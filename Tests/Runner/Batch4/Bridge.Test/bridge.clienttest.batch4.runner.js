@@ -1177,6 +1177,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             QUnit.test("DateTests - YMDHNConstructorWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests.yMDHNConstructorWorks);
             QUnit.test("DateTests - YMDHNSConstructorWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests.yMDHNSConstructorWorks);
             QUnit.test("DateTests - YMDHNSUConstructorWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests.yMDHNSUConstructorWorks);
+            QUnit.test("DateTests - NowWorks_SPI_1624", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests.nowWorks_SPI_1624);
             QUnit.test("DateTests - GetFullYearWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests.getFullYearWorks);
             QUnit.test("DateTests - GetMonthWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests.getMonthWorks);
             QUnit.test("DateTests - GetDateWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests.getDateWorks);
@@ -4346,381 +4347,388 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
                 } ));
                 t.getFixture().yMDHNSUConstructorWorks();
             },
+            nowWorks_SPI_1624: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "NowWorks_SPI_1624()",
+                    line: "114"
+                } ));
+                t.getFixture().nowWorks_SPI_1624();
+            },
             getFullYearWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetFullYearWorks()",
-                    line: "213"
+                    line: "215"
                 } ));
                 t.getFixture().getFullYearWorks();
             },
             getMonthWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetMonthWorks()",
-                    line: "220"
+                    line: "222"
                 } ));
                 t.getFixture().getMonthWorks();
             },
             getDateWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetDateWorks()",
-                    line: "227"
+                    line: "229"
                 } ));
                 t.getFixture().getDateWorks();
             },
             getHoursWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetHoursWorks()",
-                    line: "234"
+                    line: "236"
                 } ));
                 t.getFixture().getHoursWorks();
             },
             getMinutesWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetMinutesWorks()",
-                    line: "241"
+                    line: "243"
                 } ));
                 t.getFixture().getMinutesWorks();
             },
             getSecondsWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetSecondsWorks()",
-                    line: "248"
+                    line: "250"
                 } ));
                 t.getFixture().getSecondsWorks();
             },
             getMillisecondsWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetMillisecondsWorks()",
-                    line: "255"
+                    line: "257"
                 } ));
                 t.getFixture().getMillisecondsWorks();
             },
             getDayWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetDayWorks()",
-                    line: "262"
+                    line: "264"
                 } ));
                 t.getFixture().getDayWorks();
             },
             getTimeWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetTimeWorks()",
-                    line: "269"
+                    line: "271"
                 } ));
                 t.getFixture().getTimeWorks();
             },
             valueOfWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ValueOfWorks()",
-                    line: "277"
+                    line: "279"
                 } ));
                 t.getFixture().valueOfWorks();
             },
             getTimezoneOffsetWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetTimezoneOffsetWorks()",
-                    line: "285"
+                    line: "287"
                 } ));
                 t.getFixture().getTimezoneOffsetWorks();
             },
             getUtcFullYearWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetUtcFullYearWorks()",
-                    line: "292"
+                    line: "294"
                 } ));
                 t.getFixture().getUtcFullYearWorks();
             },
             getUtcMonthWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetUtcMonthWorks()",
-                    line: "299"
+                    line: "301"
                 } ));
                 t.getFixture().getUtcMonthWorks();
             },
             getUtcDateWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetUtcDateWorks()",
-                    line: "306"
+                    line: "308"
                 } ));
                 t.getFixture().getUtcDateWorks();
             },
             getUtcHoursWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetUtcHoursWorks()",
-                    line: "313"
+                    line: "315"
                 } ));
                 t.getFixture().getUtcHoursWorks();
             },
             getUtcMinutesWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetUtcMinutesWorks()",
-                    line: "321"
+                    line: "323"
                 } ));
                 t.getFixture().getUtcMinutesWorks();
             },
             getUtcSecondsWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetUtcSecondsWorks()",
-                    line: "328"
+                    line: "330"
                 } ));
                 t.getFixture().getUtcSecondsWorks();
             },
             getUtcMillisecondsWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetUtcMillisecondsWorks()",
-                    line: "335"
+                    line: "337"
                 } ));
                 t.getFixture().getUtcMillisecondsWorks();
             },
             getUtcDayWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetUtcDayWorks()",
-                    line: "342"
+                    line: "344"
                 } ));
                 t.getFixture().getUtcDayWorks();
             },
             parseWorks_SPI_1624: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ParseWorks_SPI_1624()",
-                    line: "350"
+                    line: "352"
                 } ));
                 t.getFixture().parseWorks_SPI_1624();
             },
             toDateStringWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ToDateStringWorks()",
-                    line: "407"
+                    line: "409"
                 } ));
                 t.getFixture().toDateStringWorks();
             },
             toTimeStringWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ToTimeStringWorks()",
-                    line: "415"
+                    line: "417"
                 } ));
                 t.getFixture().toTimeStringWorks();
             },
             toUtcStringWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ToUtcStringWorks()",
-                    line: "423"
+                    line: "425"
                 } ));
                 t.getFixture().toUtcStringWorks();
             },
             toLocaleDateStringWorks_SPI_1624: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ToLocaleDateStringWorks_SPI_1624()",
-                    line: "431"
+                    line: "433"
                 } ));
                 t.getFixture().toLocaleDateStringWorks_SPI_1624();
             },
             toLocaleTimeStringWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ToLocaleTimeStringWorks()",
-                    line: "440"
+                    line: "442"
                 } ));
                 t.getFixture().toLocaleTimeStringWorks();
             },
             subtractingDatesWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SubtractingDatesWorks()",
-                    line: "494"
+                    line: "496"
                 } ));
                 t.getFixture().subtractingDatesWorks();
             },
             dateEqualityWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "DateEqualityWorks()",
-                    line: "508"
+                    line: "510"
                 } ));
                 t.getFixture().dateEqualityWorks();
             },
             dateInequalityWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "DateInequalityWorks()",
-                    line: "518"
+                    line: "520"
                 } ));
                 t.getFixture().dateInequalityWorks();
             },
             dateLessThanWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "DateLessThanWorks()",
-                    line: "528"
+                    line: "530"
                 } ));
                 t.getFixture().dateLessThanWorks();
             },
             dateLessEqualWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "DateLessEqualWorks()",
-                    line: "536"
+                    line: "538"
                 } ));
                 t.getFixture().dateLessEqualWorks();
             },
             dateGreaterThanWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "DateGreaterThanWorks()",
-                    line: "544"
+                    line: "546"
                 } ));
                 t.getFixture().dateGreaterThanWorks();
             },
             dateGreaterEqualWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "DateGreaterEqualWorks()",
-                    line: "552"
+                    line: "554"
                 } ));
                 t.getFixture().dateGreaterEqualWorks();
             },
             setFullYearWithOneParameterWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SetFullYearWithOneParameterWorks()",
-                    line: "560"
+                    line: "562"
                 } ));
                 t.getFixture().setFullYearWithOneParameterWorks();
             },
             setFullYearWithTwoParametersWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SetFullYearWithTwoParametersWorks()",
-                    line: "568"
+                    line: "570"
                 } ));
                 t.getFixture().setFullYearWithTwoParametersWorks();
             },
             setFullYearWithThreeParametersWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SetFullYearWithThreeParametersWorks()",
-                    line: "577"
+                    line: "579"
                 } ));
                 t.getFixture().setFullYearWithThreeParametersWorks();
             },
             setMonthWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SetMonthWorks()",
-                    line: "587"
+                    line: "589"
                 } ));
                 t.getFixture().setMonthWorks();
             },
             setDateWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SetDateWorks()",
-                    line: "595"
+                    line: "597"
                 } ));
                 t.getFixture().setDateWorks();
             },
             setHoursWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SetHoursWorks()",
-                    line: "603"
+                    line: "605"
                 } ));
                 t.getFixture().setHoursWorks();
             },
             setMinutesWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SetMinutesWorks()",
-                    line: "611"
+                    line: "613"
                 } ));
                 t.getFixture().setMinutesWorks();
             },
             setSecondsWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SetSecondsWorks()",
-                    line: "619"
+                    line: "621"
                 } ));
                 t.getFixture().setSecondsWorks();
             },
             setMillisecondsWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SetMillisecondsWorks()",
-                    line: "627"
+                    line: "629"
                 } ));
                 t.getFixture().setMillisecondsWorks();
             },
             setTimeWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SetTimeWorks()",
-                    line: "635"
+                    line: "637"
                 } ));
                 t.getFixture().setTimeWorks();
             },
             setTimeAsDoubleWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SetTimeAsDoubleWorks()",
-                    line: "643"
+                    line: "645"
                 } ));
                 t.getFixture().setTimeAsDoubleWorks();
             },
             setUtcFullYearWithOneParameterWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SetUtcFullYearWithOneParameterWorks()",
-                    line: "651"
+                    line: "653"
                 } ));
                 t.getFixture().setUtcFullYearWithOneParameterWorks();
             },
             setUtcFullYearWithTwoParametersWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SetUtcFullYearWithTwoParametersWorks()",
-                    line: "659"
+                    line: "661"
                 } ));
                 t.getFixture().setUtcFullYearWithTwoParametersWorks();
             },
             setUtcFullYearWithThreeParametersWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SetUtcFullYearWithThreeParametersWorks()",
-                    line: "668"
+                    line: "670"
                 } ));
                 t.getFixture().setUtcFullYearWithThreeParametersWorks();
             },
             setUtcMonthWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SetUtcMonthWorks()",
-                    line: "678"
+                    line: "680"
                 } ));
                 t.getFixture().setUtcMonthWorks();
             },
             setUtcDateWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SetUtcDateWorks()",
-                    line: "688"
+                    line: "690"
                 } ));
                 t.getFixture().setUtcDateWorks();
             },
             setUtcHoursWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SetUtcHoursWorks()",
-                    line: "696"
+                    line: "698"
                 } ));
                 t.getFixture().setUtcHoursWorks();
             },
             setUtcMinutesWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SetUtcMinutesWorks()",
-                    line: "704"
+                    line: "706"
                 } ));
                 t.getFixture().setUtcMinutesWorks();
             },
             setUtcSecondsWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SetUtcSecondsWorks()",
-                    line: "712"
+                    line: "714"
                 } ));
                 t.getFixture().setUtcSecondsWorks();
             },
             setUtcMillisecondsWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SetUtcMillisecondsWorks()",
-                    line: "720"
+                    line: "722"
                 } ));
                 t.getFixture().setUtcMillisecondsWorks();
             },
             getHashCodeWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetHashCodeWorks()",
-                    line: "728"
+                    line: "730"
                 } ));
                 t.getFixture().getHashCodeWorks();
             },
             equalsWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.DateTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "EqualsWorks()",
-                    line: "737"
+                    line: "739"
                 } ));
                 t.getFixture().equalsWorks();
             }

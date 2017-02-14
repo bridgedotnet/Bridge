@@ -111,13 +111,15 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         }
 
         // #SPI
-        //[Test]
-        //public void NowWorks_SPI_1624()
-        //{
-        //    // #1624
-        //    var dt = Date.Now;
-        //    Assert.True(dt.GetFullYear() > 2011);
-        //}
+        [Test]
+        public void NowWorks_SPI_1624()
+        {
+            // #1624
+            var d1 = new Date(Date.Now());
+            var d2 = DateTime.Today;
+
+            Assert.AreEqual(d1.GetFullYear(), d2.Year);
+        }
 
         // Not JS API
         //[Test]

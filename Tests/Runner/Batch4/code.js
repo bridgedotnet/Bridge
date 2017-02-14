@@ -16214,6 +16214,13 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual(56, dt.getSeconds());
             Bridge.Test.NUnit.Assert.areEqual(345, dt.getMilliseconds());
         },
+        nowWorks_SPI_1624: function () {
+            // #1624
+            var d1 = new Date(Date.now());
+            var d2 = System.DateTime.today();
+
+            Bridge.Test.NUnit.Assert.areEqual(d1.getFullYear(), d2.getFullYear());
+        },
         getFullYearWorks: function () {
             var dt = new Date(2011, 7, 12, 13, 42, 56, 345);
             Bridge.Test.NUnit.Assert.areEqual(2011, dt.getFullYear());
