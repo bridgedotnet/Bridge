@@ -303,7 +303,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         {
             Assert.AreEqual("3.14", string.Format(new MyFormatProvider(), "{0:F2}", 22.0 / 7.0));
             // #1598
-            Assert.AreEqual("Formatted: FMT, StringTests$MyFormatProvider", string.Format(new MyFormatProvider(), "{0:FMT}", new MyFormattable()));
+            Assert.AreEqual("Formatted: FMT, StringTests+MyFormatProvider", string.Format(new MyFormatProvider(), "{0:FMT}", new MyFormattable()));
         }
 
         [Test]

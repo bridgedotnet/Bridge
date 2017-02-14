@@ -3107,11 +3107,24 @@
             var str;
 
             if (obj.$$fullname) {
-                return obj.$$fullname;
+                str = obj.$$fullname;
+            } else if (obj.$$name) {
+                str = obj.$$name;
             }
 
-            if (obj.$$name) {
-                return obj.$$name;
+            if (str) {
+                var ns = Bridge.Reflection.getTypeNamespace(obj, str);
+
+                if (ns) {
+                    var idx = str.indexOf("[");
+                    var name = str.substring(ns.length + 1, idx === -1 ? str.length : idx);
+
+                    if (new RegExp(/[\.\$]/).test(name)) {
+                        str = ns + "." + name.replace(/\.|\$/g, function (match) { return (match === ".") ? "+" : "`"; }) + (idx === -1 ? "" : str.substring(idx));
+                    }
+                }
+
+                return str;
             }
 
             if (obj.constructor === Object) {
@@ -3140,13 +3153,14 @@
         getTypeName: function (type) {
             var fullName = Bridge.Reflection.getTypeFullName(type),
                 bIndex = fullName.indexOf('['),
-                nsIndex = fullName.lastIndexOf('.', bIndex >= 0 ? bIndex : fullName.length);
+                pIndex = fullName.lastIndexOf('+', bIndex >= 0 ? bIndex : fullName.length),
+                nsIndex = pIndex > -1 ? pIndex : fullName.lastIndexOf('.', bIndex >= 0 ? bIndex : fullName.length);
 
             return nsIndex > 0 ? (bIndex >= 0 ? fullName.substring(nsIndex + 1, bIndex) : fullName.substr(nsIndex + 1)) : fullName;
         },
 
-        getTypeNamespace: function (type) {
-            var fullName = Bridge.Reflection.getTypeFullName(type),
+        getTypeNamespace: function (type, name) {
+            var fullName = name || Bridge.Reflection.getTypeFullName(type),
                 bIndex = fullName.indexOf('['),
                 nsIndex = fullName.lastIndexOf('.', bIndex >= 0 ? bIndex : fullName.length),
                 ns = nsIndex > 0 ? fullName.substr(0, nsIndex) : '';
@@ -3172,6 +3186,10 @@
 
         _getAssemblyType: function (asm, name) {
             var noAsm = false;
+
+            if (new RegExp(/[\+\`]/).test(name)) {
+                name = name.replace(/\+|\`/g, function(match) { return match === "+" ? "." : "$"});
+            }
 
             if (!asm) {
                 asm = Bridge.SystemAssembly;
