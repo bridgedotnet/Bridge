@@ -1,5 +1,5 @@
 ﻿using Bridge.Html5;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using Bridge.ClientTestHelper;
 
 using System;
@@ -61,7 +61,7 @@ namespace Bridge.ClientTest
                 {
                     AssertRecords(this.Records);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.ToString());
                 }
@@ -94,7 +94,6 @@ namespace Bridge.ClientTest
             var added = record.AddedNodes[0];
             Assert.NotNull(added, "added");
             Assert.AreEqual(ATTRIBUTE, added.NodeName.ToUpper(), "added.NodeName");
-
         }
     }
 }

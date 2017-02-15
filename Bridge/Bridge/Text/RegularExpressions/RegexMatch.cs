@@ -1,7 +1,7 @@
 namespace Bridge.Text.RegularExpressions
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class RegexMatch
     {
         public int Index

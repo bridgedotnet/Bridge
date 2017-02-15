@@ -314,10 +314,6 @@ namespace System
         [NonScriptable]
         public static extern Type GetTypeFromHandle(RuntimeTypeHandle typeHandle);
 
-        [Obsolete]
-        [Template("Bridge.getTypeName({this})")]
-        public override extern string GetClassName();
-
         /// <summary>
         /// Returns the names of the members of the current enumeration type.
         /// </summary>

@@ -1,5 +1,5 @@
 using System;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -7,17 +7,16 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     [TestFixture(TestNameFormat = "#2056 - {0}")]
     public class Bridge2056
     {
-        class A
+        private class A
         {
         }
 
-        class B : A
+        private class B : A
         {
         }
 
         public class C
         {
-
         }
 
         [Test]
@@ -83,8 +82,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual("System.Int32[]", typeof(int[]).FullName);
             Assert.AreEqual("System.Int32[,]", typeof(int[,]).FullName);
             Assert.AreEqual("System.Int32[,,]", typeof(int[,,]).FullName);
-            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2056.B[]", typeof(B[]).FullName);
-            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2056.B[,]", typeof(B[,]).FullName);
+            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2056+B[]", typeof(B[]).FullName);
+            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2056+B[,]", typeof(B[,]).FullName);
         }
     }
 }

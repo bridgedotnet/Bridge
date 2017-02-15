@@ -2,6 +2,7 @@
         hasValue: Bridge.hasValue,
 
         getValue: function (obj) {
+            obj = Bridge.unbox(obj, true);
             if (!Bridge.hasValue(obj)) {
                 throw new System.InvalidOperationException("Nullable instance doesn't have a value.");
             }
@@ -171,6 +172,27 @@
                 vb = Bridge.hasValue(b);
 
             return (va !== vb) || (va && (typeof f === "function" ? f.apply(null, Array.prototype.slice.call(arguments, 1)) : a[f].apply(a, Array.prototype.slice.call(arguments, 2))));
+        },
+
+        getUnderlyingType: function (nullableType) {
+            if (!nullableType) {
+                throw new System.ArgumentNullException("nullableType");
+            }
+
+            if (Bridge.Reflection.isGenericType(nullableType) &&
+                !Bridge.Reflection.isGenericTypeDefinition(nullableType)) {
+                var genericType = Bridge.Reflection.getGenericTypeDefinition(nullableType);
+
+                if (genericType === System.Nullable$1) {
+                    return Bridge.Reflection.getGenericArguments(nullableType)[0];
+                }
+            }
+
+            return null;
+        },
+
+        compare: function (n1, n2) {
+            return System.Collections.Generic.Comparer$1.$default.compare(n1, n2);
         }
     };
 
@@ -181,6 +203,8 @@
             $kind: "struct",
 
             statics: {
+                $nullable: true,
+                $nullableType: T,
                 getDefaultValue: function () {
                     return null;
                 },

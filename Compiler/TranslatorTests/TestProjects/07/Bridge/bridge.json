@@ -1,7 +1,13 @@
 {
   "output": "Bridge\\output",
   "cleanOutputFolderBeforeBuildPattern": "*.*",
-  "module": "MyModule",
+  "outputBy": "namespace",
+  "module": {
+    "name": "MyModule"
+  },
   "outputFormatting": "Formatted",
-  "generateDocumentation": "Full"
+  "generateDocumentation": "Full",
+  "loader": {
+    "manualLoadingMask": "Module2217_Manual"
+  }
 }

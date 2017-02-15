@@ -5,12 +5,10 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLLIElement")]
-    public class HTMLLIElement : HTMLElement<HTMLLIElement>
+    public sealed class HTMLLIElement : HTMLElement<HTMLLIElement>
     {
         [Template("document.createElement('li')")]
-        public HTMLLIElement()
-        {
-        }
+        public extern HTMLLIElement();
 
         /// <summary>
         /// The type of the bullets, "disc", "square" or "circle". As the standard way of defining the list type is via the CSS list-style-type property, use the CSSOM methods to set it via a script.

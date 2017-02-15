@@ -29,7 +29,7 @@ namespace Bridge.Translator
 
         protected virtual StringBuilder GetOutputForType(ITypeInfo typeInfo, string name)
         {
-            string module = null;
+            Module module = null;
 
             if (typeInfo != null && typeInfo.Module != null)
             {
@@ -55,7 +55,7 @@ namespace Bridge.Translator
                         break;
 
                     case OutputBy.Module:
-                        fileName = module;
+                        fileName = module != null ? module.Name : null;
                         break;
 
                     case OutputBy.NamespacePath:
@@ -173,24 +173,29 @@ namespace Bridge.Translator
 
             if (module == null)
             {
+                if (output.NonModuleDependencies == null)
+                {
+                    output.NonModuleDependencies = new List<IPluginDependency>();
+                }
+                this.Emitter.CurrentDependencies = output.NonModuleDependencies;
                 return output.NonModuletOutput;
             }
 
-            if (module == "")
+            if (module.Name == "")
             {
-                module = Bridge.Translator.AssemblyInfo.DEFAULT_FILENAME;
+                module.Name = Bridge.Translator.AssemblyInfo.DEFAULT_FILENAME;
             }
 
             if (output.ModuleOutput.ContainsKey(module))
             {
-                this.Emitter.CurrentDependencies = output.ModuleDependencies[module];
+                this.Emitter.CurrentDependencies = output.ModuleDependencies[module.Name];
                 return output.ModuleOutput[module];
             }
 
             StringBuilder moduleOutput = new StringBuilder();
             output.ModuleOutput.Add(module, moduleOutput);
             var dependencies = new List<IPluginDependency>();
-            output.ModuleDependencies.Add(module, dependencies);
+            output.ModuleDependencies.Add(module.Name, dependencies);
 
             if (typeInfo != null && typeInfo.Dependencies.Count > 0)
             {
@@ -242,6 +247,7 @@ namespace Bridge.Translator
             var reflectedTypes = this.Emitter.ReflectableTypes;
             var tmpBuffer = new StringBuilder();
             StringBuilder currentOutput = null;
+            this.Emitter.NamedBoxedFunctions = new Dictionary<IType, Dictionary<string, string>>();
 
             foreach (var type in this.Emitter.Types)
             {
@@ -259,10 +265,10 @@ namespace Bridge.Translator
 
                 if (type.IsObjectLiteral)
                 {
-                    //var mode = this.Emitter.Validator.GetObjectCreateMode(this.Emitter.GetTypeDefinition(type.Type));
-                    //var ignore = mode == 0 && !type.Type.GetMethods(null, GetMemberOptions.IgnoreInheritedMembers).Any(m => !m.IsConstructor && !m.IsAccessor);
+                    var mode = this.Emitter.Validator.GetObjectCreateMode(this.Emitter.GetTypeDefinition(type.Type));
+                    var ignore = mode == 0 && !type.Type.GetMethods(null, GetMemberOptions.IgnoreInheritedMembers).Any(m => !m.IsConstructor && !m.IsAccessor);
 
-                    if (this.Emitter.Validator.IsExternalType(typeDef))
+                    if (this.Emitter.Validator.IsExternalType(typeDef) || ignore)
                     {
                         this.Emitter.Translator.Plugins.AfterTypeEmit(this.Emitter, type);
                         continue;
@@ -312,6 +318,9 @@ namespace Bridge.Translator
                 this.Emitter.Output = currentOutput;
             }
 
+            this.Emitter.DisableDependencyTracking = true;
+            this.EmitNamedBoxedFunctions();
+
             this.Emitter.NamespacesCache = new Dictionary<string, int>();
             foreach (var type in this.Emitter.Types)
             {
@@ -332,7 +341,15 @@ namespace Bridge.Translator
                     }
                 }
 
-                if (reflectedTypes.Any(t => t == type.Type) || isGlobal)
+                var isObjectLiteral = this.Emitter.Validator.IsObjectLiteral(typeDef);
+                var isPlainMode = isObjectLiteral && this.Emitter.Validator.GetObjectCreateMode(this.Emitter.BridgeTypes.Get(type.Key).TypeDefinition) == 0;
+
+                if (isPlainMode)
+                {
+                    continue;
+                }
+
+                if (isGlobal || reflectedTypes.Any(t => t == type.Type))
                 {
                     continue;
                 }
@@ -449,6 +466,51 @@ namespace Bridge.Translator
             this.Emitter.Translator.Plugins.AfterTypesEmit(this.Emitter, this.Emitter.Types);
         }
 
+        protected virtual void EmitNamedBoxedFunctions()
+        {
+            if (this.Emitter.NamedBoxedFunctions.Count > 0)
+            {
+                this.Emitter.Comma = false;
+
+                this.WriteNewLine();
+                this.Write("var " + JS.Vars.DBOX_ + " = {};");
+
+                foreach (var boxedFunction in this.Emitter.NamedBoxedFunctions)
+                {
+                    var name = BridgeTypes.ToJsName(boxedFunction.Key, this.Emitter, true);
+
+                    this.WriteNewLine();
+                    this.WriteNewLine();
+                    this.Write(JS.Funcs.BRIDGE_NS);
+                    this.WriteOpenParentheses();
+                    this.WriteScript(name);
+                    this.Write(", " + JS.Vars.DBOX_ + ")");
+                    this.WriteSemiColon();
+
+                    this.WriteNewLine();
+                    this.WriteNewLine();
+                    this.Write(JS.Types.Bridge.APPLY + "(" + JS.Vars.DBOX_ + ".");
+                    this.Write(name);
+                    this.Write(", ");
+                    this.BeginBlock();
+
+                    this.Emitter.Comma = false;
+                    foreach (KeyValuePair<string, string> namedFunction in boxedFunction.Value)
+                    {
+                        this.EnsureComma();
+                        this.Write(namedFunction.Key.ToLowerCamelCase() + ": " + namedFunction.Value);
+                        this.Emitter.Comma = true;
+                    }
+
+                    this.WriteNewLine();
+                    this.EndBlock();
+                    this.WriteCloseParentheses();
+                    this.WriteSemiColon();
+                    this.WriteNewLine();
+                }
+            }
+        }
+
         public IType[] GetReflectableTypes()
         {
             var config = this.Emitter.AssemblyInfo.Reflection;
@@ -497,6 +559,14 @@ namespace Bridge.Translator
 
                 if (typeDef != null)
                 {
+                    var isObjectLiteral = this.Emitter.Validator.IsObjectLiteral(typeDef);
+                    var isPlainMode = isObjectLiteral && this.Emitter.Validator.GetObjectCreateMode(bridgeType.Value.TypeDefinition) == 0;
+
+                    if (isPlainMode)
+                    {
+                        continue;
+                    }
+
                     var skip = typeDef.Attributes.Any(a =>
                             a.AttributeType.FullName == "Bridge.GlobalMethodsAttribute" ||
                             a.AttributeType.FullName == "Bridge.NonScriptableAttribute" ||

@@ -1,6 +1,9 @@
 declare module Bridge {
+    export type TypeRef<T> = { prototype: { valueOf(): T } | T };
     export function global<T>(): T;
     export function emptyFn(): Function;
+    export function box<T>(v: T, type: { prototype: T }): { v: T, type: { prototype: T } };
+    export function unbox(obj:any, noclone?: boolean): any;
     export function property(scope: any, name: string, defaultValue: any): void;
     export function event(scope: any, name: string, defaultValue: any): void;
     export function copy<T>(to: T, from: T, keys: string[], toIf?: boolean): T;
@@ -9,11 +12,11 @@ declare module Bridge {
     export function ready(fn: { (): void }): void;
     export function on(event: string, el: HTMLElement, fn: Function): void;
     export function getHashCode(value: any, safe: boolean): number;
-    export function getDefaultValue<T>(type: { prototype: T }): T;
+    export function getDefaultValue<T>(type: TypeRef<T>): T;
     export function getTypeName(obj: any): string;
     export function is(obj: any, type: any, ignoreFn?: boolean): boolean;
-    export function as<T>(obj: any, type: { prototype: T }): T;
-    export function cast<T>(obj: any, type: { prototype: T }): T;
+    export function as<T>(obj: any, type: TypeRef<T>): T;
+    export function cast<T>(obj: any, type: TypeRef<T>): T;
     export function apply<T>(obj: T, values: any): T;
     export function merge<T>(to: T, from: T): T;
     export function getEnumerator(obj: any): System.Collections.IEnumerator;
@@ -64,23 +67,6 @@ declare module Bridge {
     }
 
     var Array: Array;
-
-    export interface String {
-        isNullOrWhiteSpace(value: string): boolean;
-        isNullOrEmpty(value: string): boolean;
-        fromCharCount(c: number, count: number): string;
-        format(str: string, ...args: any[]): string;
-        alignString(str: string, alignment: number, pad: string, dir: number): string;
-        startsWith(str: string, prefix: string): boolean;
-        endsWith(str: string, suffix: string): boolean;
-        contains(str: string, value: string): string;
-        indexOfAny(str: string, anyOf: number[], startIndex?: number, length?: number): number;
-        indexOf(str: string, value: string): number;
-        compare(strA: string, strB: string): number;
-        toCharArray(str: string, startIndex: number, length: number): number[];
-    }
-
-    var String: String;
 
     export interface Class {
         define(className: string, props: any): Function;
@@ -219,6 +205,9 @@ declare module Bridge {
 }
 
 declare module System {
+    export class Object {
+    }
+
     export class Attribute {
     }
 
@@ -268,6 +257,23 @@ declare module System {
     }
 
     var Char: Char;
+
+    export interface String {
+        isNullOrWhiteSpace(value: string): boolean;
+        isNullOrEmpty(value: string): boolean;
+        fromCharCount(c: number, count: number): string;
+        format(str: string, ...args: any[]): string;
+        alignString(str: string, alignment: number, pad: string, dir: number): string;
+        startsWith(str: string, prefix: string): boolean;
+        endsWith(str: string, suffix: string): boolean;
+        contains(str: string, value: string): string;
+        indexOfAny(str: string, anyOf: number[], startIndex?: number, length?: number): number;
+        indexOf(str: string, value: string): number;
+        compare(strA: string, strB: string): number;
+        toCharArray(str: string, startIndex: number, length: number): number[];
+    }
+
+    var String: String;
 
     export class Exception {
         constructor(message: string, innerException?: Exception);
@@ -369,14 +375,14 @@ declare module System {
     export interface IComparable$1<T> {
         compareTo(other: T): number;
     }
-    export function IComparable$1<T>(T: { prototype: T }): {
+    export function IComparable$1<T>(t: Bridge.TypeRef<T>): {
         prototype: IComparable$1<T>;
     }
 
     export interface IEquatable$1<T> {
         equals(other: T): boolean;
     }
-    export function IEquatable$1<T>(T: { prototype: T }): {
+    export function IEquatable$1<T>(t: Bridge.TypeRef<T>): {
         prototype: IEquatable$1<T>;
     }
 
@@ -397,7 +403,7 @@ declare module System {
         toUTC(dt: Date): Date;
         toLocal(dt: Date): Date;
     }
-    var Date: DateTime;
+    var DateTime: DateTime;
 
     export interface Guid extends System.IEquatable$1<System.Guid>, System.IComparable$1<System.Guid>, System.IFormattable {
         equalsT(o: System.Guid): boolean;
@@ -412,22 +418,22 @@ declare module System {
     export interface GuidFunc extends Function {
         prototype: Guid;
         $ctor4: {
-            new (uuid: string): Guid
+            new (uuid: string): Guid;
         };
         $ctor1: {
-            new (b: number[]): Guid
+            new (b: number[]): Guid;
         };
         $ctor5: {
-            new (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number, j: number, k: number): Guid
+            new (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number, j: number, k: number): Guid;
         };
         $ctor3: {
-            new (a: number, b: number, c: number, d: number[]): Guid
+            new (a: number, b: number, c: number, d: number[]): Guid;
         };
         $ctor2: {
-            new (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number, j: number, k: number): Guid
+            new (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number, j: number, k: number): Guid;
         };
         ctor: {
-            new (): Guid
+            new (): Guid;
         };
         empty: System.Guid;
         parse(input: string): System.Guid;
@@ -483,10 +489,10 @@ declare module System {
     export interface RandomFunc extends Function {
         prototype: Random;
         ctor: {
-            new (): Random
+            new (): Random;
         };
         $ctor1: {
-            new (seed: number): Random
+            new (seed: number): Random;
         };
     }
     var Random: RandomFunc;
@@ -522,14 +528,14 @@ declare module System {
             export interface IEnumerator$1<T> extends IEnumerator {
                 getCurrent(): T;
             }
-            export function IEnumerator$1<T>(T: { prototype: T }): {
+            export function IEnumerator$1<T>(t: Bridge.TypeRef<T>): {
                 prototype: IEnumerator$1<T>;
             }
 
             export interface IEnumerable$1<T> extends IEnumerable {
                 getEnumerator(): IEnumerator$1<T>;
             }
-            export function IEnumerable$1<T>(T: { prototype: T }): {
+            export function IEnumerable$1<T>(t: Bridge.TypeRef<T>): {
                 prototype: IEnumerable$1<T>;
             }
 
@@ -540,7 +546,7 @@ declare module System {
                 contains(item: T): boolean;
                 remove(item: T): boolean;
             }
-            export function ICollection$1<T>(T: { prototype: T }): {
+            export function ICollection$1<T>(t: Bridge.TypeRef<T>): {
                 prototype: ICollection$1<T>;
             }
 
@@ -548,7 +554,7 @@ declare module System {
                 equals(x: T, y: T): boolean;
                 getHashCode(obj: T): number;
             }
-            export function IEqualityComparer$1<T>(T: { prototype: T }): {
+            export function IEqualityComparer$1<T>(t: Bridge.TypeRef<T>): {
                 prototype: IEqualityComparer$1<T>;
             }
 
@@ -563,7 +569,7 @@ declare module System {
                 remove(key: TKey): boolean;
                 tryGetValue(key: TKey, value: { v: TValue }): boolean;
             }
-            export function IDictionary$2<TKey, TValue>(TKey: { prototype: TKey }, TValue: { prototype: TValue }): {
+            export function IDictionary$2<TKey, TValue>(tKey: Bridge.TypeRef<TKey>, tValue: Bridge.TypeRef<TValue>): {
                 prototype: IDictionary$2<TKey, TValue>;
             }
 
@@ -574,14 +580,14 @@ declare module System {
                 insert(index: number, item: T): void;
                 removeAt(index: number): void;
             }
-            export function IList$1<T>(T: { prototype: T }): {
+            export function IList$1<T>(t: Bridge.TypeRef<T>): {
                 prototype: IList$1<T>;
             }
 
             export interface IComparer$1<T> {
                 compare(x: T, y: T): number;
             }
-            export function IComparer$1<T>(T: { prototype: T }): {
+            export function IComparer$1<T>(t: Bridge.TypeRef<T>): {
                 prototype: IComparer$1<T>;
             }
 
@@ -589,7 +595,7 @@ declare module System {
                 equals(x: T, y: T): boolean;
                 getHashCode(obj: T): number;
             }
-            export function EqualityComparer$1<T>(T: { prototype: T }): {
+            export function EqualityComparer$1<T>(t: Bridge.TypeRef<T>): {
                 prototype: EqualityComparer$1<T>;
                 new (): EqualityComparer$1<T>;
             }
@@ -597,7 +603,7 @@ declare module System {
             export interface Comparer$1<T> extends IComparer$1<T> {
                 compare(x: T, y: T): number;
             }
-            export function Comparer$1<T>(T: { prototype: T }): {
+            export function Comparer$1<T>(t: Bridge.TypeRef<T>): {
                 prototype: Comparer$1<T>;
                 new (fn: { (x: T, y: T): number }): Comparer$1<T>;
             }
@@ -606,7 +612,7 @@ declare module System {
                 key: TKey;
                 value: TValue;
             }
-            export function KeyValuePair$2<TKey, TValue>(TKey: { prototype: TKey }, TValue: { prototype: TValue }): {
+            export function KeyValuePair$2<TKey, TValue>(tKey: Bridge.TypeRef<TKey>, tValue: Bridge.TypeRef<TValue>): {
                 prototype: KeyValuePair$2<TKey, TValue>;
                 new (key: TKey, value: TValue): KeyValuePair$2<TKey, TValue>;
             }
@@ -626,7 +632,7 @@ declare module System {
                 tryGetValue(key: TKey, value: { v: TValue }): boolean;
                 getEnumerator(): IEnumerator$1<KeyValuePair$2<TKey, TValue>>;
             }
-            export function Dictionary$2<TKey, TValue>(TKey: { prototype: TKey }, TValue: { prototype: TValue }): {
+            export function Dictionary$2<TKey, TValue>(tKey: Bridge.TypeRef<TKey>, tValue: Bridge.TypeRef<TValue>): {
                 prototype: Dictionary$2<TKey, TValue>;
                 new (): Dictionary$2<TKey, TValue>;
                 new (obj: Dictionary$2<TKey, TValue>, comparer?: IEqualityComparer$1<TKey>): Dictionary$2<TKey, TValue>;
@@ -661,7 +667,7 @@ declare module System {
                 unshift(): void;
                 toArray(): T[];
             }
-            export function List$1<T>(T: { prototype: T }): {
+            export function List$1<T>(t: Bridge.TypeRef<T>): {
                 prototype: List$1<T>;
                 new (): List$1<T>;
                 new (obj: T[]): List$1<T>;
@@ -672,7 +678,7 @@ declare module System {
         module ObjectModel {
             export interface ReadOnlyCollection$1<T> extends System.Collections.Generic.List$1<T> {
             }
-            export function ReadOnlyCollection$1<T>(T: { prototype: T }): {
+            export function ReadOnlyCollection$1<T>(t: Bridge.TypeRef<T>): {
                 prototype: ReadOnlyCollection$1<T>;
                 new (obj: T[]): ReadOnlyCollection$1<T>;
                 new (obj: System.Collections.Generic.IEnumerable$1<T>): ReadOnlyCollection$1<T>;

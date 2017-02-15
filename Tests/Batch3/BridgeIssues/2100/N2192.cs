@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Bridge.Html5;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -23,6 +23,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public class Person
         {
             public string Name;
+
             public Person(string name)
             {
                 Name = name;
@@ -32,6 +33,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public class Loggable
         {
             public int id;
+
             public Loggable(int id)
             {
                 this.id = id;

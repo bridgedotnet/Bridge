@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -16,31 +16,37 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
         public class Signal<T> : IObservable<T>
         {
-            public Signal(string x) { }
+            public Signal(string x)
+            {
+            }
 
-            public void Observe(Action<T> a) { }
+            public void Observe(Action<T> a)
+            {
+            }
         }
 
         public class CollectionChangeArgs<T>
         {
-
         }
 
         public class Collection<T>
         {
-            Signal<CollectionChangeArgs<T>> changed;
+            private Signal<CollectionChangeArgs<T>> changed;
 
             public IObservable<CollectionChangeArgs<T>> Changed
             {
                 get { return changed ?? (changed = new Signal<CollectionChangeArgs<T>>("Collection<T>.Changed")); }
             }
 
-            public void Foo() { }
+            public void Foo()
+            {
+            }
         }
 
         public class HtmlRenderElement
         {
-            Collection<HtmlRenderElement> children;
+            private Collection<HtmlRenderElement> children;
+
             public Collection<HtmlRenderElement> Children
             {
                 get
@@ -54,9 +60,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 }
             }
 
-            void OnChildrenChanged(CollectionChangeArgs<HtmlRenderElement> a)
+            private void OnChildrenChanged(CollectionChangeArgs<HtmlRenderElement> a)
             {
-
             }
         }
 

@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -15,6 +15,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             public static Set<T> Empty { get { return _empty; } }
 
             private readonly Node _headIfAny;
+
             private Set(Node headIfAny)
             {
                 _headIfAny = headIfAny;
@@ -46,7 +47,10 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 }
             }
 
-            IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
 
             private sealed class Node
             {

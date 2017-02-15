@@ -7,12 +7,10 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLOListElement")]
-    public class HTMLOListElement : HTMLElement<HTMLOListElement>
+    public sealed class HTMLOListElement : HTMLElement<HTMLOListElement>
     {
         [Template("document.createElement('ol')")]
-        public HTMLOListElement()
-        {
-        }
+        public extern HTMLOListElement();
 
         /// <summary>
         /// Is a Boolean value reflecting the reversed and defining if the numbering is descending, that is its value is true, or ascending (false).

@@ -20,6 +20,8 @@
     </frameworkAssemblies>
   </metadata>
   <files>
+    <file src="../../LICENSE.md" target="LICENSE.md" />
+
     <!--tools-->
     <file src="../../.build/files/install_clean.ps1" target="tools/install.ps1" />
   </files>

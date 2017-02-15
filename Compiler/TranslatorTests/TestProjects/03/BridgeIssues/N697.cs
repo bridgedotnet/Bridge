@@ -24,7 +24,7 @@ namespace Test.BridgeIssues.N697
     {
         private static Func<TProps, ReactElement> _reactStatelessRenderFunction;
         private readonly ReactElement _reactElement;
-        protected StatelessComponent(TProps props, params Any<ReactElement, string>[] children)
+        protected StatelessComponent(TProps props, params Union<ReactElement, string>[] children)
         {
             if (children != null)
             {
@@ -61,7 +61,7 @@ namespace Test.BridgeIssues.N697
             // best way that I can think of is to use Object.create to prepare a new instance, taking the prototype of the component class, and then setting its
             // props reference, then wrapping this all in a function that calls its Render function, binding to this instance. This woud mean that the constructor
             // would not get called on the component, but that's just the same as for stateful components (from the Component class).
-            var fullClassName = this.GetClassName();
+            var fullClassName = this.GetType().FullName;
             /*@
 			var classPrototype;
 			eval('classPrototype = ' + fullClassName + '.prototype');
@@ -96,9 +96,9 @@ namespace Test.BridgeIssues.N697
         /// <summary>
         /// This will never be null nor contain any null references, though it may be empt if there are children to render
         /// </summary>
-        protected Any<ReactElement, string>[] Children
+        protected Union<ReactElement, string>[] Children
         {
-            get { return Script.Write<Any<ReactElement, string>[]>("this.props && this.props.children ? this.props.children : []"); }
+            get { return Script.Write<Union<ReactElement, string>[]>("this.props && this.props.children ? this.props.children : []"); }
         }
 
         public abstract ReactElement Render();
@@ -111,7 +111,7 @@ namespace Test.BridgeIssues.N697
             return component._reactElement;
         }
 
-        public static implicit operator Any<ReactElement, string>(StatelessComponent<TProps> component)
+        public static implicit operator Union<ReactElement, string>(StatelessComponent<TProps> component)
         {
             if (component == null)
                 throw new ArgumentNullException("component");

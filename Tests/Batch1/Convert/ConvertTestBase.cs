@@ -2,7 +2,7 @@
 // https://github.com/dotnet/corefx/blob/master/src/System.Runtime.Extensions/tests/System/Convert.TestBase.cs
 // https://github.com/dotnet/corefx/blob/master/LICENSE
 
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System;
 
 namespace Bridge.ClientTest.ConvertTests
@@ -90,13 +90,13 @@ namespace Bridge.ClientTest.ConvertTests
         public const string DECIMAL_MAX_STRING = "79228162514264337593543950335";
         public const string DECIMAL_MIN_STRING = "-79228162514264337593543950335";
 
-        public const string DOUBLE_MAX_STRING = "1.7976931348623157e+308";
-        public const string DOUBLE_MIN_STRING = "-1.7976931348623157e+308";
-        public const string DOUBLE_EPSILON_STRING = "5e-324";
+        public const string DOUBLE_MAX_STRING = "1.79769313486232E+308";
+        public const string DOUBLE_MIN_STRING = "-1.79769313486232E+308";
+        public const string DOUBLE_EPSILON_STRING = "4.94065645841247E-324";
 
-        public const string SINGLE_MAX_STRING = "3.40282347e+38";
-        public const string SINGLE_MIN_STRING = "-3.40282347e+38";
-        public const string SINGLE_EPSILON_STRING = "1.401298e-45";
+        public const string SINGLE_MAX_STRING = "3.402823E+38";
+        public const string SINGLE_MIN_STRING = "-3.402823E+38";
+        public const string SINGLE_EPSILON_STRING = "1.401298E-45";
     }
 
     public abstract class ConvertTestBase<TOutput>

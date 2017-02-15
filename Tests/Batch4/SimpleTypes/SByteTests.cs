@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System;
 using System.Globalization;
 
@@ -10,7 +10,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         [Test]
         public void TypePropertiesAreCorrect_SPI_1717()
         {
-            Assert.True((object)(byte)0 is sbyte);
+            Assert.False((object)(byte)0 is sbyte);
             Assert.False((object)0.5 is sbyte);
             Assert.False((object)-129 is sbyte);
             Assert.False((object)128 is sbyte);
@@ -26,7 +26,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
             Assert.True(b is IFormattable);
 
             var interfaces = typeof(sbyte).GetInterfaces();
-            Assert.AreEqual(3, interfaces.Length);
+            Assert.AreEqual(4, interfaces.Length);
             Assert.True(interfaces.Contains(typeof(IComparable<sbyte>)));
             Assert.True(interfaces.Contains(typeof(IEquatable<sbyte>)));
             Assert.True(interfaces.Contains(typeof(IFormattable)));

@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -29,7 +29,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             public T this[int index]
             {
                 get { return default(T); }
-                set {  }
+                set { }
             }
 
             public int Add(T item)
@@ -79,7 +79,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
                 set
                 {
-
                 }
             }
 
@@ -95,7 +94,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             {
                 get
                 {
-                    return true;
+                    return false;
                 }
             }
 
@@ -157,7 +156,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
                 set
                 {
-
                 }
             }
 
@@ -254,7 +252,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual(0, list[0]);
             Assert.True(list.Contains(0));
             Assert.AreEqual(100, list.Count);
-            Assert.True(list.IsReadOnly);
+            Assert.False(list.IsReadOnly);
             Assert.Null(list.GetEnumerator());
             Assert.AreEqual(200, list.IndexOf(0));
             Assert.True(list.Remove(0));

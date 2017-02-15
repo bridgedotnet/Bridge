@@ -1,9 +1,10 @@
 {
-    "output": "Bridge/output"
-    
-    // Uncomment to add TypeScript Definition file (.d.ts) generation to your project.
-    // , "generateTypeScript": true
+  // The folder to output JavaScript (.js) files
+  "output": "Bridge/output"
 
-    // More options available at: 
-    // http://bridge.net/docs/global-configuration
+  // Uncomment to add TypeScript Definition file (.d.ts) generation to your project.
+  // , "generateTypeScript": true
+
+  // More options available at:
+  // https://github.com/bridgedotnet/Bridge/wiki/global-configuration
 }

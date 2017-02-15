@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System;
 using System.Globalization;
 
@@ -23,7 +23,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
             Assert.True((object)d is IFormattable);
 
             var interfaces = typeof(double).GetInterfaces();
-            Assert.AreEqual(3, interfaces.Length);
+            Assert.AreEqual(4, interfaces.Length);
             Assert.True(interfaces.Contains(typeof(IComparable<double>)));
             Assert.True(interfaces.Contains(typeof(IEquatable<double>)));
             Assert.True(interfaces.Contains(typeof(IFormattable)));

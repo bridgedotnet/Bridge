@@ -5,12 +5,10 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLTableRowElement")]
-    public class HTMLTableRowElement : HTMLElement<HTMLTableRowElement>
+    public sealed class HTMLTableRowElement : HTMLElement<HTMLTableRowElement>
     {
         [Template("document.createElement('tr')")]
-        public HTMLTableRowElement()
-        {
-        }
+        public extern HTMLTableRowElement();
 
         /// <summary>
         /// Returns a live HTMLCollection containing the cells in the row. The HTMLCollection is live and is automatically updated when cells are added or removed.
@@ -31,7 +29,7 @@ namespace Bridge.Html5
         /// Removes the cell at the given position in the row. If the given position is greater (or equal as it starts at zero) than the amount of cells in the row, or is smaller than 0, it raises a DOMException with the IndexSizeError value.
         /// <param name="index">The position of the cell in the row</param>
         /// </summary>
-        public virtual extern void DeleteCell(int index);
+        public extern void DeleteCell(int index);
 
         /// <summary>
         /// Inserts a new cell into a table row and returns a reference to the cell.
@@ -41,6 +39,6 @@ namespace Bridge.Html5
         /// <param name="index">The cell index of the new cell. Defaults to -1.</param>
         /// <returns>Returns the TableDataCellElement representing the new cell of the row.</returns>
         /// </summary>
-        public virtual extern HTMLTableDataCellElement InsertCell(int index = -1);
+        public extern HTMLTableDataCellElement InsertCell(int index = -1);
     }
 }

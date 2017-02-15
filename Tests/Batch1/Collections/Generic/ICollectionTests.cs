@@ -1,4 +1,4 @@
-﻿using Bridge.Test;
+﻿using Bridge.Test.NUnit;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -34,7 +34,7 @@ namespace Bridge.ClientTest.Collections.Generic
             {
                 get
                 {
-                    return true;
+                    return false;
                 }
             }
 
@@ -123,13 +123,13 @@ namespace Bridge.ClientTest.Collections.Generic
         [Test]
         public void ClassImplementingICollectionIsReadOnlyWorks()
         {
-            Assert.AreEqual(true, new MyCollection(new[] { "x", "y" }).IsReadOnly);
+            Assert.AreEqual(false, new MyCollection(new[] { "x", "y" }).IsReadOnly);
         }
 
         [Test]
         public void ClassImplementingICollectionCastToICollectionIsReadOnlyWorks()
         {
-            Assert.AreEqual(true, ((ICollection<string>)new MyCollection(new[] { "x", "y", "z" })).IsReadOnly);
+            Assert.AreEqual(false, ((ICollection<string>)new MyCollection(new[] { "x", "y", "z" })).IsReadOnly);
         }
 
         [Test]

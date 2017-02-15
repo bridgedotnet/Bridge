@@ -319,6 +319,12 @@ namespace Bridge.Translator
             set;
         }
 
+        public bool IsYield
+        {
+            get;
+            set;
+        }
+
         public List<string> AsyncVariables
         {
             get;
@@ -451,6 +457,12 @@ namespace Bridge.Translator
             set;
         }
 
+        public Dictionary<IType, Dictionary<string, string>> NamedBoxedFunctions
+        {
+            get;
+            set;
+        }
+
         public bool IsJavaScriptOverflowMode
         {
             get
@@ -498,6 +510,16 @@ namespace Bridge.Translator
         }
 
         private bool AssemblyJsDocWritten
+        {
+            get; set;
+        }
+
+        public bool ForbidLifting
+        {
+            get; set;
+        }
+
+        public bool DisableDependencyTracking
         {
             get; set;
         }

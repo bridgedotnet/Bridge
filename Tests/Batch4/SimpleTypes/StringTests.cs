@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -49,7 +49,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         [Test]
         public void TypePropertiesAreCorrect_SPI_1597()
         {
-            Assert.AreEqual("String", typeof(string).FullName);
+            Assert.AreEqual("System.String", typeof(string).FullName);
             Assert.True(typeof(string).IsClass);
             // #1597
             Assert.True(typeof(IComparable<string>).IsAssignableFrom(typeof(string)));
@@ -60,7 +60,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
             Assert.True(s is IEquatable<string>);
 
             var interfaces = typeof(string).GetInterfaces();
-            Assert.AreEqual(6, interfaces.Length);
+            Assert.AreEqual(7, interfaces.Length);
             Assert.True(interfaces.Contains(typeof(IComparable<string>)));
             Assert.True(interfaces.Contains(typeof(IEquatable<string>)));
         }
@@ -303,7 +303,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         {
             Assert.AreEqual("3.14", string.Format(new MyFormatProvider(), "{0:F2}", 22.0 / 7.0));
             // #1598
-            Assert.AreEqual("Formatted: FMT, StringTests$MyFormatProvider", string.Format(new MyFormatProvider(), "{0:FMT}", new MyFormattable()));
+            Assert.AreEqual("Formatted: FMT, StringTests+MyFormatProvider", string.Format(new MyFormatProvider(), "{0:FMT}", new MyFormattable()));
         }
 
         [Test]
@@ -928,8 +928,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
             IEnumerable<string> stringValues = new MyEnumerable<string>(new[] { "a", "ab", "abc", "abcd" });
             Assert.AreEqual("a, ab, abc, abcd", String.Join(", ", stringValues));
 
-            // TODO: c# makes it False but js false
-            Assert.AreEqual("a, 1, abc, false", String.Join(", ", new Object[] { "a", 1, "abc", false }));// False");
+            Assert.AreEqual("a, 1, abc, False", String.Join(", ", new Object[] { "a", 1, "abc", false }));// False");
         }
 
         [Test]

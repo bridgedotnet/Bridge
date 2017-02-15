@@ -130,5 +130,11 @@ namespace System
 
         [Template("System.Char.isControl({s}.charCodeAt({index}))")]
         public static extern bool IsControl(string s, int index);
+
+        [Template("System.Char.equals({this}, {other})")]
+        public override extern bool Equals(object other);
+
+        [Template("System.Char.getHashCode({this})")]
+        public override extern int GetHashCode();
     }
 }

@@ -240,10 +240,10 @@ namespace Bridge.Translator
                         needContinue = constValue is IType;
                         writeScript = true;
 
-                        if (needContinue && !(member.Initializer is ObjectCreateExpression))
+                        /*if (needContinue && !(member.Initializer is ObjectCreateExpression))
                         {
                             defValue = " || " + Inspector.GetStructDefaultValue((IType)constValue, this.Emitter);
-                        }
+                        }*/
                     }
                     else if (constValue is AstType)
                     {
@@ -347,6 +347,13 @@ namespace Bridge.Translator
                             {
                                 this.Injectors.Add(string.Format(name.StartsWith("\"") ? interfaceFormat : format, name, value + defValue));
                             }
+
+                            if (isProperty)
+                            {
+                                needContinue = false;
+                                constValue = "null";
+                                write = true;
+                            }
                         }
                     }
 
@@ -396,6 +403,39 @@ namespace Bridge.Translator
                     this.WriteColon();
                 }
 
+                bool close = false;
+                if (isProperty)
+                {
+                    var member_rr = this.Emitter.Resolver.ResolveNode(member.Entity, this.Emitter) as MemberResolveResult;
+
+                    if (member_rr != null)
+                    {
+                        var setterName = Helpers.GetPropertyRef(member_rr.Member, this.Emitter, true);
+                        var getterName = Helpers.GetPropertyRef(member_rr.Member, this.Emitter, false);
+                        string names = null;
+
+                        if (setterName != ("set" + mname) && getterName != ("get" + mname))
+                        {
+                            names = string.Format("{{ getter:'{0}', setter: '{1}'", getterName, setterName);
+                        }
+                        else if (setterName != ("set" + mname))
+                        {
+                            names = string.Format("{{ setter: '{0}'", setterName);
+                        }
+                        else if (getterName != ("get" + mname))
+                        {
+                            names = string.Format("{{ getter: '{0}'", getterName);
+                        }
+
+                        if (names != null)
+                        {
+                            this.Write(names);
+                            this.Write(", value: ");
+                            close = true;
+                        }
+                    }
+                }
+
                 if (constValue is AstType)
                 {
                     if (isNullable)
@@ -429,6 +469,11 @@ namespace Bridge.Translator
                 else
                 {
                     member.Initializer.AcceptVisitor(this.Emitter);
+                }
+
+                if (close)
+                {
+                    this.Write(" }");
                 }
 
                 if (this.IsObjectLiteral)

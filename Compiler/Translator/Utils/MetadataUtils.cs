@@ -848,13 +848,13 @@ namespace Bridge.Translator
             var typeParam = type as ITypeParameter;
             if (typeParam != null && (typeParam.OwnerType == SymbolKind.Method || Helpers.IsIgnoreGeneric(typeParam.Owner, emitter)))
             {
-                return "Object";
+                return JS.Types.System.Object.NAME;
             }
 
             var itypeDef = type.GetDefinition();
             if (itypeDef != null && itypeDef.Attributes.Any(a => a.AttributeType.FullName == "Bridge.NonScriptableAttribute"))
             {
-                return "Object";
+                return JS.Types.System.Object.NAME;
             }
 
             var name = BridgeTypes.ToJsName(type, emitter, asDefinition, skipMethodTypeParam: true);

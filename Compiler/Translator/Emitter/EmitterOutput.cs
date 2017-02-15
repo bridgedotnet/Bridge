@@ -10,7 +10,7 @@ namespace Bridge.Translator
         public EmitterOutput(string fileName)
         {
             this.FileName = fileName;
-            this.ModuleOutput = new Dictionary<string, StringBuilder>();
+            this.ModuleOutput = new Dictionary<Module, StringBuilder>();
             this.NonModuletOutput = new StringBuilder();
             this.TopOutput = new StringBuilder();
             this.BottomOutput = new StringBuilder();
@@ -41,13 +41,19 @@ namespace Bridge.Translator
             set;
         }
 
-        public Dictionary<string, StringBuilder> ModuleOutput
+        public Dictionary<Module, StringBuilder> ModuleOutput
         {
             get;
             set;
         }
 
         public Dictionary<string, List<IPluginDependency>> ModuleDependencies
+        {
+            get;
+            set;
+        }
+
+        public System.Collections.Generic.List<IPluginDependency> NonModuleDependencies
         {
             get;
             set;
@@ -66,9 +72,9 @@ namespace Bridge.Translator
     {
         public IEmitterOutput FindModuleOutput(string moduleName)
         {
-            if (this.Any(o => o.Value.ModuleOutput.ContainsKey(moduleName)))
+            if (this.Any(o => o.Value.ModuleOutput.Keys.Any(m => m.Name == moduleName)))
             {
-                return this.First(o => o.Value.ModuleOutput.ContainsKey(moduleName)).Value;
+                return this.First(o => o.Value.ModuleOutput.Keys.Any(m => m.Name == moduleName)).Value;
             }
 
             return null;

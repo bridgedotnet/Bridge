@@ -1,4 +1,5 @@
-using Bridge.Test;
+using Bridge.Html5;
+using Bridge.Test.NUnit;
 using System;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues

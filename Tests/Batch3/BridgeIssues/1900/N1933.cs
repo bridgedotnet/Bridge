@@ -1,5 +1,5 @@
 ﻿using System;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -26,7 +26,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             x = -0.025m;
             Assert.AreEqual("", x.ToString("##.#"), "decimal");
             Assert.AreEqual("0.0", x.ToString("F1"), "decimal");
-
 
             // double
             double d = 0.25;

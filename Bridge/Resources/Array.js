@@ -176,15 +176,15 @@
         },
 
         _typedArrays: {
-            Float32Array: true,
-            Float64Array: true,
-            Int8Array: true,
-            Int16Array: true,
-            Int32Array: true,
-            Uint8Array: true,
-            Uint8ClampedArray: true,
-            Uint16Array: true,
-            Uint32Array: true
+            Float32Array: System.Single,
+            Float64Array: System.Double,
+            Int8Array: System.SByte,
+            Int16Array: System.Int16,
+            Int32Array: System.Int32,
+            Uint8Array: System.Byte,
+            Uint8ClampedArray: System.Byte,
+            Uint16Array: System.UInt16,
+            Uint32Array: System.UInt32
         },
 
         is: function (obj, type) {
@@ -270,8 +270,16 @@
             return 0;
         },
 
+        checkReadOnly: function(obj, T, msg) {
+            if (System.Array.getIsReadOnly(obj, T)) {
+                throw new System.NotSupportedException(msg || "Collection was of a fixed size.");
+            }
+        },
+
         add: function (obj, item, T) {
             var name;
+
+            System.Array.checkReadOnly(obj, T);
 
             if (Bridge.isArray(obj)) {
                 obj.push(item);
@@ -286,6 +294,8 @@
 
         clear: function (obj, T) {
             var name;
+
+            System.Array.checkReadOnly(obj, T, "Collection is read-only.");
 
             if (Bridge.isArray(obj)) {
                 System.Array.fill(obj, T ? (T.getDefaultValue || Bridge.getDefaultValue(T)) : null, 0, obj.length);
@@ -407,6 +417,8 @@
         remove: function (obj, item, T) {
             var name;
 
+            System.Array.checkReadOnly(obj, T);
+
             if (Bridge.isArray(obj)) {
                 var index = System.Array.indexOf(obj, item);
 
@@ -429,6 +441,8 @@
         insert: function (obj, index, item, T) {
             var name;
 
+            System.Array.checkReadOnly(obj, T);
+
             if (Bridge.isArray(obj)) {
                 obj.splice(index, 0, item);
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert"])) {
@@ -442,6 +456,8 @@
 
         removeAt: function (obj, index, T) {
             var name;
+
+            System.Array.checkReadOnly(obj, T);
 
             if (Bridge.isArray(obj)) {
                 obj.splice(index, 1);

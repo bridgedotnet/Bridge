@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System;
 using System.Globalization;
 
@@ -10,7 +10,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         [Test]
         public void TypePropertiesAreCorrect_SPI_1717()
         {
-            Assert.True((object)(int)0 is uint);
+            Assert.False((object)(int)0 is uint);
             Assert.False((object)0.5 is uint);
             Assert.False((object)-1 is uint);
             Assert.False((object)4294967296 is uint);
@@ -26,7 +26,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
             Assert.True(i is IFormattable);
 
             var interfaces = typeof(uint).GetInterfaces();
-            Assert.AreEqual(3, interfaces.Length);
+            Assert.AreEqual(4, interfaces.Length);
             Assert.True(interfaces.Contains(typeof(IComparable<uint>)));
             Assert.True(interfaces.Contains(typeof(IEquatable<uint>)));
             Assert.True(interfaces.Contains(typeof(IFormattable)));

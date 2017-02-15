@@ -195,13 +195,14 @@ namespace Bridge.Translator
             bool oldComma = this.Emitter.Comma;
             bool oldNewLine = this.Emitter.IsNewLine;
 
+            this.EnsureComma();
+
             if (this.TypeInfo.InstanceMethods.Any(m => m.Value.Any(subm => this.Emitter.GetEntityName(subm) == JS.Fields.CONFIG)) ||
                 this.TypeInfo.InstanceConfig.Fields.Any(m => m.GetName(this.Emitter) == JS.Fields.CONFIG))
             {
                 this.Write(JS.Vars.D);
             }
 
-            this.EnsureComma();
             this.Write(JS.Fields.CONFIG);
 
             this.WriteColon();

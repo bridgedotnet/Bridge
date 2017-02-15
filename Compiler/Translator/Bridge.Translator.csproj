@@ -146,6 +146,7 @@
     <Compile Include="Emitter\Blocks\ConstructorBlock.Events.cs" />
     <Compile Include="Emitter\Blocks\EmitBlock.cs" />
     <Compile Include="Emitter\Blocks\AttributeCreateBlock.cs" />
+    <Compile Include="Emitter\Blocks\GeneratorBlock.cs" />
     <Compile Include="Emitter\Blocks\TypeOfExpressionBlock.cs" />
     <Compile Include="Emitter\Blocks\UsingBlock.cs" />
     <Compile Include="Emitter\Blocks\YieldBlock.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="Emitter\Blocks\ExpressionListBlock.cs" />
     <Compile Include="Emitter\Blocks\InlineArgumentsBlock.cs" />
     <Compile Include="Emitter\Blocks\AbstractEmitterBlock.cs" />
+    <Compile Include="Emitter\Emitter.OutputModule.cs" />
     <Compile Include="Emitter\Emitter.TypeHelpers.cs" />
     <Compile Include="Emitter\Emitter.Helpers.cs" />
     <Compile Include="Emitter\Emitter.Output.cs" />
@@ -223,6 +225,7 @@
     <Compile Include="Logging\FileLoggerWriter.cs" />
     <Compile Include="Translator\InvocationInterceptor.cs" />
     <Compile Include="Translator\Plugins.cs" />
+    <Compile Include="Utils\Loader.cs" />
     <Compile Include="Utils\FileHelper.cs" />
     <Compile Include="Translator\Translator.Versions.cs" />
     <Compile Include="Translator\Translator.Resources.cs" />

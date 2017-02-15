@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System;
 
 namespace Bridge.ClientTest.Batch4.SimpleTypes
@@ -19,7 +19,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
             Assert.True(d is IEquatable<TimeSpan>);
 
             var interfaces = typeof(TimeSpan).GetInterfaces();
-            Assert.AreEqual(2, interfaces.Length);
+            Assert.AreEqual(3, interfaces.Length);
             Assert.True(interfaces.Contains(typeof(IComparable<TimeSpan>)));
             Assert.True(interfaces.Contains(typeof(IEquatable<TimeSpan>)));
         }

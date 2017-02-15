@@ -1,9 +1,9 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Bridge.Builder")]
-[assembly: AssemblyProduct("Bridge.Builder")]
-[assembly: AssemblyDescription("Bridge Builder .exe application.")]
+[assembly: AssemblyTitle("Bridge Compiler")]
+[assembly: AssemblyProduct("Bridge Compiler")]
+[assembly: AssemblyDescription("Open Source C# to JavaScript Compiler")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

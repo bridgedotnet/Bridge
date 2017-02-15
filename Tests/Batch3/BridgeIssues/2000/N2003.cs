@@ -1,5 +1,5 @@
 ﻿using System;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -7,7 +7,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     [TestFixture(TestNameFormat = "#2003 - {0}")]
     public class Bridge2003
     {
-        class Helper
+        private class Helper
         {
             [Template("{this}.setSomeProp({this}.getSomeProp() + 1)")]
             public extern object SomeInline();

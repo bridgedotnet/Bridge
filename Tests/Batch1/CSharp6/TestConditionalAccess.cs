@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System;
 using System.Linq;
 
@@ -44,7 +44,7 @@ namespace Bridge.ClientTest.CSharp6
 
             Assert.Null(customers1?[0].Method1(nameof(GetStrings)));
             Assert.Null(customers2[2]?.Method1(nameof(GetStrings)));
-            Assert.AreEqual("getStrings", customers2?[1].Method1(nameof(GetStrings)));
+            Assert.AreEqual("GetStrings", customers2?[1].Method1(nameof(GetStrings)));
 
             Assert.Null(GetCustomers(customers1)?.Select(c => c)?.Select(c2 => c2)?.Count());
             Assert.AreEqual(3, GetCustomers(customers2)?.Select(c => c)?.Select(c2 => c2)?.Count());

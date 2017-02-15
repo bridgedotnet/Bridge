@@ -94,5 +94,11 @@ namespace System
 
         [Template("{this} === {other}")]
         public extern bool Equals(float other);
+
+        [Template("System.Single.equals({this}, {other})")]
+        public override extern bool Equals(object other);
+
+        [Template("System.Single.getHashCode({this})")]
+        public override extern int GetHashCode();
     }
 }

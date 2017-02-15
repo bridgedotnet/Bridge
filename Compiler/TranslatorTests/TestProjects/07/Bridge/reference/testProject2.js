@@ -1,8 +1,8 @@
 Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-define("MyModule", ["bridge"], function (_) {
-    var exports = { };
+    define(function () {
+        var MyModule = { };
     /** @namespace TestProject2 */
 
     /**
@@ -32,7 +32,7 @@ define("MyModule", ["bridge"], function (_) {
             }
         }
     });
-    return exports;
-});
+        return MyModule;
+    });
 
 });

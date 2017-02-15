@@ -24,8 +24,7 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <!--content-->
-    <file src="../../LICENSE.md" target="content/App_Readme/Bridge.NET/LICENSE.md" />
+    <file src="../../LICENSE.md" target="LICENSE.md" />
 
     <!--NET40-->
     <file src="../../Compiler/Contract/bin/Release/Bridge.Contract.dll" target="lib/net40/Bridge.Contract.dll" />

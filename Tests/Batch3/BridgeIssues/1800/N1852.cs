@@ -1,9 +1,10 @@
 using System;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using static Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852DispatcherMessageExtensions;
 using static Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852DispatcherMessageExtensions.Class1;
 using static Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852DispatcherMessageExtensions.Class1.Class2;
 using static Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852Test1<string>;
+
 #pragma warning disable 169
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
@@ -97,7 +98,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 {
                     public class Class4
                     {
-
                     }
                 }
             }

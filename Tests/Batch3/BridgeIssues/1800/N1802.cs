@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -10,306 +10,382 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             return 1;
         }
+
         public static int @byte()
         {
             return 2;
         }
+
         public static int @sbyte()
         {
             return 3;
         }
+
         public static int @short()
         {
             return 4;
         }
+
         public static int @ushort()
         {
             return 5;
         }
+
         public static int @int()
         {
             return 6;
         }
+
         public static int @uint()
         {
             return 7;
         }
+
         public static int @long()
         {
             return 8;
         }
+
         public static int @ulong()
         {
             return 9;
         }
+
         public static int @double()
         {
             return 10;
         }
+
         public static int @float()
         {
             return 11;
         }
+
         public static int @decimal()
         {
             return 12;
         }
+
         public static int @string()
         {
             return 13;
         }
+
         public static int @char()
         {
             return 14;
         }
+
         public static int @object()
         {
             return 15;
         }
+
         public static int @typeof()
         {
             return 16;
         }
+
         public static int @sizeof()
         {
             return 17;
         }
+
         public static int @null()
         {
             return 18;
         }
+
         public static int @true()
         {
             return 19;
         }
+
         public static int @false()
         {
             return 20;
         }
+
         public static int @if()
         {
             return 21;
         }
+
         public static int @else()
         {
             return 22;
         }
+
         public static int @while()
         {
             return 23;
         }
+
         public static int @for()
         {
             return 24;
         }
+
         public static int @foreach()
         {
             return 25;
         }
+
         public static int @do()
         {
             return 26;
         }
+
         public static int @switch()
         {
             return 27;
         }
+
         public static int @case()
         {
             return 28;
         }
+
         public static int @default()
         {
             return 29;
         }
+
         public static int @lock()
         {
             return 30;
         }
+
         public static int @try()
         {
             return 31;
         }
+
         public static int @throw()
         {
             return 32;
         }
+
         public static int @catch()
         {
             return 33;
         }
+
         public static int @finally()
         {
             return 34;
         }
+
         public static int @goto()
         {
             return 35;
         }
+
         public static int @break()
         {
             return 36;
         }
+
         public static int @continue()
         {
             return 37;
         }
+
         public static int @return()
         {
             return 38;
         }
+
         public static int @public()
         {
             return 39;
         }
+
         public static int @private()
         {
             return 40;
         }
+
         public static int @internal()
         {
             return 41;
         }
+
         public static int @protected()
         {
             return 42;
         }
+
         public static int @static()
         {
             return 43;
         }
+
         public static int @readonly()
         {
             return 44;
         }
+
         public static int @sealed()
         {
             return 45;
         }
+
         public static int @const()
         {
             return 46;
         }
+
         public static int @new()
         {
             return 47;
         }
+
         public static int @override()
         {
             return 48;
         }
+
         public static int @abstract()
         {
             return 49;
         }
+
         public static int @virtual()
         {
             return 50;
         }
+
         public static int @partial()
         {
             return 51;
         }
+
         public static int @ref()
         {
             return 52;
         }
+
         public static int @out()
         {
             return 53;
         }
+
         public static int @in()
         {
             return 54;
         }
+
         public static int @where()
         {
             return 55;
         }
+
         public static int @params()
         {
             return 56;
         }
+
         public static int @this()
         {
             return 57;
         }
+
         public static int @base()
         {
             return 58;
         }
+
         public static int @namespace()
         {
             return 59;
         }
+
         public static int @using()
         {
             return 60;
         }
+
         public static int @class()
         {
             return 61;
         }
+
         public static int @struct()
         {
             return 62;
         }
+
         public static int @interface()
         {
             return 63;
         }
+
         public static int @delegate()
         {
             return 64;
         }
+
         public static int @checked()
         {
             return 65;
         }
+
         public static int @get()
         {
             return 66;
         }
+
         public static int @set()
         {
             return 67;
         }
+
         public static int @add()
         {
             return 68;
         }
+
         public static int @remove()
         {
             return 69;
         }
+
         public static int @operator()
         {
             return 70;
         }
+
         public static int @implicit()
         {
             return 71;
         }
+
         public static int @explicit()
         {
             return 72;
         }
+
         public static int @fixed()
         {
             return 73;
         }
+
         public static int @extern()
         {
             return 74;
         }
+
         public static int @event()
         {
             return 75;
         }
+
         public static int @enum()
         {
             return 76;
         }
+
         public static int @unsafe()
         {
             return 77;

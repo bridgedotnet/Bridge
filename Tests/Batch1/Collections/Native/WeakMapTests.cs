@@ -1,4 +1,4 @@
-﻿using Bridge.Test;
+﻿using Bridge.Test.NUnit;
 using Bridge.Html5;
 
 namespace Bridge.ClientTest.Collections.Generic
@@ -7,7 +7,7 @@ namespace Bridge.ClientTest.Collections.Generic
     [TestFixture(TestNameFormat = "WeakMap - {0}")]
     public class WeakMapTests
     {
-        class SomeCustomClass
+        private class SomeCustomClass
         {
             public int SomeProperty
             {

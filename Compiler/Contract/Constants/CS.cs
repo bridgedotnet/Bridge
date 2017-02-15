@@ -5,6 +5,7 @@
         public class NS
         {
             public const string ROOT = "Bridge";
+            public const string System = "System";
         }
 
         public class Attributes
@@ -13,6 +14,7 @@
             public const string READY_ATTRIBUTE_NAME = "Bridge.Html5.ReadyAttribute";
             public const string FIELD_NAME = "Bridge.FieldAttribute";
             public const string FIELD_PROPERTY_NAME = "Bridge.FieldPropertyAttribute";
+            public const string SERIALIZABLE_NAME = "Bridge.SerializableAttribute";
         }
 
         public class Methods

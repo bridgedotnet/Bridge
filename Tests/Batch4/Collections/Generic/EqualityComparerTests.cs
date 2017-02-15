@@ -1,4 +1,4 @@
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System.Collections.Generic;
 
 namespace Bridge.ClientTest.Batch4.Collections.Generic
@@ -34,7 +34,7 @@ namespace Bridge.ClientTest.Batch4.Collections.Generic
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("System.Collections.Generic.EqualityComparer$1[[Object]]", typeof(EqualityComparer<object>).FullName, "FullName should be correct");
+            Assert.AreEqual("System.Collections.Generic.EqualityComparer`1[[System.Object, mscorlib]]", typeof(EqualityComparer<object>).FullName, "FullName should be correct");
             Assert.True(typeof(EqualityComparer<object>).IsClass, "IsClass should be true");
 
             object dict = EqualityComparer<object>.Default;

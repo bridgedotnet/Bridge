@@ -100,6 +100,7 @@
     <Compile Include="AttributeHelper.cs" />
     <Compile Include="IAnonymousType.cs" />
     <Compile Include="Config\IReflectionConfig.cs" />
+    <Compile Include="ILoader.cs" />
     <Compile Include="IWriter.cs" />
     <Compile Include="IExternalInterface.cs" />
     <Compile Include="MemberOrderer.cs" />

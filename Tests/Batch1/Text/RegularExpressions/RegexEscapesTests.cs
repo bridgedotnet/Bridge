@@ -1,5 +1,5 @@
 ﻿using System;
-using Bridge.Test;
+using Bridge.Test.NUnit;
 using System.Text.RegularExpressions;
 
 namespace Bridge.ClientTest.Text.RegularExpressions
@@ -1088,7 +1088,7 @@ namespace Bridge.ClientTest.Text.RegularExpressions
                 {
                     continue;
                 }
-                
+
                 // Test regex with the escapedStr as pattern:
                 var rgx = new Regex(escapedStr);
                 var m = rgx.Match(str);
@@ -1106,7 +1106,7 @@ namespace Bridge.ClientTest.Text.RegularExpressions
 
                 var unescapedStr = Regex.Unescape(escapedStr);
                 var unescapedCh = unescapedStr[0];
-                var unescapedCode = (int) unescapedCh;
+                var unescapedCode = (int)unescapedCh;
 
                 Assert.AreEqual(i, unescapedCode);
             }
