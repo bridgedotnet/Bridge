@@ -1,7 +1,5 @@
 ﻿using Bridge.Html5;
 using Bridge.Test.NUnit;
-using Bridge.Text.RegularExpressions;
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -394,13 +392,6 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void MatchWorks()
-        {
-            var result = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".Match(new Regex("[A-E]", "gi"));
-            Assert.AreDeepEqual(new[] { "A", "B", "C", "D", "E", "a", "b", "c", "d", "e" }, result);
-        }
-
-        [Test]
         public void PadLeftWorks()
         {
             Assert.AreEqual("  abc", "abc".PadLeft(5));
@@ -479,25 +470,6 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void ReplaceRegexWithReplaceTextWorks()
-        {
-            Assert.AreEqual("xxcxxcxxc", "abcabcabc".Replace(new Regex("a|b", "g"), "x"));
-        }
-
-        [Test]
-        public void ReplaceRegexWithReplaceCallbackWorks()
-        {
-            Assert.AreEqual("xycxycxyc", "abcabcabc".Replace(new Regex("a|b", "g"), s => s == "a" ? "x" : "y"));
-        }
-
-        [Test]
-        public void SearchWorks()
-        {
-            Assert.AreEqual(2, "abcabcabc".Search(new Regex("ca")));
-            Assert.AreEqual(-1, "abcabcabc".Search(new Regex("x")));
-        }
-
-        [Test]
         public void SliceWorks()
         {
             var numbers = "0123456789";
@@ -555,12 +527,6 @@ namespace Bridge.ClientTest.SimpleTypes
         public void SplitWithCharsAndStringSplitOptionsAndLimitWorks()
         {
             Assert.AreDeepEqual(new[] { "a", "cabcabc" }, "abxcabcabc".Split(new[] { 'b', 'x' }, 2, StringSplitOptions.RemoveEmptyEntries));
-        }
-
-        [Test]
-        public void SplitWithRegexWorks()
-        {
-            Assert.AreDeepEqual(new[] { "a", "ca", "ca", "c" }, "abcaxcaxc".Split(new Regex("b|x", "g")));
         }
 
         [Test]

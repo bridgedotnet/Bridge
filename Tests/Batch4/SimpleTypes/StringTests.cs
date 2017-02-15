@@ -580,24 +580,24 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         //    Assert.AreEqual("abcabcabc".ReplaceFirst("a", "x"), "xbcabcabc");
         //}
 
-        [Test]
-        public void ReplaceRegexWithReplaceTextWorks()
-        {
-            Assert.AreEqual("xxcxxcxxc", "abcabcabc".Replace(new Bridge.Text.RegularExpressions.Regex("a|b", "g"), "x"));
-        }
+        //[Test]
+        //public void ReplaceRegexWithReplaceTextWorks()
+        //{
+        //    Assert.AreEqual("xxcxxcxxc", "abcabcabc".Replace(new Bridge.Text.RegularExpressions.Regex("a|b", "g"), "x"));
+        //}
 
-        [Test]
-        public void ReplaceRegexWithReplaceCallbackWorks()
-        {
-            Assert.AreEqual("xycxycxyc", "abcabcabc".Replace(new Bridge.Text.RegularExpressions.Regex("a|b", "g"), s => s == "a" ? "x" : "y"));
-        }
+        //[Test]
+        //public void ReplaceRegexWithReplaceCallbackWorks()
+        //{
+        //    Assert.AreEqual("xycxycxyc", "abcabcabc".Replace(new Bridge.Text.RegularExpressions.Regex("a|b", "g"), s => s == "a" ? "x" : "y"));
+        //}
 
-        [Test]
-        public void SearchWorks()
-        {
-            Assert.AreEqual(2, "abcabcabc".Search(new Bridge.Text.RegularExpressions.Regex("ca")));
-            Assert.AreEqual(-1, "abcabcabc".Search(new Bridge.Text.RegularExpressions.Regex("x")));
-        }
+        //[Test]
+        //public void SearchWorks()
+        //{
+        //    Assert.AreEqual(2, "abcabcabc".Search(new Bridge.Text.RegularExpressions.Regex("ca")));
+        //    Assert.AreEqual(-1, "abcabcabc".Search(new Bridge.Text.RegularExpressions.Regex("x")));
+        //}
 
         [Test]
         public void SplitWithStringWorks()
@@ -637,11 +637,11 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
             Assert.AreEqual(new[] { "a", "cabcabc" }, "abxcabcabc".Split(new[] { 'b', 'x' }, 2, StringSplitOptions.RemoveEmptyEntries));
         }
 
-        [Test]
-        public void SplitWithRegexWorks()
-        {
-            Assert.AreEqual(new[] { "a", "ca", "ca", "c" }, "abcaxcaxc".Split(new Bridge.Text.RegularExpressions.Regex("b|x", "g")));
-        }
+        //[Test]
+        //public void SplitWithRegexWorks()
+        //{
+        //    Assert.AreEqual(new[] { "a", "ca", "ca", "c" }, "abcaxcaxc".Split(new Bridge.Text.RegularExpressions.Regex("b|x", "g")));
+        //}
 
         // Not C# API
         //[Test]

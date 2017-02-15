@@ -1,5 +1,4 @@
 using Bridge;
-using Bridge.Text.RegularExpressions;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -423,60 +422,6 @@ namespace System
         public extern int LocaleCompare(string compareString, string locales, LocaleOptions options);
 
         /// <summary>
-        /// The match() method retrieves the matches when matching a string against a regular expression.
-        /// </summary>
-        /// <param name="Regex">A regular expression object. If a non-Regex object obj is passed, it is implicitly converted to a Regex by using new Regex(obj).</param>
-        /// <returns></returns>
-        public extern string[] Match(Regex Regex);
-
-        /// <summary>
-        /// The match() method retrieves the matches when matching a string against a regular expression.
-        /// </summary>
-        /// <param name="Regex">A regular expression object. If a non-Regex object obj is passed, it is implicitly converted to a Regex by using new Regex(obj).</param>
-        /// <returns></returns>
-        public extern string[] Match(string Regex);
-
-        /// <summary>
-        /// The replace() method returns a new string with some or all matches of a pattern replaced by a replacement.  The pattern can be a string or a Regex, and the replacement can be a string or a function to be called for each match.
-        /// </summary>
-        /// <param name="Regex">A Regex object. The match is replaced by the return value of parameter #2.</param>
-        /// <param name="newSubStr">The String that replaces the substring received from parameter #1. A number of special replacement patterns are supported; see the "Specifying a string as a parameter" section below.</param>
-        /// <returns></returns>
-        public extern string Replace(Regex Regex, string newSubStr);
-
-        /// <summary>
-        /// The replace() method returns a new string with some or all matches of a pattern replaced by a replacement.  The pattern can be a string or a Regex, and the replacement can be a string or a function to be called for each match.
-        /// </summary>
-        /// <param name="Regex">A Regex object. The match is replaced by the return value of parameter #2.</param>
-        /// <param name="callback"></param>
-        /// <returns></returns>
-        public extern string Replace(Regex Regex, Delegate callback);
-
-        /// <summary>
-        /// The replace() method returns a new string with some or all matches of a pattern replaced by a replacement.  The pattern can be a string or a Regex, and the replacement can be a string or a function to be called for each match.
-        /// </summary>
-        /// <param name="Regex">A Regex object. The match is replaced by the return value of parameter #2.</param>
-        /// <param name="callback"></param>
-        /// <returns></returns>
-        public extern string Replace(Regex Regex, Func<string, string> callback);
-
-        /// <summary>
-        /// The replace() method returns a new string with some or all matches of a pattern replaced by a replacement.  The pattern can be a string or a Regex, and the replacement can be a string or a function to be called for each match.
-        /// </summary>
-        /// <param name="Regex">A Regex object. The match is replaced by the return value of parameter #2.</param>
-        /// <param name="callback"></param>
-        /// <returns></returns>
-        public extern string Replace(Regex Regex, Func<string, int, string> callback);
-
-        /// <summary>
-        /// The replace() method returns a new string with some or all matches of a pattern replaced by a replacement.  The pattern can be a string or a Regex, and the replacement can be a string or a function to be called for each match.
-        /// </summary>
-        /// <param name="Regex">A Regex object. The match is replaced by the return value of parameter #2.</param>
-        /// <param name="callback"></param>
-        /// <returns></returns>
-        public extern string Replace(Regex Regex, Func<string, int, string, string> callback);
-
-        /// <summary>
         /// The replace() method returns a new string with some or all matches of a pattern replaced by a replacement.  The pattern can be a string or a Regex, and the replacement can be a string or a function to be called for each match.
         /// </summary>
         /// <param name="substr">A String that is to be replaced by newSubStr.</param>
@@ -525,20 +470,6 @@ namespace System
         public extern string Replace(string substr, Func<string, int, string, string> callback);
 
         /// <summary>
-        /// The search() method executes a search for a match between a regular expression and this String object.
-        /// </summary>
-        /// <param name="Regex">A regular expression object. If a non-Regex object obj is passed, it is implicitly converted to a Regex by using new Regex(obj).</param>
-        /// <returns></returns>
-        public extern int Search(Regex Regex);
-
-        /// <summary>
-        /// The search() method executes a search for a match between a regular expression and this String object.
-        /// </summary>
-        /// <param name="Regex">A regular expression object. If a non-Regex object obj is passed, it is implicitly converted to a Regex by using new Regex(obj).</param>
-        /// <returns></returns>
-        public extern int Search(string Regex);
-
-        /// <summary>
         /// The slice() method extracts a section of a string and returns a new string.
         /// </summary>
         /// <param name="beginSlice">The zero-based index at which to begin extraction. If negative, it is treated as (sourceLength-beginSlice) where sourceLength is the length of the string (for example, if beginSlice is -3 it is treated as sourceLength-3).</param>
@@ -576,12 +507,8 @@ namespace System
         [Template("{this}.split(String.fromCharCode({separator}))")]
         public extern string[] Split(char separator);
 
-        public extern string[] Split(Regex regex);
-
         [Template("{this}.split(String.fromCharCode({separator}), {limit})")]
         public extern string[] Split(char separator, int limit);
-
-        public extern string[] Split(Regex regex, int limit);
 
         public extern string[] Split(string separator, int limit);
 

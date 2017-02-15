@@ -1590,14 +1590,10 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             QUnit.test("StringTests - RemoveWithCountWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.StringTests.removeWithCountWorks);
             QUnit.test("StringTests - ReplaceWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.StringTests.replaceWorks);
             QUnit.test("StringTests - ReplaceCharWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.StringTests.replaceCharWorks);
-            QUnit.test("StringTests - ReplaceRegexWithReplaceTextWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.StringTests.replaceRegexWithReplaceTextWorks);
-            QUnit.test("StringTests - ReplaceRegexWithReplaceCallbackWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.StringTests.replaceRegexWithReplaceCallbackWorks);
-            QUnit.test("StringTests - SearchWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.StringTests.searchWorks);
             QUnit.test("StringTests - SplitWithStringWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.StringTests.splitWithStringWorks);
             QUnit.test("StringTests - SplitWithCharWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.StringTests.splitWithCharWorks);
             QUnit.test("StringTests - SplitWithCharsAndLimitWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.StringTests.splitWithCharsAndLimitWorks);
             QUnit.test("StringTests - SplitWithCharsAndStringSplitOptionsAndLimitWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.StringTests.splitWithCharsAndStringSplitOptionsAndLimitWorks);
-            QUnit.test("StringTests - SplitWithRegexWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.StringTests.splitWithRegexWorks);
             QUnit.test("StringTests - SomeNetSplitTests", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.StringTests.someNetSplitTests);
             QUnit.test("StringTests - SplitWithCharsWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.StringTests.splitWithCharsWorks);
             QUnit.test("StringTests - SplitWithStringsWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.StringTests.splitWithStringsWorks);
@@ -1735,7 +1731,6 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             QUnit.test("RegexTests - ExecWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.RegexTests.execWorks);
             QUnit.test("RegexTests - LastIndexWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.RegexTests.lastIndexWorks);
             QUnit.test("RegexTests - TestWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.RegexTests.testWorks);
-            QUnit.test("RegexTests - EscapeWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.RegexTests.escapeWorks);
             QUnit.test("StringBuilderTests - TypePropertiesAreCorrect", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.StringBuilderTests.typePropertiesAreCorrect);
             QUnit.test("StringBuilderTests - DefaultConstructorWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.StringBuilderTests.defaultConstructorWorks);
             QUnit.test("StringBuilderTests - ConstructorWithCapacityWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.StringBuilderTests.constructorWithCapacityWorks);
@@ -12803,13 +12798,6 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
                     line: "85"
                 } ));
                 t.getFixture().testWorks();
-            },
-            escapeWorks: function (assert) {
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Text.RegularExpressions.RegexTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.RegexTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
-                    method: "EscapeWorks()",
-                    line: "92"
-                } ));
-                Bridge.ClientTest.Batch4.Text.RegularExpressions.RegexTests.escapeWorks();
             }
         },
         context: null,
@@ -13840,27 +13828,6 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
                 } ));
                 t.getFixture().replaceCharWorks();
             },
-            replaceRegexWithReplaceTextWorks: function (assert) {
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.StringTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.StringTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
-                    method: "ReplaceRegexWithReplaceTextWorks()",
-                    line: "583"
-                } ));
-                t.getFixture().replaceRegexWithReplaceTextWorks();
-            },
-            replaceRegexWithReplaceCallbackWorks: function (assert) {
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.StringTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.StringTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
-                    method: "ReplaceRegexWithReplaceCallbackWorks()",
-                    line: "589"
-                } ));
-                t.getFixture().replaceRegexWithReplaceCallbackWorks();
-            },
-            searchWorks: function (assert) {
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.StringTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.StringTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
-                    method: "SearchWorks()",
-                    line: "595"
-                } ));
-                t.getFixture().searchWorks();
-            },
             splitWithStringWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.StringTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.StringTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SplitWithStringWorks()",
@@ -13888,13 +13855,6 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
                     line: "634"
                 } ));
                 t.getFixture().splitWithCharsAndStringSplitOptionsAndLimitWorks();
-            },
-            splitWithRegexWorks: function (assert) {
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.StringTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.StringTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
-                    method: "SplitWithRegexWorks()",
-                    line: "640"
-                } ));
-                t.getFixture().splitWithRegexWorks();
             },
             someNetSplitTests: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.StringTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.StringTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
