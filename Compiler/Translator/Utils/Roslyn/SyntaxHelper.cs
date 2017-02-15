@@ -582,7 +582,7 @@ namespace Bridge.Translator
 
             if (symbol != null && symbol.Kind != SymbolKind.Namespace)
             {
-                bool preserveMemberChange = !(symbol.Kind == SymbolKind.Method || symbol.Kind == SymbolKind.Property);
+                //bool preserveMemberChange = !(symbol.Kind == SymbolKind.Method || symbol.Kind == SymbolKind.Property);
 
                 int enumMode = -1;
 
@@ -601,10 +601,10 @@ namespace Bridge.Translator
                     }
                 }
 
-                if (symbol is IFieldSymbol && ((IFieldSymbol)symbol).IsConst)
-                {
-                    preserveMemberChange = true;
-                }
+                //if (symbol is IFieldSymbol && ((IFieldSymbol)symbol).IsConst)
+                //{
+                //    preserveMemberChange = true;
+                //}
 
                 var nameAttr = SyntaxHelper.GetInheritedAttribute(symbol, Bridge.Translator.Translator.Bridge_ASSEMBLY + ".NameAttribute");
                 bool isIgnore = symbol.ContainingType != null && SyntaxHelper.IsExternalType(symbol.ContainingType);
@@ -624,7 +624,7 @@ namespace Bridge.Translator
                         return name;
                     }
 
-                    preserveMemberChange = !(bool)value;
+                    //preserveMemberChange = !(bool)value;
                     enumMode = -1;
                 }
 
@@ -644,10 +644,10 @@ namespace Bridge.Translator
                             break;
                     }
                 }
-                else
+                /*else
                 {
                     name = !preserveMemberChange ? Object.Net.Utilities.StringUtils.ToLowerCamelCase(name) : name;
-                }
+                }*/
 
                 if (!isIgnore && symbol.IsStatic && Emitter.IsReservedStaticName(name))
                 {

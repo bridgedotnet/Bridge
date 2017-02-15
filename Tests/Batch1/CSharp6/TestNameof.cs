@@ -33,10 +33,10 @@ namespace Bridge.ClientTest.CSharp6
             var c = new C();
 
             Assert.AreEqual("C", nameof(C));
-            Assert.AreEqual("method1", nameof(C.Method1));
-            Assert.AreEqual("method2", nameof(C.Method2));
-            Assert.AreEqual("method1", nameof(c.Method1));
-            Assert.AreEqual("method2", nameof(c.Method2));
+            Assert.AreEqual("Method1", nameof(C.Method1));
+            Assert.AreEqual("Method2", nameof(C.Method2));
+            Assert.AreEqual("Method1", nameof(c.Method1));
+            Assert.AreEqual("Method2", nameof(c.Method2));
             Assert.AreEqual("x", C.Method1("", 0));
             Assert.AreEqual("Y", C.Method1("", ""));
             Assert.AreEqual("z", c.Method2(0));
