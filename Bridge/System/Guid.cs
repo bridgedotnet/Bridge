@@ -406,7 +406,7 @@ namespace System
                 {
                     p = true;
                 }
-                
+
                 if (p && Guid.Valid.IsMatch(input))
                 {
                     r = input.ToLower();
