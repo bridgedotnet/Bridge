@@ -73,19 +73,6 @@ namespace System
         [Template("String.fromCharCode({numbers})")]
         public static extern string FromCharCode(params int[] numbers);
 
-        /// <summary>
-        /// The charAt() method returns the specified character from a string.
-        /// </summary>
-        /// <param name="index">An integer between 0 and 1-less-than the length of the string.</param>
-        /// <returns></returns>
-        public extern string CharAt(int index);
-
-        /// <summary>
-        /// The charCodeAt() method returns the numeric Unicode value of the character at the given index (except for unicode codepoints > 0x10000).
-        /// </summary>
-        /// <param name="index">An integer greater than or equal to 0 and less than the length of the string; if it is not a number, it defaults to 0.</param>
-        /// <returns></returns>
-        public extern int CharCodeAt(int index);
 
         /// <summary>
         /// Determines whether two specified String objects have the same value.
@@ -394,42 +381,15 @@ namespace System
         [Template("System.String.lastIndexOfAny({this}, {ch}, {startIndex}, {count})")]
         public extern int LastIndexOfAny(char[] ch, int startIndex, int count);
 
-        /// <summary>
-        /// The localeCompare() method returns a number indicating whether a reference string comes before or after or is the same as the given string in sort order.
-        /// The new locales and options arguments let applications specify the language whose sort order should be used and customize the behavior of the function. In older implementations, which ignore the locales and options arguments, the locale and sort order used are entirely implementation dependent.
-        /// </summary>
-        /// <param name="compareString">The string against which the referring string is comparing</param>
-        /// <returns></returns>
-        public extern int LocaleCompare(string compareString);
-
-        /// <summary>
-        /// The localeCompare() method returns a number indicating whether a reference string comes before or after or is the same as the given string in sort order.
-        /// The new locales and options arguments let applications specify the language whose sort order should be used and customize the behavior of the function. In older implementations, which ignore the locales and options arguments, the locale and sort order used are entirely implementation dependent.
-        /// </summary>
-        /// <param name="compareString">The string against which the referring string is comparing</param>
-        /// <param name="locales">A string with a BCP 47 language tag, or an array of such strings. For the general form and interpretation of the locales argument, see the Intl page. The following Unicode extension keys are allowed:</param>
-        /// <returns></returns>
-        public extern int LocaleCompare(string compareString, string locales);
-
-        /// <summary>
-        /// The localeCompare() method returns a number indicating whether a reference string comes before or after or is the same as the given string in sort order.
-        /// The new locales and options arguments let applications specify the language whose sort order should be used and customize the behavior of the function. In older implementations, which ignore the locales and options arguments, the locale and sort order used are entirely implementation dependent.
-        /// </summary>
-        /// <param name="compareString">The string against which the referring string is comparing</param>
-        /// <param name="locales">A string with a BCP 47 language tag, or an array of such strings. For the general form and interpretation of the locales argument, see the Intl page. The following Unicode extension keys are allowed:</param>
-        /// <param name="options">An object with some or all of the following properties:</param>
-        /// <returns></returns>
-        public extern int LocaleCompare(string compareString, string locales, LocaleOptions options);
-
-        /// <summary>
-        /// The replace() method returns a new string with some or all matches of a pattern replaced by a replacement.  The pattern can be a string or a Regex, and the replacement can be a string or a function to be called for each match.
-        /// </summary>
-        /// <param name="substr">A String that is to be replaced by newSubStr.</param>
-        /// <param name="newSubStr">The String that replaces the substring received from parameter #1. A number of special replacement patterns are supported; see the "Specifying a string as a parameter" section below.</param>
-        /// <returns></returns>
         [Template("System.String.replaceAll({this}, {substr}, {newSubStr})")]
         public extern string Replace(string substr, string newSubStr);
 
+        /// <summary>
+        /// Returns a new string in which all occurrences of a specified character in this instance are replaced with another specified character.
+        /// </summary>
+        /// <param name="oldChar">Character to be replaced.</param>
+        /// <param name="replaceChar">Character to replace all occurrences of oldChar.</param>
+        /// <returns>A string that is equivalent to this instance except that all instances of oldChar are replaced with replaceChar. If oldChar is not found in the current instance, the method returns the current instance unchanged.</returns>
         [Template("System.String.replaceAll({this}, String.fromCharCode({oldChar}), String.fromCharCode({replaceChar}))")]
         public extern string Replace(char oldChar, char replaceChar);
 
@@ -440,49 +400,7 @@ namespace System
         /// <param name="callback"></param>
         /// <returns></returns>
         [Template("System.String.replaceAll({this}, {substr}, {callback})")]
-        public extern string Replace(string substr, Delegate callback);
-
-        /// <summary>
-        /// The replace() method returns a new string with some or all matches of a pattern replaced by a replacement.  The pattern can be a string or a Regex, and the replacement can be a string or a function to be called for each match.
-        /// </summary>
-        /// <param name="substr">A String that is to be replaced by newSubStr.</param>
-        /// <param name="callback"></param>
-        /// <returns></returns>
-        [Template("System.String.replaceAll({this}, {substr}, {callback})")]
-        public extern string Replace(string substr, Func<string, string> callback);
-
-        /// <summary>
-        /// The replace() method returns a new string with some or all matches of a pattern replaced by a replacement.  The pattern can be a string or a Regex, and the replacement can be a string or a function to be called for each match.
-        /// </summary>
-        /// <param name="substr">A String that is to be replaced by newSubStr.</param>
-        /// <param name="callback"></param>
-        /// <returns></returns>
-        [Template("System.String.replaceAll({this}, {substr}, {callback})")]
-        public extern string Replace(string substr, Func<string, int, string> callback);
-
-        /// <summary>
-        /// The replace() method returns a new string with some or all matches of a pattern replaced by a replacement.  The pattern can be a string or a Regex, and the replacement can be a string or a function to be called for each match.
-        /// </summary>
-        /// <param name="substr">A String that is to be replaced by newSubStr.</param>
-        /// <param name="callback"></param>
-        /// <returns></returns>
-        [Template("System.String.replaceAll({this}, {substr}, {callback})")]
         public extern string Replace(string substr, Func<string, int, string, string> callback);
-
-        /// <summary>
-        /// The slice() method extracts a section of a string and returns a new string.
-        /// </summary>
-        /// <param name="beginSlice">The zero-based index at which to begin extraction. If negative, it is treated as (sourceLength-beginSlice) where sourceLength is the length of the string (for example, if beginSlice is -3 it is treated as sourceLength-3).</param>
-        /// <returns></returns>
-        public extern string Slice(int beginSlice);
-
-        /// <summary>
-        /// The slice() method extracts a section of a string and returns a new string.
-        /// </summary>
-        /// <param name="beginSlice">The zero-based index at which to begin extraction. If negative, it is treated as (sourceLength-beginSlice) where sourceLength is the length of the string (for example, if beginSlice is -3 it is treated as sourceLength-3).</param>
-        /// <param name="endSlice">The zero-based index at which to end extraction. If omitted, slice extracts to the end of the string. If negative, it is treated as (sourceLength-endSlice) where sourceLength is the length of the string.</param>
-        /// <returns></returns>
-        public extern string Slice(int beginSlice, int endSlice);
 
         [Template("System.String.split({this}, {separator:array}.map(function(i) {{ return String.fromCharCode(i); }}))")]
         public extern string[] Split(params char[] separator);
@@ -502,40 +420,6 @@ namespace System
         [Template("System.String.split({this}, {separator}, {limit}, {options})")]
         public extern string[] Split(string[] separator, int limit, StringSplitOptions options);
 
-        public extern string[] Split(string separator);
-
-        [Template("{this}.split(String.fromCharCode({separator}))")]
-        public extern string[] Split(char separator);
-
-        [Template("{this}.split(String.fromCharCode({separator}), {limit})")]
-        public extern string[] Split(char separator, int limit);
-
-        public extern string[] Split(string separator, int limit);
-
-        /// <summary>
-        /// The substring() method returns a subset of a string between one index and another, or through the end of the string.
-        /// </summary>
-        /// <param name="indexA">An integer between 0 and the length of the string.</param>
-        /// <returns></returns>
-        [Name("substring")]
-        public extern string JsSubstring(int indexA);
-
-        /// <summary>
-        /// The substring() method returns a subset of a string between one index and another, or through the end of the string.
-        /// </summary>
-        /// <param name="indexA">An integer between 0 and the length of the string.</param>
-        /// <param name="indexB">An integer between 0 and the length of the string.</param>
-        /// <returns></returns>
-        [Name("substring")]
-        public extern string JsSubstring(int indexA, int indexB);
-
-        /// <summary>
-        /// The substr() method returns the characters in a string beginning at the specified location through the specified number of characters.
-        /// </summary>
-        /// <param name="start">Location at which to begin extracting characters. If a negative number is given, it is treated as strLength+start where strLength = to the length of the string (for example, if start is -3 it is treated as strLength-3.)</param>
-        /// <returns></returns>
-        public extern string Substr(int start);
-
         /// <summary>
         /// The substr() method returns the characters in a string beginning at the specified location through the specified number of characters.
         /// </summary>
@@ -543,14 +427,6 @@ namespace System
         /// <returns></returns>
         [Name("substr")]
         public extern string Substring(int start);
-
-        /// <summary>
-        /// The substr() method returns the characters in a string beginning at the specified location through the specified number of characters.
-        /// </summary>
-        /// <param name="start">Location at which to begin extracting characters. If a negative number is given, it is treated as strLength+start where strLength = to the length of the string (for example, if start is -3 it is treated as strLength-3.)</param>
-        /// <param name="length">The number of characters to extract.</param>
-        /// <returns></returns>
-        public extern string Substr(int start, int length);
 
         /// <summary>
         /// The substr() method returns the characters in a string beginning at the specified location through the specified number of characters.

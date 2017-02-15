@@ -1,8 +1,13 @@
     Bridge.define("System.Version", {
         inherits: function () { return [System.ICloneable,System.IComparable$1(System.Version),System.IEquatable$1(System.Version)]; },
         statics: {
-            separatorsArray: ".",
+            separatorsArray: null,
             ZERO_CHAR_VALUE: 48,
+            config: {
+                init: function () {
+                    this.separatorsArray = System.Array.init([46], System.Char);
+                }
+            },
             appendPositiveNumber: function (num, sb) {
                 var index = sb.getLength();
                 var reminder;
@@ -40,7 +45,7 @@
                     return false;
                 }
 
-                var parsedComponents = version.split(System.Version.separatorsArray);
+                var parsedComponents = System.String.split(version, System.Version.separatorsArray.map(function(i) {{ return String.fromCharCode(i); }}));
                 var parsedComponentsLength = parsedComponents.length;
                 if ((parsedComponentsLength < 2) || (parsedComponentsLength > 4)) {
                     result.v.setFailure(System.Version.ParseFailureKind.ArgumentException);

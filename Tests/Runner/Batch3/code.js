@@ -16848,11 +16848,12 @@ Bridge.$N1391Result =                 r;
             testUseCase: function () {
                 var s = "0123456789";
 
-                Bridge.Test.NUnit.Assert.areEqual$1("0123456789", s.substring(-1), "JsSubstring(-1)");
-                Bridge.Test.NUnit.Assert.areEqual$1("56789", s.substring(5), "JsSubstring(5)");
-                Bridge.Test.NUnit.Assert.areEqual$1("", s.substring(10), "JsSubstring(10)");
-                Bridge.Test.NUnit.Assert.areEqual$1("1", s.substring(1, 2), "JsSubstring(1, 2)");
-                Bridge.Test.NUnit.Assert.areEqual$1("123456789", s.substring(1, 10), "JsSubstring(1, 10)");
+                // Not C# API #2392
+                //Assert.AreEqual("0123456789", s.JsSubstring(-1), "JsSubstring(-1)");
+                //Assert.AreEqual("56789", s.JsSubstring(5), "JsSubstring(5)");
+                //Assert.AreEqual("", s.JsSubstring(10), "JsSubstring(10)");
+                //Assert.AreEqual("1", s.JsSubstring(1, 2), "JsSubstring(1, 2)");
+                //Assert.AreEqual("123456789", s.JsSubstring(1, 10), "JsSubstring(1, 10)");
 
                 Bridge.Test.NUnit.Assert.areEqual$1("9", s.substr(-1), "Substring(-1)");
                 Bridge.Test.NUnit.Assert.areEqual$1("56789", s.substr(5), "Substring(5)");
@@ -16860,11 +16861,12 @@ Bridge.$N1391Result =                 r;
                 Bridge.Test.NUnit.Assert.areEqual$1("12", s.substr(1, 2), "Substring(1, 2)");
                 Bridge.Test.NUnit.Assert.areEqual$1("123456789", s.substr(1, 10), "Substring(1, 10)");
 
-                Bridge.Test.NUnit.Assert.areEqual$1("9", s.substr(-1), "Substr(-1)");
-                Bridge.Test.NUnit.Assert.areEqual$1("56789", s.substr(5), "Substr(5)");
-                Bridge.Test.NUnit.Assert.areEqual$1("", s.substr(10), "Substr(10)");
-                Bridge.Test.NUnit.Assert.areEqual$1("12", s.substr(1, 2), "Substr(1, 2)");
-                Bridge.Test.NUnit.Assert.areEqual$1("123456789", s.substr(1, 10), "Substr(1, 10)");
+                // Not C# API #2392
+                //Assert.AreEqual("9", s.Substr(-1), "Substr(-1)");
+                //Assert.AreEqual("56789", s.Substr(5), "Substr(5)");
+                //Assert.AreEqual("", s.Substr(10), "Substr(10)");
+                //Assert.AreEqual("12", s.Substr(1, 2), "Substr(1, 2)");
+                //Assert.AreEqual("123456789", s.Substr(1, 10), "Substr(1, 10)");
             }
         }
     });

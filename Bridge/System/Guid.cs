@@ -400,7 +400,7 @@ namespace System
                     if ((input[0] == b[0]) && (input[input.Length - 1] == b[1]))
                     {
                         p = true;
-                        input = input.Substr(1, input.Length - 2);
+                        input = input.Substring(1, input.Length - 2);
                     }
                 } else
                 {
