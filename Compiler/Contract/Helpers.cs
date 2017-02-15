@@ -365,6 +365,12 @@ namespace Bridge.Contract
                 return;
             }
 
+            var conversion = block.Emitter.Resolver.Resolver.GetConversion(expression);
+            if (conversion.IsBoxingConversion || conversion.IsUnboxingConversion)
+            {
+                return;
+            }
+
             if (resolveResult is InvocationResolveResult)
             {
                 bool ret = true;
@@ -395,17 +401,7 @@ namespace Bridge.Contract
             var type = nullable ? ((ParameterizedType)resolveResult.Type).TypeArguments[0] : resolveResult.Type;
             if (type.Kind == TypeKind.Struct)
             {
-                var typeDef = block.Emitter.GetTypeDefinition(type);
-                if (block.Emitter.Validator.IsExternalType(typeDef) || block.Emitter.Validator.IsImmutableType(typeDef))
-                {
-                    return;
-                }
-
-                var mutableFields = type.GetFields(f => !f.IsReadOnly && !f.IsConst, GetMemberOptions.IgnoreInheritedMembers);
-                var autoProps = typeDef.Properties.Where(Helpers.IsAutoProperty);
-                var autoEvents = type.GetEvents(null, GetMemberOptions.IgnoreInheritedMembers);
-
-                if (!mutableFields.Any() && !autoProps.Any() && !autoEvents.Any())
+                if (Helpers.IsImmutableStruct(block.Emitter, type))
                 {
                     return;
                 }
@@ -467,6 +463,25 @@ namespace Bridge.Contract
                     }
                 }
             }
+        }
+
+        public static bool IsImmutableStruct(IEmitter emitter, IType type)
+        {
+            var typeDef = emitter.GetTypeDefinition(type);
+            if (emitter.Validator.IsExternalType(typeDef) || emitter.Validator.IsImmutableType(typeDef))
+            {
+                return true;
+            }
+
+            var mutableFields = type.GetFields(f => !f.IsReadOnly && !f.IsConst, GetMemberOptions.IgnoreInheritedMembers);
+            var autoProps = typeDef.Properties.Where(Helpers.IsAutoProperty);
+            var autoEvents = type.GetEvents(null, GetMemberOptions.IgnoreInheritedMembers);
+
+            if (!mutableFields.Any() && !autoProps.Any() && !autoEvents.Any())
+            {
+                return true;
+            }
+            return false;
         }
 
         public static bool IsAutoProperty(IProperty propertyDeclaration)

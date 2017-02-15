@@ -15155,6 +15155,34 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2386", {
+        statics: {
+            testStructBoxingOperations: function () {
+                var p = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2386.Point.$ctor1(1, 1);
+                Bridge.Test.NUnit.Assert.areEqual("(1, 1)", p.toString());
+
+                p.change(2, 2);
+                Bridge.Test.NUnit.Assert.areEqual("(2, 2)", p.toString());
+
+                var o = p.$clone();
+                Bridge.Test.NUnit.Assert.areEqual("(2, 2)", o.toString());
+
+                System.Nullable.getValue(Bridge.cast(Bridge.unbox(o), Bridge.ClientTest.Batch3.BridgeIssues.Bridge2386.Point)).change(3, 3);
+                Bridge.Test.NUnit.Assert.areEqual("(2, 2)", o.toString());
+
+                Bridge.cast(p.$clone(), Bridge.ClientTest.Batch3.BridgeIssues.Bridge2386.IChangeBoxedPoint).Bridge$ClientTest$Batch3$BridgeIssues$Bridge2386$IChangeBoxedPoint$change(4, 4);
+                Bridge.Test.NUnit.Assert.areEqual("(2, 2)", p.toString());
+
+                Bridge.cast(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2386.IChangeBoxedPoint).Bridge$ClientTest$Batch3$BridgeIssues$Bridge2386$IChangeBoxedPoint$change(5, 5);
+                Bridge.Test.NUnit.Assert.areEqual("(5, 5)", o.toString());
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2386.IChangeBoxedPoint", {
+        $kind: "interface"
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
@@ -19852,7 +19880,7 @@ Bridge.$N1391Result =                 r;
         statics: {
             testUseCase: function () {
                 Bridge.Test.NUnit.Assert.areNotEqual(null, Bridge.ClientTest.Batch3.BridgeIssues.Bridge789.method1());
-                Bridge.Test.NUnit.Assert.areNotEqual(null, Bridge.ClientTest.Batch3.BridgeIssues.Bridge789.method2());
+                Bridge.Test.NUnit.Assert.areNotEqual(null, Bridge.ClientTest.Batch3.BridgeIssues.Bridge789.method2().$clone());
                 Bridge.Test.NUnit.Assert.areEqual(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge789.method2().field1);
             },
             method1: function (dt) {
@@ -23823,6 +23851,52 @@ Bridge.$N1391Result =                 r;
         System$IEquatable$1$System$String$Array$equalsT: function (other) {
             this.tracker = 2;
             return true;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2386.Point", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2386.IChangeBoxedPoint],
+        $kind: "struct",
+        statics: {
+            getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2386.Point(); }
+        },
+        m_x: 0,
+        m_y: 0,
+        config: {
+            alias: [
+            "change", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2386$IChangeBoxedPoint$change"
+            ]
+        },
+        $ctor1: function (x, y) {
+            this.$initialize();
+            this.m_x = x;
+            this.m_y = y;
+        },
+        ctor: function () {
+            this.$initialize();
+        },
+        change: function (x, y) {
+            this.m_x = x;
+            this.m_y = y;
+        },
+        toString: function () {
+            return System.String.format("({0}, {1})", Bridge.box(this.m_x, System.Int32), Bridge.box(this.m_y, System.Int32));
+        },
+        getHashCode: function () {
+            var h = Bridge.addHash([1852403652, this.m_x, this.m_y]);
+            return h;
+        },
+        equals: function (o) {
+            if (!Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2386.Point)) {
+                return false;
+            }
+            return Bridge.equals(this.m_x, o.m_x) && Bridge.equals(this.m_y, o.m_y);
+        },
+        $clone: function (to) {
+            var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2386.Point();
+            s.m_x = this.m_x;
+            s.m_y = this.m_y;
+            return s;
         }
     });
 
