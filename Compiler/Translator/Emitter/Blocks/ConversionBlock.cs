@@ -298,7 +298,7 @@ namespace Bridge.Translator
                     if (parent_rr != null)
                     {
                         var memberDeclaringTypeDefinition = parent_rr.Member.DeclaringTypeDefinition;
-                        isArgument = (block.Emitter.Validator.IsExternalType(memberDeclaringTypeDefinition) || block.Emitter.Validator.IsExternalType(parent_rr.Member)) 
+                        isArgument = (block.Emitter.Validator.IsExternalType(memberDeclaringTypeDefinition) || block.Emitter.Validator.IsExternalType(parent_rr.Member))
                                      && !(memberDeclaringTypeDefinition.Namespace == CS.NS.System || memberDeclaringTypeDefinition.Namespace.StartsWith(CS.NS.System + "."));
 
                         var attr = parent_rr.Member.Attributes.FirstOrDefault(a => a.AttributeType.FullName == "Bridge.UnboxAttribute");
