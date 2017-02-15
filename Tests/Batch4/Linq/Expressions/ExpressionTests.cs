@@ -1,4 +1,5 @@
 // #1614
+using Bridge.Html5;
 using Bridge.Test.NUnit;
 using System;
 using System.Collections;

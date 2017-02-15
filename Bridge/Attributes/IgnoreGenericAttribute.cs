@@ -7,5 +7,10 @@ namespace Bridge
     [NonScriptable]
     public sealed class IgnoreGenericAttribute : Attribute
     {
+        public bool AllowInTypeScript
+        {
+            get;
+            set;
+        }
     }
 }

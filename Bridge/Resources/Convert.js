@@ -23,7 +23,7 @@
         },
 
         toBoolean: function (value, formatProvider) {
-            value = Bridge.unbox(value);
+            value = Bridge.unbox(value, true);
 
             switch (typeof (value)) {
                 case "boolean":
@@ -70,7 +70,7 @@
         toChar: function (value, formatProvider, valueTypeCode) {
             var typeCodes = scope.convert.typeCodes;
 
-            value = Bridge.unbox(value);
+            value = Bridge.unbox(value, true);
 
             if (value instanceof System.Decimal) {
                 value = value.toFloat();
@@ -187,7 +187,7 @@
         toDateTime: function (value, formatProvider) {
             var typeCodes = scope.convert.typeCodes;
 
-            value = Bridge.unbox(value);
+            value = Bridge.unbox(value, true);
 
             switch (typeof (value)) {
                 case "boolean":
@@ -450,7 +450,7 @@
 
         toStringInBase: function (value, toBase, typeCode) {
             var typeCodes = scope.convert.typeCodes;
-            value = Bridge.unbox(value);
+            value = Bridge.unbox(value, true);
             if (toBase !== 2 && toBase !== 8 && toBase !== 10 && toBase !== 16) {
                 throw new System.ArgumentException("Invalid Base.");
             }
@@ -875,7 +875,7 @@
         },
 
         toNumber: function (value, formatProvider, typeCode, valueTypeCode) {
-            value = Bridge.unbox(value);
+            value = Bridge.unbox(value, true);
 
             var typeCodes = scope.convert.typeCodes,
                 type = typeof (value),

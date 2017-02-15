@@ -14,7 +14,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             var genericTypeDefinition = typeof(List<>).GetGenericTypeDefinition();
 
             Assert.AreEqual(typeof(List<>), genericTypeDefinition);
-            Assert.AreEqual("System.Collections.Generic.List$1", genericTypeDefinition.FullName);
+            Assert.AreEqual("System.Collections.Generic.List`1", genericTypeDefinition.FullName);
         }
     }
 }

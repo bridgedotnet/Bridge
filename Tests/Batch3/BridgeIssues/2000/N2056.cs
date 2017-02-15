@@ -82,8 +82,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual("System.Int32[]", typeof(int[]).FullName);
             Assert.AreEqual("System.Int32[,]", typeof(int[,]).FullName);
             Assert.AreEqual("System.Int32[,,]", typeof(int[,,]).FullName);
-            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2056.B[]", typeof(B[]).FullName);
-            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2056.B[,]", typeof(B[,]).FullName);
+            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2056+B[]", typeof(B[]).FullName);
+            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2056+B[,]", typeof(B[,]).FullName);
         }
     }
 }

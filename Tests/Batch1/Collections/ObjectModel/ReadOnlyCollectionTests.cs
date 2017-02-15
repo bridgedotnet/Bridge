@@ -32,7 +32,7 @@ namespace Bridge.ClientTest.Collections.Generic
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("System.Collections.ObjectModel.ReadOnlyCollection$1[[System.Int32, mscorlib]]", typeof(ReadOnlyCollection<int>).FullName, "FullName should be Array");
+            Assert.AreEqual("System.Collections.ObjectModel.ReadOnlyCollection`1[[System.Int32, mscorlib]]", typeof(ReadOnlyCollection<int>).FullName, "FullName should be Array");
             Assert.True(typeof(ReadOnlyCollection<int>).IsClass, "IsClass should be true");
             object list = new ReadOnlyCollection<int>(new int[0]);
             Assert.True(list is ReadOnlyCollection<int>, "is ReadOnlyCollection<int> should be true");

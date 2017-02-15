@@ -277,6 +277,7 @@
                 public const string INIT = DOTNAME + "init";
                 public const string BOX = DOTNAME + "box";
                 public const string UNBOX = DOTNAME + "unbox";
+                public const string CLONE = DOTNAME + "clone";
 
                 public class Generator
                 {

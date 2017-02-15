@@ -44,6 +44,10 @@ QUnit.test("#2031", function (assert) {
     assert.deepEqual(f.getItem("1"), 1, "1");
     assert.deepEqual(f.getItem("2"), 2, "2");
 });
+QUnit.test("#2133", function (assert) {
+    var task = new System.Threading.Tasks.Task$1(function () { return 5; });
+    assert.ok(task != null);
+});
 QUnit.test("#2264", function (assert) {
     var a = new TypeScript.Issues.N2264(new (System.Collections.Generic.List$1(String))());
     assert.notEqual(a.getValues(), null);
