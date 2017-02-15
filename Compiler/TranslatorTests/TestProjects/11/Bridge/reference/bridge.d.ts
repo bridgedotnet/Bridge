@@ -783,10 +783,17 @@ declare module System {
                 isCanceled(): boolean;
                 isCompleted(): boolean;
                 isFaulted(): boolean;
-                getResult<T>(): T;
                 setCanceled(): void;
-                setResult(result: any): void;
                 setError(error: Exception): void;
+            }
+
+            export class Task$1<TResult> extends Task {
+                constructor(action: () => TResult);
+                constructor(action: (fn: any) => TResult, state: any);
+                getResult(): TResult;
+                continueWith(continuationAction: (arg: Task$1<TResult>) => void): Task;
+                continueWith<TNewResult>(continuationAction: (arg: Task$1<TResult>) => TNewResult): Task$1<TNewResult>;
+                setResult(result: TResult): void;
             }
         }
     }
