@@ -16258,7 +16258,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             dt = Bridge.ClientTest.Batch4.SimpleTypes.DateTests.addTimezoneMinutesOffset(dt);
             Bridge.Test.NUnit.Assert.areEqual(86400000, dt.getTime());
         },
-        valueOfWorks: function () {
+        valueOfWorks_SPI_1624: function () {
             var dt = new Date(1970, 0, 2);
             dt = Bridge.ClientTest.Batch4.SimpleTypes.DateTests.addTimezoneMinutesOffset(dt);
             Bridge.Test.NUnit.Assert.areEqual(86400000, dt.valueOf());
@@ -16302,17 +16302,58 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         parseWorks_SPI_1624: function () {
             // #1624
-            var d1 = Date.parse("Aug 12, 2012"); // 1344751200000
-            var d2 = Date.parse("1970-01-01"); // 0
-            var d3 = Date.parse("March 7, 2014"); // 1394175600000
-            var d4 = Date.parse("Wed, 09 Aug 1995 00:00:00 GMT"); // 807926400000
-            var d5 = Date.parse("Thu, 01 Jan 1970 00:00:00 GMT-0400"); // 14400000
+            var utc = Date.UTC(2017, 7, 12);
+            var local = (new Date(2017, 7, 12)).valueOf();
+            var offset = utc - local;
 
-            Bridge.Test.NUnit.Assert.areEqual(d1, System.Int64([426436352,313]));
-            Bridge.Test.NUnit.Assert.areEqual(d2, 0);
-            Bridge.Test.NUnit.Assert.areEqual(d3, System.Int64([-1688771200,324]));
-            Bridge.Test.NUnit.Assert.areEqual(d4, System.Int64([472548352,188]));
-            Bridge.Test.NUnit.Assert.areEqual(d5, 14400000);
+            var d1 = Date.parse("Aug 12, 2012");
+            var d2 = Date.parse("1970-01-01");
+            var d3 = Date.parse("March 7, 2014");
+            var d4 = Date.parse("Wed, 09 Aug 1995 00:00:00 GMT");
+            var d5 = Date.parse("Thu, 01 Jan 1970 00:00:00 GMT-0400");
+
+            Bridge.Test.NUnit.Assert.areEqual(1344729600000.0 - offset, d1);
+            Bridge.Test.NUnit.Assert.areEqual(0.0, d2);
+            Bridge.Test.NUnit.Assert.areEqual(1394150400000.0 - offset, d3);
+            Bridge.Test.NUnit.Assert.areEqual(807926400000.0, d4);
+            Bridge.Test.NUnit.Assert.areEqual(14400000.0, d5);
+        },
+        toLocaleDateStringIsWorking_1624: function () {
+            var d1 = new Date(Date.UTC(2012, 11, 12, 3, 0, 0));
+
+            // Tough to test because varies by timezone/location
+            // Just testing that a string is generated
+            Bridge.Test.NUnit.Assert.true(!System.String.isNullOrEmpty(d1.toLocaleDateString()));
+
+            //var d2 = new Date(Date.UTC(2012, 11, 20, 3, 0, 0));
+
+
+            //Assert.AreEqual("12/19/2012", d2.ToLocaleDateString("en-US")); // "12/19/2012"
+
+            //Assert.AreEqual("20/12/2012", d2.ToLocaleDateString("en-GB")); // "20/12/2012"
+
+            //Assert.AreEqual("2012. 12. 20.", d2.ToLocaleDateString("ko-KR")); // "2012. 12. 20."
+
+            //Assert.AreEqual("24/12/20", d2.ToLocaleDateString("ja-JP-u-ca-japanese")); // "24/12/20"
+
+            //Assert.AreEqual("20/12/2012", d2.ToLocaleDateString(new string[] { "ban", "id" })); // "20/12/2012"
+
+            //var d3 = new Date(Date.UTC(2012, 11, 20, 3, 0, 0));
+
+            //var options = new Date.ToLocaleStringOptions
+            //{
+            //    Weekday = "long",
+            //    Year = "numeric",
+            //    Month = "long",
+            //    Day = "numeric"
+            //};
+
+            //Assert.AreEqual("Donnerstag, 20. Dezember 2012", d3.ToLocaleDateString("de-DE", options)); // "Donnerstag, 20. Dezember 2012"
+
+            //options.TimeZone = "UTC";
+            //options.TimeZoneName = "short";
+
+            //Assert.AreEqual("Thursday, December 20, 2012, GMT", d3.ToLocaleDateString("en-US", options)); // "Thursday, December 20, 2012, GMT"
         },
         toDateStringWorks: function () {
             var dt = new Date(2011, 7, 12, 13, 42);
@@ -16331,9 +16372,40 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         toLocaleDateStringWorks_SPI_1624: function () {
             var dt = new Date(2011, 7, 12, 13, 42);
-            // #1624 Temp replace `Date.ToLocaleDateString()` -> `Date.ToLocaleDateString(Script.Undefined.As<string>())` as no parameterless method overload
-            var s = dt.toLocaleDateString(undefined);
+            var s = dt.toLocaleDateString();
             Bridge.Test.NUnit.Assert.true(System.String.indexOf(s, "2011") >= 0 && System.String.indexOf(s, "42") < 0);
+        },
+        dateUTCIsWorking_SPI_1624: function () {
+            var d = new Date();
+            var year = 2017;
+            var month = 1;
+            var day = 12;
+            var hour = 4;
+            var minute = 36;
+            var second = 55;
+            var millisecond = 255;
+
+            d.setUTCFullYear(year); // 2017
+            d.setUTCMonth(month); // 1
+            d.setUTCDate(day); // 12
+            d.setUTCHours(hour); // 4
+            d.setUTCMinutes(minute); // 36
+            d.setUTCSeconds(second); // 55
+            d.setUTCMilliseconds(millisecond); // 255
+
+            var utc1 = Date.UTC(year, month); // 1485907200000
+            var utc2 = Date.UTC(year, month, day); // 1486857600000
+            var utc3 = Date.UTC(year, month, day, hour); // 1486872000000
+            var utc4 = Date.UTC(year, month, day, hour, minute); // 1486874160000
+            var utc5 = Date.UTC(year, month, day, hour, minute, second); // 1486874215000
+            var utc6 = Date.UTC(year, month, day, hour, minute, second, millisecond); // 1486874215255
+
+            Bridge.Test.NUnit.Assert.areEqual(1485907200000.0, utc1);
+            Bridge.Test.NUnit.Assert.areEqual(1486857600000.0, utc2);
+            Bridge.Test.NUnit.Assert.areEqual(1486872000000.0, utc3);
+            Bridge.Test.NUnit.Assert.areEqual(1486874160000.0, utc4);
+            Bridge.Test.NUnit.Assert.areEqual(1486874215000.0, utc5);
+            Bridge.Test.NUnit.Assert.areEqual(1486874215255.0, utc6);
         },
         toLocaleTimeStringWorks: function () {
             var dt = new Date(2011, 7, 12, 13, 42);
