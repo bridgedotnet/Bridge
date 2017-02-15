@@ -95,7 +95,7 @@ namespace Bridge.ClientTest.Batch4.Collections.Generic
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("System.Collections.Generic.ICollection$1[[System.Object, mscorlib]]", typeof(ICollection<object>).FullName, "FullName should be correct");
+            Assert.AreEqual("System.Collections.Generic.ICollection`1[[System.Object, mscorlib]]", typeof(ICollection<object>).FullName, "FullName should be correct");
             Assert.True(typeof(ICollection<object>).IsInterface, "IsInterface should be true");
 
             var interfaces = typeof(ICollection<object>).GetInterfaces();

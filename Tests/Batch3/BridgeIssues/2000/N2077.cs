@@ -222,7 +222,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 "System.Int32", "System.Byte", "System.UInt32", "System.Int64", "System.UInt64", "System.Int16", "System.UInt16", "System.SByte",
                 "System.Double", "System.Single", "System.Char", "System.Decimal",
                 "$AnonymousType$15",
-                "System.Collections.Generic.List$1[[System.Int32, mscorlib]]"
+                "System.Collections.Generic.List`1[[System.Int32, mscorlib]]"
                 };
 
 

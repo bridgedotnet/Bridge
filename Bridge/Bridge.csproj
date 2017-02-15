@@ -87,7 +87,6 @@
     <Compile Include="Attributes\FileNameAttribute.cs" />
     <Compile Include="Attributes\ScriptAttribute.cs" />
     <Compile Include="Bridge\Console\Console.cs" />
-    <Compile Include="Bridge\Function.cs" />
     <Compile Include="Bridge\Linq\Enumerable.cs" />
     <Compile Include="Bridge\IBridgeClass.cs" />
     <Compile Include="Bridge\ObjectLiteral.cs" />
@@ -317,7 +316,6 @@
     <Compile Include="System\InvalidOperationException.cs" />
     <Compile Include="System\LocaleOptions.cs" />
     <Compile Include="System\Func.cs" />
-    <Compile Include="Bridge\Date.cs" />
     <Compile Include="System\Exception.cs" />
     <Compile Include="System\Delegate.cs" />
     <Compile Include="System\Math.cs" />

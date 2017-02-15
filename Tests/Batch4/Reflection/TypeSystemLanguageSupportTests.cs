@@ -636,9 +636,9 @@ namespace Bridge.ClientTest.Batch4.Reflection
         public void GetTypeWorksOnObjects()
         {
             Action a = () => { };
-            Assert.AreEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C1", new C1().GetType().FullName);
-            Assert.AreEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C2$1[[System.Int32, mscorlib]]", new C2<int>().GetType().FullName);
-            Assert.AreEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.C2$1[[System.String, mscorlib]]", new C2<string>().GetType().FullName);
+            Assert.AreEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests+C1", new C1().GetType().FullName);
+            Assert.AreEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests+C2`1[[System.Int32, mscorlib]]", new C2<int>().GetType().FullName);
+            Assert.AreEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests+C2`1[[System.String, mscorlib]]", new C2<string>().GetType().FullName);
             Assert.AreEqual("System.Int32", (1).GetType().FullName);
             Assert.AreEqual("System.String", "X".GetType().FullName);
             Assert.AreEqual("Function", a.GetType().FullName);

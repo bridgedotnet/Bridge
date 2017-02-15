@@ -18,7 +18,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public void TestTypeFullName()
         {
             var x = new SomethingOfSomethingElse();
-            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1737.SomethingOfSomethingElse", x.GetType().FullName);
+            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1737+SomethingOfSomethingElse", x.GetType().FullName);
             Assert.True(x.GetType().FullName == x.GetType().FullName);
         }
     }

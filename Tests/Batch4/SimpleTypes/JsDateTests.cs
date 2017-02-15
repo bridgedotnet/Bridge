@@ -1,3 +1,4 @@
+using Bridge.Html5;
 using Bridge.Test.NUnit;
 using System;
 
@@ -110,13 +111,15 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         }
 
         // #SPI
-        //[Test]
-        //public void NowWorks_SPI_1624()
-        //{
-        //    // #1624
-        //    var dt = Date.Now;
-        //    Assert.True(dt.GetFullYear() > 2011);
-        //}
+        [Test]
+        public void NowWorks_SPI_1624()
+        {
+            // #1624
+            var d1 = new Date(Date.Now());
+            var d2 = DateTime.Today;
+
+            Assert.AreEqual(d1.GetFullYear(), d2.Year);
+        }
 
         // Not JS API
         //[Test]
@@ -274,7 +277,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         }
 
         [Test]
-        public void ValueOfWorks()
+        public void ValueOfWorks_SPI_1624()
         {
             var dt = new Date(1970, 0, 2);
             dt = AddTimezoneMinutesOffset(dt);
@@ -346,15 +349,78 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         }
 
         // #SPI
-        //[Test]
-        //public void ParseWorks_SPI_1624()
-        //{
-        //    // #1624
-        //    var dt = Date.Parse("Aug 12, 2012");
-        //    Assert.AreEqual(dt.GetFullYear(), 2012);
-        //    Assert.AreEqual(dt.GetMonth(), 7);
-        //    Assert.AreEqual(dt.GetDate(), 12);
-        //}
+        [Test]
+        public void ParseWorks_SPI_1624()
+        {
+            // #1624
+            var utc = Date.UTC(2017, 7, 12);
+            var local = (new Date(2017, 7, 12)).ValueOf();
+            var offset = utc - local;
+
+            var d1 = Date.Parse("Aug 12, 2012");
+            var d2 = Date.Parse("1970-01-01");
+            var d3 = Date.Parse("March 7, 2014");
+            var d4 = Date.Parse("Wed, 09 Aug 1995 00:00:00 GMT");
+            var d5 = Date.Parse("Thu, 01 Jan 1970 00:00:00 GMT-0400");
+
+            Assert.AreEqual(1344729600000d - offset, d1);
+            Assert.AreEqual(0d, d2);
+            Assert.AreEqual(1394150400000d - offset, d3);
+            Assert.AreEqual(807926400000d, d4);
+            Assert.AreEqual(14400000d, d5);
+        }
+
+        [Test]
+        public void ToLocaleDateStringIsWorking_1624()
+        {
+            var d1 = new Date(Date.UTC(2012, 11, 12, 3, 0, 0));
+
+            // Tough to test because varies by timezone/location
+            // Just testing that a string is generated
+            Assert.True(!string.IsNullOrEmpty(d1.ToLocaleDateString()));
+
+            //var d2 = new Date(Date.UTC(2012, 11, 20, 3, 0, 0));
+
+            //// formats below assume the local time zone of the locale;
+            //// America/Los_Angeles for the US
+
+            //// US English uses month-day-year order
+            //Assert.AreEqual("12/19/2012", d2.ToLocaleDateString("en-US")); // "12/19/2012"
+
+            //// British English uses day-month-year order
+            //Assert.AreEqual("20/12/2012", d2.ToLocaleDateString("en-GB")); // "20/12/2012"
+
+            //// Korean uses year-month-day order
+            //Assert.AreEqual("2012. 12. 20.", d2.ToLocaleDateString("ko-KR")); // "2012. 12. 20."
+
+            //// for Japanese, applications may want to use the Japanese calendar,
+            //// where 2012 was the year 24 of the Heisei era
+            //Assert.AreEqual("24/12/20", d2.ToLocaleDateString("ja-JP-u-ca-japanese")); // "24/12/20"
+
+            //// when requesting a language that may not be supported, such as
+            //// Balinese, include a fallback language, in this case Indonesian
+            //Assert.AreEqual("20/12/2012", d2.ToLocaleDateString(new string[] { "ban", "id" })); // "20/12/2012"
+
+            //var d3 = new Date(Date.UTC(2012, 11, 20, 3, 0, 0));
+
+            //// request a weekday along with a long date
+            //var options = new Date.ToLocaleStringOptions
+            //{
+            //    Weekday = "long",
+            //    Year = "numeric",
+            //    Month = "long",
+            //    Day = "numeric"
+            //};
+
+            //Assert.AreEqual("Donnerstag, 20. Dezember 2012", d3.ToLocaleDateString("de-DE", options)); // "Donnerstag, 20. Dezember 2012"
+
+            //// an application may want to use UTC and make that visible
+            //options.TimeZone = "UTC";
+            //options.TimeZoneName = "short";
+
+            //Assert.AreEqual("Thursday, December 20, 2012, GMT", d3.ToLocaleDateString("en-US", options)); // "Thursday, December 20, 2012, GMT"
+        }
+
 
         // Not JS API
         //[Test]
@@ -424,9 +490,43 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         public void ToLocaleDateStringWorks_SPI_1624()
         {
             var dt = new Date(2011, 7, 12, 13, 42);
-            // #1624 Temp replace `Date.ToLocaleDateString()` -> `Date.ToLocaleDateString(Script.Undefined.As<string>())` as no parameterless method overload
-            var s = dt.ToLocaleDateString(Script.Undefined.As<string>());
+            var s = dt.ToLocaleDateString();
             Assert.True(s.IndexOf("2011") >= 0 && s.IndexOf("42") < 0);
+        }
+
+        [Test]
+        public void DateUTCIsWorking_SPI_1624()
+        {
+            var d = new Date();
+            var year = 2017;
+            var month = 1;
+            var day = 12;
+            var hour = 4;
+            var minute = 36;
+            var second = 55;
+            var millisecond = 255;
+
+            d.SetUTCFullYear(year); // 2017
+            d.SetUTCMonth(month); // 1
+            d.SetUTCDate(day); // 12
+            d.SetUTCHours(hour); // 4
+            d.SetUTCMinutes(minute); // 36
+            d.SetUTCSeconds(second); // 55
+            d.SetUTCMilliseconds(millisecond); // 255
+
+            var utc1 = Date.UTC(year, month); // 1485907200000
+            var utc2 = Date.UTC(year, month, day); // 1486857600000
+            var utc3 = Date.UTC(year, month, day, hour); // 1486872000000
+            var utc4 = Date.UTC(year, month, day, hour, minute); // 1486874160000
+            var utc5 = Date.UTC(year, month, day, hour, minute, second); // 1486874215000
+            var utc6 = Date.UTC(year, month, day, hour, minute, second, millisecond); // 1486874215255
+
+            Assert.AreEqual(1485907200000d, utc1);
+            Assert.AreEqual(1486857600000d, utc2);
+            Assert.AreEqual(1486872000000d, utc3);
+            Assert.AreEqual(1486874160000d, utc4);
+            Assert.AreEqual(1486874215000d, utc5);
+            Assert.AreEqual(1486874215255d, utc6);
         }
 
         [Test]
