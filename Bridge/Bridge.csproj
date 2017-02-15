@@ -314,7 +314,6 @@
     <Compile Include="System\INotifyPropertyChanged.cs" />
     <Compile Include="System\InvalidCastException.cs" />
     <Compile Include="System\InvalidOperationException.cs" />
-    <Compile Include="System\LocaleOptions.cs" />
     <Compile Include="System\Func.cs" />
     <Compile Include="System\Exception.cs" />
     <Compile Include="System\Delegate.cs" />

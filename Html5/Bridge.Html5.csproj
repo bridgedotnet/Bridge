@@ -76,6 +76,7 @@
     <Compile Include="GamepadMappingType.cs" />
     <Compile Include="Interfaces\Touch.cs" />
     <Compile Include="Interfaces\TouchList.cs" />
+    <Compile Include="LocaleOptions.cs" />
     <Compile Include="MutationObserver.cs" />
     <Compile Include="RegExp.cs" />
     <Compile Include="RegexMatch.cs" />
