@@ -20245,6 +20245,16 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         replaceCharWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual("xbcxbcxbc", System.String.replaceAll(("abcabcabc"), String.fromCharCode(97), String.fromCharCode(120)));
         },
+        replaceRegexWithReplaceTextWorks: function () {
+            Bridge.Test.NUnit.Assert.areEqual("xxcxxcxxc", "abcabcabc".replace(new RegExp("a|b", "g"), "x"));
+        },
+        replaceRegexWithReplaceCallbackWorks: function () {
+            Bridge.Test.NUnit.Assert.areEqual("xycxycxyc", "abcabcabc".replace(new RegExp("a|b", "g"), $asm.$.Bridge.ClientTest.Batch4.SimpleTypes.StringTests.f1));
+        },
+        searchWorks: function () {
+            Bridge.Test.NUnit.Assert.areEqual(2, "abcabcabc".search(new RegExp("ca")));
+            Bridge.Test.NUnit.Assert.areEqual(-1, "abcabcabc".search(new RegExp("x")));
+        },
         splitWithStringWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual(System.Array.init(["a", "ca", "ca", "c"], System.String), "abcabcabc".split("b"));
         },
@@ -20430,6 +20440,14 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         toCharArrayWorks: function () {
             var text = "Lorem sit dolor";
             Bridge.Test.NUnit.Assert.areEqual(System.Array.init([76, 111, 114, 101, 109, 32, 115, 105, 116, 32, 100, 111, 108, 111, 114], System.Char), System.String.toCharArray(text, 0, text.length));
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch4.SimpleTypes.StringTests", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch4.SimpleTypes.StringTests, {
+        f1: function (s) {
+            return Bridge.referenceEquals(s, "a") ? "x" : "y";
         }
     });
 

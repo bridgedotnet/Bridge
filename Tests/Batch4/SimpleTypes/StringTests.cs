@@ -585,23 +585,23 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         //}
 
         //[Test]
-        //public void ReplaceRegexWithReplaceTextWorks()
-        //{
-        //    Assert.AreEqual("xxcxxcxxc", "abcabcabc".Replace(new Bridge.Text.RegularExpressions.Regex("a|b", "g"), "x"));
-        //}
+        public void ReplaceRegexWithReplaceTextWorks()
+        {
+            Assert.AreEqual("xxcxxcxxc", "abcabcabc".Replace(new Html5.RegExp("a|b", "g"), "x"));
+        }
 
-        //[Test]
-        //public void ReplaceRegexWithReplaceCallbackWorks()
-        //{
-        //    Assert.AreEqual("xycxycxyc", "abcabcabc".Replace(new Bridge.Text.RegularExpressions.Regex("a|b", "g"), s => s == "a" ? "x" : "y"));
-        //}
+        [Test]
+        public void ReplaceRegexWithReplaceCallbackWorks()
+        {
+            Assert.AreEqual("xycxycxyc", "abcabcabc".Replace(new Html5.RegExp("a|b", "g"), s => s == "a" ? "x" : "y"));
+        }
 
-        //[Test]
-        //public void SearchWorks()
-        //{
-        //    Assert.AreEqual(2, "abcabcabc".Search(new Bridge.Text.RegularExpressions.Regex("ca")));
-        //    Assert.AreEqual(-1, "abcabcabc".Search(new Bridge.Text.RegularExpressions.Regex("x")));
-        //}
+        [Test]
+        public void SearchWorks()
+        {
+            Assert.AreEqual(2, "abcabcabc".Search(new Html5.RegExp("ca")));
+            Assert.AreEqual(-1, "abcabcabc".Search(new Html5.RegExp("x")));
+        }
 
         // Not C# API #2392
         [Test]
@@ -724,7 +724,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         }
 
         // Not C# API #2392
-        //[Test]
+        [Test]
         public void SubstrWorks()
         {
             Assert.AreEqual("cde", "abcde".Substr(2));
