@@ -275,5 +275,38 @@ namespace Bridge.Html5
         /// <returns>A new string containing the extracted section of the given string.</returns>
         [Template("{str}.substring({indexStart}, {indexEnd})")]
         public static extern string Substring(this string str, int indexStart, int indexEnd);
+
+        /// <summary>
+        /// The charAt() method returns the specified character from a string.
+        /// </summary>
+        /// <param name="str">A string instance</param>
+        /// <param name="index">An integer between 0 and 1-less-than the length of the string. If no index is provided, charAt() will use 0.</param>
+        /// <returns>A string representing the character at the specified index; empty string if index is out of range.</returns>
+        [Template("{str}.charAt({index})")]
+        public static extern string CharAt(this string str, int index);
+
+        /// <summary>
+        /// The charCodeAt() method returns an integer between 0 and 65535 representing the UTF-16 code unit at the given index (the UTF-16 code unit matches the Unicode code point for code points representable in a single UTF-16 code unit, but might also be the first code unit of a surrogate pair for code points not representable in a single UTF-16 code unit, e.g. Unicode code points > 0x10000). If you want the entire code point value, use codePointAt().
+        /// </summary>
+        /// <param name="str">A string instance</param>
+        /// <param name="index">An integer greater than or equal to 0 and less than the length of the string; if it is not a number, it defaults to 0.</param>
+        /// <returns>A number representing the UTF-16 code unit value of the character at the given index; NaN if index is out of range.</returns>
+        [Template("{str}.charCodeAt({index})")]
+        public static extern int CharCodeAt(this string str, int index);
+
+        /// <summary>
+        /// The static String.fromCharCode() method returns a string created by using the specified sequence of Unicode values.
+        /// </summary>
+        /// <returns>String.Empty</returns>
+        [Template("String.fromCharCode()")]
+        public static extern string FromCharCode();
+
+        /// <summary>
+        /// The static String.fromCharCode() method returns a string created by using the specified sequence of Unicode values.
+        /// </summary>
+        /// <param name="numbers">A sequence of numbers that are Unicode values.</param>
+        /// <returns></returns>
+        [Template("String.fromCharCode({numbers})")]
+        public static extern string FromCharCode(params int[] numbers);
     }
 }

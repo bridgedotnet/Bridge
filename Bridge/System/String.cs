@@ -65,35 +65,6 @@ namespace System
         public static extern bool IsNullOrWhiteSpace(string value);
 
         /// <summary>
-        /// The static String.fromCharCode() method returns a string created by using the specified sequence of Unicode values.
-        /// </summary>
-        /// <returns>String.Empty</returns>
-        [Template("String.fromCharCode()")]
-        public static extern string FromCharCode();
-
-        /// <summary>
-        /// The static String.fromCharCode() method returns a string created by using the specified sequence of Unicode values.
-        /// </summary>
-        /// <param name="numbers">A sequence of numbers that are Unicode values.</param>
-        /// <returns></returns>
-        [Template("String.fromCharCode({numbers})")]
-        public static extern string FromCharCode(params int[] numbers);
-
-        /// <summary>
-        /// The charAt() method returns the specified character from a string.
-        /// </summary>
-        /// <param name="index">An integer between 0 and 1-less-than the length of the string.</param>
-        /// <returns></returns>
-        public extern string CharAt(int index);
-
-        /// <summary>
-        /// The charCodeAt() method returns the numeric Unicode value of the character at the given index (except for unicode codepoints > 0x10000).
-        /// </summary>
-        /// <param name="index">An integer greater than or equal to 0 and less than the length of the string; if it is not a number, it defaults to 0.</param>
-        /// <returns></returns>
-        public extern int CharCodeAt(int index);
-
-        /// <summary>
         /// Determines whether two specified String objects have the same value.
         /// </summary>
         /// <param name="a">The first string to compare, or null. </param>
