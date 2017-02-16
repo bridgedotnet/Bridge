@@ -11,6 +11,10 @@
 (function (globals) {
     "use strict";
 
+    if (typeof module !== "undefined" && module.exports) {
+        globals = global;
+    }
+
     // @source Core.js
 
     var core = {
@@ -1994,62 +1998,62 @@
     // @source Browser.js
 
     var check = function (regex) {
-            return regex.test(navigator.userAgent.toLowerCase());
-        },
+        return Bridge.global.navigator && regex.test(Bridge.global.navigator.userAgent.toLowerCase());
+    },
 
-        isStrict = Bridge.global.document && Bridge.global.document.compatMode === "CSS1Compat",
+    isStrict = Bridge.global.document && Bridge.global.document.compatMode === "CSS1Compat",
 
-        version = function (is, regex) {
-            var m;
+    version = function (is, regex) {
+        var m;
 
-            return (is && (m = regex.exec(navigator.userAgent.toLowerCase()))) ? parseFloat(m[1]) : 0;
-        },
+        return Bridge.global.navigator && (is && (m = regex.exec(navigator.userAgent.toLowerCase()))) ? parseFloat(m[1]) : 0;
+    },
 
-        docMode = Bridge.global.document ? Bridge.global.document.documentMode : null,
-        isOpera = check(/opera/),
-        isOpera10_5 = isOpera && check(/version\/10\.5/),
-        isChrome = check(/\bchrome\b/),
-        isWebKit = check(/webkit/),
-        isSafari = !isChrome && check(/safari/),
-        isSafari2 = isSafari && check(/applewebkit\/4/),
-        isSafari3 = isSafari && check(/version\/3/),
-        isSafari4 = isSafari && check(/version\/4/),
-        isSafari5_0 = isSafari && check(/version\/5\.0/),
-        isSafari5 = isSafari && check(/version\/5/),
-        isIE = !isOpera && (check(/msie/) || check(/trident/)),
-        isIE7 = isIE && ((check(/msie 7/) && docMode !== 8 && docMode !== 9 && docMode !== 10) || docMode === 7),
-        isIE8 = isIE && ((check(/msie 8/) && docMode !== 7 && docMode !== 9 && docMode !== 10) || docMode === 8),
-        isIE9 = isIE && ((check(/msie 9/) && docMode !== 7 && docMode !== 8 && docMode !== 10) || docMode === 9),
-        isIE10 = isIE && ((check(/msie 10/) && docMode !== 7 && docMode !== 8 && docMode !== 9) || docMode === 10),
-        isIE11 = isIE && ((check(/trident\/7\.0/) && docMode !== 7 && docMode !== 8 && docMode !== 9 && docMode !== 10) || docMode === 11),
-        isIE6 = isIE && check(/msie 6/),
-        isGecko = !isWebKit && !isIE && check(/gecko/),
-        isGecko3 = isGecko && check(/rv:1\.9/),
-        isGecko4 = isGecko && check(/rv:2\.0/),
-        isGecko5 = isGecko && check(/rv:5\./),
-        isGecko10 = isGecko && check(/rv:10\./),
-        isFF3_0 = isGecko3 && check(/rv:1\.9\.0/),
-        isFF3_5 = isGecko3 && check(/rv:1\.9\.1/),
-        isFF3_6 = isGecko3 && check(/rv:1\.9\.2/),
-        isWindows = check(/windows|win32/),
-        isMac = check(/macintosh|mac os x/),
-        isLinux = check(/linux/),
-        scrollbarSize = null,
-        chromeVersion = version(true, /\bchrome\/(\d+\.\d+)/),
-        firefoxVersion = version(true, /\bfirefox\/(\d+\.\d+)/),
-        ieVersion = version(isIE, /msie (\d+\.\d+)/),
-        operaVersion = version(isOpera, /version\/(\d+\.\d+)/),
-        safariVersion = version(isSafari, /version\/(\d+\.\d+)/),
-        webKitVersion = version(isWebKit, /webkit\/(\d+\.\d+)/),
-        isSecure = Bridge.global.location ? /^https/i.test(Bridge.global.location.protocol) : false,
-        isiPhone = /iPhone/i.test(navigator.platform),
-        isiPod = /iPod/i.test(navigator.platform),
-        isiPad = /iPad/i.test(navigator.userAgent),
-        isBlackberry = /Blackberry/i.test(navigator.userAgent),
-        isAndroid = /Android/i.test(navigator.userAgent),
-        isDesktop = isMac || isWindows || (isLinux && !isAndroid),
-        isTablet = isiPad,
-        isPhone = !isDesktop && !isTablet;
+    docMode = Bridge.global.document ? Bridge.global.document.documentMode : null,
+    isOpera = check(/opera/),
+    isOpera10_5 = isOpera && check(/version\/10\.5/),
+    isChrome = check(/\bchrome\b/),
+    isWebKit = check(/webkit/),
+    isSafari = !isChrome && check(/safari/),
+    isSafari2 = isSafari && check(/applewebkit\/4/),
+    isSafari3 = isSafari && check(/version\/3/),
+    isSafari4 = isSafari && check(/version\/4/),
+    isSafari5_0 = isSafari && check(/version\/5\.0/),
+    isSafari5 = isSafari && check(/version\/5/),
+    isIE = !isOpera && (check(/msie/) || check(/trident/)),
+    isIE7 = isIE && ((check(/msie 7/) && docMode !== 8 && docMode !== 9 && docMode !== 10) || docMode === 7),
+    isIE8 = isIE && ((check(/msie 8/) && docMode !== 7 && docMode !== 9 && docMode !== 10) || docMode === 8),
+    isIE9 = isIE && ((check(/msie 9/) && docMode !== 7 && docMode !== 8 && docMode !== 10) || docMode === 9),
+    isIE10 = isIE && ((check(/msie 10/) && docMode !== 7 && docMode !== 8 && docMode !== 9) || docMode === 10),
+    isIE11 = isIE && ((check(/trident\/7\.0/) && docMode !== 7 && docMode !== 8 && docMode !== 9 && docMode !== 10) || docMode === 11),
+    isIE6 = isIE && check(/msie 6/),
+    isGecko = !isWebKit && !isIE && check(/gecko/),
+    isGecko3 = isGecko && check(/rv:1\.9/),
+    isGecko4 = isGecko && check(/rv:2\.0/),
+    isGecko5 = isGecko && check(/rv:5\./),
+    isGecko10 = isGecko && check(/rv:10\./),
+    isFF3_0 = isGecko3 && check(/rv:1\.9\.0/),
+    isFF3_5 = isGecko3 && check(/rv:1\.9\.1/),
+    isFF3_6 = isGecko3 && check(/rv:1\.9\.2/),
+    isWindows = check(/windows|win32/),
+    isMac = check(/macintosh|mac os x/),
+    isLinux = check(/linux/),
+    scrollbarSize = null,
+    chromeVersion = version(true, /\bchrome\/(\d+\.\d+)/),
+    firefoxVersion = version(true, /\bfirefox\/(\d+\.\d+)/),
+    ieVersion = version(isIE, /msie (\d+\.\d+)/),
+    operaVersion = version(isOpera, /version\/(\d+\.\d+)/),
+    safariVersion = version(isSafari, /version\/(\d+\.\d+)/),
+    webKitVersion = version(isWebKit, /webkit\/(\d+\.\d+)/),
+    isSecure = Bridge.global.location ? /^https/i.test(Bridge.global.location.protocol) : false,
+    isiPhone = Bridge.global.navigator && /iPhone/i.test(Bridge.global.navigator.platform),
+    isiPod = Bridge.global.navigator && /iPod/i.test(Bridge.global.navigator.platform),
+    isiPad = Bridge.global.navigator && /iPad/i.test(Bridge.global.navigator.userAgent),
+    isBlackberry = Bridge.global.navigator && /Blackberry/i.test(Bridge.global.navigator.userAgent),
+    isAndroid = Bridge.global.navigator && /Android/i.test(Bridge.global.navigator.userAgent),
+    isDesktop = isMac || isWindows || (isLinux && !isAndroid),
+    isTablet = isiPad,
+    isPhone = !isDesktop && !isTablet;
 
     var browser = {
         isStrict: isStrict,
@@ -2115,7 +2119,6 @@
     };
 
     Bridge.Browser = browser;
-
     // @source Class.js
 
     var base = {
