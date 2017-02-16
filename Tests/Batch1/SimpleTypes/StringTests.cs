@@ -661,31 +661,31 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         // Not C# API #2392
-        //[Test]
-        //public void JsSubstringWorks()
-        //{
-        //    var numbers = "0123456789";
+        [Test]
+        public void JavaScriptSubstringWorks()
+        {
+            var numbers = "0123456789";
 
-        //    // Let's start by using both begin and end.
-        //    Assert.AreEqual(numbers.JsSubstring(3, 7), "3456");
+            // Let's start by using both begin and end.
+            Assert.AreEqual(StringPrototype.Substring(numbers, 3, 7), "3456");
 
-        //    // What happens when we start with a negative number.
-        //    Assert.AreEqual(numbers.JsSubstring(-7, 7), "0123456");
+            // What happens when we start with a negative number.
+            Assert.AreEqual(StringPrototype.Substring(numbers, -7, 7), "0123456");
 
-        //    // What happens when we use two negative numbers.
-        //    Assert.AreEqual(numbers.JsSubstring(-7, -3), "");
+            // What happens when we use two negative numbers.
+            Assert.AreEqual(StringPrototype.Substring(numbers, -7, -3), "");
 
-        //    // What happens when we omit the last argument.
-        //    Assert.AreEqual(numbers.JsSubstring(3), "3456789");
+            // What happens when we omit the last argument.
+            Assert.AreEqual(StringPrototype.Substring(numbers, 3), "3456789");
 
-        //    // And with the negative, end-relevant index.
-        //    Assert.AreEqual(numbers.JsSubstring(-7), "0123456789");
+            // And with the negative, end-relevant index.
+            Assert.AreEqual(StringPrototype.Substring(numbers, -7), "0123456789");
 
-        //    // If the index is out of range, it returns the empty string.
-        //    Assert.AreEqual(numbers.JsSubstring(100, 101), "");
+            // If the index is out of range, it returns the empty string.
+            Assert.AreEqual(StringPrototype.Substring(numbers, 100, 101), "");
 
-        //    Assert.AreEqual(numbers.JsSubstring(2, 4), "23");
-        //}
+            Assert.AreEqual(StringPrototype.Substring(numbers, 2, 4), "23");
+        }
 
         [Test]
         public void ToLowerCaseWorks()

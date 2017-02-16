@@ -1,3 +1,4 @@
+using Bridge.Html5;
 using Bridge.Test.NUnit;
 using System;
 using System.Collections;
@@ -724,17 +725,17 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
 
         // Not C# API #2392
         //[Test]
-        //public void SubstrWorks()
-        //{
-        //    Assert.AreEqual("cde", "abcde".Substr(2));
-        //}
+        public void SubstrWorks()
+        {
+            Assert.AreEqual("cde", "abcde".Substr(2));
+        }
 
         // Not C# API #2392
-        //[Test]
-        //public void SubstrWithLengthWorks()
-        //{
-        //    Assert.AreEqual("cd", "abcde".Substr(2, 2));
-        //}
+        [Test]
+        public void SubstrWithLengthWorks()
+        {
+            Assert.AreEqual("cd", "abcde".Substr(2, 2));
+        }
 
         [Test]
         public void SubstringWorks()
@@ -749,11 +750,11 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         }
 
         // Not C# API #2392
-        //[Test]
-        //public void JsSubstringWithEndIndexWorks()
-        //{
-        //    Assert.AreEqual("cd", "abcde".JsSubstring(2, 4));
-        //}
+        [Test]
+        public void JavaScriptSubstringWithEndIndexWorks()
+        {
+            Assert.AreEqual("cd", StringPrototype.Substring("abcde", 2, 4));
+        }
 
         // Not C# API
         //[Test]
