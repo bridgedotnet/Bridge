@@ -66,32 +66,32 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void SplitWithCharWorks()
         {
-            Assert.AreDeepEqual(new[] { "a", "ca", "ca", "c" }, "abcabcabc".JsSplit('b'));
+            Assert.AreDeepEqual(new[] { "a", "ca", "ca", "c" }, StringPrototype.Split("abcabcabc", 'b'));
         }
 
         [Test]
         public void SplitWithLimitWorks()
         {
-            Assert.AreDeepEqual(new[] { "abcabcabc" }, "abcabcabc".JsSplit(2));
+            Assert.AreDeepEqual(new[] { "abcabcabc" }, StringPrototype.Split("abcabcabc", 2));
         }
 
         [Test]
         public void SplitWorks()
         {
-            Assert.AreDeepEqual(new[] { "abcabcabc" }, "abcabcabc".JsSplit());
+            Assert.AreDeepEqual(new[] { "abcabcabc" }, StringPrototype.Split("abcabcabc"));
         }
 
         [Test]
         public void SplitWithCharAndLimitWorks()
         {
-            Assert.AreDeepEqual(new[] { "a", "ca" }, "abcabcabc".JsSplit('b', 2));
+            Assert.AreDeepEqual(new[] { "a", "ca" }, StringPrototype.Split("abcabcabc", 'b', 2));
         }
 
         // Not C# API #2392
         [Test]
         public void SplitWithStringWorks()
         {
-            Assert.AreDeepEqual(new[] { "a", "ca", "ca", "c" }, "abcabcabc".JsSplit("b"));
+            Assert.AreDeepEqual(new[] { "a", "ca", "ca", "c" }, StringPrototype.Split("abcabcabc", "b"));
         }
 
 
@@ -99,7 +99,7 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void JsSplitWithStringAndLimitWorks()
         {
-            Assert.AreDeepEqual(new[] { "a", "ax" }, "abcaxbcabce".JsSplit("bc", 2));
+            Assert.AreDeepEqual(new[] { "a", "ax" }, StringPrototype.Split("abcaxbcabce", "bc", 2));
         }
 
         // Not C# API #2392
@@ -136,24 +136,24 @@ namespace Bridge.ClientTest.SimpleTypes
             var numbers = "0123456789";
 
             // Let's start by using both begin and end.
-            Assert.AreEqual(numbers.JsSubstring(3, 7), "3456");
+            Assert.AreEqual(StringPrototype.Substring(numbers, 3, 7), "3456");
 
             // What happens when we start with a negative number.
-            Assert.AreEqual(numbers.JsSubstring(-7, 7), "0123456");
+            Assert.AreEqual(StringPrototype.Substring(numbers, -7, 7), "0123456");
 
             // What happens when we use two negative numbers.
-            Assert.AreEqual(numbers.JsSubstring(-7, -3), "");
+            Assert.AreEqual(StringPrototype.Substring(numbers, -7, -3), "");
 
             // What happens when we omit the last argument.
-            Assert.AreEqual(numbers.JsSubstring(3), "3456789");
+            Assert.AreEqual(StringPrototype.Substring(numbers, 3), "3456789");
 
             // And with the negative, end-relevant index.
-            Assert.AreEqual(numbers.JsSubstring(-7), "0123456789");
+            Assert.AreEqual(StringPrototype.Substring(numbers, -7), "0123456789");
 
             // If the index is out of range, it returns the empty string.
-            Assert.AreEqual(numbers.JsSubstring(100, 101), "");
+            Assert.AreEqual(StringPrototype.Substring(numbers, 100, 101), "");
 
-            Assert.AreEqual(numbers.JsSubstring(2, 4), "23");
+            Assert.AreEqual(StringPrototype.Substring(numbers, 2, 4), "23");
         }
 
         [Test]

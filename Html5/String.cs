@@ -235,7 +235,7 @@ namespace Bridge.Html5
         /// <param name="separator">Specifies the character to use for separating the string. The separator is treated as a string or a regular expression. If separator is omitted or does not occur in str, the array returned contains one element consisting of the entire string. If separator is an empty string, str is converted to an array of characters.</param>
         /// <returns>An array of strings split at each point where the separator occurs in the given string.</returns>
         [Template("{str}.split(String.fromCharCode({separator}))")]
-        public static extern string[] JsSplit(this string str, char separator);
+        public static extern string[] Split(this string str, char separator);
 
         /// <summary>
         /// Splits a String object into an array of strings by separating the string into substrings.
@@ -244,7 +244,7 @@ namespace Bridge.Html5
         /// <param name="limit">Integer specifying a limit on the number of splits to be found. The split() method still splits on every match of separator, until the number of split items match the limit or the string falls short of separator.</param>
         /// <returns>An array of strings split at each point where the separator occurs in the given string.</returns>
         [Template("{str}.split({limit})")]
-        public static extern string[] JsSplit(this string str, int limit);
+        public static extern string[] Split(this string str, int limit);
 
         /// <summary>
         /// Splits a String object into an array of strings by separating the string into substrings.
@@ -254,7 +254,7 @@ namespace Bridge.Html5
         /// <param name="limit">Integer specifying a limit on the number of splits to be found. The split() method still splits on every match of separator, until the number of split items match the limit or the string falls short of separator.</param>
         /// <returns>An array of strings split at each point where the separator occurs in the given string.</returns>
         [Template("{str}.split(String.fromCharCode({separator}), {limit})")]
-        public static extern string[] JsSplit(this string str, char separator, int limit);
+        public static extern string[] Split(this string str, char separator, int limit);
 
         /// <summary>
         /// The split() method splits a String object into an array of strings by separating the string into substrings.
@@ -262,7 +262,7 @@ namespace Bridge.Html5
         /// <param name="str">A string instance</param>
         /// <returns>An array of strings split at each point where the separator occurs in the given string.</returns>
         [Template("{str}.split()")]
-        public static extern string[] JsSplit(this string str);
+        public static extern string[] Split(this string str);
 
         /// <summary>
         /// The split() method splits a String object into an array of strings by separating the string into substrings.
@@ -271,7 +271,7 @@ namespace Bridge.Html5
         /// <param name="separator">Specifies the character(s) to use for separating the string. The separator is treated as a string or a regular expression. If separator is omitted or does not occur in str, the array returned contains one element consisting of the entire string. If separator is an empty string, str is converted to an array of characters.</param>
         /// <returns>An array of strings split at each point where the separator occurs in the given string.</returns>
         [Template("{str}.split({separator})")]
-        public static extern string[] JsSplit(this string str, string separator);
+        public static extern string[] Split(this string str, string separator);
 
         /// <summary>
         /// The split() method splits a String object into an array of strings by separating the string into substrings.
@@ -281,7 +281,7 @@ namespace Bridge.Html5
         /// <param name="limit">Integer specifying a limit on the number of splits to be found. The split() method still splits on every match of separator, until the number of split items match the limit or the string falls short of separator.</param>
         /// <returns>An array of strings split at each point where the separator occurs in the given string.</returns>
         [Template("{str}.split({separator}, {limit})")]
-        public static extern string[] JsSplit(this string str, string separator, int limit);
+        public static extern string[] Split(this string str, string separator, int limit);
 
         /// <summary>
         /// The split() method splits a String object into an array of strings by separating the string into substrings.
@@ -290,7 +290,7 @@ namespace Bridge.Html5
         /// <param name="separator">Specifies the character(s) to use for separating the string. The separator is treated as a string or a regular expression. If separator is omitted or does not occur in str, the array returned contains one element consisting of the entire string. If separator is an empty string, str is converted to an array of characters.</param>
         /// <returns>An array of strings split at each point where the separator occurs in the given string.</returns>
         [Template("{str}.split({separator})")]
-        public static extern string[] JsSplit(this string str, RegExp separator);
+        public static extern string[] Split(this string str, RegExp separator);
 
         /// <summary>
         /// The split() method splits a String object into an array of strings by separating the string into substrings.
@@ -300,7 +300,7 @@ namespace Bridge.Html5
         /// <param name="limit">Integer specifying a limit on the number of splits to be found. The split() method still splits on every match of separator, until the number of split items match the limit or the string falls short of separator.</param>
         /// <returns>An array of strings split at each point where the separator occurs in the given string.</returns>
         [Template("{str}.split({separator}, {limit})")]
-        public static extern string[] JsSplit(this string str, RegExp separator, int limit);
+        public static extern string[] Split(this string str, RegExp separator, int limit);
 
         /// <summary>
         /// The substr() method returns the characters in a string beginning at the specified location through the specified number of characters.
@@ -328,7 +328,7 @@ namespace Bridge.Html5
         /// <param name="indexStart">An integer between 0 and the length of the string, specifying the offset into the string of the first character to include in the returned substring.</param>
         /// <returns>A new string containing the extracted section of the given string.</returns>
         [Template("{str}.substring({indexStart})")]
-        public static extern string JsSubstring(this string str, int indexStart);
+        public static extern string Substring(this string str, int indexStart);
 
         /// <summary>
         /// The substring() method returns a subset of a string between one index and another, or through the end of the string.
@@ -338,7 +338,7 @@ namespace Bridge.Html5
         /// <param name="indexEnd">An integer between 0 and the length of the string, which specifies the offset into the string of the first character not to include in the returned substring.</param>
         /// <returns>A new string containing the extracted section of the given string.</returns>
         [Template("{str}.substring({indexStart}, {indexEnd})")]
-        public static extern string JsSubstring(this string str, int indexStart, int indexEnd);
+        public static extern string Substring(this string str, int indexStart, int indexEnd);
 
         /// <summary>
         /// The charAt() method returns the specified character from a string.

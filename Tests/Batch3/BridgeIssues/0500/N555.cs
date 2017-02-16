@@ -14,11 +14,11 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             var s = "0123456789";
 
             // Not C# API #2392
-            Assert.AreEqual("0123456789", s.JsSubstring(-1), "JavaScript Substring(-1)");
-            Assert.AreEqual("56789", s.JsSubstring(5), "JavaScript Substring(5)");
-            Assert.AreEqual("", s.JsSubstring(10), "JavaScript Substring(10)");
-            Assert.AreEqual("1", s.JsSubstring(1, 2), "JavaScript Substring(1, 2)");
-            Assert.AreEqual("123456789", s.JsSubstring(1, 10), "JavaScript Substring(1, 10)");
+            Assert.AreEqual("0123456789", StringPrototype.Substring(s, -1), "JavaScript Substring(-1)");
+            Assert.AreEqual("56789", StringPrototype.Substring(s, 5), "JavaScript Substring(5)");
+            Assert.AreEqual("", StringPrototype.Substring(s, 10), "JavaScript Substring(10)");
+            Assert.AreEqual("1", StringPrototype.Substring(s, 1, 2), "JavaScript Substring(1, 2)");
+            Assert.AreEqual("123456789", StringPrototype.Substring(s, 1, 10), "JavaScript Substring(1, 10)");
 
             Assert.AreEqual("9", s.Substring(-1), "Substring(-1)");
             Assert.AreEqual("56789", s.Substring(5), "Substring(5)");

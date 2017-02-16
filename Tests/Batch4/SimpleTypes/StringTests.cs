@@ -607,7 +607,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         [Test]
         public void SplitWithStringWorks()
         {
-            Assert.AreEqual(new[] { "a", "ca", "ca", "c" }, "abcabcabc".JsSplit("b"));
+            Assert.AreEqual(new[] { "a", "ca", "ca", "c" }, "abcabcabc".Split("b"));
         }
 
         [Test]
@@ -753,7 +753,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         [Test]
         public void JavaScriptSubstringWithEndIndexWorks()
         {
-            Assert.AreEqual("cd", StringPrototype.JsSubstring("abcde", 2, 4));
+            Assert.AreEqual("cd", StringPrototype.Substring("abcde", 2, 4));
         }
 
         // Not C# API
