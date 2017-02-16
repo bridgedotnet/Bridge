@@ -231,7 +231,7 @@ namespace Bridge.ClientTest.Linq
         [Test(ExpectedCount = 1)]
         public static void Bridge315()
         {
-            var q = "a,b,c,a".ToUpperCase().Split(",").Aggregate("", (workingSentence, next) => next + " " + workingSentence);
+            var q = "a,b,c,a".ToUpperCase().Split(',').Aggregate("", (workingSentence, next) => next + " " + workingSentence);
 
             Assert.AreStrictEqual("A C B A ", q, "Enumerable.Aggregate");
         }

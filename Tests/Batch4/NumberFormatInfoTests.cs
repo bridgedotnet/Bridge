@@ -1,3 +1,4 @@
+using Bridge.Html5;
 using Bridge.Test.NUnit;
 using System;
 using System.Globalization;
@@ -44,7 +45,7 @@ namespace Bridge.ClientTest.Batch4
             Assert.AreEqual(0, format.PercentNegativePattern);
 
             // "¤"
-            Assert.AreEqual(string.FromCharCode(164), format.CurrencySymbol);
+            Assert.AreEqual(StringPrototype.FromCharCode(164), format.CurrencySymbol);
             Assert.AreEqual(new[] { 3 }, format.CurrencyGroupSizes);
             Assert.AreEqual(2, format.CurrencyDecimalDigits);
             Assert.AreEqual(".", format.CurrencyDecimalSeparator);

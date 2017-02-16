@@ -1,7 +1,4 @@
-﻿using Bridge.Html5;
-using Bridge.Test.NUnit;
-using Bridge.Text.RegularExpressions;
-
+﻿using Bridge.Test.NUnit;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -79,29 +76,33 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual(4, "abcd".Length);
         }
 
-        [Test]
-        public void CharAtWorks()
-        {
-            Assert.AreEqual("c", "abcd".CharAt(2));
-        }
-
-        [Test]
-        public void CharCodeAtWorks()
-        {
-            Assert.AreEqual((int)'c', (int)"abcd".CharCodeAt(2));
-        }
-
-        // TODO #353
+        // Not C# API #2392
         //[Test]
-        //public void CompareToWithIgnoreCaseArgWorks()
+        //public void CharAtWorks()
         //{
-        //    Assert.True("abcd".CompareTo("abcd", false) == 0);
-        //    Assert.True("abcd".CompareTo("abcb", false) > 0);
-        //    Assert.True("abcd".CompareTo("abce", false) < 0);
-        //    Assert.True("abcd".CompareTo("ABCD", true) == 0);
-        //    Assert.True("abcd".CompareTo("ABCB", true) > 0);
-        //    Assert.True("abcd".CompareTo("ABCE", true) < 0);
+        //    Assert.AreEqual("c", "abcd".CharAt(2));
         //}
+
+        //[Test]
+        //public void CharCodeAtWorks()
+        //{
+        //    Assert.AreEqual((int)'c', (int)"abcd".CharCodeAt(2));
+        //}
+
+        // #353
+        [Test]
+        public void CompareToWorks_353()
+        {
+            Assert.AreEqual(0, "abcd".CompareTo("abcd"));
+            Assert.AreEqual(1, "abcd".CompareTo("abcb"));
+            Assert.AreEqual(-1, "abcd".CompareTo("abce"));
+            Assert.AreEqual(1, "abcd".CompareTo("ABCB"));
+            Assert.AreEqual(-1, "abcd".CompareTo("ABCE"));
+
+            // Phantom JS engine has different implementation of stringCompare
+            var expected = !Utilities.BrowserHelper.IsPhantomJs() ? - 1 : 1;
+            Assert.AreEqual(expected, "abcd".CompareTo("ABCD"));
+        }
 
         [Test]
         public void CompareWorks()
@@ -215,15 +216,6 @@ namespace Bridge.ClientTest.SimpleTypes
         public void FormatCanUseEscapedBraces()
         {
             Assert.AreEqual("{0}", string.Format("{{0}}"));
-        }
-
-        [Test]
-        public void FromCharCodeWorks()
-        {
-            Assert.AreEqual("", string.FromCharCode());
-            Assert.AreEqual("a", string.FromCharCode('a'));
-            Assert.AreEqual("ab", string.FromCharCode('a', 'b'));
-            Assert.AreEqual("abc", string.FromCharCode('a', 'b', 'c'));
         }
 
         [Test]
@@ -386,21 +378,6 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void LocaleCompareWorks()
-        {
-            Assert.True("abcd".LocaleCompare("abcd") == 0);
-            Assert.True("abcd".LocaleCompare("abcb") > 0);
-            Assert.True("abcd".LocaleCompare("abce") < 0);
-        }
-
-        [Test]
-        public void MatchWorks()
-        {
-            var result = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".Match(new Regex("[A-E]", "gi"));
-            Assert.AreDeepEqual(new[] { "A", "B", "C", "D", "E", "a", "b", "c", "d", "e" }, result);
-        }
-
-        [Test]
         public void PadLeftWorks()
         {
             Assert.AreEqual("  abc", "abc".PadLeft(5));
@@ -479,70 +456,9 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void ReplaceRegexWithReplaceTextWorks()
-        {
-            Assert.AreEqual("xxcxxcxxc", "abcabcabc".Replace(new Regex("a|b", "g"), "x"));
-        }
-
-        [Test]
-        public void ReplaceRegexWithReplaceCallbackWorks()
-        {
-            Assert.AreEqual("xycxycxyc", "abcabcabc".Replace(new Regex("a|b", "g"), s => s == "a" ? "x" : "y"));
-        }
-
-        [Test]
-        public void SearchWorks()
-        {
-            Assert.AreEqual(2, "abcabcabc".Search(new Regex("ca")));
-            Assert.AreEqual(-1, "abcabcabc".Search(new Regex("x")));
-        }
-
-        [Test]
-        public void SliceWorks()
-        {
-            var numbers = "0123456789";
-
-            // Let's start by using both begin and end.
-            Assert.AreEqual(numbers.Slice(3, 7), "3456");
-
-            // What happens when we start with a negative number.
-            Assert.AreEqual(numbers.Slice(-7, 7), "3456");
-
-            // What happens when we use two negative numbers.
-            Assert.AreEqual(numbers.Slice(-7, -3), "3456");
-
-            // What happens when we omit the last argument.
-            Assert.AreEqual(numbers.Slice(3), "3456789");
-
-            // And with the negative, end-relevant index.
-            Assert.AreEqual(numbers.Slice(-7), "3456789");
-
-            // If the index is out of range, it returns the empty string.
-            Assert.AreEqual(numbers.Slice(100, 101), "");
-        }
-
-        [Test]
-        public void SplitWithStringWorks()
-        {
-            Assert.AreDeepEqual(new[] { "a", "ca", "ca", "c" }, "abcabcabc".Split("b"));
-        }
-
-        [Test]
         public void SplitWithCharWorks()
         {
             Assert.AreDeepEqual(new[] { "a", "ca", "ca", "c" }, "abcabcabc".Split('b'));
-        }
-
-        [Test]
-        public void JsSplitWithStringAndLimitWorks()
-        {
-            Assert.AreDeepEqual(new[] { "a", "ax" }, "abcaxbcabce".Split("bc", 2));
-        }
-
-        [Test]
-        public void JsSplitWithCharAndLimitWorks()
-        {
-            Assert.AreDeepEqual(new[] { "a", "ca" }, "abcabcabc".Split('b', 2));
         }
 
         [Test]
@@ -555,12 +471,6 @@ namespace Bridge.ClientTest.SimpleTypes
         public void SplitWithCharsAndStringSplitOptionsAndLimitWorks()
         {
             Assert.AreDeepEqual(new[] { "a", "cabcabc" }, "abxcabcabc".Split(new[] { 'b', 'x' }, 2, StringSplitOptions.RemoveEmptyEntries));
-        }
-
-        [Test]
-        public void SplitWithRegexWorks()
-        {
-            Assert.AreDeepEqual(new[] { "a", "ca", "ca", "c" }, "abcaxcaxc".Split(new Regex("b|x", "g")));
         }
 
         [Test]
@@ -631,32 +541,6 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void SubstrWorks()
-        {
-            Assert.AreEqual("cde", "abcde".Substr(2));
-            Assert.AreEqual("cd", "abcde".Substr(2, 2));
-
-            var numbers = "0123456789";
-
-            // Let's start by using both start and length
-            Assert.AreEqual(numbers.Substr(3, 4), "3456");
-
-            // What happens when we start with a negative number.
-            Assert.AreEqual(numbers.Substr(-7, 4), "3456");
-
-            // What happens when we omit the last argument.
-            Assert.AreEqual(numbers.Substr(3), "3456789");
-
-            // And with the negative, end-relevant index.
-            Assert.AreEqual(numbers.Substr(-7), "3456789");
-
-            // If the index is out of range, it returns the empty string.
-            Assert.AreEqual(numbers.Substr(100, 1), "");
-
-            Assert.AreEqual(numbers.Substr(2, 4), "2345");
-        }
-
-        [Test]
         public void SubstringWorks()
         {
             Assert.AreEqual("cde", "abcde".Substring(2));
@@ -682,32 +566,6 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual(numbers.Substring(100, 101), "");
 
             Assert.AreEqual(numbers.Substring(2, 4), "2345");
-        }
-
-        [Test]
-        public void JsSubstringWorks()
-        {
-            var numbers = "0123456789";
-
-            // Let's start by using both begin and end.
-            Assert.AreEqual(numbers.JsSubstring(3, 7), "3456");
-
-            // What happens when we start with a negative number.
-            Assert.AreEqual(numbers.JsSubstring(-7, 7), "0123456");
-
-            // What happens when we use two negative numbers.
-            Assert.AreEqual(numbers.JsSubstring(-7, -3), "");
-
-            // What happens when we omit the last argument.
-            Assert.AreEqual(numbers.JsSubstring(3), "3456789");
-
-            // And with the negative, end-relevant index.
-            Assert.AreEqual(numbers.JsSubstring(-7), "0123456789");
-
-            // If the index is out of range, it returns the empty string.
-            Assert.AreEqual(numbers.JsSubstring(100, 101), "");
-
-            Assert.AreEqual(numbers.JsSubstring(2, 4), "23");
         }
 
         [Test]
@@ -916,21 +774,9 @@ namespace Bridge.ClientTest.SimpleTypes
             var s = "HELLO".ToLower();
             Assert.AreEqual("hello", s, "'HELLO'.ToLower()");
 
-            s = "HELLO".ToLowerCase();
-            Assert.AreEqual("hello", s, "'HELLO'.ToLowerCase()");
-
-            s = "HELLO".ToLocaleLowerCase();
-            Assert.AreEqual("hello", s, "'HELLO'.ToLocaleLowerCase()");
-
             // TEST ToUpper, ToUpperCase, ToLocaleUpperCase
             s = "hello".ToUpper();
             Assert.AreEqual("HELLO", s, "'hello'.ToUpper()");
-
-            s = "hello".ToUpperCase();
-            Assert.AreEqual("HELLO", s, "'hello'.ToUpperCase()");
-
-            s = "HELLO".ToLocaleUpperCase();
-            Assert.AreEqual("HELLO", s, "'hello'.ToLocaleUpperCase()");
 
             s = "Hello Bridge.NET";
 

@@ -1,6 +1,7 @@
+using System.Collections.Generic;
 using Bridge;
-
-using System.Runtime.CompilerServices;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace System
 {
@@ -12,10 +13,10 @@ namespace System
     {
         private const string error1 = "Byte array for GUID must be exactly {0} bytes long";
 
-        private static readonly Bridge.Text.RegularExpressions.Regex Valid = new Bridge.Text.RegularExpressions.Regex("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", "i");
-        private static readonly Bridge.Text.RegularExpressions.Regex Split = new Bridge.Text.RegularExpressions.Regex("^(.{8})(.{4})(.{4})(.{4})(.{12})$");
-        private static readonly Bridge.Text.RegularExpressions.Regex NonFormat = new Bridge.Text.RegularExpressions.Regex("^[{(]?([0-9a-f]{8})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{12})[)}]?$", "i");
-        private static readonly Bridge.Text.RegularExpressions.Regex Replace = new Bridge.Text.RegularExpressions.Regex("-", "g");
+        private static readonly Regex Valid = new Regex("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", RegexOptions.IgnoreCase);
+        private static readonly Regex Split = new Regex("^(.{8})(.{4})(.{4})(.{4})(.{12})$");
+        private static readonly Regex NonFormat = new Regex("^[{(]?([0-9a-f]{8})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{12})[)}]?$", RegexOptions.IgnoreCase);
+        private static readonly Regex Replace = new Regex("-");
         private static readonly Random Rnd = new Random();
 
         /// <summary>
@@ -351,11 +352,20 @@ namespace System
 
             if (string.IsNullOrEmpty(format))
             {
-                var m = NonFormat.Exec(input);
+                var m = NonFormat.Match(input);
 
-                if (m != null)
+                if (m.Success)
                 {
-                    r = m.Slice(1).Join("-").ToLower();
+                    List<string> list = new List<string>();
+                    for (int i = 1; i <= m.Groups.Count; i++)
+                    {
+                        if (m.Groups[i].Success)
+                        {
+                            list.Add(m.Groups[i].Value);
+                        }
+                    }
+
+                    r = list.ToArray().Join("-").ToLower();
                 }
             }
             else
@@ -366,12 +376,21 @@ namespace System
 
                 if (format == "N")
                 {
-                    var m = Split.Exec(input);
+                    var m = Split.Match(input);
 
-                    if (m != null)
+                    if (m.Success)
                     {
+                        List<string> list = new List<string>();
+                        for (int i = 1; i <= m.Groups.Count; i++)
+                        {
+                            if (m.Groups[i].Success)
+                            {
+                                list.Add(m.Groups[i].Value);
+                            }
+                        }
+
                         p = true;
-                        input = m.Slice(1).Join("-");
+                        input = list.ToArray().Join("-");
                     }
                 }
                 else if (format == "B" || format == "P")
@@ -381,14 +400,15 @@ namespace System
                     if ((input[0] == b[0]) && (input[input.Length - 1] == b[1]))
                     {
                         p = true;
-                        input = input.Substr(1, input.Length - 2);
+                        input = input.Substring(1, input.Length - 2);
                     }
-                } else
+                }
+                else
                 {
                     p = true;
                 }
 
-                if (p && input.Match(Valid) != null)
+                if (p && Guid.Valid.IsMatch(input))
                 {
                     r = input.ToLower();
                 }
@@ -413,19 +433,31 @@ namespace System
             var s = ((uint)_a).ToString("x8") + ((ushort)_b).ToString("x4") + ((ushort)_c).ToString("x4");
             s = s + (new[] { _d, _e, _f, _g, _h, _i, _j, _k }).Map(MakeBinary).Join("");
 
-            s = Split.Exec(s).Slice(1).Join("-");
+            var m = Guid.Split.Match(s);
+            List<string> list = new List<string>();
+            for (int i = 1; i <= m.Groups.Count; i++)
+            {
+                if (m.Groups[i].Success)
+                {
+                    list.Add(m.Groups[i].Value);
+                }
+            }
+            s = list.ToArray().Join("-");
 
             switch (format)
             {
                 case "n":
                 case "N":
-                    return s.Replace(Replace, "");
+                    return Guid.Replace.Replace(s, "");
+
                 case "b":
                 case "B":
                     return '{' + s + '}';
+
                 case "p":
                 case "P":
                     return '(' + s + ')';
+
                 default:
                     return s;
             }
@@ -443,7 +475,7 @@ namespace System
                 return;
             }
 
-            s = s.Replace(Replace, "");
+            s = Guid.Replace.Replace(s, "");
 
             var r = new byte[8];
 

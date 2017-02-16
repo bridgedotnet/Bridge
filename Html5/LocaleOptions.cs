@@ -1,12 +1,10 @@
-using Bridge;
-
-namespace System
+namespace Bridge.Html5
 {
     /// <summary>
-    /// An object with some or all of the following properties:
+    /// A representaion of the options used in https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString
     /// </summary>
     [External]
-    //[Name("LocaleOptions")]
+    [Namespace(false)]
     [ObjectLiteral]
     public sealed class LocaleOptions
     {

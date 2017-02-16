@@ -4021,44 +4021,44 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             },
             testStringConcatObject: function () {
                 var o1 = Bridge.box(3, System.Int32);
-                var s1 = [o1].join('');
+                var s1 = System.String.concat(o1);
 
                 Bridge.Test.NUnit.Assert.areEqual("3", s1);
 
                 var o2 = null;
-                var s2 = [o2].join('');
+                var s2 = System.String.concat(o2);
 
                 Bridge.Test.NUnit.Assert.areEqual("", s2);
             },
             testStringConcatEnumerableString: function () {
                 var e1 = System.Array.init(["1", "2"], System.String);
-                var s1 = Bridge.toArray(e1).join('');
+                var s1 = System.String.concat(Bridge.toArray(e1));
 
                 Bridge.Test.NUnit.Assert.areEqual$1("12", s1, "All not null");
 
                 var e2 = System.Array.init(["3", null, "4"], System.String);
-                var s2 = Bridge.toArray(e2).join('');
+                var s2 = System.String.concat(Bridge.toArray(e2));
 
                 Bridge.Test.NUnit.Assert.areEqual$1("34", s2, "One is null");
 
                 var e3 = System.Array.init([], System.String);
-                var s3 = Bridge.toArray(e3).join('');
+                var s3 = System.String.concat(Bridge.toArray(e3));
 
                 Bridge.Test.NUnit.Assert.areEqual$1("", s3, "Empty");
             },
             testStringConcatEnumerableGeneric: function () {
                 var e1 = System.Array.init([Bridge.box(1, System.Int32), "2"], System.Object);
-                var s1 = Bridge.toArray(e1).join('');
+                var s1 = System.String.concat(Bridge.toArray(e1));
 
                 Bridge.Test.NUnit.Assert.areEqual$1("12", s1, "All not null");
 
                 var e2 = System.Array.init(["3", null, Bridge.box(4, System.Int32)], System.Object);
-                var s2 = Bridge.toArray(e2).join('');
+                var s2 = System.String.concat(Bridge.toArray(e2));
 
                 Bridge.Test.NUnit.Assert.areEqual$1("34", s2, "One is null");
 
                 var e3 = System.Array.init([], System.Object);
-                var s3 = Bridge.toArray(e3).join('');
+                var s3 = System.String.concat(Bridge.toArray(e3));
 
                 Bridge.Test.NUnit.Assert.areEqual$1("", s3, "Empty");
             }
@@ -16848,11 +16848,12 @@ Bridge.$N1391Result =                 r;
             testUseCase: function () {
                 var s = "0123456789";
 
-                Bridge.Test.NUnit.Assert.areEqual$1("0123456789", s.substring(-1), "JsSubstring(-1)");
-                Bridge.Test.NUnit.Assert.areEqual$1("56789", s.substring(5), "JsSubstring(5)");
-                Bridge.Test.NUnit.Assert.areEqual$1("", s.substring(10), "JsSubstring(10)");
-                Bridge.Test.NUnit.Assert.areEqual$1("1", s.substring(1, 2), "JsSubstring(1, 2)");
-                Bridge.Test.NUnit.Assert.areEqual$1("123456789", s.substring(1, 10), "JsSubstring(1, 10)");
+                // Not C# API #2392
+                Bridge.Test.NUnit.Assert.areEqual$1("0123456789", s.substring(-1), "JavaScript Substring(-1)");
+                Bridge.Test.NUnit.Assert.areEqual$1("56789", s.substring(5), "JavaScript Substring(5)");
+                Bridge.Test.NUnit.Assert.areEqual$1("", s.substring(10), "JavaScript Substring(10)");
+                Bridge.Test.NUnit.Assert.areEqual$1("1", s.substring(1, 2), "JavaScript Substring(1, 2)");
+                Bridge.Test.NUnit.Assert.areEqual$1("123456789", s.substring(1, 10), "JavaScript Substring(1, 10)");
 
                 Bridge.Test.NUnit.Assert.areEqual$1("9", s.substr(-1), "Substring(-1)");
                 Bridge.Test.NUnit.Assert.areEqual$1("56789", s.substr(5), "Substring(5)");
@@ -16860,6 +16861,7 @@ Bridge.$N1391Result =                 r;
                 Bridge.Test.NUnit.Assert.areEqual$1("12", s.substr(1, 2), "Substring(1, 2)");
                 Bridge.Test.NUnit.Assert.areEqual$1("123456789", s.substr(1, 10), "Substring(1, 10)");
 
+                // Not C# API #2392
                 Bridge.Test.NUnit.Assert.areEqual$1("9", s.substr(-1), "Substr(-1)");
                 Bridge.Test.NUnit.Assert.areEqual$1("56789", s.substr(5), "Substr(5)");
                 Bridge.Test.NUnit.Assert.areEqual$1("", s.substr(10), "Substr(10)");

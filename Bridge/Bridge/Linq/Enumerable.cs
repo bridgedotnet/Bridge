@@ -1,4 +1,3 @@
-using Bridge.Text.RegularExpressions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -154,13 +153,10 @@ namespace Bridge.Linq
         public static extern EnumerableInstance<TResult> Make<TResult>(TResult element);
 
         // FIXME: absent from linq definitions!
-        public static extern EnumerableInstance<RegexMatch> Matches(string input, Regex pattern);
+        public static extern EnumerableInstance<string[]> Matches(string input, string pattern);
 
         // FIXME: absent from linq definitions!
-        public static extern EnumerableInstance<RegexMatch> Matches(string input, string pattern);
-
-        // FIXME: absent from linq definitions!
-        public static extern EnumerableInstance<RegexMatch> Matches(string input, string pattern, string flags);
+        public static extern EnumerableInstance<string[]> Matches(string input, string pattern, string flags);
 
         // FIXME: absent from linq definitions!
         [Template("Bridge.Linq.Enumerable.from({source}).maxBy({selector})")]

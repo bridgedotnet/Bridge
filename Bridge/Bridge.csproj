@@ -314,7 +314,6 @@
     <Compile Include="System\INotifyPropertyChanged.cs" />
     <Compile Include="System\InvalidCastException.cs" />
     <Compile Include="System\InvalidOperationException.cs" />
-    <Compile Include="System\LocaleOptions.cs" />
     <Compile Include="System\Func.cs" />
     <Compile Include="System\Exception.cs" />
     <Compile Include="System\Delegate.cs" />
@@ -327,8 +326,6 @@
     <Compile Include="System\Runtime.cs" />
     <Compile Include="System\String.cs" />
     <Compile Include="System\Stubs.cs" />
-    <Compile Include="Bridge\Text\RegularExpressions\Regex.cs" />
-    <Compile Include="Bridge\Text\RegularExpressions\RegexMatch.cs" />
     <Compile Include="System\TimeSpan.cs" />
     <Compile Include="Bridge\Union.cs" />
     <Compile Include="System\Tuple.cs" />

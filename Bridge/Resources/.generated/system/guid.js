@@ -10,10 +10,10 @@
             rnd: null,
             config: {
                 init: function () {
-                    this.valid = new RegExp("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", "i");
-                    this.split = new RegExp("^(.{8})(.{4})(.{4})(.{4})(.{12})$");
-                    this.nonFormat = new RegExp("^[{(]?([0-9a-f]{8})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{12})[)}]?$", "i");
-                    this.replace = new RegExp("-", "g");
+                    this.valid = new System.Text.RegularExpressions.Regex.$ctor1("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", 1);
+                    this.split = new System.Text.RegularExpressions.Regex.ctor("^(.{8})(.{4})(.{4})(.{4})(.{12})$");
+                    this.nonFormat = new System.Text.RegularExpressions.Regex.$ctor1("^[{(]?([0-9a-f]{8})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{12})[)}]?$", 1);
+                    this.replace = new System.Text.RegularExpressions.Regex.ctor("-");
                     this.rnd = new System.Random.ctor();
                     this.empty = new System.Guid.ctor();
                 }
@@ -206,10 +206,17 @@
             }
 
             if (System.String.isNullOrEmpty(format)) {
-                var m = System.Guid.nonFormat.exec(input);
+                var m = System.Guid.nonFormat.match(input);
 
-                if (m != null) {
-                    r = m.slice(1).join("-").toLowerCase();
+                if (m.getSuccess()) {
+                    var list = new (System.Collections.Generic.List$1(System.String))();
+                    for (var i = 1; i <= m.getGroups().getCount(); i = (i + 1) | 0) {
+                        if (m.getGroups().get(i).getSuccess()) {
+                            list.add(m.getGroups().get(i).getValue());
+                        }
+                    }
+
+                    r = list.toArray().join("-").toLowerCase();
                 }
             } else {
                 format = format.toUpperCase();
@@ -217,11 +224,18 @@
                 var p = false;
 
                 if (Bridge.referenceEquals(format, "N")) {
-                    var m1 = System.Guid.split.exec(input);
+                    var m1 = System.Guid.split.match(input);
 
-                    if (m1 != null) {
+                    if (m1.getSuccess()) {
+                        var list1 = new (System.Collections.Generic.List$1(System.String))();
+                        for (var i1 = 1; i1 <= m1.getGroups().getCount(); i1 = (i1 + 1) | 0) {
+                            if (m1.getGroups().get(i1).getSuccess()) {
+                                list1.add(m1.getGroups().get(i1).getValue());
+                            }
+                        }
+
                         p = true;
-                        input = m1.slice(1).join("-");
+                        input = list1.toArray().join("-");
                     }
                 } else if (Bridge.referenceEquals(format, "B") || Bridge.referenceEquals(format, "P")) {
                     var b = Bridge.referenceEquals(format, "B") ? System.Array.init([123, 125], System.Char) : System.Array.init([40, 41], System.Char);
@@ -234,7 +248,7 @@
                     p = true;
                 }
 
-                if (p && input.match(System.Guid.valid) != null) {
+                if (p && System.Guid.valid.isMatch(input)) {
                     r = input.toLowerCase();
                 }
             }
@@ -254,12 +268,19 @@
             var s = System.String.concat(System.UInt32.format((this._a >>> 0), "x8"), System.UInt16.format((this._b & 65535), "x4"), System.UInt16.format((this._c & 65535), "x4"));
             s = System.String.concat(s, (System.Array.init([this._d, this._e, this._f, this._g, this._h, this._i, this._j, this._k], System.Byte)).map(System.Guid.makeBinary).join(""));
 
-            s = System.Guid.split.exec(s).slice(1).join("-");
+            var m = System.Guid.split.match(s);
+            var list = new (System.Collections.Generic.List$1(System.String))();
+            for (var i = 1; i <= m.getGroups().getCount(); i = (i + 1) | 0) {
+                if (m.getGroups().get(i).getSuccess()) {
+                    list.add(m.getGroups().get(i).getValue());
+                }
+            }
+            s = list.toArray().join("-");
 
             switch (format) {
                 case "n": 
                 case "N": 
-                    return s.replace(System.Guid.replace, "");
+                    return System.Guid.replace.replace(s, "");
                 case "b": 
                 case "B": 
                     return System.String.concat(String.fromCharCode(123), s, String.fromCharCode(125));
@@ -275,7 +296,7 @@
                 return;
             }
 
-            s = s.replace(System.Guid.replace, "");
+            s = System.Guid.replace.replace(s, "");
 
             var r = System.Array.init(8, 0, System.Byte);
 

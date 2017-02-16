@@ -76,7 +76,7 @@ namespace Test.BridgeIssues.N697
             // the component name in the tree. The only way to do this is, unfortunately, with eval - but the only dynamic content is the class name (which should be
             // safe to use since valid C# class names should be valid JavaScript function names, with no escaping required) and this work is only performed once per
             // class, since it is stored in a static variable - so the eval calls will be made very infrequently (so performance is not a concern).
-            var className = fullClassName.Split(".").Last();
+            var className = fullClassName.Split('.').Last();
             Func<TProps, ReactElement> namedScopeBoundFunction = null;
             /*@
 			eval("namedScopeBoundFunction = function " + className + "(props) { return scopeBoundFunction(props); };");

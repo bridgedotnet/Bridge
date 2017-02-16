@@ -452,23 +452,24 @@ Bridge.define("System.String", {
             }
         },
 
-        trimEnd: function (s, chars) {
-            return s.replace(chars ? new RegExp('[' + System.String.escape(String.fromCharCode.apply(null, chars)) + ']+$') : /\s*$/, '');
+        trimEnd: function (str, chars) {
+            return str.replace(chars ? new RegExp('[' + System.String.escape(String.fromCharCode.apply(null, chars)) + ']+$') : /\s*$/, '');
         },
 
-        trimStart: function (s, chars) {
-            return s.replace(chars ? new RegExp('^[' + System.String.escape(String.fromCharCode.apply(null, chars)) + ']+') : /^\s*/, '');
+        trimStart: function (str, chars) {
+            return str.replace(chars ? new RegExp('^[' + System.String.escape(String.fromCharCode.apply(null, chars)) + ']+') : /^\s*/, '');
         },
 
-        trim: function (s, chars) {
-            return System.String.trimStart(System.String.trimEnd(s, chars), chars);
+        trim: function (str, chars) {
+            return System.String.trimStart(System.String.trimEnd(str, chars), chars);
         },
 
-        concat: function () {
-            var s = "";
-            for (var i = 0; i < arguments.length; i++) {
-                var tmp = arguments[i];
-                s += tmp == null ? "" : tmp;
+        concat: function (values) {
+            var list = (arguments.length == 1 && Array.isArray(values)) ? values : [].slice.call(arguments),
+                s = "";
+
+            for (var i = 0; i < list.length; i++) {
+                s += list[i] == null ? "" : list[i].toString();
             }
 
             return s;
