@@ -507,6 +507,7 @@
     <Compile Include="BridgeIssues\2300\N2369.cs" />
     <Compile Include="BridgeIssues\2300\N2374.cs" />
     <Compile Include="BridgeIssues\2300\N2375.cs" />
+    <Compile Include="BridgeIssues\2300\N2399.cs" />
     <Compile Include="BridgeIssues\2300\N2386.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />

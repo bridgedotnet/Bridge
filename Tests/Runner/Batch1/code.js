@@ -20142,7 +20142,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             this.assertAlmostEqual(Math.sin(0.5), 0.479425538604203);
         },
         sqrtWorks: function () {
-            this.assertIsDecimalAndEqualTo(System.Decimal(3.0).sqrt(), "1.7320508075688772935274463415");
+            this.assertAlmostEqual(Math.sqrt(3.0), 1.73205080756888);
         },
         tanWorks: function () {
             this.assertAlmostEqual(Math.tan(0.5), 0.54630248984379048);
