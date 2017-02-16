@@ -464,13 +464,14 @@ Bridge.define("System.String", {
             return System.String.trimStart(System.String.trimEnd(s, chars), chars);
         },
 
-        concat: function () {
-            var s = "";
-            for (var i = 0; i < arguments.length; i++) {
-                var tmp = arguments[i];
-                s += tmp == null ? "" : tmp;
-            }
+        concat: function (values) {
+            var list = (arguments.length == 1 && Array.isArray(values)) ? values : [].slice.call(arguments),
+                s = "";
 
+            for (var i = 0; i < list.length; i++) {
+                s += list[i] == null ? "" : list[i].toString();
+            }
+  
             return s;
         }
     }
