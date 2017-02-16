@@ -11797,7 +11797,7 @@ Bridge.define("System.String", {
             for (var i = 0; i < list.length; i++) {
                 s += list[i] == null ? "" : list[i].toString();
             }
-  
+
             return s;
         }
     }

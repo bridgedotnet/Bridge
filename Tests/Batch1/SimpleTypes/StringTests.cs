@@ -1,5 +1,4 @@
-﻿using Bridge.Html5;
-using Bridge.Test.NUnit;
+﻿using Bridge.Test.NUnit;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -220,15 +219,6 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void FromCharCodeWorks()
-        {
-            Assert.AreEqual("", StringPrototype.FromCharCode());
-            Assert.AreEqual("a", StringPrototype.FromCharCode('a'));
-            Assert.AreEqual("ab", StringPrototype.FromCharCode('a', 'b'));
-            Assert.AreEqual("abc", StringPrototype.FromCharCode('a', 'b', 'c'));
-        }
-
-        [Test]
         public void IndexOfCharWorks()
         {
             Assert.AreEqual(1, "abc".IndexOf('b'));
@@ -387,15 +377,6 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual(-1, "abcdabcd".LastIndexOfAny(new[] { 'b' }, 4, 2));
         }
 
-        // Not C# API #2392
-        //[Test]
-        //public void LocaleCompareWorks()
-        //{
-        //    Assert.True("abcd".LocaleCompare("abcd") == 0);
-        //    Assert.True("abcd".LocaleCompare("abcb") > 0);
-        //    Assert.True("abcd".LocaleCompare("abce") < 0);
-        //}
-
         [Test]
         public void PadLeftWorks()
         {
@@ -474,56 +455,10 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual("xbcxbcxbc", "abcabcabc".Replace("a", "x"));
         }
 
-        // Not C# API #2392
-        [Test]
-        public void SliceWorks()
-        {
-            var numbers = "0123456789";
-
-            // Let's start by using both begin and end.
-            Assert.AreEqual(StringPrototype.Slice(numbers, 3, 7), "3456");
-
-            // What happens when we start with a negative number.
-            Assert.AreEqual(StringPrototype.Slice(numbers, -7, 7), "3456");
-
-            // What happens when we use two negative numbers.
-            Assert.AreEqual(StringPrototype.Slice(numbers, -7, -3), "3456");
-
-            // What happens when we omit the last argument.
-            Assert.AreEqual(StringPrototype.Slice(numbers, 3), "3456789");
-
-            // And with the negative, end-relevant index.
-            Assert.AreEqual(StringPrototype.Slice(numbers, -7), "3456789");
-
-            // If the index is out of range, it returns the empty string.
-            Assert.AreEqual(StringPrototype.Slice(numbers, 100, 101), "");
-        }
-
-        // Not C# API #2392
-        [Test]
-        public void SplitWithStringWorks()
-        {
-            Assert.AreDeepEqual(new[] { "a", "ca", "ca", "c" }, "abcabcabc".Split("b"));
-        }
-
         [Test]
         public void SplitWithCharWorks()
         {
             Assert.AreDeepEqual(new[] { "a", "ca", "ca", "c" }, "abcabcabc".Split('b'));
-        }
-
-        // Not C# API #2392
-        [Test]
-        public void JsSplitWithStringAndLimitWorks()
-        {
-            Assert.AreDeepEqual(new[] { "a", "ax" }, "abcaxbcabce".Split("bc", 2));
-        }
-
-        // Not C# API #2392
-        [Test]
-        public void JsSplitWithCharAndLimitWorks()
-        {
-            Assert.AreDeepEqual(new[] { "a", "ca" }, "abcabcabc".Split(new char[] { 'b' }, 2));
         }
 
         [Test]
@@ -605,33 +540,6 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.False("abc".StartsWith("bc"));
         }
 
-        // Not C# API #2392
-        [Test]
-        public void SubstrWorks()
-        {
-            Assert.AreEqual("cde", "abcde".Substr(2));
-            Assert.AreEqual("cd", "abcde".Substr(2, 2));
-
-            var numbers = "0123456789";
-
-            // Let's start by using both start and length
-            Assert.AreEqual(numbers.Substr(3, 4), "3456");
-
-            // What happens when we start with a negative number.
-            Assert.AreEqual(numbers.Substr(-7, 4), "3456");
-
-            // What happens when we omit the last argument.
-            Assert.AreEqual(numbers.Substr(3), "3456789");
-
-            // And with the negative, end-relevant index.
-            Assert.AreEqual(numbers.Substr(-7), "3456789");
-
-            // If the index is out of range, it returns the empty string.
-            Assert.AreEqual(numbers.Substr(100, 1), "");
-
-            Assert.AreEqual(numbers.Substr(2, 4), "2345");
-        }
-
         [Test]
         public void SubstringWorks()
         {
@@ -658,33 +566,6 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual(numbers.Substring(100, 101), "");
 
             Assert.AreEqual(numbers.Substring(2, 4), "2345");
-        }
-
-        // Not C# API #2392
-        [Test]
-        public void JavaScriptSubstringWorks()
-        {
-            var numbers = "0123456789";
-
-            // Let's start by using both begin and end.
-            Assert.AreEqual(StringPrototype.Substring(numbers, 3, 7), "3456");
-
-            // What happens when we start with a negative number.
-            Assert.AreEqual(StringPrototype.Substring(numbers, -7, 7), "0123456");
-
-            // What happens when we use two negative numbers.
-            Assert.AreEqual(StringPrototype.Substring(numbers, -7, -3), "");
-
-            // What happens when we omit the last argument.
-            Assert.AreEqual(StringPrototype.Substring(numbers, 3), "3456789");
-
-            // And with the negative, end-relevant index.
-            Assert.AreEqual(StringPrototype.Substring(numbers, -7), "0123456789");
-
-            // If the index is out of range, it returns the empty string.
-            Assert.AreEqual(StringPrototype.Substring(numbers, 100, 101), "");
-
-            Assert.AreEqual(StringPrototype.Substring(numbers, 2, 4), "23");
         }
 
         [Test]
@@ -893,21 +774,9 @@ namespace Bridge.ClientTest.SimpleTypes
             var s = "HELLO".ToLower();
             Assert.AreEqual("hello", s, "'HELLO'.ToLower()");
 
-            s = "HELLO".ToLowerCase();
-            Assert.AreEqual("hello", s, "'HELLO'.ToLowerCase()");
-
-            s = "HELLO".ToLocaleLowerCase();
-            Assert.AreEqual("hello", s, "'HELLO'.ToLocaleLowerCase()");
-
             // TEST ToUpper, ToUpperCase, ToLocaleUpperCase
             s = "hello".ToUpper();
             Assert.AreEqual("HELLO", s, "'hello'.ToUpper()");
-
-            s = "hello".ToUpperCase();
-            Assert.AreEqual("HELLO", s, "'hello'.ToUpperCase()");
-
-            s = "HELLO".ToLocaleUpperCase();
-            Assert.AreEqual("HELLO", s, "'hello'.ToLocaleUpperCase()");
 
             s = "Hello Bridge.NET";
 

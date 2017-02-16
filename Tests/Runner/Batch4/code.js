@@ -20336,10 +20336,10 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual(",., aa, aa", System.String.trimEnd((",., aa, aa,... "), [44, 46, 32]));
         },
         trimStartWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual("abc  ", System.String.trimStart(("  abc  "), [null]));
+            Bridge.Test.NUnit.Assert.areEqual("abc  ", System.String.trimStart(("  abc  ")));
         },
         trimEndWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual("  abc", System.String.trimEnd(("  abc  "), [null]));
+            Bridge.Test.NUnit.Assert.areEqual("  abc", System.String.trimEnd(("  abc  ")));
         },
         stringEqualityWorks: function () {
             var s1 = "abc", s2 = null, s3 = null;
