@@ -79,7 +79,6 @@
     <Compile Include="LocaleOptions.cs" />
     <Compile Include="MutationObserver.cs" />
     <Compile Include="RegExp.cs" />
-    <Compile Include="RegexMatch.cs" />
     <Compile Include="String.cs" />
     <Compile Include="TypedArray\Float32Array.cs" />
     <Compile Include="TypedArray\Float64Array.cs" />

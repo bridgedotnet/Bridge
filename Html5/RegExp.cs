@@ -90,7 +90,7 @@ namespace Bridge.Html5
 
         public static readonly string RightContext;
 
-        public extern RegExpMatch Exec(string s);
+        public extern string[] Exec(string s);
 
         public extern bool Test(string s);
     }
