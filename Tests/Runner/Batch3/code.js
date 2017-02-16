@@ -15183,6 +15183,46 @@ Bridge.$N1391Result =                 r;
         $kind: "interface"
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2393", {
+        statics: {
+            testLambdaInLiteral: function () {
+                Bridge.Test.NUnit.Assert.notNull(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2393.c2.ctor().m1);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2393.c1", {
+        config: {
+            properties: {
+                p1: null
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2393.c2", {
+        $literal: true,
+        ctor: function () {
+            var $this = {};
+            $this.$getType = function() { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2393.c2; };
+            (function(){
+                this.a1 = null;
+                this.m1 = null;
+                this.m1 = Bridge.fn.bind(this, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2393.c2.f1);
+            }).call($this);
+            return $this;
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2393.c2", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2393.c2, {
+        f1: function (x_) {
+            var o1 = System.Linq.Enumerable.from(this.a1).firstOrDefault(function (i_) {
+                    return Bridge.referenceEquals(i_.getp1(), x_.p3);
+                }, null);
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
