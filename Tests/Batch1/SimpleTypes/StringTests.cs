@@ -94,12 +94,15 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void CompareToWorks_353()
         {
-            Assert.True("abcd".CompareTo("abcd") == 0);
-            Assert.True("abcd".CompareTo("abcb") > 0);
-            Assert.True("abcd".CompareTo("abce") < 0);
-            Assert.True("abcd".CompareTo("ABCD") < 0);
-            Assert.True("abcd".CompareTo("ABCB") > 0);
-            Assert.True("abcd".CompareTo("ABCE") < 0);
+            Assert.AreEqual(0, "abcd".CompareTo("abcd"));
+            Assert.AreEqual(1, "abcd".CompareTo("abcb"));
+            Assert.AreEqual(-1, "abcd".CompareTo("abce"));
+            Assert.AreEqual(1, "abcd".CompareTo("ABCB"));
+            Assert.AreEqual(-1, "abcd".CompareTo("ABCE"));
+
+            // Phantom JS engine has different implementation of stringCompare
+            var expected = !Utilities.BrowserHelper.IsPhantomJs() ? - 1 : 1;
+            Assert.AreEqual(expected, "abcd".CompareTo("ABCD"));
         }
 
         [Test]

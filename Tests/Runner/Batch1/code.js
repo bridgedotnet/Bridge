@@ -28760,12 +28760,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.NUnit.Assert.areEqual(4, ("abcd").length);
         },
         compareToWorks_353: function () {
-            Bridge.Test.NUnit.Assert.true(System.String.compare(("abcd"), "abcd") === 0);
-            Bridge.Test.NUnit.Assert.true(System.String.compare(("abcd"), "abcb") > 0);
-            Bridge.Test.NUnit.Assert.true(System.String.compare(("abcd"), "abce") < 0);
-            Bridge.Test.NUnit.Assert.true(System.String.compare(("abcd"), "ABCD") < 0);
-            Bridge.Test.NUnit.Assert.true(System.String.compare(("abcd"), "ABCB") > 0);
-            Bridge.Test.NUnit.Assert.true(System.String.compare(("abcd"), "ABCE") < 0);
+            Bridge.Test.NUnit.Assert.areEqual(0, System.String.compare(("abcd"), "abcd"));
+            Bridge.Test.NUnit.Assert.areEqual(1, System.String.compare(("abcd"), "abcb"));
+            Bridge.Test.NUnit.Assert.areEqual(-1, System.String.compare(("abcd"), "abce"));
+            Bridge.Test.NUnit.Assert.areEqual(1, System.String.compare(("abcd"), "ABCB"));
+            Bridge.Test.NUnit.Assert.areEqual(-1, System.String.compare(("abcd"), "ABCE"));
+
+            // Phantom JS engine has different implementation of stringCompare
+            var expected = !Bridge.ClientTest.Utilities.BrowserHelper.isPhantomJs() ? -1 : 1;
+            Bridge.Test.NUnit.Assert.areEqual(expected, System.String.compare(("abcd"), "ABCD"));
         },
         compareWorks: function () {
             Bridge.Test.NUnit.Assert.true(System.String.compare("abcd", "abcd") === 0);
