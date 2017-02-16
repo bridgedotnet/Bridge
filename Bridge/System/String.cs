@@ -592,10 +592,24 @@ namespace System
         /// <summary>
         /// Removes all trailing occurrences of a set of characters specified in an array from the current String object.
         /// </summary>
+        /// <returns>The string that remains after all occurrences of the characters in the trimChars parameter are removed from the end of the current string. If trimChars is null or an empty array, Unicode white-space characters are removed instead. If no characters can be trimmed from the current instance, the method returns the current instance unchanged.</returns>
+        [Template("System.String.trimEnd({this})")]
+        public extern string TrimEnd();
+
+        /// <summary>
+        /// Removes all trailing occurrences of a set of characters specified in an array from the current String object.
+        /// </summary>
         /// <param name="trimChars">An array of Unicode characters to remove, or null.</param>
         /// <returns>The string that remains after all occurrences of the characters in the trimChars parameter are removed from the end of the current string. If trimChars is null or an empty array, Unicode white-space characters are removed instead. If no characters can be trimmed from the current instance, the method returns the current instance unchanged.</returns>
         [Template("System.String.trimEnd({this}, {trimChars:array})")]
         public extern string TrimEnd(params char[] trimChars);
+
+        /// <summary>
+        /// Removes all leading occurrences of whitespaces specified in an array from the current String object.
+        /// </summary>
+        /// <returns>The string that remains after all occurrences of characters in the trimChars parameter are removed from the start of the current string. If trimChars is null or an empty array, white-space characters are removed instead.</returns>
+        [Template("System.String.trimStart({this})")]
+        public extern string TrimStart();
 
         /// <summary>
         /// Removes all leading occurrences of a set of characters specified in an array from the current String object.
