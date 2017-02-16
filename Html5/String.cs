@@ -15,7 +15,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="str">A string instance</param>
         /// <returns>A new string representing the calling string converted to lower case.</returns>
-        [Template("{this}.toLowerCase()")]
+        [Template("{str}.toLowerCase()")]
         public static extern string ToLowerCase(this string str);
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="str">A string instance</param>
         /// <returns>A new string representing the calling string converted to lower case, according to any locale-specific case mappings.</returns>
-        [Template("{this}.toLocaleLowerCase()")]
+        [Template("{str}.toLocaleLowerCase()")]
         public static extern string ToLocaleLowerCase(this string str);
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="str">A string instance</param>
         /// <returns>A new string representing the calling string converted to upper case.</returns>
-        [Template("{this}.toUpperCase()")]
+        [Template("{str}.toUpperCase()")]
         public static extern string ToUpperCase(this string str);
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="str">A string instance</param>
         /// <returns>A new string representing the calling string converted to upper case, according to any locale-specific case mappings.</returns>
-        [Template("{this}.toLocaleUpperCase()")]
+        [Template("{str}.toLocaleUpperCase()")]
         public static extern string ToLocaleUpperCase(this string str);
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Bridge.Html5
         /// <param name="str">A string instance</param>
         /// <param name="compareString">The string against which the referring string is compared</param>
         /// <returns>A negative number if the reference string occurs before the compare string; positive if the reference string occurs after the compare string; 0 if they are equivalent.</returns>
-        [Template("{this}.localeCompare({compareString})")]
+        [Template("{str}.localeCompare({compareString})")]
         public static extern int LocaleCompare(this string str, string compareString);
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Bridge.Html5
         /// <param name="locales">A string with a BCP 47 language tag, or an array of such strings. For the general form and interpretation of the locales argument, see the Intl page.</param>
         /// <returns>A negative number if the reference string occurs before the compare string; positive if the reference string occurs after the compare string; 0 if they are equivalent.</returns>
         /// <returns>A negative number if the reference string occurs before the compare string; positive if the reference string occurs after the compare string; 0 if they are equivalent.</returns>
-        [Template("{this}.localeCompare({compareString}, {locales})")]
+        [Template("{str}.localeCompare({compareString}, {locales})")]
         public static extern int LocaleCompare(this string str, string compareString, string locales);
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Bridge.Html5
         /// <param name="locales">A string with a BCP 47 language tag, or an array of such strings. For the general form and interpretation of the locales argument, see the Intl page.</param>
         /// <param name="options">An object with some or all of the following properties:</param>
         /// <returns>A negative number if the reference string occurs before the compare string; positive if the reference string occurs after the compare string; 0 if they are equivalent.</returns>
-        [Template("{this}.localeCompare({compareString}, {locales}, {options})")]
+        [Template("{str}.localeCompare({compareString}, {locales}, {options})")]
         public static extern int LocaleCompare(this string str, string compareString, string locales, LocaleOptions options);
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Bridge.Html5
         /// <param name="substr">A String that is to be replaced by newSubStr. It is treated as a verbatim string and is not interpreted as a regular expression. Only the first occurrence will be replaced.</param>
         /// <param name="newSubStr">The String that replaces the substring specified by the specified regexp or substr parameter. A number of special replacement patterns are supported; see the "Specifying a string as a parameter" section below.</param>
         /// <returns>A new string with some or all matches of a pattern replaced by a replacement.</returns>
-        [Template("{this}.replace({substr}, {newSubStr})")]
+        [Template("{str}.replace({substr}, {newSubStr})")]
         public static extern string Replace(this string str, string substr, string newSubStr);
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Bridge.Html5
         /// <param name="substr">A String that is to be replaced by newSubStr. It is treated as a verbatim string and is not interpreted as a regular expression. Only the first occurrence will be replaced.</param>
         /// <param name="function">A function to be invoked to create the new substring to be used to replace the matches to the given regexp or substr. </param>
         /// <returns>A new string with some or all matches of a pattern replaced by a replacement.</returns>
-        [Template("{this}.replace({substr}, {function})")]
+        [Template("{str}.replace({substr}, {function})")]
         public static extern string Replace(this string str, string substr, Delegate function);
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace Bridge.Html5
         /// <param name="substr">A String that is to be replaced by newSubStr. It is treated as a verbatim string and is not interpreted as a regular expression. Only the first occurrence will be replaced.</param>
         /// <param name="function">A function to be invoked to create the new substring to be used to replace the matches to the given regexp or substr. </param>
         /// <returns>A new string with some or all matches of a pattern replaced by a replacement.</returns>
-        [Template("{this}.replace({substr}, {function})")]
+        [Template("{str}.replace({substr}, {function})")]
         public static extern string Replace(this string str, string substr, Func<string, string> function);
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace Bridge.Html5
         /// <param name="substr">A String that is to be replaced by newSubStr. It is treated as a verbatim string and is not interpreted as a regular expression. Only the first occurrence will be replaced.</param>
         /// <param name="function">A function to be invoked to create the new substring to be used to replace the matches to the given regexp or substr. </param>
         /// <returns>A new string with some or all matches of a pattern replaced by a replacement.</returns>
-        [Template("{this}.replace({substr}, {function})")]
+        [Template("{str}.replace({substr}, {function})")]
         public static extern string Replace(this string str, string substr, Func<string, int, string> function);
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace Bridge.Html5
         /// <param name="substr">A String that is to be replaced by newSubStr. It is treated as a verbatim string and is not interpreted as a regular expression. Only the first occurrence will be replaced.</param>
         /// <param name="function">A function to be invoked to create the new substring to be used to replace the matches to the given regexp or substr. </param>
         /// <returns>A new string with some or all matches of a pattern replaced by a replacement.</returns>
-        [Template("{this}.replace({substr}, {function})")]
+        [Template("{str}.replace({substr}, {function})")]
         public static extern string Replace(this string str, string substr, Func<string, int, string, string> function);
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace Bridge.Html5
         /// <param name="regexp">A RegExp object or literal. The match or matches are replaced with newSubStr or the value returned by the specified function.</param>
         /// <param name="newSubStr">The String that replaces the substring specified by the specified regexp or substr parameter. A number of special replacement patterns are supported; see the "Specifying a string as a parameter" section below.</param>
         /// <returns>A new string with some or all matches of a pattern replaced by a replacement.</returns>
-        [Template("{this}.replace({regexp}, {newSubStr})")]
+        [Template("{str}.replace({regexp}, {newSubStr})")]
         public static extern string Replace(this string str, RegExp regexp, string newSubStr);
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace Bridge.Html5
         /// <param name="regexp">A RegExp object or literal. The match or matches are replaced with newSubStr or the value returned by the specified function.</param>
         /// <param name="function">A function to be invoked to create the new substring to be used to replace the matches to the given regexp or substr. </param>
         /// <returns>A new string with some or all matches of a pattern replaced by a replacement.</returns>
-        [Template("{this}.replace({regexp}, {function})")]
+        [Template("{str}.replace({regexp}, {function})")]
         public static extern string Replace(this string str, RegExp regexp, Delegate function);
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace Bridge.Html5
         /// <param name="regexp">A RegExp object or literal. The match or matches are replaced with newSubStr or the value returned by the specified function.</param>
         /// <param name="function">A function to be invoked to create the new substring to be used to replace the matches to the given regexp or substr. </param>
         /// <returns>A new string with some or all matches of a pattern replaced by a replacement.</returns>
-        [Template("{this}.replace({regexp}, {function})")]
+        [Template("{str}.replace({regexp}, {function})")]
         public static extern string Replace(this string str, RegExp regexp, Func<string, string> function);
 
         /// <summary>
@@ -160,7 +160,7 @@ namespace Bridge.Html5
         /// <param name="regexp">A RegExp object or literal. The match or matches are replaced with newSubStr or the value returned by the specified function.</param>
         /// <param name="function">A function to be invoked to create the new substring to be used to replace the matches to the given regexp or substr. </param>
         /// <returns>A new string with some or all matches of a pattern replaced by a replacement.</returns>
-        [Template("{this}.replace({regexp}, {function})")]
+        [Template("{str}.replace({regexp}, {function})")]
         public static extern string Replace(this string str, RegExp regexp, Func<string, int, string> function);
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace Bridge.Html5
         /// <param name="regexp">A RegExp object or literal. The match or matches are replaced with newSubStr or the value returned by the specified function.</param>
         /// <param name="function">A function to be invoked to create the new substring to be used to replace the matches to the given regexp or substr. </param>
         /// <returns>A new string with some or all matches of a pattern replaced by a replacement.</returns>
-        [Template("{this}.replace({regexp}, {function})")]
+        [Template("{str}.replace({regexp}, {function})")]
         public static extern string Replace(this string str, RegExp regexp, Func<string, int, string, string> function);
 
         /// <summary>
@@ -179,7 +179,7 @@ namespace Bridge.Html5
         /// <param name="str">A string instance</param>
         /// <param name="beginIndex">The zero-based index at which to begin extraction. If negative, it is treated as strLength + beginIndex where strLength is the length of the string (for example, if beginIndex is -3 it is treated as strLength - 3). If beginIndex is greater than or equal to the length of the string, slice() returns an empty string.</param>
         /// <returns>A new string containing the extracted section of the string.</returns>
-        [Template("{this}.slice({beginIndex})")]
+        [Template("{str}.slice({beginIndex})")]
         public static extern string Slice(this string str, int beginIndex);
 
         /// <summary>
@@ -189,7 +189,7 @@ namespace Bridge.Html5
         /// <param name="beginIndex">The zero-based index at which to begin extraction. If negative, it is treated as strLength + beginIndex where strLength is the length of the string (for example, if beginIndex is -3 it is treated as strLength - 3). If beginIndex is greater than or equal to the length of the string, slice() returns an empty string.</param>
         /// <param name="endIndex">The zero-based index before which to end extraction. The character at this index will not be included. If endIndex is omitted, slice() extracts to the end of the string. If negative, it is treated as strLength + endIndex where strLength is the length of the string (for example, if endIndex is -3 it is treated as strLength - 3).</param>
         /// <returns>A new string containing the extracted section of the string.</returns>
-        [Template("{this}.slice({beginIndex}, {endIndex})")]
+        [Template("{str}.slice({beginIndex}, {endIndex})")]
         public static extern string Slice(this string str, int beginIndex, int endIndex);
 
         /// <summary>
@@ -197,7 +197,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="str">A string instance</param>
         /// <returns>An array of strings split at each point where the separator occurs in the given string.</returns>
-        [Template("{this}.split()")]
+        [Template("{str}.split()")]
         public static extern string[] Split(this string str);
 
         /// <summary>
@@ -206,7 +206,7 @@ namespace Bridge.Html5
         /// <param name="str">A string instance</param>
         /// <param name="separator">Specifies the character(s) to use for separating the string. The separator is treated as a string or a regular expression. If separator is omitted or does not occur in str, the array returned contains one element consisting of the entire string. If separator is an empty string, str is converted to an array of characters.</param>
         /// <returns>An array of strings split at each point where the separator occurs in the given string.</returns>
-        [Template("{this}.split({separator})")]
+        [Template("{str}.split({separator})")]
         public static extern string[] Split(this string str, string separator);
 
         /// <summary>
@@ -216,7 +216,7 @@ namespace Bridge.Html5
         /// <param name="separator">Specifies the character(s) to use for separating the string. The separator is treated as a string or a regular expression. If separator is omitted or does not occur in str, the array returned contains one element consisting of the entire string. If separator is an empty string, str is converted to an array of characters.</param>
         /// <param name="limit">Integer specifying a limit on the number of splits to be found. The split() method still splits on every match of separator, until the number of split items match the limit or the string falls short of separator.</param>
         /// <returns>An array of strings split at each point where the separator occurs in the given string.</returns>
-        [Template("{this}.split({separator}, {limit})")]
+        [Template("{str}.split({separator}, {limit})")]
         public static extern string[] Split(this string str, string separator, int limit);
 
         /// <summary>
@@ -225,7 +225,7 @@ namespace Bridge.Html5
         /// <param name="str">A string instance</param>
         /// <param name="separator">Specifies the character(s) to use for separating the string. The separator is treated as a string or a regular expression. If separator is omitted or does not occur in str, the array returned contains one element consisting of the entire string. If separator is an empty string, str is converted to an array of characters.</param>
         /// <returns>An array of strings split at each point where the separator occurs in the given string.</returns>
-        [Template("{this}.split({separator})")]
+        [Template("{str}.split({separator})")]
         public static extern string[] Split(this string str, RegExp separator);
 
         /// <summary>
@@ -235,7 +235,7 @@ namespace Bridge.Html5
         /// <param name="separator">Specifies the character(s) to use for separating the string. The separator is treated as a string or a regular expression. If separator is omitted or does not occur in str, the array returned contains one element consisting of the entire string. If separator is an empty string, str is converted to an array of characters.</param>
         /// <param name="limit">Integer specifying a limit on the number of splits to be found. The split() method still splits on every match of separator, until the number of split items match the limit or the string falls short of separator.</param>
         /// <returns>An array of strings split at each point where the separator occurs in the given string.</returns>
-        [Template("{this}.split({separator}, {limit})")]
+        [Template("{str}.split({separator}, {limit})")]
         public static extern string[] Split(this string str, RegExp separator, int limit);
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace Bridge.Html5
         /// <param name="str">A string instance</param>
         /// <param name="start">Location at which to begin extracting characters. If a negative number is given, it is treated as strLength + start where strLength is the length of the string (for example, if start is -3 it is treated as strLength - 3.)</param>
         /// <returns>A new string containing the extracted section of the given string. If length is 0 or a negative number, an empty string is returned.</returns>
-        [Template("{this}.substr({start})")]
+        [Template("{str}.substr({start})")]
         public static extern string Substr(this string str, int start);
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace Bridge.Html5
         /// <param name="start">Location at which to begin extracting characters. If a negative number is given, it is treated as strLength + start where strLength is the length of the string (for example, if start is -3 it is treated as strLength - 3.)</param>
         /// <param name="length">The number of characters to extract.</param>
         /// <returns>A new string containing the extracted section of the given string. If length is 0 or a negative number, an empty string is returned.</returns>
-        [Template("{this}.substr({start}, {length})")]
+        [Template("{str}.substr({start}, {length})")]
         public static extern string Substr(this string str, int start, int length);
 
         /// <summary>
@@ -263,7 +263,7 @@ namespace Bridge.Html5
         /// <param name="str">A string instance</param>
         /// <param name="indexStart">An integer between 0 and the length of the string, specifying the offset into the string of the first character to include in the returned substring.</param>
         /// <returns>A new string containing the extracted section of the given string.</returns>
-        [Template("{this}.substring({indexStart})")]
+        [Template("{str}.substring({indexStart})")]
         public static extern string Substring(this string str, int indexStart);
 
         /// <summary>
@@ -273,7 +273,7 @@ namespace Bridge.Html5
         /// <param name="indexStart">An integer between 0 and the length of the string, specifying the offset into the string of the first character to include in the returned substring.</param>
         /// <param name="indexEnd">An integer between 0 and the length of the string, which specifies the offset into the string of the first character not to include in the returned substring.</param>
         /// <returns>A new string containing the extracted section of the given string.</returns>
-        [Template("{this}.substring({indexStart}, {indexEnd})")]
+        [Template("{str}.substring({indexStart}, {indexEnd})")]
         public static extern string Substring(this string str, int indexStart, int indexEnd);
     }
 }
