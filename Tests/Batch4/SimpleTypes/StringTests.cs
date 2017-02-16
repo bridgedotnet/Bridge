@@ -103,25 +103,25 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         }
 
         // Not C# API #2392
-        //[Test]
-        //public void CharAtWorks()
-        //{
-        //    Assert.AreEqual("c", "abcd".CharAt(2));
-        //}
-
-        // Not C# API
-        //[Test]
-        //public void JsCharAtWorks()
-        //{
-        //    Assert.AreEqual("abcd".JsCharAt(2), "c");
-        //}
+        [Test]
+        public void CharAtWorks()
+        {
+            Assert.AreEqual("c", "abcd".CharAt(2));
+        }
 
         // Not C# API #2392
-        //[Test]
-        //public void CharCodeAtWorks()
-        //{
-        //    Assert.AreEqual((int)'c', (int)"abcd".CharCodeAt(2));
-        //}
+        [Test]
+        public void JsCharAtWorks()
+        {
+            Assert.AreEqual("abcd".CharAt(2), "c");
+        }
+
+        // Not C# API #2392
+        [Test]
+        public void CharCodeAtWorks()
+        {
+            Assert.AreEqual((int)'c', "abcd".CharCodeAt(2));
+        }
 
         [Test]
         public void CompareToWithIgnoreCaseArgWorks()
@@ -318,10 +318,10 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         [Test]
         public void FromCharCodeWorks()
         {
-            Assert.AreEqual("", string.FromCharCode());
-            Assert.AreEqual("a", string.FromCharCode('a'));
-            Assert.AreEqual("ab", string.FromCharCode('a', 'b'));
-            Assert.AreEqual("abc", string.FromCharCode('a', 'b', 'c'));
+            Assert.AreEqual("", StringPrototype.FromCharCode());
+            Assert.AreEqual("a", StringPrototype.FromCharCode('a'));
+            Assert.AreEqual("ab", StringPrototype.FromCharCode('a', 'b'));
+            Assert.AreEqual("abc", StringPrototype.FromCharCode('a', 'b', 'c'));
         }
 
         // Not C# API
@@ -501,13 +501,13 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         }
 
         // Not C# API #2392
-        //[Test]
-        //public void LocaleCompareWorks()
-        //{
-        //    Assert.True("abcd".LocaleCompare("abcd") == 0);
-        //    Assert.True("abcd".LocaleCompare("abcb") > 0);
-        //    Assert.True("abcd".LocaleCompare("abce") < 0);
-        //}
+        [Test]
+        public void LocaleCompareWorks()
+        {
+            Assert.True("abcd".LocaleCompare("abcd") == 0);
+            Assert.True("abcd".LocaleCompare("abcb") > 0);
+            Assert.True("abcd".LocaleCompare("abce") < 0);
+        }
 
         // Not C# API
         //[Test]
@@ -604,11 +604,11 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         //}
 
         // Not C# API #2392
-        //[Test]
-        //public void SplitWithStringWorks()
-        //{
-        //    Assert.AreEqual(new[] { "a", "ca", "ca", "c" }, "abcabcabc".Split("b"));
-        //}
+        [Test]
+        public void SplitWithStringWorks()
+        {
+            Assert.AreEqual(new[] { "a", "ca", "ca", "c" }, "abcabcabc".Split("b"));
+        }
 
         [Test]
         public void SplitWithCharWorks()
