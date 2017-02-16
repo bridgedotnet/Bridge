@@ -402,7 +402,8 @@ namespace System
                         p = true;
                         input = input.Substring(1, input.Length - 2);
                     }
-                } else
+                }
+                else
                 {
                     p = true;
                 }
@@ -448,12 +449,15 @@ namespace System
                 case "n":
                 case "N":
                     return Guid.Replace.Replace(s, "");
+
                 case "b":
                 case "B":
                     return '{' + s + '}';
+
                 case "p":
                 case "P":
                     return '(' + s + ')';
+
                 default:
                     return s;
             }
