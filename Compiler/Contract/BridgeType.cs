@@ -962,7 +962,7 @@ namespace Bridge.Contract
                 name += Helpers.PrefixDollar(type.TypeArguments.Count);
             }
 
-            if (!asDefinition && type.TypeArguments.Count > 0 && !Helpers.IsIgnoreGeneric(type, emitter))
+            if (!asDefinition && type.TypeArguments.Count > 0 && !Helpers.IsIgnoreGeneric(type, emitter, true))
             {
                 StringBuilder sb = new StringBuilder(name);
                 bool needComma = false;

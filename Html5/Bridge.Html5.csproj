@@ -55,6 +55,7 @@
     <Compile Include="ClientRect.cs" />
     <Compile Include="ClientRectList.cs" />
     <Compile Include="CompatMode.cs" />
+    <Compile Include="Date.cs" />
     <Compile Include="DOMParser.cs" />
     <Compile Include="DragDrop\DataTransferItem.cs" />
     <Compile Include="DragDrop\DropEffect.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Events\MessageEvent.cs" />
     <Compile Include="Events\CloseEvent.cs" />
     <Compile Include="Events\TouchEvent.cs" />
+    <Compile Include="Function.cs" />
     <Compile Include="Gamepad.cs" />
     <Compile Include="GamepadButton.cs" />
     <Compile Include="GamepadMappingType.cs" />

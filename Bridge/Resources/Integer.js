@@ -26,13 +26,13 @@
                     },
                     equals: function (v1, v2) {
                         if (Bridge.is(v1, type) && Bridge.is(v2, type)) {
-                            return Bridge.unbox(v1) === Bridge.unbox(v2);
+                            return Bridge.unbox(v1, true) === Bridge.unbox(v2, true);
                         }
 
                         return false;
                     },
                     equalsT: function (v1, v2) {
-                        return Bridge.unbox(v1) === Bridge.unbox(v2);
+                        return Bridge.unbox(v1, true) === Bridge.unbox(v2, true);
                     }
                 }
             });

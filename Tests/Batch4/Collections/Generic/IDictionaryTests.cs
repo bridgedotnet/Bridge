@@ -122,7 +122,7 @@ namespace Bridge.ClientTest.Batch4.Collections.Generic
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            Assert.AreEqual("System.Collections.Generic.IDictionary$2[[System.Object, mscorlib],[System.Object, mscorlib]]", typeof(IDictionary<object, object>).FullName, "FullName should be correct");
+            Assert.AreEqual("System.Collections.Generic.IDictionary`2[[System.Object, mscorlib],[System.Object, mscorlib]]", typeof(IDictionary<object, object>).FullName, "FullName should be correct");
             Assert.True(typeof(IDictionary<object, object>).IsInterface, "IsInterface should be true");
 
             var interfaces = typeof(IDictionary<object, object>).GetInterfaces();

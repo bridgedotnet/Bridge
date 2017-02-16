@@ -107,9 +107,9 @@ Bridge.define("System.String", {
             if (formatStr && value.$boxed && value.type.$kind === "enum") {
                 value = System.Enum.format(value.type, value.v, formatStr);
             } else if (formatStr && value.$boxed && value.type.format) {
-                value = value.type.format(Bridge.unbox(value), formatStr, provider);
+                value = value.type.format(Bridge.unbox(value, true), formatStr, provider);
             } else if (formatStr && Bridge.is(value, System.IFormattable)) {
-                value = Bridge.format(Bridge.unbox(value), formatStr, provider);
+                value = Bridge.format(Bridge.unbox(value, true), formatStr, provider);
             } if (Bridge.isNumber(value)) {
                 value = Bridge.Int.format(value, formatStr, provider);
             } else if (Bridge.isDate(value)) {

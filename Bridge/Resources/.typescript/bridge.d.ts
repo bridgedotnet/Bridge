@@ -3,7 +3,7 @@ declare module Bridge {
     export function global<T>(): T;
     export function emptyFn(): Function;
     export function box<T>(v: T, type: { prototype: T }): { v: T, type: { prototype: T } };
-    export function unbox(obj:any): any;
+    export function unbox(obj:any, noclone?: boolean): any;
     export function property(scope: any, name: string, defaultValue: any): void;
     export function event(scope: any, name: string, defaultValue: any): void;
     export function copy<T>(to: T, from: T, keys: string[], toIf?: boolean): T;
@@ -776,10 +776,17 @@ declare module System {
                 isCanceled(): boolean;
                 isCompleted(): boolean;
                 isFaulted(): boolean;
-                getResult<T>(): T;
                 setCanceled(): void;
-                setResult(result: any): void;
                 setError(error: Exception): void;
+            }
+
+            export class Task$1<TResult> extends Task {
+                constructor(action: () => TResult);
+                constructor(action: (fn: any) => TResult, state: any);
+                getResult(): TResult;
+                continueWith(continuationAction: (arg: Task$1<TResult>) => void): Task;
+                continueWith<TNewResult>(continuationAction: (arg: Task$1<TResult>) => TNewResult): Task$1<TNewResult>;
+                setResult(result: TResult): void;
             }
         }
     }

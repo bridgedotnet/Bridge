@@ -298,7 +298,7 @@ namespace Bridge.Translator
                     if (parent_rr != null)
                     {
                         var memberDeclaringTypeDefinition = parent_rr.Member.DeclaringTypeDefinition;
-                        isArgument = (block.Emitter.Validator.IsExternalType(memberDeclaringTypeDefinition) || block.Emitter.Validator.IsExternalType(parent_rr.Member)) 
+                        isArgument = (block.Emitter.Validator.IsExternalType(memberDeclaringTypeDefinition) || block.Emitter.Validator.IsExternalType(parent_rr.Member))
                                      && !(memberDeclaringTypeDefinition.Namespace == CS.NS.System || memberDeclaringTypeDefinition.Namespace.StartsWith(CS.NS.System + "."));
 
                         var attr = parent_rr.Member.Attributes.FirstOrDefault(a => a.AttributeType.FullName == "Bridge.UnboxAttribute");
@@ -331,37 +331,51 @@ namespace Bridge.Translator
 
                 bool needBox = ConversionBlock.IsBoxable(rr.Type)
                     || rr.Type.IsKnownType(KnownTypeCode.NullableOfT) && ConversionBlock.IsBoxable(NullableType.GetUnderlyingType(rr.Type));
+                var nullable = rr.Type.IsKnownType(KnownTypeCode.NullableOfT);
 
-                if (conversion.IsBoxingConversion && needBox && !isArgument && !isStringConcat)
+                if (conversion.IsBoxingConversion && !isStringConcat)
                 {
-                    block.Write(JS.Types.Bridge.BOX);
-                    block.WriteOpenParentheses();
-                    block.AfterOutput2 += ", " + ConversionBlock.GetBoxedType(rr.Type, block.Emitter);
-
-                    var inlineMethod = ConversionBlock.GetInlineMethod(block.Emitter, "ToString",
-                        block.Emitter.Resolver.Compilation.FindType(KnownTypeCode.String), rr, expression);
-
-                    if (inlineMethod != null)
+                    if (needBox && !isArgument)
                     {
-                        block.AfterOutput2 += ", " + inlineMethod ;
+                        block.Write(JS.Types.Bridge.BOX);
+                        block.WriteOpenParentheses();
+                        block.AfterOutput2 += ", " + ConversionBlock.GetBoxedType(rr.Type, block.Emitter);
+
+                        var inlineMethod = ConversionBlock.GetInlineMethod(block.Emitter, "ToString",
+                            block.Emitter.Resolver.Compilation.FindType(KnownTypeCode.String), rr, expression);
+
+                        if (inlineMethod != null)
+                        {
+                            block.AfterOutput2 += ", " + inlineMethod;
+                        }
+
+                        inlineMethod = ConversionBlock.GetInlineMethod(block.Emitter, "GetHashCode",
+                            block.Emitter.Resolver.Compilation.FindType(KnownTypeCode.String), rr, expression);
+
+                        if (inlineMethod != null)
+                        {
+                            block.AfterOutput2 += ", " + inlineMethod;
+                        }
+
+                        block.AfterOutput2 += ")";
+
+                        if (rr.Type.Kind == TypeKind.TypeParameter)
+                        {
+                            block.Emitter.ForbidLifting = true;
+                        }
                     }
-
-                    inlineMethod = ConversionBlock.GetInlineMethod(block.Emitter, "GetHashCode",
-                        block.Emitter.Resolver.Compilation.FindType(KnownTypeCode.String), rr, expression);
-
-                    if (inlineMethod != null)
+                    else  if(!Helpers.IsImmutableStruct(block.Emitter, NullableType.GetUnderlyingType(rr.Type)))
                     {
-                        block.AfterOutput2 += ", " + inlineMethod;
+                        if (nullable)
+                        {
+                            block.Write(JS.Types.SYSTEM_NULLABLE + "." + JS.Funcs.Math.LIFT1 + "(\"" + JS.Funcs.CLONE + "\", ");
+                            block.AfterOutput2 += ")";
+                        }
+                        else
+                        {
+                            block.AfterOutput2 += "." + JS.Funcs.CLONE + "()";
+                        }
                     }
-
-                    block.AfterOutput2 +=")";
-
-                    if (rr.Type.Kind == TypeKind.TypeParameter)
-                    {
-                        block.Emitter.ForbidLifting = true;
-                    }
-
-                    //return level;
                 }
 
                 if (conversion.IsUnboxingConversion || isArgument && expectedType.IsKnownType(KnownTypeCode.Object) && (rr.Type.IsKnownType(KnownTypeCode.Object) || ConversionBlock.IsUnpackGenericInterfaceObject(rr.Type) || ConversionBlock.IsUnpackGenericArrayInterfaceObject(rr.Type)))
@@ -369,7 +383,18 @@ namespace Bridge.Translator
                     block.Write(JS.Types.Bridge.UNBOX);
                     block.WriteOpenParentheses();
                     block.AfterOutput2 += ")";
-                    //return level;
+                }
+                else if (conversion.IsUnboxingConversion && !Helpers.IsImmutableStruct(block.Emitter, NullableType.GetUnderlyingType(rr.Type)))
+                {
+                    if (nullable)
+                    {
+                        block.Write(JS.Types.SYSTEM_NULLABLE + "." + JS.Funcs.Math.LIFT1 + "(\"" + JS.Funcs.CLONE + "\", ");
+                        block.AfterOutput2 += ")";
+                    }
+                    else
+                    {
+                        block.AfterOutput2 += "." + JS.Funcs.CLONE + "()";
+                    }
                 }
             }
 
@@ -533,7 +558,7 @@ namespace Bridge.Translator
             return level;
         }
 
-        private static bool IsBoxable(IType type)
+        public static bool IsBoxable(IType type)
         {
             return type.Kind == TypeKind.Enum
                    || type.IsKnownType(KnownTypeCode.Enum)

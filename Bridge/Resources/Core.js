@@ -24,6 +24,10 @@
                 return v;
             }
 
+            if (v.$clone) {
+                v = v.$clone();
+            }
+
             return {
                 $boxed: true,
                 fn: {
@@ -52,18 +56,39 @@
             };
         },
 
-        unbox: function (o) {
+        unbox: function (o, noclone) {
             if (o && o.$boxed) {
-                return o.v;
+                var v = o.v;
+                if (!noclone && v && v.$clone) {
+                    v = v.$clone();
+                }
+
+                return v;
             }
 
             if (Bridge.isArray(o)) {
                 var arr = [];
                 for (var i = 0; i < o.length; i++) {
                     var item = o[i];
-                    arr[i] = (item && item.$boxed) ? item.v : item;
+
+                    if (item && item.$boxed) {
+                        item = item.v;
+
+                        if (item.$clone) {
+                            item = item.$clone();
+                        }
+                    }
+                    else if (!noclone && item && item.$clone) {
+                        item = item.$clone();
+                    }
+
+                    arr[i] = item;
                 }
                 o = arr;
+            }
+
+            if (o && !noclone && o.$clone) {
+                o = o.$clone();
             }
 
             return o;
@@ -319,6 +344,10 @@
         },
 
         clone: function (obj) {
+            if (obj == null) {
+                return obj;
+            }
+
             if (Bridge.isArray(obj)) {
                 return System.Array.clone(obj);
             }
@@ -335,6 +364,10 @@
 
             if (Bridge.is(obj, System.ICloneable)) {
                 return obj.clone();
+            }
+
+            if (Bridge.isFunction(obj.$clone)) {
+                return obj.$clone();
             }
 
             return null;
@@ -464,10 +497,10 @@
             //     for reference types it returns random value
 
             if (value && value.$boxed && value.type.getHashCode) {
-                return value.type.getHashCode(Bridge.unbox(value));
+                return value.type.getHashCode(Bridge.unbox(value, true));
             }
 
-            value = Bridge.unbox(value);
+            value = Bridge.unbox(value, true);
 
             if (Bridge.isEmpty(value, true)) {
                 if (safe) {
@@ -588,7 +621,7 @@
         },
 
         hasValue: function (obj) {
-            return Bridge.unbox(obj) != null;
+            return Bridge.unbox(obj, true) != null;
         },
 
         hasValue$1: function () {
@@ -599,7 +632,7 @@
             var i = 0;
 
             for (i; i < arguments.length; i++) {
-                if (Bridge.unbox(arguments[i]) == null) {
+                if (Bridge.unbox(arguments[i], true) == null) {
                     return false;
                 }
             }
@@ -629,14 +662,14 @@
                 }
 
                 if (ignoreFn !== true && type.$is) {
-                    return type.$is(Bridge.unbox(obj));
+                    return type.$is(Bridge.unbox(obj, true));
                 }
 
                 if (Bridge.Reflection.isAssignableFrom(type, obj.type)) {
                     return true;
                 }
 
-                obj = Bridge.unbox(obj);
+                obj = Bridge.unbox(obj, true);
             }
 
             var ctor = obj.constructor;
@@ -1130,11 +1163,11 @@
 
         compare: function (a, b, safe, T) {
             if (a && a.$boxed) {
-                a = Bridge.unbox(a);
+                a = Bridge.unbox(a, true);
             }
 
             if (b && b.$boxed) {
-                b = Bridge.unbox(b);
+                b = Bridge.unbox(b, true);
             }
 
             if (!Bridge.isDefined(a, true)) {
@@ -1221,9 +1254,9 @@
                 if (obj.type.$kind === "enum") {
                     return System.Enum.format(obj.type, obj.v, formatString);
                 } else if (obj.type === System.Char) {
-                    return System.Char.format(Bridge.unbox(obj), formatString, provider);
+                    return System.Char.format(Bridge.unbox(obj, true), formatString, provider);
                 } else if (obj.type.format) {
-                    return obj.type.format(Bridge.unbox(obj), formatString, provider);
+                    return obj.type.format(Bridge.unbox(obj, true), formatString, provider);
                 }
             }
 

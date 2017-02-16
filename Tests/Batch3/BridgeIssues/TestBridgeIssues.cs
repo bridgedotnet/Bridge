@@ -643,13 +643,13 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             {
                 Name = "B"
             });
-            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge306B.Props:B", b, "Bridge306B.New() works");
+            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge306B+Props:B", b, "Bridge306B.New() works");
 
             var a = Bridge306A.New(new Bridge306A.Props()
             {
                 Name = "A"
             });
-            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge306A.Props:A", a, "Bridge306A.New() works");
+            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge306A+Props:A", a, "Bridge306A.New() works");
         }
 
         [Test(Name = "#329", ExpectedCount = 5)]
@@ -1198,7 +1198,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             List<int> magic = new List<int>() { 0, 1, 2, 3, 4 };
             List<int> epic = magic.GetRange(0, 3);
-            Assert.AreEqual("System.Collections.Generic.List$1[[System.Int32, mscorlib]]", epic.GetType().FullName, "epic.GetType().FullName");
+            Assert.AreEqual("System.Collections.Generic.List`1[[System.Int32, mscorlib]]", epic.GetType().FullName, "epic.GetType().FullName");
         }
 
         // Bridge[#439]

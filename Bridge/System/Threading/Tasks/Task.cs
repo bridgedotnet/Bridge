@@ -92,8 +92,7 @@ namespace System.Threading.Tasks
     }
 
     [External]
-    [IgnoreGeneric]
-    [Name("System.Threading.Tasks.Task")]
+    [IgnoreGeneric(AllowInTypeScript = true)]
     public class Task<TResult> : Task
     {
         public extern Task(Func<TResult> function);
@@ -108,6 +107,7 @@ namespace System.Threading.Tasks
 
         public extern Task ContinueWith(Action<Task<TResult>> continuationAction);
 
+        [IgnoreGeneric]
         public extern Task<TNewResult> ContinueWith<TNewResult>(Func<Task<TResult>, TNewResult> continuationFunction);
 
         public new extern TaskAwaiter<TResult> GetAwaiter();

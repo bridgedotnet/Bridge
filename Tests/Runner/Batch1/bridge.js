@@ -39,6 +39,10 @@
                 return v;
             }
 
+            if (v.$clone) {
+                v = v.$clone();
+            }
+
             return {
                 $boxed: true,
                 fn: {
@@ -67,18 +71,39 @@
             };
         },
 
-        unbox: function (o) {
+        unbox: function (o, noclone) {
             if (o && o.$boxed) {
-                return o.v;
+                var v = o.v;
+                if (!noclone && v && v.$clone) {
+                    v = v.$clone();
+                }
+
+                return v;
             }
 
             if (Bridge.isArray(o)) {
                 var arr = [];
                 for (var i = 0; i < o.length; i++) {
                     var item = o[i];
-                    arr[i] = (item && item.$boxed) ? item.v : item;
+
+                    if (item && item.$boxed) {
+                        item = item.v;
+
+                        if (item.$clone) {
+                            item = item.$clone();
+                        }
+                    }
+                    else if (!noclone && item && item.$clone) {
+                        item = item.$clone();
+                    }
+
+                    arr[i] = item;
                 }
                 o = arr;
+            }
+
+            if (o && !noclone && o.$clone) {
+                o = o.$clone();
             }
 
             return o;
@@ -334,6 +359,10 @@
         },
 
         clone: function (obj) {
+            if (obj == null) {
+                return obj;
+            }
+
             if (Bridge.isArray(obj)) {
                 return System.Array.clone(obj);
             }
@@ -350,6 +379,10 @@
 
             if (Bridge.is(obj, System.ICloneable)) {
                 return obj.clone();
+            }
+
+            if (Bridge.isFunction(obj.$clone)) {
+                return obj.$clone();
             }
 
             return null;
@@ -479,10 +512,10 @@
             //     for reference types it returns random value
 
             if (value && value.$boxed && value.type.getHashCode) {
-                return value.type.getHashCode(Bridge.unbox(value));
+                return value.type.getHashCode(Bridge.unbox(value, true));
             }
 
-            value = Bridge.unbox(value);
+            value = Bridge.unbox(value, true);
 
             if (Bridge.isEmpty(value, true)) {
                 if (safe) {
@@ -603,7 +636,7 @@
         },
 
         hasValue: function (obj) {
-            return Bridge.unbox(obj) != null;
+            return Bridge.unbox(obj, true) != null;
         },
 
         hasValue$1: function () {
@@ -614,7 +647,7 @@
             var i = 0;
 
             for (i; i < arguments.length; i++) {
-                if (Bridge.unbox(arguments[i]) == null) {
+                if (Bridge.unbox(arguments[i], true) == null) {
                     return false;
                 }
             }
@@ -644,14 +677,14 @@
                 }
 
                 if (ignoreFn !== true && type.$is) {
-                    return type.$is(Bridge.unbox(obj));
+                    return type.$is(Bridge.unbox(obj, true));
                 }
 
                 if (Bridge.Reflection.isAssignableFrom(type, obj.type)) {
                     return true;
                 }
 
-                obj = Bridge.unbox(obj);
+                obj = Bridge.unbox(obj, true);
             }
 
             var ctor = obj.constructor;
@@ -1145,11 +1178,11 @@
 
         compare: function (a, b, safe, T) {
             if (a && a.$boxed) {
-                a = Bridge.unbox(a);
+                a = Bridge.unbox(a, true);
             }
 
             if (b && b.$boxed) {
-                b = Bridge.unbox(b);
+                b = Bridge.unbox(b, true);
             }
 
             if (!Bridge.isDefined(a, true)) {
@@ -1236,9 +1269,9 @@
                 if (obj.type.$kind === "enum") {
                     return System.Enum.format(obj.type, obj.v, formatString);
                 } else if (obj.type === System.Char) {
-                    return System.Char.format(Bridge.unbox(obj), formatString, provider);
+                    return System.Char.format(Bridge.unbox(obj, true), formatString, provider);
                 } else if (obj.type.format) {
-                    return obj.type.format(Bridge.unbox(obj), formatString, provider);
+                    return obj.type.format(Bridge.unbox(obj, true), formatString, provider);
                 }
             }
 
@@ -1783,7 +1816,7 @@
                 enumType = value.type;
             }
 
-            value = Bridge.unbox(value);
+            value = Bridge.unbox(value, true);
 
             if (enumType === Number) {
                 return value.toString();
@@ -1847,7 +1880,7 @@
                 throw new System.ArgumentNullException(name);
             }
 
-            value = Bridge.unbox(value);
+            value = Bridge.unbox(value, true);
 
             switch (format) {
                 case "G":
@@ -1887,7 +1920,7 @@
         },
 
         getName: function (enumType, value) {
-            value = Bridge.unbox(value);
+            value = Bridge.unbox(value, true);
 
             if (value == null) {
                 throw new System.ArgumentNullException("value");
@@ -1914,7 +1947,7 @@
         },
 
         isDefined: function (enumType, value) {
-            value = Bridge.unbox(value);
+            value = Bridge.unbox(value, true);
 
             System.Enum.checkEnumType(enumType);
 
@@ -1932,7 +1965,7 @@
 
         tryParse: function (enumType, value, result, ignoreCase) {
             result.v = 0;
-            result.v = Bridge.unbox(enumMethods.parse(enumType, value, ignoreCase, true));
+            result.v = Bridge.unbox(enumMethods.parse(enumType, value, ignoreCase, true), true);
 
             if (result.v == null) {
                 return false;
@@ -1948,11 +1981,11 @@
                 }
             }
 
-            return Bridge.unbox(v1) === Bridge.unbox(v2);
+            return Bridge.unbox(v1, true) === Bridge.unbox(v2, true);
         },
 
         equalsT: function (v1, v2) {
-            return Bridge.unbox(v1) === Bridge.unbox(v2);
+            return Bridge.unbox(v1, true) === Bridge.unbox(v2, true);
         }
     };
 
@@ -3107,11 +3140,24 @@
             var str;
 
             if (obj.$$fullname) {
-                return obj.$$fullname;
+                str = obj.$$fullname;
+            } else if (obj.$$name) {
+                str = obj.$$name;
             }
 
-            if (obj.$$name) {
-                return obj.$$name;
+            if (str) {
+                var ns = Bridge.Reflection.getTypeNamespace(obj, str);
+
+                if (ns) {
+                    var idx = str.indexOf("[");
+                    var name = str.substring(ns.length + 1, idx === -1 ? str.length : idx);
+
+                    if (new RegExp(/[\.\$]/).test(name)) {
+                        str = ns + "." + name.replace(/\.|\$/g, function (match) { return (match === ".") ? "+" : "`"; }) + (idx === -1 ? "" : str.substring(idx));
+                    }
+                }
+
+                return str;
             }
 
             if (obj.constructor === Object) {
@@ -3140,13 +3186,14 @@
         getTypeName: function (type) {
             var fullName = Bridge.Reflection.getTypeFullName(type),
                 bIndex = fullName.indexOf('['),
-                nsIndex = fullName.lastIndexOf('.', bIndex >= 0 ? bIndex : fullName.length);
+                pIndex = fullName.lastIndexOf('+', bIndex >= 0 ? bIndex : fullName.length),
+                nsIndex = pIndex > -1 ? pIndex : fullName.lastIndexOf('.', bIndex >= 0 ? bIndex : fullName.length);
 
             return nsIndex > 0 ? (bIndex >= 0 ? fullName.substring(nsIndex + 1, bIndex) : fullName.substr(nsIndex + 1)) : fullName;
         },
 
-        getTypeNamespace: function (type) {
-            var fullName = Bridge.Reflection.getTypeFullName(type),
+        getTypeNamespace: function (type, name) {
+            var fullName = name || Bridge.Reflection.getTypeFullName(type),
                 bIndex = fullName.indexOf('['),
                 nsIndex = fullName.lastIndexOf('.', bIndex >= 0 ? bIndex : fullName.length),
                 ns = nsIndex > 0 ? fullName.substr(0, nsIndex) : '';
@@ -3172,6 +3219,10 @@
 
         _getAssemblyType: function (asm, name) {
             var noAsm = false;
+
+            if (new RegExp(/[\+\`]/).test(name)) {
+                name = name.replace(/\+|\`/g, function(match) { return match === "+" ? "." : "$"});
+            }
 
             if (!asm) {
                 asm = Bridge.SystemAssembly;
@@ -3852,7 +3903,7 @@
         hasValue: Bridge.hasValue,
 
         getValue: function (obj) {
-            obj = Bridge.unbox(obj);
+            obj = Bridge.unbox(obj, true);
             if (!Bridge.hasValue(obj)) {
                 throw new System.InvalidOperationException("Nullable instance doesn't have a value.");
             }
@@ -4197,14 +4248,14 @@
 
             equals: function (v1, v2) {
                 if (Bridge.is(v1, System.Char) && Bridge.is(v2, System.Char)) {
-                    return Bridge.unbox(v1) === Bridge.unbox(v2);
+                    return Bridge.unbox(v1, true) === Bridge.unbox(v2, true);
                 }
 
                 return false;
             },
 
             equalsT: function (v1, v2) {
-                return Bridge.unbox(v1) === Bridge.unbox(v2);
+                return Bridge.unbox(v1, true) === Bridge.unbox(v2, true);
             },
 
             getHashCode: function(v) {
@@ -5328,13 +5379,13 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                     },
                     equals: function (v1, v2) {
                         if (Bridge.is(v1, type) && Bridge.is(v2, type)) {
-                            return Bridge.unbox(v1) === Bridge.unbox(v2);
+                            return Bridge.unbox(v1, true) === Bridge.unbox(v2, true);
                         }
 
                         return false;
                     },
                     equalsT: function (v1, v2) {
-                        return Bridge.unbox(v1) === Bridge.unbox(v2);
+                        return Bridge.unbox(v1, true) === Bridge.unbox(v2, true);
                     }
                 }
             });
@@ -6172,18 +6223,18 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
             equals: function (v1, v2) {
                 if (Bridge.is(v1, System.Double) && Bridge.is(v2, System.Double)) {
-                    return Bridge.unbox(v1) === Bridge.unbox(v2);
+                    return Bridge.unbox(v1, true) === Bridge.unbox(v2, true);
                 }
 
                 return false;
             },
 
             equalsT: function (v1, v2) {
-                return Bridge.unbox(v1) === Bridge.unbox(v2);
+                return Bridge.unbox(v1, true) === Bridge.unbox(v2, true);
             },
 
             getHashCode: function (v) {
-                var value = Bridge.unbox(v);
+                var value = Bridge.unbox(v, true);
                 if (value === Number.POSITIVE_INFINITY) {
                     return 0x7FF00000;
                 }
@@ -6224,14 +6275,14 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
             equals: function (v1, v2) {
                 if (Bridge.is(v1, System.Single) && Bridge.is(v2, System.Single)) {
-                    return Bridge.unbox(v1) === Bridge.unbox(v2);
+                    return Bridge.unbox(v1, true) === Bridge.unbox(v2, true);
                 }
 
                 return false;
             },
 
             equalsT: function (v1, v2) {
-                return Bridge.unbox(v1) === Bridge.unbox(v2);
+                return Bridge.unbox(v1, true) === Bridge.unbox(v2, true);
             },
 
             getHashCode: System.Double.getHashCode
@@ -11382,9 +11433,9 @@ Bridge.define("System.String", {
             if (formatStr && value.$boxed && value.type.$kind === "enum") {
                 value = System.Enum.format(value.type, value.v, formatStr);
             } else if (formatStr && value.$boxed && value.type.format) {
-                value = value.type.format(Bridge.unbox(value), formatStr, provider);
+                value = value.type.format(Bridge.unbox(value, true), formatStr, provider);
             } else if (formatStr && Bridge.is(value, System.IFormattable)) {
-                value = Bridge.format(Bridge.unbox(value), formatStr, provider);
+                value = Bridge.format(Bridge.unbox(value, true), formatStr, provider);
             } if (Bridge.isNumber(value)) {
                 value = Bridge.Int.format(value, formatStr, provider);
             } else if (Bridge.isDate(value)) {
@@ -12108,6 +12159,14 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
 
         getAwaitedResult: function () {
             return this._getResult(true);
+        }
+    });
+
+    Bridge.define("System.Threading.Tasks.Task$1", {
+        inherits: [System.Threading.Tasks.Task],
+        ctor: function (action, state) {
+            this.$initialize();
+            System.Threading.Tasks.Task.ctor.call(this, action, state);
         }
     });
 
@@ -13074,7 +13133,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         },
 
         toBoolean: function (value, formatProvider) {
-            value = Bridge.unbox(value);
+            value = Bridge.unbox(value, true);
 
             switch (typeof (value)) {
                 case "boolean":
@@ -13121,7 +13180,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         toChar: function (value, formatProvider, valueTypeCode) {
             var typeCodes = scope.convert.typeCodes;
 
-            value = Bridge.unbox(value);
+            value = Bridge.unbox(value, true);
 
             if (value instanceof System.Decimal) {
                 value = value.toFloat();
@@ -13238,7 +13297,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         toDateTime: function (value, formatProvider) {
             var typeCodes = scope.convert.typeCodes;
 
-            value = Bridge.unbox(value);
+            value = Bridge.unbox(value, true);
 
             switch (typeof (value)) {
                 case "boolean":
@@ -13501,7 +13560,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
 
         toStringInBase: function (value, toBase, typeCode) {
             var typeCodes = scope.convert.typeCodes;
-            value = Bridge.unbox(value);
+            value = Bridge.unbox(value, true);
             if (toBase !== 2 && toBase !== 8 && toBase !== 10 && toBase !== 16) {
                 throw new System.ArgumentException("Invalid Base.");
             }
@@ -13926,7 +13985,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         },
 
         toNumber: function (value, formatProvider, typeCode, valueTypeCode) {
-            value = Bridge.unbox(value);
+            value = Bridge.unbox(value, true);
 
             var typeCodes = scope.convert.typeCodes,
                 type = typeof (value),

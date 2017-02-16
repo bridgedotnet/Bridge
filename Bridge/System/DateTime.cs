@@ -260,12 +260,6 @@ namespace System
         [Template("System.DateTime.gte({a}, {b})")]
         public static extern bool operator >=(DateTime a, DateTime b);
 
-        [Template("new Date({this}.valueOf())")]
-        public static extern explicit operator DateTime(Date dt);
-
-        [Template("new Date({this}.valueOf())")]
-        public static extern explicit operator Date(DateTime dt);
-
         public extern DateTime Date
         {
             [Template("new Date({this}.getFullYear(), {this}.getMonth(), {this}.getDate())")]
