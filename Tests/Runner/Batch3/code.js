@@ -15183,6 +15183,27 @@ Bridge.$N1391Result =                 r;
         $kind: "interface"
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2401", {
+        statics: {
+            testArrayInitializer: function () {
+                var vals1 = System.Array.create(0, [[1, 2], [3, 4]], System.Double, 2, 2);
+                var vals2 = System.Array.create(0, [[1, 2], [3, 4]], System.Double, 2, 2);
+
+                var vals3 = System.Array.init([1, 2], System.Double);
+                var vals4 = System.Array.init([1, 2], System.Double);
+
+                Bridge.Test.NUnit.Assert.areDeepEqual(vals1, vals2);
+                Bridge.Test.NUnit.Assert.areDeepEqual(vals3, vals4);
+                Bridge.Test.NUnit.Assert.true(Bridge.is(vals1, System.Array.type(System.Double, 2)));
+                Bridge.Test.NUnit.Assert.areEqual(2, System.Array.getRank(vals1));
+                Bridge.Test.NUnit.Assert.areEqual(1, vals1.get([0, 0]));
+                Bridge.Test.NUnit.Assert.areEqual(2, vals1.get([0, 1]));
+                Bridge.Test.NUnit.Assert.areEqual(3, vals1.get([1, 0]));
+                Bridge.Test.NUnit.Assert.areEqual(4, vals1.get([1, 1]));
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
