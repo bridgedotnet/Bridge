@@ -56,7 +56,7 @@ namespace Bridge.Translator.Tests
         private void GetPaths(string folder)
         {
             ProjectFileName = "test" + ".csproj";
-            ProjectFolder = FileHelper.GetRelativeToCurrentDirPath(Path.Combine("..", "..", "TestProjects"), folder);
+            ProjectFolder = Helpers.FileHelper.GetRelativeToCurrentDirPath(Path.Combine("..", "..", "TestProjects"), folder);
 
             ProjectFilePath = Path.Combine(ProjectFolder, ProjectFileName);
 
@@ -67,7 +67,7 @@ namespace Bridge.Translator.Tests
         [OneTimeSetUp]
         public void TestFixtureSetUp()
         {
-            var currentFolder = Path.GetDirectoryName(FileHelper.GetExecutingAssemblyPath());
+            var currentFolder = Path.GetDirectoryName(Helpers.FileHelper.GetExecutingAssemblyPath());
 
             Directory.SetCurrentDirectory(currentFolder);
 
@@ -97,7 +97,7 @@ namespace Bridge.Translator.Tests
 #endif
         public void Test(string folder, bool isToTranslate, bool useSpecialFileCompare, string markedContentFiles = null)
         {
-            var logDir = Path.GetDirectoryName(FileHelper.GetExecutingAssemblyPath());
+            var logDir = Path.GetDirectoryName(Helpers.FileHelper.GetExecutingAssemblyPath());
 
             Directory.SetCurrentDirectory(logDir);
 
@@ -116,7 +116,7 @@ namespace Bridge.Translator.Tests
 
             logger.Info("\tOutputFolder " + OutputFolder);
             logger.Info("\tReferenceFolder " + ReferenceFolder);
-            logger.Info("\tExecutingAssemblyPath " + FileHelper.GetExecutingAssemblyPath());
+            logger.Info("\tExecutingAssemblyPath " + Helpers.FileHelper.GetExecutingAssemblyPath());
 
             try
             {
