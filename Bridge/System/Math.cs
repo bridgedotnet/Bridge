@@ -72,8 +72,6 @@ namespace System
 
         public static extern double Random();
 
-        public static extern double Sqrt(int x);
-
         public static extern double Sqrt(double x);
 
         [Template("{d}.ceil()")]
@@ -133,9 +131,6 @@ namespace System
 
         [Template("{x}.pow({y})")]
         public static extern decimal Pow(decimal x, decimal y);
-
-        [Template("{x}.sqrt()")]
-        public static extern decimal Sqrt(decimal x);
 
         public static extern double Pow(double x, double y);
 
