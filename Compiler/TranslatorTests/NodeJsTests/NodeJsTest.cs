@@ -32,20 +32,22 @@ namespace Bridge.Translator.Tests
             var currentDir = Path.GetDirectoryName(Helpers.FileHelper.GetExecutingAssemblyPath());
             Directory.SetCurrentDirectory(currentDir);
 
-            var logger = new Logger(null, true, Contract.LoggerLevel.Warning, false, new FileLoggerWriter(currentDir), new ConsoleLoggerWriter());
-            logger.Warn("NodeJs test");
-            logger.Warn("Current dir:" + currentDir);
+            var logger = new Logger(null, true, Contract.LoggerLevel.Info, false, new FileLoggerWriter(currentDir), new ConsoleLoggerWriter());
+            logger.Info("NodeJS test...");
+            logger.Info("Current dir:" + currentDir);
 
             string nodePath = FindNodeJs(currentDir, logger);
-            logger.Warn("Node path:" + nodePath);
+            logger.Info("Node path:" + nodePath);
 
             CopyBridgeandRunJsFiles(nodePath, logger);
 
             var exitCode = RunNodeJs(nodePath, logger);
 
-            logger.Warn("Exited NodeJS with code:" + exitCode);
+            logger.Info("Exited NodeJS with code:" + exitCode);
 
             Assert.AreEqual(NODEJS_EXPECTED_EXIT_CODE, exitCode);
+
+            logger.Info("NodeJS test complete");
         }
 
         private void CopyBridgeandRunJsFiles(string nodeJsExeFilePath, ILogger logger)
@@ -60,7 +62,7 @@ namespace Bridge.Translator.Tests
                 Helpers.FileHelper.WriteStreamAsFile(bridgeAssembly, bridgeJsFileName);
             }
 
-            logger.Warn("Wrote:" + bridgeJsFileName);
+            logger.Info("Extracted:" + bridgeJsFileName);
 
             var runJsFileName = Path.Combine(folder, NODEJS_RUN_FILE_NAME);
 
@@ -70,7 +72,7 @@ namespace Bridge.Translator.Tests
                 Helpers.FileHelper.WriteStreamAsFile(runJsFileResource, runJsFileName);
             }
 
-            logger.Warn("Wrote:" + runJsFileName);
+            logger.Info("Extracted:" + runJsFileName);
         }
 
         private string FindNodeJs(string currentDir, ILogger logger)
@@ -96,20 +98,50 @@ namespace Bridge.Translator.Tests
             return nodePath;
         }
 
+        private string GetProcessPath(string path)
+        {
+            switch (Environment.OSVersion.Platform)
+            {
+                case PlatformID.Win32NT:
+                    return "\"" + path + "\"";
+                case PlatformID.Unix:
+                case PlatformID.MacOSX:
+                    return "mono";
+                default:
+                    return null;
+            }
+        }
+
+        private string GetProcessArguments(string path)
+        {
+            switch (Environment.OSVersion.Platform)
+            {
+                case PlatformID.Win32NT:
+                    return NODEJS_RUN_FILE_NAME;
+                case PlatformID.Unix:
+                case PlatformID.MacOSX:
+                    return string.Format(" \"{0}\" {1}", path, NODEJS_RUN_FILE_NAME);
+                default:
+                    return null;
+            }
+        }
+
         private int RunNodeJs(string path, ILogger logger)
         {
-            logger.Warn("Running NodeJS");
+            logger.Info("Running NodeJS...");
 
             var info = new ProcessStartInfo()
             {
-                FileName = path,
-                Arguments = NODEJS_RUN_FILE_NAME,
+                FileName = GetProcessPath(path),
+                Arguments = GetProcessArguments(path),
                 WorkingDirectory = Path.GetDirectoryName(path),
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
                 CreateNoWindow = true,
                 WindowStyle = ProcessWindowStyle.Hidden
             };
+
+            logger.Info(string.Format("FileName:{0} Arguments:", info.FileName, info.Arguments));
 
             using (var p = Process.Start(info))
             {
@@ -121,12 +153,14 @@ namespace Bridge.Translator.Tests
                     output.AppendLine(p.StandardOutput.ReadLine());
                 }
 
-                logger.Warn("Read NodeJS console output:");
-                logger.Warn(output.ToString());
+                logger.Info("Read NodeJS console output:");
+                logger.Info(output.ToString());
 
-                logger.Warn("Waiting for exiting NodeJS");
+                logger.Info("Waiting for exiting NodeJS...");
 
                 p.WaitForExit();
+
+                logger.Info("Exited.");
 
                 if (p.ExitCode != NODEJS_EXPECTED_EXIT_CODE)
                 {
