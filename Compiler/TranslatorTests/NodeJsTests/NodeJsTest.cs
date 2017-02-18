@@ -26,7 +26,11 @@ namespace Bridge.Translator.Tests
 
         private const int NODEJS_MAX_CONSOLE_OUTPUT_LENGTH = 500;
 
+#if UNIX
+
+#else
         [Test]
+#endif
         public void NodeJsCanRunBridge()
         {
             var currentDir = Path.GetDirectoryName(Helpers.FileHelper.GetExecutingAssemblyPath());
