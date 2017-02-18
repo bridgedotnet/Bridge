@@ -21,7 +21,7 @@ namespace Bridge.Translator.Tests
         [OneTimeSetUp]
         public void GetTestAssembly()
         {
-            TestAssembly = MonoCecilTypeSystemHelper.GetTestAssemlyDefinition();
+            TestAssembly = MonoCecilAssemblyHelper.GetTestAssemlyDefinition();
         }
 
         [SetUp]

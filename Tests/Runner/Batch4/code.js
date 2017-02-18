@@ -19993,10 +19993,13 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual(4, ("abcd").length);
         },
         charAtWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual("c", ("abcd").charAt(2));
+            Bridge.Test.NUnit.Assert.areEqual("c", "abcd".charAt(2));
+        },
+        jsCharAtWorks: function () {
+            Bridge.Test.NUnit.Assert.areEqual("abcd".charAt(2), "c");
         },
         charCodeAtWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual(99, ("abcd").charCodeAt(2));
+            Bridge.Test.NUnit.Assert.areEqual(99, "abcd".charCodeAt(2));
         },
         compareToWithIgnoreCaseArgWorks: function () {
             Bridge.Test.NUnit.Assert.true(System.String.compare(("abcd"), "abcd") === 0);
@@ -20030,25 +20033,25 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.true(System.String.compare(null, null, true) === 0);
         },
         concatWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual("ab", ["a", "b"].join(''));
-            Bridge.Test.NUnit.Assert.areEqual("abc", ["a", "b", "c"].join(''));
-            Bridge.Test.NUnit.Assert.areEqual("abcd", ["a", "b", "c", "d"].join(''));
-            Bridge.Test.NUnit.Assert.areEqual("abcde", ["a", "b", "c", "d", "e"].toString().split(',').join(''));
-            Bridge.Test.NUnit.Assert.areEqual("abcdef", ["a", "b", "c", "d", "e", "f"].toString().split(',').join(''));
-            Bridge.Test.NUnit.Assert.areEqual("abcdefg", ["a", "b", "c", "d", "e", "f", "g"].toString().split(',').join(''));
-            Bridge.Test.NUnit.Assert.areEqual("abcdefgh", ["a", "b", "c", "d", "e", "f", "g", "h"].toString().split(',').join(''));
-            Bridge.Test.NUnit.Assert.areEqual("abcdefghi", ["a", "b", "c", "d", "e", "f", "g", "h", "i"].toString().split(',').join(''));
+            Bridge.Test.NUnit.Assert.areEqual("ab", System.String.concat("a", "b"));
+            Bridge.Test.NUnit.Assert.areEqual("abc", System.String.concat("a", "b", "c"));
+            Bridge.Test.NUnit.Assert.areEqual("abcd", System.String.concat("a", "b", "c", "d"));
+            Bridge.Test.NUnit.Assert.areEqual("abcde", System.String.concat(["a", "b", "c", "d", "e"]));
+            Bridge.Test.NUnit.Assert.areEqual("abcdef", System.String.concat(["a", "b", "c", "d", "e", "f"]));
+            Bridge.Test.NUnit.Assert.areEqual("abcdefg", System.String.concat(["a", "b", "c", "d", "e", "f", "g"]));
+            Bridge.Test.NUnit.Assert.areEqual("abcdefgh", System.String.concat(["a", "b", "c", "d", "e", "f", "g", "h"]));
+            Bridge.Test.NUnit.Assert.areEqual("abcdefghi", System.String.concat(["a", "b", "c", "d", "e", "f", "g", "h", "i"]));
         },
         concatWithObjectsWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual("1", [Bridge.box(1, System.Int32)].join(''));
-            Bridge.Test.NUnit.Assert.areEqual("12", [Bridge.box(1, System.Int32), Bridge.box(2, System.Int32)].join(''));
-            Bridge.Test.NUnit.Assert.areEqual("123", [Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), Bridge.box(3, System.Int32)].join(''));
-            Bridge.Test.NUnit.Assert.areEqual("1234", [Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), Bridge.box(3, System.Int32), Bridge.box(4, System.Int32)].join(''));
-            Bridge.Test.NUnit.Assert.areEqual("12345", [Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), Bridge.box(3, System.Int32), Bridge.box(4, System.Int32), Bridge.box(5, System.Int32)].toString().split(',').join(''));
-            Bridge.Test.NUnit.Assert.areEqual("123456", [Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), Bridge.box(3, System.Int32), Bridge.box(4, System.Int32), Bridge.box(5, System.Int32), Bridge.box(6, System.Int32)].toString().split(',').join(''));
-            Bridge.Test.NUnit.Assert.areEqual("1234567", [Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), Bridge.box(3, System.Int32), Bridge.box(4, System.Int32), Bridge.box(5, System.Int32), Bridge.box(6, System.Int32), Bridge.box(7, System.Int32)].toString().split(',').join(''));
-            Bridge.Test.NUnit.Assert.areEqual("12345678", [Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), Bridge.box(3, System.Int32), Bridge.box(4, System.Int32), Bridge.box(5, System.Int32), Bridge.box(6, System.Int32), Bridge.box(7, System.Int32), Bridge.box(8, System.Int32)].toString().split(',').join(''));
-            Bridge.Test.NUnit.Assert.areEqual("123456789", [Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), Bridge.box(3, System.Int32), Bridge.box(4, System.Int32), Bridge.box(5, System.Int32), Bridge.box(6, System.Int32), Bridge.box(7, System.Int32), Bridge.box(8, System.Int32), Bridge.box(9, System.Int32)].toString().split(',').join(''));
+            Bridge.Test.NUnit.Assert.areEqual("1", System.String.concat(Bridge.box(1, System.Int32)));
+            Bridge.Test.NUnit.Assert.areEqual("12", System.String.concat(Bridge.box(1, System.Int32), Bridge.box(2, System.Int32)));
+            Bridge.Test.NUnit.Assert.areEqual("123", System.String.concat(Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), Bridge.box(3, System.Int32)));
+            Bridge.Test.NUnit.Assert.areEqual("1234", System.String.concat(Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), Bridge.box(3, System.Int32), Bridge.box(4, System.Int32)));
+            Bridge.Test.NUnit.Assert.areEqual("12345", System.String.concat(Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), Bridge.box(3, System.Int32), Bridge.box(4, System.Int32), Bridge.box(5, System.Int32)));
+            Bridge.Test.NUnit.Assert.areEqual("123456", System.String.concat(Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), Bridge.box(3, System.Int32), Bridge.box(4, System.Int32), Bridge.box(5, System.Int32), Bridge.box(6, System.Int32)));
+            Bridge.Test.NUnit.Assert.areEqual("1234567", System.String.concat(Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), Bridge.box(3, System.Int32), Bridge.box(4, System.Int32), Bridge.box(5, System.Int32), Bridge.box(6, System.Int32), Bridge.box(7, System.Int32)));
+            Bridge.Test.NUnit.Assert.areEqual("12345678", System.String.concat(Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), Bridge.box(3, System.Int32), Bridge.box(4, System.Int32), Bridge.box(5, System.Int32), Bridge.box(6, System.Int32), Bridge.box(7, System.Int32), Bridge.box(8, System.Int32)));
+            Bridge.Test.NUnit.Assert.areEqual("123456789", System.String.concat(Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), Bridge.box(3, System.Int32), Bridge.box(4, System.Int32), Bridge.box(5, System.Int32), Bridge.box(6, System.Int32), Bridge.box(7, System.Int32), Bridge.box(8, System.Int32), Bridge.box(9, System.Int32)));
         },
         endsWithStringWorks: function () {
             Bridge.Test.NUnit.Assert.true(System.String.endsWith(("abcd"), "d"));
@@ -20213,9 +20216,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual(-1, System.String.lastIndexOfAny(("abcdabcd"), System.Array.init([98], System.Char), 4, 2));
         },
         localeCompareWorks: function () {
-            Bridge.Test.NUnit.Assert.true(("abcd").localeCompare("abcd") === 0);
-            Bridge.Test.NUnit.Assert.true(("abcd").localeCompare("abcb") > 0);
-            Bridge.Test.NUnit.Assert.true(("abcd").localeCompare("abce") < 0);
+            Bridge.Test.NUnit.Assert.true("abcd".localeCompare("abcd") === 0);
+            Bridge.Test.NUnit.Assert.true("abcd".localeCompare("abcb") > 0);
+            Bridge.Test.NUnit.Assert.true("abcd".localeCompare("abce") < 0);
         },
         padLeftWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual("  abc", System.String.alignString(("abc"), 5));
@@ -20243,29 +20246,26 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual("xbcxbcxbc", System.String.replaceAll(("abcabcabc"), String.fromCharCode(97), String.fromCharCode(120)));
         },
         replaceRegexWithReplaceTextWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual("xxcxxcxxc", ("abcabcabc").replace(new RegExp("a|b", "g"), "x"));
+            Bridge.Test.NUnit.Assert.areEqual("xxcxxcxxc", "abcabcabc".replace(new RegExp("a|b", "g"), "x"));
         },
         replaceRegexWithReplaceCallbackWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual("xycxycxyc", ("abcabcabc").replace(new RegExp("a|b", "g"), $asm.$.Bridge.ClientTest.Batch4.SimpleTypes.StringTests.f1));
+            Bridge.Test.NUnit.Assert.areEqual("xycxycxyc", "abcabcabc".replace(new RegExp("a|b", "g"), $asm.$.Bridge.ClientTest.Batch4.SimpleTypes.StringTests.f1));
         },
         searchWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual(2, ("abcabcabc").search(new RegExp("ca")));
-            Bridge.Test.NUnit.Assert.areEqual(-1, ("abcabcabc").search(new RegExp("x")));
+            Bridge.Test.NUnit.Assert.areEqual(2, "abcabcabc".search(new RegExp("ca")));
+            Bridge.Test.NUnit.Assert.areEqual(-1, "abcabcabc".search(new RegExp("x")));
         },
         splitWithStringWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual(System.Array.init(["a", "ca", "ca", "c"], System.String), ("abcabcabc").split("b"));
+            Bridge.Test.NUnit.Assert.areEqual(System.Array.init(["a", "ca", "ca", "c"], System.String), "abcabcabc".split("b"));
         },
         splitWithCharWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual(System.Array.init(["a", "ca", "ca", "c"], System.String), ("abcabcabc").split(String.fromCharCode(98)));
+            Bridge.Test.NUnit.Assert.areEqual(System.Array.init(["a", "ca", "ca", "c"], System.String), System.String.split(("abcabcabc"), [98].map(function(i) {{ return String.fromCharCode(i); }})));
         },
         splitWithCharsAndLimitWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual(System.Array.init(["a", "cabcabc"], System.String), System.String.split(("abcabcabc"), System.Array.init([98], System.Char).map(function(i) {{ return String.fromCharCode(i); }}), 2));
         },
         splitWithCharsAndStringSplitOptionsAndLimitWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual(System.Array.init(["a", "cabcabc"], System.String), System.String.split(("abxcabcabc"), System.Array.init([98, 120], System.Char).map(function(i) {{ return String.fromCharCode(i); }}), 2, 1));
-        },
-        splitWithRegexWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual(System.Array.init(["a", "ca", "ca", "c"], System.String), ("abcaxcaxc").split(new RegExp("b|x", "g")));
         },
         someNetSplitTests: function () {
             Bridge.Test.NUnit.Assert.areEqual(System.Array.init(["a", "bc", "de"], System.String), System.String.split(("axybcxzde"), System.Array.init(["xy", "xz"], System.String), null, 0));
@@ -20313,10 +20313,10 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.false(System.String.startsWith(("abc"), "bc"));
         },
         substrWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual("cde", ("abcde").substr(2));
+            Bridge.Test.NUnit.Assert.areEqual("cde", "abcde".substr(2));
         },
         substrWithLengthWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual("cd", ("abcde").substr(2, 2));
+            Bridge.Test.NUnit.Assert.areEqual("cd", "abcde".substr(2, 2));
         },
         substringWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual("cde", ("abcde").substr(2));
@@ -20324,8 +20324,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         substringWithLengthWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual("cd", ("abcde").substr(2, 2));
         },
-        jsSubstringWithEndIndexWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual("cd", ("abcde").substring(2, 4));
+        javaScriptSubstringWithEndIndexWorks: function () {
+            Bridge.Test.NUnit.Assert.areEqual("cd", "abcde".substring(2, 4));
         },
         toLowerWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual("abcd", ("ABcd").toLowerCase());
@@ -21462,12 +21462,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     });
 
     Bridge.define("Bridge.ClientTest.Batch4.Text.RegularExpressions.RegexTests", {
-        statics: {
-            escapeWorks: function () {
-                var escaped = Bridge.regexpEscape("[-/\\^$*+?.()|[]{}]");
-                Bridge.Test.NUnit.Assert.areEqual("\\[\\-\\/\\\\\\^\\$\\*\\+\\?\\.\\(\\)\\|\\[\\]\\{\\}\\]", escaped);
-            }
-        },
         typePropertiesAreCorrect: function () {
             var re = new RegExp("");
             Bridge.Test.NUnit.Assert.areEqual("RegExp", Bridge.Reflection.getTypeFullName(RegExp));
