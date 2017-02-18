@@ -120,7 +120,7 @@ namespace Bridge.Translator.Tests
                     return NODEJS_RUN_FILE_NAME;
                 case PlatformID.Unix:
                 case PlatformID.MacOSX:
-                    return string.Format(" \"{0}\" {1}", path, NODEJS_RUN_FILE_NAME);
+                    return string.Format("\"{0}\" {1}", path, NODEJS_RUN_FILE_NAME);
                 default:
                     return null;
             }
@@ -141,7 +141,7 @@ namespace Bridge.Translator.Tests
                 WindowStyle = ProcessWindowStyle.Hidden
             };
 
-            logger.Info(string.Format("FileName:{0} Arguments:", info.FileName, info.Arguments));
+            logger.Info(string.Format("FileName:{0} Arguments:{1}", info.FileName, info.Arguments));
 
             using (var p = Process.Start(info))
             {
@@ -160,7 +160,7 @@ namespace Bridge.Translator.Tests
 
                 p.WaitForExit();
 
-                logger.Info("Exited.");
+                logger.Info("Exited with exic code " + p.ExitCode);
 
                 if (p.ExitCode != NODEJS_EXPECTED_EXIT_CODE)
                 {
