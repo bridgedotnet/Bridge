@@ -98,7 +98,7 @@ namespace Bridge.Translator
                     if (type.Methods.Any(m => !m.IsRuntimeSpecialName && m.Name.Contains(".") && !m.Name.Contains("<")) ||
                         type.Properties.Any(m => !m.IsRuntimeSpecialName && m.Name.Contains(".") && !m.Name.Contains("<")))
                     {
-                        TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_EXPLICIT_IMPLIMENTATION, type);
+                        TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_EXPLICIT_IMPLEMENTATION, type);
                     }
                 }
 

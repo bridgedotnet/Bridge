@@ -175,7 +175,7 @@ namespace Bridge.Translator.Tests
                 {
                     CheckTypeShouldFailTest(
                         TestAssemblyHelper.TestClassNames.Issues.N2276.ShouldFail.INTERFACE_NO_EXPLICIT_IMPLEMENTATION,
-                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_EXPLICIT_IMPLIMENTATION
+                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_EXPLICIT_IMPLEMENTATION
                     );
                 }
 
