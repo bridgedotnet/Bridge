@@ -21,7 +21,7 @@ namespace Bridge.Translator.Tests
         [OneTimeSetUp]
         public void GetTestAssembly()
         {
-            TestAssembly = MonoCecilTypeSystemHelper.GetTestAssemlyDefinition();
+            TestAssembly = MonoCecilAssemblyHelper.GetTestAssemlyDefinition();
         }
 
         [SetUp]
@@ -175,7 +175,7 @@ namespace Bridge.Translator.Tests
                 {
                     CheckTypeShouldFailTest(
                         TestAssemblyHelper.TestClassNames.Issues.N2276.ShouldFail.INTERFACE_NO_EXPLICIT_IMPLEMENTATION,
-                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_EXPLICIT_IMPLIMENTATION
+                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_EXPLICIT_IMPLEMENTATION
                     );
                 }
 
