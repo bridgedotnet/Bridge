@@ -187,11 +187,5 @@ namespace Bridge.Contract
         {
             get; set;
         }
-
-        bool DisabledAnnotatedFunctionNames
-        {
-            get;
-            set;
-        }
     }
  }

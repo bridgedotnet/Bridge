@@ -130,6 +130,58 @@ namespace Bridge.Contract
             return type != null && type.Attributes.Any(a => CheckName(a, ATTRIBUTE_SERIALIZABLE_LONG_NAMES));
         }
 
-        #endregion Field attribute
+        #endregion Serializable attribute
+
+        #region Annotated attribute
+
+        public static readonly string[] ATTRIBUTE_ANNOTATED_FUNCTION_ALL_NAMES =
+            new string[]
+            {
+                CS.Attributes.ANNOTATED_FUNCTION_NAME, GetShortAttributeName(CS.Attributes.ANNOTATED_FUNCTION_NAME)
+            };
+
+        public static readonly string[] ATTRIBUTE_ANNOTATED_FUNCTION_LONG_NAMES =
+            new string[]
+            {
+                CS.Attributes.ANNOTATED_FUNCTION_NAME
+            };
+
+        public static bool HasAnnotatedFunctionAttribute(IMethod method)
+        {
+            return method != null && method.Attributes.Any(a => CheckName(a, ATTRIBUTE_ANNOTATED_FUNCTION_LONG_NAMES));
+        }
+
+        public static string AnnotatedFunctionName(IMember method, string methodName)
+        {
+            var attr = method.Attributes.FirstOrDefault(a => CheckName(a, ATTRIBUTE_ANNOTATED_FUNCTION_LONG_NAMES));
+
+            if (method.DeclaringTypeDefinition != null)
+            {
+                if (attr == null)
+                {
+                    attr = method.DeclaringTypeDefinition.Attributes.FirstOrDefault(a => CheckName(a, ATTRIBUTE_ANNOTATED_FUNCTION_LONG_NAMES));
+                }
+
+                if (attr == null)
+                {
+                    attr = method.DeclaringTypeDefinition.ParentAssembly.AssemblyAttributes.FirstOrDefault(a => CheckName(a, ATTRIBUTE_ANNOTATED_FUNCTION_LONG_NAMES));
+                }
+            }
+
+
+            if (attr != null)
+            {
+                if (attr.PositionalArguments.Count == 0)
+                {
+                    return methodName;
+                }
+
+                return (string)attr.PositionalArguments[0].ConstantValue;
+            }
+
+            return null;
+        }
+
+        #endregion Annotated attribute
     }
 }
