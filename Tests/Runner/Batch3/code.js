@@ -14845,6 +14845,9 @@ Bridge.$N1391Result =                 r;
 
                 Bridge.Test.NUnit.Assert.areEqual(0, System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Array.getItem(list, 0)), System.Int32)));
                 Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
+                    System.Array.setItem(list, 0, {  });
+                });
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
                     System.Array.setItem(list, 0, Bridge.box(false, System.Boolean, $box_.System.Boolean.toString));
                 });
                 Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
@@ -14855,6 +14858,9 @@ Bridge.$N1391Result =                 r;
                 var a = System.Array.init(10, 0, System.Byte);
                 var list = a;
 
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
+                    System.Array.setItem(list, 0, {  });
+                });
                 Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
                     System.Array.setItem(list, 0, Bridge.box(256, System.Int32));
                 });
@@ -14873,6 +14879,16 @@ Bridge.$N1391Result =                 r;
                 System.Array.setItem(list, 0, Bridge.box(1, System.Int32));
                 Bridge.Test.NUnit.Assert.true(Bridge.is(System.Array.getItem(list, 0), System.Int64));
                 Bridge.Test.NUnit.Assert.true(System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Array.getItem(list, 0)), System.Int64)).equals(System.Int64(1)));
+
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
+                    System.Array.setItem(list, 0, {  });
+                });
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
+                    System.Array.setItem(list, 0, Bridge.box(false, System.Boolean, $box_.System.Boolean.toString));
+                });
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
+                    System.Array.setItem(list, 0, "test");
+                });
             },
             testDecimalArrayAsIList: function () {
                 var a = System.Array.init(10, System.Decimal(0.0), System.Decimal);
@@ -14880,13 +14896,23 @@ Bridge.$N1391Result =                 r;
 
                 System.Array.setItem(list, 0, null);
                 Bridge.Test.NUnit.Assert.true(Bridge.is(System.Array.getItem(list, 0), System.Decimal));
-                Bridge.Test.NUnit.Assert.true(System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Array.getItem(list, 0)), System.Decimal)).equalsT(System.Decimal(System.Int64(0))));
+                Bridge.Test.NUnit.Assert.true(System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Array.getItem(list, 0)), System.Decimal)).equalsT(System.Decimal(0.0)));
 
                 System.Array.setItem(list, 0, Bridge.box(1, System.Int32));
                 Bridge.Test.NUnit.Assert.true(Bridge.is(System.Array.getItem(list, 0), System.Decimal));
-                Bridge.Test.NUnit.Assert.true(System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Array.getItem(list, 0)), System.Decimal)).equalsT(System.Decimal(System.Int64(1))));
+                Bridge.Test.NUnit.Assert.true(System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Array.getItem(list, 0)), System.Decimal)).equalsT(System.Decimal(1.0)));
+
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
+                    System.Array.setItem(list, 0, {  });
+                });
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
+                    System.Array.setItem(list, 0, Bridge.box(false, System.Boolean, $box_.System.Boolean.toString));
+                });
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
+                    System.Array.setItem(list, 0, "test");
+                });
             },
-            testStructrrayAsIList: function () {
+            testStructArrayAsIList: function () {
                 var a = System.Array.init(10, function (){
                     return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345.Struct1();
                 }, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345.Struct1);
@@ -14895,7 +14921,26 @@ Bridge.$N1391Result =                 r;
 
                 Bridge.Test.NUnit.Assert.notNull(a[0]);
                 Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
+                    System.Array.setItem(list, 0, {  });
+                });
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
                     System.Array.setItem(list, 0, "test");
+                });
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
+                    System.Array.setItem(list, 0, Bridge.box(-1, System.Int32));
+                });
+            },
+            testStringArrayAsIList: function () {
+                var a = System.Array.init(10, null, System.String);
+                var list = a;
+                System.Array.setItem(list, 0, null);
+
+                Bridge.Test.NUnit.Assert.null(a[0]);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
+                    System.Array.setItem(list, 0, {  });
+                });
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
+                    System.Array.setItem(list, 0, Bridge.box(false, System.Boolean, $box_.System.Boolean.toString));
                 });
                 Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
                     System.Array.setItem(list, 0, Bridge.box(-1, System.Int32));

@@ -21,6 +21,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             list[0] = null;
 
             Assert.AreEqual(0, (int)list[0]);
+            Assert.Throws<ArgumentException>(() => list[0] = new object());
             Assert.Throws<ArgumentException>(() => list[0] = false);
             Assert.Throws<ArgumentException>(() => list[0] = 1.5);
         }
@@ -31,6 +32,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             byte[] a = new byte[10];
             IList list = a;
 
+            Assert.Throws<ArgumentException>(() => list[0] = new object());
             Assert.Throws<ArgumentException>(() => list[0] = Byte.MaxValue + 1);
             Assert.Throws<ArgumentException>(() => list[0] = -1);
         }
@@ -48,6 +50,10 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             list[0] = 1;
             Assert.True(list[0] is long);
             Assert.True((long)list[0] == 1L);
+
+            Assert.Throws<ArgumentException>(() => list[0] = new object());
+            Assert.Throws<ArgumentException>(() => list[0] = false);
+            Assert.Throws<ArgumentException>(() => list[0] = "test");
         }
 
         [Test]
@@ -58,22 +64,40 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             list[0] = null;
             Assert.True(list[0] is decimal);
-            Assert.True((decimal)list[0] == 0L);
+            Assert.True((decimal)list[0] == 0m);
 
             list[0] = 1;
             Assert.True(list[0] is decimal);
-            Assert.True((decimal)list[0] == 1L);
+            Assert.True((decimal)list[0] == 1m);
+
+            Assert.Throws<ArgumentException>(() => list[0] = new object());
+            Assert.Throws<ArgumentException>(() => list[0] = false);
+            Assert.Throws<ArgumentException>(() => list[0] = "test");
         }
 
         [Test]
-        public static void TestStructrrayAsIList()
+        public static void TestStructArrayAsIList()
         {
             Struct1[] a = new Struct1[10];
             IList list = a;
             list[0] = null;
 
             Assert.NotNull(a[0]);
+            Assert.Throws<ArgumentException>(() => list[0] = new object());
             Assert.Throws<ArgumentException>(() => list[0] = "test");
+            Assert.Throws<ArgumentException>(() => list[0] = -1);
+        }
+
+        [Test]
+        public static void TestStringArrayAsIList()
+        {
+            string[] a = new string[10];
+            IList list = a;
+            list[0] = null;
+
+            Assert.Null(a[0]);
+            Assert.Throws<ArgumentException>(() => list[0] = new object());
+            Assert.Throws<ArgumentException>(() => list[0] = false);
             Assert.Throws<ArgumentException>(() => list[0] = -1);
         }
     }
