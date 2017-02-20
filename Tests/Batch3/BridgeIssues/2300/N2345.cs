@@ -21,9 +21,14 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             list[0] = null;
 
             Assert.AreEqual(0, (int)list[0]);
-            Assert.Throws<ArgumentException>(() => list[0] = new object());
+            Assert.Throws<InvalidCastException>(() => list[0] = "string");
+            Assert.Throws<InvalidCastException>(() => list[0] = new object());
+            Assert.Throws<InvalidCastException>(() => list[0] = new Struct1());
             Assert.Throws<ArgumentException>(() => list[0] = false);
             Assert.Throws<ArgumentException>(() => list[0] = 1.5);
+
+            list[0] = 1;
+            Assert.AreEqual(1, list[0]);
         }
 
         [Test]
@@ -32,9 +37,14 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             byte[] a = new byte[10];
             IList list = a;
 
-            Assert.Throws<ArgumentException>(() => list[0] = new object());
+            Assert.Throws<InvalidCastException>(() => list[0] = "string");
+            Assert.Throws<InvalidCastException>(() => list[0] = new object());
+            Assert.Throws<InvalidCastException>(() => list[0] = new Struct1());
             Assert.Throws<ArgumentException>(() => list[0] = Byte.MaxValue + 1);
             Assert.Throws<ArgumentException>(() => list[0] = -1);
+
+            list[0] = (byte)1;
+            Assert.AreEqual(1, list[0]);
         }
 
         [Test]
@@ -51,9 +61,10 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.True(list[0] is long);
             Assert.True((long)list[0] == 1L);
 
-            Assert.Throws<ArgumentException>(() => list[0] = new object());
+            Assert.Throws<InvalidCastException>(() => list[0] = "string");
+            Assert.Throws<InvalidCastException>(() => list[0] = new object());
+            Assert.Throws<InvalidCastException>(() => list[0] = new Struct1());
             Assert.Throws<ArgumentException>(() => list[0] = false);
-            Assert.Throws<ArgumentException>(() => list[0] = "test");
         }
 
         [Test]
@@ -66,13 +77,15 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.True(list[0] is decimal);
             Assert.True((decimal)list[0] == 0m);
 
-            list[0] = 1;
+            list[0] = 1m;
             Assert.True(list[0] is decimal);
             Assert.True((decimal)list[0] == 1m);
 
-            Assert.Throws<ArgumentException>(() => list[0] = new object());
-            Assert.Throws<ArgumentException>(() => list[0] = false);
-            Assert.Throws<ArgumentException>(() => list[0] = "test");
+            Assert.Throws<InvalidCastException>(() => list[0] = 1);
+            Assert.Throws<InvalidCastException>(() => list[0] = "string");
+            Assert.Throws<InvalidCastException>(() => list[0] = new object());
+            Assert.Throws<InvalidCastException>(() => list[0] = new Struct1());
+            Assert.Throws<InvalidCastException>(() => list[0] = false);
         }
 
         [Test]
@@ -83,9 +96,13 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             list[0] = null;
 
             Assert.NotNull(a[0]);
-            Assert.Throws<ArgumentException>(() => list[0] = new object());
-            Assert.Throws<ArgumentException>(() => list[0] = "test");
-            Assert.Throws<ArgumentException>(() => list[0] = -1);
+            Assert.Throws<InvalidCastException>(() => list[0] = "string");
+            Assert.Throws<InvalidCastException>(() => list[0] = new object());
+            Assert.Throws<InvalidCastException>(() => list[0] = false);
+            Assert.Throws<InvalidCastException>(() => list[0] = -1);
+
+            list[0] = new Struct1();
+            Assert.True(list[0].Equals(new Struct1()));
         }
 
         [Test]
@@ -96,9 +113,12 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             list[0] = null;
 
             Assert.Null(a[0]);
-            Assert.Throws<ArgumentException>(() => list[0] = new object());
-            Assert.Throws<ArgumentException>(() => list[0] = false);
-            Assert.Throws<ArgumentException>(() => list[0] = -1);
+            Assert.Throws<InvalidCastException>(() => list[0] = new object());
+            Assert.Throws<InvalidCastException>(() => list[0] = new Struct1());
+            Assert.Throws<InvalidCastException>(() => list[0] = false);
+
+            list[0] = "test";
+            Assert.AreEqual("test", list[0]);
         }
     }
 }
