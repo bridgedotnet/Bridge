@@ -3,6 +3,7 @@ using Bridge;
 namespace System.Reflection
 {
     [External]
+    [Unbox(true)]
     public class ConstructorInfo : MethodBase
     {
         [Template("Bridge.Reflection.invokeCI({this}, {arguments:array})")]

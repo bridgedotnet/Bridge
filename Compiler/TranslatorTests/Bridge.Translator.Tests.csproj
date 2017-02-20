@@ -90,12 +90,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Code\Constansts.cs" />
+    <Compile Include="ContractTests\BridgeTypeTests.cs" />
+    <Compile Include="Helpers\EmitterHelper.cs" />
+    <Compile Include="CompilerTests\InlineArgumentsBlockTests.cs" />
+    <Compile Include="CompilerTests\ValidatorTests.cs" />
+    <Compile Include="Helpers\MonoCecilAssemblyHelper.cs" />
+    <Compile Include="Helpers\TestAssemblyHelper.cs" />
+    <Compile Include="Helpers\MonoCecilTypeSystemHelper.cs" />
+    <Compile Include="Helpers\ResourceHelper.cs" />
     <Compile Include="IntegrationTests\Comparence.cs" />
     <Compile Include="IntegrationTests\DiffMatchPatch.cs" />
-    <Compile Include="IntegrationTests\FileHelper.cs" />
+    <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="CompilerTests\EmitBlockTests.cs" />
     <Compile Include="Helpers\TypeSystemHelper.cs" />
     <Compile Include="CompilerTests\MsBuildConditionEvaluatorTests.cs" />
+    <Compile Include="NodeJsTests\NodeJsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\..\.build\common\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
@@ -115,6 +124,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include=".bin\node.cmd" />
     <None Include="packages.config" />
     <None Include="readme.md" />
   </ItemGroup>
@@ -124,6 +134,21 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\TranslatorTestsAssembly\$(OutputPath)Bridge.Translator.Tests.Assembly.dll">
+      <Link>Resources\Bridge.Translator.Tests.Assembly.dll</Link>
+      <LogicalName>Resources.Bridge.Translator.Tests.Assembly.dll</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\Bridge\$(OutputPath)Bridge.dll">
+      <Link>Resources\Bridge.dll</Link>
+      <LogicalName>Resources.Bridge.dll</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\run.js">
+      <LogicalName>Resources.run.js</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir).nuget\NuGet.targets" Condition="Exists('$(SolutionDir).nuget\NuGet.targets')" />

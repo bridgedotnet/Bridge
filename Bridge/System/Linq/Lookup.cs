@@ -14,9 +14,10 @@ namespace System.Linq
             get;
         }
 
+        [AccessorsIndexer]
         EnumerableInstance<TElement> this[TKey key]
         {
-            [Template("get()")]
+            [Template("get({0})")]
             get;
         }
 
@@ -35,8 +36,10 @@ namespace System.Linq
             get;
         }
 
+        [AccessorsIndexer]
         public extern EnumerableInstance<TElement> this[TKey key]
         {
+            [Template("get({0})")]
             get;
         }
 

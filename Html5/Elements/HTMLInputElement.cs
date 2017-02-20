@@ -7,12 +7,10 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLInputElement")]
-    public class HTMLInputElement : HTMLElement<HTMLInputElement>
+    public sealed class HTMLInputElement : HTMLElement<HTMLInputElement>
     {
         [Template("document.createElement('input')")]
-        public HTMLInputElement()
-        {
-        }
+        public extern HTMLInputElement();
 
         /// <summary>
         /// If the value of the type attribute is file, this attribute indicates the types of files that the server accepts; otherwise it is ignored. The value must be a comma-separated list of unique content type specifiers:
@@ -256,41 +254,41 @@ namespace Bridge.Html5
         /// <summary>
         /// Removes focus from input; keystrokes will subsequently go nowhere.
         /// </summary>
-        public new virtual extern void Blur();
+        public new extern void Blur();
 
         /// <summary>
         /// Returns false if the element is a candidate for constraint validation, and it does not satisfy its constraints. In this case, it also fires an invalid event at the element. It returns true if the element is not a candidate for constraint validation, or if it satisfies its constraints.
         /// </summary>
         /// <returns></returns>
-        public virtual extern bool CheckValidity();
+        public extern bool CheckValidity();
 
         /// <summary>
         /// Simulates a click on the element.
         /// </summary>
-        public new virtual extern void Click();
+        public new extern void Click();
 
         /// <summary>
         /// Focus on input; keystrokes will subsequently go to this element.
         /// </summary>
-        public new virtual extern void Focus();
+        public new extern void Focus();
 
         /// <summary>
         /// Selects the input text in the element, and focuses it so the user can subsequently replace the whole entry.
         /// </summary>
-        public virtual extern void Select();
+        public extern void Select();
 
         /// <summary>
         /// Sets a custom validity message for the element. If this message is not the empty string, then the element is suffering from a custom validity error, and does not validate.
         /// </summary>
         /// <param name="error">The custom validity message</param>
-        public virtual extern void SetCustomValidity(string error);
+        public extern void SetCustomValidity(string error);
 
         /// <summary>
         /// Selects a range of text in the element (but does not focus it). The optional selectionDirection parameter may be "forward" or "backward" to establish the direction in which selection was set, or "none" if the direction is unknown or not relevant. The default is "none". Specifying a selectionDirection parameter sets the value of the selectionDirection property.
         /// </summary>
         /// <param name="start"></param>
         /// <param name="end"></param>
-        public virtual extern void SetSelectionRange(int start, int end);
+        public extern void SetSelectionRange(int start, int end);
 
         /// <summary>
         /// Selects a range of text in the element (but does not focus it). The optional selectionDirection parameter may be "forward" or "backward" to establish the direction in which selection was set, or "none" if the direction is unknown or not relevant. The default is "none". Specifying a selectionDirection parameter sets the value of the selectionDirection property.
@@ -298,13 +296,13 @@ namespace Bridge.Html5
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <param name="direction"></param>
-        public virtual extern void SetSelectionRange(int start, int end, string direction);
+        public extern void SetSelectionRange(int start, int end, string direction);
 
         /// <summary>
         /// Replaces a range of text with the new text. Supported input types: text, search, url, tel, password.
         /// </summary>
         /// <param name="replacement"></param>
-        public virtual extern void SetRangeText(string replacement);
+        public extern void SetRangeText(string replacement);
 
         /// <summary>
         /// Replaces a range of text with the new text. Supported input types: text, search, url, tel, password.
@@ -312,7 +310,7 @@ namespace Bridge.Html5
         /// <param name="replacement"></param>
         /// <param name="start"></param>
         /// <param name="end"></param>
-        public virtual extern void SetRangeText(string replacement, int start, int end);
+        public extern void SetRangeText(string replacement, int start, int end);
 
         /// <summary>
         /// Replaces a range of text with the new text. Supported input types: text, search, url, tel, password.
@@ -321,7 +319,7 @@ namespace Bridge.Html5
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <param name="selectMode"></param>
-        public virtual extern void SetRangeText(string replacement, int start, int end, string selectMode);
+        public extern void SetRangeText(string replacement, int start, int end, string selectMode);
 
         /// <summary>
         /// Decrements the value by (step * n), where n defaults to 1 if not specified. Throws an INVALID_STATE_ERR exception:
@@ -330,7 +328,7 @@ namespace Bridge.Html5
         /// if the value cannot be converted to a number.
         /// if the resulting value is above the max or below the min.
         /// </summary>
-        public virtual extern void StepDown();
+        public extern void StepDown();
 
         /// <summary>
         /// Decrements the value by (step * n), where n defaults to 1 if not specified. Throws an INVALID_STATE_ERR exception:
@@ -339,7 +337,7 @@ namespace Bridge.Html5
         /// if the value cannot be converted to a number.
         /// if the resulting value is above the max or below the min.
         /// </summary>
-        public virtual extern void StepDown(int n);
+        public extern void StepDown(int n);
 
         /// <summary>
         /// Increments the value by (step * n), where n defaults to 1 if not specified. Throws an INVALID_STATE_ERR exception:
@@ -348,7 +346,7 @@ namespace Bridge.Html5
         /// if the value cannot be converted to a number.
         /// if the resulting value is above the max or below the min.
         /// </summary>
-        public virtual extern void StepUp();
+        public extern void StepUp();
 
         /// <summary>
         /// Increments the value by (step * n), where n defaults to 1 if not specified. Throws an INVALID_STATE_ERR exception:
@@ -357,7 +355,7 @@ namespace Bridge.Html5
         /// if the value cannot be converted to a number.
         /// if the resulting value is above the max or below the min.
         /// </summary>
-        public virtual extern void StepUp(int n);
+        public extern void StepUp(int n);
     }
 
     /// <summary>

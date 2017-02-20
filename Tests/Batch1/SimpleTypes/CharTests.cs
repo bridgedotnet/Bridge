@@ -25,34 +25,34 @@ namespace Bridge.ClientTest.SimpleTypes
 
             unchecked
             {
-                Assert.AreStrictEqual(65535, (int)(char)i1, "-1 unchecked");
-                Assert.AreStrictEqual(0, (int)(char)i2, "0 unchecked");
-                Assert.AreStrictEqual(234, (int)(char)i3, "234 unchecked");
-                Assert.AreStrictEqual(65535, (int)(char)i4, "65535 unchecked");
-                Assert.AreStrictEqual(0, (int)(char)i5, "65536 unchecked");
+                Assert.AreEqual(65535, (int)(char)i1, "-1 unchecked");
+                Assert.AreEqual(0, (int)(char)i2, "0 unchecked");
+                Assert.AreEqual(234, (int)(char)i3, "234 unchecked");
+                Assert.AreEqual(65535, (int)(char)i4, "65535 unchecked");
+                Assert.AreEqual(0, (int)(char)i5, "65536 unchecked");
 
-                Assert.AreStrictEqual(65535, (int?)(char?)ni1, "nullable -1 unchecked");
-                Assert.AreStrictEqual(0, (int?)(char?)ni2, "nullable 0 unchecked");
-                Assert.AreStrictEqual(234, (int?)(char?)ni3, "nullable 234 unchecked");
-                Assert.AreStrictEqual(65535, (int?)(char?)ni4, "nullable 65535 unchecked");
-                Assert.AreStrictEqual(0, (int?)(char?)ni5, "nullable 65536 unchecked");
-                Assert.AreStrictEqual(null, (int?)(char?)ni6, "null unchecked");
+                Assert.AreEqual(65535, (int?)(char?)ni1, "nullable -1 unchecked");
+                Assert.AreEqual(0, (int?)(char?)ni2, "nullable 0 unchecked");
+                Assert.AreEqual(234, (int?)(char?)ni3, "nullable 234 unchecked");
+                Assert.AreEqual(65535, (int?)(char?)ni4, "nullable 65535 unchecked");
+                Assert.AreEqual(0, (int?)(char?)ni5, "nullable 65536 unchecked");
+                Assert.AreEqual(null, (int?)(char?)ni6, "null unchecked");
             }
 
             checked
             {
-                Assert.Throws(() => { var b = (int)(char)i1; }, err => err is OverflowException);
-                Assert.AreStrictEqual(0, (int?)(char)i2, "0 checked");
-                Assert.AreStrictEqual(234, (int?)(char)i3, "234 checked");
-                Assert.AreStrictEqual(65535, (int?)(char)i4, "65535 checked");
-                Assert.Throws(() => { var b = (int)(char)i5; }, err => err is OverflowException);
+                Assert.Throws<OverflowException>(() => { var b = (int)(char)i1; });
+                Assert.AreEqual(0, (int?)(char)i2, "0 checked");
+                Assert.AreEqual(234, (int?)(char)i3, "234 checked");
+                Assert.AreEqual(65535, (int?)(char)i4, "65535 checked");
+                Assert.Throws<OverflowException>(() => { var b = (int)(char)i5; });
 
-                Assert.Throws(() => { var b = (int?)(char?)ni1; }, err => err is OverflowException);
-                Assert.AreStrictEqual(0, (int?)(char?)ni2, "nullable 0 checked");
-                Assert.AreStrictEqual(234, (int?)(char?)ni3, "nullable 234 checked");
-                Assert.AreStrictEqual(65535, (int?)(char?)ni4, "nullable 65535 checked");
-                Assert.Throws(() => { var b = (int?)(char?)ni5; }, err => err is OverflowException);
-                Assert.AreStrictEqual(null, (int?)(char?)ni6, "null checked");
+                Assert.Throws<OverflowException>(() => { var b = (int?)(char?)ni1; });
+                Assert.AreEqual(0, (int?)(char?)ni2, "nullable 0 checked");
+                Assert.AreEqual(234, (int?)(char?)ni3, "nullable 234 checked");
+                Assert.AreEqual(65535, (int?)(char?)ni4, "nullable 65535 checked");
+                Assert.Throws<OverflowException>(() => { var b = (int?)(char?)ni5; });
+                Assert.AreEqual(null, (int?)(char?)ni6, "null checked");
             }
         }
 
@@ -70,13 +70,13 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void DefaultConstructorReturnsZero()
         {
-            Assert.AreStrictEqual(0, (int)new char());
+            Assert.AreEqual(0, (int)new char());
         }
 
         [Test]
         public void CreatingInstanceReturnsZero()
         {
-            Assert.AreStrictEqual(0, Activator.CreateInstance<char>());
+            Assert.AreEqual(0, Activator.CreateInstance<char>());
         }
 
         [Test]
@@ -102,9 +102,9 @@ namespace Bridge.ClientTest.SimpleTypes
         public void ParseWorks()
         {
             Assert.AreEqual('a', char.Parse("a"), "Parse 1");
-            Assert.Throws(() => char.Parse(null), "Parse 2");
-            Assert.Throws(() => char.Parse(""), "Parse 3");
-            Assert.Throws(() => char.Parse("ab"), "Parse 4");
+            Assert.Throws<ArgumentNullException>(() => char.Parse(null), "Parse 2");
+            Assert.Throws<FormatException>(() => char.Parse(""), "Parse 3");
+            Assert.Throws<FormatException>(() => char.Parse("ab"), "Parse 4");
         }
 
         [Test]
@@ -136,10 +136,17 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void EqualsWorks()
         {
-            Assert.True('0'.Equals((int)'0'));
+            Assert.False('0'.Equals((int)'0'));
             Assert.False('1'.Equals((int)'0'));
             Assert.False('0'.Equals((int)'1'));
-            Assert.True('1'.Equals((int)'1'));
+            Assert.False('1'.Equals((int)'1'));
+
+            object charZero = '0';
+            object charOne = '1';
+            Assert.True('0'.Equals(charZero));
+            Assert.False('1'.Equals(charZero));
+            Assert.False('0'.Equals(charOne));
+            Assert.True('1'.Equals(charOne));
         }
 
         [Test]

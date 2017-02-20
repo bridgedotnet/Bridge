@@ -5,12 +5,10 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLAreaElement")]
-    public class HTMLAreaElement : HTMLElement<HTMLAreaElement>
+    public sealed class HTMLAreaElement : HTMLElement<HTMLAreaElement>
     {
         [Template("document.createElement('area')")]
-        public HTMLAreaElement()
-        {
-        }
+        public extern HTMLAreaElement();
 
         /// <summary>
         /// Is a DOMString that reflects the alt HTML attribute, containing alternative text for the element.

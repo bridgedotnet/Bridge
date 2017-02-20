@@ -1,5 +1,5 @@
 ﻿using Bridge.Test.NUnit;
-using Bridge.Text.RegularExpressions;
+using Bridge.Html5;
 
 namespace Bridge.ClientTest.Text.RegularExpressions.JavaScript
 {
@@ -10,15 +10,15 @@ namespace Bridge.ClientTest.Text.RegularExpressions.JavaScript
         [Test]
         public void TypePropertiesAreCorrect()
         {
-            var re = new Regex("");
-            Assert.AreEqual("RegExp", typeof(Regex).FullName);
-            Assert.True(re is Regex);
+            var re = new RegExp("");
+            Assert.AreEqual("RegExp", typeof(RegExp).FullName);
+            Assert.True(re is RegExp);
         }
 
         [Test]
         public void StringOnlyConstructorWorks()
         {
-            var re = new Regex("test123");
+            var re = new RegExp("test123");
             Assert.AreEqual("test123", re.Source);
             Assert.False(re.Global);
         }
@@ -26,7 +26,7 @@ namespace Bridge.ClientTest.Text.RegularExpressions.JavaScript
         [Test]
         public void ConstructorWithFlagsWorks()
         {
-            var re = new Regex("test123", "g");
+            var re = new RegExp("test123", "g");
             Assert.AreEqual("test123", re.Source);
             Assert.True(re.Global);
         }
@@ -34,40 +34,40 @@ namespace Bridge.ClientTest.Text.RegularExpressions.JavaScript
         [Test]
         public void GlobalFlagWorks()
         {
-            Assert.False(new Regex("x", "").Global);
-            Assert.True(new Regex("x", "g").Global);
+            Assert.False(new RegExp("x", "").Global);
+            Assert.True(new RegExp("x", "g").Global);
         }
 
         [Test]
         public void IgnoreCaseFlagWorks()
         {
-            Assert.False(new Regex("x", "").IgnoreCase);
-            Assert.True(new Regex("x", "i").IgnoreCase);
+            Assert.False(new RegExp("x", "").IgnoreCase);
+            Assert.True(new RegExp("x", "i").IgnoreCase);
         }
 
         [Test]
         public void MultilineFlagWorks()
         {
-            Assert.False(new Regex("x", "").Multiline);
-            Assert.True(new Regex("x", "m").Multiline);
+            Assert.False(new RegExp("x", "").Multiline);
+            Assert.True(new RegExp("x", "m").Multiline);
         }
 
         [Test]
         public void PatternPropertyWorks()
         {
-            Assert.AreEqual("test123", new Regex("test123", "").Pattern);
+            Assert.AreEqual("test123", new RegExp("test123", "").Pattern);
         }
 
         [Test]
         public void SourcePropertyWorks()
         {
-            Assert.AreEqual("test123", new Regex("test123", "").Source);
+            Assert.AreEqual("test123", new RegExp("test123", "").Source);
         }
 
         [Test]
         public void ExecWorks()
         {
-            var re = new Regex("a|b", "g");
+            var re = new RegExp("a|b", "g");
             var m = re.Exec("xaybz");
             //Assert.AreEqual(m.Index, 1);
             Assert.AreEqual(1, m.Length);
@@ -77,7 +77,7 @@ namespace Bridge.ClientTest.Text.RegularExpressions.JavaScript
         [Test]
         public void LastIndexWorks()
         {
-            var re = new Regex("a|b", "g");
+            var re = new RegExp("a|b", "g");
             re.Exec("xaybz");
             Assert.AreEqual(2, re.LastIndex);
         }
@@ -85,15 +85,15 @@ namespace Bridge.ClientTest.Text.RegularExpressions.JavaScript
         [Test]
         public void TestWorks()
         {
-            Assert.True(new Regex("a|b").Test("xaybz"));
-            Assert.False(new Regex("c").Test("xaybz"));
+            Assert.True(new RegExp("a|b").Test("xaybz"));
+            Assert.False(new RegExp("c").Test("xaybz"));
         }
 
-        [Test]
-        public static void EscapeWorks()
-        {
-            var escaped = Regex.Escape(@"[-/\^$*+?.()|[]{}]");
-            Assert.AreEqual(@"\[\-\/\\\^\$\*\+\?\.\(\)\|\[\]\{\}\]", escaped);
-        }
+        //[Test]
+        //public static void EscapeWorks()
+        //{
+        //    var escaped = RegExp.Escape(@"[-/\^$*+?.()|[]{}]");
+        //    Assert.AreEqual(@"\[\-\/\\\^\$\*\+\?\.\(\)\|\[\]\{\}\]", escaped);
+        //}
     }
 }

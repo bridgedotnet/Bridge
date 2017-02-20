@@ -3,7 +3,7 @@ declare module Bridge {
     export function global<T>(): T;
     export function emptyFn(): Function;
     export function box<T>(v: T, type: { prototype: T }): { v: T, type: { prototype: T } };
-    export function unbox(obj:any): any;
+    export function unbox(obj:any, noclone?: boolean): any;
     export function property(scope: any, name: string, defaultValue: any): void;
     export function event(scope: any, name: string, defaultValue: any): void;
     export function copy<T>(to: T, from: T, keys: string[], toIf?: boolean): T;
@@ -67,23 +67,6 @@ declare module Bridge {
     }
 
     var Array: Array;
-
-    export interface String {
-        isNullOrWhiteSpace(value: string): boolean;
-        isNullOrEmpty(value: string): boolean;
-        fromCharCount(c: number, count: number): string;
-        format(str: string, ...args: any[]): string;
-        alignString(str: string, alignment: number, pad: string, dir: number): string;
-        startsWith(str: string, prefix: string): boolean;
-        endsWith(str: string, suffix: string): boolean;
-        contains(str: string, value: string): string;
-        indexOfAny(str: string, anyOf: number[], startIndex?: number, length?: number): number;
-        indexOf(str: string, value: string): number;
-        compare(strA: string, strB: string): number;
-        toCharArray(str: string, startIndex: number, length: number): number[];
-    }
-
-    var String: String;
 
     export interface Class {
         define(className: string, props: any): Function;
@@ -222,6 +205,9 @@ declare module Bridge {
 }
 
 declare module System {
+    export class Object {
+    }
+
     export class Attribute {
     }
 
@@ -271,6 +257,23 @@ declare module System {
     }
 
     var Char: Char;
+
+    export interface String {
+        isNullOrWhiteSpace(value: string): boolean;
+        isNullOrEmpty(value: string): boolean;
+        fromCharCount(c: number, count: number): string;
+        format(str: string, ...args: any[]): string;
+        alignString(str: string, alignment: number, pad: string, dir: number): string;
+        startsWith(str: string, prefix: string): boolean;
+        endsWith(str: string, suffix: string): boolean;
+        contains(str: string, value: string): string;
+        indexOfAny(str: string, anyOf: number[], startIndex?: number, length?: number): number;
+        indexOf(str: string, value: string): number;
+        compare(strA: string, strB: string): number;
+        toCharArray(str: string, startIndex: number, length: number): number[];
+    }
+
+    var String: String;
 
     export class Exception {
         constructor(message: string, innerException?: Exception);
@@ -400,7 +403,7 @@ declare module System {
         toUTC(dt: Date): Date;
         toLocal(dt: Date): Date;
     }
-    var Date: DateTime;
+    var DateTime: DateTime;
 
     export interface Guid extends System.IEquatable$1<System.Guid>, System.IComparable$1<System.Guid>, System.IFormattable {
         equalsT(o: System.Guid): boolean;
@@ -773,10 +776,17 @@ declare module System {
                 isCanceled(): boolean;
                 isCompleted(): boolean;
                 isFaulted(): boolean;
-                getResult<T>(): T;
                 setCanceled(): void;
-                setResult(result: any): void;
                 setError(error: Exception): void;
+            }
+
+            export class Task$1<TResult> extends Task {
+                constructor(action: () => TResult);
+                constructor(action: (fn: any) => TResult, state: any);
+                getResult(): TResult;
+                continueWith(continuationAction: (arg: Task$1<TResult>) => void): Task;
+                continueWith<TNewResult>(continuationAction: (arg: Task$1<TResult>) => TNewResult): Task$1<TNewResult>;
+                setResult(result: TResult): void;
             }
         }
     }

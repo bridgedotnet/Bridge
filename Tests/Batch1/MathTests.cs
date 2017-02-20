@@ -672,7 +672,7 @@ namespace Bridge.ClientTest
         [Test]
         public void SqrtWorks()
         {
-            AssertIsDecimalAndEqualTo(Math.Sqrt(3m), "1.7320508075688772935274463415");
+            AssertAlmostEqual(Math.Sqrt((double)3m), 1.73205080756888);
         }
 
         [Test]

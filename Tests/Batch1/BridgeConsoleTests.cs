@@ -1,6 +1,7 @@
 ﻿using Bridge.Linq;
 using Bridge.Test.NUnit;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Bridge.ClientTest
 {
@@ -171,13 +172,13 @@ namespace Bridge.ClientTest
 
         private string ConvertStyleColor(string styleColor)
         {
-            var r = new Bridge.Text.RegularExpressions.Regex("^rgb\\((\\d+),\\s*(\\d+),\\s*(\\d+)\\)$");
+            var r = new Regex("^rgb\\((\\d+),\\s*(\\d+),\\s*(\\d+)\\)$");
 
-            var items = r.Exec(styleColor);
+            var m = r.Match(styleColor);
 
-            if (items != null && items.Length >= 4)
+            if (m.Success && m.Groups.Count >= 4)
             {
-                styleColor = RgbToHex(items[1], items[2], items[3]);
+                styleColor = RgbToHex(m.Groups[1].Value, m.Groups[2].Value, m.Groups[3].Value);
             }
 
             return NormalizeHexStyleColor(styleColor);

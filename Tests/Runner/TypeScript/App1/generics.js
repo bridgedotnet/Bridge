@@ -66,10 +66,10 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
             config: {
                 init: function () {
                     this.simpleGenericInt = new (Generics.SimpleGeneric$1(System.Int32))(1);
-                    this.simpleDoubleGenericIntString = new (Generics.SimpleDoubleGeneric$2(System.Int32,String)).ctor();
+                    this.simpleDoubleGenericIntString = new (Generics.SimpleDoubleGeneric$2(System.Int32,System.String)).ctor();
                     this.genericINamedEntity = new (Generics.GenericINamedEntity$1(Generics.INamedEntity))(new Generics.NamedEntity());
                     this.genericNamedEntity = new (Generics.GenericNamedEntity$1(Generics.NamedEntity))(new Generics.NamedEntity());
-                    this.genericClassObject = new (Generics.GenericClass$1(Object))(Bridge.box(2, System.Int32));
+                    this.genericClassObject = new (Generics.GenericClass$1(System.Object))(Bridge.box(2, System.Int32));
                     this.genericClassNamedEntity = new (Generics.GenericClass$1(Generics.NamedEntity))(new Generics.NamedEntity());
                     this.genericNew = new (Generics.GenericNew$1(Generics.NewClass))(new Generics.NewClass());
                     this.genericNewAndClass = new (Generics.GenericNewAndClass$1(Generics.NewClass))(new Generics.NewClass());

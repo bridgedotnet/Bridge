@@ -22,11 +22,11 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test]
         public static void TestGetTypeInIgnoreGenericMethod()
         {
-            Assert.AreEqual("String", Test("abc"));
-            Assert.AreEqual("String", Test<string>("xyz"));
+            Assert.AreEqual("System.String", Test("abc"));
+            Assert.AreEqual("System.String", Test<string>("xyz"));
 
-            Assert.AreEqual("String", Test1("abc"));
-            Assert.AreEqual("String", Test1<string>("xyz"));
+            Assert.AreEqual("System.String", Test1("abc"));
+            Assert.AreEqual("System.String", Test1<string>("xyz"));
         }
     }
 }

@@ -41,7 +41,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                 Name: null
             },
             init: function () {
-                this.Name = new (Test.BridgeIssues.N1023.Optional$1(String))();
+                this.Name = new (Test.BridgeIssues.N1023.Optional$1(System.String))();
             }
         },
         ctor: function (name) {

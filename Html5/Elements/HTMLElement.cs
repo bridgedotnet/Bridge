@@ -10,19 +10,13 @@ namespace Bridge.Html5
     public class HTMLElement : Element
     {
         [Template("document.createElement('div')")]
-        public HTMLElement()
-        {
-        }
+        public extern HTMLElement();
 
         [Template("document.createElement({0})")]
-        public HTMLElement(ElementType type)
-        {
-        }
+        public extern HTMLElement(ElementType type);
 
         [Template("document.createElement({0})")]
-        public HTMLElement(string tagName)
-        {
-        }
+        public extern HTMLElement(string tagName);
 
         #region Properties
 

@@ -58,6 +58,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Attributes\FieldAttribute.cs" />
+    <Compile Include="System\SerializableAttribute.cs" />
     <Compile Include="Attributes\UnboxAttribute.cs" />
     <Compile Include="Attributes\GlobalMethodsAttribute.cs" />
     <Compile Include="Attributes\MixinAttribute.cs" />
@@ -86,11 +87,9 @@
     <Compile Include="Attributes\FileNameAttribute.cs" />
     <Compile Include="Attributes\ScriptAttribute.cs" />
     <Compile Include="Bridge\Console\Console.cs" />
-    <Compile Include="Bridge\Function.cs" />
     <Compile Include="Bridge\Linq\Enumerable.cs" />
     <Compile Include="Bridge\IBridgeClass.cs" />
     <Compile Include="Bridge\ObjectLiteral.cs" />
-    <Compile Include="Bridge\Any.cs" />
     <Compile Include="Bridge\Intersection.cs" />
     <Compile Include="Bridge\Module.cs" />
     <Compile Include="Bridge\Sequence.cs" />
@@ -315,9 +314,7 @@
     <Compile Include="System\INotifyPropertyChanged.cs" />
     <Compile Include="System\InvalidCastException.cs" />
     <Compile Include="System\InvalidOperationException.cs" />
-    <Compile Include="System\LocaleOptions.cs" />
     <Compile Include="System\Func.cs" />
-    <Compile Include="Bridge\Date.cs" />
     <Compile Include="System\Exception.cs" />
     <Compile Include="System\Delegate.cs" />
     <Compile Include="System\Math.cs" />
@@ -329,8 +326,6 @@
     <Compile Include="System\Runtime.cs" />
     <Compile Include="System\String.cs" />
     <Compile Include="System\Stubs.cs" />
-    <Compile Include="Bridge\Text\RegularExpressions\Regex.cs" />
-    <Compile Include="Bridge\Text\RegularExpressions\RegexMatch.cs" />
     <Compile Include="System\TimeSpan.cs" />
     <Compile Include="Bridge\Union.cs" />
     <Compile Include="System\Tuple.cs" />
@@ -778,6 +773,8 @@
     <Content Include="Resources\Convert.js" />
     <Content Include="Resources\Enum.js" />
     <Content Include="Resources\.lib\LongLib.js" />
+    <Content Include="Resources\Generator.js" />
+    <Content Include="Resources\Double.js" />
     <Content Include="Resources\Long.js" />
     <Content Include="Resources\Math.js" />
     <Content Include="Resources\ReflectionAssembly.js" />
@@ -801,6 +798,7 @@
     <Content Include="Resources\Text\RegularExpressions\RegexRunner.js" />
     <Content Include="Resources\Reflection.js" />
     <Content Include="Resources\ClientWebSocket.js" />
+    <Content Include="Resources\Object.js" />
     <Content Include="Resources\Uri.js" />
     <Content Include="Resources\Array.js" />
     <Content Include="Resources\Collections\Comparer.js" />

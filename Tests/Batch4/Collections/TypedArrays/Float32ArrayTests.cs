@@ -32,11 +32,11 @@ namespace Bridge.ClientTest.Batch4.Collections.TypedArrays
             Assert.AreEqual("Float32Array", typeof(Float32Array).FullName, "FullName");
 
             var interfaces = typeof(Float32Array).GetInterfaces();
-            Assert.AreEqual(1, interfaces.Length, "Interface count should be 1");
+            Assert.AreEqual(7, interfaces.Length, "Interface count should be 7");
             // #1559
             Assert.True(interfaces.Contains(typeof(IEnumerable<float>)), "Interfaces should contain IEnumerable<float>");
-            Assert.False(interfaces.Contains(typeof(ICollection<float>)), "Interfaces should contain ICollection<float>");
-            Assert.False(interfaces.Contains(typeof(IList<float>)), "Interfaces should contain IList<float>");
+            Assert.True(interfaces.Contains(typeof(ICollection<float>)), "Interfaces should contain ICollection<float>");
+            Assert.True(interfaces.Contains(typeof(IList<float>)), "Interfaces should contain IList<float>");
             // Not JS API
             //Assert.False(interfaces.Contains(typeof(IReadOnlyCollection<float>)), "Interfaces should contain IReadOnlyCollection<float>");
             //Assert.False(interfaces.Contains(typeof(IReadOnlyList<float>)), "Interfaces should contain IReadOnlyList<float>");
@@ -44,8 +44,8 @@ namespace Bridge.ClientTest.Batch4.Collections.TypedArrays
             object arr = new Float32Array(0);
             Assert.True(arr is Float32Array, "Is Float32Array");
             Assert.True(arr is IEnumerable<float>, "Is IEnumerable<float>");
-            Assert.False(arr is ICollection<float>, "Is ICollection<float>");
-            Assert.False(arr is IList<float>, "Is IList<float>");
+            Assert.True(arr is ICollection<float>, "Is ICollection<float>");
+            Assert.True(arr is IList<float>, "Is IList<float>");
             // Not JS API
             //Assert.False(arr is IReadOnlyCollection<float>, "Is IReadOnlyCollection<float>");
             //Assert.False(arr is IReadOnlyList<float>, "Is IReadOnlyList<float>");

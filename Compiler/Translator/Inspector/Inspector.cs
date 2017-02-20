@@ -161,7 +161,7 @@ namespace Bridge.Translator
                 {
                     return null;
                 }
-                return new RawValue(JS.Funcs.BRIDGE_GETDEFAULTVALUE + "(" + astType.ToString() + ")");
+                return new RawValue(JS.Funcs.BRIDGE_GETDEFAULTVALUE + "(" + type.Name + ")");
             }
 
             if (type.IsKnownType(KnownTypeCode.Decimal))
@@ -226,7 +226,7 @@ namespace Bridge.Translator
         {
             if (type.IsKnownType(KnownTypeCode.DateTime))
             {
-                return "new Date(-864e13)";
+                return string.Format("{0}()", JS.Types.System.DateTime.GET_DEFAULT_VALUE);
             }
 
             var isGeneric = type.TypeArguments.Count > 0 && !Helpers.IsIgnoreGeneric(type, emitter);

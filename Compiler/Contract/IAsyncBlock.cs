@@ -15,7 +15,7 @@ namespace Bridge.Contract
             set;
         }
 
-        ICSharpCode.NRefactory.CSharp.Expression[] AwaitExpressions
+        ICSharpCode.NRefactory.CSharp.AstNode[] AwaitExpressions
         {
             get;
             set;
@@ -47,6 +47,12 @@ namespace Bridge.Contract
         bool IsParentForAsync(ICSharpCode.NRefactory.CSharp.AstNode child);
 
         bool IsTaskReturn
+        {
+            get;
+            set;
+        }
+
+        bool IsEnumeratorReturn
         {
             get;
             set;

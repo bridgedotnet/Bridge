@@ -1,6 +1,6 @@
 using System;
 
-namespace Bridge
+namespace Bridge.Html5
 {
     /// <summary>
     /// Equivalent to the Function type in Javascript.

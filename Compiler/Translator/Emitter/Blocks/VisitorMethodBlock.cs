@@ -95,7 +95,11 @@ namespace Bridge.Translator
 
             if (script == null)
             {
-                if (methodDeclaration.HasModifier(Modifiers.Async))
+                if(YieldBlock.HasYield(methodDeclaration.Body))
+                {
+                    new GeneratorBlock(this.Emitter, methodDeclaration).Emit();
+                }
+                else if (methodDeclaration.HasModifier(Modifiers.Async))
                 {
                     new AsyncBlock(this.Emitter, methodDeclaration).Emit();
                 }

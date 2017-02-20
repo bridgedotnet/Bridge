@@ -4,6 +4,7 @@ using System.ComponentModel;
 namespace System.Reflection
 {
     [External]
+    [Unbox(true)]
     public class FieldInfo : MemberInfo
     {
         [Name("rt")]

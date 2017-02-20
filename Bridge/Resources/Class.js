@@ -134,12 +134,17 @@
 
             prop = prop || {};
 
+            if (prop.$kind == "enum" && !prop.inherits) {
+                prop.inherits = [System.IComparable, System.IFormattable]
+            }
+
             var extend = prop.$inherits || prop.inherits,
                 statics = prop.$statics || prop.statics,
                 isEntryPoint = prop.$entryPoint,
                 base,
                 prototype,
                 scope = prop.$scope || gscope || Bridge.global,
+                objectType = Bridge.global.System && Bridge.global.System.Object || Object,
                 i,
                 v,
                 isCtor,
@@ -255,7 +260,7 @@
 
             base = extend ? extend[0].prototype : this.prototype;
             Class.$base = base;
-            prototype = extend ? (extend[0].$$initCtor ? new extend[0].$$initCtor() : new extend[0]()) : new Object();
+            prototype = extend ? (extend[0].$$initCtor ? new extend[0].$$initCtor() : new extend[0]()) : (objectType.$$initCtor ? new objectType.$$initCtor() : new objectType());
 
             Class.$$initCtor = function () { };
             Class.$$initCtor.prototype = prototype;
@@ -334,7 +339,7 @@
             }
 
             if (!extend) {
-                extend = [Object].concat(Class.$interfaces);
+                extend = [objectType].concat(Class.$interfaces);
             }
 
             Bridge.Class.setInheritors(Class, extend);
@@ -354,7 +359,10 @@
             };
 
             if (isEntryPoint || Bridge.isFunction(prototype.$main)) {
-                Class.main = prototype.$main;
+                if (!Class.main && prototype.$main) {
+                    Class.main = prototype.$main;
+                }
+
                 Bridge.Class.$queueEntry.push(Class);
             }
 
@@ -389,7 +397,7 @@
                 Class.getDefaultValue = function () {
                     var utype = Class.prototype.$utype;
 
-                    if (utype === String) {
+                    if (utype === String || utype === System.String) {
                         return null;
                     }
 
@@ -687,14 +695,14 @@
                 }
 
                 Bridge.Class.createInheritors(fn, extend);
-
+                var objectType = Bridge.global.System && Bridge.global.System.Object || Object;
                 if (!extend) {
-                    extend = [Object].concat(fn.$interfaces);
+                    extend = [objectType].concat(fn.$interfaces);
                 }
 
                 Bridge.Class.setInheritors(fn, extend);
 
-                var prototype = extend ? (extend[0].$$initCtor ? new extend[0].$$initCtor() : new extend[0]()) : new Object();
+                var prototype = extend ? (extend[0].$$initCtor ? new extend[0].$$initCtor() : new extend[0]()) : new objectType();
                 fn.prototype = prototype;
                 fn.prototype.constructor = fn;
             };

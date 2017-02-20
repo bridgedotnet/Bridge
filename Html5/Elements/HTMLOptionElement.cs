@@ -5,12 +5,10 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLOptionElement")]
-    public class HTMLOptionElement : HTMLElement<HTMLOptionElement>
+    public sealed class HTMLOptionElement : HTMLElement<HTMLOptionElement>
     {
         [Template("document.createElement('option')")]
-        public HTMLOptionElement()
-        {
-        }
+        public extern HTMLOptionElement();
 
         /// <summary>
         /// Contains the initial value of the selected HTML attribute, indicating whether the option is selected by default or not.

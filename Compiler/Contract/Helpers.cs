@@ -8,6 +8,7 @@ using Mono.Cecil;
 
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -208,9 +209,23 @@ namespace Bridge.Contract
             return type.Attributes.Any(a => a.AttributeType.FullName == "Bridge.IgnoreGenericAttribute") || type.DeclaringTypeDefinition != null && Helpers.IsIgnoreGeneric(type.DeclaringTypeDefinition);
         }
 
-        public static bool IsIgnoreGeneric(IType type, IEmitter emitter)
+        public static bool IsIgnoreGeneric(IType type, IEmitter emitter, bool allowInTypeScript = false)
         {
-            return emitter.Validator.HasAttribute(type.GetDefinition().Attributes, "Bridge.IgnoreGenericAttribute") || type.DeclaringType != null && Helpers.IsIgnoreGeneric(type.DeclaringType, emitter);
+            var attr = type.GetDefinition().Attributes.FirstOrDefault(a => a.AttributeType.FullName == "Bridge.IgnoreGenericAttribute");
+
+            if (attr != null)
+            {
+                var member = allowInTypeScript ? attr.NamedArguments.FirstOrDefault(arg => arg.Key.Name == "AllowInTypeScript").Value : null;
+
+                if (member != null)
+                {
+                    return !(bool) member.ConstantValue;
+                }
+
+                return true;
+            }
+
+            return type.DeclaringType != null && Helpers.IsIgnoreGeneric(type.DeclaringType, emitter, allowInTypeScript);
         }
 
         public static bool IsIgnoreGeneric(IEntity member, IEmitter emitter)
@@ -364,6 +379,12 @@ namespace Bridge.Contract
                 return;
             }
 
+            var conversion = block.Emitter.Resolver.Resolver.GetConversion(expression);
+            if (conversion.IsBoxingConversion || conversion.IsUnboxingConversion)
+            {
+                return;
+            }
+
             if (resolveResult is InvocationResolveResult)
             {
                 bool ret = true;
@@ -394,17 +415,7 @@ namespace Bridge.Contract
             var type = nullable ? ((ParameterizedType)resolveResult.Type).TypeArguments[0] : resolveResult.Type;
             if (type.Kind == TypeKind.Struct)
             {
-                var typeDef = block.Emitter.GetTypeDefinition(type);
-                if (block.Emitter.Validator.IsExternalType(typeDef) || block.Emitter.Validator.IsImmutableType(typeDef))
-                {
-                    return;
-                }
-
-                var mutableFields = type.GetFields(f => !f.IsReadOnly && !f.IsConst, GetMemberOptions.IgnoreInheritedMembers);
-                var autoProps = typeDef.Properties.Where(Helpers.IsAutoProperty);
-                var autoEvents = type.GetEvents(null, GetMemberOptions.IgnoreInheritedMembers);
-
-                if (!mutableFields.Any() && !autoProps.Any() && !autoEvents.Any())
+                if (Helpers.IsImmutableStruct(block.Emitter, type))
                 {
                     return;
                 }
@@ -428,7 +439,16 @@ namespace Bridge.Contract
                     return;
                 }
 
-                if (expression == null ||
+                var isOperator = false;
+                if (expression != null &&
+                    (expression.Parent is BinaryOperatorExpression || expression.Parent is UnaryOperatorExpression))
+                {
+                    var orr = block.Emitter.Resolver.ResolveNode(expression.Parent, block.Emitter) as OperatorResolveResult;
+
+                    isOperator = orr != null && orr.UserDefinedOperatorMethod != null;
+                }
+
+                if (expression == null || isOperator ||
                     expression.Parent is NamedExpression ||
                     expression.Parent is ObjectCreateExpression ||
                     expression.Parent is ArrayInitializerExpression ||
@@ -457,6 +477,25 @@ namespace Bridge.Contract
                     }
                 }
             }
+        }
+
+        public static bool IsImmutableStruct(IEmitter emitter, IType type)
+        {
+            var typeDef = emitter.GetTypeDefinition(type);
+            if (emitter.Validator.IsExternalType(typeDef) || emitter.Validator.IsImmutableType(typeDef))
+            {
+                return true;
+            }
+
+            var mutableFields = type.GetFields(f => !f.IsReadOnly && !f.IsConst, GetMemberOptions.IgnoreInheritedMembers);
+            var autoProps = typeDef.Properties.Where(Helpers.IsAutoProperty);
+            var autoEvents = type.GetEvents(null, GetMemberOptions.IgnoreInheritedMembers);
+
+            if (!mutableFields.Any() && !autoProps.Any() && !autoEvents.Any())
+            {
+                return true;
+            }
+            return false;
         }
 
         public static bool IsAutoProperty(IProperty propertyDeclaration)

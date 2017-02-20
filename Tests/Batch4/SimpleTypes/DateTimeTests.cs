@@ -1,3 +1,4 @@
+using Bridge.Html5;
 using Bridge.Test.NUnit;
 using System;
 using System.Globalization;
@@ -10,7 +11,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         [Test]
         public void TypePropertiesAreCorrect_SPI_1607_1608_1609()
         {
-            Assert.AreEqual("Date", typeof(DateTime).FullName);
+            Assert.AreEqual("System.DateTime", typeof(DateTime).FullName);
             Assert.False(typeof(DateTime).IsClass);
             // #1607 #1608 #1609
             Assert.True(typeof(IComparable<DateTime>).IsAssignableFrom(typeof(DateTime)));
@@ -61,7 +62,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         public void MillisecondSinceEpochConstructorWorks()
         {
             var dt = new DateTime(1440L * 60 * 500 * 1000);
-            Assert.AreEqual(1970, dt.AddDays(1).Year);
+            Assert.AreEqual(1, dt.AddDays(1).Year);
         }
 
         [Test]
@@ -279,15 +280,15 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         [Test]
         public void GetTimeWorks()
         {
-            var dt = new DateTime(DateTime.Utc(1970, 1, 2));
-            Assert.AreEqual(1440L * 60 * 1000, dt.GetTime());
+            var dt = new DateTime(DateTime.Utc(1000, 1, 2));
+            Assert.AreEqual((-30610137600000).ToString(), dt.GetTime().ToString());
         }
 
         [Test]
         public void ValueOfWorks()
         {
-            var dt = new DateTime(DateTime.Utc(1970, 1, 2));
-            Assert.AreEqual(1440 * 60 * 1000, dt.ValueOf());
+            var dt = new DateTime(DateTime.Utc(1000, 1, 2));
+            Assert.AreEqual((-30610137600000).ToString(), dt.ValueOf().ToString());
         }
 
         // Not C# API

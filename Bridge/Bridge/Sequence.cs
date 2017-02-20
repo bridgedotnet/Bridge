@@ -2,7 +2,7 @@ namespace Bridge
 {
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1>
     {
         [Template("{this}[0]")]
@@ -23,7 +23,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2>
     {
         [Template("{this}[0]")]
@@ -47,7 +47,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3>
     {
         [Template("{this}[0]")]
@@ -74,7 +74,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4>
     {
         [Template("{this}[0]")]
@@ -104,7 +104,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5>
     {
         [Template("{this}[0]")]
@@ -137,7 +137,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6>
     {
         [Template("{this}[0]")]
@@ -173,7 +173,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7>
     {
         [Template("{this}[0]")]
@@ -212,7 +212,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8>
     {
         [Template("{this}[0]")]
@@ -254,7 +254,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9>
     {
         [Template("{this}[0]")]
@@ -299,7 +299,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>
     {
         [Template("{this}[0]")]
@@ -347,7 +347,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>
     {
         [Template("{this}[0]")]
@@ -398,7 +398,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>
     {
         [Template("{this}[0]")]
@@ -452,7 +452,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>
     {
         [Template("{this}[0]")]
@@ -509,7 +509,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>
     {
         [Template("{this}[0]")]
@@ -569,7 +569,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>
     {
         [Template("{this}[0]")]
@@ -632,7 +632,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>
     {
         [Template("{this}[0]")]
@@ -698,7 +698,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17>
     {
         [Template("{this}[0]")]
@@ -767,7 +767,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18>
     {
         [Template("{this}[0]")]
@@ -839,7 +839,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19>
     {
         [Template("{this}[0]")]
@@ -914,7 +914,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20>
     {
         [Template("{this}[0]")]
@@ -992,7 +992,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21>
     {
         [Template("{this}[0]")]
@@ -1073,7 +1073,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22>
     {
         [Template("{this}[0]")]
@@ -1157,7 +1157,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23>
     {
         [Template("{this}[0]")]
@@ -1244,7 +1244,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24>
     {
         [Template("{this}[0]")]
@@ -1334,7 +1334,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25>
     {
         [Template("{this}[0]")]
@@ -1427,7 +1427,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26>
     {
         [Template("{this}[0]")]
@@ -1523,7 +1523,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27>
     {
         [Template("{this}[0]")]
@@ -1622,7 +1622,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28>
     {
         [Template("{this}[0]")]
@@ -1724,7 +1724,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29>
     {
         [Template("{this}[0]")]
@@ -1829,7 +1829,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30>
     {
         [Template("{this}[0]")]
@@ -1937,7 +1937,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31>
     {
         [Template("{this}[0]")]
@@ -2048,7 +2048,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32>
     {
         [Template("{this}[0]")]
@@ -2162,7 +2162,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33>
     {
         [Template("{this}[0]")]
@@ -2279,7 +2279,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34>
     {
         [Template("{this}[0]")]
@@ -2399,7 +2399,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35>
     {
         [Template("{this}[0]")]
@@ -2522,7 +2522,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36>
     {
         [Template("{this}[0]")]
@@ -2648,7 +2648,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37>
     {
         [Template("{this}[0]")]
@@ -2777,7 +2777,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38>
     {
         [Template("{this}[0]")]
@@ -2909,7 +2909,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39>
     {
         [Template("{this}[0]")]
@@ -3044,7 +3044,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40>
     {
         [Template("{this}[0]")]
@@ -3182,7 +3182,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41>
     {
         [Template("{this}[0]")]
@@ -3323,7 +3323,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42>
     {
         [Template("{this}[0]")]
@@ -3467,7 +3467,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43>
     {
         [Template("{this}[0]")]
@@ -3614,7 +3614,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44>
     {
         [Template("{this}[0]")]
@@ -3764,7 +3764,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45>
     {
         [Template("{this}[0]")]
@@ -3917,7 +3917,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46>
     {
         [Template("{this}[0]")]
@@ -4073,7 +4073,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47>
     {
         [Template("{this}[0]")]
@@ -4232,7 +4232,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48>
     {
         [Template("{this}[0]")]
@@ -4394,7 +4394,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49>
     {
         [Template("{this}[0]")]
@@ -4559,7 +4559,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50>
     {
         [Template("{this}[0]")]
@@ -4728,7 +4728,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51>
     {
         [Template("{this}[0]")]
@@ -4899,7 +4899,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52>
     {
         [Template("{this}[0]")]
@@ -5073,7 +5073,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53>
     {
         [Template("{this}[0]")]
@@ -5250,7 +5250,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54>
     {
         [Template("{this}[0]")]
@@ -5430,7 +5430,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55>
     {
         [Template("{this}[0]")]
@@ -5613,7 +5613,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56>
     {
         [Template("{this}[0]")]
@@ -5799,7 +5799,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57>
     {
         [Template("{this}[0]")]
@@ -5988,7 +5988,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58>
     {
         [Template("{this}[0]")]
@@ -6180,7 +6180,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59>
     {
         [Template("{this}[0]")]
@@ -6375,7 +6375,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60>
     {
         [Template("{this}[0]")]
@@ -6573,7 +6573,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61>
     {
         [Template("{this}[0]")]
@@ -6774,7 +6774,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62>
     {
         [Template("{this}[0]")]
@@ -6978,7 +6978,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63>
     {
         [Template("{this}[0]")]
@@ -7185,7 +7185,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64>
     {
         [Template("{this}[0]")]
@@ -7395,7 +7395,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65>
     {
         [Template("{this}[0]")]
@@ -7608,7 +7608,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66>
     {
         [Template("{this}[0]")]
@@ -7824,7 +7824,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67>
     {
         [Template("{this}[0]")]
@@ -8044,7 +8044,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68>
     {
         [Template("{this}[0]")]
@@ -8266,7 +8266,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69>
     {
         [Template("{this}[0]")]
@@ -8491,7 +8491,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70>
     {
         [Template("{this}[0]")]
@@ -8719,7 +8719,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71>
     {
         [Template("{this}[0]")]
@@ -8950,7 +8950,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72>
     {
         [Template("{this}[0]")]
@@ -9184,7 +9184,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73>
     {
         [Template("{this}[0]")]
@@ -9421,7 +9421,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74>
     {
         [Template("{this}[0]")]
@@ -9661,7 +9661,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75>
     {
         [Template("{this}[0]")]
@@ -9904,7 +9904,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76>
     {
         [Template("{this}[0]")]
@@ -10151,7 +10151,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77>
     {
         [Template("{this}[0]")]
@@ -10400,7 +10400,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78>
     {
         [Template("{this}[0]")]
@@ -10652,7 +10652,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79>
     {
         [Template("{this}[0]")]
@@ -10907,7 +10907,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80>
     {
         [Template("{this}[0]")]
@@ -11165,7 +11165,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81>
     {
         [Template("{this}[0]")]
@@ -11426,7 +11426,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82>
     {
         [Template("{this}[0]")]
@@ -11690,7 +11690,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83>
     {
         [Template("{this}[0]")]
@@ -11957,7 +11957,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84>
     {
         [Template("{this}[0]")]
@@ -12227,7 +12227,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85>
     {
         [Template("{this}[0]")]
@@ -12501,7 +12501,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86>
     {
         [Template("{this}[0]")]
@@ -12777,7 +12777,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87>
     {
         [Template("{this}[0]")]
@@ -13056,7 +13056,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87, T88>
     {
         [Template("{this}[0]")]
@@ -13338,7 +13338,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87, T88, T89>
     {
         [Template("{this}[0]")]
@@ -13623,7 +13623,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87, T88, T89, T90>
     {
         [Template("{this}[0]")]
@@ -13911,7 +13911,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87, T88, T89, T90, T91>
     {
         [Template("{this}[0]")]
@@ -14202,7 +14202,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87, T88, T89, T90, T91, T92>
     {
         [Template("{this}[0]")]
@@ -14496,7 +14496,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87, T88, T89, T90, T91, T92, T93>
     {
         [Template("{this}[0]")]
@@ -14794,7 +14794,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87, T88, T89, T90, T91, T92, T93, T94>
     {
         [Template("{this}[0]")]
@@ -15094,7 +15094,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87, T88, T89, T90, T91, T92, T93, T94, T95>
     {
         [Template("{this}[0]")]
@@ -15397,7 +15397,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87, T88, T89, T90, T91, T92, T93, T94, T95, T96>
     {
         [Template("{this}[0]")]
@@ -15703,7 +15703,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87, T88, T89, T90, T91, T92, T93, T94, T95, T96, T97>
     {
         [Template("{this}[0]")]
@@ -16012,7 +16012,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87, T88, T89, T90, T91, T92, T93, T94, T95, T96, T97, T98>
     {
         [Template("{this}[0]")]
@@ -16324,7 +16324,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87, T88, T89, T90, T91, T92, T93, T94, T95, T96, T97, T98, T99>
     {
         [Template("{this}[0]")]
@@ -16639,7 +16639,7 @@ namespace Bridge
 
     [External]
     [IgnoreCast]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class Sequence<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T21, T22, T23, T24, T25, T26, T27, T28, T29, T30, T31, T32, T33, T34, T35, T36, T37, T38, T39, T40, T41, T42, T43, T44, T45, T46, T47, T48, T49, T50, T51, T52, T53, T54, T55, T56, T57, T58, T59, T60, T61, T62, T63, T64, T65, T66, T67, T68, T69, T70, T71, T72, T73, T74, T75, T76, T77, T78, T79, T80, T81, T82, T83, T84, T85, T86, T87, T88, T89, T90, T91, T92, T93, T94, T95, T96, T97, T98, T99, T100>
     {
         [Template("{this}[0]")]

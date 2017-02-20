@@ -1,22 +1,19 @@
-    var _boolean = {
+Bridge.define("System.Boolean", {
+    inherits: [System.IComparable],
+
+    statics: {
         trueString: "True",
         falseString: "False",
-
-        is: function (obj, type) {
-            if (type === System.IComparable ||
-                type === System.IEquatable$1(Boolean) ||
-                type === System.IComparable$1(Boolean)) {
-                return true;
-            }
-
-            return false;
-        },
 
         $is: function (instance) {
             return typeof (instance) === "boolean";
         },
 
         getDefaultValue: function () {
+            return false;
+        },
+
+        createInstance: function () {
             return false;
         },
 
@@ -90,6 +87,8 @@
 
             return false;
         }
-    };
+    }
+});
 
-    System.Boolean = _boolean;
+System.Boolean.$kind = "";
+Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), System.IEquatable$1(System.Boolean)]);

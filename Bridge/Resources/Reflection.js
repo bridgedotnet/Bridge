@@ -129,7 +129,7 @@
         },
 
         getBaseType: function (type) {
-            if (type === Object || type.$kind === "interface" || type.prototype == null) {
+            if (Bridge.isObject(type) || type.$kind === "interface" || type.prototype == null) {
                 return null;
             } else if (Object.getPrototypeOf) {
                 return Object.getPrototypeOf(type.prototype).constructor;
@@ -157,22 +157,39 @@
             var str;
 
             if (obj.$$fullname) {
-                return obj.$$fullname;
+                str = obj.$$fullname;
+            } else if (obj.$$name) {
+                str = obj.$$name;
             }
 
-            if (obj.$$name) {
-                return obj.$$name;
+            if (str) {
+                var ns = Bridge.Reflection.getTypeNamespace(obj, str);
+
+                if (ns) {
+                    var idx = str.indexOf("[");
+                    var name = str.substring(ns.length + 1, idx === -1 ? str.length : idx);
+
+                    if (new RegExp(/[\.\$]/).test(name)) {
+                        str = ns + "." + name.replace(/\.|\$/g, function (match) { return (match === ".") ? "+" : "`"; }) + (idx === -1 ? "" : str.substring(idx));
+                    }
+                }
+
+                return str;
             }
 
-            if ((obj).constructor === Function) {
-                str = (obj).toString();
+            if (obj.constructor === Object) {
+                str = obj.toString();
+                var match = (/\[object (.{1,})\]/).exec(str);
+                return (match && match.length > 1) ? match[1] : "Object";
+            } else if (obj.constructor === Function) {
+                str = obj.toString();
             } else {
-                str = (obj).constructor.toString();
+                str = obj.constructor.toString();
             }
 
             var results = (/function (.{1,})\(/).exec(str);
 
-            return (results && results.length > 1) ? results[1] : "Object";
+            return (results && results.length > 1) ? results[1] : "System.Object";
         },
 
         _makeQName: function (name, asm) {
@@ -186,13 +203,14 @@
         getTypeName: function (type) {
             var fullName = Bridge.Reflection.getTypeFullName(type),
                 bIndex = fullName.indexOf('['),
-                nsIndex = fullName.lastIndexOf('.', bIndex >= 0 ? bIndex : fullName.length);
+                pIndex = fullName.lastIndexOf('+', bIndex >= 0 ? bIndex : fullName.length),
+                nsIndex = pIndex > -1 ? pIndex : fullName.lastIndexOf('.', bIndex >= 0 ? bIndex : fullName.length);
 
             return nsIndex > 0 ? (bIndex >= 0 ? fullName.substring(nsIndex + 1, bIndex) : fullName.substr(nsIndex + 1)) : fullName;
         },
 
-        getTypeNamespace: function (type) {
-            var fullName = Bridge.Reflection.getTypeFullName(type),
+        getTypeNamespace: function (type, name) {
+            var fullName = name || Bridge.Reflection.getTypeFullName(type),
                 bIndex = fullName.indexOf('['),
                 nsIndex = fullName.lastIndexOf('.', bIndex >= 0 ? bIndex : fullName.length),
                 ns = nsIndex > 0 ? fullName.substr(0, nsIndex) : '';
@@ -218,6 +236,10 @@
 
         _getAssemblyType: function (asm, name) {
             var noAsm = false;
+
+            if (new RegExp(/[\+\`]/).test(name)) {
+                name = name.replace(/\+|\`/g, function(match) { return match === "+" ? "." : "$"});
+            }
 
             if (!asm) {
                 asm = Bridge.SystemAssembly;
@@ -291,6 +313,8 @@
         },
 
         getInterfaces: function (type) {
+            var t;
+
             if (type.$allInterfaces) {
                 return type.$allInterfaces;
             } else if (type === Date) {
@@ -301,8 +325,8 @@
                 return [System.IComparable$1(Boolean), System.IEquatable$1(Boolean), System.IComparable];
             } else if (type === String) {
                 return [System.IComparable$1(String), System.IEquatable$1(String), System.IComparable, System.ICloneable, System.Collections.IEnumerable, System.Collections.Generic.IEnumerable$1(System.Char)];
-            } else if (type === Array || type.$isArray || System.Array._typedArrays[Bridge.getTypeName(type)]) {
-                var t = type.$elementType || Object;
+            } else if (type === Array || type.$isArray || (t = System.Array._typedArrays[Bridge.getTypeName(type)])) {
+                t = t || type.$elementType || System.Object;
                 return [System.Collections.IEnumerable, System.Collections.ICollection, System.ICloneable, System.Collections.IList, System.Collections.Generic.IEnumerable$1(t), System.Collections.Generic.ICollection$1(t), System.Collections.Generic.IList$1(t)];
             } else {
                 return [];
@@ -322,7 +346,7 @@
                 return false;
             }
 
-            if (baseType === type || baseType === Object) {
+            if (baseType === type || Bridge.isObject(baseType)) {
                 return true;
             }
 

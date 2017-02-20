@@ -5,12 +5,10 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLParamElement")]
-    public class HTMLParamElement : HTMLElement<HTMLParamElement>
+    public sealed class HTMLParamElement : HTMLElement<HTMLParamElement>
     {
         [Template("document.createElement('param')")]
-        public HTMLParamElement()
-        {
-        }
+        public extern HTMLParamElement();
 
         /// <summary>
         /// Is a DOMString representing the name of the parameter. It reflects the name attribute.

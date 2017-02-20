@@ -260,8 +260,6 @@ namespace System
         [Template("{d1}.compareTo({d2})")]
         public static extern int Compare(decimal d1, decimal d2);
 
-        public extern bool Equals(decimal other);
-
         [Template("{d1}.equals({d2})")]
         public static extern bool Equals(decimal d1, decimal d2);
 
@@ -370,9 +368,18 @@ namespace System
 
         [Template("toFormat(null, null,{config})")]
         public extern string ToFormat(DecimalFormatConfig config);
+
+#pragma warning disable 659
+        public override extern bool Equals(object o);
+#pragma warning restore 659
+
+        [Name("equalsT")]
+        public extern bool Equals(decimal other);
+
+        public override extern int GetHashCode();
     }
 
-    [Name("Object")]
+    [Name("System.Object")]
     [Constructor("{ }")]
     [External]
     public class DecimalConfig
@@ -429,7 +436,7 @@ namespace System
         public DecimalFormatConfig Format;
     }
 
-    [Name("Object")]
+    [Name("System.Object")]
     [Constructor("{ }")]
     [External]
     public class DecimalFormatConfig

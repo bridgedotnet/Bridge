@@ -20,7 +20,7 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
             // #1603
             Assert.False(typeof(IFormattable).IsAssignableFrom(typeof(char)));
             var interfaces = typeof(char).GetInterfaces();
-            Assert.AreEqual(5, interfaces.Length);
+            Assert.AreEqual(4, interfaces.Length);
             Assert.True(interfaces.Contains(typeof(IComparable<char>)));
             Assert.True(interfaces.Contains(typeof(IEquatable<char>)));
             Assert.False(interfaces.Contains(typeof(IFormattable)));
@@ -197,10 +197,10 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
         [Test]
         public void EqualsWorks()
         {
-            Assert.True('0'.Equals((int)'0'));
+            Assert.False('0'.Equals((int)'0'));
             Assert.False('1'.Equals((int)'0'));
             Assert.False('0'.Equals((int)'1'));
-            Assert.True('1'.Equals((int)'1'));
+            Assert.False('1'.Equals((int)'1'));
         }
 
         [Test]

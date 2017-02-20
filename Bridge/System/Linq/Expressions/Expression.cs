@@ -6,7 +6,7 @@ using System.Reflection;
 namespace System.Linq.Expressions
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     public abstract class Expression
     {
         [Name("ntype")]
@@ -438,10 +438,10 @@ namespace System.Linq.Expressions
         [Template("{ ntype: 8, t: {type}, test: {test}, ifTrue: {ifTrue}, ifFalse: {ifFalse} }")]
         public static extern ConditionalExpression Condition(Expression test, Expression ifTrue, Expression ifFalse, Type type);
 
-        [Template("{ ntype: 8, t: Object, test: {test}, ifTrue: {ifTrue}, ifFalse: { ntype: 51, t: Object } }")]
+        [Template("{ ntype: 8, t: System.Object, test: {test}, ifTrue: {ifTrue}, ifFalse: { ntype: 51, t: System.Object } }")]
         public static extern ConditionalExpression IfThen(Expression test, Expression ifTrue);
 
-        [Template("{ ntype: 8, t: Object, test: {test}, ifTrue: {ifTrue}, ifFalse: {ifFalse} }")]
+        [Template("{ ntype: 8, t: System.Object, test: {test}, ifTrue: {ifTrue}, ifFalse: {ifFalse} }")]
         public static extern ConditionalExpression IfThenElse(Expression test, Expression ifTrue, Expression ifFalse);
 
         [NonScriptable, EditorBrowsable(EditorBrowsableState.Never)]
@@ -453,7 +453,7 @@ namespace System.Linq.Expressions
         [Template("{ ntype: 9, t: {T}, value: {value} }")]
         public static extern ConstantExpression Constant<T>(T value);
 
-        [Template("{ ntype: 51, t: Object }")]
+        [Template("{ ntype: 51, t: System.Object }")]
         public static extern DefaultExpression Empty();
 
         [Template("{ ntype: 51, t: {type} }")]
@@ -472,16 +472,16 @@ namespace System.Linq.Expressions
         //public static DynamicExpression Dynamic(CallSiteBinder binder, Type returnType, Expression arg0, Expression arg1, Expression arg2, Expression arg3) { return null; }
         //public static DynamicExpression Dynamic(CallSiteBinder binder, Type returnType, IEnumerable<Expression> arguments) { return null; }
 
-        [Template("{ ntype: 50, t: Object, dtype: 0, expression: {expression}, member: {member} }")]
+        [Template("{ ntype: 50, t: System.Object, dtype: 0, expression: {expression}, member: {member} }")]
         public static extern DynamicMemberExpression DynamicMember(Expression expression, string member);
 
         [Template("{ ntype: 50, t: {type}, dtype: 0, expression: {expression}, member: {member} }")]
         public static extern DynamicMemberExpression DynamicMember(Type type, Expression expression, string member);
 
-        [Template("{ ntype: 50, t: Object, dtype: 1, expression: {expression}, arguments: Bridge.toList({arguments:array}) }")]
+        [Template("{ ntype: 50, t: System.Object, dtype: 1, expression: {expression}, arguments: Bridge.toList({arguments:array}) }")]
         public static extern DynamicInvocationExpression DynamicInvocation(Expression expression, params Expression[] arguments);
 
-        [Template("{ ntype: 50, t: Object, dtype: 1, expression: {expression}, arguments: Bridge.toList({arguments}) }")]
+        [Template("{ ntype: 50, t: System.Object, dtype: 1, expression: {expression}, arguments: Bridge.toList({arguments}) }")]
         public static extern DynamicInvocationExpression DynamicInvocation(Expression expression, IEnumerable<Expression> arguments);
 
         [Template("{ ntype: 50, t: {type}, dtype: 1, expression: {expression}, arguments: Bridge.toList({arguments:array}) }")]
@@ -490,7 +490,7 @@ namespace System.Linq.Expressions
         [Template("{ ntype: 50, t: {type}, dtype: 1, expression: {expression}, arguments: Bridge.toList({arguments}) }")]
         public static extern DynamicInvocationExpression DynamicInvocation(Type type, Expression expression, IEnumerable<Expression> arguments);
 
-        [Template("{ ntype: 50, t: Object, dtype: 2, expression: {expression}, argument: {argument} }")]
+        [Template("{ ntype: 50, t: System.Object, dtype: 2, expression: {expression}, argument: {argument} }")]
         public static extern DynamicIndexExpression DynamicIndex(Expression expression, Expression argument);
 
         [Template("{ ntype: 50, t: {type}, dtype: 2, expression: {expression}, argument: {argument} }")]
@@ -502,43 +502,43 @@ namespace System.Linq.Expressions
         [Template("{ addMethod: {addMethod}, arguments: Bridge.toList({arguments}) }")]
         public static extern ElementInit ElementInit(MethodInfo addMethod, IEnumerable<Expression> arguments);
 
-        [Template("{ ntype: 53, t: Object, kind: 2, target: {target} }")]
+        [Template("{ ntype: 53, t: System.Object, kind: 2, target: {target} }")]
         public static extern GotoExpression Break(LabelTarget target);
 
         [Template("{ ntype: 53, t: {type}, kind: 2, target: {target} }")]
         public static extern GotoExpression Break(LabelTarget target, Type type);
 
-        [Template("{ ntype: 53, t: Object, kind: 2, target: {target}, value: {value} }")]
+        [Template("{ ntype: 53, t: System.Object, kind: 2, target: {target}, value: {value} }")]
         public static extern GotoExpression Break(LabelTarget target, Expression value);
 
         [Template("{ ntype: 53, t: {type}, kind: 2, target: {target}, value: {value} }")]
         public static extern GotoExpression Break(LabelTarget target, Expression value, Type type);
 
-        [Template("{ ntype: 53, t: Object, kind: 3, target: {target} }")]
+        [Template("{ ntype: 53, t: System.Object, kind: 3, target: {target} }")]
         public static extern GotoExpression Continue(LabelTarget target);
 
         [Template("{ ntype: 53, t: {type}, kind: 3, target: {target} }")]
         public static extern GotoExpression Continue(LabelTarget target, Type type);
 
-        [Template("{ ntype: 53, t: Object, kind: 1, target: {target} }")]
+        [Template("{ ntype: 53, t: System.Object, kind: 1, target: {target} }")]
         public static extern GotoExpression Return(LabelTarget target);
 
         [Template("{ ntype: 53, t: {type}, kind: 1, target: {target} }")]
         public static extern GotoExpression Return(LabelTarget target, Type type);
 
-        [Template("{ ntype: 53, t: Object, kind: 1, target: {target}, value: {value} }")]
+        [Template("{ ntype: 53, t: System.Object, kind: 1, target: {target}, value: {value} }")]
         public static extern GotoExpression Return(LabelTarget target, Expression value);
 
         [Template("{ ntype: 53, t: {type}, kind: 1, target: {target}, value: {value} }")]
         public static extern GotoExpression Return(LabelTarget target, Expression value, Type type);
 
-        [Template("{ ntype: 53, t: Object, kind: 0, target: {target} }")]
+        [Template("{ ntype: 53, t: System.Object, kind: 0, target: {target} }")]
         public static extern GotoExpression Goto(LabelTarget target);
 
         [Template("{ ntype: 53, t: {type}, kind: 0, target: {target} }")]
         public static extern GotoExpression Goto(LabelTarget target, Type type);
 
-        [Template("{ ntype: 53, t: Object, kind: 0, target: {target}, value: {value} }")]
+        [Template("{ ntype: 53, t: System.Object, kind: 0, target: {target}, value: {value} }")]
         public static extern GotoExpression Goto(LabelTarget target, Expression value);
 
         [Template("{ ntype: 53, t: {type}, kind: 0, target: {target}, value: {value} }")]
@@ -576,10 +576,10 @@ namespace System.Linq.Expressions
         [Template("{ ntype: 56, t: {target}.t, target: {target}, dv: {defaultValue} }")]
         public static extern LabelExpression Label(LabelTarget target, Expression defaultValue);
 
-        [Template("{ t: Object }")]
+        [Template("{ t: System.Object }")]
         public static extern LabelTarget Label();
 
-        [Template("{ t: Object, n: {name} }")]
+        [Template("{ t: System.Object, n: {name} }")]
         public static extern LabelTarget Label(string name);
 
         [Template("{ t: {type} }")]
@@ -620,13 +620,13 @@ namespace System.Linq.Expressions
         [Template("{ ntype: 22, t: {newExpression}.t, newExpression: {newExpression}, initializers: Bridge.toList({initializers}) }")]
         public static extern ListInitExpression ListInit(NewExpression newExpression, IEnumerable<ElementInit> initializers);
 
-        [Template("{ ntype: 58, t: Object, body: {body} }")]
+        [Template("{ ntype: 58, t: System.Object, body: {body} }")]
         public static extern LoopExpression Loop(Expression body);
 
         [Template("{ ntype: 58, t: {break}.t, body: {body}, breakLabel: {break} }")]
         public static extern LoopExpression Loop(Expression body, LabelTarget @break);
 
-        [Template("{ ntype: 58, t: {break} ? {break}.t : Object, body: {body}, breakLabel: {break}, continueLabel: {continue} }")]
+        [Template("{ ntype: 58, t: {break} ? {break}.t : System.Object, body: {body}, breakLabel: {break}, continueLabel: {continue} }")]
         public static extern LoopExpression Loop(Expression body, LabelTarget @break, LabelTarget @continue);
 
         [Template("{ btype: 0, member: {member}, expression: {expression} }")]
@@ -788,10 +788,10 @@ namespace System.Linq.Expressions
         [Template("{ ntype: 61, t: {type} || {body}.t, body: {body}, finallyExpr: {finally}, fault: {fault}, handlers: Bridge.toList({handlers} || []) }")]
         public static extern TryExpression MakeTry(Type type, Expression body, Expression @finally, Expression fault, IEnumerable<CatchBlock> handlers);
 
-        [Template("{ ntype: 45, t: Boolean, expression: {expression}, typeOperand: {type} }")]
+        [Template("{ ntype: 45, t: System.Boolean, expression: {expression}, typeOperand: {type} }")]
         public static extern TypeBinaryExpression TypeIs(Expression expression, Type type);
 
-        [Template("{ ntype: 81, t: Boolean, expression: {expression}, typeOperand: {type} }")]
+        [Template("{ ntype: 81, t: System.Boolean, expression: {expression}, typeOperand: {type} }")]
         public static extern TypeBinaryExpression TypeEqual(Expression expression, Type type);
 
         [Template("{ ntype: {unaryType}, t: {type}, operand: {operand} }")]
@@ -878,16 +878,16 @@ namespace System.Linq.Expressions
         [Template("{ ntype: 4, t: System.Int32, operand: {array} }")]
         public static extern UnaryExpression ArrayLength(Expression array);
 
-        [Template("{ ntype: 40, t: Object, operand: {expression} }")]
+        [Template("{ ntype: 40, t: System.Object, operand: {expression} }")]
         public static extern UnaryExpression Quote(Expression expression);
 
-        [Template("{ ntype: 60, t: Object }")]
+        [Template("{ ntype: 60, t: System.Object }")]
         public static extern UnaryExpression Rethrow();
 
         [Template("{ ntype: 60, t: {type} }")]
         public static extern UnaryExpression Rethrow(Type type);
 
-        [Template("{ ntype: 60, t: Object, operand: {value} }")]
+        [Template("{ ntype: 60, t: System.Object, operand: {value} }")]
         public static extern UnaryExpression Throw(Expression value);
 
         [Template("{ ntype: 60, t: {type}, operand: {value} }")]

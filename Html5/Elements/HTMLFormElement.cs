@@ -8,12 +8,10 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLFormElement")]
-    public class HTMLFormElement : HTMLElement<HTMLFormElement>, IEnumerable<HTMLElement>
+    public sealed class HTMLFormElement : HTMLElement<HTMLFormElement>, IEnumerable<HTMLElement>
     {
         [Template("document.createElement('form')")]
-        public HTMLFormElement()
-        {
-        }
+        public extern HTMLFormElement();
 
         /// <summary>
         /// Reflects the accept-charset HTML attribute, containing a list of character encodings that the server accepts.
@@ -74,24 +72,24 @@ namespace Bridge.Html5
         /// <summary>
         /// Returns true if all controls that are subject to constraint validation satisfy their constraints, or false if some controls do not satisfy their constraints. Fires an event named invalid at any control that does not satisfy its constraints; such controls are considered invalid if the event is not canceled.
         /// </summary>
-        public virtual extern bool CheckValidity();
+        public extern bool CheckValidity();
 
         /// <summary>
         /// Submits the form to the server.
         /// </summary>
-        public virtual extern void Submit();
+        public extern void Submit();
 
         /// <summary>
         /// Resets the forms to its initial state.
         /// </summary>
-        public virtual extern void Reset();
+        public extern void Reset();
 
         /// <summary>
         /// Gets the item in the elements collection at the specified index, or null if there is no item at that index. You can also specify the index in array-style brackets or parentheses after the form object name, without calling this method explicitly.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public virtual HTMLElement this[int index]
+        public HTMLElement this[int index]
         {
             get
             {
@@ -104,7 +102,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="name">The name to match the Elements' name and id</param>
         /// <returns>An Element or an HTMLCollection</returns>
-        public new virtual Union<HTMLElement, HTMLCollection> this[string name]
+        public new Union<HTMLElement, HTMLCollection> this[string name]
         {
             get
             {
@@ -118,16 +116,16 @@ namespace Bridge.Html5
         /// <param name="index"></param>
         /// <returns></returns>
         [Name("item")]
-        public virtual extern HTMLElement GetItem(int index);
+        public extern HTMLElement GetItem(int index);
 
         /// <summary>
         /// Gets the item or list of items in elements collection whose name or id match the specified name, or null if no items match. You can also specify the name in array-style brackets or parentheses after the form object name, without calling this method explicitly.
         /// </summary>
         /// <param name="name">The name to match the Elements' name and id</param>
         /// <returns>An Element or an HTMLCollection</returns>
-        public virtual extern Union<HTMLElement, HTMLCollection> NamedItem(string name);
+        public extern Union<HTMLElement, HTMLCollection> NamedItem(string name);
 
-        public virtual extern IEnumerator<HTMLElement> GetEnumerator();
+        public extern IEnumerator<HTMLElement> GetEnumerator();
 
         extern IEnumerator IEnumerable.GetEnumerator();
     }

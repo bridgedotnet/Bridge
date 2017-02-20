@@ -3,7 +3,7 @@ using Bridge;
 namespace System.Diagnostics.Contracts
 {
     [External]
-    [Name("Object")]
+    [Name("System.Object")]
     public sealed class ContractFailedEventArgs : EventArgs
     {
         public extern ContractFailedEventArgs(ContractFailureKind failureKind, String message, String condition, Exception originalException);

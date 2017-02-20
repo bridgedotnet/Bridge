@@ -213,25 +213,25 @@ namespace Bridge.ClientTest.Text
 
             // AppendFormat
             sb.AppendFormat("({0}, {1})", "foo", false);
-            Assert.AreEqual("foo bartrue=123\r\nfoo bar\r\n(foo, false)", sb.ToString(), ".AppendFormat(format, args)");
+            Assert.AreEqual("foo bartrue=123\r\nfoo bar\r\n(foo, False)", sb.ToString(), ".AppendFormat(format, args)");
 
             // Insert
             sb.Insert(0, 56.7);
-            Assert.AreEqual("56.7foo bartrue=123\r\nfoo bar\r\n(foo, false)", sb.ToString(), ".Insert()");
+            Assert.AreEqual("56.7foo bartrue=123\r\nfoo bar\r\n(foo, False)", sb.ToString(), ".Insert()");
 
             // Remove
             sb.Remove(4, 7);
-            Assert.AreEqual("56.7true=123\r\nfoo bar\r\n(foo, false)", sb.ToString(), ".Remove(start, length)");
+            Assert.AreEqual("56.7true=123\r\nfoo bar\r\n(foo, False)", sb.ToString(), ".Remove(start, length)");
 
             // Replace
             sb.Replace("foo bar", "bar foo");
-            Assert.AreEqual("56.7true=123\r\nbar foo\r\n(foo, false)", sb.ToString(), ".Replace(string, string)");
+            Assert.AreEqual("56.7true=123\r\nbar foo\r\n(foo, False)", sb.ToString(), ".Replace(string, string)");
             sb.Replace('\r', '\n');
-            Assert.AreEqual("56.7true=123\n\nbar foo\n\n(foo, false)", sb.ToString(), ".Replace(char, char)");
+            Assert.AreEqual("56.7true=123\n\nbar foo\n\n(foo, False)", sb.ToString(), ".Replace(char, char)");
             sb.Replace('f', 'F', 23, 6);
-            Assert.AreEqual("56.7true=123\n\nbar foo\n\n(Foo, false)", sb.ToString(), ".Replace(char, char, start, length)");
+            Assert.AreEqual("56.7true=123\n\nbar foo\n\n(Foo, False)", sb.ToString(), ".Replace(char, char, start, length)");
             sb.Replace("Foo", "foo", 23, 6);
-            Assert.AreEqual("56.7true=123\n\nbar foo\n\n(foo, false)", sb.ToString(), ".Replace(string, string, start, length)");
+            Assert.AreEqual("56.7true=123\n\nbar foo\n\n(foo, False)", sb.ToString(), ".Replace(string, string, start, length)");
         }
     }
 }

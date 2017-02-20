@@ -87,7 +87,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 assert[Bridge.Test.Runtime.ContextHelper.contextName] = ctx;
             },
             getTestId: function (details) {
-                return Bridge.as(details.testId, String);
+                return Bridge.as(details.testId, System.String);
             },
             getAssert: function () {
                 var a = QUnit.config.current.assert;
@@ -276,16 +276,21 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 var has = Bridge.Test.Runtime.ContextHelper.hasClass(src, name);
 
                 $t = Bridge.getEnumerator(dest);
-                while ($t.moveNext()) {
-                    var el = $t.getCurrent();
-                    if (has) {
-                        Bridge.Test.Runtime.ContextHelper.addClass(el, name);
-                    } else {
-                        Bridge.Test.Runtime.ContextHelper.removeClass(el, name);
-                    }
+                try {
+                    while ($t.moveNext()) {
+                        var el = $t.getCurrent();
+                        if (has) {
+                            Bridge.Test.Runtime.ContextHelper.addClass(el, name);
+                        } else {
+                            Bridge.Test.Runtime.ContextHelper.removeClass(el, name);
+                        }
 
-                }
-            },
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }},
             init: function () {
                 // Check that required elements exist and created if required
                 var ensure = $asm.$.Bridge.Test.Runtime.ContextHelper.f1;

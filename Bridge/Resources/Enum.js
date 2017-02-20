@@ -22,6 +22,8 @@
             return type.prototype.$utype || System.Int32;
         },
 
+        $$name: "System.Enum",
+
         toName: function (name) {
             return name;
         },
@@ -81,11 +83,15 @@
         },
 
         toString: function (enumType, value, forceFlags) {
+            if (arguments.length == 0) {
+                return "System.Enum";
+            }
+
             if (value && value.$boxed && enumType === System.Enum) {
                 enumType = value.type;
             }
 
-            value = Bridge.unbox(value);
+            value = Bridge.unbox(value, true);
 
             if (enumType === Number) {
                 return value.toString();
@@ -149,6 +155,8 @@
                 throw new System.ArgumentNullException(name);
             }
 
+            value = Bridge.unbox(value, true);
+
             switch (format) {
                 case "G":
                 case "g":
@@ -187,6 +195,8 @@
         },
 
         getName: function (enumType, value) {
+            value = Bridge.unbox(value, true);
+
             if (value == null) {
                 throw new System.ArgumentNullException("value");
             }
@@ -212,6 +222,8 @@
         },
 
         isDefined: function (enumType, value) {
+            value = Bridge.unbox(value, true);
+
             System.Enum.checkEnumType(enumType);
 
             var values = enumType,
@@ -228,13 +240,27 @@
 
         tryParse: function (enumType, value, result, ignoreCase) {
             result.v = 0;
-            result.v = Bridge.unbox(enumMethods.parse(enumType, value, ignoreCase, true));
+            result.v = Bridge.unbox(enumMethods.parse(enumType, value, ignoreCase, true), true);
 
             if (result.v == null) {
                 return false;
             }
 
             return true;
+        },
+
+        equals: function (v1, v2, T) {
+            if (v2 && v2.$boxed && (v1 && v1.$boxed || T)) {
+                if (v2.type !== (v1.type || T)) {
+                    return false;
+                }
+            }
+
+            return Bridge.unbox(v1, true) === Bridge.unbox(v2, true);
+        },
+
+        equalsT: function (v1, v2) {
+            return Bridge.unbox(v1, true) === Bridge.unbox(v2, true);
         }
     };
 
