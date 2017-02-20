@@ -293,11 +293,5 @@ namespace Bridge.Translator
         {
             get; set;
         }
-
-        public bool DisabledAnnotatedFunctionNames
-        {
-            get;
-            set;
-        }
     }
 }

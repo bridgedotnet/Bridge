@@ -18260,7 +18260,7 @@ Bridge.$N1391Result =                 r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge635A", {
-        internalFunc1: function internalFunc1 () {
+        internalFunc1: function () {
             return "A.Test1";
         }
     });
