@@ -15266,6 +15266,29 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2407", {
+        statics: {
+            ChangedStaticName: function ChangedStaticName () {
+                return "Static";
+            }
+        },
+        ChangedInstanceName: function ChangedInstanceName () {
+            return "Instance";
+        },
+        testNamedFunctions: function testNamedFunctions () {
+            var staticMethod = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2407.ChangedStaticName;
+
+            var s = staticMethod.toString();
+            Bridge.Test.NUnit.Assert.true$1(System.String.contains(s.toLowerCase(),"function changedstaticname"), System.String.concat("Contains function name annotation in ", s));
+            Bridge.Test.NUnit.Assert.areEqual("Static", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2407.ChangedStaticName());
+            Bridge.Test.NUnit.Assert.areEqual("Static", staticMethod());
+
+            s = this.ChangedInstanceName.toString();
+            Bridge.Test.NUnit.Assert.true$1(System.String.contains(s.toLowerCase(),"function changedinstancename"), System.String.concat("Contains function name annotation in ", s));
+            Bridge.Test.NUnit.Assert.areEqual("Instance", this.ChangedInstanceName());
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         config: {
             properties: {
