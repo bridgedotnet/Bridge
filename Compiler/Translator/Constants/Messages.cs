@@ -21,7 +21,7 @@ namespace Bridge.Translator.Constants
             public const string OBJECT_LITERAL_CONSTRUCTOR_INHERITANCE = "[ObjectLiteral] with Constructor mode should be inherited from a class with the same options: {0}";
             public const string OBJECT_LITERAL_INTERFACE_NO_OVERLOAD_METHODS = "[ObjectLiteral] interface does not support overloaded methods: {0}";
             public const string OBJECT_LITERAL_INTERFACE_NO_EVENTS = "[ObjectLiteral] interface does not support events: {0}";
-            public const string OBJECT_LITERAL_INTERFACE_NO_EXPLICIT_IMPLIMENTATION = "[ObjectLiteral] does not support explicit interface member implementation: {0}";
+            public const string OBJECT_LITERAL_INTERFACE_NO_EXPLICIT_IMPLEMENTATION = "[ObjectLiteral] does not support explicit interface member implementation: {0}";
             public const string OBJECT_LITERAL_INTERFACE_INHERITANCE = "[ObjectLiteral] should implement an interface which must be object literal also: {0}";
         }
     }

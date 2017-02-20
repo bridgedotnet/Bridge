@@ -161,7 +161,7 @@ namespace Bridge.Translator
                 {
                     return null;
                 }
-                return new RawValue(JS.Funcs.BRIDGE_GETDEFAULTVALUE + "(" + astType.ToString() + ")");
+                return new RawValue(JS.Funcs.BRIDGE_GETDEFAULTVALUE + "(" + type.Name + ")");
             }
 
             if (type.IsKnownType(KnownTypeCode.Decimal))
