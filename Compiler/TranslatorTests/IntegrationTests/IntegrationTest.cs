@@ -95,7 +95,6 @@ namespace Bridge.Translator.Tests
 #else
         [TestCase("19", true, true, TestName = "IntegrationTest 19 - Linked files feature #531 #562")]
 #endif
-        [TestCase("20", true, true, TestName = "IntegrationTest 20 - Test explicit naming of functions when [Name] attribute used")]
         public void Test(string folder, bool isToTranslate, bool useSpecialFileCompare, string markedContentFiles = null)
         {
             var logDir = Path.GetDirectoryName(Helpers.FileHelper.GetExecutingAssemblyPath());
