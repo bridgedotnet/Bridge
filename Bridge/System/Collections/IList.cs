@@ -6,6 +6,7 @@ namespace System.Collections
     public interface IList : ICollection, IEnumerable
     {
         [Template("System.Array.add({this}, {item})")]
+        [Unbox(false)]
         void Add(object item);
 
         [Template("System.Array.clear({this})")]
@@ -14,6 +15,7 @@ namespace System.Collections
         [Template("System.Array.contains({this}, {item})")]
         bool Contains(object item);
 
+        [Unbox(false)]
         object this[int index]
         {
             [Template("System.Array.getItem({this}, {0})")]
@@ -26,6 +28,7 @@ namespace System.Collections
         int IndexOf(object item);
 
         [Template("System.Array.insert({this}, {index}, {item})")]
+        [Unbox(false)]
         void Insert(int index, object item);
 
         [Template("System.Array.removeAt({this}, {index})")]

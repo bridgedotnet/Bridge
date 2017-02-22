@@ -464,6 +464,12 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#2342 - TestCastParanthesize", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2342.testCastParanthesize);
             QUnit.test("#2343 - TestBoxedEqualsAndGetHashCode", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2343.testBoxedEqualsAndGetHashCode);
             QUnit.test("#2344 - TestHtmlElementName", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2344.testHtmlElementName);
+            QUnit.test("#2345 - TestArrayAsIList", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2345.testArrayAsIList);
+            QUnit.test("#2345 - TestByteArrayAsIList", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2345.testByteArrayAsIList);
+            QUnit.test("#2345 - TestLongArrayAsIList", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2345.testLongArrayAsIList);
+            QUnit.test("#2345 - TestDecimalArrayAsIList", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2345.testDecimalArrayAsIList);
+            QUnit.test("#2345 - TestStructArrayAsIList", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2345.testStructArrayAsIList);
+            QUnit.test("#2345 - TestStringArrayAsIList", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2345.testStringArrayAsIList);
             QUnit.test("#2347 - TestG17FormatSpecifier", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2347.testG17FormatSpecifier);
             QUnit.test("#2349 - TestExternalIgnoreGenericClass", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2349.testExternalIgnoreGenericClass);
             QUnit.test("#2352 - TestOperatorOnAnonymousType", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2352.testOperatorOnAnonymousType);
@@ -9514,6 +9520,65 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2344",
                     file: "Batch3\\BridgeIssues\\2300\\N2344.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2345", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345)],
+        statics: {
+            testArrayAsIList: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2345, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestArrayAsIList()",
+                    line: "16"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345.testArrayAsIList();
+            },
+            testByteArrayAsIList: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2345, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestByteArrayAsIList()",
+                    line: "36"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345.testByteArrayAsIList();
+            },
+            testLongArrayAsIList: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2345, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestLongArrayAsIList()",
+                    line: "54"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345.testLongArrayAsIList();
+            },
+            testDecimalArrayAsIList: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2345, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestDecimalArrayAsIList()",
+                    line: "76"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345.testDecimalArrayAsIList();
+            },
+            testStructArrayAsIList: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2345, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestStructArrayAsIList()",
+                    line: "98"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345.testStructArrayAsIList();
+            },
+            testStringArrayAsIList: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2345, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestStringArrayAsIList()",
+                    line: "115"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345.testStringArrayAsIList();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
+                    project: "Batch3",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345",
+                    file: "Batch3\\BridgeIssues\\2300\\N2345.cs"
                 } );
             }
             return this.context;

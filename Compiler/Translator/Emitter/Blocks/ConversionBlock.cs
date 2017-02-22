@@ -291,10 +291,36 @@ namespace Bridge.Translator
                 var inv = expression.Parent as InvocationExpression;
                 var isArgument = inv != null && inv.Arguments.Contains(expression);
 
+                if (!isArgument)
+                {
+                    var idx = expression.Parent as IndexerExpression;
+                    isArgument = idx != null && idx.Arguments.Contains(expression);
+                }
+
+                if (!isArgument)
+                {
+                    var ae = expression.Parent as AssignmentExpression;
+                    isArgument = ae != null && ae.Left is IndexerExpression && ae.Right == expression;
+                }
+
                 if (isArgument)
                 {
-                    var inv_rr = block.Emitter.Resolver.ResolveNode(inv, block.Emitter);
-                    var parent_rr = inv_rr as InvocationResolveResult;
+                    var inv_rr = block.Emitter.Resolver.ResolveNode(expression.Parent, block.Emitter);
+                    var parent_rr = inv_rr as MemberResolveResult;
+
+                    if (parent_rr == null && inv_rr is OperatorResolveResult)
+                    {
+                        var orr = (OperatorResolveResult)inv_rr;
+                        if (orr.Operands[0] is ArrayAccessResolveResult)
+                        {
+                            isArgument = false;
+                        }
+                        else if (orr.Operands[0] is MemberResolveResult)
+                        {
+                            parent_rr = (MemberResolveResult)orr.Operands[0];
+                        }
+                    }
+
                     if (parent_rr != null)
                     {
                         var memberDeclaringTypeDefinition = parent_rr.Member.DeclaringTypeDefinition;
@@ -302,7 +328,7 @@ namespace Bridge.Translator
                                      && !(memberDeclaringTypeDefinition.Namespace == CS.NS.System || memberDeclaringTypeDefinition.Namespace.StartsWith(CS.NS.System + "."));
 
                         var attr = parent_rr.Member.Attributes.FirstOrDefault(a => a.AttributeType.FullName == "Bridge.UnboxAttribute");
-
+                         
                         if (attr != null)
                         {
                             isArgument = (bool)attr.PositionalArguments.First().ConstantValue;

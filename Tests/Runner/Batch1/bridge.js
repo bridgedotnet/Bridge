@@ -9572,15 +9572,46 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
             System.Array.checkReadOnly(obj, T);
 
-            if (Bridge.isArray(obj)) {
-                obj.push(item);
-            } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add"])) {
+            if (T) {
+                item = System.Array.checkNewElementType(item, T);
+            }
+
+            if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add"])) {
                 obj[name](item);
             } else if (Bridge.isFunction(obj[name = "System$Collections$IList$add"])) {
                 obj[name](item);
             } else if (Bridge.isFunction(obj.add)) {
                 obj.add(item);
             }
+        },
+
+        checkNewElementType: function (v, type) {
+            var unboxed = Bridge.unbox(v, true);
+
+            if (Bridge.isNumber(unboxed)) {
+                if (type === System.Decimal) {
+                    return new System.Decimal(unboxed);
+                }
+
+                if (type === System.Int64) {
+                    return new System.Int64(unboxed);
+                }
+
+                if (type === System.UInt64) {
+                    return new System.UInt64(unboxed);
+                }
+            }
+
+            var is = Bridge.is(v, type);
+            if (!is) {
+                if (v == null && Bridge.getDefaultValue(type) == null) {
+                    return null;
+                }
+
+                throw new System.ArgumentException("The value " + unboxed + "is not of type " + Bridge.getTypeName(type) + " and cannot be used in this generic collection.");
+            }
+
+            return unboxed;
         },
 
         clear: function (obj, T) {
@@ -9734,9 +9765,11 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
             System.Array.checkReadOnly(obj, T);
 
-            if (Bridge.isArray(obj)) {
-                obj.splice(index, 0, item);
-            } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert"])) {
+            if (T) {
+                item = System.Array.checkNewElementType(item, T);
+            }
+
+            if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert"])) {
                 obj[name](index, item);
             } else if (Bridge.isFunction(obj[name = "System$Collections$IList$insert"])) {
                 obj[name](index, item);
@@ -9762,39 +9795,81 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
         },
 
         getItem: function (obj, idx, T) {
-            var name;
+            var name,
+                v;
 
             if (Bridge.isArray(obj)) {
-                return obj[idx];
+                return obj.$type && Bridge.getDefaultValue(obj.$type.$elementType) != null ? Bridge.box(obj[idx], obj.$type.$elementType) : obj[idx];
             } else if (Bridge.isFunction(obj.get)) {
-                return obj.get(idx);
+                v = obj.get(idx);
             } else if (Bridge.isFunction(obj.getItem)) {
-                return obj.getItem(idx);
+                v = obj.getItem(idx);
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem"])) {
-                return obj[name](idx);
+                v = obj[name](idx);
             } else if (Bridge.isFunction(obj[name = "System$Collections$IList$$getItem"])) {
-                return obj[name](idx);
+                v = obj[name](idx);
             } else if (Bridge.isFunction(obj.get_Item)) {
-                return obj.get_Item(idx);
+                v = obj.get_Item(idx);
             }
+
+            return T && Bridge.getDefaultValue(T) != null ? Bridge.box(v, T) : v;
         },
 
         setItem: function (obj, idx, value, T) {
             var name;
 
             if (Bridge.isArray(obj)) {
+                if (obj.$type) {
+                    value = System.Array.checkElementType(value, obj.$type.$elementType);
+                }
+
                 obj[idx] = value;
-            } else if (Bridge.isFunction(obj.set)) {
-                obj.set(idx, value);
-            } else if (Bridge.isFunction(obj.setItem)) {
-                obj.setItem(idx, value);
-            } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem"])) {
-                return obj[name](idx, value);
-            } else if (T && Bridge.isFunction(obj[name = "System$Collections$IList$setItem"])) {
-                return obj[name](idx, value);
-            } else if (Bridge.isFunction(obj.set_Item)) {
-                obj.set_Item(idx, value);
+            } else {
+                if (T) {
+                    value = System.Array.checkElementType(value, T);
+                }
+
+                if (Bridge.isFunction(obj.set)) {
+                    obj.set(idx, value);
+                } else if (Bridge.isFunction(obj.setItem)) {
+                    obj.setItem(idx, value);
+                } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem"])) {
+                    return obj[name](idx, value);
+                } else if (T && Bridge.isFunction(obj[name = "System$Collections$IList$setItem"])) {
+                    return obj[name](idx, value);
+                } else if (Bridge.isFunction(obj.set_Item)) {
+                    obj.set_Item(idx, value);
+                }
             }
+        },
+
+        checkElementType: function (v, type) {
+            var unboxed = Bridge.unbox(v, true);
+
+            if (Bridge.isNumber(unboxed)) {
+                if (type === System.Decimal) {
+                    return new System.Decimal(unboxed);
+                }
+
+                if (type === System.Int64) {
+                    return new System.Int64(unboxed);
+                }
+
+                if (type === System.UInt64) {
+                    return new System.UInt64(unboxed);
+                }
+            }
+
+            var is = Bridge.is(v, type);
+            if (!is) {
+                if (v == null) {
+                    return Bridge.getDefaultValue(type);
+                }
+
+                throw new System.ArgumentException("Cannot widen from source type to target type either because the source type is a not a primitive type or the conversion cannot be accomplished.");
+            }
+
+            return unboxed;
         },
 
         resize: function (arr, newSize, val) {

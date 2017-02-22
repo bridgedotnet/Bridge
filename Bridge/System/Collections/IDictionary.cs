@@ -4,6 +4,7 @@ using Bridge;
 namespace System.Collections
 {
     [External]
+    [Unbox(true)]
     public interface IDictionary : ICollection, IEnumerable, IBridgeClass
     {
         [AccessorsIndexer]
