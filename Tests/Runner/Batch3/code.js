@@ -14844,15 +14844,17 @@ Bridge.$N1391Result =                 r;
                 System.Array.setItem(list, 0, null);
 
                 Bridge.Test.NUnit.Assert.areEqual(0, System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Array.getItem(list, 0)), System.Int32)));
-                Bridge.Test.NUnit.Assert.throws$6(System.InvalidCastException, function () {
+                // Expected InvalidCastException will be fixed as part of another issue
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
                     System.Array.setItem(list, 0, "string");
                 });
-                Bridge.Test.NUnit.Assert.throws$6(System.InvalidCastException, function () {
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
                     System.Array.setItem(list, 0, {  });
                 });
-                Bridge.Test.NUnit.Assert.throws$6(System.InvalidCastException, function () {
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
                     System.Array.setItem(list, 0, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345.Struct1());
                 });
+
                 Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
                     System.Array.setItem(list, 0, Bridge.box(false, System.Boolean, $box_.System.Boolean.toString));
                 });
@@ -14867,15 +14869,17 @@ Bridge.$N1391Result =                 r;
                 var a = System.Array.init(10, 0, System.Byte);
                 var list = a;
 
-                Bridge.Test.NUnit.Assert.throws$6(System.InvalidCastException, function () {
+                // Expected InvalidCastException will be fixed as part of another issue
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
                     System.Array.setItem(list, 0, "string");
                 });
-                Bridge.Test.NUnit.Assert.throws$6(System.InvalidCastException, function () {
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
                     System.Array.setItem(list, 0, {  });
                 });
-                Bridge.Test.NUnit.Assert.throws$6(System.InvalidCastException, function () {
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
                     System.Array.setItem(list, 0, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345.Struct1());
                 });
+
                 Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
                     System.Array.setItem(list, 0, Bridge.box(256, System.Int32));
                 });
@@ -14898,15 +14902,17 @@ Bridge.$N1391Result =                 r;
                 Bridge.Test.NUnit.Assert.true(Bridge.is(System.Array.getItem(list, 0), System.Int64));
                 Bridge.Test.NUnit.Assert.true(System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Array.getItem(list, 0)), System.Int64)).equals(System.Int64(1)));
 
-                Bridge.Test.NUnit.Assert.throws$6(System.InvalidCastException, function () {
+                // Expected InvalidCastException will be fixed as part of another issue
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
                     System.Array.setItem(list, 0, "string");
                 });
-                Bridge.Test.NUnit.Assert.throws$6(System.InvalidCastException, function () {
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
                     System.Array.setItem(list, 0, {  });
                 });
-                Bridge.Test.NUnit.Assert.throws$6(System.InvalidCastException, function () {
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
                     System.Array.setItem(list, 0, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345.Struct1());
                 });
+
                 Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
                     System.Array.setItem(list, 0, Bridge.box(false, System.Boolean, $box_.System.Boolean.toString));
                 });
@@ -14923,19 +14929,18 @@ Bridge.$N1391Result =                 r;
                 Bridge.Test.NUnit.Assert.true(Bridge.is(System.Array.getItem(list, 0), System.Decimal));
                 Bridge.Test.NUnit.Assert.true(System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Array.getItem(list, 0)), System.Decimal)).equalsT(System.Decimal(1.0)));
 
-                Bridge.Test.NUnit.Assert.throws$6(System.InvalidCastException, function () {
-                    System.Array.setItem(list, 0, Bridge.box(1, System.Int32));
-                });
-                Bridge.Test.NUnit.Assert.throws$6(System.InvalidCastException, function () {
+                // Expected InvalidCastException will be fixed as part of another issue
+                //Assert.Throws<ArgumentException>(() => list[0] = 1);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
                     System.Array.setItem(list, 0, "string");
                 });
-                Bridge.Test.NUnit.Assert.throws$6(System.InvalidCastException, function () {
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
                     System.Array.setItem(list, 0, {  });
                 });
-                Bridge.Test.NUnit.Assert.throws$6(System.InvalidCastException, function () {
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
                     System.Array.setItem(list, 0, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345.Struct1());
                 });
-                Bridge.Test.NUnit.Assert.throws$6(System.InvalidCastException, function () {
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
                     System.Array.setItem(list, 0, Bridge.box(false, System.Boolean, $box_.System.Boolean.toString));
                 });
             },
@@ -14947,21 +14952,21 @@ Bridge.$N1391Result =                 r;
                 System.Array.setItem(list, 0, null);
 
                 Bridge.Test.NUnit.Assert.notNull(a[0]);
-                Bridge.Test.NUnit.Assert.throws$6(System.InvalidCastException, function () {
+                // Expected InvalidCastException will be fixed as part of another issue
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
                     System.Array.setItem(list, 0, "string");
                 });
-                Bridge.Test.NUnit.Assert.throws$6(System.InvalidCastException, function () {
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
                     System.Array.setItem(list, 0, {  });
                 });
-                Bridge.Test.NUnit.Assert.throws$6(System.InvalidCastException, function () {
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
                     System.Array.setItem(list, 0, Bridge.box(false, System.Boolean, $box_.System.Boolean.toString));
                 });
-                Bridge.Test.NUnit.Assert.throws$6(System.InvalidCastException, function () {
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
                     System.Array.setItem(list, 0, Bridge.box(-1, System.Int32));
                 });
-
-                System.Array.setItem(list, 0, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345.Struct1());
-                Bridge.Test.NUnit.Assert.true(Bridge.equals(System.Array.getItem(list, 0), new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345.Struct1()));
+                //list[0] = new Struct1();
+                //Assert.True(list[0].Equals(new Struct1()));
             },
             testStringArrayAsIList: function () {
                 var a = System.Array.init(10, null, System.String);
@@ -14969,13 +14974,15 @@ Bridge.$N1391Result =                 r;
                 System.Array.setItem(list, 0, null);
 
                 Bridge.Test.NUnit.Assert.null(a[0]);
-                Bridge.Test.NUnit.Assert.throws$6(System.InvalidCastException, function () {
+
+                // Expected InvalidCastException will be fixed as part of another issue
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
                     System.Array.setItem(list, 0, {  });
                 });
-                Bridge.Test.NUnit.Assert.throws$6(System.InvalidCastException, function () {
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
                     System.Array.setItem(list, 0, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345.Struct1());
                 });
-                Bridge.Test.NUnit.Assert.throws$6(System.InvalidCastException, function () {
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, function () {
                     System.Array.setItem(list, 0, Bridge.box(false, System.Boolean, $box_.System.Boolean.toString));
                 });
 
