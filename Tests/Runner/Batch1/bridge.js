@@ -11,6 +11,10 @@
 (function (globals) {
     "use strict";
 
+    if (typeof module !== "undefined" && module.exports) {
+        globals = global;
+    }
+
     // @source Core.js
 
     var core = {
@@ -1996,62 +2000,62 @@
     // @source Browser.js
 
     var check = function (regex) {
-            return regex.test(navigator.userAgent.toLowerCase());
-        },
+        return Bridge.global.navigator && regex.test(Bridge.global.navigator.userAgent.toLowerCase());
+    },
 
-        isStrict = Bridge.global.document && Bridge.global.document.compatMode === "CSS1Compat",
+    isStrict = Bridge.global.document && Bridge.global.document.compatMode === "CSS1Compat",
 
-        version = function (is, regex) {
-            var m;
+    version = function (is, regex) {
+        var m;
 
-            return (is && (m = regex.exec(navigator.userAgent.toLowerCase()))) ? parseFloat(m[1]) : 0;
-        },
+        return Bridge.global.navigator && (is && (m = regex.exec(navigator.userAgent.toLowerCase()))) ? parseFloat(m[1]) : 0;
+    },
 
-        docMode = Bridge.global.document ? Bridge.global.document.documentMode : null,
-        isOpera = check(/opera/),
-        isOpera10_5 = isOpera && check(/version\/10\.5/),
-        isChrome = check(/\bchrome\b/),
-        isWebKit = check(/webkit/),
-        isSafari = !isChrome && check(/safari/),
-        isSafari2 = isSafari && check(/applewebkit\/4/),
-        isSafari3 = isSafari && check(/version\/3/),
-        isSafari4 = isSafari && check(/version\/4/),
-        isSafari5_0 = isSafari && check(/version\/5\.0/),
-        isSafari5 = isSafari && check(/version\/5/),
-        isIE = !isOpera && (check(/msie/) || check(/trident/)),
-        isIE7 = isIE && ((check(/msie 7/) && docMode !== 8 && docMode !== 9 && docMode !== 10) || docMode === 7),
-        isIE8 = isIE && ((check(/msie 8/) && docMode !== 7 && docMode !== 9 && docMode !== 10) || docMode === 8),
-        isIE9 = isIE && ((check(/msie 9/) && docMode !== 7 && docMode !== 8 && docMode !== 10) || docMode === 9),
-        isIE10 = isIE && ((check(/msie 10/) && docMode !== 7 && docMode !== 8 && docMode !== 9) || docMode === 10),
-        isIE11 = isIE && ((check(/trident\/7\.0/) && docMode !== 7 && docMode !== 8 && docMode !== 9 && docMode !== 10) || docMode === 11),
-        isIE6 = isIE && check(/msie 6/),
-        isGecko = !isWebKit && !isIE && check(/gecko/),
-        isGecko3 = isGecko && check(/rv:1\.9/),
-        isGecko4 = isGecko && check(/rv:2\.0/),
-        isGecko5 = isGecko && check(/rv:5\./),
-        isGecko10 = isGecko && check(/rv:10\./),
-        isFF3_0 = isGecko3 && check(/rv:1\.9\.0/),
-        isFF3_5 = isGecko3 && check(/rv:1\.9\.1/),
-        isFF3_6 = isGecko3 && check(/rv:1\.9\.2/),
-        isWindows = check(/windows|win32/),
-        isMac = check(/macintosh|mac os x/),
-        isLinux = check(/linux/),
-        scrollbarSize = null,
-        chromeVersion = version(true, /\bchrome\/(\d+\.\d+)/),
-        firefoxVersion = version(true, /\bfirefox\/(\d+\.\d+)/),
-        ieVersion = version(isIE, /msie (\d+\.\d+)/),
-        operaVersion = version(isOpera, /version\/(\d+\.\d+)/),
-        safariVersion = version(isSafari, /version\/(\d+\.\d+)/),
-        webKitVersion = version(isWebKit, /webkit\/(\d+\.\d+)/),
-        isSecure = Bridge.global.location ? /^https/i.test(Bridge.global.location.protocol) : false,
-        isiPhone = /iPhone/i.test(navigator.platform),
-        isiPod = /iPod/i.test(navigator.platform),
-        isiPad = /iPad/i.test(navigator.userAgent),
-        isBlackberry = /Blackberry/i.test(navigator.userAgent),
-        isAndroid = /Android/i.test(navigator.userAgent),
-        isDesktop = isMac || isWindows || (isLinux && !isAndroid),
-        isTablet = isiPad,
-        isPhone = !isDesktop && !isTablet;
+    docMode = Bridge.global.document ? Bridge.global.document.documentMode : null,
+    isOpera = check(/opera/),
+    isOpera10_5 = isOpera && check(/version\/10\.5/),
+    isChrome = check(/\bchrome\b/),
+    isWebKit = check(/webkit/),
+    isSafari = !isChrome && check(/safari/),
+    isSafari2 = isSafari && check(/applewebkit\/4/),
+    isSafari3 = isSafari && check(/version\/3/),
+    isSafari4 = isSafari && check(/version\/4/),
+    isSafari5_0 = isSafari && check(/version\/5\.0/),
+    isSafari5 = isSafari && check(/version\/5/),
+    isIE = !isOpera && (check(/msie/) || check(/trident/)),
+    isIE7 = isIE && ((check(/msie 7/) && docMode !== 8 && docMode !== 9 && docMode !== 10) || docMode === 7),
+    isIE8 = isIE && ((check(/msie 8/) && docMode !== 7 && docMode !== 9 && docMode !== 10) || docMode === 8),
+    isIE9 = isIE && ((check(/msie 9/) && docMode !== 7 && docMode !== 8 && docMode !== 10) || docMode === 9),
+    isIE10 = isIE && ((check(/msie 10/) && docMode !== 7 && docMode !== 8 && docMode !== 9) || docMode === 10),
+    isIE11 = isIE && ((check(/trident\/7\.0/) && docMode !== 7 && docMode !== 8 && docMode !== 9 && docMode !== 10) || docMode === 11),
+    isIE6 = isIE && check(/msie 6/),
+    isGecko = !isWebKit && !isIE && check(/gecko/),
+    isGecko3 = isGecko && check(/rv:1\.9/),
+    isGecko4 = isGecko && check(/rv:2\.0/),
+    isGecko5 = isGecko && check(/rv:5\./),
+    isGecko10 = isGecko && check(/rv:10\./),
+    isFF3_0 = isGecko3 && check(/rv:1\.9\.0/),
+    isFF3_5 = isGecko3 && check(/rv:1\.9\.1/),
+    isFF3_6 = isGecko3 && check(/rv:1\.9\.2/),
+    isWindows = check(/windows|win32/),
+    isMac = check(/macintosh|mac os x/),
+    isLinux = check(/linux/),
+    scrollbarSize = null,
+    chromeVersion = version(true, /\bchrome\/(\d+\.\d+)/),
+    firefoxVersion = version(true, /\bfirefox\/(\d+\.\d+)/),
+    ieVersion = version(isIE, /msie (\d+\.\d+)/),
+    operaVersion = version(isOpera, /version\/(\d+\.\d+)/),
+    safariVersion = version(isSafari, /version\/(\d+\.\d+)/),
+    webKitVersion = version(isWebKit, /webkit\/(\d+\.\d+)/),
+    isSecure = Bridge.global.location ? /^https/i.test(Bridge.global.location.protocol) : false,
+    isiPhone = Bridge.global.navigator && /iPhone/i.test(Bridge.global.navigator.platform),
+    isiPod = Bridge.global.navigator && /iPod/i.test(Bridge.global.navigator.platform),
+    isiPad = Bridge.global.navigator && /iPad/i.test(Bridge.global.navigator.userAgent),
+    isBlackberry = Bridge.global.navigator && /Blackberry/i.test(Bridge.global.navigator.userAgent),
+    isAndroid = Bridge.global.navigator && /Android/i.test(Bridge.global.navigator.userAgent),
+    isDesktop = isMac || isWindows || (isLinux && !isAndroid),
+    isTablet = isiPad,
+    isPhone = !isDesktop && !isTablet;
 
     var browser = {
         isStrict: isStrict,
@@ -2117,7 +2121,6 @@
     };
 
     Bridge.Browser = browser;
-
     // @source Class.js
 
     var base = {
@@ -9970,15 +9973,46 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
             System.Array.checkReadOnly(obj, T);
 
-            if (Bridge.isArray(obj)) {
-                obj.push(item);
-            } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add"])) {
+            if (T) {
+                item = System.Array.checkNewElementType(item, T);
+            }
+
+            if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add"])) {
                 obj[name](item);
             } else if (Bridge.isFunction(obj[name = "System$Collections$IList$add"])) {
                 obj[name](item);
             } else if (Bridge.isFunction(obj.add)) {
                 obj.add(item);
             }
+        },
+
+        checkNewElementType: function (v, type) {
+            var unboxed = Bridge.unbox(v, true);
+
+            if (Bridge.isNumber(unboxed)) {
+                if (type === System.Decimal) {
+                    return new System.Decimal(unboxed);
+                }
+
+                if (type === System.Int64) {
+                    return new System.Int64(unboxed);
+                }
+
+                if (type === System.UInt64) {
+                    return new System.UInt64(unboxed);
+                }
+            }
+
+            var is = Bridge.is(v, type);
+            if (!is) {
+                if (v == null && Bridge.getDefaultValue(type) == null) {
+                    return null;
+                }
+
+                throw new System.ArgumentException("The value " + unboxed + "is not of type " + Bridge.getTypeName(type) + " and cannot be used in this generic collection.");
+            }
+
+            return unboxed;
         },
 
         clear: function (obj, T) {
@@ -10132,9 +10166,11 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
             System.Array.checkReadOnly(obj, T);
 
-            if (Bridge.isArray(obj)) {
-                obj.splice(index, 0, item);
-            } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert"])) {
+            if (T) {
+                item = System.Array.checkNewElementType(item, T);
+            }
+
+            if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert"])) {
                 obj[name](index, item);
             } else if (Bridge.isFunction(obj[name = "System$Collections$IList$insert"])) {
                 obj[name](index, item);
@@ -10160,39 +10196,81 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
         },
 
         getItem: function (obj, idx, T) {
-            var name;
+            var name,
+                v;
 
             if (Bridge.isArray(obj)) {
-                return obj[idx];
+                return obj.$type && Bridge.getDefaultValue(obj.$type.$elementType) != null ? Bridge.box(obj[idx], obj.$type.$elementType) : obj[idx];
             } else if (Bridge.isFunction(obj.get)) {
-                return obj.get(idx);
+                v = obj.get(idx);
             } else if (Bridge.isFunction(obj.getItem)) {
-                return obj.getItem(idx);
+                v = obj.getItem(idx);
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem"])) {
-                return obj[name](idx);
+                v = obj[name](idx);
             } else if (Bridge.isFunction(obj[name = "System$Collections$IList$$getItem"])) {
-                return obj[name](idx);
+                v = obj[name](idx);
             } else if (Bridge.isFunction(obj.get_Item)) {
-                return obj.get_Item(idx);
+                v = obj.get_Item(idx);
             }
+
+            return T && Bridge.getDefaultValue(T) != null ? Bridge.box(v, T) : v;
         },
 
         setItem: function (obj, idx, value, T) {
             var name;
 
             if (Bridge.isArray(obj)) {
+                if (obj.$type) {
+                    value = System.Array.checkElementType(value, obj.$type.$elementType);
+                }
+
                 obj[idx] = value;
-            } else if (Bridge.isFunction(obj.set)) {
-                obj.set(idx, value);
-            } else if (Bridge.isFunction(obj.setItem)) {
-                obj.setItem(idx, value);
-            } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem"])) {
-                return obj[name](idx, value);
-            } else if (T && Bridge.isFunction(obj[name = "System$Collections$IList$setItem"])) {
-                return obj[name](idx, value);
-            } else if (Bridge.isFunction(obj.set_Item)) {
-                obj.set_Item(idx, value);
+            } else {
+                if (T) {
+                    value = System.Array.checkElementType(value, T);
+                }
+
+                if (Bridge.isFunction(obj.set)) {
+                    obj.set(idx, value);
+                } else if (Bridge.isFunction(obj.setItem)) {
+                    obj.setItem(idx, value);
+                } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem"])) {
+                    return obj[name](idx, value);
+                } else if (T && Bridge.isFunction(obj[name = "System$Collections$IList$setItem"])) {
+                    return obj[name](idx, value);
+                } else if (Bridge.isFunction(obj.set_Item)) {
+                    obj.set_Item(idx, value);
+                }
             }
+        },
+
+        checkElementType: function (v, type) {
+            var unboxed = Bridge.unbox(v, true);
+
+            if (Bridge.isNumber(unboxed)) {
+                if (type === System.Decimal) {
+                    return new System.Decimal(unboxed);
+                }
+
+                if (type === System.Int64) {
+                    return new System.Int64(unboxed);
+                }
+
+                if (type === System.UInt64) {
+                    return new System.UInt64(unboxed);
+                }
+            }
+
+            var is = Bridge.is(v, type);
+            if (!is) {
+                if (v == null) {
+                    return Bridge.getDefaultValue(type);
+                }
+
+                throw new System.ArgumentException("Cannot widen from source type to target type either because the source type is a not a primitive type or the conversion cannot be accomplished.");
+            }
+
+            return unboxed;
         },
 
         resize: function (arr, newSize, val) {

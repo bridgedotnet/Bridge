@@ -6,6 +6,6 @@
   "ignoreCast": true,
   "fileNameCasing": "Lowercase",
   "logging": {
-    "level":  "Trace"
+    "level":  "None"
   }
 }

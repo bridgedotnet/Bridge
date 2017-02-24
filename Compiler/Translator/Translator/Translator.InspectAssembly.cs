@@ -10,9 +10,17 @@ namespace Bridge.Translator
 {
     public partial class Translator
     {
+        public Stack<string> CurrentAssemblyLocationInspected
+        {
+            get; set;
+        } = new Stack<string>();
+
         private class CecilAssemblyResolver : DefaultAssemblyResolver
         {
-            public ILogger Logger { get; set; }
+            public ILogger Logger
+            {
+                get; set;
+            }
 
             public CecilAssemblyResolver(ILogger logger, string location)
             {
@@ -78,6 +86,16 @@ namespace Bridge.Translator
         {
             this.Log.Trace("Assembly definition loading " + (location ?? "") + " ...");
 
+            if (CurrentAssemblyLocationInspected.Contains(location))
+            {
+                var message = string.Format("There is a circular reference found for assembly location {0}. To avoid the error, rename your project's assembly to be different from that location.", location);
+
+                this.Log.Error(message);
+                throw new System.InvalidOperationException(message);
+            }
+
+            CurrentAssemblyLocationInspected.Push(location);
+
             var assemblyDefinition = AssemblyDefinition.ReadAssembly(
                     location,
                     new ReaderParameters()
@@ -87,29 +105,40 @@ namespace Bridge.Translator
                     }
                 );
 
-            string name;
-            string path;
-            AssemblyDefinition reference;
 
             foreach (AssemblyNameReference r in assemblyDefinition.MainModule.AssemblyReferences)
             {
-                name = r.Name;
+                var name = r.Name;
 
-                if (r.Name == "mscorlib" || r.Name == "System.Core")
+                if (name == "mscorlib" || name == "System.Core")
                 {
                     continue;
                 }
 
-                path = Path.Combine(Path.GetDirectoryName(location), name) + ".dll";
-                reference = this.LoadAssembly(path, references);
+                var fullName = r.FullName;
 
-                if (!references.Any(a => a.Name.Name == reference.Name.Name))
+                if (references.Any(a => a.Name.FullName == fullName))
+                {
+                    continue;
+                }
+
+                var path = Path.Combine(Path.GetDirectoryName(location), name) + ".dll";
+                var reference = this.LoadAssembly(path, references);
+
+                if (reference != null && !references.Any(a => a.Name.FullName == reference.Name.FullName))
                 {
                     references.Add(reference);
                 }
             }
 
             this.Log.Trace("Assembly definition loading " + (location ?? "") + " done");
+
+            var cl = CurrentAssemblyLocationInspected.Pop();
+
+            if (cl != location)
+            {
+                throw new System.InvalidOperationException(string.Format("Current location {0} is not the current location in stack {1}", location, cl));
+            }
 
             return assemblyDefinition;
         }
@@ -271,7 +300,7 @@ namespace Bridge.Translator
                     var syntaxTree = parser.Parse(rewriter.Rewrite(i), fileName);
                     //var syntaxTree = parser.Parse(reader, fileName);
                     this.Log.Trace("\tParsing syntax tree done");
-                    
+
                     if (parser.HasErrors)
                     {
                         foreach (var error in parser.Errors)

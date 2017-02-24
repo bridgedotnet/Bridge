@@ -17,6 +17,7 @@ namespace System
 
         private extern Array();
 
+        [Unbox(false)]
         public extern object this[int index]
         {
             [External]
