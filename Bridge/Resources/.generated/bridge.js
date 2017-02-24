@@ -3187,7 +3187,7 @@
             } else if (type === String.String) {
                 return "true";
             } else if (type === System.DateTime) {
-                return new Date(-System.DateTime.getOffset() + 1);
+                return new System.DateTime.fromTicks(1);
             } else if (Bridge.Reflection.isEnum(type)) {
                 return Bridge.unbox(System.Enum.parse(type, 1));
             } else {
@@ -3229,7 +3229,7 @@
             } else if (type === System.String) {
                 return raw.toString();
             } else if (type === System.DateTime) {
-                return new Date(-System.DateTime.getOffset() + System.Int64(raw | 0).div(10000));
+                return new System.DateTime.fromTicks(raw | 0);
             } else {
                 return null;
             }
