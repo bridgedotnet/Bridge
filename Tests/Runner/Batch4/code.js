@@ -13647,7 +13647,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         m$1: function (i) {
         },
-        x: function x (i, s) {
+        x: function (i, s) {
         }
     });
 
@@ -15507,7 +15507,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.ScriptTests.TestType", {
         statics: {
-            StaticMethod: function StaticMethod () {
+            StaticMethod: function () {
             }
         },
         i: 0,
@@ -15534,15 +15534,15 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 this.Evt(this, null);
             }
         },
-        InstanceMethod: function InstanceMethod () {
+        InstanceMethod: function () {
         },
-        F1: function F1 () {
+        F1: function () {
             return 42;
         },
-        F2: function F2 (i) {
+        F2: function (i) {
             return ((i + 10) | 0);
         },
-        F3: function F3 (i, j) {
+        F3: function (i, j) {
             return ((i + j) | 0);
         }
     });

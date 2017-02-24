@@ -1,6 +1,6 @@
     Bridge.define("TestIssue2141.Bridge2141", {
         statics: {
-            test: function () {
+            test: function test() {
                 // #2141 Skip writing type information to [External] [ObjectLiteral]
 
                 // These below should NOT contain Bridge.literal call

@@ -129,7 +129,7 @@
     });
 
     Bridge.define("TestIssue379.Tests", {
-        testDataIgnore: function () {
+        testDataIgnore: function testDataIgnore() {
             var d1 = TestIssue379.DataIgnore.ctor();
             var d2 = Bridge.merge(TestIssue379.DataIgnore.ctor(), {
                 int1: 1, int2: 22, str3: "3", str4: "Str44", intNull5: 5, intNull6: 66, decimal7: System.Decimal(7), decimal8: System.Decimal(88)
@@ -150,7 +150,7 @@
                 int1: 1, int2: 22, str3: "3", str4: "Str44", intNull5: 5, intNull6: 66, decimal7: System.Decimal(7), decimal8: System.Decimal(88)
             } );
         },
-        testDataDefaultValue: function () {
+        testDataDefaultValue: function testDataDefaultValue() {
             var d1 = TestIssue379.DataDefaultValue.ctor();
             var d2 = Bridge.merge(TestIssue379.DataDefaultValue.ctor(), {
                 int1: 1, int2: 22, str3: "3", str4: "Str44", intNull5: 5, intNull6: 66, decimal7: System.Decimal(7), decimal8: System.Decimal(88)
@@ -171,7 +171,7 @@
                 int1: 1, int2: 22, str3: "3", str4: "Str44", intNull5: 5, intNull6: 66, decimal7: System.Decimal(7), decimal8: System.Decimal(88)
             } );
         },
-        testDataInitializer: function () {
+        testDataInitializer: function testDataInitializer() {
             var d1 = TestIssue379.DataInitializer.ctor();
             var d2 = Bridge.merge(TestIssue379.DataInitializer.ctor(), {
                 int1: 1, int2: 22, str3: "3", str4: "Str44", intNull5: 5, intNull6: 66, decimal7: System.Decimal(7), decimal8: System.Decimal(88)

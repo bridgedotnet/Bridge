@@ -1,6 +1,6 @@
     Bridge.define("TestIssue2077.Tests", {
         statics: {
-            checkUnboxAttribute: function () {
+            checkUnboxAttribute: function checkUnboxAttribute() {
                 var o = Bridge.box(1, System.Int32);
                 var i = 1;
                 var s = "2";

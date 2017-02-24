@@ -6,16 +6,16 @@
 
     Bridge.define("TestIssue434.Issue434A", {
         statics: {
-            method1: function () {
+            method1: function method1() {
                 TestIssue434.Issue434A.doSomething(1);
             },
-            method3: function () {
+            method3: function method3() {
                 TestIssue434.Issue434A.doSomething(3);
             },
-            method4: function () {
+            method4: function method4() {
                 TestIssue434.Issue434A.doSomething(4);
             },
-            doSomething: function (i) {
+            doSomething: function doSomething(i) {
                 Bridge.Console.log(i);
             }
         }
@@ -31,16 +31,16 @@
 
     Bridge.define("TestIssue434.Issue434B", {
         statics: {
-            method1: function () {
+            method1: function method1() {
                 TestIssue434.Issue434B.doSomething(1);
             },
-            method3: function () {
+            method3: function method3() {
                 TestIssue434.Issue434B.doSomething(3);
             },
-            method4: function () {
+            method4: function method4() {
                 TestIssue434.Issue434B.doSomething(4);
             },
-            doSomething: function (i) {
+            doSomething: function doSomething(i) {
                 Bridge.Console.log(i);
             }
         }

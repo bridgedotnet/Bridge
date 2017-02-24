@@ -93,7 +93,6 @@ namespace Bridge.Translator
                 // like doSomething: function doSomething() { }
                 // instead of doSomething: function () { }
                 this.Write(name);
-                this.WriteSpace();
             }
 
             this.EmitMethodParameters(methodDeclaration.Parameters, methodDeclaration.TypeParameters.Count > 0 && Helpers.IsIgnoreGeneric(methodDeclaration, this.Emitter) ? null : methodDeclaration.TypeParameters, methodDeclaration);
