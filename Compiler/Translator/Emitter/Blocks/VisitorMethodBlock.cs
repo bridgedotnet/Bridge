@@ -29,6 +29,7 @@ namespace Bridge.Translator
 
         protected void VisitMethodDeclaration(MethodDeclaration methodDeclaration)
         {
+            var hasNameAttribute = false;
             foreach (var attrSection in methodDeclaration.Attributes)
             {
                 foreach (var attr in attrSection.Attributes)
@@ -60,6 +61,10 @@ namespace Bridge.Translator
                             return;
                         }
                     }
+                    else if (!this.Emitter.AssemblyInfo.DisabledAnnotatedFunctionNames && rr.Type.FullName == "Bridge.NameAttribute")
+                    {
+                        hasNameAttribute = true;
+                    }
                 }
             }
 
@@ -87,11 +92,11 @@ namespace Bridge.Translator
 
             this.WriteFunction();
 
-            var fn_rr = (MemberResolveResult)this.Emitter.Resolver.ResolveNode(methodDeclaration, this.Emitter);
-            string annotatedName = AttributeHelper.AnnotatedFunctionName(fn_rr.Member, name);
-            if (annotatedName != null)
+            if (hasNameAttribute)
             {
-                this.Write(annotatedName);
+				// If a method has a [Name] attribute then create a named function for this method property, rather than leaving it as an anonymous function (there are occasions that
+				// external libraries will use a function name for debugging purposes and the presence of a [Name] attribute seems like a good indicator that this might be the case)
+                this.Write(name);
                 this.WriteSpace();
             }
 

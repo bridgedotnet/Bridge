@@ -15467,7 +15467,7 @@ Bridge.$N1391Result =                 r;
         ChangedInstanceName: function ChangedInstanceName () {
             return "Instance";
         },
-        testNamedFunctions: function testNamedFunctions () {
+        testNamedFunctions: function () {
             var staticMethod = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2407.ChangedStaticName;
 
             var s = staticMethod.toString();
@@ -18475,7 +18475,7 @@ Bridge.$N1391Result =                 r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge635A", {
-        internalFunc1: function () {
+        internalFunc1: function internalFunc1 () {
             return "A.Test1";
         }
     });

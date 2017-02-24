@@ -23324,7 +23324,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         m$1: function (i) {
         },
-        x: function (i, s) {
+        x: function x (i, s) {
         }
     });
 

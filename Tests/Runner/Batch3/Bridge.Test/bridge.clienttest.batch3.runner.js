@@ -9918,7 +9918,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testNamedFunctions: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2407).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2407, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestNamedFunctions()",
-                    line: "25"
+                    line: "24"
                 } ));
                 t.getFixture().testNamedFunctions();
             }

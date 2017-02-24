@@ -5,7 +5,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
     [Category(Constants.MODULE_ISSUES)]
     [TestFixture(TestNameFormat = "#2407 - {0}")]
-    [AnnotatedFunction]
     public class Bridge2407
     {
         [Name("ChangedStaticName")]
