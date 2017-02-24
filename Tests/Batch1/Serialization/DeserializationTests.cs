@@ -186,6 +186,30 @@ namespace Bridge.ClientTest
         }
 
         [Test]
+        public static void ComplexArrayWorks()
+        {
+            var c1 = CreateComplex(E1.Item1, E1.Item2, E1.Item3, 'a', 'b', 'c');
+            var c2 = CreateComplex(E1.Item3, E1.Item1, E1.Item2, 'c', 'a', 'b');
+
+            var a = new Class1[] { c1, c2 };
+
+            string json = JSON.Serialize(a);
+            var deserialized = JSON.Deserialize<Class1[]>(json);
+
+            Assert.NotNull(deserialized, "#1");
+            Assert.AreEqual("Bridge.ClientTest.DeserializationTests+Class1[]", deserialized.GetType().FullName, "#2");
+            Assert.AreEqual(deserialized.Length, deserialized.Length, "#3");
+            Assert.NotNull(deserialized[0], "#4");
+            Assert.NotNull(deserialized[1], "#5");
+
+            var dc1 = deserialized[0];
+            AssertComplex(dc1, E1.Item1, E1.Item2, E1.Item3, 'a', 'b', 'c');
+
+            var dc2 = deserialized[1];
+            AssertComplex(dc2, E1.Item3, E1.Item1, E1.Item2, 'c', 'a', 'b');
+        }
+
+        [Test]
         public static void EnumWorks()
         {
             Assert.AreEqual(E1.Item1, JSON.Deserialize<E1>("\"Item1\""));
@@ -251,6 +275,16 @@ namespace Bridge.ClientTest
         [Test]
         public static void ComplexPropertiesWorks()
         {
+            var c = CreateComplex(E1.Item1, E1.Item2, E1.Item3, 'a', 'b', 'c');
+
+            string json = JSON.Serialize(c);
+            var jsonC = JSON.Deserialize<Class1>(json);
+
+            AssertComplex(jsonC, E1.Item1, E1.Item2, E1.Item3, 'a', 'b', 'c');
+        }
+
+        public static Class1 CreateComplex(E1 item1, E1 item2, E1 item3, char l1, char l2, char l3)
+        {
             var c = new Class1();
 
             c.Sub1 = new SubClass1
@@ -258,9 +292,9 @@ namespace Bridge.ClientTest
                 Owner = c,
                 List1 = new List<E1>
                 {
-                    E1.Item1,
-                    E1.Item2,
-                    E1.Item3
+                    item1,
+                    item2,
+                    item3
                 }
             };
 
@@ -269,29 +303,39 @@ namespace Bridge.ClientTest
                 Owner = c,
                 List1 = new List<char>
                 {
-                    'a',
-                    'b',
-                    'c'
+                    l1,
+                    l2,
+                    l3
                 }
             };
 
-            string json = JSON.Serialize(c);
-            var jsonC = JSON.Deserialize<Class1>(json);
+            return c;
+        }
 
-            Assert.True((object)jsonC.Sub1 is SubClass1);
-            Assert.True((object)jsonC.Sub2 is SubClass2);
-            Assert.True((object)jsonC.Sub1.List1 is List<E1>);
-            Assert.True((object)jsonC.Sub2.List1 is List<char>);
-            Assert.AreEqual(3, jsonC.Sub1.List1.Count);
-            Assert.AreEqual(3, jsonC.Sub2.List1.Count);
+        public static void AssertComplex(Class1 c, E1 item1, E1 item2, E1 item3, char l1, char l2, char l3)
+        {
+            Assert.NotNull(c, "ac #1");
+            Assert.NotNull(c.Sub1, "ac #2");
+            Assert.NotNull(c.Sub1.Owner, "ac #3");
+            Assert.True(c.Sub1.Owner == c, "ac #4");
+            Assert.NotNull(c.Sub2, "ac #5");
+            Assert.NotNull(c.Sub2.Owner, "ac #6");
+            Assert.True(c.Sub2.Owner == c, "ac #7");
 
-            Assert.AreEqual(E1.Item1, jsonC.Sub1.List1[0]);
-            Assert.AreEqual(E1.Item2, jsonC.Sub1.List1[1]);
-            Assert.AreEqual(E1.Item3, jsonC.Sub1.List1[2]);
+            Assert.True((object)c.Sub1 is SubClass1, "ac #8");
+            Assert.True((object)c.Sub2 is SubClass2, "ac #9");
+            Assert.True((object)c.Sub1.List1 is List<E1>, "ac #10");
+            Assert.True((object)c.Sub2.List1 is List<char>, "ac #11");
+            Assert.AreEqual(3, c.Sub1.List1.Count, "ac #12");
+            Assert.AreEqual(3, c.Sub2.List1.Count, "ac #13");
 
-            Assert.AreEqual('a', jsonC.Sub2.List1[0]);
-            Assert.AreEqual('b', jsonC.Sub2.List1[1]);
-            Assert.AreEqual('c', jsonC.Sub2.List1[2]);
+            Assert.AreEqual(item1, c.Sub1.List1[0], "ac #14");
+            Assert.AreEqual(item2, c.Sub1.List1[1], "ac #15");
+            Assert.AreEqual(item3, c.Sub1.List1[2], "ac #16");
+
+            Assert.AreEqual(l1, c.Sub2.List1[0], "ac #17");
+            Assert.AreEqual(l2, c.Sub2.List1[1], "ac #18");
+            Assert.AreEqual(l3, c.Sub2.List1[2], "ac #19");
         }
     }
 }

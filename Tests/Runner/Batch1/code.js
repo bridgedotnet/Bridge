@@ -13034,6 +13034,27 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var enumArr = System.Array.init([Bridge.ClientTest.DeserializationTests.E1.Item1, Bridge.ClientTest.DeserializationTests.E1.Item2, Bridge.ClientTest.DeserializationTests.E1.Item3], Bridge.ClientTest.DeserializationTests.E1);
                 Bridge.Test.NUnit.Assert.areEqual(enumArr, Bridge.deserialize("[\"Item1\",\"Item2\",\"Item3\"]", System.Array.type(Bridge.ClientTest.DeserializationTests.E1)));
             },
+            complexArrayWorks: function () {
+                var c1 = Bridge.ClientTest.DeserializationTests.createComplex(Bridge.ClientTest.DeserializationTests.E1.Item1, Bridge.ClientTest.DeserializationTests.E1.Item2, Bridge.ClientTest.DeserializationTests.E1.Item3, 97, 98, 99);
+                var c2 = Bridge.ClientTest.DeserializationTests.createComplex(Bridge.ClientTest.DeserializationTests.E1.Item3, Bridge.ClientTest.DeserializationTests.E1.Item1, Bridge.ClientTest.DeserializationTests.E1.Item2, 99, 97, 98);
+
+                var a = System.Array.init([c1, c2], Bridge.ClientTest.DeserializationTests.Class1);
+
+                var json = Bridge.serialize(a);
+                var deserialized = Bridge.deserialize(json, System.Array.type(Bridge.ClientTest.DeserializationTests.Class1));
+
+                Bridge.Test.NUnit.Assert.notNull$1(deserialized, "#1");
+                Bridge.Test.NUnit.Assert.areEqual$1("Bridge.ClientTest.DeserializationTests+Class1[]", Bridge.Reflection.getTypeFullName(Bridge.getType(deserialized)), "#2");
+                Bridge.Test.NUnit.Assert.areEqual$1(deserialized.length, deserialized.length, "#3");
+                Bridge.Test.NUnit.Assert.notNull$1(deserialized[0], "#4");
+                Bridge.Test.NUnit.Assert.notNull$1(deserialized[1], "#5");
+
+                var dc1 = deserialized[0];
+                Bridge.ClientTest.DeserializationTests.assertComplex(dc1, Bridge.ClientTest.DeserializationTests.E1.Item1, Bridge.ClientTest.DeserializationTests.E1.Item2, Bridge.ClientTest.DeserializationTests.E1.Item3, 97, 98, 99);
+
+                var dc2 = deserialized[1];
+                Bridge.ClientTest.DeserializationTests.assertComplex(dc2, Bridge.ClientTest.DeserializationTests.E1.Item3, Bridge.ClientTest.DeserializationTests.E1.Item1, Bridge.ClientTest.DeserializationTests.E1.Item2, 99, 97, 98);
+            },
             enumWorks: function () {
                 Bridge.Test.NUnit.Assert.areEqual(Bridge.ClientTest.DeserializationTests.E1.Item1, Bridge.deserialize("\"Item1\"", Bridge.ClientTest.DeserializationTests.E1));
             },
@@ -13080,35 +13101,61 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.areEqual$1(c.dictField.System$Collections$Generic$IDictionary$2$System$String$Bridge$ClientTest$DeserializationTests$E1$getItem("i3"), jsonC.dictField.System$Collections$Generic$IDictionary$2$System$String$Bridge$ClientTest$DeserializationTests$E1$getItem("i3"), "#18");
             },
             complexPropertiesWorks: function () {
-                var c = new Bridge.ClientTest.DeserializationTests.Class1();
-
-                c.setSub1(Bridge.merge(new Bridge.ClientTest.DeserializationTests.SubClass1(), {
-                    setOwner: c,
-                    setList1: $asm.$.Bridge.ClientTest.DeserializationTests.f3(new (System.Collections.Generic.List$1(Bridge.ClientTest.DeserializationTests.E1))())
-                } ));
-
-                c.setSub2(Bridge.merge(new Bridge.ClientTest.DeserializationTests.SubClass2(), {
-                    setOwner: c,
-                    setList1: $asm.$.Bridge.ClientTest.DeserializationTests.f4(new (System.Collections.Generic.List$1(System.Char))())
-                } ));
+                var c = Bridge.ClientTest.DeserializationTests.createComplex(Bridge.ClientTest.DeserializationTests.E1.Item1, Bridge.ClientTest.DeserializationTests.E1.Item2, Bridge.ClientTest.DeserializationTests.E1.Item3, 97, 98, 99);
 
                 var json = Bridge.serialize(c);
                 var jsonC = Bridge.deserialize(json, Bridge.ClientTest.DeserializationTests.Class1);
 
-                Bridge.Test.NUnit.Assert.true(Bridge.is(jsonC.getSub1(), Bridge.ClientTest.DeserializationTests.SubClass1));
-                Bridge.Test.NUnit.Assert.true(Bridge.is(jsonC.getSub2(), Bridge.ClientTest.DeserializationTests.SubClass2));
-                Bridge.Test.NUnit.Assert.true(Bridge.is(jsonC.getSub1().getList1(), System.Collections.Generic.List$1(Bridge.ClientTest.DeserializationTests.E1)));
-                Bridge.Test.NUnit.Assert.true(Bridge.is(jsonC.getSub2().getList1(), System.Collections.Generic.List$1(System.Char)));
-                Bridge.Test.NUnit.Assert.areEqual(3, jsonC.getSub1().getList1().getCount());
-                Bridge.Test.NUnit.Assert.areEqual(3, jsonC.getSub2().getList1().getCount());
+                Bridge.ClientTest.DeserializationTests.assertComplex(jsonC, Bridge.ClientTest.DeserializationTests.E1.Item1, Bridge.ClientTest.DeserializationTests.E1.Item2, Bridge.ClientTest.DeserializationTests.E1.Item3, 97, 98, 99);
+            },
+            createComplex: function (item1, item2, item3, l1, l2, l3) {
+                var c = new Bridge.ClientTest.DeserializationTests.Class1();
 
-                Bridge.Test.NUnit.Assert.areEqual(Bridge.ClientTest.DeserializationTests.E1.Item1, jsonC.getSub1().getList1().getItem(0));
-                Bridge.Test.NUnit.Assert.areEqual(Bridge.ClientTest.DeserializationTests.E1.Item2, jsonC.getSub1().getList1().getItem(1));
-                Bridge.Test.NUnit.Assert.areEqual(Bridge.ClientTest.DeserializationTests.E1.Item3, jsonC.getSub1().getList1().getItem(2));
+                c.setSub1(Bridge.merge(new Bridge.ClientTest.DeserializationTests.SubClass1(), {
+                    setOwner: c,
+                    setList1: function (_o15) {
+                            _o15.add(item1);
+                            _o15.add(item2);
+                            _o15.add(item3);
+                            return _o15;
+                        }(new (System.Collections.Generic.List$1(Bridge.ClientTest.DeserializationTests.E1))())
+                } ));
 
-                Bridge.Test.NUnit.Assert.areEqual(97, jsonC.getSub2().getList1().getItem(0));
-                Bridge.Test.NUnit.Assert.areEqual(98, jsonC.getSub2().getList1().getItem(1));
-                Bridge.Test.NUnit.Assert.areEqual(99, jsonC.getSub2().getList1().getItem(2));
+                c.setSub2(Bridge.merge(new Bridge.ClientTest.DeserializationTests.SubClass2(), {
+                    setOwner: c,
+                    setList1: function (_o16) {
+                            _o16.add(l1);
+                            _o16.add(l2);
+                            _o16.add(l3);
+                            return _o16;
+                        }(new (System.Collections.Generic.List$1(System.Char))())
+                } ));
+
+                return c;
+            },
+            assertComplex: function (c, item1, item2, item3, l1, l2, l3) {
+                Bridge.Test.NUnit.Assert.notNull$1(c, "ac #1");
+                Bridge.Test.NUnit.Assert.notNull$1(c.getSub1(), "ac #2");
+                Bridge.Test.NUnit.Assert.notNull$1(c.getSub1().getOwner(), "ac #3");
+                Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(c.getSub1().getOwner(), c), "ac #4");
+                Bridge.Test.NUnit.Assert.notNull$1(c.getSub2(), "ac #5");
+                Bridge.Test.NUnit.Assert.notNull$1(c.getSub2().getOwner(), "ac #6");
+                Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(c.getSub2().getOwner(), c), "ac #7");
+
+                Bridge.Test.NUnit.Assert.true$1(Bridge.is(c.getSub1(), Bridge.ClientTest.DeserializationTests.SubClass1), "ac #8");
+                Bridge.Test.NUnit.Assert.true$1(Bridge.is(c.getSub2(), Bridge.ClientTest.DeserializationTests.SubClass2), "ac #9");
+                Bridge.Test.NUnit.Assert.true$1(Bridge.is(c.getSub1().getList1(), System.Collections.Generic.List$1(Bridge.ClientTest.DeserializationTests.E1)), "ac #10");
+                Bridge.Test.NUnit.Assert.true$1(Bridge.is(c.getSub2().getList1(), System.Collections.Generic.List$1(System.Char)), "ac #11");
+                Bridge.Test.NUnit.Assert.areEqual$1(3, c.getSub1().getList1().getCount(), "ac #12");
+                Bridge.Test.NUnit.Assert.areEqual$1(3, c.getSub2().getList1().getCount(), "ac #13");
+
+                Bridge.Test.NUnit.Assert.areEqual$1(item1, c.getSub1().getList1().getItem(0), "ac #14");
+                Bridge.Test.NUnit.Assert.areEqual$1(item2, c.getSub1().getList1().getItem(1), "ac #15");
+                Bridge.Test.NUnit.Assert.areEqual$1(item3, c.getSub1().getList1().getItem(2), "ac #16");
+
+                Bridge.Test.NUnit.Assert.areEqual$1(l1, c.getSub2().getList1().getItem(0), "ac #17");
+                Bridge.Test.NUnit.Assert.areEqual$1(l2, c.getSub2().getList1().getItem(1), "ac #18");
+                Bridge.Test.NUnit.Assert.areEqual$1(l3, c.getSub2().getList1().getItem(2), "ac #19");
             }
         }
     });
@@ -13127,18 +13174,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             _o14.set("i2", Bridge.ClientTest.DeserializationTests.E1.Item2);
             _o14.set("i3", Bridge.ClientTest.DeserializationTests.E1.Item3);
             return _o14;
-        },
-        f3: function (_o15) {
-            _o15.add(Bridge.ClientTest.DeserializationTests.E1.Item1);
-            _o15.add(Bridge.ClientTest.DeserializationTests.E1.Item2);
-            _o15.add(Bridge.ClientTest.DeserializationTests.E1.Item3);
-            return _o15;
-        },
-        f4: function (_o16) {
-            _o16.add(97);
-            _o16.add(98);
-            _o16.add(99);
-            return _o16;
         }
     });
 

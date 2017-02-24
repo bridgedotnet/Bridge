@@ -1820,6 +1820,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("DecimalWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests.decimalWorks);
             QUnit.test("DateTimeWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests.dateTimeWorks);
             QUnit.test("ArrayWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests.arrayWorks);
+            QUnit.test("ComplexArrayWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests.complexArrayWorks);
             QUnit.test("EnumWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests.enumWorks);
             QUnit.test("IListWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests.iListWorks);
             QUnit.test("IDictionaryWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests.iDictionaryWorks);
@@ -8285,38 +8286,45 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 } ));
                 Bridge.ClientTest.DeserializationTests.arrayWorks();
             },
+            complexArrayWorks: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DeserializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "ComplexArrayWorks()",
+                    line: "183"
+                } ));
+                Bridge.ClientTest.DeserializationTests.complexArrayWorks();
+            },
             enumWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DeserializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "EnumWorks()",
-                    line: "183"
+                    line: "207"
                 } ));
                 Bridge.ClientTest.DeserializationTests.enumWorks();
             },
             iListWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DeserializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "IListWorks()",
-                    line: "189"
+                    line: "213"
                 } ));
                 Bridge.ClientTest.DeserializationTests.iListWorks();
             },
             iDictionaryWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DeserializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "IDictionaryWorks()",
-                    line: "200"
+                    line: "224"
                 } ));
                 Bridge.ClientTest.DeserializationTests.iDictionaryWorks();
             },
             typeWithFieldWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DeserializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TypeWithFieldWorks()",
-                    line: "214"
+                    line: "238"
                 } ));
                 Bridge.ClientTest.DeserializationTests.typeWithFieldWorks();
             },
             complexPropertiesWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DeserializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ComplexPropertiesWorks()",
-                    line: "241"
+                    line: "265"
                 } ));
                 Bridge.ClientTest.DeserializationTests.complexPropertiesWorks();
             }
