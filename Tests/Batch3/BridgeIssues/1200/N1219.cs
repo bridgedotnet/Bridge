@@ -27,15 +27,15 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             var x1 = new TestClass1();
             x1.LongProperty = 100;
-            Assert.AreEqual("{\"LongProperty\":100}", JSON.Stringify(x1).Replace(" ", ""));
+            Assert.AreEqual("{\"LongProperty\":100}", Bridge.Html5.JSON.Stringify(x1).Replace(" ", ""));
 
             var x2 = new TestClass2();
             x2.ULongProperty = 200;
-            Assert.AreEqual("{\"ULongProperty\":200}", JSON.Stringify(x2).Replace(" ", ""));
+            Assert.AreEqual("{\"ULongProperty\":200}", Bridge.Html5.JSON.Stringify(x2).Replace(" ", ""));
 
             var x3 = new TestClass3();
             x3.DecimalProperty = 300;
-            Assert.AreEqual("{\"DecimalProperty\":300}", JSON.Stringify(x3).Replace(" ", ""));
+            Assert.AreEqual("{\"DecimalProperty\":300}", Bridge.Html5.JSON.Stringify(x3).Replace(" ", ""));
         }
     }
 }

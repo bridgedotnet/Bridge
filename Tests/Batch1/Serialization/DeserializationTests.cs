@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Bridge.Html5;
 using Bridge.Test.NUnit;
+using JSON = Bridge.JSON;
 
 namespace Bridge.ClientTest
 {
@@ -106,26 +107,26 @@ namespace Bridge.ClientTest
         public static void ByteArrayWorks()
         {
             byte[] arr = new byte[] { 1, 2, 3 };
-            Assert.AreEqual(arr, JSON.Deserialize<byte[]>("\"" + System.Convert.ToBase64String(arr) + "\""));
+            Assert.AreEqual(arr, Bridge.JSON.Deserialize<byte[]>("\"" + System.Convert.ToBase64String(arr) + "\""));
         }
 
         [Test]
         public static void GuidWorks()
         {
             var guid = Guid.NewGuid();
-            Assert.AreEqual(guid.ToByteArray(), JSON.Deserialize<Guid>("\"" + guid + "\"").ToByteArray());
+            Assert.AreEqual(guid.ToByteArray(), Bridge.JSON.Deserialize<Guid>("\"" + guid + "\"").ToByteArray());
         }
 
         [Test]
         public static void TypeWorks()
         {
-            Assert.AreEqual(typeof(System.Collections.Generic.List<string>), JSON.Deserialize<Type>("\"" + typeof(System.Collections.Generic.List<string>).FullName + "\""));
+            Assert.AreEqual(typeof(System.Collections.Generic.List<string>), Bridge.JSON.Deserialize<Type>("\"" + typeof(System.Collections.Generic.List<string>).FullName + "\""));
         }
 
         [Test]
         public static void CharWorks()
         {
-            Assert.AreEqual('a', JSON.Deserialize<char>("\"a\""));
+            Assert.AreEqual('a', Bridge.JSON.Deserialize<char>("\"a\""));
         }
 
         [Test]
@@ -133,10 +134,10 @@ namespace Bridge.ClientTest
         {
             long value = long.MaxValue.ToDynamic().toNumber();
             int intValue = long.MaxValue.ToDynamic().toNumber();
-            Assert.True(value == JSON.Deserialize<long>(intValue));
+            Assert.True(value == Bridge.JSON.Deserialize<long>(intValue));
 
             value = long.MinValue;
-            Assert.True(value == JSON.Deserialize<long>(long.MinValue.ToString()));
+            Assert.True(value == Bridge.JSON.Deserialize<long>(long.MinValue.ToString()));
         }
 
         [Test]
@@ -144,25 +145,25 @@ namespace Bridge.ClientTest
         {
             ulong value = ulong.MaxValue.ToDynamic().toNumber();
             int intValue = ulong.MaxValue.ToDynamic().toNumber();
-            Assert.True(value == JSON.Deserialize<ulong>(intValue));
+            Assert.True(value == Bridge.JSON.Deserialize<ulong>(intValue));
 
             value = ulong.MinValue;
-            Assert.True(value == JSON.Deserialize<ulong>(ulong.MinValue.ToString()));
+            Assert.True(value == Bridge.JSON.Deserialize<ulong>(ulong.MinValue.ToString()));
         }
 
         [Test]
         public static void DecimalWorks()
         {
-            Assert.True(decimal.MinusOne == JSON.Deserialize<decimal>(-1));
-            Assert.True(decimal.One == JSON.Deserialize<decimal>("1"));
-            Assert.True(decimal.Zero == JSON.Deserialize<decimal>(0));
+            Assert.True(decimal.MinusOne == Bridge.JSON.Deserialize<decimal>(-1));
+            Assert.True(decimal.One == Bridge.JSON.Deserialize<decimal>("1"));
+            Assert.True(decimal.Zero == Bridge.JSON.Deserialize<decimal>(0));
         }
 
         [Test]
         public static void DateTimeWorks()
         {
             DateTime dt = new DateTime(2010, 6, 10, 12, 0, 0, 0);
-            DateTime jsonDt = JSON.Deserialize<DateTime>("\"2010-06-10T09:00:00.000\"");
+            DateTime jsonDt = Bridge.JSON.Deserialize<DateTime>("\"2010-06-10T09:00:00.000\"");
             Assert.AreEqual(dt.Year, jsonDt.Year);
             Assert.AreEqual(dt.Month, jsonDt.Month);
             Assert.AreEqual(dt.Day, jsonDt.Day);
@@ -172,30 +173,30 @@ namespace Bridge.ClientTest
         public static void ArrayWorks()
         {
             int[] intArr = new[] {1, 2, 3};
-            Assert.AreEqual(intArr, JSON.Deserialize<int[]>("[1,2,3]"));
+            Assert.AreEqual(intArr, Bridge.JSON.Deserialize<int[]>("[1,2,3]"));
 
             long[] longArr = new[] {1L, 2, 3L};
-            long[] jsonLongArr = JSON.Deserialize<long[]>("[1,2,3]");
+            long[] jsonLongArr = Bridge.JSON.Deserialize<long[]>("[1,2,3]");
             Assert.AreEqual(longArr.Length, jsonLongArr.Length);
             Assert.True(longArr[0] == jsonLongArr[0]);
             Assert.True(longArr[1] == jsonLongArr[1]);
             Assert.True(longArr[2] == jsonLongArr[2]);
 
             E1[] enumArr = new[] { E1.Item1, E1.Item2, E1.Item3 };
-            Assert.AreEqual(enumArr, JSON.Deserialize<E1[]>("[\"Item1\",\"Item2\",\"Item3\"]"));
+            Assert.AreEqual(enumArr, Bridge.JSON.Deserialize<E1[]>("[\"Item1\",\"Item2\",\"Item3\"]"));
         }
 
         [Test]
         public static void EnumWorks()
         {
-            Assert.AreEqual(E1.Item1, JSON.Deserialize<E1>("\"Item1\""));
+            Assert.AreEqual(E1.Item1, Bridge.JSON.Deserialize<E1>("\"Item1\""));
         }
 
         [Test]
         public static void IListWorks()
         {
             var list = new List<E1> {E1.Item1, E1.Item2, E1.Item3};
-            var jsonList = JSON.Deserialize<List<E1>>("[\"Item1\",\"Item2\",\"Item3\"]");
+            var jsonList = Bridge.JSON.Deserialize<List<E1>>("[\"Item1\",\"Item2\",\"Item3\"]");
             Assert.AreEqual(list.Count, jsonList.Count);
             Assert.True(list[0] == jsonList[0]);
             Assert.True(list[1] == jsonList[1]);
@@ -213,7 +214,7 @@ namespace Bridge.ClientTest
             };
 
             var jsonDict =
-                JSON.Deserialize<Dictionary<string, E1>>("{\"i1\":\"Item1\",\"i2\":\"Item2\",\"i3\":\"Item3\"}");
+                Bridge.JSON.Deserialize<Dictionary<string, E1>>("{\"i1\":\"Item1\",\"i2\":\"Item2\",\"i3\":\"Item3\"}");
 
             Assert.AreEqual(dict.Count, jsonDict.Count);
             Assert.AreEqual(dict["i1"], jsonDict["i1"]);
@@ -225,8 +226,8 @@ namespace Bridge.ClientTest
         public static void TypeWithFieldWorks()
         {
             var c = new ClassWithFields();
-            string json = JSON.Serialize(c);
-            var jsonC = JSON.Deserialize<ClassWithFieldsAndNoInit>(json);
+            string json = Bridge.JSON.Serialize(c);
+            var jsonC = Bridge.JSON.Deserialize<ClassWithFieldsAndNoInit>(json);
 
             Assert.AreEqual(c.byteArrayField, jsonC.byteArrayField);
             Assert.AreEqual(c.guidField.ToByteArray(), jsonC.guidField.ToByteArray());
@@ -275,7 +276,7 @@ namespace Bridge.ClientTest
                 }
             };
 
-            string json = JSON.Serialize(c);
+            string json = Bridge.JSON.Serialize(c);
             var jsonC = JSON.Deserialize<Class1>(json);
 
             Assert.True((object)jsonC.Sub1 is SubClass1);

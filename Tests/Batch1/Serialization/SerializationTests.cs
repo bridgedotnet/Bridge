@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Bridge.Html5;
 using Bridge.Test.NUnit;
+using JSON = Bridge.JSON;
 
 namespace Bridge.ClientTest
 {
@@ -89,99 +90,99 @@ namespace Bridge.ClientTest
         public static void ByteArrayWorks()
         {
             byte[] arr = new byte[] {1, 2, 3};
-            Assert.AreEqual("\"" + System.Convert.ToBase64String(arr) + "\"", JSON.Serialize(arr));
+            Assert.AreEqual("\"" + System.Convert.ToBase64String(arr) + "\"", Bridge.JSON.Serialize(arr));
         }
 
         [Test]
         public static void GuidWorks()
         {
             var guid = Guid.NewGuid();
-            Assert.AreEqual("\"" + guid.ToString() + "\"", JSON.Serialize(guid));
+            Assert.AreEqual("\"" + guid.ToString() + "\"", Bridge.JSON.Serialize(guid));
         }
 
         [Test]
         public static void TypeWorks()
         {
-            Assert.AreEqual("\"" + typeof(System.Collections.Generic.List<string>).FullName + "\"", JSON.Serialize(typeof(System.Collections.Generic.List<string>)));
+            Assert.AreEqual("\"" + typeof(System.Collections.Generic.List<string>).FullName + "\"", Bridge.JSON.Serialize(typeof(System.Collections.Generic.List<string>)));
         }
 
         [Test]
         public static void CharWorks()
         {
             char c = 'a';
-            Assert.AreEqual("\"a\"", JSON.Serialize(c));
+            Assert.AreEqual("\"a\"", Bridge.JSON.Serialize(c));
         }
 
         [Test]
         public static void Int64Works()
         {
             long value = long.MaxValue;
-            Assert.AreEqual(long.MaxValue.ToDynamic().toNumber(), JSON.Serialize(value));
+            Assert.AreEqual(long.MaxValue.ToDynamic().toNumber(), Bridge.JSON.Serialize(value));
 
             value = long.MinValue;
-            Assert.AreEqual(long.MinValue.ToDynamic().toNumber(), JSON.Serialize(value));
+            Assert.AreEqual(long.MinValue.ToDynamic().toNumber(), Bridge.JSON.Serialize(value));
         }
 
         [Test]
         public static void UInt64Works()
         {
             ulong value = ulong.MaxValue;
-            Assert.AreEqual(ulong.MaxValue.ToDynamic().toNumber(), JSON.Serialize(value));
+            Assert.AreEqual(ulong.MaxValue.ToDynamic().toNumber(), Bridge.JSON.Serialize(value));
 
             value = ulong.MinValue;
-            Assert.AreEqual(ulong.MinValue.ToDynamic().toNumber(), JSON.Serialize(value));
+            Assert.AreEqual(ulong.MinValue.ToDynamic().toNumber(), Bridge.JSON.Serialize(value));
         }
 
         [Test]
         public static void DecimalWorks()
         {
             decimal value = decimal.MaxValue;
-            Assert.AreEqual(decimal.MaxValue.ToDynamic().toFloat(), JSON.Serialize(value));
+            Assert.AreEqual(decimal.MaxValue.ToDynamic().toFloat(), Bridge.JSON.Serialize(value));
 
             value = decimal.MinValue;
-            Assert.AreEqual(decimal.MinValue.ToDynamic().toFloat(), JSON.Serialize(value));
+            Assert.AreEqual(decimal.MinValue.ToDynamic().toFloat(), Bridge.JSON.Serialize(value));
 
             value = decimal.MinusOne;
-            Assert.AreEqual(decimal.MinusOne.ToDynamic().toFloat(), JSON.Serialize(value));
+            Assert.AreEqual(decimal.MinusOne.ToDynamic().toFloat(), Bridge.JSON.Serialize(value));
 
             value = decimal.One;
-            Assert.AreEqual(decimal.One.ToDynamic().toFloat(), JSON.Serialize(value));
+            Assert.AreEqual(decimal.One.ToDynamic().toFloat(), Bridge.JSON.Serialize(value));
 
             value = decimal.Zero;
-            Assert.AreEqual(decimal.Zero.ToDynamic().toFloat(), JSON.Serialize(value));
+            Assert.AreEqual(decimal.Zero.ToDynamic().toFloat(), Bridge.JSON.Serialize(value));
         }
 
         [Test]
         public static void DateTimeWorks()
         {
             DateTime dt = new DateTime(2010, 6, 10, 12, 0, 0, 0);
-            Assert.True(JSON.Serialize(dt).StartsWith("\"2010-06-10T09:00:00.000"));
+            Assert.True(Bridge.JSON.Serialize(dt).StartsWith("\"2010-06-10T09:00:00.000"));
         }
 
         [Test]
         public static void ArrayWorks()
         {
             int[] intArr = new[] {1, 2, 3};
-            Assert.AreEqual("[1,2,3]", JSON.Serialize(intArr));
+            Assert.AreEqual("[1,2,3]", Bridge.JSON.Serialize(intArr));
 
             long[] longArr = new[] {1L, 2, 3L};
-            Assert.AreEqual("[1,2,3]", JSON.Serialize(longArr));
+            Assert.AreEqual("[1,2,3]", Bridge.JSON.Serialize(longArr));
 
             E1[] enumArr = new[] { E1.Item1, E1.Item2, E1.Item3 };
-            Assert.AreEqual("[\"Item1\",\"Item2\",\"Item3\"]", JSON.Serialize(enumArr));
+            Assert.AreEqual("[\"Item1\",\"Item2\",\"Item3\"]", Bridge.JSON.Serialize(enumArr));
         }
 
         [Test]
         public static void EnumWorks()
         {
-            Assert.AreEqual("\"Item1\"", JSON.Serialize(E1.Item1));
+            Assert.AreEqual("\"Item1\"", Bridge.JSON.Serialize(E1.Item1));
         }
 
         [Test]
         public static void IListWorks()
         {
             var list = new List<E1> {E1.Item1, E1.Item2, E1.Item3};
-            Assert.AreEqual("[\"Item1\",\"Item2\",\"Item3\"]", JSON.Serialize(list));
+            Assert.AreEqual("[\"Item1\",\"Item2\",\"Item3\"]", Bridge.JSON.Serialize(list));
         }
 
         [Test]
@@ -194,14 +195,14 @@ namespace Bridge.ClientTest
                 ["i3"] = E1.Item3
             };
 
-            Assert.AreEqual("{\"i1\":\"Item1\",\"i2\":\"Item2\",\"i3\":\"Item3\"}", JSON.Serialize(dict));
+            Assert.AreEqual("{\"i1\":\"Item1\",\"i2\":\"Item2\",\"i3\":\"Item3\"}", Bridge.JSON.Serialize(dict));
         }
 
         [Test]
         public static void TypeWithFieldWorks()
         {
             var c = new ClassWithFields();
-            dynamic raw = JSON.Plain(c);
+            dynamic raw = Bridge.JSON.Plain(c);
 
             Assert.AreEqual(System.Convert.ToBase64String(c.byteArrayField), raw.byteArrayField);
             Assert.AreEqual(c.guidField.ToString(), raw.guidField);

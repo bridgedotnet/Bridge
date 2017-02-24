@@ -8225,98 +8225,98 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             byteArrayWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DeserializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ByteArrayWorks()",
-                    line: "100"
+                    line: "101"
                 } ));
                 Bridge.ClientTest.DeserializationTests.byteArrayWorks();
             },
             guidWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DeserializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GuidWorks()",
-                    line: "107"
+                    line: "108"
                 } ));
                 Bridge.ClientTest.DeserializationTests.guidWorks();
             },
             typeWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DeserializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TypeWorks()",
-                    line: "114"
+                    line: "115"
                 } ));
                 Bridge.ClientTest.DeserializationTests.typeWorks();
             },
             charWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DeserializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "CharWorks()",
-                    line: "120"
+                    line: "121"
                 } ));
                 Bridge.ClientTest.DeserializationTests.charWorks();
             },
             int64Works: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DeserializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "Int64Works()",
-                    line: "126"
+                    line: "127"
                 } ));
                 Bridge.ClientTest.DeserializationTests.int64Works();
             },
             uInt64Works: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DeserializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "UInt64Works()",
-                    line: "137"
+                    line: "138"
                 } ));
                 Bridge.ClientTest.DeserializationTests.uInt64Works();
             },
             decimalWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DeserializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "DecimalWorks()",
-                    line: "148"
+                    line: "149"
                 } ));
                 Bridge.ClientTest.DeserializationTests.decimalWorks();
             },
             dateTimeWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DeserializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "DateTimeWorks()",
-                    line: "156"
+                    line: "157"
                 } ));
                 Bridge.ClientTest.DeserializationTests.dateTimeWorks();
             },
             arrayWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DeserializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ArrayWorks()",
-                    line: "166"
+                    line: "167"
                 } ));
                 Bridge.ClientTest.DeserializationTests.arrayWorks();
             },
             enumWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DeserializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "EnumWorks()",
-                    line: "183"
+                    line: "184"
                 } ));
                 Bridge.ClientTest.DeserializationTests.enumWorks();
             },
             iListWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DeserializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "IListWorks()",
-                    line: "189"
+                    line: "190"
                 } ));
                 Bridge.ClientTest.DeserializationTests.iListWorks();
             },
             iDictionaryWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DeserializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "IDictionaryWorks()",
-                    line: "200"
+                    line: "201"
                 } ));
                 Bridge.ClientTest.DeserializationTests.iDictionaryWorks();
             },
             typeWithFieldWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DeserializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TypeWithFieldWorks()",
-                    line: "214"
+                    line: "215"
                 } ));
                 Bridge.ClientTest.DeserializationTests.typeWithFieldWorks();
             },
             complexPropertiesWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DeserializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ComplexPropertiesWorks()",
-                    line: "241"
+                    line: "242"
                 } ));
                 Bridge.ClientTest.DeserializationTests.complexPropertiesWorks();
             }
@@ -19530,98 +19530,98 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             byteArrayWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SerializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ByteArrayWorks()",
-                    line: "83"
+                    line: "84"
                 } ));
                 Bridge.ClientTest.SerializationTests.byteArrayWorks();
             },
             guidWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SerializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GuidWorks()",
-                    line: "90"
+                    line: "91"
                 } ));
                 Bridge.ClientTest.SerializationTests.guidWorks();
             },
             typeWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SerializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TypeWorks()",
-                    line: "97"
+                    line: "98"
                 } ));
                 Bridge.ClientTest.SerializationTests.typeWorks();
             },
             charWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SerializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "CharWorks()",
-                    line: "103"
+                    line: "104"
                 } ));
                 Bridge.ClientTest.SerializationTests.charWorks();
             },
             int64Works: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SerializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "Int64Works()",
-                    line: "110"
+                    line: "111"
                 } ));
                 Bridge.ClientTest.SerializationTests.int64Works();
             },
             uInt64Works: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SerializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "UInt64Works()",
-                    line: "120"
+                    line: "121"
                 } ));
                 Bridge.ClientTest.SerializationTests.uInt64Works();
             },
             decimalWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SerializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "DecimalWorks()",
-                    line: "130"
+                    line: "131"
                 } ));
                 Bridge.ClientTest.SerializationTests.decimalWorks();
             },
             dateTimeWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SerializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "DateTimeWorks()",
-                    line: "149"
+                    line: "150"
                 } ));
                 Bridge.ClientTest.SerializationTests.dateTimeWorks();
             },
             arrayWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SerializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ArrayWorks()",
-                    line: "156"
+                    line: "157"
                 } ));
                 Bridge.ClientTest.SerializationTests.arrayWorks();
             },
             enumWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SerializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "EnumWorks()",
-                    line: "169"
+                    line: "170"
                 } ));
                 Bridge.ClientTest.SerializationTests.enumWorks();
             },
             iListWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SerializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "IListWorks()",
-                    line: "175"
+                    line: "176"
                 } ));
                 Bridge.ClientTest.SerializationTests.iListWorks();
             },
             iDictionaryWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SerializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "IDictionaryWorks()",
-                    line: "182"
+                    line: "183"
                 } ));
                 Bridge.ClientTest.SerializationTests.iDictionaryWorks();
             },
             typeWithFieldWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SerializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TypeWithFieldWorks()",
-                    line: "190"
+                    line: "191"
                 } ));
                 Bridge.ClientTest.SerializationTests.typeWithFieldWorks();
             },
             complexPropertiesWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SerializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ComplexPropertiesWorks()",
-                    line: "211"
+                    line: "212"
                 } ));
                 Bridge.ClientTest.SerializationTests.complexPropertiesWorks();
             }

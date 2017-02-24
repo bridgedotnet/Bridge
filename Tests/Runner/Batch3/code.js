@@ -1640,7 +1640,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1134", {
         statics: {
             testJsonArrayParse: function () {
-                var o = Bridge.deserialize("[1]", System.Array.type(System.Int32));
+                var o = Bridge.JSON.deserialize("[1]", System.Array.type(System.Int32));
                 Bridge.Test.NUnit.Assert.true(o != null);
                 Bridge.Test.NUnit.Assert.areEqual(1, o.length);
                 Bridge.Test.NUnit.Assert.areEqual(1, o[0]);
@@ -6203,26 +6203,26 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438", {
         statics: {
             testJSONParse: function () {
-                var serialized = Bridge.serialize(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo(), {
+                var serialized = Bridge.JSON.serialize(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo(), {
                         setValue: 100
                     } ));
 
                 Bridge.Test.NUnit.Assert.notNull$1(serialized, " serialized should not be null");
 
-                var result = Bridge.deserialize(serialized, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo);
+                var result = Bridge.JSON.deserialize(serialized, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo);
 
                 Bridge.Test.NUnit.Assert.notNull$1(result, " result should not be null");
                 Bridge.Test.NUnit.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438+Foo", Bridge.Reflection.getTypeFullName(Bridge.getType(result)), "Check result type name");
                 Bridge.Test.NUnit.Assert.areEqual$1(100, result.getValue(), "result.Value = 100");
             },
             testJSONParseAsArray: function () {
-                var serialized = Bridge.serialize(System.Array.init([Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo(), {
+                var serialized = Bridge.JSON.serialize(System.Array.init([Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo(), {
                         setValue: 101
                     } )], Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo));
 
                 Bridge.Test.NUnit.Assert.notNull$1(serialized, " serialized should not be null");
 
-                var result = Bridge.deserialize(serialized, System.Array.type(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo));
+                var result = Bridge.JSON.deserialize(serialized, System.Array.type(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo));
 
                 Bridge.Test.NUnit.Assert.notNull$1(result, " result should not be null");
                 Bridge.Test.NUnit.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438+Foo[]", Bridge.Reflection.getTypeFullName(Bridge.getType(result)), "Check result type name");
@@ -15800,18 +15800,18 @@ Bridge.$N1391Result =                 r;
         statics: {
             testUseCase: function () {
                 var list = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge501.f1(new (System.Collections.Generic.List$1(System.Int32))());
-                var z = Bridge.serialize(list); // this is ok
+                var z = Bridge.JSON.serialize(list); // this is ok
                 Bridge.Test.NUnit.Assert.areEqual$1("[7]", z, "List<int>");
 
                 var b = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge501.f2(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge501B());
-                var y = Bridge.serialize(b); // wrong, missing items
+                var y = Bridge.JSON.serialize(b); // wrong, missing items
                 Bridge.Test.NUnit.Assert.areEqual$1("[1,2]", y, "Bridge501B");
 
                 var a = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge501.f3(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge501A()); // sine items is defined as member, push fails
-                var x = Bridge.serialize(a);
+                var x = Bridge.JSON.serialize(a);
                 Bridge.Test.NUnit.Assert.areEqual$1("[7]", x, "Bridge501A");
 
-                var c = Bridge.deserialize(x, Bridge.ClientTest.Batch3.BridgeIssues.Bridge501A);
+                var c = Bridge.JSON.deserialize(x, Bridge.ClientTest.Batch3.BridgeIssues.Bridge501A);
                 Bridge.Test.NUnit.Assert.areEqual$1("12", c.items$1, "Bridge501A Parse c.Items");
                 Bridge.Test.NUnit.Assert.areEqual$1(7, c.getItem(0), "Bridge501A Parse c[0]");
             }
@@ -16352,20 +16352,20 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge544", {
         statics: {
             testUseCase: function () {
-                var o = Bridge.deserialize("true", System.Boolean);
+                var o = Bridge.JSON.deserialize("true", System.Boolean);
                 Bridge.Test.NUnit.Assert.areEqual$1(true, o, "Bridge544 bool");
             },
             testRelated: function () {
-                var i = Bridge.deserialize("25", System.Int32);
+                var i = Bridge.JSON.deserialize("25", System.Int32);
                 Bridge.Test.NUnit.Assert.areEqual$1(25, i, "Bridge544 int");
 
-                var dbl = Bridge.deserialize("26.1", System.Double);
+                var dbl = Bridge.JSON.deserialize("26.1", System.Double);
                 Bridge.Test.NUnit.Assert.areEqual$1(26.1, dbl, "Bridge544 double");
 
-                var d = Bridge.deserialize("27.2", System.Decimal);
+                var d = Bridge.JSON.deserialize("27.2", System.Decimal);
                 Bridge.ClientTest.Batch3.Utilities.DecimalHelper.assertIsDecimalAndEqualTo$1(d, 27.2, "Bridge544 decimal");
 
-                var s = Bridge.deserialize("\"Some string\"", System.String);
+                var s = Bridge.JSON.deserialize("\"Some string\"", System.String);
                 Bridge.Test.NUnit.Assert.areEqual$1("Some string", s, "Bridge544 string");
             }
         }
