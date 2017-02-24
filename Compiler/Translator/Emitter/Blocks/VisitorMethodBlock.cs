@@ -29,6 +29,7 @@ namespace Bridge.Translator
 
         protected void VisitMethodDeclaration(MethodDeclaration methodDeclaration)
         {
+            var hasNameAttribute = false;
             foreach (var attrSection in methodDeclaration.Attributes)
             {
                 foreach (var attr in attrSection.Attributes)
@@ -60,6 +61,10 @@ namespace Bridge.Translator
                             return;
                         }
                     }
+                    else if (rr.Type.FullName == "Bridge.NameAttribute")
+                    {
+                        hasNameAttribute = true;
+                    }
                 }
             }
 
@@ -86,6 +91,13 @@ namespace Bridge.Translator
             this.WriteColon();
 
             this.WriteFunction();
+
+            if (hasNameAttribute)
+            {
+				// If a method has a [Name] attribute then create a named function for this method property, rather than leaving it as an anonymous function (there are occasions that
+				// external libraries will use a function name for debugging purposes and the presence of a [Name] attribute seems like a good indicator that this might be the case)
+                this.Write(name);
+            }
 
             this.EmitMethodParameters(methodDeclaration.Parameters, methodDeclaration.TypeParameters.Count > 0 && Helpers.IsIgnoreGeneric(methodDeclaration, this.Emitter) ? null : methodDeclaration.TypeParameters, methodDeclaration);
 
