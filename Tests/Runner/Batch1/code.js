@@ -12980,59 +12980,59 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         statics: {
             byteArrayWorks: function () {
                 var arr = System.Array.init([1, 2, 3], System.Byte);
-                Bridge.Test.NUnit.Assert.areEqual(arr, Bridge.deserialize(System.String.concat("\"", System.Convert.toBase64String(arr, null, null, null), "\""), System.Array.type(System.Byte)));
+                Bridge.Test.NUnit.Assert.areEqual(arr, Bridge.JSON.deserialize(System.String.concat("\"", System.Convert.toBase64String(arr, null, null, null), "\""), System.Array.type(System.Byte)));
             },
             guidWorks: function () {
                 var guid = System.Guid.newGuid();
-                Bridge.Test.NUnit.Assert.areEqual(guid.toByteArray(), Bridge.deserialize("\"" + guid + "\"", System.Guid).toByteArray());
+                Bridge.Test.NUnit.Assert.areEqual(guid.toByteArray(), Bridge.JSON.deserialize("\"" + guid + "\"", System.Guid).toByteArray());
             },
             typeWorks: function () {
-                Bridge.Test.NUnit.Assert.areEqual(System.Collections.Generic.List$1(System.String), Bridge.deserialize(System.String.concat("\"", Bridge.Reflection.getTypeFullName(System.Collections.Generic.List$1(System.String)), "\""), Function));
+                Bridge.Test.NUnit.Assert.areEqual(System.Collections.Generic.List$1(System.String), Bridge.JSON.deserialize(System.String.concat("\"", Bridge.Reflection.getTypeFullName(System.Collections.Generic.List$1(System.String)), "\""), Function));
             },
             charWorks: function () {
-                Bridge.Test.NUnit.Assert.areEqual(97, Bridge.deserialize("\"a\"", System.Char));
+                Bridge.Test.NUnit.Assert.areEqual(97, Bridge.JSON.deserialize("\"a\"", System.Char));
             },
             int64Works: function () {
                 var value = System.Int64(System.Int64.MaxValue.toNumber());
                 var intValue = System.Int64.MaxValue.toNumber();
-                Bridge.Test.NUnit.Assert.true(value.equals(Bridge.deserialize(intValue, System.Int64)));
+                Bridge.Test.NUnit.Assert.true(value.equals(Bridge.JSON.deserialize(intValue, System.Int64)));
 
                 value = System.Int64.MinValue;
-                Bridge.Test.NUnit.Assert.true(value.equals(Bridge.deserialize(System.Int64.MinValue.toString(), System.Int64)));
+                Bridge.Test.NUnit.Assert.true(value.equals(Bridge.JSON.deserialize(System.Int64.MinValue.toString(), System.Int64)));
             },
             uInt64Works: function () {
                 var value = System.UInt64(System.UInt64.MaxValue.toNumber());
                 var intValue = System.UInt64.MaxValue.toNumber();
-                Bridge.Test.NUnit.Assert.true(value.equals(Bridge.deserialize(intValue, System.UInt64)));
+                Bridge.Test.NUnit.Assert.true(value.equals(Bridge.JSON.deserialize(intValue, System.UInt64)));
 
                 value = System.UInt64.MinValue;
-                Bridge.Test.NUnit.Assert.true(value.equals(Bridge.deserialize(System.UInt64.MinValue.toString(), System.UInt64)));
+                Bridge.Test.NUnit.Assert.true(value.equals(Bridge.JSON.deserialize(System.UInt64.MinValue.toString(), System.UInt64)));
             },
             decimalWorks: function () {
-                Bridge.Test.NUnit.Assert.true(System.Decimal.MinusOne.equalsT(Bridge.deserialize(-1, System.Decimal)));
-                Bridge.Test.NUnit.Assert.true(System.Decimal.One.equalsT(Bridge.deserialize("1", System.Decimal)));
-                Bridge.Test.NUnit.Assert.true(System.Decimal.Zero.equalsT(Bridge.deserialize(0, System.Decimal)));
+                Bridge.Test.NUnit.Assert.true(System.Decimal.MinusOne.equalsT(Bridge.JSON.deserialize(-1, System.Decimal)));
+                Bridge.Test.NUnit.Assert.true(System.Decimal.One.equalsT(Bridge.JSON.deserialize("1", System.Decimal)));
+                Bridge.Test.NUnit.Assert.true(System.Decimal.Zero.equalsT(Bridge.JSON.deserialize(0, System.Decimal)));
             },
             dateTimeWorks: function () {
                 var dt = new Date(2010, 6 - 1, 10, 12, 0, 0, 0);
-                var jsonDt = Bridge.deserialize("\"2010-06-10T09:00:00.000\"", System.DateTime);
+                var jsonDt = Bridge.JSON.deserialize("\"2010-06-10T09:00:00.000\"", System.DateTime);
                 Bridge.Test.NUnit.Assert.areEqual(dt.getFullYear(), jsonDt.getFullYear());
                 Bridge.Test.NUnit.Assert.areEqual((dt.getMonth() + 1), (jsonDt.getMonth() + 1));
                 Bridge.Test.NUnit.Assert.areEqual(dt.getDate(), jsonDt.getDate());
             },
             arrayWorks: function () {
                 var intArr = System.Array.init([1, 2, 3], System.Int32);
-                Bridge.Test.NUnit.Assert.areEqual(intArr, Bridge.deserialize("[1,2,3]", System.Array.type(System.Int32)));
+                Bridge.Test.NUnit.Assert.areEqual(intArr, Bridge.JSON.deserialize("[1,2,3]", System.Array.type(System.Int32)));
 
                 var longArr = System.Array.init([System.Int64(1), System.Int64(2), System.Int64(3)], System.Int64);
-                var jsonLongArr = Bridge.deserialize("[1,2,3]", System.Array.type(System.Int64));
+                var jsonLongArr = Bridge.JSON.deserialize("[1,2,3]", System.Array.type(System.Int64));
                 Bridge.Test.NUnit.Assert.areEqual(longArr.length, jsonLongArr.length);
                 Bridge.Test.NUnit.Assert.true(longArr[0].equals(jsonLongArr[0]));
                 Bridge.Test.NUnit.Assert.true(longArr[1].equals(jsonLongArr[1]));
                 Bridge.Test.NUnit.Assert.true(longArr[2].equals(jsonLongArr[2]));
 
                 var enumArr = System.Array.init([Bridge.ClientTest.DeserializationTests.E1.Item1, Bridge.ClientTest.DeserializationTests.E1.Item2, Bridge.ClientTest.DeserializationTests.E1.Item3], Bridge.ClientTest.DeserializationTests.E1);
-                Bridge.Test.NUnit.Assert.areEqual(enumArr, Bridge.deserialize("[\"Item1\",\"Item2\",\"Item3\"]", System.Array.type(Bridge.ClientTest.DeserializationTests.E1)));
+                Bridge.Test.NUnit.Assert.areEqual(enumArr, Bridge.JSON.deserialize("[\"Item1\",\"Item2\",\"Item3\"]", System.Array.type(Bridge.ClientTest.DeserializationTests.E1)));
             },
             complexArrayWorks: function () {
                 var c1 = Bridge.ClientTest.DeserializationTests.createComplex(Bridge.ClientTest.DeserializationTests.E1.Item1, Bridge.ClientTest.DeserializationTests.E1.Item2, Bridge.ClientTest.DeserializationTests.E1.Item3, 97, 98, 99);
@@ -13040,8 +13040,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var a = System.Array.init([c1, c2], Bridge.ClientTest.DeserializationTests.Class1);
 
-                var json = Bridge.serialize(a);
-                var deserialized = Bridge.deserialize(json, System.Array.type(Bridge.ClientTest.DeserializationTests.Class1));
+                var json = Bridge.JSON.serialize(a);
+                var deserialized = Bridge.JSON.deserialize(json, System.Array.type(Bridge.ClientTest.DeserializationTests.Class1));
 
                 Bridge.Test.NUnit.Assert.notNull$1(deserialized, "#1");
                 Bridge.Test.NUnit.Assert.areEqual$1("Bridge.ClientTest.DeserializationTests+Class1[]", Bridge.Reflection.getTypeFullName(Bridge.getType(deserialized)), "#2");
@@ -13056,11 +13056,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.ClientTest.DeserializationTests.assertComplex(dc2, Bridge.ClientTest.DeserializationTests.E1.Item3, Bridge.ClientTest.DeserializationTests.E1.Item1, Bridge.ClientTest.DeserializationTests.E1.Item2, 99, 97, 98);
             },
             enumWorks: function () {
-                Bridge.Test.NUnit.Assert.areEqual(Bridge.ClientTest.DeserializationTests.E1.Item1, Bridge.deserialize("\"Item1\"", Bridge.ClientTest.DeserializationTests.E1));
+                Bridge.Test.NUnit.Assert.areEqual(Bridge.ClientTest.DeserializationTests.E1.Item1, Bridge.JSON.deserialize("\"Item1\"", Bridge.ClientTest.DeserializationTests.E1));
             },
             iListWorks: function () {
                 var list = $asm.$.Bridge.ClientTest.DeserializationTests.f1(new (System.Collections.Generic.List$1(Bridge.ClientTest.DeserializationTests.E1))());
-                var jsonList = Bridge.deserialize("[\"Item1\",\"Item2\",\"Item3\"]", System.Collections.Generic.List$1(Bridge.ClientTest.DeserializationTests.E1));
+                var jsonList = Bridge.JSON.deserialize("[\"Item1\",\"Item2\",\"Item3\"]", System.Collections.Generic.List$1(Bridge.ClientTest.DeserializationTests.E1));
                 Bridge.Test.NUnit.Assert.areEqual(list.getCount(), jsonList.getCount());
                 Bridge.Test.NUnit.Assert.true(list.getItem(0) === jsonList.getItem(0));
                 Bridge.Test.NUnit.Assert.true(list.getItem(1) === jsonList.getItem(1));
@@ -13069,7 +13069,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             iDictionaryWorks: function () {
                 var dict = $asm.$.Bridge.ClientTest.DeserializationTests.f2(new (System.Collections.Generic.Dictionary$2(System.String,Bridge.ClientTest.DeserializationTests.E1))());
 
-                var jsonDict = Bridge.deserialize("{\"i1\":\"Item1\",\"i2\":\"Item2\",\"i3\":\"Item3\"}", System.Collections.Generic.Dictionary$2(System.String,Bridge.ClientTest.DeserializationTests.E1));
+                var jsonDict = Bridge.JSON.deserialize("{\"i1\":\"Item1\",\"i2\":\"Item2\",\"i3\":\"Item3\"}", System.Collections.Generic.Dictionary$2(System.String,Bridge.ClientTest.DeserializationTests.E1));
 
                 Bridge.Test.NUnit.Assert.areEqual(dict.getCount(), jsonDict.getCount());
                 Bridge.Test.NUnit.Assert.areEqual(dict.get("i1"), jsonDict.get("i1"));
@@ -13078,8 +13078,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             typeWithFieldWorks: function () {
                 var c = new Bridge.ClientTest.DeserializationTests.ClassWithFields();
-                var json = Bridge.serialize(c);
-                var jsonC = Bridge.deserialize(json, Bridge.ClientTest.DeserializationTests.ClassWithFieldsAndNoInit);
+                var json = Bridge.JSON.serialize(c);
+                var jsonC = Bridge.JSON.deserialize(json, Bridge.ClientTest.DeserializationTests.ClassWithFieldsAndNoInit);
 
                 Bridge.Test.NUnit.Assert.areEqual$1(c.byteArrayField, jsonC.byteArrayField, "#1");
                 Bridge.Test.NUnit.Assert.areEqual$1(c.guidField.toByteArray(), jsonC.guidField.toByteArray(), "#2");
@@ -13103,8 +13103,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             complexPropertiesWorks: function () {
                 var c = Bridge.ClientTest.DeserializationTests.createComplex(Bridge.ClientTest.DeserializationTests.E1.Item1, Bridge.ClientTest.DeserializationTests.E1.Item2, Bridge.ClientTest.DeserializationTests.E1.Item3, 97, 98, 99);
 
-                var json = Bridge.serialize(c);
-                var jsonC = Bridge.deserialize(json, Bridge.ClientTest.DeserializationTests.Class1);
+                var json = Bridge.JSON.serialize(c);
+                var jsonC = Bridge.JSON.deserialize(json, Bridge.ClientTest.DeserializationTests.Class1);
 
                 Bridge.ClientTest.DeserializationTests.assertComplex(jsonC, Bridge.ClientTest.DeserializationTests.E1.Item1, Bridge.ClientTest.DeserializationTests.E1.Item2, Bridge.ClientTest.DeserializationTests.E1.Item3, 97, 98, 99);
             },
@@ -25999,79 +25999,79 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         statics: {
             byteArrayWorks: function () {
                 var arr = System.Array.init([1, 2, 3], System.Byte);
-                Bridge.Test.NUnit.Assert.areEqual(System.String.concat("\"", System.Convert.toBase64String(arr, null, null, null), "\""), Bridge.serialize(arr));
+                Bridge.Test.NUnit.Assert.areEqual(System.String.concat("\"", System.Convert.toBase64String(arr, null, null, null), "\""), Bridge.JSON.serialize(arr));
             },
             guidWorks: function () {
                 var guid = System.Guid.newGuid();
-                Bridge.Test.NUnit.Assert.areEqual(System.String.concat("\"", guid.toString(), "\""), Bridge.serialize(guid));
+                Bridge.Test.NUnit.Assert.areEqual(System.String.concat("\"", guid.toString(), "\""), Bridge.JSON.serialize(guid));
             },
             typeWorks: function () {
-                Bridge.Test.NUnit.Assert.areEqual(System.String.concat("\"", Bridge.Reflection.getTypeFullName(System.Collections.Generic.List$1(System.String)), "\""), Bridge.serialize(System.Collections.Generic.List$1(System.String)));
+                Bridge.Test.NUnit.Assert.areEqual(System.String.concat("\"", Bridge.Reflection.getTypeFullName(System.Collections.Generic.List$1(System.String)), "\""), Bridge.JSON.serialize(System.Collections.Generic.List$1(System.String)));
             },
             charWorks: function () {
                 var c = 97;
-                Bridge.Test.NUnit.Assert.areEqual("\"a\"", Bridge.serialize(Bridge.box(c, System.Char, $box_.System.Char.toString)));
+                Bridge.Test.NUnit.Assert.areEqual("\"a\"", Bridge.JSON.serialize(Bridge.box(c, System.Char, $box_.System.Char.toString)));
             },
             int64Works: function () {
                 var value = System.Int64.MaxValue;
-                Bridge.Test.NUnit.Assert.areEqual(System.Int64.MaxValue.toNumber(), Bridge.serialize(value));
+                Bridge.Test.NUnit.Assert.areEqual(System.Int64.MaxValue.toNumber(), Bridge.JSON.serialize(value));
 
                 value = System.Int64.MinValue;
-                Bridge.Test.NUnit.Assert.areEqual(System.Int64.MinValue.toNumber(), Bridge.serialize(value));
+                Bridge.Test.NUnit.Assert.areEqual(System.Int64.MinValue.toNumber(), Bridge.JSON.serialize(value));
             },
             uInt64Works: function () {
                 var value = System.UInt64.MaxValue;
-                Bridge.Test.NUnit.Assert.areEqual(System.UInt64.MaxValue.toNumber(), Bridge.serialize(value));
+                Bridge.Test.NUnit.Assert.areEqual(System.UInt64.MaxValue.toNumber(), Bridge.JSON.serialize(value));
 
                 value = System.UInt64.MinValue;
-                Bridge.Test.NUnit.Assert.areEqual(System.UInt64.MinValue.toNumber(), Bridge.serialize(value));
+                Bridge.Test.NUnit.Assert.areEqual(System.UInt64.MinValue.toNumber(), Bridge.JSON.serialize(value));
             },
             decimalWorks: function () {
                 var value = System.Decimal.MaxValue;
-                Bridge.Test.NUnit.Assert.areEqual(System.Decimal.MaxValue.toFloat(), Bridge.serialize(value));
+                Bridge.Test.NUnit.Assert.areEqual(System.Decimal.MaxValue.toFloat(), Bridge.JSON.serialize(value));
 
                 value = System.Decimal.MinValue;
-                Bridge.Test.NUnit.Assert.areEqual(System.Decimal.MinValue.toFloat(), Bridge.serialize(value));
+                Bridge.Test.NUnit.Assert.areEqual(System.Decimal.MinValue.toFloat(), Bridge.JSON.serialize(value));
 
                 value = System.Decimal.MinusOne;
-                Bridge.Test.NUnit.Assert.areEqual(System.Decimal.MinusOne.toFloat(), Bridge.serialize(value));
+                Bridge.Test.NUnit.Assert.areEqual(System.Decimal.MinusOne.toFloat(), Bridge.JSON.serialize(value));
 
                 value = System.Decimal.One;
-                Bridge.Test.NUnit.Assert.areEqual(System.Decimal.One.toFloat(), Bridge.serialize(value));
+                Bridge.Test.NUnit.Assert.areEqual(System.Decimal.One.toFloat(), Bridge.JSON.serialize(value));
 
                 value = System.Decimal.Zero;
-                Bridge.Test.NUnit.Assert.areEqual(System.Decimal.Zero.toFloat(), Bridge.serialize(value));
+                Bridge.Test.NUnit.Assert.areEqual(System.Decimal.Zero.toFloat(), Bridge.JSON.serialize(value));
             },
             dateTimeWorks: function () {
                 var dt = new Date(2010, 6 - 1, 10, 12, 0, 0, 0);
-                var s = Bridge.serialize(Bridge.box(dt, System.DateTime, $box_.System.DateTime.toString));
+                var s = Bridge.JSON.serialize(Bridge.box(dt, System.DateTime, $box_.System.DateTime.toString));
                 Bridge.Test.NUnit.Assert.true$1(System.String.startsWith(s, "\"2010-06-10T09:00:00.000"), System.String.concat("Result: ", s));
             },
             arrayWorks: function () {
                 var intArr = System.Array.init([1, 2, 3], System.Int32);
-                Bridge.Test.NUnit.Assert.areEqual("[1,2,3]", Bridge.serialize(intArr));
+                Bridge.Test.NUnit.Assert.areEqual("[1,2,3]", Bridge.JSON.serialize(intArr));
 
                 var longArr = System.Array.init([System.Int64(1), System.Int64(2), System.Int64(3)], System.Int64);
-                Bridge.Test.NUnit.Assert.areEqual("[1,2,3]", Bridge.serialize(longArr));
+                Bridge.Test.NUnit.Assert.areEqual("[1,2,3]", Bridge.JSON.serialize(longArr));
 
                 var enumArr = System.Array.init([Bridge.ClientTest.SerializationTests.E1.Item1, Bridge.ClientTest.SerializationTests.E1.Item2, Bridge.ClientTest.SerializationTests.E1.Item3], Bridge.ClientTest.SerializationTests.E1);
-                Bridge.Test.NUnit.Assert.areEqual("[\"Item1\",\"Item2\",\"Item3\"]", Bridge.serialize(enumArr));
+                Bridge.Test.NUnit.Assert.areEqual("[\"Item1\",\"Item2\",\"Item3\"]", Bridge.JSON.serialize(enumArr));
             },
             enumWorks: function () {
-                Bridge.Test.NUnit.Assert.areEqual("\"Item1\"", Bridge.serialize(Bridge.box(Bridge.ClientTest.SerializationTests.E1.Item1, Bridge.ClientTest.SerializationTests.E1, $box_.Bridge.ClientTest.SerializationTests.E1.toString)));
+                Bridge.Test.NUnit.Assert.areEqual("\"Item1\"", Bridge.JSON.serialize(Bridge.box(Bridge.ClientTest.SerializationTests.E1.Item1, Bridge.ClientTest.SerializationTests.E1, $box_.Bridge.ClientTest.SerializationTests.E1.toString)));
             },
             iListWorks: function () {
                 var list = $asm.$.Bridge.ClientTest.SerializationTests.f1(new (System.Collections.Generic.List$1(Bridge.ClientTest.SerializationTests.E1))());
-                Bridge.Test.NUnit.Assert.areEqual("[\"Item1\",\"Item2\",\"Item3\"]", Bridge.serialize(list));
+                Bridge.Test.NUnit.Assert.areEqual("[\"Item1\",\"Item2\",\"Item3\"]", Bridge.JSON.serialize(list));
             },
             iDictionaryWorks: function () {
                 var dict = $asm.$.Bridge.ClientTest.SerializationTests.f2(new (System.Collections.Generic.Dictionary$2(System.String,Bridge.ClientTest.SerializationTests.E1))());
 
-                Bridge.Test.NUnit.Assert.areEqual("{\"i1\":\"Item1\",\"i2\":\"Item2\",\"i3\":\"Item3\"}", Bridge.serialize(dict));
+                Bridge.Test.NUnit.Assert.areEqual("{\"i1\":\"Item1\",\"i2\":\"Item2\",\"i3\":\"Item3\"}", Bridge.JSON.serialize(dict));
             },
             typeWithFieldWorks: function () {
                 var c = new Bridge.ClientTest.SerializationTests.ClassWithFields();
-                var raw = Bridge.serialize(c, true);
+                var raw = Bridge.JSON.serialize(c, true);
 
                 Bridge.Test.NUnit.Assert.areEqual$1(System.Convert.toBase64String(c.byteArrayField, null, null, null), raw.byteArrayField, "#1");
                 Bridge.Test.NUnit.Assert.areEqual$1(c.guidField.toString(), raw.guidField, "#2");
@@ -26100,7 +26100,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     setList1: $asm.$.Bridge.ClientTest.SerializationTests.f4(new (System.Collections.Generic.List$1(System.Char))())
                 } ));
 
-                var json = Bridge.serialize(c);
+                var json = Bridge.JSON.serialize(c);
                 Bridge.Test.NUnit.Assert.areEqual("{\"Sub1\":{\"List1\":[\"Item1\",\"Item2\",\"Item3\"]},\"Sub2\":{\"List1\":[\"a\",\"b\",\"c\"]}}", json);
             }
         }

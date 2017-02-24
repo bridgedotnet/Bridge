@@ -1,5 +1,6 @@
 using Bridge.Html5;
 using Bridge.Test.NUnit;
+using JSON = Bridge.JSON;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
