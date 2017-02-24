@@ -13060,24 +13060,24 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var json = Bridge.serialize(c);
                 var jsonC = Bridge.deserialize(json, Bridge.ClientTest.DeserializationTests.ClassWithFieldsAndNoInit);
 
-                Bridge.Test.NUnit.Assert.areEqual(c.byteArrayField, jsonC.byteArrayField);
-                Bridge.Test.NUnit.Assert.areEqual(c.guidField.toByteArray(), jsonC.guidField.toByteArray());
-                Bridge.Test.NUnit.Assert.areEqual(c.typeField, jsonC.typeField);
-                Bridge.Test.NUnit.Assert.areEqual(c.charField, jsonC.charField);
-                Bridge.Test.NUnit.Assert.true(c.longField.equals(jsonC.longField));
-                Bridge.Test.NUnit.Assert.true(c.ulongField.equals(jsonC.ulongField));
-                Bridge.Test.NUnit.Assert.true(c.decimalField.equalsT(jsonC.decimalField));
-                Bridge.Test.NUnit.Assert.true(Bridge.equals(c.dateField, jsonC.dateField));
-                Bridge.Test.NUnit.Assert.areEqual(c.enumField, jsonC.enumField);
-                Bridge.Test.NUnit.Assert.areEqual(c.arrayField, jsonC.arrayField);
-                Bridge.Test.NUnit.Assert.areEqual(System.Array.getCount(c.listField, Bridge.ClientTest.DeserializationTests.E1), System.Array.getCount(jsonC.listField, Bridge.ClientTest.DeserializationTests.E1));
-                Bridge.Test.NUnit.Assert.areEqual(System.Array.getItem(c.listField, 0, Bridge.ClientTest.DeserializationTests.E1), System.Array.getItem(jsonC.listField, 0, Bridge.ClientTest.DeserializationTests.E1));
-                Bridge.Test.NUnit.Assert.areEqual(System.Array.getItem(c.listField, 1, Bridge.ClientTest.DeserializationTests.E1), System.Array.getItem(jsonC.listField, 1, Bridge.ClientTest.DeserializationTests.E1));
-                Bridge.Test.NUnit.Assert.areEqual(System.Array.getItem(c.listField, 2, Bridge.ClientTest.DeserializationTests.E1), System.Array.getItem(jsonC.listField, 2, Bridge.ClientTest.DeserializationTests.E1));
-                Bridge.Test.NUnit.Assert.areEqual(System.Array.getCount(c.dictField, System.Collections.Generic.KeyValuePair$2(System.String,Bridge.ClientTest.DeserializationTests.E1)), System.Array.getCount(jsonC.dictField, System.Collections.Generic.KeyValuePair$2(System.String,Bridge.ClientTest.DeserializationTests.E1)));
-                Bridge.Test.NUnit.Assert.areEqual(c.dictField.System$Collections$Generic$IDictionary$2$System$String$Bridge$ClientTest$DeserializationTests$E1$getItem("i1"), jsonC.dictField.System$Collections$Generic$IDictionary$2$System$String$Bridge$ClientTest$DeserializationTests$E1$getItem("i1"));
-                Bridge.Test.NUnit.Assert.areEqual(c.dictField.System$Collections$Generic$IDictionary$2$System$String$Bridge$ClientTest$DeserializationTests$E1$getItem("i2"), jsonC.dictField.System$Collections$Generic$IDictionary$2$System$String$Bridge$ClientTest$DeserializationTests$E1$getItem("i2"));
-                Bridge.Test.NUnit.Assert.areEqual(c.dictField.System$Collections$Generic$IDictionary$2$System$String$Bridge$ClientTest$DeserializationTests$E1$getItem("i3"), jsonC.dictField.System$Collections$Generic$IDictionary$2$System$String$Bridge$ClientTest$DeserializationTests$E1$getItem("i3"));
+                Bridge.Test.NUnit.Assert.areEqual$1(c.byteArrayField, jsonC.byteArrayField, "#1");
+                Bridge.Test.NUnit.Assert.areEqual$1(c.guidField.toByteArray(), jsonC.guidField.toByteArray(), "#2");
+                Bridge.Test.NUnit.Assert.areEqual$1(c.typeField, jsonC.typeField, "#3");
+                Bridge.Test.NUnit.Assert.areEqual$1(c.charField, jsonC.charField, "#4");
+                Bridge.Test.NUnit.Assert.areEqual$1(c.longField.toString(), jsonC.longField.toString(), "#5");
+                Bridge.Test.NUnit.Assert.areEqual$1(c.ulongField.toString(), jsonC.ulongField.toString(), "#6");
+                Bridge.Test.NUnit.Assert.areEqual$1(Bridge.Int.format(c.decimalField, 'G'), Bridge.Int.format(jsonC.decimalField, 'G'), "#7");
+                Bridge.Test.NUnit.Assert.areEqual$1(System.DateTime.format(c.dateField), System.DateTime.format(jsonC.dateField), "#8");
+                Bridge.Test.NUnit.Assert.areEqual$1(c.enumField, jsonC.enumField, "#9");
+                Bridge.Test.NUnit.Assert.areEqual$1(c.arrayField, jsonC.arrayField, "#10");
+                Bridge.Test.NUnit.Assert.areEqual$1(System.Array.getCount(c.listField, Bridge.ClientTest.DeserializationTests.E1), System.Array.getCount(jsonC.listField, Bridge.ClientTest.DeserializationTests.E1), "#11");
+                Bridge.Test.NUnit.Assert.areEqual$1(System.Array.getItem(c.listField, 0, Bridge.ClientTest.DeserializationTests.E1), System.Array.getItem(jsonC.listField, 0, Bridge.ClientTest.DeserializationTests.E1), "#12");
+                Bridge.Test.NUnit.Assert.areEqual$1(System.Array.getItem(c.listField, 1, Bridge.ClientTest.DeserializationTests.E1), System.Array.getItem(jsonC.listField, 1, Bridge.ClientTest.DeserializationTests.E1), "#13");
+                Bridge.Test.NUnit.Assert.areEqual$1(System.Array.getItem(c.listField, 2, Bridge.ClientTest.DeserializationTests.E1), System.Array.getItem(jsonC.listField, 2, Bridge.ClientTest.DeserializationTests.E1), "#14");
+                Bridge.Test.NUnit.Assert.areEqual$1(System.Array.getCount(c.dictField, System.Collections.Generic.KeyValuePair$2(System.String,Bridge.ClientTest.DeserializationTests.E1)), System.Array.getCount(jsonC.dictField, System.Collections.Generic.KeyValuePair$2(System.String,Bridge.ClientTest.DeserializationTests.E1)), "#15");
+                Bridge.Test.NUnit.Assert.areEqual$1(c.dictField.System$Collections$Generic$IDictionary$2$System$String$Bridge$ClientTest$DeserializationTests$E1$getItem("i1"), jsonC.dictField.System$Collections$Generic$IDictionary$2$System$String$Bridge$ClientTest$DeserializationTests$E1$getItem("i1"), "#16");
+                Bridge.Test.NUnit.Assert.areEqual$1(c.dictField.System$Collections$Generic$IDictionary$2$System$String$Bridge$ClientTest$DeserializationTests$E1$getItem("i2"), jsonC.dictField.System$Collections$Generic$IDictionary$2$System$String$Bridge$ClientTest$DeserializationTests$E1$getItem("i2"), "#17");
+                Bridge.Test.NUnit.Assert.areEqual$1(c.dictField.System$Collections$Generic$IDictionary$2$System$String$Bridge$ClientTest$DeserializationTests$E1$getItem("i3"), jsonC.dictField.System$Collections$Generic$IDictionary$2$System$String$Bridge$ClientTest$DeserializationTests$E1$getItem("i3"), "#18");
             },
             complexPropertiesWorks: function () {
                 var c = new Bridge.ClientTest.DeserializationTests.Class1();
@@ -26009,7 +26009,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             dateTimeWorks: function () {
                 var dt = new Date(2010, 6 - 1, 10, 12, 0, 0, 0);
-                Bridge.Test.NUnit.Assert.true(System.String.startsWith(Bridge.serialize(Bridge.box(dt, System.DateTime, $box_.System.DateTime.toString)), "\"2010-06-10T09:00:00.000"));
+                var s = Bridge.serialize(Bridge.box(dt, System.DateTime, $box_.System.DateTime.toString));
+                Bridge.Test.NUnit.Assert.true$1(System.String.startsWith(s, "\"2010-06-10T09:00:00.000"), System.String.concat("Result: ", s));
             },
             arrayWorks: function () {
                 var intArr = System.Array.init([1, 2, 3], System.Int32);
@@ -26037,19 +26038,19 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var c = new Bridge.ClientTest.SerializationTests.ClassWithFields();
                 var raw = Bridge.serialize(c, true);
 
-                Bridge.Test.NUnit.Assert.areEqual(System.Convert.toBase64String(c.byteArrayField, null, null, null), raw.byteArrayField);
-                Bridge.Test.NUnit.Assert.areEqual(c.guidField.toString(), raw.guidField);
-                Bridge.Test.NUnit.Assert.areEqual(Bridge.Reflection.getTypeFullName(Bridge.ClientTest.SerializationTests), raw.typeField);
-                Bridge.Test.NUnit.Assert.areEqual("a", raw.charField);
-                Bridge.Test.NUnit.Assert.areEqual(0, raw.longField);
-                Bridge.Test.NUnit.Assert.areEqual(0, raw.ulongField);
-                Bridge.Test.NUnit.Assert.areEqual(0, raw.decimalField);
-                Bridge.Test.NUnit.Assert.notNull(raw.dateField);
-                Bridge.Test.NUnit.Assert.true(System.String.startsWith(Bridge.cast(raw.dateField, System.String), "2010-06-10T09:00:00.000"));
-                Bridge.Test.NUnit.Assert.areEqual("Item1", raw.enumField);
-                Bridge.Test.NUnit.Assert.areEqual(System.Array.init([1, 2, 3], System.Int32), raw.arrayField);
-                Bridge.Test.NUnit.Assert.areEqual(System.Array.init(["Item1", "Item2", "Item3"], System.String), raw.listField);
-                Bridge.Test.NUnit.Assert.areDeepEqual({ i1: "Item1", i2: "Item2", i3: "Item3" }, raw.dictField);
+                Bridge.Test.NUnit.Assert.areEqual$1(System.Convert.toBase64String(c.byteArrayField, null, null, null), raw.byteArrayField, "#1");
+                Bridge.Test.NUnit.Assert.areEqual$1(c.guidField.toString(), raw.guidField, "#2");
+                Bridge.Test.NUnit.Assert.areEqual$1(Bridge.Reflection.getTypeFullName(Bridge.ClientTest.SerializationTests), raw.typeField, "#3");
+                Bridge.Test.NUnit.Assert.areEqual$1("a", raw.charField, "#4");
+                Bridge.Test.NUnit.Assert.areEqual$1(0, raw.longField, "#5");
+                Bridge.Test.NUnit.Assert.areEqual$1(0, raw.ulongField, "#6");
+                Bridge.Test.NUnit.Assert.areEqual$1(0, raw.decimalField, "#7");
+                Bridge.Test.NUnit.Assert.notNull$1(raw.dateField, "#8");
+                Bridge.Test.NUnit.Assert.true$1(System.String.startsWith(Bridge.cast(raw.dateField, System.String), "2010-06-10T09:00:00.000"), System.String.concat("#9 ", raw.dateField));
+                Bridge.Test.NUnit.Assert.areEqual$1("Item1", raw.enumField, "#10");
+                Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init([1, 2, 3], System.Int32), raw.arrayField, "#11");
+                Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init(["Item1", "Item2", "Item3"], System.String), raw.listField, "#12");
+                Bridge.Test.NUnit.Assert.areDeepEqual$1({ i1: "Item1", i2: "Item2", i3: "Item3" }, raw.dictField, "#12");
             },
             complexPropertiesWorks: function () {
                 var c = new Bridge.ClientTest.SerializationTests.Class1();

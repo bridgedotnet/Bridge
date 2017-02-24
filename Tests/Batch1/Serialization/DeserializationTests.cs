@@ -14,7 +14,7 @@ namespace Bridge.ClientTest
         public enum E1
         {
             Item1,
-            Item2, 
+            Item2,
             Item3
         }
 
@@ -228,24 +228,24 @@ namespace Bridge.ClientTest
             string json = JSON.Serialize(c);
             var jsonC = JSON.Deserialize<ClassWithFieldsAndNoInit>(json);
 
-            Assert.AreEqual(c.byteArrayField, jsonC.byteArrayField);
-            Assert.AreEqual(c.guidField.ToByteArray(), jsonC.guidField.ToByteArray());
-            Assert.AreEqual(c.typeField, jsonC.typeField);
-            Assert.AreEqual(c.charField, jsonC.charField);
-            Assert.True(c.longField == jsonC.longField);
-            Assert.True(c.ulongField == jsonC.ulongField);
-            Assert.True(c.decimalField == jsonC.decimalField);
-            Assert.True(c.dateField == jsonC.dateField);
-            Assert.AreEqual(c.enumField, jsonC.enumField);
-            Assert.AreEqual(c.arrayField, jsonC.arrayField);
-            Assert.AreEqual(c.listField.Count, jsonC.listField.Count);
-            Assert.AreEqual(c.listField[0], jsonC.listField[0]);
-            Assert.AreEqual(c.listField[1], jsonC.listField[1]);
-            Assert.AreEqual(c.listField[2], jsonC.listField[2]);
-            Assert.AreEqual(c.dictField.Count, jsonC.dictField.Count);
-            Assert.AreEqual(c.dictField["i1"], jsonC.dictField["i1"]);
-            Assert.AreEqual(c.dictField["i2"], jsonC.dictField["i2"]);
-            Assert.AreEqual(c.dictField["i3"], jsonC.dictField["i3"]);
+            Assert.AreEqual(c.byteArrayField, jsonC.byteArrayField, "#1");
+            Assert.AreEqual(c.guidField.ToByteArray(), jsonC.guidField.ToByteArray(), "#2");
+            Assert.AreEqual(c.typeField, jsonC.typeField, "#3");
+            Assert.AreEqual(c.charField, jsonC.charField, "#4");
+            Assert.AreEqual(c.longField.ToString(), jsonC.longField.ToString(), "#5");
+            Assert.AreEqual(c.ulongField.ToString(), jsonC.ulongField.ToString(), "#6");
+            Assert.AreEqual(c.decimalField.ToString(), jsonC.decimalField.ToString(), "#7");
+            Assert.AreEqual(c.dateField.ToString(), jsonC.dateField.ToString(), "#8");
+            Assert.AreEqual(c.enumField, jsonC.enumField, "#9");
+            Assert.AreEqual(c.arrayField, jsonC.arrayField, "#10");
+            Assert.AreEqual(c.listField.Count, jsonC.listField.Count, "#11");
+            Assert.AreEqual(c.listField[0], jsonC.listField[0], "#12");
+            Assert.AreEqual(c.listField[1], jsonC.listField[1], "#13");
+            Assert.AreEqual(c.listField[2], jsonC.listField[2], "#14");
+            Assert.AreEqual(c.dictField.Count, jsonC.dictField.Count, "#15");
+            Assert.AreEqual(c.dictField["i1"], jsonC.dictField["i1"], "#16");
+            Assert.AreEqual(c.dictField["i2"], jsonC.dictField["i2"], "#17");
+            Assert.AreEqual(c.dictField["i3"], jsonC.dictField["i3"], "#18");
         }
 
         [Test]

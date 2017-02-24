@@ -14,7 +14,7 @@ namespace Bridge.ClientTest
         public enum E1
         {
             Item1,
-            Item2, 
+            Item2,
             Item3
         }
 
@@ -155,7 +155,8 @@ namespace Bridge.ClientTest
         public static void DateTimeWorks()
         {
             DateTime dt = new DateTime(2010, 6, 10, 12, 0, 0, 0);
-            Assert.True(JSON.Serialize(dt).StartsWith("\"2010-06-10T09:00:00.000"));
+            var s = JSON.Serialize(dt);
+            Assert.True(s.StartsWith("\"2010-06-10T09:00:00.000"), "Result: " + s);
         }
 
         [Test]
@@ -203,19 +204,19 @@ namespace Bridge.ClientTest
             var c = new ClassWithFields();
             dynamic raw = JSON.Plain(c);
 
-            Assert.AreEqual(System.Convert.ToBase64String(c.byteArrayField), raw.byteArrayField);
-            Assert.AreEqual(c.guidField.ToString(), raw.guidField);
-            Assert.AreEqual(typeof(SerializationTests).FullName, raw.typeField);
-            Assert.AreEqual("a", raw.charField);
-            Assert.AreEqual(0, raw.longField);
-            Assert.AreEqual(0, raw.ulongField);
-            Assert.AreEqual(0, raw.decimalField);
-            Assert.NotNull(raw.dateField);
-            Assert.True(((string)raw.dateField).StartsWith("2010-06-10T09:00:00.000"));
-            Assert.AreEqual("Item1", raw.enumField);
-            Assert.AreEqual(new int[] {1,2,3}, raw.arrayField);
-            Assert.AreEqual(new string[] {"Item1", "Item2", "Item3"}, raw.listField);
-            Assert.AreDeepEqual(Script.ToPlainObject(new {i1 = "Item1", i2 = "Item2", i3 = "Item3" }), raw.dictField);
+            Assert.AreEqual(System.Convert.ToBase64String(c.byteArrayField), raw.byteArrayField, "#1");
+            Assert.AreEqual(c.guidField.ToString(), raw.guidField, "#2");
+            Assert.AreEqual(typeof(SerializationTests).FullName, raw.typeField, "#3");
+            Assert.AreEqual("a", raw.charField, "#4");
+            Assert.AreEqual(0, raw.longField, "#5");
+            Assert.AreEqual(0, raw.ulongField, "#6");
+            Assert.AreEqual(0, raw.decimalField, "#7");
+            Assert.NotNull(raw.dateField, "#8");
+            Assert.True(((string)raw.dateField).StartsWith("2010-06-10T09:00:00.000"), "#9 " + raw.dateField);
+            Assert.AreEqual("Item1", raw.enumField, "#10");
+            Assert.AreEqual(new int[] {1,2,3}, raw.arrayField, "#11");
+            Assert.AreEqual(new string[] {"Item1", "Item2", "Item3"}, raw.listField, "#12");
+            Assert.AreDeepEqual(Script.ToPlainObject(new {i1 = "Item1", i2 = "Item2", i3 = "Item3" }), raw.dictField, "#12");
         }
 
         [Test]
