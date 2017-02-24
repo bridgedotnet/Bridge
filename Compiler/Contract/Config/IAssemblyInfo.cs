@@ -188,7 +188,7 @@ namespace Bridge.Contract
             get; set;
         }
 
-        bool DisabledAnnotatedFunctionNames
+        bool EnableNamedFunctionExpressions
         {
             get;
             set;
