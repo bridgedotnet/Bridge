@@ -7,6 +7,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     [TestFixture(TestNameFormat = "#1438 - {0}")]
     public class Bridge1438
     {
+        [Reflectable]
         public class Foo
         {
             public int Value { get; set; }
@@ -20,11 +21,11 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test(ExpectedCount = 4)]
         public static void TestJSONParse()
         {
-            var serialized = JSON.Stringify(new Foo() { Value = 100 });
+            var serialized = JSON.Serialize(new Foo() { Value = 100 });
 
             Assert.NotNull(serialized, " serialized should not be null");
 
-            var result = JSON.Parse<Foo>(serialized);
+            var result = JSON.Deserialize<Foo>(serialized);
 
             Assert.NotNull(result, " result should not be null");
             Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438+Foo", result.GetType().FullName, "Check result type name");
@@ -34,14 +35,14 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test(ExpectedCount = 7)]
         public static void TestJSONParseAsArray()
         {
-            var serialized = JSON.Stringify(new[] { new Foo() { Value = 101 } });
+            var serialized = JSON.Serialize(new[] { new Foo() { Value = 101 } });
 
             Assert.NotNull(serialized, " serialized should not be null");
 
-            var result = JSON.ParseAsArray<Foo>(serialized);
+            var result = JSON.Deserialize<Foo[]>(serialized);
 
             Assert.NotNull(result, " result should not be null");
-            Assert.AreEqual("Array", result.GetType().FullName, "Check result type name");
+            Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438+Foo[]", result.GetType().FullName, "Check result type name");
             Assert.AreEqual(1, result.Length, "Check result length");
             Assert.NotNull(result[0], " result[0] should not be null");
             Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438+Foo", result[0].GetType().FullName, "Check result[0] type name");

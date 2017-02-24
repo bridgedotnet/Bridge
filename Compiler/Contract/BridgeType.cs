@@ -376,7 +376,7 @@ namespace Bridge.Contract
 
                 if (isPlainMode)
                 {
-                    return "Object";
+                    return "System.Object";
                 }
             }
 

@@ -75,7 +75,7 @@ namespace Bridge.ClientTest
         [Test]
         public void GenericParseWorks()
         {
-            var o = JSON.Parse<TestClass2>("{ \"i\": 3, \"s\": \"test\" }");
+            var o = (TestClass2)JSON.Parse("{ \"i\": 3, \"s\": \"test\" }");
             Assert.AreEqual(3, o.i);
             Assert.AreEqual("test", o.s);
             Assert.True(IsPlainObject(o), "IsPlainObject");
@@ -93,7 +93,7 @@ namespace Bridge.ClientTest
         [Test]
         public void GenericParseWithCallbackWorks()
         {
-            var o = JSON.Parse<TestClass2>("{ \"i\": 3, \"s\": \"test\" }", (s, x) => { if (s == "i") return 100; return x; });
+            var o = (TestClass2)JSON.Parse("{ \"i\": 3, \"s\": \"test\" }", (s, x) => { if (s == "i") return 100; return x; });
             Assert.AreEqual(100, o.i);
             Assert.AreEqual("test", o.s);
             Assert.True(IsPlainObject(o), "IsPlainObject");
@@ -113,7 +113,7 @@ namespace Bridge.ClientTest
         [Test]
         public void GenericParseWorks3()
         {
-            var o = JSON.Parse<TestClass3>("{ \"i\": 3, \"s\": \"test\" }");
+            var o = (TestClass3)JSON.Parse("{ \"i\": 3, \"s\": \"test\" }");
             Assert.AreEqual(3, o.i);
             Assert.AreEqual("test", o.s);
             Assert.AreEqual(4, o.Inc());
@@ -135,7 +135,7 @@ namespace Bridge.ClientTest
         [Test]
         public void GenericParseWithCallbackWorks3()
         {
-            var o = JSON.Parse<TestClass3>("{ \"i\": 3, \"s\": \"test\" }", (s, x) => { if (s == "i") return 100; return x; });
+            var o = (TestClass3)JSON.Parse("{ \"i\": 3, \"s\": \"test\" }", (s, x) => { if (s == "i") return 100; return x; });
             Assert.AreEqual(100, o.i);
             Assert.AreEqual("test", o.s);
             Assert.AreEqual(101, o.Inc());
@@ -157,7 +157,7 @@ namespace Bridge.ClientTest
         [Test]
         public void GenericParseWorks4()
         {
-            var o = JSON.Parse<TestClass4>("{ \"i\": 3, \"s\": \"test\" }");
+            var o = (TestClass4)JSON.Parse("{ \"i\": 3, \"s\": \"test\" }");
             Assert.AreEqual(3, o.i);
             Assert.AreEqual("test", o.s);
             Assert.AreEqual(4, o.Inc());
@@ -179,7 +179,7 @@ namespace Bridge.ClientTest
         [Test]
         public void GenericParseWithCallbackWorks4()
         {
-            var o = JSON.Parse<TestClass4>("{ \"i\": 3, \"s\": \"test\" }", (s, x) => { if (s == "i") return 100; return x; });
+            var o = (TestClass4)JSON.Parse("{ \"i\": 3, \"s\": \"test\" }", (s, x) => { if (s == "i") return 100; return x; });
             Assert.AreEqual(100, o.i);
             Assert.AreEqual("test", o.s);
             Assert.AreEqual(101, o.Inc());

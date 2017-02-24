@@ -47,7 +47,7 @@ namespace Bridge.ClientTest.Batch4.Serialization
         [Test]
         public void GenericParseWorks()
         {
-            var o = JSON.Parse<TestClass2>("{ \"i\": 3, \"s\": \"test\" }");
+            var o = (TestClass2)JSON.Parse("{ \"i\": 3, \"s\": \"test\" }");
             Assert.AreEqual(3, o.i);
             Assert.AreEqual("test", o.s);
         }
@@ -83,7 +83,7 @@ namespace Bridge.ClientTest.Batch4.Serialization
             // #1574
             // Test restructure to keep assertion count correct (prevent uncaught test exception)
             TestClass2 o = null;
-            TestHelper.Safe(() => o = JSON.Parse<TestClass2>("{ \"i\": 3, \"s\": \"test\" }", (s, x) =>
+            TestHelper.Safe(() => o = (TestClass2)JSON.Parse("{ \"i\": 3, \"s\": \"test\" }", (s, x) =>
             {
                 ((TestClass2)x).i = 100;
                 return x;
