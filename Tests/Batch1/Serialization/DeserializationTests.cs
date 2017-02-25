@@ -316,11 +316,16 @@ namespace Bridge.ClientTest
         {
             Assert.NotNull(c, "ac #1");
             Assert.NotNull(c.Sub1, "ac #2");
-            Assert.NotNull(c.Sub1.Owner, "ac #3");
-            Assert.True(c.Sub1.Owner == c, "ac #4");
+
+            //Cycle references are ignored during serialization therefore deserialization will not restore it
+            //Assert.NotNull(c.Sub1.Owner, "ac #3");
+            //Assert.True(c.Sub1.Owner == c, "ac #4");
+
             Assert.NotNull(c.Sub2, "ac #5");
-            Assert.NotNull(c.Sub2.Owner, "ac #6");
-            Assert.True(c.Sub2.Owner == c, "ac #7");
+
+            //Cycle references are ignored during serialization therefore deserialization will not restore it
+            //Assert.NotNull(c.Sub2.Owner, "ac #6");
+            //Assert.True(c.Sub2.Owner == c, "ac #7");
 
             Assert.True((object)c.Sub1 is SubClass1, "ac #8");
             Assert.True((object)c.Sub2 is SubClass2, "ac #9");

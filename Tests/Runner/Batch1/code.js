@@ -13136,11 +13136,16 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             assertComplex: function (c, item1, item2, item3, l1, l2, l3) {
                 Bridge.Test.NUnit.Assert.notNull$1(c, "ac #1");
                 Bridge.Test.NUnit.Assert.notNull$1(c.getSub1(), "ac #2");
-                Bridge.Test.NUnit.Assert.notNull$1(c.getSub1().getOwner(), "ac #3");
-                Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(c.getSub1().getOwner(), c), "ac #4");
+
+                //Cycle references are ignored during serialization therefore deserialization will not restore it
+                //Assert.NotNull(c.Sub1.Owner, "ac #3");
+                //Assert.True(c.Sub1.Owner == c, "ac #4");
+
                 Bridge.Test.NUnit.Assert.notNull$1(c.getSub2(), "ac #5");
-                Bridge.Test.NUnit.Assert.notNull$1(c.getSub2().getOwner(), "ac #6");
-                Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(c.getSub2().getOwner(), c), "ac #7");
+
+                //Cycle references are ignored during serialization therefore deserialization will not restore it
+                //Assert.NotNull(c.Sub2.Owner, "ac #6");
+                //Assert.True(c.Sub2.Owner == c, "ac #7");
 
                 Bridge.Test.NUnit.Assert.true$1(Bridge.is(c.getSub1(), Bridge.ClientTest.DeserializationTests.SubClass1), "ac #8");
                 Bridge.Test.NUnit.Assert.true$1(Bridge.is(c.getSub2(), Bridge.ClientTest.DeserializationTests.SubClass2), "ac #9");
@@ -26045,7 +26050,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             dateTimeWorks: function () {
                 var dt = new Date(2010, 6 - 1, 10, 12, 0, 0, 0);
                 var s = Bridge.JSON.serialize(Bridge.box(dt, System.DateTime, $box_.System.DateTime.toString));
-                Bridge.Test.NUnit.Assert.true$1(System.String.startsWith(s, "\"2010-06-10T09:00:00.000"), System.String.concat("Result: ", s));
+                Bridge.Test.NUnit.Assert.areEqual$1(JSON.stringify(dt), s, System.String.concat("Result: ", s));
             },
             arrayWorks: function () {
                 var intArr = System.Array.init([1, 2, 3], System.Int32);
@@ -26081,7 +26086,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.areEqual$1(0, raw.ulongField, "#6");
                 Bridge.Test.NUnit.Assert.areEqual$1(0, raw.decimalField, "#7");
                 Bridge.Test.NUnit.Assert.notNull$1(raw.dateField, "#8");
-                Bridge.Test.NUnit.Assert.true$1(System.String.startsWith(Bridge.cast(raw.dateField, System.String), "2010-06-10T09:00:00.000"), System.String.concat("#9 ", raw.dateField));
+                Bridge.Test.NUnit.Assert.areEqual$1(c.dateField.toJSON(), raw.dateField, System.String.concat("#9 ", raw.dateField));
                 Bridge.Test.NUnit.Assert.areEqual$1("Item1", raw.enumField, "#10");
                 Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init([1, 2, 3], System.Int32), raw.arrayField, "#11");
                 Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init(["Item1", "Item2", "Item3"], System.String), raw.listField, "#12");

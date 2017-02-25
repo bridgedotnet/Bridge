@@ -156,7 +156,7 @@ namespace Bridge.ClientTest
         {
             DateTime dt = new DateTime(2010, 6, 10, 12, 0, 0, 0);
             var s = JSON.Serialize(dt);
-            Assert.True(s.StartsWith("\"2010-06-10T09:00:00.000"), "Result: " + s);
+            Assert.AreEqual(Html5.JSON.Stringify(dt), s, "Result: " + s);
         }
 
         [Test]
@@ -212,7 +212,7 @@ namespace Bridge.ClientTest
             Assert.AreEqual(0, raw.ulongField, "#6");
             Assert.AreEqual(0, raw.decimalField, "#7");
             Assert.NotNull(raw.dateField, "#8");
-            Assert.True(((string)raw.dateField).StartsWith("2010-06-10T09:00:00.000"), "#9 " + raw.dateField);
+            Assert.AreEqual(((dynamic)c.dateField).toJSON(), raw.dateField, "#9 " + raw.dateField);
             Assert.AreEqual("Item1", raw.enumField, "#10");
             Assert.AreEqual(new int[] {1,2,3}, raw.arrayField, "#11");
             Assert.AreEqual(new string[] {"Item1", "Item2", "Item3"}, raw.listField, "#12");
