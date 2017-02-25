@@ -6,7 +6,6 @@ namespace System
     /// Specifies the day of the week.
     /// </summary>
     [External]
-    [Enum(Emit.Value)]
     public enum DayOfWeek
     {
         /// <summary>

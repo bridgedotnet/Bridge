@@ -3026,11 +3026,10 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1249", {
         statics: {
             testEnumOverflow: function () {
-                var $t;
                 var v1 = 255;
                 var v2 = 255;
                 Bridge.Test.NUnit.Assert.areEqual(0, ((v1 = (v1 + 1) & 255)));
-                Bridge.Test.NUnit.Assert.areEqual("a", ($t=(((v2 = (v2 + 1) & 255))), System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1249.b, $t)));
+                Bridge.Test.NUnit.Assert.areEqual("a", System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1249.b, (((v2 = (v2 + 1) & 255)))));
             }
         }
     });
@@ -6475,7 +6474,7 @@ Bridge.$N1391Result =                 r;
         testMultiplyThisInTemplate: function () {
             var $t;
             var v = System.Array.init(4, 0, System.Int32);
-            ($t=Bridge.ClientTest.Batch3.BridgeIssues.Bridge1472.getArray(), System.Array.copy($t, 0, v, 0, $t.length));
+            ($t = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1472.getArray(), System.Array.copy($t, 0, v, 0, $t.length));
             Bridge.Test.NUnit.Assert.areEqual(0, v[3]);
         },
         testSimpleMultipleKeyTemplate: function () {
@@ -6607,16 +6606,14 @@ Bridge.$N1391Result =                 r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1489", {
         testLongEnum: function () {
-            var $t, $t1;
             var $enum = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1489.Enum.A;
-            Bridge.Test.NUnit.Assert.areEqual("B", ($t=($enum.add(System.Int64(1))), System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1489.Enum, $t)));
-            Bridge.Test.NUnit.Assert.areEqual("B", ($t1=((($enum = $enum.add(System.Int64(1))))), System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1489.Enum, $t1)));
+            Bridge.Test.NUnit.Assert.areEqual("B", System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1489.Enum, ($enum.add(System.Int64(1)))));
+            Bridge.Test.NUnit.Assert.areEqual("B", System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1489.Enum, ((($enum = $enum.add(System.Int64(1)))))));
         },
         testIntEnum: function () {
-            var $t, $t1;
             var $enum = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1489.IntEnum.C;
-            Bridge.Test.NUnit.Assert.areEqual("D", ($t=((($enum + 1) | 0)), System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1489.IntEnum, $t)));
-            Bridge.Test.NUnit.Assert.areEqual("D", ($t1=((($enum = ($enum + 1) | 0))), System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1489.IntEnum, $t1)));
+            Bridge.Test.NUnit.Assert.areEqual("D", System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1489.IntEnum, ((($enum + 1) | 0))));
+            Bridge.Test.NUnit.Assert.areEqual("D", System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1489.IntEnum, ((($enum = ($enum + 1) | 0)))));
         }
     });
 
@@ -11549,12 +11546,11 @@ Bridge.$N1391Result =                 r;
                 return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.Options.Whatever;
             },
             testToStringForEnumWhenConcatWithString: function () {
-                var $t;
                 var value = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.Options.Whatever;
                 Bridge.Test.NUnit.Assert.areEqual("Value: Whatever", "Value: " + System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.Options, value));
                 Bridge.Test.NUnit.Assert.areEqual("Value: Whatever", System.String.concat("Value: ", System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.Options, value)));
                 Bridge.Test.NUnit.Assert.areEqual("Value: Whatever", "Value: " + System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.Options, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.getStatus()));
-                Bridge.Test.NUnit.Assert.areEqual("Value: Whatever", System.String.concat("Value: ", ($t=Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.getStatus(), System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.Options, $t))));
+                Bridge.Test.NUnit.Assert.areEqual("Value: Whatever", System.String.concat("Value: ", System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.Options, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.getStatus())));
             }
         }
     });
@@ -11802,7 +11798,7 @@ Bridge.$N1391Result =                 r;
         statics: {
             testArrayCreateInstance: function () {
                 var $t, $t1, $t2, $t3;
-                var my1DArray = ($t=System.Int32, System.Array.init(5, Bridge.getDefaultValue($t), $t));
+                var my1DArray = ($t = System.Int32, System.Array.init(5, Bridge.getDefaultValue($t), $t));
                 for (var i = System.Array.getLower(my1DArray, 0); i <= (System.Array.getLength(my1DArray, 0) - 1); i = (i + 1) | 0) {
                     System.Array.set(my1DArray, Bridge.box(((i + 1) | 0), System.Int32), i);
                 }
@@ -11812,7 +11808,7 @@ Bridge.$N1391Result =                 r;
                 Bridge.Test.NUnit.Assert.areEqual(1, Bridge.unbox(my1DArray[0]));
                 Bridge.Test.NUnit.Assert.areEqual(5, Bridge.unbox(my1DArray[4]));
 
-                var my2DArray = ($t1=System.String, System.Array.create(Bridge.getDefaultValue($t1), null, $t1, 2, 3));
+                var my2DArray = ($t1 = System.String, System.Array.create(Bridge.getDefaultValue($t1), null, $t1, 2, 3));
                 for (var i1 = System.Array.getLower(my2DArray, 0); i1 <= (System.Array.getLength(my2DArray, 0) - 1); i1 = (i1 + 1) | 0) {
                     for (var j = System.Array.getLower(my2DArray, 1); j <= (System.Array.getLength(my2DArray, 1) - 1); j = (j + 1) | 0) {
                         System.Array.set(my2DArray, "abc" + i1 + j, i1, j);
@@ -11826,7 +11822,7 @@ Bridge.$N1391Result =                 r;
                 Bridge.Test.NUnit.Assert.areEqual("abc00", Bridge.unbox(System.Array.get(my2DArray, 0, 0)));
                 Bridge.Test.NUnit.Assert.areEqual("abc12", Bridge.unbox(System.Array.get(my2DArray, 1, 2)));
 
-                var my3DArray = ($t2=System.Object, System.Array.create(Bridge.getDefaultValue($t2), null, $t2, 2, 3, 4));
+                var my3DArray = ($t2 = System.Object, System.Array.create(Bridge.getDefaultValue($t2), null, $t2, 2, 3, 4));
                 for (var i2 = System.Array.getLower(my3DArray, 0); i2 <= (System.Array.getLength(my3DArray, 0) - 1); i2 = (i2 + 1) | 0) {
                     for (var j1 = System.Array.getLower(my3DArray, 1); j1 <= (System.Array.getLength(my3DArray, 1) - 1); j1 = (j1 + 1) | 0) {
                         for (var k = System.Array.getLower(my3DArray, 2); k <= (System.Array.getLength(my3DArray, 2) - 1); k = (k + 1) | 0) {
@@ -11844,7 +11840,7 @@ Bridge.$N1391Result =                 r;
                 Bridge.Test.NUnit.Assert.areEqual("abc123", Bridge.unbox(System.Array.get(my3DArray, 1, 2, 3)));
 
                 var myLengthsArray = System.Array.init([2, 3, 4, 5], System.Int32);
-                var my4DArray = ($t3=System.String, System.Array.create(Bridge.getDefaultValue($t3), null, $t3, myLengthsArray));
+                var my4DArray = ($t3 = System.String, System.Array.create(Bridge.getDefaultValue($t3), null, $t3, myLengthsArray));
                 for (var i3 = System.Array.getLower(my4DArray, 0); i3 <= (System.Array.getLength(my4DArray, 0) - 1); i3 = (i3 + 1) | 0) {
                     for (var j2 = System.Array.getLower(my4DArray, 1); j2 <= (System.Array.getLength(my4DArray, 1) - 1); j2 = (j2 + 1) | 0) {
                         for (var k1 = System.Array.getLower(my4DArray, 2); k1 <= (System.Array.getLength(my4DArray, 2) - 1); k1 = (k1 + 1) | 0) {
@@ -11885,39 +11881,39 @@ Bridge.$N1391Result =                 r;
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2052, {
         f1: function () {
             var $t;
-            ($t=null, System.Array.init(5, Bridge.getDefaultValue($t), $t));
+            ($t = null, System.Array.init(5, Bridge.getDefaultValue($t), $t));
         },
         f2: function () {
             var $t;
-            ($t=null, System.Array.create(Bridge.getDefaultValue($t), null, $t, 2, 3));
+            ($t = null, System.Array.create(Bridge.getDefaultValue($t), null, $t, 2, 3));
         },
         f3: function () {
             var $t;
-            ($t=null, System.Array.create(Bridge.getDefaultValue($t), null, $t, 2, 3, 4));
+            ($t = null, System.Array.create(Bridge.getDefaultValue($t), null, $t, 2, 3, 4));
         },
         f4: function () {
             var $t;
-            ($t=null, System.Array.create(Bridge.getDefaultValue($t), null, $t, System.Array.init([2, 3, 4, 5], System.Int32)));
+            ($t = null, System.Array.create(Bridge.getDefaultValue($t), null, $t, System.Array.init([2, 3, 4, 5], System.Int32)));
         },
         f5: function () {
             var $t;
-            ($t=System.Int32, System.Array.create(Bridge.getDefaultValue($t), null, $t, null));
+            ($t = System.Int32, System.Array.create(Bridge.getDefaultValue($t), null, $t, null));
         },
         f6: function () {
             var $t;
-            ($t=System.Int32, System.Array.init(-1, Bridge.getDefaultValue($t), $t));
+            ($t = System.Int32, System.Array.init(-1, Bridge.getDefaultValue($t), $t));
         },
         f7: function () {
             var $t;
-            ($t=System.Int32, System.Array.create(Bridge.getDefaultValue($t), null, $t, 2, -1));
+            ($t = System.Int32, System.Array.create(Bridge.getDefaultValue($t), null, $t, 2, -1));
         },
         f8: function () {
             var $t;
-            ($t=System.Int32, System.Array.create(Bridge.getDefaultValue($t), null, $t, 2, 3, -1));
+            ($t = System.Int32, System.Array.create(Bridge.getDefaultValue($t), null, $t, 2, 3, -1));
         },
         f9: function () {
             var $t;
-            ($t=System.Int32, System.Array.create(Bridge.getDefaultValue($t), null, $t, System.Array.init([2, 3, 4, -1], System.Int32)));
+            ($t = System.Int32, System.Array.create(Bridge.getDefaultValue($t), null, $t, System.Array.init([2, 3, 4, -1], System.Int32)));
         }
     });
 
@@ -12265,13 +12261,12 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge2065", {
         statics: {
             testBoxedEnum: function () {
-                var $t;
                 var vehicleType = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge2065.VehicleType.Boat;
                 var box = Bridge.box(vehicleType, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge2065.VehicleType, $box_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge2065.VehicleType.toString);
 
                 Bridge.Test.NUnit.Assert.areEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge2065.VehicleType.Boat, vehicleType);
                 Bridge.Test.NUnit.Assert.areEqual("Boat", box.toString());
-                Bridge.Test.NUnit.Assert.areEqual("Boat", ($t=System.Enum.parse(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge2065.VehicleType, "Boat"), System.Enum.toString(System.Enum, $t)));
+                Bridge.Test.NUnit.Assert.areEqual("Boat", System.Enum.toString(System.Enum, System.Enum.parse(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge2065.VehicleType, "Boat")));
             }
         }
     });
@@ -15434,6 +15429,18 @@ Bridge.$N1391Result =                 r;
         config: {
             properties: {
                 Data: 0
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2420", {
+        statics: {
+            testExternalEnum: function () {
+                var s1 = System.Enum.toString(System.String, "one");
+                var s2 = System.Enum.toString(System.Int32, (0));
+
+                Bridge.Test.NUnit.Assert.areEqual("one", s1);
+                Bridge.Test.NUnit.Assert.areEqual("0", s2);
             }
         }
     });
@@ -21127,13 +21134,12 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge893", {
         statics: {
             enumToStringWorks: function () {
-                var $t, $t1;
-                Bridge.Test.NUnit.Assert.areEqual("TestA1", ($t=Bridge.ClientTest.Batch3.BridgeIssues.Bridge893A.TestA1, System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge893A, $t)));
+                Bridge.Test.NUnit.Assert.areEqual("TestA1", System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge893A, Bridge.ClientTest.Batch3.BridgeIssues.Bridge893A.TestA1));
 
                 var a = 100;
                 Bridge.Test.NUnit.Assert.areEqual("100", System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge893A, a));
 
-                Bridge.Test.NUnit.Assert.areEqual("TestB3", ($t1=Bridge.ClientTest.Batch3.BridgeIssues.Bridge893B.TestB3, System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge893B, $t1)));
+                Bridge.Test.NUnit.Assert.areEqual("TestB3", System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge893B, Bridge.ClientTest.Batch3.BridgeIssues.Bridge893B.TestB3));
 
                 var t = 3;
                 Bridge.Test.NUnit.Assert.areEqual("TestB1, TestB2", System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge893B, t));
@@ -21184,12 +21190,11 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge905", {
         statics: {
             dayOfWeekFixed: function () {
-                var $t;
                 var dictionary = new (System.Collections.Generic.Dictionary$2(System.DayOfWeek,System.Int32))();
-                dictionary.add(0, 1);
+                dictionary.add(System.DayOfWeek.Sunday, 1);
 
-                Bridge.Test.NUnit.Assert.areEqual$1(1, dictionary.get(0), "1");
-                Bridge.Test.NUnit.Assert.areEqual$1("Saturday", ($t=(6), System.Enum.toString(System.DayOfWeek, $t)), "Saturday");
+                Bridge.Test.NUnit.Assert.areEqual$1(1, dictionary.get(System.DayOfWeek.Sunday), "1");
+                Bridge.Test.NUnit.Assert.areEqual$1("Saturday", System.Enum.toString(System.DayOfWeek, System.DayOfWeek.Saturday), "Saturday");
             }
         }
     });

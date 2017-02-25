@@ -156,6 +156,11 @@ namespace Bridge.Translator
             var has = this.HasAttribute(type.CustomAttributes, externalAttr)
                       || this.HasAttribute(type.CustomAttributes, nonScriptableAttr);
 
+            if (!has && type.DeclaringType != null)
+            {
+                has = this.HasAttribute(type.DeclaringType.CustomAttributes, externalAttr) || this.HasAttribute(type.DeclaringType.CustomAttributes, nonScriptableAttr);
+            }
+
             if (!has)
             {
                 has = this.HasAttribute(type.Module.Assembly.CustomAttributes, externalAttr);
@@ -192,6 +197,11 @@ namespace Bridge.Translator
             string externalAttr = Translator.Bridge_ASSEMBLY + ".ExternalAttribute";
 
             var has = typeDefinition.Attributes.Any(attr => attr.Constructor != null && attr.Constructor.DeclaringType.FullName == externalAttr);
+
+            if (!has && typeDefinition.DeclaringTypeDefinition != null)
+            {
+                has = this.HasAttribute(typeDefinition.DeclaringTypeDefinition.Attributes, externalAttr);
+            }
 
             if (!has)
             {
