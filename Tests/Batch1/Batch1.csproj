@@ -144,6 +144,8 @@
     <Compile Include="Reflection\ReflectionTests.cs" />
     <Compile Include="Reflection\TypeSystemLanguageSupportTests.cs" />
     <Compile Include="Reflection\TypeSystemTests.cs" />
+    <Compile Include="Serialization\DeserializationTests.cs" />
+    <Compile Include="Serialization\SerializationTests.cs" />
     <Compile Include="Serialization\JsonTests.cs" />
     <Compile Include="SimpleTypes\JsStringTests.cs" />
     <Compile Include="Text\RegularExpressions\RegexAlternationTests.cs" />

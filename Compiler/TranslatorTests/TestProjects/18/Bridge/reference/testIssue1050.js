@@ -6,10 +6,10 @@
                     Property: 0
                 }
             },
-            method: function () {
+            method: function method() {
             }
         },
-        main1: function () {
+        main1: function main1() {
             // Should be TestIssue1050.App.something = 1;
             TestIssue1050.App.field = 1;
 

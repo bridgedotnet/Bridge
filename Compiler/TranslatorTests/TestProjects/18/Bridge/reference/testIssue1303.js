@@ -6,10 +6,10 @@
                     Bridge.ready(this.main);
                 }
             },
-            notMain: function () {
+            notMain: function notMain() {
                 //Should be in config.init
             },
-            main: function () {
+            main: function main() {
                 //Should be in config.init
             }
         },
@@ -23,12 +23,12 @@
                     Bridge.ready(this.notMain);
                 }
             },
-            notMain: function () {
+            notMain: function notMain() {
                 //Should be in config.init
             }
         },
         $entryPoint: true,
-        $main: function () {
+        $main: function $main() {
             //Should be in config.init
         }
     });
@@ -40,7 +40,7 @@
                     Bridge.ready(this.main);
                 }
             },
-            main: function () {
+            main: function main() {
                 //Should be in config.init
             }
         },

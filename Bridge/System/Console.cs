@@ -48,7 +48,7 @@ namespace System
         /// Writes the text representation of the specified Boolean value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("Bridge.Console.log({value})")]
+        [Template("Bridge.Console.log(System.Boolean.toString({value}))")]
         public static extern void Write(Boolean value);
 
         /// <summary>
@@ -187,7 +187,7 @@ namespace System
         /// Writes the text representation of the specified Boolean value, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("Bridge.Console.log({value})")]
+        [Template("Bridge.Console.log(System.Boolean.toString({value}))")]
         public static extern void WriteLine(Boolean value);
 
         /// <summary>

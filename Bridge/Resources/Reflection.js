@@ -395,7 +395,7 @@
             return type.$kind === "interface";
         },
 
-        _getType: function (typeName, asm, re) {
+        _getType: function (typeName, asm, re, noinit) {
             var outer = !re;
 
             re = re || /[[,\]]/g;
@@ -404,7 +404,10 @@
                 m = re.exec(typeName),
                 tname,
                 targs = [],
-                t;
+                t,
+                noasm = !asm;
+
+            asm = asm || Bridge.$currentAssembly;
 
             if (m) {
                 tname = typeName.substring(last, m.index);
@@ -465,6 +468,22 @@
             }
 
             t = Bridge.Reflection._getAssemblyType(asm, tname.trim());
+
+            if (noinit) {
+                return t;
+            }
+
+            if (!t && noasm) {
+                for (var asmName in System.Reflection.Assembly.assemblies) {
+                    if (System.Reflection.Assembly.assemblies.hasOwnProperty(asmName) && System.Reflection.Assembly.assemblies[asmName] !== asm) {
+                        t = Bridge.Reflection._getType(typeName, System.Reflection.Assembly.assemblies[asmName], null,true);
+
+                        if (t) {
+                            break;
+                        }
+                    }
+                }
+            }
 
             t = targs.length ? t.apply(null, targs) : t;
             if (t && t.$staticInit) {

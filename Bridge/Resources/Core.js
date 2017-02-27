@@ -590,6 +590,8 @@
                 throw new System.ArgumentNullException("type");
             } else if ((type.getDefaultValue) && type.getDefaultValue.length === 0) {
                 return type.getDefaultValue();
+            } else if (Bridge.Reflection.isEnum(type)) {
+                return System.Enum.parse(type, 0);
             } else if (type === Boolean || type === System.Boolean) {
                 return false;
             } else if (type === System.DateTime) {

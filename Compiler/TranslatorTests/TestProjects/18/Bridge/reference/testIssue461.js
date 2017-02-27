@@ -1,6 +1,6 @@
     Bridge.define("TestIssue461.Issue461", {
         statics: {
-            test: function () {
+            test: function test() {
                 var input = document.createElement('input');
 
                 input.onchange = Bridge.fn.combine(input.onchange, $asm.$.TestIssue461.Issue461.f1);

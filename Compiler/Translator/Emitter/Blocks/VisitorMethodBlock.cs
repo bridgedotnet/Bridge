@@ -87,6 +87,14 @@ namespace Bridge.Translator
 
             this.WriteFunction();
 
+            if (this.Emitter.AssemblyInfo.EnableNamedFunctionExpressions)
+            {
+                // If the option enabled then use named function expressions (see #2407)
+                // like doSomething: function doSomething() { }
+                // instead of doSomething: function () { }
+                this.Write(name);
+            }
+
             this.EmitMethodParameters(methodDeclaration.Parameters, methodDeclaration.TypeParameters.Count > 0 && Helpers.IsIgnoreGeneric(methodDeclaration, this.Emitter) ? null : methodDeclaration.TypeParameters, methodDeclaration);
 
             this.WriteSpace();

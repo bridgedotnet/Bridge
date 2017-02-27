@@ -16,7 +16,7 @@ alert("I'm header 1.0.0-beta");
                     Bridge.ready(this.main1);
                 }
             },
-            main1: function () {
+            main1: function main1() {
                 Bridge.Console.log(new TestIssue599.Issue599()._something);
             }
         },
@@ -27,7 +27,7 @@ alert("I'm header 1.0.0-beta");
 
     Bridge.define("TestIssue948.Issue948", {
         statics: {
-            test: function () {
+            test: function test() {
                 // A comment
 
                 /* global Bridge */

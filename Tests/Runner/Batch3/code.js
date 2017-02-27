@@ -1640,7 +1640,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1134", {
         statics: {
             testJsonArrayParse: function () {
-                var o = Bridge.merge(Bridge.createInstance(System.Array.type(System.Int32)), JSON.parse("[1]"));
+                var o = Bridge.JSON.deserialize("[1]", System.Array.type(System.Int32));
                 Bridge.Test.NUnit.Assert.true(o != null);
                 Bridge.Test.NUnit.Assert.areEqual(1, o.length);
                 Bridge.Test.NUnit.Assert.areEqual(1, o[0]);
@@ -5429,6 +5429,34 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1345", {
+        statics: {
+            testBoolInConsole: function () {
+                try {
+                    var value = "hello world";
+
+                    Bridge.Console.getInstance().bufferedOutput = "";
+                    Bridge.Console.log(System.Boolean.toString(true));
+                    Bridge.Console.log(System.Boolean.toString(false));
+                    Bridge.Console.log(System.Boolean.toString(Bridge.referenceEquals(value, "hello world")));
+
+                    Bridge.Test.NUnit.Assert.areEqual("TrueFalseTrue", Bridge.Console.getInstance().bufferedOutput);
+
+                    Bridge.Console.getInstance().bufferedOutput = "";
+                    Bridge.Console.log(System.Boolean.toString(true));
+                    Bridge.Console.log(System.Boolean.toString(false));
+                    Bridge.Console.log(System.Boolean.toString(Bridge.referenceEquals(value, "hello world")));
+
+                    Bridge.Test.NUnit.Assert.areEqual("TrueFalseTrue", Bridge.Console.getInstance().bufferedOutput);
+                }
+                finally {
+                    Bridge.Console.getInstance().bufferedOutput = null;
+                    Bridge.Console.hide();
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1348", {
         statics: {
             testVoidTypeOf: function () {
@@ -6202,29 +6230,29 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438", {
         statics: {
             testJSONParse: function () {
-                var serialized = JSON.stringify(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo(), {
-                    setValue: 100
-                } ));
+                var serialized = Bridge.JSON.serialize(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo(), {
+                        setValue: 100
+                    } ));
 
                 Bridge.Test.NUnit.Assert.notNull$1(serialized, " serialized should not be null");
 
-                var result = Bridge.merge(Bridge.createInstance(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo), JSON.parse(serialized));
+                var result = Bridge.JSON.deserialize(serialized, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo);
 
                 Bridge.Test.NUnit.Assert.notNull$1(result, " result should not be null");
                 Bridge.Test.NUnit.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438+Foo", Bridge.Reflection.getTypeFullName(Bridge.getType(result)), "Check result type name");
                 Bridge.Test.NUnit.Assert.areEqual$1(100, result.getValue(), "result.Value = 100");
             },
             testJSONParseAsArray: function () {
-                var serialized = JSON.stringify(System.Array.init([Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo(), {
-                    setValue: 101
-                } )], Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo));
+                var serialized = Bridge.JSON.serialize(System.Array.init([Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo(), {
+                        setValue: 101
+                    } )], Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo));
 
                 Bridge.Test.NUnit.Assert.notNull$1(serialized, " serialized should not be null");
 
-                var result = Bridge.merge(new Array(), JSON.parse(serialized), null, function(){return Bridge.createInstance(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo);});
+                var result = Bridge.JSON.deserialize(serialized, System.Array.type(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo));
 
                 Bridge.Test.NUnit.Assert.notNull$1(result, " result should not be null");
-                Bridge.Test.NUnit.Assert.areEqual$1("Array", Bridge.Reflection.getTypeFullName(Bridge.getType(result)), "Check result type name");
+                Bridge.Test.NUnit.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438+Foo[]", Bridge.Reflection.getTypeFullName(Bridge.getType(result)), "Check result type name");
                 Bridge.Test.NUnit.Assert.areEqual$1(1, result.length, "Check result length");
                 Bridge.Test.NUnit.Assert.notNull$1(result[0], " result[0] should not be null");
                 Bridge.Test.NUnit.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438+Foo", Bridge.Reflection.getTypeFullName(Bridge.getType(result[0])), "Check result[0] type name");
@@ -10059,7 +10087,7 @@ Bridge.$N1391Result =                 r;
             var icontract = contract;
             var o = contract;
 
-            Bridge.Test.NUnit.Assert.true(Bridge.is(o, Object));
+            Bridge.Test.NUnit.Assert.true(Bridge.is(o, System.Object));
             Bridge.Test.NUnit.Assert.true(Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865.Contract));
             Bridge.Test.NUnit.Assert.false(Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865.Contract2));
 
@@ -12651,7 +12679,7 @@ Bridge.$N1391Result =                 r;
                 var o3 = Bridge.box(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2106.c1$1(System.String).prototype.m1.call(o1, System.Int32, o2), System.Int32);
 
                 Bridge.Test.NUnit.Assert.areEqual(0, Bridge.unbox(o3));
-                Bridge.Test.NUnit.Assert.true(Bridge.is(o1, Object));
+                Bridge.Test.NUnit.Assert.true(Bridge.is(o1, System.Object));
                 Bridge.Test.NUnit.Assert.true(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2106.c1$1(System.String).prototype.m2.call(o1, System.Int32, o2));
             }
         }
@@ -12664,7 +12692,7 @@ Bridge.$N1391Result =                 r;
         },
         m2: function (TB, p1) {
             var oThis = this;
-            return Bridge.is(oThis, Object);
+            return Bridge.is(oThis, System.Object);
         }
     }; });
 
@@ -13005,7 +13033,7 @@ Bridge.$N1391Result =                 r;
         statics: {
             testIgnoreGenericForNestedClass: function () {
                 Bridge.Test.NUnit.Assert.false(Bridge.Reflection.isGenericTypeDefinition(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.ComponentPropsHelpers$1));
-                Bridge.Test.NUnit.Assert.false(Bridge.Reflection.isGenericTypeDefinition(Object));
+                Bridge.Test.NUnit.Assert.false(Bridge.Reflection.isGenericTypeDefinition(System.Object));
                 Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isGenericTypeDefinition(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.ComponentPropsHelpers2$1));
                 // NRefactory incorrectly resolves ComponentPropsHelpers2<>.WrappedProps type
                 // It provides ComponentPropsHelpers2<TProps>.WrappedProps instead of definition
@@ -16054,18 +16082,18 @@ Bridge.$N1391Result =                 r;
         statics: {
             testUseCase: function () {
                 var list = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge501.f1(new (System.Collections.Generic.List$1(System.Int32))());
-                var z = JSON.stringify(list); // this is ok
-                Bridge.Test.NUnit.Assert.areEqual$1("{\"items\":[7]}", z, "List<int>");
+                var z = Bridge.JSON.serialize(list); // this is ok
+                Bridge.Test.NUnit.Assert.areEqual$1("[7]", z, "List<int>");
 
                 var b = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge501.f2(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge501B());
-                var y = JSON.stringify(b); // wrong, missing items
-                Bridge.Test.NUnit.Assert.areEqual$1("{\"items\":[1,2]}", y, "Bridge501B");
+                var y = Bridge.JSON.serialize(b); // wrong, missing items
+                Bridge.Test.NUnit.Assert.areEqual$1("[1,2]", y, "Bridge501B");
 
                 var a = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge501.f3(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge501A()); // sine items is defined as member, push fails
-                var x = JSON.stringify(a);
-                Bridge.Test.NUnit.Assert.areEqual$1("{\"items\":[7]}", x, "Bridge501A");
+                var x = Bridge.JSON.serialize(a);
+                Bridge.Test.NUnit.Assert.areEqual$1("[7]", x, "Bridge501A");
 
-                var c = Bridge.merge(Bridge.createInstance(Bridge.ClientTest.Batch3.BridgeIssues.Bridge501A), JSON.parse(x));
+                var c = Bridge.JSON.deserialize(x, Bridge.ClientTest.Batch3.BridgeIssues.Bridge501A);
                 Bridge.Test.NUnit.Assert.areEqual$1("12", c.items$1, "Bridge501A Parse c.Items");
                 Bridge.Test.NUnit.Assert.areEqual$1(7, c.getItem(0), "Bridge501A Parse c[0]");
             }
@@ -16606,20 +16634,20 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge544", {
         statics: {
             testUseCase: function () {
-                var o = Bridge.merge(Bridge.createInstance(System.Boolean), JSON.parse("true"));
+                var o = Bridge.JSON.deserialize("true", System.Boolean);
                 Bridge.Test.NUnit.Assert.areEqual$1(true, o, "Bridge544 bool");
             },
             testRelated: function () {
-                var i = Bridge.merge(Bridge.createInstance(System.Int32), JSON.parse("25"));
+                var i = Bridge.JSON.deserialize("25", System.Int32);
                 Bridge.Test.NUnit.Assert.areEqual$1(25, i, "Bridge544 int");
 
-                var dbl = Bridge.merge(Bridge.createInstance(System.Double), JSON.parse("26.1"));
+                var dbl = Bridge.JSON.deserialize("26.1", System.Double);
                 Bridge.Test.NUnit.Assert.areEqual$1(26.1, dbl, "Bridge544 double");
 
-                var d = Bridge.merge(Bridge.createInstance(System.Decimal), JSON.parse("27.2"));
+                var d = Bridge.JSON.deserialize("27.2", System.Decimal);
                 Bridge.ClientTest.Batch3.Utilities.DecimalHelper.assertIsDecimalAndEqualTo$1(d, 27.2, "Bridge544 decimal");
 
-                var s = Bridge.merge(Bridge.createInstance(System.String), JSON.parse("\"Some string\""));
+                var s = Bridge.JSON.deserialize("\"Some string\"", System.String);
                 Bridge.Test.NUnit.Assert.areEqual$1("Some string", s, "Bridge544 string");
             }
         }
@@ -23722,7 +23750,6 @@ Bridge.$N1391Result =                 r;
     }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865.Contract", {
-        inherits: [Object],
         $literal: true,
         ctor: function () {
             var $this = {};
@@ -23735,7 +23762,6 @@ Bridge.$N1391Result =                 r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865.Contract2", {
-        inherits: [Object],
         $literal: true,
         ctor: function () {
             var $this = {};
@@ -24578,6 +24604,9 @@ Bridge.$N1391Result =                 r;
         $n = [System.Collections.Generic,System,Bridge.ClientTest.Batch3.BridgeIssues];
     $m($n[2].Bridge1900, function () { return {"m":[{"a":2,"n":"GetValue","is":true,"t":8,"pi":[{"n":"value","out":true,"pt":System.Object,"ps":0}],"tpc":1,"tprm":["T"],"sn":"getValue","rt":$n[0].List$1(System.Object),"p":[System.Object]},{"a":1,"n":"TestOutRef","is":true,"t":8,"pi":[{"n":"value","out":true,"pt":$n[1].Int32,"ps":0},{"n":"s","ref":true,"pt":$n[1].String,"ps":1}],"sn":"testOutRef","rt":$n[1].Boolean,"p":[$n[1].Int32,$n[1].String]},{"a":1,"n":"TryGetValue1","is":true,"t":8,"pi":[{"n":"value","out":true,"pt":$n[1].Int32,"ps":0}],"sn":"tryGetValue1","rt":$n[1].Boolean,"p":[$n[1].Int32]},{"a":1,"n":"TryGetValue2","is":true,"t":8,"pi":[{"n":"value","out":true,"pt":$n[1].Int32,"ps":0},{"n":"value2","out":true,"pt":$n[1].String,"ps":1}],"sn":"tryGetValue2","rt":$n[1].Boolean,"p":[$n[1].Int32,$n[1].String]}]}; });
     $m($n[2].Bridge1970.Test, function () { return {"m":[{"a":2,"n":"IsInitialized","is":true,"t":4,"rt":$n[1].Boolean,"sn":"isInitialized","ro":true}]}; });
+    $m($n[2].Bridge501A, function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"Items","t":4,"rt":$n[1].String,"sn":"items$1"}]}; });
+    $m($n[2].Bridge501B, function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"}]}; });
+    $m($n[2].Bridge1438.Foo, function () { return {"td":$n[2].Bridge1438,"att":1048578,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"SomeMethod","t":8,"sn":"someMethod","rt":$n[1].String},{"a":2,"n":"Value","t":16,"rt":$n[1].Int32,"g":{"a":2,"n":"get_Value","t":8,"sn":"getValue","rt":$n[1].Int32},"s":{"a":2,"n":"set_Value","t":8,"pi":[{"n":"value","pt":$n[1].Int32,"ps":0}],"sn":"setValue","rt":$n[1].Object,"p":[$n[1].Int32]}}]}; });
     $m($n[2].Bridge2051, function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"TestGetElementType","is":true,"t":8,"sn":"testGetElementType","rt":$n[1].Object}]}; });
     $m($n[2].Bridge2052, function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"TestArrayCreateInstance","is":true,"t":8,"sn":"testArrayCreateInstance","rt":$n[1].Object},{"a":2,"n":"TestArrayCreateInstanceShouldThrow","is":true,"t":8,"sn":"testArrayCreateInstanceShouldThrow","rt":$n[1].Object}]}; });
     $m($n[2].Bridge2088.T, function () { return {"td":$n[2].Bridge2088,"att":1048579,"a":1,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"ShouldSeeThis","t":16,"rt":$n[1].Int32,"g":{"a":2,"n":"get_ShouldSeeThis","t":8,"sn":"getShouldSeeThis","rt":$n[1].Int32},"s":{"a":2,"n":"set_ShouldSeeThis","t":8,"pi":[{"n":"value","pt":$n[1].Int32,"ps":0}],"sn":"setShouldSeeThis","rt":$n[1].Object,"p":[$n[1].Int32]}}]}; });
@@ -24588,5 +24617,5 @@ Bridge.$N1391Result =                 r;
     $m($n[2].Bridge2221, function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"TestMakeArrayType","is":true,"t":8,"sn":"testMakeArrayType","rt":$n[1].Object}]}; });
     $m($n[2].Bridge2222, function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"TestGetTypeWithNullArgument","is":true,"t":8,"sn":"testGetTypeWithNullArgument","rt":$n[1].Object}]}; });
     $m($n[2].Bridge2375.Person, function () { return {"td":$n[2].Bridge2375,"att":1048578,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"FirstName","t":16,"rt":$n[1].String,"g":{"a":2,"n":"get_FirstName","t":8,"sn":"getFirstName","rt":$n[1].String},"s":{"a":2,"n":"set_FirstName","t":8,"pi":[{"n":"value","pt":$n[1].String,"ps":0}],"sn":"setFirstName","rt":$n[1].Object,"p":[$n[1].String]}},{"a":1,"n":"__Property__Initializer__FirstName","t":4,"rt":$n[1].String,"sn":"__Property__Initializer__FirstName"}]}; });
-    $m(console, function () { return {"att":1048833,"a":2,"m":[{"a":2,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"Clear","is":true,"t":8,"sn":"clear","rt":$n[1].Object},{"a":2,"n":"Read","is":true,"t":8,"tpc":0,"def":function () { return prompt(); },"rt":$n[1].String},{"a":2,"n":"ReadLine","is":true,"t":8,"tpc":0,"def":function () { return prompt(); },"rt":$n[1].String},{"a":2,"n":"ReadLine","is":true,"t":8,"pi":[{"n":"text","pt":$n[1].String,"ps":0}],"tpc":0,"def":function (text) { return prompt(text); },"rt":$n[1].String,"p":[$n[1].String]},{"a":2,"n":"ReadLine","is":true,"t":8,"pi":[{"n":"text","pt":$n[1].String,"ps":0},{"n":"value","pt":$n[1].String,"ps":1}],"tpc":0,"def":function (text, value) { return prompt(text, value); },"rt":$n[1].String,"p":[$n[1].String,$n[1].String]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Boolean,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value); },"rt":$n[1].Object,"p":[$n[1].Boolean]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Char,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(String.fromCharCode(value)); },"rt":$n[1].Object,"p":[$n[1].Char]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"buffer","pt":$n[1].Array.type(System.Char),"ps":0}],"sn":"write","rt":$n[1].Object,"p":[$n[1].Array.type(System.Char)]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Decimal,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value.toString('G')); },"rt":$n[1].Object,"p":[$n[1].Decimal]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Double,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value); },"rt":$n[1].Object,"p":[$n[1].Double]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Int32,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value); },"rt":$n[1].Object,"p":[$n[1].Int32]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Int64,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value.toString()); },"rt":$n[1].Object,"p":[$n[1].Int64]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Object,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value); },"rt":$n[1].Object,"p":[$n[1].Object]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Single,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value); },"rt":$n[1].Object,"p":[$n[1].Single]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].String,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value); },"rt":$n[1].Object,"p":[$n[1].String]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].UInt32,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value); },"rt":$n[1].Object,"p":[$n[1].UInt32]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].UInt64,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value.toString()); },"rt":$n[1].Object,"p":[$n[1].UInt64]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1}],"tpc":0,"def":function (format, arg0) { return Bridge.Console.log(System.String.format(format, arg0)); },"rt":$n[1].Object,"p":[$n[1].String,$n[1].Object]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg","ip":true,"pt":$n[1].Array.type(System.Object),"ps":1}],"tpc":0,"def":function (format, arg) { return Bridge.Console.log(System.String.format(format, arg)); },"rt":$n[1].Object,"p":[$n[1].String,$n[1].Array.type(System.Object)]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1},{"n":"arg1","pt":$n[1].Object,"ps":2}],"tpc":0,"def":function (format, arg0, arg1) { return Bridge.Console.log(System.String.format(format, arg0, arg1)); },"rt":$n[1].Object,"p":[$n[1].String,$n[1].Object,$n[1].Object]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1},{"n":"arg1","pt":$n[1].Object,"ps":2},{"n":"arg2","pt":$n[1].Object,"ps":3}],"tpc":0,"def":function (format, arg0, arg1, arg2) { return Bridge.Console.log(System.String.format(format, arg0, arg1, arg2)); },"rt":$n[1].Object,"p":[$n[1].String,$n[1].Object,$n[1].Object,$n[1].Object]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1},{"n":"arg1","pt":$n[1].Object,"ps":2},{"n":"arg2","pt":$n[1].Object,"ps":3},{"n":"arg3","pt":$n[1].Object,"ps":4}],"tpc":0,"def":function (format, arg0, arg1, arg2, arg3) { return Bridge.Console.log(System.String.format(format, arg0, arg1, arg2, arg3)); },"rt":$n[1].Object,"p":[$n[1].String,$n[1].Object,$n[1].Object,$n[1].Object,$n[1].Object]},{"a":2,"n":"WriteLine","is":true,"t":8,"tpc":0,"def":function () { return Bridge.Console.log(); },"rt":$n[1].Object},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Boolean,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value); },"rt":$n[1].Object,"p":[$n[1].Boolean]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Char,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(String.fromCharCode(value)); },"rt":$n[1].Object,"p":[$n[1].Char]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"buffer","pt":$n[1].Array.type(System.Char),"ps":0}],"sn":"writeLine","rt":$n[1].Object,"p":[$n[1].Array.type(System.Char)]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Decimal,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value.toString('G')); },"rt":$n[1].Object,"p":[$n[1].Decimal]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Double,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(System.Double.format(value)); },"rt":$n[1].Object,"p":[$n[1].Double]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Enum,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(System.Enum.toString(Bridge.getType(value), value)); },"rt":$n[1].Object,"p":[$n[1].Enum]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Int32,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value); },"rt":$n[1].Object,"p":[$n[1].Int32]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Int64,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value.toString()); },"rt":$n[1].Object,"p":[$n[1].Int64]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Nullable$1(System.Decimal),"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value && value.toString('G')); },"rt":$n[1].Object,"p":[$n[1].Nullable$1(System.Decimal)]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Nullable$1(System.Int64),"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value && value.toString()); },"rt":$n[1].Object,"p":[$n[1].Nullable$1(System.Int64)]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Nullable$1(System.UInt64),"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value && value.toString()); },"rt":$n[1].Object,"p":[$n[1].Nullable$1(System.UInt64)]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Object,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value); },"rt":$n[1].Object,"p":[$n[1].Object]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Single,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(System.Single.format(value)); },"rt":$n[1].Object,"p":[$n[1].Single]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].String,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value); },"rt":$n[1].Object,"p":[$n[1].String]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].UInt32,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value); },"rt":$n[1].Object,"p":[$n[1].UInt32]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].UInt64,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value.toString()); },"rt":$n[1].Object,"p":[$n[1].UInt64]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1}],"tpc":0,"def":function (format, arg0) { return Bridge.Console.log(System.String.format(format, arg0)); },"rt":$n[1].Object,"p":[$n[1].String,$n[1].Object]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg","ip":true,"pt":$n[1].Array.type(System.Object),"ps":1}],"tpc":0,"def":function (format, arg) { return Bridge.Console.log(System.String.format(format, arg)); },"rt":$n[1].Object,"p":[$n[1].String,$n[1].Array.type(System.Object)]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1},{"n":"arg1","pt":$n[1].Object,"ps":2}],"tpc":0,"def":function (format, arg0, arg1) { return Bridge.Console.log(System.String.format(format, arg0, arg1)); },"rt":$n[1].Object,"p":[$n[1].String,$n[1].Object,$n[1].Object]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1},{"n":"arg1","pt":$n[1].Object,"ps":2},{"n":"arg2","pt":$n[1].Object,"ps":3}],"tpc":0,"def":function (format, arg0, arg1, arg2) { return Bridge.Console.log(System.String.format(format, arg0, arg1, arg2)); },"rt":$n[1].Object,"p":[$n[1].String,$n[1].Object,$n[1].Object,$n[1].Object]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1},{"n":"arg1","pt":$n[1].Object,"ps":2},{"n":"arg2","pt":$n[1].Object,"ps":3},{"n":"arg3","pt":$n[1].Object,"ps":4}],"tpc":0,"def":function (format, arg0, arg1, arg2, arg3) { return Bridge.Console.log(System.String.format(format, arg0, arg1, arg2, arg3)); },"rt":$n[1].Object,"p":[$n[1].String,$n[1].Object,$n[1].Object,$n[1].Object,$n[1].Object]}]}; });
+    $m(console, function () { return {"att":1048833,"a":2,"m":[{"a":2,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"Clear","is":true,"t":8,"sn":"clear","rt":$n[1].Object},{"a":2,"n":"Read","is":true,"t":8,"tpc":0,"def":function () { return prompt(); },"rt":$n[1].String},{"a":2,"n":"ReadLine","is":true,"t":8,"tpc":0,"def":function () { return prompt(); },"rt":$n[1].String},{"a":2,"n":"ReadLine","is":true,"t":8,"pi":[{"n":"text","pt":$n[1].String,"ps":0}],"tpc":0,"def":function (text) { return prompt(text); },"rt":$n[1].String,"p":[$n[1].String]},{"a":2,"n":"ReadLine","is":true,"t":8,"pi":[{"n":"text","pt":$n[1].String,"ps":0},{"n":"value","pt":$n[1].String,"ps":1}],"tpc":0,"def":function (text, value) { return prompt(text, value); },"rt":$n[1].String,"p":[$n[1].String,$n[1].String]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Boolean,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(System.Boolean.toString(value)); },"rt":$n[1].Object,"p":[$n[1].Boolean]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Char,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(String.fromCharCode(value)); },"rt":$n[1].Object,"p":[$n[1].Char]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"buffer","pt":$n[1].Array.type(System.Char),"ps":0}],"sn":"write","rt":$n[1].Object,"p":[$n[1].Array.type(System.Char)]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Decimal,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value.toString('G')); },"rt":$n[1].Object,"p":[$n[1].Decimal]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Double,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value); },"rt":$n[1].Object,"p":[$n[1].Double]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Int32,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value); },"rt":$n[1].Object,"p":[$n[1].Int32]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Int64,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value.toString()); },"rt":$n[1].Object,"p":[$n[1].Int64]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Object,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value); },"rt":$n[1].Object,"p":[$n[1].Object]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Single,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value); },"rt":$n[1].Object,"p":[$n[1].Single]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].String,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value); },"rt":$n[1].Object,"p":[$n[1].String]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].UInt32,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value); },"rt":$n[1].Object,"p":[$n[1].UInt32]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].UInt64,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value.toString()); },"rt":$n[1].Object,"p":[$n[1].UInt64]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1}],"tpc":0,"def":function (format, arg0) { return Bridge.Console.log(System.String.format(format, arg0)); },"rt":$n[1].Object,"p":[$n[1].String,$n[1].Object]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg","ip":true,"pt":$n[1].Array.type(System.Object),"ps":1}],"tpc":0,"def":function (format, arg) { return Bridge.Console.log(System.String.format(format, arg)); },"rt":$n[1].Object,"p":[$n[1].String,$n[1].Array.type(System.Object)]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1},{"n":"arg1","pt":$n[1].Object,"ps":2}],"tpc":0,"def":function (format, arg0, arg1) { return Bridge.Console.log(System.String.format(format, arg0, arg1)); },"rt":$n[1].Object,"p":[$n[1].String,$n[1].Object,$n[1].Object]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1},{"n":"arg1","pt":$n[1].Object,"ps":2},{"n":"arg2","pt":$n[1].Object,"ps":3}],"tpc":0,"def":function (format, arg0, arg1, arg2) { return Bridge.Console.log(System.String.format(format, arg0, arg1, arg2)); },"rt":$n[1].Object,"p":[$n[1].String,$n[1].Object,$n[1].Object,$n[1].Object]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1},{"n":"arg1","pt":$n[1].Object,"ps":2},{"n":"arg2","pt":$n[1].Object,"ps":3},{"n":"arg3","pt":$n[1].Object,"ps":4}],"tpc":0,"def":function (format, arg0, arg1, arg2, arg3) { return Bridge.Console.log(System.String.format(format, arg0, arg1, arg2, arg3)); },"rt":$n[1].Object,"p":[$n[1].String,$n[1].Object,$n[1].Object,$n[1].Object,$n[1].Object]},{"a":2,"n":"WriteLine","is":true,"t":8,"tpc":0,"def":function () { return Bridge.Console.log(); },"rt":$n[1].Object},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Boolean,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(System.Boolean.toString(value)); },"rt":$n[1].Object,"p":[$n[1].Boolean]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Char,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(String.fromCharCode(value)); },"rt":$n[1].Object,"p":[$n[1].Char]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"buffer","pt":$n[1].Array.type(System.Char),"ps":0}],"sn":"writeLine","rt":$n[1].Object,"p":[$n[1].Array.type(System.Char)]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Decimal,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value.toString('G')); },"rt":$n[1].Object,"p":[$n[1].Decimal]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Double,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(System.Double.format(value)); },"rt":$n[1].Object,"p":[$n[1].Double]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Enum,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(System.Enum.toString(Bridge.getType(value), value)); },"rt":$n[1].Object,"p":[$n[1].Enum]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Int32,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value); },"rt":$n[1].Object,"p":[$n[1].Int32]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Int64,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value.toString()); },"rt":$n[1].Object,"p":[$n[1].Int64]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Nullable$1(System.Decimal),"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value && value.toString('G')); },"rt":$n[1].Object,"p":[$n[1].Nullable$1(System.Decimal)]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Nullable$1(System.Int64),"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value && value.toString()); },"rt":$n[1].Object,"p":[$n[1].Nullable$1(System.Int64)]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Nullable$1(System.UInt64),"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value && value.toString()); },"rt":$n[1].Object,"p":[$n[1].Nullable$1(System.UInt64)]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Object,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value); },"rt":$n[1].Object,"p":[$n[1].Object]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Single,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(System.Single.format(value)); },"rt":$n[1].Object,"p":[$n[1].Single]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].String,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value); },"rt":$n[1].Object,"p":[$n[1].String]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].UInt32,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value); },"rt":$n[1].Object,"p":[$n[1].UInt32]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].UInt64,"ps":0}],"tpc":0,"def":function (value) { return Bridge.Console.log(value.toString()); },"rt":$n[1].Object,"p":[$n[1].UInt64]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1}],"tpc":0,"def":function (format, arg0) { return Bridge.Console.log(System.String.format(format, arg0)); },"rt":$n[1].Object,"p":[$n[1].String,$n[1].Object]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg","ip":true,"pt":$n[1].Array.type(System.Object),"ps":1}],"tpc":0,"def":function (format, arg) { return Bridge.Console.log(System.String.format(format, arg)); },"rt":$n[1].Object,"p":[$n[1].String,$n[1].Array.type(System.Object)]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1},{"n":"arg1","pt":$n[1].Object,"ps":2}],"tpc":0,"def":function (format, arg0, arg1) { return Bridge.Console.log(System.String.format(format, arg0, arg1)); },"rt":$n[1].Object,"p":[$n[1].String,$n[1].Object,$n[1].Object]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1},{"n":"arg1","pt":$n[1].Object,"ps":2},{"n":"arg2","pt":$n[1].Object,"ps":3}],"tpc":0,"def":function (format, arg0, arg1, arg2) { return Bridge.Console.log(System.String.format(format, arg0, arg1, arg2)); },"rt":$n[1].Object,"p":[$n[1].String,$n[1].Object,$n[1].Object,$n[1].Object]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1},{"n":"arg1","pt":$n[1].Object,"ps":2},{"n":"arg2","pt":$n[1].Object,"ps":3},{"n":"arg3","pt":$n[1].Object,"ps":4}],"tpc":0,"def":function (format, arg0, arg1, arg2, arg3) { return Bridge.Console.log(System.String.format(format, arg0, arg1, arg2, arg3)); },"rt":$n[1].Object,"p":[$n[1].String,$n[1].Object,$n[1].Object,$n[1].Object,$n[1].Object]}]}; });
 });

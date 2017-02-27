@@ -602,7 +602,7 @@ namespace Bridge.ClientTest.Reflection
         [Test]
         public void CastOperatorForSerializableTypeWithoutTypeCheckCodeAlwaysSucceedsGeneric()
         {
-            object o = JSON.Parse<OL>("{}");
+            object o = Bridge.Html5.JSON.Parse("{}");
             var b = Cast<OL>(o);
             Assert.True(ReferenceEquals(o, b));
         }

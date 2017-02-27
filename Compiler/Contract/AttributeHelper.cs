@@ -130,6 +130,6 @@ namespace Bridge.Contract
             return type != null && type.Attributes.Any(a => CheckName(a, ATTRIBUTE_SERIALIZABLE_LONG_NAMES));
         }
 
-        #endregion Field attribute
+        #endregion Serializable attribute
     }
 }

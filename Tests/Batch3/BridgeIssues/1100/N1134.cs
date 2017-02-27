@@ -1,5 +1,6 @@
 using Bridge.Html5;
 using Bridge.Test.NUnit;
+using JSON = Bridge.JSON;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -10,7 +11,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test]
         public static void TestJsonArrayParse()
         {
-            var o = JSON.Parse<int[]>("[1]");
+            var o = JSON.Deserialize<int[]>("[1]");
             Assert.True(o != null);
             Assert.AreEqual(1, o.Length);
             Assert.AreEqual(1, o[0]);

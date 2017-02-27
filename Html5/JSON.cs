@@ -14,18 +14,12 @@ namespace Bridge.Html5
     {
         /// <summary>
         /// The JSON.parse() method parses a string as JSON, optionally transforming the value produced by parsing.
-        /// </summary>
-        /// <param name="text">The string to parse as JSON. See the JSON object for a description of JSON syntax.</param>
-        /// <returns>The Object corresponding to the given JSON text.</returns>
-        public static extern object Parse(string text);
-
-        /// <summary>
-        /// The JSON.parse() method parses a string as JSON, optionally transforming the value produced by parsing.
         /// Not compatible with collections of nonprimitives - for that case use <see cref="Bridge.Html5.JSON.ParseAsArray&lt;T&gt;(System.String)"/>
         /// </summary>
         /// <param name="text">The string to parse as JSON. See the JSON object for a description of JSON syntax.</param>
         /// <returns>The Object corresponding to the given JSON text.</returns>
         [Template("Bridge.merge(Bridge.createInstance({T}), JSON.parse({text}))")]
+        [Obsolete("Please use JSON.Deserialize method. See Issue #2418 for more information.")]
         public static extern T Parse<T>(string text);
 
         /// <summary>
@@ -34,7 +28,35 @@ namespace Bridge.Html5
         /// <param name="text">The string to parse as JSON. See the JSON object for a description of JSON syntax.</param>
         /// <returns>The Object corresponding to the given JSON text.</returns>
         [Template("Bridge.merge(new Array(), JSON.parse({text}), null, function(){return Bridge.createInstance({T});})")]
+        [Obsolete("Please use JSON.Deserialize method. See Issue #2418 for more information.")]
         public static extern T[] ParseAsArray<T>(string text) where T : new();
+
+        /// <summary>
+        /// The JSON.parse() method parses a string as JSON, optionally transforming the value produced by parsing.
+        /// </summary>
+        /// <param name="text">The string to parse as JSON. See the JSON object for a description of JSON syntax.</param>
+        /// <param name="reviver">If a function, prescribes how the value originally produced by parsing is transformed, before being returned.</param>
+        /// <returns>The Object corresponding to the given JSON text.</returns>
+        [Template("Bridge.merge(Bridge.createInstance({T}), JSON.parse({text}, {reviver}))")]
+        [Obsolete("Please use JSON.Deserialize method. See Issue #2418 for more information.")]
+        public static extern T Parse<T>(string text, Delegate reviver);
+
+        /// <summary>
+        /// The JSON.parse() method parses a string as JSON, optionally transforming the value produced by parsing.
+        /// </summary>
+        /// <param name="text">The string to parse as JSON. See the JSON object for a description of JSON syntax.</param>
+        /// <param name="reviver">If a function, prescribes how the value originally produced by parsing is transformed, before being returned.</param>
+        /// <returns>The Object corresponding to the given JSON text.</returns>
+        [Template("Bridge.merge(Bridge.createInstance({T}), JSON.parse({text}, {reviver}))")]
+        [Obsolete("Please use JSON.Deserialize method. See Issue #2418 for more information.")]
+        public static extern T Parse<T>(string text, Func<string, object, object> reviver);
+
+        /// <summary>
+        /// The JSON.parse() method parses a string as JSON, optionally transforming the value produced by parsing.
+        /// </summary>
+        /// <param name="text">The string to parse as JSON. See the JSON object for a description of JSON syntax.</param>
+        /// <returns>The Object corresponding to the given JSON text.</returns>
+        public static extern object Parse(string text);
 
         /// <summary>
         /// The JSON.parse() method parses a string as JSON, optionally transforming the value produced by parsing.
@@ -51,24 +73,6 @@ namespace Bridge.Html5
         /// <param name="reviver">If a function, prescribes how the value originally produced by parsing is transformed, before being returned.</param>
         /// <returns>The Object corresponding to the given JSON text.</returns>
         public static extern object Parse(string text, Func<string, object, object> reviver);
-
-        /// <summary>
-        /// The JSON.parse() method parses a string as JSON, optionally transforming the value produced by parsing.
-        /// </summary>
-        /// <param name="text">The string to parse as JSON. See the JSON object for a description of JSON syntax.</param>
-        /// <param name="reviver">If a function, prescribes how the value originally produced by parsing is transformed, before being returned.</param>
-        /// <returns>The Object corresponding to the given JSON text.</returns>
-        [Template("Bridge.merge(Bridge.createInstance({T}), JSON.parse({text}, {reviver}))")]
-        public static extern T Parse<T>(string text, Delegate reviver);
-
-        /// <summary>
-        /// The JSON.parse() method parses a string as JSON, optionally transforming the value produced by parsing.
-        /// </summary>
-        /// <param name="text">The string to parse as JSON. See the JSON object for a description of JSON syntax.</param>
-        /// <param name="reviver">If a function, prescribes how the value originally produced by parsing is transformed, before being returned.</param>
-        /// <returns>The Object corresponding to the given JSON text.</returns>
-        [Template("Bridge.merge(Bridge.createInstance({T}), JSON.parse({text}, {reviver}))")]
-        public static extern T Parse<T>(string text, Func<string, object, object> reviver);
 
         /// <summary>
         /// The JSON.stringify() method converts a value to JSON, optionally replacing values if a replacer function is specified, or optionally including only the specified properties if a replacer array is specified.
