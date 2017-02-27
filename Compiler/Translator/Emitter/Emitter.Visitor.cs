@@ -1,3 +1,6 @@
+using System.Linq;
+using Bridge.Contract;
+using Bridge.Contract.Constants;
 using ICSharpCode.NRefactory.CSharp;
 
 namespace Bridge.Translator
@@ -337,6 +340,28 @@ namespace Bridge.Translator
         {
             this.NoBraceBlock = checkedStatement.Body;
             checkedStatement.Body.AcceptVisitor(this);
+        }
+
+        public override void VisitGotoCaseStatement(GotoCaseStatement gotoCaseStatement)
+        {
+            new GotoBlock(this, gotoCaseStatement).Emit();
+        }
+
+        public override void VisitGotoDefaultStatement(GotoDefaultStatement gotoDefaultStatement)
+        {
+            new GotoBlock(this, gotoDefaultStatement).Emit();
+        }
+
+        public override void VisitGotoStatement(GotoStatement gotoStatement)
+        {
+            new GotoBlock(this, gotoStatement).Emit();
+        }
+
+        public override void VisitLabelStatement(LabelStatement labelStatement)
+        {
+            var step = this.AsyncBlock.AddAsyncStep();
+            step.Label = labelStatement.Label;
+            step.Node = labelStatement;
         }
     }
 }

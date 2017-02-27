@@ -2371,6 +2371,251 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     });
 
+    Bridge.define("Bridge.ClientTest.BasicCSharp.TestGoto", {
+        statics: {
+            caseGoto: function (choice) {
+                var $step = 0,
+                    $jumpFromFinally, 
+                    cost, 
+                    $asyncBody = Bridge.fn.bind(this, function () {
+                        for (;;) {
+                            $step = System.Array.min([0,1,2,3,4,5,6,7,8], $step);
+                            switch ($step) {
+                                case 0: {
+                                    cost = 0;
+                                    if (choice === 10) {
+                                            $step = 1;
+                                            continue;
+                                        }
+                                        else if (choice === 1) {
+                                            $step = 2;
+                                            continue;
+                                        }
+                                        else if (choice === 15) {
+                                            $step = 3;
+                                            continue;
+                                        }
+                                        else if (choice === 2) {
+                                            $step = 4;
+                                            continue;
+                                        }
+                                        else if (choice === 20) {
+                                            $step = 5;
+                                            continue;
+                                        }
+                                        else if (choice === 3) {
+                                            $step = 6;
+                                            continue;
+                                        }
+                                        else  {
+                                            $step = 7;
+                                            continue;
+                                        }
+                                    $step = 8;
+                                    continue;
+                                }
+                                case 1: {
+                                    $step = 7;
+                                        continue;
+                                }
+                                case 2: {
+                                    cost = (cost + 25) | 0;
+                                        $step = 8;
+                                        continue;
+                                }
+                                case 3: {
+                                    $step = 7;
+                                        continue;
+                                }
+                                case 4: {
+                                    cost = (cost + 25) | 0;
+                                        $step = 2;
+                                        continue;
+                                }
+                                case 5: {
+                                    $step = 7;
+                                        continue;
+                                }
+                                case 6: {
+                                    cost = (cost + 50) | 0;
+                                        $step = 2;
+                                        continue;
+                                }
+                                case 7: {
+                                    cost = -1;
+                                        $step = 8;
+                                        continue;
+                                }
+                                case 8: {
+                                    
+                                        return;
+                                }
+                                default: {
+                                    return;
+                                }
+                            }
+                        }
+                    }, arguments);
+
+                $asyncBody();
+            },
+            labelGoto: function (count) {
+                var $step = 0,
+                    $jumpFromFinally, 
+                    j, 
+                    $asyncBody = Bridge.fn.bind(this, function () {
+                        for (;;) {
+                            $step = System.Array.min([0,1,2,3], $step);
+                            switch ($step) {
+                                case 0: {
+                                    j = 1;
+                                }
+                                case 1: {
+                                    j = (j + 1) | 0;
+                                        if (j <= count) {
+                                            $step = 2;
+                                            continue;
+                                        } 
+                                        $step = 3;
+                                        continue;
+                                }
+                                case 2: {
+                                    $step = 1;
+                                        continue;
+                                }
+                                case 3: {
+                                    
+                                        return;
+                                }
+                                default: {
+                                    return;
+                                }
+                            }
+                        }
+                    }, arguments);
+
+                $asyncBody();
+            },
+            gotoMethod: function () {
+                var $step = 0,
+                    $jumpFromFinally, 
+                    dummy, 
+                    a, 
+                    y, 
+                    x, 
+                    $asyncBody = Bridge.fn.bind(this, function () {
+                        for (;;) {
+                            $step = System.Array.min([0,1,2,3,4,5,6,7,9,10,11,12,13,14,15], $step);
+                            switch ($step) {
+                                case 0: {
+                                    dummy = 0;
+                                        a = 0;
+                                        $step = 1;
+                                        continue;
+                                }
+                                case 1: {
+                                    if ( a < 10 ) {
+                                            $step = 2;
+                                            continue;
+                                        }
+                                    $step = 15;
+                                    continue;
+                                }
+                                case 2: {
+                                    y = 0;
+                                        $step = 3;
+                                        continue;
+                                }
+                                case 3: {
+                                    if ( y < 10 ) {
+                                            $step = 4;
+                                            continue;
+                                        }
+                                    $step = 12;
+                                    continue;
+                                }
+                                case 4: {
+                                    x = 0;
+                                        $step = 5;
+                                        continue;
+                                }
+                                case 5: {
+                                    if ( x < 10 ) {
+                                            $step = 6;
+                                            continue;
+                                        }
+                                    $step = 10;
+                                    continue;
+                                }
+                                case 6: {
+                                    if (x === 5 && y === 5) {
+                                            $step = 7;
+                                            continue;
+                                        } 
+                                        $step = 8;
+                                        continue;
+                                }
+                                case 7: {
+                                    $step = 13;
+                                        continue;
+                                }
+
+                                case 9: {
+                                    x = (x + 1) | 0;
+                                    $step = 5;
+                                    continue;
+                                }
+                                case 10: {
+                                    dummy = (dummy + 1) | 0;
+                                    $step = 11;
+                                    continue;
+                                }
+                                case 11: {
+                                    y = (y + 1) | 0;
+                                    $step = 3;
+                                    continue;
+                                }
+                                case 12: {
+
+                                }
+                                case 13: {
+                                    $step = 14;
+                                        continue;
+                                }
+                                case 14: {
+                                    a = (a + 1) | 0;
+                                    $step = 1;
+                                    continue;
+                                }
+                                case 15: {
+                                    return;
+                                }
+                                default: {
+                                    return;
+                                }
+                            }
+                        }
+                    }, arguments);
+
+                $asyncBody();
+            },
+            testGotoCase: function () {
+                Bridge.Test.NUnit.Assert.areEqual(25, Bridge.ClientTest.BasicCSharp.TestGoto.caseGoto(1));
+                Bridge.Test.NUnit.Assert.areEqual(50, Bridge.ClientTest.BasicCSharp.TestGoto.caseGoto(2));
+                Bridge.Test.NUnit.Assert.areEqual(75, Bridge.ClientTest.BasicCSharp.TestGoto.caseGoto(3));
+                Bridge.Test.NUnit.Assert.areEqual(-1, Bridge.ClientTest.BasicCSharp.TestGoto.caseGoto(4));
+                Bridge.Test.NUnit.Assert.areEqual(-1, Bridge.ClientTest.BasicCSharp.TestGoto.caseGoto(10));
+                Bridge.Test.NUnit.Assert.areEqual(-1, Bridge.ClientTest.BasicCSharp.TestGoto.caseGoto(15));
+                Bridge.Test.NUnit.Assert.areEqual(-1, Bridge.ClientTest.BasicCSharp.TestGoto.caseGoto(20));
+            },
+            testGotoLabel: function () {
+                Bridge.Test.NUnit.Assert.areEqual(5, Bridge.ClientTest.BasicCSharp.TestGoto.labelGoto(5));
+                Bridge.Test.NUnit.Assert.areEqual(10, Bridge.ClientTest.BasicCSharp.TestGoto.labelGoto(10));
+                Bridge.Test.NUnit.Assert.areEqual(50, Bridge.ClientTest.BasicCSharp.TestGoto.gotoMethod());
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.BasicCSharp.TestInheritance", {
         statics: {
             testA: function () {

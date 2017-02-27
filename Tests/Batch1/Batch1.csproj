@@ -45,6 +45,7 @@
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BasicCSharp\TestGoto.cs" />
     <Compile Include="Collections\Native\ArrayBufferTests.cs" />
     <Compile Include="Collections\Native\DataViewTests.cs" />
     <Compile Include="Collections\Native\Float32ArrayTests.cs" />

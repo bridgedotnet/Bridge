@@ -1,6 +1,5 @@
 using Bridge.Contract;
 using Bridge.Contract.Constants;
-
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.CSharp.Resolver;
 using ICSharpCode.NRefactory.Semantics;
@@ -738,6 +737,13 @@ namespace Bridge.Translator
 
             return false;
         }
+
+        public static bool HasGoto(AstNode node)
+        {
+            var visitor = new GotoSearchVisitor();
+            node.AcceptVisitor(visitor);
+            return visitor.Found;
+        }
     }
 
     public class AsyncStep : IAsyncStep
@@ -806,6 +812,11 @@ namespace Bridge.Translator
         {
             get;
             set;
+        }
+
+        public object Label
+        {
+            get; set;
         }
     }
 

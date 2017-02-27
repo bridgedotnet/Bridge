@@ -147,6 +147,7 @@
     <Compile Include="Emitter\Blocks\EmitBlock.cs" />
     <Compile Include="Emitter\Blocks\AttributeCreateBlock.cs" />
     <Compile Include="Emitter\Blocks\GeneratorBlock.cs" />
+    <Compile Include="Emitter\Blocks\GotoBlock.cs" />
     <Compile Include="Emitter\Blocks\TypeOfExpressionBlock.cs" />
     <Compile Include="Emitter\Blocks\UsingBlock.cs" />
     <Compile Include="Emitter\Blocks\YieldBlock.cs" />
@@ -251,6 +252,7 @@
     <Compile Include="Utils\Roslyn\SharpSixRewriter.cs" />
     <Compile Include="Utils\Roslyn\SyntaxHelper.cs" />
     <Compile Include="Utils\RawValue.cs" />
+    <Compile Include="Utils\GotoSearchVisitor.cs" />
     <Compile Include="Utils\YieldSearchVisitor.cs" />
     <Compile Include="Utils\LambdaVisitor.cs" />
     <Compile Include="Utils\ParsedSourceFile.cs" />
