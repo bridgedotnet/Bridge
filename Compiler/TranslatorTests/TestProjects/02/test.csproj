@@ -74,6 +74,13 @@
   <UsingTask Condition="$(UseBridgeTask) == true" TaskName="GenerateScript" AssemblyFile="$(ProjectDir)..\..\..\Build\$(OutDir)Bridge.Build.dll" />
   <Target Condition="$(UseBridgeTask) == true" Name="AfterBuild">
     <Message Text="Using Bridge Task" Importance="high" />
-    <GenerateScript DefineConstants="$(DefineConstants)" OutputPath="$(OutputPath)" Configuration="$(Configuration)" Assembly="@(IntermediateAssembly)" AssembliesPath="$(OutputPath)" ProjectPath="$(MSBuildProjectFullPath)" />
+    <GenerateScript
+        DefineConstants="$(DefineConstants)"
+        OutputPath="$(OutputPath)"
+        Configuration="$(Configuration)"
+        Assembly="@(IntermediateAssembly)"
+        AssembliesPath="$(OutputPath)"
+        ProjectPath="$(MSBuildProjectFullPath)"
+        Sources="@(Compile)" />
   </Target>
 </Project>
