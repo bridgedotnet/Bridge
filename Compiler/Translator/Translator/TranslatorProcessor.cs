@@ -283,6 +283,8 @@ namespace Bridge.Translator
                 if (!bridgeOptions.IsFolderMode)
                 {
                     translator = new Bridge.Translator.Translator(bridgeOptions.ProjectLocation, bridgeOptions.FromTask);
+
+                    translator.Source = bridgeOptions.Source;
                 }
                 else
                 {

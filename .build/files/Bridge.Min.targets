@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <Target Name="BridgeGenerateScript">
-    <Message Text="------ BridgeGenerateScript task started: Project: $(MSBuildProjectName), Configuration: $(Configuration) $(Platform) ------" Importance="high" />
+    <Message Text="------ BridgeGenerateScript task started: Project: $(MSBuildProjectName), Configuration: $(Configuration) $(Platform) OutputPath: $(OutputPath) ------" Importance="high" />
 
     <GenerateScript
       DefineConstants="$(DefineConstants)"
@@ -21,8 +21,9 @@
       Configuration="$(Configuration)"
       Assembly="@(IntermediateAssembly)"
       AssembliesPath="$(OutputPath)"
-      ProjectPath="$(MSBuildProjectFullPath)" />
+      ProjectPath="$(MSBuildProjectFullPath)"
+      Sources="@(Compile)" />
 
-    <Message Text="------ BridgeGenerateScript task done: Project: $(MSBuildProjectName), Configuration: $(Configuration) $(Platform) ------" Importance="high" />
+    <Message Text="------ BridgeGenerateScript task done: Project: $(MSBuildProjectName), Configuration: $(Configuration) $(Platform) OutputPath: $(OutputPath) ------" Importance="high" />
   </Target>
 </Project>

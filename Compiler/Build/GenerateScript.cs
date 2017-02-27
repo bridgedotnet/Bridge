@@ -5,6 +5,7 @@ using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace Bridge.Build
 {
@@ -33,6 +34,12 @@ namespace Bridge.Build
 
         [Required]
         public string AssembliesPath
+        {
+            get;
+            set;
+        }
+
+        public ITaskItem[] Sources
         {
             get;
             set;
@@ -146,7 +153,7 @@ namespace Bridge.Build
                 ExtractCore = !NoCore,
                 Configuration = this.Configuration,
                 Platform = this.Platform,
-                Source = null,
+                Source = GetSources(),
                 Folder = null,
                 Recursive = false,
                 Lib = null,
@@ -154,10 +161,23 @@ namespace Bridge.Build
                 Help = false,
                 NoTimeStamp = null,
                 FromTask = true,
-                Name = ""
+                Name = "",
             };
 
             return bridgeOptions;
+        }
+
+        private string GetSources()
+        {
+            System.Diagnostics.Debugger.Launch();
+            if (this.Sources != null && this.Sources.Length > 0)
+            {
+                var result = string.Join(";", this.Sources.Select(x => x.ItemSpec));
+
+                return result;
+            }
+
+            return null;
         }
     }
 }

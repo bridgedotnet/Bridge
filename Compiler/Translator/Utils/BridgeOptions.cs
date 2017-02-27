@@ -23,6 +23,7 @@ namespace Bridge.Translator
         public bool? NoTimeStamp { get; set; }
         public bool FromTask { get; set; }
         public bool NoLoggerSetUp { get; set; }
+        public string[] Sources { get; set; }
 
         public bool IsFolderMode { get { return string.IsNullOrWhiteSpace(this.ProjectLocation); } }
 

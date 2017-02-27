@@ -29,6 +29,8 @@ namespace Bridge.Translator
 
             this.ValidateProject(doc);
 
+            //System.Diagnostics.Debugger.Launch();
+
             var projectType = (from n in doc.Descendants()
                                where n.Name.LocalName == ProjectProperties.OUTPUT_TYPE_PROP
                                select n).ToArray();
@@ -40,6 +42,7 @@ namespace Bridge.Translator
 
             this.DefaultNamespace = this.GetDefaultNamespace(doc);
             this.Log.Trace("DefaultNamespace:" + this.DefaultNamespace);
+
             this.BuildAssemblyLocation(doc);
             this.SourceFiles = this.GetSourceFiles(doc);
             this.ParsedSourceFiles = new List<ParsedSourceFile>();
@@ -56,7 +59,7 @@ namespace Bridge.Translator
         {
             this.Log.Info("Reading folder files...");
 
-            this.SourceFiles = this.GetSourceFiles();
+            this.SourceFiles = this.GetSourceFiles(this.Location);
             this.ParsedSourceFiles = new List<ParsedSourceFile>();
 
             this.Log.Info("Reading folder files done");
@@ -224,6 +227,11 @@ namespace Bridge.Translator
         {
             Project project;
 
+            if (this.Source != null)
+            {
+                return GetSourceFiles(Path.GetDirectoryName(this.Location));
+            }
+
             var isOnMono = Translator.IsRunningOnMono();
             if (isOnMono)
             {
@@ -332,7 +340,7 @@ namespace Bridge.Translator
             return nodes.First().Value;
         }
 
-        protected virtual IList<string> GetSourceFiles()
+        protected virtual IList<string> GetSourceFiles(string location)
         {
             var result = new List<string>();
             if (string.IsNullOrWhiteSpace(this.Source))
@@ -346,7 +354,7 @@ namespace Bridge.Translator
             foreach (var part in parts)
             {
                 int index = part.LastIndexOf(System.IO.Path.DirectorySeparatorChar);
-                string folder = index > -1 ? Path.Combine(this.Location, part.Substring(0, index + 1)) : this.Location;
+                string folder = index > -1 ? Path.Combine(location, part.Substring(0, index + 1)) : location;
                 string mask = index > -1 ? part.Substring(index + 1) : part;
 
                 string[] allfiles = System.IO.Directory.GetFiles(folder, mask, searchOption);
