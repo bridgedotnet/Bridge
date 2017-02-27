@@ -485,7 +485,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#2393 - TestLambdaInLiteral", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2393.testLambdaInLiteral);
             QUnit.test("#2399 - TestSqrt", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2399.testSqrt);
             QUnit.test("#2401 - TestArrayInitializer", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2401.testArrayInitializer);
-            QUnit.test("#2420 - TestExternalEnum", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2420.testExternalEnum);
+            QUnit.test("#2419 - TestExternalEnum", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2419.testExternalEnum);
             QUnit.test("#381 - TestUseCase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge381.testUseCase);
             QUnit.test("#447 - CheckInlineExpression", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.checkInlineExpression);
             QUnit.test("#447 - CheckInlineCalls", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.checkInlineCalls);
@@ -9912,15 +9912,15 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
         }
     });
 
-    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2420", {
-        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2420)],
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2419", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2419)],
         statics: {
             testExternalEnum: function (assert) {
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2420).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2420, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2419).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2419, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestExternalEnum()",
                     line: "26"
                 } ));
-                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2420.testExternalEnum();
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2419.testExternalEnum();
             }
         },
         context: null,
@@ -9928,7 +9928,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             if (this.context == null) {
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
-                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2420",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2419",
                     file: "Batch3\\BridgeIssues\\2400\\N2420.cs"
                 } );
             }

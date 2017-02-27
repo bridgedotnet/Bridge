@@ -15461,7 +15461,7 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2420", {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2419", {
         statics: {
             testExternalEnum: function () {
                 var s1 = System.Enum.toString(System.String, "one");

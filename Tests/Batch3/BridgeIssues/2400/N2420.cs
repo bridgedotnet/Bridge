@@ -4,8 +4,8 @@ using Bridge.Test.NUnit;
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
     [Category(Constants.MODULE_ISSUES)]
-    [TestFixture(TestNameFormat = "#2420 - {0}")]
-    public class Bridge2420
+    [TestFixture(TestNameFormat = "#2419 - {0}")]
+    public class Bridge2419
     {
         [External]
         [Enum(Emit.StringName)]
