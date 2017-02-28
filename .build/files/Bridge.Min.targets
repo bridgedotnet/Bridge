@@ -16,12 +16,17 @@
     <Message Text="------ BridgeGenerateScript task started: Project: $(MSBuildProjectName), Configuration: $(Configuration) $(Platform) OutputPath: $(OutputPath) ------" Importance="high" />
 
     <GenerateScript
+      Assembly="@(IntermediateAssembly)"
+      AssemblyName="$(AssemblyName)"
+      AssembliesPath="$(OutputPath)"
+      CheckForOverflowUnderflow="$(CheckForOverflowUnderflow)"
+      Configuration="$(Configuration)"
       DefineConstants="$(DefineConstants)"
       OutputPath="$(OutputPath)"
-      Configuration="$(Configuration)"
-      Assembly="@(IntermediateAssembly)"
-      AssembliesPath="$(OutputPath)"
+      OutputType="$(OutputType)"
+      Platform="$(Platform)"
       ProjectPath="$(MSBuildProjectFullPath)"
+      RootNamespace="$(RootNamespace)"
       Sources="@(Compile)" />
 
     <Message Text="------ BridgeGenerateScript task done: Project: $(MSBuildProjectName), Configuration: $(Configuration) $(Platform) OutputPath: $(OutputPath) ------" Importance="high" />

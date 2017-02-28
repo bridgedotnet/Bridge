@@ -30,8 +30,6 @@ namespace Bridge.Builder
                 return 0;
             }
 
-            //System.Diagnostics.Debugger.Launch();
-
             logger.Info("Command line arguments:");
             logger.Info("\t" + (string.Join(" ", args) ?? ""));
 
@@ -136,6 +134,7 @@ namespace Bridge.Builder
             var bridgeOptions = new BridgeOptions();
 
             bridgeOptions.Name = "";
+            bridgeOptions.ProjectProperties = new ProjectProperties();
 
             int i = 0;
 
@@ -170,14 +169,19 @@ namespace Bridge.Builder
                     case "-cfg": // backwards compatibility
                     case "-configuration": // backwards compatibility
                     case "--configuration":
-                        bridgeOptions.Configuration = args[++i];
+                        bridgeOptions.ProjectProperties.Configuration = args[++i];
+                        break;
+
+                    case "-P":
+                    case "--platform":
+                        bridgeOptions.ProjectProperties.Platform = args[++i];
                         break;
 
                     case "-def": // backwards compatibility
                     case "-D":
                     case "-define": // backwards compatibility
                     case "--define":
-                        bridgeOptions.DefinitionConstants = args[++i];
+                        bridgeOptions.ProjectProperties.DefineConstants = args[++i];
                         break;
 
                     case "-rebuild": // backwards compatibility
@@ -194,7 +198,7 @@ namespace Bridge.Builder
                     case "-s":
                     case "-src": // backwards compatibility
                     case "--source":
-                        bridgeOptions.Source = args[++i];
+                        bridgeOptions.Sources = args[++i];
                         break;
 
                     case "-f":

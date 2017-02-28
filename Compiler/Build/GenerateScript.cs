@@ -39,7 +39,21 @@ namespace Bridge.Build
             set;
         }
 
+        [Required]
+        public string AssemblyName
+        {
+            get;
+            set;
+        }
+
+        [Required]
         public ITaskItem[] Sources
+        {
+            get;
+            set;
+        }
+
+        public string CheckForOverflowUnderflow
         {
             get;
             set;
@@ -57,13 +71,28 @@ namespace Bridge.Build
             set;
         }
 
+        [Required]
         public string Configuration
         {
             get;
             set;
         }
 
+        [Required]
+        public string OutputType
+        {
+            get;
+            set;
+        }
+
         public string DefineConstants
+        {
+            get;
+            set;
+        }
+
+        [Required]
+        public string RootNamespace
         {
             get;
             set;
@@ -151,17 +180,26 @@ namespace Bridge.Build
                 BridgeLocation = Path.Combine(this.AssembliesPath, "Bridge.dll"),
                 Rebuild = false,
                 ExtractCore = !NoCore,
-                Configuration = this.Configuration,
-                Platform = this.Platform,
-                Source = GetSources(),
                 Folder = null,
                 Recursive = false,
                 Lib = null,
-                DefinitionConstants = this.DefineConstants,
                 Help = false,
                 NoTimeStamp = null,
                 FromTask = true,
                 Name = "",
+                Sources = GetSources()
+            };
+
+            bridgeOptions.ProjectProperties = new ProjectProperties()
+            {
+                AssemblyName = this.AssemblyName,
+                OutputPath = this.OutputPath,
+                RootNamespace = this.RootNamespace,
+                Configuration = this.Configuration,
+                Platform = this.Platform,
+                DefineConstants = this.DefineConstants,
+                CheckForOverflowUnderflow = GetCheckForOverflowUnderflow(),
+                OutputType = this.OutputType
             };
 
             return bridgeOptions;
@@ -169,12 +207,27 @@ namespace Bridge.Build
 
         private string GetSources()
         {
-            System.Diagnostics.Debugger.Launch();
             if (this.Sources != null && this.Sources.Length > 0)
             {
                 var result = string.Join(";", this.Sources.Select(x => x.ItemSpec));
 
                 return result;
+            }
+
+            return null;
+        }
+
+        private bool? GetCheckForOverflowUnderflow()
+        {
+            if (this.CheckForOverflowUnderflow == null)
+            {
+                return null;
+            }
+
+            bool b;
+            if (bool.TryParse(this.CheckForOverflowUnderflow, out b))
+            {
+                return b;
             }
 
             return null;

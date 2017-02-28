@@ -132,6 +132,7 @@
     <Compile Include="IPlugin.cs" />
     <Compile Include="Config\DocumentationMode.cs" />
     <Compile Include="ModuleDependency.cs" />
+    <Compile Include="ProjectProperties.cs" />
     <Compile Include="TypeConfigInfo.cs" />
     <Compile Include="IValidator.cs" />
     <Compile Include="IVisitorException.cs" />
