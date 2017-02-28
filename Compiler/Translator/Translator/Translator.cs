@@ -108,8 +108,14 @@ namespace Bridge.Translator
             {
                 this.EnsureProjectProperties();
 
-                if (this.Rebuild || !File.Exists(this.AssemblyLocation))
+                if (this.Rebuild)
                 {
+                    logger.Info("Building assembly as Rebuild option is enabled");
+                    this.BuildAssembly();
+                }
+                else if (!File.Exists(this.AssemblyLocation))
+                {
+                    logger.Info("Building assembly as it is not found at " + this.AssemblyLocation);
                     this.BuildAssembly();
                 }
             }
