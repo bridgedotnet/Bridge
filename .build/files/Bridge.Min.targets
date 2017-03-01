@@ -18,10 +18,11 @@
     <GenerateScript
       Assembly="@(IntermediateAssembly)"
       AssemblyName="$(AssemblyName)"
-      AssembliesPath="$(OutputPath)"
+      AssembliesPath="$(OutDir)"
       CheckForOverflowUnderflow="$(CheckForOverflowUnderflow)"
       Configuration="$(Configuration)"
       DefineConstants="$(DefineConstants)"
+      OutDir="$(OutDir)"
       OutputPath="$(OutputPath)"
       OutputType="$(OutputType)"
       Platform="$(Platform)"

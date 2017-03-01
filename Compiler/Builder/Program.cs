@@ -90,7 +90,8 @@ namespace Bridge.Builder
        " + programName + @" [-h|--help]
 
 -h --help                  This help message.
--c --configuration <name>  Configuration name (Debug/Release) [default: Debug].
+-c --configuration <name>  Configuration name (Debug/Release etc) [default: none].
+-P --platform <name>       Platform name (AnyCPU etc) [default: none].
 -r --rebuild               Force assembly rebuilding.
 --nocore                   Do not extract core javascript files.
 -D --define <const-list>   Semicolon-delimited list of project constants.

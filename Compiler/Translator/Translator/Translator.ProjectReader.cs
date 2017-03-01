@@ -19,6 +19,7 @@ namespace Bridge.Translator
             public const string DEFINE_CONSTANTS_PROP = "DefineConstants";
             public const string ROOT_NAMESPACE_PROP = "RootNamespace";
             public const string OUTPUT_PATH_PROP = "OutputPath";
+            public const string OUT_DIR_PROP = "OutDir";
             public const string CONFIGURATION_PROP = "Configuration";
             public const string PLATFORM_PROP = "Platform";
         }
@@ -39,7 +40,7 @@ namespace Bridge.Translator
 
             this.EnsureAssemblyLocation(doc);
 
-            this.ApplyOutputPathToConfig();
+            this.ApplyProjectPropertiesToConfig();
 
             this.SourceFiles = this.GetSourceFiles(doc);
             this.ParsedSourceFiles = new List<ParsedSourceFile>();
@@ -77,6 +78,12 @@ namespace Bridge.Translator
 
             // Replace '\' with '/' in any occurrence of <OutputPath><path></OutputPath>
             foreach (var ope in doc.Descendants().Where(e => e.Name.LocalName == ProjectPropertyNames.OUTPUT_PATH_PROP && e.Value.Contains("\\")))
+            {
+                ope.SetValue(ope.Value.Replace("\\", "/"));
+            }
+
+            // Replace '\' with '/' in any occurrence of <OutDir><path></OutDir>
+            foreach (var ope in doc.Descendants().Where(e => e.Name.LocalName == ProjectPropertyNames.OUT_DIR_PROP && e.Value.Contains("\\")))
             {
                 ope.SetValue(ope.Value.Replace("\\", "/"));
             }
@@ -172,58 +179,57 @@ namespace Bridge.Translator
 
             if (string.IsNullOrEmpty(this.AssemblyLocation))
             {
-                var fullOutputPath = this.GetOutputPath(doc);
+                var fullOutputPath = this.GetOutputPaths(doc);
 
                 this.Log.Info("    FullOutputPath:" + fullOutputPath);
 
                 this.AssemblyLocation = Path.Combine(fullOutputPath, this.ProjectProperties.AssemblyName + ".dll");
             }
 
+            this.Log.Info("    OutDir:" + this.ProjectProperties.OutDir);
             this.Log.Info("    OutputPath:" + this.ProjectProperties.OutputPath);
             this.Log.Info("    AssemblyLocation:" + this.AssemblyLocation);
 
             this.Log.Trace("BuildAssemblyLocation done");
         }
 
-        protected virtual void ApplyOutputPathToConfig()
+        protected virtual void ApplyProjectPropertiesToConfig()
         {
-            this.Log.Trace("ApplyOutputPathToConfig...");
+            this.Log.Trace("ApplyProjectPropertiesToConfig...");
 
             var configReader = new AssemblyConfigHelper(this.Log);
-            configReader.ApplyTokens(this.AssemblyInfo, this.ProjectProperties.OutputPath);
+            configReader.ApplyTokens(this.AssemblyInfo, this.ProjectProperties);
 
-            this.Log.Trace("ApplyOutputPathToConfig done");
+            this.Log.Trace("ApplyProjectPropertiesToConfig done");
         }
 
-        protected virtual string GetOutputPath(XDocument doc)
+        protected virtual string GetOutputPaths(XDocument doc)
         {
-            var projectOutputPath = this.ProjectProperties.OutputPath;
-
             var configHelper = new Bridge.Contract.ConfigHelper();
 
-            if (projectOutputPath == null)
+            var outputPath = this.ProjectProperties.OutputPath;
+
+            if (outputPath == null)
             {
-                var nodes = from n in doc.Descendants()
-                            where n.Name.LocalName == ProjectPropertyNames.OUTPUT_PATH_PROP &&
-                                  EvaluateCondition(n.Parent.Attribute("Condition").Value)
-                            select n;
+                // Read OutputPath if not defined already
+                // Throw exception if not found
+                outputPath = ReadProperty(doc, ProjectPropertyNames.OUTPUT_PATH_PROP, false, configHelper);
 
-                if (nodes.Count() != 1)
-                {
-                    Bridge.Translator.TranslatorException.Throw(
-                        "Unable to determine "
-                        + ProjectPropertyNames.OUTPUT_PATH_PROP
-                        + " in the project file with conditions " + EvaluationConditionsAsString());
-                }
-
-                projectOutputPath = nodes.First().Value;
-
-                projectOutputPath = configHelper.ConvertPath(projectOutputPath);
-
-                this.ProjectProperties.OutputPath = projectOutputPath;
+                this.ProjectProperties.OutputPath = outputPath;
             }
 
-            var fullPath = projectOutputPath;
+            var outDir = this.ProjectProperties.OutDir;
+
+            if (outDir == null)
+            {
+                // Read OutDir if not defined already
+                outDir = ReadProperty(doc, ProjectPropertyNames.OUT_DIR_PROP, true, configHelper);
+
+                // If OutDir value is not found then use OutputPath value
+                this.ProjectProperties.OutDir = outDir ?? outputPath;
+            }
+
+            var fullPath = this.ProjectProperties.OutDir;
 
             if (!Path.IsPathRooted(fullPath))
             {
@@ -233,6 +239,32 @@ namespace Bridge.Translator
             fullPath = configHelper.ConvertPath(fullPath);
 
             return fullPath;
+        }
+
+        private string ReadProperty(XDocument doc, string name, bool safe, Contract.ConfigHelper configHelper)
+        {
+            var nodes = from n in doc.Descendants()
+                        where string.Compare(n.Name.LocalName, name, true) == 0 &&
+                              EvaluateCondition(n.Parent.Attribute("Condition").Value)
+                        select n;
+
+            if (nodes.Count() != 1)
+            {
+                if (safe)
+                {
+                    return null;
+                }
+
+                Bridge.Translator.TranslatorException.Throw(
+                    "Unable to determine "
+                    + name
+                    + " in the project file with conditions " + EvaluationConditionsAsString());
+            }
+
+            var value = nodes.First().Value;
+            value = configHelper.ConvertPath(value);
+
+            return value;
         }
 
         private Dictionary<string, string> GetEvaluationConditions()

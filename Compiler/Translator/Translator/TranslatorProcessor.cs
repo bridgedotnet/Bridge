@@ -63,6 +63,7 @@ namespace Bridge.Translator
             bridgeOptions.Sources = pathHelper.ConvertPath(bridgeOptions.Sources);
 
             bridgeOptions.ProjectProperties.OutputPath = pathHelper.ConvertPath(bridgeOptions.ProjectProperties.OutputPath);
+            bridgeOptions.ProjectProperties.OutDir = pathHelper.ConvertPath(bridgeOptions.ProjectProperties.OutDir);
         }
 
         public void Process()

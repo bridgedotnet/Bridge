@@ -18,8 +18,13 @@ namespace Bridge.Build
             set;
         }
 
-        [Required]
         public string OutputPath
+        {
+            get;
+            set;
+        }
+
+        public string OutDir
         {
             get;
             set;
@@ -194,6 +199,7 @@ namespace Bridge.Build
             {
                 AssemblyName = this.AssemblyName,
                 OutputPath = this.OutputPath,
+                OutDir = this.OutDir,
                 RootNamespace = this.RootNamespace,
                 Configuration = this.Configuration,
                 Platform = this.Platform,
