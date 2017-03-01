@@ -9299,6 +9299,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 a : this.a,
                 b : this.b
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"A","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_A","t":8,"sn":"getA","rt":System.Int32}},{"a":2,"n":"B","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_B","t":8,"sn":"getB","rt":System.Int32}}]}; }
         }
     });
 
@@ -9329,6 +9332,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 a : this.a,
                 b : this.b
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"a","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_a","t":8,"sn":"geta","rt":System.Int32}},{"a":2,"n":"b","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_b","t":8,"sn":"getb","rt":System.Int32}}]}; }
         }
     });
 
@@ -14974,6 +14980,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             return {
                 x : this.x
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"x","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_x","t":8,"sn":"getx","rt":System.Int32}}]}; }
         }
     });
 
@@ -15004,6 +15013,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 x : this.x,
                 y : this.y
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"x","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_x","t":8,"sn":"getx","rt":System.Int32}},{"a":2,"n":"y","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_y","t":8,"sn":"gety","rt":System.Int32}}]}; }
         }
     });
 

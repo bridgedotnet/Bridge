@@ -4967,6 +4967,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             return {
                 a : this.a
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"A","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_A","t":8,"sn":"getA","rt":System.Int32}}]}; }
         }
     });
 
@@ -4997,6 +5000,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 a : this.a,
                 b : this.b
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"A","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_A","t":8,"sn":"getA","rt":System.Int32}},{"a":2,"n":"B","t":16,"rt":System.String,"g":{"a":2,"n":"get_B","t":8,"sn":"getB","rt":System.String}}]}; }
         }
     });
 
@@ -5027,6 +5033,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 a : this.a,
                 b : this.b
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"A","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_A","t":8,"sn":"getA","rt":System.Int32}},{"a":2,"n":"B","t":16,"rt":Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeStructA,"g":{"a":2,"n":"get_B","t":8,"sn":"getB","rt":Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeStructA}}]}; }
         }
     });
 
@@ -5057,6 +5066,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 a : this.a,
                 b : this.b
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"A","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_A","t":8,"sn":"getA","rt":System.Int32}},{"a":2,"n":"B","t":16,"rt":Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeClassB,"g":{"a":2,"n":"get_B","t":8,"sn":"getB","rt":Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeClassB}}]}; }
         }
     });
 
@@ -5082,6 +5094,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             return {
                 value1 : this.value1
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"Value1","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_Value1","t":8,"sn":"getValue1","rt":System.Int32}}]}; }
         }
     });
 
@@ -5107,6 +5122,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             return {
                 value2 : this.value2
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"Value2","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_Value2","t":8,"sn":"getValue2","rt":System.Int32}}]}; }
         }
     });
 
@@ -5132,6 +5150,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             return {
                 b : this.b
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"B","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_B","t":8,"sn":"getB","rt":System.Int32}}]}; }
         }
     });
 
@@ -5162,6 +5183,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 b : this.b,
                 c : this.c
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"B","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_B","t":8,"sn":"getB","rt":System.Int32}},{"a":2,"n":"C","t":16,"rt":System.String,"g":{"a":2,"n":"get_C","t":8,"sn":"getC","rt":System.String}}]}; }
         }
     });
 
@@ -5192,6 +5216,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 a : this.a,
                 b : this.b
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"A","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_A","t":8,"sn":"getA","rt":System.Int32}},{"a":2,"n":"B","t":16,"rt":Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeClassA,"g":{"a":2,"n":"get_B","t":8,"sn":"getB","rt":Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeClassA}}]}; }
         }
     });
 
@@ -5222,6 +5249,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 b : this.b,
                 c : this.c
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"B","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_B","t":8,"sn":"getB","rt":System.Int32}},{"a":2,"n":"C","t":16,"rt":Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeClassA,"g":{"a":2,"n":"get_C","t":8,"sn":"getC","rt":Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeClassA}}]}; }
         }
     });
 
@@ -5252,6 +5282,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 b : this.b,
                 a : this.a
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"A","t":16,"rt":Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeStructA,"g":{"a":2,"n":"get_A","t":8,"sn":"getA","rt":Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeStructA}},{"a":2,"n":"B","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_B","t":8,"sn":"getB","rt":System.Int32}}]}; }
         }
     });
 
@@ -5282,6 +5315,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 b : this.b,
                 c : this.c
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"B","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_B","t":8,"sn":"getB","rt":System.Int32}},{"a":2,"n":"C","t":16,"rt":Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeClassB,"g":{"a":2,"n":"get_C","t":8,"sn":"getC","rt":Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeClassB}}]}; }
         }
     });
 
@@ -9676,6 +9712,9 @@ Bridge.$N1391Result =                 r;
             return {
                 test : this.test
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"Test","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_Test","t":8,"sn":"getTest","rt":System.Int32}}]}; }
         }
     });
 
@@ -12243,6 +12282,9 @@ Bridge.$N1391Result =                 r;
             return {
                 id : this.id
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"Id","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_Id","t":8,"sn":"getId","rt":System.Int32}}]}; }
         }
     });
 
@@ -13387,6 +13429,9 @@ Bridge.$N1391Result =                 r;
             return {
                 p1 : this.p1
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"p1","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_p1","t":8,"sn":"getp1","rt":System.Int32}}]}; }
         }
     });
 
@@ -15086,6 +15131,9 @@ Bridge.$N1391Result =                 r;
             return {
                 isTrue : this.isTrue
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"IsTrue","t":16,"rt":System.Boolean,"g":{"a":2,"n":"get_IsTrue","t":8,"sn":"getIsTrue","rt":System.Boolean}}]}; }
         }
     });
 
@@ -16018,6 +16066,9 @@ Bridge.$N1391Result =                 r;
                 lastName : this.lastName,
                 firstName : this.firstName
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"FirstName","t":16,"rt":System.String,"g":{"a":2,"n":"get_FirstName","t":8,"sn":"getFirstName","rt":System.String}},{"a":2,"n":"LastName","t":16,"rt":System.String,"g":{"a":2,"n":"get_LastName","t":8,"sn":"getLastName","rt":System.String}}]}; }
         }
     });
 
@@ -21413,6 +21464,9 @@ Bridge.$N1391Result =                 r;
             return {
                 value : this.value
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"Value","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_Value","t":8,"sn":"getValue","rt":System.Int32}}]}; }
         }
     });
 
@@ -23159,6 +23213,9 @@ Bridge.$N1391Result =                 r;
             return {
                 i : this.i
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"i","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_i","t":8,"sn":"geti","rt":System.Int32}}]}; }
         }
     });
 

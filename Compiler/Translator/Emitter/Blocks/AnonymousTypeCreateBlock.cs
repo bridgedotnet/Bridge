@@ -4,6 +4,7 @@ using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
 using Newtonsoft.Json;
+using Object.Net.Utilities;
 
 namespace Bridge.Translator
 {
@@ -130,11 +131,12 @@ namespace Bridge.Translator
             this.GenereateEquals(config);
             this.GenerateHashCode(config);
             this.GenereateToJSON(config);
+            this.GenereateMetadata(config);
 
-            if (this.Emitter.IsAnonymousReflectable)
+            /*if (this.Emitter.IsAnonymousReflectable)
             {
                 this.GenereateMetadata(config);
-            }
+            }*/
 
             this.WriteNewLine();
             this.EndBlock();
@@ -185,8 +187,9 @@ namespace Bridge.Translator
                 this.EnsureComma();
                 this.Write("statics : ");
                 this.BeginBlock();
-                this.Write("$metadata : ");
+                this.Write("$metadata : function () { return ");
                 this.Write(meta.ToString(Formatting.None));
+                this.Write("; }");
                 this.WriteNewLine();
                 this.EndBlock();
             }
@@ -290,7 +293,7 @@ namespace Bridge.Translator
             foreach (var property in config.Type.Properties)
             {
                 this.EnsureComma();
-                var name = Object.Net.Utilities.StringUtils.ToLowerCamelCase(property.Name);
+                var name = property.Name.ToLowerCamelCase();
 
                 this.Write(string.Format("{0} : this.{0}", name));
                 this.Emitter.Comma = true;

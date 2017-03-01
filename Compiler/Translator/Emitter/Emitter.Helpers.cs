@@ -167,7 +167,7 @@ namespace Bridge.Translator
             return WrapNullableMember(info, member, node.Target);
         }
 
-        private Tuple<bool, bool, string> GetInlineCodeFromMember(IMember member, Expression node)
+        internal Tuple<bool, bool, string> GetInlineCodeFromMember(IMember member, Expression node)
         {
             if (member == null)
             {

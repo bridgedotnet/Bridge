@@ -100,32 +100,90 @@ namespace Bridge.ClientTest
             }
         }
 
+        [Reflectable]
+        public class Class2
+        {
+            public int IntProp
+            {
+                get;
+                set;
+            }
+        }
+
+        [Reflectable]
+        public class Class3
+        {
+            public string StringProp
+            {
+                get;
+                set;
+            }
+        }
+
+        [Reflectable]
+        interface INamedEntity
+        {
+            string Name { get; set; }
+        }
+
+        [Reflectable]
+        class Person : INamedEntity
+        {
+            public Guid Id { get; set; }
+            public string Name { get; set; }
+            public Address Address { get; set; }
+
+            public Person(Guid id, string name, string city, string street)
+            {
+                this.Id = id;
+                this.Name = name;
+                this.Address = new Address()
+                {
+                    City = city,
+                    Street = street
+                };
+            }
+
+            public override string ToString()
+            {
+                return string.Format("{0} {1} {2} {3}",
+                    Id, Name, Address.Street, Address.City);
+            }
+        }
+
+        [Reflectable]
+        public class Address
+        {
+            public string City { get; set; }
+            public string Street { get; set; }
+        }
+
         #endregion Test data
 
         [Test]
         public static void ByteArrayWorks()
         {
             byte[] arr = new byte[] { 1, 2, 3 };
-            Assert.AreEqual(arr, JSON.Deserialize<byte[]>("\"" + System.Convert.ToBase64String(arr) + "\""));
+            Assert.AreEqual(arr, Json.Deserialize<byte[]>("\"" + System.Convert.ToBase64String(arr) + "\""));
         }
 
         [Test]
         public static void GuidWorks()
         {
             var guid = Guid.NewGuid();
-            Assert.AreEqual(guid.ToByteArray(), JSON.Deserialize<Guid>("\"" + guid + "\"").ToByteArray());
+            Assert.AreEqual(guid.ToByteArray(), Json.Deserialize<Guid>("\"" + guid + "\"").ToByteArray());
         }
 
         [Test]
         public static void TypeWorks()
         {
-            Assert.AreEqual(typeof(System.Collections.Generic.List<string>), JSON.Deserialize<Type>("\"" + typeof(System.Collections.Generic.List<string>).FullName + "\""));
+            Assert.AreEqual(typeof(System.Collections.Generic.List<string>), Json.Deserialize<Type>("\"" + typeof(System.Collections.Generic.List<string>).FullName + "\""));
         }
 
         [Test]
         public static void CharWorks()
         {
-            Assert.AreEqual('a', JSON.Deserialize<char>("\"a\""));
+            Assert.AreEqual('a', Json.Deserialize<char>("\"a\""));
         }
 
         [Test]
@@ -133,10 +191,10 @@ namespace Bridge.ClientTest
         {
             long value = long.MaxValue.ToDynamic().toNumber();
             int intValue = long.MaxValue.ToDynamic().toNumber();
-            Assert.True(value == JSON.Deserialize<long>(intValue));
+            Assert.True(value == Json.Deserialize<long>(intValue));
 
             value = long.MinValue;
-            Assert.True(value == JSON.Deserialize<long>(long.MinValue.ToString()));
+            Assert.True(value == Json.Deserialize<long>(long.MinValue.ToString()));
         }
 
         [Test]
@@ -144,25 +202,25 @@ namespace Bridge.ClientTest
         {
             ulong value = ulong.MaxValue.ToDynamic().toNumber();
             int intValue = ulong.MaxValue.ToDynamic().toNumber();
-            Assert.True(value == JSON.Deserialize<ulong>(intValue));
+            Assert.True(value == Json.Deserialize<ulong>(intValue));
 
             value = ulong.MinValue;
-            Assert.True(value == JSON.Deserialize<ulong>(ulong.MinValue.ToString()));
+            Assert.True(value == Json.Deserialize<ulong>(ulong.MinValue.ToString()));
         }
 
         [Test]
         public static void DecimalWorks()
         {
-            Assert.True(decimal.MinusOne == JSON.Deserialize<decimal>(-1));
-            Assert.True(decimal.One == JSON.Deserialize<decimal>("1"));
-            Assert.True(decimal.Zero == JSON.Deserialize<decimal>(0));
+            Assert.True(decimal.MinusOne == Json.Deserialize<decimal>(-1));
+            Assert.True(decimal.One == Json.Deserialize<decimal>("1"));
+            Assert.True(decimal.Zero == Json.Deserialize<decimal>(0));
         }
 
         [Test]
         public static void DateTimeWorks()
         {
             DateTime dt = new DateTime(2010, 6, 10, 12, 0, 0, 0);
-            DateTime jsonDt = JSON.Deserialize<DateTime>("\"2010-06-10T09:00:00.000\"");
+            DateTime jsonDt = Json.Deserialize<DateTime>("\"2010-06-10T09:00:00.000\"");
             Assert.AreEqual(dt.Year, jsonDt.Year);
             Assert.AreEqual(dt.Month, jsonDt.Month);
             Assert.AreEqual(dt.Day, jsonDt.Day);
@@ -172,17 +230,17 @@ namespace Bridge.ClientTest
         public static void ArrayWorks()
         {
             int[] intArr = new[] {1, 2, 3};
-            Assert.AreEqual(intArr, JSON.Deserialize<int[]>("[1,2,3]"));
+            Assert.AreEqual(intArr, Json.Deserialize<int[]>("[1,2,3]"));
 
             long[] longArr = new[] {1L, 2, 3L};
-            long[] jsonLongArr = JSON.Deserialize<long[]>("[1,2,3]");
+            long[] jsonLongArr = Json.Deserialize<long[]>("[1,2,3]");
             Assert.AreEqual(longArr.Length, jsonLongArr.Length);
             Assert.True(longArr[0] == jsonLongArr[0]);
             Assert.True(longArr[1] == jsonLongArr[1]);
             Assert.True(longArr[2] == jsonLongArr[2]);
 
             E1[] enumArr = new[] { E1.Item1, E1.Item2, E1.Item3 };
-            Assert.AreEqual(enumArr, JSON.Deserialize<E1[]>("[\"Item1\",\"Item2\",\"Item3\"]"));
+            Assert.AreEqual(enumArr, Json.Deserialize<E1[]>("[\"Item1\",\"Item2\",\"Item3\"]"));
         }
 
         [Test]
@@ -193,8 +251,8 @@ namespace Bridge.ClientTest
 
             var a = new Class1[] { c1, c2 };
 
-            string json = JSON.Serialize(a);
-            var deserialized = JSON.Deserialize<Class1[]>(json);
+            string json = Json.Serialize(a);
+            var deserialized = Json.Deserialize<Class1[]>(json);
 
             Assert.NotNull(deserialized, "#1");
             Assert.AreEqual("Bridge.ClientTest.DeserializationTests+Class1[]", deserialized.GetType().FullName, "#2");
@@ -212,14 +270,14 @@ namespace Bridge.ClientTest
         [Test]
         public static void EnumWorks()
         {
-            Assert.AreEqual(E1.Item1, JSON.Deserialize<E1>("\"Item1\""));
+            Assert.AreEqual(E1.Item1, Json.Deserialize<E1>("\"Item1\""));
         }
 
         [Test]
         public static void IListWorks()
         {
             var list = new List<E1> {E1.Item1, E1.Item2, E1.Item3};
-            var jsonList = JSON.Deserialize<List<E1>>("[\"Item1\",\"Item2\",\"Item3\"]");
+            var jsonList = Json.Deserialize<List<E1>>("[\"Item1\",\"Item2\",\"Item3\"]");
             Assert.AreEqual(list.Count, jsonList.Count);
             Assert.True(list[0] == jsonList[0]);
             Assert.True(list[1] == jsonList[1]);
@@ -237,7 +295,7 @@ namespace Bridge.ClientTest
             };
 
             var jsonDict =
-                JSON.Deserialize<Dictionary<string, E1>>("{\"i1\":\"Item1\",\"i2\":\"Item2\",\"i3\":\"Item3\"}");
+                Json.Deserialize<Dictionary<string, E1>>("{\"i1\":\"Item1\",\"i2\":\"Item2\",\"i3\":\"Item3\"}");
 
             Assert.AreEqual(dict.Count, jsonDict.Count);
             Assert.AreEqual(dict["i1"], jsonDict["i1"]);
@@ -249,8 +307,8 @@ namespace Bridge.ClientTest
         public static void TypeWithFieldWorks()
         {
             var c = new ClassWithFields();
-            string json = JSON.Serialize(c);
-            var jsonC = JSON.Deserialize<ClassWithFieldsAndNoInit>(json);
+            string json = Json.Serialize(c);
+            var jsonC = Json.Deserialize<ClassWithFieldsAndNoInit>(json);
 
             Assert.AreEqual(c.byteArrayField, jsonC.byteArrayField, "#1");
             Assert.AreEqual(c.guidField.ToByteArray(), jsonC.guidField.ToByteArray(), "#2");
@@ -277,8 +335,8 @@ namespace Bridge.ClientTest
         {
             var c = CreateComplex(E1.Item1, E1.Item2, E1.Item3, 'a', 'b', 'c');
 
-            string json = JSON.Serialize(c);
-            var jsonC = JSON.Deserialize<Class1>(json);
+            string json = Json.Serialize(c);
+            var jsonC = Json.Deserialize<Class1>(json);
 
             AssertComplex(jsonC, E1.Item1, E1.Item2, E1.Item3, 'a', 'b', 'c');
         }
@@ -341,6 +399,85 @@ namespace Bridge.ClientTest
             Assert.AreEqual(l1, c.Sub2.List1[0], "ac #17");
             Assert.AreEqual(l2, c.Sub2.List1[1], "ac #18");
             Assert.AreEqual(l3, c.Sub2.List1[2], "ac #19");
+        }
+
+        [Test]
+        public static void CamelCaseSettingWorks()
+        {
+            var json = "{\"intProp\":10}";
+            var deserialized = Bridge.Json.Deserialize<Class2>(json, new JsonSettings {CamelCasePropertyNames = true});
+            Assert.AreEqual(10, deserialized.IntProp);
+
+            json = "{\"IntProp\":10}";
+            deserialized = Bridge.Json.Deserialize<Class2>(json);
+            Assert.AreEqual(10, deserialized.IntProp);
+        }
+
+        [Test]
+        public static void IgnoreNullValueWorks()
+        {
+            var json = "{}";
+            var deserialized = Bridge.Json.Deserialize<Class3>(json);
+            Assert.Null(deserialized.StringProp);
+
+            json = "{\"StringProp\":null}";
+            deserialized = Bridge.Json.Deserialize<Class3>(json);
+            Assert.Null(deserialized.StringProp);
+        }
+
+        [Test]
+        public static void AnonymousTypesWorks()
+        {
+            var v = new { Amount = 108, Message = "Hello" };
+            var json = "{\"Amount\":108,\"Message\":\"Hello\"}";
+
+            var item = Bridge.Json.Deserialize(json, v);
+            Assert.AreEqual(108, item.Amount);
+            Assert.AreEqual("Hello", item.Message);
+
+            var dynItem = Bridge.Json.Deserialize<dynamic>(json);
+            Assert.AreEqual(108, (int)dynItem.Amount);
+            Assert.AreEqual("Hello", (string)dynItem.Message);
+        }
+
+        [Test]
+        public static void TypeNameHandlingWorks()
+        {
+            var persons = new[]
+            {
+                new Person(
+                    Guid.Parse("{CEADF3CA-0EB4-43F3-A813-1266E16498AC}"),
+                    "John", "New-York", "Fifth Avenue"
+                ),
+                new Person(
+                    Guid.Parse("{64F09E69-39FE-4D9C-BDB3-108CA2CCFAD9}"),
+                    "Mary", "London", "St Mary Axe"
+                )
+            };
+
+            var serialized = Bridge.Json.Serialize(persons, new JsonSettings { TypeNameHandling = true });
+            var entities = Bridge.Json.Deserialize<INamedEntity[]>(serialized, new JsonSettings { TypeNameHandling = true });
+
+            Assert.AreEqual(persons.Length, entities.Length);
+
+            Assert.True(entities[0] is Person);
+            Assert.True(entities[1] is Person);
+
+            var entity = (Person)entities[0];
+            Assert.AreEqual(persons[0].Name, entities[0].Name);
+            Assert.True(persons[0].Id == entity.Id);
+            Assert.NotNull(entity.Address);
+            Assert.True((object)entity.Address is Address);
+            Assert.AreEqual(persons[0].Address.City, entity.Address.City);
+            Assert.AreEqual(persons[0].Address.Street, entity.Address.Street);
+
+            entity = (Person)entities[1];
+            Assert.AreEqual(persons[1].Name, entities[1].Name);
+            Assert.True(persons[1].Id == entity.Id);
+            Assert.NotNull(entity.Address);
+            Assert.True((object)entity.Address is Address);
+            Assert.AreEqual(persons[1].Address.City, entity.Address.City);
+            Assert.AreEqual(persons[1].Address.Street, entity.Address.Street);
         }
     }
 }

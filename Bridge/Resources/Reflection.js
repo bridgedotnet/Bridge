@@ -128,11 +128,31 @@
             return type.$genericTypeDefinition != null || Bridge.Reflection.isGenericTypeDefinition(type);
         },
 
+        convertType: function(type) {
+            if (type === Boolean) {
+                return System.Boolean;
+            }
+
+            if (type === String) {
+                return System.String;
+            }
+
+            if (type === Object) {
+                return System.Object;
+            }
+
+            if (type === Date) {
+                return System.DateTime;
+            }
+
+            return type;
+        },
+
         getBaseType: function (type) {
             if (Bridge.isObject(type) || type.$kind === "interface" || type.prototype == null) {
                 return null;
             } else if (Object.getPrototypeOf) {
-                return Object.getPrototypeOf(type.prototype).constructor;
+                return Bridge.Reflection.convertType(Object.getPrototypeOf(type.prototype).constructor);
             } else {
                 var p = type.prototype;
 
@@ -142,14 +162,14 @@
                     try {
                         ownValue = p.constructor;
                         delete p.constructor;
-                        return p.constructor;
+                        return Bridge.Reflection.convertType(p.constructor);
                     }
                     finally {
                         p.constructor = ownValue;
                     }
                 }
 
-                return p.constructor;
+                return Bridge.Reflection.convertType(p.constructor);
             }
         },
 

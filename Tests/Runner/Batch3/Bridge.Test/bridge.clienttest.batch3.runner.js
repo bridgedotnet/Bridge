@@ -1782,7 +1782,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testJsonArrayParse: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1134).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1134, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestJsonArrayParse()",
-                    line: "11"
+                    line: "10"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge1134.testJsonArrayParse();
             }
@@ -4022,14 +4022,14 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testJSONParse: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1438, 4, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestJSONParse()",
-                    line: "22"
+                    line: "21"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.testJSONParse();
             },
             testJSONParseAsArray: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1438, 7, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestJSONParseAsArray()",
-                    line: "36"
+                    line: "35"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.testJSONParseAsArray();
             }
@@ -10092,7 +10092,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testUseCase: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge501).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge501, 5, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestUseCase()",
-                    line: "26"
+                    line: "25"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge501.testUseCase();
             }
@@ -10346,14 +10346,14 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testUseCase: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge544).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge544, 1, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestUseCase()",
-                    line: "13"
+                    line: "12"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge544.testUseCase();
             },
             testRelated: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge544).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge544, 5, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestRelated()",
-                    line: "20"
+                    line: "19"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge544.testRelated();
             }
