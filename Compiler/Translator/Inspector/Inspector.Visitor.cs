@@ -257,6 +257,7 @@ namespace Bridge.Translator
                         if (prop != null)
                         {
                             prop.Initializer = initializer;
+                            prop.IsPropertyInitializer = true;
                         }
                     }
 
@@ -285,6 +286,7 @@ namespace Bridge.Translator
                         if (prop != null)
                         {
                             prop.Initializer = initializer;
+                            prop.IsPropertyInitializer = true;
                         }
                     }
 
@@ -527,12 +529,13 @@ namespace Bridge.Translator
                     {
                         throw new EmitterException(propertyDeclaration, string.Format(Bridge.Translator.Constants.Messages.Exceptions.FIELD_PROPERTY_NOT_MARKED, resolvedProperty.Member.ToString()));
                     }
-
+                    
                     info.Properties.Add(new TypeConfigItem
                     {
                         Name = key,
                         Entity = propertyDeclaration,
-                        Initializer = initializer
+                        Initializer = initializer,
+                        IsPropertyInitializer = autoInitializer != null
                     });
                 }
                 else
@@ -546,7 +549,8 @@ namespace Bridge.Translator
                     {
                         Name = key,
                         Entity = propertyDeclaration,
-                        Initializer = initializer
+                        Initializer = initializer,
+                        IsPropertyInitializer = autoInitializer != null
                     });
                 }
             }
