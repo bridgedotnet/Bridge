@@ -43,6 +43,10 @@ namespace Bridge.Translator.Tests
                 Assert.AreEqual("TestOutputPath", config.Locales);
                 Assert.AreEqual("TestOutputType", config.LocalesOutput);
                 Assert.AreEqual("TestPlatform", config.LocalesFileName);
+
+                Assert.AreEqual("TestAssemblyName", config.Logging.FileName);
+                Assert.AreEqual("TestOutputType", config.Logging.Folder);
+
                 Assert.AreEqual("TestRootNamespace", config.Reflection.Filter);
                 Assert.AreEqual("TestOutputType", config.Reflection.Output);
 
@@ -62,7 +66,7 @@ namespace Bridge.Translator.Tests
             [Test]
             public void AssemblyConfigHelperApplyTokensPartial()
             {
-                AssemblyInfo config = CreateAssemblyInfo(false, false);
+                AssemblyInfo config = CreateAssemblyInfo(false, false, false);
 
                 ProjectProperties properties = CreateProjectProperties();
 
@@ -94,7 +98,7 @@ namespace Bridge.Translator.Tests
                 };
             }
 
-            private static AssemblyInfo CreateAssemblyInfo(bool addReflection = true, bool addResources = true)
+            private static AssemblyInfo CreateAssemblyInfo(bool addReflection = true, bool addResources = true, bool addLogging = true)
             {
                 var r =  new AssemblyInfo()
                 {
@@ -109,6 +113,15 @@ namespace Bridge.Translator.Tests
                     LocalesFileName = "$(Platform)",
                 };
 
+                if (addLogging)
+                {
+                    r.Logging = new LoggingOptions()
+                    {
+                        FileName = "$(AssemblyName)",
+                        Folder = "$(OutputType)"
+                    };
+                }
+
                 if (addReflection)
                 {
                     r.Reflection = new ReflectionConfig()
@@ -118,7 +131,7 @@ namespace Bridge.Translator.Tests
                     };
                 }
 
-                if (addReflection)
+                if (addResources)
                 {
                     r.Resources = new ResourceConfig()
                     {

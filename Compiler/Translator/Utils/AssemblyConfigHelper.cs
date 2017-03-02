@@ -98,6 +98,12 @@ namespace Bridge.Translator.Utils
             config.LocalesOutput = helper.ApplyTokens(tokens, config.LocalesOutput);
             config.LocalesFileName = helper.ApplyPathTokens(tokens, config.LocalesFileName);
 
+            if (config.Logging != null)
+            {
+                config.Logging.FileName = helper.ApplyPathTokens(tokens, config.Logging.FileName);
+                config.Logging.Folder = helper.ApplyPathTokens(tokens, config.Logging.Folder);
+            }
+
             if (config.Reflection != null)
             {
                 config.Reflection.Filter = helper.ApplyTokens(tokens, config.Reflection.Filter);
