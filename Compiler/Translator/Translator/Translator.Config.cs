@@ -1,6 +1,8 @@
 using System.Diagnostics;
 using System.IO;
 
+using Bridge.Translator.Utils;
+
 namespace Bridge.Translator
 {
     public partial class Translator
@@ -28,6 +30,16 @@ namespace Bridge.Translator
                     throw new TranslatorException("Error: The command '" + e + "' returned with exit code: " + p.ExitCode);
                 }
             }
+        }
+
+        internal virtual void ApplyProjectPropertiesToConfig()
+        {
+            this.Log.Trace("ApplyProjectPropertiesToConfig...");
+
+            var configReader = new AssemblyConfigHelper(this.Log);
+            configReader.ApplyTokens(this.AssemblyInfo, this.ProjectProperties);
+
+            this.Log.Trace("ApplyProjectPropertiesToConfig done");
         }
     }
 }

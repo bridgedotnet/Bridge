@@ -40,8 +40,6 @@ namespace Bridge.Translator
 
             this.EnsureAssemblyLocation(doc);
 
-            this.ApplyProjectPropertiesToConfig();
-
             this.SourceFiles = this.GetSourceFiles(doc);
             this.ParsedSourceFiles = new List<ParsedSourceFile>();
 
@@ -191,16 +189,6 @@ namespace Bridge.Translator
             this.Log.Info("    AssemblyLocation:" + this.AssemblyLocation);
 
             this.Log.Trace("BuildAssemblyLocation done");
-        }
-
-        protected virtual void ApplyProjectPropertiesToConfig()
-        {
-            this.Log.Trace("ApplyProjectPropertiesToConfig...");
-
-            var configReader = new AssemblyConfigHelper(this.Log);
-            configReader.ApplyTokens(this.AssemblyInfo, this.ProjectProperties);
-
-            this.Log.Trace("ApplyProjectPropertiesToConfig done");
         }
 
         protected virtual string GetOutputPaths(XDocument doc)

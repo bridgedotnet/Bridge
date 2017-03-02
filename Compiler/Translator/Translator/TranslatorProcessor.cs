@@ -334,6 +334,8 @@ namespace Bridge.Translator
                     translator.EnsureProjectProperties();
                 }
 
+                translator.ApplyProjectPropertiesToConfig();
+
                 logger.Info("Setting translator properties done");
 
                 return translator;
