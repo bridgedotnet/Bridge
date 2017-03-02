@@ -34,16 +34,16 @@ namespace Bridge.Translator
                 return "Could not get configuration";
             }
 
-            if (!this.SetLoggerConfigurationParameters())
-            {
-                return "Could not set logger configuration";
-            }
-
             this.Translator = this.SetTranslatorProperties();
 
             if (this.Translator == null)
             {
                 return "Could not get Translator";
+            }
+
+            if (!this.SetLoggerConfigurationParameters())
+            {
+                return "Could not set logger configuration";
             }
 
             return null;
@@ -324,6 +324,15 @@ namespace Bridge.Translator
                 translator.Log.Info("\tDefineConstants:" + (translator.DefineConstants != null ? string.Join(" ", translator.DefineConstants) : ""));
                 translator.Log.Info("\tRebuild:" + translator.Rebuild);
                 translator.Log.Info("\tProjectProperties:" + translator.ProjectProperties);
+
+                if (translator.FolderMode)
+                {
+                    translator.ReadFolderFiles();
+                }
+                else
+                {
+                    translator.EnsureProjectProperties();
+                }
 
                 logger.Info("Setting translator properties done");
 

@@ -24,7 +24,7 @@ namespace Bridge.Translator
             public const string PLATFORM_PROP = "Platform";
         }
 
-        protected virtual void EnsureProjectProperties()
+        internal virtual void EnsureProjectProperties()
         {
             this.Log.Info("EnsureProjectProperties at " + (Location ?? "") + " ...");
 
@@ -53,7 +53,7 @@ namespace Bridge.Translator
             this.Log.Info("EnsureProjectProperties done");
         }
 
-        protected virtual void ReadFolderFiles()
+        internal virtual void ReadFolderFiles()
         {
             this.Log.Info("Reading folder files...");
 

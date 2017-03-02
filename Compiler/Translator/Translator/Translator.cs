@@ -100,14 +100,8 @@ namespace Bridge.Translator
 
             var config = this.AssemblyInfo;
 
-            if (this.FolderMode)
+            if (!this.FolderMode)
             {
-                this.ReadFolderFiles();
-            }
-            else
-            {
-                this.EnsureProjectProperties();
-
                 if (this.Rebuild)
                 {
                     logger.Info("Building assembly as Rebuild option is enabled");
