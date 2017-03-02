@@ -35,6 +35,7 @@ namespace Bridge.Translator.Tests
                 Helper.ApplyTokens(config, properties);
 
                 Assert.AreEqual("TestAssemblyName", config.FileName);
+                Assert.AreEqual("TestOutDir", config.Output);
                 Assert.AreEqual("true", config.BeforeBuild);
                 Assert.AreEqual("TestConfiguration", config.AfterBuild);
                 Assert.AreEqual("TestDefineConstants", config.PluginsPath);
@@ -98,6 +99,7 @@ namespace Bridge.Translator.Tests
                 var r =  new AssemblyInfo()
                 {
                     FileName = "$(AssemblyName)",
+                    Output = "$(OutDir)",
                     BeforeBuild = "$(CheckForOverflowUnderflow)",
                     AfterBuild = "$(Configuration)",
                     PluginsPath = "$(DefineConstants)",

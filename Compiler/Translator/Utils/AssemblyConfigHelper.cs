@@ -89,6 +89,7 @@ namespace Bridge.Translator.Utils
             }
 
             config.FileName = helper.ApplyPathTokens(tokens, config.FileName);
+            config.Output = helper.ApplyPathTokens(tokens, config.Output);
             config.BeforeBuild = helper.ApplyPathTokens(tokens, config.BeforeBuild);
             config.AfterBuild = helper.ApplyPathTokens(tokens, config.AfterBuild);
             config.PluginsPath = helper.ApplyPathTokens(tokens, config.PluginsPath);
