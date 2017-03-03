@@ -7465,9 +7465,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         equalsObjectWorks: function () {
             var g = new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.equals(g, new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C")), "Equal");
-            Bridge.Test.NUnit.Assert.false$1(Bridge.equals(g, new System.Guid.$ctor4("E4C221BE-9B39-4398-B82A-48BA4648CAE0")), "Not equal");
-            Bridge.Test.NUnit.Assert.false$1(Bridge.equals(g, "X"), "Not equal");
+            Bridge.Test.NUnit.Assert.true$1(g.equals(new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C")), "Equal");
+            Bridge.Test.NUnit.Assert.false$1(g.equals(new System.Guid.$ctor4("E4C221BE-9B39-4398-B82A-48BA4648CAE0")), "Not equal");
+            Bridge.Test.NUnit.Assert.false$1(g.equals("X"), "Not equal");
         },
         equalsGuidWorks: function () {
             var g = new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C");
@@ -7480,8 +7480,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.false$1(Bridge.equalsT(g, new System.Guid.$ctor4("E4C221BE-9B39-4398-B82A-48BA4648CAE0"), System.Guid), "Not equal");
         },
         getHashCodeWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual(Bridge.getHashCode(new System.Guid.$ctor4("f3d8b3c0-88f0-4148-844c-232ed03c153c")), Bridge.getHashCode(new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C")));
-            Bridge.Test.NUnit.Assert.areNotEqual(Bridge.getHashCode(new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153D")), Bridge.getHashCode(new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C")));
+            Bridge.Test.NUnit.Assert.areEqual(new System.Guid.$ctor4("f3d8b3c0-88f0-4148-844c-232ed03c153c").getHashCode(), new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C").getHashCode());
+            Bridge.Test.NUnit.Assert.areNotEqual(new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153D").getHashCode(), new System.Guid.$ctor4("F3D8B3C0-88F0-4148-844C-232ED03C153C").getHashCode());
         },
         equalityOperatorWorks: function () {
             Bridge.Test.NUnit.Assert.true$1(System.Guid.op_Equality(new System.Guid.$ctor4("D311FC20-D7B6-40B6-88DB-9CD92AED6628"), new System.Guid.$ctor4("D311FC20-D7B6-40B6-88DB-9CD92AED6628")), "Equal");
