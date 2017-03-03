@@ -43,7 +43,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                             p.FirstName,
                         };
 
-            var s = JSON.Stringify(query.ToList());
+            var s = Bridge.Html5.JSON.Stringify(query.ToList());
 
             Assert.AreEqual("{\"items\":[{\"lastName\":\"Ruth\",\"firstName\":\"Babe\"},{\"lastName\":\"Cobb\",\"firstName\":\"Ty\"}]}", s, "#485");
         }

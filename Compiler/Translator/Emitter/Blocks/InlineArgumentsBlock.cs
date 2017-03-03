@@ -616,7 +616,20 @@ namespace Bridge.Translator
                             if (needName)
                             {
                                 isSimple = true;
-                                this.Write(BridgeTypes.ToJsName(type, this.Emitter));
+                                var enumType = type;
+                                if (type.Kind == TypeKind.Enum && this.Emitter.Validator.IsExternalType(type.GetDefinition()))
+                                {
+                                    var enumMode = this.Emitter.Validator.EnumEmitMode(type);
+                                    if (enumMode >= 3 && enumMode < 7)
+                                    {
+                                        enumType = this.Emitter.Resolver.Compilation.FindType(KnownTypeCode.String);
+                                    }
+                                    else if (enumMode == 2)
+                                    {
+                                        enumType = type.GetDefinition().EnumUnderlyingType;
+                                    }
+                                }
+                                this.Write(BridgeTypes.ToJsName(enumType, this.Emitter));
                             }
                             else
                             {
@@ -1047,7 +1060,7 @@ namespace Bridge.Translator
                 foreach (var tempVar in tempVars)
                 {
                     sb.Append(tempVar.Key);
-                    sb.Append("=");
+                    sb.Append(" = ");
                     sb.Append(tempVar.Value);
                     sb.Append(", ");
                 }
@@ -1093,7 +1106,20 @@ namespace Bridge.Translator
         {
             if (needName)
             {
-                this.Write(BridgeTypes.ToJsName(type, this.Emitter));
+                var enumType = type;
+                if (type.Kind == TypeKind.Enum && this.Emitter.Validator.IsExternalType(type.GetDefinition()))
+                {
+                    var enumMode = this.Emitter.Validator.EnumEmitMode(type);
+                    if (enumMode >= 3 && enumMode < 7)
+                    {
+                        enumType = this.Emitter.Resolver.Compilation.FindType(KnownTypeCode.String);
+                    }
+                    else if (enumMode == 2)
+                    {
+                        enumType = type.GetDefinition().EnumUnderlyingType;
+                    }
+                }
+                this.Write(BridgeTypes.ToJsName(enumType, this.Emitter));
             }
             else
             {

@@ -33,7 +33,7 @@ namespace Bridge.ClientTest.Batch4.Serialization
             // #1574
             // Test restructure to keep assertion count correct (prevent uncaught test exception)
             TestClass2 o = null;
-            TestHelper.Safe(() => o = (TestClass2)JSON.Parse("{ \"i\": 3, \"s\": \"test\" }"));
+            TestHelper.Safe(() => o = (TestClass2)Bridge.Html5.JSON.Parse("{ \"i\": 3, \"s\": \"test\" }"));
 
             int i = 0;
             TestHelper.Safe(() => i = o.i);
@@ -47,7 +47,7 @@ namespace Bridge.ClientTest.Batch4.Serialization
         [Test]
         public void GenericParseWorks()
         {
-            var o = JSON.Parse<TestClass2>("{ \"i\": 3, \"s\": \"test\" }");
+            var o = (TestClass2)Bridge.Html5.JSON.Parse("{ \"i\": 3, \"s\": \"test\" }");
             Assert.AreEqual(3, o.i);
             Assert.AreEqual("test", o.s);
         }
@@ -61,7 +61,7 @@ namespace Bridge.ClientTest.Batch4.Serialization
 
             TestClass2 o = null;
 
-            TestHelper.Safe(() => o = (TestClass2)JSON.Parse("{ \"i\": 3, \"s\": \"test\" }", (s, x) =>
+            TestHelper.Safe(() => o = (TestClass2)Bridge.Html5.JSON.Parse("{ \"i\": 3, \"s\": \"test\" }", (s, x) =>
             {
                 ((TestClass2)x).i = 100;
                 return x;
@@ -83,7 +83,7 @@ namespace Bridge.ClientTest.Batch4.Serialization
             // #1574
             // Test restructure to keep assertion count correct (prevent uncaught test exception)
             TestClass2 o = null;
-            TestHelper.Safe(() => o = JSON.Parse<TestClass2>("{ \"i\": 3, \"s\": \"test\" }", (s, x) =>
+            TestHelper.Safe(() => o = (TestClass2)Bridge.Html5.JSON.Parse("{ \"i\": 3, \"s\": \"test\" }", (s, x) =>
             {
                 ((TestClass2)x).i = 100;
                 return x;
@@ -101,7 +101,7 @@ namespace Bridge.ClientTest.Batch4.Serialization
         [Test]
         public void StringifyWorks()
         {
-            Assert.AreEqual("{\"i\":3}", JSON.Stringify(new TestClass1
+            Assert.AreEqual("{\"i\":3}", Bridge.Html5.JSON.Stringify(new TestClass1
             {
                 i = 3
             }));
@@ -110,7 +110,7 @@ namespace Bridge.ClientTest.Batch4.Serialization
         [Test]
         public void StringifyWithSerializableMembersArrayWorks()
         {
-            Assert.AreEqual("{\"i\":3}", JSON.Stringify(new TestClass2
+            Assert.AreEqual("{\"i\":3}", Bridge.Html5.JSON.Stringify(new TestClass2
             {
                 i = 3,
                 s = "test"
@@ -120,7 +120,7 @@ namespace Bridge.ClientTest.Batch4.Serialization
         [Test]
         public void StringifyWithSerializableMembersArrayAndIntentCountWorks()
         {
-            Assert.AreEqual("{\n    \"i\": 3\n}", JSON.Stringify(new TestClass2
+            Assert.AreEqual("{\n    \"i\": 3\n}", Bridge.Html5.JSON.Stringify(new TestClass2
             {
                 i = 3,
                 s = "test"
@@ -130,7 +130,7 @@ namespace Bridge.ClientTest.Batch4.Serialization
         [Test]
         public void StringifyWithSerializableMembersArrayAndIntentTextWorks()
         {
-            Assert.AreEqual("{\n    \"i\": 3\n}", JSON.Stringify(new TestClass2
+            Assert.AreEqual("{\n    \"i\": 3\n}", Bridge.Html5.JSON.Stringify(new TestClass2
             {
                 i = 3,
                 s = "test"
@@ -140,7 +140,7 @@ namespace Bridge.ClientTest.Batch4.Serialization
         [Test]
         public void StringifyWithCallbackWorks()
         {
-            Assert.AreEqual("{\"i\":3}", JSON.Stringify(new TestClass2
+            Assert.AreEqual("{\"i\":3}", Bridge.Html5.JSON.Stringify(new TestClass2
             {
                 i = 3,
                 s = "test"
@@ -150,7 +150,7 @@ namespace Bridge.ClientTest.Batch4.Serialization
         [Test]
         public void StringifyWithCallbackAndIndentCountWorks()
         {
-            Assert.AreEqual("{\n    \"i\": 3\n}", JSON.Stringify(new TestClass2
+            Assert.AreEqual("{\n    \"i\": 3\n}", Bridge.Html5.JSON.Stringify(new TestClass2
             {
                 i = 3,
                 s = "test"
@@ -160,7 +160,7 @@ namespace Bridge.ClientTest.Batch4.Serialization
         [Test]
         public void StringifyWithCallbackAndIndentTextWorks()
         {
-            Assert.AreEqual("{\n    \"i\": 3\n}", JSON.Stringify(new TestClass2
+            Assert.AreEqual("{\n    \"i\": 3\n}", Bridge.Html5.JSON.Stringify(new TestClass2
             {
                 i = 3,
                 s = "test"

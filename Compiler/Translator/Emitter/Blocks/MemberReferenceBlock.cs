@@ -438,12 +438,12 @@ namespace Bridge.Translator
 
                     thisArg = this.Emitter.Output.ToString();
 
-                    if (Regex.Matches(inline, @"\{(\*?)this(\:(\w+))?\}").Count > 1)
+                    if (Regex.Matches(inline, @"\{(\*?)this\}").Count > 1)
                     {
                         var mrr = resolveResult as MemberResolveResult;
                         bool isField = mrr != null && mrr.Member is IField &&
                                        (mrr.TargetResult is ThisResolveResult ||
-                                        mrr.TargetResult is LocalResolveResult);
+                                        mrr.TargetResult is LocalResolveResult || mrr.TargetResult is MemberResolveResult && ((MemberResolveResult)mrr.TargetResult).Member is IField);
 
                         isSimple = (mrr != null && (mrr.TargetResult is ThisResolveResult || mrr.TargetResult is ConstantResolveResult || mrr.TargetResult is LocalResolveResult)) || isField;
                     }
@@ -461,7 +461,7 @@ namespace Bridge.Translator
                     thisIndex = tempVar.Length + 2;
 
                     sb.Append(tempVar);
-                    sb.Append("=");
+                    sb.Append(" = ");
                     sb.Append(thisArg);
                     sb.Append(", ");
 

@@ -293,5 +293,11 @@ namespace Bridge.Translator
         {
             get; set;
         }
+
+        public bool EnableNamedFunctionExpressions
+        {
+            get;
+            set;
+        }
     }
 }
