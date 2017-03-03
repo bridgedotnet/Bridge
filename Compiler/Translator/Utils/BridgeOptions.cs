@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Bridge.Contract;
 
 namespace Bridge.Translator
@@ -30,6 +32,61 @@ namespace Bridge.Translator
         {
             ExtractCore = true;
             Folder = Environment.CurrentDirectory;
+        }
+
+        public override string ToString()
+        {
+            return string.Join(", ", GetValues().Select(x => x.Key + ":" + x.Value));
+        }
+
+        protected Dictionary<string, string> GetValues()
+        {
+            var r = new Dictionary<string, string>()
+            {
+                { WrapProperty("Name"), GetString(this.Name) },
+                { WrapProperty("ProjectProperties"), GetString(this.ProjectProperties) },
+                { WrapProperty("ProjectLocation"), GetString(this.ProjectLocation) },
+                { WrapProperty("OutputLocation"), GetString(this.OutputLocation) },
+                { WrapProperty("DefaultFileName"), GetString(this.DefaultFileName) },
+                { WrapProperty("BridgeLocation"), GetString(this.BridgeLocation) },
+                { WrapProperty("Rebuild"), GetString(this.Rebuild) },
+                { WrapProperty("ExtractCore"), GetString(this.ExtractCore) },
+                { WrapProperty("Folder"), GetString(this.Folder) },
+                { WrapProperty("Recursive"), GetString(this.Recursive) },
+                { WrapProperty("Lib"), GetString(this.Lib) },
+                { WrapProperty("Help"), GetString(this.Help) },
+                { WrapProperty("NoTimeStamp"), GetString(this.NoTimeStamp) },
+                { WrapProperty("FromTask"), GetString(this.FromTask) },
+                { WrapProperty("NoLoggerSetUp"), GetString(this.NoLoggerSetUp) },
+                { WrapProperty("Sources"), GetString(this.Sources) },
+            };
+
+            return r;
+        }
+
+        protected string WrapProperty(string name)
+        {
+            return name;
+        }
+
+        protected string GetString(string s)
+        {
+            return s != null ? s : "";
+        }
+
+        protected string GetString(ProjectProperties p)
+        {
+            return p != null ? p.ToString() : "";
+        }
+
+        protected string GetString(bool? b)
+        {
+            return b.HasValue ? GetString(b.Value) : GetString((string)null);
+        }
+
+        protected string GetString(bool b)
+        {
+            return b.ToString().ToLowerInvariant();
         }
     }
 }
