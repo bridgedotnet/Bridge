@@ -134,7 +134,7 @@
 
         toPlain: function (o) {
             if (o && Bridge.getType(o).$metadata) {
-                return Bridge.JSON.serialize(o, {}, true);
+                return Bridge.Json.serialize(o, {}, true);
             }
 
             if (!o || Bridge.isPlainObject(o) || typeof o != "object") {

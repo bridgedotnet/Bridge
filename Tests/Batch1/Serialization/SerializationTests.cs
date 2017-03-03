@@ -21,7 +21,7 @@ namespace Bridge.ClientTest
         [Reflectable]
         public class ClassWithFields
         {
-            public byte[] byteArrayField = new byte[] {1,2,3};
+            public byte[] byteArrayField = new byte[] { 1, 2, 3 };
             public Guid guidField = Guid.NewGuid();
             public Type typeField = typeof(SerializationTests);
             public char charField = 'a';
@@ -30,8 +30,8 @@ namespace Bridge.ClientTest
             public decimal decimalField;
             public DateTime dateField = new DateTime(2010, 6, 10, 12, 0, 0, 0);
             public E1 enumField;
-            public int[] arrayField = new[] {1, 2, 3};
-            public IList<E1> listField = new List<E1> {E1.Item1, E1.Item2, E1.Item3};
+            public int[] arrayField = new[] { 1, 2, 3 };
+            public IList<E1> listField = new List<E1> { E1.Item1, E1.Item2, E1.Item3 };
 
             public IDictionary<string, E1> dictField = new Dictionary<string, E1>
             {
@@ -108,7 +108,7 @@ namespace Bridge.ClientTest
         [Test]
         public static void ByteArrayWorks()
         {
-            byte[] arr = new byte[] {1, 2, 3};
+            byte[] arr = new byte[] { 1, 2, 3 };
             Assert.AreEqual("\"" + System.Convert.ToBase64String(arr) + "\"", Json.Serialize(arr));
         }
 
@@ -182,10 +182,10 @@ namespace Bridge.ClientTest
         [Test]
         public static void ArrayWorks()
         {
-            int[] intArr = new[] {1, 2, 3};
+            int[] intArr = new[] { 1, 2, 3 };
             Assert.AreEqual("[1,2,3]", Json.Serialize(intArr));
 
-            long[] longArr = new[] {1L, 2, 3L};
+            long[] longArr = new[] { 1L, 2, 3L };
             Assert.AreEqual("[1,2,3]", Json.Serialize(longArr));
 
             E1[] enumArr = new[] { E1.Item1, E1.Item2, E1.Item3 };
@@ -201,7 +201,7 @@ namespace Bridge.ClientTest
         [Test]
         public static void IListWorks()
         {
-            var list = new List<E1> {E1.Item1, E1.Item2, E1.Item3};
+            var list = new List<E1> { E1.Item1, E1.Item2, E1.Item3 };
             Assert.AreEqual("[\"Item1\",\"Item2\",\"Item3\"]", Json.Serialize(list));
         }
 
@@ -223,7 +223,7 @@ namespace Bridge.ClientTest
         {
             var c = new ClassWithFields();
             dynamic raw = null;
-            //@ raw = Bridge.JSON.serialize(c, {}, true);
+            //@ raw = Bridge.Json.serialize(c, {}, true);
 
             Assert.AreEqual(System.Convert.ToBase64String(c.byteArrayField), raw.byteArrayField, "#1");
             Assert.AreEqual(c.guidField.ToString(), raw.guidField, "#2");
@@ -235,9 +235,9 @@ namespace Bridge.ClientTest
             Assert.NotNull(raw.dateField, "#8");
             Assert.AreEqual(((dynamic)c.dateField).toJSON(), raw.dateField, "#9 " + raw.dateField);
             Assert.AreEqual("Item1", raw.enumField, "#10");
-            Assert.AreEqual(new int[] {1,2,3}, raw.arrayField, "#11");
-            Assert.AreEqual(new string[] {"Item1", "Item2", "Item3"}, raw.listField, "#12");
-            Assert.AreDeepEqual(Script.ToPlainObject(new {i1 = "Item1", i2 = "Item2", i3 = "Item3" }), raw.dictField, "#12");
+            Assert.AreEqual(new int[] { 1, 2, 3 }, raw.arrayField, "#11");
+            Assert.AreEqual(new string[] { "Item1", "Item2", "Item3" }, raw.listField, "#12");
+            Assert.AreDeepEqual(Script.ToPlainObject(new { i1 = "Item1", i2 = "Item2", i3 = "Item3" }), raw.dictField, "#12");
         }
 
         [Test]
@@ -275,7 +275,7 @@ namespace Bridge.ClientTest
         public static void CamelCaseSettingWorks()
         {
             var c = new Class2();
-            var json = Bridge.Json.Serialize(c, new JsonSettings {CamelCasePropertyNames = true});
+            var json = Bridge.Json.Serialize(c, new JsonSettings { CamelCasePropertyNames = true });
             Assert.AreEqual(json, "{\"intProp\":0}");
 
             json = Bridge.Json.Serialize(c);
