@@ -154,7 +154,7 @@ namespace Bridge.Translator
             {
                 this.BuildArgumentsList(arguments);
             }
-            
+
             if (this.ResolveResult != null)
             {
                 this.HasTypeArguments = ((IMethod)this.ResolveResult.Member).TypeArguments.Count > 0;
@@ -255,7 +255,7 @@ namespace Bridge.Translator
 
                 if (group != null && group.Methods.Count() > 1)
                 {
-                    throw new EmitterException(objectCreateExpression, "Cannot compile this dynamic invocation because there are two or more method overloads with the same parameter count. To work around this limitation, assign the dynamic value to a non-dynamic variable before use or call a method with different parameter count");
+                    throw new EmitterException(objectCreateExpression, Bridge.Translator.Constants.Messages.Exceptions.DYNAMIC_INVOCATION_TOO_MANY_OVERLOADS);
                 }
             }
 
@@ -462,8 +462,7 @@ namespace Bridge.Translator
 
                 if (method == null)
                 {
-                    throw new EmitterException(this.Expression,
-                        "Cannot compile this dynamic invocation because there are two or more method overloads with the same parameter count. To work around this limitation, assign the dynamic value to a non-dynamic variable before use or call a method with different parameter count");
+                    throw new EmitterException(this.Expression, Bridge.Translator.Constants.Messages.Exceptions.DYNAMIC_INVOCATION_TOO_MANY_OVERLOADS);
                 }
             }
 

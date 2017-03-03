@@ -311,7 +311,7 @@ namespace Bridge.Translator
                                 else if (!isNative)
                                 {
                                     var overloads = OverloadsCollection.Create(this.Emitter, resolvedMethod);
-                                    
+
                                     if (isObjectLiteral && !resolvedMethod.IsStatic && resolvedMethod.DeclaringType.Kind == TypeKind.Interface)
                                     {
                                         this.Write("Bridge.getType(");
@@ -554,8 +554,7 @@ namespace Bridge.Translator
 
                         if (method == null)
                         {
-                            throw new EmitterException(invocationExpression,
-                                "Cannot compile this dynamic invocation because there are two or more method overloads with the same parameter count. To work around this limitation, assign the dynamic value to a non-dynamic variable before use or call a method with different parameter count");
+                            throw new EmitterException(invocationExpression, Bridge.Translator.Constants.Messages.Exceptions.DYNAMIC_INVOCATION_TOO_MANY_OVERLOADS);
                         }
                     }
                 }
