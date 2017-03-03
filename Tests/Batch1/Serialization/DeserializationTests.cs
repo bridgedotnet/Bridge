@@ -423,6 +423,16 @@ namespace Bridge.ClientTest
             json = "{\"StringProp\":null}";
             deserialized = Bridge.Json.Deserialize<Class3>(json);
             Assert.Null(deserialized.StringProp);
+
+            var jsonSettings = new JsonSettings() { IgnoreNullValue = true };
+
+            json = "{}";
+            deserialized = Bridge.Json.Deserialize<Class3>(json, jsonSettings);
+            Assert.Null(deserialized.StringProp);
+
+            json = "{\"StringProp\":null}";
+            deserialized = Bridge.Json.Deserialize<Class3>(json, jsonSettings);
+            Assert.Null(deserialized.StringProp);
         }
 
         [Test]

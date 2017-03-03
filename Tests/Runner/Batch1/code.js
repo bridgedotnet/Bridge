@@ -13179,6 +13179,16 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 json = "{\"StringProp\":null}";
                 deserialized = Bridge.Json.deserialize(json, Bridge.ClientTest.DeserializationTests.Class3);
                 Bridge.Test.NUnit.Assert.null(deserialized.getStringProp());
+
+                var jsonSettings = { ignoreNullValue: true };
+
+                json = "{}";
+                deserialized = Bridge.Json.deserialize(json, Bridge.ClientTest.DeserializationTests.Class3, jsonSettings);
+                Bridge.Test.NUnit.Assert.null(deserialized.getStringProp());
+
+                json = "{\"StringProp\":null}";
+                deserialized = Bridge.Json.deserialize(json, Bridge.ClientTest.DeserializationTests.Class3, jsonSettings);
+                Bridge.Test.NUnit.Assert.null(deserialized.getStringProp());
             },
             anonymousTypesWorks: function () {
                 var v = new $asm.$AnonymousType$1(108, "Hello");

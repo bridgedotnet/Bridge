@@ -8352,14 +8352,14 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             anonymousTypesWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DeserializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "AnonymousTypesWorks()",
-                    line: "406"
+                    line: "416"
                 } ));
                 Bridge.ClientTest.DeserializationTests.anonymousTypesWorks();
             },
             typeNameHandlingWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DeserializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TypeNameHandlingWorks()",
-                    line: "421"
+                    line: "431"
                 } ));
                 Bridge.ClientTest.DeserializationTests.typeNameHandlingWorks();
             }
