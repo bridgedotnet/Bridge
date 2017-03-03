@@ -132,7 +132,7 @@ namespace Bridge.Translator.Tests
 
             if (result != null)
             {
-                Bridge.Translator.TranslatorException.Throw("Unable to preprocess");
+                Bridge.Translator.TranslatorException.Throw("Unable to preprocess: " + result);
             }
 
             var translator = processor.Translator;
