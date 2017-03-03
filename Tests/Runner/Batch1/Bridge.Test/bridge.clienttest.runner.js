@@ -33,6 +33,8 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("Enum - TestHasFlag", Bridge.Test.Runtime.BridgeClientTestRunner.TestEnum.testHasFlag);
             QUnit.test("Enum - TestIsDefined", Bridge.Test.Runtime.BridgeClientTestRunner.TestEnum.testIsDefined);
             QUnit.test("Enum - TestTryParse", Bridge.Test.Runtime.BridgeClientTestRunner.TestEnum.testTryParse);
+            QUnit.test("Goto - TestGotoCase", Bridge.Test.Runtime.BridgeClientTestRunner.TestGoto.testGotoCase);
+            QUnit.test("Goto - TestGotoLabel", Bridge.Test.Runtime.BridgeClientTestRunner.TestGoto.testGotoLabel);
             QUnit.test("Static overloads - TestA", Bridge.Test.Runtime.BridgeClientTestRunner.TestInheritance.testA);
             QUnit.test("Static overloads - TestB", Bridge.Test.Runtime.BridgeClientTestRunner.TestInheritance.testB);
             QUnit.test("Static overloads - TestAB", Bridge.Test.Runtime.BridgeClientTestRunner.TestInheritance.testAB);
@@ -21164,7 +21166,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             testBasic: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestAutoProps).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestAutoProps, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestBasic()",
-                    line: "33"
+                    line: "29"
                 } ));
                 Bridge.ClientTest.CSharp6.TestAutoProps.testBasic();
             }
@@ -21402,6 +21404,22 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestGoto", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestGoto)],
+        statics: {
+            testGotoCase: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestGoto).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestGoto, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestGotoCase()",
+                    line: "70"
+                } ));
+                Bridge.ClientTest.BasicCSharp.TestGoto.testGotoCase();
+            },
+            testGotoLabel: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestGoto).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestGoto, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestGotoLabel()",
+                    line: "82"
+                } ));
+                Bridge.ClientTest.BasicCSharp.TestGoto.testGotoLabel();
+            }
+        },
         context: null,
         getContext: function () {
             if (this.context == null) {
@@ -21521,7 +21539,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             testBasic: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestInterpolatedStrings).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestInterpolatedStrings, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestBasic()",
-                    line: "37"
+                    line: "35"
                 } ));
                 Bridge.ClientTest.CSharp6.TestInterpolatedStrings.testBasic();
             }

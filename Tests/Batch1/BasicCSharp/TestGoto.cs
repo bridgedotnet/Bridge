@@ -67,6 +67,7 @@ namespace Bridge.ClientTest.BasicCSharp
             return dummy;
         }
 
+        [Test]
         public static void TestGotoCase()
         {
             Assert.AreEqual(25, CaseGoto(1));
@@ -78,10 +79,11 @@ namespace Bridge.ClientTest.BasicCSharp
             Assert.AreEqual(-1, CaseGoto(20));
         }
 
+        [Test]
         public static void TestGotoLabel()
         {
-            Assert.AreEqual(5, LabelGoto(5));
-            Assert.AreEqual(10, LabelGoto(10));
+            Assert.AreEqual(6, LabelGoto(5));
+            Assert.AreEqual(11, LabelGoto(10));
             Assert.AreEqual(50, GotoMethod());
         }
     }

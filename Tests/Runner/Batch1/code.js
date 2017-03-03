@@ -2609,8 +2609,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.areEqual(-1, Bridge.ClientTest.BasicCSharp.TestGoto.caseGoto(20));
             },
             testGotoLabel: function () {
-                Bridge.Test.NUnit.Assert.areEqual(5, Bridge.ClientTest.BasicCSharp.TestGoto.labelGoto(5));
-                Bridge.Test.NUnit.Assert.areEqual(10, Bridge.ClientTest.BasicCSharp.TestGoto.labelGoto(10));
+                Bridge.Test.NUnit.Assert.areEqual(6, Bridge.ClientTest.BasicCSharp.TestGoto.labelGoto(5));
+                Bridge.Test.NUnit.Assert.areEqual(11, Bridge.ClientTest.BasicCSharp.TestGoto.labelGoto(10));
                 Bridge.Test.NUnit.Assert.areEqual(50, Bridge.ClientTest.BasicCSharp.TestGoto.gotoMethod());
             }
         }
