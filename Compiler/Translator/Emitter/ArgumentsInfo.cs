@@ -136,7 +136,7 @@ namespace Bridge.Translator
             }
         }
 
-        public ArgumentsInfo(IEmitter emitter, InvocationExpression invocationExpression)
+        public ArgumentsInfo(IEmitter emitter, InvocationExpression invocationExpression, IMethod method = null)
         {
             this.Emitter = emitter;
             this.Expression = invocationExpression;
@@ -159,6 +159,27 @@ namespace Bridge.Translator
             {
                 this.HasTypeArguments = ((IMethod)this.ResolveResult.Member).TypeArguments.Count > 0;
                 this.BuildTypedArguments(invocationExpression.Target);
+            }
+
+            if (method != null && method.Parameters.Count > 0)
+            {
+                this.ThisArgument = invocationExpression;
+                var name = method.Parameters[0].Name;
+
+                if (!this.ArgumentsNames.Contains(name))
+                {
+                    var list = this.ArgumentsNames.ToList();
+                    list.Add(name);
+                    this.ArgumentsNames = list.ToArray();
+
+                    var expr = this.ArgumentsExpressions.ToList();
+                    expr.Add(invocationExpression);
+                    this.ArgumentsExpressions = expr.ToArray();
+
+                    var namedExpr = this.NamedExpressions.ToList();
+                    namedExpr.Add(new NamedParamExpression(name, invocationExpression));
+                    this.NamedExpressions = namedExpr.ToArray();
+                }
             }
         }
 
@@ -220,7 +241,7 @@ namespace Bridge.Translator
             }
         }
 
-        public ArgumentsInfo(IEmitter emitter, ObjectCreateExpression objectCreateExpression)
+        public ArgumentsInfo(IEmitter emitter, ObjectCreateExpression objectCreateExpression, IMethod method = null)
         {
             this.Emitter = emitter;
             this.Expression = objectCreateExpression;
@@ -241,6 +262,27 @@ namespace Bridge.Translator
             this.ResolveResult = rr as InvocationResolveResult;
             this.BuildArgumentsList(arguments);
             this.BuildTypedArguments(objectCreateExpression.Type);
+
+            if (method != null && method.Parameters.Count > 0)
+            {
+                this.ThisArgument = objectCreateExpression;
+                var name = method.Parameters[0].Name;
+
+                if (!this.ArgumentsNames.Contains(name))
+                {
+                    var list = this.ArgumentsNames.ToList();
+                    list.Add(name);
+                    this.ArgumentsNames = list.ToArray();
+
+                    var expr = this.ArgumentsExpressions.ToList();
+                    expr.Add(objectCreateExpression);
+                    this.ArgumentsExpressions = expr.ToArray();
+
+                    var namedExpr = this.NamedExpressions.ToList();
+                    namedExpr.Add(new NamedParamExpression(name, objectCreateExpression));
+                    this.NamedExpressions = namedExpr.ToArray();
+                }
+            }
         }
 
         public ArgumentsInfo(IEmitter emitter, AssignmentExpression assignmentExpression, OperatorResolveResult operatorResolveResult, IMethod method)

@@ -45,7 +45,7 @@ namespace Test.BridgeIssues.N1472
         {
             // The method checks that a property used as a parameter in a method with multiple keys in a [Template]
             // will BE wrapped with temp variable
-            // ($t=this.getProperty(), DoSomethingTemplate($t, $t));
+            // ($t = this.getProperty(), DoSomethingTemplate($t, $t));
             ClassA.DoSomething(this.Property);
         }
 
@@ -53,7 +53,7 @@ namespace Test.BridgeIssues.N1472
         {
             // The method checks that a method used as a parameter in a method with multiple keys in a [Template]
             // will BE wrapped with temp variable
-            // ($t=this.method(), DoSomethingTemplate($t, $t));
+            // ($t = this.method(), DoSomethingTemplate($t, $t));
             ClassA.DoSomething(this.Method());
         }
     }

@@ -355,8 +355,8 @@ namespace Bridge.Translator
                     isStringConcat = resultIsString && binaryOperatorExpression.Operator == BinaryOperatorType.Add;
                 }
 
-                bool needBox = ConversionBlock.IsBoxable(rr.Type)
-                    || rr.Type.IsKnownType(KnownTypeCode.NullableOfT) && ConversionBlock.IsBoxable(NullableType.GetUnderlyingType(rr.Type));
+                bool needBox = ConversionBlock.IsBoxable(rr.Type, block.Emitter)
+                    || rr.Type.IsKnownType(KnownTypeCode.NullableOfT) && ConversionBlock.IsBoxable(NullableType.GetUnderlyingType(rr.Type), block.Emitter);
                 var nullable = rr.Type.IsKnownType(KnownTypeCode.NullableOfT);
 
                 if (conversion.IsBoxingConversion && !isStringConcat)
@@ -584,8 +584,17 @@ namespace Bridge.Translator
             return level;
         }
 
-        public static bool IsBoxable(IType type)
+        public static bool IsBoxable(IType type, IEmitter emitter)
         {
+            if (type.Kind == TypeKind.Enum && emitter.Validator.IsExternalType(type.GetDefinition()))
+            {
+                var enumMode = emitter.Validator.EnumEmitMode(type);
+                if (enumMode >= 3 && enumMode < 7 || enumMode == 2)
+                {
+                    return false;
+                }
+            }
+
             return type.Kind == TypeKind.Enum
                    || type.IsKnownType(KnownTypeCode.Enum)
                    || type.IsKnownType(KnownTypeCode.Boolean)
@@ -625,7 +634,7 @@ namespace Bridge.Translator
                     }
                     else if (expression is ObjectCreateExpression)
                     {
-                        new InlineArgumentsBlock(block.Emitter, new ArgumentsInfo(block.Emitter, (ObjectCreateExpression)expression), inline).Emit();
+                        new InlineArgumentsBlock(block.Emitter, new ArgumentsInfo(block.Emitter, (ObjectCreateExpression)expression, method), inline).Emit();
                     }
                     else if (expression is UnaryOperatorExpression)
                     {

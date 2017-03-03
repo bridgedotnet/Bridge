@@ -10,7 +10,7 @@
 
 Compile your C#...
 
-```cs
+```csharp
 using System;
 
 class Program
@@ -44,14 +44,14 @@ Run the sample above at [Deck.NET](http://deck.net/5c58693ae7b44ac969f576545cac7
 
 ## TL;DR
 
-* Read the [Getting Started](http://bridge.net/docs/getting-started/) Knowledge Base article
-* Try [Deck](http://deck.net/) if you want to just play
+* Read the [Getting Started](https://github.com/bridgedotnet/Bridge/wiki) Knowledge Base article
+* Try [Deck](http://deck.net/) if you want to play
 * Installation:
   * Add **Bridge.NET** Visual Studio extension, or 
   * Use [NuGet](https://www.nuget.org/packages/bridge) to install into a C# Class Library project (`Install-Package Bridge`), or
   * [Download](http://bridge.net/download/) the Visual Studio Code starter project
-* The [Attribute Reference](http://bridge.net/docs/attribute-reference/) document is important
-* The [Global Configuration](http://bridge.net/docs/global-configuration/) document is important
+* The [Attribute Reference](https://github.com/bridgedotnet/Bridge/wiki/attribute-reference) is important
+* The [Global Configuration](https://github.com/bridgedotnet/Bridge/wiki/global-configuration) is important
 * Licensed under [Apache License, Version 2.0](https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md)
 * Need Help? Bridge.NET [Forums](http://forums.bridge.net/) or GitHub [Issues](https://github.com/bridgedotnet/Bridge/issues)
 * [@bridgedotnet](https://twitter.com/bridgedotnet) on Twitter
@@ -59,13 +59,13 @@ Run the sample above at [Deck.NET](http://deck.net/5c58693ae7b44ac969f576545cac7
 
 ## Getting Started
 
-A great place to start if you're new to Bridge is reviewing the [Getting Started](http://bridge.net/docs/getting-started/) Knowledge Base article.
+A great place to start if you're new to Bridge is reviewing the [Getting Started](https://github.com/bridgedotnet/Bridge/wiki) wiki.
 
 The easiest place to see Bridge in action is [Deck.NET](http://deck.net/). 
 
 ## Sample
 
-The following code sample demonstrates a simple **App.cs** class that will run automatically on page load and prompt with an `alert` message.
+The following code sample demonstrates a simple **App.cs** class that will run automatically on page load and write a message to the Bridge Console.
 
 **Example ([Deck](http://deck.net/7fb39e336182bea04c695ab43379cd8c))**
 
@@ -79,7 +79,7 @@ public class Program
 }
 ```
 
-The C# class above will be compiled into JavaScript and added to **/Bridge/ouput/demo.js** within your project. By default, Bridge will use the Namespace name as the file name. In this case: **demo.js**. There are many options to control the output of your JavaScript files, and the [Attribute Reference](http://bridge.net/docs/attribute-reference/) is an important [Knowledge Base](http://bridge.net/docs/) article to review. 
+The C# class above will be compiled into JavaScript and added to **/Bridge/ouput/demo.js** within your project. By default, Bridge will use the Namespace name as the file name. In this case: **demo.js**. There are many options to control the output of your JavaScript files, and the [Attribute Reference](https://github.com/bridgedotnet/Bridge/wiki/attribute-reference) is important [documentation](https://github.com/bridgedotnet/Bridge/wiki) to review.
 
 ```javascript
 Bridge.assembly("Demo", function ($asm, globals) {
@@ -92,6 +92,7 @@ Bridge.assembly("Demo", function ($asm, globals) {
     });
 });
 ```
+
 ## Installation
 
 A full list of installation options available at [bridge.net/download/](http://bridge.net/download/), including full support on Windows, Mac OS and Linux for [Visual Studio Code](https://code.visualstudio.com/) and [Mono Develop](http://www.monodevelop.com/).
@@ -119,7 +120,7 @@ Bridge can also be installed using the NuGet Command Line tool by running the fo
 Install-Package Bridge
 ```
 
-More information regarding Nuget package installation for Bridge is available in the [Documentation](http://bridge.net/docs/nuget-installation/).
+More information regarding Nuget package installation for Bridge is available in the [Documentation](https://github.com/bridgedotnet/Bridge/wiki/nuget-installation).
 
 ## Contributing
 
@@ -135,12 +136,13 @@ Show your support by adding a **built with Bridge.NET** badge to your projects R
 
 #### Markdown
 
-```
+```md
 [![Built with Bridge.NET](https://img.shields.io/badge/built%20with-Bridge.NET-blue.svg)](http://bridge.net/)
 ```
 
 #### HTML
-```
+
+```html
 <a href="http://bridge.net/">
     <img src="https://img.shields.io/badge/built%20with-Bridge.NET-blue.svg" title="Built with Bridge.NET" />
 </a>
