@@ -48,6 +48,11 @@ namespace Bridge.Contract
             get; set;
         }
 
+        public bool IsPropertyInitializer
+        {
+            get; set;
+        }
+
         public string GetName(IEmitter emitter, bool withoutTypeParams = false)
         {
             string fieldName = this.Name;

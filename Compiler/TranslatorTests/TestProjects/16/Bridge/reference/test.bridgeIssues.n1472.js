@@ -28,15 +28,15 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             var $t;
             // The method checks that a property used as a parameter in a method with multiple keys in a [Template]
             // will BE wrapped with temp variable
-            // ($t=this.getProperty(), DoSomethingTemplate($t, $t));
-            ($t=this.getProperty(), DoSomethingTemplate($t, $t));
+            // ($t = this.getProperty(), DoSomethingTemplate($t, $t));
+            ($t = this.getProperty(), DoSomethingTemplate($t, $t));
         },
         useWithMethod: function () {
             var $t;
             // The method checks that a method used as a parameter in a method with multiple keys in a [Template]
             // will BE wrapped with temp variable
-            // ($t=this.method(), DoSomethingTemplate($t, $t));
-            ($t=Bridge.unbox(this.method()), DoSomethingTemplate($t, $t));
+            // ($t = this.method(), DoSomethingTemplate($t, $t));
+            ($t = Bridge.unbox(this.method()), DoSomethingTemplate($t, $t));
         }
     });
 });

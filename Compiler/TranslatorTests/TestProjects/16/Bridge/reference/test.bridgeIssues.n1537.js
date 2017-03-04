@@ -60,4 +60,11 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     Bridge.apply($box_.System.Single, {
         toString: function(obj) {return System.Single.format(obj, 'G');}
     });
+
+
+    Bridge.ns("Test.BridgeIssues.N2420.Options.Format", $box_);
+
+    Bridge.apply($box_.Test.BridgeIssues.N2420.Options.Format, {
+        toString: function(obj) {return System.Enum.toString(Test.BridgeIssues.N2420.Options.Format, obj);}
+    });
 });

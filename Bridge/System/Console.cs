@@ -317,6 +317,7 @@ namespace System
         /// </summary>
         /// <param name="value">The value to write.</param>
         [Template("Bridge.Console.log(System.Enum.toString({value:type}, {value}))")]
+        [Unbox(false)]
         public static extern void WriteLine(Enum value);
 
         /// <summary>

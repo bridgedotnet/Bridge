@@ -870,6 +870,11 @@ namespace Bridge.Translator
             get;
             set;
         }
+
+        public object Label
+        {
+            get; set;
+        }
     }
 
     public class GeneratorJumpLabel : IAsyncJumpLabel

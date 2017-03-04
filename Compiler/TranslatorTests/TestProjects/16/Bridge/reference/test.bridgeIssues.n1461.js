@@ -30,6 +30,9 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             return {
                 a : this.a
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"A","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_A","t":8,"sn":"getA","rt":System.Int32}}]}; }
         }
     });
 });

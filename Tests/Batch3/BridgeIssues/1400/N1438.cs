@@ -1,6 +1,5 @@
 using Bridge.Html5;
 using Bridge.Test.NUnit;
-using JSON = Bridge.JSON;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -22,11 +21,11 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test(ExpectedCount = 4)]
         public static void TestJSONParse()
         {
-            var serialized = Bridge.JSON.Serialize(new Foo() { Value = 100 });
+            var serialized = Bridge.Json.Serialize(new Foo() { Value = 100 });
 
             Assert.NotNull(serialized, " serialized should not be null");
 
-            var result = Bridge.JSON.Deserialize<Foo>(serialized);
+            var result = Bridge.Json.Deserialize<Foo>(serialized);
 
             Assert.NotNull(result, " result should not be null");
             Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438+Foo", result.GetType().FullName, "Check result type name");
@@ -36,11 +35,11 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test(ExpectedCount = 7)]
         public static void TestJSONParseAsArray()
         {
-            var serialized = Bridge.JSON.Serialize(new[] { new Foo() { Value = 101 } });
+            var serialized = Bridge.Json.Serialize(new[] { new Foo() { Value = 101 } });
 
             Assert.NotNull(serialized, " serialized should not be null");
 
-            var result = JSON.Deserialize<Foo[]>(serialized);
+            var result = Json.Deserialize<Foo[]>(serialized);
 
             Assert.NotNull(result, " result should not be null");
             Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438+Foo[]", result.GetType().FullName, "Check result type name");

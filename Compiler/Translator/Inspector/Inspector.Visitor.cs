@@ -257,6 +257,7 @@ namespace Bridge.Translator
                         if (prop != null)
                         {
                             prop.Initializer = initializer;
+                            prop.IsPropertyInitializer = true;
                         }
                     }
 
@@ -285,6 +286,7 @@ namespace Bridge.Translator
                         if (prop != null)
                         {
                             prop.Initializer = initializer;
+                            prop.IsPropertyInitializer = true;
                         }
                     }
 
@@ -532,7 +534,8 @@ namespace Bridge.Translator
                     {
                         Name = key,
                         Entity = propertyDeclaration,
-                        Initializer = initializer
+                        Initializer = initializer,
+                        IsPropertyInitializer = autoInitializer != null
                     });
                 }
                 else
@@ -546,7 +549,8 @@ namespace Bridge.Translator
                     {
                         Name = key,
                         Entity = propertyDeclaration,
-                        Initializer = initializer
+                        Initializer = initializer,
+                        IsPropertyInitializer = autoInitializer != null
                     });
                 }
             }

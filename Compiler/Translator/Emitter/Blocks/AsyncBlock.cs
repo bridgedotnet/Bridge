@@ -1,6 +1,5 @@
 using Bridge.Contract;
 using Bridge.Contract.Constants;
-
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.CSharp.Resolver;
 using ICSharpCode.NRefactory.Semantics;
@@ -355,6 +354,13 @@ namespace Bridge.Translator
             this.WriteNewLine();
             this.WriteNewLine();
             this.Outdent();
+
+            if (this.Emitter.AsyncBlock.MethodDeclaration != null &&
+                !this.Emitter.AsyncBlock.MethodDeclaration.HasModifier(Modifiers.Async))
+            {
+                this.Write("return ");    
+            }
+
             this.Write(JS.Funcs.ASYNC_BODY + "();");
 
             if (this.IsTaskReturn)
@@ -410,7 +416,11 @@ namespace Bridge.Translator
             }
             else
             {
+                var level = this.Emitter.InitialLevel;
+                ((Emitter) this.Emitter).InitialLevel = 0;
+                this.Emitter.ResetLevel();
                 this.Body.AcceptVisitor(this.Emitter);
+                ((Emitter)this.Emitter).InitialLevel = level;
             }
 
             this.RestoreWriter(writer);
@@ -738,6 +748,13 @@ namespace Bridge.Translator
 
             return false;
         }
+
+        public static bool HasGoto(AstNode node)
+        {
+            var visitor = new GotoSearchVisitor();
+            node.AcceptVisitor(visitor);
+            return visitor.Found;
+        }
     }
 
     public class AsyncStep : IAsyncStep
@@ -806,6 +823,11 @@ namespace Bridge.Translator
         {
             get;
             set;
+        }
+
+        public object Label
+        {
+            get; set;
         }
     }
 
