@@ -311,7 +311,7 @@ namespace Bridge.Translator
                                 else if (!isNative)
                                 {
                                     var overloads = OverloadsCollection.Create(this.Emitter, resolvedMethod);
-                                    
+
                                     if (isObjectLiteral && !resolvedMethod.IsStatic && resolvedMethod.DeclaringType.Kind == TypeKind.Interface)
                                     {
                                         this.Write("Bridge.getType(");
@@ -519,6 +519,7 @@ namespace Bridge.Translator
             else
             {
                 var dynamicResolveResult = this.Emitter.Resolver.ResolveNode(invocationExpression, this.Emitter) as DynamicInvocationResolveResult;
+                IMethod method = null;
 
                 if (dynamicResolveResult != null)
                 {
@@ -526,17 +527,46 @@ namespace Bridge.Translator
 
                     if (group != null && group.Methods.Count() > 1)
                     {
-                        throw new EmitterException(invocationExpression, "Cannot compile this dynamic invocation because there are two or more method overloads with the same parameter count. To work around this limitation, assign the dynamic value to a non-dynamic variable before use or call a method with different parameter count");
+                        method = group.Methods.FirstOrDefault(m =>
+                        {
+                            if (dynamicResolveResult.Arguments.Count != m.Parameters.Count)
+                            {
+                                return false;
+                            }
+
+                            for (int i = 0; i < m.Parameters.Count; i++)
+                            {
+                                var argType = dynamicResolveResult.Arguments[i].Type;
+
+                                if (argType.Kind == TypeKind.Dynamic)
+                                {
+                                    argType = this.Emitter.Resolver.Compilation.FindType(TypeCode.Object);
+                                }
+
+                                if (!m.Parameters[i].Type.Equals(argType))
+                                {
+                                    return false;
+                                }
+                            }
+
+                            return true;
+                        });
+
+                        if (method == null)
+                        {
+                            throw new EmitterException(invocationExpression, Bridge.Translator.Constants.Messages.Exceptions.DYNAMIC_INVOCATION_TOO_MANY_OVERLOADS);
+                        }
                     }
                 }
-
-                var targetResolveResult = this.Emitter.Resolver.ResolveNode(invocationExpression.Target, this.Emitter);
-                var invocationResolveResult = targetResolveResult as MemberResolveResult;
-                IMethod method = null;
-
-                if (invocationResolveResult != null)
+                else
                 {
-                    method = invocationResolveResult.Member as IMethod;
+                    var targetResolveResult = this.Emitter.Resolver.ResolveNode(invocationExpression.Target, this.Emitter);
+                    var invocationResolveResult = targetResolveResult as MemberResolveResult;
+
+                    if (invocationResolveResult != null)
+                    {
+                        method = invocationResolveResult.Member as IMethod;
+                    }
                 }
 
                 if (this.IsEmptyPartialInvoking(method) || IsConditionallyRemoved(invocationExpression, method))

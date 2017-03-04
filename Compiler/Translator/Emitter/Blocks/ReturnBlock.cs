@@ -41,7 +41,7 @@ namespace Bridge.Translator
         {
             ReturnStatement returnStatement = this.ReturnStatement;
             Expression expression = this.Expression;
-            
+
             if (this.Emitter.IsAsync && (this.Emitter.AsyncBlock.MethodDeclaration == null || this.Emitter.AsyncBlock.MethodDeclaration.HasModifier(Modifiers.Async)))
             {
                 var finallyNode = this.GetParentFinallyBlock(returnStatement ?? (AstNode)expression, false);

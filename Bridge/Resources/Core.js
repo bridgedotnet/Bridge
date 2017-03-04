@@ -133,6 +133,10 @@
         },
 
         toPlain: function (o) {
+            if (o && Bridge.getType(o).$metadata) {
+                return Bridge.Json.serialize(o, {}, true);
+            }
+
             if (!o || Bridge.isPlainObject(o) || typeof o != "object") {
                 return o;
             }
@@ -1314,23 +1318,7 @@
                 result = Object;
             }
 
-            if (result === Boolean) {
-                return System.Boolean;
-            }
-
-            if (result === String) {
-                return System.String;
-            }
-
-            if (result === Object) {
-                return System.Object;
-            }
-
-            if (result === Date) {
-                return System.DateTime;
-            }
-
-            return result;
+            return Bridge.Reflection.convertType(result);
         },
 
         isLower: function (c) {

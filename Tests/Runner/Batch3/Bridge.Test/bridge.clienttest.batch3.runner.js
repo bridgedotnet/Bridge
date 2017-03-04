@@ -710,7 +710,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge069",
-                    file: "Batch3\\BridgeIssues\\0100\\N069.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0100/N069.cs"
                 } );
             }
             return this.context;
@@ -734,7 +734,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1000",
-                    file: "Batch3\\BridgeIssues\\1000\\N1000.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1000.cs"
                 } );
             }
             return this.context;
@@ -758,7 +758,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1001",
-                    file: "Batch3\\BridgeIssues\\1000\\N1001.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1001.cs"
                 } );
             }
             return this.context;
@@ -782,7 +782,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1003",
-                    file: "Batch3\\BridgeIssues\\1000\\N1003.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1003.cs"
                 } );
             }
             return this.context;
@@ -827,7 +827,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1012",
-                    file: "Batch3\\BridgeIssues\\1000\\N1012.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1012.cs"
                 } );
             }
             return this.context;
@@ -858,7 +858,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1020",
-                    file: "Batch3\\BridgeIssues\\1000\\N1020.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1020.cs"
                 } );
             }
             return this.context;
@@ -882,7 +882,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1024",
-                    file: "Batch3\\BridgeIssues\\1000\\N1024.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1024.cs"
                 } );
             }
             return this.context;
@@ -997,7 +997,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025",
-                    file: "Batch3\\BridgeIssues\\1000\\N1025.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1025.cs"
                 } );
             }
             return this.context;
@@ -1021,7 +1021,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1026",
-                    file: "Batch3\\BridgeIssues\\1000\\N1026.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1026.cs"
                 } );
             }
             return this.context;
@@ -1045,7 +1045,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1027",
-                    file: "Batch3\\BridgeIssues\\1000\\N1027.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1027.cs"
                 } );
             }
             return this.context;
@@ -1069,7 +1069,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1029",
-                    file: "Batch3\\BridgeIssues\\1000\\N1029.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1029.cs"
                 } );
             }
             return this.context;
@@ -1093,7 +1093,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1039",
-                    file: "Batch3\\BridgeIssues\\1000\\N1039.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1039.cs"
                 } );
             }
             return this.context;
@@ -1138,7 +1138,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal",
-                    file: "Batch3\\BridgeIssues\\1000\\N1041.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1041.cs"
                 } );
             }
             return this.context;
@@ -1183,7 +1183,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Integer",
-                    file: "Batch3\\BridgeIssues\\1000\\N1041.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1041.cs"
                 } );
             }
             return this.context;
@@ -1207,7 +1207,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1051",
-                    file: "Batch3\\BridgeIssues\\1000\\N1051.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1051.cs"
                 } );
             }
             return this.context;
@@ -1231,7 +1231,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1053",
-                    file: "Batch3\\BridgeIssues\\1000\\N1053.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1053.cs"
                 } );
             }
             return this.context;
@@ -1262,7 +1262,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1058",
-                    file: "Batch3\\BridgeIssues\\1000\\N1058.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1058.cs"
                 } );
             }
             return this.context;
@@ -1286,7 +1286,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1059",
-                    file: "Batch3\\BridgeIssues\\1000\\N1059.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1059.cs"
                 } );
             }
             return this.context;
@@ -1310,7 +1310,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1061",
-                    file: "Batch3\\BridgeIssues\\1000\\N1061.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1061.cs"
                 } );
             }
             return this.context;
@@ -1334,7 +1334,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1065",
-                    file: "Batch3\\BridgeIssues\\1000\\N1065.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1065.cs"
                 } );
             }
             return this.context;
@@ -1358,7 +1358,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1066",
-                    file: "Batch3\\BridgeIssues\\1000\\N1066.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1066.cs"
                 } );
             }
             return this.context;
@@ -1382,7 +1382,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1067",
-                    file: "Batch3\\BridgeIssues\\1000\\N1067.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1067.cs"
                 } );
             }
             return this.context;
@@ -1406,7 +1406,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1071",
-                    file: "Batch3\\BridgeIssues\\1000\\N1071.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1071.cs"
                 } );
             }
             return this.context;
@@ -1430,7 +1430,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1072",
-                    file: "Batch3\\BridgeIssues\\1100\\N1172.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1172.cs"
                 } );
             }
             return this.context;
@@ -1461,7 +1461,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1076",
-                    file: "Batch3\\BridgeIssues\\1000\\N1076.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1076.cs"
                 } );
             }
             return this.context;
@@ -1485,7 +1485,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1081",
-                    file: "Batch3\\BridgeIssues\\1000\\N1081.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1081.cs"
                 } );
             }
             return this.context;
@@ -1509,7 +1509,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1083",
-                    file: "Batch3\\BridgeIssues\\1000\\N1083.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1083.cs"
                 } );
             }
             return this.context;
@@ -1533,7 +1533,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1085",
-                    file: "Batch3\\BridgeIssues\\1000\\N1085.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1085.cs"
                 } );
             }
             return this.context;
@@ -1557,7 +1557,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1096",
-                    file: "Batch3\\BridgeIssues\\1000\\N1096.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1096.cs"
                 } );
             }
             return this.context;
@@ -1581,7 +1581,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1098",
-                    file: "Batch3\\BridgeIssues\\1000\\N1098.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1000/N1098.cs"
                 } );
             }
             return this.context;
@@ -1605,7 +1605,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1103",
-                    file: "Batch3\\BridgeIssues\\1100\\N1103.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1103.cs"
                 } );
             }
             return this.context;
@@ -1629,7 +1629,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1105",
-                    file: "Batch3\\BridgeIssues\\1100\\N1105.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1105.cs"
                 } );
             }
             return this.context;
@@ -1653,7 +1653,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1109",
-                    file: "Batch3\\BridgeIssues\\1100\\N1109.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1109.cs"
                 } );
             }
             return this.context;
@@ -1691,7 +1691,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1110",
-                    file: "Batch3\\BridgeIssues\\1100\\N1110.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1110.cs"
                 } );
             }
             return this.context;
@@ -1722,7 +1722,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1120",
-                    file: "Batch3\\BridgeIssues\\1100\\N1120.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1120.cs"
                 } );
             }
             return this.context;
@@ -1746,7 +1746,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1128",
-                    file: "Batch3\\BridgeIssues\\1100\\N1128.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1128.cs"
                 } );
             }
             return this.context;
@@ -1770,7 +1770,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1130",
-                    file: "Batch3\\BridgeIssues\\1100\\N1130.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1130.cs"
                 } );
             }
             return this.context;
@@ -1783,7 +1783,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testJsonArrayParse: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1134).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1134, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestJsonArrayParse()",
-                    line: "11"
+                    line: "10"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge1134.testJsonArrayParse();
             }
@@ -1794,7 +1794,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1134",
-                    file: "Batch3\\BridgeIssues\\1100\\N1134.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1134.cs"
                 } );
             }
             return this.context;
@@ -1818,7 +1818,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1140",
-                    file: "Batch3\\BridgeIssues\\1100\\N1140.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1140.cs"
                 } );
             }
             return this.context;
@@ -1842,7 +1842,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1141",
-                    file: "Batch3\\BridgeIssues\\1100\\N1141.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1141.cs"
                 } );
             }
             return this.context;
@@ -1866,7 +1866,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1144",
-                    file: "Batch3\\BridgeIssues\\1100\\N1144.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1144.cs"
                 } );
             }
             return this.context;
@@ -1890,7 +1890,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1146",
-                    file: "Batch3\\BridgeIssues\\1100\\N1146.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1146.cs"
                 } );
             }
             return this.context;
@@ -1914,7 +1914,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1149",
-                    file: "Batch3\\BridgeIssues\\1100\\N1149.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1149.cs"
                 } );
             }
             return this.context;
@@ -1938,7 +1938,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1160",
-                    file: "Batch3\\BridgeIssues\\1100\\N1160.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1160.cs"
                 } );
             }
             return this.context;
@@ -1969,7 +1969,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1170",
-                    file: "Batch3\\BridgeIssues\\1100\\N1170.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1170.cs"
                 } );
             }
             return this.context;
@@ -1993,7 +1993,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1171",
-                    file: "Batch3\\BridgeIssues\\1100\\N1171.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1171.cs"
                 } );
             }
             return this.context;
@@ -2017,7 +2017,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1175",
-                    file: "Batch3\\BridgeIssues\\1100\\N1175.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1175.cs"
                 } );
             }
             return this.context;
@@ -2041,7 +2041,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1176",
-                    file: "Batch3\\BridgeIssues\\1100\\N1176.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1176.cs"
                 } );
             }
             return this.context;
@@ -2065,7 +2065,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1177",
-                    file: "Batch3\\BridgeIssues\\1100\\N1177.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1177.cs"
                 } );
             }
             return this.context;
@@ -2089,7 +2089,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1180",
-                    file: "Batch3\\BridgeIssues\\1100\\N1180.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1180.cs"
                 } );
             }
             return this.context;
@@ -2113,7 +2113,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1184",
-                    file: "Batch3\\BridgeIssues\\1100\\N1184.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1184.cs"
                 } );
             }
             return this.context;
@@ -2137,7 +2137,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1186",
-                    file: "Batch3\\BridgeIssues\\1100\\N1186.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1186.cs"
                 } );
             }
             return this.context;
@@ -2161,7 +2161,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1189",
-                    file: "Batch3\\BridgeIssues\\1100\\N1189.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1189.cs"
                 } );
             }
             return this.context;
@@ -2185,7 +2185,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1193",
-                    file: "Batch3\\BridgeIssues\\1100\\N1193.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1193.cs"
                 } );
             }
             return this.context;
@@ -2209,7 +2209,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1197",
-                    file: "Batch3\\BridgeIssues\\1100\\N1197.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1197.cs"
                 } );
             }
             return this.context;
@@ -2233,7 +2233,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1199",
-                    file: "Batch3\\BridgeIssues\\1100\\N1199.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1199.cs"
                 } );
             }
             return this.context;
@@ -2320,7 +2320,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1202",
-                    file: "Batch3\\BridgeIssues\\1200\\N1202.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1200/N1202.cs"
                 } );
             }
             return this.context;
@@ -2344,7 +2344,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1203",
-                    file: "Batch3\\BridgeIssues\\1200\\N1203.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1200/N1203.cs"
                 } );
             }
             return this.context;
@@ -2368,7 +2368,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1206",
-                    file: "Batch3\\BridgeIssues\\1200\\N1206.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1200/N1206.cs"
                 } );
             }
             return this.context;
@@ -2392,7 +2392,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1217",
-                    file: "Batch3\\BridgeIssues\\1200\\N1217.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1200/N1217.cs"
                 } );
             }
             return this.context;
@@ -2416,7 +2416,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1219",
-                    file: "Batch3\\BridgeIssues\\1200\\N1219.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1200/N1219.cs"
                 } );
             }
             return this.context;
@@ -2440,7 +2440,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge122",
-                    file: "Batch3\\BridgeIssues\\0100\\N122.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0100/N122.cs"
                 } );
             }
             return this.context;
@@ -2464,7 +2464,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1220",
-                    file: "Batch3\\BridgeIssues\\1200\\N1220.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1200/N1220.cs"
                 } );
             }
             return this.context;
@@ -2502,7 +2502,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1226",
-                    file: "Batch3\\BridgeIssues\\1200\\N1226.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1200/N1226.cs"
                 } );
             }
             return this.context;
@@ -2526,7 +2526,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1231",
-                    file: "Batch3\\BridgeIssues\\1200\\N1231.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1200/N1231.cs"
                 } );
             }
             return this.context;
@@ -2557,7 +2557,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1232",
-                    file: "Batch3\\BridgeIssues\\1200\\N1232.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1200/N1232.cs"
                 } );
             }
             return this.context;
@@ -2581,7 +2581,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1241",
-                    file: "Batch3\\BridgeIssues\\1200\\N1241.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1200/N1241.cs"
                 } );
             }
             return this.context;
@@ -2605,7 +2605,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1249",
-                    file: "Batch3\\BridgeIssues\\1200\\N1249.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1200/N1249.cs"
                 } );
             }
             return this.context;
@@ -2629,7 +2629,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1253",
-                    file: "Batch3\\BridgeIssues\\1200\\N1253.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1200/N1253.cs"
                 } );
             }
             return this.context;
@@ -2667,7 +2667,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1256",
-                    file: "Batch3\\BridgeIssues\\1200\\N1256.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1200/N1256.cs"
                 } );
             }
             return this.context;
@@ -2705,7 +2705,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1260",
-                    file: "Batch3\\BridgeIssues\\1200\\N1260.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1200/N1260.cs"
                 } );
             }
             return this.context;
@@ -2729,7 +2729,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1264",
-                    file: "Batch3\\BridgeIssues\\1200\\N1264.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1200/N1264.cs"
                 } );
             }
             return this.context;
@@ -2753,7 +2753,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1266",
-                    file: "Batch3\\BridgeIssues\\1200\\N1266.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1200/N1266.cs"
                 } );
             }
             return this.context;
@@ -2777,7 +2777,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1290",
-                    file: "Batch3\\BridgeIssues\\2000\\N2077.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2077.cs"
                 } );
             }
             return this.context;
@@ -2801,7 +2801,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1292",
-                    file: "Batch3\\BridgeIssues\\2000\\N2077.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2077.cs"
                 } );
             }
             return this.context;
@@ -2839,7 +2839,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1296",
-                    file: "Batch3\\BridgeIssues\\1200\\N1296.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1200/N1296.cs"
                 } );
             }
             return this.context;
@@ -2863,7 +2863,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1298",
-                    file: "Batch3\\BridgeIssues\\1200\\N1298.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1200/N1298.cs"
                 } );
             }
             return this.context;
@@ -2887,7 +2887,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1301",
-                    file: "Batch3\\BridgeIssues\\2000\\N2077.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2077.cs"
                 } );
             }
             return this.context;
@@ -2928,7 +2928,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304",
-                    file: "Batch3\\BridgeIssues\\1300\\N1304.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1300/N1304.cs"
                 } );
             }
             return this.context;
@@ -2972,7 +2972,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1305",
-                    file: "Batch3\\BridgeIssues\\1300\\N1305.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1300/N1305.cs"
                 } );
             }
             return this.context;
@@ -2996,7 +2996,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1309",
-                    file: "Batch3\\BridgeIssues\\2000\\N2077.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2077.cs"
                 } );
             }
             return this.context;
@@ -3020,7 +3020,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1311",
-                    file: "Batch3\\BridgeIssues\\1300\\N1311.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1300/N1311.cs"
                 } );
             }
             return this.context;
@@ -3044,7 +3044,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312",
-                    file: "Batch3\\BridgeIssues\\2000\\N2077.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2077.cs"
                 } );
             }
             return this.context;
@@ -3075,7 +3075,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1313",
-                    file: "Batch3\\BridgeIssues\\1300\\N1313.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1300/N1313.cs"
                 } );
             }
             return this.context;
@@ -3120,7 +3120,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1316",
-                    file: "Batch3\\BridgeIssues\\1300\\N1316.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1300/N1316.cs"
                 } );
             }
             return this.context;
@@ -3144,7 +3144,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1317",
-                    file: "Batch3\\BridgeIssues\\2000\\N2077.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2077.cs"
                 } );
             }
             return this.context;
@@ -3175,7 +3175,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1328",
-                    file: "Batch3\\BridgeIssues\\1300\\N1328.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1300/N1328.cs"
                 } );
             }
             return this.context;
@@ -3199,7 +3199,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1339",
-                    file: "Batch3\\BridgeIssues\\1300\\N1339.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1300/N1339.cs"
                 } );
             }
             return this.context;
@@ -3321,7 +3321,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1340",
-                    file: "Batch3\\BridgeIssues\\1300\\N1340.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1300/N1340.cs"
                 } );
             }
             return this.context;
@@ -3401,7 +3401,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341",
-                    file: "Batch3\\BridgeIssues\\1300\\N1341.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1300/N1341.cs"
                 } );
             }
             return this.context;
@@ -3432,7 +3432,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1343",
-                    file: "Batch3\\BridgeIssues\\1300\\N1343.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1300/N1343.cs"
                 } );
             }
             return this.context;
@@ -3456,7 +3456,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1344",
-                    file: "Batch3\\BridgeIssues\\1300\\N1344.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1300/N1344.cs"
                 } );
             }
             return this.context;
@@ -3480,7 +3480,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1345",
-                    file: "Batch3\\BridgeIssues\\1300\\N1345.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1300/N1345.cs"
                 } );
             }
             return this.context;
@@ -3504,7 +3504,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1347",
-                    file: "Batch3\\BridgeIssues\\2000\\N2077.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2077.cs"
                 } );
             }
             return this.context;
@@ -3528,7 +3528,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1348",
-                    file: "Batch3\\BridgeIssues\\1300\\N1348.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1300/N1348.cs"
                 } );
             }
             return this.context;
@@ -3552,7 +3552,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1355",
-                    file: "Batch3\\BridgeIssues\\1300\\N1355.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1300/N1355.cs"
                 } );
             }
             return this.context;
@@ -3576,7 +3576,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1357",
-                    file: "Batch3\\BridgeIssues\\2000\\N2077.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2077.cs"
                 } );
             }
             return this.context;
@@ -3628,7 +3628,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1374",
-                    file: "Batch3\\BridgeIssues\\1300\\N1374.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1300/N1374.cs"
                 } );
             }
             return this.context;
@@ -3687,7 +3687,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1378",
-                    file: "Batch3\\BridgeIssues\\1300\\N1378.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1300/N1378.cs"
                 } );
             }
             return this.context;
@@ -3711,7 +3711,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1379",
-                    file: "Batch3\\BridgeIssues\\1300\\N1379.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1300/N1379.cs"
                 } );
             }
             return this.context;
@@ -3742,7 +3742,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1381",
-                    file: "Batch3\\BridgeIssues\\1300\\N1381.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1300/N1381.cs"
                 } );
             }
             return this.context;
@@ -3766,7 +3766,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1385",
-                    file: "Batch3\\BridgeIssues\\1300\\N1385.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1300/N1385.cs"
                 } );
             }
             return this.context;
@@ -3790,7 +3790,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1389",
-                    file: "Batch3\\BridgeIssues\\1300\\N1389.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1300/N1389.cs"
                 } );
             }
             return this.context;
@@ -3814,7 +3814,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1391",
-                    file: "Batch3\\BridgeIssues\\1300\\N1391.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1300/N1391.cs"
                 } );
             }
             return this.context;
@@ -3838,7 +3838,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1391Ready",
-                    file: "Batch3\\BridgeIssues\\1300\\N1391.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1300/N1391.cs"
                 } );
             }
             return this.context;
@@ -3862,7 +3862,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1402",
-                    file: "Batch3\\BridgeIssues\\1400\\N1402.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1400/N1402.cs"
                 } );
             }
             return this.context;
@@ -3900,7 +3900,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1410",
-                    file: "Batch3\\BridgeIssues\\1400\\N1410.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1400/N1410.cs"
                 } );
             }
             return this.context;
@@ -3938,7 +3938,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1411",
-                    file: "Batch3\\BridgeIssues\\1400\\N1411.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1400/N1411.cs"
                 } );
             }
             return this.context;
@@ -3962,7 +3962,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1428",
-                    file: "Batch3\\BridgeIssues\\1400\\N1428.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1400/N1428.cs"
                 } );
             }
             return this.context;
@@ -3986,7 +3986,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1429",
-                    file: "Batch3\\BridgeIssues\\1400\\N1429.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1400/N1429.cs"
                 } );
             }
             return this.context;
@@ -4010,7 +4010,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1430",
-                    file: "Batch3\\BridgeIssues\\1400\\N1430.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1400/N1430.cs"
                 } );
             }
             return this.context;
@@ -4023,14 +4023,14 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testJSONParse: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1438, 4, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestJSONParse()",
-                    line: "22"
+                    line: "21"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.testJSONParse();
             },
             testJSONParseAsArray: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1438, 7, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestJSONParseAsArray()",
-                    line: "36"
+                    line: "35"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.testJSONParseAsArray();
             }
@@ -4041,7 +4041,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438",
-                    file: "Batch3\\BridgeIssues\\1400\\N1438.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1400/N1438.cs"
                 } );
             }
             return this.context;
@@ -4079,7 +4079,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1448",
-                    file: "Batch3\\BridgeIssues\\1400\\N1448.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1400/N1448.cs"
                 } );
             }
             return this.context;
@@ -4108,7 +4108,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1458",
-                    file: "Batch3\\BridgeIssues\\1400\\N1458.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1400/N1458.cs"
                 } );
             }
             return this.context;
@@ -4138,7 +4138,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1459",
-                    file: "Batch3\\BridgeIssues\\1400\\N1459.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1400/N1459.cs"
                 } );
             }
             return this.context;
@@ -4162,7 +4162,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1467",
-                    file: "Batch3\\BridgeIssues\\1400\\N1467.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1400/N1467.cs"
                 } );
             }
             return this.context;
@@ -4193,7 +4193,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1472",
-                    file: "Batch3\\BridgeIssues\\1400\\N1472.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1400/N1472.cs"
                 } );
             }
             return this.context;
@@ -4217,7 +4217,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1476",
-                    file: "Batch3\\BridgeIssues\\1400\\N1476.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1400/N1476.cs"
                 } );
             }
             return this.context;
@@ -4241,7 +4241,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1480",
-                    file: "Batch3\\BridgeIssues\\1400\\N1480.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1400/N1480.cs"
                 } );
             }
             return this.context;
@@ -4265,7 +4265,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1485",
-                    file: "Batch3\\BridgeIssues\\1400\\N1485.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1400/N1485.cs"
                 } );
             }
             return this.context;
@@ -4310,7 +4310,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1486",
-                    file: "Batch3\\BridgeIssues\\1400\\N1486.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1400/N1486.cs"
                 } );
             }
             return this.context;
@@ -4341,7 +4341,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1489",
-                    file: "Batch3\\BridgeIssues\\1400\\N1489.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1400/N1489.cs"
                 } );
             }
             return this.context;
@@ -4365,7 +4365,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1490",
-                    file: "Batch3\\BridgeIssues\\1400\\N1490.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1400/N1490.cs"
                 } );
             }
             return this.context;
@@ -4389,7 +4389,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1492",
-                    file: "Batch3\\BridgeIssues\\1400\\N1492.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1400/N1492.cs"
                 } );
             }
             return this.context;
@@ -4413,7 +4413,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1493",
-                    file: "Batch3\\BridgeIssues\\1400\\N1493.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1400/N1493.cs"
                 } );
             }
             return this.context;
@@ -4437,7 +4437,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1499",
-                    file: "Batch3\\BridgeIssues\\1400\\N1499.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1400/N1499.cs"
                 } );
             }
             return this.context;
@@ -4461,7 +4461,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1501",
-                    file: "Batch3\\BridgeIssues\\1500\\N1501.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1500/N1501.cs"
                 } );
             }
             return this.context;
@@ -4485,7 +4485,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1509",
-                    file: "Batch3\\BridgeIssues\\1500\\N1509.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1500/N1509.cs"
                 } );
             }
             return this.context;
@@ -4509,7 +4509,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1510",
-                    file: "Batch3\\BridgeIssues\\1500\\N1510.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1500/N1510.cs"
                 } );
             }
             return this.context;
@@ -4533,7 +4533,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1511",
-                    file: "Batch3\\BridgeIssues\\1500\\N1511.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1500/N1511.cs"
                 } );
             }
             return this.context;
@@ -4557,7 +4557,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1512",
-                    file: "Batch3\\BridgeIssues\\1500\\N1512.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1500/N1512.cs"
                 } );
             }
             return this.context;
@@ -4581,7 +4581,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1514",
-                    file: "Batch3\\BridgeIssues\\2000\\N2077.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2077.cs"
                 } );
             }
             return this.context;
@@ -4612,7 +4612,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1517",
-                    file: "Batch3\\BridgeIssues\\1500\\N1517.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1500/N1517.cs"
                 } );
             }
             return this.context;
@@ -4636,7 +4636,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1518",
-                    file: "Batch3\\BridgeIssues\\1500\\N1518.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1500/N1518.cs"
                 } );
             }
             return this.context;
@@ -4660,7 +4660,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1519",
-                    file: "Batch3\\BridgeIssues\\1500\\N1519.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1500/N1519.cs"
                 } );
             }
             return this.context;
@@ -4698,7 +4698,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1520",
-                    file: "Batch3\\BridgeIssues\\1500\\N1520.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1500/N1520.cs"
                 } );
             }
             return this.context;
@@ -4722,7 +4722,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1521",
-                    file: "Batch3\\BridgeIssues\\1500\\N1521.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1500/N1521.cs"
                 } );
             }
             return this.context;
@@ -4746,7 +4746,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1522",
-                    file: "Batch3\\BridgeIssues\\1500\\N1522.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1500/N1522.cs"
                 } );
             }
             return this.context;
@@ -4770,7 +4770,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1523",
-                    file: "Batch3\\BridgeIssues\\1500\\N1523.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1500/N1523.cs"
                 } );
             }
             return this.context;
@@ -4794,7 +4794,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1524",
-                    file: "Batch3\\BridgeIssues\\1500\\N1524.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1500/N1524.cs"
                 } );
             }
             return this.context;
@@ -4825,7 +4825,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1526",
-                    file: "Batch3\\BridgeIssues\\1500\\N1526.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1500/N1526.cs"
                 } );
             }
             return this.context;
@@ -4849,7 +4849,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1527",
-                    file: "Batch3\\BridgeIssues\\1500\\N1527.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1500/N1527.cs"
                 } );
             }
             return this.context;
@@ -4873,7 +4873,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1530",
-                    file: "Batch3\\BridgeIssues\\1500\\N1530.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1500/N1530.cs"
                 } );
             }
             return this.context;
@@ -4897,7 +4897,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1533",
-                    file: "Batch3\\BridgeIssues\\1500\\N1533.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1500/N1533.cs"
                 } );
             }
             return this.context;
@@ -4921,7 +4921,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1535",
-                    file: "Batch3\\BridgeIssues\\1500\\N1535.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1500/N1535.cs"
                 } );
             }
             return this.context;
@@ -4952,7 +4952,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1536",
-                    file: "Batch3\\BridgeIssues\\1500\\N1536.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1500/N1536.cs"
                 } );
             }
             return this.context;
@@ -4976,7 +4976,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1538",
-                    file: "Batch3\\BridgeIssues\\1500\\N1538.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1500/N1538.cs"
                 } );
             }
             return this.context;
@@ -5014,7 +5014,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1566",
-                    file: "Batch3\\BridgeIssues\\1500\\N1566.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1500/N1566.cs"
                 } );
             }
             return this.context;
@@ -5038,7 +5038,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1579",
-                    file: "Batch3\\BridgeIssues\\1500\\N1579.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1500/N1579.cs"
                 } );
             }
             return this.context;
@@ -5062,7 +5062,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1599",
-                    file: "Batch3\\BridgeIssues\\1500\\N1599.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1500/N1599.cs"
                 } );
             }
             return this.context;
@@ -5086,7 +5086,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1600",
-                    file: "Batch3\\BridgeIssues\\1600\\N1600.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1600/N1600.cs"
                 } );
             }
             return this.context;
@@ -5110,7 +5110,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1641",
-                    file: "Batch3\\BridgeIssues\\1600\\N1641.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1600/N1641.cs"
                 } );
             }
             return this.context;
@@ -5134,7 +5134,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1653",
-                    file: "Batch3\\BridgeIssues\\1600\\N1653.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1600/N1653.cs"
                 } );
             }
             return this.context;
@@ -5158,7 +5158,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1684",
-                    file: "Batch3\\BridgeIssues\\1600\\N1684.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1600/N1684.cs"
                 } );
             }
             return this.context;
@@ -5187,7 +5187,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1698",
-                    file: "Batch3\\BridgeIssues\\1600\\N1698.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1600/N1698.cs"
                 } );
             }
             return this.context;
@@ -5224,7 +5224,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1700",
-                    file: "Batch3\\BridgeIssues\\1700\\N1700.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1700/N1700.cs"
                 } );
             }
             return this.context;
@@ -5248,7 +5248,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1702",
-                    file: "Batch3\\BridgeIssues\\1700\\N1702.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1700/N1702.cs"
                 } );
             }
             return this.context;
@@ -5272,7 +5272,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1704",
-                    file: "Batch3\\BridgeIssues\\1700\\N1704.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1700/N1704.cs"
                 } );
             }
             return this.context;
@@ -5296,7 +5296,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1709",
-                    file: "Batch3\\BridgeIssues\\1700\\N1709.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1700/N1709.cs"
                 } );
             }
             return this.context;
@@ -5320,7 +5320,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1711",
-                    file: "Batch3\\BridgeIssues\\1700\\N1711.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1700/N1711.cs"
                 } );
             }
             return this.context;
@@ -5358,7 +5358,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712",
-                    file: "Batch3\\BridgeIssues\\1700\\N1712.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1700/N1712.cs"
                 } );
             }
             return this.context;
@@ -5382,7 +5382,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713",
-                    file: "Batch3\\BridgeIssues\\1700\\N1713.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1700/N1713.cs"
                 } );
             }
             return this.context;
@@ -5413,7 +5413,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1713MSDN",
-                    file: "Batch3\\BridgeIssues\\1700\\N1713.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1700/N1713.cs"
                 } );
             }
             return this.context;
@@ -5437,7 +5437,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1715",
-                    file: "Batch3\\BridgeIssues\\1700\\N1715.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1700/N1715.cs"
                 } );
             }
             return this.context;
@@ -5461,7 +5461,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1721",
-                    file: "Batch3\\BridgeIssues\\1700\\N1721.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1700/N1721.cs"
                 } );
             }
             return this.context;
@@ -5492,7 +5492,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1722",
-                    file: "Batch3\\BridgeIssues\\1700\\N1722.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1700/N1722.cs"
                 } );
             }
             return this.context;
@@ -5530,7 +5530,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1735",
-                    file: "Batch3\\BridgeIssues\\1700\\N1735.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1700/N1735.cs"
                 } );
             }
             return this.context;
@@ -5554,7 +5554,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1737",
-                    file: "Batch3\\BridgeIssues\\1700\\N1737.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1700/N1737.cs"
                 } );
             }
             return this.context;
@@ -5578,7 +5578,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1741",
-                    file: "Batch3\\BridgeIssues\\1700\\N1741.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1700/N1741.cs"
                 } );
             }
             return this.context;
@@ -5602,7 +5602,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1744",
-                    file: "Batch3\\BridgeIssues\\1700\\N1744.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1700/N1744.cs"
                 } );
             }
             return this.context;
@@ -5626,7 +5626,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1754",
-                    file: "Batch3\\BridgeIssues\\1700\\N1754.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1700/N1754.cs"
                 } );
             }
             return this.context;
@@ -5650,7 +5650,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1767",
-                    file: "Batch3\\BridgeIssues\\1700\\N1767.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1700/N1767.cs"
                 } );
             }
             return this.context;
@@ -5695,7 +5695,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768",
-                    file: "Batch3\\BridgeIssues\\1700\\N1768.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1700/N1768.cs"
                 } );
             }
             return this.context;
@@ -5719,7 +5719,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1775",
-                    file: "Batch3\\BridgeIssues\\1700\\N1775.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1700/N1775.cs"
                 } );
             }
             return this.context;
@@ -5743,7 +5743,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1776",
-                    file: "Batch3\\BridgeIssues\\1700\\N1776.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1700/N1776.cs"
                 } );
             }
             return this.context;
@@ -5767,7 +5767,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1787",
-                    file: "Batch3\\BridgeIssues\\1700\\N1787.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1700/N1787.cs"
                 } );
             }
             return this.context;
@@ -5791,7 +5791,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1802",
-                    file: "Batch3\\BridgeIssues\\1800\\N1802.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1802.cs"
                 } );
             }
             return this.context;
@@ -5815,7 +5815,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1803",
-                    file: "Batch3\\BridgeIssues\\1800\\N1803.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1803.cs"
                 } );
             }
             return this.context;
@@ -5839,7 +5839,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1804",
-                    file: "Batch3\\BridgeIssues\\1800\\N1804.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1804.cs"
                 } );
             }
             return this.context;
@@ -5863,7 +5863,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1810",
-                    file: "Batch3\\BridgeIssues\\1800\\N1810.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1810.cs"
                 } );
             }
             return this.context;
@@ -5887,7 +5887,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1812",
-                    file: "Batch3\\BridgeIssues\\1800\\N1812.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1812.cs"
                 } );
             }
             return this.context;
@@ -5911,7 +5911,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1813",
-                    file: "Batch3\\BridgeIssues\\1800\\N1813.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1813.cs"
                 } );
             }
             return this.context;
@@ -5935,7 +5935,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1814",
-                    file: "Batch3\\BridgeIssues\\1800\\N1814.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1814.cs"
                 } );
             }
             return this.context;
@@ -5959,7 +5959,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1819",
-                    file: "Batch3\\BridgeIssues\\1800\\N1819.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1819.cs"
                 } );
             }
             return this.context;
@@ -5990,7 +5990,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821",
-                    file: "Batch3\\BridgeIssues\\1800\\N1821.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1821.cs"
                 } );
             }
             return this.context;
@@ -6014,7 +6014,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1832",
-                    file: "Batch3\\BridgeIssues\\1800\\N1832.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1832.cs"
                 } );
             }
             return this.context;
@@ -6038,7 +6038,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1833",
-                    file: "Batch3\\BridgeIssues\\1800\\N1833.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1833.cs"
                 } );
             }
             return this.context;
@@ -6062,7 +6062,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1834",
-                    file: "Batch3\\BridgeIssues\\1800\\N1834.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1834.cs"
                 } );
             }
             return this.context;
@@ -6086,7 +6086,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1835",
-                    file: "Batch3\\BridgeIssues\\1800\\N1835.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1835.cs"
                 } );
             }
             return this.context;
@@ -6110,7 +6110,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1842",
-                    file: "Batch3\\BridgeIssues\\1800\\N1842.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1842.cs"
                 } );
             }
             return this.context;
@@ -6134,7 +6134,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1845",
-                    file: "Batch3\\BridgeIssues\\1800\\N1845.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1845.cs"
                 } );
             }
             return this.context;
@@ -6158,7 +6158,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1846",
-                    file: "Batch3\\BridgeIssues\\1800\\N1846.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1846.cs"
                 } );
             }
             return this.context;
@@ -6182,7 +6182,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1847",
-                    file: "Batch3\\BridgeIssues\\1800\\N1847.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1847.cs"
                 } );
             }
             return this.context;
@@ -6206,7 +6206,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1848",
-                    file: "Batch3\\BridgeIssues\\1800\\N1848.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1848.cs"
                 } );
             }
             return this.context;
@@ -6230,7 +6230,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1850",
-                    file: "Batch3\\BridgeIssues\\1800\\N1850.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1850.cs"
                 } );
             }
             return this.context;
@@ -6254,7 +6254,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852",
-                    file: "Batch3\\BridgeIssues\\1800\\N1852.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1852.cs"
                 } );
             }
             return this.context;
@@ -6278,7 +6278,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1853",
-                    file: "Batch3\\BridgeIssues\\1800\\N1853.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1853.cs"
                 } );
             }
             return this.context;
@@ -6302,7 +6302,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1854",
-                    file: "Batch3\\BridgeIssues\\1800\\N1854.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1854.cs"
                 } );
             }
             return this.context;
@@ -6326,7 +6326,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856",
-                    file: "Batch3\\BridgeIssues\\1800\\N1856.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1856.cs"
                 } );
             }
             return this.context;
@@ -6350,7 +6350,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1863",
-                    file: "Batch3\\BridgeIssues\\1800\\N1863.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1863.cs"
                 } );
             }
             return this.context;
@@ -6374,7 +6374,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865",
-                    file: "Batch3\\BridgeIssues\\1800\\N1865.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1865.cs"
                 } );
             }
             return this.context;
@@ -6398,7 +6398,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1869",
-                    file: "Batch3\\BridgeIssues\\1800\\N1869.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1869.cs"
                 } );
             }
             return this.context;
@@ -6422,7 +6422,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1871",
-                    file: "Batch3\\BridgeIssues\\1800\\N1871.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1871.cs"
                 } );
             }
             return this.context;
@@ -6446,7 +6446,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1872",
-                    file: "Batch3\\BridgeIssues\\1800\\N1872.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1872.cs"
                 } );
             }
             return this.context;
@@ -6470,7 +6470,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1875",
-                    file: "Batch3\\BridgeIssues\\1800\\N1875.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1875.cs"
                 } );
             }
             return this.context;
@@ -6494,7 +6494,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1878",
-                    file: "Batch3\\BridgeIssues\\1800\\N1878.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1878.cs"
                 } );
             }
             return this.context;
@@ -6518,7 +6518,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1880",
-                    file: "Batch3\\BridgeIssues\\1800\\N1880.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1880.cs"
                 } );
             }
             return this.context;
@@ -6549,7 +6549,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1882",
-                    file: "Batch3\\BridgeIssues\\1800\\N1882.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1882.cs"
                 } );
             }
             return this.context;
@@ -6573,7 +6573,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1884",
-                    file: "Batch3\\BridgeIssues\\1800\\N1884.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1884.cs"
                 } );
             }
             return this.context;
@@ -6597,7 +6597,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1886",
-                    file: "Batch3\\BridgeIssues\\1800\\N1886.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1886.cs"
                 } );
             }
             return this.context;
@@ -6621,7 +6621,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1892",
-                    file: "Batch3\\BridgeIssues\\1800\\N1892.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1892.cs"
                 } );
             }
             return this.context;
@@ -6645,7 +6645,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1896",
-                    file: "Batch3\\BridgeIssues\\1800\\N1896.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1896.cs"
                 } );
             }
             return this.context;
@@ -6669,7 +6669,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1897",
-                    file: "Batch3\\BridgeIssues\\1800\\N1897.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1897.cs"
                 } );
             }
             return this.context;
@@ -6693,7 +6693,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1899",
-                    file: "Batch3\\BridgeIssues\\1800\\N1899.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1800/N1899.cs"
                 } );
             }
             return this.context;
@@ -6717,7 +6717,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1900",
-                    file: "Batch3\\BridgeIssues\\1900\\N1900.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1900/N1900.cs"
                 } );
             }
             return this.context;
@@ -6741,7 +6741,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1904",
-                    file: "Batch3\\BridgeIssues\\1900\\N1904.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1900/N1904.cs"
                 } );
             }
             return this.context;
@@ -6765,7 +6765,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1906",
-                    file: "Batch3\\BridgeIssues\\1900\\N1906.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1900/N1906.cs"
                 } );
             }
             return this.context;
@@ -6789,7 +6789,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1909",
-                    file: "Batch3\\BridgeIssues\\1900\\N1909.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1900/N1909.cs"
                 } );
             }
             return this.context;
@@ -6813,7 +6813,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1910",
-                    file: "Batch3\\BridgeIssues\\1900\\N1910.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1900/N1910.cs"
                 } );
             }
             return this.context;
@@ -6844,7 +6844,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1911",
-                    file: "Batch3\\BridgeIssues\\1900\\N1911.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1900/N1911.cs"
                 } );
             }
             return this.context;
@@ -6868,7 +6868,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1912",
-                    file: "Batch3\\BridgeIssues\\1900\\N1912.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1900/N1912.cs"
                 } );
             }
             return this.context;
@@ -6892,7 +6892,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1913",
-                    file: "Batch3\\BridgeIssues\\1900\\N1913.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1900/N1913.cs"
                 } );
             }
             return this.context;
@@ -6916,7 +6916,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1914",
-                    file: "Batch3\\BridgeIssues\\1900\\N1914.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1900/N1914.cs"
                 } );
             }
             return this.context;
@@ -6940,7 +6940,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1915",
-                    file: "Batch3\\BridgeIssues\\1900\\N1915.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1900/N1915.cs"
                 } );
             }
             return this.context;
@@ -6964,7 +6964,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1920",
-                    file: "Batch3\\BridgeIssues\\1900\\N1920.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1900/N1920.cs"
                 } );
             }
             return this.context;
@@ -6988,7 +6988,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1933",
-                    file: "Batch3\\BridgeIssues\\1900\\N1933.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1900/N1933.cs"
                 } );
             }
             return this.context;
@@ -7012,7 +7012,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1934",
-                    file: "Batch3\\BridgeIssues\\1900\\N1934.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1900/N1934.cs"
                 } );
             }
             return this.context;
@@ -7036,7 +7036,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1938",
-                    file: "Batch3\\BridgeIssues\\1900\\N1938.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1900/N1938.cs"
                 } );
             }
             return this.context;
@@ -7060,7 +7060,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948",
-                    file: "Batch3\\BridgeIssues\\1900\\N1948.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1900/N1948.cs"
                 } );
             }
             return this.context;
@@ -7084,7 +7084,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1951",
-                    file: "Batch3\\BridgeIssues\\1900\\N1951.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1900/N1951.cs"
                 } );
             }
             return this.context;
@@ -7108,7 +7108,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1955",
-                    file: "Batch3\\BridgeIssues\\1900\\N1955.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1900/N1955.cs"
                 } );
             }
             return this.context;
@@ -7132,7 +7132,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1964",
-                    file: "Batch3\\BridgeIssues\\1900\\N1964.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1900/N1964.cs"
                 } );
             }
             return this.context;
@@ -7156,7 +7156,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1965",
-                    file: "Batch3\\BridgeIssues\\1900\\N1965.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1900/N1965.cs"
                 } );
             }
             return this.context;
@@ -7180,7 +7180,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1966",
-                    file: "Batch3\\BridgeIssues\\1900\\N1966.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1900/N1966.cs"
                 } );
             }
             return this.context;
@@ -7204,7 +7204,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1968",
-                    file: "Batch3\\BridgeIssues\\1900\\N1968.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1900/N1968.cs"
                 } );
             }
             return this.context;
@@ -7228,7 +7228,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1969",
-                    file: "Batch3\\BridgeIssues\\1900\\N1969.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1900/N1969.cs"
                 } );
             }
             return this.context;
@@ -7252,7 +7252,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1970",
-                    file: "Batch3\\BridgeIssues\\1900\\N1970.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1900/N1970.cs"
                 } );
             }
             return this.context;
@@ -7276,7 +7276,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1996",
-                    file: "Batch3\\BridgeIssues\\1900\\N1996.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1900/N1996.cs"
                 } );
             }
             return this.context;
@@ -7300,7 +7300,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2003",
-                    file: "Batch3\\BridgeIssues\\2000\\N2003.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2003.cs"
                 } );
             }
             return this.context;
@@ -7324,7 +7324,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011",
-                    file: "Batch3\\BridgeIssues\\2000\\N2011.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2011.cs"
                 } );
             }
             return this.context;
@@ -7348,7 +7348,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2013",
-                    file: "Batch3\\BridgeIssues\\2000\\N2013.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2013.cs"
                 } );
             }
             return this.context;
@@ -7372,7 +7372,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2019",
-                    file: "Batch3\\BridgeIssues\\2000\\N2019.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2019.cs"
                 } );
             }
             return this.context;
@@ -7396,7 +7396,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2024",
-                    file: "Batch3\\BridgeIssues\\2000\\N2024.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2024.cs"
                 } );
             }
             return this.context;
@@ -7420,7 +7420,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027",
-                    file: "Batch3\\BridgeIssues\\2000\\N2027.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2027.cs"
                 } );
             }
             return this.context;
@@ -7444,7 +7444,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2033",
-                    file: "Batch3\\BridgeIssues\\2000\\N2033.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2033.cs"
                 } );
             }
             return this.context;
@@ -7468,7 +7468,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2038",
-                    file: "Batch3\\BridgeIssues\\2000\\N2038.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2038.cs"
                 } );
             }
             return this.context;
@@ -7492,7 +7492,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2039",
-                    file: "Batch3\\BridgeIssues\\2000\\N2039.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2039.cs"
                 } );
             }
             return this.context;
@@ -7516,7 +7516,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2042",
-                    file: "Batch3\\BridgeIssues\\2000\\N2042.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2042.cs"
                 } );
             }
             return this.context;
@@ -7540,7 +7540,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2045",
-                    file: "Batch3\\BridgeIssues\\2000\\N2045.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2045.cs"
                 } );
             }
             return this.context;
@@ -7564,7 +7564,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2046",
-                    file: "Batch3\\BridgeIssues\\2000\\N2046.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2046.cs"
                 } );
             }
             return this.context;
@@ -7588,7 +7588,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2048",
-                    file: "Batch3\\BridgeIssues\\2000\\N2048.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2048.cs"
                 } );
             }
             return this.context;
@@ -7612,7 +7612,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2049",
-                    file: "Batch3\\BridgeIssues\\2000\\N2049.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2049.cs"
                 } );
             }
             return this.context;
@@ -7643,7 +7643,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2050",
-                    file: "Batch3\\BridgeIssues\\2000\\N2050.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2050.cs"
                 } );
             }
             return this.context;
@@ -7667,7 +7667,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2051",
-                    file: "Batch3\\BridgeIssues\\2000\\N2051.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2051.cs"
                 } );
             }
             return this.context;
@@ -7698,7 +7698,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2052",
-                    file: "Batch3\\BridgeIssues\\2000\\N2052.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2052.cs"
                 } );
             }
             return this.context;
@@ -7729,7 +7729,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2056",
-                    file: "Batch3\\BridgeIssues\\2000\\N2056.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2056.cs"
                 } );
             }
             return this.context;
@@ -7753,7 +7753,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge2065",
-                    file: "Batch3\\BridgeIssues\\2000\\N2077.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2077.cs"
                 } );
             }
             return this.context;
@@ -7777,7 +7777,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2067",
-                    file: "Batch3\\BridgeIssues\\2000\\N2067.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2067.cs"
                 } );
             }
             return this.context;
@@ -7801,7 +7801,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2068",
-                    file: "Batch3\\BridgeIssues\\2000\\N2068.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2068.cs"
                 } );
             }
             return this.context;
@@ -7825,7 +7825,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073",
-                    file: "Batch3\\BridgeIssues\\2000\\N2073.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2073.cs"
                 } );
             }
             return this.context;
@@ -7849,7 +7849,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2076",
-                    file: "Batch3\\BridgeIssues\\2000\\N2076.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2076.cs"
                 } );
             }
             return this.context;
@@ -7873,7 +7873,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2079",
-                    file: "Batch3\\BridgeIssues\\2000\\N2079.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2079.cs"
                 } );
             }
             return this.context;
@@ -7904,7 +7904,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080",
-                    file: "Batch3\\BridgeIssues\\2000\\N2080.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2080.cs"
                 } );
             }
             return this.context;
@@ -7928,7 +7928,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2081",
-                    file: "Batch3\\BridgeIssues\\2000\\N2081.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2081.cs"
                 } );
             }
             return this.context;
@@ -7952,7 +7952,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088",
-                    file: "Batch3\\BridgeIssues\\2000\\N2088.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2088.cs"
                 } );
             }
             return this.context;
@@ -7976,7 +7976,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2092",
-                    file: "Batch3\\BridgeIssues\\2000\\N2092.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2092.cs"
                 } );
             }
             return this.context;
@@ -8000,7 +8000,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2094",
-                    file: "Batch3\\BridgeIssues\\2000\\N2094.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2000/N2094.cs"
                 } );
             }
             return this.context;
@@ -8024,7 +8024,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2106",
-                    file: "Batch3\\BridgeIssues\\2100\\N2106.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2100/N2106.cs"
                 } );
             }
             return this.context;
@@ -8055,7 +8055,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2114",
-                    file: "Batch3\\BridgeIssues\\2100\\N2114.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2100/N2114.cs"
                 } );
             }
             return this.context;
@@ -8079,7 +8079,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2121",
-                    file: "Batch3\\BridgeIssues\\2100\\N2121.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2100/N2121.cs"
                 } );
             }
             return this.context;
@@ -8103,7 +8103,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2127",
-                    file: "Batch3\\BridgeIssues\\2100\\N2127.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2100/N2127.cs"
                 } );
             }
             return this.context;
@@ -8127,7 +8127,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2135",
-                    file: "Batch3\\BridgeIssues\\2100\\N2135.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2100/N2135.cs"
                 } );
             }
             return this.context;
@@ -8140,7 +8140,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testPropertiesWithNonPrimitiveInitializers: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2137).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2137, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestPropertiesWithNonPrimitiveInitializers()",
-                    line: "24"
+                    line: "21"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2137.testPropertiesWithNonPrimitiveInitializers();
             }
@@ -8151,7 +8151,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2137",
-                    file: "Batch3\\BridgeIssues\\2100\\N2137.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2100/N2137.cs"
                 } );
             }
             return this.context;
@@ -8175,7 +8175,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138",
-                    file: "Batch3\\BridgeIssues\\2100\\N2138.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2100/N2138.cs"
                 } );
             }
             return this.context;
@@ -8199,7 +8199,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2141",
-                    file: "Batch3\\BridgeIssues\\2100\\N2141.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2100/N2141.cs"
                 } );
             }
             return this.context;
@@ -8223,7 +8223,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143",
-                    file: "Batch3\\BridgeIssues\\2100\\N2143.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2100/N2143.cs"
                 } );
             }
             return this.context;
@@ -8247,7 +8247,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2146",
-                    file: "Batch3\\BridgeIssues\\2100\\N2146.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2100/N2146.cs"
                 } );
             }
             return this.context;
@@ -8271,7 +8271,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2147",
-                    file: "Batch3\\BridgeIssues\\2100\\N2147.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2100/N2147.cs"
                 } );
             }
             return this.context;
@@ -8295,7 +8295,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2156",
-                    file: "Batch3\\BridgeIssues\\2100\\N2156.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2100/N2156.cs"
                 } );
             }
             return this.context;
@@ -8319,7 +8319,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2157",
-                    file: "Batch3\\BridgeIssues\\2100\\N2157.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2100/N2157.cs"
                 } );
             }
             return this.context;
@@ -8343,7 +8343,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2159",
-                    file: "Batch3\\BridgeIssues\\2100\\N2160.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2100/N2160.cs"
                 } );
             }
             return this.context;
@@ -8367,7 +8367,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2160",
-                    file: "Batch3\\BridgeIssues\\2100\\N2159.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2100/N2159.cs"
                 } );
             }
             return this.context;
@@ -8391,7 +8391,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2163",
-                    file: "Batch3\\BridgeIssues\\2100\\N2163.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2100/N2163.cs"
                 } );
             }
             return this.context;
@@ -8415,7 +8415,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2167",
-                    file: "Batch3\\BridgeIssues\\2100\\N2167.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2100/N2167.cs"
                 } );
             }
             return this.context;
@@ -8439,7 +8439,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2174",
-                    file: "Batch3\\BridgeIssues\\2100\\N2174.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2100/N2174.cs"
                 } );
             }
             return this.context;
@@ -8463,7 +8463,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2176",
-                    file: "Batch3\\BridgeIssues\\2100\\N2176.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2100/N2176.cs"
                 } );
             }
             return this.context;
@@ -8487,7 +8487,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2181",
-                    file: "Batch3\\BridgeIssues\\2100\\N2181.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2100/N2181.cs"
                 } );
             }
             return this.context;
@@ -8516,7 +8516,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2186",
-                    file: "Batch3\\BridgeIssues\\2100\\N2186.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2100/N2186.cs"
                 } );
             }
             return this.context;
@@ -8546,7 +8546,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2189",
-                    file: "Batch3\\BridgeIssues\\2100\\N2189.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2100/N2189.cs"
                 } );
             }
             return this.context;
@@ -8570,7 +8570,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2190",
-                    file: "Batch3\\BridgeIssues\\2100\\N2190.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2100/N2190.cs"
                 } );
             }
             return this.context;
@@ -8594,7 +8594,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2192",
-                    file: "Batch3\\BridgeIssues\\2100\\N2192.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2100/N2192.cs"
                 } );
             }
             return this.context;
@@ -8618,7 +8618,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2195",
-                    file: "Batch3\\BridgeIssues\\2100\\N2195.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2100/N2195.cs"
                 } );
             }
             return this.context;
@@ -8642,7 +8642,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2199",
-                    file: "Batch3\\BridgeIssues\\2100\\N2199.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2100/N2199.cs"
                 } );
             }
             return this.context;
@@ -8666,7 +8666,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2200",
-                    file: "Batch3\\BridgeIssues\\2200\\N2200.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2200/N2200.cs"
                 } );
             }
             return this.context;
@@ -8690,7 +8690,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2203",
-                    file: "Batch3\\BridgeIssues\\2200\\N2203.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2200/N2203.cs"
                 } );
             }
             return this.context;
@@ -8714,7 +8714,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2204",
-                    file: "Batch3\\BridgeIssues\\2200\\N2204.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2200/N2204.cs"
                 } );
             }
             return this.context;
@@ -8738,7 +8738,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207",
-                    file: "Batch3\\BridgeIssues\\2200\\N2207.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2200/N2207.cs"
                 } );
             }
             return this.context;
@@ -8762,7 +8762,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2210",
-                    file: "Batch3\\BridgeIssues\\2200\\N2210.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2200/N2210.cs"
                 } );
             }
             return this.context;
@@ -8786,7 +8786,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2211",
-                    file: "Batch3\\BridgeIssues\\2200\\N2211.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2200/N2211.cs"
                 } );
             }
             return this.context;
@@ -8810,7 +8810,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2212",
-                    file: "Batch3\\BridgeIssues\\2200\\N2212.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2200/N2212.cs"
                 } );
             }
             return this.context;
@@ -8834,7 +8834,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2213",
-                    file: "Batch3\\BridgeIssues\\2200\\N2213.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2200/N2213.cs"
                 } );
             }
             return this.context;
@@ -8858,7 +8858,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2214",
-                    file: "Batch3\\BridgeIssues\\2200\\N2214.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2200/N2214.cs"
                 } );
             }
             return this.context;
@@ -8882,7 +8882,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2216",
-                    file: "Batch3\\BridgeIssues\\2200\\N2216.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2200/N2216.cs"
                 } );
             }
             return this.context;
@@ -8906,7 +8906,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2220",
-                    file: "Batch3\\BridgeIssues\\2200\\N2220.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2200/N2220.cs"
                 } );
             }
             return this.context;
@@ -8930,7 +8930,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2221",
-                    file: "Batch3\\BridgeIssues\\2200\\N2221.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2200/N2221.cs"
                 } );
             }
             return this.context;
@@ -8954,7 +8954,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2222",
-                    file: "Batch3\\BridgeIssues\\2200\\N2222.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2200/N2222.cs"
                 } );
             }
             return this.context;
@@ -8978,7 +8978,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2225",
-                    file: "Batch3\\BridgeIssues\\2200\\N2225.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2200/N2225.cs"
                 } );
             }
             return this.context;
@@ -9002,7 +9002,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2243",
-                    file: "Batch3\\BridgeIssues\\2200\\N2243.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2200/N2243.cs"
                 } );
             }
             return this.context;
@@ -9026,7 +9026,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2246",
-                    file: "Batch3\\BridgeIssues\\2200\\N2246.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2200/N2246.cs"
                 } );
             }
             return this.context;
@@ -9039,7 +9039,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testPropertyInitializerWithDirective: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2249).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2249, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestPropertyInitializerWithDirective()",
-                    line: "23"
+                    line: "22"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2249.testPropertyInitializerWithDirective();
             }
@@ -9050,7 +9050,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2249",
-                    file: "Batch3\\BridgeIssues\\2200\\N2249.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2200/N2249.cs"
                 } );
             }
             return this.context;
@@ -9074,7 +9074,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2251",
-                    file: "Batch3\\BridgeIssues\\2200\\N2251.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2200/N2251.cs"
                 } );
             }
             return this.context;
@@ -9098,7 +9098,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2278",
-                    file: "Batch3\\BridgeIssues\\2200\\N2278.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2200/N2278.cs"
                 } );
             }
             return this.context;
@@ -9111,7 +9111,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testPropertyWithInitializerAndNestedClass: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2279).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2279, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestPropertyWithInitializerAndNestedClass()",
-                    line: "25"
+                    line: "23"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2279.testPropertyWithInitializerAndNestedClass();
             }
@@ -9122,7 +9122,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2279",
-                    file: "Batch3\\BridgeIssues\\2200\\N2279.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2200/N2279.cs"
                 } );
             }
             return this.context;
@@ -9146,7 +9146,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2280",
-                    file: "Batch3\\BridgeIssues\\2200\\N2280.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2200/N2280.cs"
                 } );
             }
             return this.context;
@@ -9170,7 +9170,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2281",
-                    file: "Batch3\\BridgeIssues\\2200\\N2281.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2200/N2281.cs"
                 } );
             }
             return this.context;
@@ -9194,7 +9194,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2284",
-                    file: "Batch3\\BridgeIssues\\2200\\N2284.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2200/N2284.cs"
                 } );
             }
             return this.context;
@@ -9218,7 +9218,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2293",
-                    file: "Batch3\\BridgeIssues\\2200\\N2293.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2200/N2293.cs"
                 } );
             }
             return this.context;
@@ -9242,7 +9242,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298",
-                    file: "Batch3\\BridgeIssues\\2200\\N2298.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2200/N2298.cs"
                 } );
             }
             return this.context;
@@ -9255,7 +9255,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testBridgeFields: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2310, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestBridgeFields()",
-                    line: "97"
+                    line: "95"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.testBridgeFields();
             }
@@ -9266,7 +9266,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310",
-                    file: "Batch3\\BridgeIssues\\2300\\N2310.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2300/N2310.cs"
                 } );
             }
             return this.context;
@@ -9304,7 +9304,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313",
-                    file: "Batch3\\BridgeIssues\\2300\\N2313.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2300/N2313.cs"
                 } );
             }
             return this.context;
@@ -9328,7 +9328,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2318",
-                    file: "Batch3\\BridgeIssues\\2300\\N2318.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2300/N2318.cs"
                 } );
             }
             return this.context;
@@ -9352,7 +9352,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2320",
-                    file: "Batch3\\BridgeIssues\\2300\\N2320.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2300/N2320.cs"
                 } );
             }
             return this.context;
@@ -9376,7 +9376,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2322",
-                    file: "Batch3\\BridgeIssues\\2300\\N2322.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2300/N2322.cs"
                 } );
             }
             return this.context;
@@ -9400,7 +9400,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2327",
-                    file: "Batch3\\BridgeIssues\\2300\\N2327.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2300/N2327.cs"
                 } );
             }
             return this.context;
@@ -9424,7 +9424,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2330",
-                    file: "Batch3\\BridgeIssues\\2300\\N2330.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2300/N2330.cs"
                 } );
             }
             return this.context;
@@ -9448,7 +9448,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2337",
-                    file: "Batch3\\BridgeIssues\\2300\\N2337.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2300/N2337.cs"
                 } );
             }
             return this.context;
@@ -9472,7 +9472,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2338",
-                    file: "Batch3\\BridgeIssues\\2300\\N2338.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2300/N2338.cs"
                 } );
             }
             return this.context;
@@ -9496,7 +9496,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2342",
-                    file: "Batch3\\BridgeIssues\\2300\\N2342.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2300/N2342.cs"
                 } );
             }
             return this.context;
@@ -9520,7 +9520,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2343",
-                    file: "Batch3\\BridgeIssues\\2300\\N2343.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2300/N2343.cs"
                 } );
             }
             return this.context;
@@ -9544,7 +9544,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2344",
-                    file: "Batch3\\BridgeIssues\\2300\\N2344.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2300/N2344.cs"
                 } );
             }
             return this.context;
@@ -9603,7 +9603,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2345",
-                    file: "Batch3\\BridgeIssues\\2300\\N2345.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2300/N2345.cs"
                 } );
             }
             return this.context;
@@ -9627,7 +9627,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2347",
-                    file: "Batch3\\BridgeIssues\\2300\\N2347.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2300/N2347.cs"
                 } );
             }
             return this.context;
@@ -9651,7 +9651,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2349",
-                    file: "Batch3\\BridgeIssues\\2300\\N2349.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2300/N2349.cs"
                 } );
             }
             return this.context;
@@ -9675,7 +9675,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2352",
-                    file: "Batch3\\BridgeIssues\\2300\\N2352.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2300/N2352.cs"
                 } );
             }
             return this.context;
@@ -9713,7 +9713,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355",
-                    file: "Batch3\\BridgeIssues\\2300\\N2355.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2300/N2355.cs"
                 } );
             }
             return this.context;
@@ -9737,7 +9737,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2359",
-                    file: "Batch3\\BridgeIssues\\2300\\N2359.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2300/N2359.cs"
                 } );
             }
             return this.context;
@@ -9761,7 +9761,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2369",
-                    file: "Batch3\\BridgeIssues\\2300\\N2369.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2300/N2369.cs"
                 } );
             }
             return this.context;
@@ -9774,7 +9774,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testPropertyInitializer: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2374).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2374, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestPropertyInitializer()",
-                    line: "20"
+                    line: "18"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2374.testPropertyInitializer();
             }
@@ -9785,7 +9785,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2374",
-                    file: "Batch3\\BridgeIssues\\2300\\N2374.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2300/N2374.cs"
                 } );
             }
             return this.context;
@@ -9798,7 +9798,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testNameofWithReflection: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2375).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2375, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestNameofWithReflection()",
-                    line: "18"
+                    line: "17"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2375.testNameofWithReflection();
             }
@@ -9809,7 +9809,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2375",
-                    file: "Batch3\\BridgeIssues\\2300\\N2375.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2300/N2375.cs"
                 } );
             }
             return this.context;
@@ -9833,7 +9833,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2386",
-                    file: "Batch3\\BridgeIssues\\2300\\N2386.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2300/N2386.cs"
                 } );
             }
             return this.context;
@@ -9857,7 +9857,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2393",
-                    file: "Batch3\\BridgeIssues\\2300\\N2393.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2300/N2393.cs"
                 } );
             }
             return this.context;
@@ -9881,7 +9881,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2399",
-                    file: "Batch3\\BridgeIssues\\2300\\N2399.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2300/N2399.cs"
                 } );
             }
             return this.context;
@@ -9905,7 +9905,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2401",
-                    file: "Batch3\\BridgeIssues\\2400\\N2401.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2400/N2401.cs"
                 } );
             }
             return this.context;
@@ -9929,7 +9929,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2419",
-                    file: "Batch3\\BridgeIssues\\2400\\N2420.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/2400/N2420.cs"
                 } );
             }
             return this.context;
@@ -9953,7 +9953,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge381",
-                    file: "Batch3\\BridgeIssues\\0300\\N381.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0300/N381.cs"
                 } );
             }
             return this.context;
@@ -9984,7 +9984,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge447",
-                    file: "Batch3\\BridgeIssues\\0400\\N447.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0400/N447.cs"
                 } );
             }
             return this.context;
@@ -10008,7 +10008,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge472",
-                    file: "Batch3\\BridgeIssues\\0400\\N472.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0400/N472.cs"
                 } );
             }
             return this.context;
@@ -10032,7 +10032,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge479",
-                    file: "Batch3\\BridgeIssues\\0400\\N479.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0400/N479.cs"
                 } );
             }
             return this.context;
@@ -10056,7 +10056,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge483",
-                    file: "Batch3\\BridgeIssues\\0400\\N483.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0400/N483.cs"
                 } );
             }
             return this.context;
@@ -10080,7 +10080,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge485",
-                    file: "Batch3\\BridgeIssues\\0400\\N485.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0400/N485.cs"
                 } );
             }
             return this.context;
@@ -10104,7 +10104,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge495",
-                    file: "Batch3\\BridgeIssues\\0400\\N495.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0400/N495.cs"
                 } );
             }
             return this.context;
@@ -10117,7 +10117,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testUseCase: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge501).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge501, 5, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestUseCase()",
-                    line: "26"
+                    line: "25"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge501.testUseCase();
             }
@@ -10128,7 +10128,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge501",
-                    file: "Batch3\\BridgeIssues\\0500\\N501.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N501.cs"
                 } );
             }
             return this.context;
@@ -10152,7 +10152,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge502",
-                    file: "Batch3\\BridgeIssues\\0500\\N502.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N502.cs"
                 } );
             }
             return this.context;
@@ -10176,7 +10176,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge503",
-                    file: "Batch3\\BridgeIssues\\0500\\N503.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N503.cs"
                 } );
             }
             return this.context;
@@ -10200,7 +10200,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge508",
-                    file: "Batch3\\BridgeIssues\\0500\\N508.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N508.cs"
                 } );
             }
             return this.context;
@@ -10231,7 +10231,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge514",
-                    file: "Batch3\\BridgeIssues\\0500\\N514.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N514.cs"
                 } );
             }
             return this.context;
@@ -10255,7 +10255,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge520",
-                    file: "Batch3\\BridgeIssues\\0500\\N520.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N520.cs"
                 } );
             }
             return this.context;
@@ -10286,7 +10286,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge522",
-                    file: "Batch3\\BridgeIssues\\0500\\N522.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N522.cs"
                 } );
             }
             return this.context;
@@ -10310,7 +10310,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge532",
-                    file: "Batch3\\BridgeIssues\\0500\\N532.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N532.cs"
                 } );
             }
             return this.context;
@@ -10334,7 +10334,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge537",
-                    file: "Batch3\\BridgeIssues\\0500\\N537A.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N537A.cs"
                 } );
             }
             return this.context;
@@ -10358,7 +10358,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge538",
-                    file: "Batch3\\BridgeIssues\\0500\\N538.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N538.cs"
                 } );
             }
             return this.context;
@@ -10371,14 +10371,14 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testUseCase: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge544).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge544, 1, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestUseCase()",
-                    line: "13"
+                    line: "12"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge544.testUseCase();
             },
             testRelated: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge544).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge544, 5, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestRelated()",
-                    line: "20"
+                    line: "19"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge544.testRelated();
             }
@@ -10389,7 +10389,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge544",
-                    file: "Batch3\\BridgeIssues\\0500\\N544.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N544.cs"
                 } );
             }
             return this.context;
@@ -10420,7 +10420,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge546",
-                    file: "Batch3\\BridgeIssues\\0500\\N546.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N546.cs"
                 } );
             }
             return this.context;
@@ -10444,7 +10444,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge548",
-                    file: "Batch3\\BridgeIssues\\0500\\N548.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N548.cs"
                 } );
             }
             return this.context;
@@ -10468,7 +10468,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge549",
-                    file: "Batch3\\BridgeIssues\\0500\\N549.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N549.cs"
                 } );
             }
             return this.context;
@@ -10492,7 +10492,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge550",
-                    file: "Batch3\\BridgeIssues\\0500\\N550.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N550.cs"
                 } );
             }
             return this.context;
@@ -10516,7 +10516,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge554",
-                    file: "Batch3\\BridgeIssues\\0500\\N554.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N554.cs"
                 } );
             }
             return this.context;
@@ -10540,7 +10540,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge555",
-                    file: "Batch3\\BridgeIssues\\0500\\N555.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N555.cs"
                 } );
             }
             return this.context;
@@ -10564,7 +10564,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge558",
-                    file: "Batch3\\BridgeIssues\\0500\\N558.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N558.cs"
                 } );
             }
             return this.context;
@@ -10602,7 +10602,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge559",
-                    file: "Batch3\\BridgeIssues\\0500\\N559.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N559.cs"
                 } );
             }
             return this.context;
@@ -10633,7 +10633,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge563",
-                    file: "Batch3\\BridgeIssues\\0500\\N563.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N563.cs"
                 } );
             }
             return this.context;
@@ -10657,7 +10657,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge566",
-                    file: "Batch3\\BridgeIssues\\0500\\N566.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N566.cs"
                 } );
             }
             return this.context;
@@ -10681,7 +10681,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge572",
-                    file: "Batch3\\BridgeIssues\\0500\\N572.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N572.cs"
                 } );
             }
             return this.context;
@@ -10705,7 +10705,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge577",
-                    file: "Batch3\\BridgeIssues\\0500\\N577.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N577.cs"
                 } );
             }
             return this.context;
@@ -10729,7 +10729,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge578",
-                    file: "Batch3\\BridgeIssues\\0500\\N578.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N578.cs"
                 } );
             }
             return this.context;
@@ -10753,7 +10753,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge580",
-                    file: "Batch3\\BridgeIssues\\0500\\N580.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N580.cs"
                 } );
             }
             return this.context;
@@ -10805,7 +10805,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge582",
-                    file: "Batch3\\BridgeIssues\\0500\\N582.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N582.cs"
                 } );
             }
             return this.context;
@@ -10829,7 +10829,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge583",
-                    file: "Batch3\\BridgeIssues\\0500\\N583.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N583.cs"
                 } );
             }
             return this.context;
@@ -10853,7 +10853,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge586",
-                    file: "Batch3\\BridgeIssues\\0500\\N586.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N586.cs"
                 } );
             }
             return this.context;
@@ -10877,7 +10877,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge588",
-                    file: "Batch3\\BridgeIssues\\0500\\N588.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N588.cs"
                 } );
             }
             return this.context;
@@ -10901,7 +10901,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge588C",
-                    file: "Batch3\\BridgeIssues\\0500\\N588.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N588.cs"
                 } );
             }
             return this.context;
@@ -10925,7 +10925,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge592",
-                    file: "Batch3\\BridgeIssues\\0500\\N592.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N592.cs"
                 } );
             }
             return this.context;
@@ -10949,7 +10949,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge595",
-                    file: "Batch3\\BridgeIssues\\0500\\N595.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N595.cs"
                 } );
             }
             return this.context;
@@ -10973,7 +10973,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge597",
-                    file: "Batch3\\BridgeIssues\\0500\\N597.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0500/N597.cs"
                 } );
             }
             return this.context;
@@ -11004,7 +11004,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge603",
-                    file: "Batch3\\BridgeIssues\\0600\\N603.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N603.cs"
                 } );
             }
             return this.context;
@@ -11028,7 +11028,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge606",
-                    file: "Batch3\\BridgeIssues\\0600\\N606.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N606.cs"
                 } );
             }
             return this.context;
@@ -11052,7 +11052,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge607",
-                    file: "Batch3\\BridgeIssues\\0600\\N607.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N607.cs"
                 } );
             }
             return this.context;
@@ -11076,7 +11076,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge608",
-                    file: "Batch3\\BridgeIssues\\0600\\N608.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N608.cs"
                 } );
             }
             return this.context;
@@ -11100,7 +11100,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge615",
-                    file: "Batch3\\BridgeIssues\\0600\\N615.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N615.cs"
                 } );
             }
             return this.context;
@@ -11124,7 +11124,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge623",
-                    file: "Batch3\\BridgeIssues\\0600\\N623.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N623.cs"
                 } );
             }
             return this.context;
@@ -11148,7 +11148,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge625",
-                    file: "Batch3\\BridgeIssues\\0600\\N625.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N625.cs"
                 } );
             }
             return this.context;
@@ -11172,7 +11172,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge634",
-                    file: "Batch3\\BridgeIssues\\0600\\N634.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N634.cs"
                 } );
             }
             return this.context;
@@ -11196,7 +11196,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge635",
-                    file: "Batch3\\BridgeIssues\\0600\\N635.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N635.cs"
                 } );
             }
             return this.context;
@@ -11220,7 +11220,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge637",
-                    file: "Batch3\\BridgeIssues\\0600\\N637.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N637.cs"
                 } );
             }
             return this.context;
@@ -11244,7 +11244,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge647",
-                    file: "Batch3\\BridgeIssues\\0600\\N647.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N647.cs"
                 } );
             }
             return this.context;
@@ -11268,7 +11268,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge648",
-                    file: "Batch3\\BridgeIssues\\0600\\N648.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N648.cs"
                 } );
             }
             return this.context;
@@ -11292,7 +11292,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge652",
-                    file: "Batch3\\BridgeIssues\\0600\\N652.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N652.cs"
                 } );
             }
             return this.context;
@@ -11316,7 +11316,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge655",
-                    file: "Batch3\\BridgeIssues\\0600\\N655.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N655.cs"
                 } );
             }
             return this.context;
@@ -11340,7 +11340,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge658",
-                    file: "Batch3\\BridgeIssues\\0600\\N658.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N658.cs"
                 } );
             }
             return this.context;
@@ -11364,7 +11364,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge660",
-                    file: "Batch3\\BridgeIssues\\0600\\N660.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N660.cs"
                 } );
             }
             return this.context;
@@ -11388,7 +11388,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge661",
-                    file: "Batch3\\BridgeIssues\\0600\\N661.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N661.cs"
                 } );
             }
             return this.context;
@@ -11412,7 +11412,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge664",
-                    file: "Batch3\\BridgeIssues\\0600\\N664.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N664.cs"
                 } );
             }
             return this.context;
@@ -11436,7 +11436,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge666",
-                    file: "Batch3\\BridgeIssues\\0600\\N666.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N666.cs"
                 } );
             }
             return this.context;
@@ -11460,7 +11460,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge671",
-                    file: "Batch3\\BridgeIssues\\0600\\N671.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N671.cs"
                 } );
             }
             return this.context;
@@ -11491,7 +11491,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge674",
-                    file: "Batch3\\BridgeIssues\\0600\\N674.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N674.cs"
                 } );
             }
             return this.context;
@@ -11515,7 +11515,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge675",
-                    file: "Batch3\\BridgeIssues\\0600\\N675.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N675.cs"
                 } );
             }
             return this.context;
@@ -11539,7 +11539,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge687",
-                    file: "Batch3\\BridgeIssues\\0600\\N687.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N687.cs"
                 } );
             }
             return this.context;
@@ -11563,7 +11563,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge689",
-                    file: "Batch3\\BridgeIssues\\0600\\N689.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N689.cs"
                 } );
             }
             return this.context;
@@ -11594,7 +11594,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge690",
-                    file: "Batch3\\BridgeIssues\\0600\\N690.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N690.cs"
                 } );
             }
             return this.context;
@@ -11618,7 +11618,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge691",
-                    file: "Batch3\\BridgeIssues\\0600\\N691.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N691.cs"
                 } );
             }
             return this.context;
@@ -11642,7 +11642,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge692",
-                    file: "Batch3\\BridgeIssues\\0600\\N692.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N692.cs"
                 } );
             }
             return this.context;
@@ -11666,7 +11666,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge693",
-                    file: "Batch3\\BridgeIssues\\0600\\N693.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N693.cs"
                 } );
             }
             return this.context;
@@ -11690,7 +11690,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge694",
-                    file: "Batch3\\BridgeIssues\\0600\\N694.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N694.cs"
                 } );
             }
             return this.context;
@@ -11714,7 +11714,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge696",
-                    file: "Batch3\\BridgeIssues\\0600\\N696.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N696.cs"
                 } );
             }
             return this.context;
@@ -11738,7 +11738,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge699",
-                    file: "Batch3\\BridgeIssues\\0600\\N699.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0600/N699.cs"
                 } );
             }
             return this.context;
@@ -11751,7 +11751,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testFieldPropertyWithInitializer: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge706).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge706, 1, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestFieldPropertyWithInitializer()",
-                    line: "18"
+                    line: "17"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge706.testFieldPropertyWithInitializer();
             }
@@ -11762,7 +11762,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge706",
-                    file: "Batch3\\BridgeIssues\\0700\\N706.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0700/N706.cs"
                 } );
             }
             return this.context;
@@ -11786,7 +11786,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge708",
-                    file: "Batch3\\BridgeIssues\\0700\\N708.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0700/N708.cs"
                 } );
             }
             return this.context;
@@ -11810,7 +11810,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge721",
-                    file: "Batch3\\BridgeIssues\\0700\\N721.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0700/N721.cs"
                 } );
             }
             return this.context;
@@ -11834,7 +11834,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge722",
-                    file: "Batch3\\BridgeIssues\\0700\\N722.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0700/N722.cs"
                 } );
             }
             return this.context;
@@ -11858,7 +11858,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge726",
-                    file: "Batch3\\BridgeIssues\\0700\\N726.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0700/N726.cs"
                 } );
             }
             return this.context;
@@ -11882,7 +11882,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge732",
-                    file: "Batch3\\BridgeIssues\\0700\\N732.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0700/N732.cs"
                 } );
             }
             return this.context;
@@ -11906,7 +11906,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge733",
-                    file: "Batch3\\BridgeIssues\\0700\\N733.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0700/N733.cs"
                 } );
             }
             return this.context;
@@ -11930,7 +11930,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge743",
-                    file: "Batch3\\BridgeIssues\\0700\\N743.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0700/N743.cs"
                 } );
             }
             return this.context;
@@ -11954,7 +11954,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge751",
-                    file: "Batch3\\BridgeIssues\\0700\\N751.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0700/N751.cs"
                 } );
             }
             return this.context;
@@ -11978,7 +11978,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge758",
-                    file: "Batch3\\BridgeIssues\\0700\\N758.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0700/N758.cs"
                 } );
             }
             return this.context;
@@ -12002,7 +12002,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge760",
-                    file: "Batch3\\BridgeIssues\\0700\\N760.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0700/N760.cs"
                 } );
             }
             return this.context;
@@ -12026,7 +12026,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge762",
-                    file: "Batch3\\BridgeIssues\\0700\\N762.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0700/N762.cs"
                 } );
             }
             return this.context;
@@ -12050,7 +12050,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge772",
-                    file: "Batch3\\BridgeIssues\\0700\\N772.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0700/N772.cs"
                 } );
             }
             return this.context;
@@ -12074,7 +12074,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge777",
-                    file: "Batch3\\BridgeIssues\\0700\\N777.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0700/N777.cs"
                 } );
             }
             return this.context;
@@ -12098,7 +12098,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge782",
-                    file: "Batch3\\BridgeIssues\\0700\\N782.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0700/N782.cs"
                 } );
             }
             return this.context;
@@ -12122,7 +12122,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge785",
-                    file: "Batch3\\BridgeIssues\\0700\\N785.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0700/N785.cs"
                 } );
             }
             return this.context;
@@ -12146,7 +12146,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge786",
-                    file: "Batch3\\BridgeIssues\\0700\\N786.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0700/N786.cs"
                 } );
             }
             return this.context;
@@ -12170,7 +12170,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge788",
-                    file: "Batch3\\BridgeIssues\\0700\\N788.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0700/N788.cs"
                 } );
             }
             return this.context;
@@ -12194,7 +12194,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge789",
-                    file: "Batch3\\BridgeIssues\\0700\\N789.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0700/N789.cs"
                 } );
             }
             return this.context;
@@ -12218,7 +12218,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge793",
-                    file: "Batch3\\BridgeIssues\\0700\\N793.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0700/N793.cs"
                 } );
             }
             return this.context;
@@ -12249,7 +12249,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge795",
-                    file: "Batch3\\BridgeIssues\\0700\\N795.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0700/N795.cs"
                 } );
             }
             return this.context;
@@ -12273,7 +12273,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge796",
-                    file: "Batch3\\BridgeIssues\\0700\\N796.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0700/N796.cs"
                 } );
             }
             return this.context;
@@ -12297,7 +12297,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge815",
-                    file: "Batch3\\BridgeIssues\\0800\\N815.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0800/N815.cs"
                 } );
             }
             return this.context;
@@ -12321,7 +12321,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge816",
-                    file: "Batch3\\BridgeIssues\\0800\\N816.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0800/N816.cs"
                 } );
             }
             return this.context;
@@ -12345,7 +12345,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge817",
-                    file: "Batch3\\BridgeIssues\\0800\\N817.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0800/N817.cs"
                 } );
             }
             return this.context;
@@ -12369,7 +12369,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge818",
-                    file: "Batch3\\BridgeIssues\\0800\\N818.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0800/N818.cs"
                 } );
             }
             return this.context;
@@ -12393,7 +12393,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge821",
-                    file: "Batch3\\BridgeIssues\\0800\\N821.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0800/N821.cs"
                 } );
             }
             return this.context;
@@ -12417,7 +12417,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge823",
-                    file: "Batch3\\BridgeIssues\\0800\\N823.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0800/N823.cs"
                 } );
             }
             return this.context;
@@ -12441,7 +12441,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge826",
-                    file: "Batch3\\BridgeIssues\\0800\\N826.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0800/N826.cs"
                 } );
             }
             return this.context;
@@ -12465,7 +12465,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge830",
-                    file: "Batch3\\BridgeIssues\\0800\\N830.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0800/N830.cs"
                 } );
             }
             return this.context;
@@ -12489,7 +12489,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge835",
-                    file: "Batch3\\BridgeIssues\\0800\\N835.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0800/N835.cs"
                 } );
             }
             return this.context;
@@ -12513,7 +12513,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge841",
-                    file: "Batch3\\BridgeIssues\\0800\\N841.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0800/N841.cs"
                 } );
             }
             return this.context;
@@ -12537,7 +12537,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge844",
-                    file: "Batch3\\BridgeIssues\\0800\\N844.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0800/N844.cs"
                 } );
             }
             return this.context;
@@ -12561,7 +12561,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge849",
-                    file: "Batch3\\BridgeIssues\\0800\\N849.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0800/N849.cs"
                 } );
             }
             return this.context;
@@ -12585,7 +12585,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge857",
-                    file: "Batch3\\BridgeIssues\\0800\\N857.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0800/N857.cs"
                 } );
             }
             return this.context;
@@ -12609,7 +12609,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge861",
-                    file: "Batch3\\BridgeIssues\\0800\\N861.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0800/N861.cs"
                 } );
             }
             return this.context;
@@ -12633,7 +12633,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge863",
-                    file: "Batch3\\BridgeIssues\\0800\\N863.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0800/N863.cs"
                 } );
             }
             return this.context;
@@ -12657,7 +12657,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge874",
-                    file: "Batch3\\BridgeIssues\\0800\\N874.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0800/N874.cs"
                 } );
             }
             return this.context;
@@ -12681,7 +12681,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge881",
-                    file: "Batch3\\BridgeIssues\\0800\\N881.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0800/N881.cs"
                 } );
             }
             return this.context;
@@ -12705,7 +12705,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge882",
-                    file: "Batch3\\BridgeIssues\\0800\\N882.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0800/N882.cs"
                 } );
             }
             return this.context;
@@ -12729,7 +12729,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge883",
-                    file: "Batch3\\BridgeIssues\\0800\\N883.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0800/N883.cs"
                 } );
             }
             return this.context;
@@ -12760,7 +12760,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge889",
-                    file: "Batch3\\BridgeIssues\\0800\\N889.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0800/N889.cs"
                 } );
             }
             return this.context;
@@ -12784,7 +12784,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge892",
-                    file: "Batch3\\BridgeIssues\\0800\\N892.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0800/N892.cs"
                 } );
             }
             return this.context;
@@ -12808,7 +12808,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge893",
-                    file: "Batch3\\BridgeIssues\\0800\\N893.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0800/N893.cs"
                 } );
             }
             return this.context;
@@ -12839,7 +12839,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge898",
-                    file: "Batch3\\BridgeIssues\\0800\\N898.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0800/N898.cs"
                 } );
             }
             return this.context;
@@ -12863,7 +12863,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge905",
-                    file: "Batch3\\BridgeIssues\\0900\\N905.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0900/N905.cs"
                 } );
             }
             return this.context;
@@ -12894,7 +12894,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge906",
-                    file: "Batch3\\BridgeIssues\\0900\\N906.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0900/N906.cs"
                 } );
             }
             return this.context;
@@ -12918,7 +12918,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge907",
-                    file: "Batch3\\BridgeIssues\\0900\\N907.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0900/N907.cs"
                 } );
             }
             return this.context;
@@ -12942,7 +12942,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge912",
-                    file: "Batch3\\BridgeIssues\\0900\\N912.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0900/N912.cs"
                 } );
             }
             return this.context;
@@ -12966,7 +12966,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge913",
-                    file: "Batch3\\BridgeIssues\\0900\\N913.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0900/N913.cs"
                 } );
             }
             return this.context;
@@ -12990,7 +12990,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge918",
-                    file: "Batch3\\BridgeIssues\\0900\\N918.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0900/N918.cs"
                 } );
             }
             return this.context;
@@ -13014,7 +13014,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge922",
-                    file: "Batch3\\BridgeIssues\\0900\\N922.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0900/N922.cs"
                 } );
             }
             return this.context;
@@ -13038,7 +13038,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge928",
-                    file: "Batch3\\BridgeIssues\\0900\\N928.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0900/N928.cs"
                 } );
             }
             return this.context;
@@ -13062,7 +13062,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge929",
-                    file: "Batch3\\BridgeIssues\\0900\\N929.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0900/N929.cs"
                 } );
             }
             return this.context;
@@ -13086,7 +13086,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge930",
-                    file: "Batch3\\BridgeIssues\\0900\\N930.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0900/N930.cs"
                 } );
             }
             return this.context;
@@ -13110,7 +13110,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge933",
-                    file: "Batch3\\BridgeIssues\\0900\\N933.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0900/N933.cs"
                 } );
             }
             return this.context;
@@ -13134,7 +13134,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge952",
-                    file: "Batch3\\BridgeIssues\\0900\\N952.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0900/N952.cs"
                 } );
             }
             return this.context;
@@ -13165,7 +13165,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge968",
-                    file: "Batch3\\BridgeIssues\\0900\\N968.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0900/N968.cs"
                 } );
             }
             return this.context;
@@ -13189,7 +13189,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge975",
-                    file: "Batch3\\BridgeIssues\\0900\\N975.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0900/N975.cs"
                 } );
             }
             return this.context;
@@ -13220,7 +13220,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge989",
-                    file: "Batch3\\BridgeIssues\\0900\\N989.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0900/N989.cs"
                 } );
             }
             return this.context;
@@ -13244,7 +13244,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge991",
-                    file: "Batch3\\BridgeIssues\\0900\\N991.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0900/N991.cs"
                 } );
             }
             return this.context;
@@ -13275,7 +13275,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge997",
-                    file: "Batch3\\BridgeIssues\\0900\\N997.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0900/N997.cs"
                 } );
             }
             return this.context;
@@ -13299,7 +13299,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge999",
-                    file: "Batch3\\BridgeIssues\\0900\\N999.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0900/N999.cs"
                 } );
             }
             return this.context;
@@ -13323,7 +13323,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge999_1",
-                    file: "Batch3\\BridgeIssues\\0900\\N999.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/0900/N999.cs"
                 } );
             }
             return this.context;
@@ -13375,7 +13375,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.N1122",
-                    file: "Batch3\\BridgeIssues\\1100\\N1122.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/1100/N1122.cs"
                 } );
             }
             return this.context;
@@ -13686,7 +13686,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues",
-                    file: "Batch3\\BridgeIssues\\TestBridgeIssues.cs"
+                    file: "file:///C:/NET/BridgeNew/Bridge/Tests/Batch3/BridgeIssues/TestBridgeIssues.cs"
                 } );
             }
             return this.context;
