@@ -1640,7 +1640,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1134", {
         statics: {
             testJsonArrayParse: function () {
-                var o = Bridge.JSON.deserialize("[1]", System.Array.type(System.Int32));
+                var o = Bridge.Json.deserialize("[1]", System.Array.type(System.Int32));
                 Bridge.Test.NUnit.Assert.true(o != null);
                 Bridge.Test.NUnit.Assert.areEqual(1, o.length);
                 Bridge.Test.NUnit.Assert.areEqual(1, o[0]);
@@ -1798,18 +1798,18 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 switch ($step) {
                                     case 0: {
                                         done = Bridge.Test.NUnit.Assert.async();
-                                            parent = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1170();
-                                            parent2 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1170();
+                                        parent = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1170();
+                                        parent2 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1170();
 
-                                            _bridgeTmp_1 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1170.Class1.$ctor1(parent);
+                                        _bridgeTmp_1 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1170.Class1.$ctor1(parent);
                                         $step = 1;
                                         continue;
                                     }
                                     case 1: {
                                         $task1 = System.Threading.Tasks.Task.delay(1);
-                                            $step = 2;
-                                            $task1.continueWith($asyncBody, true);
-                                            return;
+                                        $step = 2;
+                                        $task1.continueWith($asyncBody, true);
+                                        return;
                                     }
                                     case 2: {
                                         $task1.getAwaitedResult();
@@ -1820,63 +1820,63 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                     case 3: {
                                         if (Bridge.hasValue(_bridgeTmp_1)) _bridgeTmp_1.dispose();
 
-                                            if ($jumpFromFinally > -1) {
-                                                $step = $jumpFromFinally;
-                                                $jumpFromFinally = null;
-                                            } else if ($async_e) {
-                                                throw $async_e;
-                                                return;
-                                            } else if (Bridge.isDefined($returnValue)) {
-                                                $tcs.setResult($returnValue);
-                                                return;
-                                            }
+                                        if ($jumpFromFinally > -1) {
+                                            $step = $jumpFromFinally;
+                                            $jumpFromFinally = null;
+                                        } else if ($async_e) {
+                                            throw $async_e;
+                                            return;
+                                        } else if (Bridge.isDefined($returnValue)) {
+                                            $tcs.setResult($returnValue);
+                                            return;
+                                        }
                                         $step = 4;
                                         continue;
                                     }
                                     case 4: {
                                         
-                                            Bridge.Test.NUnit.Assert.true(parent.isDisposed);
+                                        Bridge.Test.NUnit.Assert.true(parent.isDisposed);
 
-                                            parent.isDisposed = false;
-                                            c1 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1170.Class1.$ctor1(parent);
+                                        parent.isDisposed = false;
+                                        c1 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1170.Class1.$ctor1(parent);
                                         $step = 5;
                                         continue;
                                     }
                                     case 5: {
                                         $task2 = System.Threading.Tasks.Task.delay(1);
-                                            $step = 6;
-                                            $task2.continueWith($asyncBody, true);
-                                            return;
+                                        $step = 6;
+                                        $task2.continueWith($asyncBody, true);
+                                        return;
                                     }
                                     case 6: {
                                         $task2.getAwaitedResult();
                                         Bridge.Test.NUnit.Assert.false(c1.isDisposed);
-                                            Bridge.Test.NUnit.Assert.false(parent.isDisposed);
+                                        Bridge.Test.NUnit.Assert.false(parent.isDisposed);
                                         $step = 7;
                                         continue;
                                     }
                                     case 7: {
                                         if (Bridge.hasValue(c1)) c1.dispose();
 
-                                            if ($jumpFromFinally > -1) {
-                                                $step = $jumpFromFinally;
-                                                $jumpFromFinally = null;
-                                            } else if ($async_e) {
-                                                throw $async_e;
-                                                return;
-                                            } else if (Bridge.isDefined($returnValue)) {
-                                                $tcs.setResult($returnValue);
-                                                return;
-                                            }
+                                        if ($jumpFromFinally > -1) {
+                                            $step = $jumpFromFinally;
+                                            $jumpFromFinally = null;
+                                        } else if ($async_e) {
+                                            throw $async_e;
+                                            return;
+                                        } else if (Bridge.isDefined($returnValue)) {
+                                            $tcs.setResult($returnValue);
+                                            return;
+                                        }
                                         $step = 8;
                                         continue;
                                     }
                                     case 8: {
                                         
-                                            Bridge.Test.NUnit.Assert.true(parent.isDisposed);
+                                        Bridge.Test.NUnit.Assert.true(parent.isDisposed);
 
-                                            parent.isDisposed = false;
-                                            c11 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1170.Class1.$ctor1(parent);
+                                        parent.isDisposed = false;
+                                        c11 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1170.Class1.$ctor1(parent);
                                         $step = 9;
                                         continue;
                                     }
@@ -1887,30 +1887,30 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                     }
                                     case 10: {
                                         $task3 = System.Threading.Tasks.Task.delay(1);
-                                            $step = 11;
-                                            $task3.continueWith($asyncBody, true);
-                                            return;
+                                        $step = 11;
+                                        $task3.continueWith($asyncBody, true);
+                                        return;
                                     }
                                     case 11: {
                                         $task3.getAwaitedResult();
                                         Bridge.Test.NUnit.Assert.false(c11.isDisposed);
-                                            Bridge.Test.NUnit.Assert.false(c2.isDisposed);
+                                        Bridge.Test.NUnit.Assert.false(c2.isDisposed);
                                         $step = 12;
                                         continue;
                                     }
                                     case 12: {
                                         if (Bridge.hasValue(c2)) c2.dispose();
 
-                                            if ($jumpFromFinally > -1) {
-                                                $step = 14;
-                                                continue;
-                                            } else if ($async_e) {
-                                                throw $async_e;
-                                                return;
-                                            } else if (Bridge.isDefined($returnValue)) {
-                                                $step = 14;
-                                                continue;
-                                            }
+                                        if ($jumpFromFinally > -1) {
+                                            $step = 14;
+                                            continue;
+                                        } else if ($async_e) {
+                                            throw $async_e;
+                                            return;
+                                        } else if (Bridge.isDefined($returnValue)) {
+                                            $step = 14;
+                                            continue;
+                                        }
                                         $step = 13;
                                         continue;
                                     }
@@ -1918,25 +1918,25 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                     case 14: {
                                         if (Bridge.hasValue(c1)) c1.dispose();
 
-                                            if ($jumpFromFinally > -1) {
-                                                $step = $jumpFromFinally;
-                                                $jumpFromFinally = null;
-                                            } else if ($async_e) {
-                                                throw $async_e;
-                                                return;
-                                            } else if (Bridge.isDefined($returnValue)) {
-                                                $tcs.setResult($returnValue);
-                                                return;
-                                            }
+                                        if ($jumpFromFinally > -1) {
+                                            $step = $jumpFromFinally;
+                                            $jumpFromFinally = null;
+                                        } else if ($async_e) {
+                                            throw $async_e;
+                                            return;
+                                        } else if (Bridge.isDefined($returnValue)) {
+                                            $tcs.setResult($returnValue);
+                                            return;
+                                        }
                                         $step = 15;
                                         continue;
                                     }
                                     case 15: {
                                         
-                                            Bridge.Test.NUnit.Assert.true(parent.isDisposed);
-                                            Bridge.Test.NUnit.Assert.true(parent2.isDisposed);
+                                        Bridge.Test.NUnit.Assert.true(parent.isDisposed);
+                                        Bridge.Test.NUnit.Assert.true(parent2.isDisposed);
 
-                                            done();
+                                        done();
                                         return;
                                     }
                                     default: {
@@ -1995,7 +1995,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 switch ($step) {
                                     case 0: {
                                         done = Bridge.Test.NUnit.Assert.async();
-                                            parent = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1170();
+                                        parent = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1170();
                                         $step = 1;
                                         continue;
                                     }
@@ -2006,9 +2006,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                     }
                                     case 2: {
                                         $task1 = System.Threading.Tasks.Task.delay(1);
-                                            $step = 3;
-                                            $task1.continueWith($asyncBody, true);
-                                            return;
+                                        $step = 3;
+                                        $task1.continueWith($asyncBody, true);
+                                        return;
                                     }
                                     case 3: {
                                         $task1.getAwaitedResult();
@@ -2019,16 +2019,16 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                     case 4: {
                                         if (Bridge.hasValue(_bridgeTmp_2)) _bridgeTmp_2.dispose();
 
-                                            if ($jumpFromFinally > -1) {
-                                                $step = $jumpFromFinally;
-                                                $jumpFromFinally = null;
-                                            } else if ($async_e) {
-                                                throw $async_e;
-                                                return;
-                                            } else if (Bridge.isDefined($returnValue)) {
-                                                $tcs.setResult($returnValue);
-                                                return;
-                                            }
+                                        if ($jumpFromFinally > -1) {
+                                            $step = $jumpFromFinally;
+                                            $jumpFromFinally = null;
+                                        } else if ($async_e) {
+                                            throw $async_e;
+                                            return;
+                                        } else if (Bridge.isDefined($returnValue)) {
+                                            $tcs.setResult($returnValue);
+                                            return;
+                                        }
                                         $step = 5;
                                         continue;
                                     }
@@ -2038,15 +2038,15 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                     }
                                     case 6: {
                                         Bridge.Test.NUnit.Assert.areEqual("Bridge1170 test", e.getMessage());
-                                            $async_e = null;
+                                        $async_e = null;
                                         $step = 7;
                                         continue;
                                     }
                                     case 7: {
                                         
-                                            Bridge.Test.NUnit.Assert.true(parent.isDisposed);
+                                        Bridge.Test.NUnit.Assert.true(parent.isDisposed);
 
-                                            done();
+                                        done();
                                         return;
                                     }
                                     default: {
@@ -2353,27 +2353,27 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                             switch ($step) {
                                 case 0: {
                                     done = Bridge.Test.NUnit.Assert.async();
-                                        $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1189.fooLong();
-                                        $step = 1;
-                                        $task1.continueWith($asyncBody, true);
-                                        return;
+                                    $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1189.fooLong();
+                                    $step = 1;
+                                    $task1.continueWith($asyncBody, true);
+                                    return;
                                 }
                                 case 1: {
                                     $taskResult1 = $task1.getAwaitedResult();
                                     resultLong = $taskResult1;
-                                        Bridge.Test.NUnit.Assert.true$1(System.Int64(-5).equals(resultLong), "Task<long>");
+                                    Bridge.Test.NUnit.Assert.true$1(System.Int64(-5).equals(resultLong), "Task<long>");
 
-                                        $task2 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1189.fooDecimal();
-                                        $step = 2;
-                                        $task2.continueWith($asyncBody, true);
-                                        return;
+                                    $task2 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1189.fooDecimal();
+                                    $step = 2;
+                                    $task2.continueWith($asyncBody, true);
+                                    return;
                                 }
                                 case 2: {
                                     $taskResult2 = $task2.getAwaitedResult();
                                     resultDecimal = $taskResult2;
-                                        Bridge.Test.NUnit.Assert.true$1(System.Decimal(-7).equalsT(resultDecimal), "Task<decimal>");
+                                    Bridge.Test.NUnit.Assert.true$1(System.Decimal(-7).equalsT(resultDecimal), "Task<decimal>");
 
-                                        done();
+                                    done();
                                     return;
                                 }
                                 default: {
@@ -2399,14 +2399,14 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 switch ($step) {
                                     case 0: {
                                         $task1 = System.Threading.Tasks.Task.delay(1);
-                                            $step = 1;
-                                            $task1.continueWith($asyncBody);
-                                            return;
+                                        $step = 1;
+                                        $task1.continueWith($asyncBody);
+                                        return;
                                     }
                                     case 1: {
                                         $task1.getAwaitedResult();
                                         $tcs.setResult(System.Int64(-5));
-                                            return;
+                                        return;
                                     }
                                     default: {
                                         $tcs.setResult(null);
@@ -2437,14 +2437,14 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 switch ($step) {
                                     case 0: {
                                         $task1 = System.Threading.Tasks.Task.delay(1);
-                                            $step = 1;
-                                            $task1.continueWith($asyncBody);
-                                            return;
+                                        $step = 1;
+                                        $task1.continueWith($asyncBody);
+                                        return;
                                     }
                                     case 1: {
                                         $task1.getAwaitedResult();
                                         $tcs.setResult(System.Decimal(-7));
-                                            return;
+                                        return;
                                     }
                                     default: {
                                         $tcs.setResult(null);
@@ -3026,11 +3026,10 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1249", {
         statics: {
             testEnumOverflow: function () {
-                var $t;
                 var v1 = 255;
                 var v2 = 255;
                 Bridge.Test.NUnit.Assert.areEqual(0, ((v1 = (v1 + 1) & 255)));
-                Bridge.Test.NUnit.Assert.areEqual("a", ($t=(((v2 = (v2 + 1) & 255))), System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1249.b, $t)));
+                Bridge.Test.NUnit.Assert.areEqual("a", System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1249.b, (((v2 = (v2 + 1) & 255)))));
             }
         }
     });
@@ -3728,18 +3727,18 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 case 0: {
                                     done = Bridge.Test.NUnit.Assert.async();
 
-                                        $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1305.testIntResult();
-                                        $step = 1;
-                                        $task1.continueWith($asyncBody, true);
-                                        return;
+                                    $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1305.testIntResult();
+                                    $step = 1;
+                                    $task1.continueWith($asyncBody, true);
+                                    return;
                                 }
                                 case 1: {
                                     $taskResult1 = $task1.getAwaitedResult();
                                     result = $taskResult1;
-                                        Bridge.Test.NUnit.Assert.areEqual(10, result);
-                                        Bridge.Test.NUnit.Assert.areEqual(10, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1305.currentInt);
+                                    Bridge.Test.NUnit.Assert.areEqual(10, result);
+                                    Bridge.Test.NUnit.Assert.areEqual(10, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1305.currentInt);
 
-                                        done();
+                                    done();
                                     return;
                                 }
                                 default: {
@@ -3765,20 +3764,20 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 case 0: {
                                     done = Bridge.Test.NUnit.Assert.async();
 
-                                        $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1305.testClassResult();
-                                        $step = 1;
-                                        $task1.continueWith($asyncBody, true);
-                                        return;
+                                    $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1305.testClassResult();
+                                    $step = 1;
+                                    $task1.continueWith($asyncBody, true);
+                                    return;
                                 }
                                 case 1: {
                                     $taskResult1 = $task1.getAwaitedResult();
                                     result = $taskResult1;
-                                        Bridge.Test.NUnit.Assert.notNull(result);
-                                        Bridge.Test.NUnit.Assert.areEqual(11, result.getValue());
-                                        Bridge.Test.NUnit.Assert.notNull(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1305.currentDataClass);
-                                        Bridge.Test.NUnit.Assert.areEqual(11, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1305.currentDataClass.getValue());
+                                    Bridge.Test.NUnit.Assert.notNull(result);
+                                    Bridge.Test.NUnit.Assert.areEqual(11, result.getValue());
+                                    Bridge.Test.NUnit.Assert.notNull(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1305.currentDataClass);
+                                    Bridge.Test.NUnit.Assert.areEqual(11, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1305.currentDataClass.getValue());
 
-                                        done();
+                                    done();
                                     return;
                                 }
                                 default: {
@@ -3804,20 +3803,20 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 case 0: {
                                     done = Bridge.Test.NUnit.Assert.async();
 
-                                        $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1305.testStructResult();
-                                        $step = 1;
-                                        $task1.continueWith($asyncBody, true);
-                                        return;
+                                    $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1305.testStructResult();
+                                    $step = 1;
+                                    $task1.continueWith($asyncBody, true);
+                                    return;
                                 }
                                 case 1: {
                                     $taskResult1 = $task1.getAwaitedResult();
                                     result = $taskResult1;
-                                        Bridge.Test.NUnit.Assert.notNull(result);
-                                        Bridge.Test.NUnit.Assert.areEqual(12, result.getValue());
-                                        Bridge.Test.NUnit.Assert.notNull(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1305.currentDataStruct);
-                                        Bridge.Test.NUnit.Assert.areEqual(12, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1305.currentDataStruct.getValue());
+                                    Bridge.Test.NUnit.Assert.notNull(result);
+                                    Bridge.Test.NUnit.Assert.areEqual(12, result.getValue());
+                                    Bridge.Test.NUnit.Assert.notNull(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1305.currentDataStruct);
+                                    Bridge.Test.NUnit.Assert.areEqual(12, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1305.currentDataStruct.getValue());
 
-                                        done();
+                                    done();
                                     return;
                                 }
                                 default: {
@@ -3845,14 +3844,14 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 switch ($step) {
                                     case 0: {
                                         $task1 = System.Threading.Tasks.Task.fromResult(10);
-                                            $step = 1;
-                                            $task1.continueWith($asyncBody);
-                                            return;
+                                        $step = 1;
+                                        $task1.continueWith($asyncBody);
+                                        return;
                                     }
                                     case 1: {
                                         $taskResult1 = $task1.getAwaitedResult();
                                         $tcs.setResult(($t = $taskResult1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1305.currentInt = $t, $t));
-                                            return;
+                                        return;
                                     }
                                     default: {
                                         $tcs.setResult(null);
@@ -3885,16 +3884,16 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 switch ($step) {
                                     case 0: {
                                         $task1 = System.Threading.Tasks.Task.fromResult(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1305.DataClass(), {
-                                                setValue: 11
-                                            } ));
-                                            $step = 1;
-                                            $task1.continueWith($asyncBody);
-                                            return;
+                                            setValue: 11
+                                        } ));
+                                        $step = 1;
+                                        $task1.continueWith($asyncBody);
+                                        return;
                                     }
                                     case 1: {
                                         $taskResult1 = $task1.getAwaitedResult();
                                         $tcs.setResult(($t = $taskResult1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1305.currentDataClass = $t, $t));
-                                            return;
+                                        return;
                                     }
                                     default: {
                                         $tcs.setResult(null);
@@ -3927,16 +3926,16 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                 switch ($step) {
                                     case 0: {
                                         $task1 = System.Threading.Tasks.Task.fromResult(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1305.DataStruct(), {
-                                                setValue: 12
-                                            } ));
-                                            $step = 1;
-                                            $task1.continueWith($asyncBody);
-                                            return;
+                                            setValue: 12
+                                        } ));
+                                        $step = 1;
+                                        $task1.continueWith($asyncBody);
+                                        return;
                                     }
                                     case 1: {
                                         $taskResult1 = $task1.getAwaitedResult();
                                         $tcs.setResult(($t = $taskResult1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1305.currentDataStruct = $t, $t));
-                                            return;
+                                        return;
                                     }
                                     default: {
                                         $tcs.setResult(null);
@@ -4967,6 +4966,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             return {
                 a : this.a
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"A","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_A","t":8,"sn":"getA","rt":System.Int32}}]}; }
         }
     });
 
@@ -4997,6 +4999,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 a : this.a,
                 b : this.b
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"A","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_A","t":8,"sn":"getA","rt":System.Int32}},{"a":2,"n":"B","t":16,"rt":System.String,"g":{"a":2,"n":"get_B","t":8,"sn":"getB","rt":System.String}}]}; }
         }
     });
 
@@ -5027,6 +5032,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 a : this.a,
                 b : this.b
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"A","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_A","t":8,"sn":"getA","rt":System.Int32}},{"a":2,"n":"B","t":16,"rt":Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeStructA,"g":{"a":2,"n":"get_B","t":8,"sn":"getB","rt":Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeStructA}}]}; }
         }
     });
 
@@ -5057,6 +5065,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 a : this.a,
                 b : this.b
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"A","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_A","t":8,"sn":"getA","rt":System.Int32}},{"a":2,"n":"B","t":16,"rt":Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeClassB,"g":{"a":2,"n":"get_B","t":8,"sn":"getB","rt":Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeClassB}}]}; }
         }
     });
 
@@ -5082,6 +5093,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             return {
                 value1 : this.value1
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"Value1","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_Value1","t":8,"sn":"getValue1","rt":System.Int32}}]}; }
         }
     });
 
@@ -5107,6 +5121,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             return {
                 value2 : this.value2
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"Value2","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_Value2","t":8,"sn":"getValue2","rt":System.Int32}}]}; }
         }
     });
 
@@ -5132,6 +5149,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             return {
                 b : this.b
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"B","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_B","t":8,"sn":"getB","rt":System.Int32}}]}; }
         }
     });
 
@@ -5162,6 +5182,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 b : this.b,
                 c : this.c
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"B","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_B","t":8,"sn":"getB","rt":System.Int32}},{"a":2,"n":"C","t":16,"rt":System.String,"g":{"a":2,"n":"get_C","t":8,"sn":"getC","rt":System.String}}]}; }
         }
     });
 
@@ -5192,6 +5215,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 a : this.a,
                 b : this.b
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"A","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_A","t":8,"sn":"getA","rt":System.Int32}},{"a":2,"n":"B","t":16,"rt":Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeClassA,"g":{"a":2,"n":"get_B","t":8,"sn":"getB","rt":Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeClassA}}]}; }
         }
     });
 
@@ -5222,6 +5248,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 b : this.b,
                 c : this.c
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"B","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_B","t":8,"sn":"getB","rt":System.Int32}},{"a":2,"n":"C","t":16,"rt":Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeClassA,"g":{"a":2,"n":"get_C","t":8,"sn":"getC","rt":Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeClassA}}]}; }
         }
     });
 
@@ -5252,6 +5281,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 b : this.b,
                 a : this.a
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"A","t":16,"rt":Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeStructA,"g":{"a":2,"n":"get_A","t":8,"sn":"getA","rt":Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeStructA}},{"a":2,"n":"B","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_B","t":8,"sn":"getB","rt":System.Int32}}]}; }
         }
     });
 
@@ -5282,6 +5314,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 b : this.b,
                 c : this.c
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"B","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_B","t":8,"sn":"getB","rt":System.Int32}},{"a":2,"n":"C","t":16,"rt":Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeClassB,"g":{"a":2,"n":"get_C","t":8,"sn":"getC","rt":Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeClassB}}]}; }
         }
     });
 
@@ -6231,26 +6266,26 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438", {
         statics: {
             testJSONParse: function () {
-                var serialized = Bridge.JSON.serialize(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo(), {
+                var serialized = Bridge.Json.serialize(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo(), {
                         setValue: 100
                     } ));
 
                 Bridge.Test.NUnit.Assert.notNull$1(serialized, " serialized should not be null");
 
-                var result = Bridge.JSON.deserialize(serialized, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo);
+                var result = Bridge.Json.deserialize(serialized, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo);
 
                 Bridge.Test.NUnit.Assert.notNull$1(result, " result should not be null");
                 Bridge.Test.NUnit.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438+Foo", Bridge.Reflection.getTypeFullName(Bridge.getType(result)), "Check result type name");
                 Bridge.Test.NUnit.Assert.areEqual$1(100, result.getValue(), "result.Value = 100");
             },
             testJSONParseAsArray: function () {
-                var serialized = Bridge.JSON.serialize(System.Array.init([Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo(), {
+                var serialized = Bridge.Json.serialize(System.Array.init([Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo(), {
                         setValue: 101
                     } )], Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo));
 
                 Bridge.Test.NUnit.Assert.notNull$1(serialized, " serialized should not be null");
 
-                var result = Bridge.JSON.deserialize(serialized, System.Array.type(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo));
+                var result = Bridge.Json.deserialize(serialized, System.Array.type(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo));
 
                 Bridge.Test.NUnit.Assert.notNull$1(result, " result should not be null");
                 Bridge.Test.NUnit.Assert.areEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438+Foo[]", Bridge.Reflection.getTypeFullName(Bridge.getType(result)), "Check result type name");
@@ -6503,7 +6538,7 @@ Bridge.$N1391Result =                 r;
         testMultiplyThisInTemplate: function () {
             var $t;
             var v = System.Array.init(4, 0, System.Int32);
-            ($t=Bridge.ClientTest.Batch3.BridgeIssues.Bridge1472.getArray(), System.Array.copy($t, 0, v, 0, $t.length));
+            ($t = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1472.getArray(), System.Array.copy($t, 0, v, 0, $t.length));
             Bridge.Test.NUnit.Assert.areEqual(0, v[3]);
         },
         testSimpleMultipleKeyTemplate: function () {
@@ -6635,16 +6670,14 @@ Bridge.$N1391Result =                 r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1489", {
         testLongEnum: function () {
-            var $t, $t1;
             var $enum = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1489.Enum.A;
-            Bridge.Test.NUnit.Assert.areEqual("B", ($t=($enum.add(System.Int64(1))), System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1489.Enum, $t)));
-            Bridge.Test.NUnit.Assert.areEqual("B", ($t1=((($enum = $enum.add(System.Int64(1))))), System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1489.Enum, $t1)));
+            Bridge.Test.NUnit.Assert.areEqual("B", System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1489.Enum, ($enum.add(System.Int64(1)))));
+            Bridge.Test.NUnit.Assert.areEqual("B", System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1489.Enum, ((($enum = $enum.add(System.Int64(1)))))));
         },
         testIntEnum: function () {
-            var $t, $t1;
             var $enum = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1489.IntEnum.C;
-            Bridge.Test.NUnit.Assert.areEqual("D", ($t=((($enum + 1) | 0)), System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1489.IntEnum, $t)));
-            Bridge.Test.NUnit.Assert.areEqual("D", ($t1=((($enum = ($enum + 1) | 0))), System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1489.IntEnum, $t1)));
+            Bridge.Test.NUnit.Assert.areEqual("D", System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1489.IntEnum, ((($enum + 1) | 0))));
+            Bridge.Test.NUnit.Assert.areEqual("D", System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1489.IntEnum, ((($enum = ($enum + 1) | 0)))));
         }
     });
 
@@ -7261,49 +7294,49 @@ Bridge.$N1391Result =                 r;
                             case 0: {
                                 done = Bridge.Test.NUnit.Assert.async();
 
-                                    foo = null;
-                                    bar = Bridge.fn.bind(this, function () {
-                                        var $step = 0,
-                                            $jumpFromFinally, 
-                                            $tcs = new System.Threading.Tasks.TaskCompletionSource(), 
-                                            $returnValue, 
-                                            $async_e, 
-                                            $asyncBody = Bridge.fn.bind(this, function () {
-                                                try {
-                                                    for (;;) {
-                                                        $step = System.Array.min([0], $step);
-                                                        switch ($step) {
-                                                            case 0: {
-                                                                $tcs.setResult((foo = Bridge.box(1, System.Int32)));
-                                                                    return;
-                                                            }
-                                                            default: {
-                                                                $tcs.setResult(null);
-                                                                return;
-                                                            }
+                                foo = null;
+                                bar = Bridge.fn.bind(this, function () {
+                                    var $step = 0,
+                                        $jumpFromFinally, 
+                                        $tcs = new System.Threading.Tasks.TaskCompletionSource(), 
+                                        $returnValue, 
+                                        $async_e, 
+                                        $asyncBody = Bridge.fn.bind(this, function () {
+                                            try {
+                                                for (;;) {
+                                                    $step = System.Array.min([0], $step);
+                                                    switch ($step) {
+                                                        case 0: {
+                                                            $tcs.setResult((foo = Bridge.box(1, System.Int32)));
+                                                            return;
+                                                        }
+                                                        default: {
+                                                            $tcs.setResult(null);
+                                                            return;
                                                         }
                                                     }
-                                                } catch($async_e1) {
-                                                    $async_e = System.Exception.create($async_e1);
-                                                    $tcs.setException($async_e);
                                                 }
-                                            }, arguments);
+                                            } catch($async_e1) {
+                                                $async_e = System.Exception.create($async_e1);
+                                                $tcs.setException($async_e);
+                                            }
+                                        }, arguments);
 
-                                        $asyncBody();
-                                        return $tcs.task;
-                                    });
-                                    $task1 = bar();
-                                    $step = 1;
-                                    $task1.continueWith($asyncBody, true);
-                                    return;
+                                    $asyncBody();
+                                    return $tcs.task;
+                                });
+                                $task1 = bar();
+                                $step = 1;
+                                $task1.continueWith($asyncBody, true);
+                                return;
                             }
                             case 1: {
                                 $taskResult1 = $task1.getAwaitedResult();
                                 baz = $taskResult1;
-                                    Bridge.Test.NUnit.Assert.areEqual(1, Bridge.unbox(foo));
-                                    Bridge.Test.NUnit.Assert.areEqual(1, Bridge.unbox(baz));
+                                Bridge.Test.NUnit.Assert.areEqual(1, Bridge.unbox(foo));
+                                Bridge.Test.NUnit.Assert.areEqual(1, Bridge.unbox(baz));
 
-                                    done();
+                                done();
                                 return;
                             }
                             default: {
@@ -7491,17 +7524,17 @@ Bridge.$N1391Result =                 r;
                                 switch ($step) {
                                     case 0: {
                                         $task1 = System.Threading.Tasks.Task.delay(1);
-                                            $step = 1;
-                                            $task1.continueWith($asyncBody);
-                                            return;
+                                        $step = 1;
+                                        $task1.continueWith($asyncBody);
+                                        return;
                                     }
                                     case 1: {
                                         $task1.getAwaitedResult();
                                         bar = { };
-                                            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1641._Foo.tryGetValue(1, bar);
+                                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge1641._Foo.tryGetValue(1, bar);
 
-                                            $tcs.setResult(bar.v);
-                                            return;
+                                        $tcs.setResult(bar.v);
+                                        return;
                                     }
                                     default: {
                                         $tcs.setResult(null);
@@ -7532,16 +7565,16 @@ Bridge.$N1391Result =                 r;
                         switch ($step) {
                             case 0: {
                                 done = Bridge.Test.NUnit.Assert.async();
-                                    $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1641.test();
-                                    $step = 1;
-                                    $task1.continueWith($asyncBody, true);
-                                    return;
+                                $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1641.test();
+                                $step = 1;
+                                $task1.continueWith($asyncBody, true);
+                                return;
                             }
                             case 1: {
                                 $taskResult1 = $task1.getAwaitedResult();
                                 result = $taskResult1;
-                                    Bridge.Test.NUnit.Assert.areEqual(0, result);
-                                    done();
+                                Bridge.Test.NUnit.Assert.areEqual(0, result);
+                                done();
                                 return;
                             }
                             default: {
@@ -9676,6 +9709,9 @@ Bridge.$N1391Result =                 r;
             return {
                 test : this.test
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"Test","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_Test","t":8,"sn":"getTest","rt":System.Int32}}]}; }
         }
     });
 
@@ -10159,47 +10195,47 @@ Bridge.$N1391Result =                 r;
                         switch ($step) {
                             case 0: {
                                 done = Bridge.Test.NUnit.Assert.async();
-                                    task = new System.Threading.Tasks.Task(null);
-                                    window.setTimeout(Bridge.fn.bind(this, function () {
-                                        var $step = 0,
-                                            $task1, 
-                                            $jumpFromFinally, 
-                                            $asyncBody = Bridge.fn.bind(this, function () {
-                                                for (;;) {
-                                                    $step = System.Array.min([0,1], $step);
-                                                    switch ($step) {
-                                                        case 0: {
-                                                            $task1 = System.Threading.Tasks.Task.delay(1);
-                                                                $step = 1;
-                                                                $task1.continueWith($asyncBody, true);
-                                                                return;
-                                                        }
-                                                        case 1: {
-                                                            $task1.getAwaitedResult();
-                                                            task.complete();
-                                                            return;
-                                                        }
-                                                        default: {
-                                                            return;
-                                                        }
+                                task = new System.Threading.Tasks.Task(null);
+                                window.setTimeout(Bridge.fn.bind(this, function () {
+                                    var $step = 0,
+                                        $task1, 
+                                        $jumpFromFinally, 
+                                        $asyncBody = Bridge.fn.bind(this, function () {
+                                            for (;;) {
+                                                $step = System.Array.min([0,1], $step);
+                                                switch ($step) {
+                                                    case 0: {
+                                                        $task1 = System.Threading.Tasks.Task.delay(1);
+                                                        $step = 1;
+                                                        $task1.continueWith($asyncBody, true);
+                                                        return;
+                                                    }
+                                                    case 1: {
+                                                        $task1.getAwaitedResult();
+                                                        task.complete();
+                                                        return;
+                                                    }
+                                                    default: {
+                                                        return;
                                                     }
                                                 }
-                                            }, arguments);
+                                            }
+                                        }, arguments);
 
-                                        $asyncBody();
-                                    }));
+                                    $asyncBody();
+                                }));
 
-                                    $task1 = task;
-                                    $step = 1;
-                                    $task1.continueWith($asyncBody, true);
-                                    return;
+                                $task1 = task;
+                                $step = 1;
+                                $task1.continueWith($asyncBody, true);
+                                return;
                             }
                             case 1: {
                                 $task1.getAwaitedResult();
                                 
-                                    Bridge.Test.NUnit.Assert.true(task.isCompleted());
+                                Bridge.Test.NUnit.Assert.true(task.isCompleted());
 
-                                    done();
+                                done();
                                 return;
                             }
                             default: {
@@ -11577,12 +11613,11 @@ Bridge.$N1391Result =                 r;
                 return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.Options.Whatever;
             },
             testToStringForEnumWhenConcatWithString: function () {
-                var $t;
                 var value = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.Options.Whatever;
                 Bridge.Test.NUnit.Assert.areEqual("Value: Whatever", "Value: " + System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.Options, value));
                 Bridge.Test.NUnit.Assert.areEqual("Value: Whatever", System.String.concat("Value: ", System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.Options, value)));
                 Bridge.Test.NUnit.Assert.areEqual("Value: Whatever", "Value: " + System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.Options, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.getStatus()));
-                Bridge.Test.NUnit.Assert.areEqual("Value: Whatever", System.String.concat("Value: ", ($t=Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.getStatus(), System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.Options, $t))));
+                Bridge.Test.NUnit.Assert.areEqual("Value: Whatever", System.String.concat("Value: ", System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.Options, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.getStatus())));
             }
         }
     });
@@ -11830,7 +11865,7 @@ Bridge.$N1391Result =                 r;
         statics: {
             testArrayCreateInstance: function () {
                 var $t, $t1, $t2, $t3;
-                var my1DArray = ($t=System.Int32, System.Array.init(5, Bridge.getDefaultValue($t), $t));
+                var my1DArray = ($t = System.Int32, System.Array.init(5, Bridge.getDefaultValue($t), $t));
                 for (var i = System.Array.getLower(my1DArray, 0); i <= (System.Array.getLength(my1DArray, 0) - 1); i = (i + 1) | 0) {
                     System.Array.set(my1DArray, Bridge.box(((i + 1) | 0), System.Int32), i);
                 }
@@ -11840,7 +11875,7 @@ Bridge.$N1391Result =                 r;
                 Bridge.Test.NUnit.Assert.areEqual(1, Bridge.unbox(my1DArray[0]));
                 Bridge.Test.NUnit.Assert.areEqual(5, Bridge.unbox(my1DArray[4]));
 
-                var my2DArray = ($t1=System.String, System.Array.create(Bridge.getDefaultValue($t1), null, $t1, 2, 3));
+                var my2DArray = ($t1 = System.String, System.Array.create(Bridge.getDefaultValue($t1), null, $t1, 2, 3));
                 for (var i1 = System.Array.getLower(my2DArray, 0); i1 <= (System.Array.getLength(my2DArray, 0) - 1); i1 = (i1 + 1) | 0) {
                     for (var j = System.Array.getLower(my2DArray, 1); j <= (System.Array.getLength(my2DArray, 1) - 1); j = (j + 1) | 0) {
                         System.Array.set(my2DArray, "abc" + i1 + j, i1, j);
@@ -11854,7 +11889,7 @@ Bridge.$N1391Result =                 r;
                 Bridge.Test.NUnit.Assert.areEqual("abc00", Bridge.unbox(System.Array.get(my2DArray, 0, 0)));
                 Bridge.Test.NUnit.Assert.areEqual("abc12", Bridge.unbox(System.Array.get(my2DArray, 1, 2)));
 
-                var my3DArray = ($t2=System.Object, System.Array.create(Bridge.getDefaultValue($t2), null, $t2, 2, 3, 4));
+                var my3DArray = ($t2 = System.Object, System.Array.create(Bridge.getDefaultValue($t2), null, $t2, 2, 3, 4));
                 for (var i2 = System.Array.getLower(my3DArray, 0); i2 <= (System.Array.getLength(my3DArray, 0) - 1); i2 = (i2 + 1) | 0) {
                     for (var j1 = System.Array.getLower(my3DArray, 1); j1 <= (System.Array.getLength(my3DArray, 1) - 1); j1 = (j1 + 1) | 0) {
                         for (var k = System.Array.getLower(my3DArray, 2); k <= (System.Array.getLength(my3DArray, 2) - 1); k = (k + 1) | 0) {
@@ -11872,7 +11907,7 @@ Bridge.$N1391Result =                 r;
                 Bridge.Test.NUnit.Assert.areEqual("abc123", Bridge.unbox(System.Array.get(my3DArray, 1, 2, 3)));
 
                 var myLengthsArray = System.Array.init([2, 3, 4, 5], System.Int32);
-                var my4DArray = ($t3=System.String, System.Array.create(Bridge.getDefaultValue($t3), null, $t3, myLengthsArray));
+                var my4DArray = ($t3 = System.String, System.Array.create(Bridge.getDefaultValue($t3), null, $t3, myLengthsArray));
                 for (var i3 = System.Array.getLower(my4DArray, 0); i3 <= (System.Array.getLength(my4DArray, 0) - 1); i3 = (i3 + 1) | 0) {
                     for (var j2 = System.Array.getLower(my4DArray, 1); j2 <= (System.Array.getLength(my4DArray, 1) - 1); j2 = (j2 + 1) | 0) {
                         for (var k1 = System.Array.getLower(my4DArray, 2); k1 <= (System.Array.getLength(my4DArray, 2) - 1); k1 = (k1 + 1) | 0) {
@@ -11913,39 +11948,39 @@ Bridge.$N1391Result =                 r;
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2052, {
         f1: function () {
             var $t;
-            ($t=null, System.Array.init(5, Bridge.getDefaultValue($t), $t));
+            ($t = null, System.Array.init(5, Bridge.getDefaultValue($t), $t));
         },
         f2: function () {
             var $t;
-            ($t=null, System.Array.create(Bridge.getDefaultValue($t), null, $t, 2, 3));
+            ($t = null, System.Array.create(Bridge.getDefaultValue($t), null, $t, 2, 3));
         },
         f3: function () {
             var $t;
-            ($t=null, System.Array.create(Bridge.getDefaultValue($t), null, $t, 2, 3, 4));
+            ($t = null, System.Array.create(Bridge.getDefaultValue($t), null, $t, 2, 3, 4));
         },
         f4: function () {
             var $t;
-            ($t=null, System.Array.create(Bridge.getDefaultValue($t), null, $t, System.Array.init([2, 3, 4, 5], System.Int32)));
+            ($t = null, System.Array.create(Bridge.getDefaultValue($t), null, $t, System.Array.init([2, 3, 4, 5], System.Int32)));
         },
         f5: function () {
             var $t;
-            ($t=System.Int32, System.Array.create(Bridge.getDefaultValue($t), null, $t, null));
+            ($t = System.Int32, System.Array.create(Bridge.getDefaultValue($t), null, $t, null));
         },
         f6: function () {
             var $t;
-            ($t=System.Int32, System.Array.init(-1, Bridge.getDefaultValue($t), $t));
+            ($t = System.Int32, System.Array.init(-1, Bridge.getDefaultValue($t), $t));
         },
         f7: function () {
             var $t;
-            ($t=System.Int32, System.Array.create(Bridge.getDefaultValue($t), null, $t, 2, -1));
+            ($t = System.Int32, System.Array.create(Bridge.getDefaultValue($t), null, $t, 2, -1));
         },
         f8: function () {
             var $t;
-            ($t=System.Int32, System.Array.create(Bridge.getDefaultValue($t), null, $t, 2, 3, -1));
+            ($t = System.Int32, System.Array.create(Bridge.getDefaultValue($t), null, $t, 2, 3, -1));
         },
         f9: function () {
             var $t;
-            ($t=System.Int32, System.Array.create(Bridge.getDefaultValue($t), null, $t, System.Array.init([2, 3, 4, -1], System.Int32)));
+            ($t = System.Int32, System.Array.create(Bridge.getDefaultValue($t), null, $t, System.Array.init([2, 3, 4, -1], System.Int32)));
         }
     });
 
@@ -12243,6 +12278,9 @@ Bridge.$N1391Result =                 r;
             return {
                 id : this.id
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"Id","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_Id","t":8,"sn":"getId","rt":System.Int32}}]}; }
         }
     });
 
@@ -12293,13 +12331,12 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge2065", {
         statics: {
             testBoxedEnum: function () {
-                var $t;
                 var vehicleType = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge2065.VehicleType.Boat;
                 var box = Bridge.box(vehicleType, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge2065.VehicleType, $box_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge2065.VehicleType.toString);
 
                 Bridge.Test.NUnit.Assert.areEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge2065.VehicleType.Boat, vehicleType);
                 Bridge.Test.NUnit.Assert.areEqual("Boat", box.toString());
-                Bridge.Test.NUnit.Assert.areEqual("Boat", ($t=System.Enum.parse(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge2065.VehicleType, "Boat"), System.Enum.toString(System.Enum, $t)));
+                Bridge.Test.NUnit.Assert.areEqual("Boat", System.Enum.toString(System.Enum, System.Enum.parse(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge2065.VehicleType, "Boat")));
             }
         }
     });
@@ -12473,41 +12510,41 @@ Bridge.$N1391Result =                 r;
 
                                     case 1: {
                                         //await to force state-machine generation
-                                            $task1 = System.Threading.Tasks.Task.delay(1);
-                                            $step = 2;
-                                            $task1.continueWith($asyncBody);
-                                            return;
+                                        $task1 = System.Threading.Tasks.Task.delay(1);
+                                        $step = 2;
+                                        $task1.continueWith($asyncBody);
+                                        return;
                                     }
                                     case 2: {
                                         $task1.getAwaitedResult();
                                         
-                                            //raise exception
-                                            j = 1;
-                                            j = (Bridge.Int.div(j, 0)) | 0;
+                                        //raise exception
+                                        j = 1;
+                                        j = (Bridge.Int.div(j, 0)) | 0;
 
-                                            $returnValue = "OK";
+                                        $returnValue = "OK";
                                         $step = 4;
                                         continue;
                                     }
                                     case 3: {
                                         $returnValue = "ERROR";
-                                            $async_e = null;
+                                        $async_e = null;
                                         $step = 4;
                                         continue;
                                     }
                                     case 4: {
                                         //may be empty
 
-                                            if ($jumpFromFinally > -1) {
-                                                $step = $jumpFromFinally;
-                                                $jumpFromFinally = null;
-                                            } else if ($async_e) {
-                                                $tcs.setException($async_e);
-                                                return;
-                                            } else if (Bridge.isDefined($returnValue)) {
-                                                $tcs.setResult($returnValue);
-                                                return;
-                                            }
+                                        if ($jumpFromFinally > -1) {
+                                            $step = $jumpFromFinally;
+                                            $jumpFromFinally = null;
+                                        } else if ($async_e) {
+                                            $tcs.setException($async_e);
+                                            return;
+                                        } else if (Bridge.isDefined($returnValue)) {
+                                            $tcs.setResult($returnValue);
+                                            return;
+                                        }
                                         $step = 5;
                                         continue;
                                     }
@@ -12554,17 +12591,17 @@ Bridge.$N1391Result =                 r;
                             switch ($step) {
                                 case 0: {
                                     done = Bridge.Test.NUnit.Assert.async();
-                                        $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2081.testMethod();
-                                        $step = 1;
-                                        $task1.continueWith($asyncBody, true);
-                                        return;
+                                    $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2081.testMethod();
+                                    $step = 1;
+                                    $task1.continueWith($asyncBody, true);
+                                    return;
                                 }
                                 case 1: {
                                     $taskResult1 = $task1.getAwaitedResult();
                                     s = $taskResult1;
-                                        Bridge.Test.NUnit.Assert.areEqual("ERROR", s);
+                                    Bridge.Test.NUnit.Assert.areEqual("ERROR", s);
 
-                                        done();
+                                    done();
                                     return;
                                 }
                                 default: {
@@ -13387,6 +13424,9 @@ Bridge.$N1391Result =                 r;
             return {
                 p1 : this.p1
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"p1","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_p1","t":8,"sn":"getp1","rt":System.Int32}}]}; }
         }
     });
 
@@ -15086,6 +15126,9 @@ Bridge.$N1391Result =                 r;
             return {
                 isTrue : this.isTrue
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"IsTrue","t":16,"rt":System.Boolean,"g":{"a":2,"n":"get_IsTrue","t":8,"sn":"getIsTrue","rt":System.Boolean}}]}; }
         }
     });
 
@@ -15466,35 +15509,14 @@ Bridge.$N1391Result =                 r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430", {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2419", {
         statics: {
-            intProp: 2,
-            testPropertyInitializer: function () {
-                var d2 = { value1: Bridge.getDefaultValue(System.Int32), value2: Bridge.getDefaultValue(System.Int32) };
-                Bridge.Test.NUnit.Assert.areEqual(0, d2.value1);
-                Bridge.Test.NUnit.Assert.areEqual(0, d2.value2);
+            testExternalEnum: function () {
+                var s1 = System.Enum.toString(System.String, "one");
+                var s2 = System.Enum.toString(System.Int32, (0));
 
-                var d3 = { value1: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.intProp, value2: 1, value4: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.intProp, value5: 1, value7: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.intProp, value8: 1 };
-                Bridge.Test.NUnit.Assert.areEqual(2, d3.value1);
-                Bridge.Test.NUnit.Assert.areEqual(1, d3.value2);
-                Bridge.Test.NUnit.Assert.null(d3.value3);
-                Bridge.Test.NUnit.Assert.areEqual(2, d3.value4);
-                Bridge.Test.NUnit.Assert.areEqual(1, d3.value5);
-                Bridge.Test.NUnit.Assert.null(d3.value6);
-                Bridge.Test.NUnit.Assert.areEqual(2, d3.value7);
-                Bridge.Test.NUnit.Assert.areEqual(1, d3.value8);
-                Bridge.Test.NUnit.Assert.null(d3.value9);
-
-                var d4 = { value1: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.intProp, value2: 1, value3: 0, value4: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.intProp, value5: 1, value6: 0, value7: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.intProp, value8: 1, value9: 0 };
-                Bridge.Test.NUnit.Assert.areEqual(2, d4.value1);
-                Bridge.Test.NUnit.Assert.areEqual(1, d4.value2);
-                Bridge.Test.NUnit.Assert.areEqual(0, d4.value3);
-                Bridge.Test.NUnit.Assert.areEqual(2, d4.value4);
-                Bridge.Test.NUnit.Assert.areEqual(1, d4.value5);
-                Bridge.Test.NUnit.Assert.areEqual(0, d4.value6);
-                Bridge.Test.NUnit.Assert.areEqual(2, d4.value7);
-                Bridge.Test.NUnit.Assert.areEqual(1, d4.value8);
-                Bridge.Test.NUnit.Assert.areEqual(0, d4.value9);
+                Bridge.Test.NUnit.Assert.areEqual("one", s1);
+                Bridge.Test.NUnit.Assert.areEqual("0", s2);
             }
         }
     });
@@ -16051,6 +16073,9 @@ Bridge.$N1391Result =                 r;
                 lastName : this.lastName,
                 firstName : this.firstName
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"FirstName","t":16,"rt":System.String,"g":{"a":2,"n":"get_FirstName","t":8,"sn":"getFirstName","rt":System.String}},{"a":2,"n":"LastName","t":16,"rt":System.String,"g":{"a":2,"n":"get_LastName","t":8,"sn":"getLastName","rt":System.String}}]}; }
         }
     });
 
@@ -16108,18 +16133,18 @@ Bridge.$N1391Result =                 r;
         statics: {
             testUseCase: function () {
                 var list = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge501.f1(new (System.Collections.Generic.List$1(System.Int32))());
-                var z = Bridge.JSON.serialize(list); // this is ok
+                var z = Bridge.Json.serialize(list); // this is ok
                 Bridge.Test.NUnit.Assert.areEqual$1("[7]", z, "List<int>");
 
                 var b = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge501.f2(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge501B());
-                var y = Bridge.JSON.serialize(b); // wrong, missing items
+                var y = Bridge.Json.serialize(b); // wrong, missing items
                 Bridge.Test.NUnit.Assert.areEqual$1("[1,2]", y, "Bridge501B");
 
                 var a = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge501.f3(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge501A()); // sine items is defined as member, push fails
-                var x = Bridge.JSON.serialize(a);
+                var x = Bridge.Json.serialize(a);
                 Bridge.Test.NUnit.Assert.areEqual$1("[7]", x, "Bridge501A");
 
-                var c = Bridge.JSON.deserialize(x, Bridge.ClientTest.Batch3.BridgeIssues.Bridge501A);
+                var c = Bridge.Json.deserialize(x, Bridge.ClientTest.Batch3.BridgeIssues.Bridge501A);
                 Bridge.Test.NUnit.Assert.areEqual$1("12", c.items$1, "Bridge501A Parse c.Items");
                 Bridge.Test.NUnit.Assert.areEqual$1(7, c.getItem(0), "Bridge501A Parse c[0]");
             }
@@ -16250,18 +16275,18 @@ Bridge.$N1391Result =                 r;
                                 case 0: {
                                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.setQUnitAsyncDone(Bridge.Test.NUnit.Assert.async());
 
-                                        $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.doSomethingAsync();
-                                        $step = 1;
-                                        $task1.continueWith($asyncBody, true);
-                                        return;
+                                    $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.doSomethingAsync();
+                                    $step = 1;
+                                    $task1.continueWith($asyncBody, true);
+                                    return;
                                 }
                                 case 1: {
                                     $taskResult1 = $task1.getAwaitedResult();
                                     result = $taskResult1;
 
-                                        Bridge.Test.NUnit.Assert.areEqual$1("A(0)A(1)B(0)B(1)B(2)", result, "#508 DoSomethingAsync");
+                                    Bridge.Test.NUnit.Assert.areEqual$1("A(0)A(1)B(0)B(1)B(2)", result, "#508 DoSomethingAsync");
 
-                                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.getQUnitAsyncDone()();
+                                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.getQUnitAsyncDone()();
                                     return;
                                 }
                                 default: {
@@ -16297,23 +16322,23 @@ Bridge.$N1391Result =                 r;
                                     case 0: {
                                         result = "";
 
-                                            i = 0;
-                                            $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.initPage();
-                                            $step = 1;
-                                            $task1.continueWith($asyncBody);
-                                            return;
+                                        i = 0;
+                                        $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.initPage();
+                                        $step = 1;
+                                        $task1.continueWith($asyncBody);
+                                        return;
                                     }
                                     case 1: {
                                         $taskResult1 = $task1.getAwaitedResult();
                                         np = $taskResult1;
-                                            $step = 2;
-                                            continue;
+                                        $step = 2;
+                                        continue;
                                     }
                                     case 2: {
                                         if ( np != null ) {
-                                                $step = 3;
-                                                continue;
-                                            }
+                                            $step = 3;
+                                            continue;
+                                        }
                                         $step = 6;
                                         continue;
                                     }
@@ -16322,9 +16347,9 @@ Bridge.$N1391Result =                 r;
                                     }
                                     case 4: {
                                         $task2 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.nextPage();
-                                            $step = 5;
-                                            $task2.continueWith($asyncBody);
-                                            return;
+                                        $step = 5;
+                                        $task2.continueWith($asyncBody);
+                                        return;
                                     }
                                     case 5: {
                                         $taskResult2 = $task2.getAwaitedResult();
@@ -16334,24 +16359,24 @@ Bridge.$N1391Result =                 r;
                                     }
                                     case 6: {
                                         
-                                            Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.count = 0;
-                                            i = 0;
-                                            $task3 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.initPage();
-                                            $step = 7;
-                                            $task3.continueWith($asyncBody);
-                                            return;
+                                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.count = 0;
+                                        i = 0;
+                                        $task3 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.initPage();
+                                        $step = 7;
+                                        $task3.continueWith($asyncBody);
+                                        return;
                                     }
                                     case 7: {
                                         $taskResult3 = $task3.getAwaitedResult();
                                         np1 = $taskResult3;
-                                            $step = 8;
-                                            continue;
+                                        $step = 8;
+                                        continue;
                                     }
                                     case 8: {
                                         if ( np1 != null ) {
-                                                $step = 9;
-                                                continue;
-                                            }
+                                            $step = 9;
+                                            continue;
+                                        }
                                         $step = 11;
                                         continue;
                                     }
@@ -16365,8 +16390,8 @@ Bridge.$N1391Result =                 r;
                                     }
                                     case 11: {
                                         
-                                            $tcs.setResult(result);
-                                            return;
+                                        $tcs.setResult(result);
+                                        return;
                                     }
                                     default: {
                                         $tcs.setResult(null);
@@ -16397,15 +16422,15 @@ Bridge.$N1391Result =                 r;
                                 switch ($step) {
                                     case 0: {
                                         $task1 = System.Threading.Tasks.Task.delay(0);
-                                            $step = 1;
-                                            $task1.continueWith($asyncBody);
-                                            return;
+                                        $step = 1;
+                                        $task1.continueWith($asyncBody);
+                                        return;
                                     }
                                     case 1: {
                                         $task1.getAwaitedResult();
                                         Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.count = (Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.count + 1) | 0;
-                                            $tcs.setResult(Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.count < 2 ? new $asm.$AnonymousType$14() : null);
-                                            return;
+                                        $tcs.setResult(Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.count < 2 ? new $asm.$AnonymousType$14() : null);
+                                        return;
                                     }
                                     default: {
                                         $tcs.setResult(null);
@@ -16436,15 +16461,15 @@ Bridge.$N1391Result =                 r;
                                 switch ($step) {
                                     case 0: {
                                         $task1 = System.Threading.Tasks.Task.delay(0);
-                                            $step = 1;
-                                            $task1.continueWith($asyncBody);
-                                            return;
+                                        $step = 1;
+                                        $task1.continueWith($asyncBody);
+                                        return;
                                     }
                                     case 1: {
                                         $task1.getAwaitedResult();
                                         Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.count = (Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.count + 1) | 0;
-                                            $tcs.setResult(Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.count < 3 ? new $asm.$AnonymousType$14() : null);
-                                            return;
+                                        $tcs.setResult(Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.count < 3 ? new $asm.$AnonymousType$14() : null);
+                                        return;
                                     }
                                     default: {
                                         $tcs.setResult(null);
@@ -16660,20 +16685,20 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge544", {
         statics: {
             testUseCase: function () {
-                var o = Bridge.JSON.deserialize("true", System.Boolean);
+                var o = Bridge.Json.deserialize("true", System.Boolean);
                 Bridge.Test.NUnit.Assert.areEqual$1(true, o, "Bridge544 bool");
             },
             testRelated: function () {
-                var i = Bridge.JSON.deserialize("25", System.Int32);
+                var i = Bridge.Json.deserialize("25", System.Int32);
                 Bridge.Test.NUnit.Assert.areEqual$1(25, i, "Bridge544 int");
 
-                var dbl = Bridge.JSON.deserialize("26.1", System.Double);
+                var dbl = Bridge.Json.deserialize("26.1", System.Double);
                 Bridge.Test.NUnit.Assert.areEqual$1(26.1, dbl, "Bridge544 double");
 
-                var d = Bridge.JSON.deserialize("27.2", System.Decimal);
+                var d = Bridge.Json.deserialize("27.2", System.Decimal);
                 Bridge.ClientTest.Batch3.Utilities.DecimalHelper.assertIsDecimalAndEqualTo$1(d, 27.2, "Bridge544 decimal");
 
-                var s = Bridge.JSON.deserialize("\"Some string\"", System.String);
+                var s = Bridge.Json.deserialize("\"Some string\"", System.String);
                 Bridge.Test.NUnit.Assert.areEqual$1("Some string", s, "Bridge544 string");
             }
         }
@@ -19003,18 +19028,18 @@ Bridge.$N1391Result =                 r;
                             switch ($step) {
                                 case 0: {
                                     done = Bridge.Test.NUnit.Assert.async();
-                                        c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge690A();
-                                        $task1 = c.start();
-                                        $step = 1;
-                                        $task1.continueWith($asyncBody, true);
-                                        return;
+                                    c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge690A();
+                                    $task1 = c.start();
+                                    $step = 1;
+                                    $task1.continueWith($asyncBody, true);
+                                    return;
                                 }
                                 case 1: {
                                     $taskResult1 = $task1.getAwaitedResult();
                                     r = $taskResult1;
 
-                                        Bridge.Test.NUnit.Assert.areEqual$1(8, r, "Bridge690 TestUseCaseForInstance");
-                                        done();
+                                    Bridge.Test.NUnit.Assert.areEqual$1(8, r, "Bridge690 TestUseCaseForInstance");
+                                    done();
                                     return;
                                 }
                                 default: {
@@ -19039,17 +19064,17 @@ Bridge.$N1391Result =                 r;
                             switch ($step) {
                                 case 0: {
                                     done = Bridge.Test.NUnit.Assert.async();
-                                        $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge690B.start();
-                                        $step = 1;
-                                        $task1.continueWith($asyncBody, true);
-                                        return;
+                                    $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge690B.start();
+                                    $step = 1;
+                                    $task1.continueWith($asyncBody, true);
+                                    return;
                                 }
                                 case 1: {
                                     $taskResult1 = $task1.getAwaitedResult();
                                     r = $taskResult1;
 
-                                        Bridge.Test.NUnit.Assert.areEqual$1(59, r, "Bridge690 TestUseCaseForStatic");
-                                        done();
+                                    Bridge.Test.NUnit.Assert.areEqual$1(59, r, "Bridge690 TestUseCaseForStatic");
+                                    done();
                                     return;
                                 }
                                 default: {
@@ -19080,14 +19105,14 @@ Bridge.$N1391Result =                 r;
                             switch ($step) {
                                 case 0: {
                                     $task1 = System.Threading.Tasks.Task.delay(100);
-                                        $step = 1;
-                                        $task1.continueWith($asyncBody);
-                                        return;
+                                    $step = 1;
+                                    $task1.continueWith($asyncBody);
+                                    return;
                                 }
                                 case 1: {
                                     $task1.getAwaitedResult();
                                     $tcs.setResult(((((i1 + i2) | 0) + this.i3) | 0));
-                                        return;
+                                    return;
                                 }
                                 default: {
                                     $tcs.setResult(null);
@@ -19119,14 +19144,14 @@ Bridge.$N1391Result =                 r;
                             switch ($step) {
                                 case 0: {
                                     $task1 = this.asyncSum(2, 3);
-                                        $step = 1;
-                                        $task1.continueWith($asyncBody);
-                                        return;
+                                    $step = 1;
+                                    $task1.continueWith($asyncBody);
+                                    return;
                                 }
                                 case 1: {
                                     $taskResult1 = $task1.getAwaitedResult();
                                     $tcs.setResult($taskResult1);
-                                        return;
+                                    return;
                                 }
                                 default: {
                                     $tcs.setResult(null);
@@ -19162,14 +19187,14 @@ Bridge.$N1391Result =                 r;
                                 switch ($step) {
                                     case 0: {
                                         $task1 = System.Threading.Tasks.Task.delay(100);
-                                            $step = 1;
-                                            $task1.continueWith($asyncBody);
-                                            return;
+                                        $step = 1;
+                                        $task1.continueWith($asyncBody);
+                                        return;
                                     }
                                     case 1: {
                                         $task1.getAwaitedResult();
                                         $tcs.setResult(((((i1 + i2) | 0) + Bridge.ClientTest.Batch3.BridgeIssues.Bridge690B.i3) | 0));
-                                            return;
+                                        return;
                                     }
                                     default: {
                                         $tcs.setResult(null);
@@ -19201,14 +19226,14 @@ Bridge.$N1391Result =                 r;
                                 switch ($step) {
                                     case 0: {
                                         $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge690B.asyncSum(19, 23);
-                                            $step = 1;
-                                            $task1.continueWith($asyncBody);
-                                            return;
+                                        $step = 1;
+                                        $task1.continueWith($asyncBody);
+                                        return;
                                     }
                                     case 1: {
                                         $taskResult1 = $task1.getAwaitedResult();
                                         $tcs.setResult($taskResult1);
-                                            return;
+                                        return;
                                     }
                                     default: {
                                         $tcs.setResult(null);
@@ -20652,31 +20677,31 @@ Bridge.$N1391Result =                 r;
                                 switch ($step) {
                                     case 0: {
                                         if (method == null) {
-                                                throw new System.ArgumentNullException("method");
-                                            }
+                                            throw new System.ArgumentNullException("method");
+                                        }
                                         $step = 1;
                                         continue;
                                     }
                                     case 1: {
                                         task = System.Threading.Tasks.Task.fromResult(new System.Exception("Success"));
-                                            if (throwException) {
-                                                throw new System.Exception("test");
-                                            }
+                                        if (throwException) {
+                                            throw new System.Exception("test");
+                                        }
 
-                                            $task1 = task;
-                                            $step = 2;
-                                            $task1.continueWith($asyncBody);
-                                            return;
+                                        $task1 = task;
+                                        $step = 2;
+                                        $task1.continueWith($asyncBody);
+                                        return;
                                     }
                                     case 2: {
                                         $taskResult1 = $task1.getAwaitedResult();
                                         $tcs.setResult($taskResult1);
-                                            return;
+                                        return;
                                     }
                                     case 3: {
                                         $tcs.setResult(new System.Exception(System.String.concat("Fail: ", exception.getMessage())));
-                                            return;
-                                            $async_e = null;
+                                        return;
+                                        $async_e = null;
                                         $step = 4;
                                         continue;
                                     }
@@ -20721,27 +20746,27 @@ Bridge.$N1391Result =                 r;
                                 case 0: {
                                     done = Bridge.Test.NUnit.Assert.async();
 
-                                        $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge830.testMethod("", false);
-                                        $step = 1;
-                                        $task1.continueWith($asyncBody, true);
-                                        return;
+                                    $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge830.testMethod("", false);
+                                    $step = 1;
+                                    $task1.continueWith($asyncBody, true);
+                                    return;
                                 }
                                 case 1: {
                                     $taskResult1 = $task1.getAwaitedResult();
                                     res = $taskResult1;
-                                        Bridge.Test.NUnit.Assert.areEqual("Success", res.getMessage());
+                                    Bridge.Test.NUnit.Assert.areEqual("Success", res.getMessage());
 
-                                        $task2 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge830.testMethod("", true);
-                                        $step = 2;
-                                        $task2.continueWith($asyncBody, true);
-                                        return;
+                                    $task2 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge830.testMethod("", true);
+                                    $step = 2;
+                                    $task2.continueWith($asyncBody, true);
+                                    return;
                                 }
                                 case 2: {
                                     $taskResult2 = $task2.getAwaitedResult();
                                     res = $taskResult2;
-                                        Bridge.Test.NUnit.Assert.areEqual("Fail: test", res.getMessage());
+                                    Bridge.Test.NUnit.Assert.areEqual("Fail: test", res.getMessage());
 
-                                        done();
+                                    done();
                                     return;
                                 }
                                 default: {
@@ -21188,13 +21213,12 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge893", {
         statics: {
             enumToStringWorks: function () {
-                var $t, $t1;
-                Bridge.Test.NUnit.Assert.areEqual("TestA1", ($t=Bridge.ClientTest.Batch3.BridgeIssues.Bridge893A.TestA1, System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge893A, $t)));
+                Bridge.Test.NUnit.Assert.areEqual("TestA1", System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge893A, Bridge.ClientTest.Batch3.BridgeIssues.Bridge893A.TestA1));
 
                 var a = 100;
                 Bridge.Test.NUnit.Assert.areEqual("100", System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge893A, a));
 
-                Bridge.Test.NUnit.Assert.areEqual("TestB3", ($t1=Bridge.ClientTest.Batch3.BridgeIssues.Bridge893B.TestB3, System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge893B, $t1)));
+                Bridge.Test.NUnit.Assert.areEqual("TestB3", System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge893B, Bridge.ClientTest.Batch3.BridgeIssues.Bridge893B.TestB3));
 
                 var t = 3;
                 Bridge.Test.NUnit.Assert.areEqual("TestB1, TestB2", System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge893B, t));
@@ -21245,12 +21269,11 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge905", {
         statics: {
             dayOfWeekFixed: function () {
-                var $t;
                 var dictionary = new (System.Collections.Generic.Dictionary$2(System.DayOfWeek,System.Int32))();
-                dictionary.add(0, 1);
+                dictionary.add(System.DayOfWeek.Sunday, 1);
 
-                Bridge.Test.NUnit.Assert.areEqual$1(1, dictionary.get(0), "1");
-                Bridge.Test.NUnit.Assert.areEqual$1("Saturday", ($t=(6), System.Enum.toString(System.DayOfWeek, $t)), "Saturday");
+                Bridge.Test.NUnit.Assert.areEqual$1(1, dictionary.get(System.DayOfWeek.Sunday), "1");
+                Bridge.Test.NUnit.Assert.areEqual$1("Saturday", System.Enum.toString(System.DayOfWeek, System.DayOfWeek.Saturday), "Saturday");
             }
         }
     });
@@ -21271,9 +21294,9 @@ Bridge.$N1391Result =                 r;
                                 switch ($step) {
                                     case 0: {
                                         $task1 = System.Threading.Tasks.Task.delay(1);
-                                            $step = 1;
-                                            $task1.continueWith($asyncBody);
-                                            return;
+                                        $step = 1;
+                                        $task1.continueWith($asyncBody);
+                                        return;
                                     }
                                     case 1: {
                                         $task1.getAwaitedResult();
@@ -21312,40 +21335,40 @@ Bridge.$N1391Result =                 r;
                                 case 0: {
                                     asyncComplete = Bridge.Test.NUnit.Assert.async();
 
-                                        myvar = System.Array.init([new $asm.$AnonymousType$19(1), new $asm.$AnonymousType$19(2)], $asm.$AnonymousType$19);
-                                        sum = 0;
-                                        $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge906.myfunc();
-                                        $step = 1;
-                                        $task1.continueWith($asyncBody, true);
-                                        return;
+                                    myvar = System.Array.init([new $asm.$AnonymousType$19(1), new $asm.$AnonymousType$19(2)], $asm.$AnonymousType$19);
+                                    sum = 0;
+                                    $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge906.myfunc();
+                                    $step = 1;
+                                    $task1.continueWith($asyncBody, true);
+                                    return;
                                 }
                                 case 1: {
                                     $task1.getAwaitedResult();
                                     
-                                        $t = Bridge.getEnumerator(myvar);
-                                        try {
-                                            while ($t.moveNext()) {
-                                                d = $t.getCurrent();
-                                                if (d.value > 0) {
-                                                    sum = (sum + d.value) | 0;
-                                                }
-                                            }
-                                        }finally {
-                                            if (Bridge.is($t, System.IDisposable)) {
-                                                $t.System$IDisposable$dispose();
+                                    $t = Bridge.getEnumerator(myvar);
+                                    try {
+                                        while ($t.moveNext()) {
+                                            d = $t.getCurrent();
+                                            if (d.value > 0) {
+                                                sum = (sum + d.value) | 0;
                                             }
                                         }
-                                        $task2 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge906.myfunc();
-                                        $step = 2;
-                                        $task2.continueWith($asyncBody, true);
-                                        return;
+                                    }finally {
+                                        if (Bridge.is($t, System.IDisposable)) {
+                                            $t.System$IDisposable$dispose();
+                                        }
+                                    }
+                                    $task2 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge906.myfunc();
+                                    $step = 2;
+                                    $task2.continueWith($asyncBody, true);
+                                    return;
                                 }
                                 case 2: {
                                     $task2.getAwaitedResult();
                                     
-                                        Bridge.Test.NUnit.Assert.areEqual(3, sum);
+                                    Bridge.Test.NUnit.Assert.areEqual(3, sum);
 
-                                        asyncComplete();
+                                    asyncComplete();
                                     return;
                                 }
                                 default: {
@@ -21374,42 +21397,42 @@ Bridge.$N1391Result =                 r;
                                 case 0: {
                                     asyncComplete = Bridge.Test.NUnit.Assert.async();
 
-                                        myvar = System.Array.init([new $asm.$AnonymousType$19(-3), new $asm.$AnonymousType$19(2)], $asm.$AnonymousType$19);
-                                        sum = 0;
-                                        $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge906.myfunc();
-                                        $step = 1;
-                                        $task1.continueWith($asyncBody, true);
-                                        return;
+                                    myvar = System.Array.init([new $asm.$AnonymousType$19(-3), new $asm.$AnonymousType$19(2)], $asm.$AnonymousType$19);
+                                    sum = 0;
+                                    $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge906.myfunc();
+                                    $step = 1;
+                                    $task1.continueWith($asyncBody, true);
+                                    return;
                                 }
                                 case 1: {
                                     $task1.getAwaitedResult();
                                     
-                                        $t = Bridge.getEnumerator(myvar);
-                                        try {
-                                            while ($t.moveNext()) {
-                                                d = $t.getCurrent();
-                                                if (d.value > 0) {
-                                                    sum = (sum + d.value) | 0;
-                                                } else {
-                                                    sum = (sum - d.value) | 0;
-                                                }
-                                            }
-                                        }finally {
-                                            if (Bridge.is($t, System.IDisposable)) {
-                                                $t.System$IDisposable$dispose();
+                                    $t = Bridge.getEnumerator(myvar);
+                                    try {
+                                        while ($t.moveNext()) {
+                                            d = $t.getCurrent();
+                                            if (d.value > 0) {
+                                                sum = (sum + d.value) | 0;
+                                            } else {
+                                                sum = (sum - d.value) | 0;
                                             }
                                         }
-                                        $task2 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge906.myfunc();
-                                        $step = 2;
-                                        $task2.continueWith($asyncBody, true);
-                                        return;
+                                    }finally {
+                                        if (Bridge.is($t, System.IDisposable)) {
+                                            $t.System$IDisposable$dispose();
+                                        }
+                                    }
+                                    $task2 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge906.myfunc();
+                                    $step = 2;
+                                    $task2.continueWith($asyncBody, true);
+                                    return;
                                 }
                                 case 2: {
                                     $task2.getAwaitedResult();
                                     
-                                        Bridge.Test.NUnit.Assert.areEqual(5, sum);
+                                    Bridge.Test.NUnit.Assert.areEqual(5, sum);
 
-                                        asyncComplete();
+                                    asyncComplete();
                                     return;
                                 }
                                 default: {
@@ -21425,29 +21448,32 @@ Bridge.$N1391Result =                 r;
     });
 
     Bridge.define("$AnonymousType$19", $asm, {
-        $kind: "anonymous",
-        ctor: function (value) {
-            this.value = value;
-        },
-        getValue : function () {
-            return this.value;
-        },
-        equals: function (o) {
-            if (!Bridge.is(o, $asm.$AnonymousType$19)) {
-                return false;
-            }
-            return Bridge.equals(this.value, o.value);
-        },
-        getHashCode: function () {
-            var h = Bridge.addHash([7550210778, this.value]);
-            return h;
-        },
-        toJSON: function () {
-            return {
-                value : this.value
-            };
+    $kind: "anonymous",
+    ctor: function (value) {
+        this.value = value;
+    },
+    getValue : function () {
+        return this.value;
+    },
+    equals: function (o) {
+        if (!Bridge.is(o, $asm.$AnonymousType$19)) {
+            return false;
         }
-    });
+        return Bridge.equals(this.value, o.value);
+    },
+    getHashCode: function () {
+        var h = Bridge.addHash([7550210778, this.value]);
+        return h;
+    },
+    toJSON: function () {
+        return {
+            value : this.value
+        };
+    },
+    statics : {
+        $metadata : function () { return {"m":[{"a":2,"n":"Value","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_Value","t":8,"sn":"getValue","rt":System.Int32}}]}; }
+    }
+});
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge907", {
         statics: {
@@ -21485,14 +21511,14 @@ Bridge.$N1391Result =                 r;
                                 switch ($step) {
                                     case 0: {
                                         $task1 = System.Threading.Tasks.Task.delay(1);
-                                            $step = 1;
-                                            $task1.continueWith($asyncBody);
-                                            return;
+                                        $step = 1;
+                                        $task1.continueWith($asyncBody);
+                                        return;
                                     }
                                     case 1: {
                                         $task1.getAwaitedResult();
                                         $tcs.setResult(1);
-                                            return;
+                                        return;
                                     }
                                     default: {
                                         $tcs.setResult(null);
@@ -21522,19 +21548,19 @@ Bridge.$N1391Result =                 r;
                             switch ($step) {
                                 case 0: {
                                     asyncComplete = Bridge.Test.NUnit.Assert.async();
-                                        result = 0;
-                                        $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge912.myfunc();
-                                        $step = 1;
-                                        $task1.continueWith($asyncBody, true);
-                                        return;
+                                    result = 0;
+                                    $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge912.myfunc();
+                                    $step = 1;
+                                    $task1.continueWith($asyncBody, true);
+                                    return;
                                 }
                                 case 1: {
                                     $taskResult1 = $task1.getAwaitedResult();
                                     result = $taskResult1;
 
-                                        Bridge.Test.NUnit.Assert.areEqual(1, result);
+                                    Bridge.Test.NUnit.Assert.areEqual(1, result);
 
-                                        asyncComplete();
+                                    asyncComplete();
                                     return;
                                 }
                                 default: {
@@ -21577,19 +21603,19 @@ Bridge.$N1391Result =                 r;
                             switch ($step) {
                                 case 0: {
                                     asyncComplete = Bridge.Test.NUnit.Assert.async();
-                                        a = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge918();
-                                        $task1 = a.test();
-                                        $step = 1;
-                                        $task1.continueWith($asyncBody, true);
-                                        return;
+                                    a = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge918();
+                                    $task1 = a.test();
+                                    $step = 1;
+                                    $task1.continueWith($asyncBody, true);
+                                    return;
                                 }
                                 case 1: {
                                     $taskResult1 = $task1.getAwaitedResult();
                                     result = Bridge.cast($taskResult1, System.Int32);
 
-                                        Bridge.Test.NUnit.Assert.areEqual(1, result);
+                                    Bridge.Test.NUnit.Assert.areEqual(1, result);
 
-                                        asyncComplete();
+                                    asyncComplete();
                                     return;
                                 }
                                 default: {
@@ -21616,14 +21642,14 @@ Bridge.$N1391Result =                 r;
                             switch ($step) {
                                 case 0: {
                                     $task1 = System.Threading.Tasks.Task.delay(1);
-                                        $step = 1;
-                                        $task1.continueWith($asyncBody);
-                                        return;
+                                    $step = 1;
+                                    $task1.continueWith($asyncBody);
+                                    return;
                                 }
                                 case 1: {
                                     $task1.getAwaitedResult();
                                     $tcs.setResult(1);
-                                        return;
+                                    return;
                                 }
                                 default: {
                                     $tcs.setResult(null);
@@ -21672,15 +21698,15 @@ Bridge.$N1391Result =                 r;
                                 switch ($step) {
                                     case 0: {
                                         done = Bridge.Test.NUnit.Assert.async();
-                                            result = false;
+                                        result = false;
                                         $step = 1;
                                         continue;
                                     }
                                     case 1: {
                                         $task1 = System.Threading.Tasks.Task.delay(1);
-                                            $step = 2;
-                                            $task1.continueWith($asyncBody, true);
-                                            return;
+                                        $step = 2;
+                                        $task1.continueWith($asyncBody, true);
+                                        return;
                                     }
                                     case 2: {
                                         $task1.getAwaitedResult();
@@ -21689,32 +21715,32 @@ Bridge.$N1391Result =                 r;
                                     }
                                     case 3: {
                                         try {
-                                                throw new System.Exception("test");
-                                            }
-                                            catch ($e1) {
-                                                $e1 = System.Exception.create($e1);
-                                            }
+                                            throw new System.Exception("test");
+                                        }
+                                        catch ($e1) {
+                                            $e1 = System.Exception.create($e1);
+                                        }
 
-                                            result = true;
+                                        result = true;
 
-                                            if ($jumpFromFinally > -1) {
-                                                $step = $jumpFromFinally;
-                                                $jumpFromFinally = null;
-                                            } else if ($async_e) {
-                                                throw $async_e;
-                                                return;
-                                            } else if (Bridge.isDefined($returnValue)) {
-                                                $tcs.setResult($returnValue);
-                                                return;
-                                            }
+                                        if ($jumpFromFinally > -1) {
+                                            $step = $jumpFromFinally;
+                                            $jumpFromFinally = null;
+                                        } else if ($async_e) {
+                                            throw $async_e;
+                                            return;
+                                        } else if (Bridge.isDefined($returnValue)) {
+                                            $tcs.setResult($returnValue);
+                                            return;
+                                        }
                                         $step = 4;
                                         continue;
                                     }
                                     case 4: {
                                         
-                                            Bridge.Test.NUnit.Assert.true(result);
+                                        Bridge.Test.NUnit.Assert.true(result);
 
-                                            done();
+                                        done();
                                         return;
                                     }
                                     default: {
@@ -21762,9 +21788,9 @@ Bridge.$N1391Result =                 r;
                                     }
                                     case 1: {
                                         $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge929.test();
-                                            $step = 2;
-                                            $task1.continueWith($asyncBody, true);
-                                            return;
+                                        $step = 2;
+                                        $task1.continueWith($asyncBody, true);
+                                        return;
                                     }
                                     case 2: {
                                         $task1.getAwaitedResult();
@@ -21774,13 +21800,13 @@ Bridge.$N1391Result =                 r;
                                     }
                                     case 3: {
                                         Bridge.Test.NUnit.Assert.areEqual("test", e.getMessage());
-                                            $async_e = null;
+                                        $async_e = null;
                                         $step = 4;
                                         continue;
                                     }
                                     case 4: {
                                         
-                                            done();
+                                        done();
                                         return;
                                     }
                                     default: {
@@ -21819,9 +21845,9 @@ Bridge.$N1391Result =                 r;
 
                                     case 1: {
                                         $task1 = System.Threading.Tasks.Task.delay(1);
-                                            $step = 2;
-                                            $task1.continueWith($asyncBody);
-                                            return;
+                                        $step = 2;
+                                        $task1.continueWith($asyncBody);
+                                        return;
                                     }
                                     case 2: {
                                         $task1.getAwaitedResult();
@@ -21831,13 +21857,13 @@ Bridge.$N1391Result =                 r;
                                     }
                                     case 3: {
                                         try {
-                                                throw new System.Exception("catch");
-                                            }
-                                            catch ($e1) {
-                                                $e1 = System.Exception.create($e1);
-                                            }
-                                            throw $async_e;
-                                            $async_e = null;
+                                            throw new System.Exception("catch");
+                                        }
+                                        catch ($e1) {
+                                            $e1 = System.Exception.create($e1);
+                                        }
+                                        throw $async_e;
+                                        $async_e = null;
                                         $step = 4;
                                         continue;
                                     }
@@ -21885,9 +21911,9 @@ Bridge.$N1391Result =                 r;
                                 switch ($step) {
                                     case 0: {
                                         $task1 = System.Threading.Tasks.Task.fromResult(1);
-                                            $step = 1;
-                                            $task1.continueWith($asyncBody);
-                                            return;
+                                        $step = 1;
+                                        $task1.continueWith($asyncBody);
+                                        return;
                                     }
                                     case 1: {
                                         $taskResult1 = $task1.getAwaitedResult();
@@ -21927,26 +21953,26 @@ Bridge.$N1391Result =                 r;
                                 switch ($step) {
                                     case 0: {
                                         res = true;
-                                            $task1 = System.Threading.Tasks.Task.delay(1);
-                                            $step = 1;
-                                            $task1.continueWith($asyncBody);
-                                            return;
+                                        $task1 = System.Threading.Tasks.Task.delay(1);
+                                        $step = 1;
+                                        $task1.continueWith($asyncBody);
+                                        return;
                                     }
                                     case 1: {
                                         $task1.getAwaitedResult();
                                         
-                                            if (res) {
-                                                $step = 2;
-                                                continue;
-                                            } 
-                                            $step = 4;
+                                        if (res) {
+                                            $step = 2;
                                             continue;
+                                        } 
+                                        $step = 4;
+                                        continue;
                                     }
                                     case 2: {
                                         $task2 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge930.test();
-                                            $step = 3;
-                                            $task2.continueWith($asyncBody);
-                                            return;
+                                        $step = 3;
+                                        $task2.continueWith($asyncBody);
+                                        return;
                                     }
                                     case 3: {
                                         $task2.getAwaitedResult();
@@ -21955,10 +21981,10 @@ Bridge.$N1391Result =                 r;
                                     }
                                     case 4: {
                                         
-                                            $task3 = System.Threading.Tasks.Task.delay(1);
-                                            $step = 5;
-                                            $task3.continueWith($asyncBody);
-                                            return;
+                                        $task3 = System.Threading.Tasks.Task.delay(1);
+                                        $step = 5;
+                                        $task3.continueWith($asyncBody);
+                                        return;
                                     }
                                     case 5: {
                                         $task3.getAwaitedResult();
@@ -22001,9 +22027,9 @@ Bridge.$N1391Result =                 r;
                                     }
                                     case 1: {
                                         $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge930.test1();
-                                            $step = 2;
-                                            $task1.continueWith($asyncBody, true);
-                                            return;
+                                        $step = 2;
+                                        $task1.continueWith($asyncBody, true);
+                                        return;
                                     }
                                     case 2: {
                                         $task1.getAwaitedResult();
@@ -22013,13 +22039,13 @@ Bridge.$N1391Result =                 r;
                                     }
                                     case 3: {
                                         Bridge.Test.NUnit.Assert.areEqual("test", e.getMessage());
-                                            $async_e = null;
+                                        $async_e = null;
                                         $step = 4;
                                         continue;
                                     }
                                     case 4: {
                                         
-                                            done();
+                                        done();
                                         return;
                                     }
                                     default: {
@@ -23192,6 +23218,9 @@ Bridge.$N1391Result =                 r;
             return {
                 i : this.i
             };
+        },
+        statics : {
+            $metadata : function () { return {"m":[{"a":2,"n":"i","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_i","t":8,"sn":"geti","rt":System.Int32}}]}; }
         }
     });
 
