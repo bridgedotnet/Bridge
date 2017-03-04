@@ -73,6 +73,17 @@ namespace Bridge.Translator.TypeScript
                     {
                         continue;
                     }
+
+                    if (ctor.Parameters.Count == 0)
+                    {
+                        XmlToJsDoc.EmitComment(this, ctor);
+                        this.Write("new ()");
+                        this.WriteColon();
+                        this.Write(name);
+                        this.WriteSemiColon();
+                        this.WriteNewLine();
+                    }
+
                     XmlToJsDoc.EmitComment(this, ctor);
                     var ctorName = JS.Funcs.CONSTRUCTOR;
 
