@@ -166,6 +166,10 @@ namespace System
             _k = k;
         }
 
+        /// <summary>
+        /// Returns the hash code for this instance.
+        /// </summary>
+        /// <returns>The hash code for this instance.</returns>
         public override int GetHashCode()
         {
             return this._a ^ (((int)this._b << 16) | (int)(ushort)this._c) ^ (((int)this._f << 24) | this._k);
