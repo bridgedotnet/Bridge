@@ -354,6 +354,13 @@ namespace Bridge.Translator
             this.WriteNewLine();
             this.WriteNewLine();
             this.Outdent();
+
+            if (this.Emitter.AsyncBlock.MethodDeclaration != null &&
+                !this.Emitter.AsyncBlock.MethodDeclaration.HasModifier(Modifiers.Async))
+            {
+                this.Write("return ");    
+            }
+
             this.Write(JS.Funcs.ASYNC_BODY + "();");
 
             if (this.IsTaskReturn)
@@ -409,7 +416,11 @@ namespace Bridge.Translator
             }
             else
             {
+                var level = this.Emitter.InitialLevel;
+                ((Emitter) this.Emitter).InitialLevel = 0;
+                this.Emitter.ResetLevel();
                 this.Body.AcceptVisitor(this.Emitter);
+                ((Emitter)this.Emitter).InitialLevel = level;
             }
 
             this.RestoreWriter(writer);

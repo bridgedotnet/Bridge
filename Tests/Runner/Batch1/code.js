@@ -2384,71 +2384,71 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                                 case 0: {
                                     cost = 0;
                                     if (choice === 10) {
-                                            $step = 1;
-                                            continue;
-                                        }
-                                        else if (choice === 1) {
-                                            $step = 2;
-                                            continue;
-                                        }
-                                        else if (choice === 15) {
-                                            $step = 3;
-                                            continue;
-                                        }
-                                        else if (choice === 2) {
-                                            $step = 4;
-                                            continue;
-                                        }
-                                        else if (choice === 20) {
-                                            $step = 5;
-                                            continue;
-                                        }
-                                        else if (choice === 3) {
-                                            $step = 6;
-                                            continue;
-                                        }
-                                        else  {
-                                            $step = 7;
-                                            continue;
-                                        }
+                                        $step = 1;
+                                        continue;
+                                    }
+                                    else if (choice === 1) {
+                                        $step = 2;
+                                        continue;
+                                    }
+                                    else if (choice === 15) {
+                                        $step = 3;
+                                        continue;
+                                    }
+                                    else if (choice === 2) {
+                                        $step = 4;
+                                        continue;
+                                    }
+                                    else if (choice === 20) {
+                                        $step = 5;
+                                        continue;
+                                    }
+                                    else if (choice === 3) {
+                                        $step = 6;
+                                        continue;
+                                    }
+                                    else  {
+                                        $step = 7;
+                                        continue;
+                                    }
                                     $step = 8;
                                     continue;
                                 }
                                 case 1: {
                                     $step = 7;
-                                        continue;
+                                    continue;
                                 }
                                 case 2: {
                                     cost = (cost + 25) | 0;
-                                        $step = 8;
-                                        continue;
+                                    $step = 8;
+                                    continue;
                                 }
                                 case 3: {
                                     $step = 7;
-                                        continue;
+                                    continue;
                                 }
                                 case 4: {
                                     cost = (cost + 25) | 0;
-                                        $step = 2;
-                                        continue;
+                                    $step = 2;
+                                    continue;
                                 }
                                 case 5: {
                                     $step = 7;
-                                        continue;
+                                    continue;
                                 }
                                 case 6: {
                                     cost = (cost + 50) | 0;
-                                        $step = 2;
-                                        continue;
+                                    $step = 2;
+                                    continue;
                                 }
                                 case 7: {
                                     cost = -1;
-                                        $step = 8;
-                                        continue;
+                                    $step = 8;
+                                    continue;
                                 }
                                 case 8: {
                                     
-                                        return;
+                                    return cost;
                                 }
                                 default: {
                                     return;
@@ -2457,7 +2457,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         }
                     }, arguments);
 
-                $asyncBody();
+                return $asyncBody();
             },
             labelGoto: function (count) {
                 var $step = 0,
@@ -2472,20 +2472,20 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                                 }
                                 case 1: {
                                     j = (j + 1) | 0;
-                                        if (j <= count) {
-                                            $step = 2;
-                                            continue;
-                                        } 
-                                        $step = 3;
+                                    if (j <= count) {
+                                        $step = 2;
                                         continue;
+                                    } 
+                                    $step = 3;
+                                    continue;
                                 }
                                 case 2: {
                                     $step = 1;
-                                        continue;
+                                    continue;
                                 }
                                 case 3: {
                                     
-                                        return;
+                                    return j;
                                 }
                                 default: {
                                     return;
@@ -2494,7 +2494,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         }
                     }, arguments);
 
-                $asyncBody();
+                return $asyncBody();
             },
             gotoMethod: function () {
                 var $step = 0,
@@ -2509,55 +2509,55 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                             switch ($step) {
                                 case 0: {
                                     dummy = 0;
-                                        a = 0;
-                                        $step = 1;
-                                        continue;
+                                    a = 0;
+                                    $step = 1;
+                                    continue;
                                 }
                                 case 1: {
                                     if ( a < 10 ) {
-                                            $step = 2;
-                                            continue;
-                                        }
+                                        $step = 2;
+                                        continue;
+                                    }
                                     $step = 15;
                                     continue;
                                 }
                                 case 2: {
                                     y = 0;
-                                        $step = 3;
-                                        continue;
+                                    $step = 3;
+                                    continue;
                                 }
                                 case 3: {
                                     if ( y < 10 ) {
-                                            $step = 4;
-                                            continue;
-                                        }
+                                        $step = 4;
+                                        continue;
+                                    }
                                     $step = 12;
                                     continue;
                                 }
                                 case 4: {
                                     x = 0;
-                                        $step = 5;
-                                        continue;
+                                    $step = 5;
+                                    continue;
                                 }
                                 case 5: {
                                     if ( x < 10 ) {
-                                            $step = 6;
-                                            continue;
-                                        }
+                                        $step = 6;
+                                        continue;
+                                    }
                                     $step = 10;
                                     continue;
                                 }
                                 case 6: {
                                     if (x === 5 && y === 5) {
-                                            $step = 7;
-                                            continue;
-                                        } 
-                                        $step = 8;
+                                        $step = 7;
                                         continue;
+                                    } 
+                                    $step = 8;
+                                    continue;
                                 }
                                 case 7: {
                                     $step = 13;
-                                        continue;
+                                    continue;
                                 }
 
                                 case 9: {
@@ -2580,7 +2580,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                                 }
                                 case 13: {
                                     $step = 14;
-                                        continue;
+                                    continue;
                                 }
                                 case 14: {
                                     a = (a + 1) | 0;
@@ -2588,7 +2588,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                                     continue;
                                 }
                                 case 15: {
-                                    return;
+                                    return dummy;
                                 }
                                 default: {
                                     return;
@@ -2597,7 +2597,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         }
                     }, arguments);
 
-                $asyncBody();
+                return $asyncBody();
             },
             testGotoCase: function () {
                 Bridge.Test.NUnit.Assert.areEqual(25, Bridge.ClientTest.BasicCSharp.TestGoto.caseGoto(1));
@@ -12314,61 +12314,61 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                                 switch ($step) {
                                     case 0: {
                                         done = Bridge.Test.NUnit.Assert.async();
-                                            sb = new System.Text.StringBuilder();
+                                        sb = new System.Text.StringBuilder();
 
-                                            sb.append("1");
+                                        sb.append("1");
                                         $step = 1;
                                         continue;
                                     }
                                     case 1: {
                                         sb.append("2");
-                                            throw new System.Exception();
+                                        throw new System.Exception();
                                         $step = 4;
                                         continue;
                                     }
                                     case 2: {
                                         sb.append("3");
-                                            $task1 = System.Threading.Tasks.Task.delay(1);
-                                            $step = 3;
-                                            $task1.continueWith($asyncBody, true);
-                                            return;
+                                        $task1 = System.Threading.Tasks.Task.delay(1);
+                                        $step = 3;
+                                        $task1.continueWith($asyncBody, true);
+                                        return;
                                     }
                                     case 3: {
                                         $task1.getAwaitedResult();
                                         sb.append("4");
-                                            $async_e = null;
+                                        $async_e = null;
                                         $step = 4;
                                         continue;
                                     }
                                     case 4: {
                                         sb.append("5");
-                                            $task2 = System.Threading.Tasks.Task.delay(1);
-                                            $step = 5;
-                                            $task2.continueWith($asyncBody, true);
-                                            return;
+                                        $task2 = System.Threading.Tasks.Task.delay(1);
+                                        $step = 5;
+                                        $task2.continueWith($asyncBody, true);
+                                        return;
                                     }
                                     case 5: {
                                         $task2.getAwaitedResult();
                                         sb.append("6");
 
-                                            if ($jumpFromFinally > -1) {
-                                                $step = $jumpFromFinally;
-                                                $jumpFromFinally = null;
-                                            } else if ($async_e) {
-                                                throw $async_e;
-                                                return;
-                                            } else if (Bridge.isDefined($returnValue)) {
-                                                $tcs.setResult($returnValue);
-                                                return;
-                                            }
+                                        if ($jumpFromFinally > -1) {
+                                            $step = $jumpFromFinally;
+                                            $jumpFromFinally = null;
+                                        } else if ($async_e) {
+                                            throw $async_e;
+                                            return;
+                                        } else if (Bridge.isDefined($returnValue)) {
+                                            $tcs.setResult($returnValue);
+                                            return;
+                                        }
                                         $step = 6;
                                         continue;
                                     }
                                     case 6: {
                                         sb.append("7");
 
-                                            Bridge.Test.NUnit.Assert.areEqual("1234567", sb.toString());
-                                            done();
+                                        Bridge.Test.NUnit.Assert.areEqual("1234567", sb.toString());
+                                        done();
                                         return;
                                     }
                                     default: {
@@ -32058,10 +32058,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                             switch ($step) {
                                 case 0: {
                                     state = 1;
-                                        $task1 = task;
-                                        $step = 1;
-                                        $task1.continueWith($asyncBody, true);
-                                        return;
+                                    $task1 = task;
+                                    $step = 1;
+                                    $task1.continueWith($asyncBody, true);
+                                    return;
                                 }
                                 case 1: {
                                     $task1.getAwaitedResult();
@@ -32112,10 +32112,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                                 switch ($step) {
                                     case 0: {
                                         state = 1;
-                                            $task1 = task;
-                                            $step = 1;
-                                            $task1.continueWith($asyncBody);
-                                            return;
+                                        $task1 = task;
+                                        $step = 1;
+                                        $task1.continueWith($asyncBody);
+                                        return;
                                     }
                                     case 1: {
                                         $task1.getAwaitedResult();
@@ -32179,15 +32179,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                                 switch ($step) {
                                     case 0: {
                                         state = 1;
-                                            $task1 = task;
-                                            $step = 1;
-                                            $task1.continueWith($asyncBody);
-                                            return;
+                                        $task1 = task;
+                                        $step = 1;
+                                        $task1.continueWith($asyncBody);
+                                        return;
                                     }
                                     case 1: {
                                         $task1.getAwaitedResult();
                                         state = 2;
-                                            throw ex;
+                                        throw ex;
                                         $tcs.setResult(null);
                                         return;
                                     }
@@ -32248,10 +32248,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                                 switch ($step) {
                                     case 0: {
                                         state = 1;
-                                            $task1 = task;
-                                            $step = 1;
-                                            $task1.continueWith($asyncBody);
-                                            return;
+                                        $task1 = task;
+                                        $step = 1;
+                                        $task1.continueWith($asyncBody);
+                                        return;
                                     }
                                     case 1: {
                                         $task1.getAwaitedResult();
@@ -32321,9 +32321,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                                     case 1: {
                                         $task1 = task;
-                                            $step = 2;
-                                            $task1.continueWith($asyncBody);
-                                            return;
+                                        $step = 2;
+                                        $task1.continueWith($asyncBody);
+                                        return;
                                     }
                                     case 2: {
                                         $task1.getAwaitedResult();
@@ -32333,7 +32333,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                                     }
                                     case 3: {
                                         Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(ex, ex2), "The exception should be correct");
-                                            $async_e = null;
+                                        $async_e = null;
                                         $step = 4;
                                         continue;
                                     }
@@ -32393,16 +32393,16 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                                 switch ($step) {
                                     case 0: {
                                         state = 1;
-                                            $task1 = task;
-                                            $step = 1;
-                                            $task1.continueWith($asyncBody);
-                                            return;
+                                        $task1 = task;
+                                        $step = 1;
+                                        $task1.continueWith($asyncBody);
+                                        return;
                                     }
                                     case 1: {
                                         $task1.getAwaitedResult();
                                         state = 2;
-                                            $tcs.setResult(42);
-                                            return;
+                                        $tcs.setResult(42);
+                                        return;
                                     }
                                     default: {
                                         $tcs.setResult(null);
@@ -32977,27 +32977,27 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                             case 0: {
                                 completeAsync = Bridge.Test.NUnit.Assert.async();
 
-                                    promise = this.createPromise();
-                                    result = null;
+                                promise = this.createPromise();
+                                result = null;
 
-                                    task = System.Threading.Tasks.Task.run(function () {
-                                        Bridge.Test.NUnit.Assert.true$1(result == null, "Await should not finish too early (a).");
-                                        promise.resolve([Bridge.box(42, System.Int32), "result 123", Bridge.box(101, System.Int32)]);
-                                    });
+                                task = System.Threading.Tasks.Task.run(function () {
+                                    Bridge.Test.NUnit.Assert.true$1(result == null, "Await should not finish too early (a).");
+                                    promise.resolve([Bridge.box(42, System.Int32), "result 123", Bridge.box(101, System.Int32)]);
+                                });
 
-                                    Bridge.Test.NUnit.Assert.true$1(result == null, "Await should not finish too early (b).");
+                                Bridge.Test.NUnit.Assert.true$1(result == null, "Await should not finish too early (b).");
 
-                                    $task1 = System.Threading.Tasks.Task.fromPromise(promise);
-                                    $step = 1;
-                                    $task1.continueWith($asyncBody, true);
-                                    return;
+                                $task1 = System.Threading.Tasks.Task.fromPromise(promise);
+                                $step = 1;
+                                $task1.continueWith($asyncBody, true);
+                                return;
                             }
                             case 1: {
                                 $taskResult1 = $task1.getAwaitedResult();
                                 result = $taskResult1;
 
-                                    Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init([Bridge.box(42, System.Int32), "result 123", Bridge.box(101, System.Int32)], System.Object), Bridge.unbox(result), "The result should be correct");
-                                    completeAsync();
+                                Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init([Bridge.box(42, System.Int32), "result 123", Bridge.box(101, System.Int32)], System.Object), Bridge.unbox(result), "The result should be correct");
+                                completeAsync();
                                 return;
                             }
                             default: {
@@ -33031,49 +33031,49 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                                 case 0: {
                                     completeAsync = Bridge.Test.NUnit.Assert.async();
 
-                                        promise = this.createPromise();
+                                    promise = this.createPromise();
 
-                                        continuationRun = false;
+                                    continuationRun = false;
 
-                                        task = System.Threading.Tasks.Task.run(function () {
-                                            Bridge.Test.NUnit.Assert.false$1(continuationRun, "Continuation should not be run too early (a).");
-                                            promise.reject([Bridge.box(42, System.Int32), "result 123", Bridge.box(101, System.Int32)]);
-                                        });
+                                    task = System.Threading.Tasks.Task.run(function () {
+                                        Bridge.Test.NUnit.Assert.false$1(continuationRun, "Continuation should not be run too early (a).");
+                                        promise.reject([Bridge.box(42, System.Int32), "result 123", Bridge.box(101, System.Int32)]);
+                                    });
                                     $step = 1;
                                     continue;
                                 }
                                 case 1: {
                                     Bridge.Test.NUnit.Assert.false$1(continuationRun, "Continuation should not be run too early (b).");
-                                        $task1 = System.Threading.Tasks.Task.fromPromise(promise);
-                                        $step = 2;
-                                        $task1.continueWith($asyncBody, true);
-                                        return;
+                                    $task1 = System.Threading.Tasks.Task.fromPromise(promise);
+                                    $step = 2;
+                                    $task1.continueWith($asyncBody, true);
+                                    return;
                                 }
                                 case 2: {
                                     $taskResult1 = $task1.getAwaitedResult();
                                     
-                                        Bridge.Test.NUnit.Assert.fail$1("Await should throw");
+                                    Bridge.Test.NUnit.Assert.fail$1("Await should throw");
                                     $step = 5;
                                     continue;
                                 }
                                 case 3: {
                                     continuationRun = true;
-                                        Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init([Bridge.box(42, System.Int32), "result 123", Bridge.box(101, System.Int32)], System.Object), Bridge.unbox(ex.arguments), "The PromiseException arguments should be correct");
-                                        $async_e = null;
+                                    Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init([Bridge.box(42, System.Int32), "result 123", Bridge.box(101, System.Int32)], System.Object), Bridge.unbox(ex.arguments), "The PromiseException arguments should be correct");
+                                    $async_e = null;
                                     $step = 5;
                                     continue;
                                 }
                                 case 4: {
                                     Bridge.Test.NUnit.Assert.fail$1(System.String.concat("Thrown exception should have been an AggregateException, was ", Bridge.Reflection.getTypeFullName(Bridge.getType(ex1))));
-                                        $async_e = null;
+                                    $async_e = null;
                                     $step = 5;
                                     continue;
                                 }
                                 case 5: {
                                     
-                                        Bridge.Test.NUnit.Assert.true$1(continuationRun, "Continuation should have been run after promise was rejected.");
+                                    Bridge.Test.NUnit.Assert.true$1(continuationRun, "Continuation should have been run after promise was rejected.");
 
-                                        completeAsync();
+                                    completeAsync();
                                     return;
                                 }
                                 default: {
@@ -33517,20 +33517,20 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                                     case 1: {
                                         $task1 = tcs.task;
-                                            $step = 2;
-                                            $task1.continueWith($asyncBody, true);
-                                            return;
+                                        $step = 2;
+                                        $task1.continueWith($asyncBody, true);
+                                        return;
                                     }
                                     case 2: {
                                         $taskResult1 = $task1.getAwaitedResult();
                                         
-                                            Bridge.Test.NUnit.Assert.fail$1("Await should throw");
+                                        Bridge.Test.NUnit.Assert.fail$1("Await should throw");
                                         $step = 4;
                                         continue;
                                     }
                                     case 3: {
                                         caughtException = ex;
-                                            $async_e = null;
+                                        $async_e = null;
                                         $step = 4;
                                         continue;
                                     }
@@ -34736,39 +34736,39 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                                 case 0: {
                                     done = Bridge.Test.NUnit.Assert.async();
 
-                                        Bridge.ClientTest.Threading.TimerTests.setStaticCounter(0);
-                                        Bridge.ClientTest.Threading.TimerTests.setStaticData(null);
+                                    Bridge.ClientTest.Threading.TimerTests.setStaticCounter(0);
+                                    Bridge.ClientTest.Threading.TimerTests.setStaticData(null);
 
-                                        timer = new System.Threading.Timer.$ctor1(Bridge.ClientTest.Threading.TimerTests.staticHandleTimer, "SomeState", 1, 1);
+                                    timer = new System.Threading.Timer.$ctor1(Bridge.ClientTest.Threading.TimerTests.staticHandleTimer, "SomeState", 1, 1);
 
-                                        $task1 = System.Threading.Tasks.Task.delay(200);
-                                        $step = 1;
-                                        $task1.continueWith($asyncBody, true);
-                                        return;
+                                    $task1 = System.Threading.Tasks.Task.delay(200);
+                                    $step = 1;
+                                    $task1.continueWith($asyncBody, true);
+                                    return;
                                 }
                                 case 1: {
                                     $task1.getAwaitedResult();
                                     
-                                        count = Bridge.ClientTest.Threading.TimerTests.getStaticCounter();
-                                        timer.dispose();
+                                    count = Bridge.ClientTest.Threading.TimerTests.getStaticCounter();
+                                    timer.dispose();
 
-                                        Bridge.Test.NUnit.Assert.throws$7(System.InvalidOperationException, function () {
-                                            timer.change(1, 1);
-                                        }, "No change after Dispose allowed");
-                                        Bridge.Test.NUnit.Assert.true$1(count > 0, "Ticks: " + count);
-                                        Bridge.Test.NUnit.Assert.areEqual$1("SomeState", Bridge.unbox(Bridge.ClientTest.Threading.TimerTests.getStaticData()), "State works");
+                                    Bridge.Test.NUnit.Assert.throws$7(System.InvalidOperationException, function () {
+                                        timer.change(1, 1);
+                                    }, "No change after Dispose allowed");
+                                    Bridge.Test.NUnit.Assert.true$1(count > 0, "Ticks: " + count);
+                                    Bridge.Test.NUnit.Assert.areEqual$1("SomeState", Bridge.unbox(Bridge.ClientTest.Threading.TimerTests.getStaticData()), "State works");
 
-                                        $task2 = System.Threading.Tasks.Task.delay(200);
-                                        $step = 2;
-                                        $task2.continueWith($asyncBody, true);
-                                        return;
+                                    $task2 = System.Threading.Tasks.Task.delay(200);
+                                    $step = 2;
+                                    $task2.continueWith($asyncBody, true);
+                                    return;
                                 }
                                 case 2: {
                                     $task2.getAwaitedResult();
                                     
-                                        Bridge.Test.NUnit.Assert.areEqual$1(count, Bridge.ClientTest.Threading.TimerTests.getStaticCounter(), "Timer disposed - no more ticks");
+                                    Bridge.Test.NUnit.Assert.areEqual$1(count, Bridge.ClientTest.Threading.TimerTests.getStaticCounter(), "Timer disposed - no more ticks");
 
-                                        done();
+                                    done();
                                     return;
                                 }
                                 default: {
@@ -34796,37 +34796,37 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                                 case 0: {
                                     done = Bridge.Test.NUnit.Assert.async();
 
-                                        ts = new Bridge.ClientTest.Threading.TimerTests.TimerState();
-                                        timer = new System.Threading.Timer.$ctor1(Bridge.fn.cacheBind(ts, ts.handleTimer), "SomeState", 1, 1);
+                                    ts = new Bridge.ClientTest.Threading.TimerTests.TimerState();
+                                    timer = new System.Threading.Timer.$ctor1(Bridge.fn.cacheBind(ts, ts.handleTimer), "SomeState", 1, 1);
 
-                                        $task1 = System.Threading.Tasks.Task.delay(200);
-                                        $step = 1;
-                                        $task1.continueWith($asyncBody, true);
-                                        return;
+                                    $task1 = System.Threading.Tasks.Task.delay(200);
+                                    $step = 1;
+                                    $task1.continueWith($asyncBody, true);
+                                    return;
                                 }
                                 case 1: {
                                     $task1.getAwaitedResult();
                                     
-                                        count = ts.getCounter();
-                                        timer.dispose();
+                                    count = ts.getCounter();
+                                    timer.dispose();
 
-                                        Bridge.Test.NUnit.Assert.throws$7(System.InvalidOperationException, function () {
-                                            timer.change(1, 1);
-                                        }, "No change after Dispose allowed");
-                                        Bridge.Test.NUnit.Assert.true$1(count > 0, "Ticks: " + count);
-                                        Bridge.Test.NUnit.Assert.areEqual$1("SomeState", Bridge.unbox(ts.getData()), "State works");
+                                    Bridge.Test.NUnit.Assert.throws$7(System.InvalidOperationException, function () {
+                                        timer.change(1, 1);
+                                    }, "No change after Dispose allowed");
+                                    Bridge.Test.NUnit.Assert.true$1(count > 0, "Ticks: " + count);
+                                    Bridge.Test.NUnit.Assert.areEqual$1("SomeState", Bridge.unbox(ts.getData()), "State works");
 
-                                        $task2 = System.Threading.Tasks.Task.delay(200);
-                                        $step = 2;
-                                        $task2.continueWith($asyncBody, true);
-                                        return;
+                                    $task2 = System.Threading.Tasks.Task.delay(200);
+                                    $step = 2;
+                                    $task2.continueWith($asyncBody, true);
+                                    return;
                                 }
                                 case 2: {
                                     $task2.getAwaitedResult();
                                     
-                                        Bridge.Test.NUnit.Assert.areEqual$1(count, ts.getCounter(), "Timer disposed - no more ticks");
+                                    Bridge.Test.NUnit.Assert.areEqual$1(count, ts.getCounter(), "Timer disposed - no more ticks");
 
-                                        done();
+                                    done();
                                     return;
                                 }
                                 default: {
@@ -34901,46 +34901,46 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                             case 0: {
                                 done = Bridge.Test.NUnit.Assert.async();
 
-                                    Bridge.ClientTest.Threading.TimerTests.setStaticCounter(0);
-                                    Bridge.ClientTest.Threading.TimerTests.setStaticData(null);
+                                Bridge.ClientTest.Threading.TimerTests.setStaticCounter(0);
+                                Bridge.ClientTest.Threading.TimerTests.setStaticData(null);
 
-                                    copy = null;
+                                copy = null;
 
-                                    timer = new System.Threading.Timer.$ctor1(Bridge.ClientTest.Threading.TimerTests.staticHandleTimer, "SomeState", 1, 1);
+                                timer = new System.Threading.Timer.$ctor1(Bridge.ClientTest.Threading.TimerTests.staticHandleTimer, "SomeState", 1, 1);
 
-                                    copy = timer;
+                                copy = timer;
 
-                                    $task1 = System.Threading.Tasks.Task.delay(200);
-                                    $step = 1;
-                                    $task1.continueWith($asyncBody, true);
-                                    return;
+                                $task1 = System.Threading.Tasks.Task.delay(200);
+                                $step = 1;
+                                $task1.continueWith($asyncBody, true);
+                                return;
                             }
                             case 1: {
                                 $task1.getAwaitedResult();
                                 
-                                    count = Bridge.ClientTest.Threading.TimerTests.getStaticCounter();
-                                    timer.change(-1, 0);
+                                count = Bridge.ClientTest.Threading.TimerTests.getStaticCounter();
+                                timer.change(-1, 0);
 
-                                    Bridge.Test.NUnit.Assert.true$1(count > 0, "Ticks: " + count);
-                                    Bridge.Test.NUnit.Assert.areEqual$1("SomeState", Bridge.unbox(Bridge.ClientTest.Threading.TimerTests.getStaticData()), "State works");
+                                Bridge.Test.NUnit.Assert.true$1(count > 0, "Ticks: " + count);
+                                Bridge.Test.NUnit.Assert.areEqual$1("SomeState", Bridge.unbox(Bridge.ClientTest.Threading.TimerTests.getStaticData()), "State works");
 
-                                    $task2 = System.Threading.Tasks.Task.delay(200);
-                                    $step = 2;
-                                    $task2.continueWith($asyncBody, true);
-                                    return;
+                                $task2 = System.Threading.Tasks.Task.delay(200);
+                                $step = 2;
+                                $task2.continueWith($asyncBody, true);
+                                return;
                             }
                             case 2: {
                                 $task2.getAwaitedResult();
                                 
-                                    Bridge.Test.NUnit.Assert.areEqual$1(count, Bridge.ClientTest.Threading.TimerTests.getStaticCounter(), "Timer disposed");
+                                Bridge.Test.NUnit.Assert.areEqual$1(count, Bridge.ClientTest.Threading.TimerTests.getStaticCounter(), "Timer disposed");
 
-                                    timer.dispose();
+                                timer.dispose();
 
-                                    Bridge.Test.NUnit.Assert.throws$7(System.InvalidOperationException, function () {
-                                        copy.change(1, 1);
-                                    }, "No change after Dispose allowed");
+                                Bridge.Test.NUnit.Assert.throws$7(System.InvalidOperationException, function () {
+                                    copy.change(1, 1);
+                                }, "No change after Dispose allowed");
 
-                                    done();
+                                done();
                                 return;
                             }
                             default: {
@@ -34969,45 +34969,45 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                             case 0: {
                                 done = Bridge.Test.NUnit.Assert.async();
 
-                                    ts = new Bridge.ClientTest.Threading.TimerTests.TimerState();
+                                ts = new Bridge.ClientTest.Threading.TimerTests.TimerState();
 
-                                    copy = null;
+                                copy = null;
 
-                                    timer = new System.Threading.Timer.$ctor1(Bridge.fn.cacheBind(ts, ts.handleTimer), "SomeState", 1, 1);
+                                timer = new System.Threading.Timer.$ctor1(Bridge.fn.cacheBind(ts, ts.handleTimer), "SomeState", 1, 1);
 
-                                    copy = timer;
+                                copy = timer;
 
-                                    $task1 = System.Threading.Tasks.Task.delay(200);
-                                    $step = 1;
-                                    $task1.continueWith($asyncBody, true);
-                                    return;
+                                $task1 = System.Threading.Tasks.Task.delay(200);
+                                $step = 1;
+                                $task1.continueWith($asyncBody, true);
+                                return;
                             }
                             case 1: {
                                 $task1.getAwaitedResult();
                                 
-                                    count = ts.getCounter();
-                                    timer.change(-1, 0);
+                                count = ts.getCounter();
+                                timer.change(-1, 0);
 
-                                    Bridge.Test.NUnit.Assert.true$1(count > 0, "Ticks: " + count);
-                                    Bridge.Test.NUnit.Assert.areEqual$1("SomeState", Bridge.unbox(ts.getData()), "State works");
+                                Bridge.Test.NUnit.Assert.true$1(count > 0, "Ticks: " + count);
+                                Bridge.Test.NUnit.Assert.areEqual$1("SomeState", Bridge.unbox(ts.getData()), "State works");
 
-                                    $task2 = System.Threading.Tasks.Task.delay(200);
-                                    $step = 2;
-                                    $task2.continueWith($asyncBody, true);
-                                    return;
+                                $task2 = System.Threading.Tasks.Task.delay(200);
+                                $step = 2;
+                                $task2.continueWith($asyncBody, true);
+                                return;
                             }
                             case 2: {
                                 $task2.getAwaitedResult();
                                 
-                                    timer.dispose();
+                                timer.dispose();
 
-                                    Bridge.Test.NUnit.Assert.areEqual$1(count, ts.getCounter(), "Timer disposed");
+                                Bridge.Test.NUnit.Assert.areEqual$1(count, ts.getCounter(), "Timer disposed");
 
-                                    Bridge.Test.NUnit.Assert.throws$7(System.InvalidOperationException, function () {
-                                        copy.change(1, 1);
-                                    }, "No change after Dispose allowed");
+                                Bridge.Test.NUnit.Assert.throws$7(System.InvalidOperationException, function () {
+                                    copy.change(1, 1);
+                                }, "No change after Dispose allowed");
 
-                                    done();
+                                done();
                                 return;
                             }
                             default: {
@@ -35034,29 +35034,29 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                             case 0: {
                                 done = Bridge.Test.NUnit.Assert.async();
 
-                                    ts = new Bridge.ClientTest.Threading.TimerTests.TimerState();
+                                ts = new Bridge.ClientTest.Threading.TimerTests.TimerState();
 
-                                    timer = new System.Threading.Timer.$ctor1(Bridge.fn.cacheBind(ts, ts.handleTimer), null, -1, 1);
-                                    $task1 = System.Threading.Tasks.Task.delay(200);
-                                    $step = 1;
-                                    $task1.continueWith($asyncBody, true);
-                                    return;
+                                timer = new System.Threading.Timer.$ctor1(Bridge.fn.cacheBind(ts, ts.handleTimer), null, -1, 1);
+                                $task1 = System.Threading.Tasks.Task.delay(200);
+                                $step = 1;
+                                $task1.continueWith($asyncBody, true);
+                                return;
                             }
                             case 1: {
                                 $task1.getAwaitedResult();
                                 Bridge.Test.NUnit.Assert.areEqual$1(ts.getCounter(), 0, "new -1, 1");
 
-                                    timer.change(-1, -1);
-                                    $task2 = System.Threading.Tasks.Task.delay(200);
-                                    $step = 2;
-                                    $task2.continueWith($asyncBody, true);
-                                    return;
+                                timer.change(-1, -1);
+                                $task2 = System.Threading.Tasks.Task.delay(200);
+                                $step = 2;
+                                $task2.continueWith($asyncBody, true);
+                                return;
                             }
                             case 2: {
                                 $task2.getAwaitedResult();
                                 Bridge.Test.NUnit.Assert.areEqual$1(ts.getCounter(), 0, "Change -1, -1");
 
-                                    done();
+                                done();
                                 return;
                             }
                             default: {
