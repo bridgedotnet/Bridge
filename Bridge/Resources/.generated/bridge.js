@@ -2976,7 +2976,7 @@
 
     Bridge.define("Bridge.Utils.SystemAssemblyVersion");
 
-    // @source Json.js
+    // @source JSON.js
 
     Bridge.Json = {
         serialize: function (obj, settings, returnRaw, possibleType) {
@@ -3104,7 +3104,7 @@
                     }
 
                     if (settings && settings.typeNameHandling) {
-                        raw["$type"] = Bridge.getTypeName(type);
+                        raw["$type"] = Bridge.Reflection.getTypeQName(type);
                     }
 
                     if (nometa) {
