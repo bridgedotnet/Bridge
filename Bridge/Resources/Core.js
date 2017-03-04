@@ -609,17 +609,45 @@
             return null;
         },
 
+        $$aliasCache: [],
+
         getTypeAlias: function (obj) {
-            var type = obj.$$name ? obj : Bridge.getType(obj);
+            if (obj.$$alias) {
+                return obj.$$alias;
+            }
+
+            var type = (obj.$$name || typeof obj === "function") ? obj : Bridge.getType(obj),
+                alias;
+
+            if (type.$$alias) {
+                return type.$$alias;
+            }
+
+            alias = Bridge.$$aliasCache[type];
+            if (alias) {
+                return alias;
+            }
+
             if (type.$isArray) {
                 var elementName = Bridge.getTypeAlias(type.$elementType);
-
-                return elementName + "$Array" + (type.$rank > 1 ? ("$" + type.$rank) : "");
+                alias = elementName + "$Array" + (type.$rank > 1 ? ("$" + type.$rank) : "");
+                if (type.$$name) {
+                    type.$$alias = alias;
+                } else {
+                    Bridge.$$aliasCache[type] = alias;
+                }
+                return alias;
             }
 
             var name = obj.$$name || Bridge.getTypeName(obj);
 
-            return name.replace(/[\.\(\)\,]/g, "$");
+            alias = name.replace(/[\.\(\)\,]/g, "$");
+            if (type.$$name) {
+                type.$$alias = alias;
+            } else {
+                Bridge.$$aliasCache[type] = alias;
+            }
+            return alias;
         },
 
         getTypeName: function (obj) {

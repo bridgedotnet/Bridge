@@ -107,7 +107,7 @@ namespace Bridge.Translator
                 {
                     new GeneratorBlock(this.Emitter, methodDeclaration).Emit();
                 }
-                else if (methodDeclaration.HasModifier(Modifiers.Async))
+                else if (methodDeclaration.HasModifier(Modifiers.Async) || AsyncBlock.HasGoto(methodDeclaration.Body))
                 {
                     new AsyncBlock(this.Emitter, methodDeclaration).Emit();
                 }

@@ -157,6 +157,16 @@
         ctor: function () {
             this.$initialize();
         },
+        getHashCode: function () {
+            return this._a ^ ((this._b << 16) | (this._c & 65535)) ^ ((this._f << 24) | this._k);
+        },
+        equals: function (o) {
+            if (!(Bridge.is(o, System.Guid))) {
+                return false;
+            }
+
+            return this.equalsT(System.Nullable.getValue(Bridge.cast(Bridge.unbox(o), System.Guid)));
+        },
         equalsT: function (o) {
             if ((this._a !== o._a) || (this._b !== o._b) || (this._c !== o._c) || (this._d !== o._d) || (this._e !== o._e) || (this._f !== o._f) || (this._g !== o._g) || (this._h !== o._h) || (this._i !== o._i) || (this._j !== o._j) || (this._k !== o._k)) {
                 return false;
@@ -315,10 +325,6 @@
             this._i = r[5];
             this._j = r[6];
             this._k = r[7];
-        },
-        getHashCode: function () {
-            var h = Bridge.addHash([1684632903, this._a, this._b, this._c, this._d, this._e, this._f, this._g, this._h, this._i, this._j, this._k]);
-            return h;
         },
         $clone: function (to) { return this; }
     });
