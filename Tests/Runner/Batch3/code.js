@@ -15521,6 +15521,39 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430", {
+        statics: {
+            intProp: 2,
+            testPropertyInitializer: function () {
+                var d2 = { value1: Bridge.getDefaultValue(System.Int32), value2: Bridge.getDefaultValue(System.Int32) };
+                Bridge.Test.NUnit.Assert.areEqual(0, d2.value1);
+                Bridge.Test.NUnit.Assert.areEqual(0, d2.value2);
+
+                var d3 = { value1: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.intProp, value2: 1, value4: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.intProp, value5: 1, value7: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.intProp, value8: 1 };
+                Bridge.Test.NUnit.Assert.areEqual(2, d3.value1);
+                Bridge.Test.NUnit.Assert.areEqual(1, d3.value2);
+                Bridge.Test.NUnit.Assert.null(d3.value3);
+                Bridge.Test.NUnit.Assert.areEqual(2, d3.value4);
+                Bridge.Test.NUnit.Assert.areEqual(1, d3.value5);
+                Bridge.Test.NUnit.Assert.null(d3.value6);
+                Bridge.Test.NUnit.Assert.areEqual(2, d3.value7);
+                Bridge.Test.NUnit.Assert.areEqual(1, d3.value8);
+                Bridge.Test.NUnit.Assert.null(d3.value9);
+
+                var d4 = { value1: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.intProp, value2: 1, value3: 0, value4: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.intProp, value5: 1, value6: 0, value7: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.intProp, value8: 1, value9: 0 };
+                Bridge.Test.NUnit.Assert.areEqual(2, d4.value1);
+                Bridge.Test.NUnit.Assert.areEqual(1, d4.value2);
+                Bridge.Test.NUnit.Assert.areEqual(0, d4.value3);
+                Bridge.Test.NUnit.Assert.areEqual(2, d4.value4);
+                Bridge.Test.NUnit.Assert.areEqual(1, d4.value5);
+                Bridge.Test.NUnit.Assert.areEqual(0, d4.value6);
+                Bridge.Test.NUnit.Assert.areEqual(2, d4.value7);
+                Bridge.Test.NUnit.Assert.areEqual(1, d4.value8);
+                Bridge.Test.NUnit.Assert.areEqual(0, d4.value9);
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge266A", {
         statics: {
             test: function () {

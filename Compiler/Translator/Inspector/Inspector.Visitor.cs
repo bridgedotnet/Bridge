@@ -529,7 +529,7 @@ namespace Bridge.Translator
                     {
                         throw new EmitterException(propertyDeclaration, string.Format(Bridge.Translator.Constants.Messages.Exceptions.FIELD_PROPERTY_NOT_MARKED, resolvedProperty.Member.ToString()));
                     }
-                    
+
                     info.Properties.Add(new TypeConfigItem
                     {
                         Name = key,
