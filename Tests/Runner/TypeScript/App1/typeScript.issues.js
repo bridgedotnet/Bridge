@@ -89,6 +89,23 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         }
     });
 
+    Bridge.define("TypeScript.Issues.N2438", {
+        isDefaultCtor: false,
+        config: {
+            properties: {
+                Attribute: 0
+            }
+        },
+        ctor: function () {
+            this.$initialize();
+            this.isDefaultCtor = true;
+        },
+        $ctor1: function (arg) {
+            this.$initialize();
+            this.setAttribute(arg);
+        }
+    });
+
     Bridge.define("TypeScript.Issues.N2029", {
         inherits: [TypeScript.Issues.N2029Interface$1(System.Int32)],
         config: {

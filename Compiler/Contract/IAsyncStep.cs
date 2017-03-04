@@ -40,5 +40,10 @@ namespace Bridge.Contract
             get;
             set;
         }
+
+        object Label
+        {
+            get; set;
+        }
     }
 }

@@ -46,6 +46,7 @@
     <Compile Include="3_Classes.cs" />
     <Compile Include="Issues\N2029.cs" />
     <Compile Include="Issues\N2030.cs" />
+    <Compile Include="Issues\N2438.cs" />
     <Compile Include="Issues\N2264.cs" />
     <Compile Include="Issues\N2031.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

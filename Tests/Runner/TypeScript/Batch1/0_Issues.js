@@ -59,3 +59,7 @@ QUnit.test("#2264", function (assert) {
     enumerator.moveNext();
     assert.deepEqual(enumerator.getCurrent(), "first");
 });
+QUnit.test("#2438", function (assert) {
+    var a = new TypeScript.Issues.N2438();
+    assert.ok(a.isDefaultCtor);
+});

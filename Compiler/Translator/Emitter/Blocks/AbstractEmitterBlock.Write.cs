@@ -731,7 +731,7 @@ namespace Bridge.Translator
         public static bool IsReturnLast(string str)
         {
             str = str.TrimEnd();
-            return str.EndsWith("return;");
+            return str.EndsWith("return;") || Regex.IsMatch(str, "(?m:^)return(.*)?;$");
         }
 
         public static bool IsContinueLast(string str)
@@ -743,7 +743,7 @@ namespace Bridge.Translator
         public static bool IsJumpStatementLast(string str)
         {
             str = str.TrimEnd();
-            return str.EndsWith("continue;") || str.EndsWith("return;") || str.EndsWith("break;");
+            return str.EndsWith("continue;") || str.EndsWith("break;") || AbstractEmitterBlock.IsReturnLast(str);
         }
     }
 

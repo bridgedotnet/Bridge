@@ -593,7 +593,7 @@ namespace Bridge.Translator
                     {
                         foreach (var member in members)
                         {
-                            if (mode == 1 && (member.VarInitializer == null || member.VarInitializer.Initializer.IsNull))
+                            if (mode == 1 && (member.VarInitializer == null || member.VarInitializer.Initializer.IsNull) && !member.IsPropertyInitializer)
                             {
                                 continue;
                             }
@@ -615,7 +615,7 @@ namespace Bridge.Translator
                             this.Write(name, ": ");
                             var primitiveExpr = member.Initializer as PrimitiveExpression;
 
-                            if (mode == 2 && primitiveExpr == null)
+                            if (mode == 2 && (member.Initializer == null || member.Initializer.IsNull) && !(member.VarInitializer == null || member.VarInitializer.Initializer.IsNull))
                             {
                                 var argType = this.Emitter.Resolver.ResolveNode(member.VarInitializer, this.Emitter).Type;
                                 var defValue = Inspector.GetDefaultFieldValue(argType, null);
@@ -634,9 +634,13 @@ namespace Bridge.Translator
                                 {
                                     this.Write(Inspector.GetStructDefaultValue((AstType)primitiveExpr.Value, this.Emitter));
                                 }
-                                else
+                                else if (member.Initializer != null)
                                 {
                                     member.Initializer.AcceptVisitor(this.Emitter);
+                                }
+                                else
+                                {
+                                    this.Write("null");
                                 }
                             }
                         }

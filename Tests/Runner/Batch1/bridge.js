@@ -628,17 +628,45 @@
             return null;
         },
 
+        $$aliasCache: [],
+
         getTypeAlias: function (obj) {
-            var type = obj.$$name ? obj : Bridge.getType(obj);
+            if (obj.$$alias) {
+                return obj.$$alias;
+            }
+
+            var type = (obj.$$name || typeof obj === "function") ? obj : Bridge.getType(obj),
+                alias;
+
+            if (type.$$alias) {
+                return type.$$alias;
+            }
+
+            alias = Bridge.$$aliasCache[type];
+            if (alias) {
+                return alias;
+            }
+
             if (type.$isArray) {
                 var elementName = Bridge.getTypeAlias(type.$elementType);
-
-                return elementName + "$Array" + (type.$rank > 1 ? ("$" + type.$rank) : "");
+                alias = elementName + "$Array" + (type.$rank > 1 ? ("$" + type.$rank) : "");
+                if (type.$$name) {
+                    type.$$alias = alias;
+                } else {
+                    Bridge.$$aliasCache[type] = alias;
+                }
+                return alias;
             }
 
             var name = obj.$$name || Bridge.getTypeName(obj);
 
-            return name.replace(/[\.\(\)\,]/g, "$");
+            alias = name.replace(/[\.\(\)\,]/g, "$");
+            if (type.$$name) {
+                type.$$alias = alias;
+            } else {
+                Bridge.$$aliasCache[type] = alias;
+            }
+            return alias;
         },
 
         getTypeName: function (obj) {
@@ -18780,6 +18808,16 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         ctor: function () {
             this.$initialize();
         },
+        getHashCode: function () {
+            return this._a ^ ((this._b << 16) | (this._c & 65535)) ^ ((this._f << 24) | this._k);
+        },
+        equals: function (o) {
+            if (!(Bridge.is(o, System.Guid))) {
+                return false;
+            }
+
+            return this.equalsT(System.Nullable.getValue(Bridge.cast(Bridge.unbox(o), System.Guid)));
+        },
         equalsT: function (o) {
             if ((this._a !== o._a) || (this._b !== o._b) || (this._c !== o._c) || (this._d !== o._d) || (this._e !== o._e) || (this._f !== o._f) || (this._g !== o._g) || (this._h !== o._h) || (this._i !== o._i) || (this._j !== o._j) || (this._k !== o._k)) {
                 return false;
@@ -18938,10 +18976,6 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
             this._i = r[5];
             this._j = r[6];
             this._k = r[7];
-        },
-        getHashCode: function () {
-            var h = Bridge.addHash([1684632903, this._a, this._b, this._c, this._d, this._e, this._f, this._g, this._h, this._i, this._j, this._k]);
-            return h;
         },
         $clone: function (to) { return this; }
     });
