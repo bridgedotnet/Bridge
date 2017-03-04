@@ -26576,24 +26576,31 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             camelCaseSettingWorks: function () {
                 var c = new Bridge.ClientTest.SerializationTests.Class2();
                 var json = Bridge.Json.serialize(c, { camelCasePropertyNames: true });
-                Bridge.Test.NUnit.Assert.areEqual(json, "{\"intProp\":0}");
+                Bridge.Test.NUnit.Assert.areEqual("{\"intProp\":0}", json);
 
                 json = Bridge.Json.serialize(c);
-                Bridge.Test.NUnit.Assert.areEqual(json, "{\"IntProp\":0}");
+                Bridge.Test.NUnit.Assert.areEqual("{\"IntProp\":0}", json);
             },
             ignoreNullValueWorks: function () {
                 var c = new Bridge.ClientTest.SerializationTests.Class3();
                 var json = Bridge.Json.serialize(c, { ignoreNullValue: true });
-                Bridge.Test.NUnit.Assert.areEqual(json, "{}");
+                Bridge.Test.NUnit.Assert.areEqual("{}", json);
 
                 json = Bridge.Json.serialize(c);
-                Bridge.Test.NUnit.Assert.areEqual(json, "{\"StringProp\":null}");
+                Bridge.Test.NUnit.Assert.areEqual("{\"StringProp\":null}", json);
+            },
+            typeNameHandlingWorks: function () {
+                var c = new Bridge.ClientTest.SerializationTests.Class3();
+
+                var json = Bridge.Json.serialize(c, { typeNameHandling: true });
+
+                Bridge.Test.NUnit.Assert.areEqual("{\"$type\":\"Bridge.ClientTest.SerializationTests+Class3, Bridge.ClientTest\",\"StringProp\":null}", json);
             },
             anonymousTypesWorks: function () {
                 var v = new $asm.$AnonymousType$1(108, "Hello");
                 var json = Bridge.Json.serialize(v);
 
-                Bridge.Test.NUnit.Assert.areEqual(json, "{\"Amount\":108,\"Message\":\"Hello\"}");
+                Bridge.Test.NUnit.Assert.areEqual("{\"Amount\":108,\"Message\":\"Hello\"}", json);
             }
         }
     });
