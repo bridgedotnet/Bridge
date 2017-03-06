@@ -13850,6 +13850,143 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     });
 
     Bridge.define("Bridge.ClientTest.Diagnostics.StopwatchTests", {
+        statics: {
+            getTimestamp: function () {
+                var ts1 = System.Diagnostics.Stopwatch.getTimestamp();
+                Bridge.ClientTest.Diagnostics.StopwatchTests.sleep();
+                var ts2 = System.Diagnostics.Stopwatch.getTimestamp();
+                Bridge.Test.NUnit.Assert.false(ts1.equals(ts2));
+            },
+            constructStartAndStop: function () {
+                var watch = new System.Diagnostics.Stopwatch();
+                Bridge.Test.NUnit.Assert.false(watch.isRunning);
+                watch.start();
+                Bridge.Test.NUnit.Assert.true(watch.isRunning);
+                Bridge.ClientTest.Diagnostics.StopwatchTests.sleep();
+                Bridge.Test.NUnit.Assert.true(System.TimeSpan.gt(watch.timeSpan(), System.TimeSpan.zero));
+
+                watch.stop();
+                Bridge.Test.NUnit.Assert.false(watch.isRunning);
+
+                var e1 = watch.timeSpan();
+                Bridge.ClientTest.Diagnostics.StopwatchTests.sleep();
+                var e2 = watch.timeSpan();
+                Bridge.Test.NUnit.Assert.areEqual(e1, e2);
+                Bridge.Test.NUnit.Assert.true(Bridge.Int.clip64(e1.getTotalMilliseconds()).equals(watch.milliseconds()));
+
+                var t1 = watch.ticks();
+                Bridge.ClientTest.Diagnostics.StopwatchTests.sleep();
+                var t2 = watch.ticks();
+                Bridge.Test.NUnit.Assert.true(t1.equals(t2));
+            },
+            startNewAndReset: function () {
+                var watch = System.Diagnostics.Stopwatch.startNew();
+                Bridge.Test.NUnit.Assert.true(watch.isRunning);
+                watch.start(); // should be no-op
+                Bridge.Test.NUnit.Assert.true(watch.isRunning);
+                Bridge.ClientTest.Diagnostics.StopwatchTests.sleep();
+                Bridge.Test.NUnit.Assert.true(System.TimeSpan.gt(watch.timeSpan(), System.TimeSpan.zero));
+
+                watch.reset();
+                Bridge.Test.NUnit.Assert.false(watch.isRunning);
+                Bridge.Test.NUnit.Assert.areEqual(System.TimeSpan.zero, watch.timeSpan());
+            },
+            startNewAndRestart: function () {
+                var watch = System.Diagnostics.Stopwatch.startNew();
+                Bridge.Test.NUnit.Assert.true(watch.isRunning);
+                Bridge.ClientTest.Diagnostics.StopwatchTests.sleep(10);
+                var elapsedSinceStart = watch.timeSpan();
+                Bridge.Test.NUnit.Assert.true(System.TimeSpan.gt(elapsedSinceStart, System.TimeSpan.zero));
+
+                var MaxAttempts = 5; // The comparison below could fail if we get very unlucky with when the thread gets preempted
+                var attempt = 0;
+                while (true) {
+                    watch.restart();
+                    Bridge.Test.NUnit.Assert.true(watch.isRunning);
+                    try {
+                        Bridge.Test.NUnit.Assert.true(System.TimeSpan.lt(watch.timeSpan(), elapsedSinceStart));
+                    }
+                    catch ($e1) {
+                        $e1 = System.Exception.create($e1);
+                        if (((attempt = (attempt + 1) | 0)) < MaxAttempts) {
+                            continue;
+                        }
+                        throw $e1;
+                    }
+                    break;
+                }
+            },
+            stopShouldContinue: function () {
+                var $step = 0,
+                    $task1, 
+                    $jumpFromFinally, 
+                    done, 
+                    previous, 
+                    w, 
+                    i, 
+                    $asyncBody = Bridge.fn.bind(this, function () {
+                        for (;;) {
+                            $step = System.Array.min([0,1,2,3,4,5], $step);
+                            switch ($step) {
+                                case 0: {
+                                    done = Bridge.Test.NUnit.Assert.async();
+
+                                    previous = System.Int64(0);
+                                    w = new System.Diagnostics.Stopwatch();
+                                    i = 0;
+                                    $step = 1;
+                                    continue;
+                                }
+                                case 1: {
+                                    if ( i < 10 ) {
+                                        $step = 2;
+                                        continue;
+                                    }
+                                    $step = 5;
+                                    continue;
+                                }
+                                case 2: {
+                                    w.start();
+                                    $task1 = System.Threading.Tasks.Task.delay(10);
+                                    $step = 3;
+                                    $task1.continueWith($asyncBody, true);
+                                    return;
+                                }
+                                case 3: {
+                                    $task1.getAwaitedResult();
+                                    w.stop();
+                                    Bridge.Test.NUnit.Assert.true(w.milliseconds().gt(previous));
+                                    previous = w.milliseconds();
+                                    $step = 4;
+                                    continue;
+                                }
+                                case 4: {
+                                    i = (i + 1) | 0;
+                                    $step = 1;
+                                    continue;
+                                }
+                                case 5: {
+                                    
+                                    done();
+                                    return;
+                                }
+                                default: {
+                                    return;
+                                }
+                            }
+                        }
+                    }, arguments);
+
+                $asyncBody();
+            },
+            sleep: function (milliseconds) {
+                if (milliseconds === void 0) { milliseconds = 2; }
+                var start = new System.TimeSpan(System.DateTime.getTicks(new Date()));
+
+                while ((System.TimeSpan.sub(new System.TimeSpan(System.DateTime.getTicks(new Date())), start)).getTotalMilliseconds() < milliseconds) {
+                }
+            }
+        },
         defaultConstructorWorks: function () {
             var watch = new System.Diagnostics.Stopwatch();
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(watch, System.Diagnostics.Stopwatch), "is Stopwatch");
