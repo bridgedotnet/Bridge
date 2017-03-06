@@ -1214,6 +1214,25 @@
             }
         },
 
+        numberCompare : function (a, b) {
+            if (a < b) {
+                return -1;
+            }
+            if (a > b) {
+                return 1;
+            }
+            if (a == b) {
+                return 0;
+            }
+            if (!isNaN(a)) {
+                return 1;
+            }
+            if (!isNaN(b)) {
+                return -1;
+            }
+            return 0;
+        },
+
         compare: function (a, b, safe, T) {
             if (a && a.$boxed) {
                 a = Bridge.unbox(a, true);
@@ -1221,6 +1240,10 @@
 
             if (b && b.$boxed) {
                 b = Bridge.unbox(b, true);
+            }
+
+            if (typeof a === "number" && typeof b === "number") {
+                return Bridge.numberCompare(a, b);
             }
 
             if (!Bridge.isDefined(a, true)) {

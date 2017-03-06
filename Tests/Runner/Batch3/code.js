@@ -15554,6 +15554,25 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2443", {
+        statics: {
+            testNaNCompare: function () {
+                var vals = System.Array.init([4, 3, Number.NaN, 0, 1, 2, 1], System.Double);
+
+                Bridge.Test.NUnit.Assert.areEqual(4, System.Linq.Enumerable.from(vals).max());
+
+                vals = System.Array.init([4, 3, Number.POSITIVE_INFINITY, Number.NaN, Number.NEGATIVE_INFINITY, 0, 1, 2, 1], System.Double);
+
+                Bridge.Test.NUnit.Assert.areEqual(Number.POSITIVE_INFINITY, System.Linq.Enumerable.from(vals).max());
+                Bridge.Test.NUnit.Assert.areEqual(Number.NaN, System.Linq.Enumerable.from(vals).min());
+
+                vals = System.Array.init([4, 3, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY, 0, 1, 2, 1], System.Double);
+
+                Bridge.Test.NUnit.Assert.areEqual(Number.NEGATIVE_INFINITY, System.Linq.Enumerable.from(vals).min());
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge266A", {
         statics: {
             test: function () {
