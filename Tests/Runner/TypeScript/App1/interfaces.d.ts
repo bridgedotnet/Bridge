@@ -63,19 +63,14 @@ declare module Interfaces {
     }
     var Class1: Class1Func;
 
-    export interface Interface62 {
-        Interfaces$Interface62$getProperty(): number;
-        getProperty(): number;
-        Interfaces$Interface62$setProperty$1(s: string): void;
-        setProperty$1(s: string): void;
-        Interfaces$Interface62$setProperty(i: number): void;
-        setProperty(i: number): void;
-    }
-
-    export interface Interface3 extends Interfaces.Interface2 {
-        Interfaces$Interface3$method5(i: Interfaces.Interface3): Interfaces.Interface2;
+    export interface Class3 extends Interfaces.Class2,Interfaces.Interface3 {
         method5(i: Interfaces.Interface3): Interfaces.Interface2;
     }
+    export interface Class3Func extends Function {
+        prototype: Class3;
+        new (): Class3;
+    }
+    var Class3: Class3Func;
 
     export interface Interface1 {
         Interfaces$Interface1$getProperty(): number;
@@ -117,13 +112,18 @@ declare module Interfaces {
         setProperty(value: number): void;
     }
 
-    export interface Class3 extends Interfaces.Class2,Interfaces.Interface3 {
+    export interface Interface62 {
+        Interfaces$Interface62$getProperty(): number;
+        getProperty(): number;
+        Interfaces$Interface62$setProperty$1(s: string): void;
+        setProperty$1(s: string): void;
+        Interfaces$Interface62$setProperty(i: number): void;
+        setProperty(i: number): void;
+    }
+
+    export interface Interface3 extends Interfaces.Interface2 {
+        Interfaces$Interface3$method5(i: Interfaces.Interface3): Interfaces.Interface2;
         method5(i: Interfaces.Interface3): Interfaces.Interface2;
     }
-    export interface Class3Func extends Function {
-        prototype: Class3;
-        new (): Class3;
-    }
-    var Class3: Class3Func;
 
 }

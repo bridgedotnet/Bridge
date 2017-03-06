@@ -44,6 +44,8 @@
     <Compile Include="5_Generics.cs" />
     <Compile Include="4_Functions.cs" />
     <Compile Include="3_Classes.cs" />
+    <Compile Include="Issues\N1060.cs" />
+    <Compile Include="Issues\N1640.cs" />
     <Compile Include="Issues\N2029.cs" />
     <Compile Include="Issues\N2030.cs" />
     <Compile Include="Issues\N2438.cs" />
