@@ -5,9 +5,6 @@ declare module TypeScript.Issues {
         getValue1(): number;
         setValue1(value: number): void;
     }
-    export function N2029Interface$1<T>($T: Bridge.TypeRef<T>): {
-        prototype: N2029Interface$1<T>;
-    }
 
     export interface N2030Attribute extends System.Attribute {
         getIsUnspecified(): boolean;
@@ -35,25 +32,31 @@ declare module TypeScript.Issues {
         setReverse(value: TypeScript.Issues.N2031DictionaryMap$2.Indexer$2<T1,T2,T2,T1>): void;
         add(t1: T1, t2: T2): void;
     }
-    export function N2031DictionaryMap$2<T1,T2>($T1: Bridge.TypeRef<T1>, $T2: Bridge.TypeRef<T2>): {
-        prototype: N2031DictionaryMap$2<T1,T2>;
-        new (): N2031DictionaryMap$2<T1,T2>;
-        ctor: {
-            new (): N2031DictionaryMap$2<T1,T2>
-        };
-        $ctor1: {
-            new (initialValues: System.Collections.Generic.KeyValuePair$2<T1,T2>[]): N2031DictionaryMap$2<T1,T2>
-        };
+    export interface N2031DictionaryMap$2Func extends Function {
+        <T1, T2>($T1: Bridge.TypeRef<T1>, $T2: Bridge.TypeRef<T2>): {
+            prototype: N2031DictionaryMap$2<T1,T2>;
+            Indexer$2: TypeScript.Issues.N2031DictionaryMap$2.Indexer$2Func;
+            new (): N2031DictionaryMap$2<T1,T2>;
+            ctor: {
+                new (): N2031DictionaryMap$2<T1,T2>
+            };
+            $ctor1: {
+                new (initialValues: System.Collections.Generic.KeyValuePair$2<T1,T2>[]): N2031DictionaryMap$2<T1,T2>
+            };
+        }
     }
+    var N2031DictionaryMap$2: N2031DictionaryMap$2Func;
     module N2031DictionaryMap$2 {
         export interface Indexer$2<T1,T2,T3,T4> {
             getItem(index: T3): T4;
             setItem(index: T3, value: T4): void;
             containsKey(index: T3): boolean;
         }
-        export function Indexer$2<T1,T2,T3,T4>($T1: Bridge.TypeRef<T1>, $T2: Bridge.TypeRef<T2>, $T3: Bridge.TypeRef<T3>, $T4: Bridge.TypeRef<T4>): {
-            prototype: Indexer$2<T1,T2,T3,T4>;
-            new (dictionary: System.Collections.Generic.Dictionary$2<T3,T4>): Indexer$2<T1,T2,T3,T4>;
+        export interface Indexer$2Func extends Function {
+            <T1, T2, T3, T4>($T1: Bridge.TypeRef<T1>, $T2: Bridge.TypeRef<T2>, $T3: Bridge.TypeRef<T3>, $T4: Bridge.TypeRef<T4>): {
+                prototype: Indexer$2<T1,T2,T3,T4>;
+                new (dictionary: System.Collections.Generic.Dictionary$2<T3,T4>): Indexer$2<T1,T2,T3,T4>;
+            }
         }
     }
 
