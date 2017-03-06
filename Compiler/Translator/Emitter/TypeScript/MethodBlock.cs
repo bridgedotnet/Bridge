@@ -1,6 +1,5 @@
 using Bridge.Contract;
 using Bridge.Contract.Constants;
-
 using ICSharpCode.NRefactory.CSharp;
 using System.Collections.Generic;
 using ICSharpCode.NRefactory.Semantics;
@@ -33,17 +32,20 @@ namespace Bridge.Translator.TypeScript
             XmlToJsDoc.EmitComment(this, this.MethodDeclaration);
             var overloads = OverloadsCollection.Create(this.Emitter, methodDeclaration);
             var memberResult = this.Emitter.Resolver.ResolveNode(methodDeclaration, this.Emitter) as MemberResolveResult;
-            var ignoreInterface = memberResult.Member.DeclaringType.Kind == TypeKind.Interface &&
+            var isInterface = memberResult.Member.DeclaringType.Kind == TypeKind.Interface;
+            var ignoreInterface = isInterface &&
                                       memberResult.Member.DeclaringType.TypeParameterCount > 0;
-            if (overloads.HasOverloads)
+            this.WriteSignature(methodDeclaration, overloads, ignoreInterface);
+            if (!ignoreInterface && isInterface)
             {
-                string name = overloads.GetOverloadName(ignoreInterface);
-                this.Write(name);
+                this.WriteSignature(methodDeclaration, overloads, true);
             }
-            else
-            {
-                this.Write(this.Emitter.GetEntityName(methodDeclaration, ignoreInterface: ignoreInterface));
-            }
+        }
+
+        private void WriteSignature(MethodDeclaration methodDeclaration, OverloadsCollection overloads, bool ignoreInterface)
+        {
+            string name = overloads.GetOverloadName(ignoreInterface);
+            this.Write(name);
 
             bool needComma = false;
             var isGeneric = methodDeclaration.TypeParameters.Count > 0;

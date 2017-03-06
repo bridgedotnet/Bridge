@@ -1,6 +1,8 @@
 using Bridge.Contract;
 
 using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.NRefactory.Semantics;
+using ICSharpCode.NRefactory.TypeSystem;
 
 namespace Bridge.Translator.TypeScript
 {
@@ -54,13 +56,32 @@ namespace Bridge.Translator.TypeScript
             {
                 foreach (var ev in info.Events)
                 {
-                    if (ev.Entity.HasModifier(Modifiers.Public))
+                    if (ev.Entity.HasModifier(Modifiers.Public) || this.TypeInfo.Type.Kind == TypeKind.Interface)
                     {
-                        var name = ev.GetName(this.Emitter);
-                        name = Helpers.ReplaceFirstDollar(name);
+                        var memberResult = this.Emitter.Resolver.ResolveNode(ev.VarInitializer, this.Emitter) as MemberResolveResult;
 
-                        this.WriteEvent(ev, Helpers.GetAddOrRemove(true, name), true);
-                        this.WriteEvent(ev, Helpers.GetAddOrRemove(false, name), false);
+                        if (memberResult != null)
+                        {
+                            var ignoreInterface = memberResult.Member.DeclaringType.Kind == TypeKind.Interface &&
+                                      memberResult.Member.DeclaringType.TypeParameterCount > 0;
+
+                            this.WriteEvent(ev, Helpers.GetEventRef(memberResult.Member, this.Emitter, false, ignoreInterface:ignoreInterface), true);
+                            this.WriteEvent(ev, Helpers.GetEventRef(memberResult.Member, this.Emitter, true, ignoreInterface: ignoreInterface), false);
+
+                            if (!ignoreInterface && this.TypeInfo.Type.Kind == TypeKind.Interface)
+                            {
+                                this.WriteEvent(ev, Helpers.GetEventRef(memberResult.Member, this.Emitter, false, ignoreInterface: true), true);
+                                this.WriteEvent(ev, Helpers.GetEventRef(memberResult.Member, this.Emitter, true, ignoreInterface: true), false);
+                            }
+                        }
+                        else
+                        {
+                            var name = ev.GetName(this.Emitter);
+                            name = Helpers.ReplaceFirstDollar(name);
+
+                            this.WriteEvent(ev, Helpers.GetAddOrRemove(true, name), true);
+                            this.WriteEvent(ev, Helpers.GetAddOrRemove(false, name), false);
+                        }
                     }
                 }
             }

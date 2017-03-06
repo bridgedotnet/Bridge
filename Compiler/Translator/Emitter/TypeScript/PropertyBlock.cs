@@ -47,35 +47,46 @@ namespace Bridge.Translator.TypeScript
             {
                 XmlToJsDoc.EmitComment(this, this.PropertyDeclaration);
                 var p = (PropertyDeclaration)accessor.Parent;
-                var ignoreInterface = memberResult.Member.DeclaringType.Kind == TypeKind.Interface &&
+                var isInterface = memberResult.Member.DeclaringType.Kind == TypeKind.Interface;
+                var ignoreInterface = isInterface &&
                                       memberResult.Member.DeclaringType.TypeParameterCount > 0;
-                string name = Helpers.GetPropertyRef(memberResult.Member, this.Emitter, setter, false, ignoreInterface);
-                this.Write(name);
-                this.WriteOpenParentheses();
-                if (setter)
-                {
-                    this.Write("value");
-                    this.WriteColon();
-                    name = BridgeTypes.ToTypeScriptName(p.ReturnType, this.Emitter);
-                    this.Write(name);
-                }
+                this.WriteAccessor(setter, memberResult, ignoreInterface, p);
 
-                this.WriteCloseParentheses();
-                this.WriteColon();
-
-                if (setter)
+                if (!ignoreInterface && isInterface)
                 {
-                    this.Write("void");
+                    this.WriteAccessor(setter, memberResult, true, p);
                 }
-                else
-                {
-                    name = BridgeTypes.ToTypeScriptName(p.ReturnType, this.Emitter);
-                    this.Write(name);
-                }
-
-                this.WriteSemiColon();
-                this.WriteNewLine();
             }
+        }
+
+        private void WriteAccessor(bool setter, MemberResolveResult memberResult, bool ignoreInterface, PropertyDeclaration p)
+        {
+            string name = Helpers.GetPropertyRef(memberResult.Member, this.Emitter, setter, false, ignoreInterface);
+            this.Write(name);
+            this.WriteOpenParentheses();
+            if (setter)
+            {
+                this.Write("value");
+                this.WriteColon();
+                name = BridgeTypes.ToTypeScriptName(p.ReturnType, this.Emitter);
+                this.Write(name);
+            }
+
+            this.WriteCloseParentheses();
+            this.WriteColon();
+
+            if (setter)
+            {
+                this.Write("void");
+            }
+            else
+            {
+                name = BridgeTypes.ToTypeScriptName(p.ReturnType, this.Emitter);
+                this.Write(name);
+            }
+
+            this.WriteSemiColon();
+            this.WriteNewLine();
         }
     }
 }
