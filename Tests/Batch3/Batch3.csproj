@@ -514,6 +514,7 @@
     <Compile Include="BridgeIssues\2300\N2399.cs" />
     <Compile Include="BridgeIssues\2400\N2401.cs" />
     <Compile Include="BridgeIssues\2400\N2420.cs" />
+    <Compile Include="BridgeIssues\2400\N2430.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
     <Compile Include="Utilities\DecimalHelper.cs" />
