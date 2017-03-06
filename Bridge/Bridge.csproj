@@ -58,7 +58,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Attributes\FieldAttribute.cs" />
-    <Compile Include="Bridge\JSON.cs" />
+    <Compile Include="Bridge\Json.cs" />
     <Compile Include="System\SerializableAttribute.cs" />
     <Compile Include="Attributes\UnboxAttribute.cs" />
     <Compile Include="Attributes\GlobalMethodsAttribute.cs" />

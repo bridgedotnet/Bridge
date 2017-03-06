@@ -274,7 +274,8 @@ namespace Bridge.Translator
             this.WriteNewLine();
             this.Write("continue;");
             var writer = this.SaveWriter();
-            this.Emitter.AsyncBlock.AddAsyncStep();
+            var step = this.Emitter.AsyncBlock.AddAsyncStep();
+            step.Node = switchSection;
 
             switchSection.Statements.AcceptVisitor(this.Emitter);
 

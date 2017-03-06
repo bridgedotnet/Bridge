@@ -1,3 +1,4 @@
+using System;
 using Bridge.Contract;
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.CSharp.Resolver;
@@ -135,19 +136,50 @@ namespace Bridge.Translator
             }
         }
 
-        public ArgumentsInfo(IEmitter emitter, InvocationExpression invocationExpression)
+        public ArgumentsInfo(IEmitter emitter, InvocationExpression invocationExpression, IMethod method = null)
         {
             this.Emitter = emitter;
             this.Expression = invocationExpression;
 
             var arguments = invocationExpression.Arguments.ToList();
-            this.ResolveResult = emitter.Resolver.ResolveNode(invocationExpression, emitter) as InvocationResolveResult;
+            var rr = emitter.Resolver.ResolveNode(invocationExpression, emitter);
+            this.ResolveResult = rr as InvocationResolveResult;
+            var drr = rr as DynamicInvocationResolveResult;
 
-            this.BuildArgumentsList(arguments);
+            if (this.ResolveResult == null && drr != null)
+            {
+                this.BuildDynamicArgumentsList(drr, arguments);
+            }
+            else
+            {
+                this.BuildArgumentsList(arguments);
+            }
+
             if (this.ResolveResult != null)
             {
                 this.HasTypeArguments = ((IMethod)this.ResolveResult.Member).TypeArguments.Count > 0;
                 this.BuildTypedArguments(invocationExpression.Target);
+            }
+
+            if (method != null && method.Parameters.Count > 0)
+            {
+                this.ThisArgument = invocationExpression;
+                var name = method.Parameters[0].Name;
+
+                if (!this.ArgumentsNames.Contains(name))
+                {
+                    var list = this.ArgumentsNames.ToList();
+                    list.Add(name);
+                    this.ArgumentsNames = list.ToArray();
+
+                    var expr = this.ArgumentsExpressions.ToList();
+                    expr.Add(invocationExpression);
+                    this.ArgumentsExpressions = expr.ToArray();
+
+                    var namedExpr = this.NamedExpressions.ToList();
+                    namedExpr.Add(new NamedParamExpression(name, invocationExpression));
+                    this.NamedExpressions = namedExpr.ToArray();
+                }
             }
         }
 
@@ -209,7 +241,7 @@ namespace Bridge.Translator
             }
         }
 
-        public ArgumentsInfo(IEmitter emitter, ObjectCreateExpression objectCreateExpression)
+        public ArgumentsInfo(IEmitter emitter, ObjectCreateExpression objectCreateExpression, IMethod method = null)
         {
             this.Emitter = emitter;
             this.Expression = objectCreateExpression;
@@ -223,13 +255,34 @@ namespace Bridge.Translator
 
                 if (group != null && group.Methods.Count() > 1)
                 {
-                    throw new EmitterException(objectCreateExpression, "Cannot compile this dynamic invocation because there are two or more method overloads with the same parameter count. To work around this limitation, assign the dynamic value to a non-dynamic variable before use or call a method with different parameter count");
+                    throw new EmitterException(objectCreateExpression, Bridge.Translator.Constants.Messages.Exceptions.DYNAMIC_INVOCATION_TOO_MANY_OVERLOADS);
                 }
             }
 
             this.ResolveResult = rr as InvocationResolveResult;
             this.BuildArgumentsList(arguments);
             this.BuildTypedArguments(objectCreateExpression.Type);
+
+            if (method != null && method.Parameters.Count > 0)
+            {
+                this.ThisArgument = objectCreateExpression;
+                var name = method.Parameters[0].Name;
+
+                if (!this.ArgumentsNames.Contains(name))
+                {
+                    var list = this.ArgumentsNames.ToList();
+                    list.Add(name);
+                    this.ArgumentsNames = list.ToArray();
+
+                    var expr = this.ArgumentsExpressions.ToList();
+                    expr.Add(objectCreateExpression);
+                    this.ArgumentsExpressions = expr.ToArray();
+
+                    var namedExpr = this.NamedExpressions.ToList();
+                    namedExpr.Add(new NamedParamExpression(name, objectCreateExpression));
+                    this.NamedExpressions = namedExpr.ToArray();
+                }
+            }
         }
 
         public ArgumentsInfo(IEmitter emitter, AssignmentExpression assignmentExpression, OperatorResolveResult operatorResolveResult, IMethod method)
@@ -369,6 +422,161 @@ namespace Bridge.Translator
                 {
                     this.TypeArguments[i] = new TypeParamExpression(method.TypeParameters[i].Name, null, method.TypeArguments[i]);
                 }
+            }
+        }
+
+        private void BuildDynamicArgumentsList(DynamicInvocationResolveResult drr, IList<Expression> arguments)
+        {
+            Expression paramsArg = null;
+            string paramArgName = null;
+            var resolveResult = drr;
+            IMethod method = null;
+            var group = drr.Target as MethodGroupResolveResult;
+
+            if (group != null && group.Methods.Count() > 1)
+            {
+                method = group.Methods.FirstOrDefault(m =>
+                {
+                    if (drr.Arguments.Count != m.Parameters.Count)
+                    {
+                        return false;
+                    }
+
+                    for (int i = 0; i < m.Parameters.Count; i++)
+                    {
+                        var argType = drr.Arguments[i].Type;
+
+                        if (argType.Kind == TypeKind.Dynamic)
+                        {
+                            argType = this.Emitter.Resolver.Compilation.FindType(TypeCode.Object);
+                        }
+
+                        if (!m.Parameters[i].Type.Equals(argType))
+                        {
+                            return false;
+                        }
+                    }
+
+                    return true;
+                });
+
+                if (method == null)
+                {
+                    throw new EmitterException(this.Expression, Bridge.Translator.Constants.Messages.Exceptions.DYNAMIC_INVOCATION_TOO_MANY_OVERLOADS);
+                }
+            }
+
+            if (method != null)
+            {
+                var member = method;
+                var parameters = method.Parameters;
+
+                Expression[] result = new Expression[parameters.Count];
+                string[] names = new string[result.Length];
+                bool named = false;
+                int i = 0;
+                bool isInterfaceMember = false;
+
+                if (member != null)
+                {
+                    var inlineStr = this.Emitter.GetInline(member);
+                    named = !string.IsNullOrEmpty(inlineStr);
+
+                    isInterfaceMember = member.DeclaringTypeDefinition != null &&
+                                        member.DeclaringTypeDefinition.Kind == TypeKind.Interface;
+                }
+
+                foreach (var arg in arguments)
+                {
+                    if (arg is NamedArgumentExpression)
+                    {
+                        NamedArgumentExpression namedArg = (NamedArgumentExpression)arg;
+                        var namedParam = parameters.First(p => p.Name == namedArg.Name);
+                        var index = parameters.IndexOf(namedParam);
+
+                        result[index] = namedArg.Expression;
+                        names[index] = namedArg.Name;
+                        named = true;
+
+                        if (paramsArg == null && (parameters.Count > i) && parameters[i].IsParams)
+                        {
+                            if (member.DeclaringTypeDefinition == null || !this.Emitter.Validator.IsExternalType(member.DeclaringTypeDefinition))
+                            {
+                                paramsArg = namedArg.Expression;
+                            }
+
+                            paramArgName = namedArg.Name;
+                        }
+                    }
+                    else
+                    {
+                        if (paramsArg == null && (parameters.Count > i) && parameters[i].IsParams)
+                        {
+                            if (member.DeclaringTypeDefinition == null || !this.Emitter.Validator.IsExternalType(member.DeclaringTypeDefinition))
+                            {
+                                paramsArg = arg;
+                            }
+
+                            paramArgName = parameters[i].Name;
+                        }
+
+                        if (i >= result.Length)
+                        {
+                            var list = result.ToList();
+                            list.AddRange(new Expression[arguments.Count - i]);
+
+                            var strList = names.ToList();
+                            strList.AddRange(new string[arguments.Count - i]);
+
+                            result = list.ToArray();
+                            names = strList.ToArray();
+                        }
+
+                        result[i] = arg;
+                        names[i] = i < parameters.Count ? parameters[i].Name : paramArgName;
+                    }
+
+                    i++;
+                }
+
+                for (i = 0; i < result.Length; i++)
+                {
+                    if (result[i] == null)
+                    {
+                        var p = parameters[i];
+                        object t = null;
+                        if (p.Type.Kind == TypeKind.Enum)
+                        {
+                            t = Helpers.GetEnumValue(this.Emitter, p.Type, p.ConstantValue);
+                        }
+                        else
+                        {
+                            t = p.ConstantValue;
+                        }
+                        if ((named || isInterfaceMember) && !p.IsParams)
+                        {
+                            if (t == null)
+                            {
+                                result[i] = new PrimitiveExpression(new RawValue("void 0"));
+                            }
+                            else
+                            {
+                                result[i] = new PrimitiveExpression(t);
+                            }
+                        }
+
+                        names[i] = parameters[i].Name;
+                    }
+                }
+
+                this.ArgumentsExpressions = result;
+                this.ArgumentsNames = names;
+                this.ParamsExpression = paramsArg;
+                this.NamedExpressions = this.CreateNamedExpressions(names, result);
+            }
+            else
+            {
+                this.ArgumentsExpressions = arguments.ToArray();
             }
         }
 

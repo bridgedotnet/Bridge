@@ -1,8 +1,16 @@
-    Bridge.JSON = {
-        serialize: function (obj, returnRaw, possibleType) {
+    Bridge.Json = {
+        serialize: function (obj, settings, returnRaw, possibleType) {
+            if (obj == null) {
+                if (settings && settings.ignoreNullValue) {
+                    return;
+                }
+
+                return returnRaw ? null : JSON.stringify(null);
+            }
+
             var objType = Bridge.getType(obj);
 
-            if (possibleType) {
+            if (possibleType && objType) {
                 if (possibleType.$kind === "interface" || Bridge.Reflection.isAssignableFrom(possibleType, objType)) {
                     possibleType = null;
                 }
@@ -72,7 +80,7 @@
                     arr = [];
 
                     for(i = 0; i < obj.length; i++) {
-                        arr.push(Bridge.JSON.serialize(obj[i], true, type.$elementType));
+                        arr.push(Bridge.Json.serialize(obj[i], settings, true, type.$elementType));
                     }
 
                     obj = arr;
@@ -88,7 +96,7 @@
                     arr = [];
 
                     for(i = 0; i < count; i++) {
-                        arr.push(Bridge.JSON.serialize(System.Array.getItem(obj, i), true, typeElement));
+                        arr.push(Bridge.Json.serialize(System.Array.getItem(obj, i), settings, true, typeElement));
                     }
 
                     obj = arr;
@@ -102,37 +110,49 @@
 
                     while (enm.moveNext()) {
                         var entr = enm.getCurrent();
-                        dict[Bridge.JSON.serialize(entr.key, true, typeKey)] = Bridge.JSON.serialize(entr.value, true, typeValue);
+                        dict[Bridge.Json.serialize(entr.key, settings, true, typeKey)] = Bridge.Json.serialize(entr.value, settings, true, typeValue);
                     }
 
                     obj = dict;
                 } else {
                     var raw = {},
-                        ignoreMetaData = type === System.Object || type === Object || type.$literal,
+                        ignoreMetaData = type === System.Object || type === Object || type.$literal || type.$kind === "anonymous",
                         nometa = !type.$metadata;
 
                     if (!ignoreMetaData && nometa) {
                         throw new System.InvalidOperationException(Bridge.getTypeName(type) + " is not reflectable and cannot be serialized.");
                     }
 
+                    if (settings && settings.typeNameHandling) {
+                        raw["$type"] = Bridge.getTypeName(type);
+                    }
+
                     if (nometa) {
-                        for (var key in obj) {
-                            if (obj.hasOwnProperty(key)) {
-                                raw[key] = Bridge.JSON.serialize(obj[key], true);
+                        if (obj.toJSON) {
+                            raw = obj.toJSON();
+                        } else {
+                            for (var key in obj) {
+                                if (obj.hasOwnProperty(key)) {
+                                    raw[key] = Bridge.Json.serialize(obj[key], settings, true);
+                                }
                             }
                         }
                     } else {
                         var fields = Bridge.Reflection.getMembers(type, 4, 4);
 
                         for (i = 0; i < fields.length; i++) {
-                            raw[fields[i].n] = Bridge.JSON.serialize(Bridge.Reflection.fieldAccess(fields[i], obj), true, fields[i].rt);
+                            raw[fields[i].n] = Bridge.Json.serialize(Bridge.Reflection.fieldAccess(fields[i], obj), settings, true, fields[i].rt);
                         }
 
-                        var properties = Bridge.Reflection.getMembers(type, 16, 28);
+                        var properties = Bridge.Reflection.getMembers(type, 16, 28),
+                            camelCase = settings && settings.camelCasePropertyNames;
 
                         for (i = 0; i < properties.length; i++) {
                             if (!!properties[i].g) {
-                                raw[properties[i].n] = Bridge.JSON.serialize(Bridge.Reflection.midel(properties[i].g, obj)(), true, properties[i].rt);
+                                var pname = camelCase
+                                    ? (properties[i].n.charAt(0).toLowerCase() + properties[i].n.substr(1))
+                                    : properties[i].n;
+                                raw[pname] = Bridge.Json.serialize(Bridge.Reflection.midel(properties[i].g, obj)(), settings, true, properties[i].rt);
                             }
                         }
                     }
@@ -146,7 +166,7 @@
             return returnRaw ? obj : JSON.stringify(obj);
         },
 
-        deserialize: function (raw, type, field) {
+        deserialize: function (raw, type, settings, field) {
             if (type.$kind === "interface") {
                 if (type === System.Collections.IList) {
                     type = System.Collections.Generic.List$1(System.Object);
@@ -308,7 +328,7 @@
                     System.Array.type(type.$elementType, type.$rank || 1, arr);
 
                     for(var i = 0; i < raw.length; i++) {
-                        arr[i] = Bridge.JSON.deserialize(raw[i], type.$elementType, true);
+                        arr[i] = Bridge.Json.deserialize(raw[i], type.$elementType, settings, true);
                     }
 
                     return arr;
@@ -321,7 +341,7 @@
                     }
 
                     for(var i = 0; i < raw.length; i++) {
-                        list.add(Bridge.JSON.deserialize(raw[i], typeElement, true));
+                        list.add(Bridge.Json.deserialize(raw[i], typeElement, settings, true));
                     }
 
                     return list;
@@ -334,13 +354,13 @@
 
                     for(var each in raw) {
                         if (raw.hasOwnProperty(each)) {
-                            dictionary.add(Bridge.JSON.deserialize(each, typeKey, true), Bridge.JSON.deserialize(raw[each], typeValue, true));
+                            dictionary.add(Bridge.Json.deserialize(each, typeKey, settings, true), Bridge.Json.deserialize(raw[each], typeValue, settings, true));
                         }
                     }
 
                     return dictionary;
                 } else {
-                    if (raw["$type"] !== undefined) {
+                    if (settings && settings.typeNameHandling && raw["$type"] != null) {
                         type = Bridge.Reflection.getType(raw["$type"].split(",")[0]);
                     }
 
@@ -350,23 +370,34 @@
 
                     var o = Bridge.createInstance(type);
 
-                    var fields = Bridge.Reflection.getMembers(type, 4, 4);
+                    var fields = Bridge.Reflection.getMembers(type, 4, 4),
+                        value,
+                        i;
 
-                    for (var i = 0; i < fields.length; i++) {
-                        var value = raw[fields[i].n];
+                    for (i = 0; i < fields.length; i++) {
+                        value = raw[fields[i].n];
 
                         if (value !== undefined) {
-                            Bridge.Reflection.fieldAccess(fields[i], o, Bridge.JSON.deserialize(value, fields[i].rt, true));
+                            Bridge.Reflection.fieldAccess(fields[i], o, Bridge.Json.deserialize(value, fields[i].rt, settings, true));
                         }
                     }
 
                     var properties = Bridge.Reflection.getMembers(type, 16, 4);
 
-                    for (var i = 0; i < properties.length; i++) {
-                        var value = raw[properties[i].n];
+                    for (i = 0; i < properties.length; i++) {
+                        var camelCase = settings && settings.camelCasePropertyNames,
+                            pname = camelCase
+                                    ? (properties[i].n.charAt(0).toLowerCase() + properties[i].n.substr(1))
+                                    : properties[i].n;
+                        value = raw[pname];
 
-                        if (value !== undefined && !!properties[i].s) {
-                            Bridge.Reflection.midel(properties[i].s, o)(Bridge.JSON.deserialize(value, properties[i].rt, true));
+                        if (value !== undefined) {
+                            if (!!properties[i].s) {
+                                Bridge.Reflection.midel(properties[i].s, o)(Bridge.Json.deserialize(value, properties[i].rt, settings, true));
+                            }
+                            else if (type.$kind === "anonymous") {
+                                o[properties[i].n.charAt(0).toLowerCase() + properties[i].n.substr(1)] = Bridge.Json.deserialize(value, properties[i].rt, settings, true);
+                            }
                         }
                     }
 

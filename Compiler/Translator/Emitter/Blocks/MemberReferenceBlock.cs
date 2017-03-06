@@ -233,9 +233,43 @@ namespace Bridge.Translator
                 return;
             }
 
+            bool isDynamic = false;
             if (resolveResult is DynamicInvocationResolveResult)
             {
-                resolveResult = ((DynamicInvocationResolveResult)resolveResult).Target;
+                var dynamicResolveResult = (DynamicInvocationResolveResult) resolveResult;
+                var group = dynamicResolveResult.Target as MethodGroupResolveResult;
+
+                if (group != null && group.Methods.Count() > 1)
+                {
+                    var method = group.Methods.FirstOrDefault(m =>
+                    {
+                        if (dynamicResolveResult.Arguments.Count != m.Parameters.Count)
+                        {
+                            return false;
+                        }
+
+                        for (int i = 0; i < m.Parameters.Count; i++)
+                        {
+                            var argType = dynamicResolveResult.Arguments[i].Type;
+
+                            if (argType.Kind == TypeKind.Dynamic)
+                            {
+                                argType = this.Emitter.Resolver.Compilation.FindType(TypeCode.Object);
+                            }
+
+                            if (!m.Parameters[i].Type.Equals(argType))
+                            {
+                                return false;
+                            }
+                        }
+
+                        return true;
+                    }) ?? group.Methods.Last();
+
+                    isDynamic = true;
+                    resolveResult = new MemberResolveResult(new TypeResolveResult(method.DeclaringType), method);
+                    resolveResult = new InvocationResolveResult(resolveResult, method, dynamicResolveResult.Arguments);
+                }
             }
 
             if (resolveResult is MethodGroupResolveResult)
@@ -329,7 +363,7 @@ namespace Bridge.Translator
                 return;
             }
 
-            Tuple<bool, bool, string> inlineInfo = member != null ? this.Emitter.GetInlineCode(memberReferenceExpression) : null;
+            Tuple<bool, bool, string> inlineInfo = member != null ? (isDynamic ? ((Emitter)this.Emitter).GetInlineCodeFromMember(member.Member, null) : this.Emitter.GetInlineCode(memberReferenceExpression)) : null;
             //string inline = member != null ? this.Emitter.GetInline(member.Member) : null;
             string inline = inlineInfo != null ? inlineInfo.Item3 : null;
 
@@ -438,12 +472,12 @@ namespace Bridge.Translator
 
                     thisArg = this.Emitter.Output.ToString();
 
-                    if (Regex.Matches(inline, @"\{(\*?)this(\:(\w+))?\}").Count > 1)
+                    if (Regex.Matches(inline, @"\{(\*?)this\}").Count > 1)
                     {
                         var mrr = resolveResult as MemberResolveResult;
                         bool isField = mrr != null && mrr.Member is IField &&
                                        (mrr.TargetResult is ThisResolveResult ||
-                                        mrr.TargetResult is LocalResolveResult);
+                                        mrr.TargetResult is LocalResolveResult || mrr.TargetResult is MemberResolveResult && ((MemberResolveResult)mrr.TargetResult).Member is IField);
 
                         isSimple = (mrr != null && (mrr.TargetResult is ThisResolveResult || mrr.TargetResult is ConstantResolveResult || mrr.TargetResult is LocalResolveResult)) || isField;
                     }
@@ -461,7 +495,7 @@ namespace Bridge.Translator
                     thisIndex = tempVar.Length + 2;
 
                     sb.Append(tempVar);
-                    sb.Append("=");
+                    sb.Append(" = ");
                     sb.Append(thisArg);
                     sb.Append(", ");
 

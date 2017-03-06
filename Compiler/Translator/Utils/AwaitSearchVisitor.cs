@@ -68,6 +68,30 @@ namespace Bridge.Translator
 
             base.VisitUnaryOperatorExpression(unaryOperatorExpression);
         }
+
+        public override void VisitGotoCaseStatement(GotoCaseStatement gotoCaseStatement)
+        {
+            this.AwaitExpressions.Add(new Tuple<int, AstNode>(this.InvocationLevel, gotoCaseStatement));
+            base.VisitGotoCaseStatement(gotoCaseStatement);
+        }
+
+        public override void VisitGotoDefaultStatement(GotoDefaultStatement gotoDefaultStatement)
+        {
+            this.AwaitExpressions.Add(new Tuple<int, AstNode>(this.InvocationLevel, gotoDefaultStatement));
+            base.VisitGotoDefaultStatement(gotoDefaultStatement);
+        }
+
+        public override void VisitGotoStatement(GotoStatement gotoStatement)
+        {
+            this.AwaitExpressions.Add(new Tuple<int, AstNode>(this.InvocationLevel, gotoStatement));
+            base.VisitGotoStatement(gotoStatement);
+        }
+
+        public override void VisitLabelStatement(LabelStatement labelStatement)
+        {
+            this.AwaitExpressions.Add(new Tuple<int, AstNode>(this.InvocationLevel, labelStatement));
+            base.VisitLabelStatement(labelStatement);
+        }
     }
 
     public class AsyncTryVisitor : DepthFirstAstVisitor

@@ -106,26 +106,30 @@ namespace Bridge.Translator
         {
             var result = new JObject();
             var typedef = type.GetDefinition();
-            var cecilType = emitter.GetTypeDefinition(type);
 
-            if (type.DeclaringType != null)
+            if (typedef != null)
             {
-                result.Add("td", new JRaw(MetadataUtils.GetTypeName(type.DeclaringType, emitter, false)));
-            }
+                var cecilType = type.Kind == TypeKind.Anonymous ? null : emitter.GetTypeDefinition(type);
 
-            if (cecilType != null)
-            {
-                result.Add("att", (int)cecilType.Attributes);
-            }
+                if (type.DeclaringType != null)
+                {
+                    result.Add("td", new JRaw(MetadataUtils.GetTypeName(type.DeclaringType, emitter, false)));
+                }
 
-            if (typedef.Accessibility != Accessibility.None)
-            {
-                result.Add("a", (int)typedef.Accessibility);
-            }
+                if (cecilType != null)
+                {
+                    result.Add("att", (int)cecilType.Attributes);
+                }
 
-            if (typedef.IsStatic)
-            {
-                result.Add("s", true);
+                if (typedef.Accessibility != Accessibility.None)
+                {
+                    result.Add("a", (int)typedef.Accessibility);
+                }
+
+                if (typedef.IsStatic)
+                {
+                    result.Add("s", true);
+                }
             }
 
             return result;
