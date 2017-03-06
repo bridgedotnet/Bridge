@@ -24,9 +24,16 @@ namespace Bridge.Translator
             public const string PLATFORM_PROP = "Platform";
         }
 
+        private bool ShouldReadProjectFile
+        {
+            get; set;
+        }
+
         internal virtual void EnsureProjectProperties()
         {
             this.Log.Info("EnsureProjectProperties at " + (Location ?? "") + " ...");
+
+            ShouldReadProjectFile = !this.FromTask;
 
             var doc = XDocument.Load(Location, LoadOptions.SetLineInfo);
 
@@ -43,10 +50,7 @@ namespace Bridge.Translator
             this.SourceFiles = this.GetSourceFiles(doc);
             this.ParsedSourceFiles = new List<ParsedSourceFile>();
 
-            if (!this.FromTask)
-            {
-                this.EnsureDefineConstants(doc);
-            }
+            this.EnsureDefineConstants(doc);
 
             this.Log.Info("EnsureProjectProperties done");
         }
@@ -131,7 +135,7 @@ namespace Bridge.Translator
 
             var outputType = this.ProjectProperties.OutputType;
 
-            if (outputType == null)
+            if (outputType == null && ShouldReadProjectFile)
             {
                 var projectType = (from n in doc.Descendants()
                                    where n.Name.LocalName == ProjectPropertyNames.OUTPUT_TYPE_PROP
@@ -151,6 +155,11 @@ namespace Bridge.Translator
 
         private void EnsureOverflowMode(XDocument doc)
         {
+            if (!this.ShouldReadProjectFile)
+            {
+                return;
+            }
+
             if (this.OverflowMode.HasValue)
             {
                 return;
@@ -197,25 +206,30 @@ namespace Bridge.Translator
 
             var outputPath = this.ProjectProperties.OutputPath;
 
-            if (outputPath == null)
+            if (outputPath == null && this.ShouldReadProjectFile)
             {
                 // Read OutputPath if not defined already
                 // Throw exception if not found
                 outputPath = ReadProperty(doc, ProjectPropertyNames.OUTPUT_PATH_PROP, false, configHelper);
-
-                this.ProjectProperties.OutputPath = outputPath;
             }
+
+            if (outputPath == null)
+            {
+                outputPath = string.Empty;
+            }
+
+            this.ProjectProperties.OutputPath = outputPath;
 
             var outDir = this.ProjectProperties.OutDir;
 
-            if (outDir == null)
+            if (outDir == null && this.ShouldReadProjectFile)
             {
                 // Read OutDir if not defined already
                 outDir = ReadProperty(doc, ProjectPropertyNames.OUT_DIR_PROP, true, configHelper);
-
-                // If OutDir value is not found then use OutputPath value
-                this.ProjectProperties.OutDir = outDir ?? outputPath;
             }
+
+            // If OutDir value is not found then use OutputPath value
+            this.ProjectProperties.OutDir = outDir ?? outputPath;
 
             var fullPath = this.ProjectProperties.OutDir;
 
@@ -360,7 +374,7 @@ namespace Bridge.Translator
                 this.DefineConstants = new List<string>();
             }
 
-            if (this.ProjectProperties.DefineConstants == null)
+            if (this.ProjectProperties.DefineConstants == null && this.ShouldReadProjectFile)
             {
                 this.Log.Info("Reading define constants...");
 
@@ -408,40 +422,44 @@ namespace Bridge.Translator
 
         protected virtual void EnsureAssemblyName(XDocument doc)
         {
-            if (this.ProjectProperties.AssemblyName == null)
+            if (this.ProjectProperties.AssemblyName == null && this.ShouldReadProjectFile)
             {
                 var nodes = from n in doc.Descendants()
                             where n.Name.LocalName == ProjectPropertyNames.ASSEMBLY_NAME_PROP
                             select n;
 
-                if (nodes.Count() != 1)
+                if (nodes.Count() == 1)
                 {
-                    Bridge.Translator.TranslatorException.Throw("Unable to determine assembly name");
+                    this.ProjectProperties.AssemblyName = nodes.First().Value;
                 }
+            }
 
-                this.ProjectProperties.AssemblyName = nodes.First().Value;
+            if (string.IsNullOrWhiteSpace(this.ProjectProperties.AssemblyName))
+            {
+                Bridge.Translator.TranslatorException.Throw("Unable to determine assembly name");
             }
         }
 
         protected virtual void EnsureDefaultNamespace(XDocument doc)
         {
-            if (this.ProjectProperties.RootNamespace == null)
+            if (this.ProjectProperties.RootNamespace == null && this.ShouldReadProjectFile)
             {
                 var nodes = from n in doc.Descendants()
                             where n.Name.LocalName == ProjectPropertyNames.ROOT_NAMESPACE_PROP
                             select n;
 
-                if (nodes.Count() != 1)
-                {
-                    this.ProjectProperties.RootNamespace = Translator.DefaultRootNamespace;
-                }
-                else
+                if (nodes.Count() == 1)
                 {
                     this.ProjectProperties.RootNamespace = nodes.First().Value;
                 }
             }
 
             this.DefaultNamespace = this.ProjectProperties.RootNamespace;
+
+            if (string.IsNullOrWhiteSpace(this.DefaultNamespace))
+            {
+                this.DefaultNamespace = Translator.DefaultRootNamespace;
+            }
 
             this.Log.Trace("DefaultNamespace:" + this.DefaultNamespace);
         }
