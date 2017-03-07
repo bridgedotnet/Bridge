@@ -487,7 +487,8 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#2401 - TestArrayInitializer", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2401.testArrayInitializer);
             QUnit.test("#2419 - TestExternalEnum", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2419.testExternalEnum);
             QUnit.test("#2430 - TestPropertyInitializer", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2430.testPropertyInitializer);
-            QUnit.test("#2443 - TestNaNCompare", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2443.testNaNCompare);
+            QUnit.test("#2443 - TestNaNCompareForDouble", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2443.testNaNCompareForDouble);
+            QUnit.test("#2443 - TestNaNCompareForFloat", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2443.testNaNCompareForFloat);
             QUnit.test("#381 - TestUseCase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge381.testUseCase);
             QUnit.test("#447 - CheckInlineExpression", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.checkInlineExpression);
             QUnit.test("#447 - CheckInlineCalls", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.checkInlineCalls);
@@ -9965,12 +9966,19 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2443", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2443)],
         statics: {
-            testNaNCompare: function (assert) {
+            testNaNCompareForDouble: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2443).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2443, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
-                    method: "TestNaNCompare()",
+                    method: "TestNaNCompareForDouble()",
                     line: "11"
                 } ));
-                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2443.testNaNCompare();
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2443.testNaNCompareForDouble();
+            },
+            testNaNCompareForFloat: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2443).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2443, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestNaNCompareForFloat()",
+                    line: "60"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2443.testNaNCompareForFloat();
             }
         },
         context: null,
