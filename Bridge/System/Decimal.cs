@@ -14,19 +14,19 @@ namespace System
     public struct Decimal : IComparable, IComparable<Decimal>, IEquatable<Decimal>, IFormattable
     {
         [Name(false)]
-        public static readonly decimal Zero = 0;
+        public const decimal Zero = 0;
 
         [Name(false)]
-        public static readonly decimal One = 1;
+        public const decimal One = 1;
 
         [Name(false)]
-        public static readonly decimal MinusOne = -1;
+        public const decimal MinusOne = -1;
 
         [Name(false)]
-        public static readonly decimal MaxValue = 79228162514264337593543950335m;
+        public const decimal MaxValue = 79228162514264337593543950335m;
 
         [Name(false)]
-        public static readonly decimal MinValue = -79228162514264337593543950335m;
+        public const decimal MinValue = -79228162514264337593543950335m;
 
         [Template("System.Decimal(0)")]
         private extern Decimal(DummyTypeUsedToAddAttributeToDefaultValueTypeConstructor _);

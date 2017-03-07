@@ -12133,7 +12133,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 }
             },
             fromDoubleArray: function () {
-                var testValues = System.Array.init([-System.Double.max, 0.0, 1.0, 1000.0, System.Double.max, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 4.94065645841247E-324, Number.NaN], System.Double);
+                var testValues = System.Array.init([-1.7976931348623157E+308, 0.0, 1.0, 1000.0, System.Double.max, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 4.94065645841247E-324, Number.NaN], System.Double);
                 var expectedValues = System.Array.init([Bridge.ClientTest.ConvertTests.ConvertConstants.DOUBLE_MIN_STRING, "0", "1", "1000", Bridge.ClientTest.ConvertTests.ConvertConstants.DOUBLE_MAX_STRING, "-Infinity", "Infinity", Bridge.ClientTest.ConvertTests.ConvertConstants.DOUBLE_EPSILON_STRING, "NaN"], System.String);
 
                 // Vanila Test Cases
@@ -12939,8 +12939,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             jSMode: true,
             NoDotNetDiff: false,
             HasDotNetDiff: true,
-            maxValue: System.Decimal(0.0),
-            minValue: System.Decimal(0.0),
+            maxValue: System.Decimal("79228162514264337593543950335"),
+            minValue: System.Decimal("-79228162514264337593543950335"),
             inputAdd: null,
             inputSubtract: null,
             inputMultiply: null,
@@ -12948,8 +12948,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             inputRemainder: null,
             config: {
                 init: function () {
-                    this.maxValue = System.Decimal.MaxValue;
-                    this.minValue = System.Decimal.MinValue;
                     this.inputAdd = System.Array.create(null, [[Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(47.0), System.Decimal(47.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(-47.0), System.Decimal(-47.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(-47.0), System.Decimal(-47.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(47.0), System.Decimal(47.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("443534569034876.33478923476"), System.Decimal(47.0), System.Decimal("443534569034923.33478923476")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("443534569034876.12345678901235"), System.Decimal(47.000000000001), System.Decimal("443534569034923.12345678901335")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("443534569034876.12345678901235"), System.Decimal("9436905724146.297872340425532"), System.Decimal("452971474759022.42132912943788")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("4435345690348766678656790453"), System.Decimal(17.0), System.Decimal("4435345690348766678656790470")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(17.2345324), System.Decimal("4435345690348766678656790453"), System.Decimal("4435345690348766678656790470.2")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.HasDotNetDiff, System.Boolean, $box_.System.Boolean.toString), "0.00000000000005", System.Decimal("-943456769034871.4234"), System.Decimal("47.00000000003455"), System.Decimal("-943456769034824.4233999999654")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("6999545690348766678656790453"), System.Decimal(-13.0), System.Decimal("6999545690348766678656790440")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(11.0), System.Decimal("-6435345690348766678656790453"), System.Decimal("-6435345690348766678656790442")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, Bridge.ClientTest.DecimalMathTests.maxValue, Bridge.ClientTest.DecimalMathTests.minValue, System.Decimal(0.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal.MinusOne, Bridge.ClientTest.DecimalMathTests.maxValue, System.Decimal("79228162514264337593543950334")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, Bridge.ClientTest.DecimalMathTests.maxValue, System.Decimal.MinusOne, System.Decimal("79228162514264337593543950334")]], System.Object, 15, 5);
                     this.inputSubtract = System.Array.create(null, [[Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(47.0), System.Decimal(-47.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(-47.0), System.Decimal(47.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(-47.0), System.Decimal(47.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(47.0), System.Decimal(-47.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("443534569034876.33478923476"), System.Decimal(47.0), System.Decimal("443534569034829.33478923476")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("443534569034876.12345678901235"), System.Decimal(47.000000000001), System.Decimal("443534569034829.12345678901135")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("443534569034876.12345678901235"), System.Decimal("9436905724146.297872340425532"), System.Decimal("434097663310729.82558444858682")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("4435345690348766678656790453"), System.Decimal(17.0), System.Decimal("4435345690348766678656790436")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(17.2345324), System.Decimal("4435345690348766678656790453"), System.Decimal("-4435345690348766678656790435.8")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.HasDotNetDiff, System.Boolean, $box_.System.Boolean.toString), System.Decimal(-0.00000000000005), System.Decimal("-943456769034871.4234"), System.Decimal("47.00000000003455"), System.Decimal("-943456769034918.4234000000346")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("6999545690348766678656790453"), System.Decimal(-13.0), System.Decimal("6999545690348766678656790466")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(11.0), System.Decimal("-6435345690348766678656790453"), System.Decimal("6435345690348766678656790464")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, Bridge.ClientTest.DecimalMathTests.maxValue, Bridge.ClientTest.DecimalMathTests.maxValue, System.Decimal(0.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal.MinusOne, Bridge.ClientTest.DecimalMathTests.minValue, System.Decimal("79228162514264337593543950334")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, Bridge.ClientTest.DecimalMathTests.maxValue, System.Decimal.One, System.Decimal("79228162514264337593543950334")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, Bridge.ClientTest.DecimalMathTests.minValue, System.Decimal.MinusOne, System.Decimal("-79228162514264337593543950334")]], System.Object, 16, 5);
                     this.inputMultiply = System.Array.create(null, [[Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(47.0), System.Decimal(0.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(-47.0), System.Decimal(0.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(-47.0), System.Decimal(0.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(47.0), System.Decimal(0.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(0.0), System.Decimal(0.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("443534569034876.33478923476"), System.Decimal(0.47), System.Decimal("208461247446391.8773509403372")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("43534569034876.12345678901235"), System.Decimal(47.000000000001), System.Decimal("2046124744639221.3370381184566")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("44.353456903487612345678901235"), System.Decimal("9436905724146.297872340425532"), System.Decimal("418559391338198.38088395328596")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("4435345690348766678656790453"), System.Decimal(0.17), System.Decimal("754008767359290335371654377.01")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(17.2345324), System.Decimal("443534569034876667865679045.37"), System.Decimal("7644110900551618662335084355.4")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("-943456769034871.4234"), System.Decimal("0.4700000000003455"), System.Decimal("-443424681446715.53331170154808")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.HasDotNetDiff, System.Boolean, $box_.System.Boolean.toString), System.Decimal(-0.01), System.Decimal("6999545690348766678656790453"), System.Decimal(-0.13), System.Decimal("-909940939745339668225382758.9")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.HasDotNetDiff, System.Boolean, $box_.System.Boolean.toString), System.Decimal(0.0001), System.Decimal(0.11), System.Decimal("-64353456903487666786567904.535"), System.Decimal("-7078880259383643346522469.4988")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, Bridge.ClientTest.DecimalMathTests.maxValue, System.Decimal.MinusOne, Bridge.ClientTest.DecimalMathTests.minValue], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal.MinusOne, Bridge.ClientTest.DecimalMathTests.minValue, Bridge.ClientTest.DecimalMathTests.maxValue], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, Bridge.ClientTest.DecimalMathTests.maxValue, System.Decimal.One, Bridge.ClientTest.DecimalMathTests.maxValue], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, Bridge.ClientTest.DecimalMathTests.minValue, System.Decimal.MinusOne, Bridge.ClientTest.DecimalMathTests.maxValue]], System.Object, 17, 5);
@@ -35827,7 +35825,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var expectedValues = System.Array.init([0, 255, 100, 255, 255], System.Byte);
             this.verifyViaObj(System.Double, function (value) { return System.Convert.toByte(value); }, testValues, expectedValues);
 
-            var overflowValues = System.Array.init([-System.Double.max, System.Double.max], System.Double);
+            var overflowValues = System.Array.init([-1.7976931348623157E+308, System.Double.max], System.Double);
             this.verifyThrowsViaObj(System.OverflowException, System.Double, function (value) { return System.Convert.toByte(value); }, overflowValues);
         },
         fromInt16: function () {
@@ -36219,7 +36217,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var expectedValues = System.Array.init([System.Decimal(1000.0), System.Decimal(100.0), System.Decimal(0.0), System.Decimal(0.001), System.Decimal(-1000.0), System.Decimal(-100.0)], System.Decimal);
             this.verifyViaObj(System.Double, function (value) { return System.Convert.toDecimal(value); }, testValues, expectedValues);
 
-            var overflowValues = System.Array.init([System.Double.max, -System.Double.max], System.Double);
+            var overflowValues = System.Array.init([System.Double.max, -1.7976931348623157E+308], System.Double);
             this.verifyThrowsViaObj(System.OverflowException, System.Double, function (value) { return System.Convert.toDecimal(value); }, overflowValues);
         },
         fromInt16: function () {
@@ -36311,7 +36309,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         fromDecimal: function () {
             var testValues = System.Array.init([System.Decimal.MaxValue, System.Decimal.MinValue, System.Decimal(0.0)], System.Decimal);
-            var expectedValues = System.Array.init([System.Decimal.toFloat(System.Decimal.MaxValue), System.Decimal.toFloat(System.Decimal.MinValue), 0.0], System.Double);
+            var expectedValues = System.Array.init([7.9228162514264338E+28, -7.9228162514264338E+28, 0.0], System.Double);
             this.verifyViaObj(System.Decimal, function (value) { return System.Convert.toDouble(value); }, testValues, expectedValues);
         },
         fromDouble: function () {
@@ -36354,10 +36352,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         fromString: function () {
             var doubleMaxValue = System.Double.max;
-            var doubleMinValue = -System.Double.max;
+            var doubleMinValue = -1.7976931348623157E+308;
 
             var testValues = System.Array.init([System.Double.format(doubleMinValue, "R"), System.Double.format(doubleMaxValue, "R"), System.Double.format((0.0), 'G'), System.Double.format((10.0), 'G'), System.Double.format((-10.0), 'G'), null], System.String);
-            var expectedValues = System.Array.init([-System.Double.max, System.Double.max, 0.0, 10.0, -10.0, 0.0], System.Double);
+            var expectedValues = System.Array.init([-1.7976931348623157E+308, System.Double.max, 0.0, 10.0, -10.0, 0.0], System.Double);
             this.verifyFromString(function (value) { return System.Convert.toDouble(value); }, function (value, provider) { return System.Convert.toDouble(value, provider); }, testValues, expectedValues);
 
             var overflowValues = System.Array.init(["1.79769313486232E+308", "-1.79769313486232E+308"], System.String);
@@ -36413,7 +36411,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var expectedValues = System.Array.init([100, -100, 0], System.Int16);
             this.verifyViaObj(System.Double, function (value) { return System.Convert.toInt16(value); }, testValues, expectedValues);
 
-            var overflowValues = System.Array.init([System.Double.max, -System.Double.max], System.Double);
+            var overflowValues = System.Array.init([System.Double.max, -1.7976931348623157E+308], System.Double);
             this.verifyThrowsViaObj(System.OverflowException, System.Double, function (value) { return System.Convert.toInt16(value); }, overflowValues);
         },
         fromInt16: function () {
@@ -36548,7 +36546,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var expectedValues = System.Array.init([100, -100, 0], System.Int32);
             this.verifyViaObj(System.Double, function (value) { return System.Convert.toInt32(value); }, testValues, expectedValues);
 
-            var overflowValues = System.Array.init([System.Double.max, -System.Double.max], System.Double);
+            var overflowValues = System.Array.init([System.Double.max, -1.7976931348623157E+308], System.Double);
             this.verifyThrowsViaObj(System.OverflowException, System.Double, function (value) { return System.Convert.toInt32(value); }, overflowValues);
         },
         fromInt16: function () {
@@ -36677,7 +36675,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var expectedValues = System.Array.init([System.Int64(100), System.Int64(-100), System.Int64(0)], System.Int64);
             this.verifyViaObj(System.Double, function (value) { return System.Convert.toInt64(value); }, testValues, expectedValues);
 
-            var overflowValues = System.Array.init([System.Double.max, -System.Double.max], System.Double);
+            var overflowValues = System.Array.init([System.Double.max, -1.7976931348623157E+308], System.Double);
             this.verifyThrowsViaObj(System.OverflowException, System.Double, function (value) { return System.Convert.toInt64(value); }, overflowValues);
         },
         fromInt16: function () {
@@ -36804,7 +36802,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var expectedValues = System.Array.init([100, -100, 0], System.SByte);
             this.verifyViaObj(System.Double, function (value) { return System.Convert.toSByte(value); }, testValues, expectedValues);
 
-            var overflowValues = System.Array.init([System.Double.max, -System.Double.max], System.Double);
+            var overflowValues = System.Array.init([System.Double.max, -1.7976931348623157E+308], System.Double);
             this.verifyThrowsViaObj(System.OverflowException, System.Double, function (value) { return System.Convert.toSByte(value); }, overflowValues);
         },
         fromInt16: function () {
@@ -36939,11 +36937,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         fromDecimal: function () {
             var testValues = System.Array.init([System.Decimal(1000.0), System.Decimal(0.0), System.Decimal(-1000.0), System.Decimal.MaxValue, System.Decimal.MinValue], System.Decimal);
-            var expectedValues = System.Array.init([1000.0, 0.0, -1000.0, System.Decimal.toFloat(System.Decimal.MaxValue), System.Decimal.toFloat(System.Decimal.MinValue)], System.Single);
+            var max = System.Decimal.MaxValue;
+            var min = System.Decimal.MinValue;
+            var expectedValues = System.Array.init([1000.0, 0.0, -1000.0, System.Decimal.toFloat(max), System.Decimal.toFloat(min)], System.Single);
             this.verifyViaObj(System.Decimal, function (value) { return System.Convert.toSingle(value); }, testValues, expectedValues);
         },
         fromDouble: function () {
-            var testValues = System.Array.init([1000.0, 100.0, 0.0, -100.0, -1000.0, System.Double.max, -System.Double.max], System.Double);
+            var testValues = System.Array.init([1000.0, 100.0, 0.0, -100.0, -1000.0, System.Double.max, -1.7976931348623157E+308], System.Double);
             var expectedValues = System.Array.init([1000.0, 100.0, 0.0, -100.0, -1000.0, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY], System.Single);
             this.verifyViaObj(System.Double, function (value) { return System.Convert.toSingle(value); }, testValues, expectedValues);
         },
@@ -36986,7 +36986,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             this.verifyFromString(function (value) { return System.Convert.toSingle(value); }, function (value, provider) { return System.Convert.toSingle(value, provider); }, testValues, expectedValues);
 
             var doubleMaxValue = System.Double.max;
-            var doubleMinValue = -System.Double.max;
+            var doubleMinValue = -1.7976931348623157E+308;
             var overflowValues = System.Array.init([System.Double.format(doubleMinValue, "R"), System.Double.format(doubleMaxValue, "R")], System.String);
             this.verifyFromStringThrows(System.OverflowException, function (value) { return System.Convert.toSingle(value); }, function (value, provider) { return System.Convert.toSingle(value, provider); }, overflowValues);
 

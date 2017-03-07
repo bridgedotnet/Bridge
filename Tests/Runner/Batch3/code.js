@@ -15554,6 +15554,49 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2446", {
+        statics: {
+            testDoubleMinValue: function () {
+                Bridge.Test.NUnit.Assert.areEqual(System.Double.min, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2446.returnDouble1());
+                Bridge.Test.NUnit.Assert.areEqual(System.Double.max, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2446.returnDouble2());
+
+                Bridge.Test.NUnit.Assert.true(System.Decimal.MinValue.equalsT(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2446.returnDecimal1()));
+                Bridge.Test.NUnit.Assert.true(System.Decimal.MaxValue.equalsT(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2446.returnDecimal2()));
+                Bridge.Test.NUnit.Assert.true(System.Decimal.Zero.equalsT(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2446.returnDecimal3()));
+                Bridge.Test.NUnit.Assert.true(System.Decimal.One.equalsT(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2446.returnDecimal4()));
+                Bridge.Test.NUnit.Assert.true(System.Decimal.MinusOne.equalsT(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2446.returnDecimal5()));
+            },
+            returnDouble1: function (x) {
+                if (x === void 0) { x = -1.7976931348623157E+308; }
+                return x;
+            },
+            returnDouble2: function (x) {
+                if (x === void 0) { x = 1.7976931348623157E+308; }
+                return x;
+            },
+            returnDecimal1: function (x) {
+                if (x === void 0) { x = System.Decimal("-79228162514264337593543950335"); }
+                return x;
+            },
+            returnDecimal2: function (x) {
+                if (x === void 0) { x = System.Decimal("79228162514264337593543950335"); }
+                return x;
+            },
+            returnDecimal3: function (x) {
+                if (x === void 0) { x = System.Decimal(0.0); }
+                return x;
+            },
+            returnDecimal4: function (x) {
+                if (x === void 0) { x = System.Decimal(1.0); }
+                return x;
+            },
+            returnDecimal5: function (x) {
+                if (x === void 0) { x = System.Decimal(-1.0); }
+                return x;
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge266A", {
         statics: {
             test: function () {
