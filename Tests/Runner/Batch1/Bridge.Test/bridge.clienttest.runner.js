@@ -1884,6 +1884,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("ComplexPropertiesWorks", Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests.complexPropertiesWorks);
             QUnit.test("CamelCaseSettingWorks", Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests.camelCaseSettingWorks);
             QUnit.test("IgnoreNullValueWorks", Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests.ignoreNullValueWorks);
+            QUnit.test("TypeNameHandlingWorks", Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests.typeNameHandlingWorks);
             QUnit.test("AnonymousTypesWorks", Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests.anonymousTypesWorks);
             QUnit.module("Simple types");
             QUnit.test("Boolean - TypePropertiesAreCorrect", Bridge.Test.Runtime.BridgeClientTestRunner.BooleanTests.typePropertiesAreCorrect);
@@ -19689,10 +19690,17 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 } ));
                 Bridge.ClientTest.SerializationTests.ignoreNullValueWorks();
             },
+            typeNameHandlingWorks: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SerializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TypeNameHandlingWorks()",
+                    line: "274"
+                } ));
+                Bridge.ClientTest.SerializationTests.typeNameHandlingWorks();
+            },
             anonymousTypesWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SerializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "AnonymousTypesWorks()",
-                    line: "274"
+                    line: "284"
                 } ));
                 Bridge.ClientTest.SerializationTests.anonymousTypesWorks();
             }

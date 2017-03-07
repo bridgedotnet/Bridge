@@ -34,18 +34,18 @@ function TestInstance1(assert, instance) {
 }
 function TestInstance2(assert, instance) {
     var interface2 = instance;
-    interface2.method1();
+    interface2.Interfaces$Interface2$method1();
     assert.deepEqual(interface2.Interfaces$Interface1$getProperty(), 2, "Method1() through Property");
     assert.deepEqual(instance.field, 1, "Method1() through Fileld");
-    interface2.method2("1234567");
+    interface2.Interfaces$Interface2$method2("1234567");
     assert.deepEqual(instance.field, 7, "Method2() through Field");
-    assert.deepEqual(interface2.method3(), instance.field, "Method3 through Field");
-    assert.ok(interface2.method4(instance), "Method4 through return result");
+    assert.deepEqual(interface2.Interfaces$Interface2$method3(), instance.field, "Method3 through Field");
+    assert.ok(interface2.Interfaces$Interface2$method4(instance), "Method4 through return result");
     assert.deepEqual(instance.field, interface2.Interfaces$Interface1$getProperty(), "Method4 through Field");
 }
 function TestInstance3(assert, instance) {
     var interface3 = instance;
-    var interface2 = interface3.method5(interface3);
+    var interface2 = interface3.Interfaces$Interface3$method5(interface3);
     assert.deepEqual(interface3.Interfaces$Interface1$getProperty(), interface2.Interfaces$Interface1$getProperty(), "Method5 through Property");
     var instance1 = instance;
     assert.deepEqual(instance1.field, instance.field, "Method5 through Field");

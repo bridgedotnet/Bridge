@@ -49,28 +49,19 @@ namespace Bridge.Translator
             protected set;
         }
 
-        /// <summary>
-        /// Value of $(OutputPath) read from the project file
-        /// </summary>
-        public string OutputPath
-        {
-            get;
-            protected set;
-        }
-
-        public string AssemblyName
-        {
-            get;
-            protected set;
-        }
-
-        public string BuildArguments
+        public ProjectProperties ProjectProperties
         {
             get;
             set;
         }
 
         public string DefaultNamespace
+        {
+            get;
+            set;
+        }
+
+        public string BuildArguments
         {
             get;
             set;
@@ -171,18 +162,6 @@ namespace Bridge.Translator
         }
 
         public bool Recursive
-        {
-            get;
-            set;
-        }
-
-        public string Configuration
-        {
-            get;
-            set;
-        }
-
-        public string Platform
         {
             get;
             set;

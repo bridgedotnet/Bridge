@@ -25,6 +25,34 @@ QUnit.test("#338", function (assert) {
     var interfacedList = list;
     assert.deepEqual(interfacedList.get(0), "4", "Bridge.List$1(String) is Bridge.IList$1<String>");
 });
+QUnit.test("#1060", function (assert) {
+    var a = new (TypeScript.Issues.N1060.B$1(Number))();
+    var c = a.getC();
+    assert.notEqual(c, null);
+});
+QUnit.test("#1640", function (assert) {
+    var game1 = new TypeScript.Issues.N1640.GamePlay();
+    var result1;
+    var s1 = function (sender, s) { result1 = s + "1"; };
+    var iGame1 = game1;
+    game1.subscribe(s1);
+    iGame1.startGame("First");
+    assert.equal(result1, "First1");
+    var game2 = new TypeScript.Issues.N1640.GamePlay();
+    var result2;
+    var s2 = function (sender, s) { result2 = s + "2"; };
+    var iGame2 = game2;
+    iGame2.addOnGameEvent(s2);
+    iGame2.startGame("Second");
+    assert.equal(result2, "Second2");
+    iGame2.removeOnGameEvent(s2);
+    result2 = "Removed";
+    iGame2.startGame("");
+    assert.equal(result2, "Removed");
+    iGame2.addOnGameEvent(s2);
+    iGame2.startGame("SecondPlus");
+    assert.equal(result2, "SecondPlus2");
+});
 QUnit.test("#2029", function (assert) {
     var a = new (TypeScript.Issues.N2029)();
     a.setValue1(25);

@@ -79,7 +79,7 @@ namespace Bridge.Translator.Tests
             }
         }
 
-        [TestCase("02", false, true, "TestProject.I2096.js", TestName = "IntegrationTest 02 - using GenerateScript Task Bridge.json outputFormatting Formatted, autoPropertyToField, combineScripts")]
+        [TestCase("02", true, true, "TestProject.I2096.js", TestName = "IntegrationTest 02 - using GenerateScript Task Bridge.json outputFormatting Formatted, autoPropertyToField, combineScripts")]
         [TestCase("03", true, true, TestName = "IntegrationTest 03 - Bridge.json outputFormatting Minified")]
         [TestCase("04", true, true, TestName = "IntegrationTest 04 - Bridge.json outputBy Class ignoreCast fileNameCasing Lowercase")]
         [TestCase("05", true, true, TestName = "IntegrationTest 05 - Bridge.json outputBy Namespace ignoreCast default useTypedArrays default fileNameCasing CamelCase")]
@@ -95,7 +95,7 @@ namespace Bridge.Translator.Tests
 #else
         [TestCase("19", true, true, TestName = "IntegrationTest 19 - Linked files feature #531 #562")]
 #endif
-        public void Test(string folder, bool isToTranslate, bool useSpecialFileCompare, string markedContentFiles = null)
+        public void Test(string folder, bool isToBuild, bool useSpecialFileCompare, string markedContentFiles = null)
         {
             var logDir = Path.GetDirectoryName(Helpers.FileHelper.GetExecutingAssemblyPath());
 
@@ -120,11 +120,11 @@ namespace Bridge.Translator.Tests
 
             try
             {
-                TranslateTestProject(isToTranslate, logger);
+                TranslateTestProject(isToBuild, logger);
             }
             catch (System.Exception ex)
             {
-                Assert.Fail("Could not {0} the project {1}. Exception occurred: {2}.", isToTranslate ? "translate" : "build", folder, ex.ToString());
+                Assert.Fail("Could not {0} the project {1}. Exception occurred: {2}.", isToBuild ? "translate" : "build", folder, ex.ToString());
             }
 
             try
@@ -184,7 +184,7 @@ namespace Bridge.Translator.Tests
             }
         }
 
-        private void TranslateTestProject(bool isToTranslate, Logger logger)
+        private void TranslateTestProject(bool isToBuild, Logger logger)
         {
             var translator = new TranslatorRunner()
             {
@@ -193,13 +193,13 @@ namespace Bridge.Translator.Tests
                 BuildArguments = IntegrationTest.BuildArguments
             };
 
-            if (isToTranslate)
+            if (isToBuild)
             {
-                translator.Translate();
+                translator.Translate(true);
             }
             else
             {
-                translator.Translate(true);
+                translator.Translate(false);
             }
         }
     }

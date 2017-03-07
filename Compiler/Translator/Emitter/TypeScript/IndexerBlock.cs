@@ -1,5 +1,7 @@
 ﻿using Bridge.Contract;
 using ICSharpCode.NRefactory.CSharp;
+using ICSharpCode.NRefactory.Semantics;
+using ICSharpCode.NRefactory.TypeSystem;
 using System.Collections.Generic;
 
 namespace Bridge.Translator.TypeScript
@@ -29,32 +31,47 @@ namespace Bridge.Translator.TypeScript
         {
             if (!accessor.IsNull && this.Emitter.GetInline(accessor) == null)
             {
-                XmlToJsDoc.EmitComment(this, this.IndexerDeclaration, !setter);
-                string name = Helpers.GetPropertyRef(this.IndexerDeclaration, this.Emitter, setter, false, false);
-                this.Write(name);
+                var memberResult = this.Emitter.Resolver.ResolveNode(this.IndexerDeclaration, this.Emitter) as MemberResolveResult;
+                var isInterface = memberResult.Member.DeclaringType.Kind == TypeKind.Interface;
+                var ignoreInterface = isInterface &&
+                                      memberResult.Member.DeclaringType.TypeParameterCount > 0;
 
-                this.EmitMethodParameters(indexerDeclaration.Parameters, null, indexerDeclaration, setter);
+                this.WriteAccessor(indexerDeclaration, setter, ignoreInterface);
 
-                if (setter)
+                if (!ignoreInterface && isInterface)
                 {
-                    this.Write(", value");
-                    this.WriteColon();
-                    name = BridgeTypes.ToTypeScriptName(indexerDeclaration.ReturnType, this.Emitter);
-                    this.Write(name);
-                    this.WriteCloseParentheses();
-                    this.WriteColon();
-                    this.Write("void");
+                    this.WriteAccessor(indexerDeclaration, setter, true);
                 }
-                else
-                {
-                    this.WriteColon();
-                    name = BridgeTypes.ToTypeScriptName(indexerDeclaration.ReturnType, this.Emitter);
-                    this.Write(name);
-                }
-
-                this.WriteSemiColon();
-                this.WriteNewLine();
             }
+        }
+
+        private void WriteAccessor(IndexerDeclaration indexerDeclaration, bool setter, bool ignoreInterface)
+        {
+            XmlToJsDoc.EmitComment(this, this.IndexerDeclaration, !setter);
+            string name = Helpers.GetPropertyRef(this.IndexerDeclaration, this.Emitter, setter, false, ignoreInterface);
+            this.Write(name);
+
+            this.EmitMethodParameters(indexerDeclaration.Parameters, null, indexerDeclaration, setter);
+
+            if (setter)
+            {
+                this.Write(", value");
+                this.WriteColon();
+                name = BridgeTypes.ToTypeScriptName(indexerDeclaration.ReturnType, this.Emitter);
+                this.Write(name);
+                this.WriteCloseParentheses();
+                this.WriteColon();
+                this.Write("void");
+            }
+            else
+            {
+                this.WriteColon();
+                name = BridgeTypes.ToTypeScriptName(indexerDeclaration.ReturnType, this.Emitter);
+                this.Write(name);
+            }
+
+            this.WriteSemiColon();
+            this.WriteNewLine();
         }
 
         protected virtual void EmitMethodParameters(IEnumerable<ParameterDeclaration> declarations, IEnumerable<TypeParameterDeclaration> typeParamsdeclarations, AstNode context, bool skipClose)

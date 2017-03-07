@@ -145,6 +145,10 @@ namespace Bridge.Translator
 
                 foreach (var p in typeDef.GenericParameters)
                 {
+                    if (typeDef.GenericParameters.Count(gp => gp.FullName == p.FullName) > 1)
+                    {
+                        throw new EmitterException(this.TypeInfo.TypeDeclaration, $"Type parameter '{p.FullName}' has the same name as the type parameter from outer type.");
+                    }
                     this.EnsureComma(false);
                     this.Write(p.Name);
                     this.Emitter.Comma = true;

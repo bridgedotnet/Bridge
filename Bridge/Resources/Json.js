@@ -124,7 +124,7 @@
                     }
 
                     if (settings && settings.typeNameHandling) {
-                        raw["$type"] = Bridge.getTypeName(type);
+                        raw["$type"] = Bridge.Reflection.getTypeQName(type);
                     }
 
                     if (nometa) {
