@@ -90,6 +90,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Code\Constansts.cs" />
+    <Compile Include="CompilerTests\AssemblyConfigHelperTests.cs" />
+    <Compile Include="BuilderTests\BuilderTests.cs" />
     <Compile Include="ContractTests\BridgeTypeTests.cs" />
     <Compile Include="Helpers\EmitterHelper.cs" />
     <Compile Include="CompilerTests\InlineArgumentsBlockTests.cs" />
@@ -114,6 +116,10 @@
     <Compile Include="IntegrationTests\TranslatorRunner.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Builder\Bridge.Builder.csproj">
+      <Project>{243bb709-3912-4c65-82d4-787a5e2201d7}</Project>
+      <Name>Bridge.Builder</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Contract\Bridge.Contract.csproj">
       <Project>{52ae9e3e-6929-4720-ab7a-f9f22b9a8972}</Project>
       <Name>Bridge.Contract</Name>

@@ -25,7 +25,6 @@ namespace Bridge.Translator
 
         public string PreProcess()
         {
-            //System.Diagnostics.Debugger.Launch();
             this.AdjustBridgeOptions();
 
             this.TranslatorConfiguration = this.ReadConfiguration();
@@ -35,16 +34,16 @@ namespace Bridge.Translator
                 return "Could not get configuration";
             }
 
-            if (!this.SetLoggerConfigurationParameters())
-            {
-                return "Could not set logger configuration";
-            }
-
             this.Translator = this.SetTranslatorProperties();
 
             if (this.Translator == null)
             {
                 return "Could not get Translator";
+            }
+
+            if (!this.SetLoggerConfigurationParameters())
+            {
+                return "Could not set logger configuration";
             }
 
             return null;
@@ -61,7 +60,10 @@ namespace Bridge.Translator
             bridgeOptions.Lib = pathHelper.ConvertPath(bridgeOptions.Lib);
             bridgeOptions.OutputLocation = pathHelper.ConvertPath(bridgeOptions.OutputLocation);
             bridgeOptions.ProjectLocation = pathHelper.ConvertPath(bridgeOptions.ProjectLocation);
-            bridgeOptions.Source = pathHelper.ConvertPath(bridgeOptions.Source);
+            bridgeOptions.Sources = pathHelper.ConvertPath(bridgeOptions.Sources);
+
+            bridgeOptions.ProjectProperties.OutputPath = pathHelper.ConvertPath(bridgeOptions.ProjectProperties.OutputPath);
+            bridgeOptions.ProjectProperties.OutDir = pathHelper.ConvertPath(bridgeOptions.ProjectProperties.OutDir);
         }
 
         public void Process()
@@ -176,7 +178,7 @@ namespace Bridge.Translator
             {
                 var configReader = new AssemblyConfigHelper(logger);
 
-                return configReader.ReadConfig(bridgeOptions.IsFolderMode, location, bridgeOptions.Configuration);
+                return configReader.ReadConfig(bridgeOptions.IsFolderMode, location, bridgeOptions.ProjectProperties.Configuration);
             }
             catch (Exception ex)
             {
@@ -212,7 +214,7 @@ namespace Bridge.Translator
 
             if (loggerLevel <= LoggerLevel.None)
             {
-                logger.Info("To enable further logging use configuration setting \"logging\" in bridge.json. See http://bridge.net/docs/global-configuration/#logging");
+                logger.Info("To enable further logging use configuration setting \"logging\" in bridge.json. See https://github.com/bridgedotnet/Bridge/wiki/global-configuration#logging");
             }
 
             try
@@ -282,7 +284,7 @@ namespace Bridge.Translator
                 // FIXME: detect by extension whether first argument is a project or DLL
                 if (!bridgeOptions.IsFolderMode)
                 {
-                    translator = new Bridge.Translator.Translator(bridgeOptions.ProjectLocation, bridgeOptions.FromTask);
+                    translator = new Bridge.Translator.Translator(bridgeOptions.ProjectLocation, bridgeOptions.Sources, bridgeOptions.FromTask);
                 }
                 else
                 {
@@ -292,12 +294,14 @@ namespace Bridge.Translator
                     }
 
                     bridgeOptions.Lib = Path.Combine(bridgeOptions.Folder, bridgeOptions.Lib);
-                    translator = new Bridge.Translator.Translator(bridgeOptions.Folder, bridgeOptions.Source, bridgeOptions.Recursive, bridgeOptions.Lib);
+                    translator = new Bridge.Translator.Translator(bridgeOptions.Folder, bridgeOptions.Sources, bridgeOptions.Recursive, bridgeOptions.Lib);
                 }
 
+                translator.ProjectProperties = bridgeOptions.ProjectProperties;
+
                 translator.AssemblyInfo = assemblyConfig;
-                translator.Configuration = bridgeOptions.Configuration;
-                translator.Platform = bridgeOptions.Platform;
+                translator.OverflowMode = bridgeOptions.ProjectProperties.CheckForOverflowUnderflow.HasValue ?
+                    (bridgeOptions.ProjectProperties.CheckForOverflowUnderflow.Value ? OverflowMode.Checked : OverflowMode.Unchecked) : (OverflowMode?)null;
 
                 if (string.IsNullOrEmpty(bridgeOptions.BridgeLocation))
                 {
@@ -308,19 +312,29 @@ namespace Bridge.Translator
                 translator.Rebuild = bridgeOptions.Rebuild;
                 translator.Log = logger;
 
-                if (bridgeOptions.DefinitionConstants != null)
+                if (bridgeOptions.ProjectProperties.DefineConstants != null)
                 {
-                    translator.DefineConstants.AddRange(bridgeOptions.DefinitionConstants.Split(';').Select(s => s.Trim()).Where(s => s != ""));
+                    translator.DefineConstants.AddRange(bridgeOptions.ProjectProperties.DefineConstants.Split(';').Select(s => s.Trim()).Where(s => s != ""));
                     translator.DefineConstants = translator.DefineConstants.Distinct().ToList();
                 }
 
                 translator.Log.Info("Translator properties:");
-                translator.Log.Info("\tBridgeLocation:" + translator.BridgeLocation ?? "");
-                translator.Log.Info("\tBuildArguments:" + translator.BuildArguments ?? "");
-                translator.Log.Info("\tConfiguration:" + translator.Configuration ?? "");
-                translator.Log.Info("\tPlatform:" + translator.Platform ?? "");
+                translator.Log.Info("\tBridgeLocation:" + translator.BridgeLocation);
+                translator.Log.Info("\tBuildArguments:" + translator.BuildArguments);
                 translator.Log.Info("\tDefineConstants:" + (translator.DefineConstants != null ? string.Join(" ", translator.DefineConstants) : ""));
                 translator.Log.Info("\tRebuild:" + translator.Rebuild);
+                translator.Log.Info("\tProjectProperties:" + translator.ProjectProperties);
+
+                if (translator.FolderMode)
+                {
+                    translator.ReadFolderFiles();
+                }
+                else
+                {
+                    translator.EnsureProjectProperties();
+                }
+
+                translator.ApplyProjectPropertiesToConfig();
 
                 logger.Info("Setting translator properties done");
 

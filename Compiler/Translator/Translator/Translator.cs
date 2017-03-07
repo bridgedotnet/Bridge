@@ -74,19 +74,19 @@ namespace Bridge.Translator
             this.Location = location;
             this.Validator = this.CreateValidator();
             this.DefineConstants = new List<string>() { "BRIDGE" };
-            this.DefaultNamespace = Translator.DefaultRootNamespace;
+            this.ProjectProperties = new ProjectProperties();
             this.FileHelper = new FileHelper();
         }
 
-        public Translator(string location, bool fromTask = false) : this(location)
+        public Translator(string location, string source, bool fromTask = false) : this(location)
         {
             this.FromTask = fromTask;
+            this.Source = source;
         }
 
-        public Translator(string location, string source, bool recursive, string lib) : this(location, true)
+        public Translator(string location, string source, bool recursive, string lib) : this(location, source, true)
         {
             this.Recursive = recursive;
-            this.Source = source;
             this.AssemblyLocation = lib;
             this.FolderMode = true;
         }
@@ -100,16 +100,16 @@ namespace Bridge.Translator
 
             var config = this.AssemblyInfo;
 
-            if (this.FolderMode)
+            if (!this.FolderMode)
             {
-                this.ReadFolderFiles();
-            }
-            else
-            {
-                this.ReadProjectFile();
-
-                if (this.Rebuild || !File.Exists(this.AssemblyLocation))
+                if (this.Rebuild)
                 {
+                    logger.Info("Building assembly as Rebuild option is enabled");
+                    this.BuildAssembly();
+                }
+                else if (!File.Exists(this.AssemblyLocation))
+                {
+                    logger.Info("Building assembly as it is not found at " + this.AssemblyLocation);
                     this.BuildAssembly();
                 }
             }

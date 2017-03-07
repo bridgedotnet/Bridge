@@ -276,10 +276,10 @@ namespace Bridge.ClientTest
         {
             var c = new Class2();
             var json = Bridge.Json.Serialize(c, new JsonSettings { CamelCasePropertyNames = true });
-            Assert.AreEqual(json, "{\"intProp\":0}");
+            Assert.AreEqual("{\"intProp\":0}", json);
 
             json = Bridge.Json.Serialize(c);
-            Assert.AreEqual(json, "{\"IntProp\":0}");
+            Assert.AreEqual("{\"IntProp\":0}", json);
         }
 
         [Test]
@@ -287,10 +287,20 @@ namespace Bridge.ClientTest
         {
             var c = new Class3();
             var json = Bridge.Json.Serialize(c, new JsonSettings { IgnoreNullValue = true });
-            Assert.AreEqual(json, "{}");
+            Assert.AreEqual("{}", json);
 
             json = Bridge.Json.Serialize(c);
-            Assert.AreEqual(json, "{\"StringProp\":null}");
+            Assert.AreEqual("{\"StringProp\":null}", json);
+        }
+
+        [Test]
+        public static void TypeNameHandlingWorks()
+        {
+            var c = new Class3();
+
+            var json = Bridge.Json.Serialize(c, new JsonSettings { TypeNameHandling = true });
+
+            Assert.AreEqual("{\"$type\":\"Bridge.ClientTest.SerializationTests+Class3, Bridge.ClientTest\",\"StringProp\":null}", json);
         }
 
         [Test]
@@ -299,7 +309,7 @@ namespace Bridge.ClientTest
             var v = new { Amount = 108, Message = "Hello" };
             var json = Bridge.Json.Serialize(v);
 
-            Assert.AreEqual(json, "{\"Amount\":108,\"Message\":\"Hello\"}");
+            Assert.AreEqual("{\"Amount\":108,\"Message\":\"Hello\"}", json);
         }
     }
 }

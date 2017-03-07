@@ -5,6 +5,7 @@ using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace Bridge.Build
 {
@@ -17,8 +18,13 @@ namespace Bridge.Build
             set;
         }
 
-        [Required]
         public string OutputPath
+        {
+            get;
+            set;
+        }
+
+        public string OutDir
         {
             get;
             set;
@@ -38,6 +44,26 @@ namespace Bridge.Build
             set;
         }
 
+        [Required]
+        public string AssemblyName
+        {
+            get;
+            set;
+        }
+
+        [Required]
+        public ITaskItem[] Sources
+        {
+            get;
+            set;
+        }
+
+        public string CheckForOverflowUnderflow
+        {
+            get;
+            set;
+        }
+
         public bool NoCore
         {
             get;
@@ -50,13 +76,28 @@ namespace Bridge.Build
             set;
         }
 
+        [Required]
         public string Configuration
         {
             get;
             set;
         }
 
+        [Required]
+        public string OutputType
+        {
+            get;
+            set;
+        }
+
         public string DefineConstants
+        {
+            get;
+            set;
+        }
+
+        [Required]
+        public string RootNamespace
         {
             get;
             set;
@@ -144,20 +185,58 @@ namespace Bridge.Build
                 BridgeLocation = Path.Combine(this.AssembliesPath, "Bridge.dll"),
                 Rebuild = false,
                 ExtractCore = !NoCore,
-                Configuration = this.Configuration,
-                Platform = this.Platform,
-                Source = null,
                 Folder = null,
                 Recursive = false,
                 Lib = null,
-                DefinitionConstants = this.DefineConstants,
                 Help = false,
                 NoTimeStamp = null,
                 FromTask = true,
-                Name = ""
+                Name = "",
+                Sources = GetSources()
+            };
+
+            bridgeOptions.ProjectProperties = new ProjectProperties()
+            {
+                AssemblyName = this.AssemblyName,
+                OutputPath = this.OutputPath,
+                OutDir = this.OutDir,
+                RootNamespace = this.RootNamespace,
+                Configuration = this.Configuration,
+                Platform = this.Platform,
+                DefineConstants = this.DefineConstants,
+                CheckForOverflowUnderflow = GetCheckForOverflowUnderflow(),
+                OutputType = this.OutputType
             };
 
             return bridgeOptions;
+        }
+
+        private string GetSources()
+        {
+            if (this.Sources != null && this.Sources.Length > 0)
+            {
+                var result = string.Join(";", this.Sources.Select(x => x.ItemSpec));
+
+                return result;
+            }
+
+            return null;
+        }
+
+        private bool? GetCheckForOverflowUnderflow()
+        {
+            if (this.CheckForOverflowUnderflow == null)
+            {
+                return null;
+            }
+
+            bool b;
+            if (bool.TryParse(this.CheckForOverflowUnderflow, out b))
+            {
+                return b;
+            }
+
+            return null;
         }
     }
 }

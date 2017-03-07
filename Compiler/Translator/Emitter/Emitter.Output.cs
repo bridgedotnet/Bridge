@@ -190,7 +190,7 @@ namespace Bridge.Translator
                 {
                     if (!disableAsm)
                     {
-                        string asmName = this.AssemblyInfo.Assembly.FullName ?? this.Translator.AssemblyName;
+                        string asmName = this.AssemblyInfo.Assembly.FullName ?? this.Translator.ProjectProperties.AssemblyName;
 
                         OutputAssemblyComment(tmp);
 

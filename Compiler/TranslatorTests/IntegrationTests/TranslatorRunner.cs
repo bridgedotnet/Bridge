@@ -20,6 +20,18 @@ namespace Bridge.Translator.Tests
             set;
         }
 
+        public string Configuration
+        {
+            get;
+            set;
+        }
+
+        public string Platform
+        {
+            get;
+            set;
+        }
+
         private string FindBridgeDllPathByConfiguration(string configurationName, string platform)
         {
             var bridgeProjectPath = Helpers.FileHelper.GetRelativeToCurrentDirPath(Path.Combine("..", "..", "..", "..", "Bridge", "Bridge.csproj"));
@@ -53,26 +65,26 @@ namespace Bridge.Translator.Tests
             return outputPath;
         }
 
-        private string FindBridgeDllPath(out string configuration)
+        private void SetPlatformAndConfiguration()
         {
-            configuration = "Release";
-#if DEBUG
-            configuration = "Debug";
-#endif
-            var path = FindBridgeDllPathByConfiguration(configuration, "AnyCPU");
+            this.Platform = "AnyCPU";
 
-            //if (path == null)
-            //{
-            //    configuration = "Debug";
-            //    path = FindBridgeDllPathByConfiguration(configuration);
-            //}
+            this.Configuration = "Release";
+#if DEBUG
+            this.Configuration = "Debug";
+#endif
+        }
+
+        private string FindBridgeDllPath()
+        {
+            var path = FindBridgeDllPathByConfiguration(this.Configuration, this.Platform);
 
             return path;
         }
 
-        private string WrapBuildArguments(string configuration)
+        private string WrapBuildArguments()
         {
-            return this.BuildArguments + @" /p:Platform=AnyCPU /p:OutDir=bin" + Path.DirectorySeparatorChar + configuration + Path.DirectorySeparatorChar;
+            return this.BuildArguments + @" /p:Platform=" + this.Platform +" /p:OutDir=bin" + Path.DirectorySeparatorChar + this.Configuration + Path.DirectorySeparatorChar;
         }
 
         public void Translate(bool byBuilding = false)
@@ -80,12 +92,13 @@ namespace Bridge.Translator.Tests
             var outputLocation = Path.ChangeExtension(ProjectLocation, "js");
             this.Logger.Info("\t\tProjectLocation: " + ProjectLocation);
 
-            string configuration;
-            var bridgeLocation = FindBridgeDllPath(out configuration);
+            SetPlatformAndConfiguration();
+
+            var bridgeLocation = FindBridgeDllPath();
 
             if (bridgeLocation == null)
             {
-                Bridge.Translator.TranslatorException.Throw("Unable to determine Bridge project output path by configuration " + configuration);
+                Bridge.Translator.TranslatorException.Throw("Unable to determine Bridge project output path by configuration/platform " + this.Configuration + "/" + this.Platform);
             }
 
             var bridgeOptions = new Bridge.Translator.BridgeOptions()
@@ -96,16 +109,21 @@ namespace Bridge.Translator.Tests
                 DefaultFileName = Path.GetFileName(outputLocation),
                 Rebuild = true,
                 ExtractCore = true,
-                Configuration = configuration,
-                Source = null,
+                Sources = null,
                 Folder = null,
                 Recursive = false,
                 Lib = null,
-                DefinitionConstants = null,
                 Help = false,
                 NoTimeStamp = null,
                 FromTask = false,
                 NoLoggerSetUp = true
+            };
+
+            bridgeOptions.ProjectProperties = new ProjectProperties()
+            {
+                Configuration = this.Configuration,
+                Platform = this.Platform,
+                DefineConstants = null,
             };
 
             var processor = new TranslatorProcessor(bridgeOptions, this.Logger as Bridge.Translator.Logging.Logger);
@@ -114,12 +132,12 @@ namespace Bridge.Translator.Tests
 
             if (result != null)
             {
-                Bridge.Translator.TranslatorException.Throw("Unable to preprocess");
+                Bridge.Translator.TranslatorException.Throw("Unable to preprocess: " + result);
             }
 
             var translator = processor.Translator;
 
-            translator.BuildArguments = WrapBuildArguments(configuration);
+            translator.BuildArguments = WrapBuildArguments();
             translator.Log.Info("\t Adjusted BuildArguments:" + translator.BuildArguments ?? "");
 
             if (byBuilding)

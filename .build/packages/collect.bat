@@ -31,7 +31,7 @@ echo f | xcopy /f /y "%root%Bridge\Compiler\Build\bin\%build%\*.nupkg"          
 echo f | xcopy /f /y "%root%Bridge\Compiler\Contract\bin\%build%\*.nupkg"           %output%
 
 :: Bridge.Compiler
-echo f | xcopy /f /y "%root%Bridge\Compiler\Builder\bin\%build%\*.exe" 				%output%
+echo f | xcopy /f /y "%root%Bridge\Compiler\Builder\bin\%build%\bridge.exe"         %output%
 echo f | xcopy /f /y "%root%Bridge\Compiler\Translator\bin\%build%\*.nupkg"         %output%
 
 ::------------------------------------------------------------------------------------------::

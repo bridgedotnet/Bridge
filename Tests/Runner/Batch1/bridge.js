@@ -1214,6 +1214,25 @@
             }
         },
 
+        numberCompare : function (a, b) {
+            if (a < b) {
+                return -1;
+            }
+            if (a > b) {
+                return 1;
+            }
+            if (a == b) {
+                return 0;
+            }
+            if (!isNaN(a)) {
+                return 1;
+            }
+            if (!isNaN(b)) {
+                return -1;
+            }
+            return 0;
+        },
+
         compare: function (a, b, safe, T) {
             if (a && a.$boxed) {
                 a = Bridge.unbox(a, true);
@@ -1221,6 +1240,10 @@
 
             if (b && b.$boxed) {
                 b = Bridge.unbox(b, true);
+            }
+
+            if (typeof a === "number" && typeof b === "number") {
+                return Bridge.numberCompare(a, b);
             }
 
             if (!Bridge.isDefined(a, true)) {
@@ -3132,7 +3155,7 @@
                     }
 
                     if (settings && settings.typeNameHandling) {
-                        raw["$type"] = Bridge.getTypeName(type);
+                        raw["$type"] = Bridge.Reflection.getTypeQName(type);
                     }
 
                     if (nometa) {
@@ -9546,26 +9569,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
     Bridge.define("System.Diagnostics.Stopwatch", {
         ctor: function () {
             this.$initialize();
-            this._stopTime = System.Int64.Zero;
-            this._startTime = System.Int64.Zero;
-            this.isRunning = false;
-        },
-
-        reset: function () {
-            this._stopTime = this._startTime = System.Diagnostics.Stopwatch.getTimestamp();
-            this.isRunning = false;
-        },
-
-        ticks: function () {
-            return (this.isRunning ? System.Diagnostics.Stopwatch.getTimestamp() : this._stopTime).sub(this._startTime);
-        },
-
-        milliseconds: function () {
-            return this.ticks().mul(1000).div(System.Diagnostics.Stopwatch.frequency);
-        },
-
-        timeSpan: function () {
-            return new System.TimeSpan(this.milliseconds().mul(10000));
+            this.reset();
         },
 
         start: function () {
@@ -9582,21 +9586,49 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 return;
             }
 
-            this._stopTime = System.Diagnostics.Stopwatch.getTimestamp();
+            var endTimeStamp = System.Diagnostics.Stopwatch.getTimestamp();
+            var elapsedThisPeriod = endTimeStamp.sub(this._startTime);
+            this._elapsed = this._elapsed.add(elapsedThisPeriod);
+            this.isRunning = false;
+        },
+
+        reset: function () {
+            this._startTime = System.Int64.Zero;
+            this._elapsed = System.Int64.Zero;
             this.isRunning = false;
         },
 
         restart: function () {
             this.isRunning = false;
+            this._elapsed = System.Int64.Zero;
+            this._startTime = System.Diagnostics.Stopwatch.getTimestamp();
             this.start();
+        },
+
+        ticks: function () {
+            var timeElapsed = this._elapsed;
+
+            if (this.isRunning)
+            {
+                var currentTimeStamp = System.Diagnostics.Stopwatch.getTimestamp();
+                var elapsedUntilNow = currentTimeStamp.sub(this._startTime);
+                timeElapsed = timeElapsed.add(elapsedUntilNow);
+            }
+            return timeElapsed;
+        },
+
+        milliseconds: function () {
+            return this.ticks().mul(1000).div(System.Diagnostics.Stopwatch.frequency);
+        },
+
+        timeSpan: function () {
+            return new System.TimeSpan(this.milliseconds().mul(10000));
         },
 
         statics: {
             startNew: function () {
                 var s = new System.Diagnostics.Stopwatch();
-
                 s.start();
-
                 return s;
             }
         }

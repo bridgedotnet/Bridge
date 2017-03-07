@@ -1,6 +1,7 @@
 using Bridge.Test.NUnit;
 using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace Bridge.ClientTest.Diagnostics
 {
@@ -8,6 +9,111 @@ namespace Bridge.ClientTest.Diagnostics
     [TestFixture(TestNameFormat = "Stopwatch - {0}")]
     public class StopwatchTests
     {
+        [Test]
+        public static void GetTimestamp()
+        {
+            long ts1 = Stopwatch.GetTimestamp();
+            Sleep();
+            long ts2 = Stopwatch.GetTimestamp();
+            Assert.False(ts1 == ts2);
+        }
+
+        [Test]
+        public static void ConstructStartAndStop()
+        {
+            Stopwatch watch = new Stopwatch();
+            Assert.False(watch.IsRunning);
+            watch.Start();
+            Assert.True(watch.IsRunning);
+            Sleep();
+            Assert.True(watch.Elapsed > TimeSpan.Zero);
+
+            watch.Stop();
+            Assert.False(watch.IsRunning);
+
+            var e1 = watch.Elapsed;
+            Sleep();
+            var e2 = watch.Elapsed;
+            Assert.AreEqual(e1, e2);
+            Assert.True((long)e1.TotalMilliseconds == watch.ElapsedMilliseconds);
+
+            var t1 = watch.ElapsedTicks;
+            Sleep();
+            var t2 = watch.ElapsedTicks;
+            Assert.True(t1 == t2);
+        }
+
+        [Test]
+        public static void StartNewAndReset()
+        {
+            Stopwatch watch = Stopwatch.StartNew();
+            Assert.True(watch.IsRunning);
+            watch.Start(); // should be no-op
+            Assert.True(watch.IsRunning);
+            Sleep();
+            Assert.True(watch.Elapsed > TimeSpan.Zero);
+
+            watch.Reset();
+            Assert.False(watch.IsRunning);
+            Assert.AreEqual(TimeSpan.Zero, watch.Elapsed);
+        }
+
+        [Test]
+        public static void StartNewAndRestart()
+        {
+            Stopwatch watch = Stopwatch.StartNew();
+            Assert.True(watch.IsRunning);
+            Sleep(10);
+            TimeSpan elapsedSinceStart = watch.Elapsed;
+            Assert.True(elapsedSinceStart > TimeSpan.Zero);
+
+            const int MaxAttempts = 5; // The comparison below could fail if we get very unlucky with when the thread gets preempted
+            int attempt = 0;
+            while (true)
+            {
+                watch.Restart();
+                Assert.True(watch.IsRunning);
+                try
+                {
+                    Assert.True(watch.Elapsed < elapsedSinceStart);
+                }
+                catch
+                {
+                    if (++attempt < MaxAttempts) continue;
+                    throw;
+                }
+                break;
+            }
+        }
+
+        [Test]
+        public static async void StopShouldContinue()
+        {
+            var done = Assert.Async();
+
+            long previous = 0;
+            Stopwatch w = new Stopwatch();
+            for (int i = 0; i < 10; i++)
+            {
+                w.Start();
+                await Task.Delay(10);
+                w.Stop();
+                Assert.True(w.ElapsedMilliseconds > previous);
+                previous = w.ElapsedMilliseconds;
+            }
+
+            done();
+        }
+
+        private static void Sleep(int milliseconds = 2)
+        {
+            TimeSpan start = new TimeSpan(DateTime.Now.Ticks);
+            
+            while ((new TimeSpan(DateTime.Now.Ticks) - start).TotalMilliseconds < milliseconds)
+            {
+            }
+        }
+
         [Test]
         public void DefaultConstructorWorks()
         {
