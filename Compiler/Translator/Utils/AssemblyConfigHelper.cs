@@ -1,14 +1,13 @@
 using Bridge.Contract;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Bridge.Translator.Utils
 {
     public class AssemblyConfigHelper
     {
-        public const string OUTPUT_PATH_TOKEN = "$(OutputPath)";
-
         private const string CONFIG_FILE_NAME = "bridge.json";
 
         private ILogger Logger { get; set; }
@@ -65,27 +64,67 @@ namespace Bridge.Translator.Utils
             return JsonConvert.SerializeObject(config);
         }
 
-        public void ApplyTokens(IAssemblyInfo config, string outputPathValue)
+        public void ApplyTokens(IAssemblyInfo config, ProjectProperties projectProperties)
         {
             Logger.Trace("ApplyTokens ...");
-            Logger.Trace("outputPathValue:" + outputPathValue);
 
             if (config == null)
             {
                 throw new ArgumentNullException("config");
             }
 
+            if (projectProperties == null)
+            {
+                throw new ArgumentNullException("projectProperties");
+            }
+
+            Logger.Trace("Properties:" + projectProperties.ToString());
+
+            var tokens = projectProperties.GetValues();
+
+            if (tokens == null || tokens.Count <= 0)
+            {
+                Logger.Trace("No tokens applied as no values to apply");
+                return;
+            }
+
+            config.FileName = helper.ApplyPathTokens(tokens, config.FileName);
+            config.Output = helper.ApplyPathTokens(tokens, config.Output);
+            config.BeforeBuild = helper.ApplyPathTokens(tokens, config.BeforeBuild);
+            config.AfterBuild = helper.ApplyPathTokens(tokens, config.AfterBuild);
+            config.PluginsPath = helper.ApplyPathTokens(tokens, config.PluginsPath);
+            config.CleanOutputFolderBeforeBuildPattern = helper.ApplyTokens(tokens, config.CleanOutputFolderBeforeBuildPattern);
+            config.Locales = helper.ApplyTokens(tokens, config.Locales);
+            config.LocalesOutput = helper.ApplyTokens(tokens, config.LocalesOutput);
+            config.LocalesFileName = helper.ApplyPathTokens(tokens, config.LocalesFileName);
+
+            if (config.Logging != null)
+            {
+                config.Logging.FileName = helper.ApplyPathTokens(tokens, config.Logging.FileName);
+                config.Logging.Folder = helper.ApplyPathTokens(tokens, config.Logging.Folder);
+            }
+
+            if (config.Reflection != null)
+            {
+                config.Reflection.Filter = helper.ApplyTokens(tokens, config.Reflection.Filter);
+                config.Reflection.Output = helper.ApplyTokens(tokens, config.Reflection.Output);
+            }
+
             if (config.Resources != null)
             {
                 foreach (var resourceItem in config.Resources.Items)
                 {
+                    resourceItem.Header = helper.ApplyTokens(tokens, resourceItem.Header);
+                    resourceItem.Name = helper.ApplyTokens(tokens, resourceItem.Name);
+                    resourceItem.Remark = helper.ApplyTokens(tokens, resourceItem.Remark);
+
                     var files = resourceItem.Files;
 
                     if (files != null)
                     {
                         for (int i = 0; i < files.Length; i++)
                         {
-                            files[i] = helper.ApplyPathToken(OUTPUT_PATH_TOKEN, outputPathValue, files[i]);
+                            files[i] = helper.ApplyPathTokens(tokens, files[i]);
                         }
                     }
                 }

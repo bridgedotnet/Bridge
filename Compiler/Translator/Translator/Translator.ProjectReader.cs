@@ -12,51 +12,54 @@ namespace Bridge.Translator
 {
     public partial class Translator
     {
-        public static class ProjectProperties
+        public static class ProjectPropertyNames
         {
             public const string OUTPUT_TYPE_PROP = "OutputType";
             public const string ASSEMBLY_NAME_PROP = "AssemblyName";
             public const string DEFINE_CONSTANTS_PROP = "DefineConstants";
             public const string ROOT_NAMESPACE_PROP = "RootNamespace";
             public const string OUTPUT_PATH_PROP = "OutputPath";
+            public const string OUT_DIR_PROP = "OutDir";
+            public const string CONFIGURATION_PROP = "Configuration";
+            public const string PLATFORM_PROP = "Platform";
         }
 
-        protected virtual void ReadProjectFile()
+        private bool ShouldReadProjectFile
         {
-            this.Log.Info("Reading project file at " + (Location ?? "") + " ...");
+            get; set;
+        }
+
+        internal virtual void EnsureProjectProperties()
+        {
+            this.Log.Info("EnsureProjectProperties at " + (Location ?? "") + " ...");
+
+            ShouldReadProjectFile = !this.FromTask;
 
             var doc = XDocument.Load(Location, LoadOptions.SetLineInfo);
 
             this.ValidateProject(doc);
 
-            var projectType = (from n in doc.Descendants()
-                               where n.Name.LocalName == ProjectProperties.OUTPUT_TYPE_PROP
-                               select n).ToArray();
+            this.EnsureOverflowMode(doc);
 
-            if (projectType.Length > 0 && projectType[0] != null && projectType[0].Value != Translator.SupportedProjectType)
-            {
-                Bridge.Translator.TranslatorException.Throw("Project type ({0}) is not supported, please use Library instead of {0}", projectType[0].Value);
-            }
+            this.EnsureDefaultNamespace(doc);
 
-            this.DefaultNamespace = this.GetDefaultNamespace(doc);
-            this.Log.Trace("DefaultNamespace:" + this.DefaultNamespace);
-            this.BuildAssemblyLocation(doc);
+            this.EnsureAssemblyName(doc);
+
+            this.EnsureAssemblyLocation(doc);
+
             this.SourceFiles = this.GetSourceFiles(doc);
             this.ParsedSourceFiles = new List<ParsedSourceFile>();
 
-            if (!this.FromTask)
-            {
-                this.ReadDefineConstants(doc);
-            }
+            this.EnsureDefineConstants(doc);
 
-            this.Log.Info("Reading project file done");
+            this.Log.Info("EnsureProjectProperties done");
         }
 
-        protected virtual void ReadFolderFiles()
+        internal virtual void ReadFolderFiles()
         {
             this.Log.Info("Reading folder files...");
 
-            this.SourceFiles = this.GetSourceFiles();
+            this.SourceFiles = this.GetSourceFiles(this.Location);
             this.ParsedSourceFiles = new List<ParsedSourceFile>();
 
             this.Log.Info("Reading folder files done");
@@ -72,11 +75,17 @@ namespace Bridge.Translator
             var failList = new HashSet<string>();
             var failNodeList = new List<XElement>();
             var combined_tags = from x in doc.Descendants()
-                                where x.Name.LocalName == ProjectProperties.ROOT_NAMESPACE_PROP || x.Name.LocalName == ProjectProperties.ASSEMBLY_NAME_PROP
+                                where x.Name.LocalName == ProjectPropertyNames.ROOT_NAMESPACE_PROP || x.Name.LocalName == ProjectPropertyNames.ASSEMBLY_NAME_PROP
                                 select x;
 
             // Replace '\' with '/' in any occurrence of <OutputPath><path></OutputPath>
-            foreach (var ope in doc.Descendants().Where(e => e.Name.LocalName == ProjectProperties.OUTPUT_PATH_PROP && e.Value.Contains("\\")))
+            foreach (var ope in doc.Descendants().Where(e => e.Name.LocalName == ProjectPropertyNames.OUTPUT_PATH_PROP && e.Value.Contains("\\")))
+            {
+                ope.SetValue(ope.Value.Replace("\\", "/"));
+            }
+
+            // Replace '\' with '/' in any occurrence of <OutDir><path></OutDir>
+            foreach (var ope in doc.Descendants().Where(e => e.Name.LocalName == ProjectPropertyNames.OUT_DIR_PROP && e.Value.Contains("\\")))
             {
                 ope.SetValue(ope.Value.Replace("\\", "/"));
             }
@@ -124,9 +133,42 @@ namespace Bridge.Translator
                 );
             }
 
+            var outputType = this.ProjectProperties.OutputType;
+
+            if (outputType == null && ShouldReadProjectFile)
+            {
+                var projectType = (from n in doc.Descendants()
+                                   where n.Name.LocalName == ProjectPropertyNames.OUTPUT_TYPE_PROP
+                                   select n).ToArray();
+
+                if (projectType.Length > 0)
+                {
+                    outputType = projectType[0].Value;
+                }
+            }
+
+            if (outputType != null && string.Compare(outputType, Translator.SupportedProjectType, true) != 0)
+            {
+                Bridge.Translator.TranslatorException.Throw("Project type ({0}) is not supported, please use Library instead of {0}", outputType);
+            }
+        }
+
+        private void EnsureOverflowMode(XDocument doc)
+        {
+            if (!this.ShouldReadProjectFile)
+            {
+                return;
+            }
+
+            if (this.OverflowMode.HasValue)
+            {
+                return;
+            }
+
             var nodes = from n in doc.Descendants()
                         where n.Name.LocalName == "CheckForOverflowUnderflow"
                         select n;
+
             if (nodes.Any())
             {
                 var value = nodes.Last().Value;
@@ -138,80 +180,123 @@ namespace Bridge.Translator
             }
         }
 
-        protected virtual void BuildAssemblyLocation(XDocument doc)
+        protected virtual void EnsureAssemblyLocation(XDocument doc)
         {
             this.Log.Trace("BuildAssemblyLocation...");
 
             if (string.IsNullOrEmpty(this.AssemblyLocation))
             {
-                this.Configuration = this.Configuration ?? "Debug";
-                this.Platform = this.Platform ?? "AnyCPU";
-                var outputPath = this.GetOutputPath(doc, this.Configuration, this.Platform);
+                var fullOutputPath = this.GetOutputPaths(doc);
 
-                if (string.IsNullOrEmpty(outputPath.Item2))
-                {
-                    this.Configuration = "Release";
-                    outputPath = this.GetOutputPath(doc, this.Configuration, this.Platform);
-                }
+                this.Log.Info("    FullOutputPath:" + fullOutputPath);
 
-                this.AssemblyName = this.GetAssemblyName(doc);
-                this.AssemblyLocation = Path.Combine(outputPath.Item2, this.AssemblyName + ".dll");
-
-                if (!File.Exists(this.AssemblyLocation) && !this.Rebuild)
-                {
-                    this.Configuration = "Release";
-                    outputPath = this.GetOutputPath(doc, this.Configuration, this.Platform);
-                    this.AssemblyLocation = Path.Combine(outputPath.Item2, this.AssemblyName + ".dll");
-                }
-
-                this.OutputPath = outputPath.Item1;
+                this.AssemblyLocation = Path.Combine(fullOutputPath, this.ProjectProperties.AssemblyName + ".dll");
             }
 
-            this.Log.Info("    Configuration:" + this.Configuration);
-            this.Log.Info("    OutputPath:" + this.OutputPath);
+            this.Log.Info("    OutDir:" + this.ProjectProperties.OutDir);
+            this.Log.Info("    OutputPath:" + this.ProjectProperties.OutputPath);
             this.Log.Info("    AssemblyLocation:" + this.AssemblyLocation);
-
-            var configReader = new AssemblyConfigHelper(this.Log);
-            configReader.ApplyTokens(this.AssemblyInfo, this.OutputPath);
 
             this.Log.Trace("BuildAssemblyLocation done");
         }
 
-        protected virtual Tuple<string, string> GetOutputPath(XDocument doc, string configuration, string platform)
+        protected virtual string GetOutputPaths(XDocument doc)
         {
-            var nodes = from n in doc.Descendants()
-                        where n.Name.LocalName == ProjectProperties.OUTPUT_PATH_PROP &&
-                              EvaluateCondition(n.Parent.Attribute("Condition").Value)
-                        select n;
+            var configHelper = new Bridge.Contract.ConfigHelper();
 
-            if (nodes.Count() != 1)
+            var outputPath = this.ProjectProperties.OutputPath;
+
+            if (outputPath == null && this.ShouldReadProjectFile)
             {
-                Bridge.Translator.TranslatorException.Throw("Unable to determine output path");
+                // Read OutputPath if not defined already
+                // Throw exception if not found
+                outputPath = ReadProperty(doc, ProjectPropertyNames.OUTPUT_PATH_PROP, false, configHelper);
             }
 
-            var projectPath = nodes.First().Value;
-            var fullPath = projectPath;
+            if (outputPath == null)
+            {
+                outputPath = string.Empty;
+            }
+
+            this.ProjectProperties.OutputPath = outputPath;
+
+            var outDir = this.ProjectProperties.OutDir;
+
+            if (outDir == null && this.ShouldReadProjectFile)
+            {
+                // Read OutDir if not defined already
+                outDir = ReadProperty(doc, ProjectPropertyNames.OUT_DIR_PROP, true, configHelper);
+            }
+
+            // If OutDir value is not found then use OutputPath value
+            this.ProjectProperties.OutDir = outDir ?? outputPath;
+
+            var fullPath = this.ProjectProperties.OutDir;
 
             if (!Path.IsPathRooted(fullPath))
             {
                 fullPath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Location), fullPath));
             }
 
-            var configHelper = new Bridge.Contract.ConfigHelper();
-
             fullPath = configHelper.ConvertPath(fullPath);
-            projectPath = configHelper.ConvertPath(projectPath);
 
-            return new Tuple<string, string>(projectPath, fullPath);
+            return fullPath;
+        }
+
+        private string ReadProperty(XDocument doc, string name, bool safe, Contract.ConfigHelper configHelper)
+        {
+            var nodes = from n in doc.Descendants()
+                        where string.Compare(n.Name.LocalName, name, true) == 0 &&
+                              EvaluateCondition(n.Parent.Attribute("Condition").Value)
+                        select n;
+
+            if (nodes.Count() != 1)
+            {
+                if (safe)
+                {
+                    return null;
+                }
+
+                Bridge.Translator.TranslatorException.Throw(
+                    "Unable to determine "
+                    + name
+                    + " in the project file with conditions " + EvaluationConditionsAsString());
+            }
+
+            var value = nodes.First().Value;
+            value = configHelper.ConvertPath(value);
+
+            return value;
+        }
+
+        private Dictionary<string, string> GetEvaluationConditions()
+        {
+            var properties = new Dictionary<string, string>();
+
+            if (this.ProjectProperties.Configuration != null)
+            {
+                properties.Add(ProjectPropertyNames.CONFIGURATION_PROP, this.ProjectProperties.Configuration);
+            }
+
+            if (this.ProjectProperties.Platform != null)
+            {
+                properties.Add(ProjectPropertyNames.PLATFORM_PROP, this.ProjectProperties.Platform);
+            }
+
+            return properties;
+        }
+
+        private string EvaluationConditionsAsString()
+        {
+            var conditions = string.Join(", ", GetEvaluationConditions().Select(x => x.Key + ": " + x.Value));
+
+            return conditions;
         }
 
         private bool EvaluateCondition(string condition)
         {
-            var properties = new Dictionary<string, string>
-            {
-                ["Configuration"] = this.Configuration,
-                ["Platform"] = this.Platform
-            };
+            var properties = GetEvaluationConditions();
+
             return MsBuildConditionEvaluator.EvaluateCondition(condition, properties);
         }
 
@@ -222,121 +307,171 @@ namespace Bridge.Translator
 
         protected virtual IList<string> GetSourceFiles(XDocument doc)
         {
+            this.Log.Trace("Getting source files by xml...");
+
             Project project;
+            IList<string> sourceFiles = new List<string>();
 
-            var isOnMono = Translator.IsRunningOnMono();
-            if (isOnMono)
+            if (this.Source == null)
             {
-                // Using XmlReader here addresses a Mono issue logged as #38224 at Mono's official BugZilla.
-                // Bridge issue #860
-                // This constructor below works on Linux and DOES break #531
-                project = new Project(XmlReader.Create(this.Location), null, null, new ProjectCollection());
+                var isOnMono = Translator.IsRunningOnMono();
+                if (isOnMono)
+                {
+                    // Using XmlReader here addresses a Mono issue logged as #38224 at Mono's official BugZilla.
+                    // Bridge issue #860
+                    // This constructor below works on Linux and DOES break #531
+                    project = new Project(XmlReader.Create(this.Location), null, null, new ProjectCollection());
+                }
+                else
+                {
+                    // Using XmlReader above breaks feature #531 - referencing linked files in csproj (Compiler test 18 fails)
+                    // To avoid it at least on Windows, use different Project constructors
+                    // This constructor below works on Windows and does NOT break #531
+                    project = new Project(this.Location, null, null, new ProjectCollection());
+                }
+
+                foreach (var projectItem in project.GetItems("Compile"))
+                {
+                    sourceFiles.Add(projectItem.EvaluatedInclude);
+                }
+
+                if (isOnMono)
+                {
+                    // This UnloadProject overload should be used if the project created by new Project(XmlReader.Create(this.Location)...)
+                    // Otherwise it does NOT work either on Windows or Linux
+                    project.ProjectCollection.UnloadProject(project.Xml);
+                }
+                else
+                {
+                    // This UnloadProject overload should be used if the project created by new Project(this.Location...)
+                    // Otherwise it does NOT work either on Windows or Linux
+                    project.ProjectCollection.UnloadProject(project);
+                }
+
+                if (!sourceFiles.Any())
+                {
+                    throw new Bridge.Translator.TranslatorException("Unable to get source file list from project file '" +
+                        this.Location + "'. In order to use bridge, you have to have at least one source code file " +
+                        "with the 'compile' property set (usually .cs files have it by default in C# projects).");
+                };
             }
             else
             {
-                // Using XmlReader above breaks feature #531 - referencing linked files in csproj (Compiler test 18 fails)
-                // To avoid it at least on Windows, use different Project constructors
-                // This constructor below works on Windows and does NOT break #531
-                project = new Project(this.Location, null, null, new ProjectCollection());
+                sourceFiles = GetSourceFiles(Path.GetDirectoryName(this.Location));
             }
 
-            var sourceFiles = new List<string>();
-
-            foreach (var projectItem in project.GetItems("Compile"))
-            {
-                sourceFiles.Add(projectItem.EvaluatedInclude);
-            }
-
-            if (isOnMono)
-            {
-                // This UnloadProject overload should be used if the project created by new Project(XmlReader.Create(this.Location)...)
-                // Otherwise it does NOT work either on Windows or Linux
-                project.ProjectCollection.UnloadProject(project.Xml);
-            }
-            else
-            {
-                // This UnloadProject overload should be used if the project created by new Project(this.Location...)
-                // Otherwise it does NOT work either on Windows or Linux
-                project.ProjectCollection.UnloadProject(project);
-            }
-
-            if (!sourceFiles.Any())
-            {
-                throw new Bridge.Translator.TranslatorException("Unable to get source file list from project file '" +
-                    this.Location + "'. In order to use bridge, you have to have at least one source code file " +
-                    "with the 'compile' property set (usually .cs files have it by default in C# projects).");
-            };
+            this.Log.Trace("Getting source files by xml done");
 
             return sourceFiles;
         }
 
-        protected virtual void ReadDefineConstants(XDocument doc)
+        protected virtual void EnsureDefineConstants(XDocument doc)
         {
-            this.Log.Info("Reading define constants...");
+            this.Log.Info("EnsureDefineConstants...");
 
-            var nodeList = doc.Descendants().Where(n =>
+            if (this.DefineConstants == null)
             {
-                if (n.Name.LocalName != "PropertyGroup")
-                {
-                    return false;
-                }
+                this.DefineConstants = new List<string>();
+            }
 
-                var attr = n.Attribute("Condition");
-                return attr == null || EvaluateCondition(attr.Value);
-            });
-
-            foreach (var node in nodeList)
+            if (this.ProjectProperties.DefineConstants == null && this.ShouldReadProjectFile)
             {
-                var constants = from n in node.Descendants()
-                                where n.Name.LocalName == ProjectProperties.DEFINE_CONSTANTS_PROP
-                                select n.Value;
-                foreach (var constant in constants)
+                this.Log.Info("Reading define constants...");
+
+                var nodeList = doc.Descendants().Where(n =>
                 {
-                    if (!string.IsNullOrWhiteSpace(constant))
+                    if (n.Name.LocalName != "PropertyGroup")
                     {
-                        this.DefineConstants.AddRange(constant.Split(';').Select(s => s.Trim()).Where(s => s != ""));
+                        return false;
+                    }
+
+                    var attr = n.Attribute("Condition");
+                    return attr == null || EvaluateCondition(attr.Value);
+                });
+
+                this.ProjectProperties.DefineConstants = "";
+
+                foreach (var node in nodeList)
+                {
+                    var constants = from n in node.Descendants()
+                                    where n.Name.LocalName == ProjectPropertyNames.DEFINE_CONSTANTS_PROP
+                                    select n.Value;
+
+                    if (constants.Count() > 0)
+                    {
+                        if (this.ProjectProperties.DefineConstants.Length > 0)
+                        {
+                            this.ProjectProperties.DefineConstants += ";";
+                        }
+
+                        this.ProjectProperties.DefineConstants += string.Join(";", constants);
                     }
                 }
             }
 
+            if (!string.IsNullOrWhiteSpace(this.ProjectProperties.DefineConstants))
+            {
+                this.DefineConstants.AddRange(
+                    this.ProjectProperties.DefineConstants.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim()));
+            }
+
             this.DefineConstants = this.DefineConstants.Distinct().ToList();
 
-            this.Log.Info("Reading define constants done");
+            this.Log.Info("EnsureDefineConstants done");
         }
 
-        protected virtual string GetAssemblyName(XDocument doc)
+        protected virtual void EnsureAssemblyName(XDocument doc)
         {
-            var nodes = from n in doc.Descendants()
-                        where n.Name.LocalName == ProjectProperties.ASSEMBLY_NAME_PROP
-                        select n;
+            if (this.ProjectProperties.AssemblyName == null && this.ShouldReadProjectFile)
+            {
+                var nodes = from n in doc.Descendants()
+                            where n.Name.LocalName == ProjectPropertyNames.ASSEMBLY_NAME_PROP
+                            select n;
 
-            if (nodes.Count() != 1)
+                if (nodes.Count() == 1)
+                {
+                    this.ProjectProperties.AssemblyName = nodes.First().Value;
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(this.ProjectProperties.AssemblyName))
             {
                 Bridge.Translator.TranslatorException.Throw("Unable to determine assembly name");
             }
-
-            return nodes.First().Value;
         }
 
-        protected virtual string GetDefaultNamespace(XDocument doc)
+        protected virtual void EnsureDefaultNamespace(XDocument doc)
         {
-            var nodes = from n in doc.Descendants()
-                        where n.Name.LocalName == ProjectProperties.ROOT_NAMESPACE_PROP
-                        select n;
-
-            if (nodes.Count() != 1)
+            if (this.ProjectProperties.RootNamespace == null && this.ShouldReadProjectFile)
             {
-                return Translator.DefaultRootNamespace;
+                var nodes = from n in doc.Descendants()
+                            where n.Name.LocalName == ProjectPropertyNames.ROOT_NAMESPACE_PROP
+                            select n;
+
+                if (nodes.Count() == 1)
+                {
+                    this.ProjectProperties.RootNamespace = nodes.First().Value;
+                }
             }
 
-            return nodes.First().Value;
+            this.DefaultNamespace = this.ProjectProperties.RootNamespace;
+
+            if (string.IsNullOrWhiteSpace(this.DefaultNamespace))
+            {
+                this.DefaultNamespace = Translator.DefaultRootNamespace;
+            }
+
+            this.Log.Trace("DefaultNamespace:" + this.DefaultNamespace);
         }
 
-        protected virtual IList<string> GetSourceFiles()
+        protected virtual IList<string> GetSourceFiles(string location)
         {
+            this.Log.Trace("Getting source files by location...");
+
             var result = new List<string>();
             if (string.IsNullOrWhiteSpace(this.Source))
             {
+                this.Log.Trace("Source is not defined, will use *.cs mask");
                 this.Source = "*.cs";
             }
 
@@ -346,7 +481,7 @@ namespace Bridge.Translator
             foreach (var part in parts)
             {
                 int index = part.LastIndexOf(System.IO.Path.DirectorySeparatorChar);
-                string folder = index > -1 ? Path.Combine(this.Location, part.Substring(0, index + 1)) : this.Location;
+                string folder = index > -1 ? Path.Combine(location, part.Substring(0, index + 1)) : location;
                 string mask = index > -1 ? part.Substring(index + 1) : part;
 
                 string[] allfiles = System.IO.Directory.GetFiles(folder, mask, searchOption);
@@ -354,6 +489,9 @@ namespace Bridge.Translator
             }
 
             result = result.Distinct().ToList();
+
+            this.Log.Trace("Getting source files by location done (found " + result.Count + " items)");
+
             return result;
         }
     }
