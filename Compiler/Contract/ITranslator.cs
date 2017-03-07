@@ -23,12 +23,13 @@ namespace Bridge.Contract
             get;
         }
 
-        string AssemblyName
+        string BridgeLocation
         {
             get;
+            set;
         }
 
-        string BridgeLocation
+        ProjectProperties ProjectProperties
         {
             get;
             set;
@@ -128,12 +129,6 @@ namespace Bridge.Contract
         }
 
         bool Recursive
-        {
-            get;
-            set;
-        }
-
-        string Configuration
         {
             get;
             set;

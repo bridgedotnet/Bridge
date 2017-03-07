@@ -1,6 +1,24 @@
 Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     "use strict";
 
+    Bridge.define("TypeScript.Issues.N1060");
+
+    Bridge.define("TypeScript.Issues.N1060.B$1", function (T) { return {
+        getC: function () {
+            return new (TypeScript.Issues.N1060.B$1.C(T))();
+        }
+    }; });
+
+    Bridge.define("TypeScript.Issues.N1060.B$1.C", function (T) { return {
+
+    }; });
+
+    Bridge.define("TypeScript.Issues.N1640");
+
+    Bridge.define("TypeScript.Issues.N1640.IGamePlay", {
+        $kind: "interface"
+    });
+
     Bridge.definei("TypeScript.Issues.N2029Interface$1", function (T) { return {
         $kind: "interface"
     }; });
@@ -103,6 +121,28 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         $ctor1: function (arg) {
             this.$initialize();
             this.setAttribute(arg);
+        }
+    });
+
+    Bridge.define("TypeScript.Issues.N1640.GamePlay", {
+        inherits: [TypeScript.Issues.N1640.IGamePlay],
+        config: {
+            events: {
+                OnGameEvent: null
+            },
+            alias: [
+            "startGame", "TypeScript$Issues$N1640$IGamePlay$startGame",
+            "addOnGameEvent", "TypeScript$Issues$N1640$IGamePlay$addOnGameEvent",
+            "removeOnGameEvent", "TypeScript$Issues$N1640$IGamePlay$removeOnGameEvent"
+            ]
+        },
+        startGame: function (s) {
+            if (!Bridge.staticEquals(this.OnGameEvent, null)) {
+                this.OnGameEvent(this, s);
+            }
+        },
+        subscribe: function (handler) {
+            this.addOnGameEvent(handler);
         }
     });
 

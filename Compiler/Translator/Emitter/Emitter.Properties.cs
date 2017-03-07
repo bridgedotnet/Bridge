@@ -22,7 +22,6 @@ namespace Bridge.Translator
                 return this.overloadsCacheNodes;
             }
         }
- 
 
          private Dictionary<Tuple<IMember, bool, bool>, OverloadsCollection> overloadsCacheMembers;
          public Dictionary<Tuple<IMember, bool, bool>, OverloadsCollection> OverloadsCacheMembers

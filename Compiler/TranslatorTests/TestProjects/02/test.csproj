@@ -22,10 +22,10 @@
     <NoWarn>1591, 0219, 0414, 0618, 0626, 0649, 0693, 0824, 0660, 0661, 7035</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>bin\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -67,13 +67,22 @@
   </ItemGroup>
   <!-- Bridge Compiler -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup Condition="$(UseBridgeTask) != true">
-    <PostBuildEvent Condition="$(OS) != Unix">"$(ProjectDir)..\..\..\Builder\$(OutDir)bridge.exe" -p "$(ProjectPath)" -b "$(ProjectDir)$(OutDir)Bridge.dll" -cfg "$(Configuration)"</PostBuildEvent>
-    <PostBuildEvent Condition="$(OS) == Unix">mono "$(ProjectDir)../../../Builder/$(OutDir)bridge.exe" -p "$(ProjectDir)/$(MSBuildProjectFile)" -b "$(ProjectDir)$(OutDir)Bridge.dll"  -cfg "$(Configuration)"</PostBuildEvent>
-  </PropertyGroup>
-  <UsingTask Condition="$(UseBridgeTask) == true" TaskName="GenerateScript" AssemblyFile="$(ProjectDir)..\..\..\Build\$(OutDir)Bridge.Build.dll" />
+  <UsingTask Condition="$(UseBridgeTask) == true" TaskName="GenerateScript" AssemblyFile="$(ProjectDir)..\..\..\Build\bin\$(Configuration)\Bridge.Build.dll" />
   <Target Condition="$(UseBridgeTask) == true" Name="AfterBuild">
     <Message Text="Using Bridge Task" Importance="high" />
-    <GenerateScript DefineConstants="$(DefineConstants)" OutputPath="$(OutputPath)" Configuration="$(Configuration)" Assembly="@(IntermediateAssembly)" AssembliesPath="$(OutputPath)" ProjectPath="$(MSBuildProjectFullPath)" />
+    <GenerateScript
+      Assembly="@(IntermediateAssembly)"
+      AssemblyName="$(AssemblyName)"
+      AssembliesPath="$(OutDir)"
+      CheckForOverflowUnderflow="$(CheckForOverflowUnderflow)"
+      Configuration="$(Configuration)"
+      DefineConstants="$(DefineConstants)"
+      OutDir="$(OutDir)"
+      OutputPath="$(OutputPath)"
+      OutputType="$(OutputType)"
+      Platform="$(Platform)"
+      ProjectPath="$(MSBuildProjectFullPath)"
+      RootNamespace="$(RootNamespace)"
+      Sources="@(Compile)" />
   </Target>
 </Project>

@@ -31,7 +31,7 @@ namespace Bridge.Translator
                 case PlatformID.Win32NT:
                 case PlatformID.Unix:
                 case PlatformID.MacOSX:
-                    return String.Format(" \"{0}\" /t:Rebuild /p:Configuration={1} /p:Platform={2} {3}", Location, this.Configuration, this.Platform, this.BuildArguments);
+                    return String.Format(" \"{0}\" /t:Rebuild /p:Configuration={1} /p:Platform={2} {3}", Location, this.ProjectProperties.Configuration, this.ProjectProperties.Platform, this.BuildArguments);
 
                 default:
                     throw (TranslatorException)Bridge.Translator.TranslatorException.Create("Unsupported platform - {0}", Environment.OSVersion.Platform);

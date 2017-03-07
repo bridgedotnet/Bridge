@@ -82,6 +82,11 @@ namespace Bridge.Translator.TypeScript
             if (name.IsEmpty())
             {
                 name = BridgeTypes.ToTypeScriptName(this.TypeInfo.Type, this.Emitter, false, true);
+
+                if (this.IsGeneric)
+                {
+                    this.DefName = BridgeTypes.ToTypeScriptName(this.TypeInfo.Type, this.Emitter, true, true);
+                }
             }
 
             this.Write("export ");
@@ -102,6 +107,8 @@ namespace Bridge.Translator.TypeScript
             this.BeginBlock();
             this.Position = this.Emitter.Output.Length;
         }
+
+        public string DefName { get; set; }
 
         private string GetTypeHierarchy()
         {
@@ -147,7 +154,7 @@ namespace Bridge.Translator.TypeScript
             var typeDef = this.Emitter.GetTypeDefinition();
 
             new MemberBlock(this.Emitter, this.TypeInfo, false).Emit();
-            if (this.Emitter.TypeInfo.TypeDeclaration.ClassType != ICSharpCode.NRefactory.CSharp.ClassType.Interface || this.IsGeneric)
+            if (this.Emitter.TypeInfo.TypeDeclaration.ClassType != ICSharpCode.NRefactory.CSharp.ClassType.Interface)
             {
                 if (this.Position != this.Emitter.Output.Length && !this.Emitter.IsNewLine)
                 {
@@ -158,26 +165,30 @@ namespace Bridge.Translator.TypeScript
 
                 this.WriteNewLine();
 
-                this.Write("export ");
+                this.Write("export interface ");
+                
+                this.Write(this.DefName ?? this.JsName);
+
+                this.Write("Func extends Function ");
+
                 if (this.IsGeneric)
                 {
-                    this.WriteFunction();
-                }
-                else
-                {
-                    this.Write("interface ");
-                }
-
-                this.Write(this.JsName);
-
-                if (!this.IsGeneric)
-                {
-                    this.Write("Func extends Function ");
-                }
-                else
-                {
-                    this.WriteOpenParentheses();
+                    this.BeginBlock();
+                    this.Write("<");
                     var comma = false;
+                    foreach (var p in typeDef.GenericParameters)
+                    {
+                        if (comma)
+                        {
+                            this.WriteComma();
+                        }
+                        this.Write(p.Name);
+                        comma = true;
+                    }
+                    this.Write(">");
+
+                    this.WriteOpenParentheses();
+                    comma = false;
                     foreach (var p in typeDef.GenericParameters)
                     {
                         if (comma)
@@ -223,34 +234,43 @@ namespace Bridge.Translator.TypeScript
             {
                 foreach (var nestedType in this.NestedTypes)
                 {
+
                     var typeDef = this.Emitter.GetTypeDefinition(nestedType.Type);
-                    var isGeneric = typeDef.GenericParameters.Count > 0;
 
-                    if (!isGeneric)
+                    if (typeDef.IsInterface)
                     {
-                        string name = this.Emitter.Validator.GetCustomTypeName(typeDef, this.Emitter);
+                        continue;
+                    }
 
-                        if (name.IsEmpty())
-                        {
-                            name = BridgeTypes.ToTypeScriptName(nestedType.Type, this.Emitter, false, true);
-                        }
+                    string customName = this.Emitter.Validator.GetCustomTypeName(typeDef, this.Emitter);
+                    string defName = customName;
 
-                        this.Write(name);
-                        this.WriteColon();
+                    if (defName.IsEmpty())
+                    {
+                        defName = BridgeTypes.ToTypeScriptName(nestedType.Type, this.Emitter, true);
+                        this.Write(BridgeTypes.ToTypeScriptName(nestedType.Type, this.Emitter, true, true));
+                    }
+                    else
+                    {
+                        this.Write(defName);
+                    }
 
+                    if (typeDef.IsEnum)
+                    {
                         var parentTypeDef = this.Emitter.GetTypeDefinition();
                         string parentName = this.Emitter.Validator.GetCustomTypeName(parentTypeDef, this.Emitter);
                         if (parentName.IsEmpty())
                         {
                             parentName = this.TypeInfo.Type.Name;
                         }
-
-                        this.Write(parentName);
-                        this.WriteDot();
-                        this.Write(name + "Func");
-                        this.WriteSemiColon();
-                        this.WriteNewLine();
+                        defName = parentName + "." + BridgeTypes.ToTypeScriptName(nestedType.Type, this.Emitter, false, true);
                     }
+
+                    this.WriteColon();
+
+                    this.Write(defName + "Func");
+                    this.WriteSemiColon();
+                    this.WriteNewLine();
                 }
             }
         }
@@ -262,23 +282,24 @@ namespace Bridge.Translator.TypeScript
                 this.WriteNewLine();
             }
 
+            var isInterface = this.Emitter.TypeInfo.TypeDeclaration.ClassType == ICSharpCode.NRefactory.CSharp.ClassType.Interface;
             this.EndBlock();
 
-            if (!this.IsGeneric && this.TypeInfo.ParentType == null)
+            if (this.IsGeneric && !isInterface)
             {
                 this.WriteNewLine();
+                this.EndBlock();
+            }
+            
+            if (this.TypeInfo.ParentType == null && !isInterface)
+            {
+                string name = BridgeTypes.ToTypeScriptName(this.TypeInfo.Type, this.Emitter, true, true);
+                this.WriteNewLine();
                 this.Write("var ");
-                this.Write(this.JsName);
+                this.Write(name);
                 this.WriteColon();
-                var isInterface = this.Emitter.TypeInfo.TypeDeclaration.ClassType == ICSharpCode.NRefactory.CSharp.ClassType.Interface;
-                if (isInterface)
-                {
-                    this.Write(JS.Types.FUNCTION);
-                }
-                else
-                {
-                    this.Write(this.JsName + "Func");
-                }
+
+                this.Write(name + "Func");
 
                 this.WriteSemiColon();
             }

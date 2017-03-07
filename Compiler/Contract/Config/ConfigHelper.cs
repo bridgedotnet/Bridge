@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 
@@ -83,12 +84,54 @@ namespace Bridge.Contract
                 return null;
             }
 
-            return input.Replace(token, tokenValue);
+            if (token.Contains("$"))
+            {
+                token = Regex.Escape(token);
+            }
+
+            if (tokenValue == null)
+            {
+                tokenValue = "";
+            }
+
+            return Regex.Replace(input, token, tokenValue, RegexOptions.IgnoreCase);
+        }
+
+        public string ApplyTokens(Dictionary<string, string> tokens, string input)
+        {
+            if (tokens == null)
+            {
+                throw new ArgumentNullException("tokens");
+            }
+
+            if (input == null)
+            {
+                return null;
+            }
+
+            foreach (var token in tokens)
+            {
+                input = ApplyToken(token.Key, token.Value, input);
+            }
+
+            return input;
         }
 
         public string ApplyPathToken(string token, string tokenValue, string input)
         {
             return ConvertPath(ApplyToken(token, tokenValue, input));
+        }
+
+        public string ApplyPathTokens(Dictionary<string, string> tokens, string input)
+        {
+            if (input == null)
+            {
+                return null;
+            }
+
+            input = ApplyTokens(tokens, input);
+
+            return ConvertPath(input);
         }
     }
 

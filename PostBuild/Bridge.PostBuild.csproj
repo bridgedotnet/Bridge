@@ -67,12 +67,12 @@
   <PropertyGroup Condition="'$(OS)' != 'Unix'">
     <PreBuildEvent>
 REM Run Bridge Compiler for the project
-"$(SolutionDir)Compiler\Builder\$(OutDir)bridge.exe" -p "$(SolutionDir)Bridge\Bridge.csproj" -b "$(SolutionDir)Bridge\$(OutDir)Bridge.dll" -cfg "$(Configuration)"
+"$(SolutionDir)Compiler\Builder\$(OutDir)bridge.exe" -p "$(SolutionDir)Bridge\Bridge.csproj" -b "$(SolutionDir)Bridge\$(OutDir)Bridge.dll" -cfg "$(Configuration)" --platform "$(Platform)"
 </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(OS)' == 'Unix'">
     <PreBuildEvent>
-mono "$(SolutionDir)Compiler/Builder/$(OutDir)bridge.exe" -p "$(SolutionDir)Bridge/Bridge.csproj" -b "$(SolutionDir)Bridge/$(OutDir)Bridge.dll" -cfg "$(Configuration)"
+mono "$(SolutionDir)Compiler/Builder/$(OutDir)bridge.exe" -p "$(SolutionDir)Bridge/Bridge.csproj" -b "$(SolutionDir)Bridge/$(OutDir)Bridge.dll" -cfg "$(Configuration)" --platform "$(Platform)"
     </PreBuildEvent>
   </PropertyGroup>
   <!-- NuGet packaging starts -->

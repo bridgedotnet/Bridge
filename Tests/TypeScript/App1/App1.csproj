@@ -44,6 +44,8 @@
     <Compile Include="5_Generics.cs" />
     <Compile Include="4_Functions.cs" />
     <Compile Include="3_Classes.cs" />
+    <Compile Include="Issues\N1060.cs" />
+    <Compile Include="Issues\N1640.cs" />
     <Compile Include="Issues\N2029.cs" />
     <Compile Include="Issues\N2030.cs" />
     <Compile Include="Issues\N2438.cs" />
@@ -73,12 +75,12 @@
   <PropertyGroup Condition="'$(OS)' != 'Unix'">
     <PostBuildEvent>
 REM Run Bridge Compiler for the project
-"$(ProjectDir)..\..\..\Compiler\Builder\$(OutDir)bridge.exe" -p "$(ProjectPath)" -b "$(ProjectDir)$(OutDir)Bridge.dll" -cfg "$(Configuration)"
+"$(ProjectDir)..\..\..\Compiler\Builder\$(OutDir)bridge.exe" -p "$(ProjectPath)" -b "$(ProjectDir)$(OutDir)Bridge.dll" -cfg "$(Configuration)" --platform "$(Platform)"
     </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(OS)' == 'Unix'">
     <PostBuildEvent>
-mono "$(ProjectDir)../../../Compiler/Builder/$(OutDir)bridge.exe" -p "$(ProjectDir)/$(MSBuildProjectFile)" -b "$(ProjectDir)$(OutDir)Bridge.dll" -cfg "$(Configuration)"
+mono "$(ProjectDir)../../../Compiler/Builder/$(OutDir)bridge.exe" -p "$(ProjectDir)/$(MSBuildProjectFile)" -b "$(ProjectDir)$(OutDir)Bridge.dll" -cfg "$(Configuration)" --platform "$(Platform)"
     </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
