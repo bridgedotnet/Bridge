@@ -778,6 +778,11 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("Contract - ForAllWithCollection", Bridge.Test.Runtime.BridgeClientTestRunner.ContractTests.forAllWithCollection);
             QUnit.test("Contract - Exists", Bridge.Test.Runtime.BridgeClientTestRunner.ContractTests.exists);
             QUnit.test("Contract - ExistsWithCollection", Bridge.Test.Runtime.BridgeClientTestRunner.ContractTests.existsWithCollection);
+            QUnit.test("Stopwatch - GetTimestamp", Bridge.Test.Runtime.BridgeClientTestRunner.StopwatchTests.getTimestamp);
+            QUnit.test("Stopwatch - ConstructStartAndStop", Bridge.Test.Runtime.BridgeClientTestRunner.StopwatchTests.constructStartAndStop);
+            QUnit.test("Stopwatch - StartNewAndReset", Bridge.Test.Runtime.BridgeClientTestRunner.StopwatchTests.startNewAndReset);
+            QUnit.test("Stopwatch - StartNewAndRestart", Bridge.Test.Runtime.BridgeClientTestRunner.StopwatchTests.startNewAndRestart);
+            QUnit.test("Stopwatch - StopShouldContinue", Bridge.Test.Runtime.BridgeClientTestRunner.StopwatchTests.stopShouldContinue);
             QUnit.test("Stopwatch - DefaultConstructorWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StopwatchTests.defaultConstructorWorks);
             QUnit.test("Stopwatch - ConstantsWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StopwatchTests.constantsWorks);
             QUnit.test("Stopwatch - StartNewWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StopwatchTests.startNewWorks);
@@ -1879,6 +1884,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("ComplexPropertiesWorks", Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests.complexPropertiesWorks);
             QUnit.test("CamelCaseSettingWorks", Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests.camelCaseSettingWorks);
             QUnit.test("IgnoreNullValueWorks", Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests.ignoreNullValueWorks);
+            QUnit.test("TypeNameHandlingWorks", Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests.typeNameHandlingWorks);
             QUnit.test("AnonymousTypesWorks", Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests.anonymousTypesWorks);
             QUnit.module("Simple types");
             QUnit.test("Boolean - TypePropertiesAreCorrect", Bridge.Test.Runtime.BridgeClientTestRunner.BooleanTests.typePropertiesAreCorrect);
@@ -19684,10 +19690,17 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 } ));
                 Bridge.ClientTest.SerializationTests.ignoreNullValueWorks();
             },
+            typeNameHandlingWorks: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SerializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TypeNameHandlingWorks()",
+                    line: "274"
+                } ));
+                Bridge.ClientTest.SerializationTests.typeNameHandlingWorks();
+            },
             anonymousTypesWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SerializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "AnonymousTypesWorks()",
-                    line: "274"
+                    line: "284"
                 } ));
                 Bridge.ClientTest.SerializationTests.anonymousTypesWorks();
             }
@@ -19893,45 +19906,80 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.StopwatchTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Diagnostics.StopwatchTests)],
         statics: {
+            getTimestamp: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Diagnostics.StopwatchTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StopwatchTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "GetTimestamp()",
+                    line: "12"
+                } ));
+                Bridge.ClientTest.Diagnostics.StopwatchTests.getTimestamp();
+            },
+            constructStartAndStop: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Diagnostics.StopwatchTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StopwatchTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "ConstructStartAndStop()",
+                    line: "21"
+                } ));
+                Bridge.ClientTest.Diagnostics.StopwatchTests.constructStartAndStop();
+            },
+            startNewAndReset: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Diagnostics.StopwatchTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StopwatchTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "StartNewAndReset()",
+                    line: "46"
+                } ));
+                Bridge.ClientTest.Diagnostics.StopwatchTests.startNewAndReset();
+            },
+            startNewAndRestart: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Diagnostics.StopwatchTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StopwatchTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "StartNewAndRestart()",
+                    line: "61"
+                } ));
+                Bridge.ClientTest.Diagnostics.StopwatchTests.startNewAndRestart();
+            },
+            stopShouldContinue: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Diagnostics.StopwatchTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StopwatchTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "StopShouldContinue()",
+                    line: "89"
+                } ));
+                Bridge.ClientTest.Diagnostics.StopwatchTests.stopShouldContinue();
+            },
             defaultConstructorWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Diagnostics.StopwatchTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StopwatchTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "DefaultConstructorWorks()",
-                    line: "11"
+                    line: "117"
                 } ));
                 t.getFixture().defaultConstructorWorks();
             },
             constantsWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Diagnostics.StopwatchTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StopwatchTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ConstantsWorks()",
-                    line: "19"
+                    line: "125"
                 } ));
                 t.getFixture().constantsWorks();
             },
             startNewWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Diagnostics.StopwatchTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StopwatchTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "StartNewWorks()",
-                    line: "26"
+                    line: "132"
                 } ));
                 t.getFixture().startNewWorks();
             },
             startAndStopWork: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Diagnostics.StopwatchTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StopwatchTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "StartAndStopWork()",
-                    line: "34"
+                    line: "140"
                 } ));
                 t.getFixture().startAndStopWork();
             },
             elapsedWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Diagnostics.StopwatchTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StopwatchTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ElapsedWorks()",
-                    line: "45"
+                    line: "151"
                 } ));
                 t.getFixture().elapsedWorks();
             },
             getTimestampWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Diagnostics.StopwatchTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StopwatchTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetTimestampWorks()",
-                    line: "79"
+                    line: "185"
                 } ));
                 t.getFixture().getTimestampWorks();
             }
@@ -21222,7 +21270,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             testBasic: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestAutoProps).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestAutoProps, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestBasic()",
-                    line: "33"
+                    line: "29"
                 } ));
                 Bridge.ClientTest.CSharp6.TestAutoProps.testBasic();
             }
@@ -21595,7 +21643,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             testBasic: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestInterpolatedStrings).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestInterpolatedStrings, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestBasic()",
-                    line: "37"
+                    line: "35"
                 } ));
                 Bridge.ClientTest.CSharp6.TestInterpolatedStrings.testBasic();
             }

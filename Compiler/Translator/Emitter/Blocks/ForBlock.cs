@@ -1,8 +1,6 @@
 using Bridge.Contract;
 using Bridge.Contract.Constants;
-
 using ICSharpCode.NRefactory.CSharp;
-
 using System.Collections.Generic;
 using System.Linq;
 
@@ -78,7 +76,16 @@ namespace Bridge.Translator
 
             this.WriteIf();
             this.WriteOpenParentheses(true);
-            forStatement.Condition.AcceptVisitor(this.Emitter);
+
+            if (!forStatement.Condition.IsNull)
+            {
+                forStatement.Condition.AcceptVisitor(this.Emitter);
+            }
+            else
+            {
+                this.Write("true");
+            }
+
             this.WriteCloseParentheses(true);
             this.Emitter.ReplaceAwaiterByVar = oldValue;
 

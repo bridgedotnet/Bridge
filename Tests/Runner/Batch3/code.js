@@ -15554,6 +15554,108 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2443", {
+        statics: {
+            testNaNCompareForDouble: function () {
+                var vals = System.Array.init([4, 3, Number.NaN, 0, 1, 2, 1], System.Double);
+
+                Bridge.Test.NUnit.Assert.areEqual(4, System.Linq.Enumerable.from(vals).max());
+                Bridge.Test.NUnit.Assert.areEqual(Number.NaN, System.Linq.Enumerable.from(vals).min());
+
+                vals = System.Array.init([4, 3, Number.POSITIVE_INFINITY, Number.NaN, Number.NEGATIVE_INFINITY, 0, 1, 2, 1], System.Double);
+
+                Bridge.Test.NUnit.Assert.areEqual(Number.POSITIVE_INFINITY, System.Linq.Enumerable.from(vals).max());
+                Bridge.Test.NUnit.Assert.areEqual(Number.NaN, System.Linq.Enumerable.from(vals).min());
+
+                vals = System.Array.init([4, 3, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY, 0, 1, 2, 1], System.Double);
+
+                Bridge.Test.NUnit.Assert.areEqual(Number.POSITIVE_INFINITY, System.Linq.Enumerable.from(vals).max());
+                Bridge.Test.NUnit.Assert.areEqual(Number.NEGATIVE_INFINITY, System.Linq.Enumerable.from(vals).min());
+            },
+            testNaNCompareForFloat: function () {
+                var vals = System.Array.init([4, 3, Number.NaN, 0, 1, 2, 1], System.Single);
+
+                Bridge.Test.NUnit.Assert.areEqual(4, System.Linq.Enumerable.from(vals).max());
+                Bridge.Test.NUnit.Assert.areEqual(Number.NaN, System.Linq.Enumerable.from(vals).min());
+
+                vals = System.Array.init([4, 3, Number.POSITIVE_INFINITY, Number.NaN, Number.NEGATIVE_INFINITY, 0, 1, 2, 1], System.Single);
+
+                Bridge.Test.NUnit.Assert.areEqual(Number.POSITIVE_INFINITY, System.Linq.Enumerable.from(vals).max());
+                Bridge.Test.NUnit.Assert.areEqual(Number.NaN, System.Linq.Enumerable.from(vals).min());
+
+                vals = System.Array.init([4, 3, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY, 0, 1, 2, 1], System.Single);
+
+                Bridge.Test.NUnit.Assert.areEqual(Number.POSITIVE_INFINITY, System.Linq.Enumerable.from(vals).max());
+                Bridge.Test.NUnit.Assert.areEqual(Number.NEGATIVE_INFINITY, System.Linq.Enumerable.from(vals).min());
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2445", {
+        statics: {
+            testEmptyForLoop: function () {
+                var $step = 0,
+                    $task1, 
+                    $jumpFromFinally, 
+                    done, 
+                    i, 
+                    $asyncBody = Bridge.fn.bind(this, function () {
+                        for (;;) {
+                            $step = System.Array.min([0,1,2,3,4,5], $step);
+                            switch ($step) {
+                                case 0: {
+                                    done = Bridge.Test.NUnit.Assert.async();
+                                    i = 0;
+                                    $step = 1;
+                                    continue;
+                                }
+                                case 1: {
+                                    if ( true ) {
+                                        $step = 2;
+                                        continue;
+                                    }
+                                    $step = 5;
+                                    continue;
+                                }
+                                case 2: {
+                                    $task1 = System.Threading.Tasks.Task.delay(1);
+                                    $step = 3;
+                                    $task1.continueWith($asyncBody, true);
+                                    return;
+                                }
+                                case 3: {
+                                    $task1.getAwaitedResult();
+                                    
+                                    if (((i = (i + 1) | 0)) > 10) {
+                                        $step = 5;
+                                        continue;
+                                    }
+                                    $step = 4;
+                                    continue;
+                                }
+                                case 4: {
+                                    $step = 1;
+                                    continue;
+                                }
+                                case 5: {
+                                    
+                                    Bridge.Test.NUnit.Assert.areEqual(11, i);
+
+                                    done();
+                                    return;
+                                }
+                                default: {
+                                    return;
+                                }
+                            }
+                        }
+                    }, arguments);
+
+                $asyncBody();
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2446", {
         statics: {
             testDoubleMinValue: function () {
