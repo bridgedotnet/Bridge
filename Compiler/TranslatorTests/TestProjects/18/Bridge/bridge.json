@@ -74,6 +74,27 @@
         "Bridge\\output/testIssue599.js",
         "Bridge\\output/testIssue948.js"
       ]
+    },
+    // #2429 Check two css files with BOM encoding get BOM removed when combined by default
+    {
+      "name": "issue2429_NoBom.css",
+      "extract": true,
+      "output": "resources",
+      "files": [
+        "Bridge/res/style2429_1.css",
+        "Bridge/res/style2429_2.css"
+      ]
+    },
+    // #2429 Check two css files with BOM encoding do NOT get BOM removed when combined with RemoveBom = false
+    {
+      "name": "issue2429_Bom.css",
+      "extract": true,
+      "removeBom":  false,
+      "output": "resources",
+      "files": [
+        "Bridge/res/style2429_1.css",
+        "Bridge/res/style2429_2.css"
+      ]
     }
   ]
 }
