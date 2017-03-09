@@ -672,7 +672,9 @@ namespace Bridge.Translator
 
                         if (content.Length > 0)
                         {
-                            var bomLength = GetBomLength(content);
+                            var bomLength = !item.RemoveBom.HasValue || item.RemoveBom.Value
+                                ? GetBomLength(content)
+                                : 0;
 
                             if (bomLength > 0)
                             {
