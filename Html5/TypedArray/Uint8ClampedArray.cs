@@ -1,7 +1,11 @@
 // The documentation for this class (on <summary> tags) was extracted from:
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray
 
+#if CORE
+namespace Bridge.Internal.Html5
+#else
 namespace Bridge.Html5
+#endif
 {
     // FIXME: This structure should accept integers and other types. Values above 255 are truncated to 255, and
     //        values below 0 are truncated to zero (this is done in JavaScript/browser level).
@@ -12,7 +16,12 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Namespace(false)]
-    public class Uint8ClampedArray : TypedArray.Prototype<Uint8ClampedArray, byte>
+    #if CORE
+    internal
+#else
+    public
+#endif
+    class Uint8ClampedArray : TypedArray.Prototype<Uint8ClampedArray, byte>
     {
         /// <summary>
         /// Creates a new Uint8ClampedArray of the specified length.

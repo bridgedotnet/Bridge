@@ -1,12 +1,23 @@
+#if CORE
+namespace Bridge.Internal.Html5
+#else
 namespace Bridge.Html5
+#endif
 {
+#pragma warning disable 649 // CS0649  Field is never assigned to, and will always have its default value null
+
     /// <summary>
     /// An ArrayBuffer is a useful object for representing an arbitrary chunk of data. In many cases, such data will be read from disk or from the network, and will not follow the alignment restrictions that are imposed on the Typed Array Views described earlier. In addition, the data will often be heterogeneous in nature and have a defined byte order.
     /// The DataView view provides a low-level interface for reading such data from and writing it to an ArrayBuffer.
     /// </summary>
     [External]
     [Name("DataView")]
-    public class DataView
+#if CORE
+    internal
+#else
+    public
+#endif
+    class DataView
     {
         /// <summary>
         /// Returns a new DataView object using the passed ArrayBuffer for its storage.

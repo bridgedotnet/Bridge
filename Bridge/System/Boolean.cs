@@ -6,6 +6,12 @@ namespace System
     [External]
     public struct Boolean : IComparable, IComparable<bool>, IEquatable<bool>
     {
+        [InlineConst]
+        internal const int True = 1;
+
+        [InlineConst]
+        internal const int False = 0;
+
         [Template("System.Boolean.trueString")]
         public static readonly string TrueString = "True";
 
