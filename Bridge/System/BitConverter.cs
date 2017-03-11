@@ -1,6 +1,4 @@
-﻿// https://referencesource.microsoft.com/#mscorlib/system/bitconverter.cs
-
-namespace System
+﻿namespace System
 {
     using Bridge;
     using Bridge.Internal.Html5;
@@ -14,7 +12,7 @@ namespace System
         /// The value is set to true if the architecture is
         /// little endian; false if it is big endian.
         /// </summary>
-        public static readonly bool IsLittleEndian = true;
+        public static readonly bool IsLittleEndian = GetIsLittleEndian();
 
         private static string Arg_ArrayPlusOffTooSmall = "Destination array is not long enough to copy all the items in the collection. Check array index and length.";
 
@@ -45,7 +43,10 @@ namespace System
         /// <returns>An array of bytes with length 2.</returns>
         public static byte[] GetBytes(short value)
         {
-            return new byte[] { unchecked((byte)value), unchecked((byte)(value >> 0x8)) };
+            var view = View(2);
+            view.SetInt16(0, value);
+
+            return GetViewBytes(view);
         }
 
         /// <summary>
@@ -55,7 +56,10 @@ namespace System
         /// <returns>An array of bytes with length 4.</returns>
         public static byte[] GetBytes(int value)
         {
-            return new byte[] { unchecked((byte)value), unchecked((byte)(value >> 0x8)), unchecked((byte)(value >> 0x10)), unchecked((byte)(value >> 0x18)) };
+            var view = View(4);
+            view.SetInt32(0, value);
+
+            return GetViewBytes(view);
         }
 
         /// <summary>
@@ -65,7 +69,9 @@ namespace System
         /// <returns>An array of bytes with length 8.</returns>
         public static byte[] GetBytes(long value)
         {
-            return new byte[] { ToByte(value), ToByte(value, 1), ToByte(value, 2), ToByte(value, 3), ToByte(value, 4), ToByte(value, 5), ToByte(value, 6), ToByte(value, 7) };
+            var view = GetView(value);
+
+            return GetViewBytes(view);
         }
 
         /// <summary>
@@ -75,7 +81,10 @@ namespace System
         /// <returns>An array of bytes with length 2.</returns>
         public static byte[] GetBytes(ushort value)
         {
-            return new byte[] { unchecked((byte)value), unchecked((byte)(value >> 0x8)) };
+            var view = View(2);
+            view.SetUint16(0, value);
+
+            return GetViewBytes(view);
         }
 
         /// <summary>
@@ -85,7 +94,10 @@ namespace System
         /// <returns>An array of bytes with length 4.</returns>
         public static byte[] GetBytes(uint value)
         {
-            return new byte[] { unchecked((byte)value), unchecked((byte)(value >> 0x8)), unchecked((byte)(value >> 0x10)), unchecked((byte)(value >> 0x18)) };
+            var view = View(4);
+            view.SetUint32(0, value);
+
+            return GetViewBytes(view);
         }
 
         /// <summary>
@@ -95,7 +107,9 @@ namespace System
         /// <returns>An array of bytes with length 8.</returns>
         public static byte[] GetBytes(ulong value)
         {
-            return new byte[] { ToByte(value), ToByte(value, 1), ToByte(value, 2), ToByte(value, 3), ToByte(value, 4), ToByte(value, 5), ToByte(value, 6), ToByte(value, 7) };
+            var view = GetView((long)value);
+
+            return GetViewBytes(view);
         }
 
         /// <summary>
@@ -105,11 +119,10 @@ namespace System
         /// <returns>An array of bytes with length 4.</returns>
         public static byte[] GetBytes(float value)
         {
-            var buffer = new ArrayBuffer(8);
-            var view = new DataView(buffer);
+            var view = View(4);
             view.SetFloat32(0, value);
 
-            return new byte[] { view.GetUint8(3), view.GetUint8(2), view.GetUint8(1), view.GetUint8(0) };
+            return GetViewBytes(view);
         }
 
         /// <summary>
@@ -119,13 +132,10 @@ namespace System
         /// <returns>An array of bytes with length 8.</returns>
         public static byte[] GetBytes(double value)
         {
-            var buffer = new ArrayBuffer(8);
-            var view = new DataView(buffer);
+            var view = View(8);
             view.SetFloat64(0, value);
 
-            return new byte[] {
-                view.GetUint8(7), view.GetUint8(6), view.GetUint8(5), view.GetUint8(4),
-                view.GetUint8(3), view.GetUint8(2), view.GetUint8(1), view.GetUint8(0)};
+            return GetViewBytes(view);
         }
 
         /// <summary>
@@ -136,21 +146,6 @@ namespace System
         /// <returns>A character formed by two bytes beginning at startIndex.</returns>
         public static char ToChar(byte[] value, int startIndex)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException("null");
-            }
-
-            if ((uint)startIndex >= value.Length)
-            {
-                throw new ArgumentOutOfRangeException("startIndex");
-            }
-
-            if (startIndex > value.Length - 2)
-            {
-                throw new ArgumentException(Arg_ArrayPlusOffTooSmall);
-            }
-
             return (char)ToInt16(value, startIndex);
         }
 
@@ -177,41 +172,12 @@ namespace System
                 throw new ArgumentException(Arg_ArrayPlusOffTooSmall);
             }
 
-            var buffer = new ArrayBuffer();
-            var view = new DataView(buffer);
+            var view = View(2);
 
-            if (startIndex % 2 == 0)
-            {
-                // data is aligned
-                return *((short*)pbyte);
-            }
-            else
-            {
-                if (IsLittleEndian)
-                {
-                    return (short)((*pbyte) | (*(pbyte + 1) << 8));
-                }
-                else
-                {
-                    return (short)((*pbyte << 8) | (*(pbyte + 1)));
-                }
-            }
+            SetViewBytes(view, value, startIndex: startIndex);
 
-
-            return ((value[startIndex].As<double>()) + ((value[(startIndex.As<double>() + 1).As<int>()] << 0x8).As<double>())).As<short>();
+            return view.GetInt16(0);
         }
-
-        //function checkEndian()
-        //{
-        //    var arrayBuffer = new ArrayBuffer(2);
-        //    var uint8Array = new Uint8Array(arrayBuffer);
-        //    var uint16array = new Uint16Array(arrayBuffer);
-        //    uint8Array[0] = 0xAA; // set first byte
-        //    uint8Array[1] = 0xBB; // set second byte
-        //    if (uint16array[0] === 0xBBAA) return "little endian";
-        //    if (uint16array[0] === 0xAABB) return "big endian";
-        //    else throw new Error("Something crazy just happened");
-        //}
 
         /// <summary>
         /// Returns a 32-bit signed integer converted from four bytes at a specified position in a byte array.
@@ -236,26 +202,11 @@ namespace System
                 throw new ArgumentException(Arg_ArrayPlusOffTooSmall);
             }
 
-            //if (startIndex % 4 == 0)
-            //{ // data is aligned
-            //    return *((int*)pbyte);
-            //}
-            //else
-            //{
-            //    if (IsLittleEndian)
-            //    {
-            //        return (*pbyte) | (*(pbyte + 1) << 8) | (*(pbyte + 2) << 16) | (*(pbyte + 3) << 24);
-            //    }
-            //    else
-            //    {
-            //        return (*pbyte << 24) | (*(pbyte + 1) << 16) | (*(pbyte + 2) << 8) | (*(pbyte + 3));
-            //    }
-            //}
+            var view = View(4);
 
-            return (value[startIndex].As<double>()
-                + (value[(startIndex.As<double>() + 1).As<int>()] << 0x8).As<double>()
-                + (value[(startIndex.As<double>() + 2).As<int>()] << 0x10).As<double>()
-                + (value[(startIndex.As<double>() + 3).As<int>()] << 0x18).As<double>()).As<int>();
+            SetViewBytes(view, value, startIndex: startIndex);
+
+            return view.GetInt32(0);
         }
 
         /// <summary>
@@ -281,34 +232,16 @@ namespace System
                 throw new ArgumentException(Arg_ArrayPlusOffTooSmall);
             }
 
-            //if (startIndex % 8 == 0)
-            //{ // data is aligned
-            //    return *((long*)pbyte);
-            //}
-            //else
-            //{
-            //    if (IsLittleEndian)
-            //    {
-            //        int i1 = (*pbyte) | (*(pbyte + 1) << 8) | (*(pbyte + 2) << 16) | (*(pbyte + 3) << 24);
-            //        int i2 = (*(pbyte + 4)) | (*(pbyte + 5) << 8) | (*(pbyte + 6) << 16) | (*(pbyte + 7) << 24);
-            //        return (uint)i1 | ((long)i2 << 32);
-            //    }
-            //    else
-            //    {
-            //        int i1 = (*pbyte << 24) | (*(pbyte + 1) << 16) | (*(pbyte + 2) << 8) | (*(pbyte + 3));
-            //        int i2 = (*(pbyte + 4) << 24) | (*(pbyte + 5) << 16) | (*(pbyte + 6) << 8) | (*(pbyte + 7));
-            //        return (uint)i2 | ((long)i1 << 32);
-            //    }
-            //}
 
-            return value[startIndex]
-                + ((long)value[(startIndex.As<double>() + 1).As<int>()] << 0x8)
-                + ((long)value[(startIndex.As<double>() + 2).As<int>()] << 0x10)
-                + ((long)value[(startIndex.As<double>() + 3).As<int>()] << 0x18)
-                + ((long)value[(startIndex.As<double>() + 4).As<int>()] << 0x20)
-                + ((long)value[(startIndex.As<double>() + 5).As<int>()] << 0x28)
-                + ((long)value[(startIndex.As<double>() + 6).As<int>()] << 0x30)
-                + ((long)value[(startIndex.As<double>() + 7).As<int>()] << 0x38);
+            var low = ToInt32(value, startIndex);
+            var high = ToInt32(value, startIndex + 4);
+
+            if (IsLittleEndian)
+            {
+                return CreateLong(low, high);
+            }
+
+            return CreateLong(high, low);
         }
 
 
@@ -320,23 +253,7 @@ namespace System
         /// <returns>A 16-bit unsigned integer formed by two bytes beginning at startIndex.</returns>
         public static ushort ToUInt16(byte[] value, int startIndex)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException("null");
-            }
-
-            if ((uint)startIndex >= value.Length)
-            {
-                throw new ArgumentOutOfRangeException("startIndex");
-            }
-
-            if (startIndex > value.Length - 2)
-            {
-                throw new ArgumentException(Arg_ArrayPlusOffTooSmall);
-            }
-
-            //return (ushort)ToInt16(value, startIndex);
-            return ((value[startIndex].As<double>()) + ((value[(startIndex.As<double>() + 1).As<int>()] << 0x8).As<double>())).As<ushort>();
+            return (ushort)ToInt16(value, startIndex);
         }
 
         /// <summary>
@@ -347,26 +264,7 @@ namespace System
         /// <returns>A 32-bit unsigned integer formed by four bytes beginning at startIndex.</returns>
         public static uint ToUInt32(byte[] value, int startIndex)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException("null");
-            }
-
-            if ((uint)startIndex >= value.Length)
-            {
-                throw new ArgumentOutOfRangeException("startIndex");
-            }
-
-            if (startIndex > value.Length - 4)
-            {
-                throw new ArgumentException(Arg_ArrayPlusOffTooSmall);
-            }
-
-            //return (uint)ToInt32(value, startIndex);
-            return (value[startIndex].As<double>()
-                + (value[(startIndex.As<double>() + 1).As<uint>()] << 0x8).As<double>()
-                + (value[(startIndex.As<double>() + 2).As<uint>()] << 0x10).As<double>()
-                + (value[(startIndex.As<double>() + 3).As<uint>()] << 0x18).As<double>()).As<uint>();
+            return (uint)ToInt32(value, startIndex);
         }
 
         /// <summary>
@@ -377,29 +275,9 @@ namespace System
         /// <returns>A 64-bit unsigned integer formed by the eight bytes beginning at startIndex.</returns>
         public static ulong ToUInt64(byte[] value, int startIndex)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException("null");
-            }
+            var l = ToInt64(value, startIndex);
 
-            if ((uint)startIndex >= value.Length)
-            {
-                throw new ArgumentOutOfRangeException("startIndex");
-            }
-
-            if (startIndex > value.Length - 8)
-            {
-                throw new ArgumentException(Arg_ArrayPlusOffTooSmall);
-            }
-
-            return value[startIndex]
-                + ((ulong)value[(startIndex.As<double>() + 1).As<int>()] << 0x8)
-                + ((ulong)value[(startIndex.As<double>() + 2).As<int>()] << 0x10)
-                + ((ulong)value[(startIndex.As<double>() + 3).As<int>()] << 0x18)
-                + ((ulong)value[(startIndex.As<double>() + 4).As<int>()] << 0x20)
-                + ((ulong)value[(startIndex.As<double>() + 5).As<int>()] << 0x28)
-                + ((ulong)value[(startIndex.As<double>() + 6).As<int>()] << 0x30)
-                + ((ulong)value[(startIndex.As<double>() + 7).As<int>()] << 0x38);
+            return CreateULong(GetLongLow(l), GetLongHigh(l));
         }
 
         /// <summary>
@@ -425,12 +303,9 @@ namespace System
                 throw new ArgumentException(Arg_ArrayPlusOffTooSmall);
             }
 
-            var buffer = new ArrayBuffer(4);
-            var view = new DataView(buffer);
-            view.SetUint8(0, value[startIndex + 3]);
-            view.SetUint8(1, value[startIndex + 2]);
-            view.SetUint8(2, value[startIndex + 1]);
-            view.SetUint8(3, value[startIndex + 0]);
+            var view = View(4);
+
+            SetViewBytes(view, value, startIndex: startIndex);
 
             return view.GetFloat32(0);
         }
@@ -458,28 +333,11 @@ namespace System
                 throw new ArgumentException(Arg_ArrayPlusOffTooSmall);
             }
 
-            var buffer = new ArrayBuffer(8);
-            var view = new DataView(buffer);
-            view.SetUint8(0, value[startIndex + 7]);
-            view.SetUint8(1, value[startIndex + 6]);
-            view.SetUint8(2, value[startIndex + 5]);
-            view.SetUint8(3, value[startIndex + 4]);
-            view.SetUint8(4, value[startIndex + 3]);
-            view.SetUint8(5, value[startIndex + 2]);
-            view.SetUint8(6, value[startIndex + 1]);
-            view.SetUint8(7, value[startIndex + 0]);
+            var view = View(8);
+
+            SetViewBytes(view, value, startIndex: startIndex);
 
             return view.GetFloat64(0);
-        }
-
-        private static char GetHexValue(int i)
-        {
-            if (i < 10)
-            {
-                return (char)(i + '0');
-            }
-
-            return (char)(i - 10 + 'A');
         }
 
         /// <summary>
@@ -603,11 +461,10 @@ namespace System
         /// <returns>A 64-bit signed integer whose value is equivalent to value.</returns>
         public static long DoubleToInt64Bits(double value)
         {
-            var buf = new ArrayBuffer(8);
-            (new Float64Array(buf))[0] = value;
-            var uintArray = new Uint32Array(buf);
+            var view = View(8);
+            view.SetFloat64(0, value);
 
-            return CreateLong(uintArray[0], uintArray[1]);
+            return CreateLong(view.GetInt32(4), view.GetInt32(0));
         }
 
         /// <summary>
@@ -617,22 +474,114 @@ namespace System
         /// <returns>A double-precision floating point number whose value is equivalent to value.</returns>
         public static double Int64BitsToDouble(long value)
         {
-            ArrayBuffer buffer = new ArrayBuffer(8);
-            Int32Array int32View = new Int32Array(buffer);
-            Float64Array doubleView = new Float64Array(buffer);
-            int32View[0] = value.ToDynamic().value.low;
-            int32View[1] = value.ToDynamic().value.high;
+            var view = GetView(value);
 
-            return doubleView[0];
+            return view.GetFloat64(0);
         }
 
+        private static char GetHexValue(int i)
+        {
+            if (i < 10)
+            {
+                return (char)(i + '0');
+            }
+
+            return (char)(i - 10 + 'A');
+        }
+
+        private static byte[] GetViewBytes(DataView view, int count = -1, int startIndex = 0)
+        {
+            if (count == -1)
+            {
+                count = view.ByteLength;
+            }
+
+            var r = new byte[count];
+
+            if (IsLittleEndian)
+            {
+                for (int i = count - 1; i >= 0; i--)
+                {
+                    r[i] = view.GetUint8(startIndex++);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    r[i] = view.GetUint8(startIndex++);
+                }
+            }
+
+            return r;
+        }
+
+        private static void SetViewBytes(DataView view, byte[] value, int count = -1, int startIndex = 0)
+        {
+            if (count == -1)
+            {
+                count = view.ByteLength;
+            }
+
+            if (IsLittleEndian)
+            {
+                for (int i = count - 1; i >= 0; i--)
+                {
+                    view.SetUint8(i, value[startIndex++]);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    view.SetUint8(i, value[startIndex++]);
+                }
+            }
+        }
+
+        private static DataView View(int length)
+        {
+            var buffer = new ArrayBuffer(length);
+            var view = new DataView(buffer);
+
+            return view;
+        }
+
+        private static DataView GetView(long value)
+        {
+            var view = View(8);
+
+            view.SetInt32(4, GetLongLow(value));
+            view.SetInt32(0, GetLongHigh(value));
+
+            return view;
+        }
+
+        private static bool GetIsLittleEndian()
+        {
+            var view = View(2);
+
+            view.SetUint8(0, 0xAA);
+            view.SetUint8(1, 0xBB);
+
+            if (view.GetUint16(0) == 0xBBAA)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        [Template("{0}.value.high")]
+        private static extern int GetLongHigh(long value);
+
+        [Template("{0}.value.low")]
+        private static extern int GetLongLow(long value);
+
         [Template("System.Int64([{0}, {1}])")]
-        static extern long CreateLong(uint low, uint high);
+        private static extern long CreateLong(int low, int high);
 
-        [Template("({0}.shr({1} * 8).value.low & 255)")]
-        public static extern byte ToByte(this long value, int bitRight = 0);
-
-        [Template("({0}.shr({1} * 8).value.low & 255)")]
-        public static extern byte ToByte(this ulong value, int bitRight = 0);
+        [Template("System.UInt64([{0}, {1}])")]
+        private static extern ulong CreateULong(int low, int high);
     }
 }

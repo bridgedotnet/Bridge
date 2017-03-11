@@ -377,6 +377,7 @@
     <Content Include="Resources\.generated\bridge.js" />
     <Content Include="Resources\.generated\bridge\utils\console.js" />
     <Content Include="Resources\.generated\bridge\utils\systemAssemblyVersion.js" />
+    <Content Include="Resources\.generated\system\bitConverter.js" />
     <Content Include="Resources\.generated\system\formattableString.js" />
     <Content Include="Resources\.generated\system\formattableStringImpl.js" />
     <Content Include="Resources\.generated\system\guid.js" />

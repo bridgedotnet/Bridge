@@ -12,6 +12,25 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("CreateAndInitializationModes - Test", Bridge.Test.Runtime.BridgeClientTestRunner.CreateAndInitializationModesTests.test);
             QUnit.test("ObjectCreateMode - Test", Bridge.Test.Runtime.BridgeClientTestRunner.CreateModeTests.test);
             QUnit.test("ObjectInitializationMode - Test", Bridge.Test.Runtime.BridgeClientTestRunner.InitializationModeTests.test);
+            QUnit.module("BitConverter");
+            QUnit.test("BitConverter - ValueArgumentNull", Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests.valueArgumentNull);
+            QUnit.test("BitConverter - StartIndexBeyondLength", Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests.startIndexBeyondLength);
+            QUnit.test("BitConverter - StartIndexPlusNeededLengthTooLong", Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests.startIndexPlusNeededLengthTooLong);
+            QUnit.test("BitConverter - RoundtripDoubleToInt64Bits", Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests.roundtripDoubleToInt64Bits);
+            QUnit.test("BitConverter - Int64BitsToDouble", Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests.int64BitsToDouble);
+            QUnit.test("BitConverter - DoubleToInt64Bits", Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests.doubleToInt64Bits);
+            QUnit.test("BitConverter - RoundtripBoolean", Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests.roundtripBoolean);
+            QUnit.test("BitConverter - RoundtripChar", Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests.roundtripChar);
+            QUnit.test("BitConverter - RoundtripDouble", Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests.roundtripDouble);
+            QUnit.test("BitConverter - RoundtripSingle", Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests.roundtripSingle);
+            QUnit.test("BitConverter - RoundtripInt16", Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests.roundtripInt16);
+            QUnit.test("BitConverter - RoundtripInt32", Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests.roundtripInt32);
+            QUnit.test("BitConverter - RoundtripInt64", Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests.roundtripInt64);
+            QUnit.test("BitConverter - RoundtripUInt16", Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests.roundtripUInt16);
+            QUnit.test("BitConverter - RoundtripUInt32", Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests.roundtripUInt32);
+            QUnit.test("BitConverter - RoundtripUInt64", Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests.roundtripUInt64);
+            QUnit.test("BitConverter - RoundtripString", Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests.roundtripString);
+            QUnit.test("BitConverter - ToString_ByteArray_Long", Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests.toString_ByteArray_Long);
             QUnit.module("Bridge Console");
             QUnit.test("TestLogMessageObject", Bridge.Test.Runtime.BridgeClientTestRunner.BridgeConsoleTests.testLogMessageObject);
             QUnit.test("TestLogMessageString", Bridge.Test.Runtime.BridgeClientTestRunner.BridgeConsoleTests.testLogMessageString);
@@ -4003,6 +4022,149 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                     project: "Batch1",
                     className: "Bridge.ClientTest.Batch1.Reflection.AttributeTests",
                     file: "Batch1\\Reflection\\AttributeTests.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BitConverterTests)],
+        statics: {
+            valueArgumentNull: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BitConverterTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "ValueArgumentNull()",
+                    line: "22"
+                } ));
+                Bridge.ClientTest.BitConverterTests.valueArgumentNull();
+            },
+            startIndexBeyondLength: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BitConverterTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "StartIndexBeyondLength()",
+                    line: "40"
+                } ));
+                Bridge.ClientTest.BitConverterTests.startIndexBeyondLength();
+            },
+            startIndexPlusNeededLengthTooLong: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BitConverterTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "StartIndexPlusNeededLengthTooLong()",
+                    line: "94"
+                } ));
+                Bridge.ClientTest.BitConverterTests.startIndexPlusNeededLengthTooLong();
+            },
+            roundtripDoubleToInt64Bits: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BitConverterTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "RoundtripDoubleToInt64Bits()",
+                    line: "110"
+                } ));
+                Bridge.ClientTest.BitConverterTests.roundtripDoubleToInt64Bits();
+            },
+            int64BitsToDouble: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BitConverterTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "Int64BitsToDouble()",
+                    line: "122"
+                } ));
+                Bridge.ClientTest.BitConverterTests.int64BitsToDouble();
+            },
+            doubleToInt64Bits: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BitConverterTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "DoubleToInt64Bits()",
+                    line: "134"
+                } ));
+                Bridge.ClientTest.BitConverterTests.doubleToInt64Bits();
+            },
+            roundtripBoolean: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BitConverterTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "RoundtripBoolean()",
+                    line: "146"
+                } ));
+                Bridge.ClientTest.BitConverterTests.roundtripBoolean();
+            },
+            roundtripChar: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BitConverterTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "RoundtripChar()",
+                    line: "160"
+                } ));
+                Bridge.ClientTest.BitConverterTests.roundtripChar();
+            },
+            roundtripDouble: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BitConverterTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "RoundtripDouble()",
+                    line: "168"
+                } ));
+                Bridge.ClientTest.BitConverterTests.roundtripDouble();
+            },
+            roundtripSingle: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BitConverterTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "RoundtripSingle()",
+                    line: "184"
+                } ));
+                Bridge.ClientTest.BitConverterTests.roundtripSingle();
+            },
+            roundtripInt16: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BitConverterTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "RoundtripInt16()",
+                    line: "193"
+                } ));
+                Bridge.ClientTest.BitConverterTests.roundtripInt16();
+            },
+            roundtripInt32: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BitConverterTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "RoundtripInt32()",
+                    line: "209"
+                } ));
+                Bridge.ClientTest.BitConverterTests.roundtripInt32();
+            },
+            roundtripInt64: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BitConverterTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "RoundtripInt64()",
+                    line: "225"
+                } ));
+                Bridge.ClientTest.BitConverterTests.roundtripInt64();
+            },
+            roundtripUInt16: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BitConverterTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "RoundtripUInt16()",
+                    line: "241"
+                } ));
+                Bridge.ClientTest.BitConverterTests.roundtripUInt16();
+            },
+            roundtripUInt32: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BitConverterTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "RoundtripUInt32()",
+                    line: "257"
+                } ));
+                Bridge.ClientTest.BitConverterTests.roundtripUInt32();
+            },
+            roundtripUInt64: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BitConverterTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "RoundtripUInt64()",
+                    line: "273"
+                } ));
+                Bridge.ClientTest.BitConverterTests.roundtripUInt64();
+            },
+            roundtripString: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BitConverterTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "RoundtripString()",
+                    line: "289"
+                } ));
+                Bridge.ClientTest.BitConverterTests.roundtripString();
+            },
+            toString_ByteArray_Long: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BitConverterTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BitConverterTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "ToString_ByteArray_Long()",
+                    line: "302"
+                } ));
+                Bridge.ClientTest.BitConverterTests.toString_ByteArray_Long();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
+                    project: "Batch1",
+                    className: "Bridge.ClientTest.BitConverterTests",
+                    file: "Batch1\\BitConverterTests.cs"
                 } );
             }
             return this.context;

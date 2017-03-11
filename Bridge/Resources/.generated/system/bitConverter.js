@@ -1,7 +1,12 @@
     Bridge.define("System.BitConverter", {
         statics: {
-            isLittleEndian: true,
+            isLittleEndian: false,
             arg_ArrayPlusOffTooSmall: "Destination array is not long enough to copy all the items in the collection. Check array index and length.",
+            config: {
+                init: function () {
+                    this.isLittleEndian = System.BitConverter.getIsLittleEndian();
+                }
+            },
             getBytes: function (value) {
                 return value ? System.Array.init([1], System.Byte) : System.Array.init([0], System.Byte);
             },
@@ -9,50 +14,52 @@
                 return System.BitConverter.getBytes$3(Bridge.Int.sxs(value & 65535));
             },
             getBytes$3: function (value) {
-                return System.Array.init([(value & 255), ((value >> 8) & 255)], System.Byte);
+                var view = System.BitConverter.view(2);
+                view.setInt16(0, value);
+
+                return System.BitConverter.getViewBytes(view);
             },
             getBytes$4: function (value) {
-                return System.Array.init([(value & 255), ((value >> 8) & 255), ((value >> 16) & 255), ((value >> 24) & 255)], System.Byte);
+                var view = System.BitConverter.view(4);
+                view.setInt32(0, value);
+
+                return System.BitConverter.getViewBytes(view);
             },
             getBytes$5: function (value) {
-                return System.Array.init([(value.shr(0 * 8).value.low & 255), (value.shr(1 * 8).value.low & 255), (value.shr(2 * 8).value.low & 255), (value.shr(3 * 8).value.low & 255), (value.shr(4 * 8).value.low & 255), (value.shr(5 * 8).value.low & 255), (value.shr(6 * 8).value.low & 255), (value.shr(7 * 8).value.low & 255)], System.Byte);
+                var view = System.BitConverter.getView(value);
+
+                return System.BitConverter.getViewBytes(view);
             },
             getBytes$7: function (value) {
-                return System.Array.init([(value & 255), ((value >> 8) & 255)], System.Byte);
+                var view = System.BitConverter.view(2);
+                view.setUint16(0, value);
+
+                return System.BitConverter.getViewBytes(view);
             },
             getBytes$8: function (value) {
-                return System.Array.init([(value & 255), ((value >>> 8) & 255), ((value >>> 16) & 255), ((value >>> 24) & 255)], System.Byte);
+                var view = System.BitConverter.view(4);
+                view.setUint32(0, value);
+
+                return System.BitConverter.getViewBytes(view);
             },
             getBytes$9: function (value) {
-                return System.Array.init([(value.shr(0 * 8).value.low & 255), (value.shr(1 * 8).value.low & 255), (value.shr(2 * 8).value.low & 255), (value.shr(3 * 8).value.low & 255), (value.shr(4 * 8).value.low & 255), (value.shr(5 * 8).value.low & 255), (value.shr(6 * 8).value.low & 255), (value.shr(7 * 8).value.low & 255)], System.Byte);
+                var view = System.BitConverter.getView(System.Int64.clip64(value));
+
+                return System.BitConverter.getViewBytes(view);
             },
             getBytes$6: function (value) {
-                var buffer = new ArrayBuffer(8);
-                var view = new DataView(buffer);
+                var view = System.BitConverter.view(4);
                 view.setFloat32(0, value);
 
-                return System.Array.init([view.getUint8(3), view.getUint8(2), view.getUint8(1), view.getUint8(0)], System.Byte);
+                return System.BitConverter.getViewBytes(view);
             },
             getBytes$2: function (value) {
-                var buffer = new ArrayBuffer(8);
-                var view = new DataView(buffer);
+                var view = System.BitConverter.view(8);
                 view.setFloat64(0, value);
 
-                return System.Array.init([view.getUint8(7), view.getUint8(6), view.getUint8(5), view.getUint8(4), view.getUint8(3), view.getUint8(2), view.getUint8(1), view.getUint8(0)], System.Byte);
+                return System.BitConverter.getViewBytes(view);
             },
             toChar: function (value, startIndex) {
-                if (value == null) {
-                    throw new System.ArgumentNullException("null");
-                }
-
-                if (System.Int64((startIndex >>> 0)).gte(System.Int64(value.length))) {
-                    throw new System.ArgumentOutOfRangeException("startIndex");
-                }
-
-                if (startIndex > ((value.length - 2) | 0)) {
-                    throw new System.ArgumentException(System.BitConverter.arg_ArrayPlusOffTooSmall);
-                }
-
                 return ((System.BitConverter.toInt16(value, startIndex)) & 65535);
             },
             toInt16: function (value, startIndex) {
@@ -68,25 +75,11 @@
                     throw new System.ArgumentException(System.BitConverter.arg_ArrayPlusOffTooSmall);
                 }
 
-                //if (startIndex % 2 == 0)
-                //{
-                //    // data is aligned
-                //    return *((short*)pbyte);
-                //}
-                //else
-                //{
-                //    if (IsLittleEndian)
-                //    {
-                //        return (short)((*pbyte) | (*(pbyte + 1) << 8));
-                //    }
-                //    else
-                //    {
-                //        return (short)((*pbyte << 8) | (*(pbyte + 1)));
-                //    }
-                //}
+                var view = System.BitConverter.view(2);
 
+                System.BitConverter.setViewBytes(view, value, -1, startIndex);
 
-                return ((value[startIndex]) + ((value[(startIndex + 1)] << 8)));
+                return view.getInt16(0);
             },
             toInt32: function (value, startIndex) {
                 if (value == null) {
@@ -101,23 +94,11 @@
                     throw new System.ArgumentException(System.BitConverter.arg_ArrayPlusOffTooSmall);
                 }
 
-                //if (startIndex % 4 == 0)
-                //{ // data is aligned
-                //    return *((int*)pbyte);
-                //}
-                //else
-                //{
-                //    if (IsLittleEndian)
-                //    {
-                //        return (*pbyte) | (*(pbyte + 1) << 8) | (*(pbyte + 2) << 16) | (*(pbyte + 3) << 24);
-                //    }
-                //    else
-                //    {
-                //        return (*pbyte << 24) | (*(pbyte + 1) << 16) | (*(pbyte + 2) << 8) | (*(pbyte + 3));
-                //    }
-                //}
+                var view = System.BitConverter.view(4);
 
-                return (value[startIndex] + (value[(startIndex + 1)] << 8) + (value[(startIndex + 2)] << 16) + (value[(startIndex + 3)] << 24));
+                System.BitConverter.setViewBytes(view, value, -1, startIndex);
+
+                return view.getInt32(0);
             },
             toInt64: function (value, startIndex) {
                 if (value == null) {
@@ -132,74 +113,26 @@
                     throw new System.ArgumentException(System.BitConverter.arg_ArrayPlusOffTooSmall);
                 }
 
-                //if (startIndex % 8 == 0)
-                //{ // data is aligned
-                //    return *((long*)pbyte);
-                //}
-                //else
-                //{
-                //    if (IsLittleEndian)
-                //    {
-                //        int i1 = (*pbyte) | (*(pbyte + 1) << 8) | (*(pbyte + 2) << 16) | (*(pbyte + 3) << 24);
-                //        int i2 = (*(pbyte + 4)) | (*(pbyte + 5) << 8) | (*(pbyte + 6) << 16) | (*(pbyte + 7) << 24);
-                //        return (uint)i1 | ((long)i2 << 32);
-                //    }
-                //    else
-                //    {
-                //        int i1 = (*pbyte << 24) | (*(pbyte + 1) << 16) | (*(pbyte + 2) << 8) | (*(pbyte + 3));
-                //        int i2 = (*(pbyte + 4) << 24) | (*(pbyte + 5) << 16) | (*(pbyte + 6) << 8) | (*(pbyte + 7));
-                //        return (uint)i2 | ((long)i1 << 32);
-                //    }
-                //}
 
-                return System.Int64(value[startIndex]).add((System.Int64(value[(startIndex + 1)]).shl(8))).add((System.Int64(value[(startIndex + 2)]).shl(16))).add((System.Int64(value[(startIndex + 3)]).shl(24))).add((System.Int64(value[(startIndex + 4)]).shl(32))).add((System.Int64(value[(startIndex + 5)]).shl(40))).add((System.Int64(value[(startIndex + 6)]).shl(48))).add((System.Int64(value[(startIndex + 7)]).shl(56)));
+                var low = System.BitConverter.toInt32(value, startIndex);
+                var high = System.BitConverter.toInt32(value, ((startIndex + 4) | 0));
+
+                if (System.BitConverter.isLittleEndian) {
+                    return System.Int64([low, high]);
+                }
+
+                return System.Int64([high, low]);
             },
             toUInt16: function (value, startIndex) {
-                if (value == null) {
-                    throw new System.ArgumentNullException("null");
-                }
-
-                if (System.Int64((startIndex >>> 0)).gte(System.Int64(value.length))) {
-                    throw new System.ArgumentOutOfRangeException("startIndex");
-                }
-
-                if (startIndex > ((value.length - 2) | 0)) {
-                    throw new System.ArgumentException(System.BitConverter.arg_ArrayPlusOffTooSmall);
-                }
-
-                //return (ushort)ToInt16(value, startIndex);
-                return ((value[startIndex]) + ((value[(startIndex + 1)] << 8)));
+                return ((System.BitConverter.toInt16(value, startIndex)) & 65535);
             },
             toUInt32: function (value, startIndex) {
-                if (value == null) {
-                    throw new System.ArgumentNullException("null");
-                }
-
-                if (System.Int64((startIndex >>> 0)).gte(System.Int64(value.length))) {
-                    throw new System.ArgumentOutOfRangeException("startIndex");
-                }
-
-                if (startIndex > ((value.length - 4) | 0)) {
-                    throw new System.ArgumentException(System.BitConverter.arg_ArrayPlusOffTooSmall);
-                }
-
-                //return (uint)ToInt32(value, startIndex);
-                return (value[startIndex] + (value[(startIndex + 1)] << 8) + (value[(startIndex + 2)] << 16) + (value[(startIndex + 3)] << 24));
+                return ((System.BitConverter.toInt32(value, startIndex)) >>> 0);
             },
             toUInt64: function (value, startIndex) {
-                if (value == null) {
-                    throw new System.ArgumentNullException("null");
-                }
+                var l = System.BitConverter.toInt64(value, startIndex);
 
-                if (System.Int64((startIndex >>> 0)).gte(System.Int64(value.length))) {
-                    throw new System.ArgumentOutOfRangeException("startIndex");
-                }
-
-                if (startIndex > ((value.length - 8) | 0)) {
-                    throw new System.ArgumentException(System.BitConverter.arg_ArrayPlusOffTooSmall);
-                }
-
-                return System.UInt64(value[startIndex]).add((System.UInt64(value[(startIndex + 1)]).shl(8))).add((System.UInt64(value[(startIndex + 2)]).shl(16))).add((System.UInt64(value[(startIndex + 3)]).shl(24))).add((System.UInt64(value[(startIndex + 4)]).shl(32))).add((System.UInt64(value[(startIndex + 5)]).shl(40))).add((System.UInt64(value[(startIndex + 6)]).shl(48))).add((System.UInt64(value[(startIndex + 7)]).shl(56)));
+                return System.UInt64([l.value.low, l.value.high]);
             },
             toSingle: function (value, startIndex) {
                 if (value == null) {
@@ -214,12 +147,9 @@
                     throw new System.ArgumentException(System.BitConverter.arg_ArrayPlusOffTooSmall);
                 }
 
-                var buffer = new ArrayBuffer(4);
-                var view = new DataView(buffer);
-                view.setUint8(0, value[((startIndex + 3) | 0)]);
-                view.setUint8(1, value[((startIndex + 2) | 0)]);
-                view.setUint8(2, value[((startIndex + 1) | 0)]);
-                view.setUint8(3, value[((startIndex + 0) | 0)]);
+                var view = System.BitConverter.view(4);
+
+                System.BitConverter.setViewBytes(view, value, -1, startIndex);
 
                 return view.getFloat32(0);
             },
@@ -236,25 +166,11 @@
                     throw new System.ArgumentException(System.BitConverter.arg_ArrayPlusOffTooSmall);
                 }
 
-                var buffer = new ArrayBuffer(8);
-                var view = new DataView(buffer);
-                view.setUint8(0, value[((startIndex + 7) | 0)]);
-                view.setUint8(1, value[((startIndex + 6) | 0)]);
-                view.setUint8(2, value[((startIndex + 5) | 0)]);
-                view.setUint8(3, value[((startIndex + 4) | 0)]);
-                view.setUint8(4, value[((startIndex + 3) | 0)]);
-                view.setUint8(5, value[((startIndex + 2) | 0)]);
-                view.setUint8(6, value[((startIndex + 1) | 0)]);
-                view.setUint8(7, value[((startIndex + 0) | 0)]);
+                var view = System.BitConverter.view(8);
+
+                System.BitConverter.setViewBytes(view, value, -1, startIndex);
 
                 return view.getFloat64(0);
-            },
-            getHexValue: function (i) {
-                if (i < 10) {
-                    return ((((i + 48) | 0)) & 65535);
-                }
-
-                return ((((((i - 10) | 0) + 65) | 0)) & 65535);
             },
             toString$2: function (value, startIndex, length) {
                 if (value == null) {
@@ -327,20 +243,86 @@
                 return (value[startIndex] === 0) ? false : true;
             },
             doubleToInt64Bits: function (value) {
-                var buf = new ArrayBuffer(8);
-                (new Float64Array(buf))[0] = value;
-                var uintArray = new Uint32Array(buf);
+                var view = System.BitConverter.view(8);
+                view.setFloat64(0, value);
 
-                return System.Int64([uintArray[0], uintArray[1]]);
+                return System.Int64([view.getInt32(4), view.getInt32(0)]);
             },
             int64BitsToDouble: function (value) {
-                var buffer = new ArrayBuffer(8);
-                var int32View = new Int32Array(buffer);
-                var doubleView = new Float64Array(buffer);
-                int32View[0] = value.value.low;
-                int32View[1] = value.value.high;
+                var view = System.BitConverter.getView(value);
 
-                return doubleView[0];
+                return view.getFloat64(0);
+            },
+            getHexValue: function (i) {
+                if (i < 10) {
+                    return ((((i + 48) | 0)) & 65535);
+                }
+
+                return ((((((i - 10) | 0) + 65) | 0)) & 65535);
+            },
+            getViewBytes: function (view, count, startIndex) {
+                if (count === void 0) { count = -1; }
+                if (startIndex === void 0) { startIndex = 0; }
+                if (count === -1) {
+                    count = view.byteLength;
+                }
+
+                var r = System.Array.init(count, 0, System.Byte);
+
+                if (System.BitConverter.isLittleEndian) {
+                    for (var i = (count - 1) | 0; i >= 0; i = (i - 1) | 0) {
+                        r[i] = view.getUint8(Bridge.identity(startIndex, (startIndex = (startIndex + 1) | 0)));
+                    }
+                } else {
+                    for (var i1 = 0; i1 < count; i1 = (i1 + 1) | 0) {
+                        r[i1] = view.getUint8(Bridge.identity(startIndex, (startIndex = (startIndex + 1) | 0)));
+                    }
+                }
+
+                return r;
+            },
+            setViewBytes: function (view, value, count, startIndex) {
+                if (count === void 0) { count = -1; }
+                if (startIndex === void 0) { startIndex = 0; }
+                if (count === -1) {
+                    count = view.byteLength;
+                }
+
+                if (System.BitConverter.isLittleEndian) {
+                    for (var i = (count - 1) | 0; i >= 0; i = (i - 1) | 0) {
+                        view.setUint8(i, value[Bridge.identity(startIndex, (startIndex = (startIndex + 1) | 0))]);
+                    }
+                } else {
+                    for (var i1 = 0; i1 < count; i1 = (i1 + 1) | 0) {
+                        view.setUint8(i1, value[Bridge.identity(startIndex, (startIndex = (startIndex + 1) | 0))]);
+                    }
+                }
+            },
+            view: function (length) {
+                var buffer = new ArrayBuffer(length);
+                var view = new DataView(buffer);
+
+                return view;
+            },
+            getView: function (value) {
+                var view = System.BitConverter.view(8);
+
+                view.setInt32(4, value.value.low);
+                view.setInt32(0, value.value.high);
+
+                return view;
+            },
+            getIsLittleEndian: function () {
+                var view = System.BitConverter.view(2);
+
+                view.setUint8(0, 170);
+                view.setUint8(1, 187);
+
+                if (view.getUint16(0) === 48042) {
+                    return true;
+                }
+
+                return false;
             }
         }
     });
