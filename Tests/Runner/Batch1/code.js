@@ -4336,8 +4336,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.ClientTest.BitConverterTests.verifyRoundtrip(System.Char, System.BitConverter.getBytes$1, System.BitConverter.toChar, input, expected);
             },
             roundtripDouble: function () {
-                var input = System.Array.init([System.Double.max, 123456.3234, 0.0, -123456.3234, System.Double.min], System.Double);
-                var expected = System.Array.init([System.Array.init([255, 255, 255, 255, 255, 255, 239, 127], System.Byte), System.Array.init([120, 122, 165, 44, 5, 36, 254, 64], System.Byte), System.Array.init([0, 0, 0, 0, 0, 0, 0, 0], System.Byte), System.Array.init([120, 122, 165, 44, 5, 36, 254, 192], System.Byte), System.Array.init([255, 255, 255, 255, 255, 255, 239, 255], System.Byte)], System.Array.type(System.Byte));
+                var input = System.Array.init([System.Double.max, 123456.3234, 0.0, -123456.3234, System.Double.min, Number.NaN, 3.14932264628586E-319], System.Double);
+                var expected = System.Array.init([System.Array.init([255, 255, 255, 255, 255, 255, 239, 127], System.Byte), System.Array.init([120, 122, 165, 44, 5, 36, 254, 64], System.Byte), System.Array.init([0, 0, 0, 0, 0, 0, 0, 0], System.Byte), System.Array.init([120, 122, 165, 44, 5, 36, 254, 192], System.Byte), System.Array.init([255, 255, 255, 255, 255, 255, 239, 255], System.Byte), System.Array.init([0, 0, 0, 0, 0, 0, 248, 255], System.Byte), System.Array.init([255, 248, 0, 0, 0, 0, 0, 0], System.Byte)], System.Array.type(System.Byte));
 
                 Bridge.ClientTest.BitConverterTests.verifyRoundtrip$1(System.Double, System.BitConverter.getBytes$2, System.BitConverter.toDouble, input, expected);
             },

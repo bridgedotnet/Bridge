@@ -132,6 +132,18 @@
         /// <returns>An array of bytes with length 8.</returns>
         public static byte[] GetBytes(double value)
         {
+            if (double.IsNaN(value))
+            {
+                if (IsLittleEndian)
+                {
+                    return new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF8, 0xFF };
+                }
+                else
+                {
+                    return new byte[] { 0xFF, 0xF8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+                }
+            }
+
             var view = View(8);
             view.SetFloat64(0, value);
 
@@ -564,7 +576,7 @@
             view.SetUint8(0, 0xAA);
             view.SetUint8(1, 0xBB);
 
-            if (view.GetUint16(0) == 0xBBAA)
+            if (view.GetUint16(0) == 0xAABB)
             {
                 return true;
             }

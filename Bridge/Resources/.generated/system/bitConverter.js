@@ -54,6 +54,14 @@
                 return System.BitConverter.getViewBytes(view);
             },
             getBytes$2: function (value) {
+                if (isNaN(value)) {
+                    if (System.BitConverter.isLittleEndian) {
+                        return System.Array.init([0, 0, 0, 0, 0, 0, 248, 255], System.Byte);
+                    } else {
+                        return System.Array.init([255, 248, 0, 0, 0, 0, 0, 0], System.Byte);
+                    }
+                }
+
                 var view = System.BitConverter.view(8);
                 view.setFloat64(0, value);
 
@@ -318,7 +326,7 @@
                 view.setUint8(0, 170);
                 view.setUint8(1, 187);
 
-                if (view.getUint16(0) === 48042) {
+                if (view.getUint16(0) === 43707) {
                     return true;
                 }
 
