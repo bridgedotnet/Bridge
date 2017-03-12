@@ -169,20 +169,7 @@
         /// <returns>A 16-bit signed integer formed by two bytes beginning at startIndex.</returns>
         public static short ToInt16(byte[] value, int startIndex)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException("null");
-            }
-
-            if ((uint)startIndex >= value.Length)
-            {
-                throw new ArgumentOutOfRangeException("startIndex");
-            }
-
-            if (startIndex > value.Length - 2)
-            {
-                throw new ArgumentException(Arg_ArrayPlusOffTooSmall);
-            }
+            CheckArguments(value, startIndex, 2);
 
             var view = View(2);
 
@@ -199,20 +186,7 @@
         /// <returns>A 32-bit signed integer formed by four bytes beginning at startIndex.</returns>
         public static int ToInt32(byte[] value, int startIndex)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException("null");
-            }
-
-            if ((uint)startIndex >= value.Length)
-            {
-                throw new ArgumentOutOfRangeException("startIndex");
-            }
-
-            if (startIndex > value.Length - 4)
-            {
-                throw new ArgumentException(Arg_ArrayPlusOffTooSmall);
-            }
+            CheckArguments(value, startIndex, 4);
 
             var view = View(4);
 
@@ -229,21 +203,7 @@
         /// <returns>A 64-bit signed integer formed by eight bytes beginning at startIndex.</returns>
         public static long ToInt64(byte[] value, int startIndex)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException("null");
-            }
-
-            if ((uint)startIndex >= value.Length)
-            {
-                throw new ArgumentOutOfRangeException("startIndex");
-            }
-
-            if (startIndex > value.Length - 8)
-            {
-                throw new ArgumentException(Arg_ArrayPlusOffTooSmall);
-            }
-
+            CheckArguments(value, startIndex, 8);
 
             var low = ToInt32(value, startIndex);
             var high = ToInt32(value, startIndex + 4);
@@ -300,20 +260,7 @@
         /// <returns>A single-precision floating point number formed by four bytes beginning at startIndex.</returns>
         public static float ToSingle(byte[] value, int startIndex)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException("null");
-            }
-
-            if ((uint)startIndex >= value.Length)
-            {
-                throw new ArgumentOutOfRangeException("startIndex");
-            }
-
-            if (startIndex > value.Length - 4)
-            {
-                throw new ArgumentException(Arg_ArrayPlusOffTooSmall);
-            }
+            CheckArguments(value, startIndex, 4);
 
             var view = View(4);
 
@@ -330,20 +277,7 @@
         /// <returns>A double precision floating point number formed by eight bytes beginning at startIndex.</returns>
         public static double ToDouble(byte[] value, int startIndex)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException("value");
-            }
-
-            if ((uint)startIndex >= value.Length)
-            {
-                throw new ArgumentOutOfRangeException("startIndex");
-            }
-
-            if (startIndex > value.Length - 8)
-            {
-                throw new ArgumentException(Arg_ArrayPlusOffTooSmall);
-            }
+            CheckArguments(value, startIndex, 8);
 
             var view = View(8);
 
@@ -448,20 +382,7 @@
         /// <returns>true if the byte at startIndex in value is nonzero; otherwise, false.</returns>
         public static bool ToBoolean(byte[] value, int startIndex)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException("value");
-            }
-
-            if (startIndex < 0)
-            {
-                throw new ArgumentOutOfRangeException("startIndex");
-            }
-
-            if (startIndex > value.Length - 1)
-            {
-                throw new ArgumentOutOfRangeException("startIndex");
-            }
+            CheckArguments(value, startIndex, 1);
 
             return (value[startIndex] == 0) ? false : true;
         }
@@ -582,6 +503,24 @@
             }
 
             return false;
+        }
+
+        private static void CheckArguments(byte[] value, int startIndex, int size)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException("null");
+            }
+
+            if ((uint)startIndex >= value.Length)
+            {
+                throw new ArgumentOutOfRangeException("startIndex");
+            }
+
+            if (startIndex > value.Length - size)
+            {
+                throw new ArgumentException(Arg_ArrayPlusOffTooSmall);
+            }
         }
 
         [Template("{0}.value.high")]

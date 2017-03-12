@@ -25061,17 +25061,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 return ((System.BitConverter.toInt16(value, startIndex)) & 65535);
             },
             toInt16: function (value, startIndex) {
-                if (value == null) {
-                    throw new System.ArgumentNullException("null");
-                }
-
-                if (System.Int64((startIndex >>> 0)).gte(System.Int64(value.length))) {
-                    throw new System.ArgumentOutOfRangeException("startIndex");
-                }
-
-                if (startIndex > ((value.length - 2) | 0)) {
-                    throw new System.ArgumentException(System.BitConverter.arg_ArrayPlusOffTooSmall);
-                }
+                System.BitConverter.checkArguments(value, startIndex, 2);
 
                 var view = System.BitConverter.view(2);
 
@@ -25080,17 +25070,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 return view.getInt16(0);
             },
             toInt32: function (value, startIndex) {
-                if (value == null) {
-                    throw new System.ArgumentNullException("null");
-                }
-
-                if (System.Int64((startIndex >>> 0)).gte(System.Int64(value.length))) {
-                    throw new System.ArgumentOutOfRangeException("startIndex");
-                }
-
-                if (startIndex > ((value.length - 4) | 0)) {
-                    throw new System.ArgumentException(System.BitConverter.arg_ArrayPlusOffTooSmall);
-                }
+                System.BitConverter.checkArguments(value, startIndex, 4);
 
                 var view = System.BitConverter.view(4);
 
@@ -25099,18 +25079,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 return view.getInt32(0);
             },
             toInt64: function (value, startIndex) {
-                if (value == null) {
-                    throw new System.ArgumentNullException("null");
-                }
-
-                if (System.Int64((startIndex >>> 0)).gte(System.Int64(value.length))) {
-                    throw new System.ArgumentOutOfRangeException("startIndex");
-                }
-
-                if (startIndex > ((value.length - 8) | 0)) {
-                    throw new System.ArgumentException(System.BitConverter.arg_ArrayPlusOffTooSmall);
-                }
-
+                System.BitConverter.checkArguments(value, startIndex, 8);
 
                 var low = System.BitConverter.toInt32(value, startIndex);
                 var high = System.BitConverter.toInt32(value, ((startIndex + 4) | 0));
@@ -25133,17 +25102,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 return System.UInt64([l.value.low, l.value.high]);
             },
             toSingle: function (value, startIndex) {
-                if (value == null) {
-                    throw new System.ArgumentNullException("null");
-                }
-
-                if (System.Int64((startIndex >>> 0)).gte(System.Int64(value.length))) {
-                    throw new System.ArgumentOutOfRangeException("startIndex");
-                }
-
-                if (startIndex > ((value.length - 4) | 0)) {
-                    throw new System.ArgumentException(System.BitConverter.arg_ArrayPlusOffTooSmall);
-                }
+                System.BitConverter.checkArguments(value, startIndex, 4);
 
                 var view = System.BitConverter.view(4);
 
@@ -25152,17 +25111,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 return view.getFloat32(0);
             },
             toDouble: function (value, startIndex) {
-                if (value == null) {
-                    throw new System.ArgumentNullException("value");
-                }
-
-                if (System.Int64((startIndex >>> 0)).gte(System.Int64(value.length))) {
-                    throw new System.ArgumentOutOfRangeException("startIndex");
-                }
-
-                if (startIndex > ((value.length - 8) | 0)) {
-                    throw new System.ArgumentException(System.BitConverter.arg_ArrayPlusOffTooSmall);
-                }
+                System.BitConverter.checkArguments(value, startIndex, 8);
 
                 var view = System.BitConverter.view(8);
 
@@ -25226,17 +25175,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 return System.BitConverter.toString$2(value, startIndex, ((value.length - startIndex) | 0));
             },
             toBoolean: function (value, startIndex) {
-                if (value == null) {
-                    throw new System.ArgumentNullException("value");
-                }
-
-                if (startIndex < 0) {
-                    throw new System.ArgumentOutOfRangeException("startIndex");
-                }
-
-                if (startIndex > ((value.length - 1) | 0)) {
-                    throw new System.ArgumentOutOfRangeException("startIndex");
-                }
+                System.BitConverter.checkArguments(value, startIndex, 1);
 
                 return (value[startIndex] === 0) ? false : true;
             },
@@ -25321,6 +25260,19 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 }
 
                 return false;
+            },
+            checkArguments: function (value, startIndex, size) {
+                if (value == null) {
+                    throw new System.ArgumentNullException("null");
+                }
+
+                if (System.Int64((startIndex >>> 0)).gte(System.Int64(value.length))) {
+                    throw new System.ArgumentOutOfRangeException("startIndex");
+                }
+
+                if (startIndex > ((value.length - size) | 0)) {
+                    throw new System.ArgumentException(System.BitConverter.arg_ArrayPlusOffTooSmall);
+                }
             }
         }
     });
