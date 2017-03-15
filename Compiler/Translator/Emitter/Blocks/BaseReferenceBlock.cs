@@ -31,6 +31,8 @@ namespace Bridge.Translator
         protected override void EmitConversionExpression()
         {
             var proto = false;
+            var isProperty = false;
+            IMember member = null;
             if (this.BaseReferenceExpression.Parent != null)
             {
                 var rr = this.Emitter.Resolver.ResolveNode(this.BaseReferenceExpression.Parent, this.Emitter) as MemberResolveResult;
@@ -58,20 +60,35 @@ namespace Bridge.Translator
                             }
                         }
                     }
+
+                    var iproperty = rr.Member as IProperty;
+                    if (iproperty != null && !iproperty.IsIndexer)
+                    {
+                        isProperty = true;
+                        member = rr.Member;
+                    }
                 }
             }
 
             if (proto)
             {
-                var baseType = this.Emitter.GetBaseTypeDefinition();
-
-                if (this.Emitter.TypeInfo.GetBaseTypes(this.Emitter).Any())
+                if (isProperty)
                 {
-                    this.Write(BridgeTypes.ToJsName(this.Emitter.TypeInfo.GetBaseClass(this.Emitter), this.Emitter), "." + JS.Fields.PROTOTYPE);
+                    var name = OverloadsCollection.Create(this.Emitter, member).GetOverloadName(true);
+                    this.Write("Bridge.ensureBaseProperty(this, " + this.Emitter.ToJavaScript(name) + ")");
                 }
                 else
                 {
-                    this.Write(BridgeTypes.ToJsName(baseType, this.Emitter), "." + JS.Fields.PROTOTYPE);
+                    var baseType = this.Emitter.GetBaseTypeDefinition();
+
+                    if (this.Emitter.TypeInfo.GetBaseTypes(this.Emitter).Any())
+                    {
+                        this.Write(BridgeTypes.ToJsName(this.Emitter.TypeInfo.GetBaseClass(this.Emitter), this.Emitter), "." + JS.Fields.PROTOTYPE);
+                    }
+                    else
+                    {
+                        this.Write(BridgeTypes.ToJsName(baseType, this.Emitter), "." + JS.Fields.PROTOTYPE);
+                    }
                 }
             }
             else

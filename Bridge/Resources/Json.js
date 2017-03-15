@@ -109,7 +109,7 @@
                         enm =  Bridge.getEnumerator(obj);
 
                     while (enm.moveNext()) {
-                        var entr = enm.getCurrent();
+                        var entr = enm.Current;
                         dict[Bridge.Json.serialize(entr.key, settings, true, typeKey)] = Bridge.Json.serialize(entr.value, settings, true, typeValue);
                     }
 
@@ -396,7 +396,7 @@
                                 Bridge.Reflection.midel(properties[i].s, o)(Bridge.Json.deserialize(value, properties[i].rt, settings, true));
                             }
                             else if (type.$kind === "anonymous") {
-                                o[properties[i].n.charAt(0).toLowerCase() + properties[i].n.substr(1)] = Bridge.Json.deserialize(value, properties[i].rt, settings, true);
+                                o[properties[i].n] = Bridge.Json.deserialize(value, properties[i].rt, settings, true);
                             }
                         }
                     }

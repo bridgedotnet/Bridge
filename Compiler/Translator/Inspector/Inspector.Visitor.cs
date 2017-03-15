@@ -486,36 +486,11 @@ namespace Bridge.Translator
                 config.Alias.Add(new TypeConfigItem { Entity = propertyDeclaration });
             }
 
-            var isResolvedProperty = false;
-            MemberResolveResult resolvedProperty = null;
-
-            CheckFieldProperty(propertyDeclaration, ref isResolvedProperty, ref resolvedProperty);
-
-            if (!propertyDeclaration.Getter.IsNull
-                && !this.HasExternal(propertyDeclaration)
-                && !this.HasTemplate(propertyDeclaration.Getter)
-                && propertyDeclaration.Getter.Body.IsNull
-                && !this.HasScript(propertyDeclaration.Getter))
+            if (!this.HasExternal(propertyDeclaration)
+                && !this.HasTemplate(propertyDeclaration.Getter))
             {
                 Expression initializer = this.GetDefaultFieldInitializer(propertyDeclaration.ReturnType);
                 TypeConfigInfo info = isStatic ? this.CurrentType.StaticConfig : this.CurrentType.InstanceConfig;
-
-                if (!isResolvedProperty)
-                {
-                    resolvedProperty = Resolver.ResolveNode(propertyDeclaration, null) as MemberResolveResult;
-                    isResolvedProperty = true;
-                }
-
-                bool autoPropertyToField = false;
-                if (resolvedProperty != null && resolvedProperty.Member != null)
-                {
-                    autoPropertyToField = Helpers.IsFieldProperty(resolvedProperty.Member, AssemblyInfo);
-                }
-                else
-                {
-                    autoPropertyToField = AssemblyInfo.AutoPropertyToField;
-                }
-
                 var autoInitializer = info.AutoPropertyInitializers.FirstOrDefault(f => f.Name == key);
 
                 if (autoInitializer != null)
@@ -523,80 +498,13 @@ namespace Bridge.Translator
                     initializer = autoInitializer.Initializer;
                 }
 
-                if (!autoPropertyToField)
+                info.Properties.Add(new TypeConfigItem
                 {
-                    if (resolvedProperty != null && resolvedProperty.Member.ImplementedInterfaceMembers.Count > 0 && resolvedProperty.Member.ImplementedInterfaceMembers.Any(m => Helpers.IsFieldProperty(m, this.AssemblyInfo)))
-                    {
-                        throw new EmitterException(propertyDeclaration, string.Format(Bridge.Translator.Constants.Messages.Exceptions.FIELD_PROPERTY_NOT_MARKED, resolvedProperty.Member.ToString()));
-                    }
-
-                    info.Properties.Add(new TypeConfigItem
-                    {
-                        Name = key,
-                        Entity = propertyDeclaration,
-                        Initializer = initializer,
-                        IsPropertyInitializer = autoInitializer != null
-                    });
-                }
-                else
-                {
-                    if (resolvedProperty != null && resolvedProperty.Member.ImplementedInterfaceMembers.Count > 0 && !resolvedProperty.Member.ImplementedInterfaceMembers.All(m => Helpers.IsFieldProperty(m, this.AssemblyInfo)))
-                    {
-                        throw new EmitterException(propertyDeclaration, string.Format(Bridge.Translator.Constants.Messages.Exceptions.FIELD_PROPERTY_MARKED, resolvedProperty.Member.ToString()));
-                    }
-
-                    info.Fields.Add(new TypeConfigItem
-                    {
-                        Name = key,
-                        Entity = propertyDeclaration,
-                        Initializer = initializer,
-                        IsPropertyInitializer = autoInitializer != null
-                    });
-                }
-            }
-        }
-
-        private void CheckFieldProperty(PropertyDeclaration propertyDeclaration, ref bool isResolvedProperty, ref MemberResolveResult resolvedProperty)
-        {
-            if (this.HasExternal(propertyDeclaration) || this.CurrentType.IsObjectLiteral)
-            {
-                return;
-            }
-
-            var possiblyWrongGetter = !propertyDeclaration.Getter.IsNull
-                && !propertyDeclaration.Getter.Body.IsNull
-                && !this.HasTemplate(propertyDeclaration.Getter)
-                && !this.HasScript(propertyDeclaration.Getter);
-
-            var possiblyWrongSetter = !propertyDeclaration.Setter.IsNull
-                && !propertyDeclaration.Setter.Body.IsNull
-                && !this.HasTemplate(propertyDeclaration.Setter)
-                && !this.HasScript(propertyDeclaration.Setter);
-
-            if (possiblyWrongGetter || possiblyWrongSetter)
-            {
-                if (!isResolvedProperty)
-                {
-                    resolvedProperty = Resolver.ResolveNode(propertyDeclaration, null) as MemberResolveResult;
-                    isResolvedProperty = true;
-                }
-
-                if (resolvedProperty != null && resolvedProperty.Member != null)
-                {
-                    var isField = Helpers.IsFieldProperty(resolvedProperty.Member, AssemblyInfo);
-
-                    if (isField)
-                    {
-                        var message = string.Format(
-                            Bridge.Translator.Constants.Messages.Exceptions.FIELD_PROPERTY_MARKED_ADVISE,
-                            resolvedProperty.Member.ToString(),
-                            possiblyWrongGetter ? "getter" : string.Empty,
-                            possiblyWrongSetter ? (possiblyWrongGetter ? " and " : string.Empty) + "setter" : string.Empty
-                        );
-
-                        throw new EmitterException(propertyDeclaration, message);
-                    }
-                }
+                    Name = key,
+                    Entity = propertyDeclaration,
+                    Initializer = initializer,
+                    IsPropertyInitializer = autoInitializer != null
+                });
             }
         }
 

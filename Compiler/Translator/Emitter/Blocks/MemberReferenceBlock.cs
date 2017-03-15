@@ -544,6 +544,10 @@ namespace Bridge.Translator
                     {
                         this.PushWriter(inline, null, thisArg, range);
                     }
+                    else if (InlineArgumentsBlock.FormatArgRegex.IsMatch(inline))
+                    {
+                        this.PushWriter(inline, null, thisArg, range);
+                    }
                     else
                     {
                         this.Write(inline);
@@ -765,7 +769,7 @@ namespace Bridge.Translator
                 {
                     bool isProperty = false;
 
-                    if (member != null && member.Member.SymbolKind == SymbolKind.Property && member.TargetResult.Type.Kind != TypeKind.Anonymous && !this.Emitter.Validator.IsObjectLiteral(member.Member.DeclaringTypeDefinition))
+                    if (member != null && member.Member.SymbolKind == SymbolKind.Property && (member.Member.DeclaringTypeDefinition == null || !this.Emitter.Validator.IsObjectLiteral(member.Member.DeclaringTypeDefinition)))
                     {
                         isProperty = true;
                         bool writeTargetVar = false;
@@ -907,44 +911,13 @@ namespace Bridge.Translator
                         this.Write(inline);
                     }
                 }
-                else if (member.Member.SymbolKind == SymbolKind.Property && member.TargetResult.Type.Kind != TypeKind.Anonymous && (!this.Emitter.Validator.IsObjectLiteral(member.Member.DeclaringTypeDefinition) || member.Member.IsStatic))
+                else if (member.Member.SymbolKind == SymbolKind.Property && (member.Member.DeclaringTypeDefinition == null || (!this.Emitter.Validator.IsObjectLiteral(member.Member.DeclaringTypeDefinition) || member.Member.IsStatic)))
                 {
-                    var proto = false;
-                    if (this.MemberReferenceExpression.Target is BaseReferenceExpression && member != null)
-                    {
-                        var prop = member.Member as IProperty;
-
-                        if (prop != null && (prop.IsVirtual || prop.IsOverride))
-                        {
-                            proto = true;
-                        }
-                    }
-
-                    bool isFieldProperty = Helpers.IsFieldProperty(member.Member, this.Emitter);
-                    if (isFieldProperty)
-                    {
-                        if (member.Member.ImplementedInterfaceMembers.Count > 0 &&
-                            !member.Member.ImplementedInterfaceMembers.All(m => Helpers.IsFieldProperty(m, this.Emitter)))
-                        {
-                            throw new EmitterException(memberReferenceExpression,
-                                string.Format(
-                                    Bridge.Translator.Constants.Messages.Exceptions.FIELD_PROPERTY_MARKED,
-                                    member.Member.ToString()));
-                        }
-                    }
-                    else
-                    {
-                        if (member.Member.ImplementedInterfaceMembers.Count > 0 && member.Member.ImplementedInterfaceMembers.Any(m => Helpers.IsFieldProperty(m, this.Emitter)))
-                        {
-                            throw new EmitterException(memberReferenceExpression, string.Format(Bridge.Translator.Constants.Messages.Exceptions.FIELD_PROPERTY_NOT_MARKED, member.Member.ToString()));
-                        }
-                    }
-
                     if (member.Member is IProperty && targetrr != null && targetrr.Type.GetDefinition() != null && this.Emitter.Validator.IsObjectLiteral(targetrr.Type.GetDefinition()) && !this.Emitter.Validator.IsObjectLiteral(member.Member.DeclaringTypeDefinition))
                     {
                         this.Write(this.Emitter.GetEntityName(member.Member));
                     }
-                    else if (isFieldProperty)
+                    else
                     {
                         if (isInterfaceMember)
                         {
@@ -953,515 +926,30 @@ namespace Bridge.Translator
                         else
                         {
                             var name = OverloadsCollection.Create(this.Emitter, member.Member).GetOverloadName(!nativeImplementation);
-                            this.WriteIdentifier(name);
-                        }
-                    }
-                    else if (!this.Emitter.IsAssignment)
-                    {
-                        if (this.Emitter.IsUnaryAccessor)
-                        {
-                            bool isNullable = NullableType.IsNullable(member.Member.ReturnType);
-                            bool isDecimal = Helpers.IsDecimalType(member.Member.ReturnType, this.Emitter.Resolver);
-                            bool isLong = Helpers.Is64Type(member.Member.ReturnType, this.Emitter.Resolver);
+                            var property = (IProperty) member.Member;
+                            var proto = member.IsVirtualCall || property.IsVirtual || property.IsOverride;
 
-                            if (isStatement)
+                            if (this.MemberReferenceExpression.Target is BaseReferenceExpression && !property.IsIndexer && proto)
                             {
-                                if (isInterfaceMember)
+                                var alias = BridgeTypes.ToJsName(member.Member.DeclaringType, this.Emitter,
+                                    isAlias: true);
+                                if (alias.StartsWith("\""))
                                 {
-                                    this.WriteInterfaceMember(interfaceTempVar ?? targetVar, member, true, JS.Funcs.Property.SET);
+                                    alias = alias.Insert(1, "$");
+                                    name = alias + "+\"$" + name + "\"";
+                                    this.WriteIdentifier(name, false);
                                 }
                                 else
                                 {
-                                    this.Write(Helpers.GetPropertyRef(member.Member, this.Emitter, true, ignoreInterface: !nativeImplementation));
-                                }
-
-                                if (proto)
-                                {
-                                    this.WriteCall();
-                                    this.WriteOpenParentheses();
-                                    this.WriteThis();
-                                    this.WriteComma();
-                                }
-                                else
-                                {
-                                    this.WriteOpenParentheses();
-                                }
-
-                                if (isDecimal || isLong)
-                                {
-                                    if (isNullable)
-                                    {
-                                        this.Write(JS.Types.SYSTEM_NULLABLE + "." + JS.Funcs.Math.LIFT1);
-                                        this.WriteOpenParentheses();
-                                        if (this.Emitter.UnaryOperatorType == UnaryOperatorType.Increment || this.Emitter.UnaryOperatorType == UnaryOperatorType.PostIncrement)
-                                        {
-                                            this.WriteScript(JS.Funcs.Math.INC);
-                                        }
-                                        else
-                                        {
-                                            this.WriteScript(JS.Funcs.Math.DEC);
-                                        }
-
-                                        this.WriteComma();
-
-                                        if (targetVar != null)
-                                        {
-                                            this.Write(targetVar);
-                                        }
-                                        else if (interfaceTempVar != null)
-                                        {
-                                            this.Write(interfaceTempVar);
-                                        }
-                                        else
-                                        {
-                                            this.WriteSimpleTarget(resolveResult);
-                                        }
-
-                                        if (isInterfaceMember)
-                                        {
-                                            this.WriteInterfaceMember(interfaceTempVar ?? targetVar, member, false, JS.Funcs.Property.GET);
-                                        }
-                                        else
-                                        {
-                                            this.WriteDot();
-                                            this.Write(Helpers.GetPropertyRef(member.Member, this.Emitter, false, ignoreInterface: !nativeImplementation));
-                                        }
-
-                                        if (proto)
-                                        {
-                                            this.WriteCall();
-                                            this.WriteOpenParentheses();
-                                            this.WriteThis();
-                                            this.WriteCloseParentheses();
-                                        }
-                                        else
-                                        {
-                                            this.WriteOpenParentheses();
-                                            this.WriteCloseParentheses();
-                                        }
-
-                                        this.WriteCloseParentheses();
-                                    }
-                                    else
-                                    {
-                                        if (targetVar != null || interfaceTempVar != null)
-                                        {
-                                            this.Write(targetVar ?? interfaceTempVar);
-                                        }
-                                        else
-                                        {
-                                            this.WriteSimpleTarget(resolveResult);
-                                        }
-
-                                        if (isInterfaceMember)
-                                        {
-                                            this.WriteInterfaceMember(interfaceTempVar ?? targetVar, member, false, JS.Funcs.Property.GET);
-                                        }
-                                        else
-                                        {
-                                            this.WriteDot();
-                                            this.Write(Helpers.GetPropertyRef(member.Member, this.Emitter, false, ignoreInterface: !nativeImplementation));
-                                        }
-
-                                        if (proto)
-                                        {
-                                            this.WriteCall();
-                                            this.WriteOpenParentheses();
-                                            this.WriteThis();
-                                            this.WriteCloseParentheses();
-                                        }
-                                        else
-                                        {
-                                            this.WriteOpenParentheses();
-                                            this.WriteCloseParentheses();
-                                        }
-
-                                        this.WriteDot();
-
-                                        if (this.Emitter.UnaryOperatorType == UnaryOperatorType.Increment || this.Emitter.UnaryOperatorType == UnaryOperatorType.PostIncrement)
-                                        {
-                                            this.Write(JS.Funcs.Math.INC);
-                                        }
-                                        else
-                                        {
-                                            this.Write(JS.Funcs.Math.DEC);
-                                        }
-
-                                        this.WriteOpenParentheses();
-                                        this.WriteCloseParentheses();
-
-                                        this.WriteCloseParentheses();
-                                    }
-                                }
-                                else
-                                {
-                                    if (targetVar != null || interfaceTempVar != null)
-                                    {
-                                        this.Write(targetVar ?? interfaceTempVar);
-                                    }
-                                    else
-                                    {
-                                        if (isConstTarget)
-                                        {
-                                            this.Write("(");
-                                        }
-                                        this.WriteSimpleTarget(resolveResult);
-                                        if (isConstTarget)
-                                        {
-                                            this.Write(")");
-                                        }
-                                    }
-
-                                    if (isInterfaceMember)
-                                    {
-                                        this.WriteInterfaceMember(interfaceTempVar ?? targetVar, member, false, JS.Funcs.Property.GET);
-                                    }
-                                    else
-                                    {
-                                        this.WriteDot();
-                                        this.Write(Helpers.GetPropertyRef(member.Member, this.Emitter, false, ignoreInterface: !nativeImplementation));
-                                    }
-
-                                    if (proto)
-                                    {
-                                        this.WriteCall();
-                                        this.WriteOpenParentheses();
-                                        this.WriteThis();
-                                        this.WriteCloseParentheses();
-                                    }
-                                    else
-                                    {
-                                        this.WriteOpenParentheses();
-                                        this.WriteCloseParentheses();
-                                    }
-
-                                    if (this.Emitter.UnaryOperatorType == UnaryOperatorType.Increment || this.Emitter.UnaryOperatorType == UnaryOperatorType.PostIncrement)
-                                    {
-                                        this.Write("+");
-                                    }
-                                    else
-                                    {
-                                        this.Write("-");
-                                    }
-
-                                    this.Write("1");
-                                    this.WriteCloseParentheses();
+                                    name = "$" + alias + "$" + name;
+                                    this.WriteIdentifier(name);
                                 }
                             }
                             else
                             {
-                                if (isInterfaceMember)
-                                {
-                                    this.WriteInterfaceMember(interfaceTempVar ?? targetVar, member, false, JS.Funcs.Property.GET);
-                                }
-                                else
-                                {
-                                    this.Write(Helpers.GetPropertyRef(member.Member, this.Emitter, false, ignoreInterface: !nativeImplementation));
-                                }
-
-                                if (proto)
-                                {
-                                    this.WriteCall();
-                                    this.WriteOpenParentheses();
-                                    this.WriteThis();
-                                    this.WriteCloseParentheses();
-                                }
-                                else
-                                {
-                                    this.WriteOpenParentheses();
-                                    this.WriteCloseParentheses();
-                                }
-                                this.WriteComma();
-
-                                if (targetVar != null || interfaceTempVar != null)
-                                {
-                                    this.Write(targetVar ?? interfaceTempVar);
-                                }
-                                else
-                                {
-                                    if (isConstTarget)
-                                    {
-                                        this.Write("(");
-                                    }
-                                    this.WriteSimpleTarget(resolveResult);
-                                    if (isConstTarget)
-                                    {
-                                        this.Write(")");
-                                    }
-                                }
-
-                                if (isInterfaceMember)
-                                {
-                                    this.WriteInterfaceMember(interfaceTempVar ?? targetVar, member, true, JS.Funcs.Property.SET);
-                                }
-                                else
-                                {
-                                    this.WriteDot();
-                                    this.Write(Helpers.GetPropertyRef(member.Member, this.Emitter, true, ignoreInterface: !nativeImplementation));
-                                }
-
-                                if (proto)
-                                {
-                                    this.WriteCall();
-                                    this.WriteOpenParentheses();
-                                    this.WriteThis();
-                                    this.WriteComma();
-                                }
-                                else
-                                {
-                                    this.WriteOpenParentheses();
-                                }
-
-                                if (isDecimal || isLong)
-                                {
-                                    if (isNullable)
-                                    {
-                                        this.Write(JS.Types.SYSTEM_NULLABLE + "." + JS.Funcs.Math.LIFT1);
-                                        this.WriteOpenParentheses();
-                                        if (this.Emitter.UnaryOperatorType == UnaryOperatorType.Increment || this.Emitter.UnaryOperatorType == UnaryOperatorType.PostIncrement)
-                                        {
-                                            this.WriteScript(JS.Funcs.Math.INC);
-                                        }
-                                        else
-                                        {
-                                            this.WriteScript(JS.Funcs.Math.DEC);
-                                        }
-                                        this.WriteComma();
-                                        this.Write(valueVar);
-                                        this.WriteCloseParentheses();
-                                    }
-                                    else
-                                    {
-                                        this.Write(valueVar);
-                                        this.WriteDot();
-                                        if (this.Emitter.UnaryOperatorType == UnaryOperatorType.Increment || this.Emitter.UnaryOperatorType == UnaryOperatorType.PostIncrement)
-                                        {
-                                            this.Write(JS.Funcs.Math.INC);
-                                        }
-                                        else
-                                        {
-                                            this.Write(JS.Funcs.Math.DEC);
-                                        }
-                                        this.WriteOpenParentheses();
-                                        this.WriteCloseParentheses();
-                                    }
-                                }
-                                else
-                                {
-                                    this.Write(valueVar);
-
-                                    if (this.Emitter.UnaryOperatorType == UnaryOperatorType.Increment || this.Emitter.UnaryOperatorType == UnaryOperatorType.PostIncrement)
-                                    {
-                                        this.Write("+");
-                                    }
-                                    else
-                                    {
-                                        this.Write("-");
-                                    }
-                                    this.Write("1");
-                                }
-
-                                this.WriteCloseParentheses();
-                                this.WriteComma();
-
-                                bool isPreOp = this.Emitter.UnaryOperatorType == UnaryOperatorType.Increment ||
-                                               this.Emitter.UnaryOperatorType == UnaryOperatorType.Decrement;
-
-                                if (isPreOp)
-                                {
-                                    if (targetVar != null || interfaceTempVar != null)
-                                    {
-                                        this.Write(targetVar ?? interfaceTempVar);
-                                    }
-                                    else
-                                    {
-                                        this.WriteSimpleTarget(resolveResult);
-                                    }
-
-                                    if (isInterfaceMember)
-                                    {
-                                        this.WriteInterfaceMember(interfaceTempVar ?? targetVar, member, false, JS.Funcs.Property.GET);
-                                    }
-                                    else
-                                    {
-                                        this.WriteDot();
-                                        this.Write(Helpers.GetPropertyRef(member.Member, this.Emitter, false, ignoreInterface: !nativeImplementation));
-                                    }
-
-                                    this.WriteOpenParentheses();
-                                    this.WriteCloseParentheses();
-                                }
-                                else
-                                {
-                                    this.Write(valueVar);
-                                }
-                                this.WriteCloseParentheses();
-
-                                if (valueVar != null)
-                                {
-                                    this.RemoveTempVar(valueVar);
-                                }
-                            }
-
-                            if (targetVar != null)
-                            {
-                                this.RemoveTempVar(targetVar);
+                                this.WriteIdentifier(name);
                             }
                         }
-                        else
-                        {
-                            if (isInterfaceMember)
-                            {
-                                this.WriteInterfaceMember(interfaceTempVar ?? targetVar, member, false, JS.Funcs.Property.GET);
-                            }
-                            else
-                            {
-                                this.Write(Helpers.GetPropertyRef(member.Member, this.Emitter, ignoreInterface: !nativeImplementation));
-                            }
-
-                            if (proto)
-                            {
-                                this.WriteCall();
-                                this.WriteOpenParentheses();
-                                this.WriteThis();
-                                this.WriteCloseParentheses();
-                            }
-                            else
-                            {
-                                this.WriteOpenParentheses();
-                                this.WriteCloseParentheses();
-                            }
-                        }
-                    }
-                    else if (this.Emitter.AssignmentType != AssignmentOperatorType.Assign)
-                    {
-                        string memberStr;
-                        if (isInterfaceMember)
-                        {
-                            var oldWriter = this.SaveWriter();
-                            this.NewWriter();
-
-                            this.Emitter.IsAssignment = false;
-                            this.Emitter.IsUnaryAccessor = false;
-                            this.WriteInterfaceMember(interfaceTempVar ?? targetVar, member, true, JS.Funcs.Property.SET);
-                            this.Emitter.IsAssignment = oldIsAssignment;
-                            this.Emitter.IsUnaryAccessor = oldUnary;
-                            memberStr = this.Emitter.Output.ToString();
-                            this.RestoreWriter(oldWriter);
-                        }
-                        else
-                        {
-                            memberStr = Helpers.GetPropertyRef(member.Member, this.Emitter, true, ignoreInterface: !nativeImplementation);
-                        }
-
-                        string getterMember;
-                        if (isInterfaceMember)
-                        {
-                            var oldWriter = this.SaveWriter();
-                            this.NewWriter();
-
-                            this.Emitter.IsAssignment = false;
-                            this.Emitter.IsUnaryAccessor = false;
-                            this.WriteInterfaceMember(interfaceTempVar ?? targetVar, member, false, JS.Funcs.Property.GET);
-                            this.Emitter.IsAssignment = oldIsAssignment;
-                            this.Emitter.IsUnaryAccessor = oldUnary;
-                            getterMember = this.Emitter.Output.ToString();
-                            this.RestoreWriter(oldWriter);
-                        }
-                        else
-                        {
-                            getterMember = "." + Helpers.GetPropertyRef(member.Member, this.Emitter, false, ignoreInterface: !nativeImplementation);
-                        }
-
-                        bool isBool = member != null && NullableType.IsNullable(member.Member.ReturnType) ? NullableType.GetUnderlyingType(member.Member.ReturnType).IsKnownType(KnownTypeCode.Boolean) : member.Member.ReturnType.IsKnownType(KnownTypeCode.Boolean);
-                        bool skipGet = false;
-                        var orr = this.Emitter.Resolver.ResolveNode(memberReferenceExpression.Parent, this.Emitter) as OperatorResolveResult;
-                        bool special = orr != null && orr.IsLiftedOperator;
-
-                        if (!special && isBool &&
-                            (this.Emitter.AssignmentType == AssignmentOperatorType.BitwiseAnd ||
-                             this.Emitter.AssignmentType == AssignmentOperatorType.BitwiseOr))
-                        {
-                            skipGet = true;
-                        }
-
-                        if (targetVar != null)
-                        {
-                            if (skipGet)
-                            {
-                                this.PushWriter(string.Concat(memberStr,
-                                proto ? "." + JS.Funcs.CALL + "(this, " : "(",
-                                "{0})"), () =>
-                                {
-                                    this.RemoveTempVar(targetVar);
-                                });
-                            }
-                            else
-                            {
-                                this.PushWriter(string.Concat(memberStr,
-                                proto ? "." + JS.Funcs.CALL + "(this, " : "(",
-                                targetVar,
-                                getterMember,
-                                proto ? "." + JS.Funcs.CALL + "(this)" : "()",
-                                "{0})"), () =>
-                                {
-                                    this.RemoveTempVar(targetVar);
-                                });
-                            }
-                        }
-                        else
-                        {
-                            var oldWriter = this.SaveWriter();
-                            this.NewWriter();
-
-                            this.Emitter.IsAssignment = false;
-                            this.Emitter.IsUnaryAccessor = false;
-                            this.WriteSimpleTarget(resolveResult);
-                            this.Emitter.IsAssignment = oldIsAssignment;
-                            this.Emitter.IsUnaryAccessor = oldUnary;
-                            var trg = this.Emitter.Output.ToString();
-
-                            this.RestoreWriter(oldWriter);
-
-                            if (skipGet)
-                            {
-                                this.PushWriter(string.Concat(memberStr,
-                                    proto ? "." + JS.Funcs.CALL + "(this, " : "(",
-                                    "{0})"));
-                            }
-                            else
-                            {
-                                this.PushWriter(string.Concat(memberStr,
-                                    proto ? "." + JS.Funcs.CALL + "(this, " : "(",
-                                    trg,
-                                    getterMember,
-                                    proto ? "." + JS.Funcs.CALL + "(this)" : "()",
-                                    "{0})"));
-                            }
-                        }
-                    }
-                    else
-                    {
-                        string trg;
-                        if (isInterfaceMember)
-                        {
-                            var oldWriter = this.SaveWriter();
-                            this.NewWriter();
-
-                            this.Emitter.IsAssignment = false;
-                            this.Emitter.IsUnaryAccessor = false;
-                            this.WriteInterfaceMember(interfaceTempVar ?? targetVar, member, true, JS.Funcs.Property.SET);
-                            this.Emitter.IsAssignment = oldIsAssignment;
-                            this.Emitter.IsUnaryAccessor = oldUnary;
-                            trg = this.Emitter.Output.ToString();
-                            this.RestoreWriter(oldWriter);
-                        }
-                        else
-                        {
-                            trg = Helpers.GetPropertyRef(member.Member, this.Emitter, true, ignoreInterface: !nativeImplementation);
-                        }
-
-                        this.PushWriter(trg + (proto ? ".call(this, {0})" : "({0})"));
                     }
                 }
                 else if (member.Member.SymbolKind == SymbolKind.Field)

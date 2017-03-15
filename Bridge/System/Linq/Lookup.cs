@@ -33,6 +33,7 @@ namespace System.Linq
 
         public extern int Count
         {
+            [Template("count()")]
             get;
         }
 

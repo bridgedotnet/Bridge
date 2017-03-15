@@ -5,15 +5,21 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
         statics: {
             instanceFabric: null,
             fixtureFabric: Bridge.getDefaultValue(T),
-            getFixtureFabric: function () {
-                if (Bridge.Test.Runtime.TestFixture$1(T).fixtureFabric == null) {
-                    Bridge.Test.Runtime.TestFixture$1(T).fixtureFabric = Bridge.createInstance(T);
-                }
+            config: {
+                properties: {
+                    FixtureFabric: {
+                        get: function () {
+                            if (Bridge.Test.Runtime.TestFixture$1(T).fixtureFabric == null) {
+                                Bridge.Test.Runtime.TestFixture$1(T).fixtureFabric = Bridge.createInstance(T);
+                            }
 
-                return Bridge.Test.Runtime.TestFixture$1(T).fixtureFabric;
-            },
-            setFixtureFabric: function (value) {
-                Bridge.Test.Runtime.TestFixture$1(T).fixtureFabric = value;
+                            return Bridge.Test.Runtime.TestFixture$1(T).fixtureFabric;
+                        },
+                        set: function (value) {
+                            Bridge.Test.Runtime.TestFixture$1(T).fixtureFabric = value;
+                        }
+                    }
+                }
             },
             instanceFabric$1: function (type) {
                 if (Bridge.Test.Runtime.TestFixture$1(T).instanceFabric == null) {
@@ -32,7 +38,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 }
 
                 var instance = Bridge.Test.Runtime.TestFixture$1(T).instanceFabric$1(type);
-                instance.setFixture(needInstance ? Bridge.Test.Runtime.TestFixture$1(T).getFixtureFabric() : Bridge.getDefaultValue(T));
+                instance.Fixture = needInstance ? Bridge.Test.Runtime.TestFixture$1(T).FixtureFabric : Bridge.getDefaultValue(T);
 
                 var fixtureContext = instance.getContext();
 
@@ -278,7 +284,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 $t = Bridge.getEnumerator(dest);
                 try {
                     while ($t.moveNext()) {
-                        var el = $t.getCurrent();
+                        var el = $t.Current;
                         if (has) {
                             Bridge.Test.Runtime.ContextHelper.addClass(el, name);
                         } else {

@@ -12,6 +12,7 @@ namespace System
 
         public extern string AbsoluteUri
         {
+            [Template("getAbsoluteUri()")]
             get;
         }
     }

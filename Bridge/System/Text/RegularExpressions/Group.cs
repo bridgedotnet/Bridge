@@ -13,14 +13,22 @@ namespace System.Text.RegularExpressions
         /// <summary>
         /// Gets a value indicating whether the match is successful.
         /// </summary>
-        public extern bool Success { get; }
+        public extern bool Success
+        {
+            [Template("getSuccess()")]
+            get;
+        }
 
         /// <summary>
         /// Gets a collection of all the captures matched by the capturing group, in innermost-leftmost-first order
         /// (or innermost-rightmost-first order if the regular expression is modified with the RegexOptions.RightToLeft option).
         /// The collection may have zero or more items.
         /// </summary>
-        public extern CaptureCollection Captures { get; }
+        public extern CaptureCollection Captures
+        {
+            [Template("getCaptures()")]
+            get;
+        }
 
         /// <summary>
         /// Returns a Group object equivalent to the one supplied that is safe to share between multiple threads.

@@ -166,6 +166,24 @@
         this.System$Collections$IEnumerator$getCurrent = this.getCurrent;
         this.System$Collections$IEnumerator$moveNext = this.moveNext;
         this.System$Collections$IEnumerator$reset = this.reset;
+
+        Object.defineProperties(this,
+        {
+            "Current$1": {
+                get: this.getCurrent,
+                enumerable: true
+            },
+
+            "Current": {
+                get: this.getCurrent,
+                enumerable: true
+            },
+
+            "System$Collections$IEnumerator$Current": {
+                get: this.getCurrent,
+                enumerable: true
+            }
+        });
     };
 
     IEnumerator.$$inherits = [];
@@ -323,7 +341,7 @@
                     function () { enumerator = Bridge.getEnumerator(ienum); },
                     function () {
                         var ok = enumerator.moveNext();
-                        return ok ? this.yieldReturn(enumerator.getCurrent()) : false;
+                        return ok ? this.yieldReturn(enumerator.Current) : false;
                     },
                     function () {
                         var disposable = Bridge.as(enumerator, System.IDisposable);
@@ -608,7 +626,7 @@
                 function () { enumerator = Enumerable.from(enumerableFactory()).getEnumerator(); },
                 function () {
                     return (enumerator.moveNext())
-                        ? this.yieldReturn(enumerator.getCurrent())
+                        ? this.yieldReturn(enumerator.Current)
                         : this.yieldBreak();
                 },
                 function () {
@@ -639,8 +657,8 @@
                 function () {
                     while (true) {
                         if (enumerator.moveNext()) {
-                            buffer.push(enumerator.getCurrent());
-                            return this.yieldReturn(resultSelector(enumerator.getCurrent(), nestLevel));
+                            buffer.push(enumerator.Current);
+                            return this.yieldReturn(resultSelector(enumerator.Current, nestLevel));
                         }
 
                         var next = Enumerable.from(buffer).selectMany(function (x) { return func(x); });
@@ -676,9 +694,9 @@
                 function () {
                     while (true) {
                         if (enumerator.moveNext()) {
-                            var value = resultSelector(enumerator.getCurrent(), enumeratorStack.length);
+                            var value = resultSelector(enumerator.Current, enumeratorStack.length);
                             enumeratorStack.push(enumerator);
-                            enumerator = Enumerable.from(func(enumerator.getCurrent())).getEnumerator();
+                            enumerator = Enumerable.from(func(enumerator.Current)).getEnumerator();
                             return this.yieldReturn(value);
                         }
 
@@ -711,7 +729,7 @@
                     while (true) {
                         if (middleEnumerator != null) {
                             if (middleEnumerator.moveNext()) {
-                                return this.yieldReturn(middleEnumerator.getCurrent());
+                                return this.yieldReturn(middleEnumerator.Current);
                             }
                             else {
                                 middleEnumerator = null;
@@ -719,16 +737,16 @@
                         }
 
                         if (enumerator.moveNext()) {
-                            if (enumerator.getCurrent() instanceof Array) {
+                            if (enumerator.Current instanceof Array) {
                                 Utils.dispose(middleEnumerator);
-                                middleEnumerator = Enumerable.from(enumerator.getCurrent())
+                                middleEnumerator = Enumerable.from(enumerator.Current)
                                     .selectMany(Functions.Identity)
                                     .flatten()
                                     .getEnumerator();
                                 continue;
                             }
                             else {
-                                return this.yieldReturn(enumerator.getCurrent());
+                                return this.yieldReturn(enumerator.Current);
                             }
                         }
 
@@ -759,9 +777,9 @@
                     enumerator.moveNext();
                 },
                 function () {
-                    var prev = enumerator.getCurrent();
+                    var prev = enumerator.Current;
                     return (enumerator.moveNext())
-                        ? this.yieldReturn(selector(prev, enumerator.getCurrent()))
+                        ? this.yieldReturn(selector(prev, enumerator.Current))
                         : false;
                 },
                 function () { Utils.dispose(enumerator); });
@@ -793,7 +811,7 @@
                         isFirst = false;
                         if (!isUseSeed) {
                             if (enumerator.moveNext()) {
-                                return this.yieldReturn(value = enumerator.getCurrent());
+                                return this.yieldReturn(value = enumerator.Current);
                             }
                         }
                         else {
@@ -802,7 +820,7 @@
                     }
 
                     return (enumerator.moveNext())
-                        ? this.yieldReturn(value = func(value, enumerator.getCurrent()))
+                        ? this.yieldReturn(value = func(value, enumerator.Current))
                         : false;
                 },
                 function () { Utils.dispose(enumerator); });
@@ -828,7 +846,7 @@
                     function () { enumerator = source.getEnumerator(); },
                     function () {
                         return (enumerator.moveNext())
-                            ? this.yieldReturn(selector(enumerator.getCurrent(), index++))
+                            ? this.yieldReturn(selector(enumerator.Current, index++))
                             : false;
                     },
                     function () { Utils.dispose(enumerator); });
@@ -859,11 +877,11 @@
                     }
                     do {
                         if (middleEnumerator == null) {
-                            var middleSeq = collectionSelector(enumerator.getCurrent(), index++);
+                            var middleSeq = collectionSelector(enumerator.Current, index++);
                             middleEnumerator = Enumerable.from(middleSeq).getEnumerator();
                         }
                         if (middleEnumerator.moveNext()) {
-                            return this.yieldReturn(resultSelector(enumerator.getCurrent(), middleEnumerator.getCurrent()));
+                            return this.yieldReturn(resultSelector(enumerator.Current, middleEnumerator.Current));
                         }
                         Utils.dispose(middleEnumerator);
                         middleEnumerator = null;
@@ -900,8 +918,8 @@
                     function () { enumerator = source.getEnumerator(); },
                     function () {
                         while (enumerator.moveNext()) {
-                            if (predicate(enumerator.getCurrent(), index++)) {
-                                return this.yieldReturn(enumerator.getCurrent());
+                            if (predicate(enumerator.Current, index++)) {
+                                return this.yieldReturn(enumerator.Current);
                             }
                         }
                         return false;
@@ -925,7 +943,7 @@
                 function () { enumerator = source.getEnumerator(); },
                 function () {
                     while (enumerator.moveNext()) {
-                        var result = selector(enumerator.getCurrent(), index++);
+                        var result = selector(enumerator.Current, index++);
                         if (result != null) {
                             return this.yieldReturn(result);
                         }
@@ -948,7 +966,7 @@
 				},
                 function () {
                     while (enumerator.moveNext()) {
-                        var v = Bridge.as(enumerator.getCurrent(), type);
+                        var v = Bridge.as(enumerator.Current, type);
                         if (Bridge.hasValue(v)) {
                             return this.yieldReturn(v);
                         }
@@ -983,7 +1001,7 @@
                 },
                 function () {
                     if (firstEnumerator.moveNext() && secondEnumerator.moveNext()) {
-                        return this.yieldReturn(selector(firstEnumerator.getCurrent(), secondEnumerator.getCurrent(), index++));
+                        return this.yieldReturn(selector(firstEnumerator.Current, secondEnumerator.Current, index++));
                     }
                     return false;
                 },
@@ -1012,7 +1030,7 @@
                 function () {
                     if (enumerators.all(function (x) { return x.moveNext() })) {
                         var array = enumerators
-                            .select(function (x) { return x.getCurrent() })
+                            .select(function (x) { return x.Current; })
                             .toArray();
                         array.push(index++);
                         return this.yieldReturn(selector.apply(null, array));
@@ -1050,7 +1068,7 @@
                         var enumerator = enumerators[index];
 
                         if (enumerator.moveNext()) {
-                            return this.yieldReturn(enumerator.getCurrent());
+                            return this.yieldReturn(enumerator.Current);
                         }
                         else {
                             enumerator.dispose();
@@ -1092,7 +1110,7 @@
                         if (innerElements != null) {
                             var innerElement = innerElements[innerCount++];
                             if (innerElement !== undefined) {
-                                return this.yieldReturn(resultSelector(outerEnumerator.getCurrent(), innerElement));
+                                return this.yieldReturn(resultSelector(outerEnumerator.Current, innerElement));
                             }
 
                             innerElement = null;
@@ -1100,7 +1118,7 @@
                         }
 
                         if (outerEnumerator.moveNext()) {
-                            var key = outerKeySelector(outerEnumerator.getCurrent());
+                            var key = outerKeySelector(outerEnumerator.Current);
                             innerElements = lookup.get(key).toArray();
                         } else {
                             return false;
@@ -1130,8 +1148,8 @@
                 },
                 function () {
                     if (enumerator.moveNext()) {
-                        var innerElement = lookup.get(outerKeySelector(enumerator.getCurrent()));
-                        return this.yieldReturn(resultSelector(enumerator.getCurrent(), innerElement));
+                        var innerElement = lookup.get(outerKeySelector(enumerator.Current));
+                        return this.yieldReturn(resultSelector(enumerator.Current, innerElement));
                     }
                     return false;
                 },
@@ -1165,7 +1183,7 @@
 
             while (enumerator.moveNext()) // case:function (predicate)
             {
-                if (predicate(enumerator.getCurrent())) return true;
+                if (predicate(enumerator.Current)) return true;
             }
             return false;
         }
@@ -1193,10 +1211,10 @@
                 function () { firstEnumerator = source.getEnumerator(); },
                 function () {
                     if (secondEnumerator == null) {
-                        if (firstEnumerator.moveNext()) return this.yieldReturn(firstEnumerator.getCurrent());
+                        if (firstEnumerator.moveNext()) return this.yieldReturn(firstEnumerator.Current);
                         secondEnumerator = Enumerable.from(second).getEnumerator();
                     }
-                    if (secondEnumerator.moveNext()) return this.yieldReturn(secondEnumerator.getCurrent());
+                    if (secondEnumerator.moveNext()) return this.yieldReturn(secondEnumerator.Current);
                     return false;
                 },
                 function () {
@@ -1227,7 +1245,7 @@
                             var enumerator = enumerators[0];
 
                             if (enumerator.moveNext()) {
-                                return this.yieldReturn(enumerator.getCurrent());
+                                return this.yieldReturn(enumerator.Current);
                             }
                             else {
                                 enumerator.dispose();
@@ -1260,14 +1278,14 @@
                 function () {
                     if (count == index && secondEnumerator.moveNext()) {
                         isEnumerated = true;
-                        return this.yieldReturn(secondEnumerator.getCurrent());
+                        return this.yieldReturn(secondEnumerator.Current);
                     }
                     if (firstEnumerator.moveNext()) {
                         count++;
-                        return this.yieldReturn(firstEnumerator.getCurrent());
+                        return this.yieldReturn(firstEnumerator.Current);
                     }
                     if (!isEnumerated && secondEnumerator.moveNext()) {
-                        return this.yieldReturn(secondEnumerator.getCurrent());
+                        return this.yieldReturn(secondEnumerator.Current);
                     }
                     return false;
                 },
@@ -1300,13 +1318,13 @@
                         alternateSequence = Enumerable.make(alternateValueOrSequence);
                     }
                     enumerator = source.getEnumerator();
-                    if (enumerator.moveNext()) buffer = enumerator.getCurrent();
+                    if (enumerator.moveNext()) buffer = enumerator.Current;
                 },
                 function () {
                     while (true) {
                         if (alternateEnumerator != null) {
                             if (alternateEnumerator.moveNext()) {
-                                return this.yieldReturn(alternateEnumerator.getCurrent());
+                                return this.yieldReturn(alternateEnumerator.Current);
                             }
                             else {
                                 alternateEnumerator = null;
@@ -1314,7 +1332,7 @@
                         }
 
                         if (buffer == null && enumerator.moveNext()) {
-                            buffer = enumerator.getCurrent(); // hasNext
+                            buffer = enumerator.Current; // hasNext
                             alternateEnumerator = alternateSequence.getEnumerator();
                             continue; // GOTO
                         }
@@ -1345,7 +1363,7 @@
         var enumerator = this.getEnumerator();
         try {
             while (enumerator.moveNext()) {
-                if (comparer.equals2(enumerator.getCurrent(), value)) return true;
+                if (comparer.equals2(enumerator.Current, value)) return true;
             }
             return false;
         }
@@ -1367,7 +1385,7 @@
                 function () {
                     if (enumerator.moveNext()) {
                         isFirst = false;
-                        return this.yieldReturn(enumerator.getCurrent());
+                        return this.yieldReturn(enumerator.Current);
                     }
                     else if (isFirst) {
                         isFirst = false;
@@ -1400,12 +1418,12 @@
                 },
                 function () {
                     while (enumerator.moveNext()) {
-                        var key = compareSelector(enumerator.getCurrent());
+                        var key = compareSelector(enumerator.Current);
 
                         if (initial) {
                             initial = false;
                             compareKey = key;
-                            return this.yieldReturn(enumerator.getCurrent());
+                            return this.yieldReturn(enumerator.Current);
                         }
 
                         if (compareKey === key) {
@@ -1413,7 +1431,7 @@
                         }
 
                         compareKey = key;
-                        return this.yieldReturn(enumerator.getCurrent());
+                        return this.yieldReturn(enumerator.Current);
                     }
                     return this.yieldBreak();
                 },
@@ -1438,7 +1456,7 @@
                 },
                 function () {
                     while (enumerator.moveNext()) {
-                        var current = enumerator.getCurrent();
+                        var current = enumerator.Current;
                         if (!keys.containsKey(current)) {
                             keys.add(current);
                             return this.yieldReturn(current);
@@ -1470,7 +1488,7 @@
                 },
                 function () {
                     while (enumerator.moveNext()) {
-                        var current = enumerator.getCurrent();
+                        var current = enumerator.Current;
                         if (!outs.containsKey(current) && keys.containsKey(current)) {
                             outs.add(current);
                             return this.yieldReturn(current);
@@ -1493,7 +1511,7 @@
             try {
                 while (firstEnumerator.moveNext()) {
                     if (!secondEnumerator.moveNext()
-                    || !comparer.equals2(firstEnumerator.getCurrent(), secondEnumerator.getCurrent())) {
+                    || !comparer.equals2(firstEnumerator.Current, secondEnumerator.Current)) {
                         return false;
                     }
                 }
@@ -1527,7 +1545,7 @@
                     var current;
                     if (secondEnumerator === undefined) {
                         while (firstEnumerator.moveNext()) {
-                            current = firstEnumerator.getCurrent();
+                            current = firstEnumerator.Current;
                             if (!keys.containsKey(current)) {
                                 keys.add(current);
                                 return this.yieldReturn(current);
@@ -1536,7 +1554,7 @@
                         secondEnumerator = Enumerable.from(second).getEnumerator();
                     }
                     while (secondEnumerator.moveNext()) {
-                        current = secondEnumerator.getCurrent();
+                        current = secondEnumerator.Current;
                         if (!keys.containsKey(current)) {
                             keys.add(current);
                             return this.yieldReturn(current);
@@ -1674,8 +1692,8 @@
                 function () {
                     while (enumerator.moveNext()) {
                         return (resultSelector == null)
-                            ? this.yieldReturn(enumerator.getCurrent())
-                            : this.yieldReturn(resultSelector(enumerator.getCurrent().key(), enumerator.getCurrent()));
+                            ? this.yieldReturn(enumerator.Current)
+                            : this.yieldReturn(resultSelector(enumerator.Current.key(), enumerator.Current));
                     }
                     return false;
                 },
@@ -1711,15 +1729,15 @@
                 function () {
                     enumerator = source.getEnumerator();
                     if (enumerator.moveNext()) {
-                        key = keySelector(enumerator.getCurrent());
-                        group.push(elementSelector(enumerator.getCurrent()));
+                        key = keySelector(enumerator.Current);
+                        group.push(elementSelector(enumerator.Current));
                     }
                 },
                 function () {
                     var hasNext;
                     while ((hasNext = enumerator.moveNext()) == true) {
-                        if (comparer.equals2(key, keySelector(enumerator.getCurrent()))) {
-                            group.push(elementSelector(enumerator.getCurrent()));
+                        if (comparer.equals2(key, keySelector(enumerator.Current))) {
+                            group.push(elementSelector(enumerator.Current));
                         }
                         else break;
                     }
@@ -1729,8 +1747,8 @@
                             ? resultSelector(key, Enumerable.from(group))
                             : resultSelector(key, group);
                         if (hasNext) {
-                            key = keySelector(enumerator.getCurrent());
-                            group = [elementSelector(enumerator.getCurrent())];
+                            key = keySelector(enumerator.Current);
+                            group = [elementSelector(enumerator.Current)];
                         }
                         else group = [];
 
@@ -1755,7 +1773,7 @@
                     var array = [];
                     var index = 0;
                     while (enumerator.moveNext()) {
-                        array.push(enumerator.getCurrent());
+                        array.push(enumerator.Current);
                         if (++index >= count) return this.yieldReturn(array);
                     }
                     if (array.length > 0) return this.yieldReturn(array);
@@ -2057,7 +2075,7 @@
                 },
                 function () {
                     return (enumerator.moveNext())
-                        ? this.yieldReturn(enumerator.getCurrent())
+                        ? this.yieldReturn(enumerator.Current)
                         : false;
                 },
                 function () { Utils.dispose(enumerator); });
@@ -2080,16 +2098,16 @@
                 function () {
                     while (!isSkipEnd) {
                         if (enumerator.moveNext()) {
-                            if (!predicate(enumerator.getCurrent(), index++)) {
+                            if (!predicate(enumerator.Current, index++)) {
                                 isSkipEnd = true;
-                                return this.yieldReturn(enumerator.getCurrent());
+                                return this.yieldReturn(enumerator.Current);
                             }
                             continue;
                         } else return false;
                     }
 
                     return (enumerator.moveNext())
-                        ? this.yieldReturn(enumerator.getCurrent())
+                        ? this.yieldReturn(enumerator.Current)
                         : false;
                 },
                 function () { Utils.dispose(enumerator); });
@@ -2107,7 +2125,7 @@
                 function () { enumerator = source.getEnumerator(); },
                 function () {
                     return (index++ < count && enumerator.moveNext())
-                        ? this.yieldReturn(enumerator.getCurrent())
+                        ? this.yieldReturn(enumerator.Current)
                         : false;
                 },
                 function () { Utils.dispose(enumerator); }
@@ -2128,8 +2146,8 @@
             return new IEnumerator(
                 function () { enumerator = source.getEnumerator(); },
                 function () {
-                    return (enumerator.moveNext() && predicate(enumerator.getCurrent(), index++))
-                        ? this.yieldReturn(enumerator.getCurrent())
+                    return (enumerator.moveNext() && predicate(enumerator.Current, index++))
+                        ? this.yieldReturn(enumerator.Current)
                         : false;
                 },
                 function () { Utils.dispose(enumerator); });
@@ -2153,10 +2171,10 @@
                 function () {
                     while (enumerator.moveNext()) {
                         if (q.length == count) {
-                            q.push(enumerator.getCurrent());
+                            q.push(enumerator.Current);
                             return this.yieldReturn(q.shift());
                         }
-                        q.push(enumerator.getCurrent());
+                        q.push(enumerator.Current);
                     }
                     return false;
                 },
@@ -2179,12 +2197,12 @@
                     if (enumerator == null) {
 	                    while (sourceEnumerator.moveNext()) {
 	                        if (q.length == count) q.shift();
-	                        q.push(sourceEnumerator.getCurrent());
+	                        q.push(sourceEnumerator.Current);
 	                    }
                         enumerator = Enumerable.from(q).getEnumerator();
                     }
                     return (enumerator.moveNext())
-                        ? this.yieldReturn(enumerator.getCurrent())
+                        ? this.yieldReturn(enumerator.Current)
                         : false;
                 },
                 function () { Utils.dispose(enumerator); });
@@ -2342,8 +2360,8 @@
                 function () { enumerator = source.getEnumerator(); },
                 function () {
                     if (enumerator.moveNext()) {
-                        action(enumerator.getCurrent(), index++);
-                        return this.yieldReturn(enumerator.getCurrent());
+                        action(enumerator.Current, index++);
+                        return this.yieldReturn(enumerator.Current);
                     }
                     return false;
                 },
@@ -2362,7 +2380,7 @@
         var enumerator = this.getEnumerator();
         try {
             while (enumerator.moveNext()) {
-                if (action(enumerator.getCurrent(), index++) === false) break;
+                if (action(enumerator.Current, index++) === false) break;
             }
         } finally {
             Utils.dispose(enumerator);
@@ -2421,7 +2439,7 @@
                 },
                 function () {
                     return (enumerator.moveNext())
-                        ? this.yieldReturn(enumerator.getCurrent())
+                        ? this.yieldReturn(enumerator.Current)
                         : false;
                 },
                 function () { Utils.dispose(enumerator); });
@@ -2444,7 +2462,7 @@
                     if (disposed) throw new Error("enumerator is disposed");
 
                     return (sharedEnumerator.moveNext())
-                        ? this.yieldReturn(sharedEnumerator.getCurrent())
+                        ? this.yieldReturn(sharedEnumerator.Current)
                         : false;
                 },
                 Functions.Blank
@@ -2477,7 +2495,7 @@
                     index++;
                     if (cache.length <= index) {
                         return (enumerator.moveNext())
-                            ? this.yieldReturn(cache[index] = enumerator.getCurrent())
+                            ? this.yieldReturn(cache[index] = enumerator.Current)
                             : false;
                     }
 
@@ -2506,7 +2524,7 @@
                 function () {
                     try {
                         return (enumerator.moveNext())
-                            ? this.yieldReturn(enumerator.getCurrent())
+                            ? this.yieldReturn(enumerator.Current)
                             : false;
                     } catch (e) {
                         handler(e);
@@ -2528,7 +2546,7 @@
                 function () { enumerator = source.getEnumerator(); },
                 function () {
                     return (enumerator.moveNext())
-                        ? this.yieldReturn(enumerator.getCurrent())
+                        ? this.yieldReturn(enumerator.Current)
                         : false;
                 },
                 function () {
@@ -2841,8 +2859,8 @@
             function () { enumerator = source.getEnumerator(); },
             function () {
                 while (enumerator.moveNext()) {
-                    if (predicate(enumerator.getCurrent())) {
-                        return this.yieldReturn(enumerator.getCurrent());
+                    if (predicate(enumerator.Current)) {
+                        return this.yieldReturn(enumerator.Current);
                     }
                 }
                 return false;
@@ -2889,8 +2907,8 @@
             function () { enumerator = source.getEnumerator(); },
             function () {
                 while (enumerator.moveNext()) {
-                    if (predicate == null || predicate(enumerator.getCurrent())) {
-                        return this.yieldReturn(selector(enumerator.getCurrent()));
+                    if (predicate == null || predicate(enumerator.Current)) {
+                        return this.yieldReturn(selector(enumerator.Current));
                     }
                 }
                 return false;

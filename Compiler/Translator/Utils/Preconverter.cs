@@ -51,7 +51,7 @@ namespace Bridge.Translator
                 {
                     var orr = rr as OperatorResolveResult;
 
-                    if (orr != null && !Helpers.IsFloatType(orr.Type, this.Resolver) && !Helpers.Is64Type(orr.Type, this.Resolver))
+                    if (orr != null)
                     {
                         this.Found = true;
                     }
@@ -339,10 +339,7 @@ namespace Bridge.Translator
                 {
                     var orr = (OperatorResolveResult)rr;
 
-                    if (Helpers.IsFloatType(orr.Type, this.Resolver) || Helpers.Is64Type(orr.Type, this.Resolver))
-                    {
-                        return base.VisitUnaryOperatorExpression(unaryOperatorExpression);
-                    }
+                    
 
                     UnaryOperatorExpression clonUnaryOperatorExpression = (UnaryOperatorExpression)base.VisitUnaryOperatorExpression(unaryOperatorExpression);
                     if (clonUnaryOperatorExpression == null)

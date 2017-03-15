@@ -86,7 +86,7 @@ namespace Bridge.Translator.TypeScript
                 }
             }
 
-            if (info.Properties.Count > 0)
+            /*if (info.Properties.Count > 0)
             {
                 foreach (var prop in info.Properties)
                 {
@@ -95,11 +95,10 @@ namespace Bridge.Translator.TypeScript
                         var name = prop.GetName(this.Emitter);
                         name = Helpers.ReplaceFirstDollar(name);
 
-                        this.WriteProp(prop, name, true);
-                        this.WriteProp(prop, name, false);
+                        this.WriteProp(prop, name);
                     }
                 }
-            }
+            }*/
 
             new MethodsBlock(this.Emitter, this.TypeInfo, this.StaticBlock).Emit();
         }
@@ -121,33 +120,14 @@ namespace Bridge.Translator.TypeScript
             this.WriteNewLine();
         }
 
-        private void WriteProp(TypeConfigItem ev, string name, bool getter)
+        private void WriteProp(TypeConfigItem ev, string name)
         {
-            XmlToJsDoc.EmitComment(this, ev.Entity, getter);
-            this.Write(Helpers.GetSetOrGet(!getter));
+            XmlToJsDoc.EmitComment(this, ev.Entity);
             this.Write(name);
-            this.WriteOpenParentheses();
-
-            if (!getter)
-            {
-                this.Write("value");
-                this.WriteColon();
-                string typeName = BridgeTypes.ToTypeScriptName(ev.Entity.ReturnType, this.Emitter);
-                this.Write(typeName);
-            }
-
-            this.WriteCloseParentheses();
             this.WriteColon();
 
-            if (!getter)
-            {
-                this.Write("void");
-            }
-            else
-            {
-                string typeName = BridgeTypes.ToTypeScriptName(ev.Entity.ReturnType, this.Emitter);
-                this.Write(typeName);
-            }
+            string typeName = BridgeTypes.ToTypeScriptName(ev.Entity.ReturnType, this.Emitter);
+            this.Write(typeName);
 
             this.WriteSemiColon();
             this.WriteNewLine();

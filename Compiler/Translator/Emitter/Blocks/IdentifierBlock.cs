@@ -189,6 +189,10 @@ namespace Bridge.Translator
                     {
                         this.PushWriter(inlineCode, null, thisArg, range);
                     }
+                    else if (InlineArgumentsBlock.FormatArgRegex.IsMatch(inlineCode))
+                    {
+                        this.PushWriter(inlineCode, null, thisArg, range);
+                    }
                     else
                     {
                         this.Write(inlineCode);
@@ -215,6 +219,10 @@ namespace Bridge.Translator
                         }
 
                         new InlineArgumentsBlock(this.Emitter, new ArgumentsInfo(this.Emitter, this.IdentifierExpression, resolveResult), inlineCode, (IMethod)memberResult.Member, targetrr).EmitFunctionReference();
+                    }
+                    else if (InlineArgumentsBlock.FormatArgRegex.IsMatch(inlineCode))
+                    {
+                        this.PushWriter(inlineCode);
                     }
                     else
                     {
@@ -311,7 +319,7 @@ namespace Bridge.Translator
                         this.Write(inlineCode);
                     }
                 }
-                else if (Helpers.IsFieldProperty(memberResult.Member, this.Emitter))
+                else if (memberResult.Member is IProperty)
                 {
                     var name = Helpers.GetPropertyRef(memberResult.Member, this.Emitter);
 

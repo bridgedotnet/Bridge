@@ -132,8 +132,8 @@ namespace Bridge.ClientTest.BasicCSharp
 
             var b = a as A;
             Assert.True(b != null, "Instance of ISimple as A");
-            Assert.AreEqual("A.ISimple", a.GetString(), "a.GetString() = A.ISimple through instance");
-            Assert.AreEqual(1, a.Data, "a.Data = 1 through instance");
+            Assert.AreEqual("A.ISimple", b.GetString(), "a.GetString() = A.ISimple through instance");
+            Assert.AreEqual(1, b.Data, "a.Data = 1 through instance");
         }
 
         [Test(ExpectedCount = 3)]

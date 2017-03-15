@@ -135,7 +135,7 @@ namespace Bridge.ClientTest
                 Assert.AreEqual("1: Frank", tempFrank, "Check call works");
 
                 var options = new Bridge.ClientTestHelperExternal.AjaxOptions { Data = new { Name = c.Temp } };
-                Assert.AreEqual("Frank", options.Data["name"], "External referenced default ObjectLiteral works");
+                Assert.AreEqual("Frank", options.Data["Name"], "External referenced default ObjectLiteral works");
 
                 var bs = new BS();
                 Assert.True(Bridge1529.IsPlainObject(bs));

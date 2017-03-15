@@ -6,11 +6,26 @@
         },
 
         config: {
+			properties: {
+				Current: {
+					get: function () {
+						return this.getCurrent();
+					}
+				},
+
+				Current$1: {
+				    get: function () {
+				        return this.getCurrent();
+				    }
+				}
+			},
+			
             alias: [
                 "getCurrent", "System$Collections$IEnumerator$getCurrent",
                 "moveNext", "System$Collections$IEnumerator$moveNext",
                 "reset", "System$Collections$IEnumerator$reset",
-                "dispose", "System$IDisposable$dispose"
+                "dispose", "System$IDisposable$dispose",
+				"Current", "System$Collections$IEnumerator$Current"
             ]
         },
 
@@ -21,6 +36,11 @@
 
             if (T) {
                 this["System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$getCurrent$1"] = this.getCurrent;
+
+                Object.defineProperty(this, "System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$Current$1", {
+                    get: this.getCurrent,
+                    enumerable: true
+                });
             }
         },
 

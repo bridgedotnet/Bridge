@@ -625,7 +625,10 @@ namespace Bridge.Translator
                     }
                 }
 
-                if (!Helpers.IsFieldProperty(prop, emitter))
+                var inlineGetter = prop.CanGet && (emitter.GetInline(prop.Getter) != null || Helpers.IsScript(prop.Getter));
+                var inlineSetter = prop.CanSet && (emitter.GetInline(prop.Setter) != null || Helpers.IsScript(prop.Setter));
+
+                if (inlineGetter || inlineSetter || prop.IsIndexer)
                 {
                     if (prop.CanGet)
                     {

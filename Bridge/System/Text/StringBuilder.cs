@@ -25,13 +25,17 @@ namespace System.Text
         /// </summary>
         public extern int Length
         {
+            [Template("getLength()")]
             get;
+            [Template("setLength({0})")]
             set;
         }
 
         public extern int Capacity
         {
+            [Template("getCapacity()")]
             get;
+            [Template("setCapacity({0})")]
             set;
         }
 

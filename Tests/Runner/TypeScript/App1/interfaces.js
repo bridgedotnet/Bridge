@@ -26,16 +26,19 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         field: 200,
         property: 100,
         config: {
+            properties: {
+                Property: {
+                    get: function () {
+                        return this.property;
+                    },
+                    set: function (value) {
+                        this.property = value;
+                    }
+                }
+            },
             alias: [
-            "getProperty", "Interfaces$Interface1$getProperty",
-            "setProperty", "Interfaces$Interface1$setProperty"
+            "Property", "Interfaces$Interface1$Property"
             ]
-        },
-        getProperty: function () {
-            return this.property;
-        },
-        setProperty: function (value) {
-            this.property = value;
         }
     });
 
@@ -81,21 +84,20 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
                 MethodProperty: 0
             },
             alias: [
+            "Property", "Interfaces$Interface6$Property",
             "getProperty", "Interfaces$Interface6$getProperty",
-            "setProperty", "Interfaces$Interface6$setProperty",
-            "getProperty$1", "Interfaces$Interface6$getProperty$1",
-            "setProperty$3", "Interfaces$Interface6$setProperty$3",
-            "setProperty$2", "Interfaces$Interface6$setProperty$2"
+            "setProperty$1", "Interfaces$Interface6$setProperty$1",
+            "setProperty", "Interfaces$Interface6$setProperty"
             ]
         },
-        getProperty$1: function () {
-            return this.getMethodProperty();
+        getProperty: function () {
+            return this.MethodProperty;
         },
-        setProperty$3: function (s) {
-            this.setMethodProperty(s.length);
+        setProperty$1: function (s) {
+            this.MethodProperty = s.length;
         },
-        setProperty$2: function (i) {
-            this.setMethodProperty(i);
+        setProperty: function (i) {
+            this.MethodProperty = i;
         }
     });
 
@@ -111,7 +113,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         },
         method1: function () {
             this.field = 1;
-            this.setProperty(2);
+            this.Property = 2;
         },
         method2: function (s) {
             this.field = s.length;
@@ -120,7 +122,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
             return this.field;
         },
         method4: function (i) {
-            this.field = i.Interfaces$Interface1$getProperty();
+            this.field = i.Interfaces$Interface1$Property;
 
             return true;
         }

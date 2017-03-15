@@ -261,7 +261,7 @@ namespace Bridge.Translator
             return insideTryFinally ? ((TryCatchStatement)target).FinallyBlock : null;
         }
 
-        public void WriteIdentifier(string name)
+        public void WriteIdentifier(string name, bool script = true)
         {
             var isValid = Helpers.IsValidIdentifier(name);
 
@@ -275,7 +275,15 @@ namespace Bridge.Translator
                 {
                     --this.Emitter.Output.Length;
                     this.Write("[");
-                    this.WriteScript(name);
+                    if (script)
+                    {
+                        this.WriteScript(name);
+                    }
+                    else
+                    {
+                        this.Write(name);
+                    }
+                    
                     this.Write("]");
                 }
             }

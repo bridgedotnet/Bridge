@@ -173,7 +173,7 @@ namespace Bridge.Translator
 
             if (castCode != null)
             {
-                this.EmitInlineCast(iteratorName + "." + JS.Funcs.GET_CURRENT + "()", castCode);
+                this.EmitInlineCast(iteratorName + "." + JS.Funcs.GET_CURRENT, castCode);
             }
             else if (this.CastMethod != null)
             {
@@ -181,7 +181,7 @@ namespace Bridge.Translator
                 this.WriteDot();
                 this.Write(OverloadsCollection.Create(this.Emitter, this.CastMethod).GetOverloadName());
                 this.WriteOpenParentheses();
-                this.Write(iteratorName + "." + JS.Funcs.GET_CURRENT + "()");
+                this.Write(iteratorName + "." + JS.Funcs.GET_CURRENT);
                 this.WriteCloseParentheses();
             }
             else
@@ -197,7 +197,6 @@ namespace Bridge.Translator
 
                 this.WriteDot();
                 this.Write(JS.Funcs.GET_CURRENT);
-                this.WriteOpenCloseParentheses();
 
                 if (needCast)
                 {
@@ -356,7 +355,7 @@ namespace Bridge.Translator
 
                 if (castCode != null)
                 {
-                    this.EmitInlineCast(iteratorName + "." + JS.Funcs.GET_CURRENT + "()", castCode);
+                    this.EmitInlineCast(iteratorName + "." + JS.Funcs.GET_CURRENT, castCode);
                 }
                 else if (this.CastMethod != null)
                 {
@@ -364,7 +363,7 @@ namespace Bridge.Translator
                     this.WriteDot();
                     this.Write(OverloadsCollection.Create(this.Emitter, this.CastMethod).GetOverloadName());
                     this.WriteOpenParentheses();
-                    this.Write(iteratorName + "." + JS.Funcs.GET_CURRENT + "()");
+                    this.Write(iteratorName + "." + JS.Funcs.GET_CURRENT);
                     this.WriteCloseParentheses();
                 }
                 else
@@ -380,7 +379,6 @@ namespace Bridge.Translator
 
                     this.WriteDot();
                     this.Write(JS.Funcs.GET_CURRENT);
-                    this.WriteOpenCloseParentheses();
 
                     if (needCast)
                     {

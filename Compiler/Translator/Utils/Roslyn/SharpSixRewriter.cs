@@ -608,6 +608,23 @@ namespace Bridge.Translator
             return newNode.Equals(node) ? node : newNode;
         }
 
+        public override SyntaxNode VisitStructDeclaration(StructDeclarationSyntax node)
+        {
+            var old = this.fields;
+            this.fields = new List<MemberDeclarationSyntax>();
+
+            var c = base.VisitStructDeclaration(node) as StructDeclarationSyntax;
+
+            if (c != null && this.fields.Count > 0)
+            {
+                c = c.AddMembers(this.fields.ToArray());
+            }
+
+            this.fields = old;
+
+            return c;
+        }
+
         public override SyntaxNode VisitClassDeclaration(ClassDeclarationSyntax node)
         {
             var old = this.fields;

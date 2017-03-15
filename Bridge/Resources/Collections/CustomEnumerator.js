@@ -1,11 +1,21 @@
     Bridge.define('Bridge.CustomEnumerator', {
-        inherits: [System.Collections.IEnumerator],
+        inherits: [System.Collections.IEnumerator, System.IDisposable],
 
         config: {
+			properties: {
+				Current: {
+					get: function () {
+						return this.getCurrent();
+					}
+				}
+			},
+			
             alias: [
                 "getCurrent", "System$Collections$IEnumerator$getCurrent",
                 "moveNext", "System$Collections$IEnumerator$moveNext",
-                "reset", "System$Collections$IEnumerator$reset"
+                "reset", "System$Collections$IEnumerator$reset",
+				"dispose", "System$IDisposable$dispose",
+				"Current", "System$Collections$IEnumerator$Current"
             ]
         },
 

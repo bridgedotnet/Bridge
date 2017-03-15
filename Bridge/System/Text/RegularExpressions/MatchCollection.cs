@@ -14,22 +14,38 @@ namespace System.Text.RegularExpressions
         /// <summary>
         /// Gets the number of matches.
         /// </summary>
-        public extern int Count { get; }
+        public extern int Count
+        {
+            [Template("getCount()")]
+            get;
+        }
 
         /// <summary>
         /// Gets an object that can be used to synchronize access to the collection.
         /// </summary>
-        public extern object SyncRoot { get; }
+        public extern object SyncRoot
+        {
+            [Template("getSyncRoot()")]
+            get;
+        }
 
         /// <summary>
         /// Gets a value indicating whether access to the collection is synchronized (thread-safe).
         /// </summary>
-        public extern bool IsSynchronized { get; }
+        public extern bool IsSynchronized
+        {
+            [Template("getIsSynchronized()")]
+            get;
+        }
 
         /// <summary>
         /// Gets a value that indicates whether the collection is read only.
         /// </summary>
-        public extern bool IsReadOnly { get; }
+        public extern bool IsReadOnly
+        {
+            [Template("getIsReadOnly()")]
+            get;
+        }
 
         /// <summary>
         /// Gets an individual member of the collection.

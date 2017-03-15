@@ -130,6 +130,38 @@
         _Build: -1,
         _Revision: -1,
         config: {
+            properties: {
+                Major: {
+                    get: function () {
+                        return this._Major;
+                    }
+                },
+                Minor: {
+                    get: function () {
+                        return this._Minor;
+                    }
+                },
+                Build: {
+                    get: function () {
+                        return this._Build;
+                    }
+                },
+                Revision: {
+                    get: function () {
+                        return this._Revision;
+                    }
+                },
+                MajorRevision: {
+                    get: function () {
+                        return Bridge.Int.sxs((this._Revision >> 16) & 65535);
+                    }
+                },
+                MinorRevision: {
+                    get: function () {
+                        return Bridge.Int.sxs((this._Revision & 65535) & 65535);
+                    }
+                }
+            },
             alias: [
             "clone", "System$ICloneable$clone",
             "compareTo", "System$IComparable$1$System$Version$compareTo",
@@ -193,33 +225,15 @@
         $ctor4: function (version) {
             this.$initialize();
             var v = System.Version.parse(version);
-            this._Major = v.getMajor();
-            this._Minor = v.getMinor();
-            this._Build = v.getBuild();
-            this._Revision = v.getRevision();
+            this._Major = v.Major;
+            this._Minor = v.Minor;
+            this._Build = v.Build;
+            this._Revision = v.Revision;
         },
         ctor: function () {
             this.$initialize();
             this._Major = 0;
             this._Minor = 0;
-        },
-        getMajor: function () {
-            return this._Major;
-        },
-        getMinor: function () {
-            return this._Minor;
-        },
-        getBuild: function () {
-            return this._Build;
-        },
-        getRevision: function () {
-            return this._Revision;
-        },
-        getMajorRevision: function () {
-            return Bridge.Int.sxs((this._Revision >> 16) & 65535);
-        },
-        getMinorRevision: function () {
-            return Bridge.Int.sxs((this._Revision & 65535) & 65535);
         },
         clone: function () {
             var v = new System.Version.ctor();

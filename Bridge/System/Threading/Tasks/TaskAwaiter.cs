@@ -11,7 +11,7 @@ namespace System.Threading.Tasks
 
         public extern bool IsCompleted
         {
-            [Name("isCompleted")]
+            [Template("isCompleted()")]
             get;
         }
 
@@ -30,7 +30,7 @@ namespace System.Threading.Tasks
 
         public extern bool IsCompleted
         {
-            [Name("isCompleted")]
+            [Template("isCompleted()")]
             get;
         }
 

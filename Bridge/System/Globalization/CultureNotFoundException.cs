@@ -28,8 +28,16 @@ namespace System.Globalization
         [Template("new System.Globalization.CultureNotFoundException({paramName}, null, {message}, null, {invalidCultureId})")]
         public extern CultureNotFoundException(string paramName, int invalidCultureId, string message);
 
-        public extern string InvalidCultureName { get; }
+        public extern string InvalidCultureName
+        {
+            [Template("getInvalidCultureName()")]
+            get;
+        }
 
-        public extern int? InvalidCultureId { get; }
+        public extern int? InvalidCultureId
+        {
+            [Template("getInvalidCultureId()")]
+            get;
+        }
     }
 }
