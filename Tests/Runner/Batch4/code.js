@@ -1840,7 +1840,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 sb.appendLine("got " + enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "Current$1")]);
             }
 
-            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n");
+            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
         },
         prematureDisposalOfIEnumeratorIteratorExecutesFinallyBlocks_SPI_1555: function () {
             // #1555
@@ -1853,7 +1853,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             }
             enm.System$IDisposable$dispose();
 
-            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nin finally\r\n");
+            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
         },
         exceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks_SPI_1554: function () {
             var sb = new System.Text.StringBuilder();
@@ -1877,7 +1877,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 sb.appendLine("caught exception");
             }
 
-            this.assertEqual(sb.toString(), "yielding 1\r\ngot 1\r\nyielding 2\r\ngot 2\r\nthrowing\r\nin finally\r\ncaught exception\r\n");
+            this.assertEqual(sb.toString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
         },
         typeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface_SPI_1554: function () {
             var enm = null;
@@ -1918,7 +1918,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     $t1.System$IDisposable$dispose();
                 }
             }
-            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n-\r\nyielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n");
+            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n-\nyielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
         },
         prematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks_SPI_1555: function () {
             var $t;
@@ -1939,7 +1939,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     $t.System$IDisposable$dispose();
                 }
             }
-            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nin finally\r\n");
+            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
         },
         exceptionInIEnumerableIteratorBodyExecutesFinallyBlocks_SPI_1554: function () {
             var sb = new System.Text.StringBuilder();
@@ -1964,7 +1964,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 sb.appendLine("caught exception");
             }
 
-            this.assertEqual(sb.toString(), "yielding 1\r\ngot 1\r\nyielding 2\r\ngot 2\r\nthrowing\r\nin finally\r\ncaught exception\r\n");
+            this.assertEqual(sb.toString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
         },
         enumeratingAnIteratorBlockReturningIEnumerableMultipleTimesUsesTheInitialValuesForParameters: function () {
             var $t, $t1;
@@ -1992,7 +1992,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     $t1.System$IDisposable$dispose();
                 }
             }
-            this.assertEqual(sb.toString(), "3\r\n2\r\n1\r\n3\r\n2\r\n1\r\n");
+            this.assertEqual(sb.toString(), "3\n2\n1\n3\n2\n1\n");
         },
         differentGetEnumeratorCallsOnIteratorBlockReturningIEnumerableGetOwnCopiesOfLocals: function () {
             var sb = new System.Text.StringBuilder();
@@ -2007,7 +2007,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 sb.appendLine(enm2[Bridge.geti(enm2, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "Current$1")].toString());
             }
 
-            this.assertEqual(sb.toString(), "0\r\n0\r\n1\r\n1\r\n2\r\n2\r\n-1\r\n-1\r\n");
+            this.assertEqual(sb.toString(), "0\n0\n1\n1\n2\n2\n-1\n-1\n");
         }
     });
 
@@ -13836,8 +13836,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         statics: {
             canConvert: function (T, arg) {
                 try { /// The variable `x' is assigned but its value is never used
-
-
                     var x = Bridge.cast(Bridge.unbox(arg), T);
                     return true;
                 }
@@ -17843,18 +17841,19 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             });
         },
         operatorsWork_SPI_1583: function () {
+            var $t;
             var x = System.Decimal(3);
             this.assertIsDecimalAndEqualTo(x.clone(), 3);
             this.assertIsDecimalAndEqualTo(x.neg(), -3);
             this.assertIsDecimalAndEqualTo(x.add(System.Decimal(4.0)), 7);
             this.assertIsDecimalAndEqualTo(x.sub(System.Decimal(2.0)), 1);
-            this.assertIsDecimalAndEqualTo(Bridge.identity(x, (x = x.add(System.Decimal(1)))), 3);
+            this.assertIsDecimalAndEqualTo(($t = x, x = x.inc(), $t), 3);
             this.assertIsDecimalAndEqualTo(x, 4);
-            this.assertIsDecimalAndEqualTo(((x = x.add(System.Decimal(1)))), 5);
+            this.assertIsDecimalAndEqualTo((x = x.inc()), 5);
             this.assertIsDecimalAndEqualTo(x, 5);
-            this.assertIsDecimalAndEqualTo(Bridge.identity(x, (x = x.sub(System.Decimal(1)))), 5);
+            this.assertIsDecimalAndEqualTo(($t = x, x = x.dec(), $t), 5);
             this.assertIsDecimalAndEqualTo(x, 4);
-            this.assertIsDecimalAndEqualTo(((x = x.sub(System.Decimal(1)))), 3);
+            this.assertIsDecimalAndEqualTo((x = x.dec()), 3);
             this.assertIsDecimalAndEqualTo(x, 3);
             this.assertIsDecimalAndEqualTo(x.mul(System.Decimal(3.0)), 9);
             this.assertIsDecimalAndEqualTo(x.div(System.Decimal(2.0)), 1.5);
@@ -17882,18 +17881,19 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.false(x.lte(System.Decimal(2.0)));
         },
         liftedOperatorsWork_SPI_1583: function () {
+            var $t;
             var x1 = System.Decimal(3), x2 = System.Decimal.lift(null);
             this.assertIsDecimalAndEqualTo(System.Nullable.lift1("clone", x1), 3);
             this.assertIsDecimalAndEqualTo(System.Nullable.lift1("neg", x1), -3);
             this.assertIsDecimalAndEqualTo(System.Nullable.lift2("add", x1, System.Decimal(4.0)), 7);
             this.assertIsDecimalAndEqualTo(System.Nullable.lift2("sub", x1, System.Decimal(2.0)), 1);
-            this.assertIsDecimalAndEqualTo(Bridge.identity(x1, (x1 = System.Nullable.lift2("add", x1, System.Decimal(1)))), 3);
+            this.assertIsDecimalAndEqualTo(Bridge.hasValue(x1) ? ($t = x1, x1 = System.Nullable.lift1('inc', x1), $t) : null, 3);
             this.assertIsDecimalAndEqualTo(x1, 4);
-            this.assertIsDecimalAndEqualTo(((x1 = System.Nullable.lift2("add", x1, System.Decimal(1)))), 5);
+            this.assertIsDecimalAndEqualTo(Bridge.hasValue(x1) ? (x1 = System.Nullable.lift1('inc', x1)) : null, 5);
             this.assertIsDecimalAndEqualTo(x1, 5);
-            this.assertIsDecimalAndEqualTo(Bridge.identity(x1, (x1 = System.Nullable.lift2("sub", x1, System.Decimal(1)))), 5);
+            this.assertIsDecimalAndEqualTo(Bridge.hasValue(x1) ? ($t = x1, x1 = System.Nullable.lift1('dec', x1), $t) : null, 5);
             this.assertIsDecimalAndEqualTo(x1, 4);
-            this.assertIsDecimalAndEqualTo(((x1 = System.Nullable.lift2("sub", x1, System.Decimal(1)))), 3);
+            this.assertIsDecimalAndEqualTo(Bridge.hasValue(x1) ? (x1 = System.Nullable.lift1('dec', x1)) : null, 3);
             this.assertIsDecimalAndEqualTo(x1, 3);
             this.assertIsDecimalAndEqualTo(System.Nullable.lift2("mul", x1, System.Decimal(3.0)), 9);
             this.assertIsDecimalAndEqualTo(System.Nullable.lift2("div", x1, System.Decimal(2.0)), 1.5);
@@ -17913,13 +17913,13 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual(null, System.Nullable.lift2("add", System.Decimal(4.0), x2));
             Bridge.Test.NUnit.Assert.areEqual(null, System.Nullable.lift2("sub", x2, System.Decimal(2.0)));
             Bridge.Test.NUnit.Assert.areEqual(null, System.Nullable.lift2("sub", System.Decimal(2.0), x2));
-            Bridge.Test.NUnit.Assert.areEqual(null, Bridge.identity(x2, (x2 = System.Nullable.lift2("add", x2, System.Decimal(1)))));
+            Bridge.Test.NUnit.Assert.areEqual(null, Bridge.hasValue(x2) ? ($t = x2, x2 = System.Nullable.lift1('inc', x2), $t) : null);
             Bridge.Test.NUnit.Assert.areEqual(null, x2);
-            Bridge.Test.NUnit.Assert.areEqual(null, ((x2 = System.Nullable.lift2("add", x2, System.Decimal(1)))));
+            Bridge.Test.NUnit.Assert.areEqual(null, Bridge.hasValue(x2) ? (x2 = System.Nullable.lift1('inc', x2)) : null);
             Bridge.Test.NUnit.Assert.areEqual(null, x2);
-            Bridge.Test.NUnit.Assert.areEqual(null, Bridge.identity(x2, (x2 = System.Nullable.lift2("sub", x2, System.Decimal(1)))));
+            Bridge.Test.NUnit.Assert.areEqual(null, Bridge.hasValue(x2) ? ($t = x2, x2 = System.Nullable.lift1('dec', x2), $t) : null);
             Bridge.Test.NUnit.Assert.areEqual(null, x2);
-            Bridge.Test.NUnit.Assert.areEqual(null, ((x2 = System.Nullable.lift2("sub", x2, System.Decimal(1)))));
+            Bridge.Test.NUnit.Assert.areEqual(null, Bridge.hasValue(x2) ? (x2 = System.Nullable.lift1('dec', x2)) : null);
             Bridge.Test.NUnit.Assert.areEqual(null, x2);
             Bridge.Test.NUnit.Assert.areEqual(null, System.Nullable.lift2("mul", x2, System.Decimal(3.0)));
             Bridge.Test.NUnit.Assert.areEqual(null, System.Nullable.lift2("mul", System.Decimal(3.0), x2));
@@ -18736,34 +18736,34 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
             var d;
             d = System.Decimal(0);
-            Bridge.Test.NUnit.Assert.areEqual$1("1", Bridge.Int.format((((d = d.add(System.Decimal(1))))), 'G'), "(new Decimal(\"0\").inc() == \"1\" FAILED");
+            Bridge.Test.NUnit.Assert.areEqual$1("1", Bridge.Int.format(((d = d.inc())), 'G'), "(new Decimal(\"0\").inc() == \"1\" FAILED");
             d = System.Decimal(1);
-            Bridge.Test.NUnit.Assert.areEqual$1("2", Bridge.Int.format((((d = d.add(System.Decimal(1))))), 'G'), "(new Decimal(\"1\").inc() == \"2\" FAILED");
+            Bridge.Test.NUnit.Assert.areEqual$1("2", Bridge.Int.format(((d = d.inc())), 'G'), "(new Decimal(\"1\").inc() == \"2\" FAILED");
             d = System.Decimal(2);
-            Bridge.Test.NUnit.Assert.areEqual$1("3", Bridge.Int.format((((d = d.add(System.Decimal(1))))), 'G'), "(new Decimal(\"2\").inc() == \"3\" FAILED");
+            Bridge.Test.NUnit.Assert.areEqual$1("3", Bridge.Int.format(((d = d.inc())), 'G'), "(new Decimal(\"2\").inc() == \"3\" FAILED");
             d = System.Decimal(-1);
-            Bridge.Test.NUnit.Assert.areEqual$1("0", Bridge.Int.format((((d = d.add(System.Decimal(1))))), 'G'), "(new Decimal(\"-1\").inc() == \"0\" FAILED");
+            Bridge.Test.NUnit.Assert.areEqual$1("0", Bridge.Int.format(((d = d.inc())), 'G'), "(new Decimal(\"-1\").inc() == \"0\" FAILED");
             d = System.Decimal(-2);
-            Bridge.Test.NUnit.Assert.areEqual$1("-1", Bridge.Int.format((((d = d.add(System.Decimal(1))))), 'G'), "(new Decimal(\"2\").inc() == \"-1\" FAILED");
+            Bridge.Test.NUnit.Assert.areEqual$1("-1", Bridge.Int.format(((d = d.inc())), 'G'), "(new Decimal(\"2\").inc() == \"-1\" FAILED");
             d = System.Decimal(1.5);
-            Bridge.Test.NUnit.Assert.areEqual$1("2.5", Bridge.Int.format((((d = d.add(System.Decimal(1))))), 'G'), "(new Decimal(\"1.5\").inc() == \"2.5\" FAILED");
+            Bridge.Test.NUnit.Assert.areEqual$1("2.5", Bridge.Int.format(((d = d.inc())), 'G'), "(new Decimal(\"1.5\").inc() == \"2.5\" FAILED");
             d = System.Decimal(-1.5);
-            Bridge.Test.NUnit.Assert.areEqual$1("-0.5", Bridge.Int.format((((d = d.add(System.Decimal(1))))), 'G'), "(new Decimal(\"-1.5\").inc() == \"-0.5\" FAILED");
+            Bridge.Test.NUnit.Assert.areEqual$1("-0.5", Bridge.Int.format(((d = d.inc())), 'G'), "(new Decimal(\"-1.5\").inc() == \"-0.5\" FAILED");
 
             d = System.Decimal(0);
-            Bridge.Test.NUnit.Assert.areEqual$1("-1", Bridge.Int.format((((d = d.sub(System.Decimal(1))))), 'G'), "(new Decimal(\"0\").dec().toString() == \"-1\" FAILED");
+            Bridge.Test.NUnit.Assert.areEqual$1("-1", Bridge.Int.format(((d = d.dec())), 'G'), "(new Decimal(\"0\").dec().toString() == \"-1\" FAILED");
             d = System.Decimal(1);
-            Bridge.Test.NUnit.Assert.areEqual$1("0", Bridge.Int.format((((d = d.sub(System.Decimal(1))))), 'G'), "(new Decimal(\"1\").dec().toString() == \"0\" FAILED");
+            Bridge.Test.NUnit.Assert.areEqual$1("0", Bridge.Int.format(((d = d.dec())), 'G'), "(new Decimal(\"1\").dec().toString() == \"0\" FAILED");
             d = System.Decimal(2);
-            Bridge.Test.NUnit.Assert.areEqual$1("3", Bridge.Int.format((((d = d.add(System.Decimal(1))))), 'G'), "(new Decimal(\"2\").inc() == \"1\" FAILED");
+            Bridge.Test.NUnit.Assert.areEqual$1("3", Bridge.Int.format(((d = d.inc())), 'G'), "(new Decimal(\"2\").inc() == \"1\" FAILED");
             d = System.Decimal(-1);
-            Bridge.Test.NUnit.Assert.areEqual$1("-2", Bridge.Int.format((((d = d.sub(System.Decimal(1))))), 'G'), "(new Decimal(\"-1\").dec().toString() == \"-2\" FAILED");
+            Bridge.Test.NUnit.Assert.areEqual$1("-2", Bridge.Int.format(((d = d.dec())), 'G'), "(new Decimal(\"-1\").dec().toString() == \"-2\" FAILED");
             d = System.Decimal(-2);
-            Bridge.Test.NUnit.Assert.areEqual$1("-3", Bridge.Int.format((((d = d.sub(System.Decimal(1))))), 'G'), "(new Decimal(\"2\").dec().toString() == \"-3\" FAILED");
+            Bridge.Test.NUnit.Assert.areEqual$1("-3", Bridge.Int.format(((d = d.dec())), 'G'), "(new Decimal(\"2\").dec().toString() == \"-3\" FAILED");
             d = System.Decimal(1.5);
-            Bridge.Test.NUnit.Assert.areEqual$1("0.5", Bridge.Int.format((((d = d.sub(System.Decimal(1))))), 'G'), "(new Decimal(\"1.5\").dec().toString() == \"0.5\" FAILED");
+            Bridge.Test.NUnit.Assert.areEqual$1("0.5", Bridge.Int.format(((d = d.dec())), 'G'), "(new Decimal(\"1.5\").dec().toString() == \"0.5\" FAILED");
             d = System.Decimal(-1.5);
-            Bridge.Test.NUnit.Assert.areEqual$1("-2.5", Bridge.Int.format((((d = d.sub(System.Decimal(1))))), 'G'), "(new Decimal(\"-1.5\").dec().toString() == \"-2.5\" FAILED");
+            Bridge.Test.NUnit.Assert.areEqual$1("-2.5", Bridge.Int.format(((d = d.dec())), 'G'), "(new Decimal(\"-1.5\").dec().toString() == \"-2.5\" FAILED");
         }
     });
 

@@ -58,7 +58,7 @@ namespace Bridge.Translator
                     this.AddLocals(new ParameterDeclaration[0], accessor.Body);
                 }
 
-                XmlToJsDoc.EmitComment(this, this.PropertyDeclaration);
+                //XmlToJsDoc.EmitComment(this, this.PropertyDeclaration);
 
                 this.Write(setter ? JS.Funcs.Property.SET : JS.Funcs.Property.GET);
 

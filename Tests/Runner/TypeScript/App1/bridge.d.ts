@@ -180,7 +180,7 @@ declare module Bridge {
         getCurrent(): any;
         reset(): void;
         dispose(): void;
-		readonly Current: any;
+        readonly Current: any;
     }
 
     export class ArrayEnumerator implements System.Collections.IEnumerator {
@@ -189,7 +189,7 @@ declare module Bridge {
         getCurrent(): any;
         reset(): void;
         dispose(): void;
-		readonly Current: any;
+        readonly Current: any;
     }
 
     export class ArrayEnumerable implements System.Collections.IEnumerable {
@@ -516,7 +516,7 @@ declare module System {
             getCurrent(): any;
             moveNext(): boolean;
             reset(): void;
-			readonly Current: any;
+            readonly Current: any;
         }
         var IEnumerator: Function;
 
@@ -537,7 +537,7 @@ declare module System {
             }
             export interface IEnumerator$1<T> extends IEnumerator {
                 getCurrent(): T;
-				readonly Current: T;
+                readonly Current: T;
             }
             export function IEnumerator$1<T>(t: Bridge.TypeRef<T>): {
                 prototype: IEnumerator$1<T>;

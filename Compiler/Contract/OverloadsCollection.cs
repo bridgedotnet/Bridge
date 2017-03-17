@@ -207,6 +207,7 @@ namespace Bridge.Contract
         private OverloadsCollection(IEmitter emitter, FieldDeclaration fieldDeclaration)
         {
             this.Emitter = emitter;
+            this.CancelChangeCase = false;
             this.Name = emitter.GetFieldName(fieldDeclaration);
             this.JsName = this.Emitter.GetEntityName(fieldDeclaration, false, true);
             this.Inherit = !fieldDeclaration.HasModifier(Modifiers.Static);
@@ -216,6 +217,8 @@ namespace Bridge.Contract
             this.Type = this.Member.DeclaringType;
             this.InitMembers();
             this.Emitter.OverloadsCacheNodes[new Tuple<AstNode, bool>(fieldDeclaration, false)] = this;
+            
+            this.SetCaseFromNameAttr();
         }
 
         private OverloadsCollection(IEmitter emitter, EventDeclaration eventDeclaration)
@@ -300,6 +303,25 @@ namespace Bridge.Contract
             this.Type = this.Member.DeclaringType;
             this.InitMembers();
             this.Emitter.OverloadsCacheNodes[new Tuple<AstNode, bool>(propDeclaration, isSetter)] = this;
+
+            this.SetCaseFromNameAttr();
+        }
+
+        private void SetCaseFromNameAttr()
+        {
+            if (this.Member != null)
+            {
+                var nameAttr = this.Member.Attributes.FirstOrDefault(a => a.AttributeType.FullName == "Bridge.NameAttribute");
+                if (nameAttr != null)
+                {
+                    var value = nameAttr.PositionalArguments.First().ConstantValue;
+
+                    if (value is bool)
+                    {
+                        this.CancelChangeCase = !(bool) value;
+                    }
+                }
+            }
         }
 
         private OverloadsCollection(IEmitter emitter, IndexerDeclaration indexerDeclaration, bool isSetter)
@@ -370,11 +392,18 @@ namespace Bridge.Contract
             }
             else
             {
+                if (member is IField)
+                {
+                    this.CancelChangeCase = false;
+                }
+
                 this.JsName = this.Emitter.GetEntityName(member, false, true);
             }
 
             this.IncludeInline = includeInline;
             this.Member = member;
+            this.SetCaseFromNameAttr();
+
             this.TypeDefinition = this.Member.DeclaringTypeDefinition;
             this.Type = this.Member.DeclaringType;
             this.IsSetter = isSetter;

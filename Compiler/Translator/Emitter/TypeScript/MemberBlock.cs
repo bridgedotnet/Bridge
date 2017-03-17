@@ -41,13 +41,18 @@ namespace Bridge.Translator.TypeScript
                 {
                     if (field.Entity.HasModifier(Modifiers.Public) || this.TypeInfo.IsEnum)
                     {
-                        XmlToJsDoc.EmitComment(this, field.Entity);
-                        this.Write(field.GetName(this.Emitter));
-                        this.WriteColon();
-                        string typeName = this.TypeInfo.IsEnum ? "number" : BridgeTypes.ToTypeScriptName(field.Entity.ReturnType, this.Emitter);
-                        this.Write(typeName);
-                        this.WriteSemiColon();
-                        this.WriteNewLine();
+                        var fieldDecl = field.Entity as FieldDeclaration;
+                        if (fieldDecl != null)
+                        {
+                            foreach (var variableInitializer in fieldDecl.Variables)
+                            {
+                                this.WriteFieldDeclaration(field, variableInitializer);
+                            }
+                        }
+                        else
+                        {
+                            this.WriteFieldDeclaration(field, null);
+                        }
                     }
                 }
             }
@@ -101,6 +106,19 @@ namespace Bridge.Translator.TypeScript
             }*/
 
             new MethodsBlock(this.Emitter, this.TypeInfo, this.StaticBlock).Emit();
+        }
+
+        private void WriteFieldDeclaration(TypeConfigItem field, VariableInitializer variableInitializer)
+        {
+            XmlToJsDoc.EmitComment(this, field.Entity, null, variableInitializer);
+            this.Write(field.GetName(this.Emitter));
+            this.WriteColon();
+            string typeName = this.TypeInfo.IsEnum
+                ? "number"
+                : BridgeTypes.ToTypeScriptName(field.Entity.ReturnType, this.Emitter);
+            this.Write(typeName);
+            this.WriteSemiColon();
+            this.WriteNewLine();
         }
 
         private void WriteEvent(TypeConfigItem ev, string name, bool adder)

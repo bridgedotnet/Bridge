@@ -161,7 +161,7 @@ namespace Bridge.Translator
                     var ignoreAccessor = prop.Getter != null && this.Emitter.Validator.IsExternalType(prop.Getter);
                     var isAccessorsIndexer = this.Emitter.Validator.IsAccessorsIndexer(memberArgResolverResult.Member);
 
-                    isAccessor = true;
+                    isAccessor = prop.IsIndexer;
 
                     if (inlineAttr == null && (isIgnore || ignoreAccessor) && !isAccessorsIndexer)
                     {
@@ -413,7 +413,7 @@ namespace Bridge.Translator
                 var ignoreAccessor = this.Emitter.Validator.IsExternalType(((IProperty)memberArgResolverResult.Member).Getter);
                 var isAccessorsIndexer = this.Emitter.Validator.IsAccessorsIndexer(memberArgResolverResult.Member);
 
-                isAccessor = true;
+                isAccessor = ((IProperty)memberArgResolverResult.Member).IsIndexer;
 
                 if (inlineAttr == null && (isIgnore || ignoreAccessor) && !isAccessorsIndexer)
                 {

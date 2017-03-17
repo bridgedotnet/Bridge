@@ -408,7 +408,7 @@ namespace Bridge.Translator
                 else
                 {
                     this.EnsureComma();
-                    XmlToJsDoc.EmitComment(this, member.Entity);
+                    XmlToJsDoc.EmitComment(this, member.Entity, null, member.Entity is FieldDeclaration ? member.VarInitializer : null);
                     this.Write(mname);
                     this.WriteColon();
                 }
