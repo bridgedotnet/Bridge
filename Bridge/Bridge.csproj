@@ -29,7 +29,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>CORE;DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoStdLib>true</NoStdLib>
@@ -40,7 +40,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>CORE;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoStdLib>true</NoStdLib>
@@ -57,8 +57,48 @@
     <AdditionalExplicitAssemblyReferences />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\Html5\TypedArray\ArrayBuffer.cs">
+      <Link>Internal\Html5\TypedArray\ArrayBuffer.cs</Link>
+    </Compile>
+    <Compile Include="..\Html5\TypedArray\ArrayBufferView.cs">
+      <Link>Internal\Html5\TypedArray\ArrayBufferView.cs</Link>
+    </Compile>
+    <Compile Include="..\Html5\TypedArray\DataView.cs">
+      <Link>Internal\Html5\TypedArray\DataView.cs</Link>
+    </Compile>
+    <Compile Include="..\Html5\TypedArray\Float32Array.cs">
+      <Link>Internal\Html5\TypedArray\Float32Array.cs</Link>
+    </Compile>
+    <Compile Include="..\Html5\TypedArray\Float64Array.cs">
+      <Link>Internal\Html5\TypedArray\Float64Array.cs</Link>
+    </Compile>
+    <Compile Include="..\Html5\TypedArray\Int16Array.cs">
+      <Link>Internal\Html5\TypedArray\Int16Array.cs</Link>
+    </Compile>
+    <Compile Include="..\Html5\TypedArray\Int32Array.cs">
+      <Link>Internal\Html5\TypedArray\Int32Array.cs</Link>
+    </Compile>
+    <Compile Include="..\Html5\TypedArray\Int8Array.cs">
+      <Link>Internal\Html5\TypedArray\Int8Array.cs</Link>
+    </Compile>
+    <Compile Include="..\Html5\TypedArray\Prototype.cs">
+      <Link>Internal\Html5\TypedArray\Prototype.cs</Link>
+    </Compile>
+    <Compile Include="..\Html5\TypedArray\Uint16Array.cs">
+      <Link>Internal\Html5\TypedArray\Uint16Array.cs</Link>
+    </Compile>
+    <Compile Include="..\Html5\TypedArray\Uint32Array.cs">
+      <Link>Internal\Html5\TypedArray\Uint32Array.cs</Link>
+    </Compile>
+    <Compile Include="..\Html5\TypedArray\Uint8Array.cs">
+      <Link>Internal\Html5\TypedArray\Uint8Array.cs</Link>
+    </Compile>
+    <Compile Include="..\Html5\TypedArray\Uint8ClampedArray.cs">
+      <Link>Internal\Html5\TypedArray\Uint8ClampedArray.cs</Link>
+    </Compile>
     <Compile Include="Attributes\FieldAttribute.cs" />
     <Compile Include="Bridge\Json.cs" />
+    <Compile Include="System\BitConverter.cs" />
     <Compile Include="System\SerializableAttribute.cs" />
     <Compile Include="Attributes\UnboxAttribute.cs" />
     <Compile Include="Attributes\GlobalMethodsAttribute.cs" />
@@ -337,6 +377,7 @@
     <Content Include="Resources\.generated\bridge.js" />
     <Content Include="Resources\.generated\bridge\utils\console.js" />
     <Content Include="Resources\.generated\bridge\utils\systemAssemblyVersion.js" />
+    <Content Include="Resources\.generated\system\bitConverter.js" />
     <Content Include="Resources\.generated\system\formattableString.js" />
     <Content Include="Resources\.generated\system\formattableStringImpl.js" />
     <Content Include="Resources\.generated\system\guid.js" />

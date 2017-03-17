@@ -4239,6 +4239,455 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     });
 
+    Bridge.define("Bridge.ClientTest.BitConverterTests", {
+        statics: {
+            valueArgumentNull: function () {
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.BitConverterTests.f1);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.BitConverterTests.f2);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.BitConverterTests.f3);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.BitConverterTests.f4);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.BitConverterTests.f5);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.BitConverterTests.f6);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.BitConverterTests.f7);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.BitConverterTests.f8);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.BitConverterTests.f9);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.BitConverterTests.f10);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.BitConverterTests.f11);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.BitConverterTests.f12);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.BitConverterTests.f13);
+            },
+            startIndexBeyondLength: function () {
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f14);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f15);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f16);
+
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f17);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f18);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f19);
+
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f20);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f21);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f22);
+
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f23);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f24);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f25);
+
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f26);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f27);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f28);
+
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f29);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f30);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f31);
+
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f32);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f33);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f34);
+
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f35);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f36);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f37);
+
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f38);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f39);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f40);
+
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f41);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f42);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f43);
+
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f44);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f45);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f46);
+
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f47);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f48);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f49);
+
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f50);
+            },
+            startIndexPlusNeededLengthTooLong: function () {
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, $asm.$.Bridge.ClientTest.BitConverterTests.f51);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, $asm.$.Bridge.ClientTest.BitConverterTests.f52);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, $asm.$.Bridge.ClientTest.BitConverterTests.f53);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, $asm.$.Bridge.ClientTest.BitConverterTests.f54);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, $asm.$.Bridge.ClientTest.BitConverterTests.f55);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, $asm.$.Bridge.ClientTest.BitConverterTests.f56);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, $asm.$.Bridge.ClientTest.BitConverterTests.f57);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, $asm.$.Bridge.ClientTest.BitConverterTests.f58);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, $asm.$.Bridge.ClientTest.BitConverterTests.f59);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, $asm.$.Bridge.ClientTest.BitConverterTests.f60);
+                Bridge.Test.NUnit.Assert.throws$6(System.ArgumentException, $asm.$.Bridge.ClientTest.BitConverterTests.f61);
+            },
+            roundtripDoubleToInt64Bits: function () {
+                var input = 123456.3234;
+
+                var result = System.BitConverter.doubleToInt64Bits(input);
+                Bridge.Test.NUnit.Assert.areEqual(System.Int64([749042296,1090397189]).toString(), result.toString());
+
+                var roundtripped = System.BitConverter.int64BitsToDouble(result);
+                Bridge.Test.NUnit.Assert.areEqual(input, roundtripped);
+            },
+            int64BitsToDouble: function () {
+                var input = System.Array.init([System.Int64.MaxValue, System.Int64(1), System.Int64(0), System.Int64(-1), System.Int64.MinValue], System.Int64);
+                var expected = System.Array.init([Number.NaN, 4.94065645841247E-324, 0, Number.NaN, 0], System.Double);
+
+                for (var i = 0; i < input.length; i = (i + 1) | 0) {
+                    Bridge.Test.NUnit.Assert.areEqual(expected[i], System.BitConverter.int64BitsToDouble(input[i]));
+                }
+            },
+            doubleToInt64Bits: function () {
+                var input = System.Array.init([System.Double.max, 1.0, 0.0, -1.0, System.Double.min], System.Double);
+                var expected = System.Array.init([System.Int64([-1,2146435071]), System.Int64([0,1072693248]), System.Int64(0), System.Int64([0,-1074790400]), System.Int64([-1,-1048577])], System.Int64);
+
+                for (var i = 0; i < input.length; i = (i + 1) | 0) {
+                    Bridge.Test.NUnit.Assert.areEqual(expected[i].toString(), System.BitConverter.doubleToInt64Bits(input[i]).toString());
+                }
+            },
+            roundtripBoolean: function () {
+                var bytes = System.BitConverter.getBytes(true);
+                Bridge.Test.NUnit.Assert.areEqual(1, bytes.length);
+                Bridge.Test.NUnit.Assert.areEqual(1, bytes[0]);
+                Bridge.Test.NUnit.Assert.true(System.BitConverter.toBoolean(bytes, 0));
+
+                bytes = System.BitConverter.getBytes(false);
+                Bridge.Test.NUnit.Assert.areEqual(1, bytes.length);
+                Bridge.Test.NUnit.Assert.areEqual(0, bytes[0]);
+                Bridge.Test.NUnit.Assert.false(System.BitConverter.toBoolean(bytes, 0));
+            },
+            roundtripChar: function () {
+                var input = 65;
+                var expected = System.Array.init([65, 0], System.Byte);
+                Bridge.ClientTest.BitConverterTests.verifyRoundtrip(System.Char, System.BitConverter.getBytes$1, System.BitConverter.toChar, input, expected);
+            },
+            roundtripDouble: function () {
+                var input = System.Array.init([System.Double.max, 123456.3234, 0.0, -123456.3234, System.Double.min, Number.NaN, 3.14932264628586E-319], System.Double);
+                var expected = System.Array.init([System.Array.init([255, 255, 255, 255, 255, 255, 239, 127], System.Byte), System.Array.init([120, 122, 165, 44, 5, 36, 254, 64], System.Byte), System.Array.init([0, 0, 0, 0, 0, 0, 0, 0], System.Byte), System.Array.init([120, 122, 165, 44, 5, 36, 254, 192], System.Byte), System.Array.init([255, 255, 255, 255, 255, 255, 239, 255], System.Byte), System.Array.init([0, 0, 0, 0, 0, 0, 248, 255], System.Byte), System.Array.init([255, 248, 0, 0, 0, 0, 0, 0], System.Byte)], System.Array.type(System.Byte));
+
+                Bridge.ClientTest.BitConverterTests.verifyRoundtrip$1(System.Double, System.BitConverter.getBytes$2, System.BitConverter.toDouble, input, expected);
+            },
+            roundtripSingle: function () {
+                var input = 8392.34;
+                var expected = System.Array.init([92, 33, 3, 70], System.Byte);
+
+                Bridge.ClientTest.BitConverterTests.verifyRoundtrip(System.Single, System.BitConverter.getBytes$6, System.BitConverter.toSingle, input, expected);
+            },
+            roundtripInt16: function () {
+                var input = System.Array.init([32767, 4660, 0, -4660, -32768], System.Int16);
+                var expected = System.Array.init([System.Array.init([255, 127], System.Byte), System.Array.init([52, 18], System.Byte), System.Array.init([0, 0], System.Byte), System.Array.init([204, 237], System.Byte), System.Array.init([0, 128], System.Byte)], System.Array.type(System.Byte));
+
+                Bridge.ClientTest.BitConverterTests.verifyRoundtrip$1(System.Int16, System.BitConverter.getBytes$3, System.BitConverter.toInt16, input, expected);
+            },
+            roundtripInt32: function () {
+                var input = System.Array.init([2147483647, 305419896, 0, -305419896, -2147483648], System.Int32);
+                var expected = System.Array.init([System.Array.init([255, 255, 255, 127], System.Byte), System.Array.init([120, 86, 52, 18], System.Byte), System.Array.init([0, 0, 0, 0], System.Byte), System.Array.init([136, 169, 203, 237], System.Byte), System.Array.init([0, 0, 0, 128], System.Byte)], System.Array.type(System.Byte));
+
+                Bridge.ClientTest.BitConverterTests.verifyRoundtrip$1(System.Int32, System.BitConverter.getBytes$4, System.BitConverter.toInt32, input, expected);
+            },
+            roundtripInt64: function () {
+                var input = System.Array.init([System.Int64.MaxValue, System.Int64([-1985229329,19088743]), System.Int64(0), System.Int64([1985229329,-19088744]), System.Int64.MinValue], System.Int64);
+                var expected = System.Array.init([System.Array.init([255, 255, 255, 255, 255, 255, 255, 127], System.Byte), System.Array.init([239, 205, 171, 137, 103, 69, 35, 1], System.Byte), System.Array.init([0, 0, 0, 0, 0, 0, 0, 0], System.Byte), System.Array.init([17, 50, 84, 118, 152, 186, 220, 254], System.Byte), System.Array.init([0, 0, 0, 0, 0, 0, 0, 128], System.Byte)], System.Array.type(System.Byte));
+
+                Bridge.ClientTest.BitConverterTests.verifyRoundtrip$1(System.Int64, System.BitConverter.getBytes$5, System.BitConverter.toInt64, input, expected);
+            },
+            roundtripUInt16: function () {
+                var input = System.Array.init([65535, 4660, 0, 60876, 0], System.UInt16);
+                var expected = System.Array.init([System.Array.init([255, 255], System.Byte), System.Array.init([52, 18], System.Byte), System.Array.init([0, 0], System.Byte), System.Array.init([204, 237], System.Byte), System.Array.init([0, 0], System.Byte)], System.Array.type(System.Byte));
+
+                Bridge.ClientTest.BitConverterTests.verifyRoundtrip$1(System.UInt16, System.BitConverter.getBytes$7, System.BitConverter.toUInt16, input, expected);
+            },
+            roundtripUInt32: function () {
+                var input = System.Array.init([4294967295, 305419896, 0, 3989547400, 0], System.UInt32);
+                var expected = System.Array.init([System.Array.init([255, 255, 255, 255], System.Byte), System.Array.init([120, 86, 52, 18], System.Byte), System.Array.init([0, 0, 0, 0], System.Byte), System.Array.init([136, 169, 203, 237], System.Byte), System.Array.init([0, 0, 0, 0], System.Byte)], System.Array.type(System.Byte));
+
+                Bridge.ClientTest.BitConverterTests.verifyRoundtrip$1(System.UInt32, System.BitConverter.getBytes$8, System.BitConverter.toUInt32, input, expected);
+            },
+            roundtripUInt64: function () {
+                var input = System.Array.init([System.UInt64.MaxValue, System.UInt64([-1985229329,19088743]), System.UInt64(0), System.UInt64([-2023406814,-1193047]), System.UInt64.MinValue], System.UInt64);
+                var expected = System.Array.init([System.Array.init([255, 255, 255, 255, 255, 255, 255, 255], System.Byte), System.Array.init([239, 205, 171, 137, 103, 69, 35, 1], System.Byte), System.Array.init([0, 0, 0, 0, 0, 0, 0, 0], System.Byte), System.Array.init([34, 67, 101, 135, 169, 203, 237, 255], System.Byte), System.Array.init([0, 0, 0, 0, 0, 0, 0, 0], System.Byte)], System.Array.type(System.Byte));
+
+                Bridge.ClientTest.BitConverterTests.verifyRoundtrip$1(System.UInt64, System.BitConverter.getBytes$9, System.BitConverter.toUInt64, input, expected);
+            },
+            roundtripString: function () {
+                var bytes = System.Array.init([18, 52, 86, 120, 154], System.Byte);
+
+                Bridge.Test.NUnit.Assert.areEqual("12-34-56-78-9A", System.BitConverter.toString(bytes));
+                Bridge.Test.NUnit.Assert.areEqual("56-78-9A", System.BitConverter.toString$1(bytes, 2));
+                Bridge.Test.NUnit.Assert.areEqual("56", System.BitConverter.toString$2(bytes, 2, 1));
+
+                Bridge.Test.NUnit.Assert.areEqual("", System.BitConverter.toString(System.Array.init(0, 0, System.Byte)));
+                Bridge.Test.NUnit.Assert.areEqual("", System.BitConverter.toString$2(System.Array.init(3, 0, System.Byte), 1, 0));
+            },
+            toString_ByteArray_Long: function () {
+                var bytes = System.Linq.Enumerable.range(0, 1024).select($asm.$.Bridge.ClientTest.BitConverterTests.f62).toArray();
+
+                var expected = Bridge.toArray(System.Linq.Enumerable.from(bytes).select($asm.$.Bridge.ClientTest.BitConverterTests.f63)).join("-");
+
+                Bridge.Test.NUnit.Assert.areEqual(expected, System.BitConverter.toString(bytes));
+                Bridge.Test.NUnit.Assert.areEqual(expected.substr(3, ((expected.length - 6) | 0)), System.BitConverter.toString$2(bytes, 1, ((bytes.length - 2) | 0)));
+            },
+            verifyRoundtrip$1: function (TInput, getBytes, convertBack, input, expectedBytes) {
+                for (var i = 0; i < input.length; i = (i + 1) | 0) {
+                    Bridge.ClientTest.BitConverterTests.verifyRoundtrip(TInput, getBytes, convertBack, input[i], expectedBytes[i], "Set " + i + ". ");
+                }
+            },
+            verifyRoundtrip: function (TInput, getBytes, convertBack, input, expectedBytes, message) {
+                if (message === void 0) { message = ""; }
+                var bytes = getBytes(input);
+                Bridge.Test.NUnit.Assert.areEqual$1(expectedBytes.length, bytes.length, System.String.concat(message, "GetBytes().Length from ", input));
+
+                if (!System.BitConverter.isLittleEndian) {
+                    System.Array.reverse(expectedBytes);
+                }
+
+                Bridge.Test.NUnit.Assert.areEqual$1(Bridge.toArray(System.Linq.Enumerable.from(expectedBytes).select($asm.$.Bridge.ClientTest.BitConverterTests.f64)).join(" "), Bridge.toArray(System.Linq.Enumerable.from(bytes).select($asm.$.Bridge.ClientTest.BitConverterTests.f64)).join(" "), System.String.concat(message, "GetBytes() from ", input));
+
+                var back = convertBack(bytes, 0);
+                Bridge.ClientTest.BitConverterTests.assertApproximatelyIfDoubleOrFloat(TInput, back, input, System.String.concat(message, "Convert back aligned. "));
+
+                // Also try unaligned startIndex
+                var longerBytes = System.Array.init(((bytes.length + 1) | 0), 0, System.Byte);
+                longerBytes[0] = 0;
+                System.Array.copy(bytes, 0, longerBytes, 1, bytes.length);
+                back = convertBack(longerBytes, 1);
+                Bridge.ClientTest.BitConverterTests.assertApproximatelyIfDoubleOrFloat(TInput, back, input, System.String.concat(message, "Convert back unaligned. "));
+            },
+            assertApproximatelyIfDoubleOrFloat: function (TInput, back, input, message) {
+                var useEpsilon = Bridge.referenceEquals(TInput, System.Double) || Bridge.referenceEquals(TInput, System.Single);
+
+                if (useEpsilon) {
+                    var epsilon = 0.1;
+
+                    if (Bridge.referenceEquals(TInput, System.Double)) {
+                        var diff = input - back;
+
+                        if (diff < 0) {
+                            diff = -diff;
+                        }
+
+                        if (diff < epsilon) {
+                            Bridge.Test.NUnit.Assert.true$1(true, System.String.concat(message, input, " vs ", back));
+                        } else {
+                            Bridge.Test.NUnit.Assert.areEqual$1(input.toString(), back.toString(), System.String.concat(message, "Counted with epsilon: ", System.Double.format(epsilon, 'G')));
+                        }
+                    } else {
+                        var diff1 = input - back;
+
+                        if (diff1 < 0) {
+                            diff1 = -diff1;
+                        }
+
+                        if (diff1 < epsilon) {
+                            Bridge.Test.NUnit.Assert.true$1(true, System.String.concat(message, input, " vs ", back));
+                        } else {
+                            Bridge.Test.NUnit.Assert.areEqual$1(input.toString(), back.toString(), System.String.concat(message, "Counted with epsilon: ", System.Double.format(epsilon, 'G')));
+                        }
+                    }
+                } else {
+                    Bridge.Test.NUnit.Assert.areEqual$1(input.toString(), back.toString(), message);
+                }
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.BitConverterTests", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.BitConverterTests, {
+        f1: function () {
+            System.BitConverter.toBoolean(null, 0);
+        },
+        f2: function () {
+            System.BitConverter.toChar(null, 0);
+        },
+        f3: function () {
+            System.BitConverter.toDouble(null, 0);
+        },
+        f4: function () {
+            System.BitConverter.toInt16(null, 0);
+        },
+        f5: function () {
+            System.BitConverter.toInt32(null, 0);
+        },
+        f6: function () {
+            System.BitConverter.toInt64(null, 0);
+        },
+        f7: function () {
+            System.BitConverter.toSingle(null, 0);
+        },
+        f8: function () {
+            System.BitConverter.toUInt16(null, 0);
+        },
+        f9: function () {
+            System.BitConverter.toUInt32(null, 0);
+        },
+        f10: function () {
+            System.BitConverter.toUInt64(null, 0);
+        },
+        f11: function () {
+            System.BitConverter.toString(null);
+        },
+        f12: function () {
+            System.BitConverter.toString$1(null, 0);
+        },
+        f13: function () {
+            System.BitConverter.toString$2(null, 0, 0);
+        },
+        f14: function () {
+            System.BitConverter.toBoolean(System.Array.init(1, 0, System.Byte), -1);
+        },
+        f15: function () {
+            System.BitConverter.toBoolean(System.Array.init(1, 0, System.Byte), 1);
+        },
+        f16: function () {
+            System.BitConverter.toBoolean(System.Array.init(1, 0, System.Byte), 2);
+        },
+        f17: function () {
+            System.BitConverter.toChar(System.Array.init(2, 0, System.Byte), -1);
+        },
+        f18: function () {
+            System.BitConverter.toChar(System.Array.init(2, 0, System.Byte), 2);
+        },
+        f19: function () {
+            System.BitConverter.toChar(System.Array.init(2, 0, System.Byte), 3);
+        },
+        f20: function () {
+            System.BitConverter.toDouble(System.Array.init(8, 0, System.Byte), -1);
+        },
+        f21: function () {
+            System.BitConverter.toDouble(System.Array.init(8, 0, System.Byte), 8);
+        },
+        f22: function () {
+            System.BitConverter.toDouble(System.Array.init(8, 0, System.Byte), 9);
+        },
+        f23: function () {
+            System.BitConverter.toInt16(System.Array.init(2, 0, System.Byte), -1);
+        },
+        f24: function () {
+            System.BitConverter.toInt16(System.Array.init(2, 0, System.Byte), 2);
+        },
+        f25: function () {
+            System.BitConverter.toInt16(System.Array.init(2, 0, System.Byte), 3);
+        },
+        f26: function () {
+            System.BitConverter.toInt32(System.Array.init(4, 0, System.Byte), -1);
+        },
+        f27: function () {
+            System.BitConverter.toInt32(System.Array.init(4, 0, System.Byte), 4);
+        },
+        f28: function () {
+            System.BitConverter.toInt32(System.Array.init(4, 0, System.Byte), 5);
+        },
+        f29: function () {
+            System.BitConverter.toInt64(System.Array.init(8, 0, System.Byte), -1);
+        },
+        f30: function () {
+            System.BitConverter.toInt64(System.Array.init(8, 0, System.Byte), 8);
+        },
+        f31: function () {
+            System.BitConverter.toInt64(System.Array.init(8, 0, System.Byte), 9);
+        },
+        f32: function () {
+            System.BitConverter.toSingle(System.Array.init(4, 0, System.Byte), -1);
+        },
+        f33: function () {
+            System.BitConverter.toSingle(System.Array.init(4, 0, System.Byte), 4);
+        },
+        f34: function () {
+            System.BitConverter.toSingle(System.Array.init(4, 0, System.Byte), 5);
+        },
+        f35: function () {
+            System.BitConverter.toUInt16(System.Array.init(2, 0, System.Byte), -1);
+        },
+        f36: function () {
+            System.BitConverter.toUInt16(System.Array.init(2, 0, System.Byte), 2);
+        },
+        f37: function () {
+            System.BitConverter.toUInt16(System.Array.init(2, 0, System.Byte), 3);
+        },
+        f38: function () {
+            System.BitConverter.toUInt32(System.Array.init(4, 0, System.Byte), -1);
+        },
+        f39: function () {
+            System.BitConverter.toUInt32(System.Array.init(4, 0, System.Byte), 4);
+        },
+        f40: function () {
+            System.BitConverter.toUInt32(System.Array.init(4, 0, System.Byte), 5);
+        },
+        f41: function () {
+            System.BitConverter.toUInt64(System.Array.init(8, 0, System.Byte), -1);
+        },
+        f42: function () {
+            System.BitConverter.toUInt64(System.Array.init(8, 0, System.Byte), 8);
+        },
+        f43: function () {
+            System.BitConverter.toUInt64(System.Array.init(8, 0, System.Byte), 9);
+        },
+        f44: function () {
+            System.BitConverter.toString$1(System.Array.init(1, 0, System.Byte), -1);
+        },
+        f45: function () {
+            System.BitConverter.toString$1(System.Array.init(1, 0, System.Byte), 1);
+        },
+        f46: function () {
+            System.BitConverter.toString$1(System.Array.init(1, 0, System.Byte), 2);
+        },
+        f47: function () {
+            System.BitConverter.toString$2(System.Array.init(1, 0, System.Byte), -1, 0);
+        },
+        f48: function () {
+            System.BitConverter.toString$2(System.Array.init(1, 0, System.Byte), 1, 0);
+        },
+        f49: function () {
+            System.BitConverter.toString$2(System.Array.init(1, 0, System.Byte), 2, 0);
+        },
+        f50: function () {
+            System.BitConverter.toString$2(System.Array.init(1, 0, System.Byte), 0, -1);
+        },
+        f51: function () {
+            System.BitConverter.toBoolean(System.Array.init(0, 0, System.Byte), 0);
+        },
+        f52: function () {
+            System.BitConverter.toChar(System.Array.init(2, 0, System.Byte), 1);
+        },
+        f53: function () {
+            System.BitConverter.toDouble(System.Array.init(8, 0, System.Byte), 1);
+        },
+        f54: function () {
+            System.BitConverter.toInt16(System.Array.init(2, 0, System.Byte), 1);
+        },
+        f55: function () {
+            System.BitConverter.toInt32(System.Array.init(4, 0, System.Byte), 1);
+        },
+        f56: function () {
+            System.BitConverter.toInt64(System.Array.init(8, 0, System.Byte), 1);
+        },
+        f57: function () {
+            System.BitConverter.toSingle(System.Array.init(4, 0, System.Byte), 1);
+        },
+        f58: function () {
+            System.BitConverter.toUInt16(System.Array.init(2, 0, System.Byte), 1);
+        },
+        f59: function () {
+            System.BitConverter.toUInt32(System.Array.init(4, 0, System.Byte), 1);
+        },
+        f60: function () {
+            System.BitConverter.toUInt64(System.Array.init(8, 0, System.Byte), 1);
+        },
+        f61: function () {
+            System.BitConverter.toString$2(System.Array.init(2, 0, System.Byte), 1, 2);
+        },
+        f62: function (i) {
+            return (i & 255);
+        },
+        f63: function (b) {
+            return System.Byte.format(b, "X2");
+        },
+        f64: function (x) {
+            return System.Byte.format(x, "X");
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.BridgeConsoleTests", {
         statics: {
             hideConsole: function () {
@@ -11001,6 +11450,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             MODULE_GUID: "Guid",
             MODULE_MATH: "Math",
             MODULE_DECIMAL_MATH: "Decimal Math",
+            MODULE_BIT_CONVERTER: "BitConverter",
             MODULE_CONVERT: "Convert",
             MODULE_RANDOM: "Random",
             MODULE_TYPEDARRAYS: "Typed Arrays",
@@ -12155,7 +12605,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 }
             },
             fromDoubleArray: function () {
-                var testValues = System.Array.init([-System.Double.max, 0.0, 1.0, 1000.0, System.Double.max, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 4.94065645841247E-324, Number.NaN], System.Double);
+                var testValues = System.Array.init([-1.7976931348623157E+308, 0.0, 1.0, 1000.0, System.Double.max, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 4.94065645841247E-324, Number.NaN], System.Double);
                 var expectedValues = System.Array.init([Bridge.ClientTest.ConvertTests.ConvertConstants.DOUBLE_MIN_STRING, "0", "1", "1000", Bridge.ClientTest.ConvertTests.ConvertConstants.DOUBLE_MAX_STRING, "-Infinity", "Infinity", Bridge.ClientTest.ConvertTests.ConvertConstants.DOUBLE_EPSILON_STRING, "NaN"], System.String);
 
                 // Vanila Test Cases
@@ -12963,8 +13413,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             jSMode: true,
             NoDotNetDiff: false,
             HasDotNetDiff: true,
-            maxValue: System.Decimal(0.0),
-            minValue: System.Decimal(0.0),
+            maxValue: System.Decimal("79228162514264337593543950335"),
+            minValue: System.Decimal("-79228162514264337593543950335"),
             inputAdd: null,
             inputSubtract: null,
             inputMultiply: null,
@@ -12972,8 +13422,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             inputRemainder: null,
             config: {
                 init: function () {
-                    this.maxValue = System.Decimal.MaxValue;
-                    this.minValue = System.Decimal.MinValue;
                     this.inputAdd = System.Array.create(null, [[Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(47.0), System.Decimal(47.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(-47.0), System.Decimal(-47.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(-47.0), System.Decimal(-47.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(47.0), System.Decimal(47.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("443534569034876.33478923476"), System.Decimal(47.0), System.Decimal("443534569034923.33478923476")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("443534569034876.12345678901235"), System.Decimal(47.000000000001), System.Decimal("443534569034923.12345678901335")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("443534569034876.12345678901235"), System.Decimal("9436905724146.297872340425532"), System.Decimal("452971474759022.42132912943788")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("4435345690348766678656790453"), System.Decimal(17.0), System.Decimal("4435345690348766678656790470")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(17.2345324), System.Decimal("4435345690348766678656790453"), System.Decimal("4435345690348766678656790470.2")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.HasDotNetDiff, System.Boolean, $box_.System.Boolean.toString), "0.00000000000005", System.Decimal("-943456769034871.4234"), System.Decimal("47.00000000003455"), System.Decimal("-943456769034824.4233999999654")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("6999545690348766678656790453"), System.Decimal(-13.0), System.Decimal("6999545690348766678656790440")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(11.0), System.Decimal("-6435345690348766678656790453"), System.Decimal("-6435345690348766678656790442")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, Bridge.ClientTest.DecimalMathTests.maxValue, Bridge.ClientTest.DecimalMathTests.minValue, System.Decimal(0.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal.MinusOne, Bridge.ClientTest.DecimalMathTests.maxValue, System.Decimal("79228162514264337593543950334")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, Bridge.ClientTest.DecimalMathTests.maxValue, System.Decimal.MinusOne, System.Decimal("79228162514264337593543950334")]], System.Object, 15, 5);
                     this.inputSubtract = System.Array.create(null, [[Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(47.0), System.Decimal(-47.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(-47.0), System.Decimal(47.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(-47.0), System.Decimal(47.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(47.0), System.Decimal(-47.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("443534569034876.33478923476"), System.Decimal(47.0), System.Decimal("443534569034829.33478923476")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("443534569034876.12345678901235"), System.Decimal(47.000000000001), System.Decimal("443534569034829.12345678901135")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("443534569034876.12345678901235"), System.Decimal("9436905724146.297872340425532"), System.Decimal("434097663310729.82558444858682")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("4435345690348766678656790453"), System.Decimal(17.0), System.Decimal("4435345690348766678656790436")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(17.2345324), System.Decimal("4435345690348766678656790453"), System.Decimal("-4435345690348766678656790435.8")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.HasDotNetDiff, System.Boolean, $box_.System.Boolean.toString), System.Decimal(-0.00000000000005), System.Decimal("-943456769034871.4234"), System.Decimal("47.00000000003455"), System.Decimal("-943456769034918.4234000000346")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("6999545690348766678656790453"), System.Decimal(-13.0), System.Decimal("6999545690348766678656790466")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(11.0), System.Decimal("-6435345690348766678656790453"), System.Decimal("6435345690348766678656790464")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, Bridge.ClientTest.DecimalMathTests.maxValue, Bridge.ClientTest.DecimalMathTests.maxValue, System.Decimal(0.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal.MinusOne, Bridge.ClientTest.DecimalMathTests.minValue, System.Decimal("79228162514264337593543950334")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, Bridge.ClientTest.DecimalMathTests.maxValue, System.Decimal.One, System.Decimal("79228162514264337593543950334")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, Bridge.ClientTest.DecimalMathTests.minValue, System.Decimal.MinusOne, System.Decimal("-79228162514264337593543950334")]], System.Object, 16, 5);
                     this.inputMultiply = System.Array.create(null, [[Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(47.0), System.Decimal(0.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(-47.0), System.Decimal(0.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(-47.0), System.Decimal(0.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(47.0), System.Decimal(0.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(0.0), System.Decimal(0.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("443534569034876.33478923476"), System.Decimal(0.47), System.Decimal("208461247446391.8773509403372")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("43534569034876.12345678901235"), System.Decimal(47.000000000001), System.Decimal("2046124744639221.3370381184566")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("44.353456903487612345678901235"), System.Decimal("9436905724146.297872340425532"), System.Decimal("418559391338198.38088395328596")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("4435345690348766678656790453"), System.Decimal(0.17), System.Decimal("754008767359290335371654377.01")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(17.2345324), System.Decimal("443534569034876667865679045.37"), System.Decimal("7644110900551618662335084355.4")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("-943456769034871.4234"), System.Decimal("0.4700000000003455"), System.Decimal("-443424681446715.53331170154808")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.HasDotNetDiff, System.Boolean, $box_.System.Boolean.toString), System.Decimal(-0.01), System.Decimal("6999545690348766678656790453"), System.Decimal(-0.13), System.Decimal("-909940939745339668225382758.9")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.HasDotNetDiff, System.Boolean, $box_.System.Boolean.toString), System.Decimal(0.0001), System.Decimal(0.11), System.Decimal("-64353456903487666786567904.535"), System.Decimal("-7078880259383643346522469.4988")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, Bridge.ClientTest.DecimalMathTests.maxValue, System.Decimal.MinusOne, Bridge.ClientTest.DecimalMathTests.minValue], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal.MinusOne, Bridge.ClientTest.DecimalMathTests.minValue, Bridge.ClientTest.DecimalMathTests.maxValue], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, Bridge.ClientTest.DecimalMathTests.maxValue, System.Decimal.One, Bridge.ClientTest.DecimalMathTests.maxValue], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, Bridge.ClientTest.DecimalMathTests.minValue, System.Decimal.MinusOne, Bridge.ClientTest.DecimalMathTests.maxValue]], System.Object, 17, 5);
@@ -35919,7 +36367,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var expectedValues = System.Array.init([0, 255, 100, 255, 255], System.Byte);
             this.verifyViaObj(System.Double, function (value) { return System.Convert.toByte(value); }, testValues, expectedValues);
 
-            var overflowValues = System.Array.init([-System.Double.max, System.Double.max], System.Double);
+            var overflowValues = System.Array.init([-1.7976931348623157E+308, System.Double.max], System.Double);
             this.verifyThrowsViaObj(System.OverflowException, System.Double, function (value) { return System.Convert.toByte(value); }, overflowValues);
         },
         fromInt16: function () {
@@ -36311,7 +36759,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var expectedValues = System.Array.init([System.Decimal(1000.0), System.Decimal(100.0), System.Decimal(0.0), System.Decimal(0.001), System.Decimal(-1000.0), System.Decimal(-100.0)], System.Decimal);
             this.verifyViaObj(System.Double, function (value) { return System.Convert.toDecimal(value); }, testValues, expectedValues);
 
-            var overflowValues = System.Array.init([System.Double.max, -System.Double.max], System.Double);
+            var overflowValues = System.Array.init([System.Double.max, -1.7976931348623157E+308], System.Double);
             this.verifyThrowsViaObj(System.OverflowException, System.Double, function (value) { return System.Convert.toDecimal(value); }, overflowValues);
         },
         fromInt16: function () {
@@ -36403,7 +36851,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         fromDecimal: function () {
             var testValues = System.Array.init([System.Decimal.MaxValue, System.Decimal.MinValue, System.Decimal(0.0)], System.Decimal);
-            var expectedValues = System.Array.init([System.Decimal.toFloat(System.Decimal.MaxValue), System.Decimal.toFloat(System.Decimal.MinValue), 0.0], System.Double);
+            var expectedValues = System.Array.init([7.9228162514264338E+28, -7.9228162514264338E+28, 0.0], System.Double);
             this.verifyViaObj(System.Decimal, function (value) { return System.Convert.toDouble(value); }, testValues, expectedValues);
         },
         fromDouble: function () {
@@ -36446,10 +36894,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         fromString: function () {
             var doubleMaxValue = System.Double.max;
-            var doubleMinValue = -System.Double.max;
+            var doubleMinValue = -1.7976931348623157E+308;
 
             var testValues = System.Array.init([System.Double.format(doubleMinValue, "R"), System.Double.format(doubleMaxValue, "R"), System.Double.format((0.0), 'G'), System.Double.format((10.0), 'G'), System.Double.format((-10.0), 'G'), null], System.String);
-            var expectedValues = System.Array.init([-System.Double.max, System.Double.max, 0.0, 10.0, -10.0, 0.0], System.Double);
+            var expectedValues = System.Array.init([-1.7976931348623157E+308, System.Double.max, 0.0, 10.0, -10.0, 0.0], System.Double);
             this.verifyFromString(function (value) { return System.Convert.toDouble(value); }, function (value, provider) { return System.Convert.toDouble(value, provider); }, testValues, expectedValues);
 
             var overflowValues = System.Array.init(["1.79769313486232E+308", "-1.79769313486232E+308"], System.String);
@@ -36505,7 +36953,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var expectedValues = System.Array.init([100, -100, 0], System.Int16);
             this.verifyViaObj(System.Double, function (value) { return System.Convert.toInt16(value); }, testValues, expectedValues);
 
-            var overflowValues = System.Array.init([System.Double.max, -System.Double.max], System.Double);
+            var overflowValues = System.Array.init([System.Double.max, -1.7976931348623157E+308], System.Double);
             this.verifyThrowsViaObj(System.OverflowException, System.Double, function (value) { return System.Convert.toInt16(value); }, overflowValues);
         },
         fromInt16: function () {
@@ -36640,7 +37088,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var expectedValues = System.Array.init([100, -100, 0], System.Int32);
             this.verifyViaObj(System.Double, function (value) { return System.Convert.toInt32(value); }, testValues, expectedValues);
 
-            var overflowValues = System.Array.init([System.Double.max, -System.Double.max], System.Double);
+            var overflowValues = System.Array.init([System.Double.max, -1.7976931348623157E+308], System.Double);
             this.verifyThrowsViaObj(System.OverflowException, System.Double, function (value) { return System.Convert.toInt32(value); }, overflowValues);
         },
         fromInt16: function () {
@@ -36769,7 +37217,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var expectedValues = System.Array.init([System.Int64(100), System.Int64(-100), System.Int64(0)], System.Int64);
             this.verifyViaObj(System.Double, function (value) { return System.Convert.toInt64(value); }, testValues, expectedValues);
 
-            var overflowValues = System.Array.init([System.Double.max, -System.Double.max], System.Double);
+            var overflowValues = System.Array.init([System.Double.max, -1.7976931348623157E+308], System.Double);
             this.verifyThrowsViaObj(System.OverflowException, System.Double, function (value) { return System.Convert.toInt64(value); }, overflowValues);
         },
         fromInt16: function () {
@@ -36896,7 +37344,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var expectedValues = System.Array.init([100, -100, 0], System.SByte);
             this.verifyViaObj(System.Double, function (value) { return System.Convert.toSByte(value); }, testValues, expectedValues);
 
-            var overflowValues = System.Array.init([System.Double.max, -System.Double.max], System.Double);
+            var overflowValues = System.Array.init([System.Double.max, -1.7976931348623157E+308], System.Double);
             this.verifyThrowsViaObj(System.OverflowException, System.Double, function (value) { return System.Convert.toSByte(value); }, overflowValues);
         },
         fromInt16: function () {
@@ -37031,11 +37479,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         fromDecimal: function () {
             var testValues = System.Array.init([System.Decimal(1000.0), System.Decimal(0.0), System.Decimal(-1000.0), System.Decimal.MaxValue, System.Decimal.MinValue], System.Decimal);
-            var expectedValues = System.Array.init([1000.0, 0.0, -1000.0, System.Decimal.toFloat(System.Decimal.MaxValue), System.Decimal.toFloat(System.Decimal.MinValue)], System.Single);
+            var max = System.Decimal.MaxValue;
+            var min = System.Decimal.MinValue;
+            var expectedValues = System.Array.init([1000.0, 0.0, -1000.0, System.Decimal.toFloat(max), System.Decimal.toFloat(min)], System.Single);
             this.verifyViaObj(System.Decimal, function (value) { return System.Convert.toSingle(value); }, testValues, expectedValues);
         },
         fromDouble: function () {
-            var testValues = System.Array.init([1000.0, 100.0, 0.0, -100.0, -1000.0, System.Double.max, -System.Double.max], System.Double);
+            var testValues = System.Array.init([1000.0, 100.0, 0.0, -100.0, -1000.0, System.Double.max, -1.7976931348623157E+308], System.Double);
             var expectedValues = System.Array.init([1000.0, 100.0, 0.0, -100.0, -1000.0, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY], System.Single);
             this.verifyViaObj(System.Double, function (value) { return System.Convert.toSingle(value); }, testValues, expectedValues);
         },
@@ -37078,7 +37528,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             this.verifyFromString(function (value) { return System.Convert.toSingle(value); }, function (value, provider) { return System.Convert.toSingle(value, provider); }, testValues, expectedValues);
 
             var doubleMaxValue = System.Double.max;
-            var doubleMinValue = -System.Double.max;
+            var doubleMinValue = -1.7976931348623157E+308;
             var overflowValues = System.Array.init([System.Double.format(doubleMinValue, "R"), System.Double.format(doubleMaxValue, "R")], System.String);
             this.verifyFromStringThrows(System.OverflowException, function (value) { return System.Convert.toSingle(value); }, function (value, provider) { return System.Convert.toSingle(value, provider); }, overflowValues);
 

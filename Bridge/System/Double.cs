@@ -8,11 +8,11 @@ namespace System
     {
         private extern Double(int i);
 
-        [Name("max")]
-        public static readonly double MaxValue = 1.7976931348623157E+308;
+        [Template("System.Double.max")]
+        public const double MaxValue = 1.7976931348623157E+308;
 
-        [Name("min")]
-        public static readonly double MinValue = -1.7976931348623157E+308;
+        [Template("System.Double.min")]
+        public const double MinValue = -1.7976931348623157E+308;
 
         [InlineConst]
         public const double Epsilon = 4.94065645841247E-324;

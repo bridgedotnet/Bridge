@@ -41,6 +41,7 @@
         public const string MODULE_MATH = "Math";
         public const string MODULE_DECIMAL_MATH = "Decimal Math";
 
+        public const string MODULE_BIT_CONVERTER = "BitConverter";
         public const string MODULE_CONVERT = "Convert";
         public const string MODULE_RANDOM = "Random";
 

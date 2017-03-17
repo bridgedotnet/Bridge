@@ -90,7 +90,7 @@ namespace System.Collections.Generic
 
         public extern void RemoveAt(int index);
 
-        public extern List<T> RemoveRange(int index, int count);
+        public extern void RemoveRange(int index, int count);
 
         public extern void Reverse();
 

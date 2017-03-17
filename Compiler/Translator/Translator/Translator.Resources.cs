@@ -669,7 +669,28 @@ namespace Bridge.Translator
                         this.Log.Trace("Reading resource item at " + file.FullName);
 
                         var content = File.ReadAllBytes(file.FullName);
-                        buffer.Write(content, 0, content.Length);
+
+                        if (content.Length > 0)
+                        {
+                            var bomLength = !item.RemoveBom.HasValue || item.RemoveBom.Value
+                                ? GetBomLength(content)
+                                : 0;
+
+                            if (bomLength > 0)
+                            {
+                                this.Log.Trace("Found BOM symbols (" + bomLength + " byte length)");
+                            }
+
+                            if (bomLength < content.Length)
+                            {
+                                buffer.Write(content, bomLength, content.Length - bomLength);
+                            }
+                            else
+                            {
+                                this.Log.Trace("Skipped resource as it contains only BOM");
+                            }
+
+                        }
 
                         this.Log.Trace("Read " + content.Length + " bytes");
                     }
@@ -680,6 +701,50 @@ namespace Bridge.Translator
                     throw;
                 }
             }
+        }
+
+        private int GetBomLength(byte[] buffer)
+        {
+            if (buffer.Length >= 2)
+            {
+                if (buffer[0] == 0xff && buffer[1] == 0xfe)
+                {
+                    // UTF-16LE
+                    return 2;
+                }
+                if (buffer[0] == 0xfe && buffer[1] == 0xff)
+                {
+                    // UTF-16BE
+                    return 2;
+                }
+
+                if (buffer.Length >= 3)
+                {
+                    if (buffer[0] == 0x2b && buffer[1] == 0x2f && buffer[2] == 0x76)
+                    {
+                        // UTF7;
+                        return 3;
+                    }
+
+                    if (buffer[0] == 0xef && buffer[1] == 0xbb && buffer[2] == 0xbf)
+                    {
+                        // UTF8
+                        return 3;
+                    }
+
+                }
+
+                if (buffer.Length >= 4)
+                {
+                    if (buffer[0] == 0 && buffer[1] == 0 && buffer[2] == 0xfe && buffer[3] == 0xff)
+                    {
+                        // UTF32;
+                        return 4;
+                    }
+                }
+            }
+
+            return 0;
         }
 
         private void GenerateResourceFileRemark(MemoryStream resourceBuffer, ResourceConfigItem item, FileInfo file, string dirPathInFileName)

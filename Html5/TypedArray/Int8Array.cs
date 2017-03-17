@@ -2,7 +2,11 @@
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array
 using System;
 
+#if CORE
+namespace Bridge.Internal.Html5
+#else
 namespace Bridge.Html5
+#endif
 {
     /// <summary>
     /// Represents an array of twos-complement 8-bit signed integers. The contents are initialized to 0.
@@ -11,7 +15,12 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Namespace(false)]
-    public class Int8Array : TypedArray.Prototype<Int8Array, SByte>
+    #if CORE
+    internal
+#else
+    public
+#endif
+    class Int8Array : TypedArray.Prototype<Int8Array, SByte>
     {
         /// <summary>
         /// Creates a new Int8Array of the specified length.

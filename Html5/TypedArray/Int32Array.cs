@@ -1,7 +1,11 @@
 // The documentation for this class (on <summary> tags) was extracted from:
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array
 
+#if CORE
+namespace Bridge.Internal.Html5
+#else
 namespace Bridge.Html5
+#endif
 {
     /// <summary>
     /// Represents an array of twos-complement 32-bit signed integers in the platform byte order.
@@ -11,7 +15,12 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Namespace(false)]
-    public class Int32Array : TypedArray.Prototype<Int32Array, int>
+#if CORE
+    internal
+#else
+    public
+#endif
+    class Int32Array : TypedArray.Prototype<Int32Array, int>
     {
         /// <summary>
         /// Creates a new Int32Array of the specified length.

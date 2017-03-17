@@ -1,7 +1,11 @@
 // The documentation for this class (on <summary> tags) was extracted from:
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array
 
+#if CORE
+namespace Bridge.Internal.Html5
+#else
 namespace Bridge.Html5
+#endif
 {
     /// <summary>
     /// Represents an array of twos-complement 16-bit signed integers in the platform byte order.
@@ -11,7 +15,12 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Namespace(false)]
-    public class Int16Array : TypedArray.Prototype<Int16Array, short>
+#if CORE
+    internal
+#else
+    public
+#endif
+    class Int16Array : TypedArray.Prototype<Int16Array, short>
     {
         /// <summary>
         /// Creates a new Int16Array of the specified length.

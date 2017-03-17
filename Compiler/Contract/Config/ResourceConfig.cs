@@ -101,6 +101,11 @@ namespace Bridge.Contract
             {
                 this.Silent = true;
             }
+
+            if (!this.RemoveBom.HasValue)
+            {
+                this.RemoveBom = true;
+            }
         }
 
         public string Header
@@ -119,6 +124,11 @@ namespace Bridge.Contract
         }
 
         public bool? Silent
+        {
+            get; set;
+        }
+
+        public bool? RemoveBom
         {
             get; set;
         }
