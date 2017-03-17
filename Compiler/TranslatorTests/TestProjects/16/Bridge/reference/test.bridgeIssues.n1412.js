@@ -14,7 +14,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                 $t = Bridge.getEnumerator(animationComp);
                 try {
                     while ($t.moveNext()) {
-                        var state = $t.getCurrent();
+                        var state = $t.Current;
 
                     }
                 }finally {

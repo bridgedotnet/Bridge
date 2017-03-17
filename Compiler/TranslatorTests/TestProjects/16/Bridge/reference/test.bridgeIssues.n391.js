@@ -12,11 +12,11 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                 $t = Bridge.getEnumerator(TestArray1);
                 try {
                     while ($t.moveNext()) {
-                        var x = $t.getCurrent();
+                        var x = $t.Current;
                         $t1 = Bridge.getEnumerator(TestArray2);
                         try {
                             while ($t1.moveNext()) {
-                                var y = $t1.getCurrent();
+                                var y = $t1.Current;
                                 doSomething = System.String.equals(x, y);
                             }
                         }finally {
@@ -33,11 +33,11 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                 $t2 = Bridge.getEnumerator(TestArray1);
                 try {
                     while ($t2.moveNext()) {
-                        var x1 = $t2.getCurrent();
+                        var x1 = $t2.Current;
                         $t3 = Bridge.getEnumerator(TestArray2);
                         try {
                             while ($t3.moveNext()) {
-                                var y1 = $t3.getCurrent();
+                                var y1 = $t3.Current;
                                 doSomething = System.String.equals(x1, y1);
                             }
                         }finally {

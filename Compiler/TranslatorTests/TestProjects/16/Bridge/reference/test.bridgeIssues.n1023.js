@@ -13,7 +13,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
         },
         $ctor1: function (value) {
             Test.BridgeIssues.N1023.Optional$1(T).ctor.call(this);
-            this.setValue(value);
+            this.Value = value;
         },
         ctor: function () {
             this.$initialize();
@@ -46,7 +46,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
         },
         ctor: function (name) {
             this.$initialize();
-            this.setName(name.$clone());
+            this.Name = name.$clone();
         }
     });
 });

@@ -10,7 +10,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             $t = Bridge.getEnumerator(a);
             try {
                 while ($t.moveNext()) {
-                    var v = $t.getCurrent();
+                    var v = $t.Current;
 
                 }
             }finally {
@@ -29,7 +29,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             $t = Bridge.getEnumerator(a);
             try {
                 while ($t.moveNext()) {
-                    var v = $t.getCurrent();
+                    var v = $t.Current;
 
                 }
             }finally {
@@ -48,7 +48,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                 $t = Bridge.getEnumerator(a);
                 try {
                     while ($t.moveNext()) {
-                        var v = $t.getCurrent();
+                        var v = $t.Current;
 
                     }
                 }finally {
@@ -68,7 +68,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                 $t = Bridge.getEnumerator(a);
                 try {
                     while ($t.moveNext()) {
-                        var v = $t.getCurrent();
+                        var v = $t.Current;
 
                     }
                 }finally {

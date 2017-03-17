@@ -26,35 +26,43 @@ Bridge.assembly("TestProject.I2096", function ($asm, globals) {
     Bridge.define("Test.BridgeIssues.N1424.A");
 
     Bridge.define("Test.BridgeIssues.N1424.Alpha", {
-        data: 0
-    });
-
-    Bridge.define("Test.BridgeIssues.N1424.B", {
-        getData: function () {
-            return 8;
-        },
-        setData: function (value) {
+        config: {
+            properties: {
+                Data: 0
+            }
         }
     });
+
+    Bridge.define("Test.BridgeIssues.N1424.B");
 
     Bridge.define("Test.BridgeIssues.N770.IBase", {
         $kind: "interface"
     });
 
     Bridge.define("TestProject1.TestClassA", {
-        value1: 0
+        config: {
+            properties: {
+                Value1: 0
+            }
+        }
     });
 
     Bridge.define("TestProject2.TestClassB", {
-        value1: 0
+        config: {
+            properties: {
+                Value1: 0
+            }
+        }
     });
 
     Bridge.define("Test.BridgeIssues.N770.Impl", {
         inherits: [Test.BridgeIssues.N770.IBase],
-        prop: 0,
         config: {
+            properties: {
+                Prop: 0
+            },
             alias: [
-            "prop", "Test$BridgeIssues$N770$IBase$prop"
+            "Prop", "Test$BridgeIssues$N770$IBase$Prop"
             ]
         }
     });

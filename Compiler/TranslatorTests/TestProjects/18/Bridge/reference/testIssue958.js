@@ -19,10 +19,10 @@
 
     Bridge.apply($asm.$.TestIssue958.Issue958, {
         f1: function (action) {
-            Bridge.Console.log(System.String.concat("Name: ", action.getName()));
+            Bridge.Console.log(System.String.concat("Name: ", action.Name));
         },
         f2: function (action) {
-            Bridge.Console.log(System.String.concat("Value: ", action.getValue()));
+            Bridge.Console.log(System.String.concat("Value: ", action.Value));
         }
     });
 
@@ -46,7 +46,7 @@
         },
         ctor: function (name) {
             this.$initialize();
-            this.setName(name);
+            this.Name = name;
         }
     });
 
@@ -59,6 +59,6 @@
         },
         ctor: function (value) {
             this.$initialize();
-            this.setValue(value);
+            this.Value = value;
         }
     });
