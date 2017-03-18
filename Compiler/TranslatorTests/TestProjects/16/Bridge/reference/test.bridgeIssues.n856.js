@@ -11,7 +11,6 @@ Bridge.assembly("TestProject", function ($asm, globals) {
         config: {
             properties: {
                 
-                
                 TestProperty: 0
             }
         },
