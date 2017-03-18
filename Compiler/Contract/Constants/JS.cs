@@ -268,6 +268,7 @@
 
                 public const string APPLY = DOTNAME + "apply";
                 public const string ASSEMBLY = DOTNAME + "assembly";
+                public const string ENSURE_BASE_PROPERTY = DOTNAME + "ensureBaseProperty";
                 public const string IS = DOTNAME + "is";
                 public const string SET_METADATA = DOTNAME + "setMetadata";
                 public const string GET_TYPE_ALIAS = DOTNAME + "getTypeAlias";

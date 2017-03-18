@@ -75,7 +75,7 @@ namespace Bridge.Translator
                 if (isProperty)
                 {
                     var name = OverloadsCollection.Create(this.Emitter, member).GetOverloadName(true);
-                    this.Write("Bridge.ensureBaseProperty(this, " + this.Emitter.ToJavaScript(name) + ")");
+                    this.Write(JS.Types.Bridge.ENSURE_BASE_PROPERTY + "(this, " + this.Emitter.ToJavaScript(name) + ")");
                 }
                 else
                 {

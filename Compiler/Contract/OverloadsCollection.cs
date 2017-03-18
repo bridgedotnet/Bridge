@@ -217,7 +217,7 @@ namespace Bridge.Contract
             this.Type = this.Member.DeclaringType;
             this.InitMembers();
             this.Emitter.OverloadsCacheNodes[new Tuple<AstNode, bool>(fieldDeclaration, false)] = this;
-            
+
             this.SetCaseFromNameAttr();
         }
 
