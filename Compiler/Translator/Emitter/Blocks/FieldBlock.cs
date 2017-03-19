@@ -380,7 +380,7 @@ namespace Bridge.Translator
                     continue;
                 }
 
-                var mname = member.GetName(this.Emitter, true);
+                var mname = this.TypeInfo.IsEnum ? member.Name : member.GetName(this.Emitter, true);
 
                 bool isValid = Helpers.IsValidIdentifier(mname);
                 if (!isValid)

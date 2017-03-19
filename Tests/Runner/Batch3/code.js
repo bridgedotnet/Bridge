@@ -1044,7 +1044,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1059.OverlayType3", {
         $kind: "enum",
         statics: {
-            circle: 1,
+            CIRCLE: 1,
             marker: 2
         }
     });
@@ -1053,7 +1053,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         $kind: "enum",
         statics: {
             CIRCLE: 1,
-            MARKER: 2
+            marker: 2
         }
     });
 
@@ -11743,9 +11743,9 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2033.GameState", {
         $kind: "enum",
         statics: {
-            new: "new",
-            playing: "playing",
-            finished: "finished"
+            New: "new",
+            Playing: "playing",
+            Finished: "finished"
         },
         $utype: System.String
     });
@@ -21394,7 +21394,7 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge881A", {
         $kind: "enum",
         statics: {
-            $Name: 0
+            Name: 0
         }
     });
 

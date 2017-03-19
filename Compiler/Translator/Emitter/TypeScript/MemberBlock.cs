@@ -111,10 +111,20 @@ namespace Bridge.Translator.TypeScript
         private void WriteFieldDeclaration(TypeConfigItem field, VariableInitializer variableInitializer)
         {
             XmlToJsDoc.EmitComment(this, field.Entity, null, variableInitializer);
-            this.Write(field.GetName(this.Emitter));
+
+            if (this.TypeInfo.IsEnum)
+            {
+                this.Write(field.Name);
+            }
+            else
+            {
+                this.Write(field.GetName(this.Emitter));
+            }
+            
             this.WriteColon();
+            
             string typeName = this.TypeInfo.IsEnum
-                ? "number"
+                ? (this.Emitter.Validator.IsStringNameEnum(this.TypeInfo.Type) ? "string" : "number")
                 : BridgeTypes.ToTypeScriptName(field.Entity.ReturnType, this.Emitter);
             this.Write(typeName);
             this.WriteSemiColon();

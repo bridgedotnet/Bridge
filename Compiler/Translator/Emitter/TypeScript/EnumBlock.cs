@@ -40,13 +40,21 @@ namespace Bridge.Translator.TypeScript
                 var lastField = this.TypeInfo.StaticConfig.Fields.Last();
                 foreach (var field in this.TypeInfo.StaticConfig.Fields)
                 {
-                    this.Write(field.GetName(this.Emitter));
+                    this.Write(field.Name);
 
                     var initializer = field.Initializer;
                     if (initializer != null && initializer is PrimitiveExpression)
                     {
                         this.Write(" = ");
-                        this.Write(((PrimitiveExpression)initializer).Value);
+                        if (this.Emitter.Validator.IsStringNameEnum(this.TypeInfo.Type))
+                        {
+                            this.WriteScript(((PrimitiveExpression)initializer).Value);
+                        }
+                        else
+                        {
+                            this.Write(((PrimitiveExpression)initializer).Value);
+                        }
+                        
                     }
 
                     if (field != lastField)
