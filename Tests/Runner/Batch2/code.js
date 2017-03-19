@@ -104,7 +104,7 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
                 var ol = System.Int64(5);
                 var oi = Bridge.box(5, System.Int32);
                 var varNull = null;
-                var varUndefined = temp["this-prop-undefined"];
+                var varUndefined = temp[System.Array.index("this-prop-undefined", temp)];
 
                 Bridge.Test.NUnit.Assert.false$1(varNull === varUndefined, "varNull == varUndefined");
                 Bridge.Test.NUnit.Assert.true$1(varNull === null, "varNull == null");
@@ -144,29 +144,29 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
                 var stringArray = System.Array.init(9, null, System.String);
                 var decimalArray = System.Array.init(10, System.Decimal(0.0), System.Decimal);
 
-                byteArray[0] = 1;
-                sbyteArray[0] = 2;
-                shortArray[0] = 3;
-                ushortArray[0] = 4;
-                intArray[0] = 5;
-                uintArray[0] = 6;
-                floatArray[0] = 7;
-                doubleArray[0] = 8;
+                byteArray[System.Array.index(0, byteArray)] = 1;
+                sbyteArray[System.Array.index(0, sbyteArray)] = 2;
+                shortArray[System.Array.index(0, shortArray)] = 3;
+                ushortArray[System.Array.index(0, ushortArray)] = 4;
+                intArray[System.Array.index(0, intArray)] = 5;
+                uintArray[System.Array.index(0, uintArray)] = 6;
+                floatArray[System.Array.index(0, floatArray)] = 7;
+                doubleArray[System.Array.index(0, doubleArray)] = 8;
 
-                stringArray[0] = "9";
-                decimalArray[0] = System.Decimal(10.0);
+                stringArray[System.Array.index(0, stringArray)] = "9";
+                decimalArray[System.Array.index(0, decimalArray)] = System.Decimal(10.0);
 
-                Bridge.Test.NUnit.Assert.areEqual$1(1, byteArray[0], "get byteArray[0]");
-                Bridge.Test.NUnit.Assert.areEqual$1(2, sbyteArray[0], "get sbyteArray[0]");
-                Bridge.Test.NUnit.Assert.areEqual$1(3, shortArray[0], "get shortArray[0]");
-                Bridge.Test.NUnit.Assert.areEqual$1(4, ushortArray[0], "get ushortArray[0]");
-                Bridge.Test.NUnit.Assert.areEqual$1(5, intArray[0], "get intArray[0]");
-                Bridge.Test.NUnit.Assert.areEqual$1(6, uintArray[0], "get uintArray[0]");
-                Bridge.Test.NUnit.Assert.areEqual$1(7, floatArray[0], "get floatArray[0]");
-                Bridge.Test.NUnit.Assert.areEqual$1(8, doubleArray[0], "get doubleArray[0]");
+                Bridge.Test.NUnit.Assert.areEqual$1(1, byteArray[System.Array.index(0, byteArray)], "get byteArray[0]");
+                Bridge.Test.NUnit.Assert.areEqual$1(2, sbyteArray[System.Array.index(0, sbyteArray)], "get sbyteArray[0]");
+                Bridge.Test.NUnit.Assert.areEqual$1(3, shortArray[System.Array.index(0, shortArray)], "get shortArray[0]");
+                Bridge.Test.NUnit.Assert.areEqual$1(4, ushortArray[System.Array.index(0, ushortArray)], "get ushortArray[0]");
+                Bridge.Test.NUnit.Assert.areEqual$1(5, intArray[System.Array.index(0, intArray)], "get intArray[0]");
+                Bridge.Test.NUnit.Assert.areEqual$1(6, uintArray[System.Array.index(0, uintArray)], "get uintArray[0]");
+                Bridge.Test.NUnit.Assert.areEqual$1(7, floatArray[System.Array.index(0, floatArray)], "get floatArray[0]");
+                Bridge.Test.NUnit.Assert.areEqual$1(8, doubleArray[System.Array.index(0, doubleArray)], "get doubleArray[0]");
 
-                Bridge.Test.NUnit.Assert.areEqual$1("9", stringArray[0], "get stringArray[0]");
-                Bridge.Test.NUnit.Assert.areEqual$1(System.Decimal(10.0), decimalArray[0], "get decimalArray[0]");
+                Bridge.Test.NUnit.Assert.areEqual$1("9", stringArray[System.Array.index(0, stringArray)], "get stringArray[0]");
+                Bridge.Test.NUnit.Assert.areEqual$1(System.Decimal(10.0), decimalArray[System.Array.index(0, decimalArray)], "get decimalArray[0]");
             }
         },
         typePropertiesAreCorrect: function () {
@@ -204,8 +204,9 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
             Bridge.Test.NUnit.Assert.areEqual(1, (System.Array.getLength(System.Array.init(["x", "y"], System.String), 0) - 1));
         },
         gettingValueByIndexWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual("x", System.Array.init(["x", "y"], System.String)[0]);
-            Bridge.Test.NUnit.Assert.areEqual("y", System.Array.init(["x", "y"], System.String)[1]);
+            var $t, $t1;
+            Bridge.Test.NUnit.Assert.areEqual("x", ($t = System.Array.init(["x", "y"], System.String))[System.Array.index(0, $t)]);
+            Bridge.Test.NUnit.Assert.areEqual("y", ($t1 = System.Array.init(["x", "y"], System.String))[System.Array.index(1, $t1)]);
         },
         getValueWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual("x", Bridge.unbox(System.Array.get(System.Array.init(["x", "y"], System.String), 0)));
@@ -213,17 +214,17 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
         },
         settingValueByIndexWorks: function () {
             var arr = System.Array.init(2, null, System.String);
-            arr[0] = "x";
-            arr[1] = "y";
-            Bridge.Test.NUnit.Assert.areEqual("x", arr[0]);
-            Bridge.Test.NUnit.Assert.areEqual("y", arr[1]);
+            arr[System.Array.index(0, arr)] = "x";
+            arr[System.Array.index(1, arr)] = "y";
+            Bridge.Test.NUnit.Assert.areEqual("x", arr[System.Array.index(0, arr)]);
+            Bridge.Test.NUnit.Assert.areEqual("y", arr[System.Array.index(1, arr)]);
         },
         setValueWorks: function () {
             var arr = System.Array.init(2, null, System.String);
             System.Array.set(arr, "x", 0);
             System.Array.set(arr, "y", 1);
-            Bridge.Test.NUnit.Assert.areEqual("x", arr[0]);
-            Bridge.Test.NUnit.Assert.areEqual("y", arr[1]);
+            Bridge.Test.NUnit.Assert.areEqual("x", arr[System.Array.index(0, arr)]);
+            Bridge.Test.NUnit.Assert.areEqual("y", arr[System.Array.index(1, arr)]);
         },
         foreachWorks: function () {
             var $t;

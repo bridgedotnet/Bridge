@@ -5,7 +5,7 @@
             }
 
             if (indices[0] < 0 || indices[0] >= (arr.$s ? arr.$s[0] : arr.length)) {
-                throw new System.ArgumentException("Index 0 out of range");
+                throw new System.IndexOutOfRangeException("Index 0 out of range");
             }
 
             var idx = indices[0],
@@ -14,7 +14,7 @@
             if (arr.$s) {
                 for (i = 1; i < arr.$s.length; i++) {
                     if (indices[i] < 0 || indices[i] >= arr.$s[i]) {
-                        throw new System.ArgumentException("Index " + i + " out of range");
+                        throw new System.IndexOutOfRangeException("Index " + i + " out of range");
                     }
 
                     idx = idx * arr.$s[i] + indices[i];
@@ -22,6 +22,13 @@
             }
 
             return idx;
+        },
+
+        index: function (index, arr) {
+            if (index < 0 || index >= arr.length) {
+                throw new System.IndexOutOfRangeException();
+            }
+            return index;
         },
 
         $get: function (indices) {

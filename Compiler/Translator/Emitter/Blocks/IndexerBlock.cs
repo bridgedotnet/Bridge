@@ -369,6 +369,7 @@ namespace Bridge.Translator
             var memberTargetrr = targetrr as MemberResolveResult;
             bool isField = memberTargetrr != null && memberTargetrr.Member is IField &&
                            (memberTargetrr.TargetResult is ThisResolveResult ||
+                           memberTargetrr.TargetResult is TypeResolveResult ||
                             memberTargetrr.TargetResult is LocalResolveResult);
             bool isSimple = targetrr is ThisResolveResult || targetrr is LocalResolveResult ||
                             targetrr is ConstantResolveResult || isField;
@@ -1319,7 +1320,32 @@ namespace Bridge.Translator
             var oldUnary = this.Emitter.IsUnaryAccessor;
             this.Emitter.IsAssignment = false;
             this.Emitter.IsUnaryAccessor = false;
+
+            var targetrr = this.Emitter.Resolver.ResolveNode(indexerExpression.Target, this.Emitter);
+            var memberTargetrr = targetrr as MemberResolveResult;
+            bool isField = memberTargetrr != null && memberTargetrr.Member is IField &&
+                           (memberTargetrr.TargetResult is ThisResolveResult ||
+                            memberTargetrr.TargetResult is TypeResolveResult ||
+                            memberTargetrr.TargetResult is LocalResolveResult);
+            bool isSimple = targetrr is ThisResolveResult || targetrr is LocalResolveResult ||
+                            targetrr is ConstantResolveResult || isField;
+            string targetVar = null;
+
+            if (!isSimple)
+            {
+                this.WriteOpenParentheses();
+                targetVar = this.GetTempVarName();
+                this.Write(targetVar);
+                this.Write(" = ");
+            }
+
             indexerExpression.Target.AcceptVisitor(this.Emitter);
+
+            if (!isSimple)
+            {
+                this.WriteCloseParentheses();
+            }
+
             this.Emitter.IsAssignment = oldIsAssignment;
             this.Emitter.IsUnaryAccessor = oldUnary;
 
@@ -1357,12 +1383,25 @@ namespace Bridge.Translator
                 else
                 {
                     this.WriteOpenBracket();
+                    this.Write("System.Array.index(");
                 }
 
                 index.AcceptVisitor(this.Emitter);
 
                 if (!this.isRefArg)
                 {
+                    this.WriteComma();
+
+                    if (targetVar != null)
+                    {
+                        this.Write(targetVar);
+                    }
+                    else
+                    {
+                        indexerExpression.Target.AcceptVisitor(this.Emitter);
+                    }
+                    
+                    this.WriteCloseParentheses();
                     this.WriteCloseBracket();
                 }
 

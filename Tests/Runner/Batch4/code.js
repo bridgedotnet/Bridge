@@ -123,16 +123,17 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual(Object, c3.constructor);
         },
         createInstanceWithNoArgumentsWorksForGenericClassWithNamedDefaultConstructor: function () {
+            var $t, $t1, $t2;
             var c1 = Bridge.createInstance(Bridge.ClientTest.Batch4.ActivatorTests.C8$1(System.Int32));
             var c2 = Bridge.cast(Bridge.createInstance(Bridge.ClientTest.Batch4.ActivatorTests.C8$1(System.Int32)), Bridge.ClientTest.Batch4.ActivatorTests.C8$1(System.Int32));
             var c3 = this.instantiate(Bridge.ClientTest.Batch4.ActivatorTests.C8$1(System.Int32));
 
             Bridge.Test.NUnit.Assert.areEqual(42, c1.i);
-            Bridge.Test.NUnit.Assert.areEqual(System.Int32, Bridge.Reflection.getGenericArguments(Bridge.getType(c1))[0]);
+            Bridge.Test.NUnit.Assert.areEqual(System.Int32, ($t = Bridge.Reflection.getGenericArguments(Bridge.getType(c1)))[System.Array.index(0, $t)]);
             Bridge.Test.NUnit.Assert.areEqual(42, c2.i);
-            Bridge.Test.NUnit.Assert.areEqual(System.Int32, Bridge.Reflection.getGenericArguments(Bridge.getType(c2))[0]);
+            Bridge.Test.NUnit.Assert.areEqual(System.Int32, ($t1 = Bridge.Reflection.getGenericArguments(Bridge.getType(c2)))[System.Array.index(0, $t1)]);
             Bridge.Test.NUnit.Assert.areEqual(42, c3.i);
-            Bridge.Test.NUnit.Assert.areEqual(System.Int32, Bridge.Reflection.getGenericArguments(Bridge.getType(c3))[0]);
+            Bridge.Test.NUnit.Assert.areEqual(System.Int32, ($t2 = Bridge.Reflection.getGenericArguments(Bridge.getType(c3)))[System.Array.index(0, $t2)]);
         }
     });
 
@@ -334,8 +335,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual(1, (System.Array.getLength(System.Array.init(["x", "y"], System.String), 0) - 1));
         },
         gettingValueByIndexWorks: function () {
-            Bridge.Test.NUnit.Assert.areEqual("x", System.Array.init(["x", "y"], System.String)[0]);
-            Bridge.Test.NUnit.Assert.areEqual("y", System.Array.init(["x", "y"], System.String)[1]);
+            var $t, $t1;
+            Bridge.Test.NUnit.Assert.areEqual("x", ($t = System.Array.init(["x", "y"], System.String))[System.Array.index(0, $t)]);
+            Bridge.Test.NUnit.Assert.areEqual("y", ($t1 = System.Array.init(["x", "y"], System.String))[System.Array.index(1, $t1)]);
         },
         getValueWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual("x", Bridge.unbox(System.Array.get(System.Array.init(["x", "y"], System.String), 0)));
@@ -343,17 +345,17 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         settingValueByIndexWorks: function () {
             var arr = System.Array.init(2, null, System.String);
-            arr[0] = "x";
-            arr[1] = "y";
-            Bridge.Test.NUnit.Assert.areEqual("x", arr[0]);
-            Bridge.Test.NUnit.Assert.areEqual("y", arr[1]);
+            arr[System.Array.index(0, arr)] = "x";
+            arr[System.Array.index(1, arr)] = "y";
+            Bridge.Test.NUnit.Assert.areEqual("x", arr[System.Array.index(0, arr)]);
+            Bridge.Test.NUnit.Assert.areEqual("y", arr[System.Array.index(1, arr)]);
         },
         setValueWorks: function () {
             var arr = System.Array.init(2, null, System.String);
             System.Array.set(arr, "x", 0);
             System.Array.set(arr, "y", 1);
-            Bridge.Test.NUnit.Assert.areEqual("x", arr[0]);
-            Bridge.Test.NUnit.Assert.areEqual("y", arr[1]);
+            Bridge.Test.NUnit.Assert.areEqual("x", arr[System.Array.index(0, arr)]);
+            Bridge.Test.NUnit.Assert.areEqual("y", arr[System.Array.index(1, arr)]);
         },
         foreachWorks: function () {
             var $t;
@@ -1057,7 +1059,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
             var interfaces = Bridge.Reflection.getInterfaces(System.Collections.Generic.ICollection$1(System.Object));
             Bridge.Test.NUnit.Assert.areEqual$1(2, interfaces.length, "Interfaces length");
-            Bridge.Test.NUnit.Assert.areEqual$1(System.Collections.Generic.IEnumerable$1(System.Object), interfaces[0], "Interfaces");
+            Bridge.Test.NUnit.Assert.areEqual$1(System.Collections.Generic.IEnumerable$1(System.Object), interfaces[System.Array.index(0, interfaces)], "Interfaces");
         },
         arrayImplementsICollection: function () {
             Bridge.Test.NUnit.Assert.true(Bridge.is(System.Array.init(1, 0, System.Int32), System.Collections.Generic.ICollection$1(System.Int32)));
@@ -1202,7 +1204,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
             var interfaces = Bridge.Reflection.getInterfaces(System.Collections.Generic.IDictionary$2(System.Object,System.Object));
             Bridge.Test.NUnit.Assert.areEqual$1(2, interfaces.length, "Interfaces length");
-            Bridge.Test.NUnit.Assert.areEqual$1(System.Collections.Generic.IEnumerable$1(System.Collections.Generic.KeyValuePair$2(System.Object,System.Object)), interfaces[0], "Interfaces");
+            Bridge.Test.NUnit.Assert.areEqual$1(System.Collections.Generic.IEnumerable$1(System.Collections.Generic.KeyValuePair$2(System.Object,System.Object)), interfaces[System.Array.index(0, interfaces)], "Interfaces");
         },
         classImplementsInterfaces_SPI_1626: function () {
             Bridge.Test.NUnit.Assert.true(Bridge.is(new Bridge.ClientTest.Batch4.Collections.Generic.IDictionaryTests.MyDictionary.ctor(), System.Collections.Generic.IDictionary$2(System.Int32,System.String)));
@@ -1232,7 +1234,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             try {
                 while ($t.moveNext()) {
                     var key = $t.Current;
-                    Bridge.Test.NUnit.Assert.areEqual(actualKeys[i], key);
+                    Bridge.Test.NUnit.Assert.areEqual(actualKeys[System.Array.index(i, actualKeys)], key);
                     i = (i + 1) | 0;
                 }
             }finally {
@@ -1287,7 +1289,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             try {
                 while ($t.moveNext()) {
                     var val = $t.Current;
-                    Bridge.Test.NUnit.Assert.areEqual(actualValues[i], val);
+                    Bridge.Test.NUnit.Assert.areEqual(actualValues[System.Array.index(i, actualValues)], val);
                     i = (i + 1) | 0;
                 }
             }finally {
@@ -1840,7 +1842,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 sb.appendLine("got " + enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "Current$1")]);
             }
 
-            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n");
+            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
         },
         prematureDisposalOfIEnumeratorIteratorExecutesFinallyBlocks_SPI_1555: function () {
             // #1555
@@ -1853,7 +1855,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             }
             enm.System$IDisposable$dispose();
 
-            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nin finally\r\n");
+            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
         },
         exceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks_SPI_1554: function () {
             var sb = new System.Text.StringBuilder();
@@ -1877,7 +1879,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 sb.appendLine("caught exception");
             }
 
-            this.assertEqual(sb.toString(), "yielding 1\r\ngot 1\r\nyielding 2\r\ngot 2\r\nthrowing\r\nin finally\r\ncaught exception\r\n");
+            this.assertEqual(sb.toString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
         },
         typeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface_SPI_1554: function () {
             var enm = null;
@@ -1918,7 +1920,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     $t1.System$IDisposable$dispose();
                 }
             }
-            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n-\r\nyielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n");
+            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n-\nyielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
         },
         prematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks_SPI_1555: function () {
             var $t;
@@ -1939,7 +1941,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     $t.System$IDisposable$dispose();
                 }
             }
-            this.assertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nin finally\r\n");
+            this.assertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
         },
         exceptionInIEnumerableIteratorBodyExecutesFinallyBlocks_SPI_1554: function () {
             var sb = new System.Text.StringBuilder();
@@ -1964,7 +1966,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 sb.appendLine("caught exception");
             }
 
-            this.assertEqual(sb.toString(), "yielding 1\r\ngot 1\r\nyielding 2\r\ngot 2\r\nthrowing\r\nin finally\r\ncaught exception\r\n");
+            this.assertEqual(sb.toString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
         },
         enumeratingAnIteratorBlockReturningIEnumerableMultipleTimesUsesTheInitialValuesForParameters: function () {
             var $t, $t1;
@@ -1992,7 +1994,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     $t1.System$IDisposable$dispose();
                 }
             }
-            this.assertEqual(sb.toString(), "3\r\n2\r\n1\r\n3\r\n2\r\n1\r\n");
+            this.assertEqual(sb.toString(), "3\n2\n1\n3\n2\n1\n");
         },
         differentGetEnumeratorCallsOnIteratorBlockReturningIEnumerableGetOwnCopiesOfLocals: function () {
             var sb = new System.Text.StringBuilder();
@@ -2007,7 +2009,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 sb.appendLine(enm2[Bridge.geti(enm2, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "Current$1")].toString());
             }
 
-            this.assertEqual(sb.toString(), "0\r\n0\r\n1\r\n1\r\n2\r\n2\r\n-1\r\n-1\r\n");
+            this.assertEqual(sb.toString(), "0\n0\n1\n1\n2\n2\n-1\n-1\n");
         }
     });
 
@@ -3298,7 +3300,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var result = System.Array.init(b.byteLength, 0, System.Byte);
             var a = new Uint8Array(b);
             for (var i = 0; i < result.length; i = (i + 1) | 0) {
-                result[i] = a[i];
+                result[System.Array.index(i, result)] = a[System.Array.index(i, a)];
             }
             return result;
         },
@@ -3323,7 +3325,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         getView: function (content) {
             var result = new Uint8Array(content.length);
             for (var i = 0; i < content.length; i = (i + 1) | 0) {
-                result[i] = content[i];
+                result[System.Array.index(i, result)] = content[System.Array.index(i, content)];
             }
             return new DataView(result.buffer);
         },
@@ -3431,7 +3433,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var actual = new (System.Collections.Generic.List$1(System.Byte))();
             var ub = new Uint8Array(b);
             for (var i = 0; i < ub.length; i = (i + 1) | 0) {
-                actual.add(ub[i]);
+                actual.add(ub[System.Array.index(i, ub)]);
             }
 
             Bridge.Test.NUnit.Assert.areEqual(expected, actual.toArray());
@@ -3524,8 +3526,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 return;
             }
             for (var i = 0; i < expected.length; i = (i + 1) | 0) {
-                if (actual[i] !== expected[i]) {
-                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[i], ", actual: ", System.Single.format(actual[i], 'G')));
+                if (actual[System.Array.index(i, actual)] !== expected[System.Array.index(i, expected)]) {
+                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[System.Array.index(i, expected)], ", actual: ", System.Single.format(actual[System.Array.index(i, actual)], 'G')));
                     return;
                 }
             }
@@ -3602,9 +3604,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         indexingWorks: function () {
             var arr = new Float32Array(3);
-            arr[1] = 42;
+            arr[System.Array.index(1, arr)] = 42;
             this.assertContent(arr, System.Array.init([0, 42, 0], System.Int32), "Content");
-            Bridge.Test.NUnit.Assert.areEqual$1(42, arr[1], "[1]");
+            Bridge.Test.NUnit.Assert.areEqual$1(42, arr[System.Array.index(1, arr)], "[1]");
         },
         setFloat32ArrayWorks: function () {
             var arr = new Float32Array(4);
@@ -3742,8 +3744,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 return;
             }
             for (var i = 0; i < expected.length; i = (i + 1) | 0) {
-                if (actual[i] !== expected[i]) {
-                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[i], ", actual: ", System.Double.format(actual[i], 'G')));
+                if (actual[System.Array.index(i, actual)] !== expected[System.Array.index(i, expected)]) {
+                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[System.Array.index(i, expected)], ", actual: ", System.Double.format(actual[System.Array.index(i, actual)], 'G')));
                     return;
                 }
             }
@@ -3821,9 +3823,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         indexingWorks: function () {
             var arr = new Float64Array(3);
-            arr[1] = 42;
+            arr[System.Array.index(1, arr)] = 42;
             this.assertContent(arr, System.Array.init([0, 42, 0], System.Int32), "Content");
-            Bridge.Test.NUnit.Assert.areEqual$1(42, arr[1], "[1]");
+            Bridge.Test.NUnit.Assert.areEqual$1(42, arr[System.Array.index(1, arr)], "[1]");
         },
         setFloat64ArrayWorks: function () {
             var arr = new Float64Array(4);
@@ -3961,8 +3963,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 return;
             }
             for (var i = 0; i < expected.length; i = (i + 1) | 0) {
-                if (actual[i] !== expected[i]) {
-                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[i], ", actual: ", actual[i]));
+                if (actual[System.Array.index(i, actual)] !== expected[System.Array.index(i, expected)]) {
+                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[System.Array.index(i, expected)], ", actual: ", actual[System.Array.index(i, actual)]));
                     return;
                 }
             }
@@ -4039,9 +4041,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         indexingWorks: function () {
             var arr = new Int16Array(3);
-            arr[1] = 42;
+            arr[System.Array.index(1, arr)] = 42;
             this.assertContent(arr, System.Array.init([0, 42, 0], System.Int32), "Content");
-            Bridge.Test.NUnit.Assert.areEqual$1(42, arr[1], "[1]");
+            Bridge.Test.NUnit.Assert.areEqual$1(42, arr[System.Array.index(1, arr)], "[1]");
         },
         setInt16ArrayWorks: function () {
             var arr = new Int16Array(4);
@@ -4179,8 +4181,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 return;
             }
             for (var i = 0; i < expected.length; i = (i + 1) | 0) {
-                if (actual[i] !== expected[i]) {
-                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[i], ", actual: ", actual[i]));
+                if (actual[System.Array.index(i, actual)] !== expected[System.Array.index(i, expected)]) {
+                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[System.Array.index(i, expected)], ", actual: ", actual[System.Array.index(i, actual)]));
                     return;
                 }
             }
@@ -4256,9 +4258,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         indexingWorks: function () {
             var arr = new Int32Array(3);
-            arr[1] = 42;
+            arr[System.Array.index(1, arr)] = 42;
             this.assertContent(arr, System.Array.init([0, 42, 0], System.Int32), "Content");
-            Bridge.Test.NUnit.Assert.areEqual$1(42, arr[1], "[1]");
+            Bridge.Test.NUnit.Assert.areEqual$1(42, arr[System.Array.index(1, arr)], "[1]");
         },
         setInt32ArrayWorks: function () {
             var arr = new Int32Array(4);
@@ -4396,8 +4398,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 return;
             }
             for (var i = 0; i < expected.length; i = (i + 1) | 0) {
-                if (actual[i] !== expected[i]) {
-                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[i], ", actual: ", actual[i]));
+                if (actual[System.Array.index(i, actual)] !== expected[System.Array.index(i, expected)]) {
+                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[System.Array.index(i, expected)], ", actual: ", actual[System.Array.index(i, actual)]));
                     return;
                 }
             }
@@ -4473,9 +4475,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         indexingWorks: function () {
             var arr = new Int8Array(3);
-            arr[1] = 42;
+            arr[System.Array.index(1, arr)] = 42;
             this.assertContent(arr, System.Array.init([0, 42, 0], System.Int32), "Content");
-            Bridge.Test.NUnit.Assert.areEqual$1(42, arr[1], "[1]");
+            Bridge.Test.NUnit.Assert.areEqual$1(42, arr[System.Array.index(1, arr)], "[1]");
         },
         setInt8ArrayWorks: function () {
             var arr = new Int8Array(4);
@@ -4613,8 +4615,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 return;
             }
             for (var i = 0; i < expected.length; i = (i + 1) | 0) {
-                if (actual[i] !== expected[i]) {
-                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[i], ", actual: ", actual[i]));
+                if (actual[System.Array.index(i, actual)] !== expected[System.Array.index(i, expected)]) {
+                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[System.Array.index(i, expected)], ", actual: ", actual[System.Array.index(i, actual)]));
                     return;
                 }
             }
@@ -4690,9 +4692,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         indexingWorks: function () {
             var arr = new Uint16Array(3);
-            arr[1] = 42;
+            arr[System.Array.index(1, arr)] = 42;
             this.assertContent(arr, System.Array.init([0, 42, 0], System.Int32), "Content");
-            Bridge.Test.NUnit.Assert.areEqual$1(42, arr[1], "[1]");
+            Bridge.Test.NUnit.Assert.areEqual$1(42, arr[System.Array.index(1, arr)], "[1]");
         },
         setUint16ArrayWorks: function () {
             var arr = new Uint16Array(4);
@@ -4830,8 +4832,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 return;
             }
             for (var i = 0; i < expected.length; i = (i + 1) | 0) {
-                if (System.Int64(actual[i]).ne(System.Int64(expected[i]))) {
-                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[i], ", actual: ", actual[i]));
+                if (System.Int64(actual[System.Array.index(i, actual)]).ne(System.Int64(expected[System.Array.index(i, expected)]))) {
+                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[System.Array.index(i, expected)], ", actual: ", actual[System.Array.index(i, actual)]));
                     return;
                 }
             }
@@ -4907,9 +4909,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         indexingWorks: function () {
             var arr = new Uint32Array(3);
-            arr[1] = 42;
+            arr[System.Array.index(1, arr)] = 42;
             this.assertContent(arr, System.Array.init([0, 42, 0], System.Int32), "Content");
-            Bridge.Test.NUnit.Assert.areEqual$1(42, arr[1], "[1]");
+            Bridge.Test.NUnit.Assert.areEqual$1(42, arr[System.Array.index(1, arr)], "[1]");
         },
         setUint32ArrayWorks: function () {
             var arr = new Uint32Array(4);
@@ -5047,8 +5049,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 return;
             }
             for (var i = 0; i < expected.length; i = (i + 1) | 0) {
-                if (actual[i] !== expected[i]) {
-                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[i], ", actual: ", actual[i]));
+                if (actual[System.Array.index(i, actual)] !== expected[System.Array.index(i, expected)]) {
+                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[System.Array.index(i, expected)], ", actual: ", actual[System.Array.index(i, actual)]));
                     return;
                 }
             }
@@ -5124,9 +5126,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         indexingWorks: function () {
             var arr = new Uint8Array(3);
-            arr[1] = 42;
+            arr[System.Array.index(1, arr)] = 42;
             this.assertContent(arr, System.Array.init([0, 42, 0], System.Int32), "Content");
-            Bridge.Test.NUnit.Assert.areEqual$1(42, arr[1], "[1]");
+            Bridge.Test.NUnit.Assert.areEqual$1(42, arr[System.Array.index(1, arr)], "[1]");
         },
         setUint8ArrayWorks: function () {
             var arr = new Uint8Array(4);
@@ -5264,8 +5266,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 return;
             }
             for (var i = 0; i < expected.length; i = (i + 1) | 0) {
-                if (actual[i] !== expected[i]) {
-                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[i], ", actual: ", actual[i]));
+                if (actual[System.Array.index(i, actual)] !== expected[System.Array.index(i, expected)]) {
+                    Bridge.Test.NUnit.Assert.fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[System.Array.index(i, expected)], ", actual: ", actual[System.Array.index(i, actual)]));
                     return;
                 }
             }
@@ -5354,9 +5356,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         indexingWorks: function () {
             var arr = new Uint8ClampedArray(3);
-            arr[1] = 42;
+            arr[System.Array.index(1, arr)] = 42;
             this.assertContent(arr, System.Array.init([0, 42, 0], System.Int32), "Content");
-            Bridge.Test.NUnit.Assert.areEqual$1(42, arr[1], "[1]");
+            Bridge.Test.NUnit.Assert.areEqual$1(42, arr[System.Array.index(1, arr)], "[1]");
         },
         setUint8ClampedArrayWorks: function () {
             var arr = new Uint8ClampedArray(4);
@@ -5495,9 +5497,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         getTestArr: function () {
             var result = System.Array.init(192, 0, System.Byte);
             for (var i = 0; i < 64; i = (i + 1) | 0) {
-                result[((i * 3) | 0)] = (i << 2) & 255;
-                result[((((i * 3) | 0) + 1) | 0)] = 0;
-                result[((((i * 3) | 0) + 2) | 0)] = 0;
+                result[System.Array.index(((i * 3) | 0), result)] = (i << 2) & 255;
+                result[System.Array.index(((((i * 3) | 0) + 1) | 0), result)] = 0;
+                result[System.Array.index(((((i * 3) | 0) + 2) | 0), result)] = 0;
             }
             return result;
         },
@@ -5861,7 +5863,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 c = l.length;
             });
             Bridge.Test.NUnit.Assert.areEqual(1, c);
-            Bridge.Test.NUnit.Assert.true(Bridge.referenceEquals(f, l[0]));
+            Bridge.Test.NUnit.Assert.true(Bridge.referenceEquals(f, l[System.Array.index(0, l)]));
         },
         getInvocationListWorksForMulticastDelegate: function () {
             var c1 = new Bridge.ClientTest.Batch4.DelegateTests.C(), c2 = new Bridge.ClientTest.Batch4.DelegateTests.C();
@@ -5869,10 +5871,10 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var combined = Bridge.fn.combine(Bridge.fn.combine(Bridge.fn.combine(f11, f21), f12), f11_2);
             var l = combined.$invocationList;
             Bridge.Test.NUnit.Assert.true(l.length === 4);
-            Bridge.Test.NUnit.Assert.true(Bridge.staticEquals(l[0], f11));
-            Bridge.Test.NUnit.Assert.true(Bridge.staticEquals(l[1], f21));
-            Bridge.Test.NUnit.Assert.true(Bridge.staticEquals(l[2], f12));
-            Bridge.Test.NUnit.Assert.true(Bridge.staticEquals(l[3], f11_2));
+            Bridge.Test.NUnit.Assert.true(Bridge.staticEquals(l[System.Array.index(0, l)], f11));
+            Bridge.Test.NUnit.Assert.true(Bridge.staticEquals(l[System.Array.index(1, l)], f21));
+            Bridge.Test.NUnit.Assert.true(Bridge.staticEquals(l[System.Array.index(2, l)], f12));
+            Bridge.Test.NUnit.Assert.true(Bridge.staticEquals(l[System.Array.index(3, l)], f11_2));
         }
     });
 
@@ -7266,16 +7268,16 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         getArgumentsWorks: function () {
             var s = System.Runtime.CompilerServices.FormattableStringFactory.create("x = {0}, y = {1}", ["x", "y"]);
             var args = s.getArguments();
-            Bridge.Test.NUnit.Assert.areEqual$1("x", Bridge.unbox(args[0]), "0");
-            Bridge.Test.NUnit.Assert.areEqual$1("y", Bridge.unbox(args[1]), "1");
+            Bridge.Test.NUnit.Assert.areEqual$1("x", Bridge.unbox(args[System.Array.index(0, args)]), "0");
+            Bridge.Test.NUnit.Assert.areEqual$1("y", Bridge.unbox(args[System.Array.index(1, args)]), "1");
         },
         arrayReturnedByGetArgumentsCanBeModified: function () {
             var s = System.Runtime.CompilerServices.FormattableStringFactory.create("x = {0}, y = {1}", ["x", "y"]);
             var args = s.getArguments();
-            Bridge.Test.NUnit.Assert.areEqual$1("x", Bridge.unbox(args[0]), "#1");
-            args[0] = "z";
+            Bridge.Test.NUnit.Assert.areEqual$1("x", Bridge.unbox(args[System.Array.index(0, args)]), "#1");
+            args[System.Array.index(0, args)] = "z";
             var args2 = s.getArguments();
-            Bridge.Test.NUnit.Assert.areEqual$1("z", Bridge.unbox(args2[0]), "#2");
+            Bridge.Test.NUnit.Assert.areEqual$1("z", Bridge.unbox(args2[System.Array.index(0, args2)]), "#2");
             Bridge.Test.NUnit.Assert.areEqual$1("x = z, y = y", s.toString(), "#3");
         },
         toStringWorks: function () {
@@ -8705,16 +8707,16 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual$1(1, mb3.btype, "b3 BindingType");
             Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(mb3.member, Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests.C, 4, 284, "CF")), "b3 member");
             Bridge.Test.NUnit.Assert.areEqual$1(2, mb3.bindings.Count, "b3 binding count");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(mb3.bindings.get(0), bindings[0]), "b3 binding 0");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(mb3.bindings.get(1), bindings[1]), "b3 binding 1");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(mb3.bindings.get(0), bindings[System.Array.index(0, bindings)]), "b3 binding 0");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(mb3.bindings.get(1), bindings[System.Array.index(1, bindings)]), "b3 binding 1");
 
             var mb4 = Bridge.as(b4, Bridge.hasValue(b4) && (b4.btype === 1));
             Bridge.Test.NUnit.Assert.true$1(mb4 != null, "b4 should be MemberMemberBinding");
             Bridge.Test.NUnit.Assert.areEqual$1(1, mb4.btype, "b4 BindingType");
             Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(mb4.member, Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests.C, 16, 284, "CP")), "b4 member");
             Bridge.Test.NUnit.Assert.areEqual$1(2, mb4.bindings.Count, "b4 binding count");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(mb4.bindings.get(0), bindings[0]), "b4 binding 0");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(mb4.bindings.get(1), bindings[1]), "b4 binding 1");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(mb4.bindings.get(0), bindings[System.Array.index(0, bindings)]), "b4 binding 0");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(mb4.bindings.get(1), bindings[System.Array.index(1, bindings)]), "b4 binding 1");
 
             Bridge.Test.NUnit.Assert.false$1(($t8 = { btype: 2, member: Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests.C, 4, 284, "LF"), initializers: Bridge.toList([null]) }, Bridge.is($t8, Bridge.hasValue($t8) && ($t8.btype === 1))), "ListBinding should not be MemberMemberBinding");
         },
@@ -8876,7 +8878,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.true$1(prop.s.td != null, "setter declaring type");
             Bridge.Test.NUnit.Assert.false$1((prop.s.is || false), "setter is static");
             Bridge.Test.NUnit.Assert.areEqual$1(1, (prop.s.p || []).length, "setter parameter count");
-            Bridge.Test.NUnit.Assert.areEqual$1(System.Int32, (prop.s.p || [])[0], "setter parameter type");
+            Bridge.Test.NUnit.Assert.areEqual$1(System.Int32, ($t1 = (prop.s.p || []))[System.Array.index(0, $t1)], "setter parameter type");
             Bridge.Test.NUnit.Assert.false$1((prop.s.t === 1), "setter is constructor");
             Bridge.Test.NUnit.Assert.areEqual$1(System.Object, prop.s.rt, "setter return type");
             Bridge.Test.NUnit.Assert.areEqual$1(0, (prop.s.tpc || 0), "setter type parameter count");
@@ -9216,8 +9218,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(te.finallyExpr, $finally), System.String.concat(title, " finally"));
                 if (hasHandlers) {
                     Bridge.Test.NUnit.Assert.areEqual$1(2, te.handlers.Count, System.String.concat(title, " handler count"));
-                    Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(te.handlers.get(0), cs[0]), System.String.concat(title, " handler 0"));
-                    Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(te.handlers.get(1), cs[1]), System.String.concat(title, " handler 1"));
+                    Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(te.handlers.get(0), cs[System.Array.index(0, cs)]), System.String.concat(title, " handler 0"));
+                    Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(te.handlers.get(1), cs[System.Array.index(1, cs)]), System.String.concat(title, " handler 1"));
                 } else {
                     Bridge.Test.NUnit.Assert.areEqual$1(0, te.handlers.Count, System.String.concat(title, " handler count"));
                 }
@@ -9365,8 +9367,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual$1(parmTypes.length, expr.p.Count, System.String.concat(title, " param count"));
             for (var i = 0; i < expr.p.Count; i = (i + 1) | 0) {
                 Bridge.Test.NUnit.Assert.areEqual$1(38, expr.p.get(i).ntype, System.String.concat(title, " parameter ", i, " node type"));
-                Bridge.Test.NUnit.Assert.areEqual$1(parmNames[i], expr.p.get(i).n, System.String.concat(title, " parameter ", i, " name"));
-                Bridge.Test.NUnit.Assert.areEqual$1(parmTypes[i], expr.p.get(i).t, System.String.concat(title, " parameter ", i, " type"));
+                Bridge.Test.NUnit.Assert.areEqual$1(parmNames[System.Array.index(i, parmNames)], expr.p.get(i).n, System.String.concat(title, " parameter ", i, " name"));
+                Bridge.Test.NUnit.Assert.areEqual$1(parmTypes[System.Array.index(i, parmTypes)], expr.p.get(i).t, System.String.concat(title, " parameter ", i, " type"));
             }
         },
         f2: function (expr, nodeType, type, method, title) {
@@ -9468,7 +9470,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             }
             Bridge.Test.NUnit.Assert.areEqual$1(argTypes.length, (ne.constructor.p || []).length, System.String.concat(title, " constructor argument length"));
             for (var i1 = 0; i1 < (ne.constructor.p || []).length; i1 = (i1 + 1) | 0) {
-                Bridge.Test.NUnit.Assert.areEqual$1(argTypes[i1], (ne.constructor.p || [])[i1], System.String.concat(title, " constructor parameter type ", i1));
+                Bridge.Test.NUnit.Assert.areEqual$1(argTypes[System.Array.index(i1, argTypes)], ($t = (ne.constructor.p || []))[System.Array.index(i1, $t)], System.String.concat(title, " constructor parameter type ", i1));
             }
             if (checkReference) {
                 var $ctor = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests.C, 1, 284, null, argTypes);
@@ -9522,7 +9524,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(se.defaultBody, defaultBody), System.String.concat(title, " default value"));
             Bridge.Test.NUnit.Assert.areEqual$1(cases.length, se.cases.Count, System.String.concat(title, " cases count"));
             for (var i = 0; i < se.cases.Count; i = (i + 1) | 0) {
-                Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(se.cases.get(i), cases[i]), System.String.concat(title, " case ", i));
+                Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(se.cases.get(i), cases[System.Array.index(i, cases)]), System.String.concat(title, " case ", i));
             }
         }
     });
@@ -10238,7 +10240,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             // Test restructure to keep assertion count correct (prevent uncaught test exception)
             var b1 = false;
             Bridge.ClientTest.Batch4.TestHelper.safe(function () {
-                b1 = Bridge.referenceEquals(Bridge.Reflection.getGenericArguments(System.Nullable$1(System.Int32))[0], System.Int32);
+                var $t;
+                b1 = Bridge.referenceEquals(($t = Bridge.Reflection.getGenericArguments(System.Nullable$1(System.Int32)))[System.Array.index(0, $t)], System.Int32);
             });
             Bridge.Test.NUnit.Assert.true$1(b1, "GenericArguments");
 
@@ -10955,8 +10958,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var bytes = System.Array.init(150, 0, System.Byte);
             rand.nextBytes(bytes);
             for (var i = 0; i < bytes.length; i = (i + 1) | 0) {
-                Bridge.Test.NUnit.Assert.true$1(bytes[i] >= 0, "a: " + bytes[i] + " is greater or equal to " + 0);
-                Bridge.Test.NUnit.Assert.true$1(bytes[i] <= 255, "a: " + bytes[i] + " is smaller than or equal to " + 255);
+                Bridge.Test.NUnit.Assert.true$1(bytes[System.Array.index(i, bytes)] >= 0, "a: " + bytes[System.Array.index(i, bytes)] + " is greater or equal to " + 0);
+                Bridge.Test.NUnit.Assert.true$1(bytes[System.Array.index(i, bytes)] <= 255, "a: " + bytes[System.Array.index(i, bytes)] + " is smaller than or equal to " + 255);
             }
         }
     });
@@ -11074,13 +11077,13 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     Bridge.Test.NUnit.Assert.false(a.some($asm.$.Bridge.ClientTest.Batch4.Reflection.AssemblyTests.f1));
                     var a2 = a.filter($asm.$.Bridge.ClientTest.Batch4.Reflection.AssemblyTests.f2);
                     Bridge.Test.NUnit.Assert.areEqual(1, a2.length);
-                    Bridge.Test.NUnit.Assert.true(Bridge.cast(a2[0], Bridge.ClientTest.Batch4.Reflection.AssemblyTests.A2Attribute).X === 64);
-                    Bridge.Test.NUnit.Assert.true(Bridge.cast(a2[0], Bridge.ClientTest.Batch4.Reflection.AssemblyTests.A2Attribute).P === 23);
+                    Bridge.Test.NUnit.Assert.true(Bridge.cast(a2[System.Array.index(0, a2)], Bridge.ClientTest.Batch4.Reflection.AssemblyTests.A2Attribute).X === 64);
+                    Bridge.Test.NUnit.Assert.true(Bridge.cast(a2[System.Array.index(0, a2)], Bridge.ClientTest.Batch4.Reflection.AssemblyTests.A2Attribute).P === 23);
 
                     var a3 = a.filter($asm.$.Bridge.ClientTest.Batch4.Reflection.AssemblyTests.f3);
                     Bridge.Test.NUnit.Assert.areEqual(1, a3.length);
-                    Bridge.Test.NUnit.Assert.true(Bridge.cast(a3[0], Bridge.ClientTest.Batch4.Reflection.AssemblyTests.A3Attribute).X === 15);
-                    Bridge.Test.NUnit.Assert.true(Bridge.cast(a3[0], Bridge.ClientTest.Batch4.Reflection.AssemblyTests.A3Attribute).P === 45);
+                    Bridge.Test.NUnit.Assert.true(Bridge.cast(a3[System.Array.index(0, a3)], Bridge.ClientTest.Batch4.Reflection.AssemblyTests.A3Attribute).X === 15);
+                    Bridge.Test.NUnit.Assert.true(Bridge.cast(a3[System.Array.index(0, a3)], Bridge.ClientTest.Batch4.Reflection.AssemblyTests.A3Attribute).P === 45);
                 }
             }finally {
                 if (Bridge.is($t, System.IDisposable)) {
@@ -11092,8 +11095,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 while ($t1.moveNext()) {
                     var a1 = $t1.Current;
                     Bridge.Test.NUnit.Assert.areEqual(1, a1.length);
-                    Bridge.Test.NUnit.Assert.true(Bridge.cast(a1[0], Bridge.ClientTest.Batch4.Reflection.AssemblyTests.A2Attribute).X === 64);
-                    Bridge.Test.NUnit.Assert.true(Bridge.cast(a1[0], Bridge.ClientTest.Batch4.Reflection.AssemblyTests.A2Attribute).P === 23);
+                    Bridge.Test.NUnit.Assert.true(Bridge.cast(a1[System.Array.index(0, a1)], Bridge.ClientTest.Batch4.Reflection.AssemblyTests.A2Attribute).X === 64);
+                    Bridge.Test.NUnit.Assert.true(Bridge.cast(a1[System.Array.index(0, a1)], Bridge.ClientTest.Batch4.Reflection.AssemblyTests.A2Attribute).P === 23);
                 }
             }finally {
                 if (Bridge.is($t1, System.IDisposable)) {
@@ -11200,63 +11203,63 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         canGetCustomTypeAttributesForClassWithAttributes: function () {
             var arr = Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C2, null, false);
             Bridge.Test.NUnit.Assert.areEqual$1(2, arr.length, "Should have two attributes");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute) || Bridge.is(arr[1], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute), "A1 should exist");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute) || Bridge.is(arr[1], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute), "A2 should exist");
-            var a1 = Bridge.cast((Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute) ? arr[0] : arr[1]), Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute);
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute) || Bridge.is(arr[System.Array.index(1, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute), "A1 should exist");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute) || Bridge.is(arr[System.Array.index(1, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute), "A2 should exist");
+            var a1 = Bridge.cast((Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute) ? arr[System.Array.index(0, arr)] : arr[System.Array.index(1, arr)]), Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute);
             Bridge.Test.NUnit.Assert.areEqual(1, a1.V);
-            var a2 = Bridge.cast((Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute) ? arr[0] : arr[1]), Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute);
+            var a2 = Bridge.cast((Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute) ? arr[System.Array.index(0, arr)] : arr[System.Array.index(1, arr)]), Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute);
             Bridge.Test.NUnit.Assert.areEqual(2, a2.V);
         },
         nonScriptableAttributesAreNotIncluded: function () {
             var arr = Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C19, null, false);
             Bridge.Test.NUnit.Assert.areEqual$1(1, arr.length, "Should have one attribute");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute), "A1 should exist");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute), "A1 should exist");
         },
         canGetCustomTypeAttributesForInterfaceWithAttributes: function () {
             var arr = Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.I1, null, false);
             Bridge.Test.NUnit.Assert.areEqual$1(2, arr.length, "Should have two attributes");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute) || Bridge.is(arr[1], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute), "A1 should exist");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute) || Bridge.is(arr[1], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute), "A2 should exist");
-            var a1 = Bridge.cast((Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute) ? arr[0] : arr[1]), Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute);
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute) || Bridge.is(arr[System.Array.index(1, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute), "A1 should exist");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute) || Bridge.is(arr[System.Array.index(1, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute), "A2 should exist");
+            var a1 = Bridge.cast((Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute) ? arr[System.Array.index(0, arr)] : arr[System.Array.index(1, arr)]), Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute);
             Bridge.Test.NUnit.Assert.areEqual(1, a1.V);
-            var a2 = Bridge.cast((Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute) ? arr[0] : arr[1]), Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute);
+            var a2 = Bridge.cast((Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute) ? arr[System.Array.index(0, arr)] : arr[System.Array.index(1, arr)]), Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute);
             Bridge.Test.NUnit.Assert.areEqual(2, a2.V);
         },
         canGetCustomTypeAttributesForEnumWithAttributes: function () {
             var arr = Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.E1, null, false);
             Bridge.Test.NUnit.Assert.areEqual$1(2, arr.length, "Should have two attributes");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute) || Bridge.is(arr[1], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute), "A1 should exist");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute) || Bridge.is(arr[1], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute), "A2 should exist");
-            var a1 = Bridge.cast((Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute) ? arr[0] : arr[1]), Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute);
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute) || Bridge.is(arr[System.Array.index(1, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute), "A1 should exist");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute) || Bridge.is(arr[System.Array.index(1, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute), "A2 should exist");
+            var a1 = Bridge.cast((Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute) ? arr[System.Array.index(0, arr)] : arr[System.Array.index(1, arr)]), Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute);
             Bridge.Test.NUnit.Assert.areEqual(1, a1.V);
-            var a2 = Bridge.cast((Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute) ? arr[0] : arr[1]), Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute);
+            var a2 = Bridge.cast((Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute) ? arr[System.Array.index(0, arr)] : arr[System.Array.index(1, arr)]), Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute);
             Bridge.Test.NUnit.Assert.areEqual(2, a2.V);
         },
         inheritedFlagToGetCustomAttributesWorks: function () {
             var arr = Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C3, null, false);
             Bridge.Test.NUnit.Assert.areEqual$1(1, arr.length, "Should have one non-inherited attribute");
-            Bridge.Test.NUnit.Assert.true(Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A3Attribute));
+            Bridge.Test.NUnit.Assert.true(Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A3Attribute));
 
             arr = Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C3, null, true);
             Bridge.Test.NUnit.Assert.areEqual$1(3, arr.length, "Should have three inherited attributes");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute) || Bridge.is(arr[1], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute) || Bridge.is(arr[2], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute), "A1 should exist");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute) || Bridge.is(arr[1], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute) || Bridge.is(arr[2], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute), "A2 should exist");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A3Attribute) || Bridge.is(arr[1], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A3Attribute) || Bridge.is(arr[2], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A3Attribute), "A3 should exist");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute) || Bridge.is(arr[System.Array.index(1, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute) || Bridge.is(arr[System.Array.index(2, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute), "A1 should exist");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute) || Bridge.is(arr[System.Array.index(1, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute) || Bridge.is(arr[System.Array.index(2, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute), "A2 should exist");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A3Attribute) || Bridge.is(arr[System.Array.index(1, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A3Attribute) || Bridge.is(arr[System.Array.index(2, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A3Attribute), "A3 should exist");
         },
         deepInheritanceWorks: function () {
             var arr = Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C4, null, true);
             Bridge.Test.NUnit.Assert.areEqual$1(4, arr.length, "Should have 4 attributes");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute) || Bridge.is(arr[1], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute) || Bridge.is(arr[2], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute) || Bridge.is(arr[3], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute), "A1 should exist");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute) || Bridge.is(arr[1], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute) || Bridge.is(arr[2], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute) || Bridge.is(arr[3], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute), "A2 should exist");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A3Attribute) || Bridge.is(arr[1], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A3Attribute) || Bridge.is(arr[2], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A3Attribute) || Bridge.is(arr[3], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A3Attribute), "A3 should exist");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A4Attribute) || Bridge.is(arr[1], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A4Attribute) || Bridge.is(arr[2], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A4Attribute) || Bridge.is(arr[3], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A4Attribute), "A4 should exist");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute) || Bridge.is(arr[System.Array.index(1, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute) || Bridge.is(arr[System.Array.index(2, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute) || Bridge.is(arr[System.Array.index(3, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute), "A1 should exist");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute) || Bridge.is(arr[System.Array.index(1, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute) || Bridge.is(arr[System.Array.index(2, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute) || Bridge.is(arr[System.Array.index(3, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute), "A2 should exist");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A3Attribute) || Bridge.is(arr[System.Array.index(1, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A3Attribute) || Bridge.is(arr[System.Array.index(2, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A3Attribute) || Bridge.is(arr[System.Array.index(3, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A3Attribute), "A3 should exist");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A4Attribute) || Bridge.is(arr[System.Array.index(1, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A4Attribute) || Bridge.is(arr[System.Array.index(2, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A4Attribute) || Bridge.is(arr[System.Array.index(3, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A4Attribute), "A4 should exist");
         },
         overridingSingleUseAttributeReplacesTheAttributeOnTheBaseClass: function () {
             var arr = Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C5, null, true);
             Bridge.Test.NUnit.Assert.areEqual$1(2, arr.length, "Should have 2 attributes");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute) || Bridge.is(arr[1], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute), "A1 should exist");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute) || Bridge.is(arr[1], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute), "A2 should exist");
-            var a1 = Bridge.cast((Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute) ? arr[0] : arr[1]), Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute);
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute) || Bridge.is(arr[System.Array.index(1, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute), "A1 should exist");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute) || Bridge.is(arr[System.Array.index(1, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute), "A2 should exist");
+            var a1 = Bridge.cast((Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute) ? arr[System.Array.index(0, arr)] : arr[System.Array.index(1, arr)]), Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute);
             Bridge.Test.NUnit.Assert.areEqual(5, a1.V);
         },
         applyingNewInstanceOfMultipleUseAttributeAddsTheAttribute: function () {
@@ -11265,8 +11268,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual$1(arr.filter($asm.$.Bridge.ClientTest.Batch4.Reflection.AttributeTests.f1).length, 1, "Should have one A1");
             Bridge.Test.NUnit.Assert.areEqual$1(arr.filter($asm.$.Bridge.ClientTest.Batch4.Reflection.AttributeTests.f2).length, 2, "Should have two A2");
             var a2 = Bridge.cast(arr.filter($asm.$.Bridge.ClientTest.Batch4.Reflection.AttributeTests.f2), System.Array.type(Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute));
-            Bridge.Test.NUnit.Assert.true(a2[0].V === 2 || a2[1].V === 2);
-            Bridge.Test.NUnit.Assert.true(a2[0].V === 6 || a2[1].V === 6);
+            Bridge.Test.NUnit.Assert.true(a2[System.Array.index(0, a2)].V === 2 || a2[System.Array.index(1, a2)].V === 2);
+            Bridge.Test.NUnit.Assert.true(a2[System.Array.index(0, a2)].V === 6 || a2[System.Array.index(1, a2)].V === 6);
         },
         nonInheritedAttributeIsNotInherited: function () {
             var arr = Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C8, null, true);
@@ -11275,32 +11278,33 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         getCustomAttributesTypeFilterWorks: function () {
             var arr = Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C9, Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute, true);
             Bridge.Test.NUnit.Assert.areEqual$1(2, arr.length, "Should have 2 A2 attributes");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute) && Bridge.is(arr[1], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute), "Should only return A2 attributes");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.cast(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute).V === 8 || Bridge.cast(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute).V === 9, "Attribute members should be correct");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.cast(arr[1], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute).V === 8 || Bridge.cast(arr[1], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute).V === 9, "Attribute members should be correct");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute) && Bridge.is(arr[System.Array.index(1, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute), "Should only return A2 attributes");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.cast(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute).V === 8 || Bridge.cast(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute).V === 9, "Attribute members should be correct");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.cast(arr[System.Array.index(1, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute).V === 8 || Bridge.cast(arr[System.Array.index(1, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute).V === 9, "Attribute members should be correct");
         },
         getCustomAttributesWorksForOpenGenericClass: function () {
             var arr = Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C10$2, null, true);
             Bridge.Test.NUnit.Assert.areEqual$1(1, arr.length, "Should have one attribute");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute), "Should be A1");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute), "Should be A1");
         },
         getCustomAttributesWorksForConstructedGenericClass: function () {
             var arr = Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C10$2(System.Int32,System.String), null, true);
             Bridge.Test.NUnit.Assert.areEqual$1(1, arr.length, "Should have one attribute");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute), "Should be A1");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute), "Should be A1");
         },
         getCustomAttributesWorksForOpenGenericInterface: function () {
             var arr = Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.I2$2, null, true);
             Bridge.Test.NUnit.Assert.areEqual$1(1, arr.length, "Should have one attribute");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute), "Should be A1");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute), "Should be A1");
         },
         getCustomAttributesWorksForConstructedGenericInterface: function () {
             var arr = Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.I2$2(System.Int32,System.String), null, true);
             Bridge.Test.NUnit.Assert.areEqual$1(1, arr.length, "Should have one attribute");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute), "Should be A1");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(arr[System.Array.index(0, arr)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute), "Should be A1");
         },
         allSupportedScalarTypesCanBeUsedAsAttributeArguments: function () {
-            var a6 = Bridge.cast(Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C11, null, false)[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A6Attribute);
+            var $t;
+            var a6 = Bridge.cast(($t = Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C11, null, false))[System.Array.index(0, $t)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A6Attribute);
             Bridge.Test.NUnit.Assert.areEqual$1(true, a6.B, "B");
             Bridge.Test.NUnit.Assert.areEqual$1(43, a6.Y, "Y");
             Bridge.Test.NUnit.Assert.areEqual$1(68, a6.C, "C");
@@ -11315,36 +11319,44 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual$1(System.String, a6.T, "T");
         },
         arraysCanBeUsedAsAttributeArguments: function () {
-            var a7 = Bridge.cast(Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C12, null, false)[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A7Attribute);
+            var $t;
+            var a7 = Bridge.cast(($t = Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C12, null, false))[System.Array.index(0, $t)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A7Attribute);
             Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init([42, 17, 31], System.Int32), a7.I, "I");
             Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init(["X", "Y2", "Z3"], System.String), a7.S, "S");
         },
         namedValuesEnumCanBeUsedAsAttributeArgument: function () {
-            var a8 = Bridge.cast(Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C13, null, false)[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A8Attribute);
+            var $t;
+            var a8 = Bridge.cast(($t = Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C13, null, false))[System.Array.index(0, $t)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A8Attribute);
             Bridge.Test.NUnit.Assert.areEqual$1("v2", a8.E, "E");
         },
         propertiesWithSetMethodsImplementedAsNormalMethodsCanBeSetInAttributeDeclaration: function () {
-            var a = Bridge.cast(Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C14, null, false)[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A9Attribute);
+            var $t;
+            var a = Bridge.cast(($t = Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C14, null, false))[System.Array.index(0, $t)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A9Attribute);
             Bridge.Test.NUnit.Assert.areEqual(42, a.P1);
         },
         propertiesWithSetMethodsImplementedAsInlineCodeCanBeSetInAttributeDeclaration: function () {
-            var a = Bridge.cast(Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C15, null, false)[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A9Attribute);
+            var $t;
+            var a = Bridge.cast(($t = Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C15, null, false))[System.Array.index(0, $t)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A9Attribute);
             Bridge.Test.NUnit.Assert.areEqual(18, a.$$XX$$);
         },
         propertiesImplementedAsFieldsCanBeAssignedInAttributeDeclaration: function () {
-            var a = Bridge.cast(Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C16, null, false)[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A9Attribute);
+            var $t;
+            var a = Bridge.cast(($t = Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C16, null, false))[System.Array.index(0, $t)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A9Attribute);
             Bridge.Test.NUnit.Assert.areEqual(43, a.P3);
         },
         fieldsCanBeAssignedInAttributeDeclaration: function () {
-            var a = Bridge.cast(Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C18, null, false)[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A9Attribute);
+            var $t;
+            var a = Bridge.cast(($t = Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C18, null, false))[System.Array.index(0, $t)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A9Attribute);
             Bridge.Test.NUnit.Assert.areEqual(13, a.F1);
         },
         creatingAttributeWithNamedConstructorWorks: function () {
-            var a = Bridge.cast(Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C20, null, false)[0], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A11Attribute);
+            var $t;
+            var a = Bridge.cast(($t = Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C20, null, false))[System.Array.index(0, $t)], Bridge.ClientTest.Batch4.Reflection.AttributeTests.A11Attribute);
             Bridge.Test.NUnit.Assert.areEqual(42, a.i);
         },
         creatingAttributeWithInlineCodeConstructorWorks: function () {
-            var a = Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C21, null, false)[0];
+            var $t;
+            var a = ($t = Bridge.Reflection.getAttributes(Bridge.ClientTest.Batch4.Reflection.AttributeTests.C21, null, false))[System.Array.index(0, $t)];
             Bridge.Test.NUnit.Assert.areEqual(18, a.i);
         },
         conditionalAttributesWhoseSymbolsAreNotDefinedAreRemoved: function () {
@@ -11603,7 +11615,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual(expected, actualValues);
         },
         assertEqual: function (actual, expected) {
-            var actualValue = actual != null ? Bridge.cast(System.Attribute.getCustomAttributes(actual, Bridge.ClientTest.Batch4.Reflection.GetMembersTests.A1Attribute, true)[0], Bridge.ClientTest.Batch4.Reflection.GetMembersTests.A1Attribute).I : null;
+            var $t;
+            var actualValue = actual != null ? Bridge.cast(($t = System.Attribute.getCustomAttributes(actual, Bridge.ClientTest.Batch4.Reflection.GetMembersTests.A1Attribute, true))[System.Array.index(0, $t)], Bridge.ClientTest.Batch4.Reflection.GetMembersTests.A1Attribute).I : null;
             Bridge.Test.NUnit.Assert.areEqual(expected, actualValue);
         },
         assertAmbiguous: function (action) {
@@ -11911,7 +11924,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         f2: function (m) {
             var arr = Bridge.cast(System.Attribute.getCustomAttributes(m, Bridge.ClientTest.Batch4.Reflection.GetMembersTests.A1Attribute, true), System.Array.type(Bridge.ClientTest.Batch4.Reflection.GetMembersTests.A1Attribute));
-            return arr.length > 0 ? arr[0].I : 0;
+            return arr.length > 0 ? arr[System.Array.index(0, arr)].I : 0;
         },
         f3: function (x) {
             return x !== 0;
@@ -12097,18 +12110,19 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         getMembersReturnsMethodsWithAnyScriptableAttributeOrReflectableAttribute: function () {
             var methods = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C1, 31, 28);
             Bridge.Test.NUnit.Assert.areEqual$1(2, methods.length, "Should be two methods");
-            Bridge.Test.NUnit.Assert.true(Bridge.referenceEquals(methods[0].n, "M2") || Bridge.referenceEquals(methods[1].n, "M2"));
-            Bridge.Test.NUnit.Assert.true(Bridge.referenceEquals(methods[0].n, "M3") || Bridge.referenceEquals(methods[1].n, "M3"));
+            Bridge.Test.NUnit.Assert.true(Bridge.referenceEquals(methods[System.Array.index(0, methods)].n, "M2") || Bridge.referenceEquals(methods[System.Array.index(1, methods)].n, "M2"));
+            Bridge.Test.NUnit.Assert.true(Bridge.referenceEquals(methods[System.Array.index(0, methods)].n, "M3") || Bridge.referenceEquals(methods[System.Array.index(1, methods)].n, "M3"));
         },
         structMemberReflectionWorks: function () {
             var methods = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.S1, 31, 28);
             Bridge.Test.NUnit.Assert.areEqual$1(2, methods.length, "Should be two methods");
-            Bridge.Test.NUnit.Assert.true(Bridge.referenceEquals(methods[0].n, "M2") || Bridge.referenceEquals(methods[1].n, "M2"));
-            Bridge.Test.NUnit.Assert.true(Bridge.referenceEquals(methods[0].n, "M3") || Bridge.referenceEquals(methods[1].n, "M3"));
+            Bridge.Test.NUnit.Assert.true(Bridge.referenceEquals(methods[System.Array.index(0, methods)].n, "M2") || Bridge.referenceEquals(methods[System.Array.index(1, methods)].n, "M2"));
+            Bridge.Test.NUnit.Assert.true(Bridge.referenceEquals(methods[System.Array.index(0, methods)].n, "M3") || Bridge.referenceEquals(methods[System.Array.index(1, methods)].n, "M3"));
         },
         isStaticFlagWorksForMethod: function () {
-            Bridge.Test.NUnit.Assert.areEqual$1(false, (Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C2, 31, 4)[0].is || false), "Instance member should not be static");
-            Bridge.Test.NUnit.Assert.areEqual$1(true, (Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C2, 31, 8)[0].is || false), "Static member should be static");
+            var $t, $t1;
+            Bridge.Test.NUnit.Assert.areEqual$1(false, (($t = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C2, 31, 4))[System.Array.index(0, $t)].is || false), "Instance member should not be static");
+            Bridge.Test.NUnit.Assert.areEqual$1(true, (($t1 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C2, 31, 8))[System.Array.index(0, $t1)].is || false), "Static member should be static");
         },
         memberTypeIsMethodForMethod: function () {
             Bridge.Test.NUnit.Assert.areEqual(8, Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C3, 8, 284, "M1").t);
@@ -12123,77 +12137,77 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var c11 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C11, 31, 28);
             var c19 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C19, 31, 28);
             var c20 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C20, 31, 28);
-            Bridge.Test.NUnit.Assert.true$1((Bridge.cast(c10[0], System.Reflection.ConstructorInfo).t === 1), "Unnamed");
-            Bridge.Test.NUnit.Assert.true$1((Bridge.cast(c10[1], System.Reflection.ConstructorInfo).t === 1), "Named");
-            Bridge.Test.NUnit.Assert.true$1((Bridge.cast(c11[0], System.Reflection.ConstructorInfo).t === 1), "Static method");
-            Bridge.Test.NUnit.Assert.true$1((Bridge.cast(c19[0], System.Reflection.ConstructorInfo).t === 1), "Object literal");
-            Bridge.Test.NUnit.Assert.true$1((Bridge.cast(c20[0], System.Reflection.ConstructorInfo).t === 1), "Inline code");
+            Bridge.Test.NUnit.Assert.true$1((Bridge.cast(c10[System.Array.index(0, c10)], System.Reflection.ConstructorInfo).t === 1), "Unnamed");
+            Bridge.Test.NUnit.Assert.true$1((Bridge.cast(c10[System.Array.index(1, c10)], System.Reflection.ConstructorInfo).t === 1), "Named");
+            Bridge.Test.NUnit.Assert.true$1((Bridge.cast(c11[System.Array.index(0, c11)], System.Reflection.ConstructorInfo).t === 1), "Static method");
+            Bridge.Test.NUnit.Assert.true$1((Bridge.cast(c19[System.Array.index(0, c19)], System.Reflection.ConstructorInfo).t === 1), "Object literal");
+            Bridge.Test.NUnit.Assert.true$1((Bridge.cast(c20[System.Array.index(0, c20)], System.Reflection.ConstructorInfo).t === 1), "Inline code");
         },
         isStaticIsFalseForAllKindsOfConstructors: function () {
             var c10 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C10, 31, 28);
             var c11 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C11, 31, 28);
             var c19 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C19, 31, 28);
             var c20 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C20, 31, 28);
-            Bridge.Test.NUnit.Assert.false$1((c10[0].is || false), "Unnamed");
-            Bridge.Test.NUnit.Assert.false$1((c10[1].is || false), "Named");
-            Bridge.Test.NUnit.Assert.false$1((c11[0].is || false), "Static method");
-            Bridge.Test.NUnit.Assert.false$1((c19[0].is || false), "Object literal");
-            Bridge.Test.NUnit.Assert.false$1((c20[0].is || false), "Inline code");
+            Bridge.Test.NUnit.Assert.false$1((c10[System.Array.index(0, c10)].is || false), "Unnamed");
+            Bridge.Test.NUnit.Assert.false$1((c10[System.Array.index(1, c10)].is || false), "Named");
+            Bridge.Test.NUnit.Assert.false$1((c11[System.Array.index(0, c11)].is || false), "Static method");
+            Bridge.Test.NUnit.Assert.false$1((c19[System.Array.index(0, c19)].is || false), "Object literal");
+            Bridge.Test.NUnit.Assert.false$1((c20[System.Array.index(0, c20)].is || false), "Inline code");
         },
         memberTypeIsConstructorForAllKindsOfConstructors: function () {
             var c10 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C10, 31, 28);
             var c11 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C11, 31, 28);
             var c19 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C19, 31, 28);
             var c20 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C20, 31, 28);
-            Bridge.Test.NUnit.Assert.areEqual$1(1, c10[0].t, "Unnamed");
-            Bridge.Test.NUnit.Assert.areEqual$1(1, c10[1].t, "Named");
-            Bridge.Test.NUnit.Assert.areEqual$1(1, c11[0].t, "Static method");
-            Bridge.Test.NUnit.Assert.areEqual$1(1, c19[0].t, "Object literal");
-            Bridge.Test.NUnit.Assert.areEqual$1(1, c20[0].t, "Inline code");
+            Bridge.Test.NUnit.Assert.areEqual$1(1, c10[System.Array.index(0, c10)].t, "Unnamed");
+            Bridge.Test.NUnit.Assert.areEqual$1(1, c10[System.Array.index(1, c10)].t, "Named");
+            Bridge.Test.NUnit.Assert.areEqual$1(1, c11[System.Array.index(0, c11)].t, "Static method");
+            Bridge.Test.NUnit.Assert.areEqual$1(1, c19[System.Array.index(0, c19)].t, "Object literal");
+            Bridge.Test.NUnit.Assert.areEqual$1(1, c20[System.Array.index(0, c20)].t, "Inline code");
         },
         nameIsCtorForAllKindsOfConstructors: function () {
             var c10 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C10, 31, 28);
             var c11 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C11, 31, 28);
             var c19 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C19, 31, 28);
             var c20 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C20, 31, 28);
-            Bridge.Test.NUnit.Assert.areEqual$1(".ctor", c10[0].n, "Unnamed");
-            Bridge.Test.NUnit.Assert.areEqual$1(".ctor", c10[1].n, "Named");
-            Bridge.Test.NUnit.Assert.areEqual$1(".ctor", c11[0].n, "Static method");
-            Bridge.Test.NUnit.Assert.areEqual$1(".ctor", c19[0].n, "Object literal");
-            Bridge.Test.NUnit.Assert.areEqual$1(".ctor", c20[0].n, "Inline code");
+            Bridge.Test.NUnit.Assert.areEqual$1(".ctor", c10[System.Array.index(0, c10)].n, "Unnamed");
+            Bridge.Test.NUnit.Assert.areEqual$1(".ctor", c10[System.Array.index(1, c10)].n, "Named");
+            Bridge.Test.NUnit.Assert.areEqual$1(".ctor", c11[System.Array.index(0, c11)].n, "Static method");
+            Bridge.Test.NUnit.Assert.areEqual$1(".ctor", c19[System.Array.index(0, c19)].n, "Object literal");
+            Bridge.Test.NUnit.Assert.areEqual$1(".ctor", c20[System.Array.index(0, c20)].n, "Inline code");
         },
         declaringTypeIsCorrectForAllKindsOfConstructors: function () {
             var c10 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C10, 31, 28);
             var c11 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C11, 31, 28);
             var c19 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C19, 31, 28);
             var c20 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C20, 31, 28);
-            Bridge.Test.NUnit.Assert.areEqual$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C10, c10[0].td, "Unnamed");
-            Bridge.Test.NUnit.Assert.areEqual$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C10, c10[1].td, "Named");
-            Bridge.Test.NUnit.Assert.areEqual$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C11, c11[0].td, "Static method");
-            Bridge.Test.NUnit.Assert.areEqual$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C19, c19[0].td, "Object literal");
-            Bridge.Test.NUnit.Assert.areEqual$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C20, c20[0].td, "Inline code");
+            Bridge.Test.NUnit.Assert.areEqual$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C10, c10[System.Array.index(0, c10)].td, "Unnamed");
+            Bridge.Test.NUnit.Assert.areEqual$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C10, c10[System.Array.index(1, c10)].td, "Named");
+            Bridge.Test.NUnit.Assert.areEqual$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C11, c11[System.Array.index(0, c11)].td, "Static method");
+            Bridge.Test.NUnit.Assert.areEqual$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C19, c19[System.Array.index(0, c19)].td, "Object literal");
+            Bridge.Test.NUnit.Assert.areEqual$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C20, c20[System.Array.index(0, c20)].td, "Inline code");
         },
         scriptNameIsCorrectForAllKindsOfConstructors: function () {
             var c10 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C10, 31, 28);
             var c11 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C11, 31, 28);
             var c19 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C19, 31, 28);
             var c20 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C20, 31, 28);
-            Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(Bridge.cast(c10[0], System.Reflection.ConstructorInfo).sn, "ctor"), "Unnamed");
-            Bridge.Test.NUnit.Assert.areEqual$1("$ctor1", Bridge.cast(c10[1], System.Reflection.ConstructorInfo).sn, "Named");
-            Bridge.Test.NUnit.Assert.areEqual$1("ctor", Bridge.cast(c11[0], System.Reflection.ConstructorInfo).sn, "Static method");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.cast(c19[0], System.Reflection.ConstructorInfo).sn == null, "Object literal");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.cast(c20[0], System.Reflection.ConstructorInfo).sn == null, "Inline code");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(Bridge.cast(c10[System.Array.index(0, c10)], System.Reflection.ConstructorInfo).sn, "ctor"), "Unnamed");
+            Bridge.Test.NUnit.Assert.areEqual$1("$ctor1", Bridge.cast(c10[System.Array.index(1, c10)], System.Reflection.ConstructorInfo).sn, "Named");
+            Bridge.Test.NUnit.Assert.areEqual$1("ctor", Bridge.cast(c11[System.Array.index(0, c11)], System.Reflection.ConstructorInfo).sn, "Static method");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.cast(c19[System.Array.index(0, c19)], System.Reflection.ConstructorInfo).sn == null, "Object literal");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.cast(c20[System.Array.index(0, c20)], System.Reflection.ConstructorInfo).sn == null, "Inline code");
         },
         isStaticMethodIsTrueOnlyForStaticMethodConstructors: function () {
             var c10 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C10, 31, 28);
             var c11 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C11, 31, 28);
             var c19 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C19, 31, 28);
             var c20 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C20, 31, 28);
-            Bridge.Test.NUnit.Assert.false$1((Bridge.cast(c10[0], System.Reflection.ConstructorInfo).sm || false), "Unnamed");
-            Bridge.Test.NUnit.Assert.false$1((Bridge.cast(c10[1], System.Reflection.ConstructorInfo).sm || false), "Named");
-            Bridge.Test.NUnit.Assert.false$1((Bridge.cast(c11[0], System.Reflection.ConstructorInfo).sm || false), "Static method");
-            Bridge.Test.NUnit.Assert.false$1((Bridge.cast(c19[0], System.Reflection.ConstructorInfo).sm || false), "Object literal");
-            Bridge.Test.NUnit.Assert.false$1((Bridge.cast(c20[0], System.Reflection.ConstructorInfo).sm || false), "Inline code");
+            Bridge.Test.NUnit.Assert.false$1((Bridge.cast(c10[System.Array.index(0, c10)], System.Reflection.ConstructorInfo).sm || false), "Unnamed");
+            Bridge.Test.NUnit.Assert.false$1((Bridge.cast(c10[System.Array.index(1, c10)], System.Reflection.ConstructorInfo).sm || false), "Named");
+            Bridge.Test.NUnit.Assert.false$1((Bridge.cast(c11[System.Array.index(0, c11)], System.Reflection.ConstructorInfo).sm || false), "Static method");
+            Bridge.Test.NUnit.Assert.false$1((Bridge.cast(c19[System.Array.index(0, c19)], System.Reflection.ConstructorInfo).sm || false), "Object literal");
+            Bridge.Test.NUnit.Assert.false$1((Bridge.cast(c20[System.Array.index(0, c20)], System.Reflection.ConstructorInfo).sm || false), "Inline code");
         },
         isExpandParamsIsCorrectForConstructors: function () {
             var c1 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C22, 1, 284, null, System.Array.init([System.Int32, System.Array.type(System.Int32)], Function));
@@ -12210,11 +12224,11 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var c11 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C11, 31, 28);
             var c19 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C19, 31, 28);
             var c20 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C20, 31, 28);
-            Bridge.Test.NUnit.Assert.true$1(Bridge.staticEquals(Bridge.cast(c10[0], System.Reflection.ConstructorInfo).def, null), "Unnamed");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.staticEquals(Bridge.cast(c10[1], System.Reflection.ConstructorInfo).def, null), "Named");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.staticEquals(Bridge.cast(c11[0], System.Reflection.ConstructorInfo).def, null), "Static method");
-            Bridge.Test.NUnit.Assert.true$1(!Bridge.staticEquals(Bridge.cast(c19[0], System.Reflection.ConstructorInfo).def, null), "Object literal");
-            Bridge.Test.NUnit.Assert.true$1(!Bridge.staticEquals(Bridge.cast(c20[0], System.Reflection.ConstructorInfo).def, null), "Inline code");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.staticEquals(Bridge.cast(c10[System.Array.index(0, c10)], System.Reflection.ConstructorInfo).def, null), "Unnamed");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.staticEquals(Bridge.cast(c10[System.Array.index(1, c10)], System.Reflection.ConstructorInfo).def, null), "Named");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.staticEquals(Bridge.cast(c11[System.Array.index(0, c11)], System.Reflection.ConstructorInfo).def, null), "Static method");
+            Bridge.Test.NUnit.Assert.true$1(!Bridge.staticEquals(Bridge.cast(c19[System.Array.index(0, c19)], System.Reflection.ConstructorInfo).def, null), "Object literal");
+            Bridge.Test.NUnit.Assert.true$1(!Bridge.staticEquals(Bridge.cast(c20[System.Array.index(0, c20)], System.Reflection.ConstructorInfo).def, null), "Inline code");
         },
         declaringTypeShouldBeCorrectForMethods: function () {
             Bridge.Test.NUnit.Assert.areEqual$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C3, Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C3, 8, 284, "M1").td, "Simple type");
@@ -12246,11 +12260,11 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var c11 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C11, 31, 28);
             var c19 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C19, 31, 28);
             var c20 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C20, 31, 28);
-            Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init([System.Int32], Function), (Bridge.cast(c10[0], System.Reflection.ConstructorInfo).p || []), "Unnamed");
-            Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init([System.Int32, System.String], Function), (Bridge.cast(c10[1], System.Reflection.ConstructorInfo).p || []), "Named");
-            Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init([System.DateTime], Function), (Bridge.cast(c11[0], System.Reflection.ConstructorInfo).p || []), "Static method");
-            Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init([System.Int32, System.String], Function), (Bridge.cast(c19[0], System.Reflection.ConstructorInfo).p || []), "Object literal");
-            Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init([System.Int32, System.String], Function), (Bridge.cast(c20[0], System.Reflection.ConstructorInfo).p || []), "Object literal");
+            Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init([System.Int32], Function), (Bridge.cast(c10[System.Array.index(0, c10)], System.Reflection.ConstructorInfo).p || []), "Unnamed");
+            Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init([System.Int32, System.String], Function), (Bridge.cast(c10[System.Array.index(1, c10)], System.Reflection.ConstructorInfo).p || []), "Named");
+            Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init([System.DateTime], Function), (Bridge.cast(c11[System.Array.index(0, c11)], System.Reflection.ConstructorInfo).p || []), "Static method");
+            Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init([System.Int32, System.String], Function), (Bridge.cast(c19[System.Array.index(0, c19)], System.Reflection.ConstructorInfo).p || []), "Object literal");
+            Bridge.Test.NUnit.Assert.areEqual$1(System.Array.init([System.Int32, System.String], Function), (Bridge.cast(c20[System.Array.index(0, c20)], System.Reflection.ConstructorInfo).p || []), "Object literal");
         },
         voidIsConsideredObjectAsReturnType: function () {
             Bridge.Test.NUnit.Assert.areEqual$1(System.Object, Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C3, 8, 284, "M4").rt, "Return type of void method should be object");
@@ -12512,25 +12526,26 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual(System.Array.init([Bridge.box(2, System.Int32), System.Array.init([17, 32], System.Int32)], System.Object), Bridge.unbox(r2));
         },
         invokeWorksForAllKindsOfConstructors: function () {
-            var c1 = Bridge.cast(Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C10, 31, 28).filter($asm.$.Bridge.ClientTest.Batch4.Reflection.ReflectionTests.f3)[0], System.Reflection.ConstructorInfo);
+            var $t, $t1, $t2, $t3, $t4;
+            var c1 = Bridge.cast(($t = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C10, 31, 28).filter($asm.$.Bridge.ClientTest.Batch4.Reflection.ReflectionTests.f3))[System.Array.index(0, $t)], System.Reflection.ConstructorInfo);
             var o1 = Bridge.cast(Bridge.Reflection.invokeCI(c1, [42]), Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C10);
             Bridge.Test.NUnit.Assert.areEqual$1(42, o1.x, "o1.X");
             Bridge.Test.NUnit.Assert.areEqual$1("X", o1.s, "o1.S");
 
-            var c2 = Bridge.cast(Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C10, 31, 28).filter($asm.$.Bridge.ClientTest.Batch4.Reflection.ReflectionTests.f4)[0], System.Reflection.ConstructorInfo);
+            var c2 = Bridge.cast(($t1 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C10, 31, 28).filter($asm.$.Bridge.ClientTest.Batch4.Reflection.ReflectionTests.f4))[System.Array.index(0, $t1)], System.Reflection.ConstructorInfo);
             var o2 = Bridge.cast(Bridge.Reflection.invokeCI(c2, [14, "Hello"]), Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C10);
             Bridge.Test.NUnit.Assert.areEqual$1(14, o2.x, "o2.X");
             Bridge.Test.NUnit.Assert.areEqual$1("Hello", o2.s, "o2.S");
 
-            var c3 = Bridge.cast(Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C11, 31, 28)[0], System.Reflection.ConstructorInfo);
+            var c3 = Bridge.cast(($t2 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C11, 31, 28))[System.Array.index(0, $t2)], System.Reflection.ConstructorInfo);
             var o3 = Bridge.cast(Bridge.Reflection.invokeCI(c3, [new Date(2012, 1 - 1, 2)]), Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C11);
             Bridge.Test.NUnit.Assert.areEqual$1(new Date(2012, 1 - 1, 2), o3.D, "o3.D");
 
-            var c19 = Bridge.cast(Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C19, 31, 28)[0], System.Reflection.ConstructorInfo);
+            var c19 = Bridge.cast(($t3 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C19, 31, 28))[System.Array.index(0, $t3)], System.Reflection.ConstructorInfo);
             var o4 = Bridge.Reflection.invokeCI(c19, [42, "Hello"]);
             Bridge.Test.NUnit.Assert.areDeepEqual({ a: 42, b: "Hello" }, o4);
 
-            var c20 = Bridge.cast(Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C20, 31, 28)[0], System.Reflection.ConstructorInfo);
+            var c20 = Bridge.cast(($t4 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C20, 31, 28))[System.Array.index(0, $t4)], System.Reflection.ConstructorInfo);
             var o5 = Bridge.Reflection.invokeCI(c20, [42, "Hello"]);
             Bridge.Test.NUnit.Assert.areDeepEqual({ A: 42, B: "Hello" }, Bridge.unbox(o5));
         },
@@ -13194,25 +13209,25 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         testMemberAttribute: function (member, expectedA1) {
             var all = System.Attribute.getCustomAttributes(member, false);
             Bridge.Test.NUnit.Assert.areEqual(2, all.length);
-            Bridge.Test.NUnit.Assert.true(Bridge.is(all[0], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute) || Bridge.is(all[1], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute));
-            Bridge.Test.NUnit.Assert.true(Bridge.is(all[0], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A3Attribute) || Bridge.is(all[1], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A3Attribute));
-            Bridge.Test.NUnit.Assert.areEqual(expectedA1, Bridge.cast((Bridge.is(all[0], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute) ? all[0] : all[1]), Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute).X);
+            Bridge.Test.NUnit.Assert.true(Bridge.is(all[System.Array.index(0, all)], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute) || Bridge.is(all[System.Array.index(1, all)], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute));
+            Bridge.Test.NUnit.Assert.true(Bridge.is(all[System.Array.index(0, all)], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A3Attribute) || Bridge.is(all[System.Array.index(1, all)], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A3Attribute));
+            Bridge.Test.NUnit.Assert.areEqual(expectedA1, Bridge.cast((Bridge.is(all[System.Array.index(0, all)], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute) ? all[System.Array.index(0, all)] : all[System.Array.index(1, all)]), Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute).X);
 
             all = System.Attribute.getCustomAttributes(member, false, true);
             Bridge.Test.NUnit.Assert.areEqual(2, all.length);
-            Bridge.Test.NUnit.Assert.true(Bridge.is(all[0], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute) || Bridge.is(all[1], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute));
-            Bridge.Test.NUnit.Assert.true(Bridge.is(all[0], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A3Attribute) || Bridge.is(all[1], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A3Attribute));
-            Bridge.Test.NUnit.Assert.areEqual(expectedA1, Bridge.cast((Bridge.is(all[0], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute) ? all[0] : all[1]), Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute).X);
+            Bridge.Test.NUnit.Assert.true(Bridge.is(all[System.Array.index(0, all)], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute) || Bridge.is(all[System.Array.index(1, all)], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute));
+            Bridge.Test.NUnit.Assert.true(Bridge.is(all[System.Array.index(0, all)], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A3Attribute) || Bridge.is(all[System.Array.index(1, all)], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A3Attribute));
+            Bridge.Test.NUnit.Assert.areEqual(expectedA1, Bridge.cast((Bridge.is(all[System.Array.index(0, all)], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute) ? all[System.Array.index(0, all)] : all[System.Array.index(1, all)]), Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute).X);
 
             all = System.Attribute.getCustomAttributes(member, Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute);
             Bridge.Test.NUnit.Assert.areEqual(1, all.length);
-            Bridge.Test.NUnit.Assert.true(Bridge.is(all[0], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute));
-            Bridge.Test.NUnit.Assert.areEqual(expectedA1, Bridge.cast(all[0], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute).X);
+            Bridge.Test.NUnit.Assert.true(Bridge.is(all[System.Array.index(0, all)], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute));
+            Bridge.Test.NUnit.Assert.areEqual(expectedA1, Bridge.cast(all[System.Array.index(0, all)], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute).X);
 
             all = System.Attribute.getCustomAttributes(member, Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute, false);
             Bridge.Test.NUnit.Assert.areEqual(1, all.length);
-            Bridge.Test.NUnit.Assert.true(Bridge.is(all[0], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute));
-            Bridge.Test.NUnit.Assert.areEqual(expectedA1, Bridge.cast(all[0], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute).X);
+            Bridge.Test.NUnit.Assert.true(Bridge.is(all[System.Array.index(0, all)], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute));
+            Bridge.Test.NUnit.Assert.areEqual(expectedA1, Bridge.cast(all[System.Array.index(0, all)], Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute).X);
 
             Bridge.Test.NUnit.Assert.areEqual(0, System.Attribute.getCustomAttributes(member, Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A4Attribute).length);
             Bridge.Test.NUnit.Assert.areEqual(0, System.Attribute.getCustomAttributes(member, Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A4Attribute, false).length);
@@ -13836,8 +13851,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         statics: {
             canConvert: function (T, arg) {
                 try { /// The variable `x' is assigned but its value is never used
-
-
                     var x = Bridge.cast(Bridge.unbox(arg), T);
                     return true;
                 }
@@ -14444,8 +14457,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge.Test.NUnit.Assert.areEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests+G`2[[System.Int32, mscorlib],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests+G`2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests+C, Bridge.ClientTest.Batch4],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests+IG`1[[System.String, mscorlib]], Bridge.ClientTest.Batch4]], Bridge.ClientTest.Batch4]]", Bridge.Reflection.getTypeFullName(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(System.Int32,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1(System.String)))));
         },
         baseTypeAndImplementedInterfacesForGenericTypeWorks: function () {
+            var $t;
             Bridge.Test.NUnit.Assert.areEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests+BX`1[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests+G`2[[System.Int32, mscorlib],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests+C, Bridge.ClientTest.Batch4]], Bridge.ClientTest.Batch4]]", Bridge.Reflection.getTypeFullName(Bridge.Reflection.getBaseType(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(System.Int32,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1(System.String))))));
-            Bridge.Test.NUnit.Assert.areEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests+IG`1[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests+G`2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests+G`2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests+C, Bridge.ClientTest.Batch4],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests+IG`1[[System.String, mscorlib]], Bridge.ClientTest.Batch4]], Bridge.ClientTest.Batch4],[System.String, mscorlib]], Bridge.ClientTest.Batch4]]", Bridge.Reflection.getTypeFullName(Bridge.Reflection.getInterfaces(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(System.Int32,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1(System.String))))[0]));
+            Bridge.Test.NUnit.Assert.areEqual("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests+IG`1[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests+G`2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests+G`2[[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests+C, Bridge.ClientTest.Batch4],[Bridge.ClientTest.Batch4.Reflection.TypeSystemTests+IG`1[[System.String, mscorlib]], Bridge.ClientTest.Batch4]], Bridge.ClientTest.Batch4],[System.String, mscorlib]], Bridge.ClientTest.Batch4]]", Bridge.Reflection.getTypeFullName(($t = Bridge.Reflection.getInterfaces(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(System.Int32,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.C,Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.IG$1(System.String)))))[System.Array.index(0, $t)]));
         },
         isGenericTypeDefinitionWorksAsExpected: function () {
             Bridge.Test.NUnit.Assert.true(Bridge.Reflection.isGenericTypeDefinition(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.G$2));
@@ -15380,12 +15394,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var a1 = System.Array.init([3, 7, 14, 1], System.Int32);
             var a2 = a1;
             this.refTestMethod(Bridge.ref(a1, 2), 14, 17, 21, 24, function () {
-                Bridge.Test.NUnit.Assert.areEqual(17, a1[2]);
-                a1[2] = 21;
+                Bridge.Test.NUnit.Assert.areEqual(17, a1[System.Array.index(2, a1)]);
+                a1[System.Array.index(2, a1)] = 21;
                 a1 = System.Array.init([8, 9, 10, 11, 12], System.Int32);
             });
-            Bridge.Test.NUnit.Assert.areEqual(24, a2[2]);
-            Bridge.Test.NUnit.Assert.areEqual(10, a1[2]);
+            Bridge.Test.NUnit.Assert.areEqual(24, a2[System.Array.index(2, a2)]);
+            Bridge.Test.NUnit.Assert.areEqual(10, a1[System.Array.index(2, a1)]);
         },
         canUseReferenceToMultiDimensionalArray: function () {
             var a1 = System.Array.create(0, [[1, 3, 7], [1, 2, 3], [1, 14, 1]], System.Int32, 3, 3);
@@ -21600,7 +21614,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             var m = re.exec("xaybz");
             //Assert.AreEqual(m.Index, 1);
             Bridge.Test.NUnit.Assert.areEqual(1, m.length);
-            Bridge.Test.NUnit.Assert.areEqual("a", m[0]);
+            Bridge.Test.NUnit.Assert.areEqual("a", m[System.Array.index(0, m)]);
         },
         lastIndexWorks: function () {
             var re = new RegExp("a|b", "g");
@@ -22806,7 +22820,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         handleProgress: function (args) {
             if (args === void 0) { args = []; }
-            var i = System.Nullable.getValue(Bridge.cast(Bridge.unbox(args[0]), System.Int32));
+            var i = System.Nullable.getValue(Bridge.cast(Bridge.unbox(args[System.Array.index(0, args)]), System.Int32));
             this.PromiseProgress = i;
         },
         taskFromPromiseWithProgressWithoutResultFactoryWorksWhenPromiseProgressesAndCompletes: function () {
