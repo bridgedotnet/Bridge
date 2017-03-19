@@ -15840,6 +15840,50 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469", {
+        statics: {
+            testLambdaLiftingWithStaticGenericMember: function () {
+                Bridge.Test.NUnit.Assert.areEqual("Hello", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469.Class1$1(System.Int32).method()());
+                Bridge.Test.NUnit.Assert.areEqual("Hello", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469.Class2$1.method()());
+
+                var scope1 = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469.Class2$1;
+                Bridge.Test.NUnit.Assert.notNull$1(scope1, "scope1 exists");
+                Bridge.Test.NUnit.Assert.notNull$1(scope1.f1, "scope1.f1 should exists");
+
+                var scope2 = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469.Class1$1;
+                Bridge.Test.NUnit.Assert.null$1(scope2, "scope2 should not exists");
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469.Class1$1", function (T) { return {
+        statics: {
+            Hello: "Hello",
+            method: function () {
+                return function () {
+                    return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469.Class1$1(T).Hello;
+                };
+            }
+        }
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469.Class2$1", {
+        statics: {
+            Hello: "Hello",
+            method: function () {
+                return $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469.Class2$1.f1;
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469.Class2$1", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469.Class2$1, {
+        f1: function () {
+            return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469.Class2$1.Hello;
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge266A", {
         statics: {
             test: function () {
