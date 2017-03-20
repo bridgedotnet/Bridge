@@ -9,7 +9,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     {
         public class Class1<T>
         {
-            private const string Hello = "Hello";
+            private const string Hello = "Hello1";
 
             public static Func<string> Method()
             {
@@ -20,7 +20,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [IgnoreGeneric]
         public class Class2<T>
         {
-            private const string Hello = "Hello";
+            private const string Hello = "Hello2";
 
             public static Func<string> Method()
             {
@@ -31,15 +31,15 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test]
         public static void TestLambdaLiftingWithStaticGenericMember()
         {
-            Assert.AreEqual("Hello", Class1<int>.Method()());
-            Assert.AreEqual("Hello", Class2<int>.Method()());
+            Assert.AreEqual("Hello1", Class1<int>.Method()());
+            Assert.AreEqual("Hello2", Class2<int>.Method()());
 
-            dynamic scope1 = Script.Get("$asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469.Class2$1");
-            Assert.NotNull(scope1, "scope1 exists");
-            Assert.NotNull(scope1.f1, "scope1.f1 should exists");
+            dynamic scope2 = Script.Get("$asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469.Class2$1");
+            Assert.NotNull(scope2, "scope2 exists");
+            Assert.NotNull(scope2.f1, "scope2.f1 exists");
 
-            dynamic scope2 = Script.Get("$asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469.Class1$1");
-            Assert.Null(scope2, "scope2 should not exists");
+            dynamic scope1 = Script.Get("$asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469.Class1$1");
+            Assert.Null(scope1, "scope1 should not exist");
         }
     }
 }
