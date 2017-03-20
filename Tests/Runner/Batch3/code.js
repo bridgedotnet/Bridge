@@ -7416,13 +7416,65 @@ Bridge.$N1391Result =                 r;
                 }
             },
             testArrayIndexOutOfRangeException: function () {
-                Bridge.Test.NUnit.Assert.areEqual(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge156.myArray[System.Array.index(4, Bridge.ClientTest.Batch3.BridgeIssues.Bridge156.myArray)]);
-                Bridge.Test.NUnit.Assert.throws$6(System.IndexOutOfRangeException, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge156.f1);
+                var lowIndex = -1;
 
+                Bridge.Test.NUnit.Assert.areEqual(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge156.myArray[System.Array.index(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge156.myArray)]);
+                Bridge.Test.NUnit.Assert.areEqual(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge156.myArray[System.Array.index(4, Bridge.ClientTest.Batch3.BridgeIssues.Bridge156.myArray)]);
+
+                Bridge.Test.NUnit.Assert.throws$6(System.IndexOutOfRangeException, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge156.f1);
+                Bridge.Test.NUnit.Assert.throws$6(System.IndexOutOfRangeException, function () {
+                    var v = Bridge.ClientTest.Batch3.BridgeIssues.Bridge156.myArray[System.Array.index(lowIndex, Bridge.ClientTest.Batch3.BridgeIssues.Bridge156.myArray)];
+                });
+
+                Bridge.Test.NUnit.Assert.areEqual(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge156.my2DArray.get([0, 0]));
+                Bridge.Test.NUnit.Assert.areEqual(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge156.my2DArray.get([0, 4]));
+                Bridge.Test.NUnit.Assert.areEqual(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge156.my2DArray.get([4, 0]));
                 Bridge.Test.NUnit.Assert.areEqual(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge156.my2DArray.get([4, 4]));
+
                 Bridge.Test.NUnit.Assert.throws$6(System.IndexOutOfRangeException, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge156.f2);
                 Bridge.Test.NUnit.Assert.throws$6(System.IndexOutOfRangeException, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge156.f3);
                 Bridge.Test.NUnit.Assert.throws$6(System.IndexOutOfRangeException, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge156.f4);
+                Bridge.Test.NUnit.Assert.throws$6(System.IndexOutOfRangeException, function () {
+                    var v = Bridge.ClientTest.Batch3.BridgeIssues.Bridge156.my2DArray.get([lowIndex, 4]);
+                });
+                Bridge.Test.NUnit.Assert.throws$6(System.IndexOutOfRangeException, function () {
+                    var v = Bridge.ClientTest.Batch3.BridgeIssues.Bridge156.my2DArray.get([4, lowIndex]);
+                });
+                Bridge.Test.NUnit.Assert.throws$6(System.IndexOutOfRangeException, function () {
+                    var v = Bridge.ClientTest.Batch3.BridgeIssues.Bridge156.my2DArray.get([lowIndex, lowIndex]);
+                });
+            },
+            test1DArrayIndexOutOfRangeExceptionIndexAsVariable: function () {
+                var index = -2;
+                var a = System.Array.init([1, 2, 3], System.Int32);
+
+                Bridge.Test.NUnit.Assert.throws$6(System.IndexOutOfRangeException, function () {
+                    var v = a[System.Array.index(Bridge.identity(index, (index = (index + 1) | 0)), a)];
+                });
+
+                Bridge.Test.NUnit.Assert.areEqual(1, a[System.Array.index(((index = (index + 1) | 0)), a)]);
+                Bridge.Test.NUnit.Assert.areEqual(2, a[System.Array.index(((index = (index + 1) | 0)), a)]);
+                Bridge.Test.NUnit.Assert.areEqual(3, a[System.Array.index(((index = (index + 1) | 0)), a)]);
+
+                Bridge.Test.NUnit.Assert.throws$6(System.IndexOutOfRangeException, function () {
+                    var v = a[System.Array.index(((index = (index + 1) | 0)), a)];
+                });
+            },
+            test2DArrayIndexOutOfRangeExceptionIndexAsVariable: function () {
+                var index = -2;
+                var a = System.Array.create(0, [[1, 2, 3], [11, 12, 13]], System.Int32, 2, 3);
+
+                Bridge.Test.NUnit.Assert.throws$6(System.IndexOutOfRangeException, function () {
+                    var v = a.get([1, Bridge.identity(index, (index = (index + 1) | 0))]);
+                });
+
+                Bridge.Test.NUnit.Assert.areEqual(11, a.get([1, ((index = (index + 1) | 0))]));
+                Bridge.Test.NUnit.Assert.areEqual(12, a.get([1, ((index = (index + 1) | 0))]));
+                Bridge.Test.NUnit.Assert.areEqual(13, a.get([1, ((index = (index + 1) | 0))]));
+
+                Bridge.Test.NUnit.Assert.throws$6(System.IndexOutOfRangeException, function () {
+                    var v = a.get([1, ((index = (index + 1) | 0))]);
+                });
             }
         }
     });
