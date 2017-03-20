@@ -15907,9 +15907,9 @@ Bridge.$N1391Result =                 r;
                 }},
             testForEachClone: function () {
                 var x = System.Array.init([new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2454.MyStruct.$ctor1(1, 10)], Bridge.ClientTest.Batch3.BridgeIssues.Bridge2454.MyStruct);
-                Bridge.Test.NUnit.Assert.areEqual("1-10", x[0].toString());
+                Bridge.Test.NUnit.Assert.areEqual("1-10", x[System.Array.index(0, x)].toString());
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2454.test(x);
-                Bridge.Test.NUnit.Assert.areEqual("1-10", x[0].toString());
+                Bridge.Test.NUnit.Assert.areEqual("1-10", x[System.Array.index(0, x)].toString());
             }
         }
     });
