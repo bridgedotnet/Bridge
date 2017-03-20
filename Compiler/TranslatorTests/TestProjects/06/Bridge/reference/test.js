@@ -40,17 +40,17 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                 var stringArray = System.Array.init(9, null, System.String);
                 var decimalArray = System.Array.init(10, System.Decimal(0.0), System.Decimal);
 
-                byteArray[0] = 1;
-                sbyteArray[0] = 2;
-                shortArray[0] = 3;
-                ushortArray[0] = 4;
-                intArray[0] = 5;
-                uintArray[0] = 6;
-                floatArray[0] = 7;
-                doubleArray[0] = 8;
+                byteArray[System.Array.index(0, byteArray)] = 1;
+                sbyteArray[System.Array.index(0, sbyteArray)] = 2;
+                shortArray[System.Array.index(0, shortArray)] = 3;
+                ushortArray[System.Array.index(0, ushortArray)] = 4;
+                intArray[System.Array.index(0, intArray)] = 5;
+                uintArray[System.Array.index(0, uintArray)] = 6;
+                floatArray[System.Array.index(0, floatArray)] = 7;
+                doubleArray[System.Array.index(0, doubleArray)] = 8;
 
-                stringArray[0] = "9";
-                decimalArray[0] = System.Decimal(10.0);
+                stringArray[System.Array.index(0, stringArray)] = "9";
+                decimalArray[System.Array.index(0, decimalArray)] = System.Decimal(10.0);
             }
         }
     });
