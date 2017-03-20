@@ -3,10 +3,31 @@
             inherits: [System.Collections.Generic.IDictionary$2(TKey, TValue), System.Collections.IDictionary],
 
             config: {
+                properties: {
+                    Keys: {
+                        get: function() {
+                            return this.getKeys();
+                        }
+                    },
+
+                    Values: {
+                        get: function () {
+                            return this.getValues();
+                        }
+                    },
+
+                    IsReadOnly: {
+                        get: function () {
+                            return this.getIsReadOnly();
+                        }
+                    }
+                },
                 alias: [
                     "getCount", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(System.Collections.Generic.KeyValuePair$2(TKey, TValue)) + "$getCount",
                     "getKeys", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getKeys",
                     "getValues", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getValues",
+                    "Keys", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$Keys",
+                    "Values", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$Values",
                     "get", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getItem",
                     "set", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$setItem",
                     "add", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$add",
@@ -15,6 +36,7 @@
                     "remove", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$remove",
                     "tryGetValue", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$tryGetValue",
                     "getIsReadOnly", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(System.Collections.Generic.KeyValuePair$2(TKey, TValue)) + "$getIsReadOnly",
+                    "IsReadOnly", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(System.Collections.Generic.KeyValuePair$2(TKey, TValue)) + "$IsReadOnly",
                     "addPair", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(System.Collections.Generic.KeyValuePair$2(TKey, TValue)) + "$add",
                     "copyTo", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(System.Collections.Generic.KeyValuePair$2(TKey, TValue)) + "$copyTo",
                     "clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(System.Collections.Generic.KeyValuePair$2(TKey, TValue)) + "$clear",
@@ -23,12 +45,15 @@
                     "copyTo", "System$Collections$ICollection$copyTo",
                     "get", "System$Collections$IDictionary$getItem",
                     "set", "System$Collections$IDictionary$setItem",
-                    "getValues", "System$Collections$IDictionary$getValues",
                     "containsKey", "System$Collections$IDictionary$containsKey",
                     "add", "System$Collections$IDictionary$add",
                     "remove", "System$Collections$IDictionary$remove",
                     "getIsReadOnly", "System$Collections$IDictionary$getIsReadOnly",
-                    "getKeys", "System$Collections$IDictionary$getKeys"
+                    "getKeys", "System$Collections$IDictionary$getKeys",
+                    "getValues", "System$Collections$IDictionary$getValues",
+                    "IsReadOnly", "System$Collections$IDictionary$IsReadOnly",
+                    "Keys", "System$Collections$IDictionary$Keys",
+                    "Values", "System$Collections$IDictionary$Values"
                 ]
             },
 
@@ -42,7 +67,7 @@
                         c;
 
                     while (e.moveNext()) {
-                        c = e.getCurrent();
+                        c = e.Current;
                         this.add(c.key, c.value);
                     }
                 } else if (Object.prototype.toString.call(obj) === '[object Object]') {

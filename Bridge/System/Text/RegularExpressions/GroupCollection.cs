@@ -14,22 +14,38 @@ namespace System.Text.RegularExpressions
         /// <summary>
         /// Gets an object that can be used to synchronize access to the GroupCollection.
         /// </summary>
-        public extern object SyncRoot { get; }
+        public extern object SyncRoot
+        {
+            [Template("getSyncRoot()")]
+            get;
+        }
 
         /// <summary>
         /// Gets a value that indicates whether access to the GroupCollection is synchronized (thread-safe).
         /// </summary>
-        public extern bool IsSynchronized { get; }
+        public extern bool IsSynchronized
+        {
+            [Template("getIsSynchronized()")]
+            get;
+        }
 
         /// <summary>
         /// Gets a value that indicates whether the collection is read-only.
         /// </summary>
-        public extern bool IsReadOnly { get; }
+        public extern bool IsReadOnly
+        {
+            [Template("getIsReadOnly()")]
+            get;
+        }
 
         /// <summary>
         /// Returns the number of groups in the collection.
         /// </summary>
-        public extern int Count { get; }
+        public extern int Count
+        {
+            [Template("getCount()")]
+            get;
+        }
 
         /// <summary>
         /// Enables access to a member of the collection by integer index.

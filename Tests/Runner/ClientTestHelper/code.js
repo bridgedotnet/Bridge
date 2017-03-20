@@ -17,8 +17,14 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
     Bridge.define("Bridge.ClientTestHelper.HtmlHelper", {
         statics: {
             TEST_FIXTURE_ELEMENT: "qunit-fixture",
-            getFixtureElement: function () {
-                return document.getElementById(Bridge.ClientTestHelper.HtmlHelper.TEST_FIXTURE_ELEMENT);
+            config: {
+                properties: {
+                    FixtureElement: {
+                        get: function () {
+                            return document.getElementById(Bridge.ClientTestHelper.HtmlHelper.TEST_FIXTURE_ELEMENT);
+                        }
+                    }
+                }
             }
         }
     });
@@ -29,8 +35,14 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
 
     Bridge.define("Bridge.ClientTestHelper.N1193", {
         statics: {
-            getClientTestHelperAssemblyVersion: function () {
-                return "1.2.3.4";
+            config: {
+                properties: {
+                    ClientTestHelperAssemblyVersion: {
+                        get: function () {
+                            return "1.2.3.4";
+                        }
+                    }
+                }
             }
         }
     });

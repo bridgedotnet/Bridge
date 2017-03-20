@@ -34,7 +34,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
             }
         },
         move: function (dx, dy) {
-            this.setPoint(Classes.MovePoint.move(this.getPoint().$clone(), dx, dy));
+            this.Point = Classes.MovePoint.move(this.Point.$clone(), dx, dy);
         }
     });
 

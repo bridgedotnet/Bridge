@@ -64,8 +64,7 @@ declare module TypeScript.Issues {
 
     export interface N2438 {
         isDefaultCtor: boolean;
-        getAttribute(): number;
-        setAttribute(value: number): void;
+        Attribute: number;
     }
     export interface N2438Func extends Function {
         prototype: N2438;
@@ -80,8 +79,7 @@ declare module TypeScript.Issues {
     var N2438: N2438Func;
 
     export interface N2264 {
-        getValues(): System.Collections.Generic.IEnumerable$1<string>;
-        setValues(value: System.Collections.Generic.IEnumerable$1<string>): void;
+        Values: System.Collections.Generic.IEnumerable$1<string>;
     }
     export interface N2264Func extends Function {
         prototype: N2264;
@@ -90,10 +88,8 @@ declare module TypeScript.Issues {
     var N2264: N2264Func;
 
     export interface N2031DictionaryMap$2<T1,T2> {
-        getForward(): TypeScript.Issues.N2031DictionaryMap$2.Indexer$2<T1,T2,T1,T2>;
-        setForward(value: TypeScript.Issues.N2031DictionaryMap$2.Indexer$2<T1,T2,T1,T2>): void;
-        getReverse(): TypeScript.Issues.N2031DictionaryMap$2.Indexer$2<T1,T2,T2,T1>;
-        setReverse(value: TypeScript.Issues.N2031DictionaryMap$2.Indexer$2<T1,T2,T2,T1>): void;
+        Forward: TypeScript.Issues.N2031DictionaryMap$2.Indexer$2<T1,T2,T1,T2>;
+        Reverse: TypeScript.Issues.N2031DictionaryMap$2.Indexer$2<T1,T2,T2,T1>;
         add(t1: T1, t2: T2): void;
     }
     export interface N2031DictionaryMap$2Func extends Function {
@@ -125,8 +121,7 @@ declare module TypeScript.Issues {
     }
 
     export interface N2029 extends TypeScript.Issues.N2029Interface$1<number> {
-        getValue1(): number;
-        setValue1(value: number): void;
+        Value1: number;
     }
     export interface N2029Func extends Function {
         prototype: N2029;
@@ -135,7 +130,7 @@ declare module TypeScript.Issues {
     var N2029: N2029Func;
 
     export interface N2030Attribute extends System.Attribute {
-        getIsUnspecified(): boolean;
+        IsUnspecified: boolean;
     }
     export interface N2030AttributeFunc extends Function {
         prototype: N2030Attribute;
@@ -144,8 +139,7 @@ declare module TypeScript.Issues {
     var N2030Attribute: N2030AttributeFunc;
 
     export interface N2029Interface$1<T> {
-        getValue1(): number;
-        setValue1(value: number): void;
+        Value1: number;
     }
 
 }

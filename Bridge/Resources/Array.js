@@ -240,13 +240,20 @@
         },
 
         getCount: function (obj, T) {
-            var name;
+            var name,
+                v;
             if (Bridge.isArray(obj)) {
                 return obj.length;
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getCount"])) {
                 return obj[name]();
             } else if (Bridge.isFunction(obj[name = "System$Collections$ICollection$getCount"])) {
                 return obj[name]();
+            } else if (T && (v = obj["System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$Count"]) !== undefined) {
+                return v;
+            } else if ((v = obj["System$Collections$ICollection$Count"]) !== undefined) {
+                return v;
+            } else if ((v = obj.Count) !== undefined) {
+                return v;
             } else if (Bridge.isFunction(obj.getCount)) {
                 return obj.getCount();
             }
@@ -255,19 +262,26 @@
         },
 
         getIsReadOnly: function (obj, T) {
-            var name;
+            var name,
+                v;
 
             if (Bridge.isArray(obj)) {
                 return T ? true : false;
             } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getIsReadOnly"])) {
                 return obj[name]();
+            } else if (T && (v = obj["System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$IsReadOnly"]) !== undefined) {
+                return v;
             } else if (Bridge.isFunction(obj[name = "System$Collections$IList$getIsReadOnly"])) {
                 return obj[name]();
+            } else if ((v = obj["System$Collections$IList$IsReadOnly"]) !== undefined) {
+                return v;
+            } else if ((v = obj.IsReadOnly) !== undefined) {
+                return v;
             } else if (Bridge.isFunction(obj.getIsReadOnly)) {
                 return obj.getIsReadOnly();
             }
 
-            return 0;
+            return false;
         },
 
         checkReadOnly: function(obj, T, msg) {
@@ -758,7 +772,7 @@
 
                 try {
                     while (e.moveNext()) {
-                        arr.push(e.getCurrent());
+                        arr.push(e.Current);
                     }
                 } finally {
                     if (Bridge.is(e, System.IDisposable)) {

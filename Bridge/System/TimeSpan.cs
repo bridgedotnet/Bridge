@@ -65,56 +65,67 @@ namespace System
 
         public extern int Days
         {
+            [Template("getDays()")]
             get;
         }
 
         public extern int Hours
         {
+            [Template("getHours()")]
             get;
         }
 
         public extern int Milliseconds
         {
+            [Template("getMilliseconds()")]
             get;
         }
 
         public extern int Minutes
         {
+            [Template("getMinutes()")]
             get;
         }
 
         public extern int Seconds
         {
+            [Template("getSeconds()")]
             get;
         }
 
         public extern long Ticks
         {
+            [Template("getTicks()")]
             get;
         }
 
         public extern double TotalDays
         {
+            [Template("getTotalDays()")]
             get;
         }
 
         public extern double TotalHours
         {
+            [Template("getTotalHours()")]
             get;
         }
 
         public extern double TotalMilliseconds
         {
+            [Template("getTotalMilliseconds()")]
             get;
         }
 
         public extern double TotalMinutes
         {
+            [Template("getTotalMinutes()")]
             get;
         }
 
         public extern double TotalSeconds
         {
+            [Template("getTotalSeconds()")]
             get;
         }
 

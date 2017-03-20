@@ -189,78 +189,76 @@
             return proxy;
         },
 
-        property: function (scope, name, v, statics) {
-            var getName,
-                setName,
-                cfg = null;
+        ensureBaseProperty: function (scope, name) {
+            var scopeType = Bridge.getType(scope),
+                descriptors = scopeType.$descriptors || [];
 
-            if (v && Bridge.isDefined(v.value) && (v.setter || v.getter)) {
-                getName = v.getter;
-                setName = v.setter;
-                cfg = v;
-                v = v.value;
+            descriptors.$propMap = descriptors.$propMap || {};
+
+            if (descriptors.$propMap[name]) {
+                return scope;
             }
 
-            scope[name] = v;
+            for (var j = 0; j < descriptors.length; j++) {
+                var d = descriptors[j];
+                if (d.name === name) {
+                    var aliasCfg = {},
+                        aliasName = "$" + Bridge.getTypeAlias(d.cls) + "$" + name;
 
-            var rs = name.charAt(0) === "$",
-                cap = rs ? name.slice(1) : name,
-                lastSep = name.lastIndexOf("$"),
-                endsNum = lastSep > 0 && ((name.length - lastSep - 1) > 0) && !isNaN(parseInt(name.substr(lastSep + 1)));
+                    if (d.get) {
+                        aliasCfg.get = d.get;
+                    }
 
-            if (!cfg || !cfg.getter) {
-                getName = "get" + cap;
-            }
-
-            if (!cfg || !cfg.setter) {
-                setName = "set" + cap;
-            }
-
-            if (endsNum) {
-                lastSep = name.substring(0, lastSep - 1).lastIndexOf("$");
-            }
-
-            if (lastSep > 0 && lastSep !== (name.length - 1)) {
-                if (!cfg || !cfg.getter) {
-                    getName = name.substring(0, lastSep) + "get" + name.substr(lastSep + 1);
-                }
-
-                if (!cfg || !cfg.setter) {
-                    setName = name.substring(0, lastSep) + "set" + name.substr(lastSep + 1);
+                    if (d.set) {
+                        aliasCfg.set = d.set;
+                    }
+                    Bridge.property(scope, aliasName, aliasCfg, false, scopeType, true);
                 }
             }
 
-            if (getName === setName) {
-                scope[getName] = (function (name, scope, statics) {
-                    return statics ? function (value) {
-                        if (arguments.length === 0) {
-                            return scope[name];
-                        }
-                        scope[name] = value;
-                    } : function (value) {
-                        if (arguments.length === 0) {
-                            return this[name];
-                        }
-                        this[name] = value;
-                    };
-                })(name, scope, statics);
-            } else {
-                scope[getName] = (function (name, scope, statics) {
-                    return statics ? function () {
-                        return scope[name];
-                    } : function () {
-                        return this[name];
-                    };
-                })(name, scope, statics);
+            descriptors.$propMap[name] = true;
 
-                scope[setName] = (function (name, scope, statics) {
-                    return statics ? function (value) {
-                        scope[name] = value;
-                    } : function (value) {
-                        this[name] = value;
-                    };
-                })(name, scope, statics);
+            return scope;
+        },
+
+        property: function (scope, name, v, statics, cls, alias) {
+            var cfg = {
+                    enumerable: alias ? false : true,
+                    configurable: false
+                };
+
+            if (v && v.get) {
+                cfg.get = v.get;
             }
+
+            if (v && v.set) {
+                cfg.set = v.set;
+            }
+
+            if (!v || !(v.get || v.set)) {
+                var backingField = "$BackingField$" + cls.$$name + "$" + name;
+                Object.defineProperty(scope, backingField,
+                {
+                    writable: true,
+                    enumerable: false,
+                    configurable: false,
+                    value: v
+                });
+
+                (function (cfg, scope, backingField) {
+                    cfg.get = function () {
+                        return this[backingField];
+                    };
+
+                    cfg.set = function (value) {
+                        this[backingField] = value;
+                    };
+                })(cfg, scope, backingField);
+            }
+
+            Object.defineProperty(scope, name, cfg);
+
+            return cfg;
         },
 
         event: function (scope, name, v, statics) {
@@ -831,7 +829,7 @@
             // -instance of single class or primitive
             // -array of primitives
             // -array of single class
-            if (to instanceof System.Decimal && Bridge.isNumber(from)) {
+            if (to instanceof System.Decimal && typeof from === "number") {
                 return new System.Decimal(from);
             }
 
@@ -844,11 +842,10 @@
             }
 
             if (to instanceof Boolean || Bridge.isBoolean(to) ||
-                to instanceof Number || Bridge.isNumber(to) ||
+                typeof to === "number" ||
                 to instanceof String || Bridge.isString(to) ||
                 to instanceof Function || Bridge.isFunction(to) ||
                 to instanceof Date || Bridge.isDate(to) ||
-                Bridge.isNumber(to) ||
                 to instanceof System.Double ||
                 to instanceof System.Single ||
                 to instanceof System.Byte ||
@@ -858,7 +855,9 @@
                 to instanceof System.Int32 ||
                 to instanceof System.UInt32 ||
                 to instanceof Bridge.Int ||
-                to instanceof System.Decimal) {
+                to instanceof System.Decimal ||
+                to instanceof System.Int64 ||
+                to instanceof System.UInt64) {
                 return from;
             }
 
@@ -881,55 +880,81 @@
                     fn.apply(to, item);
                 }
             } else {
-                for (key in from) {
-                    value = from[key];
+                var t = Bridge.getType(to),
+					descriptors = t && t.$descriptors;
 
-                    if (typeof to[key] === "function") {
-                        if (key.match(/^\s*get[A-Z]/)) {
-                            Bridge.merge(to[key](), value);
-                        } else {
-                            to[key](value);
+                if (from) {
+                    for (key in from) {
+                        value = from[key];
+
+                        var descriptor = null;
+                        if (descriptors) {
+                            for (var i = descriptors.length - 1; i >= 0; i--) {
+                                if (descriptors[i].name === key) {
+                                    descriptor = descriptors[i];
+                                    break;
+                                }
+                            }
                         }
-                    } else {
-                        var setter1 = "set" + key.charAt(0).toUpperCase() + key.slice(1),
-                            setter2 = "set" + key,
-                            getter;
 
-                        if (typeof to[setter1] === "function" && typeof value !== "function") {
-                            getter = "g" + setter1.slice(1);
-                            if (typeof to[getter] === "function") {
-                                to[setter1](Bridge.merge(to[getter](), value));
+                        if (descriptor != null) {
+                            if (descriptor.set) {
+                                to[key] = Bridge.merge(to[key], value);
                             } else {
-                                to[setter1](value);
+                                Bridge.merge(to[key], value);
                             }
-                        } else if (typeof to[setter2] === "function" && typeof value !== "function") {
-                            getter = "g" + setter2.slice(1);
-                            if (typeof to[getter] === "function") {
-                                to[setter2](Bridge.merge(to[getter](), value));
+                        } else if (typeof to[key] === "function") {
+                            if (key.match(/^\s*get[A-Z]/)) {
+                                Bridge.merge(to[key](), value);
                             } else {
-                                to[setter2](value);
+                                to[key](value);
                             }
-                        } else if (value && value.constructor === Object && to[key]) {
-                            toValue = to[key];
-                            Bridge.merge(toValue, value);
                         } else {
-                            var isNumber = Bridge.isNumber(from);
+                            var setter1 = "set" + key.charAt(0).toUpperCase() + key.slice(1),
+                                setter2 = "set" + key,
+                                getter;
 
-                            if (to[key] instanceof System.Decimal && isNumber) {
-                                return new System.Decimal(from);
+                            if (typeof to[setter1] === "function" && typeof value !== "function") {
+                                getter = "g" + setter1.slice(1);
+                                if (typeof to[getter] === "function") {
+                                    to[setter1](Bridge.merge(to[getter](), value));
+                                } else {
+                                    to[setter1](value);
+                                }
+                            } else if (typeof to[setter2] === "function" && typeof value !== "function") {
+                                getter = "g" + setter2.slice(1);
+                                if (typeof to[getter] === "function") {
+                                    to[setter2](Bridge.merge(to[getter](), value));
+                                } else {
+                                    to[setter2](value);
+                                }
+                            } else if (value && value.constructor === Object && to[key]) {
+                                toValue = to[key];
+                                Bridge.merge(toValue, value);
+                            } else {
+                                var isNumber = Bridge.isNumber(from);
+
+                                if (to[key] instanceof System.Decimal && isNumber) {
+                                    return new System.Decimal(from);
+                                }
+
+                                if (to[key] instanceof System.Int64 && isNumber) {
+                                    return new System.Int64(from);
+                                }
+
+                                if (to[key] instanceof System.UInt64 && isNumber) {
+                                    return new System.UInt64(from);
+                                }
+
+                                to[key] = value;
                             }
-
-                            if (to[key] instanceof System.Int64 && isNumber) {
-                                return new System.Int64(from);
-                            }
-
-                            if (to[key] instanceof System.UInt64 && isNumber) {
-                                return new System.UInt64(from);
-                            }
-
-                            to[key] = value;
                         }
                     }
+                } else {
+                    if (callback) {
+                        callback.call(to, to);
+                    }
+                    return from;
                 }
             }
 
@@ -1015,7 +1040,7 @@
                 i = Bridge.getEnumerator(ienumerable);
 
                 while (i.moveNext()) {
-                    item = i.getCurrent();
+                    item = i.Current;
                     result.push(item);
                 }
             }

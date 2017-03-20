@@ -17,7 +17,9 @@ namespace System.Globalization
 
         public static extern CultureInfo CurrentCulture
         {
+            [Template("{this}.getCurrentCulture()")]
             get;
+            [Template("{this}.setCurrentCulture({0})")]
             set;
         }
 

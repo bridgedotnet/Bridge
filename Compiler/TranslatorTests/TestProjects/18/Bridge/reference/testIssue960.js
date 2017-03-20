@@ -1,6 +1,6 @@
     Bridge.define("TestIssue960.Example", {
         getName: function getName(x) {
-            return x.TestIssue960$IHaveNamed$getName();
+            return x.TestIssue960$IHaveNamed$Name;
         }
     });
 
@@ -31,12 +31,11 @@
                 Name: null
             },
             alias: [
-            "getName", "TestIssue960$IHaveNamed$getName",
-            "setName", "TestIssue960$IHaveNamed$setName"
+            "Name", "TestIssue960$IHaveNamed$Name"
             ]
         },
         ctor: function (name) {
             this.$initialize();
-            this.setName(name);
+            this.Name = name;
         }
     });

@@ -74,7 +74,7 @@ namespace Bridge.Translator
             this.EmitInlineExpressionList(this.ArgumentsInfo, this.InlineCode);
         }
 
-        private static Regex _formatArg = new Regex(@"\{(\*?)(\w+)(\:(\w+))?\}");
+        internal static Regex FormatArgRegex = new Regex(@"\{(\*?)(\w+)(\:(\w+))?\}");
         private static Regex _inlineMethod = new Regex(@"([$\w\.\{\}\(\)]+)\(\s*(.*)\)");
 
         protected virtual IList<Expression> GetExpressionsByKey(IEnumerable<NamedParamExpression> expressions, string key)
@@ -160,7 +160,7 @@ namespace Bridge.Translator
             if (args.Length > 0)
             {
                 var emitter = block.Emitter;
-                inline = _formatArg.Replace(inline, delegate (Match m)
+                inline = InlineArgumentsBlock.FormatArgRegex.Replace(inline, delegate (Match m)
                 {
                     int count = emitter.Writers.Count;
                     string key = m.Groups[2].Value;
@@ -298,7 +298,7 @@ namespace Bridge.Translator
 
             if (paramsName != null)
             {
-                var matches = _formatArg.Matches(inline);
+                var matches = InlineArgumentsBlock.FormatArgRegex.Matches(inline);
                 bool ignoreArray = false;
                 foreach (Match m in matches)
                 {
@@ -381,7 +381,7 @@ namespace Bridge.Translator
                 }
             }
 
-            var r = InlineArgumentsBlock._formatArg.Matches(inline);
+            var r = InlineArgumentsBlock.FormatArgRegex.Matches(inline);
             List<Match> keyMatches = new List<Match>();
             foreach (Match keyMatch in r)
             {
@@ -391,7 +391,7 @@ namespace Bridge.Translator
             var tempVars = new Dictionary<string, string>();
             var tempMap = new Dictionary<string, string>();
 
-            inline = _formatArg.Replace(inline, delegate (Match m)
+            inline = InlineArgumentsBlock.FormatArgRegex.Replace(inline, delegate (Match m)
             {
                 if (this.IgnoreRange != null && m.Index >= this.IgnoreRange[0] && m.Index <= this.IgnoreRange[1])
                 {

@@ -14,19 +14,9 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                 /**
                  * @instance
                  * @public
-                 * @this TestProject2.TestClassB
                  * @memberof TestProject2.TestClassB
-                 * @function getValue1
-                 * @return  {number}
-                 */
-                /**
-                 * @instance
-                 * @public
-                 * @this TestProject2.TestClassB
-                 * @memberof TestProject2.TestClassB
-                 * @function setValue1
-                 * @param   {number}    value
-                 * @return  {void}
+                 * @function Value1
+                 * @type number
                  */
                 Value1: 0
             }

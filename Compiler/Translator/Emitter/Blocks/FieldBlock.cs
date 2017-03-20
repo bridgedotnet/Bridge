@@ -4,6 +4,7 @@ using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Bridge.Translator
 {
@@ -205,8 +206,17 @@ namespace Bridge.Translator
                     tpl = init_rr != null ? this.Emitter.GetInline(init_rr.Member) : null;
                 }
 
+                bool isAutoProperty = false;
+
+                if (isProperty)
+                {
+                    var member_rr = this.Emitter.Resolver.ResolveNode(member.Entity, this.Emitter) as MemberResolveResult;
+                    var property = (IProperty)member_rr.Member;
+                    isAutoProperty = Helpers.IsAutoProperty(property);
+                }
+
                 bool written = false;
-                if (!isNull && (!isPrimitive || constValue is AstType || tpl != null))
+                if (!isNull && (!isPrimitive || constValue is AstType || tpl != null) && !(isProperty && !IsObjectLiteral && !isAutoProperty))
                 {
                     string value = null;
                     bool needContinue = false;
@@ -398,42 +408,20 @@ namespace Bridge.Translator
                 else
                 {
                     this.EnsureComma();
-                    XmlToJsDoc.EmitComment(this, member.Entity);
+                    XmlToJsDoc.EmitComment(this, member.Entity, null, member.Entity is FieldDeclaration ? member.VarInitializer : null);
                     this.Write(mname);
                     this.WriteColon();
                 }
 
                 bool close = false;
-                if (isProperty)
+                if (isProperty && !IsObjectLiteral && !isAutoProperty)
                 {
-                    var member_rr = this.Emitter.Resolver.ResolveNode(member.Entity, this.Emitter) as MemberResolveResult;
-
-                    if (member_rr != null)
-                    {
-                        var setterName = Helpers.GetPropertyRef(member_rr.Member, this.Emitter, true);
-                        var getterName = Helpers.GetPropertyRef(member_rr.Member, this.Emitter, false);
-                        string names = null;
-
-                        if (setterName != ("set" + mname) && getterName != ("get" + mname))
-                        {
-                            names = string.Format("{{ getter:'{0}', setter: '{1}'", getterName, setterName);
-                        }
-                        else if (setterName != ("set" + mname))
-                        {
-                            names = string.Format("{{ setter: '{0}'", setterName);
-                        }
-                        else if (getterName != ("get" + mname))
-                        {
-                            names = string.Format("{{ getter: '{0}'", getterName);
-                        }
-
-                        if (names != null)
-                        {
-                            this.Write(names);
-                            this.Write(", value: ");
-                            close = true;
-                        }
-                    }
+                    this.BeginBlock();
+                    new VisitorPropertyBlock(this.Emitter, (PropertyDeclaration)member.Entity).Emit();
+                    this.WriteNewLine();
+                    this.EndBlock();
+                    this.Emitter.Comma = true;
+                    continue;
                 }
 
                 if (constValue is AstType)
@@ -484,7 +472,7 @@ namespace Bridge.Translator
                 this.Emitter.Comma = true;
             }
 
-            if (count > 0 && objectName != null)
+            if (count > 0 && objectName != null && !IsObjectLiteral)
             {
                 this.WriteNewLine();
                 this.EndBlock();
@@ -609,7 +597,7 @@ namespace Bridge.Translator
                 }
             }
 
-            if (member is IProperty && !Helpers.IsFieldProperty(member, this.Emitter))
+            if (member is IProperty && ((IProperty)member).IsIndexer)
             {
                 var property = (IProperty)member;
                 if (property.CanGet)

@@ -173,7 +173,7 @@ namespace Bridge.Translator
 
             if (castCode != null)
             {
-                this.EmitInlineCast(iteratorName + "." + JS.Funcs.GET_CURRENT + "()", castCode);
+                this.EmitInlineCast(iteratorName + "." + JS.Funcs.GET_CURRENT, castCode);
             }
             else if (this.CastMethod != null)
             {
@@ -182,7 +182,7 @@ namespace Bridge.Translator
                 this.Write(OverloadsCollection.Create(this.Emitter, this.CastMethod).GetOverloadName());
                 this.WriteOpenParentheses();
                 var pos = this.Emitter.Output.Length;
-                this.Write(iteratorName + "." + JS.Funcs.GET_CURRENT + "()");
+                this.Write(iteratorName + "." + JS.Funcs.GET_CURRENT);
                 Helpers.CheckValueTypeClone(rr, this.ForeachStatement.InExpression, this, pos);
                 this.WriteCloseParentheses();
             }
@@ -200,7 +200,6 @@ namespace Bridge.Translator
 
                 this.WriteDot();
                 this.Write(JS.Funcs.GET_CURRENT);
-                this.WriteOpenCloseParentheses();
                 Helpers.CheckValueTypeClone(rr, this.ForeachStatement.InExpression, this, pos);
 
                 if (needCast)
@@ -360,7 +359,7 @@ namespace Bridge.Translator
 
                 if (castCode != null)
                 {
-                    this.EmitInlineCast(iteratorName + "." + JS.Funcs.GET_CURRENT + "()", castCode);
+                    this.EmitInlineCast(iteratorName + "." + JS.Funcs.GET_CURRENT, castCode);
                 }
                 else if (this.CastMethod != null)
                 {
@@ -369,7 +368,7 @@ namespace Bridge.Translator
                     this.Write(OverloadsCollection.Create(this.Emitter, this.CastMethod).GetOverloadName());
                     this.WriteOpenParentheses();
                     int pos = this.Emitter.Output.Length;
-                    this.Write(iteratorName + "." + JS.Funcs.GET_CURRENT + "()");
+                    this.Write(iteratorName + "." + JS.Funcs.GET_CURRENT);
                     Helpers.CheckValueTypeClone(rr, this.ForeachStatement.InExpression, this, pos);
                     this.WriteCloseParentheses();
                 }
@@ -386,7 +385,6 @@ namespace Bridge.Translator
 
                     this.WriteDot();
                     this.Write(JS.Funcs.GET_CURRENT);
-                    this.WriteOpenCloseParentheses();
 
                     Helpers.CheckValueTypeClone(rr, this.ForeachStatement.InExpression, this, pos);
 

@@ -29,7 +29,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             // The method checks that a property used as a parameter in a method with multiple keys in a [Template]
             // will BE wrapped with temp variable
             // ($t = this.getProperty(), DoSomethingTemplate($t, $t));
-            ($t = this.getProperty(), DoSomethingTemplate($t, $t));
+            ($t = this.Property, DoSomethingTemplate($t, $t));
         },
         useWithMethod: function () {
             var $t;

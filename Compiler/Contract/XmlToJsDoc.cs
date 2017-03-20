@@ -25,7 +25,7 @@ namespace Bridge.Contract
     {
         private const char newLine = Bridge.Contract.XmlToJSConstants.DEFAULT_LINE_SEPARATOR;
 
-        public static void EmitComment(IAbstractEmitterBlock block, AstNode node, bool? getter = null)
+        public static void EmitComment(IAbstractEmitterBlock block, AstNode node, bool? getter = null, VariableInitializer varInitializer = null)
         {
             if (block.Emitter.AssemblyInfo.GenerateDocumentation == Bridge.Contract.DocumentationMode.None || node.Parent == null)
             {
@@ -41,14 +41,12 @@ namespace Bridge.Contract
             }
 
             object value = null;
-            var rr = block.Emitter.Resolver.ResolveNode(node, block.Emitter);
+            var rr = block.Emitter.Resolver.ResolveNode(varInitializer ?? node, block.Emitter);
             string source = BuildCommentString(visitor.Comments);
 
             if (node is FieldDeclaration)
             {
-                var fieldDecl = (FieldDeclaration)node;
-                node = fieldDecl.Variables.First();
-                var initializer = fieldDecl.Variables.First().Initializer as PrimitiveExpression;
+                var initializer = varInitializer.Initializer as PrimitiveExpression;
 
                 if (initializer != null)
                 {
@@ -94,23 +92,11 @@ namespace Bridge.Contract
                 var memberResolveResult = rr as MemberResolveResult;
                 var rProp = memberResolveResult.Member as IProperty;
 
-                if (!getter.HasValue || getter.Value)
-                {
-                    var comment = new JsDocComment();
-                    InitMember(comment, rProp.Getter, block.Emitter, null);
-                    comment.Function = Helpers.GetPropertyRef(rProp, block.Emitter, false);
-                    block.Write(block.WriteIndentToString(XmlToJsDoc.ReadComment(source, rr, block.Emitter, comment)));
-                    block.WriteNewLine();
-                }
-
-                if (!getter.HasValue || !getter.Value)
-                {
-                    var comment = new JsDocComment();
-                    InitMember(comment, rProp.Setter, block.Emitter, null);
-                    comment.Function = Helpers.GetPropertyRef(rProp, block.Emitter, true);
-                    block.Write(block.WriteIndentToString(XmlToJsDoc.ReadComment(source, rr, block.Emitter, comment)));
-                    block.WriteNewLine();
-                }
+                var comment = new JsDocComment();
+                InitMember(comment, rProp, block.Emitter, null);
+                comment.Function = Helpers.GetPropertyRef(rProp, block.Emitter);
+                block.Write(block.WriteIndentToString(XmlToJsDoc.ReadComment(source, rr, block.Emitter, comment)));
+                block.WriteNewLine();
                 return;
             }
 
@@ -522,7 +508,7 @@ namespace Bridge.Contract
                 {
                     comment.MemberType = XmlToJsDoc.ToJavascriptName(variable.Type, emitter);
                 }
-                else
+                else if(!(member is IField || member is IProperty))
                 {
                     comment.Returns.Add(new JsDocParam
                     {
@@ -530,12 +516,21 @@ namespace Bridge.Contract
                     });
                 }
 
-                var field = member as DefaultResolvedField;
+                var field = member as IField;
                 if (field != null)
                 {
                     comment.ReadOnly = field.IsReadOnly;
                     comment.Const = field.IsConst;
                     comment.Default = value ?? field.ConstantValue;
+                    comment.MemberType = XmlToJsDoc.ToJavascriptName(field.Type, emitter);
+                }
+
+                var property = member as IProperty;
+                if (property != null)
+                {
+                    comment.ReadOnly = !property.CanSet;
+                    comment.Default = value;
+                    comment.MemberType = XmlToJsDoc.ToJavascriptName(property.ReturnType, emitter);
                 }
 
                 var ev = member as IEvent;

@@ -16,11 +16,13 @@ namespace System.Threading
 
         public extern bool CanBeCanceled
         {
+            [Template("getCanBeCanceled()")]
             get;
         }
 
         public extern bool IsCancellationRequested
         {
+            [Template("getIsCancellationRequested()")]
             get;
         }
 

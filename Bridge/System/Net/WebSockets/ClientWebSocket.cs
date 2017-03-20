@@ -15,6 +15,7 @@ namespace System.Net.WebSockets
         /// </summary>
         public extern WebSocketState State
         {
+            [Template("getState()")]
             get;
         }
 
@@ -23,6 +24,7 @@ namespace System.Net.WebSockets
         /// </summary>
         public extern ClientWebSocketOptions Options
         {
+            [Template("getOptions()")]
             get;
         }
 
@@ -31,6 +33,7 @@ namespace System.Net.WebSockets
         /// </summary>
         public extern WebSocketCloseStatus? CloseStatus
         {
+            [Template("getCloseStatus()")]
             get;
         }
 
@@ -40,6 +43,7 @@ namespace System.Net.WebSockets
         /// </summary>
         public extern string CloseStatusDescription
         {
+            [Template("getCloseStatusDescription()")]
             get;
         }
 
@@ -48,6 +52,7 @@ namespace System.Net.WebSockets
         /// </summary>
         public extern string SubProtocol
         {
+            [Template("getSubProtocol()")]
             get;
         }
 

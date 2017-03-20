@@ -8,8 +8,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                 Count: 0
             },
             alias: [
-            "getCount", "TestProject$Issues$N2262$I2262$getCount",
-            "setCount", "TestProject$Issues$N2262$I2262$setCount"
+            "Count", "TestProject$Issues$N2262$I2262$Count"
             ]
         }
     });

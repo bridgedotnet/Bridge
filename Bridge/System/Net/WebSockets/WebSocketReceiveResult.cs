@@ -18,6 +18,7 @@ namespace System.Net.WebSockets
         /// </summary>
         public extern int Count
         {
+            [Template("getCount()")]
             get;
         }
 
@@ -26,6 +27,7 @@ namespace System.Net.WebSockets
         /// </summary>
         public extern bool EndOfMessage
         {
+            [Template("getEndOfMessage()")]
             get;
         }
 
@@ -34,6 +36,7 @@ namespace System.Net.WebSockets
         /// </summary>
         public extern WebSocketMessageType MessageType
         {
+            [Template("getMessageType()")]
             get;
         }
 
@@ -42,6 +45,7 @@ namespace System.Net.WebSockets
         /// </summary>
         public extern WebSocketCloseStatus? CloseStatus
         {
+            [Template("getCloseStatus()")]
             get;
         }
 
@@ -50,6 +54,7 @@ namespace System.Net.WebSockets
         /// </summary>
         public extern string CloseStatusDescription
         {
+            [Template("getCloseStatusDescription()")]
             get;
         }
     }

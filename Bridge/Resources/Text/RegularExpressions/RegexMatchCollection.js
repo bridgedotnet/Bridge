@@ -4,9 +4,18 @@
         },
 
         config: {
+            properties: {
+                Count: {
+                    get: function () {
+                        return this.getCount();
+                    }
+                }
+            },
             alias: [
             "getEnumerator", "System$Collections$IEnumerable$getEnumerator",
-            "getCount", "System$Collections$ICollection$getCount"
+            "getCount", "System$Collections$ICollection$getCount",
+            "Count", "System$Collections$ICollection$Count",
+            "copyTo", "System$Collections$ICollection$copyTo"
             ]
         },
 
@@ -127,10 +136,19 @@
         },
 
         config: {
+			properties: {
+				Current: {
+					get: function () {
+						return this.getCurrent();
+					}
+				}
+			},
+			
             alias: [
                 "getCurrent", "System$Collections$IEnumerator$getCurrent",
                 "moveNext", "System$Collections$IEnumerator$moveNext",
-                "reset", "System$Collections$IEnumerator$reset"
+                "reset", "System$Collections$IEnumerator$reset",
+				"Current", "System$Collections$IEnumerator$Current"
             ]
         },
 

@@ -81,7 +81,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             Assert.AreEqual("ID", app["ID"]);
             Assert.AreEqual("x", app["x"]);
-            Assert.AreEqual("PROP1", app["getPROP1"].As<Func<string>>()());
+            Assert.AreEqual("PROP1", app["PROP1"]);
             Assert.NotNull(app["FOO"], "FOO");
             Assert.NotNull(app["m"], "m");
             Assert.NotNull(app["m$1"], "m$1");

@@ -1,4 +1,6 @@
-﻿namespace System.Text.RegularExpressions
+﻿using Bridge;
+
+namespace System.Text.RegularExpressions
 {
     public sealed class Regex
     {
@@ -13,17 +15,29 @@
         /// <summary>
         /// Gets the time-out interval of the current instance.
         /// </summary>
-        public extern TimeSpan MatchTimeout { get; }
+        public extern TimeSpan MatchTimeout
+        {
+            [Template("getMatchTimeout()")]
+            get;
+        }
 
         /// <summary>
         /// Gets the options that were passed into the Regex constructor.
         /// </summary>
-        public extern RegexOptions Options { get; }
+        public extern RegexOptions Options
+        {
+            [Template("getOptions()")]
+            get;
+        }
 
         /// <summary>
         /// Gets a value that indicates whether the regular expression searches from right to left.
         /// </summary>
-        public extern bool RightToLeft { get; }
+        public extern bool RightToLeft
+        {
+            [Template("getRightToLeft()")]
+            get;
+        }
 
         /// <summary>
         /// Returns an array of capturing group names for the regular expression.

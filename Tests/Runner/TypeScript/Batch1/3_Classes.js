@@ -45,12 +45,12 @@ QUnit.test("Static", function (assert) {
     assert.deepEqual(point2.x, -10, "Point x field moved");
     assert.deepEqual(point2.y, -20, "Point y field moved");
     var movePoint = new Classes.MovePoint();
-    movePoint.setPoint(point1);
-    assert.deepEqual(movePoint.getPoint().x, 10, "MovePoint x field");
-    assert.deepEqual(movePoint.getPoint().y, 20, "MovePoint y field");
+    movePoint.Point = point1;
+    assert.deepEqual(movePoint.Point.x, 10, "MovePoint x field");
+    assert.deepEqual(movePoint.Point.y, 20, "MovePoint y field");
     movePoint.move(5, 7);
     assert.deepEqual(point1.x, 10, "Point x field not changed");
     assert.deepEqual(point1.y, 20, "Point y field not changed");
-    assert.deepEqual(movePoint.getPoint().x, 15, "MovePoint x field moved");
-    assert.deepEqual(movePoint.getPoint().y, 27, "MovePoint y field moved");
+    assert.deepEqual(movePoint.Point.x, 15, "MovePoint x field moved");
+    assert.deepEqual(movePoint.Point.y, 27, "MovePoint y field moved");
 });

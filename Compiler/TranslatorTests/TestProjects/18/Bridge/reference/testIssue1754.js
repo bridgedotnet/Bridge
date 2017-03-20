@@ -21,10 +21,10 @@
 
             TestIssue1754.Issue1754.f = "Name should be f";
 
-            TestIssue1754.Issue1754.setP_STATIC_S1("Name should be P_STATIC_S1");
+            TestIssue1754.Issue1754.P_STATIC_S1 = "Name should be P_STATIC_S1";
 
-            TestIssue1754.Issue1754.setP_STaTIC_S2("Name should be p_STaTIC_S2");
+            TestIssue1754.Issue1754.P_STaTIC_S2 = "Name should be p_STaTIC_S2";
 
-            TestIssue1754.Issue1754.setP("Name should be p");
+            TestIssue1754.Issue1754.P = "Name should be p";
         }
     });

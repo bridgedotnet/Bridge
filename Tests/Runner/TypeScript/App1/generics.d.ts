@@ -14,8 +14,7 @@ declare module Generics {
     var GenericINamedEntity$1: GenericINamedEntity$1Func;
 
     export interface NamedEntity extends Generics.INamedEntity {
-        getName$1(): string;
-        setName$1(value: string): void;
+        Name$1: string;
     }
     export interface NamedEntityFunc extends Function {
         prototype: NamedEntity;
@@ -108,6 +107,7 @@ declare module Generics {
     var GenericNew$1: GenericNew$1Func;
 
     export interface INamedEntity {
+        Name: string;
     }
     export interface INamedEntityFunc extends Function {
         prototype: INamedEntity;

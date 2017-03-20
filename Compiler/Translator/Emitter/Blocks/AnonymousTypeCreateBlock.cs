@@ -70,7 +70,7 @@ namespace Bridge.Translator
 
             if (anonymousTypeCreateExpression.Initializers.Count > 0)
             {
-                this.WriteObjectInitializer(anonymousTypeCreateExpression.Initializers, true);
+                this.WriteObjectInitializer(anonymousTypeCreateExpression.Initializers, false);
 
                 this.WriteSpace();
                 this.WriteCloseBrace();
@@ -127,7 +127,7 @@ namespace Bridge.Translator
             this.BeginBlock();
             this.Emitter.Comma = false;
             this.GenereateCtor(type);
-            this.GenereateGetters(config);
+            //this.GenereateGetters(config);
             this.GenereateEquals(config);
             this.GenerateHashCode(config);
             this.GenereateToJSON(config);
@@ -159,7 +159,7 @@ namespace Bridge.Translator
             foreach (var property in type.Properties)
             {
                 this.EnsureComma(false);
-                this.Write(Object.Net.Utilities.StringUtils.ToLowerCamelCase(property.Name));
+                this.Write(property.Name.ToLowerCamelCase());
                 this.Emitter.Comma = true;
             }
             this.Write(") ");
@@ -168,9 +168,9 @@ namespace Bridge.Translator
 
             foreach (var property in type.Properties)
             {
-                var name = Object.Net.Utilities.StringUtils.ToLowerCamelCase(property.Name);
+                var name = property.Name;
 
-                this.Write(string.Format("this.{0} = {0};", name));
+                this.Write(string.Format("this.{0} = {1};", name, name.ToLowerCamelCase()));
                 this.WriteNewLine();
             }
 
@@ -200,7 +200,7 @@ namespace Bridge.Translator
             foreach (var property in config.Type.Properties)
             {
                 this.EnsureComma();
-                var lowerName = Object.Net.Utilities.StringUtils.ToLowerCamelCase(property.Name);
+                var lowerName = property.Name;
                 var name = property.Name;
 
                 this.Write(string.Format("get{0} : function () ", name));
@@ -232,7 +232,7 @@ namespace Bridge.Translator
 
             foreach (var property in config.Type.Properties)
             {
-                var name = Object.Net.Utilities.StringUtils.ToLowerCamelCase(property.Name);
+                var name = property.Name;
 
                 if (and)
                 {
@@ -269,7 +269,7 @@ namespace Bridge.Translator
 
             foreach (var property in config.Type.Properties)
             {
-                var name = Object.Net.Utilities.StringUtils.ToLowerCamelCase(property.Name);
+                var name = property.Name;
                 this.Write(", this." + name);
             }
 
@@ -293,7 +293,7 @@ namespace Bridge.Translator
             foreach (var property in config.Type.Properties)
             {
                 this.EnsureComma();
-                var name = property.Name.ToLowerCamelCase();
+                var name = property.Name;
 
                 this.Write(string.Format("{0} : this.{0}", name));
                 this.Emitter.Comma = true;

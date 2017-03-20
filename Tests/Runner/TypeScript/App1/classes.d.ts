@@ -53,8 +53,7 @@ declare module Classes {
     var Animal: AnimalFunc;
 
     export interface MovePoint {
-        getPoint(): Classes.Point;
-        setPoint(value: Classes.Point): void;
+        Point: Classes.Point;
         move(dx: number, dy: number): void;
     }
     export interface MovePointFunc extends Function {

@@ -8,7 +8,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             }
         },
         preventDefault: function () {
-            this.setData(77);
+            this.Data = 77;
         }
     });
 

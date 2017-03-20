@@ -23,16 +23,10 @@ namespace Bridge.Translator.TypeScript
 
         protected override void DoEmit()
         {
-            if (this.PropertyDeclaration.Getter.Body.IsNull && this.PropertyDeclaration.Setter.Body.IsNull && this.Emitter.TypeInfo.TypeDeclaration.ClassType != ClassType.Interface)
-            {
-                return;
-            }
-
-            this.EmitPropertyMethod(this.PropertyDeclaration, this.PropertyDeclaration.Getter, false);
-            this.EmitPropertyMethod(this.PropertyDeclaration, this.PropertyDeclaration.Setter, true);
+            this.EmitPropertyMethod(this.PropertyDeclaration);
         }
 
-        protected virtual void EmitPropertyMethod(PropertyDeclaration propertyDeclaration, Accessor accessor, bool setter)
+        protected virtual void EmitPropertyMethod(PropertyDeclaration propertyDeclaration)
         {
             var memberResult = this.Emitter.Resolver.ResolveNode(propertyDeclaration, this.Emitter) as MemberResolveResult;
 
@@ -43,48 +37,28 @@ namespace Bridge.Translator.TypeScript
                 return;
             }
 
-            if (!accessor.IsNull && this.Emitter.GetInline(accessor) == null)
+            if (!propertyDeclaration.Getter.IsNull && this.Emitter.GetInline(propertyDeclaration.Getter) == null)
             {
                 XmlToJsDoc.EmitComment(this, this.PropertyDeclaration);
-                var p = (PropertyDeclaration)accessor.Parent;
                 var isInterface = memberResult.Member.DeclaringType.Kind == TypeKind.Interface;
                 var ignoreInterface = isInterface &&
                                       memberResult.Member.DeclaringType.TypeParameterCount > 0;
-                this.WriteAccessor(setter, memberResult, ignoreInterface, p);
+                this.WriteAccessor(propertyDeclaration, memberResult, ignoreInterface);
 
                 if (!ignoreInterface && isInterface)
                 {
-                    this.WriteAccessor(setter, memberResult, true, p);
+                    this.WriteAccessor(propertyDeclaration, memberResult, true);
                 }
             }
         }
 
-        private void WriteAccessor(bool setter, MemberResolveResult memberResult, bool ignoreInterface, PropertyDeclaration p)
+        private void WriteAccessor(PropertyDeclaration p, MemberResolveResult memberResult, bool ignoreInterface)
         {
-            string name = Helpers.GetPropertyRef(memberResult.Member, this.Emitter, setter, false, ignoreInterface);
+            string name = Helpers.GetPropertyRef(memberResult.Member, this.Emitter, false, false, ignoreInterface);
             this.Write(name);
-            this.WriteOpenParentheses();
-            if (setter)
-            {
-                this.Write("value");
-                this.WriteColon();
-                name = BridgeTypes.ToTypeScriptName(p.ReturnType, this.Emitter);
-                this.Write(name);
-            }
-
-            this.WriteCloseParentheses();
             this.WriteColon();
-
-            if (setter)
-            {
-                this.Write("void");
-            }
-            else
-            {
-                name = BridgeTypes.ToTypeScriptName(p.ReturnType, this.Emitter);
-                this.Write(name);
-            }
-
+            name = BridgeTypes.ToTypeScriptName(p.ReturnType, this.Emitter);
+            this.Write(name);
             this.WriteSemiColon();
             this.WriteNewLine();
         }

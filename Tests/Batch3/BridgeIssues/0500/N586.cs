@@ -53,7 +53,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test(ExpectedCount = 4)]
         public static void TestUseCase()
         {
-            Assert.Throws(() => { Bridge586A.SomeDataStatic = 4; }, "a.SomeDataStatic is external");
+            Assert.Null(Bridge586A.SomeDataStatic, "a.SomeDataStatic is external");
             Assert.Throws(() => { Bridge586A.DoSomethingStatic(); }, "a.DoSomethingStatic() is external");
 
             Assert.Throws(() => { Bridge586B.SomeDataStatic = 4; }, "b.SomeDataStatic is external");

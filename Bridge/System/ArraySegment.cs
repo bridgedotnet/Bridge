@@ -18,6 +18,7 @@ namespace System
         /// </summary>
         public extern T[] Array
         {
+            [Template("getArray()")]
             get;
         }
 
@@ -26,6 +27,7 @@ namespace System
         /// </summary>
         public extern int Count
         {
+            [Template("getCount()")]
             get;
         }
 
@@ -35,6 +37,7 @@ namespace System
         /// </summary>
         public extern int Offset
         {
+            [Template("getOffset()")]
             get;
         }
     }

@@ -12,19 +12,19 @@ namespace System.Diagnostics
 
         public extern TimeSpan Elapsed
         {
-            [Name("timeSpan")]
+            [Template("timeSpan()")]
             get;
         }
 
         public extern long ElapsedMilliseconds
         {
-            [Name("milliseconds")]
+            [Template("milliseconds()")]
             get;
         }
 
         public extern long ElapsedTicks
         {
-            [Name("ticks")]
+            [Template("ticks()")]
             get;
         }
 

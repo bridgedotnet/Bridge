@@ -2,8 +2,7 @@
 
 declare module TestProject2 {
     export interface TestClassB {
-        getValue1(): number;
-        setValue1(value: number): void;
+        Value1: number;
     }
     export interface TestClassBFunc extends Function {
         prototype: TestClassB;

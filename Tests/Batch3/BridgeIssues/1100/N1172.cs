@@ -11,8 +11,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             var c = new Class1();
 
-            Assert.NotNull(c["getAccessor"]);
-            Assert.NotNull(c["setAccessor"]);
+            //Name ignores for accessors because Object.defineProperty is used
+            Assert.Null(c["getAccessor"]);
+            Assert.Null(c["setAccessor"]);
 
             c.Prop1 = 7;
             Assert.AreEqual(7, c.Prop1);

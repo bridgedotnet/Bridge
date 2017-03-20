@@ -24,11 +24,13 @@ namespace System.Collections.Generic
 
         public extern Dictionary(IDictionary<TKey, TValue> dictionary, IEqualityComparer<TKey> comparer);
 
+        [Field]
         public extern IEqualityComparer<TKey> Comparer
         {
             get;
         }
 
+        [Field]
         public extern int Count
         {
             get;
@@ -36,11 +38,13 @@ namespace System.Collections.Generic
 
         new public extern ICollection<TKey> Keys
         {
+            [Template("getKeys()")]
             get;
         }
 
         public extern ICollection<TValue> Values
         {
+            [Template("getValues()")]
             get;
         }
 
@@ -77,6 +81,7 @@ namespace System.Collections.Generic
 
         public extern bool IsReadOnly
         {
+            [Template("getIsReadOnly()")]
             get;
         }
 

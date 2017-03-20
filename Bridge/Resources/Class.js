@@ -1,4 +1,4 @@
-    var base = {
+        var base = {
         _initialize: function () {
             if (this.$initialized) {
                 return;
@@ -17,7 +17,9 @@
 
         initConfig: function (extend, base, config, statics, scope, prototype) {
             var initFn,
-                name;
+                name,
+                cls = (statics ? scope : scope.ctor),
+                descriptors = cls.$descriptors;
 
             if (config.fields) {
                 for (name in config.fields) {
@@ -27,7 +29,12 @@
 
             if (config.properties) {
                 for (name in config.properties) {
-                    Bridge.property(scope, name, config.properties[name], statics);
+                    var cfg = Bridge.property(statics ? scope : prototype, name, config.properties[name], statics, cls);
+
+                    cfg.name = name;
+                    cfg.cls = cls;
+
+                    descriptors.push(cfg);
                 }
             }
 
@@ -39,13 +46,29 @@
 
             if (config.alias) {
                 for (var i = 0; i < config.alias.length; i++) {
-                    var m = scope[config.alias[i]];
+                    (function (obj, name, alias) {
+                        var descriptor = null;
+                        for (var i = descriptors.length - 1; i >= 0; i--) {
+                            if (descriptors[i].name === name) {
+                                descriptor = descriptors[i];
+                                break;
+                            }
+                        }
 
-                    if (m === undefined && prototype) {
-                        m = prototype[config.alias[i]];
-                    }
+                        if (descriptor != null) {
+                            Object.defineProperty(obj, alias, descriptor);
+                        } else {
+                            var m = scope[name];
 
-                    scope[config.alias[i + 1]] = m;
+                            if (m === undefined && prototype) {
+                                m = prototype[name];
+                            }
+
+                            scope[alias] = m;
+                        }
+                        
+                    })(statics ? scope : prototype, config.alias[i], config.alias[i + 1]);
+
                     i++;
                 }
             }
@@ -134,8 +157,8 @@
 
             prop = prop || {};
 
-            if (prop.$kind == "enum" && !prop.inherits) {
-                prop.inherits = [System.IComparable, System.IFormattable]
+            if (prop.$kind === "enum" && !prop.inherits) {
+                prop.inherits = [System.IComparable, System.IFormattable];
             }
 
             var extend = prop.$inherits || prop.inherits,
@@ -328,6 +351,10 @@
 
             prototype.$$name = className;
 
+            if (!prototype.toJSON) {
+                prototype.toJSON = Bridge.Class.toJSON;
+            }
+
             if (statics) {
                 for (name in statics) {
                     if (name === "ctor") {
@@ -418,12 +445,20 @@
 
         createInheritors: function(cls, extend) {
             var interfaces = [],
-                baseInterfaces = [];
+                baseInterfaces = [],
+                descriptors = [];
 
             if (extend) {
                 for (var j = 0; j < extend.length; j++) {
                     var baseType = extend[j],
-                        baseI = (baseType.$interfaces || []).concat(baseType.$baseInterfaces || []);
+                        baseI = (baseType.$interfaces || []).concat(baseType.$baseInterfaces || []),
+                        baseDescriptors = baseType.$descriptors;
+
+                    if (baseDescriptors && baseDescriptors.length > 0) {
+                        for (var d = 0; d < baseDescriptors.length; d++) {
+                            descriptors.push(baseDescriptors[d]);
+                        }
+                    }
 
                     if (baseI.length > 0) {
                         for (var k = 0; k < baseI.length; k++) {
@@ -439,9 +474,37 @@
                 }
             }
 
+            cls.$descriptors = descriptors;
             cls.$baseInterfaces = baseInterfaces;
             cls.$interfaces = interfaces;
             cls.$allInterfaces = interfaces.concat(baseInterfaces);
+        },
+
+        toJSON: function () {
+            var obj = {},
+                t = Bridge.getType(this),
+                descriptors = t.$descriptors || [];
+
+            for (var key in this) {
+                var own = this.hasOwnProperty(key),
+                    descriptor = null;
+
+                if (!own) {
+                    for (var i = descriptors.length - 1; i >= 0; i--) {
+                        if (descriptors[i].name === key) {
+                            descriptor = descriptors[i];
+                            break;
+                        }
+                    }    
+                }
+
+                var dcount = key.split("$").length;
+                if ((own || descriptor != null) && (dcount === 1 || dcount === 2 && key.match("\$\d+$"))) {
+                    obj[key] = this[key];
+                }
+            }
+
+            return obj;
         },
 
         setInheritors: function(cls, extend) {

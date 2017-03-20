@@ -4,16 +4,22 @@
             CONSOLE_MESSAGES_ID: "bridge-console-messages",
             position: "horizontal",
             instance: null,
-            getInstance: function () {
-                if (Bridge.Console.instance == null) {
-                    Bridge.Console.instance = new Bridge.Console();
-                }
+            config: {
+                properties: {
+                    Instance: {
+                        get: function () {
+                            if (Bridge.Console.instance == null) {
+                                Bridge.Console.instance = new Bridge.Console();
+                            }
 
-                return Bridge.Console.instance;
+                            return Bridge.Console.instance;
+                        }
+                    }
+                }
             },
             logBase: function (value, messageType) {
                 if (messageType === void 0) { messageType = 0; }
-                var self = Bridge.Console.getInstance();
+                var self = Bridge.Console.Instance;
 
                 var v = value != null ? value.toString() : "";
 
@@ -53,7 +59,7 @@
                     return;
                 }
 
-                var self = Bridge.Console.getInstance();
+                var self = Bridge.Console.Instance;
 
                 if (self.hidden) {
                     return;
@@ -62,7 +68,7 @@
                 self.close();
             },
             show: function () {
-                var self = Bridge.Console.getInstance();
+                var self = Bridge.Console.Instance;
 
                 if (!self.hidden) {
                     return;
@@ -71,7 +77,7 @@
                 self.init(true);
             },
             toggle: function () {
-                if (Bridge.Console.getInstance().hidden) {
+                if (Bridge.Console.Instance.hidden) {
                     Bridge.Console.show();
                 } else {
                     Bridge.Console.hide();
@@ -225,13 +231,13 @@
             }
         },
         showTooltip: function () {
-            var self = Bridge.Console.getInstance();
+            var self = Bridge.Console.Instance;
             self.tooltip.style.right = "20px";
             self.tooltip.style.visibility = "visible";
             self.tooltip.style.opacity = "1";
         },
         hideTooltip: function () {
-            var self = Bridge.Console.getInstance();
+            var self = Bridge.Console.Instance;
             self.tooltip.style.right = "30px";
             self.tooltip.style.opacity = "0";
         },
@@ -330,7 +336,7 @@
             $t = Bridge.getEnumerator(attrs);
             try {
                 while ($t.moveNext()) {
-                    var item = $t.getCurrent();
+                    var item = $t.Current;
                     el.setAttribute(item.key, item.value);
                 }
             }finally {
@@ -345,7 +351,7 @@
             $t = Bridge.getEnumerator(obj);
             try {
                 while ($t.moveNext()) {
-                    var item = $t.getCurrent();
+                    var item = $t.Current;
                     str = System.String.concat(str, (System.String.concat(item.key.toLowerCase(), ":", item.value, ";")));
                 }
             }finally {

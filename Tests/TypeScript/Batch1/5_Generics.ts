@@ -13,7 +13,7 @@ QUnit.test("Check predefined generic instances", function (assert) {
 
     var g3 = Generics.implementation.genericINamedEntity;
     var i3 = new Generics.NamedEntity();
-    i3.setName$1("Dove");
+    i3.Name$1 = "Dove";
     var r3 = g3.getSomething(i3);
     assert.deepEqual(r3, i3, "genericINamedEntity");
     assert.deepEqual(r3 instanceof Generics.INamedEntity, true, "genericINamedEntity instance of INameEntity");
@@ -21,7 +21,7 @@ QUnit.test("Check predefined generic instances", function (assert) {
 
     var g4 = Generics.implementation.genericNamedEntity;
     var i4 = new Generics.NamedEntity();
-    i4.setName$1("Eagle");
+    i4.Name$1 = "Eagle";
     var r4 = g4.getSomething(i4);
     assert.deepEqual(r4, i4, "genericNamedEntity");
     assert.deepEqual(r4 instanceof Generics.INamedEntity, true, "genericNamedEntity instance of INameEntity");
@@ -36,7 +36,7 @@ QUnit.test("Check predefined generic instances", function (assert) {
 
     var g6 = Generics.implementation.genericClassNamedEntity;
     var i6 = new Generics.NamedEntity();
-    i6.setName$1("Penguin");
+    i6.Name$1 = "Penguin";
     var r6 = g6.getSomething(i6);
     assert.deepEqual(r6, i6, "genericClassNamedEntity");
     assert.deepEqual(r6 instanceof Generics.INamedEntity, true, "genericClassNamedEntity instance of INameEntity");
@@ -60,14 +60,14 @@ QUnit.test("Check predefined generic instances", function (assert) {
 QUnit.test("Create generic instances", function (assert) {
     var name = "My name is Named Entity";
     var namedEntity = new Generics.NamedEntity();
-    namedEntity.setName$1(name);
+    namedEntity.Name$1 = name;
 
     var c10 = new (Generics.SimpleGeneric$1(Number))(5);
     assert.deepEqual(c10.getSomething(7), 7, "simpleGeneric$1(Number) getSomething");
     assert.deepEqual(c10.instance, 5, "simpleGeneric$1(Number) instance");
 
     var c11 = new (Generics.SimpleGeneric$1(Generics.NamedEntity))(namedEntity);
-    assert.deepEqual(c11.getSomething(namedEntity).getName$1(), name, "SimpleGeneric$1(Generics.NamedEntity) getSomething");
+    assert.deepEqual(c11.getSomething(namedEntity).Name$1, name, "SimpleGeneric$1(Generics.NamedEntity) getSomething");
     assert.deepEqual(c11.instance, namedEntity, "SimpleGeneric$1(Generics.NamedEntity) instance");
 
     var c20 = new (Generics.SimpleDoubleGeneric$2(Object, Number).$ctor1)("I'm object", 35);
@@ -83,22 +83,22 @@ QUnit.test("Create generic instances", function (assert) {
     assert.deepEqual(c21.instanceK, 0, "SimpleDoubleGeneric$2(Object, Number) instanceK");
 
     var c30 = new (Generics.GenericINamedEntity$1(Generics.NamedEntity))(namedEntity);
-    assert.deepEqual(c30.getSomething(namedEntity).getName$1(), name, "GenericINamedEntity$1(Generics.NamedEntity) getSomething");
+    assert.deepEqual(c30.getSomething(namedEntity).Name$1, name, "GenericINamedEntity$1(Generics.NamedEntity) getSomething");
     assert.deepEqual(c30.instance, namedEntity, "GenericINamedEntity$1(Generics.NamedEntity) instance");
 
     var c40 = new (Generics.GenericNamedEntity$1(Generics.NamedEntity))(namedEntity);
-    assert.deepEqual(c40.getSomething(namedEntity).getName$1(), name, "GenericNamedEntity$1(Generics.NamedEntity) getSomething");
+    assert.deepEqual(c40.getSomething(namedEntity).Name$1, name, "GenericNamedEntity$1(Generics.NamedEntity) getSomething");
     assert.deepEqual(c40.instance, namedEntity, "GenericNamedEntity$1(Generics.NamedEntity) instance");
 
     var c50 = new (Generics.GenericClass$1(Generics.NamedEntity))(namedEntity);
-    assert.deepEqual(c50.getSomething(namedEntity).getName$1(), name, "GenericClass$1(Generics.NamedEntity) getSomething");
+    assert.deepEqual(c50.getSomething(namedEntity).Name$1, name, "GenericClass$1(Generics.NamedEntity) getSomething");
     assert.deepEqual(c50.instance, namedEntity, "GenericClass$1(Generics.NamedEntity) instance");
     var c51 = new (Generics.GenericClass$1(String))("Trest");
     assert.deepEqual(c51.getSomething("Just string"), "Just string", "GenericClass$1(String) getSomething");
     assert.deepEqual(c51.instance, "Trest", "GenericClass$1(String) instance");
 
     var c60 = new (Generics.GenericStruct$1(Generics.NamedEntity))(namedEntity);
-    assert.deepEqual(c60.getSomething(namedEntity).getName$1(), name, "GenericStruct$1(Generics.NamedEntity) getSomething");
+    assert.deepEqual(c60.getSomething(namedEntity).Name$1, name, "GenericStruct$1(Generics.NamedEntity) getSomething");
     assert.deepEqual(c60.instance, namedEntity, "GenericStruct$1(Generics.NamedEntity) instance");
     var c61 = new (Generics.GenericStruct$1(String))("Trest");
     assert.deepEqual(c61.getSomething("Just string"), "Just string", "GenericStruct$1(String) getSomething");

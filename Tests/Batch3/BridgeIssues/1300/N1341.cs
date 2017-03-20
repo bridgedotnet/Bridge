@@ -17,7 +17,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.Null(o1["toJSON"], "o1 has no toJSON");
             Assert.Null(o1["ctor"], "o1 has no ctor");
             Assert.Null(o1["equals"], "o1 has no equals");
-            Assert.NotNull(o1["a"], "o1 has a");
+            Assert.NotNull(o1["A"], "o1 has a");
 
             var o2 = Script.ToPlainObject(new { A = 1, B = "2" });
             Assert.NotNull(o2, "o2 not null");
@@ -48,9 +48,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.Null(o5["toJSON"], "o5 has no toJSON");
             Assert.Null(o5["$constructor"], "o5 has no $constructor");
             Assert.Null(o5["equals"], "o5 has no equals");
-            Assert.NotNull(o5["a"], "o5 has a");
-            Assert.NotNull(o5["b"], "o5 has b");
-            Assert.NotNull(o5.B["getValue1"], "o5.B has getValue1");
+            Assert.NotNull(o5["A"], "o5 has a");
+            Assert.NotNull(o5["B"], "o5 has b");
+            Assert.NotNull(o5.B["Value1"], "o5.B has getValue1");
         }
 
         [Test]
@@ -64,7 +64,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.NotNull(o1["toJSON"], "o1 has toJSON");
             Assert.NotNull(o1["ctor"], "o1 has ctor");
             Assert.NotNull(o1["equals"], "o1 has equals");
-            Assert.NotNull(o1["getA"], "o1 has getA");
 
             var o2 = new { A = 1, B = "2" };
             Assert.NotNull(o2, "o2 not null");
@@ -95,9 +94,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.NotNull(o5["toJSON"], "o5 has toJSON");
             Assert.NotNull(o5["ctor"], "o5 has ctor");
             Assert.NotNull(o5["equals"], "o5 has equals");
-            Assert.NotNull(o5["getA"], "o5 has getA");
-            Assert.NotNull(o5["getB"], "o5 has getB");
-            Assert.NotNull(o5.B["getValue1"], "o5.B has getValue1");
         }
 
         [Test]

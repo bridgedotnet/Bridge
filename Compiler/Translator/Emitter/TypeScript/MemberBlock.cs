@@ -41,13 +41,18 @@ namespace Bridge.Translator.TypeScript
                 {
                     if (field.Entity.HasModifier(Modifiers.Public) || this.TypeInfo.IsEnum)
                     {
-                        XmlToJsDoc.EmitComment(this, field.Entity);
-                        this.Write(field.GetName(this.Emitter));
-                        this.WriteColon();
-                        string typeName = this.TypeInfo.IsEnum ? "number" : BridgeTypes.ToTypeScriptName(field.Entity.ReturnType, this.Emitter);
-                        this.Write(typeName);
-                        this.WriteSemiColon();
-                        this.WriteNewLine();
+                        var fieldDecl = field.Entity as FieldDeclaration;
+                        if (fieldDecl != null)
+                        {
+                            foreach (var variableInitializer in fieldDecl.Variables)
+                            {
+                                this.WriteFieldDeclaration(field, variableInitializer);
+                            }
+                        }
+                        else
+                        {
+                            this.WriteFieldDeclaration(field, null);
+                        }
                     }
                 }
             }
@@ -86,7 +91,7 @@ namespace Bridge.Translator.TypeScript
                 }
             }
 
-            if (info.Properties.Count > 0)
+            /*if (info.Properties.Count > 0)
             {
                 foreach (var prop in info.Properties)
                 {
@@ -95,13 +100,25 @@ namespace Bridge.Translator.TypeScript
                         var name = prop.GetName(this.Emitter);
                         name = Helpers.ReplaceFirstDollar(name);
 
-                        this.WriteProp(prop, name, true);
-                        this.WriteProp(prop, name, false);
+                        this.WriteProp(prop, name);
                     }
                 }
-            }
+            }*/
 
             new MethodsBlock(this.Emitter, this.TypeInfo, this.StaticBlock).Emit();
+        }
+
+        private void WriteFieldDeclaration(TypeConfigItem field, VariableInitializer variableInitializer)
+        {
+            XmlToJsDoc.EmitComment(this, field.Entity, null, variableInitializer);
+            this.Write(field.GetName(this.Emitter));
+            this.WriteColon();
+            string typeName = this.TypeInfo.IsEnum
+                ? "number"
+                : BridgeTypes.ToTypeScriptName(field.Entity.ReturnType, this.Emitter);
+            this.Write(typeName);
+            this.WriteSemiColon();
+            this.WriteNewLine();
         }
 
         private void WriteEvent(TypeConfigItem ev, string name, bool adder)
@@ -121,33 +138,14 @@ namespace Bridge.Translator.TypeScript
             this.WriteNewLine();
         }
 
-        private void WriteProp(TypeConfigItem ev, string name, bool getter)
+        private void WriteProp(TypeConfigItem ev, string name)
         {
-            XmlToJsDoc.EmitComment(this, ev.Entity, getter);
-            this.Write(Helpers.GetSetOrGet(!getter));
+            XmlToJsDoc.EmitComment(this, ev.Entity);
             this.Write(name);
-            this.WriteOpenParentheses();
-
-            if (!getter)
-            {
-                this.Write("value");
-                this.WriteColon();
-                string typeName = BridgeTypes.ToTypeScriptName(ev.Entity.ReturnType, this.Emitter);
-                this.Write(typeName);
-            }
-
-            this.WriteCloseParentheses();
             this.WriteColon();
 
-            if (!getter)
-            {
-                this.Write("void");
-            }
-            else
-            {
-                string typeName = BridgeTypes.ToTypeScriptName(ev.Entity.ReturnType, this.Emitter);
-                this.Write(typeName);
-            }
+            string typeName = BridgeTypes.ToTypeScriptName(ev.Entity.ReturnType, this.Emitter);
+            this.Write(typeName);
 
             this.WriteSemiColon();
             this.WriteNewLine();

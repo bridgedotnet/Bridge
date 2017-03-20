@@ -11,28 +11,25 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     Bridge.define("$AnonymousType$1", $asm, {
         $kind: "anonymous",
         ctor: function (a) {
-            this.a = a;
-        },
-        getA : function () {
-            return this.a;
+            this.A = a;
         },
         equals: function (o) {
             if (!Bridge.is(o, $asm.$AnonymousType$1)) {
                 return false;
             }
-            return Bridge.equals(this.a, o.a);
+            return Bridge.equals(this.A, o.A);
         },
         getHashCode: function () {
-            var h = Bridge.addHash([7550196186, this.a]);
+            var h = Bridge.addHash([7550196186, this.A]);
             return h;
         },
         toJSON: function () {
             return {
-                a : this.a
+                A : this.A
             };
         },
         statics : {
-            $metadata : function () { return {"m":[{"a":2,"n":"A","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_A","t":8,"sn":"getA","rt":System.Int32}}]}; }
+            $metadata : function () { return {"m":[{"a":2,"n":"A","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_A","t":8,"rt":System.Int32,"fg":"A"},"fn":"A"}]}; }
         }
     });
 });

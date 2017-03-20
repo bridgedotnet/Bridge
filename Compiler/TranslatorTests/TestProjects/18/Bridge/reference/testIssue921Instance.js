@@ -15,7 +15,7 @@
         ctor: function (offset) {
             this.$initialize();
             this._offset = offset;
-            TestIssue921Instance.Issue921Instance.setNameStatic("Static");
+            TestIssue921Instance.Issue921Instance.NameStatic = "Static";
         },
         computeValue: function computeValue(d) {
             return d.add(System.Decimal(10));
@@ -111,13 +111,13 @@
             return System.String.concat(value, index);
         },
         f7: function (value) {
-            return System.String.concat(value, this.getName());
+            return System.String.concat(value, this.Name);
         },
         f8: function (value, index) {
-            return System.String.concat(value, index, this.getName());
+            return System.String.concat(value, index, this.Name);
         },
         f9: function (value, index) {
-            return System.String.concat(value, index, TestIssue921Instance.Issue921Instance.getNameStatic());
+            return System.String.concat(value, index, TestIssue921Instance.Issue921Instance.NameStatic);
         },
         f10: function (value) {
             return value.add(System.Decimal(1));

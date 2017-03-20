@@ -16,19 +16,19 @@ namespace System.Threading.Tasks
 
         public extern bool IsCanceled
         {
-            [Name("isCanceled")]
+            [Template("isCanceled()")]
             get;
         }
 
         public extern bool IsCompleted
         {
-            [Name("isCompleted")]
+            [Template("isCompleted()")]
             get;
         }
 
         public extern bool IsFaulted
         {
-            [Name("isFaulted")]
+            [Template("isFaulted()")]
             get;
         }
 
@@ -101,7 +101,7 @@ namespace System.Threading.Tasks
 
         public extern TResult Result
         {
-            [Name("getResult")]
+            [Template("getResult()")]
             get;
         }
 

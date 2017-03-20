@@ -13,12 +13,20 @@ namespace System.Text.RegularExpressions
         /// <summary>
         /// Gets the empty group. All failed matches return this empty match.
         /// </summary>
-        public extern static Match Empty { get; }
+        public extern static Match Empty
+        {
+            [Template("{this}.getEmpty()")]
+            get;
+        }
 
         /// <summary>
         /// Gets a collection of groups matched by the regular expression.
         /// </summary>
-        public extern virtual GroupCollection Groups { get; }
+        public extern virtual GroupCollection Groups
+        {
+            [Template("getGroups()")]
+            get;
+        }
 
         /// <summary>
         /// Returns a new Match object with the results for the next match, starting at the position at which the last match ended (at the character after the last matched character).

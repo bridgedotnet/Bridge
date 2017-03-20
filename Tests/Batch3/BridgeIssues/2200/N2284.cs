@@ -63,38 +63,38 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             var p = new Person();
             string v = null;
 
-            //@ p.setNAME("Frank1");
-            //@ v = p.getNAME();
+            //@ p.NAME = "Frank1";
+            //@ v = p.NAME;
             Assert.AreEqual("Frank1", v);
             p.Name = "John1";
             Assert.AreEqual("John1", p.Name);
 
-            //@ p.setN2("Frank2");
-            //@ v = p.getN2();
+            //@ p.Name2 = "Frank2";
+            //@ v = p.Name2;
             Assert.AreEqual("Frank2", v);
             p.Name2 = "John2";
             Assert.AreEqual("John2", p.Name2);
 
-            //@ p.nm3("Frank3");
-            //@ v = p.nm3();
+            //@ p.Name3 = "Frank3";
+            //@ v = p.Name3;
             Assert.AreEqual("Frank3", v);
             p.Name3 = "John3";
             Assert.AreEqual("John3", p.Name3);
 
-            //@ p.nm4("Frank4");
-            //@ v = p.getName4();
+            //@ p.Name4 = "Frank4";
+            //@ v = p.Name4;
             Assert.AreEqual("Frank4", v);
             p.Name4 = "John4";
             Assert.AreEqual("John4", p.Name4);
 
-            //@ p.setName5("Frank5");
-            //@ v = p.nm5();
+            //@ p.Name5 = "Frank5";
+            //@ v = p.Name5;
             Assert.AreEqual("Frank5", v);
             p.Name5 = "John5";
             Assert.AreEqual("John5", p.Name5);
 
-            //@ p.nm6_s("Frank6");
-            //@ v = p.nm6_g();
+            //@ p.NAME6 = "Frank6";
+            //@ v = p.NAME6;
             Assert.AreEqual("Frank6", v);
             p.Name6 = "John6";
             Assert.AreEqual("John6", p.Name6);

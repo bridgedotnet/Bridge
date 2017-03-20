@@ -9,12 +9,13 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     {
         private class Helper
         {
-            [Template("{this}.setSomeProp({this}.getSomeProp() + 1)")]
+            [Template("({this}.SomeProp = {this}.SomeProp + 1)")]
             public extern object SomeInline();
 
             public int SomeProp
             {
-                get; set;
+                get;
+                set;
             }
 
             public void CreateAndCallLambda()

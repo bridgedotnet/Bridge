@@ -2,12 +2,12 @@
         useAField1: function useAField1() {
             var n = new TestIssue921Nested.Issue921NestedOuter.Issue921Nested(100);
 
-            var t = System.Linq.Enumerable.from(n.getName()).select($asm.$.TestIssue921Nested.Issue921NestedOuter.f1);
+            var t = System.Linq.Enumerable.from(n.Name).select($asm.$.TestIssue921Nested.Issue921NestedOuter.f1);
         },
         useAField2: function useAField2() {
             var n = new TestIssue921Nested.Issue921NestedOuter.Issue921Nested(200);
 
-            var t = System.Linq.Enumerable.from(n.getName()).select($asm.$.TestIssue921Nested.Issue921NestedOuter.f1);
+            var t = System.Linq.Enumerable.from(n.Name).select($asm.$.TestIssue921Nested.Issue921NestedOuter.f1);
         },
         useNestedFunOneInt: function useNestedFunOneInt() {
             var n = new TestIssue921Nested.Issue921NestedOuter.Issue921Nested(300);
@@ -28,7 +28,7 @@
             $t = Bridge.getEnumerator(System.Array.init([1, 2, 3], System.Int32));
             try {
                 while ($t.moveNext()) {
-                    var item = $t.getCurrent();
+                    var item = $t.Current;
                     n.doWithNumbers(item, item, item);
                 }
             }finally {
@@ -83,7 +83,7 @@
         ctor: function (offset) {
             this.$initialize();
             this._offset = offset;
-            TestIssue921Nested.Issue921NestedOuter.Issue921Nested.setNameStatic("Static");
+            TestIssue921Nested.Issue921NestedOuter.Issue921Nested.NameStatic = "Static";
         },
         computeValue: function computeValue(d) {
             return d.add(System.Decimal(10));
@@ -161,16 +161,16 @@
 
     Bridge.apply($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested, {
         f1: function (i) {
-            return ((((3 * i) | 0) + TestIssue921Nested.Issue921NestedOuter.Issue921Nested.getIntStatic()) | 0);
+            return ((((3 * i) | 0) + TestIssue921Nested.Issue921NestedOuter.Issue921Nested.IntStatic) | 0);
         },
         f2: function (i) {
-            return ((((2 * i) | 0) + TestIssue921Nested.Issue921NestedOuter.Issue921Nested.getIntStatic()) | 0);
+            return ((((2 * i) | 0) + TestIssue921Nested.Issue921NestedOuter.Issue921Nested.IntStatic) | 0);
         },
         f3: function (i, j) {
-            return ((((i + j) | 0) + TestIssue921Nested.Issue921NestedOuter.Issue921Nested.getIntStatic()) | 0);
+            return ((((i + j) | 0) + TestIssue921Nested.Issue921NestedOuter.Issue921Nested.IntStatic) | 0);
         },
         f4: function (i, j, k) {
-            var x = (((((i + j) | 0) + k) | 0) + TestIssue921Nested.Issue921NestedOuter.Issue921Nested.getIntStatic()) | 0;
+            var x = (((((i + j) | 0) + k) | 0) + TestIssue921Nested.Issue921NestedOuter.Issue921Nested.IntStatic) | 0;
         },
         f5: function (value) {
             return ((value + 1) | 0);
@@ -191,13 +191,13 @@
             return System.String.concat(value, index);
         },
         f11: function (value) {
-            return System.String.concat(value, this.getName());
+            return System.String.concat(value, this.Name);
         },
         f12: function (value, index) {
-            return System.String.concat(value, index, this.getName());
+            return System.String.concat(value, index, this.Name);
         },
         f13: function (value, index) {
-            return System.String.concat(value, index, TestIssue921Nested.Issue921NestedOuter.Issue921Nested.getNameStatic());
+            return System.String.concat(value, index, TestIssue921Nested.Issue921NestedOuter.Issue921Nested.NameStatic);
         },
         f14: function (value) {
             return value.add(System.Decimal(1));

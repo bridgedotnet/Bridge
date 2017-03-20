@@ -350,7 +350,7 @@ namespace Bridge.ClientTest.Reflection
             [Name(false)]
             public string B;
 
-            [Reflectable, Template("{ a: {a}, b: {b} }")]
+            [Reflectable, Template("{ A: {a}, B: {b} }")]
             public C20(int a, string b)
             {
             }
@@ -1482,7 +1482,7 @@ namespace Bridge.ClientTest.Reflection
         [Test]
         public void ScriptFieldNameIsCorrectForPropertiesImplementedAsFieldAndNullForOtherProperties()
         {
-            Assert.True(typeof(C14).GetProperty("P1").ScriptFieldName == null, "P1");
+            Assert.True(typeof(C14).GetProperty("P1").ScriptFieldName != null, "P1");
             Assert.AreEqual(typeof(C14).GetProperty("P2").ScriptFieldName, "P2", "P2");
         }
 

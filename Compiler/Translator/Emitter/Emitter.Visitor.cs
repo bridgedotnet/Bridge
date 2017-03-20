@@ -19,7 +19,7 @@ namespace Bridge.Translator
 
         public override void VisitPropertyDeclaration(PropertyDeclaration propertyDeclaration)
         {
-            new VisitorPropertyBlock(this, propertyDeclaration).Emit();
+            //new VisitorPropertyBlock(this, propertyDeclaration).Emit();
         }
 
         public override void VisitCustomEventDeclaration(CustomEventDeclaration customEventDeclaration)

@@ -1,11 +1,9 @@
 using Bridge.Contract.Constants;
-
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
 using ICSharpCode.NRefactory.TypeSystem.Implementation;
 using Mono.Cecil;
-
 using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
@@ -490,6 +488,11 @@ namespace Bridge.Contract
 
         public static bool IsImmutableStruct(IEmitter emitter, IType type)
         {
+            if (type.Kind != TypeKind.Struct)
+            {
+                return true;
+            }
+
             var typeDef = emitter.GetTypeDefinition(type);
             if (emitter.Validator.IsExternalType(typeDef) || emitter.Validator.IsImmutableType(typeDef))
             {
@@ -507,8 +510,27 @@ namespace Bridge.Contract
             return false;
         }
 
+        public static bool IsScript(IMethod method)
+        {
+            return method.Attributes.Any(a => a.AttributeType.FullName == CS.NS.ROOT + ".ScriptAttribute");
+        }
+
+        public static bool IsScript(MethodDefinition method)
+        {
+            return method.CustomAttributes.Any(a => a.AttributeType.FullName == CS.NS.ROOT + ".ScriptAttribute");
+        }
+
         public static bool IsAutoProperty(IProperty propertyDeclaration)
         {
+            if (propertyDeclaration.CanGet && Helpers.IsScript(propertyDeclaration.Getter))
+            {
+                return false;
+            }
+
+            if (propertyDeclaration.CanSet && Helpers.IsScript(propertyDeclaration.Setter))
+            {
+                return false;
+            }
             // auto properties don't have bodies
             return (propertyDeclaration.CanGet && (!propertyDeclaration.Getter.HasBody || propertyDeclaration.Getter.BodyRegion.IsEmpty)) ||
                    (propertyDeclaration.CanSet && (!propertyDeclaration.Setter.HasBody || propertyDeclaration.Setter.BodyRegion.IsEmpty));
@@ -516,116 +538,27 @@ namespace Bridge.Contract
 
         public static bool IsAutoProperty(PropertyDefinition propDef)
         {
-            var typeDef = propDef.DeclaringType;
-            if (propDef != null)
-            {
-                if (propDef.GetMethod == null || propDef.SetMethod == null)
-                {
-                    return false;
-                }
-                if (propDef.GetMethod.CustomAttributes.Any(a => a.AttributeType.FullName == "System.Runtime.CompilerServices.CompilerGeneratedAttribute"))
-                {
-                    return true;
-                }
-            }
-            return typeDef.Fields.Any(f => !f.IsPublic && !f.IsStatic && f.Name.Contains("BackingField") && f.Name.Contains("<" + propDef.Name + ">"));
-        }
-
-        public static bool IsFieldProperty(IMember propertyMember, IAssemblyInfo assemblyInfo)
-        {
-            if (propertyMember is IProperty &&
-                !propertyMember.IsStatic &&
-                propertyMember.DeclaringTypeDefinition != null &&
-                propertyMember.DeclaringTypeDefinition.Attributes.Any(a => a.AttributeType.FullName == "Bridge.ObjectLiteralAttribute"))
-            {
-                return true;
-            }
-
-            bool isAuto = AttributeHelper.HasFieldAttribute(propertyMember);
-            if (!isAuto && assemblyInfo.AutoPropertyToField && propertyMember is IProperty)
-            {
-                var isIgnore = propertyMember.DeclaringTypeDefinition.Attributes.Any(a => a.AttributeType.FullName == "Bridge.ExternalAttribute") ||
-                               propertyMember.DeclaringTypeDefinition.ParentAssembly.AssemblyAttributes.Any(a => a.AttributeType.FullName == "Bridge.ExternalAttribute");
-                if (isIgnore)
-                {
-                    return false;
-                }
-                return propertyMember.DeclaringType.Kind == TypeKind.Interface || Helpers.IsAutoProperty((IProperty)propertyMember);
-            }
-
-            return isAuto || assemblyInfo.AutoPropertyToField;
-        }
-
-        public static bool IsFieldProperty(IMember propertyMember, IEmitter emitter)
-        {
-            if (propertyMember is IProperty &&
-                !propertyMember.IsStatic &&
-                propertyMember.DeclaringTypeDefinition != null &&
-                propertyMember.DeclaringTypeDefinition.Attributes.Any(a => a.AttributeType.FullName == "Bridge.ObjectLiteralAttribute"))
-            {
-                return true;
-            }
-
-            bool isAuto = AttributeHelper.HasFieldAttribute(propertyMember);
-            if (!isAuto && emitter.AssemblyInfo.AutoPropertyToField)
-            {
-                var typeDef = emitter.GetTypeDefinition(propertyMember.DeclaringType);
-                if (emitter.Validator.IsExternalType(typeDef))
-                {
-                    return false;
-                }
-                var propDef = typeDef.Properties.FirstOrDefault(p => p.Name == propertyMember.Name);
-                return typeDef.IsInterface || Helpers.IsAutoProperty(propDef);
-            }
-            return isAuto;
-        }
-
-        public static bool IsFieldProperty(IMemberDefinition property, IEmitter emitter)
-        {
-            var p = property as PropertyDefinition;
-            if (p != null &&
-                p.GetMethod != null &&
-                !p.GetMethod.IsStatic &&
-                property.DeclaringType != null &&
-                property.DeclaringType.CustomAttributes.Any(a => a.AttributeType.FullName == "Bridge.ObjectLiteralAttribute"))
-            {
-                return true;
-            }
-
-            bool isAuto = AttributeHelper.HasFieldAttribute(property);
-            if (!isAuto && emitter.AssemblyInfo.AutoPropertyToField)
-            {
-                var typeDef = property.DeclaringType;
-                if (emitter.Validator.IsExternalType(typeDef))
-                {
-                    return false;
-                }
-                return Helpers.IsAutoProperty((PropertyDefinition)property);
-            }
-            return isAuto;
-        }
-
-        public static bool IsFieldProperty(PropertyDeclaration property, IEmitter emitter)
-        {
-            ResolveResult resolveResult = emitter.Resolver.ResolveNode(property, emitter) as MemberResolveResult;
-            if (resolveResult != null && ((MemberResolveResult)resolveResult).Member != null)
-            {
-                return Helpers.IsFieldProperty(((MemberResolveResult)resolveResult).Member, emitter);
-            }
-
-            if (AttributeHelper.HasFieldAttribute(property, emitter))
-            {
-                return true;
-            }
-
-            if (!emitter.AssemblyInfo.AutoPropertyToField)
+            if (propDef.GetMethod != null && Helpers.IsScript(propDef.GetMethod))
             {
                 return false;
             }
 
-            var typeDef = emitter.GetTypeDefinition();
-            var propDef = typeDef.Properties.FirstOrDefault(p => p.Name == property.Name);
-            return Helpers.IsAutoProperty(propDef);
+            if (propDef.SetMethod != null && Helpers.IsScript(propDef.SetMethod))
+            {
+                return false;
+            }
+
+            if (propDef.GetMethod == null || propDef.SetMethod == null)
+            {
+                return false;
+            }
+            if (propDef.GetMethod.CustomAttributes.Any(a => a.AttributeType.FullName == "System.Runtime.CompilerServices.CompilerGeneratedAttribute"))
+            {
+                return true;
+            }
+
+            var typeDef = propDef.DeclaringType;
+            return typeDef != null && typeDef.Fields.Any(f => !f.IsPublic && !f.IsStatic && f.Name.Contains("BackingField") && f.Name.Contains("<" + propDef.Name + ">"));
         }
 
         public static string GetAddOrRemove(bool isAdd, string name = null)
@@ -675,26 +608,20 @@ namespace Bridge.Contract
             return (isSetter ? JS.Funcs.Property.SET : JS.Funcs.Property.GET) + name;
         }
 
-        public static string GetPropertyRef(PropertyDeclaration property, IEmitter emitter, bool isSetter = false, bool noOverload = false, bool ignoreInterface = false, bool withoutTypeParams = false)
+        public static string GetPropertyRef(PropertyDeclaration property, IEmitter emitter, bool isSetter = false, bool noOverload = false, bool ignoreInterface = false, bool withoutTypeParams = false, bool skipPrefix = true)
         {
             ResolveResult resolveResult = emitter.Resolver.ResolveNode(property, emitter) as MemberResolveResult;
             if (resolveResult != null && ((MemberResolveResult)resolveResult).Member != null)
             {
-                return GetPropertyRef(((MemberResolveResult)resolveResult).Member, emitter, isSetter, noOverload, ignoreInterface, withoutTypeParams);
+                return GetPropertyRef(((MemberResolveResult)resolveResult).Member, emitter, isSetter, noOverload, ignoreInterface, withoutTypeParams, skipPrefix);
             }
 
             string name;
-            bool isFieldProperty = Helpers.IsFieldProperty(property, emitter);
-
-            if (isFieldProperty)
-            {
-                return emitter.GetEntityName(property, false, ignoreInterface);
-            }
-
+            
             if (!noOverload)
             {
                 var overloads = OverloadsCollection.Create(emitter, property, isSetter);
-                return overloads.GetOverloadName(ignoreInterface, GetSetOrGet(isSetter), withoutTypeParams);
+                return overloads.GetOverloadName(ignoreInterface, skipPrefix ? null : GetSetOrGet(isSetter), withoutTypeParams);
             }
 
             name = emitter.GetEntityName(property, true, ignoreInterface);
@@ -738,7 +665,7 @@ namespace Bridge.Contract
             return GetSetOrGet(isSetter, name);
         }
 
-        public static string GetPropertyRef(IMember property, IEmitter emitter, bool isSetter = false, bool noOverload = false, bool ignoreInterface = false, bool withoutTypeParams = false, bool skipPrefix = false)
+        public static string GetPropertyRef(IMember property, IEmitter emitter, bool isSetter = false, bool noOverload = false, bool ignoreInterface = false, bool withoutTypeParams = false, bool skipPrefix = true)
         {
             var attrName = emitter.GetEntityNameFromAttr(property, isSetter);
 
@@ -748,13 +675,12 @@ namespace Bridge.Contract
             }
 
             string name = null;
-            bool isFieldProperty = Helpers.IsFieldProperty(property, emitter);
 
-            if (isFieldProperty)
+            if (property.SymbolKind == SymbolKind.Indexer)
             {
-                return emitter.GetEntityName(property, false, ignoreInterface);
+                skipPrefix = false;
             }
-
+            
             if (!noOverload)
             {
                 var overloads = OverloadsCollection.Create(emitter, property, isSetter);

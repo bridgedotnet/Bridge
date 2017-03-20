@@ -1330,8 +1330,8 @@ namespace Bridge.ClientTest.Linq.Expressions
             }), 17, "B getter result");
 
             var instance = ne.Constructor.Invoke(42, 17);
-            Assert.AreEqual(((dynamic)instance).a, 42, "Constructor invocation result A");
-            Assert.AreEqual(((dynamic)instance).b, 17, "Constructor invocation result B");
+            Assert.AreEqual(((dynamic)instance).A, 42, "Constructor invocation result A");
+            Assert.AreEqual(((dynamic)instance).B, 17, "Constructor invocation result B");
         }
 
         public class ClassWithQueryPattern<T>

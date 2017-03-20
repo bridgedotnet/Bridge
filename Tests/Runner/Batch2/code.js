@@ -231,7 +231,7 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
             $t = Bridge.getEnumerator(System.Array.init(["x", "y"], System.String));
             try {
                 while ($t.moveNext()) {
-                    var s = $t.getCurrent();
+                    var s = $t.Current;
                     result = System.String.concat(result, s);
                 }
             }finally {
@@ -386,7 +386,7 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
             $t = Bridge.getEnumerator(list, System.String);
             try {
                 while ($t.moveNext()) {
-                    var s = $t.getCurrent();
+                    var s = $t.Current;
                     result = System.String.concat(result, s);
                 }
             }finally {

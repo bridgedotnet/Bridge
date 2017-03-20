@@ -26,13 +26,19 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     Bridge.define("TypeScript.Issues.N2030Attribute", {
         inherits: [System.Attribute],
         _isUnspecified: false,
+        config: {
+            properties: {
+                IsUnspecified: {
+                    get: function () {
+                        return this._isUnspecified;
+                    }
+                }
+            }
+        },
         ctor: function (IsUnspecified) {
             this.$initialize();
             System.Attribute.ctor.call(this);
             this._isUnspecified = IsUnspecified;
-        },
-        getIsUnspecified: function () {
-            return this._isUnspecified;
         }
     });
 
@@ -51,8 +57,8 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         },
         ctor: function () {
             this.$initialize();
-            this.setForward(new (TypeScript.Issues.N2031DictionaryMap$2.Indexer$2(T1,T2,T1,T2))(this._forward));
-            this.setReverse(new (TypeScript.Issues.N2031DictionaryMap$2.Indexer$2(T1,T2,T2,T1))(this._reverse));
+            this.Forward = new (TypeScript.Issues.N2031DictionaryMap$2.Indexer$2(T1,T2,T1,T2))(this._forward);
+            this.Reverse = new (TypeScript.Issues.N2031DictionaryMap$2.Indexer$2(T1,T2,T2,T1))(this._reverse);
         },
         $ctor1: function (initialValues) {
             if (initialValues === void 0) { initialValues = []; }
@@ -62,7 +68,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
             $t = Bridge.getEnumerator(initialValues);
             try {
                 while ($t.moveNext()) {
-                    var value = $t.getCurrent();
+                    var value = $t.Current;
                     this.add(value.key, value.value);
                 }
             }finally {
@@ -103,7 +109,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
             if (queryParameters === void 0) { queryParameters = null; }
 
             this.$initialize();
-            this.setValues(queryParameters);
+            this.Values = queryParameters;
         }
     });
 
@@ -120,7 +126,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         },
         $ctor1: function (arg) {
             this.$initialize();
-            this.setAttribute(arg);
+            this.Attribute = arg;
         }
     });
 
@@ -153,8 +159,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
                 Value1: 0
             },
             alias: [
-            "getValue1", "TypeScript$Issues$N2029Interface$1$System$Int32$getValue1",
-            "setValue1", "TypeScript$Issues$N2029Interface$1$System$Int32$setValue1"
+            "Value1", "TypeScript$Issues$N2029Interface$1$System$Int32$Value1"
             ]
         }
     });

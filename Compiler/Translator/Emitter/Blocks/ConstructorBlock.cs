@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using ICSharpCode.NRefactory.TypeSystem;
 using Object.Net.Utilities;
 
 namespace Bridge.Translator
@@ -426,9 +427,10 @@ namespace Bridge.Translator
                                     this.WriteComma();
                                     this.Emitter.Comma = false;
                                     this.BeginBlock();
+                                    var memberResult = this.Emitter.Resolver.ResolveNode(p, this.Emitter) as MemberResolveResult;
                                     var block = new VisitorPropertyBlock(this.Emitter, p);
-                                    block.EmitPropertyMethod(p, p.Getter, false, true);
-                                    block.EmitPropertyMethod(p, p.Setter, true, true);
+                                    block.EmitPropertyMethod(p, p.Getter, ((IProperty)memberResult.Member).Getter, false, true);
+                                    block.EmitPropertyMethod(p, p.Setter, ((IProperty)memberResult.Member).Setter, true, true);
                                     this.EnsureComma(true);
                                     this.Write(JS.Fields.ENUMERABLE + ": true");
                                     this.WriteNewLine();

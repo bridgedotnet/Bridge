@@ -164,7 +164,7 @@
 
             try {
                 while (enumerator.moveNext()) {
-                    if (!predicate(enumerator.getCurrent())) {
+                    if (!predicate(enumerator.Current)) {
                         return false;
                     }
                 }
@@ -199,7 +199,7 @@
 
             try {
                 while (enumerator.moveNext()) {
-                    if (predicate(enumerator.getCurrent())) {
+                    if (predicate(enumerator.Current)) {
                         return true;
                     }
                 }
@@ -225,6 +225,34 @@
     Bridge.define("System.Diagnostics.Contracts.ContractException", {
         inherits: [System.Exception],
 
+        config: {
+            properties: {
+                Kind: {
+                    get: function() {
+                        return this._kind;
+                    }
+                },
+
+                Failure: {
+                    get: function () {
+                        return this._failureMessage;
+                    }
+                },
+
+                UserMessage: {
+                    get: function () {
+                        return this._userMessage;
+                    }
+                },
+
+                Condition: {
+                    get: function () {
+                        return this._condition;
+                    }
+                }
+            }  
+        },
+
         ctor: function (failureKind, failureMessage, userMessage, condition, innerException) {
             this.$initialize();
             System.Exception.ctor.call(this, failureMessage, innerException);
@@ -232,18 +260,5 @@
             this._failureMessage = failureMessage || null;
             this._userMessage = userMessage || null;
             this._condition = condition || null;
-        },
-
-        getKind: function () {
-            return this._kind;
-        },
-        getFailure: function () {
-            return this._failureMessage;
-        },
-        getUserMessage: function () {
-            return this._userMessage;
-        },
-        getCondition: function () {
-            return this._condition;
         }
     });

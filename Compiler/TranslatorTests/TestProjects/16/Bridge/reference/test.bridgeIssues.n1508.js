@@ -16,7 +16,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                         try {
                             while ($t1.moveNext()) {
                                 $t2 = (function () {
-                                    var dimensionN = $t1.getCurrent();
+                                    var dimensionN = $t1.Current;
                                     // $t2 should not be re-created with var
                                     var action;
                                     var xOut = 0;

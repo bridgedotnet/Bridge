@@ -64,7 +64,7 @@
             public const string INIT = "init";
             public const string CLONE = "$clone";
             public const string MOVE_NEXT = "moveNext";
-            public const string GET_CURRENT = "getCurrent";
+            public const string GET_CURRENT = "Current";
             public const string TOSTIRNG = "toString";
             public const string EQUALS = "equals";
             public const string GETHASHCODE = "getHashCode";
@@ -268,6 +268,7 @@
 
                 public const string APPLY = DOTNAME + "apply";
                 public const string ASSEMBLY = DOTNAME + "assembly";
+                public const string ENSURE_BASE_PROPERTY = DOTNAME + "ensureBaseProperty";
                 public const string IS = DOTNAME + "is";
                 public const string SET_METADATA = DOTNAME + "setMetadata";
                 public const string GET_TYPE_ALIAS = DOTNAME + "getTypeAlias";
