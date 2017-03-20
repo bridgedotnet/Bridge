@@ -1008,18 +1008,26 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         statics: {
             testEnumNameModes: function () {
                 var t1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1059.OverlayType1;
+                Bridge.Test.NUnit.Assert.areEqual(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1059.OverlayType1.CIRCLE);
+                Bridge.Test.NUnit.Assert.areEqual(2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1059.OverlayType1.marker);
                 Bridge.Test.NUnit.Assert.areEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1059.OverlayType1.CIRCLE, Bridge.unbox(t1.CIRCLE));
                 Bridge.Test.NUnit.Assert.areEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1059.OverlayType1.marker, Bridge.unbox(t1.marker));
 
                 var t2 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1059.OverlayType2;
+                Bridge.Test.NUnit.Assert.areEqual(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1059.OverlayType2.CIRCLE);
+                Bridge.Test.NUnit.Assert.areEqual(2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1059.OverlayType2.marker);
                 Bridge.Test.NUnit.Assert.areEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1059.OverlayType2.CIRCLE, Bridge.unbox(t2.CIRCLE));
                 Bridge.Test.NUnit.Assert.areEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1059.OverlayType2.marker, Bridge.unbox(t2.marker));
 
                 var t3 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1059.OverlayType3;
+                Bridge.Test.NUnit.Assert.areEqual(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1059.OverlayType3.circle);
+                Bridge.Test.NUnit.Assert.areEqual(2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1059.OverlayType3.marker);
                 Bridge.Test.NUnit.Assert.areEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1059.OverlayType3.circle, Bridge.unbox(t3.circle));
                 Bridge.Test.NUnit.Assert.areEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1059.OverlayType3.marker, Bridge.unbox(t3.marker));
 
                 var t4 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1059.OverlayType4;
+                Bridge.Test.NUnit.Assert.areEqual(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1059.OverlayType4.CIRCLE);
+                Bridge.Test.NUnit.Assert.areEqual(2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1059.OverlayType4.MARKER);
                 Bridge.Test.NUnit.Assert.areEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1059.OverlayType4.CIRCLE, Bridge.unbox(t4.CIRCLE));
                 Bridge.Test.NUnit.Assert.areEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1059.OverlayType4.MARKER, Bridge.unbox(t4.MARKER));
             }
@@ -1045,7 +1053,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1059.OverlayType3", {
         $kind: "enum",
         statics: {
-            CIRCLE: 1,
+            circle: 1,
             marker: 2
         }
     });
@@ -1054,7 +1062,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         $kind: "enum",
         statics: {
             CIRCLE: 1,
-            marker: 2
+            MARKER: 2
         }
     });
 
@@ -21660,7 +21668,7 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge881A", {
         $kind: "enum",
         statics: {
-            Name: 0
+            $Name: 0
         }
     });
 

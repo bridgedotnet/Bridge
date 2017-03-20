@@ -380,7 +380,18 @@ namespace Bridge.Translator
                     continue;
                 }
 
-                var mname = this.TypeInfo.IsEnum ? member.Name : member.GetName(this.Emitter, true);
+                var mname = member.GetName(this.Emitter, true);
+
+                if (this.TypeInfo.IsEnum)
+                {
+                    var memeber_rr = (MemberResolveResult)this.Emitter.Resolver.ResolveNode(member.Entity, this.Emitter);
+                    var mode = this.Emitter.Validator.EnumEmitMode(memeber_rr.Member.DeclaringTypeDefinition);
+
+                    if (mode < 6)
+                    {
+                        mname = member.Name;
+                    }
+                }
 
                 bool isValid = Helpers.IsValidIdentifier(mname);
                 if (!isValid)

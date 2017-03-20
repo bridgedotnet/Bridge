@@ -2,6 +2,7 @@ using Bridge.Contract;
 using ICSharpCode.NRefactory.CSharp;
 using Object.Net.Utilities;
 using System.Linq;
+using ICSharpCode.NRefactory.Semantics;
 
 namespace Bridge.Translator.TypeScript
 {
@@ -40,7 +41,17 @@ namespace Bridge.Translator.TypeScript
                 var lastField = this.TypeInfo.StaticConfig.Fields.Last();
                 foreach (var field in this.TypeInfo.StaticConfig.Fields)
                 {
-                    this.Write(field.Name);
+                    var memeber_rr = (MemberResolveResult)this.Emitter.Resolver.ResolveNode(field.Entity, this.Emitter);
+                    var mode = this.Emitter.Validator.EnumEmitMode(memeber_rr.Member.DeclaringTypeDefinition);
+
+                    if (mode < 6)
+                    {
+                        this.Write(field.Name);
+                    }
+                    else
+                    {
+                        this.Write(field.GetName(this.Emitter, true));
+                    }
 
                     var initializer = field.Initializer;
                     if (initializer != null && initializer is PrimitiveExpression)
