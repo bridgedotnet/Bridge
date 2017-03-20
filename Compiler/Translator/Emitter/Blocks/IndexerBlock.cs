@@ -1383,7 +1383,8 @@ namespace Bridge.Translator
                 else
                 {
                     this.WriteOpenBracket();
-                    this.Write("System.Array.index(");
+                    this.Write(JS.Types.System.Array.INDEX);
+                    this.WriteOpenParentheses();
                 }
 
                 index.AcceptVisitor(this.Emitter);
@@ -1400,7 +1401,7 @@ namespace Bridge.Translator
                     {
                         indexerExpression.Target.AcceptVisitor(this.Emitter);
                     }
-                    
+
                     this.WriteCloseParentheses();
                     this.WriteCloseBracket();
                 }
