@@ -181,7 +181,9 @@ namespace Bridge.Translator
                 this.WriteDot();
                 this.Write(OverloadsCollection.Create(this.Emitter, this.CastMethod).GetOverloadName());
                 this.WriteOpenParentheses();
+                var pos = this.Emitter.Output.Length;
                 this.Write(iteratorName + "." + JS.Funcs.GET_CURRENT);
+                Helpers.CheckValueTypeClone(rr, this.ForeachStatement.InExpression, this, pos);
                 this.WriteCloseParentheses();
             }
             else
@@ -193,10 +195,12 @@ namespace Bridge.Translator
                     this.WriteOpenParentheses();
                 }
 
+                var pos = this.Emitter.Output.Length;
                 this.Write(iteratorName);
 
                 this.WriteDot();
                 this.Write(JS.Funcs.GET_CURRENT);
+                Helpers.CheckValueTypeClone(rr, this.ForeachStatement.InExpression, this, pos);
 
                 if (needCast)
                 {
@@ -363,7 +367,9 @@ namespace Bridge.Translator
                     this.WriteDot();
                     this.Write(OverloadsCollection.Create(this.Emitter, this.CastMethod).GetOverloadName());
                     this.WriteOpenParentheses();
+                    int pos = this.Emitter.Output.Length;
                     this.Write(iteratorName + "." + JS.Funcs.GET_CURRENT);
+                    Helpers.CheckValueTypeClone(rr, this.ForeachStatement.InExpression, this, pos);
                     this.WriteCloseParentheses();
                 }
                 else
@@ -374,11 +380,13 @@ namespace Bridge.Translator
                         this.Write(JS.Funcs.BRIDGE_CAST);
                         this.WriteOpenParentheses();
                     }
-
+                    int pos = this.Emitter.Output.Length;
                     this.Write(iteratorName);
 
                     this.WriteDot();
                     this.Write(JS.Funcs.GET_CURRENT);
+
+                    Helpers.CheckValueTypeClone(rr, this.ForeachStatement.InExpression, this, pos);
 
                     if (needCast)
                     {
