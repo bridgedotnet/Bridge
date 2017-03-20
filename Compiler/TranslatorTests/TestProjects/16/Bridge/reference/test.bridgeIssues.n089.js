@@ -4,7 +4,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     Bridge.define("Test.BridgeIssues.N089.Class89", {
         test: function (p) {
             if (p === void 0) { p = []; }
-            var i = p[0];
+            var i = p[System.Array.index(0, p)];
         }
     });
 });
