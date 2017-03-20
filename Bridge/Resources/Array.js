@@ -1048,7 +1048,7 @@
 
             if (!result) {
                 name = Bridge.getTypeName(t) + "[" + System.String.fromCharCount(",".charCodeAt(0), rank - 1) + "]";
-
+                var old = Bridge.Class.staticInitAllow;
                 result = Bridge.define(name, {
                     $inherits: [Array, System.Collections.ICollection, System.ICloneable, System.Collections.Generic.IList$1(t)],
                     $noRegister: true,
@@ -1081,7 +1081,12 @@
                 });
 
                 typeCache.push(result);
-                Bridge.init();
+
+                Bridge.Class.staticInitAllow = true;
+                if (result.$staticInit) {
+                    result.$staticInit();
+                }
+                Bridge.Class.staticInitAllow = old;
             }
 
             if (arr) {

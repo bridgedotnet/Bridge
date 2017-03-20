@@ -15889,6 +15889,171 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2454", {
+        statics: {
+            test: function (values) {
+                var $t;
+                $t = Bridge.getEnumerator(values, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2454.MyStruct);
+                try {
+                    while ($t.moveNext()) {
+                        var value = $t.Current.$clone();
+                        value.intersect(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2454.MyStruct.$ctor1(5, 20));
+                        Bridge.Test.NUnit.Assert.areEqual("5-10", value.toString());
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }},
+            testForEachClone: function () {
+                var x = System.Array.init([new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2454.MyStruct.$ctor1(1, 10)], Bridge.ClientTest.Batch3.BridgeIssues.Bridge2454.MyStruct);
+                Bridge.Test.NUnit.Assert.areEqual("1-10", x[0].toString());
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2454.test(x);
+                Bridge.Test.NUnit.Assert.areEqual("1-10", x[0].toString());
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2454.MyStruct", {
+        $kind: "struct",
+        statics: {
+            getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2454.MyStruct(); }
+        },
+        config: {
+            properties: {
+                X1: 0,
+                X2: 0
+            }
+        },
+        $ctor1: function (x1, x2) {
+            this.$initialize();
+            this.X1 = x1;
+            this.X2 = x2;
+        },
+        ctor: function () {
+            this.$initialize();
+        },
+        intersect: function (other) {
+            var x1 = Math.max(this.X1, other.X1);
+            var x2 = Math.min(this.X2, other.X2);
+            this.X1 = x1;
+            this.X2 = x2;
+        },
+        toString: function () {
+            return this.X1 + "-" + this.X2;
+        },
+        getHashCode: function () {
+            var h = Bridge.addHash([3904302783, this.X1, this.X2]);
+            return h;
+        },
+        equals: function (o) {
+            if (!Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2454.MyStruct)) {
+                return false;
+            }
+            return Bridge.equals(this.X1, o.X1) && Bridge.equals(this.X2, o.X2);
+        },
+        $clone: function (to) {
+            var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2454.MyStruct();
+            s.X1 = this.X1;
+            s.X2 = this.X2;
+            return s;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2467", {
+        statics: {
+            testPropertyInitializerInStruct: function () {
+                Bridge.Test.NUnit.Assert.areEqual(123, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2467.MyStruct.Example.Value);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2467.MyStruct", {
+        $kind: "struct",
+        statics: {
+            config: {
+                properties: {
+                    Example: null
+                },
+                init: function () {
+                    this.Example = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2467.MyStruct.$ctor1(123);
+                }
+            },
+            getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2467.MyStruct(); }
+        },
+        config: {
+            properties: {
+                Value: 0
+            }
+        },
+        $ctor1: function (value) {
+            this.$initialize();
+            this.Value = value;
+        },
+        ctor: function () {
+            this.$initialize();
+        },
+        getHashCode: function () {
+            var h = Bridge.addHash([3904302783, this.Value]);
+            return h;
+        },
+        equals: function (o) {
+            if (!Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2467.MyStruct)) {
+                return false;
+            }
+            return Bridge.equals(this.Value, o.Value);
+        },
+        $clone: function (to) {
+            var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2467.MyStruct();
+            s.Value = this.Value;
+            return s;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469", {
+        statics: {
+            testLambdaLiftingWithStaticGenericMember: function () {
+                Bridge.Test.NUnit.Assert.areEqual("Hello1", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469.Class1$1(System.Int32).method()());
+                Bridge.Test.NUnit.Assert.areEqual("Hello2", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469.Class2$1.method()());
+
+                var scope2 = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469.Class2$1;
+                Bridge.Test.NUnit.Assert.notNull$1(scope2, "scope2 exists");
+                Bridge.Test.NUnit.Assert.notNull$1(scope2.f1, "scope2.f1 exists");
+
+                var scope1 = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469.Class1$1;
+                Bridge.Test.NUnit.Assert.null$1(scope1, "scope1 should not exist");
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469.Class1$1", function (T) { return {
+        statics: {
+            Hello: "Hello1",
+            method: function () {
+                return function () {
+                    return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469.Class1$1(T).Hello;
+                };
+            }
+        }
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469.Class2$1", {
+        statics: {
+            Hello: "Hello2",
+            method: function () {
+                return $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469.Class2$1.f1;
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469.Class2$1", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469.Class2$1, {
+        f1: function () {
+            return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469.Class2$1.Hello;
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge266A", {
         statics: {
             test: function () {
