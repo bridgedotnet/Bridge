@@ -11593,8 +11593,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.E2", {
         $kind: "enum",
         statics: {
-            V1: "v1",
-            V2: "v2"
+            v1: "v1",
+            v2: "v2"
         },
         $utype: System.String
     });
@@ -15264,8 +15264,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.ImportedNamedValuesEnum", {
         $kind: "enum",
         statics: {
-            FirstValue: "firstValue",
-            SecondValue: "secondValue"
+            firstValue: "firstValue",
+            secondValue: "secondValue"
         },
         $utype: System.String
     });
@@ -15352,8 +15352,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.NamedValuesEnum", {
         $kind: "enum",
         statics: {
-            FirstValue: "firstValue",
-            SecondValue: "secondValue"
+            firstValue: "firstValue",
+            secondValue: "secondValue"
         },
         $utype: System.String
     });

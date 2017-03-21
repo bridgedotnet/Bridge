@@ -114,25 +114,15 @@ namespace Bridge.Translator.TypeScript
 
             if (this.TypeInfo.IsEnum)
             {
-                var memeber_rr = (MemberResolveResult)this.Emitter.Resolver.ResolveNode(field.Entity, this.Emitter);
-                var mode = this.Emitter.Validator.EnumEmitMode(memeber_rr.Member.DeclaringTypeDefinition);
-
-                if (mode < 6)
-                {
-                    this.Write(field.Name);
-                }
-                else
-                {
-                    this.Write(field.GetName(this.Emitter, true));
-                }
+                this.Write(EnumBlock.GetEnumItemName(this.Emitter, field));
             }
             else
             {
                 this.Write(field.GetName(this.Emitter));
             }
-            
+
             this.WriteColon();
-            
+
             string typeName = this.TypeInfo.IsEnum
                 ? (this.Emitter.Validator.IsStringNameEnum(this.TypeInfo.Type) ? "string" : "number")
                 : BridgeTypes.ToTypeScriptName(field.Entity.ReturnType, this.Emitter);

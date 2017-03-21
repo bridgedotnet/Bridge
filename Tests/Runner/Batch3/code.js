@@ -11850,9 +11850,9 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2033.GameState", {
         $kind: "enum",
         statics: {
-            New: "new",
-            Playing: "playing",
-            Finished: "finished"
+            new: "new",
+            playing: "playing",
+            finished: "finished"
         },
         $utype: System.String
     });

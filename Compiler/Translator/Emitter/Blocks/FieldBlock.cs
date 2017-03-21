@@ -387,7 +387,34 @@ namespace Bridge.Translator
                     var memeber_rr = (MemberResolveResult)this.Emitter.Resolver.ResolveNode(member.Entity, this.Emitter);
                     var mode = this.Emitter.Validator.EnumEmitMode(memeber_rr.Member.DeclaringTypeDefinition);
 
-                    if (mode < 6)
+                    var attr = Helpers.GetInheritedAttribute(memeber_rr.Member, Translator.Bridge_ASSEMBLY + ".NameAttribute");
+
+                    if (attr != null)
+                    {
+                        mname = this.Emitter.GetEntityName(memeber_rr.Member);
+                    }
+                    else if (mode >= 3 && mode < 7)
+                    {
+                        switch (mode)
+                        {
+                            case 3:
+                                mname = Object.Net.Utilities.StringUtils.ToLowerCamelCase(memeber_rr.Member.Name);
+                                break;
+
+                            case 4:
+                                mname = memeber_rr.Member.Name;
+                                break;
+
+                            case 5:
+                                mname = memeber_rr.Member.Name.ToLowerInvariant();
+                                break;
+
+                            case 6:
+                                mname = memeber_rr.Member.Name.ToUpperInvariant();
+                                break;
+                        }
+                    }
+                    else if (mode < 3)
                     {
                         mname = member.Name;
                     }
