@@ -103,7 +103,7 @@ namespace Bridge.Translator.TypeScript
                         break;
                 }
             }
-            else if (mode < 3)
+            else if (mode < 3 && mode != 1)
             {
                 mname = field.Name;
             }
