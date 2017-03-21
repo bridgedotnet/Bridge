@@ -1,3 +1,4 @@
+using System.Linq;
 using Bridge.Contract;
 using Bridge.Contract.Constants;
 using ICSharpCode.NRefactory.CSharp;
@@ -45,6 +46,7 @@ namespace Bridge.Translator
             if (this.Emitter.IsAsync && (this.Emitter.AsyncBlock.MethodDeclaration == null || this.Emitter.AsyncBlock.MethodDeclaration.HasModifier(Modifiers.Async)))
             {
                 var finallyNode = this.GetParentFinallyBlock(returnStatement ?? (AstNode)expression, false);
+                var catchNode = this.GetParentCatchBlock(returnStatement ?? (AstNode)expression, false);
                 expression = returnStatement != null ? returnStatement.Expression : expression;
 
                 if (this.Emitter.AsyncBlock != null && this.Emitter.AsyncBlock.IsTaskReturn)
@@ -78,15 +80,24 @@ namespace Bridge.Translator
 
                 if (finallyNode != null)
                 {
-                    //var hashcode = finallyNode.GetHashCode();
-                    this.Emitter.AsyncBlock.JumpLabels.Add(new AsyncJumpLabel
+                    if (catchNode == null || !catchNode.Body.Statements.Last().Equals(this.ReturnStatement))
                     {
-                        Node = finallyNode,
-                        Output = this.Emitter.Output
-                    });
-                    /*this.Write(JS.Vars.ASYNC_STEP + " = " + Helpers.PrefixDollar("{", hashcode, "};"));
-                    this.WriteNewLine();
-                    this.Write("continue;");*/
+                        if (catchNode != null)
+                        {
+                            Write(JS.Vars.ASYNC_E + " = null;");
+                        }
+                        
+                        var hashcode = finallyNode.GetHashCode();
+                        this.Emitter.AsyncBlock.JumpLabels.Add(new AsyncJumpLabel
+                        {
+                            Node = finallyNode,
+                            Output = this.Emitter.Output
+                        });
+                        this.Write(JS.Vars.ASYNC_STEP + " = " + Helpers.PrefixDollar("{", hashcode, "};"));
+                        this.WriteNewLine();
+                        this.Write("continue;");
+                        this.WriteNewLine();
+                    }
                 }
                 else
                 {
