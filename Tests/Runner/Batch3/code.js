@@ -16029,7 +16029,7 @@ Bridge.$N1391Result =                 r;
                     $jumpFromFinally, 
                     $tcs = new System.Threading.Tasks.TaskCompletionSource(), 
                     $returnValue, 
-                    errors, 
+                    result, 
                     $async_e, 
                     $asyncBody = Bridge.fn.bind(this, function () {
                         try {
@@ -16044,8 +16044,9 @@ Bridge.$N1391Result =                 r;
                                     }
                                     case 1: {
                                         $taskResult1 = $task1.getAwaitedResult();
-                                        errors = $taskResult1;
-                                        $tcs.setResult(errors.toArray());
+                                        result = $taskResult1;
+
+                                        $tcs.setResult(result.toArray());
                                         return;
                                     }
                                     default: {
@@ -16081,6 +16082,7 @@ Bridge.$N1391Result =                 r;
                                         result = new (System.Collections.Generic.List$1(System.String))();
                                         result.add("xxx");
                                         result.add("yyy");
+
                                         $task1 = System.Threading.Tasks.Task.fromResult(result);
                                         $step = 1;
                                         $task1.continueWith($asyncBody);
@@ -16114,7 +16116,7 @@ Bridge.$N1391Result =                 r;
                     $returnValue, 
                     done, 
                     step, 
-                    errors, 
+                    items, 
                     $async_e, 
                     $async_e1, 
                     $asyncBody = Bridge.fn.bind(this, function () {
@@ -16139,8 +16141,8 @@ Bridge.$N1391Result =                 r;
                                     }
                                     case 2: {
                                         $taskResult1 = $task1.getAwaitedResult();
-                                        errors = $taskResult1;
-                                        if (errors.length !== 0) {
+                                        items = $taskResult1;
+                                        if (items.length !== 0) {
                                             step = 2;
                                             $step = 3;
                                             continue;
@@ -16169,6 +16171,7 @@ Bridge.$N1391Result =                 r;
                                     case 4: {
                                         
                                         Bridge.Test.NUnit.Assert.areEqual(20, step);
+
                                         done();
                                         return;
                                     }
@@ -16331,6 +16334,7 @@ Bridge.$N1391Result =                 r;
                                             $step = 4;
                                             continue;
                                         }
+
                                         $task2 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2481.bug6_m();
                                         $step = 3;
                                         $task2.continueWith($asyncBody);
@@ -16365,6 +16369,7 @@ Bridge.$N1391Result =                 r;
                                     }
                                     case 5: {
                                         
+
                                         $tcs.setResult("");
                                         return;
                                     }

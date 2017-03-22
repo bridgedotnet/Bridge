@@ -11,8 +11,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     {
         public static async Task<string[]> TestAsync()
         {
-            var errors = await ValidateAsync();
-            return errors.ToArray();
+            var result = await ValidateAsync();
+
+            return result.ToArray();
         }
 
         public static async Task<List<string>> ValidateAsync()
@@ -20,6 +21,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             var result = new List<string>();
             result.Add("xxx");
             result.Add("yyy");
+
             return await Task.FromResult(result);
         }
 
@@ -33,8 +35,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             {
                 step = 1;
 
-                var errors = await TestAsync();
-                if (errors.Length != 0)
+                var items = await TestAsync();
+                if (items.Length != 0)
                 {
                     step = 2;
                     return;
@@ -48,6 +50,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
 
             Assert.AreEqual(20, step);
+
             done();
         }
     }

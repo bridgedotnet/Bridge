@@ -30,12 +30,14 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 {
                     return "1" + s;
                 }
+
                 string z = await bug6_m();
                 if (z != "")
                 {
                     return "2" + z;
                 }
             }
+
             return "";
         }
 

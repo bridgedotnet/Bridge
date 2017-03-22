@@ -10120,7 +10120,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testReturnInAsync: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2462).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2462, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestReturnInAsync()",
-                    line: "26"
+                    line: "28"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2462.testReturnInAsync();
             }
@@ -10192,7 +10192,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testReturnInAsyncUsing: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2481).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2481, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestReturnInAsyncUsing()",
-                    line: "42"
+                    line: "44"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2481.testReturnInAsyncUsing();
             }
