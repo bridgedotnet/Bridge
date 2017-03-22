@@ -22,7 +22,7 @@ namespace Bridge.ClientTest.Exceptions
             var ex = new DivideByZeroException();
             Assert.True((object)ex is DivideByZeroException, "is DivideByZeroException");
             Assert.AreEqual(null, ex.InnerException, "InnerException");
-            Assert.AreEqual("Division by 0.", ex.Message);
+            Assert.AreEqual("Attempted to divide by zero.", ex.Message);
         }
 
         [Test]

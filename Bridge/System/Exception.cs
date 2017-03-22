@@ -31,6 +31,13 @@ namespace System
         }
 
         /// <summary>
+        /// Retrieves the lowest exception (inner most) for the given Exception.
+        /// This will traverse exceptions using the innerException property.
+        /// </summary>
+        /// <returns>The first exception thrown in a chain of exceptions. If the InnerException property of the current exception is a null reference</returns>
+        public virtual extern Exception GetBaseException();
+
+        /// <summary>
         /// Gets a string representation of the immediate frames on the call stack.
         /// </summary>
         public virtual extern string StackTrace

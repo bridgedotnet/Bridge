@@ -16006,6 +16006,67 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2458", {
+        statics: {
+            rethrow: function () {
+                try {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2458.divideBy0();
+                }
+                catch (ex) {
+                    ex = System.Exception.create(ex);
+                    throw new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2458.ThirdLevelException(ex);
+                }
+            },
+            divideBy0: function () {
+                try {
+                    var zero = 0;
+                    var ecks = (Bridge.Int.div(1, zero)) | 0;
+                }
+                catch (ex) {
+                    ex = System.Exception.create(ex);
+                    throw new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2458.SecondLevelException(ex);
+                }
+            },
+            testGetBaseException: function () {
+                try {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2458.rethrow();
+                }
+                catch (ex) {
+                    ex = System.Exception.create(ex);
+                    var list = new (System.Collections.Generic.List$1(System.Exception))();
+                    var current;
+                    current = ex;
+                    while (current != null) {
+                        list.add(current);
+                        current = current.InnerException;
+                    }
+
+                    Bridge.Test.NUnit.Assert.areEqual(3, list.Count);
+                    Bridge.Test.NUnit.Assert.true(Bridge.is(list.getItem(0), Bridge.ClientTest.Batch3.BridgeIssues.Bridge2458.ThirdLevelException));
+                    Bridge.Test.NUnit.Assert.true(Bridge.is(list.getItem(1), Bridge.ClientTest.Batch3.BridgeIssues.Bridge2458.SecondLevelException));
+                    Bridge.Test.NUnit.Assert.true(Bridge.is(list.getItem(2), System.DivideByZeroException));
+                    Bridge.Test.NUnit.Assert.true(Bridge.is(ex.getBaseException(), System.DivideByZeroException));
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2458.SecondLevelException", {
+        inherits: [System.Exception],
+        ctor: function (inner) {
+            this.$initialize();
+            System.Exception.ctor.call(this, null, inner);
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2458.ThirdLevelException", {
+        inherits: [System.Exception],
+        ctor: function (inner) {
+            this.$initialize();
+            System.Exception.ctor.call(this, null, inner);
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2462", {
         statics: {
             testAsync: function () {

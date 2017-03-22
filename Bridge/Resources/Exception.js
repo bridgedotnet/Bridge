@@ -35,8 +35,31 @@ Bridge.define("System.Exception", {
             this.data = new(System.Collections.Generic.Dictionary$2(System.Object, System.Object))();
         },
 
+        getBaseException: function() {
+            var inner = this.innerException;
+            var back = this;
+            
+            while (inner != null) {
+                back = inner;
+                inner = inner.innerException;
+            }
+            
+            return back;  
+        },
+
         toString: function () {
-            return this.Message;
+            var builder = Bridge.getTypeName(this);
+            if (this.Message != null) {
+                builder += ": " + this.Message + "\n";
+            } else {
+                builder += "\n";
+            }
+                
+            if (this.StackTrace != null) {
+                builder += this.StackTrace + "\n";
+            }
+                
+            return builder;
         },
 
         statics: {
@@ -301,7 +324,7 @@ Bridge.define("System.Exception", {
 
         ctor: function (message, innerException) {
             this.$initialize();
-            System.ArithmeticException.ctor.call(this, message || "Division by 0.", innerException);
+            System.ArithmeticException.ctor.call(this, message || "Attempted to divide by zero.", innerException);
         }
     });
 
@@ -444,6 +467,17 @@ Bridge.define("System.Exception", {
             if (unhandledExceptions.length > 0) {
                 throw new System.AggregateException(this.Message, unhandledExceptions);
             }
+        },
+
+        getBaseException: function() {
+            var back = this;
+            var backAsAggregate = this;
+            while (backAsAggregate != null && backAsAggregate.innerExceptions.getCount() === 1)
+            {
+                back = back.InnerException;
+                backAsAggregate = Bridge.as(back, System.AggregateException);
+            }
+            return back;  
         },
 
         flatten: function () {

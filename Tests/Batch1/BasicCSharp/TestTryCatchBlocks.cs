@@ -54,7 +54,7 @@ namespace Bridge.ClientTest.BasicCSharp
 
             Assert.Throws(TryCatchWithRethrowEx, new Func<object, bool>((error) =>
             {
-                return error.ToString() == "catch me";
+                return ((Exception)error).Message == "catch me";
             }), "D. Rethrow with parameter");
             Assert.True(IsDTry, "D. exception caught and re-thrown  - try section called");
             Assert.True(IsDCatch, "D. exception caught and re-thrown  - catch section called");

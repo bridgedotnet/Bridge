@@ -3264,7 +3264,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.apply($asm.$.Bridge.ClientTest.BasicCSharp.TestTryCatchBlocks, {
         f1: function (error) {
-            return Bridge.referenceEquals(error.toString(), "catch me");
+            return Bridge.referenceEquals(Bridge.cast(error, System.Exception).Message, "catch me");
         }
     });
 
@@ -3479,7 +3479,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.apply($asm.$.Bridge.ClientTest.BasicCSharp.TestTryCatchFinallyBlocks, {
         f1: function (error) {
-            return Bridge.referenceEquals(error.toString(), "catch me");
+            return Bridge.referenceEquals(Bridge.cast(error, System.Exception).Message, "catch me");
         }
     });
 
@@ -15199,7 +15199,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var ex = new System.DivideByZeroException();
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(ex, System.DivideByZeroException), "is DivideByZeroException");
             Bridge.Test.NUnit.Assert.areEqual$1(null, ex.InnerException, "InnerException");
-            Bridge.Test.NUnit.Assert.areEqual("Division by 0.", ex.Message);
+            Bridge.Test.NUnit.Assert.areEqual("Attempted to divide by zero.", ex.Message);
         },
         constructorWithMessageWorks: function () {
             var ex = new System.DivideByZeroException("The message");
