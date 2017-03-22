@@ -29,9 +29,13 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 dynamic xFrame = Window.Frames[Window.Frames.Length - 1];
                 object xArray = xFrame.Array;
 
-                var array = Script.Write<object>("new {0}(1,2,3)", xArray);
-                var isArray = BridgeHelper.isArray(array);
+                // Create an array in the iframe
+                var array = Script.Write<int[]>("new {0}(1,2,3)", xArray);
 
+                var contains = array.Contains(3);
+                Assert.True(contains, "Checks that an array [1, 2, 3] created in another frame contains 3");
+
+                var isArray = BridgeHelper.isArray(array);
                 Assert.True(isArray, "Checks that an array created in another frame returns true for Bridge.isArray(array)");
             }
             finally

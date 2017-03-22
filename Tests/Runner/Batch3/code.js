@@ -16016,9 +16016,13 @@ Bridge.$N1391Result =                 r;
                     var xFrame = window.frames[System.Array.index(((window.frames.length - 1) | 0), window.frames)];
                     var xArray = xFrame.Array;
 
+                    // Create an array in the iframe
                     var array = new Bridge.unbox(xArray)(1,2,3);
-                    var isArray = Bridge.isArray(array);
 
+                    var contains = System.Array.contains(array, 3, System.Int32);
+                    Bridge.Test.NUnit.Assert.true$1(contains, "Checks that an array [1, 2, 3] created in another frame contains 3");
+
+                    var isArray = Bridge.isArray(array);
                     Bridge.Test.NUnit.Assert.true$1(isArray, "Checks that an array created in another frame returns true for Bridge.isArray(array)");
                 }
                 finally {
