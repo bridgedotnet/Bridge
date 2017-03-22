@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="BridgeIssues\0100\N069.cs" />
     <Compile Include="BridgeIssues\0100\N122.cs" />
+    <Compile Include="BridgeIssues\0100\N156.cs" />
     <Compile Include="BridgeIssues\0300\N381.cs" />
     <Compile Include="BridgeIssues\0400\N447.cs" />
     <Compile Include="BridgeIssues\0400\N472.cs" />
@@ -518,6 +519,11 @@
     <Compile Include="BridgeIssues\2400\N2443.cs" />
     <Compile Include="BridgeIssues\2400\N2445.cs" />
     <Compile Include="BridgeIssues\2400\N2446.cs" />
+    <Compile Include="BridgeIssues\2400\N2454.cs" />
+    <Compile Include="BridgeIssues\2400\N2462.cs" />
+    <Compile Include="BridgeIssues\2400\N2467.cs" />
+    <Compile Include="BridgeIssues\2400\N2469.cs" />
+    <Compile Include="BridgeIssues\2400\N2481.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
     <Compile Include="Utilities\DecimalHelper.cs" />

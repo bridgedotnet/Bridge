@@ -633,6 +633,7 @@ namespace Bridge.Translator
                                         break;
 
                                     case 4:
+                                        enumStringName = member.Member.Name;
                                         break;
 
                                     case 5:

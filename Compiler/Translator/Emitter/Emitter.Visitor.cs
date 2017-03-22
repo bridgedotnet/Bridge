@@ -291,6 +291,16 @@ namespace Bridge.Translator
         {
             if (newLineNode.PrevSibling == null || newLineNode.PrevSibling is NewLineNode || newLineNode.PrevSibling.EndLocation.Line != newLineNode.StartLocation.Line)
             {
+                if (this.IsAsync && this.AsyncBlock != null)
+                {
+                    var step = this.AsyncBlock.Steps.LastOrDefault();
+
+                    if (step != null && this.ContainsOnlyOrEmpty(step.Output, ' '))
+                    {
+                        return;
+                    }
+                }
+
                 this.Output.Append(NEW_LINE);
                 this.IsNewLine = true;
             }

@@ -200,6 +200,7 @@
                     private const string DOTNAME = System.DOTNAME + "Array.";
 
                     public const string CREATE = DOTNAME + "create";
+                    public const string INDEX = DOTNAME + "index";
                     public const string INIT = DOTNAME + "init";
                     public const string MIN = DOTNAME + "min";
                     public const string TYPE = DOTNAME + "type";

@@ -58,13 +58,13 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             var objectList = new (System.Collections.Generic.List$1(System.Object))(System.Array.init([Bridge.box(1, System.Int32)], System.Object));
 
             // The code below SHOULD contain box calls for standart primitives (except custim long, ulong, decimal) and enums #2318
-            var unboxArray1 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectArray[0]), System.Int32));
-            var unboxArray2 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectArray[0]), System.Int32));
-            var unboxArray3 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectArray[0]), Test.BridgeIssues.N2318.N2318.JustStruct));
-            var unboxArray4 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectArray[0]), System.DateTime));
-            var unboxArray5 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectArray[0]), System.Int64));
-            var unboxArray6 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectArray[0]), System.UInt64));
-            var unboxArray7 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectArray[0]), System.Decimal));
+            var unboxArray1 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectArray[System.Array.index(0, objectArray)]), System.Int32));
+            var unboxArray2 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectArray[System.Array.index(0, objectArray)]), System.Int32));
+            var unboxArray3 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectArray[System.Array.index(0, objectArray)]), Test.BridgeIssues.N2318.N2318.JustStruct));
+            var unboxArray4 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectArray[System.Array.index(0, objectArray)]), System.DateTime));
+            var unboxArray5 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectArray[System.Array.index(0, objectArray)]), System.Int64));
+            var unboxArray6 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectArray[System.Array.index(0, objectArray)]), System.UInt64));
+            var unboxArray7 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectArray[System.Array.index(0, objectArray)]), System.Decimal));
 
             var unboxList1 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectList.getItem(0)), System.Int32));
             var unboxList2 = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectList.getItem(0)), System.Int32));

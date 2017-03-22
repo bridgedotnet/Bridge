@@ -15,7 +15,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
                 // Bridge boxes enum value for Console.WriteLine(Enum value)
                 // Expected Bridge.Console.log(...box);
-                Bridge.Console.log(System.Enum.toString(Test.BridgeIssues.N2420.Options.Format, Bridge.box(option, Test.BridgeIssues.N2420.Options.Format, $box_.Test.BridgeIssues.N2420.Options.Format.toString)));
+                Bridge.Console.log(System.Enum.toString(Test.BridgeIssues.N2420.Options.Format, option));
             }
         }
     });

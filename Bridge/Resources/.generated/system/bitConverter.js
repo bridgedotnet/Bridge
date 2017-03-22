@@ -161,10 +161,10 @@
                 var i = 0;
                 var index = startIndex;
                 for (i = 0; i < chArrayLength; i = (i + 3) | 0) {
-                    var b = value[Bridge.identity(index, (index = (index + 1) | 0))];
-                    chArray[i] = System.BitConverter.getHexValue(((Bridge.Int.div(b, 16)) | 0));
-                    chArray[((i + 1) | 0)] = System.BitConverter.getHexValue(b % 16);
-                    chArray[((i + 2) | 0)] = 45;
+                    var b = value[System.Array.index(Bridge.identity(index, (index = (index + 1) | 0)), value)];
+                    chArray[System.Array.index(i, chArray)] = System.BitConverter.getHexValue(((Bridge.Int.div(b, 16)) | 0));
+                    chArray[System.Array.index(((i + 1) | 0), chArray)] = System.BitConverter.getHexValue(b % 16);
+                    chArray[System.Array.index(((i + 2) | 0), chArray)] = 45;
                 }
 
                 // We don't need the last '-' character
@@ -187,7 +187,7 @@
             toBoolean: function (value, startIndex) {
                 System.BitConverter.checkArguments(value, startIndex, 1);
 
-                return (value[startIndex] === 0) ? false : true;
+                return (value[System.Array.index(startIndex, value)] === 0) ? false : true;
             },
             doubleToInt64Bits: function (value) {
                 var view = System.BitConverter.view(8);
@@ -218,11 +218,11 @@
 
                 if (System.BitConverter.isLittleEndian) {
                     for (var i = (count - 1) | 0; i >= 0; i = (i - 1) | 0) {
-                        r[i] = view.getUint8(Bridge.identity(startIndex, (startIndex = (startIndex + 1) | 0)));
+                        r[System.Array.index(i, r)] = view.getUint8(Bridge.identity(startIndex, (startIndex = (startIndex + 1) | 0)));
                     }
                 } else {
                     for (var i1 = 0; i1 < count; i1 = (i1 + 1) | 0) {
-                        r[i1] = view.getUint8(Bridge.identity(startIndex, (startIndex = (startIndex + 1) | 0)));
+                        r[System.Array.index(i1, r)] = view.getUint8(Bridge.identity(startIndex, (startIndex = (startIndex + 1) | 0)));
                     }
                 }
 
@@ -237,11 +237,11 @@
 
                 if (System.BitConverter.isLittleEndian) {
                     for (var i = (count - 1) | 0; i >= 0; i = (i - 1) | 0) {
-                        view.setUint8(i, value[Bridge.identity(startIndex, (startIndex = (startIndex + 1) | 0))]);
+                        view.setUint8(i, value[System.Array.index(Bridge.identity(startIndex, (startIndex = (startIndex + 1) | 0)), value)]);
                     }
                 } else {
                     for (var i1 = 0; i1 < count; i1 = (i1 + 1) | 0) {
-                        view.setUint8(i1, value[Bridge.identity(startIndex, (startIndex = (startIndex + 1) | 0))]);
+                        view.setUint8(i1, value[System.Array.index(Bridge.identity(startIndex, (startIndex = (startIndex + 1) | 0)), value)]);
                     }
                 }
             },

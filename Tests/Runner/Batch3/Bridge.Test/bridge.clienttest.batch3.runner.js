@@ -251,6 +251,9 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#1536 - TestEventNameConflict", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1536.testEventNameConflict);
             QUnit.test("#1536 - TestPropertyNameConflict", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1536.testPropertyNameConflict);
             QUnit.test("#1538 - TestOutParameterInIndexer", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1538.testOutParameterInIndexer);
+            QUnit.test("#156 - TestArrayIndexOutOfRangeException", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge156.testArrayIndexOutOfRangeException);
+            QUnit.test("#156 - Test1DArrayIndexOutOfRangeExceptionIndexAsVariable", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge156.test1DArrayIndexOutOfRangeExceptionIndexAsVariable);
+            QUnit.test("#156 - Test2DArrayIndexOutOfRangeExceptionIndexAsVariable", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge156.test2DArrayIndexOutOfRangeExceptionIndexAsVariable);
             QUnit.test("#1566 - TestMathLog10", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1566.testMathLog10);
             QUnit.test("#1566 - TestMathLogWithBase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1566.testMathLogWithBase);
             QUnit.test("#1566 - TestMathLog", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1566.testMathLog);
@@ -491,6 +494,11 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#2443 - TestNaNCompareForFloat", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2443.testNaNCompareForFloat);
             QUnit.test("#2445 - TestEmptyForLoop", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2445.testEmptyForLoop);
             QUnit.test("#2446 - TestDoubleMinValue", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2446.testDoubleMinValue);
+            QUnit.test("#2454 - TestForEachClone", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2454.testForEachClone);
+            QUnit.test("#2462 - TestReturnInAsync", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2462.testReturnInAsync);
+            QUnit.test("#2467 - TestPropertyInitializerInStruct", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2467.testPropertyInitializerInStruct);
+            QUnit.test("#2469 - TestLambdaLiftingWithStaticGenericMember", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2469.testLambdaLiftingWithStaticGenericMember);
+            QUnit.test("#2481 - TestReturnInAsyncUsing", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2481.testReturnInAsyncUsing);
             QUnit.test("#381 - TestUseCase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge381.testUseCase);
             QUnit.test("#447 - CheckInlineExpression", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.checkInlineExpression);
             QUnit.test("#447 - CheckInlineCalls", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.checkInlineCalls);
@@ -4982,6 +4990,44 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge1538",
                     file: "Batch3\\BridgeIssues\\1500\\N1538.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge156", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge156)],
+        statics: {
+            testArrayIndexOutOfRangeException: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge156).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge156, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestArrayIndexOutOfRangeException()",
+                    line: "13"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge156.testArrayIndexOutOfRangeException();
+            },
+            test1DArrayIndexOutOfRangeExceptionIndexAsVariable: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge156).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge156, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "Test1DArrayIndexOutOfRangeExceptionIndexAsVariable()",
+                    line: "61"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge156.test1DArrayIndexOutOfRangeExceptionIndexAsVariable();
+            },
+            test2DArrayIndexOutOfRangeExceptionIndexAsVariable: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge156).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge156, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "Test2DArrayIndexOutOfRangeExceptionIndexAsVariable()",
+                    line: "82"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge156.test2DArrayIndexOutOfRangeExceptionIndexAsVariable();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
+                    project: "Batch3",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge156",
+                    file: "Batch3\\BridgeIssues\\0100\\N156.cs"
                 } );
             }
             return this.context;
@@ -10038,6 +10084,126 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2446",
                     file: "Batch3\\BridgeIssues\\2400\\N2446.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2454", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2454)],
+        statics: {
+            testForEachClone: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2454).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2454, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestForEachClone()",
+                    line: "44"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2454.testForEachClone();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
+                    project: "Batch3",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2454",
+                    file: "Batch3\\BridgeIssues\\2400\\N2454.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2462", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2462)],
+        statics: {
+            testReturnInAsync: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2462).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2462, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestReturnInAsync()",
+                    line: "28"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2462.testReturnInAsync();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
+                    project: "Batch3",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2462",
+                    file: "Batch3\\BridgeIssues\\2400\\N2462.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2467", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2467)],
+        statics: {
+            testPropertyInitializerInStruct: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2467).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2467, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestPropertyInitializerInStruct()",
+                    line: "22"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2467.testPropertyInitializerInStruct();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
+                    project: "Batch3",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2467",
+                    file: "Batch3\\BridgeIssues\\2400\\N2467.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2469", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469)],
+        statics: {
+            testLambdaLiftingWithStaticGenericMember: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2469, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestLambdaLiftingWithStaticGenericMember()",
+                    line: "31"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469.testLambdaLiftingWithStaticGenericMember();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
+                    project: "Batch3",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2469",
+                    file: "Batch3\\BridgeIssues\\2400\\N2469.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2481", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2481)],
+        statics: {
+            testReturnInAsyncUsing: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2481).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2481, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestReturnInAsyncUsing()",
+                    line: "44"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2481.testReturnInAsyncUsing();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
+                    project: "Batch3",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2481",
+                    file: "Batch3\\BridgeIssues\\2400\\N2481.cs"
                 } );
             }
             return this.context;
