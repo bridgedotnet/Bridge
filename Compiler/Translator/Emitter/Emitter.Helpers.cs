@@ -765,5 +765,23 @@ namespace Bridge.Translator
             this.Comma = false;
             this.CurrentDependencies = new List<IPluginDependency>();
         }
+
+        public virtual bool ContainsOnlyOrEmpty(StringBuilder sb, params char[] c)
+        {
+            if (sb == null || sb.Length == 0)
+            {
+                return true;
+            }
+
+            for (int i = 0; i < sb.Length; i++)
+            {
+                if (!c.Contains(sb[i]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }

@@ -295,7 +295,7 @@ namespace Bridge.Translator
                 {
                     var step = this.AsyncBlock.Steps.LastOrDefault();
 
-                    if (step != null && step.Output.ToString().Trim().Length == 0)
+                    if (step != null && this.ContainsOnlyOrEmpty(step.Output, ' '))
                     {
                         return;
                     }
