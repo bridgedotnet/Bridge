@@ -130,6 +130,82 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         }
     });
 
+    Bridge.define("TypeScript.Issues.N2474");
+
+    Bridge.define("TypeScript.Issues.N2474.Enum", {
+        $kind: "enum",
+        statics: {
+            Value: 1
+        }
+    });
+
+    Bridge.define("TypeScript.Issues.N2474.NameEnum", {
+        $kind: "enum",
+        statics: {
+            value: 3
+        }
+    });
+
+    Bridge.define("TypeScript.Issues.N2474.NameLowerCase", {
+        $kind: "enum",
+        statics: {
+            value: 4
+        }
+    });
+
+    Bridge.define("TypeScript.Issues.N2474.NamePreserveCase", {
+        $kind: "enum",
+        statics: {
+            Value: 5
+        }
+    });
+
+    Bridge.define("TypeScript.Issues.N2474.NameUpperCase", {
+        $kind: "enum",
+        statics: {
+            VALUE: 6
+        }
+    });
+
+    Bridge.define("TypeScript.Issues.N2474.StringName", {
+        $kind: "enum",
+        statics: {
+            value: "value"
+        },
+        $utype: System.String
+    });
+
+    Bridge.define("TypeScript.Issues.N2474.StringNameLowerCase", {
+        $kind: "enum",
+        statics: {
+            value: "value"
+        },
+        $utype: System.String
+    });
+
+    Bridge.define("TypeScript.Issues.N2474.StringNamePreserveCase", {
+        $kind: "enum",
+        statics: {
+            Value: "Value"
+        },
+        $utype: System.String
+    });
+
+    Bridge.define("TypeScript.Issues.N2474.StringNameUpperCase", {
+        $kind: "enum",
+        statics: {
+            VALUE: "VALUE"
+        },
+        $utype: System.String
+    });
+
+    Bridge.define("TypeScript.Issues.N2474.ValueEnum", {
+        $kind: "enum",
+        statics: {
+            Value: 2
+        }
+    });
+
     Bridge.define("TypeScript.Issues.N1640.GamePlay", {
         inherits: [TypeScript.Issues.N1640.IGamePlay],
         config: {

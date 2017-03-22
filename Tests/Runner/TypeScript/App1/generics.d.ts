@@ -1,6 +1,18 @@
 /// <reference path="./bridge.d.ts" />
 
 declare module Generics {
+    export interface GenericNamedEntity$1<T> {
+        instance: T;
+        getSomething(input: T): T;
+    }
+    export interface GenericNamedEntity$1Func extends Function {
+        <T>($T: Bridge.TypeRef<T>): {
+            prototype: GenericNamedEntity$1<T>;
+            new (instance: T): GenericNamedEntity$1<T>;
+        }
+    }
+    var GenericNamedEntity$1: GenericNamedEntity$1Func;
+
     export interface GenericINamedEntity$1<T> {
         instance: T;
         getSomething(input: T): T;
@@ -22,18 +34,6 @@ declare module Generics {
     }
     var NamedEntity: NamedEntityFunc;
 
-    export interface GenericNamedEntity$1<T> {
-        instance: T;
-        getSomething(input: T): T;
-    }
-    export interface GenericNamedEntity$1Func extends Function {
-        <T>($T: Bridge.TypeRef<T>): {
-            prototype: GenericNamedEntity$1<T>;
-            new (instance: T): GenericNamedEntity$1<T>;
-        }
-    }
-    var GenericNamedEntity$1: GenericNamedEntity$1Func;
-
     export interface SimpleGeneric$1<T> {
         instance: T;
         getSomething(input: T): T;
@@ -46,25 +46,26 @@ declare module Generics {
     }
     var SimpleGeneric$1: SimpleGeneric$1Func;
 
-    export interface SimpleDoubleGeneric$2<T,K> {
-        instanceT: T;
-        instanceK: K;
+    export interface GenericStruct$1<T> {
+        instance: T;
         getSomething(input: T): T;
-        getSomethingMore(input: K): K;
     }
-    export interface SimpleDoubleGeneric$2Func extends Function {
-        <T, K>($T: Bridge.TypeRef<T>, $K: Bridge.TypeRef<K>): {
-            prototype: SimpleDoubleGeneric$2<T,K>;
-            new (): SimpleDoubleGeneric$2<T,K>;
-            ctor: {
-                new (): SimpleDoubleGeneric$2<T,K>
-            };
-            $ctor1: {
-                new (instanceT: T, instanceK: K): SimpleDoubleGeneric$2<T,K>
-            };
+    export interface GenericStruct$1Func extends Function {
+        <T>($T: Bridge.TypeRef<T>): {
+            prototype: GenericStruct$1<T>;
+            new (instance: T): GenericStruct$1<T>;
         }
     }
-    var SimpleDoubleGeneric$2: SimpleDoubleGeneric$2Func;
+    var GenericStruct$1: GenericStruct$1Func;
+
+    export interface NewClass {
+        data: number;
+    }
+    export interface NewClassFunc extends Function {
+        prototype: NewClass;
+        new (): NewClass;
+    }
+    var NewClass: NewClassFunc;
 
     export interface implementation {
     }
@@ -127,25 +128,24 @@ declare module Generics {
     }
     var GenericClass$1: GenericClass$1Func;
 
-    export interface NewClass {
-        data: number;
-    }
-    export interface NewClassFunc extends Function {
-        prototype: NewClass;
-        new (): NewClass;
-    }
-    var NewClass: NewClassFunc;
-
-    export interface GenericStruct$1<T> {
-        instance: T;
+    export interface SimpleDoubleGeneric$2<T,K> {
+        instanceT: T;
+        instanceK: K;
         getSomething(input: T): T;
+        getSomethingMore(input: K): K;
     }
-    export interface GenericStruct$1Func extends Function {
-        <T>($T: Bridge.TypeRef<T>): {
-            prototype: GenericStruct$1<T>;
-            new (instance: T): GenericStruct$1<T>;
+    export interface SimpleDoubleGeneric$2Func extends Function {
+        <T, K>($T: Bridge.TypeRef<T>, $K: Bridge.TypeRef<K>): {
+            prototype: SimpleDoubleGeneric$2<T,K>;
+            new (): SimpleDoubleGeneric$2<T,K>;
+            ctor: {
+                new (): SimpleDoubleGeneric$2<T,K>
+            };
+            $ctor1: {
+                new (instanceT: T, instanceK: K): SimpleDoubleGeneric$2<T,K>
+            };
         }
     }
-    var GenericStruct$1: GenericStruct$1Func;
+    var SimpleDoubleGeneric$2: SimpleDoubleGeneric$2Func;
 
 }
