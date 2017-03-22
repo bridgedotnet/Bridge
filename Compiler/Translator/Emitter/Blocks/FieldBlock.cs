@@ -414,7 +414,7 @@ namespace Bridge.Translator
                                 break;
                         }
                     }
-                    else if (mode < 3)
+                    else if (mode < 3 && mode != 1)
                     {
                         mname = member.Name;
                     }
