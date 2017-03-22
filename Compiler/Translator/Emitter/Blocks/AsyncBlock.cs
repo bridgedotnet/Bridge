@@ -485,6 +485,7 @@ namespace Bridge.Translator
                     this.WriteOpenParentheses(true);
                     this.Write(string.Format(JS.Vars.ASYNC_STEP + " >= {0} && " + JS.Vars.ASYNC_STEP + " <= {1}", info.StartStep, info.EndStep));
                     this.WriteCloseParentheses(true);
+                    this.WriteSpace();
                     this.BeginBlock();
                     var firstClause = true;
 
@@ -565,10 +566,11 @@ namespace Bridge.Translator
                     this.WriteOpenParentheses();
                     this.Write(string.Format(JS.Vars.ASYNC_STEP + " >= {0} && " + JS.Vars.ASYNC_STEP + " <= {1}", info.StartStep, info.CatchBlocks.Count > 0 ? info.CatchBlocks.Last().Item4 : info.EndStep));
                     this.WriteCloseParentheses();
+                    this.WriteSpace();
                     this.BeginBlock();
 
                     //this.Write(Variables.E + " = " + Variables.ASYNC_E + ";");
-                    this.WriteNewLine();
+                    //this.WriteNewLine();
                     this.Write(JS.Vars.ASYNC_STEP + " = " + info.FinallyStep + ";");
 
                     this.WriteNewLine();

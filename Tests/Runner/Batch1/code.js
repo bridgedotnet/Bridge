@@ -2459,7 +2459,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                                     continue;
                                 }
                                 case 8: {
-                                    
                                     return cost;
                                 }
                                 default: {
@@ -2496,7 +2495,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                                     continue;
                                 }
                                 case 3: {
-                                    
                                     return j;
                                 }
                                 default: {
@@ -12886,13 +12884,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                             }
                         } catch($async_e1) {
                             $async_e = System.Exception.create($async_e1);
-                            if ( $step >= 1 && $step <= 1 ){
+                            if ( $step >= 1 && $step <= 1 ) {
                                 $step = 2;
                                 $asyncBody();
                                 return;
                             }
-                            if ($step >= 1 && $step <= 3){
-
+                            if ($step >= 1 && $step <= 3) {
                                 $step = 4;
                                 $asyncBody();
                                 return;
@@ -14468,7 +14465,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                                     continue;
                                 }
                                 case 5: {
-                                    
                                     done();
                                     return;
                                 }
@@ -33190,7 +33186,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                             }
                         } catch($async_e1) {
                             $async_e = System.Exception.create($async_e1);
-                            if ( $step >= 1 && $step <= 2 ){
+                            if ( $step >= 1 && $step <= 2 ) {
                                 ex2 = $async_e;
                                 $step = 3;
                                 $asyncBody();
@@ -33891,7 +33887,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                                 }
                                 case 2: {
                                     $taskResult1 = $task1.getAwaitedResult();
-                                    
                                     Bridge.Test.NUnit.Assert.fail$1("Await should throw");
                                     $step = 5;
                                     continue;
@@ -33910,7 +33905,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                                     continue;
                                 }
                                 case 5: {
-                                    
                                     Bridge.Test.NUnit.Assert.true$1(continuationRun, "Continuation should have been run after promise was rejected.");
 
                                     completeAsync();
@@ -33923,7 +33917,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         }
                     } catch($async_e1) {
                         $async_e = System.Exception.create($async_e1);
-                        if ( $step >= 1 && $step <= 2 ){
+                        if ( $step >= 1 && $step <= 2 ) {
                             if (Bridge.is($async_e, Bridge.PromiseException)) {
                                 ex = $async_e;
                                 $step = 3;
@@ -34363,7 +34357,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                                     }
                                     case 2: {
                                         $taskResult1 = $task1.getAwaitedResult();
-                                        
                                         Bridge.Test.NUnit.Assert.fail$1("Await should throw");
                                         $step = 4;
                                         continue;
@@ -34384,7 +34377,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                             }
                         } catch($async_e1) {
                             $async_e = System.Exception.create($async_e1);
-                            if ( $step >= 1 && $step <= 2 ){
+                            if ( $step >= 1 && $step <= 2 ) {
                                 if (Bridge.is($async_e, System.Threading.Tasks.TaskCanceledException)) {
                                     ex = $async_e;
                                     $step = 3;
@@ -35588,7 +35581,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                                 }
                                 case 1: {
                                     $task1.getAwaitedResult();
-                                    
                                     count = Bridge.ClientTest.Threading.TimerTests.StaticCounter;
                                     timer.dispose();
 
@@ -35605,7 +35597,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                                 }
                                 case 2: {
                                     $task2.getAwaitedResult();
-                                    
                                     Bridge.Test.NUnit.Assert.areEqual$1(count, Bridge.ClientTest.Threading.TimerTests.StaticCounter, "Timer disposed - no more ticks");
 
                                     done();
@@ -35646,7 +35637,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                                 }
                                 case 1: {
                                     $task1.getAwaitedResult();
-                                    
                                     count = ts.Counter;
                                     timer.dispose();
 
@@ -35663,7 +35653,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                                 }
                                 case 2: {
                                     $task2.getAwaitedResult();
-                                    
                                     Bridge.Test.NUnit.Assert.areEqual$1(count, ts.Counter, "Timer disposed - no more ticks");
 
                                     done();
@@ -35757,7 +35746,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                             }
                             case 1: {
                                 $task1.getAwaitedResult();
-                                
                                 count = Bridge.ClientTest.Threading.TimerTests.StaticCounter;
                                 timer.change(-1, 0);
 
@@ -35771,7 +35759,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                             }
                             case 2: {
                                 $task2.getAwaitedResult();
-                                
                                 Bridge.Test.NUnit.Assert.areEqual$1(count, Bridge.ClientTest.Threading.TimerTests.StaticCounter, "Timer disposed");
 
                                 timer.dispose();
@@ -35824,7 +35811,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                             }
                             case 1: {
                                 $task1.getAwaitedResult();
-                                
                                 count = ts.Counter;
                                 timer.change(-1, 0);
 
@@ -35838,7 +35824,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                             }
                             case 2: {
                                 $task2.getAwaitedResult();
-                                
                                 timer.dispose();
 
                                 Bridge.Test.NUnit.Assert.areEqual$1(count, ts.Counter, "Timer disposed");

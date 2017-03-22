@@ -1853,7 +1853,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                         continue;
                                     }
                                     case 4: {
-                                        
                                         Bridge.Test.NUnit.Assert.true(parent.isDisposed);
 
                                         parent.isDisposed = false;
@@ -1891,7 +1890,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                         continue;
                                     }
                                     case 8: {
-                                        
                                         Bridge.Test.NUnit.Assert.true(parent.isDisposed);
 
                                         parent.isDisposed = false;
@@ -1951,7 +1949,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                         continue;
                                     }
                                     case 15: {
-                                        
                                         Bridge.Test.NUnit.Assert.true(parent.isDisposed);
                                         Bridge.Test.NUnit.Assert.true(parent2.isDisposed);
 
@@ -1965,26 +1962,22 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                             }
                         } catch($async_e1) {
                             $async_e = System.Exception.create($async_e1);
-                            if ($step >= 1 && $step <= 2){
-
+                            if ($step >= 1 && $step <= 2) {
                                 $step = 3;
                                 $asyncBody();
                                 return;
                             }
-                            if ($step >= 5 && $step <= 6){
-
+                            if ($step >= 5 && $step <= 6) {
                                 $step = 7;
                                 $asyncBody();
                                 return;
                             }
-                            if ($step >= 10 && $step <= 11){
-
+                            if ($step >= 10 && $step <= 11) {
                                 $step = 12;
                                 $asyncBody();
                                 return;
                             }
-                            if ($step >= 9 && $step <= 13){
-
+                            if ($step >= 9 && $step <= 13) {
                                 $step = 14;
                                 $asyncBody();
                                 return;
@@ -2062,7 +2055,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                                         continue;
                                     }
                                     case 7: {
-                                        
                                         Bridge.Test.NUnit.Assert.true(parent.isDisposed);
 
                                         done();
@@ -2075,13 +2067,12 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                             }
                         } catch($async_e1) {
                             $async_e = System.Exception.create($async_e1);
-                            if ($step >= 2 && $step <= 3){
-
+                            if ($step >= 2 && $step <= 3) {
                                 $step = 4;
                                 $asyncBody();
                                 return;
                             }
-                            if ( $step >= 1 && $step <= 5 ){
+                            if ( $step >= 1 && $step <= 5 ) {
                                 if (Bridge.is($async_e, System.InvalidOperationException)) {
                                     e = $async_e;
                                     $step = 6;
@@ -10398,7 +10389,6 @@ Bridge.$N1391Result =                 r;
                             }
                             case 1: {
                                 $task1.getAwaitedResult();
-                                
                                 Bridge.Test.NUnit.Assert.true(task.isCompleted());
 
                                 done();
@@ -12733,7 +12723,6 @@ Bridge.$N1391Result =                 r;
                                     }
                                     case 2: {
                                         $task1.getAwaitedResult();
-                                        
                                         //raise exception
                                         j = 1;
                                         j = (Bridge.Int.div(j, 0)) | 0;
@@ -12776,13 +12765,12 @@ Bridge.$N1391Result =                 r;
                             }
                         } catch($async_e1) {
                             $async_e = System.Exception.create($async_e1);
-                            if ( $step >= 1 && $step <= 2 ){
+                            if ( $step >= 1 && $step <= 2 ) {
                                 $step = 3;
                                 $asyncBody();
                                 return;
                             }
-                            if ($step >= 1 && $step <= 3){
-
+                            if ($step >= 1 && $step <= 3) {
                                 $step = 4;
                                 $asyncBody();
                                 return;
@@ -15875,7 +15863,6 @@ Bridge.$N1391Result =                 r;
                                 }
                                 case 3: {
                                     $task1.getAwaitedResult();
-                                    
                                     if (((i = (i + 1) | 0)) > 10) {
                                         $step = 5;
                                         continue;
@@ -15888,7 +15875,6 @@ Bridge.$N1391Result =                 r;
                                     continue;
                                 }
                                 case 5: {
-                                    
                                     Bridge.Test.NUnit.Assert.areEqual(11, i);
 
                                     done();
@@ -16169,7 +16155,6 @@ Bridge.$N1391Result =                 r;
                                         continue;
                                     }
                                     case 4: {
-                                        
                                         Bridge.Test.NUnit.Assert.areEqual(20, step);
 
                                         done();
@@ -16182,8 +16167,7 @@ Bridge.$N1391Result =                 r;
                             }
                         } catch($async_e1) {
                             $async_e = System.Exception.create($async_e1);
-                            if ($step >= 1 && $step <= 2){
-
+                            if ($step >= 1 && $step <= 2) {
                                 $step = 3;
                                 $asyncBody();
                                 return;
@@ -16368,8 +16352,6 @@ Bridge.$N1391Result =                 r;
                                         continue;
                                     }
                                     case 5: {
-                                        
-
                                         $tcs.setResult("");
                                         return;
                                     }
@@ -16381,8 +16363,7 @@ Bridge.$N1391Result =                 r;
                             }
                         } catch($async_e1) {
                             $async_e = System.Exception.create($async_e1);
-                            if ($step >= 1 && $step <= 3){
-
+                            if ($step >= 1 && $step <= 3) {
                                 $step = 4;
                                 $asyncBody();
                                 return;
@@ -17286,7 +17267,6 @@ Bridge.$N1391Result =                 r;
                                         continue;
                                     }
                                     case 6: {
-                                        
                                         Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.count = 0;
                                         i = 0;
                                         $task3 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge508.initPage();
@@ -17317,7 +17297,6 @@ Bridge.$N1391Result =                 r;
                                         continue;
                                     }
                                     case 11: {
-                                        
                                         $tcs.setResult(result);
                                         return;
                                     }
@@ -21688,7 +21667,7 @@ Bridge.$N1391Result =                 r;
                             }
                         } catch($async_e1) {
                             $async_e = System.Exception.create($async_e1);
-                            if ( $step >= 1 && $step <= 2 ){
+                            if ( $step >= 1 && $step <= 2 ) {
                                 exception = $async_e;
                                 $step = 3;
                                 $asyncBody();
@@ -22315,7 +22294,6 @@ Bridge.$N1391Result =                 r;
                                 }
                                 case 1: {
                                     $task1.getAwaitedResult();
-                                    
                                     $t = Bridge.getEnumerator(myvar);
                                     try {
                                         while ($t.moveNext()) {
@@ -22336,7 +22314,6 @@ Bridge.$N1391Result =                 r;
                                 }
                                 case 2: {
                                     $task2.getAwaitedResult();
-                                    
                                     Bridge.Test.NUnit.Assert.areEqual(3, sum);
 
                                     asyncComplete();
@@ -22377,7 +22354,6 @@ Bridge.$N1391Result =                 r;
                                 }
                                 case 1: {
                                     $task1.getAwaitedResult();
-                                    
                                     $t = Bridge.getEnumerator(myvar);
                                     try {
                                         while ($t.moveNext()) {
@@ -22400,7 +22376,6 @@ Bridge.$N1391Result =                 r;
                                 }
                                 case 2: {
                                     $task2.getAwaitedResult();
-                                    
                                     Bridge.Test.NUnit.Assert.areEqual(5, sum);
 
                                     asyncComplete();
@@ -22705,7 +22680,6 @@ Bridge.$N1391Result =                 r;
                                         continue;
                                     }
                                     case 4: {
-                                        
                                         Bridge.Test.NUnit.Assert.true(result);
 
                                         done();
@@ -22718,8 +22692,7 @@ Bridge.$N1391Result =                 r;
                             }
                         } catch($async_e1) {
                             $async_e = System.Exception.create($async_e1);
-                            if ($step >= 1 && $step <= 2){
-
+                            if ($step >= 1 && $step <= 2) {
                                 $step = 3;
                                 $asyncBody();
                                 return;
@@ -22773,7 +22746,6 @@ Bridge.$N1391Result =                 r;
                                         continue;
                                     }
                                     case 4: {
-                                        
                                         done();
                                         return;
                                     }
@@ -22784,7 +22756,7 @@ Bridge.$N1391Result =                 r;
                             }
                         } catch($async_e1) {
                             $async_e = System.Exception.create($async_e1);
-                            if ( $step >= 1 && $step <= 2 ){
+                            if ( $step >= 1 && $step <= 2 ) {
                                 e = $async_e;
                                 $step = 3;
                                 $asyncBody();
@@ -22847,7 +22819,7 @@ Bridge.$N1391Result =                 r;
                             }
                         } catch($async_e1) {
                             $async_e = System.Exception.create($async_e1);
-                            if ( $step >= 1 && $step <= 2 ){
+                            if ( $step >= 1 && $step <= 2 ) {
                                 $step = 3;
                                 $asyncBody();
                                 return;
@@ -22928,7 +22900,6 @@ Bridge.$N1391Result =                 r;
                                     }
                                     case 1: {
                                         $task1.getAwaitedResult();
-                                        
                                         if (res) {
                                             $step = 2;
                                             continue;
@@ -22948,7 +22919,6 @@ Bridge.$N1391Result =                 r;
                                         continue;
                                     }
                                     case 4: {
-                                        
                                         $task3 = System.Threading.Tasks.Task.delay(1);
                                         $step = 5;
                                         $task3.continueWith($asyncBody);
@@ -23012,7 +22982,6 @@ Bridge.$N1391Result =                 r;
                                         continue;
                                     }
                                     case 4: {
-                                        
                                         done();
                                         return;
                                     }
@@ -23023,7 +22992,7 @@ Bridge.$N1391Result =                 r;
                             }
                         } catch($async_e1) {
                             $async_e = System.Exception.create($async_e1);
-                            if ( $step >= 1 && $step <= 2 ){
+                            if ( $step >= 1 && $step <= 2 ) {
                                 e = $async_e;
                                 $step = 3;
                                 $asyncBody();
