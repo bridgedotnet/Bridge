@@ -24,6 +24,6 @@
     Bridge.define("TestIssue2140.EnumValue", {
         $kind: "enum",
         statics: {
-            value1: 1
+            Value1: 1
         }
     });

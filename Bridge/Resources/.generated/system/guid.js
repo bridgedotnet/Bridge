@@ -38,8 +38,8 @@
 
                 System.Guid.rnd.nextBytes(a);
 
-                a[7] = (a[7] & 15 | 64) & 255;
-                a[8] = (a[8] & 191 | 128) & 255;
+                a[System.Array.index(7, a)] = (a[System.Array.index(7, a)] & 15 | 64) & 255;
+                a[System.Array.index(8, a)] = (a[System.Array.index(8, a)] & 191 | 128) & 255;
 
                 return new System.Guid.$ctor1(a);
             },
@@ -92,17 +92,17 @@
                 throw new System.ArgumentException(System.String.format(System.Guid.error1, Bridge.box(16, System.Int32)));
             }
 
-            this._a = (b[3] << 24) | (b[2] << 16) | (b[1] << 8) | b[0];
-            this._b = Bridge.Int.sxs(((b[5] << 8) | b[4]) & 65535);
-            this._c = Bridge.Int.sxs(((b[7] << 8) | b[6]) & 65535);
-            this._d = b[8];
-            this._e = b[9];
-            this._f = b[10];
-            this._g = b[11];
-            this._h = b[12];
-            this._i = b[13];
-            this._j = b[14];
-            this._k = b[15];
+            this._a = (b[System.Array.index(3, b)] << 24) | (b[System.Array.index(2, b)] << 16) | (b[System.Array.index(1, b)] << 8) | b[System.Array.index(0, b)];
+            this._b = Bridge.Int.sxs(((b[System.Array.index(5, b)] << 8) | b[System.Array.index(4, b)]) & 65535);
+            this._c = Bridge.Int.sxs(((b[System.Array.index(7, b)] << 8) | b[System.Array.index(6, b)]) & 65535);
+            this._d = b[System.Array.index(8, b)];
+            this._e = b[System.Array.index(9, b)];
+            this._f = b[System.Array.index(10, b)];
+            this._g = b[System.Array.index(11, b)];
+            this._h = b[System.Array.index(12, b)];
+            this._i = b[System.Array.index(13, b)];
+            this._j = b[System.Array.index(14, b)];
+            this._k = b[System.Array.index(15, b)];
         },
         $ctor5: function (a, b, c, d, e, f, g, h, i, j, k) {
             this.$initialize();
@@ -131,14 +131,14 @@
             this._a = a;
             this._b = b;
             this._c = c;
-            this._d = d[0];
-            this._e = d[1];
-            this._f = d[2];
-            this._g = d[3];
-            this._h = d[4];
-            this._i = d[5];
-            this._j = d[6];
-            this._k = d[7];
+            this._d = d[System.Array.index(0, d)];
+            this._e = d[System.Array.index(1, d)];
+            this._f = d[System.Array.index(2, d)];
+            this._g = d[System.Array.index(3, d)];
+            this._h = d[System.Array.index(4, d)];
+            this._i = d[System.Array.index(5, d)];
+            this._j = d[System.Array.index(6, d)];
+            this._k = d[System.Array.index(7, d)];
         },
         $ctor2: function (a, b, c, d, e, f, g, h, i, j, k) {
             this.$initialize();
@@ -189,22 +189,22 @@
         toByteArray: function () {
             var g = System.Array.init(16, 0, System.Byte);
 
-            g[0] = this._a & 255;
-            g[1] = (this._a >> 8) & 255;
-            g[2] = (this._a >> 16) & 255;
-            g[3] = (this._a >> 24) & 255;
-            g[4] = this._b & 255;
-            g[5] = (this._b >> 8) & 255;
-            g[6] = this._c & 255;
-            g[7] = (this._c >> 8) & 255;
-            g[8] = this._d;
-            g[9] = this._e;
-            g[10] = this._f;
-            g[11] = this._g;
-            g[12] = this._h;
-            g[13] = this._i;
-            g[14] = this._j;
-            g[15] = this._k;
+            g[System.Array.index(0, g)] = this._a & 255;
+            g[System.Array.index(1, g)] = (this._a >> 8) & 255;
+            g[System.Array.index(2, g)] = (this._a >> 16) & 255;
+            g[System.Array.index(3, g)] = (this._a >> 24) & 255;
+            g[System.Array.index(4, g)] = this._b & 255;
+            g[System.Array.index(5, g)] = (this._b >> 8) & 255;
+            g[System.Array.index(6, g)] = this._c & 255;
+            g[System.Array.index(7, g)] = (this._c >> 8) & 255;
+            g[System.Array.index(8, g)] = this._d;
+            g[System.Array.index(9, g)] = this._e;
+            g[System.Array.index(10, g)] = this._f;
+            g[System.Array.index(11, g)] = this._g;
+            g[System.Array.index(12, g)] = this._h;
+            g[System.Array.index(13, g)] = this._i;
+            g[System.Array.index(14, g)] = this._j;
+            g[System.Array.index(15, g)] = this._k;
 
             return g;
         },
@@ -250,7 +250,7 @@
                 } else if (Bridge.referenceEquals(format, "B") || Bridge.referenceEquals(format, "P")) {
                     var b = Bridge.referenceEquals(format, "B") ? System.Array.init([123, 125], System.Char) : System.Array.init([40, 41], System.Char);
 
-                    if ((input.charCodeAt(0) === b[0]) && (input.charCodeAt(((input.length - 1) | 0)) === b[1])) {
+                    if ((input.charCodeAt(0) === b[System.Array.index(0, b)]) && (input.charCodeAt(((input.length - 1) | 0)) === b[System.Array.index(1, b)])) {
                         p = true;
                         input = input.substr(1, ((input.length - 2) | 0));
                     }
@@ -314,17 +314,17 @@
             this._b = Bridge.Int.sxs((System.UInt16.parse(s.substr(8, 4), 16)) & 65535);
             this._c = Bridge.Int.sxs((System.UInt16.parse(s.substr(12, 4), 16)) & 65535);
             for (var i = 8; i < 16; i = (i + 1) | 0) {
-                r[((i - 8) | 0)] = System.Byte.parse(s.substr(((i * 2) | 0), 2), 16);
+                r[System.Array.index(((i - 8) | 0), r)] = System.Byte.parse(s.substr(((i * 2) | 0), 2), 16);
             }
 
-            this._d = r[0];
-            this._e = r[1];
-            this._f = r[2];
-            this._g = r[3];
-            this._h = r[4];
-            this._i = r[5];
-            this._j = r[6];
-            this._k = r[7];
+            this._d = r[System.Array.index(0, r)];
+            this._e = r[System.Array.index(1, r)];
+            this._f = r[System.Array.index(2, r)];
+            this._g = r[System.Array.index(3, r)];
+            this._h = r[System.Array.index(4, r)];
+            this._i = r[System.Array.index(5, r)];
+            this._j = r[System.Array.index(6, r)];
+            this._k = r[System.Array.index(7, r)];
         },
         $clone: function (to) { return this; }
     });

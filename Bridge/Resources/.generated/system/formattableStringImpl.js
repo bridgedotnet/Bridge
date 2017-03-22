@@ -25,7 +25,7 @@
             this.args = args;
         },
         getArgument: function (index) {
-            return this.args[index];
+            return this.args[System.Array.index(index, this.args)];
         },
         getArguments: function () {
             return this.args;

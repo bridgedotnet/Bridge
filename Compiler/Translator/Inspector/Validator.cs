@@ -315,20 +315,21 @@ namespace Bridge.Translator
             return result;
         }
 
-        public virtual bool IsValueEnum(DefaultResolvedTypeDefinition type)
+        public virtual bool IsValueEnum(IType type)
         {
             return this.EnumEmitMode(type) == 2;
         }
 
-        public virtual bool IsNameEnum(DefaultResolvedTypeDefinition type)
+        public virtual bool IsNameEnum(IType type)
         {
             var enumEmitMode = this.EnumEmitMode(type);
             return enumEmitMode == 1 || enumEmitMode > 6;
         }
 
-        public virtual bool IsStringNameEnum(DefaultResolvedTypeDefinition type)
+        public virtual bool IsStringNameEnum(IType type)
         {
-            return this.EnumEmitMode(type) == 3;
+            var mode = this.EnumEmitMode(type);
+            return mode >= 3 && mode <=6;
         }
 
         public virtual bool HasAttribute(IEnumerable<CustomAttribute> attributes, string name)

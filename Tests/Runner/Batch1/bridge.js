@@ -4898,7 +4898,7 @@
             this.args = args;
         },
         getArgument: function (index) {
-            return this.args[index];
+            return this.args[System.Array.index(index, this.args)];
         },
         getArguments: function () {
             return this.args;
@@ -9935,7 +9935,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             }
 
             if (indices[0] < 0 || indices[0] >= (arr.$s ? arr.$s[0] : arr.length)) {
-                throw new System.ArgumentException("Index 0 out of range");
+                throw new System.IndexOutOfRangeException("Index 0 out of range");
             }
 
             var idx = indices[0],
@@ -9944,7 +9944,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             if (arr.$s) {
                 for (i = 1; i < arr.$s.length; i++) {
                     if (indices[i] < 0 || indices[i] >= arr.$s[i]) {
-                        throw new System.ArgumentException("Index " + i + " out of range");
+                        throw new System.IndexOutOfRangeException("Index " + i + " out of range");
                     }
 
                     idx = idx * arr.$s[i] + indices[i];
@@ -9952,6 +9952,13 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             }
 
             return idx;
+        },
+
+        index: function (index, arr) {
+            if (index < 0 || index >= arr.length) {
+                throw new System.IndexOutOfRangeException();
+            }
+            return index;
         },
 
         $get: function (indices) {
@@ -10971,7 +10978,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
             if (!result) {
                 name = Bridge.getTypeName(t) + "[" + System.String.fromCharCount(",".charCodeAt(0), rank - 1) + "]";
-
+                var old = Bridge.Class.staticInitAllow;
                 result = Bridge.define(name, {
                     $inherits: [Array, System.Collections.ICollection, System.ICloneable, System.Collections.Generic.IList$1(t)],
                     $noRegister: true,
@@ -11004,7 +11011,12 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 });
 
                 typeCache.push(result);
-                Bridge.init();
+
+                Bridge.Class.staticInitAllow = true;
+                if (result.$staticInit) {
+                    result.$staticInit();
+                }
+                Bridge.Class.staticInitAllow = old;
             }
 
             if (arr) {
@@ -13465,25 +13477,25 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                     return false;
                 }
 
-                if (!System.Version.tryParseComponent(parsedComponents[0], "version", result, major)) {
+                if (!System.Version.tryParseComponent(parsedComponents[System.Array.index(0, parsedComponents)], "version", result, major)) {
                     return false;
                 }
 
-                if (!System.Version.tryParseComponent(parsedComponents[1], "version", result, minor)) {
+                if (!System.Version.tryParseComponent(parsedComponents[System.Array.index(1, parsedComponents)], "version", result, minor)) {
                     return false;
                 }
 
                 parsedComponentsLength = (parsedComponentsLength - 2) | 0;
 
                 if (parsedComponentsLength > 0) {
-                    if (!System.Version.tryParseComponent(parsedComponents[2], "build", result, build)) {
+                    if (!System.Version.tryParseComponent(parsedComponents[System.Array.index(2, parsedComponents)], "build", result, build)) {
                         return false;
                     }
 
                     parsedComponentsLength = (parsedComponentsLength - 1) | 0;
 
                     if (parsedComponentsLength > 0) {
-                        if (!System.Version.tryParseComponent(parsedComponents[3], "revision", result, revision)) {
+                        if (!System.Version.tryParseComponent(parsedComponents[System.Array.index(3, parsedComponents)], "revision", result, revision)) {
                             return false;
                         } else {
                             result.v.m_parsedVersion = new System.Version.$ctor3(major.v, minor.v, build.v, revision.v);
@@ -19002,8 +19014,8 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
 
                 System.Guid.rnd.nextBytes(a);
 
-                a[7] = (a[7] & 15 | 64) & 255;
-                a[8] = (a[8] & 191 | 128) & 255;
+                a[System.Array.index(7, a)] = (a[System.Array.index(7, a)] & 15 | 64) & 255;
+                a[System.Array.index(8, a)] = (a[System.Array.index(8, a)] & 191 | 128) & 255;
 
                 return new System.Guid.$ctor1(a);
             },
@@ -19056,17 +19068,17 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                 throw new System.ArgumentException(System.String.format(System.Guid.error1, Bridge.box(16, System.Int32)));
             }
 
-            this._a = (b[3] << 24) | (b[2] << 16) | (b[1] << 8) | b[0];
-            this._b = Bridge.Int.sxs(((b[5] << 8) | b[4]) & 65535);
-            this._c = Bridge.Int.sxs(((b[7] << 8) | b[6]) & 65535);
-            this._d = b[8];
-            this._e = b[9];
-            this._f = b[10];
-            this._g = b[11];
-            this._h = b[12];
-            this._i = b[13];
-            this._j = b[14];
-            this._k = b[15];
+            this._a = (b[System.Array.index(3, b)] << 24) | (b[System.Array.index(2, b)] << 16) | (b[System.Array.index(1, b)] << 8) | b[System.Array.index(0, b)];
+            this._b = Bridge.Int.sxs(((b[System.Array.index(5, b)] << 8) | b[System.Array.index(4, b)]) & 65535);
+            this._c = Bridge.Int.sxs(((b[System.Array.index(7, b)] << 8) | b[System.Array.index(6, b)]) & 65535);
+            this._d = b[System.Array.index(8, b)];
+            this._e = b[System.Array.index(9, b)];
+            this._f = b[System.Array.index(10, b)];
+            this._g = b[System.Array.index(11, b)];
+            this._h = b[System.Array.index(12, b)];
+            this._i = b[System.Array.index(13, b)];
+            this._j = b[System.Array.index(14, b)];
+            this._k = b[System.Array.index(15, b)];
         },
         $ctor5: function (a, b, c, d, e, f, g, h, i, j, k) {
             this.$initialize();
@@ -19095,14 +19107,14 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
             this._a = a;
             this._b = b;
             this._c = c;
-            this._d = d[0];
-            this._e = d[1];
-            this._f = d[2];
-            this._g = d[3];
-            this._h = d[4];
-            this._i = d[5];
-            this._j = d[6];
-            this._k = d[7];
+            this._d = d[System.Array.index(0, d)];
+            this._e = d[System.Array.index(1, d)];
+            this._f = d[System.Array.index(2, d)];
+            this._g = d[System.Array.index(3, d)];
+            this._h = d[System.Array.index(4, d)];
+            this._i = d[System.Array.index(5, d)];
+            this._j = d[System.Array.index(6, d)];
+            this._k = d[System.Array.index(7, d)];
         },
         $ctor2: function (a, b, c, d, e, f, g, h, i, j, k) {
             this.$initialize();
@@ -19153,22 +19165,22 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         toByteArray: function () {
             var g = System.Array.init(16, 0, System.Byte);
 
-            g[0] = this._a & 255;
-            g[1] = (this._a >> 8) & 255;
-            g[2] = (this._a >> 16) & 255;
-            g[3] = (this._a >> 24) & 255;
-            g[4] = this._b & 255;
-            g[5] = (this._b >> 8) & 255;
-            g[6] = this._c & 255;
-            g[7] = (this._c >> 8) & 255;
-            g[8] = this._d;
-            g[9] = this._e;
-            g[10] = this._f;
-            g[11] = this._g;
-            g[12] = this._h;
-            g[13] = this._i;
-            g[14] = this._j;
-            g[15] = this._k;
+            g[System.Array.index(0, g)] = this._a & 255;
+            g[System.Array.index(1, g)] = (this._a >> 8) & 255;
+            g[System.Array.index(2, g)] = (this._a >> 16) & 255;
+            g[System.Array.index(3, g)] = (this._a >> 24) & 255;
+            g[System.Array.index(4, g)] = this._b & 255;
+            g[System.Array.index(5, g)] = (this._b >> 8) & 255;
+            g[System.Array.index(6, g)] = this._c & 255;
+            g[System.Array.index(7, g)] = (this._c >> 8) & 255;
+            g[System.Array.index(8, g)] = this._d;
+            g[System.Array.index(9, g)] = this._e;
+            g[System.Array.index(10, g)] = this._f;
+            g[System.Array.index(11, g)] = this._g;
+            g[System.Array.index(12, g)] = this._h;
+            g[System.Array.index(13, g)] = this._i;
+            g[System.Array.index(14, g)] = this._j;
+            g[System.Array.index(15, g)] = this._k;
 
             return g;
         },
@@ -19214,7 +19226,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                 } else if (Bridge.referenceEquals(format, "B") || Bridge.referenceEquals(format, "P")) {
                     var b = Bridge.referenceEquals(format, "B") ? System.Array.init([123, 125], System.Char) : System.Array.init([40, 41], System.Char);
 
-                    if ((input.charCodeAt(0) === b[0]) && (input.charCodeAt(((input.length - 1) | 0)) === b[1])) {
+                    if ((input.charCodeAt(0) === b[System.Array.index(0, b)]) && (input.charCodeAt(((input.length - 1) | 0)) === b[System.Array.index(1, b)])) {
                         p = true;
                         input = input.substr(1, ((input.length - 2) | 0));
                     }
@@ -19278,17 +19290,17 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
             this._b = Bridge.Int.sxs((System.UInt16.parse(s.substr(8, 4), 16)) & 65535);
             this._c = Bridge.Int.sxs((System.UInt16.parse(s.substr(12, 4), 16)) & 65535);
             for (var i = 8; i < 16; i = (i + 1) | 0) {
-                r[((i - 8) | 0)] = System.Byte.parse(s.substr(((i * 2) | 0), 2), 16);
+                r[System.Array.index(((i - 8) | 0), r)] = System.Byte.parse(s.substr(((i * 2) | 0), 2), 16);
             }
 
-            this._d = r[0];
-            this._e = r[1];
-            this._f = r[2];
-            this._g = r[3];
-            this._h = r[4];
-            this._i = r[5];
-            this._j = r[6];
-            this._k = r[7];
+            this._d = r[System.Array.index(0, r)];
+            this._e = r[System.Array.index(1, r)];
+            this._f = r[System.Array.index(2, r)];
+            this._g = r[System.Array.index(3, r)];
+            this._h = r[System.Array.index(4, r)];
+            this._i = r[System.Array.index(5, r)];
+            this._j = r[System.Array.index(6, r)];
+            this._k = r[System.Array.index(7, r)];
         },
         $clone: function (to) { return this; }
     });
@@ -25212,22 +25224,22 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             //This algorithm comes from Numerical Recipes in C (2nd Ed.)
             var subtraction = (seed === -2147483648) ? 2147483647 : Math.abs(seed);
             mj = (System.Random.MSEED - subtraction) | 0;
-            this.seedArray[55] = mj;
+            this.seedArray[System.Array.index(55, this.seedArray)] = mj;
             mk = 1;
             for (var i = 1; i < 55; i = (i + 1) | 0) { //Apparently the range [1..55] is special (Knuth) and so we're wasting the 0'th position.
                 ii = (((21 * i) | 0)) % 55;
-                this.seedArray[ii] = mk;
+                this.seedArray[System.Array.index(ii, this.seedArray)] = mk;
                 mk = (mj - mk) | 0;
                 if (mk < 0) {
                     mk = (mk + System.Random.MBIG) | 0;
                 }
-                mj = this.seedArray[ii];
+                mj = this.seedArray[System.Array.index(ii, this.seedArray)];
             }
             for (var k = 1; k < 5; k = (k + 1) | 0) {
                 for (var i1 = 1; i1 < 56; i1 = (i1 + 1) | 0) {
-                    this.seedArray[i1] = (this.seedArray[i1] - this.seedArray[((1 + (((i1 + 30) | 0)) % 55) | 0)]) | 0;
-                    if (this.seedArray[i1] < 0) {
-                        this.seedArray[i1] = (this.seedArray[i1] + System.Random.MBIG) | 0;
+                    this.seedArray[System.Array.index(i1, this.seedArray)] = (this.seedArray[System.Array.index(i1, this.seedArray)] - this.seedArray[System.Array.index(((1 + (((i1 + 30) | 0)) % 55) | 0), this.seedArray)]) | 0;
+                    if (this.seedArray[System.Array.index(i1, this.seedArray)] < 0) {
+                        this.seedArray[System.Array.index(i1, this.seedArray)] = (this.seedArray[System.Array.index(i1, this.seedArray)] + System.Random.MBIG) | 0;
                     }
                 }
             }
@@ -25253,7 +25265,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 locINextp = 1;
             }
 
-            retVal = (this.seedArray[locINext] - this.seedArray[locINextp]) | 0;
+            retVal = (this.seedArray[System.Array.index(locINext, this.seedArray)] - this.seedArray[System.Array.index(locINextp, this.seedArray)]) | 0;
 
             if (retVal === System.Random.MBIG) {
                 retVal = (retVal - 1) | 0;
@@ -25263,7 +25275,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 retVal = (retVal + System.Random.MBIG) | 0;
             }
 
-            this.seedArray[locINext] = retVal;
+            this.seedArray[System.Array.index(locINext, this.seedArray)] = retVal;
 
             this.inext = locINext;
             this.inextp = locINextp;
@@ -25316,7 +25328,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 throw new System.ArgumentNullException("buffer");
             }
             for (var i = 0; i < buffer.length; i = (i + 1) | 0) {
-                buffer[i] = (this.internalSample() % (256)) & 255;
+                buffer[System.Array.index(i, buffer)] = (this.internalSample() % (256)) & 255;
             }
         }
     });
@@ -25486,10 +25498,10 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 var i = 0;
                 var index = startIndex;
                 for (i = 0; i < chArrayLength; i = (i + 3) | 0) {
-                    var b = value[Bridge.identity(index, (index = (index + 1) | 0))];
-                    chArray[i] = System.BitConverter.getHexValue(((Bridge.Int.div(b, 16)) | 0));
-                    chArray[((i + 1) | 0)] = System.BitConverter.getHexValue(b % 16);
-                    chArray[((i + 2) | 0)] = 45;
+                    var b = value[System.Array.index(Bridge.identity(index, (index = (index + 1) | 0)), value)];
+                    chArray[System.Array.index(i, chArray)] = System.BitConverter.getHexValue(((Bridge.Int.div(b, 16)) | 0));
+                    chArray[System.Array.index(((i + 1) | 0), chArray)] = System.BitConverter.getHexValue(b % 16);
+                    chArray[System.Array.index(((i + 2) | 0), chArray)] = 45;
                 }
 
                 // We don't need the last '-' character
@@ -25512,7 +25524,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             toBoolean: function (value, startIndex) {
                 System.BitConverter.checkArguments(value, startIndex, 1);
 
-                return (value[startIndex] === 0) ? false : true;
+                return (value[System.Array.index(startIndex, value)] === 0) ? false : true;
             },
             doubleToInt64Bits: function (value) {
                 var view = System.BitConverter.view(8);
@@ -25543,11 +25555,11 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
                 if (System.BitConverter.isLittleEndian) {
                     for (var i = (count - 1) | 0; i >= 0; i = (i - 1) | 0) {
-                        r[i] = view.getUint8(Bridge.identity(startIndex, (startIndex = (startIndex + 1) | 0)));
+                        r[System.Array.index(i, r)] = view.getUint8(Bridge.identity(startIndex, (startIndex = (startIndex + 1) | 0)));
                     }
                 } else {
                     for (var i1 = 0; i1 < count; i1 = (i1 + 1) | 0) {
-                        r[i1] = view.getUint8(Bridge.identity(startIndex, (startIndex = (startIndex + 1) | 0)));
+                        r[System.Array.index(i1, r)] = view.getUint8(Bridge.identity(startIndex, (startIndex = (startIndex + 1) | 0)));
                     }
                 }
 
@@ -25562,11 +25574,11 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
                 if (System.BitConverter.isLittleEndian) {
                     for (var i = (count - 1) | 0; i >= 0; i = (i - 1) | 0) {
-                        view.setUint8(i, value[Bridge.identity(startIndex, (startIndex = (startIndex + 1) | 0))]);
+                        view.setUint8(i, value[System.Array.index(Bridge.identity(startIndex, (startIndex = (startIndex + 1) | 0)), value)]);
                     }
                 } else {
                     for (var i1 = 0; i1 < count; i1 = (i1 + 1) | 0) {
-                        view.setUint8(i1, value[Bridge.identity(startIndex, (startIndex = (startIndex + 1) | 0))]);
+                        view.setUint8(i1, value[System.Array.index(Bridge.identity(startIndex, (startIndex = (startIndex + 1) | 0)), value)]);
                     }
                 }
             },

@@ -24,22 +24,22 @@
             //This algorithm comes from Numerical Recipes in C (2nd Ed.)
             var subtraction = (seed === -2147483648) ? 2147483647 : Math.abs(seed);
             mj = (System.Random.MSEED - subtraction) | 0;
-            this.seedArray[55] = mj;
+            this.seedArray[System.Array.index(55, this.seedArray)] = mj;
             mk = 1;
             for (var i = 1; i < 55; i = (i + 1) | 0) { //Apparently the range [1..55] is special (Knuth) and so we're wasting the 0'th position.
                 ii = (((21 * i) | 0)) % 55;
-                this.seedArray[ii] = mk;
+                this.seedArray[System.Array.index(ii, this.seedArray)] = mk;
                 mk = (mj - mk) | 0;
                 if (mk < 0) {
                     mk = (mk + System.Random.MBIG) | 0;
                 }
-                mj = this.seedArray[ii];
+                mj = this.seedArray[System.Array.index(ii, this.seedArray)];
             }
             for (var k = 1; k < 5; k = (k + 1) | 0) {
                 for (var i1 = 1; i1 < 56; i1 = (i1 + 1) | 0) {
-                    this.seedArray[i1] = (this.seedArray[i1] - this.seedArray[((1 + (((i1 + 30) | 0)) % 55) | 0)]) | 0;
-                    if (this.seedArray[i1] < 0) {
-                        this.seedArray[i1] = (this.seedArray[i1] + System.Random.MBIG) | 0;
+                    this.seedArray[System.Array.index(i1, this.seedArray)] = (this.seedArray[System.Array.index(i1, this.seedArray)] - this.seedArray[System.Array.index(((1 + (((i1 + 30) | 0)) % 55) | 0), this.seedArray)]) | 0;
+                    if (this.seedArray[System.Array.index(i1, this.seedArray)] < 0) {
+                        this.seedArray[System.Array.index(i1, this.seedArray)] = (this.seedArray[System.Array.index(i1, this.seedArray)] + System.Random.MBIG) | 0;
                     }
                 }
             }
@@ -65,7 +65,7 @@
                 locINextp = 1;
             }
 
-            retVal = (this.seedArray[locINext] - this.seedArray[locINextp]) | 0;
+            retVal = (this.seedArray[System.Array.index(locINext, this.seedArray)] - this.seedArray[System.Array.index(locINextp, this.seedArray)]) | 0;
 
             if (retVal === System.Random.MBIG) {
                 retVal = (retVal - 1) | 0;
@@ -75,7 +75,7 @@
                 retVal = (retVal + System.Random.MBIG) | 0;
             }
 
-            this.seedArray[locINext] = retVal;
+            this.seedArray[System.Array.index(locINext, this.seedArray)] = retVal;
 
             this.inext = locINext;
             this.inextp = locINextp;
@@ -128,7 +128,7 @@
                 throw new System.ArgumentNullException("buffer");
             }
             for (var i = 0; i < buffer.length; i = (i + 1) | 0) {
-                buffer[i] = (this.internalSample() % (256)) & 255;
+                buffer[System.Array.index(i, buffer)] = (this.internalSample() % (256)) & 255;
             }
         }
     });

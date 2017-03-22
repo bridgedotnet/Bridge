@@ -211,6 +211,15 @@ namespace Bridge.Translator
             {
                 var rr = this.emitter.Resolver.ResolveNode(memberReferenceExpression, this.emitter);
                 var member = rr as MemberResolveResult;
+                
+                if (member != null && member.Member.IsStatic && member.Member.DeclaringTypeDefinition.TypeParameterCount > 0 && member.Member.DeclaringTypeDefinition.Equals(this.emitter.TypeInfo.Type.GetDefinition()) && !Helpers.IsIgnoreGeneric(member.Member.DeclaringTypeDefinition))
+                {
+                    var ivar = new TypeVariable(member.Member.DeclaringType);
+                    if (!_usedVariables.Contains(ivar))
+                    {
+                        _usedVariables.Add(ivar);
+                    }
+                }
 
                 bool isInterface = member != null && member.Member.DeclaringTypeDefinition != null && member.Member.DeclaringTypeDefinition.Kind == TypeKind.Interface;
                 var hasTypeParemeter = isInterface && Helpers.IsTypeParameterType(member.Member.DeclaringType);
@@ -234,6 +243,15 @@ namespace Bridge.Translator
             if (this._usedVariables.Count == 0)
             {
                 var member = rr as MemberResolveResult;
+                
+                if (member != null && member.Member.IsStatic && member.Member.DeclaringTypeDefinition.TypeParameterCount > 0 && member.Member.DeclaringTypeDefinition.Equals(this.emitter.TypeInfo.Type.GetDefinition()) && !Helpers.IsIgnoreGeneric(member.Member.DeclaringTypeDefinition))
+                {
+                    var ivar = new TypeVariable(member.Member.DeclaringType);
+                    if (!_usedVariables.Contains(ivar))
+                    {
+                        _usedVariables.Add(ivar);
+                    }
+                }
 
                 bool isInterface = member != null && member.Member.DeclaringTypeDefinition != null &&
                                    member.Member.DeclaringTypeDefinition.Kind == TypeKind.Interface;

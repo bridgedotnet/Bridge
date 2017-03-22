@@ -409,8 +409,16 @@ namespace Bridge.Contract
                 }
             }
 
-            var nullable = resolveResult.Type.IsKnownType(KnownTypeCode.NullableOfT);
-            var type = nullable ? ((ParameterizedType)resolveResult.Type).TypeArguments[0] : resolveResult.Type;
+            var rrtype = resolveResult.Type;
+
+            var forEachResolveResult = resolveResult as ForEachResolveResult;
+            if (forEachResolveResult != null)
+            {
+                rrtype = forEachResolveResult.ElementType;
+            }
+
+            var nullable = rrtype.IsKnownType(KnownTypeCode.NullableOfT);
+            var type = nullable ? ((ParameterizedType)rrtype).TypeArguments[0] : rrtype;
             if (type.Kind == TypeKind.Struct)
             {
                 if (Helpers.IsImmutableStruct(block.Emitter, type))
@@ -453,7 +461,8 @@ namespace Bridge.Contract
                     expression.Parent is ReturnStatement ||
                     expression.Parent is InvocationExpression ||
                     expression.Parent is AssignmentExpression ||
-                    expression.Parent is VariableInitializer)
+                    expression.Parent is VariableInitializer ||
+                    expression.Parent is ForeachStatement && resolveResult is ForEachResolveResult)
                 {
                     if (expression != null && expression.Parent is InvocationExpression)
                     {

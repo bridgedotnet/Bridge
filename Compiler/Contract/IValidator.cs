@@ -69,15 +69,15 @@ namespace Bridge.Contract
 
         bool IsInlineMethod(Mono.Cecil.MethodDefinition method);
 
-        bool IsNameEnum(ICSharpCode.NRefactory.TypeSystem.Implementation.DefaultResolvedTypeDefinition type);
+        bool IsNameEnum(IType type);
 
         bool IsObjectLiteral(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition type);
 
         bool IsObjectLiteral(Mono.Cecil.TypeDefinition type);
 
-        bool IsStringNameEnum(ICSharpCode.NRefactory.TypeSystem.Implementation.DefaultResolvedTypeDefinition type);
+        bool IsStringNameEnum(IType type);
 
-        bool IsValueEnum(ICSharpCode.NRefactory.TypeSystem.Implementation.DefaultResolvedTypeDefinition type);
+        bool IsValueEnum(IType type);
 
         bool IsAccessorsIndexer(IEntity enity);
 

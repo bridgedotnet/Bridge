@@ -49,25 +49,25 @@
                     return false;
                 }
 
-                if (!System.Version.tryParseComponent(parsedComponents[0], "version", result, major)) {
+                if (!System.Version.tryParseComponent(parsedComponents[System.Array.index(0, parsedComponents)], "version", result, major)) {
                     return false;
                 }
 
-                if (!System.Version.tryParseComponent(parsedComponents[1], "version", result, minor)) {
+                if (!System.Version.tryParseComponent(parsedComponents[System.Array.index(1, parsedComponents)], "version", result, minor)) {
                     return false;
                 }
 
                 parsedComponentsLength = (parsedComponentsLength - 2) | 0;
 
                 if (parsedComponentsLength > 0) {
-                    if (!System.Version.tryParseComponent(parsedComponents[2], "build", result, build)) {
+                    if (!System.Version.tryParseComponent(parsedComponents[System.Array.index(2, parsedComponents)], "build", result, build)) {
                         return false;
                     }
 
                     parsedComponentsLength = (parsedComponentsLength - 1) | 0;
 
                     if (parsedComponentsLength > 0) {
-                        if (!System.Version.tryParseComponent(parsedComponents[3], "revision", result, revision)) {
+                        if (!System.Version.tryParseComponent(parsedComponents[System.Array.index(3, parsedComponents)], "revision", result, revision)) {
                             return false;
                         } else {
                             result.v.m_parsedVersion = new System.Version.$ctor3(major.v, minor.v, build.v, revision.v);

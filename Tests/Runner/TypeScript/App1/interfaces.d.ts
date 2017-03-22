@@ -60,6 +60,11 @@ declare module Interfaces {
     }
     var Class1: Class1Func;
 
+    export interface Interface3 extends Interfaces.Interface2 {
+        Interfaces$Interface3$method5(i: Interfaces.Interface3): Interfaces.Interface2;
+        method5(i: Interfaces.Interface3): Interfaces.Interface2;
+    }
+
     export interface Class3 extends Interfaces.Class2,Interfaces.Interface3 {
         method5(i: Interfaces.Interface3): Interfaces.Interface2;
     }
@@ -110,11 +115,6 @@ declare module Interfaces {
         setProperty$1(s: string): void;
         Interfaces$Interface62$setProperty(i: number): void;
         setProperty(i: number): void;
-    }
-
-    export interface Interface3 extends Interfaces.Interface2 {
-        Interfaces$Interface3$method5(i: Interfaces.Interface3): Interfaces.Interface2;
-        method5(i: Interfaces.Interface3): Interfaces.Interface2;
     }
 
 }
