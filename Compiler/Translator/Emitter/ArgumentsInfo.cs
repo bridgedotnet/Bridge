@@ -429,7 +429,6 @@ namespace Bridge.Translator
         {
             Expression paramsArg = null;
             string paramArgName = null;
-            var resolveResult = drr;
             IMethod method = null;
             var group = drr.Target as MethodGroupResolveResult;
 
