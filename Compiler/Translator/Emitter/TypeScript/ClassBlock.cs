@@ -237,7 +237,7 @@ namespace Bridge.Translator.TypeScript
 
                     var typeDef = this.Emitter.GetTypeDefinition(nestedType.Type);
 
-                    if (typeDef.IsInterface)
+                    if (typeDef.IsInterface || this.Emitter.Validator.IsObjectLiteral(typeDef))
                     {
                         continue;
                     }

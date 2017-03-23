@@ -349,7 +349,7 @@ namespace Bridge.Translator
             return this.baseTypes;
         }
 
-        public string GetNamespace(IEmitter emitter)
+        public string GetNamespace(IEmitter emitter, bool nons = false)
         {
             if (emitter == null)
             {
@@ -373,10 +373,20 @@ namespace Bridge.Translator
                         name = constructorArgumentValue;
                         break;
                     }
+
+                    if (ca.ConstructorArguments[0].Value is bool)
+                    {
+                        if (!(bool) ca.ConstructorArguments[0].Value)
+                        {
+                            name = null;
+                        }
+                        
+                        break;
+                    }
                 }
             }
 
-            if (name == null)
+            if (name == null && !nons)
             {
                 name = emitter.Translator.DefaultNamespace;
             }

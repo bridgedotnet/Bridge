@@ -113,3 +113,8 @@ QUnit.test("#2474", function (assert) {
     var e10 = TypeScript.Issues.N2474.StringNameUpperCase.VALUE;
     assert.equal(e10, "VALUE", "StringNameUpperCase");
 });
+QUnit.test("#2463", function (assert) {
+    var ol = { nothing: 1 };
+    TypeScript.Issues.N2463.do(ol);
+    assert.equal(ol.nothing, 2);
+});
