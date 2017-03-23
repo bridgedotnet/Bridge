@@ -11,22 +11,23 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     {
         class SecondLevelException : Exception
         {
-            public SecondLevelException(Exception inner)
-                : base(null, inner)
-            { }
+            public SecondLevelException(Exception inner): base(null, inner)
+            {
+            }
         }
+
         class ThirdLevelException : Exception
         {
-            public ThirdLevelException(Exception inner)
-                : base(null, inner)
-            { }
+            public ThirdLevelException(Exception inner): base(null, inner)
+            {
+            }
         }
 
         static void Rethrow()
         {
             try
             {
-                DivideBy0();
+                DivideByZero();
             }
             catch (Exception ex)
             {
@@ -34,7 +35,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
         }
 
-        static void DivideBy0()
+        static void DivideByZero()
         {
             try
             {
@@ -59,6 +60,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 List<Exception> list = new List<Exception>();
                 Exception current;
                 current = ex;
+
                 while (current != null)
                 {
                     list.Add(current);
@@ -66,11 +68,29 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 }
 
                 Assert.AreEqual(3, list.Count);
-                Assert.True(list[0] is ThirdLevelException);
-                Assert.True(list[1] is SecondLevelException);
-                Assert.True(list[2] is DivideByZeroException);
-                Assert.True(ex.GetBaseException() is DivideByZeroException);
+
+                var l0 = list[0];
+                Assert.True(l0 is ThirdLevelException, GetType(l0));
+
+                var l1 = list[1];
+                Assert.True(l1 is SecondLevelException, GetType(l1));
+
+                var l2 = list[2];
+                Assert.True(l2 is DivideByZeroException, GetType(l2));
+
+                var l3 = ex.GetBaseException();
+                Assert.True(l3 is DivideByZeroException, GetType(l3));
             }
+        }
+
+        private static string GetType(object o)
+        {
+            if (o == null)
+            {
+                return "[null]";
+            }
+
+            return o.GetType().Name;
         }
     }
 }

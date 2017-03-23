@@ -10146,7 +10146,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testGetBaseException: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2458).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2458, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestGetBaseException()",
-                    line: "50"
+                    line: "51"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2458.testGetBaseException();
             }

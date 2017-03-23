@@ -16038,14 +16038,14 @@ Bridge.$N1391Result =                 r;
         statics: {
             rethrow: function () {
                 try {
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2458.divideBy0();
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2458.divideByZero();
                 }
                 catch (ex) {
                     ex = System.Exception.create(ex);
                     throw new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2458.ThirdLevelException(ex);
                 }
             },
-            divideBy0: function () {
+            divideByZero: function () {
                 try {
                     var zero = 0;
                     var ecks = (Bridge.Int.div(1, zero)) | 0;
@@ -16064,17 +16064,33 @@ Bridge.$N1391Result =                 r;
                     var list = new (System.Collections.Generic.List$1(System.Exception))();
                     var current;
                     current = ex;
+
                     while (current != null) {
                         list.add(current);
                         current = current.InnerException;
                     }
 
                     Bridge.Test.NUnit.Assert.areEqual(3, list.Count);
-                    Bridge.Test.NUnit.Assert.true(Bridge.is(list.getItem(0), Bridge.ClientTest.Batch3.BridgeIssues.Bridge2458.ThirdLevelException));
-                    Bridge.Test.NUnit.Assert.true(Bridge.is(list.getItem(1), Bridge.ClientTest.Batch3.BridgeIssues.Bridge2458.SecondLevelException));
-                    Bridge.Test.NUnit.Assert.true(Bridge.is(list.getItem(2), System.DivideByZeroException));
-                    Bridge.Test.NUnit.Assert.true(Bridge.is(ex.getBaseException(), System.DivideByZeroException));
+
+                    var l0 = list.getItem(0);
+                    Bridge.Test.NUnit.Assert.true$1(Bridge.is(l0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2458.ThirdLevelException), Bridge.ClientTest.Batch3.BridgeIssues.Bridge2458.getType(l0));
+
+                    var l1 = list.getItem(1);
+                    Bridge.Test.NUnit.Assert.true$1(Bridge.is(l1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2458.SecondLevelException), Bridge.ClientTest.Batch3.BridgeIssues.Bridge2458.getType(l1));
+
+                    var l2 = list.getItem(2);
+                    Bridge.Test.NUnit.Assert.true$1(Bridge.is(l2, System.DivideByZeroException), Bridge.ClientTest.Batch3.BridgeIssues.Bridge2458.getType(l2));
+
+                    var l3 = ex.getBaseException();
+                    Bridge.Test.NUnit.Assert.true$1(Bridge.is(l3, System.DivideByZeroException), Bridge.ClientTest.Batch3.BridgeIssues.Bridge2458.getType(l3));
                 }
+            },
+            getType: function (o) {
+                if (o == null) {
+                    return "[null]";
+                }
+
+                return Bridge.Reflection.getTypeName(Bridge.getType(o));
             }
         }
     });
