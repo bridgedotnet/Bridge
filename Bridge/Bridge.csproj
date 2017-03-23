@@ -99,6 +99,8 @@
     <Compile Include="Attributes\FieldAttribute.cs" />
     <Compile Include="Bridge\Json.cs" />
     <Compile Include="System\BitConverter.cs" />
+    <Compile Include="System\ComponentModel\BrowsableAttribute.cs" />
+    <Compile Include="System\ComponentModel\EditorBrowsableAttribute.cs" />
     <Compile Include="System\SerializableAttribute.cs" />
     <Compile Include="Attributes\UnboxAttribute.cs" />
     <Compile Include="Attributes\GlobalMethodsAttribute.cs" />
@@ -352,7 +354,7 @@
     <Compile Include="System\Decimal.cs" />
     <Compile Include="System\IComparable.cs" />
     <Compile Include="System\IEquatable.cs" />
-    <Compile Include="System\INotifyPropertyChanged.cs" />
+    <Compile Include="System\ComponentModel\INotifyPropertyChanged.cs" />
     <Compile Include="System\InvalidCastException.cs" />
     <Compile Include="System\InvalidOperationException.cs" />
     <Compile Include="System\Func.cs" />
@@ -883,6 +885,7 @@
     <Content Include="Resources\.typescript\bridge.d.ts" />
     <Content Include="Resources\.typescript\header.d.ts" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir).nuget\NuGet.targets" Condition="Exists('$(SolutionDir).nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

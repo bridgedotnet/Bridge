@@ -668,46 +668,6 @@ namespace System.Diagnostics
     }
 }
 
-namespace System.ComponentModel
-{
-    /// <summary>
-    /// This attribute marks a field, property, event or method as
-    /// "browsable", i.e. present in the type descriptor associated with
-    /// the type.
-    /// </summary>
-    [EditorBrowsable(EditorBrowsableState.Never)]
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Event | AttributeTargets.Method, AllowMultiple = false)]
-    [External]
-    [NonScriptable]
-    public sealed class BrowsableAttribute : Attribute
-    {
-    }
-
-    [EditorBrowsable(EditorBrowsableState.Never)]
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Enum | AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Event | AttributeTargets.Delegate | AttributeTargets.Interface)]
-    [External]
-    [NonScriptable]
-    public sealed class EditorBrowsableAttribute : Attribute
-    {
-        public extern EditorBrowsableAttribute(EditorBrowsableState state);
-
-        public extern EditorBrowsableState State
-        {
-            get;
-        }
-    }
-
-    [EditorBrowsable(EditorBrowsableState.Never)]
-    [External]
-    [NonScriptable]
-    public enum EditorBrowsableState
-    {
-        Always = 0,
-        Never = 1,
-        Advanced = 2
-    }
-}
-
 namespace System.Threading
 {
     [EditorBrowsable(EditorBrowsableState.Never)]
