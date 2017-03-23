@@ -495,6 +495,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#2445 - TestEmptyForLoop", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2445.testEmptyForLoop);
             QUnit.test("#2446 - TestDoubleMinValue", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2446.testDoubleMinValue);
             QUnit.test("#2454 - TestForEachClone", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2454.testForEachClone);
+            QUnit.test("#2456 - TestIsArrayFromIFrame", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2456.testIsArrayFromIFrame);
             QUnit.test("#2458 - TestGetBaseException", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2458.testGetBaseException);
             QUnit.test("#2462 - TestReturnInAsync", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2462.testReturnInAsync);
             QUnit.test("#2467 - TestPropertyInitializerInStruct", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2467.testPropertyInitializerInStruct);
@@ -8192,7 +8193,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testPropertiesWithNonPrimitiveInitializers: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2137).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2137, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestPropertiesWithNonPrimitiveInitializers()",
-                    line: "24"
+                    line: "21"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2137.testPropertiesWithNonPrimitiveInitializers();
             }
@@ -9091,7 +9092,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testPropertyInitializerWithDirective: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2249).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2249, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestPropertyInitializerWithDirective()",
-                    line: "23"
+                    line: "22"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2249.testPropertyInitializerWithDirective();
             }
@@ -9163,7 +9164,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testPropertyWithInitializerAndNestedClass: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2279).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2279, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestPropertyWithInitializerAndNestedClass()",
-                    line: "25"
+                    line: "23"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2279.testPropertyWithInitializerAndNestedClass();
             }
@@ -9307,7 +9308,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testBridgeFields: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2310, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestBridgeFields()",
-                    line: "97"
+                    line: "95"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.testBridgeFields();
             }
@@ -9826,7 +9827,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testPropertyInitializer: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2374).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2374, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestPropertyInitializer()",
-                    line: "20"
+                    line: "18"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2374.testPropertyInitializer();
             }
@@ -9850,7 +9851,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testNameofWithReflection: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2375).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2375, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestNameofWithReflection()",
-                    line: "18"
+                    line: "17"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2375.testNameofWithReflection();
             }
@@ -9994,7 +9995,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testPropertyInitializer: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2430, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestPropertyInitializer()",
-                    line: "78"
+                    line: "68"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.testPropertyInitializer();
             }
@@ -10115,6 +10116,30 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
         }
     });
 
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2456", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2456)],
+        statics: {
+            testIsArrayFromIFrame: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2456).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2456, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestIsArrayFromIFrame()",
+                    line: "21"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2456.testIsArrayFromIFrame();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
+                    project: "Batch3",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2456",
+                    file: "Batch3\\BridgeIssues\\2400\\N2456.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2458", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2458)],
         statics: {
@@ -10169,7 +10194,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testPropertyInitializerInStruct: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2467).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2467, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestPropertyInitializerInStruct()",
-                    line: "23"
+                    line: "22"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2467.testPropertyInitializerInStruct();
             }
@@ -12050,7 +12075,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testFieldPropertyWithInitializer: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge706).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge706, 1, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestFieldPropertyWithInitializer()",
-                    line: "18"
+                    line: "17"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge706.testFieldPropertyWithInitializer();
             }

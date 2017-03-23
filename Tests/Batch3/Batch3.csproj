@@ -27,6 +27,7 @@
     <WarningLevel>4</WarningLevel>
     <NoStdLib>True</NoStdLib>
     <Prefer32Bit>false</Prefer32Bit>
+    <NoWarn>0626</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,6 +38,7 @@
     <WarningLevel>4</WarningLevel>
     <NoStdLib>True</NoStdLib>
     <Prefer32Bit>false</Prefer32Bit>
+    <NoWarn>0626</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -520,6 +522,7 @@
     <Compile Include="BridgeIssues\2400\N2445.cs" />
     <Compile Include="BridgeIssues\2400\N2446.cs" />
     <Compile Include="BridgeIssues\2400\N2454.cs" />
+    <Compile Include="BridgeIssues\2400\N2456.cs" />
     <Compile Include="BridgeIssues\2400\N2462.cs" />
     <Compile Include="BridgeIssues\2400\N2467.cs" />
     <Compile Include="BridgeIssues\2400\N2469.cs" />

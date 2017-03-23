@@ -1061,7 +1061,7 @@
                 return false;
             }
 
-            return Bridge.arrayTypes.indexOf(c) >= 0 || c.$isArray;
+            return Bridge.arrayTypes.indexOf(c) >= 0 || c.$isArray || Array.isArray(obj);
         },
 
         isFunction: function (obj) {
