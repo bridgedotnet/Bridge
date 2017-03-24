@@ -20874,6 +20874,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     });
 
     Bridge.define("Bridge.ClientTest.MathTests", {
+        statics: {
+            E2: 2.7182818284590451,
+            PI2: 3.1415926535897931
+        },
         assertAlmostEqual: function (d1, d2) {
             var diff = d2 - d1;
             if (diff < 0) {
@@ -20894,6 +20898,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         constantsWork: function () {
             this.assertAlmostEqual(Math.E, 2.7182818284590451);
             this.assertAlmostEqual(Math.PI, 3.1415926535897931);
+        },
+        constantsWork_N2473: function () {
+            this.assertAlmostEqual(Bridge.ClientTest.MathTests.E2, 2.7182818284590451);
+            this.assertAlmostEqual(Bridge.ClientTest.MathTests.PI2, 3.1415926535897931);
         },
         absOfDoubleWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual(12.5, Math.abs(-12.5));

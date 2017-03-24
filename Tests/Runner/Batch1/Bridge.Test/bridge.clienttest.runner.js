@@ -1068,6 +1068,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("LINQ Expressions - DynamicWorks", Bridge.Test.Runtime.BridgeClientTestRunner.ExpressionTests.dynamicWorks);
             QUnit.module("Math");
             QUnit.test("Math - ConstantsWork", Bridge.Test.Runtime.BridgeClientTestRunner.MathTests.constantsWork);
+            QUnit.test("Math - ConstantsWork_N2473", Bridge.Test.Runtime.BridgeClientTestRunner.MathTests.constantsWork_N2473);
             QUnit.test("Math - AbsOfDoubleWorks", Bridge.Test.Runtime.BridgeClientTestRunner.MathTests.absOfDoubleWorks);
             QUnit.test("Math - AbsOfIntWorks", Bridge.Test.Runtime.BridgeClientTestRunner.MathTests.absOfIntWorks);
             QUnit.test("Math - AbsOfLongWorks", Bridge.Test.Runtime.BridgeClientTestRunner.MathTests.absOfLongWorks);
@@ -13961,364 +13962,371 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             constantsWork: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ConstantsWork()",
-                    line: "30"
+                    line: "33"
                 } ));
                 t.Fixture.constantsWork();
+            },
+            constantsWork_N2473: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "ConstantsWork_N2473()",
+                    line: "41"
+                } ));
+                t.Fixture.constantsWork_N2473();
             },
             absOfDoubleWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "AbsOfDoubleWorks()",
-                    line: "37"
+                    line: "48"
                 } ));
                 t.Fixture.absOfDoubleWorks();
             },
             absOfIntWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "AbsOfIntWorks()",
-                    line: "43"
+                    line: "54"
                 } ));
                 t.Fixture.absOfIntWorks();
             },
             absOfLongWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "AbsOfLongWorks()",
-                    line: "49"
+                    line: "60"
                 } ));
                 t.Fixture.absOfLongWorks();
             },
             absOfSbyteWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "AbsOfSbyteWorks()",
-                    line: "55"
+                    line: "66"
                 } ));
                 t.Fixture.absOfSbyteWorks();
             },
             absOfShortWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "AbsOfShortWorks()",
-                    line: "61"
+                    line: "72"
                 } ));
                 t.Fixture.absOfShortWorks();
             },
             absOfFloatWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "AbsOfFloatWorks()",
-                    line: "67"
+                    line: "78"
                 } ));
                 t.Fixture.absOfFloatWorks();
             },
             absOfDecimalWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "AbsOfDecimalWorks()",
-                    line: "73"
+                    line: "84"
                 } ));
                 t.Fixture.absOfDecimalWorks();
             },
             acosWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "AcosWorks()",
-                    line: "79"
+                    line: "90"
                 } ));
                 t.Fixture.acosWorks();
             },
             asinWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "AsinWorks()",
-                    line: "85"
+                    line: "96"
                 } ));
                 t.Fixture.asinWorks();
             },
             atanWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "AtanWorks()",
-                    line: "91"
+                    line: "102"
                 } ));
                 t.Fixture.atanWorks();
             },
             atan2Works: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "Atan2Works()",
-                    line: "97"
+                    line: "108"
                 } ));
                 t.Fixture.atan2Works();
             },
             cosWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "CosWorks()",
-                    line: "103"
+                    line: "114"
                 } ));
                 t.Fixture.cosWorks();
             },
             divRemWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "DivRemWorks()",
-                    line: "109"
+                    line: "120"
                 } ));
                 t.Fixture.divRemWorks();
             },
             expWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ExpWorks()",
-                    line: "132"
+                    line: "143"
                 } ));
                 t.Fixture.expWorks();
             },
             floorOfDoubleWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "FloorOfDoubleWorks()",
-                    line: "138"
+                    line: "149"
                 } ));
                 t.Fixture.floorOfDoubleWorks();
             },
             floorOfDecimalWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "FloorOfDecimalWorks()",
-                    line: "145"
+                    line: "156"
                 } ));
                 t.Fixture.floorOfDecimalWorks();
             },
             logWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "LogWorks()",
-                    line: "152"
+                    line: "163"
                 } ));
                 t.Fixture.logWorks();
             },
             maxOfByteWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "MaxOfByteWorks()",
-                    line: "158"
+                    line: "169"
                 } ));
                 t.Fixture.maxOfByteWorks();
             },
             maxOfDecimalWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "MaxOfDecimalWorks()",
-                    line: "165"
+                    line: "176"
                 } ));
                 t.Fixture.maxOfDecimalWorks();
             },
             maxOfDoubleWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "MaxOfDoubleWorks()",
-                    line: "172"
+                    line: "183"
                 } ));
                 t.Fixture.maxOfDoubleWorks();
             },
             maxOfShortWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "MaxOfShortWorks()",
-                    line: "179"
+                    line: "190"
                 } ));
                 t.Fixture.maxOfShortWorks();
             },
             maxOfIntWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "MaxOfIntWorks()",
-                    line: "186"
+                    line: "197"
                 } ));
                 t.Fixture.maxOfIntWorks();
             },
             maxOfLongWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "MaxOfLongWorks()",
-                    line: "193"
+                    line: "204"
                 } ));
                 t.Fixture.maxOfLongWorks();
             },
             maxOfSByteWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "MaxOfSByteWorks()",
-                    line: "200"
+                    line: "211"
                 } ));
                 t.Fixture.maxOfSByteWorks();
             },
             maxOfFloatWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "MaxOfFloatWorks()",
-                    line: "207"
+                    line: "218"
                 } ));
                 t.Fixture.maxOfFloatWorks();
             },
             maxOfUShortWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "MaxOfUShortWorks()",
-                    line: "214"
+                    line: "225"
                 } ));
                 t.Fixture.maxOfUShortWorks();
             },
             maxOfUIntWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "MaxOfUIntWorks()",
-                    line: "221"
+                    line: "232"
                 } ));
                 t.Fixture.maxOfUIntWorks();
             },
             maxOfULongWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "MaxOfULongWorks()",
-                    line: "228"
+                    line: "239"
                 } ));
                 t.Fixture.maxOfULongWorks();
             },
             minOfByteWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "MinOfByteWorks()",
-                    line: "235"
+                    line: "246"
                 } ));
                 t.Fixture.minOfByteWorks();
             },
             minOfDecimalWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "MinOfDecimalWorks()",
-                    line: "242"
+                    line: "253"
                 } ));
                 t.Fixture.minOfDecimalWorks();
             },
             minOfDoubleWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "MinOfDoubleWorks()",
-                    line: "249"
+                    line: "260"
                 } ));
                 t.Fixture.minOfDoubleWorks();
             },
             minOfShortWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "MinOfShortWorks()",
-                    line: "256"
+                    line: "267"
                 } ));
                 t.Fixture.minOfShortWorks();
             },
             minOfIntWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "MinOfIntWorks()",
-                    line: "263"
+                    line: "274"
                 } ));
                 t.Fixture.minOfIntWorks();
             },
             minOfLongWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "MinOfLongWorks()",
-                    line: "270"
+                    line: "281"
                 } ));
                 t.Fixture.minOfLongWorks();
             },
             minOfSByteWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "MinOfSByteWorks()",
-                    line: "277"
+                    line: "288"
                 } ));
                 t.Fixture.minOfSByteWorks();
             },
             minOfFloatWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "MinOfFloatWorks()",
-                    line: "284"
+                    line: "295"
                 } ));
                 t.Fixture.minOfFloatWorks();
             },
             minOfUShortWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "MinOfUShortWorks()",
-                    line: "291"
+                    line: "302"
                 } ));
                 t.Fixture.minOfUShortWorks();
             },
             minOfUIntWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "MinOfUIntWorks()",
-                    line: "298"
+                    line: "309"
                 } ));
                 t.Fixture.minOfUIntWorks();
             },
             minOfULongWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "MinOfULongWorks()",
-                    line: "305"
+                    line: "316"
                 } ));
                 t.Fixture.minOfULongWorks();
             },
             powWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "PowWorks()",
-                    line: "312"
+                    line: "323"
                 } ));
                 t.Fixture.powWorks();
             },
             randomWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "RandomWorks()",
-                    line: "321"
+                    line: "332"
                 } ));
                 t.Fixture.randomWorks();
             },
             roundOfDoubleWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "RoundOfDoubleWorks()",
-                    line: "332"
+                    line: "343"
                 } ));
                 t.Fixture.roundOfDoubleWorks();
             },
             roundDecimalWithModeWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "RoundDecimalWithModeWorks()",
-                    line: "343"
+                    line: "354"
                 } ));
                 t.Fixture.roundDecimalWithModeWorks();
             },
             roundDecimalWithPrecisionAndModeWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "RoundDecimalWithPrecisionAndModeWorks()",
-                    line: "417"
+                    line: "428"
                 } ));
                 t.Fixture.roundDecimalWithPrecisionAndModeWorks();
             },
             roundDoubleWithModeWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "RoundDoubleWithModeWorks()",
-                    line: "491"
+                    line: "502"
                 } ));
                 t.Fixture.roundDoubleWithModeWorks();
             },
             roundDoubleWithPrecisionAndModeWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "RoundDoubleWithPrecisionAndModeWorks()",
-                    line: "565"
+                    line: "576"
                 } ));
                 t.Fixture.roundDoubleWithPrecisionAndModeWorks();
             },
             jsRoundWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "JsRoundWorks()",
-                    line: "639"
+                    line: "650"
                 } ));
                 t.Fixture.jsRoundWorks();
             },
             iEEERemainderWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "IEEERemainderWorks()",
-                    line: "650"
+                    line: "661"
                 } ));
                 t.Fixture.iEEERemainderWorks();
             },
             sinWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SinWorks()",
-                    line: "660"
+                    line: "671"
                 } ));
                 t.Fixture.sinWorks();
             },
             sqrtWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "SqrtWorks()",
-                    line: "666"
+                    line: "677"
                 } ));
                 t.Fixture.sqrtWorks();
             },
             tanWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.MathTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.MathTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TanWorks()",
-                    line: "672"
+                    line: "683"
                 } ));
                 t.Fixture.tanWorks();
             }

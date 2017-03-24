@@ -7,6 +7,9 @@ namespace Bridge.ClientTest
     [TestFixture(TestNameFormat = "Math - {0}")]
     public class MathTests
     {
+        public const double E2 = Math.E;
+        public const double PI2 = Math.PI;
+
         private void AssertAlmostEqual(double d1, double d2)
         {
             var diff = d2 - d1;
@@ -32,6 +35,14 @@ namespace Bridge.ClientTest
         {
             AssertAlmostEqual(Math.E, 2.718281828459045);
             AssertAlmostEqual(Math.PI, 3.141592653589793);
+        }
+
+        // #2473
+        [Test]
+        public void ConstantsWork_N2473()
+        {
+            AssertAlmostEqual(E2, 2.718281828459045);
+            AssertAlmostEqual(PI2, 3.141592653589793);
         }
 
         [Test]
