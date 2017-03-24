@@ -96,7 +96,6 @@
     <Compile Include="..\Html5\TypedArray\Uint8ClampedArray.cs">
       <Link>Internal\Html5\TypedArray\Uint8ClampedArray.cs</Link>
     </Compile>
-    <Compile Include="Attributes\FieldAttribute.cs" />
     <Compile Include="Bridge\Json.cs" />
     <Compile Include="System\BitConverter.cs" />
     <Compile Include="System\ComponentModel\BrowsableAttribute.cs" />
