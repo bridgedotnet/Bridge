@@ -214,7 +214,6 @@ namespace Bridge.ClientTest.Reflection
                 set;
             }
 
-            [FieldProperty]
             public int P3
             {
                 get;

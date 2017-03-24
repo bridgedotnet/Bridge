@@ -139,7 +139,6 @@ namespace Bridge.ClientTest.Batch4
                 set;
             }
 
-            [FieldProperty]
             public int P2
             {
                 get;

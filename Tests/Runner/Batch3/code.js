@@ -7251,7 +7251,7 @@ Bridge.$N1391Result =                 r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1530", {
-        testObjectLiteralFieldImplementingInterface: function () {
+        testObjectLiteralPropertyImplementingInterface: function () {
             var c = { name: "name" };
             var p = c;
 
@@ -20608,19 +20608,6 @@ Bridge.$N1391Result =                 r;
                 var blob2 = new Blob(System.Array.init(["data2"], Object));
                 Bridge.Test.NUnit.Assert.areNotEqual$1(null, blob2, "blob2 is not null");
                 Bridge.Test.NUnit.Assert.areEqual$1(5, blob2.size, "blob2.Size equals 5");
-            }
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge706", {
-        statics: {
-            config: {
-                properties: {
-                    Value: Bridge.box(7, System.Int32)
-                }
-            },
-            testFieldPropertyWithInitializer: function () {
-                Bridge.Test.NUnit.Assert.areEqual(7, Bridge.unbox(Bridge.ClientTest.Batch3.BridgeIssues.Bridge706.Value));
             }
         }
     });

@@ -12,7 +12,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             int GetNewId();
 
-            [FieldProperty]
             string Name { get; }
         }
 
@@ -22,7 +21,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             int GetNewId();
 
-            [FieldProperty]
             string Name { get; }
         }
 
