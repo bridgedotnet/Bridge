@@ -8,11 +8,10 @@ namespace System.Linq.Expressions
     [Cast("{this}.ntype === 17")]
     public sealed class InvocationExpression : Expression
     {
-        [Field]
+        [Name(true)] //[Field]
         public extern Expression Expression { get; private set; }
 
         [Name("args")]
-        [Field]
         public extern ReadOnlyCollection<Expression> Arguments { get; private set; }
 
         internal extern InvocationExpression();

@@ -24,7 +24,7 @@ Bridge.define("System.Exception", {
                         return this.data;
                     }
                 }
-            }        
+            }
         },
 
         ctor: function (message, innerException) {

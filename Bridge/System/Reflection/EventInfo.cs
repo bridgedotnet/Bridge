@@ -6,7 +6,6 @@ namespace System.Reflection
     public class EventInfo : MemberInfo
     {
         [Name("ad")]
-        [Field]
         public extern MethodInfo AddMethod
         {
             get;
@@ -14,7 +13,6 @@ namespace System.Reflection
         }
 
         [Name("r")]
-        [Field]
         public extern MethodInfo RemoveMethod
         {
             get;

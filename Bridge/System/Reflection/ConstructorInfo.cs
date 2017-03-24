@@ -13,7 +13,6 @@ namespace System.Reflection
         /// Script name of the constructor. Null for the unnamed constructor and for constructors with special implementations
         /// </summary>
         [Name("sn")]
-        [Field]
         public extern string ScriptName
         {
             get;
@@ -35,7 +34,6 @@ namespace System.Reflection
         /// For constructors with a special implementation (eg. [Template]), contains a delegate that can be invoked to create an instance.
         /// </summary>
         [Name("def")]
-        [Field]
         public extern Delegate SpecialImplementation
         {
             get;

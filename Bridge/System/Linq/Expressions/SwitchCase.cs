@@ -7,10 +7,10 @@ namespace System.Linq.Expressions
     [Name("System.Object")]
     public sealed class SwitchCase
     {
-        [Field]
+        [Name(true)] //[Field]
         public extern ReadOnlyCollection<Expression> TestValues { get; private set; }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern Expression Body { get; private set; }
 
         internal extern SwitchCase();

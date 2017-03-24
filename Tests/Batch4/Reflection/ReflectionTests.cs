@@ -335,7 +335,7 @@ namespace Bridge.ClientTest.Batch4.Reflection
                 get; set;
             }
 
-            [Reflectable, FieldProperty]
+            [Reflectable]
             public string P2
             {
                 get; set;
@@ -347,7 +347,7 @@ namespace Bridge.ClientTest.Batch4.Reflection
                 get; set;
             }
 
-            [Reflectable, FieldProperty]
+            [Reflectable]
             public static double P4
             {
                 get; set;
@@ -362,7 +362,7 @@ namespace Bridge.ClientTest.Batch4.Reflection
                 }
             }
 
-            [Reflectable, FieldProperty]
+            [Reflectable]
             public string P6
             {
                 get; set;
@@ -377,7 +377,7 @@ namespace Bridge.ClientTest.Batch4.Reflection
                 }
             }
 
-            [Reflectable, FieldProperty]
+            [Reflectable]
             public static double P8
             {
                 get; set;
@@ -391,7 +391,7 @@ namespace Bridge.ClientTest.Batch4.Reflection
                 }
             }
 
-            [Reflectable, FieldProperty]
+            [Reflectable]
             public string P10
             {
                 get; set;
@@ -405,7 +405,7 @@ namespace Bridge.ClientTest.Batch4.Reflection
                 }
             }
 
-            [Reflectable, FieldProperty]
+            [Reflectable]
             public static double P12
             {
                 get; set;

@@ -214,7 +214,6 @@ namespace Bridge.ClientTest.Batch4.Reflection
                 set;
             }
 
-            [FieldProperty]
             public int P3
             {
                 get;

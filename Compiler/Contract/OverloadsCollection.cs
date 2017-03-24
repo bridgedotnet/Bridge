@@ -297,7 +297,7 @@ namespace Bridge.Contract
             this.IsSetter = isSetter;
             this.Member = this.FindMember(propDeclaration);
             var p = (IProperty)this.Member;
-            this.CancelChangeCase = !AttributeHelper.HasFieldAttribute(p) && (this.Member.DeclaringTypeDefinition == null || !this.Emitter.Validator.IsObjectLiteral(this.Member.DeclaringTypeDefinition));
+            this.CancelChangeCase = this.Member.DeclaringTypeDefinition == null || !this.Emitter.Validator.IsObjectLiteral(this.Member.DeclaringTypeDefinition);
             this.FieldJsName = this.Emitter.GetEntityName(p, true);
             this.TypeDefinition = this.Member.DeclaringTypeDefinition;
             this.Type = this.Member.DeclaringType;
@@ -377,7 +377,7 @@ namespace Bridge.Contract
 
             if (member is IProperty)
             {
-                this.CancelChangeCase = !AttributeHelper.HasFieldAttribute(member) && (member.DeclaringTypeDefinition == null || !this.Emitter.Validator.IsObjectLiteral(member.DeclaringTypeDefinition));
+                this.CancelChangeCase = member.DeclaringTypeDefinition == null || !this.Emitter.Validator.IsObjectLiteral(member.DeclaringTypeDefinition);
                 this.JsName = Helpers.GetPropertyRef(member, emitter, isSetter, true, true);
                 this.AltJsName = Helpers.GetPropertyRef(member, emitter, !isSetter, true, true);
                 var p = (IProperty) member;

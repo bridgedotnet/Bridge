@@ -7,168 +7,167 @@ namespace System.Globalization
     {
         public extern NumberFormatInfo();
 
-        [Field]
+        [Name(true)] //[Field]
         public static extern NumberFormatInfo InvariantInfo
         {
             get;
         }
 
         [Name("nanSymbol")]
-        [Field]
         public extern string NaNSymbol
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string NegativeSign
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string PositiveSign
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string NegativeInfinitySymbol
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string PositiveInfinitySymbol
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string PercentSymbol
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern int[] PercentGroupSizes
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern int PercentDecimalDigits
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string PercentDecimalSeparator
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string PercentGroupSeparator
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern int PercentPositivePattern
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern int PercentNegativePattern
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string CurrencySymbol
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern int[] CurrencyGroupSizes
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern int CurrencyDecimalDigits
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string CurrencyDecimalSeparator
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string CurrencyGroupSeparator
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern int CurrencyPositivePattern
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern int CurrencyNegativePattern
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern int[] NumberGroupSizes
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern int NumberDecimalDigits
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string NumberDecimalSeparator
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string NumberGroupSeparator
         {
             get;
@@ -179,7 +178,7 @@ namespace System.Globalization
 
         public extern object Clone();
 
-        [Field]
+        [Name(true)] //[Field]
         public static extern NumberFormatInfo CurrentInfo
         {
             get;

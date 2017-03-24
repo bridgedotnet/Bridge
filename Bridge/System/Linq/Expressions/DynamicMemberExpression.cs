@@ -7,7 +7,7 @@ namespace System.Linq.Expressions
     [Cast("{this}.ntype == 50 && {this}.dtype === 0")]
     public sealed class DynamicMemberExpression : DynamicExpression
     {
-        [Field]
+        [Name(true)] //[Field]
         public extern string Member { get; private set; }
 
         internal extern DynamicMemberExpression();

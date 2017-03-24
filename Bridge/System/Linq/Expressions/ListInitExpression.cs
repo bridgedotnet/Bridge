@@ -8,10 +8,10 @@ namespace System.Linq.Expressions
     [Cast("{this}.ntype === 22")]
     public sealed class ListInitExpression : Expression
     {
-        [Field]
+        [Name(true)] //[Field]
         public extern NewExpression NewExpression { get; private set; }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern ReadOnlyCollection<ElementInit> Initializers { get; private set; }
 
         internal extern ListInitExpression();

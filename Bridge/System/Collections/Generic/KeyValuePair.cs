@@ -8,13 +8,13 @@ namespace System.Collections.Generic
     {
         public extern KeyValuePair(TKey key, TValue value);
 
-        [Field]
+        [Name(true)] //[Field]
         public extern TKey Key
         {
             get;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern TValue Value
         {
             get;

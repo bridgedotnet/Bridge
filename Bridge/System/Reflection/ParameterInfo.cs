@@ -7,20 +7,17 @@ namespace System.Reflection
     public class ParameterInfo
     {
         [Name("sn")]
-        [Field]
         public extern string ScriptName
         {
             get;
         }
 
-        [Field]
         [Name("n")]
         public extern string Name
         {
             get;
         }
 
-        [Field]
         [Name("dv")]
         public extern string DefaultValue
         {
@@ -57,14 +54,12 @@ namespace System.Reflection
             get;
         }
 
-        [Field]
         [Name("pt")]
         public extern Type ParameterType
         {
             get;
         }
 
-        [Field]
         [Name("ps")]
         public extern int Position
         {

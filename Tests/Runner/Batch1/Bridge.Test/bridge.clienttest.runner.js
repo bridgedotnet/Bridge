@@ -21432,7 +21432,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             testBasic: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestAutoProps).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestAutoProps, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestBasic()",
-                    line: "33"
+                    line: "29"
                 } ));
                 Bridge.ClientTest.CSharp6.TestAutoProps.testBasic();
             }
@@ -21805,7 +21805,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             testBasic: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestInterpolatedStrings).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestInterpolatedStrings, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestBasic()",
-                    line: "37"
+                    line: "35"
                 } ));
                 Bridge.ClientTest.CSharp6.TestInterpolatedStrings.testBasic();
             }
@@ -22903,175 +22903,175 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             canGetCustomTypeAttributesForTypeWithNoAttributes: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeAttributeTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TypeAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "CanGetCustomTypeAttributesForTypeWithNoAttributes()",
-                    line: "416"
+                    line: "415"
                 } ));
                 t.Fixture.canGetCustomTypeAttributesForTypeWithNoAttributes();
             },
             canGetCustomTypeAttributesForClassWithAttributes: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeAttributeTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TypeAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "CanGetCustomTypeAttributesForClassWithAttributes()",
-                    line: "423"
+                    line: "422"
                 } ));
                 t.Fixture.canGetCustomTypeAttributesForClassWithAttributes();
             },
             nonScriptableAttributesAreNotIncluded: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeAttributeTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TypeAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "NonScriptableAttributesAreNotIncluded()",
-                    line: "436"
+                    line: "435"
                 } ));
                 t.Fixture.nonScriptableAttributesAreNotIncluded();
             },
             canGetCustomTypeAttributesForInterfaceWithAttributes: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeAttributeTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TypeAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "CanGetCustomTypeAttributesForInterfaceWithAttributes()",
-                    line: "444"
+                    line: "443"
                 } ));
                 t.Fixture.canGetCustomTypeAttributesForInterfaceWithAttributes();
             },
             canGetCustomTypeAttributesForEnumWithAttributes: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeAttributeTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TypeAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "CanGetCustomTypeAttributesForEnumWithAttributes()",
-                    line: "457"
+                    line: "456"
                 } ));
                 t.Fixture.canGetCustomTypeAttributesForEnumWithAttributes();
             },
             inheritedFlagToGetCustomAttributesWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeAttributeTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TypeAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "InheritedFlagToGetCustomAttributesWorks()",
-                    line: "470"
+                    line: "469"
                 } ));
                 t.Fixture.inheritedFlagToGetCustomAttributesWorks();
             },
             deepInheritanceWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeAttributeTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TypeAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "DeepInheritanceWorks()",
-                    line: "484"
+                    line: "483"
                 } ));
                 t.Fixture.deepInheritanceWorks();
             },
             overridingSingleUseAttributeReplacesTheAttributeOnTheBaseClass: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeAttributeTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TypeAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "OverridingSingleUseAttributeReplacesTheAttributeOnTheBaseClass()",
-                    line: "495"
+                    line: "494"
                 } ));
                 t.Fixture.overridingSingleUseAttributeReplacesTheAttributeOnTheBaseClass();
             },
             applyingNewInstanceOfMultipleUseAttributeAddsTheAttribute: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeAttributeTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TypeAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ApplyingNewInstanceOfMultipleUseAttributeAddsTheAttribute()",
-                    line: "506"
+                    line: "505"
                 } ));
                 t.Fixture.applyingNewInstanceOfMultipleUseAttributeAddsTheAttribute();
             },
             nonInheritedAttributeIsNotInherited: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeAttributeTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TypeAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "NonInheritedAttributeIsNotInherited()",
-                    line: "518"
+                    line: "517"
                 } ));
                 t.Fixture.nonInheritedAttributeIsNotInherited();
             },
             getCustomAttributesTypeFilterWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeAttributeTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TypeAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetCustomAttributesTypeFilterWorks()",
-                    line: "525"
+                    line: "524"
                 } ));
                 t.Fixture.getCustomAttributesTypeFilterWorks();
             },
             getCustomAttributesWorksForOpenGenericClass: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeAttributeTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TypeAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetCustomAttributesWorksForOpenGenericClass()",
-                    line: "535"
+                    line: "534"
                 } ));
                 t.Fixture.getCustomAttributesWorksForOpenGenericClass();
             },
             getCustomAttributesWorksForConstructedGenericClass: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeAttributeTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TypeAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetCustomAttributesWorksForConstructedGenericClass()",
-                    line: "543"
+                    line: "542"
                 } ));
                 t.Fixture.getCustomAttributesWorksForConstructedGenericClass();
             },
             getCustomAttributesWorksForOpenGenericInterface: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeAttributeTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TypeAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetCustomAttributesWorksForOpenGenericInterface()",
-                    line: "551"
+                    line: "550"
                 } ));
                 t.Fixture.getCustomAttributesWorksForOpenGenericInterface();
             },
             getCustomAttributesWorksForConstructedGenericInterface: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeAttributeTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TypeAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "GetCustomAttributesWorksForConstructedGenericInterface()",
-                    line: "559"
+                    line: "558"
                 } ));
                 t.Fixture.getCustomAttributesWorksForConstructedGenericInterface();
             },
             allSupportedScalarTypesCanBeUsedAsAttributeArguments: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeAttributeTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TypeAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "AllSupportedScalarTypesCanBeUsedAsAttributeArguments()",
-                    line: "567"
+                    line: "566"
                 } ));
                 t.Fixture.allSupportedScalarTypesCanBeUsedAsAttributeArguments();
             },
             arraysCanBeUsedAsAttributeArguments: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeAttributeTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TypeAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ArraysCanBeUsedAsAttributeArguments()",
-                    line: "585"
+                    line: "584"
                 } ));
                 t.Fixture.arraysCanBeUsedAsAttributeArguments();
             },
             namedValuesEnumCanBeUsedAsAttributeArgument: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeAttributeTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TypeAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "NamedValuesEnumCanBeUsedAsAttributeArgument()",
-                    line: "593"
+                    line: "592"
                 } ));
                 t.Fixture.namedValuesEnumCanBeUsedAsAttributeArgument();
             },
             propertiesWithSetMethodsImplementedAsNormalMethodsCanBeSetInAttributeDeclaration: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeAttributeTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TypeAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "PropertiesWithSetMethodsImplementedAsNormalMethodsCanBeSetInAttributeDeclaration()",
-                    line: "600"
+                    line: "599"
                 } ));
                 t.Fixture.propertiesWithSetMethodsImplementedAsNormalMethodsCanBeSetInAttributeDeclaration();
             },
             propertiesWithSetMethodsImplementedAsInlineCodeCanBeSetInAttributeDeclaration: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeAttributeTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TypeAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "PropertiesWithSetMethodsImplementedAsInlineCodeCanBeSetInAttributeDeclaration()",
-                    line: "607"
+                    line: "606"
                 } ));
                 t.Fixture.propertiesWithSetMethodsImplementedAsInlineCodeCanBeSetInAttributeDeclaration();
             },
             propertiesImplementedAsFieldsCanBeAssignedInAttributeDeclaration: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeAttributeTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TypeAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "PropertiesImplementedAsFieldsCanBeAssignedInAttributeDeclaration()",
-                    line: "614"
+                    line: "613"
                 } ));
                 t.Fixture.propertiesImplementedAsFieldsCanBeAssignedInAttributeDeclaration();
             },
             fieldsCanBeAssignedInAttributeDeclaration: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeAttributeTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TypeAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "FieldsCanBeAssignedInAttributeDeclaration()",
-                    line: "621"
+                    line: "620"
                 } ));
                 t.Fixture.fieldsCanBeAssignedInAttributeDeclaration();
             },
             creatingAttributeWithNamedConstructorWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeAttributeTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TypeAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "CreatingAttributeWithNamedConstructorWorks()",
-                    line: "628"
+                    line: "627"
                 } ));
                 t.Fixture.creatingAttributeWithNamedConstructorWorks();
             },
             creatingAttributeWithInlineCodeConstructorWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeAttributeTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TypeAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "CreatingAttributeWithInlineCodeConstructorWorks()",
-                    line: "635"
+                    line: "634"
                 } ));
                 t.Fixture.creatingAttributeWithInlineCodeConstructorWorks();
             },
             conditionalAttributesWhoseSymbolsAreNotDefinedAreRemoved: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Reflection.TypeAttributeTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TypeAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ConditionalAttributesWhoseSymbolsAreNotDefinedAreRemoved()",
-                    line: "642"
+                    line: "641"
                 } ));
                 t.Fixture.conditionalAttributesWhoseSymbolsAreNotDefinedAreRemoved();
             }

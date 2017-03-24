@@ -24,13 +24,13 @@ namespace System.Collections.Generic
 
         public extern Dictionary(IDictionary<TKey, TValue> dictionary, IEqualityComparer<TKey> comparer);
 
-        [Field]
+        [Name(true)] //[Field]
         public extern IEqualityComparer<TKey> Comparer
         {
             get;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern int Count
         {
             get;

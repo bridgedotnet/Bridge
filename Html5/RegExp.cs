@@ -10,7 +10,6 @@ namespace Bridge.Html5
 
         public extern RegExp(string pattern, string flags);
 
-        [Field]
         [Name("lastIndex")]
         public extern int LastIndex
         {
@@ -18,35 +17,30 @@ namespace Bridge.Html5
             set;
         }
 
-        [Field]
         [Name("global")]
         public extern bool Global
         {
             get;
         }
 
-        [Field]
         [Name("ignoreCase")]
         public extern bool IgnoreCase
         {
             get;
         }
 
-        [Field]
         [Name("multiline")]
         public extern bool Multiline
         {
             get;
         }
 
-        [Field]
         [Name("source")]
         public extern string Pattern
         {
             get;
         }
 
-        [Field]
         [Name("source")]
         public extern string Source
         {
