@@ -10,14 +10,14 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test]
         public static void TestFieldPropertyWithInterface()
         {
-            Script.Write("var Foo = function(){this.bar = null;};");
+            Script.Write("var Foo = function(){this.Bar = null;};");
             var foo = new Foo();
             Car car = foo;
             foo.Bar = "1";
             Assert.AreEqual("1", foo.Bar);
-            Assert.AreEqual("1", foo["bar"]);
+            Assert.AreEqual("1", foo["Bar"]);
             Assert.AreEqual("1", car.Bar);
-            Assert.AreEqual("1", car["bar"]);
+            Assert.AreEqual("1", car["Bar"]);
         }
 
         [External]

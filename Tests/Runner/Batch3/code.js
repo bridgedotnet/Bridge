@@ -953,14 +953,14 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1053", {
         statics: {
             testFieldPropertyWithInterface: function () {
-                var Foo = function(){this.bar = null;};
+                var Foo = function(){this.Bar = null;};
                 var foo = new Foo();
                 var car = foo;
-                foo.bar = "1";
-                Bridge.Test.NUnit.Assert.areEqual("1", foo.bar);
-                Bridge.Test.NUnit.Assert.areEqual("1", Bridge.unbox(foo.bar));
-                Bridge.Test.NUnit.Assert.areEqual("1", car.bar);
-                Bridge.Test.NUnit.Assert.areEqual("1", Bridge.unbox(car.bar));
+                foo.Bar = "1";
+                Bridge.Test.NUnit.Assert.areEqual("1", foo.Bar);
+                Bridge.Test.NUnit.Assert.areEqual("1", Bridge.unbox(foo.Bar));
+                Bridge.Test.NUnit.Assert.areEqual("1", car.Bar);
+                Bridge.Test.NUnit.Assert.areEqual("1", Bridge.unbox(car.Bar));
             }
         }
     });
@@ -9978,20 +9978,20 @@ Bridge.$N1391Result =                 r;
         testExternalInterfaceProperty: function () {
             Bridge.Bridge1848_ITest = {
                 getNewId: function () { return 123; },
-                name: "editor"
+                Name: "editor"
             };
             Bridge.Bridge1848_ITest2 = {
                 Bridge1848_ITest$getNewId: function () { return 123; },
-                Bridge1848_ITest$name: "editor"
+                Bridge1848_ITest$Name: "editor"
             };
 
             var initialiser = Bridge.Bridge1848_ITest;
             Bridge.Test.NUnit.Assert.areEqual(123, initialiser.getNewId());
-            Bridge.Test.NUnit.Assert.areEqual("editor", initialiser.name);
+            Bridge.Test.NUnit.Assert.areEqual("editor", initialiser.Name);
 
             var initialiser2 = Bridge.Bridge1848_ITest2;
             Bridge.Test.NUnit.Assert.areEqual(123, initialiser2.Bridge1848_ITest$getNewId());
-            Bridge.Test.NUnit.Assert.areEqual("editor", initialiser2.Bridge1848_ITest$name);
+            Bridge.Test.NUnit.Assert.areEqual("editor", initialiser2.Bridge1848_ITest$Name);
         }
     });
 
@@ -14204,11 +14204,11 @@ Bridge.$N1391Result =                 r;
         statics: {
             testExternalInterface: function () {
                 var person = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2216.Person("John Smith");
-                Bridge.Test.NUnit.Assert.areEqual("John Smith", person.name);
+                Bridge.Test.NUnit.Assert.areEqual("John Smith", person.Name);
                 Bridge.Test.NUnit.Assert.areEqual("This is John Smith", person.introduce());
 
                 var iperson = Bridge.cast(person, Bridge.getInterface("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2216.IPerson"));
-                Bridge.Test.NUnit.Assert.areEqual("John Smith", iperson[Bridge.geti(iperson, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2216$IPerson$name", "name")]);
+                Bridge.Test.NUnit.Assert.areEqual("John Smith", iperson[Bridge.geti(iperson, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2216$IPerson$Name", "Name")]);
                 Bridge.Test.NUnit.Assert.areEqual("This is John Smith", iperson[Bridge.geti(iperson, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2216$IPerson$introduce", "introduce")]());
             }
         }
@@ -14717,9 +14717,6 @@ Bridge.$N1391Result =                 r;
                 var c1 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.Component1();
                 Bridge.Test.NUnit.Assert.notNull(Bridge.unbox(c1.any));
 
-                var c2 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.Component2();
-                Bridge.Test.NUnit.Assert.notNull(Bridge.unbox(c2.any));
-
                 var c3 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.Component3();
                 Bridge.Test.NUnit.Assert.notNull(Bridge.unbox(c3.any));
             }
@@ -14732,18 +14729,6 @@ Bridge.$N1391Result =                 r;
         config: null,
         any: null,
         $config: {
-            init: function () {
-                this.any = {  };
-            }
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.Component2", {
-        any: null,
-        config: {
-            properties: {
-                config: null
-            },
             init: function () {
                 this.any = {  };
             }
@@ -14773,10 +14758,14 @@ Bridge.$N1391Result =                 r;
             },
             testExternalClassInheritingInterface: function () {
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.Consoler = { };
-                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.Consoler.console = {log: function (msg) {return msg || "[Empty]";}};
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.Consoler.console1 = {log: function (msg) {return msg || "[Empty]";}};
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.Consoler.Console2 = {log: function (msg) {return msg || "[Empty]";}};
 
-                Bridge.Test.NUnit.Assert.areEqual("[Empty]", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.Consoler.console.log());
-                Bridge.Test.NUnit.Assert.areEqual("[Msg]", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.Consoler.console.log("[Msg]"));
+                Bridge.Test.NUnit.Assert.areEqual("[Empty]", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.Consoler.console1.log());
+                Bridge.Test.NUnit.Assert.areEqual("[Msg]", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.Consoler.console1.log("[Msg]"));
+
+                Bridge.Test.NUnit.Assert.areEqual("[Empty]", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.Consoler.Console2.log());
+                Bridge.Test.NUnit.Assert.areEqual("[Msg]", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.Consoler.Console2.log("[Msg]"));
             },
             testExternalInheritingInterfaces: function () {
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.IBaseContainer = function() { };
@@ -14784,15 +14773,15 @@ Bridge.$N1391Result =                 r;
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.Container = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.IBaseContainer;
 
                 var baseCnt = Bridge.cast(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.Container(), Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.IBaseContainer);
-                baseCnt.value = 1;
+                baseCnt.Value = 1;
                 var r1 = 0;
-                r1 = baseCnt.value;
+                r1 = baseCnt.Value;
                 Bridge.Test.NUnit.Assert.areEqual(1, r1);
 
                 var cnt = Bridge.cast(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.Container(), Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.IContainer);
-                cnt.value = 2;
+                cnt.Value = 2;
                 var r2 = 0;
-                r2 = cnt.value;
+                r2 = cnt.Value;
                 Bridge.Test.NUnit.Assert.areEqual(2, r2);
             }
         }
@@ -15763,28 +15752,21 @@ Bridge.$N1391Result =                 r;
         statics: {
             intProp: 2,
             testPropertyInitializer: function () {
-                var d2 = { value1: Bridge.getDefaultValue(System.Int32), value2: Bridge.getDefaultValue(System.Int32) };
+                var d2 = { value1: Bridge.getDefaultValue(System.Int32) };
                 Bridge.Test.NUnit.Assert.areEqual(0, d2.value1);
-                Bridge.Test.NUnit.Assert.areEqual(0, d2.value2);
 
-                var d3 = { value7: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.intProp, value8: 1, value1: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.intProp, value2: 1, value4: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.intProp, value5: 1 };
+                var d3 = { value7: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.intProp, value8: 1, value1: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.intProp, value2: 1 };
                 Bridge.Test.NUnit.Assert.areEqual(2, d3.value1);
                 Bridge.Test.NUnit.Assert.areEqual(1, d3.value2);
                 Bridge.Test.NUnit.Assert.null(d3.value3);
-                Bridge.Test.NUnit.Assert.areEqual(2, d3.value4);
-                Bridge.Test.NUnit.Assert.areEqual(1, d3.value5);
-                Bridge.Test.NUnit.Assert.null(d3.value6);
                 Bridge.Test.NUnit.Assert.areEqual(2, d3.value7);
                 Bridge.Test.NUnit.Assert.areEqual(1, d3.value8);
                 Bridge.Test.NUnit.Assert.null(d3.value9);
 
-                var d4 = { value7: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.intProp, value8: 1, value9: 0, value1: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.intProp, value2: 1, value3: 0, value4: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.intProp, value5: 1, value6: 0 };
+                var d4 = { value7: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.intProp, value8: 1, value9: 0, value1: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.intProp, value2: 1, value3: 0 };
                 Bridge.Test.NUnit.Assert.areEqual(2, d4.value1);
                 Bridge.Test.NUnit.Assert.areEqual(1, d4.value2);
                 Bridge.Test.NUnit.Assert.areEqual(0, d4.value3);
-                Bridge.Test.NUnit.Assert.areEqual(2, d4.value4);
-                Bridge.Test.NUnit.Assert.areEqual(1, d4.value5);
-                Bridge.Test.NUnit.Assert.areEqual(0, d4.value6);
                 Bridge.Test.NUnit.Assert.areEqual(2, d4.value7);
                 Bridge.Test.NUnit.Assert.areEqual(1, d4.value8);
                 Bridge.Test.NUnit.Assert.areEqual(0, d4.value9);
@@ -20634,11 +20616,11 @@ Bridge.$N1391Result =                 r;
         statics: {
             config: {
                 properties: {
-                    value: Bridge.box(7, System.Int32)
+                    Value: Bridge.box(7, System.Int32)
                 }
             },
             testFieldPropertyWithInitializer: function () {
-                Bridge.Test.NUnit.Assert.areEqual(7, Bridge.unbox(Bridge.ClientTest.Batch3.BridgeIssues.Bridge706.value));
+                Bridge.Test.NUnit.Assert.areEqual(7, Bridge.unbox(Bridge.ClientTest.Batch3.BridgeIssues.Bridge706.Value));
             }
         }
     });
@@ -25079,19 +25061,19 @@ Bridge.$N1391Result =                 r;
         inherits: [Bridge.getInterface("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2216.IPerson")],
         config: {
             properties: {
-                name: null
+                Name: null
             },
             alias: [
-            "name", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2216$IPerson$name",
+            "Name", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2216$IPerson$Name",
             "introduce", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2216$IPerson$introduce"
             ]
         },
         ctor: function (name) {
             this.$initialize();
-            this.name = name;
+            this.Name = name;
         },
         introduce: function () {
-            return System.String.format("This is {0}", this.name);
+            return System.String.format("This is {0}", this.Name);
         }
     });
 

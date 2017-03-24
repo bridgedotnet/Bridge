@@ -31,11 +31,11 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             /*@Bridge.Bridge1848_ITest = {
                 getNewId: function () { return 123; },
-                name: "editor"
+                Name: "editor"
             };
             Bridge.Bridge1848_ITest2 = {
                 Bridge1848_ITest$getNewId: function () { return 123; },
-                Bridge1848_ITest$name: "editor"
+                Bridge1848_ITest$Name: "editor"
             };*/
 
             var initialiser = Script.Write<ITest>("Bridge.Bridge1848_ITest");
