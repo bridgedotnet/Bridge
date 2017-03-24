@@ -10,13 +10,12 @@ namespace System.Linq.Expressions
     public sealed class IndexExpression : Expression
     {
         [Name("obj")]
-        [Field]
         public extern Expression Object { get; private set; }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern PropertyInfo Indexer { get; private set; }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern ReadOnlyCollection<Expression> Arguments { get; private set; }
 
         internal extern IndexExpression();

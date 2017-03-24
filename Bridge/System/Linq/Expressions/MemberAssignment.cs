@@ -7,7 +7,7 @@ namespace System.Linq.Expressions
     [Cast("{this}.btype === 0")]
     public sealed class MemberAssignment : MemberBinding
     {
-        [Field]
+        [Name(true)] //[Field]
         public extern Expression Expression { get; private set; }
 
         internal extern MemberAssignment();

@@ -8,10 +8,9 @@ namespace System.Linq.Expressions
     public abstract class DynamicExpression : Expression
     {
         [Name("dtype")]
-        [Field]
         public extern DynamicExpressionType DynamicType { get; private set; }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern Expression Expression { get; private set; }
 
         internal extern DynamicExpression();

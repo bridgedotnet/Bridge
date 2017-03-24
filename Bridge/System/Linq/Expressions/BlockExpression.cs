@@ -8,7 +8,7 @@ namespace System.Linq.Expressions
     [Cast("{this}.ntype === 47")]
     public sealed class BlockExpression : Expression
     {
-        [Field]
+        [Name(true)] //[Field]
         public extern ReadOnlyCollection<Expression> Expressions { get; private set; }
 
         public extern ReadOnlyCollection<ParameterExpression> Variables

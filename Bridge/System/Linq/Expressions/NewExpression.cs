@@ -9,13 +9,12 @@ namespace System.Linq.Expressions
     [Cast("{this}.ntype === 31")]
     public sealed class NewExpression : Expression
     {
-        [Field]
+        [Name(true)] //[Field]
         public new extern ConstructorInfo Constructor { get; private set; }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern ReadOnlyCollection<Expression> Arguments { get; private set; }
 
-        [Field]
         [Name("m")]
         public extern ReadOnlyCollection<MemberInfo> Members { get; private set; }
 
