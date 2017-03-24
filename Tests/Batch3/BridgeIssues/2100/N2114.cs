@@ -21,7 +21,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             public long TestField2;
 
             [Name("0p")]
-            [FieldProperty]
             public int TespProp
             {
                 get; set;
@@ -36,7 +35,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 #pragma warning restore 169
 
             [Name("0p1")]
-            [FieldProperty]
             public static int TespProp1
             {
                 get; set;

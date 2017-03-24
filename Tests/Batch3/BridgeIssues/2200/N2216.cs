@@ -10,7 +10,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     {
         public class Person : IPerson
         {
-            [FieldProperty]
             public string Name { get; set; }
 
             public Person(string name)
@@ -27,7 +26,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [ExternalInterface(IsVirtual = true)]
         public interface IPerson
         {
-            [FieldProperty]
             string Name { get; set; }
 
             string Introduce();

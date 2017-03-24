@@ -36,8 +36,7 @@ namespace Bridge.Html5
         /// <summary>
         /// Gets the number of parameters expected by the function.
         /// </summary>
-        [Field]
-        public extern int Length { get; }
+        public readonly int Length;
 
         /// <summary>
         /// Invokes the function against the specified object instance.

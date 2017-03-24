@@ -307,7 +307,7 @@ namespace System
         [Template("System.Array.type({this}, {rank})")]
         public extern Type MakeArrayType(int rank);
 
-        [Field]
+        [Name(true)] //[Field]
         public extern object Prototype { get; }
 
         [EditorBrowsable(EditorBrowsableState.Never)]

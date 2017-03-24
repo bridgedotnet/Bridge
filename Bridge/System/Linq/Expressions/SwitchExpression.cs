@@ -9,16 +9,16 @@ namespace System.Linq.Expressions
     [Cast("{this}.ntype === 59")]
     public sealed class SwitchExpression : Expression
     {
-        [Field]
+        [Name(true)] //[Field]
         public extern Expression SwitchValue { get; private set; }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern ReadOnlyCollection<SwitchCase> Cases { get; private set; }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern Expression DefaultBody { get; private set; }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern MethodInfo Comparison { get; private set; }
 
         internal extern SwitchExpression();

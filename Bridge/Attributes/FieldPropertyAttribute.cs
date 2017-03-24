@@ -9,6 +9,7 @@ namespace Bridge
     [External]
     [AttributeUsage(AttributeTargets.Property)]
     [NonScriptable]
+    [Obsolete("Deprecated in Bridge 16.0. See Issue #2234 for more information.", true)]
     public sealed class FieldPropertyAttribute : Attribute
     {
     }

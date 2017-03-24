@@ -7,13 +7,12 @@ namespace System.Globalization
     {
         public extern DateTimeFormatInfo();
 
-        [Field]
+        [Name(true)] //[Field]
         public static extern DateTimeFormatInfo InvariantInfo
         {
             get;
         }
 
-        [Field]
         [Name("amDesignator")]
         public extern string AMDesignator
         {
@@ -21,7 +20,6 @@ namespace System.Globalization
             set;
         }
 
-        [Field]
         [Name("pmDesignator")]
         public extern string PMDesignator
         {
@@ -29,133 +27,132 @@ namespace System.Globalization
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string DateSeparator
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string TimeSeparator
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string UniversalSortableDateTimePattern
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string SortableDateTimePattern
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string FullDateTimePattern
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string LongDatePattern
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string ShortDatePattern
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string LongTimePattern
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string ShortTimePattern
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern int FirstDayOfWeek
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string[] DayNames
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string[] AbbreviatedDayNames
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string[] ShortestDayNames
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string[] MonthNames
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string[] MonthGenitiveNames
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string[] AbbreviatedMonthNames
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string[] AbbreviatedMonthGenitiveNames
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string MonthDayPattern
         {
             get;
             set;
         }
 
-        [Field]
         [Name("rfc1123Pattern")]
         public extern string RFC1123Pattern
         {
@@ -163,14 +160,14 @@ namespace System.Globalization
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string YearMonthPattern
         {
             get;
             set;
         }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern string RoundtripFormat
         {
             get;
@@ -181,7 +178,7 @@ namespace System.Globalization
 
         public extern object Clone();
 
-        [Field]
+        [Name(true)] //[Field]
         public static extern DateTimeFormatInfo CurrentInfo
         {
             get;

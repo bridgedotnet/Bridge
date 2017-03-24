@@ -70,7 +70,6 @@
     <Compile Include="BridgeIssues\1500\N1499.cs" />
     <Compile Include="BridgeIssues\1500\N1472.cs" />
     <Compile Include="BridgeIssues\1500\N1461.cs" />
-    <Compile Include="BridgeIssues\1500\N1424.cs" />
     <Compile Include="BridgeIssues\1500\N1412.cs" />
     <Compile Include="BridgeIssues\1500\N1215.cs" />
     <Compile Include="BridgeIssues\1500\N1212.cs" />
