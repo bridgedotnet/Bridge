@@ -183,7 +183,7 @@ namespace Bridge.Translator.TypeScript
 
                 this.Emitter.Output = this.GetOutputForType(typeInfo);
                 var nestedTypes = types.Where(t => t.ParentType == type);
-                new ClassBlock(this.Emitter, this.Emitter.TypeInfo, nestedTypes, types).Emit();
+                new ClassBlock(this.Emitter, this.Emitter.TypeInfo, nestedTypes, types, this.ns).Emit();
                 this.WriteNewLine();
 
                 if (type != last)

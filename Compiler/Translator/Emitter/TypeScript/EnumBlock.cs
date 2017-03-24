@@ -8,13 +8,20 @@ namespace Bridge.Translator.TypeScript
 {
     public class EnumBlock : TypeScriptBlock
     {
-        public EnumBlock(IEmitter emitter, ITypeInfo typeInfo)
+        public EnumBlock(IEmitter emitter, ITypeInfo typeInfo, string ns)
             : base(emitter, typeInfo.TypeDeclaration)
         {
             this.TypeInfo = typeInfo;
+            this.Namespace = ns;
         }
 
         public ITypeInfo TypeInfo
+        {
+            get;
+            set;
+        }
+
+        public string Namespace
         {
             get;
             set;
@@ -30,7 +37,12 @@ namespace Bridge.Translator.TypeScript
                 name = BridgeTypes.ToTypeScriptName(this.TypeInfo.Type, this.Emitter, false, true);
             }
 
-            this.Write("export enum ");
+            if (this.Namespace != null)
+            {
+                this.Write("export ");
+            }
+
+            this.Write("enum ");
             this.Write(name);
 
             this.WriteSpace();
