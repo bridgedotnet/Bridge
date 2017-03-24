@@ -75,20 +75,13 @@ namespace Bridge.Translator.TypeScript
             if (this.Emitter.CurrentDependencies != null && this.Emitter.CurrentDependencies.Count > 0)
             {
                 StringBuilder depSb = new StringBuilder();
-                var last = this.Emitter.CurrentDependencies.LastOrDefault();
                 foreach (var d in this.Emitter.CurrentDependencies)
                 {
                     depSb.Append(@"/// <reference path=""./" + d.DependencyName + @".d.ts"" />");
-
-                    if (d != last)
-                    {
-                        depSb.Append(newLine);
-                    }
+                    depSb.Append(newLine);
                 }
 
-                var index = sb.ToString().IndexOf(Bridge.Translator.Emitter.NEW_LINE);
-
-                sb.Insert(index, depSb.ToString());
+                sb.Insert(0, depSb.ToString() + newLine);
                 this.Emitter.CurrentDependencies.Clear();
             }
         }

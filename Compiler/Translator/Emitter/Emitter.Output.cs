@@ -228,7 +228,7 @@ namespace Bridge.Translator
                 }
                 else
                 {
-                    char newLine = Bridge.Contract.XmlToJSConstants.DEFAULT_LINE_SEPARATOR;
+                    string newLine = Bridge.Contract.XmlToJSConstants.DEFAULT_LINE_SEPARATOR.ToString();
                     tmp.Insert(0, @"/// <reference path=""./bridge.d.ts"" />" + newLine + newLine);
                 }
 
