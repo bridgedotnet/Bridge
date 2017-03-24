@@ -32,6 +32,28 @@ declare module TypeScript.Issues {
         }
     }
 
+    export interface N2029Interface$1<T> {
+        Value1: number;
+    }
+
+    export interface N2029 extends TypeScript.Issues.N2029Interface$1<number> {
+        Value1: number;
+    }
+    export interface N2029Func extends Function {
+        prototype: N2029;
+        new (): N2029;
+    }
+    var N2029: N2029Func;
+
+    export interface N2493Operation3 {
+        add(n: number): number;
+    }
+    export interface N2493Operation3Func extends Function {
+        prototype: N2493Operation3;
+        new (): N2493Operation3;
+    }
+    var N2493Operation3: N2493Operation3Func;
+
     export interface N1640 {
     }
     export interface N1640Func extends Function {
@@ -59,57 +81,6 @@ declare module TypeScript.Issues {
             removeOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
             TypeScript$Issues$N1640$IGamePlay$startGame(s: string): void;
             startGame(s: string): void;
-        }
-    }
-
-    export interface N2029 extends TypeScript.Issues.N2029Interface$1<number> {
-        Value1: number;
-    }
-    export interface N2029Func extends Function {
-        prototype: N2029;
-        new (): N2029;
-    }
-    var N2029: N2029Func;
-
-    export interface N2030Attribute extends System.Attribute {
-        IsUnspecified: boolean;
-    }
-    export interface N2030AttributeFunc extends Function {
-        prototype: N2030Attribute;
-        new (IsUnspecified: boolean): N2030Attribute;
-    }
-    var N2030Attribute: N2030AttributeFunc;
-
-    export interface N2031DictionaryMap$2<T1,T2> {
-        Forward: TypeScript.Issues.N2031DictionaryMap$2.Indexer$2<T1,T2,T1,T2>;
-        Reverse: TypeScript.Issues.N2031DictionaryMap$2.Indexer$2<T1,T2,T2,T1>;
-        add(t1: T1, t2: T2): void;
-    }
-    export interface N2031DictionaryMap$2Func extends Function {
-        <T1, T2>($T1: Bridge.TypeRef<T1>, $T2: Bridge.TypeRef<T2>): {
-            prototype: N2031DictionaryMap$2<T1,T2>;
-            Indexer$2: TypeScript.Issues.N2031DictionaryMap$2.Indexer$2Func;
-            new (): N2031DictionaryMap$2<T1,T2>;
-            ctor: {
-                new (): N2031DictionaryMap$2<T1,T2>
-            };
-            $ctor1: {
-                new (initialValues: System.Collections.Generic.KeyValuePair$2<T1,T2>[]): N2031DictionaryMap$2<T1,T2>
-            };
-        }
-    }
-    var N2031DictionaryMap$2: N2031DictionaryMap$2Func;
-    module N2031DictionaryMap$2 {
-        export interface Indexer$2<T1,T2,T3,T4> {
-            getItem(index: T3): T4;
-            setItem(index: T3, value: T4): void;
-            containsKey(index: T3): boolean;
-        }
-        export interface Indexer$2Func extends Function {
-            <T1, T2, T3, T4>($T1: Bridge.TypeRef<T1>, $T2: Bridge.TypeRef<T2>, $T3: Bridge.TypeRef<T3>, $T4: Bridge.TypeRef<T4>): {
-                prototype: Indexer$2<T1,T2,T3,T4>;
-                new (dictionary: System.Collections.Generic.Dictionary$2<T3,T4>): Indexer$2<T1,T2,T3,T4>;
-            }
         }
     }
 
@@ -154,15 +125,15 @@ declare module TypeScript.Issues {
     export interface N2474Func extends Function {
         prototype: N2474;
         ValueEnum: N2474.ValueEnumFunc;
-        StringNameUpperCase: N2474.StringNameUpperCaseFunc;
-        StringNameLowerCase: N2474.StringNameLowerCaseFunc;
-        StringNamePreserveCase: N2474.StringNamePreserveCaseFunc;
         Enum: N2474.EnumFunc;
         NameEnum: N2474.NameEnumFunc;
         NameLowerCase: N2474.NameLowerCaseFunc;
         NamePreserveCase: N2474.NamePreserveCaseFunc;
         NameUpperCase: N2474.NameUpperCaseFunc;
         StringName: N2474.StringNameFunc;
+        StringNameLowerCase: N2474.StringNameLowerCaseFunc;
+        StringNamePreserveCase: N2474.StringNamePreserveCaseFunc;
+        StringNameUpperCase: N2474.StringNameUpperCaseFunc;
         new (): N2474;
     }
     var N2474: N2474Func;
@@ -172,27 +143,6 @@ declare module TypeScript.Issues {
         export interface ValueEnumFunc extends Function {
             prototype: ValueEnum;
             Value: number;
-        }
-
-        export interface StringNameUpperCase {
-        }
-        export interface StringNameUpperCaseFunc extends Function {
-            prototype: StringNameUpperCase;
-            VALUE: string;
-        }
-
-        export interface StringNameLowerCase {
-        }
-        export interface StringNameLowerCaseFunc extends Function {
-            prototype: StringNameLowerCase;
-            value: string;
-        }
-
-        export interface StringNamePreserveCase {
-        }
-        export interface StringNamePreserveCaseFunc extends Function {
-            prototype: StringNamePreserveCase;
-            Value: string;
         }
 
         export interface Enum {
@@ -236,9 +186,68 @@ declare module TypeScript.Issues {
             prototype: StringName;
             value: string;
         }
+
+        export interface StringNameLowerCase {
+        }
+        export interface StringNameLowerCaseFunc extends Function {
+            prototype: StringNameLowerCase;
+            value: string;
+        }
+
+        export interface StringNamePreserveCase {
+        }
+        export interface StringNamePreserveCaseFunc extends Function {
+            prototype: StringNamePreserveCase;
+            Value: string;
+        }
+
+        export interface StringNameUpperCase {
+        }
+        export interface StringNameUpperCaseFunc extends Function {
+            prototype: StringNameUpperCase;
+            VALUE: string;
+        }
     }
 
-    export interface N2029Interface$1<T> {
-        Value1: number;
+    export interface N2030Attribute extends System.Attribute {
+        IsUnspecified: boolean;
+    }
+    export interface N2030AttributeFunc extends Function {
+        prototype: N2030Attribute;
+        new (IsUnspecified: boolean): N2030Attribute;
+    }
+    var N2030Attribute: N2030AttributeFunc;
+
+    export interface N2031DictionaryMap$2<T1,T2> {
+        Forward: TypeScript.Issues.N2031DictionaryMap$2.Indexer$2<T1,T2,T1,T2>;
+        Reverse: TypeScript.Issues.N2031DictionaryMap$2.Indexer$2<T1,T2,T2,T1>;
+        add(t1: T1, t2: T2): void;
+    }
+    export interface N2031DictionaryMap$2Func extends Function {
+        <T1, T2>($T1: Bridge.TypeRef<T1>, $T2: Bridge.TypeRef<T2>): {
+            prototype: N2031DictionaryMap$2<T1,T2>;
+            Indexer$2: TypeScript.Issues.N2031DictionaryMap$2.Indexer$2Func;
+            new (): N2031DictionaryMap$2<T1,T2>;
+            ctor: {
+                new (): N2031DictionaryMap$2<T1,T2>
+            };
+            $ctor1: {
+                new (initialValues: System.Collections.Generic.KeyValuePair$2<T1,T2>[]): N2031DictionaryMap$2<T1,T2>
+            };
+        }
+    }
+    var N2031DictionaryMap$2: N2031DictionaryMap$2Func;
+    module N2031DictionaryMap$2 {
+        export interface Indexer$2<T1,T2,T3,T4> {
+            getItem(index: T3): T4;
+            setItem(index: T3, value: T4): void;
+            containsKey(index: T3): boolean;
+        }
+        export interface Indexer$2Func extends Function {
+            <T1, T2, T3, T4>($T1: Bridge.TypeRef<T1>, $T2: Bridge.TypeRef<T2>, $T3: Bridge.TypeRef<T3>, $T4: Bridge.TypeRef<T4>): {
+                prototype: Indexer$2<T1,T2,T3,T4>;
+                new (dictionary: System.Collections.Generic.Dictionary$2<T3,T4>): Indexer$2<T1,T2,T3,T4>;
+            }
+        }
     }
 }

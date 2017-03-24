@@ -215,6 +215,12 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         }
     });
 
+    Bridge.define("TypeScript.Issues.N2493Operation3", {
+        add: function (n) {
+            return ((n + 3) | 0);
+        }
+    });
+
     Bridge.define("TypeScript.Issues.N1640.GamePlay", {
         inherits: [TypeScript.Issues.N1640.IGamePlay],
         config: {
