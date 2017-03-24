@@ -6,7 +6,6 @@ namespace System.Reflection
     [Unbox(true)]
     public class MethodInfo : MethodBase
     {
-        [Field]
         [Name("rt")]
         public extern Type ReturnType
         {
@@ -90,7 +89,6 @@ namespace System.Reflection
         /// Script name of the method. Null if the method has a special implementation.
         /// </summary>
         [Name("sn")]
-        [Field]
         public extern string ScriptName
         {
             get;
@@ -101,7 +99,6 @@ namespace System.Reflection
         /// For methods with a special implementation (eg. [Template]), contains a delegate that represents the method. Null for normal methods.
         /// </summary>
         [Name("def")]
-        [Field]
         public extern Delegate SpecialImplementation
         {
             get;

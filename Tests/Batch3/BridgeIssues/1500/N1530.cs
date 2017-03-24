@@ -15,12 +15,12 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [ObjectLiteral]
         private interface Parent
         {
-            [FieldProperty]
+            //[FieldProperty]
             string Name { get; set; }
         }
 
         [Test]
-        public void TestObjectLiteralFieldImplementingInterface()
+        public void TestObjectLiteralPropertyImplementingInterface()
         {
             Child c = new Child { Name = "name" };
             Parent p = c;

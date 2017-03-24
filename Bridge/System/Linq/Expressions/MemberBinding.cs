@@ -8,10 +8,9 @@ namespace System.Linq.Expressions
     public abstract class MemberBinding
     {
         [Name("btype")]
-        [Field]
         public extern MemberBindingType BindingType { get; private set; }
 
-        [Field]
+        [Name(true)] //[Field]
         public extern MemberInfo Member { get; private set; }
 
         internal extern MemberBinding();

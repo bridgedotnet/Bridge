@@ -27,8 +27,7 @@ namespace Bridge.Translator
             var memberResult = this.Emitter.Resolver.ResolveNode(this.PropertyDeclaration, this.Emitter) as MemberResolveResult;
 
             if (memberResult != null &&
-                (AttributeHelper.HasFieldAttribute(memberResult.Member) ||
-                    memberResult.Member.Attributes.Any(a => a.AttributeType.FullName == "Bridge.ExternalAttribute"))
+                memberResult.Member.Attributes.Any(a => a.AttributeType.FullName == "Bridge.ExternalAttribute")
                 )
             {
                 return;

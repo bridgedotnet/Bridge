@@ -6,11 +6,9 @@ namespace System.Linq.Expressions
     [Name("System.Object")]
     public sealed class LabelTarget
     {
-        [Field]
         [Name("n")]
         public extern string Name { get; }
 
-        [Field]
         [Name("t")]
         public extern Type Type { get; }
 

@@ -1,6 +1,14 @@
 /// <reference path="./bridge.d.ts" />
 
 declare module Functions {
+    export interface Delegates {
+    }
+    export interface DelegatesFunc extends Function {
+        prototype: Delegates;
+        new (): Delegates;
+    }
+    var Delegates: DelegatesFunc;
+
     export interface DelegateInterface {
         Functions$DelegateInterface$addMethodVoidDelegate(value: {(): void}): void;
         Functions$DelegateInterface$removeMethodVoidDelegate(value: {(): void}): void;
@@ -15,14 +23,6 @@ declare module Functions {
         addMethodStringDelegateIntResult(value: {(s: string): number}): void;
         removeMethodStringDelegateIntResult(value: {(s: string): number}): void;
     }
-
-    export interface Delegates {
-    }
-    export interface DelegatesFunc extends Function {
-        prototype: Delegates;
-        new (): Delegates;
-    }
-    var Delegates: DelegatesFunc;
 
     export interface DelegateClass {
         methodVoidDelegate: {(): void};

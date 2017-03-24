@@ -247,37 +247,37 @@ namespace Bridge.ClientTest.Reflection
             [Reflectable]
             public int P1 { get; set; }
 
-            [Reflectable, FieldProperty]
+            [Reflectable]
             public string P2 { get; set; }
 
             [Reflectable]
             public static DateTime P3 { get; set; }
 
-            [Reflectable, FieldProperty]
+            [Reflectable]
             public static double P4 { get; set; }
 
             [Reflectable]
             public int P5 { get { return 0; } }
 
-            [Reflectable, FieldProperty]
+            [Reflectable]
             public string P6 { get; set; }
 
             [Reflectable]
             public static DateTime P7 { get { return default(DateTime); } }
 
-            [Reflectable, FieldProperty]
+            [Reflectable]
             public static double P8 { get; set; }
 
             [Reflectable]
             public int P9 { set { } }
 
-            [Reflectable, FieldProperty]
+            [Reflectable]
             public string P10 { get; set; }
 
             [Reflectable]
             public static DateTime P11 { set { } }
 
-            [Reflectable, FieldProperty]
+            [Reflectable]
             public static double P12 { get; set; }
 
             [Reflectable]

@@ -27,11 +27,17 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [External]
         public class Consoler
         {
-            [Field]
-            public static IConsole console
+            //[Field]
+            public static IConsole console1
             {
                 get;
             }
+
+            public static IConsole Console2
+            {
+                get;
+            }
+
         }
 
         [External]
@@ -45,16 +51,20 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public static void TestExternalClassInheritingInterface()
         {
             //@ Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.Consoler = { };
-            //@ Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.Consoler.console = {log: function (msg) {return msg || "[Empty]";}};
+            //@ Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.Consoler.console1 = {log: function (msg) {return msg || "[Empty]";}};
+            //@ Bridge.ClientTest.Batch3.BridgeIssues.Bridge2313.Consoler.Console2 = {log: function (msg) {return msg || "[Empty]";}};
 
-            Assert.AreEqual("[Empty]", Consoler.console.Log());
-            Assert.AreEqual("[Msg]", Consoler.console.Log("[Msg]"));
+            Assert.AreEqual("[Empty]", Consoler.console1.Log());
+            Assert.AreEqual("[Msg]", Consoler.console1.Log("[Msg]"));
+
+            Assert.AreEqual("[Empty]", Consoler.Console2.Log());
+            Assert.AreEqual("[Msg]", Consoler.Console2.Log("[Msg]"));
         }
 
         [External]
         public interface IContainer : IBaseContainer
         {
-            [Field]
+            //[Field]
             new int Value
             {
                 get; set;
@@ -64,7 +74,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [External]
         public interface IBaseContainer
         {
-            [Field]
+            //[Field]
             int Value
             {
                 get; set;
@@ -74,7 +84,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [External]
         private class Container : IContainer
         {
-            [Field]
+            //[Field]
             public int Value
             {
                 get; set;
@@ -91,13 +101,13 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             IBaseContainer baseCnt = (IBaseContainer)new Container();
             baseCnt.Value = 1;
             int r1 = 0;
-            //@ r1 = baseCnt.value;
+            //@ r1 = baseCnt.Value;
             Assert.AreEqual(1, r1);
 
             IContainer cnt = (IContainer)new Container();
             cnt.Value = 2;
             int r2 = 0;
-            //@ r2 = cnt.value;
+            //@ r2 = cnt.Value;
             Assert.AreEqual(2, r2);
         }
     }
