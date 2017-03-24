@@ -994,7 +994,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         // Bridge[#410]
-        [Test(Name = "#410", ExpectedCount = 50)]
+        [Test(Name = "#410", ExpectedCount = 38)]
         public static void N410()
         {
             // Decimal consts
@@ -1014,13 +1014,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             decimal dz = 0m;
             DecimalZero = decimal.Zero + dz;
             DecimalOne = decimal.One + dz;
-            ;
             DecimalMinusOne = decimal.MinusOne + dz;
-            ;
             DecimalMaxValue = decimal.MaxValue + dz;
-            ;
             DecimalMinValue = decimal.MinValue + dz;
-            ;
 
             EnsureNumber(DecimalZero, "0", "DecimalZeroin expression");
             EnsureNumber(DecimalOne, "1", "DecimalOnein expression");
@@ -1065,43 +1061,19 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             // Math consts
             var MathE = Math.E;
-            var MathLN10 = Math.LN10;
-            var MathLN2 = Math.LN2;
-            var MathLOG2E = Math.LOG2E;
-            var MathLOG10E = Math.LOG10E;
             var MathPI = Math.PI;
-            var MathSQRT1_2 = Math.SQRT1_2;
-            var MathSQRT2 = Math.SQRT2;
 
             EnsureNumber(MathE, "2.71828182845905", "MathE");
-            EnsureNumber(MathLN10, "2.30258509299405", "MathLN10");
-            EnsureNumber(MathLN2, "0.69314718055995", "MathLN2");
             //IE has Math.LOG2E defined as 1.4426950408889633 instead of standard 1.4426950408889634
-            AssertAlmostEqual(MathLOG2E, 1.4426950408889634, "MathLOG2E");
-            EnsureNumber(MathLOG10E, "0.43429448190325", "MathLOG10E");
             EnsureNumber(MathPI, "3.14159265358979", "MathPI");
-            EnsureNumber(MathSQRT1_2, "0.70710678118655", "MathSQRT1_2");
-            EnsureNumber(MathSQRT2, "1.4142135623731", "MathSQRT2");
 
             // Math consts in expression
             MathE = Math.E + 0;
-            MathLN10 = Math.LN10 + 0;
-            MathLN2 = Math.LN2 + 0;
-            MathLOG2E = Math.LOG2E + 0;
-            MathLOG10E = Math.LOG10E + 0;
             MathPI = Math.PI + 0;
-            MathSQRT1_2 = Math.SQRT1_2 + 0;
-            MathSQRT2 = Math.SQRT2 + 0;
 
             EnsureNumber(MathE, "2.71828182845905", "MathEin expression");
-            EnsureNumber(MathLN10, "2.30258509299405", "MathLN10in expression");
-            EnsureNumber(MathLN2, "0.69314718055995", "MathLN2in expression");
             //IE has Math.LOG2E defined as 1.4426950408889633 instead of standard 1.4426950408889634
-            AssertAlmostEqual(MathLOG2E, 1.4426950408889634, "MathLOG2Ein expression");
-            EnsureNumber(MathLOG10E, "0.43429448190325", "MathLOG10Ein expression");
             EnsureNumber(MathPI, "3.14159265358979", "MathPIin expression");
-            EnsureNumber(MathSQRT1_2, "0.70710678118655", "MathSQRT1_2in expression");
-            EnsureNumber(MathSQRT2, "1.4142135623731", "MathSQRT2in expression");
 
             // Single consts
             var SingleMaxValue = float.MaxValue;
