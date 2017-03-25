@@ -19,6 +19,11 @@ namespace Bridge
         public extern ReflectableAttribute(params MemberAccessibility[] memberAccessibilities);
 
         public extern ReflectableAttribute(TypeAccessibility typeAccessibility);
+
+        public bool Inherits
+        {
+            get; set;
+        }
     }
 
     /// <summary>
