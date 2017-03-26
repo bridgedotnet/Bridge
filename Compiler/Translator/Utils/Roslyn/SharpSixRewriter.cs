@@ -582,6 +582,7 @@ namespace Bridge.Translator
                         modifiers = modifiers.Add(SyntaxFactory.Token(SyntaxKind.StaticKeyword).WithTrailingTrivia(SyntaxFactory.Space));
                     }
 
+                    var evc = SyntaxFactory.EqualsValueClause(newNode.Initializer.Value);
                     var field = SyntaxFactory.FieldDeclaration(SyntaxFactory.List<AttributeListSyntax>(),
                         modifiers,
                         SyntaxFactory.VariableDeclaration(
@@ -590,15 +591,16 @@ namespace Bridge.Translator
                                 SyntaxFactory.VariableDeclarator(
                                     SyntaxFactory.Identifier(AutoInitFieldPrefix + node.Identifier.Text),
                                     null,
-                                    newNode.Initializer
+                                    evc
                                 )
                             })
                         ),
                         SyntaxFactory.Token(SyntaxKind.SemicolonToken)
                     );
-                    field = field.WithLeadingTrivia(node.GetLeadingTrivia().ExcludeDirectivies()).WithTrailingTrivia(node.GetTrailingTrivia().ExcludeDirectivies());
+                    
                     fields.Add(field);
                     newNode = newNode.ReplaceNode(newNode.Initializer, (SyntaxNode)null);
+                    newNode = newNode.WithTrailingTrivia(node.Initializer.GetLeadingTrivia().AddRange(node.Initializer.GetTrailingTrivia()));
                     newNode = SyntaxHelper.RemoveSemicolon(newNode, newNode.SemicolonToken, t => newNode.WithSemicolonToken(t));
                 }
 
@@ -634,9 +636,14 @@ namespace Bridge.Translator
 
             if (c != null && this.fields.Count > 0)
             {
-                c = c.AddMembers(this.fields.ToArray());
+                var list = c.Members.ToList();
+                var arr = this.fields.ToArray();
+                arr[0] = arr[0].WithLeadingTrivia(c.CloseBraceToken.LeadingTrivia);
+                c = c.WithCloseBraceToken(c.CloseBraceToken.WithLeadingTrivia(null));
+                list.AddRange(arr);
+                c = c.WithMembers(SyntaxFactory.List(list));
             }
-
+            
             this.fields = old;
 
             return c;

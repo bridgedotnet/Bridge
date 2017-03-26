@@ -16513,6 +16513,52 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2497", {
+        statics: {
+            testPropertyInitializerWithDirective: function () {
+                Bridge.Test.NUnit.Assert.notNull(Bridge.unbox(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2497.Options().TraceLevels));
+                Bridge.Test.NUnit.Assert.notNull(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2497.GeneralOptions().CurrentCulture);
+                Bridge.Test.NUnit.Assert.notNull(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2497.GeneralOptions().CurrentUICulture);
+                Bridge.Test.NUnit.Assert.notNull(Bridge.unbox(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2497.ServerOptions().ApplicationType));
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2497.GeneralOptions", {
+        config: {
+            properties: {
+                CurrentCulture: null,
+                CurrentUICulture: null
+            },
+            init: function () {
+                this.CurrentCulture = System.Globalization.CultureInfo.getCurrentCulture();
+                this.CurrentUICulture = System.Globalization.CultureInfo.getCurrentCulture();
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2497.Options", {
+        config: {
+            properties: {
+                TraceLevels: null
+            },
+            init: function () {
+                this.TraceLevels = {  };
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2497.ServerOptions", {
+        config: {
+            properties: {
+                ApplicationType: null
+            },
+            init: function () {
+                this.ApplicationType = {  };
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge266A", {
         statics: {
             test: function () {
