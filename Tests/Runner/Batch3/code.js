@@ -16513,6 +16513,35 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2499", {
+        statics: {
+            compareDinosByLength: function (x, y) {
+                if (x == null) {
+                    return y == null ? 0 : -1;
+                }
+
+                if (y == null) {
+                    return 1;
+                }
+
+                var retval = Bridge.compare(x.length, y.length);
+
+                return retval !== 0 ? retval : System.String.compare(x, y);
+            },
+            testArraySortComparison: function () {
+                var dinosaurs = System.Array.init(["Pachycephalosaurus", "Amargasaurus", "", null, "Mamenchisaurus", "Deinonychus"], System.String);
+                System.Array.sort(dinosaurs, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2499.compareDinosByLength);
+
+                Bridge.Test.NUnit.Assert.null(dinosaurs[System.Array.index(0, dinosaurs)]);
+                Bridge.Test.NUnit.Assert.areEqual("", dinosaurs[System.Array.index(1, dinosaurs)]);
+                Bridge.Test.NUnit.Assert.areEqual("Amargasaurus", dinosaurs[System.Array.index(2, dinosaurs)]);
+                Bridge.Test.NUnit.Assert.areEqual("Deinonychus", dinosaurs[System.Array.index(3, dinosaurs)]);
+                Bridge.Test.NUnit.Assert.areEqual("Mamenchisaurus", dinosaurs[System.Array.index(4, dinosaurs)]);
+                Bridge.Test.NUnit.Assert.areEqual("Pachycephalosaurus", dinosaurs[System.Array.index(5, dinosaurs)]);
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge266A", {
         statics: {
             test: function () {
