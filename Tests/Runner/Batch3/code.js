@@ -16596,8 +16596,8 @@ Bridge.$N1391Result =                 r;
 
                 Bridge.Test.NUnit.Assert.null(dinosaurs[System.Array.index(0, dinosaurs)]);
                 Bridge.Test.NUnit.Assert.areEqual("", dinosaurs[System.Array.index(1, dinosaurs)]);
-                Bridge.Test.NUnit.Assert.areEqual("Amargasaurus", dinosaurs[System.Array.index(2, dinosaurs)]);
-                Bridge.Test.NUnit.Assert.areEqual("Deinonychus", dinosaurs[System.Array.index(3, dinosaurs)]);
+                Bridge.Test.NUnit.Assert.areEqual("Deinonychus", dinosaurs[System.Array.index(2, dinosaurs)]);
+                Bridge.Test.NUnit.Assert.areEqual("Amargasaurus", dinosaurs[System.Array.index(3, dinosaurs)]);
                 Bridge.Test.NUnit.Assert.areEqual("Mamenchisaurus", dinosaurs[System.Array.index(4, dinosaurs)]);
                 Bridge.Test.NUnit.Assert.areEqual("Pachycephalosaurus", dinosaurs[System.Array.index(5, dinosaurs)]);
             }
