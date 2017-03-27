@@ -56,15 +56,6 @@ declare module Classes {
     }
     var StaticClass: StaticClassFunc;
 
-    export interface Dog extends Classes.Animal {
-        move$1(): number;
-    }
-    export interface DogFunc extends Function {
-        prototype: Dog;
-        new (name: string): Dog;
-    }
-    var Dog: DogFunc;
-
     export interface Snake extends Classes.Animal {
         move(): number;
     }
@@ -81,5 +72,14 @@ declare module Classes {
         new (name: string, id: number): Employee;
     }
     var Employee: EmployeeFunc;
+
+    export interface Dog extends Classes.Animal {
+        move$1(): number;
+    }
+    export interface DogFunc extends Function {
+        prototype: Dog;
+        new (name: string): Dog;
+    }
+    var Dog: DogFunc;
 
 }

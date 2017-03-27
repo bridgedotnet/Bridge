@@ -1,9 +1,7 @@
 using Bridge.Contract;
 using Bridge.Contract.Constants;
-
 using Mono.Cecil;
 using Object.Net.Utilities;
-
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +16,12 @@ namespace Bridge.Translator.TypeScript
             this.TypeInfo = typeInfo;
         }
 
-        public ClassBlock(IEmitter emitter, ITypeInfo typeInfo, IEnumerable<ITypeInfo> nestedTypes, IEnumerable<ITypeInfo> allTypes)
+        public ClassBlock(IEmitter emitter, ITypeInfo typeInfo, IEnumerable<ITypeInfo> nestedTypes, IEnumerable<ITypeInfo> allTypes, string ns)
             : this(emitter, typeInfo)
         {
             this.NestedTypes = nestedTypes;
             this.AllTypes = allTypes;
+            this.Namespace = ns;
         }
 
         public ITypeInfo TypeInfo
@@ -38,6 +37,12 @@ namespace Bridge.Translator.TypeScript
         }
 
         public string JsName
+        {
+            get;
+            set;
+        }
+
+        public string Namespace
         {
             get;
             set;
@@ -63,7 +68,7 @@ namespace Bridge.Translator.TypeScript
 
             if (this.TypeInfo.IsEnum && this.TypeInfo.ParentType == null)
             {
-                new EnumBlock(this.Emitter, this.TypeInfo).Emit();
+                new EnumBlock(this.Emitter, this.TypeInfo, this.Namespace).Emit();
             }
             else
             {
@@ -89,7 +94,11 @@ namespace Bridge.Translator.TypeScript
                 }
             }
 
-            this.Write("export ");
+            if (this.Namespace != null)
+            {
+                this.Write("export ");
+            }
+            
             this.Write("interface ");
 
             this.JsName = name;
@@ -165,8 +174,13 @@ namespace Bridge.Translator.TypeScript
 
                 this.WriteNewLine();
 
-                this.Write("export interface ");
-                
+                if (this.Namespace != null)
+                {
+                    this.Write("export ");
+                }
+
+                this.Write("interface ");
+
                 this.Write(this.DefName ?? this.JsName);
 
                 this.Write("Func extends Function ");
@@ -237,7 +251,7 @@ namespace Bridge.Translator.TypeScript
 
                     var typeDef = this.Emitter.GetTypeDefinition(nestedType.Type);
 
-                    if (typeDef.IsInterface)
+                    if (typeDef.IsInterface || this.Emitter.Validator.IsObjectLiteral(typeDef))
                     {
                         continue;
                     }
@@ -295,6 +309,12 @@ namespace Bridge.Translator.TypeScript
             {
                 string name = BridgeTypes.ToTypeScriptName(this.TypeInfo.Type, this.Emitter, true, true);
                 this.WriteNewLine();
+
+                if (this.Namespace == null)
+                {
+                    this.Write("declare ");
+                }
+
                 this.Write("var ");
                 this.Write(name);
                 this.WriteColon();
@@ -357,7 +377,7 @@ namespace Bridge.Translator.TypeScript
                     this.Emitter.TypeInfo = nestedType;
 
                     var nestedTypes = this.AllTypes.Where(t => t.ParentType == nestedType);
-                    new ClassBlock(this.Emitter, this.Emitter.TypeInfo, nestedTypes, this.AllTypes).Emit();
+                    new ClassBlock(this.Emitter, this.Emitter.TypeInfo, nestedTypes, this.AllTypes, this.Namespace).Emit();
                     this.WriteNewLine();
                     if (nestedType != last)
                     {
