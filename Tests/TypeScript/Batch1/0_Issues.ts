@@ -2,6 +2,7 @@
 /// <reference path="..\..\Runner\TypeScript\App1\bridge.d.ts" />
 /// <reference path="..\..\Runner\TypeScript\App1\misc.a.d.ts" />
 /// <reference path="..\..\Runner\TypeScript\App1\misc.b.d.ts" />
+/// <reference path="..\..\Runner\TypeScript\App1\typeScriptTest.d.ts" />
 /// <reference path="..\..\Runner\TypeScript\App1\typeScript.issues.d.ts" />
 
 QUnit.module("TypeScript - Issues");
@@ -164,3 +165,21 @@ QUnit.test("#2474", function (assert) {
     var e10 = TypeScript.Issues.N2474.StringNameUpperCase.VALUE;
     assert.equal(e10, "VALUE", "StringNameUpperCase");
 });
+
+QUnit.test("#2463", function (assert) {
+    var ol = { nothing: 1 };
+    TypeScript.Issues.N2463.do(ol);
+    assert.equal(ol.nothing, 2);
+});
+
+QUnit.test("#2493", function (assert) {
+    var op1 = new N2493Operation1();
+    assert.equal(op1.add(1), 2)
+
+    var op2 = new Operation2();
+    assert.equal(op2.add(1), 3)
+
+    var op3 = new TypeScript.Issues.N2493Operation3();
+    assert.equal(op3.add(1), 4)
+});
+

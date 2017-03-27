@@ -178,6 +178,6 @@ namespace Bridge.Contract
 
         AstType GetBaseClass(IEmitter emitter);
 
-        string GetNamespace(IEmitter emitter);
+        string GetNamespace(IEmitter emitter, bool nons = false);
     }
 }

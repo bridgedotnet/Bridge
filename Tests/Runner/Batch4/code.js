@@ -9734,13 +9734,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         },
         constantsWork: function () {
             this.assertAlmostEqual(Math.E, 2.7182818284590451);
-            this.assertAlmostEqual(Math.LN2, 0.69314718055994529);
-            this.assertAlmostEqual(Math.LN10, 2.3025850929940459);
-            this.assertAlmostEqual(Math.LOG2E, 1.4426950408889634);
-            this.assertAlmostEqual(Math.LOG10E, 0.43429448190325182);
             this.assertAlmostEqual(Math.PI, 3.1415926535897931);
-            this.assertAlmostEqual(Math.SQRT1_2, 0.70710678118654757);
-            this.assertAlmostEqual(Math.SQRT2, 1.4142135623730951);
         },
         absOfDoubleWorks: function () {
             Bridge.Test.NUnit.Assert.areEqual(12.5, Math.abs(-12.5));

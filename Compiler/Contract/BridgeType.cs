@@ -817,6 +817,56 @@ namespace Bridge.Contract
             return BridgeTypes.ToTypeScriptName(resolveResult.Type, emitter, asDefinition: asDefinition, ignoreDependency: ignoreDependency);
         }
 
+        public static string ObjectLiteralSignature(IType type, IEmitter emitter)
+        {
+            var typeDef = type.GetDefinition();
+            var isObjectLiteral = typeDef != null && emitter.Validator.IsObjectLiteral(typeDef);
+
+            if (isObjectLiteral)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append("{");
+
+                var fields = type.GetFields().Where(f => f.IsPublic && f.DeclaringTypeDefinition.FullName != "System.Object");
+                var properties = type.GetProperties().Where(p => p.IsPublic && p.DeclaringTypeDefinition.FullName != "System.Object");
+
+                var comma = false;
+
+                foreach (var field in fields)
+                {
+                    if (comma)
+                    {
+                        sb.Append(", ");
+                    }
+
+                    sb.Append(OverloadsCollection.Create(emitter, field).GetOverloadName());
+                    sb.Append(": ");
+                    sb.Append(BridgeTypes.ToTypeScriptName(field.Type, emitter));
+
+                    comma = true;
+                }
+
+                foreach (var property in properties)
+                {
+                    if (comma)
+                    {
+                        sb.Append(", ");
+                    }
+
+                    sb.Append(OverloadsCollection.Create(emitter, property).GetOverloadName());
+                    sb.Append(": ");
+                    sb.Append(BridgeTypes.ToTypeScriptName(property.ReturnType, emitter));
+
+                    comma = true;
+                }
+
+                sb.Append("}");
+                return sb.ToString();
+            }
+
+            return null;
+        }
+
         public static string ToTypeScriptName(IType type, IEmitter emitter, bool asDefinition = false, bool excludens = false, bool ignoreDependency = false)
         {
             if (type.Kind == TypeKind.Delegate)
@@ -850,6 +900,13 @@ namespace Bridge.Contract
                 sb.Append("}");
 
                 return sb.ToString();
+            }
+
+            var oname = ObjectLiteralSignature(type, emitter);
+
+            if (oname != null)
+            {
+                return oname;
             }
 
             if (type.IsKnownType(KnownTypeCode.String))
@@ -1020,9 +1077,8 @@ namespace Bridge.Contract
 
         public static Tuple<string, string> GetNamespaceFilename(ITypeInfo typeInfo, IEmitter emitter)
         {
-            var fileName = typeInfo.GetNamespace(emitter);
-
-            var ns = fileName;
+            var ns = typeInfo.GetNamespace(emitter, true);
+            var fileName = ns ?? typeInfo.GetNamespace(emitter);
 
             switch (emitter.AssemblyInfo.FileNameCasing)
             {

@@ -23943,13 +23943,9 @@ Bridge.$N1391Result =                 r;
                 var dz = System.Decimal(0.0);
                 DecimalZero = System.Decimal.Zero.add(dz);
                 DecimalOne = System.Decimal.One.add(dz);
-                ;
                 DecimalMinusOne = System.Decimal.MinusOne.add(dz);
-                ;
                 DecimalMaxValue = System.Decimal.MaxValue.add(dz);
-                ;
                 DecimalMinValue = System.Decimal.MinValue.add(dz);
-                ;
 
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.ensureNumber(DecimalZero, "0", "DecimalZeroin expression");
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.ensureNumber(DecimalOne, "1", "DecimalOnein expression");
@@ -23994,43 +23990,19 @@ Bridge.$N1391Result =                 r;
 
                 // Math consts
                 var MathE = Math.E;
-                var MathLN10 = Math.LN10;
-                var MathLN2 = Math.LN2;
-                var MathLOG2E = Math.LOG2E;
-                var MathLOG10E = Math.LOG10E;
                 var MathPI = Math.PI;
-                var MathSQRT1_2 = Math.SQRT1_2;
-                var MathSQRT2 = Math.SQRT2;
 
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.ensureNumber(Bridge.box(MathE, System.Double, $box_.System.Double.toString), "2.71828182845905", "MathE");
-                Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.ensureNumber(Bridge.box(MathLN10, System.Double, $box_.System.Double.toString), "2.30258509299405", "MathLN10");
-                Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.ensureNumber(Bridge.box(MathLN2, System.Double, $box_.System.Double.toString), "0.69314718055995", "MathLN2");
                 //IE has Math.LOG2E defined as 1.4426950408889633 instead of standard 1.4426950408889634
-                Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.assertAlmostEqual(MathLOG2E, 1.4426950408889634, "MathLOG2E");
-                Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.ensureNumber(Bridge.box(MathLOG10E, System.Double, $box_.System.Double.toString), "0.43429448190325", "MathLOG10E");
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.ensureNumber(Bridge.box(MathPI, System.Double, $box_.System.Double.toString), "3.14159265358979", "MathPI");
-                Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.ensureNumber(Bridge.box(MathSQRT1_2, System.Double, $box_.System.Double.toString), "0.70710678118655", "MathSQRT1_2");
-                Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.ensureNumber(Bridge.box(MathSQRT2, System.Double, $box_.System.Double.toString), "1.4142135623731", "MathSQRT2");
 
                 // Math consts in expression
-                MathE = Math.E + 0;
-                MathLN10 = Math.LN10 + 0;
-                MathLN2 = Math.LN2 + 0;
-                MathLOG2E = Math.LOG2E + 0;
-                MathLOG10E = Math.LOG10E + 0;
-                MathPI = Math.PI + 0;
-                MathSQRT1_2 = Math.SQRT1_2 + 0;
-                MathSQRT2 = Math.SQRT2 + 0;
+                MathE = 2.7182818284590451;
+                MathPI = 3.1415926535897931;
 
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.ensureNumber(Bridge.box(MathE, System.Double, $box_.System.Double.toString), "2.71828182845905", "MathEin expression");
-                Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.ensureNumber(Bridge.box(MathLN10, System.Double, $box_.System.Double.toString), "2.30258509299405", "MathLN10in expression");
-                Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.ensureNumber(Bridge.box(MathLN2, System.Double, $box_.System.Double.toString), "0.69314718055995", "MathLN2in expression");
                 //IE has Math.LOG2E defined as 1.4426950408889633 instead of standard 1.4426950408889634
-                Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.assertAlmostEqual(MathLOG2E, 1.4426950408889634, "MathLOG2Ein expression");
-                Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.ensureNumber(Bridge.box(MathLOG10E, System.Double, $box_.System.Double.toString), "0.43429448190325", "MathLOG10Ein expression");
                 Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.ensureNumber(Bridge.box(MathPI, System.Double, $box_.System.Double.toString), "3.14159265358979", "MathPIin expression");
-                Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.ensureNumber(Bridge.box(MathSQRT1_2, System.Double, $box_.System.Double.toString), "0.70710678118655", "MathSQRT1_2in expression");
-                Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.ensureNumber(Bridge.box(MathSQRT2, System.Double, $box_.System.Double.toString), "1.4142135623731", "MathSQRT2in expression");
 
                 // Single consts
                 var SingleMaxValue = 3.40282347E+38;

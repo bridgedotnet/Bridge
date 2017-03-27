@@ -1,19 +1,6 @@
 /// <reference path="./bridge.d.ts" />
 
 declare module TypeScript.Issues {
-    export interface N2029Interface$1<T> {
-        Value1: number;
-    }
-
-    export interface N2029 extends TypeScript.Issues.N2029Interface$1<number> {
-        Value1: number;
-    }
-    export interface N2029Func extends Function {
-        prototype: N2029;
-        new (): N2029;
-    }
-    var N2029: N2029Func;
-
     export interface N1060 {
     }
     export interface N1060Func extends Function {
@@ -45,6 +32,28 @@ declare module TypeScript.Issues {
         }
     }
 
+    export interface N2029Interface$1<T> {
+        Value1: number;
+    }
+
+    export interface N2029 extends TypeScript.Issues.N2029Interface$1<number> {
+        Value1: number;
+    }
+    export interface N2029Func extends Function {
+        prototype: N2029;
+        new (): N2029;
+    }
+    var N2029: N2029Func;
+
+    export interface N2493Operation3 {
+        add(n: number): number;
+    }
+    export interface N2493Operation3Func extends Function {
+        prototype: N2493Operation3;
+        new (): N2493Operation3;
+    }
+    var N2493Operation3: N2493Operation3Func;
+
     export interface N1640 {
     }
     export interface N1640Func extends Function {
@@ -75,94 +84,14 @@ declare module TypeScript.Issues {
         }
     }
 
-    export interface N2474 {
+    export interface N2264 {
+        Values: System.Collections.Generic.IEnumerable$1<string>;
     }
-    export interface N2474Func extends Function {
-        prototype: N2474;
-        ValueEnum: N2474.ValueEnumFunc;
-        StringNamePreserveCase: N2474.StringNamePreserveCaseFunc;
-        StringNameLowerCase: N2474.StringNameLowerCaseFunc;
-        StringName: N2474.StringNameFunc;
-        NameUpperCase: N2474.NameUpperCaseFunc;
-        NamePreserveCase: N2474.NamePreserveCaseFunc;
-        NameLowerCase: N2474.NameLowerCaseFunc;
-        NameEnum: N2474.NameEnumFunc;
-        Enum: N2474.EnumFunc;
-        StringNameUpperCase: N2474.StringNameUpperCaseFunc;
-        new (): N2474;
+    export interface N2264Func extends Function {
+        prototype: N2264;
+        new (queryParameters: System.Collections.Generic.IEnumerable$1<string>): N2264;
     }
-    var N2474: N2474Func;
-    module N2474 {
-        export interface ValueEnum {
-        }
-        export interface ValueEnumFunc extends Function {
-            prototype: ValueEnum;
-            Value: number;
-        }
-
-        export interface StringNamePreserveCase {
-        }
-        export interface StringNamePreserveCaseFunc extends Function {
-            prototype: StringNamePreserveCase;
-            Value: string;
-        }
-
-        export interface StringNameLowerCase {
-        }
-        export interface StringNameLowerCaseFunc extends Function {
-            prototype: StringNameLowerCase;
-            value: string;
-        }
-
-        export interface StringName {
-        }
-        export interface StringNameFunc extends Function {
-            prototype: StringName;
-            value: string;
-        }
-
-        export interface NameUpperCase {
-        }
-        export interface NameUpperCaseFunc extends Function {
-            prototype: NameUpperCase;
-            VALUE: number;
-        }
-
-        export interface NamePreserveCase {
-        }
-        export interface NamePreserveCaseFunc extends Function {
-            prototype: NamePreserveCase;
-            Value: number;
-        }
-
-        export interface NameLowerCase {
-        }
-        export interface NameLowerCaseFunc extends Function {
-            prototype: NameLowerCase;
-            value: number;
-        }
-
-        export interface NameEnum {
-        }
-        export interface NameEnumFunc extends Function {
-            prototype: NameEnum;
-            value: number;
-        }
-
-        export interface Enum {
-        }
-        export interface EnumFunc extends Function {
-            prototype: Enum;
-            Value: number;
-        }
-
-        export interface StringNameUpperCase {
-        }
-        export interface StringNameUpperCaseFunc extends Function {
-            prototype: StringNameUpperCase;
-            VALUE: string;
-        }
-    }
+    var N2264: N2264Func;
 
     export interface N2438 {
         isDefaultCtor: boolean;
@@ -180,14 +109,114 @@ declare module TypeScript.Issues {
     }
     var N2438: N2438Func;
 
-    export interface N2264 {
-        Values: System.Collections.Generic.IEnumerable$1<string>;
+    export interface N2463 {
     }
-    export interface N2264Func extends Function {
-        prototype: N2264;
-        new (queryParameters: System.Collections.Generic.IEnumerable$1<string>): N2264;
+    export interface N2463Func extends Function {
+        prototype: N2463;
+        new (): N2463;
+        do(dummy: {nothing: number}): {nothing: number};
     }
-    var N2264: N2264Func;
+    var N2463: N2463Func;
+    module N2463 {
+    }
+
+    export interface N2474 {
+    }
+    export interface N2474Func extends Function {
+        prototype: N2474;
+        ValueEnum: N2474.ValueEnumFunc;
+        Enum: N2474.EnumFunc;
+        NameEnum: N2474.NameEnumFunc;
+        NameLowerCase: N2474.NameLowerCaseFunc;
+        NamePreserveCase: N2474.NamePreserveCaseFunc;
+        NameUpperCase: N2474.NameUpperCaseFunc;
+        StringName: N2474.StringNameFunc;
+        StringNameLowerCase: N2474.StringNameLowerCaseFunc;
+        StringNamePreserveCase: N2474.StringNamePreserveCaseFunc;
+        StringNameUpperCase: N2474.StringNameUpperCaseFunc;
+        new (): N2474;
+    }
+    var N2474: N2474Func;
+    module N2474 {
+        export interface ValueEnum {
+        }
+        export interface ValueEnumFunc extends Function {
+            prototype: ValueEnum;
+            Value: number;
+        }
+
+        export interface Enum {
+        }
+        export interface EnumFunc extends Function {
+            prototype: Enum;
+            Value: number;
+        }
+
+        export interface NameEnum {
+        }
+        export interface NameEnumFunc extends Function {
+            prototype: NameEnum;
+            value: number;
+        }
+
+        export interface NameLowerCase {
+        }
+        export interface NameLowerCaseFunc extends Function {
+            prototype: NameLowerCase;
+            value: number;
+        }
+
+        export interface NamePreserveCase {
+        }
+        export interface NamePreserveCaseFunc extends Function {
+            prototype: NamePreserveCase;
+            Value: number;
+        }
+
+        export interface NameUpperCase {
+        }
+        export interface NameUpperCaseFunc extends Function {
+            prototype: NameUpperCase;
+            VALUE: number;
+        }
+
+        export interface StringName {
+        }
+        export interface StringNameFunc extends Function {
+            prototype: StringName;
+            value: string;
+        }
+
+        export interface StringNameLowerCase {
+        }
+        export interface StringNameLowerCaseFunc extends Function {
+            prototype: StringNameLowerCase;
+            value: string;
+        }
+
+        export interface StringNamePreserveCase {
+        }
+        export interface StringNamePreserveCaseFunc extends Function {
+            prototype: StringNamePreserveCase;
+            Value: string;
+        }
+
+        export interface StringNameUpperCase {
+        }
+        export interface StringNameUpperCaseFunc extends Function {
+            prototype: StringNameUpperCase;
+            VALUE: string;
+        }
+    }
+
+    export interface N2030Attribute extends System.Attribute {
+        IsUnspecified: boolean;
+    }
+    export interface N2030AttributeFunc extends Function {
+        prototype: N2030Attribute;
+        new (IsUnspecified: boolean): N2030Attribute;
+    }
+    var N2030Attribute: N2030AttributeFunc;
 
     export interface N2031DictionaryMap$2<T1,T2> {
         Forward: TypeScript.Issues.N2031DictionaryMap$2.Indexer$2<T1,T2,T1,T2>;
@@ -221,14 +250,4 @@ declare module TypeScript.Issues {
             }
         }
     }
-
-    export interface N2030Attribute extends System.Attribute {
-        IsUnspecified: boolean;
-    }
-    export interface N2030AttributeFunc extends Function {
-        prototype: N2030Attribute;
-        new (IsUnspecified: boolean): N2030Attribute;
-    }
-    var N2030Attribute: N2030AttributeFunc;
-
 }

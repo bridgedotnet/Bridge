@@ -56,9 +56,13 @@ namespace Bridge.Translator.TypeScript
 
                 output = new StringBuilder();
                 this.Emitter.Output = output;
-                output.Append(@"/// <reference path=""./bridge.d.ts"" />" + newLine + newLine);
-                output.Append("declare module " + ns + " ");
-                this.BeginBlock();
+                
+                if (ns != null)
+                {
+                    output.Append("declare module " + ns + " ");
+                    this.BeginBlock();
+                }
+                
                 this.Outputs.Add(fileName, output);
                 this.Emitter.CurrentDependencies = new List<IPluginDependency>();
             }
@@ -71,20 +75,13 @@ namespace Bridge.Translator.TypeScript
             if (this.Emitter.CurrentDependencies != null && this.Emitter.CurrentDependencies.Count > 0)
             {
                 StringBuilder depSb = new StringBuilder();
-                var last = this.Emitter.CurrentDependencies.LastOrDefault();
                 foreach (var d in this.Emitter.CurrentDependencies)
                 {
                     depSb.Append(@"/// <reference path=""./" + d.DependencyName + @".d.ts"" />");
-
-                    if (d != last)
-                    {
-                        depSb.Append(newLine);
-                    }
+                    depSb.Append(newLine);
                 }
 
-                var index = sb.ToString().IndexOf(Bridge.Translator.Emitter.NEW_LINE);
-
-                sb.Insert(index, depSb.ToString());
+                sb.Insert(0, depSb.ToString() + newLine);
                 this.Emitter.CurrentDependencies.Clear();
             }
         }
@@ -126,7 +123,28 @@ namespace Bridge.Translator.TypeScript
             this.Outputs = new Dictionary<string, StringBuilder>();
 
             var types = this.Emitter.Types.ToArray();
-            Array.Sort(types, (t1, t2) => BridgeTypes.GetNamespaceFilename(t1, this.Emitter).Item1.CompareTo(BridgeTypes.GetNamespaceFilename(t2, this.Emitter).Item1));
+            Array.Sort(types, (t1, t2) =>
+            {
+                var t1ns = BridgeTypes.GetNamespaceFilename(t1, this.Emitter);
+                var t2ns = BridgeTypes.GetNamespaceFilename(t2, this.Emitter);
+
+                if (t1ns.Item1 == null && t2ns.Item1 == null)
+                {
+                    return 0;
+                }
+
+                if (t1ns.Item1 == null)
+                {
+                    return -1;
+                }
+
+                if (t2ns.Item1 == null)
+                {
+                    return 1;
+                }
+
+                return t1ns.Item1.CompareTo(t2ns.Item1);
+            });
             this.Emitter.InitEmitter();
 
             var last = types.LastOrDefault();
@@ -165,7 +183,7 @@ namespace Bridge.Translator.TypeScript
 
                 this.Emitter.Output = this.GetOutputForType(typeInfo);
                 var nestedTypes = types.Where(t => t.ParentType == type);
-                new ClassBlock(this.Emitter, this.Emitter.TypeInfo, nestedTypes, types).Emit();
+                new ClassBlock(this.Emitter, this.Emitter.TypeInfo, nestedTypes, types, this.ns).Emit();
                 this.WriteNewLine();
 
                 if (type != last)

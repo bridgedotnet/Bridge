@@ -1,4 +1,6 @@
-/// <reference path="./bridge.d.ts" />/// <reference path="./misc.a.d.ts" />
+/// <reference path="./bridge.d.ts" />
+
+/// <reference path="./misc.a.d.ts" />
 
 declare module Misc.B {
     export interface Class2 extends Misc.A.Class1 {

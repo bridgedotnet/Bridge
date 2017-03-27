@@ -7,28 +7,10 @@ namespace System
     public static class Math
     {
         [Name(false)]
-        public static readonly double E = 0;
+        public const double E = 2.7182818284590452354;
 
         [Name(false)]
-        public static readonly double LN10 = 0;
-
-        [Name(false)]
-        public static readonly double LN2 = 0;
-
-        [Name(false)]
-        public static readonly double LOG2E = 0;
-
-        [Name(false)]
-        public static readonly double LOG10E = 0;
-
-        [Name(false)]
-        public static readonly double PI = 0;
-
-        [Name(false)]
-        public static readonly double SQRT1_2 = 0;
-
-        [Name(false)]
-        public static readonly double SQRT2 = 0;
+        public const double PI = 3.14159265358979323846;
 
         public static extern int Abs(int x);
 
