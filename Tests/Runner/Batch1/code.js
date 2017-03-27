@@ -31963,7 +31963,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         castingOfLargeValuesToUInt64Works: function () {
             var d1 = 5000000000.5, d2 = -d1;
             Bridge.Test.NUnit.Assert.true$1(System.UInt64(System.Int64([705032704,1])).equals(Bridge.Int.clipu64(d1)), "Positive");
-            Bridge.Test.NUnit.Assert.false$1(Bridge.Int.clipu64(d2).gt(System.UInt64(2147483647)), "Negative");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.Int.clipu64(d2).gt(System.UInt64(2147483647)), "Negative");
         },
         divisionOfLargeUInt64Works: function () {
             var v1 = System.UInt64(System.Int64([-1539607552,11])), v2 = System.UInt64(3);

@@ -175,7 +175,7 @@ namespace Bridge.ClientTest.SimpleTypes
         {
             double d1 = 5e9 + 0.5, d2 = -d1;
             Assert.True(5000000000 == (ulong)d1, "Positive");
-            Assert.False((ulong)d2 > int.MaxValue, "Negative");
+            Assert.True((ulong)d2 > int.MaxValue, "Negative");
         }
 
         [Test]

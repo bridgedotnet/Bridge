@@ -58,6 +58,11 @@
         this.value = System.Int64.getValue(l);
     }
 
+    System.Int64.TWO_PWR_16_DBL = 1 << 16;
+    System.Int64.TWO_PWR_32_DBL = System.Int64.TWO_PWR_16_DBL * System.Int64.TWO_PWR_16_DBL;
+    System.Int64.TWO_PWR_64_DBL = System.Int64.TWO_PWR_32_DBL * System.Int64.TWO_PWR_32_DBL;
+    System.Int64.TWO_PWR_63_DBL = System.Int64.TWO_PWR_64_DBL / 2;
+
     System.Int64.$$name = "System.Int64";
     System.Int64.prototype.$$name = "System.Int64";
     System.Int64.$kind = "struct";
@@ -108,6 +113,9 @@
         }
 
         if (Bridge.isNumber(l)) {
+            if (l + 1 >= System.Int64.TWO_PWR_63_DBL) {
+                return (new System.UInt64(l)).value.toSigned();
+            }
             return Bridge.$Long.fromNumber(l);
         }
 
@@ -630,6 +638,10 @@
         }
 
         if (Bridge.isNumber(l)) {
+            if (l < 0) {
+                return (new System.Int64(l)).value.toUnsigned();
+            }
+
             return Bridge.$Long.fromNumber(l, true);
         }
 
