@@ -16540,6 +16540,26 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2497.ConnectOptions", {
+        config: {
+            properties: {
+                BrandName: {
+                    get: function () {
+                        return this.Provider.toString();
+                    }
+                },
+                HasHdsAlwaysEnabled: false,
+                Name: "",
+                Password: "",
+                Provider: null,
+                User: ""
+            },
+            init: function () {
+                this.Provider = {  };
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2497.GeneralOptions", {
         config: {
             properties: {
@@ -25334,6 +25354,38 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2489.Bar", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2489.BaseClass],
         field00: 2
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2497.NTConnectOptions", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2497.ConnectOptions],
+        config: {
+            properties: {
+                AssemblyName: {
+                    get: function () {
+                        return "test.dll";
+                    }
+                },
+                BrandName: {
+                    get: function () {
+                        return "test";
+                    }
+                },
+                LogConnectionLoss: false,
+                Port: 0,
+                Server: null,
+                System: null,
+                UseWebSocket: true
+            }
+        },
+        ctor: function () {
+            this.$initialize();
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge2497.ConnectOptions.ctor.call(this);
+            this.HasHdsAlwaysEnabled = true;
+            this.LogConnectionLoss = true;
+            this.Provider = {  };
+            this.Server = "";
+            this.System = "NT";
+        }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge304", {

@@ -602,8 +602,7 @@ namespace Bridge.Translator
                     fields.Add(field);
                     newNode = newNode.ReplaceNode(newNode.Initializer, (SyntaxNode)null);
                     var trivias = node.Initializer.GetLeadingTrivia().AddRange(node.Initializer.GetTrailingTrivia());
-                    trivias = trivias.Insert(0, SyntaxFactory.Whitespace("\n"));
-                    newNode = newNode.WithTrailingTrivia(trivias);
+                    newNode = newNode.WithTrailingTrivia(trivias.AddRange(node.GetTrailingTrivia()));
                     newNode = SyntaxHelper.RemoveSemicolon(newNode, newNode.SemicolonToken, t => newNode.WithSemicolonToken(t));
                 }
 
@@ -625,7 +624,7 @@ namespace Bridge.Translator
                 var list = c.Members.ToList();
                 var arr = this.fields.ToArray();
                 var trivias = c.CloseBraceToken.LeadingTrivia;
-                trivias = trivias.Insert(0, SyntaxFactory.Whitespace("\n"));
+                trivias = trivias.Insert(0, SyntaxFactory.Whitespace("\n")).Add(SyntaxFactory.Whitespace("\n"));
                 arr[0] = arr[0].WithLeadingTrivia(trivias);
                 c = c.WithCloseBraceToken(c.CloseBraceToken.WithLeadingTrivia(null));
                 list.AddRange(arr);
@@ -649,7 +648,7 @@ namespace Bridge.Translator
                 var list = c.Members.ToList();
                 var arr = this.fields.ToArray();
                 var trivias = c.CloseBraceToken.LeadingTrivia;
-                trivias = trivias.Insert(0, SyntaxFactory.Whitespace("\n"));
+                trivias = trivias.Insert(0, SyntaxFactory.Whitespace("\n")).Add(SyntaxFactory.Whitespace("\n"));
                 arr[0] = arr[0].WithLeadingTrivia(trivias);
                 c = c.WithCloseBraceToken(c.CloseBraceToken.WithLeadingTrivia(null));
                 list.AddRange(arr);
