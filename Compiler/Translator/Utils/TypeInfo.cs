@@ -349,7 +349,7 @@ namespace Bridge.Translator
             return this.baseTypes;
         }
 
-        public string GetNamespace(IEmitter emitter)
+        public string GetNamespace(IEmitter emitter, bool nons = false)
         {
             if (emitter == null)
             {
@@ -364,6 +364,18 @@ namespace Bridge.Translator
             // Search for an 'NamespaceAttribute' entry
             foreach (var ca in cas)
             {
+                if (ca.AttributeType.Name == "NameAttribute" && ca.ConstructorArguments.Count > 0)
+                {
+                    var constructorArgumentValue = ca.ConstructorArguments[0].Value as string;
+
+                    if (constructorArgumentValue != null)
+                    {
+                        name = constructorArgumentValue.Contains(".") ? constructorArgumentValue.Substring(0, constructorArgumentValue.LastIndexOf(".")) : null;
+
+                        break;
+                    }
+                }
+
                 if (ca.AttributeType.Name == "NamespaceAttribute" && ca.ConstructorArguments.Count > 0)
                 {
                     var constructorArgumentValue = ca.ConstructorArguments[0].Value as string;
@@ -371,12 +383,19 @@ namespace Bridge.Translator
                     if (!string.IsNullOrWhiteSpace(constructorArgumentValue))
                     {
                         name = constructorArgumentValue;
-                        break;
+                    }
+
+                    if (ca.ConstructorArguments[0].Value is bool)
+                    {
+                        if (!(bool) ca.ConstructorArguments[0].Value)
+                        {
+                            name = null;
+                        }
                     }
                 }
             }
 
-            if (name == null)
+            if (name == null && !nons)
             {
                 name = emitter.Translator.DefaultNamespace;
             }

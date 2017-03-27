@@ -130,6 +130,15 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         }
     });
 
+    Bridge.define("TypeScript.Issues.N2463", {
+        statics: {
+            do: function (dummy) {
+                dummy.nothing = (dummy.nothing + 1) | 0;
+                return dummy;
+            }
+        }
+    });
+
     Bridge.define("TypeScript.Issues.N2474");
 
     Bridge.define("TypeScript.Issues.N2474.Enum", {
@@ -203,6 +212,12 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         $kind: "enum",
         statics: {
             Value: 2
+        }
+    });
+
+    Bridge.define("TypeScript.Issues.N2493Operation3", {
+        add: function (n) {
+            return ((n + 3) | 0);
         }
     });
 

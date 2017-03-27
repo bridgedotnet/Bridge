@@ -597,7 +597,7 @@ namespace Bridge.Translator
                         ),
                         SyntaxFactory.Token(SyntaxKind.SemicolonToken)
                     );
-                    
+
                     fields.Add(field);
                     newNode = newNode.ReplaceNode(newNode.Initializer, (SyntaxNode)null);
                     newNode = newNode.WithTrailingTrivia(node.Initializer.GetLeadingTrivia().AddRange(node.Initializer.GetTrailingTrivia()));
@@ -643,7 +643,7 @@ namespace Bridge.Translator
                 list.AddRange(arr);
                 c = c.WithMembers(SyntaxFactory.List(list));
             }
-            
+
             this.fields = old;
 
             return c;

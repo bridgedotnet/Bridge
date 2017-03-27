@@ -260,6 +260,28 @@ namespace Bridge.Translator
         {
             var attr = attributes.FirstOrDefault(a => a.AttributeType.FullName == "Bridge.ReflectableAttribute");
 
+            if (attr == null)
+            {
+                attr = Helpers.GetInheritedAttribute(member, "Bridge.ReflectableAttribute");
+
+                if (attr != null)
+                {
+                    if (attr.NamedArguments.Count > 0 && attr.NamedArguments.Any(arg => arg.Key.Name == "Inherits"))
+                    {
+                        var inherits = attr.NamedArguments.First(arg => arg.Key.Name == "Inherits");
+
+                        if (!(bool)inherits.Value.ConstantValue)
+                        {
+                            attr = null;
+                        }
+                    }
+                    else
+                    {
+                        attr = null;
+                    }
+                }
+            }
+
             if (attr != null)
             {
                 if (attr.PositionalArguments.Count == 0)
