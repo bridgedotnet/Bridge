@@ -10317,14 +10317,14 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testArraySortComparison: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2499).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2499, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestArraySortComparison()",
-                    line: "29"
+                    line: "30"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2499.testArraySortComparison();
             },
             testArraySortComparisonWithEntity: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2499).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2499, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestArraySortComparisonWithEntity()",
-                    line: "57"
+                    line: "58"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2499.testArraySortComparisonWithEntity();
             }

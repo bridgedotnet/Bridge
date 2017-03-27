@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Bridge.Test.NUnit;
+using Bridge.ClientTest.Batch3.Utilities;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -78,10 +79,20 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 }
             );
 
-            Assert.AreEqual(3, items.Length);
-            Assert.AreEqual("C", items[0].Name);
-            Assert.AreEqual("A", items[1].Name);
-            Assert.AreEqual("B", items[2].Name);
+            if (!BrowserHelper.IsPhantomJs())
+            {
+                Assert.AreEqual(3, items.Length);
+                Assert.AreEqual("C", items[0].Name);
+                Assert.AreEqual("A", items[1].Name);
+                Assert.AreEqual("B", items[2].Name);
+            }
+            else
+            {
+                Assert.AreEqual(3, items.Length);
+                Assert.AreEqual("A", items[0].Name);
+                Assert.AreEqual("B", items[1].Name);
+                Assert.AreEqual("C", items[2].Name);
+            }
         }
     }
 }

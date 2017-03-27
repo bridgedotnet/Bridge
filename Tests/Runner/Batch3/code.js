@@ -16620,10 +16620,17 @@ Bridge.$N1391Result =                 r;
                         return System.String.compare(x.Name, y.Name);
                     });
 
-                Bridge.Test.NUnit.Assert.areEqual(3, items.length);
-                Bridge.Test.NUnit.Assert.areEqual("C", items[System.Array.index(0, items)].Name);
-                Bridge.Test.NUnit.Assert.areEqual("A", items[System.Array.index(1, items)].Name);
-                Bridge.Test.NUnit.Assert.areEqual("B", items[System.Array.index(2, items)].Name);
+                if (!Bridge.ClientTest.Batch3.Utilities.BrowserHelper.isPhantomJs()) {
+                    Bridge.Test.NUnit.Assert.areEqual(3, items.length);
+                    Bridge.Test.NUnit.Assert.areEqual("C", items[System.Array.index(0, items)].Name);
+                    Bridge.Test.NUnit.Assert.areEqual("A", items[System.Array.index(1, items)].Name);
+                    Bridge.Test.NUnit.Assert.areEqual("B", items[System.Array.index(2, items)].Name);
+                } else {
+                    Bridge.Test.NUnit.Assert.areEqual(3, items.length);
+                    Bridge.Test.NUnit.Assert.areEqual("A", items[System.Array.index(0, items)].Name);
+                    Bridge.Test.NUnit.Assert.areEqual("B", items[System.Array.index(1, items)].Name);
+                    Bridge.Test.NUnit.Assert.areEqual("C", items[System.Array.index(2, items)].Name);
+                }
             }
         }
     });
