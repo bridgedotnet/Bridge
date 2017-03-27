@@ -40,8 +40,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             Assert.Null(dinosaurs[0]);
             Assert.AreEqual("", dinosaurs[1]);
-            Assert.AreEqual("Amargasaurus", dinosaurs[2]);
-            Assert.AreEqual("Deinonychus", dinosaurs[3]);
+            Assert.AreEqual("Deinonychus", dinosaurs[2]);
+            Assert.AreEqual("Amargasaurus", dinosaurs[3]);
             Assert.AreEqual("Mamenchisaurus", dinosaurs[4]);
             Assert.AreEqual("Pachycephalosaurus", dinosaurs[5]);
         }
