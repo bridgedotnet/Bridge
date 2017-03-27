@@ -27,13 +27,23 @@
             return s.length;
         },
 
-        setLength: function (length) {
-            if (length === this.getLength()) {
-                return;
-            } if (length === 0) {
+        setLength: function (value) {
+            if (value === 0) {
                 this.clear();
+            } else if (value < 0) {
+                throw new System.ArgumentOutOfRangeException("value", "Length cannot be less than zero");
             } else {
-                throw new System.NotSupportedException("Setting StringBuilder.Length other than 0 is not supported");
+                var l = this.getLength();
+                if (value === l) {
+                    return;
+                }
+
+                var delta = value - l;
+                if (delta > 0) {
+                    this.append('\0', delta);
+                } else {
+                    this.remove(l + delta, -delta);
+                }
             }
         },
 

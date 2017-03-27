@@ -144,6 +144,46 @@ namespace Bridge.ClientTest.Text
             Assert.AreEqual(0, sb.Length, "Length");
         }
 
+
+        [Test]
+        public void SetLengthWorks()
+        {
+            var sb = new StringBuilder("ab");
+
+            // Set some length
+            sb.Length = 4;
+            Assert.AreEqual(4, sb.Length);
+            Assert.AreEqual("ab\0\0", sb.ToString());
+
+            // Increase length
+            sb.Length = 6;
+            Assert.AreEqual(6, sb.Length);
+            Assert.AreEqual("ab\0\0\0\0", sb.ToString());
+
+            // Set the same
+            sb.Length = 6;
+            Assert.AreEqual(6, sb.Length);
+            Assert.AreEqual("ab\0\0\0\0", sb.ToString());
+
+            // Decrease length
+            sb.Length = 4;
+            Assert.AreEqual(4, sb.Length);
+            Assert.AreEqual("ab\0\0", sb.ToString());
+
+            // Decrease length
+            sb.Length = 2;
+            Assert.AreEqual(2, sb.Length);
+            Assert.AreEqual("ab", sb.ToString());
+
+            // Set zero length
+            sb.Length = 0;
+            Assert.AreEqual(0, sb.Length);
+            Assert.AreEqual("", sb.ToString());
+
+            // Try negative length
+            Assert.Throws<System.ArgumentOutOfRangeException>(() => { sb.Length = -1; });
+        }
+
         [Test]
         public void ToStringWorks()
         {
