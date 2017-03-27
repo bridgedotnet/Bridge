@@ -291,6 +291,8 @@ namespace Bridge.Translator
         protected void VisitSwitchStatement()
         {
             SwitchStatement switchStatement = this.SwitchStatement;
+            var jumpStatements = this.Emitter.JumpStatements;
+            this.Emitter.JumpStatements = null;
 
             this.WriteSwitch();
             this.WriteOpenParentheses();
@@ -330,6 +332,7 @@ namespace Bridge.Translator
             switchStatement.SwitchSections.ToList().ForEach(s => s.AcceptVisitor(this.Emitter));
             this.EndBlock();
             this.WriteNewLine();
+            this.Emitter.JumpStatements = jumpStatements;
         }
 
         protected void VisitSwitchSection()

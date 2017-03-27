@@ -9471,6 +9471,16 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             return s.length;
         },
 
+        setLength: function (length) {
+            if (length === this.getLength()) {
+                return;
+            } if (length === 0) {
+                this.clear();
+            } else {
+                throw new System.NotSupportedException("Setting StringBuilder.Length other than 0 is not supported");
+            }
+        },
+
         getCapacity: function () {
             var length = this.getLength();
 

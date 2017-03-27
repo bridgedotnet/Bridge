@@ -190,6 +190,8 @@ namespace Bridge.Translator
         protected void VisitForStatement()
         {
             ForStatement forStatement = this.ForStatement;
+            var jumpStatements = this.Emitter.JumpStatements;
+            this.Emitter.JumpStatements = null;
 
             this.PushLocals();
             this.Emitter.EnableSemicolon = false;
@@ -235,6 +237,7 @@ namespace Bridge.Translator
             this.EmitBlockOrIndentedLine(forStatement.EmbeddedStatement);
 
             this.PopLocals();
+            this.Emitter.JumpStatements = jumpStatements;
         }
     }
 }
