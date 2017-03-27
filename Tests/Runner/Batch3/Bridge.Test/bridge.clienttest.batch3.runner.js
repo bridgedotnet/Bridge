@@ -504,6 +504,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#2489 - TestReflectableInherits", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2489.testReflectableInherits);
             QUnit.test("#2497 - TestPropertyInitializerWithDirective", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2497.testPropertyInitializerWithDirective);
             QUnit.test("#2499 - TestArraySortComparison", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2499.testArraySortComparison);
+            QUnit.test("#2499 - TestArraySortComparisonWithEntity", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2499.testArraySortComparisonWithEntity);
             QUnit.test("#381 - TestUseCase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge381.testUseCase);
             QUnit.test("#447 - CheckInlineExpression", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.checkInlineExpression);
             QUnit.test("#447 - CheckInlineCalls", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.checkInlineCalls);
@@ -10319,6 +10320,13 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                     line: "29"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2499.testArraySortComparison();
+            },
+            testArraySortComparisonWithEntity: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2499).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2499, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestArraySortComparisonWithEntity()",
+                    line: "57"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2499.testArraySortComparisonWithEntity();
             }
         },
         context: null,

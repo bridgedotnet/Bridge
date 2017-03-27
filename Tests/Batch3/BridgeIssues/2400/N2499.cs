@@ -45,5 +45,43 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual("Mamenchisaurus", dinosaurs[4]);
             Assert.AreEqual("Pachycephalosaurus", dinosaurs[5]);
         }
+
+        class Named
+        {
+            public string Name
+            {
+                get; set;
+            }
+        }
+
+        [Test]
+        public static void TestArraySortComparisonWithEntity()
+        {
+            var items = new[]
+            {
+                new Named { Name = "C" },
+                new Named { Name = "B" },
+                new Named { Name = "A" }
+            };
+
+            var theLittle = "C";
+
+            Array.Sort(items,
+                (x, y) =>
+                {
+                    if (x.Name == theLittle)
+                    {
+                        return -1;
+                    }
+
+                    return string.Compare(x.Name, y.Name);
+                }
+            );
+
+            Assert.AreEqual(3, items.Length);
+            Assert.AreEqual("C", items[0].Name);
+            Assert.AreEqual("A", items[1].Name);
+            Assert.AreEqual("B", items[2].Name);
+        }
     }
 }

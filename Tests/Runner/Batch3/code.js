@@ -16600,6 +16600,38 @@ Bridge.$N1391Result =                 r;
                 Bridge.Test.NUnit.Assert.areEqual("Amargasaurus", dinosaurs[System.Array.index(3, dinosaurs)]);
                 Bridge.Test.NUnit.Assert.areEqual("Mamenchisaurus", dinosaurs[System.Array.index(4, dinosaurs)]);
                 Bridge.Test.NUnit.Assert.areEqual("Pachycephalosaurus", dinosaurs[System.Array.index(5, dinosaurs)]);
+            },
+            testArraySortComparisonWithEntity: function () {
+                var items = System.Array.init([Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2499.Named(), {
+                    Name: "C"
+                } ), Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2499.Named(), {
+                    Name: "B"
+                } ), Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2499.Named(), {
+                    Name: "A"
+                } )], Bridge.ClientTest.Batch3.BridgeIssues.Bridge2499.Named);
+
+                var theLittle = "C";
+
+                System.Array.sort(items, function (x, y) {
+                        if (Bridge.referenceEquals(x.Name, theLittle)) {
+                            return -1;
+                        }
+
+                        return System.String.compare(x.Name, y.Name);
+                    });
+
+                Bridge.Test.NUnit.Assert.areEqual(3, items.length);
+                Bridge.Test.NUnit.Assert.areEqual("C", items[System.Array.index(0, items)].Name);
+                Bridge.Test.NUnit.Assert.areEqual("A", items[System.Array.index(1, items)].Name);
+                Bridge.Test.NUnit.Assert.areEqual("B", items[System.Array.index(2, items)].Name);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2499.Named", {
+        config: {
+            properties: {
+                Name: null
             }
         }
     });
