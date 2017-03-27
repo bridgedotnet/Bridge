@@ -10679,6 +10679,11 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 throw new System.ArgumentNullException("array");
             }
 
+            if (arguments.length === 2 && typeof index === "function") {
+                array.sort(index);
+                return;
+            }
+
             if (arguments.length === 2 && typeof index === "object") {
                 comparer = index;
                 index = null;
