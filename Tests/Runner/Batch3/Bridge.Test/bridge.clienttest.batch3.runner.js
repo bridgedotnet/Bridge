@@ -10272,7 +10272,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             testGenericArrayInterface: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2486).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2486, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestGenericArrayInterface()",
-                    line: "26"
+                    line: "50"
                 } ));
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2486.testGenericArrayInterface();
             }
