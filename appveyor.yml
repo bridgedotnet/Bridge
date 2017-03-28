@@ -79,7 +79,7 @@ build:
 
 # scripts to run before build
 before_build:
-- nuget restore "c:\projects\Bridge\.nuget\packages.config" -PackagesDirectory "c:\projects\Bridge\packages"
+- nuget restore "c:\projects\Bridge\.nuget\packages.config" -PackagesDirectory "c:\projects\Bridge\packages" -DisableParallelProcessing
 - ps: >-
     # Check if commit message contains labels [skip appveyor client] or [skip ci client] to skip client tests
 
