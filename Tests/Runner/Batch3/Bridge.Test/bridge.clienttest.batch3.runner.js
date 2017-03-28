@@ -669,6 +669,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#1122 - TestInfinityCastDefaultOverflowMode", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.N1122.testInfinityCastDefaultOverflowMode);
             QUnit.test("#1122 - TestInfinityCastWithNullable1DefaultOverflowMode", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.N1122.testInfinityCastWithNullable1DefaultOverflowMode);
             QUnit.test("#1122 - TestInfinityCastWithNullable2DefaultOverflowMode", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.N1122.testInfinityCastWithNullable2DefaultOverflowMode);
+            QUnit.test("#2460 - TestSequenceInheritance", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.N2460.testSequenceInheritance);
             QUnit.test("#169", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.TestBridgeIssues.N169);
             QUnit.test("#240", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.TestBridgeIssues.N240);
             QUnit.test("#264", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.TestBridgeIssues.N264);
@@ -13833,6 +13834,30 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                     project: "Batch3",
                     className: "Bridge.ClientTest.Batch3.BridgeIssues.N1122",
                     file: "Batch3\\BridgeIssues\\1100\\N1122.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.N2460", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.N2460)],
+        statics: {
+            testSequenceInheritance: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.N2460).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.N2460, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "TestSequenceInheritance()",
+                    line: "20"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.N2460.testSequenceInheritance();
+            }
+        },
+        context: null,
+        getContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
+                    project: "Batch3",
+                    className: "Bridge.ClientTest.Batch3.BridgeIssues.N2460",
+                    file: "Batch3\\BridgeIssues\\2400\\N2460.cs"
                 } );
             }
             return this.context;

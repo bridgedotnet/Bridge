@@ -23834,6 +23834,46 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.N2460", {
+        statics: {
+            testSequenceInheritance: function () {
+                var point = new Bridge.ClientTest.Batch3.BridgeIssues.N2460.Point2D(3, 5);
+
+                Bridge.Test.NUnit.Assert.true(Bridge.is(point, System.Object));
+
+                Bridge.Test.NUnit.Assert.areEqual(3, point.X);
+                Bridge.Test.NUnit.Assert.areEqual(5, point.Y);
+                Bridge.Test.NUnit.Assert.areEqual(3, point[0]);
+                Bridge.Test.NUnit.Assert.areEqual(5, point[1]);
+
+                var sequence = point;
+                Bridge.Test.NUnit.Assert.areEqual(3, sequence[0]);
+                Bridge.Test.NUnit.Assert.areEqual(5, sequence[1]);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.N2460.Point2D", {
+        config: {
+            properties: {
+                X: {
+                    get: function () {
+                        return this[0];
+                    }
+                },
+                Y: {
+                    get: function () {
+                        return this[1];
+                    }
+                }
+            }
+        },
+        ctor: function (x, y) {
+            this.$initialize();
+            Bridge.merge(this, [x, y]);
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Person383", {
         config: {
             properties: {
