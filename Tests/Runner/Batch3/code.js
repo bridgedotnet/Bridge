@@ -16513,6 +16513,21 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2486", {
+        statics: {
+            testGenericArrayInterface: function () {
+                var x = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2486.Linear();
+                var r = x.function(null);
+
+                Bridge.Test.NUnit.Assert.areEqual(123, r);
+            }
+        }
+    });
+
+    Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2486.IKernel$1", function (T) { return {
+        $kind: "interface"
+    }; });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2489", {
         statics: {
             testReflectableInherits: function () {
@@ -25526,6 +25541,18 @@ Bridge.$N1391Result =                 r;
         getString: function () {
             this.Data = (this.Data + 1) | 0;
             return "B";
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2486.Linear", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2486.IKernel$1(System.Array.type(System.String))],
+        config: {
+            alias: [
+            "function", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2486$IKernel$1$System$String$Array$function"
+            ]
+        },
+        function: function (x) {
+            return 123;
         }
     });
 
