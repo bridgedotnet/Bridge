@@ -15,7 +15,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test]
         public static void TestNegativeNumberToULong()
         {
-            Assert.True(4281808695 == MakeArgb(255, 55, 55, 55));
+            Assert.AreEqual("4281808695", MakeArgb(255, 55, 55, 55).ToString());
         }
     }
 }

@@ -16768,7 +16768,7 @@ Bridge.$N1391Result =                 r;
                 return System.Int64.clip64(Bridge.Int.clipu64((((red << 16) | (green << 8)) | blue) | (alpha << 24)).and(System.UInt64(System.Int64([-1,0]))));
             },
             testNegativeNumberToULong: function () {
-                Bridge.Test.NUnit.Assert.true(System.Int64(4281808695).equals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2505.makeArgb(255, 55, 55, 55)));
+                Bridge.Test.NUnit.Assert.areEqual("4281808695", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2505.makeArgb(255, 55, 55, 55).toString());
             }
         }
     });
