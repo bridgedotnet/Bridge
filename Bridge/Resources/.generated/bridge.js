@@ -9483,6 +9483,26 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             return s.length;
         },
 
+        setLength: function (value) {
+            if (value === 0) {
+                this.clear();
+            } else if (value < 0) {
+                throw new System.ArgumentOutOfRangeException("value", "Length cannot be less than zero");
+            } else {
+                var l = this.getLength();
+                if (value === l) {
+                    return;
+                }
+
+                var delta = value - l;
+                if (delta > 0) {
+                    this.append('\0', delta);
+                } else {
+                    this.remove(l + delta, -delta);
+                }
+            }
+        },
+
         getCapacity: function () {
             var length = this.getLength();
 
@@ -10689,6 +10709,11 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
         sort: function (array, index, length, comparer) {
             if (!array) {
                 throw new System.ArgumentNullException("array");
+            }
+
+            if (arguments.length === 2 && typeof index === "function") {
+                array.sort(index);
+                return;
             }
 
             if (arguments.length === 2 && typeof index === "object") {

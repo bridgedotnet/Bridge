@@ -273,6 +273,8 @@ namespace Bridge.Translator
         protected void VisitForeachStatement(bool? replaceAwaiterByVar = null)
         {
             ForeachStatement foreachStatement = this.ForeachStatement;
+            var jumpStatements = this.Emitter.JumpStatements;
+            this.Emitter.JumpStatements = null;
 
             if (foreachStatement.EmbeddedStatement is EmptyStatement)
             {
@@ -433,6 +435,7 @@ namespace Bridge.Translator
             this.EndBlock();
             this.WriteNewLine();
             this.EndBlock();
+            this.Emitter.JumpStatements = jumpStatements;
         }
 
         protected virtual string GetCastCode(IType fromType, IType toType)

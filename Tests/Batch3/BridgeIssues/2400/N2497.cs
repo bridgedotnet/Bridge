@@ -14,6 +14,97 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     [TestFixture(TestNameFormat = "#2497 - {0}")]
     public class Bridge2497
     {
+        public abstract partial class ConnectOptions
+        {
+#if !TEST_ONE
+
+#endif
+            public abstract string AssemblyName
+            { get; }
+
+#if !TEST_ONE
+
+#endif
+            public virtual string BrandName => Provider.ToString();
+
+#if !TEST_ONE
+
+#endif
+            public bool HasHdsAlwaysEnabled
+            { get; set; }
+
+#if !TEST_ONE
+
+#endif
+            public string Name
+            { get; set; } = string.Empty;
+
+#if !TEST_ONE
+
+#endif
+            public string Password
+            { get; set; } = string.Empty;
+
+#if !TEST_ONE
+
+#endif
+            public object Provider
+            { get; set; } = new object();
+
+#if !TEST_ONE
+
+#endif
+            public string User
+            { get; set; } = string.Empty;
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public class NTConnectOptions : ConnectOptions
+        {
+#if !TEST_ONE
+
+#endif
+            public override string AssemblyName => "test.dll";
+
+#if !TEST_ONE
+
+#endif
+            public override string BrandName => "test";
+
+#if !TEST_ONE
+#endif
+            public bool LogConnectionLoss { get; set; }
+
+            public NTConnectOptions()
+            {
+                HasHdsAlwaysEnabled = true;
+                LogConnectionLoss = true;
+                Provider = new object();
+                Server = string.Empty;
+                System = "NT";
+            }
+
+#if !TEST_ONE
+#endif
+            public int Port { get; set; }
+
+#if !TEST_ONE
+#endif
+            public string Server { get; set; }
+
+#if !TEST_ONE
+
+#endif
+            public string System { get; set; }
+
+
+#if !TEST_ONE
+            public bool UseWebSocket { get; set; }
+#else
+            internal bool UseWebSocket { get; private set; } = true;
+#endif
+        }
+
         public class Options
         {
 #if !TEST_ONE

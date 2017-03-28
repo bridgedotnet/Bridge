@@ -16540,6 +16540,26 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2497.ConnectOptions", {
+        config: {
+            properties: {
+                BrandName: {
+                    get: function () {
+                        return this.Provider.toString();
+                    }
+                },
+                HasHdsAlwaysEnabled: false,
+                Name: "",
+                Password: "",
+                Provider: null,
+                User: ""
+            },
+            init: function () {
+                this.Provider = {  };
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2497.GeneralOptions", {
         config: {
             properties: {
@@ -16571,6 +16591,173 @@ Bridge.$N1391Result =                 r;
             },
             init: function () {
                 this.ApplicationType = {  };
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2499", {
+        statics: {
+            compareDinosByLength: function (x, y) {
+                if (x == null) {
+                    return y == null ? 0 : -1;
+                }
+
+                if (y == null) {
+                    return 1;
+                }
+
+                var retval = Bridge.compare(x.length, y.length);
+
+                return retval !== 0 ? retval : System.String.compare(x, y);
+            },
+            testArraySortComparison: function () {
+                var dinosaurs = System.Array.init(["Pachycephalosaurus", "Amargasaurus", "", null, "Mamenchisaurus", "Deinonychus"], System.String);
+                System.Array.sort(dinosaurs, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2499.compareDinosByLength);
+
+                Bridge.Test.NUnit.Assert.null(dinosaurs[System.Array.index(0, dinosaurs)]);
+                Bridge.Test.NUnit.Assert.areEqual("", dinosaurs[System.Array.index(1, dinosaurs)]);
+                Bridge.Test.NUnit.Assert.areEqual("Deinonychus", dinosaurs[System.Array.index(2, dinosaurs)]);
+                Bridge.Test.NUnit.Assert.areEqual("Amargasaurus", dinosaurs[System.Array.index(3, dinosaurs)]);
+                Bridge.Test.NUnit.Assert.areEqual("Mamenchisaurus", dinosaurs[System.Array.index(4, dinosaurs)]);
+                Bridge.Test.NUnit.Assert.areEqual("Pachycephalosaurus", dinosaurs[System.Array.index(5, dinosaurs)]);
+            },
+            testArraySortComparisonWithEntity: function () {
+                var items = System.Array.init([Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2499.Named(), {
+                    Name: "C"
+                } ), Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2499.Named(), {
+                    Name: "B"
+                } ), Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2499.Named(), {
+                    Name: "A"
+                } )], Bridge.ClientTest.Batch3.BridgeIssues.Bridge2499.Named);
+
+                var theLittle = "C";
+
+                System.Array.sort(items, function (x, y) {
+                        if (Bridge.referenceEquals(x.Name, theLittle)) {
+                            return -1;
+                        }
+
+                        return System.String.compare(x.Name, y.Name);
+                    });
+
+                if (!Bridge.ClientTest.Batch3.Utilities.BrowserHelper.isPhantomJs()) {
+                    Bridge.Test.NUnit.Assert.areEqual(3, items.length);
+                    Bridge.Test.NUnit.Assert.areEqual("C", items[System.Array.index(0, items)].Name);
+                    Bridge.Test.NUnit.Assert.areEqual("A", items[System.Array.index(1, items)].Name);
+                    Bridge.Test.NUnit.Assert.areEqual("B", items[System.Array.index(2, items)].Name);
+                } else {
+                    Bridge.Test.NUnit.Assert.areEqual(3, items.length);
+                    Bridge.Test.NUnit.Assert.areEqual("A", items[System.Array.index(0, items)].Name);
+                    Bridge.Test.NUnit.Assert.areEqual("B", items[System.Array.index(1, items)].Name);
+                    Bridge.Test.NUnit.Assert.areEqual("C", items[System.Array.index(2, items)].Name);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2499.Named", {
+        config: {
+            properties: {
+                Name: null
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2502", {
+        statics: {
+            test: function () {
+                var $step = 0,
+                    $task1, 
+                    $jumpFromFinally, 
+                    $tcs = new System.Threading.Tasks.TaskCompletionSource(), 
+                    $returnValue, 
+                    i, 
+                    $async_e, 
+                    $asyncBody = Bridge.fn.bind(this, function () {
+                        try {
+                            for (;;) {
+                                $step = System.Array.min([0,1,2,3], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        if ( true ) {
+                                            $step = 1;
+                                            continue;
+                                        } 
+                                        $step = 3;
+                                        continue;
+                                    }
+                                    case 1: {
+                                        i = -1;
+
+                                        $task1 = System.Threading.Tasks.Task.delay(1);
+                                        $step = 2;
+                                        $task1.continueWith($asyncBody);
+                                        return;
+                                    }
+                                    case 2: {
+                                        $task1.getAwaitedResult();
+                                        switch (i) {
+                                            case -1: 
+                                                break;
+                                        }
+
+                                        for (i = 0; i < 10; i = (i + 1) | 0) {
+                                            break;
+                                        }
+
+                                        $tcs.setResult(i);
+                                        return;
+                                    }
+                                    case 3: {
+                                        $tcs.setResult(null);
+                                        return;
+                                    }
+                                    default: {
+                                        $tcs.setResult(null);
+                                        return;
+                                    }
+                                }
+                            }
+                        } catch($async_e1) {
+                            $async_e = System.Exception.create($async_e1);
+                            $tcs.setException($async_e);
+                        }
+                    }, arguments);
+
+                $asyncBody();
+                return $tcs.task;
+            },
+            testAsyncBreak: function () {
+                var $step = 0,
+                    $task1, 
+                    $taskResult1, 
+                    $jumpFromFinally, 
+                    done, 
+                    $asyncBody = Bridge.fn.bind(this, function () {
+                        for (;;) {
+                            $step = System.Array.min([0,1], $step);
+                            switch ($step) {
+                                case 0: {
+                                    done = Bridge.Test.NUnit.Assert.async();
+                                    $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2502.test();
+                                    $step = 1;
+                                    $task1.continueWith($asyncBody, true);
+                                    return;
+                                }
+                                case 1: {
+                                    $taskResult1 = $task1.getAwaitedResult();
+                                    Bridge.Test.NUnit.Assert.areEqual(0, $taskResult1);
+                                    done();
+                                    return;
+                                }
+                                default: {
+                                    return;
+                                }
+                            }
+                        }
+                    }, arguments);
+
+                $asyncBody();
             }
         }
     });
@@ -25345,6 +25532,38 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2489.Bar", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2489.BaseClass],
         field00: 2
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2497.NTConnectOptions", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2497.ConnectOptions],
+        config: {
+            properties: {
+                AssemblyName: {
+                    get: function () {
+                        return "test.dll";
+                    }
+                },
+                BrandName: {
+                    get: function () {
+                        return "test";
+                    }
+                },
+                LogConnectionLoss: false,
+                Port: 0,
+                Server: null,
+                System: null,
+                UseWebSocket: true
+            }
+        },
+        ctor: function () {
+            this.$initialize();
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge2497.ConnectOptions.ctor.call(this);
+            this.HasHdsAlwaysEnabled = true;
+            this.LogConnectionLoss = true;
+            this.Provider = {  };
+            this.Server = "";
+            this.System = "NT";
+        }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge304", {

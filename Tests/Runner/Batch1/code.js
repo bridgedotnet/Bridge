@@ -32860,6 +32860,44 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.NUnit.Assert.areEqual$1("", sb.toString(), "Text");
             Bridge.Test.NUnit.Assert.areEqual$1(0, sb.getLength(), "Length");
         },
+        setLengthWorks: function () {
+            var sb = new System.Text.StringBuilder("ab");
+
+            // Set some length
+            sb.setLength(4);
+            Bridge.Test.NUnit.Assert.areEqual(4, sb.getLength());
+            Bridge.Test.NUnit.Assert.areEqual("ab\u0000\u0000", sb.toString());
+
+            // Increase length
+            sb.setLength(6);
+            Bridge.Test.NUnit.Assert.areEqual(6, sb.getLength());
+            Bridge.Test.NUnit.Assert.areEqual("ab\u0000\u0000\u0000\u0000", sb.toString());
+
+            // Set the same
+            sb.setLength(6);
+            Bridge.Test.NUnit.Assert.areEqual(6, sb.getLength());
+            Bridge.Test.NUnit.Assert.areEqual("ab\u0000\u0000\u0000\u0000", sb.toString());
+
+            // Decrease length
+            sb.setLength(4);
+            Bridge.Test.NUnit.Assert.areEqual(4, sb.getLength());
+            Bridge.Test.NUnit.Assert.areEqual("ab\u0000\u0000", sb.toString());
+
+            // Decrease length
+            sb.setLength(2);
+            Bridge.Test.NUnit.Assert.areEqual(2, sb.getLength());
+            Bridge.Test.NUnit.Assert.areEqual("ab", sb.toString());
+
+            // Set zero length
+            sb.setLength(0);
+            Bridge.Test.NUnit.Assert.areEqual(0, sb.getLength());
+            Bridge.Test.NUnit.Assert.areEqual("", sb.toString());
+
+            // Try negative length
+            Bridge.Test.NUnit.Assert.throws$6(System.ArgumentOutOfRangeException, function () {
+                sb.setLength(-1);
+            });
+        },
         toStringWorks: function () {
             // Yes, this is tested by every other test as well. Included for completeness only
             var sb = new System.Text.StringBuilder("some text");

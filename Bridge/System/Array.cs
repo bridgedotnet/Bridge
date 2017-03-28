@@ -253,6 +253,9 @@ namespace System
         [Template("System.Array.sort({array}, {comparer})")]
         public static extern void Sort<T>(T[] array, IComparer<T> comparer);
 
+        [Template("System.Array.sort({array}, {comparison})")]
+        public static extern void Sort<T>(T[] array, Comparison<T> comparison);
+
         /// <summary>
         /// Creates a one-dimensional Array of the specified Type and length, with zero-based indexing.
         /// </summary>

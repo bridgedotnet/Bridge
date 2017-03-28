@@ -120,11 +120,16 @@ namespace Bridge.Translator
 
         protected void VisitWhileStatement()
         {
+            var jumpStatements = this.Emitter.JumpStatements;
+            this.Emitter.JumpStatements = null;
+
             this.WriteWhile();
             this.WriteOpenParentheses();
             this.WhileStatement.Condition.AcceptVisitor(this.Emitter);
             this.WriteCloseParentheses();
             this.EmitBlockOrIndentedLine(this.WhileStatement.EmbeddedStatement);
+
+            this.Emitter.JumpStatements = jumpStatements;
         }
     }
 }

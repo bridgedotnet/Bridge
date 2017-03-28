@@ -93,6 +93,8 @@ namespace Bridge.Translator
         protected void VisitDoWhileStatement()
         {
             DoWhileStatement doWhileStatement = this.DoWhileStatement;
+            var jumpStatements = this.Emitter.JumpStatements;
+            this.Emitter.JumpStatements = null;
 
             this.WriteDo();
             this.EmitBlockOrIndentedLine(doWhileStatement.EmbeddedStatement);
@@ -111,6 +113,8 @@ namespace Bridge.Translator
             this.WriteSemiColon();
 
             this.WriteNewLine();
+
+            this.Emitter.JumpStatements = jumpStatements;
         }
     }
 }
