@@ -55,7 +55,8 @@ cache:
   - packages -> **\packages.config
 
 # scripts that run after cloning repository
-#install:
+install:
+  - cmd: nuget sources add -Name NuGetV3 -Source  https://api.nuget.org/v3/index.json
 #  - cmd: git.exe clone -q --progress -v  --depth 20 --branch=master "https://github.com/bridgedotnet/Frameworks" "c:\projects\Frameworks"
 #  - cmd: git.exe clone -q --progress -v  --depth 20 --branch=master "https://github.com/bridgedotnet/Testing" "c:\projects\Testing"
 
