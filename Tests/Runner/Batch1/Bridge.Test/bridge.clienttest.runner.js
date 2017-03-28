@@ -2336,6 +2336,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("StringBuilder - AppendLineWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.appendLineWorks);
             QUnit.test("StringBuilder - AppendLineStringWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.appendLineStringWorks);
             QUnit.test("StringBuilder - ClearWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.clearWorks);
+            QUnit.test("StringBuilder - SetLengthWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.setLengthWorks);
             QUnit.test("StringBuilder - ToStringWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.toStringWorks);
             QUnit.test("StringBuilder - LengthPropertyWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.lengthPropertyWorks);
             QUnit.test("StringBuilder - StringBuilders", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.stringBuilders);
@@ -20275,24 +20276,31 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 } ));
                 t.Fixture.clearWorks();
             },
+            setLengthWorks: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "SetLengthWorks()",
+                    line: "148"
+                } ));
+                t.Fixture.setLengthWorks();
+            },
             toStringWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "ToStringWorks()",
-                    line: "147"
+                    line: "187"
                 } ));
                 t.Fixture.toStringWorks();
             },
             lengthPropertyWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "LengthPropertyWorks()",
-                    line: "155"
+                    line: "195"
                 } ));
                 t.Fixture.lengthPropertyWorks();
             },
             stringBuilders: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, 21, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "StringBuilders()",
-                    line: "163"
+                    line: "203"
                 } ));
                 Bridge.ClientTest.Text.StringBuilderTests.stringBuilders();
             }
