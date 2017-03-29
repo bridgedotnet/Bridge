@@ -26,8 +26,7 @@
     <file src="../../LICENSE.md" target="LICENSE.md" />
 
     <!--content-->
-    <file src="../../.build/files/bridge.json" target="content/Bridge/bridge.json" />
-    <file src="../../.build/files/output_readme.txt" target="content/Bridge/output/readme.txt" />
-    <file src="../../.build/files/demo.html.pp" target="content/Bridge/www/demo.html.pp" />
+    <file src="../../.build/files/bridge.json" target="content/bridge.json" />
+    <file src="../../.build/files/demo.html.pp" target="content/demo.html.pp" />
   </files>
 </package>

@@ -4,12 +4,12 @@
 <head>
     <meta charset="utf-8" />
     <title>Bridge $rootnamespace$</title>
-    <script src="../output/bridge.min.js"></script>
-    <script src="../output/$rootnamespace$.js"></script>
+    <script src="bin/Debug/bridge/bridge.min.js"></script>
+    <script src="bin/Debug/bridge/$rootnamespace$.js"></script>
 </head>
 <body>
-    <!-- 
+    <!--
         Right-Click on this file and select "View in Browser"
-    --> 
+    -->
 </body>
 </html>
