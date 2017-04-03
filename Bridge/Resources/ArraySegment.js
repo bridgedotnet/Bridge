@@ -1,4 +1,4 @@
-    Bridge.define('System.ArraySegment', {
+    Bridge.define('System.ArraySegment$1', {
         ctor: function (array, offset, count) {
             this.$initialize();
             this.array = array;
