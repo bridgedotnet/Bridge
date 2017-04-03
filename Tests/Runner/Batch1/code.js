@@ -6098,8 +6098,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             var dict = new (System.Collections.Generic.Dictionary$2(System.Int32,System.String))();
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(dict, System.Collections.Generic.Dictionary$2(System.Int32,System.String)), "is Dictionary<int,string> should be true");
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(dict, System.Collections.Generic.IDictionary$2(System.Int32,System.String)), "is IDictionary<int,string> should be true");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(dict, System.Collections.IEnumerable), "is IEnumerable should be true");
             Bridge.Test.NUnit.Assert.true$1(Bridge.is(dict, System.Collections.Generic.IEnumerable$1(System.Collections.Generic.KeyValuePair$2(System.Int32,System.String))), "is IEnumerable<KeyValuePair<int,string>> should be true");
-            Bridge.Test.NUnit.Assert.true$1(Bridge.is(dict, System.Collections.Generic.IReadOnlyDictionary$2(System.Int32,System.String)), "is IEnumerable<KeyValuePair<int,string>> should be true");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(dict, System.Collections.Generic.IReadOnlyDictionary$2(System.Int32,System.String)), "is IReadOnlyDictionary<int,string> should be true");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(dict, System.Collections.Generic.IReadOnlyCollection$1(System.Collections.Generic.KeyValuePair$2(System.Int32,System.String))), "is IReadOnlyCollection<KeyValuePair<int, string>> should be true");
         },
         defaultConstructorWorks: function () {
             var d = new (System.Collections.Generic.Dictionary$2(System.Int32,System.String))();
@@ -6136,9 +6138,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         keysWorks: function () {
             var $t;
             var d = $asm.$.Bridge.ClientTest.Collections.Generic.GenericDictionaryTests.f1(new (System.Collections.Generic.Dictionary$2(System.String,System.String))());
+
             var keys = d.getKeys();
-            Bridge.Test.NUnit.Assert.true(Bridge.is(keys, System.Collections.Generic.IEnumerable$1(System.String)));
+
             Bridge.Test.NUnit.Assert.true(Bridge.is(keys, System.Collections.Generic.ICollection$1(System.String)));
+            Bridge.Test.NUnit.Assert.true(Bridge.is(keys, System.Collections.Generic.IEnumerable$1(System.String)));
+            Bridge.Test.NUnit.Assert.true(Bridge.is(keys, System.Collections.IEnumerable));
             Bridge.Test.NUnit.Assert.areEqual(2, System.Array.getCount(keys, System.String));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(keys, "1", System.String));
             Bridge.Test.NUnit.Assert.true(System.Array.contains(keys, "2", System.String));
@@ -6299,6 +6304,107 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             d.set("a2", 100);
             Bridge.Test.NUnit.Assert.areEqual(100, d.get("a3"));
             Bridge.Test.NUnit.Assert.areEqual(2, d.count);
+        },
+        dictionaryAsIReadOnlyDictionaryWorks: function () {
+            var $t, $t1;
+            var d = $asm.$.Bridge.ClientTest.Collections.Generic.GenericDictionaryTests.f15(new (System.Collections.Generic.Dictionary$2(System.Int32,System.String))());
+
+            // IReadOnlyDictionary<TKey, TValue>
+            Bridge.Test.NUnit.Assert.areEqual$1("a", d.System$Collections$Generic$IReadOnlyDictionary$2$System$Int32$System$String$getItem(1), "Getter[1]");
+            Bridge.Test.NUnit.Assert.throws$7(System.Collections.Generic.KeyNotFoundException, function () {
+                var r = d.System$Collections$Generic$IReadOnlyDictionary$2$System$Int32$System$String$getItem(3);
+            }, "Getter[3] should fail");
+
+            var keys = d.System$Collections$Generic$IReadOnlyDictionary$2$System$Int32$System$String$Keys;
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(keys, System.Collections.Generic.IEnumerable$1(System.Int32)), "Keys is IEnumerable<int>");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(keys, System.Collections.IEnumerable), "Keys is IEnumerable");
+
+            var count = 0;
+            $t = Bridge.getEnumerator(d.System$Collections$Generic$IReadOnlyDictionary$2$System$Int32$System$String$Keys, System.Int32);
+            try {
+                while ($t.moveNext()) {
+                    var key = $t.Current;
+                    Bridge.Test.NUnit.Assert.true$1(key === 1 || key === 2, "Expected key " + key);
+                    count = (count + 1) | 0;
+                }
+            }finally {
+                if (Bridge.is($t, System.IDisposable)) {
+                    $t.System$IDisposable$dispose();
+                }
+            }Bridge.Test.NUnit.Assert.areEqual$1(2, count, "Keys count");
+
+            var values = d.System$Collections$Generic$IReadOnlyDictionary$2$System$Int32$System$String$Values;
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(values, System.Collections.Generic.IEnumerable$1(System.String)), "Values is IEnumerable<string>");
+            Bridge.Test.NUnit.Assert.true$1(Bridge.is(values, System.Collections.IEnumerable), "Values is IEnumerable");
+
+            count = 0;
+            $t1 = Bridge.getEnumerator(d.System$Collections$Generic$IReadOnlyDictionary$2$System$Int32$System$String$Values, System.String);
+            try {
+                while ($t1.moveNext()) {
+                    var value = $t1.Current;
+                    Bridge.Test.NUnit.Assert.true$1(Bridge.referenceEquals(value, "a") || Bridge.referenceEquals(value, "b"), System.String.concat("Expected value ", value));
+                    count = (count + 1) | 0;
+                }
+            }finally {
+                if (Bridge.is($t1, System.IDisposable)) {
+                    $t1.System$IDisposable$dispose();
+                }
+            }Bridge.Test.NUnit.Assert.areEqual$1(2, count, "Values count");
+
+            Bridge.Test.NUnit.Assert.true$1(d.System$Collections$Generic$IReadOnlyDictionary$2$System$Int32$System$String$containsKey(1), "ContainsKey(1)");
+            Bridge.Test.NUnit.Assert.false$1(d.System$Collections$Generic$IReadOnlyDictionary$2$System$Int32$System$String$containsKey(3), "ContainsKey(3)");
+
+            var v = { };
+
+            Bridge.Test.NUnit.Assert.true$1(d.System$Collections$Generic$IReadOnlyDictionary$2$System$Int32$System$String$tryGetValue(2, v), "TryGetValue(2)");
+            Bridge.Test.NUnit.Assert.areEqual$1("b", v.v, "TryGetValue(2) value");
+            Bridge.Test.NUnit.Assert.false$1(d.System$Collections$Generic$IReadOnlyDictionary$2$System$Int32$System$String$tryGetValue(0, v), "TryGetValue(0)");
+            Bridge.Test.NUnit.Assert.areEqual$1(null, v.v, "TryGetValue(0) value");
+
+            // IReadOnlyCollection<KeyValuePair<TKey, TValue>>
+
+            Bridge.Test.NUnit.Assert.areEqual$1(2, System.Array.getCount(d, System.Collections.Generic.KeyValuePair$2(System.Int32,System.String)), "Count");
+
+            // IEnumerable<KeyValuePair<TKey, TValue>>
+
+            var en = Bridge.getEnumerator(d, System.Collections.Generic.KeyValuePair$2(System.Int32,System.String));
+
+            var el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "Current$1")];
+            Bridge.Test.NUnit.Assert.areEqual$1(0, el.key, "Enumerable initial key");
+            Bridge.Test.NUnit.Assert.areEqual$1(null, el.value, "Enumerable initial value");
+            Bridge.Test.NUnit.Assert.true$1(en.System$Collections$IEnumerator$moveNext(), "Enumerable MoveNext true");
+            el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "Current$1")];
+            Bridge.Test.NUnit.Assert.areEqual$1(1, el.key, "Enumerable first key");
+            Bridge.Test.NUnit.Assert.areEqual$1("a", el.value, "Enumerable first value");
+            Bridge.Test.NUnit.Assert.true$1(en.System$Collections$IEnumerator$moveNext(), "Enumerable MoveNext true");
+            el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "Current$1")];
+            Bridge.Test.NUnit.Assert.areEqual$1(2, el.key, "Enumerable second key");
+            Bridge.Test.NUnit.Assert.areEqual$1("b", el.value, "Enumerable second value");
+            Bridge.Test.NUnit.Assert.false$1(en.System$Collections$IEnumerator$moveNext(), "Enumerable MoveNext false");
+        },
+        dictionaryAsIReadOnlyCollectionWorks: function () {
+            var d = $asm.$.Bridge.ClientTest.Collections.Generic.GenericDictionaryTests.f16(new (System.Collections.Generic.Dictionary$2(System.Int32,System.String))());
+
+            // IReadOnlyCollection<KeyValuePair<TKey, TValue>>
+
+            Bridge.Test.NUnit.Assert.areEqual$1(2, System.Array.getCount(d, System.Collections.Generic.KeyValuePair$2(System.Int32,System.String)), "Count");
+
+            // IEnumerable<KeyValuePair<TKey, TValue>>
+
+            var en = Bridge.getEnumerator(d, System.Collections.Generic.KeyValuePair$2(System.Int32,System.String));
+
+            var el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "Current$1")];
+            Bridge.Test.NUnit.Assert.areEqual$1(0, el.key, "Enumerable initial key");
+            Bridge.Test.NUnit.Assert.areEqual$1(null, el.value, "Enumerable initial value");
+            Bridge.Test.NUnit.Assert.true$1(en.System$Collections$IEnumerator$moveNext(), "Enumerable MoveNext true");
+            el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "Current$1")];
+            Bridge.Test.NUnit.Assert.areEqual$1(1, el.key, "Enumerable first key");
+            Bridge.Test.NUnit.Assert.areEqual$1("a", el.value, "Enumerable first value");
+            Bridge.Test.NUnit.Assert.true$1(en.System$Collections$IEnumerator$moveNext(), "Enumerable MoveNext true");
+            el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "Current$1")];
+            Bridge.Test.NUnit.Assert.areEqual$1(2, el.key, "Enumerable second key");
+            Bridge.Test.NUnit.Assert.areEqual$1("b", el.value, "Enumerable second value");
+            Bridge.Test.NUnit.Assert.false$1(en.System$Collections$IEnumerator$moveNext(), "Enumerable MoveNext false");
         }
     });
 
@@ -6374,6 +6480,16 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             _o55.add("a", 1);
             _o55.add("b", 2);
             return _o55;
+        },
+        f15: function (_o56) {
+            _o56.add(1, "a");
+            _o56.add(2, "b");
+            return _o56;
+        },
+        f16: function (_o57) {
+            _o57.add(1, "a");
+            _o57.add(2, "b");
+            return _o57;
         }
     });
 
@@ -8844,64 +8960,46 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.ns("Bridge.ClientTest.Collections.Generic.ListTests", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Collections.Generic.ListTests, {
-        f1: function (_o56) {
-            _o56.add("x");
-            return _o56;
-        },
-        f2: function (_o57) {
-            _o57.add("x");
-            _o57.add("y");
-            return _o57;
-        },
-        f3: function (_o58) {
+        f1: function (_o58) {
             _o58.add("x");
-            _o58.add("y");
             return _o58;
         },
-        f4: function (_o59) {
+        f2: function (_o59) {
             _o59.add("x");
             _o59.add("y");
             return _o59;
         },
-        f5: function (_o60) {
+        f3: function (_o60) {
             _o60.add("x");
             _o60.add("y");
             return _o60;
         },
-        f6: function (_o61) {
+        f4: function (_o61) {
             _o61.add("x");
             _o61.add("y");
             return _o61;
         },
-        f7: function (_o62) {
+        f5: function (_o62) {
             _o62.add("x");
             _o62.add("y");
             return _o62;
         },
-        f8: function (_o63) {
+        f6: function (_o63) {
             _o63.add("x");
             _o63.add("y");
             return _o63;
         },
-        f9: function (_o64) {
-            _o64.add(1);
-            _o64.add(2);
-            _o64.add(3);
-            _o64.add(3);
-            _o64.add(4);
-            _o64.add(5);
+        f7: function (_o64) {
+            _o64.add("x");
+            _o64.add("y");
             return _o64;
         },
-        f10: function (_o65) {
-            _o65.add(1);
-            _o65.add(2);
-            _o65.add(3);
-            _o65.add(3);
-            _o65.add(4);
-            _o65.add(5);
+        f8: function (_o65) {
+            _o65.add("x");
+            _o65.add("y");
             return _o65;
         },
-        f11: function (_o66) {
+        f9: function (_o66) {
             _o66.add(1);
             _o66.add(2);
             _o66.add(3);
@@ -8910,7 +9008,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             _o66.add(5);
             return _o66;
         },
-        f12: function (_o67) {
+        f10: function (_o67) {
             _o67.add(1);
             _o67.add(2);
             _o67.add(3);
@@ -8919,180 +9017,179 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             _o67.add(5);
             return _o67;
         },
-        f13: function (_o68) {
-            _o68.add("x");
-            _o68.add("y");
+        f11: function (_o68) {
+            _o68.add(1);
+            _o68.add(2);
+            _o68.add(3);
+            _o68.add(3);
+            _o68.add(4);
+            _o68.add(5);
             return _o68;
         },
-        f14: function (_o69) {
-            _o69.add("x");
-            _o69.add("y");
+        f12: function (_o69) {
+            _o69.add(1);
+            _o69.add(2);
+            _o69.add(3);
+            _o69.add(3);
+            _o69.add(4);
+            _o69.add(5);
             return _o69;
         },
-        f15: function (_o70) {
-            _o70.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
-            _o70.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
-            _o70.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
+        f13: function (_o70) {
+            _o70.add("x");
+            _o70.add("y");
             return _o70;
         },
-        f16: function (_o71) {
-            _o71.add("0");
-            _o71.add("1");
-            _o71.add("2");
+        f14: function (_o71) {
+            _o71.add("x");
+            _o71.add("y");
             return _o71;
         },
-        f17: function (_o72) {
-            _o72.add("0");
-            _o72.add("1");
-            _o72.add("2");
+        f15: function (_o72) {
+            _o72.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
+            _o72.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
+            _o72.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
             return _o72;
         },
-        f18: function (_o73) {
+        f16: function (_o73) {
             _o73.add("0");
             _o73.add("1");
             _o73.add("2");
             return _o73;
         },
-        f19: function (_o74) {
-            _o74.add("a");
-            _o74.add("b");
-            _o74.add("c");
-            _o74.add("d");
+        f17: function (_o74) {
+            _o74.add("0");
+            _o74.add("1");
+            _o74.add("2");
             return _o74;
         },
-        f20: function (_o75) {
-            _o75.add("a");
-            _o75.add("b");
-            _o75.add("c");
-            _o75.add("d");
+        f18: function (_o75) {
+            _o75.add("0");
+            _o75.add("1");
+            _o75.add("2");
             return _o75;
         },
-        f21: function (_o76) {
+        f19: function (_o76) {
             _o76.add("a");
             _o76.add("b");
             _o76.add("c");
+            _o76.add("d");
             return _o76;
         },
-        f22: function (_o77) {
+        f20: function (_o77) {
             _o77.add("a");
             _o77.add("b");
             _o77.add("c");
+            _o77.add("d");
             return _o77;
         },
-        f23: function (_o78) {
-            _o78.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
-            _o78.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
-            _o78.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
+        f21: function (_o78) {
+            _o78.add("a");
+            _o78.add("b");
+            _o78.add("c");
             return _o78;
         },
-        f24: function (_o79) {
+        f22: function (_o79) {
             _o79.add("a");
             _o79.add("b");
             _o79.add("c");
-            _o79.add("b");
             return _o79;
         },
-        f25: function (_o80) {
+        f23: function (_o80) {
             _o80.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
             _o80.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
             _o80.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
-            _o80.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
             return _o80;
         },
-        f26: function (_o81) {
-            _o81.add("x");
-            _o81.add("y");
+        f24: function (_o81) {
+            _o81.add("a");
+            _o81.add("b");
+            _o81.add("c");
+            _o81.add("b");
             return _o81;
         },
-        f27: function (_o82) {
-            _o82.add("x");
-            _o82.add("y");
+        f25: function (_o82) {
+            _o82.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
+            _o82.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
+            _o82.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
+            _o82.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
             return _o82;
         },
-        f28: function (_o83) {
-            _o83.add("a");
-            _o83.add("b");
-            _o83.add("c");
-            _o83.add("b");
+        f26: function (_o83) {
+            _o83.add("x");
+            _o83.add("y");
             return _o83;
         },
-        f29: function (_o84) {
-            _o84.add("a");
-            _o84.add("b");
-            _o84.add("c");
-            _o84.add("b");
+        f27: function (_o84) {
+            _o84.add("x");
+            _o84.add("y");
             return _o84;
         },
-        f30: function (_o85) {
+        f28: function (_o85) {
             _o85.add("a");
             _o85.add("b");
             _o85.add("c");
-            _o85.add("a");
+            _o85.add("b");
             return _o85;
         },
-        f31: function (_o86) {
+        f29: function (_o86) {
             _o86.add("a");
             _o86.add("b");
             _o86.add("c");
-            _o86.add("a");
+            _o86.add("b");
             return _o86;
         },
-        f32: function (_o87) {
+        f30: function (_o87) {
             _o87.add("a");
-            _o87.add(null);
+            _o87.add("b");
             _o87.add("c");
-            _o87.add(null);
+            _o87.add("a");
             return _o87;
         },
-        f33: function (_o88) {
-            _o88.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
-            _o88.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
-            _o88.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
+        f31: function (_o88) {
+            _o88.add("a");
+            _o88.add("b");
+            _o88.add("c");
+            _o88.add("a");
             return _o88;
         },
-        f34: function (_o89) {
+        f32: function (_o89) {
             _o89.add("a");
-            _o89.add("b");
+            _o89.add(null);
             _o89.add("c");
-            _o89.add("a");
+            _o89.add(null);
             return _o89;
         },
-        f35: function (_o90) {
-            _o90.add("a");
-            _o90.add("b");
-            _o90.add("c");
-            _o90.add("d");
+        f33: function (_o90) {
+            _o90.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
+            _o90.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
+            _o90.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
             return _o90;
         },
-        f36: function (_o91) {
-            _o91.add(1);
-            _o91.add(3);
-            _o91.add(4);
-            _o91.add(1);
-            _o91.add(3);
-            _o91.add(2);
+        f34: function (_o91) {
+            _o91.add("a");
+            _o91.add("b");
+            _o91.add("c");
+            _o91.add("a");
             return _o91;
         },
-        f37: function (_o92) {
-            _o92.add(1);
-            _o92.add(6);
-            _o92.add(6);
-            _o92.add(4);
-            _o92.add(2);
+        f35: function (_o92) {
+            _o92.add("a");
+            _o92.add("b");
+            _o92.add("c");
+            _o92.add("d");
             return _o92;
         },
-        f38: function (_o93) {
+        f36: function (_o93) {
             _o93.add(1);
-            _o93.add(6);
-            _o93.add(6);
+            _o93.add(3);
             _o93.add(4);
+            _o93.add(1);
+            _o93.add(3);
             _o93.add(2);
             return _o93;
         },
-        f39: function (x, y) {
-            return ((y - x) | 0);
-        },
-        f40: function (_o94) {
+        f37: function (_o94) {
             _o94.add(1);
             _o94.add(6);
             _o94.add(6);
@@ -9100,122 +9197,141 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             _o94.add(2);
             return _o94;
         },
-        f41: function (_o95) {
-            _o95.add("x");
-            _o95.add("y");
+        f38: function (_o95) {
+            _o95.add(1);
+            _o95.add(6);
+            _o95.add(6);
+            _o95.add(4);
+            _o95.add(2);
             return _o95;
         },
-        f42: function (_o96) {
-            _o96.add("x");
-            _o96.add("y");
+        f39: function (x, y) {
+            return ((y - x) | 0);
+        },
+        f40: function (_o96) {
+            _o96.add(1);
+            _o96.add(6);
+            _o96.add(6);
+            _o96.add(4);
+            _o96.add(2);
             return _o96;
         },
-        f43: function (_o97) {
+        f41: function (_o97) {
             _o97.add("x");
             _o97.add("y");
-            _o97.add("z");
             return _o97;
         },
-        f44: function (_o98) {
+        f42: function (_o98) {
             _o98.add("x");
             _o98.add("y");
-            _o98.add("z");
             return _o98;
         },
-        f45: function (_o99) {
+        f43: function (_o99) {
             _o99.add("x");
             _o99.add("y");
             _o99.add("z");
             return _o99;
         },
-        f46: function (_o100) {
+        f44: function (_o100) {
             _o100.add("x");
             _o100.add("y");
             _o100.add("z");
             return _o100;
         },
-        f47: function (_o101) {
-            _o101.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
-            _o101.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
-            _o101.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
+        f45: function (_o101) {
+            _o101.add("x");
+            _o101.add("y");
+            _o101.add("z");
             return _o101;
         },
-        f48: function (_o102) {
+        f46: function (_o102) {
             _o102.add("x");
             _o102.add("y");
             _o102.add("z");
             return _o102;
         },
-        f49: function (_o103) {
-            _o103.add("a");
-            _o103.add(null);
-            _o103.add("c");
-            _o103.add(null);
+        f47: function (_o103) {
+            _o103.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
+            _o103.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
+            _o103.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
             return _o103;
         },
-        f50: function (_o104) {
-            _o104.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
-            _o104.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
-            _o104.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
+        f48: function (_o104) {
+            _o104.add("x");
+            _o104.add("y");
+            _o104.add("z");
             return _o104;
         },
-        f51: function (_o105) {
-            _o105.add("x");
-            _o105.add("y");
-            _o105.add("z");
+        f49: function (_o105) {
+            _o105.add("a");
+            _o105.add(null);
+            _o105.add("c");
+            _o105.add(null);
             return _o105;
         },
-        f52: function (_o106) {
-            _o106.add("x");
-            _o106.add("y");
-            _o106.add("z");
+        f50: function (_o106) {
+            _o106.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
+            _o106.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
+            _o106.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
             return _o106;
         },
-        f53: function (_o107) {
-            _o107.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
-            _o107.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
-            _o107.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
+        f51: function (_o107) {
+            _o107.add("x");
+            _o107.add("y");
+            _o107.add("z");
             return _o107;
         },
-        f54: function (_o108) {
+        f52: function (_o108) {
             _o108.add("x");
             _o108.add("y");
             _o108.add("z");
             return _o108;
         },
-        f55: function (_o109) {
-            _o109.add("x");
-            _o109.add("y");
-            _o109.add("z");
+        f53: function (_o109) {
+            _o109.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
+            _o109.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
+            _o109.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
             return _o109;
         },
-        f56: function (_o110) {
+        f54: function (_o110) {
             _o110.add("x");
             _o110.add("y");
             _o110.add("z");
             return _o110;
         },
-        f57: function (_o111) {
+        f55: function (_o111) {
             _o111.add("x");
             _o111.add("y");
+            _o111.add("z");
             return _o111;
         },
-        f58: function (_o112) {
+        f56: function (_o112) {
             _o112.add("x");
             _o112.add("y");
             _o112.add("z");
             return _o112;
         },
-        f59: function (_o113) {
+        f57: function (_o113) {
             _o113.add("x");
             _o113.add("y");
-            _o113.add("z");
             return _o113;
         },
-        f60: function (_o114) {
+        f58: function (_o114) {
             _o114.add("x");
             _o114.add("y");
+            _o114.add("z");
             return _o114;
+        },
+        f59: function (_o115) {
+            _o115.add("x");
+            _o115.add("y");
+            _o115.add("z");
+            return _o115;
+        },
+        f60: function (_o116) {
+            _o116.add("x");
+            _o116.add("y");
+            return _o116;
         }
     });
 

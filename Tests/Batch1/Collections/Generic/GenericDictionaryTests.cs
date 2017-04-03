@@ -1,5 +1,6 @@
 ﻿using Bridge.Test.NUnit;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Bridge.ClientTest.Collections.Generic
@@ -28,8 +29,10 @@ namespace Bridge.ClientTest.Collections.Generic
             object dict = new Dictionary<int, string>();
             Assert.True(dict is Dictionary<int, string>, "is Dictionary<int,string> should be true");
             Assert.True(dict is IDictionary<int, string>, "is IDictionary<int,string> should be true");
+            Assert.True(dict is IEnumerable, "is IEnumerable should be true");
             Assert.True(dict is IEnumerable<KeyValuePair<int, string>>, "is IEnumerable<KeyValuePair<int,string>> should be true");
-            Assert.True(dict is IReadOnlyDictionary<int, string>, "is IEnumerable<KeyValuePair<int,string>> should be true");
+            Assert.True(dict is IReadOnlyDictionary<int, string>, "is IReadOnlyDictionary<int,string> should be true");
+            Assert.True(dict is IReadOnlyCollection<KeyValuePair<int, string>>, "is IReadOnlyCollection<KeyValuePair<int, string>> should be true");
         }
 
         [Test]
@@ -83,9 +86,12 @@ namespace Bridge.ClientTest.Collections.Generic
         public void KeysWorks()
         {
             var d = new Dictionary<string, string> { { "1", "a" }, { "2", "b" } };
+
             var keys = d.Keys;
-            Assert.True((object)keys is IEnumerable<string>);
+
             Assert.True((object)keys is ICollection<string>);
+            Assert.True((object)keys is IEnumerable<string>);
+            Assert.True((object)keys is IEnumerable);
             Assert.AreEqual(2, keys.Count);
             Assert.True(keys.Contains("1"));
             Assert.True(keys.Contains("2"));
@@ -266,6 +272,98 @@ namespace Bridge.ClientTest.Collections.Generic
             d["a2"] = 100;
             Assert.AreEqual(100, d["a3"]);
             Assert.AreEqual(2, d.Count);
+        }
+
+        [Test]
+        public void DictionaryAsIReadOnlyDictionaryWorks()
+        {
+            IReadOnlyDictionary<int, string> d = new Dictionary<int, string> { { 1, "a" }, { 2, "b" } };
+
+            // IReadOnlyDictionary<TKey, TValue>
+            Assert.AreEqual("a", d[1], "Getter[1]");
+            Assert.Throws<KeyNotFoundException>(() => { var r = d[3]; }, "Getter[3] should fail");
+
+            var keys = d.Keys;
+            Assert.True((object)keys is IEnumerable<int>, "Keys is IEnumerable<int>");
+            Assert.True((object)keys is IEnumerable, "Keys is IEnumerable");
+
+            int count = 0;
+            foreach (var key in d.Keys)
+            {
+                Assert.True(key == 1 || key == 2, "Expected key " + key);
+                count++;
+            }
+            Assert.AreEqual(2, count, "Keys count");
+
+            var values = d.Values;
+            Assert.True((object)values is IEnumerable<string>, "Values is IEnumerable<string>");
+            Assert.True((object)values is IEnumerable, "Values is IEnumerable");
+
+            count = 0;
+            foreach (var value in d.Values)
+            {
+                Assert.True(value == "a" || value == "b", "Expected value " + value);
+                count++;
+            }
+            Assert.AreEqual(2, count, "Values count");
+
+            Assert.True(d.ContainsKey(1), "ContainsKey(1)");
+            Assert.False(d.ContainsKey(3), "ContainsKey(3)");
+
+            string v;
+
+            Assert.True(d.TryGetValue(2, out v), "TryGetValue(2)");
+            Assert.AreEqual("b", v, "TryGetValue(2) value");
+            Assert.False(d.TryGetValue(0, out v), "TryGetValue(0)");
+            Assert.AreEqual(null, v, "TryGetValue(0) value");
+
+            // IReadOnlyCollection<KeyValuePair<TKey, TValue>>
+
+            Assert.AreEqual(2, d.Count, "Count");
+
+            // IEnumerable<KeyValuePair<TKey, TValue>>
+
+            var en = d.GetEnumerator();
+
+            var el = en.Current;
+            Assert.AreEqual(0, el.Key, "Enumerable initial key");
+            Assert.AreEqual(null, el.Value, "Enumerable initial value");
+            Assert.True(en.MoveNext(), "Enumerable MoveNext true");
+            el = en.Current;
+            Assert.AreEqual(1, el.Key, "Enumerable first key");
+            Assert.AreEqual("a", el.Value, "Enumerable first value");
+            Assert.True(en.MoveNext(), "Enumerable MoveNext true");
+            el = en.Current;
+            Assert.AreEqual(2, el.Key, "Enumerable second key");
+            Assert.AreEqual("b", el.Value, "Enumerable second value");
+            Assert.False(en.MoveNext(), "Enumerable MoveNext false");
+        }
+
+        [Test]
+        public void DictionaryAsIReadOnlyCollectionWorks()
+        {
+            IReadOnlyCollection<KeyValuePair<int, string>> d = new Dictionary<int, string> { { 1, "a" }, { 2, "b" } };
+
+             // IReadOnlyCollection<KeyValuePair<TKey, TValue>>
+
+            Assert.AreEqual(2, d.Count, "Count");
+
+            // IEnumerable<KeyValuePair<TKey, TValue>>
+
+            var en = d.GetEnumerator();
+
+            var el = en.Current;
+            Assert.AreEqual(0, el.Key, "Enumerable initial key");
+            Assert.AreEqual(null, el.Value, "Enumerable initial value");
+            Assert.True(en.MoveNext(), "Enumerable MoveNext true");
+            el = en.Current;
+            Assert.AreEqual(1, el.Key, "Enumerable first key");
+            Assert.AreEqual("a", el.Value, "Enumerable first value");
+            Assert.True(en.MoveNext(), "Enumerable MoveNext true");
+            el = en.Current;
+            Assert.AreEqual(2, el.Key, "Enumerable second key");
+            Assert.AreEqual("b", el.Value, "Enumerable second value");
+            Assert.False(en.MoveNext(), "Enumerable MoveNext false");
         }
     }
 }
