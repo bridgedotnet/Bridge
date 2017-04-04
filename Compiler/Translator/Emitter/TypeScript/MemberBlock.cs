@@ -124,7 +124,7 @@ namespace Bridge.Translator.TypeScript
             this.WriteColon();
 
             string typeName = this.TypeInfo.IsEnum
-                ? (this.Emitter.Validator.IsStringNameEnum(this.TypeInfo.Type) ? "string" : "number")
+                ? (Helpers.IsStringNameEnum(this.TypeInfo.Type) ? "string" : "number")
                 : BridgeTypes.ToTypeScriptName(field.Entity.ReturnType, this.Emitter);
             this.Write(typeName);
             this.WriteSemiColon();

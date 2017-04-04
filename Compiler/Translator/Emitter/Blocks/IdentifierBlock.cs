@@ -574,7 +574,7 @@ namespace Bridge.Translator
                 else
                 {
                     this.WriteTarget(memberResult);
-                    this.Write(this.Emitter.GetEntityName(memberResult.Member, true));
+                    this.Write(this.Emitter.GetEntityName(memberResult.Member));
                 }
             }
             else

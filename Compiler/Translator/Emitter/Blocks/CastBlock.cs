@@ -134,7 +134,7 @@ namespace Bridge.Translator
             if (castToEnum)
             {
                 itype = enumType.GetDefinition().EnumUnderlyingType;
-                var enumMode = this.Emitter.Validator.EnumEmitMode(enumType);
+                var enumMode = Helpers.EnumEmitMode(enumType);
                 if (enumMode >= 3 && enumMode < 7)
                 {
                     itype = this.Emitter.Resolver.Compilation.FindType(KnownTypeCode.String);
@@ -157,7 +157,7 @@ namespace Bridge.Translator
 
             if (expressionrr.Type.Kind == TypeKind.Enum)
             {
-                var enumMode = this.Emitter.Validator.EnumEmitMode(expressionrr.Type);
+                var enumMode = Helpers.EnumEmitMode(expressionrr.Type);
                 if (enumMode >= 3 && enumMode < 7 && Helpers.IsIntegerType(itype, this.Emitter.Resolver))
                 {
                    throw new EmitterException(this.CastExpression, "Enum underlying type is string and cannot be casted to number");

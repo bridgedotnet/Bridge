@@ -413,8 +413,8 @@ namespace Bridge.Contract
                 {
                     name = BridgeTypes.ToJsName(typeDef.DeclaringType, emitter, true);
                 }
-
-                name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.ConvertName(typeDef.Name);
+                
+                name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.ConvertName(emitter.GetTypeName(itypeDef, typeDef));
             }
             else
             {

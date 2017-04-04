@@ -49,12 +49,12 @@ namespace Bridge.Translator
 
                 if (hasInitializer)
                 {
-                    this.WriteObjectInitializer(attribute.NamedArguments, this.Emitter.AssemblyInfo.PreserveMemberCase, type, attribute);
+                    this.WriteObjectInitializer(attribute.NamedArguments, type, attribute);
                     this.WriteSpace();
                 }
                 else if (this.Emitter.Validator.IsObjectLiteral(type))
                 {
-                    this.WriteObjectInitializer(null, this.Emitter.AssemblyInfo.PreserveMemberCase, type, attribute);
+                    this.WriteObjectInitializer(null, type, attribute);
                     this.WriteSpace();
                 }
 
@@ -103,7 +103,7 @@ namespace Bridge.Translator
 
                     this.BeginBlock();
 
-                    var inlineInit = this.WriteObjectInitializer(attribute.NamedArguments, this.Emitter.AssemblyInfo.PreserveMemberCase, type, attribute);
+                    var inlineInit = this.WriteObjectInitializer(attribute.NamedArguments, type, attribute);
 
                     this.WriteNewLine();
 
@@ -203,7 +203,7 @@ namespace Bridge.Translator
 
                     if (typeDef != null)
                     {
-                        var enumMode = block.Emitter.Validator.EnumEmitMode(typeDef);
+                        var enumMode = Helpers.EnumEmitMode(typeDef);
 
                         if ((block.Emitter.Validator.IsExternalType(typeDef) && enumMode == -1) || enumMode == 2)
                         {
@@ -343,7 +343,7 @@ namespace Bridge.Translator
             return inlineCode;
         }
 
-        protected virtual List<string> WriteObjectInitializer(IList<KeyValuePair<IMember, ResolveResult>> expressions, bool preserveMemberCase, TypeDefinition type, IAttribute attr)
+        protected virtual List<string> WriteObjectInitializer(IList<KeyValuePair<IMember, ResolveResult>> expressions, TypeDefinition type, IAttribute attr)
         {
             bool needComma = false;
             List<string> names = new List<string>();
@@ -354,8 +354,7 @@ namespace Bridge.Translator
                 foreach (KeyValuePair<IMember, ResolveResult> item in expressions)
                 {
                     var member = item.Key;
-                    var preserveCase = !this.Emitter.IsNativeMember(member.FullName) && preserveMemberCase;
-                    var name = this.Emitter.GetEntityName(member, preserveCase);
+                    var name = this.Emitter.GetEntityName(member);
 
                     var inlineCode = AttributeCreateBlock.GetInlineInit(item, this);
 
@@ -433,11 +432,6 @@ namespace Bridge.Translator
                             }
 
                             var name = member.GetName(this.Emitter);
-
-                            if (!preserveMemberCase)
-                            {
-                                name = Object.Net.Utilities.StringUtils.ToLowerCamelCase(name);
-                            }
 
                             if (names.Contains(name))
                             {

@@ -87,6 +87,8 @@
     <Compile Include="BridgeType.cs" />
     <Compile Include="Config\VersionContext.cs" />
     <Compile Include="Constants\Files.cs" />
+    <Compile Include="Name\Converter.cs" />
+    <Compile Include="Name\Semantic.cs" />
     <Compile Include="HashHelper.cs" />
     <Compile Include="Config\ConfigHelper.cs" />
     <Compile Include="Config\AssemblyConfig.cs" />
@@ -166,6 +168,7 @@
       <Path Condition="'$(OS)' != 'Windows_NT'">$(SolutionDir).build\specs\Bridge.Contract.Mono.nuspec</Path>
     </NuGetPackageSourcePath>
   </ItemGroup>
+  <ItemGroup />
   <Import Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " Project="$(SolutionDir).build\common\NuGet.Build.Package.targets" />
   <Target Name="CleanProjectNuGetOutput" BeforeTargets="Clean">
     <ItemGroup>

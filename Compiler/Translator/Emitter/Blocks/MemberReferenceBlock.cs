@@ -172,7 +172,7 @@ namespace Bridge.Translator
             }
 
             var memberTargetrr = targetrr as MemberResolveResult;
-            if (memberTargetrr != null && memberTargetrr.Type.Kind == TypeKind.Enum && memberTargetrr.Member is DefaultResolvedField && this.Emitter.Validator.EnumEmitMode(memberTargetrr.Type) == 2)
+            if (memberTargetrr != null && memberTargetrr.Type.Kind == TypeKind.Enum && memberTargetrr.Member is DefaultResolvedField && Helpers.EnumEmitMode(memberTargetrr.Type) == 2)
             {
                 isConstTarget = true;
             }
@@ -606,7 +606,7 @@ namespace Bridge.Translator
 
                     if (typeDef != null)
                     {
-                        var enumMode = this.Emitter.Validator.EnumEmitMode(typeDef);
+                        var enumMode = Helpers.EnumEmitMode(typeDef);
 
                         if ((this.Emitter.Validator.IsExternalType(typeDef) && enumMode == -1) || enumMode == 2)
                         {
@@ -916,7 +916,7 @@ namespace Bridge.Translator
                 {
                     if (member.Member is IProperty && targetrr != null && targetrr.Type.GetDefinition() != null && this.Emitter.Validator.IsObjectLiteral(targetrr.Type.GetDefinition()) && !this.Emitter.Validator.IsObjectLiteral(member.Member.DeclaringTypeDefinition))
                     {
-                        this.Write(this.Emitter.GetEntityName(member.Member));
+                        this.Write(this.Emitter.GetLiteralEntityName(member.Member));
                     }
                     else
                     {
@@ -1029,7 +1029,7 @@ namespace Bridge.Translator
                         }
                         else
                         {
-                            this.Write(this.Emitter.GetEntityName(member.Member, true, ignoreInterface: !nativeImplementation));
+                            this.Write(this.Emitter.GetEntityName(member.Member));
                         }
                     }
                 }
@@ -1041,7 +1041,7 @@ namespace Bridge.Translator
                     }
                     else
                     {
-                        this.Write(this.Emitter.GetEntityName(member.Member, ignoreInterface: !nativeImplementation));
+                        this.Write(this.Emitter.GetEntityName(member.Member));
                     }
                 }
 

@@ -385,7 +385,7 @@ namespace Bridge.Translator
                 if (this.TypeInfo.IsEnum)
                 {
                     var memeber_rr = (MemberResolveResult)this.Emitter.Resolver.ResolveNode(member.Entity, this.Emitter);
-                    var mode = this.Emitter.Validator.EnumEmitMode(memeber_rr.Member.DeclaringTypeDefinition);
+                    var mode = Helpers.EnumEmitMode(memeber_rr.Member.DeclaringTypeDefinition);
 
                     var attr = Helpers.GetInheritedAttribute(memeber_rr.Member, Translator.Bridge_ASSEMBLY + ".NameAttribute");
 

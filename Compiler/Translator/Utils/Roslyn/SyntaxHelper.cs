@@ -617,7 +617,7 @@ namespace Bridge.Translator
                     if (value is string)
                     {
                         name = value.ToString();
-                        if (!isIgnore && symbol.IsStatic && Emitter.IsReservedStaticName(name))
+                        if (!isIgnore && symbol.IsStatic && Helpers.IsReservedStaticName(name))
                         {
                             name = Helpers.ChangeReservedWord(name);
                         }
@@ -649,7 +649,7 @@ namespace Bridge.Translator
                     name = !preserveMemberChange ? Object.Net.Utilities.StringUtils.ToLowerCamelCase(name) : name;
                 }*/
 
-                if (!isIgnore && symbol.IsStatic && Emitter.IsReservedStaticName(name))
+                if (!isIgnore && symbol.IsStatic && Helpers.IsReservedStaticName(name))
                 {
                     name = Helpers.ChangeReservedWord(name);
                 }

@@ -279,59 +279,6 @@ namespace Bridge.Translator
             return this.HasAttribute(type.CustomAttributes, attrName);
         }
 
-        public virtual int EnumEmitMode(DefaultResolvedTypeDefinition type)
-        {
-            string enumAttr = Translator.Bridge_ASSEMBLY + ".EnumAttribute";
-            int result = 7;
-            type.Attributes.Any(attr =>
-            {
-                if (attr.Constructor != null && attr.Constructor.DeclaringType.FullName == enumAttr && attr.PositionalArguments.Count > 0)
-                {
-                    result = (int)attr.PositionalArguments.First().ConstantValue;
-                    return true;
-                }
-
-                return false;
-            });
-
-            return result;
-        }
-
-        public virtual int EnumEmitMode(IType type)
-        {
-            string enumAttr = Translator.Bridge_ASSEMBLY + ".EnumAttribute";
-            int result = 7;
-            type.GetDefinition().Attributes.Any(attr =>
-            {
-                if (attr.Constructor != null && attr.Constructor.DeclaringType.FullName == enumAttr && attr.PositionalArguments.Count > 0)
-                {
-                    result = (int)attr.PositionalArguments.First().ConstantValue;
-                    return true;
-                }
-
-                return false;
-            });
-
-            return result;
-        }
-
-        public virtual bool IsValueEnum(IType type)
-        {
-            return this.EnumEmitMode(type) == 2;
-        }
-
-        public virtual bool IsNameEnum(IType type)
-        {
-            var enumEmitMode = this.EnumEmitMode(type);
-            return enumEmitMode == 1 || enumEmitMode > 6;
-        }
-
-        public virtual bool IsStringNameEnum(IType type)
-        {
-            var mode = this.EnumEmitMode(type);
-            return mode >= 3 && mode <=6;
-        }
-
         public virtual bool HasAttribute(IEnumerable<CustomAttribute> attributes, string name)
         {
             return this.GetAttribute(attributes, name) != null;

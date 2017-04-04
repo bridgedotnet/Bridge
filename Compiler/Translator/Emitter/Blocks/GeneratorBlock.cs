@@ -168,7 +168,7 @@ namespace Bridge.Translator
                 {
                     foreach (var parameterDeclaration in prms)
                     {
-                        var name = this.Emitter.GetEntityName(parameterDeclaration);
+                        var name = this.Emitter.GetParameterName(parameterDeclaration);
                         if (this.Emitter.LocalsNamesMap != null && this.Emitter.LocalsNamesMap.ContainsKey(name))
                         {
                             name = this.Emitter.LocalsNamesMap[name];
