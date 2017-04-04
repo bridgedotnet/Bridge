@@ -275,6 +275,204 @@ namespace Bridge.ClientTest.Collections.Generic
         }
 
         [Test]
+        public void DictionaryAsICollectionWorks()
+        {
+            var container = new Dictionary<int, string> { { 1, "a" }, { 2, "b" } };
+            var d = container as ICollection<KeyValuePair<int, string>>;
+
+
+            // IEnumerable<KeyValuePair<TKey, TValue>>
+
+            var en = d.GetEnumerator();
+
+            var el = en.Current;
+            Assert.AreEqual(0, el.Key, "Enumerable initial key");
+            Assert.AreEqual(null, el.Value, "Enumerable initial value");
+            Assert.True(en.MoveNext(), "Enumerable MoveNext true");
+            el = en.Current;
+            Assert.AreEqual(1, el.Key, "Enumerable first key");
+            Assert.AreEqual("a", el.Value, "Enumerable first value");
+            Assert.True(en.MoveNext(), "Enumerable MoveNext true");
+            el = en.Current;
+            Assert.AreEqual(2, el.Key, "Enumerable second key");
+            Assert.AreEqual("b", el.Value, "Enumerable second value");
+            Assert.False(en.MoveNext(), "Enumerable MoveNext false");
+
+
+            // ICollection<T>
+
+            Assert.AreEqual(2, d.Count, "Count");
+            Assert.False(d.IsReadOnly, "IsReadOnly");
+
+            d.Add(new KeyValuePair<int, string>(3, "c"));
+            Assert.AreEqual(3, d.Count, "ICollection<KeyValuePair> Count after Add(3)");
+            Assert.AreEqual("c", container[3], "ICollection<KeyValuePair> Getter[3] after Add(3)");
+            Assert.Throws<ArgumentException>(() => { d.Add(new KeyValuePair<int, string>(1, "d")); }, "ICollection<KeyValuePair> Add(1) should fail");
+
+            Assert.True(d.Remove(new KeyValuePair<int, string>(3, "c")), "ICollection<KeyValuePair> Remove(3)");
+            Assert.AreEqual(2, d.Count, "ICollection<KeyValuePair> Count after Remove(3)");
+            Assert.AreEqual("a", container[1], "ICollection<KeyValuePair> Getter[1] after Remove(3)");
+            Assert.AreEqual("b", container[2], "ICollection<KeyValuePair> Getter[2] after Remove(3)");
+
+            var cta = new KeyValuePair<int, string>[3];
+            d.CopyTo(cta, 0);
+
+            Assert.AreEqual(1, cta[0].Key, "ICollection<KeyValuePair> CopyTo Getter[0] Key");
+            Assert.AreEqual("a", cta[0].Value, "ICollection<KeyValuePair> CopyTo Getter[0] Value");
+
+            Assert.AreEqual(2, cta[1].Key, "ICollection<KeyValuePair> CopyTo Getter[1] Key");
+            Assert.AreEqual("b", cta[1].Value, "ICollection<KeyValuePair> CopyTo Getter[1] Value");
+
+            Assert.AreEqual(0, cta[2].Key, "ICollection<KeyValuePair> CopyTo Getter[2] Key");
+            Assert.AreEqual(null, cta[2].Value, "ICollection<KeyValuePair> CopyTo Getter[2] Value");
+
+            Assert.True(d.Contains(new KeyValuePair<int, string>(1, "a")), "ICollection<KeyValuePair> Contains(1, \"a\")");
+            Assert.True(d.Contains(new KeyValuePair<int, string>(2, "b")), "ICollection<KeyValuePair> Contains(2, \"b\")");
+            Assert.False(d.Contains(new KeyValuePair<int, string>(1, "b")), "ICollection<KeyValuePair> Contains(1, \"b\")");
+            Assert.False(d.Contains(new KeyValuePair<int, string>(3, "a")), "ICollection<KeyValuePair> Contains(3, \"a\")");
+            Assert.False(d.Contains(new KeyValuePair<int, string>(0, "a")), "ICollection<KeyValuePair> Contains(0, \"a\")");
+
+            d.Clear();
+            Assert.AreEqual(0, d.Count, "ICollection<KeyValuePair> Count after Clear");
+            Assert.Throws<KeyNotFoundException>(() => { var a = container[1]; }, "ICollection<KeyValuePair> Getter[1] should fail after clear");
+        }
+
+        [Test]
+        public void DictionaryAsIDictionaryWorks()
+        {
+            IDictionary<int, string> d = new Dictionary<int, string> { { 1, "a" }, { 2, "b" } };
+
+            // IDictionary<TKey, TValue>
+            Assert.AreEqual("a", d[1], "Getter[1]");
+            Assert.Throws<KeyNotFoundException>(() => { var r = d[3]; }, "Getter[3] should fail");
+
+            d[1] = "aa";
+            Assert.AreEqual("aa", d[1], "Getter[1] after setter");
+            d[3] = "cc";
+            Assert.AreEqual("cc", d[3], "Getter[3] after setter");
+
+            Assert.True(d.Remove(3), "Remove(3)");
+            Assert.AreEqual(2, d.Count, "Count after Remove(3)");
+            Assert.AreEqual("aa", d[1], "Getter[1] after Remove(3)");
+            Assert.AreEqual("b", d[2], "Getter[2] after Remove(3)");
+
+            Assert.False(d.Remove(4), "Remove(4)");
+            Assert.AreEqual(2, d.Count, "Count after Remove(4)");
+            Assert.AreEqual("aa", d[1], "Getter[1] after Remove(4)");
+            Assert.AreEqual("b", d[2], "Getter[2] after Remove(4)");
+
+            Assert.True(d.Remove(1), "Remove(1)");
+            Assert.AreEqual(1, d.Count, "Count after Remove(1)");
+            Assert.AreEqual("b", d[2], "Getter[2] after Remove(1)");
+
+            Assert.True(d.Remove(2), "Remove(2)");
+            Assert.AreEqual(0, d.Count, "Count after Remove(2)");
+
+            d.Add(2, "b");
+            Assert.AreEqual(1, d.Count, "Count after Add(2)");
+            Assert.AreEqual("b", d[2], "Getter[1] after Add(2)");
+
+            d.Add(1, "a");
+            Assert.AreEqual(2, d.Count, "Count after Add(1)");
+            Assert.AreEqual("a", d[1], "Getter[1] after Add(1)");
+
+            Assert.Throws<ArgumentException>(() => { d.Add(2, "c"); }, "Add(2) should fail");
+
+            var keys = d.Keys;
+            Assert.True((object)keys is ICollection<int>, "Keys is ICollection<int>");
+            Assert.True((object)keys is IEnumerable<int>, "Keys is IEnumerable<int>");
+            Assert.True((object)keys is IEnumerable, "Keys is IEnumerable");
+
+            int count = 0;
+            foreach (var key in d.Keys)
+            {
+                Assert.True(key == 1 || key == 2, "Expected key " + key);
+                count++;
+            }
+            Assert.AreEqual(2, count, "Keys count");
+
+            var values = d.Values;
+            Assert.True((object)values is ICollection<string>, "Values is ICollection<string>");
+            Assert.True((object)values is IEnumerable<string>, "Values is IEnumerable<string>");
+            Assert.True((object)values is IEnumerable, "Values is IEnumerable");
+
+            count = 0;
+            foreach (var value in d.Values)
+            {
+                Assert.True(value == "a" || value == "b", "Expected value " + value);
+                count++;
+            }
+            Assert.AreEqual(2, count, "Values count");
+
+            Assert.True(d.ContainsKey(1), "ContainsKey(1)");
+            Assert.False(d.ContainsKey(3), "ContainsKey(3)");
+
+            string v;
+
+            Assert.True(d.TryGetValue(2, out v), "TryGetValue(2)");
+            Assert.AreEqual("b", v, "TryGetValue(2) value");
+            Assert.False(d.TryGetValue(0, out v), "TryGetValue(0)");
+            Assert.AreEqual(null, v, "TryGetValue(0) value");
+
+
+            // IEnumerable<KeyValuePair<TKey, TValue>>
+
+            var en = d.GetEnumerator();
+
+            // #2541
+            var el = en.Current;
+            Assert.AreEqual(0, el.Key, "Enumerable initial key");
+            Assert.AreEqual(null, el.Value, "Enumerable initial value");
+            Assert.True(en.MoveNext(), "Enumerable MoveNext true");
+            el = en.Current;
+            Assert.AreEqual(1, el.Key, "Enumerable first key");
+            Assert.AreEqual("a", el.Value, "Enumerable first value");
+            Assert.True(en.MoveNext(), "Enumerable MoveNext true");
+            el = en.Current;
+            Assert.AreEqual(2, el.Key, "Enumerable second key");
+            Assert.AreEqual("b", el.Value, "Enumerable second value");
+            Assert.False(en.MoveNext(), "Enumerable MoveNext false");
+
+
+            // ICollection<T>
+
+            Assert.AreEqual(2, d.Count, "Count");
+            Assert.False(d.IsReadOnly, "IsReadOnly");
+
+            d.Add(new KeyValuePair<int, string>(3, "c"));
+            Assert.AreEqual(3, d.Count, "ICollection<KeyValuePair> Count after Add(3)");
+            Assert.AreEqual("c", d[3], "ICollection<KeyValuePair> Getter[3] after Add(3)");
+            Assert.Throws<ArgumentException>(() => { d.Add(new KeyValuePair<int, string>(1, "d")); }, "ICollection<KeyValuePair> Add(1) should fail");
+
+            Assert.True(d.Remove(new KeyValuePair<int, string>(3, "c")), "ICollection<KeyValuePair> Remove(3)");
+            Assert.AreEqual(2, d.Count, "ICollection<KeyValuePair> Count after Remove(3)");
+            Assert.AreEqual("a", d[1], "ICollection<KeyValuePair> Getter[1] after Remove(3)");
+            Assert.AreEqual("b", d[2], "ICollection<KeyValuePair> Getter[2] after Remove(3)");
+
+            var cta = new KeyValuePair<int, string>[3];
+            d.CopyTo(cta, 0);
+
+            Assert.AreEqual(1, cta[0].Key, "ICollection<KeyValuePair> CopyTo Getter[0] Key");
+            Assert.AreEqual("a", cta[0].Value, "ICollection<KeyValuePair> CopyTo Getter[0] Value");
+
+            Assert.AreEqual(2, cta[1].Key, "ICollection<KeyValuePair> CopyTo Getter[1] Key");
+            Assert.AreEqual("b", cta[1].Value, "ICollection<KeyValuePair> CopyTo Getter[1] Value");
+
+            Assert.AreEqual(0, cta[2].Key, "ICollection<KeyValuePair> CopyTo Getter[2] Key");
+            Assert.AreEqual(null, cta[2].Value, "ICollection<KeyValuePair> CopyTo Getter[2] Value");
+
+            Assert.True(d.Contains(new KeyValuePair<int, string>(1, "a")), "ICollection<KeyValuePair> Contains(1, \"a\")");
+            Assert.True(d.Contains(new KeyValuePair<int, string>(2, "b")), "ICollection<KeyValuePair> Contains(2, \"b\")");
+            Assert.False(d.Contains(new KeyValuePair<int, string>(1, "b")), "ICollection<KeyValuePair> Contains(1, \"b\")");
+            Assert.False(d.Contains(new KeyValuePair<int, string>(3, "a")), "ICollection<KeyValuePair> Contains(3, \"a\")");
+            Assert.False(d.Contains(new KeyValuePair<int, string>(0, "a")), "ICollection<KeyValuePair> Contains(0, \"a\")");
+
+            d.Clear();
+            Assert.AreEqual(0, d.Count, "ICollection<KeyValuePair> Count after Clear");
+            Assert.Throws<KeyNotFoundException>(() => { var a = d[1]; }, "ICollection<KeyValuePair> Getter[1] should fail after clear");
+        }
+
+        [Test]
         public void DictionaryAsIReadOnlyDictionaryWorks()
         {
             IReadOnlyDictionary<int, string> d = new Dictionary<int, string> { { 1, "a" }, { 2, "b" } };

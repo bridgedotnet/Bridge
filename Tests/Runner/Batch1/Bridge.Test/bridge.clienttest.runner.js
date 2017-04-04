@@ -210,6 +210,8 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("GenericDictionary - TryGetValueWithIntKeysWorks", Bridge.Test.Runtime.BridgeClientTestRunner.GenericDictionaryTests.tryGetValueWithIntKeysWorks);
             QUnit.test("GenericDictionary - TryGetValueWithObjectKeysWorks", Bridge.Test.Runtime.BridgeClientTestRunner.GenericDictionaryTests.tryGetValueWithObjectKeysWorks);
             QUnit.test("GenericDictionary - CanUseCustomComparer", Bridge.Test.Runtime.BridgeClientTestRunner.GenericDictionaryTests.canUseCustomComparer);
+            QUnit.test("GenericDictionary - DictionaryAsICollectionWorks", Bridge.Test.Runtime.BridgeClientTestRunner.GenericDictionaryTests.dictionaryAsICollectionWorks);
+            QUnit.test("GenericDictionary - DictionaryAsIDictionaryWorks", Bridge.Test.Runtime.BridgeClientTestRunner.GenericDictionaryTests.dictionaryAsIDictionaryWorks);
             QUnit.test("GenericDictionary - DictionaryAsIReadOnlyDictionaryWorks", Bridge.Test.Runtime.BridgeClientTestRunner.GenericDictionaryTests.dictionaryAsIReadOnlyDictionaryWorks);
             QUnit.test("GenericDictionary - DictionaryAsIReadOnlyCollectionWorks", Bridge.Test.Runtime.BridgeClientTestRunner.GenericDictionaryTests.dictionaryAsIReadOnlyCollectionWorks);
             QUnit.test("ICollection - ArrayImplementsICollection", Bridge.Test.Runtime.BridgeClientTestRunner.ICollectionTests.arrayImplementsICollection);
@@ -10356,17 +10358,31 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 } ));
                 t.Fixture.canUseCustomComparer();
             },
+            dictionaryAsICollectionWorks: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.GenericDictionaryTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.GenericDictionaryTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "DictionaryAsICollectionWorks()",
+                    line: "277"
+                } ));
+                t.Fixture.dictionaryAsICollectionWorks();
+            },
+            dictionaryAsIDictionaryWorks: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.GenericDictionaryTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.GenericDictionaryTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "DictionaryAsIDictionaryWorks()",
+                    line: "340"
+                } ));
+                t.Fixture.dictionaryAsIDictionaryWorks();
+            },
             dictionaryAsIReadOnlyDictionaryWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.GenericDictionaryTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.GenericDictionaryTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "DictionaryAsIReadOnlyDictionaryWorks()",
-                    line: "277"
+                    line: "475"
                 } ));
                 t.Fixture.dictionaryAsIReadOnlyDictionaryWorks();
             },
             dictionaryAsIReadOnlyCollectionWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.GenericDictionaryTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.GenericDictionaryTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "DictionaryAsIReadOnlyCollectionWorks()",
-                    line: "342"
+                    line: "540"
                 } ));
                 t.Fixture.dictionaryAsIReadOnlyCollectionWorks();
             }
