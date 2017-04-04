@@ -275,6 +275,31 @@ namespace Bridge.ClientTest.Collections.Generic
         }
 
         [Test]
+        public void DictionaryAsIEnumerableWorks()
+        {
+            var container = new Dictionary<int, string> { { 1, "a" }, { 2, "b" } };
+            var d = container as IEnumerable<KeyValuePair<int, string>>;
+
+
+            // IEnumerable<KeyValuePair<TKey, TValue>>
+
+            var en = d.GetEnumerator();
+
+            var el = en.Current;
+            Assert.AreEqual(0, el.Key, "Enumerable initial key");
+            Assert.AreEqual(null, el.Value, "Enumerable initial value");
+            Assert.True(en.MoveNext(), "Enumerable MoveNext true");
+            el = en.Current;
+            Assert.AreEqual(1, el.Key, "Enumerable first key");
+            Assert.AreEqual("a", el.Value, "Enumerable first value");
+            Assert.True(en.MoveNext(), "Enumerable MoveNext true");
+            el = en.Current;
+            Assert.AreEqual(2, el.Key, "Enumerable second key");
+            Assert.AreEqual("b", el.Value, "Enumerable second value");
+            Assert.False(en.MoveNext(), "Enumerable MoveNext false");
+        }
+
+        [Test]
         public void DictionaryAsICollectionWorks()
         {
             var container = new Dictionary<int, string> { { 1, "a" }, { 2, "b" } };

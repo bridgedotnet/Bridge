@@ -210,6 +210,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("GenericDictionary - TryGetValueWithIntKeysWorks", Bridge.Test.Runtime.BridgeClientTestRunner.GenericDictionaryTests.tryGetValueWithIntKeysWorks);
             QUnit.test("GenericDictionary - TryGetValueWithObjectKeysWorks", Bridge.Test.Runtime.BridgeClientTestRunner.GenericDictionaryTests.tryGetValueWithObjectKeysWorks);
             QUnit.test("GenericDictionary - CanUseCustomComparer", Bridge.Test.Runtime.BridgeClientTestRunner.GenericDictionaryTests.canUseCustomComparer);
+            QUnit.test("GenericDictionary - DictionaryAsIEnumerableWorks", Bridge.Test.Runtime.BridgeClientTestRunner.GenericDictionaryTests.dictionaryAsIEnumerableWorks);
             QUnit.test("GenericDictionary - DictionaryAsICollectionWorks", Bridge.Test.Runtime.BridgeClientTestRunner.GenericDictionaryTests.dictionaryAsICollectionWorks);
             QUnit.test("GenericDictionary - DictionaryAsIDictionaryWorks", Bridge.Test.Runtime.BridgeClientTestRunner.GenericDictionaryTests.dictionaryAsIDictionaryWorks);
             QUnit.test("GenericDictionary - DictionaryAsIReadOnlyDictionaryWorks", Bridge.Test.Runtime.BridgeClientTestRunner.GenericDictionaryTests.dictionaryAsIReadOnlyDictionaryWorks);
@@ -10358,31 +10359,38 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 } ));
                 t.Fixture.canUseCustomComparer();
             },
+            dictionaryAsIEnumerableWorks: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.GenericDictionaryTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.GenericDictionaryTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    method: "DictionaryAsIEnumerableWorks()",
+                    line: "277"
+                } ));
+                t.Fixture.dictionaryAsIEnumerableWorks();
+            },
             dictionaryAsICollectionWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.GenericDictionaryTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.GenericDictionaryTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "DictionaryAsICollectionWorks()",
-                    line: "277"
+                    line: "302"
                 } ));
                 t.Fixture.dictionaryAsICollectionWorks();
             },
             dictionaryAsIDictionaryWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.GenericDictionaryTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.GenericDictionaryTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "DictionaryAsIDictionaryWorks()",
-                    line: "340"
+                    line: "365"
                 } ));
                 t.Fixture.dictionaryAsIDictionaryWorks();
             },
             dictionaryAsIReadOnlyDictionaryWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.GenericDictionaryTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.GenericDictionaryTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "DictionaryAsIReadOnlyDictionaryWorks()",
-                    line: "475"
+                    line: "500"
                 } ));
                 t.Fixture.dictionaryAsIReadOnlyDictionaryWorks();
             },
             dictionaryAsIReadOnlyCollectionWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.GenericDictionaryTests).beforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.GenericDictionaryTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "DictionaryAsIReadOnlyCollectionWorks()",
-                    line: "540"
+                    line: "565"
                 } ));
                 t.Fixture.dictionaryAsIReadOnlyCollectionWorks();
             }
