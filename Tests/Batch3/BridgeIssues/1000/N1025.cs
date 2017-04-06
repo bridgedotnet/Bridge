@@ -532,11 +532,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             {
                 get = (Func<int>)(() => 1),
                 set = (Action<string>)(s => { }),
-                //getProp1 = (Func<int>)(() => 2),
-                //getProp2 = (Func<string>)(() => "test"),
-                //setProp2 = (Action<string>)(s => { }),
                 addEvent1 = (Action<string>)(s => { }),
-                foo = (Action)(() => { })
+                Foo = (Action)(() => { })
             });
 
             //@ Object.defineProperty(externalInstance, "Prop1", {value:2});

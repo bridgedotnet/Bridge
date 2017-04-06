@@ -25,9 +25,9 @@ declare module Functions {
     }
 
     export interface DelegateClass {
-        methodVoidDelegate: {(): void};
-        methodStringDelegate: {(s: string): void};
-        methodStringDelegateIntResult: {(s: string): number};
+        MethodVoidDelegate: {(): void};
+        MethodStringDelegate: {(s: string): void};
+        MethodStringDelegateIntResult: {(s: string): number};
     }
     export interface DelegateClassFunc extends Function {
         prototype: DelegateClass;
@@ -36,8 +36,8 @@ declare module Functions {
     var DelegateClass: DelegateClassFunc;
 
     export interface Parameters {
-        getSomething(i?: number): number;
-        join(numbers: number[]): string;
+        GetSomething(i?: number): number;
+        Join(numbers: number[]): string;
     }
     export interface ParametersFunc extends Function {
         prototype: Parameters;

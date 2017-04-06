@@ -2,9 +2,9 @@
         inherits: [System.IFormatProvider, System.ICloneable],
 
         config: {
-            alias: {
-                getFormat: "System$IFormatProvider$getFormat"
-            }
+            alias: [
+                "getFormat", "System$IFormatProvider$getFormat"
+            ]
         },
 
         statics: {
@@ -180,9 +180,9 @@
         inherits: [System.IFormatProvider, System.ICloneable],
 
         config: {
-            alias: {
-                getFormat: "System$IFormatProvider$getFormat"
-            }
+            alias: [
+                "getFormat", "System$IFormatProvider$getFormat"
+            ]
         },
 
         statics: {
@@ -268,9 +268,9 @@
         inherits: [System.IFormatProvider, System.ICloneable],
 
         config: {
-            alias: {
-                getFormat: "System$IFormatProvider$getFormat"
-            }
+            alias: [
+                "getFormat", "System$IFormatProvider$getFormat"
+            ]
         },
 
         $entryPoint: true,

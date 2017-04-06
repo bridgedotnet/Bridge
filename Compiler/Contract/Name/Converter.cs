@@ -93,10 +93,12 @@ namespace Bridge.Contract
 
     public static class NameConvertor
     {
+        private const string ConventionAttrName = "Bridge.ConventionAttribute";
+
         private static readonly List<NameRule> defaultRules = new List<NameRule>
         {
-            new NameRule { Member = NotationMember.Method, Notation = Notation.LowerCamelCase},
-            new NameRule { Member = NotationMember.Field, Notation = Notation.LowerCamelCase}
+            //new NameRule { Member = NotationMember.Method, Notation = Notation.LowerCamelCase},
+            //new NameRule { Member = NotationMember.Field, Notation = Notation.LowerCamelCase}
         };
 
         public static string Convert(NameSemantic semantic)
@@ -116,6 +118,7 @@ namespace Bridge.Contract
 
         private static string ApplyRule(NameSemantic semantic, NameRule rule)
         {
+            semantic.AppliedRule = rule;
             var name = semantic.DefaultName;
 
             if (rule != null)
@@ -156,10 +159,10 @@ namespace Bridge.Contract
             }
 
             // TODO: remove this statement when default rules (method and field to lower camel case) will be removed
-            if (semantic.Entity is IMember && !semantic.IsCustomName && semantic.EnumMode <= 6 && semantic.Entity.Name.Length > 1 && semantic.Entity.Name.ToUpperInvariant() == semantic.Entity.Name)
+            /*if (semantic.Entity is IMember && !semantic.IsCustomName && semantic.EnumMode <= 1 && semantic.Entity.Name.Length > 1 && semantic.Entity.Name.ToUpperInvariant() == semantic.Entity.Name)
             {
                 name = semantic.Entity.Name;
-            }
+            }*/
 
             return name;
         }
@@ -379,18 +382,16 @@ namespace Bridge.Contract
             }
             return acceptable;
         }
+        private static readonly NameRule ConstructorRule = new NameRule { CustomName = JS.Funcs.CONSTRUCTOR };
+        private static readonly NameRule LowerCamelCaseRule = new NameRule {Notation = Notation.LowerCamelCase};
+        private static readonly NameRule LowerCaseRule = new NameRule { Notation = Notation.LowerCase };
+        private static readonly NameRule UpperCaseRule = new NameRule { Notation = Notation.UpperCase };
+        private static readonly NameRule DefaultCaseRule = new NameRule { Notation = Notation.None };
 
         private static List<NameRule> GetRules(NameSemantic semantic)
         {
-            var attrs = NameConvertor.GetAttributes(semantic);
-            var rules = new List<NameRule>(attrs.Length);
-            rules.AddRange(NameConvertor.GetSpecialRules(semantic));
-
-            foreach (var attribute in attrs)
-            {
-                rules.Add(NameConvertor.ToRule(attribute));
-            }
-
+            var rules = NameConvertor.GetSpecialRules(semantic);
+            rules.AddRange(NameConvertor.GetAttributeRules(semantic));
             rules.AddRange(NameConvertor.GetDefaultRules(semantic));
 
             return rules;
@@ -429,18 +430,24 @@ namespace Bridge.Contract
             switch (enumMode)
             {
                 case 1:
+                    if (semantic.Entity.Name.Length > 1 &&
+                        semantic.Entity.Name.ToUpperInvariant() == semantic.Entity.Name)
+                    {
+                        return NameConvertor.DefaultCaseRule;
+                    }
+                    return NameConvertor.LowerCamelCaseRule;
                 case 3:
-                    return new NameRule { Notation = Notation.LowerCamelCase };
+                    return NameConvertor.LowerCamelCaseRule;
                 case 2:
                 case 4:
                 case 7:
-                    return new NameRule { Notation = Notation.None };
+                    return NameConvertor.DefaultCaseRule;
                 case 5:
                 case 8:
-                    return new NameRule { Notation = Notation.LowerCase };
+                    return NameConvertor.LowerCaseRule;
                 case 6:
                 case 9:
-                    return new NameRule { Notation = Notation.UpperCase };
+                    return NameConvertor.UpperCaseRule;
             }
 
             return null;
@@ -448,14 +455,14 @@ namespace Bridge.Contract
 
         private static NameRule GetPropertyRule(NameSemantic semantic)
         {
-            if (semantic.Entity is IProperty && semantic.Entity.DeclaringTypeDefinition != null && (semantic.IsObjectLiteral || semantic.Emitter.Validator.IsObjectLiteral(semantic.Entity.DeclaringTypeDefinition)))
+            if ((semantic.Entity is IProperty || semantic.Entity is IField) && semantic.Entity.DeclaringTypeDefinition != null && (semantic.IsObjectLiteral || semantic.Emitter.Validator.IsObjectLiteral(semantic.Entity.DeclaringTypeDefinition)))
             {
-                return new NameRule { Notation = Notation.LowerCamelCase };
+                return NameConvertor.LowerCamelCaseRule;
             }
 
             return null;
         }
-
+        
         private static List<NameRule> GetSpecialRules(NameSemantic semantic)
         {
             var rules = new List<NameRule>();
@@ -482,7 +489,7 @@ namespace Bridge.Contract
                 if (method != null && method.IsConstructor)
                 {
                     semantic.IsCustomName = true;
-                    rules.Add(new NameRule { CustomName = JS.Funcs.CONSTRUCTOR });
+                    rules.Add(NameConvertor.ConstructorRule);
                 }
             }
 
@@ -528,30 +535,130 @@ namespace Bridge.Contract
             return rule;
         }
 
-        private static IAttribute[] GetAttributes(NameSemantic semantic)
+        private static List<NameRule> GetAttributeRules(NameSemantic semantic)
         {
-            var attrName = "Bridge.ConventionAttribute";
-            IAttribute[] ownAttrs = semantic.Entity.GetAttributes(new FullTypeName(attrName)).ToArray();
-            IAttribute[] ownerAttributes = null;
+            NameRule memberRule = null;
+            NameRule[] classRules = null;
+            NameRule[] assemblyRules = null;
+            NameRule[] interfaceRules = null;
 
-            if (semantic.Entity.DeclaringTypeDefinition != null)
+            if (semantic.Entity is IMember)
             {
-                ownerAttributes = semantic.Entity.DeclaringTypeDefinition.GetAttributes(new FullTypeName(attrName)).ToArray();
+                var attr = Helpers.GetInheritedAttribute(semantic.Entity, NameConvertor.ConventionAttrName);
+
+                if (attr != null)
+                {
+                    memberRule = NameConvertor.ToRule(attr);
+                }
+
+                var typeDef = semantic.Entity.DeclaringTypeDefinition;
+
+                if (typeDef != null)
+                {
+                    classRules = NameConvertor.GetClassRules(semantic, typeDef);
+                }
+
+                interfaceRules = NameConvertor.GetVirtualMemberRules(semantic);
+            }
+            else if(semantic.Entity is ITypeDefinition)
+            {
+                classRules = NameConvertor.GetClassRules(semantic, (ITypeDefinition)semantic.Entity);
             }
 
-            IAttribute[] assemblyAttr = semantic.Entity.ParentAssembly.AssemblyAttributes.Where(a => a.AttributeType.FullName == attrName).ToArray();
-
-            if(ownerAttributes != null && ownerAttributes.Length > 0)
+            var assembly = semantic.Entity.ParentAssembly;
+            
+            if (semantic.Emitter.AssemblyNameRuleCache.ContainsKey(assembly))
             {
-                ownAttrs = ownAttrs.Concat(ownerAttributes).ToArray();
+                assemblyRules = semantic.Emitter.AssemblyNameRuleCache[assembly];
+            }
+            else
+            {
+                IAttribute[] assemblyAttrs = assembly.AssemblyAttributes.Where(a => a.AttributeType.FullName == NameConvertor.ConventionAttrName).ToArray();
+                assemblyRules = new NameRule[assemblyAttrs.Length];
+                for (int i = 0; i < assemblyAttrs.Length; i++)
+                {
+                    assemblyRules[i] = NameConvertor.ToRule(assemblyAttrs[i]);
+                }
+
+                semantic.Emitter.AssemblyNameRuleCache.Add(assembly, assemblyRules);
+            }
+            
+            var rules = new List<NameRule>();
+
+            if(memberRule != null)
+            {
+                rules.Add(memberRule);
             }
 
-            if (assemblyAttr.Length > 0)
+            if (classRules != null && classRules.Length > 0)
             {
-                ownAttrs = ownAttrs.Concat(assemblyAttr).ToArray();
+                rules.AddRange(classRules);
             }
 
-            return ownAttrs;
+            if (interfaceRules != null && interfaceRules.Length > 0)
+            {
+                rules.AddRange(interfaceRules);
+            }
+
+            if (assemblyRules != null && assemblyRules.Length > 0)
+            {
+                rules.AddRange(assemblyRules);
+            }
+
+            return rules;
+        }
+
+        private static NameRule[] GetVirtualMemberRules(NameSemantic semantic)
+        {
+            var member = semantic.Entity as IMember;
+
+            if (member != null)
+            {
+                if (member.IsOverride)
+                {
+                    var baseMember = InheritanceHelper.GetBaseMember(member);
+                    var baseSemantic = NameSemantic.Create(baseMember, semantic.Emitter);
+                    //do not remove baseName, it calculates AppliedRule
+                    var baseName = baseSemantic.Name;
+                    if (baseSemantic.AppliedRule != null)
+                    {
+                        return new[] { baseSemantic.AppliedRule };
+                    }
+                }
+
+                if (member.ImplementedInterfaceMembers.Count > 0)
+                {
+                    var interfaceMember = member.ImplementedInterfaceMembers.First();
+                    return NameConvertor.GetClassRules(new NameSemantic { Emitter = semantic.Emitter }, interfaceMember.DeclaringTypeDefinition);
+                }
+            }
+
+            return null;
+        }
+
+        private static NameRule[] GetClassRules(NameSemantic semantic, ITypeDefinition typeDef)
+        {
+            if (semantic.Emitter.ClassNameRuleCache.ContainsKey(typeDef))
+            {
+                return semantic.Emitter.ClassNameRuleCache[typeDef];
+            }
+
+            var td = typeDef;
+            List<NameRule> rules = new List<NameRule>();
+            while (td != null)
+            {
+                IAttribute[] classAttrs = td.GetAttributes(new FullTypeName(NameConvertor.ConventionAttrName)).ToArray();
+                for (int i = 0; i < classAttrs.Length; i++)
+                {
+                    rules.Add(NameConvertor.ToRule(classAttrs[i]));
+                }
+
+                td = td.DeclaringTypeDefinition;
+            }
+
+            var classRules = rules.ToArray();
+            semantic.Emitter.ClassNameRuleCache.Add(typeDef, classRules);
+            return classRules;
         }
     }
 }

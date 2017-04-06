@@ -5455,9 +5455,9 @@ Bridge.define("System.Exception", {
         inherits: [System.IFormatProvider, System.ICloneable],
 
         config: {
-            alias: {
-                getFormat: "System$IFormatProvider$getFormat"
-            }
+            alias: [
+                "getFormat", "System$IFormatProvider$getFormat"
+            ]
         },
 
         statics: {
@@ -5633,9 +5633,9 @@ Bridge.define("System.Exception", {
         inherits: [System.IFormatProvider, System.ICloneable],
 
         config: {
-            alias: {
-                getFormat: "System$IFormatProvider$getFormat"
-            }
+            alias: [
+                "getFormat", "System$IFormatProvider$getFormat"
+            ]
         },
 
         statics: {
@@ -5721,9 +5721,9 @@ Bridge.define("System.Exception", {
         inherits: [System.IFormatProvider, System.ICloneable],
 
         config: {
-            alias: {
-                getFormat: "System$IFormatProvider$getFormat"
-            }
+            alias: [
+                "getFormat", "System$IFormatProvider$getFormat"
+            ]
         },
 
         $entryPoint: true,

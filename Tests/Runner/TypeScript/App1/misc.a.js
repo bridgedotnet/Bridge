@@ -2,13 +2,13 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     "use strict";
 
     Bridge.define("Misc.A.Class1", {
-        getInt: function (i) {
+        GetInt: function (i) {
             return i;
         }
     });
 
     Bridge.define("Misc.A.EnumTest", {
-        doSomething: function (m) {
+        DoSomething: function (m) {
             return m;
         }
     });

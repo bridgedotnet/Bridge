@@ -8,6 +8,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge1848
     {
         [External]
+        [Convention(Type = NotationType.Member, Notation = Notation.LowerCamelCase)]
         public interface ITest
         {
             int GetNewId();
@@ -17,6 +18,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
         [ExternalInterface(true)]
         [Name("Bridge1848_ITest")]
+        [Convention(Type = NotationType.Member, Notation = Notation.LowerCamelCase)]
         public interface ITest2
         {
             int GetNewId();
@@ -29,11 +31,11 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             /*@Bridge.Bridge1848_ITest = {
                 getNewId: function () { return 123; },
-                Name: "editor"
+                name: "editor"
             };
             Bridge.Bridge1848_ITest2 = {
                 Bridge1848_ITest$getNewId: function () { return 123; },
-                Bridge1848_ITest$Name: "editor"
+                Bridge1848_ITest$name: "editor"
             };*/
 
             var initialiser = Script.Write<ITest>("Bridge.Bridge1848_ITest");

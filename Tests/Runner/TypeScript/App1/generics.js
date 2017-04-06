@@ -2,12 +2,12 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     "use strict";
 
     Bridge.define("Generics.GenericClass$1", function (T) { return {
-        instance: Bridge.getDefaultValue(T),
+        Instance: Bridge.getDefaultValue(T),
         ctor: function (instance) {
             this.$initialize();
-            this.instance = instance;
+            this.Instance = instance;
         },
-        getSomething: function (input) {
+        GetSomething: function (input) {
             return input;
         }
     }; });
@@ -21,108 +21,108 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     });
 
     Bridge.define("Generics.GenericNew$1", function (T) { return {
-        instance: Bridge.getDefaultValue(T),
+        Instance: Bridge.getDefaultValue(T),
         ctor: function (instance) {
             this.$initialize();
-            this.instance = instance;
+            this.Instance = instance;
         },
-        getSomething: function (input) {
+        GetSomething: function (input) {
             return input;
         }
     }; });
 
     Bridge.define("Generics.GenericNewAndClass$1", function (T) { return {
-        instance: Bridge.getDefaultValue(T),
+        Instance: Bridge.getDefaultValue(T),
         ctor: function (instance) {
             this.$initialize();
-            this.instance = instance;
+            this.Instance = instance;
         },
-        getSomething: function (input) {
+        GetSomething: function (input) {
             return input;
         }
     }; });
 
     Bridge.define("Generics.GenericStruct$1", function (T) { return {
-        instance: Bridge.getDefaultValue(T),
+        Instance: Bridge.getDefaultValue(T),
         ctor: function (instance) {
             this.$initialize();
-            this.instance = instance;
+            this.Instance = instance;
         },
-        getSomething: function (input) {
+        GetSomething: function (input) {
             return input;
         }
     }; });
 
     Bridge.define("Generics.implementation", {
         statics: {
-            simpleGenericInt: null,
-            simpleDoubleGenericIntString: null,
-            genericINamedEntity: null,
-            genericNamedEntity: null,
-            genericClassObject: null,
-            genericClassNamedEntity: null,
-            genericNew: null,
-            genericNewAndClass: null,
+            SimpleGenericInt: null,
+            SimpleDoubleGenericIntString: null,
+            GenericINamedEntity: null,
+            GenericNamedEntity: null,
+            GenericClassObject: null,
+            GenericClassNamedEntity: null,
+            GenericNew: null,
+            GenericNewAndClass: null,
             config: {
                 init: function () {
-                    this.simpleGenericInt = new (Generics.SimpleGeneric$1(System.Int32))(1);
-                    this.simpleDoubleGenericIntString = new (Generics.SimpleDoubleGeneric$2(System.Int32,System.String)).ctor();
-                    this.genericINamedEntity = new (Generics.GenericINamedEntity$1(Generics.INamedEntity))(new Generics.NamedEntity());
-                    this.genericNamedEntity = new (Generics.GenericNamedEntity$1(Generics.NamedEntity))(new Generics.NamedEntity());
-                    this.genericClassObject = new (Generics.GenericClass$1(System.Object))(Bridge.box(2, System.Int32));
-                    this.genericClassNamedEntity = new (Generics.GenericClass$1(Generics.NamedEntity))(new Generics.NamedEntity());
-                    this.genericNew = new (Generics.GenericNew$1(Generics.NewClass))(new Generics.NewClass());
-                    this.genericNewAndClass = new (Generics.GenericNewAndClass$1(Generics.NewClass))(new Generics.NewClass());
+                    this.SimpleGenericInt = new (Generics.SimpleGeneric$1(System.Int32))(1);
+                    this.SimpleDoubleGenericIntString = new (Generics.SimpleDoubleGeneric$2(System.Int32,System.String)).ctor();
+                    this.GenericINamedEntity = new (Generics.GenericINamedEntity$1(Generics.INamedEntity))(new Generics.NamedEntity());
+                    this.GenericNamedEntity = new (Generics.GenericNamedEntity$1(Generics.NamedEntity))(new Generics.NamedEntity());
+                    this.GenericClassObject = new (Generics.GenericClass$1(System.Object))(Bridge.box(2, System.Int32));
+                    this.GenericClassNamedEntity = new (Generics.GenericClass$1(Generics.NamedEntity))(new Generics.NamedEntity());
+                    this.GenericNew = new (Generics.GenericNew$1(Generics.NewClass))(new Generics.NewClass());
+                    this.GenericNewAndClass = new (Generics.GenericNewAndClass$1(Generics.NewClass))(new Generics.NewClass());
                 }
             }
         }
     });
 
     Bridge.define("Generics.NewClass", {
-        data: 0,
+        Data: 0,
         ctor: function () {
             this.$initialize();
-            this.data = 30;
+            this.Data = 30;
         }
     });
 
     Bridge.define("Generics.SimpleDoubleGeneric$2", function (T, K) { return {
-        instanceT: Bridge.getDefaultValue(T),
-        instanceK: Bridge.getDefaultValue(K),
+        InstanceT: Bridge.getDefaultValue(T),
+        InstanceK: Bridge.getDefaultValue(K),
         ctor: function () {
             this.$initialize();
         },
         $ctor1: function (instanceT, instanceK) {
             this.$initialize();
-            this.instanceT = instanceT;
-            this.instanceK = instanceK;
+            this.InstanceT = instanceT;
+            this.InstanceK = instanceK;
         },
-        getSomething: function (input) {
+        GetSomething: function (input) {
             return input;
         },
-        getSomethingMore: function (input) {
+        GetSomethingMore: function (input) {
             return input;
         }
     }; });
 
     Bridge.define("Generics.SimpleGeneric$1", function (T) { return {
-        instance: Bridge.getDefaultValue(T),
+        Instance: Bridge.getDefaultValue(T),
         ctor: function (instance) {
             this.$initialize();
-            this.instance = instance;
+            this.Instance = instance;
         },
-        getSomething: function (input) {
+        GetSomething: function (input) {
             return input;
         }
     }; });
 
     Bridge.define("Generics.GenericINamedEntity$1", function (T) { return {
-        instance: Bridge.getDefaultValue(T),
+        Instance: Bridge.getDefaultValue(T),
         ctor: function (instance) {
             this.$initialize();
-            this.instance = instance;
+            this.Instance = instance;
         },
-        getSomething: function (input) {
+        GetSomething: function (input) {
             return input;
         }
     }; });
@@ -137,12 +137,12 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     });
 
     Bridge.define("Generics.GenericNamedEntity$1", function (T) { return {
-        instance: Bridge.getDefaultValue(T),
+        Instance: Bridge.getDefaultValue(T),
         ctor: function (instance) {
             this.$initialize();
-            this.instance = instance;
+            this.Instance = instance;
         },
-        getSomething: function (input) {
+        GetSomething: function (input) {
             return input;
         }
     }; });

@@ -84,7 +84,7 @@
             public const string APPLY = "apply";
             public const string CALL = "call";
             public const string DEFINE = "define";
-            public const string DISPOSE = "dispose";
+            public const string DISPOSE = "System$IDisposable$dispose";
 
             public const string SLICE = "slice";
 

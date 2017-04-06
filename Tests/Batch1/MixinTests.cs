@@ -10,6 +10,7 @@ namespace Bridge.ClientTest
     {
         [External]
         [GlobalMethods]
+        [Convention(Type = NotationType.Member, Notation = Notation.LowerCamelCase)]
         private class GlobalWrapper
         {
             public static extern bool IsNaN(object o);
@@ -24,6 +25,7 @@ namespace Bridge.ClientTest
 
         [External]
         [Mixin("System.Byte")]
+        [Convention(Type = NotationType.Member, Notation = Notation.LowerCamelCase)]
         private class MixinWrapper
         {
             public static extern byte Parse(string s);

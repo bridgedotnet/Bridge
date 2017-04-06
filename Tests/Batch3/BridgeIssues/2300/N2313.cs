@@ -10,7 +10,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [External]
         public interface I1
         {
+            [Name(true)]
             string Log();
+            [Name(true)]
             string Log(string msg);
         }
 
@@ -43,7 +45,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [External]
         public interface IConsole
         {
+            [Name(true)]
             string Log();
+            [Name(true)]
             string Log(string message);
         }
 

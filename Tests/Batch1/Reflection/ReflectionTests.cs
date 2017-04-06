@@ -955,7 +955,7 @@ namespace Bridge.ClientTest.Reflection
         [Test]
         public void ScriptNameWorksForAllKindsOfMethods()
         {
-            Assert.AreEqual(typeof(C4).GetMethod("M", new[] { typeof(int) }).ScriptName, "m$1", "C4.M");
+            Assert.AreEqual(typeof(C4).GetMethod("M", new[] { typeof(int) }).ScriptName, "M$1", "C4.M");
             Assert.True(typeof(C21).GetMethod("M1").ScriptName == null, "C21.M1");
             Assert.AreEqual(typeof(C7).GetMethod("M1").ScriptName, "M1", "C7.m1");
         }

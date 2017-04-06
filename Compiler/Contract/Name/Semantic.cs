@@ -60,6 +60,11 @@ namespace Bridge.Contract
             }
         }
 
+        public NameRule AppliedRule
+        {
+            get; set;
+        }
+
         public IEntity Entity
         {
             get; set;

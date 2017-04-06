@@ -3,6 +3,7 @@ using Bridge;
 namespace System
 {
     [External]
+    [Convention(Type = NotationType.Member, Member = NotationMember.Method, Notation = Notation.LowerCamelCase)]
     public interface IComparable : IBridgeClass
     {
         [Template("Bridge.compare({this}, {obj})")]
@@ -10,6 +11,7 @@ namespace System
     }
 
     [External]
+    [Convention(Type = NotationType.Member, Member = NotationMember.Method, Notation = Notation.LowerCamelCase)]
     public interface IComparable<in T> : IBridgeClass
     {
         [Template("Bridge.compare({this}, {other}, false, {T})")]

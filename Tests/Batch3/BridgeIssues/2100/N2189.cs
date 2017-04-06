@@ -13,7 +13,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             /*@
             Bridge.$MyPerson2189 = function(name){
-                this.name = name;
+                this.Name = name;
             };
             */
         }

@@ -5,6 +5,7 @@
     [Name("Bridge")]
     public class BridgeHelper
     {
+        [Name(true)]
         public static extern T Merge<T>(object o1, object o2);
     }
 #pragma warning restore 626

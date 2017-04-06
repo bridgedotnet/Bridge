@@ -23,7 +23,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
 
     Bridge.define("Interfaces.Class1", {
         inherits: [Interfaces.Interface1],
-        field: 200,
+        Field: 200,
         property: 100,
         config: {
             properties: {
@@ -51,26 +51,26 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         inherits: [Interfaces.Interface4],
         config: {
             alias: [
-            "method6", "Interfaces$Interface4$method6",
-            "method7", "Interfaces$Interface4$method7",
-            "method8", "Interfaces$Interface4$method8",
-            "method9", "Interfaces$Interface4$method9",
-            "method10", "Interfaces$Interface4$method10"
+            "Method6", "Interfaces$Interface4$Method6",
+            "Method7", "Interfaces$Interface4$Method7",
+            "Method8", "Interfaces$Interface4$Method8",
+            "Method9", "Interfaces$Interface4$Method9",
+            "Method10", "Interfaces$Interface4$Method10"
             ]
         },
-        method6: function (b) {
+        Method6: function (b) {
             b.v = true;
         },
-        method7: function (i, b) {
+        Method7: function (i, b) {
             b.v = true;
         },
-        method8: function (s) {
+        Method8: function (s) {
             s.v = System.String.concat(s.v, "Method8");
         },
-        method9: function (i, s) {
+        Method9: function (i, s) {
             s.v = System.String.concat(s.v, i);
         },
-        method10: function (i, b, s) {
+        Method10: function (i, b, s) {
             b.v = true;
             s.v = System.String.concat(s.v, i);
         }
@@ -85,18 +85,18 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
             },
             alias: [
             "Property", "Interfaces$Interface6$Property",
-            "getProperty", "Interfaces$Interface6$getProperty",
-            "setProperty$1", "Interfaces$Interface6$setProperty$1",
-            "setProperty", "Interfaces$Interface6$setProperty"
+            "GetProperty", "Interfaces$Interface6$GetProperty",
+            "SetProperty$1", "Interfaces$Interface6$SetProperty$1",
+            "SetProperty", "Interfaces$Interface6$SetProperty"
             ]
         },
-        getProperty: function () {
+        GetProperty: function () {
             return this.MethodProperty;
         },
-        setProperty$1: function (s) {
+        SetProperty$1: function (s) {
             this.MethodProperty = s.length;
         },
-        setProperty: function (i) {
+        SetProperty: function (i) {
             this.MethodProperty = i;
         }
     });
@@ -105,24 +105,24 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         inherits: [Interfaces.Class1,Interfaces.Interface2],
         config: {
             alias: [
-            "method1", "Interfaces$Interface2$method1",
-            "method2", "Interfaces$Interface2$method2",
-            "method3", "Interfaces$Interface2$method3",
-            "method4", "Interfaces$Interface2$method4"
+            "Method1", "Interfaces$Interface2$Method1",
+            "Method2", "Interfaces$Interface2$Method2",
+            "Method3", "Interfaces$Interface2$Method3",
+            "Method4", "Interfaces$Interface2$Method4"
             ]
         },
-        method1: function () {
-            this.field = 1;
+        Method1: function () {
+            this.Field = 1;
             this.Property = 2;
         },
-        method2: function (s) {
-            this.field = s.length;
+        Method2: function (s) {
+            this.Field = s.length;
         },
-        method3: function () {
-            return this.field;
+        Method3: function () {
+            return this.Field;
         },
-        method4: function (i) {
-            this.field = i.Interfaces$Interface1$Property;
+        Method4: function (i) {
+            this.Field = i.Interfaces$Interface1$Property;
 
             return true;
         }
@@ -137,10 +137,10 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         inherits: [Interfaces.Class2,Interfaces.Interface3],
         config: {
             alias: [
-            "method5", "Interfaces$Interface3$method5"
+            "Method5", "Interfaces$Interface3$Method5"
             ]
         },
-        method5: function (i) {
+        Method5: function (i) {
             return i;
         }
     });

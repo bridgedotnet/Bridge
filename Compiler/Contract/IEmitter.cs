@@ -486,7 +486,16 @@ namespace Bridge.Contract
 
         void WriteIndented(string s, int? position = null);
         string GetReflectionName(IType type);
-
         bool ForbidLifting { get; set; }
+
+        Dictionary<IAssembly, NameRule[]> AssemblyNameRuleCache
+        {
+            get;
+        }
+
+        Dictionary<ITypeDefinition, NameRule[]> ClassNameRuleCache
+        {
+            get;
+        }
     }
 }

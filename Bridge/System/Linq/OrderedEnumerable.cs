@@ -5,6 +5,7 @@ namespace System.Linq
 {
     [External]
     [IgnoreGeneric]
+    [Convention(Type = NotationType.Member, Member = NotationMember.Method, Notation = Notation.LowerCamelCase)]
     public interface IOrderedEnumerable<TSource> : IEnumerable<TSource>
     {
         [Template("thenBy({keySelector})")]

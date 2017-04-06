@@ -5,6 +5,7 @@ namespace System.Linq
 {
     [External]
     [IgnoreGeneric]
+    [Convention(Type = NotationType.Member, Member = NotationMember.Method, Notation = Notation.LowerCamelCase)]
     public interface IGrouping<out TKey, TElement> : IEnumerable<TElement>
     {
         TKey Key

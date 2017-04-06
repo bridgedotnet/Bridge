@@ -617,37 +617,8 @@ namespace Bridge.Translator
 
                         if (enumMode >= 3 && enumMode < 7)
                         {
-                            string enumStringName = member.Member.Name;
-                            var attr = Helpers.GetInheritedAttribute(member.Member, Translator.Bridge_ASSEMBLY + ".NameAttribute");
-
-                            if (attr != null)
-                            {
-                                enumStringName = this.Emitter.GetEntityName(member.Member);
-                            }
-                            else
-                            {
-                                switch (enumMode)
-                                {
-                                    case 3:
-                                        enumStringName = Object.Net.Utilities.StringUtils.ToLowerCamelCase(member.Member.Name);
-                                        break;
-
-                                    case 4:
-                                        enumStringName = member.Member.Name;
-                                        break;
-
-                                    case 5:
-                                        enumStringName = enumStringName.ToLowerInvariant();
-                                        break;
-
-                                    case 6:
-                                        enumStringName = enumStringName.ToUpperInvariant();
-                                        break;
-                                }
-                            }
-
+                            string enumStringName = this.Emitter.GetEntityName(member.Member); 
                             this.WriteScript(enumStringName);
-
                             return;
                         }
                     }

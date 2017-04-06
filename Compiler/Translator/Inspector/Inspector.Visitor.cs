@@ -519,7 +519,6 @@ namespace Bridge.Translator
             var initializerIsString = false;
             if (member != null)
             {
-                var validator = new Validator();
                 var enumMode = Helpers.EnumEmitMode(member.Member.DeclaringTypeDefinition);
 
                 if (enumMode >= 3 && enumMode < 7)

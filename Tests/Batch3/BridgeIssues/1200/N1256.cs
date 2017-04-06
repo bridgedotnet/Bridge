@@ -46,6 +46,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
         }
 
+        [Convention(Type = NotationType.Member, Notation = Notation.LowerCamelCase)]
         private class ReservedFields
         {
 #pragma warning disable 414 //CS0414  The field 'Bridge1256.ReservedProperties.Case' is assigned but its value is never used
@@ -121,6 +122,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             private bool Yield = true;
         }
 
+        [Convention(Type = NotationType.Member, Notation = Notation.LowerCamelCase)]
         private class ReservedMethods
         {
             private int Abstract()
@@ -465,8 +467,11 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         private static bool boolean = true;
+
+        [Name(true)]
         private static bool Is = true;
 
+        [Name(true)]
         private static int Let()
         {
             return 5;
