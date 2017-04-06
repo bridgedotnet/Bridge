@@ -519,6 +519,25 @@
             return typeName ? Bridge.Reflection._getType(typeName, asm) : null;
         },
 
+        isPrimitive: function(type) {
+            if (type === System.Int64 ||
+                type === System.UInt64 ||
+                type === System.Double ||
+                type === System.Single ||
+                type === System.Byte ||
+                type === System.SByte ||
+                type === System.Int16 ||
+                type === System.UInt16 ||
+                type === System.Int32 ||
+                type === System.UInt32 ||
+                type === Boolean ||
+                type === System.Char) {
+                return true;
+            }
+
+            return false;
+        },
+
         canAcceptNull: function (type) {
             if (type.$kind === "struct" ||
                 type === System.Decimal ||

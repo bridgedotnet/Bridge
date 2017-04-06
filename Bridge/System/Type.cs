@@ -396,5 +396,14 @@ namespace System
             [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 7)  == 5)")]
             get;
         }
+
+        /// <summary>
+        /// Gets a value indicating whether the Type is primitive.
+        /// </summary>
+        public extern bool IsPrimitive
+        {
+            [Template("Bridge.Reflection.isPrimitive({this})")]
+            get;
+        }
     }
 }
