@@ -34,6 +34,14 @@ namespace Bridge
         {
             get; set;
         }
+
+        /// <summary>
+        /// Applied to assembly attributes only
+        /// </summary>
+        public int Priority
+        {
+            get; set;
+        }
     }
 
     [NonScriptable]

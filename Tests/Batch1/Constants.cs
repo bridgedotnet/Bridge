@@ -44,6 +44,7 @@
         public const string MODULE_BIT_CONVERTER = "BitConverter";
         public const string MODULE_CONVERT = "Convert";
         public const string MODULE_RANDOM = "Random";
+        public const string MODULE_CONVENTION = "Convention";
 
         public const string MODULE_TYPEDARRAYS = "Typed Arrays";
         public const string MODULE_ICOLLECTION = PREFIX_COLLECTIONS; // + "ICollection";

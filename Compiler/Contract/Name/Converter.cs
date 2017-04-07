@@ -89,6 +89,11 @@ namespace Bridge.Contract
         {
             get; set;
         }
+
+        public int Priority
+        {
+            get; set;
+        }
     }
 
     public static class NameConvertor
@@ -202,11 +207,6 @@ namespace Bridge.Contract
                     }
                 }
 
-                if (typeDef == null)
-                {
-                    typeDef = entity.DeclaringTypeDefinition;
-                }
-
                 if (typeDef != null)
                 {
                     foreach (var notationType in GetFlags(rule.Type))
@@ -222,6 +222,10 @@ namespace Bridge.Contract
                             break;
                         }
                     }
+                }
+                else if (acceptable && !rule.Type.HasFlag(NotationType.Member))
+                {
+                    acceptable = false;
                 }
 
                 if (!acceptable)
@@ -274,7 +278,7 @@ namespace Bridge.Contract
 
             if (!string.IsNullOrEmpty(rule.Filter))
             {
-                var fullName = entity is ITypeDefinition ? entity.FullName : entity.Name;
+                var fullName = entity.FullName;
                 var parts = rule.Filter.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
                 acceptable = false;
 
@@ -527,6 +531,10 @@ namespace Bridge.Contract
                         rule.Filter = value.ConstantValue as string;
                         break;
 
+                    case "Priority":
+                        rule.Priority = (int)value.ConstantValue;
+                        break;
+
                     default:
                         throw new NotSupportedException($"Property {member.Name} is not supported in {attribute.AttributeType.FullName}");
                 }
@@ -579,6 +587,8 @@ namespace Bridge.Contract
                 {
                     assemblyRules[i] = NameConvertor.ToRule(assemblyAttrs[i]);
                 }
+
+                Array.Sort(assemblyRules, (item1, item2) => -item1.Priority.CompareTo(item2.Priority));
 
                 semantic.Emitter.AssemblyNameRuleCache.Add(assembly, assemblyRules);
             }
@@ -652,7 +662,7 @@ namespace Bridge.Contract
                 {
                     rules.Add(NameConvertor.ToRule(classAttrs[i]));
                 }
-
+                
                 td = td.DeclaringTypeDefinition;
             }
 

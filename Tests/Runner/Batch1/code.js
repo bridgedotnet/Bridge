@@ -11487,6 +11487,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             MODULE_BIT_CONVERTER: "BitConverter",
             MODULE_CONVERT: "Convert",
             MODULE_RANDOM: "Random",
+            MODULE_CONVENTION: "Convention",
             MODULE_TYPEDARRAYS: "Typed Arrays",
             MODULE_ICOLLECTION: "Collections",
             MODULE_IDICTIONARY: "Collections",
@@ -11536,6 +11537,194 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             MODULE_BRIDGECONSOLE: "Bridge Console",
             MODULE_OBJECTLITERAL: "[ObjectLiteral]",
             IGNORE_DATE: null
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.ConventionTests.Assembly.AssemblyAttributeTests", {
+        statics: {
+            NotationTypeTest: function () {
+                var c1 = new Bridge.ClientTest.ConventionTests.Assembly.Holder1.CLASS1();
+                Bridge.Test.NUnit.Assert.AreEqual("Bridge.ClientTest.ConventionTests.Assembly.Holder1+CLASS1", Bridge.Reflection.getTypeFullName(Bridge.ClientTest.ConventionTests.Assembly.Holder1.CLASS1));
+                Bridge.Test.NUnit.Assert.AreEqual("Bridge.ClientTest.ConventionTests.Assembly.Holder1+CLASS1", Bridge.Reflection.getTypeFullName(Bridge.getType(c1)));
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.global.Bridge.ClientTest.ConventionTests.Assembly.Holder1.CLASS1);
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(c1.field1));
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(c1.method1));
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(c1.prop1));
+                Bridge.Test.NUnit.Assert.Null(Bridge.unbox(c1.FIELD1));
+                Bridge.Test.NUnit.Assert.Null(Bridge.unbox(c1.METHOD1));
+                Bridge.Test.NUnit.Assert.Null(Bridge.unbox(c1.PROP1));
+            },
+            NotationTypeClassOverrideTest: function () {
+                var c2 = new Bridge.ClientTest.ConventionTests.Assembly.Holder1.class2();
+                Bridge.Test.NUnit.Assert.AreEqual("Bridge.ClientTest.ConventionTests.Assembly.Holder1+class2", Bridge.Reflection.getTypeFullName(Bridge.ClientTest.ConventionTests.Assembly.Holder1.class2));
+                Bridge.Test.NUnit.Assert.AreEqual("Bridge.ClientTest.ConventionTests.Assembly.Holder1+class2", Bridge.Reflection.getTypeFullName(Bridge.getType(c2)));
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.global.Bridge.ClientTest.ConventionTests.Assembly.Holder1.class2);
+                Bridge.Test.NUnit.Assert.Null(Bridge.unbox(c2.field1));
+                Bridge.Test.NUnit.Assert.Null(Bridge.unbox(c2.method1));
+                Bridge.Test.NUnit.Assert.Null(Bridge.unbox(c2.prop1));
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(c2.FIELD1));
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(c2.METHOD1));
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(c2.PROP1));
+            },
+            NotationTypeMemberOverrideTest: function () {
+                var c3 = new Bridge.ClientTest.ConventionTests.Assembly.Holder1.CLASS3();
+                Bridge.Test.NUnit.Assert.Null(Bridge.unbox(c3.field1));
+                Bridge.Test.NUnit.Assert.Null(Bridge.unbox(c3.method1));
+                Bridge.Test.NUnit.Assert.Null(Bridge.unbox(c3.prop1));
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(c3.FIELD1));
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(c3.METHOD1));
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(c3.PROP1));
+            },
+            NotattionAccessibilityTest: function () {
+                var c2 = new Bridge.ClientTest.ConventionTests.Assembly.Holder2.Class2();
+
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(c2.int_FIELD1));
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(c2.INT_FIELD2));
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(c2.int_field3));
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(c2.int_FIELD4));
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.ConventionTests.Assembly.Holder1");
+
+    Bridge.define("Bridge.ClientTest.ConventionTests.Assembly.Holder1.CLASS1", {
+        field1: 0,
+        config: {
+            properties: {
+                prop1: 0
+            }
+        },
+        method1: function () {
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.ConventionTests.Assembly.Holder1.class2", {
+        FIELD1: 0,
+        config: {
+            properties: {
+                PROP1: 0
+            }
+        },
+        METHOD1: function () {
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.ConventionTests.Assembly.Holder1.CLASS3", {
+        FIELD1: 0,
+        config: {
+            properties: {
+                PROP1: 0
+            }
+        },
+        METHOD1: function () {
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.ConventionTests.Assembly.Holder2");
+
+    Bridge.define("Bridge.ClientTest.ConventionTests.Assembly.Holder2.Class2", {
+        int_FIELD1: 0,
+        INT_FIELD2: 0,
+        int_field3: 0,
+        int_FIELD4: 0
+    });
+
+    Bridge.define("Bridge.ClientTest.ConventionTests.Class.class1", {
+        field1: 0,
+        Field2: 0
+    });
+
+    Bridge.define("Bridge.ClientTest.ConventionTests.Class.Class2", {
+        field1: 0,
+        config: {
+            properties: {
+                prop1: 0
+            }
+        },
+        method1: function () {
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.ConventionTests.Class.I1", {
+        $kind: "interface"
+    });
+
+    Bridge.define("Bridge.ClientTest.ConventionTests.Class.Class5");
+
+    Bridge.define("Bridge.ClientTest.ConventionTests.Class.Class5.Class5_1", {
+        field1: 0
+    });
+
+    Bridge.define("Bridge.ClientTest.ConventionTests.Class.CLASS6", {
+        FIELD1: 0
+    });
+
+    Bridge.define("Bridge.ClientTest.ConventionTests.Class.Class7", {
+        METHOD1: function () {
+            return 1;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests", {
+        statics: {
+            AllTest: function () {
+                var c1 = new Bridge.ClientTest.ConventionTests.Class.class1();
+                Bridge.Test.NUnit.Assert.AreEqual("Bridge.ClientTest.ConventionTests.Class.class1", Bridge.Reflection.getTypeFullName(Bridge.ClientTest.ConventionTests.Class.class1));
+                Bridge.Test.NUnit.Assert.AreEqual("Bridge.ClientTest.ConventionTests.Class.class1", Bridge.Reflection.getTypeFullName(Bridge.getType(c1)));
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.global.Bridge.ClientTest.ConventionTests.Class.class1);
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(c1.field1));
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(c1.Field2));
+                Bridge.Test.NUnit.Assert.Null(Bridge.unbox(c1.Field1));
+                Bridge.Test.NUnit.Assert.Null(Bridge.unbox(c1.field2));
+            },
+            MembersTest: function () {
+                var c2 = new Bridge.ClientTest.ConventionTests.Class.Class2();
+                Bridge.Test.NUnit.Assert.AreEqual("Bridge.ClientTest.ConventionTests.Class.Class2", Bridge.Reflection.getTypeFullName(Bridge.ClientTest.ConventionTests.Class.Class2));
+                Bridge.Test.NUnit.Assert.AreEqual("Bridge.ClientTest.ConventionTests.Class.Class2", Bridge.Reflection.getTypeFullName(Bridge.getType(c2)));
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.global.Bridge.ClientTest.ConventionTests.Class.Class2);
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(c2.field1));
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(c2.method1));
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(c2.prop1));
+                Bridge.Test.NUnit.Assert.Null(Bridge.unbox(c2.FIELD1));
+                Bridge.Test.NUnit.Assert.Null(Bridge.unbox(c2.METHOD1));
+                Bridge.Test.NUnit.Assert.Null(Bridge.unbox(c2.PROP1));
+            },
+            ObjectLiteralTest: function () {
+                var c3 = { FIELD1: 1, PROP1: 2 };
+                Bridge.Test.NUnit.Assert.AreEqual(1, Bridge.unbox(c3.FIELD1));
+                Bridge.Test.NUnit.Assert.AreEqual(2, Bridge.unbox(c3.PROP1));
+            },
+            InterfaceMemberTest: function () {
+                var c4 = new Bridge.ClientTest.ConventionTests.Class.Class4();
+                Bridge.Test.NUnit.Assert.AreEqual("function", (typeof Bridge.unbox(c4.method1)));
+                Bridge.Test.NUnit.Assert.AreEqual("function", (typeof Bridge.unbox(c4.METHOD2)));
+            },
+            InnerClassMemberTest: function () {
+                var c51 = new Bridge.ClientTest.ConventionTests.Class.Class5.Class5_1();
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(c51.field1));
+                Bridge.Test.NUnit.Assert.Null(Bridge.unbox(c51.FIELD1));
+            },
+            ClassAttributeInheritanceTest: function () {
+                var c6 = new Bridge.ClientTest.ConventionTests.Class.CLASS6();
+                var c61 = new Bridge.ClientTest.ConventionTests.Class.CLASS61();
+                Bridge.Test.NUnit.Assert.AreEqual("Bridge.ClientTest.ConventionTests.Class.CLASS6", Bridge.Reflection.getTypeFullName(Bridge.ClientTest.ConventionTests.Class.CLASS6));
+                Bridge.Test.NUnit.Assert.AreEqual("Bridge.ClientTest.ConventionTests.Class.CLASS61", Bridge.Reflection.getTypeFullName(Bridge.ClientTest.ConventionTests.Class.CLASS61));
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.global.Bridge.ClientTest.ConventionTests.Class.CLASS6);
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.global.Bridge.ClientTest.ConventionTests.Class.CLASS61);
+
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(c6.FIELD1));
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(c61.FIELD2));
+            },
+            OverrideMemberTest: function () {
+                var c7 = new Bridge.ClientTest.ConventionTests.Class.Class7();
+                var c71 = new Bridge.ClientTest.ConventionTests.Class.Class71();
+
+                Bridge.Test.NUnit.Assert.AreEqual(1, c7.METHOD1());
+                Bridge.Test.NUnit.Assert.AreEqual("function", (typeof Bridge.unbox(c7.METHOD1)));
+                Bridge.Test.NUnit.Assert.AreEqual(2, c71.METHOD1());
+                Bridge.Test.NUnit.Assert.AreEqual("function", (typeof Bridge.unbox(c71.METHOD1)));
+            }
         }
     });
 
@@ -36334,6 +36523,32 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             this.$initialize();
             Bridge.ClientTest.Batch1.Reflection.AttributeTests.A1.ctor.call(this, v);
             this.V = v;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.ConventionTests.Class.Class4", {
+        inherits: [Bridge.ClientTest.ConventionTests.Class.I1],
+        config: {
+            alias: [
+            "method1", "Bridge$ClientTest$ConventionTests$Class$I1$method1",
+            "METHOD2", "Bridge$ClientTest$ConventionTests$Class$I1$METHOD2"
+            ]
+        },
+        method1: function () {
+        },
+        METHOD2: function () {
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.ConventionTests.Class.CLASS61", {
+        inherits: [Bridge.ClientTest.ConventionTests.Class.CLASS6],
+        FIELD2: 0
+    });
+
+    Bridge.define("Bridge.ClientTest.ConventionTests.Class.Class71", {
+        inherits: [Bridge.ClientTest.ConventionTests.Class.Class7],
+        METHOD1: function () {
+            return 2;
         }
     });
 
