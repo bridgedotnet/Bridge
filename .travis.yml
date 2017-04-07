@@ -16,10 +16,9 @@ before_install:
 - if [[ -z ${SKIP_SERVER_TESTS+x} && "${TRAVIS_COMMIT_MSG,,}" == *"[skip ci server]"* ]]; then echo "SETUP Commit message contains [skip ci server]"; export SKIP_SERVER_TESTS=true; fi
 - if [ ! "$SKIP_SERVER_TESTS" == "true" ]; then echo "SETUP Will run server tests"; else echo "SETUP Will not run server tests as either the skipping labels found ([skip travis server], [skip ci server]) or set SKIP_SERVER_TESTS=true"; fi
 
-- echo "Mono build currently does not work for us https://github.com/travis-ci/travis-ci/issues/7374"
-- echo  "Set the environment to skip server tests"
-- export SKIP_SERVER_TESTS=true
-- $TRAVIS_TEST_RESULT = 0
+- echo "Mono build currently does not work for us https://github.com/travis-ci/travis-ci/issues/7374";
+- echo  "Set the environment to skip server tests";
+- export SKIP_SERVER_TESTS=true;
 
 
 # Below is a fix to for `package requires NuGet client version '3.0' or above, but the current NuGet version is '2.12.0.0'.`
@@ -46,7 +45,7 @@ before_script:
 script:
 - xbuild /p:Configuration=Release Bridge.sln
 - if [[ ! "$SKIP_SERVER_TESTS" == "true" && $TRAVIS_TEST_RESULT = 0 ]]; then mono ./packages/NUnit.ConsoleRunner.*/tools/nunit*-console.exe ./Compiler/TranslatorTests/bin/Release/Bridge.Translator.Tests.dll; else echo "Skipping NUnit tests as SKIP_SERVER_TESTS or build failed"; fi
-- if [[ ! "$SKIP_CLIENT_TESTS" == "true" && $TRAVIS_TEST_RESULT = 0 ]]; then npm test; else echo "Skipping sauce tests as SKIP_CLIENT_TESTS or build failed"; fi
+- if [[ ! "$SKIP_CLIENT_TESTS" == "true"]]; then npm test; else echo "Skipping sauce tests as SKIP_CLIENT_TESTS or build failed"; fi
 cache:
   directories:
   - packages
