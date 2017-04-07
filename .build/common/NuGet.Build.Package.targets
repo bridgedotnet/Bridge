@@ -70,13 +70,13 @@
 
     <!--Inline tasks not supported in xbuild-->
     <!--So we will use SmallApplicationVersion matched from AssemblyIdentityInfo in non Windows-->
-    <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
+    <GetAssemblyIdentity Condition="'$(OS)' == 'Windows_NT'" AssemblyFiles="$(TargetPath)">
       <Output TaskParameter="Assemblies" ItemName="AssemblyIdentityInfo" />
     </GetAssemblyIdentity>
 
     <PropertyGroup>
       <FirstSymbolIfPercentNotSupported>%25</FirstSymbolIfPercentNotSupported>
-      <ApplicationVersion>%(AssemblyIdentityInfo.Version)</ApplicationVersion>
+      <ApplicationVersion Condition="'$(OS)' == 'Windows_NT'">%(AssemblyIdentityInfo.Version)"</ApplicationVersion>
       <CouldNotGetApplicationVersion Condition="'$(ApplicationVersion)' == '' OR '$(ApplicationVersion.StartsWith($(FirstSymbolIfPercentNotSupported)))' == 'true'">true</CouldNotGetApplicationVersion>
       <ApplicationVersion Condition="'$(CouldNotGetApplicationVersion)' == 'true'">$(DefaultPackageVersion)</ApplicationVersion>
     </PropertyGroup>
