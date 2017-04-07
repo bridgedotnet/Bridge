@@ -19,7 +19,11 @@
             timezoneOffset: null,
 
             getTimezoneOffset: function () {
-                System.DateTime.timezoneOffset = (new Date()).getTimezoneOffset() * 60 * 1000;
+                var winter = System.DateTime.today();
+                winter.setMonth(0);
+                winter.setDate(1);
+
+                System.DateTime.timezoneOffset = winter.getTimezoneOffset() * 60 * 1000;
 
                 System.DateTime.getTimezoneOffset = function() {
                     return System.DateTime.timezoneOffset;
