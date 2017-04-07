@@ -17,8 +17,9 @@ before_install:
 - if [ ! "$SKIP_SERVER_TESTS" == "true" ]; then echo "SETUP Will run server tests"; else echo "SETUP Will not run server tests as either the skipping labels found ([skip travis server], [skip ci server]) or set SKIP_SERVER_TESTS=true"; fi
 
 - echo "Mono build currently does not work for us https://github.com/travis-ci/travis-ci/issues/7374";
-- echo  "Set the environment to skip server tests";
+- echo  "Set the environment to skip xbuild and server tests";
 - export SKIP_SERVER_TESTS=true;
+- export SKIP_XBUILD=true;
 
 
 # Below is a fix to for `package requires NuGet client version '3.0' or above, but the current NuGet version is '2.12.0.0'.`
@@ -43,9 +44,9 @@ before_script:
 - if [ ! "$SKIP_CLIENT_TESTS" == "true" ]; then npm install -g grunt-cli; fi
 - if [ ! "$SKIP_CLIENT_TESTS" == "true" ]; then git submodule update --init --recursive; fi
 script:
-- xbuild /p:Configuration=Release Bridge.sln
+- if [[ ! "$SKIP_XBUILD" == "true" ]]; then xbuild /p:Configuration=Release Bridge.sln; else echo "Skipping XBuild as SKIP_XBUILD"; fi
 - if [[ ! "$SKIP_SERVER_TESTS" == "true" && $TRAVIS_TEST_RESULT = 0 ]]; then mono ./packages/NUnit.ConsoleRunner.*/tools/nunit*-console.exe ./Compiler/TranslatorTests/bin/Release/Bridge.Translator.Tests.dll; else echo "Skipping NUnit tests as SKIP_SERVER_TESTS or build failed"; fi
-- if [[ ! "$SKIP_CLIENT_TESTS" == "true"]]; then npm test; else echo "Skipping sauce tests as SKIP_CLIENT_TESTS or build failed"; fi
+- if [[ ! "$SKIP_CLIENT_TESTS" == "true" && ($TRAVIS_TEST_RESULT = 0 || "$SKIP_XBUILD" == "true")]]; then npm test; else echo "Skipping sauce tests as SKIP_CLIENT_TESTS or build failed"; fi
 cache:
   directories:
   - packages
