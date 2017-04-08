@@ -53,7 +53,7 @@ module.exports = function(grunt) {
                     urls: ["http://127.0.0.1:9999/Tests/Runner/index.html?noglobals&hidepassed"],
                     tunnelTimeout: 5,
                     build: process.env.TRAVIS_BUILD_NUMBER,
-                    concurrency: 3,
+                    concurrency: 4,
                     browsers: browsers,
                     testname: "Bridge client tests",
                     tags: ["master", process.TRAVIS_BRANCH, process.TRAVIS_BUILD_NUMBER, process.TRAVIS_COMMIT_RANGE ]
