@@ -54,8 +54,6 @@ module.exports = function(grunt) {
             all: {
                 // https://wiki.saucelabs.com/display/DOCS/Parameters+for+Grunt-Saucelabs+Tasks
                 options: {
-                    username: 'saucelabs-user-name', // if not provided it'll default to ENV SAUCE_USERNAME (if applicable)
-                    key: 'saucelabs-key', // if not provided it'll default to ENV SAUCE_ACCESS_KEY (if applicable)
                     urls: ["http://127.0.0.1:9999/Tests/Runner/index.html?noglobals&hidepassed"],
                     browsers: browsers,
                     build: process.env.TRAVIS_JOB_ID,
