@@ -39,6 +39,7 @@ module.exports = function(grunt) {
     ];
 
     grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
         connect: {
             server: {
                 options: {
@@ -50,13 +51,19 @@ module.exports = function(grunt) {
         'saucelabs-qunit': {
             all: {
                 options: {
+                    username: 'saucelabs-user-name', // if not provided it'll default to ENV SAUCE_USERNAME (if applicable)
+                    key: 'saucelabs-key', // if not provided it'll default to ENV SAUCE_ACCESS_KEY (if applicable)
                     urls: ["http://127.0.0.1:9999/Tests/Runner/index.html?noglobals&hidepassed"],
-                    tunnelTimeout: 5,
-                    build: process.env.TRAVIS_BUILD_NUMBER,
-                    concurrency: 4,
                     browsers: browsers,
+                    build: process.env.TRAVIS_BUILD_NUMBER, //process.env.TRAVIS_JOB_ID,
                     testname: "Bridge client tests",
-                    tags: ["master", process.TRAVIS_BRANCH, process.TRAVIS_BUILD_NUMBER, process.TRAVIS_COMMIT_RANGE ]
+                    throttled: 4,
+                    sauceConfig: {
+                        'video-upload-on-pass': false
+                    },
+                    tags: ["master", process.TRAVIS_BRANCH, process.TRAVIS_BUILD_NUMBER, process.TRAVIS_COMMIT_RANGE ],
+                    // tunnelTimeout: 5,
+                    // concurrency: 4,
                 }
             }
         },
