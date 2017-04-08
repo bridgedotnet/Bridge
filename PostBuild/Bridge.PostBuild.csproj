@@ -75,27 +75,4 @@ REM Run Bridge Compiler for the project
 mono "$(SolutionDir)Compiler/Builder/$(OutDir)bridge.exe" -p "$(SolutionDir)Bridge/Bridge.csproj" -b "$(SolutionDir)Bridge/$(OutDir)Bridge.dll" -cfg "$(Configuration)" --platform "$(Platform)"
     </PreBuildEvent>
   </PropertyGroup>
-  <!-- NuGet packaging starts -->
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <NuGetBuildPackage>true</NuGetBuildPackage>
-  </PropertyGroup>
-  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <NuGetPackageSourcePath Include="$(SolutionDir).build\specs\Bridge.Core.nuspec">
-      <Path>$(SolutionDir).build\specs\Bridge.Core.nuspec</Path>
-    </NuGetPackageSourcePath>
-  </ItemGroup>
-  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <NuGetPackageSourcePath Include="$(SolutionDir).build\specs\Bridge.nuspec">
-      <Path>$(SolutionDir).build\specs\Bridge.nuspec</Path>
-    </NuGetPackageSourcePath>
-  </ItemGroup>
-  <Import Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " Project="$(SolutionDir).build\common\NuGet.Build.Package.targets" />
-  <Target Name="CleanProjectNuGetOutput" BeforeTargets="Clean">
-    <ItemGroup>
-      <FilesToDelete Include="$(ProjectDir)$(OutDir)Bridge.*.nupkg" />
-    </ItemGroup>
-    <Message Text="Cleaning NuGet packages in $(ProjectDir)$(OutDir)" Importance="high" />
-    <Delete Files="@(FilesToDelete)" ContinueOnError="true" />
-  </Target>
-  <!-- NuGet packaging finishes -->
 </Project>
