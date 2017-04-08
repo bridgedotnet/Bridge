@@ -31,7 +31,7 @@ before_install:
 # The line below starts failing in travis-build version: 5ddd724fb Issue logged - https://github.com/travis-ci/travis-ci/issues/6854
 # - mono .nuget/nuget.exe
 install:
-# Mono build currently does not work for us https://github.com/travis-ci/travis-ci/issues/7374
+#Mono build currently does not work for us https://github.com/travis-ci/travis-ci/issues/7374
 - mono .nuget/nuget.exe restore Bridge.sln -Verbosity detailed
 env:
   global:
