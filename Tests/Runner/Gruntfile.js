@@ -54,7 +54,7 @@ module.exports = function(grunt) {
             all: {
                 // https://wiki.saucelabs.com/display/DOCS/Parameters+for+Grunt-Saucelabs+Tasks
                 options: {
-                    urls: ["http://127.0.0.1:9999/Tests/Runner/index.html?noglobals&hidepassed"],
+                    urls: ["http://127.0.0.1:9999/index.html?noglobals&hidepassed"],
                     browsers: browsers,
                     build: process.env.TRAVIS_JOB_ID,
                     testname: "Bridge.NET client tests",
