@@ -77,7 +77,7 @@ mono "$(SolutionDir)Compiler/Builder/$(OutDir)bridge.exe" -p "$(SolutionDir)Brid
   </PropertyGroup>
   <!-- NuGet packaging starts -->
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <NuGetBuildPackage>false</NuGetBuildPackage>
+    <NuGetBuildPackage>true</NuGetBuildPackage>
   </PropertyGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <NuGetPackageSourcePath Include="$(SolutionDir).build\specs\Bridge.Core.nuspec">
