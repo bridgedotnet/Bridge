@@ -5,7 +5,7 @@
   "outputBy": "ClassPath",
   "generateDocumentation": "None",
   "logging": {
-    "level": "None"
+    "level": "Trace"
   },
   "assembly": {
     "disableInitAssembly": true,
