@@ -194,3 +194,4 @@ Tests/**/App_Readme/
 /Bridge.Sandbox.sln
 /.build/packages/
 !/.build/packages/*.bat
+/Tests/Runner/node_modules
