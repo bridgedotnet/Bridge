@@ -49,7 +49,7 @@
 
     Bridge.define('System.Collections.Generic.IDictionary$2', function (TKey, TValue) {
         return {
-            inherits: [System.Collections.Generic.IEnumerable$1(System.Collections.Generic.KeyValuePair$2(TKey, TValue))],
+            inherits: [System.Collections.Generic.ICollection$1(System.Collections.Generic.KeyValuePair$2(TKey, TValue))],
             $kind: "interface"
         };
     });

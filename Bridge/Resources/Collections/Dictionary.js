@@ -279,10 +279,14 @@
 
                     return true;
                 }, function () {
+                    if (hashIndex < 0 || hashIndex >= hashes.length) {
+                        return new (System.Collections.Generic.KeyValuePair$2(TKey, TValue))()
+                    }
+
                     return fn(this.entries[hashes[hashIndex]][keyIndex]);
                 }, function () {
                     hashIndex = -1;
-                }, null, this);
+                }, null, this, System.Collections.Generic.KeyValuePair$2(TKey, TValue));
             },
 
             getEnumerator: function () {

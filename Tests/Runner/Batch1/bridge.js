@@ -11224,7 +11224,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
     Bridge.define('System.Collections.Generic.IDictionary$2', function (TKey, TValue) {
         return {
-            inherits: [System.Collections.Generic.IEnumerable$1(System.Collections.Generic.KeyValuePair$2(TKey, TValue))],
+            inherits: [System.Collections.Generic.ICollection$1(System.Collections.Generic.KeyValuePair$2(TKey, TValue))],
             $kind: "interface"
         };
     });
@@ -11281,6 +11281,12 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 					get: function () {
 						return this.getCurrent();
 					}
+				},
+
+				Current$1: {
+				    get: function () {
+				        return this.getCurrent();
+				    }
 				}
 			},
 			
@@ -11293,13 +11299,22 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             ]
         },
 
-        ctor: function (moveNext, getCurrent, reset, dispose, scope) {
+        ctor: function (moveNext, getCurrent, reset, dispose, scope, T) {
             this.$initialize();
             this.$moveNext = moveNext;
             this.$getCurrent = getCurrent;
             this.$dispose = dispose;
             this.$reset = reset;
             this.scope = scope;
+
+            if (T) {
+                this["System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$getCurrent$1"] = this.getCurrent;
+
+                Object.defineProperty(this, "System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$Current$1", {
+                    get: this.getCurrent,
+                    enumerable: true
+                });
+            }
         },
 
         moveNext: function () {
@@ -11781,10 +11796,14 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
                     return true;
                 }, function () {
+                    if (hashIndex < 0 || hashIndex >= hashes.length) {
+                        return new (System.Collections.Generic.KeyValuePair$2(TKey, TValue))()
+                    }
+
                     return fn(this.entries[hashes[hashIndex]][keyIndex]);
                 }, function () {
                     hashIndex = -1;
-                }, null, this);
+                }, null, this, System.Collections.Generic.KeyValuePair$2(TKey, TValue));
             },
 
             getEnumerator: function () {
