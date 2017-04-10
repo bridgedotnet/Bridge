@@ -38,7 +38,10 @@ module.exports = function(grunt) {
     // }
     ];
 
+    // https://wiki.saucelabs.com/display/DOCS/Grunt-Saucelabs+Set+Up%2C+Configuration%2C+and+Usage
+    // https://wiki.saucelabs.com/display/DOCS/Getting+Started+with+JavaScript+Unit+Testing+Example
     grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
         connect: {
             server: {
                 options: {
@@ -49,14 +52,18 @@ module.exports = function(grunt) {
         },
         'saucelabs-qunit': {
             all: {
+                // https://wiki.saucelabs.com/display/DOCS/Parameters+for+Grunt-Saucelabs+Tasks
                 options: {
-                    urls: ["http://127.0.0.1:9999/Tests/Runner/index.html?noglobals&hidepassed"],
-                    tunnelTimeout: 5,
-                    build: process.env.TRAVIS_BUILD_NUMBER,
-                    concurrency: 3,
+                    urls: ["http://127.0.0.1:9999/index.html?noglobals&hidepassed"],
                     browsers: browsers,
-                    testname: "Bridge client tests",
-                    tags: ["master", process.TRAVIS_BRANCH, process.TRAVIS_BUILD_NUMBER, process.TRAVIS_COMMIT_RANGE ]
+                    build: process.env.TRAVIS_JOB_ID,
+                    testname: "Bridge.NET client tests",
+                    throttled: 4,
+                    sauceConfig: {
+                        // https://wiki.saucelabs.com/display/DOCS/Test+Configuration+Options
+                        'video-upload-on-pass': false
+                    },
+                    tags: [process.TRAVIS_BRANCH, process.TRAVIS_BUILD_NUMBER, process.TRAVIS_COMMIT_RANGE ]
                 }
             }
         },
@@ -68,6 +75,7 @@ module.exports = function(grunt) {
         if (key !== "grunt" && key.indexOf("grunt") === 0) grunt.loadNpmTasks(key);
     }
 
+    // https://gruntjs.com/api/grunt.task
     grunt.registerTask("dev", ["connect", "watch"]);
     grunt.registerTask("test", ["connect", "saucelabs-qunit"]);
 };

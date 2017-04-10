@@ -362,7 +362,20 @@ namespace Bridge.Builder
                     ? Path.GetFileNameWithoutExtension(bridgeOptions.ProjectLocation) : bridgeOptions.Folder;
             }
 
-            bridgeOptions.DefaultFileName = Path.GetFileName(bridgeOptions.OutputLocation);
+            if (bridgeOptions.IsFolderMode)
+            {
+                bridgeOptions.DefaultFileName = Path.GetFileNameWithoutExtension(bridgeOptions.Lib);
+                bridgeOptions.ProjectProperties.AssemblyName = bridgeOptions.DefaultFileName;
+            }
+            else
+            {
+                bridgeOptions.DefaultFileName = Path.GetFileName(bridgeOptions.OutputLocation);
+            }
+
+            if (string.IsNullOrWhiteSpace(bridgeOptions.DefaultFileName))
+            {
+                bridgeOptions.DefaultFileName = Path.GetFileName(bridgeOptions.OutputLocation);
+            }
 
             return bridgeOptions;
         }
@@ -384,7 +397,7 @@ namespace Bridge.Builder
 
             var settings = new Dictionary<string, string>();
 
-            var splitParameters = parameters.Split(new char[] { ','}, StringSplitOptions.RemoveEmptyEntries);
+            var splitParameters = parameters.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
             foreach (var pair in splitParameters)
             {

@@ -6,16 +6,19 @@ namespace Bridge.Translator
     public class AssemblyInfo : IAssemblyInfo
     {
         public const string DEFAULT_FILENAME = "---";
+        public const string DEFAULT_OUTPUT = "$(OutDir)/bridge/";
 
         public AssemblyInfo()
         {
             this.Dependencies = new List<IPluginDependency>();
+            this.DefineConstants = new List<string>();
             this.Logging = new LoggingOptions();
             this.Reflection = new ReflectionConfig();
             this.ReflectionInternal = new ReflectionConfig();
             this.Assembly = new AssemblyConfig();
             this.Resources = new ResourceConfig();
             this.Loader = new ModuleLoader();
+            this.Output = DEFAULT_OUTPUT;
         }
 
         /// <summary>

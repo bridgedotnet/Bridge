@@ -1,6 +1,6 @@
 {
   // The folder to output JavaScript (.js) files
-  "output": "Bridge/output"
+  "output": "$(OutDir)/bridge/"
 
   // Uncomment to add TypeScript Definition file (.d.ts) generation to your project.
   // , "generateTypeScript": true

@@ -3,7 +3,8 @@ using Bridge;
 namespace System.Collections.Generic
 {
     [External]
-    public class Dictionary<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary, IBridgeClass
+    public class Dictionary<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary,
+        IReadOnlyDictionary<TKey, TValue>, IReadOnlyCollection<KeyValuePair<TKey, TValue>>, IBridgeClass
     {
         public extern Dictionary();
 
@@ -42,7 +43,19 @@ namespace System.Collections.Generic
             get;
         }
 
+        IEnumerable<TKey> IReadOnlyDictionary<TKey, TValue>.Keys
+        {
+            [Template("getKeys()")]
+            get;
+        }
+
         public extern ICollection<TValue> Values
+        {
+            [Template("getValues()")]
+            get;
+        }
+
+        IEnumerable<TValue> IReadOnlyDictionary<TKey, TValue>.Values
         {
             [Template("getValues()")]
             get;
@@ -66,7 +79,7 @@ namespace System.Collections.Generic
         private extern TValue Items(TKey key);
 
         public extern void Clear();
-        
+
         public extern bool ContainsKey(TKey key);
 
         public extern bool ContainsValue(TValue value);

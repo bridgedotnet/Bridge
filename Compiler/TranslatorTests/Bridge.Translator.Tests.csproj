@@ -90,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Code\Constansts.cs" />
+    <Compile Include="CompilerTests\AssemblyInfoTests.cs" />
     <Compile Include="CompilerTests\AssemblyConfigHelperTests.cs" />
     <Compile Include="BuilderTests\BuilderTests.cs" />
     <Compile Include="ContractTests\BridgeTypeTests.cs" />

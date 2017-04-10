@@ -41,6 +41,8 @@ namespace Bridge.ClientTest.Collections.Generic
             Assert.True(list is IList<int>, "is IList<int> should be true");
             Assert.True(list is ICollection<int>, "is ICollection<int> should be true");
             Assert.True(list is IEnumerable<int>, "is IEnumerable<int> should be true");
+            Assert.True(list is IReadOnlyCollection<int>, "is IReadOnlyCollection<int> should be true");
+            Assert.True(list is IReadOnlyList<int>, "is IReadOnlyList<int> should be true");
         }
 
         [Test]
@@ -560,6 +562,51 @@ namespace Bridge.ClientTest.Collections.Generic
             Assert.False(ReferenceEquals(l, actual));
             Assert.True(actual is Array);
             Assert.AreDeepEqual(new[] { "a", "b" }, actual);
+        }
+
+        [Test]
+        public void IReadOnlyCollectionCountWorks()
+        {
+            IReadOnlyCollection<string> l = new List<string> { "x", "y", "z" };
+            Assert.AreEqual(3, l.Count);
+        }
+
+        [Test]
+        public void IReadOnlyCollectionGetEnumeratorWorks()
+        {
+            var l = (IReadOnlyCollection<string>)new List<string> { "x", "y" };
+            var e = l.GetEnumerator();
+            Assert.True(e.MoveNext());
+            Assert.AreEqual("x", e.Current);
+            Assert.True(e.MoveNext());
+            Assert.AreEqual("y", e.Current);
+            Assert.False(e.MoveNext());
+        }
+
+        [Test]
+        public void IReadOnlyListIndexingWorks()
+        {
+            IReadOnlyList<string> l = new List<string> { "x", "y", "z" };
+            Assert.AreEqual("y", l[1]);
+        }
+
+        [Test]
+        public void IReadOnlyListCountWorks()
+        {
+            IReadOnlyList<string> l = new List<string> { "x", "y", "z" };
+            Assert.AreEqual(3, l.Count);
+        }
+
+        [Test]
+        public void IReadOnlyListGetEnumeratorWorks()
+        {
+            var l = (IReadOnlyList<string>)new List<string> { "x", "y" };
+            var e = l.GetEnumerator();
+            Assert.True(e.MoveNext());
+            Assert.AreEqual("x", e.Current);
+            Assert.True(e.MoveNext());
+            Assert.AreEqual("y", e.Current);
+            Assert.False(e.MoveNext());
         }
     }
 }

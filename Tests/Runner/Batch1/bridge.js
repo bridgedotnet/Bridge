@@ -8304,7 +8304,11 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             timezoneOffset: null,
 
             getTimezoneOffset: function () {
-                System.DateTime.timezoneOffset = (new Date()).getTimezoneOffset() * 60 * 1000;
+                var winter = System.DateTime.today();
+                winter.setMonth(0);
+                winter.setDate(1);
+
+                System.DateTime.timezoneOffset = winter.getTimezoneOffset() * 60 * 1000;
 
                 System.DateTime.getTimezoneOffset = function() {
                     return System.DateTime.timezoneOffset;
@@ -10224,7 +10228,9 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 type === System.Collections.IList ||
                 type.$$name && System.String.startsWith(type.$$name, "System.Collections.Generic.IEnumerable$1") ||
                 type.$$name && System.String.startsWith(type.$$name, "System.Collections.Generic.ICollection$1") ||
-                type.$$name && System.String.startsWith(type.$$name, "System.Collections.Generic.IList$1")) {
+                type.$$name && System.String.startsWith(type.$$name, "System.Collections.Generic.IList$1") ||
+                type.$$name && System.String.startsWith(type.$$name, "System.Collections.Generic.IReadOnlyCollection$1") ||
+                type.$$name && System.String.startsWith(type.$$name, "System.Collections.Generic.IReadOnlyList$1")) {
                 return true;
             }
 
@@ -11051,7 +11057,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 name = Bridge.getTypeName(t) + "[" + System.String.fromCharCount(",".charCodeAt(0), rank - 1) + "]";
                 var old = Bridge.Class.staticInitAllow;
                 result = Bridge.define(name, {
-                    $inherits: [Array, System.Collections.ICollection, System.ICloneable, System.Collections.Generic.IList$1(t)],
+                    $inherits: [Array, System.Collections.ICollection, System.ICloneable, System.Collections.Generic.IList$1(t), System.Collections.Generic.IReadOnlyCollection$1(t)],
                     $noRegister: true,
                     statics: {
                         $elementType: t,
@@ -11222,7 +11228,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
     Bridge.define('System.Collections.Generic.IDictionary$2', function (TKey, TValue) {
         return {
-            inherits: [System.Collections.Generic.IEnumerable$1(System.Collections.Generic.KeyValuePair$2(TKey, TValue))],
+            inherits: [System.Collections.Generic.ICollection$1(System.Collections.Generic.KeyValuePair$2(TKey, TValue))],
             $kind: "interface"
         };
     });
@@ -11261,6 +11267,13 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
         };
     });
 
+    Bridge.define('System.Collections.Generic.IReadOnlyDictionary$2', function (TKey, TValue) {
+        return {
+            inherits: [System.Collections.Generic.IReadOnlyCollection$1(System.Collections.Generic.KeyValuePair$2(TKey, TValue))],
+            $kind: "interface"
+        };
+    });
+
     // @source CustomEnumerator.js
 
     Bridge.define('Bridge.CustomEnumerator', {
@@ -11272,6 +11285,12 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 					get: function () {
 						return this.getCurrent();
 					}
+				},
+
+				Current$1: {
+				    get: function () {
+				        return this.getCurrent();
+				    }
 				}
 			},
 			
@@ -11284,13 +11303,22 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             ]
         },
 
-        ctor: function (moveNext, getCurrent, reset, dispose, scope) {
+        ctor: function (moveNext, getCurrent, reset, dispose, scope, T) {
             this.$initialize();
             this.$moveNext = moveNext;
             this.$getCurrent = getCurrent;
             this.$dispose = dispose;
             this.$reset = reset;
             this.scope = scope;
+
+            if (T) {
+                this["System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$getCurrent$1"] = this.getCurrent;
+
+                Object.defineProperty(this, "System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$Current$1", {
+                    get: this.getCurrent,
+                    enumerable: true
+                });
+            }
         },
 
         moveNext: function () {
@@ -11493,7 +11521,9 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
     Bridge.define('System.Collections.Generic.Dictionary$2', function (TKey, TValue) {
         return {
-            inherits: [System.Collections.Generic.IDictionary$2(TKey, TValue), System.Collections.IDictionary],
+            inherits: [System.Collections.Generic.IDictionary$2(TKey, TValue),
+                System.Collections.IDictionary,
+                System.Collections.Generic.IReadOnlyDictionary$2(TKey, TValue)],
 
             config: {
                 properties: {
@@ -11546,7 +11576,14 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                     "getValues", "System$Collections$IDictionary$getValues",
                     "IsReadOnly", "System$Collections$IDictionary$IsReadOnly",
                     "Keys", "System$Collections$IDictionary$Keys",
-                    "Values", "System$Collections$IDictionary$Values"
+                    "Values", "System$Collections$IDictionary$Values",
+                    "get", "System$Collections$Generic$IReadOnlyDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getItem",
+                    "Keys", "System$Collections$Generic$IReadOnlyDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$Keys",
+                    "getKeys", "System$Collections$Generic$IReadOnlyDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getKeys",
+                    "getValues", "System$Collections$Generic$IReadOnlyDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getValues",
+                    "Values", "System$Collections$Generic$IReadOnlyDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$Values",
+                    "containsKey", "System$Collections$Generic$IReadOnlyDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$containsKey",
+                    "tryGetValue", "System$Collections$Generic$IReadOnlyDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$tryGetValue"
                 ]
             },
 
@@ -11763,10 +11800,14 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
                     return true;
                 }, function () {
+                    if (hashIndex < 0 || hashIndex >= hashes.length) {
+                        return new (System.Collections.Generic.KeyValuePair$2(TKey, TValue))()
+                    }
+
                     return fn(this.entries[hashes[hashIndex]][keyIndex]);
                 }, function () {
                     hashIndex = -1;
-                }, null, this);
+                }, null, this, System.Collections.Generic.KeyValuePair$2(TKey, TValue));
             },
 
             getEnumerator: function () {
@@ -11854,7 +11895,8 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
     Bridge.define('System.Collections.Generic.List$1', function (T) {
         return {
-            inherits: [System.Collections.Generic.IList$1(T), System.Collections.IList],
+            inherits: [System.Collections.Generic.IList$1(T), System.Collections.IList,
+                System.Collections.Generic.IReadOnlyCollection$1(T), System.Collections.Generic.IReadOnlyList$1(T)],
 
             config: {
                 properties: {
