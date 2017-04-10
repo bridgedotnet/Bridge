@@ -8510,28 +8510,28 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             camelCaseSettingWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DeserializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "CamelCaseSettingWorks()",
-                    line: "382"
+                    line: "384"
                 } ));
                 Bridge.ClientTest.DeserializationTests.camelCaseSettingWorks();
             },
             ignoreNullValueWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DeserializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "IgnoreNullValueWorks()",
-                    line: "394"
+                    line: "396"
                 } ));
                 Bridge.ClientTest.DeserializationTests.ignoreNullValueWorks();
             },
             anonymousTypesWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DeserializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "AnonymousTypesWorks()",
-                    line: "416"
+                    line: "418"
                 } ));
                 Bridge.ClientTest.DeserializationTests.anonymousTypesWorks();
             },
             typeNameHandlingWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.DeserializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DeserializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TypeNameHandlingWorks()",
-                    line: "431"
+                    line: "433"
                 } ));
                 Bridge.ClientTest.DeserializationTests.typeNameHandlingWorks();
             }
@@ -19850,28 +19850,28 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             camelCaseSettingWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SerializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "CamelCaseSettingWorks()",
-                    line: "252"
+                    line: "254"
                 } ));
                 Bridge.ClientTest.SerializationTests.camelCaseSettingWorks();
             },
             ignoreNullValueWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SerializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "IgnoreNullValueWorks()",
-                    line: "263"
+                    line: "265"
                 } ));
                 Bridge.ClientTest.SerializationTests.ignoreNullValueWorks();
             },
             typeNameHandlingWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SerializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TypeNameHandlingWorks()",
-                    line: "274"
+                    line: "276"
                 } ));
                 Bridge.ClientTest.SerializationTests.typeNameHandlingWorks();
             },
             anonymousTypesWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SerializationTests).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SerializationTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "AnonymousTypesWorks()",
-                    line: "284"
+                    line: "286"
                 } ));
                 Bridge.ClientTest.SerializationTests.anonymousTypesWorks();
             }
@@ -21448,7 +21448,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             testBasic: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestAutoProps).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestAutoProps, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestBasic()",
-                    line: "27"
+                    line: "31"
                 } ));
                 Bridge.ClientTest.CSharp6.TestAutoProps.testBasic();
             }
@@ -21821,7 +21821,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             testBasic: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestInterpolatedStrings).beforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestInterpolatedStrings, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     method: "TestBasic()",
-                    line: "35"
+                    line: "37"
                 } ));
                 Bridge.ClientTest.CSharp6.TestInterpolatedStrings.testBasic();
             }
