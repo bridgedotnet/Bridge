@@ -6,7 +6,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
     Bridge.define("Test.BridgeIssues.N1092.App", {
         statics: {
-            main1: function () {
+            Main1: function () {
                 // Should contain instruction to check data type range as cspoj contains <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
                 var maxInt32 = 2147483647;
                 var rInt32Max = Bridge.Int.check(maxInt32 + 1, System.Int32);
@@ -25,7 +25,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
     Bridge.define("Test.BridgeIssues.N772.App", {
         statics: {
-            main1: function () {
+            Main1: function () {
                 //These arrays depend on "useTypedArray" bridge.json option
                 var byteArray = System.Array.init(new Uint8Array(1), System.Byte);
                 var sbyteArray = System.Array.init(new Int8Array(2), System.SByte);

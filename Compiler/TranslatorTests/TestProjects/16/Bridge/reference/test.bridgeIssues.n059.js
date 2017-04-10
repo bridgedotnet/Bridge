@@ -6,10 +6,10 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
     Bridge.define("Test.BridgeIssues.N059.Class59", {
         statics: {
-            method1: function () {
+            Method1: function () {
             }
         },
-        method1: function (d) {
+        Method1: function (d) {
         }
     });
 

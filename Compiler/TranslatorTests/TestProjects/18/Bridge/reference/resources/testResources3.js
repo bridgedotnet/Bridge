@@ -6,54 +6,54 @@
 // Top
 
     Bridge.init(function(){
-        TestIssue434.Issue434A.doSomething(2);
+        TestIssue434.Issue434A.DoSomething(2);
     });
 
     Bridge.define("TestIssue434.Issue434A", {
         statics: {
-            method1: function method1() {
-                TestIssue434.Issue434A.doSomething(1);
+            Method1: function Method1() {
+                TestIssue434.Issue434A.DoSomething(1);
             },
-            method3: function method3() {
-                TestIssue434.Issue434A.doSomething(3);
+            Method3: function Method3() {
+                TestIssue434.Issue434A.DoSomething(3);
             },
-            method4: function method4() {
-                TestIssue434.Issue434A.doSomething(4);
+            Method4: function Method4() {
+                TestIssue434.Issue434A.DoSomething(4);
             },
-            doSomething: function doSomething(i) {
+            DoSomething: function DoSomething(i) {
                 Bridge.Console.log(i);
             }
         }
     });
 
-    Bridge.init(function() { TestIssue434.Issue434A.method1(); });
-    Bridge.init(function() { TestIssue434.Issue434A.method3(); });
-    Bridge.init(function() { TestIssue434.Issue434A.method4(); });
+    Bridge.init(function() { TestIssue434.Issue434A.Method1(); });
+    Bridge.init(function() { TestIssue434.Issue434A.Method3(); });
+    Bridge.init(function() { TestIssue434.Issue434A.Method4(); });
 
     Bridge.init(function(){
-        TestIssue434.Issue434B.doSomething(2);
+        TestIssue434.Issue434B.DoSomething(2);
     });
 
     Bridge.define("TestIssue434.Issue434B", {
         statics: {
-            method1: function method1() {
-                TestIssue434.Issue434B.doSomething(1);
+            Method1: function Method1() {
+                TestIssue434.Issue434B.DoSomething(1);
             },
-            method3: function method3() {
-                TestIssue434.Issue434B.doSomething(3);
+            Method3: function Method3() {
+                TestIssue434.Issue434B.DoSomething(3);
             },
-            method4: function method4() {
-                TestIssue434.Issue434B.doSomething(4);
+            Method4: function Method4() {
+                TestIssue434.Issue434B.DoSomething(4);
             },
-            doSomething: function doSomething(i) {
+            DoSomething: function DoSomething(i) {
                 Bridge.Console.log(i);
             }
         }
     });
 
-    Bridge.init(function() { TestIssue434.Issue434B.method1(); });
-    Bridge.init(function() { TestIssue434.Issue434B.method3(); });
-    Bridge.init(function() { TestIssue434.Issue434B.method4(); });
+    Bridge.init(function() { TestIssue434.Issue434B.Method1(); });
+    Bridge.init(function() { TestIssue434.Issue434B.Method3(); });
+    Bridge.init(function() { TestIssue434.Issue434B.Method4(); });
 
     Bridge.define("TestIssue434.Issue434C");
 
@@ -64,7 +64,7 @@
 
     Bridge.define("TestIssue461.Issue461", {
         statics: {
-            test: function test() {
+            Test: function Test() {
                 var input = document.createElement('input');
 
                 input.onchange = Bridge.fn.combine(input.onchange, $asm.$.TestIssue461.Issue461.f1);

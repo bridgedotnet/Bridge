@@ -3,7 +3,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
     Bridge.define("Test.BridgeIssues.N542.Bridge542", {
         statics: {
-            test1: function () {
+            Test1: function () {
                 var blable = "";
                 /* 
                 vBoubli (@"/faaa");
@@ -11,7 +11,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
                 return blable;
             },
-            test2: function () {
+            Test2: function () {
                 var blable = "";
                 
                 vBoubli (@"/faaa");

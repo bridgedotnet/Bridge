@@ -18,7 +18,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
              * @memberof Module2217_AMD.TestProject.Issues.N2217.N2217_AMD
              * @return  {number}
              */
-            getNumber: function () {
+            GetNumber: function () {
                 return 1;
             }
         });
@@ -52,7 +52,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
              * @memberof Module2217_CommonJS.TestProject.Issues.N2217.N2217_CommonJS
              * @return  {number}
              */
-            getNumber: function () {
+            GetNumber: function () {
                 return 2;
             }
         });
@@ -74,7 +74,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
              * @memberof Module2217_ES6.TestProject.Issues.N2217.N2217_ES6
              * @return  {number}
              */
-            getNumber: function () {
+            GetNumber: function () {
                 return 3;
             }
         });
@@ -95,7 +95,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
          * @memberof TestProject.Issues.N2217.N2217_Loader
          * @return  {void}
          */
-        loadManualModule: function () {
+        LoadManualModule: function () {
             // N2217_Loader Should NOT be wrapped by module N2217_Manual
             var manual = new Module2217_Manual.TestProject.Issues.N2217.N2217_Manual();
 
@@ -109,7 +109,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
          * @memberof TestProject.Issues.N2217.N2217_Loader
          * @return  {void}
          */
-        load: function () {
+        Load: function () {
             var $step = 0,
                 $task1, 
                 $task2, 
@@ -199,7 +199,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
              * @memberof Module2217_UMD.TestProject.Issues.N2217.N2217_UMD
              * @return  {number}
              */
-            getNumber: function () {
+            GetNumber: function () {
                 return 4;
             }
         });

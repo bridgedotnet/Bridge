@@ -3,7 +3,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
     Bridge.define("Test.BridgeIssues.N2420.N2420", {
         statics: {
-            output: function () {
+            Output: function () {
                 var externalOption = "one";
 
                 // Bridge boxes external enum value for Console.WriteLine(Enum value)

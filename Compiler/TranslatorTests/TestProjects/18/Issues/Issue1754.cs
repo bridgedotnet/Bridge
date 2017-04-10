@@ -5,6 +5,7 @@ using System.Text;
 
 namespace TestIssue1754
 {
+    [Bridge.Convention(Member = Bridge.NotationMember.Field | Bridge.NotationMember.Property, Notation = Bridge.Notation.LowerCamelCase)]
     class Issue1754
     {
         public Issue1754()

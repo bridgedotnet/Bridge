@@ -6,7 +6,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
     Bridge.define("Test.BridgeIssues.N772.App", {
         statics: {
-            main1: function () {
+            Main1: function () {
                 //These arrays depend on "useTypedArray" bridge.json option
                 var byteArray = System.Array.init(1, 0, System.Byte);
                 var sbyteArray = System.Array.init(2, 0, System.SByte);

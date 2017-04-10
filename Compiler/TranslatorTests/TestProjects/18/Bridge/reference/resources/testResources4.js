@@ -13,10 +13,10 @@ alert("I'm header 1.0.0-beta");
         statics: {
             config: {
                 init: function () {
-                    Bridge.ready(this.main1);
+                    Bridge.ready(this.Main1);
                 }
             },
-            main1: function main1() {
+            Main1: function Main1() {
                 Bridge.Console.log(new TestIssue599.Issue599()._something);
             }
         },
@@ -27,7 +27,7 @@ alert("I'm header 1.0.0-beta");
 
     Bridge.define("TestIssue948.Issue948", {
         statics: {
-            test: function test() {
+            Test: function Test() {
                 // A comment
 
                 /* global Bridge */
