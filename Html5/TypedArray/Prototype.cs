@@ -37,6 +37,7 @@ namespace Bridge.Html5.TypedArray
         // </summary>
         //public Func<x, TypedArray> buffer;
 
+#pragma warning disable 649 // CS0649  Field is never assigned to, and will always have its default value null
         /// <summary>
         /// Returns the ArrayBuffer referenced by the typed array. Fixed at construction time and thus
         /// read only.
@@ -60,6 +61,8 @@ namespace Bridge.Html5.TypedArray
         /// read only.
         /// </summary>
         public readonly int Length;
+
+#pragma warning restore 649 // CS0649  Field is never assigned to, and will always have its default value null
 
         #endregion Properties
 
