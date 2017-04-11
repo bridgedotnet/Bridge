@@ -22,39 +22,42 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual("Bridge1058.Class2_B", typeof(Class2_B).FullName);
         }
 
-        [Name(true)]
+        // #2477!!!
+        [Convention(Notation.LowerCamelCase)]
         public enum OverlayType
         {
             CIRCLE,
             MARKER
         }
 
-        [Name(true)]
+        // #2477!!!
+        [Convention(Notation.LowerCamelCase)]
         [Namespace("$Bridge1058")]
         public class Class1
         {
         }
 
-        [Name(true)]
+        // #2477!!!
+        [Convention(Notation.LowerCamelCase)]
         [Namespace(false)]
         public class Class2
         {
         }
 
-        [Name(false)]
+        [Convention]
         public enum OverlayType_B
         {
             CIRCLE,
             MARKER
         }
 
-        [Name(false)]
+        [Convention]
         [Namespace("$Bridge1058")]
         public class Class1_B
         {
         }
 
-        [Name(false)]
+        [Convention]
         [Namespace(false)]
         public class Class2_B
         {

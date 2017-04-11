@@ -969,8 +969,8 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         statics: {
             TestNameTrue: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1058+overlayType", Bridge.Reflection.getTypeFullName(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1058.overlayType));
-                Bridge.Test.NUnit.Assert.AreEqual("$Bridge1058.Bridge1058.class1", Bridge.Reflection.getTypeFullName($Bridge1058.Bridge1058.class1));
-                Bridge.Test.NUnit.Assert.AreEqual("Bridge1058.class2", Bridge.Reflection.getTypeFullName(Bridge1058.class2));
+                Bridge.Test.NUnit.Assert.AreEqual("$Bridge1058.Bridge1058.class1", Bridge.Reflection.getTypeFullName($Bridge1058.Bridge1058.Class1));
+                Bridge.Test.NUnit.Assert.AreEqual("Bridge1058.class2", Bridge.Reflection.getTypeFullName(Bridge1058.Class2));
             },
             TestNameFalse: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1058+OverlayType_B", Bridge.Reflection.getTypeFullName(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1058.OverlayType_B));
@@ -980,19 +980,19 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
-    Bridge.define("$Bridge1058.Bridge1058.class1");
+    Bridge.define("$Bridge1058.Bridge1058.Class1");
 
     Bridge.define("$Bridge1058.Bridge1058.Class1_B");
 
-    Bridge.define("Bridge1058.class2");
+    Bridge.define("Bridge1058.Class2");
 
     Bridge.define("Bridge1058.Class2_B");
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1058.overlayType", {
         $kind: "enum",
         statics: {
-            CIRCLE: 0,
-            MARKER: 1
+            cIRCLE: 0,
+            mARKER: 1
         }
     });
 

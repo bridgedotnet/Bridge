@@ -7,13 +7,13 @@ namespace System.Linq.Expressions
     [Cast("{this}.ntype === 58")]
     public sealed class LoopExpression : Expression
     {
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern Expression Body { get; private set; }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern LabelTarget BreakLabel { get; private set; }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern LabelTarget ContinueLabel { get; private set; }
 
         internal extern LoopExpression();

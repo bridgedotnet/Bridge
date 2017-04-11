@@ -180,7 +180,7 @@ namespace Bridge.ClientTest.Reflection
 
         public class C11
         {
-            [Name(false)]
+            [Convention]
             public DateTime D;
 
             [Reflectable]
@@ -201,16 +201,16 @@ namespace Bridge.ClientTest.Reflection
 
         public class C13
         {
-            [Name(false)]
+            [Convention]
             public Action addedE3Handler;
 
-            [Name(false)]
+            [Convention]
             public Action removedE3Handler;
 
-            [Name(false)]
+            [Convention]
             public static Action addedE4Handler;
 
-            [Name(false)]
+            [Convention]
             public static Action removedE4Handler;
 
             [Reflectable]
@@ -238,10 +238,10 @@ namespace Bridge.ClientTest.Reflection
 
         public class C14
         {
-            [Name(false)]
+            [Convention]
             public int p13Field;
 
-            [Name(false)]
+            [Convention]
             public static int p14Field;
 
             [Reflectable]
@@ -330,10 +330,10 @@ namespace Bridge.ClientTest.Reflection
         [Constructor("{ }")]
         public class C19
         {
-            [Name(false)]
+            [Convention]
             public int A;
 
-            [Name(false)]
+            [Convention]
             public string B;
 
             [Reflectable]
@@ -344,10 +344,10 @@ namespace Bridge.ClientTest.Reflection
 
         public class C20
         {
-            [Name(false)]
+            [Convention]
             public int A;
 
-            [Name(false)]
+            [Convention]
             public string B;
 
             [Reflectable, Template("{ A: {a}, B: {b} }")]
@@ -358,7 +358,7 @@ namespace Bridge.ClientTest.Reflection
 
         public class C21
         {
-            [Name(false)]
+            [Convention]
             public int X;
 
             public C21(int x)
@@ -442,13 +442,13 @@ namespace Bridge.ClientTest.Reflection
 
         public class C24
         {
-            [Name(false)]
+            [Convention]
             public int x;
 
-            [Name(false)]
+            [Convention]
             public string s;
 
-            [Name(false)]
+            [Convention]
             public string v;
 
             [Reflectable]

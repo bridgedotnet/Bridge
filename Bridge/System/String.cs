@@ -16,7 +16,7 @@ namespace System
         /// <summary>
         /// Gets the number of characters in the current String object.
         /// </summary>
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern int Length
         {
             get;

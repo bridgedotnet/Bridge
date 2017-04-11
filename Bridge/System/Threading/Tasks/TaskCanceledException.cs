@@ -15,7 +15,7 @@ namespace System.Threading.Tasks
         [Template("new System.Threading.Tasks.TaskCanceledException({message}, null, {innerException})")]
         public extern TaskCanceledException(string message, Exception innerException);
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern Task Task
         {
             get;

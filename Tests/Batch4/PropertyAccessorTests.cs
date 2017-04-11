@@ -7,7 +7,7 @@ namespace Bridge.ClientTest.Batch4
     {
 #pragma warning disable 649
 
-        [Name(false)]
+        [Convention]
         public class C1
         {
             public int F1, F2, F3;
@@ -77,7 +77,7 @@ namespace Bridge.ClientTest.Batch4
             }
         }
 
-        [Name(false)]
+        [Convention]
         public class C2<T>
         {
             public T F1, F2, F3;
@@ -147,7 +147,7 @@ namespace Bridge.ClientTest.Batch4
             }
         }
 
-        [Name(false)]
+        [Convention]
         public class B3
         {
             public int F1, F2, F3;
@@ -184,7 +184,7 @@ namespace Bridge.ClientTest.Batch4
             }
         }
 
-        [Name(false)]
+        [Convention]
         public class D3 : B3
         {
             public override int P1
@@ -216,7 +216,7 @@ namespace Bridge.ClientTest.Batch4
             }
         }
 
-        [Name(false)]
+        [Convention]
         public class B4<T>
         {
             public T F1, F2, F3;
@@ -253,7 +253,7 @@ namespace Bridge.ClientTest.Batch4
             }
         }
 
-        [Name(false)]
+        [Convention]
         public class D4<T> : B4<T>
         {
             public override T P1
