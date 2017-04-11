@@ -6,8 +6,8 @@
             config: {
                 properties: {
                     P_STATIC_S1: null,
-                    P_STaTIC_S2: null,
-                    P: null
+                    p_STaTIC_S2: null,
+                    p: null
                 }
             }
         },
@@ -23,8 +23,8 @@
 
             TestIssue1754.Issue1754.P_STATIC_S1 = "Name should be P_STATIC_S1";
 
-            TestIssue1754.Issue1754.P_STaTIC_S2 = "Name should be p_STaTIC_S2";
+            TestIssue1754.Issue1754.p_STaTIC_S2 = "Name should be p_STaTIC_S2";
 
-            TestIssue1754.Issue1754.P = "Name should be p";
+            TestIssue1754.Issue1754.p = "Name should be p";
         }
     });

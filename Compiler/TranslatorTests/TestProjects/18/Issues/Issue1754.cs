@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Bridge;
+
 namespace TestIssue1754
 {
-    [Bridge.Convention(Member = Bridge.NotationMember.Field | Bridge.NotationMember.Property, Notation = Bridge.Notation.LowerCamelCase)]
+    [Bridge.Convention(Member = ConventionMember.Field | ConventionMember.Property, Notation = Notation.LowerCamelCase)]
     class Issue1754
     {
         public Issue1754()
