@@ -3,7 +3,7 @@ using Bridge;
 namespace System.Collections.Generic
 {
     [External]
-    [Convention(Type = NotationType.Member, Member = NotationMember.Method, Notation = Notation.LowerCamelCase)]
+    [Convention(Target = ConventionTarget.Member, Member = ConventionMember.Method, Notation = Notation.LowerCamelCase)]
     public interface IReadOnlyCollection<T> : IEnumerable<T>
     {
         int Count
@@ -14,7 +14,7 @@ namespace System.Collections.Generic
     }
 
     [External]
-    [Convention(Type = NotationType.Member, Member = NotationMember.Method, Notation = Notation.LowerCamelCase)]
+    [Convention(Target = ConventionTarget.Member, Member = ConventionMember.Method, Notation = Notation.LowerCamelCase)]
     public interface IReadOnlyList<T> : IReadOnlyCollection<T>
     {
         T this[int index]

@@ -8,7 +8,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge1848
     {
         [External]
-        [Convention(Type = NotationType.Member, Notation = Notation.LowerCamelCase)]
+        [Convention(Target = ConventionTarget.Member, Notation = Notation.LowerCamelCase)]
         public interface ITest
         {
             int GetNewId();
@@ -18,7 +18,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
         [ExternalInterface(true)]
         [Name("Bridge1848_ITest")]
-        [Convention(Type = NotationType.Member, Notation = Notation.LowerCamelCase)]
+        [Convention(Target = ConventionTarget.Member, Notation = Notation.LowerCamelCase)]
         public interface ITest2
         {
             int GetNewId();

@@ -3,13 +3,13 @@ using System;
 using Bridge;
 using Bridge.Html5;
 
-[assembly:Convention(Filter = "Bridge.ClientTest.ConventionTests.Assembly.Holder1.*", Type = NotationType.Class, Notation = Notation.UpperCase)]
-[assembly: Convention(Filter = "Bridge.ClientTest.ConventionTests.Assembly.Holder1.*", Type = NotationType.Member, Notation = Notation.LowerCase)]
+[assembly:Convention(Filter = "Bridge.ClientTest.ConventionTests.Assembly.Holder1.*", Target = ConventionTarget.Class, Notation = Notation.UpperCase)]
+[assembly: Convention(Filter = "Bridge.ClientTest.ConventionTests.Assembly.Holder1.*", Target = ConventionTarget.Member, Notation = Notation.LowerCase)]
 
-[assembly: Convention(Filter = "Bridge.ClientTest.ConventionTests.Assembly.Holder2.*", Type = NotationType.Member, Accessibility = NotationAccessibility.Public, Notation = Notation.None)]
-[assembly: Convention(Filter = "Bridge.ClientTest.ConventionTests.Assembly.Holder2.*", Type = NotationType.Member, Accessibility = NotationAccessibility.Protected, Notation = Notation.UpperCase)]
-[assembly: Convention(Filter = "Bridge.ClientTest.ConventionTests.Assembly.Holder2.*", Type = NotationType.Member, Accessibility = NotationAccessibility.Private, Notation = Notation.LowerCase)]
-[assembly: Convention(Filter = "Bridge.ClientTest.ConventionTests.Assembly.Holder2.*", Type = NotationType.Member, Accessibility = NotationAccessibility.ProtectedInternal, Notation = Notation.LowerCamelCase)]
+[assembly: Convention(Filter = "Bridge.ClientTest.ConventionTests.Assembly.Holder2.*", Target = ConventionTarget.Member, Accessibility = ConventionAccessibility.Public, Notation = Notation.None)]
+[assembly: Convention(Filter = "Bridge.ClientTest.ConventionTests.Assembly.Holder2.*", Target = ConventionTarget.Member, Accessibility = ConventionAccessibility.Protected, Notation = Notation.UpperCase)]
+[assembly: Convention(Filter = "Bridge.ClientTest.ConventionTests.Assembly.Holder2.*", Target = ConventionTarget.Member, Accessibility = ConventionAccessibility.Private, Notation = Notation.LowerCase)]
+[assembly: Convention(Filter = "Bridge.ClientTest.ConventionTests.Assembly.Holder2.*", Target = ConventionTarget.Member, Accessibility = ConventionAccessibility.ProtectedInternal, Notation = Notation.LowerCamelCase)]
 namespace Bridge.ClientTest.ConventionTests.Assembly
 {
     public class Holder1
@@ -28,8 +28,8 @@ namespace Bridge.ClientTest.ConventionTests.Assembly
             }
         }
 
-        [Convention(Type = NotationType.Class, Notation = Notation.LowerCase)]
-        [Convention(Type = NotationType.Member, Notation = Notation.UpperCase)]
+        [Convention(Target = ConventionTarget.Class, Notation = Notation.LowerCase)]
+        [Convention(Target = ConventionTarget.Member, Notation = Notation.UpperCase)]
         public class Class2
         {
             public int field1;

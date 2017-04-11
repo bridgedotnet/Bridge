@@ -13,7 +13,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         [External]
-        [Convention(Type = NotationType.Member, Notation = Notation.LowerCamelCase)]
+        [Convention(Target = ConventionTarget.Member, Notation = Notation.LowerCamelCase)]
         public class MyClass
         {
 #pragma warning disable CS0626 // Method, operator, or accessor is marked external and has no attributes on it
