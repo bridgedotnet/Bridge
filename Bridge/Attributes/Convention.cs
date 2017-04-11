@@ -3,29 +3,33 @@
 namespace Bridge
 {
     /// <summary>
-	/// Can be applied to a member to change case notation in the compiled script.
-	/// </summary>
-	[AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
+    /// Can be applied to a member to change case notation in the compiled script.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
     [External]
     [NonScriptable]
     public sealed class ConventionAttribute : Attribute
     {
+        public extern ConventionAttribute();
+        public extern ConventionAttribute(Notation notation);
+        public extern ConventionAttribute(Notation notation, ConventionTarget target);
+
         public Notation Notation
         {
             get; set;
         }
 
-        public NotationType Type
+        public ConventionTarget Target
         {
             get; set;
         }
 
-        public NotationMember Member
+        public ConventionMember Member
         {
             get; set;
         }
 
-        public NotationAccessibility Accessibility
+        public ConventionAccessibility Accessibility
         {
             get; set;
         }
@@ -46,7 +50,7 @@ namespace Bridge
 
     [NonScriptable]
     [Flags]
-    public enum NotationType
+    public enum ConventionTarget
     {
         All = 0x0,
         Class = 0x1,
@@ -62,7 +66,7 @@ namespace Bridge
 
     [NonScriptable]
     [Flags]
-    public enum NotationMember
+    public enum ConventionMember
     {
         All = 0x0,
         Method = 0x1,
@@ -75,7 +79,7 @@ namespace Bridge
 
     [NonScriptable]
     [Flags]
-    public enum NotationAccessibility
+    public enum ConventionAccessibility
     {
         All = 0x0,
         Public = 0x1,

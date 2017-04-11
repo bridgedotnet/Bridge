@@ -12,7 +12,7 @@ using Object.Net.Utilities;
 namespace Bridge.Contract
 {
     [Flags]
-    public enum NotationType
+    public enum ConventionTarget
     {
         All = 0x0,
         Class = 0x1,
@@ -27,7 +27,7 @@ namespace Bridge.Contract
     }
 
     [Flags]
-    public enum NotationMember
+    public enum ConventionMember
     {
         All = 0x0,
         Method = 0x1,
@@ -39,7 +39,7 @@ namespace Bridge.Contract
     }
 
     [Flags]
-    public enum NotationAccessibility
+    public enum ConventionAccessibility
     {
         All = 0x0,
         Public = 0x1,
@@ -58,6 +58,14 @@ namespace Bridge.Contract
         UpperCamelCase = 4
     }
 
+    public enum NameRuleLevel
+    {
+        None,
+        Assembly,
+        Class,
+        Member
+    }
+
     public class NameRule
     {
         public Notation Notation
@@ -65,17 +73,17 @@ namespace Bridge.Contract
             get; set;
         }
 
-        public NotationType Type
+        public ConventionTarget Target
         {
             get; set;
         }
 
-        public NotationMember Member
+        public ConventionMember Member
         {
             get; set;
         }
 
-        public NotationAccessibility Accessibility
+        public ConventionAccessibility Accessibility
         {
             get; set;
         }
@@ -91,6 +99,11 @@ namespace Bridge.Contract
         }
 
         public int Priority
+        {
+            get; set;
+        }
+
+        public NameRuleLevel Level
         {
             get; set;
         }
@@ -144,7 +157,15 @@ namespace Bridge.Contract
                         name = name.ToLowerInvariant();
                         break;
                     case Notation.LowerCamelCase:
-                        name = name.ToLowerCamelCase();
+                        var rejectRule = rule.Level != NameRuleLevel.Member && semantic.Entity is IMember &&
+                                         !semantic.IsCustomName && semantic.EnumMode <= 1 &&
+                                         semantic.Entity.Name.Length > 1 &&
+                                         semantic.Entity.Name.ToUpperInvariant() == semantic.Entity.Name;
+                        if (!rejectRule)
+                        {
+                            name = name.ToLowerCamelCase();
+                        }
+
                         break;
                     case Notation.UpperCamelCase:
                         name = name.ToCamelCase();
@@ -163,12 +184,6 @@ namespace Bridge.Contract
                 }
             }
 
-            // TODO: remove this statement when default rules (method and field to lower camel case) will be removed
-            /*if (semantic.Entity is IMember && !semantic.IsCustomName && semantic.EnumMode <= 1 && semantic.Entity.Name.Length > 1 && semantic.Entity.Name.ToUpperInvariant() == semantic.Entity.Name)
-            {
-                name = semantic.Entity.Name;
-            }*/
-
             return name;
         }
 
@@ -177,12 +192,12 @@ namespace Bridge.Contract
             var acceptable = true;
             var entity = semantic.Entity;
 
-            if (rule.Type != NotationType.All)
+            if (rule.Target != ConventionTarget.All)
             {
                 var typeDef = entity as ITypeDefinition;
                 string externalAttr = "Bridge.ExternalAttribute";
 
-                if (typeDef == null && rule.Type.HasFlag(NotationType.External))
+                if (typeDef == null && rule.Target.HasFlag(ConventionTarget.External))
                 {
                     acceptable = entity.GetAttribute(new FullTypeName(externalAttr), false) != null;
 
@@ -191,11 +206,11 @@ namespace Bridge.Contract
                         typeDef = entity.DeclaringTypeDefinition;
                     }
                 }
-                else if (rule.Type.HasFlag(NotationType.Member) && !(entity is IMember))
+                else if (rule.Target.HasFlag(ConventionTarget.Member) && !(entity is IMember))
                 {
                     acceptable = false;
                 }
-                else if (rule.Type.HasFlag(NotationType.Anonymous))
+                else if (rule.Target.HasFlag(ConventionTarget.Anonymous))
                 {
                     if (entity is IMember && (entity.DeclaringType == null || entity.DeclaringType.Kind != TypeKind.Anonymous))
                     {
@@ -209,21 +224,21 @@ namespace Bridge.Contract
 
                 if (typeDef != null)
                 {
-                    foreach (var notationType in GetFlags(rule.Type))
+                    foreach (var notationType in GetFlags(rule.Target))
                     {
-                        if (notationType == NotationType.Member)
+                        if (notationType == ConventionTarget.Member)
                         {
                             continue;
                         }
 
-                        acceptable = NameConvertor.IsType(semantic, notationType, typeDef);
+                        acceptable = NameConvertor.IsAcceptableTarget(semantic, notationType, typeDef);
                         if (acceptable)
                         {
                             break;
                         }
                     }
                 }
-                else if (acceptable && !rule.Type.HasFlag(NotationType.Member))
+                else if (acceptable && !rule.Target.HasFlag(ConventionTarget.Member))
                 {
                     acceptable = false;
                 }
@@ -234,13 +249,13 @@ namespace Bridge.Contract
                 }
             }
 
-            if (rule.Accessibility != NotationAccessibility.All)
+            if (rule.Accessibility != ConventionAccessibility.All)
             {
-                if (!(rule.Accessibility.HasFlag(NotationAccessibility.Public) && entity.IsPublic ||
-                    rule.Accessibility.HasFlag(NotationAccessibility.Protected) && entity.IsProtected ||
-                    rule.Accessibility.HasFlag(NotationAccessibility.ProtectedInternal) && entity.IsProtectedOrInternal ||
-                    rule.Accessibility.HasFlag(NotationAccessibility.Private) && entity.IsPrivate ||
-                    rule.Accessibility.HasFlag(NotationAccessibility.Internal) && entity.IsInternal))
+                if (!(rule.Accessibility.HasFlag(ConventionAccessibility.Public) && entity.IsPublic ||
+                    rule.Accessibility.HasFlag(ConventionAccessibility.Protected) && entity.IsProtected ||
+                    rule.Accessibility.HasFlag(ConventionAccessibility.ProtectedInternal) && entity.IsProtectedOrInternal ||
+                    rule.Accessibility.HasFlag(ConventionAccessibility.Private) && entity.IsPrivate ||
+                    rule.Accessibility.HasFlag(ConventionAccessibility.Internal) && entity.IsInternal))
                 {
                     acceptable = false;
                 }
@@ -251,21 +266,21 @@ namespace Bridge.Contract
                 }
             }
 
-            if (rule.Member != NotationMember.All)
+            if (rule.Member != ConventionMember.All)
             {
                 var field = entity as IField;
                 if (field != null)
                 {
-                    if (!(rule.Member.HasFlag(NotationMember.Field) && !field.IsConst ||
-                          rule.Member.HasFlag(NotationMember.EnumItem) && field.IsConst && semantic.Entity.DeclaringTypeDefinition.Kind != TypeKind.Enum ||
-                          rule.Member.HasFlag(NotationMember.Const) && field.IsConst))
+                    if (!(rule.Member.HasFlag(ConventionMember.Field) && !field.IsConst ||
+                          rule.Member.HasFlag(ConventionMember.EnumItem) && field.IsConst && semantic.Entity.DeclaringTypeDefinition.Kind != TypeKind.Enum ||
+                          rule.Member.HasFlag(ConventionMember.Const) && field.IsConst))
                     {
                         acceptable = false;
                     }
                 }
-                else if (!(rule.Member.HasFlag(NotationMember.Event) && entity is IEvent ||
-                    rule.Member.HasFlag(NotationMember.Method) && entity is IMethod ||
-                    rule.Member.HasFlag(NotationMember.Property) && entity is IProperty))
+                else if (!(rule.Member.HasFlag(ConventionMember.Event) && entity is IEvent ||
+                    rule.Member.HasFlag(ConventionMember.Method) && entity is IMethod ||
+                    rule.Member.HasFlag(ConventionMember.Property) && entity is IProperty))
                 {
                     acceptable = false;
                 }
@@ -327,33 +342,33 @@ namespace Bridge.Contract
             return (lValue & lFlag) != 0;
         }
 
-        private static bool IsType(NameSemantic semantic, NotationType notationType, ITypeDefinition typeDef)
+        private static bool IsAcceptableTarget(NameSemantic semantic, ConventionTarget target, ITypeDefinition typeDef)
         {
             bool acceptable = true;
-            switch (notationType)
+            switch (target)
             {
-                case NotationType.Class:
+                case ConventionTarget.Class:
                     acceptable = typeDef.Kind == TypeKind.Class;
                     break;
-                case NotationType.Struct:
+                case ConventionTarget.Struct:
                     acceptable = typeDef.Kind == TypeKind.Struct;
                     break;
-                case NotationType.Enum:
+                case ConventionTarget.Enum:
                     acceptable = typeDef.Kind == TypeKind.Enum;
                     break;
-                case NotationType.Interface:
+                case ConventionTarget.Interface:
                     acceptable = typeDef.Kind == TypeKind.Interface;
                     break;
-                case NotationType.Delegate:
+                case ConventionTarget.Delegate:
                     acceptable = typeDef.Kind == TypeKind.Delegate;
                     break;
-                case NotationType.ObjectLiteral:
+                case ConventionTarget.ObjectLiteral:
                     acceptable = semantic.IsObjectLiteral || typeDef.GetAttribute(new FullTypeName("Bridge.ObjectLiteralAttribute"), false) != null;
                     break;
-                case NotationType.Anonymous:
+                case ConventionTarget.Anonymous:
                     acceptable = typeDef.Kind == TypeKind.Anonymous;
                     break;
-                case NotationType.External:
+                case ConventionTarget.External:
                     string externalAttr = "Bridge.ExternalAttribute";
                     var has =
                         typeDef.Attributes.Any(
@@ -386,11 +401,11 @@ namespace Bridge.Contract
             }
             return acceptable;
         }
-        private static readonly NameRule ConstructorRule = new NameRule { CustomName = JS.Funcs.CONSTRUCTOR };
-        private static readonly NameRule LowerCamelCaseRule = new NameRule {Notation = Notation.LowerCamelCase};
-        private static readonly NameRule LowerCaseRule = new NameRule { Notation = Notation.LowerCase };
-        private static readonly NameRule UpperCaseRule = new NameRule { Notation = Notation.UpperCase };
-        private static readonly NameRule DefaultCaseRule = new NameRule { Notation = Notation.None };
+        private static readonly NameRule ConstructorRule = new NameRule { CustomName = JS.Funcs.CONSTRUCTOR, Level = NameRuleLevel.Member };
+        private static readonly NameRule LowerCamelCaseRule = new NameRule {Notation = Notation.LowerCamelCase, Level = NameRuleLevel.Assembly };
+        private static readonly NameRule LowerCaseRule = new NameRule { Notation = Notation.LowerCase, Level = NameRuleLevel.Assembly };
+        private static readonly NameRule UpperCaseRule = new NameRule { Notation = Notation.UpperCase, Level = NameRuleLevel.Assembly };
+        private static readonly NameRule DefaultCaseRule = new NameRule { Notation = Notation.None, Level = NameRuleLevel.Assembly };
 
         private static List<NameRule> GetRules(NameSemantic semantic)
         {
@@ -475,6 +490,7 @@ namespace Bridge.Contract
             if (nameAttr != null)
             {
                 var rule = new NameRule();
+                rule.Level = NameRuleLevel.Member;
                 var value = nameAttr.PositionalArguments.First().ConstantValue;
                 if (value is bool)
                 {
@@ -500,9 +516,19 @@ namespace Bridge.Contract
             return rules;
         }
 
-        private static NameRule ToRule(IAttribute attribute)
+        private static NameRule ToRule(IAttribute attribute, NameRuleLevel level = NameRuleLevel.None)
         {
             var rule = new NameRule();
+
+            if (attribute.PositionalArguments.Count > 0)
+            {
+                rule.Notation = (Notation)(int)attribute.PositionalArguments[0].ConstantValue;
+            }
+
+            if (attribute.PositionalArguments.Count > 1)
+            {
+                rule.Target = (ConventionTarget)(int)attribute.PositionalArguments[1].ConstantValue;
+            }
 
             foreach (var argument in attribute.NamedArguments)
             {
@@ -515,16 +541,16 @@ namespace Bridge.Contract
                         rule.Notation = (Notation) (int) value.ConstantValue;
                         break;
 
-                    case "Type":
-                        rule.Type = (NotationType)(int)value.ConstantValue;
+                    case "Target":
+                        rule.Target = (ConventionTarget)(int)value.ConstantValue;
                         break;
 
                     case "Member":
-                        rule.Member = (NotationMember)(int)value.ConstantValue;
+                        rule.Member = (ConventionMember)(int)value.ConstantValue;
                         break;
 
                     case "Accessibility":
-                        rule.Accessibility = (NotationAccessibility)(int)value.ConstantValue;
+                        rule.Accessibility = (ConventionAccessibility)(int)value.ConstantValue;
                         break;
 
                     case "Filter":
@@ -540,6 +566,7 @@ namespace Bridge.Contract
                 }
             }
 
+            rule.Level = level;
             return rule;
         }
 
@@ -556,7 +583,7 @@ namespace Bridge.Contract
 
                 if (attr != null)
                 {
-                    memberRule = NameConvertor.ToRule(attr);
+                    memberRule = NameConvertor.ToRule(attr, NameRuleLevel.Member);
                 }
 
                 var typeDef = semantic.Entity.DeclaringTypeDefinition;
@@ -585,7 +612,7 @@ namespace Bridge.Contract
                 assemblyRules = new NameRule[assemblyAttrs.Length];
                 for (int i = 0; i < assemblyAttrs.Length; i++)
                 {
-                    assemblyRules[i] = NameConvertor.ToRule(assemblyAttrs[i]);
+                    assemblyRules[i] = NameConvertor.ToRule(assemblyAttrs[i], NameRuleLevel.Assembly);
                 }
 
                 Array.Sort(assemblyRules, (item1, item2) => -item1.Priority.CompareTo(item2.Priority));
@@ -660,7 +687,7 @@ namespace Bridge.Contract
                 IAttribute[] classAttrs = td.GetAttributes(new FullTypeName(NameConvertor.ConventionAttrName)).ToArray();
                 for (int i = 0; i < classAttrs.Length; i++)
                 {
-                    rules.Add(NameConvertor.ToRule(classAttrs[i]));
+                    rules.Add(NameConvertor.ToRule(classAttrs[i], NameRuleLevel.Class));
                 }
                 
                 td = td.DeclaringTypeDefinition;

@@ -10,4 +10,4 @@ using Bridge;
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: Guid("76ba3097-5b23-4900-bca9-2ba3bc0afcfe")]
-[assembly: Bridge.Convention(Member = NotationMember.Field | NotationMember.Method, Notation = Notation.LowerCamelCase)]
+[assembly: Bridge.Convention(Member = ConventionMember.Field | ConventionMember.Method, Notation = Notation.LowerCamelCase)]

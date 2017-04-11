@@ -14,7 +14,7 @@ namespace Bridge.ClientTest.ConventionTests.Class
         public int Field2;
     }
 
-    [Convention(Type = NotationType.Member, Notation = Notation.LowerCase)]
+    [Convention(Target = ConventionTarget.Member, Notation = Notation.LowerCase)]
     public class Class2
     {
         public int FIELD1;
@@ -29,7 +29,7 @@ namespace Bridge.ClientTest.ConventionTests.Class
         }
     }
 
-    [Convention(Type = NotationType.Member, Notation = Notation.UpperCase)]
+    [Convention(Target = ConventionTarget.Member, Notation = Notation.UpperCase)]
     [ObjectLiteral]
     public class Class3
     {
@@ -41,7 +41,7 @@ namespace Bridge.ClientTest.ConventionTests.Class
         }
     }
 
-    [Convention(Type = NotationType.Member, Notation = Notation.LowerCase)]
+    [Convention(Target = ConventionTarget.Member, Notation = Notation.LowerCase)]
     public interface I1
     {
         void Method1();
@@ -61,7 +61,7 @@ namespace Bridge.ClientTest.ConventionTests.Class
         }
     }
 
-    [Convention(Type = NotationType.Member, Notation = Notation.LowerCase)]
+    [Convention(Target = ConventionTarget.Member, Notation = Notation.LowerCase)]
     public class Class5
     {
         public class Class5_1
