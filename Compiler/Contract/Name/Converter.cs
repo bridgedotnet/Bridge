@@ -158,9 +158,28 @@ namespace Bridge.Contract
                         break;
                     case Notation.LowerCamelCase:
                         var rejectRule = rule.Level != NameRuleLevel.Member && semantic.Entity is IMember &&
-                                         !semantic.IsCustomName && semantic.EnumMode <= 1 &&
+                                         !semantic.IsCustomName &&
                                          semantic.Entity.Name.Length > 1 &&
                                          semantic.Entity.Name.ToUpperInvariant() == semantic.Entity.Name;
+                        if (rejectRule)
+                        {
+                            int upperCount = 0;
+                            for (int i = 0; i < semantic.Entity.Name.Length; i++)
+                            {
+                                if (char.IsUpper(semantic.Entity.Name[i])) upperCount++;
+                                if (char.IsLower(semantic.Entity.Name[i]))
+                                {
+                                    rejectRule = false;
+                                    break;
+                                }
+                            }
+
+                            if (upperCount <= 1)
+                            {
+                                rejectRule = false;
+                            }
+                        }
+
                         if (!rejectRule)
                         {
                             name = name.ToLowerCamelCase();
