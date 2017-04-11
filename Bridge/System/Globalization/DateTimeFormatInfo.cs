@@ -7,7 +7,7 @@ namespace System.Globalization
     {
         public extern DateTimeFormatInfo();
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public static extern DateTimeFormatInfo InvariantInfo
         {
             get;
@@ -27,126 +27,126 @@ namespace System.Globalization
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string DateSeparator
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string TimeSeparator
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string UniversalSortableDateTimePattern
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string SortableDateTimePattern
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string FullDateTimePattern
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string LongDatePattern
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string ShortDatePattern
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string LongTimePattern
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string ShortTimePattern
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern int FirstDayOfWeek
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string[] DayNames
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string[] AbbreviatedDayNames
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string[] ShortestDayNames
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string[] MonthNames
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string[] MonthGenitiveNames
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string[] AbbreviatedMonthNames
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string[] AbbreviatedMonthGenitiveNames
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string MonthDayPattern
         {
             get;
@@ -160,14 +160,14 @@ namespace System.Globalization
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string YearMonthPattern
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string RoundtripFormat
         {
             get;
@@ -178,7 +178,7 @@ namespace System.Globalization
 
         public extern object Clone();
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public static extern DateTimeFormatInfo CurrentInfo
         {
             get;

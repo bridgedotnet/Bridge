@@ -95,7 +95,7 @@ namespace Bridge.ClientTest.Reflection
 
         public class BS
         {
-            [Name(false)]
+            [Convention]
             public int X;
 
             public BS(int x)

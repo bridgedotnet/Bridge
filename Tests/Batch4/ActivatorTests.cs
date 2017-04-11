@@ -57,7 +57,7 @@ namespace Bridge.ClientTest.Batch4
 
         public class C5
         {
-            [Name(false)]
+            [Convention]
             public int i;
 
             [Template("{ i: 42 }")]

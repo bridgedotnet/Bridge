@@ -8,7 +8,7 @@ namespace System.Linq.Expressions
     [Cast("{this}.ntype === 32 || {this}.ntype === 33")]
     public sealed class NewArrayExpression : Expression
     {
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern ReadOnlyCollection<Expression> Expressions { get; private set; }
 
         internal extern NewArrayExpression();

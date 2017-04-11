@@ -22,7 +22,7 @@ namespace System
         [Template("new System.AggregateException({message}, {innerExceptions:array})")]
         public extern AggregateException(string message, params Exception[] innerExceptions);
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern ReadOnlyCollection<Exception> InnerExceptions
         {
             get;

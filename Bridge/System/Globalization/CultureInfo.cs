@@ -23,40 +23,40 @@ namespace System.Globalization
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern DateTimeFormatInfo DateTimeFormat
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public static extern CultureInfo InvariantCulture
         {
             get;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string Name
         {
             get;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string EnglishName
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string NativeName
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public NumberFormatInfo NumberFormat
         {
             get;

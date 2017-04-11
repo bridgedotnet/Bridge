@@ -185,7 +185,7 @@ namespace Bridge.Html5
         /// Event - HTML5
         /// The document has finished loading (but not its dependent resources).
         /// </summary>
-        [Name(false)]
+        [Convention]
         DOMContentLoaded,
 
         /// <summary>

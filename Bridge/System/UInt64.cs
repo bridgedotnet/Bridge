@@ -9,10 +9,10 @@ namespace System
     {
         private extern UInt64(int i);
 
-        [Name(false)]
+        [Convention]
         public const ulong MinValue = 0;
 
-        [Name(false)]
+        [Convention]
         public const ulong MaxValue = 18446744073709551615;
 
         [Template("System.UInt64.parse({s})")]

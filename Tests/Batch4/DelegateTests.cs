@@ -43,7 +43,7 @@ namespace Bridge.ClientTest.Batch4
             Assert.AreEqual(0, interfaces.Length);
         }
 
-        [Name(false)]
+        [Convention]
         private int testField = 12;
 
         [Test]

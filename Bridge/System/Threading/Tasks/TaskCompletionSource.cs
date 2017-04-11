@@ -10,7 +10,7 @@ namespace System.Threading.Tasks
     {
         public extern TaskCompletionSource();
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern Task<TResult> Task
         {
             get;

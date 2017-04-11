@@ -468,10 +468,10 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
         private static bool boolean = true;
 
-        [Name(true)]
+        [Convention(Notation.LowerCamelCase)]
         private static bool Is = true;
 
-        [Name(true)]
+        [Convention(Notation.LowerCamelCase)]
         private static int Let()
         {
             return 5;

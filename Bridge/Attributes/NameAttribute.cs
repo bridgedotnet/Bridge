@@ -19,6 +19,7 @@ namespace Bridge
         {
         }
 
+        [Obsolete("Please replace [Name(true)] with [Convention(Notation.LowerCamelCase)] and [Name(false)] with [Convention]. See Issue #2477 for details.", true)]
         public NameAttribute(bool changeCase)
         {
         }
