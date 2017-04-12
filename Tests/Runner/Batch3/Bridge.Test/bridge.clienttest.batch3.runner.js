@@ -47,8 +47,8 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#1041 - Integer TestVariableOps", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1041Integer.TestVariableOps);
             QUnit.test("#1051 - TestInlinePopertyWithValue", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1051.TestInlinePopertyWithValue);
             QUnit.test("#1053 - TestFieldPropertyWithInterface", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1053.TestFieldPropertyWithInterface);
-            QUnit.test("#1058 - TestNameTrue", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1058.TestNameTrue);
-            QUnit.test("#1058 - TestNameFalse", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1058.TestNameFalse);
+            QUnit.test("#1058 - TestNameLowerCase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1058.TestNameLowerCase);
+            QUnit.test("#1058 - TestNameNotChanged", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1058.TestNameNotChanged);
             QUnit.test("#1059 - TestEnumNameModes", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1059.TestEnumNameModes);
             QUnit.test("#1061 - TestIsDigitFromLinq", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1061.TestIsDigitFromLinq);
             QUnit.test("#1065 - TestDecimalLongWithDictionary", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1065.TestDecimalLongWithDictionary);
@@ -1263,19 +1263,19 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1058", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1058)],
         statics: {
-            TestNameTrue: function (assert) {
+            TestNameLowerCase: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1058).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1058, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
-                    Method: "TestNameTrue()",
+                    Method: "TestNameLowerCase()",
                     Line: "9"
                 } ));
-                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1058.TestNameTrue();
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1058.TestNameLowerCase();
             },
-            TestNameFalse: function (assert) {
+            TestNameNotChanged: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1058).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1058, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
-                    Method: "TestNameFalse()",
-                    Line: "17"
+                    Method: "TestNameNotChanged()",
+                    Line: "18"
                 } ));
-                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1058.TestNameFalse();
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1058.TestNameNotChanged();
             }
         },
         context: null,

@@ -967,32 +967,34 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1058", {
         statics: {
-            TestNameTrue: function () {
+            TestNameLowerCase: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1058+overlayType", Bridge.Reflection.getTypeFullName(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1058.overlayType));
-                Bridge.Test.NUnit.Assert.AreEqual("$Bridge1058.Bridge1058.class1", Bridge.Reflection.getTypeFullName($Bridge1058.Bridge1058.Class1));
-                Bridge.Test.NUnit.Assert.AreEqual("Bridge1058.class2", Bridge.Reflection.getTypeFullName(Bridge1058.Class2));
+                Bridge.Test.NUnit.Assert.AreEqual("MARKER", System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1058.overlayType, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1058.overlayType.MARKER));
+                Bridge.Test.NUnit.Assert.AreEqual("$Bridge1058.Bridge1058.class1", Bridge.Reflection.getTypeFullName($Bridge1058.Bridge1058.class1));
+                Bridge.Test.NUnit.Assert.AreEqual("Bridge1058.class2", Bridge.Reflection.getTypeFullName(Bridge1058.class2));
             },
-            TestNameFalse: function () {
+            TestNameNotChanged: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1058+OverlayType_B", Bridge.Reflection.getTypeFullName(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1058.OverlayType_B));
+                Bridge.Test.NUnit.Assert.AreEqual("MARKER", System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1058.OverlayType_B, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1058.OverlayType_B.MARKER));
                 Bridge.Test.NUnit.Assert.AreEqual("$Bridge1058.Bridge1058.Class1_B", Bridge.Reflection.getTypeFullName($Bridge1058.Bridge1058.Class1_B));
                 Bridge.Test.NUnit.Assert.AreEqual("Bridge1058.Class2_B", Bridge.Reflection.getTypeFullName(Bridge1058.Class2_B));
             }
         }
     });
 
-    Bridge.define("$Bridge1058.Bridge1058.Class1");
+    Bridge.define("$Bridge1058.Bridge1058.class1");
 
     Bridge.define("$Bridge1058.Bridge1058.Class1_B");
 
-    Bridge.define("Bridge1058.Class2");
+    Bridge.define("Bridge1058.class2");
 
     Bridge.define("Bridge1058.Class2_B");
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1058.overlayType", {
         $kind: "enum",
         statics: {
-            cIRCLE: 0,
-            mARKER: 1
+            CIRCLE: 0,
+            MARKER: 1
         }
     });
 
