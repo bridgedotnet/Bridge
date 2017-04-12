@@ -93,8 +93,8 @@ namespace Bridge
     public enum Notation
     {
         None = 0,
-        UpperCase = 1,
-        LowerCase = 2,
+        LowerCase = 1,
+        UpperCase = 2,
         LowerCamelCase = 3,
         UpperCamelCase = 4
     }

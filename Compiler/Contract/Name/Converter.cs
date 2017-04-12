@@ -52,8 +52,8 @@ namespace Bridge.Contract
     public enum Notation
     {
         None = 0,
-        UpperCase = 1,
-        LowerCase = 2,
+        LowerCase = 1,
+        UpperCase = 2,
         LowerCamelCase = 3,
         UpperCamelCase = 4
     }
@@ -500,7 +500,7 @@ namespace Bridge.Contract
 
             return null;
         }
-        
+
         private static List<NameRule> GetSpecialRules(NameSemantic semantic)
         {
             var rules = new List<NameRule>();
@@ -620,7 +620,7 @@ namespace Bridge.Contract
             }
 
             var assembly = semantic.Entity.ParentAssembly;
-            
+
             if (semantic.Emitter.AssemblyNameRuleCache.ContainsKey(assembly))
             {
                 assemblyRules = semantic.Emitter.AssemblyNameRuleCache[assembly];
@@ -638,7 +638,7 @@ namespace Bridge.Contract
 
                 semantic.Emitter.AssemblyNameRuleCache.Add(assembly, assemblyRules);
             }
-            
+
             var rules = new List<NameRule>();
 
             if(memberRule != null)
@@ -708,7 +708,7 @@ namespace Bridge.Contract
                 {
                     rules.Add(NameConvertor.ToRule(classAttrs[i], NameRuleLevel.Class));
                 }
-                
+
                 td = td.DeclaringTypeDefinition;
             }
 
