@@ -20,36 +20,43 @@ namespace Bridge.Html5
             /// <summary>
             /// The new shape is drawn only where both the new shape and the destination canvas overlap. Everything else is made transparent.
             /// </summary>
+            [Name("source-in")]
             SourceIn,
 
             /// <summary>
             /// The new shape is drawn where it doesn't overlap the existing canvas content.
             /// </summary>
+            [Name("source-out")]
             SourceOut,
 
             /// <summary>
             /// The new shape is only drawn where it overlaps the existing canvas content.
             /// </summary>
+            [Name("source-atop")]
             SourceAtop,
 
             /// <summary>
             /// New shapes are drawn behind the existing canvas content.
             /// </summary>
+            [Name("destination-over")]
             DestinationOver,
 
             /// <summary>
             /// The existing canvas content is kept where both the new shape and existing canvas content overlap. Everything else is made transparent.
             /// </summary>
+            [Name("destination-in")]
             DestinationIn,
 
             /// <summary>
             /// The existing content is kept where it doesn't overlap the new shape.
             /// </summary>
+            [Name("destination-out")]
             DestinationOut,
 
             /// <summary>
             /// The existing canvas is only kept where it overlaps the new shape. The new shape is drawn behind the canvas content.
             /// </summary>
+            [Name("destination-atop")]
             DestinationAtop,
 
             /// <summary>
