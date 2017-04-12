@@ -1881,91 +1881,91 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             NonGenericCreateInstanceWithoutArgumentsWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.ActivatorTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ActivatorTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "NonGenericCreateInstanceWithoutArgumentsWorks()",
-                    Line: "106"
+                    Line: "105"
                 } ));
                 t.Fixture.NonGenericCreateInstanceWithoutArgumentsWorks();
             },
             NonGenericCreateInstanceWithOneArgumentWorks_SPI_1540: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.ActivatorTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ActivatorTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "NonGenericCreateInstanceWithOneArgumentWorks_SPI_1540()",
-                    Line: "114"
+                    Line: "113"
                 } ));
                 t.Fixture.NonGenericCreateInstanceWithOneArgumentWorks_SPI_1540();
             },
             NonGenericCreateInstanceWithTwoArgumentsWorks_SPI_1541: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.ActivatorTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ActivatorTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "NonGenericCreateInstanceWithTwoArgumentsWorks_SPI_1541()",
-                    Line: "128"
+                    Line: "127"
                 } ));
                 t.Fixture.NonGenericCreateInstanceWithTwoArgumentsWorks_SPI_1541();
             },
             GenericCreateInstanceWithoutArgumentsWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.ActivatorTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ActivatorTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "GenericCreateInstanceWithoutArgumentsWorks()",
-                    Line: "144"
+                    Line: "143"
                 } ));
                 t.Fixture.GenericCreateInstanceWithoutArgumentsWorks();
             },
             GenericCreateInstanceWithOneArgumentWorks_SPI_1542: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.ActivatorTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ActivatorTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "GenericCreateInstanceWithOneArgumentWorks_SPI_1542()",
-                    Line: "152"
+                    Line: "151"
                 } ));
                 t.Fixture.GenericCreateInstanceWithOneArgumentWorks_SPI_1542();
             },
             GenericCreateInstanceWithTwoArgumentsWorks_SPI_1543: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.ActivatorTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ActivatorTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "GenericCreateInstanceWithTwoArgumentsWorks_SPI_1543()",
-                    Line: "166"
+                    Line: "165"
                 } ));
                 t.Fixture.GenericCreateInstanceWithTwoArgumentsWorks_SPI_1543();
             },
             InstantiatingTypeParameterWithDefaultConstructorConstraintWorks_SPI_1544: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.ActivatorTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ActivatorTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "InstantiatingTypeParameterWithDefaultConstructorConstraintWorks_SPI_1544()",
-                    Line: "187"
+                    Line: "186"
                 } ));
                 t.Fixture.InstantiatingTypeParameterWithDefaultConstructorConstraintWorks_SPI_1544();
             },
             CreateInstanceWithNoArgumentsWorksForClassWithUnnamedDefaultConstructor: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.ActivatorTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ActivatorTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "CreateInstanceWithNoArgumentsWorksForClassWithUnnamedDefaultConstructor()",
-                    Line: "196"
+                    Line: "195"
                 } ));
                 t.Fixture.CreateInstanceWithNoArgumentsWorksForClassWithUnnamedDefaultConstructor();
             },
             CreateInstanceWithNoArgumentsWorksForClassWithNamedDefaultConstructor: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.ActivatorTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ActivatorTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "CreateInstanceWithNoArgumentsWorksForClassWithNamedDefaultConstructor()",
-                    Line: "208"
+                    Line: "207"
                 } ));
                 t.Fixture.CreateInstanceWithNoArgumentsWorksForClassWithNamedDefaultConstructor();
             },
             CreateInstanceWithNoArgumentsWorksForClassWithInlineCodeDefaultConstructor_SPI_1545: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.ActivatorTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ActivatorTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "CreateInstanceWithNoArgumentsWorksForClassWithInlineCodeDefaultConstructor_SPI_1545()",
-                    Line: "220"
+                    Line: "219"
                 } ));
                 t.Fixture.CreateInstanceWithNoArgumentsWorksForClassWithInlineCodeDefaultConstructor_SPI_1545();
             },
             CreateInstanceWithNoArgumentsWorksForClassWithStaticMethodDefaultConstructor: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.ActivatorTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ActivatorTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "CreateInstanceWithNoArgumentsWorksForClassWithStaticMethodDefaultConstructor()",
-                    Line: "233"
+                    Line: "232"
                 } ));
                 t.Fixture.CreateInstanceWithNoArgumentsWorksForClassWithStaticMethodDefaultConstructor();
             },
             CreateInstanceWithNoArgumentsWorksForClassWithJsonDefaultConstructor: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.ActivatorTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ActivatorTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "CreateInstanceWithNoArgumentsWorksForClassWithJsonDefaultConstructor()",
-                    Line: "245"
+                    Line: "244"
                 } ));
                 t.Fixture.CreateInstanceWithNoArgumentsWorksForClassWithJsonDefaultConstructor();
             },
             CreateInstanceWithNoArgumentsWorksForGenericClassWithNamedDefaultConstructor: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.ActivatorTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ActivatorTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "CreateInstanceWithNoArgumentsWorksForGenericClassWithNamedDefaultConstructor()",
-                    Line: "257"
+                    Line: "256"
                 } ));
                 t.Fixture.CreateInstanceWithNoArgumentsWorksForGenericClassWithNamedDefaultConstructor();
             }
@@ -5923,133 +5923,133 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             CreatingAndInvokingADelegateWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.DelegateTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DelegateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "CreatingAndInvokingADelegateWorks()",
-                    Line: "49"
+                    Line: "48"
                 } ));
                 t.Fixture.CreatingAndInvokingADelegateWorks();
             },
             CreateWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.DelegateTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DelegateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "CreateWorks()",
-                    Line: "61"
+                    Line: "60"
                 } ));
                 t.Fixture.CreateWorks();
             },
             CombineWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.DelegateTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DelegateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "CombineWorks()",
-                    Line: "71"
+                    Line: "70"
                 } ));
                 t.Fixture.CombineWorks();
             },
             CombineDoesAddsDuplicateDelegates: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.DelegateTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DelegateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "CombineDoesAddsDuplicateDelegates()",
-                    Line: "80"
+                    Line: "79"
                 } ));
                 t.Fixture.CombineDoesAddsDuplicateDelegates();
             },
             CombineDoesNotAffectOriginal_SPI_1563: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.DelegateTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DelegateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "CombineDoesNotAffectOriginal_SPI_1563()",
-                    Line: "93"
+                    Line: "92"
                 } ));
                 t.Fixture.CombineDoesNotAffectOriginal_SPI_1563();
             },
             AddWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.DelegateTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DelegateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "AddWorks()",
-                    Line: "110"
+                    Line: "109"
                 } ));
                 t.Fixture.AddWorks();
             },
             AddAssignWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.DelegateTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DelegateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "AddAssignWorks()",
-                    Line: "119"
+                    Line: "118"
                 } ));
                 t.Fixture.AddAssignWorks();
             },
             RemoveWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.DelegateTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DelegateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "RemoveWorks()",
-                    Line: "129"
+                    Line: "128"
                 } ));
                 t.Fixture.RemoveWorks();
             },
             RemoveDoesNotAffectOriginal_SPI_1563: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.DelegateTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DelegateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "RemoveDoesNotAffectOriginal_SPI_1563()",
-                    Line: "140"
+                    Line: "139"
                 } ));
                 t.Fixture.RemoveDoesNotAffectOriginal_SPI_1563();
             },
             SubtractingDelegateFromItselfReturnsNull: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.DelegateTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DelegateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "SubtractingDelegateFromItselfReturnsNull()",
-                    Line: "162"
+                    Line: "161"
                 } ));
                 t.Fixture.SubtractingDelegateFromItselfReturnsNull();
             },
             RemoveWorksWithMethodGroupConversion_SPI_1563: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.DelegateTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DelegateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "RemoveWorksWithMethodGroupConversion_SPI_1563()",
-                    Line: "176"
+                    Line: "175"
                 } ));
                 t.Fixture.RemoveWorksWithMethodGroupConversion_SPI_1563();
             },
             SubtractWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.DelegateTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DelegateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "SubtractWorks()",
-                    Line: "192"
+                    Line: "191"
                 } ));
                 t.Fixture.SubtractWorks();
             },
             SubtractAssignWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.DelegateTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DelegateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "SubtractAssignWorks()",
-                    Line: "203"
+                    Line: "202"
                 } ));
                 t.Fixture.SubtractAssignWorks();
             },
             CloneWorks_SPI_1563: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.DelegateTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DelegateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "CloneWorks_SPI_1563()",
-                    Line: "214"
+                    Line: "213"
                 } ));
                 t.Fixture.CloneWorks_SPI_1563();
             },
             CloningDelegateToADifferentTypeIsANoOp: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.DelegateTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DelegateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "CloningDelegateToADifferentTypeIsANoOp()",
-                    Line: "250"
+                    Line: "249"
                 } ));
                 t.Fixture.CloningDelegateToADifferentTypeIsANoOp();
             },
             CloningDelegateToTheSameTypeCreatesANewClone_SPI_1563: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.DelegateTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DelegateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "CloningDelegateToTheSameTypeCreatesANewClone_SPI_1563()",
-                    Line: "260"
+                    Line: "259"
                 } ));
                 t.Fixture.CloningDelegateToTheSameTypeCreatesANewClone_SPI_1563();
             },
             EqualityAndInequalityOperatorsAndEqualsMethod_SPI_1563: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.DelegateTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DelegateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "EqualityAndInequalityOperatorsAndEqualsMethod_SPI_1563()",
-                    Line: "292"
+                    Line: "291"
                 } ));
                 t.Fixture.EqualityAndInequalityOperatorsAndEqualsMethod_SPI_1563();
             },
             GetInvocationListWorksForImportedFunction_SPI_1563: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.DelegateTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DelegateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "GetInvocationListWorksForImportedFunction_SPI_1563()",
-                    Line: "341"
+                    Line: "340"
                 } ));
                 t.Fixture.GetInvocationListWorksForImportedFunction_SPI_1563();
             },
             GetInvocationListWorksForMulticastDelegate: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.DelegateTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DelegateTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "GetInvocationListWorksForMulticastDelegate()",
-                    Line: "354"
+                    Line: "353"
                 } ));
                 t.Fixture.GetInvocationListWorksForMulticastDelegate();
             }
@@ -6317,84 +6317,84 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             TypePropertiesAreCorrect: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "TypePropertiesAreCorrect()",
-                    Line: "29"
+                    Line: "27"
                 } ));
                 t.Fixture.TypePropertiesAreCorrect();
             },
             DefaultValueOfEnumClassIsNull: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "DefaultValueOfEnumClassIsNull()",
-                    Line: "49"
+                    Line: "47"
                 } ));
                 t.Fixture.DefaultValueOfEnumClassIsNull();
             },
             DefaultValueOfEnumTypeIsZero_SPI_1595: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "DefaultValueOfEnumTypeIsZero_SPI_1595()",
-                    Line: "55"
+                    Line: "53"
                 } ));
                 t.Fixture.DefaultValueOfEnumTypeIsZero_SPI_1595();
             },
             DefaultConstructorOfEnumTypeReturnsZero_SPI_1595: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "DefaultConstructorOfEnumTypeReturnsZero_SPI_1595()",
-                    Line: "62"
+                    Line: "60"
                 } ));
                 t.Fixture.DefaultConstructorOfEnumTypeReturnsZero_SPI_1595();
             },
             CreatingInstanceOfEnumTypeReturnsZero_SPI_1595: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "CreatingInstanceOfEnumTypeReturnsZero_SPI_1595()",
-                    Line: "69"
+                    Line: "67"
                 } ));
                 t.Fixture.CreatingInstanceOfEnumTypeReturnsZero_SPI_1595();
             },
             DefaultExpressionWithEnumReturnsZero_SPI_1595: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "DefaultExpressionWithEnumReturnsZero_SPI_1595()",
-                    Line: "76"
+                    Line: "74"
                 } ));
                 t.Fixture.DefaultExpressionWithEnumReturnsZero_SPI_1595();
             },
             ParseWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "ParseWorks()",
-                    Line: "83"
+                    Line: "81"
                 } ));
                 t.Fixture.ParseWorks();
             },
             StaticToStringWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "StaticToStringWorks()",
-                    Line: "90"
+                    Line: "88"
                 } ));
                 t.Fixture.StaticToStringWorks();
             },
             GetHashCodeWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "GetHashCodeWorks()",
-                    Line: "97"
+                    Line: "95"
                 } ));
                 t.Fixture.GetHashCodeWorks();
             },
             EqualsWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "EqualsWorks()",
-                    Line: "104"
+                    Line: "102"
                 } ));
                 t.Fixture.EqualsWorks();
             },
             ConversionsToEnumAreTreatedAsConversionsToTheUnderlyingType_SPI_1596: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "ConversionsToEnumAreTreatedAsConversionsToTheUnderlyingType_SPI_1596()",
-                    Line: "111"
+                    Line: "109"
                 } ));
                 t.Fixture.ConversionsToEnumAreTreatedAsConversionsToTheUnderlyingType_SPI_1596();
             },
             GetValuesWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "GetValuesWorks()",
-                    Line: "122"
+                    Line: "120"
                 } ));
                 t.Fixture.GetValuesWorks();
             }
@@ -9813,77 +9813,77 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             NonGenericParseWorks_SPI_1574: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Serialization.JsonTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.JsonTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "NonGenericParseWorks_SPI_1574()",
-                    Line: "30"
+                    Line: "27"
                 } ));
                 t.Fixture.NonGenericParseWorks_SPI_1574();
             },
             GenericParseWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Serialization.JsonTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.JsonTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "GenericParseWorks()",
-                    Line: "47"
+                    Line: "44"
                 } ));
                 t.Fixture.GenericParseWorks();
             },
             NonGenericParseWithCallbackWorks_SPI_1574: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Serialization.JsonTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.JsonTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "NonGenericParseWithCallbackWorks_SPI_1574()",
-                    Line: "56"
+                    Line: "53"
                 } ));
                 t.Fixture.NonGenericParseWithCallbackWorks_SPI_1574();
             },
             GenericParseWithCallbackWorks_SPI_1574: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Serialization.JsonTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.JsonTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "GenericParseWithCallbackWorks_SPI_1574()",
-                    Line: "80"
+                    Line: "77"
                 } ));
                 t.Fixture.GenericParseWithCallbackWorks_SPI_1574();
             },
             StringifyWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Serialization.JsonTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.JsonTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "StringifyWorks()",
-                    Line: "101"
+                    Line: "98"
                 } ));
                 t.Fixture.StringifyWorks();
             },
             StringifyWithSerializableMembersArrayWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Serialization.JsonTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.JsonTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "StringifyWithSerializableMembersArrayWorks()",
-                    Line: "110"
+                    Line: "107"
                 } ));
                 t.Fixture.StringifyWithSerializableMembersArrayWorks();
             },
             StringifyWithSerializableMembersArrayAndIntentCountWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Serialization.JsonTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.JsonTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "StringifyWithSerializableMembersArrayAndIntentCountWorks()",
-                    Line: "120"
+                    Line: "117"
                 } ));
                 t.Fixture.StringifyWithSerializableMembersArrayAndIntentCountWorks();
             },
             StringifyWithSerializableMembersArrayAndIntentTextWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Serialization.JsonTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.JsonTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "StringifyWithSerializableMembersArrayAndIntentTextWorks()",
-                    Line: "130"
+                    Line: "127"
                 } ));
                 t.Fixture.StringifyWithSerializableMembersArrayAndIntentTextWorks();
             },
             StringifyWithCallbackWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Serialization.JsonTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.JsonTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "StringifyWithCallbackWorks()",
-                    Line: "140"
+                    Line: "137"
                 } ));
                 t.Fixture.StringifyWithCallbackWorks();
             },
             StringifyWithCallbackAndIndentCountWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Serialization.JsonTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.JsonTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "StringifyWithCallbackAndIndentCountWorks()",
-                    Line: "150"
+                    Line: "147"
                 } ));
                 t.Fixture.StringifyWithCallbackAndIndentCountWorks();
             },
             StringifyWithCallbackAndIndentTextWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Serialization.JsonTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.JsonTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "StringifyWithCallbackAndIndentTextWorks()",
-                    Line: "160"
+                    Line: "157"
                 } ));
                 t.Fixture.StringifyWithCallbackAndIndentTextWorks();
             }
@@ -11779,42 +11779,42 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             AccessorsCanBeInvokedInstance: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.PropertyAccessorTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.PropertyAccessorTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "AccessorsCanBeInvokedInstance()",
-                    Line: "291"
+                    Line: "285"
                 } ));
                 t.Fixture.AccessorsCanBeInvokedInstance();
             },
             AccessorsCanBeInvokedStatic: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.PropertyAccessorTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.PropertyAccessorTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "AccessorsCanBeInvokedStatic()",
-                    Line: "310"
+                    Line: "304"
                 } ));
                 t.Fixture.AccessorsCanBeInvokedStatic();
             },
             AccessorsCanBeInvokedGeneric: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.PropertyAccessorTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.PropertyAccessorTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "AccessorsCanBeInvokedGeneric()",
-                    Line: "327"
+                    Line: "321"
                 } ));
                 t.Fixture.AccessorsCanBeInvokedGeneric();
             },
             AccessorsCanBeInvokedGenericStatic: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.PropertyAccessorTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.PropertyAccessorTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "AccessorsCanBeInvokedGenericStatic()",
-                    Line: "346"
+                    Line: "340"
                 } ));
                 t.Fixture.AccessorsCanBeInvokedGenericStatic();
             },
             BaseAccessorsCanBeInvoked: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.PropertyAccessorTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.PropertyAccessorTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "BaseAccessorsCanBeInvoked()",
-                    Line: "363"
+                    Line: "357"
                 } ));
                 t.Fixture.BaseAccessorsCanBeInvoked();
             },
             BaseAccessorsCanBeInvokedGeneric: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.PropertyAccessorTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.PropertyAccessorTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "BaseAccessorsCanBeInvokedGeneric()",
-                    Line: "382"
+                    Line: "376"
                 } ));
                 t.Fixture.BaseAccessorsCanBeInvokedGeneric();
             }
@@ -12047,644 +12047,644 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetMembersReturnsMethodsWithAnyScriptableAttributeOrReflectableAttribute: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "GetMembersReturnsMethodsWithAnyScriptableAttributeOrReflectableAttribute()",
-                    Line: "853"
+                    Line: "838"
                 } ));
                 t.Fixture.GetMembersReturnsMethodsWithAnyScriptableAttributeOrReflectableAttribute();
             },
             StructMemberReflectionWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "StructMemberReflectionWorks()",
-                    Line: "862"
+                    Line: "847"
                 } ));
                 t.Fixture.StructMemberReflectionWorks();
             },
             IsStaticFlagWorksForMethod: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "IsStaticFlagWorksForMethod()",
-                    Line: "871"
+                    Line: "856"
                 } ));
                 t.Fixture.IsStaticFlagWorksForMethod();
             },
             MemberTypeIsMethodForMethod: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "MemberTypeIsMethodForMethod()",
-                    Line: "878"
+                    Line: "863"
                 } ));
                 t.Fixture.MemberTypeIsMethodForMethod();
             },
             IsConstructorIsFalseForMethod: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "IsConstructorIsFalseForMethod()",
-                    Line: "885"
+                    Line: "870"
                 } ));
                 t.Fixture.IsConstructorIsFalseForMethod();
             },
             IsConstructorIsTrueForAllKindsOfConstructors: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "IsConstructorIsTrueForAllKindsOfConstructors()",
-                    Line: "892"
+                    Line: "877"
                 } ));
                 t.Fixture.IsConstructorIsTrueForAllKindsOfConstructors();
             },
             IsStaticIsFalseForAllKindsOfConstructors: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "IsStaticIsFalseForAllKindsOfConstructors()",
-                    Line: "906"
+                    Line: "891"
                 } ));
                 t.Fixture.IsStaticIsFalseForAllKindsOfConstructors();
             },
             MemberTypeIsConstructorForAllKindsOfConstructors: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "MemberTypeIsConstructorForAllKindsOfConstructors()",
-                    Line: "920"
+                    Line: "905"
                 } ));
                 t.Fixture.MemberTypeIsConstructorForAllKindsOfConstructors();
             },
             NameIsCtorForAllKindsOfConstructors: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "NameIsCtorForAllKindsOfConstructors()",
-                    Line: "934"
+                    Line: "919"
                 } ));
                 t.Fixture.NameIsCtorForAllKindsOfConstructors();
             },
             DeclaringTypeIsCorrectForAllKindsOfConstructors: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "DeclaringTypeIsCorrectForAllKindsOfConstructors()",
-                    Line: "948"
+                    Line: "933"
                 } ));
                 t.Fixture.DeclaringTypeIsCorrectForAllKindsOfConstructors();
             },
             ScriptNameIsCorrectForAllKindsOfConstructors: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "ScriptNameIsCorrectForAllKindsOfConstructors()",
-                    Line: "962"
+                    Line: "947"
                 } ));
                 t.Fixture.ScriptNameIsCorrectForAllKindsOfConstructors();
             },
             IsStaticMethodIsTrueOnlyForStaticMethodConstructors: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "IsStaticMethodIsTrueOnlyForStaticMethodConstructors()",
-                    Line: "976"
+                    Line: "961"
                 } ));
                 t.Fixture.IsStaticMethodIsTrueOnlyForStaticMethodConstructors();
             },
             IsExpandParamsIsCorrectForConstructors: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "IsExpandParamsIsCorrectForConstructors()",
-                    Line: "990"
+                    Line: "975"
                 } ));
                 t.Fixture.IsExpandParamsIsCorrectForConstructors();
             },
             SpecialImplementationExistsOnlyForObjectLiteralAndInlineCodeConstructors: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "SpecialImplementationExistsOnlyForObjectLiteralAndInlineCodeConstructors()",
-                    Line: "1003"
+                    Line: "988"
                 } ));
                 t.Fixture.SpecialImplementationExistsOnlyForObjectLiteralAndInlineCodeConstructors();
             },
             DeclaringTypeShouldBeCorrectForMethods: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "DeclaringTypeShouldBeCorrectForMethods()",
-                    Line: "1017"
+                    Line: "1002"
                 } ));
                 t.Fixture.DeclaringTypeShouldBeCorrectForMethods();
             },
             ReturnTypeAndParameterTypesAreCorrectForMethods: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "ReturnTypeAndParameterTypesAreCorrectForMethods()",
-                    Line: "1025"
+                    Line: "1010"
                 } ));
                 t.Fixture.ReturnTypeAndParameterTypesAreCorrectForMethods();
             },
             ParameterTypesShouldBeCorrectForConstructors: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "ParameterTypesShouldBeCorrectForConstructors()",
-                    Line: "1048"
+                    Line: "1033"
                 } ));
                 t.Fixture.ParameterTypesShouldBeCorrectForConstructors();
             },
             VoidIsConsideredObjectAsReturnType: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "VoidIsConsideredObjectAsReturnType()",
-                    Line: "1062"
+                    Line: "1047"
                 } ));
                 t.Fixture.VoidIsConsideredObjectAsReturnType();
             },
             MethodNameIsTheCSharpName: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "MethodNameIsTheCSharpName()",
-                    Line: "1068"
+                    Line: "1053"
                 } ));
                 t.Fixture.MethodNameIsTheCSharpName();
             },
             TypeParametersAreReplacedWithObjectForReturnAndParameterTypesForOpenGenericTypes: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "TypeParametersAreReplacedWithObjectForReturnAndParameterTypesForOpenGenericTypes()",
-                    Line: "1075"
+                    Line: "1060"
                 } ));
                 t.Fixture.TypeParametersAreReplacedWithObjectForReturnAndParameterTypesForOpenGenericTypes();
             },
             TypeParametersAreCorrectForReturnAndParameterTypesForConstructedGenericTypes: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "TypeParametersAreCorrectForReturnAndParameterTypesForConstructedGenericTypes()",
-                    Line: "1083"
+                    Line: "1068"
                 } ));
                 t.Fixture.TypeParametersAreCorrectForReturnAndParameterTypesForConstructedGenericTypes();
             },
             MethodTypeParametersAreReplacedWithObjectForReturnAndParameterTypes: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "MethodTypeParametersAreReplacedWithObjectForReturnAndParameterTypes()",
-                    Line: "1095"
+                    Line: "1080"
                 } ));
                 t.Fixture.MethodTypeParametersAreReplacedWithObjectForReturnAndParameterTypes();
             },
             IsGenericMethodDefinitionAndTypeParameterCountWork: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "IsGenericMethodDefinitionAndTypeParameterCountWork()",
-                    Line: "1103"
+                    Line: "1088"
                 } ));
                 t.Fixture.IsGenericMethodDefinitionAndTypeParameterCountWork();
             },
             ScriptNameWorksForAllKindsOfMethods: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "ScriptNameWorksForAllKindsOfMethods()",
-                    Line: "1114"
+                    Line: "1099"
                 } ));
                 t.Fixture.ScriptNameWorksForAllKindsOfMethods();
             },
             SpecialImplementationExistsOnlyForMethodsImplementedAsInlineCode: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "SpecialImplementationExistsOnlyForMethodsImplementedAsInlineCode()",
-                    Line: "1128"
+                    Line: "1113"
                 } ));
                 t.Fixture.SpecialImplementationExistsOnlyForMethodsImplementedAsInlineCode();
             },
             IsExpandParamsIsCorrectForMethods: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "IsExpandParamsIsCorrectForMethods()",
-                    Line: "1136"
+                    Line: "1121"
                 } ));
                 t.Fixture.IsExpandParamsIsCorrectForMethods();
             },
             CreateDelegateWorksForNonGenericInstanceMethods: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "CreateDelegateWorksForNonGenericInstanceMethods()",
-                    Line: "1149"
+                    Line: "1134"
                 } ));
                 t.Fixture.CreateDelegateWorksForNonGenericInstanceMethods();
             },
             DelegateCreateDelegateWorksForNonGenericInstanceMethods: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "DelegateCreateDelegateWorksForNonGenericInstanceMethods()",
-                    Line: "1167"
+                    Line: "1152"
                 } ));
                 t.Fixture.DelegateCreateDelegateWorksForNonGenericInstanceMethods();
             },
             CreateDelegateWorksNonGenericStaticMethods: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "CreateDelegateWorksNonGenericStaticMethods()",
-                    Line: "1175"
+                    Line: "1160"
                 } ));
                 t.Fixture.CreateDelegateWorksNonGenericStaticMethods();
             },
             CreateDelegateWorksNonGenericStaticMethodOfGenericType: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "CreateDelegateWorksNonGenericStaticMethodOfGenericType()",
-                    Line: "1194"
+                    Line: "1179"
                 } ));
                 t.Fixture.CreateDelegateWorksNonGenericStaticMethodOfGenericType();
             },
             CreateDelegateWorksForGenericInstanceMethods: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "CreateDelegateWorksForGenericInstanceMethods()",
-                    Line: "1202"
+                    Line: "1187"
                 } ));
                 t.Fixture.CreateDelegateWorksForGenericInstanceMethods();
             },
             CreateDelegateWorksForGenericStaticMethods: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "CreateDelegateWorksForGenericStaticMethods()",
-                    Line: "1216"
+                    Line: "1201"
                 } ));
                 t.Fixture.CreateDelegateWorksForGenericStaticMethods();
             },
             InvokeWorksForNonGenericInstanceMethods: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "InvokeWorksForNonGenericInstanceMethods()",
-                    Line: "1229"
+                    Line: "1214"
                 } ));
                 t.Fixture.InvokeWorksForNonGenericInstanceMethods();
             },
             InvokeWorksForNonGenericStaticMethods: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "InvokeWorksForNonGenericStaticMethods()",
-                    Line: "1242"
+                    Line: "1227"
                 } ));
                 t.Fixture.InvokeWorksForNonGenericStaticMethods();
             },
             InvokeWorksForNonGenericInstanceMethodsOnSerializableTypes: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "InvokeWorksForNonGenericInstanceMethodsOnSerializableTypes()",
-                    Line: "1252"
+                    Line: "1237"
                 } ));
                 t.Fixture.InvokeWorksForNonGenericInstanceMethodsOnSerializableTypes();
             },
             InvokeWorksForNonGenericInlineCodeMethods: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "InvokeWorksForNonGenericInlineCodeMethods()",
-                    Line: "1259"
+                    Line: "1244"
                 } ));
                 t.Fixture.InvokeWorksForNonGenericInlineCodeMethods();
             },
             InvokeWorksForGenericInlineCodeMethods: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "InvokeWorksForGenericInlineCodeMethods()",
-                    Line: "1266"
+                    Line: "1251"
                 } ));
                 t.Fixture.InvokeWorksForGenericInlineCodeMethods();
             },
             InvokeWorksForGenericInstanceMethod: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "InvokeWorksForGenericInstanceMethod()",
-                    Line: "1273"
+                    Line: "1258"
                 } ));
                 t.Fixture.InvokeWorksForGenericInstanceMethod();
             },
             InvokeWorksForGenericStaticMethod: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "InvokeWorksForGenericStaticMethod()",
-                    Line: "1288"
+                    Line: "1273"
                 } ));
                 t.Fixture.InvokeWorksForGenericStaticMethod();
             },
             InvokeWorksForGenericInstanceMethodsOnSerializableTypes: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "InvokeWorksForGenericInstanceMethodsOnSerializableTypes()",
-                    Line: "1300"
+                    Line: "1285"
                 } ));
                 t.Fixture.InvokeWorksForGenericInstanceMethodsOnSerializableTypes();
             },
             InvokeWorksForExpandParamsMethods: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "InvokeWorksForExpandParamsMethods()",
-                    Line: "1307"
+                    Line: "1292"
                 } ));
                 t.Fixture.InvokeWorksForExpandParamsMethods();
             },
             InvokeWorksForAllKindsOfConstructors: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "InvokeWorksForAllKindsOfConstructors()",
-                    Line: "1319"
+                    Line: "1304"
                 } ));
                 t.Fixture.InvokeWorksForAllKindsOfConstructors();
             },
             InvokeWorksForExpandParamsConstructors: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "InvokeWorksForExpandParamsConstructors()",
-                    Line: "1345"
+                    Line: "1330"
                 } ));
                 t.Fixture.InvokeWorksForExpandParamsConstructors();
             },
             MemberTypeIsFieldForField: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "MemberTypeIsFieldForField()",
-                    Line: "1359"
+                    Line: "1344"
                 } ));
                 t.Fixture.MemberTypeIsFieldForField();
             },
             DeclaringTypeIsCorrectForField: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "DeclaringTypeIsCorrectForField()",
-                    Line: "1366"
+                    Line: "1351"
                 } ));
                 t.Fixture.DeclaringTypeIsCorrectForField();
             },
             NameIsCorrectForField: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "NameIsCorrectForField()",
-                    Line: "1373"
+                    Line: "1358"
                 } ));
                 t.Fixture.NameIsCorrectForField();
             },
             IsStaticIsCorrectForField: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "IsStaticIsCorrectForField()",
-                    Line: "1380"
+                    Line: "1365"
                 } ));
                 t.Fixture.IsStaticIsCorrectForField();
             },
             FieldTypeIsCorrectForField: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "FieldTypeIsCorrectForField()",
-                    Line: "1388"
+                    Line: "1373"
                 } ));
                 t.Fixture.FieldTypeIsCorrectForField();
             },
             ScriptNameIsCorrectForField: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "ScriptNameIsCorrectForField()",
-                    Line: "1396"
+                    Line: "1381"
                 } ));
                 t.Fixture.ScriptNameIsCorrectForField();
             },
             GetValueWorksForInstanceField: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "GetValueWorksForInstanceField()",
-                    Line: "1403"
+                    Line: "1388"
                 } ));
                 t.Fixture.GetValueWorksForInstanceField();
             },
             GetValueWorksForStaticField: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "GetValueWorksForStaticField()",
-                    Line: "1410"
+                    Line: "1395"
                 } ));
                 t.Fixture.GetValueWorksForStaticField();
             },
             SetValueWorksForInstanceField: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "SetValueWorksForInstanceField()",
-                    Line: "1417"
+                    Line: "1402"
                 } ));
                 t.Fixture.SetValueWorksForInstanceField();
             },
             SetValueWorksForStaticField: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "SetValueWorksForStaticField()",
-                    Line: "1425"
+                    Line: "1410"
                 } ));
                 t.Fixture.SetValueWorksForStaticField();
             },
             MemberTypeIsEventForEvent: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "MemberTypeIsEventForEvent()",
-                    Line: "1432"
+                    Line: "1417"
                 } ));
                 t.Fixture.MemberTypeIsEventForEvent();
             },
             DeclaringTypeIsCorrectForEvent: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "DeclaringTypeIsCorrectForEvent()",
-                    Line: "1439"
+                    Line: "1424"
                 } ));
                 t.Fixture.DeclaringTypeIsCorrectForEvent();
             },
             NameIsCorrectForEvent: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "NameIsCorrectForEvent()",
-                    Line: "1446"
+                    Line: "1431"
                 } ));
                 t.Fixture.NameIsCorrectForEvent();
             },
             IsStaticIsCorrectForEvent: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "IsStaticIsCorrectForEvent()",
-                    Line: "1453"
+                    Line: "1438"
                 } ));
                 t.Fixture.IsStaticIsCorrectForEvent();
             },
             AddEventHandlerMethodWorksForInstanceEvent: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "AddEventHandlerMethodWorksForInstanceEvent()",
-                    Line: "1460"
+                    Line: "1445"
                 } ));
                 t.Fixture.AddEventHandlerMethodWorksForInstanceEvent();
             },
             AddEventHandlerMethodWorksForInstanceEventWithInlineCodeAddMethod: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "AddEventHandlerMethodWorksForInstanceEventWithInlineCodeAddMethod()",
-                    Line: "1472"
+                    Line: "1457"
                 } ));
                 t.Fixture.AddEventHandlerMethodWorksForInstanceEventWithInlineCodeAddMethod();
             },
             AddEventHandlerMethodWorksForStaticEvent: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "AddEventHandlerMethodWorksForStaticEvent()",
-                    Line: "1483"
+                    Line: "1468"
                 } ));
                 t.Fixture.AddEventHandlerMethodWorksForStaticEvent();
             },
             AddEventHandlerMethodWorksForStaticEventWithInlineCodeAddMethod: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "AddEventHandlerMethodWorksForStaticEventWithInlineCodeAddMethod()",
-                    Line: "1494"
+                    Line: "1479"
                 } ));
                 t.Fixture.AddEventHandlerMethodWorksForStaticEventWithInlineCodeAddMethod();
             },
             RemoveEventHandlerMethodWorksForInstanceEvent: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "RemoveEventHandlerMethodWorksForInstanceEvent()",
-                    Line: "1504"
+                    Line: "1489"
                 } ));
                 t.Fixture.RemoveEventHandlerMethodWorksForInstanceEvent();
             },
             RemoveEventHandlerMethodWorksForInstanceEventWithInlineCodeRemoveMethod: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "RemoveEventHandlerMethodWorksForInstanceEventWithInlineCodeRemoveMethod()",
-                    Line: "1519"
+                    Line: "1504"
                 } ));
                 t.Fixture.RemoveEventHandlerMethodWorksForInstanceEventWithInlineCodeRemoveMethod();
             },
             RemoveEventHandlerMethodWorksForStaticEvent: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "RemoveEventHandlerMethodWorksForStaticEvent()",
-                    Line: "1531"
+                    Line: "1516"
                 } ));
                 t.Fixture.RemoveEventHandlerMethodWorksForStaticEvent();
             },
             RemoveEventHandlerMethodWorksForStaticEventWithInlineCodeRemoveMethod: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "RemoveEventHandlerMethodWorksForStaticEventWithInlineCodeRemoveMethod()",
-                    Line: "1545"
+                    Line: "1530"
                 } ));
                 t.Fixture.RemoveEventHandlerMethodWorksForStaticEventWithInlineCodeRemoveMethod();
             },
             PropertiesForAddMethodAreCorrect: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "PropertiesForAddMethodAreCorrect()",
-                    Line: "1556"
+                    Line: "1541"
                 } ));
                 t.Fixture.PropertiesForAddMethodAreCorrect();
             },
             PropertiesForRemoveMethodAreCorrect: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "PropertiesForRemoveMethodAreCorrect()",
-                    Line: "1593"
+                    Line: "1578"
                 } ));
                 t.Fixture.PropertiesForRemoveMethodAreCorrect();
             },
             MemberTypeIsPropertyForProperty: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "MemberTypeIsPropertyForProperty()",
-                    Line: "1632"
+                    Line: "1617"
                 } ));
                 t.Fixture.MemberTypeIsPropertyForProperty();
             },
             ScriptFieldNameIsCorrectForPropertiesImplementedAsFieldAndNullForOtherProperties: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "ScriptFieldNameIsCorrectForPropertiesImplementedAsFieldAndNullForOtherProperties()",
-                    Line: "1641"
+                    Line: "1626"
                 } ));
                 t.Fixture.ScriptFieldNameIsCorrectForPropertiesImplementedAsFieldAndNullForOtherProperties();
             },
             MemberTypeIsPropertyForIndexer: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "MemberTypeIsPropertyForIndexer()",
-                    Line: "1648"
+                    Line: "1633"
                 } ));
                 t.Fixture.MemberTypeIsPropertyForIndexer();
             },
             DeclaringTypeIsCorrectForProperty: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "DeclaringTypeIsCorrectForProperty()",
-                    Line: "1655"
+                    Line: "1640"
                 } ));
                 t.Fixture.DeclaringTypeIsCorrectForProperty();
             },
             DeclaringTypeIsCorrectForIndexer: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "DeclaringTypeIsCorrectForIndexer()",
-                    Line: "1664"
+                    Line: "1649"
                 } ));
                 t.Fixture.DeclaringTypeIsCorrectForIndexer();
             },
             NameIsCorrectForProperty: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "NameIsCorrectForProperty()",
-                    Line: "1671"
+                    Line: "1656"
                 } ));
                 t.Fixture.NameIsCorrectForProperty();
             },
             NameIsCorrectForIndexer: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "NameIsCorrectForIndexer()",
-                    Line: "1680"
+                    Line: "1665"
                 } ));
                 t.Fixture.NameIsCorrectForIndexer();
             },
             IsStaticIsCorrectForProperty: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "IsStaticIsCorrectForProperty()",
-                    Line: "1687"
+                    Line: "1672"
                 } ));
                 t.Fixture.IsStaticIsCorrectForProperty();
             },
             IsStaticIsFalseForIndexer: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "IsStaticIsFalseForIndexer()",
-                    Line: "1696"
+                    Line: "1681"
                 } ));
                 t.Fixture.IsStaticIsFalseForIndexer();
             },
             PropertyTypeIsCorrectForProperty: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "PropertyTypeIsCorrectForProperty()",
-                    Line: "1703"
+                    Line: "1688"
                 } ));
                 t.Fixture.PropertyTypeIsCorrectForProperty();
             },
             PropertyTypeIsCorrectForIndexer: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "PropertyTypeIsCorrectForIndexer()",
-                    Line: "1712"
+                    Line: "1697"
                 } ));
                 t.Fixture.PropertyTypeIsCorrectForIndexer();
             },
             IndexParameterTypesAreEmptyForProperty: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "IndexParameterTypesAreEmptyForProperty()",
-                    Line: "1719"
+                    Line: "1704"
                 } ));
                 t.Fixture.IndexParameterTypesAreEmptyForProperty();
             },
             IndexParameterTypesAreCorrectForIndexer: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "IndexParameterTypesAreCorrectForIndexer()",
-                    Line: "1728"
+                    Line: "1713"
                 } ));
                 t.Fixture.IndexParameterTypesAreCorrectForIndexer();
             },
             PropertiesForGetMethodAreCorrectForPropertyImplementedAsGetAndSetMethods: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "PropertiesForGetMethodAreCorrectForPropertyImplementedAsGetAndSetMethods()",
-                    Line: "1735"
+                    Line: "1720"
                 } ));
                 t.Fixture.PropertiesForGetMethodAreCorrectForPropertyImplementedAsGetAndSetMethods();
             },
             PropertiesForSetMethodAreCorrectForPropertyImplementedAsGetAndSetMethods: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "PropertiesForSetMethodAreCorrectForPropertyImplementedAsGetAndSetMethods()",
-                    Line: "1788"
+                    Line: "1773"
                 } ));
                 t.Fixture.PropertiesForSetMethodAreCorrectForPropertyImplementedAsGetAndSetMethods();
             },
             PropertiesForGetMethodAreCorrectForPropertyImplementedAsFields: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "PropertiesForGetMethodAreCorrectForPropertyImplementedAsFields()",
-                    Line: "1841"
+                    Line: "1826"
                 } ));
                 t.Fixture.PropertiesForGetMethodAreCorrectForPropertyImplementedAsFields();
             },
             PropertiesForSetMethodAreCorrectForPropertyImplementedAsFields: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "PropertiesForSetMethodAreCorrectForPropertyImplementedAsFields()",
-                    Line: "1875"
+                    Line: "1860"
                 } ));
                 t.Fixture.PropertiesForSetMethodAreCorrectForPropertyImplementedAsFields();
             },
             PropertiesForGetMethodAreCorrectForIndexer: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "PropertiesForGetMethodAreCorrectForIndexer()",
-                    Line: "1909"
+                    Line: "1894"
                 } ));
                 t.Fixture.PropertiesForGetMethodAreCorrectForIndexer();
             },
             PropertiesForSetMethodAreCorrectForIndexer: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "PropertiesForSetMethodAreCorrectForIndexer()",
-                    Line: "1943"
+                    Line: "1928"
                 } ));
                 t.Fixture.PropertiesForSetMethodAreCorrectForIndexer();
             },
             CanReadAndWriteAndPropertiesWithOnlyOneAccessor: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "CanReadAndWriteAndPropertiesWithOnlyOneAccessor()",
-                    Line: "1983"
+                    Line: "1968"
                 } ));
                 t.Fixture.CanReadAndWriteAndPropertiesWithOnlyOneAccessor();
             },
             CanReadAndWriteAndIndexersWithOnlyOneAccessor: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "CanReadAndWriteAndIndexersWithOnlyOneAccessor()",
-                    Line: "2037"
+                    Line: "2022"
                 } ));
                 t.Fixture.CanReadAndWriteAndIndexersWithOnlyOneAccessor();
             },
             PropertyInfoGetValueWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "PropertyInfoGetValueWorks()",
-                    Line: "2055"
+                    Line: "2040"
                 } ));
                 t.Fixture.PropertyInfoGetValueWorks();
             },
             PropertyInfoSetValueWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "PropertyInfoSetValueWorks()",
-                    Line: "2076"
+                    Line: "2061"
                 } ));
                 t.Fixture.PropertyInfoSetValueWorks();
             },
             MemberAttributesWork: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "MemberAttributesWork()",
-                    Line: "2131"
+                    Line: "2116"
                 } ));
                 t.Fixture.MemberAttributesWork();
             },
             MembersReflectableAttributeWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.ReflectionTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ReflectionTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "MembersReflectableAttributeWorks()",
-                    Line: "2147"
+                    Line: "2132"
                 } ));
                 t.Fixture.MembersReflectableAttributeWorks();
             }
@@ -13035,35 +13035,35 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             EvalWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ScriptTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "EvalWorks()",
-                    Line: "93"
+                    Line: "83"
                 } ));
                 t.Fixture.EvalWorks();
             },
             TypeOfWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ScriptTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "TypeOfWorks()",
-                    Line: "145"
+                    Line: "135"
                 } ));
                 t.Fixture.TypeOfWorks();
             },
             DeleteWorks_SPI_1571: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ScriptTests, 4, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "DeleteWorks_SPI_1571()",
-                    Line: "161"
+                    Line: "151"
                 } ));
                 t.Fixture.DeleteWorks_SPI_1571();
             },
             ParseIntWithoutRadixWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ScriptTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "ParseIntWithoutRadixWorks()",
-                    Line: "207"
+                    Line: "197"
                 } ));
                 t.Fixture.ParseIntWithoutRadixWorks();
             },
             ParseIntWithRadixWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ScriptTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "ParseIntWithRadixWorks()",
-                    Line: "213"
+                    Line: "203"
                 } ));
                 t.Fixture.ParseIntWithRadixWorks();
             }
@@ -14770,49 +14770,49 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             TypeIsWorksForReferenceTypes: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemLanguageSupportTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "TypeIsWorksForReferenceTypes()",
-                    Line: "206"
+                    Line: "205"
                 } ));
                 t.Fixture.TypeIsWorksForReferenceTypes();
             },
             TypeAsWorksForReferenceTypes: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemLanguageSupportTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "TypeAsWorksForReferenceTypes()",
-                    Line: "349"
+                    Line: "348"
                 } ));
                 t.Fixture.TypeAsWorksForReferenceTypes();
             },
             CastWorksForReferenceTypes: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemLanguageSupportTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "CastWorksForReferenceTypes()",
-                    Line: "492"
+                    Line: "491"
                 } ));
                 t.Fixture.CastWorksForReferenceTypes();
             },
             GetTypeWorksOnObjects: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemLanguageSupportTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "GetTypeWorksOnObjects()",
-                    Line: "635"
+                    Line: "634"
                 } ));
                 t.Fixture.GetTypeWorksOnObjects();
             },
             GetTypeOnNullInstanceThrowsException: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemLanguageSupportTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "GetTypeOnNullInstanceThrowsException()",
-                    Line: "649"
+                    Line: "648"
                 } ));
                 t.Fixture.GetTypeOnNullInstanceThrowsException();
             },
             CastOperatorForSerializableTypeWithoutTypeCheckCodeAlwaysSucceedsGeneric: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemLanguageSupportTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "CastOperatorForSerializableTypeWithoutTypeCheckCodeAlwaysSucceedsGeneric()",
-                    Line: "662"
+                    Line: "661"
                 } ));
                 t.Fixture.CastOperatorForSerializableTypeWithoutTypeCheckCodeAlwaysSucceedsGeneric();
             },
             TypeCheckForSubTypeOfGenericType: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemLanguageSupportTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "TypeCheckForSubTypeOfGenericType()",
-                    Line: "704"
+                    Line: "703"
                 } ));
                 t.Fixture.TypeCheckForSubTypeOfGenericType();
             }
@@ -14836,364 +14836,364 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             FullNamePropertyReturnsTheNameWithTheNamespace: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "FullNamePropertyReturnsTheNameWithTheNamespace()",
-                    Line: "123"
+                    Line: "122"
                 } ));
                 t.Fixture.FullNamePropertyReturnsTheNameWithTheNamespace();
             },
             AssemblyQualifiedNameReturnsTheNameWithTheNamespaceAndAssemblyName: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "AssemblyQualifiedNameReturnsTheNameWithTheNamespaceAndAssemblyName()",
-                    Line: "129"
+                    Line: "128"
                 } ));
                 t.Fixture.AssemblyQualifiedNameReturnsTheNameWithTheNamespaceAndAssemblyName();
             },
             AssemblyPropertyWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "AssemblyPropertyWorks()",
-                    Line: "137"
+                    Line: "136"
                 } ));
                 t.Fixture.AssemblyPropertyWorks();
             },
             NamespacePropertyReturnsTheNamespaceWithoutTheName: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "NamespacePropertyReturnsTheNamespaceWithoutTheName()",
-                    Line: "149"
+                    Line: "148"
                 } ));
                 t.Fixture.NamespacePropertyReturnsTheNamespaceWithoutTheName();
             },
             InstantiatingClassWithConstructorThatNeedsToBeAppliedWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "InstantiatingClassWithConstructorThatNeedsToBeAppliedWorks()",
-                    Line: "156"
+                    Line: "155"
                 } ));
                 t.Fixture.InstantiatingClassWithConstructorThatNeedsToBeAppliedWorks();
             },
             NamePropertyRemovesTheNamespace: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "NamePropertyRemovesTheNamespace()",
-                    Line: "166"
+                    Line: "165"
                 } ));
                 t.Fixture.NamePropertyRemovesTheNamespace();
             },
             GettingBaseTypeWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "GettingBaseTypeWorks()",
-                    Line: "174"
+                    Line: "173"
                 } ));
                 t.Fixture.GettingBaseTypeWorks();
             },
             GettingImplementedInterfacesWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "GettingImplementedInterfacesWorks()",
-                    Line: "182"
+                    Line: "181"
                 } ));
                 t.Fixture.GettingImplementedInterfacesWorks();
             },
             TypeOfAnOpenGenericClassWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "TypeOfAnOpenGenericClassWorks()",
-                    Line: "193"
+                    Line: "192"
                 } ));
                 t.Fixture.TypeOfAnOpenGenericClassWorks();
             },
             TypeOfAnOpenGenericInterfaceWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "TypeOfAnOpenGenericInterfaceWorks()",
-                    Line: "199"
+                    Line: "198"
                 } ));
                 t.Fixture.TypeOfAnOpenGenericInterfaceWorks();
             },
             TypeOfInstantiatedGenericClassWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "TypeOfInstantiatedGenericClassWorks()",
-                    Line: "205"
+                    Line: "204"
                 } ));
                 t.Fixture.TypeOfInstantiatedGenericClassWorks();
             },
             TypeOfInstantiatedGenericInterfaceWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "TypeOfInstantiatedGenericInterfaceWorks()",
-                    Line: "211"
+                    Line: "210"
                 } ));
                 t.Fixture.TypeOfInstantiatedGenericInterfaceWorks();
             },
             ConstructingAGenericTypeTwiceWithTheSameArgumentsReturnsTheSameInstance: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "ConstructingAGenericTypeTwiceWithTheSameArgumentsReturnsTheSameInstance()",
-                    Line: "217"
+                    Line: "216"
                 } ));
                 t.Fixture.ConstructingAGenericTypeTwiceWithTheSameArgumentsReturnsTheSameInstance();
             },
             AccessingAStaticMemberInAGenericClassWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "AccessingAStaticMemberInAGenericClassWorks()",
-                    Line: "227"
+                    Line: "226"
                 } ));
                 t.Fixture.AccessingAStaticMemberInAGenericClassWorks();
             },
             TypeOfNestedGenericClassWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "TypeOfNestedGenericClassWorks()",
-                    Line: "235"
+                    Line: "234"
                 } ));
                 t.Fixture.TypeOfNestedGenericClassWorks();
             },
             BaseTypeAndImplementedInterfacesForGenericTypeWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "BaseTypeAndImplementedInterfacesForGenericTypeWorks()",
-                    Line: "241"
+                    Line: "240"
                 } ));
                 t.Fixture.BaseTypeAndImplementedInterfacesForGenericTypeWorks();
             },
             IsGenericTypeDefinitionWorksAsExpected: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "IsGenericTypeDefinitionWorksAsExpected()",
-                    Line: "248"
+                    Line: "247"
                 } ));
                 t.Fixture.IsGenericTypeDefinitionWorksAsExpected();
             },
             GenericParameterCountReturnsZeroForConstructedTypesAndNonZeroForOpenOnes: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "GenericParameterCountReturnsZeroForConstructedTypesAndNonZeroForOpenOnes()",
-                    Line: "260"
+                    Line: "259"
                 } ));
                 t.Fixture.GenericParameterCountReturnsZeroForConstructedTypesAndNonZeroForOpenOnes();
             },
             GetGenericArgumentsReturnsTheCorrectTypesForConstructedTypesOtherwiseNull: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "GetGenericArgumentsReturnsTheCorrectTypesForConstructedTypesOtherwiseNull()",
-                    Line: "272"
+                    Line: "271"
                 } ));
                 t.Fixture.GetGenericArgumentsReturnsTheCorrectTypesForConstructedTypesOtherwiseNull();
             },
             GetGenericTypeDefinitionReturnsTheGenericTypeDefinitionForConstructedTypeOtherwiseNull: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "GetGenericTypeDefinitionReturnsTheGenericTypeDefinitionForConstructedTypeOtherwiseNull()",
-                    Line: "284"
+                    Line: "283"
                 } ));
                 t.Fixture.GetGenericTypeDefinitionReturnsTheGenericTypeDefinitionForConstructedTypeOtherwiseNull();
             },
             IsAssignableFromWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "IsAssignableFromWorks()",
-                    Line: "434"
+                    Line: "433"
                 } ));
                 t.Fixture.IsAssignableFromWorks();
             },
             IsSubclassOfWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "IsSubclassOfWorks()",
-                    Line: "652"
+                    Line: "651"
                 } ));
                 t.Fixture.IsSubclassOfWorks();
             },
             IsClassWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "IsClassWorks()",
-                    Line: "669"
+                    Line: "668"
                 } ));
                 t.Fixture.IsClassWorks();
             },
             IsEnumWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "IsEnumWorks()",
-                    Line: "682"
+                    Line: "681"
                 } ));
                 t.Fixture.IsEnumWorks();
             },
             IsArrayWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "IsArrayWorks()",
-                    Line: "695"
+                    Line: "694"
                 } ));
                 t.Fixture.IsArrayWorks();
             },
             IsFlagsWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "IsFlagsWorks()",
-                    Line: "707"
+                    Line: "706"
                 } ));
                 t.Fixture.IsFlagsWorks();
             },
             IsInterfaceWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "IsInterfaceWorks()",
-                    Line: "720"
+                    Line: "719"
                 } ));
                 t.Fixture.IsInterfaceWorks();
             },
             IsInstanceOfTypeWorksForReferenceTypes: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "IsInstanceOfTypeWorksForReferenceTypes()",
-                    Line: "733"
+                    Line: "732"
                 } ));
                 t.Fixture.IsInstanceOfTypeWorksForReferenceTypes();
             },
             InvokingBaseUnnamedConstructorWithoutArgumentsWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "InvokingBaseUnnamedConstructorWithoutArgumentsWorks()",
-                    Line: "925"
+                    Line: "924"
                 } ));
                 t.Fixture.InvokingBaseUnnamedConstructorWithoutArgumentsWorks();
             },
             InvokingBaseUnnamedConstructorWithArgumentsWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "InvokingBaseUnnamedConstructorWithArgumentsWorks()",
-                    Line: "955"
+                    Line: "954"
                 } ));
                 t.Fixture.InvokingBaseUnnamedConstructorWithArgumentsWorks();
             },
             InvokingBaseNamedConstructorWithoutArgumentsWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "InvokingBaseNamedConstructorWithoutArgumentsWorks()",
-                    Line: "985"
+                    Line: "984"
                 } ));
                 t.Fixture.InvokingBaseNamedConstructorWithoutArgumentsWorks();
             },
             InvokingBaseNamedConstructorWithArgumentsWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "InvokingBaseNamedConstructorWithArgumentsWorks()",
-                    Line: "1015"
+                    Line: "1014"
                 } ));
                 t.Fixture.InvokingBaseNamedConstructorWithArgumentsWorks();
             },
             ConstructingInstanceWithNamedConstructorWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "ConstructingInstanceWithNamedConstructorWorks()",
-                    Line: "1055"
+                    Line: "1054"
                 } ));
                 t.Fixture.ConstructingInstanceWithNamedConstructorWorks();
             },
             ConstructingInstanceWithNamedConstructorWorks2: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "ConstructingInstanceWithNamedConstructorWorks2()",
-                    Line: "1064"
+                    Line: "1063"
                 } ));
                 t.Fixture.ConstructingInstanceWithNamedConstructorWorks2();
             },
             InvokingBaseMethodWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "InvokingBaseMethodWorks()",
-                    Line: "1115"
+                    Line: "1114"
                 } ));
                 t.Fixture.InvokingBaseMethodWorks();
             },
             InvokingGenericBaseMethodWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "InvokingGenericBaseMethodWorks()",
-                    Line: "1121"
+                    Line: "1120"
                 } ));
                 t.Fixture.InvokingGenericBaseMethodWorks();
             },
             MethodGroupConversionWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "MethodGroupConversionWorks()",
-                    Line: "1207"
+                    Line: "1206"
                 } ));
                 t.Fixture.MethodGroupConversionWorks();
             },
             MethodGroupConversionOnGenericMethodWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "MethodGroupConversionOnGenericMethodWorks()",
-                    Line: "1214"
+                    Line: "1213"
                 } ));
                 t.Fixture.MethodGroupConversionOnGenericMethodWorks();
             },
             MethodGroupConversionOnBaseMethodWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "MethodGroupConversionOnBaseMethodWorks()",
-                    Line: "1221"
+                    Line: "1220"
                 } ));
                 t.Fixture.MethodGroupConversionOnBaseMethodWorks();
             },
             MethodGroupConversionOnGenericBaseMethodWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "MethodGroupConversionOnGenericBaseMethodWorks()",
-                    Line: "1228"
+                    Line: "1227"
                 } ));
                 t.Fixture.MethodGroupConversionOnGenericBaseMethodWorks();
             },
             ImportedInterfaceAppearsAsObjectWhenUsedAsGenericArgument: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "ImportedInterfaceAppearsAsObjectWhenUsedAsGenericArgument()",
-                    Line: "1235"
+                    Line: "1234"
                 } ));
                 t.Fixture.ImportedInterfaceAppearsAsObjectWhenUsedAsGenericArgument();
             },
             FalseIsFunctionShouldReturnFalse: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "FalseIsFunctionShouldReturnFalse()",
-                    Line: "1241"
+                    Line: "1240"
                 } ));
                 t.Fixture.FalseIsFunctionShouldReturnFalse();
             },
             CastingUndefinedToOtherTypeShouldReturnUndefined: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "CastingUndefinedToOtherTypeShouldReturnUndefined()",
-                    Line: "1247"
+                    Line: "1246"
                 } ));
                 t.Fixture.CastingUndefinedToOtherTypeShouldReturnUndefined();
             },
             NonSerializableTypeCanInheritFromSerializableType: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "NonSerializableTypeCanInheritFromSerializableType()",
-                    Line: "1253"
+                    Line: "1252"
                 } ));
                 t.Fixture.NonSerializableTypeCanInheritFromSerializableType();
             },
             InheritingFromRecordWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "InheritingFromRecordWorks()",
-                    Line: "1261"
+                    Line: "1260"
                 } ));
                 t.Fixture.InheritingFromRecordWorks();
             },
             InstanceOfWorksForSerializableTypesWithCustomTypeCheckCode: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "InstanceOfWorksForSerializableTypesWithCustomTypeCheckCode()",
-                    Line: "1268"
+                    Line: "1267"
                 } ));
                 t.Fixture.InstanceOfWorksForSerializableTypesWithCustomTypeCheckCode();
             },
             StaticGetTypeMethodWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "StaticGetTypeMethodWorks()",
-                    Line: "1277"
+                    Line: "1276"
                 } ));
                 t.Fixture.StaticGetTypeMethodWorks();
             },
             StaticGetTypeMethodWithGenericsWorks: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "StaticGetTypeMethodWithGenericsWorks()",
-                    Line: "1287"
+                    Line: "1286"
                 } ));
                 t.Fixture.StaticGetTypeMethodWithGenericsWorks();
             },
             CastingToNamedValuesEnumCastsToString: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "CastingToNamedValuesEnumCastsToString()",
-                    Line: "1336"
+                    Line: "1335"
                 } ));
                 t.Fixture.CastingToNamedValuesEnumCastsToString();
             },
             CastingToImportedNamedValuesEnumCastsToString: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "CastingToImportedNamedValuesEnumCastsToString()",
-                    Line: "1356"
+                    Line: "1355"
                 } ));
                 t.Fixture.CastingToImportedNamedValuesEnumCastsToString();
             },
             DefaultValueOfNamedValuesEnumIsNull: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "DefaultValueOfNamedValuesEnumIsNull()",
-                    Line: "1372"
+                    Line: "1371"
                 } ));
                 t.Fixture.DefaultValueOfNamedValuesEnumIsNull();
             },
             DefaultValueOfImportedNamedValuesEnumIsNull: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.TypeSystemTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "DefaultValueOfImportedNamedValuesEnumIsNull()",
-                    Line: "1379"
+                    Line: "1378"
                 } ));
                 t.Fixture.DefaultValueOfImportedNamedValuesEnumIsNull();
             }

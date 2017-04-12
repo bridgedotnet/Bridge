@@ -46,7 +46,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
         }
 
-        [Convention]
         public enum OverlayType_B
         {
             CIRCLE,

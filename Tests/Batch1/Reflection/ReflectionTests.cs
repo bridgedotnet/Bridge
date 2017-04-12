@@ -180,7 +180,6 @@ namespace Bridge.ClientTest.Reflection
 
         public class C11
         {
-            [Convention]
             public DateTime D;
 
             [Reflectable]
@@ -201,16 +200,12 @@ namespace Bridge.ClientTest.Reflection
 
         public class C13
         {
-            [Convention]
             public Action addedE3Handler;
 
-            [Convention]
             public Action removedE3Handler;
 
-            [Convention]
             public static Action addedE4Handler;
 
-            [Convention]
             public static Action removedE4Handler;
 
             [Reflectable]
@@ -238,10 +233,8 @@ namespace Bridge.ClientTest.Reflection
 
         public class C14
         {
-            [Convention]
             public int p13Field;
 
-            [Convention]
             public static int p14Field;
 
             [Reflectable]
@@ -330,10 +323,8 @@ namespace Bridge.ClientTest.Reflection
         [Constructor("{ }")]
         public class C19
         {
-            [Convention]
             public int A;
 
-            [Convention]
             public string B;
 
             [Reflectable]
@@ -344,10 +335,8 @@ namespace Bridge.ClientTest.Reflection
 
         public class C20
         {
-            [Convention]
             public int A;
 
-            [Convention]
             public string B;
 
             [Reflectable, Template("{ A: {a}, B: {b} }")]
@@ -358,7 +347,6 @@ namespace Bridge.ClientTest.Reflection
 
         public class C21
         {
-            [Convention]
             public int X;
 
             public C21(int x)
@@ -442,13 +430,10 @@ namespace Bridge.ClientTest.Reflection
 
         public class C24
         {
-            [Convention]
             public int x;
 
-            [Convention]
             public string s;
 
-            [Convention]
             public string v;
 
             [Reflectable]

@@ -79,7 +79,6 @@ namespace Bridge.ClientTest.Batch4.Reflection
 
         public class BS
         {
-            [Convention]
             public int X;
 
             public BS(int x)

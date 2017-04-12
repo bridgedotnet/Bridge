@@ -12,7 +12,6 @@ namespace Bridge.ClientTest.Batch4.Serialization
         //[Serializable]
         private class TestClass1
         {
-            [Convention]
             public int i;
         }
 
@@ -20,10 +19,8 @@ namespace Bridge.ClientTest.Batch4.Serialization
         //[Serializable]
         private class TestClass2
         {
-            [Convention]
             public int i;
 
-            [Convention]
             public string s;
         }
 

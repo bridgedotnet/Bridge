@@ -15,17 +15,14 @@ namespace Bridge.ClientTest.Batch4
                 P = 42;
             }
 
-            [Convention]
             public int i;
 
-            [Convention]
             public int P
             {
                 get;
                 set;
             }
 
-            [Convention]
             public int P2
             {
                 get
@@ -34,7 +31,6 @@ namespace Bridge.ClientTest.Batch4
                 }
             }
 
-            [Convention]
             public int P3
             {
                 set
@@ -42,7 +38,6 @@ namespace Bridge.ClientTest.Batch4
                 }
             }
 
-            //[Convention]
             public event EventHandler Evt;
 
             public void Raise()
@@ -51,29 +46,24 @@ namespace Bridge.ClientTest.Batch4
                     Evt(this, null);
             }
 
-            [Convention]
             public void InstanceMethod()
             {
             }
 
-            [Convention]
             public static void StaticMethod()
             {
             }
 
-            [Convention]
             public int F1()
             {
                 return 42;
             }
 
-            [Convention]
             public int F2(int i)
             {
                 return i + 10;
             }
 
-            [Convention]
             public int F3(int i, int j)
             {
                 return i + j;

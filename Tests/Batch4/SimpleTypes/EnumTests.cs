@@ -8,7 +8,6 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
     [TestFixture(TestNameFormat = "EnumTests - {0}")]
     public class EnumTests
     {
-        [Convention]
         public enum TestEnum
         {
             FirstValue,
@@ -16,7 +15,6 @@ namespace Bridge.ClientTest.Batch4.SimpleTypes
             ThirdValue
         }
 
-        [Convention]
         [Flags]
         public enum FlagsEnum
         {
