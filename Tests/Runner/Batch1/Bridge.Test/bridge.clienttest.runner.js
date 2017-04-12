@@ -429,7 +429,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("Convention.AssemblyAttribute - NotationTypeTest", Bridge.Test.Runtime.BridgeClientTestRunner.AssemblyAttributeTests.NotationTypeTest);
             QUnit.test("Convention.AssemblyAttribute - NotationTypeClassOverrideTest", Bridge.Test.Runtime.BridgeClientTestRunner.AssemblyAttributeTests.NotationTypeClassOverrideTest);
             QUnit.test("Convention.AssemblyAttribute - NotationTypeMemberOverrideTest", Bridge.Test.Runtime.BridgeClientTestRunner.AssemblyAttributeTests.NotationTypeMemberOverrideTest);
-            QUnit.test("Convention.AssemblyAttribute - NotattionAccessibilityTest", Bridge.Test.Runtime.BridgeClientTestRunner.AssemblyAttributeTests.NotattionAccessibilityTest);
+            QUnit.test("Convention.AssemblyAttribute - NotationAccessibilityTest", Bridge.Test.Runtime.BridgeClientTestRunner.AssemblyAttributeTests.NotationAccessibilityTest);
             QUnit.test("Convention.ClassAttribute - AllTest", Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests.AllTest);
             QUnit.test("Convention.ClassAttribute - MembersTest", Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests.MembersTest);
             QUnit.test("Convention.ClassAttribute - ObjectLiteralTest", Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests.ObjectLiteralTest);
@@ -437,6 +437,15 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("Convention.ClassAttribute - InnerClassMemberTest", Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests.InnerClassMemberTest);
             QUnit.test("Convention.ClassAttribute - ClassAttributeInheritanceTest", Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests.ClassAttributeInheritanceTest);
             QUnit.test("Convention.ClassAttribute - OverrideMemberTest", Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests.OverrideMemberTest);
+            QUnit.test("Convention.ClassAttribute - NestedClassTest", Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests.NestedClassTest);
+            QUnit.test("Convention.ClassAttribute - AccessibilityTest", Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests.AccessibilityTest);
+            QUnit.test("Convention.ClassAttribute - ConstMemberTest", Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests.ConstMemberTest);
+            QUnit.test("Convention.ClassAttribute - EventMemberTest", Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests.EventMemberTest);
+            QUnit.test("Convention.ClassAttribute - EnumItemMemberTest", Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests.EnumItemMemberTest);
+            QUnit.test("Convention.ClassAttribute - EnumTargetTest", Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests.EnumTargetTest);
+            QUnit.test("Convention.ClassAttribute - ExternalTargetTest", Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests.ExternalTargetTest);
+            QUnit.test("Convention.ClassAttribute - AnonymousTargetTest", Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests.AnonymousTargetTest);
+            QUnit.test("Convention.ClassAttribute - DelegateTargetTest", Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests.DelegateTargetTest);
             QUnit.module("Convert");
             QUnit.test("Convert.FromBase64 - Roundtrip1", Bridge.Test.Runtime.BridgeClientTestRunner.ConvertFromBase64Tests.Roundtrip1);
             QUnit.test("Convert.FromBase64 - Roundtrip2", Bridge.Test.Runtime.BridgeClientTestRunner.ConvertFromBase64Tests.Roundtrip2);
@@ -3793,12 +3802,12 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 } ));
                 Bridge.ClientTest.ConventionTests.Assembly.AssemblyAttributeTests.NotationTypeMemberOverrideTest();
             },
-            NotattionAccessibilityTest: function (assert) {
+            NotationAccessibilityTest: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConventionTests.Assembly.AssemblyAttributeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AssemblyAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
-                    Method: "NotattionAccessibilityTest()",
+                    Method: "NotationAccessibilityTest()",
                     Line: "125"
                 } ));
-                Bridge.ClientTest.ConventionTests.Assembly.AssemblyAttributeTests.NotattionAccessibilityTest();
+                Bridge.ClientTest.ConventionTests.Assembly.AssemblyAttributeTests.NotationAccessibilityTest();
             }
         },
         context: null,
@@ -5276,51 +5285,114 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             AllTest: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "AllTest()",
-                    Line: "105"
+                    Line: "344"
                 } ));
                 Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests.AllTest();
             },
             MembersTest: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "MembersTest()",
-                    Line: "118"
+                    Line: "357"
                 } ));
                 Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests.MembersTest();
             },
             ObjectLiteralTest: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "ObjectLiteralTest()",
-                    Line: "133"
+                    Line: "372"
                 } ));
                 Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests.ObjectLiteralTest();
             },
             InterfaceMemberTest: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "InterfaceMemberTest()",
-                    Line: "141"
+                    Line: "380"
                 } ));
                 Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests.InterfaceMemberTest();
             },
             InnerClassMemberTest: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "InnerClassMemberTest()",
-                    Line: "149"
+                    Line: "388"
                 } ));
                 Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests.InnerClassMemberTest();
             },
             ClassAttributeInheritanceTest: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "ClassAttributeInheritanceTest()",
-                    Line: "157"
+                    Line: "396"
                 } ));
                 Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests.ClassAttributeInheritanceTest();
             },
             OverrideMemberTest: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "OverrideMemberTest()",
-                    Line: "171"
+                    Line: "410"
                 } ));
                 Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests.OverrideMemberTest();
+            },
+            NestedClassTest: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "NestedClassTest()",
+                    Line: "422"
+                } ));
+                Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests.NestedClassTest();
+            },
+            AccessibilityTest: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "AccessibilityTest()",
+                    Line: "442"
+                } ));
+                Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests.AccessibilityTest();
+            },
+            ConstMemberTest: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "ConstMemberTest()",
+                    Line: "496"
+                } ));
+                Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests.ConstMemberTest();
+            },
+            EventMemberTest: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "EventMemberTest()",
+                    Line: "506"
+                } ));
+                Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests.EventMemberTest();
+            },
+            EnumItemMemberTest: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "EnumItemMemberTest()",
+                    Line: "532"
+                } ));
+                Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests.EnumItemMemberTest();
+            },
+            EnumTargetTest: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "EnumTargetTest()",
+                    Line: "547"
+                } ));
+                Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests.EnumTargetTest();
+            },
+            ExternalTargetTest: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "ExternalTargetTest()",
+                    Line: "564"
+                } ));
+                Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests.ExternalTargetTest();
+            },
+            AnonymousTargetTest: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "AnonymousTargetTest()",
+                    Line: "575"
+                } ));
+                Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests.AnonymousTargetTest();
+            },
+            DelegateTargetTest: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "DelegateTargetTest()",
+                    Line: "591"
+                } ));
+                Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests.DelegateTargetTest();
             }
         },
         context: null,

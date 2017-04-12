@@ -123,7 +123,7 @@ namespace Bridge.ClientTest.ConventionTests.Assembly
         }
 
         [Test]
-        public static void NotattionAccessibilityTest()
+        public static void NotationAccessibilityTest()
         {
             var c2 = new Holder2.Class2();
 
