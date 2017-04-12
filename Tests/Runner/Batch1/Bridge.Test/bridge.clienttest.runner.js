@@ -3775,28 +3775,28 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             NotationTypeTest: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConventionTests.Assembly.AssemblyAttributeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AssemblyAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "NotationTypeTest()",
-                    Line: "82"
+                    Line: "83"
                 } ));
                 Bridge.ClientTest.ConventionTests.Assembly.AssemblyAttributeTests.NotationTypeTest();
             },
             NotationTypeClassOverrideTest: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConventionTests.Assembly.AssemblyAttributeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AssemblyAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "NotationTypeClassOverrideTest()",
-                    Line: "97"
+                    Line: "98"
                 } ));
                 Bridge.ClientTest.ConventionTests.Assembly.AssemblyAttributeTests.NotationTypeClassOverrideTest();
             },
             NotationTypeMemberOverrideTest: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConventionTests.Assembly.AssemblyAttributeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AssemblyAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "NotationTypeMemberOverrideTest()",
-                    Line: "112"
+                    Line: "113"
                 } ));
                 Bridge.ClientTest.ConventionTests.Assembly.AssemblyAttributeTests.NotationTypeMemberOverrideTest();
             },
             NotattionAccessibilityTest: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConventionTests.Assembly.AssemblyAttributeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AssemblyAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "NotattionAccessibilityTest()",
-                    Line: "124"
+                    Line: "125"
                 } ));
                 Bridge.ClientTest.ConventionTests.Assembly.AssemblyAttributeTests.NotattionAccessibilityTest();
             }

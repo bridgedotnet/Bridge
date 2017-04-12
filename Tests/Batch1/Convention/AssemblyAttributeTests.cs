@@ -3,13 +3,14 @@ using System;
 using Bridge;
 using Bridge.Html5;
 
-[assembly:Convention(Filter = "Bridge.ClientTest.ConventionTests.Assembly.Holder1.*", Target = ConventionTarget.Class, Notation = Notation.UpperCase)]
+[assembly: Convention(Filter = "Bridge.ClientTest.ConventionTests.Assembly.Holder1.*", Target = ConventionTarget.Class, Notation = Notation.UpperCase)]
 [assembly: Convention(Filter = "Bridge.ClientTest.ConventionTests.Assembly.Holder1.*", Target = ConventionTarget.Member, Notation = Notation.LowerCase)]
 
 [assembly: Convention(Filter = "Bridge.ClientTest.ConventionTests.Assembly.Holder2.*", Target = ConventionTarget.Member, Accessibility = ConventionAccessibility.Public, Notation = Notation.None)]
 [assembly: Convention(Filter = "Bridge.ClientTest.ConventionTests.Assembly.Holder2.*", Target = ConventionTarget.Member, Accessibility = ConventionAccessibility.Protected, Notation = Notation.UpperCase)]
 [assembly: Convention(Filter = "Bridge.ClientTest.ConventionTests.Assembly.Holder2.*", Target = ConventionTarget.Member, Accessibility = ConventionAccessibility.Private, Notation = Notation.LowerCase)]
 [assembly: Convention(Filter = "Bridge.ClientTest.ConventionTests.Assembly.Holder2.*", Target = ConventionTarget.Member, Accessibility = ConventionAccessibility.ProtectedInternal, Notation = Notation.LowerCamelCase)]
+
 namespace Bridge.ClientTest.ConventionTests.Assembly
 {
     public class Holder1
