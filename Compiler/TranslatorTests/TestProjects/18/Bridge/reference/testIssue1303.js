@@ -2,14 +2,14 @@
         statics: {
             config: {
                 init: function () {
-                    Bridge.ready(this.notMain);
-                    Bridge.ready(this.main);
+                    Bridge.ready(this.NotMain);
+                    Bridge.ready(this.Main);
                 }
             },
-            notMain: function notMain() {
+            NotMain: function NotMain() {
                 //Should be in config.init
             },
-            main: function main() {
+            Main: function Main() {
                 //Should be in config.init
             }
         },
@@ -20,10 +20,10 @@
         statics: {
             config: {
                 init: function () {
-                    Bridge.ready(this.notMain);
+                    Bridge.ready(this.NotMain);
                 }
             },
-            notMain: function notMain() {
+            NotMain: function NotMain() {
                 //Should be in config.init
             }
         },
@@ -37,10 +37,10 @@
         statics: {
             config: {
                 init: function () {
-                    Bridge.ready(this.main);
+                    Bridge.ready(this.Main);
                 }
             },
-            main: function main() {
+            Main: function Main() {
                 //Should be in config.init
             }
         },

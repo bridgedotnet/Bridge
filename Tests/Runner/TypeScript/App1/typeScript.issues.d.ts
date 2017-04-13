@@ -11,7 +11,7 @@ declare module TypeScript.Issues {
     var N1060: N1060Func;
     module N1060 {
         export interface B$1<T> {
-            getC(): TypeScript.Issues.N1060.B$1.C<T>;
+            GetC(): TypeScript.Issues.N1060.B$1.C<T>;
         }
         export interface B$1Func extends Function {
             <T>($T: Bridge.TypeRef<T>): {
@@ -46,7 +46,7 @@ declare module TypeScript.Issues {
     var N2029: N2029Func;
 
     export interface N2493Operation3 {
-        add(n: number): number;
+        Add(n: number): number;
     }
     export interface N2493Operation3Func extends Function {
         prototype: N2493Operation3;
@@ -66,8 +66,8 @@ declare module TypeScript.Issues {
         export interface GamePlay extends TypeScript.Issues.N1640.IGamePlay {
             addOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
             removeOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
-            startGame(s: string): void;
-            subscribe(handler: {(sender: System.Object, e: string): void}): void;
+            StartGame(s: string): void;
+            Subscribe(handler: {(sender: System.Object, e: string): void}): void;
         }
         export interface GamePlayFunc extends Function {
             prototype: GamePlay;
@@ -79,8 +79,8 @@ declare module TypeScript.Issues {
             TypeScript$Issues$N1640$IGamePlay$removeOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
             addOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
             removeOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
-            TypeScript$Issues$N1640$IGamePlay$startGame(s: string): void;
-            startGame(s: string): void;
+            TypeScript$Issues$N1640$IGamePlay$StartGame(s: string): void;
+            StartGame(s: string): void;
         }
     }
 
@@ -114,7 +114,7 @@ declare module TypeScript.Issues {
     export interface N2463Func extends Function {
         prototype: N2463;
         new (): N2463;
-        do(dummy: {nothing: number}): {nothing: number};
+        Do(dummy: {nothing: number}): {nothing: number};
     }
     var N2463: N2463Func;
     module N2463 {
@@ -221,7 +221,7 @@ declare module TypeScript.Issues {
     export interface N2031DictionaryMap$2<T1,T2> {
         Forward: TypeScript.Issues.N2031DictionaryMap$2.Indexer$2<T1,T2,T1,T2>;
         Reverse: TypeScript.Issues.N2031DictionaryMap$2.Indexer$2<T1,T2,T2,T1>;
-        add(t1: T1, t2: T2): void;
+        Add(t1: T1, t2: T2): void;
     }
     export interface N2031DictionaryMap$2Func extends Function {
         <T1, T2>($T1: Bridge.TypeRef<T1>, $T2: Bridge.TypeRef<T2>): {
@@ -241,7 +241,7 @@ declare module TypeScript.Issues {
         export interface Indexer$2<T1,T2,T3,T4> {
             getItem(index: T3): T4;
             setItem(index: T3, value: T4): void;
-            containsKey(index: T3): boolean;
+            ContainsKey(index: T3): boolean;
         }
         export interface Indexer$2Func extends Function {
             <T1, T2, T3, T4>($T1: Bridge.TypeRef<T1>, $T2: Bridge.TypeRef<T2>, $T3: Bridge.TypeRef<T3>, $T4: Bridge.TypeRef<T4>): {

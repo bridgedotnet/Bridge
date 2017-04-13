@@ -1,5 +1,6 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
+using Bridge;
 
 [assembly: AssemblyTitle("Bridge.Transpiled")]
 [assembly: AssemblyProduct("Bridge.Transpiled")]

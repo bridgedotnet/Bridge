@@ -168,9 +168,9 @@ namespace Bridge.Translator
 
             foreach (var property in type.Properties)
             {
-                var name = property.Name;
+                var name = this.Emitter.GetEntityName(property);
 
-                this.Write(string.Format("this.{0} = {1};", name, name.ToLowerCamelCase()));
+                this.Write(string.Format("this.{0} = {1};", name, property.Name.ToLowerCamelCase()));
                 this.WriteNewLine();
             }
 
@@ -195,23 +195,6 @@ namespace Bridge.Translator
             }
         }
 
-        private void GenereateGetters(IAnonymousTypeConfig config)
-        {
-            foreach (var property in config.Type.Properties)
-            {
-                this.EnsureComma();
-                var lowerName = property.Name;
-                var name = property.Name;
-
-                this.Write(string.Format("get{0} : function () ", name));
-                this.BeginBlock();
-                this.Write(string.Format("return this.{0};", lowerName));
-                this.WriteNewLine();
-                this.EndBlock();
-                this.Emitter.Comma = true;
-            }
-        }
-
         private void GenereateEquals(IAnonymousTypeConfig config)
         {
             this.EnsureComma();
@@ -232,7 +215,7 @@ namespace Bridge.Translator
 
             foreach (var property in config.Type.Properties)
             {
-                var name = property.Name;
+                var name = this.Emitter.GetEntityName(property);
 
                 if (and)
                 {
@@ -269,7 +252,7 @@ namespace Bridge.Translator
 
             foreach (var property in config.Type.Properties)
             {
-                var name = property.Name;
+                var name = this.Emitter.GetEntityName(property);
                 this.Write(", this." + name);
             }
 
@@ -293,7 +276,7 @@ namespace Bridge.Translator
             foreach (var property in config.Type.Properties)
             {
                 this.EnsureComma();
-                var name = property.Name;
+                var name = this.Emitter.GetEntityName(property);
 
                 this.Write(string.Format("{0} : this.{0}", name));
                 this.Emitter.Comma = true;

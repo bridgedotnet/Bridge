@@ -2,27 +2,27 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     "use strict";
 
     Bridge.define("Classes.Animal", {
-        name: null,
+        Name: null,
         ctor: function () {
             this.$initialize();
-            this.name = "Animal";
+            this.Name = "Animal";
         },
         $ctor1: function (name) {
             this.$initialize();
-            this.name = name;
+            this.Name = name;
         },
-        getName: function () {
-            return this.name;
+        GetName: function () {
+            return this.Name;
         },
-        move: function () {
+        Move: function () {
             return 1;
         }
     });
 
     Bridge.define("Classes.MovePoint", {
         statics: {
-            move: function (p, dx, dy) {
-                return Classes.StaticClass.move(p.$clone(), dx, dy);
+            Move: function (p, dx, dy) {
+                return Classes.StaticClass.Move(p.$clone(), dx, dy);
             }
         },
         config: {
@@ -33,8 +33,8 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
                 this.Point = new Classes.Point();
             }
         },
-        move: function (dx, dy) {
-            this.Point = Classes.MovePoint.move(this.Point.$clone(), dx, dy);
+        Move: function (dx, dy) {
+            this.Point = Classes.MovePoint.Move(this.Point.$clone(), dx, dy);
         }
     });
 
@@ -43,38 +43,38 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         statics: {
             getDefaultValue: function () { return new Classes.Point(); }
         },
-        x: 0,
-        y: 0,
+        X: 0,
+        Y: 0,
         $ctor1: function (x, y) {
             this.$initialize();
-            this.x = x;
-            this.y = y;
+            this.X = x;
+            this.Y = y;
         },
         ctor: function () {
             this.$initialize();
         },
         getHashCode: function () {
-            var h = Bridge.addHash([1852403652, this.x, this.y]);
+            var h = Bridge.addHash([1852403652, this.X, this.Y]);
             return h;
         },
         equals: function (o) {
             if (!Bridge.is(o, Classes.Point)) {
                 return false;
             }
-            return Bridge.equals(this.x, o.x) && Bridge.equals(this.y, o.y);
+            return Bridge.equals(this.X, o.X) && Bridge.equals(this.Y, o.Y);
         },
         $clone: function (to) {
             var s = to || new Classes.Point();
-            s.x = this.x;
-            s.y = this.y;
+            s.X = this.X;
+            s.Y = this.Y;
             return s;
         }
     });
 
     Bridge.define("Classes.StaticClass", {
         statics: {
-            move: function (p, dx, dy) {
-                return new Classes.Point.$ctor1(((p.x + dx) | 0), ((p.y + dy) | 0));
+            Move: function (p, dx, dy) {
+                return new Classes.Point.$ctor1(((p.X + dx) | 0), ((p.Y + dy) | 0));
             }
         }
     });
@@ -85,20 +85,20 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
             this.$initialize();
             Classes.Animal.$ctor1.call(this, name);
         },
-        move$1: function () {
+        Move$1: function () {
             return 20;
         }
     });
 
     Bridge.define("Classes.Employee", {
         inherits: [Classes.Animal],
-        name$1: null,
-        id: 0,
+        Name$1: null,
+        Id: 0,
         ctor: function (name, id) {
             this.$initialize();
             Classes.Animal.$ctor1.call(this, name);
-            this.name$1 = name;
-            this.id = id;
+            this.Name$1 = name;
+            this.Id = id;
         }
     });
 
@@ -108,7 +108,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
             this.$initialize();
             Classes.Animal.$ctor1.call(this, name);
         },
-        move: function () {
+        Move: function () {
             return 5;
         }
     });

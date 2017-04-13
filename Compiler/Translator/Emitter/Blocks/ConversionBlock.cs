@@ -588,7 +588,7 @@ namespace Bridge.Translator
         {
             if (type.Kind == TypeKind.Enum && emitter.Validator.IsExternalType(type.GetDefinition()))
             {
-                var enumMode = emitter.Validator.EnumEmitMode(type);
+                var enumMode = Helpers.EnumEmitMode(type);
                 if (enumMode >= 3 && enumMode < 7 || enumMode == 2)
                 {
                     return false;

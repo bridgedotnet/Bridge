@@ -6,11 +6,6 @@ namespace Bridge.Contract
 {
     public interface IAssemblyInfo
     {
-        bool PreserveMemberCase
-        {
-            get; set;
-        }
-
         List<IPluginDependency> Dependencies
         {
             get; set;

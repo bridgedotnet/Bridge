@@ -7,7 +7,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                 Data: 0
             }
         },
-        preventDefault: function () {
+        PreventDefault: function () {
             this.Data = 77;
         }
     });
@@ -16,11 +16,11 @@ Bridge.assembly("TestProject", function ($asm, globals) {
         statics: {
             N475: function () {
                 var b = new Test.BridgeIssues.N475B.Bridge475();
-                b.keyDown($asm.$.Test.BridgeIssues.N475B.Test.f1);
+                b.KeyDown($asm.$.Test.BridgeIssues.N475B.Test.f1);
 
-                b.keyDown(4);
+                b.KeyDown(4);
 
-                b.keyDown("5");
+                b.KeyDown("5");
             }
         }
     });
@@ -29,7 +29,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
     Bridge.apply($asm.$.Test.BridgeIssues.N475B.Test, {
         f1: function (ev) {
-            ev.preventDefault();
+            ev.PreventDefault();
         }
     });
 });

@@ -502,5 +502,15 @@ namespace Bridge.Translator
         {
             get; set;
         }
+
+        public Dictionary<IAssembly, NameRule[]> AssemblyNameRuleCache
+        {
+            get;
+        }
+
+        public Dictionary<ITypeDefinition, NameRule[]> ClassNameRuleCache
+        {
+            get;
+        }
     }
 }

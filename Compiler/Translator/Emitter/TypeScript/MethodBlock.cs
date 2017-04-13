@@ -113,7 +113,7 @@ namespace Bridge.Translator.TypeScript
 
             foreach (var p in declarations)
             {
-                var name = this.Emitter.GetEntityName(p);
+                var name = this.Emitter.GetParameterName(p);
                 bool optional = p.DefaultExpression != null && !p.DefaultExpression.IsNull;
 
                 if (needComma)

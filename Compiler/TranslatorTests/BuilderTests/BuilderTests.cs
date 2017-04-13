@@ -69,11 +69,11 @@ namespace Bridge.Translator.Tests
 
                 TestArguments("#4 Lib",
                     "-lib \"folder a\\folderb\" -b \"folder\\Bridge.dll\" -cfg \"Release\" --platform \"AnyCPU\"",
-                    "Configuration:Release|Platform:AnyCPU",
+                    "AssemblyName:folderb|Configuration:Release|Platform:AnyCPU",
                     new BridgeOptions()
                     {
                         BridgeLocation = "folder\\Bridge.dll",
-                        DefaultFileName = "Bridge",
+                        DefaultFileName = "folderb",
                         ExtractCore = true,
                         Folder = Environment.CurrentDirectory,
                         Name = "",

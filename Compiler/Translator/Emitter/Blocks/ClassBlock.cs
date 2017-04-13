@@ -356,7 +356,7 @@ namespace Bridge.Translator
                 }
 
                 var etype = this.TypeInfo.Type.GetDefinition().EnumUnderlyingType;
-                var enumMode = this.Emitter.Validator.EnumEmitMode(this.TypeInfo.Type);
+                var enumMode = Helpers.EnumEmitMode(this.TypeInfo.Type);
                 var isString = enumMode >= 3 && enumMode <= 6;
                 if (isString)
                 {

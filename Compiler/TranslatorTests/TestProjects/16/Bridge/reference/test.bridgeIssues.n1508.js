@@ -3,16 +3,16 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
     Bridge.define("Test.BridgeIssues.N1508.App", {
         statics: {
-            upTo: function (value) {
+            UpTo: function (value) {
                 return System.Array.init([value], System.Int32);
             },
-            doIt: function () {
+            DoIt: function () {
                 var $t, $t1, $t2;
                 // Should create var $t, $t1, $t2;
                 for (var dimensionNActual = 0; dimensionNActual < 4; dimensionNActual = (dimensionNActual + 1) | 0) {
                     $t = (function () {
                         // $t should not be re-created with var
-                        $t1 = Bridge.getEnumerator(Test.BridgeIssues.N1508.App.upTo(dimensionNActual));
+                        $t1 = Bridge.getEnumerator(Test.BridgeIssues.N1508.App.UpTo(dimensionNActual));
                         try {
                             while ($t1.moveNext()) {
                                 $t2 = (function () {

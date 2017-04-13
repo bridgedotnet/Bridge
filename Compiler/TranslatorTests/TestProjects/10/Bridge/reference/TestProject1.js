@@ -29,7 +29,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
          * @param   {number}    i    Number of somethng
          * @return  {string}         A good string
          */
-        getMyValue: function (i) {
+        GetMyValue: function (i) {
             return "";
         }
     });

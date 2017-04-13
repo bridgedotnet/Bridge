@@ -2,7 +2,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
     Bridge.define("Test.BridgeIssues.N2318.N2318", {
-        shouldBox: function () {
+        ShouldBox: function () {
             var o;
 
             var box1 = Test.BridgeIssues.N2318.N2318.JustEnum.Value;
@@ -32,7 +32,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             o = Bridge.box(box11, System.UInt16);
             o = Bridge.box(box12, System.UInt32);
         },
-        shouldNotBox: function () {
+        ShouldNotBox: function () {
             var o;
 
             var box1 = new Test.BridgeIssues.N2318.N2318.JustStruct();
@@ -53,7 +53,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             var s2 = System.String.concat(s1, s1);
             var s3 = System.String.concat(s1, 2);
         },
-        shouldUnbox: function () {
+        ShouldUnbox: function () {
             var objectArray = System.Array.init([Bridge.box(1, System.Int32)], System.Object);
             var objectList = new (System.Collections.Generic.List$1(System.Object))(System.Array.init([Bridge.box(1, System.Int32)], System.Object));
 

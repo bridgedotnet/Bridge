@@ -1,6 +1,7 @@
     Bridge.define('System.Collections.Generic.List$1', function (T) {
         return {
-            inherits: [System.Collections.Generic.IList$1(T), System.Collections.IList],
+            inherits: [System.Collections.Generic.IList$1(T), System.Collections.IList,
+                System.Collections.Generic.IReadOnlyCollection$1(T), System.Collections.Generic.IReadOnlyList$1(T)],
 
             config: {
                 properties: {

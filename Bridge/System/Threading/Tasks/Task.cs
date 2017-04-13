@@ -11,7 +11,7 @@ namespace System.Threading.Tasks
 
         public extern Task(Action<object> action, object state);
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern AggregateException Exception { get; }
 
         public extern bool IsCanceled
@@ -32,7 +32,7 @@ namespace System.Threading.Tasks
             get;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern TaskStatus Status
         {
             get;

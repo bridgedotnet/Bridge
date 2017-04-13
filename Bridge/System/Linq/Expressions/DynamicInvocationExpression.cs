@@ -8,7 +8,7 @@ namespace System.Linq.Expressions
     [Cast("{this}.ntype == 50 && {this}.dtype === 1")]
     public sealed class DynamicInvocationExpression : DynamicExpression
     {
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern ReadOnlyCollection<Expression> Arguments { get; private set; }
 
         internal extern DynamicInvocationExpression();

@@ -5,6 +5,7 @@ namespace System.Collections
 {
     [External]
     [Unbox(true)]
+    [Convention(Target = ConventionTarget.Member, Member = ConventionMember.Method, Notation = Notation.LowerCamelCase)]
     public interface IDictionary : ICollection, IEnumerable, IBridgeClass
     {
         [AccessorsIndexer]

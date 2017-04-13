@@ -5,7 +5,7 @@
                 // like doSomething: function doSomething() { }
                 return "Static";
             },
-            doSomethingStatic: function doSomethingStatic() {
+            DoSomethingStatic: function DoSomethingStatic() {
                 // Should use named function expressions
                 // like doSomething: function doSomething() { }
             }
@@ -15,7 +15,7 @@
             // like doSomething: function doSomething() { }
             return "Instance";
         },
-        doSomethingInstance: function doSomethingInstance() {
+        DoSomethingInstance: function DoSomethingInstance() {
             // Should use named function expressions
             // like doSomething: function doSomething() { }
         }

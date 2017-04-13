@@ -5,7 +5,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     Bridge.define("Test.BridgeIssues.N856.Bridge856", {
         statics: {
             
-            test1: function () {
+            Test1: function () {
             }
         },
         config: {
@@ -15,7 +15,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             }
         },
         
-        test2: function (a) {
+        Test2: function (a) {
             if (a === void 0) { a = null; }
 
         }

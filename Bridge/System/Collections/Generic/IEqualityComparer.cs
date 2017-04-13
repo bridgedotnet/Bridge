@@ -3,6 +3,7 @@ using Bridge;
 namespace System.Collections.Generic
 {
     [External]
+    [Convention(Target = ConventionTarget.Member, Member = ConventionMember.Method, Notation = Notation.LowerCamelCase)]
     public interface IEqualityComparer<in T> : IBridgeClass
     {
         [Name("equals2")]

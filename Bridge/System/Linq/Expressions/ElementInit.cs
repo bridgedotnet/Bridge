@@ -8,10 +8,10 @@ namespace System.Linq.Expressions
     [Name("System.Object")]
     public sealed class ElementInit
     {
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern MethodInfo AddMethod { get; private set; }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern ReadOnlyCollection<Expression> Arguments { get; private set; }
 
         internal extern ElementInit();

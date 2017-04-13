@@ -1,5 +1,5 @@
     Bridge.define("TestIssue960.Example", {
-        getName: function getName(x) {
+        GetName: function GetName(x) {
             return x.TestIssue960$IHaveNamed$Name;
         }
     });
@@ -12,13 +12,13 @@
         statics: {
             config: {
                 init: function () {
-                    Bridge.ready(this.go);
+                    Bridge.ready(this.Go);
                 }
             },
-            go: function go() {
+            Go: function Go() {
                 var x = new TestIssue960.Named("Test");
                 // Should not contain generic type parameter
-                Bridge.Console.log(new TestIssue960.Example().getName(x));
+                Bridge.Console.log(new TestIssue960.Example().GetName(x));
             }
         },
         $entryPoint: true

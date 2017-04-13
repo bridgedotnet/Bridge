@@ -53,16 +53,10 @@ namespace Bridge.Translator
         {
             var resolveResult = this.Emitter.Resolver.ResolveNode(namedExpression, this.Emitter);
 
-            if (!this.Emitter.AssemblyInfo.PreserveMemberCase)
-            {
-                name = Object.Net.Utilities.StringUtils.ToLowerCamelCase(name);
-            }
-
             if (resolveResult is MemberResolveResult)
             {
                 var member = ((MemberResolveResult)resolveResult).Member;
-                var preserveCase = !this.Emitter.IsNativeMember(member.FullName) && this.Emitter.AssemblyInfo.PreserveMemberCase;
-                name = this.Emitter.GetEntityName(member, preserveCase);
+                name = this.Emitter.GetEntityName(member);
 
                 bool isSet = this.IsSet ?? !(expression is ArrayInitializerExpression);
                 if (member is IProperty)

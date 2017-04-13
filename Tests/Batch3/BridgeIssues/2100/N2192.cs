@@ -14,7 +14,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             var person = new Person(name);
             var loggable = new Loggable(id);
 
-            //@ person.log = loggable.log;
+            //@ person.Log = loggable.Log;
             //@ person.id = loggable.id;
 
             return person;

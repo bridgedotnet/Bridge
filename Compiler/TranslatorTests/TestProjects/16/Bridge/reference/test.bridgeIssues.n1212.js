@@ -2,7 +2,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
     Bridge.define("Test.BridgeIssues.N1212.TestIncrementDecrement", {
-        testDouble: function () {
+        TestDouble: function () {
             var v = 0;
             v++;
             v--;
@@ -15,7 +15,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             var v3 = ++v;
             var v4 = --v;
         },
-        testDecimal: function () {
+        TestDecimal: function () {
             var $t;
             var v = System.Decimal(0);
             v = v.inc();
@@ -29,7 +29,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             var v3 = (v = v.inc());
             var v4 = (v = v.dec());
         },
-        testSingle: function () {
+        TestSingle: function () {
             var v = 0;
             v++;
             v--;
@@ -42,7 +42,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             var v3 = ++v;
             var v4 = --v;
         },
-        testLong: function () {
+        TestLong: function () {
             var $t;
             var v = System.Int64(0);
             v = v.inc();

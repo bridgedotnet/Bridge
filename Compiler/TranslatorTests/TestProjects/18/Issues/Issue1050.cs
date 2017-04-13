@@ -9,13 +9,13 @@ namespace TestIssue1050
 
         public void Main1()
         {
-            // Should be TestIssue1050.App.something = 1;
+            // Should be TestIssue1050.App.Field = 1;
             App.Field = 1;
 
-            // Should be TestIssue1050.App.setProperty(2);
+            // Should be TestIssue1050.App.Property = 2;
             App.Property = 2;
 
-            // Should be TestIssue1050.App.method();
+            // Should be TestIssue1050.App.Method();
             App.Method();
         }
     }

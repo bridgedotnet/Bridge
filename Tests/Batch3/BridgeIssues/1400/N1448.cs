@@ -36,7 +36,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             var plainee = Plainer.ToPlainObject(a);
 
             Assert.NotNull(plainee, "plainee not null");
-            Assert.NotNull(plainee["data"], "plainee has data");
+            Assert.NotNull(plainee["Data"], "plainee has data");
             Assert.AreEqual(5, plainee.Data, "plainee.Data == 5");
             Assert.Null(plainee["getHashCode"], "plainee has no getHashCode");
             Assert.Null(plainee["toJSON"], "plainee has no toJSON");
@@ -47,8 +47,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test(ExpectedCount = 7)]
         public static void TestObjectLiteralProperty()
         {
-            var a = new A() { Data = 5 };
-
             var l = new Literal() { V = new { Data = 5 } };
 
             var plainee = l.V;

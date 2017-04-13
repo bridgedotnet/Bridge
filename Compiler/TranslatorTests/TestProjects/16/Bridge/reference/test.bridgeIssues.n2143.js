@@ -2,7 +2,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
     Bridge.define("Test.BridgeIssues.N2143.Level1$1", {
-        doSomething1: function (p) {
+        DoSomething1: function (p) {
             // Should not contain generic parameter in function
         }
     });
