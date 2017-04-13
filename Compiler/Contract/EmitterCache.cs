@@ -13,16 +13,36 @@ namespace Bridge.Contract
             this.Nodes = new Dictionary<Tuple<AstNode, bool>, OverloadsCollection>();
         }
 
-        public Dictionary<Tuple<AstNode, bool>, OverloadsCollection> Nodes
+        private Dictionary<Tuple<AstNode, bool>, OverloadsCollection> Nodes
         {
             get;
-            private set;
+            set;
         }
 
-        public Dictionary<Tuple<IMember, bool, bool>, OverloadsCollection> Members
+        private Dictionary<Tuple<IMember, bool, bool>, OverloadsCollection> Members
         {
             get;
-            private set;
+            set;
+        }
+
+        public void AddNode(AstNode astNode, bool isSetter, OverloadsCollection overloads)
+        {
+            this.Nodes[Tuple.Create(astNode, isSetter)] = overloads;
+        }
+
+        public bool TryGetNode(AstNode astNode, bool isSetter, out OverloadsCollection overloads)
+        {
+            return this.Nodes.TryGetValue(Tuple.Create(astNode, isSetter), out overloads);
+        }
+
+        public void AddMember(IMember member, bool isSetter, bool includeInline, OverloadsCollection overloads)
+        {
+            this.Members[Tuple.Create(member, isSetter, includeInline)] = overloads;
+        }
+
+        public bool TryGetMember(IMember member, bool isSetter, bool includeInline, out OverloadsCollection overloads)
+        {
+            return this.Members.TryGetValue(Tuple.Create(member, isSetter, includeInline), out overloads);
         }
     }
 }
