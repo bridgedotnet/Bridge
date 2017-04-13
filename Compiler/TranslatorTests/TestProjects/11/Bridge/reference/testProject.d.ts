@@ -1,7 +1,7 @@
 /// <reference path="./bridge.d.ts" />
 
 interface Operation {
-    add(a: number, b: number): number;
+    Add(a: number, b: number): number;
 }
 interface OperationFunc extends Function {
     prototype: Operation;
@@ -10,7 +10,7 @@ interface OperationFunc extends Function {
 declare var Operation: OperationFunc;
 
 interface o2 {
-    add(a: number, b: number): number;
+    Add(a: number, b: number): number;
 }
 interface o2Func extends Function {
     prototype: o2;

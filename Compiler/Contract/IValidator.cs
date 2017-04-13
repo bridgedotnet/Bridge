@@ -27,10 +27,6 @@ namespace Bridge.Contract
 
         void CheckType(Mono.Cecil.TypeDefinition type, ITranslator translator);
 
-        int EnumEmitMode(ICSharpCode.NRefactory.TypeSystem.Implementation.DefaultResolvedTypeDefinition type);
-
-        int EnumEmitMode(ICSharpCode.NRefactory.TypeSystem.IType type);
-
         ICSharpCode.NRefactory.TypeSystem.IAttribute GetAttribute(System.Collections.Generic.IEnumerable<ICSharpCode.NRefactory.TypeSystem.IAttribute> attributes, string name);
 
         Mono.Cecil.CustomAttribute GetAttribute(System.Collections.Generic.IEnumerable<Mono.Cecil.CustomAttribute> attributes, string name);
@@ -69,15 +65,9 @@ namespace Bridge.Contract
 
         bool IsInlineMethod(Mono.Cecil.MethodDefinition method);
 
-        bool IsNameEnum(IType type);
-
         bool IsObjectLiteral(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition type);
 
         bool IsObjectLiteral(Mono.Cecil.TypeDefinition type);
-
-        bool IsStringNameEnum(IType type);
-
-        bool IsValueEnum(IType type);
 
         bool IsAccessorsIndexer(IEntity enity);
 

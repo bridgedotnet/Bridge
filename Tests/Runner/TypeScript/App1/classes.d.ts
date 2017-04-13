@@ -2,8 +2,8 @@
 
 declare module Classes {
     export interface Animal {
-        getName(): string;
-        move(): number;
+        GetName(): string;
+        Move(): number;
     }
     export interface AnimalFunc extends Function {
         prototype: Animal;
@@ -19,18 +19,18 @@ declare module Classes {
 
     export interface MovePoint {
         Point: Classes.Point;
-        move(dx: number, dy: number): void;
+        Move(dx: number, dy: number): void;
     }
     export interface MovePointFunc extends Function {
         prototype: MovePoint;
         new (): MovePoint;
-        move(p: Classes.Point, dx: number, dy: number): Classes.Point;
+        Move(p: Classes.Point, dx: number, dy: number): Classes.Point;
     }
     var MovePoint: MovePointFunc;
 
     export interface Point {
-        x: number;
-        y: number;
+        X: number;
+        Y: number;
         getHashCode(): Classes.Point;
         equals(o: Classes.Point): Boolean;
         $clone(to: Classes.Point): Classes.Point;
@@ -52,12 +52,12 @@ declare module Classes {
     export interface StaticClassFunc extends Function {
         prototype: StaticClass;
         new (): StaticClass;
-        move(p: Classes.Point, dx: number, dy: number): Classes.Point;
+        Move(p: Classes.Point, dx: number, dy: number): Classes.Point;
     }
     var StaticClass: StaticClassFunc;
 
     export interface Snake extends Classes.Animal {
-        move(): number;
+        Move(): number;
     }
     export interface SnakeFunc extends Function {
         prototype: Snake;
@@ -74,7 +74,7 @@ declare module Classes {
     var Employee: EmployeeFunc;
 
     export interface Dog extends Classes.Animal {
-        move$1(): number;
+        Move$1(): number;
     }
     export interface DogFunc extends Function {
         prototype: Dog;

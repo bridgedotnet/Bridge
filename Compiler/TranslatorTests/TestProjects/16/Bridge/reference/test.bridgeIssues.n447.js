@@ -3,13 +3,13 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
     Bridge.define("Test.BridgeIssues.N447.Math447", {
         statics: {
-            getSum$1: function (a, b) {
+            GetSum$1: function (a, b) {
                 return ((a + b) | 0);
             },
-            getSum$2: function (a, b) {
+            GetSum$2: function (a, b) {
                 return System.String.concat(a, b);
             },
-            getSum: function (a, b) {
+            GetSum: function (a, b) {
                 return a.add(b);
             }
         }
@@ -20,15 +20,15 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             Five: 5,
             Another: "Another",
             Ten: System.Decimal(10.0),
-            checkInlineExpression: function () {
+            CheckInlineExpression: function () {
                 var s = "AnotherSome";
                 var i = 20;
                 var d = System.Decimal(10.5);
             },
-            checkInlineCalls: function () {
-                var s = Test.BridgeIssues.N447.Math447.getSum$2(Test.BridgeIssues.N447.N447.Another, "Some");
-                var i = Test.BridgeIssues.N447.Math447.getSum$1(Test.BridgeIssues.N447.N447.Five, 15);
-                var d = Test.BridgeIssues.N447.Math447.getSum(Test.BridgeIssues.N447.N447.Ten, System.Decimal(0.5));
+            CheckInlineCalls: function () {
+                var s = Test.BridgeIssues.N447.Math447.GetSum$2(Test.BridgeIssues.N447.N447.Another, "Some");
+                var i = Test.BridgeIssues.N447.Math447.GetSum$1(Test.BridgeIssues.N447.N447.Five, 15);
+                var d = Test.BridgeIssues.N447.Math447.GetSum(Test.BridgeIssues.N447.N447.Ten, System.Decimal(0.5));
             }
         }
     });

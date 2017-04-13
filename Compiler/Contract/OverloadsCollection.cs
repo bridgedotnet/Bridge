@@ -16,10 +16,11 @@ namespace Bridge.Contract
     {
         public static OverloadsCollection Create(IEmitter emitter, FieldDeclaration fieldDeclaration)
         {
-            var key = new Tuple<AstNode, bool>(fieldDeclaration, false);
-            if (emitter.OverloadsCacheNodes.ContainsKey(key))
+            OverloadsCollection collection;
+
+            if (emitter.Cache.TryGetNode(fieldDeclaration, false, out collection))
             {
-                return emitter.OverloadsCacheNodes[key];
+                return collection;
             }
 
             return new OverloadsCollection(emitter, fieldDeclaration);
@@ -27,10 +28,11 @@ namespace Bridge.Contract
 
         public static OverloadsCollection Create(IEmitter emitter, EventDeclaration eventDeclaration)
         {
-            var key = new Tuple<AstNode, bool>(eventDeclaration, false);
-            if (emitter.OverloadsCacheNodes.ContainsKey(key))
+            OverloadsCollection collection;
+
+            if (emitter.Cache.TryGetNode(eventDeclaration, false, out collection))
             {
-                return emitter.OverloadsCacheNodes[key];
+                return collection;
             }
 
             return new OverloadsCollection(emitter, eventDeclaration);
@@ -38,10 +40,11 @@ namespace Bridge.Contract
 
         public static OverloadsCollection Create(IEmitter emitter, CustomEventDeclaration eventDeclaration, bool remove)
         {
-            var key = new Tuple<AstNode, bool>(eventDeclaration, remove);
-            if (emitter.OverloadsCacheNodes.ContainsKey(key))
+            OverloadsCollection collection;
+
+            if (emitter.Cache.TryGetNode(eventDeclaration, remove, out collection))
             {
-                return emitter.OverloadsCacheNodes[key];
+                return collection;
             }
 
             return new OverloadsCollection(emitter, eventDeclaration, remove);
@@ -49,10 +52,11 @@ namespace Bridge.Contract
 
         public static OverloadsCollection Create(IEmitter emitter, MethodDeclaration methodDeclaration)
         {
-            var key = new Tuple<AstNode, bool>(methodDeclaration, false);
-            if (emitter.OverloadsCacheNodes.ContainsKey(key))
+            OverloadsCollection collection;
+
+            if (emitter.Cache.TryGetNode(methodDeclaration, false, out collection))
             {
-                return emitter.OverloadsCacheNodes[key];
+                return collection;
             }
 
             return new OverloadsCollection(emitter, methodDeclaration);
@@ -60,10 +64,11 @@ namespace Bridge.Contract
 
         public static OverloadsCollection Create(IEmitter emitter, ConstructorDeclaration constructorDeclaration)
         {
-            var key = new Tuple<AstNode, bool>(constructorDeclaration, false);
-            if (emitter.OverloadsCacheNodes.ContainsKey(key))
+            OverloadsCollection collection;
+
+            if (emitter.Cache.TryGetNode(constructorDeclaration, false, out collection))
             {
-                return emitter.OverloadsCacheNodes[key];
+                return collection;
             }
 
             return new OverloadsCollection(emitter, constructorDeclaration);
@@ -71,10 +76,11 @@ namespace Bridge.Contract
 
         public static OverloadsCollection Create(IEmitter emitter, PropertyDeclaration propDeclaration, bool isSetter = false, bool isField = false)
         {
-            var key = new Tuple<AstNode, bool>(propDeclaration, isSetter);
-            if (!isField && emitter.OverloadsCacheNodes.ContainsKey(key))
+            OverloadsCollection collection;
+
+            if (emitter.Cache.TryGetNode(propDeclaration, isSetter, out collection))
             {
-                return emitter.OverloadsCacheNodes[key];
+                return collection;
             }
 
             return new OverloadsCollection(emitter, propDeclaration, isSetter, isField);
@@ -82,10 +88,11 @@ namespace Bridge.Contract
 
         public static OverloadsCollection Create(IEmitter emitter, IndexerDeclaration indexerDeclaration, bool isSetter = false)
         {
-            var key = new Tuple<AstNode, bool>(indexerDeclaration, isSetter);
-            if (emitter.OverloadsCacheNodes.ContainsKey(key))
+            OverloadsCollection collection;
+
+            if (emitter.Cache.TryGetNode(indexerDeclaration, isSetter, out collection))
             {
-                return emitter.OverloadsCacheNodes[key];
+                return collection;
             }
 
             return new OverloadsCollection(emitter, indexerDeclaration, isSetter);
@@ -93,10 +100,11 @@ namespace Bridge.Contract
 
         public static OverloadsCollection Create(IEmitter emitter, OperatorDeclaration operatorDeclaration)
         {
-            var key = new Tuple<AstNode, bool>(operatorDeclaration, false);
-            if (emitter.OverloadsCacheNodes.ContainsKey(key))
+            OverloadsCollection collection;
+
+            if (emitter.Cache.TryGetNode(operatorDeclaration, false, out collection))
             {
-                return emitter.OverloadsCacheNodes[key];
+                return collection;
             }
 
             return new OverloadsCollection(emitter, operatorDeclaration);
@@ -104,11 +112,11 @@ namespace Bridge.Contract
 
         public static OverloadsCollection Create(IEmitter emitter, IMember member, bool isSetter = false, bool includeInline = false)
         {
-            var key = new Tuple<IMember, bool, bool>(member, isSetter, includeInline);
+            OverloadsCollection collection;
 
-            if (emitter.OverloadsCacheMembers.ContainsKey(key))
+            if (emitter.Cache.TryGetMember(member, isSetter, includeInline, out collection))
             {
-                return emitter.OverloadsCacheMembers[key];
+                return collection;
             }
 
             return new OverloadsCollection(emitter, member, isSetter, includeInline);
@@ -180,12 +188,6 @@ namespace Bridge.Contract
             private set;
         }
 
-        public bool CancelChangeCase
-        {
-            get;
-            set;
-        }
-
         public bool IsSetter
         {
             get;
@@ -207,33 +209,29 @@ namespace Bridge.Contract
         private OverloadsCollection(IEmitter emitter, FieldDeclaration fieldDeclaration)
         {
             this.Emitter = emitter;
-            this.CancelChangeCase = false;
             this.Name = emitter.GetFieldName(fieldDeclaration);
-            this.JsName = this.Emitter.GetEntityName(fieldDeclaration, false, true);
+            this.JsName = this.Emitter.GetEntityName(fieldDeclaration);
             this.Inherit = !fieldDeclaration.HasModifier(Modifiers.Static);
             this.Static = fieldDeclaration.HasModifier(Modifiers.Static);
             this.Member = this.FindMember(fieldDeclaration);
             this.TypeDefinition = this.Member.DeclaringTypeDefinition;
             this.Type = this.Member.DeclaringType;
             this.InitMembers();
-            this.Emitter.OverloadsCacheNodes[new Tuple<AstNode, bool>(fieldDeclaration, false)] = this;
-
-            this.SetCaseFromNameAttr();
+            this.Emitter.Cache.AddNode(fieldDeclaration, false, this);
         }
 
         private OverloadsCollection(IEmitter emitter, EventDeclaration eventDeclaration)
         {
             this.Emitter = emitter;
             this.Name = emitter.GetEventName(eventDeclaration);
-            this.JsName = this.Emitter.GetEntityName(eventDeclaration, false, true);
+            this.JsName = this.Emitter.GetEntityName(eventDeclaration);
             this.Inherit = !eventDeclaration.HasModifier(Modifiers.Static);
             this.Static = eventDeclaration.HasModifier(Modifiers.Static);
-            this.CancelChangeCase = true;
             this.Member = this.FindMember(eventDeclaration);
             this.TypeDefinition = this.Member.DeclaringTypeDefinition;
             this.Type = this.Member.DeclaringType;
             this.InitMembers();
-            this.Emitter.OverloadsCacheNodes[new Tuple<AstNode, bool>(eventDeclaration, false)] = this;
+            this.Emitter.Cache.AddNode(eventDeclaration, false, this);
         }
 
         private OverloadsCollection(IEmitter emitter, CustomEventDeclaration eventDeclaration, bool remove)
@@ -244,7 +242,6 @@ namespace Bridge.Contract
             this.AltJsName = Helpers.GetEventRef(eventDeclaration, emitter, !remove, true);
             this.FieldJsName = emitter.GetEntityName(eventDeclaration);
             this.Inherit = !eventDeclaration.HasModifier(Modifiers.Static);
-            this.CancelChangeCase = true;
             this.IsSetter = remove;
             this.Static = eventDeclaration.HasModifier(Modifiers.Static);
             this.Member = this.FindMember(eventDeclaration);
@@ -252,28 +249,28 @@ namespace Bridge.Contract
             this.TypeDefinition = this.Member.DeclaringTypeDefinition;
             this.Type = this.Member.DeclaringType;
             this.InitMembers();
-            this.Emitter.OverloadsCacheNodes[new Tuple<AstNode, bool>(eventDeclaration, remove)] = this;
+            this.Emitter.Cache.AddNode(eventDeclaration, remove, this);
         }
 
         private OverloadsCollection(IEmitter emitter, MethodDeclaration methodDeclaration)
         {
             this.Emitter = emitter;
             this.Name = methodDeclaration.Name;
-            this.JsName = this.Emitter.GetEntityName(methodDeclaration, false, true);
+            this.JsName = this.Emitter.GetEntityName(methodDeclaration);
             this.Inherit = !methodDeclaration.HasModifier(Modifiers.Static);
             this.Static = methodDeclaration.HasModifier(Modifiers.Static);
             this.Member = this.FindMember(methodDeclaration);
             this.TypeDefinition = this.Member.DeclaringTypeDefinition;
             this.Type = this.Member.DeclaringType;
             this.InitMembers();
-            this.Emitter.OverloadsCacheNodes[new Tuple<AstNode, bool>(methodDeclaration, false)] = this;
+            this.Emitter.Cache.AddNode(methodDeclaration, false, this);
         }
 
         private OverloadsCollection(IEmitter emitter, ConstructorDeclaration constructorDeclaration)
         {
             this.Emitter = emitter;
             this.Name = constructorDeclaration.Name;
-            this.JsName = this.Emitter.GetEntityName(constructorDeclaration, false, true);
+            this.JsName = this.Emitter.GetEntityName(constructorDeclaration);
             this.Inherit = false;
             this.Constructor = true;
             this.Static = constructorDeclaration.HasModifier(Modifiers.Static);
@@ -281,7 +278,7 @@ namespace Bridge.Contract
             this.TypeDefinition = this.Member.DeclaringTypeDefinition;
             this.Type = this.Member.DeclaringType;
             this.InitMembers();
-            this.Emitter.OverloadsCacheNodes[new Tuple<AstNode, bool>(constructorDeclaration, false)] = this;
+            this.Emitter.Cache.AddNode(constructorDeclaration, false, this);
         }
 
         private OverloadsCollection(IEmitter emitter, PropertyDeclaration propDeclaration, bool isSetter, bool isField)
@@ -297,31 +294,11 @@ namespace Bridge.Contract
             this.IsSetter = isSetter;
             this.Member = this.FindMember(propDeclaration);
             var p = (IProperty)this.Member;
-            this.CancelChangeCase = this.Member.DeclaringTypeDefinition == null || !this.Emitter.Validator.IsObjectLiteral(this.Member.DeclaringTypeDefinition);
-            this.FieldJsName = this.Emitter.GetEntityName(p, true);
+            this.FieldJsName = this.Emitter.GetEntityName(p);
             this.TypeDefinition = this.Member.DeclaringTypeDefinition;
             this.Type = this.Member.DeclaringType;
             this.InitMembers();
-            this.Emitter.OverloadsCacheNodes[new Tuple<AstNode, bool>(propDeclaration, isSetter)] = this;
-
-            this.SetCaseFromNameAttr();
-        }
-
-        private void SetCaseFromNameAttr()
-        {
-            if (this.Member != null)
-            {
-                var nameAttr = this.Member.Attributes.FirstOrDefault(a => a.AttributeType.FullName == "Bridge.NameAttribute");
-                if (nameAttr != null)
-                {
-                    var value = nameAttr.PositionalArguments.First().ConstantValue;
-
-                    if (value is bool)
-                    {
-                        this.CancelChangeCase = !(bool) value;
-                    }
-                }
-            }
+            this.Emitter.Cache.AddNode(propDeclaration, isSetter, this);
         }
 
         private OverloadsCollection(IEmitter emitter, IndexerDeclaration indexerDeclaration, bool isSetter)
@@ -332,27 +309,26 @@ namespace Bridge.Contract
             this.AltJsName = Helpers.GetPropertyRef(indexerDeclaration, emitter, !isSetter, true, true);
             this.Inherit = true;
             this.Static = false;
-            this.CancelChangeCase = true;
             this.IsSetter = isSetter;
             this.Member = this.FindMember(indexerDeclaration);
             this.TypeDefinition = this.Member.DeclaringTypeDefinition;
             this.Type = this.Member.DeclaringType;
             this.InitMembers();
-            this.Emitter.OverloadsCacheNodes[new Tuple<AstNode, bool>(indexerDeclaration, isSetter)] = this;
+            this.Emitter.Cache.AddNode(indexerDeclaration, isSetter, this);
         }
 
         private OverloadsCollection(IEmitter emitter, OperatorDeclaration operatorDeclaration)
         {
             this.Emitter = emitter;
             this.Name = operatorDeclaration.Name;
-            this.JsName = this.Emitter.GetEntityName(operatorDeclaration, false, true);
+            this.JsName = this.Emitter.GetEntityName(operatorDeclaration);
             this.Inherit = !operatorDeclaration.HasModifier(Modifiers.Static);
             this.Static = operatorDeclaration.HasModifier(Modifiers.Static);
             this.Member = this.FindMember(operatorDeclaration);
             this.TypeDefinition = this.Member.DeclaringTypeDefinition;
             this.Type = this.Member.DeclaringType;
             this.InitMembers();
-            this.Emitter.OverloadsCacheNodes[new Tuple<AstNode, bool>(operatorDeclaration, false)] = this;
+            this.Emitter.Cache.AddNode(operatorDeclaration, false, this);
         }
 
         private OverloadsCollection(IEmitter emitter, IMember member, bool isSetter = false, bool includeInline = false, bool isField = false)
@@ -377,38 +353,29 @@ namespace Bridge.Contract
 
             if (member is IProperty)
             {
-                this.CancelChangeCase = member.DeclaringTypeDefinition == null || !this.Emitter.Validator.IsObjectLiteral(member.DeclaringTypeDefinition);
                 this.JsName = Helpers.GetPropertyRef(member, emitter, isSetter, true, true);
                 this.AltJsName = Helpers.GetPropertyRef(member, emitter, !isSetter, true, true);
                 var p = (IProperty) member;
-                this.FieldJsName = this.Emitter.GetEntityName(p, true);
+                this.FieldJsName = this.Emitter.GetEntityName(p);
             }
             else if (member is IEvent)
             {
-                this.CancelChangeCase = true;
                 this.JsName = Helpers.GetEventRef(member, emitter, isSetter, true, true);
                 this.AltJsName = Helpers.GetEventRef(member, emitter, !isSetter, true, true);
                 this.FieldJsName = Helpers.GetEventRef(member, emitter, true, true, true, false, true);
             }
             else
             {
-                if (member is IField)
-                {
-                    this.CancelChangeCase = false;
-                }
-
-                this.JsName = this.Emitter.GetEntityName(member, false, true);
+                this.JsName = this.Emitter.GetEntityName(member);
             }
 
             this.IncludeInline = includeInline;
             this.Member = member;
-            this.SetCaseFromNameAttr();
-
             this.TypeDefinition = this.Member.DeclaringTypeDefinition;
             this.Type = this.Member.DeclaringType;
             this.IsSetter = isSetter;
             this.InitMembers();
-            this.Emitter.OverloadsCacheMembers[new Tuple<IMember, bool, bool>(member, isSetter, includeInline)] = this;
+            this.Emitter.Cache.AddMember(member, isSetter, includeInline, this);
         }
 
         public bool IsField
@@ -671,9 +638,10 @@ namespace Bridge.Contract
 
         protected virtual List<IMethod> GetMethodOverloads(List<IMethod> list = null, ITypeDefinition typeDef = null)
         {
+            typeDef = typeDef ?? this.TypeDefinition;
+
             bool isTop = list == null;
             list = list ?? new List<IMethod>();
-            typeDef = typeDef ?? this.TypeDefinition;
 
             if (typeDef != null)
             {
@@ -693,7 +661,7 @@ namespace Bridge.Contract
                         }
                     }
 
-                    var name = this.Emitter.GetEntityName(m, false, true);
+                    var name = this.Emitter.GetEntityName(m);
                     if ((name == this.JsName || name == this.AltJsName || name == this.FieldJsName) && m.IsStatic == this.Static &&
                         ((m.IsConstructor && this.JsName == JS.Funcs.CONSTRUCTOR) || m.IsConstructor == this.Constructor))
                     {
@@ -727,19 +695,20 @@ namespace Bridge.Contract
                 }
             }
 
-            return isTop ? list.Distinct().ToList() : list;
+            var returnMethods = isTop ? list.Distinct().ToList() : list;
+            return returnMethods;
         }
 
         protected virtual List<IProperty> GetPropertyOverloads(List<IProperty> list = null, ITypeDefinition typeDef = null)
         {
+            typeDef = typeDef ?? this.TypeDefinition;
+
             bool isTop = list == null;
             list = list ?? new List<IProperty>();
-            typeDef = typeDef ?? this.TypeDefinition;
 
             if (typeDef != null)
             {
-                var bridgeType = this.Emitter.BridgeTypes.Get(typeDef);
-                var monoTypeDef = bridgeType != null ? bridgeType.TypeDefinition : null;
+                bool isMember = this.Member is IMethod;
                 var properties = typeDef.Properties.Where(p =>
                 {
                     if (p.IsExplicitInterfaceImplementation)
@@ -749,17 +718,6 @@ namespace Bridge.Contract
 
                     var canGet = p.CanGet && p.Getter != null;
                     var canSet = p.CanSet && p.Setter != null;
-
-                    if (monoTypeDef != null)
-                    {
-                        var monoProp = monoTypeDef.Properties.FirstOrDefault(mp => mp.Name == p.Name);
-
-                        if (monoProp != null)
-                        {
-                            canGet = monoProp.GetMethod != null;
-                            canSet = monoProp.SetMethod != null;
-                        }
-                    }
 
                     if (!this.IncludeInline)
                     {
@@ -783,27 +741,33 @@ namespace Bridge.Contract
 
                     bool eq = false;
                     bool? equalsByGetter = null;
+
                     if (p.IsStatic == this.Static)
                     {
-                        var getterIgnore = canGet && this.Emitter.Validator.IsExternalType(p.Getter);
-                        var setterIgnore = canSet && this.Emitter.Validator.IsExternalType(p.Setter);
-                        var getterName = canGet ? Helpers.GetPropertyRef(p, this.Emitter, false, true, true) : null;
-                        var setterName = canSet ? Helpers.GetPropertyRef(p, this.Emitter, true, true, true) : null;
-                        var fieldName = this.Emitter.GetEntityName(p, true);
+                        var fieldName = this.Emitter.GetEntityName(p);
 
-                        if (!getterIgnore && getterName != null && (getterName == this.JsName || getterName == this.AltJsName || getterName == this.FieldJsName))
+                        if (fieldName != null && (fieldName == this.JsName || fieldName == this.AltJsName || fieldName == this.FieldJsName))
                         {
                             eq = true;
-                            equalsByGetter = true;
                         }
-                        else if (!setterIgnore && setterName != null && (setterName == this.JsName || setterName == this.AltJsName || setterName == this.FieldJsName))
+
+                        if (!eq && p.IsIndexer)
                         {
-                            eq = true;
-                            equalsByGetter = false;
-                        }
-                        else if (fieldName != null && (fieldName == this.JsName || fieldName == this.AltJsName || fieldName == this.FieldJsName))
-                        {
-                            eq = true;
+                            var getterIgnore = canGet && this.Emitter.Validator.IsExternalType(p.Getter);
+                            var setterIgnore = canSet && this.Emitter.Validator.IsExternalType(p.Setter);
+                            var getterName = canGet ? Helpers.GetPropertyRef(p, this.Emitter, false, true, true) : null;
+                            var setterName = canSet ? Helpers.GetPropertyRef(p, this.Emitter, true, true, true) : null;
+
+                            if (!getterIgnore && getterName != null && (getterName == this.JsName || getterName == this.AltJsName || getterName == this.FieldJsName))
+                            {
+                                eq = true;
+                                equalsByGetter = true;
+                            }
+                            else if (!setterIgnore && setterName != null && (setterName == this.JsName || setterName == this.AltJsName || setterName == this.FieldJsName))
+                            {
+                                eq = true;
+                                equalsByGetter = false;
+                            }
                         }
                     }
 
@@ -814,7 +778,7 @@ namespace Bridge.Contract
                             return false;
                         }
 
-                        if (equalsByGetter.HasValue && this.Member is IMethod && this.AltJsName == null)
+                        if (equalsByGetter.HasValue && isMember && this.AltJsName == null)
                         {
                             this.AltJsName = Helpers.GetPropertyRef(p, this.Emitter, equalsByGetter.Value, true, true);
                         }
@@ -839,14 +803,16 @@ namespace Bridge.Contract
                 }
             }
 
-            return isTop ? list.Distinct().ToList() : list;
+            var returnProperties = isTop ? list.Distinct().ToList() : list;
+            return returnProperties;
         }
 
         protected virtual List<IField> GetFieldOverloads(List<IField> list = null, ITypeDefinition typeDef = null)
         {
+            typeDef = typeDef ?? this.TypeDefinition;
+
             bool isTop = list == null;
             list = list ?? new List<IField>();
-            typeDef = typeDef ?? this.TypeDefinition;
 
             if (typeDef != null)
             {
@@ -886,14 +852,16 @@ namespace Bridge.Contract
                 }
             }
 
-            return isTop ? list.Distinct().ToList() : list;
+            var returnFields = isTop ? list.Distinct().ToList() : list;
+            return returnFields;
         }
 
         protected virtual List<IEvent> GetEventOverloads(List<IEvent> list = null, ITypeDefinition typeDef = null)
         {
+            typeDef = typeDef ?? this.TypeDefinition;
+
             bool isTop = list == null;
             list = list ?? new List<IEvent>();
-            typeDef = typeDef ?? this.TypeDefinition;
 
             if (typeDef != null)
             {
@@ -971,12 +939,13 @@ namespace Bridge.Contract
                 }
             }
 
-            return isTop ? list.Distinct().ToList() : list;
+            var returnEvents = isTop ? list.Distinct().ToList() : list;
+            return returnEvents;
         }
 
-        private Dictionary<Tuple<bool, string, bool>, string> overloadName = new Dictionary<Tuple<bool, string, bool>, string>();
+        private Dictionary<Tuple<bool, string, bool, bool>, string> overloadName = new Dictionary<Tuple<bool, string, bool, bool>, string>();
 
-        public string GetOverloadName(bool skipInterfaceName = false, string prefix = null, bool withoutTypeParams = false)
+        public string GetOverloadName(bool skipInterfaceName = false, string prefix = null, bool withoutTypeParams = false, bool isObjectLiteral = false)
         {
             if (this.Member == null)
             {
@@ -990,12 +959,12 @@ namespace Bridge.Contract
                 }
             }
 
-            var key = new Tuple<bool, string, bool>(skipInterfaceName, prefix, withoutTypeParams);
+            var key = new Tuple<bool, string, bool, bool>(skipInterfaceName, prefix, withoutTypeParams, isObjectLiteral);
             string name = null;
             var contains = this.overloadName.ContainsKey(key);
             if (!contains && this.Member != null)
             {
-                name = this.GetOverloadName(this.Member, skipInterfaceName, prefix, withoutTypeParams);
+                name = this.GetOverloadName(this.Member, skipInterfaceName, prefix, withoutTypeParams, isObjectLiteral);
                 this.overloadName[key] = name;
             }
             else if(contains)
@@ -1053,7 +1022,7 @@ namespace Bridge.Contract
             return true;
         }
 
-        protected virtual string GetOverloadName(IMember definition, bool skipInterfaceName = false, string prefix = null, bool withoutTypeParams = false)
+        protected virtual string GetOverloadName(IMember definition, bool skipInterfaceName = false, string prefix = null, bool withoutTypeParams = false, bool isObjectLiteral = false)
         {
             IMember interfaceMember = null;
             if (definition.IsExplicitInterfaceImplementation)
@@ -1070,7 +1039,7 @@ namespace Bridge.Contract
                 return OverloadsCollection.GetInterfaceMemberName(this.Emitter, interfaceMember, null, prefix, withoutTypeParams, this.IsSetter);
             }
 
-            string name = this.Emitter.GetEntityName(definition, this.CancelChangeCase);
+            string name = isObjectLiteral ? this.Emitter.GetLiteralEntityName(definition) : this.Emitter.GetEntityName(definition);
             if (name.StartsWith("." + JS.Funcs.CONSTRUCTOR))
             {
                 name = JS.Funcs.CONSTRUCTOR;

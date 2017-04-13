@@ -518,12 +518,9 @@ namespace Bridge.Translator
                     if (itemrr != null)
                     {
                         var oc = OverloadsCollection.Create(this.Emitter, itemrr.Member);
-                        name = oc.GetOverloadName();
-
-                        if (!this.Emitter.AssemblyInfo.PreserveMemberCase && itemrr.Member is IProperty && !itemrr.Member.Attributes.Any(attr => attr.AttributeType.FullName == "Bridge.NameAttribute") && !this.Emitter.Validator.IsObjectLiteral(itemrr.Member.DeclaringTypeDefinition))
-                        {
-                            name = Object.Net.Utilities.StringUtils.ToLowerCamelCase(name);
-                        }
+                        bool forceObjectLiteral = itemrr.Member is IProperty && !itemrr.Member.Attributes.Any(attr => attr.AttributeType.FullName == "Bridge.NameAttribute") && !this.Emitter.Validator.IsObjectLiteral(itemrr.Member.DeclaringTypeDefinition);
+                        
+                        name = oc.GetOverloadName(isObjectLiteral: forceObjectLiteral);
                     }
 
                     if (needComma)

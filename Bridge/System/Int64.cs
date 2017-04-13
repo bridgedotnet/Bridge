@@ -9,10 +9,10 @@ namespace System
     {
         private extern Int64(int i);
 
-        [Name(false)]
+        [Convention]
         public const long MinValue = -9223372036854775808;
 
-        [Name(false)]
+        [Convention]
         public const long MaxValue = 9223372036854775807;
 
         [Template("System.Int64.parse({s})")]

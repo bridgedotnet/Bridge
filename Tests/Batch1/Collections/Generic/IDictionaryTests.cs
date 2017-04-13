@@ -9,7 +9,7 @@ namespace Bridge.ClientTest.Collections.Generic
     [TestFixture(TestNameFormat = "IDictionary - {0}")]
     public class IDictionaryTests
     {
-        private class MyDictionary : IDictionary<int, string>
+        private class MyDictionary : IDictionary<int, string>, IReadOnlyDictionary<int, string>
         {
             private readonly Dictionary<int, string> _backingDictionary;
 
@@ -44,9 +44,25 @@ namespace Bridge.ClientTest.Collections.Generic
                 get { return _backingDictionary.Keys; }
             }
 
-            public ICollection<string> Values
+            IEnumerable<string> IReadOnlyDictionary<int, string>.Values
             {
                 get { return _backingDictionary.Values; }
+            }
+
+            IEnumerable<int> IReadOnlyDictionary<int, string>.Keys
+            {
+                get
+                {
+                    return _backingDictionary.Keys;
+                }
+            }
+
+            public ICollection<string> Values
+            {
+                get
+                {
+                    return _backingDictionary.Values;
+                }
             }
 
             public int Count { get { return _backingDictionary.Count; } }
@@ -112,6 +128,7 @@ namespace Bridge.ClientTest.Collections.Generic
         public void ClassImplementsInterfaces()
         {
             Assert.True((object)new MyDictionary() is IDictionary<int, string>);
+            Assert.True((object)new MyDictionary() is IReadOnlyDictionary<int, string>, "#1626");
         }
 
         [Test]
@@ -196,12 +213,17 @@ namespace Bridge.ClientTest.Collections.Generic
         public void ContainsKeyWorks()
         {
             var d = new MyDictionary(new Dictionary<int, string> { { 3, "b" }, { 6, "z" }, { 9, "x" } });
+            Assert.True((object)new MyDictionary() is IDictionary<int, string>);
+
+            var di = (IReadOnlyDictionary<int, string>)d;
             var di2 = (IDictionary<int, string>)d;
 
             Assert.True(d.ContainsKey(9));
+            Assert.True(di.ContainsKey(6), "#1626");
             Assert.True(di2.ContainsKey(3));
 
             Assert.False(d.ContainsKey(923));
+            Assert.False(di.ContainsKey(6124), "#1626");
             Assert.False(di2.ContainsKey(353));
         }
 
@@ -209,6 +231,7 @@ namespace Bridge.ClientTest.Collections.Generic
         public void TryGetValueWorks()
         {
             var d = new MyDictionary(new Dictionary<int, string> { { 3, "b" }, { 6, "z" }, { 9, "x" } });
+            var di = (IReadOnlyDictionary<int, string>)d;
             var di2 = (IDictionary<int, string>)d;
 
             string outVal;
@@ -216,12 +239,19 @@ namespace Bridge.ClientTest.Collections.Generic
             Assert.True(d.TryGetValue(9, out outVal));
             Assert.AreEqual("x", outVal);
 
+            Assert.True(di.TryGetValue(6, out outVal), "#1626");
+            Assert.AreEqual("z", outVal, "#1626");
+
             Assert.True(di2.TryGetValue(3, out outVal));
             Assert.AreEqual("b", outVal);
 
             outVal = "!!!";
             Assert.False(d.TryGetValue(923, out outVal));
             Assert.AreEqual(null, outVal);
+
+            outVal = "!!!";
+            Assert.False(di.TryGetValue(6124, out outVal), "#1626");
+            Assert.AreEqual(null, outVal, "#1626");
 
             outVal = "!!!";
             Assert.False(di2.TryGetValue(353, out outVal));

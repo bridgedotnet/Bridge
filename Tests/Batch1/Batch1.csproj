@@ -47,6 +47,9 @@
   <ItemGroup>
     <Compile Include="BitConverterTests.cs" />
     <Compile Include="BasicCSharp\TestGoto.cs" />
+    <Compile Include="Collections\Generic\IReadOnlyCollectionTests.cs" />
+    <Compile Include="Collections\Generic\IReadOnlyDictionaryTests.cs" />
+    <Compile Include="Collections\Generic\IReadOnlyListTests.cs" />
     <Compile Include="Collections\Native\ArrayBufferTests.cs" />
     <Compile Include="Collections\Native\DataViewTests.cs" />
     <Compile Include="Collections\Native\Float32ArrayTests.cs" />
@@ -59,6 +62,8 @@
     <Compile Include="Collections\Native\Uint8ArrayTests.cs" />
     <Compile Include="Collections\Native\Uint8ClampedArrayTests.cs" />
     <Compile Include="Collections\ObjectModel\ReadOnlyCollectionTests.cs" />
+    <Compile Include="Convention\ClassAttributeTests.cs" />
+    <Compile Include="Convention\AssemblyAttributeTests.cs" />
     <Compile Include="DOMParserTests.cs" />
     <Compile Include="FunctionTests.cs" />
     <Compile Include="BridgeConsoleTests.cs" />

@@ -28,7 +28,7 @@ namespace System.Diagnostics
             get;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern bool IsRunning
         {
             get;

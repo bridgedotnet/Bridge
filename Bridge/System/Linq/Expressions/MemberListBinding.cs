@@ -8,7 +8,7 @@ namespace System.Linq.Expressions
     [Cast("{this}.btype === 2")]
     public sealed class MemberListBinding : MemberBinding
     {
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern ReadOnlyCollection<ElementInit> Initializers { get; private set; }
 
         internal extern MemberListBinding();

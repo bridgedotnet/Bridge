@@ -443,11 +443,6 @@ namespace Bridge.Translator
 
                 bool isIgnore = this.Emitter.Validator.IsExternalType(baseType);
 
-                if (isIgnore)
-                {
-                    //throw (System.Exception)this.Emitter.CreateException(targetMember.Target, "Cannot call base method, because parent class code is ignored");
-                }
-
                 bool needComma = false;
 
                 var resolveResult = this.Emitter.Resolver.ResolveNode(targetMember, this.Emitter);
@@ -465,13 +460,7 @@ namespace Bridge.Translator
 
                 string baseMethod;
                 bool isIgnoreGeneric = false;
-                if (resolveResult is InvocationResolveResult)
-                {
-                    InvocationResolveResult invocationResult = (InvocationResolveResult)resolveResult;
-                    baseMethod = OverloadsCollection.Create(this.Emitter, invocationResult.Member).GetOverloadName();
-                    isIgnoreGeneric = Helpers.IsIgnoreGeneric(invocationResult.Member, this.Emitter);
-                }
-                else if (resolveResult is MemberResolveResult)
+                if (resolveResult is MemberResolveResult)
                 {
                     MemberResolveResult memberResult = (MemberResolveResult)resolveResult;
                     baseMethod = OverloadsCollection.Create(this.Emitter, memberResult.Member).GetOverloadName();
@@ -480,7 +469,7 @@ namespace Bridge.Translator
                 else
                 {
                     baseMethod = targetMember.MemberName;
-                    baseMethod = this.Emitter.AssemblyInfo.PreserveMemberCase ? baseMethod : Object.Net.Utilities.StringUtils.ToLowerCamelCase(baseMethod);
+                    baseMethod = Object.Net.Utilities.StringUtils.ToLowerCamelCase(baseMethod);
                 }
 
                 this.Write(name, "." + JS.Fields.PROTOTYPE + ".", baseMethod);

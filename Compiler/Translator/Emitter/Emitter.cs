@@ -38,6 +38,9 @@ namespace Bridge.Translator
             this.JsDoc = new JsDoc();
             this.AnonymousTypes = new Dictionary<AnonymousType, IAnonymousTypeConfig>();
             this.AutoStartupMethods = new List<string>();
+            this.Cache = new EmitterCache();
+            this.AssemblyNameRuleCache = new Dictionary<IAssembly, NameRule[]>();
+            this.ClassNameRuleCache = new Dictionary<ITypeDefinition, NameRule[]>();
         }
 
         public virtual Dictionary<string, string> Emit()

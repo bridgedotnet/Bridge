@@ -262,7 +262,6 @@ namespace Bridge.ClientTest.Batch4.Reflection
 
         public class C11
         {
-            [Name(false)]
             public DateTime D;
 
             [Reflectable]
@@ -286,16 +285,12 @@ namespace Bridge.ClientTest.Batch4.Reflection
 
         public class C13
         {
-            [Name(false)]
             public Action addedE3Handler;
 
-            [Name(false)]
             public Action removedE3Handler;
 
-            [Name(false)]
             public static Action addedE4Handler;
 
-            [Name(false)]
             public static Action removedE4Handler;
 
             [Reflectable]
@@ -323,10 +318,8 @@ namespace Bridge.ClientTest.Batch4.Reflection
 
         public class C14
         {
-            [Name(false)]
             public int p13Field;
 
-            [Name(false)]
             public static int p14Field;
 
             [Reflectable]
@@ -480,10 +473,8 @@ namespace Bridge.ClientTest.Batch4.Reflection
         [Constructor("{ }")]
         public class C19
         {
-            [Name(false)]
             public int A;
 
-            [Name(false)]
             public string B;
 
             [Reflectable]
@@ -494,10 +485,8 @@ namespace Bridge.ClientTest.Batch4.Reflection
 
         public class C20
         {
-            [Name(false)]
             public int A;
 
-            [Name(false)]
             public string B;
 
             [Reflectable, Template("{ a: {a}, b: {b} }")]
@@ -508,7 +497,6 @@ namespace Bridge.ClientTest.Batch4.Reflection
 
         public class C21
         {
-            [Name(false)]
             public int X;
 
             public C21(int x)
@@ -601,13 +589,10 @@ namespace Bridge.ClientTest.Batch4.Reflection
 
         public class C24
         {
-            [Name(false)]
             public int x;
 
-            [Name(false)]
             public string s;
 
-            [Name(false)]
             public string v;
 
             [Reflectable]

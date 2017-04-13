@@ -317,6 +317,7 @@ namespace Bridge.ClientTest.ConvertTests
         /// <summary>
         /// Helper class to test that the IFormatProvider is being called.
         /// </summary>
+        [Convention(Target = ConventionTarget.Member, Notation = Notation.LowerCamelCase)]
         protected class TestFormatProvider : IFormatProvider
         {
             public static readonly TestFormatProvider s_instance = new TestFormatProvider();

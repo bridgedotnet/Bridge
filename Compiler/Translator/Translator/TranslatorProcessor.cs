@@ -328,6 +328,8 @@ namespace Bridge.Translator
                 if (translator.FolderMode)
                 {
                     translator.ReadFolderFiles();
+
+                    translator.DefaultNamespace = bridgeOptions.DefaultFileName;
                 }
                 else
                 {

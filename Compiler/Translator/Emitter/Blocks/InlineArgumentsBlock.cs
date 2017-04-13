@@ -619,7 +619,7 @@ namespace Bridge.Translator
                                 var enumType = type;
                                 if (type.Kind == TypeKind.Enum && this.Emitter.Validator.IsExternalType(type.GetDefinition()))
                                 {
-                                    var enumMode = this.Emitter.Validator.EnumEmitMode(type);
+                                    var enumMode = Helpers.EnumEmitMode(type);
                                     if (enumMode >= 3 && enumMode < 7)
                                     {
                                         enumType = this.Emitter.Resolver.Compilation.FindType(KnownTypeCode.String);
@@ -1109,7 +1109,7 @@ namespace Bridge.Translator
                 var enumType = type;
                 if (type.Kind == TypeKind.Enum && this.Emitter.Validator.IsExternalType(type.GetDefinition()))
                 {
-                    var enumMode = this.Emitter.Validator.EnumEmitMode(type);
+                    var enumMode = Helpers.EnumEmitMode(type);
                     if (enumMode >= 3 && enumMode < 7)
                     {
                         enumType = this.Emitter.Resolver.Compilation.FindType(KnownTypeCode.String);

@@ -180,7 +180,6 @@ namespace Bridge.ClientTest.Reflection
 
         public class C11
         {
-            [Name(false)]
             public DateTime D;
 
             [Reflectable]
@@ -201,16 +200,12 @@ namespace Bridge.ClientTest.Reflection
 
         public class C13
         {
-            [Name(false)]
             public Action addedE3Handler;
 
-            [Name(false)]
             public Action removedE3Handler;
 
-            [Name(false)]
             public static Action addedE4Handler;
 
-            [Name(false)]
             public static Action removedE4Handler;
 
             [Reflectable]
@@ -238,10 +233,8 @@ namespace Bridge.ClientTest.Reflection
 
         public class C14
         {
-            [Name(false)]
             public int p13Field;
 
-            [Name(false)]
             public static int p14Field;
 
             [Reflectable]
@@ -330,10 +323,8 @@ namespace Bridge.ClientTest.Reflection
         [Constructor("{ }")]
         public class C19
         {
-            [Name(false)]
             public int A;
 
-            [Name(false)]
             public string B;
 
             [Reflectable]
@@ -344,10 +335,8 @@ namespace Bridge.ClientTest.Reflection
 
         public class C20
         {
-            [Name(false)]
             public int A;
 
-            [Name(false)]
             public string B;
 
             [Reflectable, Template("{ A: {a}, B: {b} }")]
@@ -358,7 +347,6 @@ namespace Bridge.ClientTest.Reflection
 
         public class C21
         {
-            [Name(false)]
             public int X;
 
             public C21(int x)
@@ -442,13 +430,10 @@ namespace Bridge.ClientTest.Reflection
 
         public class C24
         {
-            [Name(false)]
             public int x;
 
-            [Name(false)]
             public string s;
 
-            [Name(false)]
             public string v;
 
             [Reflectable]
@@ -955,7 +940,7 @@ namespace Bridge.ClientTest.Reflection
         [Test]
         public void ScriptNameWorksForAllKindsOfMethods()
         {
-            Assert.AreEqual(typeof(C4).GetMethod("M", new[] { typeof(int) }).ScriptName, "m$1", "C4.M");
+            Assert.AreEqual(typeof(C4).GetMethod("M", new[] { typeof(int) }).ScriptName, "M$1", "C4.M");
             Assert.True(typeof(C21).GetMethod("M1").ScriptName == null, "C21.M1");
             Assert.AreEqual(typeof(C7).GetMethod("M1").ScriptName, "M1", "C7.m1");
         }

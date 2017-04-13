@@ -413,8 +413,8 @@ namespace Bridge.Contract
                 {
                     name = BridgeTypes.ToJsName(typeDef.DeclaringType, emitter, true);
                 }
-
-                name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.ConvertName(typeDef.Name);
+                
+                name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.ConvertName(emitter.GetTypeName(itypeDef, typeDef));
             }
             else
             {
@@ -975,7 +975,7 @@ namespace Bridge.Contract
                     name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.GetParentNames(typeDef);
                 }
 
-                name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.ConvertName(typeDef.Name);
+                name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.ConvertName(emitter.GetTypeName(bridgeType.Type.GetDefinition(), typeDef));
             }
             else
             {

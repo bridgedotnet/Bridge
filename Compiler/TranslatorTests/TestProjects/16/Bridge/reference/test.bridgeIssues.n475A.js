@@ -7,14 +7,14 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                 Data: 0
             }
         },
-        preventDefault: function () {
+        PreventDefault: function () {
             this.Data = 77;
         }
     });
 
     Bridge.define("Test.BridgeIssues.N475A.Bridge475Extension1", {
         statics: {
-            keyDown: function (T, entity, handler) {
+            KeyDown: function (T, entity, handler) {
                 return null;
             }
         }
@@ -22,7 +22,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
     Bridge.define("Test.BridgeIssues.N475A.Bridge475Extension2", {
         statics: {
-            keyDown: function (T, entity, handler) {
+            KeyDown: function (T, entity, handler) {
                 return null;
             }
         }
@@ -32,11 +32,11 @@ Bridge.assembly("TestProject", function ($asm, globals) {
         statics: {
             N475: function () {
                 var b = new Test.BridgeIssues.N475A.Bridge475();
-                Test.BridgeIssues.N475A.Bridge475Extension1.keyDown(Test.BridgeIssues.N475A.Bridge475Event, b, $asm.$.Test.BridgeIssues.N475A.Test.f1);
+                Test.BridgeIssues.N475A.Bridge475Extension1.KeyDown(Test.BridgeIssues.N475A.Bridge475Event, b, $asm.$.Test.BridgeIssues.N475A.Test.f1);
 
-                b.keyDown(4);
+                b.KeyDown(4);
 
-                Test.BridgeIssues.N475A.Bridge475Extension2.keyDown(System.Decimal, b, "5");
+                Test.BridgeIssues.N475A.Bridge475Extension2.KeyDown(System.Decimal, b, "5");
             }
         }
     });
@@ -45,7 +45,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
     Bridge.apply($asm.$.Test.BridgeIssues.N475A.Test, {
         f1: function (ev) {
-            ev.preventDefault();
+            ev.PreventDefault();
         }
     });
 });

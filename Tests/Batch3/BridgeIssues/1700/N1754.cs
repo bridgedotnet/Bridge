@@ -14,8 +14,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             // ID
             public string ID = "ID";
 
-            // x
-            public string X = "x";
+            // X
+            public string X = "X";
 
             // CONFIG_VAL1
             public string CONFIG_VAL1 = "CONFIG_VAL1";
@@ -31,12 +31,12 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             {
             }
 
-            // m
+            // M
             public void M(int i)
             {
             }
 
-            // m$1
+            // M$1
             public void M(string s)
             {
             }
@@ -80,11 +80,11 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             app.ANOTHER_EVENt += (sender, e) => { };
 
             Assert.AreEqual("ID", app["ID"]);
-            Assert.AreEqual("x", app["x"]);
+            Assert.AreEqual("X", app["X"]);
             Assert.AreEqual("PROP1", app["PROP1"]);
             Assert.NotNull(app["FOO"], "FOO");
-            Assert.NotNull(app["m"], "m");
-            Assert.NotNull(app["m$1"], "m$1");
+            Assert.NotNull(app["M"], "M");
+            Assert.NotNull(app["M$1"], "M$1");
             Assert.NotNull(app["AB"], "AB");
             // We do not change event name case
             Assert.NotNull(app["SOME_EVENT"], "SOME_EVENT");

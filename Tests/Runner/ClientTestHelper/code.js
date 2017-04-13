@@ -8,8 +8,8 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
 
     Bridge.define("Bridge.ClientTestHelper.ClassLibraryTest", {
         statics: {
-            test: function (item) {
-                item.Bridge$ClientTestHelper$IWriteableItem$setValue(Bridge.box(2, System.Int32));
+            Test: function (item) {
+                item.Bridge$ClientTestHelper$IWriteableItem$SetValue(Bridge.box(2, System.Int32));
             }
         }
     });
@@ -49,7 +49,7 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
 
     Bridge.define("Bridge.ClientTestHelper.N2190", {
         statics: {
-            greeting: function () {
+            Greeting: function () {
                 return "Hi";
             }
         }

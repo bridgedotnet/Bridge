@@ -8,7 +8,7 @@ namespace System.Linq.Expressions
     [Cast("{this}.ntype === 17")]
     public sealed class InvocationExpression : Expression
     {
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern Expression Expression { get; private set; }
 
         [Name("args")]

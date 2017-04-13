@@ -580,7 +580,7 @@ namespace Bridge.Contract
                 return overloads.GetOverloadName(ignoreInterface, GetAddOrRemove(!remove), withoutTypeParams);
             }
 
-            var name = emitter.GetEntityName(property, true, ignoreInterface);
+            var name = emitter.GetEntityName(property);
             return GetAddOrRemove(!remove, name);
         }
 
@@ -599,7 +599,7 @@ namespace Bridge.Contract
                 return overloads.GetOverloadName(ignoreInterface, skipPrefix ? null : GetAddOrRemove(!remove), withoutTypeParams);
             }
 
-            var name = emitter.GetEntityName(property, true, ignoreInterface);
+            var name = emitter.GetEntityName(property);
             return skipPrefix ? name : GetAddOrRemove(!remove, name);
         }
 
@@ -624,7 +624,7 @@ namespace Bridge.Contract
                 return overloads.GetOverloadName(ignoreInterface, skipPrefix ? null : GetSetOrGet(isSetter), withoutTypeParams);
             }
 
-            name = emitter.GetEntityName(property, true, ignoreInterface);
+            name = emitter.GetEntityName(property);
             return GetSetOrGet(isSetter, name);
         }
 
@@ -642,7 +642,7 @@ namespace Bridge.Contract
                 return overloads.GetOverloadName(ignoreInterface, GetSetOrGet(isSetter));
             }
 
-            var name = emitter.GetEntityName(property, true, ignoreInterface);
+            var name = emitter.GetEntityName(property);
             return GetSetOrGet(isSetter, name);
         }
 
@@ -661,7 +661,7 @@ namespace Bridge.Contract
                 return overloads.GetOverloadName(ignoreInterface, GetSetOrGet(isSetter));
             }
 
-            var name = emitter.GetEntityName(property, true, ignoreInterface);
+            var name = emitter.GetEntityName(property);
             return GetSetOrGet(isSetter, name);
         }
 
@@ -687,7 +687,7 @@ namespace Bridge.Contract
                 return overloads.GetOverloadName(ignoreInterface, skipPrefix ? null : GetSetOrGet(isSetter), withoutTypeParams);
             }
 
-            name = emitter.GetEntityName(property, true, ignoreInterface);
+            name = emitter.GetEntityName(property);
             return skipPrefix ? name : GetSetOrGet(isSetter, name);
         }
 
@@ -748,7 +748,7 @@ namespace Bridge.Contract
 
         public static object GetEnumValue(IEmitter emitter, IType type, object constantValue)
         {
-            var enumMode = emitter.Validator.EnumEmitMode(type);
+            var enumMode = Helpers.EnumEmitMode(type);
 
             if ((emitter.Validator.IsExternalType(type.GetDefinition()) && enumMode == -1) || enumMode == 2)
             {
@@ -1215,6 +1215,64 @@ namespace Bridge.Contract
         public static bool IsValidIdentifier(string name)
         {
             return Helpers.validIdentifier.IsMatch(name);
+        }
+
+        public static int EnumEmitMode(ITypeDefinition type)
+        {
+            string enumAttr = "Bridge.EnumAttribute";
+            int result = 7;
+            type.Attributes.Any(attr =>
+            {
+                if (attr.Constructor != null && attr.Constructor.DeclaringType.FullName == enumAttr && attr.PositionalArguments.Count > 0)
+                {
+                    result = (int)attr.PositionalArguments.First().ConstantValue;
+                    return true;
+                }
+
+                return false;
+            });
+
+            return result;
+        }
+
+        public static int EnumEmitMode(IType type)
+        {
+            string enumAttr = "Bridge.EnumAttribute";
+            int result = 7;
+            type.GetDefinition().Attributes.Any(attr =>
+            {
+                if (attr.Constructor != null && attr.Constructor.DeclaringType.FullName == enumAttr && attr.PositionalArguments.Count > 0)
+                {
+                    result = (int)attr.PositionalArguments.First().ConstantValue;
+                    return true;
+                }
+
+                return false;
+            });
+
+            return result;
+        }
+
+        public static bool IsValueEnum(IType type)
+        {
+            return Helpers.EnumEmitMode(type) == 2;
+        }
+
+        public static bool IsNameEnum(IType type)
+        {
+            var enumEmitMode = Helpers.EnumEmitMode(type);
+            return enumEmitMode == 1 || enumEmitMode > 6;
+        }
+
+        public static bool IsStringNameEnum(IType type)
+        {
+            var mode = Helpers.EnumEmitMode(type);
+            return mode >= 3 && mode <= 6;
+        }
+
+        public static bool IsReservedStaticName(string name)
+        {
+            return JS.Reserved.StaticNames.Any(n => String.Equals(name, n, StringComparison.InvariantCultureIgnoreCase));
         }
     }
 }

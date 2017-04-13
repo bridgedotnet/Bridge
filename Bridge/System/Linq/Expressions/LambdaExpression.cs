@@ -11,7 +11,7 @@ namespace System.Linq.Expressions
         [Name("p")]
         public extern ReadOnlyCollection<ParameterExpression> Parameters { get; private set; }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern Expression Body { get; private set; }
 
         [Name("rt")]

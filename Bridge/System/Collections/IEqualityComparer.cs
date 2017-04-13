@@ -3,6 +3,7 @@
 namespace System.Collections
 {
     [External]
+    [Convention(Target = ConventionTarget.Member, Member = ConventionMember.Method, Notation = Notation.LowerCamelCase)]
     public interface IEqualityComparer : IBridgeClass
     {
         bool Equals(object x, object y);

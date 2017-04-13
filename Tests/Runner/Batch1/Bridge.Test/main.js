@@ -21,14 +21,14 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                     }
                 }
             },
-            instanceFabric$1: function (type) {
+            InstanceFabric: function (type) {
                 if (Bridge.Test.Runtime.TestFixture$1(T).instanceFabric == null) {
                     Bridge.Test.Runtime.TestFixture$1(T).instanceFabric = Bridge.cast(Bridge.createInstance(type), Bridge.Test.Runtime.TestFixture$1(T));
                 }
 
                 return Bridge.Test.Runtime.TestFixture$1(T).instanceFabric;
             },
-            beforeTest: function (needInstance, assert, type, expectedCount, testContext) {
+            BeforeTest: function (needInstance, assert, type, expectedCount, testContext) {
                 if (expectedCount === void 0) { expectedCount = null; }
                 if (testContext === void 0) { testContext = null; }
                 Bridge.Test.NUnit.Assert.assert = assert;
@@ -37,20 +37,20 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                     assert.expect(System.Nullable.getValue(expectedCount));
                 }
 
-                var instance = Bridge.Test.Runtime.TestFixture$1(T).instanceFabric$1(type);
+                var instance = Bridge.Test.Runtime.TestFixture$1(T).InstanceFabric(type);
                 instance.Fixture = needInstance ? Bridge.Test.Runtime.TestFixture$1(T).FixtureFabric : Bridge.getDefaultValue(T);
 
-                var fixtureContext = instance.getContext();
+                var fixtureContext = instance.GetContext();
 
                 if (testContext != null || fixtureContext != null) {
-                    Bridge.Test.Runtime.ContextHelper.setContext(assert, Bridge.merge(new Bridge.Test.Runtime.Context(), {
-                        fixtureCtx: fixtureContext,
-                        testCtx: testContext
+                    Bridge.Test.Runtime.ContextHelper.SetContext(assert, Bridge.merge(new Bridge.Test.Runtime.Context(), {
+                        FixtureCtx: fixtureContext,
+                        TestCtx: testContext
                     } ));
                 }
 
                 try {
-                    instance.setUp();
+                    instance.SetUp();
                 }
                 catch ($e1) {
                     $e1 = System.Exception.create($e1);
@@ -67,58 +67,58 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 Fixture: Bridge.getDefaultValue(T)
             }
         },
-        getContext: function () {
+        GetContext: function () {
             return null;
         },
-        setUp: function () {
+        SetUp: function () {
         },
-        tearDown: function () {
+        TearDown: function () {
         }
     }; });
 
     Bridge.define("Bridge.Test.Runtime.Context", {
-        fixtureCtx: null,
-        testCtx: null,
-        stack: null
+        FixtureCtx: null,
+        TestCtx: null,
+        Stack: null
     });
 
     Bridge.define("Bridge.Test.Runtime.ContextHelper", {
         statics: {
             contextName: "BridgeTestContext",
-            setContext: function (assert, ctx) {
+            SetContext: function (assert, ctx) {
                 if (assert == null) {
                     return;
                 }
 
                 assert[System.Array.index(Bridge.Test.Runtime.ContextHelper.contextName, assert)] = ctx;
             },
-            getTestId: function (details) {
+            GetTestId: function (details) {
                 return Bridge.as(details.testId, System.String);
             },
-            getAssert: function () {
+            GetAssert: function () {
                 var $t;
                 var a = ($t = QUnit.config.current).assert;
 
                 return a;
             },
-            getContext$1: function (assert) {
+            GetContext$1: function (assert) {
                 if (assert == null) {
                     return null;
                 }
 
                 return Bridge.as(assert[System.Array.index(Bridge.Test.Runtime.ContextHelper.contextName, assert)], Bridge.Test.Runtime.Context);
             },
-            getContext: function () {
-                return Bridge.Test.Runtime.ContextHelper.getContext$1(Bridge.Test.Runtime.ContextHelper.getAssert());
+            GetContext: function () {
+                return Bridge.Test.Runtime.ContextHelper.GetContext$1(Bridge.Test.Runtime.ContextHelper.GetAssert());
             },
-            getTestOutput: function (testId) {
+            GetTestOutput: function (testId) {
                 if (testId == null) {
                     return null;
                 }
 
                 return document.getElementById(System.String.concat("qunit-test-output-", testId));
             },
-            getQUnitSource: function (output) {
+            GetQUnitSource: function (output) {
                 if (output == null) {
                     return null;
                 }
@@ -131,14 +131,14 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
                 return source[System.Array.index(0, source)];
             },
-            adjustSourceElement: function (ctx, testItem) {
+            AdjustSourceElement: function (ctx, testItem) {
                 var $t;
                 if (testItem == null) {
                     return null;
                 }
 
-                var fc = ctx.fixtureCtx;
-                var tc = ctx.testCtx;
+                var fc = ctx.FixtureCtx;
+                var tc = ctx.TestCtx;
 
                 var project = null;
                 var file = null;
@@ -146,25 +146,25 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 var line = null;
 
                 if (fc != null) {
-                    project = fc.project;
-                    file = fc.file;
-                    method = fc.className;
+                    project = fc.Project;
+                    file = fc.File;
+                    method = fc.ClassName;
                 }
 
                 if (tc != null) {
-                    if (tc.file != null) {
-                        file = tc.file;
+                    if (tc.File != null) {
+                        file = tc.File;
                     }
 
-                    if (tc.method != null) {
-                        method = System.String.concat((($t = method, $t != null ? $t : "")), ".", tc.method);
+                    if (tc.Method != null) {
+                        method = System.String.concat((($t = method, $t != null ? $t : "")), ".", tc.Method);
                     }
 
-                    line = tc.line;
+                    line = tc.Line;
                 }
 
                 if (project != null || file != null || method != null) {
-                    var qunitSourceName = Bridge.Test.Runtime.ContextHelper.getQUnitSource(testItem);
+                    var qunitSourceName = Bridge.Test.Runtime.ContextHelper.GetQUnitSource(testItem);
 
                     if (qunitSourceName == null) {
                         return null;
@@ -177,7 +177,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                     }
 
                     if (method != null) {
-                        html = System.String.concat(html, (System.String.concat(" at ", Bridge.Test.Runtime.ContextHelper.adjustTags(method))));
+                        html = System.String.concat(html, (System.String.concat(" at ", Bridge.Test.Runtime.ContextHelper.AdjustTags(method))));
                     }
 
                     if (file != null) {
@@ -209,7 +209,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                     if (assertList != null) {
                         testTitle.addEventListener("click", function () {
                             // A Qunit fix to make source element collapsed the same as assert list
-                            Bridge.Test.Runtime.ContextHelper.toggleClass(assertList, "qunit-collapsed", [qunitSourceName]);
+                            Bridge.Test.Runtime.ContextHelper.ToggleClass(assertList, "qunit-collapsed", [qunitSourceName]);
                         }, false);
                     }
 
@@ -218,7 +218,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
                 return null;
             },
-            getTestSource: function (output) {
+            GetTestSource: function (output) {
                 if (output == null) {
                     return null;
                 }
@@ -231,32 +231,32 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
                 return source[System.Array.index(0, source)];
             },
-            getTestSource$1: function (testId) {
-                var output = Bridge.Test.Runtime.ContextHelper.getTestOutput(testId);
+            GetTestSource$1: function (testId) {
+                var output = Bridge.Test.Runtime.ContextHelper.GetTestOutput(testId);
 
-                return Bridge.Test.Runtime.ContextHelper.getTestSource(output);
+                return Bridge.Test.Runtime.ContextHelper.GetTestSource(output);
             },
-            updateTestSource: function (testSource, stack) {
+            UpdateTestSource: function (testSource, stack) {
                 if (testSource != null) {
                     testSource.innerHTML = System.String.concat("<th>Source: </th><td><pre> ", stack, "  </pre></td>");
                 }
             },
-            adjustTags: function (s) {
+            AdjustTags: function (s) {
                 if (s == null) {
                     return null;
                 }
 
                 return System.String.replaceAll(System.String.replaceAll(s, "<", "&lt;"), ">", "&gt;");
             },
-            hasClass: function (el, name) {
+            HasClass: function (el, name) {
                 return System.String.indexOf((System.String.concat(" ", el.className, " ")), System.String.concat(" ", name, " ")) >= 0;
             },
-            addClass: function (el, name) {
-                if (!Bridge.Test.Runtime.ContextHelper.hasClass(el, name)) {
+            AddClass: function (el, name) {
+                if (!Bridge.Test.Runtime.ContextHelper.HasClass(el, name)) {
                     el.className = System.String.concat(el.className, (System.String.concat((el.className != null ? " " : ""), name)));
                 }
             },
-            removeClass: function (el, name) {
+            RemoveClass: function (el, name) {
                 var set = System.String.concat(" ", el.className, " ");
 
                 while (System.String.indexOf(set, System.String.concat(" ", name, " ")) >= 0) {
@@ -265,31 +265,31 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 
                 el.className = set.trim();
             },
-            toggleClass$1: function (el, name, force) {
+            ToggleClass$1: function (el, name, force) {
                 if (force === void 0) { force = false; }
-                if (force || !Bridge.Test.Runtime.ContextHelper.hasClass(el, name)) {
-                    Bridge.Test.Runtime.ContextHelper.addClass(el, name);
+                if (force || !Bridge.Test.Runtime.ContextHelper.HasClass(el, name)) {
+                    Bridge.Test.Runtime.ContextHelper.AddClass(el, name);
                 } else {
-                    Bridge.Test.Runtime.ContextHelper.removeClass(el, name);
+                    Bridge.Test.Runtime.ContextHelper.RemoveClass(el, name);
                 }
             },
-            toggleClass: function (src, name, dest) {
+            ToggleClass: function (src, name, dest) {
                 var $t;
                 if (dest === void 0) { dest = []; }
                 if (src == null) {
                     return;
                 }
 
-                var has = Bridge.Test.Runtime.ContextHelper.hasClass(src, name);
+                var has = Bridge.Test.Runtime.ContextHelper.HasClass(src, name);
 
                 $t = Bridge.getEnumerator(dest);
                 try {
                     while ($t.moveNext()) {
                         var el = $t.Current;
                         if (has) {
-                            Bridge.Test.Runtime.ContextHelper.addClass(el, name);
+                            Bridge.Test.Runtime.ContextHelper.AddClass(el, name);
                         } else {
-                            Bridge.Test.Runtime.ContextHelper.removeClass(el, name);
+                            Bridge.Test.Runtime.ContextHelper.RemoveClass(el, name);
                         }
 
                     }
@@ -298,7 +298,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                         $t.System$IDisposable$dispose();
                     }
                 }},
-            init: function () {
+            Init: function () {
                 // Check that required elements exist and created if required
                 var ensure = $asm.$.Bridge.Test.Runtime.ContextHelper.f1;
 
@@ -322,112 +322,112 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
     });
 
     Bridge.define("Bridge.Test.Runtime.FixtureContext", {
-        project: null,
-        className: null,
-        file: null
+        Project: null,
+        ClassName: null,
+        File: null
     });
 
     Bridge.define("Bridge.Test.NUnit.Assert", {
         statics: {
             assert: null,
             stackOffset: 2,
-            setStack: function (offset) {
+            SetStack: function (offset) {
                 if (offset === void 0) { offset = 0; }
-                var ctx = Bridge.Test.Runtime.ContextHelper.getContext$1(Bridge.Test.NUnit.Assert.assert);
+                var ctx = Bridge.Test.Runtime.ContextHelper.GetContext$1(Bridge.Test.NUnit.Assert.assert);
 
                 if (ctx == null) {
                     return;
                 }
 
-                ctx.stack = QUnit.stack(((Bridge.Test.NUnit.Assert.stackOffset + offset) | 0));
+                ctx.Stack = QUnit.stack(((Bridge.Test.NUnit.Assert.stackOffset + offset) | 0));
             },
-            async: function () {
+            Async: function () {
                 return Bridge.Test.NUnit.Assert.assert.async();
             },
-            areEqual: function (expected, actual) {
-                Bridge.Test.NUnit.Assert.setStack();
+            AreEqual: function (expected, actual) {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.deepEqual(Bridge.unbox(actual), Bridge.unbox(expected));
             },
-            areEqual$1: function (expected, actual, description) {
-                Bridge.Test.NUnit.Assert.setStack();
+            AreEqual$1: function (expected, actual, description) {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.deepEqual(Bridge.unbox(actual), Bridge.unbox(expected), description);
             },
-            areDeepEqual: function (expected, actual) {
-                Bridge.Test.NUnit.Assert.setStack();
+            AreDeepEqual: function (expected, actual) {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.deepEqual(Bridge.unbox(actual), Bridge.unbox(expected));
             },
-            areDeepEqual$1: function (expected, actual, description) {
-                Bridge.Test.NUnit.Assert.setStack();
+            AreDeepEqual$1: function (expected, actual, description) {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.deepEqual(Bridge.unbox(actual), Bridge.unbox(expected), description);
             },
-            areStrictEqual: function (expected, actual) {
-                Bridge.Test.NUnit.Assert.setStack();
+            AreStrictEqual: function (expected, actual) {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.strictEqual(Bridge.unbox(actual), Bridge.unbox(expected));
             },
-            areStrictEqual$1: function (expected, actual, description) {
-                Bridge.Test.NUnit.Assert.setStack();
+            AreStrictEqual$1: function (expected, actual, description) {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.strictEqual(Bridge.unbox(actual), Bridge.unbox(expected), description);
             },
-            areNotEqual: function (expected, actual) {
-                Bridge.Test.NUnit.Assert.setStack();
+            AreNotEqual: function (expected, actual) {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.notDeepEqual(Bridge.unbox(actual), Bridge.unbox(expected));
             },
-            areNotEqual$1: function (expected, actual, description) {
-                Bridge.Test.NUnit.Assert.setStack();
+            AreNotEqual$1: function (expected, actual, description) {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.notDeepEqual(Bridge.unbox(actual), Bridge.unbox(expected), description);
             },
-            areNotDeepEqual: function (expected, actual) {
-                Bridge.Test.NUnit.Assert.setStack();
+            AreNotDeepEqual: function (expected, actual) {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.notDeepEqual(Bridge.unbox(actual), Bridge.unbox(expected));
             },
-            areNotDeepEqual$1: function (expected, actual, description) {
-                Bridge.Test.NUnit.Assert.setStack();
+            AreNotDeepEqual$1: function (expected, actual, description) {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.notDeepEqual(Bridge.unbox(actual), Bridge.unbox(expected), description);
             },
-            areNotStrictEqual: function (expected, actual) {
-                Bridge.Test.NUnit.Assert.setStack();
+            AreNotStrictEqual: function (expected, actual) {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.notStrictEqual(Bridge.unbox(actual), Bridge.unbox(expected));
             },
-            areNotStrictEqual$1: function (expected, actual, description) {
-                Bridge.Test.NUnit.Assert.setStack();
+            AreNotStrictEqual$1: function (expected, actual, description) {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.notStrictEqual(Bridge.unbox(actual), Bridge.unbox(expected), description);
             },
-            true: function (condition) {
-                Bridge.Test.NUnit.Assert.setStack();
+            True: function (condition) {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.ok(condition);
             },
-            true$1: function (condition, message) {
-                Bridge.Test.NUnit.Assert.setStack();
+            True$1: function (condition, message) {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.ok(condition, message);
             },
-            false: function (condition) {
-                Bridge.Test.NUnit.Assert.setStack();
+            False: function (condition) {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.notOk(condition);
             },
-            false$1: function (condition, message) {
-                Bridge.Test.NUnit.Assert.setStack();
+            False$1: function (condition, message) {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.notOk(condition, message);
             },
-            fail: function () {
-                Bridge.Test.NUnit.Assert.setStack();
+            Fail: function () {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.ok(false);
             },
-            fail$1: function (message) {
-                Bridge.Test.NUnit.Assert.setStack();
+            Fail$1: function (message) {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.notOk(true, message);
             },
-            throws: function (block) {
-                Bridge.Test.NUnit.Assert.setStack();
+            Throws: function (block) {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.throws(block, "");
             },
-            throws$5: function (block, message) {
-                Bridge.Test.NUnit.Assert.setStack();
+            Throws$5: function (block, message) {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.throws(block, message);
             },
-            throws$6: function (T, block) {
-                Bridge.Test.NUnit.Assert.throws$7(T, block, "", 1);
+            Throws$6: function (T, block) {
+                Bridge.Test.NUnit.Assert.Throws$7(T, block, "", 1);
             },
-            throws$7: function (T, block, message, stackOffset) {
+            Throws$7: function (T, block, message, stackOffset) {
                 if (stackOffset === void 0) { stackOffset = 0; }
                 var actual = null;
                 var expected = Bridge.Reflection.getTypeFullName(T);
@@ -440,7 +440,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                     actual = Bridge.Reflection.getTypeFullName(Bridge.getType(ex));
                 }
 
-                Bridge.Test.NUnit.Assert.setStack(stackOffset);
+                Bridge.Test.NUnit.Assert.SetStack(stackOffset);
 
                 if (!Bridge.referenceEquals(actual, expected)) {
                     Bridge.Test.NUnit.Assert.assert.equal(actual, expected, message);
@@ -448,45 +448,45 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                     Bridge.Test.NUnit.Assert.assert.ok(true, message);
                 }
             },
-            throws$3: function (block, expected) {
-                Bridge.Test.NUnit.Assert.setStack();
+            Throws$3: function (block, expected) {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.throws(block, Bridge.unbox(expected));
             },
-            throws$4: function (block, expected, message) {
-                Bridge.Test.NUnit.Assert.setStack();
+            Throws$4: function (block, expected, message) {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.throws(block, Bridge.unbox(expected), message);
             },
-            throws$1: function (block, expected) {
-                Bridge.Test.NUnit.Assert.setStack();
+            Throws$1: function (block, expected) {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.throws(block, expected);
             },
-            throws$2: function (block, expected, message) {
-                Bridge.Test.NUnit.Assert.setStack();
+            Throws$2: function (block, expected, message) {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.throws(block, expected, message);
             },
-            null: function (anObject) {
-                Bridge.Test.NUnit.Assert.setStack();
+            Null: function (anObject) {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.ok(anObject == null);
             },
-            null$1: function (anObject, message) {
-                Bridge.Test.NUnit.Assert.setStack();
+            Null$1: function (anObject, message) {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.ok(anObject == null, message);
             },
-            notNull: function (anObject) {
-                Bridge.Test.NUnit.Assert.setStack();
+            NotNull: function (anObject) {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.notOk(anObject == null);
             },
-            notNull$1: function (anObject, message) {
-                Bridge.Test.NUnit.Assert.setStack();
+            NotNull$1: function (anObject, message) {
+                Bridge.Test.NUnit.Assert.SetStack();
                 Bridge.Test.NUnit.Assert.assert.notOk(anObject == null, message);
             }
         }
     });
 
     Bridge.define("Bridge.Test.Runtime.TestContext", {
-        file: null,
-        method: null,
-        line: null
+        File: null,
+        Method: null,
+        Line: null
     });
 });
 
@@ -498,36 +498,36 @@ QUnit.testDone(function (details) {
         //    return;
         //}
 
-        var ctx = Bridge.Test.Runtime.ContextHelper.getContext();
+        var ctx = Bridge.Test.Runtime.ContextHelper.GetContext();
 
-        if (ctx == null || (ctx.testCtx == null && ctx.fixtureCtx == null)) {
+        if (ctx == null || (ctx.TestCtx == null && ctx.FixtureCtx == null)) {
             return;
         }
 
-        var testId = Bridge.Test.Runtime.ContextHelper.getTestId(details);
+        var testId = Bridge.Test.Runtime.ContextHelper.GetTestId(details);
 
         if (testId == null) {
             return;
         }
 
-        var testItem = Bridge.Test.Runtime.ContextHelper.getTestOutput(testId);
+        var testItem = Bridge.Test.Runtime.ContextHelper.GetTestOutput(testId);
 
         if (testItem != null) {
-            Bridge.Test.Runtime.ContextHelper.adjustSourceElement(ctx, testItem);
+            Bridge.Test.Runtime.ContextHelper.AdjustSourceElement(ctx, testItem);
         }
     });
 QUnit.log(function (details) {
         // It will update a UI elements to show test source (JS) for the assertion (If the JS source (Stack) data found in the context)
 
-        var ctx = Bridge.Test.Runtime.ContextHelper.getContext();
+        var ctx = Bridge.Test.Runtime.ContextHelper.GetContext();
 
-        if (ctx == null || ctx.stack == null) {
+        if (ctx == null || ctx.Stack == null) {
             return;
         }
 
-        var testId = Bridge.Test.Runtime.ContextHelper.getTestId(details);
+        var testId = Bridge.Test.Runtime.ContextHelper.GetTestId(details);
 
-        var source = Bridge.Test.Runtime.ContextHelper.getTestSource$1(testId);
+        var source = Bridge.Test.Runtime.ContextHelper.GetTestSource$1(testId);
 
-        Bridge.Test.Runtime.ContextHelper.updateTestSource(source, ctx.stack);
+        Bridge.Test.Runtime.ContextHelper.UpdateTestSource(source, ctx.Stack);
     });

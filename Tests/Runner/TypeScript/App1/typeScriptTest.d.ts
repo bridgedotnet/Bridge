@@ -1,7 +1,7 @@
 /// <reference path="./bridge.d.ts" />
 
 interface N2493Operation1 {
-    add(n: number): number;
+    Add(n: number): number;
 }
 interface N2493Operation1Func extends Function {
     prototype: N2493Operation1;
@@ -10,7 +10,7 @@ interface N2493Operation1Func extends Function {
 declare var N2493Operation1: N2493Operation1Func;
 
 interface Operation2 {
-    add(n: number): number;
+    Add(n: number): number;
 }
 interface Operation2Func extends Function {
     prototype: Operation2;

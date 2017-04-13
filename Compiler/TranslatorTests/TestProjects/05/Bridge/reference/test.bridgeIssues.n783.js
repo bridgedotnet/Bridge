@@ -3,7 +3,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
     Bridge.define("Test.BridgeIssues.N783.App", {
         statics: {
-            main1: function () {
+            Main1: function () {
                 var base1 = new Test.BridgeIssues.N783.Base();
                 var base2 = new Test.BridgeIssues.N783.Base();
 

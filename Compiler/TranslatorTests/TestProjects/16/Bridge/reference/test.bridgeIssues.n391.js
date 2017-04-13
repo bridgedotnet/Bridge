@@ -3,7 +3,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
     Bridge.define("Test.BridgeIssues.N391.Class391", {
         statics: {
-            main1: function () {
+            Main1: function () {
                 var $t, $t1, $t2, $t3;
                 var TestArray1 = System.Array.init(["TestA", "TestB", "TestC"], System.String);
                 var TestArray2 = System.Array.init(["TestA", "TestB", "TestC"], System.String);

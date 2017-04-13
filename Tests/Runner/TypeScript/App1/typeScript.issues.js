@@ -4,7 +4,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     Bridge.define("TypeScript.Issues.N1060");
 
     Bridge.define("TypeScript.Issues.N1060.B$1", function (T) { return {
-        getC: function () {
+        GetC: function () {
             return new (TypeScript.Issues.N1060.B$1.C(T))();
         }
     }; });
@@ -69,14 +69,14 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
             try {
                 while ($t.moveNext()) {
                     var value = $t.Current;
-                    this.add(value.key, value.value);
+                    this.Add(value.key, value.value);
                 }
             }finally {
                 if (Bridge.is($t, System.IDisposable)) {
                     $t.System$IDisposable$dispose();
                 }
             }},
-    add: function (t1, t2) {
+    Add: function (t1, t2) {
         this._forward.add(t1, t2);
         this._reverse.add(t2, t1);
     }
@@ -94,7 +94,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         setItem: function (index, value) {
             this._dictionary.set(index, value);
         },
-        containsKey: function (index) {
+        ContainsKey: function (index) {
             return this._dictionary.containsKey(index);
         }
     }; });
@@ -132,7 +132,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
 
     Bridge.define("TypeScript.Issues.N2463", {
         statics: {
-            do: function (dummy) {
+            Do: function (dummy) {
                 dummy.nothing = (dummy.nothing + 1) | 0;
                 return dummy;
             }
@@ -216,7 +216,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     });
 
     Bridge.define("TypeScript.Issues.N2493Operation3", {
-        add: function (n) {
+        Add: function (n) {
             return ((n + 3) | 0);
         }
     });
@@ -228,17 +228,17 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
                 OnGameEvent: null
             },
             alias: [
-            "startGame", "TypeScript$Issues$N1640$IGamePlay$startGame",
+            "StartGame", "TypeScript$Issues$N1640$IGamePlay$StartGame",
             "addOnGameEvent", "TypeScript$Issues$N1640$IGamePlay$addOnGameEvent",
             "removeOnGameEvent", "TypeScript$Issues$N1640$IGamePlay$removeOnGameEvent"
             ]
         },
-        startGame: function (s) {
+        StartGame: function (s) {
             if (!Bridge.staticEquals(this.OnGameEvent, null)) {
                 this.OnGameEvent(this, s);
             }
         },
-        subscribe: function (handler) {
+        Subscribe: function (handler) {
             this.addOnGameEvent(handler);
         }
     });

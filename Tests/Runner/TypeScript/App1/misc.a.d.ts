@@ -2,7 +2,7 @@
 
 declare module Misc.A {
     export interface Class1 {
-        getInt(i: number): number;
+        GetInt(i: number): number;
     }
     export interface Class1Func extends Function {
         prototype: Class1;
@@ -11,7 +11,7 @@ declare module Misc.A {
     var Class1: Class1Func;
 
     export interface EnumTest {
-        doSomething(m: number): number;
+        DoSomething(m: number): number;
     }
     export interface EnumTestFunc extends Function {
         prototype: EnumTest;

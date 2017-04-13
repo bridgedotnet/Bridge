@@ -519,8 +519,7 @@ namespace Bridge.Translator
             var initializerIsString = false;
             if (member != null)
             {
-                var validator = new Validator();
-                var enumMode = validator.EnumEmitMode(member.Member.DeclaringTypeDefinition);
+                var enumMode = Helpers.EnumEmitMode(member.Member.DeclaringTypeDefinition);
 
                 if (enumMode >= 3 && enumMode < 7)
                 {
@@ -541,7 +540,7 @@ namespace Bridge.Translator
                             name = (bool)value ? Object.Net.Utilities.StringUtils.ToLowerCamelCase(member.Member.Name) : member.Member.Name;
                         }
 
-                        if (member.Member.IsStatic && Emitter.IsReservedStaticName(name))
+                        if (member.Member.IsStatic && Helpers.IsReservedStaticName(name))
                         {
                             name = Helpers.ChangeReservedWord(name);
                         }

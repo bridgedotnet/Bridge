@@ -45,6 +45,9 @@ namespace Bridge.ClientTest
                 Assert.True(arr is ICollection<int>, "is ICollection<int> should be true");
                 Assert.True(arr is IEnumerable<int>, "is IEnumerable<int> should be true");
                 Assert.True(arr is IList<int>, "is IList<int> should be true");
+                Assert.True(arr is IReadOnlyCollection<int>, "is IReadOnlyCollection<int> should be true");
+                Assert.True(arr is IReadOnlyList<int>, "is IReadOnlyList<int> should be true");
+
             }
 
             [Test]

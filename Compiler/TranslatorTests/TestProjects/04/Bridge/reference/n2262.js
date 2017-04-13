@@ -2,7 +2,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
     Bridge.define("TestProject.Issues.N2262", {
-        doSomething: function () {
+        DoSomething: function () {
             var i = new TestProject.Issues.N2262.CI2262();
 
             // [ExternalInterface(true)] should be applied on Assembly level

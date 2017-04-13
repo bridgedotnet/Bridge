@@ -10,7 +10,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [External]
         public interface I1
         {
+            [Convention(Notation.LowerCamelCase)]
             string Log();
+            [Convention(Notation.LowerCamelCase)]
             string Log(string msg);
         }
 
@@ -43,7 +45,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [External]
         public interface IConsole
         {
+            [Convention(Notation.LowerCamelCase)]
             string Log();
+            [Convention(Notation.LowerCamelCase)]
             string Log(string message);
         }
 

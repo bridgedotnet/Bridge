@@ -1,6 +1,8 @@
     Bridge.define('System.Collections.Generic.Dictionary$2', function (TKey, TValue) {
         return {
-            inherits: [System.Collections.Generic.IDictionary$2(TKey, TValue), System.Collections.IDictionary],
+            inherits: [System.Collections.Generic.IDictionary$2(TKey, TValue),
+                System.Collections.IDictionary,
+                System.Collections.Generic.IReadOnlyDictionary$2(TKey, TValue)],
 
             config: {
                 properties: {
@@ -53,7 +55,14 @@
                     "getValues", "System$Collections$IDictionary$getValues",
                     "IsReadOnly", "System$Collections$IDictionary$IsReadOnly",
                     "Keys", "System$Collections$IDictionary$Keys",
-                    "Values", "System$Collections$IDictionary$Values"
+                    "Values", "System$Collections$IDictionary$Values",
+                    "get", "System$Collections$Generic$IReadOnlyDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getItem",
+                    "Keys", "System$Collections$Generic$IReadOnlyDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$Keys",
+                    "getKeys", "System$Collections$Generic$IReadOnlyDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getKeys",
+                    "getValues", "System$Collections$Generic$IReadOnlyDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getValues",
+                    "Values", "System$Collections$Generic$IReadOnlyDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$Values",
+                    "containsKey", "System$Collections$Generic$IReadOnlyDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$containsKey",
+                    "tryGetValue", "System$Collections$Generic$IReadOnlyDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$tryGetValue"
                 ]
             },
 
@@ -270,10 +279,14 @@
 
                     return true;
                 }, function () {
+                    if (hashIndex < 0 || hashIndex >= hashes.length) {
+                        return new (System.Collections.Generic.KeyValuePair$2(TKey, TValue))()
+                    }
+
                     return fn(this.entries[hashes[hashIndex]][keyIndex]);
                 }, function () {
                     hashIndex = -1;
-                }, null, this);
+                }, null, this, System.Collections.Generic.KeyValuePair$2(TKey, TValue));
             },
 
             getEnumerator: function () {
