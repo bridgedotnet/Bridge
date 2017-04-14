@@ -223,9 +223,9 @@
 
         property: function (scope, name, v, statics, cls, alias) {
             var cfg = {
-                    enumerable: alias ? false : true,
-                    configurable: false
-                };
+                enumerable: alias ? false : true,
+                configurable: true
+            };
 
             if (v && v.get) {
                 cfg.get = v.get;

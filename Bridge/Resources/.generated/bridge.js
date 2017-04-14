@@ -242,9 +242,9 @@
 
         property: function (scope, name, v, statics, cls, alias) {
             var cfg = {
-                    enumerable: alias ? false : true,
-                    configurable: false
-                };
+                enumerable: alias ? false : true,
+                configurable: true
+            };
 
             if (v && v.get) {
                 cfg.get = v.get;
@@ -2212,7 +2212,8 @@
             var initFn,
                 name,
                 cls = (statics ? scope : scope.ctor),
-                descriptors = cls.$descriptors;
+                descriptors = cls.$descriptors,
+                aliases = cls.$aliases;
 
             if (config.fields) {
                 for (name in config.fields) {
@@ -2239,17 +2240,18 @@
 
             if (config.alias) {
                 for (var i = 0; i < config.alias.length; i++) {
-                    (function (obj, name, alias) {
-                        var descriptor = null;
-                        for (var i = descriptors.length - 1; i >= 0; i--) {
-                            if (descriptors[i].name === name) {
-                                descriptor = descriptors[i];
-                                break;
+                    (function (obj, name, alias, cls) {
+                            var descriptor = null;
+                            for (var i = descriptors.length - 1; i >= 0; i--) {
+                                if (descriptors[i].name === name) {
+                                    descriptor = descriptors[i];
+                                    break;
+                                }
                             }
-                        }
 
                         if (descriptor != null) {
                             Object.defineProperty(obj, alias, descriptor);
+                            aliases.push({alias: alias, descriptor: descriptor});
                         } else {
                             var m = scope[name];
 
@@ -2258,9 +2260,10 @@
                             }
 
                             scope[alias] = m;
+                            aliases.push({ fn: name, alias: alias });
                         }
                         
-                    })(statics ? scope : prototype, config.alias[i], config.alias[i + 1]);
+                    })(statics ? scope : prototype, config.alias[i], config.alias[i + 1], cls);
 
                     i++;
                 }
@@ -2579,8 +2582,8 @@
             };
 
             if (isEntryPoint || Bridge.isFunction(prototype.$main)) {
-                if (!Class.main && prototype.$main) {
-                    Class.main = prototype.$main;
+                if (!Class.Main && prototype.$main) {
+                    Class.Main = prototype.$main;
                 }
 
                 Bridge.Class.$queueEntry.push(Class);
@@ -2639,17 +2642,25 @@
         createInheritors: function(cls, extend) {
             var interfaces = [],
                 baseInterfaces = [],
-                descriptors = [];
+                descriptors = [],
+                aliases = [];
 
             if (extend) {
                 for (var j = 0; j < extend.length; j++) {
                     var baseType = extend[j],
                         baseI = (baseType.$interfaces || []).concat(baseType.$baseInterfaces || []),
-                        baseDescriptors = baseType.$descriptors;
+                        baseDescriptors = baseType.$descriptors,
+                        baseAliases = baseType.$aliases;
 
                     if (baseDescriptors && baseDescriptors.length > 0) {
                         for (var d = 0; d < baseDescriptors.length; d++) {
                             descriptors.push(baseDescriptors[d]);
+                        }
+                    }
+
+                    if (baseAliases && baseAliases.length > 0) {
+                        for (var d = 0; d < baseAliases.length; d++) {
+                            aliases.push(baseAliases[d]);
                         }
                     }
 
@@ -2668,6 +2679,7 @@
             }
 
             cls.$descriptors = descriptors;
+            cls.$aliases = aliases;
             cls.$baseInterfaces = baseInterfaces;
             cls.$interfaces = interfaces;
             cls.$allInterfaces = interfaces.concat(baseInterfaces);
@@ -2991,7 +3003,12 @@
                 }
 
                 if (t.prototype.$main) {
-                    Bridge.ready(t.main);
+                    (function(cls) {
+                        Bridge.ready(function() {
+                             cls.Main();
+                        });
+                    })(t);
+                    
                     t.prototype.$main = null;
                 }
             }
