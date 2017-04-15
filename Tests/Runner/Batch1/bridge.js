@@ -19468,9 +19468,9 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                     ExitCode: 0,
                     Is64BitOperatingSystem: {
                         get: function () {
-                            var g = Bridge.global;
+                            var n = Bridge.global ? Bridge.global.navigator : null;
 
-                            if (g && g.navigator && (!Bridge.referenceEquals(g.navigator.userAgent.indexOf("WOW64"), -1) || !Bridge.referenceEquals(g.navigator.userAgent.indexOf("Win64"), -1))) {
+                            if (n && (!Bridge.referenceEquals(n.userAgent.indexOf("WOW64"), -1) || !Bridge.referenceEquals(n.userAgent.indexOf("Win64"), -1))) {
                                 return true;
                             }
 
@@ -19479,10 +19479,10 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                     },
                     ProcessorCount: {
                         get: function () {
-                            var g = Bridge.global;
+                            var n = Bridge.global ? Bridge.global.navigator : null;
 
-                            if (g && g.navigator && g.navigator.hardwareConcurrency) {
-                                return g.navigator.hardwareConcurrency;
+                            if (n && n.hardwareConcurrency) {
+                                return n.hardwareConcurrency;
                             }
 
                             return 1;

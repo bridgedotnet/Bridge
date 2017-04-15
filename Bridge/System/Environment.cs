@@ -403,11 +403,9 @@ namespace System
         {
             get
             {
-                dynamic g = Global;
+                dynamic n = Global ? Global.navigator : null;
 
-                if (g && g.navigator
-                    && (g.navigator.userAgent.indexOf("WOW64") != -1 ||
-                        g.navigator.userAgent.indexOf("Win64") != -1))
+                if (n && (n.userAgent.indexOf("WOW64") != -1 || n.userAgent.indexOf("Win64") != -1))
                 {
                     return true;
                 }
@@ -463,11 +461,11 @@ namespace System
         {
             get
             {
-                dynamic g = Global;
+                dynamic n = Global ? Global.navigator : null;
 
-                if (g && g.navigator && g.navigator.hardwareConcurrency)
+                if (n && n.hardwareConcurrency)
                 {
-                    return g.navigator.hardwareConcurrency;
+                    return n.hardwareConcurrency;
                 }
 
                 return 1;
