@@ -11587,6 +11587,8 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 ]
             },
 
+            noKeyCheck: false,
+
             ctor: function (obj, comparer) {
                 this.$initialize();
                 this.comparer = comparer || System.Collections.Generic.EqualityComparer$1(TKey).def;
@@ -11690,6 +11692,10 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 var entry = this.findEntry(key);
 
                 if (!entry) {
+                    if (this.noKeyCheck){
+                        return Bridge.getDefaultValue(TValue);
+                    }
+
                     throw new System.Collections.Generic.KeyNotFoundException('Key ' + key + ' does not exist.');
                 }
 
@@ -19416,6 +19422,214 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
             this._k = r[System.Array.index(7, r)];
         },
         $clone: function (to) { return this; }
+    });
+
+    // @source environment.js
+
+    Bridge.define("System.Environment", {
+        statics: {
+            ctor: function () {
+                System.Environment.variables = new (System.Collections.Generic.Dictionary$2(System.String,System.String))();
+                System.Environment.patchDictionary(System.Environment.variables);
+            },
+            variables: null,
+            config: {
+                properties: {
+                    Location: {
+                        get: function () {
+                            var g = Bridge.global;
+
+                            if (g && g.location) {
+                                return g.location;
+                            }
+
+                            return null;
+                        }
+                    },
+                    CommandLine: {
+                        get: function () {
+                            return System.Environment.getCommandLineArgs().join(" ");
+                        }
+                    },
+                    CurrentDirectory: {
+                        get: function () {
+                            var l = System.Environment.Location;
+
+                            return l ? l.pathname : "";
+                        },
+                        set: function (value) {
+                            var l = System.Environment.Location;
+
+                            if (l) {
+                                l.pathname = value;
+                            }
+                        }
+                    },
+                    ExitCode: 0,
+                    Is64BitOperatingSystem: {
+                        get: function () {
+                            var g = Bridge.global;
+
+                            if (g && g.navigator && (!Bridge.referenceEquals(g.navigator.userAgent.indexOf("WOW64"), -1) || !Bridge.referenceEquals(g.navigator.userAgent.indexOf("Win64"), -1))) {
+                                return true;
+                            }
+
+                            return false;
+                        }
+                    },
+                    ProcessorCount: {
+                        get: function () {
+                            var g = Bridge.global;
+
+                            if (g && g.navigator && g.navigator.hardwareConcurrency) {
+                                return g.navigator.hardwareConcurrency;
+                            }
+
+                            return 1;
+                        }
+                    },
+                    StackTrace: {
+                        get: function () {
+                            var err = new Error();
+                            var s = err.stack;
+
+                            if (!System.String.isNullOrEmpty(s)) {
+                                if (System.String.indexOf(s, "at") >= 0) {
+                                    return s.substr(System.String.indexOf(s, "at"));
+                                }
+                            }
+
+                            return "";
+                        }
+                    },
+                    Version: {
+                        get: function () {
+                            var s = Bridge.SystemAssembly.compiler;
+
+                            var v = { };
+
+                            if (System.Version.tryParse(s, v)) {
+                                return v.v;
+                            }
+
+                            return new System.Version.ctor();
+                        }
+                    }
+                }
+            },
+            patchDictionary: function (d) {
+                d.noKeyCheck = true;
+
+                return d;
+            },
+            exit: function (exitCode) {
+                System.Environment.ExitCode = exitCode;
+            },
+            expandEnvironmentVariables: function (name) {
+                var $t;
+                if (name == null) {
+                    throw new System.ArgumentNullException(name);
+                }
+
+                // Case sensitive
+                $t = Bridge.getEnumerator(System.Environment.variables);
+                try {
+                    while ($t.moveNext()) {
+                        var pair = $t.Current;
+                        name = System.String.replaceAll(name, System.String.concat("%", pair.key, "%"), pair.value);
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }
+                return name;
+            },
+            failFast: function (message) {
+                throw new System.Exception(message);
+            },
+            failFast$1: function (message, exception) {
+                throw new System.Exception(message, exception);
+            },
+            getCommandLineArgs: function () {
+                var l = System.Environment.Location;
+
+                if (l) {
+                    var args = new (System.Collections.Generic.List$1(System.String))();
+
+                    var path = l.pathname;
+
+                    if (!System.String.isNullOrEmpty(path)) {
+                        args.add(path);
+                    }
+
+                    var search = l.search;
+
+                    if (!System.String.isNullOrEmpty(search) && search.length > 1) {
+                        var query = System.String.split(search.substr(1), [38].map(function(i) {{ return String.fromCharCode(i); }}));
+
+                        for (var i = 0; i < query.length; i = (i + 1) | 0) {
+                            var param = System.String.split(query[System.Array.index(i, query)], [61].map(function(i) {{ return String.fromCharCode(i); }}));
+
+                            for (var j = 0; j < param.length; j = (j + 1) | 0) {
+                                args.add(param[System.Array.index(j, param)]);
+                            }
+                        }
+                    }
+
+                    return args.toArray();
+                }
+
+                return System.Array.init(0, null, System.String);
+            },
+            getEnvironmentVariable: function (variable) {
+                if (variable == null) {
+                    throw new System.ArgumentNullException("variable");
+                }
+
+                var r = { };
+
+                if (System.Environment.variables.tryGetValue(variable.toLowerCase(), r)) {
+                    return r.v;
+                }
+
+                return null;
+            },
+            getEnvironmentVariable$1: function (variable, target) {
+                return System.Environment.getEnvironmentVariable(variable);
+            },
+            getEnvironmentVariables: function () {
+                return System.Environment.patchDictionary(new (System.Collections.Generic.Dictionary$2(System.String,System.String))(System.Environment.variables));
+            },
+            getEnvironmentVariables$1: function (target) {
+                return System.Environment.getEnvironmentVariables();
+            },
+            getLogicalDrives: function () {
+                return System.Array.init(0, null, System.String);
+            },
+            setEnvironmentVariable: function (variable, value) {
+                if (variable == null) {
+                    throw new System.ArgumentNullException("variable");
+                }
+
+                if (System.String.isNullOrEmpty(variable) || System.String.startsWith(variable, String.fromCharCode(0)) || System.String.contains(variable,"=") || variable.length > 32767) {
+                    throw new System.ArgumentException("Incorrect variable (cannot be empty, contain zero character nor equal sign, be longer than 32767).");
+                }
+
+                variable = variable.toLowerCase();
+
+                if (System.String.isNullOrEmpty(value)) {
+                    if (System.Environment.variables.containsKey(variable)) {
+                        System.Environment.variables.remove(variable);
+                    }
+                } else {
+                    System.Environment.variables.set(variable, value);
+                }
+            },
+            setEnvironmentVariable$1: function (variable, value, target) {
+                System.Environment.setEnvironmentVariable(variable, value);
+            }
+        }
     });
 
     // @source Regex.js
