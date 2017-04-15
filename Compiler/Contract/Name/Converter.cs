@@ -257,7 +257,7 @@ namespace Bridge.Contract
                         }
                     }
                 }
-                else if (acceptable && !rule.Target.HasFlag(ConventionTarget.Member))
+                else if (acceptable && !rule.Target.HasFlag(ConventionTarget.Member) && !rule.Target.HasFlag(ConventionTarget.External) && !rule.Target.HasFlag(ConventionTarget.Anonymous))
                 {
                     acceptable = false;
                 }
@@ -291,8 +291,8 @@ namespace Bridge.Contract
                 if (field != null)
                 {
                     if (!(rule.Member.HasFlag(ConventionMember.Field) && !field.IsConst ||
-                          rule.Member.HasFlag(ConventionMember.EnumItem) && field.IsConst && semantic.Entity.DeclaringTypeDefinition.Kind != TypeKind.Enum ||
-                          rule.Member.HasFlag(ConventionMember.Const) && field.IsConst))
+                          rule.Member.HasFlag(ConventionMember.EnumItem) && field.IsConst && semantic.Entity.DeclaringTypeDefinition.Kind == TypeKind.Enum ||
+                          rule.Member.HasFlag(ConventionMember.Const) && field.IsConst && semantic.Entity.DeclaringTypeDefinition.Kind != TypeKind.Enum))
                     {
                         acceptable = false;
                     }

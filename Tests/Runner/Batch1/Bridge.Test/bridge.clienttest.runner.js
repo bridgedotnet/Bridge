@@ -444,8 +444,6 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("Convention.ClassAttribute - EnumItemMemberTest", Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests.EnumItemMemberTest);
             QUnit.test("Convention.ClassAttribute - EnumTargetTest", Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests.EnumTargetTest);
             QUnit.test("Convention.ClassAttribute - ExternalTargetTest", Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests.ExternalTargetTest);
-            QUnit.test("Convention.ClassAttribute - AnonymousTargetTest", Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests.AnonymousTargetTest);
-            QUnit.test("Convention.ClassAttribute - DelegateTargetTest", Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests.DelegateTargetTest);
             QUnit.module("Convert");
             QUnit.test("Convert.FromBase64 - Roundtrip1", Bridge.Test.Runtime.BridgeClientTestRunner.ConvertFromBase64Tests.Roundtrip1);
             QUnit.test("Convert.FromBase64 - Roundtrip2", Bridge.Test.Runtime.BridgeClientTestRunner.ConvertFromBase64Tests.Roundtrip2);
@@ -5369,30 +5367,16 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             EnumTargetTest: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "EnumTargetTest()",
-                    Line: "547"
+                    Line: "544"
                 } ));
                 Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests.EnumTargetTest();
             },
             ExternalTargetTest: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "ExternalTargetTest()",
-                    Line: "564"
+                    Line: "561"
                 } ));
                 Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests.ExternalTargetTest();
-            },
-            AnonymousTargetTest: function (assert) {
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
-                    Method: "AnonymousTargetTest()",
-                    Line: "575"
-                } ));
-                Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests.AnonymousTargetTest();
-            },
-            DelegateTargetTest: function (assert) {
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ClassAttributeTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
-                    Method: "DelegateTargetTest()",
-                    Line: "591"
-                } ));
-                Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests.DelegateTargetTest();
             }
         },
         context: null,
@@ -21990,7 +21974,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             TestBasic: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestAutoProps).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestAutoProps, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "TestBasic()",
-                    Line: "27"
+                    Line: "31"
                 } ));
                 Bridge.ClientTest.CSharp6.TestAutoProps.TestBasic();
             }
@@ -22363,7 +22347,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             TestBasic: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestInterpolatedStrings).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestInterpolatedStrings, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "TestBasic()",
-                    Line: "35"
+                    Line: "37"
                 } ));
                 Bridge.ClientTest.CSharp6.TestInterpolatedStrings.TestBasic();
             }

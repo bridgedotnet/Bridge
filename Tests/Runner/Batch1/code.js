@@ -12911,14 +12911,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             EnumItemMemberTest: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("Bridge.ClientTest.ConventionTests.Class.Enum2", Bridge.Reflection.getTypeFullName(Bridge.ClientTest.ConventionTests.Class.Enum2));
-
-                //#2477 Test failing
-                //Assert.AreEqual("enummember1", Enum.ToString(typeof(Enum2), Enum2.EnumMember1));
+                Bridge.Test.NUnit.Assert.AreEqual("enummember1", System.Enum.toString(Bridge.ClientTest.ConventionTests.Class.Enum2, Bridge.box(Bridge.ClientTest.ConventionTests.Class.Enum2.enummember1, Bridge.ClientTest.ConventionTests.Class.Enum2, $box_.Bridge.ClientTest.ConventionTests.Class.Enum2.toString)));
                 Bridge.Test.NUnit.Assert.AreEqual("EnumMember2", System.Enum.toString(Bridge.ClientTest.ConventionTests.Class.Enum2, Bridge.box(Bridge.ClientTest.ConventionTests.Class.Enum2.EnumMember2, Bridge.ClientTest.ConventionTests.Class.Enum2, $box_.Bridge.ClientTest.ConventionTests.Class.Enum2.toString)));
 
                 Bridge.Test.NUnit.Assert.NotNull(Bridge.global.Bridge.ClientTest.ConventionTests.Class.Enum2);
-                //#2477 Test failing
-                //Assert.NotNull(Global.ToDynamic().Bridge.ClientTest.ConventionTests.Class.Enum2.enummember1);
+                Bridge.Test.NUnit.Assert.NotNull(Bridge.global.Bridge.ClientTest.ConventionTests.Class.Enum2.enummember1);
                 Bridge.Test.NUnit.Assert.NotNull(Bridge.global.Bridge.ClientTest.ConventionTests.Class.Enum2.EnumMember2);
             },
             EnumTargetTest: function () {
@@ -12939,42 +12936,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var c9 = new Bridge.ClientTest.ConventionTests.Class.CLASS9();
 
                 Bridge.Test.NUnit.Assert.Null(c9.externalprop91);
-                c9.ExternalProp91 = 1;
-                //#2477 Test failing
-                //Assert.NotNull(c9.As<dynamic>().externalprop91);
-            },
-            AnonymousTargetTest: function () {
-                var c = new Bridge.ClientTest.ConventionTests.Class.CLASS13();
-
-                var sum = { };
-                var a = c.GetObject(7, 8, sum);
-
-                Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(a));
-                Bridge.Test.NUnit.Assert.AreEqual(15, sum.v);
-                //#2477 Test failing
-                //Assert.AreEqual(7, c.As<dynamic>().member1);
-                //#2477 Test failing
-                //Assert.AreEqual(8, c.As<dynamic>().member2);
-            },
-            DelegateTargetTest: function () {
-                var c = new Bridge.ClientTest.ConventionTests.Class.CLASS14();
-
-                Bridge.Test.NUnit.Assert.Null(c.DelegateProp91);
-
-                c.delegateProp91 = $asm.$.Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests.f1;
-
-                Bridge.Test.NUnit.Assert.AreEqual(1, c.delegateProp91());
-                //#2477 Test failing
-                //Assert.NotNull(c.As<dynamic>().DelegateProp91);
+                c9.externalprop91 = 1;
+                Bridge.Test.NUnit.Assert.NotNull(c9.externalprop91);
             }
-        }
-    });
-
-    Bridge.ns("Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests", $asm.$);
-
-    Bridge.apply($asm.$.Bridge.ClientTest.ConventionTests.Class.ClassAttributeTests, {
-        f1: function () {
-            return 1;
         }
     });
 
@@ -12991,7 +12955,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.ConventionTests.Class.Enum2", {
         $kind: "enum",
         statics: {
-            EnumMember1: 0,
+            enummember1: 0,
             EnumMember2: 1
         }
     });

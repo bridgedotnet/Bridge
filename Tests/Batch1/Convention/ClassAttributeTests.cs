@@ -533,14 +533,11 @@ namespace Bridge.ClientTest.ConventionTests.Class
         public static void EnumItemMemberTest()
         {
             Assert.AreEqual("Bridge.ClientTest.ConventionTests.Class.Enum2", typeof(Enum2).FullName);
-
-            //#2477 Test failing
-            //Assert.AreEqual("enummember1", Enum.ToString(typeof(Enum2), Enum2.EnumMember1));
+            Assert.AreEqual("enummember1", Enum.ToString(typeof(Enum2), Enum2.EnumMember1));
             Assert.AreEqual("EnumMember2", Enum.ToString(typeof(Enum2), Enum2.enumMember2));
 
             Assert.NotNull(Global.ToDynamic().Bridge.ClientTest.ConventionTests.Class.Enum2);
-            //#2477 Test failing
-            //Assert.NotNull(Global.ToDynamic().Bridge.ClientTest.ConventionTests.Class.Enum2.enummember1);
+            Assert.NotNull(Global.ToDynamic().Bridge.ClientTest.ConventionTests.Class.Enum2.enummember1);
             Assert.NotNull(Global.ToDynamic().Bridge.ClientTest.ConventionTests.Class.Enum2.EnumMember2);
         }
 
@@ -568,10 +565,10 @@ namespace Bridge.ClientTest.ConventionTests.Class
 
             Assert.Null(c9.As<dynamic>().externalprop91);
             c9.ExternalProp91 = 1;
-            //#2477 Test failing
-            //Assert.NotNull(c9.As<dynamic>().externalprop91);
+            Assert.NotNull(c9.As<dynamic>().externalprop91);
         }
 
+        /* Anonymous target can be applied on assembly level only
         [Test]
         public static void AnonymousTargetTest()
         {
@@ -582,12 +579,11 @@ namespace Bridge.ClientTest.ConventionTests.Class
 
             Assert.NotNull(a);
             Assert.AreEqual(15, sum);
-            //#2477 Test failing
-            //Assert.AreEqual(7, c.As<dynamic>().member1);
-            //#2477 Test failing
-            //Assert.AreEqual(8, c.As<dynamic>().member2);
-        }
+            Assert.AreEqual(7, c.As<dynamic>().member1);
+            Assert.AreEqual(8, c.As<dynamic>().member2);
+        }*/
 
+        /* DelegateProp91 is property, not delegate
         [Test]
         public static void DelegateTargetTest()
         {
@@ -598,8 +594,7 @@ namespace Bridge.ClientTest.ConventionTests.Class
             c.delegateProp91 = () => { return 1; };
 
             Assert.AreEqual(1, c.delegateProp91());
-            //#2477 Test failing
-            //Assert.NotNull(c.As<dynamic>().DelegateProp91);
-        }
+            Assert.NotNull(c.As<dynamic>().DelegateProp91);
+        }*/
     }
 }
