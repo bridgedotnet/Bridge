@@ -242,9 +242,9 @@
 
         property: function (scope, name, v, statics, cls, alias) {
             var cfg = {
-                    enumerable: alias ? false : true,
-                    configurable: false
-                };
+                enumerable: alias ? false : true,
+                configurable: true
+            };
 
             if (v && v.get) {
                 cfg.get = v.get;
@@ -2212,7 +2212,8 @@
             var initFn,
                 name,
                 cls = (statics ? scope : scope.ctor),
-                descriptors = cls.$descriptors;
+                descriptors = cls.$descriptors,
+                aliases = cls.$aliases;
 
             if (config.fields) {
                 for (name in config.fields) {
@@ -2239,7 +2240,7 @@
 
             if (config.alias) {
                 for (var i = 0; i < config.alias.length; i++) {
-                    (function (obj, name, alias) {
+                    (function (obj, name, alias, cls) {
                         var descriptor = null;
                         for (var i = descriptors.length - 1; i >= 0; i--) {
                             if (descriptors[i].name === name) {
@@ -2250,6 +2251,7 @@
 
                         if (descriptor != null) {
                             Object.defineProperty(obj, alias, descriptor);
+                            aliases.push({alias: alias, descriptor: descriptor});
                         } else {
                             var m = scope[name];
 
@@ -2258,9 +2260,10 @@
                             }
 
                             scope[alias] = m;
+                            aliases.push({ fn: name, alias: alias });
                         }
                         
-                    })(statics ? scope : prototype, config.alias[i], config.alias[i + 1]);
+                    })(statics ? scope : prototype, config.alias[i], config.alias[i + 1], cls);
 
                     i++;
                 }
@@ -2579,8 +2582,8 @@
             };
 
             if (isEntryPoint || Bridge.isFunction(prototype.$main)) {
-                if (!Class.main && prototype.$main) {
-                    Class.main = prototype.$main;
+                if (!Class.Main && prototype.$main) {
+                    Class.Main = prototype.$main;
                 }
 
                 Bridge.Class.$queueEntry.push(Class);
@@ -2639,17 +2642,25 @@
         createInheritors: function(cls, extend) {
             var interfaces = [],
                 baseInterfaces = [],
-                descriptors = [];
+                descriptors = [],
+                aliases = [];
 
             if (extend) {
                 for (var j = 0; j < extend.length; j++) {
                     var baseType = extend[j],
                         baseI = (baseType.$interfaces || []).concat(baseType.$baseInterfaces || []),
-                        baseDescriptors = baseType.$descriptors;
+                        baseDescriptors = baseType.$descriptors,
+                        baseAliases = baseType.$aliases;
 
                     if (baseDescriptors && baseDescriptors.length > 0) {
                         for (var d = 0; d < baseDescriptors.length; d++) {
                             descriptors.push(baseDescriptors[d]);
+                        }
+                    }
+
+                    if (baseAliases && baseAliases.length > 0) {
+                        for (var d = 0; d < baseAliases.length; d++) {
+                            aliases.push(baseAliases[d]);
                         }
                     }
 
@@ -2668,6 +2679,7 @@
             }
 
             cls.$descriptors = descriptors;
+            cls.$aliases = aliases;
             cls.$baseInterfaces = baseInterfaces;
             cls.$interfaces = interfaces;
             cls.$allInterfaces = interfaces.concat(baseInterfaces);
@@ -2991,7 +3003,12 @@
                 }
 
                 if (t.prototype.$main) {
-                    Bridge.ready(t.main);
+                    (function(cls) {
+                        Bridge.ready(function() {
+                             cls.Main();
+                        });
+                    })(t);
+                    
                     t.prototype.$main = null;
                 }
             }
@@ -11587,6 +11604,8 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 ]
             },
 
+            noKeyCheck: false,
+
             ctor: function (obj, comparer) {
                 this.$initialize();
                 this.comparer = comparer || System.Collections.Generic.EqualityComparer$1(TKey).def;
@@ -11690,6 +11709,10 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 var entry = this.findEntry(key);
 
                 if (!entry) {
+                    if (this.noKeyCheck){
+                        return Bridge.getDefaultValue(TValue);
+                    }
+
                     throw new System.Collections.Generic.KeyNotFoundException('Key ' + key + ' does not exist.');
                 }
 
@@ -19416,6 +19439,214 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
             this._k = r[System.Array.index(7, r)];
         },
         $clone: function (to) { return this; }
+    });
+
+    // @source environment.js
+
+    Bridge.define("System.Environment", {
+        statics: {
+            ctor: function () {
+                System.Environment.variables = new (System.Collections.Generic.Dictionary$2(System.String,System.String))();
+                System.Environment.patchDictionary(System.Environment.variables);
+            },
+            variables: null,
+            config: {
+                properties: {
+                    Location: {
+                        get: function () {
+                            var g = Bridge.global;
+
+                            if (g && g.location) {
+                                return g.location;
+                            }
+
+                            return null;
+                        }
+                    },
+                    CommandLine: {
+                        get: function () {
+                            return System.Environment.getCommandLineArgs().join(" ");
+                        }
+                    },
+                    CurrentDirectory: {
+                        get: function () {
+                            var l = System.Environment.Location;
+
+                            return l ? l.pathname : "";
+                        },
+                        set: function (value) {
+                            var l = System.Environment.Location;
+
+                            if (l) {
+                                l.pathname = value;
+                            }
+                        }
+                    },
+                    ExitCode: 0,
+                    Is64BitOperatingSystem: {
+                        get: function () {
+                            var n = Bridge.global ? Bridge.global.navigator : null;
+
+                            if (n && (!Bridge.referenceEquals(n.userAgent.indexOf("WOW64"), -1) || !Bridge.referenceEquals(n.userAgent.indexOf("Win64"), -1))) {
+                                return true;
+                            }
+
+                            return false;
+                        }
+                    },
+                    ProcessorCount: {
+                        get: function () {
+                            var n = Bridge.global ? Bridge.global.navigator : null;
+
+                            if (n && n.hardwareConcurrency) {
+                                return n.hardwareConcurrency;
+                            }
+
+                            return 1;
+                        }
+                    },
+                    StackTrace: {
+                        get: function () {
+                            var err = new Error();
+                            var s = err.stack;
+
+                            if (!System.String.isNullOrEmpty(s)) {
+                                if (System.String.indexOf(s, "at") >= 0) {
+                                    return s.substr(System.String.indexOf(s, "at"));
+                                }
+                            }
+
+                            return "";
+                        }
+                    },
+                    Version: {
+                        get: function () {
+                            var s = Bridge.SystemAssembly.compiler;
+
+                            var v = { };
+
+                            if (System.Version.tryParse(s, v)) {
+                                return v.v;
+                            }
+
+                            return new System.Version.ctor();
+                        }
+                    }
+                }
+            },
+            patchDictionary: function (d) {
+                d.noKeyCheck = true;
+
+                return d;
+            },
+            exit: function (exitCode) {
+                System.Environment.ExitCode = exitCode;
+            },
+            expandEnvironmentVariables: function (name) {
+                var $t;
+                if (name == null) {
+                    throw new System.ArgumentNullException(name);
+                }
+
+                // Case sensitive
+                $t = Bridge.getEnumerator(System.Environment.variables);
+                try {
+                    while ($t.moveNext()) {
+                        var pair = $t.Current;
+                        name = System.String.replaceAll(name, System.String.concat("%", pair.key, "%"), pair.value);
+                    }
+                }finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }
+                return name;
+            },
+            failFast: function (message) {
+                throw new System.Exception(message);
+            },
+            failFast$1: function (message, exception) {
+                throw new System.Exception(message, exception);
+            },
+            getCommandLineArgs: function () {
+                var l = System.Environment.Location;
+
+                if (l) {
+                    var args = new (System.Collections.Generic.List$1(System.String))();
+
+                    var path = l.pathname;
+
+                    if (!System.String.isNullOrEmpty(path)) {
+                        args.add(path);
+                    }
+
+                    var search = l.search;
+
+                    if (!System.String.isNullOrEmpty(search) && search.length > 1) {
+                        var query = System.String.split(search.substr(1), [38].map(function(i) {{ return String.fromCharCode(i); }}));
+
+                        for (var i = 0; i < query.length; i = (i + 1) | 0) {
+                            var param = System.String.split(query[System.Array.index(i, query)], [61].map(function(i) {{ return String.fromCharCode(i); }}));
+
+                            for (var j = 0; j < param.length; j = (j + 1) | 0) {
+                                args.add(param[System.Array.index(j, param)]);
+                            }
+                        }
+                    }
+
+                    return args.toArray();
+                }
+
+                return System.Array.init(0, null, System.String);
+            },
+            getEnvironmentVariable: function (variable) {
+                if (variable == null) {
+                    throw new System.ArgumentNullException("variable");
+                }
+
+                var r = { };
+
+                if (System.Environment.variables.tryGetValue(variable.toLowerCase(), r)) {
+                    return r.v;
+                }
+
+                return null;
+            },
+            getEnvironmentVariable$1: function (variable, target) {
+                return System.Environment.getEnvironmentVariable(variable);
+            },
+            getEnvironmentVariables: function () {
+                return System.Environment.patchDictionary(new (System.Collections.Generic.Dictionary$2(System.String,System.String))(System.Environment.variables));
+            },
+            getEnvironmentVariables$1: function (target) {
+                return System.Environment.getEnvironmentVariables();
+            },
+            getLogicalDrives: function () {
+                return System.Array.init(0, null, System.String);
+            },
+            setEnvironmentVariable: function (variable, value) {
+                if (variable == null) {
+                    throw new System.ArgumentNullException("variable");
+                }
+
+                if (System.String.isNullOrEmpty(variable) || System.String.startsWith(variable, String.fromCharCode(0)) || System.String.contains(variable,"=") || variable.length > 32767) {
+                    throw new System.ArgumentException("Incorrect variable (cannot be empty, contain zero character nor equal sign, be longer than 32767).");
+                }
+
+                variable = variable.toLowerCase();
+
+                if (System.String.isNullOrEmpty(value)) {
+                    if (System.Environment.variables.containsKey(variable)) {
+                        System.Environment.variables.remove(variable);
+                    }
+                } else {
+                    System.Environment.variables.set(variable, value);
+                }
+            },
+            setEnvironmentVariable$1: function (variable, value, target) {
+                System.Environment.setEnvironmentVariable(variable, value);
+            }
+        }
     });
 
     // @source Regex.js

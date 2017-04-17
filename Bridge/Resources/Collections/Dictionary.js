@@ -66,6 +66,8 @@
                 ]
             },
 
+            noKeyCheck: false,
+
             ctor: function (obj, comparer) {
                 this.$initialize();
                 this.comparer = comparer || System.Collections.Generic.EqualityComparer$1(TKey).def;
@@ -169,6 +171,10 @@
                 var entry = this.findEntry(key);
 
                 if (!entry) {
+                    if (this.noKeyCheck){
+                        return Bridge.getDefaultValue(TValue);
+                    }
+
                     throw new System.Collections.Generic.KeyNotFoundException('Key ' + key + ' does not exist.');
                 }
 

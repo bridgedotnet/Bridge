@@ -2772,7 +2772,39 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("Uint8ClampedArrayTests - ICollectionIsReadOnlyWorks", Bridge.Test.Runtime.BridgeClientTestRunner.Uint8ClampedArrayTests.ICollectionIsReadOnlyWorks);
             QUnit.test("Uint8ClampedArrayTests - ICollectionCopyTo", Bridge.Test.Runtime.BridgeClientTestRunner.Uint8ClampedArrayTests.ICollectionCopyTo);
             QUnit.module("Utilities");
+            QUnit.test("Environment - CommandLineNotEmpty", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.CommandLineNotEmpty);
+            QUnit.test("Environment - CurrentDirectoryNotEmpty", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.CurrentDirectoryNotEmpty);
+            QUnit.test("Environment - CurrentManagedThreadIdZero", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.CurrentManagedThreadIdZero);
+            QUnit.test("Environment - ExitCodeWorks", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.ExitCodeWorks);
+            QUnit.test("Environment - HasShutdownStartedFalse", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.HasShutdownStartedFalse);
+            QUnit.test("Environment - Is64BitOperatingSystemNotNull", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.Is64BitOperatingSystemNotNull);
+            QUnit.test("Environment - Is64BitProcessNotNull", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.Is64BitProcessNotNull);
+            QUnit.test("Environment - MachineNameEmpty", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.MachineNameEmpty);
             QUnit.test("Environment - NewLineIsAStringContainingOnlyTheNewLineChar", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.NewLineIsAStringContainingOnlyTheNewLineChar);
+            QUnit.test("Environment - OSVersionNull", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.OSVersionNull);
+            QUnit.test("Environment - ProcessorCountMoreThanZero", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.ProcessorCountMoreThanZero);
+            QUnit.test("Environment - StackTraceNotEmpty", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.StackTraceNotEmpty);
+            QUnit.test("Environment - SystemDirectoryEmpty", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.SystemDirectoryEmpty);
+            QUnit.test("Environment - SystemPageSizeEqualsOne", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.SystemPageSizeEqualsOne);
+            QUnit.test("Environment - TickCountNotEmpty", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.TickCountNotEmpty);
+            QUnit.test("Environment - UserDomainNameEmpty", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.UserDomainNameEmpty);
+            QUnit.test("Environment - UserInteractiveTrue", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.UserInteractiveTrue);
+            QUnit.test("Environment - UserNameEmpty", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.UserNameEmpty);
+            QUnit.test("Environment - VersionWorks", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.VersionWorks);
+            QUnit.test("Environment - WorkingSetZero", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.WorkingSetZero);
+            QUnit.test("Environment - ExitSetsExitCode", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.ExitSetsExitCode);
+            QUnit.test("Environment - ExpandEnvironmentVariablesWorks", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.ExpandEnvironmentVariablesWorks);
+            QUnit.test("Environment - FailFastWorks", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.FailFastWorks);
+            QUnit.test("Environment - GetCommandLineArgsWorks", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.GetCommandLineArgsWorks);
+            QUnit.test("Environment - GetEnvironmentVariableOneParameterWorks", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.GetEnvironmentVariableOneParameterWorks);
+            QUnit.test("Environment - GetEnvironmentVariableRwoParametersWorks", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.GetEnvironmentVariableRwoParametersWorks);
+            QUnit.test("Environment - GetEnvironmentVariablesWorks", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.GetEnvironmentVariablesWorks);
+            QUnit.test("Environment - GetEnvironmentVariablesOneParameterWorks", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.GetEnvironmentVariablesOneParameterWorks);
+            QUnit.test("Environment - GetFolderPathOneParameterEmpty", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.GetFolderPathOneParameterEmpty);
+            QUnit.test("Environment - GetFolderPathTwoParametersEmpty", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.GetFolderPathTwoParametersEmpty);
+            QUnit.test("Environment - GetLogicalDrivesEmpty", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.GetLogicalDrivesEmpty);
+            QUnit.test("Environment - SetEnvironmentVariableTwoParametersWorks", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.SetEnvironmentVariableTwoParametersWorks);
+            QUnit.test("Environment - SetEnvironmentVariableThreeParametersWorks", Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests.SetEnvironmentVariableThreeParametersWorks);
             QUnit.module("СultureInfo");
             QUnit.test("TypePropertiesAreCorrect", Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests.TypePropertiesAreCorrect);
             QUnit.test("GetFormatWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests.GetFormatWorks);
@@ -9342,12 +9374,236 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests)],
         statics: {
+            CommandLineNotEmpty: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "CommandLineNotEmpty()",
+                    Line: "40"
+                } ));
+                t.Fixture.CommandLineNotEmpty();
+            },
+            CurrentDirectoryNotEmpty: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "CurrentDirectoryNotEmpty()",
+                    Line: "47"
+                } ));
+                t.Fixture.CurrentDirectoryNotEmpty();
+            },
+            CurrentManagedThreadIdZero: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "CurrentManagedThreadIdZero()",
+                    Line: "54"
+                } ));
+                t.Fixture.CurrentManagedThreadIdZero();
+            },
+            ExitCodeWorks: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "ExitCodeWorks()",
+                    Line: "60"
+                } ));
+                t.Fixture.ExitCodeWorks();
+            },
+            HasShutdownStartedFalse: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "HasShutdownStartedFalse()",
+                    Line: "70"
+                } ));
+                t.Fixture.HasShutdownStartedFalse();
+            },
+            Is64BitOperatingSystemNotNull: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "Is64BitOperatingSystemNotNull()",
+                    Line: "77"
+                } ));
+                t.Fixture.Is64BitOperatingSystemNotNull();
+            },
+            Is64BitProcessNotNull: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "Is64BitProcessNotNull()",
+                    Line: "83"
+                } ));
+                t.Fixture.Is64BitProcessNotNull();
+            },
+            MachineNameEmpty: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "MachineNameEmpty()",
+                    Line: "89"
+                } ));
+                t.Fixture.MachineNameEmpty();
+            },
             NewLineIsAStringContainingOnlyTheNewLineChar: function (assert) {
                 var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                     Method: "NewLineIsAStringContainingOnlyTheNewLineChar()",
-                    Line: "10"
+                    Line: "96"
                 } ));
                 t.Fixture.NewLineIsAStringContainingOnlyTheNewLineChar();
+            },
+            OSVersionNull: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "OSVersionNull()",
+                    Line: "102"
+                } ));
+                t.Fixture.OSVersionNull();
+            },
+            ProcessorCountMoreThanZero: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "ProcessorCountMoreThanZero()",
+                    Line: "108"
+                } ));
+                t.Fixture.ProcessorCountMoreThanZero();
+            },
+            StackTraceNotEmpty: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "StackTraceNotEmpty()",
+                    Line: "115"
+                } ));
+                t.Fixture.StackTraceNotEmpty();
+            },
+            SystemDirectoryEmpty: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "SystemDirectoryEmpty()",
+                    Line: "122"
+                } ));
+                t.Fixture.SystemDirectoryEmpty();
+            },
+            SystemPageSizeEqualsOne: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "SystemPageSizeEqualsOne()",
+                    Line: "128"
+                } ));
+                t.Fixture.SystemPageSizeEqualsOne();
+            },
+            TickCountNotEmpty: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "TickCountNotEmpty()",
+                    Line: "134"
+                } ));
+                t.Fixture.TickCountNotEmpty();
+            },
+            UserDomainNameEmpty: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "UserDomainNameEmpty()",
+                    Line: "142"
+                } ));
+                t.Fixture.UserDomainNameEmpty();
+            },
+            UserInteractiveTrue: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "UserInteractiveTrue()",
+                    Line: "148"
+                } ));
+                t.Fixture.UserInteractiveTrue();
+            },
+            UserNameEmpty: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "UserNameEmpty()",
+                    Line: "155"
+                } ));
+                t.Fixture.UserNameEmpty();
+            },
+            VersionWorks: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "VersionWorks()",
+                    Line: "161"
+                } ));
+                t.Fixture.VersionWorks();
+            },
+            WorkingSetZero: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "WorkingSetZero()",
+                    Line: "168"
+                } ));
+                t.Fixture.WorkingSetZero();
+            },
+            ExitSetsExitCode: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "ExitSetsExitCode()",
+                    Line: "176"
+                } ));
+                t.Fixture.ExitSetsExitCode();
+            },
+            ExpandEnvironmentVariablesWorks: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "ExpandEnvironmentVariablesWorks()",
+                    Line: "184"
+                } ));
+                t.Fixture.ExpandEnvironmentVariablesWorks();
+            },
+            FailFastWorks: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "FailFastWorks()",
+                    Line: "199"
+                } ));
+                t.Fixture.FailFastWorks();
+            },
+            GetCommandLineArgsWorks: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "GetCommandLineArgsWorks()",
+                    Line: "223"
+                } ));
+                t.Fixture.GetCommandLineArgsWorks();
+            },
+            GetEnvironmentVariableOneParameterWorks: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "GetEnvironmentVariableOneParameterWorks()",
+                    Line: "235"
+                } ));
+                t.Fixture.GetEnvironmentVariableOneParameterWorks();
+            },
+            GetEnvironmentVariableRwoParametersWorks: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "GetEnvironmentVariableRwoParametersWorks()",
+                    Line: "254"
+                } ));
+                t.Fixture.GetEnvironmentVariableRwoParametersWorks();
+            },
+            GetEnvironmentVariablesWorks: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "GetEnvironmentVariablesWorks()",
+                    Line: "274"
+                } ));
+                t.Fixture.GetEnvironmentVariablesWorks();
+            },
+            GetEnvironmentVariablesOneParameterWorks: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "GetEnvironmentVariablesOneParameterWorks()",
+                    Line: "294"
+                } ));
+                t.Fixture.GetEnvironmentVariablesOneParameterWorks();
+            },
+            GetFolderPathOneParameterEmpty: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "GetFolderPathOneParameterEmpty()",
+                    Line: "315"
+                } ));
+                t.Fixture.GetFolderPathOneParameterEmpty();
+            },
+            GetFolderPathTwoParametersEmpty: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "GetFolderPathTwoParametersEmpty()",
+                    Line: "321"
+                } ));
+                t.Fixture.GetFolderPathTwoParametersEmpty();
+            },
+            GetLogicalDrivesEmpty: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "GetLogicalDrivesEmpty()",
+                    Line: "328"
+                } ));
+                t.Fixture.GetLogicalDrivesEmpty();
+            },
+            SetEnvironmentVariableTwoParametersWorks: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "SetEnvironmentVariableTwoParametersWorks()",
+                    Line: "336"
+                } ));
+                t.Fixture.SetEnvironmentVariableTwoParametersWorks();
+            },
+            SetEnvironmentVariableThreeParametersWorks: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.EnvironmentTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnvironmentTests, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "SetEnvironmentVariableThreeParametersWorks()",
+                    Line: "364"
+                } ));
+                t.Fixture.SetEnvironmentVariableThreeParametersWorks();
             }
         },
         context: null,
