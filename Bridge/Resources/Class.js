@@ -48,13 +48,13 @@
             if (config.alias) {
                 for (var i = 0; i < config.alias.length; i++) {
                     (function (obj, name, alias, cls) {
-                            var descriptor = null;
-                            for (var i = descriptors.length - 1; i >= 0; i--) {
-                                if (descriptors[i].name === name) {
-                                    descriptor = descriptors[i];
-                                    break;
-                                }
+                        var descriptor = null;
+                        for (var i = descriptors.length - 1; i >= 0; i--) {
+                            if (descriptors[i].name === name) {
+                                descriptor = descriptors[i];
+                                break;
                             }
+                        }
 
                         if (descriptor != null) {
                             Object.defineProperty(obj, alias, descriptor);
