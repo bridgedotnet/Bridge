@@ -508,6 +508,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#2499 - TestArraySortComparisonWithEntity", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2499.TestArraySortComparisonWithEntity);
             QUnit.test("#2502 - TestAsyncBreak", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2502.TestAsyncBreak);
             QUnit.test("#2505 - TestNegativeNumberToULong", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2505.TestNegativeNumberToULong);
+            QUnit.test("#2515 - TestPreprocessorConditionalAccess", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2515.TestPreprocessorConditionalAccess);
             QUnit.test("#381 - TestUseCase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge381.TestUseCase);
             QUnit.test("#447 - CheckInlineExpression", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.CheckInlineExpression);
             QUnit.test("#447 - CheckInlineCalls", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.CheckInlineCalls);
@@ -10412,6 +10413,30 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                     Project: "Batch3",
                     ClassName: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2505",
                     File: "Batch3\\BridgeIssues\\2500\\N2505.cs"
+                } );
+            }
+            return this.context;
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2515", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2515)],
+        statics: {
+            TestPreprocessorConditionalAccess: function (assert) {
+                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2515).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2515, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                    Method: "TestPreprocessorConditionalAccess()",
+                    Line: "15"
+                } ));
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2515.TestPreprocessorConditionalAccess();
+            }
+        },
+        context: null,
+        GetContext: function () {
+            if (this.context == null) {
+                this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
+                    Project: "Batch3",
+                    ClassName: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2515",
+                    File: "Batch3\\BridgeIssues\\2500\\N2515.cs"
                 } );
             }
             return this.context;

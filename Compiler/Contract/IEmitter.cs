@@ -350,12 +350,7 @@ namespace Bridge.Contract
             set;
         }
 
-        Dictionary<Tuple<AstNode, bool>, OverloadsCollection> OverloadsCacheNodes
-        {
-            get;
-        }
-
-        Dictionary<Tuple<IMember, bool, bool>, OverloadsCollection> OverloadsCacheMembers
+        EmitterCache Cache
         {
             get;
         }

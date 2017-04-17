@@ -40,7 +40,7 @@ namespace Bridge.Translator
             get; set;
         }
 
-        private OutputBy outputBy = OutputBy.Namespace;
+        private OutputBy outputBy = OutputBy.Project;
 
         /// <summary>
         /// The option to manage JavaScript output folders and files.

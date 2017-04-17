@@ -16801,6 +16801,21 @@ Bridge.$N1391Result =                 r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2515", {
+        statics: {
+            TestPreprocessorConditionalAccess: function () {
+                var p = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2515();
+                var i = null;
+                i = p != null ? p.DoSomething() : null;
+                Bridge.Test.NUnit.Assert.True(System.Nullable.hasValue(i));
+                Bridge.Test.NUnit.Assert.AreEqual(1, System.Nullable.getValue(i));
+            }
+        },
+        DoSomething: function () {
+            return 1;
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge266A", {
         statics: {
             Test: function () {

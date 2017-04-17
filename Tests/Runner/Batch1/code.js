@@ -16045,8 +16045,313 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     });
 
     Bridge.define("Bridge.ClientTest.EnvironmentTests", {
+        statics: {
+            AssertVariables: function () {
+                var variables = Bridge.as(System.Environment.variables, System.Collections.Generic.Dictionary$2(System.String,System.String));
+
+                Bridge.Test.NUnit.Assert.NotNull$1(variables, "Get EnvironmentVariable via internal code as a preparation step for the test");
+                variables.clear();
+            },
+            SetupVariables: function () {
+                var variables = Bridge.as(System.Environment.variables, System.Collections.Generic.Dictionary$2(System.String,System.String));
+                variables.add("variable1", "value1");
+                variables.add("variable2", "value2");
+
+                return variables;
+            }
+        },
+        CommandLineNotEmpty: function () {
+            Bridge.Test.NUnit.Assert.NotNull(System.Environment.CommandLine);
+            Bridge.Test.NUnit.Assert.True(!Bridge.referenceEquals(System.Environment.CommandLine, ""));
+        },
+        CurrentDirectoryNotEmpty: function () {
+            Bridge.Test.NUnit.Assert.NotNull(System.Environment.CurrentDirectory);
+            Bridge.Test.NUnit.Assert.True(!Bridge.referenceEquals(System.Environment.CurrentDirectory, ""));
+        },
+        CurrentManagedThreadIdZero: function () {
+            Bridge.Test.NUnit.Assert.AreEqual(0, 0);
+        },
+        ExitCodeWorks: function () {
+            Bridge.Test.NUnit.Assert.NotNull(System.Environment.ExitCode);
+            Bridge.Test.NUnit.Assert.AreEqual(0, System.Environment.ExitCode);
+
+            System.Environment.ExitCode = 1;
+            Bridge.Test.NUnit.Assert.AreEqual(1, System.Environment.ExitCode);
+        },
+        HasShutdownStartedFalse: function () {
+            Bridge.Test.NUnit.Assert.NotNull(false);
+            Bridge.Test.NUnit.Assert.False(false);
+        },
+        Is64BitOperatingSystemNotNull: function () {
+            Bridge.Test.NUnit.Assert.NotNull(System.Environment.Is64BitOperatingSystem);
+        },
+        Is64BitProcessNotNull: function () {
+            Bridge.Test.NUnit.Assert.NotNull(false);
+        },
+        MachineNameEmpty: function () {
+            Bridge.Test.NUnit.Assert.NotNull("");
+            Bridge.Test.NUnit.Assert.AreEqual("", "");
+        },
         NewLineIsAStringContainingOnlyTheNewLineChar: function () {
             Bridge.Test.NUnit.Assert.AreEqual("\n", '\n');
+        },
+        OSVersionNull: function () {
+            Bridge.Test.NUnit.Assert.Null(Bridge.unbox(null));
+        },
+        ProcessorCountMoreThanZero: function () {
+            Bridge.Test.NUnit.Assert.NotNull(System.Environment.ProcessorCount);
+            Bridge.Test.NUnit.Assert.True(System.Environment.ProcessorCount > 0);
+        },
+        StackTraceNotEmpty: function () {
+            Bridge.Test.NUnit.Assert.NotNull(System.Environment.StackTrace);
+            Bridge.Test.NUnit.Assert.True(System.Environment.StackTrace.length > -1);
+        },
+        SystemDirectoryEmpty: function () {
+            Bridge.Test.NUnit.Assert.AreEqual("", "");
+        },
+        SystemPageSizeEqualsOne: function () {
+            Bridge.Test.NUnit.Assert.AreEqual(1, 1);
+        },
+        TickCountNotEmpty: function () {
+            Bridge.Test.NUnit.Assert.NotNull(Date.now());
+            Bridge.Test.NUnit.Assert.True(Date.now() !== 0);
+            Bridge.Test.NUnit.Assert.True((Date.now() > 0) || (Date.now() < 0));
+        },
+        UserDomainNameEmpty: function () {
+            Bridge.Test.NUnit.Assert.AreEqual("", "");
+        },
+        UserInteractiveTrue: function () {
+            Bridge.Test.NUnit.Assert.NotNull(true);
+            Bridge.Test.NUnit.Assert.True(true);
+        },
+        UserNameEmpty: function () {
+            Bridge.Test.NUnit.Assert.AreEqual("", "");
+        },
+        VersionWorks: function () {
+            Bridge.Test.NUnit.Assert.NotNull(System.Environment.Version);
+            Bridge.Test.NUnit.Assert.True$1(System.Environment.Version.toString().length > 0, System.Environment.Version.toString());
+        },
+        WorkingSetZero: function () {
+            Bridge.Test.NUnit.Assert.NotNull(System.Int64(0));
+            Bridge.Test.NUnit.Assert.AreEqual("0", System.Int64(0).toString());
+            Bridge.Test.NUnit.Assert.AreEqual(System.Int64(0), System.Int64(0));
+        },
+        ExitSetsExitCode: function () {
+            System.Environment.exit(77);
+
+            Bridge.Test.NUnit.Assert.AreEqual(77, System.Environment.ExitCode);
+        },
+        ExpandEnvironmentVariablesWorks: function () {
+            Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.EnvironmentTests.f1);
+
+            Bridge.ClientTest.EnvironmentTests.AssertVariables();
+
+            Bridge.ClientTest.EnvironmentTests.SetupVariables();
+
+            var query = "First %variable1% Second: %variable2% Ignored %variable1";
+            var r = System.Environment.expandEnvironmentVariables(query);
+
+            Bridge.Test.NUnit.Assert.AreEqual("First value1 Second: value2 Ignored %variable1", r);
+        },
+        FailFastWorks: function () {
+            try {
+                System.Environment.failFast("Some message");
+                Bridge.Test.NUnit.Assert.Fail$1("Should have thrown 1");
+            }
+            catch (ex) {
+                ex = System.Exception.create(ex);
+                Bridge.Test.NUnit.Assert.True$1(Bridge.referenceEquals(ex.Message, "Some message"), "Message correct");
+            }
+
+            try {
+                System.Environment.failFast$1("1", new System.ArgumentException("2"));
+                Bridge.Test.NUnit.Assert.Fail$1("Should have thrown 2");
+            }
+            catch (ex1) {
+                ex1 = System.Exception.create(ex1);
+                Bridge.Test.NUnit.Assert.True$1(Bridge.referenceEquals(ex1.Message, "1"), "Message correct");
+            }
+        },
+        GetCommandLineArgsWorks: function () {
+            var args = System.Environment.getCommandLineArgs();
+
+            Bridge.Test.NUnit.Assert.NotNull(args);
+            Bridge.Test.NUnit.Assert.True(args.length > 0);
+            Bridge.Test.NUnit.Assert.True(Bridge.hasValue(args));
+            Bridge.Test.NUnit.Assert.NotNull(args[System.Array.index(0, args)]);
+            Bridge.Test.NUnit.Assert.True(args[System.Array.index(0, args)].length > 0);
+        },
+        GetEnvironmentVariableOneParameterWorks: function () {
+            Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.EnvironmentTests.f2);
+
+            Bridge.ClientTest.EnvironmentTests.AssertVariables();
+
+            Bridge.Test.NUnit.Assert.AreEqual(null, System.Environment.getEnvironmentVariable("variable1"));
+
+            Bridge.ClientTest.EnvironmentTests.SetupVariables();
+
+            Bridge.Test.NUnit.Assert.AreEqual("value1", System.Environment.getEnvironmentVariable("variable1"));
+            Bridge.Test.NUnit.Assert.AreEqual("value1", System.Environment.getEnvironmentVariable("VARIable1"));
+            Bridge.Test.NUnit.Assert.AreEqual("value2", System.Environment.getEnvironmentVariable("variable2"));
+            Bridge.Test.NUnit.Assert.AreEqual("value2", System.Environment.getEnvironmentVariable("VARIable2"));
+            Bridge.Test.NUnit.Assert.AreEqual(null, System.Environment.getEnvironmentVariable("variable3"));
+            Bridge.Test.NUnit.Assert.AreEqual(null, System.Environment.getEnvironmentVariable("VARIable3"));
+        },
+        GetEnvironmentVariableRwoParametersWorks: function () {
+            Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.EnvironmentTests.f3);
+
+            Bridge.ClientTest.EnvironmentTests.AssertVariables();
+
+            Bridge.Test.NUnit.Assert.AreEqual(null, System.Environment.getEnvironmentVariable$1("variable1", 0));
+
+            Bridge.ClientTest.EnvironmentTests.SetupVariables();
+
+            Bridge.Test.NUnit.Assert.AreEqual("value1", System.Environment.getEnvironmentVariable$1("variable1", 0));
+            Bridge.Test.NUnit.Assert.AreEqual("value1", System.Environment.getEnvironmentVariable$1("VARIable1", 0));
+            Bridge.Test.NUnit.Assert.AreEqual("value2", System.Environment.getEnvironmentVariable$1("variable2", 0));
+            Bridge.Test.NUnit.Assert.AreEqual("value2", System.Environment.getEnvironmentVariable$1("VARIable2", 0));
+            Bridge.Test.NUnit.Assert.AreEqual(null, System.Environment.getEnvironmentVariable$1("variable3", 0));
+            Bridge.Test.NUnit.Assert.AreEqual(null, System.Environment.getEnvironmentVariable$1("VARIable3", 0));
+        },
+        GetEnvironmentVariablesWorks: function () {
+            Bridge.ClientTest.EnvironmentTests.AssertVariables();
+
+            var ens = System.Environment.getEnvironmentVariables();
+
+            Bridge.Test.NUnit.Assert.NotNull(ens);
+            Bridge.Test.NUnit.Assert.AreEqual(0, System.Array.getCount(ens));
+
+            Bridge.ClientTest.EnvironmentTests.SetupVariables();
+
+            ens = System.Environment.getEnvironmentVariables();
+
+            Bridge.Test.NUnit.Assert.AreEqual(2, System.Array.getCount(ens));
+            Bridge.Test.NUnit.Assert.AreEqual("value1", Bridge.unbox(ens.System$Collections$IDictionary$getItem("variable1")));
+            Bridge.Test.NUnit.Assert.AreEqual("value2", Bridge.unbox(ens.System$Collections$IDictionary$getItem("variable2")));
+            Bridge.Test.NUnit.Assert.AreEqual(null, Bridge.unbox(ens.System$Collections$IDictionary$getItem("variable3")));
+        },
+        GetEnvironmentVariablesOneParameterWorks: function () {
+            Bridge.ClientTest.EnvironmentTests.AssertVariables();
+
+            var ens = System.Environment.getEnvironmentVariables$1(0);
+
+            Bridge.Test.NUnit.Assert.NotNull(ens);
+            Bridge.Test.NUnit.Assert.True(Bridge.hasValue(ens));
+            Bridge.Test.NUnit.Assert.AreEqual(0, System.Array.getCount(ens));
+
+            Bridge.ClientTest.EnvironmentTests.SetupVariables();
+
+            ens = System.Environment.getEnvironmentVariables$1(0);
+
+            Bridge.Test.NUnit.Assert.AreEqual(2, System.Array.getCount(ens));
+            Bridge.Test.NUnit.Assert.AreEqual("value1", Bridge.unbox(ens.System$Collections$IDictionary$getItem("variable1")));
+            Bridge.Test.NUnit.Assert.AreEqual("value2", Bridge.unbox(ens.System$Collections$IDictionary$getItem("variable2")));
+            Bridge.Test.NUnit.Assert.AreEqual(null, Bridge.unbox(ens.System$Collections$IDictionary$getItem("variable3")));
+        },
+        GetFolderPathOneParameterEmpty: function () {
+            Bridge.Test.NUnit.Assert.AreEqual("", "");
+        },
+        GetFolderPathTwoParametersEmpty: function () {
+            Bridge.Test.NUnit.Assert.AreEqual("", "");
+        },
+        GetLogicalDrivesEmpty: function () {
+            Bridge.Test.NUnit.Assert.NotNull(System.Environment.getLogicalDrives());
+            Bridge.Test.NUnit.Assert.True(Bridge.hasValue(System.Environment.getLogicalDrives()));
+            Bridge.Test.NUnit.Assert.AreEqual(0, System.Environment.getLogicalDrives().length);
+        },
+        SetEnvironmentVariableTwoParametersWorks: function () {
+            Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.EnvironmentTests.f4);
+            Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentException, $asm.$.Bridge.ClientTest.EnvironmentTests.f5);
+            Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentException, $asm.$.Bridge.ClientTest.EnvironmentTests.f6);
+            Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentException, $asm.$.Bridge.ClientTest.EnvironmentTests.f7);
+            Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentException, $asm.$.Bridge.ClientTest.EnvironmentTests.f8);
+
+            Bridge.ClientTest.EnvironmentTests.AssertVariables();
+
+            System.Environment.setEnvironmentVariable("1", "one");
+            Bridge.Test.NUnit.Assert.AreEqual("one", System.Environment.getEnvironmentVariable("1"));
+            Bridge.Test.NUnit.Assert.AreEqual(1, System.Array.getCount(System.Environment.getEnvironmentVariables()));
+
+            System.Environment.setEnvironmentVariable("2", "two");
+            Bridge.Test.NUnit.Assert.AreEqual("two", System.Environment.getEnvironmentVariable("2"));
+            Bridge.Test.NUnit.Assert.AreEqual(2, System.Array.getCount(System.Environment.getEnvironmentVariables()));
+
+            System.Environment.setEnvironmentVariable("1", null);
+            Bridge.Test.NUnit.Assert.AreEqual(null, System.Environment.getEnvironmentVariable("1"));
+            Bridge.Test.NUnit.Assert.AreEqual(1, System.Array.getCount(System.Environment.getEnvironmentVariables()));
+
+            System.Environment.setEnvironmentVariable("2", "");
+            Bridge.Test.NUnit.Assert.AreEqual(null, System.Environment.getEnvironmentVariable("2"));
+            Bridge.Test.NUnit.Assert.AreEqual(0, System.Array.getCount(System.Environment.getEnvironmentVariables()));
+        },
+        SetEnvironmentVariableThreeParametersWorks: function () {
+            Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.EnvironmentTests.f9);
+            Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentException, $asm.$.Bridge.ClientTest.EnvironmentTests.f10);
+            Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentException, $asm.$.Bridge.ClientTest.EnvironmentTests.f11);
+            Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentException, $asm.$.Bridge.ClientTest.EnvironmentTests.f12);
+            Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentException, $asm.$.Bridge.ClientTest.EnvironmentTests.f13);
+
+            Bridge.ClientTest.EnvironmentTests.AssertVariables();
+
+            System.Environment.setEnvironmentVariable$1("1", "one", 0);
+            Bridge.Test.NUnit.Assert.AreEqual("one", System.Environment.getEnvironmentVariable("1"));
+            Bridge.Test.NUnit.Assert.AreEqual(1, System.Array.getCount(System.Environment.getEnvironmentVariables()));
+
+            System.Environment.setEnvironmentVariable$1("2", "two", 0);
+            Bridge.Test.NUnit.Assert.AreEqual("two", System.Environment.getEnvironmentVariable("2"));
+            Bridge.Test.NUnit.Assert.AreEqual(2, System.Array.getCount(System.Environment.getEnvironmentVariables()));
+
+            System.Environment.setEnvironmentVariable$1("1", null, 0);
+            Bridge.Test.NUnit.Assert.AreEqual(null, System.Environment.getEnvironmentVariable("1"));
+            Bridge.Test.NUnit.Assert.AreEqual(1, System.Array.getCount(System.Environment.getEnvironmentVariables()));
+
+            System.Environment.setEnvironmentVariable$1("2", "", 0);
+            Bridge.Test.NUnit.Assert.AreEqual(null, System.Environment.getEnvironmentVariable("2"));
+            Bridge.Test.NUnit.Assert.AreEqual(0, System.Array.getCount(System.Environment.getEnvironmentVariables()));
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.EnvironmentTests", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.EnvironmentTests, {
+        f1: function () {
+            System.Environment.expandEnvironmentVariables(null);
+        },
+        f2: function () {
+            System.Environment.getEnvironmentVariable(null);
+        },
+        f3: function () {
+            System.Environment.getEnvironmentVariable$1(null, 0);
+        },
+        f4: function () {
+            System.Environment.setEnvironmentVariable(null, "1");
+        },
+        f5: function () {
+            System.Environment.setEnvironmentVariable("", "1");
+        },
+        f6: function () {
+            System.Environment.setEnvironmentVariable("=", "1");
+        },
+        f7: function () {
+            System.Environment.setEnvironmentVariable("a=", "1");
+        },
+        f8: function () {
+            System.Environment.setEnvironmentVariable(String.fromCharCode(0), "1");
+        },
+        f9: function () {
+            System.Environment.setEnvironmentVariable$1(null, "1", 0);
+        },
+        f10: function () {
+            System.Environment.setEnvironmentVariable$1("", "1", 0);
+        },
+        f11: function () {
+            System.Environment.setEnvironmentVariable$1("=", "1", 0);
+        },
+        f12: function () {
+            System.Environment.setEnvironmentVariable$1("a=", "1", 0);
+        },
+        f13: function () {
+            System.Environment.setEnvironmentVariable$1(String.fromCharCode(0), "1", 0);
         }
     });
 
