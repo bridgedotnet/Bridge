@@ -93,7 +93,7 @@ namespace Bridge
         Struct = 0x2,
         Enum = 0x4,
         Interface = 0x8,
-        Delegate = 0x10,
+        //Delegate = 0x10,
         ObjectLiteral = 0x20,
         Anonymous = 0x40,
         External = 0x80,

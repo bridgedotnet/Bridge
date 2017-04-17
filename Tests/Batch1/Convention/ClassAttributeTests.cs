@@ -76,7 +76,7 @@ namespace Bridge.ClientTest.ConventionTests.Class
         public int field1;
     }
 
-    public class Class61: Class6
+    public class Class61 : Class6
     {
         public int field2;
     }
@@ -325,17 +325,18 @@ namespace Bridge.ClientTest.ConventionTests.Class
         }
     }
 
-    [Convention(Notation.UpperCase, ConventionTarget.Class)]
-    [Convention(Notation.UpperCamelCase, ConventionTarget.Delegate)]
-    public class Class14
-    {
-        public delegate int delegate91();
+    // Uncomment when ConventionTarget.Delegate implemented
+    //[Convention(Notation.UpperCase, ConventionTarget.Class)]
+    //[Convention(Notation.UpperCamelCase, ConventionTarget.Delegate)]
+    //public class Class14
+    //{
+    //    public delegate int delegate91();
 
-        public delegate91 delegateProp91
-        {
-            get; set;
-        }
-    }
+    //    public delegate91 delegateProp91
+    //    {
+    //        get; set;
+    //    }
+    //}
 
     [Category(Constants.MODULE_CONVENTION)]
     [TestFixture(TestNameFormat = "Convention.ClassAttribute - {0}")]
@@ -372,7 +373,7 @@ namespace Bridge.ClientTest.ConventionTests.Class
         [Test]
         public static void ObjectLiteralTest()
         {
-            var c3 = new Class3 {field1 = 1, prop1 = 2};
+            var c3 = new Class3 { field1 = 1, prop1 = 2 };
             Assert.AreEqual(1, c3["FIELD1"]);
             Assert.AreEqual(2, c3["PROP1"]);
         }
@@ -380,7 +381,7 @@ namespace Bridge.ClientTest.ConventionTests.Class
         [Test]
         public static void InterfaceMemberTest()
         {
-           var c4 = new Class4();
+            var c4 = new Class4();
             Assert.AreEqual("function", Script.TypeOf(c4["method1"]));
             Assert.AreEqual("function", Script.TypeOf(c4["METHOD2"]));
         }
@@ -583,7 +584,7 @@ namespace Bridge.ClientTest.ConventionTests.Class
             Assert.AreEqual(8, c.As<dynamic>().member2);
         }*/
 
-        /* DelegateProp91 is property, not delegate
+        /* Uncomment when ConventionTarget.Delegate implemented
         [Test]
         public static void DelegateTargetTest()
         {

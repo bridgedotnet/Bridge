@@ -12692,14 +12692,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     });
 
-    Bridge.define("Bridge.ClientTest.ConventionTests.Class.CLASS14", {
-        config: {
-            properties: {
-                delegateProp91: null
-            }
-        }
-    });
-
     Bridge.define("Bridge.ClientTest.ConventionTests.Class.Class2", {
         field1: 0,
         config: {
