@@ -114,7 +114,7 @@ declare module TypeScript.Issues {
     export interface N2463Func extends Function {
         prototype: N2463;
         new (): N2463;
-        Do(dummy: {nothing: number}): {nothing: number};
+        Do(dummy: {Nothing: number}): {Nothing: number};
     }
     var N2463: N2463Func;
     module N2463 {

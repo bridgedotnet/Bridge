@@ -240,6 +240,10 @@ namespace Bridge.Contract
                         acceptable = false;
                     }
                 }
+                else if (typeDef == null && rule.Member != ConventionMember.All)
+                {
+                    typeDef = entity.DeclaringTypeDefinition;
+                }
 
                 if (typeDef != null)
                 {
@@ -493,10 +497,10 @@ namespace Bridge.Contract
 
         private static NameRule GetPropertyRule(NameSemantic semantic)
         {
-            if ((semantic.Entity is IProperty || semantic.Entity is IField) && semantic.Entity.DeclaringTypeDefinition != null && (semantic.IsObjectLiteral || semantic.Emitter.Validator.IsObjectLiteral(semantic.Entity.DeclaringTypeDefinition)))
+            /*if ((semantic.Entity is IProperty || semantic.Entity is IField) && semantic.Entity.DeclaringTypeDefinition != null && (semantic.IsObjectLiteral || semantic.Emitter.Validator.IsObjectLiteral(semantic.Entity.DeclaringTypeDefinition)))
             {
                 return NameConvertor.LowerCamelCaseRule;
-            }
+            }*/
 
             return null;
         }

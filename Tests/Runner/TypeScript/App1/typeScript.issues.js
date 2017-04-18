@@ -133,7 +133,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     Bridge.define("TypeScript.Issues.N2463", {
         statics: {
             Do: function (dummy) {
-                dummy.nothing = (dummy.nothing + 1) | 0;
+                dummy.Nothing = (dummy.Nothing + 1) | 0;
                 return dummy;
             }
         }

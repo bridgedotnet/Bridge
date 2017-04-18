@@ -6305,9 +6305,9 @@ Bridge.$N1391Result =                 r;
                 Bridge.Test.NUnit.Assert.Null$1(Bridge.unbox(plainee.equals), "plainee has no equals");
             },
             TestObjectLiteralProperty: function () {
-                var l = { v: { Data: 5 } };
+                var l = { V: { Data: 5 } };
 
-                var plainee = l.v;
+                var plainee = l.V;
 
                 Bridge.Test.NUnit.Assert.NotNull$1(Bridge.unbox(plainee), "plainee not null");
                 Bridge.Test.NUnit.Assert.NotNull$1(Bridge.unbox(plainee.Data), "plainee has data");
@@ -7250,11 +7250,11 @@ Bridge.$N1391Result =                 r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1530", {
         TestObjectLiteralPropertyImplementingInterface: function () {
-            var c = { name: "name" };
+            var c = { Name: "name" };
             var p = c;
 
-            Bridge.Test.NUnit.Assert.AreEqual("name", p.name);
-            Bridge.Test.NUnit.Assert.AreEqual("name", c.name);
+            Bridge.Test.NUnit.Assert.AreEqual("name", p.Name);
+            Bridge.Test.NUnit.Assert.AreEqual("name", c.Name);
         }
     });
 
@@ -9639,8 +9639,8 @@ Bridge.$N1391Result =                 r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1819", {
         TestObjectLiteralWithInheritance: function () {
-            var x = { name: "test" };
-            Bridge.Test.NUnit.Assert.AreEqual("test", x.name);
+            var x = { Name: "test" };
+            Bridge.Test.NUnit.Assert.AreEqual("test", x.Name);
             Bridge.Test.NUnit.Assert.True(Bridge.isPlainObject(x));
         }
     });
@@ -9777,11 +9777,11 @@ Bridge.$N1391Result =                 r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1833", {
         TestInheritedPropertyInLiteral: function () {
-            var x = { id: 12, name: "test" };
-            Bridge.Test.NUnit.Assert.AreEqual(12, x.id);
-            Bridge.Test.NUnit.Assert.AreEqual(12, Bridge.unbox(x.id));
-            Bridge.Test.NUnit.Assert.AreEqual("test", x.name);
-            Bridge.Test.NUnit.Assert.AreEqual("test", Bridge.unbox(x.name));
+            var x = { Id: 12, Name: "test" };
+            Bridge.Test.NUnit.Assert.AreEqual(12, x.Id);
+            Bridge.Test.NUnit.Assert.AreEqual(12, Bridge.unbox(x.Id));
+            Bridge.Test.NUnit.Assert.AreEqual("test", x.Name);
+            Bridge.Test.NUnit.Assert.AreEqual("test", Bridge.unbox(x.Name));
         }
     });
 
@@ -10276,7 +10276,7 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865", {
         TestObjectLiteralInterface: function () {
             var contract = Bridge.merge(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865.Contract.ctor(), {
-                value: 5
+                Value: 5
             } );
             var icontract = contract;
             var o = contract;
@@ -10285,8 +10285,8 @@ Bridge.$N1391Result =                 r;
             Bridge.Test.NUnit.Assert.True(Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865.Contract));
             Bridge.Test.NUnit.Assert.False(Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865.Contract2));
 
-            Bridge.Test.NUnit.Assert.AreEqual(5, contract.value);
-            Bridge.Test.NUnit.Assert.AreEqual(5, icontract.value);
+            Bridge.Test.NUnit.Assert.AreEqual(5, contract.Value);
+            Bridge.Test.NUnit.Assert.AreEqual(5, icontract.Value);
         }
     });
 
@@ -12836,7 +12836,7 @@ Bridge.$N1391Result =                 r;
                 Bridge.Test.NUnit.Assert.AreEqual("ShouldSeeThis1", props[System.Array.index(0, props)]);
 
                 var ol2 = Bridge.merge(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.OL2.ctor(), {
-                    shouldSeeThis2: 2
+                    ShouldSeeThis2: 2
                 } );
                 props = System.Linq.Enumerable.from(Bridge.Reflection.getMembers(Bridge.getType(ol2), 16, 28)).select($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.f1).toArray();
                 Bridge.Test.NUnit.Assert.AreEqual(2, props.length);
@@ -12862,7 +12862,7 @@ Bridge.$N1391Result =                 r;
             var $this = {};
             $this.$getType = function() { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.OL1; };
             (function(){
-                this.shouldSeeThis1 = 0;
+                this.ShouldSeeThis1 = 0;
             }).call($this);
             return $this;
         }
@@ -13271,10 +13271,10 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2141", {
         statics: {
             TestExternalObjectLiteral: function () {
-                var config = { name: "test" };
+                var config = { Name: "test" };
 
                 Bridge.Test.NUnit.Assert.AreEqual(1, Object.keys(config).length);
-                Bridge.Test.NUnit.Assert.AreEqual("test", config.name);
+                Bridge.Test.NUnit.Assert.AreEqual("test", config.Name);
             }
         }
     });
@@ -13295,7 +13295,7 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.ComponentPropsHelpers$1", {
         statics: {
             WrapProps: function (propsIfAny) {
-                return { value: propsIfAny };
+                return { Value: propsIfAny };
             }
         }
     });
@@ -13303,7 +13303,7 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.ComponentPropsHelpers2$1", function (TProps) { return {
         statics: {
             WrapProps: function (propsIfAny) {
-                return { value: propsIfAny };
+                return { Value: propsIfAny };
             }
         }
     }; });
@@ -15750,24 +15750,24 @@ Bridge.$N1391Result =                 r;
         statics: {
             IntProp: 2,
             TestPropertyInitializer: function () {
-                var d2 = { value1: Bridge.getDefaultValue(System.Int32) };
-                Bridge.Test.NUnit.Assert.AreEqual(0, d2.value1);
+                var d2 = { Value1: Bridge.getDefaultValue(System.Int32) };
+                Bridge.Test.NUnit.Assert.AreEqual(0, d2.Value1);
 
-                var d3 = { value7: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.IntProp, value8: 1, value1: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.IntProp, value2: 1 };
-                Bridge.Test.NUnit.Assert.AreEqual(2, d3.value1);
-                Bridge.Test.NUnit.Assert.AreEqual(1, d3.value2);
-                Bridge.Test.NUnit.Assert.Null(d3.value3);
-                Bridge.Test.NUnit.Assert.AreEqual(2, d3.value7);
-                Bridge.Test.NUnit.Assert.AreEqual(1, d3.value8);
-                Bridge.Test.NUnit.Assert.Null(d3.value9);
+                var d3 = { Value7: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.IntProp, Value8: 1, Value1: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.IntProp, Value2: 1 };
+                Bridge.Test.NUnit.Assert.AreEqual(2, d3.Value1);
+                Bridge.Test.NUnit.Assert.AreEqual(1, d3.Value2);
+                Bridge.Test.NUnit.Assert.Null(d3.Value3);
+                Bridge.Test.NUnit.Assert.AreEqual(2, d3.Value7);
+                Bridge.Test.NUnit.Assert.AreEqual(1, d3.Value8);
+                Bridge.Test.NUnit.Assert.Null(d3.Value9);
 
-                var d4 = { value7: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.IntProp, value8: 1, value9: 0, value1: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.IntProp, value2: 1, value3: 0 };
-                Bridge.Test.NUnit.Assert.AreEqual(2, d4.value1);
-                Bridge.Test.NUnit.Assert.AreEqual(1, d4.value2);
-                Bridge.Test.NUnit.Assert.AreEqual(0, d4.value3);
-                Bridge.Test.NUnit.Assert.AreEqual(2, d4.value7);
-                Bridge.Test.NUnit.Assert.AreEqual(1, d4.value8);
-                Bridge.Test.NUnit.Assert.AreEqual(0, d4.value9);
+                var d4 = { Value7: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.IntProp, Value8: 1, Value9: 0, Value1: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.IntProp, Value2: 1, Value3: 0 };
+                Bridge.Test.NUnit.Assert.AreEqual(2, d4.Value1);
+                Bridge.Test.NUnit.Assert.AreEqual(1, d4.Value2);
+                Bridge.Test.NUnit.Assert.AreEqual(0, d4.Value3);
+                Bridge.Test.NUnit.Assert.AreEqual(2, d4.Value7);
+                Bridge.Test.NUnit.Assert.AreEqual(1, d4.Value8);
+                Bridge.Test.NUnit.Assert.AreEqual(0, d4.Value9);
             }
         }
     });
@@ -25160,7 +25160,7 @@ Bridge.$N1391Result =                 r;
             var $this = {};
             $this.$getType = function() { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865.Contract; };
             (function(){
-                this.value = 0;
+                this.Value = 0;
             }).call($this);
             return $this;
         }
@@ -25172,7 +25172,7 @@ Bridge.$N1391Result =                 r;
             var $this = {};
             $this.$getType = function() { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865.Contract2; };
             (function(){
-                this.value = 0;
+                this.Value = 0;
             }).call($this);
             return $this;
         }
@@ -25310,7 +25310,7 @@ Bridge.$N1391Result =                 r;
             var $this = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.OL1.ctor();
             $this.$getType = function() { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.OL2; };
             (function(){
-                this.shouldSeeThis2 = 0;
+                this.ShouldSeeThis2 = 0;
             }).call($this);
             return $this;
         }
@@ -26129,8 +26129,8 @@ Bridge.$N1391Result =                 r;
     $m($n[2].Bridge2051, function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"TestGetElementType","is":true,"t":8,"sn":"TestGetElementType","rt":$n[1].Object}]}; });
     $m($n[2].Bridge2052, function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"TestArrayCreateInstance","is":true,"t":8,"sn":"TestArrayCreateInstance","rt":$n[1].Object},{"a":2,"n":"TestArrayCreateInstanceShouldThrow","is":true,"t":8,"sn":"TestArrayCreateInstanceShouldThrow","rt":$n[1].Object}]}; });
     $m($n[2].Bridge2088.T, function () { return {"td":$n[2].Bridge2088,"att":1048579,"a":1,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"ShouldSeeThis","t":16,"rt":$n[1].Int32,"g":{"a":2,"n":"get_ShouldSeeThis","t":8,"rt":$n[1].Int32,"fg":"ShouldSeeThis"},"s":{"a":2,"n":"set_ShouldSeeThis","t":8,"p":[$n[1].Int32],"rt":$n[1].Object,"fs":"ShouldSeeThis"},"fn":"ShouldSeeThis"}]}; });
-    $m($n[2].Bridge2088.OL1, function () { return {"td":$n[2].Bridge2088,"att":1048579,"a":1,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"ShouldSeeThis1","t":16,"rt":$n[1].Int32,"g":{"a":2,"n":"get_ShouldSeeThis1","t":8,"rt":$n[1].Int32,"fg":"shouldSeeThis1"},"s":{"a":2,"n":"set_ShouldSeeThis1","t":8,"p":[$n[1].Int32],"rt":$n[1].Object,"fs":"shouldSeeThis1"},"fn":"shouldSeeThis1"}]}; });
-    $m($n[2].Bridge2088.OL2, function () { return {"td":$n[2].Bridge2088,"att":1048579,"a":1,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"ShouldSeeThis2","t":16,"rt":$n[1].Int32,"g":{"a":2,"n":"get_ShouldSeeThis2","t":8,"rt":$n[1].Int32,"fg":"shouldSeeThis2"},"s":{"a":2,"n":"set_ShouldSeeThis2","t":8,"p":[$n[1].Int32],"rt":$n[1].Object,"fs":"shouldSeeThis2"},"fn":"shouldSeeThis2"}]}; });
+    $m($n[2].Bridge2088.OL1, function () { return {"td":$n[2].Bridge2088,"att":1048579,"a":1,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"ShouldSeeThis1","t":16,"rt":$n[1].Int32,"g":{"a":2,"n":"get_ShouldSeeThis1","t":8,"rt":$n[1].Int32,"fg":"ShouldSeeThis1"},"s":{"a":2,"n":"set_ShouldSeeThis1","t":8,"p":[$n[1].Int32],"rt":$n[1].Object,"fs":"ShouldSeeThis1"},"fn":"ShouldSeeThis1"}]}; });
+    $m($n[2].Bridge2088.OL2, function () { return {"td":$n[2].Bridge2088,"att":1048579,"a":1,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"ShouldSeeThis2","t":16,"rt":$n[1].Int32,"g":{"a":2,"n":"get_ShouldSeeThis2","t":8,"rt":$n[1].Int32,"fg":"ShouldSeeThis2"},"s":{"a":2,"n":"set_ShouldSeeThis2","t":8,"p":[$n[1].Int32],"rt":$n[1].Object,"fs":"ShouldSeeThis2"},"fn":"ShouldSeeThis2"}]}; });
     $m($n[2].Bridge2212, function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":1,"n":"Run","t":8,"sn":"Run","rt":$n[1].Object},{"a":2,"n":"TestDelegateBindCache","is":true,"t":8,"sn":"TestDelegateBindCache","rt":$n[1].Object},{"a":2,"n":"runCounter","t":4,"rt":$n[1].Int32,"sn":"runCounter"},{"a":1,"n":"test","t":4,"rt":$n[1].Int32,"sn":"test"}]}; });
     $m($n[2].Bridge2220, function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"Test","t":8,"pi":[{"n":"arr","pt":$n[1].Array.type(System.Int32),"ps":0},{"n":"x","pt":$n[1].Int32,"ps":1}],"sn":"Test","rt":$n[1].Object,"p":[$n[1].Array.type(System.Int32),$n[1].Int32]},{"a":2,"n":"TestHasElementType","is":true,"t":8,"sn":"TestHasElementType","rt":$n[1].Object}]}; });
     $m($n[2].Bridge2221, function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"TestMakeArrayType","is":true,"t":8,"sn":"TestMakeArrayType","rt":$n[1].Object}]}; });
