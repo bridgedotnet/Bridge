@@ -29,7 +29,7 @@ namespace Bridge.Translator
         }
 
         private static Regex injectComment = new Regex("^@(.*)@?$", RegexOptions.Singleline | RegexOptions.IgnoreCase | RegexOptions.Multiline);
-        private static Regex removeStars = new Regex("(^\\s*)(\\* )", RegexOptions.Singleline | RegexOptions.IgnoreCase | RegexOptions.Multiline);
+        private static Regex removeStars = new Regex("(^\\s*)(\\*[ ]?)", RegexOptions.Singleline | RegexOptions.IgnoreCase | RegexOptions.Multiline);
 
         protected virtual void WriteMultiLineComment(string text, bool newline, bool wrap = true)
         {
@@ -93,7 +93,12 @@ namespace Bridge.Translator
                 this.WriteSpace();
             }
 
-            this.Write(wrap ? "//" + text : text);
+            if (wrap)
+            {
+                this.Write("//");
+            }
+
+            this.Write(text);
             this.WriteNewLine();
         }
 
@@ -126,7 +131,22 @@ namespace Bridge.Translator
                 }
                 else if (comment.CommentType == CommentType.SingleLine)
                 {
-                    string code = comment.Content.StartsWith("@ ") ? comment.Content.Substring(2) : comment.Content;
+                    string code = comment.Content;
+
+                    if (code.StartsWith("@"))
+                    {
+                        code = code.Substring(1);
+
+                        if (code.All(x => x == ' '))
+                        {
+                            code = string.Empty;
+                        }
+                        else if (code.StartsWith(" "))
+                        {
+                            code = code.Substring(1);
+                        }
+                    }
+
                     this.WriteSingleLineComment(code, true, false);
                 }
             }
