@@ -72,7 +72,7 @@ namespace Bridge.Translator
             {
                 if (info.Fields.Count > 0)
                 {
-                    var hasProperties = this.WriteObject(null, info.Fields, "this.{0} = {1};", "this[{0}] = {1};");
+                    var hasProperties = this.WriteObject(JS.Fields.FIELDS, info.Fields, "this.{0} = {1};", "this[{0}] = {1};");
                     if (hasProperties)
                     {
                         this.Emitter.Comma = true;
@@ -116,9 +116,15 @@ namespace Bridge.Translator
         protected virtual bool WriteObject(string objectName, List<TypeConfigItem> members, string format, string interfaceFormat)
         {
             bool hasProperties = this.HasProperties(objectName, members);
+            int pos = 0;
+            IWriterInfo writer = null;
+            bool beginBlock = false;
 
             if (hasProperties && objectName != null && !this.IsObjectLiteral)
             {
+                beginBlock = true;
+                pos = this.Emitter.Output.Length;
+                writer = this.SaveWriter();
                 this.EnsureComma();
                 this.Write(objectName);
 
@@ -127,7 +133,7 @@ namespace Bridge.Translator
             }
 
             bool isProperty = JS.Fields.PROPERTIES == objectName;
-            bool isField = objectName == null;
+            bool isField = JS.Fields.FIELDS == objectName;
             int count = 0;
 
             foreach (var member in members)
@@ -483,6 +489,14 @@ namespace Bridge.Translator
                 this.WriteNewLine();
                 this.EndBlock();
             }
+            else if (beginBlock)
+            {
+                this.Emitter.IsNewLine = writer.IsNewLine;
+                this.Emitter.ResetLevel(writer.Level);
+                this.Emitter.Comma = writer.Comma;
+
+                this.Emitter.Output.Length = pos;
+            }
 
             return count > 0;
         }
@@ -517,7 +531,7 @@ namespace Bridge.Translator
                     return true;
                 }
 
-                if (objectName != JS.Fields.PROPERTIES)
+                if (objectName != JS.Fields.PROPERTIES && objectName != JS.Fields.FIELDS)
                 {
                     if (!isPrimitive || constValue is AstType)
                     {

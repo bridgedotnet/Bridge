@@ -25,7 +25,10 @@
             public const string CONFIG = "config";
             public const string EVENTS = "events";
             public const string PROPERTIES = "properties";
+            public const string FIELDS = "fields";
+            public const string METHODS = "methods";
             public const string STATICS = "statics";
+            public const string CTORS = "ctors";
 
             public const string ASYNC_TASK = "task";
             public const string PROTOTYPE = "prototype";

@@ -60,32 +60,6 @@ namespace Bridge.Translator
 
         protected virtual void EmitCtorForStaticClass()
         {
-            var ctor = this.TypeInfo.StaticCtor;
-
-            if (ctor != null && ctor.Body.HasChildren)
-            {
-                this.ResetLocals();
-                var prevNamesMap = this.BuildLocalsNamesMap();
-                this.Write(JS.Funcs.CONSTRUCTOR);
-                this.WriteColon();
-                this.WriteFunction();
-                this.WriteOpenCloseParentheses(true);
-
-                this.BeginBlock();
-                var beginPosition = this.Emitter.Output.Length;
-
-                ctor.Body.AcceptChildren(this.Emitter);
-
-                if (!this.Emitter.IsAsync)
-                {
-                    this.EmitTempVars(beginPosition, true);
-                }
-
-                this.EndBlock();
-                this.ClearLocalsNamesMap(prevNamesMap);
-                this.Emitter.Comma = true;
-            }
-
             var injectors = this.GetInjectors();
             IEnumerable<string> fieldsInjectors = null;
 
@@ -99,20 +73,10 @@ namespace Bridge.Translator
                 this.Emitter.Comma = true;
             }
 
+            bool ctorHeader = false;
             if (this.TypeInfo.StaticConfig.HasConfigMembers || injectors.Any() || fieldsInjectors.Any())
             {
                 this.EnsureComma();
-
-                if (this.TypeInfo.StaticMethods.Any(m => m.Value.Any(subm => this.Emitter.GetEntityName(subm) == JS.Fields.CONFIG)) ||
-                    this.TypeInfo.StaticConfig.Fields.Any(m => m.GetName(this.Emitter) == JS.Fields.CONFIG))
-                {
-                    this.Write(JS.Vars.D);
-                }
-
-                this.Write(JS.Fields.CONFIG);
-
-                this.WriteColon();
-                this.BeginBlock();
 
                 if (this.TypeInfo.StaticConfig.HasConfigMembers)
                 {
@@ -139,6 +103,11 @@ namespace Bridge.Translator
                 {
                     this.EnsureComma();
 
+                    ctorHeader = true;
+                    this.Write(JS.Fields.CTORS);
+                    this.WriteColon();
+                    this.BeginBlock();
+
                     this.Write(JS.Funcs.INIT);
                     this.WriteColon();
                     this.WriteFunction();
@@ -161,11 +130,52 @@ namespace Bridge.Translator
                     this.EndBlock();
                     this.Emitter.Comma = true;
                 }
+            }
+
+            var ctor = this.TypeInfo.StaticCtor;
+
+            if (ctor != null && ctor.Body.HasChildren)
+            {
+                this.EnsureComma();
+
+                if (!ctorHeader)
+                {
+                    ctorHeader = true;
+                    this.Write(JS.Fields.CTORS);
+                    this.WriteColon();
+                    this.BeginBlock();
+                }
+
+                this.ResetLocals();
+                var prevNamesMap = this.BuildLocalsNamesMap();
+                this.Write(JS.Funcs.CONSTRUCTOR);
+                this.WriteColon();
+                this.WriteFunction();
+                this.WriteOpenCloseParentheses(true);
+
+                this.BeginBlock();
+                var beginPosition = this.Emitter.Output.Length;
+
+                ctor.Body.AcceptChildren(this.Emitter);
+
+                if (!this.Emitter.IsAsync)
+                {
+                    this.EmitTempVars(beginPosition, true);
+                }
+
+                this.EndBlock();
+                this.ClearLocalsNamesMap(prevNamesMap);
+                this.Emitter.Comma = true;
+            }
+
+            if (ctorHeader)
+            {
                 this.WriteNewLine();
                 this.EndBlock();
             }
         }
 
+        private bool ctorHeader = false;
         protected virtual IEnumerable<string> EmitInitMembers()
         {
             var injectors = this.GetInjectors();
@@ -192,23 +202,6 @@ namespace Bridge.Translator
                 return ctorWrappers;
             }
 
-            int pos = this.Emitter.Output.Length;
-            bool oldComma = this.Emitter.Comma;
-            bool oldNewLine = this.Emitter.IsNewLine;
-
-            this.EnsureComma();
-
-            if (this.TypeInfo.InstanceMethods.Any(m => m.Value.Any(subm => this.Emitter.GetEntityName(subm) == JS.Fields.CONFIG)) ||
-                this.TypeInfo.InstanceConfig.Fields.Any(m => m.GetName(this.Emitter) == JS.Fields.CONFIG))
-            {
-                this.Write(JS.Vars.D);
-            }
-
-            this.Write(JS.Fields.CONFIG);
-
-            this.WriteColon();
-            this.BeginBlock();
-
             if (this.TypeInfo.InstanceConfig.HasConfigMembers)
             {
                 var configBlock = new FieldBlock(this.Emitter, this.TypeInfo, false, false);
@@ -233,6 +226,11 @@ namespace Bridge.Translator
             if (injectors.Count() > 0)
             {
                 this.EnsureComma();
+                this.ctorHeader = true;
+                this.Write(JS.Fields.CTORS);
+                this.WriteColon();
+                this.BeginBlock();
+
                 this.Write(JS.Funcs.INIT);
                 this.WriteColon();
                 this.WriteFunction();
@@ -258,18 +256,6 @@ namespace Bridge.Translator
                 this.Emitter.Comma = true;
             }
 
-            this.WriteNewLine();
-            this.EndBlock();
-
-            var str = this.Emitter.Output.ToString().Substring(pos);
-
-            if (Regex.IsMatch(str, "^\\s*\\$?" + JS.Fields.CONFIG + "\\s*:\\s*\\{\\s*\\}\\s*$", RegexOptions.Multiline))
-            {
-                this.Emitter.Output.Length = pos;
-                this.Emitter.Comma = oldComma;
-                this.Emitter.IsNewLine = oldNewLine;
-            }
-
             return ctorWrappers;
         }
 
@@ -282,16 +268,16 @@ namespace Bridge.Translator
 
             var ctorWrappers = isObjectLiteral ? new string[0] : this.EmitInitMembers().ToArray();
 
-            if (!this.TypeInfo.HasRealInstantiable(this.Emitter) && ctorWrappers.Length == 0)
+            if (!this.TypeInfo.HasRealInstantiable(this.Emitter) && ctorWrappers.Length == 0 || isObjectLiteral && isPlainMode)
             {
+                if (this.ctorHeader)
+                {
+                    this.WriteNewLine();
+                    this.EndBlock();
+                }
                 return;
             }
-
-            if (isObjectLiteral && isPlainMode)
-            {
-                return;
-            }
-
+            
             bool forceDefCtor = isObjectLiteral && this.Emitter.Validator.GetObjectCreateMode(typeDef) == 1 && this.TypeInfo.Ctors.Count == 0;
 
             if (typeDef.IsValueType || forceDefCtor || (this.TypeInfo.Ctors.Count == 0 && ctorWrappers.Length > 0))
@@ -301,6 +287,15 @@ namespace Bridge.Translator
                     Modifiers = Modifiers.Public,
                     Body = new BlockStatement()
                 });
+            }
+
+            if (!this.ctorHeader && this.TypeInfo.Ctors.Count > 0)
+            {
+                this.EnsureComma();
+                this.ctorHeader = true;
+                this.Write(JS.Fields.CTORS);
+                this.WriteColon();
+                this.BeginBlock();
             }
 
             foreach (var ctor in this.TypeInfo.Ctors)
@@ -524,6 +519,12 @@ namespace Bridge.Translator
                 this.Emitter.Comma = true;
                 this.ClearLocalsMap(prevMap);
                 this.ClearLocalsNamesMap(prevNamesMap);
+            }
+
+            if (this.ctorHeader)
+            {
+                this.WriteNewLine();
+                this.EndBlock();
             }
         }
 

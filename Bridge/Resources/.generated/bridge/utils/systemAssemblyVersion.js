@@ -3,4 +3,10 @@
         Bridge.SystemAssembly.compiler = "16.0.0";
     });
 
-    Bridge.define("Bridge.Utils.SystemAssemblyVersion");
+    Bridge.define("Bridge.Utils.SystemAssemblyVersion", {
+        statics: {
+            methods: {
+
+            }
+        }
+    });
