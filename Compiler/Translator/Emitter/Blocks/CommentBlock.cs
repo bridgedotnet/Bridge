@@ -41,7 +41,7 @@ namespace Bridge.Translator
             string wrapperStart = wrap ? "/* " : null;
             string wrapperEnd = wrap ? "*/" : null;
 
-            var lines = this.GetNormalizedWhitespaceAndAstericsLines(text, true);
+            var lines = this.GetNormalizedWhitespaceAndAsteriskLines(text, true);
 
             // Remove first and last empty lines
             if (!wrap && lines.Length > 0)
@@ -92,7 +92,7 @@ namespace Bridge.Translator
 
             string wrapperStart = wrap ? "//" : null;
 
-            var lines = this.GetNormalizedWhitespaceAndAstericsLines(text, false);
+            var lines = this.GetNormalizedWhitespaceAndAsteriskLines(text, false);
 
             int? initAttributeMode = GetInitAttributeMode();
 

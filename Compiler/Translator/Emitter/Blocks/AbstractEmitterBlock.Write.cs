@@ -247,9 +247,9 @@ namespace Bridge.Translator
         /// Then aligns remaining whitespaces to match indent level if alignedIndent is true.
         /// </summary>
         /// <param name="line">The string to process.</param>
-        /// <param name="startOffset">The number of whitespaces to remove from the beginning.</param>
-        /// <param name="alignedIndent">The string to process.</param>
-        /// <returns></returns>
+        /// <param name="startOffset">The number of whitespaces to remove from the beginning, ignored if negative or zero.</param>
+        /// <param name="alignedIndent">Specifies if whitespaces should be aligned by indent level.</param>
+        /// <returns>The string with removed first startOffset whitespace symbols and aligned by indent level if required.</returns>
         private static string IndentLine(string line, int startOffset, bool alignedIndent)
         {
             if (string.IsNullOrEmpty(line))
@@ -804,14 +804,14 @@ namespace Bridge.Translator
         }
 
         /// <summary>
-        /// Splits the input string into lines,
+        /// Splits the input string into lines by CRLF and LF,
         /// replaces lines containing only whitespaces into empty lines and
-        /// optionally replaces first (ignoring whitespaces) asterics symbol in each line with whitespace.
+        /// optionally replaces first (ignoring whitespaces) asterisk symbol in each line with whitespace.
         /// </summary>
-        /// <param name="s">Input string</param>
-        /// <param name="removeFirstAsterics">Specifies whether to replace first (ignoring whitespaces) asterics symbol in each line with whitespace</param>
-        /// <returns></returns>
-        public string[] GetNormalizedWhitespaceAndAstericsLines(string s, bool removeFirstAsterics)
+        /// <param name="s">Input string.</param>
+        /// <param name="removeFirstAsterisk">Specifies whether to replace first (ignoring whitespaces) asterisk symbol in each line with whitespace</param>
+        /// <returns>String array representing the input line splittted by lines, first asterisk symbol removed if required.</returns>
+        public string[] GetNormalizedWhitespaceAndAsteriskLines(string s, bool removeFirstAsterisk)
         {
             if (string.IsNullOrEmpty(s))
             {
@@ -828,9 +828,9 @@ namespace Bridge.Translator
                             return string.Empty;
                         }
 
-                        if (removeFirstAsterics)
+                        if (removeFirstAsterisk)
                         {
-                            var astericsIndex = -1;
+                            var asteriskIndex = -1;
 
                             for (int i = 0; i < x.Length; i++)
                             {
@@ -838,17 +838,17 @@ namespace Bridge.Translator
                                 {
                                     if (x[i] == '*')
                                     {
-                                        astericsIndex = i;
+                                        asteriskIndex = i;
                                     }
 
                                     break;
                                 }
                             }
 
-                            if (astericsIndex >= 0)
+                            if (asteriskIndex >= 0)
                             {
-                                var ie = astericsIndex + 1 > x.Length ? x.Length : astericsIndex + 1;
-                                x = x.Substring(0, astericsIndex) + " " + x.Substring(ie);
+                                var ie = asteriskIndex + 1 > x.Length ? x.Length : asteriskIndex + 1;
+                                x = x.Substring(0, asteriskIndex) + " " + x.Substring(ie);
                             }
                         }
 
