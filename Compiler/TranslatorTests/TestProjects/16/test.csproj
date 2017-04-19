@@ -79,12 +79,12 @@
     <Compile Include="BridgeIssues\2000\N1537.cs" />
     <Compile Include="BridgeIssues\2000\N1508.cs" />
     <Compile Include="BridgeIssues\2000\N1552.cs" />
-    <Compile Include="BridgeIssues\2000\N2420.cs" />
-    <Compile Include="BridgeIssues\2000\N2318.cs" />
-    <Compile Include="BridgeIssues\2000\N2277.cs" />
-    <Compile Include="BridgeIssues\2000\N2143.cs" />
-    <Compile Include="BridgeIssues\2000\N2113.cs" />
-    <Compile Include="BridgeIssues\2500\N2567.cs" />
+    <Compile Include="BridgeIssues\2500\N2420.cs" />
+    <Compile Include="BridgeIssues\2500\N2318.cs" />
+    <Compile Include="BridgeIssues\2500\N2277.cs" />
+    <Compile Include="BridgeIssues\2500\N2143.cs" />
+    <Compile Include="BridgeIssues\2500\N2113.cs" />
+    <Compile Include="BridgeIssues\3000\N2567.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BridgeIssues\0500\N384.cs" />
   </ItemGroup>
