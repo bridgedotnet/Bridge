@@ -76,7 +76,7 @@ namespace Bridge.ClientTest.ConventionTests.Class
         public int field1;
     }
 
-    public class Class61: Class6
+    public class Class61 : Class6
     {
         public int field2;
     }
@@ -325,17 +325,18 @@ namespace Bridge.ClientTest.ConventionTests.Class
         }
     }
 
-    [Convention(Notation.UpperCase, ConventionTarget.Class)]
-    [Convention(Notation.UpperCamelCase, ConventionTarget.Delegate)]
-    public class Class14
-    {
-        public delegate int delegate91();
+    // Uncomment when ConventionTarget.Delegate implemented
+    //[Convention(Notation.UpperCase, ConventionTarget.Class)]
+    //[Convention(Notation.UpperCamelCase, ConventionTarget.Delegate)]
+    //public class Class14
+    //{
+    //    public delegate int delegate91();
 
-        public delegate91 delegateProp91
-        {
-            get; set;
-        }
-    }
+    //    public delegate91 delegateProp91
+    //    {
+    //        get; set;
+    //    }
+    //}
 
     [Category(Constants.MODULE_CONVENTION)]
     [TestFixture(TestNameFormat = "Convention.ClassAttribute - {0}")]
@@ -372,7 +373,7 @@ namespace Bridge.ClientTest.ConventionTests.Class
         [Test]
         public static void ObjectLiteralTest()
         {
-            var c3 = new Class3 {field1 = 1, prop1 = 2};
+            var c3 = new Class3 { field1 = 1, prop1 = 2 };
             Assert.AreEqual(1, c3["FIELD1"]);
             Assert.AreEqual(2, c3["PROP1"]);
         }
@@ -380,7 +381,7 @@ namespace Bridge.ClientTest.ConventionTests.Class
         [Test]
         public static void InterfaceMemberTest()
         {
-           var c4 = new Class4();
+            var c4 = new Class4();
             Assert.AreEqual("function", Script.TypeOf(c4["method1"]));
             Assert.AreEqual("function", Script.TypeOf(c4["METHOD2"]));
         }
@@ -533,14 +534,11 @@ namespace Bridge.ClientTest.ConventionTests.Class
         public static void EnumItemMemberTest()
         {
             Assert.AreEqual("Bridge.ClientTest.ConventionTests.Class.Enum2", typeof(Enum2).FullName);
-
-            //#2477 Test failing
-            //Assert.AreEqual("enummember1", Enum.ToString(typeof(Enum2), Enum2.EnumMember1));
+            Assert.AreEqual("enummember1", Enum.ToString(typeof(Enum2), Enum2.EnumMember1));
             Assert.AreEqual("EnumMember2", Enum.ToString(typeof(Enum2), Enum2.enumMember2));
 
             Assert.NotNull(Global.ToDynamic().Bridge.ClientTest.ConventionTests.Class.Enum2);
-            //#2477 Test failing
-            //Assert.NotNull(Global.ToDynamic().Bridge.ClientTest.ConventionTests.Class.Enum2.enummember1);
+            Assert.NotNull(Global.ToDynamic().Bridge.ClientTest.ConventionTests.Class.Enum2.enummember1);
             Assert.NotNull(Global.ToDynamic().Bridge.ClientTest.ConventionTests.Class.Enum2.EnumMember2);
         }
 
@@ -568,10 +566,10 @@ namespace Bridge.ClientTest.ConventionTests.Class
 
             Assert.Null(c9.As<dynamic>().externalprop91);
             c9.ExternalProp91 = 1;
-            //#2477 Test failing
-            //Assert.NotNull(c9.As<dynamic>().externalprop91);
+            Assert.NotNull(c9.As<dynamic>().externalprop91);
         }
 
+        /* Anonymous target can be applied on assembly level only
         [Test]
         public static void AnonymousTargetTest()
         {
@@ -582,12 +580,11 @@ namespace Bridge.ClientTest.ConventionTests.Class
 
             Assert.NotNull(a);
             Assert.AreEqual(15, sum);
-            //#2477 Test failing
-            //Assert.AreEqual(7, c.As<dynamic>().member1);
-            //#2477 Test failing
-            //Assert.AreEqual(8, c.As<dynamic>().member2);
-        }
+            Assert.AreEqual(7, c.As<dynamic>().member1);
+            Assert.AreEqual(8, c.As<dynamic>().member2);
+        }*/
 
+        /* Uncomment when ConventionTarget.Delegate implemented
         [Test]
         public static void DelegateTargetTest()
         {
@@ -598,8 +595,7 @@ namespace Bridge.ClientTest.ConventionTests.Class
             c.delegateProp91 = () => { return 1; };
 
             Assert.AreEqual(1, c.delegateProp91());
-            //#2477 Test failing
-            //Assert.NotNull(c.As<dynamic>().DelegateProp91);
-        }
+            Assert.NotNull(c.As<dynamic>().DelegateProp91);
+        }*/
     }
 }

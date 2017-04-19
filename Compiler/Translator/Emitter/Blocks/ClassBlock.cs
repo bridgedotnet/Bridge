@@ -139,7 +139,6 @@ namespace Bridge.Translator
 
             if (name.IsEmpty())
             {
-                
                 name = BridgeTypes.ToJsName(this.TypeInfo.Type, this.Emitter, asDefinition: true, nomodule: true, ignoreLiteralName: false);
             }
 
@@ -516,30 +515,10 @@ namespace Bridge.Translator
             }
         }
 
-        protected virtual IEnumerable<string> GetDefineMethods(string prefix, Func<MethodDeclaration, IMethod, string> fn)
+        protected virtual IEnumerable<string> GetDefineMethods(InitPosition value, Func<MethodDeclaration, IMethod, string> fn)
         {
             var methods = this.TypeInfo.InstanceMethods;
             var attrName = "Bridge.InitAttribute";
-            int value = 0;
-
-            switch (prefix)
-            {
-                case "After":
-                    value = 0;
-                    break;
-
-                case "Before":
-                    value = 1;
-                    break;
-
-                case "Top":
-                    value = 2;
-                    break;
-
-                case "Bottom":
-                    value = 3;
-                    break;
-            }
 
             foreach (var methodGroup in methods)
             {
@@ -575,7 +554,7 @@ namespace Bridge.Translator
                             var rr = this.Emitter.Resolver.ResolveNode(attr.Type, this.Emitter);
                             if (rr.Type.FullName == attrName)
                             {
-                                int? initPosition = null;
+                                InitPosition? initPosition = null;
                                 if (attr.HasArgumentList)
                                 {
                                     if (attr.Arguments.Count > 0)
@@ -584,17 +563,17 @@ namespace Bridge.Translator
                                         var argrr = this.Emitter.Resolver.ResolveNode(argExpr, this.Emitter);
                                         if (argrr.ConstantValue is int)
                                         {
-                                            initPosition = (int)argrr.ConstantValue;
+                                            initPosition = (InitPosition)argrr.ConstantValue;
                                         }
                                     }
                                     else
                                     {
-                                        initPosition = 0; //Default InitPosition.After
+                                        initPosition = InitPosition.After;
                                     }
                                 }
                                 else
                                 {
-                                    initPosition = 0; //Default InitPosition.After
+                                    initPosition = InitPosition.After;
                                 }
 
                                 if (initPosition == value)
@@ -637,65 +616,106 @@ namespace Bridge.Translator
 
         protected virtual IEnumerable<string> GetBeforeDefineMethods()
         {
-            return this.GetDefineMethods("Before",
+            return this.GetDefineMethods(InitPosition.Before,
                 (method, rrMethod) =>
                 {
-                    this.PushWriter(JS.Types.Bridge.INIT + "(function(){0});");
+                    var level = this.Emitter.Level;
+
+                    this.PushWriter(JS.Types.Bridge.INIT + "(function (){0});");
                     this.ResetLocals();
                     var prevMap = this.BuildLocalsMap();
                     var prevNamesMap = this.BuildLocalsNamesMap();
 
+                    this.Emitter.InitPosition = InitPosition.Before;
+                    this.Emitter.ResetLevel();
+
                     method.Body.AcceptVisitor(this.Emitter);
+
+                    this.Emitter.InitPosition = null;
+                    this.Emitter.ResetLevel(level);
 
                     this.ClearLocalsMap(prevMap);
                     this.ClearLocalsNamesMap(prevNamesMap);
+
                     return this.PopWriter(true);
                 });
         }
 
         protected virtual IEnumerable<string> GetTopDefineMethods()
         {
-            return this.GetDefineMethods("Top",
+            return this.GetDefineMethods(InitPosition.Top,
                 (method, rrMethod) =>
                 {
+                    var prevLevel = this.Emitter.Level;
+                    var prevInitialLevel = this.Emitter.InitialLevel;
+
                     this.PushWriter("{0}");
                     this.ResetLocals();
                     var prevMap = this.BuildLocalsMap();
                     var prevNamesMap = this.BuildLocalsNamesMap();
                     this.Emitter.NoBraceBlock = method.Body;
+
+                    this.Emitter.InitPosition = InitPosition.Top;
+                    ((Emitter)this.Emitter).InitialLevel = this.Emitter.InitialLevel > 1 ? this.Emitter.InitialLevel - 1 : 0;
+                    this.Emitter.ResetLevel();
+
                     method.Body.AcceptVisitor(this.Emitter);
+
+                    this.Emitter.InitPosition = null;
+                    ((Emitter)this.Emitter).InitialLevel = prevInitialLevel;
+                    this.Emitter.ResetLevel(prevLevel);
 
                     this.ClearLocalsMap(prevMap);
                     this.ClearLocalsNamesMap(prevNamesMap);
+
                     return this.PopWriter(true);
                 });
         }
 
         protected virtual IEnumerable<string> GetBottomDefineMethods()
         {
-            return this.GetDefineMethods("Bottom",
+            return this.GetDefineMethods(InitPosition.Bottom,
                 (method, rrMethod) =>
                 {
+                    var prevLevel = this.Emitter.Level;
+                    var prevInitialLevel = this.Emitter.InitialLevel;
+
                     this.PushWriter("{0}");
                     this.ResetLocals();
                     var prevMap = this.BuildLocalsMap();
                     var prevNamesMap = this.BuildLocalsNamesMap();
                     this.Emitter.NoBraceBlock = method.Body;
+
+                    this.Emitter.InitPosition = InitPosition.Bottom;
+                    ((Emitter)this.Emitter).InitialLevel = this.Emitter.InitialLevel > 1 ? this.Emitter.InitialLevel - 1 : 0;
+                    this.Emitter.ResetLevel();
+
                     method.Body.AcceptVisitor(this.Emitter);
+
+                    this.Emitter.InitPosition = null;
+                    ((Emitter)this.Emitter).InitialLevel = prevInitialLevel;
+                    this.Emitter.ResetLevel(prevLevel);
 
                     this.ClearLocalsMap(prevMap);
                     this.ClearLocalsNamesMap(prevNamesMap);
+
                     return this.PopWriter(true);
                 });
         }
 
         protected virtual IEnumerable<string> GetAfterDefineMethods()
         {
-            return this.GetDefineMethods("After",
-                delegate(MethodDeclaration method, IMethod rrMethod)
+            return this.GetDefineMethods(InitPosition.After,
+                (method, rrMethod) =>
                 {
-                    return JS.Types.Bridge.INIT + "(function() { " + BridgeTypes.ToJsName(rrMethod.DeclaringTypeDefinition, this.Emitter) + "." +
+                    this.Emitter.InitPosition = InitPosition.After;
+
+                    var callback = JS.Types.Bridge.INIT + "(function () { " + BridgeTypes.ToJsName(rrMethod.DeclaringTypeDefinition, this.Emitter) + "." +
                            this.Emitter.GetEntityName(method) + "(); });";
+
+                    this.Emitter.InitPosition = null;
+
+                    return callback;
                 });
         }
     }

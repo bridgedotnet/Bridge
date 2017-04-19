@@ -1624,6 +1624,6 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
     Bridge.ns("System.Nullable$1", $box_);
 
     Bridge.apply($box_.System.Nullable$1, {
-        toString: function(obj) {return System.Nullable.toString(obj);}
+        toString: function (obj) {return System.Nullable.toString(obj);}
     });
 });

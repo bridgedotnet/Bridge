@@ -377,10 +377,10 @@ namespace Bridge.Translator
                         name = BridgeTypes.DefinitionToJsName(this.TypeInfo.Type, this.Emitter);
                     }
 
-                    this.Write(JS.Vars.D_THIS + "." + JS.Funcs.GET_TYPE + " = function() { return " + name + "; };");
+                    this.Write(JS.Vars.D_THIS + "." + JS.Funcs.GET_TYPE + " = function () { return " + name + "; };");
 
                     this.WriteNewLine();
-                    this.Write("(function()");
+                    this.Write("(function ()");
                     this.BeginBlock();
                     requireNewLine = false;
                 }

@@ -196,6 +196,12 @@ namespace Bridge.Contract
 
         int ResetLevel(int? level = null);
 
+        InitPosition? InitPosition
+        {
+            get;
+            set;
+        }
+
         System.Collections.Generic.Dictionary<string, ICSharpCode.NRefactory.CSharp.AstType> Locals
         {
             get;
