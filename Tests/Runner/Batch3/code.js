@@ -1,15 +1,11 @@
-
 var SomeExternalNamespace = {
     SomeNonBridgeClass: function () {
     }
 };
 SomeExternalNamespace.SomeNonBridgeClass.prototype.Foo = function(){return 1;};
-
-
 Bridge.$MyPerson2189 = function(name){
     this.Name = name;
 };
-
 
 /**
  * Bridge Test library - test github issues up to #1999
@@ -13726,7 +13722,6 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2176", {
         statics: {
             TestExternalObjectLiteralConstructorMode: function () {
-
                 // This emulates external Config1
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge2176.Config1 = function()
                 {
@@ -13738,7 +13733,6 @@ Bridge.$N1391Result =                 r;
                 {
                     return { id: 2 };
                 };
-
 
                 var c1 = Bridge.merge(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2176.Config1(), {
                     name: "Config1"
@@ -22327,14 +22321,10 @@ Bridge.$N1391Result =                 r;
 
                 switch (myValue) {
                     case 0: 
-
                         myValue = 2;
-
                         break;
                     case 1: 
-
                         myValue = 3;
-
                         break;
                 }
 

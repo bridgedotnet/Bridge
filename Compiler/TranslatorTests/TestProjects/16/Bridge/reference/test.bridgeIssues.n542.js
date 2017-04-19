@@ -13,9 +13,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             },
             Test2: function () {
                 var blable = "";
-
                     vBoubli (@"/faaa");
-
 
                 return blable;
             }

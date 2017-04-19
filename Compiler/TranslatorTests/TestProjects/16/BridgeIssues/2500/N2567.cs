@@ -127,6 +127,38 @@ namespace Test.BridgeIssues.N2567
             //@     console.log('5');
         }
 
+        public static void CheckTheSameLineAndEmptyInjectComments()
+        {
+            /*@var a = 1,
+                b = 2,
+                c = 3;*/
+
+            /*@var d = 4,
+                e = 5;*/
+
+            /*@var f = 6;*/
+
+            /*@ */
+
+            /*@*/
+        }
+        
+        public static void CheckTheSameLineAndEmptyComments()
+        {
+            /*var a = 1,
+                b = 2,
+                c = 3;*/
+
+            /*var d = 4,
+                e = 5;*/
+
+            /*var f = 6;*/
+            
+            /* */
+
+            /**/
+        }
+
         [Init(InitPosition.Top)]
         public static void CheckCommentsInInitPositionTop()
         {

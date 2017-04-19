@@ -43,6 +43,36 @@ namespace Bridge.Translator
 
             var lines = this.GetNormalizedWhitespaceAndAstericsLines(text, true);
 
+            // Remove first and last empty lines
+            if (!wrap && lines.Length > 0)
+            {
+                System.Collections.Generic.List<string> l = null;
+
+                if (string.IsNullOrEmpty(lines[0]))
+                {
+                    l = new System.Collections.Generic.List<string>(lines);
+                    l.RemoveAt(0);
+                }
+
+                if (string.IsNullOrEmpty(lines[lines.Length - 1]))
+                {
+                    if (l == null)
+                    {
+                        l = new System.Collections.Generic.List<string>(lines);
+                    }
+
+                    if (l.Count > 0)
+                    {
+                        l.RemoveAt(l.Count - 1);
+                    }
+                }
+
+                if (l != null)
+                {
+                    lines = l.ToArray();
+                }
+            }
+
             var indentTrim = this.Comment.StartLocation.Column + offsetAlreadyApplied;
 
             int? initAttributeMode = GetInitAttributeMode();
