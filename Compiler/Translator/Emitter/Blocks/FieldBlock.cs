@@ -551,6 +551,7 @@ namespace Bridge.Translator
             bool oldComma = this.Emitter.Comma;
             bool oldNewLine = this.Emitter.IsNewLine;
             bool nonEmpty = false;
+            var changedIndenting = false;
 
             if (objectName != null)
             {
@@ -560,6 +561,9 @@ namespace Bridge.Translator
                 this.WriteColon();
                 this.WriteOpenBracket();
                 this.WriteNewLine();
+
+                this.Indent();
+                changedIndenting = true;
             }
 
             foreach (var member in members)
@@ -594,6 +598,12 @@ namespace Bridge.Translator
             }
 
             this.WriteNewLine();
+
+            if (changedIndenting)
+            {
+                this.Outdent();
+            }
+
             this.WriteCloseBracket();
 
             if (!nonEmpty)
