@@ -7,30 +7,30 @@ namespace Test.BridgeIssues.N2567
     // #2567
     public class N2567
     {
-        public static void CheckMultilineInjectCommentAsterics()
+        public static void CheckMultilineInjectCommentAsterisk()
         {
-            // The comment below contains a line with asterics with NO whitespace at the end
+            // The comment below contains a line with asterisk with NO whitespace at the end
             /*@
              * console.log('one');
              *
              * console.log('two');
              */
 
-            // The comment below contains a line with asterics with ONE whitespace at the end
+            // The comment below contains a line with asterisk with ONE whitespace at the end
             /*@
              * console.log('three');
              * 
              * console.log('four');
              */
 
-            // The comment below contains a line with asterics with TWO whitespaces at the end
+            // The comment below contains a line with asterisk with TWO whitespaces at the end
             /*@
              * console.log('fix');
              *  
              * console.log('six');
              */
 
-            // The comment below contains a line with asterics with TWO whitespaces and a code
+            // The comment below contains a line with asterisk with TWO whitespaces and a code
             /*@
              * console.log('fix');
              * if (true) {
