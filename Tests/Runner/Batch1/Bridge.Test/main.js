@@ -491,12 +491,12 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 });
 
 QUnit.testDone(function (details) {
-        // It will add a UI elements to show CS source for the Test (If CS source data found in the context)
+// It will add a UI elements to show CS source for the Test (If CS source data found in the context)
 
-        //if (details.Failed <= 0)
-        //{
-        //    return;
-        //}
+//if (details.Failed <= 0)
+//{
+//    return;
+//}
 
         var ctx = Bridge.Test.Runtime.ContextHelper.GetContext();
 
@@ -517,7 +517,7 @@ QUnit.testDone(function (details) {
         }
     });
 QUnit.log(function (details) {
-        // It will update a UI elements to show test source (JS) for the assertion (If the JS source (Stack) data found in the context)
+// It will update a UI elements to show test source (JS) for the assertion (If the JS source (Stack) data found in the context)
 
         var ctx = Bridge.Test.Runtime.ContextHelper.GetContext();
 

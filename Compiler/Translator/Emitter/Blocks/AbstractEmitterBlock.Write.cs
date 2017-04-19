@@ -4,6 +4,7 @@ using Bridge.Contract.Constants;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -27,6 +28,11 @@ namespace Bridge.Translator
         public virtual void Outdent()
         {
             this.Emitter.ResetLevel(this.Emitter.Level - 1);
+        }
+
+        public virtual void ResetLevel(int level)
+        {
+            this.Emitter.ResetLevel(level);
         }
 
         public virtual void WriteIndent()
@@ -164,6 +170,142 @@ namespace Bridge.Translator
         public virtual void WriteLines(params string[] lines)
         {
             this.WriteLines((IEnumerable<string>)lines);
+        }
+
+        /// <summary>
+        /// Takes an array of strings to put into Emitter's output.
+        /// Each array element is considered as a separate line (i.e. new line character appended) and not expected to contain new line character at the end.
+        /// Set lineStartOffset to trim first lineStartOffset whitespaces.
+        /// Use wrappedStart to add it before the first line and use wrappedEnd to add it after the last line.
+        /// Set customIndent to output the lines with overridden indent level (Emitter.Level).
+        /// Use alignedIndent to align whitespace to match indent levels (i.e. first one whitespaces gets three extra ones, six became eight whitespaces etc).
+        /// </summary>
+        /// <param name="lines">Strings to put into Emitter's output, line by line.</param>
+        /// <param name="lineStartOffset">Offset in lines to trim whitespaces.</param>
+        /// <param name="wrappedStart">Suffix for the first line.</param>
+        /// <param name="wrappedEnd">Postfix for the last line.</param>
+        /// <param name="customIndent">Overrides the current Emitter's indent level (just for the lines output).</param>
+        /// <param name="alignedIndent">Aligns each line to match indent levels (i.e. first one whitespaces gets three extra ones, six became eight whitespaces etc).</param>
+        public virtual void WriteLinesIndented(string[] lines, int lineStartOffset = 0, string wrappedStart = null, string wrappedEnd = null, int? customIndent = null, bool alignedIndent = false)
+        {
+            if (lines == null)
+            {
+                return;
+            }
+
+            for (int j = 0; j < lines.Length; j++)
+            {
+                var line = lines[j];
+
+                line = IndentLine(line, lineStartOffset, alignedIndent);
+
+                if (line == null)
+                {
+                    line = string.Empty;
+                }
+
+                if (j == 0 && !string.IsNullOrEmpty(wrappedStart))
+                {
+                    line = wrappedStart + line;
+                }
+
+                if (j == lines.Length - 1 && !string.IsNullOrEmpty(wrappedEnd))
+                {
+                    line = line + wrappedEnd;
+                }
+
+                if (!string.IsNullOrEmpty(line))
+                {
+                    if (!customIndent.HasValue)
+                    {
+                        this.WriteIndent();
+                    }
+                    else if (customIndent.Value > 0)
+                    {
+                        var currentIndent = this.Level;
+
+                        try
+                        {
+                            this.ResetLevel(customIndent.Value);
+                            this.WriteIndent();
+
+                        } finally
+                        {
+                            this.ResetLevel(currentIndent);
+                        }
+                    }
+
+                    this.Emitter.Output.Append(line);
+                }
+
+                this.WriteNewLine();
+            }
+        }
+
+        /// <summary>
+        /// First whitespace symbols get removed (i.e shifts the line on startOffset whitespace symbols (or less if not present) to the left.
+        /// Then aligns remaining whitespaces to match indent level if alignedIndent is true.
+        /// </summary>
+        /// <param name="line">The string to process.</param>
+        /// <param name="startOffset">The number of whitespaces to remove from the beginning.</param>
+        /// <param name="alignedIndent">The string to process.</param>
+        /// <returns></returns>
+        private static string IndentLine(string line, int startOffset, bool alignedIndent)
+        {
+            if (string.IsNullOrEmpty(line))
+            {
+                return line;
+            }
+
+            if (startOffset <= 0 && !alignedIndent)
+            {
+                return line;
+            }
+
+            if (startOffset < 0)
+            {
+                startOffset = 0;
+            }
+
+            int firstWhitespaceCount = 0;
+            for (int i = 0; i < line.Length; i++)
+            {
+                if (line[i] == ' ')
+                {
+                    firstWhitespaceCount++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            int trimIndex = firstWhitespaceCount > startOffset
+                ? startOffset
+                : firstWhitespaceCount;
+
+            if (trimIndex > 0)
+            {
+                line = line.Substring(trimIndex);
+            }
+
+            if (alignedIndent)
+            {
+                int indentIndex = firstWhitespaceCount - trimIndex;
+
+                var indentLength = Bridge.Translator.Emitter.INDENT.Length;
+
+                if (indentIndex % indentLength > 0)
+                {
+                    var level = indentIndex / indentLength;
+                    var fullLevelLength = (level + 1) * indentLength;
+                    var restLevelLength = fullLevelLength - indentIndex;
+
+                    line = line.PadLeft(line.Length + restLevelLength);
+                }
+            }
+
+            return line;
         }
 
         public static string DecimalConstant(decimal value, IEmitter emitter)
@@ -518,29 +660,6 @@ namespace Bridge.Translator
             }, RegexOptions.Multiline);
         }
 
-        public static string RemoveIndentFromString(string value, int offset)
-        {
-            StringBuilder output = new StringBuilder();
-            string indentWhiteSpaces = new string(' ', offset);
-
-            int level = offset / 4;
-            for (var i = 0; i < level; i++)
-            {
-                output.Append(Bridge.Translator.Emitter.TAB);
-            }
-
-            var needSpaces = offset % 4;
-            if (needSpaces > 0)
-            {
-                output.Append(new string(' ', needSpaces));
-            }
-
-            string indentTabs = output.ToString();
-
-            value = value.Replace(Bridge.Translator.Emitter.NEW_LINE + indentWhiteSpaces, Bridge.Translator.Emitter.NEW_LINE);
-            return value.Replace(Bridge.Translator.Emitter.NEW_LINE + indentTabs, Bridge.Translator.Emitter.NEW_LINE);
-        }
-
         public virtual void EnsureComma(bool newLine = true)
         {
             if (this.Emitter.Comma)
@@ -682,6 +801,53 @@ namespace Bridge.Translator
             }
 
             return false;
+        }
+
+        public static string[] GetNormalizedWhitespaceAndAstericsLines(string s, bool removeFirstAsterics)
+        {
+            if (string.IsNullOrEmpty(s))
+            {
+                return new[] { s };
+            }
+
+            var lines = s.Split(new string[] { Bridge.Translator.Emitter.CRLF, Bridge.Translator.Emitter.NEW_LINE }, StringSplitOptions.None);
+
+            lines = lines.Select(
+                x =>
+                    {
+                        if (string.IsNullOrEmpty(x))
+                        {
+                            return string.Empty;
+                        }
+
+                        if (removeFirstAsterics)
+                        {
+                            var astericsIndex = -1;
+
+                            for (int i = 0; i < x.Length; i++)
+                            {
+                                if (x[i] != ' ')
+                                {
+                                    if (x[i] == '*')
+                                    {
+                                        astericsIndex = i;
+                                    }
+
+                                    break;
+                                }
+                            }
+
+                            if (astericsIndex >= 0)
+                            {
+                                var ie = astericsIndex + 1 > x.Length ? x.Length : astericsIndex + 1;
+                                x = x.Substring(0, astericsIndex) + " " + x.Substring(ie);
+                            }
+                        }
+
+                        return x.All(c => c == ' ') ? string.Empty : x;
+                    }).ToArray();
+
+            return lines;
         }
 
         public static bool RemovePenultimateEmptyLines(StringBuilder buffer, bool withLast = false)

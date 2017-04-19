@@ -13726,19 +13726,19 @@ Bridge.$N1391Result =                 r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2176", {
         statics: {
             TestExternalObjectLiteralConstructorMode: function () {
-                
-            // This emulates external Config1
-            Bridge.ClientTest.Batch3.BridgeIssues.Bridge2176.Config1 = function()
-            {
-                return { id: 1 };
-            };
 
-            // This emulates external Config2
-            var Config2 = function()
-            {
-                return { id: 2 };
-            };
-            
+                // This emulates external Config1
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2176.Config1 = function()
+                {
+                    return { id: 1 };
+                };
+
+                // This emulates external Config2
+                var Config2 = function()
+                {
+                    return { id: 2 };
+                };
+
 
                 var c1 = Bridge.merge(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2176.Config1(), {
                     name: "Config1"
@@ -18134,13 +18134,13 @@ Bridge.$N1391Result =                 r;
                 Bridge.Test.NUnit.Assert.AreEqual$1(10, v1.length, "Float32Array Length");
 
                 /* 
-             * Commented out. Reason: Only Firefox implements them.
-             * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array
-            var mA = v1.Join();
-            v1.Reverse();
-            var mB = v1.Slice();
-            var mC = v1.Sort();
-             */
+                  Commented out. Reason: Only Firefox implements them.
+                  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array
+                var mA = v1.Join();
+                v1.Reverse();
+                var mB = v1.Slice();
+                var mC = v1.Sort();
+                */
 
                 var expectedToStringFloat32Array1 = isToStringToTypeNameLogic ? "[object Float32Array]" : "0,11,0,0,0,5,0,0,0,99";
                 Bridge.Test.NUnit.Assert.AreEqual$1(expectedToStringFloat32Array1, v1.toLocaleString(), "Float32Array ToLocaleString");
@@ -22327,14 +22327,14 @@ Bridge.$N1391Result =                 r;
 
                 switch (myValue) {
                     case 0: 
-                        
-                    myValue = 2;
-                    
+
+                        myValue = 2;
+
                         break;
                     case 1: 
-                        
-                    myValue = 3;
-                    
+
+                        myValue = 3;
+
                         break;
                 }
 
