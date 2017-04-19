@@ -803,7 +803,15 @@ namespace Bridge.Translator
             return false;
         }
 
-        public static string[] GetNormalizedWhitespaceAndAstericsLines(string s, bool removeFirstAsterics)
+        /// <summary>
+        /// Splits the input string into lines,
+        /// replaces lines containing only whitespaces into empty lines and
+        /// optionally replaces first (ignoring whitespaces) asterics symbol in each line with whitespace.
+        /// </summary>
+        /// <param name="s">Input string</param>
+        /// <param name="removeFirstAsterics">Specifies whether to replace first (ignoring whitespaces) asterics symbol in each line with whitespace</param>
+        /// <returns></returns>
+        public string[] GetNormalizedWhitespaceAndAstericsLines(string s, bool removeFirstAsterics)
         {
             if (string.IsNullOrEmpty(s))
             {

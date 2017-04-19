@@ -41,7 +41,7 @@ namespace Bridge.Translator
             string wrapperStart = wrap ? "/* " : null;
             string wrapperEnd = wrap ? "*/" : null;
 
-            var lines = AbstractEmitterBlock.GetNormalizedWhitespaceAndAstericsLines(text, true);
+            var lines = this.GetNormalizedWhitespaceAndAstericsLines(text, true);
 
             var indentTrim = this.Comment.StartLocation.Column + offsetAlreadyApplied;
 
@@ -62,7 +62,7 @@ namespace Bridge.Translator
 
             string wrapperStart = wrap ? "//" : null;
 
-            var lines = AbstractEmitterBlock.GetNormalizedWhitespaceAndAstericsLines(text, false);
+            var lines = this.GetNormalizedWhitespaceAndAstericsLines(text, false);
 
             int? initAttributeMode = GetInitAttributeMode();
 
