@@ -103,14 +103,25 @@ namespace Bridge.Translator
                 level = InitialLevel;
             }
 
-            if (level <= InitialLevel)
+            if (level < InitialLevel && !this.InitPosition.HasValue )
             {
                 level = InitialLevel;
+            }
+
+            if (level < 0)
+            {
+                level = 0;
             }
 
             this.Level = level.Value;
 
             return this.Level;
+        }
+
+        public InitPosition? InitPosition
+        {
+            get;
+            set;
         }
 
         public bool IsNewLine

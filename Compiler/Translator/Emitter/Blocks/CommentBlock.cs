@@ -52,11 +52,7 @@ namespace Bridge.Translator
 
             var indentTrim = this.Comment.StartLocation.Column + offsetAlreadyApplied;
 
-            int? initAttributeMode = GetInitAttributeMode();
-
-            int? customIndent = GetIndentLevelByInitPosition(initAttributeMode);
-
-            this.WriteLinesIndented(lines, indentTrim, wrapperStart, wrapperEnd, customIndent, alignedIndent);
+            this.WriteLinesIndented(lines, indentTrim, wrapperStart, wrapperEnd, alignedIndent);
         }
 
         protected virtual void WriteSingleLineComment(string text, bool newline, bool wrap, bool alignedIndent, int offsetAlreadyApplied)
@@ -71,11 +67,7 @@ namespace Bridge.Translator
 
             var lines = this.GetNormalizedWhitespaceAndAsteriskLines(text, false);
 
-            int? initAttributeMode = GetInitAttributeMode();
-
-            int? customIndent = GetIndentLevelByInitPosition(initAttributeMode);
-
-            this.WriteLinesIndented(lines, offsetAlreadyApplied, wrapperStart, null, customIndent, alignedIndent);
+            this.WriteLinesIndented(lines, offsetAlreadyApplied, wrapperStart, null, alignedIndent);
         }
 
         protected void VisitComment()
@@ -124,52 +116,6 @@ namespace Bridge.Translator
             {
                 this.WriteSingleLineComment(comment.Content, newLine, true, false, 0);
             }
-        }
-
-        private int? GetInitAttributeMode()
-        {
-            int? initAttributeMode = null;
-
-            var methodDeclaration = this.Comment.GetParent<MethodDeclaration>();
-
-            if (methodDeclaration != null)
-            {
-                foreach (var attrSection in methodDeclaration.Attributes)
-                {
-                    foreach (var attr in attrSection.Attributes)
-                    {
-                        var rr = this.Emitter.Resolver.ResolveNode(attr.Type, this.Emitter);
-
-                        if (rr.Type.FullName == "Bridge.InitAttribute")
-                        {
-                            if (attr.HasArgumentList && attr.Arguments.Count > 0)
-                            {
-                                var argExpr = attr.Arguments.First();
-                                var argrr = this.Emitter.Resolver.ResolveNode(argExpr, this.Emitter);
-
-                                if (argrr.ConstantValue is int && (int)argrr.ConstantValue > 0)
-                                {
-                                    initAttributeMode = (int)argrr.ConstantValue;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            return initAttributeMode;
-        }
-
-        private int? GetIndentLevelByInitPosition(int? initAttributeMode)
-        {
-            int? customIndent = null;
-
-            if (initAttributeMode.HasValue)
-            {
-                customIndent = initAttributeMode.Value == 1 /*InitPosition.Before*/ ? 2 : 0;
-            }
-
-            return customIndent;
         }
 
         private void RemoveFirstAndLastEmptyElements(ref string[] lines)

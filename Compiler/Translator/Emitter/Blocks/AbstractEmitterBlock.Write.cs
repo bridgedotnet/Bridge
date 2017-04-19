@@ -177,16 +177,14 @@ namespace Bridge.Translator
         /// Each array element is considered as a separate line (i.e. new line character appended) and not expected to contain new line character at the end.
         /// Set lineStartOffset to trim first lineStartOffset whitespaces.
         /// Use wrappedStart to add it before the first line and use wrappedEnd to add it after the last line.
-        /// Set customIndent to output the lines with overridden indent level (Emitter.Level).
         /// Use alignedIndent to align whitespace to match indent levels (i.e. first one whitespaces gets three extra ones, six became eight whitespaces etc).
         /// </summary>
         /// <param name="lines">Strings to put into Emitter's output, line by line.</param>
         /// <param name="lineStartOffset">Offset in lines to trim whitespaces.</param>
         /// <param name="wrappedStart">Suffix for the first line.</param>
         /// <param name="wrappedEnd">Postfix for the last line.</param>
-        /// <param name="customIndent">Overrides the current Emitter's indent level (just for the lines output).</param>
         /// <param name="alignedIndent">Aligns each line to match indent levels (i.e. first one whitespaces gets three extra ones, six became eight whitespaces etc).</param>
-        public virtual void WriteLinesIndented(string[] lines, int lineStartOffset = 0, string wrappedStart = null, string wrappedEnd = null, int? customIndent = null, bool alignedIndent = false)
+        public virtual void WriteLinesIndented(string[] lines, int lineStartOffset = 0, string wrappedStart = null, string wrappedEnd = null, bool alignedIndent = false)
         {
             if (lines == null)
             {
@@ -216,24 +214,7 @@ namespace Bridge.Translator
 
                 if (!string.IsNullOrEmpty(line))
                 {
-                    if (!customIndent.HasValue)
-                    {
-                        this.WriteIndent();
-                    }
-                    else if (customIndent.Value > 0)
-                    {
-                        var currentIndent = this.Level;
-
-                        try
-                        {
-                            this.ResetLevel(customIndent.Value);
-                            this.WriteIndent();
-
-                        } finally
-                        {
-                            this.ResetLevel(currentIndent);
-                        }
-                    }
+                    this.WriteIndent();
 
                     this.Emitter.Output.Append(line);
                 }

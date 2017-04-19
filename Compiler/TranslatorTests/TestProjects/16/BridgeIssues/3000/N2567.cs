@@ -187,6 +187,22 @@ namespace Test.BridgeIssues.N2567
             //@   console.log('Top3');
             //@ if (true)
             //@   console.log('Top4');
+
+            System.Linq.Enumerable.Any("", (ch) =>
+            {
+                // Singleline comment Top
+                /*
+                 * Multipleline comment Top
+                 */
+                //@ var singlelineInjectTop = 1;
+                /*@
+                 * var multilineInjectWithAsteriskTop = 2;
+                 */
+                /*@
+                   var multilineInjectTop = 3;
+                 */
+                return true;
+            });
         }
         
         [Init(InitPosition.Bottom)]
@@ -217,6 +233,68 @@ namespace Test.BridgeIssues.N2567
             //@   console.log('Bottom3');
             //@ if (true)
             //@   console.log('Bottom4');
+
+            System.Linq.Enumerable.Any("", (ch) =>
+            {
+                // Singleline comment Bottom
+                /*
+                 * Multipleline comment Bottom
+                 */
+                //@ var singlelineInjectBottom = 1;
+                /*@
+                 * var multilineInjectWithAsteriskBottom = 2;
+                 */
+                /*@
+                   var multilineInjectBottom = 3;
+                 */
+                return true;
+            });
+        }
+
+        [Init(InitPosition.After)]
+        public static void CheckCommentsInInitPositionAfter()
+        {
+            /*@
+             * console.log('After0');
+             *
+             * if (true) {
+             *  console.log('After1');
+             * }
+             * if (true) {
+             *   console.log('After2');
+             * }
+             * if (true) {
+             *    console.log('After3');
+             * }
+             * if (true) {
+             *    console.log('After4');
+             * }
+             */
+
+            //@ if (true)
+            //@  console.log('After1');
+            //@ if (true)
+            //@   console.log('After2');
+            //@ if (true)
+            //@   console.log('After3');
+            //@ if (true)
+            //@   console.log('After4');
+
+            System.Linq.Enumerable.Any("", (ch) =>
+            {
+                // Singleline comment After
+                /*
+                 * Multipleline comment After
+                 */
+                //@ var singlelineInjectAfter = 1;
+                /*@
+                 * var multilineInjectWithAsteriskAfter = 2;
+                 */
+                /*@
+                   var multilineInjectAfter = 3;
+                 */
+                return true;
+            });
         }
 
         [Init(InitPosition.Before)]
@@ -247,6 +325,22 @@ namespace Test.BridgeIssues.N2567
             //@   console.log('Before3');
             //@ if (true)
             //@   console.log('Before4');
+
+            System.Linq.Enumerable.Any("", (ch) =>
+            {
+                // Singleline comment Before
+                /*
+                 * Multipleline comment Before
+                 */
+                //@ var singlelineInjectBefore = 1;
+                /*@
+                 * var multilineInjectWithAsteriskBefore = 2;
+                 */
+                /*@
+                   var multilineInjectBefore = 3;
+                 */
+                return true;
+            });
         }
     }
 

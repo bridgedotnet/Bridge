@@ -22,6 +22,17 @@ if (true)
 if (true)
     console.log('Top4');
 
+System.Linq.Enumerable.from("").any(function (ch) {
+    // Singleline comment Top
+    /* 
+      Multipleline comment Top
+    */
+    var singlelineInjectTop = 1;
+    var multilineInjectWithAsteriskTop = 2;
+    var multilineInjectTop = 3;
+    return true;
+});
+
 Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
@@ -49,6 +60,17 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             console.log('Before3');
         if (true)
             console.log('Before4');
+
+        System.Linq.Enumerable.from("").any(function (ch) {
+                // Singleline comment Before
+                /* 
+                  Multipleline comment Before
+                */
+                var singlelineInjectBefore = 1;
+                var multilineInjectWithAsteriskBefore = 2;
+                var multilineInjectBefore = 3;
+                return true;
+            });
     });
 
     Bridge.define("Test.BridgeIssues.N2567.N2567", {
@@ -170,9 +192,47 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                 /* */
 
                 /* */
+            },
+            CheckCommentsInInitPositionAfter: function () {
+                console.log('After0');
+
+                if (true) {
+                    console.log('After1');
+                }
+                if (true) {
+                    console.log('After2');
+                }
+                if (true) {
+                    console.log('After3');
+                }
+                if (true) {
+                    console.log('After4');
+                }
+
+                if (true)
+                    console.log('After1');
+                if (true)
+                    console.log('After2');
+                if (true)
+                    console.log('After3');
+                if (true)
+                    console.log('After4');
+
+                System.Linq.Enumerable.from("").any(function (ch) {
+                        // Singleline comment After
+                        /* 
+                          Multipleline comment After
+                        */
+                        var singlelineInjectAfter = 1;
+                        var multilineInjectWithAsteriskAfter = 2;
+                        var multilineInjectAfter = 3;
+                        return true;
+                    });
             }
         }
     });
+
+    Bridge.init(function() { Test.BridgeIssues.N2567.N2567.CheckCommentsInInitPositionAfter(); });
 });
 
 console.log('Bottom0');
@@ -198,3 +258,14 @@ if (true)
     console.log('Bottom3');
 if (true)
     console.log('Bottom4');
+
+System.Linq.Enumerable.from("").any(function (ch) {
+    // Singleline comment Bottom
+    /* 
+      Multipleline comment Bottom
+    */
+    var singlelineInjectBottom = 1;
+    var multilineInjectWithAsteriskBottom = 2;
+    var multilineInjectBottom = 3;
+    return true;
+});
