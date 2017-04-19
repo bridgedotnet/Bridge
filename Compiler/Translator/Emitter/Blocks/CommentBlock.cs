@@ -3,6 +3,7 @@ using Bridge.Contract.Constants;
 
 using ICSharpCode.NRefactory.CSharp;
 
+using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -43,34 +44,10 @@ namespace Bridge.Translator
 
             var lines = this.GetNormalizedWhitespaceAndAsteriskLines(text, true);
 
-            // Remove first and last empty lines
-            if (!wrap && lines.Length > 0)
+            if (!wrap)
             {
-                System.Collections.Generic.List<string> l = null;
-
-                if (string.IsNullOrEmpty(lines[0]))
-                {
-                    l = new System.Collections.Generic.List<string>(lines);
-                    l.RemoveAt(0);
-                }
-
-                if (string.IsNullOrEmpty(lines[lines.Length - 1]))
-                {
-                    if (l == null)
-                    {
-                        l = new System.Collections.Generic.List<string>(lines);
-                    }
-
-                    if (l.Count > 0)
-                    {
-                        l.RemoveAt(l.Count - 1);
-                    }
-                }
-
-                if (l != null)
-                {
-                    lines = l.ToArray();
-                }
+                // Only if !wrap i.e. in case of injection comment
+                this.RemoveFirstAndLastEmptyElements(ref lines);
             }
 
             var indentTrim = this.Comment.StartLocation.Column + offsetAlreadyApplied;
@@ -193,6 +170,40 @@ namespace Bridge.Translator
             }
 
             return customIndent;
+        }
+
+        private void RemoveFirstAndLastEmptyElements(ref string[] lines)
+        {
+            if (lines == null || lines.Length <= 0)
+            {
+                return;
+            }
+
+            System.Collections.Generic.List<string> l = null;
+
+            if (string.IsNullOrEmpty(lines[0]))
+            {
+                l = new System.Collections.Generic.List<string>(lines);
+                l.RemoveAt(0);
+            }
+
+            if (string.IsNullOrEmpty(lines[lines.Length - 1]))
+            {
+                if (l == null)
+                {
+                    l = new System.Collections.Generic.List<string>(lines);
+                }
+
+                if (l.Count > 0)
+                {
+                    l.RemoveAt(l.Count - 1);
+                }
+            }
+
+            if (l != null)
+            {
+                lines = l.ToArray();
+            }
         }
     }
 }
