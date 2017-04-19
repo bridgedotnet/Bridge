@@ -18761,8 +18761,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         ctor: function () {
             var $this = {};
-            $this.$getType = function() { return Bridge.ClientTest.JsonTests.TestClass4; };
-            (function(){
+            $this.$getType = function () { return Bridge.ClientTest.JsonTests.TestClass4; };
+            (function (){
                 this.i = 0;
                 this.s = null;
             }).call($this);
@@ -19609,7 +19609,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         TransparentIdentifiersWork: function () {
             var $t, $t1, $t2, $t3, $t4, $t5, $t6, $t7, $t8, $t9, $t10;
             var c = new (Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32))(42);
-            var f = ($t9 = ($t8 = {"td":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1($asm.$AnonymousType$8),"a":2,"n":"Select","t":8,"pi":[{"n":"f","pt":Function,"ps":0}],"tpc":1,"tprm":["TResult"],"sn":"Select","rt":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32),"p":[Function]}, { ntype: 6, t: $t8.rt, obj: ($t3 = {"td":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32),"a":2,"n":"Select","t":8,"pi":[{"n":"f","pt":Function,"ps":0}],"tpc":1,"tprm":["TResult"],"sn":"Select","rt":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Object),"p":[Function]}, { ntype: 6, t: $t3.rt, obj: {"ntype":23,"t":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32),"expression":{"ntype":9,"t":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32),"value":{}},"member":{"td":System.Object,"n":"c","t":16,"rt":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32),"g":{"td":System.Object,"n":"getc","t":8,"rt":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32),"p":[],"def":function(){ return c}},"s":{"td":System.Object,"n":"setc","t":8,"rt":System.Object,"p":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32)],"def":function($){ c = $; }}}}, method: $t3, args: Bridge.toList([($t = { ntype: 38, t: System.Int32, n: "a" }, ($t2 = ($t1 = {"td":$asm.$AnonymousType$8,"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"}, { ntype: 31, t: $t1.td, constructor: $t1, arguments: Bridge.toList([$t,{ ntype: 0, t: System.Int32, left: $t, right: { ntype: 9, t: System.Int32, value: 1 } }]), m: Bridge.toList([{"td":$asm.$AnonymousType$8,"a":2,"n":"a","t":16,"rt":System.Int32,"g":{"td":$asm.$AnonymousType$8,"a":2,"n":"get_a","t":8,"rt":System.Int32,"fg":"a"},"fn":"a"},{"td":$asm.$AnonymousType$8,"a":2,"n":"b","t":16,"rt":System.Int32,"g":{"td":$asm.$AnonymousType$8,"a":2,"n":"get_b","t":8,"rt":System.Int32,"fg":"b"},"fn":"b"}]) }), { ntype: 18, t: Function, rt: $t2.t, body: $t2, p: Bridge.toList([$t]) }))]) }), method: $t8, args: Bridge.toList([($t4 = { ntype: 38, t: $asm.$AnonymousType$8, n: "x0" }, ($t7 = { ntype: 0, t: System.Int32, left: ($t5 = {"td":$asm.$AnonymousType$8,"a":2,"n":"a","t":16,"rt":System.Int32,"g":{"td":$asm.$AnonymousType$8,"a":2,"n":"get_a","t":8,"rt":System.Int32,"fg":"a"},"fn":"a"}, { ntype: 23, t: $t5.rt, expression: $t4, member: $t5 }), right: ($t6 = {"td":$asm.$AnonymousType$8,"a":2,"n":"b","t":16,"rt":System.Int32,"g":{"td":$asm.$AnonymousType$8,"a":2,"n":"get_b","t":8,"rt":System.Int32,"fg":"b"},"fn":"b"}, { ntype: 23, t: $t6.rt, expression: $t4, member: $t6 }) }, { ntype: 18, t: Function, rt: $t7.t, body: $t7, p: Bridge.toList([$t4]) }))]) }), { ntype: 18, t: Function, rt: $t9.t, body: $t9, p: Bridge.toList([]) });
+            var f = ($t9 = ($t8 = {"td":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1($asm.$AnonymousType$8),"a":2,"n":"Select","t":8,"pi":[{"n":"f","pt":Function,"ps":0}],"tpc":1,"tprm":["TResult"],"sn":"Select","rt":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32),"p":[Function]}, { ntype: 6, t: $t8.rt, obj: ($t3 = {"td":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32),"a":2,"n":"Select","t":8,"pi":[{"n":"f","pt":Function,"ps":0}],"tpc":1,"tprm":["TResult"],"sn":"Select","rt":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Object),"p":[Function]}, { ntype: 6, t: $t3.rt, obj: {"ntype":23,"t":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32),"expression":{"ntype":9,"t":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32),"value":{}},"member":{"td":System.Object,"n":"c","t":16,"rt":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32),"g":{"td":System.Object,"n":"getc","t":8,"rt":Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32),"p":[],"def":function (){ return c}},"s":{"td":System.Object,"n":"setc","t":8,"rt":System.Object,"p":[Bridge.ClientTest.Linq.Expressions.ExpressionTests.ClassWithQueryPattern$1(System.Int32)],"def":function ($){ c = $; }}}}, method: $t3, args: Bridge.toList([($t = { ntype: 38, t: System.Int32, n: "a" }, ($t2 = ($t1 = {"td":$asm.$AnonymousType$8,"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"}, { ntype: 31, t: $t1.td, constructor: $t1, arguments: Bridge.toList([$t,{ ntype: 0, t: System.Int32, left: $t, right: { ntype: 9, t: System.Int32, value: 1 } }]), m: Bridge.toList([{"td":$asm.$AnonymousType$8,"a":2,"n":"a","t":16,"rt":System.Int32,"g":{"td":$asm.$AnonymousType$8,"a":2,"n":"get_a","t":8,"rt":System.Int32,"fg":"a"},"fn":"a"},{"td":$asm.$AnonymousType$8,"a":2,"n":"b","t":16,"rt":System.Int32,"g":{"td":$asm.$AnonymousType$8,"a":2,"n":"get_b","t":8,"rt":System.Int32,"fg":"b"},"fn":"b"}]) }), { ntype: 18, t: Function, rt: $t2.t, body: $t2, p: Bridge.toList([$t]) }))]) }), method: $t8, args: Bridge.toList([($t4 = { ntype: 38, t: $asm.$AnonymousType$8, n: "x0" }, ($t7 = { ntype: 0, t: System.Int32, left: ($t5 = {"td":$asm.$AnonymousType$8,"a":2,"n":"a","t":16,"rt":System.Int32,"g":{"td":$asm.$AnonymousType$8,"a":2,"n":"get_a","t":8,"rt":System.Int32,"fg":"a"},"fn":"a"}, { ntype: 23, t: $t5.rt, expression: $t4, member: $t5 }), right: ($t6 = {"td":$asm.$AnonymousType$8,"a":2,"n":"b","t":16,"rt":System.Int32,"g":{"td":$asm.$AnonymousType$8,"a":2,"n":"get_b","t":8,"rt":System.Int32,"fg":"b"},"fn":"b"}, { ntype: 23, t: $t6.rt, expression: $t4, member: $t6 }) }, { ntype: 18, t: Function, rt: $t7.t, body: $t7, p: Bridge.toList([$t4]) }))]) }), { ntype: 18, t: Function, rt: $t9.t, body: $t9, p: Bridge.toList([]) });
             var outer = ($t10 = f.body, Bridge.cast($t10, Bridge.hasValue($t10) && ($t10.ntype === 6)));
             //var outerLambda = (LambdaExpression)outer.Arguments[0];
             var inner = ($t10 = outer.obj, Bridge.cast($t10, Bridge.hasValue($t10) && ($t10.ntype === 6)));
@@ -19950,7 +19950,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         LocalVariableReferenceWorks: function () {
             var $t, $t1;
             var a = 42;
-            var e = ($t = {"ntype":23,"t":System.Int32,"expression":{"ntype":9,"t":System.Int32,"value":{}},"member":{"td":System.Object,"n":"a","t":16,"rt":System.Int32,"g":{"td":System.Object,"n":"geta","t":8,"rt":System.Int32,"p":[],"def":function(){ return a}},"s":{"td":System.Object,"n":"seta","t":8,"rt":System.Object,"p":[System.Int32],"def":function($){ a = $; }}}}, { ntype: 18, t: Function, rt: $t.t, body: $t, p: Bridge.toList([]) });
+            var e = ($t = {"ntype":23,"t":System.Int32,"expression":{"ntype":9,"t":System.Int32,"value":{}},"member":{"td":System.Object,"n":"a","t":16,"rt":System.Int32,"g":{"td":System.Object,"n":"geta","t":8,"rt":System.Int32,"p":[],"def":function (){ return a}},"s":{"td":System.Object,"n":"seta","t":8,"rt":System.Object,"p":[System.Int32],"def":function ($){ a = $; }}}}, { ntype: 18, t: Function, rt: $t.t, body: $t, p: Bridge.toList([]) });
             var me = ($t1 = e.body, Bridge.as($t1, Bridge.hasValue($t1) && ($t1.ntype === 23)));
             Bridge.Test.NUnit.Assert.True$1(me != null, "e is MemberExpression");
             Bridge.Test.NUnit.Assert.AreEqual$1(me.ntype, 23, "e node type");
@@ -23681,8 +23681,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         ctor: function () {
             var $this = {};
-            $this.$getType = function() { return Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS; };
-            (function(){
+            $this.$getType = function () { return Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS; };
+            (function (){
                 this.field1 = 0;
                 this.field2 = null;
                 this.prop1 = 0;
@@ -23714,16 +23714,16 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         $ctor1: function (i) {
             var $this = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.ctor();
-            $this.$getType = function() { return Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS; };
-            (function(){
+            $this.$getType = function () { return Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS; };
+            (function (){
                 this.field1 = i;
             }).call($this);
             return $this;
         },
         $ctor2: function (s) {
             var $this = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.ctor();
-            $this.$getType = function() { return Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS; };
-            (function(){
+            $this.$getType = function () { return Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS; };
+            (function (){
                 this.field2 = s;
             }).call($this);
             return $this;
@@ -23781,8 +23781,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $literal: true,
         ctor: function () {
             var $this = {};
-            $this.$getType = function() { return Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config1; };
-            (function(){
+            $this.$getType = function () { return Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config1; };
+            (function (){
                 this.val1 = 1;
                 this.val2 = 0;
                 this.val2 = 11;
@@ -23795,8 +23795,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $literal: true,
         ctor: function () {
             var $this = {};
-            $this.$getType = function() { return Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config3; };
-            (function(){
+            $this.$getType = function () { return Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config3; };
+            (function (){
                 this.val1 = 3;
                 this.val2 = 0;
                 this.val2 = 13;
@@ -23809,8 +23809,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $literal: true,
         ctor: function () {
             var $this = {};
-            $this.$getType = function() { return Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config5; };
-            (function(){
+            $this.$getType = function () { return Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config5; };
+            (function (){
                 this.val1 = 5;
                 this.val2 = 0;
                 this.val2 = 15;
@@ -23847,8 +23847,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $literal: true,
         ctor: function () {
             var $this = {};
-            $this.$getType = function() { return Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config1; };
-            (function(){
+            $this.$getType = function () { return Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config1; };
+            (function (){
                 this.val1 = 1;
                 this.val2 = 0;
                 this.val2 = 11;
@@ -23861,8 +23861,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $literal: true,
         ctor: function () {
             var $this = {};
-            $this.$getType = function() { return Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config2; };
-            (function(){
+            $this.$getType = function () { return Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config2; };
+            (function (){
                 this.val1 = 2;
                 this.val2 = 0;
                 this.val2 = 12;
@@ -39825,8 +39825,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $literal: true,
         ctor: function () {
             var $this = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.ctor();
-            $this.$getType = function() { return Bridge.ClientTest.ObjectLiteralTests.Bridge1529.DS; };
-            (function(){
+            $this.$getType = function () { return Bridge.ClientTest.ObjectLiteralTests.Bridge1529.DS; };
+            (function (){
                 this.field = 0;
             }).call($this);
             return $this;
@@ -39838,8 +39838,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $literal: true,
         ctor: function () {
             var $this = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.$ctor1(8);
-            $this.$getType = function() { return Bridge.ClientTest.ObjectLiteralTests.Bridge1529.TS; };
-            (function(){
+            $this.$getType = function () { return Bridge.ClientTest.ObjectLiteralTests.Bridge1529.TS; };
+            (function (){
             }).call($this);
             return $this;
         }
@@ -48920,154 +48920,154 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.ns("Bridge.ClientTest.ArrayTests.ArrayTestsSet2.E1", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.ArrayTests.ArrayTestsSet2.E1, {
-        toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.ArrayTests.ArrayTestsSet2.E1, obj);}
+        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.ArrayTests.ArrayTestsSet2.E1, obj);}
     });
 
 
     Bridge.ns("Bridge.ClientTest.BasicCSharp.TestEnum.Digits", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.BasicCSharp.TestEnum.Digits, {
-        toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.BasicCSharp.TestEnum.Digits, obj);}
+        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.BasicCSharp.TestEnum.Digits, obj);}
     });
 
 
     Bridge.ns("Bridge.ClientTest.BasicCSharp.TestEnum.Pets", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.BasicCSharp.TestEnum.Pets, {
-        toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.BasicCSharp.TestEnum.Pets, obj);}
+        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.BasicCSharp.TestEnum.Pets, obj);}
     });
 
 
     Bridge.ns("Bridge.ClientTest.BasicCSharp.TestEnum.Pets1", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.BasicCSharp.TestEnum.Pets1, {
-        toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.BasicCSharp.TestEnum.Pets1, obj);}
+        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.BasicCSharp.TestEnum.Pets1, obj);}
     });
 
 
     Bridge.ns("System.Boolean", $box_);
 
     Bridge.apply($box_.System.Boolean, {
-        toString: function(obj) {return System.Boolean.toString(obj);}
+        toString: function (obj) {return System.Boolean.toString(obj);}
     });
 
 
     Bridge.ns("System.Double", $box_);
 
     Bridge.apply($box_.System.Double, {
-        toString: function(obj) {return System.Double.format(obj, 'G');}
+        toString: function (obj) {return System.Double.format(obj, 'G');}
     });
 
 
     Bridge.ns("Bridge.ClientTest.ConventionTests.Class.Enum2", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.ConventionTests.Class.Enum2, {
-        toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.ConventionTests.Class.Enum2, obj);}
+        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.ConventionTests.Class.Enum2, obj);}
     });
 
 
     Bridge.ns("Bridge.ClientTest.ConventionTests.Class.enum1", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.ConventionTests.Class.enum1, {
-        toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.ConventionTests.Class.enum1, obj);}
+        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.ConventionTests.Class.enum1, obj);}
     });
 
 
     Bridge.ns("System.Single", $box_);
 
     Bridge.apply($box_.System.Single, {
-        toString: function(obj) {return System.Single.format(obj, 'G');}
+        toString: function (obj) {return System.Single.format(obj, 'G');}
     });
 
 
     Bridge.ns("System.DateTime", $box_);
 
     Bridge.apply($box_.System.DateTime, {
-        toString: function(obj) {return System.DateTime.format(obj);}
+        toString: function (obj) {return System.DateTime.format(obj);}
     });
 
 
     Bridge.ns("System.Nullable$1", $box_);
 
     Bridge.apply($box_.System.Nullable$1, {
-        toString: function(obj) {return System.Nullable.toString(obj);}
+        toString: function (obj) {return System.Nullable.toString(obj);}
     });
 
 
     Bridge.ns("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.E2", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.E2, {
-        toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.E2, obj);}
+        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.E2, obj);}
     });
 
 
     Bridge.ns("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.E1", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.E1, {
-        toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.E1, obj);}
+        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.E1, obj);}
     });
 
 
     Bridge.ns("Bridge.ClientTest.Reflection.TypeSystemTests.E0", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.Reflection.TypeSystemTests.E0, {
-        toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.Reflection.TypeSystemTests.E0, obj);}
+        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.Reflection.TypeSystemTests.E0, obj);}
     });
 
 
     Bridge.ns("Bridge.ClientTest.Reflection.TypeSystemTests.E1", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.Reflection.TypeSystemTests.E1, {
-        toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.Reflection.TypeSystemTests.E1, obj);}
+        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.Reflection.TypeSystemTests.E1, obj);}
     });
 
 
     Bridge.ns("Bridge.ClientTest.Reflection.TypeSystemTests.E2", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.Reflection.TypeSystemTests.E2, {
-        toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.Reflection.TypeSystemTests.E2, obj);}
+        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.Reflection.TypeSystemTests.E2, obj);}
     });
 
 
     Bridge.ns("Bridge.ClientTest.Reflection.TypeSystemTests.NamedValuesEnum", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.Reflection.TypeSystemTests.NamedValuesEnum, {
-        toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.Reflection.TypeSystemTests.NamedValuesEnum, obj);}
+        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.Reflection.TypeSystemTests.NamedValuesEnum, obj);}
     });
 
 
     Bridge.ns("Bridge.ClientTest.Reflection.TypeSystemTests.ImportedNamedValuesEnum", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.Reflection.TypeSystemTests.ImportedNamedValuesEnum, {
-        toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.Reflection.TypeSystemTests.ImportedNamedValuesEnum, obj);}
+        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.Reflection.TypeSystemTests.ImportedNamedValuesEnum, obj);}
     });
 
 
     Bridge.ns("System.Char", $box_);
 
     Bridge.apply($box_.System.Char, {
-        toString: function(obj) {return String.fromCharCode(obj);}
+        toString: function (obj) {return String.fromCharCode(obj);}
     });
 
 
     Bridge.ns("Bridge.ClientTest.SerializationTests.E1", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.SerializationTests.E1, {
-        toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.SerializationTests.E1, obj);}
+        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.SerializationTests.E1, obj);}
     });
 
 
     Bridge.ns("Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum, {
-        toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum, obj);}
+        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum, obj);}
     });
 
 
     Bridge.ns("Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum, {
-        toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum, obj);}
+        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum, obj);}
     });
 
     var $m = Bridge.setMetadata,
@@ -49090,7 +49090,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     $m($n[4].ReflectionTests.C16, function () { return {"m":[{"a":2,"n":"Item","t":16,"rt":$n[0].String,"p":[$n[0].Int32,$n[0].String],"i":true,"ipi":[{"n":"x","pt":$n[0].Int32,"ps":0},{"n":"s","pt":$n[0].String,"ps":1}],"g":{"a":2,"n":"get_Item","t":8,"pi":[{"n":"x","pt":$n[0].Int32,"ps":0},{"n":"s","pt":$n[0].String,"ps":1}],"sn":"getItem","rt":$n[0].String,"p":[$n[0].Int32,$n[0].String]}}]}; });
     $m($n[4].ReflectionTests.C17, function () { return {"m":[{"a":2,"n":"Item","t":16,"rt":$n[0].String,"p":[$n[0].Int32,$n[0].String],"i":true,"ipi":[{"n":"x","pt":$n[0].Int32,"ps":0},{"n":"s","pt":$n[0].String,"ps":1}],"s":{"a":2,"n":"set_Item","t":8,"pi":[{"n":"x","pt":$n[0].Int32,"ps":0},{"n":"s","pt":$n[0].String,"ps":1},{"n":"value","pt":$n[0].String,"ps":2}],"sn":"setItem","rt":$n[0].Object,"p":[$n[0].Int32,$n[0].String,$n[0].String]}}]}; });
     $m($n[4].ReflectionTests.C18, function () { return {"m":[{"at":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$ctor1(1),new Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute()],"a":2,"n":".ctor","t":1,"sn":"ctor"},{"at":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$ctor1(2),new Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute()],"a":2,"n":"M","t":8,"sn":"M","rt":$n[0].Object},{"at":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$ctor1(4),new Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute()],"a":2,"n":"P","t":16,"rt":$n[0].Int32,"g":{"at":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$ctor1(5),new Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute()],"a":2,"n":"get_P","t":8,"rt":$n[0].Int32,"fg":"P"},"s":{"at":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$ctor1(6),new Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute()],"a":2,"n":"set_P","t":8,"p":[$n[0].Int32],"rt":$n[0].Object,"fs":"P"},"fn":"P"},{"at":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$ctor1(3),new Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute()],"a":2,"n":"F","t":4,"rt":$n[0].Int32,"sn":"F"},{"at":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$ctor1(7),new Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute()],"a":2,"n":"E","t":2,"ad":{"at":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$ctor1(8),new Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute()],"a":2,"n":"add_E","t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"sn":"addE","rt":$n[0].Object,"p":[Function]},"r":{"at":[new Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute.$ctor1(9),new Bridge.ClientTest.Reflection.ReflectionTests.A3Attribute()],"a":2,"n":"remove_E","t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"sn":"removeE","rt":$n[0].Object,"p":[Function]}}]}; });
-    $m($n[4].ReflectionTests.C19, function () { return {"m":[{"a":2,"n":".ctor","t":1,"p":[$n[0].Int32,$n[0].String],"pi":[{"n":"a","pt":$n[0].Int32,"ps":0},{"n":"b","pt":$n[0].String,"ps":1}],"def":function(a, b) { return {a: a, b: b};}}]}; });
+    $m($n[4].ReflectionTests.C19, function () { return {"m":[{"a":2,"n":".ctor","t":1,"p":[$n[0].Int32,$n[0].String],"pi":[{"n":"a","pt":$n[0].Int32,"ps":0},{"n":"b","pt":$n[0].String,"ps":1}],"def":function (a, b) { return {a: a, b: b};}}]}; });
     $m($n[4].ReflectionTests.C2, function () { return {"m":[{"a":2,"n":"M1","t":8,"sn":"M1","rt":$n[0].Object},{"a":2,"n":"M2","is":true,"t":8,"sn":"M2","rt":$n[0].Object}]}; });
     $m($n[4].ReflectionTests.C20, function () { return {"m":[{"a":2,"n":".ctor","t":1,"p":[$n[0].Int32,$n[0].String],"pi":[{"n":"a","pt":$n[0].Int32,"ps":0},{"n":"b","pt":$n[0].String,"ps":1}],"def":function (a, b) { return { A: a, B: b }; }}]}; });
     $m($n[4].ReflectionTests.C21, function () { return {"m":[{"a":2,"n":"M1","t":8,"pi":[{"n":"a","pt":$n[0].Int32,"ps":0},{"n":"b","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (a, b) { return this.X + a + b; },"rt":$n[0].Int32,"p":[$n[0].Int32,$n[0].Int32]},{"a":2,"n":"M2","is":true,"t":8,"pi":[{"n":"a","pt":$n[0].Int32,"ps":0},{"n":"b","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (a, b) { return a + b; },"rt":$n[0].Int32,"p":[$n[0].Int32,$n[0].Int32]},{"a":2,"n":"M3","t":8,"pi":[{"n":"s","pt":$n[0].String,"ps":0}],"tpc":1,"def":function (T, s) { return this.X + Bridge.Reflection.getTypeFullName(T) + s; },"rt":$n[0].String,"p":[$n[0].String]}]}; });

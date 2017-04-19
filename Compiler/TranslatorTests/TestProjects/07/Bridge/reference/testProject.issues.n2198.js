@@ -23,7 +23,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             }
         });
 
-        Bridge.init(function() { Module1.TestProject.Issues.N2198.N2198.Main(); });
+        Bridge.init(function () { Module1.TestProject.Issues.N2198.N2198.Main(); });
         return Module1;
     });
 

@@ -601,7 +601,7 @@ namespace Bridge.Translator
                 {
                     var level = this.Emitter.Level;
 
-                    this.PushWriter(JS.Types.Bridge.INIT + "(function(){0});");
+                    this.PushWriter(JS.Types.Bridge.INIT + "(function (){0});");
                     this.ResetLocals();
                     var prevMap = this.BuildLocalsMap();
                     var prevNamesMap = this.BuildLocalsNamesMap();
@@ -690,7 +690,7 @@ namespace Bridge.Translator
                 {
                     this.Emitter.InitPosition = InitPosition.After;
 
-                    var callback = JS.Types.Bridge.INIT + "(function() { " + BridgeTypes.ToJsName(rrMethod.DeclaringTypeDefinition, this.Emitter) + "." +
+                    var callback = JS.Types.Bridge.INIT + "(function () { " + BridgeTypes.ToJsName(rrMethod.DeclaringTypeDefinition, this.Emitter) + "." +
                            this.Emitter.GetEntityName(method) + "(); });";
 
                     this.Emitter.InitPosition = null;

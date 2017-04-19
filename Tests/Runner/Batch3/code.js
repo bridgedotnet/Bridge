@@ -2667,7 +2667,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
-    Bridge.init(function(){
+    Bridge.init(function (){
         var Bridge1203_a2 = function () {
         };
     });
@@ -2685,7 +2685,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
-    Bridge.init(function() { Bridge.ClientTest.Batch3.BridgeIssues.Bridge1203.InitMethod1(); });
+    Bridge.init(function () { Bridge.ClientTest.Batch3.BridgeIssues.Bridge1203.InitMethod1(); });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1206", {
         statics: {
@@ -12856,8 +12856,8 @@ Bridge.$N1391Result =                 r;
         $literal: true,
         ctor: function () {
             var $this = {};
-            $this.$getType = function() { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.OL1; };
-            (function(){
+            $this.$getType = function () { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.OL1; };
+            (function (){
                 this.shouldSeeThis1 = 0;
             }).call($this);
             return $this;
@@ -15657,8 +15657,8 @@ Bridge.$N1391Result =                 r;
         $literal: true,
         ctor: function () {
             var $this = {};
-            $this.$getType = function() { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2393.c2; };
-            (function(){
+            $this.$getType = function () { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2393.c2; };
+            (function (){
                 this.a1 = null;
                 this.m1 = null;
                 this.m1 = Bridge.fn.bind(this, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2393.c2.f1);
@@ -25148,8 +25148,8 @@ Bridge.$N1391Result =                 r;
         $literal: true,
         ctor: function () {
             var $this = {};
-            $this.$getType = function() { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865.Contract; };
-            (function(){
+            $this.$getType = function () { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865.Contract; };
+            (function (){
                 this.value = 0;
             }).call($this);
             return $this;
@@ -25160,8 +25160,8 @@ Bridge.$N1391Result =                 r;
         $literal: true,
         ctor: function () {
             var $this = {};
-            $this.$getType = function() { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865.Contract2; };
-            (function(){
+            $this.$getType = function () { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge1865.Contract2; };
+            (function (){
                 this.value = 0;
             }).call($this);
             return $this;
@@ -25298,8 +25298,8 @@ Bridge.$N1391Result =                 r;
         $literal: true,
         ctor: function () {
             var $this = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.OL1.ctor();
-            $this.$getType = function() { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.OL2; };
-            (function(){
+            $this.$getType = function () { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.OL2; };
+            (function (){
                 this.shouldSeeThis2 = 0;
             }).call($this);
             return $this;
@@ -26001,112 +26001,112 @@ Bridge.$N1391Result =                 r;
     Bridge.ns("System.Nullable$1", $box_);
 
     Bridge.apply($box_.System.Nullable$1, {
-        toString: function(obj) {return System.Nullable.toString(obj);}
+        toString: function (obj) {return System.Nullable.toString(obj);}
     });
 
 
     Bridge.ns("System.Single", $box_);
 
     Bridge.apply($box_.System.Single, {
-        toString: function(obj) {return System.Single.format(obj, 'G');}
+        toString: function (obj) {return System.Single.format(obj, 'G');}
     });
 
 
     Bridge.ns("System.Double", $box_);
 
     Bridge.apply($box_.System.Double, {
-        toString: function(obj) {return System.Double.format(obj, 'G');}
+        toString: function (obj) {return System.Double.format(obj, 'G');}
     });
 
 
     Bridge.ns("System.Boolean", $box_);
 
     Bridge.apply($box_.System.Boolean, {
-        toString: function(obj) {return System.Boolean.toString(obj);}
+        toString: function (obj) {return System.Boolean.toString(obj);}
     });
 
 
     Bridge.ns("System.Char", $box_);
 
     Bridge.apply($box_.System.Char, {
-        toString: function(obj) {return String.fromCharCode(obj);}
+        toString: function (obj) {return String.fromCharCode(obj);}
     });
 
 
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.SimpleEnum", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.SimpleEnum, {
-        toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.SimpleEnum, obj);}
+        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.SimpleEnum, obj);}
     });
 
 
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.ByteEnum", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.ByteEnum, {
-        toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.ByteEnum, obj);}
+        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1312.ByteEnum, obj);}
     });
 
 
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge2065.VehicleType", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge2065.VehicleType, {
-        toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge2065.VehicleType, obj);}
+        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge2065.VehicleType, obj);}
     });
 
 
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2327.Foo", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2327.Foo, {
-        toString: function(obj) {return System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2327.Foo, obj);}
+        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2327.Foo, obj);}
     });
 
 
     Bridge.ns("System.DateTime", $box_);
 
     Bridge.apply($box_.System.DateTime, {
-        toString: function(obj) {return System.DateTime.format(obj);}
+        toString: function (obj) {return System.DateTime.format(obj);}
     });
 
 
     Bridge.ns("System.Nullable$1", $box_);
 
     Bridge.apply($box_.System.Nullable$1, {
-        toString: function(obj) {return System.Nullable.toString(obj);}
+        toString: function (obj) {return System.Nullable.toString(obj);}
     });
 
 
     Bridge.ns("System.Nullable$1", $box_);
 
     Bridge.apply($box_.System.Nullable$1, {
-        toString: function(obj) {return System.Nullable.toString(obj);}
+        toString: function (obj) {return System.Nullable.toString(obj);}
     });
 
 
     Bridge.ns("System.Nullable$1", $box_);
 
     Bridge.apply($box_.System.Nullable$1, {
-        toString: function(obj) {return System.Nullable.toString(obj);}
+        toString: function (obj) {return System.Nullable.toString(obj);}
     });
 
 
     Bridge.ns("System.Nullable$1", $box_);
 
     Bridge.apply($box_.System.Nullable$1, {
-        toString: function(obj) {return System.Nullable.toString(obj);}
+        toString: function (obj) {return System.Nullable.toString(obj);}
     });
 
 
     Bridge.ns("System.Nullable$1", $box_);
 
     Bridge.apply($box_.System.Nullable$1, {
-        toString: function(obj) {return System.Nullable.toString(obj);}
+        toString: function (obj) {return System.Nullable.toString(obj);}
     });
 
 
     Bridge.ns("System.Nullable$1", $box_);
 
     Bridge.apply($box_.System.Nullable$1, {
-        toString: function(obj) {return System.Nullable.toString(obj);}
+        toString: function (obj) {return System.Nullable.toString(obj);}
     });
 
     var $m = Bridge.setMetadata,

@@ -27,8 +27,8 @@
         $literal: true,
         ctor: function () {
             var $this = {};
-            $this.$getType = function() { return TestIssue379.DataDefaultValue; };
-            (function(){
+            $this.$getType = function () { return TestIssue379.DataDefaultValue; };
+            (function (){
                 this.int1 = 0;
                 this.int2 = 2;
                 this.str3 = null;
@@ -42,8 +42,8 @@
         },
         $ctor1: function (mode) {
             var $this = {};
-            $this.$getType = function() { return TestIssue379.DataDefaultValue; };
-            (function(){
+            $this.$getType = function () { return TestIssue379.DataDefaultValue; };
+            (function (){
                 this.int1 = 0;
                 this.int2 = 2;
                 this.str3 = null;
@@ -62,8 +62,8 @@
         $literal: true,
         ctor: function () {
             var $this = {};
-            $this.$getType = function() { return TestIssue379.DataIgnore; };
-            (function(){
+            $this.$getType = function () { return TestIssue379.DataIgnore; };
+            (function (){
                 this.int1 = 0;
                 this.int2 = 2;
                 this.str3 = null;
@@ -77,8 +77,8 @@
         },
         $ctor1: function (mode) {
             var $this = {};
-            $this.$getType = function() { return TestIssue379.DataIgnore; };
-            (function(){
+            $this.$getType = function () { return TestIssue379.DataIgnore; };
+            (function (){
                 this.int1 = 0;
                 this.int2 = 2;
                 this.str3 = null;
@@ -97,8 +97,8 @@
         $literal: true,
         ctor: function () {
             var $this = {};
-            $this.$getType = function() { return TestIssue379.DataInitializer; };
-            (function(){
+            $this.$getType = function () { return TestIssue379.DataInitializer; };
+            (function (){
                 this.int1 = 0;
                 this.int2 = 2;
                 this.str3 = null;
@@ -112,8 +112,8 @@
         },
         $ctor1: function (mode) {
             var $this = {};
-            $this.$getType = function() { return TestIssue379.DataInitializer; };
-            (function(){
+            $this.$getType = function () { return TestIssue379.DataInitializer; };
+            (function (){
                 this.int1 = 0;
                 this.int2 = 2;
                 this.str3 = null;
