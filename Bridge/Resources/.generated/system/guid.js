@@ -76,9 +76,9 @@
             _k: 0
         },
         alias: [
-        "equalsT", "System$IEquatable$1$System$Guid$equalsT",
-        "compareTo", "System$IComparable$1$System$Guid$compareTo",
-        "format", "System$IFormattable$format"
+            "equalsT", "System$IEquatable$1$System$Guid$equalsT",
+            "compareTo", "System$IComparable$1$System$Guid$compareTo",
+            "format", "System$IFormattable$format"
         ],
         ctors: {
             $ctor4: function (uuid) {

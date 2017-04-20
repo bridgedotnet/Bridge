@@ -38,11 +38,8 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
             }
         },
         alias: [
-        "Property", "Interfaces$Interface1$Property"
-        ],
-        methods: {
-
-        }
+            "Property", "Interfaces$Interface1$Property"
+        ]
     });
 
     Bridge.define("Interfaces.Interface2", {
@@ -53,11 +50,11 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     Bridge.define("Interfaces.Class4", {
         inherits: [Interfaces.Interface4],
         alias: [
-        "Method6", "Interfaces$Interface4$Method6",
-        "Method7", "Interfaces$Interface4$Method7",
-        "Method8", "Interfaces$Interface4$Method8",
-        "Method9", "Interfaces$Interface4$Method9",
-        "Method10", "Interfaces$Interface4$Method10"
+            "Method6", "Interfaces$Interface4$Method6",
+            "Method7", "Interfaces$Interface4$Method7",
+            "Method8", "Interfaces$Interface4$Method8",
+            "Method9", "Interfaces$Interface4$Method9",
+            "Method10", "Interfaces$Interface4$Method10"
         ],
         methods: {
             Method6: function (b) {
@@ -86,10 +83,10 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
             MethodProperty: 0
         },
         alias: [
-        "Property", "Interfaces$Interface6$Property",
-        "GetProperty", "Interfaces$Interface6$GetProperty",
-        "SetProperty$1", "Interfaces$Interface6$SetProperty$1",
-        "SetProperty", "Interfaces$Interface6$SetProperty"
+            "Property", "Interfaces$Interface6$Property",
+            "GetProperty", "Interfaces$Interface6$GetProperty",
+            "SetProperty$1", "Interfaces$Interface6$SetProperty$1",
+            "SetProperty", "Interfaces$Interface6$SetProperty"
         ],
         methods: {
             GetProperty: function () {
@@ -107,10 +104,10 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     Bridge.define("Interfaces.Class2", {
         inherits: [Interfaces.Class1,Interfaces.Interface2],
         alias: [
-        "Method1", "Interfaces$Interface2$Method1",
-        "Method2", "Interfaces$Interface2$Method2",
-        "Method3", "Interfaces$Interface2$Method3",
-        "Method4", "Interfaces$Interface2$Method4"
+            "Method1", "Interfaces$Interface2$Method1",
+            "Method2", "Interfaces$Interface2$Method2",
+            "Method3", "Interfaces$Interface2$Method3",
+            "Method4", "Interfaces$Interface2$Method4"
         ],
         methods: {
             Method1: function () {
@@ -139,7 +136,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     Bridge.define("Interfaces.Class3", {
         inherits: [Interfaces.Class2,Interfaces.Interface3],
         alias: [
-        "Method5", "Interfaces$Interface3$Method5"
+            "Method5", "Interfaces$Interface3$Method5"
         ],
         methods: {
             Method5: function (i) {

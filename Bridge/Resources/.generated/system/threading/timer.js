@@ -17,7 +17,7 @@
             disposed: false
         },
         alias: [
-        "dispose", "System$IDisposable$dispose"
+            "dispose", "System$IDisposable$dispose"
         ],
         ctors: {
             $ctor1: function (callback, state, dueTime, period) {

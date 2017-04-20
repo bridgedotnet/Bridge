@@ -43,9 +43,6 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
                 System.Attribute.ctor.call(this);
                 this._isUnspecified = IsUnspecified;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -127,9 +124,6 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
                 this.$initialize();
                 this.Values = queryParameters;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -149,9 +143,6 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
                 this.$initialize();
                 this.Attribute = arg;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -276,9 +267,9 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
             OnGameEvent: null
         },
         alias: [
-        "StartGame", "TypeScript$Issues$N1640$IGamePlay$StartGame",
-        "addOnGameEvent", "TypeScript$Issues$N1640$IGamePlay$addOnGameEvent",
-        "removeOnGameEvent", "TypeScript$Issues$N1640$IGamePlay$removeOnGameEvent"
+            "StartGame", "TypeScript$Issues$N1640$IGamePlay$StartGame",
+            "addOnGameEvent", "TypeScript$Issues$N1640$IGamePlay$addOnGameEvent",
+            "removeOnGameEvent", "TypeScript$Issues$N1640$IGamePlay$removeOnGameEvent"
         ],
         methods: {
             StartGame: function (s) {
@@ -298,10 +289,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
             Value1: 0
         },
         alias: [
-        "Value1", "TypeScript$Issues$N2029Interface$1$System$Int32$Value1"
-        ],
-        methods: {
-
-        }
+            "Value1", "TypeScript$Issues$N2029Interface$1$System$Int32$Value1"
+        ]
     });
 });

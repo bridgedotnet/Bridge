@@ -168,9 +168,9 @@
             }
         },
         alias: [
-        "clone", "System$ICloneable$clone",
-        "compareTo", "System$IComparable$1$System$Version$compareTo",
-        "equalsT", "System$IEquatable$1$System$Version$equalsT"
+            "clone", "System$ICloneable$clone",
+            "compareTo", "System$IComparable$1$System$Version$compareTo",
+            "equalsT", "System$IEquatable$1$System$Version$equalsT"
         ],
         ctors: {
             $ctor3: function (major, minor, build, revision) {

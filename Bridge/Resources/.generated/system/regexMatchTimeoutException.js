@@ -1,6 +1,3 @@
     Bridge.define("System.RegexMatchTimeoutException", {
-        inherits: [System.TimeoutException],
-        methods: {
-
-        }
+        inherits: [System.TimeoutException]
     });

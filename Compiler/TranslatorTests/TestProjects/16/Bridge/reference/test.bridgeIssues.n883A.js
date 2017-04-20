@@ -3,8 +3,10 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
     Bridge.define("Test.BridgeIssues.N883A.Control", {
         statics: {
-            test: 0,
-            config: {
+            fields: {
+                test: 0
+            },
+            ctors: {
                 init: function () {
                     this.test = Test.BridgeIssues.N883A.Globals.myVar;
                 }
@@ -14,8 +16,10 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
     Bridge.define("Test.BridgeIssues.N883A.Globals", {
         statics: {
-            myVar: 0,
-            myTextBox: null
+            fields: {
+                myVar: 0,
+                myTextBox: null
+            }
         }
     });
 

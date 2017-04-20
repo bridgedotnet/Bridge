@@ -3,11 +3,13 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
     Bridge.define("Test.BridgeIssues.N557.Bridge557", {
         statics: {
-            Test1: function () {
-                var text = document.createTextNode('');
-            },
-            Test2: function () {
-                var text = document.createTextNode("Some text");
+            methods: {
+                Test1: function () {
+                    var text = document.createTextNode('');
+                },
+                Test2: function () {
+                    var text = document.createTextNode("Some text");
+                }
             }
         }
     });

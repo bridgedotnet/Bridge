@@ -2809,11 +2809,6 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("TypePropertiesAreCorrect", Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests.TypePropertiesAreCorrect);
             QUnit.test("GetFormatWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests.GetFormatWorks);
             QUnit.test("InvariantWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests.InvariantWorks);
-        },
-        statics: {
-            methods: {
-
-            }
         }
     });
 

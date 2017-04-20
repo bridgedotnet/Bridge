@@ -533,8 +533,8 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             strField: null
         },
         alias: [
-        "equalsT$1", "System$IEquatable$1$System$Int32$equalsT",
-        "equalsT", "System$IEquatable$1$System$String$equalsT"
+            "equalsT$1", "System$IEquatable$1$System$Int32$equalsT",
+            "equalsT", "System$IEquatable$1$System$String$equalsT"
         ],
         methods: {
             equalsT$1: function (other) {
@@ -1256,17 +1256,11 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1067.MyDictionary1", {
-        inherits: [System.Collections.Generic.Dictionary$2(System.Int32,System.Int32)],
-        methods: {
-
-        }
+        inherits: [System.Collections.Generic.Dictionary$2(System.Int32,System.Int32)]
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1067.MyDictionary2", {
-        inherits: [System.Collections.Generic.Dictionary$2(System.Int32,System.Int32)],
-        methods: {
-
-        }
+        inherits: [System.Collections.Generic.Dictionary$2(System.Int32,System.Int32)]
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1071", {
@@ -1336,9 +1330,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                     this.data = value;
                 }
             }
-        },
-        methods: {
-
         }
     });
 
@@ -1718,7 +1709,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             Value: null
         },
         alias: [
-        "compareTo", "System$IComparable$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1128$Foo$Item$compareTo"
+            "compareTo", "System$IComparable$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1128$Foo$Item$compareTo"
         ],
         ctors: {
             $ctor1: function (value) {
@@ -1779,7 +1770,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             Value: null
         },
         alias: [
-        "compareTo", "System$IComparable$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1128$Foo1$Item$compareTo"
+            "compareTo", "System$IComparable$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1128$Foo1$Item$compareTo"
         ],
         ctors: {
             $ctor1: function (value) {
@@ -1971,9 +1962,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                     return $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1160A.f1;
                 }
             }
-        },
-        methods: {
-
         }
     });
 
@@ -2297,7 +2285,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             parent: null
         },
         alias: [
-        "dispose", "System$IDisposable$dispose"
+            "dispose", "System$IDisposable$dispose"
         ],
         ctors: {
             ctor: function () {
@@ -2363,9 +2351,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1171.ObjectA", {
         properties: {
             FieldA: null
-        },
-        methods: {
-
         }
     });
 
@@ -2413,8 +2398,10 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1176.Item$1", function (TValue) { return {
         statics: {
-            op_Implicit: function (item) {
-                return "Item";
+            methods: {
+                op_Implicit: function (item) {
+                    return "Item";
+                }
             }
         }
     }; });
@@ -2433,8 +2420,10 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1177.Item", {
         statics: {
-            op_Implicit: function (item) {
-                return item.value;
+            methods: {
+                op_Implicit: function (item) {
+                    return item.value;
+                }
             }
         },
         fields: {
@@ -3008,27 +2997,18 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1219.TestClass1", {
         properties: {
             LongProperty: System.Int64(0)
-        },
-        methods: {
-
         }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1219.TestClass2", {
         properties: {
             ULongProperty: System.UInt64(0)
-        },
-        methods: {
-
         }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1219.TestClass3", {
         properties: {
             DecimalProperty: System.Decimal(0.0)
-        },
-        methods: {
-
         }
     });
 
@@ -3246,9 +3226,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge1232.ClassA.ctor.call(this, 1, str);
             }
-        },
-        methods: {
-
         }
     });
 
@@ -3277,9 +3254,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge1232.ClassB.$ctor2.call(this, str);
                 this.S = s;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -3847,25 +3821,29 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1296.AnyNonExternal$2", {
         statics: {
-            op_Implicit: function (t) {
-                throw new System.InvalidCastException();
-            },
-            op_Implicit$1: function (t) {
-                throw new System.InvalidCastException();
-            },
-            op_Explicit: function (value) {
-                throw new System.InvalidCastException();
-            },
-            op_Explicit$1: function (value) {
-                throw new System.InvalidCastException();
+            methods: {
+                op_Implicit: function (t) {
+                    throw new System.InvalidCastException();
+                },
+                op_Implicit$1: function (t) {
+                    throw new System.InvalidCastException();
+                },
+                op_Explicit: function (value) {
+                    throw new System.InvalidCastException();
+                },
+                op_Explicit$1: function (value) {
+                    throw new System.InvalidCastException();
+                }
             }
         }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1296.BlahId", {
         statics: {
-            op_Implicit: function (value) {
-                return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1296.BlahId(value);
+            methods: {
+                op_Implicit: function (value) {
+                    return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1296.BlahId(value);
+                }
             }
         },
         properties: {
@@ -3876,9 +3854,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 this.$initialize();
                 this.Value = value;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -4299,18 +4274,12 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1305.DataClass", {
         properties: {
             Value: 0
-        },
-        methods: {
-
         }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1305.DataStruct", {
         properties: {
             Value: 0
-        },
-        methods: {
-
         }
     });
 
@@ -4493,9 +4462,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 this.Url = url;
                 this.Text = text;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -5069,9 +5035,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         properties: {
             Value1: Bridge.getDefaultValue(T)
-        },
-        methods: {
-
         }
     }; });
 
@@ -5081,9 +5044,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         },
         properties: {
             Value1: Bridge.getDefaultValue(T)
-        },
-        methods: {
-
         }
     }; });
 
@@ -5094,9 +5054,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             },
             properties: {
                 Value1: Bridge.getDefaultValue(T)
-            },
-            methods: {
-
             }
         }
     }; });
@@ -5108,9 +5065,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             },
             properties: {
                 Value1: Bridge.getDefaultValue(T)
-            },
-            methods: {
-
             }
         }
     }; });
@@ -5753,9 +5707,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeClassA", {
         properties: {
             Value1: 0
-        },
-        methods: {
-
         }
     });
 
@@ -5768,9 +5719,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             init: function () {
                 this.Value2 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeStructA();
             }
-        },
-        methods: {
-
         }
     });
 
@@ -6107,11 +6055,13 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1378.IntWrapper", {
         statics: {
-            op_Addition: function (a, b) {
-                return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1378.IntWrapper(((a.value + b.value) | 0));
-            },
-            op_Subtraction: function (a, b) {
-                return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1378.IntWrapper(((a.value - b.value) | 0));
+            methods: {
+                op_Addition: function (a, b) {
+                    return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1378.IntWrapper(((a.value + b.value) | 0));
+                },
+                op_Subtraction: function (a, b) {
+                    return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1378.IntWrapper(((a.value - b.value) | 0));
+                }
             }
         },
         fields: {
@@ -6699,9 +6649,6 @@ Bridge.$N1391Result =                     r;
                 // 2
                 this.Data = 2;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -6715,9 +6662,6 @@ Bridge.$N1391Result =                     r;
         },
         properties: {
             Data: 0
-        },
-        methods: {
-
         }
     });
 
@@ -7065,18 +7009,12 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1467.AnotherClass", {
         properties: {
             Value: 0
-        },
-        methods: {
-
         }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1467.SomeClass1", {
         properties: {
             Value: 0
-        },
-        methods: {
-
         }
     });
 
@@ -7145,8 +7083,10 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1480.IntWrapper", {
         statics: {
-            op_Increment: function (a) {
-                return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1480.IntWrapper(((a.value + 1) | 0));
+            methods: {
+                op_Increment: function (a) {
+                    return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1480.IntWrapper(((a.value + 1) | 0));
+                }
             }
         },
         fields: {
@@ -7490,8 +7430,10 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1510.IntWrap2", {
         statics: {
-            op_Implicit: function (v) {
-                return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1510.IntWrap2(v);
+            methods: {
+                op_Implicit: function (v) {
+                    return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1510.IntWrap2(v);
+                }
             }
         },
         fields: {
@@ -7519,8 +7461,10 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1510.IntWrap4", {
         statics: {
-            op_Implicit: function (v) {
-                return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1510.IntWrap4(v);
+            methods: {
+                op_Implicit: function (v) {
+                    return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1510.IntWrap4(v);
+                }
             }
         },
         fields: {
@@ -8265,7 +8209,7 @@ Bridge.$N1391Result =                     r;
             _items: null
         },
         alias: [
-        "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"
+            "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"
         ],
         ctors: {
             ctor: function (items) {
@@ -8477,9 +8421,6 @@ Bridge.$N1391Result =                     r;
                 init: function () {
                     this._empty = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1684.Set$1(T))();
                 }
-            },
-            methods: {
-
             }
         },
         properties: {
@@ -8652,16 +8593,13 @@ Bridge.$N1391Result =                     r;
                 init: function () {
                     this._empty = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1702.Set$1(T))(null);
                 }
-            },
-            methods: {
-
             }
         },
         fields: {
             _headIfAny: null
         },
         alias: [
-        "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"
+            "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"
         ],
         ctors: {
             ctor: function (headIfAny) {
@@ -8829,9 +8767,6 @@ Bridge.$N1391Result =                     r;
         statics: {
             properties: {
                 Buffer: null
-            },
-            methods: {
-
             }
         },
         methods: {
@@ -8895,7 +8830,7 @@ Bridge.$N1391Result =                     r;
             list: null
         },
         alias: [
-        "getEnumerator", "System$Collections$IEnumerable$getEnumerator"
+            "getEnumerator", "System$Collections$IEnumerable$getEnumerator"
         ],
         ctors: {
             init: function () {
@@ -8912,7 +8847,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712.MSDNCollectionWithAdd", {
         inherits: [System.Collections.IEnumerable],
         alias: [
-        "getEnumerator", "System$Collections$IEnumerable$getEnumerator"
+            "getEnumerator", "System$Collections$IEnumerable$getEnumerator"
         ],
         methods: {
             Add: function (T, item) {
@@ -8927,7 +8862,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712.MSDNCollectionWithoutAdd", {
         inherits: [System.Collections.IEnumerable],
         alias: [
-        "getEnumerator", "System$Collections$IEnumerable$getEnumerator"
+            "getEnumerator", "System$Collections$IEnumerable$getEnumerator"
         ],
         methods: {
             getEnumerator: function () {
@@ -9113,7 +9048,7 @@ Bridge.$N1391Result =                     r;
             }
         },
         alias: [
-        "getEnumerator", "System$Collections$IEnumerable$getEnumerator"
+            "getEnumerator", "System$Collections$IEnumerable$getEnumerator"
         ],
         ctors: {
             ctor: function () {
@@ -9487,19 +9422,19 @@ Bridge.$N1391Result =                     r;
             }
         },
         alias: [
-        "System$Collections$Generic$IList$1$T$getItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem",
-        "System$Collections$Generic$IList$1$T$setItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem",
-        "System$Collections$Generic$ICollection$1$T$Count", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$Count",
-        "IsReadOnly", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$IsReadOnly",
-        "System$Collections$Generic$ICollection$1$T$add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
-        "System$Collections$Generic$ICollection$1$T$clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
-        "System$Collections$Generic$ICollection$1$T$contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains",
-        "System$Collections$Generic$ICollection$1$T$copyTo", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$copyTo",
-        "System$Collections$Generic$IEnumerable$1$T$getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator",
-        "System$Collections$Generic$IList$1$T$indexOf", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf",
-        "System$Collections$Generic$IList$1$T$insert", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert",
-        "System$Collections$Generic$ICollection$1$T$remove", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$remove",
-        "System$Collections$Generic$IList$1$T$removeAt", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$removeAt"
+            "System$Collections$Generic$IList$1$T$getItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem",
+            "System$Collections$Generic$IList$1$T$setItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem",
+            "System$Collections$Generic$ICollection$1$T$Count", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$Count",
+            "IsReadOnly", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$IsReadOnly",
+            "System$Collections$Generic$ICollection$1$T$add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
+            "System$Collections$Generic$ICollection$1$T$clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
+            "System$Collections$Generic$ICollection$1$T$contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains",
+            "System$Collections$Generic$ICollection$1$T$copyTo", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$copyTo",
+            "System$Collections$Generic$IEnumerable$1$T$getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator",
+            "System$Collections$Generic$IList$1$T$indexOf", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf",
+            "System$Collections$Generic$IList$1$T$insert", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert",
+            "System$Collections$Generic$ICollection$1$T$remove", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$remove",
+            "System$Collections$Generic$IList$1$T$removeAt", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$removeAt"
         ],
         methods: {
             System$Collections$Generic$IList$1$T$getItem: function (index) {
@@ -9551,19 +9486,19 @@ Bridge.$N1391Result =                     r;
             }
         },
         alias: [
-        "getItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem",
-        "setItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem",
-        "Count", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$Count",
-        "IsReadOnly", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$IsReadOnly",
-        "add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
-        "clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
-        "contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains",
-        "copyTo", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$copyTo",
-        "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator",
-        "indexOf", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf",
-        "insert", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert",
-        "remove", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$remove",
-        "removeAt", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$removeAt"
+            "getItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem",
+            "setItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem",
+            "Count", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$Count",
+            "IsReadOnly", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$IsReadOnly",
+            "add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
+            "clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
+            "contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains",
+            "copyTo", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$copyTo",
+            "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator",
+            "indexOf", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf",
+            "insert", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert",
+            "remove", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$remove",
+            "removeAt", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$removeAt"
         ],
         methods: {
             getItem: function (index) {
@@ -10401,19 +10336,19 @@ Bridge.$N1391Result =                     r;
             }
         },
         alias: [
-        "System$Collections$Generic$IList$1$T$getItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem",
-        "System$Collections$Generic$IList$1$T$setItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem",
-        "System$Collections$Generic$ICollection$1$T$Count", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$Count",
-        "System$Collections$Generic$ICollection$1$T$IsReadOnly", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$IsReadOnly",
-        "System$Collections$Generic$ICollection$1$T$add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
-        "System$Collections$Generic$ICollection$1$T$clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
-        "System$Collections$Generic$ICollection$1$T$contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains",
-        "System$Collections$Generic$ICollection$1$T$copyTo", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$copyTo",
-        "System$Collections$Generic$IEnumerable$1$T$getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator",
-        "System$Collections$Generic$IList$1$T$indexOf", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf",
-        "System$Collections$Generic$IList$1$T$insert", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert",
-        "System$Collections$Generic$ICollection$1$T$remove", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$remove",
-        "System$Collections$Generic$IList$1$T$removeAt", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$removeAt"
+            "System$Collections$Generic$IList$1$T$getItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem",
+            "System$Collections$Generic$IList$1$T$setItem", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$setItem",
+            "System$Collections$Generic$ICollection$1$T$Count", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$Count",
+            "System$Collections$Generic$ICollection$1$T$IsReadOnly", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$IsReadOnly",
+            "System$Collections$Generic$ICollection$1$T$add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
+            "System$Collections$Generic$ICollection$1$T$clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
+            "System$Collections$Generic$ICollection$1$T$contains", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$contains",
+            "System$Collections$Generic$ICollection$1$T$copyTo", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$copyTo",
+            "System$Collections$Generic$IEnumerable$1$T$getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator",
+            "System$Collections$Generic$IList$1$T$indexOf", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf",
+            "System$Collections$Generic$IList$1$T$insert", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$insert",
+            "System$Collections$Generic$ICollection$1$T$remove", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$remove",
+            "System$Collections$Generic$IList$1$T$removeAt", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$removeAt"
         ],
         methods: {
             System$Collections$Generic$IList$1$T$getItem: function (index) {
@@ -10621,9 +10556,6 @@ Bridge.$N1391Result =                     r;
                     return new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.Bar$1(System.Nullable$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.Xxx)))(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.Xxx.$ctor1(5));
                 }
             }
-        },
-        methods: {
-
         }
     });
 
@@ -10714,9 +10646,6 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1833.AttributeBase", {
         properties: {
             Id: 0
-        },
-        methods: {
-
         }
     });
 
@@ -10802,13 +10731,15 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1842.Class", {
         statics: {
-            op_Implicit: function (t) {
-                return Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1842.Class(), {
-                    type: t
-                } );
-            },
-            op_Implicit$1: function (t) {
-                return t.type;
+            methods: {
+                op_Implicit: function (t) {
+                    return Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1842.Class(), {
+                        type: t
+                    } );
+                },
+                op_Implicit$1: function (t) {
+                    return t.type;
+                }
             }
         },
         fields: {
@@ -10872,9 +10803,6 @@ Bridge.$N1391Result =                     r;
                 var r1 = this.ctor$1;
                 var r2 = this.Ctor;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -10900,10 +10828,12 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1846.Obj", {
         statics: {
-            op_Implicit: function (str) {
-                return Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1846.Obj(), {
-                    s: str
-                } );
+            methods: {
+                op_Implicit: function (str) {
+                    return Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1846.Obj(), {
+                        s: str
+                    } );
+                }
             }
         },
         fields: {
@@ -10973,7 +10903,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1850.LookupOptions$1", function (T) { return {
         inherits: [System.Collections.Generic.IEnumerable$1(System.Collections.Generic.KeyValuePair$2(T,System.String))],
         alias: [
-        "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$Collections$Generic$KeyValuePair$2$" + Bridge.getTypeAlias(T) + "$System$String$getEnumerator"
+            "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$Collections$Generic$KeyValuePair$2$" + Bridge.getTypeAlias(T) + "$System$String$getEnumerator"
         ],
         methods: {
             getEnumerator: function () {
@@ -11213,35 +11143,37 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1863.Obj", {
         statics: {
-            op_False: function (o) {
-                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1863.sb.append(System.String.concat("f:", o.v, ";"));
-                return o == null;
-            },
-            op_True: function (o) {
-                Bridge.ClientTest.Batch3.BridgeIssues.Bridge1863.sb.append(System.String.concat("t:", o.v, ";"));
-                return o != null;
-            },
-            op_BitwiseOr: function (left, right) {
-                if (left == null) {
+            methods: {
+                op_False: function (o) {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1863.sb.append(System.String.concat("f:", o.v, ";"));
+                    return o == null;
+                },
+                op_True: function (o) {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge1863.sb.append(System.String.concat("t:", o.v, ";"));
+                    return o != null;
+                },
+                op_BitwiseOr: function (left, right) {
+                    if (left == null) {
+                        return right;
+                    }
+
+                    if (right == null) {
+                        return left;
+                    }
+
+                    return left;
+                },
+                op_BitwiseAnd: function (left, right) {
+                    if (left == null) {
+                        return null;
+                    }
+
+                    if (right == null) {
+                        return null;
+                    }
+
                     return right;
                 }
-
-                if (right == null) {
-                    return left;
-                }
-
-                return left;
-            },
-            op_BitwiseAnd: function (left, right) {
-                if (left == null) {
-                    return null;
-                }
-
-                if (right == null) {
-                    return null;
-                }
-
-                return right;
             }
         },
         fields: {
@@ -11440,9 +11372,6 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1875.ClassA", {
         properties: {
             Id: System.Int64(0)
-        },
-        methods: {
-
         }
     });
 
@@ -11502,9 +11431,6 @@ Bridge.$N1391Result =                     r;
         properties: {
             DecimalNumber: System.Decimal(0.0),
             LongNumber: System.Int64(0)
-        },
-        methods: {
-
         }
     });
 
@@ -11705,9 +11631,6 @@ Bridge.$N1391Result =                     r;
                 this.Indexed = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1884.Foo.f1(new (System.Collections.Generic.Dictionary$2(System.Int32,System.String))());
                 this.Indexed1 = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1884.Foo.f2(new (System.Collections.Generic.Dictionary$2(System.Int32,System.Collections.Generic.List$1(System.String)))());
             }
-        },
-        methods: {
-
         }
     });
 
@@ -11751,49 +11674,51 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1892.Obj", {
         statics: {
-            op_False: function (o) {
-                return o == null;
-            },
-            op_True: function (o) {
-                return o != null;
-            },
-            op_Implicit: function (v) {
-                return Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1892.Obj(), {
-                    value: Bridge.box(v, System.Boolean, $box_.System.Boolean.toString)
-                } );
-            },
-            op_Implicit$2: function (v) {
-                return v.value;
-            },
-            op_Implicit$3: function (v) {
-                return v.value;
-            },
-            op_Implicit$1: function (v) {
-                return Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1892.Obj(), {
-                    value: Bridge.box(v, System.Int32)
-                } );
-            },
-            op_BitwiseOr: function (left, right) {
-                if (left == null) {
+            methods: {
+                op_False: function (o) {
+                    return o == null;
+                },
+                op_True: function (o) {
+                    return o != null;
+                },
+                op_Implicit: function (v) {
+                    return Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1892.Obj(), {
+                        value: Bridge.box(v, System.Boolean, $box_.System.Boolean.toString)
+                    } );
+                },
+                op_Implicit$2: function (v) {
+                    return v.value;
+                },
+                op_Implicit$3: function (v) {
+                    return v.value;
+                },
+                op_Implicit$1: function (v) {
+                    return Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1892.Obj(), {
+                        value: Bridge.box(v, System.Int32)
+                    } );
+                },
+                op_BitwiseOr: function (left, right) {
+                    if (left == null) {
+                        return right;
+                    }
+
+                    if (right == null) {
+                        return left;
+                    }
+
+                    return left;
+                },
+                op_BitwiseAnd: function (left, right) {
+                    if (left == null) {
+                        return null;
+                    }
+
+                    if (right == null) {
+                        return null;
+                    }
+
                     return right;
                 }
-
-                if (right == null) {
-                    return left;
-                }
-
-                return left;
-            },
-            op_BitwiseAnd: function (left, right) {
-                if (left == null) {
-                    return null;
-                }
-
-                if (right == null) {
-                    return null;
-                }
-
-                return right;
             }
         },
         fields: {
@@ -12112,9 +12037,6 @@ Bridge.$N1391Result =                     r;
                 this.$initialize();
                 this.value = value;
             }
-        },
-        methods: {
-
         }
     }; });
 
@@ -12233,8 +12155,8 @@ Bridge.$N1391Result =                     r;
             }
         },
         alias: [
-        "Value", "Bridge$ClientTestHelper$IItem$Value",
-        "SetValue", "Bridge$ClientTestHelper$IWriteableItem$SetValue"
+            "Value", "Bridge$ClientTestHelper$IItem$Value",
+            "SetValue", "Bridge$ClientTestHelper$IWriteableItem$SetValue"
         ],
         methods: {
             SetValue: function (value) {
@@ -12483,7 +12405,7 @@ Bridge.$N1391Result =                     r;
             isGeneric: false
         },
         alias: [
-        "getEnumerator", "System$Collections$IEnumerable$getEnumerator"
+            "getEnumerator", "System$Collections$IEnumerable$getEnumerator"
         ],
         ctors: {
             ctor: function () {
@@ -12857,7 +12779,7 @@ Bridge.$N1391Result =                     r;
             field: Bridge.getDefaultValue(T)
         },
         alias: [
-        "equalsT", "System$IEquatable$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2011$Optional$1$" + Bridge.getTypeAlias(T) + "$equalsT"
+            "equalsT", "System$IEquatable$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2011$Optional$1$" + Bridge.getTypeAlias(T) + "$equalsT"
         ],
         ctors: {
             ctor: function () {
@@ -12964,9 +12886,6 @@ Bridge.$N1391Result =                     r;
                         return "Test";
                     }
                 }
-            },
-            methods: {
-
             }
         }
     });
@@ -13166,9 +13085,6 @@ Bridge.$N1391Result =                     r;
                 set: function (value) {
                 }
             }
-        },
-        methods: {
-
         }
     });
 
@@ -13535,16 +13451,18 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj", {
         statics: {
-            op_Implicit: function (s) {
-                return Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj(), {
-                    v: s
-                } );
-            },
-            op_Implicit$1: function (s) {
-                return s.v;
-            },
-            op_Addition: function (left, right) {
-                return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Implicit(System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Implicit$1(left), Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Implicit$1(right)));
+            methods: {
+                op_Implicit: function (s) {
+                    return Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj(), {
+                        v: s
+                    } );
+                },
+                op_Implicit$1: function (s) {
+                    return s.v;
+                },
+                op_Addition: function (left, right) {
+                    return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Implicit(System.String.concat(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Implicit$1(left), Bridge.ClientTest.Batch3.BridgeIssues.Bridge2073.Obj.op_Implicit$1(right)));
+                }
             }
         },
         fields: {
@@ -13946,9 +13864,6 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080.TestClass", {
         properties: {
             TestProperty: false
-        },
-        methods: {
-
         }
     });
 
@@ -13971,9 +13886,6 @@ Bridge.$N1391Result =                     r;
                     this.b = value;
                 }
             }
-        },
-        methods: {
-
         }
     });
 
@@ -14153,18 +14065,12 @@ Bridge.$N1391Result =                     r;
                 }).call($this);
                 return $this;
             }
-        },
-        methods: {
-
         }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.T", {
         properties: {
             ShouldSeeThis: 0
-        },
-        methods: {
-
         }
     });
 
@@ -14278,9 +14184,6 @@ Bridge.$N1391Result =                     r;
             },
             properties: {
                 "0p1": 0
-            },
-            methods: {
-
             }
         },
         fields: {
@@ -14321,9 +14224,6 @@ Bridge.$N1391Result =                     r;
                 var l = ($t = this["0l"], this["0l"] = this["0l"].inc(), $t);
                 l = ($t = this["0l"], this["0l"] = this["0l"].inc(), $t);
         }
-    },
-    methods: {
-
     }
     });
 
@@ -14410,9 +14310,6 @@ Bridge.$N1391Result =                     r;
     Bridge.define("_Bridge2135_1.Config", {
         properties: {
             Msg: null
-        },
-        methods: {
-
         }
     });
 
@@ -14425,9 +14322,6 @@ Bridge.$N1391Result =                     r;
     Bridge.define("_Bridge2135_2.Class2_1$1.Config", {
         properties: {
             Msg: null
-        },
-        methods: {
-
         }
     });
 
@@ -14436,9 +14330,6 @@ Bridge.$N1391Result =                     r;
     Bridge.define("_Bridge2135_3.Config$1", function (T) { return {
         properties: {
             Msg: null
-        },
-        methods: {
-
         }
     }; });
 
@@ -14451,9 +14342,6 @@ Bridge.$N1391Result =                     r;
     Bridge.define("_Bridge2135_4.Class4_1$1.Config", function (T) { return {
         properties: {
             Msg: null
-        },
-        methods: {
-
         }
     }; });
 
@@ -14491,9 +14379,6 @@ Bridge.$N1391Result =                     r;
                 this.$initialize();
                 this.E4 = System.String.concat("_", this.E3);
             }
-        },
-        methods: {
-
         }
     });
 
@@ -14555,9 +14440,6 @@ Bridge.$N1391Result =                     r;
                 this.$initialize();
                 this.Itms = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.SomeCollection$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Something$1(T)))(itms);
             }
-        },
-        methods: {
-
         }
     }; });
 
@@ -14905,9 +14787,6 @@ Bridge.$N1391Result =                     r;
                 this.TestStringProperty = "constructor";
                 this.TestObjectProperty = String.fromCharCode.apply(null, System.Array.init([99], System.Char));
             }
-        },
-        methods: {
-
         }
     });
 
@@ -15018,9 +14897,6 @@ Bridge.$N1391Result =                     r;
         properties: {
             p1: System.Decimal(0.0),
             p2: System.Decimal(0.0)
-        },
-        methods: {
-
         }
     });
 
@@ -15079,7 +14955,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2174.CustomCmp$1", function (T) { return {
         inherits: [System.Collections.Generic.IComparer$1(T)],
         alias: [
-        "compare", "System$Collections$Generic$IComparer$1$" + Bridge.getTypeAlias(T) + "$compare"
+            "compare", "System$Collections$Generic$IComparer$1$" + Bridge.getTypeAlias(T) + "$compare"
         ],
         methods: {
             compare: function (x, y) {
@@ -15094,7 +14970,7 @@ Bridge.$N1391Result =                     r;
             _wrapped: null
         },
         alias: [
-        "compare", "System$Collections$Generic$IComparer$1$" + Bridge.getTypeAlias(T) + "$compare"
+            "compare", "System$Collections$Generic$IComparer$1$" + Bridge.getTypeAlias(T) + "$compare"
         ],
         ctors: {
             ctor: function (wrapped) {
@@ -15486,9 +15362,6 @@ Bridge.$N1391Result =                     r;
                         return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2210.GoSington$1(T).instance;
                     }
                 }
-            },
-            methods: {
-
             }
         }
     }; });
@@ -15507,9 +15380,6 @@ Bridge.$N1391Result =                     r;
                         return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2210.ObjSingleton$1(T).instance;
                     }
                 }
-            },
-            methods: {
-
             }
         }
     }; });
@@ -15544,9 +15414,6 @@ Bridge.$N1391Result =                     r;
                     return Bridge.referenceEquals((this.ParentNode != null ? this.ParentNode.AssistantsRoot : null), this);
                 }
             }
-        },
-        methods: {
-
         }
     });
 
@@ -15817,9 +15684,6 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2249.c1", {
         properties: {
             p1: "test"
-        },
-        methods: {
-
         }
     });
 
@@ -15917,16 +15781,10 @@ Bridge.$N1391Result =                     r;
         statics: {
             properties: {
                 Value2: "test2"
-            },
-            methods: {
-
             }
         },
         properties: {
             Value: "test1"
-        },
-        methods: {
-
         }
     });
 
@@ -16088,9 +15946,6 @@ Bridge.$N1391Result =                     r;
             Name4: null,
             Name5: null,
             NAME6: null
-        },
-        methods: {
-
         }
     });
 
@@ -16269,9 +16124,6 @@ Bridge.$N1391Result =                     r;
             init: function () {
                 this.any = {  };
             }
-        },
-        methods: {
-
         }
     });
 
@@ -16989,9 +16841,6 @@ Bridge.$N1391Result =                     r;
             Common: null,
             Light: null,
             Indoor: false
-        },
-        methods: {
-
         }
     });
 
@@ -17003,9 +16852,6 @@ Bridge.$N1391Result =                     r;
                         return $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plants.f1(new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant))());
                     }
                 }
-            },
-            methods: {
-
             }
         }
     });
@@ -17190,9 +17036,6 @@ Bridge.$N1391Result =                     r;
                 this.CreatedOn = new Date();
                 this.CreatedOnNullable = new Date();
             }
-        },
-        methods: {
-
         }
     });
 
@@ -17211,9 +17054,6 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2375.Person", {
         properties: {
             FirstName: "Test value"
-        },
-        methods: {
-
         }
     });
 
@@ -17260,9 +17100,6 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2393.c1", {
         properties: {
             p1: null
-        },
-        methods: {
-
         }
     });
 
@@ -17279,9 +17116,6 @@ Bridge.$N1391Result =                     r;
                 }).call($this);
                 return $this;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -17345,9 +17179,6 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
         properties: {
             Data: 0
-        },
-        methods: {
-
         }
     });
 
@@ -18166,7 +17997,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2481.c1", {
         inherits: [System.IDisposable],
         alias: [
-        "dispose", "System$IDisposable$dispose"
+            "dispose", "System$IDisposable$dispose"
         ],
         methods: {
             dispose: function () {
@@ -18256,9 +18087,6 @@ Bridge.$N1391Result =                     r;
             init: function () {
                 this.Provider = {  };
             }
-        },
-        methods: {
-
         }
     });
 
@@ -18272,9 +18100,6 @@ Bridge.$N1391Result =                     r;
                 this.CurrentCulture = System.Globalization.CultureInfo.getCurrentCulture();
                 this.CurrentUICulture = System.Globalization.CultureInfo.getCurrentCulture();
             }
-        },
-        methods: {
-
         }
     });
 
@@ -18286,9 +18111,6 @@ Bridge.$N1391Result =                     r;
             init: function () {
                 this.TraceLevels = {  };
             }
-        },
-        methods: {
-
         }
     });
 
@@ -18300,9 +18122,6 @@ Bridge.$N1391Result =                     r;
             init: function () {
                 this.ApplicationType = {  };
             }
-        },
-        methods: {
-
         }
     });
 
@@ -18371,9 +18190,6 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2499.Named", {
         properties: {
             Name: null
-        },
-        methods: {
-
         }
     });
 
@@ -18593,7 +18409,7 @@ Bridge.$N1391Result =                     r;
             Items: null
         },
         alias: [
-        "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$String$getEnumerator"
+            "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$String$getEnumerator"
         ],
         ctors: {
             ctor: function (items) {
@@ -18646,9 +18462,6 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
         properties: {
             Str: null
-        },
-        methods: {
-
         }
     });
 
@@ -18658,7 +18471,7 @@ Bridge.$N1391Result =                     r;
             Str: null
         },
         alias: [
-        "equalsT", "System$IEquatable$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge341B$equalsT"
+            "equalsT", "System$IEquatable$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge341B$equalsT"
         ],
         methods: {
             equalsT: function (other) {
@@ -18701,22 +18514,22 @@ Bridge.$N1391Result =                     r;
             }
         },
         alias: [
-        "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$getEnumerator",
-        "getItem", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$getItem",
-        "setItem", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$setItem",
-        "Keys", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$Keys",
-        "Values", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$Values",
-        "Count", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Count",
-        "IsReadOnly", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$IsReadOnly",
-        "add", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$add",
-        "copyTo", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$copyTo",
-        "add$1", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$add",
-        "remove$1", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$remove",
-        "containsKey", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$containsKey",
-        "tryGetValue", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$tryGetValue",
-        "clear", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$clear",
-        "contains", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$contains",
-        "remove", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$remove"
+            "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$getEnumerator",
+            "getItem", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$getItem",
+            "setItem", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$setItem",
+            "Keys", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$Keys",
+            "Values", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$Values",
+            "Count", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Count",
+            "IsReadOnly", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$IsReadOnly",
+            "add", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$add",
+            "copyTo", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$copyTo",
+            "add$1", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$add",
+            "remove$1", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$remove",
+            "containsKey", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$containsKey",
+            "tryGetValue", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$tryGetValue",
+            "clear", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$clear",
+            "contains", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$contains",
+            "remove", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$remove"
         ],
         ctors: {
             ctor: function () {
@@ -18842,9 +18655,6 @@ Bridge.$N1391Result =                     r;
         properties: {
             Id: null,
             data: 0
-        },
-        methods: {
-
         }
     });
 
@@ -18998,8 +18808,8 @@ Bridge.$N1391Result =                     r;
             Data: 0
         },
         alias: [
-        "equals2", "System$Collections$Generic$IEqualityComparer$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge470$equals2",
-        "getHashCode2", "System$Collections$Generic$IEqualityComparer$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge470$getHashCode2"
+            "equals2", "System$Collections$Generic$IEqualityComparer$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge470$equals2",
+            "getHashCode2", "System$Collections$Generic$IEqualityComparer$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge470$getHashCode2"
         ],
         methods: {
             equals2: function (x, y) {
@@ -19742,7 +19552,7 @@ Bridge.$N1391Result =                     r;
             list: null
         },
         alias: [
-        "getEnumerator", "System$Collections$Generic$IEnumerable$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge537A$getEnumerator"
+            "getEnumerator", "System$Collections$Generic$IEnumerable$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge537A$getEnumerator"
         ],
         ctors: {
             ctor: function () {
@@ -20413,9 +20223,6 @@ Bridge.$N1391Result =                     r;
             ctor: function (value) {
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge559A3.$ctor1.call(this, value.toString());
             }
-        },
-        methods: {
-
         }
     });
 
@@ -20541,9 +20348,6 @@ Bridge.$N1391Result =                     r;
                 this.$initialize();
                 this.Data = this.GetName();
             }
-        },
-        methods: {
-
         }
     });
 
@@ -20891,16 +20695,7 @@ Bridge.$N1391Result =                     r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge586A", {
-        statics: {
-            methods: {
-
-            }
-        },
-        methods: {
-
-        }
-    });
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge586A");
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge588", {
         statics: {
@@ -20978,9 +20773,6 @@ Bridge.$N1391Result =                     r;
                 init: function () {
                     this._default = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge588C.C1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge588C.C2.Default);
                 }
-            },
-            methods: {
-
             }
         },
         properties: {
@@ -20991,9 +20783,6 @@ Bridge.$N1391Result =                     r;
                 this.$initialize();
                 this.Value = value;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -21013,9 +20802,6 @@ Bridge.$N1391Result =                     r;
                 init: function () {
                     this._default = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge588C.C2("default");
                 }
-            },
-            methods: {
-
             }
         },
         properties: {
@@ -21026,9 +20812,6 @@ Bridge.$N1391Result =                     r;
                 this.$initialize();
                 this.Name = name;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -21310,9 +21093,6 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge603Class", {
         properties: {
             Data: null
-        },
-        methods: {
-
         }
     });
 
@@ -21357,9 +21137,6 @@ Bridge.$N1391Result =                     r;
                 this.X = x;
                 this.Y = y;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -21398,7 +21175,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge607A$1", function (T) { return {
         inherits: function () { return [System.IEquatable$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge607A$1(T))]; },
         alias: [
-        "equalsT", "System$IEquatable$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge607A$1$" + Bridge.getTypeAlias(T) + "$equalsT"
+            "equalsT", "System$IEquatable$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge607A$1$" + Bridge.getTypeAlias(T) + "$equalsT"
         ],
         methods: {
             equalsT: function (obj) {
@@ -21410,7 +21187,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge607B", {
         inherits: function () { return [System.IEquatable$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge607B)]; },
         alias: [
-        "equalsT", "System$IEquatable$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge607B$equalsT"
+            "equalsT", "System$IEquatable$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge607B$equalsT"
         ],
         methods: {
             equalsT: function (other) {
@@ -21622,8 +21399,8 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge625A", {
         inherits: [System.Collections.Generic.IEqualityComparer$1(System.Int32)],
         alias: [
-        "equals2", "System$Collections$Generic$IEqualityComparer$1$System$Int32$equals2",
-        "getHashCode2", "System$Collections$Generic$IEqualityComparer$1$System$Int32$getHashCode2"
+            "equals2", "System$Collections$Generic$IEqualityComparer$1$System$Int32$equals2",
+            "getHashCode2", "System$Collections$Generic$IEqualityComparer$1$System$Int32$getHashCode2"
         ],
         methods: {
             equals2: function (x, y) {
@@ -21849,8 +21626,10 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge648A", {
         statics: {
-            op_Implicit: function (value) {
-                return value.Value;
+            methods: {
+                op_Implicit: function (value) {
+                    return value.Value;
+                }
             }
         },
         properties: {
@@ -21861,9 +21640,6 @@ Bridge.$N1391Result =                     r;
                 this.$initialize();
                 this.Value = value;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -21912,7 +21688,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge652.Bridge652B2", {
         inherits: [System.IComparable],
         alias: [
-        "compareTo", "System$IComparable$compareTo"
+            "compareTo", "System$IComparable$compareTo"
         ],
         ctors: {
             ctor: function () {
@@ -22042,9 +21818,6 @@ Bridge.$N1391Result =                     r;
                 this.$initialize();
                 this.Content = content;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -22136,9 +21909,6 @@ Bridge.$N1391Result =                     r;
                 this.$initialize();
                 this.Text = text;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -22347,8 +22117,10 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge687A", {
         statics: {
-            op_Implicit: function (value) {
-                return value.Value;
+            methods: {
+                op_Implicit: function (value) {
+                    return value.Value;
+                }
             }
         },
         properties: {
@@ -22359,9 +22131,6 @@ Bridge.$N1391Result =                     r;
                 this.$initialize();
                 this.Value = value;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -24171,11 +23940,13 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge826A", {
         statics: {
-            op_Implicit: function (val) {
-                return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge826A(val);
-            },
-            op_Implicit$1: function (val) {
-                return val != null ? val._val : System.Decimal(0);
+            methods: {
+                op_Implicit: function (val) {
+                    return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge826A(val);
+                },
+                op_Implicit$1: function (val) {
+                    return val != null ? val._val : System.Decimal(0);
+                }
             }
         },
         fields: {
@@ -24191,11 +23962,13 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge826B", {
         statics: {
-            op_Implicit: function (val) {
-                return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge826B(val);
-            },
-            op_Implicit$1: function (val) {
-                return val != null ? val._val : 0;
+            methods: {
+                op_Implicit: function (val) {
+                    return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge826B(val);
+                },
+                op_Implicit$1: function (val) {
+                    return val != null ? val._val : 0;
+                }
             }
         },
         fields: {
@@ -24651,9 +24424,6 @@ Bridge.$N1391Result =                     r;
                     }
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge882_Static.Sum = s;
             }
-        },
-        methods: {
-
         }
     }
     });
@@ -24682,9 +24452,6 @@ Bridge.$N1391Result =                     r;
                     }
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge882_Static.Bridge882_A_Static.Sum = s;
             }
-        },
-        methods: {
-
         }
     }
     });
@@ -26227,18 +25994,12 @@ Bridge.$N1391Result =                     r;
                 this.$initialize();
                 Bridge.merge(this, [x, y]);
             }
-        },
-        methods: {
-
         }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Person383", {
         properties: {
             Name: null
-        },
-        methods: {
-
         }
     });
 
@@ -26252,9 +26013,6 @@ Bridge.$N1391Result =                     r;
                     return this.MyType;
                 }
             }
-        },
-        methods: {
-
         }
     });
 
@@ -27036,7 +26794,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C10", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I7$3(System.Int32,System.String,System.Boolean)],
         alias: [
-        "Foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I7$3$System$Int32$System$String$System$Boolean$Foo"
+            "Foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I7$3$System$Int32$System$String$System$Boolean$Foo"
         ],
         methods: {
             Foo: function () {
@@ -27048,7 +26806,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C11$3", function (T1, T2, T3) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I7$3(T1,T2,T3)],
         alias: [
-        "Foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I7$3$" + Bridge.getTypeAlias(T1) + "$" + Bridge.getTypeAlias(T2) + "$" + Bridge.getTypeAlias(T3) + "$Foo"
+            "Foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I7$3$" + Bridge.getTypeAlias(T1) + "$" + Bridge.getTypeAlias(T2) + "$" + Bridge.getTypeAlias(T3) + "$Foo"
         ],
         methods: {
             Foo: function () {
@@ -27060,7 +26818,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C12$3", function (T1, T2, T3) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I7$3(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I5$1(T1),Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I5$1(T2),Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I5$1(T3))],
         alias: [
-        "Foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I7$3$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I5$1$" + Bridge.getTypeAlias(T1) + "$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I5$1$" + Bridge.getTypeAlias(T2) + "$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I5$1$" + Bridge.getTypeAlias(T3) + "$Foo"
+            "Foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I7$3$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I5$1$" + Bridge.getTypeAlias(T1) + "$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I5$1$" + Bridge.getTypeAlias(T2) + "$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I5$1$" + Bridge.getTypeAlias(T3) + "$Foo"
         ],
         methods: {
             Foo: function () {
@@ -27072,7 +26830,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C13$3", function (T1, T2, T3) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I7$3(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I5$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I5$1(T1)),Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I5$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I5$1(T2)),Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I5$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I5$1(T3)))],
         alias: [
-        "Foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I7$3$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I5$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I5$1$" + Bridge.getTypeAlias(T1) + "$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I5$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I5$1$" + Bridge.getTypeAlias(T2) + "$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I5$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I5$1$" + Bridge.getTypeAlias(T3) + "$Foo"
+            "Foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I7$3$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I5$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I5$1$" + Bridge.getTypeAlias(T1) + "$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I5$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I5$1$" + Bridge.getTypeAlias(T2) + "$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I5$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I5$1$" + Bridge.getTypeAlias(T3) + "$Foo"
         ],
         methods: {
             Foo: function () {
@@ -27098,13 +26856,13 @@ Bridge.$N1391Result =                     r;
             Prop2: null
         },
         alias: [
-        "getItem", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I8$getItem",
-        "setItem", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I8$setItem",
-        "Prop1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I8$Prop1",
-        "Prop2", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I8$Prop2",
-        "addEvent1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I8$addEvent1",
-        "removeEvent1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I8$removeEvent1",
-        "Invoke", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I8$Invoke"
+            "getItem", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I8$getItem",
+            "setItem", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I8$setItem",
+            "Prop1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I8$Prop1",
+            "Prop2", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I8$Prop2",
+            "addEvent1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I8$addEvent1",
+            "removeEvent1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I8$removeEvent1",
+            "Invoke", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I8$Invoke"
         ],
         methods: {
             getItem: function (index) {
@@ -27130,7 +26888,7 @@ Bridge.$N1391Result =                     r;
             log: null
         },
         alias: [
-        "Foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I10$Foo"
+            "Foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I10$Foo"
         ],
         methods: {
             Foo: function () {
@@ -27142,7 +26900,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C19", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C18,Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I10],
         alias: [
-        "Foo$1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I10$Foo"
+            "Foo$1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I10$Foo"
         ],
         methods: {
             Foo$1: function () {
@@ -27174,9 +26932,6 @@ Bridge.$N1391Result =                     r;
                     this.i2 = (value + 1) | 0;
                 }
             }
-        },
-        methods: {
-
         }
     });
 
@@ -27186,7 +26941,7 @@ Bridge.$N1391Result =                     r;
             log: null
         },
         alias: [
-        "Foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I10$Foo"
+            "Foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I10$Foo"
         ],
         methods: {
             Foo: function () {
@@ -27205,18 +26960,15 @@ Bridge.$N1391Result =                     r;
             Prop1: 0
         },
         alias: [
-        "Prop1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I2$Prop1",
-        "Prop1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I1$Prop1"
-        ],
-        methods: {
-
-        }
+            "Prop1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I2$Prop1",
+            "Prop1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I1$Prop1"
+        ]
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C4", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I3],
         alias: [
-        "Foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I3$Foo"
+            "Foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I3$Foo"
         ],
         methods: {
             Foo: function () {
@@ -27228,7 +26980,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C7", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C6,Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I4],
         alias: [
-        "Foo$1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I4$Foo"
+            "Foo$1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I4$Foo"
         ],
         methods: {
             Foo$1: function () {
@@ -27255,8 +27007,8 @@ Bridge.$N1391Result =                     r;
             flag: null
         },
         alias: [
-        "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I5$1$T1$Foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I5$1$" + Bridge.getTypeAlias(T1) + "$Foo",
-        "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I6$1$T2$Foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I6$1$" + Bridge.getTypeAlias(T2) + "$Foo"
+            "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I5$1$T1$Foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I5$1$" + Bridge.getTypeAlias(T1) + "$Foo",
+            "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I6$1$T2$Foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I6$1$" + Bridge.getTypeAlias(T2) + "$Foo"
         ],
         methods: {
             Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I5$1$T1$Foo: function () {
@@ -27293,7 +27045,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1128.Foo1.Comparer", {
         inherits: [System.Collections.Generic.IComparer$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1128.Foo1.Item)],
         alias: [
-        "compare", "System$Collections$Generic$IComparer$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1128$Foo1$Item$compare"
+            "compare", "System$Collections$Generic$IComparer$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1128$Foo1$Item$compare"
         ],
         methods: {
             compare: function (x, y) {
@@ -27348,7 +27100,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1313.Class", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1313.IInterface],
         alias: [
-        "Function", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1313$IInterface$Function"
+            "Function", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1313$IInterface$Function"
         ],
         methods: {
             Function: function (v) {
@@ -27431,10 +27183,10 @@ Bridge.$N1391Result =                     r;
             }
         },
         alias: [
-        "getItem", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$" + Bridge.getTypeAlias(T) + "$getItem",
-        "setItem", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$" + Bridge.getTypeAlias(T) + "$setItem",
-        "Add", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$" + Bridge.getTypeAlias(T) + "$Add",
-        "Count", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$" + Bridge.getTypeAlias(T) + "$Count"
+            "getItem", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$" + Bridge.getTypeAlias(T) + "$getItem",
+            "setItem", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$" + Bridge.getTypeAlias(T) + "$setItem",
+            "Add", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$" + Bridge.getTypeAlias(T) + "$Add",
+            "Count", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$" + Bridge.getTypeAlias(T) + "$Count"
         ],
         methods: {
             getItem: function (index) {
@@ -27458,10 +27210,10 @@ Bridge.$N1391Result =                     r;
             }
         },
         alias: [
-        "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$T$getItem", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$" + Bridge.getTypeAlias(T) + "$getItem",
-        "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$T$setItem", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$" + Bridge.getTypeAlias(T) + "$setItem",
-        "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$T$Add", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$" + Bridge.getTypeAlias(T) + "$Add",
-        "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$T$Count", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$" + Bridge.getTypeAlias(T) + "$Count"
+            "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$T$getItem", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$" + Bridge.getTypeAlias(T) + "$getItem",
+            "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$T$setItem", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$" + Bridge.getTypeAlias(T) + "$setItem",
+            "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$T$Add", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$" + Bridge.getTypeAlias(T) + "$Add",
+            "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$T$Count", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$" + Bridge.getTypeAlias(T) + "$Count"
         ],
         methods: {
             Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$T$getItem: function (index) {
@@ -27488,16 +27240,13 @@ Bridge.$N1391Result =                     r;
             }
         },
         alias: [
-        "Value", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1821$IBar$1$" + Bridge.getTypeAlias(T) + "$Value"
+            "Value", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1821$IBar$1$" + Bridge.getTypeAlias(T) + "$Value"
         ],
         ctors: {
             ctor: function (v) {
                 this.$initialize();
                 this.v = v;
             }
-        },
-        methods: {
-
         }
     }; });
 
@@ -27509,7 +27258,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1834.Test1$1", function (TValues) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1834.ITest1$1],
         alias: [
-        "ToRoute", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1834$ITest1$1$ToRoute"
+            "ToRoute", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1834$ITest1$1$ToRoute"
         ],
         methods: {
             ToRoute: function (ifMatched) {
@@ -27521,7 +27270,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852.MatchDispatcherMessages", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852DispatcherMessageExtensions.IMatchDispatcherMessages],
         alias: [
-        "DoSomething", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1852DispatcherMessageExtensions$IMatchDispatcherMessages$DoSomething"
+            "DoSomething", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1852DispatcherMessageExtensions$IMatchDispatcherMessages$DoSomething"
         ],
         methods: {
             DoSomething: function (T, name) {
@@ -27535,8 +27284,8 @@ Bridge.$N1391Result =                     r;
             _param: null
         },
         alias: [
-        "Read", "Object$" + Bridge.getTypeAlias(T) + "$Read",
-        "Read", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1854$IRead$1$" + Bridge.getTypeAlias(T) + "$Read"
+            "Read", "Object$" + Bridge.getTypeAlias(T) + "$Read",
+            "Read", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1854$IRead$1$" + Bridge.getTypeAlias(T) + "$Read"
         ],
         ctors: {
             ctor: function (param) {
@@ -27554,7 +27303,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856.Signal$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856.IObservable$1(T)],
         alias: [
-        "Observe", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1856$IObservable$1$" + Bridge.getTypeAlias(T) + "$Observe"
+            "Observe", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1856$IObservable$1$" + Bridge.getTypeAlias(T) + "$Observe"
         ],
         ctors: {
             ctor: function (x) {
@@ -27578,9 +27327,6 @@ Bridge.$N1391Result =                     r;
                 }).call($this);
                 return $this;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -27595,9 +27341,6 @@ Bridge.$N1391Result =                     r;
                 }).call($this);
                 return $this;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -27648,8 +27391,8 @@ Bridge.$N1391Result =                     r;
             }
         },
         alias: [
-        "Value", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1899$IItem$Value",
-        "SetValue", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1899$IItem$SetValue"
+            "Value", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1899$IItem$Value",
+            "SetValue", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1899$IItem$SetValue"
         ],
         methods: {
             GetValue: function () {
@@ -27695,12 +27438,9 @@ Bridge.$N1391Result =                     r;
             }
         },
         alias: [
-        "addEv", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2013$IEvGen$1$" + Bridge.getTypeAlias(T) + "$addEv",
-        "removeEv", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2013$IEvGen$1$" + Bridge.getTypeAlias(T) + "$removeEv"
-        ],
-        methods: {
-
-        }
+            "addEv", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2013$IEvGen$1$" + Bridge.getTypeAlias(T) + "$addEv",
+            "removeEv", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2013$IEvGen$1$" + Bridge.getTypeAlias(T) + "$removeEv"
+        ]
     }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2019.Some$1", function (T) { return {
@@ -27709,8 +27449,8 @@ Bridge.$N1391Result =                     r;
             SomeProp: 0
         },
         alias: [
-        "SomeProp", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2019$ISome$1$" + Bridge.getTypeAlias(T) + "$SomeProp",
-        "SomeMethod", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2019$ISome$1$" + Bridge.getTypeAlias(T) + "$SomeMethod"
+            "SomeProp", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2019$ISome$1$" + Bridge.getTypeAlias(T) + "$SomeProp",
+            "SomeMethod", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2019$ISome$1$" + Bridge.getTypeAlias(T) + "$SomeMethod"
         ],
         methods: {
             SomeMethod: function () {
@@ -27726,9 +27466,6 @@ Bridge.$N1391Result =                     r;
                 set: function (value) {
                 }
             }
-        },
-        methods: {
-
         }
     });
 
@@ -27748,9 +27485,6 @@ Bridge.$N1391Result =                     r;
                 }).call($this);
                 return $this;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -27760,8 +27494,8 @@ Bridge.$N1391Result =                     r;
             _items: null
         },
         alias: [
-        "getItem", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2138$ISomeCollection$1$" + Bridge.getTypeAlias(T) + "$getItem",
-        "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"
+            "getItem", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2138$ISomeCollection$1$" + Bridge.getTypeAlias(T) + "$getItem",
+            "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"
         ],
         ctors: {
             init: function () {
@@ -27807,8 +27541,8 @@ Bridge.$N1391Result =                     r;
             Name: null
         },
         alias: [
-        "Name", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2216$IPerson$Name",
-        "Introduce", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2216$IPerson$Introduce"
+            "Name", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2216$IPerson$Name",
+            "Introduce", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2216$IPerson$Introduce"
         ],
         ctors: {
             ctor: function (name) {
@@ -27826,7 +27560,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2278.Something$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2278.ISomething$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2278.Item$1(T))],
         alias: [
-        "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$ISomething$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$Item$1$T$DoSomething", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$ISomething$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$Item$1$" + Bridge.getTypeAlias(T) + "$DoSomething"
+            "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$ISomething$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$Item$1$T$DoSomething", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$ISomething$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$Item$1$" + Bridge.getTypeAlias(T) + "$DoSomething"
         ],
         methods: {
             Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$ISomething$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2278$Item$1$T$DoSomething: function (t) {
@@ -27842,7 +27576,7 @@ Bridge.$N1391Result =                     r;
             B: null
         },
         alias: [
-        "MyMethod", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2298$IThing$2$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2298$V2$2$" + Bridge.getTypeAlias(TX) + "$System$Decimal$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2298$V2$2$System$Decimal$System$Int64$MyMethod"
+            "MyMethod", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2298$IThing$2$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2298$V2$2$" + Bridge.getTypeAlias(TX) + "$System$Decimal$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2298$V2$2$System$Decimal$System$Int64$MyMethod"
         ],
         ctors: {
             init: function () {
@@ -27860,7 +27594,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.MyThing$1", function (TX) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.IThing$2(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.V2$2(TX,System.Double),Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.V2$2(System.Double,System.Double))],
         alias: [
-        "MyMethod", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2298$IThing$2$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2298$V2$2$" + Bridge.getTypeAlias(TX) + "$System$Double$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2298$V2$2$System$Double$System$Double$MyMethod"
+            "MyMethod", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2298$IThing$2$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2298$V2$2$" + Bridge.getTypeAlias(TX) + "$System$Double$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2298$V2$2$System$Double$System$Double$MyMethod"
         ],
         methods: {
             MyMethod: function () {
@@ -27955,12 +27689,12 @@ Bridge.$N1391Result =                     r;
             Second: null
         },
         alias: [
-        "First", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2344$IFoo$2$HTMLElement$System$String$First",
-        "Second", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2344$IFoo$2$HTMLElement$System$String$Second",
-        "addEv", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2344$IFoo$2$HTMLElement$System$String$addEv",
-        "removeEv", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2344$IFoo$2$HTMLElement$System$String$removeEv",
-        "Something", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2344$IFoo$2$HTMLElement$System$String$Something",
-        "DoInvoke", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2344$IFoo$2$HTMLElement$System$String$DoInvoke"
+            "First", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2344$IFoo$2$HTMLElement$System$String$First",
+            "Second", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2344$IFoo$2$HTMLElement$System$String$Second",
+            "addEv", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2344$IFoo$2$HTMLElement$System$String$addEv",
+            "removeEv", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2344$IFoo$2$HTMLElement$System$String$removeEv",
+            "Something", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2344$IFoo$2$HTMLElement$System$String$Something",
+            "DoInvoke", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2344$IFoo$2$HTMLElement$System$String$DoInvoke"
         ],
         methods: {
             Something: function () {
@@ -27975,7 +27709,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2369.G1$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2369.IFoo$1(T)],
         alias: [
-        "Foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2369$IFoo$1$" + Bridge.getTypeAlias(T) + "$Foo"
+            "Foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2369$IFoo$1$" + Bridge.getTypeAlias(T) + "$Foo"
         ],
         methods: {
             Foo: function (t) {
@@ -27987,7 +27721,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2369.G2", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2369.IFoo$1(System.String)],
         alias: [
-        "Foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2369$IFoo$1$System$String$Foo"
+            "Foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2369$IFoo$1$System$String$Foo"
         ],
         methods: {
             Foo: function (t) {
@@ -28002,7 +27736,7 @@ Bridge.$N1391Result =                     r;
             tracker: 0
         },
         alias: [
-        "equalsT", "System$IEquatable$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2369$IBar$Array$equalsT"
+            "equalsT", "System$IEquatable$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2369$IBar$Array$equalsT"
         ],
         methods: {
             equalsT: function (other) {
@@ -28029,7 +27763,7 @@ Bridge.$N1391Result =                     r;
             m_y: 0
         },
         alias: [
-        "Change", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2386$IChangeBoxedPoint$Change"
+            "Change", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2386$IChangeBoxedPoint$Change"
         ],
         ctors: {
             $ctor1: function (x, y) {
@@ -28081,7 +27815,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2486.Linear", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2486.IKernel$1(System.Array.type(System.String))],
         alias: [
-        "Function", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2486$IKernel$1$System$String$Array$Function"
+            "Function", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2486$IKernel$1$System$String$Array$Function"
         ],
         methods: {
             Function: function (x) {
@@ -28093,7 +27827,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2486.Linear1", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2486.IKernel$1(System.Array.type(System.Double))],
         alias: [
-        "Function", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2486$IKernel$1$System$Double$Array$Function"
+            "Function", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2486$IKernel$1$System$Double$Array$Function"
         ],
         methods: {
             Function: function (x) {
@@ -28105,7 +27839,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2486.Linear2", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2486.IKernel$1(System.Array.type(System.Double, 2))],
         alias: [
-        "Function", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2486$IKernel$1$System$Double$Array$2$Function"
+            "Function", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2486$IKernel$1$System$Double$Array$2$Function"
         ],
         methods: {
             Function: function (x) {
@@ -28117,7 +27851,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2486.Linear3", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2486.IKernel$1(System.Collections.Generic.List$1(System.Double))],
         alias: [
-        "Function", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2486$IKernel$1$System$Collections$Generic$List$1$System$Double$Function"
+            "Function", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2486$IKernel$1$System$Collections$Generic$List$1$System$Double$Function"
         ],
         methods: {
             Function: function (x) {
@@ -28162,9 +27896,6 @@ Bridge.$N1391Result =                     r;
                 this.Server = "";
                 this.System = "NT";
             }
-        },
-        methods: {
-
         }
     });
 
@@ -28174,7 +27905,7 @@ Bridge.$N1391Result =                     r;
             X: null
         },
         alias: [
-        "F", "Bridge$ClientTest$Batch3$BridgeIssues$IBridge304$F"
+            "F", "Bridge$ClientTest$Batch3$BridgeIssues$IBridge304$F"
         ],
         methods: {
             F: function (x) {
@@ -28237,9 +27968,6 @@ Bridge.$N1391Result =                     r;
                 this.$initialize();
                 Bridge.ClientTest.Batch3.BridgeIssues.Bridge522.BaseClass.ctor.call(this);
             }
-        },
-        methods: {
-
         }
     });
 
@@ -28352,7 +28080,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C15", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C14,Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I9$1(System.Int32)],
         alias: [
-        "Invoke", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I9$1$System$Int32$Invoke$1"
+            "Invoke", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I9$1$System$Int32$Invoke$1"
         ]
     });
 
@@ -28368,7 +28096,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C21", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C20],
         alias: [
-        "Foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I10$Foo"
+            "Foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I10$Foo"
         ],
         methods: {
             Foo: function () {
@@ -28380,7 +28108,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C24", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C23,Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I10],
         alias: [
-        "Foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I10$Foo"
+            "Foo", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I10$Foo"
         ]
     });
 
@@ -28408,7 +28136,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.CClass$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.IClass$1(T)],
         alias: [
-        "Act", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1821$IInterface$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1821$TT$1$" + Bridge.getTypeAlias(T) + "$Act"
+            "Act", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1821$IInterface$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge1821$TT$1$" + Bridge.getTypeAlias(T) + "$Act"
         ],
         methods: {
             Act: function (v) {
@@ -28496,9 +28224,6 @@ Bridge.$N1391Result =                     r;
         },
         properties: {
             Value3: Bridge.getDefaultValue(T)
-        },
-        methods: {
-
         }
     }; });
 
@@ -28510,9 +28235,6 @@ Bridge.$N1391Result =                     r;
             },
             properties: {
                 Value3: Bridge.getDefaultValue(T)
-            },
-            methods: {
-
             }
         }
     }; });

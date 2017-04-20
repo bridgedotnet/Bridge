@@ -3225,13 +3225,7 @@
         Bridge.SystemAssembly.compiler = "16.0.0";
     });
 
-    Bridge.define("Bridge.Utils.SystemAssemblyVersion", {
-        statics: {
-            methods: {
-
-            }
-        }
-    });
+    Bridge.define("Bridge.Utils.SystemAssemblyVersion");
 
     // @source Json.js
 
@@ -13843,9 +13837,9 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
             }
         },
         alias: [
-        "clone", "System$ICloneable$clone",
-        "compareTo", "System$IComparable$1$System$Version$compareTo",
-        "equalsT", "System$IEquatable$1$System$Version$equalsT"
+            "clone", "System$ICloneable$clone",
+            "compareTo", "System$IComparable$1$System$Version$compareTo",
+            "equalsT", "System$IEquatable$1$System$Version$equalsT"
         ],
         ctors: {
             $ctor3: function (major, minor, build, revision) {
@@ -19317,9 +19311,9 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
             _k: 0
         },
         alias: [
-        "equalsT", "System$IEquatable$1$System$Guid$equalsT",
-        "compareTo", "System$IComparable$1$System$Guid$compareTo",
-        "format", "System$IFormattable$format"
+            "equalsT", "System$IEquatable$1$System$Guid$equalsT",
+            "compareTo", "System$IComparable$1$System$Guid$compareTo",
+            "format", "System$IFormattable$format"
         ],
         ctors: {
             $ctor4: function (uuid) {
@@ -26140,7 +26134,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             disposed: false
         },
         alias: [
-        "dispose", "System$IDisposable$dispose"
+            "dispose", "System$IDisposable$dispose"
         ],
         ctors: {
             $ctor1: function (callback, state, dueTime, period) {

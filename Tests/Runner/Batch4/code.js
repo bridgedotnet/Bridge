@@ -685,7 +685,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             value: 0
         },
         alias: [
-        "compareTo", "System$IComparable$1$Bridge$ClientTest$Batch4$Collections$Generic$ComparerTests$C$compareTo"
+            "compareTo", "System$IComparable$1$Bridge$ClientTest$Batch4$Collections$Generic$ComparerTests$C$compareTo"
         ],
         ctors: {
             ctor: function (value) {
@@ -1095,8 +1095,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.GenericDictionaryTests.TestEqualityComparer", {
         inherits: [System.Collections.Generic.EqualityComparer$1(System.String)],
         alias: [
-        "equals2", "System$Collections$Generic$IEqualityComparer$1$System$String$equals2",
-        "getHashCode2", "System$Collections$Generic$IEqualityComparer$1$System$String$getHashCode2"
+            "equals2", "System$Collections$Generic$IEqualityComparer$1$System$String$equals2",
+            "getHashCode2", "System$Collections$Generic$IEqualityComparer$1$System$String$getHashCode2"
         ],
         methods: {
             equals2: function (x, y) {
@@ -1223,14 +1223,14 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             }
         },
         alias: [
-        "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$String$getEnumerator",
-        "Count", "System$Collections$Generic$ICollection$1$System$String$Count",
-        "IsReadOnly", "System$Collections$Generic$ICollection$1$System$String$IsReadOnly",
-        "add", "System$Collections$Generic$ICollection$1$System$String$add",
-        "clear", "System$Collections$Generic$ICollection$1$System$String$clear",
-        "contains", "System$Collections$Generic$ICollection$1$System$String$contains",
-        "copyTo", "System$Collections$Generic$ICollection$1$System$String$copyTo",
-        "remove", "System$Collections$Generic$ICollection$1$System$String$remove"
+            "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$String$getEnumerator",
+            "Count", "System$Collections$Generic$ICollection$1$System$String$Count",
+            "IsReadOnly", "System$Collections$Generic$ICollection$1$System$String$IsReadOnly",
+            "add", "System$Collections$Generic$ICollection$1$System$String$add",
+            "clear", "System$Collections$Generic$ICollection$1$System$String$clear",
+            "contains", "System$Collections$Generic$ICollection$1$System$String$contains",
+            "copyTo", "System$Collections$Generic$ICollection$1$System$String$copyTo",
+            "remove", "System$Collections$Generic$ICollection$1$System$String$remove"
         ],
         ctors: {
             ctor: function (items) {
@@ -1547,22 +1547,22 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             }
         },
         alias: [
-        "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$getEnumerator",
-        "getItem", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$getItem",
-        "setItem", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$setItem",
-        "Keys", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$Keys",
-        "Values", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$Values",
-        "Count", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Count",
-        "IsReadOnly", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$IsReadOnly",
-        "add", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$add",
-        "copyTo", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$copyTo",
-        "add$1", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$add",
-        "remove$1", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$remove",
-        "containsKey", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$containsKey",
-        "tryGetValue", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$tryGetValue",
-        "clear", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$clear",
-        "contains", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$contains",
-        "remove", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$remove"
+            "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$getEnumerator",
+            "getItem", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$getItem",
+            "setItem", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$setItem",
+            "Keys", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$Keys",
+            "Values", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$Values",
+            "Count", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Count",
+            "IsReadOnly", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$IsReadOnly",
+            "add", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$add",
+            "copyTo", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$copyTo",
+            "add$1", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$add",
+            "remove$1", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$remove",
+            "containsKey", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$containsKey",
+            "tryGetValue", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$tryGetValue",
+            "clear", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$clear",
+            "contains", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$contains",
+            "remove", "System$Collections$Generic$ICollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$remove"
         ],
         ctors: {
             ctor: function () {
@@ -1673,7 +1673,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.IEnumerableTests.MyEnumerable", {
         inherits: [System.Collections.Generic.IEnumerable$1(System.String)],
         alias: [
-        "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$String$getEnumerator"
+            "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$String$getEnumerator"
         ],
         methods: {
             getEnumerator: function () {
@@ -1840,19 +1840,19 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             }
         },
         alias: [
-        "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$String$getEnumerator",
-        "Count", "System$Collections$Generic$ICollection$1$System$String$Count",
-        "IsReadOnly", "System$Collections$Generic$ICollection$1$System$String$IsReadOnly",
-        "add", "System$Collections$Generic$ICollection$1$System$String$add",
-        "clear", "System$Collections$Generic$ICollection$1$System$String$clear",
-        "contains", "System$Collections$Generic$ICollection$1$System$String$contains",
-        "copyTo", "System$Collections$Generic$ICollection$1$System$String$copyTo",
-        "remove", "System$Collections$Generic$ICollection$1$System$String$remove",
-        "getItem", "System$Collections$Generic$IList$1$System$String$getItem",
-        "setItem", "System$Collections$Generic$IList$1$System$String$setItem",
-        "indexOf", "System$Collections$Generic$IList$1$System$String$indexOf",
-        "insert", "System$Collections$Generic$IList$1$System$String$insert",
-        "removeAt", "System$Collections$Generic$IList$1$System$String$removeAt"
+            "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$String$getEnumerator",
+            "Count", "System$Collections$Generic$ICollection$1$System$String$Count",
+            "IsReadOnly", "System$Collections$Generic$ICollection$1$System$String$IsReadOnly",
+            "add", "System$Collections$Generic$ICollection$1$System$String$add",
+            "clear", "System$Collections$Generic$ICollection$1$System$String$clear",
+            "contains", "System$Collections$Generic$ICollection$1$System$String$contains",
+            "copyTo", "System$Collections$Generic$ICollection$1$System$String$copyTo",
+            "remove", "System$Collections$Generic$ICollection$1$System$String$remove",
+            "getItem", "System$Collections$Generic$IList$1$System$String$getItem",
+            "setItem", "System$Collections$Generic$IList$1$System$String$setItem",
+            "indexOf", "System$Collections$Generic$IList$1$System$String$indexOf",
+            "insert", "System$Collections$Generic$IList$1$System$String$insert",
+            "removeAt", "System$Collections$Generic$IList$1$System$String$removeAt"
         ],
         ctors: {
             ctor: function (items) {
@@ -3254,7 +3254,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.ListTests.TestReverseComparer", {
         inherits: [System.Collections.Generic.IComparer$1(System.Int32)],
         alias: [
-        "compare", "System$Collections$Generic$IComparer$1$System$Int32$compare"
+            "compare", "System$Collections$Generic$IComparer$1$System$Int32$compare"
         ],
         methods: {
             compare: function (x, y) {
@@ -6880,9 +6880,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 this._message = message;
                 this._innerException = innerException;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -7509,7 +7506,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.FormattableStringTests.MyFormatProvider", {
         inherits: [System.IFormatProvider],
         alias: [
-        "getFormat", "System$IFormatProvider$getFormat"
+            "getFormat", "System$IFormatProvider$getFormat"
         ],
         methods: {
             getFormat: function (type) {
@@ -7521,7 +7518,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.FormattableStringTests.MyFormattable", {
         inherits: [System.IFormattable],
         alias: [
-        "format", "System$IFormattable$format"
+            "format", "System$IFormattable$format"
         ],
         methods: {
             format: function (format, formatProvider) {
@@ -7809,7 +7806,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             other: null
         },
         alias: [
-        "compareTo", "System$IComparable$1$Bridge$ClientTest$Batch4$IComparableTests$MyComparable$compareTo"
+            "compareTo", "System$IComparable$1$Bridge$ClientTest$Batch4$IComparableTests$MyComparable$compareTo"
         ],
         methods: {
             compareTo: function (other) {
@@ -7857,7 +7854,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             other: null
         },
         alias: [
-        "equalsT", "System$IEquatable$1$Bridge$ClientTest$Batch4$IEquatableTests$MyEquatable$equalsT"
+            "equalsT", "System$IEquatable$1$Bridge$ClientTest$Batch4$IEquatableTests$MyEquatable$equalsT"
         ],
         methods: {
             equalsT: function (other) {
@@ -7885,7 +7882,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.IFormattableTests.MyFormatProvider", {
         inherits: [System.IFormatProvider],
         alias: [
-        "getFormat", "System$IFormatProvider$getFormat"
+            "getFormat", "System$IFormatProvider$getFormat"
         ],
         methods: {
             getFormat: function (formatType) {
@@ -7897,7 +7894,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.IFormattableTests.MyFormattable", {
         inherits: [System.IFormattable],
         alias: [
-        "format", "System$IFormattable$format"
+            "format", "System$IFormattable$format"
         ],
         methods: {
             format: function (format, provider) {
@@ -9921,7 +9918,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             _items: null
         },
         alias: [
-        "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"
+            "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"
         ],
         ctors: {
             ctor: function (items) {
@@ -9955,7 +9952,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests.MyList", {
         inherits: [System.Collections.IEnumerable],
         alias: [
-        "getEnumerator", "System$Collections$IEnumerable$getEnumerator"
+            "getEnumerator", "System$Collections$IEnumerable$getEnumerator"
         ],
         ctors: {
             ctor: function () {
@@ -11032,9 +11029,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     this.F3 = value;
                 }
             }
-        },
-        methods: {
-
         }
     });
 
@@ -11063,9 +11057,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     this.F3 = value;
                 }
             }
-        },
-        methods: {
-
         }
     }; });
 
@@ -11095,9 +11086,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                         Bridge.ClientTest.Batch4.PropertyAccessorTests.C1.FS3 = (value - 1) | 0;
                     }
                 }
-            },
-            methods: {
-
             }
         },
         fields: {
@@ -11124,9 +11112,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     this.F3 = (value - 1) | 0;
                 }
             }
-        },
-        methods: {
-
         }
     });
 
@@ -11156,9 +11141,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                         Bridge.ClientTest.Batch4.PropertyAccessorTests.C2$1(T).FS3 = value - 1;
                     }
                 }
-            },
-            methods: {
-
             }
         },
         fields: {
@@ -11185,9 +11167,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     this.F3 = value - 1;
                 }
             }
-        },
-        methods: {
-
         }
     }; });
 
@@ -11452,9 +11431,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 System.Attribute.ctor.call(this);
                 this.X = x;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -11474,9 +11450,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 System.Attribute.ctor.call(this);
                 this.X = x;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -11714,9 +11687,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 System.Attribute.ctor.call(this);
                 this.V = v;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -11731,9 +11701,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 System.Attribute.ctor.call(this);
                 this.V = v;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -11748,9 +11715,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 System.Attribute.ctor.call(this);
                 this.V = v;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -11765,9 +11729,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 System.Attribute.ctor.call(this);
                 this.V = v;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -11808,9 +11769,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 this.O = o;
                 this.T = t;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -11827,9 +11785,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 this.I = i;
                 this.S = s;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -11844,9 +11799,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 System.Attribute.ctor.call(this);
                 this.E = e;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -11858,9 +11810,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             P4: 0,
             F1: 0,
             F2: 0
-        },
-        methods: {
-
         }
     });
 
@@ -12284,9 +12233,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 System.Attribute.ctor.call(this);
                 this.I = i;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -13713,9 +13659,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 System.Attribute.ctor.call(this);
                 this.X = x;
             }
-        },
-        methods: {
-
         }
     });
 
@@ -13852,9 +13795,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 init: function () {
                     this.P3 = System.DateTime.getDefaultValue();
                 }
-            },
-            methods: {
-
             }
         },
         fields: {
@@ -13874,9 +13814,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 }
             },
             P10: null
-        },
-        methods: {
-
         }
     });
 
@@ -16075,11 +16012,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     });
 
     Bridge.define("Bridge.ClientTest.Batch4.ScriptTests", {
-        statics: {
-            methods: {
-
-            }
-        },
         methods: {
             EvalWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual(5, Bridge.unbox(eval("2 + 3")));
@@ -21168,7 +21100,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             _items: null
         },
         alias: [
-        "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"
+            "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"
         ],
         ctors: {
             ctor: function (items) {
@@ -21189,7 +21121,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.StringTests.MyFormatProvider", {
         inherits: [System.IFormatProvider],
         alias: [
-        "getFormat", "System$IFormatProvider$getFormat"
+            "getFormat", "System$IFormatProvider$getFormat"
         ],
         methods: {
             getFormat: function (type) {
@@ -21201,7 +21133,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.StringTests.MyFormattable", {
         inherits: [System.IFormattable],
         alias: [
-        "format", "System$IFormattable$format"
+            "format", "System$IFormattable$format"
         ],
         methods: {
             format: function (format, formatProvider) {
@@ -23505,7 +23437,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Thens: null
         },
         alias: [
-        "then", "Bridge$IPromise$then"
+            "then", "Bridge$IPromise$then"
         ],
         ctors: {
             ctor: function () {
@@ -23596,9 +23528,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Filled: null,
             Error: null,
             Progress: null
-        },
-        methods: {
-
         }
     });
 
@@ -23617,9 +23546,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             I: null,
             S: null,
             J: null
-        },
-        methods: {
-
         }
     });
 
@@ -25846,9 +25772,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     Bridge.ensureBaseProperty(this, "P3").$Bridge$ClientTest$Batch4$PropertyAccessorTests$B3$P3 = (value - 1) | 0;
                 }
             }
-        },
-        methods: {
-
         }
     });
 
@@ -25873,9 +25796,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     Bridge.ensureBaseProperty(this, "P3")["$Bridge$ClientTest$Batch4$PropertyAccessorTests$B4$1$" + Bridge.getTypeAlias(T)+"$P3"] = value - 1;
                 }
             }
-        },
-        methods: {
-
         }
     }; });
 

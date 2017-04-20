@@ -27,9 +27,6 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
                         return document.getElementById(Bridge.ClientTestHelper.HtmlHelper.TEST_FIXTURE_ELEMENT);
                     }
                 }
-            },
-            methods: {
-
             }
         }
     });
@@ -46,9 +43,6 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
                         return "1.2.3.4";
                     }
                 }
-            },
-            methods: {
-
             }
         }
     });

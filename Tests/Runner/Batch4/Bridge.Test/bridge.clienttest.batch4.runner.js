@@ -1872,11 +1872,6 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             QUnit.test("UserDefinedStructTests - GenericMutableValueTypeWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.UserDefinedStructTests.GenericMutableValueTypeWorks);
             QUnit.test("UserDefinedStructTests - CloningValueTypeWithNamedDefaultConstructorWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.UserDefinedStructTests.CloningValueTypeWithNamedDefaultConstructorWorks);
             QUnit.test("UserDefinedStructTests - CloningNullableValueTypesWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.UserDefinedStructTests.CloningNullableValueTypesWorks);
-        },
-        statics: {
-            methods: {
-
-            }
         }
     });
 

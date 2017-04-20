@@ -21,9 +21,6 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     Bridge.define("Generics.INamedEntity", {
         properties: {
             Name: null
-        },
-        methods: {
-
         }
     });
 
@@ -180,9 +177,6 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         inherits: [Generics.INamedEntity],
         properties: {
             Name$1: null
-        },
-        methods: {
-
         }
     });
 

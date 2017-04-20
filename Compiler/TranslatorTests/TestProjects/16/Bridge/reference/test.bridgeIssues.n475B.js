@@ -2,25 +2,27 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
     Bridge.define("Test.BridgeIssues.N475B.Bridge475Event", {
-        config: {
-            properties: {
-                Data: 0
-            }
+        properties: {
+            Data: 0
         },
-        PreventDefault: function () {
-            this.Data = 77;
+        methods: {
+            PreventDefault: function () {
+                this.Data = 77;
+            }
         }
     });
 
     Bridge.define("Test.BridgeIssues.N475B.Test", {
         statics: {
-            N475: function () {
-                var b = new Test.BridgeIssues.N475B.Bridge475();
-                b.KeyDown($asm.$.Test.BridgeIssues.N475B.Test.f1);
+            methods: {
+                N475: function () {
+                    var b = new Test.BridgeIssues.N475B.Bridge475();
+                    b.KeyDown($asm.$.Test.BridgeIssues.N475B.Test.f1);
 
-                b.KeyDown(4);
+                    b.KeyDown(4);
 
-                b.KeyDown("5");
+                    b.KeyDown("5");
+                }
             }
         }
     });
