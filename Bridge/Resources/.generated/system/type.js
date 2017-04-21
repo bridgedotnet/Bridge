@@ -1,25 +1,23 @@
     Bridge.define("System.Type", {
-        config: {
-            properties: {
-                prototype: null,
-                isPrimitive: {
-                    get: function () {
-                        return $asm.$.System.Type.f1(new (System.Collections.Generic.List$1(System.Type))()).contains(this);
+        props: {
+            prototype: null,
+            isPrimitive: {
+                get: function () {
+                    return $asm.$.System.Type.f1(new (System.Collections.Generic.List$1(System.Type))()).contains(this);
 
-                        // System.Decimal(decimal) ??
-                        // System.Int64
-                        // System.UInt64
-                        // System.Double
-                        // System.Single
-                        // System.Byte
-                        // System.SByte
-                        // System.Int16
-                        // System.UInt16
-                        // System.Int32
-                        // System.UInt32
-                        // Boolean
-                        // System.Char
-                    }
+                    // System.Decimal(decimal) ??
+                    // System.Int64
+                    // System.UInt64
+                    // System.Double
+                    // System.Single
+                    // System.Byte
+                    // System.SByte
+                    // System.Int16
+                    // System.UInt16
+                    // System.Int32
+                    // System.UInt32
+                    // Boolean
+                    // System.Char
                 }
             }
         }
