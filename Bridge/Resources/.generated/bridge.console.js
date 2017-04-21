@@ -34,46 +34,46 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                     var con = Bridge.global.console;
 
                     if (wl) {
-                            System.Console.WriteLine = function (value) {
-                                wl(value);
-                                Bridge.Console.log(value);
-                            }
+                        System.Console.WriteLine = function (value) {
+                            wl(value);
+                            Bridge.Console.log(value);
+                        }
                     }
 
                     if (debug) {
-                            System.Diagnostics.Debug.writeln = function (value) {
-                                debug(value);
-                                Bridge.Console.debug(value);
-                            }
+                        System.Diagnostics.Debug.writeln = function (value) {
+                            debug(value);
+                            Bridge.Console.debug(value);
+                        }
                     }
 
                     if (win) {
-                            Bridge.global.window.addEventListener("error", function (e) {
-                                var msg = e;
+                        Bridge.global.window.addEventListener("error", function (e) {
+                            var msg = e;
 
-                        	        if (e.error) {
-                        	                        msg = e.error.toString();
+                            if (e.error) {
+                                msg = e.error.toString();
 
-                                    if (e.error.stack) {
-                                        msg += '\n' + e.error.stack;
-                                    }
-                                } else if (e.message) {
-                                    msg = e.message;
-
-                                    if (e.filename && e.lineno && e.colno) {
-                                        msg += " (" + e.filename.substring(e.filename.lastIndexOf('/') + 1) + ", line " + e.lineno + " char " + e.colno + ")";
-                                    }
+                                if (e.error.stack) {
+                                    msg += '\n' + e.error.stack;
                                 }
+                            } else if (e.message) {
+                                msg = e.message;
 
-                                Bridge.Console.error(msg);
-                            });
+                                if (e.filename && e.lineno && e.colno) {
+                                    msg += " (" + e.filename.substring(e.filename.lastIndexOf('/') + 1) + ", line " + e.lineno + " char " + e.colno + ")";
+                                }
+                            }
+
+                            Bridge.Console.error(msg);
+                        });
                     }
 
                     if (con && con.error) {
-                            Bridge.global.console.error = function (msg) {
-                                error(msg);
-                                Bridge.Console.error(msg);
-                            }
+                        Bridge.global.console.error = function (msg) {
+                            error(msg);
+                            Bridge.Console.error(msg);
+                        }
                     }
                 },
                 logBase: function (value, messageType) {
@@ -83,7 +83,7 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                     var t = false;
 
                     if (value != null) {
-                            t = typeof value !== "object";
+                        t = typeof value !== "object";
 
                         if (Bridge.getType(value).isPrimitive || t) {
                             v = value == null ? "" : value.toString();
