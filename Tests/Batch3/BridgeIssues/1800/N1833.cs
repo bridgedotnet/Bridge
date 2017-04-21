@@ -22,9 +22,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             var x = new Attributes { Id = 12, Name = "test" };
             Assert.AreEqual(12, x.Id);
-            Assert.AreEqual(12, x["id"]);
+            Assert.AreEqual(12, x["Id"]);
             Assert.AreEqual("test", x.Name);
-            Assert.AreEqual("test", x["name"]);
+            Assert.AreEqual("test", x["Name"]);
         }
     }
 }

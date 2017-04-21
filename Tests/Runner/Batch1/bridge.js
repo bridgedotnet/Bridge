@@ -3236,7 +3236,7 @@
     Bridge.Json = {
         serialize: function (obj, settings, returnRaw, possibleType) {
             if (obj == null) {
-                if (settings && settings.ignoreNullValue) {
+                if (settings && settings.IgnoreNullValue) {
                     return;
                 }
 
@@ -3358,7 +3358,7 @@
                         throw new System.InvalidOperationException(Bridge.getTypeName(type) + " is not reflectable and cannot be serialized.");
                     }
 
-                    if (settings && settings.typeNameHandling) {
+                    if (settings && settings.TypeNameHandling) {
                         raw["$type"] = Bridge.Reflection.getTypeQName(type);
                     }
 
@@ -3380,7 +3380,7 @@
                         }
 
                         var properties = Bridge.Reflection.getMembers(type, 16, 28),
-                            camelCase = settings && settings.camelCasePropertyNames;
+                            camelCase = settings && settings.CamelCasePropertyNames;
 
                         for (i = 0; i < properties.length; i++) {
                             if (!!properties[i].g) {
@@ -3595,7 +3595,7 @@
 
                     return dictionary;
                 } else {
-                    if (settings && settings.typeNameHandling && raw["$type"] != null) {
+                    if (settings && settings.TypeNameHandling && raw["$type"] != null) {
                         type = Bridge.Reflection.getType(raw["$type"].split(",")[0]);
                     }
 
@@ -3620,7 +3620,7 @@
                     var properties = Bridge.Reflection.getMembers(type, 16, 4);
 
                     for (i = 0; i < properties.length; i++) {
-                        var camelCase = settings && settings.camelCasePropertyNames,
+                        var camelCase = settings && settings.CamelCasePropertyNames,
                             pname = camelCase
                                     ? (properties[i].n.charAt(0).toLowerCase() + properties[i].n.substr(1))
                                     : properties[i].n;

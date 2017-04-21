@@ -15682,7 +15682,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 },
                 CamelCaseSettingWorks: function () {
                     var json = "{\"intProp\":10}";
-                    var deserialized = Bridge.Json.deserialize(json, Bridge.ClientTest.DeserializationTests.Class2, { camelCasePropertyNames: true });
+                    var deserialized = Bridge.Json.deserialize(json, Bridge.ClientTest.DeserializationTests.Class2, { CamelCasePropertyNames: true });
                     Bridge.Test.NUnit.Assert.AreEqual(10, deserialized.IntProp);
 
                     json = "{\"IntProp\":10}";
@@ -15698,7 +15698,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     deserialized = Bridge.Json.deserialize(json, Bridge.ClientTest.DeserializationTests.Class3);
                     Bridge.Test.NUnit.Assert.Null(deserialized.StringProp);
 
-                    var jsonSettings = { ignoreNullValue: true };
+                    var jsonSettings = { IgnoreNullValue: true };
 
                     json = "{}";
                     deserialized = Bridge.Json.deserialize(json, Bridge.ClientTest.DeserializationTests.Class3, jsonSettings);
@@ -15723,8 +15723,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 TypeNameHandlingWorks: function () {
                     var persons = System.Array.init([new Bridge.ClientTest.DeserializationTests.Person(System.Guid.parse("{CEADF3CA-0EB4-43F3-A813-1266E16498AC}"), "John", "New-York", "Fifth Avenue"), new Bridge.ClientTest.DeserializationTests.Person(System.Guid.parse("{64F09E69-39FE-4D9C-BDB3-108CA2CCFAD9}"), "Mary", "London", "St Mary Axe")], Bridge.ClientTest.DeserializationTests.Person);
 
-                    var serialized = Bridge.Json.serialize(persons, { typeNameHandling: true });
-                    var entities = Bridge.Json.deserialize(serialized, System.Array.type(Bridge.ClientTest.DeserializationTests.INamedEntity), { typeNameHandling: true });
+                    var serialized = Bridge.Json.serialize(persons, { TypeNameHandling: true });
+                    var entities = Bridge.Json.deserialize(serialized, System.Array.type(Bridge.ClientTest.DeserializationTests.INamedEntity), { TypeNameHandling: true });
 
                     Bridge.Test.NUnit.Assert.AreEqual(persons.length, entities.length);
 
@@ -24324,12 +24324,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         methods: {
             TestObjectLiteral: function () {
                 var $t;
-                var c = { temp: "Frank" };
+                var c = { Temp: "Frank" };
                 var tempFrank = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.Config.prototype.GetTmp.call({  }, c);
                 Bridge.Test.NUnit.Assert.AreEqual$1("1: Frank", tempFrank, "Check call works");
 
-                var options = { data: { Name: c.temp } };
-                Bridge.Test.NUnit.Assert.AreEqual$1("Frank", Bridge.unbox(($t = options.data).Name), "External referenced default ObjectLiteral works");
+                var options = { Data: { Name: c.Temp } };
+                Bridge.Test.NUnit.Assert.AreEqual$1("Frank", Bridge.unbox(($t = options.Data).Name), "External referenced default ObjectLiteral works");
 
                 var bs = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.ctor();
                 Bridge.Test.NUnit.Assert.True(Bridge.isPlainObject(bs));
@@ -24337,12 +24337,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual("test", bs.field2);
                 Bridge.Test.NUnit.Assert.AreEqual(10, Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.prototype.GetField1.call(bs));
                 Bridge.Test.NUnit.Assert.AreEqual("test", Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.prototype.GetField2.call(bs));
-                Bridge.Test.NUnit.Assert.AreEqual(0, bs.prop1);
-                Bridge.Test.NUnit.Assert.AreEqual(10, bs.proxyField1);
-                Bridge.Test.NUnit.Assert.AreEqual("test", bs.proxyField2);
-                Bridge.Test.NUnit.Assert.AreEqual(0, bs.prop1);
-                Bridge.Test.NUnit.Assert.Null(bs.prop2);
-                Bridge.Test.NUnit.Assert.AreEqual(11, Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.staticProp);
+                Bridge.Test.NUnit.Assert.AreEqual(0, bs.Prop1);
+                Bridge.Test.NUnit.Assert.AreEqual(10, bs.ProxyField1);
+                Bridge.Test.NUnit.Assert.AreEqual("test", bs.ProxyField2);
+                Bridge.Test.NUnit.Assert.AreEqual(0, bs.Prop1);
+                Bridge.Test.NUnit.Assert.Null(bs.Prop2);
+                Bridge.Test.NUnit.Assert.AreEqual(11, Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.StaticProp);
 
                 var bs1 = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS.Create(3, "test3");
                 Bridge.Test.NUnit.Assert.True(Bridge.isPlainObject(bs1));
@@ -24366,7 +24366,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual(9, ds1.field);
                 Bridge.Test.NUnit.Assert.AreEqual(10, ds1.field1);
                 Bridge.Test.NUnit.Assert.AreEqual("test", ds1.field2);
-                Bridge.Test.NUnit.Assert.AreEqual(0, ds1.prop1);
+                Bridge.Test.NUnit.Assert.AreEqual(0, ds1.Prop1);
 
                 var ts = Bridge.ClientTest.ObjectLiteralTests.Bridge1529.TS.ctor();
                 Bridge.Test.NUnit.Assert.True(Bridge.isPlainObject(ts));
@@ -24379,7 +24379,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $literal: true,
         statics: {
             props: {
-                staticProp: {
+                StaticProp: {
                     get: function () {
                         return 11;
                     }
@@ -24400,11 +24400,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 (function (){
                     this.field1 = 0;
                     this.field2 = null;
-                    this.prop1 = 0;
-                    this.prop2 = null;
-                    this.proxyField1 = 0;
-                    this.proxyField2 = null;
-                    Object.defineProperty(this, "proxyField1", {
+                    this.Prop1 = 0;
+                    this.Prop2 = null;
+                    this.ProxyField1 = 0;
+                    this.ProxyField2 = null;
+                    Object.defineProperty(this, "ProxyField1", {
                         get: function () {
                             return this.field1;
                         },
@@ -24413,7 +24413,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         },
                         enumerable: true
                     });
-                    Object.defineProperty(this, "proxyField2", {
+                    Object.defineProperty(this, "ProxyField2", {
                         get: function () {
                             return this.field2;
                         },
@@ -24458,7 +24458,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         $literal: true,
         methods: {
             GetTmp: function (config) {
-                return System.String.concat("1: ", config.temp);
+                return System.String.concat("1: ", config.Temp);
             }
         }
     });
@@ -24468,33 +24468,33 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Test: function () {
                 var config1 = Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config1.ctor();
                 Bridge.Test.NUnit.Assert.NotNull$1(config1, "DefaultValue and Construtor Modes config1 created");
-                Bridge.Test.NUnit.Assert.AreEqual$1(1, config1.val1, "config1 Val1");
-                Bridge.Test.NUnit.Assert.AreEqual$1(11, config1.val2, "config1 Val2");
+                Bridge.Test.NUnit.Assert.AreEqual$1(1, config1.Val1, "config1 Val1");
+                Bridge.Test.NUnit.Assert.AreEqual$1(11, config1.Val2, "config1 Val2");
 
-                var config2 = { val1: 2, val2: 0 };
+                var config2 = { Val1: 2, Val2: 0 };
                 Bridge.Test.NUnit.Assert.NotNull$1(config2, "DefaultValue and Plain Modes config2 created");
-                Bridge.Test.NUnit.Assert.AreEqual$1(2, config2.val1, "config2 Val1");
-                Bridge.Test.NUnit.Assert.AreEqual$1(0, config2.val2, "config2 Val2");
+                Bridge.Test.NUnit.Assert.AreEqual$1(2, config2.Val1, "config2 Val1");
+                Bridge.Test.NUnit.Assert.AreEqual$1(0, config2.Val2, "config2 Val2");
 
                 var config3 = Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config3.ctor();
                 Bridge.Test.NUnit.Assert.NotNull$1(config3, "Ignore and Construtor Modes config3 created");
-                Bridge.Test.NUnit.Assert.AreEqual$1(3, config3.val1, "config3 Val1");
-                Bridge.Test.NUnit.Assert.AreEqual$1(13, config3.val2, "config3 Val2");
+                Bridge.Test.NUnit.Assert.AreEqual$1(3, config3.Val1, "config3 Val1");
+                Bridge.Test.NUnit.Assert.AreEqual$1(13, config3.Val2, "config3 Val2");
 
                 var config4 = {  };
                 Bridge.Test.NUnit.Assert.NotNull$1(config4, "Ignore and Plain Modes config4 created");
-                Bridge.Test.NUnit.Assert.Null$1(config4.val1, "config4 Val1");
-                Bridge.Test.NUnit.Assert.Null$1(config4.val2, "config4 Val2");
+                Bridge.Test.NUnit.Assert.Null$1(config4.Val1, "config4 Val1");
+                Bridge.Test.NUnit.Assert.Null$1(config4.Val2, "config4 Val2");
 
                 var config5 = Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config5.ctor();
                 Bridge.Test.NUnit.Assert.NotNull$1(config5, "Initializer and Construtor Modes config5 created");
-                Bridge.Test.NUnit.Assert.AreEqual$1(5, config5.val1, "config5 Val1");
-                Bridge.Test.NUnit.Assert.AreEqual$1(15, config5.val2, "config5 Val2");
+                Bridge.Test.NUnit.Assert.AreEqual$1(5, config5.Val1, "config5 Val1");
+                Bridge.Test.NUnit.Assert.AreEqual$1(15, config5.Val2, "config5 Val2");
 
-                var config6 = { val1: 6 };
+                var config6 = { Val1: 6 };
                 Bridge.Test.NUnit.Assert.NotNull$1(config6, "Initializer and Plain Modes config6 created");
-                Bridge.Test.NUnit.Assert.AreEqual$1(6, config6.val1, "config6 Val1");
-                Bridge.Test.NUnit.Assert.Null$1(config6.val2, "config6 Val2");
+                Bridge.Test.NUnit.Assert.AreEqual$1(6, config6.Val1, "config6 Val1");
+                Bridge.Test.NUnit.Assert.Null$1(config6.Val2, "config6 Val2");
             }
         }
     });
@@ -24506,9 +24506,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var $this = {};
                 $this.$getType = function () { return Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config1; };
                 (function (){
-                    this.val1 = 1;
-                    this.val2 = 0;
-                    this.val2 = 11;
+                    this.Val1 = 1;
+                    this.Val2 = 0;
+                    this.Val2 = 11;
                 }).call($this);
                 return $this;
             }
@@ -24522,9 +24522,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var $this = {};
                 $this.$getType = function () { return Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config3; };
                 (function (){
-                    this.val1 = 3;
-                    this.val2 = 0;
-                    this.val2 = 13;
+                    this.Val1 = 3;
+                    this.Val2 = 0;
+                    this.Val2 = 13;
                 }).call($this);
                 return $this;
             }
@@ -24538,9 +24538,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var $this = {};
                 $this.$getType = function () { return Bridge.ClientTest.ObjectLiteralTests.CreateAndInitializationModesTests.Config5; };
                 (function (){
-                    this.val1 = 5;
-                    this.val2 = 0;
-                    this.val2 = 15;
+                    this.Val1 = 5;
+                    this.Val2 = 0;
+                    this.Val2 = 15;
                 }).call($this);
                 return $this;
             }
@@ -24552,23 +24552,23 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Test: function () {
                 var config1 = Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config1.ctor();
                 Bridge.Test.NUnit.Assert.NotNull$1(config1, "Default Mode config1 created");
-                Bridge.Test.NUnit.Assert.AreEqual$1(1, config1.val1, "config1 Val1");
-                Bridge.Test.NUnit.Assert.AreEqual$1(11, config1.val2, "config1 Val2");
+                Bridge.Test.NUnit.Assert.AreEqual$1(1, config1.Val1, "config1 Val1");
+                Bridge.Test.NUnit.Assert.AreEqual$1(11, config1.Val2, "config1 Val2");
 
                 var config2 = Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config2.ctor();
                 Bridge.Test.NUnit.Assert.NotNull$1(config2, "Constructor Mode config2 created");
-                Bridge.Test.NUnit.Assert.AreEqual$1(2, config2.val1, "config2 Val1");
-                Bridge.Test.NUnit.Assert.AreEqual$1(12, config2.val2, "config2 Val2");
+                Bridge.Test.NUnit.Assert.AreEqual$1(2, config2.Val1, "config2 Val1");
+                Bridge.Test.NUnit.Assert.AreEqual$1(12, config2.Val2, "config2 Val2");
 
                 var config3 = {  };
                 Bridge.Test.NUnit.Assert.NotNull$1(config3, "Plain Mode config3 created");
-                Bridge.Test.NUnit.Assert.Null$1(config3.val1, "config3 Val1");
-                Bridge.Test.NUnit.Assert.Null$1(config3.val2, "config3 Val2");
+                Bridge.Test.NUnit.Assert.Null$1(config3.Val1, "config3 Val1");
+                Bridge.Test.NUnit.Assert.Null$1(config3.Val2, "config3 Val2");
 
                 var config4 = {  };
                 Bridge.Test.NUnit.Assert.NotNull$1(config4, "Plain Mode config4 created");
-                Bridge.Test.NUnit.Assert.Null$1(config4.val1, "config4 Val1");
-                Bridge.Test.NUnit.Assert.Null$1(config4.val2, "config4 Val2");
+                Bridge.Test.NUnit.Assert.Null$1(config4.Val1, "config4 Val1");
+                Bridge.Test.NUnit.Assert.Null$1(config4.Val2, "config4 Val2");
             }
         }
     });
@@ -24580,9 +24580,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var $this = {};
                 $this.$getType = function () { return Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config1; };
                 (function (){
-                    this.val1 = 1;
-                    this.val2 = 0;
-                    this.val2 = 11;
+                    this.Val1 = 1;
+                    this.Val2 = 0;
+                    this.Val2 = 11;
                 }).call($this);
                 return $this;
             }
@@ -24596,9 +24596,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var $this = {};
                 $this.$getType = function () { return Bridge.ClientTest.ObjectLiteralTests.CreateModeTests.Config2; };
                 (function (){
-                    this.val1 = 2;
-                    this.val2 = 0;
-                    this.val2 = 12;
+                    this.Val1 = 2;
+                    this.Val2 = 0;
+                    this.Val2 = 12;
                 }).call($this);
                 return $this;
             }
@@ -24610,23 +24610,23 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Test: function () {
                 var config1 = {  };
                 Bridge.Test.NUnit.Assert.NotNull$1(config1, "Default Mode config1 created");
-                Bridge.Test.NUnit.Assert.Null$1(config1.val1, "config1 Val1");
-                Bridge.Test.NUnit.Assert.Null$1(config1.val2, "config1 Val2");
+                Bridge.Test.NUnit.Assert.Null$1(config1.Val1, "config1 Val1");
+                Bridge.Test.NUnit.Assert.Null$1(config1.Val2, "config1 Val2");
 
-                var config2 = { val1: 2, val2: 0 };
+                var config2 = { Val1: 2, Val2: 0 };
                 Bridge.Test.NUnit.Assert.NotNull$1(config2, "DefaultValue Mode config2 created");
-                Bridge.Test.NUnit.Assert.AreEqual$1(2, config2.val1, "config2 Val1");
-                Bridge.Test.NUnit.Assert.AreEqual$1(0, config2.val2, "config2 Val2");
+                Bridge.Test.NUnit.Assert.AreEqual$1(2, config2.Val1, "config2 Val1");
+                Bridge.Test.NUnit.Assert.AreEqual$1(0, config2.Val2, "config2 Val2");
 
-                var config3 = { val1: 3 };
+                var config3 = { Val1: 3 };
                 Bridge.Test.NUnit.Assert.NotNull$1(config3, "Initializer Mode config3 created");
-                Bridge.Test.NUnit.Assert.AreEqual$1(3, config3.val1, "config3 Val1");
-                Bridge.Test.NUnit.Assert.Null$1(config3.val2, "config3 Val2");
+                Bridge.Test.NUnit.Assert.AreEqual$1(3, config3.Val1, "config3 Val1");
+                Bridge.Test.NUnit.Assert.Null$1(config3.Val2, "config3 Val2");
 
                 var config4 = {  };
                 Bridge.Test.NUnit.Assert.NotNull$1(config4, "Ignore Mode config4 created");
-                Bridge.Test.NUnit.Assert.Null$1(config4.val1, "config4 Val1");
-                Bridge.Test.NUnit.Assert.Null$1(config4.val2, "config4 Val2");
+                Bridge.Test.NUnit.Assert.Null$1(config4.Val1, "config4 Val1");
+                Bridge.Test.NUnit.Assert.Null$1(config4.Val2, "config4 Val2");
             }
         }
     });
@@ -29811,7 +29811,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 },
                 CamelCaseSettingWorks: function () {
                     var c = new Bridge.ClientTest.SerializationTests.Class2();
-                    var json = Bridge.Json.serialize(c, { camelCasePropertyNames: true });
+                    var json = Bridge.Json.serialize(c, { CamelCasePropertyNames: true });
                     Bridge.Test.NUnit.Assert.AreEqual("{\"intProp\":0}", json);
 
                     json = Bridge.Json.serialize(c);
@@ -29819,7 +29819,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 },
                 IgnoreNullValueWorks: function () {
                     var c = new Bridge.ClientTest.SerializationTests.Class3();
-                    var json = Bridge.Json.serialize(c, { ignoreNullValue: true });
+                    var json = Bridge.Json.serialize(c, { IgnoreNullValue: true });
                     Bridge.Test.NUnit.Assert.AreEqual("{}", json);
 
                     json = Bridge.Json.serialize(c);
@@ -29828,7 +29828,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 TypeNameHandlingWorks: function () {
                     var c = new Bridge.ClientTest.SerializationTests.Class3();
 
-                    var json = Bridge.Json.serialize(c, { typeNameHandling: true });
+                    var json = Bridge.Json.serialize(c, { TypeNameHandling: true });
 
                     Bridge.Test.NUnit.Assert.AreEqual("{\"$type\":\"Bridge.ClientTest.SerializationTests+Class3, Bridge.ClientTest\",\"StringProp\":null}", json);
                 },

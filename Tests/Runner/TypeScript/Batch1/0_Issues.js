@@ -115,9 +115,9 @@ QUnit.test("#2474", function (assert) {
     assert.equal(e10, "VALUE", "StringNameUpperCase");
 });
 QUnit.test("#2463", function (assert) {
-    var ol = { nothing: 1 };
+    var ol = { Nothing: 1 };
     TypeScript.Issues.N2463.Do(ol);
-    assert.equal(ol.nothing, 2);
+    assert.equal(ol.Nothing, 2);
 });
 QUnit.test("#2493", function (assert) {
     var op1 = new N2493Operation1();
