@@ -18326,6 +18326,104 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2523", {
+        statics: {
+            methods: {
+                TestAsyncConditionalAccess: function () {
+                    var $step = 0,
+                        $task1, 
+                        $taskResult1, 
+                        $jumpFromFinally, 
+                        done, 
+                        result, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            for (;;) {
+                                $step = System.Array.min([0,1], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        done = Bridge.Test.NUnit.Assert.Async();
+                                        $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2523.Class1.ReturnObject(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2523.Class2());
+                                        $step = 1;
+                                        $task1.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 1: {
+                                        $taskResult1 = $task1.getAwaitedResult();
+                                        result = $taskResult1;
+                                        Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(result));
+                                        done();
+                                        return;
+                                    }
+                                    default: {
+                                        return;
+                                    }
+                                }
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2523.Class1", {
+        statics: {
+            methods: {
+                ReturnObject: function (class2) {
+                    var $step = 0,
+                        $task1, 
+                        $taskResult1, 
+                        $jumpFromFinally, 
+                        $tcs = new System.Threading.Tasks.TaskCompletionSource(), 
+                        $returnValue, 
+                        $async_e, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            try {
+                                for (;;) {
+                                    $step = System.Array.min([0,1], $step);
+                                    switch ($step) {
+                                        case 0: {
+                                            $task1 = (class2 != null ? class2.ReturnObject2() : null);
+                                            $step = 1;
+                                            $task1.continueWith($asyncBody);
+                                            return;
+                                        }
+                                        case 1: {
+                                            $taskResult1 = $task1.getAwaitedResult();
+                                            $tcs.setResult({  });
+                                            return;
+                                        }
+                                        default: {
+                                            $tcs.setResult(null);
+                                            return;
+                                        }
+                                    }
+                                }
+                            } catch($async_e1) {
+                                $async_e = System.Exception.create($async_e1);
+                                $tcs.setException($async_e);
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                    return $tcs.task;
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2523.Class2", {
+        methods: {
+            ReturnObject2: function () {
+                var tcs = new System.Threading.Tasks.TaskCompletionSource();
+                tcs.setResult({  });
+
+                return tcs.task;
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge266A", {
         statics: {
             methods: {
