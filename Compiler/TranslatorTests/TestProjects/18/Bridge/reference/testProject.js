@@ -5,7 +5,7 @@
                 var $this = {};
                 $this.$getType = function () { return Options3; };
                 (function (){
-                    this.id = null;
+                    this.Id = null;
                 }).call($this);
                 return $this;
             }
