@@ -16,7 +16,7 @@
                 TestIssue434.Issue434A.DoSomething(4);
             },
             DoSomething: function DoSomething(i) {
-                Bridge.Console.log(i);
+                System.Console.WriteLine(i);
             }
         }
     });
@@ -41,7 +41,7 @@
                 TestIssue434.Issue434B.DoSomething(4);
             },
             DoSomething: function DoSomething(i) {
-                Bridge.Console.log(i);
+                System.Console.WriteLine(i);
             }
         }
     });

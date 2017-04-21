@@ -19,10 +19,10 @@
 
     Bridge.apply($asm.$.TestIssue958.Issue958, {
         f1: function (action) {
-            Bridge.Console.log(System.String.concat("Name: ", action.Name));
+            System.Console.WriteLine(System.String.concat("Name: ", action.Name));
         },
         f2: function (action) {
-            Bridge.Console.log(System.String.concat("Value: ", action.Value));
+            System.Console.WriteLine(System.String.concat("Value: ", action.Value));
         }
     });
 
