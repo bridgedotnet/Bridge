@@ -201,6 +201,12 @@ namespace Test.BridgeIssues.N2567
                 /*@
                    var multilineInjectTop = 3;
                  */
+                /*@
+                 *  var multilineInjectWithAsteriskAndWhitespaceOffsetTop = 4;
+                 */
+                /*@
+                    var multilineInjectAndWhitespaceOffsetTop = 5;
+                 */
                 return true;
             });
         }
@@ -246,6 +252,12 @@ namespace Test.BridgeIssues.N2567
                  */
                 /*@
                    var multilineInjectBottom = 3;
+                 */
+                /*@
+                 *  var multilineInjectWithAsteriskAndWhitespaceOffsetBottom = 4;
+                 */
+                /*@
+                    var multilineInjectAndWhitespaceOffsetBottom = 5;
                  */
                 return true;
             });
@@ -293,6 +305,12 @@ namespace Test.BridgeIssues.N2567
                 /*@
                    var multilineInjectAfter = 3;
                  */
+                /*@
+                 *  var multilineInjectWithAsteriskAndWhitespaceOffsetAfter = 4;
+                 */
+                /*@
+                    var multilineInjectAndWhitespaceOffsetAfter = 5;
+                 */
                 return true;
             });
         }
@@ -338,6 +356,12 @@ namespace Test.BridgeIssues.N2567
                  */
                 /*@
                    var multilineInjectBefore = 3;
+                 */
+                /*@
+                 *  var multilineInjectWithAsteriskAndWhitespaceOffsetBefore = 4;
+                 */
+                /*@
+                    var multilineInjectAndWhitespaceOffsetBefore = 5;
                  */
                 return true;
             });
