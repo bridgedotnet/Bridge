@@ -6,16 +6,14 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             Test1: function () {
                 var blable = "";
                 /* 
-                vBoubli (@"/faaa");
-            */
+                   vBoubli (@"/faaa");
+                */
 
                 return blable;
             },
             Test2: function () {
                 var blable = "";
-                
-                vBoubli (@"/faaa");
-            
+                    vBoubli (@"/faaa");
 
                 return blable;
             }

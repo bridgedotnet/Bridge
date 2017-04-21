@@ -40,8 +40,8 @@
         $literal: true,
         ctor: function () {
             var $this = {};
-            $this.$getType = function() { return TestIssue2141.Config3; };
-            (function(){
+            $this.$getType = function () { return TestIssue2141.Config3; };
+            (function (){
                 this.id = null;
             }).call($this);
             return $this;

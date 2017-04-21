@@ -40,7 +40,7 @@ namespace Bridge.Translator
                     }
                     else if (rr.Type.FullName == "Bridge.InitAttribute")
                     {
-                        int initPosition = 0;
+                        InitPosition initPosition = InitPosition.After;
 
                         if (attr.HasArgumentList)
                         {
@@ -50,7 +50,7 @@ namespace Bridge.Translator
                                 var argrr = this.Emitter.Resolver.ResolveNode(argExpr, this.Emitter);
                                 if (argrr.ConstantValue is int)
                                 {
-                                    initPosition = (int)argrr.ConstantValue;
+                                    initPosition = (InitPosition)argrr.ConstantValue;
                                 }
                             }
                         }

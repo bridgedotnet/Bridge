@@ -491,43 +491,43 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
 });
 
 QUnit.testDone(function (details) {
-        // It will add a UI elements to show CS source for the Test (If CS source data found in the context)
+    // It will add a UI elements to show CS source for the Test (If CS source data found in the context)
 
-        //if (details.Failed <= 0)
-        //{
-        //    return;
-        //}
+    //if (details.Failed <= 0)
+    //{
+    //    return;
+    //}
 
-        var ctx = Bridge.Test.Runtime.ContextHelper.GetContext();
+    var ctx = Bridge.Test.Runtime.ContextHelper.GetContext();
 
-        if (ctx == null || (ctx.TestCtx == null && ctx.FixtureCtx == null)) {
-            return;
-        }
+    if (ctx == null || (ctx.TestCtx == null && ctx.FixtureCtx == null)) {
+        return;
+    }
 
-        var testId = Bridge.Test.Runtime.ContextHelper.GetTestId(details);
+    var testId = Bridge.Test.Runtime.ContextHelper.GetTestId(details);
 
-        if (testId == null) {
-            return;
-        }
+    if (testId == null) {
+        return;
+    }
 
-        var testItem = Bridge.Test.Runtime.ContextHelper.GetTestOutput(testId);
+    var testItem = Bridge.Test.Runtime.ContextHelper.GetTestOutput(testId);
 
-        if (testItem != null) {
-            Bridge.Test.Runtime.ContextHelper.AdjustSourceElement(ctx, testItem);
-        }
-    });
+    if (testItem != null) {
+        Bridge.Test.Runtime.ContextHelper.AdjustSourceElement(ctx, testItem);
+    }
+});
 QUnit.log(function (details) {
-        // It will update a UI elements to show test source (JS) for the assertion (If the JS source (Stack) data found in the context)
+    // It will update a UI elements to show test source (JS) for the assertion (If the JS source (Stack) data found in the context)
 
-        var ctx = Bridge.Test.Runtime.ContextHelper.GetContext();
+    var ctx = Bridge.Test.Runtime.ContextHelper.GetContext();
 
-        if (ctx == null || ctx.Stack == null) {
-            return;
-        }
+    if (ctx == null || ctx.Stack == null) {
+        return;
+    }
 
-        var testId = Bridge.Test.Runtime.ContextHelper.GetTestId(details);
+    var testId = Bridge.Test.Runtime.ContextHelper.GetTestId(details);
 
-        var source = Bridge.Test.Runtime.ContextHelper.GetTestSource$1(testId);
+    var source = Bridge.Test.Runtime.ContextHelper.GetTestSource$1(testId);
 
-        Bridge.Test.Runtime.ContextHelper.UpdateTestSource(source, ctx.Stack);
-    });
+    Bridge.Test.Runtime.ContextHelper.UpdateTestSource(source, ctx.Stack);
+});
