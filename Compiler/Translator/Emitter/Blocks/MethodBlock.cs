@@ -45,6 +45,15 @@ namespace Bridge.Translator
 
         protected virtual void EmitMethods(Dictionary<string, List<MethodDeclaration>> methods, Dictionary<string, List<EntityDeclaration>> properties, Dictionary<OperatorType, List<OperatorDeclaration>> operators)
         {
+            int pos = this.Emitter.Output.Length;
+            var writerInfo = this.SaveWriter();
+
+            this.EnsureComma();
+            this.Write(JS.Fields.METHODS);
+            this.WriteColon();
+            this.BeginBlock();
+            int checkPos = this.Emitter.Output.Length;
+
             var names = new List<string>(properties.Keys);
 
             foreach (var name in names)
@@ -64,29 +73,6 @@ namespace Bridge.Translator
                     else if (prop is IndexerDeclaration)
                     {
                         this.Emitter.VisitIndexerDeclaration((IndexerDeclaration)prop);
-                    }
-                }
-            }
-
-            if (!this.StaticBlock)
-            {
-                MethodDeclaration entryPoint = null;
-                if (this.TypeInfo.StaticMethods.Any(group =>
-                {
-                    return group.Value.Any(method =>
-                    {
-                        var result = Helpers.IsEntryPointMethod(this.Emitter, method);
-                        if (result)
-                        {
-                            entryPoint = method;
-                        }
-                        return result;
-                    });
-                }))
-                {
-                    if (!entryPoint.Body.IsNull)
-                    {
-                        this.Emitter.VisitMethodDeclaration(entryPoint);
                     }
                 }
             }
@@ -146,6 +132,19 @@ namespace Bridge.Translator
                     this.EndBlock();
                     this.Emitter.Comma = true;
                 }
+            }
+
+            if (checkPos == this.Emitter.Output.Length)
+            {
+                this.Emitter.IsNewLine = writerInfo.IsNewLine;
+                this.Emitter.ResetLevel(writerInfo.Level);
+                this.Emitter.Comma = writerInfo.Comma;
+                this.Emitter.Output.Length = pos;
+            }
+            else
+            {
+                this.WriteNewLine();
+                this.EndBlock();
             }
         }
 

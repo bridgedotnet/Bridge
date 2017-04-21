@@ -8,21 +8,23 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
 
     Bridge.define("Bridge.ClientTestHelper.ClassLibraryTest", {
         statics: {
-            Test: function (item) {
-                item.Bridge$ClientTestHelper$IWriteableItem$SetValue(Bridge.box(2, System.Int32));
+            methods: {
+                Test: function (item) {
+                    item.Bridge$ClientTestHelper$IWriteableItem$SetValue(Bridge.box(2, System.Int32));
+                }
             }
         }
     });
 
     Bridge.define("Bridge.ClientTestHelper.HtmlHelper", {
         statics: {
-            TEST_FIXTURE_ELEMENT: "qunit-fixture",
-            config: {
-                properties: {
-                    FixtureElement: {
-                        get: function () {
-                            return document.getElementById(Bridge.ClientTestHelper.HtmlHelper.TEST_FIXTURE_ELEMENT);
-                        }
+            fields: {
+                TEST_FIXTURE_ELEMENT: "qunit-fixture"
+            },
+            props: {
+                FixtureElement: {
+                    get: function () {
+                        return document.getElementById(Bridge.ClientTestHelper.HtmlHelper.TEST_FIXTURE_ELEMENT);
                     }
                 }
             }
@@ -35,12 +37,10 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
 
     Bridge.define("Bridge.ClientTestHelper.N1193", {
         statics: {
-            config: {
-                properties: {
-                    ClientTestHelperAssemblyVersion: {
-                        get: function () {
-                            return "1.2.3.4";
-                        }
+            props: {
+                ClientTestHelperAssemblyVersion: {
+                    get: function () {
+                        return "1.2.3.4";
                     }
                 }
             }
@@ -49,8 +49,10 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
 
     Bridge.define("Bridge.ClientTestHelper.N2190", {
         statics: {
-            Greeting: function () {
-                return "Hi";
+            methods: {
+                Greeting: function () {
+                    return "Hi";
+                }
             }
         }
     });

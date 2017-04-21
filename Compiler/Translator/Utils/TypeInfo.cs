@@ -188,9 +188,9 @@ namespace Bridge.Translator
                                 var argrr = emitter.Resolver.ResolveNode(expr, emitter);
                                 if (argrr.ConstantValue is int)
                                 {
-                                    var value = (int)argrr.ConstantValue;
+                                    var value = (InitPosition)argrr.ConstantValue;
 
-                                    if (value == 1 || value == 2)
+                                    if (value == InitPosition.Before || value == InitPosition.Top)
                                     {
                                         return false;
                                     }

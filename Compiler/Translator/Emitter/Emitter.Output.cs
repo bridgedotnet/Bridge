@@ -18,7 +18,6 @@ namespace Bridge.Translator
         public const string NEW_LINE = "\n";
         public const char NEW_LINE_CHAR = '\n';
         public const string CRLF = "\r\n";
-        public const string TAB = "\t";
 
         protected StringBuilder Write(StringBuilder dest, string s, int? position = null)
         {

@@ -1,5 +1,5 @@
 /* 
-    A custom comment
+   A custom comment
 */
 
 Bridge.assembly("TestProject", function ($asm, globals) {
@@ -9,5 +9,5 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 });
 
 /* 
-    A custom comment
+   A custom comment
 */

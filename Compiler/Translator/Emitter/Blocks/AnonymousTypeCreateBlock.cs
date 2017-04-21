@@ -127,16 +127,20 @@ namespace Bridge.Translator
             this.BeginBlock();
             this.Emitter.Comma = false;
             this.GenereateCtor(type);
-            //this.GenereateGetters(config);
+
+            this.EnsureComma();
+            this.Write(JS.Fields.METHODS);
+            this.WriteColon();
+            this.BeginBlock();
+
             this.GenereateEquals(config);
             this.GenerateHashCode(config);
             this.GenereateToJSON(config);
-            this.GenereateMetadata(config);
 
-            /*if (this.Emitter.IsAnonymousReflectable)
-            {
-                this.GenereateMetadata(config);
-            }*/
+            this.WriteNewLine();
+            this.EndBlock();
+
+            this.GenereateMetadata(config);
 
             this.WriteNewLine();
             this.EndBlock();
@@ -155,6 +159,9 @@ namespace Bridge.Translator
             this.WriteColon();
             this.WriteScript(TypeKind.Anonymous.ToString().ToLowerInvariant());
             this.WriteComma(true);
+            this.Write(JS.Fields.CTORS);
+            this.WriteColon();
+            this.BeginBlock();
             this.Write(JS.Funcs.CONSTRUCTOR + ": function (");
             foreach (var property in type.Properties)
             {
@@ -175,6 +182,8 @@ namespace Bridge.Translator
             }
 
             this.EndBlock();
+            this.WriteNewLine();
+            this.EndBlock();
             this.Emitter.Comma = true;
         }
 
@@ -187,9 +196,16 @@ namespace Bridge.Translator
                 this.EnsureComma();
                 this.Write("statics : ");
                 this.BeginBlock();
+
+                this.Write(JS.Fields.METHODS);
+                this.WriteColon();
+                this.BeginBlock();
+
                 this.Write("$metadata : function () { return ");
                 this.Write(meta.ToString(Formatting.None));
                 this.Write("; }");
+                this.WriteNewLine();
+                this.EndBlock();
                 this.WriteNewLine();
                 this.EndBlock();
             }
@@ -237,8 +253,6 @@ namespace Bridge.Translator
             this.EndBlock();
             this.Emitter.Comma = true;
         }
-
-
 
         private void GenerateHashCode(IAnonymousTypeConfig config)
         {

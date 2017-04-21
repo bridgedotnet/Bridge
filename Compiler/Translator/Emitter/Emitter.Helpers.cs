@@ -301,7 +301,7 @@ namespace Bridge.Translator
                         var argExpr = attr.PositionalArguments.First();
                         if (argExpr.ConstantValue is int)
                         {
-                            var value = (int)argExpr.ConstantValue;
+                            var value = (InitPosition)argExpr.ConstantValue;
 
                             if (value > 0)
                             {
