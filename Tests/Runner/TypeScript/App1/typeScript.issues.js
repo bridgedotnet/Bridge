@@ -30,7 +30,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         fields: {
             _isUnspecified: false
         },
-        properties: {
+        props: {
             IsUnspecified: {
                 get: function () {
                     return this._isUnspecified;
@@ -51,7 +51,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
             _forward: null,
             _reverse: null
         },
-        properties: {
+        props: {
             Forward: null,
             Reverse: null
         },
@@ -114,7 +114,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     }; });
 
     Bridge.define("TypeScript.Issues.N2264", {
-        properties: {
+        props: {
             Values: null
         },
         ctors: {
@@ -131,7 +131,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         fields: {
             isDefaultCtor: false
         },
-        properties: {
+        props: {
             Attribute: 0
         },
         ctors: {
@@ -285,7 +285,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
 
     Bridge.define("TypeScript.Issues.N2029", {
         inherits: [TypeScript.Issues.N2029Interface$1(System.Int32)],
-        properties: {
+        props: {
             Value1: 0
         },
         alias: [

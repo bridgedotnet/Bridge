@@ -707,7 +707,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal", {
         statics: {
-            properties: {
+            props: {
                 Prop1: System.Decimal(0.0)
             },
             methods: {
@@ -863,7 +863,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Integer", {
         statics: {
-            properties: {
+            props: {
                 Prop1: 0
             },
             methods: {
@@ -1321,7 +1321,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         fields: {
             data: 0
         },
-        properties: {
+        props: {
             Prop1: {
                 get: function () {
                     return this.data;
@@ -1956,7 +1956,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1160A", {
-        properties: {
+        props: {
             Processor: {
                 get: function () {
                     return $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1160A.f1;
@@ -2349,7 +2349,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1171.ObjectA", {
-        properties: {
+        props: {
             FieldA: null
         }
     });
@@ -2995,19 +2995,19 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1219.TestClass1", {
-        properties: {
+        props: {
             LongProperty: System.Int64(0)
         }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1219.TestClass2", {
-        properties: {
+        props: {
             ULongProperty: System.UInt64(0)
         }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1219.TestClass3", {
-        properties: {
+        props: {
             DecimalProperty: System.Decimal(0.0)
         }
     });
@@ -3209,7 +3209,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1232.ClassA", {
-        properties: {
+        props: {
             A: null,
             Number: 0
         },
@@ -3230,7 +3230,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1232.ClassB", {
-        properties: {
+        props: {
             A: null,
             S: null,
             Number: 0
@@ -3846,7 +3846,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 }
             }
         },
-        properties: {
+        props: {
             Value: 0
         },
         ctors: {
@@ -3872,7 +3872,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1296.MessageId(); }
             }
         },
-        properties: {
+        props: {
             Value: 0
         },
         ctors: {
@@ -3958,7 +3958,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304", {
         statics: {
-            properties: {
+            props: {
                 Output: {
                     get: function () {
                         return Bridge.Console.Instance.bufferedOutput;
@@ -4272,13 +4272,13 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1305.DataClass", {
-        properties: {
+        props: {
             Value: 0
         }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1305.DataStruct", {
-        properties: {
+        props: {
             Value: 0
         }
     });
@@ -4446,7 +4446,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1328.ClassLink3", {
-        properties: {
+        props: {
             Url: null,
             Text: null
         },
@@ -4484,7 +4484,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 getDefaultValue: function () { return new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1328.Optional3$1(T))(); }
             }
         },
-        properties: {
+        props: {
             Value: Bridge.getDefaultValue(T)
         },
         ctors: {
@@ -4602,7 +4602,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1328.StructLink3(); }
             }
         },
-        properties: {
+        props: {
             Url: null,
             Text: null
         },
@@ -4953,7 +4953,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         fields: {
             Value2: Bridge.getDefaultValue(T)
         },
-        properties: {
+        props: {
             Value1: Bridge.getDefaultValue(T)
         },
         ctors: {
@@ -5001,7 +5001,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         fields: {
             Value2: Bridge.getDefaultValue(K)
         },
-        properties: {
+        props: {
             Value1: Bridge.getDefaultValue(T)
         },
         ctors: {
@@ -5033,7 +5033,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         fields: {
             Value2: Bridge.getDefaultValue(T)
         },
-        properties: {
+        props: {
             Value1: Bridge.getDefaultValue(T)
         }
     }; });
@@ -5042,7 +5042,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         fields: {
             Value2: Bridge.getDefaultValue(K)
         },
-        properties: {
+        props: {
             Value1: Bridge.getDefaultValue(T)
         }
     }; });
@@ -5052,7 +5052,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             fields: {
                 Value2: Bridge.getDefaultValue(T)
             },
-            properties: {
+            props: {
                 Value1: Bridge.getDefaultValue(T)
             }
         }
@@ -5063,7 +5063,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             fields: {
                 Value2: Bridge.getDefaultValue(K)
             },
-            properties: {
+            props: {
                 Value1: Bridge.getDefaultValue(T)
             }
         }
@@ -5705,13 +5705,13 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeClassA", {
-        properties: {
+        props: {
             Value1: 0
         }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeClassB", {
-        properties: {
+        props: {
             Value1: 0,
             Value2: null
         },
@@ -5729,7 +5729,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeStructA(); }
             }
         },
-        properties: {
+        props: {
             Value1: 0
         },
         ctors: {
@@ -5763,7 +5763,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeStructA1(); }
             }
         },
-        properties: {
+        props: {
             Value1: 0
         },
         ctors: {
@@ -5797,7 +5797,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1341.SomeStructA2(); }
             }
         },
-        properties: {
+        props: {
             Value2: 0
         },
         ctors: {
@@ -5923,7 +5923,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1374", {
         statics: {
-            properties: {
+            props: {
                 Value: 0
             },
             methods: {
@@ -5983,7 +5983,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1374.ScopeContainer", {
-        properties: {
+        props: {
             Value: 0
         },
         methods: {
@@ -5995,7 +5995,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1378", {
         statics: {
-            properties: {
+            props: {
                 x: 0
             },
             methods: {
@@ -6398,7 +6398,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             fields: {
                 builder: null
             },
-            properties: {
+            props: {
                 Builder: {
                     get: function () {
                         var $t;
@@ -6467,7 +6467,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             fields: {
                 builder: null
             },
-            properties: {
+            props: {
                 Builder: {
                     get: function () {
                         var $t;
@@ -6545,7 +6545,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1410", {
         statics: {
-            properties: {
+            props: {
                 X: {
                     set: function (value) {
                     }
@@ -6640,7 +6640,7 @@ Bridge.$N1391Result =                     r;
                 }
             }
         },
-        properties: {
+        props: {
             Data: 0
         },
         ctors: {
@@ -6660,7 +6660,7 @@ Bridge.$N1391Result =                     r;
                 }
             }
         },
-        properties: {
+        props: {
             Data: 0
         }
     });
@@ -6781,7 +6781,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo", {
-        properties: {
+        props: {
             Value: 0
         },
         methods: {
@@ -6852,7 +6852,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1458", {
         statics: {
-            properties: {
+            props: {
                 Output: {
                     get: function () {
                         return Bridge.Console.Instance.bufferedOutput;
@@ -7007,13 +7007,13 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1467.AnotherClass", {
-        properties: {
+        props: {
             Value: 0
         }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1467.SomeClass1", {
-        properties: {
+        props: {
             Value: 0
         }
     });
@@ -7122,7 +7122,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1485.TestName", {
-        properties: {
+        props: {
             Data: 0
         },
         ctors: {
@@ -7783,7 +7783,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1526", {
         statics: {
-            properties: {
+            props: {
                 StaticProperty1: {
                     get: function () {
                         var levelKey = { };
@@ -7815,7 +7815,7 @@ Bridge.$N1391Result =                     r;
                 }
             }
         },
-        properties: {
+        props: {
             Property1: {
                 get: function () {
                     var i = { v : 1 };
@@ -7988,7 +7988,7 @@ Bridge.$N1391Result =                     r;
             events: {
                 test: null
             },
-            properties: {
+            props: {
                 test1: 0
             },
             methods: {
@@ -8410,7 +8410,7 @@ Bridge.$N1391Result =                     r;
             fields: {
                 _empty: null
             },
-            properties: {
+            props: {
                 Empty: {
                     get: function () {
                         return Bridge.ClientTest.Batch3.BridgeIssues.Bridge1684.Set$1(T)._empty;
@@ -8423,7 +8423,7 @@ Bridge.$N1391Result =                     r;
                 }
             }
         },
-        properties: {
+        props: {
             Count: {
                 get: function () {
                     return 1;
@@ -8475,7 +8475,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1698", {
         statics: {
-            properties: {
+            props: {
                 Output: {
                     get: function () {
                         return Bridge.Console.Instance.bufferedOutput;
@@ -8582,7 +8582,7 @@ Bridge.$N1391Result =                     r;
             fields: {
                 _empty: null
             },
-            properties: {
+            props: {
                 Empty: {
                     get: function () {
                         return Bridge.ClientTest.Batch3.BridgeIssues.Bridge1702.Set$1(T)._empty;
@@ -8765,7 +8765,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712", {
         statics: {
-            properties: {
+            props: {
                 Buffer: null
             }
         },
@@ -9295,7 +9295,7 @@ Bridge.$N1391Result =                     r;
             SOME_EVENT: null,
             ANOTHER_EVENt: null
         },
-        properties: {
+        props: {
             PROP1: null
         },
         methods: {
@@ -9409,7 +9409,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.List1$1", function (T) { return {
         inherits: [System.Collections.Generic.IList$1(T)],
-        properties: {
+        props: {
             System$Collections$Generic$ICollection$1$T$Count: {
                 get: function () {
                     return 100;
@@ -9473,7 +9473,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.List2$1", function (T) { return {
         inherits: [System.Collections.Generic.IList$1(T)],
-        properties: {
+        props: {
             Count: {
                 get: function () {
                     return 1000;
@@ -10323,7 +10323,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1810.C$1", function (T) { return {
         inherits: [System.Collections.Generic.IList$1(T)],
-        properties: {
+        props: {
             System$Collections$Generic$ICollection$1$T$Count: {
                 get: function () {
                     throw new System.NotImplementedException();
@@ -10550,7 +10550,7 @@ Bridge.$N1391Result =                     r;
     }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.Foo", {
-        properties: {
+        props: {
             A: {
                 get: function () {
                     return new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.Bar$1(System.Nullable$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.Xxx)))(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1821.Xxx.$ctor1(5));
@@ -10644,7 +10644,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1833.AttributeBase", {
-        properties: {
+        props: {
             Id: 0
         }
     });
@@ -10785,7 +10785,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1845.Base2", {
-        properties: {
+        props: {
             ctor$1: {
                 get: function () {
                     return 1;
@@ -11049,7 +11049,7 @@ Bridge.$N1391Result =                     r;
     }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1854.UseReader$1", function (T) { return {
-        properties: {
+        props: {
             Reader: null,
             Reader1: null
         },
@@ -11077,7 +11077,7 @@ Bridge.$N1391Result =                     r;
         fields: {
             changed: null
         },
-        properties: {
+        props: {
             Changed: {
                 get: function () {
                     return this.changed || ((this.changed = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856.Signal$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1856.CollectionChangeArgs$1(T)))("Collection<T>.Changed")));
@@ -11098,7 +11098,7 @@ Bridge.$N1391Result =                     r;
         fields: {
             children: null
         },
-        properties: {
+        props: {
             Children: {
                 get: function () {
                     if (this.children == null) {
@@ -11179,7 +11179,7 @@ Bridge.$N1391Result =                     r;
         fields: {
             _v: null
         },
-        properties: {
+        props: {
             v: {
                 get: function () {
                     return this._v;
@@ -11370,7 +11370,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1875.ClassA", {
-        properties: {
+        props: {
             Id: System.Int64(0)
         }
     });
@@ -11428,7 +11428,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1878.classA", {
-        properties: {
+        props: {
             DecimalNumber: System.Decimal(0.0),
             LongNumber: System.Int64(0)
         }
@@ -11617,7 +11617,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1884.Foo", {
-        properties: {
+        props: {
             Items: null,
             Items1: null,
             Indexed: null,
@@ -11724,7 +11724,7 @@ Bridge.$N1391Result =                     r;
         fields: {
             value: null
         },
-        properties: {
+        props: {
             length: 0
         },
         ctors: {
@@ -11831,7 +11831,7 @@ Bridge.$N1391Result =                     r;
         fields: {
             getValue: 0
         },
-        properties: {
+        props: {
             Value: {
                 get: function () {
                     return this.getValue;
@@ -11869,7 +11869,7 @@ Bridge.$N1391Result =                     r;
         fields: {
             value: 0
         },
-        properties: {
+        props: {
             Value: {
                 get: function () {
                     return this.value;
@@ -11906,7 +11906,7 @@ Bridge.$N1391Result =                     r;
         fields: {
             value: 0
         },
-        properties: {
+        props: {
             Value: 0
         },
         ctors: {
@@ -12020,7 +12020,7 @@ Bridge.$N1391Result =                     r;
         fields: {
             value: null
         },
-        properties: {
+        props: {
             Value1: {
                 get: function () {
                     return Bridge.cast(this.value, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1910.ItemValue);
@@ -12147,7 +12147,7 @@ Bridge.$N1391Result =                     r;
         fields: {
             value: null
         },
-        properties: {
+        props: {
             Value: {
                 get: function () {
                     return this.value;
@@ -12702,7 +12702,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2003.Helper", {
-        properties: {
+        props: {
             SomeProp: 0
         },
         methods: {
@@ -12750,7 +12750,7 @@ Bridge.$N1391Result =                     r;
         inherits: function () { return [System.IEquatable$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1(T))]; },
         $kind: "struct",
         statics: {
-            properties: {
+            props: {
                 Missing: {
                     get: function () {
                         return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2011.Optional$1(T)._missing;
@@ -12880,7 +12880,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2024.Class2.Inner", {
         statics: {
-            properties: {
+            props: {
                 $Name: {
                     get: function () {
                         return "Test";
@@ -12902,7 +12902,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027", {
         statics: {
-            properties: {
+            props: {
                 Status: {
                     get: function () {
                         return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2027.Options.Whatever;
@@ -13077,7 +13077,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2048.Base", {
-        properties: {
+        props: {
             property: {
                 get: function () {
                     return false;
@@ -13823,7 +13823,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080", {
         statics: {
-            properties: {
+            props: {
                 TestProperty1: false
             },
             methods: {
@@ -13862,7 +13862,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080.TestClass", {
-        properties: {
+        props: {
             TestProperty: false
         }
     });
@@ -13876,7 +13876,7 @@ Bridge.$N1391Result =                     r;
         fields: {
             b: false
         },
-        properties: {
+        props: {
             TestProperty: {
                 get: function () {
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080.TestClass2.GetCount = (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2080.TestClass2.GetCount + 1) | 0;
@@ -14069,7 +14069,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.T", {
-        properties: {
+        props: {
             ShouldSeeThis: 0
         }
     });
@@ -14182,7 +14182,7 @@ Bridge.$N1391Result =                     r;
             fields: {
                 STestField: 1
             },
-            properties: {
+            props: {
                 "0p1": 0
             }
         },
@@ -14192,7 +14192,7 @@ Bridge.$N1391Result =                     r;
             "0l": System.Int64(0),
             "0a4": 0
         },
-        properties: {
+        props: {
             "0p": 0
         },
         ctors: {
@@ -14308,7 +14308,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("_Bridge2135_1");
 
     Bridge.define("_Bridge2135_1.Config", {
-        properties: {
+        props: {
             Msg: null
         }
     });
@@ -14320,7 +14320,7 @@ Bridge.$N1391Result =                     r;
     }; });
 
     Bridge.define("_Bridge2135_2.Class2_1$1.Config", {
-        properties: {
+        props: {
             Msg: null
         }
     });
@@ -14328,7 +14328,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("_Bridge2135_3");
 
     Bridge.define("_Bridge2135_3.Config$1", function (T) { return {
-        properties: {
+        props: {
             Msg: null
         }
     }; });
@@ -14340,14 +14340,14 @@ Bridge.$N1391Result =                     r;
     }; });
 
     Bridge.define("_Bridge2135_4.Class4_1$1.Config", function (T) { return {
-        properties: {
+        props: {
             Msg: null
         }
     }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2137", {
         statics: {
-            properties: {
+            props: {
                 E1: null,
                 E2: null
             },
@@ -14367,7 +14367,7 @@ Bridge.$N1391Result =                     r;
                 }
             }
         },
-        properties: {
+        props: {
             E3: null,
             E4: null
         },
@@ -14432,7 +14432,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Elem$1", function (T) { return {
-        properties: {
+        props: {
             Itms: null
         },
         ctors: {
@@ -14548,7 +14548,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2146", {
         statics: {
-            properties: {
+            props: {
                 TokenTerminator: 0
             },
             methods: {
@@ -14775,7 +14775,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2157.TestClass", {
-        properties: {
+        props: {
             TestIntProperty: 0,
             TestStringProperty: null,
             TestObjectProperty: null
@@ -14894,7 +14894,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2167.Data", {
-        properties: {
+        props: {
             p1: System.Decimal(0.0),
             p2: System.Decimal(0.0)
         }
@@ -15030,7 +15030,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2186", {
         statics: {
-            properties: {
+            props: {
                 Output: {
                     get: function () {
                         return Bridge.Console.Instance.bufferedOutput;
@@ -15354,7 +15354,7 @@ Bridge.$N1391Result =                     r;
             fields: {
                 instance: null
             },
-            properties: {
+            props: {
                 Instance: {
                     get: function () {
                         if (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2210.GoSington$1(T).instance == null) {
@@ -15371,7 +15371,7 @@ Bridge.$N1391Result =                     r;
             fields: {
                 instance: null
             },
-            properties: {
+            props: {
                 Instance: {
                     get: function () {
                         if (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2210.ObjSingleton$1(T).instance == null) {
@@ -15408,7 +15408,7 @@ Bridge.$N1391Result =                     r;
             AssistantsRoot: null,
             ParentNode: null
         },
-        properties: {
+        props: {
             IsAssistantRoot: {
                 get: function () {
                     return Bridge.referenceEquals((this.ParentNode != null ? this.ParentNode.AssistantsRoot : null), this);
@@ -15682,7 +15682,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2249.c1", {
-        properties: {
+        props: {
             p1: "test"
         }
     });
@@ -15779,11 +15779,11 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2279.NestedClass", {
         statics: {
-            properties: {
+            props: {
                 Value2: "test2"
             }
         },
-        properties: {
+        props: {
             Value: "test1"
         }
     });
@@ -15856,7 +15856,7 @@ Bridge.$N1391Result =                     r;
                 getDefaultValue: function () { return new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2281.Optional$1(T))(); }
             }
         },
-        properties: {
+        props: {
             IsDefined: false,
             Value: Bridge.getDefaultValue(T)
         },
@@ -15939,7 +15939,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2284.Person", {
-        properties: {
+        props: {
             NAME: null,
             Name2: null,
             Name3: null,
@@ -16117,7 +16117,7 @@ Bridge.$N1391Result =                     r;
         fields: {
             any: null
         },
-        properties: {
+        props: {
             config: null
         },
         ctors: {
@@ -16837,7 +16837,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant", {
-        properties: {
+        props: {
             Common: null,
             Light: null,
             Indoor: false
@@ -16846,7 +16846,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plants", {
         statics: {
-            properties: {
+            props: {
                 Flowers: {
                     get: function () {
                         return $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plants.f1(new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant))());
@@ -17027,7 +17027,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2374.Person", {
-        properties: {
+        props: {
             CreatedOn: null,
             CreatedOnNullable: null
         },
@@ -17052,7 +17052,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2375.Person", {
-        properties: {
+        props: {
             FirstName: "Test value"
         }
     });
@@ -17098,7 +17098,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2393.c1", {
-        properties: {
+        props: {
             p1: null
         }
     });
@@ -17177,7 +17177,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge240A", {
-        properties: {
+        props: {
             Data: 0
         }
     });
@@ -17409,7 +17409,7 @@ Bridge.$N1391Result =                     r;
                 getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2454.MyStruct(); }
             }
         },
-        properties: {
+        props: {
             X1: 0,
             X2: 0
         },
@@ -17755,7 +17755,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2467.MyStruct", {
         $kind: "struct",
         statics: {
-            properties: {
+            props: {
                 Example: null
             },
             ctors: {
@@ -17767,7 +17767,7 @@ Bridge.$N1391Result =                     r;
                 getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2467.MyStruct(); }
             }
         },
-        properties: {
+        props: {
             Value: 0
         },
         ctors: {
@@ -18071,7 +18071,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2497.ConnectOptions", {
-        properties: {
+        props: {
             BrandName: {
                 get: function () {
                     return this.Provider.toString();
@@ -18091,7 +18091,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2497.GeneralOptions", {
-        properties: {
+        props: {
             CurrentCulture: null,
             CurrentUICulture: null
         },
@@ -18104,7 +18104,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2497.Options", {
-        properties: {
+        props: {
             TraceLevels: null
         },
         ctors: {
@@ -18115,7 +18115,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2497.ServerOptions", {
-        properties: {
+        props: {
             ApplicationType: null
         },
         ctors: {
@@ -18188,7 +18188,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2499.Named", {
-        properties: {
+        props: {
             Name: null
         }
     });
@@ -18405,7 +18405,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge305", {
         inherits: [System.Collections.Generic.IEnumerable$1(System.String)],
-        properties: {
+        props: {
             Items: null
         },
         alias: [
@@ -18460,14 +18460,14 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341A", {
-        properties: {
+        props: {
             Str: null
         }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge341B", {
         inherits: function () { return [System.IEquatable$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge341B)]; },
-        properties: {
+        props: {
             Str: null
         },
         alias: [
@@ -18491,7 +18491,7 @@ Bridge.$N1391Result =                     r;
         fields: {
             _backingDictionary: null
         },
-        properties: {
+        props: {
             Keys: {
                 get: function () {
                     return this._backingDictionary.getKeys();
@@ -18652,7 +18652,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge395", {
-        properties: {
+        props: {
             Id: null,
             data: 0
         }
@@ -18670,7 +18670,7 @@ Bridge.$N1391Result =                     r;
                 getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge407(); }
             }
         },
-        properties: {
+        props: {
             A: 0
         },
         ctors: {
@@ -18698,7 +18698,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge418", {
-        properties: {
+        props: {
             Delegate: null
         },
         methods: {
@@ -18773,7 +18773,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge467", {
-        properties: {
+        props: {
             MyProperty: 0
         },
         methods: {
@@ -18804,7 +18804,7 @@ Bridge.$N1391Result =                     r;
                 }
             }
         },
-        properties: {
+        props: {
             Data: 0
         },
         alias: [
@@ -19144,7 +19144,7 @@ Bridge.$N1391Result =                     r;
             fields: {
                 count: 0
             },
-            properties: {
+            props: {
                 QUnitAsyncDone: null
             },
             methods: {
@@ -19416,7 +19416,7 @@ Bridge.$N1391Result =                     r;
         events: {
             Fired: null
         },
-        properties: {
+        props: {
             Counter: 0
         },
         methods: {
@@ -20212,7 +20212,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge559A3", {
-        properties: {
+        props: {
             Data: null
         },
         ctors: {
@@ -20340,7 +20340,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge566A", {
-        properties: {
+        props: {
             Data: null
         },
         ctors: {
@@ -20417,7 +20417,7 @@ Bridge.$N1391Result =                     r;
                 getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge577.Bridge577UnitB(); }
             }
         },
-        properties: {
+        props: {
             Number: 0
         },
         ctors: {
@@ -20762,7 +20762,7 @@ Bridge.$N1391Result =                     r;
             fields: {
                 _default: null
             },
-            properties: {
+            props: {
                 Default: {
                     get: function () {
                         return Bridge.ClientTest.Batch3.BridgeIssues.Bridge588C.C1._default;
@@ -20775,7 +20775,7 @@ Bridge.$N1391Result =                     r;
                 }
             }
         },
-        properties: {
+        props: {
             Value: null
         },
         ctors: {
@@ -20791,7 +20791,7 @@ Bridge.$N1391Result =                     r;
             fields: {
                 _default: null
             },
-            properties: {
+            props: {
                 Default: {
                     get: function () {
                         return Bridge.ClientTest.Batch3.BridgeIssues.Bridge588C.C2._default;
@@ -20804,7 +20804,7 @@ Bridge.$N1391Result =                     r;
                 }
             }
         },
-        properties: {
+        props: {
             Name: null
         },
         ctors: {
@@ -21091,7 +21091,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge603Class", {
-        properties: {
+        props: {
             Data: null
         }
     });
@@ -21127,7 +21127,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge606B", {
-        properties: {
+        props: {
             X: null,
             Y: null
         },
@@ -21141,7 +21141,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge606C", {
-        properties: {
+        props: {
             X: null,
             Y: null
         },
@@ -21632,7 +21632,7 @@ Bridge.$N1391Result =                     r;
                 }
             }
         },
-        properties: {
+        props: {
             Value: null
         },
         ctors: {
@@ -21810,7 +21810,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge660MessageEditState", {
-        properties: {
+        props: {
             Content: null
         },
         ctors: {
@@ -21837,7 +21837,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge660Optional$1", function (T) { return {
         $kind: "struct",
         statics: {
-            properties: {
+            props: {
                 Missing: {
                     get: function () {
                         return Bridge.ClientTest.Batch3.BridgeIssues.Bridge660Optional$1(T)._missing.$clone();
@@ -21857,7 +21857,7 @@ Bridge.$N1391Result =                     r;
             value: Bridge.getDefaultValue(T),
             isDefined: false
         },
-        properties: {
+        props: {
             IsDefined: {
                 get: function () {
                     return this.isDefined;
@@ -21898,7 +21898,7 @@ Bridge.$N1391Result =                     r;
     }; });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge660TextInputState", {
-        properties: {
+        props: {
             Text: null
         },
         ctors: {
@@ -22123,7 +22123,7 @@ Bridge.$N1391Result =                     r;
                 }
             }
         },
-        properties: {
+        props: {
             Value: null
         },
         ctors: {
@@ -22530,7 +22530,7 @@ Bridge.$N1391Result =                     r;
         fields: {
             field1: 0
         },
-        properties: {
+        props: {
             Prop1: {
                 get: function () {
                     return this.field1;
@@ -22572,7 +22572,7 @@ Bridge.$N1391Result =                     r;
                 getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge692.B3(); }
             }
         },
-        properties: {
+        props: {
             Prop1: {
                 get: function () {
                     return 0;
@@ -22599,7 +22599,7 @@ Bridge.$N1391Result =                     r;
         fields: {
             field1: 0
         },
-        properties: {
+        props: {
             Prop1: {
                 get: function () {
                     return this.field1;
@@ -22644,7 +22644,7 @@ Bridge.$N1391Result =                     r;
         fields: {
             field1: 0
         },
-        properties: {
+        props: {
             Prop1: {
                 get: function () {
                     return this.field1;
@@ -22688,7 +22688,7 @@ Bridge.$N1391Result =                     r;
                 getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge692.C3(); }
             }
         },
-        properties: {
+        props: {
             Prop1: 0
         },
         ctors: {
@@ -23026,7 +23026,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge733", {
         statics: {
-            properties: {
+            props: {
                 DateA: null
             },
             ctors: {
@@ -23228,7 +23228,7 @@ Bridge.$N1391Result =                     r;
                 getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge762B(); }
             }
         },
-        properties: {
+        props: {
             Data: 0
         },
         ctors: {
@@ -23303,7 +23303,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge777", {
         statics: {
-            properties: {
+            props: {
                 SomeProperty: null,
                 P1: null,
                 P2: null
@@ -23402,7 +23402,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge785.DataClass", {
-        properties: {
+        props: {
             Value: 0
         },
         methods: {
@@ -23421,7 +23421,7 @@ Bridge.$N1391Result =                     r;
                 getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge785.DataStruct(); }
             }
         },
-        properties: {
+        props: {
             Value: 0
         },
         ctors: {
@@ -23607,7 +23607,7 @@ Bridge.$N1391Result =                     r;
                 getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge795A(); }
             }
         },
-        properties: {
+        props: {
             Value: 0
         },
         ctors: {
@@ -23662,7 +23662,7 @@ Bridge.$N1391Result =                     r;
                 getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge795B(); }
             }
         },
-        properties: {
+        props: {
             Value: 0
         },
         ctors: {
@@ -23748,7 +23748,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge815.A", {
-        properties: {
+        props: {
             Property: null
         },
         methods: {
@@ -24311,7 +24311,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge861A", {
-        properties: {
+        props: {
             MyId: 0,
             Delegates: null
         },
@@ -24402,7 +24402,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge882_Static", {
         statics: {
-            properties: {
+            props: {
                 Sum: 0
             },
             ctors: {
@@ -24430,7 +24430,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge882_Static.Bridge882_A_Static", {
         statics: {
-            properties: {
+            props: {
                 Sum: 0
             },
             ctors: {
@@ -25549,7 +25549,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge991", {
         statics: {
-            properties: {
+            props: {
                 Prop: 0
             },
             methods: {
@@ -25977,7 +25977,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.N2460.Point2D", {
-        properties: {
+        props: {
             X: {
                 get: function () {
                     return this[0];
@@ -25998,7 +25998,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Person383", {
-        properties: {
+        props: {
             Name: null
         }
     });
@@ -26007,7 +26007,7 @@ Bridge.$N1391Result =                     r;
         fields: {
             MyType: null
         },
-        properties: {
+        props: {
             MyOtherType: {
                 get: function () {
                     return this.MyType;
@@ -26847,7 +26847,7 @@ Bridge.$N1391Result =                     r;
         events: {
             Event1: null
         },
-        properties: {
+        props: {
             Prop1: {
                 get: function () {
                     return 2;
@@ -26915,7 +26915,7 @@ Bridge.$N1391Result =                     r;
             i1: 0,
             i2: 0
         },
-        properties: {
+        props: {
             Bridge$ClientTest$Batch3$BridgeIssues$Bridge1025$I1$Prop1: {
                 get: function () {
                     return this.i1;
@@ -26956,7 +26956,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C3", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I1,Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I2],
-        properties: {
+        props: {
             Prop1: 0
         },
         alias: [
@@ -27175,7 +27175,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.C1$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.I1$1(T)],
-        properties: {
+        props: {
             Count: {
                 get: function () {
                     return 1;
@@ -27202,7 +27202,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.C2$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1768.I1$1(T)],
-        properties: {
+        props: {
             Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$T$Count: {
                 get: function () {
                     return 10;
@@ -27232,7 +27232,7 @@ Bridge.$N1391Result =                     r;
         fields: {
             v: Bridge.getDefaultValue(T)
         },
-        properties: {
+        props: {
             Value: {
                 get: function () {
                     return this.v;
@@ -27349,7 +27349,7 @@ Bridge.$N1391Result =                     r;
         fields: {
             value: 0
         },
-        properties: {
+        props: {
             Value: {
                 get: function () {
                     return this.value;
@@ -27383,7 +27383,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1899.Item", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1899.IItem],
-        properties: {
+        props: {
             Value: {
                 get: function () {
                     return 1; // getter
@@ -27430,7 +27430,7 @@ Bridge.$N1391Result =                     r;
         events: {
             Ev: null
         },
-        properties: {
+        props: {
             HasListeners: {
                 get: function () {
                     return !Bridge.staticEquals(this.Ev, null);
@@ -27445,7 +27445,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2019.Some$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2019.ISome$1(T)],
-        properties: {
+        props: {
             SomeProp: 0
         },
         alias: [
@@ -27461,7 +27461,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2048.Derived", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2048.Base],
-        properties: {
+        props: {
             property: {
                 set: function (value) {
                 }
@@ -27537,7 +27537,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2216.Person", {
         inherits: [Bridge.getInterface("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2216.IPerson")],
-        properties: {
+        props: {
             Name: null
         },
         alias: [
@@ -27571,7 +27571,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.DecimalThing$1", function (TX) { return {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.IThing$2(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.V2$2(TX,System.Decimal),Bridge.ClientTest.Batch3.BridgeIssues.Bridge2298.V2$2(System.Decimal,System.Int64))],
-        properties: {
+        props: {
             A: null,
             B: null
         },
@@ -27613,7 +27613,7 @@ Bridge.$N1391Result =                     r;
             events: {
                 StaticEvent: null
             },
-            properties: {
+            props: {
                 StaticProperty: null
             },
             ctors: {
@@ -27646,7 +27646,7 @@ Bridge.$N1391Result =                     r;
         events: {
             InstanceEvent: null
         },
-        properties: {
+        props: {
             InstanceProperty: null
         },
         ctors: {
@@ -27684,7 +27684,7 @@ Bridge.$N1391Result =                     r;
         events: {
             Ev: null
         },
-        properties: {
+        props: {
             First: null,
             Second: null
         },
@@ -27869,7 +27869,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2497.NTConnectOptions", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2497.ConnectOptions],
-        properties: {
+        props: {
             AssemblyName: {
                 get: function () {
                     return "test.dll";
@@ -27901,7 +27901,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge304", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.IBridge304],
-        properties: {
+        props: {
             X: null
         },
         alias: [
@@ -27960,7 +27960,7 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge522.DerivedClass2", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge522.BaseClass],
-        properties: {
+        props: {
             B: 0
         },
         ctors: {
@@ -28222,7 +28222,7 @@ Bridge.$N1391Result =                     r;
         fields: {
             Value4: Bridge.getDefaultValue(K)
         },
-        properties: {
+        props: {
             Value3: Bridge.getDefaultValue(T)
         }
     }; });
@@ -28233,7 +28233,7 @@ Bridge.$N1391Result =                     r;
             fields: {
                 Value4: Bridge.getDefaultValue(K)
             },
-            properties: {
+            props: {
                 Value3: Bridge.getDefaultValue(T)
             }
         }

@@ -519,7 +519,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.ArrayTests.ArrayTestsSet2", {
         statics: {
-            properties: {
+            props: {
                 BinarySearchTestData: {
                     get: function () {
                         var intArray = System.Array.init([1, 3, 6, 6, 8, 10, 12, 16], System.Int32);
@@ -2010,7 +2010,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         fields: {
             data: null
         },
-        properties: {
+        props: {
             NumberA: 0,
             StringA: null,
             BoolA: false,
@@ -2116,7 +2116,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     });
 
     Bridge.define("Bridge.ClientTest.BasicCSharp.ClassA.Aux1", {
-        properties: {
+        props: {
             Number: 0,
             Related: null
         },
@@ -2128,7 +2128,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     });
 
     Bridge.define("Bridge.ClientTest.BasicCSharp.Data", {
-        properties: {
+        props: {
             Count: 0
         }
     });
@@ -2279,7 +2279,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     });
 
     Bridge.define("Bridge.ClientTest.BasicCSharp.TestAbstractClass.A", {
-        properties: {
+        props: {
             Data: 0
         }
     });
@@ -2730,7 +2730,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     });
 
     Bridge.define("Bridge.ClientTest.BasicCSharp.TestInheritance.A", {
-        properties: {
+        props: {
             X: 0
         },
         ctors: {
@@ -3153,7 +3153,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.BasicCSharp.TestTryCatchBlocks", {
         statics: {
-            properties: {
+            props: {
                 IsATry: false,
                 IsACatch: false,
                 IsBTry: false,
@@ -3361,7 +3361,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.BasicCSharp.TestTryCatchFinallyBlocks", {
         statics: {
-            properties: {
+            props: {
                 IsATry: false,
                 IsACatch: false,
                 IsAFinally: false,
@@ -3676,7 +3676,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A2Attribute", {
         inherits: [System.Attribute],
-        properties: {
+        props: {
             X: 0,
             P: 0
         },
@@ -3695,7 +3695,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A3Attribute", {
         inherits: [System.Attribute],
-        properties: {
+        props: {
             X: 0,
             P: 0
         },
@@ -3713,7 +3713,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     });
 
     Bridge.define("Bridge.ClientTest.Batch1.Reflection.AssemblyTests", {
-        properties: {
+        props: {
             ImportedModuleTestCase: {
                 get: function () {
                     
@@ -4327,7 +4327,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.Batch1.Reflection.AttributeTests.A1", {
         inherits: [System.Attribute],
-        properties: {
+        props: {
             V: 0
         },
         ctors: {
@@ -7075,7 +7075,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.Collections.Generic.ICollectionTests.MyCollection", {
         inherits: [System.Collections.Generic.ICollection$1(System.String)],
-        properties: {
+        props: {
             Items: null,
             Count: {
                 get: function () {
@@ -7383,7 +7383,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         fields: {
             _backingDictionary: null
         },
-        properties: {
+        props: {
             Keys: {
                 get: function () {
                     return this._backingDictionary.getKeys();
@@ -7785,7 +7785,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.Collections.Generic.IListTests.MyList", {
         inherits: [System.Collections.Generic.IList$1(System.String)],
-        properties: {
+        props: {
             Items: null,
             Count: {
                 get: function () {
@@ -7921,7 +7921,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.Collections.Generic.IReadOnlyCollectionTests.MyCollection", {
         inherits: [System.Collections.Generic.IReadOnlyCollection$1(System.String)],
-        properties: {
+        props: {
             Items: null,
             Count: {
                 get: function () {
@@ -8161,7 +8161,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         fields: {
             _backingDictionary: null
         },
-        properties: {
+        props: {
             Keys: {
                 get: function () {
                     return this._backingDictionary.getKeys();
@@ -8216,7 +8216,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     });
 
     Bridge.define("Bridge.ClientTest.Collections.Generic.IReadOnlyDictionaryTests.Person", {
-        properties: {
+        props: {
             Name: null,
             Age: 0
         },
@@ -8292,7 +8292,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.Collections.Generic.IReadOnlyListTests.MyList", {
         inherits: [System.Collections.Generic.IReadOnlyList$1(System.String)],
-        properties: {
+        props: {
             Items: null,
             Count: {
                 get: function () {
@@ -10176,7 +10176,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     });
 
     Bridge.define("Bridge.ClientTest.Collections.Generic.WeakMapTests.SomeCustomClass", {
-        properties: {
+        props: {
             SomeProperty: 0
         }
     });
@@ -12772,7 +12772,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         fields: {
             field1: 0
         },
-        properties: {
+        props: {
             prop1: 0
         },
         methods: {
@@ -12785,7 +12785,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         fields: {
             FIELD1: 0
         },
-        properties: {
+        props: {
             PROP1: 0
         },
         methods: {
@@ -12798,7 +12798,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         fields: {
             FIELD1: 0
         },
-        properties: {
+        props: {
             PROP1: 0
         },
         methods: {
@@ -12850,7 +12850,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     });
 
     Bridge.define("Bridge.ClientTest.ConventionTests.Class.class12", {
-        properties: {
+        props: {
             internalprop: 0,
             privateProp: 0,
             PROTECTEDPROP: 0,
@@ -12952,7 +12952,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         fields: {
             field1: 0
         },
-        properties: {
+        props: {
             prop1: 0
         },
         methods: {
@@ -13535,8 +13535,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     });
 
-    Bridge.define("Bridge.ClientTest.ConvertTests.ConvertTestBase$1", function (TOutput) { return {
-            /** @namespace System */
+    /** @namespace System */
 
     /**
      * @memberof System
@@ -13545,7 +13544,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
      * @return  {TOutput}
      */
 
-methods: {
+    Bridge.define("Bridge.ClientTest.ConvertTests.ConvertTestBase$1", function (TOutput) { return {
+        methods: {
             /**
              * Verify that the provided convert delegate produces expectedValues given testValues.
              *
@@ -14501,7 +14501,7 @@ methods: {
                 staticField: "test1"
             }
         },
-        properties: {
+        props: {
             First: "Jane",
             Last: "Doe",
             Name: null,
@@ -14723,7 +14723,7 @@ methods: {
         fields: {
             fields: null
         },
-        properties: {
+        props: {
             Orders: null
         },
         ctors: {
@@ -14944,7 +14944,7 @@ methods: {
                 }
             }
         },
-        properties: {
+        props: {
             First: "Jane",
             Last: "Doe",
             Name: {
@@ -15035,7 +15035,7 @@ methods: {
     });
 
     Bridge.define("Bridge.ClientTest.CSharp6.TestIndexInitializer.BitFlipinator", {
-        properties: {
+        props: {
             Value: 0
         },
         methods: {
@@ -15058,7 +15058,7 @@ methods: {
 
     Bridge.define("Bridge.ClientTest.CSharp6.TestInterpolatedStrings", {
         statics: {
-            properties: {
+            props: {
                 P: 0
             },
             methods: {
@@ -15102,7 +15102,7 @@ methods: {
     });
 
     Bridge.define("Bridge.ClientTest.CSharp6.TestInterpolatedStrings.Person", {
-        properties: {
+        props: {
             Name: "Jane",
             Age: 10
         }
@@ -15428,7 +15428,7 @@ methods: {
                 }
             }
         },
-        properties: {
+        props: {
             Text: null
         },
         ctors: {
@@ -15802,27 +15802,27 @@ methods: {
     });
 
     Bridge.define("Bridge.ClientTest.DeserializationTests.Address", {
-        properties: {
+        props: {
             City: null,
             Street: null
         }
     });
 
     Bridge.define("Bridge.ClientTest.DeserializationTests.Class1", {
-        properties: {
+        props: {
             Sub1: null,
             Sub2: null
         }
     });
 
     Bridge.define("Bridge.ClientTest.DeserializationTests.Class2", {
-        properties: {
+        props: {
             IntProp: 0
         }
     });
 
     Bridge.define("Bridge.ClientTest.DeserializationTests.Class3", {
-        properties: {
+        props: {
             StringProp: null
         }
     });
@@ -15907,14 +15907,14 @@ methods: {
     });
 
     Bridge.define("Bridge.ClientTest.DeserializationTests.SubClass1", {
-        properties: {
+        props: {
             Owner: null,
             List1: null
         }
     });
 
     Bridge.define("Bridge.ClientTest.DeserializationTests.SubClass2", {
-        properties: {
+        props: {
             Owner: null,
             List1: null
         }
@@ -17372,7 +17372,7 @@ methods: {
             _message: null,
             _innerException: null
         },
-        properties: {
+        props: {
             Message: {
                 get: function () {
                     return this._message;
@@ -21251,7 +21251,7 @@ methods: {
             LF: null,
             CF: null
         },
-        properties: {
+        props: {
             P1: 0,
             P2: 0,
             LP: null,
@@ -23998,7 +23998,7 @@ methods: {
                 TYPE: "childList"
             }
         },
-        properties: {
+        props: {
             Records: null
         },
         methods: {
@@ -24378,7 +24378,7 @@ methods: {
     Bridge.define("Bridge.ClientTest.ObjectLiteralTests.Bridge1529.BS", {
         $literal: true,
         statics: {
-            properties: {
+            props: {
                 staticProp: {
                     get: function () {
                         return 11;
@@ -24728,7 +24728,7 @@ methods: {
             F2: 0,
             F3: 0
         },
-        properties: {
+        props: {
             P1: {
                 get: function () {
                     return this.F1;
@@ -24756,7 +24756,7 @@ methods: {
             F2: Bridge.getDefaultValue(T),
             F3: Bridge.getDefaultValue(T)
         },
-        properties: {
+        props: {
             P1: {
                 get: function () {
                     return this.F1;
@@ -24785,7 +24785,7 @@ methods: {
                 FS2: 0,
                 FS3: 0
             },
-            properties: {
+            props: {
                 PS1: {
                     get: function () {
                         return ((Bridge.ClientTest.PropertyAccessorTests.C1.FS1 + 1) | 0);
@@ -24811,7 +24811,7 @@ methods: {
             F2: 0,
             F3: 0
         },
-        properties: {
+        props: {
             P1: {
                 get: function () {
                     return ((this.F1 + 1) | 0);
@@ -24840,7 +24840,7 @@ methods: {
                 FS2: Bridge.getDefaultValue(T),
                 FS3: Bridge.getDefaultValue(T)
             },
-            properties: {
+            props: {
                 PS1: {
                     get: function () {
                         return ((Bridge.ClientTest.PropertyAccessorTests.C2$1(T).FS1 + 1) | 0);
@@ -24866,7 +24866,7 @@ methods: {
             F2: Bridge.getDefaultValue(T),
             F3: Bridge.getDefaultValue(T)
         },
-        properties: {
+        props: {
             P1: {
                 get: function () {
                     return ((this.F1 + 1) | 0);
@@ -25299,7 +25299,7 @@ methods: {
 
     Bridge.define("Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute", {
         inherits: [System.Attribute],
-        properties: {
+        props: {
             I: 0
         },
         ctors: {
@@ -25317,7 +25317,7 @@ methods: {
                 FBS1: 0,
                 FBS2: 0
             },
-            properties: {
+            props: {
                 PBS1: 0,
                 PBS2: 0
             },
@@ -25344,7 +25344,7 @@ methods: {
             FB1: 0,
             FB2: 0
         },
-        properties: {
+        props: {
             PB1: 0,
             PB2: 0
         },
@@ -25394,7 +25394,7 @@ methods: {
                 ES: null,
                 EBS: null
             },
-            properties: {
+            props: {
                 PS: 0,
                 PBS: 0
             },
@@ -25423,7 +25423,7 @@ methods: {
             E: null,
             EB: null
         },
-        properties: {
+        props: {
             P: 0,
             PB: 0
         },
@@ -26721,7 +26721,7 @@ methods: {
 
     Bridge.define("Bridge.ClientTest.Reflection.ReflectionTests.A1Attribute", {
         inherits: [System.Attribute],
-        properties: {
+        props: {
             X: 0
         },
         ctors: {
@@ -26851,7 +26851,7 @@ methods: {
             fields: {
                 p14Field: 0
             },
-            properties: {
+            props: {
                 P3: null,
                 P4: 0,
                 P7: {
@@ -26875,7 +26875,7 @@ methods: {
         fields: {
             p13Field: 0
         },
-        properties: {
+        props: {
             P1: 0,
             P2: null,
             P5: {
@@ -26929,7 +26929,7 @@ methods: {
         fields: {
             F: 0
         },
-        properties: {
+        props: {
             P: 0
         },
         ctors: {
@@ -27527,7 +27527,7 @@ methods: {
 
     Bridge.define("Bridge.ClientTest.Reflection.TypeAttributeTests.A1Attribute", {
         inherits: [System.Attribute],
-        properties: {
+        props: {
             V: 0
         },
         ctors: {
@@ -27541,7 +27541,7 @@ methods: {
 
     Bridge.define("Bridge.ClientTest.Reflection.TypeAttributeTests.A2Attribute", {
         inherits: [System.Attribute],
-        properties: {
+        props: {
             V: 0
         },
         ctors: {
@@ -27555,7 +27555,7 @@ methods: {
 
     Bridge.define("Bridge.ClientTest.Reflection.TypeAttributeTests.A3Attribute", {
         inherits: [System.Attribute],
-        properties: {
+        props: {
             V: 0
         },
         ctors: {
@@ -27569,7 +27569,7 @@ methods: {
 
     Bridge.define("Bridge.ClientTest.Reflection.TypeAttributeTests.A4Attribute", {
         inherits: [System.Attribute],
-        properties: {
+        props: {
             V: 0
         },
         ctors: {
@@ -27587,7 +27587,7 @@ methods: {
 
     Bridge.define("Bridge.ClientTest.Reflection.TypeAttributeTests.A6Attribute", {
         inherits: [System.Attribute],
-        properties: {
+        props: {
             B: false,
             Y: 0,
             C: 0,
@@ -27623,7 +27623,7 @@ methods: {
 
     Bridge.define("Bridge.ClientTest.Reflection.TypeAttributeTests.A7Attribute", {
         inherits: [System.Attribute],
-        properties: {
+        props: {
             I: null,
             S: null
         },
@@ -27639,7 +27639,7 @@ methods: {
 
     Bridge.define("Bridge.ClientTest.Reflection.TypeAttributeTests.A8Attribute", {
         inherits: [System.Attribute],
-        properties: {
+        props: {
             E: "v1"
         },
         ctors: {
@@ -27653,7 +27653,7 @@ methods: {
 
     Bridge.define("Bridge.ClientTest.Reflection.TypeAttributeTests.A9Attribute", {
         inherits: [System.Attribute],
-        properties: {
+        props: {
             P1: 0,
             P3: 0,
             P4: 0,
@@ -28355,7 +28355,7 @@ methods: {
                 }
             }
         },
-        properties: {
+        props: {
             AssemblyName: {
                 get: function () {
                     return "Bridge.ClientTest";
@@ -29607,7 +29607,7 @@ methods: {
     }; });
 
     Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.L1", {
-        properties: {
+        props: {
             P: 0
         },
         methods: {
@@ -29617,7 +29617,7 @@ methods: {
     });
 
     Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.L1.L2", {
-        properties: {
+        props: {
             P: 0
         },
         methods: {
@@ -29627,7 +29627,7 @@ methods: {
     });
 
     Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.L30", {
-        properties: {
+        props: {
             P1: 0
         },
         methods: {
@@ -29872,20 +29872,20 @@ methods: {
     });
 
     Bridge.define("Bridge.ClientTest.SerializationTests.Class1", {
-        properties: {
+        props: {
             Sub1: null,
             Sub2: null
         }
     });
 
     Bridge.define("Bridge.ClientTest.SerializationTests.Class2", {
-        properties: {
+        props: {
             IntProp: 0
         }
     });
 
     Bridge.define("Bridge.ClientTest.SerializationTests.Class3", {
-        properties: {
+        props: {
             StringProp: null
         }
     });
@@ -29945,14 +29945,14 @@ methods: {
     });
 
     Bridge.define("Bridge.ClientTest.SerializationTests.SubClass1", {
-        properties: {
+        props: {
             Owner: null,
             List1: null
         }
     });
 
     Bridge.define("Bridge.ClientTest.SerializationTests.SubClass2", {
-        properties: {
+        props: {
             Owner: null,
             List1: null
         }
@@ -30243,7 +30243,7 @@ methods: {
     });
 
     Bridge.define("Bridge.ClientTest.SimpleTypes.BooleanTests.Counter", {
-        properties: {
+        props: {
             Count: 0
         },
         methods: {
@@ -36481,7 +36481,7 @@ methods: {
     });
 
     Bridge.define("Bridge.ClientTest.Threading.PromiseTests", {
-        properties: {
+        props: {
             PromiseProgress: 0
         },
         methods: {
@@ -36777,7 +36777,7 @@ methods: {
         fields: {
             DoThen: null
         },
-        properties: {
+        props: {
             Thens: null
         },
         alias: [
@@ -36868,7 +36868,7 @@ methods: {
     });
 
     Bridge.define("Bridge.ClientTest.Threading.PromiseTests.SimplePromise.A", {
-        properties: {
+        props: {
             Filled: null,
             Error: null,
             Progress: null
@@ -36886,7 +36886,7 @@ methods: {
     });
 
     Bridge.define("Bridge.ClientTest.Threading.PromiseTests.TaskResult", {
-        properties: {
+        props: {
             I: 0,
             S: null,
             J: 0
@@ -38330,7 +38330,7 @@ methods: {
 
     Bridge.define("Bridge.ClientTest.Threading.TimerTests", {
         statics: {
-            properties: {
+            props: {
                 StaticCounter: 0,
                 StaticData: null
             },
@@ -38692,7 +38692,7 @@ methods: {
     });
 
     Bridge.define("Bridge.ClientTest.Threading.TimerTests.TimerState", {
-        properties: {
+        props: {
             Counter: 0,
             Data: null
         },
@@ -38872,7 +38872,7 @@ methods: {
                 }
             }
         },
-        properties: {
+        props: {
             Name: null,
             Limit: 0
         }
@@ -38945,7 +38945,7 @@ methods: {
                 }
             }
         },
-        properties: {
+        props: {
             ID: 0,
             Name: null,
             City: null,
@@ -38974,7 +38974,7 @@ methods: {
 
     Bridge.define("Bridge.ClientTest.BasicCSharp.TestInheritance.B", {
         inherits: [Bridge.ClientTest.BasicCSharp.TestInheritance.A],
-        properties: {
+        props: {
             Y: 0
         },
         ctors: {
@@ -38993,7 +38993,7 @@ methods: {
 
     Bridge.define("Bridge.ClientTest.BasicCSharp.TestInterfaces.A", {
         inherits: [Bridge.ClientTest.BasicCSharp.TestInterfaces.ISimple],
-        properties: {
+        props: {
             Data: 0
         },
         alias: [
@@ -39018,7 +39018,7 @@ methods: {
         fields: {
             data: 0
         },
-        properties: {
+        props: {
             Bridge$ClientTest$BasicCSharp$TestInterfaces$ISimple$Data: {
                 get: function () {
                     return this.data;
@@ -39047,7 +39047,7 @@ methods: {
             data: 0,
             dataAsWell: 0
         },
-        properties: {
+        props: {
             Bridge$ClientTest$BasicCSharp$TestInterfaces$ISimple$Data: {
                 get: function () {
                     return this.data;
@@ -40873,7 +40873,7 @@ methods: {
 
     Bridge.define("Bridge.ClientTest.DeserializationTests.Person", {
         inherits: [Bridge.ClientTest.DeserializationTests.INamedEntity],
-        properties: {
+        props: {
             Id: null,
             Name: null,
             Address: null
@@ -40943,7 +40943,7 @@ methods: {
 
     Bridge.define("Bridge.ClientTest.PropertyAccessorTests.D3", {
         inherits: [Bridge.ClientTest.PropertyAccessorTests.B3],
-        properties: {
+        props: {
             P1: {
                 get: function () {
                     return ((Bridge.ensureBaseProperty(this, "P1").$Bridge$ClientTest$PropertyAccessorTests$B3$P1 + 1) | 0);
@@ -40967,7 +40967,7 @@ methods: {
 
     Bridge.define("Bridge.ClientTest.PropertyAccessorTests.D4$1", function (T) { return {
         inherits: [Bridge.ClientTest.PropertyAccessorTests.B4$1(T)],
-        properties: {
+        props: {
             P1: {
                 get: function () {
                     return Bridge.ensureBaseProperty(this, "P1")["$Bridge$ClientTest$PropertyAccessorTests$B4$1$" + Bridge.getTypeAlias(T)+"$P1"] + 1;
@@ -40996,7 +40996,7 @@ methods: {
                 FCS1: 0,
                 FCS2: 0
             },
-            properties: {
+            props: {
                 PCS1: 0,
                 PCS2: 0
             },
@@ -41023,7 +41023,7 @@ methods: {
             FC1: 0,
             FC2: 0
         },
-        properties: {
+        props: {
             PC1: 0,
             PC2: 0
         },
@@ -41077,7 +41077,7 @@ methods: {
                 ES: null,
                 ECS: null
             },
-            properties: {
+            props: {
                 PS: 0,
                 PCS: 0
             },
@@ -41106,7 +41106,7 @@ methods: {
             E$1: null,
             EC: null
         },
-        properties: {
+        props: {
             P$1: 0,
             PC: 0
         },
@@ -49768,7 +49768,7 @@ methods: {
                 FDS1: 0,
                 FDS2: 0
             },
-            properties: {
+            props: {
                 PDS1: 0,
                 PDS2: 0
             },
@@ -49795,7 +49795,7 @@ methods: {
             FD1: 0,
             FD2: 0
         },
-        properties: {
+        props: {
             PD1: 0,
             PD2: 0,
             Bridge$ClientTest$Reflection$GetMembersTests$I1$PI11: {
@@ -49894,7 +49894,7 @@ methods: {
                 ES: null,
                 EDS: null
             },
-            properties: {
+            props: {
                 PS: 0,
                 PDS: 0
             },
@@ -49923,7 +49923,7 @@ methods: {
             E$2: null,
             ED: null
         },
-        properties: {
+        props: {
             P$2: 0,
             PD: 0
         },

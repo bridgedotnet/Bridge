@@ -1209,7 +1209,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.ICollectionTests.MyCollection", {
         inherits: [System.Collections.Generic.ICollection$1(System.String)],
-        properties: {
+        props: {
             Items: null,
             Count: {
                 get: function () {
@@ -1524,7 +1524,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         fields: {
             _backingDictionary: null
         },
-        properties: {
+        props: {
             Keys: {
                 get: function () {
                     return this._backingDictionary.getKeys();
@@ -1826,7 +1826,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.IListTests.MyList", {
         inherits: [System.Collections.Generic.IList$1(System.String)],
-        properties: {
+        props: {
             Items: null,
             Count: {
                 get: function () {
@@ -1927,7 +1927,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     sb.appendLine("got " + enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "Current$1")]);
                 }
 
-                this.AssertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n");
+                this.AssertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
             },
             PrematureDisposalOfIEnumeratorIteratorExecutesFinallyBlocks_SPI_1555: function () {
                 // #1555
@@ -1940,7 +1940,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 }
                 enm.System$IDisposable$dispose();
 
-                this.AssertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nin finally\r\n");
+                this.AssertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
             },
             ExceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks_SPI_1554: function () {
                 var sb = new System.Text.StringBuilder();
@@ -1964,7 +1964,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     sb.appendLine("caught exception");
                 }
 
-                this.AssertEqual(sb.toString(), "yielding 1\r\ngot 1\r\nyielding 2\r\ngot 2\r\nthrowing\r\nin finally\r\ncaught exception\r\n");
+                this.AssertEqual(sb.toString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
             },
             TypeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface_SPI_1554: function () {
                 var enm = null;
@@ -2005,7 +2005,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                         $t1.System$IDisposable$dispose();
                     }
                 }
-                this.AssertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n-\r\nyielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n");
+                this.AssertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n-\nyielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
             },
             PrematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks_SPI_1555: function () {
                 var $t;
@@ -2026,7 +2026,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                         $t.System$IDisposable$dispose();
                     }
                 }
-                this.AssertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nin finally\r\n");
+                this.AssertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
             },
             ExceptionInIEnumerableIteratorBodyExecutesFinallyBlocks_SPI_1554: function () {
                 var sb = new System.Text.StringBuilder();
@@ -2051,7 +2051,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     sb.appendLine("caught exception");
                 }
 
-                this.AssertEqual(sb.toString(), "yielding 1\r\ngot 1\r\nyielding 2\r\ngot 2\r\nthrowing\r\nin finally\r\ncaught exception\r\n");
+                this.AssertEqual(sb.toString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
             },
             EnumeratingAnIteratorBlockReturningIEnumerableMultipleTimesUsesTheInitialValuesForParameters: function () {
                 var $t, $t1;
@@ -2079,7 +2079,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                         $t1.System$IDisposable$dispose();
                     }
                 }
-                this.AssertEqual(sb.toString(), "3\r\n2\r\n1\r\n3\r\n2\r\n1\r\n");
+                this.AssertEqual(sb.toString(), "3\n2\n1\n3\n2\n1\n");
             },
             DifferentGetEnumeratorCallsOnIteratorBlockReturningIEnumerableGetOwnCopiesOfLocals: function () {
                 var sb = new System.Text.StringBuilder();
@@ -2094,7 +2094,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     sb.appendLine(enm2[Bridge.geti(enm2, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "Current$1")].toString());
                 }
 
-                this.AssertEqual(sb.toString(), "0\r\n0\r\n1\r\n1\r\n2\r\n2\r\n-1\r\n-1\r\n");
+                this.AssertEqual(sb.toString(), "0\n0\n1\n1\n2\n2\n-1\n-1\n");
             }
         }
     });
@@ -6861,7 +6861,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             _message: null,
             _innerException: null
         },
-        properties: {
+        props: {
             Message: {
                 get: function () {
                     return this._message;
@@ -9851,7 +9851,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             LF: null,
             CF: null
         },
-        properties: {
+        props: {
             P1: 0,
             P2: 0,
             LP: null,
@@ -11010,7 +11010,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             F2: 0,
             F3: 0
         },
-        properties: {
+        props: {
             P1: {
                 get: function () {
                     return this.F1;
@@ -11038,7 +11038,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             F2: Bridge.getDefaultValue(T),
             F3: Bridge.getDefaultValue(T)
         },
-        properties: {
+        props: {
             P1: {
                 get: function () {
                     return this.F1;
@@ -11067,7 +11067,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 FS2: 0,
                 FS3: 0
             },
-            properties: {
+            props: {
                 PS1: {
                     get: function () {
                         return ((Bridge.ClientTest.Batch4.PropertyAccessorTests.C1.FS1 + 1) | 0);
@@ -11093,7 +11093,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             F2: 0,
             F3: 0
         },
-        properties: {
+        props: {
             P1: {
                 get: function () {
                     return ((this.F1 + 1) | 0);
@@ -11122,7 +11122,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 FS2: Bridge.getDefaultValue(T),
                 FS3: Bridge.getDefaultValue(T)
             },
-            properties: {
+            props: {
                 PS1: {
                     get: function () {
                         return ((Bridge.ClientTest.Batch4.PropertyAccessorTests.C2$1(T).FS1 + 1) | 0);
@@ -11148,7 +11148,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             F2: Bridge.getDefaultValue(T),
             F3: Bridge.getDefaultValue(T)
         },
-        properties: {
+        props: {
             P1: {
                 get: function () {
                     return ((this.F1 + 1) | 0);
@@ -11229,7 +11229,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     });
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.AssemblyTests", {
-        properties: {
+        props: {
             ImportedModuleTestCase: {
                 get: function () {
                     
@@ -11417,7 +11417,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.AssemblyTests.A2Attribute", {
         inherits: [System.Attribute],
-        properties: {
+        props: {
             X: 0,
             P: 0
         },
@@ -11436,7 +11436,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.AssemblyTests.A3Attribute", {
         inherits: [System.Attribute],
-        properties: {
+        props: {
             X: 0,
             P: 0
         },
@@ -11678,7 +11678,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.A1Attribute", {
         inherits: [System.Attribute],
-        properties: {
+        props: {
             V: 0
         },
         ctors: {
@@ -11692,7 +11692,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.A2Attribute", {
         inherits: [System.Attribute],
-        properties: {
+        props: {
             V: 0
         },
         ctors: {
@@ -11706,7 +11706,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.A3Attribute", {
         inherits: [System.Attribute],
-        properties: {
+        props: {
             V: 0
         },
         ctors: {
@@ -11720,7 +11720,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.A4Attribute", {
         inherits: [System.Attribute],
-        properties: {
+        props: {
             V: 0
         },
         ctors: {
@@ -11738,7 +11738,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.A6Attribute", {
         inherits: [System.Attribute],
-        properties: {
+        props: {
             B: false,
             Y: 0,
             C: 0,
@@ -11774,7 +11774,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.A7Attribute", {
         inherits: [System.Attribute],
-        properties: {
+        props: {
             I: null,
             S: null
         },
@@ -11790,7 +11790,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.A8Attribute", {
         inherits: [System.Attribute],
-        properties: {
+        props: {
             E: "v1"
         },
         ctors: {
@@ -11804,7 +11804,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.A9Attribute", {
         inherits: [System.Attribute],
-        properties: {
+        props: {
             P1: 0,
             P3: 0,
             P4: 0,
@@ -12224,7 +12224,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.GetMembersTests.A1Attribute", {
         inherits: [System.Attribute],
-        properties: {
+        props: {
             I: 0
         },
         ctors: {
@@ -12242,7 +12242,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 FBS1: 0,
                 FBS2: 0
             },
-            properties: {
+            props: {
                 PBS1: 0,
                 PBS2: 0
             },
@@ -12269,7 +12269,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             FB1: 0,
             FB2: 0
         },
-        properties: {
+        props: {
             PB1: 0,
             PB2: 0
         },
@@ -12319,7 +12319,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 ES: null,
                 EBS: null
             },
-            properties: {
+            props: {
                 PS: 0,
                 PBS: 0
             },
@@ -12348,7 +12348,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             E: null,
             EB: null
         },
-        properties: {
+        props: {
             P: 0,
             PB: 0
         },
@@ -13646,7 +13646,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.A1Attribute", {
         inherits: [System.Attribute],
-        properties: {
+        props: {
             X: 0
         },
         ctors: {
@@ -13776,7 +13776,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             fields: {
                 p14Field: 0
             },
-            properties: {
+            props: {
                 P3: null,
                 P4: 0,
                 P7: {
@@ -13800,7 +13800,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         fields: {
             p13Field: 0
         },
-        properties: {
+        props: {
             P1: 0,
             P2: null,
             P5: {
@@ -13854,7 +13854,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         fields: {
             F: 0
         },
-        properties: {
+        props: {
             P: 0
         },
         ctors: {
@@ -14238,8 +14238,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             methods: {
                 CanConvert: function (T, arg) {
                     try { /// The variable `x' is assigned but its value is never used
-
-
                         var x = Bridge.cast(Bridge.unbox(arg), T);
                         return true;
                     }
@@ -14770,7 +14768,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     }; });
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests", {
-        properties: {
+        props: {
             AssemblyWithVersion: {
                 get: function () {
                     return "Bridge.ClientTest.Batch4";
@@ -16108,7 +16106,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         events: {
             Evt: null
         },
-        properties: {
+        props: {
             P: 0,
             P2: {
                 get: function () {
@@ -23137,7 +23135,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     });
 
     Bridge.define("Bridge.ClientTest.Batch4.Threading.PromiseTests", {
-        properties: {
+        props: {
             PromiseProgress: 0
         },
         methods: {
@@ -23433,7 +23431,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         fields: {
             DoThen: null
         },
-        properties: {
+        props: {
             Thens: null
         },
         alias: [
@@ -23524,7 +23522,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     });
 
     Bridge.define("Bridge.ClientTest.Batch4.Threading.PromiseTests.SimplePromise.A", {
-        properties: {
+        props: {
             Filled: null,
             Error: null,
             Progress: null
@@ -23542,7 +23540,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     });
 
     Bridge.define("Bridge.ClientTest.Batch4.Threading.PromiseTests.TaskResult", {
-        properties: {
+        props: {
             I: null,
             S: null,
             J: null
@@ -25239,7 +25237,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         events: {
             E: null
         },
-        properties: {
+        props: {
             P1: null,
             P2: 0
         },
@@ -25753,7 +25751,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.PropertyAccessorTests.D3", {
         inherits: [Bridge.ClientTest.Batch4.PropertyAccessorTests.B3],
-        properties: {
+        props: {
             P1: {
                 get: function () {
                     return ((Bridge.ensureBaseProperty(this, "P1").$Bridge$ClientTest$Batch4$PropertyAccessorTests$B3$P1 + 1) | 0);
@@ -25777,7 +25775,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.PropertyAccessorTests.D4$1", function (T) { return {
         inherits: [Bridge.ClientTest.Batch4.PropertyAccessorTests.B4$1(T)],
-        properties: {
+        props: {
             P1: {
                 get: function () {
                     return Bridge.ensureBaseProperty(this, "P1")["$Bridge$ClientTest$Batch4$PropertyAccessorTests$B4$1$" + Bridge.getTypeAlias(T)+"$P1"] + 1;
@@ -25822,7 +25820,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 FCS1: 0,
                 FCS2: 0
             },
-            properties: {
+            props: {
                 PCS1: 0,
                 PCS2: 0
             },
@@ -25849,7 +25847,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             FC1: 0,
             FC2: 0
         },
-        properties: {
+        props: {
             PC1: 0,
             PC2: 0
         },
@@ -25903,7 +25901,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 ES: null,
                 ECS: null
             },
-            properties: {
+            props: {
                 PS: 0,
                 PCS: 0
             },
@@ -25932,7 +25930,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             E$1: null,
             EC: null
         },
-        properties: {
+        props: {
             P$1: 0,
             PC: 0
         },
@@ -26264,7 +26262,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 FDS1: 0,
                 FDS2: 0
             },
-            properties: {
+            props: {
                 PDS1: 0,
                 PDS2: 0
             },
@@ -26291,7 +26289,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             FD1: 0,
             FD2: 0
         },
-        properties: {
+        props: {
             PD1: 0,
             PD2: 0,
             Bridge$ClientTest$Batch4$Reflection$GetMembersTests$I1$PI11: {
@@ -26390,7 +26388,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 ES: null,
                 EDS: null
             },
-            properties: {
+            props: {
                 PS: 0,
                 PDS: 0
             },
@@ -26419,7 +26417,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             E$2: null,
             ED: null
         },
-        properties: {
+        props: {
             P$2: 0,
             PD: 0
         },

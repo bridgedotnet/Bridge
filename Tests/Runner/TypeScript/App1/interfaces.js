@@ -27,7 +27,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
             Field: 200,
             property: 100
         },
-        properties: {
+        props: {
             Property: {
                 get: function () {
                     return this.property;
@@ -78,7 +78,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
 
     Bridge.define("Interfaces.Class6", {
         inherits: [Interfaces.Interface6],
-        properties: {
+        props: {
             Property: 0,
             MethodProperty: 0
         },

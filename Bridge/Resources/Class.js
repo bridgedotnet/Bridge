@@ -28,9 +28,10 @@
                 }
             }
 
-            if (config.properties) {
-                for (name in config.properties) {
-                    var cfg = Bridge.property(statics ? scope : prototype, name, config.properties[name], statics, cls);
+            var props = config.properties;
+            if (props) {
+                for (name in props) {
+                    var cfg = Bridge.property(statics ? scope : prototype, name, props[name], statics, cls);
 
                     cfg.name = name;
                     cfg.cls = cls;
@@ -96,7 +97,7 @@
         convertScheme: function(obj) {
             var result = {},
             copy = function (obj, to) {
-                var reserved = ["fields", "methods", "events", "properties", "alias", "ctors"],
+                var reserved = ["fields", "methods", "events", "props", "properties", "alias", "ctors"],
                     keys = Object.keys(obj);
 
                 for (var i = 0; i < keys.length; i++) {
@@ -115,7 +116,10 @@
                 }
 
                 var config = {};
-                if (obj.properties) {
+                if (obj.props) {
+                    config.properties = obj.props;
+                }
+                else if (obj.properties) {
                     config.properties = obj.properties;
                 }
 
@@ -224,7 +228,7 @@
                 prop.inherits = [System.IComparable, System.IFormattable];
             }
 
-            var rNames = ["fields", "events", "properties", "ctors", "methods"],
+            var rNames = ["fields", "events", "props", "ctors", "methods"],
                 defaultScheme = Bridge.isFunction(prop.Main) ? 0 : 1,
                 check = function (scope) {
                     if (scope.config && Bridge.isPlainObject(scope.config) ||

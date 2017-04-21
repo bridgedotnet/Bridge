@@ -4,7 +4,7 @@
             args: null,
             format: null
         },
-        properties: {
+        props: {
             ArgumentCount: {
                 get: function () {
                     return this.args.length;

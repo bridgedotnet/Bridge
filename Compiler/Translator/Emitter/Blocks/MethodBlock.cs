@@ -45,14 +45,14 @@ namespace Bridge.Translator
 
         protected virtual void EmitMethods(Dictionary<string, List<MethodDeclaration>> methods, Dictionary<string, List<EntityDeclaration>> properties, Dictionary<OperatorType, List<OperatorDeclaration>> operators)
         {
-            var oldWriter = this.SaveWriter();
+            int pos = this.Emitter.Output.Length;
+            var writerInfo = this.SaveWriter();
 
-            this.NewWriter();
-            this.ResetLevel(oldWriter.Level);
-
+            this.EnsureComma();
             this.Write(JS.Fields.METHODS);
             this.WriteColon();
             this.BeginBlock();
+            int checkPos = this.Emitter.Output.Length;
 
             var names = new List<string>(properties.Keys);
 
@@ -134,19 +134,17 @@ namespace Bridge.Translator
                 }
             }
 
-            this.WriteNewLine();
-            this.EndBlock();
-
-            var methodsSectionCode = this.Emitter.Output.ToString();
-
-            this.RestoreWriter(oldWriter);
-
-            if (methodsSectionCode != null
-                && methodsSectionCode.Contains(JS.Fields.METHODS)
-                && methodsSectionCode.Contains("function"))
+            if (checkPos == this.Emitter.Output.Length)
             {
-                this.EnsureComma();
-                this.Write(methodsSectionCode);
+                this.Emitter.IsNewLine = writerInfo.IsNewLine;
+                this.Emitter.ResetLevel(writerInfo.Level);
+                this.Emitter.Comma = writerInfo.Comma;
+                this.Emitter.Output.Length = pos;
+            }
+            else
+            {
+                this.WriteNewLine();
+                this.EndBlock();
             }
         }
 

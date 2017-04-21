@@ -7,7 +7,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 instanceFabric: null,
                 fixtureFabric: Bridge.getDefaultValue(T)
             },
-            properties: {
+            props: {
                 FixtureFabric: {
                     get: function () {
                         if (Bridge.Test.Runtime.TestFixture$1(T).fixtureFabric == null) {
@@ -64,7 +64,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 }
             }
         },
-        properties: {
+        props: {
             Fixture: Bridge.getDefaultValue(T)
         },
         methods: {

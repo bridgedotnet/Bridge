@@ -33,7 +33,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
                 }
             }
         },
-        properties: {
+        props: {
             Point: null
         },
         ctors: {

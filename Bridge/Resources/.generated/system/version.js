@@ -135,7 +135,7 @@
             _Build: -1,
             _Revision: -1
         },
-        properties: {
+        props: {
             Major: {
                 get: function () {
                     return this._Major;

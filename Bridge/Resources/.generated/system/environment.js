@@ -3,7 +3,7 @@
             fields: {
                 variables: null
             },
-            properties: {
+            props: {
                 Location: {
                     get: function () {
                         var g = Bridge.global;

@@ -6,7 +6,7 @@
                 position: "horizontal",
                 instance: null
             },
-            properties: {
+            props: {
                 Instance: {
                     get: function () {
                         if (Bridge.Console.instance == null) {
