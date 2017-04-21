@@ -9,7 +9,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     Bridge.define("TestProject1.ExistsIfTest2Defined");
 
     Bridge.define("TestProject1.TestClassA", {
-        properties: {
+        props: {
             /**
              * Some property
              *
@@ -39,7 +39,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     });
 
     Bridge.define("TestProject2.TestClassB", {
-        properties: {
+        props: {
             Value1: 0
         },
         methods: {

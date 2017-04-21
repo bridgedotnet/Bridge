@@ -43,7 +43,7 @@
 
     Bridge.define("TestIssue958.SetName", {
         inherits: [TestIssue958.IMessage],
-        properties: {
+        props: {
             Name: null
         },
         ctors: {
@@ -56,7 +56,7 @@
 
     Bridge.define("TestIssue958.SetValue", {
         inherits: [TestIssue958.IMessage],
-        properties: {
+        props: {
             Value: null
         },
         ctors: {

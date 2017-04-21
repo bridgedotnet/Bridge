@@ -2,7 +2,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
     Bridge.define("TestProject1.TestClassA", {
-        properties: {
+        props: {
             Value1: 0
         }
     });

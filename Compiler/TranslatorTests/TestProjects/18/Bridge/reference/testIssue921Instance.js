@@ -1,13 +1,13 @@
     Bridge.define("TestIssue921Instance.Issue921Instance", {
         statics: {
-            properties: {
+            props: {
                 NameStatic: null
             }
         },
         fields: {
             _offset: 0
         },
-        properties: {
+        props: {
             Name: null
         },
         ctors: {

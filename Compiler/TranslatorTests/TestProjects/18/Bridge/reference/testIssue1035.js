@@ -5,7 +5,7 @@
                 getDefaultValue: function () { return new TestIssue1035.StructBridge1035(); }
             }
         },
-        properties: {
+        props: {
             Data: 0
         },
         ctors: {

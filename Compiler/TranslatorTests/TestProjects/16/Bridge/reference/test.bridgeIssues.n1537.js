@@ -2,7 +2,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
     Bridge.define("Test.BridgeIssues.N1537.A", {
-        properties: {
+        props: {
             Property: {
                 get: function () {
                     // Classes should be in the order A -> B -> C -> PlaceMeToTheEnd

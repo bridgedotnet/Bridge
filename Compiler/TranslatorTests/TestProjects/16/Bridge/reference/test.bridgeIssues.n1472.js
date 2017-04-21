@@ -5,7 +5,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
         fields: {
             Field: 0
         },
-        properties: {
+        props: {
             Property: 0
         },
         methods: {

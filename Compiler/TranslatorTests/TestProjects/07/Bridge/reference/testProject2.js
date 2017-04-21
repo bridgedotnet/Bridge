@@ -9,7 +9,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
      * @class TestProject2.TestClassB
      */
     Bridge.define("TestProject2.TestClassB", {
-        properties: {
+        props: {
             /**
              * @instance
              * @public

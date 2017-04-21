@@ -8,7 +8,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                 getDefaultValue: function () { return new (Test.BridgeIssues.N1023.Optional$1(T))(); }
             }
         },
-        properties: {
+        props: {
             Value: Bridge.getDefaultValue(T)
         },
         ctors: {
@@ -40,7 +40,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     }; });
 
     Bridge.define("Test.BridgeIssues.N1023.PersonDetails", {
-        properties: {
+        props: {
             Name: null
         },
         ctors: {

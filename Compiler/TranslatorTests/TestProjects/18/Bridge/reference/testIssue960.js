@@ -30,7 +30,7 @@
 
     Bridge.define("TestIssue960.Named", {
         inherits: [TestIssue960.IHaveNamed],
-        properties: {
+        props: {
             Name: null
         },
         alias: [

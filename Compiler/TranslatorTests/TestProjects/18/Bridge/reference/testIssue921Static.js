@@ -3,7 +3,7 @@
             fields: {
                 _offset: 0
             },
-            properties: {
+            props: {
                 $Name: null
             },
             ctors: {

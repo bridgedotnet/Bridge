@@ -5,7 +5,7 @@
                 f_STaTIC_S2: null,
                 f: null
             },
-            properties: {
+            props: {
                 P_STATIC_S1: null,
                 p_STaTIC_S2: null,
                 p: null

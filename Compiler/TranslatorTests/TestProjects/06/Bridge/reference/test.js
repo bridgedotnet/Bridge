@@ -60,13 +60,13 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     });
 
     Bridge.define("TestProject1.TestClassA", {
-        properties: {
+        props: {
             Value1: 0
         }
     });
 
     Bridge.define("TestProject2.TestClassB", {
-        properties: {
+        props: {
             Value1: 0
         }
     });

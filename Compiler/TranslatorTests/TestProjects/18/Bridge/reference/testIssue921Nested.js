@@ -60,7 +60,7 @@
             fields: {
                 ComputeNumberStatic: null
             },
-            properties: {
+            props: {
                 NameStatic: null,
                 IntStatic: 0
             },
@@ -76,7 +76,7 @@
             ComputeTwoNumbers: null,
             DoWithNumbers: null
         },
-        properties: {
+        props: {
             Name: null
         },
         ctors: {

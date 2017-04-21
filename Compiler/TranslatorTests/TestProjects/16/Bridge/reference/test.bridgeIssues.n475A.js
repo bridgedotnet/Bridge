@@ -2,7 +2,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
     Bridge.define("Test.BridgeIssues.N475A.Bridge475Event", {
-        properties: {
+        props: {
             Data: 0
         },
         methods: {

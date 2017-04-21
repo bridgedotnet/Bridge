@@ -26,7 +26,7 @@ Bridge.assembly("TestProject.I2096", function ($asm, globals) {
     Bridge.define("Test.BridgeIssues.N1424.A");
 
     Bridge.define("Test.BridgeIssues.N1424.Alpha", {
-        properties: {
+        props: {
             Data: 0
         }
     });
@@ -38,20 +38,20 @@ Bridge.assembly("TestProject.I2096", function ($asm, globals) {
     });
 
     Bridge.define("TestProject1.TestClassA", {
-        properties: {
+        props: {
             Value1: 0
         }
     });
 
     Bridge.define("TestProject2.TestClassB", {
-        properties: {
+        props: {
             Value1: 0
         }
     });
 
     Bridge.define("Test.BridgeIssues.N770.Impl", {
         inherits: [Test.BridgeIssues.N770.IBase],
-        properties: {
+        props: {
             Prop: 0
         },
         alias: [

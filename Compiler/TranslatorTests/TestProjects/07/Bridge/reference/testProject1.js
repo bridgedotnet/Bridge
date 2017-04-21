@@ -9,7 +9,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
      * @class TestProject1.TestClassA
      */
     Bridge.define("TestProject1.TestClassA", {
-        properties: {
+        props: {
             /**
              * Some property
              *

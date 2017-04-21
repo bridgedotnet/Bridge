@@ -10,7 +10,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                 }
             }
         },
-        properties: {
+        props: {
             
             TestProperty: 0
         },
