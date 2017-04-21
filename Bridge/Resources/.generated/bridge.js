@@ -19503,7 +19503,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
             variables: null,
             config: {
                 properties: {
-                    Location: {
+                    location: {
                         get: function () {
                             var g = Bridge.global;
 
@@ -19514,27 +19514,27 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                             return null;
                         }
                     },
-                    CommandLine: {
+                    commandLine: {
                         get: function () {
                             return System.Environment.getCommandLineArgs().join(" ");
                         }
                     },
-                    CurrentDirectory: {
+                    currentDirectory: {
                         get: function () {
-                            var l = System.Environment.Location;
+                            var l = System.Environment.location;
 
                             return l ? l.pathname : "";
                         },
                         set: function (value) {
-                            var l = System.Environment.Location;
+                            var l = System.Environment.location;
 
                             if (l) {
                                 l.pathname = value;
                             }
                         }
                     },
-                    ExitCode: 0,
-                    Is64BitOperatingSystem: {
+                    exitCode: 0,
+                    is64BitOperatingSystem: {
                         get: function () {
                             var n = Bridge.global ? Bridge.global.navigator : null;
 
@@ -19545,7 +19545,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                             return false;
                         }
                     },
-                    ProcessorCount: {
+                    processorCount: {
                         get: function () {
                             var n = Bridge.global ? Bridge.global.navigator : null;
 
@@ -19556,7 +19556,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                             return 1;
                         }
                     },
-                    StackTrace: {
+                    stackTrace: {
                         get: function () {
                             var err = new Error();
                             var s = err.stack;
@@ -19570,7 +19570,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                             return "";
                         }
                     },
-                    Version: {
+                    version: {
                         get: function () {
                             var s = Bridge.SystemAssembly.compiler;
 
@@ -19591,7 +19591,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                 return d;
             },
             exit: function (exitCode) {
-                System.Environment.ExitCode = exitCode;
+                System.Environment.exitCode = exitCode;
             },
             expandEnvironmentVariables: function (name) {
                 var $t;
@@ -19620,7 +19620,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                 throw new System.Exception(message, exception);
             },
             getCommandLineArgs: function () {
-                var l = System.Environment.Location;
+                var l = System.Environment.location;
 
                 if (l) {
                     var args = new (System.Collections.Generic.List$1(System.String))();
