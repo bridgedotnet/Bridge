@@ -1,9 +1,9 @@
     Bridge.define("System.Version.ParseFailureKind", {
         $kind: "enum",
         statics: {
-            ArgumentNullException: 0,
-            ArgumentException: 1,
-            ArgumentOutOfRangeException: 2,
-            FormatException: 3
+            argumentNullException: 0,
+            argumentException: 1,
+            argumentOutOfRangeException: 2,
+            formatException: 3
         }
     });

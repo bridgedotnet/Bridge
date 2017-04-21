@@ -1,17 +1,17 @@
     Bridge.define("System.FormattableStringImpl", {
         inherits: [System.FormattableString],
         args: null,
-        format: null,
+        format$1: null,
         config: {
             properties: {
-                ArgumentCount: {
+                argumentCount: {
                     get: function () {
                         return this.args.length;
                     }
                 },
-                Format: {
+                format: {
                     get: function () {
-                        return this.format;
+                        return this.format$1;
                     }
                 }
             }
@@ -21,7 +21,7 @@
 
             this.$initialize();
             System.FormattableString.ctor.call(this);
-            this.format = format;
+            this.format$1 = format;
             this.args = args;
         },
         getArgument: function (index) {
@@ -31,6 +31,6 @@
             return this.args;
         },
         toString$1: function (formatProvider) {
-            return System.String.formatProvider.apply(System.String, [formatProvider, this.format].concat(this.args));
+            return System.String.formatProvider.apply(System.String, [formatProvider, this.format$1].concat(this.args));
         }
     });

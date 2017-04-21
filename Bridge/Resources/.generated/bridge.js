@@ -4406,6 +4406,55 @@
         }
     };
 
+    // @source type.js
+
+    Bridge.define("System.Type", {
+        config: {
+            properties: {
+                prototype: null,
+                isPrimitive: {
+                    get: function () {
+                        return $asm.$.System.Type.f1(new (System.Collections.Generic.List$1(System.Type))()).contains(this);
+
+                        // System.Decimal(decimal) ??
+                        // System.Int64
+                        // System.UInt64
+                        // System.Double
+                        // System.Single
+                        // System.Byte
+                        // System.SByte
+                        // System.Int16
+                        // System.UInt16
+                        // System.Int32
+                        // System.UInt32
+                        // Boolean
+                        // System.Char
+                    }
+                }
+            }
+        }
+    });
+
+    Bridge.ns("System.Type", $asm.$);
+
+    Bridge.apply($asm.$.System.Type, {
+        f1: function (_o8) {
+            _o8.add(System.Boolean);
+            _o8.add(System.Byte);
+            _o8.add(System.SByte);
+            _o8.add(System.Int16);
+            _o8.add(System.UInt16);
+            _o8.add(System.Int32);
+            _o8.add(System.UInt32);
+            _o8.add(System.Int64);
+            _o8.add(System.UInt64);
+            _o8.add(System.Char);
+            _o8.add(System.Double);
+            _o8.add(System.Single);
+            return _o8;
+        }
+    });
+
     // @source Interfaces.js
 
     Bridge.define("System.IFormattable", {
@@ -4874,17 +4923,17 @@
     Bridge.define("System.FormattableStringImpl", {
         inherits: [System.FormattableString],
         args: null,
-        format: null,
+        format$1: null,
         config: {
             properties: {
-                ArgumentCount: {
+                argumentCount: {
                     get: function () {
                         return this.args.length;
                     }
                 },
-                Format: {
+                format: {
                     get: function () {
-                        return this.format;
+                        return this.format$1;
                     }
                 }
             }
@@ -4894,7 +4943,7 @@
 
             this.$initialize();
             System.FormattableString.ctor.call(this);
-            this.format = format;
+            this.format$1 = format;
             this.args = args;
         },
         getArgument: function (index) {
@@ -4904,7 +4953,7 @@
             return this.args;
         },
         toString$1: function (formatProvider) {
-            return System.String.formatProvider.apply(System.String, [formatProvider, this.format].concat(this.args));
+            return System.String.formatProvider.apply(System.String, [formatProvider, this.format$1].concat(this.args));
         }
     });
 
@@ -9733,7 +9782,9 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
     System.Diagnostics.Debug = {
         writeln: function (text) {
-            Bridge.Console.debug(text);
+            if (Bridge.global.console && Bridge.global.console.debug) {
+                Bridge.global.console.debug(text);
+            }
         },
 
         _fail: function (message) {
@@ -13577,7 +13628,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                 var major = { }, minor = { }, build = { }, revision = { };
 
                 if (version == null) {
-                    result.v.setFailure(System.Version.ParseFailureKind.ArgumentNullException);
+                    result.v.setFailure(System.Version.ParseFailureKind.argumentNullException);
 
                     return false;
                 }
@@ -13586,7 +13637,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                 var parsedComponentsLength = parsedComponents.length;
 
                 if ((parsedComponentsLength < 2) || (parsedComponentsLength > 4)) {
-                    result.v.setFailure(System.Version.ParseFailureKind.ArgumentException);
+                    result.v.setFailure(System.Version.ParseFailureKind.argumentException);
                     return false;
                 }
 
@@ -13624,12 +13675,12 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
             },
             tryParseComponent: function (component, componentName, result, parsedComponent) {
                 if (!System.Int32.tryParse(component, parsedComponent)) {
-                    result.v.setFailure$1(System.Version.ParseFailureKind.FormatException, component);
+                    result.v.setFailure$1(System.Version.ParseFailureKind.formatException, component);
                     return false;
                 }
 
                 if (parsedComponent.v < 0) {
-                    result.v.setFailure$1(System.Version.ParseFailureKind.ArgumentOutOfRangeException, componentName);
+                    result.v.setFailure$1(System.Version.ParseFailureKind.argumentOutOfRangeException, componentName);
                     return false;
                 }
 
@@ -13672,32 +13723,32 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         _Revision: -1,
         config: {
             properties: {
-                Major: {
+                major: {
                     get: function () {
                         return this._Major;
                     }
                 },
-                Minor: {
+                minor: {
                     get: function () {
                         return this._Minor;
                     }
                 },
-                Build: {
+                build: {
                     get: function () {
                         return this._Build;
                     }
                 },
-                Revision: {
+                revision: {
                     get: function () {
                         return this._Revision;
                     }
                 },
-                MajorRevision: {
+                majorRevision: {
                     get: function () {
                         return Bridge.Int.sxs((this._Revision >> 16) & 65535);
                     }
                 },
-                MinorRevision: {
+                minorRevision: {
                     get: function () {
                         return Bridge.Int.sxs((this._Revision & 65535) & 65535);
                     }
@@ -13766,10 +13817,10 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         $ctor4: function (version) {
             this.$initialize();
             var v = System.Version.parse(version);
-            this._Major = v.Major;
-            this._Minor = v.Minor;
-            this._Build = v.Build;
-            this._Revision = v.Revision;
+            this._Major = v.major;
+            this._Minor = v.minor;
+            this._Build = v.build;
+            this._Revision = v.revision;
         },
         ctor: function () {
             this.$initialize();
@@ -13954,10 +14005,10 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
     Bridge.define("System.Version.ParseFailureKind", {
         $kind: "enum",
         statics: {
-            ArgumentNullException: 0,
-            ArgumentException: 1,
-            ArgumentOutOfRangeException: 2,
-            FormatException: 3
+            argumentNullException: 0,
+            argumentException: 1,
+            argumentOutOfRangeException: 2,
+            formatException: 3
         }
     });
 
@@ -13992,13 +14043,13 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         },
         getVersionParseException: function () {
             switch (this.m_failure) {
-                case System.Version.ParseFailureKind.ArgumentNullException: 
+                case System.Version.ParseFailureKind.argumentNullException: 
                     return new System.ArgumentNullException(this.m_argumentName);
-                case System.Version.ParseFailureKind.ArgumentException: 
+                case System.Version.ParseFailureKind.argumentException: 
                     return new System.ArgumentException("VersionString");
-                case System.Version.ParseFailureKind.ArgumentOutOfRangeException: 
+                case System.Version.ParseFailureKind.argumentOutOfRangeException: 
                     return new System.ArgumentOutOfRangeException(this.m_exceptionArgument, "Cannot be < 0");
-                case System.Version.ParseFailureKind.FormatException: 
+                case System.Version.ParseFailureKind.formatException: 
                     // Regenerate the FormatException as would be thrown by Int32.Parse()
                     try {
                         System.Int32.parse(this.m_exceptionArgument);
@@ -25875,429 +25926,15 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
     // @source console.js
 
-    Bridge.define("Bridge.Console", {
+    Bridge.define("System.Console", {
         statics: {
-            BODY_WRAPPER_ID: "bridge-body-wrapper",
-            CONSOLE_MESSAGES_ID: "bridge-console-messages",
-            position: "horizontal",
-            instance: null,
-            config: {
-                properties: {
-                    Instance: {
-                        get: function () {
-                            if (Bridge.Console.instance == null) {
-                                Bridge.Console.instance = new Bridge.Console();
-                            }
+            WriteLine: function (value) {
+                var con = Bridge.global.console;
 
-                            return Bridge.Console.instance;
-                        }
-                    }
-                }
-            },
-            logBase: function (value, messageType) {
-                if (messageType === void 0) { messageType = 0; }
-                var self = Bridge.Console.Instance;
-
-                var v = value != null ? value.toString() : "";
-
-                if (self.bufferedOutput != null) {
-                    self.bufferedOutput = System.String.concat(self.bufferedOutput, v);
-                    return;
-                }
-
-                Bridge.Console.show();
-
-                var m = self.buildConsoleMessage(v, messageType);
-                self.consoleMessages.appendChild(m);
-
-                self.currentMessageElement = m;
-
-                if (self.consoleDefined) {
-                    if (messageType === 1 && self.consoleDebugDefined) {
-                        Bridge.global.console.debug(v);
-                    } else {
-                        Bridge.global.console.log(v);
-                    }
-                } else if (self.operaPostErrorDefined) {
-                    Bridge.global.opera.postError(v);
-                }
-            },
-            error: function (value) {
-                Bridge.Console.logBase(value, 2);
-            },
-            debug: function (value) {
-                Bridge.Console.logBase(value, 1);
-            },
-            log: function (value) {
-                Bridge.Console.logBase(value);
-            },
-            hide: function () {
-                if (Bridge.Console.instance == null) {
-                    return;
-                }
-
-                var self = Bridge.Console.Instance;
-
-                if (self.hidden) {
-                    return;
-                }
-
-                self.close();
-            },
-            show: function () {
-                var self = Bridge.Console.Instance;
-
-                if (!self.hidden) {
-                    return;
-                }
-
-                self.init(true);
-            },
-            toggle: function () {
-                if (Bridge.Console.Instance.hidden) {
-                    Bridge.Console.show();
-                } else {
-                    Bridge.Console.hide();
+                if (con && con.log) {
+                    con.log(Bridge.unbox(value));
                 }
             }
-        },
-        svgNS: "http://www.w3.org/2000/svg",
-        consoleHeight: "300px",
-        consoleHeaderHeight: "35px",
-        tooltip: null,
-        consoleWrapper: null,
-        consoleMessages: null,
-        bridgeIcon: null,
-        bridgeIconPath: null,
-        bridgeConsoleLabel: null,
-        closeBtn: null,
-        closeIcon: null,
-        closeIconPath: null,
-        consoleHeader: null,
-        consoleBody: null,
-        hidden: true,
-        consoleDefined: false,
-        consoleDebugDefined: false,
-        operaPostErrorDefined: false,
-        currentMessageElement: null,
-        bufferedOutput: null,
-        ctor: function () {
-            this.$initialize();
-            this.init();
-        },
-        init: function (reinit) {
-            if (reinit === void 0) { reinit = false; }
-            this.hidden = false;
-
-            var consoleWrapperStyles = Bridge.fn.bind(this, $asm.$.Bridge.Console.f1)(new (System.Collections.Generic.Dictionary$2(System.String,System.String))());
-
-            var consoleHeaderStyles = $asm.$.Bridge.Console.f2(new (System.Collections.Generic.Dictionary$2(System.String,System.String))());
-
-            var consoleBodyStyles = $asm.$.Bridge.Console.f3(new (System.Collections.Generic.Dictionary$2(System.String,System.String))());
-
-            // Bridge Icon
-            this.bridgeIcon = this.bridgeIcon || document.createElementNS(this.svgNS, "svg");
-
-            var items = Bridge.fn.bind(this, $asm.$.Bridge.Console.f4)(new (System.Collections.Generic.Dictionary$2(System.String,System.String))());
-
-            this.setAttributes(this.bridgeIcon, items);
-
-            this.bridgeIconPath = this.bridgeIconPath || document.createElementNS(this.svgNS, "path");
-
-            var items2 = new (System.Collections.Generic.Dictionary$2(System.String,System.String))();
-            items2.set("d", "M19 14.4h2.2V9.6L19 7.1v7.3zm4.3-2.5v2.5h2.2l-2.2-2.5zm-8.5 2.5H17V4.8l-2.2-2.5v12.1zM0 14.4h3l7.5-8.5v8.5h2.2V0L0 14.4z");
-            items2.set("fill", "#555");
-
-            this.setAttributes(this.bridgeIconPath, items2);
-
-            // Bridge Console Label
-            this.bridgeConsoleLabel = this.bridgeConsoleLabel || document.createElement("span");
-            this.bridgeConsoleLabel.innerHTML = "Bridge Console";
-
-            // Close Button
-            this.closeBtn = this.closeBtn || document.createElement("span");
-            this.closeBtn.setAttribute("style", "position: relative;display: inline-block;float: right;cursor: pointer");
-
-            this.closeIcon = this.closeIcon || document.createElementNS(this.svgNS, "svg");
-
-            var items3 = Bridge.fn.bind(this, $asm.$.Bridge.Console.f5)(new (System.Collections.Generic.Dictionary$2(System.String,System.String))());
-
-            this.setAttributes(this.closeIcon, items3);
-
-            this.closeIconPath = this.closeIconPath || document.createElementNS(this.svgNS, "path");
-
-            var items4 = $asm.$.Bridge.Console.f6(new (System.Collections.Generic.Dictionary$2(System.String,System.String))());
-
-            this.setAttributes(this.closeIconPath, items4);
-
-            this.tooltip = this.tooltip || document.createElement("div");
-            this.tooltip.innerHTML = "Refresh page to open Bridge Console";
-
-            this.tooltip.setAttribute("style", "position: absolute;right: 30px;top: -6px;white-space: nowrap;padding: 7px;border-radius: 3px;background-color: rgba(0, 0, 0, 0.75);color: #eee;text-align: center;visibility: hidden;opacity: 0;-webkit-transition: all 0.25s ease-in-out;transition: all 0.25s ease-in-out;z-index: 1;");
-
-            // Styles and other stuff based on position
-            // Force to horizontal for now
-            Bridge.Console.position = "horizontal";
-
-            if (Bridge.referenceEquals(Bridge.Console.position, "horizontal")) {
-                this.wrapBodyContent();
-
-                consoleWrapperStyles.set("right", "0");
-                consoleHeaderStyles.set("border-top", "1px solid #a3a3a3");
-                consoleBodyStyles.set("height", this.consoleHeight);
-            } else if (Bridge.referenceEquals(Bridge.Console.position, "vertical")) {
-                var consoleWidth = "400px";
-                document.body.style.marginLeft = consoleWidth;
-
-                consoleWrapperStyles.set("top", "0");
-                consoleWrapperStyles.set("width", consoleWidth);
-                consoleWrapperStyles.set("border-right", "1px solid #a3a3a3");
-                consoleBodyStyles.set("height", "100%");
-            }
-
-            // Console wrapper
-            this.consoleWrapper = this.consoleWrapper || document.createElement("div");
-            this.consoleWrapper.setAttribute("style", this.obj2Css(consoleWrapperStyles));
-
-            // Console Header
-            this.consoleHeader = this.consoleHeader || document.createElement("div");
-            this.consoleHeader.setAttribute("style", this.obj2Css(consoleHeaderStyles));
-
-            // Console Body Wrapper
-            this.consoleBody = this.consoleBody || document.createElement("div");
-            this.consoleBody.setAttribute("style", this.obj2Css(consoleBodyStyles));
-
-            // Console Messages Unordered List Element
-            this.consoleMessages = this.consoleMessages || document.createElement("ul");
-            var cm = this.consoleMessages;
-            cm.id = Bridge.Console.CONSOLE_MESSAGES_ID;
-
-            cm.setAttribute("style", "margin: 0;padding: 0;list-style: none;");
-
-            if (!reinit) {
-                this.bridgeIcon.appendChild(this.bridgeIconPath);
-                this.closeIcon.appendChild(this.closeIconPath);
-                this.closeBtn.appendChild(this.closeIcon);
-                this.closeBtn.appendChild(this.tooltip);
-
-                // Add child elements into console header
-                this.consoleHeader.appendChild(this.bridgeIcon);
-                this.consoleHeader.appendChild(this.bridgeConsoleLabel);
-                this.consoleHeader.appendChild(this.closeBtn);
-
-                // Add messages to console body
-                this.consoleBody.appendChild(cm);
-
-                // Add console header and console body into console wrapper
-                this.consoleWrapper.appendChild(this.consoleHeader);
-                this.consoleWrapper.appendChild(this.consoleBody);
-
-                // Finally add console to body
-                document.body.appendChild(this.consoleWrapper);
-
-                // Close console
-                this.closeBtn.addEventListener("click", Bridge.fn.cacheBind(this, this.close));
-
-                // Show/hide Tooltip
-                this.closeBtn.addEventListener("mouseover", Bridge.fn.cacheBind(this, this.showTooltip));
-                this.closeBtn.addEventListener("mouseout", Bridge.fn.cacheBind(this, this.hideTooltip));
-
-                this.consoleDefined = Bridge.isDefined(Bridge.global) && Bridge.isDefined(Bridge.global.console);
-                this.consoleDebugDefined = this.consoleDefined && Bridge.isDefined(Bridge.unbox(Bridge.global.console.debug));
-                this.operaPostErrorDefined = Bridge.isDefined(Bridge.global.opera) && Bridge.isDefined(Bridge.unbox(Bridge.global.opera.postError));
-            }
-        },
-        showTooltip: function () {
-            var self = Bridge.Console.Instance;
-            self.tooltip.style.right = "20px";
-            self.tooltip.style.visibility = "visible";
-            self.tooltip.style.opacity = "1";
-        },
-        hideTooltip: function () {
-            var self = Bridge.Console.Instance;
-            self.tooltip.style.right = "30px";
-            self.tooltip.style.opacity = "0";
-        },
-        close: function () {
-            this.hidden = true;
-
-            this.consoleWrapper.style.display = "none";
-
-            if (Bridge.referenceEquals(Bridge.Console.position, "horizontal")) {
-                this.unwrapBodyContent();
-            } else if (Bridge.referenceEquals(Bridge.Console.position, "vertical")) {
-                document.body.removeAttribute("style");
-            }
-        },
-        wrapBodyContent: function () {
-            if (document.body == null) {
-                return;
-            }
-
-            // get body margin and padding for proper alignment of scroll if a body margin/padding is used.
-            var bodyStyle = document.defaultView.getComputedStyle(document.body, null);
-
-            var bodyPaddingTop = bodyStyle.paddingTop;
-            var bodyPaddingRight = bodyStyle.paddingRight;
-            var bodyPaddingBottom = bodyStyle.paddingBottom;
-            var bodyPaddingLeft = bodyStyle.paddingLeft;
-
-            var bodyMarginTop = bodyStyle.marginTop;
-            var bodyMarginRight = bodyStyle.marginRight;
-            var bodyMarginBottom = bodyStyle.marginBottom;
-            var bodyMarginLeft = bodyStyle.marginLeft;
-
-            var div = document.createElement("div");
-            div.id = Bridge.Console.BODY_WRAPPER_ID;
-            div.setAttribute("style", System.String.concat("height: calc(100vh - ", this.consoleHeight, " - ", this.consoleHeaderHeight, ");", "margin-top: calc(-1 * ", "(", (System.String.concat(bodyMarginTop, " + ", bodyPaddingTop)), "));", "margin-right: calc(-1 * ", "(", (System.String.concat(bodyMarginRight, " + ", bodyPaddingRight)), "));", "margin-left: calc(-1 * ", "(", (System.String.concat(bodyMarginLeft, " + ", bodyPaddingLeft)), "));", "padding-top: calc(", (System.String.concat(bodyMarginTop, " + ", bodyPaddingTop)), ");", "padding-right: calc(", (System.String.concat(bodyMarginRight, " + ", bodyPaddingRight)), ");", "padding-bottom: calc(", (System.String.concat(bodyMarginBottom, " + ", bodyPaddingBottom)), ");", "padding-left: calc(", (System.String.concat(bodyMarginLeft, " + ", bodyPaddingLeft)), ");", "overflow-x: auto;", "box-sizing: border-box !important;"));
-
-            while (document.body.firstChild != null) {
-                div.appendChild(document.body.firstChild);
-            }
-
-            document.body.appendChild(div);
-        },
-        unwrapBodyContent: function () {
-            var bridgeBodyWrapper = document.getElementById(Bridge.Console.BODY_WRAPPER_ID);
-
-            if (bridgeBodyWrapper == null) {
-                return;
-            }
-
-            while (bridgeBodyWrapper.firstChild != null) {
-                document.body.insertBefore(bridgeBodyWrapper.firstChild, bridgeBodyWrapper);
-            }
-
-            document.body.removeChild(bridgeBodyWrapper);
-        },
-        buildConsoleMessage: function (message, messageType) {
-            var messageItem = document.createElement("li");
-            messageItem.setAttribute("style", "padding: 5px 10px;border-bottom: 1px solid #f0f0f0;");
-
-            var messageIcon = document.createElementNS(this.svgNS, "svg");
-
-            var items5 = Bridge.fn.bind(this, $asm.$.Bridge.Console.f7)(new (System.Collections.Generic.Dictionary$2(System.String,System.String))());
-
-            this.setAttributes(messageIcon, items5);
-
-            var color = "#555";
-
-            if (messageType === 2) {
-                color = "#d65050";
-            } else if (messageType === 1) {
-                color = "#1800FF";
-            }
-
-            var messageIconPath = document.createElementNS(this.svgNS, "path");
-
-            var items6 = new (System.Collections.Generic.Dictionary$2(System.String,System.String))();
-
-            items6.set("d", "M3.8 3.5L.7 6.6s-.1.1-.2.1-.1 0-.2-.1l-.2-.3C0 6.2 0 6.2 0 6.1c0 0 0-.1.1-.1l2.6-2.6L.1.7C0 .7 0 .6 0 .6 0 .5 0 .5.1.4L.4.1c0-.1.1-.1.2-.1s.1 0 .2.1l3.1 3.1s.1.1.1.2-.1.1-.2.1z");
-            items6.set("fill", color);
-
-            this.setAttributes(messageIconPath, items6);
-
-            messageIcon.appendChild(messageIconPath);
-
-            var messageContainer = document.createElement("span");
-            messageContainer.innerHTML = message;
-            messageContainer.setAttribute("style", System.String.concat("color: ", color, "; white-space: pre;"));
-
-            messageItem.appendChild(messageIcon);
-            messageItem.appendChild(messageContainer);
-
-            return messageItem;
-        },
-        setAttributes: function (el, attrs) {
-            var $t;
-            $t = Bridge.getEnumerator(attrs);
-            try {
-                while ($t.moveNext()) {
-                    var item = $t.Current;
-                    el.setAttribute(item.key, item.value);
-                }
-            }finally {
-                if (Bridge.is($t, System.IDisposable)) {
-                    $t.System$IDisposable$dispose();
-                }
-            }},
-        obj2Css: function (obj) {
-            var $t;
-            var str = "";
-
-            $t = Bridge.getEnumerator(obj);
-            try {
-                while ($t.moveNext()) {
-                    var item = $t.Current;
-                    str = System.String.concat(str, (System.String.concat(item.key.toLowerCase(), ":", item.value, ";")));
-                }
-            }finally {
-                if (Bridge.is($t, System.IDisposable)) {
-                    $t.System$IDisposable$dispose();
-                }
-            }
-            return str;
-        }
-    });
-
-    Bridge.ns("Bridge.Console", $asm.$);
-
-    Bridge.apply($asm.$.Bridge.Console, {
-        f1: function (_o1) {
-            _o1.add("position", "fixed");
-            _o1.add("left", "0");
-            _o1.add("bottom", "0");
-            _o1.add("padding-top", this.consoleHeaderHeight);
-            _o1.add("background-color", "#fff");
-            _o1.add("font", "normal normal normal 13px/1 sans-serif");
-            _o1.add("color", "#555");
-            return _o1;
-        },
-        f2: function (_o2) {
-            _o2.add("position", "absolute");
-            _o2.add("top", "0");
-            _o2.add("left", "0");
-            _o2.add("right", "0");
-            _o2.add("height", "35px");
-            _o2.add("padding", "9px 15px 7px 10px");
-            _o2.add("border-bottom", "1px solid #ccc");
-            _o2.add("background-color", "#f3f3f3");
-            _o2.add("box-sizing", "border-box");
-            return _o2;
-        },
-        f3: function (_o3) {
-            _o3.add("overflow-x", "auto");
-            _o3.add("font-family", "Menlo, Monaco, Consolas, 'Courier New', monospace");
-            return _o3;
-        },
-        f4: function (_o4) {
-            _o4.add("xmlns", this.svgNS);
-            _o4.add("width", "25.5");
-            _o4.add("height", "14.4");
-            _o4.add("viewBox", "0 0 25.5 14.4");
-            _o4.add("style", "margin: 0 3px 3px 0;vertical-align:middle;");
-            return _o4;
-        },
-        f5: function (_o5) {
-            _o5.add("xmlns", this.svgNS);
-            _o5.add("width", "11.4");
-            _o5.add("height", "11.4");
-            _o5.add("viewBox", "0 0 11.4 11.4");
-            _o5.add("style", "vertical-align: middle;");
-            return _o5;
-        },
-        f6: function (_o6) {
-            _o6.add("d", "M11.4 1.4L10 0 5.7 4.3 1.4 0 0 1.4l4.3 4.3L0 10l1.4 1.4 4.3-4.3 4.3 4.3 1.4-1.4-4.3-4.3");
-            _o6.add("fill", "#555");
-            return _o6;
-        },
-        f7: function (_o7) {
-            _o7.add("xmlns", this.svgNS);
-            _o7.add("width", "3.9");
-            _o7.add("height", "6.7");
-            _o7.add("viewBox", "0 0 3.9 6.7");
-            _o7.add("style", "margin-right: 7px; vertical-align: middle;");
-            return _o7;
         }
     });
 
