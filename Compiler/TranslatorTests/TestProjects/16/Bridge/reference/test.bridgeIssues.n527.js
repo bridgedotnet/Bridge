@@ -5,9 +5,11 @@ Bridge.assembly("TestProject", function ($asm, globals) {
         var Bridge527_A = { };
         Bridge.define("Test.BridgeIssues.N527.Bridge527_A", {
             $scope: Bridge527_A,
-            GetName: function () {
-                var c = new Bridge527_B.Test.BridgeIssues.N527.Bridge527_B();
-                return "Test";
+            methods: {
+                GetName: function () {
+                    var c = new Bridge527_B.Test.BridgeIssues.N527.Bridge527_B();
+                    return "Test";
+                }
             }
         });
         return Bridge527_A;

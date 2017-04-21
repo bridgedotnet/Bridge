@@ -10,9 +10,11 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
     Bridge.define("Test.BridgeIssues.N963.Class963", {
         statics: {
-            Main1: function () {
-                var i = 5;
-                i = (i + 1) | 0;
+            methods: {
+                Main1: function () {
+                    var i = 5;
+                    i = (i + 1) | 0;
+                }
             }
         }
     });

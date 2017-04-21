@@ -28,9 +28,10 @@
                 }
             }
 
-            if (config.properties) {
-                for (name in config.properties) {
-                    var cfg = Bridge.property(statics ? scope : prototype, name, config.properties[name], statics, cls);
+            var props = config.properties;
+            if (props) {
+                for (name in props) {
+                    var cfg = Bridge.property(statics ? scope : prototype, name, props[name], statics, cls);
 
                     cfg.name = name;
                     cfg.cls = cls;
@@ -91,6 +92,69 @@
                     }
                 };
             }
+        },
+
+        convertScheme: function(obj) {
+            var result = {},
+            copy = function (obj, to) {
+                var reserved = ["fields", "methods", "events", "props", "properties", "alias", "ctors"],
+                    keys = Object.keys(obj);
+
+                for (var i = 0; i < keys.length; i++) {
+                    var name = keys[i];
+                    if (reserved.indexOf(name) === -1) {
+                        to[name] = obj[name];
+                    }
+                }
+
+                if (obj.fields) {
+                    Bridge.apply(to, obj.fields);
+                }
+
+                if (obj.methods) {
+                    Bridge.apply(to, obj.methods);
+                }
+
+                var config = {};
+                if (obj.props) {
+                    config.properties = obj.props;
+                }
+                else if (obj.properties) {
+                    config.properties = obj.properties;
+                }
+
+                if (obj.events) {
+                    config.events = obj.events;
+                }
+
+                if (obj.alias) {
+                    config.alias = obj.alias;
+                }
+
+                if (obj.ctors) {
+                    if (obj.ctors.init) {
+                        config.init = obj.ctors.init;
+                        delete obj.ctors.init;
+                    }
+
+                    Bridge.apply(to, obj.ctors);
+                }
+
+                to.$config = config;
+            };
+
+            if (obj.Main) {
+                result.$main = obj.Main;
+            }
+
+            copy(obj, result);
+
+            if (obj.statics || obj.$statics) {
+                result.$statics = {};
+                copy(obj.statics || obj.$statics, result.$statics);
+            }
+
+            return result;
         },
 
         definei: function (className, gscope, prop) {
@@ -162,6 +226,41 @@
 
             if (prop.$kind === "enum" && !prop.inherits) {
                 prop.inherits = [System.IComparable, System.IFormattable];
+            }
+
+            var rNames = ["fields", "events", "props", "ctors", "methods"],
+                defaultScheme = Bridge.isFunction(prop.Main) ? 0 : 1,
+                check = function (scope) {
+                    if (scope.config && Bridge.isPlainObject(scope.config) ||
+                        scope.$main && Bridge.isFunction(scope.$main) ||
+                        scope.hasOwnProperty("ctor") && Bridge.isFunction(scope.ctor)) {
+                        defaultScheme = 1;
+                        return false;
+                    }
+
+                    if (scope.alias && Bridge.isArray(scope.alias) && scope.alias.length > 0 && scope.alias.length % 2 === 0) {
+                        return true;
+                    }
+
+                    for (var j = 0; j < rNames.length; j++) {
+                        if (scope[rNames[j]] && Bridge.isPlainObject(scope[rNames[j]])) {
+                            return true;
+                        }
+                    }
+                    return false;
+                },
+                alternateScheme = check(prop);
+
+            if (!alternateScheme && prop.statics) {
+                alternateScheme = check(prop.statics);
+            }
+
+            if (!alternateScheme) {
+                alternateScheme = defaultScheme == 0;
+            }
+
+            if (alternateScheme) {
+                prop = Bridge.Class.convertScheme(prop);
             }
 
             var extend = prop.$inherits || prop.inherits,

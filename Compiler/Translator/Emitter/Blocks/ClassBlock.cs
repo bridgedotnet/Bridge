@@ -82,6 +82,26 @@ namespace Bridge.Translator
 
                 if (this.TypeInfo.TypeDeclaration.ClassType != ClassType.Interface)
                 {
+                    MethodDeclaration entryPoint = null;
+                    if (this.TypeInfo.StaticMethods.Any(group =>
+                    {
+                        return group.Value.Any(method =>
+                        {
+                            var result = Helpers.IsEntryPointMethod(this.Emitter, method);
+                            if (result)
+                            {
+                                entryPoint = method;
+                            }
+                            return result;
+                        });
+                    }))
+                    {
+                        if (!entryPoint.Body.IsNull)
+                        {
+                            this.Emitter.VisitMethodDeclaration(entryPoint);
+                        }
+                    }
+
                     this.EmitStaticBlock();
                     this.EmitInstantiableBlock();
                 }

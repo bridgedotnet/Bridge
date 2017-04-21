@@ -2,9 +2,11 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     "use strict";
 
     Bridge.define("Functions.DelegateClass", {
-        MethodVoidDelegate: null,
-        MethodStringDelegate: null,
-        MethodStringDelegateIntResult: null
+        fields: {
+            MethodVoidDelegate: null,
+            MethodStringDelegate: null,
+            MethodStringDelegateIntResult: null
+        }
     });
 
     Bridge.define("Functions.DelegateInterface", {
@@ -14,18 +16,20 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     Bridge.define("Functions.Delegates");
 
     Bridge.define("Functions.Parameters", {
-        GetSomething: function (i) {
-            if (i === void 0) { i = 5; }
-            return i;
-        },
-        Join: function (numbers) {
-            if (numbers === void 0) { numbers = []; }
-            var s = "";
-            for (var i = 0; i < numbers.length; i = (i + 1) | 0) {
-                s = System.String.concat(s, numbers[System.Array.index(i, numbers)]);
-            }
+        methods: {
+            GetSomething: function (i) {
+                if (i === void 0) { i = 5; }
+                return i;
+            },
+            Join: function (numbers) {
+                if (numbers === void 0) { numbers = []; }
+                var s = "";
+                for (var i = 0; i < numbers.length; i = (i + 1) | 0) {
+                    s = System.String.concat(s, numbers[System.Array.index(i, numbers)]);
+                }
 
-            return s;
+                return s;
+            }
         }
     });
 });

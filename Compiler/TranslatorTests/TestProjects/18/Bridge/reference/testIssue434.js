@@ -6,17 +6,19 @@
 
     Bridge.define("TestIssue434.Issue434A", {
         statics: {
-            Method1: function Method1() {
-                TestIssue434.Issue434A.DoSomething(1);
-            },
-            Method3: function Method3() {
-                TestIssue434.Issue434A.DoSomething(3);
-            },
-            Method4: function Method4() {
-                TestIssue434.Issue434A.DoSomething(4);
-            },
-            DoSomething: function DoSomething(i) {
-                Bridge.Console.log(i);
+            methods: {
+                Method1: function Method1() {
+                    TestIssue434.Issue434A.DoSomething(1);
+                },
+                Method3: function Method3() {
+                    TestIssue434.Issue434A.DoSomething(3);
+                },
+                Method4: function Method4() {
+                    TestIssue434.Issue434A.DoSomething(4);
+                },
+                DoSomething: function DoSomething(i) {
+                    Bridge.Console.log(i);
+                }
             }
         }
     });
@@ -31,17 +33,19 @@
 
     Bridge.define("TestIssue434.Issue434B", {
         statics: {
-            Method1: function Method1() {
-                TestIssue434.Issue434B.DoSomething(1);
-            },
-            Method3: function Method3() {
-                TestIssue434.Issue434B.DoSomething(3);
-            },
-            Method4: function Method4() {
-                TestIssue434.Issue434B.DoSomething(4);
-            },
-            DoSomething: function DoSomething(i) {
-                Bridge.Console.log(i);
+            methods: {
+                Method1: function Method1() {
+                    TestIssue434.Issue434B.DoSomething(1);
+                },
+                Method3: function Method3() {
+                    TestIssue434.Issue434B.DoSomething(3);
+                },
+                Method4: function Method4() {
+                    TestIssue434.Issue434B.DoSomething(4);
+                },
+                DoSomething: function DoSomething(i) {
+                    Bridge.Console.log(i);
+                }
             }
         }
     });

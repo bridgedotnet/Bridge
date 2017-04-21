@@ -76,11 +76,6 @@ namespace Bridge.Translator
 
             string name = overloads.GetOverloadName(false, null, true);
 
-            if (Helpers.IsEntryPointMethod(this.Emitter, methodDeclaration))
-            {
-                name = JS.Fields.MAIN;
-            }
-
             this.Write(name);
 
             this.WriteColon();

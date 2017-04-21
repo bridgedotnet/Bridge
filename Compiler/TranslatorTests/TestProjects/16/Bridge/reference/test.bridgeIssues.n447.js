@@ -3,32 +3,38 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
     Bridge.define("Test.BridgeIssues.N447.Math447", {
         statics: {
-            GetSum$1: function (a, b) {
-                return ((a + b) | 0);
-            },
-            GetSum$2: function (a, b) {
-                return System.String.concat(a, b);
-            },
-            GetSum: function (a, b) {
-                return a.add(b);
+            methods: {
+                GetSum$1: function (a, b) {
+                    return ((a + b) | 0);
+                },
+                GetSum$2: function (a, b) {
+                    return System.String.concat(a, b);
+                },
+                GetSum: function (a, b) {
+                    return a.add(b);
+                }
             }
         }
     });
 
     Bridge.define("Test.BridgeIssues.N447.N447", {
         statics: {
-            Five: 5,
-            Another: "Another",
-            Ten: System.Decimal(10.0),
-            CheckInlineExpression: function () {
-                var s = "AnotherSome";
-                var i = 20;
-                var d = System.Decimal(10.5);
+            fields: {
+                Five: 5,
+                Another: "Another",
+                Ten: System.Decimal(10.0)
             },
-            CheckInlineCalls: function () {
-                var s = Test.BridgeIssues.N447.Math447.GetSum$2(Test.BridgeIssues.N447.N447.Another, "Some");
-                var i = Test.BridgeIssues.N447.Math447.GetSum$1(Test.BridgeIssues.N447.N447.Five, 15);
-                var d = Test.BridgeIssues.N447.Math447.GetSum(Test.BridgeIssues.N447.N447.Ten, System.Decimal(0.5));
+            methods: {
+                CheckInlineExpression: function () {
+                    var s = "AnotherSome";
+                    var i = 20;
+                    var d = System.Decimal(10.5);
+                },
+                CheckInlineCalls: function () {
+                    var s = Test.BridgeIssues.N447.Math447.GetSum$2(Test.BridgeIssues.N447.N447.Another, "Some");
+                    var i = Test.BridgeIssues.N447.Math447.GetSum$1(Test.BridgeIssues.N447.N447.Five, 15);
+                    var d = Test.BridgeIssues.N447.Math447.GetSum(Test.BridgeIssues.N447.N447.Ten, System.Decimal(0.5));
+                }
             }
         }
     });

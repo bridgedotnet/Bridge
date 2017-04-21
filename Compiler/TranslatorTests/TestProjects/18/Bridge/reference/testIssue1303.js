@@ -1,47 +1,53 @@
     Bridge.define("TestIssue1303.App", {
         statics: {
-            config: {
+            ctors: {
                 init: function () {
                     Bridge.ready(this.NotMain);
                     Bridge.ready(this.Main);
                 }
             },
-            NotMain: function NotMain() {
-                //Should be in config.init
-            },
-            Main: function Main() {
-                //Should be in config.init
+            methods: {
+                NotMain: function NotMain() {
+                    //Should be in config.init
+                },
+                Main: function Main() {
+                    //Should be in config.init
+                }
             }
         },
         $entryPoint: true
     });
 
     Bridge.define("TestIssue1303.App1", {
+        Main: function Main() {
+            //Should be in config.init
+        },
         statics: {
-            config: {
+            ctors: {
                 init: function () {
                     Bridge.ready(this.NotMain);
                 }
             },
-            NotMain: function NotMain() {
-                //Should be in config.init
+            methods: {
+                NotMain: function NotMain() {
+                    //Should be in config.init
+                }
             }
         },
-        $entryPoint: true,
-        $main: function $main() {
-            //Should be in config.init
-        }
+        $entryPoint: true
     });
 
     Bridge.define("TestIssue1303.App2", {
         statics: {
-            config: {
+            ctors: {
                 init: function () {
                     Bridge.ready(this.Main);
                 }
             },
-            Main: function Main() {
-                //Should be in config.init
+            methods: {
+                Main: function Main() {
+                    //Should be in config.init
+                }
             }
         },
         $entryPoint: true
