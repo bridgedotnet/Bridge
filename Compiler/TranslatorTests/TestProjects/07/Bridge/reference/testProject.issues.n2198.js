@@ -19,7 +19,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
              * @return  {void}
              */
             Main: function () {
-                Bridge.Console.log("Hello World!");
+                System.Console.WriteLine("Hello World!");
             }
         });
 
