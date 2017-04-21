@@ -46,7 +46,6 @@
             public const string BRIDGE_COMBINE = "Bridge.fn.combine";
             public const string BRIDGE_REMOVE = "Bridge.fn.remove";
             public const string BRIDGE_MERGE = "Bridge.merge";
-            public const string BRIDGE_APPLY = "Bridge.apply";
             public const string BRIDGE_IS_DEFINED = "Bridge.isDefined";
             public const string BRIDGE_GET_ENUMERATOR = "Bridge.getEnumerator";
             public const string BRIDGE_GET_TYPE = "Bridge.getType";
