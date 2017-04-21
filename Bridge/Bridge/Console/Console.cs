@@ -221,7 +221,23 @@ namespace Bridge.Utils
             {
                 /*@
                     Bridge.global.window.addEventListener("error", function (e) {
-                        Bridge.Console.error(e.message + " (" + e.filename.substring(e.filename.lastIndexOf('/') + 1) + ", line " + e.lineno + " char " + e.colno + ")");
+                        var msg = e;
+
+                        if (e.error) {
+                            msg = e.error.toString();
+
+                            if (e.error.stack) {
+                                msg += '\n' + e.error.stack;
+                            }
+                        } else if (e.message) {
+                            msg = e.message;
+
+                            if (e.filename && e.lineno && e.colno) {
+                                msg += " (" + e.filename.substring(e.filename.lastIndexOf('/') + 1) + ", line " + e.lineno + " char " + e.colno + ")";
+                            }
+                        }
+
+                        Bridge.Console.error(msg);
                     });
                  */
             }
