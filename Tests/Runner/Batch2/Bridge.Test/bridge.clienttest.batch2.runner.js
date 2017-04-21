@@ -5,7 +5,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch2", function ($asm, globals)
     
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch2Runner", {
-        $main: function () {
+        Main: function () {
             Bridge.Test.Runtime.ContextHelper.Init();
             QUnit.module("Checked/Unckecked");
             QUnit.test("CheckedInsideUnchecked - Batch2 TestInt32", Bridge.Test.Runtime.BridgeClientTestBatch2Runner.CheckedInsideUncheckedTests.TestInt32);
@@ -89,510 +89,570 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch2", function ($asm, globals)
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch2Runner.Bridge1385", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.Bridge1385)],
         statics: {
-            TestIsTypedArrayForByte: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.Bridge1385).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.Bridge1385, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestIsTypedArrayForByte()", $t.Line = "9", $t));
-                Bridge.ClientTest.Batch2.BridgeIssues.Bridge1385.TestIsTypedArrayForByte();
+            methods: {
+                TestIsTypedArrayForByte: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.Bridge1385).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.Bridge1385, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestIsTypedArrayForByte()", $t.Line = "9", $t));
+                    Bridge.ClientTest.Batch2.BridgeIssues.Bridge1385.TestIsTypedArrayForByte();
+                }
             }
         },
-        context: null,
-        GetContext: function () {
-            var $t;
-            if (this.context == null) {
-                this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch2", $t.ClassName = "Bridge.ClientTest.Batch2.BridgeIssues.Bridge1385", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch2/BridgeIssues/N1385.cs", $t);
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch2", $t.ClassName = "Bridge.ClientTest.Batch2.BridgeIssues.Bridge1385", $t.File = "Batch2\\BridgeIssues\\N1385.cs", $t);
+                }
+                return this.context;
             }
-            return this.context;
         }
     });
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch2Runner.Bridge1499", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.Bridge1499)],
         statics: {
-            TestObjectStringCoalesceWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.Bridge1499).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.Bridge1499, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestObjectStringCoalesceWorks()", $t.Line = "9", $t));
-                t.Fixture.TestObjectStringCoalesceWorks();
+            methods: {
+                TestObjectStringCoalesceWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.Bridge1499).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.Bridge1499, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestObjectStringCoalesceWorks()", $t.Line = "9", $t));
+                    t.Fixture.TestObjectStringCoalesceWorks();
+                }
             }
         },
-        context: null,
-        GetContext: function () {
-            var $t;
-            if (this.context == null) {
-                this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch2", $t.ClassName = "Bridge.ClientTest.Batch2.BridgeIssues.Bridge1499", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch2/BridgeIssues/N1499.cs", $t);
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch2", $t.ClassName = "Bridge.ClientTest.Batch2.BridgeIssues.Bridge1499", $t.File = "Batch2\\BridgeIssues\\N1499.cs", $t);
+                }
+                return this.context;
             }
-            return this.context;
         }
     });
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch2Runner.CheckedInsideUncheckedTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests)],
         statics: {
-            TestInt32: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.CheckedInsideUncheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestInt32()", $t.Line = "190", $t));
-                Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests.TestInt32();
-            },
-            TestUInt32: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.CheckedInsideUncheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestUInt32()", $t.Line = "234", $t));
-                Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests.TestUInt32();
-            },
-            TestLong: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.CheckedInsideUncheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLong()", $t.Line = "276", $t));
-                Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests.TestLong();
-            },
-            TestULong: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.CheckedInsideUncheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestULong()", $t.Line = "320", $t));
-                Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests.TestULong();
+            methods: {
+                TestInt32: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.CheckedInsideUncheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestInt32()", $t.Line = "190", $t));
+                    Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests.TestInt32();
+                },
+                TestUInt32: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.CheckedInsideUncheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestUInt32()", $t.Line = "234", $t));
+                    Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests.TestUInt32();
+                },
+                TestLong: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.CheckedInsideUncheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLong()", $t.Line = "276", $t));
+                    Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests.TestLong();
+                },
+                TestULong: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.CheckedInsideUncheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestULong()", $t.Line = "320", $t));
+                    Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests.TestULong();
+                }
             }
         },
-        context: null,
-        GetContext: function () {
-            var $t;
-            if (this.context == null) {
-                this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch2", $t.ClassName = "Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch2/CheckedUncheckedTests.cs", $t);
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch2", $t.ClassName = "Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedInsideUncheckedTests", $t.File = "Batch2\\CheckedUncheckedTests.cs", $t);
+                }
+                return this.context;
             }
-            return this.context;
         }
     });
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch2Runner.CheckedTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests)],
         statics: {
-            TestInt32: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.CheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestInt32()", $t.Line = "25", $t));
-                Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests.TestInt32();
-            },
-            TestUInt32: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.CheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestUInt32()", $t.Line = "66", $t));
-                Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests.TestUInt32();
-            },
-            TestLong: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.CheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLong()", $t.Line = "105", $t));
-                Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests.TestLong();
-            },
-            TestULong: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.CheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestULong()", $t.Line = "146", $t));
-                Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests.TestULong();
+            methods: {
+                TestInt32: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.CheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestInt32()", $t.Line = "25", $t));
+                    Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests.TestInt32();
+                },
+                TestUInt32: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.CheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestUInt32()", $t.Line = "66", $t));
+                    Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests.TestUInt32();
+                },
+                TestLong: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.CheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLong()", $t.Line = "105", $t));
+                    Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests.TestLong();
+                },
+                TestULong: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.CheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestULong()", $t.Line = "146", $t));
+                    Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests.TestULong();
+                }
             }
         },
-        context: null,
-        GetContext: function () {
-            var $t;
-            if (this.context == null) {
-                this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch2", $t.ClassName = "Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch2/CheckedUncheckedTests.cs", $t);
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch2", $t.ClassName = "Bridge.ClientTest.Batch2.CheckedUncheckedTests.CheckedTests", $t.File = "Batch2\\CheckedUncheckedTests.cs", $t);
+                }
+                return this.context;
             }
-            return this.context;
         }
     });
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N1122", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N1122)],
         statics: {
-            TestClippingInJavaScriptOverflowMode: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N1122).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N1122, 4, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestClippingInJavaScriptOverflowMode()", $t.Line = "12", $t));
-                Bridge.ClientTest.Batch2.BridgeIssues.N1122.TestClippingInJavaScriptOverflowMode();
-            },
-            TestIntegerDivisionInJavaScriptOverflowMode: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N1122).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N1122, 4, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestIntegerDivisionInJavaScriptOverflowMode()", $t.Line = "30", $t));
-                Bridge.ClientTest.Batch2.BridgeIssues.N1122.TestIntegerDivisionInJavaScriptOverflowMode();
+            methods: {
+                TestClippingInJavaScriptOverflowMode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N1122).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N1122, 4, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestClippingInJavaScriptOverflowMode()", $t.Line = "12", $t));
+                    Bridge.ClientTest.Batch2.BridgeIssues.N1122.TestClippingInJavaScriptOverflowMode();
+                },
+                TestIntegerDivisionInJavaScriptOverflowMode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N1122).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N1122, 4, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestIntegerDivisionInJavaScriptOverflowMode()", $t.Line = "30", $t));
+                    Bridge.ClientTest.Batch2.BridgeIssues.N1122.TestIntegerDivisionInJavaScriptOverflowMode();
+                }
             }
         },
-        context: null,
-        GetContext: function () {
-            var $t;
-            if (this.context == null) {
-                this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch2", $t.ClassName = "Bridge.ClientTest.Batch2.BridgeIssues.N1122", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch2/BridgeIssues/N1122.cs", $t);
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch2", $t.ClassName = "Bridge.ClientTest.Batch2.BridgeIssues.N1122", $t.File = "Batch2\\BridgeIssues\\N1122.cs", $t);
+                }
+                return this.context;
             }
-            return this.context;
         }
     });
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N1204", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N1204)],
         statics: {
-            TestStrictNullChecksOptionForNulls: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N1204).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N1204, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestStrictNullChecksOptionForNulls()", $t.Line = "10", $t));
-                Bridge.ClientTest.Batch2.BridgeIssues.N1204.TestStrictNullChecksOptionForNulls();
+            methods: {
+                TestStrictNullChecksOptionForNulls: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N1204).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N1204, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestStrictNullChecksOptionForNulls()", $t.Line = "10", $t));
+                    Bridge.ClientTest.Batch2.BridgeIssues.N1204.TestStrictNullChecksOptionForNulls();
+                }
             }
         },
-        context: null,
-        GetContext: function () {
-            var $t;
-            if (this.context == null) {
-                this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch2", $t.ClassName = "Bridge.ClientTest.Batch2.BridgeIssues.N1204", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch2/BridgeIssues/N1204.cs", $t);
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch2", $t.ClassName = "Bridge.ClientTest.Batch2.BridgeIssues.N1204", $t.File = "Batch2\\BridgeIssues\\N1204.cs", $t);
+                }
+                return this.context;
             }
-            return this.context;
         }
     });
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772)],
         statics: {
-            TypePropertiesAreCorrect: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TypePropertiesAreCorrect()", $t.Line = "36", $t));
-                t.Fixture.TypePropertiesAreCorrect();
-            },
-            LengthWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "LengthWorks()", $t.Line = "50", $t));
-                t.Fixture.LengthWorks();
-            },
-            RankIsOne: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "RankIsOne()", $t.Line = "58", $t));
-                t.Fixture.RankIsOne();
-            },
-            GetLengthWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetLengthWorks()", $t.Line = "64", $t));
-                t.Fixture.GetLengthWorks();
-            },
-            GetLowerBound: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetLowerBound()", $t.Line = "72", $t));
-                t.Fixture.GetLowerBound();
-            },
-            GetUpperBoundWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetUpperBoundWorks()", $t.Line = "80", $t));
-                t.Fixture.GetUpperBoundWorks();
-            },
-            GettingValueByIndexWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GettingValueByIndexWorks()", $t.Line = "88", $t));
-                t.Fixture.GettingValueByIndexWorks();
-            },
-            GetValueWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetValueWorks()", $t.Line = "95", $t));
-                t.Fixture.GetValueWorks();
-            },
-            SettingValueByIndexWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "SettingValueByIndexWorks()", $t.Line = "102", $t));
-                t.Fixture.SettingValueByIndexWorks();
-            },
-            SetValueWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "SetValueWorks()", $t.Line = "112", $t));
-                t.Fixture.SetValueWorks();
-            },
-            ForeachWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ForeachWorks()", $t.Line = "122", $t));
-                t.Fixture.ForeachWorks();
-            },
-            CloneWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "CloneWorks()", $t.Line = "133", $t));
-                t.Fixture.CloneWorks();
-            },
-            ConcatWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ConcatWorks()", $t.Line = "142", $t));
-                t.Fixture.ConcatWorks();
-            },
-            ContainsWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ContainsWorks()", $t.Line = "151", $t));
-                t.Fixture.ContainsWorks();
-            },
-            ContainsUsesEqualsMethod: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ContainsUsesEqualsMethod()", $t.Line = "159", $t));
-                t.Fixture.ContainsUsesEqualsMethod();
-            },
-            AllWithArrayItemFilterCallbackWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "AllWithArrayItemFilterCallbackWorks()", $t.Line = "167", $t));
-                t.Fixture.AllWithArrayItemFilterCallbackWorks();
-            },
-            SliceWithoutEndWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "SliceWithoutEndWorks()", $t.Line = "174", $t));
-                t.Fixture.SliceWithoutEndWorks();
-            },
-            ForeachWithArrayItemCallbackWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ForeachWithArrayItemCallbackWorks()", $t.Line = "181", $t));
-                t.Fixture.ForeachWithArrayItemCallbackWorks();
-            },
-            ForeachWithArrayCallbackWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ForeachWithArrayCallbackWorks()", $t.Line = "189", $t));
-                t.Fixture.ForeachWithArrayCallbackWorks();
-            },
-            IndexOfWithoutStartIndexWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "IndexOfWithoutStartIndexWorks()", $t.Line = "197", $t));
-                t.Fixture.IndexOfWithoutStartIndexWorks();
-            },
-            IndexOfWithoutStartIndexUsesEqualsMethod: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "IndexOfWithoutStartIndexUsesEqualsMethod()", $t.Line = "203", $t));
-                t.Fixture.IndexOfWithoutStartIndexUsesEqualsMethod();
-            },
-            IndexOfWithStartIndexWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "IndexOfWithStartIndexWorks()", $t.Line = "211", $t));
-                t.Fixture.IndexOfWithStartIndexWorks();
-            },
-            JoinWithoutDelimiterWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "JoinWithoutDelimiterWorks()", $t.Line = "217", $t));
-                t.Fixture.JoinWithoutDelimiterWorks();
-            },
-            ReverseWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ReverseWorks()", $t.Line = "225", $t));
-                t.Fixture.ReverseWorks();
-            },
-            AnyWithArrayItemFilterCallbackWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "AnyWithArrayItemFilterCallbackWorks()", $t.Line = "233", $t));
-                t.Fixture.AnyWithArrayItemFilterCallbackWorks();
-            },
-            BinarySearch1Works: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "BinarySearch1Works()", $t.Line = "240", $t));
-                t.Fixture.BinarySearch1Works();
-            },
-            BinarySearch2Works: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "BinarySearch2Works()", $t.Line = "249", $t));
-                t.Fixture.BinarySearch2Works();
-            },
-            BinarySearch3Works: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "BinarySearch3Works()", $t.Line = "266", $t));
-                t.Fixture.BinarySearch3Works();
-            },
-            BinarySearch4Works: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "BinarySearch4Works()", $t.Line = "275", $t));
-                t.Fixture.BinarySearch4Works();
-            },
-            BinarySearchExceptionsWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "BinarySearchExceptionsWorks()", $t.Line = "284", $t));
-                t.Fixture.BinarySearchExceptionsWorks();
-            },
-            SortWithDefaultCompareWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "SortWithDefaultCompareWorks()", $t.Line = "295", $t));
-                t.Fixture.SortWithDefaultCompareWorks();
-            },
-            Sort1Works: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "Sort1Works()", $t.Line = "303", $t));
-                t.Fixture.Sort1Works();
-            },
-            Sort2Works: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "Sort2Works()", $t.Line = "311", $t));
-                t.Fixture.Sort2Works();
-            },
-            Sort3Works: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "Sort3Works()", $t.Line = "319", $t));
-                t.Fixture.Sort3Works();
-            },
-            Sort4Works: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "Sort4Works()", $t.Line = "327", $t));
-                t.Fixture.Sort4Works();
-            },
-            SortExceptionsWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "SortExceptionsWorks()", $t.Line = "335", $t));
-                t.Fixture.SortExceptionsWorks();
-            },
-            ForeachWhenCastToIListWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ForeachWhenCastToIListWorks()", $t.Line = "343", $t));
-                t.Fixture.ForeachWhenCastToIListWorks();
-            },
-            ICollectionCountWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ICollectionCountWorks()", $t.Line = "355", $t));
-                t.Fixture.ICollectionCountWorks();
-            },
-            ICollectionAddWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ICollectionAddWorks()", $t.Line = "362", $t));
-                t.Fixture.ICollectionAddWorks();
-            },
-            ICollectionClearWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ICollectionClearWorks()", $t.Line = "369", $t));
-                t.Fixture.ICollectionClearWorks();
-            },
-            ICollectionContainsWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ICollectionContainsWorks()", $t.Line = "376", $t));
-                t.Fixture.ICollectionContainsWorks();
-            },
-            ICollectionContainsUsesEqualsMethod: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ICollectionContainsUsesEqualsMethod()", $t.Line = "384", $t));
-                t.Fixture.ICollectionContainsUsesEqualsMethod();
-            },
-            ICollectionRemoveWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ICollectionRemoveWorks()", $t.Line = "392", $t));
-                t.Fixture.ICollectionRemoveWorks();
-            },
-            IListIndexingWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "IListIndexingWorks()", $t.Line = "399", $t));
-                t.Fixture.IListIndexingWorks();
-            },
-            IListIndexOfWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "IListIndexOfWorks()", $t.Line = "408", $t));
-                t.Fixture.IListIndexOfWorks();
-            },
-            IListIndexOfUsesEqualsMethod: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "IListIndexOfUsesEqualsMethod()", $t.Line = "416", $t));
-                t.Fixture.IListIndexOfUsesEqualsMethod();
-            },
-            IListInsertWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "IListInsertWorks()", $t.Line = "424", $t));
-                t.Fixture.IListInsertWorks();
-            },
-            IListRemoveAtWorks: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "IListRemoveAtWorks()", $t.Line = "431", $t));
-                t.Fixture.IListRemoveAtWorks();
-            },
-            TestUseCase: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, 10, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestUseCase()", $t.Line = "438", $t));
-                Bridge.ClientTest.Batch2.BridgeIssues.N772.TestUseCase();
+            methods: {
+                TypePropertiesAreCorrect: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TypePropertiesAreCorrect()", $t.Line = "36", $t));
+                    t.Fixture.TypePropertiesAreCorrect();
+                },
+                LengthWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "LengthWorks()", $t.Line = "50", $t));
+                    t.Fixture.LengthWorks();
+                },
+                RankIsOne: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "RankIsOne()", $t.Line = "58", $t));
+                    t.Fixture.RankIsOne();
+                },
+                GetLengthWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetLengthWorks()", $t.Line = "64", $t));
+                    t.Fixture.GetLengthWorks();
+                },
+                GetLowerBound: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetLowerBound()", $t.Line = "72", $t));
+                    t.Fixture.GetLowerBound();
+                },
+                GetUpperBoundWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetUpperBoundWorks()", $t.Line = "80", $t));
+                    t.Fixture.GetUpperBoundWorks();
+                },
+                GettingValueByIndexWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GettingValueByIndexWorks()", $t.Line = "88", $t));
+                    t.Fixture.GettingValueByIndexWorks();
+                },
+                GetValueWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetValueWorks()", $t.Line = "95", $t));
+                    t.Fixture.GetValueWorks();
+                },
+                SettingValueByIndexWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "SettingValueByIndexWorks()", $t.Line = "102", $t));
+                    t.Fixture.SettingValueByIndexWorks();
+                },
+                SetValueWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "SetValueWorks()", $t.Line = "112", $t));
+                    t.Fixture.SetValueWorks();
+                },
+                ForeachWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ForeachWorks()", $t.Line = "122", $t));
+                    t.Fixture.ForeachWorks();
+                },
+                CloneWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "CloneWorks()", $t.Line = "133", $t));
+                    t.Fixture.CloneWorks();
+                },
+                ConcatWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ConcatWorks()", $t.Line = "142", $t));
+                    t.Fixture.ConcatWorks();
+                },
+                ContainsWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ContainsWorks()", $t.Line = "151", $t));
+                    t.Fixture.ContainsWorks();
+                },
+                ContainsUsesEqualsMethod: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ContainsUsesEqualsMethod()", $t.Line = "159", $t));
+                    t.Fixture.ContainsUsesEqualsMethod();
+                },
+                AllWithArrayItemFilterCallbackWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "AllWithArrayItemFilterCallbackWorks()", $t.Line = "167", $t));
+                    t.Fixture.AllWithArrayItemFilterCallbackWorks();
+                },
+                SliceWithoutEndWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "SliceWithoutEndWorks()", $t.Line = "174", $t));
+                    t.Fixture.SliceWithoutEndWorks();
+                },
+                ForeachWithArrayItemCallbackWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ForeachWithArrayItemCallbackWorks()", $t.Line = "181", $t));
+                    t.Fixture.ForeachWithArrayItemCallbackWorks();
+                },
+                ForeachWithArrayCallbackWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ForeachWithArrayCallbackWorks()", $t.Line = "189", $t));
+                    t.Fixture.ForeachWithArrayCallbackWorks();
+                },
+                IndexOfWithoutStartIndexWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "IndexOfWithoutStartIndexWorks()", $t.Line = "197", $t));
+                    t.Fixture.IndexOfWithoutStartIndexWorks();
+                },
+                IndexOfWithoutStartIndexUsesEqualsMethod: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "IndexOfWithoutStartIndexUsesEqualsMethod()", $t.Line = "203", $t));
+                    t.Fixture.IndexOfWithoutStartIndexUsesEqualsMethod();
+                },
+                IndexOfWithStartIndexWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "IndexOfWithStartIndexWorks()", $t.Line = "211", $t));
+                    t.Fixture.IndexOfWithStartIndexWorks();
+                },
+                JoinWithoutDelimiterWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "JoinWithoutDelimiterWorks()", $t.Line = "217", $t));
+                    t.Fixture.JoinWithoutDelimiterWorks();
+                },
+                ReverseWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ReverseWorks()", $t.Line = "225", $t));
+                    t.Fixture.ReverseWorks();
+                },
+                AnyWithArrayItemFilterCallbackWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "AnyWithArrayItemFilterCallbackWorks()", $t.Line = "233", $t));
+                    t.Fixture.AnyWithArrayItemFilterCallbackWorks();
+                },
+                BinarySearch1Works: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "BinarySearch1Works()", $t.Line = "240", $t));
+                    t.Fixture.BinarySearch1Works();
+                },
+                BinarySearch2Works: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "BinarySearch2Works()", $t.Line = "249", $t));
+                    t.Fixture.BinarySearch2Works();
+                },
+                BinarySearch3Works: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "BinarySearch3Works()", $t.Line = "266", $t));
+                    t.Fixture.BinarySearch3Works();
+                },
+                BinarySearch4Works: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "BinarySearch4Works()", $t.Line = "275", $t));
+                    t.Fixture.BinarySearch4Works();
+                },
+                BinarySearchExceptionsWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "BinarySearchExceptionsWorks()", $t.Line = "284", $t));
+                    t.Fixture.BinarySearchExceptionsWorks();
+                },
+                SortWithDefaultCompareWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "SortWithDefaultCompareWorks()", $t.Line = "295", $t));
+                    t.Fixture.SortWithDefaultCompareWorks();
+                },
+                Sort1Works: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "Sort1Works()", $t.Line = "303", $t));
+                    t.Fixture.Sort1Works();
+                },
+                Sort2Works: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "Sort2Works()", $t.Line = "311", $t));
+                    t.Fixture.Sort2Works();
+                },
+                Sort3Works: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "Sort3Works()", $t.Line = "319", $t));
+                    t.Fixture.Sort3Works();
+                },
+                Sort4Works: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "Sort4Works()", $t.Line = "327", $t));
+                    t.Fixture.Sort4Works();
+                },
+                SortExceptionsWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "SortExceptionsWorks()", $t.Line = "335", $t));
+                    t.Fixture.SortExceptionsWorks();
+                },
+                ForeachWhenCastToIListWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ForeachWhenCastToIListWorks()", $t.Line = "343", $t));
+                    t.Fixture.ForeachWhenCastToIListWorks();
+                },
+                ICollectionCountWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ICollectionCountWorks()", $t.Line = "355", $t));
+                    t.Fixture.ICollectionCountWorks();
+                },
+                ICollectionAddWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ICollectionAddWorks()", $t.Line = "362", $t));
+                    t.Fixture.ICollectionAddWorks();
+                },
+                ICollectionClearWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ICollectionClearWorks()", $t.Line = "369", $t));
+                    t.Fixture.ICollectionClearWorks();
+                },
+                ICollectionContainsWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ICollectionContainsWorks()", $t.Line = "376", $t));
+                    t.Fixture.ICollectionContainsWorks();
+                },
+                ICollectionContainsUsesEqualsMethod: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ICollectionContainsUsesEqualsMethod()", $t.Line = "384", $t));
+                    t.Fixture.ICollectionContainsUsesEqualsMethod();
+                },
+                ICollectionRemoveWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ICollectionRemoveWorks()", $t.Line = "392", $t));
+                    t.Fixture.ICollectionRemoveWorks();
+                },
+                IListIndexingWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "IListIndexingWorks()", $t.Line = "399", $t));
+                    t.Fixture.IListIndexingWorks();
+                },
+                IListIndexOfWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "IListIndexOfWorks()", $t.Line = "408", $t));
+                    t.Fixture.IListIndexOfWorks();
+                },
+                IListIndexOfUsesEqualsMethod: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "IListIndexOfUsesEqualsMethod()", $t.Line = "416", $t));
+                    t.Fixture.IListIndexOfUsesEqualsMethod();
+                },
+                IListInsertWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "IListInsertWorks()", $t.Line = "424", $t));
+                    t.Fixture.IListInsertWorks();
+                },
+                IListRemoveAtWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "IListRemoveAtWorks()", $t.Line = "431", $t));
+                    t.Fixture.IListRemoveAtWorks();
+                },
+                TestUseCase: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.BridgeIssues.N772).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.N772, 10, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestUseCase()", $t.Line = "438", $t));
+                    Bridge.ClientTest.Batch2.BridgeIssues.N772.TestUseCase();
+                }
             }
         },
-        context: null,
-        GetContext: function () {
-            var $t;
-            if (this.context == null) {
-                this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch2", $t.ClassName = "Bridge.ClientTest.Batch2.BridgeIssues.N772", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch2/BridgeIssues/N772.cs", $t);
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch2", $t.ClassName = "Bridge.ClientTest.Batch2.BridgeIssues.N772", $t.File = "Batch2\\BridgeIssues\\N772.cs", $t);
+                }
+                return this.context;
             }
-            return this.context;
         }
     });
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch2Runner.UncheckedInsideCheckedTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests)],
         statics: {
-            TestInt32: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.UncheckedInsideCheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestInt32()", $t.Line = "565", $t));
-                Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests.TestInt32();
-            },
-            TestUInt32: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.UncheckedInsideCheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestUInt32()", $t.Line = "617", $t));
-                Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests.TestUInt32();
-            },
-            TestLong: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.UncheckedInsideCheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLong()", $t.Line = "669", $t));
-                Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests.TestLong();
-            },
-            TestULong: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.UncheckedInsideCheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestULong()", $t.Line = "721", $t));
-                Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests.TestULong();
+            methods: {
+                TestInt32: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.UncheckedInsideCheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestInt32()", $t.Line = "565", $t));
+                    Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests.TestInt32();
+                },
+                TestUInt32: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.UncheckedInsideCheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestUInt32()", $t.Line = "617", $t));
+                    Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests.TestUInt32();
+                },
+                TestLong: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.UncheckedInsideCheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLong()", $t.Line = "669", $t));
+                    Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests.TestLong();
+                },
+                TestULong: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.UncheckedInsideCheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestULong()", $t.Line = "721", $t));
+                    Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests.TestULong();
+                }
             }
         },
-        context: null,
-        GetContext: function () {
-            var $t;
-            if (this.context == null) {
-                this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch2", $t.ClassName = "Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch2/CheckedUncheckedTests.cs", $t);
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch2", $t.ClassName = "Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedInsideCheckedTests", $t.File = "Batch2\\CheckedUncheckedTests.cs", $t);
+                }
+                return this.context;
             }
-            return this.context;
         }
     });
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch2Runner.UncheckedTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests)],
         statics: {
-            TestInt32: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.UncheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestInt32()", $t.Line = "367", $t));
-                Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests.TestInt32();
-            },
-            TestUInt32: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.UncheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestUInt32()", $t.Line = "416", $t));
-                Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests.TestUInt32();
-            },
-            TestLong: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.UncheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLong()", $t.Line = "465", $t));
-                Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests.TestLong();
-            },
-            TestULong: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.UncheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestULong()", $t.Line = "514", $t));
-                Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests.TestULong();
+            methods: {
+                TestInt32: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.UncheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestInt32()", $t.Line = "367", $t));
+                    Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests.TestInt32();
+                },
+                TestUInt32: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.UncheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestUInt32()", $t.Line = "416", $t));
+                    Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests.TestUInt32();
+                },
+                TestLong: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.UncheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLong()", $t.Line = "465", $t));
+                    Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests.TestLong();
+                },
+                TestULong: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.UncheckedTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestULong()", $t.Line = "514", $t));
+                    Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests.TestULong();
+                }
             }
         },
-        context: null,
-        GetContext: function () {
-            var $t;
-            if (this.context == null) {
-                this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch2", $t.ClassName = "Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch2/CheckedUncheckedTests.cs", $t);
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch2", $t.ClassName = "Bridge.ClientTest.Batch2.CheckedUncheckedTests.UncheckedTests", $t.File = "Batch2\\CheckedUncheckedTests.cs", $t);
+                }
+                return this.context;
             }
-            return this.context;
         }
     });
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch2Runner.WithNoUncheckedKeywordTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests)],
         statics: {
-            TestInt32: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.WithNoUncheckedKeywordTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestInt32()", $t.Line = "775", $t));
-                Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests.TestInt32();
-            },
-            TestUInt32: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.WithNoUncheckedKeywordTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestUInt32()", $t.Line = "821", $t));
-                Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests.TestUInt32();
-            },
-            TestLong: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.WithNoUncheckedKeywordTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLong()", $t.Line = "867", $t));
-                Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests.TestLong();
-            },
-            TestULong: function (assert) {
-                var $t;
-                var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.WithNoUncheckedKeywordTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestULong()", $t.Line = "913", $t));
-                Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests.TestULong();
+            methods: {
+                TestInt32: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.WithNoUncheckedKeywordTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestInt32()", $t.Line = "775", $t));
+                    Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests.TestInt32();
+                },
+                TestUInt32: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.WithNoUncheckedKeywordTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestUInt32()", $t.Line = "821", $t));
+                    Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests.TestUInt32();
+                },
+                TestLong: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.WithNoUncheckedKeywordTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLong()", $t.Line = "867", $t));
+                    Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests.TestLong();
+                },
+                TestULong: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch2Runner.WithNoUncheckedKeywordTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestULong()", $t.Line = "913", $t));
+                    Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests.TestULong();
+                }
             }
         },
-        context: null,
-        GetContext: function () {
-            var $t;
-            if (this.context == null) {
-                this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch2", $t.ClassName = "Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests", $t.File = "file:///C:/projects/Bridge/v1/Bridge/Tests/Batch2/CheckedUncheckedTests.cs", $t);
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch2", $t.ClassName = "Bridge.ClientTest.Batch2.CheckedUncheckedTests.WithNoUncheckedKeywordTests", $t.File = "Batch2\\CheckedUncheckedTests.cs", $t);
+                }
+                return this.context;
             }
-            return this.context;
         }
     });
 });

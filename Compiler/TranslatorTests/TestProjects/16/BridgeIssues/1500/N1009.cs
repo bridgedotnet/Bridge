@@ -17,8 +17,8 @@ namespace Test.BridgeIssues.N1009
         public static void Bottom()
         {
             /*
-                A custom comment
-            */
+             *  A custom comment
+             */
         }
     }
 }

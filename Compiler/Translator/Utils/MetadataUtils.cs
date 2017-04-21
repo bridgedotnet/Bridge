@@ -784,7 +784,7 @@ namespace Bridge.Translator
                 {
                     var names = constructor.Parameters.Select(p => p.Name);
 
-                    StringBuilder sb = new StringBuilder("function(" + string.Join(", ", names.ToArray()) + ") { return {");
+                    StringBuilder sb = new StringBuilder("function (" + string.Join(", ", names.ToArray()) + ") { return {");
 
                     bool needComma = false;
                     foreach (var name in names)

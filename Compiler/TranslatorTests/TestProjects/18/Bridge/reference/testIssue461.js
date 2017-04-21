@@ -1,22 +1,24 @@
     Bridge.define("TestIssue461.Issue461", {
         statics: {
-            Test: function Test() {
-                var input = document.createElement('input');
+            methods: {
+                Test: function Test() {
+                    var input = document.createElement('input');
 
-                input.onchange = Bridge.fn.combine(input.onchange, $asm.$.TestIssue461.Issue461.f1);
+                    input.onchange = Bridge.fn.combine(input.onchange, $asm.$.TestIssue461.Issue461.f1);
 
-                var anchor = document.createElement('a');
+                    var anchor = document.createElement('a');
 
-                anchor.onclick = Bridge.fn.combine(anchor.onclick, $asm.$.TestIssue461.Issue461.f2);
+                    anchor.onclick = Bridge.fn.combine(anchor.onclick, $asm.$.TestIssue461.Issue461.f2);
 
-                // Test if Document.GetElementById<>() compiles
-                var div = document.getElementById("div1");
+                    // Test if Document.GetElementById<>() compiles
+                    var div = document.getElementById("div1");
 
-                // Tests if Element is still a superclass of all the element classes and the following code compiles
-                var element;
+                    // Tests if Element is still a superclass of all the element classes and the following code compiles
+                    var element;
 
-                element = document.createElement('input');
-                element = document.createElement('textarea');
+                    element = document.createElement('input');
+                    element = document.createElement('textarea');
+                }
             }
         }
     });

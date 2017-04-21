@@ -310,7 +310,7 @@ namespace Bridge.Translator
                     {
                         this.Write(name);
                     }
-                    
+
                     this.Write("]");
                 }
             }
