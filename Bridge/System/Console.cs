@@ -1,7 +1,5 @@
 using Bridge;
 
-[assembly: Convention(Notation.UpperCamelCase)]
-
 namespace System
 {
     /// <summary>
@@ -9,6 +7,7 @@ namespace System
     /// </summary>
     [Unbox(false)]
     [FileName("system/console.js")]
+    [Convention(Notation.UpperCamelCase)]
     public sealed partial class Console
     {
         #region Read and ReadLine
