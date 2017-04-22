@@ -509,6 +509,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#2502 - TestAsyncBreak", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2502.TestAsyncBreak);
             QUnit.test("#2505 - TestNegativeNumberToULong", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2505.TestNegativeNumberToULong);
             QUnit.test("#2515 - TestPreprocessorConditionalAccess", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2515.TestPreprocessorConditionalAccess);
+            QUnit.test("#2538 - TestArraySegment", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2538.TestArraySegment);
             QUnit.test("#381 - TestUseCase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge381.TestUseCase);
             QUnit.test("#447 - CheckInlineExpression", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.CheckInlineExpression);
             QUnit.test("#447 - CheckInlineCalls", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.CheckInlineCalls);
@@ -12614,6 +12615,36 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                         Project: "Batch3",
                         ClassName: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2515",
                         File: "Batch3\\BridgeIssues\\2500\\N2515.cs"
+                    } );
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2538", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2538)],
+        statics: {
+            methods: {
+                TestArraySegment: function (assert) {
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2538).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2538, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
+                        Method: "TestArraySegment()",
+                        Line: "10"
+                    } ));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2538.TestArraySegment();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                if (this.context == null) {
+                    this.context = Bridge.merge(new Bridge.Test.Runtime.FixtureContext(), {
+                        Project: "Batch3",
+                        ClassName: "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2538",
+                        File: "Batch3\\BridgeIssues\\2500\\N2538.cs"
                     } );
                 }
                 return this.context;
