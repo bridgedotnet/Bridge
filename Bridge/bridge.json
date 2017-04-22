@@ -72,6 +72,7 @@
         "Resources/Generator.js",
         "Resources/linq.js",
         "Resources/.generated/system/guid.js",
+        "Resources/.generated/system/environment.js",
         "Resources/Text/RegularExpressions/Regex.js",
         "Resources/Text/RegularExpressions/RegexCapture.js",
         "Resources/Text/RegularExpressions/RegexCaptureCollection.js",
