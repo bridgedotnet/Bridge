@@ -380,7 +380,7 @@ namespace Bridge.Translator
 
             if (inlineCode != null && inlineCode.Trim().EndsWith(";"))
             {
-                inlineCode = inlineCode.TrimEnd(';');
+                inlineCode = inlineCode.Trim().TrimEnd(';');
             }
 
             return inlineCode;
@@ -446,7 +446,7 @@ namespace Bridge.Translator
                     {
                         var oc = OverloadsCollection.Create(this.Emitter, itemrr.Member);
                         bool forceObjectLiteral = itemrr.Member is IProperty && !itemrr.Member.Attributes.Any(attr => attr.AttributeType.FullName == "Bridge.NameAttribute") && !this.Emitter.Validator.IsObjectLiteral(itemrr.Member.DeclaringTypeDefinition);
-                        
+
                         name = oc.GetOverloadName(isObjectLiteral: forceObjectLiteral);
                     }
 
