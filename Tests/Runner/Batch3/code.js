@@ -18326,6 +18326,28 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2571", {
+        statics: {
+            methods: {
+                TestContainsFunction: function () {
+                    var types = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2571.f1(new (System.Collections.Generic.List$1(Function))());
+
+                    Bridge.Test.NUnit.Assert.True(types.contains(System.Double));
+                }
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2571", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2571, {
+        f1: function (_o43) {
+            _o43.add(System.Int32);
+            _o43.add(System.Double);
+            return _o43;
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge266A", {
         statics: {
             methods: {
@@ -26672,30 +26694,30 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues, {
-        f1: function (_o43) {
-            _o43.add(0);
-            _o43.add(1);
-            _o43.add(2);
-            _o43.add(3);
-            _o43.add(4);
-            return _o43;
-        },
-        f2: function (_o44) {
-            _o44.add(3, "b");
-            _o44.add(6, "z");
-            _o44.add(9, "x");
+        f1: function (_o44) {
+            _o44.add(0);
+            _o44.add(1);
+            _o44.add(2);
+            _o44.add(3);
+            _o44.add(4);
             return _o44;
+        },
+        f2: function (_o45) {
+            _o45.add(3, "b");
+            _o45.add(6, "z");
+            _o45.add(9, "x");
+            return _o45;
         },
         f3: function (i) {
             return ((i * 2) | 0);
         },
-        f4: function (_o45) {
-            _o45.add(0);
-            _o45.add(1);
-            _o45.add(2);
-            _o45.add(3);
-            _o45.add(4);
-            return _o45;
+        f4: function (_o46) {
+            _o46.add(0);
+            _o46.add(1);
+            _o46.add(2);
+            _o46.add(3);
+            _o46.add(4);
+            return _o46;
         }
     });
 
