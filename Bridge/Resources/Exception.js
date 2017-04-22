@@ -15,15 +15,7 @@ Bridge.define("System.Exception", {
 
                 StackTrace: {
                     get: function () {
-                        var s = this.errorStack.stack;
-
-                        if (this.$ownError) {
-                            s = s.match(/[^\r\n]+/g);
-                            s.splice(1, 1);
-                            s = s.join('\n');
-                        }
-
-                        return s;
+                        return this.errorStack.stack;
                     }
                 },
 
@@ -40,7 +32,6 @@ Bridge.define("System.Exception", {
             this.message = message ? message : ("Exception of type '" + Bridge.getTypeName(this) + "' was thrown.");
             this.innerException = innerException ? innerException : null;
             this.errorStack = new Error(this.message);
-            this.$ownError = true;
             this.data = new (System.Collections.Generic.Dictionary$2(System.Object, System.Object))();
         },
 
@@ -88,7 +79,6 @@ Bridge.define("System.Exception", {
                 }
 
                 ex.errorStack = error;
-                ex.$ownError = false;
                 return ex;
             }
         }

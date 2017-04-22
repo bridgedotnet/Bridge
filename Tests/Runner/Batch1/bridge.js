@@ -275,12 +275,16 @@
                 })(cfg, scope, backingField);
             }
 
-            if (!alias && cfg.get) {
+            if (!alias && cfg.get && !cfg.get.$set) {
+                Object.defineProperty(cfg.get, "$set", { value: true, enumerable: false });
                 Object.defineProperty(cfg.get, "name", { value: cls.$$name + "." + name + ".get" });
+                Object.defineProperty(cfg.get, "displayName", { value: cls.$$name + "." + name + ".get" });
             }
 
-            if (!alias && cfg.set) {
+            if (!alias && cfg.set && !cfg.set.$set) {
+                Object.defineProperty(cfg.set, "$set", { value: true, enumerable: false });
                 Object.defineProperty(cfg.set, "name", { value: cls.$$name + "." + name + ".set" });
+                Object.defineProperty(cfg.set, "displayName", { value: cls.$$name + "." + name + ".set" });
             }
 
             Object.defineProperty(scope, name, cfg);
@@ -2654,8 +2658,10 @@
                     prototype[ctorName] = member;
                 }
 
-                if (typeof member === "function") {
+                if (typeof member === "function" && !member.$set) {
+                    Object.defineProperty(member, "$set", { value: true, enumerable: false });
                     Object.defineProperty(member, "name", { value: className + "." + name });
+                    Object.defineProperty(member, "displayName", { value: className + "." + name });
                 }
             }
 
@@ -2674,8 +2680,10 @@
                         Class[name] = member;
                     }
 
-                    if (typeof member === "function") {
+                    if (typeof member === "function" && !member.$set) {
                         Object.defineProperty(member, "name", { value: className + "." + name });
+                        Object.defineProperty(member, "displayName", { value: className + "." + name });
+                        Object.defineProperty(member, "$set", { value: true, enumerable: false });
                     }
                 }
             }
@@ -5088,15 +5096,7 @@ Bridge.define("System.Exception", {
 
                 StackTrace: {
                     get: function () {
-                        var s = this.errorStack.stack;
-
-                        if (this.$ownError) {
-                            s = s.match(/[^\r\n]+/g);
-                            s.splice(1, 1);
-                            s = s.join('\n');
-                        }
-
-                        return s;
+                        return this.errorStack.stack;
                     }
                 },
 
@@ -5113,7 +5113,6 @@ Bridge.define("System.Exception", {
             this.message = message ? message : ("Exception of type '" + Bridge.getTypeName(this) + "' was thrown.");
             this.innerException = innerException ? innerException : null;
             this.errorStack = new Error(this.message);
-            this.$ownError = true;
             this.data = new (System.Collections.Generic.Dictionary$2(System.Object, System.Object))();
         },
 
@@ -5161,7 +5160,6 @@ Bridge.define("System.Exception", {
                 }
 
                 ex.errorStack = error;
-                ex.$ownError = false;
                 return ex;
             }
         }

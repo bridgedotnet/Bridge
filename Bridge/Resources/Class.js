@@ -453,8 +453,10 @@
                     prototype[ctorName] = member;
                 }
 
-                if (typeof member === "function") {
+                if (typeof member === "function" && !member.$set) {
+                    Object.defineProperty(member, "$set", { value: true, enumerable: false });
                     Object.defineProperty(member, "name", { value: className + "." + name });
+                    Object.defineProperty(member, "displayName", { value: className + "." + name });
                 }
             }
 
@@ -473,8 +475,10 @@
                         Class[name] = member;
                     }
 
-                    if (typeof member === "function") {
+                    if (typeof member === "function" && !member.$set) {
                         Object.defineProperty(member, "name", { value: className + "." + name });
+                        Object.defineProperty(member, "displayName", { value: className + "." + name });
+                        Object.defineProperty(member, "$set", { value: true, enumerable: false });
                     }
                 }
             }

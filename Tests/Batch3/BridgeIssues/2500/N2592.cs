@@ -40,8 +40,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             {
                 caught = true;
                 var s = e.StackTrace;
-                var result = Regex.Split(s, "\r\n|\r|\n");
-                Assert.True(result[1].Contains("Bridge2592.MethodThowsException1"));
+                Assert.True(s.Contains("MethodThowsException1"));
             }
             Assert.True(caught);
 
@@ -54,8 +53,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             {
                 caught = true;
                 var s = e.StackTrace;
-                var result = Regex.Split(s, "\r\n|\r|\n");
-                Assert.True(result[1].Contains("Bridge2592.MethodThowsException2"));
+                Assert.True(s.Contains("MethodThowsException2"));
             }
             Assert.True(caught);
 
@@ -68,8 +66,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             {
                 caught = true;
                 var s = e.StackTrace;
-                var result = Regex.Split(s, "\r\n|\r|\n");
-                Assert.True(result[1].Contains("Bridge2592.Prop1.get"));
+                Assert.True(s.Contains("Prop1.get"));
             }
             Assert.True(caught);
         }

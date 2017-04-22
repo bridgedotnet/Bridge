@@ -256,12 +256,16 @@
                 })(cfg, scope, backingField);
             }
 
-            if (!alias && cfg.get) {
+            if (!alias && cfg.get && !cfg.get.$set) {
+                Object.defineProperty(cfg.get, "$set", { value: true, enumerable: false });
                 Object.defineProperty(cfg.get, "name", { value: cls.$$name + "." + name + ".get" });
+                Object.defineProperty(cfg.get, "displayName", { value: cls.$$name + "." + name + ".get" });
             }
 
-            if (!alias && cfg.set) {
+            if (!alias && cfg.set && !cfg.set.$set) {
+                Object.defineProperty(cfg.set, "$set", { value: true, enumerable: false });
                 Object.defineProperty(cfg.set, "name", { value: cls.$$name + "." + name + ".set" });
+                Object.defineProperty(cfg.set, "displayName", { value: cls.$$name + "." + name + ".set" });
             }
 
             Object.defineProperty(scope, name, cfg);
