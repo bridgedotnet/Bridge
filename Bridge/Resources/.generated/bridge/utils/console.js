@@ -76,7 +76,7 @@
                     if (value != null) {
                         t = typeof value !== "object";
 
-                        if (Bridge.getType(value).isPrimitive || t) {
+                        if (Bridge.getType(value).IsPrimitive || t) {
                             v = value == null ? "" : value.toString();
                         } else {
                             v = JSON.stringify(Bridge.unbox(value));

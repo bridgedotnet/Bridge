@@ -2,17 +2,17 @@
         inherits: [System.FormattableString],
         fields: {
             args: null,
-            format$1: null
+            format: null
         },
         props: {
-            argumentCount: {
+            ArgumentCount: {
                 get: function () {
                     return this.args.length;
                 }
             },
-            format: {
+            Format: {
                 get: function () {
-                    return this.format$1;
+                    return this.format;
                 }
             }
         },
@@ -22,7 +22,7 @@
 
                 this.$initialize();
                 System.FormattableString.ctor.call(this);
-                this.format$1 = format;
+                this.format = format;
                 this.args = args;
             }
         },
@@ -34,7 +34,7 @@
                 return this.args;
             },
             toString$1: function (formatProvider) {
-                return System.String.formatProvider.apply(System.String, [formatProvider, this.format$1].concat(this.args));
+                return System.String.formatProvider.apply(System.String, [formatProvider, this.format].concat(this.args));
             }
         }
     });

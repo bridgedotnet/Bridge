@@ -2,14 +2,13 @@ using Bridge;
 using System;
 using System.Collections.Generic;
 
-[assembly: Convention(Target = ConventionTarget.Member, Notation = Notation.LowerCamelCase)]
-
 namespace Bridge.Utils
 {
     /// <summary>
     /// Outputs log messages into a formatted div element on the page
     /// </summary>
     [Namespace("Bridge")]
+    [Convention(Target = ConventionTarget.Member, Notation = Notation.LowerCamelCase)]
     public class Console
     {
         #region HTML Wrappers to avoid dynamic

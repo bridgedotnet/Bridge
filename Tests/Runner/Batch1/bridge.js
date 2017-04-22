@@ -4527,7 +4527,7 @@
     Bridge.define("System.Type", {
         props: {
             prototype: null,
-            isPrimitive: {
+            IsPrimitive: {
                 get: function () {
                     return $asm.$.System.Type.f1(new (System.Collections.Generic.List$1(System.Type))()).contains(this);
 
@@ -5042,17 +5042,17 @@
         inherits: [System.FormattableString],
         fields: {
             args: null,
-            format$1: null
+            format: null
         },
         props: {
-            argumentCount: {
+            ArgumentCount: {
                 get: function () {
                     return this.args.length;
                 }
             },
-            format: {
+            Format: {
                 get: function () {
-                    return this.format$1;
+                    return this.format;
                 }
             }
         },
@@ -5062,7 +5062,7 @@
 
                 this.$initialize();
                 System.FormattableString.ctor.call(this);
-                this.format$1 = format;
+                this.format = format;
                 this.args = args;
             }
         },
@@ -5074,7 +5074,7 @@
                 return this.args;
             },
             toString$1: function (formatProvider) {
-                return System.String.formatProvider.apply(System.String, [formatProvider, this.format$1].concat(this.args));
+                return System.String.formatProvider.apply(System.String, [formatProvider, this.format].concat(this.args));
             }
         }
     });
@@ -13761,7 +13761,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                     var major = { }, minor = { }, build = { }, revision = { };
 
                     if (version == null) {
-                        result.v.setFailure(System.Version.ParseFailureKind.argumentNullException);
+                        result.v.setFailure(System.Version.ParseFailureKind.ArgumentNullException);
 
                         return false;
                     }
@@ -13770,7 +13770,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                     var parsedComponentsLength = parsedComponents.length;
 
                     if ((parsedComponentsLength < 2) || (parsedComponentsLength > 4)) {
-                        result.v.setFailure(System.Version.ParseFailureKind.argumentException);
+                        result.v.setFailure(System.Version.ParseFailureKind.ArgumentException);
                         return false;
                     }
 
@@ -13808,12 +13808,12 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                 },
                 tryParseComponent: function (component, componentName, result, parsedComponent) {
                     if (!System.Int32.tryParse(component, parsedComponent)) {
-                        result.v.setFailure$1(System.Version.ParseFailureKind.formatException, component);
+                        result.v.setFailure$1(System.Version.ParseFailureKind.FormatException, component);
                         return false;
                     }
 
                     if (parsedComponent.v < 0) {
-                        result.v.setFailure$1(System.Version.ParseFailureKind.argumentOutOfRangeException, componentName);
+                        result.v.setFailure$1(System.Version.ParseFailureKind.ArgumentOutOfRangeException, componentName);
                         return false;
                     }
 
@@ -13858,32 +13858,32 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
             _Revision: -1
         },
         props: {
-            major: {
+            Major: {
                 get: function () {
                     return this._Major;
                 }
             },
-            minor: {
+            Minor: {
                 get: function () {
                     return this._Minor;
                 }
             },
-            build: {
+            Build: {
                 get: function () {
                     return this._Build;
                 }
             },
-            revision: {
+            Revision: {
                 get: function () {
                     return this._Revision;
                 }
             },
-            majorRevision: {
+            MajorRevision: {
                 get: function () {
                     return Bridge.Int.sxs((this._Revision >> 16) & 65535);
                 }
             },
-            minorRevision: {
+            MinorRevision: {
                 get: function () {
                     return Bridge.Int.sxs((this._Revision & 65535) & 65535);
                 }
@@ -13952,10 +13952,10 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
             $ctor4: function (version) {
                 this.$initialize();
                 var v = System.Version.parse(version);
-                this._Major = v.major;
-                this._Minor = v.minor;
-                this._Build = v.build;
-                this._Revision = v.revision;
+                this._Major = v.Major;
+                this._Minor = v.Minor;
+                this._Build = v.Build;
+                this._Revision = v.Revision;
             },
             ctor: function () {
                 this.$initialize();
@@ -14144,10 +14144,10 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         $kind: "enum",
         statics: {
             fields: {
-                argumentNullException: 0,
-                argumentException: 1,
-                argumentOutOfRangeException: 2,
-                formatException: 3
+                ArgumentNullException: 0,
+                ArgumentException: 1,
+                ArgumentOutOfRangeException: 2,
+                FormatException: 3
             }
         }
     });
@@ -14190,13 +14190,13 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
             },
             getVersionParseException: function () {
                 switch (this.m_failure) {
-                    case System.Version.ParseFailureKind.argumentNullException: 
+                    case System.Version.ParseFailureKind.ArgumentNullException: 
                         return new System.ArgumentNullException(this.m_argumentName);
-                    case System.Version.ParseFailureKind.argumentException: 
+                    case System.Version.ParseFailureKind.ArgumentException: 
                         return new System.ArgumentException("VersionString");
-                    case System.Version.ParseFailureKind.argumentOutOfRangeException: 
+                    case System.Version.ParseFailureKind.ArgumentOutOfRangeException: 
                         return new System.ArgumentOutOfRangeException(this.m_exceptionArgument, "Cannot be < 0");
-                    case System.Version.ParseFailureKind.formatException: 
+                    case System.Version.ParseFailureKind.FormatException: 
                         // Regenerate the FormatException as would be thrown by Int32.Parse()
                         try {
                             System.Int32.parse(this.m_exceptionArgument);

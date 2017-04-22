@@ -34,13 +34,13 @@
             },
             getVersionParseException: function () {
                 switch (this.m_failure) {
-                    case System.Version.ParseFailureKind.argumentNullException: 
+                    case System.Version.ParseFailureKind.ArgumentNullException: 
                         return new System.ArgumentNullException(this.m_argumentName);
-                    case System.Version.ParseFailureKind.argumentException: 
+                    case System.Version.ParseFailureKind.ArgumentException: 
                         return new System.ArgumentException("VersionString");
-                    case System.Version.ParseFailureKind.argumentOutOfRangeException: 
+                    case System.Version.ParseFailureKind.ArgumentOutOfRangeException: 
                         return new System.ArgumentOutOfRangeException(this.m_exceptionArgument, "Cannot be < 0");
-                    case System.Version.ParseFailureKind.formatException: 
+                    case System.Version.ParseFailureKind.FormatException: 
                         // Regenerate the FormatException as would be thrown by Int32.Parse()
                         try {
                             System.Int32.parse(this.m_exceptionArgument);

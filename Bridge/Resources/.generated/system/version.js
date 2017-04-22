@@ -39,7 +39,7 @@
                     var major = { }, minor = { }, build = { }, revision = { };
 
                     if (version == null) {
-                        result.v.setFailure(System.Version.ParseFailureKind.argumentNullException);
+                        result.v.setFailure(System.Version.ParseFailureKind.ArgumentNullException);
 
                         return false;
                     }
@@ -48,7 +48,7 @@
                     var parsedComponentsLength = parsedComponents.length;
 
                     if ((parsedComponentsLength < 2) || (parsedComponentsLength > 4)) {
-                        result.v.setFailure(System.Version.ParseFailureKind.argumentException);
+                        result.v.setFailure(System.Version.ParseFailureKind.ArgumentException);
                         return false;
                     }
 
@@ -86,12 +86,12 @@
                 },
                 tryParseComponent: function (component, componentName, result, parsedComponent) {
                     if (!System.Int32.tryParse(component, parsedComponent)) {
-                        result.v.setFailure$1(System.Version.ParseFailureKind.formatException, component);
+                        result.v.setFailure$1(System.Version.ParseFailureKind.FormatException, component);
                         return false;
                     }
 
                     if (parsedComponent.v < 0) {
-                        result.v.setFailure$1(System.Version.ParseFailureKind.argumentOutOfRangeException, componentName);
+                        result.v.setFailure$1(System.Version.ParseFailureKind.ArgumentOutOfRangeException, componentName);
                         return false;
                     }
 
@@ -136,32 +136,32 @@
             _Revision: -1
         },
         props: {
-            major: {
+            Major: {
                 get: function () {
                     return this._Major;
                 }
             },
-            minor: {
+            Minor: {
                 get: function () {
                     return this._Minor;
                 }
             },
-            build: {
+            Build: {
                 get: function () {
                     return this._Build;
                 }
             },
-            revision: {
+            Revision: {
                 get: function () {
                     return this._Revision;
                 }
             },
-            majorRevision: {
+            MajorRevision: {
                 get: function () {
                     return Bridge.Int.sxs((this._Revision >> 16) & 65535);
                 }
             },
-            minorRevision: {
+            MinorRevision: {
                 get: function () {
                     return Bridge.Int.sxs((this._Revision & 65535) & 65535);
                 }
@@ -230,10 +230,10 @@
             $ctor4: function (version) {
                 this.$initialize();
                 var v = System.Version.parse(version);
-                this._Major = v.major;
-                this._Minor = v.minor;
-                this._Build = v.build;
-                this._Revision = v.revision;
+                this._Major = v.Major;
+                this._Minor = v.Minor;
+                this._Build = v.Build;
+                this._Revision = v.Revision;
             },
             ctor: function () {
                 this.$initialize();

@@ -2,10 +2,10 @@
         $kind: "enum",
         statics: {
             fields: {
-                argumentNullException: 0,
-                argumentException: 1,
-                argumentOutOfRangeException: 2,
-                formatException: 3
+                ArgumentNullException: 0,
+                ArgumentException: 1,
+                ArgumentOutOfRangeException: 2,
+                FormatException: 3
             }
         }
     });

@@ -4,7 +4,7 @@
                 variables: null
             },
             props: {
-                location: {
+                Location: {
                     get: function () {
                         var g = Bridge.global;
 
@@ -15,27 +15,27 @@
                         return null;
                     }
                 },
-                commandLine: {
+                CommandLine: {
                     get: function () {
                         return System.Environment.getCommandLineArgs().join(" ");
                     }
                 },
-                currentDirectory: {
+                CurrentDirectory: {
                     get: function () {
-                        var l = System.Environment.location;
+                        var l = System.Environment.Location;
 
                         return l ? l.pathname : "";
                     },
                     set: function (value) {
-                        var l = System.Environment.location;
+                        var l = System.Environment.Location;
 
                         if (l) {
                             l.pathname = value;
                         }
                     }
                 },
-                exitCode: 0,
-                is64BitOperatingSystem: {
+                ExitCode: 0,
+                Is64BitOperatingSystem: {
                     get: function () {
                         var n = Bridge.global ? Bridge.global.navigator : null;
 
@@ -46,7 +46,7 @@
                         return false;
                     }
                 },
-                processorCount: {
+                ProcessorCount: {
                     get: function () {
                         var n = Bridge.global ? Bridge.global.navigator : null;
 
@@ -57,7 +57,7 @@
                         return 1;
                     }
                 },
-                stackTrace: {
+                StackTrace: {
                     get: function () {
                         var err = new Error();
                         var s = err.stack;
@@ -71,7 +71,7 @@
                         return "";
                     }
                 },
-                version: {
+                Version: {
                     get: function () {
                         var s = Bridge.SystemAssembly.compiler;
 
@@ -98,7 +98,7 @@
                     return d;
                 },
                 exit: function (exitCode) {
-                    System.Environment.exitCode = exitCode;
+                    System.Environment.ExitCode = exitCode;
                 },
                 expandEnvironmentVariables: function (name) {
                     var $t;
@@ -127,7 +127,7 @@
                     throw new System.Exception(message, exception);
                 },
                 getCommandLineArgs: function () {
-                    var l = System.Environment.location;
+                    var l = System.Environment.Location;
 
                     if (l) {
                         var args = new (System.Collections.Generic.List$1(System.String))();
