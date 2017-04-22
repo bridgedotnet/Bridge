@@ -84,6 +84,7 @@
             public const string SET_EXCEPTION = "setException";
 
             public const string CONSTRUCTOR = "ctor";
+            public const string ENTRY_POINT_NAME = "Main";
             public const string APPLY = "apply";
             public const string CALL = "call";
             public const string DEFINE = "define";
