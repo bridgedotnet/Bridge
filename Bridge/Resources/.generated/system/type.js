@@ -1,7 +1,7 @@
     Bridge.define("System.Type", {
         props: {
             prototype: null,
-            isPrimitive: {
+            IsPrimitive: {
                 get: function () {
                     return $asm.$.System.Type.f1(new (System.Collections.Generic.List$1(System.Type))()).contains(this);
 
