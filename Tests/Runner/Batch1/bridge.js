@@ -704,6 +704,12 @@
                 type = Object;
             }
 
+            var tt = typeof type;
+
+            if (tt === "boolean") {
+                return type;
+            }
+
             if (obj.$boxed) {
                 if (obj.type.$kind === "enum" && (obj.type.prototype.$utype === type || type === System.Enum || type === System.IFormattable || type === System.IComparable)) {
                     return true;
@@ -762,12 +768,6 @@
                 }
 
                 return false;
-            }
-
-            var tt = typeof type;
-
-            if (tt === "boolean") {
-                return type;
             }
 
             if (tt === "string") {

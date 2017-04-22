@@ -23167,7 +23167,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 TestBasic: function (assert) {
                     var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestAutoProps).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestAutoProps, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                         Method: "TestBasic()",
-                        Line: "27"
+                        Line: "31"
                     } ));
                     Bridge.ClientTest.CSharp6.TestAutoProps.TestBasic();
                 }
@@ -23600,7 +23600,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 TestBasic: function (assert) {
                     var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestInterpolatedStrings).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestInterpolatedStrings, void 0, Bridge.merge(new Bridge.Test.Runtime.TestContext(), {
                         Method: "TestBasic()",
-                        Line: "35"
+                        Line: "37"
                     } ));
                     Bridge.ClientTest.CSharp6.TestInterpolatedStrings.TestBasic();
                 }
