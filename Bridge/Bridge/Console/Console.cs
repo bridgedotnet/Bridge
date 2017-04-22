@@ -221,23 +221,23 @@ namespace Bridge.Utils
             {
                 /*@
                     Bridge.global.window.addEventListener("error", function (e) {
-                        var msg = e;
+                        if (e.message) {
+                            var msg = e.message;
 
-                        if (e.error) {
-                            msg = e.error.toString();
+                            if (e.filename) {
+                                msg += "\n    at <a style=\"color:#d65050\" target=\"_blank\" href=\"" + e.filename + "\">" + e.filename + "</a>";
 
-                            if (e.error.stack) {
-                                msg += '\n' + e.error.stack;
+                                if (e.lineno) {
+                                    msg += ":" + e.lineno;
+                                }
+
+                                if (e.colno) {
+                                    msg += ":" + e.colno;
+                                }
                             }
-                        } else if (e.message) {
-                            msg = e.message;
 
-                            if (e.filename && e.lineno && e.colno) {
-                                msg += " (" + e.filename.substring(e.filename.lastIndexOf('/') + 1) + ", line " + e.lineno + " char " + e.colno + ")";
-                            }
+                            Bridge.Console.error(msg);
                         }
-
-                        Bridge.Console.error(msg);
                     });
                  */
             }
@@ -424,9 +424,7 @@ namespace Bridge.Utils
 
             if (value != null)
             {
-                /*@
-                    t = typeof value !== "object";
-                  */
+                //@ t = typeof value !== "object";
 
                 if (value.GetType().IsPrimitive || t)
                 {
