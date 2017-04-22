@@ -351,6 +351,8 @@
             }
 
             Class.$$name = className;
+            Object.defineProperty(Class, "name", { value: className });
+            Object.defineProperty(Class.constructor, "name", { value: className });
             Class.$kind = prop.$kind;
 
             if (gCfg && isGenericInstance) {
@@ -441,13 +443,18 @@
                     isCtor = true;
                 }
 
+                var member = prop[name];
                 if (isCtor) {
-                    Class[ctorName] = prop[name];
+                    Class[ctorName] = member;
                     Class[ctorName].prototype = prototype;
                     Class[ctorName].prototype.constructor = Class;
-                    prototype[ctorName] = prop[name];
+                    prototype[ctorName] = member;
                 } else {
-                    prototype[ctorName] = prop[name];
+                    prototype[ctorName] = member;
+                }
+
+                if (typeof member === "function") {
+                    Object.defineProperty(member, "name", { value: className + "." + name });
                 }
             }
 
@@ -459,10 +466,15 @@
 
             if (statics) {
                 for (name in statics) {
+                    var member = statics[name];
                     if (name === "ctor") {
-                        Class["$ctor"] = statics[name];
+                        Class["$ctor"] = member;
                     } else {
-                        Class[name] = statics[name];
+                        Class[name] = member;
+                    }
+
+                    if (typeof member === "function") {
+                        Object.defineProperty(member, "name", { value: className + "." + name });
                     }
                 }
             }
@@ -543,6 +555,10 @@
             }
 
             return Class;
+        },
+
+        toCtorString: function() {
+            return Bridge.Reflection.getTypeName(this);
         },
 
         createInheritors: function(cls, extend) {

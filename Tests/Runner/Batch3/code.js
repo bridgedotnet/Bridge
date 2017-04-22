@@ -18326,6 +18326,67 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592", {
+        statics: {
+            props: {
+                Prop1: {
+                    get: function () {
+                        throw new System.Exception("Test");
+                    }
+                }
+            },
+            methods: {
+                MethodThowsException1: function () {
+                    var nulref = null;
+                    var ch = nulref.charAt(1);
+                },
+                MethodThowsException2: function () {
+                    throw new System.Exception();
+                },
+                TestStackTrace: function () {
+                    var caught = false;
+                    try {
+                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.MethodThowsException1();
+                    }
+                    catch (e) {
+                        e = System.Exception.create(e);
+                        caught = true;
+                        var s = e.StackTrace;
+                        var result = System.Text.RegularExpressions.Regex.split(s, "\r\n|\r|\n");
+                        Bridge.Test.NUnit.Assert.True(System.String.contains(result[System.Array.index(1, result)],"Bridge2592.MethodThowsException1"));
+                    }
+                    Bridge.Test.NUnit.Assert.True(caught);
+
+                    caught = false;
+                    try {
+                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.MethodThowsException2();
+                    }
+                    catch (e1) {
+                        e1 = System.Exception.create(e1);
+                        caught = true;
+                        var s1 = e1.StackTrace;
+                        var result1 = System.Text.RegularExpressions.Regex.split(s1, "\r\n|\r|\n");
+                        Bridge.Test.NUnit.Assert.True(System.String.contains(result1[System.Array.index(1, result1)],"Bridge2592.MethodThowsException2"));
+                    }
+                    Bridge.Test.NUnit.Assert.True(caught);
+
+                    caught = false;
+                    try {
+                        var i = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.Prop1;
+                    }
+                    catch (e2) {
+                        e2 = System.Exception.create(e2);
+                        caught = true;
+                        var s2 = e2.StackTrace;
+                        var result2 = System.Text.RegularExpressions.Regex.split(s2, "\r\n|\r|\n");
+                        Bridge.Test.NUnit.Assert.True(System.String.contains(result2[System.Array.index(1, result2)],"Bridge2592.Prop1.get"));
+                    }
+                    Bridge.Test.NUnit.Assert.True(caught);
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge266A", {
         statics: {
             methods: {

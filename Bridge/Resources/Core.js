@@ -256,6 +256,14 @@
                 })(cfg, scope, backingField);
             }
 
+            if (!alias && cfg.get) {
+                Object.defineProperty(cfg.get, "name", { value: cls.$$name + "." + name + ".get" });
+            }
+
+            if (!alias && cfg.set) {
+                Object.defineProperty(cfg.set, "name", { value: cls.$$name + "." + name + ".set" });
+            }
+
             Object.defineProperty(scope, name, cfg);
 
             return cfg;

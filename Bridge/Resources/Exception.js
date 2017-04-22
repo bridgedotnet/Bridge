@@ -15,7 +15,15 @@ Bridge.define("System.Exception", {
 
                 StackTrace: {
                     get: function () {
-                        return this.errorStack.stack;
+                        var s = this.errorStack.stack;
+
+                        if (this.$ownError) {
+                            s = s.match(/[^\r\n]+/g);
+                            s.splice(1, 1);
+                            s = s.join('\n');
+                        }
+
+                        return s;
                     }
                 },
 
@@ -31,8 +39,9 @@ Bridge.define("System.Exception", {
             this.$initialize();
             this.message = message ? message : ("Exception of type '" + Bridge.getTypeName(this) + "' was thrown.");
             this.innerException = innerException ? innerException : null;
-            this.errorStack = new Error();
-            this.data = new(System.Collections.Generic.Dictionary$2(System.Object, System.Object))();
+            this.errorStack = new Error(this.message);
+            this.$ownError = true;
+            this.data = new (System.Collections.Generic.Dictionary$2(System.Object, System.Object))();
         },
 
         getBaseException: function() {
@@ -67,16 +76,20 @@ Bridge.define("System.Exception", {
                 if (Bridge.is(error, System.Exception)) {
                     return error;
                 }
-
+                var ex;
                 if (error instanceof TypeError) {
-                    return new System.NullReferenceException(error.message, new Bridge.ErrorException(error));
+                    ex = new System.NullReferenceException(error.message, new Bridge.ErrorException(error));
                 } else if (error instanceof RangeError) {
-                    return new System.ArgumentOutOfRangeException(null, error.message, new Bridge.ErrorException(error));
+                    ex = new System.ArgumentOutOfRangeException(null, error.message, new Bridge.ErrorException(error));
                 } else if (error instanceof Error) {
                     return new Bridge.ErrorException(error);
                 } else {
-                    return new System.Exception(error ? error.toString() : null);
+                    ex = new System.Exception(error ? error.toString() : null);
                 }
+
+                ex.errorStack = error;
+                ex.$ownError = false;
+                return ex;
             }
         }
     });
