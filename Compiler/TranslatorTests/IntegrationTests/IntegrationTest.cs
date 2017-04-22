@@ -50,7 +50,9 @@ namespace Bridge.Translator.Tests
         private static Dictionary<string, CompareMode> SpecialFiles = new Dictionary<string, CompareMode>
         {
             { "bridge.js", CompareMode.Presence },
-            { "bridge.min.js", CompareMode.Presence }
+            { "bridge.min.js", CompareMode.Presence },
+            { "bridge.console.js", CompareMode.Presence },
+            { "bridge.console.min.js", CompareMode.Presence }
         };
 
         private void GetPaths(string folder)
