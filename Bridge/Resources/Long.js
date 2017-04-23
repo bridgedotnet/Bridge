@@ -58,6 +58,7 @@
         this.value = System.Int64.getValue(l);
     }
 
+    System.Int64.$number = true;
     System.Int64.TWO_PWR_16_DBL = 1 << 16;
     System.Int64.TWO_PWR_32_DBL = System.Int64.TWO_PWR_16_DBL * System.Int64.TWO_PWR_16_DBL;
     System.Int64.TWO_PWR_64_DBL = System.Int64.TWO_PWR_32_DBL * System.Int64.TWO_PWR_32_DBL;
@@ -597,6 +598,7 @@
         this.value = System.UInt64.getValue(l, true);
     }
 
+    System.UInt64.$number = true;
     System.UInt64.$$name = "System.UInt64";
     System.UInt64.prototype.$$name = "System.UInt64";
     System.UInt64.$kind = "struct";

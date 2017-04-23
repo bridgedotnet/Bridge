@@ -221,21 +221,7 @@ namespace Bridge.Utils
                 /*@
                     Bridge.global.window.addEventListener("error", function (e) {
                         if (e.message) {
-                            var msg = e.message;
-
-                            if (e.filename) {
-                                msg += "\n    at <a style=\"color:#d65050\" target=\"_blank\" href=\"" + e.filename + "\">" + e.filename + "</a>";
-
-                                if (e.lineno) {
-                                    msg += ":" + e.lineno;
-                                }
-
-                                if (e.colno) {
-                                    msg += ":" + e.colno;
-                                }
-                            }
-
-                            Bridge.Console.error(msg);
+                            Bridge.Console.error(e.message);
                         }
                     });
                  */

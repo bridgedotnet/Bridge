@@ -64,7 +64,7 @@ namespace Bridge.Translator
             {
                 if (hasInitializer)
                 {
-                    this.Write(JS.Funcs.BRIDGE_MERGE);
+                    this.Write(JS.Types.Bridge.APPLY);
                     this.WriteOpenParentheses();
                 }
 
