@@ -18190,6 +18190,29 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2587", {
+        statics: {
+            methods: {
+                TestNamedParams: function () {
+                    var result = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2587.Test.Method(void 0, ["test"]);
+                    Bridge.Test.NUnit.Assert.AreEqual(1, result);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2587.Test", {
+        statics: {
+            methods: {
+                Method: function (useless, list) {
+                    if (useless === void 0) { useless = null; }
+                    if (list === void 0) { list = []; }
+                    return list.length;
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge266A", {
         statics: {
             methods: {
