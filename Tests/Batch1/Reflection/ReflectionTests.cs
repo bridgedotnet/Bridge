@@ -697,8 +697,8 @@ namespace Bridge.ClientTest.Reflection
         [Test]
         public void IsStaticFlagWorksForMethod()
         {
-            Assert.AreEqual(typeof(C2).GetMembers(BindingFlags.Instance)[0].IsStatic, false, "Instance member should not be static");
-            Assert.AreEqual(typeof(C2).GetMembers(BindingFlags.Static)[0].IsStatic, true, "Static member should be static");
+            Assert.AreEqual(typeof(C2).GetMembers(BindingFlags.Instance | BindingFlags.Public)[0].IsStatic, false, "Instance member should not be static");
+            Assert.AreEqual(typeof(C2).GetMembers(BindingFlags.Static | BindingFlags.Public)[0].IsStatic, true, "Static member should be static");
         }
 
         [Test]
