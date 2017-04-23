@@ -275,16 +275,14 @@
                 })(cfg, scope, backingField);
             }
 
-            if (!alias && cfg.get && !cfg.get.$set) {
-                Object.defineProperty(cfg.get, "$set", { value: true, enumerable: false });
-                Object.defineProperty(cfg.get, "name", { value: cls.$$name + "." + name + ".get" });
-                Object.defineProperty(cfg.get, "displayName", { value: cls.$$name + "." + name + ".get" });
+            var isFF = Bridge.Browser.firefoxVersion > 0
+
+            if (!alias && cfg.get) {
+                Object.defineProperty(cfg.get, isFF ? "displayName" : "name", { value: cls.$$name + "." + name + ".get", writable: true });
             }
 
-            if (!alias && cfg.set && !cfg.set.$set) {
-                Object.defineProperty(cfg.set, "$set", { value: true, enumerable: false });
-                Object.defineProperty(cfg.set, "name", { value: cls.$$name + "." + name + ".set" });
-                Object.defineProperty(cfg.set, "displayName", { value: cls.$$name + "." + name + ".set" });
+            if (!alias && cfg.set) {
+                Object.defineProperty(cfg.set, isFF ? "displayName" : "name", { value: cls.$$name + "." + name + ".set", writable: true });
             }
 
             Object.defineProperty(scope, name, cfg);
@@ -2631,7 +2629,8 @@
 
             prop.$initialize = Bridge.Class._initialize;
 
-            var keys = [];
+            var keys = [],
+                isFF = Bridge.Browser.firefoxVersion > 0;
 
             for (name in prop) {
                 keys.push(name);
@@ -2658,10 +2657,8 @@
                     prototype[ctorName] = member;
                 }
 
-                if (typeof member === "function" && !member.$set) {
-                    Object.defineProperty(member, "$set", { value: true, enumerable: false });
-                    Object.defineProperty(member, "name", { value: className + "." + name });
-                    Object.defineProperty(member, "displayName", { value: className + "." + name });
+                if (typeof member === "function" && name !== "$main") {
+                    Object.defineProperty(member, isFF ? "displayName" : "name", { value: className + "." + name, writable: true });
                 }
             }
 
@@ -2680,10 +2677,8 @@
                         Class[name] = member;
                     }
 
-                    if (typeof member === "function" && !member.$set) {
-                        Object.defineProperty(member, "name", { value: className + "." + name });
-                        Object.defineProperty(member, "displayName", { value: className + "." + name });
-                        Object.defineProperty(member, "$set", { value: true, enumerable: false });
+                    if (typeof member === "function") {
+                        Object.defineProperty(member, isFF ? "displayName" : "name", { value: className + "." + name, writable: true });
                     }
                 }
             }

@@ -426,7 +426,8 @@
 
             prop.$initialize = Bridge.Class._initialize;
 
-            var keys = [];
+            var keys = [],
+                isFF = Bridge.Browser.firefoxVersion > 0;
 
             for (name in prop) {
                 keys.push(name);
@@ -453,10 +454,8 @@
                     prototype[ctorName] = member;
                 }
 
-                if (typeof member === "function" && !member.$set) {
-                    Object.defineProperty(member, "$set", { value: true, enumerable: false });
-                    Object.defineProperty(member, "name", { value: className + "." + name });
-                    Object.defineProperty(member, "displayName", { value: className + "." + name });
+                if (typeof member === "function" && name !== "$main") {
+                    Object.defineProperty(member, isFF ? "displayName" : "name", { value: className + "." + name, writable: true });
                 }
             }
 
@@ -475,10 +474,8 @@
                         Class[name] = member;
                     }
 
-                    if (typeof member === "function" && !member.$set) {
-                        Object.defineProperty(member, "name", { value: className + "." + name });
-                        Object.defineProperty(member, "displayName", { value: className + "." + name });
-                        Object.defineProperty(member, "$set", { value: true, enumerable: false });
+                    if (typeof member === "function") {
+                        Object.defineProperty(member, isFF ? "displayName" : "name", { value: className + "." + name, writable: true });
                     }
                 }
             }
