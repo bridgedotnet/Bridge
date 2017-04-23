@@ -531,14 +531,6 @@ namespace Bridge.Contract
         private static List<NameRule> GetSpecialRules(NameSemantic semantic)
         {
             var rules = new List<NameRule>();
-            var method = semantic.Entity as IMethod;
-
-            if (method != null && Helpers.IsEntryPointMethod(method))
-            {
-                semantic.IsCustomName = true;
-                rules.Add(new NameRule { CustomName = JS.Funcs.ENTRY_POINT_NAME, Level = NameRuleLevel.Member });
-                return rules;
-            }
 
             var nameAttr = Helpers.GetInheritedAttribute(semantic.Entity, "Bridge.NameAttribute");
             if (nameAttr != null)
@@ -559,7 +551,7 @@ namespace Bridge.Contract
             }
             else
             {
-                
+                var method = semantic.Entity as IMethod;
                 if (method != null && method.IsConstructor)
                 {
                     semantic.IsCustomName = true;

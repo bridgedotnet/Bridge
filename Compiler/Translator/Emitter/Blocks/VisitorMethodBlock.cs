@@ -1,6 +1,7 @@
 using Bridge.Contract;
 using ICSharpCode.NRefactory.CSharp;
 using System.Linq;
+using System.Xml.Schema;
 using Bridge.Contract.Constants;
 using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
@@ -73,16 +74,25 @@ namespace Bridge.Translator
 
             var overloads = OverloadsCollection.Create(this.Emitter, methodDeclaration);
             XmlToJsDoc.EmitComment(this, this.MethodDeclaration);
+            var isEntryPoint = Helpers.IsEntryPointMethod(this.Emitter, this.MethodDeclaration);
 
             string name = overloads.GetOverloadName(false, null, true);
 
-            this.Write(name);
+            if (isEntryPoint)
+            {
+                this.Write(JS.Funcs.ENTRY_POINT_NAME);
+            }
+            else
+            {
+                this.Write(name);
+            }
 
             this.WriteColon();
 
             this.WriteFunction();
 
-            if (this.Emitter.AssemblyInfo.EnableNamedFunctionExpressions)
+
+            if (isEntryPoint || this.Emitter.AssemblyInfo.EnableNamedFunctionExpressions)
             {
                 // If the option enabled then use named function expressions (see #2407)
                 // like doSomething: function doSomething() { }

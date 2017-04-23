@@ -5,7 +5,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
     
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch4Runner", {
-        Main: function () {
+        main: function Main() {
             Bridge.Test.Runtime.ContextHelper.Init();
             QUnit.test("ActivatorTests - NonGenericCreateInstanceWithoutArgumentsWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ActivatorTests.NonGenericCreateInstanceWithoutArgumentsWorks);
             QUnit.test("ActivatorTests - NonGenericCreateInstanceWithOneArgumentWorks_SPI_1540", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ActivatorTests.NonGenericCreateInstanceWithOneArgumentWorks_SPI_1540);

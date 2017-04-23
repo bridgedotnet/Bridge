@@ -2336,8 +2336,8 @@
                 to.$config = config;
             };
 
-            if (obj.Main) {
-                result.$main = obj.Main;
+            if (obj.main) {
+                result.$main = obj.main;
             }
 
             copy(obj, result);
@@ -2422,7 +2422,7 @@
             }
 
             var rNames = ["fields", "events", "props", "ctors", "methods"],
-                defaultScheme = Bridge.isFunction(prop.Main) ? 0 : 1,
+                defaultScheme = Bridge.isFunction(prop.main) ? 0 : 1,
                 check = function (scope) {
                     if (scope.config && Bridge.isPlainObject(scope.config) ||
                         scope.$main && Bridge.isFunction(scope.$main) ||
@@ -2681,8 +2681,11 @@
             };
 
             if (isEntryPoint || Bridge.isFunction(prototype.$main)) {
-                if (!Class.Main && prototype.$main) {
-                    Class.Main = prototype.$main;
+                if (prototype.$main) {
+                    var entryName = prototype.$main.name || "Main";
+                    if (!Class[entryName]) {
+                        Class[entryName] = prototype.$main;
+                    }
                 }
 
                 Bridge.Class.$queueEntry.push(Class);
@@ -3102,11 +3105,11 @@
                 }
 
                 if (t.prototype.$main) {
-                    (function(cls) {
-                        Bridge.ready(function() {
-                             cls.Main();
+                    (function(cls, name) {
+                        Bridge.ready(function () {
+                             cls[name]();
                         });
-                    })(t);
+                    })(t, t.prototype.$main.name || "Main");
                     
                     t.prototype.$main = null;
                 }
