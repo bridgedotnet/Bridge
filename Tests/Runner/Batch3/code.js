@@ -18555,54 +18555,72 @@ Bridge.$N1391Result =                     r;
             props: {
                 Prop1: {
                     get: function () {
-                        throw new System.Exception("Test");
+                        throw new System.Exception("ThrownFromGetterProp1");
+                    },
+                    set: function (value) {
+                        throw new System.Exception("ThrownFromSetterProp1");
                     }
                 }
             },
             methods: {
-                MethodThowsException1: function () {
+                MethodThrowsException1: function () {
                     var nulref = null;
                     var ch = nulref.charAt(1);
                 },
-                MethodThowsException2: function () {
-                    throw new System.Exception();
+                MethodThrowsException2: function () {
+                    throw new System.Exception("ThrownFromMethod2");
                 },
                 TestStackTrace: function () {
-                    var caught = false;
                     try {
-                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.MethodThowsException1();
+                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.MethodThrowsException1();
+                        Bridge.Test.NUnit.Assert.Fail$1("Should have thrown at MethodThrowsException1");
                     }
                     catch (e) {
                         e = System.Exception.create(e);
-                        caught = true;
-                        var s = e.StackTrace;
-                        Bridge.Test.NUnit.Assert.True(System.String.contains(s,"MethodThowsException1"));
+                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.AssertStackTrace(e.StackTrace, "MethodThrowsException1");
                     }
-                    Bridge.Test.NUnit.Assert.True(caught);
 
-                    caught = false;
                     try {
-                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.MethodThowsException2();
+                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.MethodThrowsException2();
+                        Bridge.Test.NUnit.Assert.Fail$1("Should have thrown at MethodThrowsException2");
                     }
                     catch (e1) {
                         e1 = System.Exception.create(e1);
-                        caught = true;
-                        var s1 = e1.StackTrace;
-                        Bridge.Test.NUnit.Assert.True(System.String.contains(s1,"MethodThowsException2"));
+                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.AssertStackTrace(e1.StackTrace, "MethodThrowsException2");
+                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.AssertStackTrace(e1.StackTrace, "ThrownFromMethod2");
                     }
-                    Bridge.Test.NUnit.Assert.True(caught);
 
-                    caught = false;
                     try {
                         var i = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.Prop1;
+                        Bridge.Test.NUnit.Assert.Fail$1("Should have thrown at getter Prop1");
                     }
                     catch (e2) {
                         e2 = System.Exception.create(e2);
-                        caught = true;
-                        var s2 = e2.StackTrace;
-                        Bridge.Test.NUnit.Assert.True(System.String.contains(s2,"Prop1.get"));
+                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.AssertStackTrace(e2.StackTrace, "Prop1.get");
+                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.AssertStackTrace(e2.StackTrace, "ThrownFromGetterProp1");
                     }
-                    Bridge.Test.NUnit.Assert.True(caught);
+
+                    try {
+                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.Prop1 = 1;
+                        Bridge.Test.NUnit.Assert.Fail$1("Should have thrown at setter Prop1");
+                    }
+                    catch (e3) {
+                        e3 = System.Exception.create(e3);
+                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.AssertStackTrace(e3.StackTrace, "Prop1.set");
+                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.AssertStackTrace(e3.StackTrace, "ThrownFromSetterProp1");
+                    }
+                },
+                AssertStackTrace: function (stack, fragment) {
+                    if (stack == null) {
+                        Bridge.Test.NUnit.Assert.Fail$1(stack);
+                        return;
+                    }
+
+                    if (System.String.contains(stack,fragment)) {
+                        Bridge.Test.NUnit.Assert.True(true);
+                    } else {
+                        Bridge.Test.NUnit.Assert.True$1(false, stack);
+                    }
                 }
             }
         }

@@ -9,66 +9,92 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     [TestFixture(TestNameFormat = "#2592 - {0}")]
     public class Bridge2592
     {
-        private static void MethodThowsException1()
+        private static void MethodThrowsException1()
         {
             string nulref = null;
             var ch = nulref.CharAt(1);
         }
 
-        private static void MethodThowsException2()
+        private static void MethodThrowsException2()
         {
-            throw new Exception();
+            throw new Exception("ThrownFromMethod2");
         }
 
         private static int Prop1
         {
             get
             {
-                throw new Exception("Test");
+                throw new Exception("ThrownFromGetterProp1");
+            }
+            set
+            {
+                throw new Exception("ThrownFromSetterProp1");
             }
         }
 
         [Test]
         public static void TestStackTrace()
         {
-            bool caught = false;
             try
             {
-                MethodThowsException1();
+                MethodThrowsException1();
+                Assert.Fail("Should have thrown at MethodThrowsException1");
             }
             catch (Exception e)
             {
-                caught = true;
-                var s = e.StackTrace;
-                Assert.True(s.Contains("MethodThowsException1"));
+                AssertStackTrace(e.StackTrace, "MethodThrowsException1");
             }
-            Assert.True(caught);
 
-            caught = false;
             try
             {
-                MethodThowsException2();
+                MethodThrowsException2();
+                Assert.Fail("Should have thrown at MethodThrowsException2");
             }
             catch (Exception e)
             {
-                caught = true;
-                var s = e.StackTrace;
-                Assert.True(s.Contains("MethodThowsException2"));
+                AssertStackTrace(e.StackTrace, "MethodThrowsException2");
+                AssertStackTrace(e.StackTrace, "ThrownFromMethod2");
             }
-            Assert.True(caught);
 
-            caught = false;
             try
             {
                 var i = Prop1;
+                Assert.Fail("Should have thrown at getter Prop1");
             }
             catch (Exception e)
             {
-                caught = true;
-                var s = e.StackTrace;
-                Assert.True(s.Contains("Prop1.get"));
+                AssertStackTrace(e.StackTrace, "Prop1.get");
+                AssertStackTrace(e.StackTrace, "ThrownFromGetterProp1");
             }
-            Assert.True(caught);
+
+            try
+            {
+                Prop1 = 1;
+                Assert.Fail("Should have thrown at setter Prop1");
+            }
+            catch (Exception e)
+            {
+                AssertStackTrace(e.StackTrace, "Prop1.set");
+                AssertStackTrace(e.StackTrace, "ThrownFromSetterProp1");
+            }
+        }
+
+        private static void AssertStackTrace(string stack, string fragment)
+        {
+            if (stack == null)
+            {
+                Assert.Fail(stack);
+                return;
+            }
+
+            if (stack.Contains(fragment))
+            {
+                Assert.True(true);
+            }
+            else
+            {
+                Assert.True(false, stack);
+            }
         }
     }
 }

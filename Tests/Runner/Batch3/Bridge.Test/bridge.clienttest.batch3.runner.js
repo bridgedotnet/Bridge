@@ -10673,7 +10673,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestStackTrace: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2592, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestStackTrace()", $t.Line = "31", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2592, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestStackTrace()", $t.Line = "35", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.TestStackTrace();
                 }
             }
