@@ -141,7 +141,9 @@ build_script:
 # scripts to run before tests
 before_test:
   # - echo script1
-
+- ps: >-
+    $env:CLIENT_TESTS_EXIT_CODE = 0
+ 
 # scripts to run after tests
 after_test:
 
