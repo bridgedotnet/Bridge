@@ -30,6 +30,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                     return Bridge.Test.Runtime.TestFixture$1(T).instanceFabric;
                 },
                 BeforeTest: function (needInstance, assert, type, expectedCount, testContext) {
+                    var $t;
                     if (expectedCount === void 0) { expectedCount = null; }
                     if (testContext === void 0) { testContext = null; }
                     Bridge.Test.NUnit.Assert.assert = assert;
@@ -44,10 +45,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                     var fixtureContext = instance.GetContext();
 
                     if (testContext != null || fixtureContext != null) {
-                        Bridge.Test.Runtime.ContextHelper.SetContext(assert, Bridge.merge(new Bridge.Test.Runtime.Context(), {
-                            FixtureCtx: fixtureContext,
-                            TestCtx: testContext
-                        } ));
+                        Bridge.Test.Runtime.ContextHelper.SetContext(assert, ($t=new Bridge.Test.Runtime.Context(), $t.FixtureCtx = fixtureContext, $t.TestCtx = testContext, $t));
                     }
 
                     try {
