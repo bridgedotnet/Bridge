@@ -1,10 +1,11 @@
 using Bridge;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 
 namespace System
 {
+    [External]
+    [Name("Function")]
     public class Type
     {
         public extern string FullName
@@ -394,45 +395,6 @@ namespace System
         {
             [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 7)  == 5)")]
             get;
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether the Type is one of the primitive types.
-        /// </summary>
-        public bool IsPrimitive
-        {
-            get
-            {
-                return new List<Type>()
-                {
-                    typeof(Boolean), // System.Boolean(bool)
-                    typeof(Byte), // System.Byte(byte)
-                    typeof(SByte), // System.SByte(sbyte)
-                    typeof(Int16), // System.Int16(short)
-                    typeof(UInt16), // System.UInt16(ushort)
-                    typeof(Int32), // System.Int32(int)
-                    typeof(UInt32), // System.UInt32(uint)
-                    typeof(Int64), // System.Int64(long)
-                    typeof(UInt64), // System.UInt64(ulong)
-                    typeof(Char), // System.Char(char)
-                    typeof(Double), // System.Double(double)
-                    typeof(Single) // System.Single(float)
-                }.Contains(this);
-
-                // System.Decimal(decimal) ??
-                // System.Int64
-                // System.UInt64
-                // System.Double
-                // System.Single
-                // System.Byte
-                // System.SByte
-                // System.Int16
-                // System.UInt16
-                // System.Int32
-                // System.UInt32
-                // Boolean
-                // System.Char
-            }
         }
     }
 }

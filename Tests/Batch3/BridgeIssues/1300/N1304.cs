@@ -54,6 +54,10 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             Console.Write("{0} {1} {2} {3} {4}", 1, 2, 3, 4, "5");
             Assert.AreEqual("1 2 3 4 5", Output);
+            ClearOutput();
+
+            Console.Write("{0} {1} {2} {3} {4} {5}", 1, 2, 3, 4, "5", true);
+            Assert.AreEqual("1 2 3 4 5 True", Output);
         }
 
         [Test]

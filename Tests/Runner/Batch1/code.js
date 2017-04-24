@@ -4832,9 +4832,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 this.AssertLogMessageObject("#27 - ", System.Decimal("-12345678.12345678"), "-12345678.12345678");
                 this.AssertLogMessageObject("#28 - ", System.Decimal("12345678.12345678"), "12345678.12345678");
                 this.AssertLogMessageObject("#29 - ", null, "");
-                this.AssertLogMessageObject("#30 - ", {  }, "[object Object]");
-                this.AssertLogMessageObject("#31 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassA(), "I'm ClassA");
-                this.AssertLogMessageObject("#32 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassB(), "[object Object]");
+                this.AssertLogMessageObject("#30 - ", {  }, "{}"); // Improved in #1994
+                this.AssertLogMessageObject("#31 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassA(), "{}"); // Improved in #1994
+                this.AssertLogMessageObject("#32 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassB(), "{}"); // Improved in #1994
+                this.AssertLogMessageObject("#33 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassC(), "{\"Name\":\"Frank\",\"Age\":55,\"Admin\":true}"); // Improved in #1994
+                this.AssertLogMessageObject("#34 - ", {  }.toString(), "[object Object]");
+                this.AssertLogMessageObject("#35 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassA().toString(), "I'm ClassA");
+                this.AssertLogMessageObject("#36 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassB().toString(), "[object Object]");
+                this.AssertLogMessageObject("#37 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassC().toString(), "[object Object]");
             },
             TestLogMessageString: function () {
                 this.AssertLogMessageObject("#1 - ", "Test Bridge Console Log Message String", "Test Bridge Console Log Message String");
@@ -4988,6 +4993,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     });
 
     Bridge.define("Bridge.ClientTest.BridgeConsoleTests.ClassB");
+
+    Bridge.define("Bridge.ClientTest.BridgeConsoleTests.ClassC", {
+        props: {
+            Name: "Frank",
+            Age: 55,
+            Admin: true
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.CheckedUncheckedTests", {
         statics: {

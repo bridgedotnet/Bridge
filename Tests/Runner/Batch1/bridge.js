@@ -3256,7 +3256,7 @@
 
     Bridge.define("Bridge.Utils.SystemAssemblyVersion");
 
-    // @source Json.js
+    // @source JSON.js
 
     Bridge.Json = {
         serialize: function (obj, settings, returnRaw, possibleType) {
@@ -4546,53 +4546,6 @@
             return Object.keys(System.Reflection.Assembly.assemblies).map(function (n) { return System.Reflection.Assembly.assemblies[n]; });
         }
     };
-
-    // @source type.js
-
-    Bridge.define("System.Type", {
-        props: {
-            prototype: null,
-            IsPrimitive: {
-                get: function () {
-                    return $asm.$.System.Type.f1(new (System.Collections.Generic.List$1(System.Type))()).contains(this);
-
-                    // System.Decimal(decimal) ??
-                    // System.Int64
-                    // System.UInt64
-                    // System.Double
-                    // System.Single
-                    // System.Byte
-                    // System.SByte
-                    // System.Int16
-                    // System.UInt16
-                    // System.Int32
-                    // System.UInt32
-                    // Boolean
-                    // System.Char
-                }
-            }
-        }
-    });
-
-    Bridge.ns("System.Type", $asm.$);
-
-    Bridge.apply($asm.$.System.Type, {
-        f1: function (_o8) {
-            _o8.add(System.Boolean);
-            _o8.add(System.Byte);
-            _o8.add(System.SByte);
-            _o8.add(System.Int16);
-            _o8.add(System.UInt16);
-            _o8.add(System.Int32);
-            _o8.add(System.UInt32);
-            _o8.add(System.Int64);
-            _o8.add(System.UInt64);
-            _o8.add(System.Char);
-            _o8.add(System.Double);
-            _o8.add(System.Single);
-            return _o8;
-        }
-    });
 
     // @source Interfaces.js
 
@@ -12571,18 +12524,17 @@ Bridge.define("System.String", {
             }
         },
 
-        format: function (format) {
-            return System.String._format(System.Globalization.CultureInfo.getCurrentCulture(), format, Array.prototype.slice.call(arguments, 1));
+        format: function (format, args) {
+            return System.String._format(System.Globalization.CultureInfo.getCurrentCulture(), format, !Array.isArray(args) ? Array.prototype.slice.call(arguments, 1) : args);
         },
 
-        formatProvider: function (provider, format) {
-            return System.String._format(provider, format, Array.prototype.slice.call(arguments, 2));
+        formatProvider: function (provider, format, args) {
+            return System.String._format(provider, format, !Array.isArray(args) ? Array.prototype.slice.call(arguments, 2) : args);
         },
 
-        _format: function (provider, format, values) {
+        _format: function (provider, format, args) {
             var me = this,
                 _formatRe = /(\{+)((\d+|[a-zA-Z_$]\w+(?:\.[a-zA-Z_$]\w+|\[\d+\])*)(?:\,(-?\d*))?(?:\:([^\}]*))?)(\}+)|(\{+)|(\}+)/g,
-                args = values,
                 fn = this.decodeBraceSequence;
 
             return format.replace(_formatRe, function (m, openBrace, elementContent, index, align, format, closeBrace, repeatOpenBrace, repeatCloseBrace) {
@@ -26347,11 +26299,14 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
     Bridge.define("System.Console", {
         statics: {
             methods: {
+                Write: function (value) {
+                    System.Console.WriteLine(value);
+                },
                 WriteLine: function (value) {
                     var con = Bridge.global.console;
 
                     if (con && con.log) {
-                        con.log(Bridge.unbox(value));
+                        con.log(value);
                     }
                 }
             }
