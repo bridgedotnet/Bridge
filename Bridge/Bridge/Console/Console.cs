@@ -412,10 +412,9 @@ namespace Bridge.Utils
             if (value != null)
             {
                 //@ t = typeof value !== "object";
+                var name = value.GetType().FullName;
 
-                var types = new string[] { "System.Boolean", "System.Byte", "System.SByte", "System.Int16", "System.UInt16", "System.Int32", "System.UInt32", "System.Int64", "System.UInt64", "System.Char", "System.Double", "System.Single" };
-
-                if (types.Contains(value.GetType().FullName) || t)
+                if (!name.Equals("System.Object") && (name.StartsWith("System") || t))
                 {
                     v = value == null ? "" : value.ToString();
                 }

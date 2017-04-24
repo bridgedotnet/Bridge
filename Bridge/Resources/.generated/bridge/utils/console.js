@@ -60,10 +60,9 @@
 
                     if (value != null) {
                         t = typeof value !== "object";
+                        var name = Bridge.Reflection.getTypeFullName(Bridge.getType(value));
 
-                        var types = System.Array.init(["System.Boolean", "System.Byte", "System.SByte", "System.Int16", "System.UInt16", "System.Int32", "System.UInt32", "System.Int64", "System.UInt64", "System.Char", "System.Double", "System.Single"], System.String);
-
-                        if (System.Array.contains(types, Bridge.Reflection.getTypeFullName(Bridge.getType(value)), System.String) || t) {
+                        if (!System.String.equals(name, "System.Object") && (System.String.startsWith(name, "System") || t)) {
                             v = value == null ? "" : value.toString();
                         } else {
                             v = JSON.stringify(value);
