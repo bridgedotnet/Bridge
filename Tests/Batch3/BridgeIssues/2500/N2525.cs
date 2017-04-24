@@ -30,7 +30,15 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             var b = (B)(object)a;
 
-            Assert.AreEqual(33, b.value);
+            Assert.AreEqual(33, b.value, "value 33 casts");
+
+
+            a.value = 34;
+
+            Assert.Throws(() =>
+            {
+                var c = (B)(object)a;
+            }, "value 34 should throw");
         }
     }
 }

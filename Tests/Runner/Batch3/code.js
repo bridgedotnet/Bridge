@@ -18378,7 +18378,15 @@ Bridge.$N1391Result =                     r;
 
                     var b = ($t = a, Bridge.cast($t, Bridge.hasValue($t) && ($t.value == 33)));
 
-                    Bridge.Test.NUnit.Assert.AreEqual(33, b.value);
+                    Bridge.Test.NUnit.Assert.AreEqual$1(33, b.value, "value 33 casts");
+
+
+                    a.value = 34;
+
+                    Bridge.Test.NUnit.Assert.Throws$5(function () {
+                        var $t1;
+                        var c = ($t1 = a, Bridge.cast($t1, Bridge.hasValue($t1) && ($t1.value == 33)));
+                    }, "value 34 should throw");
                 }
             }
         }
