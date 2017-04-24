@@ -1,10 +1,10 @@
         var base = {
         _initialize: function () {
-            if (this.$initialized) {
+            if (this.$init) {
                 return;
             }
 
-            this.$initialized = Bridge.emptyFn;
+            this.$init = {};
 
             if (this.$staticInit) {
                 this.$staticInit();

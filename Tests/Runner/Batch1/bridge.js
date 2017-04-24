@@ -255,24 +255,23 @@
             }
 
             if (!v || !(v.get || v.set)) {
-                var backingField = "$BackingField$" + cls.$$name + "$" + name;
-                Object.defineProperty(scope, backingField,
-                {
-                    writable: true,
-                    enumerable: false,
-                    configurable: false,
-                    value: v
-                });
+                var backingField = Bridge.getTypeAlias(cls) + "$" + name;
 
-                (function (cfg, scope, backingField) {
+                cls.$init = cls.$init || {};
+                if (statics) {
+                    cls.$init[backingField] = v;
+                }
+
+                (function (cfg, scope, backingField, v) {
                     cfg.get = function () {
-                        return this[backingField];
+                        var o = this.$init[backingField];
+                        return o === undefined ? v : o;
                     };
 
                     cfg.set = function (value) {
-                        this[backingField] = value;
+                        this.$init[backingField] = value;
                     };
-                })(cfg, scope, backingField);
+                })(cfg, scope, backingField, v);
             }
 
             Object.defineProperty(scope, name, cfg);
@@ -820,7 +819,7 @@
             return result;
         },
 
-        apply: function (obj, values) {
+        apply: function (obj, values, callback) {
             var names = Bridge.getPropertyNames(values, true),
                 i;
 
@@ -832,6 +831,10 @@
                 } else {
                     obj[name] = values[name];
                 }
+            }
+
+            if (callback) {
+                callback.call(obj, obj);
             }
 
             return obj;
@@ -865,18 +868,7 @@
                 to instanceof String || Bridge.isString(to) ||
                 to instanceof Function || Bridge.isFunction(to) ||
                 to instanceof Date || Bridge.isDate(to) ||
-                to instanceof System.Double ||
-                to instanceof System.Single ||
-                to instanceof System.Byte ||
-                to instanceof System.SByte ||
-                to instanceof System.Int16 ||
-                to instanceof System.UInt16 ||
-                to instanceof System.Int32 ||
-                to instanceof System.UInt32 ||
-                to instanceof Bridge.Int ||
-                to instanceof System.Decimal ||
-                to instanceof System.Int64 ||
-                to instanceof System.UInt64) {
+                Bridge.getType(to).$number) {
                 return from;
             }
 
@@ -1154,6 +1146,8 @@
 
             if (b && Bridge.isFunction(b.equals) && b.equals.length === 1) {
                 return b.equals(a);
+            } if (Bridge.isFunction(a) && Bridge.isFunction(b)) {
+                return Bridge.fn.equals.call(a, b);
             } else if (Bridge.isDate(a) && Bridge.isDate(b)) {
                 return a.valueOf() === b.valueOf();
             } else if (Bridge.isNull(a) && Bridge.isNull(b)) {
@@ -1347,6 +1341,10 @@
                 return b[name](a);
             }
 
+            if (Bridge.isFunction(a) && Bridge.isFunction(b)) {
+                return Bridge.fn.equals.call(a, b);
+            }
+
             return a.equalsT ? a.equalsT(b) : b.equalsT(a);
         },
 
@@ -1442,7 +1440,7 @@
                     return false;
                 }
 
-                return this.equals === fn.equals && this.$method === fn.$method && this.$scope === fn.$scope;
+                return this.equals && (this.equals === fn.equals) && this.$method && (this.$method === fn.$method) && this.$scope && (this.$scope === fn.$scope);
             },
 
             call: function (obj, fnName) {
@@ -2193,11 +2191,11 @@
 
         var base = {
         _initialize: function () {
-            if (this.$initialized) {
+            if (this.$init) {
                 return;
             }
 
-            this.$initialized = Bridge.emptyFn;
+            this.$init = {};
 
             if (this.$staticInit) {
                 this.$staticInit();
@@ -7132,6 +7130,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
         this.value = System.Int64.getValue(l);
     }
 
+    System.Int64.$number = true;
     System.Int64.TWO_PWR_16_DBL = 1 << 16;
     System.Int64.TWO_PWR_32_DBL = System.Int64.TWO_PWR_16_DBL * System.Int64.TWO_PWR_16_DBL;
     System.Int64.TWO_PWR_64_DBL = System.Int64.TWO_PWR_32_DBL * System.Int64.TWO_PWR_32_DBL;
@@ -7671,6 +7670,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
         this.value = System.UInt64.getValue(l, true);
     }
 
+    System.UInt64.$number = true;
     System.UInt64.$$name = "System.UInt64";
     System.UInt64.prototype.$$name = "System.UInt64";
     System.UInt64.$kind = "struct";
@@ -7925,6 +7925,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
         this.value = System.Decimal.getValue(v);
     }
 
+    System.Decimal.$number = true;
     System.Decimal.$$name = "System.Decimal";
     System.Decimal.prototype.$$name = "System.Decimal";
     System.Decimal.$kind = "struct";
@@ -11594,7 +11595,10 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 } else if (Bridge.isDefined(y, true)) {
                     var isBridge = x && x.$$name;
 
-                    if (!isBridge || x && x.$boxed || y && y.$boxed) {
+                    if (Bridge.isFunction(x) && Bridge.isFunction(y)) {
+                        return Bridge.fn.equals.call(x, y);
+                    }
+                    else if (!isBridge || x && x.$boxed || y && y.$boxed) {
                         return Bridge.equals(x, y);
                     }
                     else if (Bridge.isFunction(x.equalsT)) {
