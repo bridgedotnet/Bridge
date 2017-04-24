@@ -18483,6 +18483,7 @@ Bridge.$N1391Result =                     r;
                     var types = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2571.f1(new (System.Collections.Generic.List$1(Function))());
 
                     Bridge.Test.NUnit.Assert.True(types.contains(System.Double));
+                    Bridge.Test.NUnit.Assert.False(types.contains(System.Int16));
                 }
             }
         }

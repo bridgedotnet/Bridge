@@ -18,6 +18,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             };
 
             Assert.True(types.Contains(typeof(Double)));
+            Assert.False(types.Contains(typeof(Int16)));
         }
     }
 }
