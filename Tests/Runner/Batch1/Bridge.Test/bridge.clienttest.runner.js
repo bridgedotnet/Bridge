@@ -4188,7 +4188,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestLogMessageString: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BridgeConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BridgeConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLogMessageString()", $t.Line = "56", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BridgeConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BridgeConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLogMessageString()", $t.Line = "61", $t));
                     try {
                         t.Fixture.TestLogMessageString();
                     }
@@ -4198,7 +4198,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestDebugMessageString: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BridgeConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BridgeConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestDebugMessageString()", $t.Line = "63", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BridgeConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BridgeConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestDebugMessageString()", $t.Line = "68", $t));
                     try {
                         t.Fixture.TestDebugMessageString();
                     }
@@ -4208,7 +4208,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestErrorMessageString: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BridgeConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BridgeConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestErrorMessageString()", $t.Line = "70", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BridgeConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BridgeConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestErrorMessageString()", $t.Line = "75", $t));
                     try {
                         t.Fixture.TestErrorMessageString();
                     }
@@ -4218,7 +4218,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestToggling: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BridgeConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BridgeConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestToggling()", $t.Line = "77", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BridgeConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BridgeConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestToggling()", $t.Line = "82", $t));
                     try {
                         t.Fixture.TestToggling();
                     }

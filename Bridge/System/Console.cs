@@ -6,7 +6,6 @@ namespace System
     /// Represents the standard input, output, and error streams for console applications.
     /// </summary>
     [Unbox(false)]
-    [FileName("system/console.js")]
     [Convention(Notation.UpperCamelCase)]
     public sealed partial class Console
     {
@@ -48,63 +47,66 @@ namespace System
         /// Writes the text representation of the specified Boolean value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.WriteLine(System.Boolean.toString({value}))")]
+        [Template("System.Console.Write(System.Boolean.toString({value}))")]
         public static extern void Write(Boolean value);
 
         /// <summary>
         /// Writes the specified Unicode character value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.WriteLine(String.fromCharCode({value}))")]
+        [Template("System.Console.Write(String.fromCharCode({value}))")]
         public static extern void Write(Char value);
 
         /// <summary>
         /// Writes the text representation of the specified Decimal value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.WriteLine({value}.toString('G'))")]
+        [Template("System.Console.Write({value}.toString('G'))")]
         public static extern void Write(Decimal value);
 
         /// <summary>
         /// Writes the text representation of the specified double-precision floating-point value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.WriteLine({value})")]
+        [Template("System.Console.Write({value})")]
         public static extern void Write(Double value);
 
         /// <summary>
         /// Writes the text representation of the specified 32-bit signed integer value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.WriteLine({value})")]
+        [Template("System.Console.Write({value})")]
         public static extern void Write(Int32 value);
 
         /// <summary>
         /// Writes the text representation of the specified 64-bit signed integer value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.WriteLine({value}.toString())")]
+        [Template("System.Console.Write({value}.toString())")]
         public static extern void Write(Int64 value);
 
         /// <summary>
         /// Writes the text representation of the specified object to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.WriteLine({value})")]
-        public static extern void Write(Object value);
+        [Name("Write")]
+        public static void Write(Object value)
+        {
+            WriteLine(value);
+        }
 
         /// <summary>
         /// Writes the text representation of the specified single-precision floating-point value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.WriteLine({value})")]
+        [Template("System.Console.Write({value})")]
         public static extern void Write(Single value);
 
         /// <summary>
         /// Writes the specified string value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.WriteLine({value})")]
+        [Template("System.Console.Write({value})")]
         public static extern void Write(String value);
 
         /// <summary>
@@ -112,7 +114,7 @@ namespace System
         /// </summary>
         /// <param name="format">A composite format string.</param>
         /// <param name="arg0">The first object to write using format.</param>
-        [Template("System.Console.WriteLine(System.String.format({format}, {arg0}))")]
+        [Template("System.Console.Write(System.String.format({format}, {arg0}))")]
         public static extern void Write(String format, Object arg0);
 
         /// <summary>
@@ -121,7 +123,7 @@ namespace System
         /// <param name="format">A composite format string.</param>
         /// <param name="arg0">The first object to write using format.</param>
         /// <param name="arg1">The second object to write using format.</param>
-        [Template("System.Console.WriteLine(System.String.format({format}, {arg0}, {arg1}))")]
+        [Template("System.Console.Write(System.String.format({format}, {arg0}, {arg1}))")]
         public static extern void Write(String format, Object arg0, Object arg1);
 
         /// <summary>
@@ -131,7 +133,7 @@ namespace System
         /// <param name="arg0">The first object to write using format.</param>
         /// <param name="arg1">The second object to write using format.</param>
         /// <param name="arg2">The third object to write using format.</param>
-        [Template("System.Console.WriteLine(System.String.format({format}, {arg0}, {arg1}, {arg2}))")]
+        [Template("System.Console.Write(System.String.format({format}, {arg0}, {arg1}, {arg2}))")]
         public static extern void Write(String format, Object arg0, Object arg1, Object arg2);
 
         /// <summary>
@@ -142,7 +144,7 @@ namespace System
         /// <param name="arg1">The second object to write using format.</param>
         /// <param name="arg2">The third object to write using format.</param>
         /// <param name="arg3">The fourth object to write using format.</param>
-        [Template("System.Console.WriteLine(System.String.format({format}, {arg0}, {arg1}, {arg2}, {arg3}))")]
+        [Template("System.Console.Write(System.String.format({format}, [{arg0}, {arg1}, {arg2}, {arg3}]))")]
         public static extern void Write(String format, Object arg0, Object arg1, Object arg2, Object arg3);
 
         /// <summary>
@@ -150,21 +152,21 @@ namespace System
         /// </summary>
         /// <param name="format">A composite format string.</param>
         /// <param name="arg">An array of objects to write using format.</param>
-        [Template("System.Console.WriteLine(System.String.format({format}, {arg}))")]
+        [Template("System.Console.Write(System.String.format({format}, {arg}))")]
         public static extern void Write(String format, params Object[] arg);
 
         /// <summary>
         /// Writes the text representation of the specified 32-bit unsigned integer value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.WriteLine({value})")]
+        [Template("System.Console.Write({value})")]
         public static extern void Write(UInt32 value);
 
         /// <summary>
         /// Writes the text representation of the specified 64-bit unsigned integer value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.WriteLine({value}.toString())")]
+        [Template("System.Console.Write({value}.toString())")]
         public static extern void Write(UInt64 value);
 
         /// <summary>
@@ -236,7 +238,7 @@ namespace System
 
             if (con && con.log)
             {
-                con.log(value);
+                //@ con.log(value);
             }
         }
 
@@ -289,7 +291,7 @@ namespace System
         /// <param name="arg1">The second object to write using format.</param>
         /// <param name="arg2">The third object to write using format.</param>
         /// <param name="arg3">The fourth object to write using format.</param>
-        [Template("System.Console.WriteLine(System.String.format({format}, {arg0}, {arg1}, {arg2}, {arg3}))")]
+        [Template("System.Console.WriteLine(System.String.format({format}, [{arg0}, {arg1}, {arg2}, {arg3}]))")]
         public static extern void WriteLine(String format, Object arg0, Object arg1, Object arg2, Object arg3);
 
         /// <summary>

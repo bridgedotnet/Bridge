@@ -2917,7 +2917,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 },
                 TestWriteLineFormatString: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1304, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineFormatString()", $t.Line = "59", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1304, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineFormatString()", $t.Line = "63", $t));
                     try {
                         Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.TestWriteLineFormatString();
                     }

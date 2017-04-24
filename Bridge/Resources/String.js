@@ -58,18 +58,17 @@ Bridge.define("System.String", {
             }
         },
 
-        format: function (format) {
-            return System.String._format(System.Globalization.CultureInfo.getCurrentCulture(), format, Array.prototype.slice.call(arguments, 1));
+        format: function (format, args) {
+            return System.String._format(System.Globalization.CultureInfo.getCurrentCulture(), format, !Array.isArray(args) ? Array.prototype.slice.call(arguments, 1) : args);
         },
 
-        formatProvider: function (provider, format) {
-            return System.String._format(provider, format, Array.prototype.slice.call(arguments, 2));
+        formatProvider: function (provider, format, args) {
+            return System.String._format(provider, format, !Array.isArray(args) ? Array.prototype.slice.call(arguments, 2) : args);
         },
 
-        _format: function (provider, format, values) {
+        _format: function (provider, format, args) {
             var me = this,
                 _formatRe = /(\{+)((\d+|[a-zA-Z_$]\w+(?:\.[a-zA-Z_$]\w+|\[\d+\])*)(?:\,(-?\d*))?(?:\:([^\}]*))?)(\}+)|(\{+)|(\}+)/g,
-                args = values,
                 fn = this.decodeBraceSequence;
 
             return format.replace(_formatRe, function (m, openBrace, elementContent, index, align, format, closeBrace, repeatOpenBrace, repeatCloseBrace) {

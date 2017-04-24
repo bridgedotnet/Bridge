@@ -21,7 +21,6 @@
                 end: function () {
                     var wl = System.Console.WriteLine;
                     var debug = System.Diagnostics.Debug.writeln;
-                    var win = Bridge.global.window;
                     var con = Bridge.global.console;
 
                     if (wl) {
@@ -38,19 +37,19 @@
                         }
                     }
 
-                    if (win) {
-                        Bridge.global.window.addEventListener("error", function (e) {
-                            if (e.message) {
-                                Bridge.Console.error(e.message);
-                            }
-                        });
-                    }
-
                     if (con && con.error) {
                         Bridge.global.console.error = function (msg) {
                             error(msg);
                             Bridge.Console.error(msg);
                         }
+                    }
+
+                    if (Bridge.isDefined(Bridge.global.window)) {
+                        Bridge.global.window.addEventListener("error", function (e) {
+                            if (e.message) {
+                                Bridge.Console.error(e.message);
+                            }
+                        });
                     }
                 },
                 logBase: function (value, messageType) {
@@ -62,10 +61,12 @@
                     if (value != null) {
                         t = typeof value !== "object";
 
-                        if (Bridge.getType(value).IsPrimitive || t) {
+                        var types = System.Array.init(["System.Boolean", "System.Byte", "System.SByte", "System.Int16", "System.UInt16", "System.Int32", "System.UInt32", "System.Int64", "System.UInt64", "System.Char", "System.Double", "System.Single"], System.String);
+
+                        if (System.Array.contains(types, Bridge.Reflection.getTypeFullName(Bridge.getType(value)), System.String) || t) {
                             v = value == null ? "" : value.toString();
                         } else {
-                            v = JSON.stringify(Bridge.unbox(value));
+                            v = JSON.stringify(value);
                         }
 
                         if (self.bufferedOutput != null) {

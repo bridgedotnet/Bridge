@@ -49,6 +49,7 @@ namespace Bridge.Utils
 
                 public ConsoleWrap Console;
                 public OperaWrap Opera;
+                public Element Window;
             }
 
             public static GlobalWrap Global;
@@ -76,6 +77,8 @@ namespace Bridge.Utils
             public extern Element appendChild(Element child);
 
             public extern void addEventListener(string type, Action listener);
+
+            public extern void addEventListener(string type, Action<dynamic> listener);
 
             public extern Element insertBefore(Element newElement, Element referenceElement);
 
@@ -193,7 +196,6 @@ namespace Bridge.Utils
         {
             var wl = Script.ToDynamic().System.Console.WriteLine;
             var debug = Script.ToDynamic().System.Diagnostics.Debug.writeln;
-            var win = Script.ToDynamic().Bridge.global.window;
             var con = Script.ToDynamic().Bridge.global.console;
 
             if (wl)
@@ -216,17 +218,6 @@ namespace Bridge.Utils
                  */
             }
 
-            if (win)
-            {
-                /*@
-                    Bridge.global.window.addEventListener("error", function (e) {
-                        if (e.message) {
-                            Bridge.Console.error(e.message);
-                        }
-                    });
-                 */
-            }
-
             if (con && con.error)
             {
                 /*@
@@ -235,6 +226,17 @@ namespace Bridge.Utils
                         Bridge.Console.error(msg);
                     }
                  */
+            }
+
+            if (Script.IsDefined(BridgeWrap.Global.Window))
+            {
+                BridgeWrap.Global.Window.addEventListener("error", (e) =>
+                {
+                    if (e.message)
+                    {
+                        Console.Error(e.message);
+                    }
+                });
             }
         }
 
@@ -411,13 +413,15 @@ namespace Bridge.Utils
             {
                 //@ t = typeof value !== "object";
 
-                if (value.GetType().IsPrimitive || t)
+                var types = new string[] { "System.Boolean", "System.Byte", "System.SByte", "System.Int16", "System.UInt16", "System.Int32", "System.UInt32", "System.Int64", "System.UInt64", "System.Char", "System.Double", "System.Single" };
+
+                if (types.Contains(value.GetType().FullName) || t)
                 {
                     v = value == null ? "" : value.ToString();
                 }
                 else
                 {
-                    v = Script.ToDynamic().JSON.stringify(value);
+                    //@ v = JSON.stringify(value);
                 }
 
                 if (self.BufferedOutput != null)

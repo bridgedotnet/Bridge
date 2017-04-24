@@ -48,9 +48,14 @@ namespace Bridge.ClientTest
             AssertLogMessageObject("#27 - ", -12345678.12345678m, "-12345678.12345678");
             AssertLogMessageObject("#28 - ", 12345678.12345678m, "12345678.12345678");
             AssertLogMessageObject("#29 - ", null, "");
-            AssertLogMessageObject("#30 - ", new object(), "[object Object]");
-            AssertLogMessageObject("#31 - ", new ClassA(), "I'm ClassA");
-            AssertLogMessageObject("#32 - ", new ClassB(), "[object Object]");
+            AssertLogMessageObject("#30 - ", new object(), "{}"); // Improved in #1994
+            AssertLogMessageObject("#31 - ", new ClassA(), "{}"); // Improved in #1994
+            AssertLogMessageObject("#32 - ", new ClassB(), "{}"); // Improved in #1994
+            AssertLogMessageObject("#33 - ", new ClassC(), "{\"Name\":\"Frank\",\"Age\":55,\"Admin\":true}"); // Improved in #1994
+            AssertLogMessageObject("#34 - ", new object().ToString(), "[object Object]");
+            AssertLogMessageObject("#35 - ", new ClassA().ToString(), "I'm ClassA");
+            AssertLogMessageObject("#36 - ", new ClassB().ToString(), "[object Object]");
+            AssertLogMessageObject("#37 - ", new ClassC().ToString(), "[object Object]");
         }
 
         [Test]
@@ -119,6 +124,15 @@ namespace Bridge.ClientTest
 
         private class ClassB
         {
+        }
+
+        public class ClassC
+        {
+            public string Name { get; set; } = "Frank";
+
+            public int Age { get; set; } = 55;
+
+            public bool Admin { get; set; } = true;
         }
 
         private void AssertLogMessageObject(string description, object message, string expected)

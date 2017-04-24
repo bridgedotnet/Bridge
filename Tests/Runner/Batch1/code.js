@@ -3788,9 +3788,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var asm = this.ImportedModuleTestCase;
                 var types = Bridge.Reflection.getAssemblyTypes(asm);
                 Bridge.Test.NUnit.Assert.AreEqual$1(types.length, 3, "Length");
-                Bridge.Test.NUnit.Assert.True$1(System.Array.contains(types, Bridge.cast(asm.Foo.Bar.Inner.OtherFunction, System.Type), System.Type), "#1");
-                Bridge.Test.NUnit.Assert.True$1(System.Array.contains(types, Bridge.cast(asm.Foo.Bar.Something, System.Type), System.Type), "#2");
-                Bridge.Test.NUnit.Assert.True$1(System.Array.contains(types, Bridge.cast(asm.Foo.baz.Test, System.Type), System.Type), "#3");
+                Bridge.Test.NUnit.Assert.True$1(System.Array.contains(types, Bridge.cast(asm.Foo.Bar.Inner.OtherFunction, Function), Function), "#1");
+                Bridge.Test.NUnit.Assert.True$1(System.Array.contains(types, Bridge.cast(asm.Foo.Bar.Something, Function), Function), "#2");
+                Bridge.Test.NUnit.Assert.True$1(System.Array.contains(types, Bridge.cast(asm.Foo.baz.Test, Function), Function), "#3");
             },
             GetTypeWorks: function () {
                 Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(Bridge.Reflection.getType(Bridge.Reflection.getTypeFullName(Bridge.ClientTest.Batch1.Reflection.AssemblyTests), $asm), Bridge.ClientTest.Batch1.Reflection.AssemblyTests));
@@ -3803,9 +3803,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             GetTypeWithImportedModuleWorks: function () {
                 var asm = this.ImportedModuleTestCase;
-                Bridge.Test.NUnit.Assert.True$1(Bridge.referenceEquals(Bridge.Reflection.getType("Foo.Bar.Inner.OtherFunction", asm), Bridge.cast(asm.Foo.Bar.Inner.OtherFunction, System.Type)), "#1");
-                Bridge.Test.NUnit.Assert.True$1(Bridge.referenceEquals(Bridge.Reflection.getType("Foo.Bar.Something", asm), Bridge.cast(asm.Foo.Bar.Something, System.Type)), "#2");
-                Bridge.Test.NUnit.Assert.True$1(Bridge.referenceEquals(Bridge.Reflection.getType("Foo.baz.Test", asm), Bridge.cast(asm.Foo.baz.Test, System.Type)), "#3");
+                Bridge.Test.NUnit.Assert.True$1(Bridge.referenceEquals(Bridge.Reflection.getType("Foo.Bar.Inner.OtherFunction", asm), Bridge.cast(asm.Foo.Bar.Inner.OtherFunction, Function)), "#1");
+                Bridge.Test.NUnit.Assert.True$1(Bridge.referenceEquals(Bridge.Reflection.getType("Foo.Bar.Something", asm), Bridge.cast(asm.Foo.Bar.Something, Function)), "#2");
+                Bridge.Test.NUnit.Assert.True$1(Bridge.referenceEquals(Bridge.Reflection.getType("Foo.baz.Test", asm), Bridge.cast(asm.Foo.baz.Test, Function)), "#3");
                 Bridge.Test.NUnit.Assert.True$1(Bridge.Reflection.getType("Foo.Bar", asm) == null, "#4");
             },
             AssemblyOfBuiltInTypes: function () {
@@ -4832,9 +4832,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 this.AssertLogMessageObject("#27 - ", System.Decimal("-12345678.12345678"), "-12345678.12345678");
                 this.AssertLogMessageObject("#28 - ", System.Decimal("12345678.12345678"), "12345678.12345678");
                 this.AssertLogMessageObject("#29 - ", null, "");
-                this.AssertLogMessageObject("#30 - ", {  }, "[object Object]");
-                this.AssertLogMessageObject("#31 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassA(), "I'm ClassA");
-                this.AssertLogMessageObject("#32 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassB(), "[object Object]");
+                this.AssertLogMessageObject("#30 - ", {  }, "{}"); // Improved in #1994
+                this.AssertLogMessageObject("#31 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassA(), "{}"); // Improved in #1994
+                this.AssertLogMessageObject("#32 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassB(), "{}"); // Improved in #1994
+                this.AssertLogMessageObject("#33 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassC(), "{\"Name\":\"Frank\",\"Age\":55,\"Admin\":true}"); // Improved in #1994
+                this.AssertLogMessageObject("#34 - ", {  }.toString(), "[object Object]");
+                this.AssertLogMessageObject("#35 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassA().toString(), "I'm ClassA");
+                this.AssertLogMessageObject("#36 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassB().toString(), "[object Object]");
+                this.AssertLogMessageObject("#37 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassC().toString(), "[object Object]");
             },
             TestLogMessageString: function () {
                 this.AssertLogMessageObject("#1 - ", "Test Bridge Console Log Message String", "Test Bridge Console Log Message String");
@@ -4988,6 +4993,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     });
 
     Bridge.define("Bridge.ClientTest.BridgeConsoleTests.ClassB");
+
+    Bridge.define("Bridge.ClientTest.BridgeConsoleTests.ClassC", {
+        props: {
+            Name: "Frank",
+            Age: 55,
+            Admin: true
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.CheckedUncheckedTests", {
         statics: {
@@ -8231,9 +8244,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var interfaces = Bridge.Reflection.getInterfaces(System.Collections.Generic.IReadOnlyList$1(System.Object));
                 Bridge.Test.NUnit.Assert.AreEqual$1(3, interfaces.length, "Interfaces length");
-                Bridge.Test.NUnit.Assert.True$1(System.Array.contains(interfaces, System.Collections.Generic.IEnumerable$1(System.Object), System.Type), "Interfaces should contain IEnumerable<object>");
-                Bridge.Test.NUnit.Assert.True$1(System.Array.contains(interfaces, System.Collections.Generic.IReadOnlyCollection$1(System.Object), System.Type), "Interfaces should contain IReadOnlyCollection");
-                Bridge.Test.NUnit.Assert.True$1(System.Array.contains(interfaces, System.Collections.IEnumerable, System.Type), "Interfaces should contain IEnumerable");
+                Bridge.Test.NUnit.Assert.True$1(System.Array.contains(interfaces, System.Collections.Generic.IEnumerable$1(System.Object), Function), "Interfaces should contain IEnumerable<object>");
+                Bridge.Test.NUnit.Assert.True$1(System.Array.contains(interfaces, System.Collections.Generic.IReadOnlyCollection$1(System.Object), Function), "Interfaces should contain IReadOnlyCollection");
+                Bridge.Test.NUnit.Assert.True$1(System.Array.contains(interfaces, System.Collections.IEnumerable, Function), "Interfaces should contain IEnumerable");
             },
             CustomClassThatShouldImplementIReadOnlyListDoesSo: function () {
                 Bridge.Test.NUnit.Assert.True(Bridge.is(new Bridge.ClientTest.Collections.Generic.IReadOnlyListTests.MyList(System.Array.init(0, null, System.String)), System.Collections.Generic.IReadOnlyList$1(System.String)));
@@ -15490,7 +15503,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.Test.NUnit.Assert.AreEqual(guid.toByteArray(), Bridge.Json.deserialize("\"" + guid + "\"", System.Guid).toByteArray());
                 },
                 TypeWorks: function () {
-                    Bridge.Test.NUnit.Assert.AreEqual(System.Collections.Generic.List$1(System.String), Bridge.Json.deserialize(System.String.concat("\"", Bridge.Reflection.getTypeFullName(System.Collections.Generic.List$1(System.String)), "\""), System.Type));
+                    Bridge.Test.NUnit.Assert.AreEqual(System.Collections.Generic.List$1(System.String), Bridge.Json.deserialize(System.String.concat("\"", Bridge.Reflection.getTypeFullName(System.Collections.Generic.List$1(System.String)), "\""), Function));
                 },
                 CharWorks: function () {
                     Bridge.Test.NUnit.Assert.AreEqual(97, Bridge.Json.deserialize("\"a\"", System.Char));
@@ -18378,7 +18391,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.True$1(Bridge.Reflection.isAssignableFrom(System.IFormattable, System.FormattableString), "IFormattable.IsAssignableFrom");
                 var interfaces = Bridge.Reflection.getInterfaces(System.FormattableString);
                 Bridge.Test.NUnit.Assert.AreEqual$1(1, interfaces.length, "interfaces length");
-                Bridge.Test.NUnit.Assert.True$1(System.Array.contains(interfaces, System.IFormattable, System.Type), "interfaces contains IFormattable");
+                Bridge.Test.NUnit.Assert.True$1(System.Array.contains(interfaces, System.IFormattable, Function), "interfaces contains IFormattable");
             },
             ArgumentCountWorks: function () {
                 var s1 = System.Runtime.CompilerServices.FormattableStringFactory.create("{0}", ["x"]);
@@ -19313,13 +19326,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var f6 = ($t8 = { ntype: 9, t: System.Double, value: Bridge.box(42, System.Int32) }, { ntype: 18, t: Function, rt: $t8.t, body: $t8, p: Bridge.toList(System.Array.init([{ ntype: 38, t: System.Int32, n: "x1" }, { ntype: 38, t: System.String, n: "x2" }], System.Object)) });
                 var f7 = ($t9 = { ntype: 9, t: System.Double, value: Bridge.box(42, System.Int32) }, { ntype: 18, t: Function, rt: $t9.t, body: $t9, p: Bridge.toList(new (Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyEnumerable$1(System.Object))(System.Array.init([{ ntype: 38, t: System.Int32, n: "x1" }, { ntype: 38, t: System.String, n: "x2" }], System.Object))) });
 
-                asserter(f1, System.Int32, System.Array.init(0, null, System.String), System.Array.init(0, null, System.Type), "f1");
-                asserter(f2, System.String, System.Array.init(["a"], System.String), System.Array.init([System.Int32], System.Type), "f2");
-                asserter(f3, System.Double, System.Array.init(["x", "y"], System.String), System.Array.init([System.Int32, System.String], System.Type), "f3");
-                asserter(f4, System.Double, System.Array.init(["x1", "x2"], System.String), System.Array.init([System.Int32, System.String], System.Type), "f4");
-                asserter(f5, System.Double, System.Array.init(["x1", "x2"], System.String), System.Array.init([System.Int32, System.String], System.Type), "f5");
-                asserter(f6, System.Double, System.Array.init(["x1", "x2"], System.String), System.Array.init([System.Int32, System.String], System.Type), "f6");
-                asserter(f7, System.Double, System.Array.init(["x1", "x2"], System.String), System.Array.init([System.Int32, System.String], System.Type), "f7");
+                asserter(f1, System.Int32, System.Array.init(0, null, System.String), System.Array.init(0, null, Function), "f1");
+                asserter(f2, System.String, System.Array.init(["a"], System.String), System.Array.init([System.Int32], Function), "f2");
+                asserter(f3, System.Double, System.Array.init(["x", "y"], System.String), System.Array.init([System.Int32, System.String], Function), "f3");
+                asserter(f4, System.Double, System.Array.init(["x1", "x2"], System.String), System.Array.init([System.Int32, System.String], Function), "f4");
+                asserter(f5, System.Double, System.Array.init(["x1", "x2"], System.String), System.Array.init([System.Int32, System.String], Function), "f5");
+                asserter(f6, System.Double, System.Array.init(["x1", "x2"], System.String), System.Array.init([System.Int32, System.String], Function), "f6");
+                asserter(f7, System.Double, System.Array.init(["x1", "x2"], System.String), System.Array.init([System.Int32, System.String], Function), "f7");
             },
             ParameterAndVariableWork: function () {
                 var $t;
@@ -19815,7 +19828,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.Test.NUnit.Assert.AreEqual$1(me.method.rt, System.Double, System.String.concat(title, " method return value"));
                     Bridge.Test.NUnit.Assert.AreEqual$1(me.method.n, "Get", System.String.concat(title, " method name"));
                     Bridge.Test.NUnit.Assert.AreEqual$1(me.method.td, System.Array.type(System.Double, 2), System.String.concat(title, " method declaring type"));
-                    Bridge.Test.NUnit.Assert.AreEqual$1((me.method.p || []), System.Array.init([System.Int32, System.Int32], System.Type), System.String.concat(title, " method parameter types"));
+                    Bridge.Test.NUnit.Assert.AreEqual$1((me.method.p || []), System.Array.init([System.Int32, System.Int32], Function), System.String.concat(title, " method parameter types"));
                     Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(Bridge.Reflection.midel(me.method, arr)(1, 2)), 2.5, System.String.concat(title, " method invoke result"));
                 };
 
@@ -19876,7 +19889,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             MethodGroupConversionWorks: function () {
                 var $t, $t1, $t2, $t3;
-                var e1 = ($t = { ntype: 38, t: Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, n: "a" }, ($t2 = { ntype: 10, t: Function, operand: ($t1 = {"td":System.Reflection.MethodInfo,"a":2,"n":"CreateDelegate","t":8,"pi":[{"n":"delegateType","pt":System.Type,"ps":0},{"n":"target","pt":System.Object,"ps":1}],"tpc":0,"def":function (delegateType, target) { return Bridge.Reflection.midel(this, target); },"rt":Function,"p":[System.Type,System.Object]}, { ntype: 6, t: $t1.rt, obj: { ntype: 9, t: System.Reflection.MethodInfo, value: Bridge.getMetadata(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C).m[4] }, method: $t1, args: Bridge.toList([Function,$t]) }) }, { ntype: 18, t: Function, rt: $t2.t, body: $t2, p: Bridge.toList([$t]) }));
+                var e1 = ($t = { ntype: 38, t: Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, n: "a" }, ($t2 = { ntype: 10, t: Function, operand: ($t1 = {"td":System.Reflection.MethodInfo,"a":2,"n":"CreateDelegate","t":8,"pi":[{"n":"delegateType","pt":Function,"ps":0},{"n":"target","pt":System.Object,"ps":1}],"tpc":0,"def":function (delegateType, target) { return Bridge.Reflection.midel(this, target); },"rt":Function,"p":[Function,System.Object]}, { ntype: 6, t: $t1.rt, obj: { ntype: 9, t: System.Reflection.MethodInfo, value: Bridge.getMetadata(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C).m[4] }, method: $t1, args: Bridge.toList([Function,$t]) }) }, { ntype: 18, t: Function, rt: $t2.t, body: $t2, p: Bridge.toList([$t]) }));
 
                 Bridge.Test.NUnit.Assert.True$1(e1.body.ntype === 10, "e1 body node type");
                 var e2 = ($t3 = e1.body, Bridge.cast($t3, Bridge.hasValue($t3) && ([4,10,11,28,29,30,34,40,44,49,54,60,62,77,78,79,80,82,83,84].indexOf($t3.ntype) >= 0)));
@@ -19889,7 +19902,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.True$1(Bridge.referenceEquals(e4.value, Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 8, 284, "M4")), "e4 value");
                 Bridge.Test.NUnit.Assert.AreEqual$1(e3.method.td, System.Reflection.MethodInfo, "e3 method declaring type");
                 Bridge.Test.NUnit.Assert.AreEqual$1(e3.method.n, "CreateDelegate", "e3 method name");
-                Bridge.Test.NUnit.Assert.AreEqual$1((e3.method.p || []), System.Array.init([System.Type, System.Object], System.Type), "e3 method parameters");
+                Bridge.Test.NUnit.Assert.AreEqual$1((e3.method.p || []), System.Array.init([Function, System.Object], Function), "e3 method parameters");
                 Bridge.Test.NUnit.Assert.AreEqual$1(e3.args.Count, 2, "e3 arguments");
                 Bridge.Test.NUnit.Assert.AreEqual$1(e3.args.get(0), Function, "e3 argument 0");
                 Bridge.Test.NUnit.Assert.True$1(($t3 = e3.args.get(1), Bridge.is($t3, Bridge.hasValue($t3) && ($t3.ntype === 38))) && Bridge.referenceEquals(($t3 = e3.args.get(1), Bridge.cast($t3, Bridge.hasValue($t3) && ($t3.ntype === 38))).n, "a"), "e3 argument 1");
@@ -20048,16 +20061,16 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var e1 = ($t1 = ($t = Bridge.getMetadata(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C).m[0], { ntype: 31, t: $t.td, constructor: $t, arguments: Bridge.toList([]) }), { ntype: 18, t: Function, rt: $t1.t, body: $t1, p: Bridge.toList([]) });
                 var e2 = ($t2 = { ntype: 38, t: System.Int32, n: "a" }, $t3 = { ntype: 38, t: System.Int32, n: "b" }, ($t5 = ($t4 = Bridge.getMetadata(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C).m[1], { ntype: 31, t: $t4.td, constructor: $t4, arguments: Bridge.toList([$t2,$t3]) }), { ntype: 18, t: Function, rt: $t5.t, body: $t5, p: Bridge.toList([$t2,$t3]) }));
                 var e3 = ($t6 = { ntype: 38, t: System.Int32, n: "a" }, $t7 = { ntype: 38, t: System.String, n: "b" }, ($t9 = ($t8 = {"td":Bridge.ClientTest.Linq.Expressions.ExpressionTests.C,"a":2,"n":".ctor","t":1,"p":[System.Int32,System.String],"pi":[{"n":"a","pt":System.Int32,"ps":0},{"n":"b","pt":System.String,"ps":1}],"sn":"$ctor2"}, { ntype: 31, t: $t8.td, constructor: $t8, arguments: Bridge.toList([$t6,$t7]) }), { ntype: 18, t: Function, rt: $t9.t, body: $t9, p: Bridge.toList([$t6,$t7]) }));
-                var e4 = ($t10 = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 1, 284, null, System.Array.init([System.Int32, System.Int32], System.Type)), { ntype: 31, t: $t10.td, constructor: $t10, arguments: Bridge.toList(System.Array.init([{ ntype: 38, t: System.Int32, n: "a" }, { ntype: 38, t: System.Int32, n: "b" }], System.Object)) });
-                var e5 = ($t11 = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 1, 284, null, System.Array.init([System.Int32, System.Int32], System.Type)), { ntype: 31, t: $t11.td, constructor: $t11, arguments: Bridge.toList(new (Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyEnumerable$1(System.Object))(System.Array.init([{ ntype: 38, t: System.Int32, n: "a" }, { ntype: 38, t: System.Int32, n: "b" }], System.Object))) });
+                var e4 = ($t10 = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 1, 284, null, System.Array.init([System.Int32, System.Int32], Function)), { ntype: 31, t: $t10.td, constructor: $t10, arguments: Bridge.toList(System.Array.init([{ ntype: 38, t: System.Int32, n: "a" }, { ntype: 38, t: System.Int32, n: "b" }], System.Object)) });
+                var e5 = ($t11 = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 1, 284, null, System.Array.init([System.Int32, System.Int32], Function)), { ntype: 31, t: $t11.td, constructor: $t11, arguments: Bridge.toList(new (Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyEnumerable$1(System.Object))(System.Array.init([{ ntype: 38, t: System.Int32, n: "a" }, { ntype: 38, t: System.Int32, n: "b" }], System.Object))) });
                 var e6 = ($t12 = Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, { ntype: 31, t: $t12, constructor: Bridge.Reflection.getMembers($t12, 1, 284, null, []), arguments: Bridge.toList([]) });
 
-                asserter(e1.body, System.Array.init(0, null, System.Type), true, "e1");
-                asserter(e2.body, System.Array.init([System.Int32, System.Int32], System.Type), true, "e2");
-                asserter(e3.body, System.Array.init([System.Int32, System.String], System.Type), false, "e3");
-                asserter(e4, System.Array.init([System.Int32, System.Int32], System.Type), true, "e4");
-                asserter(e5, System.Array.init([System.Int32, System.Int32], System.Type), true, "e5");
-                asserter(e6, System.Array.init(0, null, System.Type), true, "e6");
+                asserter(e1.body, System.Array.init(0, null, Function), true, "e1");
+                asserter(e2.body, System.Array.init([System.Int32, System.Int32], Function), true, "e2");
+                asserter(e3.body, System.Array.init([System.Int32, System.String], Function), false, "e3");
+                asserter(e4, System.Array.init([System.Int32, System.Int32], Function), true, "e4");
+                asserter(e5, System.Array.init([System.Int32, System.Int32], Function), true, "e5");
+                asserter(e6, System.Array.init(0, null, Function), true, "e6");
 
                 Bridge.Test.NUnit.Assert.False$1(($t13 = { ntype: 9, t: System.Object, value: null }, Bridge.is($t13, Bridge.hasValue($t13) && ($t13.ntype === 31))), "Constant should not be NewExpression");
             },
@@ -20129,7 +20142,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.Test.NUnit.Assert.AreEqual$1(ne.ntype, 31, System.String.concat(title, " node type"));
                     Bridge.Test.NUnit.Assert.AreEqual$1(ne.t, Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, System.String.concat(title, " type"));
                     Bridge.Test.NUnit.Assert.AreEqual$1(ne.arguments.Count, 2, System.String.concat(title, " argument count"));
-                    Bridge.Test.NUnit.Assert.True$1(Bridge.referenceEquals(ne.constructor, Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 1, 284, null, System.Array.init([System.Int32, System.Int32], System.Type))), System.String.concat(title, " constructor reference"));
+                    Bridge.Test.NUnit.Assert.True$1(Bridge.referenceEquals(ne.constructor, Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 1, 284, null, System.Array.init([System.Int32, System.Int32], Function))), System.String.concat(title, " constructor reference"));
                     Bridge.Test.NUnit.Assert.True$1(Bridge.referenceEquals(ne.arguments.get(0), a), System.String.concat(title, " argument 0"));
                     Bridge.Test.NUnit.Assert.True$1(Bridge.referenceEquals(ne.arguments.get(1), b), System.String.concat(title, " argument 1"));
                     Bridge.Test.NUnit.Assert.AreEqual$1(ne.m.Count, 2, System.String.concat(title, " member count"));
@@ -20137,9 +20150,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.Test.NUnit.Assert.True$1(Bridge.referenceEquals(ne.m.get(1), Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 16, 284, "P1").g), System.String.concat(title, " member 1"));
                 };
 
-                var e1 = ($t = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 1, 284, null, System.Array.init([System.Int32, System.Int32], System.Type)), { ntype: 31, t: $t.td, constructor: $t, arguments: Bridge.toList(System.Array.init([a, b], System.Object)), m: Bridge.toList(System.Array.init([Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 4, 284, "F1"), Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 16, 284, "P1").g], System.Object)) });
-                var e2 = ($t1 = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 1, 284, null, System.Array.init([System.Int32, System.Int32], System.Type)), { ntype: 31, t: $t1.td, constructor: $t1, arguments: Bridge.toList(new (Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyEnumerable$1(System.Object))(System.Array.init([a, b], System.Object))), m: Bridge.toList(System.Array.init([Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 4, 284, "F1"), Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 16, 284, "P1").g], System.Object)) });
-                var e3 = ($t2 = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 1, 284, null, System.Array.init([System.Int32, System.Int32], System.Type)), { ntype: 31, t: $t2.td, constructor: $t2, arguments: Bridge.toList(new (Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyEnumerable$1(System.Object))(System.Array.init([a, b], System.Object))), m: Bridge.toList(new (Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyEnumerable$1(System.Object))(System.Array.init([Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 4, 284, "F1"), Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 16, 284, "P1").g], System.Object))) });
+                var e1 = ($t = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 1, 284, null, System.Array.init([System.Int32, System.Int32], Function)), { ntype: 31, t: $t.td, constructor: $t, arguments: Bridge.toList(System.Array.init([a, b], System.Object)), m: Bridge.toList(System.Array.init([Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 4, 284, "F1"), Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 16, 284, "P1").g], System.Object)) });
+                var e2 = ($t1 = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 1, 284, null, System.Array.init([System.Int32, System.Int32], Function)), { ntype: 31, t: $t1.td, constructor: $t1, arguments: Bridge.toList(new (Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyEnumerable$1(System.Object))(System.Array.init([a, b], System.Object))), m: Bridge.toList(System.Array.init([Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 4, 284, "F1"), Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 16, 284, "P1").g], System.Object)) });
+                var e3 = ($t2 = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 1, 284, null, System.Array.init([System.Int32, System.Int32], Function)), { ntype: 31, t: $t2.td, constructor: $t2, arguments: Bridge.toList(new (Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyEnumerable$1(System.Object))(System.Array.init([a, b], System.Object))), m: Bridge.toList(new (Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyEnumerable$1(System.Object))(System.Array.init([Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 4, 284, "F1"), Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 16, 284, "P1").g], System.Object))) });
 
                 asserter(e1, "e1");
                 asserter(e2, "e2");
@@ -20183,8 +20196,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.False$1(($t8 = { btype: 2, member: Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 4, 284, "LF"), initializers: Bridge.toList([null]) }, Bridge.is($t8, Bridge.hasValue($t8) && ($t8.btype === 0))), "ListBinding should not be MemberAssignment");
             },
             ElementInitWorks: function () {
-                var add1 = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList, 8, 284, "Add", System.Array.init([System.Int32], System.Type));
-                var add2 = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList, 8, 284, "Add", System.Array.init([System.Int32, System.Int32], System.Type));
+                var add1 = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList, 8, 284, "Add", System.Array.init([System.Int32], Function));
+                var add2 = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList, 8, 284, "Add", System.Array.init([System.Int32, System.Int32], Function));
                 var pa = { ntype: 38, t: System.Int32, n: "a" };
                 var pb = { ntype: 38, t: System.Int32, n: "b" };
 
@@ -20213,8 +20226,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             ListBindWorks: function () {
                 var $t, $t1, $t2, $t3, $t4, $t5, $t6, $t7, $t8, $t9, $t10, $t11, $t12, $t13, $t14, $t15;
-                var add1 = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList, 8, 284, "Add", System.Array.init([System.Int32], System.Type));
-                var add2 = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList, 8, 284, "Add", System.Array.init([System.Int32, System.Int32], System.Type));
+                var add1 = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList, 8, 284, "Add", System.Array.init([System.Int32], Function));
+                var add2 = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList, 8, 284, "Add", System.Array.init([System.Int32, System.Int32], Function));
                 var asserter = function (binding, member, title) {
                     var $t;
                     var mlb = Bridge.as(binding, Bridge.hasValue(binding) && (binding.btype === 2));
@@ -20318,8 +20331,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var pa = { ntype: 38, t: System.Int32, n: "a" };
                 var pb = { ntype: 38, t: System.Int32, n: "b" };
                 var e1 = ($t = { ntype: 38, t: System.Int32, n: "a" }, $t1 = { ntype: 38, t: System.Int32, n: "b" }, ($t4 = ($t3 = ($t2 = Bridge.getMetadata(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C).m[0], { ntype: 31, t: $t2.td, constructor: $t2, arguments: Bridge.toList([]) }), { ntype: 24, t: $t3.t, newExpression: $t3, bindings: Bridge.toList([{ btype: 0, member: Bridge.getMetadata(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C).m[36], expression: $t },{ btype: 0, member: Bridge.getMetadata(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C).m[34], expression: $t1 }]) }), { ntype: 18, t: Function, rt: $t4.t, body: $t4, p: Bridge.toList([$t,$t1]) }));
-                var e2 = ($t6 = ($t5 = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 1, 284, null, System.Array.init(0, null, System.Type)), { ntype: 31, t: $t5.td, constructor: $t5, arguments: Bridge.toList([null]) }), { ntype: 24, t: $t6.t, newExpression: $t6, bindings: Bridge.toList(System.Array.init([{ btype: 0, member: Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 4, 284, "F1"), expression: pa }, { btype: 0, member: Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 16, 284, "P1"), expression: pb }], System.Object)) });
-                var e3 = ($t8 = ($t7 = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 1, 284, null, System.Array.init(0, null, System.Type)), { ntype: 31, t: $t7.td, constructor: $t7, arguments: Bridge.toList([null]) }), { ntype: 24, t: $t8.t, newExpression: $t8, bindings: Bridge.toList(new (Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyEnumerable$1(System.Object))(System.Array.init([{ btype: 0, member: Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 4, 284, "F1"), expression: pa }, { btype: 0, member: Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 16, 284, "P1"), expression: pb }], System.Object))) });
+                var e2 = ($t6 = ($t5 = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 1, 284, null, System.Array.init(0, null, Function)), { ntype: 31, t: $t5.td, constructor: $t5, arguments: Bridge.toList([null]) }), { ntype: 24, t: $t6.t, newExpression: $t6, bindings: Bridge.toList(System.Array.init([{ btype: 0, member: Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 4, 284, "F1"), expression: pa }, { btype: 0, member: Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 16, 284, "P1"), expression: pb }], System.Object)) });
+                var e3 = ($t8 = ($t7 = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 1, 284, null, System.Array.init(0, null, Function)), { ntype: 31, t: $t7.td, constructor: $t7, arguments: Bridge.toList([null]) }), { ntype: 24, t: $t8.t, newExpression: $t8, bindings: Bridge.toList(new (Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyEnumerable$1(System.Object))(System.Array.init([{ btype: 0, member: Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 4, 284, "F1"), expression: pa }, { btype: 0, member: Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 16, 284, "P1"), expression: pb }], System.Object))) });
 
                 asserter(e1.body, "e1");
                 asserter(e2, "e2");
@@ -20329,8 +20342,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             ListInitWorks: function () {
                 var $t, $t1, $t2, $t3, $t4, $t5, $t6, $t7, $t8, $t9, $t10, $t11, $t12, $t13, $t14, $t15, $t16, $t17, $t18;
-                var add1 = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList, 8, 284, "Add", System.Array.init([System.Int32], System.Type));
-                var add2 = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList, 8, 284, "Add", System.Array.init([System.Int32, System.Int32], System.Type));
+                var add1 = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList, 8, 284, "Add", System.Array.init([System.Int32], Function));
+                var add2 = Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList, 8, 284, "Add", System.Array.init([System.Int32, System.Int32], Function));
 
                 var asserter = function (expr, title) {
                     var $t;
@@ -20338,7 +20351,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.Test.NUnit.Assert.True$1(lie != null, System.String.concat(title, " is ListInitExpression"));
                     Bridge.Test.NUnit.Assert.AreEqual$1(expr.ntype, 22, System.String.concat(title, " node type"));
                     Bridge.Test.NUnit.Assert.AreEqual$1(expr.t, Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList, System.String.concat(title, " type"));
-                    Bridge.Test.NUnit.Assert.True$1(Bridge.referenceEquals(lie.newExpression.constructor, Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList, 1, 284, null, System.Array.init(0, null, System.Type))), System.String.concat(title, " new expression"));
+                    Bridge.Test.NUnit.Assert.True$1(Bridge.referenceEquals(lie.newExpression.constructor, Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList, 1, 284, null, System.Array.init(0, null, Function))), System.String.concat(title, " new expression"));
                     Bridge.Test.NUnit.Assert.AreEqual$1(lie.initializers.Count, 2, System.String.concat(title, " initializer count"));
                     Bridge.Test.NUnit.Assert.True$1(Bridge.referenceEquals(lie.initializers.get(0).addMethod, add1), System.String.concat(title, " initializer 0 add method"));
                     Bridge.Test.NUnit.Assert.AreEqual$1(lie.initializers.get(0).arguments.Count, 1, System.String.concat(title, " initializer 0 argument count"));
@@ -20367,7 +20380,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.True$1(lie6 != null, "e6 is ListInitExpression");
                 Bridge.Test.NUnit.Assert.AreEqual$1(lie6.ntype, 22, "e6 node type");
                 Bridge.Test.NUnit.Assert.AreEqual$1(lie6.t, Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList, "e6 type");
-                Bridge.Test.NUnit.Assert.True$1(Bridge.referenceEquals(lie6.newExpression.constructor, Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList, 1, 284, null, System.Array.init(0, null, System.Type))), "e6 new expression");
+                Bridge.Test.NUnit.Assert.True$1(Bridge.referenceEquals(lie6.newExpression.constructor, Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyList, 1, 284, null, System.Array.init(0, null, Function))), "e6 new expression");
                 Bridge.Test.NUnit.Assert.AreEqual$1(lie6.initializers.Count, 2, "e6 initializer count");
                 Bridge.Test.NUnit.Assert.True$1(Bridge.referenceEquals(lie6.initializers.get(0).addMethod, add1), "e6 initializer 0 add method");
                 Bridge.Test.NUnit.Assert.AreEqual$1(lie6.initializers.get(0).arguments.Count, 1, "e6 initializer 0 argument count");
@@ -21088,7 +21101,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge.Test.NUnit.Assert.AreEqual$1(expr.ntype, 24, System.String.concat(title, " node type"));
             Bridge.Test.NUnit.Assert.AreEqual$1(expr.t, Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, System.String.concat(title, " type"));
             Bridge.Test.NUnit.Assert.AreEqual$1(mie.bindings.Count, 2, System.String.concat(title, " binding count"));
-            Bridge.Test.NUnit.Assert.True$1(Bridge.referenceEquals(mie.newExpression.constructor, Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 1, 284, null, System.Array.init(0, null, System.Type))), System.String.concat(title, " new expression"));
+            Bridge.Test.NUnit.Assert.True$1(Bridge.referenceEquals(mie.newExpression.constructor, Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 1, 284, null, System.Array.init(0, null, Function))), System.String.concat(title, " new expression"));
             Bridge.Test.NUnit.Assert.True$1(($t = mie.bindings.get(0), Bridge.is($t, Bridge.hasValue($t) && ($t.btype === 0))), System.String.concat(title, " binding 0 type"));
             Bridge.Test.NUnit.Assert.True$1(Bridge.referenceEquals(mie.bindings.get(0).member, Bridge.Reflection.getMembers(Bridge.ClientTest.Linq.Expressions.ExpressionTests.C, 4, 284, "F1")), System.String.concat(title, " binding 0 member"));
             Bridge.Test.NUnit.Assert.True$1(($t = ($t = mie.bindings.get(0), Bridge.cast($t, Bridge.hasValue($t) && ($t.btype === 0))).expression, Bridge.is($t, Bridge.hasValue($t) && ($t.ntype === 38))) && Bridge.referenceEquals(($t = ($t = mie.bindings.get(0), Bridge.cast($t, Bridge.hasValue($t) && ($t.btype === 0))).expression, Bridge.cast($t, Bridge.hasValue($t) && ($t.ntype === 38))).n, "a"), System.String.concat(title, " binding 0 expression"));
@@ -24962,9 +24975,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 this.AssertEquivalent(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D1, 1, 28), System.Array.init([301, 302, 303], System.Int32));
             },
             GetConstructorWorks: function () {
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D1, 1, 284, null, System.Array.init(0, null, System.Type)), 301);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D1, 1, 284, null, System.Array.init([System.Int32, System.String], System.Type)), 303);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D1, 1, 284, null, System.Array.init([System.DateTime], System.Type)), null);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D1, 1, 284, null, System.Array.init(0, null, Function)), 301);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D1, 1, 284, null, System.Array.init([System.Int32, System.String], Function)), 303);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D1, 1, 284, null, System.Array.init([System.DateTime], Function)), null);
             },
             GetMethodsWithoutBindingFlagsWorks: function () {
                 this.AssertEquivalent(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D1, 8, 28), System.Array.init([111, 112, 113, 114, 152, 153, 155, 156, 158, 159, 172, 173, 175, 176, 211, 212, 213, 214, 252, 253, 255, 256, 258, 259, 272, 273, 275, 276, 311, 312, 313, 314, 321, 322, 323, 324, 352, 353, 355, 356, 358, 359, 362, 363, 365, 366, 372, 373, 375, 376, 382, 383, 385, 386], System.Int32));
@@ -25023,33 +25036,33 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D1, 8, 24 | 256, "remove_EDS1"), 383);
             },
             GetMethodWithNameAndArgumentTypesWorks: function () {
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 284, "MD", System.Array.init(0, null, System.Type)), 312);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 284, "M2D", System.Array.init([System.Int32], System.Type)), 315);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 284, "M2D", System.Array.init([System.String], System.Type)), 316);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 284, "M2D", System.Array.init([System.DateTime], System.Type)), null);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 284, "M3", System.Array.init([System.Int32], System.Type)), 117);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 284, "M3", System.Array.init([System.String], System.Type)), 217);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 284, "M3", System.Array.init([System.DateTime], System.Type)), 317);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 284, "M3", System.Array.init([System.DateTime, System.Int32], System.Type)), null);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 284, "M3S", System.Array.init([System.String], System.Type)), null);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 284, "M3S", System.Array.init([System.DateTime], System.Type)), 327);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 284, "MD", System.Array.init(0, null, Function)), 312);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 284, "M2D", System.Array.init([System.Int32], Function)), 315);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 284, "M2D", System.Array.init([System.String], Function)), 316);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 284, "M2D", System.Array.init([System.DateTime], Function)), null);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 284, "M3", System.Array.init([System.Int32], Function)), 117);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 284, "M3", System.Array.init([System.String], Function)), 217);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 284, "M3", System.Array.init([System.DateTime], Function)), 317);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 284, "M3", System.Array.init([System.DateTime, System.Int32], Function)), null);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 284, "M3S", System.Array.init([System.String], Function)), null);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 284, "M3S", System.Array.init([System.DateTime], Function)), 327);
             },
             GetMethodWithNameAndArgumentTypesAndBindingFlagsWorks: function () {
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 20 | 256, "MD", System.Array.init(0, null, System.Type)), 312);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 24 | 256, "MD", System.Array.init(0, null, System.Type)), null);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 20 | 256, "M2D", System.Array.init([System.Int32], System.Type)), 315);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 20 | 256, "M3", System.Array.init([System.Int32], System.Type)), 117);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 20 | 256, "M3", System.Array.init([System.String], System.Type)), 217);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 20 | 256, "M3", System.Array.init([System.DateTime], System.Type)), 317);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 22 | 256, "M3", System.Array.init([System.String], System.Type)), null);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 22 | 256, "M3", System.Array.init([System.DateTime], System.Type)), 317);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 24 | 256, "M3", System.Array.init([System.DateTime], System.Type)), null);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 20 | 256, "MD", System.Array.init(0, null, Function)), 312);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 24 | 256, "MD", System.Array.init(0, null, Function)), null);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 20 | 256, "M2D", System.Array.init([System.Int32], Function)), 315);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 20 | 256, "M3", System.Array.init([System.Int32], Function)), 117);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 20 | 256, "M3", System.Array.init([System.String], Function)), 217);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 20 | 256, "M3", System.Array.init([System.DateTime], Function)), 317);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 22 | 256, "M3", System.Array.init([System.String], Function)), null);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 22 | 256, "M3", System.Array.init([System.DateTime], Function)), 317);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 24 | 256, "M3", System.Array.init([System.DateTime], Function)), null);
 
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 24 | 256, "M3S", System.Array.init([System.String], System.Type)), null);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 24 | 256, "M3S", System.Array.init([System.DateTime], System.Type)), 327);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 24 | 256, "M3S", System.Array.init([System.Int32], System.Type)), null);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 88 | 256, "M3S", System.Array.init([System.String], System.Type)), 227);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 88 | 256, "M3S", System.Array.init([System.DateTime], System.Type)), 327);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 24 | 256, "M3S", System.Array.init([System.String], Function)), null);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 24 | 256, "M3S", System.Array.init([System.DateTime], Function)), 327);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 24 | 256, "M3S", System.Array.init([System.Int32], Function)), null);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 88 | 256, "M3S", System.Array.init([System.String], Function)), 227);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 8, 88 | 256, "M3S", System.Array.init([System.DateTime], Function)), 327);
             },
             GetPropertiesWithoutBindingFlagsWorks: function () {
                 this.AssertEquivalent(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D1, 16, 28), System.Array.init([151, 154, 157, 251, 254, 257, 351, 354, 357, 361, 364], System.Int32));
@@ -25096,25 +25109,25 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 20 | 256, "X"), null);
             },
             GetPropertyWithNameAndArgumentTypesWorks: function () {
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 284, "PD", System.Array.init(0, null, System.Type)), 352);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 284, "Item", System.Array.init([System.String], System.Type)), 154);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 284, "Item", System.Array.init([System.Double], System.Type)), 254);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 284, "Item", System.Array.init([System.DateTime], System.Type)), 354);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 284, "Item", System.Array.init([System.Int32], System.Type)), 353);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 284, "Item", System.Array.init([System.Int32, System.String], System.Type)), null);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 284, "PD", System.Array.init(0, null, Function)), 352);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 284, "Item", System.Array.init([System.String], Function)), 154);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 284, "Item", System.Array.init([System.Double], Function)), 254);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 284, "Item", System.Array.init([System.DateTime], Function)), 354);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 284, "Item", System.Array.init([System.Int32], Function)), 353);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 284, "Item", System.Array.init([System.Int32, System.String], Function)), null);
             },
             GetPropertyWithNameAndArgumentTypesAndBindingFlagsWorks: function () {
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 20 | 256, "PD", System.Array.init(0, null, System.Type)), 352);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 24 | 256, "PD", System.Array.init(0, null, System.Type)), null);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 20 | 256, "Item", System.Array.init([System.String], System.Type)), 154);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 20 | 256, "Item", System.Array.init([System.Double], System.Type)), 254);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 20 | 256, "Item", System.Array.init([System.DateTime], System.Type)), 354);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 20 | 256, "Item", System.Array.init([System.Int32], System.Type)), 353);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 20 | 256, "Item", System.Array.init([System.Int32, System.String], System.Type)), null);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 22 | 256, "Item", System.Array.init([System.String], System.Type)), null);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 22 | 256, "Item", System.Array.init([System.Double], System.Type)), null);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 22 | 256, "Item", System.Array.init([System.DateTime], System.Type)), 354);
-                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 22 | 256, "Item", System.Array.init([System.Int32], System.Type)), 353);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 20 | 256, "PD", System.Array.init(0, null, Function)), 352);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 24 | 256, "PD", System.Array.init(0, null, Function)), null);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 20 | 256, "Item", System.Array.init([System.String], Function)), 154);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 20 | 256, "Item", System.Array.init([System.Double], Function)), 254);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 20 | 256, "Item", System.Array.init([System.DateTime], Function)), 354);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 20 | 256, "Item", System.Array.init([System.Int32], Function)), 353);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 20 | 256, "Item", System.Array.init([System.Int32, System.String], Function)), null);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 22 | 256, "Item", System.Array.init([System.String], Function)), null);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 22 | 256, "Item", System.Array.init([System.Double], Function)), null);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 22 | 256, "Item", System.Array.init([System.DateTime], Function)), 354);
+                this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 16, 22 | 256, "Item", System.Array.init([System.Int32], Function)), 353);
             },
             GetFieldsWithoutBindingFlagsWorks: function () {
                 this.AssertEquivalent(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D1, 4, 28), System.Array.init([131, 132, 231, 232, 331, 332, 341, 342], System.Int32));
@@ -25195,7 +25208,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 this.AssertEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.D2, 2, 20 | 256, "X"), null);
             },
             IsOperatorForMemberInfoWorks: function () {
-                Bridge.Test.NUnit.Assert.True(Bridge.is(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.B1, 1, 284, null, System.Array.init(0, null, System.Type)), System.Reflection.ConstructorInfo));
+                Bridge.Test.NUnit.Assert.True(Bridge.is(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.B1, 1, 284, null, System.Array.init(0, null, Function)), System.Reflection.ConstructorInfo));
                 Bridge.Test.NUnit.Assert.False(Bridge.is(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.B1, 4, 284, "FB1"), System.Reflection.ConstructorInfo));
 
                 Bridge.Test.NUnit.Assert.True(Bridge.is(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.GetMembersTests.B1, 8, 284, "MB2"), System.Reflection.MethodInfo));
@@ -25520,10 +25533,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.False$1((Bridge.cast(c20[System.Array.index(0, c20)], System.Reflection.ConstructorInfo).sm || false), "Inline code");
             },
             IsExpandParamsIsCorrectForConstructors: function () {
-                var c1 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C22, 1, 284, null, System.Array.init([System.Int32, System.Array.type(System.Int32)], System.Type));
-                var c2 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C22, 1, 284, null, System.Array.init([System.String, System.Array.type(System.String)], System.Type));
-                var c3 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C23, 1, 284, null, System.Array.init([System.Int32, System.Array.type(System.Int32)], System.Type));
-                var c4 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C23, 1, 284, null, System.Array.init([System.String, System.Array.type(System.String)], System.Type));
+                var c1 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C22, 1, 284, null, System.Array.init([System.Int32, System.Array.type(System.Int32)], Function));
+                var c2 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C22, 1, 284, null, System.Array.init([System.String, System.Array.type(System.String)], Function));
+                var c3 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C23, 1, 284, null, System.Array.init([System.Int32, System.Array.type(System.Int32)], Function));
+                var c4 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C23, 1, 284, null, System.Array.init([System.String, System.Array.type(System.String)], Function));
                 Bridge.Test.NUnit.Assert.False(c1.exp || false);
                 Bridge.Test.NUnit.Assert.True(c2.exp || false);
                 Bridge.Test.NUnit.Assert.False(c3.exp || false);
@@ -25551,30 +25564,30 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual$1((m1.p || []).length, 0, "M1 should have no parameters");
 
                 var m2 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C3, 8, 284, "M2");
-                Bridge.Test.NUnit.Assert.AreEqual$1((m2.p || []), System.Array.init([System.String], System.Type), "M2 parameter types should be correct");
+                Bridge.Test.NUnit.Assert.AreEqual$1((m2.p || []), System.Array.init([System.String], Function), "M2 parameter types should be correct");
 
                 var m3 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C3, 8, 284, "M3");
-                Bridge.Test.NUnit.Assert.AreEqual$1((m3.p || []), System.Array.init([System.String, System.Int32], System.Type), "M3 parameter types should be correct");
+                Bridge.Test.NUnit.Assert.AreEqual$1((m3.p || []), System.Array.init([System.String, System.Int32], Function), "M3 parameter types should be correct");
 
                 var m4 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C7, 8, 284, "M1");
                 Bridge.Test.NUnit.Assert.False$1((m4.is || false), "M4 should not be static");
-                Bridge.Test.NUnit.Assert.AreEqual$1((m4.p || []), System.Array.init([System.Int32], System.Type), "C7.M1 parameters should be correct");
+                Bridge.Test.NUnit.Assert.AreEqual$1((m4.p || []), System.Array.init([System.Int32], Function), "C7.M1 parameters should be correct");
 
                 var m5 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C21, 8, 284, "M1");
                 Bridge.Test.NUnit.Assert.AreEqual$1(m5.rt, System.Int32, "M5 Return type should be int");
                 Bridge.Test.NUnit.Assert.False$1((m5.is || false), "M5 should not be static");
-                Bridge.Test.NUnit.Assert.AreEqual$1((m5.p || []), System.Array.init([System.Int32, System.Int32], System.Type), "M5 parameters should be correct");
+                Bridge.Test.NUnit.Assert.AreEqual$1((m5.p || []), System.Array.init([System.Int32, System.Int32], Function), "M5 parameters should be correct");
             },
             ParameterTypesShouldBeCorrectForConstructors: function () {
                 var c10 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C10, 31, 28);
                 var c11 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C11, 31, 28);
                 var c19 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C19, 31, 28);
                 var c20 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C20, 31, 28);
-                Bridge.Test.NUnit.Assert.AreEqual$1((Bridge.cast(c10[System.Array.index(0, c10)], System.Reflection.ConstructorInfo).p || []), System.Array.init([System.Int32], System.Type), "Unnamed");
-                Bridge.Test.NUnit.Assert.AreEqual$1((Bridge.cast(c10[System.Array.index(1, c10)], System.Reflection.ConstructorInfo).p || []), System.Array.init([System.Int32, System.String], System.Type), "Named");
-                Bridge.Test.NUnit.Assert.AreEqual$1((Bridge.cast(c11[System.Array.index(0, c11)], System.Reflection.ConstructorInfo).p || []), System.Array.init([System.DateTime], System.Type), "Static method");
-                Bridge.Test.NUnit.Assert.AreEqual$1((Bridge.cast(c19[System.Array.index(0, c19)], System.Reflection.ConstructorInfo).p || []), System.Array.init([System.Int32, System.String], System.Type), "Object literal");
-                Bridge.Test.NUnit.Assert.AreEqual$1((Bridge.cast(c20[System.Array.index(0, c20)], System.Reflection.ConstructorInfo).p || []), System.Array.init([System.Int32, System.String], System.Type), "Object literal");
+                Bridge.Test.NUnit.Assert.AreEqual$1((Bridge.cast(c10[System.Array.index(0, c10)], System.Reflection.ConstructorInfo).p || []), System.Array.init([System.Int32], Function), "Unnamed");
+                Bridge.Test.NUnit.Assert.AreEqual$1((Bridge.cast(c10[System.Array.index(1, c10)], System.Reflection.ConstructorInfo).p || []), System.Array.init([System.Int32, System.String], Function), "Named");
+                Bridge.Test.NUnit.Assert.AreEqual$1((Bridge.cast(c11[System.Array.index(0, c11)], System.Reflection.ConstructorInfo).p || []), System.Array.init([System.DateTime], Function), "Static method");
+                Bridge.Test.NUnit.Assert.AreEqual$1((Bridge.cast(c19[System.Array.index(0, c19)], System.Reflection.ConstructorInfo).p || []), System.Array.init([System.Int32, System.String], Function), "Object literal");
+                Bridge.Test.NUnit.Assert.AreEqual$1((Bridge.cast(c20[System.Array.index(0, c20)], System.Reflection.ConstructorInfo).p || []), System.Array.init([System.Int32, System.String], Function), "Object literal");
             },
             VoidIsConsideredObjectAsReturnType: function () {
                 Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C3, 8, 284, "M4").rt, System.Object, "Return type of void method should be object");
@@ -25591,7 +25604,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             TypeParametersAreCorrectForReturnAndParameterTypesForConstructedGenericTypes: function () {
                 var m = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C5$2(System.String,System.DateTime), 8, 284, "M");
                 Bridge.Test.NUnit.Assert.AreEqual$1(m.rt, System.String, "Return type of M should be string");
-                Bridge.Test.NUnit.Assert.AreDeepEqual$1((m.p || []), System.Array.init([System.DateTime, System.String], System.Type), "Parameters to M should be correct");
+                Bridge.Test.NUnit.Assert.AreDeepEqual$1((m.p || []), System.Array.init([System.DateTime, System.String], Function), "Parameters to M should be correct");
 
                 var m2 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C5$2(System.String,System.DateTime), 8, 284, "M2");
                 Bridge.Test.NUnit.Assert.AreEqual$1(m2.rt, System.Object, "Return type of M2 should be object");
@@ -25600,7 +25613,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             MethodTypeParametersAreReplacedWithObjectForReturnAndParameterTypes: function () {
                 var m = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C6, 8, 284, "M1");
                 Bridge.Test.NUnit.Assert.AreEqual$1(m.rt, System.Object, "Return type should be object");
-                Bridge.Test.NUnit.Assert.AreDeepEqual$1((m.p || []), System.Array.init([System.Object, System.String], System.Type), "Parameters should be correct");
+                Bridge.Test.NUnit.Assert.AreDeepEqual$1((m.p || []), System.Array.init([System.Object, System.String], Function), "Parameters should be correct");
             },
             IsGenericMethodDefinitionAndTypeParameterCountWork: function () {
                 Bridge.Test.NUnit.Assert.True$1((!!Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C6, 8, 284, "M1").tpc), "M1 should be generic");
@@ -25611,12 +25624,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual$1((Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C6, 8, 284, "M3").tpc || 0), 0, "M3 should have 0 type parameters");
             },
             ScriptNameWorksForAllKindsOfMethods: function () {
-                Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C4, 8, 284, "M", System.Array.init([System.Int32], System.Type)).sn, "M$1", "C4.M");
+                Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C4, 8, 284, "M", System.Array.init([System.Int32], Function)).sn, "M$1", "C4.M");
                 Bridge.Test.NUnit.Assert.True$1(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C21, 8, 284, "M1").sn == null, "C21.M1");
                 Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C7, 8, 284, "M1").sn, "M1", "C7.m1");
             },
             SpecialImplementationExistsOnlyForMethodsImplementedAsInlineCode: function () {
-                Bridge.Test.NUnit.Assert.True$1(Bridge.staticEquals(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C4, 8, 284, "M", System.Array.init([System.Int32], System.Type)).def, null), "C4.M");
+                Bridge.Test.NUnit.Assert.True$1(Bridge.staticEquals(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C4, 8, 284, "M", System.Array.init([System.Int32], Function)).def, null), "C4.M");
                 Bridge.Test.NUnit.Assert.True$1(!Bridge.staticEquals(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C21, 8, 284, "M3").def, null), "C21.M3");
                 Bridge.Test.NUnit.Assert.True$1(Bridge.staticEquals(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C7, 8, 284, "M1").def, null), "C7.m1");
             },
@@ -25650,13 +25663,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.Reflection.midel(m, Bridge.unbox(null));
                 }, "Null target without delegate type should throw");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
-                    Bridge.Reflection.midel(m, c, System.Array.init([System.String], System.Type));
+                    Bridge.Reflection.midel(m, c, System.Array.init([System.String], Function));
                 }, "With type arguments with target should throw");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
-                    Bridge.Reflection.midel(m, null, System.Array.init([System.String], System.Type));
+                    Bridge.Reflection.midel(m, null, System.Array.init([System.String], Function));
                 }, "With type arguments without target should throw");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
-                    Bridge.Reflection.midel(m, Bridge.unbox(null), System.Array.init([System.String], System.Type));
+                    Bridge.Reflection.midel(m, Bridge.unbox(null), System.Array.init([System.String], Function));
                 }, "With type arguments with null target should throw");
             },
             DelegateCreateDelegateWorksForNonGenericInstanceMethods: function () {
@@ -25681,13 +25694,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.Reflection.midel(m, new Bridge.ClientTest.Reflection.ReflectionTests.C8(""));
                 }, "With target without delegate type should throw");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
-                    Bridge.Reflection.midel(m, new Bridge.ClientTest.Reflection.ReflectionTests.C8(""), System.Array.init([System.String], System.Type));
+                    Bridge.Reflection.midel(m, new Bridge.ClientTest.Reflection.ReflectionTests.C8(""), System.Array.init([System.String], Function));
                 }, "With type arguments with target should throw");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
-                    Bridge.Reflection.midel(m, null, System.Array.init([System.String], System.Type));
+                    Bridge.Reflection.midel(m, null, System.Array.init([System.String], Function));
                 }, "With type arguments without target should throw");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
-                    Bridge.Reflection.midel(m, Bridge.unbox(null), System.Array.init([System.String], System.Type));
+                    Bridge.Reflection.midel(m, Bridge.unbox(null), System.Array.init([System.String], Function));
                 }, "With type arguments with null target should throw");
             },
             CreateDelegateWorksNonGenericStaticMethodOfGenericType: function () {
@@ -25698,42 +25711,42 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             CreateDelegateWorksForGenericInstanceMethods: function () {
                 var m = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C8, 8, 284, "M3");
                 var c = new Bridge.ClientTest.Reflection.ReflectionTests.C8("X");
-                var f = Bridge.Reflection.midel(m, c, System.Array.init([System.Int32, System.String], System.Type));
+                var f = Bridge.Reflection.midel(m, c, System.Array.init([System.Int32, System.String], Function));
                 Bridge.Test.NUnit.Assert.AreEqual$1(f("a"), "X System.Int32 System.String a", "Result of invoking delegate should be correct");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
-                    Bridge.Reflection.midel(m, Bridge.unbox(null), System.Array.init([System.Int32, System.String], System.Type));
+                    Bridge.Reflection.midel(m, Bridge.unbox(null), System.Array.init([System.Int32, System.String], Function));
                 }, "Null target with correct type arguments should throw");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
                     Bridge.Reflection.midel(m, c);
                 }, "No type arguments with target should throw");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
-                    Bridge.Reflection.midel(m, c, System.Array.init(0, null, System.Type));
+                    Bridge.Reflection.midel(m, c, System.Array.init(0, null, Function));
                 }, "0 type arguments with target should throw");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
-                    Bridge.Reflection.midel(m, c, System.Array.init(1, null, System.Type));
+                    Bridge.Reflection.midel(m, c, System.Array.init(1, null, Function));
                 }, "1 type arguments with target should throw");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
-                    Bridge.Reflection.midel(m, c, System.Array.init(3, null, System.Type));
+                    Bridge.Reflection.midel(m, c, System.Array.init(3, null, Function));
                 }, "3 type arguments with target should throw");
             },
             CreateDelegateWorksForGenericStaticMethods: function () {
                 var m = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C8, 8, 284, "M4");
-                var f = Bridge.Reflection.midel(m, Bridge.unbox(null), System.Array.init([System.Int32, System.String], System.Type));
+                var f = Bridge.Reflection.midel(m, Bridge.unbox(null), System.Array.init([System.Int32, System.String], Function));
                 Bridge.Test.NUnit.Assert.AreEqual$1(f("a"), "System.Int32 System.String a", "Result of invoking delegate should be correct");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
-                    Bridge.Reflection.midel(m, new Bridge.ClientTest.Reflection.ReflectionTests.C8(""), System.Array.init([System.Int32, System.String], System.Type));
+                    Bridge.Reflection.midel(m, new Bridge.ClientTest.Reflection.ReflectionTests.C8(""), System.Array.init([System.Int32, System.String], Function));
                 }, "Target with correct type arguments should throw");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
                     Bridge.Reflection.midel(m, Bridge.unbox(null));
                 }, "No type arguments without target should throw");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
-                    Bridge.Reflection.midel(m, Bridge.unbox(null), System.Array.init(0, null, System.Type));
+                    Bridge.Reflection.midel(m, Bridge.unbox(null), System.Array.init(0, null, Function));
                 }, "0 type arguments without target should throw");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
-                    Bridge.Reflection.midel(m, Bridge.unbox(null), System.Array.init(1, null, System.Type));
+                    Bridge.Reflection.midel(m, Bridge.unbox(null), System.Array.init(1, null, Function));
                 }, "1 type arguments without target should throw");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
-                    Bridge.Reflection.midel(m, Bridge.unbox(null), System.Array.init(3, null, System.Type));
+                    Bridge.Reflection.midel(m, Bridge.unbox(null), System.Array.init(3, null, Function));
                 }, "3 type arguments without target should throw");
             },
             InvokeWorksForNonGenericInstanceMethods: function () {
@@ -25746,10 +25759,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.Reflection.midel(m, null)("a", "b");
                 }, "Invoke without target should throw");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
-                    Bridge.Reflection.midel(m, c, System.Array.init([System.String], System.Type))("a", "b");
+                    Bridge.Reflection.midel(m, c, System.Array.init([System.String], Function))("a", "b");
                 }, "Invoke with type arguments with target should throw");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
-                    Bridge.Reflection.midel(m, null, System.Array.init([System.String], System.Type))("a", "b");
+                    Bridge.Reflection.midel(m, null, System.Array.init([System.String], Function))("a", "b");
                 }, "Invoke with type arguments without target should throw");
             },
             InvokeWorksForNonGenericStaticMethods: function () {
@@ -25759,10 +25772,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.Reflection.midel(m, new Bridge.ClientTest.Reflection.ReflectionTests.C8(""))("a", "b");
                 }, "Invoke with target should throw");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
-                    Bridge.Reflection.midel(m, new Bridge.ClientTest.Reflection.ReflectionTests.C8(""), System.Array.init([System.String], System.Type))("a", "b");
+                    Bridge.Reflection.midel(m, new Bridge.ClientTest.Reflection.ReflectionTests.C8(""), System.Array.init([System.String], Function))("a", "b");
                 }, "Invoke with type arguments with target should throw");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
-                    Bridge.Reflection.midel(m, null, System.Array.init([System.String], System.Type))("a", "b");
+                    Bridge.Reflection.midel(m, null, System.Array.init([System.String], Function))("a", "b");
                 }, "Invoke with type arguments without target should throw");
             },
             InvokeWorksForNonGenericInstanceMethodsOnSerializableTypes: function () {
@@ -25776,53 +25789,53 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             InvokeWorksForGenericInlineCodeMethods: function () {
                 var m = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C21, 8, 284, "M3");
-                Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(Bridge.Reflection.midel(m, new Bridge.ClientTest.Reflection.ReflectionTests.C21(42), System.Array.init([System.String], System.Type))("World")), "42System.StringWorld", "Invoke should work");
+                Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(Bridge.Reflection.midel(m, new Bridge.ClientTest.Reflection.ReflectionTests.C21(42), System.Array.init([System.String], Function))("World")), "42System.StringWorld", "Invoke should work");
             },
             InvokeWorksForGenericInstanceMethod: function () {
                 var m = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C8, 8, 284, "M3");
                 var argsArr = System.Array.init(["x"], System.Object);
                 var c = new Bridge.ClientTest.Reflection.ReflectionTests.C8("X");
-                Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(Bridge.Reflection.midel(m, c, System.Array.init([System.Int32, System.String], System.Type))("a")), "X System.Int32 System.String a", "Result of invoking delegate should be correct");
-                Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(Bridge.Reflection.midel(m, c, System.Array.init([System.Int32, System.String], System.Type)).apply(null, argsArr)), "X System.Int32 System.String x", "Result of invoking delegate should be correct");
+                Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(Bridge.Reflection.midel(m, c, System.Array.init([System.Int32, System.String], Function))("a")), "X System.Int32 System.String a", "Result of invoking delegate should be correct");
+                Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(Bridge.Reflection.midel(m, c, System.Array.init([System.Int32, System.String], Function)).apply(null, argsArr)), "X System.Int32 System.String x", "Result of invoking delegate should be correct");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
-                    Bridge.Reflection.midel(m, null, System.Array.init([System.Int32, System.String], System.Type))("a");
+                    Bridge.Reflection.midel(m, null, System.Array.init([System.Int32, System.String], Function))("a");
                 }, "Null target with correct type arguments should throw");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
                     Bridge.Reflection.midel(m, c)("a");
                 }, "No type arguments with target should throw");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
-                    Bridge.Reflection.midel(m, c, System.Array.init(0, null, System.Type))("a");
+                    Bridge.Reflection.midel(m, c, System.Array.init(0, null, Function))("a");
                 }, "0 type arguments with target should throw");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
-                    Bridge.Reflection.midel(m, c, System.Array.init(1, null, System.Type))("a");
+                    Bridge.Reflection.midel(m, c, System.Array.init(1, null, Function))("a");
                 }, "1 type arguments with target should throw");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
-                    Bridge.Reflection.midel(m, c, System.Array.init(3, null, System.Type))("a");
+                    Bridge.Reflection.midel(m, c, System.Array.init(3, null, Function))("a");
                 }, "3 type arguments with target should throw");
             },
             InvokeWorksForGenericStaticMethod: function () {
                 var m = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C8, 8, 284, "M4");
-                Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(Bridge.Reflection.midel(m, null, System.Array.init([System.Int32, System.String], System.Type))("a")), "System.Int32 System.String a", "Result of invoking delegate should be correct");
+                Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(Bridge.Reflection.midel(m, null, System.Array.init([System.Int32, System.String], Function))("a")), "System.Int32 System.String a", "Result of invoking delegate should be correct");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
-                    Bridge.Reflection.midel(m, new Bridge.ClientTest.Reflection.ReflectionTests.C8(""), System.Array.init([System.Int32, System.String], System.Type))("a");
+                    Bridge.Reflection.midel(m, new Bridge.ClientTest.Reflection.ReflectionTests.C8(""), System.Array.init([System.Int32, System.String], Function))("a");
                 }, "Target with correct type arguments should throw");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
                     Bridge.Reflection.midel(m, null)("a");
                 }, "No type arguments without target should throw");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
-                    Bridge.Reflection.midel(m, null, System.Array.init(0, null, System.Type))("a");
+                    Bridge.Reflection.midel(m, null, System.Array.init(0, null, Function))("a");
                 }, "0 type arguments without target should throw");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
-                    Bridge.Reflection.midel(m, null, System.Array.init(1, null, System.Type))("a");
+                    Bridge.Reflection.midel(m, null, System.Array.init(1, null, Function))("a");
                 }, "1 type arguments without target should throw");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
-                    Bridge.Reflection.midel(m, null, System.Array.init(3, null, System.Type))("a");
+                    Bridge.Reflection.midel(m, null, System.Array.init(3, null, Function))("a");
                 }, "3 type arguments without target should throw");
             },
             InvokeWorksForGenericInstanceMethodsOnSerializableTypes: function () {
                 var $t;
                 var m = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C7, 8, 284, "M3");
-                Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(Bridge.Reflection.midel(m, ($t=new Bridge.ClientTest.Reflection.ReflectionTests.C7(), $t.x = 13, $t), System.Array.init([System.Int32, System.String], System.Type))("Suffix")), "13 System.Int32 System.String Suffix", "Invoke should work");
+                Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(Bridge.Reflection.midel(m, ($t=new Bridge.ClientTest.Reflection.ReflectionTests.C7(), $t.x = 13, $t), System.Array.init([System.Int32, System.String], Function))("Suffix")), "13 System.Int32 System.String Suffix", "Invoke should work");
             },
             InvokeWorksForExpandParamsMethods: function () {
                 var m1 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C22, 8, 284, "M2");
@@ -25858,12 +25871,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreDeepEqual(Bridge.unbox(o5), { A: 42, B: "Hello" });
             },
             InvokeWorksForExpandParamsConstructors: function () {
-                var c1 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C22, 1, 284, null, System.Array.init([System.String, System.Array.type(System.String)], System.Type));
+                var c1 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C22, 1, 284, null, System.Array.init([System.String, System.Array.type(System.String)], Function));
                 var o1 = Bridge.cast(Bridge.Reflection.invokeCI(c1, System.Array.init(["a", System.Array.init(["b", "c"], System.String)], System.Object)), Bridge.ClientTest.Reflection.ReflectionTests.C22);
                 Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(o1.a), "a", "o1.a");
                 Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(o1.b), System.Array.init(["b", "c"], System.String), "o1.b");
 
-                var c2 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C23, 1, 284, null, System.Array.init([System.String, System.Array.type(System.String)], System.Type));
+                var c2 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C23, 1, 284, null, System.Array.init([System.String, System.Array.type(System.String)], Function));
                 var o2 = Bridge.cast(Bridge.Reflection.invokeCI(c2, System.Array.init(["a", System.Array.init(["b", "c"], System.String)], System.Object)), Bridge.ClientTest.Reflection.ReflectionTests.C23);
                 Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(o2.a), "a", "o1.a");
                 Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(o2.b), System.Array.init(["b", "c"], System.String), "o1.b");
@@ -26028,8 +26041,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual$1(m2.td, Bridge.ClientTest.Reflection.ReflectionTests.C13, "m2.DeclaringType");
                 Bridge.Test.NUnit.Assert.False$1((m1.is || false), "m1.IsStatic");
                 Bridge.Test.NUnit.Assert.True$1((m2.is || false), "m2.IsStatic");
-                Bridge.Test.NUnit.Assert.AreEqual$1((m1.p || []), System.Array.init([Function], System.Type), "m1.ParameterTypes");
-                Bridge.Test.NUnit.Assert.AreEqual$1((m2.p || []), System.Array.init([Function], System.Type), "m2.ParameterTypes");
+                Bridge.Test.NUnit.Assert.AreEqual$1((m1.p || []), System.Array.init([Function], Function), "m1.ParameterTypes");
+                Bridge.Test.NUnit.Assert.AreEqual$1((m2.p || []), System.Array.init([Function], Function), "m2.ParameterTypes");
                 Bridge.Test.NUnit.Assert.False$1((m1.t === 1), "m1.IsConstructor");
                 Bridge.Test.NUnit.Assert.False$1((m2.t === 1), "m2.IsConstructor");
                 Bridge.Test.NUnit.Assert.AreEqual$1(m1.rt, System.Object, "m1.ReturnType");
@@ -26066,8 +26079,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual$1(m2.td, Bridge.ClientTest.Reflection.ReflectionTests.C13, "m2.DeclaringType");
                 Bridge.Test.NUnit.Assert.False$1((m1.is || false), "m1.IsStatic");
                 Bridge.Test.NUnit.Assert.True$1((m2.is || false), "m2.IsStatic");
-                Bridge.Test.NUnit.Assert.AreEqual$1((m1.p || []), System.Array.init([Function], System.Type), "m1.ParameterTypes");
-                Bridge.Test.NUnit.Assert.AreEqual$1((m2.p || []), System.Array.init([Function], System.Type), "m2.ParameterTypes");
+                Bridge.Test.NUnit.Assert.AreEqual$1((m1.p || []), System.Array.init([Function], Function), "m1.ParameterTypes");
+                Bridge.Test.NUnit.Assert.AreEqual$1((m2.p || []), System.Array.init([Function], Function), "m2.ParameterTypes");
                 Bridge.Test.NUnit.Assert.False$1((m1.t === 1), "m1.IsConstructor");
                 Bridge.Test.NUnit.Assert.False$1((m2.t === 1), "m2.IsConstructor");
                 Bridge.Test.NUnit.Assert.AreEqual$1(m1.rt, System.Object, "m1.ReturnType");
@@ -26149,14 +26162,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C24, 16, 284, "Item").rt, System.String);
             },
             IndexParameterTypesAreEmptyForProperty: function () {
-                Bridge.Test.NUnit.Assert.AreEqual$1((Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C14, 16, 284, "P1").p || []), System.Array.init(0, null, System.Type), "P1");
-                Bridge.Test.NUnit.Assert.AreEqual$1((Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C14, 16, 284, "P2").p || []), System.Array.init(0, null, System.Type), "P2");
-                Bridge.Test.NUnit.Assert.AreEqual$1((Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C14, 16, 284, "P3").p || []), System.Array.init(0, null, System.Type), "P3");
-                Bridge.Test.NUnit.Assert.AreEqual$1((Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C14, 16, 284, "P4").p || []), System.Array.init(0, null, System.Type), "P4");
+                Bridge.Test.NUnit.Assert.AreEqual$1((Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C14, 16, 284, "P1").p || []), System.Array.init(0, null, Function), "P1");
+                Bridge.Test.NUnit.Assert.AreEqual$1((Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C14, 16, 284, "P2").p || []), System.Array.init(0, null, Function), "P2");
+                Bridge.Test.NUnit.Assert.AreEqual$1((Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C14, 16, 284, "P3").p || []), System.Array.init(0, null, Function), "P3");
+                Bridge.Test.NUnit.Assert.AreEqual$1((Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C14, 16, 284, "P4").p || []), System.Array.init(0, null, Function), "P4");
             },
             IndexParameterTypesAreCorrectForIndexer: function () {
-                Bridge.Test.NUnit.Assert.AreEqual((Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C15, 16, 284, "Item").p || []), System.Array.init([System.Int32, System.String], System.Type));
-                Bridge.Test.NUnit.Assert.AreEqual((Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C24, 16, 284, "Item").p || []), System.Array.init([System.Int32, System.String], System.Type));
+                Bridge.Test.NUnit.Assert.AreEqual((Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C15, 16, 284, "Item").p || []), System.Array.init([System.Int32, System.String], Function));
+                Bridge.Test.NUnit.Assert.AreEqual((Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C24, 16, 284, "Item").p || []), System.Array.init([System.Int32, System.String], Function));
             },
             PropertiesForGetMethodAreCorrectForPropertyImplementedAsGetAndSetMethods: function () {
                 var $t, $t1;
@@ -26227,9 +26240,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.False$1((m1.is || false), "m1.IsStatic");
                 Bridge.Test.NUnit.Assert.True$1((m2.is || false), "m2.IsStatic");
                 Bridge.Test.NUnit.Assert.False$1((m3.is || false), "m3.IsStatic");
-                Bridge.Test.NUnit.Assert.AreEqual$1((m1.p || []), System.Array.init([System.Int32], System.Type), "m1.ParameterTypes");
-                Bridge.Test.NUnit.Assert.AreEqual$1((m2.p || []), System.Array.init([System.DateTime], System.Type), "m2.ParameterTypes");
-                Bridge.Test.NUnit.Assert.AreEqual$1((m3.p || []), System.Array.init([System.Int32], System.Type), "m3.ParameterTypes");
+                Bridge.Test.NUnit.Assert.AreEqual$1((m1.p || []), System.Array.init([System.Int32], Function), "m1.ParameterTypes");
+                Bridge.Test.NUnit.Assert.AreEqual$1((m2.p || []), System.Array.init([System.DateTime], Function), "m2.ParameterTypes");
+                Bridge.Test.NUnit.Assert.AreEqual$1((m3.p || []), System.Array.init([System.Int32], Function), "m3.ParameterTypes");
                 Bridge.Test.NUnit.Assert.False$1((m1.t === 1), "m1.IsConstructor");
                 Bridge.Test.NUnit.Assert.False$1((m2.t === 1), "m2.IsConstructor");
                 Bridge.Test.NUnit.Assert.False$1((m3.t === 1), "m3.IsConstructor");
@@ -26303,8 +26316,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual$1(m2.td, Bridge.ClientTest.Reflection.ReflectionTests.C14, "m2.DeclaringType");
                 Bridge.Test.NUnit.Assert.False$1((m1.is || false), "m1.IsStatic");
                 Bridge.Test.NUnit.Assert.True$1((m2.is || false), "m2.IsStatic");
-                Bridge.Test.NUnit.Assert.AreEqual$1((m1.p || []), System.Array.init([System.String], System.Type), "m1.ParameterTypes");
-                Bridge.Test.NUnit.Assert.AreEqual$1((m2.p || []), System.Array.init([System.Double], System.Type), "m2.ParameterTypes");
+                Bridge.Test.NUnit.Assert.AreEqual$1((m1.p || []), System.Array.init([System.String], Function), "m1.ParameterTypes");
+                Bridge.Test.NUnit.Assert.AreEqual$1((m2.p || []), System.Array.init([System.Double], Function), "m2.ParameterTypes");
                 Bridge.Test.NUnit.Assert.False$1((m1.t === 1), "m1.IsConstructor");
                 Bridge.Test.NUnit.Assert.False$1((m2.t === 1), "m2.IsConstructor");
                 Bridge.Test.NUnit.Assert.AreEqual$1(m1.rt, System.Object, "m1.ReturnType");
@@ -26335,8 +26348,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual$1(m2.td, Bridge.ClientTest.Reflection.ReflectionTests.C24, "m2.DeclaringType");
                 Bridge.Test.NUnit.Assert.False$1((m1.is || false), "m1.IsStatic");
                 Bridge.Test.NUnit.Assert.False$1((m2.is || false), "m2.IsStatic");
-                Bridge.Test.NUnit.Assert.AreEqual$1((m1.p || []), System.Array.init([System.Int32, System.String], System.Type), "m1.ParameterTypes");
-                Bridge.Test.NUnit.Assert.AreEqual$1((m2.p || []), System.Array.init([System.Int32, System.String], System.Type), "m2.ParameterTypes");
+                Bridge.Test.NUnit.Assert.AreEqual$1((m1.p || []), System.Array.init([System.Int32, System.String], Function), "m1.ParameterTypes");
+                Bridge.Test.NUnit.Assert.AreEqual$1((m2.p || []), System.Array.init([System.Int32, System.String], Function), "m2.ParameterTypes");
                 Bridge.Test.NUnit.Assert.False$1((m1.t === 1), "m1.IsConstructor");
                 Bridge.Test.NUnit.Assert.False$1((m2.t === 1), "m2.IsConstructor");
                 Bridge.Test.NUnit.Assert.AreEqual$1(m1.rt, System.String, "m1.ReturnType");
@@ -26366,8 +26379,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual$1(m2.td, Bridge.ClientTest.Reflection.ReflectionTests.C24, "m2.DeclaringType");
                 Bridge.Test.NUnit.Assert.False$1((m1.is || false), "m1.IsStatic");
                 Bridge.Test.NUnit.Assert.False$1((m2.is || false), "m2.IsStatic");
-                Bridge.Test.NUnit.Assert.AreEqual$1((m1.p || []), System.Array.init([System.Int32, System.String, System.String], System.Type), "m1.ParameterTypes");
-                Bridge.Test.NUnit.Assert.AreEqual$1((m2.p || []), System.Array.init([System.Int32, System.String, System.String], System.Type), "m2.ParameterTypes");
+                Bridge.Test.NUnit.Assert.AreEqual$1((m1.p || []), System.Array.init([System.Int32, System.String, System.String], Function), "m1.ParameterTypes");
+                Bridge.Test.NUnit.Assert.AreEqual$1((m2.p || []), System.Array.init([System.Int32, System.String, System.String], Function), "m2.ParameterTypes");
                 Bridge.Test.NUnit.Assert.False$1((m1.t === 1), "m1.IsConstructor");
                 Bridge.Test.NUnit.Assert.False$1((m2.t === 1), "m2.IsConstructor");
                 Bridge.Test.NUnit.Assert.AreEqual$1(m1.rt, System.Object, "m1.ReturnType");
@@ -26528,7 +26541,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual(System.Attribute.getCustomAttributes(member, Bridge.ClientTest.Reflection.ReflectionTests.A4Attribute, false).length, 0);
             },
             MemberAttributesWork: function () {
-                this.TestMemberAttribute(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C18, 1, 284, null, System.Array.init(0, null, System.Type)), 1);
+                this.TestMemberAttribute(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C18, 1, 284, null, System.Array.init(0, null, Function)), 1);
                 this.TestMemberAttribute(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C18, 8, 284, "M"), 2);
                 this.TestMemberAttribute(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C18, 4, 284, "F"), 3);
                 this.TestMemberAttribute(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C18, 16, 284, "P"), 4);
@@ -28341,10 +28354,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             GettingImplementedInterfacesWorks: function () {
                 var ifs = Bridge.Reflection.getInterfaces(Bridge.ClientTest.Reflection.TypeSystemTests.C);
                 Bridge.Test.NUnit.Assert.AreEqual(ifs.length, 4);
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(ifs, Bridge.ClientTest.Reflection.TypeSystemTests.I1, System.Type));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(ifs, Bridge.ClientTest.Reflection.TypeSystemTests.I2, System.Type));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(ifs, Bridge.ClientTest.Reflection.TypeSystemTests.I3, System.Type));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(ifs, Bridge.ClientTest.Reflection.TypeSystemTests.I4, System.Type));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(ifs, Bridge.ClientTest.Reflection.TypeSystemTests.I1, Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(ifs, Bridge.ClientTest.Reflection.TypeSystemTests.I2, Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(ifs, Bridge.ClientTest.Reflection.TypeSystemTests.I3, Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(ifs, Bridge.ClientTest.Reflection.TypeSystemTests.I4, Function));
             },
             TypeOfAnOpenGenericClassWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeFullName(Bridge.ClientTest.Reflection.TypeSystemTests.G$2), "Bridge.ClientTest.Reflection.TypeSystemTests+G`2");
@@ -28584,10 +28597,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             GetGenericArgumentsReturnsTheCorrectTypesForConstructedTypesOtherwiseNull: function () {
                 Bridge.Test.NUnit.Assert.AreEqual(2, Bridge.Reflection.getGenericArguments(Bridge.ClientTest.Reflection.TypeSystemTests.G$2).length);
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getGenericArguments(Bridge.ClientTest.Reflection.TypeSystemTests.G$2(System.Int32,System.String)), System.Array.init([System.Int32, System.String], System.Type));
+                Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getGenericArguments(Bridge.ClientTest.Reflection.TypeSystemTests.G$2(System.Int32,System.String)), System.Array.init([System.Int32, System.String], Function));
                 Bridge.Test.NUnit.Assert.AreEqual(0, Bridge.Reflection.getGenericArguments(Bridge.ClientTest.Reflection.TypeSystemTests.C).length);
                 Bridge.Test.NUnit.Assert.AreEqual(1, Bridge.Reflection.getGenericArguments(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1).length);
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getGenericArguments(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1(System.String)), System.Array.init([System.String], System.Type));
+                Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getGenericArguments(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1(System.String)), System.Array.init([System.String], Function));
                 Bridge.Test.NUnit.Assert.AreEqual(0, Bridge.Reflection.getGenericArguments(Bridge.ClientTest.Reflection.TypeSystemTests.I2).length);
                 Bridge.Test.NUnit.Assert.AreEqual(0, Bridge.Reflection.getGenericArguments(Bridge.ClientTest.Reflection.TypeSystemTests.E1).length);
             },
@@ -50226,8 +50239,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     $m($n[4].GetMembersTests.D1, function () { return {"m":[{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(301)],"a":2,"n":".ctor","t":1,"sn":"ctor"},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(302)],"a":2,"n":".ctor","t":1,"p":[$n[0].Int32],"pi":[{"n":"x","pt":$n[0].Int32,"ps":0}],"sn":"$ctor1"},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(303)],"a":2,"n":".ctor","t":1,"p":[$n[0].Int32,$n[0].String],"pi":[{"n":"x","pt":$n[0].Int32,"ps":0},{"n":"y","pt":$n[0].String,"ps":1}],"sn":"$ctor2"},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(311)],"a":2,"n":"MD","t":8,"sn":"MD","rt":$n[0].Object},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(312)],"a":2,"n":"MD","t":8,"pi":[{"n":"x","pt":$n[0].Int32,"ps":0}],"sn":"MD$1","rt":$n[0].Object,"p":[$n[0].Int32]},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(313)],"a":2,"n":"MD","t":8,"pi":[{"n":"x","pt":$n[0].Int32,"ps":0},{"n":"y","pt":$n[0].String,"ps":1}],"sn":"MD$2","rt":$n[0].Object,"p":[$n[0].Int32,$n[0].String]},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(314)],"a":2,"n":"MD2","t":8,"pi":[{"n":"x","pt":$n[0].Int32,"ps":0},{"n":"y","pt":$n[0].String,"ps":1}],"sn":"MD2","rt":$n[0].Object,"p":[$n[0].Int32,$n[0].String]},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(321)],"a":2,"n":"MDS","is":true,"t":8,"sn":"MDS","rt":$n[0].Object},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(322)],"a":2,"n":"MDS","is":true,"t":8,"pi":[{"n":"x","pt":$n[0].Int32,"ps":0}],"sn":"MDS$1","rt":$n[0].Object,"p":[$n[0].Int32]},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(323)],"a":2,"n":"MDS","is":true,"t":8,"pi":[{"n":"x","pt":$n[0].Int32,"ps":0},{"n":"y","pt":$n[0].String,"ps":1}],"sn":"MDS$2","rt":$n[0].Object,"p":[$n[0].Int32,$n[0].String]},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(324)],"a":2,"n":"MDS2","is":true,"t":8,"pi":[{"n":"x","pt":$n[0].Int32,"ps":0},{"n":"y","pt":$n[0].String,"ps":1}],"sn":"MDS2","rt":$n[0].Object,"p":[$n[0].Int32,$n[0].String]},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(357)],"a":2,"n":"Item","t":16,"rt":$n[0].Int32,"p":[$n[0].Double],"i":true,"ipi":[{"n":"x","pt":$n[0].Double,"ps":0}],"g":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(358)],"a":2,"n":"get_Item","t":8,"pi":[{"n":"x","pt":$n[0].Double,"ps":0}],"sn":"getItem$2","rt":$n[0].Int32,"p":[$n[0].Double]},"s":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(359)],"a":2,"n":"set_Item","t":8,"pi":[{"n":"x","pt":$n[0].Double,"ps":0},{"n":"value","pt":$n[0].Int32,"ps":1}],"sn":"setItem$2","rt":$n[0].Object,"p":[$n[0].Double,$n[0].Int32]}},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(351)],"a":2,"n":"PD1","t":16,"rt":$n[0].Int32,"g":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(352)],"a":2,"n":"get_PD1","t":8,"rt":$n[0].Int32,"fg":"PD1"},"s":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(353)],"a":2,"n":"set_PD1","t":8,"p":[$n[0].Int32],"rt":$n[0].Object,"fs":"PD1"},"fn":"PD1"},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(354)],"a":2,"n":"PD2","t":16,"rt":$n[0].Int32,"g":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(355)],"a":2,"n":"get_PD2","t":8,"rt":$n[0].Int32,"fg":"PD2"},"s":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(356)],"a":2,"n":"set_PD2","t":8,"p":[$n[0].Int32],"rt":$n[0].Object,"fs":"PD2"},"fn":"PD2"},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(361)],"a":2,"n":"PDS1","is":true,"t":16,"rt":$n[0].Int32,"g":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(362)],"a":2,"n":"get_PDS1","t":8,"rt":$n[0].Int32,"fg":"PDS1","is":true},"s":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(363)],"a":2,"n":"set_PDS1","t":8,"p":[$n[0].Int32],"rt":$n[0].Object,"fs":"PDS1","is":true},"fn":"PDS1"},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(364)],"a":2,"n":"PDS2","is":true,"t":16,"rt":$n[0].Int32,"g":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(365)],"a":2,"n":"get_PDS2","t":8,"rt":$n[0].Int32,"fg":"PDS2","is":true},"s":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(366)],"a":2,"n":"set_PDS2","t":8,"p":[$n[0].Int32],"rt":$n[0].Object,"fs":"PDS2","is":true},"fn":"PDS2"},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(331)],"a":2,"n":"FD1","t":4,"rt":$n[0].Int32,"sn":"FD1"},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(332)],"a":2,"n":"FD2","t":4,"rt":$n[0].Int32,"sn":"FD2"},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(341)],"a":2,"n":"FDS1","is":true,"t":4,"rt":$n[0].Int32,"sn":"FDS1"},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(342)],"a":2,"n":"FDS2","is":true,"t":4,"rt":$n[0].Int32,"sn":"FDS2"},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(371)],"a":2,"n":"ED1","t":2,"ad":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(372)],"a":2,"n":"add_ED1","t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"sn":"addED1","rt":$n[0].Object,"p":[Function]},"r":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(373)],"a":2,"n":"remove_ED1","t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"sn":"removeED1","rt":$n[0].Object,"p":[Function]}},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(374)],"a":2,"n":"ED2","t":2,"ad":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(375)],"a":2,"n":"add_ED2","t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"sn":"addED2","rt":$n[0].Object,"p":[Function]},"r":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(376)],"a":2,"n":"remove_ED2","t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"sn":"removeED2","rt":$n[0].Object,"p":[Function]}},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(381)],"a":2,"n":"EDS1","is":true,"t":2,"ad":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(382)],"a":2,"n":"add_EDS1","is":true,"t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"sn":"addEDS1","rt":$n[0].Object,"p":[Function]},"r":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(383)],"a":2,"n":"remove_EDS1","is":true,"t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"sn":"removeEDS1","rt":$n[0].Object,"p":[Function]}},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(384)],"a":2,"n":"EDS2","is":true,"t":2,"ad":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(385)],"a":2,"n":"add_EDS2","is":true,"t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"sn":"addEDS2","rt":$n[0].Object,"p":[Function]},"r":{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(386)],"a":2,"n":"remove_EDS2","is":true,"t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"sn":"removeEDS2","rt":$n[0].Object,"p":[Function]}}]}; });
     $m($n[4].GetMembersTests.D2, function () { return {"m":[{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(311)],"a":2,"n":"M","t":8,"sn":"M$2","rt":$n[0].Object},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(313)],"a":2,"n":"M2","t":8,"pi":[{"n":"x","pt":$n[0].Int32,"ps":0}],"sn":"M2$4","rt":$n[0].Object,"p":[$n[0].Int32]},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(314)],"a":2,"n":"M2","t":8,"pi":[{"n":"x","pt":$n[0].String,"ps":0}],"sn":"M2$5","rt":$n[0].Object,"p":[$n[0].String]},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(315)],"a":2,"n":"M2D","t":8,"pi":[{"n":"x","pt":$n[0].Int32,"ps":0}],"sn":"M2D","rt":$n[0].Object,"p":[$n[0].Int32]},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(316)],"a":2,"n":"M2D","t":8,"pi":[{"n":"x","pt":$n[0].String,"ps":0}],"sn":"M2D$1","rt":$n[0].Object,"p":[$n[0].String]},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(325)],"a":2,"n":"M2DS","is":true,"t":8,"pi":[{"n":"x","pt":$n[0].Int32,"ps":0}],"sn":"M2DS","rt":$n[0].Object,"p":[$n[0].Int32]},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(326)],"a":2,"n":"M2DS","is":true,"t":8,"pi":[{"n":"x","pt":$n[0].String,"ps":0}],"sn":"M2DS$1","rt":$n[0].Object,"p":[$n[0].String]},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(323)],"a":2,"n":"M2S","is":true,"t":8,"pi":[{"n":"x","pt":$n[0].Int32,"ps":0}],"sn":"M2S","rt":$n[0].Object,"p":[$n[0].Int32]},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(324)],"a":2,"n":"M2S","is":true,"t":8,"pi":[{"n":"x","pt":$n[0].String,"ps":0}],"sn":"M2S$1","rt":$n[0].Object,"p":[$n[0].String]},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(317)],"a":2,"n":"M3","t":8,"pi":[{"n":"x","pt":$n[0].DateTime,"ps":0}],"sn":"M3$2","rt":$n[0].Object,"p":[$n[0].DateTime]},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(327)],"a":2,"n":"M3S","is":true,"t":8,"pi":[{"n":"x","pt":$n[0].DateTime,"ps":0}],"sn":"M3S","rt":$n[0].Object,"p":[$n[0].DateTime]},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(312)],"a":2,"n":"MD","t":8,"sn":"MD","rt":$n[0].Object},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(322)],"a":2,"n":"MDS","is":true,"t":8,"sn":"MDS","rt":$n[0].Object},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(321)],"a":2,"n":"MS","is":true,"t":8,"sn":"MS","rt":$n[0].Object},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(353)],"a":2,"n":"Item","t":16,"rt":$n[0].Int32,"p":[$n[0].Int32],"i":true,"ipi":[{"n":"x","pt":$n[0].Int32,"ps":0}],"g":{"a":2,"n":"get_Item","t":8,"pi":[{"n":"x","pt":$n[0].Int32,"ps":0}],"sn":"getItem$4","rt":$n[0].Int32,"p":[$n[0].Int32]},"s":{"a":2,"n":"set_Item","t":8,"pi":[{"n":"x","pt":$n[0].Int32,"ps":0},{"n":"value","pt":$n[0].Int32,"ps":1}],"sn":"setItem$4","rt":$n[0].Object,"p":[$n[0].Int32,$n[0].Int32]}},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(354)],"a":2,"n":"Item","t":16,"rt":$n[0].Int32,"p":[$n[0].DateTime],"i":true,"ipi":[{"n":"x","pt":$n[0].DateTime,"ps":0}],"g":{"a":2,"n":"get_Item","t":8,"pi":[{"n":"x","pt":$n[0].DateTime,"ps":0}],"sn":"getItem$5","rt":$n[0].Int32,"p":[$n[0].DateTime]},"s":{"a":2,"n":"set_Item","t":8,"pi":[{"n":"x","pt":$n[0].DateTime,"ps":0},{"n":"value","pt":$n[0].Int32,"ps":1}],"sn":"setItem$5","rt":$n[0].Object,"p":[$n[0].DateTime,$n[0].Int32]}},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(351)],"a":2,"n":"P","t":16,"rt":$n[0].Int32,"g":{"a":2,"n":"get_P","t":8,"rt":$n[0].Int32,"fg":"P$2"},"s":{"a":2,"n":"set_P","t":8,"p":[$n[0].Int32],"rt":$n[0].Object,"fs":"P$2"},"fn":"P$2"},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(352)],"a":2,"n":"PD","t":16,"rt":$n[0].Int32,"g":{"a":2,"n":"get_PD","t":8,"rt":$n[0].Int32,"fg":"PD"},"s":{"a":2,"n":"set_PD","t":8,"p":[$n[0].Int32],"rt":$n[0].Object,"fs":"PD"},"fn":"PD"},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(362)],"a":2,"n":"PDS","is":true,"t":16,"rt":$n[0].Int32,"g":{"a":2,"n":"get_PDS","t":8,"rt":$n[0].Int32,"fg":"PDS","is":true},"s":{"a":2,"n":"set_PDS","t":8,"p":[$n[0].Int32],"rt":$n[0].Object,"fs":"PDS","is":true},"fn":"PDS"},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(361)],"a":2,"n":"PS","is":true,"t":16,"rt":$n[0].Int32,"g":{"a":2,"n":"get_PS","t":8,"rt":$n[0].Int32,"fg":"PS","is":true},"s":{"a":2,"n":"set_PS","t":8,"p":[$n[0].Int32],"rt":$n[0].Object,"fs":"PS","is":true},"fn":"PS"},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(331)],"a":2,"n":"F","t":4,"rt":$n[0].Int32,"sn":"F$2"},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(332)],"a":2,"n":"FD","t":4,"rt":$n[0].Int32,"sn":"FD"},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(342)],"a":2,"n":"FDS","is":true,"t":4,"rt":$n[0].Int32,"sn":"FDS"},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(341)],"a":2,"n":"FS","is":true,"t":4,"rt":$n[0].Int32,"sn":"FS"},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(371)],"a":2,"n":"E","t":2,"ad":{"a":2,"n":"add_E","t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"sn":"addE$2","rt":$n[0].Object,"p":[Function]},"r":{"a":2,"n":"remove_E","t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"sn":"removeE$2","rt":$n[0].Object,"p":[Function]}},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(372)],"a":2,"n":"ED","t":2,"ad":{"a":2,"n":"add_ED","t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"sn":"addED","rt":$n[0].Object,"p":[Function]},"r":{"a":2,"n":"remove_ED","t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"sn":"removeED","rt":$n[0].Object,"p":[Function]}},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(382)],"a":2,"n":"EDS","is":true,"t":2,"ad":{"a":2,"n":"add_EDS","is":true,"t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"sn":"addEDS","rt":$n[0].Object,"p":[Function]},"r":{"a":2,"n":"remove_EDS","is":true,"t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"sn":"removeEDS","rt":$n[0].Object,"p":[Function]}},{"at":[new Bridge.ClientTest.Reflection.GetMembersTests.A1Attribute(381)],"a":2,"n":"ES","is":true,"t":2,"ad":{"a":2,"n":"add_ES","is":true,"t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"sn":"addES","rt":$n[0].Object,"p":[Function]},"r":{"a":2,"n":"remove_ES","is":true,"t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"sn":"removeES","rt":$n[0].Object,"p":[Function]}}]}; });
     $m($n[4].TypeAttributeTests.C4, function () { return {"at":[new Bridge.ClientTest.Reflection.TypeAttributeTests.A4Attribute(4)]}; });
-    $m($n[2].DeserializationTests.ClassWithFieldsAndNoInit, function () { return {"td":$n[2].DeserializationTests,"att":1048578,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"arrayField","t":4,"rt":$n[0].Array.type(System.Int32),"sn":"arrayField"},{"a":2,"n":"byteArrayField","t":4,"rt":$n[0].Array.type(System.Byte),"sn":"byteArrayField"},{"a":2,"n":"charField","t":4,"rt":$n[0].Char,"sn":"charField"},{"a":2,"n":"dateField","t":4,"rt":$n[0].DateTime,"sn":"dateField"},{"a":2,"n":"decimalField","t":4,"rt":$n[0].Decimal,"sn":"decimalField"},{"a":2,"n":"dictField","t":4,"rt":$n[3].IDictionary$2(System.String,Bridge.ClientTest.DeserializationTests.E1),"sn":"dictField"},{"a":2,"n":"enumField","t":4,"rt":$n[2].DeserializationTests.E1,"sn":"enumField"},{"a":2,"n":"guidField","t":4,"rt":$n[0].Guid,"sn":"guidField"},{"a":2,"n":"listField","t":4,"rt":$n[3].IList$1(Bridge.ClientTest.DeserializationTests.E1),"sn":"listField"},{"a":2,"n":"longField","t":4,"rt":$n[0].Int64,"sn":"longField"},{"a":2,"n":"typeField","t":4,"rt":$n[0].Type,"sn":"typeField"},{"a":2,"n":"ulongField","t":4,"rt":$n[0].UInt64,"sn":"ulongField"}]}; });
-    $m($n[2].DeserializationTests.ClassWithFields, function () { return {"td":$n[2].DeserializationTests,"att":1048578,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"arrayField","t":4,"rt":$n[0].Array.type(System.Int32),"sn":"arrayField"},{"a":2,"n":"byteArrayField","t":4,"rt":$n[0].Array.type(System.Byte),"sn":"byteArrayField"},{"a":2,"n":"charField","t":4,"rt":$n[0].Char,"sn":"charField"},{"a":2,"n":"dateField","t":4,"rt":$n[0].DateTime,"sn":"dateField"},{"a":2,"n":"decimalField","t":4,"rt":$n[0].Decimal,"sn":"decimalField"},{"a":2,"n":"dictField","t":4,"rt":$n[3].IDictionary$2(System.String,Bridge.ClientTest.DeserializationTests.E1),"sn":"dictField"},{"a":2,"n":"enumField","t":4,"rt":$n[2].DeserializationTests.E1,"sn":"enumField"},{"a":2,"n":"guidField","t":4,"rt":$n[0].Guid,"sn":"guidField"},{"a":2,"n":"listField","t":4,"rt":$n[3].IList$1(Bridge.ClientTest.DeserializationTests.E1),"sn":"listField"},{"a":2,"n":"longField","t":4,"rt":$n[0].Int64,"sn":"longField"},{"a":2,"n":"typeField","t":4,"rt":$n[0].Type,"sn":"typeField"},{"a":2,"n":"ulongField","t":4,"rt":$n[0].UInt64,"sn":"ulongField"}]}; });
+    $m($n[2].DeserializationTests.ClassWithFieldsAndNoInit, function () { return {"td":$n[2].DeserializationTests,"att":1048578,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"arrayField","t":4,"rt":$n[0].Array.type(System.Int32),"sn":"arrayField"},{"a":2,"n":"byteArrayField","t":4,"rt":$n[0].Array.type(System.Byte),"sn":"byteArrayField"},{"a":2,"n":"charField","t":4,"rt":$n[0].Char,"sn":"charField"},{"a":2,"n":"dateField","t":4,"rt":$n[0].DateTime,"sn":"dateField"},{"a":2,"n":"decimalField","t":4,"rt":$n[0].Decimal,"sn":"decimalField"},{"a":2,"n":"dictField","t":4,"rt":$n[3].IDictionary$2(System.String,Bridge.ClientTest.DeserializationTests.E1),"sn":"dictField"},{"a":2,"n":"enumField","t":4,"rt":$n[2].DeserializationTests.E1,"sn":"enumField"},{"a":2,"n":"guidField","t":4,"rt":$n[0].Guid,"sn":"guidField"},{"a":2,"n":"listField","t":4,"rt":$n[3].IList$1(Bridge.ClientTest.DeserializationTests.E1),"sn":"listField"},{"a":2,"n":"longField","t":4,"rt":$n[0].Int64,"sn":"longField"},{"a":2,"n":"typeField","t":4,"rt":Function,"sn":"typeField"},{"a":2,"n":"ulongField","t":4,"rt":$n[0].UInt64,"sn":"ulongField"}]}; });
+    $m($n[2].DeserializationTests.ClassWithFields, function () { return {"td":$n[2].DeserializationTests,"att":1048578,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"arrayField","t":4,"rt":$n[0].Array.type(System.Int32),"sn":"arrayField"},{"a":2,"n":"byteArrayField","t":4,"rt":$n[0].Array.type(System.Byte),"sn":"byteArrayField"},{"a":2,"n":"charField","t":4,"rt":$n[0].Char,"sn":"charField"},{"a":2,"n":"dateField","t":4,"rt":$n[0].DateTime,"sn":"dateField"},{"a":2,"n":"decimalField","t":4,"rt":$n[0].Decimal,"sn":"decimalField"},{"a":2,"n":"dictField","t":4,"rt":$n[3].IDictionary$2(System.String,Bridge.ClientTest.DeserializationTests.E1),"sn":"dictField"},{"a":2,"n":"enumField","t":4,"rt":$n[2].DeserializationTests.E1,"sn":"enumField"},{"a":2,"n":"guidField","t":4,"rt":$n[0].Guid,"sn":"guidField"},{"a":2,"n":"listField","t":4,"rt":$n[3].IList$1(Bridge.ClientTest.DeserializationTests.E1),"sn":"listField"},{"a":2,"n":"longField","t":4,"rt":$n[0].Int64,"sn":"longField"},{"a":2,"n":"typeField","t":4,"rt":Function,"sn":"typeField"},{"a":2,"n":"ulongField","t":4,"rt":$n[0].UInt64,"sn":"ulongField"}]}; });
     $m($n[2].DeserializationTests.Class1, function () { return {"td":$n[2].DeserializationTests,"att":1048578,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"Sub1","t":16,"rt":$n[2].DeserializationTests.SubClass1,"g":{"a":2,"n":"get_Sub1","t":8,"rt":$n[2].DeserializationTests.SubClass1,"fg":"Sub1"},"s":{"a":2,"n":"set_Sub1","t":8,"p":[$n[2].DeserializationTests.SubClass1],"rt":$n[0].Object,"fs":"Sub1"},"fn":"Sub1"},{"a":2,"n":"Sub2","t":16,"rt":$n[2].DeserializationTests.SubClass2,"g":{"a":2,"n":"get_Sub2","t":8,"rt":$n[2].DeserializationTests.SubClass2,"fg":"Sub2"},"s":{"a":2,"n":"set_Sub2","t":8,"p":[$n[2].DeserializationTests.SubClass2],"rt":$n[0].Object,"fs":"Sub2"},"fn":"Sub2"}]}; });
     $m($n[2].DeserializationTests.SubClass1, function () { return {"td":$n[2].DeserializationTests,"att":1048578,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"List1","t":16,"rt":$n[3].List$1(Bridge.ClientTest.DeserializationTests.E1),"g":{"a":2,"n":"get_List1","t":8,"rt":$n[3].List$1(Bridge.ClientTest.DeserializationTests.E1),"fg":"List1"},"s":{"a":2,"n":"set_List1","t":8,"p":[$n[3].List$1(Bridge.ClientTest.DeserializationTests.E1)],"rt":$n[0].Object,"fs":"List1"},"fn":"List1"},{"a":2,"n":"Owner","t":16,"rt":$n[2].DeserializationTests.Class1,"g":{"a":2,"n":"get_Owner","t":8,"rt":$n[2].DeserializationTests.Class1,"fg":"Owner"},"s":{"a":2,"n":"set_Owner","t":8,"p":[$n[2].DeserializationTests.Class1],"rt":$n[0].Object,"fs":"Owner"},"fn":"Owner"}]}; });
     $m($n[2].DeserializationTests.SubClass2, function () { return {"td":$n[2].DeserializationTests,"att":1048578,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"List1","t":16,"rt":$n[3].List$1(System.Char),"g":{"a":2,"n":"get_List1","t":8,"rt":$n[3].List$1(System.Char),"fg":"List1"},"s":{"a":2,"n":"set_List1","t":8,"p":[$n[3].List$1(System.Char)],"rt":$n[0].Object,"fs":"List1"},"fn":"List1"},{"a":2,"n":"Owner","t":16,"rt":$n[2].DeserializationTests.Class1,"g":{"a":2,"n":"get_Owner","t":8,"rt":$n[2].DeserializationTests.Class1,"fg":"Owner"},"s":{"a":2,"n":"set_Owner","t":8,"p":[$n[2].DeserializationTests.Class1],"rt":$n[0].Object,"fs":"Owner"},"fn":"Owner"}]}; });
@@ -50236,7 +50249,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     $m($n[2].DeserializationTests.INamedEntity, function () { return {"td":$n[2].DeserializationTests,"att":163,"a":1,"m":[{"ab":true,"a":2,"n":"Name","t":16,"rt":$n[0].String,"g":{"ab":true,"a":2,"n":"get_Name","t":8,"rt":$n[0].String,"fg":"Bridge$ClientTest$DeserializationTests$INamedEntity$Name"},"s":{"ab":true,"a":2,"n":"set_Name","t":8,"p":[$n[0].String],"rt":$n[0].Object,"fs":"Bridge$ClientTest$DeserializationTests$INamedEntity$Name"},"fn":"Bridge$ClientTest$DeserializationTests$INamedEntity$Name"}]}; });
     $m($n[2].DeserializationTests.Person, function () { return {"td":$n[2].DeserializationTests,"att":1048579,"a":1,"m":[{"a":2,"n":".ctor","t":1,"p":[$n[0].Guid,$n[0].String,$n[0].String,$n[0].String],"pi":[{"n":"id","pt":$n[0].Guid,"ps":0},{"n":"name","pt":$n[0].String,"ps":1},{"n":"city","pt":$n[0].String,"ps":2},{"n":"street","pt":$n[0].String,"ps":3}],"sn":"ctor"},{"ov":true,"a":2,"n":"ToString","t":8,"sn":"toString","rt":$n[0].String},{"a":2,"n":"Address","t":16,"rt":$n[2].DeserializationTests.Address,"g":{"a":2,"n":"get_Address","t":8,"rt":$n[2].DeserializationTests.Address,"fg":"Address"},"s":{"a":2,"n":"set_Address","t":8,"p":[$n[2].DeserializationTests.Address],"rt":$n[0].Object,"fs":"Address"},"fn":"Address"},{"a":2,"n":"Id","t":16,"rt":$n[0].Guid,"g":{"a":2,"n":"get_Id","t":8,"rt":$n[0].Guid,"fg":"Id"},"s":{"a":2,"n":"set_Id","t":8,"p":[$n[0].Guid],"rt":$n[0].Object,"fs":"Id"},"fn":"Id"},{"a":2,"n":"Name","t":16,"rt":$n[0].String,"g":{"a":2,"n":"get_Name","t":8,"rt":$n[0].String,"fg":"Name"},"s":{"a":2,"n":"set_Name","t":8,"p":[$n[0].String],"rt":$n[0].Object,"fs":"Name"},"fn":"Name"}]}; });
     $m($n[2].DeserializationTests.Address, function () { return {"td":$n[2].DeserializationTests,"att":1048578,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"City","t":16,"rt":$n[0].String,"g":{"a":2,"n":"get_City","t":8,"rt":$n[0].String,"fg":"City"},"s":{"a":2,"n":"set_City","t":8,"p":[$n[0].String],"rt":$n[0].Object,"fs":"City"},"fn":"City"},{"a":2,"n":"Street","t":16,"rt":$n[0].String,"g":{"a":2,"n":"get_Street","t":8,"rt":$n[0].String,"fg":"Street"},"s":{"a":2,"n":"set_Street","t":8,"p":[$n[0].String],"rt":$n[0].Object,"fs":"Street"},"fn":"Street"}]}; });
-    $m($n[2].SerializationTests.ClassWithFields, function () { return {"td":$n[2].SerializationTests,"att":1048578,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"arrayField","t":4,"rt":$n[0].Array.type(System.Int32),"sn":"arrayField"},{"a":2,"n":"byteArrayField","t":4,"rt":$n[0].Array.type(System.Byte),"sn":"byteArrayField"},{"a":2,"n":"charField","t":4,"rt":$n[0].Char,"sn":"charField"},{"a":2,"n":"dateField","t":4,"rt":$n[0].DateTime,"sn":"dateField"},{"a":2,"n":"decimalField","t":4,"rt":$n[0].Decimal,"sn":"decimalField"},{"a":2,"n":"dictField","t":4,"rt":$n[3].IDictionary$2(System.String,Bridge.ClientTest.SerializationTests.E1),"sn":"dictField"},{"a":2,"n":"enumField","t":4,"rt":$n[2].SerializationTests.E1,"sn":"enumField"},{"a":2,"n":"guidField","t":4,"rt":$n[0].Guid,"sn":"guidField"},{"a":2,"n":"listField","t":4,"rt":$n[3].IList$1(Bridge.ClientTest.SerializationTests.E1),"sn":"listField"},{"a":2,"n":"longField","t":4,"rt":$n[0].Int64,"sn":"longField"},{"a":2,"n":"typeField","t":4,"rt":$n[0].Type,"sn":"typeField"},{"a":2,"n":"ulongField","t":4,"rt":$n[0].UInt64,"sn":"ulongField"}]}; });
+    $m($n[2].SerializationTests.ClassWithFields, function () { return {"td":$n[2].SerializationTests,"att":1048578,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"arrayField","t":4,"rt":$n[0].Array.type(System.Int32),"sn":"arrayField"},{"a":2,"n":"byteArrayField","t":4,"rt":$n[0].Array.type(System.Byte),"sn":"byteArrayField"},{"a":2,"n":"charField","t":4,"rt":$n[0].Char,"sn":"charField"},{"a":2,"n":"dateField","t":4,"rt":$n[0].DateTime,"sn":"dateField"},{"a":2,"n":"decimalField","t":4,"rt":$n[0].Decimal,"sn":"decimalField"},{"a":2,"n":"dictField","t":4,"rt":$n[3].IDictionary$2(System.String,Bridge.ClientTest.SerializationTests.E1),"sn":"dictField"},{"a":2,"n":"enumField","t":4,"rt":$n[2].SerializationTests.E1,"sn":"enumField"},{"a":2,"n":"guidField","t":4,"rt":$n[0].Guid,"sn":"guidField"},{"a":2,"n":"listField","t":4,"rt":$n[3].IList$1(Bridge.ClientTest.SerializationTests.E1),"sn":"listField"},{"a":2,"n":"longField","t":4,"rt":$n[0].Int64,"sn":"longField"},{"a":2,"n":"typeField","t":4,"rt":Function,"sn":"typeField"},{"a":2,"n":"ulongField","t":4,"rt":$n[0].UInt64,"sn":"ulongField"}]}; });
     $m($n[2].SerializationTests.Class1, function () { return {"td":$n[2].SerializationTests,"att":1048578,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"Sub1","t":16,"rt":$n[2].SerializationTests.SubClass1,"g":{"a":2,"n":"get_Sub1","t":8,"rt":$n[2].SerializationTests.SubClass1,"fg":"Sub1"},"s":{"a":2,"n":"set_Sub1","t":8,"p":[$n[2].SerializationTests.SubClass1],"rt":$n[0].Object,"fs":"Sub1"},"fn":"Sub1"},{"a":2,"n":"Sub2","t":16,"rt":$n[2].SerializationTests.SubClass2,"g":{"a":2,"n":"get_Sub2","t":8,"rt":$n[2].SerializationTests.SubClass2,"fg":"Sub2"},"s":{"a":2,"n":"set_Sub2","t":8,"p":[$n[2].SerializationTests.SubClass2],"rt":$n[0].Object,"fs":"Sub2"},"fn":"Sub2"}]}; });
     $m($n[2].SerializationTests.SubClass1, function () { return {"td":$n[2].SerializationTests,"att":1048578,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"List1","t":16,"rt":$n[3].List$1(Bridge.ClientTest.SerializationTests.E1),"g":{"a":2,"n":"get_List1","t":8,"rt":$n[3].List$1(Bridge.ClientTest.SerializationTests.E1),"fg":"List1"},"s":{"a":2,"n":"set_List1","t":8,"p":[$n[3].List$1(Bridge.ClientTest.SerializationTests.E1)],"rt":$n[0].Object,"fs":"List1"},"fn":"List1"},{"a":2,"n":"Owner","t":16,"rt":$n[2].SerializationTests.Class1,"g":{"a":2,"n":"get_Owner","t":8,"rt":$n[2].SerializationTests.Class1,"fg":"Owner"},"s":{"a":2,"n":"set_Owner","t":8,"p":[$n[2].SerializationTests.Class1],"rt":$n[0].Object,"fs":"Owner"},"fn":"Owner"}]}; });
     $m($n[2].SerializationTests.SubClass2, function () { return {"td":$n[2].SerializationTests,"att":1048578,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"List1","t":16,"rt":$n[3].List$1(System.Char),"g":{"a":2,"n":"get_List1","t":8,"rt":$n[3].List$1(System.Char),"fg":"List1"},"s":{"a":2,"n":"set_List1","t":8,"p":[$n[3].List$1(System.Char)],"rt":$n[0].Object,"fs":"List1"},"fn":"List1"},{"a":2,"n":"Owner","t":16,"rt":$n[2].SerializationTests.Class1,"g":{"a":2,"n":"get_Owner","t":8,"rt":$n[2].SerializationTests.Class1,"fg":"Owner"},"s":{"a":2,"n":"set_Owner","t":8,"p":[$n[2].SerializationTests.Class1],"rt":$n[0].Object,"fs":"Owner"},"fn":"Owner"}]}; });
@@ -50247,7 +50260,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     $m($n[4].ReflectionTests.C26, function () { return {"td":$n[4].ReflectionTests,"att":1048578,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"A1","t":4,"rt":$n[0].Int32,"sn":"A1"},{"a":3,"n":"A3","t":4,"rt":$n[0].Int32,"sn":"A3"},{"a":5,"n":"A4","t":4,"rt":$n[0].Int32,"sn":"A4"},{"a":2,"n":"B1","t":4,"rt":$n[0].Int32,"sn":"B1"},{"a":4,"n":"B2","t":4,"rt":$n[0].Int32,"sn":"B2"},{"a":3,"n":"B3","t":4,"rt":$n[0].Int32,"sn":"B3"},{"a":5,"n":"B4","t":4,"rt":$n[0].Int32,"sn":"B4"},{"a":1,"n":"B5","t":4,"rt":$n[0].Int32,"sn":"B5"},{"a":2,"n":"C1","t":4,"rt":$n[0].Int32,"sn":"C1"},{"a":4,"n":"C2","t":4,"rt":$n[0].Int32,"sn":"C2"},{"a":3,"n":"C3","t":4,"rt":$n[0].Int32,"sn":"C3"},{"a":5,"n":"C4","t":4,"rt":$n[0].Int32,"sn":"C4"},{"a":1,"n":"C5","t":4,"rt":$n[0].Int32,"sn":"C5"}]}; });
     $m($n[4].ReflectionTests.C27, function () { return {"td":$n[4].ReflectionTests,"att":1048578,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"A1","t":4,"rt":$n[0].Int32,"sn":"A1"},{"a":4,"n":"A2","t":4,"rt":$n[0].Int32,"sn":"A2"},{"a":3,"n":"A3","t":4,"rt":$n[0].Int32,"sn":"A3"},{"a":5,"n":"A4","t":4,"rt":$n[0].Int32,"sn":"A4"},{"a":2,"n":"B1","t":4,"rt":$n[0].Int32,"sn":"B1"},{"a":4,"n":"B2","t":4,"rt":$n[0].Int32,"sn":"B2"},{"a":3,"n":"B3","t":4,"rt":$n[0].Int32,"sn":"B3"},{"a":5,"n":"B4","t":4,"rt":$n[0].Int32,"sn":"B4"},{"a":1,"n":"B5","t":4,"rt":$n[0].Int32,"sn":"B5"},{"a":2,"n":"C1","t":4,"rt":$n[0].Int32,"sn":"C1"},{"a":4,"n":"C2","t":4,"rt":$n[0].Int32,"sn":"C2"},{"a":3,"n":"C3","t":4,"rt":$n[0].Int32,"sn":"C3"},{"a":5,"n":"C4","t":4,"rt":$n[0].Int32,"sn":"C4"},{"a":1,"n":"C5","t":4,"rt":$n[0].Int32,"sn":"C5"}]}; });
     $m($n[4].ReflectionTests.C28, function () { return {"td":$n[4].ReflectionTests,"att":1048578,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"A1","t":4,"rt":$n[0].Int32,"sn":"A1"},{"a":4,"n":"A2","t":4,"rt":$n[0].Int32,"sn":"A2"},{"a":3,"n":"A3","t":4,"rt":$n[0].Int32,"sn":"A3"},{"a":5,"n":"A4","t":4,"rt":$n[0].Int32,"sn":"A4"},{"a":1,"n":"A5","t":4,"rt":$n[0].Int32,"sn":"A5"},{"a":2,"n":"B1","t":4,"rt":$n[0].Int32,"sn":"B1"},{"a":4,"n":"B2","t":4,"rt":$n[0].Int32,"sn":"B2"},{"a":3,"n":"B3","t":4,"rt":$n[0].Int32,"sn":"B3"},{"a":5,"n":"B4","t":4,"rt":$n[0].Int32,"sn":"B4"},{"a":1,"n":"B5","t":4,"rt":$n[0].Int32,"sn":"B5"},{"a":2,"n":"C1","t":4,"rt":$n[0].Int32,"sn":"C1"},{"a":4,"n":"C2","t":4,"rt":$n[0].Int32,"sn":"C2"},{"a":3,"n":"C3","t":4,"rt":$n[0].Int32,"sn":"C3"},{"a":5,"n":"C4","t":4,"rt":$n[0].Int32,"sn":"C4"},{"a":1,"n":"C5","t":4,"rt":$n[0].Int32,"sn":"C5"}]}; });
-    $m($n[4].TypeSystemTests, function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"AccessingAStaticMemberInAGenericClassWorks","t":8,"sn":"AccessingAStaticMemberInAGenericClassWorks","rt":$n[0].Object},{"a":2,"n":"AssemblyPropertyWorks","t":8,"sn":"AssemblyPropertyWorks","rt":$n[0].Object},{"a":2,"n":"AssemblyQualifiedNameReturnsTheNameWithTheNamespaceAndAssemblyName","t":8,"sn":"AssemblyQualifiedNameReturnsTheNameWithTheNamespaceAndAssemblyName","rt":$n[0].Object},{"a":1,"n":"AssertIsGenericParameter","is":true,"t":8,"pi":[{"n":"number","pt":$n[0].String,"ps":0},{"n":"t","pt":$n[0].Type,"ps":1},{"n":"expected","ip":true,"pt":$n[0].Array.type(System.Boolean),"ps":2}],"sn":"AssertIsGenericParameter","rt":$n[0].Object,"p":[$n[0].String,$n[0].Type,$n[0].Array.type(System.Boolean)]},{"a":2,"n":"AttributesWorks","t":8,"sn":"AttributesWorks","rt":$n[0].Object},{"a":2,"n":"BaseTypeAndImplementedInterfacesForGenericTypeWorks","t":8,"sn":"BaseTypeAndImplementedInterfacesForGenericTypeWorks","rt":$n[0].Object},{"a":2,"n":"CastingToImportedNamedValuesEnumCastsToString","t":8,"sn":"CastingToImportedNamedValuesEnumCastsToString","rt":$n[0].Object},{"a":2,"n":"CastingToNamedValuesEnumCastsToString","t":8,"sn":"CastingToNamedValuesEnumCastsToString","rt":$n[0].Object},{"a":2,"n":"CastingUndefinedToOtherTypeShouldReturnUndefined","t":8,"sn":"CastingUndefinedToOtherTypeShouldReturnUndefined","rt":$n[0].Object},{"a":2,"n":"ConstructingAGenericTypeTwiceWithTheSameArgumentsReturnsTheSameInstance","t":8,"sn":"ConstructingAGenericTypeTwiceWithTheSameArgumentsReturnsTheSameInstance","rt":$n[0].Object},{"a":2,"n":"ConstructingInstanceWithNamedConstructorWorks","t":8,"sn":"ConstructingInstanceWithNamedConstructorWorks","rt":$n[0].Object},{"a":2,"n":"ConstructingInstanceWithNamedConstructorWorks2","t":8,"sn":"ConstructingInstanceWithNamedConstructorWorks2","rt":$n[0].Object},{"a":2,"n":"ContainsGenericParametersWorks","is":true,"t":8,"sn":"ContainsGenericParametersWorks","rt":$n[0].Object},{"a":2,"n":"DeclaringTypeWorks","is":true,"t":8,"sn":"DeclaringTypeWorks","rt":$n[0].Object},{"a":2,"n":"DefaultValueOfImportedNamedValuesEnumIsNull","t":8,"sn":"DefaultValueOfImportedNamedValuesEnumIsNull","rt":$n[0].Object},{"a":2,"n":"DefaultValueOfNamedValuesEnumIsNull","t":8,"sn":"DefaultValueOfNamedValuesEnumIsNull","rt":$n[0].Object},{"a":1,"n":"DoesItThrow","t":8,"pi":[{"n":"a","pt":Function,"ps":0}],"sn":"DoesItThrow","rt":$n[0].Boolean,"p":[Function]},{"a":2,"n":"FalseIsFunctionShouldReturnFalse","t":8,"sn":"FalseIsFunctionShouldReturnFalse","rt":$n[0].Object},{"a":2,"n":"FullNamePropertyReturnsTheNameWithTheNamespace","t":8,"sn":"FullNamePropertyReturnsTheNameWithTheNamespace","rt":$n[0].Object},{"a":2,"n":"GenericParameterCountReturnsZeroForConstructedTypesAndNonZeroForOpenOnes","t":8,"sn":"GenericParameterCountReturnsZeroForConstructedTypesAndNonZeroForOpenOnes","rt":$n[0].Object},{"a":1,"n":"GetDefault","t":8,"tpc":1,"tprm":["T"],"sn":"GetDefault","rt":System.Object},{"a":2,"n":"GetEnumNameWorks","t":8,"sn":"GetEnumNameWorks","rt":$n[0].Object},{"a":2,"n":"GetEnumNamesWorks","t":8,"sn":"GetEnumNamesWorks","rt":$n[0].Object},{"a":2,"n":"GetEnumUnderlyingTypeWorks","t":8,"sn":"GetEnumUnderlyingTypeWorks","rt":$n[0].Object},{"a":2,"n":"GetEnumValuesWorks","t":8,"sn":"GetEnumValuesWorks","rt":$n[0].Object},{"a":2,"n":"GetGenericArgumentsReturnsTheCorrectTypesForConstructedTypesOtherwiseNull","t":8,"sn":"GetGenericArgumentsReturnsTheCorrectTypesForConstructedTypesOtherwiseNull","rt":$n[0].Object},{"a":2,"n":"GetGenericTypeDefinitionReturnsTheGenericTypeDefinitionForConstructedTypeOtherwiseNull","t":8,"sn":"GetGenericTypeDefinitionReturnsTheGenericTypeDefinitionForConstructedTypeOtherwiseNull","rt":$n[0].Object},{"a":2,"n":"GettingBaseTypeWorks","t":8,"sn":"GettingBaseTypeWorks","rt":$n[0].Object},{"a":2,"n":"GettingImplementedInterfacesWorks","t":8,"sn":"GettingImplementedInterfacesWorks","rt":$n[0].Object},{"a":2,"n":"ImportedInterfaceAppearsAsObjectWhenUsedAsGenericArgument","t":8,"sn":"ImportedInterfaceAppearsAsObjectWhenUsedAsGenericArgument","rt":$n[0].Object},{"a":2,"n":"InheritingFromRecordWorks","t":8,"sn":"InheritingFromRecordWorks","rt":$n[0].Object},{"a":2,"n":"InstanceOfWorksForSerializableTypesWithCustomTypeCheckCode","t":8,"sn":"InstanceOfWorksForSerializableTypesWithCustomTypeCheckCode","rt":$n[0].Object},{"a":2,"n":"InstantiatingClassWithConstructorThatNeedsToBeAppliedWorks","t":8,"sn":"InstantiatingClassWithConstructorThatNeedsToBeAppliedWorks","rt":$n[0].Object},{"a":2,"n":"InvokingBaseMethodWorks","t":8,"sn":"InvokingBaseMethodWorks","rt":$n[0].Object},{"a":2,"n":"InvokingBaseNamedConstructorWithArgumentsWorks","t":8,"sn":"InvokingBaseNamedConstructorWithArgumentsWorks","rt":$n[0].Object},{"a":2,"n":"InvokingBaseNamedConstructorWithoutArgumentsWorks","t":8,"sn":"InvokingBaseNamedConstructorWithoutArgumentsWorks","rt":$n[0].Object},{"a":2,"n":"InvokingBaseUnnamedConstructorWithArgumentsWorks","t":8,"sn":"InvokingBaseUnnamedConstructorWithArgumentsWorks","rt":$n[0].Object},{"a":2,"n":"InvokingBaseUnnamedConstructorWithoutArgumentsWorks","t":8,"sn":"InvokingBaseUnnamedConstructorWithoutArgumentsWorks","rt":$n[0].Object},{"a":2,"n":"InvokingGenericBaseMethodWorks","t":8,"sn":"InvokingGenericBaseMethodWorks","rt":$n[0].Object},{"a":2,"n":"IsAbstractWorks","t":8,"sn":"IsAbstractWorks","rt":$n[0].Object},{"a":2,"n":"IsArrayWorks","t":8,"sn":"IsArrayWorks","rt":$n[0].Object},{"a":2,"n":"IsAssignableFromWorks","t":8,"sn":"IsAssignableFromWorks","rt":$n[0].Object},{"a":2,"n":"IsClassWorks","t":8,"sn":"IsClassWorks","rt":$n[0].Object},{"a":2,"n":"IsEnumWorks","t":8,"sn":"IsEnumWorks","rt":$n[0].Object},{"a":2,"n":"IsFlagsWorks","t":8,"sn":"IsFlagsWorks","rt":$n[0].Object},{"a":2,"n":"IsGenericParameterWorks","is":true,"t":8,"sn":"IsGenericParameterWorks","rt":$n[0].Object},{"a":2,"n":"IsGenericTypeDefinitionWorksAsExpected","t":8,"sn":"IsGenericTypeDefinitionWorksAsExpected","rt":$n[0].Object},{"a":2,"n":"IsGenericTypeWorks","t":8,"sn":"IsGenericTypeWorks","rt":$n[0].Object},{"a":2,"n":"IsInstanceOfTypeWorksForReferenceTypes","t":8,"sn":"IsInstanceOfTypeWorksForReferenceTypes","rt":$n[0].Object},{"a":2,"n":"IsInterfaceWorks","t":8,"sn":"IsInterfaceWorks","rt":$n[0].Object},{"a":2,"n":"IsNestedAssemblyWorks","t":8,"sn":"IsNestedAssemblyWorks","rt":$n[0].Object},{"a":2,"n":"IsNestedFamilyWorks","t":8,"sn":"IsNestedFamilyWorks","rt":$n[0].Object},{"a":2,"n":"IsNestedPrivateWorks","t":8,"sn":"IsNestedPrivateWorks","rt":$n[0].Object},{"a":2,"n":"IsNestedPublicWorks","t":8,"sn":"IsNestedPublicWorks","rt":$n[0].Object},{"a":2,"n":"IsNestedWorks","is":true,"t":8,"sn":"IsNestedWorks","rt":$n[0].Object},{"a":2,"n":"IsNotPublicWorks","t":8,"sn":"IsNotPublicWorks","rt":$n[0].Object},{"a":1,"n":"IsOfType","t":8,"pi":[{"n":"o","pt":$n[0].Object,"ps":0}],"tpc":1,"tprm":["T"],"sn":"IsOfType","rt":$n[0].Boolean,"p":[$n[0].Object]},{"a":2,"n":"IsPublicWorks","t":8,"sn":"IsPublicWorks","rt":$n[0].Object},{"a":2,"n":"IsSealedWorks","t":8,"sn":"IsSealedWorks","rt":$n[0].Object},{"a":2,"n":"IsSubclassOfWorks","t":8,"sn":"IsSubclassOfWorks","rt":$n[0].Object},{"a":2,"n":"MethodGroupConversionOnBaseMethodWorks","t":8,"sn":"MethodGroupConversionOnBaseMethodWorks","rt":$n[0].Object},{"a":2,"n":"MethodGroupConversionOnGenericBaseMethodWorks","t":8,"sn":"MethodGroupConversionOnGenericBaseMethodWorks","rt":$n[0].Object},{"a":2,"n":"MethodGroupConversionOnGenericMethodWorks","t":8,"sn":"MethodGroupConversionOnGenericMethodWorks","rt":$n[0].Object},{"a":2,"n":"MethodGroupConversionWorks","t":8,"sn":"MethodGroupConversionWorks","rt":$n[0].Object},{"a":2,"n":"NamePropertyRemovesTheNamespace","t":8,"sn":"NamePropertyRemovesTheNamespace","rt":$n[0].Object},{"a":2,"n":"NamespacePropertyReturnsTheNamespaceWithoutTheName","t":8,"sn":"NamespacePropertyReturnsTheNamespaceWithoutTheName","rt":$n[0].Object},{"a":2,"n":"NonSerializableTypeCanInheritFromSerializableType","t":8,"sn":"NonSerializableTypeCanInheritFromSerializableType","rt":$n[0].Object},{"a":2,"n":"StaticGetTypeMethodWithGenericsWorks","t":8,"sn":"StaticGetTypeMethodWithGenericsWorks","rt":$n[0].Object},{"a":2,"n":"StaticGetTypeMethodWorks","t":8,"sn":"StaticGetTypeMethodWorks","rt":$n[0].Object},{"a":2,"n":"TypeOfAnOpenGenericClassWorks","t":8,"sn":"TypeOfAnOpenGenericClassWorks","rt":$n[0].Object},{"a":2,"n":"TypeOfAnOpenGenericInterfaceWorks","t":8,"sn":"TypeOfAnOpenGenericInterfaceWorks","rt":$n[0].Object},{"a":2,"n":"TypeOfInstantiatedGenericClassWorks","t":8,"sn":"TypeOfInstantiatedGenericClassWorks","rt":$n[0].Object},{"a":2,"n":"TypeOfInstantiatedGenericInterfaceWorks","t":8,"sn":"TypeOfInstantiatedGenericInterfaceWorks","rt":$n[0].Object},{"a":2,"n":"TypeOfNestedGenericClassWorks","t":8,"sn":"TypeOfNestedGenericClassWorks","rt":$n[0].Object},{"a":1,"n":"AssemblyName","t":16,"rt":$n[0].String,"g":{"a":1,"n":"get_AssemblyName","t":8,"rt":$n[0].String,"fg":"AssemblyName"},"fn":"AssemblyName"},{"a":1,"n":"AssemblyWithVersion","t":16,"rt":$n[0].String,"g":{"a":1,"n":"get_AssemblyWithVersion","t":8,"rt":$n[0].String,"fg":"AssemblyWithVersion"},"fn":"AssemblyWithVersion"}]}; });
+    $m($n[4].TypeSystemTests, function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"AccessingAStaticMemberInAGenericClassWorks","t":8,"sn":"AccessingAStaticMemberInAGenericClassWorks","rt":$n[0].Object},{"a":2,"n":"AssemblyPropertyWorks","t":8,"sn":"AssemblyPropertyWorks","rt":$n[0].Object},{"a":2,"n":"AssemblyQualifiedNameReturnsTheNameWithTheNamespaceAndAssemblyName","t":8,"sn":"AssemblyQualifiedNameReturnsTheNameWithTheNamespaceAndAssemblyName","rt":$n[0].Object},{"a":1,"n":"AssertIsGenericParameter","is":true,"t":8,"pi":[{"n":"number","pt":$n[0].String,"ps":0},{"n":"t","pt":Function,"ps":1},{"n":"expected","ip":true,"pt":$n[0].Array.type(System.Boolean),"ps":2}],"sn":"AssertIsGenericParameter","rt":$n[0].Object,"p":[$n[0].String,Function,$n[0].Array.type(System.Boolean)]},{"a":2,"n":"AttributesWorks","t":8,"sn":"AttributesWorks","rt":$n[0].Object},{"a":2,"n":"BaseTypeAndImplementedInterfacesForGenericTypeWorks","t":8,"sn":"BaseTypeAndImplementedInterfacesForGenericTypeWorks","rt":$n[0].Object},{"a":2,"n":"CastingToImportedNamedValuesEnumCastsToString","t":8,"sn":"CastingToImportedNamedValuesEnumCastsToString","rt":$n[0].Object},{"a":2,"n":"CastingToNamedValuesEnumCastsToString","t":8,"sn":"CastingToNamedValuesEnumCastsToString","rt":$n[0].Object},{"a":2,"n":"CastingUndefinedToOtherTypeShouldReturnUndefined","t":8,"sn":"CastingUndefinedToOtherTypeShouldReturnUndefined","rt":$n[0].Object},{"a":2,"n":"ConstructingAGenericTypeTwiceWithTheSameArgumentsReturnsTheSameInstance","t":8,"sn":"ConstructingAGenericTypeTwiceWithTheSameArgumentsReturnsTheSameInstance","rt":$n[0].Object},{"a":2,"n":"ConstructingInstanceWithNamedConstructorWorks","t":8,"sn":"ConstructingInstanceWithNamedConstructorWorks","rt":$n[0].Object},{"a":2,"n":"ConstructingInstanceWithNamedConstructorWorks2","t":8,"sn":"ConstructingInstanceWithNamedConstructorWorks2","rt":$n[0].Object},{"a":2,"n":"ContainsGenericParametersWorks","is":true,"t":8,"sn":"ContainsGenericParametersWorks","rt":$n[0].Object},{"a":2,"n":"DeclaringTypeWorks","is":true,"t":8,"sn":"DeclaringTypeWorks","rt":$n[0].Object},{"a":2,"n":"DefaultValueOfImportedNamedValuesEnumIsNull","t":8,"sn":"DefaultValueOfImportedNamedValuesEnumIsNull","rt":$n[0].Object},{"a":2,"n":"DefaultValueOfNamedValuesEnumIsNull","t":8,"sn":"DefaultValueOfNamedValuesEnumIsNull","rt":$n[0].Object},{"a":1,"n":"DoesItThrow","t":8,"pi":[{"n":"a","pt":Function,"ps":0}],"sn":"DoesItThrow","rt":$n[0].Boolean,"p":[Function]},{"a":2,"n":"FalseIsFunctionShouldReturnFalse","t":8,"sn":"FalseIsFunctionShouldReturnFalse","rt":$n[0].Object},{"a":2,"n":"FullNamePropertyReturnsTheNameWithTheNamespace","t":8,"sn":"FullNamePropertyReturnsTheNameWithTheNamespace","rt":$n[0].Object},{"a":2,"n":"GenericParameterCountReturnsZeroForConstructedTypesAndNonZeroForOpenOnes","t":8,"sn":"GenericParameterCountReturnsZeroForConstructedTypesAndNonZeroForOpenOnes","rt":$n[0].Object},{"a":1,"n":"GetDefault","t":8,"tpc":1,"tprm":["T"],"sn":"GetDefault","rt":System.Object},{"a":2,"n":"GetEnumNameWorks","t":8,"sn":"GetEnumNameWorks","rt":$n[0].Object},{"a":2,"n":"GetEnumNamesWorks","t":8,"sn":"GetEnumNamesWorks","rt":$n[0].Object},{"a":2,"n":"GetEnumUnderlyingTypeWorks","t":8,"sn":"GetEnumUnderlyingTypeWorks","rt":$n[0].Object},{"a":2,"n":"GetEnumValuesWorks","t":8,"sn":"GetEnumValuesWorks","rt":$n[0].Object},{"a":2,"n":"GetGenericArgumentsReturnsTheCorrectTypesForConstructedTypesOtherwiseNull","t":8,"sn":"GetGenericArgumentsReturnsTheCorrectTypesForConstructedTypesOtherwiseNull","rt":$n[0].Object},{"a":2,"n":"GetGenericTypeDefinitionReturnsTheGenericTypeDefinitionForConstructedTypeOtherwiseNull","t":8,"sn":"GetGenericTypeDefinitionReturnsTheGenericTypeDefinitionForConstructedTypeOtherwiseNull","rt":$n[0].Object},{"a":2,"n":"GettingBaseTypeWorks","t":8,"sn":"GettingBaseTypeWorks","rt":$n[0].Object},{"a":2,"n":"GettingImplementedInterfacesWorks","t":8,"sn":"GettingImplementedInterfacesWorks","rt":$n[0].Object},{"a":2,"n":"ImportedInterfaceAppearsAsObjectWhenUsedAsGenericArgument","t":8,"sn":"ImportedInterfaceAppearsAsObjectWhenUsedAsGenericArgument","rt":$n[0].Object},{"a":2,"n":"InheritingFromRecordWorks","t":8,"sn":"InheritingFromRecordWorks","rt":$n[0].Object},{"a":2,"n":"InstanceOfWorksForSerializableTypesWithCustomTypeCheckCode","t":8,"sn":"InstanceOfWorksForSerializableTypesWithCustomTypeCheckCode","rt":$n[0].Object},{"a":2,"n":"InstantiatingClassWithConstructorThatNeedsToBeAppliedWorks","t":8,"sn":"InstantiatingClassWithConstructorThatNeedsToBeAppliedWorks","rt":$n[0].Object},{"a":2,"n":"InvokingBaseMethodWorks","t":8,"sn":"InvokingBaseMethodWorks","rt":$n[0].Object},{"a":2,"n":"InvokingBaseNamedConstructorWithArgumentsWorks","t":8,"sn":"InvokingBaseNamedConstructorWithArgumentsWorks","rt":$n[0].Object},{"a":2,"n":"InvokingBaseNamedConstructorWithoutArgumentsWorks","t":8,"sn":"InvokingBaseNamedConstructorWithoutArgumentsWorks","rt":$n[0].Object},{"a":2,"n":"InvokingBaseUnnamedConstructorWithArgumentsWorks","t":8,"sn":"InvokingBaseUnnamedConstructorWithArgumentsWorks","rt":$n[0].Object},{"a":2,"n":"InvokingBaseUnnamedConstructorWithoutArgumentsWorks","t":8,"sn":"InvokingBaseUnnamedConstructorWithoutArgumentsWorks","rt":$n[0].Object},{"a":2,"n":"InvokingGenericBaseMethodWorks","t":8,"sn":"InvokingGenericBaseMethodWorks","rt":$n[0].Object},{"a":2,"n":"IsAbstractWorks","t":8,"sn":"IsAbstractWorks","rt":$n[0].Object},{"a":2,"n":"IsArrayWorks","t":8,"sn":"IsArrayWorks","rt":$n[0].Object},{"a":2,"n":"IsAssignableFromWorks","t":8,"sn":"IsAssignableFromWorks","rt":$n[0].Object},{"a":2,"n":"IsClassWorks","t":8,"sn":"IsClassWorks","rt":$n[0].Object},{"a":2,"n":"IsEnumWorks","t":8,"sn":"IsEnumWorks","rt":$n[0].Object},{"a":2,"n":"IsFlagsWorks","t":8,"sn":"IsFlagsWorks","rt":$n[0].Object},{"a":2,"n":"IsGenericParameterWorks","is":true,"t":8,"sn":"IsGenericParameterWorks","rt":$n[0].Object},{"a":2,"n":"IsGenericTypeDefinitionWorksAsExpected","t":8,"sn":"IsGenericTypeDefinitionWorksAsExpected","rt":$n[0].Object},{"a":2,"n":"IsGenericTypeWorks","t":8,"sn":"IsGenericTypeWorks","rt":$n[0].Object},{"a":2,"n":"IsInstanceOfTypeWorksForReferenceTypes","t":8,"sn":"IsInstanceOfTypeWorksForReferenceTypes","rt":$n[0].Object},{"a":2,"n":"IsInterfaceWorks","t":8,"sn":"IsInterfaceWorks","rt":$n[0].Object},{"a":2,"n":"IsNestedAssemblyWorks","t":8,"sn":"IsNestedAssemblyWorks","rt":$n[0].Object},{"a":2,"n":"IsNestedFamilyWorks","t":8,"sn":"IsNestedFamilyWorks","rt":$n[0].Object},{"a":2,"n":"IsNestedPrivateWorks","t":8,"sn":"IsNestedPrivateWorks","rt":$n[0].Object},{"a":2,"n":"IsNestedPublicWorks","t":8,"sn":"IsNestedPublicWorks","rt":$n[0].Object},{"a":2,"n":"IsNestedWorks","is":true,"t":8,"sn":"IsNestedWorks","rt":$n[0].Object},{"a":2,"n":"IsNotPublicWorks","t":8,"sn":"IsNotPublicWorks","rt":$n[0].Object},{"a":1,"n":"IsOfType","t":8,"pi":[{"n":"o","pt":$n[0].Object,"ps":0}],"tpc":1,"tprm":["T"],"sn":"IsOfType","rt":$n[0].Boolean,"p":[$n[0].Object]},{"a":2,"n":"IsPublicWorks","t":8,"sn":"IsPublicWorks","rt":$n[0].Object},{"a":2,"n":"IsSealedWorks","t":8,"sn":"IsSealedWorks","rt":$n[0].Object},{"a":2,"n":"IsSubclassOfWorks","t":8,"sn":"IsSubclassOfWorks","rt":$n[0].Object},{"a":2,"n":"MethodGroupConversionOnBaseMethodWorks","t":8,"sn":"MethodGroupConversionOnBaseMethodWorks","rt":$n[0].Object},{"a":2,"n":"MethodGroupConversionOnGenericBaseMethodWorks","t":8,"sn":"MethodGroupConversionOnGenericBaseMethodWorks","rt":$n[0].Object},{"a":2,"n":"MethodGroupConversionOnGenericMethodWorks","t":8,"sn":"MethodGroupConversionOnGenericMethodWorks","rt":$n[0].Object},{"a":2,"n":"MethodGroupConversionWorks","t":8,"sn":"MethodGroupConversionWorks","rt":$n[0].Object},{"a":2,"n":"NamePropertyRemovesTheNamespace","t":8,"sn":"NamePropertyRemovesTheNamespace","rt":$n[0].Object},{"a":2,"n":"NamespacePropertyReturnsTheNamespaceWithoutTheName","t":8,"sn":"NamespacePropertyReturnsTheNamespaceWithoutTheName","rt":$n[0].Object},{"a":2,"n":"NonSerializableTypeCanInheritFromSerializableType","t":8,"sn":"NonSerializableTypeCanInheritFromSerializableType","rt":$n[0].Object},{"a":2,"n":"StaticGetTypeMethodWithGenericsWorks","t":8,"sn":"StaticGetTypeMethodWithGenericsWorks","rt":$n[0].Object},{"a":2,"n":"StaticGetTypeMethodWorks","t":8,"sn":"StaticGetTypeMethodWorks","rt":$n[0].Object},{"a":2,"n":"TypeOfAnOpenGenericClassWorks","t":8,"sn":"TypeOfAnOpenGenericClassWorks","rt":$n[0].Object},{"a":2,"n":"TypeOfAnOpenGenericInterfaceWorks","t":8,"sn":"TypeOfAnOpenGenericInterfaceWorks","rt":$n[0].Object},{"a":2,"n":"TypeOfInstantiatedGenericClassWorks","t":8,"sn":"TypeOfInstantiatedGenericClassWorks","rt":$n[0].Object},{"a":2,"n":"TypeOfInstantiatedGenericInterfaceWorks","t":8,"sn":"TypeOfInstantiatedGenericInterfaceWorks","rt":$n[0].Object},{"a":2,"n":"TypeOfNestedGenericClassWorks","t":8,"sn":"TypeOfNestedGenericClassWorks","rt":$n[0].Object},{"a":1,"n":"AssemblyName","t":16,"rt":$n[0].String,"g":{"a":1,"n":"get_AssemblyName","t":8,"rt":$n[0].String,"fg":"AssemblyName"},"fn":"AssemblyName"},{"a":1,"n":"AssemblyWithVersion","t":16,"rt":$n[0].String,"g":{"a":1,"n":"get_AssemblyWithVersion","t":8,"rt":$n[0].String,"fg":"AssemblyWithVersion"},"fn":"AssemblyWithVersion"}]}; });
     $m($n[4].TypeSystemTests.CA1, function () { return {"td":$n[4].TypeSystemTests,"att":1048706,"a":2,"m":[{"a":3,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"}]}; });
     $m($n[4].TypeSystemTests.CA2, function () { return {"td":$n[4].TypeSystemTests,"att":1048706,"a":2,"m":[{"a":3,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"}]}; });
     $m($n[4].TypeSystemTests.I1, function () { return {"td":$n[4].TypeSystemTests,"att":162,"a":2}; });
