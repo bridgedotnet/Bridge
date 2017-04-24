@@ -539,6 +539,7 @@
     <Compile Include="BridgeIssues\2500\N2525.cs" />
     <Compile Include="BridgeIssues\2500\N2538.cs" />
     <Compile Include="BridgeIssues\2500\N2565.cs" />
+    <Compile Include="BridgeIssues\2500\N2550.cs" />
     <Compile Include="BridgeIssues\2500\N2571.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
