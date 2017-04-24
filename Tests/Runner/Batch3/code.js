@@ -20024,7 +20024,8 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestUseCase: function () {
-                    var isToStringToTypeNameLogic = !Bridge.ClientTest.Batch3.Utilities.BrowserHelper.IsChrome();
+                    // After FF some v.43 version it also outputs content instead of type name for TypeArrays.toString()
+                    var isToStringToTypeNameLogic = !(Bridge.ClientTest.Batch3.Utilities.BrowserHelper.IsChrome() || Bridge.ClientTest.Batch3.Utilities.BrowserHelper.IsFirefox());
 
                     var v1 = new Float32Array(10);
                     Bridge.Test.NUnit.Assert.True$1(v1 != null, "Float32Array created");
