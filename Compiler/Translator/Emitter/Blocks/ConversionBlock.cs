@@ -276,6 +276,16 @@ namespace Bridge.Translator
         private static int DoConversion(ConversionBlock block, Expression expression, Conversion conversion, IType expectedType,
             int level, ResolveResult rr, bool ignoreConversionResolveResult = false, bool ignoreBoxing = false)
         {
+            if (expression.Parent is MemberReferenceExpression && expression.Parent.Parent is InvocationExpression)
+            {
+                var inv_rr = block.Emitter.Resolver.ResolveNode(expression.Parent.Parent, block.Emitter) as CSharpInvocationResolveResult;
+
+                if (inv_rr != null && inv_rr.IsExtensionMethodInvocation)
+                {
+                    conversion = block.Emitter.Resolver.Resolver.GetConversion((Expression)expression.Parent);
+                }
+            }
+
             if (ConversionBlock.expressionIgnoreUserDefine.Contains(expression) && conversion.IsUserDefined)
             {
                 expectedType = conversion.Method.Parameters.First().Type;
