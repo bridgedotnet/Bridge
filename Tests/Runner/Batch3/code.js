@@ -18587,7 +18587,6 @@ Bridge.$N1391Result =                     r;
                     catch (e1) {
                         e1 = System.Exception.create(e1);
                         Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.AssertStackTrace(e1.StackTrace, "MethodThrowsException2");
-                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.AssertStackTrace(e1.StackTrace, "ThrownFromMethod2");
                     }
 
                     try {
@@ -18597,7 +18596,6 @@ Bridge.$N1391Result =                     r;
                     catch (e2) {
                         e2 = System.Exception.create(e2);
                         Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.AssertStackTrace(e2.StackTrace, "Prop1.get");
-                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.AssertStackTrace(e2.StackTrace, "ThrownFromGetterProp1");
                     }
 
                     try {
@@ -18607,7 +18605,6 @@ Bridge.$N1391Result =                     r;
                     catch (e3) {
                         e3 = System.Exception.create(e3);
                         Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.AssertStackTrace(e3.StackTrace, "Prop1.set");
-                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.AssertStackTrace(e3.StackTrace, "ThrownFromSetterProp1");
                     }
                 },
                 AssertStackTrace: function (stack, fragment) {

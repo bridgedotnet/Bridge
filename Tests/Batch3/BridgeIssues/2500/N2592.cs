@@ -53,7 +53,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             catch (Exception e)
             {
                 AssertStackTrace(e.StackTrace, "MethodThrowsException2");
-                AssertStackTrace(e.StackTrace, "ThrownFromMethod2");
             }
 
             try
@@ -64,7 +63,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             catch (Exception e)
             {
                 AssertStackTrace(e.StackTrace, "Prop1.get");
-                AssertStackTrace(e.StackTrace, "ThrownFromGetterProp1");
             }
 
             try
@@ -75,7 +73,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             catch (Exception e)
             {
                 AssertStackTrace(e.StackTrace, "Prop1.set");
-                AssertStackTrace(e.StackTrace, "ThrownFromSetterProp1");
             }
         }
 
