@@ -236,24 +236,23 @@
             }
 
             if (!v || !(v.get || v.set)) {
-                var backingField = "$BackingField$" + cls.$$name + "$" + name;
-                Object.defineProperty(scope, backingField,
-                {
-                    writable: true,
-                    enumerable: false,
-                    configurable: false,
-                    value: v
-                });
+                var backingField = Bridge.getTypeAlias(cls) + "$" + name;
 
-                (function (cfg, scope, backingField) {
+                cls.$init = cls.$init || {};
+                if (statics) {
+                    cls.$init[backingField] = v;
+                }
+
+                (function (cfg, scope, backingField, v) {
                     cfg.get = function () {
-                        return this[backingField];
+                        var o = this.$init[backingField];
+                        return o === undefined ? v : o;
                     };
 
                     cfg.set = function (value) {
-                        this[backingField] = value;
+                        this.$init[backingField] = value;
                     };
-                })(cfg, scope, backingField);
+                })(cfg, scope, backingField, v);
             }
 
             Object.defineProperty(scope, name, cfg);
@@ -801,7 +800,7 @@
             return result;
         },
 
-        apply: function (obj, values) {
+        apply: function (obj, values, callback) {
             var names = Bridge.getPropertyNames(values, true),
                 i;
 
@@ -813,6 +812,10 @@
                 } else {
                     obj[name] = values[name];
                 }
+            }
+
+            if (callback) {
+                callback.call(obj, obj);
             }
 
             return obj;
@@ -846,18 +849,7 @@
                 to instanceof String || Bridge.isString(to) ||
                 to instanceof Function || Bridge.isFunction(to) ||
                 to instanceof Date || Bridge.isDate(to) ||
-                to instanceof System.Double ||
-                to instanceof System.Single ||
-                to instanceof System.Byte ||
-                to instanceof System.SByte ||
-                to instanceof System.Int16 ||
-                to instanceof System.UInt16 ||
-                to instanceof System.Int32 ||
-                to instanceof System.UInt32 ||
-                to instanceof Bridge.Int ||
-                to instanceof System.Decimal ||
-                to instanceof System.Int64 ||
-                to instanceof System.UInt64) {
+                Bridge.getType(to).$number) {
                 return from;
             }
 
