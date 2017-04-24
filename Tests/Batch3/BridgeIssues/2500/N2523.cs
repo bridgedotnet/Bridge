@@ -18,6 +18,16 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
         }
 
+        class Class1Workaround
+        {
+            public static async Task<object> ReturnObject(Class2 class2)
+            {
+                await (class2?.ReturnObject2());
+
+                return new object();
+            }
+        }
+
         class Class2
         {
             public Task<object> ReturnObject2()
@@ -34,6 +44,15 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             var done = Assert.Async();
             var result = await Class1.ReturnObject(new Class2());
+            Assert.NotNull(result);
+            done();
+        }
+
+        [Test]
+        public static async void TestAsyncConditionalAccessWorkaround()
+        {
+            var done = Assert.Async();
+            var result = await Class1Workaround.ReturnObject(new Class2());
             Assert.NotNull(result);
             done();
         }
