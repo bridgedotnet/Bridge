@@ -274,6 +274,16 @@
                 })(cfg, scope, backingField, v);
             }
 
+            var isFF = Bridge.Browser.firefoxVersion > 0
+
+            if (!alias && cfg.get) {
+                Object.defineProperty(cfg.get, isFF ? "displayName" : "name", { value: cls.$$name + "." + name + ".get", writable: true });
+            }
+
+            if (!alias && cfg.set) {
+                Object.defineProperty(cfg.set, isFF ? "displayName" : "name", { value: cls.$$name + "." + name + ".set", writable: true });
+            }
+
             Object.defineProperty(scope, name, cfg);
 
             return cfg;
@@ -703,6 +713,12 @@
                 type = Object;
             }
 
+            var tt = typeof type;
+
+            if (tt === "boolean") {
+                return type;
+            }
+
             if (obj.$boxed) {
                 if (obj.type.$kind === "enum" && (obj.type.prototype.$utype === type || type === System.Enum || type === System.IFormattable || type === System.IComparable)) {
                     return true;
@@ -761,12 +777,6 @@
                 }
 
                 return false;
-            }
-
-            var tt = typeof type;
-
-            if (tt === "boolean") {
-                return type;
             }
 
             if (tt === "string") {
@@ -1146,6 +1156,8 @@
 
             if (b && Bridge.isFunction(b.equals) && b.equals.length === 1) {
                 return b.equals(a);
+            } if (Bridge.isFunction(a) && Bridge.isFunction(b)) {
+                return Bridge.fn.equals.call(a, b);
             } else if (Bridge.isDate(a) && Bridge.isDate(b)) {
                 return a.valueOf() === b.valueOf();
             } else if (Bridge.isNull(a) && Bridge.isNull(b)) {
@@ -1339,6 +1351,10 @@
                 return b[name](a);
             }
 
+            if (Bridge.isFunction(a) && Bridge.isFunction(b)) {
+                return Bridge.fn.equals.call(a, b);
+            }
+
             return a.equalsT ? a.equalsT(b) : b.equalsT(a);
         },
 
@@ -1434,7 +1450,7 @@
                     return false;
                 }
 
-                return this.equals === fn.equals && this.$method === fn.$method && this.$scope === fn.$scope;
+                return this.equals && (this.equals === fn.equals) && this.$method && (this.$method === fn.$method) && this.$scope && (this.$scope === fn.$scope);
             },
 
             call: function (obj, fnName) {
@@ -2536,6 +2552,8 @@
             }
 
             Class.$$name = className;
+            Object.defineProperty(Class, "name", { value: className });
+            Object.defineProperty(Class.constructor, "name", { value: className });
             Class.$kind = prop.$kind;
 
             if (gCfg && isGenericInstance) {
@@ -2609,7 +2627,8 @@
 
             prop.$initialize = Bridge.Class._initialize;
 
-            var keys = [];
+            var keys = [],
+                isFF = Bridge.Browser.firefoxVersion > 0;
 
             for (name in prop) {
                 keys.push(name);
@@ -2626,13 +2645,18 @@
                     isCtor = true;
                 }
 
+                var member = prop[name];
                 if (isCtor) {
-                    Class[ctorName] = prop[name];
+                    Class[ctorName] = member;
                     Class[ctorName].prototype = prototype;
                     Class[ctorName].prototype.constructor = Class;
-                    prototype[ctorName] = prop[name];
+                    prototype[ctorName] = member;
                 } else {
-                    prototype[ctorName] = prop[name];
+                    prototype[ctorName] = member;
+                }
+
+                if (typeof member === "function" && name !== "$main") {
+                    Object.defineProperty(member, isFF ? "displayName" : "name", { value: className + "." + name, writable: true });
                 }
             }
 
@@ -2644,10 +2668,15 @@
 
             if (statics) {
                 for (name in statics) {
+                    var member = statics[name];
                     if (name === "ctor") {
-                        Class["$ctor"] = statics[name];
+                        Class["$ctor"] = member;
                     } else {
-                        Class[name] = statics[name];
+                        Class[name] = member;
+                    }
+
+                    if (typeof member === "function") {
+                        Object.defineProperty(member, isFF ? "displayName" : "name", { value: className + "." + name, writable: true });
                     }
                 }
             }
@@ -2728,6 +2757,10 @@
             }
 
             return Class;
+        },
+
+        toCtorString: function() {
+            return Bridge.Reflection.getTypeName(this);
         },
 
         createInheritors: function(cls, extend) {
@@ -5072,8 +5105,8 @@ Bridge.define("System.Exception", {
             this.$initialize();
             this.message = message ? message : ("Exception of type '" + Bridge.getTypeName(this) + "' was thrown.");
             this.innerException = innerException ? innerException : null;
-            this.errorStack = new Error();
-            this.data = new(System.Collections.Generic.Dictionary$2(System.Object, System.Object))();
+            this.errorStack = new Error(this.message);
+            this.data = new (System.Collections.Generic.Dictionary$2(System.Object, System.Object))();
         },
 
         getBaseException: function() {
@@ -5108,16 +5141,19 @@ Bridge.define("System.Exception", {
                 if (Bridge.is(error, System.Exception)) {
                     return error;
                 }
-
+                var ex;
                 if (error instanceof TypeError) {
-                    return new System.NullReferenceException(error.message, new Bridge.ErrorException(error));
+                    ex = new System.NullReferenceException(error.message, new Bridge.ErrorException(error));
                 } else if (error instanceof RangeError) {
-                    return new System.ArgumentOutOfRangeException(null, error.message, new Bridge.ErrorException(error));
+                    ex = new System.ArgumentOutOfRangeException(null, error.message, new Bridge.ErrorException(error));
                 } else if (error instanceof Error) {
                     return new Bridge.ErrorException(error);
                 } else {
-                    return new System.Exception(error ? error.toString() : null);
+                    ex = new System.Exception(error ? error.toString() : null);
                 }
+
+                ex.errorStack = error;
+                return ex;
             }
         }
     });
@@ -11589,7 +11625,10 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 } else if (Bridge.isDefined(y, true)) {
                     var isBridge = x && x.$$name;
 
-                    if (!isBridge || x && x.$boxed || y && y.$boxed) {
+                    if (Bridge.isFunction(x) && Bridge.isFunction(y)) {
+                        return Bridge.fn.equals.call(x, y);
+                    }
+                    else if (!isBridge || x && x.$boxed || y && y.$boxed) {
                         return Bridge.equals(x, y);
                     }
                     else if (Bridge.isFunction(x.equalsT)) {
