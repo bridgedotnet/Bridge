@@ -125,7 +125,8 @@ namespace Bridge.Translator
             if ((!this.WrapByFn.HasValue || this.WrapByFn.Value) && (this.BlockStatement.Parent is ForStatement ||
                      this.BlockStatement.Parent is ForeachStatement ||
                      this.BlockStatement.Parent is WhileStatement ||
-                     this.BlockStatement.Parent is DoWhileStatement))
+                     this.BlockStatement.Parent is DoWhileStatement) &&
+                     (!this.Emitter.IsAsync || this.GetAwaiters(this.BlockStatement.Parent).Length == 0))
             {
                 var visitor = new LambdaVisitor(true, this.Emitter);
                 this.BlockStatement.AcceptVisitor(visitor);

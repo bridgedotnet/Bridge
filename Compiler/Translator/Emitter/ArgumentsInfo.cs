@@ -626,8 +626,8 @@ namespace Bridge.Translator
                         result[index] = namedArg.Expression;
                         names[index] = namedArg.Name;
                         named = true;
-
-                        if (paramsArg == null && (parameters.Count > (i + shift)) && parameters[i + shift].IsParams)
+                        
+                        if (paramsArg == null && parameters.FirstOrDefault(p => p.Name == namedArg.Name).IsParams)
                         {
                             if (resolveResult.Member.DeclaringTypeDefinition == null || !this.Emitter.Validator.IsExternalType(resolveResult.Member.DeclaringTypeDefinition))
                             {
