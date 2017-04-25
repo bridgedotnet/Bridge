@@ -10675,7 +10675,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestOperatorTemplate: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2574).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2574, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestOperatorTemplate()", $t.Line = "26", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2574).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2574, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestOperatorTemplate()", $t.Line = "23", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2574.TestOperatorTemplate();
                 }
             }

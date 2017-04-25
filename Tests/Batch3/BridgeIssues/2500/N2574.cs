@@ -15,18 +15,15 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             public int Yes = 7;
         }
 
-        static A Cool(int k)
+        static A Cool()
         {
-            if (k != 3)
-                return new A { Yes = 5 };
-            else
-                return -1;
+            return -1;
         }
 
         [Test]
         public static void TestOperatorTemplate()
         {
-            Assert.AreEqual(6, Bridge2574.Cool(3).Yes);
+            Assert.AreEqual(6, Bridge2574.Cool().Yes);
         }
     }
 }

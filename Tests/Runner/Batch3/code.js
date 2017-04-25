@@ -18553,16 +18553,11 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2574", {
         statics: {
             methods: {
-                Cool: function (k) {
-                    var $t;
-                    if (k !== 3) {
-                        return ($t=new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2574.A(), $t.Yes = 5, $t);
-                    } else {
-                        return {Yes:6};
-                    }
+                Cool: function () {
+                    return {Yes:6};
                 },
                 TestOperatorTemplate: function () {
-                    Bridge.Test.NUnit.Assert.AreEqual(6, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2574.Cool(3).Yes);
+                    Bridge.Test.NUnit.Assert.AreEqual(6, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2574.Cool().Yes);
                 }
             }
         }
