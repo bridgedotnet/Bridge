@@ -544,7 +544,7 @@ namespace Bridge.Translator
                         requireNewLine = false;
                     }
 
-                    this.Write(JS.Funcs.BRIDGE_MERGE);
+                    this.Write(JS.Types.Bridge.APPLY);
                     this.WriteOpenParentheses();
 
                     this.Write("this, ");

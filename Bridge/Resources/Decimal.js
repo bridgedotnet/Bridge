@@ -39,6 +39,7 @@
         this.value = System.Decimal.getValue(v);
     }
 
+    System.Decimal.$number = true;
     System.Decimal.$$name = "System.Decimal";
     System.Decimal.prototype.$$name = "System.Decimal";
     System.Decimal.$kind = "struct";

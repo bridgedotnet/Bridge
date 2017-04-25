@@ -236,24 +236,33 @@
             }
 
             if (!v || !(v.get || v.set)) {
-                var backingField = "$BackingField$" + cls.$$name + "$" + name;
-                Object.defineProperty(scope, backingField,
-                {
-                    writable: true,
-                    enumerable: false,
-                    configurable: false,
-                    value: v
-                });
+                var backingField = Bridge.getTypeAlias(cls) + "$" + name;
 
-                (function (cfg, scope, backingField) {
+                cls.$init = cls.$init || {};
+                if (statics) {
+                    cls.$init[backingField] = v;
+                }
+
+                (function (cfg, scope, backingField, v) {
                     cfg.get = function () {
-                        return this[backingField];
+                        var o = this.$init[backingField];
+                        return o === undefined ? v : o;
                     };
 
                     cfg.set = function (value) {
-                        this[backingField] = value;
+                        this.$init[backingField] = value;
                     };
-                })(cfg, scope, backingField);
+                })(cfg, scope, backingField, v);
+            }
+
+            var isFF = Bridge.Browser.firefoxVersion > 0
+
+            if (!alias && cfg.get) {
+                Object.defineProperty(cfg.get, isFF ? "displayName" : "name", { value: cls.$$name + "." + name + ".get", writable: true });
+            }
+
+            if (!alias && cfg.set) {
+                Object.defineProperty(cfg.set, isFF ? "displayName" : "name", { value: cls.$$name + "." + name + ".set", writable: true });
             }
 
             Object.defineProperty(scope, name, cfg);
@@ -685,6 +694,12 @@
                 type = Object;
             }
 
+            var tt = typeof type;
+
+            if (tt === "boolean") {
+                return type;
+            }
+
             if (obj.$boxed) {
                 if (obj.type.$kind === "enum" && (obj.type.prototype.$utype === type || type === System.Enum || type === System.IFormattable || type === System.IComparable)) {
                     return true;
@@ -745,12 +760,6 @@
                 return false;
             }
 
-            var tt = typeof type;
-
-            if (tt === "boolean") {
-                return type;
-            }
-
             if (tt === "string") {
                 type = Bridge.unroll(type);
             }
@@ -801,7 +810,7 @@
             return result;
         },
 
-        apply: function (obj, values) {
+        apply: function (obj, values, callback) {
             var names = Bridge.getPropertyNames(values, true),
                 i;
 
@@ -813,6 +822,10 @@
                 } else {
                     obj[name] = values[name];
                 }
+            }
+
+            if (callback) {
+                callback.call(obj, obj);
             }
 
             return obj;
@@ -846,18 +859,7 @@
                 to instanceof String || Bridge.isString(to) ||
                 to instanceof Function || Bridge.isFunction(to) ||
                 to instanceof Date || Bridge.isDate(to) ||
-                to instanceof System.Double ||
-                to instanceof System.Single ||
-                to instanceof System.Byte ||
-                to instanceof System.SByte ||
-                to instanceof System.Int16 ||
-                to instanceof System.UInt16 ||
-                to instanceof System.Int32 ||
-                to instanceof System.UInt32 ||
-                to instanceof Bridge.Int ||
-                to instanceof System.Decimal ||
-                to instanceof System.Int64 ||
-                to instanceof System.UInt64) {
+                Bridge.getType(to).$number) {
                 return from;
             }
 
@@ -1135,6 +1137,8 @@
 
             if (b && Bridge.isFunction(b.equals) && b.equals.length === 1) {
                 return b.equals(a);
+            } if (Bridge.isFunction(a) && Bridge.isFunction(b)) {
+                return Bridge.fn.equals.call(a, b);
             } else if (Bridge.isDate(a) && Bridge.isDate(b)) {
                 return a.valueOf() === b.valueOf();
             } else if (Bridge.isNull(a) && Bridge.isNull(b)) {
@@ -1328,6 +1332,10 @@
                 return b[name](a);
             }
 
+            if (Bridge.isFunction(a) && Bridge.isFunction(b)) {
+                return Bridge.fn.equals.call(a, b);
+            }
+
             return a.equalsT ? a.equalsT(b) : b.equalsT(a);
         },
 
@@ -1423,7 +1431,7 @@
                     return false;
                 }
 
-                return this.equals === fn.equals && this.$method === fn.$method && this.$scope === fn.$scope;
+                return this.equals && (this.equals === fn.equals) && this.$method && (this.$method === fn.$method) && this.$scope && (this.$scope === fn.$scope);
             },
 
             call: function (obj, fnName) {
