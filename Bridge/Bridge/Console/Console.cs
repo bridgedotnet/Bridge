@@ -423,13 +423,13 @@ namespace Bridge.Utils
                 {
                     //@ v = JSON.stringify(value);
                 }
+            }
 
-                if (self.BufferedOutput != null)
-                {
-                    self.BufferedOutput += v;
+            if (self.BufferedOutput != null)
+            {
+                self.BufferedOutput += v;
 
-                    return;
-                }
+                return;
             }
 
             Show();

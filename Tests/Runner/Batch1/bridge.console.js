@@ -78,12 +78,12 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                         } else {
                             v = JSON.stringify(value);
                         }
+                    }
 
-                        if (self.bufferedOutput != null) {
-                            self.bufferedOutput = System.String.concat(self.bufferedOutput, v);
+                    if (self.bufferedOutput != null) {
+                        self.bufferedOutput = System.String.concat(self.bufferedOutput, v);
 
-                            return;
-                        }
+                        return;
                     }
 
                     Bridge.Console.show();
