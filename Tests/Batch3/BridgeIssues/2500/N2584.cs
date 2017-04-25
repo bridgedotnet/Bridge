@@ -41,7 +41,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual("s_field4", fields[2].Name);
 
             fields = typeof(Class1).GetFields();
-            Assert.AreEqual(8, fields.Length);
+            Assert.AreEqual(2, fields.Length);
 
             fields = typeof(Class1).GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
             Assert.AreEqual(8, fields.Length);

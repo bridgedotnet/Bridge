@@ -18565,7 +18565,7 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.AreEqual("s_field4", fields[System.Array.index(2, fields)].n);
 
                     fields = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2584.Class1, 4, 60);
-                    Bridge.Test.NUnit.Assert.AreEqual(8, fields.length);
+                    Bridge.Test.NUnit.Assert.AreEqual(2, fields.length);
 
                     fields = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2584.Class1, 4, 60);
                     Bridge.Test.NUnit.Assert.AreEqual(8, fields.length);
