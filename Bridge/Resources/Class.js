@@ -145,6 +145,7 @@
 
             if (obj.main) {
                 result.$main = obj.main;
+                delete obj.main;
             }
 
             copy(obj, result);
