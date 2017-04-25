@@ -389,9 +389,7 @@
     <Content Include="Resources\.generated\system\formattableStringImpl.js" />
     <Content Include="Resources\.generated\system\guid.js" />
     <Content Include="Resources\.generated\system\random.js" />
-    <Content Include="Resources\.generated\system\regexMatchTimeoutException.js" />
     <Content Include="Resources\.generated\system\runtime\compilerServices\formattableStringFactory.js" />
-    <Content Include="Resources\.generated\system\text\regularExpressions\regex.js" />
     <Content Include="Resources\.generated\system\threading\timer.js" />
     <Content Include="Resources\.generated\system\version.js" />
     <Content Include="Resources\.generated\system\version\parseFailureKind.js" />
