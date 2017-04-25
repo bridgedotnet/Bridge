@@ -192,7 +192,7 @@ namespace Bridge.Utils
         }
 
         [Init(InitPosition.After)]
-        public static void End()
+        public static void InitConsoleFunctions()
         {
             var wl = Script.ToDynamic().System.Console.WriteLine;
             var debug = Script.ToDynamic().System.Diagnostics.Debug.writeln;
@@ -217,7 +217,6 @@ namespace Bridge.Utils
                     }
                  */
             }
-
 
             if (con && con.error)
             {

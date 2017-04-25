@@ -18,7 +18,7 @@
                 }
             },
             methods: {
-                end: function () {
+                initConsoleFunctions: function () {
                     var wl = System.Console.WriteLine;
                     var debug = System.Diagnostics.Debug.writeln;
                     var con = Bridge.global.console;
@@ -36,7 +36,6 @@
                             Bridge.Console.debug(value);
                         }
                     }
-
 
                     if (con && con.error) {
                         Bridge.global.console.error = function (msg) {
@@ -461,4 +460,4 @@
         }
     });
 
-    Bridge.init(function () { Bridge.Console.end(); });
+    Bridge.init(function () { Bridge.Console.initConsoleFunctions(); });
