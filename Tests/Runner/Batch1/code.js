@@ -4858,19 +4858,19 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Console.log("Hide/Log");
                 this.AssertMessage("#1 - ", "Hide/Log");
 
-                Bridge.Console.Instance.close();
-                Bridge.Console.Instance.close();
+                Bridge.Console.instance.close();
+                Bridge.Console.instance.close();
                 Bridge.Console.hide();
                 Bridge.Console.log("Close/Close/Hide/Log");
                 this.AssertMessage("#2 - ", "Close/Close/Hide/Log");
 
-                Bridge.Console.Instance.close();
+                Bridge.Console.instance.close();
                 Bridge.Console.hide();
                 Bridge.Console.hide();
                 Bridge.Console.log("Close/Hide/Hide/Log");
                 this.AssertMessage("#3 - ", "Close/Hide/Hide/Log");
 
-                Bridge.Console.Instance.close();
+                Bridge.Console.instance.close();
                 Bridge.Console.hide();
                 Bridge.Console.show();
                 Bridge.Console.show();
@@ -4903,7 +4903,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             AssertMessage: function (description, expected, color) {
                 if (color === void 0) { color = "#555"; }
-                var el = Bridge.as(Bridge.Console.Instance.currentMessageElement, HTMLLIElement);
+                var el = Bridge.as(Bridge.Console.instance.currentMessageElement, HTMLLIElement);
 
                 if (el == null) {
                     Bridge.Test.NUnit.Assert.Fail$1(System.String.concat(description, "Could not get current message as HTMLLIElement"));
@@ -15486,7 +15486,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 sb.appendLine();
                 sb.append("};");
 
-                Bridge.Console.log(sb.toString());
+                System.Console.WriteLine(sb.toString());
             }
         }
     });
@@ -23993,7 +23993,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     }
                     catch (ex) {
                         ex = System.Exception.create(ex);
-                        Bridge.Console.log(ex.toString());
+                        System.Console.WriteLine(ex.toString());
                     }
 
                     observer.disconnect();

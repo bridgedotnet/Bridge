@@ -31,7 +31,6 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                 end: function () {
                     var wl = System.Console.WriteLine;
                     var debug = System.Diagnostics.Debug.writeln;
-                    var win = Bridge.global.window;
                     var con = Bridge.global.console;
 
                     if (wl) {
@@ -48,33 +47,20 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                         }
                     }
 
-                    if (win) {
-                        Bridge.global.window.addEventListener("error", function (e) {
-                            if (e.message) {
-                                var msg = e.message;
-
-                                if (e.filename) {
-                                    msg += "\n    at <a style=\"color:#d65050\" target=\"_blank\" href=\"" + e.filename + "\">" + e.filename + "</a>";
-
-                                    if (e.lineno) {
-                                        msg += ":" + e.lineno;
-                                    }
-
-                                    if (e.colno) {
-                                        msg += ":" + e.colno;
-                                    }
-                                }
-
-                                Bridge.Console.error(msg);
-                            }
-                        });
-                    }
 
                     if (con && con.error) {
                         Bridge.global.console.error = function (msg) {
                             error(msg);
                             Bridge.Console.error(msg);
                         }
+                    }
+
+                    if (Bridge.isDefined(Bridge.global.window)) {
+                        Bridge.global.window.addEventListener("error", function (e) {
+                            if (e.message) {
+                                Bridge.Console.error(e.message);
+                            }
+                        });
                     }
                 },
                 logBase: function (value, messageType) {
@@ -85,11 +71,12 @@ Bridge.assembly("Bridge", function ($asm, globals) {
 
                     if (value != null) {
                         t = typeof value !== "object";
+                        var name = Bridge.Reflection.getTypeFullName(Bridge.getType(value));
 
-                        if (Bridge.getType(value).IsPrimitive || t) {
+                        if (!System.String.equals(name, "System.Object") && (System.String.startsWith(name, "System") || t)) {
                             v = value == null ? "" : value.toString();
                         } else {
-                            v = JSON.stringify(Bridge.unbox(value));
+                            v = JSON.stringify(value);
                         }
 
                         if (self.bufferedOutput != null) {
