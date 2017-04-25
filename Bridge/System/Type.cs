@@ -198,79 +198,79 @@ namespace System
         [Template("Bridge.Reflection.isInstanceOfType({instance}, {type})")]
         public static extern bool IsInstanceOfType(object instance, Type type);
 
-        [Template("Bridge.Reflection.getMembers({this}, 31, 60)")]
+        [Template("Bridge.Reflection.getMembers({this}, 31, 28)")]
         public extern MemberInfo[] GetMembers();
 
         [Template("Bridge.Reflection.getMembers({this}, 31, {bindingAttr})")]
         public extern MemberInfo[] GetMembers(BindingFlags bindingAttr);
 
-        [Template("Bridge.Reflection.getMembers({this}, 31, 60, {name})")]
+        [Template("Bridge.Reflection.getMembers({this}, 31, 28, {name})")]
         public extern MemberInfo[] GetMember(string name);
 
         [Template("Bridge.Reflection.getMembers({this}, 31, {bindingAttr}, {name})")]
         public extern MemberInfo[] GetMember(string name, BindingFlags bindingAttr);
 
-        [Template("Bridge.Reflection.getMembers({this}, 1, 60)")]
+        [Template("Bridge.Reflection.getMembers({this}, 1, 28)")]
         public extern ConstructorInfo[] GetConstructors();
 
-        [Template("Bridge.Reflection.getMembers({this}, 1, 316, null, {parameterTypes})")]
+        [Template("Bridge.Reflection.getMembers({this}, 1, 284, null, {parameterTypes})")]
         public extern ConstructorInfo GetConstructor(Type[] parameterTypes);
 
-        [Template("Bridge.Reflection.getMembers({this}, 8, 60)")]
+        [Template("Bridge.Reflection.getMembers({this}, 8, 28)")]
         public extern MethodInfo[] GetMethods();
 
         [Template("Bridge.Reflection.getMembers({this}, 8, {bindingAttr})")]
         public extern MethodInfo[] GetMethods(BindingFlags bindingAttr);
 
-        [Template("Bridge.Reflection.getMembers({this}, 8, 316, {name})")]
+        [Template("Bridge.Reflection.getMembers({this}, 8, 284, {name})")]
         public extern MethodInfo GetMethod(string name);
 
         [Template("Bridge.Reflection.getMembers({this}, 8, {bindingAttr} | 256, {name})")]
         public extern MethodInfo GetMethod(string name, BindingFlags bindingAttr);
 
-        [Template("Bridge.Reflection.getMembers({this}, 8, 316, {name}, {parameterTypes})")]
+        [Template("Bridge.Reflection.getMembers({this}, 8, 284, {name}, {parameterTypes})")]
         public extern MethodInfo GetMethod(string name, Type[] parameterTypes);
 
         [Template("Bridge.Reflection.getMembers({this}, 8, {bindingAttr} | 256, {name}, {parameterTypes})")]
         public extern MethodInfo GetMethod(string name, BindingFlags bindingAttr, Type[] parameterTypes);
 
-        [Template("Bridge.Reflection.getMembers({this}, 16, 60)")]
+        [Template("Bridge.Reflection.getMembers({this}, 16, 28)")]
         public extern PropertyInfo[] GetProperties();
 
         [Template("Bridge.Reflection.getMembers({this}, 16, {bindingAttr})")]
         public extern PropertyInfo[] GetProperties(BindingFlags bindingAttr);
 
-        [Template("Bridge.Reflection.getMembers({this}, 16, 316, {name})")]
+        [Template("Bridge.Reflection.getMembers({this}, 16, 284, {name})")]
         public extern PropertyInfo GetProperty(string name);
 
         [Template("Bridge.Reflection.getMembers({this}, 16, {bindingAttr} | 256, {name})")]
         public extern PropertyInfo GetProperty(string name, BindingFlags bindingAttr);
 
-        [Template("Bridge.Reflection.getMembers({this}, 16, 316, {name}, {parameterTypes})")]
+        [Template("Bridge.Reflection.getMembers({this}, 16, 284, {name}, {parameterTypes})")]
         public extern PropertyInfo GetProperty(string name, Type[] parameterTypes);
 
         [Template("Bridge.Reflection.getMembers({this}, 16, {bindingAttr} | 256, {name}, {parameterTypes})")]
         public extern PropertyInfo GetProperty(string name, BindingFlags bindingAttr, Type[] parameterTypes);
 
-        [Template("Bridge.Reflection.getMembers({this}, 2, 60)")]
+        [Template("Bridge.Reflection.getMembers({this}, 2, 28)")]
         public extern EventInfo[] GetEvents();
 
         [Template("Bridge.Reflection.getMembers({this}, 2, {bindingAttr})")]
         public extern EventInfo[] GetEvents(BindingFlags bindingAttr);
 
-        [Template("Bridge.Reflection.getMembers({this}, 2, 316, {name})")]
+        [Template("Bridge.Reflection.getMembers({this}, 2, 284, {name})")]
         public extern EventInfo GetEvent(string name);
 
         [Template("Bridge.Reflection.getMembers({this}, 2, {bindingAttr} | 256, {name})")]
         public extern EventInfo GetEvent(string name, BindingFlags bindingAttr);
 
-        [Template("Bridge.Reflection.getMembers({this}, 4, 60)")]
+        [Template("Bridge.Reflection.getMembers({this}, 4, 28)")]
         public extern FieldInfo[] GetFields();
 
         [Template("Bridge.Reflection.getMembers({this}, 4, {bindingAttr})")]
         public extern FieldInfo[] GetFields(BindingFlags bindingAttr);
 
-        [Template("Bridge.Reflection.getMembers({this}, 4, 316, {name})")]
+        [Template("Bridge.Reflection.getMembers({this}, 4, 284, {name})")]
         public extern FieldInfo GetField(string name);
 
         [Template("Bridge.Reflection.getMembers({this}, 4, {bindingAttr} | 256, {name})")]

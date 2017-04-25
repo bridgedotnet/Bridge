@@ -8430,7 +8430,7 @@ Bridge.$N1391Result =                     r;
         },
         methods: {
             TestReflectionForNativeTypes: function () {
-                var t = Bridge.Reflection.getMembers(console, 8, 316, "WriteLine", System.Array.init([System.String], Function));
+                var t = Bridge.Reflection.getMembers(console, 8, 284, "WriteLine", System.Array.init([System.String], Function));
 
                 Bridge.Test.NUnit.Assert.NotNull$1(t, "Not null");
                 Bridge.Test.NUnit.Assert.True$1((t.a === 2), "IsPublic");
@@ -11869,10 +11869,11 @@ Bridge.$N1391Result =                     r;
         methods: {
             TestOutParamInMetadata: function () {
                 var $t, $t1, $t2, $t3;
-                Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(($t = (Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1900, 8, 316, "TryGetValue1").p || []))[System.Array.index(0, $t)], System.Int32));
-                Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(($t1 = (Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1900, 8, 316, "TryGetValue2").p || []))[System.Array.index(1, $t1)], System.String));
-                Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(($t2 = (Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1900, 8, 316, "TestOutRef").p || []))[System.Array.index(1, $t2)], System.String));
-                Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(($t3 = (Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1900, 8, 316, "GetValue").p || []))[System.Array.index(0, $t3)], System.Object));
+                var flags = 40;
+                Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(($t = (Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1900, 8, flags | 256, "TryGetValue1").p || []))[System.Array.index(0, $t)], System.Int32));
+                Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(($t1 = (Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1900, 8, flags | 256, "TryGetValue2").p || []))[System.Array.index(1, $t1)], System.String));
+                Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(($t2 = (Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1900, 8, flags | 256, "TestOutRef").p || []))[System.Array.index(1, $t2)], System.String));
+                Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(($t3 = (Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1900, 8, 284, "GetValue").p || []))[System.Array.index(0, $t3)], System.Object));
             }
         }
     });
@@ -12543,7 +12544,7 @@ Bridge.$N1391Result =                     r;
             TestRunClassConstructor: function () {
                 var type1 = Bridge.Reflection.getType("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1970.Test, Bridge.ClientTest.Batch3");
 
-                Bridge.Test.NUnit.Assert.AreEqual(true, Bridge.unbox(Bridge.Reflection.fieldAccess(Bridge.Reflection.getMembers(type1, 4, 316, "IsInitialized"), null)));
+                Bridge.Test.NUnit.Assert.AreEqual(true, Bridge.unbox(Bridge.Reflection.fieldAccess(Bridge.Reflection.getMembers(type1, 4, 284, "IsInitialized"), null)));
             }
         }
     });
@@ -13930,26 +13931,26 @@ Bridge.$N1391Result =                     r;
                 TestObjectLiteralReflection: function () {
                     var $t;
                     var ol = {  };
-                    var props = System.Linq.Enumerable.from(Bridge.Reflection.getMembers(Bridge.getType(ol), 16, 60)).select($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.f1).toArray();
+                    var props = System.Linq.Enumerable.from(Bridge.Reflection.getMembers(Bridge.getType(ol), 16, 28)).select($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.f1).toArray();
                     Bridge.Test.NUnit.Assert.AreEqual(0, props.length);
 
                     var obj = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.T();
-                    props = System.Linq.Enumerable.from(Bridge.Reflection.getMembers(Bridge.getType(obj), 16, 60)).select($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.f1).toArray();
+                    props = System.Linq.Enumerable.from(Bridge.Reflection.getMembers(Bridge.getType(obj), 16, 28)).select($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.f1).toArray();
                     Bridge.Test.NUnit.Assert.AreEqual(1, props.length);
                     Bridge.Test.NUnit.Assert.AreEqual("ShouldSeeThis", props[System.Array.index(0, props)]);
 
                     var ol1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.OL1.ctor();
-                    props = System.Linq.Enumerable.from(Bridge.Reflection.getMembers(Bridge.getType(ol1), 16, 60)).select($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.f1).toArray();
+                    props = System.Linq.Enumerable.from(Bridge.Reflection.getMembers(Bridge.getType(ol1), 16, 28)).select($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.f1).toArray();
                     Bridge.Test.NUnit.Assert.AreEqual(1, props.length);
                     Bridge.Test.NUnit.Assert.AreEqual("ShouldSeeThis1", props[System.Array.index(0, props)]);
 
                     var ol2 = ($t=Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.OL2.ctor(), $t.ShouldSeeThis2 = 2, $t);
-                    props = System.Linq.Enumerable.from(Bridge.Reflection.getMembers(Bridge.getType(ol2), 16, 60)).select($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.f1).toArray();
+                    props = System.Linq.Enumerable.from(Bridge.Reflection.getMembers(Bridge.getType(ol2), 16, 28)).select($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2088.f1).toArray();
                     Bridge.Test.NUnit.Assert.AreEqual(2, props.length);
                     Bridge.Test.NUnit.Assert.AreEqual("ShouldSeeThis1", props[System.Array.index(0, props)]);
                     Bridge.Test.NUnit.Assert.AreEqual("ShouldSeeThis2", props[System.Array.index(1, props)]);
 
-                    Bridge.Test.NUnit.Assert.AreEqual(2, Bridge.unbox(Bridge.Reflection.midel(Bridge.Reflection.getMembers(Bridge.getType(ol2), 16, 316, "ShouldSeeThis2").g, ol2)()));
+                    Bridge.Test.NUnit.Assert.AreEqual(2, Bridge.unbox(Bridge.Reflection.midel(Bridge.Reflection.getMembers(Bridge.getType(ol2), 16, 284, "ShouldSeeThis2").g, ol2)()));
                 }
             }
         }
@@ -15446,7 +15447,7 @@ Bridge.$N1391Result =                     r;
                     t = System.Array.type(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2220);
                     Bridge.Test.NUnit.Assert.True((!!t.$elementType));
 
-                    var mi = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2220, 8, 316, "Test");
+                    var mi = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2220, 8, 284, "Test");
                     var parms = (mi.pi || []);
 
                     t = parms[System.Array.index(0, parms)].pt;
@@ -16912,7 +16913,7 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNameofWithReflection: function () {
-                    var result = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2375.Person, 16, 316, "FirstName");
+                    var result = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2375.Person, 16, 284, "FirstName");
 
                     Bridge.Test.NUnit.Assert.AreEqual("Test value", Bridge.unbox(Bridge.Reflection.midel(result.g, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2375.Person())()));
                 }
@@ -17910,11 +17911,11 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestReflectableInherits: function () {
-                    Bridge.Test.NUnit.Assert.AreEqual$1(4, Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2489.BaseClass, 4, 316, "Field").t, "Should have Field in metadata as type has its own [Reflectable]");
-                    Bridge.Test.NUnit.Assert.AreEqual$1(4, Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2489.Bar, 4, 316, "Field00").t, "Should have Field in metadata as base type has [Reflectable] with Inherits = true");
-                    Bridge.Test.NUnit.Assert.AreEqual$1(4, Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2489.Bar1, 4, 316, "Field01").t, "Should have Field in metadata as type has its own [Reflectable]");
+                    Bridge.Test.NUnit.Assert.AreEqual$1(4, Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2489.BaseClass, 4, 284, "Field").t, "Should have Field in metadata as type has its own [Reflectable]");
+                    Bridge.Test.NUnit.Assert.AreEqual$1(4, Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2489.Bar, 4, 284, "Field00").t, "Should have Field in metadata as base type has [Reflectable] with Inherits = true");
+                    Bridge.Test.NUnit.Assert.AreEqual$1(4, Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2489.Bar1, 4, 284, "Field01").t, "Should have Field in metadata as type has its own [Reflectable]");
 
-                    Bridge.Test.NUnit.Assert.AreEqual$1(null, Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2489.Bar2, 4, 316, "Field02"), "Should NOT have Field in metadata as base type has [Reflectable] with Inherits = false");
+                    Bridge.Test.NUnit.Assert.AreEqual$1(null, Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2489.Bar2, 4, 284, "Field02"), "Should NOT have Field in metadata as base type has [Reflectable] with Inherits = false");
                 }
             }
         }
@@ -18564,7 +18565,7 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.AreEqual("s_field3", fields[System.Array.index(1, fields)].n);
                     Bridge.Test.NUnit.Assert.AreEqual("s_field4", fields[System.Array.index(2, fields)].n);
 
-                    fields = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2584.Class1, 4, 60);
+                    fields = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2584.Class1, 4, 28);
                     Bridge.Test.NUnit.Assert.AreEqual(2, fields.length);
 
                     fields = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2584.Class1, 4, 60);
