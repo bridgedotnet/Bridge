@@ -3256,7 +3256,7 @@
 
     Bridge.define("Bridge.Utils.SystemAssemblyVersion");
 
-    // @source Json.js
+    // @source JSON.js
 
     Bridge.Json = {
         serialize: function (obj, settings, returnRaw, possibleType) {
