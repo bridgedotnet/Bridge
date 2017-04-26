@@ -404,20 +404,18 @@ namespace Bridge.Utils
         {
             var self = Instance;
             var v = "";
-            var t = false;
 
             if (value != null)
             {
-                //@ t = typeof value !== "object";
-                var name = value.GetType().FullName;
+                bool isNativeToString = value.As<dynamic>().toString == (new object()).As<dynamic>().toString;
 
-                if (!name.Equals("System.Object") && (name.StartsWith("System") || t))
+                if (isNativeToString)
                 {
-                    v = value == null ? "" : value.ToString();
+                    v = Script.ToDynamic().JSON.stringify(value.As<dynamic>());
                 }
                 else
                 {
-                    //@ v = JSON.stringify(value);
+                    v = value.ToString();
                 }
             }
 
