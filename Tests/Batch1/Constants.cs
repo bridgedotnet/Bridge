@@ -98,7 +98,7 @@
         public const string MODULE_FUNCTIONS = "Functions";
         public const string MODULE_SERIALIZATION = "Serialization";
         public const string MODULE_BRIDGE_CONSOLE = "Bridge Console";
-        public const string MODULE_SYETM_CONSOLE = "System Console";
+        public const string MODULE_SYSTEM_CONSOLE = "System Console";
         public const string MODULE_OBJECTLITERAL = "[ObjectLiteral]";
 
         public const string IGNORE_DATE = null;
