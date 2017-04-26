@@ -195,6 +195,7 @@ namespace Bridge.Utils
         public static void InitConsoleFunctions()
         {
             var wl = Script.ToDynamic().System.Console.WriteLine;
+            var clr = Script.ToDynamic().System.Console.Clear;
             var debug = Script.ToDynamic().System.Diagnostics.Debug.writeln;
             var con = Script.ToDynamic().Bridge.global.console;
 
@@ -204,6 +205,16 @@ namespace Bridge.Utils
                     System.Console.WriteLine = function (value) {
                         wl(value);
                         Bridge.Console.log(value);
+                    }
+                 */
+            }
+
+            if (clr)
+            {
+                /*@
+                    System.Console.Clear = function () {
+                        clr();
+                        Bridge.Console.clear();
                     }
                  */
             }
@@ -437,6 +448,33 @@ namespace Bridge.Utils
         public static void Log(object value)
         {
             LogBase(value);
+        }
+
+        public static void Clear()
+        {
+            var self = instance;
+
+            if (self == null)
+            {
+                return;
+            }
+
+            var m = self.ConsoleMessages;
+
+            if (m != null)
+            {
+                while (m.firstChild != null)
+                {
+                    m.removeChild(m.firstChild);
+                }
+
+                self.CurrentMessageElement = null;
+            }
+
+            if (self.BufferedOutput != null)
+            {
+                self.BufferedOutput = "";
+            }
         }
 
         public static void Hide()

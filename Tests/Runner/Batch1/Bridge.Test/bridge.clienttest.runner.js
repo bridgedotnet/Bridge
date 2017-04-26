@@ -2399,6 +2399,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("StringBuilder - LengthPropertyWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.LengthPropertyWorks);
             QUnit.test("StringBuilder - StringBuilders", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.StringBuilders);
             QUnit.module("System Console");
+            QUnit.test("TestClear", Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests.TestClear);
             QUnit.test("TestWriteLine", Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests.TestWriteLine);
             QUnit.test("TestWriteLineBool", Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests.TestWriteLineBool);
             QUnit.test("TestWriteLineChar", Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests.TestWriteLineChar);
@@ -17653,9 +17654,19 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests)],
         statics: {
             methods: {
+                TestClear: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestClear()", $t.Line = "84", $t));
+                    try {
+                        t.Fixture.TestClear();
+                    }
+                    finally {
+                        t.TearDown();
+                    }
+                },
                 TestWriteLine: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLine()", $t.Line = "81", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLine()", $t.Line = "109", $t));
                     try {
                         t.Fixture.TestWriteLine();
                     }
@@ -17665,7 +17676,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteLineBool: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineBool()", $t.Line = "88", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineBool()", $t.Line = "116", $t));
                     try {
                         t.Fixture.TestWriteLineBool();
                     }
@@ -17675,7 +17686,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteLineChar: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineChar()", $t.Line = "98", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineChar()", $t.Line = "126", $t));
                     try {
                         t.Fixture.TestWriteLineChar();
                     }
@@ -17685,7 +17696,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteLineDecimal: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineDecimal()", $t.Line = "105", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineDecimal()", $t.Line = "133", $t));
                     try {
                         t.Fixture.TestWriteLineDecimal();
                     }
@@ -17695,7 +17706,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteLineDouble: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineDouble()", $t.Line = "133", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineDouble()", $t.Line = "161", $t));
                     try {
                         t.Fixture.TestWriteLineDouble();
                     }
@@ -17705,7 +17716,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteLineInt32: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineInt32()", $t.Line = "161", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineInt32()", $t.Line = "189", $t));
                     try {
                         t.Fixture.TestWriteLineInt32();
                     }
@@ -17715,7 +17726,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteLineInt64: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineInt64()", $t.Line = "174", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineInt64()", $t.Line = "202", $t));
                     try {
                         t.Fixture.TestWriteLineInt64();
                     }
@@ -17725,7 +17736,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteLineObject: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineObject()", $t.Line = "187", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineObject()", $t.Line = "215", $t));
                     try {
                         t.Fixture.TestWriteLineObject();
                     }
@@ -17735,7 +17746,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteLineSingle: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineSingle()", $t.Line = "260", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineSingle()", $t.Line = "288", $t));
                     try {
                         t.Fixture.TestWriteLineSingle();
                     }
@@ -17745,7 +17756,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteLineString: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineString()", $t.Line = "273", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineString()", $t.Line = "301", $t));
                     try {
                         t.Fixture.TestWriteLineString();
                     }
@@ -17755,7 +17766,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteLineFormatString1: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineFormatString1()", $t.Line = "286", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineFormatString1()", $t.Line = "314", $t));
                     try {
                         t.Fixture.TestWriteLineFormatString1();
                     }
@@ -17765,7 +17776,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteLineFormatString2: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineFormatString2()", $t.Line = "309", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineFormatString2()", $t.Line = "337", $t));
                     try {
                         t.Fixture.TestWriteLineFormatString2();
                     }
@@ -17775,7 +17786,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteLineFormatString3: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineFormatString3()", $t.Line = "336", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineFormatString3()", $t.Line = "364", $t));
                     try {
                         t.Fixture.TestWriteLineFormatString3();
                     }
@@ -17785,7 +17796,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteLineFormatString4: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineFormatString4()", $t.Line = "363", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineFormatString4()", $t.Line = "391", $t));
                     try {
                         t.Fixture.TestWriteLineFormatString4();
                     }
@@ -17795,7 +17806,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteLineFormatString5: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineFormatString5()", $t.Line = "390", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineFormatString5()", $t.Line = "418", $t));
                     try {
                         t.Fixture.TestWriteLineFormatString5();
                     }
@@ -17805,7 +17816,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteLineUInt32: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineUInt32()", $t.Line = "417", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineUInt32()", $t.Line = "445", $t));
                     try {
                         t.Fixture.TestWriteLineUInt32();
                     }
@@ -17815,7 +17826,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteLineUInt64: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineUInt64()", $t.Line = "429", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineUInt64()", $t.Line = "457", $t));
                     try {
                         t.Fixture.TestWriteLineUInt64();
                     }
@@ -17825,7 +17836,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteLineCharArray: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineCharArray()", $t.Line = "439", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineCharArray()", $t.Line = "467", $t));
                     try {
                         t.Fixture.TestWriteLineCharArray();
                     }
@@ -17835,7 +17846,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteLineCharArrayIndexCount: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineCharArrayIndexCount()", $t.Line = "455", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineCharArrayIndexCount()", $t.Line = "483", $t));
                     try {
                         t.Fixture.TestWriteLineCharArrayIndexCount();
                     }
@@ -17845,7 +17856,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteLineEnum: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineEnum()", $t.Line = "493", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineEnum()", $t.Line = "521", $t));
                     try {
                         t.Fixture.TestWriteLineEnum();
                     }
@@ -17855,7 +17866,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteLineDecimalNullable: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineDecimalNullable()", $t.Line = "513", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineDecimalNullable()", $t.Line = "541", $t));
                     try {
                         t.Fixture.TestWriteLineDecimalNullable();
                     }
@@ -17865,7 +17876,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteLineInt64Nullable: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineInt64Nullable()", $t.Line = "529", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineInt64Nullable()", $t.Line = "557", $t));
                     try {
                         t.Fixture.TestWriteLineInt64Nullable();
                     }
@@ -17875,7 +17886,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteLineUInt64Nullable: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineUInt64Nullable()", $t.Line = "549", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteLineUInt64Nullable()", $t.Line = "577", $t));
                     try {
                         t.Fixture.TestWriteLineUInt64Nullable();
                     }
@@ -17885,7 +17896,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteBool: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteBool()", $t.Line = "569", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteBool()", $t.Line = "597", $t));
                     try {
                         t.Fixture.TestWriteBool();
                     }
@@ -17895,7 +17906,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteChar: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteChar()", $t.Line = "579", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteChar()", $t.Line = "607", $t));
                     try {
                         t.Fixture.TestWriteChar();
                     }
@@ -17905,7 +17916,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteDecimal: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteDecimal()", $t.Line = "586", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteDecimal()", $t.Line = "614", $t));
                     try {
                         t.Fixture.TestWriteDecimal();
                     }
@@ -17915,7 +17926,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteDouble: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteDouble()", $t.Line = "614", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteDouble()", $t.Line = "642", $t));
                     try {
                         t.Fixture.TestWriteDouble();
                     }
@@ -17925,7 +17936,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteInt32: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteInt32()", $t.Line = "642", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteInt32()", $t.Line = "670", $t));
                     try {
                         t.Fixture.TestWriteInt32();
                     }
@@ -17935,7 +17946,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteInt64: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteInt64()", $t.Line = "655", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteInt64()", $t.Line = "683", $t));
                     try {
                         t.Fixture.TestWriteInt64();
                     }
@@ -17945,7 +17956,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteObject: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteObject()", $t.Line = "668", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteObject()", $t.Line = "696", $t));
                     try {
                         t.Fixture.TestWriteObject();
                     }
@@ -17955,7 +17966,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteSingle: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteSingle()", $t.Line = "741", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteSingle()", $t.Line = "769", $t));
                     try {
                         t.Fixture.TestWriteSingle();
                     }
@@ -17965,7 +17976,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteString: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteString()", $t.Line = "754", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteString()", $t.Line = "782", $t));
                     try {
                         t.Fixture.TestWriteString();
                     }
@@ -17975,7 +17986,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteFormatString1: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteFormatString1()", $t.Line = "767", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteFormatString1()", $t.Line = "795", $t));
                     try {
                         t.Fixture.TestWriteFormatString1();
                     }
@@ -17985,7 +17996,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteFormatString2: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteFormatString2()", $t.Line = "790", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteFormatString2()", $t.Line = "818", $t));
                     try {
                         t.Fixture.TestWriteFormatString2();
                     }
@@ -17995,7 +18006,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteFormatString3: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteFormatString3()", $t.Line = "817", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteFormatString3()", $t.Line = "845", $t));
                     try {
                         t.Fixture.TestWriteFormatString3();
                     }
@@ -18005,7 +18016,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteFormatString4: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteFormatString4()", $t.Line = "844", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteFormatString4()", $t.Line = "872", $t));
                     try {
                         t.Fixture.TestWriteFormatString4();
                     }
@@ -18015,7 +18026,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteFormatString5: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteFormatString5()", $t.Line = "871", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteFormatString5()", $t.Line = "899", $t));
                     try {
                         t.Fixture.TestWriteFormatString5();
                     }
@@ -18025,7 +18036,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteUInt32: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteUInt32()", $t.Line = "898", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteUInt32()", $t.Line = "926", $t));
                     try {
                         t.Fixture.TestWriteUInt32();
                     }
@@ -18035,7 +18046,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteUInt64: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteUInt64()", $t.Line = "910", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteUInt64()", $t.Line = "938", $t));
                     try {
                         t.Fixture.TestWriteUInt64();
                     }
@@ -18045,7 +18056,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteCharArray: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteCharArray()", $t.Line = "920", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteCharArray()", $t.Line = "948", $t));
                     try {
                         t.Fixture.TestWriteCharArray();
                     }
@@ -18055,7 +18066,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteCharArrayIndexCount: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteCharArrayIndexCount()", $t.Line = "936", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteCharArrayIndexCount()", $t.Line = "964", $t));
                     try {
                         t.Fixture.TestWriteCharArrayIndexCount();
                     }
@@ -18065,7 +18076,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteEnum: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteEnum()", $t.Line = "974", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteEnum()", $t.Line = "1002", $t));
                     try {
                         t.Fixture.TestWriteEnum();
                     }
@@ -18075,7 +18086,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteDecimalNullable: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteDecimalNullable()", $t.Line = "994", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteDecimalNullable()", $t.Line = "1022", $t));
                     try {
                         t.Fixture.TestWriteDecimalNullable();
                     }
@@ -18085,7 +18096,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteInt64Nullable: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteInt64Nullable()", $t.Line = "1010", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteInt64Nullable()", $t.Line = "1038", $t));
                     try {
                         t.Fixture.TestWriteInt64Nullable();
                     }
@@ -18095,7 +18106,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestWriteUInt64Nullable: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteUInt64Nullable()", $t.Line = "1030", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SystemConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestWriteUInt64Nullable()", $t.Line = "1058", $t));
                     try {
                         t.Fixture.TestWriteUInt64Nullable();
                     }

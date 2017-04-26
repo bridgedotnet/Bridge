@@ -248,7 +248,7 @@ namespace System
 
             if (con && con.log)
             {
-                //@ con.log(value);
+                con.log(value.As<dynamic>());
             }
         }
 
@@ -400,7 +400,16 @@ namespace System
         /// <summary>
         /// Clears the console buffer and corresponding console window of display information.
         /// </summary>
-        public static extern void Clear();
+        [Name("Clear")]
+        public static void Clear()
+        {
+            var con = Script.ToDynamic().Bridge.global.console;
+
+            if (con && con.clear)
+            {
+               con.clear();
+            }
+        }
 
         #endregion Utils
 

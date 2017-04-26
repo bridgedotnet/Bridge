@@ -30,6 +30,7 @@ Bridge.assembly("Bridge", function ($asm, globals) {
             methods: {
                 initConsoleFunctions: function () {
                     var wl = System.Console.WriteLine;
+                    var clr = System.Console.Clear;
                     var debug = System.Diagnostics.Debug.writeln;
                     var con = Bridge.global.console;
 
@@ -37,6 +38,13 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                         System.Console.WriteLine = function (value) {
                             wl(value);
                             Bridge.Console.log(value);
+                        }
+                    }
+
+                    if (clr) {
+                        System.Console.Clear = function () {
+                            clr();
+                            Bridge.Console.clear();
                         }
                     }
 
@@ -66,13 +74,7 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                     var v = "";
 
                     if (value != null) {
-                        var isNativeToString = Bridge.referenceEquals(value.toString, ({  }).toString);
-
-                        if (isNativeToString) {
-                            v = JSON.stringify(value);
-                        } else {
-                            v = value.toString();
-                        }
+                        v = (value.toString == {}.toString) ? JSON.stringify(value) : value.toString();
                     }
 
                     if (self.bufferedOutput != null) {
@@ -95,6 +97,27 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                 },
                 log: function (value) {
                     Bridge.Console.logBase(value);
+                },
+                clear: function () {
+                    var self = Bridge.Console.instance$1;
+
+                    if (self == null) {
+                        return;
+                    }
+
+                    var m = self.consoleMessages;
+
+                    if (m != null) {
+                        while (m.firstChild != null) {
+                            m.removeChild(m.firstChild);
+                        }
+
+                        self.currentMessageElement = null;
+                    }
+
+                    if (self.bufferedOutput != null) {
+                        self.bufferedOutput = "";
+                    }
                 },
                 hide: function () {
                     if (Bridge.Console.instance$1 == null) {

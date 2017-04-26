@@ -20,6 +20,7 @@
             methods: {
                 initConsoleFunctions: function () {
                     var wl = System.Console.WriteLine;
+                    var clr = System.Console.Clear;
                     var debug = System.Diagnostics.Debug.writeln;
                     var con = Bridge.global.console;
 
@@ -27,6 +28,13 @@
                         System.Console.WriteLine = function (value) {
                             wl(value);
                             Bridge.Console.log(value);
+                        }
+                    }
+
+                    if (clr) {
+                        System.Console.Clear = function () {
+                            clr();
+                            Bridge.Console.clear();
                         }
                     }
 
@@ -79,6 +87,27 @@
                 },
                 log: function (value) {
                     Bridge.Console.logBase(value);
+                },
+                clear: function () {
+                    var self = Bridge.Console.instance$1;
+
+                    if (self == null) {
+                        return;
+                    }
+
+                    var m = self.consoleMessages;
+
+                    if (m != null) {
+                        while (m.firstChild != null) {
+                            m.removeChild(m.firstChild);
+                        }
+
+                        self.currentMessageElement = null;
+                    }
+
+                    if (self.bufferedOutput != null) {
+                        self.bufferedOutput = "";
+                    }
                 },
                 hide: function () {
                     if (Bridge.Console.instance$1 == null) {

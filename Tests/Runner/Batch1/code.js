@@ -34809,15 +34809,36 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             CleanConsoleBuffer: function () {
                 this.ConsoleBuffer = "";
             },
-            AssertConsoleMessage: function (description, expected) {
+            AssertConsoleMessage: function (description, expected, noClean) {
+                if (noClean === void 0) { noClean = false; }
                 try {
                     description = System.String.concat(description, " - ");
 
                     Bridge.Test.NUnit.Assert.AreEqual$1(expected, this.ConsoleBuffer, System.String.concat(description, "expected ", expected));
                 }
                 finally {
-                    this.CleanConsoleBuffer();
+                    if (!noClean) {
+                        this.CleanConsoleBuffer();
+                    }
                 }
+            },
+            TestClear: function () {
+                System.Console.WriteLine("Message1");
+                this.AssertConsoleMessage("#1", "Message1", true);
+                System.Console.WriteLine("Message2");
+                this.AssertConsoleMessage("#2", "Message1Message2", true);
+
+                System.Console.Clear();
+                this.AssertConsoleMessage("#3", "");
+
+                // Check it works after Clear()
+                System.Console.WriteLine("Message1");
+                this.AssertConsoleMessage("#4", "Message1", true);
+                System.Console.WriteLine("Message2");
+                this.AssertConsoleMessage("#5", "Message1Message2", true);
+
+                System.Console.Clear();
+                this.AssertConsoleMessage("#3", "");
             },
             TestWriteLine: function () {
                 System.Console.WriteLine();

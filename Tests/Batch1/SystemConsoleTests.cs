@@ -62,7 +62,7 @@ namespace Bridge.ClientTest
             ConsoleBuffer = "";
         }
 
-        private void AssertConsoleMessage(string description, string expected)
+        private void AssertConsoleMessage(string description, string expected, bool noClean = false)
         {
             try
             {
@@ -72,9 +72,37 @@ namespace Bridge.ClientTest
             }
             finally
             {
-                CleanConsoleBuffer();
+                if (!noClean)
+                {
+                    CleanConsoleBuffer();
+                }
             }
         }
+
+        #region Clear
+
+        [Test]
+        public void TestClear()
+        {
+            Console.WriteLine("Message1");
+            AssertConsoleMessage("#1", "Message1", true);
+            Console.WriteLine("Message2");
+            AssertConsoleMessage("#2", "Message1Message2", true);
+
+            Console.Clear();
+            AssertConsoleMessage("#3", "");
+
+            // Check it works after Clear()
+            Console.WriteLine("Message1");
+            AssertConsoleMessage("#4", "Message1", true);
+            Console.WriteLine("Message2");
+            AssertConsoleMessage("#5", "Message1Message2", true);
+
+            Console.Clear();
+            AssertConsoleMessage("#3", "");
+        }
+
+        #endregion Clear
 
         #region WriteLine
 

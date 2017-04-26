@@ -43,6 +43,13 @@
                     }
 
                     return s;
+                },
+                Clear: function () {
+                    var con = Bridge.global.console;
+
+                    if (con && con.clear) {
+                        con.clear();
+                    }
                 }
             }
         }
