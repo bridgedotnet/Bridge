@@ -18665,6 +18665,87 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2610", {
+        statics: {
+            methods: {
+                TryToGetResult: function (T, value) {
+                    // The "handleResult" lambda gets lifted into an anonymous method but it shouldn't be allowed to because
+                    // it relies on the generic type param T because there is an implicit cast from T on to OptionalTest<T>
+                    return value.Match(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2610.OptionalTest$1(T), function (result) {
+                        return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2610.OptionalTest$1(T).op_Implicit(result);
+                    }, function (error) {
+                        return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2610.OptionalTest$1(T).Missing;
+                    });
+                },
+                TestLambdaLifting: function () {
+                    var myValue = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2610.ResultOrErrorTest$1(System.String)).ctor("WOOOO");
+                    try {
+                        var result = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2610.TryToGetResult(System.String, myValue);
+                        Bridge.Test.NUnit.Assert.AreEqual("WOOOO", result.Value);
+                    }
+                    catch (e) {
+                        e = System.Exception.create(e);
+                        Bridge.Test.NUnit.Assert.Fail$1(e.Message);
+                    }
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2610.OptionalTest$1", function (T) { return {
+        statics: {
+            props: {
+                Missing: null
+            },
+            ctors: {
+                init: function () {
+                    this.Missing = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2610.OptionalTest$1(T))(Bridge.getDefaultValue(T), false);
+                }
+            },
+            methods: {
+                op_Implicit: function (value) {
+                    return (value == null) ? Bridge.ClientTest.Batch3.BridgeIssues.Bridge2610.OptionalTest$1(T).Missing : new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2610.OptionalTest$1(T))(value, true);
+                }
+            }
+        },
+        props: {
+            IsDefined: false,
+            Value: Bridge.getDefaultValue(T)
+        },
+        ctors: {
+            ctor: function (value, isDefined) {
+                this.$initialize();
+                this.Value = value;
+                this.IsDefined = isDefined;
+            }
+        }
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2610.ResultOrErrorTest$1", function (T) { return {
+        fields: {
+            _result: null,
+            _error: null
+        },
+        ctors: {
+            ctor: function (result) {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2610.ResultOrErrorTest$1(T).$ctor1.call(this, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2610.OptionalTest$1(T).op_Implicit(result), null);
+            },
+            $ctor2: function (error) {
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2610.ResultOrErrorTest$1(T).$ctor1.call(this, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2610.OptionalTest$1(T).Missing, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2610.OptionalTest$1(System.Exception).op_Implicit(error));
+            },
+            $ctor1: function (result, error) {
+                this.$initialize();
+                this._result = result;
+                this._error = error;
+            }
+        },
+        methods: {
+            Match: function (TResult, handleResult, handleError) {
+                return this._result.IsDefined ? handleResult(this._result.Value) : handleError(this._error.Value);
+            }
+        }
+    }; });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge266A", {
         statics: {
             methods: {
