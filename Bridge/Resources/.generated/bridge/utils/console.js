@@ -378,7 +378,7 @@
 
                 var messageContainer = document.createElement("span");
                 messageContainer.innerHTML = message;
-                messageContainer.setAttribute("style", System.String.concat("color: ", color, "; white-space: pre;"));
+                messageContainer.setAttribute("style", System.String.concat("color: ", color, "; white-space: pre; line-height:1.4;"));
 
                 messageItem.appendChild(messageIcon);
                 messageItem.appendChild(messageContainer);

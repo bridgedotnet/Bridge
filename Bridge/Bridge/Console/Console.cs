@@ -676,7 +676,7 @@ namespace Bridge.Utils
 
             var messageContainer = document.createElement("span");
             messageContainer.innerHTML = message;
-            messageContainer.setAttribute("style", "color: " + color + "; white-space: pre;");
+            messageContainer.setAttribute("style", "color: " + color + "; white-space: pre; line-height:1.4;");
 
             messageItem.appendChild(messageIcon);
             messageItem.appendChild(messageContainer);
