@@ -67,6 +67,10 @@ Bridge.define("System.String", {
         },
 
         _format: function (provider, format, args) {
+            if (format == null) {
+                throw new System.ArgumentNullException("format");
+            }
+
             var me = this,
                 _formatRe = /(\{+)((\d+|[a-zA-Z_$]\w+(?:\.[a-zA-Z_$]\w+|\[\d+\])*)(?:\,(-?\d*))?(?:\:([^\}]*))?)(\}+)|(\{+)|(\}+)/g,
                 fn = this.decodeBraceSequence;
