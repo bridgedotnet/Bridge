@@ -18665,6 +18665,32 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2614", {
+        statics: {
+            methods: {
+                TestInitializers: function () {
+                    var x = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2614.X();
+                    Bridge.Test.NUnit.Assert.True(x.Id1.gt(System.Int64(0)));
+                    Bridge.Test.NUnit.Assert.True(Bridge.is(x.Id1, System.Int64));
+
+                    Bridge.Test.NUnit.Assert.True(x.Id2.gt(System.UInt64(0)));
+                    Bridge.Test.NUnit.Assert.True(Bridge.is(x.Id2, System.UInt64));
+
+                    Bridge.Test.NUnit.Assert.True(x.Id3.gt(System.Decimal(0)));
+                    Bridge.Test.NUnit.Assert.True(Bridge.is(x.Id3, System.Decimal));
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2614.X", {
+        props: {
+            Id1: System.Int64(1),
+            Id2: System.UInt64(1),
+            Id3: System.Decimal(1)
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge266A", {
         statics: {
             methods: {
