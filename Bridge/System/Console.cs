@@ -320,6 +320,7 @@ namespace System
         /// Writes the specified array of Unicode characters, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="buffer">An array of Unicode characters.</param>
+        [Template("System.Console.WriteLine(System.Console.TransformChars({buffer}))")]
         public static extern void WriteLine(Char[] buffer);
 
         /// <summary>
@@ -354,6 +355,21 @@ namespace System
         #endregion WriteLine
 
         #region Utils
+
+        [Name("TransformChars")]
+        private static string TransformChars(params char[] buffer)
+        {
+            var s = "";
+            if (buffer != null)
+            {
+                for (int i = 0; i < buffer.Length; i++)
+                {
+                    s += (char)buffer[i];
+                }
+            }
+
+            return s;
+        }
 
         /// <summary>
         /// Clears the console buffer and corresponding console window of display information.
