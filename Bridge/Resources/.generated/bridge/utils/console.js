@@ -54,17 +54,9 @@
                     if (messageType === void 0) { messageType = 0; }
                     var self = Bridge.Console.instance;
                     var v = "";
-                    var t = false;
 
                     if (value != null) {
-                        t = typeof value !== "object";
-                        var name = Bridge.Reflection.getTypeFullName(Bridge.getType(value));
-
-                        if (!System.String.equals(name, "System.Object") && (System.String.startsWith(name, "System") || t)) {
-                            v = value == null ? "" : value.toString();
-                        } else {
-                            v = JSON.stringify(value);
-                        }
+                        v = (value.toString == {}.toString) ? JSON.stringify(value) : value.toString();
                     }
 
                     if (self.bufferedOutput != null) {

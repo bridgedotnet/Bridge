@@ -404,21 +404,10 @@ namespace Bridge.Utils
         {
             var self = Instance;
             var v = "";
-            var t = false;
 
             if (value != null)
             {
-                //@ t = typeof value !== "object";
-                var name = value.GetType().FullName;
-
-                if (!name.Equals("System.Object") && (name.StartsWith("System") || t))
-                {
-                    v = value == null ? "" : value.ToString();
-                }
-                else
-                {
-                    //@ v = JSON.stringify(value);
-                }
+                //@ v = (value.toString == {}.toString) ? JSON.stringify(value) : value.toString();
             }
 
             if (self.BufferedOutput != null)
