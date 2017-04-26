@@ -68,21 +68,21 @@ namespace System
         /// Writes the text representation of the specified double-precision floating-point value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.Write({value})")]
+        [Template("System.Console.Write(System.Double.format({value}))")]
         public static extern void Write(Double value);
 
         /// <summary>
         /// Writes the text representation of the specified 32-bit signed integer value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.Write({value})")]
+        [Name("Write")]
         public static extern void Write(Int32 value);
 
         /// <summary>
         /// Writes the text representation of the specified 64-bit signed integer value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.Write({value}.toString())")]
+        [Name("Write")]
         public static extern void Write(Int64 value);
 
         /// <summary>
@@ -99,14 +99,14 @@ namespace System
         /// Writes the text representation of the specified single-precision floating-point value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.Write({value})")]
+        [Name("Write")]
         public static extern void Write(Single value);
 
         /// <summary>
         /// Writes the specified string value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.Write({value})")]
+        [Name("Write")]
         public static extern void Write(String value);
 
         /// <summary>
@@ -159,21 +159,31 @@ namespace System
         /// Writes the text representation of the specified 32-bit unsigned integer value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.Write({value})")]
+        [Name("Write")]
         public static extern void Write(UInt32 value);
 
         /// <summary>
         /// Writes the text representation of the specified 64-bit unsigned integer value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.Write({value}.toString())")]
+        [Name("Write")]
         public static extern void Write(UInt64 value);
 
         /// <summary>
         /// Writes the specified array of Unicode characters to the standard output stream.
         /// </summary>
         /// <param name="buffer">An array of Unicode characters.</param>
+        [Template("System.Console.Write(System.Console.TransformChars({buffer}, 1))")]
         public static extern void Write(Char[] buffer);
+
+        /// <summary>
+        /// Writes the specified subarray of Unicode characters to the standard output stream.
+        /// </summary>
+        /// <param name="buffer">An array of Unicode characters.</param>
+        /// <param name="index">The starting position in buffer.</param>
+        /// <param name="count">The number of characters to write. </param>
+        [Template("System.Console.Write(System.Console.TransformChars({buffer}, 0, {index}, {count}))")]
+        public static extern void Write(Char[] buffer, Int32 index, Int32 count);
 
         #endregion Write
 
@@ -182,7 +192,7 @@ namespace System
         /// <summary>
         /// Writes the current line terminator to the standard output stream.
         /// </summary>
-        [Template("System.Console.WriteLine()")]
+        [Name("WriteLine")]
         public static extern void WriteLine();
 
         /// <summary>
@@ -217,14 +227,14 @@ namespace System
         /// Writes the text representation of the specified 32-bit signed integer value, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.WriteLine({value})")]
+        [Name("WriteLine")]
         public static extern void WriteLine(Int32 value);
 
         /// <summary>
         /// Writes the text representation of the specified 64-bit signed integer value, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.WriteLine({value}.toString())")]
+        [Name("WriteLine")]
         public static extern void WriteLine(Int64 value);
 
         /// <summary>
@@ -253,7 +263,7 @@ namespace System
         /// Writes the specified string value, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.WriteLine({value})")]
+        [Name("WriteLine")]
         public static extern void WriteLine(string value);
 
         /// <summary>
@@ -306,29 +316,31 @@ namespace System
         /// Writes the text representation of the specified 32-bit unsigned integer value, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.WriteLine({value})")]
+        [Name("WriteLine")]
         public static extern void WriteLine(UInt32 value);
 
         /// <summary>
         /// Writes the text representation of the specified 64-bit unsigned integer value, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.WriteLine({value}.toString())")]
+        [Name("WriteLine")]
         public static extern void WriteLine(UInt64 value);
 
         /// <summary>
         /// Writes the specified array of Unicode characters, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="buffer">An array of Unicode characters.</param>
+        [Template("System.Console.WriteLine(System.Console.TransformChars({buffer}, 1))")]
         public static extern void WriteLine(Char[] buffer);
 
         /// <summary>
-        /// Writes the text representation of the specified enum value, followed by the current line terminator, to the standard output stream.
+        /// Writes the specified subarray of Unicode characters to the standard output stream.
         /// </summary>
-        /// <param name="value">The value to write.</param>
-        [Template("System.Console.WriteLine(System.Enum.toString({value:type}, {value}))")]
-        [Unbox(true)]
-        public static extern void WriteLine(Enum value);
+        /// <param name="buffer">An array of Unicode characters.</param>
+        /// <param name="index">The starting position in buffer.</param>
+        /// <param name="count">The number of characters to write. </param>
+        [Template("System.Console.WriteLine(System.Console.TransformChars({buffer}, 0, {index}, {count}))")]
+        public static extern void WriteLine(Char[] buffer, Int32 index, Int32 count);
 
         /// <summary>
         /// Writes the text representation of the specified nullable decimal, followed by the current line terminator, to the standard output stream.
@@ -337,23 +349,53 @@ namespace System
         [Template("System.Console.WriteLine({value} && {value}.toString('G'))")]
         public static extern void WriteLine(decimal? value);
 
-        /// <summary>
-        /// Writes the text representation of the specified nullable 64-bit signed integer, followed by the current line terminator, to the standard output stream.
-        /// </summary>
-        /// <param name="value">The value to write.</param>
-        [Template("System.Console.WriteLine({value} && {value}.toString())")]
-        public static extern void WriteLine(long? value);
-
-        /// <summary>
-        /// Writes the text representation of the specified nullable 64-bit unsigned integer, followed by the current line terminator, to the standard output stream.
-        /// </summary>
-        /// <param name="value">The value to write.</param>
-        [Template("System.Console.WriteLine({value} && {value}.toString())")]
-        public static extern void WriteLine(ulong? value);
-
         #endregion WriteLine
 
         #region Utils
+
+        [Name("TransformChars")]
+        private static string TransformChars(char[] buffer, int all, int index, int count)
+        {
+            if (all != 1)
+            {
+                if (buffer == null)
+                {
+                    throw new ArgumentNullException("buffer");
+                }
+
+                if (index < 0)
+                {
+                    throw new ArgumentOutOfRangeException("index", "less than zero");
+                }
+
+                if (count < 0)
+                {
+                    throw new ArgumentOutOfRangeException("count", "less than zero");
+                }
+
+                if (index + count > buffer.Length)
+                {
+                    throw new ArgumentException("index plus count specify a position that is not within buffer.");
+                }
+            }
+
+            var s = "";
+            if (buffer != null)
+            {
+                if (all == 1)
+                {
+                    index = 0;
+                    count = buffer.Length;
+                }
+
+                for (int i = index; i < index + count; i++)
+                {
+                    s += (char)buffer[i];
+                }
+            }
+
+            return s;
+        }
 
         /// <summary>
         /// Clears the console buffer and corresponding console window of display information.
@@ -465,22 +507,6 @@ namespace System
         ///// </summary>
         ///// <param name="bufferSize">The internal stream buffer size.</param>
         //public static extern void OpenStandardOutput(Int32 bufferSize);
-
-        ///// <summary>
-        ///// Writes the specified subarray of Unicode characters to the standard output stream.
-        ///// </summary>
-        ///// <param name="buffer">An array of Unicode characters.</param>
-        ///// <param name="index">The starting position in buffer.</param>
-        ///// <param name="count">The number of characters to write. </param>
-        //public static extern void Write(Char[] buffer, Int32 index, Int32 count);
-
-        ///// <summary>
-        ///// Writes the specified subarray of Unicode characters, followed by the current line terminator, to the standard output stream.
-        ///// </summary>
-        ///// <param name="buffer">An array of Unicode characters.</param>
-        ///// <param name="index">The starting position in buffer.</param>
-        ///// <param name="count">The number of characters to write. </param>
-        //public static extern void WriteLine(Char[] buffer, Int32 index, Int32 count);
 
         #endregion Not Implemented
     }

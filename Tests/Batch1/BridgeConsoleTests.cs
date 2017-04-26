@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace Bridge.ClientTest
 {
-    [Category(Constants.MODULE_BRIDGECONSOLE)]
+    [Category(Constants.MODULE_BRIDGE_CONSOLE)]
     [TestFixture]
     public class BridgeConsoleTests
     {
@@ -49,7 +49,7 @@ namespace Bridge.ClientTest
             AssertLogMessageObject("#28 - ", 12345678.12345678m, "12345678.12345678");
             AssertLogMessageObject("#29 - ", null, "");
             AssertLogMessageObject("#30 - ", new object(), "{}"); // Improved in #1994
-            AssertLogMessageObject("#31 - ", new ClassA(), "{}"); // Improved in #1994
+            AssertLogMessageObject("#31 - ", new ClassA(), "I'm ClassA");
             AssertLogMessageObject("#32 - ", new ClassB(), "{}"); // Improved in #1994
             AssertLogMessageObject("#33 - ", new ClassC(), "{\"Name\":\"Frank\",\"Age\":55,\"Admin\":true}"); // Improved in #1994
             AssertLogMessageObject("#34 - ", new object().ToString(), "[object Object]");

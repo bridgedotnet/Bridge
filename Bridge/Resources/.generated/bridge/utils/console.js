@@ -18,7 +18,7 @@
                 }
             },
             methods: {
-                end: function () {
+                initConsoleFunctions: function () {
                     var wl = System.Console.WriteLine;
                     var debug = System.Diagnostics.Debug.writeln;
                     var con = Bridge.global.console;
@@ -450,4 +450,4 @@
         }
     });
 
-    Bridge.init(function () { Bridge.Console.end(); });
+    Bridge.init(function () { Bridge.Console.initConsoleFunctions(); });
