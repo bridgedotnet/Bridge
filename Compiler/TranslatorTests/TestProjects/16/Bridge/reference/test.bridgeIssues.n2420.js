@@ -10,13 +10,13 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                     // Bridge boxes external enum value for Console.WriteLine(Enum value)
                     // but it is not required because Template handles it. It produces unnecessary code.
                     // Expected Bridge.Console.log(System.Enum.toString(...Options.format, externalOption));
-                    System.Console.WriteLine(System.Enum.toString(System.String, externalOption));
+                    System.Console.WriteLine(externalOption);
 
                     var option = "one";
 
                     // Bridge boxes enum value for Console.WriteLine(Enum value)
                     // Expected Bridge.Console.log(...box);
-                    System.Console.WriteLine(System.Enum.toString(Test.BridgeIssues.N2420.Options.Format, option));
+                    System.Console.WriteLine(Bridge.box(option, Test.BridgeIssues.N2420.Options.Format, $box_.Test.BridgeIssues.N2420.Options.Format.toString));
                 }
             }
         }

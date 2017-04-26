@@ -7,11 +7,11 @@
                     var l = System.Int64(v);
                     l = System.Int64(v);
 
-                    System.Console.WriteLine(System.Int64(v).toString());
-                    System.Console.WriteLine(System.Int64(v).toString());
-                    System.Console.WriteLine(System.Int64(2).toString());
-                    System.Console.WriteLine(System.Int64(2).toString());
-                    System.Console.WriteLine(System.Int64(7).toString());
+                    System.Console.WriteLine(System.Int64(v));
+                    System.Console.WriteLine(System.Int64(v));
+                    System.Console.WriteLine(System.Int64(2));
+                    System.Console.WriteLine(System.Int64(2));
+                    System.Console.WriteLine(System.Int64(7));
                     TestIssue1230.Issue1230.MethodLong(System.Int64(v));
                     TestIssue1230.Issue1230.MethodLong(System.Int64(v));
                 },
