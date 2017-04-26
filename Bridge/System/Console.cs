@@ -68,7 +68,7 @@ namespace System
         /// Writes the text representation of the specified double-precision floating-point value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.Write({value})")]
+        [Template("System.Console.Write(System.Double.format({value}))")]
         public static extern void Write(Double value);
 
         /// <summary>
