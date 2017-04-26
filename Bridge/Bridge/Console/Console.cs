@@ -218,7 +218,6 @@ namespace Bridge.Utils
                  */
             }
 
-
             if (con && con.error)
             {
                 /*@
@@ -233,10 +232,7 @@ namespace Bridge.Utils
             {
                 BridgeWrap.Global.Window.addEventListener("error", (e) =>
                 {
-                    if (e.message)
-                    {
-                        Console.Error(e.message);
-                    }
+                    //@ Bridge.Console.error(System.Exception.create(e));
                 });
             }
         }

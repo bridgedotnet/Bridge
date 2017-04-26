@@ -37,7 +37,6 @@
                         }
                     }
 
-
                     if (con && con.error) {
                         Bridge.global.console.error = function (msg) {
                             error(msg);
@@ -47,9 +46,7 @@
 
                     if (Bridge.isDefined(Bridge.global.window)) {
                         Bridge.global.window.addEventListener("error", function (e) {
-                            if (e.message) {
-                                Bridge.Console.error(e.message);
-                            }
+                            Bridge.Console.error(System.Exception.create(e));
                         });
                     }
                 },

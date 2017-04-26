@@ -3256,7 +3256,7 @@
 
     Bridge.define("Bridge.Utils.SystemAssemblyVersion");
 
-    // @source Json.js
+    // @source JSON.js
 
     Bridge.Json = {
         serialize: function (obj, settings, returnRaw, possibleType) {
@@ -5123,6 +5123,7 @@ Bridge.define("System.Exception", {
 
         toString: function () {
             var builder = Bridge.getTypeName(this);
+
             if (this.Message != null) {
                 builder += ": " + this.Message + "\n";
             } else {
@@ -5141,18 +5142,23 @@ Bridge.define("System.Exception", {
                 if (Bridge.is(error, System.Exception)) {
                     return error;
                 }
+
                 var ex;
+
                 if (error instanceof TypeError) {
                     ex = new System.NullReferenceException(error.message, new Bridge.ErrorException(error));
                 } else if (error instanceof RangeError) {
                     ex = new System.ArgumentOutOfRangeException(null, error.message, new Bridge.ErrorException(error));
                 } else if (error instanceof Error) {
                     return new Bridge.ErrorException(error);
+                } else if (error && error.error && error.error.stack) {
+                    ex = new System.Exception(error.error.stack);
                 } else {
-                    ex = new System.Exception(error ? error.toString() : null);
+                    ex = new System.Exception(error ? error.message ? error.message : error.toString() : null);
                 }
 
                 ex.errorStack = error;
+
                 return ex;
             }
         }
