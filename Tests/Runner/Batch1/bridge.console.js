@@ -64,16 +64,14 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                     if (messageType === void 0) { messageType = 0; }
                     var self = Bridge.Console.instance;
                     var v = "";
-                    var t = false;
 
                     if (value != null) {
-                        t = typeof value !== "object";
-                        var name = Bridge.Reflection.getTypeFullName(Bridge.getType(value));
+                        var isNativeToString = Bridge.referenceEquals(value.toString, ({  }).toString);
 
-                        if (!System.String.equals(name, "System.Object") && (System.String.startsWith(name, "System") || t)) {
-                            v = value == null ? "" : value.toString();
-                        } else {
+                        if (isNativeToString) {
                             v = JSON.stringify(value);
+                        } else {
+                            v = value.toString();
                         }
                     }
 

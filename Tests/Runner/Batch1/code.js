@@ -4833,7 +4833,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 this.AssertLogMessageObject("#28 - ", System.Decimal("12345678.12345678"), "12345678.12345678");
                 this.AssertLogMessageObject("#29 - ", null, "");
                 this.AssertLogMessageObject("#30 - ", {  }, "{}"); // Improved in #1994
-                this.AssertLogMessageObject("#31 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassA(), "{}"); // Improved in #1994
+                this.AssertLogMessageObject("#31 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassA(), "I'm ClassA");
                 this.AssertLogMessageObject("#32 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassB(), "{}"); // Improved in #1994
                 this.AssertLogMessageObject("#33 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassC(), "{\"Name\":\"Frank\",\"Age\":55,\"Admin\":true}"); // Improved in #1994
                 this.AssertLogMessageObject("#34 - ", {  }.toString(), "[object Object]");
@@ -12709,7 +12709,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 MODULE_REFLECTION: "Reflection",
                 MODULE_FUNCTIONS: "Functions",
                 MODULE_SERIALIZATION: "Serialization",
-                MODULE_BRIDGECONSOLE: "Bridge Console",
+                MODULE_BRIDGE_CONSOLE: "Bridge Console",
+                MODULE_SYETM_CONSOLE: "System Console",
                 MODULE_OBJECTLITERAL: "[ObjectLiteral]",
                 IGNORE_DATE: null
             }
@@ -18268,6 +18269,32 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.Format.StringFormatTests", {
         methods: {
+            FormatShouldThrow: function () {
+                Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Format.StringFormatTests.f1);
+                Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Format.StringFormatTests.f2);
+                Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Format.StringFormatTests.f3);
+                Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Format.StringFormatTests.f4);
+                Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentNullException, $asm.$.Bridge.ClientTest.Format.StringFormatTests.f5);
+            },
+            FormatProviderShouldThrow: function () {
+                var fp = new Bridge.ClientTest.Format.StringFormatTests.MyFormatProvider();
+
+                Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentNullException, function () {
+                    System.String.formatProvider(fp, null, null);
+                });
+                Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentNullException, function () {
+                    System.String.formatProvider(fp, null, Bridge.box(1, System.Int32));
+                });
+                Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentNullException, function () {
+                    System.String.formatProvider(fp, null, Bridge.box(1, System.Int32), Bridge.box(2, System.Int32));
+                });
+                Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentNullException, function () {
+                    System.String.formatProvider(fp, null, Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), Bridge.box(3, System.Int32));
+                });
+                Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentNullException, function () {
+                    System.String.formatProvider(fp, null, Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), Bridge.box(3, System.Int32), Bridge.box(4, System.Int32));
+                });
+            },
             Simple: function () {
                 var pricePerOunce = System.Decimal(17.36);
                 var s = System.String.format("The current price is {0} per ounce.", pricePerOunce);
@@ -18377,6 +18404,38 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         $t.System$IDisposable$dispose();
                     }
                 }}
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Format.StringFormatTests", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Format.StringFormatTests, {
+        f1: function () {
+            System.String.format(null, null);
+        },
+        f2: function () {
+            System.String.format(null, Bridge.box(1, System.Int32));
+        },
+        f3: function () {
+            System.String.format(null, Bridge.box(1, System.Int32), Bridge.box(2, System.Int32));
+        },
+        f4: function () {
+            System.String.format(null, Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), Bridge.box(3, System.Int32));
+        },
+        f5: function () {
+            System.String.format(null, Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), Bridge.box(3, System.Int32), Bridge.box(4, System.Int32));
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Format.StringFormatTests.MyFormatProvider", {
+        inherits: [System.IFormatProvider],
+        alias: [
+            "getFormat", "System$IFormatProvider$getFormat"
+        ],
+        methods: {
+            getFormat: function (type) {
+                return System.Globalization.CultureInfo.invariantCulture.getFormat(type);
+            }
         }
     });
 
@@ -34731,6 +34790,526 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     });
 
+    Bridge.define("Bridge.ClientTest.SystemConsoleTests", {
+        props: {
+            ConsoleBuffer: {
+                get: function () {
+                    return Bridge.Console.instance.bufferedOutput;
+                },
+                set: function (value) {
+                    Bridge.Console.instance.bufferedOutput = value;
+                }
+            }
+        },
+        methods: {
+            HideConsole: function () {
+                this.ConsoleBuffer = null;
+                Bridge.Console.hide();
+            },
+            CleanConsoleBuffer: function () {
+                this.ConsoleBuffer = "";
+            },
+            TestWriteLine: function () {
+                System.Console.WriteLine();
+                this.AssertConsoleMessage("#1", "");
+            },
+            TestWriteLineBool: function () {
+                System.Console.WriteLine(System.Boolean.toString(true));
+                this.AssertConsoleMessage("#1", "True");
+
+                System.Console.WriteLine(System.Boolean.toString(false));
+                this.AssertConsoleMessage("#2", "False");
+            },
+            TestWriteLineChar: function () {
+                System.Console.WriteLine(String.fromCharCode(97));
+                this.AssertConsoleMessage("#1", "a");
+            },
+            TestWriteLineDecimal: function () {
+                System.Console.WriteLine(System.Decimal(-1.0).toString('G'));
+                this.AssertConsoleMessage("#1", "-1");
+
+                System.Console.WriteLine(System.Decimal(1.0).toString('G'));
+                this.AssertConsoleMessage("#2", "1");
+
+                System.Console.WriteLine(System.Decimal(-12345678.0).toString('G'));
+                this.AssertConsoleMessage("#3", "-12345678");
+
+                System.Console.WriteLine(System.Decimal(12345678.0).toString('G'));
+                this.AssertConsoleMessage("#4", "12345678");
+
+                System.Console.WriteLine(System.Decimal(-1.12345678).toString('G'));
+                this.AssertConsoleMessage("#5", "-1.12345678");
+
+                System.Console.WriteLine(System.Decimal(1.12345678).toString('G'));
+                this.AssertConsoleMessage("#6", "1.12345678");
+
+                System.Console.WriteLine(System.Decimal("-12345678.12345678").toString('G'));
+                this.AssertConsoleMessage("#7", "-12345678.12345678");
+
+                System.Console.WriteLine(System.Decimal("12345678.12345678").toString('G'));
+                this.AssertConsoleMessage("#8", "12345678.12345678");
+            },
+            TestWriteLineDouble: function () {
+                System.Console.WriteLine(System.Double.format(-1.0));
+                this.AssertConsoleMessage("#1", "-1");
+
+                System.Console.WriteLine(System.Double.format(1.0));
+                this.AssertConsoleMessage("#2", "1");
+
+                System.Console.WriteLine(System.Double.format(-12345678.0));
+                this.AssertConsoleMessage("#3", "-12345678");
+
+                System.Console.WriteLine(System.Double.format(12345678.0));
+                this.AssertConsoleMessage("#4", "12345678");
+
+                System.Console.WriteLine(System.Double.format(-1.12345678));
+                this.AssertConsoleMessage("#5", "-1.12345678");
+
+                System.Console.WriteLine(System.Double.format(1.12345678));
+                this.AssertConsoleMessage("#6", "1.12345678");
+
+                System.Console.WriteLine(System.Double.format(-12345678.12345678));
+                this.AssertConsoleMessage("#7", "-12345678.1234568");
+
+                System.Console.WriteLine(System.Double.format(12345678.12345678));
+                this.AssertConsoleMessage("#8", "12345678.1234568");
+            },
+            TestWriteLineInt32: function () {
+                System.Console.WriteLine(0);
+                this.AssertConsoleMessage("#1", "0");
+
+                System.Console.WriteLine(2147483647);
+                this.AssertConsoleMessage("#2", "2147483647");
+
+                System.Console.WriteLine(-2147483648);
+                this.AssertConsoleMessage("#3", "-2147483648");
+            },
+            TestWriteLineInt64: function () {
+                System.Console.WriteLine(System.Int64(0).toString());
+                this.AssertConsoleMessage("#1", "0");
+
+                System.Console.WriteLine(System.Int64([-1,2147483647]).toString());
+                this.AssertConsoleMessage("#2", "9223372036854775807");
+
+                System.Console.WriteLine(System.Int64([0,-2147483648]).toString());
+                this.AssertConsoleMessage("#3", "-9223372036854775808");
+            },
+            TestWriteLineObject: function () {
+                var o = "Hi";
+
+                System.Console.WriteLine(o);
+                this.AssertConsoleMessage("#1", "Hi");
+
+                o = Bridge.box(1, System.Int32);
+                System.Console.WriteLine(o);
+                this.AssertConsoleMessage("#2", "1");
+
+                o = System.Int64([-1,2147483647]);
+                System.Console.WriteLine(o);
+                this.AssertConsoleMessage("#3", "9223372036854775807");
+
+                o = null;
+                System.Console.WriteLine(o);
+                this.AssertConsoleMessage("#4", "");
+
+                o = Bridge.box(Bridge.ClientTest.SystemConsoleTests.Values.Value1, Bridge.ClientTest.SystemConsoleTests.Values, $box_.Bridge.ClientTest.SystemConsoleTests.Values.toString);
+                System.Console.WriteLine(o);
+                this.AssertConsoleMessage("#5", "Value1");
+
+                o = System.Decimal(1.01);
+                System.Console.WriteLine(o);
+                this.AssertConsoleMessage("#6", "1.01");
+
+                o = System.Int64(-2);
+                System.Console.WriteLine(o);
+                this.AssertConsoleMessage("#7", "-2");
+
+                o = System.UInt64(4);
+                System.Console.WriteLine(o);
+                this.AssertConsoleMessage("#8", "4");
+
+                o = Bridge.box(Bridge.ClientTest.SystemConsoleTests.Values.Value2, Bridge.ClientTest.SystemConsoleTests.Values, $box_.System.Nullable$1.toString);
+                System.Console.WriteLine(o);
+                this.AssertConsoleMessage("#9", "2"); // That's a bug in nullable<enum>.ToString(), expected "Value2"
+
+                o = System.Decimal(1.01);
+                System.Console.WriteLine(o);
+                this.AssertConsoleMessage("#10", "1.01");
+
+                o = System.Int64(-2);
+                System.Console.WriteLine(o);
+                this.AssertConsoleMessage("#11", "-2");
+
+                o = System.UInt64(4);
+                System.Console.WriteLine(o);
+                this.AssertConsoleMessage("#12", "4");
+
+                o = {  };
+                System.Console.WriteLine(o);
+                this.AssertConsoleMessage("#13", "{}"); // Non .Net behavior, should be System.Object
+
+                o = new Bridge.ClientTest.SystemConsoleTests.ClassWithCustomToString();
+                System.Console.WriteLine(o);
+                this.AssertConsoleMessage("#14", "Overridden ToString()");
+
+                o = new $asm.$AnonymousType$33(1, "John");
+                System.Console.WriteLine(o);
+                this.AssertConsoleMessage("#15", "{\"Id\":1,\"Name\":\"John\"}");
+
+                var a = new $asm.$AnonymousType$33(2, "Mary");
+                System.Console.WriteLine(a);
+                this.AssertConsoleMessage("#16", "{\"Id\":2,\"Name\":\"Mary\"}");
+
+                o = { Id: 3, Name: "Sally" };
+                System.Console.WriteLine(o);
+                this.AssertConsoleMessage("#17", "{\"Id\":3,\"Name\":\"Sally\"}");
+            },
+            TestWriteLineSingle: function () {
+                System.Console.WriteLine(System.Single.format(0.0));
+                this.AssertConsoleMessage("#1", "0");
+
+                System.Console.WriteLine(System.Single.format(1.0));
+                this.AssertConsoleMessage("#2", "1");
+
+                System.Console.WriteLine(System.Single.format(-1.0));
+                this.AssertConsoleMessage("#3", "-1");
+            },
+            TestWriteLineString: function () {
+                System.Console.WriteLine(null);
+                this.AssertConsoleMessage("#1", "");
+
+                System.Console.WriteLine("");
+                this.AssertConsoleMessage("#2", "");
+
+                System.Console.WriteLine("Value1");
+                this.AssertConsoleMessage("#3", "Value1");
+            },
+            TestWriteLineFormatString1: function () {
+                var f = "{0}";
+
+                System.Console.WriteLine(System.String.format(f, Bridge.box(1, System.Int32)));
+                this.AssertConsoleMessage("#1", "1");
+
+                System.Console.WriteLine(System.String.format(f, "\"2\""));
+                this.AssertConsoleMessage("#2", "\"2\"");
+
+                System.Console.WriteLine(System.String.format(f, null));
+                this.AssertConsoleMessage("#3", "");
+
+                f = null;
+                Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentNullException, function () {
+                    System.Console.WriteLine(System.String.format(f, Bridge.box(3, System.Int32)));
+                });
+                this.AssertConsoleMessage("#4", "");
+
+                f = "{0} {1}";
+                Bridge.Test.NUnit.Assert.Throws$6(System.FormatException, function () {
+                    System.Console.WriteLine(System.String.format(f, Bridge.box(4, System.Int32)));
+                });
+                this.AssertConsoleMessage("#5", "");
+            },
+            TestWriteLineFormatString2: function () {
+                var f = "{0} {1}";
+
+                System.Console.WriteLine(System.String.format(f, Bridge.box(1, System.Int32), "2"));
+                this.AssertConsoleMessage("#1", "1 2");
+
+                System.Console.WriteLine(System.String.format(f, null, Bridge.box(false, System.Boolean, $box_.System.Boolean.toString)));
+                this.AssertConsoleMessage("#2", " False");
+
+                System.Console.WriteLine(System.String.format(f, null, null));
+                this.AssertConsoleMessage("#3", " ");
+
+                f = "{0}";
+                System.Console.WriteLine(System.String.format(f, "a", "b"));
+                this.AssertConsoleMessage("#4", "a");
+
+                f = null;
+                Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentNullException, function () {
+                    System.Console.WriteLine(System.String.format(f, Bridge.box(4, System.Int32), Bridge.box(5, System.Int32)));
+                });
+                this.AssertConsoleMessage("#5", "");
+
+                f = "{0} {1} {2}";
+                Bridge.Test.NUnit.Assert.Throws$6(System.FormatException, function () {
+                    System.Console.WriteLine(System.String.format(f, Bridge.box(6, System.Int32), Bridge.box(7, System.Int32)));
+                });
+                this.AssertConsoleMessage("#6", "");
+            },
+            TestWriteLineFormatString3: function () {
+                var f = "{0} {1} {2}";
+
+                System.Console.WriteLine(System.String.format(f, Bridge.box(1, System.Int32), "2", Bridge.box(true, System.Boolean, $box_.System.Boolean.toString)));
+                this.AssertConsoleMessage("#1", "1 2 True");
+
+                System.Console.WriteLine(System.String.format(f, null, null, Bridge.box(false, System.Boolean, $box_.System.Boolean.toString)));
+                this.AssertConsoleMessage("#2", "  False");
+
+                System.Console.WriteLine(System.String.format(f, null, null, null));
+                this.AssertConsoleMessage("#3", "  ");
+
+                f = "{0}";
+                System.Console.WriteLine(System.String.format(f, "a", "b", "c"));
+                this.AssertConsoleMessage("#4", "a");
+
+                f = null;
+                Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentNullException, function () {
+                    System.Console.WriteLine(System.String.format(f, Bridge.box(4, System.Int32), Bridge.box(5, System.Int32), Bridge.box(6, System.Int32)));
+                });
+                this.AssertConsoleMessage("#5", "");
+
+                f = "{0} {1} {2} {3}";
+                Bridge.Test.NUnit.Assert.Throws$6(System.FormatException, function () {
+                    System.Console.WriteLine(System.String.format(f, Bridge.box(6, System.Int32), Bridge.box(7, System.Int32), Bridge.box(8, System.Int32)));
+                });
+                this.AssertConsoleMessage("#6", "");
+            },
+            TestWriteLineFormatString4: function () {
+                var f = "{0} {1} {2} {3}";
+
+                System.Console.WriteLine(System.String.format(f, [Bridge.box(1, System.Int32), "2", Bridge.box(true, System.Boolean, $box_.System.Boolean.toString), Bridge.box(4, System.Int32)]));
+                this.AssertConsoleMessage("#1", "1 2 True 4");
+
+                System.Console.WriteLine(System.String.format(f, [null, Bridge.box(false, System.Boolean, $box_.System.Boolean.toString), null, Bridge.box(3, System.Int32)]));
+                this.AssertConsoleMessage("#2", " False  3");
+
+                System.Console.WriteLine(System.String.format(f, [null, null, null, null]));
+                this.AssertConsoleMessage("#3", "   ");
+
+                f = "{0}";
+                System.Console.WriteLine(System.String.format(f, ["a", "b", "c", "d"]));
+                this.AssertConsoleMessage("#4", "a");
+
+                f = null;
+                Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentNullException, function () {
+                    System.Console.WriteLine(System.String.format(f, [Bridge.box(4, System.Int32), Bridge.box(5, System.Int32), Bridge.box(6, System.Int32), Bridge.box(7, System.Int32)]));
+                });
+                this.AssertConsoleMessage("#5", "");
+
+                f = "{0} {1} {2} {3} {4}";
+                Bridge.Test.NUnit.Assert.Throws$6(System.FormatException, function () {
+                    System.Console.WriteLine(System.String.format(f, [Bridge.box(6, System.Int32), Bridge.box(7, System.Int32), Bridge.box(8, System.Int32), Bridge.box(9, System.Int32)]));
+                });
+                this.AssertConsoleMessage("#6", "");
+            },
+            TestWriteLineFormatString5: function () {
+                var f = "{0} {1} {2} {3} {4}";
+
+                System.Console.WriteLine(System.String.format(f, [Bridge.box(1, System.Int32), "2", Bridge.box(true, System.Boolean, $box_.System.Boolean.toString), Bridge.box(4, System.Int32), Bridge.box(5, System.Int32)]));
+                this.AssertConsoleMessage("#1", "1 2 True 4 5");
+
+                System.Console.WriteLine(System.String.format(f, [null, Bridge.box(false, System.Boolean, $box_.System.Boolean.toString), null, null, Bridge.box(3, System.Int32)]));
+                this.AssertConsoleMessage("#2", " False   3");
+
+                System.Console.WriteLine(System.String.format(f, [null, null, null, null, null]));
+                this.AssertConsoleMessage("#3", "    ");
+
+                f = "{0}";
+                System.Console.WriteLine(System.String.format(f, ["a", "b", "c", "d", "e"]));
+                this.AssertConsoleMessage("#4", "a");
+
+                f = null;
+                Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentNullException, function () {
+                    System.Console.WriteLine(System.String.format(f, [Bridge.box(4, System.Int32), Bridge.box(5, System.Int32), Bridge.box(6, System.Int32), Bridge.box(7, System.Int32), Bridge.box(8, System.Int32)]));
+                });
+                this.AssertConsoleMessage("#5", "");
+
+                f = "{0} {1} {2} {3} {4} {5}";
+                Bridge.Test.NUnit.Assert.Throws$6(System.FormatException, function () {
+                    System.Console.WriteLine(System.String.format(f, [Bridge.box(6, System.Int32), Bridge.box(7, System.Int32), Bridge.box(8, System.Int32), Bridge.box(9, System.Int32), Bridge.box(10, System.Int32)]));
+                });
+                this.AssertConsoleMessage("#6", "");
+            },
+            TestWriteLineUInt32: function () {
+                var n = 0;
+                System.Console.WriteLine(n);
+                this.AssertConsoleMessage("#1", "0");
+
+                n = 4294967295;
+                System.Console.WriteLine(n);
+                this.AssertConsoleMessage("#2", "4294967295");
+            },
+            TestWriteLineUInt64: function () {
+                System.Console.WriteLine(System.UInt64(0).toString());
+                this.AssertConsoleMessage("#1", "0");
+
+                System.Console.WriteLine(System.UInt64([-1,-1]).toString());
+                this.AssertConsoleMessage("#2", "18446744073709551615");
+            },
+            TestWriteLineCharArray: function () {
+                var ch = System.Array.init(0, 0, System.Char);
+                System.Console.WriteLine(System.Console.TransformChars(ch, 1));
+                this.AssertConsoleMessage("#1", "");
+
+                ch = System.Array.init([97, 98], System.Char);
+                System.Console.WriteLine(System.Console.TransformChars(ch, 1));
+                this.AssertConsoleMessage("#2", "ab");
+
+                ch = null;
+                System.Console.WriteLine(System.Console.TransformChars(ch, 1));
+                this.AssertConsoleMessage("#3", "");
+            },
+            TestWriteLineCharArrayIndexCount: function () {
+                var ch = System.Array.init(0, 0, System.Char);
+                System.Console.WriteLine(System.Console.TransformChars(ch, 0, 0, 0));
+                this.AssertConsoleMessage("#1", "");
+
+                ch = System.Array.init([97, 98], System.Char);
+
+                System.Console.WriteLine(System.Console.TransformChars(ch, 0, 0, 0));
+                this.AssertConsoleMessage("#2", "");
+
+                System.Console.WriteLine(System.Console.TransformChars(ch, 0, 0, 2));
+                this.AssertConsoleMessage("#3", "ab");
+
+                System.Console.WriteLine(System.Console.TransformChars(ch, 0, 1, 1));
+                this.AssertConsoleMessage("#4", "b");
+
+                System.Console.WriteLine(System.Console.TransformChars(ch, 0, 0, 1));
+                this.AssertConsoleMessage("#5", "a");
+
+                Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentOutOfRangeException, function () {
+                    System.Console.WriteLine(System.Console.TransformChars(ch, 0, -1, 1));
+                });
+                this.AssertConsoleMessage("#6", "");
+
+                Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentOutOfRangeException, function () {
+                    System.Console.WriteLine(System.Console.TransformChars(ch, 0, 1, -1));
+                });
+                this.AssertConsoleMessage("#7", "");
+
+                Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentException, function () {
+                    System.Console.WriteLine(System.Console.TransformChars(ch, 0, 0, 3));
+                });
+                this.AssertConsoleMessage("#8", "");
+
+                Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentException, function () {
+                    System.Console.WriteLine(System.Console.TransformChars(ch, 0, 1, 2));
+                });
+                this.AssertConsoleMessage("#9", "");
+
+                ch = null;
+                Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentNullException, function () {
+                    System.Console.WriteLine(System.Console.TransformChars(ch, 0, 0, 1));
+                });
+                this.AssertConsoleMessage("#10", "");
+            },
+            TestWriteLineEnum: function () {
+                var en = Bridge.ClientTest.SystemConsoleTests.Values.Value1;
+                System.Console.WriteLine(System.Enum.toString(Bridge.ClientTest.SystemConsoleTests.Values, en));
+                this.AssertConsoleMessage("#1", "Value1");
+
+                en = Bridge.ClientTest.SystemConsoleTests.Values.Value2;
+                System.Console.WriteLine(System.Enum.toString(Bridge.ClientTest.SystemConsoleTests.Values, en));
+                this.AssertConsoleMessage("#2", "Value2");
+            },
+            TestWriteLineDecimalNullable: function () {
+                var d = System.Decimal(-1.0);
+                System.Console.WriteLine(d && d.toString('G'));
+                this.AssertConsoleMessage("#1", "-1");
+
+                d = System.Decimal(1.12345678);
+                System.Console.WriteLine(d && d.toString('G'));
+                this.AssertConsoleMessage("#2", "1.12345678");
+
+                d = System.Decimal.lift(null);
+                System.Console.WriteLine(d && d.toString('G'));
+                this.AssertConsoleMessage("#3", "");
+            },
+            TestWriteLineInt64Nullable: function () {
+                var l = System.Int64(0);
+                System.Console.WriteLine(l && l.toString());
+                this.AssertConsoleMessage("#1", "0");
+
+                l = System.Int64([-1,2147483647]);
+                System.Console.WriteLine(l && l.toString());
+                this.AssertConsoleMessage("#2", "9223372036854775807");
+
+                l = System.Int64([0,-2147483648]);
+                System.Console.WriteLine(l && l.toString());
+                this.AssertConsoleMessage("#3", "-9223372036854775808");
+
+                l = System.Int64.lift(null);
+                System.Console.WriteLine(l && l.toString());
+                this.AssertConsoleMessage("#4", "");
+            },
+            TestWriteLineUInt64Nullable: function () {
+                var l = System.UInt64(0);
+                System.Console.WriteLine(l && l.toString());
+                this.AssertConsoleMessage("#1", "0");
+
+                l = System.UInt64([-1,-1]);
+                System.Console.WriteLine(l && l.toString());
+                this.AssertConsoleMessage("#2", "18446744073709551615");
+
+                l = System.UInt64.lift(null);
+                System.Console.WriteLine(l && l.toString());
+                this.AssertConsoleMessage("#3", "");
+            },
+            AssertConsoleMessage: function (description, expected) {
+                try {
+                    description = System.String.concat(description, " - ");
+
+                    Bridge.Test.NUnit.Assert.AreEqual$1(expected, this.ConsoleBuffer, System.String.concat(description, "expected ", expected));
+                }
+                finally {
+                    this.CleanConsoleBuffer();
+                }
+            }
+        }
+    });
+
+    Bridge.define("$AnonymousType$33", $asm, {
+        $kind: "anonymous",
+        ctors: {
+            ctor: function (id, name) {
+                this.Id = id;
+                this.Name = name;
+            }
+        },
+        methods: {
+            equals: function (o) {
+                if (!Bridge.is(o, $asm.$AnonymousType$33)) {
+                    return false;
+                }
+                return Bridge.equals(this.Id, o.Id) && Bridge.equals(this.Name, o.Name);
+            },
+            getHashCode: function () {
+                var h = Bridge.addHash([7550209244, this.Id, this.Name]);
+                return h;
+            },
+            toJSON: function () {
+                return {
+                    Id : this.Id,
+                    Name : this.Name
+                };
+            }
+        },
+        statics : {
+            methods: {
+                $metadata : function () { return {"m":[{"a":2,"n":"Id","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_Id","t":8,"rt":System.Int32,"fg":"Id"},"fn":"Id"},{"a":2,"n":"Name","t":16,"rt":System.String,"g":{"a":2,"n":"get_Name","t":8,"rt":System.String,"fg":"Name"},"fn":"Name"}]}; }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.SystemConsoleTests.ClassWithCustomToString", {
+        methods: {
+            toString: function () {
+                return "Overridden ToString()";
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.SystemConsoleTests.Values", {
+        $kind: "enum",
+        statics: {
+            fields: {
+                Value1: 1,
+                Value2: 2
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Text.RegularExpressions.RegexTestBase", {
         methods: {
             ValidateMatchNotFound: function (match) {
@@ -50163,6 +50742,20 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.apply($box_.Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum, {
         toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum, obj);}
+    });
+
+
+    Bridge.ns("Bridge.ClientTest.SystemConsoleTests.Values", $box_);
+
+    Bridge.apply($box_.Bridge.ClientTest.SystemConsoleTests.Values, {
+        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.SystemConsoleTests.Values, obj);}
+    });
+
+
+    Bridge.ns("System.Nullable$1", $box_);
+
+    Bridge.apply($box_.System.Nullable$1, {
+        toString: function (obj) {return System.Nullable.toString(obj);}
     });
 
     var $m = Bridge.setMetadata,
