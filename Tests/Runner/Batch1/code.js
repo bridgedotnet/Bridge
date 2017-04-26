@@ -9161,9 +9161,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             ForeachWithListItemCallbackWorks: function () {
                 var result = "";
-                Bridge.Linq.Enumerable.from($asm.$.Bridge.ClientTest.Collections.Generic.ListTests.f21(new (System.Collections.Generic.List$1(System.String))())).forEach(function (s) {
-                        result = System.String.concat(result, s);
-                    });
+                $asm.$.Bridge.ClientTest.Collections.Generic.ListTests.f21(new (System.Collections.Generic.List$1(System.String))()).forEach(function (s) {
+                    result = System.String.concat(result, s);
+                });
                 Bridge.Test.NUnit.Assert.AreEqual("abc", result);
             },
             ForeachWithListCallbackWorks: function () {

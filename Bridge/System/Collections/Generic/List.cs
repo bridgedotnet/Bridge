@@ -78,6 +78,8 @@ namespace System.Collections.Generic
 
         public extern void InsertRange(int index, IEnumerable<T> items);
 
+        public extern void ForEach(Action<T> action);
+
         public extern string Join();
 
         public extern string Join(string delimiter);
