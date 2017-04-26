@@ -320,8 +320,17 @@ namespace System
         /// Writes the specified array of Unicode characters, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="buffer">An array of Unicode characters.</param>
-        [Template("System.Console.WriteLine(System.Console.TransformChars({buffer}))")]
+        [Template("System.Console.WriteLine(System.Console.TransformChars({buffer}, 1))")]
         public static extern void WriteLine(Char[] buffer);
+
+        /// <summary>
+        /// Writes the specified subarray of Unicode characters to the standard output stream.
+        /// </summary>
+        /// <param name="buffer">An array of Unicode characters.</param>
+        /// <param name="index">The starting position in buffer.</param>
+        /// <param name="count">The number of characters to write. </param>
+        [Template("System.Console.WriteLine(System.Console.TransformChars({buffer}, 0, {index}, {count}))")]
+        public static extern void WriteLine(Char[] buffer, Int32 index, Int32 count);
 
         /// <summary>
         /// Writes the text representation of the specified enum value, followed by the current line terminator, to the standard output stream.
@@ -357,12 +366,41 @@ namespace System
         #region Utils
 
         [Name("TransformChars")]
-        private static string TransformChars(params char[] buffer)
+        private static string TransformChars(char[] buffer, int all, int index, int count)
         {
+            if (all != 1)
+            {
+                if (buffer == null)
+                {
+                    throw new ArgumentNullException("buffer");
+                }
+
+                if (index < 0)
+                {
+                    throw new ArgumentOutOfRangeException("index", "less than zero");
+                }
+
+                if (count < 0)
+                {
+                    throw new ArgumentOutOfRangeException("count", "less than zero");
+                }
+
+                if (index + count > buffer.Length)
+                {
+                    throw new ArgumentException("index plus count specify a position that is not within buffer.");
+                }
+            }
+
             var s = "";
             if (buffer != null)
             {
-                for (int i = 0; i < buffer.Length; i++)
+                if (all == 1)
+                {
+                    index = 0;
+                    count = buffer.Length;
+                }
+
+                for (int i = index; i < index + count; i++)
                 {
                     s += (char)buffer[i];
                 }
@@ -481,22 +519,6 @@ namespace System
         ///// </summary>
         ///// <param name="bufferSize">The internal stream buffer size.</param>
         //public static extern void OpenStandardOutput(Int32 bufferSize);
-
-        ///// <summary>
-        ///// Writes the specified subarray of Unicode characters to the standard output stream.
-        ///// </summary>
-        ///// <param name="buffer">An array of Unicode characters.</param>
-        ///// <param name="index">The starting position in buffer.</param>
-        ///// <param name="count">The number of characters to write. </param>
-        //public static extern void Write(Char[] buffer, Int32 index, Int32 count);
-
-        ///// <summary>
-        ///// Writes the specified subarray of Unicode characters, followed by the current line terminator, to the standard output stream.
-        ///// </summary>
-        ///// <param name="buffer">An array of Unicode characters.</param>
-        ///// <param name="index">The starting position in buffer.</param>
-        ///// <param name="count">The number of characters to write. </param>
-        //public static extern void WriteLine(Char[] buffer, Int32 index, Int32 count);
 
         #endregion Not Implemented
     }
