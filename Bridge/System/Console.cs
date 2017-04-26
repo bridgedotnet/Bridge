@@ -173,7 +173,17 @@ namespace System
         /// Writes the specified array of Unicode characters to the standard output stream.
         /// </summary>
         /// <param name="buffer">An array of Unicode characters.</param>
+        [Template("System.Console.Write(System.Console.TransformChars({buffer}, 1))")]
         public static extern void Write(Char[] buffer);
+
+        /// <summary>
+        /// Writes the specified subarray of Unicode characters to the standard output stream.
+        /// </summary>
+        /// <param name="buffer">An array of Unicode characters.</param>
+        /// <param name="index">The starting position in buffer.</param>
+        /// <param name="count">The number of characters to write. </param>
+        [Template("System.Console.Write(System.Console.TransformChars({buffer}, 0, {index}, {count}))")]
+        public static extern void Write(Char[] buffer, Int32 index, Int32 count);
 
         #endregion Write
 
