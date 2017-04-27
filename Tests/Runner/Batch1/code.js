@@ -4835,7 +4835,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 this.AssertLogMessageObject("#30 - ", {  }, "{}"); // Improved in #1994
                 this.AssertLogMessageObject("#31 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassA(), "I'm ClassA");
                 this.AssertLogMessageObject("#32 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassB(), "{}"); // Improved in #1994
-                this.AssertLogMessageObject("#33 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassC(), "{\"Name\":\"Frank\",\"Age\":55,\"Admin\":true}"); // Improved in #1994
+                this.AssertLogMessageObject("#33 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassC(), Bridge.ClientTestHelper.StringHelper.CombineLines(["{", "    \"Name\": \"Frank\",", "    \"Age\": 55,", "    \"Admin\": true", "}"])); // Improved in #1994
                 this.AssertLogMessageObject("#34 - ", {  }.toString(), "[object Object]");
                 this.AssertLogMessageObject("#35 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassA().toString(), "I'm ClassA");
                 this.AssertLogMessageObject("#36 - ", new Bridge.ClientTest.BridgeConsoleTests.ClassB().toString(), "[object Object]");
@@ -34985,15 +34985,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 o = new $asm.$AnonymousType$33(1, "John");
                 System.Console.WriteLine(o);
-                this.AssertConsoleMessage("#15", "{\"Id\":1,\"Name\":\"John\"}");
+                this.AssertConsoleMessage("#15", Bridge.ClientTestHelper.StringHelper.CombineLines(["{", "    \"Id\": 1,", "    \"Name\": \"John\"", "}"]));
 
                 var a = new $asm.$AnonymousType$33(2, "Mary");
                 System.Console.WriteLine(a);
-                this.AssertConsoleMessage("#16", "{\"Id\":2,\"Name\":\"Mary\"}");
+                this.AssertConsoleMessage("#16", Bridge.ClientTestHelper.StringHelper.CombineLines(["{", "    \"Id\": 2,", "    \"Name\": \"Mary\"", "}"]));
 
                 o = { Id: 3, Name: "Sally" };
                 System.Console.WriteLine(o);
-                this.AssertConsoleMessage("#17", "{\"Id\":3,\"Name\":\"Sally\"}");
+                this.AssertConsoleMessage("#17", Bridge.ClientTestHelper.StringHelper.CombineLines(["{", "    \"Id\": 3,", "    \"Name\": \"Sally\"", "}"]));
             },
             TestWriteLineSingle: function () {
                 System.Console.WriteLine(System.Single.format(0.0));
@@ -35426,15 +35426,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 o = new $asm.$AnonymousType$33(1, "John");
                 System.Console.Write(o);
-                this.AssertConsoleMessage("#15", "{\"Id\":1,\"Name\":\"John\"}");
+                this.AssertConsoleMessage("#15", Bridge.ClientTestHelper.StringHelper.CombineLines(["{", "    \"Id\": 1,", "    \"Name\": \"John\"", "}"]));
 
                 var a = new $asm.$AnonymousType$33(2, "Mary");
                 System.Console.Write(a);
-                this.AssertConsoleMessage("#16", "{\"Id\":2,\"Name\":\"Mary\"}");
+                this.AssertConsoleMessage("#16", Bridge.ClientTestHelper.StringHelper.CombineLines(["{", "    \"Id\": 2,", "    \"Name\": \"Mary\"", "}"]));
 
                 o = { Id: 3, Name: "Sally" };
                 System.Console.Write(o);
-                this.AssertConsoleMessage("#17", "{\"Id\":3,\"Name\":\"Sally\"}");
+                this.AssertConsoleMessage("#17", Bridge.ClientTestHelper.StringHelper.CombineLines(["{", "    \"Id\": 3,", "    \"Name\": \"Sally\"", "}"]));
             },
             TestWriteSingle: function () {
                 System.Console.Write(0.0);

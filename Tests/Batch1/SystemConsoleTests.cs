@@ -1,4 +1,5 @@
 ﻿using System;
+using Bridge.ClientTestHelper;
 using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest
@@ -274,15 +275,15 @@ namespace Bridge.ClientTest
 
             o = new { Id = 1, Name = "John" };
             Console.WriteLine(o);
-            AssertConsoleMessage("#15", "{\"Id\":1,\"Name\":\"John\"}");
+            AssertConsoleMessage("#15", StringHelper.CombineLines("{", "    \"Id\": 1,", "    \"Name\": \"John\"", "}"));
 
             var a = new { Id = 2, Name = "Mary" };
             Console.WriteLine(a);
-            AssertConsoleMessage("#16", "{\"Id\":2,\"Name\":\"Mary\"}");
+            AssertConsoleMessage("#16", StringHelper.CombineLines("{", "    \"Id\": 2,", "    \"Name\": \"Mary\"", "}"));
 
             //@ o = { Id: 3, Name: "Sally" };
             Console.WriteLine(o);
-            AssertConsoleMessage("#17", "{\"Id\":3,\"Name\":\"Sally\"}");
+            AssertConsoleMessage("#17", StringHelper.CombineLines("{", "    \"Id\": 3,", "    \"Name\": \"Sally\"", "}"));
         }
 
         [Test]
@@ -755,15 +756,15 @@ namespace Bridge.ClientTest
 
             o = new { Id = 1, Name = "John" };
             Console.Write(o);
-            AssertConsoleMessage("#15", "{\"Id\":1,\"Name\":\"John\"}");
+            AssertConsoleMessage("#15", StringHelper.CombineLines("{", "    \"Id\": 1,", "    \"Name\": \"John\"", "}"));
 
             var a = new { Id = 2, Name = "Mary" };
             Console.Write(a);
-            AssertConsoleMessage("#16", "{\"Id\":2,\"Name\":\"Mary\"}");
+            AssertConsoleMessage("#16", StringHelper.CombineLines("{", "    \"Id\": 2,", "    \"Name\": \"Mary\"", "}"));
 
             //@ o = { Id: 3, Name: "Sally" };
             Console.Write(o);
-            AssertConsoleMessage("#17", "{\"Id\":3,\"Name\":\"Sally\"}");
+            AssertConsoleMessage("#17", StringHelper.CombineLines("{", "    \"Id\": 3,", "    \"Name\": \"Sally\"", "}"));
         }
 
         [Test]
