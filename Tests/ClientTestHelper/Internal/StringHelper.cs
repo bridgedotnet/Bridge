@@ -25,5 +25,17 @@ namespace Bridge.ClientTestHelper
 
             return s;
         }
+
+        public static string CombineLinesNL(params string[] lines)
+        {
+            var s = CombineLines(lines);
+
+            if (s == null)
+            {
+                return null;
+            }
+
+            return s + System.Environment.NewLine;
+        }
     }
 }

@@ -34824,208 +34824,212 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             TestClear: function () {
                 System.Console.WriteLine("Message1");
-                this.AssertConsoleMessage("#1", "Message1", true);
+                this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["Message1"]), true);
                 System.Console.WriteLine("Message2");
-                this.AssertConsoleMessage("#2", "Message1Message2", true);
+                this.AssertConsoleMessage("#2", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["Message1", "Message2"]), true);
 
                 System.Console.Clear();
                 this.AssertConsoleMessage("#3", "");
 
                 // Check it works after Clear()
-                System.Console.WriteLine("Message1");
-                this.AssertConsoleMessage("#4", "Message1", true);
-                System.Console.WriteLine("Message2");
-                this.AssertConsoleMessage("#5", "Message1Message2", true);
+                System.Console.WriteLine("Message4");
+                this.AssertConsoleMessage("#4", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["Message4"]), true);
+                System.Console.WriteLine("Message5");
+                this.AssertConsoleMessage("#5", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["Message4", "Message5"]), true);
 
                 System.Console.Clear();
-                this.AssertConsoleMessage("#3", "");
+                this.AssertConsoleMessage("#6", "");
             },
             TestWriteLine: function () {
                 System.Console.WriteLine();
-                this.AssertConsoleMessage("#1", "");
+                this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL([""]));
+            },
+            TestWriteLineMultiline: function () {
+                System.Console.WriteLine("1\n2\n3");
+                this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["1\n2\n3"]));
             },
             TestWriteLineBool: function () {
                 System.Console.WriteLine(System.Boolean.toString(true));
-                this.AssertConsoleMessage("#1", "True");
+                this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["True"]));
 
                 System.Console.WriteLine(System.Boolean.toString(false));
-                this.AssertConsoleMessage("#2", "False");
+                this.AssertConsoleMessage("#2", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["False"]));
             },
             TestWriteLineChar: function () {
                 System.Console.WriteLine(String.fromCharCode(97));
-                this.AssertConsoleMessage("#1", "a");
+                this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["a"]));
             },
             TestWriteLineDecimal: function () {
                 System.Console.WriteLine(System.Decimal(-1.0).toString('G'));
-                this.AssertConsoleMessage("#1", "-1");
+                this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["-1"]));
 
                 System.Console.WriteLine(System.Decimal(1.0).toString('G'));
-                this.AssertConsoleMessage("#2", "1");
+                this.AssertConsoleMessage("#2", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["1"]));
 
                 System.Console.WriteLine(System.Decimal(-12345678.0).toString('G'));
-                this.AssertConsoleMessage("#3", "-12345678");
+                this.AssertConsoleMessage("#3", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["-12345678"]));
 
                 System.Console.WriteLine(System.Decimal(12345678.0).toString('G'));
-                this.AssertConsoleMessage("#4", "12345678");
+                this.AssertConsoleMessage("#4", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["12345678"]));
 
                 System.Console.WriteLine(System.Decimal(-1.12345678).toString('G'));
-                this.AssertConsoleMessage("#5", "-1.12345678");
+                this.AssertConsoleMessage("#5", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["-1.12345678"]));
 
                 System.Console.WriteLine(System.Decimal(1.12345678).toString('G'));
-                this.AssertConsoleMessage("#6", "1.12345678");
+                this.AssertConsoleMessage("#6", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["1.12345678"]));
 
                 System.Console.WriteLine(System.Decimal("-12345678.12345678").toString('G'));
-                this.AssertConsoleMessage("#7", "-12345678.12345678");
+                this.AssertConsoleMessage("#7", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["-12345678.12345678"]));
 
                 System.Console.WriteLine(System.Decimal("12345678.12345678").toString('G'));
-                this.AssertConsoleMessage("#8", "12345678.12345678");
+                this.AssertConsoleMessage("#8", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["12345678.12345678"]));
             },
             TestWriteLineDouble: function () {
                 System.Console.WriteLine(System.Double.format(-1.0));
-                this.AssertConsoleMessage("#1", "-1");
+                this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["-1"]));
 
                 System.Console.WriteLine(System.Double.format(1.0));
-                this.AssertConsoleMessage("#2", "1");
+                this.AssertConsoleMessage("#2", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["1"]));
 
                 System.Console.WriteLine(System.Double.format(-12345678.0));
-                this.AssertConsoleMessage("#3", "-12345678");
+                this.AssertConsoleMessage("#3", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["-12345678"]));
 
                 System.Console.WriteLine(System.Double.format(12345678.0));
-                this.AssertConsoleMessage("#4", "12345678");
+                this.AssertConsoleMessage("#4", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["12345678"]));
 
                 System.Console.WriteLine(System.Double.format(-1.12345678));
-                this.AssertConsoleMessage("#5", "-1.12345678");
+                this.AssertConsoleMessage("#5", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["-1.12345678"]));
 
                 System.Console.WriteLine(System.Double.format(1.12345678));
-                this.AssertConsoleMessage("#6", "1.12345678");
+                this.AssertConsoleMessage("#6", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["1.12345678"]));
 
                 System.Console.WriteLine(System.Double.format(-12345678.12345678));
-                this.AssertConsoleMessage("#7", "-12345678.1234568");
+                this.AssertConsoleMessage("#7", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["-12345678.1234568"]));
 
                 System.Console.WriteLine(System.Double.format(12345678.12345678));
-                this.AssertConsoleMessage("#8", "12345678.1234568");
+                this.AssertConsoleMessage("#8", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["12345678.1234568"]));
             },
             TestWriteLineInt32: function () {
                 System.Console.WriteLine(0);
-                this.AssertConsoleMessage("#1", "0");
+                this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["0"]));
 
                 System.Console.WriteLine(2147483647);
-                this.AssertConsoleMessage("#2", "2147483647");
+                this.AssertConsoleMessage("#2", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["2147483647"]));
 
                 System.Console.WriteLine(-2147483648);
-                this.AssertConsoleMessage("#3", "-2147483648");
+                this.AssertConsoleMessage("#3", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["-2147483648"]));
             },
             TestWriteLineInt64: function () {
                 System.Console.WriteLine(System.Int64(0));
-                this.AssertConsoleMessage("#1", "0");
+                this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["0"]));
 
                 System.Console.WriteLine(System.Int64([-1,2147483647]));
-                this.AssertConsoleMessage("#2", "9223372036854775807");
+                this.AssertConsoleMessage("#2", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["9223372036854775807"]));
 
                 System.Console.WriteLine(System.Int64([0,-2147483648]));
-                this.AssertConsoleMessage("#3", "-9223372036854775808");
+                this.AssertConsoleMessage("#3", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["-9223372036854775808"]));
             },
             TestWriteLineObject: function () {
                 var o = "Hi";
 
                 System.Console.WriteLine(o);
-                this.AssertConsoleMessage("#1", "Hi");
+                this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["Hi"]));
 
                 o = Bridge.box(1, System.Int32);
                 System.Console.WriteLine(o);
-                this.AssertConsoleMessage("#2", "1");
+                this.AssertConsoleMessage("#2", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["1"]));
 
                 o = System.Int64([-1,2147483647]);
                 System.Console.WriteLine(o);
-                this.AssertConsoleMessage("#3", "9223372036854775807");
+                this.AssertConsoleMessage("#3", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["9223372036854775807"]));
 
                 o = null;
                 System.Console.WriteLine(o);
-                this.AssertConsoleMessage("#4", "");
+                this.AssertConsoleMessage("#4", Bridge.ClientTestHelper.StringHelper.CombineLinesNL([""]));
 
                 o = Bridge.box(Bridge.ClientTest.SystemConsoleTests.Values.Value1, Bridge.ClientTest.SystemConsoleTests.Values, $box_.Bridge.ClientTest.SystemConsoleTests.Values.toString);
                 System.Console.WriteLine(o);
-                this.AssertConsoleMessage("#5", "Value1");
+                this.AssertConsoleMessage("#5", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["Value1"]));
 
                 o = System.Decimal(1.01);
                 System.Console.WriteLine(o);
-                this.AssertConsoleMessage("#6", "1.01");
+                this.AssertConsoleMessage("#6", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["1.01"]));
 
                 o = System.Int64(-2);
                 System.Console.WriteLine(o);
-                this.AssertConsoleMessage("#7", "-2");
+                this.AssertConsoleMessage("#7", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["-2"]));
 
                 o = System.UInt64(4);
                 System.Console.WriteLine(o);
-                this.AssertConsoleMessage("#8", "4");
+                this.AssertConsoleMessage("#8", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["4"]));
 
                 o = Bridge.box(Bridge.ClientTest.SystemConsoleTests.Values.Value2, Bridge.ClientTest.SystemConsoleTests.Values, $box_.System.Nullable$1.toString);
                 System.Console.WriteLine(o);
-                this.AssertConsoleMessage("#9", "2"); // That's a bug in nullable<enum>.ToString(), expected "Value2"
+                this.AssertConsoleMessage("#9", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["2"])); // That's a bug in nullable<enum>.ToString(), expected "Value2"
 
                 o = System.Decimal(1.01);
                 System.Console.WriteLine(o);
-                this.AssertConsoleMessage("#10", "1.01");
+                this.AssertConsoleMessage("#10", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["1.01"]));
 
                 o = System.Int64(-2);
                 System.Console.WriteLine(o);
-                this.AssertConsoleMessage("#11", "-2");
+                this.AssertConsoleMessage("#11", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["-2"]));
 
                 o = System.UInt64(4);
                 System.Console.WriteLine(o);
-                this.AssertConsoleMessage("#12", "4");
+                this.AssertConsoleMessage("#12", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["4"]));
 
                 o = {  };
                 System.Console.WriteLine(o);
-                this.AssertConsoleMessage("#13", "{}"); // Non .Net behavior, should be System.Object
+                this.AssertConsoleMessage("#13", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["{}"])); // Non .Net behavior, should be System.Object
 
                 o = new Bridge.ClientTest.SystemConsoleTests.ClassWithCustomToString();
                 System.Console.WriteLine(o);
-                this.AssertConsoleMessage("#14", "Overridden ToString()");
+                this.AssertConsoleMessage("#14", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["Overridden ToString()"]));
 
                 o = new $asm.$AnonymousType$33(1, "John");
                 System.Console.WriteLine(o);
-                this.AssertConsoleMessage("#15", Bridge.ClientTestHelper.StringHelper.CombineLines(["{", "    \"Id\": 1,", "    \"Name\": \"John\"", "}"]));
+                this.AssertConsoleMessage("#15", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["{", "    \"Id\": 1,", "    \"Name\": \"John\"", "}"]));
 
                 var a = new $asm.$AnonymousType$33(2, "Mary");
                 System.Console.WriteLine(a);
-                this.AssertConsoleMessage("#16", Bridge.ClientTestHelper.StringHelper.CombineLines(["{", "    \"Id\": 2,", "    \"Name\": \"Mary\"", "}"]));
+                this.AssertConsoleMessage("#16", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["{", "    \"Id\": 2,", "    \"Name\": \"Mary\"", "}"]));
 
                 o = { Id: 3, Name: "Sally" };
                 System.Console.WriteLine(o);
-                this.AssertConsoleMessage("#17", Bridge.ClientTestHelper.StringHelper.CombineLines(["{", "    \"Id\": 3,", "    \"Name\": \"Sally\"", "}"]));
+                this.AssertConsoleMessage("#17", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["{", "    \"Id\": 3,", "    \"Name\": \"Sally\"", "}"]));
             },
             TestWriteLineSingle: function () {
                 System.Console.WriteLine(System.Single.format(0.0));
-                this.AssertConsoleMessage("#1", "0");
+                this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["0"]));
 
                 System.Console.WriteLine(System.Single.format(1.0));
-                this.AssertConsoleMessage("#2", "1");
+                this.AssertConsoleMessage("#2", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["1"]));
 
                 System.Console.WriteLine(System.Single.format(-1.0));
-                this.AssertConsoleMessage("#3", "-1");
+                this.AssertConsoleMessage("#3", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["-1"]));
             },
             TestWriteLineString: function () {
                 System.Console.WriteLine(null);
-                this.AssertConsoleMessage("#1", "");
+                this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL([""]));
 
                 System.Console.WriteLine("");
-                this.AssertConsoleMessage("#2", "");
+                this.AssertConsoleMessage("#2", Bridge.ClientTestHelper.StringHelper.CombineLinesNL([""]));
 
                 System.Console.WriteLine("Value1");
-                this.AssertConsoleMessage("#3", "Value1");
+                this.AssertConsoleMessage("#3", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["Value1"]));
             },
             TestWriteLineFormatString1: function () {
                 var f = "{0}";
 
                 System.Console.WriteLine(System.String.format(f, Bridge.box(1, System.Int32)));
-                this.AssertConsoleMessage("#1", "1");
+                this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["1"]));
 
                 System.Console.WriteLine(System.String.format(f, "\"2\""));
-                this.AssertConsoleMessage("#2", "\"2\"");
+                this.AssertConsoleMessage("#2", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["\"2\""]));
 
                 System.Console.WriteLine(System.String.format(f, null));
-                this.AssertConsoleMessage("#3", "");
+                this.AssertConsoleMessage("#3", Bridge.ClientTestHelper.StringHelper.CombineLinesNL([""]));
 
                 f = null;
                 Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentNullException, function () {
@@ -35043,17 +35047,17 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var f = "{0} {1}";
 
                 System.Console.WriteLine(System.String.format(f, Bridge.box(1, System.Int32), "2"));
-                this.AssertConsoleMessage("#1", "1 2");
+                this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["1 2"]));
 
                 System.Console.WriteLine(System.String.format(f, null, Bridge.box(false, System.Boolean, $box_.System.Boolean.toString)));
-                this.AssertConsoleMessage("#2", " False");
+                this.AssertConsoleMessage("#2", Bridge.ClientTestHelper.StringHelper.CombineLinesNL([" False"]));
 
                 System.Console.WriteLine(System.String.format(f, null, null));
-                this.AssertConsoleMessage("#3", " ");
+                this.AssertConsoleMessage("#3", Bridge.ClientTestHelper.StringHelper.CombineLinesNL([" "]));
 
                 f = "{0}";
                 System.Console.WriteLine(System.String.format(f, "a", "b"));
-                this.AssertConsoleMessage("#4", "a");
+                this.AssertConsoleMessage("#4", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["a"]));
 
                 f = null;
                 Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentNullException, function () {
@@ -35071,17 +35075,17 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var f = "{0} {1} {2}";
 
                 System.Console.WriteLine(System.String.format(f, Bridge.box(1, System.Int32), "2", Bridge.box(true, System.Boolean, $box_.System.Boolean.toString)));
-                this.AssertConsoleMessage("#1", "1 2 True");
+                this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["1 2 True"]));
 
                 System.Console.WriteLine(System.String.format(f, null, null, Bridge.box(false, System.Boolean, $box_.System.Boolean.toString)));
-                this.AssertConsoleMessage("#2", "  False");
+                this.AssertConsoleMessage("#2", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["  False"]));
 
                 System.Console.WriteLine(System.String.format(f, null, null, null));
-                this.AssertConsoleMessage("#3", "  ");
+                this.AssertConsoleMessage("#3", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["  "]));
 
                 f = "{0}";
                 System.Console.WriteLine(System.String.format(f, "a", "b", "c"));
-                this.AssertConsoleMessage("#4", "a");
+                this.AssertConsoleMessage("#4", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["a"]));
 
                 f = null;
                 Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentNullException, function () {
@@ -35099,17 +35103,17 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var f = "{0} {1} {2} {3}";
 
                 System.Console.WriteLine(System.String.format(f, [Bridge.box(1, System.Int32), "2", Bridge.box(true, System.Boolean, $box_.System.Boolean.toString), Bridge.box(4, System.Int32)]));
-                this.AssertConsoleMessage("#1", "1 2 True 4");
+                this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["1 2 True 4"]));
 
                 System.Console.WriteLine(System.String.format(f, [null, Bridge.box(false, System.Boolean, $box_.System.Boolean.toString), null, Bridge.box(3, System.Int32)]));
-                this.AssertConsoleMessage("#2", " False  3");
+                this.AssertConsoleMessage("#2", Bridge.ClientTestHelper.StringHelper.CombineLinesNL([" False  3"]));
 
                 System.Console.WriteLine(System.String.format(f, [null, null, null, null]));
-                this.AssertConsoleMessage("#3", "   ");
+                this.AssertConsoleMessage("#3", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["   "]));
 
                 f = "{0}";
                 System.Console.WriteLine(System.String.format(f, ["a", "b", "c", "d"]));
-                this.AssertConsoleMessage("#4", "a");
+                this.AssertConsoleMessage("#4", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["a"]));
 
                 f = null;
                 Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentNullException, function () {
@@ -35127,17 +35131,17 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var f = "{0} {1} {2} {3} {4}";
 
                 System.Console.WriteLine(System.String.format(f, [Bridge.box(1, System.Int32), "2", Bridge.box(true, System.Boolean, $box_.System.Boolean.toString), Bridge.box(4, System.Int32), Bridge.box(5, System.Int32)]));
-                this.AssertConsoleMessage("#1", "1 2 True 4 5");
+                this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["1 2 True 4 5"]));
 
                 System.Console.WriteLine(System.String.format(f, [null, Bridge.box(false, System.Boolean, $box_.System.Boolean.toString), null, null, Bridge.box(3, System.Int32)]));
-                this.AssertConsoleMessage("#2", " False   3");
+                this.AssertConsoleMessage("#2", Bridge.ClientTestHelper.StringHelper.CombineLinesNL([" False   3"]));
 
                 System.Console.WriteLine(System.String.format(f, [null, null, null, null, null]));
-                this.AssertConsoleMessage("#3", "    ");
+                this.AssertConsoleMessage("#3", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["    "]));
 
                 f = "{0}";
                 System.Console.WriteLine(System.String.format(f, ["a", "b", "c", "d", "e"]));
-                this.AssertConsoleMessage("#4", "a");
+                this.AssertConsoleMessage("#4", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["a"]));
 
                 f = null;
                 Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentNullException, function () {
@@ -35154,50 +35158,50 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             TestWriteLineUInt32: function () {
                 var n = 0;
                 System.Console.WriteLine(n);
-                this.AssertConsoleMessage("#1", "0");
+                this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["0"]));
 
                 n = 4294967295;
                 System.Console.WriteLine(n);
-                this.AssertConsoleMessage("#2", "4294967295");
+                this.AssertConsoleMessage("#2", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["4294967295"]));
             },
             TestWriteLineUInt64: function () {
                 System.Console.WriteLine(System.UInt64(0));
-                this.AssertConsoleMessage("#1", "0");
+                this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["0"]));
 
                 System.Console.WriteLine(System.UInt64([-1,-1]));
-                this.AssertConsoleMessage("#2", "18446744073709551615");
+                this.AssertConsoleMessage("#2", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["18446744073709551615"]));
             },
             TestWriteLineCharArray: function () {
                 var ch = System.Array.init(0, 0, System.Char);
                 System.Console.WriteLine(System.Console.TransformChars(ch, 1));
-                this.AssertConsoleMessage("#1", "");
+                this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL([""]));
 
                 ch = System.Array.init([97, 98], System.Char);
                 System.Console.WriteLine(System.Console.TransformChars(ch, 1));
-                this.AssertConsoleMessage("#2", "ab");
+                this.AssertConsoleMessage("#2", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["ab"]));
 
                 ch = null;
                 System.Console.WriteLine(System.Console.TransformChars(ch, 1));
-                this.AssertConsoleMessage("#3", "");
+                this.AssertConsoleMessage("#3", Bridge.ClientTestHelper.StringHelper.CombineLinesNL([""]));
             },
             TestWriteLineCharArrayIndexCount: function () {
                 var ch = System.Array.init(0, 0, System.Char);
                 System.Console.WriteLine(System.Console.TransformChars(ch, 0, 0, 0));
-                this.AssertConsoleMessage("#1", "");
+                this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL([""]));
 
                 ch = System.Array.init([97, 98], System.Char);
 
                 System.Console.WriteLine(System.Console.TransformChars(ch, 0, 0, 0));
-                this.AssertConsoleMessage("#2", "");
+                this.AssertConsoleMessage("#2", Bridge.ClientTestHelper.StringHelper.CombineLinesNL([""]));
 
                 System.Console.WriteLine(System.Console.TransformChars(ch, 0, 0, 2));
-                this.AssertConsoleMessage("#3", "ab");
+                this.AssertConsoleMessage("#3", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["ab"]));
 
                 System.Console.WriteLine(System.Console.TransformChars(ch, 0, 1, 1));
-                this.AssertConsoleMessage("#4", "b");
+                this.AssertConsoleMessage("#4", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["b"]));
 
                 System.Console.WriteLine(System.Console.TransformChars(ch, 0, 0, 1));
-                this.AssertConsoleMessage("#5", "a");
+                this.AssertConsoleMessage("#5", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["a"]));
 
                 Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentOutOfRangeException, function () {
                     System.Console.WriteLine(System.Console.TransformChars(ch, 0, -1, 1));
@@ -35228,62 +35232,67 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             TestWriteLineEnum: function () {
                 var en = Bridge.ClientTest.SystemConsoleTests.Values.Value1;
                 System.Console.WriteLine(Bridge.box(en, Bridge.ClientTest.SystemConsoleTests.Values, $box_.Bridge.ClientTest.SystemConsoleTests.Values.toString));
-                this.AssertConsoleMessage("#1", "Value1");
+                this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["Value1"]));
 
                 en = Bridge.ClientTest.SystemConsoleTests.Values.Value2;
                 System.Console.WriteLine(Bridge.box(en, Bridge.ClientTest.SystemConsoleTests.Values, $box_.Bridge.ClientTest.SystemConsoleTests.Values.toString));
-                this.AssertConsoleMessage("#2", "Value2");
+                this.AssertConsoleMessage("#2", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["Value2"]));
 
                 var f1 = "one";
                 System.Console.WriteLine(f1);
-                this.AssertConsoleMessage("#3", "one");
+                this.AssertConsoleMessage("#3", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["one"]));
 
                 var f2 = 0;
                 System.Console.WriteLine(f2);
-                this.AssertConsoleMessage("#4", "0");
+                this.AssertConsoleMessage("#4", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["0"]));
             },
             TestWriteLineDecimalNullable: function () {
                 var d = System.Decimal(-1.0);
                 System.Console.WriteLine(d && d.toString('G'));
-                this.AssertConsoleMessage("#1", "-1");
+                this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["-1"]));
 
                 d = System.Decimal(1.12345678);
                 System.Console.WriteLine(d && d.toString('G'));
-                this.AssertConsoleMessage("#2", "1.12345678");
+                this.AssertConsoleMessage("#2", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["1.12345678"]));
 
                 d = System.Decimal.lift(null);
                 System.Console.WriteLine(d && d.toString('G'));
-                this.AssertConsoleMessage("#3", "");
+                this.AssertConsoleMessage("#3", Bridge.ClientTestHelper.StringHelper.CombineLinesNL([""]));
             },
             TestWriteLineInt64Nullable: function () {
                 var l = System.Int64(0);
                 System.Console.WriteLine(System.Decimal.lift(l) && System.Decimal.lift(l).toString('G'));
-                this.AssertConsoleMessage("#1", "0");
+                this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["0"]));
 
                 l = System.Int64([-1,2147483647]);
                 System.Console.WriteLine(System.Decimal.lift(l) && System.Decimal.lift(l).toString('G'));
-                this.AssertConsoleMessage("#2", "9223372036854775807");
+                this.AssertConsoleMessage("#2", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["9223372036854775807"]));
 
                 l = System.Int64([0,-2147483648]);
                 System.Console.WriteLine(System.Decimal.lift(l) && System.Decimal.lift(l).toString('G'));
-                this.AssertConsoleMessage("#3", "-9223372036854775808");
+                this.AssertConsoleMessage("#3", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["-9223372036854775808"]));
 
                 l = System.Int64.lift(null);
                 System.Console.WriteLine(System.Decimal.lift(l) && System.Decimal.lift(l).toString('G'));
-                this.AssertConsoleMessage("#4", "");
+                this.AssertConsoleMessage("#4", Bridge.ClientTestHelper.StringHelper.CombineLinesNL([""]));
             },
             TestWriteLineUInt64Nullable: function () {
                 var l = System.UInt64(0);
                 System.Console.WriteLine(System.Decimal.lift(l) && System.Decimal.lift(l).toString('G'));
-                this.AssertConsoleMessage("#1", "0");
+                this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["0"]));
 
                 l = System.UInt64([-1,-1]);
                 System.Console.WriteLine(System.Decimal.lift(l) && System.Decimal.lift(l).toString('G'));
-                this.AssertConsoleMessage("#2", "18446744073709551615");
+                this.AssertConsoleMessage("#2", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["18446744073709551615"]));
 
                 l = System.UInt64.lift(null);
                 System.Console.WriteLine(System.Decimal.lift(l) && System.Decimal.lift(l).toString('G'));
-                this.AssertConsoleMessage("#3", "");
+                this.AssertConsoleMessage("#3", Bridge.ClientTestHelper.StringHelper.CombineLinesNL([""]));
+            },
+            TestWriteMultiline: function () {
+                System.Console.Write("1\n2\n3");
+                System.Console.Write("End");
+                this.AssertConsoleMessage("#1", "1\n2\n3End");
             },
             TestWriteBool: function () {
                 System.Console.Write(System.Boolean.toString(true));

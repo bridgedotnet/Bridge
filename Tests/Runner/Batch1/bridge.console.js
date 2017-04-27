@@ -30,6 +30,7 @@ Bridge.assembly("Bridge", function ($asm, globals) {
             methods: {
                 initConsoleFunctions: function () {
                     var wl = System.Console.WriteLine;
+                    var w = System.Console.Write;
                     var clr = System.Console.Clear;
                     var debug = System.Diagnostics.Debug.writeln;
                     var con = Bridge.global.console;
@@ -37,7 +38,14 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                     if (wl) {
                         System.Console.WriteLine = function (value) {
                             wl(value);
-                            Bridge.Console.log(value);
+                            Bridge.Console.log(value, true);
+                        }
+                    }
+
+                    if (w) {
+                        System.Console.Write = function (value) {
+                            w(value);
+                            Bridge.Console.log(value, false);
                         }
                     }
 
@@ -68,7 +76,8 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                         });
                     }
                 },
-                logBase: function (value, messageType) {
+                logBase: function (value, newLine, messageType) {
+                    if (newLine === void 0) { newLine = true; }
                     if (messageType === void 0) { messageType = 0; }
                     var self = Bridge.Console.instance;
                     var v = "";
@@ -80,23 +89,35 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                     if (self.bufferedOutput != null) {
                         self.bufferedOutput = System.String.concat(self.bufferedOutput, v);
 
+                        if (newLine) {
+                            self.bufferedOutput = System.String.concat(self.bufferedOutput, '\n');
+                        }
+
                         return;
                     }
 
                     Bridge.Console.show();
 
-                    var m = self.buildConsoleMessage(v, messageType);
-                    self.consoleMessages.appendChild(m);
-                    self.currentMessageElement = m;
+                    if (self.isNewLine || self.currentMessageElement == null) {
+                        var m = self.buildConsoleMessage(v, messageType);
+                        self.consoleMessages.appendChild(m);
+                        self.currentMessageElement = m;
+                    } else {
+                        var m1 = self.currentMessageElement;
+                        m1.lastChild.innerHTML = System.String.concat(m1.lastChild.innerHTML, v);
+                    }
+
+                    self.isNewLine = newLine;
                 },
                 error: function (value) {
-                    Bridge.Console.logBase(value, 2);
+                    Bridge.Console.logBase(value, true, 2);
                 },
                 debug: function (value) {
-                    Bridge.Console.logBase(value, 1);
+                    Bridge.Console.logBase(value, true, 1);
                 },
-                log: function (value) {
-                    Bridge.Console.logBase(value);
+                log: function (value, newLine) {
+                    if (newLine === void 0) { newLine = true; }
+                    Bridge.Console.logBase(value, newLine);
                 },
                 clear: function () {
                     var self = Bridge.Console.instance$1;
@@ -118,6 +139,8 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                     if (self.bufferedOutput != null) {
                         self.bufferedOutput = "";
                     }
+
+                    self.isNewLine = false;
                 },
                 hide: function () {
                     if (Bridge.Console.instance$1 == null) {
@@ -166,6 +189,7 @@ Bridge.assembly("Bridge", function ($asm, globals) {
             consoleHeader: null,
             consoleBody: null,
             hidden: true,
+            isNewLine: false,
             currentMessageElement: null,
             bufferedOutput: null
         },

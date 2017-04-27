@@ -77,6 +77,16 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
                     }
 
                     return s;
+                },
+                CombineLinesNL: function (lines) {
+                    if (lines === void 0) { lines = []; }
+                    var s = Bridge.ClientTestHelper.StringHelper.CombineLines(lines);
+
+                    if (s == null) {
+                        return null;
+                    }
+
+                    return System.String.concat(s, '\n');
                 }
             }
         }

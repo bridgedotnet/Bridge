@@ -3995,23 +3995,23 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 },
                 TestWriteLineFormatString: function () {
                     System.Console.WriteLine(System.String.format("{0}", Bridge.box(1, System.Int32)));
-                    Bridge.Test.NUnit.Assert.AreEqual("1", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.Output);
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["1"]), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.Output);
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.ClearOutput();
 
                     System.Console.WriteLine(System.String.format("{0} {1}", Bridge.box(1, System.Int32), Bridge.box(2, System.Int32)));
-                    Bridge.Test.NUnit.Assert.AreEqual("1 2", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.Output);
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["1 2"]), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.Output);
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.ClearOutput();
 
                     System.Console.WriteLine(System.String.format("{0} {1} {2}", Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), Bridge.box(3, System.Int32)));
-                    Bridge.Test.NUnit.Assert.AreEqual("1 2 3", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.Output);
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["1 2 3"]), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.Output);
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.ClearOutput();
 
                     System.Console.WriteLine(System.String.format("{0} {1} {2} {3}", [Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), Bridge.box(3, System.Int32), Bridge.box(4, System.Int32)]));
-                    Bridge.Test.NUnit.Assert.AreEqual("1 2 3 4", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.Output);
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["1 2 3 4"]), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.Output);
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.ClearOutput();
 
                     System.Console.WriteLine(System.String.format("{0} {1} {2} {3} {4}", [Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), Bridge.box(3, System.Int32), Bridge.box(4, System.Int32), "5"]));
-                    Bridge.Test.NUnit.Assert.AreEqual("1 2 3 4 5", Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.Output);
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["1 2 3 4 5"]), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1304.Output);
                 }
             }
         }
@@ -5831,7 +5831,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                         System.Console.WriteLine(System.Boolean.toString(false));
                         System.Console.WriteLine(System.Boolean.toString(Bridge.referenceEquals(value, "hello world")));
 
-                        Bridge.Test.NUnit.Assert.AreEqual("TrueFalseTrue", Bridge.Console.instance.bufferedOutput);
+                        Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["True", "False", "True"]), Bridge.Console.instance.bufferedOutput);
                     }
                     finally {
                         Bridge.Console.instance.bufferedOutput = null;
@@ -13506,7 +13506,7 @@ Bridge.$N1391Result =                     r;
                     try {
                         System.Console.WriteLine("Language: " + System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1317.Enum, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1317.Enum.English));
 
-                        Bridge.Test.NUnit.Assert.AreEqual("Language: English", Bridge.Console.instance.bufferedOutput);
+                        Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["Language: English"]), Bridge.Console.instance.bufferedOutput);
                     }
                     finally {
                         Bridge.Console.instance.bufferedOutput = null;
@@ -14955,7 +14955,7 @@ Bridge.$N1391Result =                     r;
                 },
                 TestConsoleWriteLineParameterless: function () {
                     System.Console.WriteLine();
-                    Bridge.Test.NUnit.Assert.AreEqual("", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2186.Output);
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTestHelper.StringHelper.CombineLinesNL([""]), Bridge.ClientTest.Batch3.BridgeIssues.Bridge2186.Output);
                 }
             }
         }

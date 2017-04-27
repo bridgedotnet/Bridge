@@ -94,6 +94,7 @@ namespace Bridge.Utils
             public string id;
             public string innerHTML;
             public readonly Element firstChild;
+            public readonly Element lastChild;
             public readonly cssStyle style;
         }
 
@@ -166,6 +167,7 @@ namespace Bridge.Utils
         private Element ConsoleBody;
 
         private bool Hidden = true;
+        private bool IsNewLine = false;
         public object CurrentMessageElement;
         public string BufferedOutput;
 
@@ -195,6 +197,7 @@ namespace Bridge.Utils
         public static void InitConsoleFunctions()
         {
             var wl = Script.ToDynamic().System.Console.WriteLine;
+            var w = Script.ToDynamic().System.Console.Write;
             var clr = Script.ToDynamic().System.Console.Clear;
             var debug = Script.ToDynamic().System.Diagnostics.Debug.writeln;
             var con = Script.ToDynamic().Bridge.global.console;
@@ -204,7 +207,17 @@ namespace Bridge.Utils
                 /*@
                     System.Console.WriteLine = function (value) {
                         wl(value);
-                        Bridge.Console.log(value);
+                        Bridge.Console.log(value, true);
+                    }
+                 */
+            }
+
+            if (w)
+            {
+                /*@
+                    System.Console.Write = function (value) {
+                        w(value);
+                        Bridge.Console.log(value, false);
                     }
                  */
             }
@@ -411,7 +424,7 @@ namespace Bridge.Utils
             }
         }
 
-        private static void LogBase(object value, MessageType messageType = MessageType.Info)
+        private static void LogBase(object value, bool newLine = true, MessageType messageType = MessageType.Info)
         {
             var self = Instance;
             var v = "";
@@ -425,29 +438,44 @@ namespace Bridge.Utils
             {
                 self.BufferedOutput += v;
 
+                if (newLine)
+                {
+                    self.BufferedOutput += System.Environment.NewLine;
+                }
+
                 return;
             }
 
             Show();
 
-            var m = self.BuildConsoleMessage(v, messageType);
-            self.ConsoleMessages.appendChild(m);
-            self.CurrentMessageElement = m;
+            if (self.IsNewLine || self.CurrentMessageElement == null)
+            {
+                var m = self.BuildConsoleMessage(v, messageType);
+                self.ConsoleMessages.appendChild(m);
+                self.CurrentMessageElement = m;
+            }
+            else
+            {
+                var m = self.CurrentMessageElement.As<Element>();
+                m.lastChild.innerHTML += v;
+            }
+
+            self.IsNewLine = newLine;
         }
 
         public static void Error(string value)
         {
-            LogBase(value, MessageType.Error);
+            LogBase(value, messageType: MessageType.Error);
         }
 
         public static void Debug(string value)
         {
-            LogBase(value, MessageType.Debug);
+            LogBase(value, messageType: MessageType.Debug);
         }
 
-        public static void Log(object value)
+        public static void Log(object value, bool newLine = true)
         {
-            LogBase(value);
+            LogBase(value, newLine);
         }
 
         public static void Clear()
@@ -475,6 +503,8 @@ namespace Bridge.Utils
             {
                 self.BufferedOutput = "";
             }
+
+            self.IsNewLine = false;
         }
 
         public static void Hide()

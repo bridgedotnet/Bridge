@@ -86,21 +86,21 @@ namespace Bridge.ClientTest
         public void TestClear()
         {
             Console.WriteLine("Message1");
-            AssertConsoleMessage("#1", "Message1", true);
+            AssertConsoleMessage("#1", StringHelper.CombineLinesNL("Message1"), true);
             Console.WriteLine("Message2");
-            AssertConsoleMessage("#2", "Message1Message2", true);
+            AssertConsoleMessage("#2", StringHelper.CombineLinesNL("Message1","Message2"), true);
 
             Console.Clear();
             AssertConsoleMessage("#3", "");
 
             // Check it works after Clear()
-            Console.WriteLine("Message1");
-            AssertConsoleMessage("#4", "Message1", true);
-            Console.WriteLine("Message2");
-            AssertConsoleMessage("#5", "Message1Message2", true);
+            Console.WriteLine("Message4");
+            AssertConsoleMessage("#4", StringHelper.CombineLinesNL("Message4"), true);
+            Console.WriteLine("Message5");
+            AssertConsoleMessage("#5", StringHelper.CombineLinesNL("Message4", "Message5"), true);
 
             Console.Clear();
-            AssertConsoleMessage("#3", "");
+            AssertConsoleMessage("#6", "");
         }
 
         #endregion Clear
@@ -111,106 +111,113 @@ namespace Bridge.ClientTest
         public void TestWriteLine()
         {
             Console.WriteLine();
-            AssertConsoleMessage("#1", string.Empty);
+            AssertConsoleMessage("#1", StringHelper.CombineLinesNL(""));
+        }
+
+        [Test]
+        public void TestWriteLineMultiline()
+        {
+            Console.WriteLine("1\n2\n3");
+            AssertConsoleMessage("#1", StringHelper.CombineLinesNL("1\n2\n3"));
         }
 
         [Test]
         public void TestWriteLineBool()
         {
             Console.WriteLine(true);
-            AssertConsoleMessage("#1", "True");
+            AssertConsoleMessage("#1", StringHelper.CombineLinesNL("True"));
 
             Console.WriteLine(false);
-            AssertConsoleMessage("#2", "False");
+            AssertConsoleMessage("#2", StringHelper.CombineLinesNL("False"));
         }
 
         [Test]
         public void TestWriteLineChar()
         {
             Console.WriteLine('a');
-            AssertConsoleMessage("#1", "a");
+            AssertConsoleMessage("#1", StringHelper.CombineLinesNL("a"));
         }
 
         [Test]
         public void TestWriteLineDecimal()
         {
             Console.WriteLine(-1m);
-            AssertConsoleMessage("#1", "-1");
+            AssertConsoleMessage("#1", StringHelper.CombineLinesNL("-1"));
 
             Console.WriteLine(1m);
-            AssertConsoleMessage("#2", "1");
+            AssertConsoleMessage("#2", StringHelper.CombineLinesNL("1"));
 
             Console.WriteLine(-12345678m);
-            AssertConsoleMessage("#3", "-12345678");
+            AssertConsoleMessage("#3", StringHelper.CombineLinesNL("-12345678"));
 
             Console.WriteLine(12345678m);
-            AssertConsoleMessage("#4", "12345678");
+            AssertConsoleMessage("#4", StringHelper.CombineLinesNL("12345678"));
 
             Console.WriteLine(-1.12345678m);
-            AssertConsoleMessage("#5", "-1.12345678");
+            AssertConsoleMessage("#5", StringHelper.CombineLinesNL("-1.12345678"));
 
             Console.WriteLine(1.12345678m);
-            AssertConsoleMessage("#6", "1.12345678");
+            AssertConsoleMessage("#6", StringHelper.CombineLinesNL("1.12345678"));
 
             Console.WriteLine(-12345678.12345678m);
-            AssertConsoleMessage("#7", "-12345678.12345678");
+            AssertConsoleMessage("#7", StringHelper.CombineLinesNL("-12345678.12345678"));
 
             Console.WriteLine(12345678.12345678m);
-            AssertConsoleMessage("#8", "12345678.12345678");
+            AssertConsoleMessage("#8", StringHelper.CombineLinesNL("12345678.12345678"));
         }
 
         [Test]
         public void TestWriteLineDouble()
         {
             Console.WriteLine(-1d);
-            AssertConsoleMessage("#1", "-1");
+            AssertConsoleMessage("#1", StringHelper.CombineLinesNL("-1"));
 
             Console.WriteLine(1d);
-            AssertConsoleMessage("#2", "1");
+            AssertConsoleMessage("#2", StringHelper.CombineLinesNL("1"));
 
             Console.WriteLine(-12345678d);
-            AssertConsoleMessage("#3", "-12345678");
+            AssertConsoleMessage("#3", StringHelper.CombineLinesNL("-12345678"));
 
             Console.WriteLine(12345678d);
-            AssertConsoleMessage("#4", "12345678");
+            AssertConsoleMessage("#4", StringHelper.CombineLinesNL("12345678"));
 
             Console.WriteLine(-1.12345678);
-            AssertConsoleMessage("#5", "-1.12345678");
+            AssertConsoleMessage("#5", StringHelper.CombineLinesNL("-1.12345678"));
 
             Console.WriteLine(1.12345678);
-            AssertConsoleMessage("#6", "1.12345678");
+            AssertConsoleMessage("#6", StringHelper.CombineLinesNL("1.12345678"));
 
             Console.WriteLine(-12345678.12345678);
-            AssertConsoleMessage("#7", "-12345678.1234568");
+            AssertConsoleMessage("#7", StringHelper.CombineLinesNL("-12345678.1234568"));
 
             Console.WriteLine(12345678.12345678);
-            AssertConsoleMessage("#8", "12345678.1234568");
+            AssertConsoleMessage("#8", StringHelper.CombineLinesNL("12345678.1234568"));
         }
 
         [Test]
         public void TestWriteLineInt32()
         {
             Console.WriteLine(0);
-            AssertConsoleMessage("#1", "0");
+            AssertConsoleMessage("#1", StringHelper.CombineLinesNL("0"));
 
             Console.WriteLine(2147483647);
-            AssertConsoleMessage("#2", "2147483647");
+            AssertConsoleMessage("#2", StringHelper.CombineLinesNL("2147483647"));
 
             Console.WriteLine(-2147483648);
-            AssertConsoleMessage("#3", "-2147483648");
+            AssertConsoleMessage("#3", StringHelper.CombineLinesNL("-2147483648"));
         }
 
         [Test]
         public void TestWriteLineInt64()
         {
             Console.WriteLine(0L);
-            AssertConsoleMessage("#1", "0");
+            AssertConsoleMessage("#1", StringHelper.CombineLinesNL("0"));
 
             Console.WriteLine(9223372036854775807);
-            AssertConsoleMessage("#2", "9223372036854775807");
+            AssertConsoleMessage("#2", StringHelper.CombineLinesNL("9223372036854775807"));
 
             Console.WriteLine(-9223372036854775808);
-            AssertConsoleMessage("#3", "-9223372036854775808");
+            AssertConsoleMessage("#3", StringHelper.CombineLinesNL("-9223372036854775808"));
         }
 
         [Test]
@@ -219,97 +226,97 @@ namespace Bridge.ClientTest
             object o = "Hi";
 
             Console.WriteLine(o);
-            AssertConsoleMessage("#1", "Hi");
+            AssertConsoleMessage("#1", StringHelper.CombineLinesNL("Hi"));
 
             o = 1;
             Console.WriteLine(o);
-            AssertConsoleMessage("#2", "1");
+            AssertConsoleMessage("#2", StringHelper.CombineLinesNL("1"));
 
             o = 9223372036854775807;
             Console.WriteLine(o);
-            AssertConsoleMessage("#3", "9223372036854775807");
+            AssertConsoleMessage("#3", StringHelper.CombineLinesNL("9223372036854775807"));
 
             o = null;
             Console.WriteLine(o);
-            AssertConsoleMessage("#4", "");
+            AssertConsoleMessage("#4", StringHelper.CombineLinesNL(""));
 
             o = Values.Value1;
             Console.WriteLine(o);
-            AssertConsoleMessage("#5", "Value1");
+            AssertConsoleMessage("#5", StringHelper.CombineLinesNL("Value1"));
 
             o = 1.01m;
             Console.WriteLine(o);
-            AssertConsoleMessage("#6", "1.01");
+            AssertConsoleMessage("#6", StringHelper.CombineLinesNL("1.01"));
 
             o = -2L;
             Console.WriteLine(o);
-            AssertConsoleMessage("#7", "-2");
+            AssertConsoleMessage("#7", StringHelper.CombineLinesNL("-2"));
 
             o = 4UL;
             Console.WriteLine(o);
-            AssertConsoleMessage("#8", "4");
+            AssertConsoleMessage("#8", StringHelper.CombineLinesNL("4"));
 
             o = new Values?(Values.Value2);
             Console.WriteLine(o);
-            AssertConsoleMessage("#9", "2"); // That's a bug in nullable<enum>.ToString(), expected "Value2"
+            AssertConsoleMessage("#9", StringHelper.CombineLinesNL("2")); // That's a bug in nullable<enum>.ToString(), expected "Value2"
 
             o = new decimal?(1.01m);
             Console.WriteLine(o);
-            AssertConsoleMessage("#10", "1.01");
+            AssertConsoleMessage("#10", StringHelper.CombineLinesNL("1.01"));
 
             o = new long?(-2L);
             Console.WriteLine(o);
-            AssertConsoleMessage("#11", "-2");
+            AssertConsoleMessage("#11", StringHelper.CombineLinesNL("-2"));
 
             o = new ulong?(4UL);
             Console.WriteLine(o);
-            AssertConsoleMessage("#12", "4");
+            AssertConsoleMessage("#12", StringHelper.CombineLinesNL("4"));
 
             o = new object();
             Console.WriteLine(o);
-            AssertConsoleMessage("#13", "{}"); // Non .Net behavior, should be System.Object
+            AssertConsoleMessage("#13", StringHelper.CombineLinesNL("{}")); // Non .Net behavior, should be System.Object
 
             o = new ClassWithCustomToString();
             Console.WriteLine(o);
-            AssertConsoleMessage("#14", "Overridden ToString()");
+            AssertConsoleMessage("#14", StringHelper.CombineLinesNL("Overridden ToString()"));
 
             o = new { Id = 1, Name = "John" };
             Console.WriteLine(o);
-            AssertConsoleMessage("#15", StringHelper.CombineLines("{", "    \"Id\": 1,", "    \"Name\": \"John\"", "}"));
+            AssertConsoleMessage("#15", StringHelper.CombineLinesNL("{", "    \"Id\": 1,", "    \"Name\": \"John\"", "}"));
 
             var a = new { Id = 2, Name = "Mary" };
             Console.WriteLine(a);
-            AssertConsoleMessage("#16", StringHelper.CombineLines("{", "    \"Id\": 2,", "    \"Name\": \"Mary\"", "}"));
+            AssertConsoleMessage("#16", StringHelper.CombineLinesNL("{", "    \"Id\": 2,", "    \"Name\": \"Mary\"", "}"));
 
             //@ o = { Id: 3, Name: "Sally" };
             Console.WriteLine(o);
-            AssertConsoleMessage("#17", StringHelper.CombineLines("{", "    \"Id\": 3,", "    \"Name\": \"Sally\"", "}"));
+            AssertConsoleMessage("#17", StringHelper.CombineLinesNL("{", "    \"Id\": 3,", "    \"Name\": \"Sally\"", "}"));
         }
 
         [Test]
         public void TestWriteLineSingle()
         {
             Console.WriteLine((float)0);
-            AssertConsoleMessage("#1", "0");
+            AssertConsoleMessage("#1", StringHelper.CombineLinesNL("0"));
 
             Console.WriteLine((float)1.0);
-            AssertConsoleMessage("#2", "1");
+            AssertConsoleMessage("#2", StringHelper.CombineLinesNL("1"));
 
             Console.WriteLine((float)-1.0);
-            AssertConsoleMessage("#3", "-1");
+            AssertConsoleMessage("#3", StringHelper.CombineLinesNL("-1"));
         }
 
         [Test]
         public void TestWriteLineString()
         {
             Console.WriteLine((string)null);
-            AssertConsoleMessage("#1", "");
+            AssertConsoleMessage("#1", StringHelper.CombineLinesNL(""));
 
             Console.WriteLine("");
-            AssertConsoleMessage("#2", "");
+            AssertConsoleMessage("#2", StringHelper.CombineLinesNL(""));
 
             Console.WriteLine("Value1");
-            AssertConsoleMessage("#3", "Value1");
+            AssertConsoleMessage("#3", StringHelper.CombineLinesNL("Value1"));
         }
 
         [Test]
@@ -318,13 +325,13 @@ namespace Bridge.ClientTest
             string f = "{0}";
 
             Console.WriteLine(f, 1);
-            AssertConsoleMessage("#1", "1");
+            AssertConsoleMessage("#1", StringHelper.CombineLinesNL("1"));
 
             Console.WriteLine(f, "\"2\"");
-            AssertConsoleMessage("#2", "\"2\"");
+            AssertConsoleMessage("#2", StringHelper.CombineLinesNL("\"2\""));
 
             Console.WriteLine(f, null);
-            AssertConsoleMessage("#3", "");
+            AssertConsoleMessage("#3", StringHelper.CombineLinesNL(""));
 
             f = null;
             Assert.Throws<ArgumentNullException>(() => { Console.WriteLine(f, 3); });
@@ -341,17 +348,17 @@ namespace Bridge.ClientTest
             string f = "{0} {1}";
 
             Console.WriteLine(f, 1, "2");
-            AssertConsoleMessage("#1", "1 2");
+            AssertConsoleMessage("#1", StringHelper.CombineLinesNL("1 2"));
 
             Console.WriteLine(f, null, false);
-            AssertConsoleMessage("#2", " False");
+            AssertConsoleMessage("#2", StringHelper.CombineLinesNL(" False"));
 
             Console.WriteLine(f, null, null);
-            AssertConsoleMessage("#3", " ");
+            AssertConsoleMessage("#3", StringHelper.CombineLinesNL(" "));
 
             f = "{0}";
             Console.WriteLine(f, "a", "b");
-            AssertConsoleMessage("#4", "a");
+            AssertConsoleMessage("#4", StringHelper.CombineLinesNL("a"));
 
             f = null;
             Assert.Throws<ArgumentNullException>(() => { Console.WriteLine(f, 4, 5); });
@@ -368,17 +375,17 @@ namespace Bridge.ClientTest
             string f = "{0} {1} {2}";
 
             Console.WriteLine(f, 1, "2", true);
-            AssertConsoleMessage("#1", "1 2 True");
+            AssertConsoleMessage("#1", StringHelper.CombineLinesNL("1 2 True"));
 
             Console.WriteLine(f, null, null, false);
-            AssertConsoleMessage("#2", "  False");
+            AssertConsoleMessage("#2", StringHelper.CombineLinesNL("  False"));
 
             Console.WriteLine(f, null, null, null);
-            AssertConsoleMessage("#3", "  ");
+            AssertConsoleMessage("#3", StringHelper.CombineLinesNL("  "));
 
             f = "{0}";
             Console.WriteLine(f, "a", "b", "c");
-            AssertConsoleMessage("#4", "a");
+            AssertConsoleMessage("#4", StringHelper.CombineLinesNL("a"));
 
             f = null;
             Assert.Throws<ArgumentNullException>(() => { Console.WriteLine(f, 4, 5, 6); });
@@ -395,17 +402,17 @@ namespace Bridge.ClientTest
             string f = "{0} {1} {2} {3}";
 
             Console.WriteLine(f, 1, "2", true, 4);
-            AssertConsoleMessage("#1", "1 2 True 4");
+            AssertConsoleMessage("#1", StringHelper.CombineLinesNL("1 2 True 4"));
 
             Console.WriteLine(f, null, false, null, 3);
-            AssertConsoleMessage("#2", " False  3");
+            AssertConsoleMessage("#2", StringHelper.CombineLinesNL(" False  3"));
 
             Console.WriteLine(f, null, null, null, null);
-            AssertConsoleMessage("#3", "   ");
+            AssertConsoleMessage("#3", StringHelper.CombineLinesNL("   "));
 
             f = "{0}";
             Console.WriteLine(f, "a", "b", "c", "d");
-            AssertConsoleMessage("#4", "a");
+            AssertConsoleMessage("#4", StringHelper.CombineLinesNL("a"));
 
             f = null;
             Assert.Throws<ArgumentNullException>(() => { Console.WriteLine(f, 4, 5, 6, 7); });
@@ -422,17 +429,17 @@ namespace Bridge.ClientTest
             string f = "{0} {1} {2} {3} {4}";
 
             Console.WriteLine(f, 1, "2", true, 4, 5);
-            AssertConsoleMessage("#1", "1 2 True 4 5");
+            AssertConsoleMessage("#1", StringHelper.CombineLinesNL("1 2 True 4 5"));
 
             Console.WriteLine(f, null, false, null, null, 3);
-            AssertConsoleMessage("#2", " False   3");
+            AssertConsoleMessage("#2", StringHelper.CombineLinesNL(" False   3"));
 
             Console.WriteLine(f, null, null, null, null, null);
-            AssertConsoleMessage("#3", "    ");
+            AssertConsoleMessage("#3", StringHelper.CombineLinesNL("    "));
 
             f = "{0}";
             Console.WriteLine(f, "a", "b", "c", "d", "e");
-            AssertConsoleMessage("#4", "a");
+            AssertConsoleMessage("#4", StringHelper.CombineLinesNL("a"));
 
             f = null;
             Assert.Throws<ArgumentNullException>(() => { Console.WriteLine(f, 4, 5, 6, 7, 8); });
@@ -448,21 +455,21 @@ namespace Bridge.ClientTest
         {
             uint n = 0;
             Console.WriteLine(n);
-            AssertConsoleMessage("#1", "0");
+            AssertConsoleMessage("#1", StringHelper.CombineLinesNL("0"));
 
             n = 4294967295;
             Console.WriteLine(n);
-            AssertConsoleMessage("#2", "4294967295");
+            AssertConsoleMessage("#2", StringHelper.CombineLinesNL("4294967295"));
         }
 
         [Test]
         public void TestWriteLineUInt64()
         {
             Console.WriteLine(0UL);
-            AssertConsoleMessage("#1", "0");
+            AssertConsoleMessage("#1", StringHelper.CombineLinesNL("0"));
 
             Console.WriteLine(18446744073709551615);
-            AssertConsoleMessage("#2", "18446744073709551615");
+            AssertConsoleMessage("#2", StringHelper.CombineLinesNL("18446744073709551615"));
         }
 
         [Test]
@@ -470,15 +477,15 @@ namespace Bridge.ClientTest
         {
             char[] ch = new char[0];
             Console.WriteLine(ch);
-            AssertConsoleMessage("#1", "");
+            AssertConsoleMessage("#1", StringHelper.CombineLinesNL(""));
 
             ch = new char[] { 'a', 'b' };
             Console.WriteLine(ch);
-            AssertConsoleMessage("#2", "ab");
+            AssertConsoleMessage("#2", StringHelper.CombineLinesNL("ab"));
 
             ch = null;
             Console.WriteLine(ch);
-            AssertConsoleMessage("#3", "");
+            AssertConsoleMessage("#3", StringHelper.CombineLinesNL(""));
         }
 
         [Test]
@@ -486,21 +493,21 @@ namespace Bridge.ClientTest
         {
             char[] ch = new char[0];
             Console.WriteLine(ch, 0, 0);
-            AssertConsoleMessage("#1", "");
+            AssertConsoleMessage("#1", StringHelper.CombineLinesNL(""));
 
             ch = new char[] { 'a', 'b' };
 
             Console.WriteLine(ch, 0, 0);
-            AssertConsoleMessage("#2", "");
+            AssertConsoleMessage("#2", StringHelper.CombineLinesNL(""));
 
             Console.WriteLine(ch, 0, 2);
-            AssertConsoleMessage("#3", "ab");
+            AssertConsoleMessage("#3", StringHelper.CombineLinesNL("ab"));
 
             Console.WriteLine(ch, 1, 1);
-            AssertConsoleMessage("#4", "b");
+            AssertConsoleMessage("#4", StringHelper.CombineLinesNL("b"));
 
             Console.WriteLine(ch, 0, 1);
-            AssertConsoleMessage("#5", "a");
+            AssertConsoleMessage("#5", StringHelper.CombineLinesNL("a"));
 
             Assert.Throws<ArgumentOutOfRangeException>(() => { Console.WriteLine(ch, -1, 1); });
             AssertConsoleMessage("#6", "");
@@ -524,19 +531,19 @@ namespace Bridge.ClientTest
         {
             var en = Values.Value1;
             Console.WriteLine(en);
-            AssertConsoleMessage("#1", "Value1");
+            AssertConsoleMessage("#1", StringHelper.CombineLinesNL("Value1"));
 
             en = Values.Value2;
             Console.WriteLine(en);
-            AssertConsoleMessage("#2", "Value2");
+            AssertConsoleMessage("#2", StringHelper.CombineLinesNL("Value2"));
 
             var f1 = Format1.One;
             Console.WriteLine(f1);
-            AssertConsoleMessage("#3", "one");
+            AssertConsoleMessage("#3", StringHelper.CombineLinesNL("one"));
 
             var f2 = Format2.One;
             Console.WriteLine(f2);
-            AssertConsoleMessage("#4", "0");
+            AssertConsoleMessage("#4", StringHelper.CombineLinesNL("0"));
         }
 
         [Test]
@@ -544,15 +551,15 @@ namespace Bridge.ClientTest
         {
             decimal? d = -1m;
             Console.WriteLine(d);
-            AssertConsoleMessage("#1", "-1");
+            AssertConsoleMessage("#1", StringHelper.CombineLinesNL("-1"));
 
             d = 1.12345678m;
             Console.WriteLine(d);
-            AssertConsoleMessage("#2", "1.12345678");
+            AssertConsoleMessage("#2", StringHelper.CombineLinesNL("1.12345678"));
 
             d = null;
             Console.WriteLine(d);
-            AssertConsoleMessage("#3", "");
+            AssertConsoleMessage("#3", StringHelper.CombineLinesNL(""));
         }
 
         [Test]
@@ -560,19 +567,19 @@ namespace Bridge.ClientTest
         {
             long? l = 0;
             Console.WriteLine(l);
-            AssertConsoleMessage("#1", "0");
+            AssertConsoleMessage("#1", StringHelper.CombineLinesNL("0"));
 
             l = 9223372036854775807;
             Console.WriteLine(l);
-            AssertConsoleMessage("#2", "9223372036854775807");
+            AssertConsoleMessage("#2", StringHelper.CombineLinesNL("9223372036854775807"));
 
             l = -9223372036854775808;
             Console.WriteLine(l);
-            AssertConsoleMessage("#3", "-9223372036854775808");
+            AssertConsoleMessage("#3", StringHelper.CombineLinesNL("-9223372036854775808"));
 
             l = null;
             Console.WriteLine(l);
-            AssertConsoleMessage("#4", "");
+            AssertConsoleMessage("#4", StringHelper.CombineLinesNL(""));
         }
 
         [Test]
@@ -580,20 +587,28 @@ namespace Bridge.ClientTest
         {
             ulong? l = 0;
             Console.WriteLine(l);
-            AssertConsoleMessage("#1", "0");
+            AssertConsoleMessage("#1", StringHelper.CombineLinesNL("0"));
 
             l = 18446744073709551615;
             Console.WriteLine(l);
-            AssertConsoleMessage("#2", "18446744073709551615");
+            AssertConsoleMessage("#2", StringHelper.CombineLinesNL("18446744073709551615"));
 
             l = null;
             Console.WriteLine(l);
-            AssertConsoleMessage("#3", "");
+            AssertConsoleMessage("#3", StringHelper.CombineLinesNL(""));
         }
 
         #endregion WriteLine
 
         #region Write
+
+        [Test]
+        public void TestWriteMultiline()
+        {
+            Console.Write("1\n2\n3");
+            Console.Write("End");
+            AssertConsoleMessage("#1", "1\n2\n3End");
+        }
 
         [Test]
         public void TestWriteBool()

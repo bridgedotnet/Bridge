@@ -1,3 +1,4 @@
+using Bridge.ClientTestHelper;
 using Bridge.Test.NUnit;
 using System;
 
@@ -64,23 +65,23 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public static void TestWriteLineFormatString()
         {
             Console.WriteLine("{0}", 1);
-            Assert.AreEqual("1", Output);
+            Assert.AreEqual(StringHelper.CombineLinesNL("1"), Output);
             ClearOutput();
 
             Console.WriteLine("{0} {1}", 1, 2);
-            Assert.AreEqual("1 2", Output);
+            Assert.AreEqual(StringHelper.CombineLinesNL("1 2"), Output);
             ClearOutput();
 
             Console.WriteLine("{0} {1} {2}", 1, 2, 3);
-            Assert.AreEqual("1 2 3", Output);
+            Assert.AreEqual(StringHelper.CombineLinesNL("1 2 3"), Output);
             ClearOutput();
 
             Console.WriteLine("{0} {1} {2} {3}", 1, 2, 3, 4);
-            Assert.AreEqual("1 2 3 4", Output);
+            Assert.AreEqual(StringHelper.CombineLinesNL("1 2 3 4"), Output);
             ClearOutput();
 
             Console.WriteLine("{0} {1} {2} {3} {4}", 1, 2, 3, 4, "5");
-            Assert.AreEqual("1 2 3 4 5", Output);
+            Assert.AreEqual(StringHelper.CombineLinesNL("1 2 3 4 5"), Output);
         }
     }
 }

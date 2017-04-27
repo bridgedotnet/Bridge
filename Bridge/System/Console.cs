@@ -92,7 +92,12 @@ namespace System
         [Name("Write")]
         public static void Write(Object value)
         {
-            WriteLine(value);
+            var con = Script.ToDynamic().Bridge.global.console;
+
+            if (con && con.log)
+            {
+                con.log(value.As<dynamic>());
+            }
         }
 
         /// <summary>
@@ -407,7 +412,7 @@ namespace System
 
             if (con && con.clear)
             {
-               con.clear();
+                con.clear();
             }
         }
 
