@@ -172,17 +172,17 @@ namespace Bridge.ClientTest
 
             Assert.True(true, description + "Message <li> element exists");
 
-            var span = el.GetElementsByTagName("span").FirstOrDefault();
+            var textContainer = el.GetElementsByTagName("div").FirstOrDefault();
 
-            if (span == null)
+            if (textContainer == null)
             {
-                Assert.Fail(description + "Could not get message span element");
+                Assert.Fail(description + "Could not get message container <div> element");
                 return;
             }
 
-            Assert.True(true, description + "Message <span> element exists");
-            Assert.AreEqual(expected, span.InnerHTML, description + "Message is correct");
-            Assert.AreEqual(NormalizeHexStyleColor(color), ConvertStyleColor(span.Style.Color), description + "Message <span> color (" + span.Style.Color + ") should be " + color);
+            Assert.True(true, description + "Message container <div> element exists");
+            Assert.AreEqual(expected, textContainer.InnerHTML, description + "Message is correct");
+            Assert.AreEqual(NormalizeHexStyleColor(color), ConvertStyleColor(textContainer.Style.Color), description + "Message <span> color (" + textContainer.Style.Color + ") should be " + color);
         }
 
         private string ConvertStyleColor(string styleColor)

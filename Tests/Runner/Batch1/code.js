@@ -4912,16 +4912,16 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 Bridge.Test.NUnit.Assert.True$1(true, System.String.concat(description, "Message <li> element exists"));
 
-                var span = System.Linq.Enumerable.from(el.getElementsByTagName("span")).firstOrDefault(null, null);
+                var textContainer = System.Linq.Enumerable.from(el.getElementsByTagName("div")).firstOrDefault(null, null);
 
-                if (span == null) {
-                    Bridge.Test.NUnit.Assert.Fail$1(System.String.concat(description, "Could not get message span element"));
+                if (textContainer == null) {
+                    Bridge.Test.NUnit.Assert.Fail$1(System.String.concat(description, "Could not get message container <div> element"));
                     return;
                 }
 
-                Bridge.Test.NUnit.Assert.True$1(true, System.String.concat(description, "Message <span> element exists"));
-                Bridge.Test.NUnit.Assert.AreEqual$1(expected, span.innerHTML, System.String.concat(description, "Message is correct"));
-                Bridge.Test.NUnit.Assert.AreEqual$1(this.NormalizeHexStyleColor(color), this.ConvertStyleColor(span.style.color), System.String.concat(description, "Message <span> color (", span.style.color, ") should be ", color));
+                Bridge.Test.NUnit.Assert.True$1(true, System.String.concat(description, "Message container <div> element exists"));
+                Bridge.Test.NUnit.Assert.AreEqual$1(expected, textContainer.innerHTML, System.String.concat(description, "Message is correct"));
+                Bridge.Test.NUnit.Assert.AreEqual$1(this.NormalizeHexStyleColor(color), this.ConvertStyleColor(textContainer.style.color), System.String.concat(description, "Message <span> color (", textContainer.style.color, ") should be ", color));
             },
             ConvertStyleColor: function (styleColor) {
                 var r = new System.Text.RegularExpressions.Regex.ctor("^rgb\\((\\d+),\\s*(\\d+),\\s*(\\d+)\\)$");
