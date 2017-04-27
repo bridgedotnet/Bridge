@@ -637,7 +637,7 @@ namespace Bridge.Utils
         private Element BuildConsoleMessage(string message, MessageType messageType)
         {
             var messageItem = document.createElement("li");
-            messageItem.setAttribute("style", "padding: 5px 10px;border-bottom: 1px solid #f0f0f0;");
+            messageItem.setAttribute("style", "padding:5px 10px;border-bottom:1px solid #f0f0f0;position:relative;");
 
             var messageIcon = document.createElementNS(svgNS, "svg");
 
@@ -647,7 +647,7 @@ namespace Bridge.Utils
                 { "width", "3.9" },
                 { "height", "6.7" },
                 { "viewBox", "0 0 3.9 6.7" },
-                { "style", "margin-right: 7px; vertical-align: middle;" },
+                { "style", "vertical-align:middle;position: absolute;top: 10.5px;" },
             };
 
             SetAttributes(messageIcon, items5);
@@ -674,9 +674,9 @@ namespace Bridge.Utils
 
             messageIcon.appendChild(messageIconPath);
 
-            var messageContainer = document.createElement("span");
+            var messageContainer = document.createElement("div");
             messageContainer.innerHTML = message;
-            messageContainer.setAttribute("style", "color: " + color + "; white-space: pre; line-height:1.4;");
+            messageContainer.setAttribute("style", "color:" + color + ";white-space:pre;margin-left:12px;line-height:1.4;min-height:18px;");
 
             messageItem.appendChild(messageIcon);
             messageItem.appendChild(messageContainer);

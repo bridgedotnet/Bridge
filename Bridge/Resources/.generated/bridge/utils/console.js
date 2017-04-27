@@ -349,7 +349,7 @@
             },
             buildConsoleMessage: function (message, messageType) {
                 var messageItem = document.createElement("li");
-                messageItem.setAttribute("style", "padding: 5px 10px;border-bottom: 1px solid #f0f0f0;");
+                messageItem.setAttribute("style", "padding:5px 10px;border-bottom:1px solid #f0f0f0;position:relative;");
 
                 var messageIcon = document.createElementNS(this.svgNS, "svg");
 
@@ -376,9 +376,9 @@
 
                 messageIcon.appendChild(messageIconPath);
 
-                var messageContainer = document.createElement("span");
+                var messageContainer = document.createElement("div");
                 messageContainer.innerHTML = message;
-                messageContainer.setAttribute("style", System.String.concat("color: ", color, "; white-space: pre; line-height:1.4;"));
+                messageContainer.setAttribute("style", System.String.concat("color:", color, ";white-space:pre;margin-left:12px;line-height:1.4;min-height:18px;"));
 
                 messageItem.appendChild(messageIcon);
                 messageItem.appendChild(messageContainer);
@@ -474,7 +474,7 @@
             _o7.add("width", "3.9");
             _o7.add("height", "6.7");
             _o7.add("viewBox", "0 0 3.9 6.7");
-            _o7.add("style", "margin-right: 7px; vertical-align: middle;");
+            _o7.add("style", "vertical-align:middle;position: absolute;top: 10.5px;");
             return _o7;
         }
     });
