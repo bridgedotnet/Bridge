@@ -641,7 +641,15 @@ namespace Bridge.Translator
                         var unaryExpression = (UnaryOperatorExpression)expression;
                         var resolveOperator = block.Emitter.Resolver.ResolveNode(unaryExpression, block.Emitter);
                         OperatorResolveResult orr = resolveOperator as OperatorResolveResult;
-                        new InlineArgumentsBlock(block.Emitter, new ArgumentsInfo(block.Emitter, unaryExpression, orr, method), inline).Emit();
+                        if (orr != null)
+                        {
+                            new InlineArgumentsBlock(block.Emitter,
+                                new ArgumentsInfo(block.Emitter, unaryExpression, orr, method), inline).Emit();
+                        }
+                        else
+                        {
+                            new InlineArgumentsBlock(block.Emitter, new ArgumentsInfo(block.Emitter, expression, method), inline, method).Emit();
+                        }
                     }
                     else
                     {

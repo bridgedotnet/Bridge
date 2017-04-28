@@ -5,7 +5,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
         main: function Main() {
             var app = null;
             // When option "useTypedArrays": false, the code below should use || - System.Console.log(app || new Demo.App());
-            Bridge.Console.log(app || new Test.BridgeIssues.N1499.App());
+            System.Console.WriteLine(app || new Test.BridgeIssues.N1499.App());
         }
     });
 });

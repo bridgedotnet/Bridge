@@ -1,3 +1,13 @@
+/**
+ * @version   : 16.0.0 - Bridge.NET
+ * @author    : Object.NET, Inc. http://bridge.net/
+ * @date      : 2017-01-16
+ * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
+ * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
+ */
+Bridge.assembly("Bridge", function ($asm, globals) {
+    "use strict";
+
     Bridge.define("Bridge.Console", {
         statics: {
             fields: {
@@ -504,3 +514,4 @@
     });
 
     Bridge.init(function () { Bridge.Console.initConsoleFunctions(); });
+});

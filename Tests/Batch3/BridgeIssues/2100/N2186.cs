@@ -1,3 +1,4 @@
+using Bridge.ClientTestHelper;
 using Bridge.Test.NUnit;
 using System;
 
@@ -37,7 +38,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public static void TestConsoleWriteLineParameterless()
         {
             Console.WriteLine();
-            Assert.AreEqual(String.Empty, Output);
+            Assert.AreEqual(StringHelper.CombineLinesNL(String.Empty), Output);
         }
     }
 }

@@ -1,11 +1,12 @@
 ﻿using Bridge.Linq;
 using Bridge.Test.NUnit;
+using Bridge.ClientTestHelper;
 using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Bridge.ClientTest
 {
-    [Category(Constants.MODULE_BRIDGECONSOLE)]
+    [Category(Constants.MODULE_BRIDGE_CONSOLE)]
     [TestFixture]
     public class BridgeConsoleTests
     {
@@ -48,9 +49,14 @@ namespace Bridge.ClientTest
             AssertLogMessageObject("#27 - ", -12345678.12345678m, "-12345678.12345678");
             AssertLogMessageObject("#28 - ", 12345678.12345678m, "12345678.12345678");
             AssertLogMessageObject("#29 - ", null, "");
-            AssertLogMessageObject("#30 - ", new object(), "[object Object]");
+            AssertLogMessageObject("#30 - ", new object(), "{}"); // Improved in #1994
             AssertLogMessageObject("#31 - ", new ClassA(), "I'm ClassA");
-            AssertLogMessageObject("#32 - ", new ClassB(), "[object Object]");
+            AssertLogMessageObject("#32 - ", new ClassB(), "{}"); // Improved in #1994
+            AssertLogMessageObject("#33 - ", new ClassC(), StringHelper.CombineLines("{", "    \"Name\": \"Frank\",", "    \"Age\": 55,", "    \"Admin\": true", "}")); // Improved in #1994
+            AssertLogMessageObject("#34 - ", new object().ToString(), "[object Object]");
+            AssertLogMessageObject("#35 - ", new ClassA().ToString(), "I'm ClassA");
+            AssertLogMessageObject("#36 - ", new ClassB().ToString(), "[object Object]");
+            AssertLogMessageObject("#37 - ", new ClassC().ToString(), "[object Object]");
         }
 
         [Test]
@@ -121,6 +127,15 @@ namespace Bridge.ClientTest
         {
         }
 
+        public class ClassC
+        {
+            public string Name { get; set; } = "Frank";
+
+            public int Age { get; set; } = 55;
+
+            public bool Admin { get; set; } = true;
+        }
+
         private void AssertLogMessageObject(string description, object message, string expected)
         {
             Bridge.Utils.Console.Log(message);
@@ -157,17 +172,17 @@ namespace Bridge.ClientTest
 
             Assert.True(true, description + "Message <li> element exists");
 
-            var span = el.GetElementsByTagName("span").FirstOrDefault();
+            var textContainer = el.GetElementsByTagName("div").FirstOrDefault();
 
-            if (span == null)
+            if (textContainer == null)
             {
-                Assert.Fail(description + "Could not get message span element");
+                Assert.Fail(description + "Could not get message container <div> element");
                 return;
             }
 
-            Assert.True(true, description + "Message <span> element exists");
-            Assert.AreEqual(expected, span.InnerHTML, description + "Message is correct");
-            Assert.AreEqual(NormalizeHexStyleColor(color), ConvertStyleColor(span.Style.Color), description + "Message <span> color (" + span.Style.Color + ") should be " + color);
+            Assert.True(true, description + "Message container <div> element exists");
+            Assert.AreEqual(expected, textContainer.InnerHTML, description + "Message is correct");
+            Assert.AreEqual(NormalizeHexStyleColor(color), ConvertStyleColor(textContainer.Style.Color), description + "Message <span> color (" + textContainer.Style.Color + ") should be " + color);
         }
 
         private string ConvertStyleColor(string styleColor)

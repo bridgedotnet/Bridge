@@ -7,7 +7,7 @@
             },
             methods: {
                 Main1: function Main1() {
-                    Bridge.Console.log(new TestIssue599.Issue599()._something);
+                    System.Console.WriteLine(new TestIssue599.Issue599()._something);
                 }
             }
         },
