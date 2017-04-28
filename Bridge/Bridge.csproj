@@ -9,6 +9,14 @@
     </When>
   </Choose>
   <PropertyGroup>
+    <NoStdLib>True</NoStdLib>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
+    <AdditionalExplicitAssemblyReferences />
+    <NoWarn>1591, 0626, 0824, 0660, 0661</NoWarn>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DE78B8B7-C0F5-415B-A70B-02194433F450}</ProjectGuid>
@@ -19,7 +27,6 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
-    <NoStdLib>true</NoStdLib>
     <DocumentationFile>bin\$(Configuration)\$(MSBuildProjectName).xml</DocumentationFile>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -31,10 +38,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>CORE;DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <NoStdLib>true</NoStdLib>
     <Prefer32Bit>false</Prefer32Bit>
-    <NoWarn>1591, 0626, 0824, 0660, 0661</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -42,19 +46,8 @@
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>CORE;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <NoStdLib>true</NoStdLib>
     <Prefer32Bit>false</Prefer32Bit>
-    <NoWarn>1591, 0626, 0824, 0660, 0661</NoWarn>
     <DocumentationFile>bin\Release\Bridge.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-  </PropertyGroup>
-  <PropertyGroup>
-    <NoStdLib>True</NoStdLib>
-    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
-    <AdditionalExplicitAssemblyReferences />
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\Html5\TypedArray\ArrayBuffer.cs">
