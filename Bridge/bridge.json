@@ -5,7 +5,7 @@
   "outputBy": "ClassPath",
   "generateDocumentation": "None",
   "logging": {
-    "level": "None"
+    "level": "Info"
   },
   "assembly": {
     "disableInitAssembly": true,
@@ -93,9 +93,16 @@
         "Resources/.generated/system/random.js",
         "Resources/.generated/system/bitConverter.js",
         "Resources/.generated/system/threading/timer.js",
+<<<<<<< HEAD
         "Resources/.generated/system/console.js",
+=======
+        "Resources/.generated/bridge/utils/console.js",
+		"Resources/.generated/system/threading/utils/workerThreadManager.js",
+		"Resources/.generated/system/threading/utils/workerThreadManager/messageType.js",
+		"Resources/.generated/system/threading/thread.js",
+>>>>>>> Initial work on adding Threading using Web Workers
         "Resources/.auxiliary/End.js",
-        "Resources/.auxiliary/Finally.js"
+        "Resources/.auxiliary/Finally.js",
       ]
     },
     {
