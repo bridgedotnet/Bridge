@@ -1,0 +1,25 @@
+using System;
+using Bridge.Html5;
+using Bridge.Test.NUnit;
+using System.Text;
+
+namespace Bridge.ClientTest.Batch3.BridgeIssues
+{
+    [Category(Constants.MODULE_ISSUES)]
+    [TestFixture(TestNameFormat = "#1390 - {0}")]
+    public class Bridge1390
+    {
+        private static int b = a;
+        private static int a = 5;
+
+        private static DateTime time = MinDate;
+        public static readonly DateTime MinDate = new DateTime(1800, 1, 1);
+
+        [Test]
+        public static void TestFieldInitializer()
+        {
+            Assert.AreEqual(0, Bridge1390.b);
+            Assert.AreEqual(DateTime.MinValue, Bridge1390.time);
+        }
+    }
+}

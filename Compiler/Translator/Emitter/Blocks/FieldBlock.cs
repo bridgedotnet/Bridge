@@ -5,6 +5,7 @@ using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
 using System.Collections.Generic;
 using System.Linq;
+using ICSharpCode.NRefactory.CSharp.Resolver;
 
 namespace Bridge.Translator
 {
@@ -46,6 +47,12 @@ namespace Bridge.Translator
         }
 
         public List<string> Injectors
+        {
+            get;
+            private set;
+        }
+
+        public int BeginCounter
         {
             get;
             private set;
@@ -146,7 +153,7 @@ namespace Bridge.Translator
 
                 if (primitiveExpr != null)
                 {
-                    isPrimitive = true;
+                    //isPrimitive = true;
                     constValue = primitiveExpr.Value;
 
                     ResolveResult rr = null;
@@ -173,14 +180,14 @@ namespace Bridge.Translator
                     writeScript = false;
                 }
 
-                var isNull = member.Initializer.IsNull || member.Initializer is NullReferenceExpression;
+                var isNull = member.Initializer.IsNull || member.Initializer is NullReferenceExpression || member.Initializer.Parent == null;
 
                 if (!isNull && !isPrimitive)
                 {
                     var constrr = this.Emitter.Resolver.ResolveNode(member.Initializer, this.Emitter);
                     if (constrr != null && constrr.IsCompileTimeConstant)
                     {
-                        isPrimitive = true;
+                        //isPrimitive = true;
                         constValue = constrr.ConstantValue;
 
                         if (constrr.Type.Kind == TypeKind.Enum)
@@ -355,27 +362,25 @@ namespace Bridge.Translator
                         }
                         else
                         {
-                            if (isField && !isValidIdentifier)
-                            {
-                                this.Injectors.Add(string.Format("this[{0}] = {1};", name.StartsWith("\"") ? name : AbstractEmitterBlock.ToJavaScript(name, this.Emitter), value + defValue));
-                            }
-                            else
-                            {
-                                this.Injectors.Add(string.Format(name.StartsWith("\"") ? interfaceFormat : format, name, value + defValue));
-                            }
+                            var rr = this.Emitter.Resolver.ResolveNode(member.Initializer, this.Emitter) as CSharpInvocationResolveResult;
+                            bool isDefaultInstance = rr != null && 
+                                                     rr.Member.SymbolKind == SymbolKind.Constructor &&
+                                                     rr.Arguments.Count == 0 && 
+                                                     rr.InitializerStatements.Count == 0 && 
+                                                     rr.Type.Kind == TypeKind.Struct;
 
-                            if (isProperty)
+                            if (!isDefaultInstance)
                             {
-                                needContinue = false;
-                                constValue = "null";
-                                write = true;
+                                if (isField && !isValidIdentifier)
+                                {
+                                    this.Injectors.Add(string.Format("this[{0}] = {1};", name.StartsWith("\"") ? name : AbstractEmitterBlock.ToJavaScript(name, this.Emitter), value + defValue));
+                                }
+                                else
+                                {
+                                    this.Injectors.Add(string.Format(name.StartsWith("\"") ? interfaceFormat : format, name, value + defValue));
+                                }
                             }
                         }
-                    }
-
-                    if (needContinue || tpl != null)
-                    {
-                        continue;
                     }
                 }
 
@@ -436,26 +441,24 @@ namespace Bridge.Translator
                     continue;
                 }
 
-                if (constValue is AstType)
+                if (constValue is AstType || constValue is IType)
                 {
-                    if (isNullable)
+                    this.Write("null");
+
+                    if (!isNullable)
                     {
-                        this.Write("null");
-                    }
-                    else
-                    {
-                        this.Write(Inspector.GetStructDefaultValue((AstType)constValue, this.Emitter));
-                    }
-                }
-                else if (constValue is IType)
-                {
-                    if (isNullable)
-                    {
-                        this.Write("null");
-                    }
-                    else
-                    {
-                        this.Write(Inspector.GetStructDefaultValue((IType)constValue, this.Emitter));
+                        var name = member.GetName(this.Emitter);
+                        bool isValidIdentifier = Helpers.IsValidIdentifier(name);
+                        var value = constValue is AstType ? Inspector.GetStructDefaultValue((AstType) constValue, this.Emitter) : Inspector.GetStructDefaultValue((IType)constValue, this.Emitter);
+
+                        if (!isValidIdentifier)
+                        {
+                            this.Injectors.Insert(BeginCounter++, string.Format("this[{0}] = {1};", name.StartsWith("\"") ? name : AbstractEmitterBlock.ToJavaScript(name, this.Emitter), value));
+                        }
+                        else
+                        {
+                            this.Injectors.Insert(BeginCounter++, string.Format(name.StartsWith("\"") ? interfaceFormat : format, name, value));
+                        }
                     }
                 }
                 else if (write)

@@ -1952,7 +1952,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.BasicCSharp.Class68", {
         fields: {
             x: 0,
-            y: 1
+            y: 0
+        },
+        ctors: {
+            init: function () {
+                this.y = 1;
+            }
         },
         methods: {
             Test: function () {
@@ -1971,10 +1976,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 StatitStringNotInitialized: null,
                 StaticInt: 0,
                 StaticString: null,
-                CONST_CHAR: 81,
-                CONST_DECIMAL: System.Decimal("3.123456789324324324")
+                CONST_CHAR: 0,
+                CONST_DECIMAL: System.Decimal(0.0)
             },
             ctors: {
+                init: function () {
+                    this.CONST_CHAR = 81;
+                    this.CONST_DECIMAL = System.Decimal("3.123456789324324324");
+                },
                 ctor: function () {
                     Bridge.ClientTest.BasicCSharp.ClassA.StaticString = "Defined string";
                     Bridge.ClientTest.BasicCSharp.ClassA.StaticInt = -340;
@@ -2135,9 +2144,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 StatitStringNotInitialized: null,
                 StaticInt: 0,
                 StaticString: null,
-                CONST_CHAR: 87
+                CONST_CHAR: 0
             },
             ctors: {
+                init: function () {
+                    this.CONST_CHAR = 87;
+                },
                 ctor: function () {
                     Bridge.ClientTest.BasicCSharp.Point.StaticInt = 500;
                     Bridge.ClientTest.BasicCSharp.Point.StaticString = "Initialized";
@@ -2192,6 +2204,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             methods: {
                 getDefaultValue: function () { return new Bridge.ClientTest.BasicCSharp.Rectangle(); }
             }
+        },
+        fields: {
+            l: null,
+            t: null
         },
         ctors: {
             init: function () {
@@ -4996,9 +5012,16 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.BridgeConsoleTests.ClassC", {
         props: {
-            Name: "Frank",
-            Age: 55,
-            Admin: true
+            Name: null,
+            Age: 0,
+            Admin: false
+        },
+        ctors: {
+            init: function () {
+                this.Name = "Frank";
+                this.Age = 55;
+                this.Admin = true;
+            }
         }
     });
 
@@ -12626,93 +12649,183 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.Constants", {
         statics: {
             fields: {
-                MODULE_HTML5: "HTML5",
-                PREFIX_SYSTEM_CLASSES: "Simple types",
-                PREFIX_SYSTEM_INTERFACES: "System interface",
-                PREFIX_COLLECTIONS: "Collections",
-                PREFIX_UTILITIES: "Utilities",
-                PREFIX_EXCEPTIONS: "Exceptions",
-                MODULE_DECIMAL: "Simple types",
-                MODULE_DOUBLE: "Simple types",
-                MODULE_INT16: "Simple types",
-                MODULE_INT64: "Simple types",
-                MODULE_SBYTE: "Simple types",
-                MODULE_FLOAT: "Simple types",
-                MODULE_UINT64: "Simple types",
-                MODULE_UINT32: "Simple types",
-                MODULE_OBJECT: "Simple types",
-                MODULE_CHAR: "Simple types",
-                MODULE_INT32: "Simple types",
-                MODULE_UINT16: "Simple types",
-                MODULE_BYTE: "Simple types",
-                MODULE_TUPLE: "Simple types",
-                MODULE_VERSION: "Simple types",
-                MODULE_BASIC_CSHARP: "C#",
-                MODULE_LINQ: "LINQ",
-                MODULE_LINQ_EXPRESSIONS: "LINQ Expressions",
-                MODULE_DATETIME: "Date and time",
-                MODULE_NULLABLE: "Nullable",
-                MODULE_STRING: "String",
-                MODULE_REGEX: "Regex",
-                MODULE_REGEX_JS: "RegexJS",
-                MODULE_ENUM: "Enum",
-                MODULE_GUID: "Guid",
-                MODULE_MATH: "Math",
-                MODULE_DECIMAL_MATH: "Decimal Math",
-                MODULE_BIT_CONVERTER: "BitConverter",
-                MODULE_CONVERT: "Convert",
-                MODULE_RANDOM: "Random",
-                MODULE_CONVENTION: "Convention",
-                MODULE_TYPEDARRAYS: "Typed Arrays",
-                MODULE_ICOLLECTION: "Collections",
-                MODULE_IDICTIONARY: "Collections",
-                MODULE_WEAKCOLLECTION: "Collections",
-                MODULE_LIST: "Collections",
-                MODULE_ILIST: "Collections",
-                MODULE_ITERATORBLOCK: "Collections",
-                MODULE_ARRAY: "Collections",
-                MODULE_IENUMERABLE: "Collections",
-                MODULE_GENERICDICTIONARY: "Collections",
-                MODULE_ICOMPARABLE: "System interface",
-                MODULE_IEQUATABLE: "System interface",
-                MODULE_COMPARER: "Comparer",
-                MODULE_EQUALITYCOMPARER: "EqualityComparer",
-                MODULE_NUMBERFORMATINFO: "NumberFormatInfo",
-                MODULE_CULTUREINFO: "СultureInfo",
-                MODULE_PROPERTYACCESSOR: "Property accessor",
-                MODULE_NUMBERFORMATSPECIFIERS: "Number format specifiers",
-                MODULE_RUNTIMEHELPERS: "Utilities",
-                MODULE_ENVIRONMENT: "Utilities",
-                MODULE_NOTSUPPORTEDEXCEPTION: "Exceptions",
-                MODULE_KEYNOTFOUNDEXCEPTION: "Exceptions",
-                MODULE_EXCEPTION: "Exceptions",
-                MODULE_ARGUMENTNULLEXCEPTION: "Exceptions",
-                MODULE_DIVIDEBYZEROEXCEPTION: "Exceptions",
-                MODULE_NOTIMPLEMENTEDEXCEPTION: "Exceptions",
-                MODULE_OVERFLOWEXCEPTION: "Exceptions",
-                MODULE_OUTOFMEMORYEXCEPTION: "Exceptions",
-                MODULE_INDEXOUTOFRANGEEXCEPTION: "Exceptions",
-                MODULE_SYSTEMEXCEPTION: "Exceptions",
-                MODULE_TIMOUTEXCEPTION: "Exceptions",
-                MODULE_REGEXMATCHTIMEOUTEXCEPTION: "Exceptions",
-                MODULE_ARITHMETICEXCEPTION: "Exceptions",
-                MODULE_FORMATEXCEPTION: "Exceptions",
-                MODULE_INVALIDOPERATIONEXCEPTION: "Exceptions",
-                MODULE_INVALIDCASTEXCEPTION: "Exceptions",
-                MODULE_ARGUMENTEXCEPTION: "Exceptions",
-                MODULE_NULLREFERENCEEXCEPTION: "Exceptions",
-                MODULE_ARGUMENTOUTOFRANGEEXCEPTION: "Exceptions",
-                MODULE_THREADING: "Threading",
-                MODULE_DIAGNOSTICS: "Diagnostics",
-                MODULE_CHECKED_UNCKECKED: "Checked/Unckecked",
-                MODULE_TYPE_SYSTEM: "Type system",
-                MODULE_REFLECTION: "Reflection",
-                MODULE_FUNCTIONS: "Functions",
-                MODULE_SERIALIZATION: "Serialization",
-                MODULE_BRIDGE_CONSOLE: "Bridge Console",
-                MODULE_SYSTEM_CONSOLE: "System Console",
-                MODULE_OBJECTLITERAL: "[ObjectLiteral]",
+                MODULE_HTML5: null,
+                PREFIX_SYSTEM_CLASSES: null,
+                PREFIX_SYSTEM_INTERFACES: null,
+                PREFIX_COLLECTIONS: null,
+                PREFIX_UTILITIES: null,
+                PREFIX_EXCEPTIONS: null,
+                MODULE_DECIMAL: null,
+                MODULE_DOUBLE: null,
+                MODULE_INT16: null,
+                MODULE_INT64: null,
+                MODULE_SBYTE: null,
+                MODULE_FLOAT: null,
+                MODULE_UINT64: null,
+                MODULE_UINT32: null,
+                MODULE_OBJECT: null,
+                MODULE_CHAR: null,
+                MODULE_INT32: null,
+                MODULE_UINT16: null,
+                MODULE_BYTE: null,
+                MODULE_TUPLE: null,
+                MODULE_VERSION: null,
+                MODULE_BASIC_CSHARP: null,
+                MODULE_LINQ: null,
+                MODULE_LINQ_EXPRESSIONS: null,
+                MODULE_DATETIME: null,
+                MODULE_NULLABLE: null,
+                MODULE_STRING: null,
+                MODULE_REGEX: null,
+                MODULE_REGEX_JS: null,
+                MODULE_ENUM: null,
+                MODULE_GUID: null,
+                MODULE_MATH: null,
+                MODULE_DECIMAL_MATH: null,
+                MODULE_BIT_CONVERTER: null,
+                MODULE_CONVERT: null,
+                MODULE_RANDOM: null,
+                MODULE_CONVENTION: null,
+                MODULE_TYPEDARRAYS: null,
+                MODULE_ICOLLECTION: null,
+                MODULE_IDICTIONARY: null,
+                MODULE_WEAKCOLLECTION: null,
+                MODULE_LIST: null,
+                MODULE_ILIST: null,
+                MODULE_ITERATORBLOCK: null,
+                MODULE_ARRAY: null,
+                MODULE_IENUMERABLE: null,
+                MODULE_GENERICDICTIONARY: null,
+                MODULE_ICOMPARABLE: null,
+                MODULE_IEQUATABLE: null,
+                MODULE_COMPARER: null,
+                MODULE_EQUALITYCOMPARER: null,
+                MODULE_NUMBERFORMATINFO: null,
+                MODULE_CULTUREINFO: null,
+                MODULE_PROPERTYACCESSOR: null,
+                MODULE_NUMBERFORMATSPECIFIERS: null,
+                MODULE_RUNTIMEHELPERS: null,
+                MODULE_ENVIRONMENT: null,
+                MODULE_NOTSUPPORTEDEXCEPTION: null,
+                MODULE_KEYNOTFOUNDEXCEPTION: null,
+                MODULE_EXCEPTION: null,
+                MODULE_ARGUMENTNULLEXCEPTION: null,
+                MODULE_DIVIDEBYZEROEXCEPTION: null,
+                MODULE_NOTIMPLEMENTEDEXCEPTION: null,
+                MODULE_OVERFLOWEXCEPTION: null,
+                MODULE_OUTOFMEMORYEXCEPTION: null,
+                MODULE_INDEXOUTOFRANGEEXCEPTION: null,
+                MODULE_SYSTEMEXCEPTION: null,
+                MODULE_TIMOUTEXCEPTION: null,
+                MODULE_REGEXMATCHTIMEOUTEXCEPTION: null,
+                MODULE_ARITHMETICEXCEPTION: null,
+                MODULE_FORMATEXCEPTION: null,
+                MODULE_INVALIDOPERATIONEXCEPTION: null,
+                MODULE_INVALIDCASTEXCEPTION: null,
+                MODULE_ARGUMENTEXCEPTION: null,
+                MODULE_NULLREFERENCEEXCEPTION: null,
+                MODULE_ARGUMENTOUTOFRANGEEXCEPTION: null,
+                MODULE_THREADING: null,
+                MODULE_DIAGNOSTICS: null,
+                MODULE_CHECKED_UNCKECKED: null,
+                MODULE_TYPE_SYSTEM: null,
+                MODULE_REFLECTION: null,
+                MODULE_FUNCTIONS: null,
+                MODULE_SERIALIZATION: null,
+                MODULE_BRIDGE_CONSOLE: null,
+                MODULE_SYSTEM_CONSOLE: null,
+                MODULE_OBJECTLITERAL: null,
                 IGNORE_DATE: null
+            },
+            ctors: {
+                init: function () {
+                    this.MODULE_HTML5 = "HTML5";
+                    this.PREFIX_SYSTEM_CLASSES = "Simple types";
+                    this.PREFIX_SYSTEM_INTERFACES = "System interface";
+                    this.PREFIX_COLLECTIONS = "Collections";
+                    this.PREFIX_UTILITIES = "Utilities";
+                    this.PREFIX_EXCEPTIONS = "Exceptions";
+                    this.MODULE_DECIMAL = Bridge.ClientTest.Constants.PREFIX_SYSTEM_CLASSES;
+                    this.MODULE_DOUBLE = Bridge.ClientTest.Constants.PREFIX_SYSTEM_CLASSES;
+                    this.MODULE_INT16 = Bridge.ClientTest.Constants.PREFIX_SYSTEM_CLASSES;
+                    this.MODULE_INT64 = Bridge.ClientTest.Constants.PREFIX_SYSTEM_CLASSES;
+                    this.MODULE_SBYTE = Bridge.ClientTest.Constants.PREFIX_SYSTEM_CLASSES;
+                    this.MODULE_FLOAT = Bridge.ClientTest.Constants.PREFIX_SYSTEM_CLASSES;
+                    this.MODULE_UINT64 = Bridge.ClientTest.Constants.PREFIX_SYSTEM_CLASSES;
+                    this.MODULE_UINT32 = Bridge.ClientTest.Constants.PREFIX_SYSTEM_CLASSES;
+                    this.MODULE_OBJECT = Bridge.ClientTest.Constants.PREFIX_SYSTEM_CLASSES;
+                    this.MODULE_CHAR = Bridge.ClientTest.Constants.PREFIX_SYSTEM_CLASSES;
+                    this.MODULE_INT32 = Bridge.ClientTest.Constants.PREFIX_SYSTEM_CLASSES;
+                    this.MODULE_UINT16 = Bridge.ClientTest.Constants.PREFIX_SYSTEM_CLASSES;
+                    this.MODULE_BYTE = Bridge.ClientTest.Constants.PREFIX_SYSTEM_CLASSES;
+                    this.MODULE_TUPLE = Bridge.ClientTest.Constants.PREFIX_SYSTEM_CLASSES;
+                    this.MODULE_VERSION = Bridge.ClientTest.Constants.PREFIX_SYSTEM_CLASSES;
+                    this.MODULE_BASIC_CSHARP = "C#";
+                    this.MODULE_LINQ = "LINQ";
+                    this.MODULE_LINQ_EXPRESSIONS = "LINQ Expressions";
+                    this.MODULE_DATETIME = "Date and time";
+                    this.MODULE_NULLABLE = "Nullable";
+                    this.MODULE_STRING = "String";
+                    this.MODULE_REGEX = "Regex";
+                    this.MODULE_REGEX_JS = "RegexJS";
+                    this.MODULE_ENUM = "Enum";
+                    this.MODULE_GUID = "Guid";
+                    this.MODULE_MATH = "Math";
+                    this.MODULE_DECIMAL_MATH = "Decimal Math";
+                    this.MODULE_BIT_CONVERTER = "BitConverter";
+                    this.MODULE_CONVERT = "Convert";
+                    this.MODULE_RANDOM = "Random";
+                    this.MODULE_CONVENTION = "Convention";
+                    this.MODULE_TYPEDARRAYS = "Typed Arrays";
+                    this.MODULE_ICOLLECTION = Bridge.ClientTest.Constants.PREFIX_COLLECTIONS;
+                    this.MODULE_IDICTIONARY = Bridge.ClientTest.Constants.PREFIX_COLLECTIONS;
+                    this.MODULE_WEAKCOLLECTION = Bridge.ClientTest.Constants.PREFIX_COLLECTIONS;
+                    this.MODULE_LIST = Bridge.ClientTest.Constants.PREFIX_COLLECTIONS;
+                    this.MODULE_ILIST = Bridge.ClientTest.Constants.PREFIX_COLLECTIONS;
+                    this.MODULE_ITERATORBLOCK = Bridge.ClientTest.Constants.PREFIX_COLLECTIONS;
+                    this.MODULE_ARRAY = Bridge.ClientTest.Constants.PREFIX_COLLECTIONS;
+                    this.MODULE_IENUMERABLE = Bridge.ClientTest.Constants.PREFIX_COLLECTIONS;
+                    this.MODULE_GENERICDICTIONARY = Bridge.ClientTest.Constants.PREFIX_COLLECTIONS;
+                    this.MODULE_ICOMPARABLE = Bridge.ClientTest.Constants.PREFIX_SYSTEM_INTERFACES;
+                    this.MODULE_IEQUATABLE = Bridge.ClientTest.Constants.PREFIX_SYSTEM_INTERFACES;
+                    this.MODULE_COMPARER = "Comparer";
+                    this.MODULE_EQUALITYCOMPARER = "EqualityComparer";
+                    this.MODULE_NUMBERFORMATINFO = "NumberFormatInfo";
+                    this.MODULE_CULTUREINFO = "СultureInfo";
+                    this.MODULE_PROPERTYACCESSOR = "Property accessor";
+                    this.MODULE_NUMBERFORMATSPECIFIERS = "Number format specifiers";
+                    this.MODULE_RUNTIMEHELPERS = Bridge.ClientTest.Constants.PREFIX_UTILITIES;
+                    this.MODULE_ENVIRONMENT = Bridge.ClientTest.Constants.PREFIX_UTILITIES;
+                    this.MODULE_NOTSUPPORTEDEXCEPTION = Bridge.ClientTest.Constants.PREFIX_EXCEPTIONS;
+                    this.MODULE_KEYNOTFOUNDEXCEPTION = Bridge.ClientTest.Constants.PREFIX_EXCEPTIONS;
+                    this.MODULE_EXCEPTION = Bridge.ClientTest.Constants.PREFIX_EXCEPTIONS;
+                    this.MODULE_ARGUMENTNULLEXCEPTION = Bridge.ClientTest.Constants.PREFIX_EXCEPTIONS;
+                    this.MODULE_DIVIDEBYZEROEXCEPTION = Bridge.ClientTest.Constants.PREFIX_EXCEPTIONS;
+                    this.MODULE_NOTIMPLEMENTEDEXCEPTION = Bridge.ClientTest.Constants.PREFIX_EXCEPTIONS;
+                    this.MODULE_OVERFLOWEXCEPTION = Bridge.ClientTest.Constants.PREFIX_EXCEPTIONS;
+                    this.MODULE_OUTOFMEMORYEXCEPTION = Bridge.ClientTest.Constants.PREFIX_EXCEPTIONS;
+                    this.MODULE_INDEXOUTOFRANGEEXCEPTION = Bridge.ClientTest.Constants.PREFIX_EXCEPTIONS;
+                    this.MODULE_SYSTEMEXCEPTION = Bridge.ClientTest.Constants.PREFIX_EXCEPTIONS;
+                    this.MODULE_TIMOUTEXCEPTION = Bridge.ClientTest.Constants.PREFIX_EXCEPTIONS;
+                    this.MODULE_REGEXMATCHTIMEOUTEXCEPTION = Bridge.ClientTest.Constants.PREFIX_EXCEPTIONS;
+                    this.MODULE_ARITHMETICEXCEPTION = Bridge.ClientTest.Constants.PREFIX_EXCEPTIONS;
+                    this.MODULE_FORMATEXCEPTION = Bridge.ClientTest.Constants.PREFIX_EXCEPTIONS;
+                    this.MODULE_INVALIDOPERATIONEXCEPTION = Bridge.ClientTest.Constants.PREFIX_EXCEPTIONS;
+                    this.MODULE_INVALIDCASTEXCEPTION = Bridge.ClientTest.Constants.PREFIX_EXCEPTIONS;
+                    this.MODULE_ARGUMENTEXCEPTION = Bridge.ClientTest.Constants.PREFIX_EXCEPTIONS;
+                    this.MODULE_NULLREFERENCEEXCEPTION = Bridge.ClientTest.Constants.PREFIX_EXCEPTIONS;
+                    this.MODULE_ARGUMENTOUTOFRANGEEXCEPTION = Bridge.ClientTest.Constants.PREFIX_EXCEPTIONS;
+                    this.MODULE_THREADING = "Threading";
+                    this.MODULE_DIAGNOSTICS = "Diagnostics";
+                    this.MODULE_CHECKED_UNCKECKED = "Checked/Unckecked";
+                    this.MODULE_TYPE_SYSTEM = "Type system";
+                    this.MODULE_REFLECTION = "Reflection";
+                    this.MODULE_FUNCTIONS = "Functions";
+                    this.MODULE_SERIALIZATION = "Serialization";
+                    this.MODULE_BRIDGE_CONSOLE = "Bridge Console";
+                    this.MODULE_SYSTEM_CONSOLE = "System Console";
+                    this.MODULE_OBJECTLITERAL = "[ObjectLiteral]";
+                }
             }
         }
     });
@@ -12827,8 +12940,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.ConventionTests.Class.Class10", {
         statics: {
             fields: {
-                const_10: 10,
-                CONST_11: 11
+                const_10: 0,
+                CONST_11: 0
+            },
+            ctors: {
+                init: function () {
+                    this.const_10 = 10;
+                    this.CONST_11 = 11;
+                }
             }
         }
     });
@@ -13230,84 +13349,166 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.ConvertTests.ConvertConstants", {
         statics: {
             fields: {
-                UINT64_MAX_STRING_BASE_16: "ffffffffffffffff",
-                UINT64_MAX_STRING_BASE_8: "1777777777777777777777",
-                UINT64_MAX_STRING_BASE_2: "1111111111111111111111111111111111111111111111111111111111111111",
-                UINT64_OVERFLOW_MAX_STRING: "18446744073709551616",
-                UINT64_OVERFLOW_MAX_STRING_BASE_16: "10000000000000000",
-                UINT64_OVERFLOW_MAX_STRING_BASE_8: "7777777777777777777777777",
-                UINT64_OVERFLOW_MAX_STRING_BASE_2: "11111111111111111111111111111111111111111111111111111111111111111",
-                UINT64_OVERFLOW_MIN_STRING: "-1",
-                INT64_MAX_STRING_BASE_16: "7fffffffffffffff",
-                INT64_MAX_STRING_BASE_8: "777777777777777777777",
-                INT64_MAX_STRING_BASE_2: "111111111111111111111111111111111111111111111111111111111111111",
-                INT64_MIN_STRING_BASE_16: "8000000000000000",
-                INT64_MIN_STRING_BASE_8: "1000000000000000000000",
-                INT64_MIN_STRING_BASE_2: "1000000000000000000000000000000000000000000000000000000000000000",
-                INT64_OVERFLOW_MAX_STRING: "9223372036854775808",
-                INT64_OVERFLOW_MIN_STRING: "-9223372036854775809",
-                UINT32_MAX_STRING_BASE_16: "ffffffff",
-                UINT32_MAX_STRING_BASE_8: "37777777777",
-                UINT32_MAX_STRING_BASE_2: "11111111111111111111111111111111",
-                UINT32_OVERFLOW_MAX_STRING: "4294967296",
-                UINT32_OVERFLOW_MAX_STRING_BASE_16: "100000000",
-                UINT32_OVERFLOW_MAX_STRING_BASE_8: "77777777777",
-                UINT32_OVERFLOW_MAX_STRING_BASE_2: "111111111111111111111111111111111",
-                UINT32_OVERFLOW_MIN_STRING: "-1",
-                INT32_MAX_STRING_BASE_16: "7fffffff",
-                INT32_MAX_STRING_BASE_8: "17777777777",
-                INT32_MAX_STRING_BASE_2: "1111111111111111111111111111111",
-                INT32_MIN_STRING_BASE_16: "80000000",
-                INT32_MIN_STRING_BASE_8: "20000000000",
-                INT32_MIN_STRING_BASE_2: "10000000000000000000000000000000",
-                INT32_OVERFLOW_MAX_STRING: "2147483648",
-                INT32_OVERFLOW_MAX_STRING_BASE_16: "1ffffffff",
-                INT32_OVERFLOW_MAX_STRING_BASE_8: "777777777777",
-                INT32_OVERFLOW_MAX_STRING_BASE_2: "111111111111111111111111111111111",
-                INT32_OVERFLOW_MIN_STRING: "-2147483649",
-                UINT16_MAX_STRING_BASE_16: "ffff",
-                UINT16_MAX_STRING_BASE_8: "177777",
-                UINT16_MAX_STRING_BASE_2: "1111111111111111",
-                UINT16_OVERFLOW_MAX_STRING: "65536",
-                UINT16_OVERFLOW_MAX_STRING_BASE_16: "10000",
-                UINT16_OVERFLOW_MAX_STRING_BASE_8: "777777",
-                UINT16_OVERFLOW_MAX_STRING_BASE_2: "11111111111111111",
-                UINT16_OVERFLOW_MIN_STRING: "-1",
-                INT16_MAX_STRING_BASE_16: "7fff",
-                INT16_MAX_STRING_BASE_8: "77777",
-                INT16_MAX_STRING_BASE_2: "111111111111111",
-                INT16_MIN_STRING_BASE_16: "8000",
-                INT16_MIN_STRING_BASE_8: "100000",
-                INT16_MIN_STRING_BASE_2: "1000000000000000",
-                INT16_OVERFLOW_MAX_STRING: "32768",
-                INT16_OVERFLOW_MAX_STRING_BASE_16: "1ffff",
-                INT16_OVERFLOW_MAX_STRING_BASE_8: "777777",
-                INT16_OVERFLOW_MAX_STRING_BASE_2: "11111111111111111",
-                INT16_OVERFLOW_MIN_STRING: "-32769",
-                UINT8_MAX_STRING_BASE_16: "ff",
-                UINT8_MAX_STRING_BASE_8: "377",
-                UINT8_MAX_STRING_BASE_2: "11111111",
-                UINT8_OVERFLOW_MAX_STRING: "256",
-                UINT8_OVERFLOW_MIN_STRING: "-1",
-                INT8_MAX_STRING_BASE_16: "7f",
-                INT8_MAX_STRING_BASE_8: "177",
-                INT8_MAX_STRING_BASE_2: "1111111",
-                INT8_MIN_STRING_BASE_16: "80",
-                INT8_MIN_STRING_BASE_8: "200",
-                INT8_MIN_STRING_BASE_2: "10000000",
-                INT8_OVERFLOW_MAX_STRING: "128",
-                INT8_OVERFLOW_MAX_STRING_BASE_16: "1ff",
-                INT8_OVERFLOW_MAX_STRING_BASE_8: "777",
-                INT8_OVERFLOW_MAX_STRING_BASE_2: "111111111",
-                INT8_OVERFLOW_MIN_STRING: "-129",
-                DECIMAL_MAX_STRING: "79228162514264337593543950335",
-                DECIMAL_MIN_STRING: "-79228162514264337593543950335",
-                DOUBLE_MAX_STRING: "1.79769313486232E+308",
-                DOUBLE_MIN_STRING: "-1.79769313486232E+308",
-                DOUBLE_EPSILON_STRING: "4.94065645841247E-324",
-                SINGLE_MAX_STRING: "3.402823E+38",
-                SINGLE_MIN_STRING: "-3.402823E+38",
-                SINGLE_EPSILON_STRING: "1.401298E-45"
+                UINT64_MAX_STRING_BASE_16: null,
+                UINT64_MAX_STRING_BASE_8: null,
+                UINT64_MAX_STRING_BASE_2: null,
+                UINT64_OVERFLOW_MAX_STRING: null,
+                UINT64_OVERFLOW_MAX_STRING_BASE_16: null,
+                UINT64_OVERFLOW_MAX_STRING_BASE_8: null,
+                UINT64_OVERFLOW_MAX_STRING_BASE_2: null,
+                UINT64_OVERFLOW_MIN_STRING: null,
+                INT64_MAX_STRING_BASE_16: null,
+                INT64_MAX_STRING_BASE_8: null,
+                INT64_MAX_STRING_BASE_2: null,
+                INT64_MIN_STRING_BASE_16: null,
+                INT64_MIN_STRING_BASE_8: null,
+                INT64_MIN_STRING_BASE_2: null,
+                INT64_OVERFLOW_MAX_STRING: null,
+                INT64_OVERFLOW_MIN_STRING: null,
+                UINT32_MAX_STRING_BASE_16: null,
+                UINT32_MAX_STRING_BASE_8: null,
+                UINT32_MAX_STRING_BASE_2: null,
+                UINT32_OVERFLOW_MAX_STRING: null,
+                UINT32_OVERFLOW_MAX_STRING_BASE_16: null,
+                UINT32_OVERFLOW_MAX_STRING_BASE_8: null,
+                UINT32_OVERFLOW_MAX_STRING_BASE_2: null,
+                UINT32_OVERFLOW_MIN_STRING: null,
+                INT32_MAX_STRING_BASE_16: null,
+                INT32_MAX_STRING_BASE_8: null,
+                INT32_MAX_STRING_BASE_2: null,
+                INT32_MIN_STRING_BASE_16: null,
+                INT32_MIN_STRING_BASE_8: null,
+                INT32_MIN_STRING_BASE_2: null,
+                INT32_OVERFLOW_MAX_STRING: null,
+                INT32_OVERFLOW_MAX_STRING_BASE_16: null,
+                INT32_OVERFLOW_MAX_STRING_BASE_8: null,
+                INT32_OVERFLOW_MAX_STRING_BASE_2: null,
+                INT32_OVERFLOW_MIN_STRING: null,
+                UINT16_MAX_STRING_BASE_16: null,
+                UINT16_MAX_STRING_BASE_8: null,
+                UINT16_MAX_STRING_BASE_2: null,
+                UINT16_OVERFLOW_MAX_STRING: null,
+                UINT16_OVERFLOW_MAX_STRING_BASE_16: null,
+                UINT16_OVERFLOW_MAX_STRING_BASE_8: null,
+                UINT16_OVERFLOW_MAX_STRING_BASE_2: null,
+                UINT16_OVERFLOW_MIN_STRING: null,
+                INT16_MAX_STRING_BASE_16: null,
+                INT16_MAX_STRING_BASE_8: null,
+                INT16_MAX_STRING_BASE_2: null,
+                INT16_MIN_STRING_BASE_16: null,
+                INT16_MIN_STRING_BASE_8: null,
+                INT16_MIN_STRING_BASE_2: null,
+                INT16_OVERFLOW_MAX_STRING: null,
+                INT16_OVERFLOW_MAX_STRING_BASE_16: null,
+                INT16_OVERFLOW_MAX_STRING_BASE_8: null,
+                INT16_OVERFLOW_MAX_STRING_BASE_2: null,
+                INT16_OVERFLOW_MIN_STRING: null,
+                UINT8_MAX_STRING_BASE_16: null,
+                UINT8_MAX_STRING_BASE_8: null,
+                UINT8_MAX_STRING_BASE_2: null,
+                UINT8_OVERFLOW_MAX_STRING: null,
+                UINT8_OVERFLOW_MIN_STRING: null,
+                INT8_MAX_STRING_BASE_16: null,
+                INT8_MAX_STRING_BASE_8: null,
+                INT8_MAX_STRING_BASE_2: null,
+                INT8_MIN_STRING_BASE_16: null,
+                INT8_MIN_STRING_BASE_8: null,
+                INT8_MIN_STRING_BASE_2: null,
+                INT8_OVERFLOW_MAX_STRING: null,
+                INT8_OVERFLOW_MAX_STRING_BASE_16: null,
+                INT8_OVERFLOW_MAX_STRING_BASE_8: null,
+                INT8_OVERFLOW_MAX_STRING_BASE_2: null,
+                INT8_OVERFLOW_MIN_STRING: null,
+                DECIMAL_MAX_STRING: null,
+                DECIMAL_MIN_STRING: null,
+                DOUBLE_MAX_STRING: null,
+                DOUBLE_MIN_STRING: null,
+                DOUBLE_EPSILON_STRING: null,
+                SINGLE_MAX_STRING: null,
+                SINGLE_MIN_STRING: null,
+                SINGLE_EPSILON_STRING: null
+            },
+            ctors: {
+                init: function () {
+                    this.UINT64_MAX_STRING_BASE_16 = "ffffffffffffffff";
+                    this.UINT64_MAX_STRING_BASE_8 = "1777777777777777777777";
+                    this.UINT64_MAX_STRING_BASE_2 = "1111111111111111111111111111111111111111111111111111111111111111";
+                    this.UINT64_OVERFLOW_MAX_STRING = "18446744073709551616";
+                    this.UINT64_OVERFLOW_MAX_STRING_BASE_16 = "10000000000000000";
+                    this.UINT64_OVERFLOW_MAX_STRING_BASE_8 = "7777777777777777777777777";
+                    this.UINT64_OVERFLOW_MAX_STRING_BASE_2 = "11111111111111111111111111111111111111111111111111111111111111111";
+                    this.UINT64_OVERFLOW_MIN_STRING = "-1";
+                    this.INT64_MAX_STRING_BASE_16 = "7fffffffffffffff";
+                    this.INT64_MAX_STRING_BASE_8 = "777777777777777777777";
+                    this.INT64_MAX_STRING_BASE_2 = "111111111111111111111111111111111111111111111111111111111111111";
+                    this.INT64_MIN_STRING_BASE_16 = "8000000000000000";
+                    this.INT64_MIN_STRING_BASE_8 = "1000000000000000000000";
+                    this.INT64_MIN_STRING_BASE_2 = "1000000000000000000000000000000000000000000000000000000000000000";
+                    this.INT64_OVERFLOW_MAX_STRING = "9223372036854775808";
+                    this.INT64_OVERFLOW_MIN_STRING = "-9223372036854775809";
+                    this.UINT32_MAX_STRING_BASE_16 = "ffffffff";
+                    this.UINT32_MAX_STRING_BASE_8 = "37777777777";
+                    this.UINT32_MAX_STRING_BASE_2 = "11111111111111111111111111111111";
+                    this.UINT32_OVERFLOW_MAX_STRING = "4294967296";
+                    this.UINT32_OVERFLOW_MAX_STRING_BASE_16 = "100000000";
+                    this.UINT32_OVERFLOW_MAX_STRING_BASE_8 = "77777777777";
+                    this.UINT32_OVERFLOW_MAX_STRING_BASE_2 = "111111111111111111111111111111111";
+                    this.UINT32_OVERFLOW_MIN_STRING = "-1";
+                    this.INT32_MAX_STRING_BASE_16 = "7fffffff";
+                    this.INT32_MAX_STRING_BASE_8 = "17777777777";
+                    this.INT32_MAX_STRING_BASE_2 = "1111111111111111111111111111111";
+                    this.INT32_MIN_STRING_BASE_16 = "80000000";
+                    this.INT32_MIN_STRING_BASE_8 = "20000000000";
+                    this.INT32_MIN_STRING_BASE_2 = "10000000000000000000000000000000";
+                    this.INT32_OVERFLOW_MAX_STRING = "2147483648";
+                    this.INT32_OVERFLOW_MAX_STRING_BASE_16 = "1ffffffff";
+                    this.INT32_OVERFLOW_MAX_STRING_BASE_8 = "777777777777";
+                    this.INT32_OVERFLOW_MAX_STRING_BASE_2 = "111111111111111111111111111111111";
+                    this.INT32_OVERFLOW_MIN_STRING = "-2147483649";
+                    this.UINT16_MAX_STRING_BASE_16 = "ffff";
+                    this.UINT16_MAX_STRING_BASE_8 = "177777";
+                    this.UINT16_MAX_STRING_BASE_2 = "1111111111111111";
+                    this.UINT16_OVERFLOW_MAX_STRING = "65536";
+                    this.UINT16_OVERFLOW_MAX_STRING_BASE_16 = "10000";
+                    this.UINT16_OVERFLOW_MAX_STRING_BASE_8 = "777777";
+                    this.UINT16_OVERFLOW_MAX_STRING_BASE_2 = "11111111111111111";
+                    this.UINT16_OVERFLOW_MIN_STRING = "-1";
+                    this.INT16_MAX_STRING_BASE_16 = "7fff";
+                    this.INT16_MAX_STRING_BASE_8 = "77777";
+                    this.INT16_MAX_STRING_BASE_2 = "111111111111111";
+                    this.INT16_MIN_STRING_BASE_16 = "8000";
+                    this.INT16_MIN_STRING_BASE_8 = "100000";
+                    this.INT16_MIN_STRING_BASE_2 = "1000000000000000";
+                    this.INT16_OVERFLOW_MAX_STRING = "32768";
+                    this.INT16_OVERFLOW_MAX_STRING_BASE_16 = "1ffff";
+                    this.INT16_OVERFLOW_MAX_STRING_BASE_8 = "777777";
+                    this.INT16_OVERFLOW_MAX_STRING_BASE_2 = "11111111111111111";
+                    this.INT16_OVERFLOW_MIN_STRING = "-32769";
+                    this.UINT8_MAX_STRING_BASE_16 = "ff";
+                    this.UINT8_MAX_STRING_BASE_8 = "377";
+                    this.UINT8_MAX_STRING_BASE_2 = "11111111";
+                    this.UINT8_OVERFLOW_MAX_STRING = "256";
+                    this.UINT8_OVERFLOW_MIN_STRING = "-1";
+                    this.INT8_MAX_STRING_BASE_16 = "7f";
+                    this.INT8_MAX_STRING_BASE_8 = "177";
+                    this.INT8_MAX_STRING_BASE_2 = "1111111";
+                    this.INT8_MIN_STRING_BASE_16 = "80";
+                    this.INT8_MIN_STRING_BASE_8 = "200";
+                    this.INT8_MIN_STRING_BASE_2 = "10000000";
+                    this.INT8_OVERFLOW_MAX_STRING = "128";
+                    this.INT8_OVERFLOW_MAX_STRING_BASE_16 = "1ff";
+                    this.INT8_OVERFLOW_MAX_STRING_BASE_8 = "777";
+                    this.INT8_OVERFLOW_MAX_STRING_BASE_2 = "111111111";
+                    this.INT8_OVERFLOW_MIN_STRING = "-129";
+                    this.DECIMAL_MAX_STRING = "79228162514264337593543950335";
+                    this.DECIMAL_MIN_STRING = "-79228162514264337593543950335";
+                    this.DOUBLE_MAX_STRING = "1.79769313486232E+308";
+                    this.DOUBLE_MIN_STRING = "-1.79769313486232E+308";
+                    this.DOUBLE_EPSILON_STRING = "4.94065645841247E-324";
+                    this.SINGLE_MAX_STRING = "3.402823E+38";
+                    this.SINGLE_MIN_STRING = "-3.402823E+38";
+                    this.SINGLE_EPSILON_STRING = "1.401298E-45";
+                }
             }
         }
     });
@@ -14497,18 +14698,25 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.CSharp6.TestAutoProps.Customer", {
         statics: {
             fields: {
-                staticField: "test1"
+                staticField: null
+            },
+            ctors: {
+                init: function () {
+                    this.staticField = "test1";
+                }
             }
         },
         props: {
-            First: "Jane",
-            Last: "Doe",
+            First: null,
+            Last: null,
             Name: null,
             Prop1: null,
             Prop2: null
         },
         ctors: {
             init: function () {
+                this.First = "Jane";
+                this.Last = "Doe";
                 this.Prop1 = Bridge.ClientTest.CSharp6.TestAutoProps.Customer.staticField;
                 this.Prop2 = System.String.concat(Bridge.ClientTest.CSharp6.TestAutoProps.Customer.staticField, "2");
             },
@@ -14944,12 +15152,18 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             }
         },
         props: {
-            First: "Jane",
-            Last: "Doe",
+            First: null,
+            Last: null,
             Name: {
                 get: function () {
                     return System.String.concat(this.First, " ", this.Last);
                 }
+            }
+        },
+        ctors: {
+            init: function () {
+                this.First = "Jane";
+                this.Last = "Doe";
             }
         },
         methods: {
@@ -15102,8 +15316,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.CSharp6.TestInterpolatedStrings.Person", {
         props: {
-            Name: "Jane",
-            Age: 10
+            Name: null,
+            Age: 0
+        },
+        ctors: {
+            init: function () {
+                this.Name = "Jane";
+                this.Age = 10;
+            }
         }
     });
 
@@ -15202,11 +15422,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         statics: {
             fields: {
                 UseLogging: false,
-                JSMode: true,
+                JSMode: false,
                 NoDotNetDiff: false,
-                HasDotNetDiff: true,
-                MaxValue: System.Decimal("79228162514264337593543950335"),
-                MinValue: System.Decimal("-79228162514264337593543950335"),
+                HasDotNetDiff: false,
+                MaxValue: System.Decimal(0.0),
+                MinValue: System.Decimal(0.0),
                 InputAdd: null,
                 InputSubtract: null,
                 InputMultiply: null,
@@ -15215,6 +15435,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             ctors: {
                 init: function () {
+                    this.UseLogging = false;
+                    this.JSMode = true;
+                    this.NoDotNetDiff = false;
+                    this.HasDotNetDiff = true;
+                    this.MaxValue = System.Decimal.MaxValue;
+                    this.MinValue = System.Decimal.MinValue;
                     this.InputAdd = System.Array.create(null, [[Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(47.0), System.Decimal(47.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(-47.0), System.Decimal(-47.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(-47.0), System.Decimal(-47.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(47.0), System.Decimal(47.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("443534569034876.33478923476"), System.Decimal(47.0), System.Decimal("443534569034923.33478923476")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("443534569034876.12345678901235"), System.Decimal(47.000000000001), System.Decimal("443534569034923.12345678901335")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("443534569034876.12345678901235"), System.Decimal("9436905724146.297872340425532"), System.Decimal("452971474759022.42132912943788")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("4435345690348766678656790453"), System.Decimal(17.0), System.Decimal("4435345690348766678656790470")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(17.2345324), System.Decimal("4435345690348766678656790453"), System.Decimal("4435345690348766678656790470.2")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.HasDotNetDiff, System.Boolean, $box_.System.Boolean.toString), "0.00000000000005", System.Decimal("-943456769034871.4234"), System.Decimal("47.00000000003455"), System.Decimal("-943456769034824.4233999999654")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("6999545690348766678656790453"), System.Decimal(-13.0), System.Decimal("6999545690348766678656790440")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(11.0), System.Decimal("-6435345690348766678656790453"), System.Decimal("-6435345690348766678656790442")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, Bridge.ClientTest.DecimalMathTests.MaxValue, Bridge.ClientTest.DecimalMathTests.MinValue, System.Decimal(0.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal.MinusOne, Bridge.ClientTest.DecimalMathTests.MaxValue, System.Decimal("79228162514264337593543950334")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, Bridge.ClientTest.DecimalMathTests.MaxValue, System.Decimal.MinusOne, System.Decimal("79228162514264337593543950334")]], System.Object, 15, 5);
                     this.InputSubtract = System.Array.create(null, [[Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(47.0), System.Decimal(-47.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(-47.0), System.Decimal(47.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(-47.0), System.Decimal(47.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(47.0), System.Decimal(-47.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("443534569034876.33478923476"), System.Decimal(47.0), System.Decimal("443534569034829.33478923476")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("443534569034876.12345678901235"), System.Decimal(47.000000000001), System.Decimal("443534569034829.12345678901135")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("443534569034876.12345678901235"), System.Decimal("9436905724146.297872340425532"), System.Decimal("434097663310729.82558444858682")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("4435345690348766678656790453"), System.Decimal(17.0), System.Decimal("4435345690348766678656790436")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(17.2345324), System.Decimal("4435345690348766678656790453"), System.Decimal("-4435345690348766678656790435.8")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.HasDotNetDiff, System.Boolean, $box_.System.Boolean.toString), System.Decimal(-0.00000000000005), System.Decimal("-943456769034871.4234"), System.Decimal("47.00000000003455"), System.Decimal("-943456769034918.4234000000346")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("6999545690348766678656790453"), System.Decimal(-13.0), System.Decimal("6999545690348766678656790466")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(11.0), System.Decimal("-6435345690348766678656790453"), System.Decimal("6435345690348766678656790464")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, Bridge.ClientTest.DecimalMathTests.MaxValue, Bridge.ClientTest.DecimalMathTests.MaxValue, System.Decimal(0.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal.MinusOne, Bridge.ClientTest.DecimalMathTests.MinValue, System.Decimal("79228162514264337593543950334")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, Bridge.ClientTest.DecimalMathTests.MaxValue, System.Decimal.One, System.Decimal("79228162514264337593543950334")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, Bridge.ClientTest.DecimalMathTests.MinValue, System.Decimal.MinusOne, System.Decimal("-79228162514264337593543950334")]], System.Object, 16, 5);
                     this.InputMultiply = System.Array.create(null, [[Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(47.0), System.Decimal(0.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(-47.0), System.Decimal(0.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(-47.0), System.Decimal(0.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(47.0), System.Decimal(0.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(0.0), System.Decimal(0.0), System.Decimal(0.0)], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("443534569034876.33478923476"), System.Decimal(0.47), System.Decimal("208461247446391.8773509403372")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("43534569034876.12345678901235"), System.Decimal(47.000000000001), System.Decimal("2046124744639221.3370381184566")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("44.353456903487612345678901235"), System.Decimal("9436905724146.297872340425532"), System.Decimal("418559391338198.38088395328596")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("4435345690348766678656790453"), System.Decimal(0.17), System.Decimal("754008767359290335371654377.01")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal(17.2345324), System.Decimal("443534569034876667865679045.37"), System.Decimal("7644110900551618662335084355.4")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal("-943456769034871.4234"), System.Decimal("0.4700000000003455"), System.Decimal("-443424681446715.53331170154808")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.HasDotNetDiff, System.Boolean, $box_.System.Boolean.toString), System.Decimal(-0.01), System.Decimal("6999545690348766678656790453"), System.Decimal(-0.13), System.Decimal("-909940939745339668225382758.9")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.HasDotNetDiff, System.Boolean, $box_.System.Boolean.toString), System.Decimal(0.0001), System.Decimal(0.11), System.Decimal("-64353456903487666786567904.535"), System.Decimal("-7078880259383643346522469.4988")], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, Bridge.ClientTest.DecimalMathTests.MaxValue, System.Decimal.MinusOne, Bridge.ClientTest.DecimalMathTests.MinValue], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, System.Decimal.MinusOne, Bridge.ClientTest.DecimalMathTests.MinValue, Bridge.ClientTest.DecimalMathTests.MaxValue], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, Bridge.ClientTest.DecimalMathTests.MaxValue, System.Decimal.One, Bridge.ClientTest.DecimalMathTests.MaxValue], [Bridge.box(Bridge.ClientTest.DecimalMathTests.NoDotNetDiff, System.Boolean, $box_.System.Boolean.toString), null, Bridge.ClientTest.DecimalMathTests.MinValue, System.Decimal.MinusOne, Bridge.ClientTest.DecimalMathTests.MaxValue]], System.Object, 17, 5);
@@ -15824,11 +16050,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.DeserializationTests.ClassWithFields", {
         fields: {
             byteArrayField: null,
+            guidField: null,
             typeField: null,
-            charField: 97,
+            charField: 0,
             longField: System.Int64(0),
             ulongField: System.UInt64(0),
             decimalField: System.Decimal(0.0),
+            dateField: null,
             enumField: 0,
             arrayField: null,
             listField: null,
@@ -15836,9 +16064,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         ctors: {
             init: function () {
+                this.guidField = new System.Guid();
+                this.dateField = System.DateTime.getDefaultValue();
                 this.byteArrayField = System.Array.init([1, 2, 3], System.Byte);
                 this.guidField = System.Guid.newGuid();
                 this.typeField = Bridge.ClientTest.SerializationTests;
+                this.charField = 97;
                 this.dateField = new Date(2010, 6 - 1, 10, 12, 0, 0, 0);
                 this.arrayField = System.Array.init([1, 2, 3], System.Int32);
                 this.listField = $asm.$.Bridge.ClientTest.DeserializationTests.ClassWithFields.f1(new (System.Collections.Generic.List$1(Bridge.ClientTest.DeserializationTests.E1))());
@@ -15867,11 +16098,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.DeserializationTests.ClassWithFieldsAndNoInit", {
         fields: {
             byteArrayField: null,
+            guidField: null,
             typeField: null,
             charField: 0,
             longField: System.Int64(0),
             ulongField: System.UInt64(0),
             decimalField: System.Decimal(0.0),
+            dateField: null,
             enumField: 0,
             arrayField: null,
             listField: null,
@@ -16676,7 +16909,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.Exceptions.AggregateExceptionTests", {
         statics: {
             fields: {
-                DefaultMessage: "One or more errors occurred."
+                DefaultMessage: null
+            },
+            ctors: {
+                init: function () {
+                    this.DefaultMessage = "One or more errors occurred.";
+                }
             }
         },
         methods: {
@@ -16926,7 +17164,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.Exceptions.ArgumentExceptionTests", {
         statics: {
             fields: {
-                DefaultMessage: "Value does not fall within the expected range."
+                DefaultMessage: null
+            },
+            ctors: {
+                init: function () {
+                    this.DefaultMessage = "Value does not fall within the expected range.";
+                }
             }
         },
         methods: {
@@ -17204,7 +17447,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.Exceptions.CultureNotFoundExceptionTests", {
         statics: {
             fields: {
-                DefaultMessage: "Culture is not supported."
+                DefaultMessage: null
+            },
+            ctors: {
+                init: function () {
+                    this.DefaultMessage = "Culture is not supported.";
+                }
             }
         },
         methods: {
@@ -17421,7 +17669,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.Exceptions.IndexOutOfRangeExceptionTests", {
         statics: {
             fields: {
-                DefaultMessage: "Index was outside the bounds of the array."
+                DefaultMessage: null
+            },
+            ctors: {
+                init: function () {
+                    this.DefaultMessage = "Index was outside the bounds of the array.";
+                }
             }
         },
         methods: {
@@ -17714,7 +17967,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.Exceptions.OutOfMemoryExceptionTests", {
         statics: {
             fields: {
-                DefaultMessage: "Insufficient memory to continue the execution of the program."
+                DefaultMessage: null
+            },
+            ctors: {
+                init: function () {
+                    this.DefaultMessage = "Insufficient memory to continue the execution of the program.";
+                }
             }
         },
         methods: {
@@ -17817,7 +18075,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.Exceptions.RankExceptionTests", {
         statics: {
             fields: {
-                DefaultMessage: "Attempted to operate on an array with the incorrect number of dimensions."
+                DefaultMessage: null
+            },
+            ctors: {
+                init: function () {
+                    this.DefaultMessage = "Attempted to operate on an array with the incorrect number of dimensions.";
+                }
             }
         },
         methods: {
@@ -17845,8 +18108,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.Exceptions.RegexMatchTimeoutExceptionTests", {
         statics: {
             fields: {
-                DefaultMessage1: "The operation has timed out.",
-                DefaultMessage2: "The RegEx engine has timed out while trying to match a pattern to an input string. This can occur for many reasons, including very large inputs or excessive backtracking caused by nested quantifiers, back-references and other factors."
+                DefaultMessage1: null,
+                DefaultMessage2: null
+            },
+            ctors: {
+                init: function () {
+                    this.DefaultMessage1 = "The operation has timed out.";
+                    this.DefaultMessage2 = "The RegEx engine has timed out while trying to match a pattern to an input string. This can occur for many reasons, including very large inputs or excessive backtracking caused by nested quantifiers, back-references and other factors.";
+                }
             }
         },
         methods: {
@@ -17892,7 +18161,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.Exceptions.SystemExceptionTests", {
         statics: {
             fields: {
-                DefaultMessage: "System error."
+                DefaultMessage: null
+            },
+            ctors: {
+                init: function () {
+                    this.DefaultMessage = "System error.";
+                }
             }
         },
         methods: {
@@ -17973,7 +18247,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.Exceptions.TimeoutExceptionTests", {
         statics: {
             fields: {
-                DefaultMessage: "The operation has timed out."
+                DefaultMessage: null
+            },
+            ctors: {
+                init: function () {
+                    this.DefaultMessage = "The operation has timed out.";
+                }
             }
         },
         methods: {
@@ -18520,7 +18799,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.FunctionTests", {
         statics: {
             fields: {
-                IntFunctionBody: "  if (this) {\n  if (this.sv1) { p1 = this.sv1; }\n  if (this.sv2) { p2 = this.sv2; }\n}\nif (sc) { p1 = sc.v1; p2 = sc.v2; }\nif (p1 === undefined) { p1 = 100; }\nif (p2 === undefined) { p2 = -55; }\nreturn p1 + p2;"
+                IntFunctionBody: null
+            },
+            ctors: {
+                init: function () {
+                    this.IntFunctionBody = "  if (this) {\n  if (this.sv1) { p1 = this.sv1; }\n  if (this.sv2) { p2 = this.sv2; }\n}\nif (sc) { p1 = sc.v1; p2 = sc.v2; }\nif (p1 === undefined) { p1 = 100; }\nif (p2 === undefined) { p2 = -55; }\nreturn p1 + p2;";
+                }
             }
         },
         methods: {
@@ -23317,8 +23601,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.MathTests", {
         statics: {
             fields: {
-                E2: 2.7182818284590451,
-                PI2: 3.1415926535897931
+                E2: 0,
+                PI2: 0
+            },
+            ctors: {
+                init: function () {
+                    this.E2 = Math.E;
+                    this.PI2 = Math.PI;
+                }
             }
         },
         methods: {
@@ -24017,8 +24307,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.MutationObserverTests", {
         statics: {
             fields: {
-                ATTRIBUTE: "SPAN",
-                TYPE: "childList"
+                ATTRIBUTE: null,
+                TYPE: null
+            },
+            ctors: {
+                init: function () {
+                    this.ATTRIBUTE = "SPAN";
+                    this.TYPE = "childList";
+                }
             }
         },
         props: {
@@ -24909,7 +25205,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.RandomTests", {
         statics: {
             fields: {
-                ITERATIONS: 100
+                ITERATIONS: 0
+            },
+            ctors: {
+                init: function () {
+                    this.ITERATIONS = 100;
+                }
             },
             methods: {
                 Unseeded: function () {
@@ -26781,6 +27082,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     });
 
     Bridge.define("Bridge.ClientTest.Reflection.ReflectionTests.C11", {
+        fields: {
+            D: null
+        },
         ctors: {
             init: function () {
                 this.D = System.DateTime.getDefaultValue();
@@ -26799,7 +27103,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             }
         },
         fields: {
-            F1: 0
+            F1: 0,
+            renamedF2: null
         },
         ctors: {
             init: function () {
@@ -29890,11 +30195,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.SerializationTests.ClassWithFields", {
         fields: {
             byteArrayField: null,
+            guidField: null,
             typeField: null,
-            charField: 97,
+            charField: 0,
             longField: System.Int64(0),
             ulongField: System.UInt64(0),
             decimalField: System.Decimal(0.0),
+            dateField: null,
             enumField: 0,
             arrayField: null,
             listField: null,
@@ -29902,9 +30209,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         ctors: {
             init: function () {
+                this.guidField = new System.Guid();
+                this.dateField = System.DateTime.getDefaultValue();
                 this.byteArrayField = System.Array.init([1, 2, 3], System.Byte);
                 this.guidField = System.Guid.newGuid();
                 this.typeField = Bridge.ClientTest.SerializationTests;
+                this.charField = 97;
                 this.dateField = new Date(2010, 6 - 1, 10, 12, 0, 0, 0);
                 this.arrayField = System.Array.init([1, 2, 3], System.Int32);
                 this.listField = $asm.$.Bridge.ClientTest.SerializationTests.ClassWithFields.f1(new (System.Collections.Generic.List$1(Bridge.ClientTest.SerializationTests.E1))());
@@ -42394,8 +42704,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.Text.RegularExpressions.RegexTestBase],
         statics: {
             fields: {
-                Pattern: "((?:\\w)+[\\s\\.])+",
-                Text: "This is a sentance. This is another sentance."
+                Pattern: null,
+                Text: null
+            },
+            ctors: {
+                init: function () {
+                    this.Pattern = "((?:\\w)+[\\s\\.])+";
+                    this.Text = "This is a sentance. This is another sentance.";
+                }
             },
             methods: {
                 GetTestDataMatch: function (matchIndex) {
@@ -42523,8 +42839,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.Text.RegularExpressions.RegexTestBase],
         statics: {
             fields: {
-                Pattern: "((?:\\w)+[\\s\\.])+",
-                Text: "This is a sentance. This is another sentance."
+                Pattern: null,
+                Text: null
+            },
+            ctors: {
+                init: function () {
+                    this.Pattern = "((?:\\w)+[\\s\\.])+";
+                    this.Text = "This is a sentance. This is another sentance.";
+                }
             },
             methods: {
                 GetTestDataMatch: function (matchIndex) {
@@ -42978,8 +43300,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.Text.RegularExpressions.RegexTestBase],
         statics: {
             fields: {
-                Pattern: "((?:\\w)+[\\s\\.])+",
-                Text: "This is a sentance. This is another sentance."
+                Pattern: null,
+                Text: null
+            },
+            ctors: {
+                init: function () {
+                    this.Pattern = "((?:\\w)+[\\s\\.])+";
+                    this.Text = "This is a sentance. This is another sentance.";
+                }
             },
             methods: {
                 GetTestDataMatch: function (matchIndex) {
@@ -43103,8 +43431,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.Text.RegularExpressions.RegexTestBase],
         statics: {
             fields: {
-                Pattern: "((?:\\w)+[\\s\\.])+",
-                Text: "This is a sentance. This is another sentance."
+                Pattern: null,
+                Text: null
+            },
+            ctors: {
+                init: function () {
+                    this.Pattern = "((?:\\w)+[\\s\\.])+";
+                    this.Text = "This is a sentance. This is another sentance.";
+                }
             },
             methods: {
                 GetTestDataMatch: function (matchIndex) {
@@ -43260,8 +43594,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.Text.RegularExpressions.RegexTestBase],
         statics: {
             fields: {
-                Pattern: "((?:\\w)+[\\s\\.])+",
-                Text: "This is a sentance. This is another sentance."
+                Pattern: null,
+                Text: null
+            },
+            ctors: {
+                init: function () {
+                    this.Pattern = "((?:\\w)+[\\s\\.])+";
+                    this.Text = "This is a sentance. This is another sentance.";
+                }
             },
             methods: {
                 GetTestDataMatch: function (matchIndex) {
@@ -50519,12 +50859,17 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.Text.RegularExpressions.RegexTestBase],
         statics: {
             fields: {
-                Pattern: "([0-9a-zA-Z]{1})+",
+                Pattern: null,
+                ShortTimeoutMs: null,
+                LongTimeoutMs: null,
                 ShortText: null,
                 LongText: null
             },
             ctors: {
                 init: function () {
+                    this.ShortTimeoutMs = new System.TimeSpan();
+                    this.LongTimeoutMs = new System.TimeSpan();
+                    this.Pattern = "([0-9a-zA-Z]{1})+";
                     this.ShortTimeoutMs = System.TimeSpan.fromMilliseconds(1);
                     this.LongTimeoutMs = System.TimeSpan.fromMilliseconds(3000);
                 },

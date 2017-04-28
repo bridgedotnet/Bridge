@@ -2,10 +2,18 @@
         inherits: [System.IDisposable],
         statics: {
             fields: {
-                MAX_SUPPORTED_TIMEOUT: 4294967294,
-                EXC_LESS: "Number must be either non-negative and less than or equal to Int32.MaxValue or -1.",
-                EXC_MORE: "Time-out interval must be less than 2^32-2.",
-                EXC_DISPOSED: "The timer has been already disposed."
+                MAX_SUPPORTED_TIMEOUT: 0,
+                EXC_LESS: null,
+                EXC_MORE: null,
+                EXC_DISPOSED: null
+            },
+            ctors: {
+                init: function () {
+                    this.MAX_SUPPORTED_TIMEOUT = 4294967294;
+                    this.EXC_LESS = "Number must be either non-negative and less than or equal to Int32.MaxValue or -1.";
+                    this.EXC_MORE = "Time-out interval must be less than 2^32-2.";
+                    this.EXC_DISPOSED = "The timer has been already disposed.";
+                }
             }
         },
         fields: {

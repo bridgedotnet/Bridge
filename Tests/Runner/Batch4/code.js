@@ -1926,7 +1926,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     sb.appendLine("got " + enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "Current$1")]);
                 }
 
-                this.AssertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n");
+                this.AssertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
             },
             PrematureDisposalOfIEnumeratorIteratorExecutesFinallyBlocks_SPI_1555: function () {
                 // #1555
@@ -1939,7 +1939,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 }
                 enm.System$IDisposable$dispose();
 
-                this.AssertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nin finally\r\n");
+                this.AssertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
             },
             ExceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks_SPI_1554: function () {
                 var sb = new System.Text.StringBuilder();
@@ -1963,7 +1963,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     sb.appendLine("caught exception");
                 }
 
-                this.AssertEqual(sb.toString(), "yielding 1\r\ngot 1\r\nyielding 2\r\ngot 2\r\nthrowing\r\nin finally\r\ncaught exception\r\n");
+                this.AssertEqual(sb.toString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
             },
             TypeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface_SPI_1554: function () {
                 var enm = null;
@@ -2004,7 +2004,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                         $t1.System$IDisposable$dispose();
                     }
                 }
-                this.AssertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n-\r\nyielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nyielding -1\r\ngot -1\r\nin finally\r\n");
+                this.AssertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n-\nyielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
             },
             PrematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks_SPI_1555: function () {
                 var $t;
@@ -2025,7 +2025,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                         $t.System$IDisposable$dispose();
                     }
                 }
-                this.AssertEqual(sb.toString(), "yielding 0\r\ngot 0\r\nyielding 1\r\ngot 1\r\nin finally\r\n");
+                this.AssertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
             },
             ExceptionInIEnumerableIteratorBodyExecutesFinallyBlocks_SPI_1554: function () {
                 var sb = new System.Text.StringBuilder();
@@ -2050,7 +2050,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     sb.appendLine("caught exception");
                 }
 
-                this.AssertEqual(sb.toString(), "yielding 1\r\ngot 1\r\nyielding 2\r\ngot 2\r\nthrowing\r\nin finally\r\ncaught exception\r\n");
+                this.AssertEqual(sb.toString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
             },
             EnumeratingAnIteratorBlockReturningIEnumerableMultipleTimesUsesTheInitialValuesForParameters: function () {
                 var $t, $t1;
@@ -2078,7 +2078,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                         $t1.System$IDisposable$dispose();
                     }
                 }
-                this.AssertEqual(sb.toString(), "3\r\n2\r\n1\r\n3\r\n2\r\n1\r\n");
+                this.AssertEqual(sb.toString(), "3\n2\n1\n3\n2\n1\n");
             },
             DifferentGetEnumeratorCallsOnIteratorBlockReturningIEnumerableGetOwnCopiesOfLocals: function () {
                 var sb = new System.Text.StringBuilder();
@@ -2093,7 +2093,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     sb.appendLine(enm2[Bridge.geti(enm2, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "Current$1")].toString());
                 }
 
-                this.AssertEqual(sb.toString(), "0\r\n0\r\n1\r\n1\r\n2\r\n2\r\n-1\r\n-1\r\n");
+                this.AssertEqual(sb.toString(), "0\n0\n1\n1\n2\n2\n-1\n-1\n");
             }
         }
     });
@@ -5746,7 +5746,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.DelegateTests", {
         fields: {
-            testField: 12
+            testField: 0
+        },
+        ctors: {
+            init: function () {
+                this.testField = 12;
+            }
         },
         methods: {
             TypePropertiesAreCorrect: function () {
@@ -6242,7 +6247,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.Exceptions.AggregateExceptionTests", {
         statics: {
             fields: {
-                DefaultMessage: "One or more errors occurred."
+                DefaultMessage: null
+            },
+            ctors: {
+                init: function () {
+                    this.DefaultMessage = "One or more errors occurred.";
+                }
             }
         },
         methods: {
@@ -6495,7 +6505,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.Exceptions.ArgumentExceptionTests", {
         statics: {
             fields: {
-                DefaultMessage: "Value does not fall within the expected range."
+                DefaultMessage: null
+            },
+            ctors: {
+                init: function () {
+                    this.DefaultMessage = "Value does not fall within the expected range.";
+                }
             }
         },
         methods: {
@@ -13687,6 +13702,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     });
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C11", {
+        fields: {
+            D: null
+        },
         ctors: {
             init: function () {
                 this.D = System.DateTime.getDefaultValue();
@@ -13705,7 +13723,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             }
         },
         fields: {
-            F1: 0
+            F1: 0,
+            renamedF2: null
         },
         ctors: {
             init: function () {
@@ -14222,8 +14241,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             methods: {
                 CanConvert: function (T, arg) {
                     try { /// The variable `x' is assigned but its value is never used
-
-
                         var x = Bridge.cast(Bridge.unbox(arg), T);
                         return true;
                     }
@@ -25182,7 +25199,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             }
         },
         fields: {
-            i: 0
+            i: 0,
+            N: null
         },
         events: {
             E: null
@@ -25377,6 +25395,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         fields: {
             I: 0,
             D: 0,
+            DT: null,
             O: null,
             T: 0
         },
@@ -25421,6 +25440,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         fields: {
             I: 0,
             D: 0,
+            DT: null,
             O: null,
             T: Bridge.getDefaultValue(TT)
         },

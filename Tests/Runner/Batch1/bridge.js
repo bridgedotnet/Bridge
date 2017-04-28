@@ -13720,8 +13720,14 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         inherits: function () { return [System.ICloneable,System.IComparable$1(System.Version),System.IEquatable$1(System.Version)]; },
         statics: {
             fields: {
-                separatorsArray: 46,
-                ZERO_CHAR_VALUE: 48
+                separatorsArray: 0,
+                ZERO_CHAR_VALUE: 0
+            },
+            ctors: {
+                init: function () {
+                    this.separatorsArray = 46;
+                    this.ZERO_CHAR_VALUE = 48;
+                }
             },
             methods: {
                 appendPositiveNumber: function (num, sb) {
@@ -13850,8 +13856,8 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         fields: {
             _Major: 0,
             _Minor: 0,
-            _Build: -1,
-            _Revision: -1
+            _Build: 0,
+            _Revision: 0
         },
         props: {
             Major: {
@@ -13891,6 +13897,10 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
             "equalsT", "System$IEquatable$1$System$Version$equalsT"
         ],
         ctors: {
+            init: function () {
+                this._Build = -1;
+                this._Revision = -1;
+            },
             $ctor3: function (major, minor, build, revision) {
                 this.$initialize();
                 if (major < 0) {
@@ -19287,21 +19297,23 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         $kind: "struct",
         statics: {
             fields: {
-                error1: "Byte array for GUID must be exactly {0} bytes long",
+                error1: null,
                 valid: null,
                 split: null,
                 nonFormat: null,
                 replace: null,
-                rnd: null
+                rnd: null,
+                empty: null
             },
             ctors: {
                 init: function () {
+                    this.empty = new System.Guid();
+                    this.error1 = "Byte array for GUID must be exactly {0} bytes long";
                     this.valid = new System.Text.RegularExpressions.Regex.$ctor1("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", 1);
                     this.split = new System.Text.RegularExpressions.Regex.ctor("^(.{8})(.{4})(.{4})(.{4})(.{12})$");
                     this.nonFormat = new System.Text.RegularExpressions.Regex.$ctor1("^[{(]?([0-9a-f]{8})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{12})[)}]?$", 1);
                     this.replace = new System.Text.RegularExpressions.Regex.ctor("-");
                     this.rnd = new System.Random.ctor();
-                    this.empty = new System.Guid.ctor();
                 }
             },
             methods: {
@@ -19711,6 +19723,9 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                 }
             },
             ctors: {
+                init: function () {
+                    this.ExitCode = 0;
+                },
                 ctor: function () {
                     System.Environment.variables = new (System.Collections.Generic.Dictionary$2(System.String,System.String))();
                     System.Environment.patchDictionary(System.Environment.variables);
@@ -25729,9 +25744,16 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
     Bridge.define("System.Random", {
         statics: {
             fields: {
-                MBIG: 2147483647,
-                MSEED: 161803398,
+                MBIG: 0,
+                MSEED: 0,
                 MZ: 0
+            },
+            ctors: {
+                init: function () {
+                    this.MBIG = 2147483647;
+                    this.MSEED = 161803398;
+                    this.MZ = 0;
+                }
             }
         },
         fields: {
@@ -25873,11 +25895,12 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         statics: {
             fields: {
                 isLittleEndian: false,
-                arg_ArrayPlusOffTooSmall: "Destination array is not long enough to copy all the items in the collection. Check array index and length."
+                arg_ArrayPlusOffTooSmall: null
             },
             ctors: {
                 init: function () {
                     this.isLittleEndian = System.BitConverter.getIsLittleEndian();
+                    this.arg_ArrayPlusOffTooSmall = "Destination array is not long enough to copy all the items in the collection. Check array index and length.";
                 }
             },
             methods: {
@@ -26168,10 +26191,18 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         inherits: [System.IDisposable],
         statics: {
             fields: {
-                MAX_SUPPORTED_TIMEOUT: 4294967294,
-                EXC_LESS: "Number must be either non-negative and less than or equal to Int32.MaxValue or -1.",
-                EXC_MORE: "Time-out interval must be less than 2^32-2.",
-                EXC_DISPOSED: "The timer has been already disposed."
+                MAX_SUPPORTED_TIMEOUT: 0,
+                EXC_LESS: null,
+                EXC_MORE: null,
+                EXC_DISPOSED: null
+            },
+            ctors: {
+                init: function () {
+                    this.MAX_SUPPORTED_TIMEOUT = 4294967294;
+                    this.EXC_LESS = "Number must be either non-negative and less than or equal to Int32.MaxValue or -1.";
+                    this.EXC_MORE = "Time-out interval must be less than 2^32-2.";
+                    this.EXC_DISPOSED = "The timer has been already disposed.";
+                }
             }
         },
         fields: {
