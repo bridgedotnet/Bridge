@@ -1,6 +1,8 @@
     System.Diagnostics.Debug = {
         writeln: function (text) {
-            Bridge.Console.debug(text);
+            if (Bridge.global.console && Bridge.global.console.debug) {
+                Bridge.global.console.debug(text);
+            }
         },
 
         _fail: function (message) {

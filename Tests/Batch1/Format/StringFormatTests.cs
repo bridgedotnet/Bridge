@@ -1,6 +1,7 @@
 ﻿using Bridge.Test.NUnit;
 
 using System;
+using System.Globalization;
 
 namespace Bridge.ClientTest.Format
 {
@@ -8,6 +9,36 @@ namespace Bridge.ClientTest.Format
     [TestFixture(TestNameFormat = "StringFormatTests - {0}")]
     public class StringFormatTests
     {
+        private class MyFormatProvider : IFormatProvider
+        {
+            public object GetFormat(Type type)
+            {
+                return CultureInfo.InvariantCulture.GetFormat(type);
+            }
+        }
+
+        [Test]
+        public void FormatShouldThrow()
+        {
+            Assert.Throws<ArgumentNullException>(() => { String.Format(null); });
+            Assert.Throws<ArgumentNullException>(() => { String.Format(null, 1); });
+            Assert.Throws<ArgumentNullException>(() => { String.Format(null, 1, 2); });
+            Assert.Throws<ArgumentNullException>(() => { String.Format(null, 1, 2, 3); });
+            Assert.Throws<ArgumentNullException>(() => { String.Format(null, 1, 2, 3, 4); });
+        }
+
+        [Test]
+        public void FormatProviderShouldThrow()
+        {
+            var fp = new MyFormatProvider();
+
+            Assert.Throws<ArgumentNullException>(() => { String.Format(fp, null); });
+            Assert.Throws<ArgumentNullException>(() => { String.Format(fp, null, 1); });
+            Assert.Throws<ArgumentNullException>(() => { String.Format(fp, null, 1, 2); });
+            Assert.Throws<ArgumentNullException>(() => { String.Format(fp, null, 1, 2, 3); });
+            Assert.Throws<ArgumentNullException>(() => { String.Format(fp, null, 1, 2, 3, 4); });
+        }
+
         [Test]
         public void Simple()
         {

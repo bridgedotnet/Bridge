@@ -1,4 +1,5 @@
 using System;
+using Bridge.ClientTestHelper;
 using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
@@ -26,7 +27,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 Console.WriteLine(false);
                 Console.WriteLine(value == "hello world");
 
-                Assert.AreEqual("TrueFalseTrue", Bridge.Utils.Console.Instance.BufferedOutput);
+                Assert.AreEqual(StringHelper.CombineLinesNL("True", "False", "True"), Bridge.Utils.Console.Instance.BufferedOutput);
             }
             finally
             {

@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <title>Bridge $rootnamespace$</title>
     <script src="bin/Debug/bridge/bridge.min.js"></script>
+    <script src="bin/Debug/bridge/bridge.console.min.js"></script>
     <script src="bin/Debug/bridge/$rootnamespace$.js"></script>
 </head>
 <body>

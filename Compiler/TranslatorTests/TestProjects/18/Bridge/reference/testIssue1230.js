@@ -7,11 +7,11 @@
                     var l = System.Int64(v);
                     l = System.Int64(v);
 
-                    Bridge.Console.log(System.Int64(v).toString());
-                    Bridge.Console.log(System.Int64(v).toString());
-                    Bridge.Console.log(System.Int64(2).toString());
-                    Bridge.Console.log(System.Int64(2).toString());
-                    Bridge.Console.log(System.Int64(7).toString());
+                    System.Console.WriteLine(System.Int64(v));
+                    System.Console.WriteLine(System.Int64(v));
+                    System.Console.WriteLine(System.Int64(2));
+                    System.Console.WriteLine(System.Int64(2));
+                    System.Console.WriteLine(System.Int64(7));
                     TestIssue1230.Issue1230.MethodLong(System.Int64(v));
                     TestIssue1230.Issue1230.MethodLong(System.Int64(v));
                 },
@@ -27,11 +27,11 @@
                     var l = System.Decimal(v);
                     l = System.Decimal(v);
 
-                    Bridge.Console.log(System.Decimal(v).toString('G'));
-                    Bridge.Console.log(System.Decimal(v).toString('G'));
-                    Bridge.Console.log(System.Decimal(2.0).toString('G'));
-                    Bridge.Console.log(System.Decimal(2.0).toString('G'));
-                    Bridge.Console.log(System.Decimal(7.0).toString('G'));
+                    System.Console.WriteLine(System.Decimal(v).toString('G'));
+                    System.Console.WriteLine(System.Decimal(v).toString('G'));
+                    System.Console.WriteLine(System.Decimal(2.0).toString('G'));
+                    System.Console.WriteLine(System.Decimal(2.0).toString('G'));
+                    System.Console.WriteLine(System.Decimal(7.0).toString('G'));
                     TestIssue1230.Issue1230.MethodDecimal(System.Decimal(v));
                     TestIssue1230.Issue1230.MethodDecimal(System.Decimal(v));
                 },
@@ -40,11 +40,11 @@
                     var l = v;
                     l = v;
 
-                    Bridge.Console.log(v);
-                    Bridge.Console.log(v);
-                    Bridge.Console.log(2);
-                    Bridge.Console.log(2);
-                    Bridge.Console.log(7);
+                    System.Console.WriteLine(v);
+                    System.Console.WriteLine(v);
+                    System.Console.WriteLine(2);
+                    System.Console.WriteLine(2);
+                    System.Console.WriteLine(7);
                     TestIssue1230.Issue1230.MethodInt(v);
                     TestIssue1230.Issue1230.MethodInt(v);
                 }
