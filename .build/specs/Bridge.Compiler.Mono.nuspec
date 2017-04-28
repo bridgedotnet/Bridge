@@ -32,6 +32,6 @@
 
     <!--NET40-->
     <file src="../../Compiler/Translator/bin/Release/Bridge.Translator.dll" target="lib/net40/Bridge.Translator.dll" />
-    <file src="../../Compiler/Translator/bin/Release/Bridge.Translator.dll.mdb" target="lib/net40/pdb/Bridge.Translator.dll.mdb" />
+    <file src="../../Compiler/Translator/bin/Release/Bridge.Translator.mdb" target="lib/net40/pdb/Bridge.Translator.mdb" />
   </files>
 </package>
