@@ -8,6 +8,9 @@
 
     // @source Init.js
 
+// Special case for allowing Window to be defined and accessible from Web Workers
+window = self;
+
 (function (globals) {
     "use strict";
 
@@ -451,22 +454,25 @@
         },
 
         ready: function (fn, scope) {
-            var delayfn = function () {
-                if (scope) {
-                    fn.apply(scope);
-                } else {
-                    fn();
-                }
-            };
+        	if (!System.Threading.Utils.WorkerThreadManager.isWebWorker())
+			{
+				var delayfn = function () {
+	                if (scope) {
+	                    fn.apply(scope);
+	                } else {
+	                    fn();
+	                }
+	            };
 
-            if (typeof Bridge.global.jQuery !== "undefined") {
-                Bridge.global.jQuery(delayfn);
-            } else {
-                if (typeof Bridge.global.document === "undefined" || Bridge.global.document.readyState === "complete" || Bridge.global.document.readyState === "loaded") {
-                    delayfn();
-                } else {
-                    Bridge.on("DOMContentLoaded", Bridge.global.document, delayfn);
-                }
+	            if (typeof Bridge.global.jQuery !== "undefined") {
+	                Bridge.global.jQuery(delayfn);
+	            } else {
+	                if (typeof Bridge.global.document === "undefined" || Bridge.global.document.readyState === "complete" || Bridge.global.document.readyState === "loaded") {
+	                    delayfn();
+	                } else {
+	                    Bridge.on("DOMContentLoaded", Bridge.global.document, delayfn);
+	                }
+	            }
             }
         },
 
@@ -26729,6 +26735,126 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     });
 
+    // @source workerThreadManager.js
+
+    Bridge.define("System.Threading.Utils.WorkerThreadManager", {
+        statics: {
+            fields: {
+                _isWebWorker: false
+            },
+            methods: {
+                isWebWorker: function () {
+                    return System.Threading.Utils.WorkerThreadManager._isWebWorker;
+                },
+                workerThreadManagerEntryPoint: function () {
+                    System.Threading.Utils.WorkerThreadManager._isWebWorker = true;
+
+                    var worker = window;
+                    worker.onmessage = System.Threading.Utils.WorkerThreadManager.handleMessage;
+
+                    for (var i = 0; i < 1000; i = (i + 1) | 0) {
+                        worker.postMessage("Hello from the worker");
+                    }
+                },
+                handleMessage: function (arg) {
+                    var $t;
+                    var msg = arg.data;
+                    msg.data = JSON.parse(Bridge.unbox(msg.data));
+                    switch (msg.msgType) {
+                        case System.Threading.Utils.WorkerThreadManager.MessageType.LoadScripts: 
+                            var scripts = Bridge.cast(msg.data, System.Array.type(System.String));
+                            $t = Bridge.getEnumerator(scripts);
+                            try {
+                                while ($t.moveNext()) {
+                                    var s = $t.Current;
+                                    console.log("Loading script: ", s);
+                                    importScripts(s);
+                                }
+                            }finally {
+                                if (Bridge.is($t, System.IDisposable)) {
+                                    $t.System$IDisposable$dispose();
+                                }
+                            }break;
+                        default: 
+                            throw new System.ArgumentOutOfRangeException();
+                    }
+                }
+            }
+        }
+    });
+
+    // @source messageType.js
+
+    Bridge.define("System.Threading.Utils.WorkerThreadManager.MessageType", {
+        $kind: "enum",
+        statics: {
+            fields: {
+                LoadScripts: 0
+            }
+        }
+    });
+
+    // @source thread.js
+
+    Bridge.define("System.Threading.Thread", {
+        statics: {
+            methods: {
+                getCurrentJsFile: function () {
+                    var $t;
+                    try {
+                        throw new Error();
+                    }
+                    catch ($e1) {
+                        $e1 = System.Exception.create($e1);
+                        if (Bridge.is($e1, Bridge.ErrorException)) {
+                            var stack = $e1.error.stack;
+                            var stackLines = System.String.split(stack, [10].map(function(i) {{ return String.fromCharCode(i); }}));
+                            $t = Bridge.getEnumerator(System.Linq.Enumerable.from(stackLines).skip(2));
+                            try {
+                                while ($t.moveNext()) {
+                                    var line = $t.Current;
+                                    if (System.String.contains(line,"://") && System.String.contains(line,".js")) {
+                                        var s = System.String.concat(System.Linq.Enumerable.from(System.String.split(System.Linq.Enumerable.from(System.String.split(line, [40].map(function(i) {{ return String.fromCharCode(i); }}))).last(), System.Array.init([".js:"], System.String), null, 0)).first(), ".js");
+                                        return s;
+                                    }
+                                }
+                            }finally {
+                                if (Bridge.is($t, System.IDisposable)) {
+                                    $t.System$IDisposable$dispose();
+                                }
+                            }} else {
+                            throw $e1;
+                        }
+                    }
+
+                    return null;
+                }
+            }
+        },
+        fields: {
+            _worker: null,
+            _entryPoint: null
+        },
+        ctors: {
+            ctor: function (scripts, entryPoint) {
+                this.$initialize();
+                // Create the worker
+                this._worker = new Worker(System.Threading.Thread.getCurrentJsFile());
+
+                // Ask the worker to load the scripts provider
+                this._worker.postMessage({ msgType: System.Threading.Utils.WorkerThreadManager.MessageType.LoadScripts, data: JSON.stringify(scripts) });
+
+                // Remember the entry point for when we call start
+                this._entryPoint = entryPoint;
+            }
+        },
+        methods: {
+            start: function () {
+                console.log(this._entryPoint);
+            }
+        }
+    });
+
     // @source End.js
 
     // module export
@@ -26743,3 +26869,9 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
     // @source Finally.js
 
 })(this);
+
+// WebWorker check
+// http://stackoverflow.com/a/18002694
+if (typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope) {
+    System.Threading.Utils.WorkerThreadManager.workerThreadManagerEntryPoint();
+}

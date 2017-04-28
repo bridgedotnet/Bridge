@@ -432,22 +432,25 @@
         },
 
         ready: function (fn, scope) {
-            var delayfn = function () {
-                if (scope) {
-                    fn.apply(scope);
-                } else {
-                    fn();
-                }
-            };
+        	if (!System.Threading.Utils.WorkerThreadManager.isWebWorker())
+			{
+				var delayfn = function () {
+	                if (scope) {
+	                    fn.apply(scope);
+	                } else {
+	                    fn();
+	                }
+	            };
 
-            if (typeof Bridge.global.jQuery !== "undefined") {
-                Bridge.global.jQuery(delayfn);
-            } else {
-                if (typeof Bridge.global.document === "undefined" || Bridge.global.document.readyState === "complete" || Bridge.global.document.readyState === "loaded") {
-                    delayfn();
-                } else {
-                    Bridge.on("DOMContentLoaded", Bridge.global.document, delayfn);
-                }
+	            if (typeof Bridge.global.jQuery !== "undefined") {
+	                Bridge.global.jQuery(delayfn);
+	            } else {
+	                if (typeof Bridge.global.document === "undefined" || Bridge.global.document.readyState === "complete" || Bridge.global.document.readyState === "loaded") {
+	                    delayfn();
+	                } else {
+	                    Bridge.on("DOMContentLoaded", Bridge.global.document, delayfn);
+	                }
+	            }
             }
         },
 
