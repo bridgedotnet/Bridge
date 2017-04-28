@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
@@ -40,9 +41,10 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test]
         public void TestOutParamInMetadata()
         {
-            Assert.True(typeof(Bridge1900).GetMethod("TryGetValue1").ParameterTypes[0] == typeof(int));
-            Assert.True(typeof(Bridge1900).GetMethod("TryGetValue2").ParameterTypes[1] == typeof(string));
-            Assert.True(typeof(Bridge1900).GetMethod("TestOutRef").ParameterTypes[1] == typeof(string));
+            var flags = BindingFlags.NonPublic | BindingFlags.Static;
+            Assert.True(typeof(Bridge1900).GetMethod("TryGetValue1", flags).ParameterTypes[0] == typeof(int));
+            Assert.True(typeof(Bridge1900).GetMethod("TryGetValue2", flags).ParameterTypes[1] == typeof(string));
+            Assert.True(typeof(Bridge1900).GetMethod("TestOutRef", flags).ParameterTypes[1] == typeof(string));
             Assert.True(typeof(Bridge1900).GetMethod("GetValue").ParameterTypes[0] == typeof(object));
         }
     }

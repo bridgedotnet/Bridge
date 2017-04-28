@@ -8,6 +8,9 @@
     {
       "name": "bridge.js",
       "extract": false
-    }
+    }, {
+      "name": "bridge.console.js",
+      "extract": false
+    },
   ]
 }

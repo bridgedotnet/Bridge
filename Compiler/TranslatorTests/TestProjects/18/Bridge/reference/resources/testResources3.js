@@ -22,7 +22,7 @@
                     TestIssue434.Issue434A.DoSomething(4);
                 },
                 DoSomething: function DoSomething(i) {
-                    Bridge.Console.log(i);
+                    System.Console.WriteLine(i);
                 }
             }
         }
@@ -49,7 +49,7 @@
                     TestIssue434.Issue434B.DoSomething(4);
                 },
                 DoSomething: function DoSomething(i) {
-                    Bridge.Console.log(i);
+                    System.Console.WriteLine(i);
                 }
             }
         }
@@ -96,13 +96,13 @@
     Bridge.apply($asm.$.TestIssue461.Issue461, {
         f1: function (ev) {
             // Tests if ev.CurrentTarget.Value compiles
-            Bridge.Console.log(System.String.concat("ev.CurrentTarget.Value: ", ev.currentTarget.value));
+            System.Console.WriteLine(System.String.concat("ev.CurrentTarget.Value: ", ev.currentTarget.value));
 
             // Tests if ev.IsMouseEvent() compiles
-            Bridge.Console.log("IsMouseEvent: " + System.Boolean.toString(Bridge.is(ev, MouseEvent)));
+            System.Console.WriteLine("IsMouseEvent: " + System.Boolean.toString(Bridge.is(ev, MouseEvent)));
         },
         f2: function (ev) {
             // Tests if ev.CurrentTarget.Href compiles
-            Bridge.Console.log(System.String.concat("ev.CurrentTarget.Href: ", ev.currentTarget.href));
+            System.Console.WriteLine(System.String.concat("ev.CurrentTarget.Href: ", ev.currentTarget.href));
         }
     });

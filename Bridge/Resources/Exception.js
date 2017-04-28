@@ -31,8 +31,8 @@ Bridge.define("System.Exception", {
             this.$initialize();
             this.message = message ? message : ("Exception of type '" + Bridge.getTypeName(this) + "' was thrown.");
             this.innerException = innerException ? innerException : null;
-            this.errorStack = new Error();
-            this.data = new(System.Collections.Generic.Dictionary$2(System.Object, System.Object))();
+            this.errorStack = new Error(this.message);
+            this.data = new (System.Collections.Generic.Dictionary$2(System.Object, System.Object))();
         },
 
         getBaseException: function() {
@@ -49,6 +49,7 @@ Bridge.define("System.Exception", {
 
         toString: function () {
             var builder = Bridge.getTypeName(this);
+
             if (this.Message != null) {
                 builder += ": " + this.Message + "\n";
             } else {
@@ -68,15 +69,23 @@ Bridge.define("System.Exception", {
                     return error;
                 }
 
+                var ex;
+
                 if (error instanceof TypeError) {
-                    return new System.NullReferenceException(error.message, new Bridge.ErrorException(error));
+                    ex = new System.NullReferenceException(error.message, new Bridge.ErrorException(error));
                 } else if (error instanceof RangeError) {
-                    return new System.ArgumentOutOfRangeException(null, error.message, new Bridge.ErrorException(error));
+                    ex = new System.ArgumentOutOfRangeException(null, error.message, new Bridge.ErrorException(error));
                 } else if (error instanceof Error) {
                     return new Bridge.ErrorException(error);
+                } else if (error && error.error && error.error.stack) {
+                    ex = new System.Exception(error.error.stack);
                 } else {
-                    return new System.Exception(error ? error.toString() : null);
+                    ex = new System.Exception(error ? error.message ? error.message : error.toString() : null);
                 }
+
+                ex.errorStack = error;
+
+                return ex;
             }
         }
     });
