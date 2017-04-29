@@ -26740,7 +26740,9 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
     Bridge.define("System.Threading.Utils.WorkerThreadManager", {
         statics: {
             fields: {
-                _isWebWorker: false
+                _isWebWorker: false,
+                _worker: null,
+                _threadId: 0
             },
             methods: {
                 isWebWorker: function () {
@@ -26749,17 +26751,22 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 workerThreadManagerEntryPoint: function () {
                     System.Threading.Utils.WorkerThreadManager._isWebWorker = true;
 
-                    var worker = window;
-                    worker.onmessage = System.Threading.Utils.WorkerThreadManager.handleMessage;
-
-                    for (var i = 0; i < 1000; i = (i + 1) | 0) {
-                        worker.postMessage("Hello from the worker");
+                    System.Threading.Utils.WorkerThreadManager._worker = window;
+                    System.Threading.Utils.WorkerThreadManager._worker.onmessage = System.Threading.Utils.WorkerThreadManager.handleMessage;
+                },
+                getObjectRefFromString: function (o, s) {
+                    if (!System.String.contains(s,".")) {
+                        return o[s];
                     }
+
+                    var bits = System.String.split(s, [46].map(function(i) {{ return String.fromCharCode(i); }}));
+                    var s1 = bits[System.Array.index(0, bits)];
+                    var s2 = bits.slice(1).join(".");
+                    return System.Threading.Utils.WorkerThreadManager.getObjectRefFromString(o[s1], s2);
                 },
                 handleMessage: function (arg) {
                     var $t;
-                    var msg = arg.data;
-                    msg.data = JSON.parse(Bridge.unbox(msg.data));
+                    var msg = Bridge.Json.deserialize(Bridge.unbox(arg.data), System.Object);
                     switch (msg.msgType) {
                         case System.Threading.Utils.WorkerThreadManager.MessageType.LoadScripts: 
                             var scripts = Bridge.cast(msg.data, System.Array.type(System.String));
@@ -26775,6 +26782,22 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                                     $t.System$IDisposable$dispose();
                                 }
                             }break;
+                        case System.Threading.Utils.WorkerThreadManager.MessageType.Start: 
+                            var startData = msg.data;
+                            var entryPointRef = System.Threading.Utils.WorkerThreadManager.getObjectRefFromString(window, startData.threadEntryPoint);
+                            var param = startData.threadParam;
+                            try {
+                                var result = entryPointRef(param);
+
+                                System.Threading.Utils.WorkerThreadManager._worker.postMessage(Bridge.Json.serialize({ msgType: System.Threading.Utils.WorkerThreadManager.MessageType.Finish, data: { threadId: startData.threadId, result: Bridge.unbox(Bridge.unbox(result)) } }));
+                            }
+                            catch (e) {
+                                e = System.Exception.create(e);
+                                System.Threading.Utils.WorkerThreadManager._worker.postMessage(Bridge.Json.serialize({ msgType: System.Threading.Utils.WorkerThreadManager.MessageType.Exception, data: { threadId: startData.threadId } }));
+
+                                throw e;
+                            }
+                            break;
                         default: 
                             throw new System.ArgumentOutOfRangeException();
                     }
@@ -26789,7 +26812,10 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         $kind: "enum",
         statics: {
             fields: {
-                LoadScripts: 0
+                LoadScripts: 0,
+                Start: 1,
+                Finish: 2,
+                Exception: 3
             }
         }
     });
@@ -26797,7 +26823,11 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
     // @source thread.js
 
     Bridge.define("System.Threading.Thread", {
+        inherits: [System.IDisposable],
         statics: {
+            fields: {
+                _globalThreadIdCounter: 0
+            },
             methods: {
                 getCurrentJsFile: function () {
                     var $t;
@@ -26806,8 +26836,10 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     }
                     catch ($e1) {
                         $e1 = System.Exception.create($e1);
+                        var error;
                         if (Bridge.is($e1, Bridge.ErrorException)) {
-                            var stack = $e1.error.stack;
+                            error = $e1;
+                            var stack = Bridge.cast(error.error.stack, System.String);
                             var stackLines = System.String.split(stack, [10].map(function(i) {{ return String.fromCharCode(i); }}));
                             $t = Bridge.getEnumerator(System.Linq.Enumerable.from(stackLines).skip(2));
                             try {
@@ -26832,25 +26864,115 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             }
         },
         fields: {
+            _result: null,
             _worker: null,
-            _entryPoint: null
+            _isDead: false,
+            _queuedStarts: null
         },
+        props: {
+            Result: {
+                get: function () {
+                    return this._result;
+                }
+            }
+        },
+        alias: [
+            "dispose", "System$IDisposable$dispose"
+        ],
         ctors: {
-            ctor: function (scripts, entryPoint) {
+            init: function () {
+                this._queuedStarts = new (System.Collections.Generic.Dictionary$2(System.Int32,System.Object))();
+            },
+            ctor: function (scripts) {
                 this.$initialize();
                 // Create the worker
                 this._worker = new Worker(System.Threading.Thread.getCurrentJsFile());
 
-                // Ask the worker to load the scripts provider
-                this._worker.postMessage({ msgType: System.Threading.Utils.WorkerThreadManager.MessageType.LoadScripts, data: JSON.stringify(scripts) });
+                // Set the message handler to handle messages from the worker
+                this._worker.onmessage = Bridge.fn.cacheBind(this, this.handleMessage);
 
-                // Remember the entry point for when we call start
-                this._entryPoint = entryPoint;
+                // Ask the worker to load the scripts provider
+                this._worker.postMessage(Bridge.Json.serialize({ msgType: System.Threading.Utils.WorkerThreadManager.MessageType.LoadScripts, data: scripts }));
+
+                // Thread starts in an alive state
+                this._isDead = false;
             }
         },
         methods: {
-            start: function () {
-                console.log(this._entryPoint);
+            start: function (entryPoint, param, onResult) {
+                if (onResult === void 0) { onResult = null; }
+                // Verify that the entry point exists and we can get a reference to the static function
+                try {
+                    if (System.Threading.Utils.WorkerThreadManager.getObjectRefFromString(window, entryPoint) == null) {
+                        throw new System.Exception();
+                    }
+                }
+                catch ($e1) {
+                    $e1 = System.Exception.create($e1);
+                    throw new System.ArgumentException(System.String.concat("Thread entry point ", entryPoint, " doesn't seem to exist, or is not a static function"));
+                }
+
+                // Can't start on a dead thread
+                if (this._isDead) {
+                    throw new System.InvalidOperationException("Attempt made to call Start on a dead thread");
+                }
+
+                // Can only run one thread start if there is no on result callback
+                if (Bridge.staticEquals(onResult, null) && System.Linq.Enumerable.from(this._queuedStarts).count() > 0) {
+                    throw new System.InvalidOperationException("Attempt made to queue thread starts with no valid OnResult handler");
+                }
+
+                this._worker.postMessage(Bridge.Json.serialize({ msgType: System.Threading.Utils.WorkerThreadManager.MessageType.Start, data: { threadId: System.Threading.Thread._globalThreadIdCounter, threadEntryPoint: entryPoint, threadParam: Bridge.unbox(Bridge.unbox(param)) } }));
+
+                this._queuedStarts.add(System.Threading.Thread._globalThreadIdCounter, { threadId: System.Threading.Thread._globalThreadIdCounter, param: param, onResult: onResult });
+
+                // Increment the thread counter
+                System.Threading.Thread._globalThreadIdCounter = (System.Threading.Thread._globalThreadIdCounter + 1) | 0;
+            },
+            handleMessage: function (arg) {
+                var msg = Bridge.Json.deserialize(Bridge.unbox(arg.data), System.Object);
+                switch (msg.msgType) {
+                    case System.Threading.Utils.WorkerThreadManager.MessageType.Finish: 
+                        var finishMessage = msg.data;
+                        var thread = this._queuedStarts.get(finishMessage.threadId);
+                        if (!Bridge.staticEquals(thread.onResult, null)) {
+                            thread.onResult(this, thread.param, finishMessage.result);
+                        } else {
+                            this._result = finishMessage.result;
+                        }
+                        // Remove this finished thread from the list of queued threads
+                        this._queuedStarts.remove(thread.threadId);
+                        break;
+                    case System.Threading.Utils.WorkerThreadManager.MessageType.Exception: 
+                        var exceptionMessage = msg.data;
+                        thread = this._queuedStarts.get(exceptionMessage.threadId);
+                        // Remove this finished thread from the list of queued threads
+                        this._queuedStarts.remove(thread.threadId);
+                        throw new System.Exception("Unhandled exception in thread (" + thread.threadId + ")");
+                        break;
+                    default: 
+                        throw new System.ArgumentOutOfRangeException();
+                }
+            },
+            join: function (onJoin) {
+                if (System.Linq.Enumerable.from(this._queuedStarts).count() > 0) {
+                    var setTimeout = window.setTimeout;
+                    setTimeout(Bridge.fn.bind(this, function () {
+                        return this.join(onJoin);
+                    }), 0);
+                } else {
+                    onJoin();
+                }
+            },
+            abort: function () {
+                this.dispose();
+            },
+            dispose: function () {
+                if (!this._isDead) {
+                    this._worker.terminate();
+                    this._queuedStarts.clear();
+                    this._isDead = true;
+                }
             }
         }
     });
