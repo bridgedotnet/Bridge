@@ -432,6 +432,7 @@
         },
 
         ready: function (fn, scope) {
+        	// If we are loaded in to a web worker, prevent the default action of running the functions marked [Ready]
         	if (!System.Threading.Utils.WorkerThreadManager.isWebWorker())
 			{
 				var delayfn = function () {
