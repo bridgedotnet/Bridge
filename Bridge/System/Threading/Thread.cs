@@ -11,7 +11,7 @@ namespace System.Threading
 	{
 		/// <summary>
 		/// Gets the managed thread identifier for this thread. If this is a web worker it returns the thread id of the web worker
-		/// otherwise it returns 0, the main thread always has thread id 0
+		/// otherwise it returns the currently running thread id where web workers are not available, or if this is the main thread, 0
 		/// </summary>
 		/// <value>The managed thread identifier.</value>
 		public int ManagedThreadId
@@ -26,8 +26,8 @@ namespace System.Threading
 				}
 				else
 				{
-					// No, return 0
-					return 0;
+					// No, return the current thread id
+					return _currentThreadId;
 				}
 			}
 		}
@@ -96,29 +96,42 @@ namespace System.Threading
 		/// </param>
 		public Thread(string[] scripts)
 		{
-			// Create the web worker loading the bridge.js runtime
-			_worker = new Worker(GetCurrentJsFilePath());
+			// Try to create a web worker
+			try
+			{
+				// Create the web worker loading the bridge.js runtime
+				_worker = new Worker(GetCurrentJsFilePath());
 
-			// Set the message handler to handle messages from the worker
-			_worker.OnMessage = HandleMessage;
+				// Set the message handler to handle messages from the worker
+				_worker.OnMessage = HandleMessage;
 
-			// Ask the worker to load the scripts provided
-			_worker.PostMessage(
-				// Messages are serialized so complex objects can be sent
-				Bridge.Json.Serialize(
-					// Create a new message to send to the worker
-					new WorkerThreadManager.WebWorkerMessage
-					{
-						// The message is to load scripts
-						MsgType = WorkerThreadManager.MessageType.LoadScripts,
-						// Specify the scripts to load
-						Data = scripts
-					}
-				)
-			);
+				// Ask the worker to load the scripts provided
+				_worker.PostMessage(
+					// Messages are serialized so complex objects can be sent
+					Bridge.Json.Serialize(
+						// Create a new message to send to the worker
+						new WorkerThreadManager.WebWorkerMessage
+						{
+							// The message is to load scripts
+							MsgType = WorkerThreadManager.MessageType.LoadScripts,
+							// Specify the scripts to load
+							Data = scripts
+						}
+					)
+				);
+			}
+			catch (Exception)
+			{
+				// Web worker does not exist
+				_worker = null;
+			}
 
 			// Threads start in an alive state
 			_isDead = false;
+
+			// Current thread id always starts at 0 since 0 represents the main thread, or the currenly executing 
+			// thread start within this thread if web workers are not available
+			_currentThreadId = 0;
 		}
 
 		/// <summary>
@@ -144,16 +157,17 @@ namespace System.Threading
 		public void Start(string entryPoint, object param, Action<Thread, object, object> onResult = null)
 		{
 			// First we must make sure the function exists and is static
+			object threadStartRef = null;
 			try
 			{
 				// Try to get a reference to the entry point
-				var fn = WorkerThreadManager.GetObjectRefFromString(Script.Get<object>("window"), entryPoint);
+				threadStartRef = WorkerThreadManager.GetObjectRefFromString(Script.Get<object>("window"), entryPoint);
 				// Confirm that it is not null
-				if (fn == null)
+				if (threadStartRef == null)
 					// The reference was null
 					throw new Exception();
 				// Confirm that the reference is a function
-				if (!Script.Write<bool>("typeof fn === 'function'"))
+				if (!Script.Write<bool>("typeof threadStartRef === 'function'"))
 					// The reference is not a function
 					throw new Exception();
 			}
@@ -173,43 +187,83 @@ namespace System.Threading
 				// Whoops
 				throw new InvalidOperationException("Attempt made to queue thread starts with no valid OnResult handler");
 
-			// Ask the worker to start (or queue) this function
-			_worker.PostMessage(
-				// Messages are serialized so complex objects can be sent
-				Bridge.Json.Serialize(
-					// Send a new message
-					new WorkerThreadManager.WebWorkerMessage
-					{
-						// The message is to start a function
-						MsgType = WorkerThreadManager.MessageType.Start,
-						// The data is a WebWorkerStartMessage
-						Data = new WorkerThreadManager.WebWorkerStartMessage
+			// Ask the worker to start the thread if web workers are available
+			if (_worker != null)
+			{
+				// Ask the worker to start (or queue) this function
+				_worker.PostMessage(
+					// Messages are serialized so complex objects can be sent
+					Bridge.Json.Serialize(
+						// Send a new message
+						new WorkerThreadManager.WebWorkerMessage
 						{
-							// Set the thread id
-							ThreadId = _globalThreadIdCounter,
-							// Set the entry point
-							ThreadEntryPoint = entryPoint,
-							// Set the parameter
-							// This is a work around for not being able to serialize boxed primitives such is System.Int32
-							ThreadParam = Script.Call<object>("Bridge.unbox", param)
+							// The message is to start a function
+							MsgType = WorkerThreadManager.MessageType.Start,
+							// The data is a WebWorkerStartMessage
+							Data = new WorkerThreadManager.WebWorkerStartMessage
+							{
+								// Set the thread id
+								ThreadId = _globalThreadIdCounter,
+								// Set the entry point
+								ThreadEntryPoint = entryPoint,
+								// Set the parameter
+								// This is a work around for not being able to serialize boxed primitives such is System.Int32
+								ThreadParam = Script.Call<object>("Bridge.unbox", param)
+							}
 						}
+					)
+				);
+				// Add the thread to the queue of thread starts
+				_queuedStarts.Add(_globalThreadIdCounter,
+					// Create a new QueuedThreadStart object
+					new QueuedThreadStart
+					{
+						// Set the thread id	
+						ThreadId = _globalThreadIdCounter,
+						// Set the original parameter
+						Param = param,
+						// Set the on result callback
+						OnResult = onResult
 					}
-				)
-			);
+				);
+			}
+			else
+			{
+				// Web workers are not available, run the thread start function in this thread
 
-			// Add the thread to the queue of thread starts
-			_queuedStarts.Add(_globalThreadIdCounter,
-                // Create a new QueuedThreadStart object
-				new QueuedThreadStart
+				// Set the current thread to be the current global thread count
+				_currentThreadId = _globalThreadIdCounter;
+
+				// Try to call the function
+				try
 				{
-					// Set the thread id	
-					ThreadId = _globalThreadIdCounter,
-					// Set the original parameter
-					Param = param,
-					// Set the on result callback
-					OnResult = onResult
+					// Call the function with the parameter, and get the result
+					var result = Script.Write<object>("threadStartRef(param)", threadStartRef, param);
+
+					// Check if an on result callback was provided
+					if (onResult != null)
+					{
+						// Yes, call the handler with this thread, the original parameter and the result from the message
+						onResult(this, param, result);
+					}
+					else
+					{
+						// No, set the internal result to the result from the message
+						_result = result;
+					}
 				}
-		   	);
+				catch (Exception e)
+				{
+					// An exception occurred running the thread start function
+					// Continue raising the exception in this thread so it is printed to the console
+					throw new Exception("Unhandled exception in thread (" + _currentThreadId + ")", e);
+				}
+				finally
+				{
+					// Always go back to the main thread
+					_currentThreadId = 0;
+				}
+			}
 
 			// Increment the global thread counter
 			_globalThreadIdCounter++;
@@ -367,5 +421,10 @@ namespace System.Threading
 		/// The global thread id counter, used to generate unique thread id's
 		/// </summary>
 		private static int _globalThreadIdCounter;
+
+		/// <summary>
+		/// The current thread identifier, used only when web workers are unavailable
+		/// </summary>
+		private int _currentThreadId;
 	}
 }
