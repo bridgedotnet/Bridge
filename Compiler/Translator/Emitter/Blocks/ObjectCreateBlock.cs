@@ -115,13 +115,11 @@ namespace Bridge.Translator
 
             var customCtor = isTypeParam ? "" : (this.Emitter.Validator.GetCustomConstructor(type) ?? "");
 
-            bool isCollectionInitializer = false;
             AstNodeCollection<Expression> elements = null;
 
             if (hasInitializer)
             {
                 elements = objectCreateExpression.Initializer.Elements;
-                isCollectionInitializer = elements.Count > 0 && elements.First() is ArrayInitializerExpression;
             }
 
             var isPlainObjectCtor = Regex.Match(customCtor, @"\s*\{\s*\}\s*").Success;
