@@ -1155,11 +1155,9 @@ namespace Bridge.Translator
         {
             var def = type.GetDefinition();
             return (def != null && def.IsSealed && !Helpers.IsKnownType(KnownTypeCode.Array, type, this.Emitter.Resolver))
-                   || type.Kind == TypeKind.Enum
-                   || type.IsKnownType(KnownTypeCode.Enum)
+                   || (type.Kind == TypeKind.Enum || Helpers.IsKnownType(KnownTypeCode.Enum, type, this.Emitter.Resolver)) && type.FullName != "System.Enum"
                    || Helpers.IsIntegerType(type, this.Emitter.Resolver)
                    || Helpers.IsFloatType(type, this.Emitter.Resolver)
-                   || Helpers.IsKnownType(KnownTypeCode.Enum, type, this.Emitter.Resolver)
                    || Helpers.IsKnownType(KnownTypeCode.Boolean, type, this.Emitter.Resolver)
                    || Helpers.IsKnownType(KnownTypeCode.Type, type, this.Emitter.Resolver)
                    || Helpers.IsKnownType(KnownTypeCode.Char, type, this.Emitter.Resolver)

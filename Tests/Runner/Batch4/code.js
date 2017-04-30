@@ -12424,8 +12424,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             },
             IsStaticFlagWorksForMethod: function () {
                 var $t, $t1;
-                Bridge.Test.NUnit.Assert.AreEqual$1(false, (($t = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C2, 31, 4))[System.Array.index(0, $t)].is || false), "Instance member should not be static");
-                Bridge.Test.NUnit.Assert.AreEqual$1(true, (($t1 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C2, 31, 8))[System.Array.index(0, $t1)].is || false), "Static member should be static");
+                Bridge.Test.NUnit.Assert.AreEqual$1(false, (($t = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C2, 31, 20))[System.Array.index(0, $t)].is || false), "Instance member should not be static");
+                Bridge.Test.NUnit.Assert.AreEqual$1(true, (($t1 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C2, 31, 24))[System.Array.index(0, $t1)].is || false), "Static member should be static");
             },
             MemberTypeIsMethodForMethod: function () {
                 Bridge.Test.NUnit.Assert.AreEqual(8, Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C3, 8, 284, "M1").t);
