@@ -373,6 +373,19 @@ namespace System.Threading
 		}
 
 		/// <summary>
+		/// Checks if the thread is currently busy (is still executing any thread starts
+		/// </summary>
+		/// <value>If the thread is busy.</value>
+		public bool IsAlive
+		{
+			get
+			{
+				// True if there are any outstanding jobs, else false
+				return _queuedStarts.Count > 0;
+			}
+		}
+
+		/// <summary>
 		/// The thread start function signature, takes an object as the parameter, and must return an object as the result
 		/// </summary>
 		public delegate object ThreadStart(object param);
