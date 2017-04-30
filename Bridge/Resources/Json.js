@@ -138,13 +138,13 @@
                             }
                         }
                     } else {
-                        var fields = Bridge.Reflection.getMembers(type, 4, 4);
+                        var fields = Bridge.Reflection.getMembers(type, 4, 20);
 
                         for (i = 0; i < fields.length; i++) {
                             raw[fields[i].n] = Bridge.Json.serialize(Bridge.Reflection.fieldAccess(fields[i], obj), settings, true, fields[i].rt);
                         }
 
-                        var properties = Bridge.Reflection.getMembers(type, 16, 28),
+                        var properties = Bridge.Reflection.getMembers(type, 16, 20),
                             camelCase = settings && settings.CamelCasePropertyNames;
 
                         for (i = 0; i < properties.length; i++) {
@@ -370,7 +370,7 @@
 
                     var o = Bridge.createInstance(type);
 
-                    var fields = Bridge.Reflection.getMembers(type, 4, 4),
+                    var fields = Bridge.Reflection.getMembers(type, 4, 20),
                         value,
                         i;
 
@@ -382,7 +382,7 @@
                         }
                     }
 
-                    var properties = Bridge.Reflection.getMembers(type, 16, 4);
+                    var properties = Bridge.Reflection.getMembers(type, 16, 20);
 
                     for (i = 0; i < properties.length; i++) {
                         var camelCase = settings && settings.CamelCasePropertyNames,

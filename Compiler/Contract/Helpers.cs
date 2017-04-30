@@ -1117,12 +1117,17 @@ namespace Bridge.Contract
         public static bool IsEntryPointMethod(IEmitter emitter, MethodDeclaration methodDeclaration)
         {
             var member_rr = emitter.Resolver.ResolveNode(methodDeclaration, emitter) as MemberResolveResult;
-            var method = member_rr != null ? member_rr.Member : null;
+            IMethod method = member_rr != null ? member_rr.Member as IMethod : null;
 
+            return Helpers.IsEntryPointMethod(method);
+        }
+
+        public static bool IsEntryPointMethod(IMethod method)
+        {
             if (method != null && method.Name == CS.Methods.AUTO_STARTUP_METHOD_NAME &&
                 method.IsStatic &&
                 !method.IsAbstract &&
-                Helpers.IsEntryPointCandidate(emitter, methodDeclaration))
+                Helpers.IsEntryPointCandidate(method))
             {
                 bool isReady = false;
                 foreach (var attr in method.Attributes)
@@ -1159,11 +1164,18 @@ namespace Bridge.Contract
 
             var m = (IMethod)m_rr.Member;
 
-            if (m.Name != CS.Methods.AUTO_STARTUP_METHOD_NAME || !m.IsStatic || m.DeclaringTypeDefinition.TypeParameterCount > 0 || m.TypeParameters.Count > 0)  // Must be a static, non-generic Main
+            return Helpers.IsEntryPointCandidate(m);
+        }
+
+        public static bool IsEntryPointCandidate(IMethod m)
+        {
+            if (m.Name != CS.Methods.AUTO_STARTUP_METHOD_NAME || !m.IsStatic || m.DeclaringTypeDefinition.TypeParameterCount > 0 ||
+                m.TypeParameters.Count > 0) // Must be a static, non-generic Main
                 return false;
-            if (!m.ReturnType.IsKnownType(KnownTypeCode.Void) && !m.ReturnType.IsKnownType(KnownTypeCode.Int32))    // Must return void or int.
+            if (!m.ReturnType.IsKnownType(KnownTypeCode.Void) && !m.ReturnType.IsKnownType(KnownTypeCode.Int32))
+                // Must return void or int.
                 return false;
-            if (m.Parameters.Count == 0)    // Can have 0 parameters.
+            if (m.Parameters.Count == 0) // Can have 0 parameters.
                 return true;
             if (m.Parameters.Count > 1) // May not have more than 1 parameter.
                 return false;
@@ -1171,7 +1183,8 @@ namespace Bridge.Contract
                 return false;
 
             var at = m.Parameters[0].Type as ArrayType;
-            return at != null && at.Dimensions == 1 && at.ElementType.IsKnownType(KnownTypeCode.String);    // The single parameter must be a one-dimensional array of strings.
+            return at != null && at.Dimensions == 1 && at.ElementType.IsKnownType(KnownTypeCode.String);
+                // The single parameter must be a one-dimensional array of strings.
         }
 
         public static bool IsTypeParameterType(IType type)
