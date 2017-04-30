@@ -15,11 +15,19 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         private static DateTime time = MinDate;
         public static readonly DateTime MinDate = new DateTime(1800, 1, 1);
 
+        private static dynamic d1 = d2;
+        private static dynamic d2 = 6;
+
+        private static int[] ar1 = ar2;
+        private static int[] ar2 = new int[] { 1 };
+
         [Test]
         public static void TestFieldInitializer()
         {
             Assert.AreEqual(0, Bridge1390.b);
             Assert.AreEqual(DateTime.MinValue, Bridge1390.time);
+            Assert.AreEqual(null, Bridge1390.d1);
+            Assert.AreEqual(null, Bridge1390.ar1);
         }
     }
 }
