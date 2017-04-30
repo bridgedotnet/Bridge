@@ -30,6 +30,8 @@ System.Linq.Enumerable.from("").any(function (ch) {
     var singlelineInjectTop = 1;
     var multilineInjectWithAsteriskTop = 2;
     var multilineInjectTop = 3;
+    var multilineInjectWithAsteriskAndWhitespaceOffsetTop = 4;
+    var multilineInjectAndWhitespaceOffsetTop = 5;
     return true;
 });
 
@@ -69,6 +71,8 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                 var singlelineInjectBefore = 1;
                 var multilineInjectWithAsteriskBefore = 2;
                 var multilineInjectBefore = 3;
+                var multilineInjectWithAsteriskAndWhitespaceOffsetBefore = 4;
+                var multilineInjectAndWhitespaceOffsetBefore = 5;
                 return true;
             });
     });
@@ -227,6 +231,8 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                             var singlelineInjectAfter = 1;
                             var multilineInjectWithAsteriskAfter = 2;
                             var multilineInjectAfter = 3;
+                            var multilineInjectWithAsteriskAndWhitespaceOffsetAfter = 4;
+                            var multilineInjectAndWhitespaceOffsetAfter = 5;
                             return true;
                         });
                 }
@@ -269,5 +275,7 @@ System.Linq.Enumerable.from("").any(function (ch) {
     var singlelineInjectBottom = 1;
     var multilineInjectWithAsteriskBottom = 2;
     var multilineInjectBottom = 3;
+    var multilineInjectWithAsteriskAndWhitespaceOffsetBottom = 4;
+    var multilineInjectAndWhitespaceOffsetBottom = 5;
     return true;
 });

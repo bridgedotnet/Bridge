@@ -1,3 +1,4 @@
+using Bridge.ClientTestHelper;
 using Bridge.Test.NUnit;
 
 using System;
@@ -99,7 +100,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 {
                     Console.WriteLine("Language: " + Enum.English);
 
-                    Assert.AreEqual("Language: English", Bridge.Utils.Console.Instance.BufferedOutput);
+                    Assert.AreEqual(StringHelper.CombineLinesNL("Language: English"), Bridge.Utils.Console.Instance.BufferedOutput);
                 }
                 finally
                 {

@@ -44,15 +44,36 @@ namespace Bridge.Translator
 
             var lines = this.GetNormalizedWhitespaceAndAsteriskLines(text, true);
 
+            int offset = 0;
+
+            if (wrap || (lines.Length > 0 && lines[0].Any(x => !char.IsWhiteSpace(x))))
+            {
+                offset = this.Comment.StartLocation.Column + offsetAlreadyApplied;
+            }
+            else
+            {
+                var firstNotEmptyLine = lines.FirstOrDefault(x => !string.IsNullOrEmpty(x));
+
+                if (firstNotEmptyLine != null)
+                {
+                    for (int i = 0; i < firstNotEmptyLine.Length; i++)
+                    {
+                        if (!char.IsWhiteSpace(firstNotEmptyLine[i]))
+                        {
+                            offset = i;
+                            break;
+                        }
+                    }
+                }
+            }
+
             if (!wrap)
             {
                 // Only if !wrap i.e. in case of injection comment
                 this.RemoveFirstAndLastEmptyElements(ref lines);
             }
 
-            var indentTrim = this.Comment.StartLocation.Column + offsetAlreadyApplied;
-
-            this.WriteLinesIndented(lines, indentTrim, wrapperStart, wrapperEnd, alignedIndent);
+            this.WriteLinesIndented(lines, offset, wrapperStart, wrapperEnd, alignedIndent);
         }
 
         protected virtual void WriteSingleLineComment(string text, bool newline, bool wrap, bool alignedIndent, int offsetAlreadyApplied)

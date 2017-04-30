@@ -5,7 +5,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch2", function ($asm, globals)
     
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch2Runner", {
-        Main: function () {
+        main: function Main() {
             Bridge.Test.Runtime.ContextHelper.Init();
             QUnit.module("Checked/Unckecked");
             QUnit.test("CheckedInsideUnchecked - Batch2 TestInt32", Bridge.Test.Runtime.BridgeClientTestBatch2Runner.CheckedInsideUncheckedTests.TestInt32);

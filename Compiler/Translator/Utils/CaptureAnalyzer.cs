@@ -173,7 +173,7 @@ namespace Bridge.Translator
         {
             var rr = this.emitter.Resolver.ResolveNode(type, this.emitter);
 
-            if (rr.Type.Kind == TypeKind.TypeParameter)
+            if (Helpers.HasTypeParameters(rr.Type))
             {
                 var ivar = new TypeVariable(rr.Type);
                 if (!_usedVariables.Contains(ivar))
@@ -185,6 +185,8 @@ namespace Bridge.Translator
 
         public override void VisitIndexerExpression(IndexerExpression indexerExpression)
         {
+            this.CheckExpression(indexerExpression);
+
             if (this._usedVariables.Count == 0)
             {
                 var rr = this.emitter.Resolver.ResolveNode(indexerExpression, this.emitter);
@@ -205,20 +207,44 @@ namespace Bridge.Translator
             base.VisitIndexerExpression(indexerExpression);
         }
 
-        public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
+        private void CheckMember(IMember member)
+        {
+            if (member != null && member.IsStatic && member.DeclaringTypeDefinition.TypeParameterCount > 0 && !Helpers.IsIgnoreGeneric(member.DeclaringTypeDefinition) && Helpers.HasTypeParameters(member.DeclaringType))
+            {
+                var ivar = new TypeVariable(member.DeclaringType);
+                if (!_usedVariables.Contains(ivar))
+                {
+                    _usedVariables.Add(ivar);
+                }
+            }
+        }
+
+        private void CheckExpression(Expression expression)
         {
             if (this._usedVariables.Count == 0)
             {
+                var rr = this.emitter.Resolver.ResolveNode(expression, this.emitter);
+                var conversion = this.emitter.Resolver.Resolver.GetConversion(expression);
+                if (conversion != null && conversion.Method != null)
+                {
+                    CheckMember(conversion.Method);
+                }
+            }
+        }
+
+        public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)
+        {
+            this.CheckExpression(memberReferenceExpression);
+
+            if (this._usedVariables.Count == 0)
+            {
                 var rr = this.emitter.Resolver.ResolveNode(memberReferenceExpression, this.emitter);
+                
                 var member = rr as MemberResolveResult;
                 
-                if (member != null && member.Member.IsStatic && member.Member.DeclaringTypeDefinition.TypeParameterCount > 0 && member.Member.DeclaringTypeDefinition.Equals(this.emitter.TypeInfo.Type.GetDefinition()) && !Helpers.IsIgnoreGeneric(member.Member.DeclaringTypeDefinition))
+                if (member != null)
                 {
-                    var ivar = new TypeVariable(member.Member.DeclaringType);
-                    if (!_usedVariables.Contains(ivar))
-                    {
-                        _usedVariables.Add(ivar);
-                    }
+                    CheckMember(member.Member);
                 }
 
                 bool isInterface = member != null && member.Member.DeclaringTypeDefinition != null && member.Member.DeclaringTypeDefinition.Kind == TypeKind.Interface;
@@ -239,6 +265,7 @@ namespace Bridge.Translator
         public override void VisitIdentifierExpression(IdentifierExpression identifierExpression)
         {
             var rr = this.emitter.Resolver.ResolveNode(identifierExpression, this.emitter);
+            this.CheckExpression(identifierExpression);
 
             if (this._usedVariables.Count == 0)
             {
@@ -293,6 +320,8 @@ namespace Bridge.Translator
 
         public override void VisitLambdaExpression(LambdaExpression lambdaExpression)
         {
+            this.CheckExpression(lambdaExpression);
+
             var analyzer = new CaptureAnalyzer(this.emitter);
             analyzer.Analyze(lambdaExpression.Body, lambdaExpression.Parameters.Select(p => p.Name));
 
@@ -314,6 +343,8 @@ namespace Bridge.Translator
 
         public override void VisitAnonymousMethodExpression(AnonymousMethodExpression anonymousMethodExpression)
         {
+            this.CheckExpression(anonymousMethodExpression);
+
             var analyzer = new CaptureAnalyzer(this.emitter);
             analyzer.Analyze(anonymousMethodExpression.Body, anonymousMethodExpression.Parameters.Select(p => p.Name));
 
@@ -340,7 +371,7 @@ namespace Bridge.Translator
             {
                 foreach (var typeArgument in conversion.Method.DeclaringType.TypeArguments)
                 {
-                    if (typeArgument.Kind == TypeKind.TypeParameter)
+                    if (Helpers.HasTypeParameters(typeArgument))
                     {
                         var ivar = new TypeVariable(typeArgument);
                         if (!_usedVariables.Contains(ivar))
@@ -355,12 +386,14 @@ namespace Bridge.Translator
 
         public override void VisitBinaryOperatorExpression(BinaryOperatorExpression binaryOperatorExpression)
         {
+            this.CheckExpression(binaryOperatorExpression);
+
             var rr = this.emitter.Resolver.ResolveNode(binaryOperatorExpression, this.emitter) as OperatorResolveResult;
             if (rr != null && rr.UserDefinedOperatorMethod != null)
             {
                 foreach (var typeArgument in rr.UserDefinedOperatorMethod.DeclaringType.TypeArguments)
                 {
-                    if (typeArgument.Kind == TypeKind.TypeParameter)
+                    if (Helpers.HasTypeParameters(typeArgument))
                     {
                         var ivar = new TypeVariable(typeArgument);
                         if (!_usedVariables.Contains(ivar))
@@ -375,12 +408,14 @@ namespace Bridge.Translator
 
         public override void VisitUnaryOperatorExpression(UnaryOperatorExpression unaryOperatorExpression)
         {
+            this.CheckExpression(unaryOperatorExpression);
+
             var rr = this.emitter.Resolver.ResolveNode(unaryOperatorExpression, this.emitter) as OperatorResolveResult;
             if (rr != null && rr.UserDefinedOperatorMethod != null)
             {
                 foreach (var typeArgument in rr.UserDefinedOperatorMethod.DeclaringType.TypeArguments)
                 {
-                    if (typeArgument.Kind == TypeKind.TypeParameter)
+                    if (Helpers.HasTypeParameters(typeArgument))
                     {
                         var ivar = new TypeVariable(typeArgument);
                         if (!_usedVariables.Contains(ivar))
@@ -401,7 +436,7 @@ namespace Bridge.Translator
             {
                 foreach (var typeArgument in rr.UserDefinedOperatorMethod.DeclaringType.TypeArguments)
                 {
-                    if (typeArgument.Kind == TypeKind.TypeParameter)
+                    if (Helpers.HasTypeParameters(typeArgument))
                     {
                         var ivar = new TypeVariable(typeArgument);
                         if (!_usedVariables.Contains(ivar))
@@ -417,13 +452,15 @@ namespace Bridge.Translator
 
         public override void VisitInvocationExpression(InvocationExpression invocationExpression)
         {
+            this.CheckExpression(invocationExpression);
+
             var rr = this.emitter.Resolver.ResolveNode(invocationExpression, this.emitter) as InvocationResolveResult;
 
             if (rr != null)
             {
                 foreach (var argument in rr.Arguments)
                 {
-                    if (argument.Type != null && argument.Type.Kind == TypeKind.TypeParameter)
+                    if (argument.Type != null && Helpers.HasTypeParameters(argument.Type))
                     {
                         var ivar = new TypeVariable(argument.Type);
                         if (!_usedVariables.Contains(ivar))
