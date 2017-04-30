@@ -192,10 +192,16 @@ namespace Bridge.Translator
                         constValue = constrr.ConstantValue;
 
                         var expectedType = this.Emitter.Resolver.Resolver.GetExpectedType(member.Initializer);
-                        if (!expectedType.Equals(constrr.Type))
+                        if (!expectedType.Equals(constrr.Type) && expectedType.Kind != TypeKind.Dynamic)
                         {
-
-                            constValue = Convert.ChangeType(constValue, ReflectionHelper.GetTypeCode(expectedType));
+                            try
+                            {
+                                constValue = Convert.ChangeType(constValue, ReflectionHelper.GetTypeCode(expectedType));
+                            }
+                            catch (Exception)
+                            {
+                                this.Emitter.Log.Warn($"FieldBlock: Convert.ChangeType is failed. Value type: {constrr.Type.FullName}, Target type: {expectedType.FullName}");
+                            }
                         }
 
                         if (constrr.Type.Kind == TypeKind.Enum)
