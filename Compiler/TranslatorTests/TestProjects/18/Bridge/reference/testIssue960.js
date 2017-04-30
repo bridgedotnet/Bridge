@@ -21,7 +21,7 @@
                 Go: function Go() {
                     var x = new TestIssue960.Named("Test");
                     // Should not contain generic type parameter
-                    Bridge.Console.log(new TestIssue960.Example().GetName(x));
+                    System.Console.WriteLine(new TestIssue960.Example().GetName(x));
                 }
             }
         },

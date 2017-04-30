@@ -1,3 +1,4 @@
+using System;
 using Bridge.Contract;
 using Bridge.Contract.Constants;
 using ICSharpCode.NRefactory.CSharp;
@@ -182,6 +183,13 @@ namespace Bridge.Translator
                     {
                         isPrimitive = true;
                         constValue = constrr.ConstantValue;
+
+                        var expectedType = this.Emitter.Resolver.Resolver.GetExpectedType(member.Initializer);
+                        if (!expectedType.Equals(constrr.Type))
+                        {
+
+                            constValue = Convert.ChangeType(constValue, ReflectionHelper.GetTypeCode(expectedType));
+                        }
 
                         if (constrr.Type.Kind == TypeKind.Enum)
                         {

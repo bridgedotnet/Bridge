@@ -12,7 +12,7 @@ namespace CopyOutputToReference
             string testFolderPath = GetTestFolderPath();
 
             var exceptionFolders = new[] { "01" };
-            var exceptionFiles = new[] { "bridge.js", "bridge.min.js" };
+            var exceptionFiles = new[] { "bridge.js", "bridge.min.js", "bridge.console.js", "bridge.console.min.js" };
 
             var testProjectFolders = Directory.EnumerateDirectories(testFolderPath, "*", SearchOption.TopDirectoryOnly);
 

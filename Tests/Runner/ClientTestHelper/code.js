@@ -57,6 +57,41 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.ClientTestHelper.StringHelper", {
+        statics: {
+            methods: {
+                CombineLines: function (lines) {
+                    if (lines === void 0) { lines = []; }
+                    if (lines == null) {
+                        return null;
+                    }
+
+                    var s = "";
+
+                    for (var i = 0; i < lines.length; i = (i + 1) | 0) {
+                        if (i !== 0) {
+                            s = System.String.concat(s, '\n');
+                        }
+
+                        s = System.String.concat(s, lines[System.Array.index(i, lines)]);
+                    }
+
+                    return s;
+                },
+                CombineLinesNL: function (lines) {
+                    if (lines === void 0) { lines = []; }
+                    var s = Bridge.ClientTestHelper.StringHelper.CombineLines(lines);
+
+                    if (s == null) {
+                        return null;
+                    }
+
+                    return System.String.concat(s, '\n');
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTestHelper.IWriteableItem", {
         inherits: [Bridge.ClientTestHelper.IItem],
         $kind: "interface"
