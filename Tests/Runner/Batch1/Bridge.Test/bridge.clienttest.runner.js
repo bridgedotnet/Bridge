@@ -1274,6 +1274,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("Reflection - Attribute GetCustomAttributesForParameterInfoTypeWorks", Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests.GetCustomAttributesForParameterInfoTypeWorks);
             QUnit.test("Reflection - Attribute GetCustomAttributesForParameterInfoTypeInheritFalseWorks", Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests.GetCustomAttributesForParameterInfoTypeInheritFalseWorks);
             QUnit.test("Reflection - Attribute GetCustomAttributesForParameterInfoTypeInheritTrueWorks", Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests.GetCustomAttributesForParameterInfoTypeInheritTrueWorks);
+            QUnit.test("Reflection - Attribute GetCustomAttributesForEnumMember", Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests.GetCustomAttributesForEnumMember);
             QUnit.test("Reflection - GetMembers GetMembersWithoutBindingFlagsWorks", Bridge.Test.Runtime.BridgeClientTestRunner.GetMembersTests.GetMembersWithoutBindingFlagsWorks);
             QUnit.test("Reflection - GetMembers GetMembersWorksForInterface", Bridge.Test.Runtime.BridgeClientTestRunner.GetMembersTests.GetMembersWorksForInterface);
             QUnit.test("Reflection - GetMembers GetMembersWithBindingFlagsWorks", Bridge.Test.Runtime.BridgeClientTestRunner.GetMembersTests.GetMembersWithBindingFlagsWorks);
@@ -3859,68 +3860,73 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             methods: {
                 GetCustomAttributesForAssemblyWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetCustomAttributesForAssemblyWorks()", $t.Line = "51", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetCustomAttributesForAssemblyWorks()", $t.Line = "74", $t));
                     t.Fixture.GetCustomAttributesForAssemblyWorks();
                 },
                 GetCustomAttributesForMemberInfoWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetCustomAttributesForMemberInfoWorks()", $t.Line = "97", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetCustomAttributesForMemberInfoWorks()", $t.Line = "120", $t));
                     t.Fixture.GetCustomAttributesForMemberInfoWorks();
                 },
                 GetCustomAttributesForMemberInfoInheritTrueWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetCustomAttributesForMemberInfoInheritTrueWorks()", $t.Line = "118", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetCustomAttributesForMemberInfoInheritTrueWorks()", $t.Line = "141", $t));
                     t.Fixture.GetCustomAttributesForMemberInfoInheritTrueWorks();
                 },
                 GetCustomAttributesForMemberInfoInheritFalseWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetCustomAttributesForMemberInfoInheritFalseWorks()", $t.Line = "139", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetCustomAttributesForMemberInfoInheritFalseWorks()", $t.Line = "162", $t));
                     t.Fixture.GetCustomAttributesForMemberInfoInheritFalseWorks();
                 },
                 GetCustomAttributesForMemberInfoTypeWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetCustomAttributesForMemberInfoTypeWorks()", $t.Line = "160", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetCustomAttributesForMemberInfoTypeWorks()", $t.Line = "183", $t));
                     t.Fixture.GetCustomAttributesForMemberInfoTypeWorks();
                 },
                 GetCustomAttributesForMemberInfoTypeInheritFalseWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetCustomAttributesForMemberInfoTypeInheritFalseWorks()", $t.Line = "186", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetCustomAttributesForMemberInfoTypeInheritFalseWorks()", $t.Line = "209", $t));
                     t.Fixture.GetCustomAttributesForMemberInfoTypeInheritFalseWorks();
                 },
                 GetCustomAttributesForMemberInfoTypeInheritTrueWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetCustomAttributesForMemberInfoTypeInheritTrueWorks()", $t.Line = "217", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetCustomAttributesForMemberInfoTypeInheritTrueWorks()", $t.Line = "240", $t));
                     t.Fixture.GetCustomAttributesForMemberInfoTypeInheritTrueWorks();
                 },
                 GetCustomAttributesForParameterInfoWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetCustomAttributesForParameterInfoWorks()", $t.Line = "248", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetCustomAttributesForParameterInfoWorks()", $t.Line = "271", $t));
                     t.Fixture.GetCustomAttributesForParameterInfoWorks();
                 },
                 GetCustomAttributesForParameterInfoInheritTrueWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetCustomAttributesForParameterInfoInheritTrueWorks()", $t.Line = "271", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetCustomAttributesForParameterInfoInheritTrueWorks()", $t.Line = "294", $t));
                     t.Fixture.GetCustomAttributesForParameterInfoInheritTrueWorks();
                 },
                 GetCustomAttributesForParameterInfoInheritFalseWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetCustomAttributesForParameterInfoInheritFalseWorks()", $t.Line = "292", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetCustomAttributesForParameterInfoInheritFalseWorks()", $t.Line = "315", $t));
                     t.Fixture.GetCustomAttributesForParameterInfoInheritFalseWorks();
                 },
                 GetCustomAttributesForParameterInfoTypeWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetCustomAttributesForParameterInfoTypeWorks()", $t.Line = "313", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetCustomAttributesForParameterInfoTypeWorks()", $t.Line = "336", $t));
                     t.Fixture.GetCustomAttributesForParameterInfoTypeWorks();
                 },
                 GetCustomAttributesForParameterInfoTypeInheritFalseWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetCustomAttributesForParameterInfoTypeInheritFalseWorks()", $t.Line = "339", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetCustomAttributesForParameterInfoTypeInheritFalseWorks()", $t.Line = "362", $t));
                     t.Fixture.GetCustomAttributesForParameterInfoTypeInheritFalseWorks();
                 },
                 GetCustomAttributesForParameterInfoTypeInheritTrueWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetCustomAttributesForParameterInfoTypeInheritTrueWorks()", $t.Line = "370", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetCustomAttributesForParameterInfoTypeInheritTrueWorks()", $t.Line = "393", $t));
                     t.Fixture.GetCustomAttributesForParameterInfoTypeInheritTrueWorks();
+                },
+                GetCustomAttributesForEnumMember: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch1.Reflection.AttributeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.AttributeTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetCustomAttributesForEnumMember()", $t.Line = "424", $t));
+                    t.Fixture.GetCustomAttributesForEnumMember();
                 }
             }
         },
