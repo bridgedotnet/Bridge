@@ -454,6 +454,7 @@ window = self;
         },
 
         ready: function (fn, scope) {
+        	// If we are loaded in to a web worker, prevent the default action of running the functions marked [Ready]
         	if (!System.Threading.Utils.WorkerThreadManager.isWebWorker())
 			{
 				var delayfn = function () {
@@ -26663,6 +26664,12 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     }
                 }
             },
+            IsAlive: {
+                get: function () {
+                    // True if there are any outstanding jobs, else false
+                    return this._queuedStarts.count > 0;
+                }
+            },
             Result: {
                 get: function () {
                     return this._result;
@@ -26863,5 +26870,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 // WebWorker check
 // http://stackoverflow.com/a/18002694
 if (typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope) {
+	// Call the web worker manager entry point
     System.Threading.Utils.WorkerThreadManager.workerThreadManagerEntryPoint();
 }
