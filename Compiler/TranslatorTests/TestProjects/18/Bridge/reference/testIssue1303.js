@@ -19,7 +19,7 @@
     });
 
     Bridge.define("TestIssue1303.App1", {
-        Main: function Main() {
+        main: function Main() {
             //Should be in config.init
         },
         statics: {

@@ -4,63 +4,140 @@
                 BODY_WRAPPER_ID: "bridge-body-wrapper",
                 CONSOLE_MESSAGES_ID: "bridge-console-messages",
                 position: "horizontal",
-                instance: null
+                instance$1: null
             },
             props: {
-                Instance: {
+                instance: {
                     get: function () {
-                        if (Bridge.Console.instance == null) {
-                            Bridge.Console.instance = new Bridge.Console();
+                        if (Bridge.Console.instance$1 == null) {
+                            Bridge.Console.instance$1 = new Bridge.Console();
                         }
 
-                        return Bridge.Console.instance;
+                        return Bridge.Console.instance$1;
                     }
                 }
             },
             methods: {
-                logBase: function (value, messageType) {
-                    if (messageType === void 0) { messageType = 0; }
-                    var self = Bridge.Console.Instance;
+                initConsoleFunctions: function () {
+                    var wl = System.Console.WriteLine;
+                    var w = System.Console.Write;
+                    var clr = System.Console.Clear;
+                    var debug = System.Diagnostics.Debug.writeln;
+                    var con = Bridge.global.console;
 
-                    var v = value != null ? value.toString() : "";
+                    if (wl) {
+                        System.Console.WriteLine = function (value) {
+                            wl(value);
+                            Bridge.Console.log(value, true);
+                        }
+                    }
+
+                    if (w) {
+                        System.Console.Write = function (value) {
+                            w(value);
+                            Bridge.Console.log(value, false);
+                        }
+                    }
+
+                    if (clr) {
+                        System.Console.Clear = function () {
+                            clr();
+                            Bridge.Console.clear();
+                        }
+                    }
+
+                    if (debug) {
+                        System.Diagnostics.Debug.writeln = function (value) {
+                            debug(value);
+                            Bridge.Console.debug(value);
+                        }
+                    }
+
+                    if (con && con.error) {
+                        Bridge.global.console.error = function (msg) {
+                            error(msg);
+                            Bridge.Console.error(msg);
+                        }
+                    }
+
+                    if (Bridge.isDefined(Bridge.global.window)) {
+                        Bridge.global.window.addEventListener("error", function (e) {
+                            Bridge.Console.error(System.Exception.create(e));
+                        });
+                    }
+                },
+                logBase: function (value, newLine, messageType) {
+                    if (newLine === void 0) { newLine = true; }
+                    if (messageType === void 0) { messageType = 0; }
+                    var self = Bridge.Console.instance;
+                    var v = "";
+
+                    if (value != null) {
+                        v = (value.toString == {}.toString) ? JSON.stringify(value, null, 4) : value.toString();
+                    }
 
                     if (self.bufferedOutput != null) {
                         self.bufferedOutput = System.String.concat(self.bufferedOutput, v);
+
+                        if (newLine) {
+                            self.bufferedOutput = System.String.concat(self.bufferedOutput, '\n');
+                        }
+
                         return;
                     }
 
                     Bridge.Console.show();
 
-                    var m = self.buildConsoleMessage(v, messageType);
-                    self.consoleMessages.appendChild(m);
-
-                    self.currentMessageElement = m;
-
-                    if (self.consoleDefined) {
-                        if (messageType === 1 && self.consoleDebugDefined) {
-                            Bridge.global.console.debug(v);
-                        } else {
-                            Bridge.global.console.log(v);
-                        }
-                    } else if (self.operaPostErrorDefined) {
-                        Bridge.global.opera.postError(v);
+                    if (self.isNewLine || self.currentMessageElement == null) {
+                        var m = self.buildConsoleMessage(v, messageType);
+                        self.consoleMessages.appendChild(m);
+                        self.currentMessageElement = m;
+                    } else {
+                        var m1 = self.currentMessageElement;
+                        m1.lastChild.innerHTML = System.String.concat(m1.lastChild.innerHTML, v);
                     }
+
+                    self.isNewLine = newLine;
                 },
                 error: function (value) {
-                    Bridge.Console.logBase(value, 2);
+                    Bridge.Console.logBase(value, true, 2);
                 },
                 debug: function (value) {
-                    Bridge.Console.logBase(value, 1);
+                    Bridge.Console.logBase(value, true, 1);
                 },
-                log: function (value) {
-                    Bridge.Console.logBase(value);
+                log: function (value, newLine) {
+                    if (newLine === void 0) { newLine = true; }
+                    Bridge.Console.logBase(value, newLine);
                 },
-                hide: function () {
-                    if (Bridge.Console.instance == null) {
+                clear: function () {
+                    var self = Bridge.Console.instance$1;
+
+                    if (self == null) {
                         return;
                     }
 
-                    var self = Bridge.Console.Instance;
+                    var m = self.consoleMessages;
+
+                    if (m != null) {
+                        while (m.firstChild != null) {
+                            m.removeChild(m.firstChild);
+                        }
+
+                        self.currentMessageElement = null;
+                    }
+
+                    if (self.bufferedOutput != null) {
+                        self.bufferedOutput = "";
+                    }
+
+                    self.isNewLine = false;
+                },
+                hide: function () {
+                    if (Bridge.Console.instance$1 == null) {
+                        return;
+                    }
+
+                    var self = Bridge.Console.instance;
 
                     if (self.hidden) {
                         return;
@@ -69,7 +146,7 @@
                     self.close();
                 },
                 show: function () {
-                    var self = Bridge.Console.Instance;
+                    var self = Bridge.Console.instance;
 
                     if (!self.hidden) {
                         return;
@@ -78,7 +155,7 @@
                     self.init(true);
                 },
                 toggle: function () {
-                    if (Bridge.Console.Instance.hidden) {
+                    if (Bridge.Console.instance.hidden) {
                         Bridge.Console.show();
                     } else {
                         Bridge.Console.hide();
@@ -91,7 +168,7 @@
             consoleHeight: "300px",
             consoleHeaderHeight: "35px",
             tooltip: null,
-            consoleWrapper: null,
+            consoleWrap: null,
             consoleMessages: null,
             bridgeIcon: null,
             bridgeIconPath: null,
@@ -102,9 +179,7 @@
             consoleHeader: null,
             consoleBody: null,
             hidden: true,
-            consoleDefined: false,
-            consoleDebugDefined: false,
-            operaPostErrorDefined: false,
+            isNewLine: false,
             currentMessageElement: null,
             bufferedOutput: null
         },
@@ -119,7 +194,7 @@
                 if (reinit === void 0) { reinit = false; }
                 this.hidden = false;
 
-                var consoleWrapperStyles = Bridge.fn.bind(this, $asm.$.Bridge.Console.f1)(new (System.Collections.Generic.Dictionary$2(System.String,System.String))());
+                var consoleWrapStyles = Bridge.fn.bind(this, $asm.$.Bridge.Console.f1)(new (System.Collections.Generic.Dictionary$2(System.String,System.String))());
 
                 var consoleHeaderStyles = $asm.$.Bridge.Console.f2(new (System.Collections.Generic.Dictionary$2(System.String,System.String))());
 
@@ -172,22 +247,22 @@
                 if (Bridge.referenceEquals(Bridge.Console.position, "horizontal")) {
                     this.wrapBodyContent();
 
-                    consoleWrapperStyles.set("right", "0");
+                    consoleWrapStyles.set("right", "0");
                     consoleHeaderStyles.set("border-top", "1px solid #a3a3a3");
                     consoleBodyStyles.set("height", this.consoleHeight);
                 } else if (Bridge.referenceEquals(Bridge.Console.position, "vertical")) {
                     var consoleWidth = "400px";
                     document.body.style.marginLeft = consoleWidth;
 
-                    consoleWrapperStyles.set("top", "0");
-                    consoleWrapperStyles.set("width", consoleWidth);
-                    consoleWrapperStyles.set("border-right", "1px solid #a3a3a3");
+                    consoleWrapStyles.set("top", "0");
+                    consoleWrapStyles.set("width", consoleWidth);
+                    consoleWrapStyles.set("border-right", "1px solid #a3a3a3");
                     consoleBodyStyles.set("height", "100%");
                 }
 
                 // Console wrapper
-                this.consoleWrapper = this.consoleWrapper || document.createElement("div");
-                this.consoleWrapper.setAttribute("style", this.obj2Css(consoleWrapperStyles));
+                this.consoleWrap = this.consoleWrap || document.createElement("div");
+                this.consoleWrap.setAttribute("style", this.obj2Css(consoleWrapStyles));
 
                 // Console Header
                 this.consoleHeader = this.consoleHeader || document.createElement("div");
@@ -219,11 +294,11 @@
                     this.consoleBody.appendChild(cm);
 
                     // Add console header and console body into console wrapper
-                    this.consoleWrapper.appendChild(this.consoleHeader);
-                    this.consoleWrapper.appendChild(this.consoleBody);
+                    this.consoleWrap.appendChild(this.consoleHeader);
+                    this.consoleWrap.appendChild(this.consoleBody);
 
                     // Finally add console to body
-                    document.body.appendChild(this.consoleWrapper);
+                    document.body.appendChild(this.consoleWrap);
 
                     // Close console
                     this.closeBtn.addEventListener("click", Bridge.fn.cacheBind(this, this.close));
@@ -231,27 +306,23 @@
                     // Show/hide Tooltip
                     this.closeBtn.addEventListener("mouseover", Bridge.fn.cacheBind(this, this.showTooltip));
                     this.closeBtn.addEventListener("mouseout", Bridge.fn.cacheBind(this, this.hideTooltip));
-
-                    this.consoleDefined = Bridge.isDefined(Bridge.global) && Bridge.isDefined(Bridge.global.console);
-                    this.consoleDebugDefined = this.consoleDefined && Bridge.isDefined(Bridge.unbox(Bridge.global.console.debug));
-                    this.operaPostErrorDefined = Bridge.isDefined(Bridge.global.opera) && Bridge.isDefined(Bridge.unbox(Bridge.global.opera.postError));
                 }
             },
             showTooltip: function () {
-                var self = Bridge.Console.Instance;
+                var self = Bridge.Console.instance;
                 self.tooltip.style.right = "20px";
                 self.tooltip.style.visibility = "visible";
                 self.tooltip.style.opacity = "1";
             },
             hideTooltip: function () {
-                var self = Bridge.Console.Instance;
+                var self = Bridge.Console.instance;
                 self.tooltip.style.right = "30px";
                 self.tooltip.style.opacity = "0";
             },
             close: function () {
                 this.hidden = true;
 
-                this.consoleWrapper.style.display = "none";
+                this.consoleWrap.style.display = "none";
 
                 if (Bridge.referenceEquals(Bridge.Console.position, "horizontal")) {
                     this.unwrapBodyContent();
@@ -288,21 +359,21 @@
                 document.body.appendChild(div);
             },
             unwrapBodyContent: function () {
-                var bridgeBodyWrapper = document.getElementById(Bridge.Console.BODY_WRAPPER_ID);
+                var bridgeBodyWrap = document.getElementById(Bridge.Console.BODY_WRAPPER_ID);
 
-                if (bridgeBodyWrapper == null) {
+                if (bridgeBodyWrap == null) {
                     return;
                 }
 
-                while (bridgeBodyWrapper.firstChild != null) {
-                    document.body.insertBefore(bridgeBodyWrapper.firstChild, bridgeBodyWrapper);
+                while (bridgeBodyWrap.firstChild != null) {
+                    document.body.insertBefore(bridgeBodyWrap.firstChild, bridgeBodyWrap);
                 }
 
-                document.body.removeChild(bridgeBodyWrapper);
+                document.body.removeChild(bridgeBodyWrap);
             },
             buildConsoleMessage: function (message, messageType) {
                 var messageItem = document.createElement("li");
-                messageItem.setAttribute("style", "padding: 5px 10px;border-bottom: 1px solid #f0f0f0;");
+                messageItem.setAttribute("style", "padding:5px 10px;border-bottom:1px solid #f0f0f0;position:relative;");
 
                 var messageIcon = document.createElementNS(this.svgNS, "svg");
 
@@ -329,9 +400,9 @@
 
                 messageIcon.appendChild(messageIconPath);
 
-                var messageContainer = document.createElement("span");
+                var messageContainer = document.createElement("div");
                 messageContainer.innerHTML = message;
-                messageContainer.setAttribute("style", System.String.concat("color: ", color, "; white-space: pre;"));
+                messageContainer.setAttribute("style", System.String.concat("color:", color, ";white-space:pre;margin-left:12px;line-height:1.4;min-height:18px;"));
 
                 messageItem.appendChild(messageIcon);
                 messageItem.appendChild(messageContainer);
@@ -427,7 +498,9 @@
             _o7.add("width", "3.9");
             _o7.add("height", "6.7");
             _o7.add("viewBox", "0 0 3.9 6.7");
-            _o7.add("style", "margin-right: 7px; vertical-align: middle;");
+            _o7.add("style", "vertical-align:middle;position: absolute;top: 10.5px;");
             return _o7;
         }
     });
+
+    Bridge.init(function () { Bridge.Console.initConsoleFunctions(); });

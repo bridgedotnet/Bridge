@@ -255,6 +255,16 @@
                 })(cfg, scope, backingField, v);
             }
 
+            var isFF = Bridge.Browser.firefoxVersion > 0
+
+            if (!alias && cfg.get) {
+                Object.defineProperty(cfg.get, isFF ? "displayName" : "name", { value: cls.$$name + "." + name + ".get", writable: true });
+            }
+
+            if (!alias && cfg.set) {
+                Object.defineProperty(cfg.set, isFF ? "displayName" : "name", { value: cls.$$name + "." + name + ".set", writable: true });
+            }
+
             Object.defineProperty(scope, name, cfg);
 
             return cfg;

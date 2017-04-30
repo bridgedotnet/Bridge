@@ -30,7 +30,7 @@ namespace Bridge.Translator
                 properties.Add("at", attrArr);
             }
 
-            if (type.Kind == TypeKind.Class || type.Kind == TypeKind.Struct || type.Kind == TypeKind.Interface)
+            if (type.Kind == TypeKind.Class || type.Kind == TypeKind.Struct || type.Kind == TypeKind.Interface || type.Kind == TypeKind.Enum)
             {
                 var members = type.Members.Where(m => MetadataUtils.IsReflectable(m, emitter, ifHasAttribute, tree))
                                           .OrderBy(m => m, MemberOrderer.Instance)

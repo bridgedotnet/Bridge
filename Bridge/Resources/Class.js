@@ -143,8 +143,9 @@
                 to.$config = config;
             };
 
-            if (obj.Main) {
-                result.$main = obj.Main;
+            if (obj.main) {
+                result.$main = obj.main;
+                delete obj.main;
             }
 
             copy(obj, result);
@@ -229,7 +230,7 @@
             }
 
             var rNames = ["fields", "events", "props", "ctors", "methods"],
-                defaultScheme = Bridge.isFunction(prop.Main) ? 0 : 1,
+                defaultScheme = Bridge.isFunction(prop.main) ? 0 : 1,
                 check = function (scope) {
                     if (scope.config && Bridge.isPlainObject(scope.config) ||
                         scope.$main && Bridge.isFunction(scope.$main) ||
@@ -351,6 +352,8 @@
             }
 
             Class.$$name = className;
+            Object.defineProperty(Class, "name", { value: className });
+            Object.defineProperty(Class.constructor, "name", { value: className });
             Class.$kind = prop.$kind;
 
             if (gCfg && isGenericInstance) {
@@ -424,7 +427,8 @@
 
             prop.$initialize = Bridge.Class._initialize;
 
-            var keys = [];
+            var keys = [],
+                isFF = Bridge.Browser.firefoxVersion > 0;
 
             for (name in prop) {
                 keys.push(name);
@@ -441,13 +445,18 @@
                     isCtor = true;
                 }
 
+                var member = prop[name];
                 if (isCtor) {
-                    Class[ctorName] = prop[name];
+                    Class[ctorName] = member;
                     Class[ctorName].prototype = prototype;
                     Class[ctorName].prototype.constructor = Class;
-                    prototype[ctorName] = prop[name];
+                    prototype[ctorName] = member;
                 } else {
-                    prototype[ctorName] = prop[name];
+                    prototype[ctorName] = member;
+                }
+
+                if (typeof member === "function" && name !== "$main") {
+                    Object.defineProperty(member, isFF ? "displayName" : "name", { value: className + "." + name, writable: true });
                 }
             }
 
@@ -459,10 +468,15 @@
 
             if (statics) {
                 for (name in statics) {
+                    var member = statics[name];
                     if (name === "ctor") {
-                        Class["$ctor"] = statics[name];
+                        Class["$ctor"] = member;
                     } else {
-                        Class[name] = statics[name];
+                        Class[name] = member;
+                    }
+
+                    if (typeof member === "function") {
+                        Object.defineProperty(member, isFF ? "displayName" : "name", { value: className + "." + name, writable: true });
                     }
                 }
             }
@@ -488,8 +502,11 @@
             };
 
             if (isEntryPoint || Bridge.isFunction(prototype.$main)) {
-                if (!Class.Main && prototype.$main) {
-                    Class.Main = prototype.$main;
+                if (prototype.$main) {
+                    var entryName = prototype.$main.name || "Main";
+                    if (!Class[entryName]) {
+                        Class[entryName] = prototype.$main;
+                    }
                 }
 
                 Bridge.Class.$queueEntry.push(Class);
@@ -543,6 +560,10 @@
             }
 
             return Class;
+        },
+
+        toCtorString: function() {
+            return Bridge.Reflection.getTypeName(this);
         },
 
         createInheritors: function(cls, extend) {
@@ -909,11 +930,11 @@
                 }
 
                 if (t.prototype.$main) {
-                    (function(cls) {
-                        Bridge.ready(function() {
-                             cls.Main();
+                    (function(cls, name) {
+                        Bridge.ready(function () {
+                             cls[name]();
                         });
-                    })(t);
+                    })(t, t.prototype.$main.name || "Main");
                     
                     t.prototype.$main = null;
                 }
