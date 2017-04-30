@@ -8189,6 +8189,7 @@ Bridge.$N1391Result =                     r;
                 $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1627.f1(new (System.Collections.Generic.List$1(System.String))()).forEach(function (s) {
                     result += s;
                 });
+
                 Bridge.Test.NUnit.Assert.AreEqual(result, "abc");
             }
         }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Bridge;
 using Bridge.Test.NUnit;
 
-[assembly: Reflectable("System.Console")]
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
@@ -16,6 +15,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             string result = "";
             new List<string> { "a", "b", "c" }.ForEach(s => result += s);
+
             Assert.AreEqual(result, "abc");
         }
     }
