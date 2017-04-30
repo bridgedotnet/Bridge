@@ -3770,7 +3770,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestFieldInitializer: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1390).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1390, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestFieldInitializer()", $t.Line = "24", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1390).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge1390, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestFieldInitializer()", $t.Line = "27", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge1390.TestFieldInitializer();
                 }
             }

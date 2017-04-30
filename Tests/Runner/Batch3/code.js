@@ -6489,7 +6489,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 d1: null,
                 d2: null,
                 ar1: null,
-                ar2: null
+                ar2: null,
+                order1: 0,
+                order2: 0
             },
             ctors: {
                 init: function () {
@@ -6503,6 +6505,8 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                     this.d2 = 6;
                     this.ar1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1390.ar2;
                     this.ar2 = System.Array.init([1], System.Int32);
+                    this.order1 = 8;
+                    this.order2 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1390.order1;
                 }
             },
             methods: {
@@ -6511,6 +6515,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                     Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getDefaultValue(), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1390.time);
                     Bridge.Test.NUnit.Assert.AreEqual(null, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1390.d1);
                     Bridge.Test.NUnit.Assert.AreEqual(null, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1390.ar1);
+                    Bridge.Test.NUnit.Assert.AreEqual(8, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1390.order2);
                 }
             }
         }

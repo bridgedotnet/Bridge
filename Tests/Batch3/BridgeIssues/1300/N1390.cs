@@ -21,6 +21,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         private static int[] ar1 = ar2;
         private static int[] ar2 = new int[] { 1 };
 
+        private static int order1 = 8;
+        private static int order2 = order1;
+
         [Test]
         public static void TestFieldInitializer()
         {
@@ -28,6 +31,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual(DateTime.MinValue, Bridge1390.time);
             Assert.AreEqual(null, Bridge1390.d1);
             Assert.AreEqual(null, Bridge1390.ar1);
+            Assert.AreEqual(8, Bridge1390.order2);
         }
     }
 }
