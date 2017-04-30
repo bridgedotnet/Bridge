@@ -19056,6 +19056,11 @@ Bridge.$N1391Result =                     r;
             fields: {
                 run: false
             },
+            ctors: {
+                init: function () {
+                    this.run = false;
+                }
+            },
             methods: {
                 TestEntryPointCustomName: function () {
                     var $t;
@@ -19240,9 +19245,16 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2614.X", {
         props: {
-            Id1: System.Int64(1),
-            Id2: System.UInt64(1),
-            Id3: System.Decimal(1)
+            Id1: System.Int64(0),
+            Id2: System.UInt64(0),
+            Id3: System.Decimal(0.0)
+        },
+        ctors: {
+            init: function () {
+                this.Id1 = System.Int64(1);
+                this.Id2 = System.UInt64(1);
+                this.Id3 = System.Decimal(1);
+            }
         }
     });
 
