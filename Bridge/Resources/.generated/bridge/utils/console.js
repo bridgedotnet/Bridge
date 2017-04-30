@@ -1,9 +1,9 @@
     Bridge.define("Bridge.Console", {
         statics: {
             fields: {
-                BODY_WRAPPER_ID: "bridge-body-wrapper",
-                CONSOLE_MESSAGES_ID: "bridge-console-messages",
-                position: "horizontal",
+                BODY_WRAPPER_ID: null,
+                CONSOLE_MESSAGES_ID: null,
+                position: null,
                 instance$1: null
             },
             props: {
@@ -15,6 +15,13 @@
 
                         return Bridge.Console.instance$1;
                     }
+                }
+            },
+            ctors: {
+                init: function () {
+                    this.BODY_WRAPPER_ID = "bridge-body-wrapper";
+                    this.CONSOLE_MESSAGES_ID = "bridge-console-messages";
+                    this.position = "horizontal";
                 }
             },
             methods: {
@@ -164,9 +171,9 @@
             }
         },
         fields: {
-            svgNS: "http://www.w3.org/2000/svg",
-            consoleHeight: "300px",
-            consoleHeaderHeight: "35px",
+            svgNS: null,
+            consoleHeight: null,
+            consoleHeaderHeight: null,
             tooltip: null,
             consoleWrap: null,
             consoleMessages: null,
@@ -178,12 +185,19 @@
             closeIconPath: null,
             consoleHeader: null,
             consoleBody: null,
-            hidden: true,
+            hidden: false,
             isNewLine: false,
             currentMessageElement: null,
             bufferedOutput: null
         },
         ctors: {
+            init: function () {
+                this.svgNS = "http://www.w3.org/2000/svg";
+                this.consoleHeight = "300px";
+                this.consoleHeaderHeight = "35px";
+                this.hidden = true;
+                this.isNewLine = false;
+            },
             ctor: function () {
                 this.$initialize();
                 this.init();

@@ -19,13 +19,18 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
     Bridge.define("Bridge.ClientTestHelper.HtmlHelper", {
         statics: {
             fields: {
-                TEST_FIXTURE_ELEMENT: "qunit-fixture"
+                TEST_FIXTURE_ELEMENT: null
             },
             props: {
                 FixtureElement: {
                     get: function () {
                         return document.getElementById(Bridge.ClientTestHelper.HtmlHelper.TEST_FIXTURE_ELEMENT);
                     }
+                }
+            },
+            ctors: {
+                init: function () {
+                    this.TEST_FIXTURE_ELEMENT = "qunit-fixture";
                 }
             }
         }

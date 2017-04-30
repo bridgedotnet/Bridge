@@ -87,7 +87,12 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
     Bridge.define("Bridge.Test.Runtime.ContextHelper", {
         statics: {
             fields: {
-                contextName: "BridgeTestContext"
+                contextName: null
+            },
+            ctors: {
+                init: function () {
+                    this.contextName = "BridgeTestContext";
+                }
             },
             methods: {
                 SetContext: function (assert, ctx) {
@@ -339,7 +344,12 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
         statics: {
             fields: {
                 assert: null,
-                stackOffset: 2
+                stackOffset: 0
+            },
+            ctors: {
+                init: function () {
+                    this.stackOffset = 2;
+                }
             },
             methods: {
                 SetStack: function (offset) {

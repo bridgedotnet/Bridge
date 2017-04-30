@@ -35,6 +35,19 @@ namespace Bridge.ClientTest.Batch1.Reflection
             }
         }
 
+        public sealed class A4 : Attribute
+        {
+            public A4(string id)
+            {
+                Id = id;
+            }
+
+            public string Id
+            {
+                get;
+            }
+        }
+
         private class C1
         {
             [A1(10), A2]
@@ -46,6 +59,15 @@ namespace Bridge.ClientTest.Batch1.Reflection
             public void DoSomething([A1(1000), A3(3000)] int i)
             {
             }
+        }
+
+        public enum E1
+        {
+            [A4("URL")]
+            Url = 0,
+
+            [A4("EMAIL")]
+            Email = 1,
         }
 
         [Test]
@@ -396,6 +418,21 @@ namespace Bridge.ClientTest.Batch1.Reflection
 
             Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes((ParameterInfo)null, null, true); });
             Assert.Throws<ArgumentNullException>(() => { Attribute.GetCustomAttributes(parameter1, null, true); });
+        }
+
+        [Test]
+        public void GetCustomAttributesForEnumMember()
+        {
+            Assert.True(IsEnum(E1.Url));
+            Assert.True(IsEnum(E1.Email));
+
+            Assert.True(E1.Url.GetType().IsEnum);
+            Assert.True(E1.Email.GetType().IsEnum);
+        }
+
+        public static bool IsEnum(Enum e)
+        {
+            return e.GetType().IsEnum;
         }
     }
 }

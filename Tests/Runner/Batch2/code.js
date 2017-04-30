@@ -1612,9 +1612,16 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
     Bridge.define("Bridge.ClientTest.Batch2.Constants", {
         statics: {
             fields: {
-                BATCH_NAME: "Batch2",
-                MODULE_ISSUES: "Issues2",
-                MODULE_CHECKED_UNCKECKED: "Checked/Unckecked"
+                BATCH_NAME: null,
+                MODULE_ISSUES: null,
+                MODULE_CHECKED_UNCKECKED: null
+            },
+            ctors: {
+                init: function () {
+                    this.BATCH_NAME = "Batch2";
+                    this.MODULE_ISSUES = "Issues2";
+                    this.MODULE_CHECKED_UNCKECKED = "Checked/Unckecked";
+                }
             }
         }
     });

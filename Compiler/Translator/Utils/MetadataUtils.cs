@@ -214,6 +214,11 @@ namespace Bridge.Translator
 
         public static bool IsReflectable(IMember member, IEmitter emitter, bool ifHasAttribute, SyntaxTree tree)
         {
+            if (member.IsExplicitInterfaceImplementation)
+            {
+                return false;
+            }
+
             if (member.Attributes.Any(a => a.AttributeType.FullName == "Bridge.NonScriptableAttribute"))
             {
                 return false;
@@ -332,6 +337,11 @@ namespace Bridge.Translator
 
         private static bool IsMemberReflectable(IMember member, MemberAccessibility[] memberReflectability)
         {
+            if (member.IsExplicitInterfaceImplementation)
+            {
+                return false;
+            }
+
             foreach (var memberAccessibility in memberReflectability)
             {
                 if (memberAccessibility == MemberAccessibility.All)

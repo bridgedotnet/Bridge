@@ -5746,7 +5746,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.DelegateTests", {
         fields: {
-            testField: 12
+            testField: 0
+        },
+        ctors: {
+            init: function () {
+                this.testField = 12;
+            }
         },
         methods: {
             TypePropertiesAreCorrect: function () {
@@ -6242,7 +6247,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.Exceptions.AggregateExceptionTests", {
         statics: {
             fields: {
-                DefaultMessage: "One or more errors occurred."
+                DefaultMessage: null
+            },
+            ctors: {
+                init: function () {
+                    this.DefaultMessage = "One or more errors occurred.";
+                }
             }
         },
         methods: {
@@ -6495,7 +6505,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.Exceptions.ArgumentExceptionTests", {
         statics: {
             fields: {
-                DefaultMessage: "Value does not fall within the expected range."
+                DefaultMessage: null
+            },
+            ctors: {
+                init: function () {
+                    this.DefaultMessage = "Value does not fall within the expected range.";
+                }
             }
         },
         methods: {
@@ -13687,6 +13702,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     });
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C11", {
+        fields: {
+            D: null
+        },
         ctors: {
             init: function () {
                 this.D = System.DateTime.getDefaultValue();
@@ -13705,7 +13723,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             }
         },
         fields: {
-            F1: 0
+            F1: 0,
+            renamedF2: null
         },
         ctors: {
             init: function () {
@@ -25182,7 +25201,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             }
         },
         fields: {
-            i: 0
+            i: 0,
+            N: null
         },
         events: {
             E: null
@@ -25377,6 +25397,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         fields: {
             I: 0,
             D: 0,
+            DT: null,
             O: null,
             T: 0
         },
@@ -25421,6 +25442,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         fields: {
             I: 0,
             D: 0,
+            DT: null,
             O: null,
             T: Bridge.getDefaultValue(TT)
         },

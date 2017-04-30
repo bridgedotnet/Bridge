@@ -2,11 +2,12 @@
         statics: {
             fields: {
                 isLittleEndian: false,
-                arg_ArrayPlusOffTooSmall: "Destination array is not long enough to copy all the items in the collection. Check array index and length."
+                arg_ArrayPlusOffTooSmall: null
             },
             ctors: {
                 init: function () {
                     this.isLittleEndian = System.BitConverter.getIsLittleEndian();
+                    this.arg_ArrayPlusOffTooSmall = "Destination array is not long enough to copy all the items in the collection. Check array index and length.";
                 }
             },
             methods: {

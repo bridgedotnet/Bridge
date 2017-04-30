@@ -24,7 +24,12 @@ alert("I'm header 1.0.0-beta");
         },
         $entryPoint: true,
         fields: {
-            _something: "HI!"
+            _something: null
+        },
+        ctors: {
+            init: function () {
+                this._something = "HI!";
+            }
         }
     });
 // -- remark with no tokens

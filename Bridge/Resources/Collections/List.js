@@ -350,6 +350,16 @@
                 }
 
                 return list;
+            },
+
+            forEach: function(action) {
+                if (action == null) {
+                    throw new System.ArgumentNullException("action");
+                }
+ 
+                for (var i = 0; i < this.items.length; i++) {
+                    action(this.items[i]);
+                }
             }
         };
     });

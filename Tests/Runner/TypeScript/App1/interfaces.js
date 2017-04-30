@@ -24,8 +24,8 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
     Bridge.define("Interfaces.Class1", {
         inherits: [Interfaces.Interface1],
         fields: {
-            Field: 200,
-            property: 100
+            Field: 0,
+            property: 0
         },
         props: {
             Property: {
@@ -39,7 +39,13 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         },
         alias: [
             "Property", "Interfaces$Interface1$Property"
-        ]
+        ],
+        ctors: {
+            init: function () {
+                this.Field = 200;
+                this.property = 100;
+            }
+        }
     });
 
     Bridge.define("Interfaces.Interface2", {
