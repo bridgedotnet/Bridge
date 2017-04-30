@@ -3,6 +3,9 @@ using Bridge;
 
 namespace System.Threading.Utils
 {
+	/// <summary>
+	/// External binding to the Worker HTML5 interface
+	/// </summary>
 	[External]
 	public class Worker
 	{
