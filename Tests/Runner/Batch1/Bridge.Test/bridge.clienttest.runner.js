@@ -5,7 +5,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
     
 
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner", {
-        Main: function () {
+        main: function Main() {
             Bridge.Test.Runtime.ContextHelper.Init();
             QUnit.module("[ObjectLiteral]");
             QUnit.test("Methods and properties - TestObjectLiteral", Bridge.Test.Runtime.BridgeClientTestRunner.Bridge1529.TestObjectLiteral);
