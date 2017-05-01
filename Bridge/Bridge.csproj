@@ -31,7 +31,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>CORE;DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>0</WarningLevel>
+    <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <NoStdLib>true</NoStdLib>
     <Prefer32Bit>false</Prefer32Bit>
@@ -43,7 +43,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>CORE;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>0</WarningLevel>
+    <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <NoStdLib>true</NoStdLib>
     <Prefer32Bit>false</Prefer32Bit>

@@ -26508,6 +26508,8 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                             var entryPointRef = System.Threading.Utils.WorkerThreadManager.getObjectRefFromString(window, startData.threadEntryPoint);
                             // Get the param from the message
                             var param = startData.threadParam;
+                            // Set the thread id
+                            System.Threading.Utils.WorkerThreadManager._threadId = startData.threadId;
                             // Try to call the function
                             try {
                                 // Call the function with the parameter, and get the result
@@ -26516,12 +26518,12 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                                 // Send the result back to the main thread
                                 System.Threading.Utils.WorkerThreadManager._worker.postMessage(Bridge.Json.serialize({ msgType: System.Threading.Utils.WorkerThreadManager.MessageType.Finish, data: { threadId: startData.threadId, result: Bridge.unbox(Bridge.unbox(result)) } }));
                             }
-                            catch (e) {
-                                e = System.Exception.create(e);
+                            catch ($e2) {
+                                $e2 = System.Exception.create($e2);
                                 // An exception occurred running the thread start function
                                 System.Threading.Utils.WorkerThreadManager._worker.postMessage(Bridge.Json.serialize({ msgType: System.Threading.Utils.WorkerThreadManager.MessageType.Exception, data: { threadId: startData.threadId } }));
                                 // Continue raising the exception in this thread so it is printed to the console
-                                throw e;
+                                throw $e2;
                             }
                             break;
                         default: 

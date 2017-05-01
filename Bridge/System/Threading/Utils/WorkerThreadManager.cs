@@ -89,7 +89,7 @@ namespace System.Threading.Utils
 			// Get the rest of the path after the first .
 			var s2 = bits.Slice(1).Join(".");
 			// Get the object referenced by the first part, and continue recursing with the next path reference
-			return GetObjectRefFromString(Script.Write<object>("o[s1]"), s2);
+			return GetObjectRefFromString(Script.Write<object>("o[s1]", s1), s2);
 		}
 
 		/// <summary>
@@ -146,6 +146,9 @@ namespace System.Threading.Utils
 					// Get the param from the message
 					var param = startData.ThreadParam;
 
+					// Set the thread id
+					_threadId = startData.ThreadId;
+
 					// Try to call the function
 					try
 					{
@@ -174,7 +177,7 @@ namespace System.Threading.Utils
 							)
 						);
 					}
-					catch (Exception e)
+					catch (Exception)
 					{
 						// An exception occurred running the thread start function
 						_worker.PostMessage(
