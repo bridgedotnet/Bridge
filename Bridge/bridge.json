@@ -93,17 +93,12 @@
         "Resources/.generated/system/random.js",
         "Resources/.generated/system/bitConverter.js",
         "Resources/.generated/system/threading/timer.js",
-<<<<<<< HEAD
         "Resources/.generated/system/console.js",
-=======
-        "Resources/.generated/bridge/utils/console.js",
->>>>>>> ab3209ca4eac8b376a91f6c5acf790d9d4e3b56a
 		"Resources/.generated/system/threading/utils/workerThreadManager.js",
 		"Resources/.generated/system/threading/utils/workerThreadManager/messageType.js",
 		"Resources/.generated/system/threading/thread.js",
         "Resources/.auxiliary/End.js",
         "Resources/.auxiliary/Finally.js",
-<<<<<<< HEAD
       ]
     },
     {
@@ -114,8 +109,6 @@
         "Resources/.auxiliary/AssemblyBegin.js",
         "Resources/.generated/bridge/utils/console.js",
         "Resources/.auxiliary/AssemblyEnd.js"
-=======
->>>>>>> ab3209ca4eac8b376a91f6c5acf790d9d4e3b56a
       ]
     },
     {
