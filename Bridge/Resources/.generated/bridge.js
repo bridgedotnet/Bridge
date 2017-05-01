@@ -26422,69 +26422,6 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     });
 
-<<<<<<< HEAD
-=======
-    Bridge.ns("Bridge.Console", $asm.$);
-
-    Bridge.apply($asm.$.Bridge.Console, {
-        f1: function (_o1) {
-            _o1.add("position", "fixed");
-            _o1.add("left", "0");
-            _o1.add("bottom", "0");
-            _o1.add("padding-top", this.consoleHeaderHeight);
-            _o1.add("background-color", "#fff");
-            _o1.add("font", "normal normal normal 13px/1 sans-serif");
-            _o1.add("color", "#555");
-            return _o1;
-        },
-        f2: function (_o2) {
-            _o2.add("position", "absolute");
-            _o2.add("top", "0");
-            _o2.add("left", "0");
-            _o2.add("right", "0");
-            _o2.add("height", "35px");
-            _o2.add("padding", "9px 15px 7px 10px");
-            _o2.add("border-bottom", "1px solid #ccc");
-            _o2.add("background-color", "#f3f3f3");
-            _o2.add("box-sizing", "border-box");
-            return _o2;
-        },
-        f3: function (_o3) {
-            _o3.add("overflow-x", "auto");
-            _o3.add("font-family", "Menlo, Monaco, Consolas, 'Courier New', monospace");
-            return _o3;
-        },
-        f4: function (_o4) {
-            _o4.add("xmlns", this.svgNS);
-            _o4.add("width", "25.5");
-            _o4.add("height", "14.4");
-            _o4.add("viewBox", "0 0 25.5 14.4");
-            _o4.add("style", "margin: 0 3px 3px 0;vertical-align:middle;");
-            return _o4;
-        },
-        f5: function (_o5) {
-            _o5.add("xmlns", this.svgNS);
-            _o5.add("width", "11.4");
-            _o5.add("height", "11.4");
-            _o5.add("viewBox", "0 0 11.4 11.4");
-            _o5.add("style", "vertical-align: middle;");
-            return _o5;
-        },
-        f6: function (_o6) {
-            _o6.add("d", "M11.4 1.4L10 0 5.7 4.3 1.4 0 0 1.4l4.3 4.3L0 10l1.4 1.4 4.3-4.3 4.3 4.3 1.4-1.4-4.3-4.3");
-            _o6.add("fill", "#555");
-            return _o6;
-        },
-        f7: function (_o7) {
-            _o7.add("xmlns", this.svgNS);
-            _o7.add("width", "3.9");
-            _o7.add("height", "6.7");
-            _o7.add("viewBox", "0 0 3.9 6.7");
-            _o7.add("style", "margin-right: 7px; vertical-align: middle;");
-            return _o7;
-        }
-    });
-
     // @source workerThreadManager.js
 
     Bridge.define("System.Threading.Utils.WorkerThreadManager", {
@@ -26493,6 +26430,11 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 _isWebWorker: false,
                 _worker: null,
                 _threadId: 0
+            },
+            ctors: {
+                init: function () {
+                    this._isWebWorker = false;
+                }
             },
             methods: {
                 isWebWorker: function () {
@@ -26895,5 +26837,5 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 // http://stackoverflow.com/a/18002694
 if (typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope) {
 	// Call the web worker manager entry point
-    System.Threading.Utils.WorkerThreadManager.workerThreadManagerEntryPoint();
+    Bridge.init(System.Threading.Utils.WorkerThreadManager.workerThreadManagerEntryPoint);
 }

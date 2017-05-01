@@ -5,6 +5,11 @@
                 _worker: null,
                 _threadId: 0
             },
+            ctors: {
+                init: function () {
+                    this._isWebWorker = false;
+                }
+            },
             methods: {
                 isWebWorker: function () {
                     // Return the web worker status
