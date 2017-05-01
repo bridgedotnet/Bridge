@@ -11,8 +11,6 @@
 Compile your C#...
 
 ```csharp
-using System;
-
 class Program
 {
     static void Main(string[] args)
@@ -27,18 +25,13 @@ class Program
 into JavaScript
 
 ```js
-Bridge.assembly("Demo", function ($asm, globals) {
-    "use strict";
+Bridge.define("Program", {
+    main: function Main(args) {
+        var msg = "Hello, world!";
 
-    Bridge.define("Program", {
-        main: function Main(args) {
-            var msg = "Hello, world!";
-
-            System.Console.WriteLine(msg);
-        }
-    });
+        System.Console.WriteLine(msg);
+    }
 });
-
 ```
 
 Run the sample above at [Deck.NET](http://deck.net/5c58693ae7b44ac969f576545cac7f0c).
