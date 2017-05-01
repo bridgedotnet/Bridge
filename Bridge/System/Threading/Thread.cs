@@ -61,7 +61,7 @@ namespace System.Threading
 		/// Used internally by System.Threading.Thread to get the bridge.js file to load System.Threading.Utils.WorkerThreadManager in a web worker.
 		/// </summary>
 		/// <returns>The current js file path (As a fully formed Uri).</returns>
-		public static string GetCurrentJsFilePath()
+		public static string GetCurrentJsFileUri()
 		{
 			// Need to create a stack trace so we can break down the files in the stack trace and work out which file called us
 			try
@@ -77,11 +77,11 @@ namespace System.Threading
 				var stackLines = stack.Split('\n').Where(e => e.Contains("@") || e.Contains("at"));
 				// Next we skip over the first two lines in the stack trace, since the first line is "Error" and the second line is this javascript file where the exception occurred
 				foreach (var line in stackLines.Skip(1))
-              	{
+				{
 					// Next we sprit the string up and extract the file name from the line, file name is inside brackets, but also includes the line and column, so we need to extract between ( and :
 					if (line.Contains("://") && line.Contains(".js"))
-                  	{
-						var s = line.Split(new[] { '(', '@' }).Last().Split(new[] { ".js:" }, StringSplitOptions.None).First() + ".js";
+					{
+						var s = line.Split(new[] { '(', '@' }, 2).Last().Split(new[] { ".js:" }, StringSplitOptions.None).First() + ".js";
 						// Remove leading or trailing whitespace
 						s = s.Trim();
 						// Sometimes the line will start with "at ", so we need to check and remove
@@ -89,11 +89,11 @@ namespace System.Threading
 							s = s.Substring(2);
 						// Return the result
 						return s.Trim();
-                  	}
-              	}
+					}
+				}
 			}
 			// Should never get here
-			return null;
+			throw new InvalidOperationException("Unable to get the Uri of the current javascript file");
 		}
 
 		/// <summary>
@@ -110,7 +110,7 @@ namespace System.Threading
 			try
 			{
 				// Create the web worker loading the bridge.js runtime
-				_worker = new Worker(GetCurrentJsFilePath());
+				_worker = new Worker(GetCurrentJsFileUri());
 
 				// Set the message handler to handle messages from the worker
 				_worker.OnMessage = HandleMessage;

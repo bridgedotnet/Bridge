@@ -5,7 +5,7 @@
                 _globalThreadIdCounter: 0
             },
             methods: {
-                getCurrentJsFilePath: function () {
+                getCurrentJsFileUri: function () {
                     var $t;
                     // Need to create a stack trace so we can break down the files in the stack trace and work out which file called us
                     try {
@@ -28,7 +28,7 @@
                                     var line = $t.Current;
                                     // Next we sprit the string up and extract the file name from the line, file name is inside brackets, but also includes the line and column, so we need to extract between ( and :
                                     if (System.String.contains(line,"://") && System.String.contains(line,".js")) {
-                                        var s = System.String.concat(System.Linq.Enumerable.from(System.String.split(System.Linq.Enumerable.from(System.String.split(line, System.Array.init([40, 64], System.Char).map(function(i) {{ return String.fromCharCode(i); }}))).last(), System.Array.init([".js:"], System.String), null, 0)).first(), ".js");
+                                        var s = System.String.concat(System.Linq.Enumerable.from(System.String.split(System.Linq.Enumerable.from(System.String.split(line, System.Array.init([40, 64], System.Char).map(function(i) {{ return String.fromCharCode(i); }}), 2)).last(), System.Array.init([".js:"], System.String), null, 0)).first(), ".js");
                                         // Remove leading or trailing whitespace
                                         s = s.trim();
                                         // Sometimes the line will start with "at ", so we need to check and remove
@@ -48,7 +48,7 @@
                         }
                     }
                     // Should never get here
-                    return null;
+                    throw new System.InvalidOperationException("Unable to get the Uri of the current javascript file");
                 }
             }
         },
@@ -96,7 +96,7 @@
                 // Try to create a web worker
                 try {
                     // Create the web worker loading the bridge.js runtime
-                    this._worker = new Worker(System.Threading.Thread.getCurrentJsFilePath());
+                    this._worker = new Worker(System.Threading.Thread.getCurrentJsFileUri());
 
                     // Set the message handler to handle messages from the worker
                     this._worker.onmessage = Bridge.fn.cacheBind(this, this.handleMessage);
