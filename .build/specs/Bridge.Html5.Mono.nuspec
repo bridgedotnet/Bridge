@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
   <metadata minClientVersion="2.5">
-    <id>Bridge.Contract</id>
+    <id>Bridge.Html5</id>
     <version>0.0.0</version>
-    <title>Bridge.NET</title>
+    <title>Html5 for Bridge.NET</title>
     <authors>Object.NET, Inc.</authors>
     <iconUrl>http://speed.bridge.net/identity/bridgedotnet-100x100.png</iconUrl>
     <owners />
@@ -15,19 +15,18 @@
     <copyright>Copyright (c) 2008-2017, Object.NET, Inc. (http://object.net/). All rights reserved.</copyright>
     <tags>bridge bridge.net bridge js javascript C# csharp mobile ios asp.net aspnet mvc aspnetmvc web transpiler compiler object.net</tags>
     <dependencies>
-      <dependency id="Bridge.NRefactory" version="5.5.5" />
-      <dependency id="Mono.Cecil" version="0.9.6.1" />
-      <dependency id="Newtonsoft.Json" version="10.0.1" />
-      <dependency id="Object.NET.Utilities" version="2.5.0" />
+      <dependency id="Bridge.Core" version="16.0.0-beta" />
     </dependencies>
     <frameworkAssemblies>
     </frameworkAssemblies>
   </metadata>
   <files>
+    <file src="../../README.md" target="README.md" />
     <file src="../../LICENSE.md" target="LICENSE.md" />
 
     <!--NET40-->
-    <file src="../../Compiler/Contract/bin/Release/Bridge.Contract.dll" target="lib/net40/Bridge.Contract.dll" />
-    <!--<file src="../../Compiler/Contract/bin/Release/Bridge.Contract.dll.mdb" target="lib/net40/pdb/Bridge.Contract.dll.mdb" />-->
+    <file src="../../Html5/bin/Release/Bridge.Html5.dll" target="lib/net40/Bridge.Html5.dll" />
+    <file src="../../Html5/bin/Release/Bridge.Html5.xml" target="lib/net40/Bridge.Html5.xml" />
+    <!--<file src="../../Html5/bin/Release/Bridge.Html5.dll.mdb" target="lib/net40/pdb/Bridge.Html5.dll.mdb" />-->
   </files>
 </package>
