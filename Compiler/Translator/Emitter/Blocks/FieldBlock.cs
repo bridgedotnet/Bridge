@@ -246,7 +246,6 @@ namespace Bridge.Translator
                 if (!isNull && (!isPrimitive || constValue is AstType || tpl != null) && !(isProperty && !IsObjectLiteral && !isAutoProperty))
                 {
                     string value = null;
-                    bool needContinue = false;
                     string defValue = "";
                     if (!isPrimitive)
                     {
@@ -274,13 +273,7 @@ namespace Bridge.Translator
                             constValue = Helpers.GetEnumValue(this.Emitter, rr.Type, constValue);
                         }
                         isNullable = NullableType.IsNullable(rr.Type);
-                        needContinue = constValue is IType;
                         writeScript = true;
-
-                        /*if (needContinue && !(member.Initializer is ObjectCreateExpression))
-                        {
-                            defValue = " || " + Inspector.GetStructDefaultValue((IType)constValue, this.Emitter);
-                        }*/
                     }
                     else if (constValue is AstType)
                     {
@@ -289,7 +282,6 @@ namespace Bridge.Translator
                             : Inspector.GetStructDefaultValue((AstType)constValue, this.Emitter);
                         constValue = value;
                         write = true;
-                        needContinue = !isProperty && !isNullable;
                     }
 
                     var name = member.GetName(this.Emitter);

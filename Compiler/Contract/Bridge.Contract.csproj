@@ -165,8 +165,7 @@
   </PropertyGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <NuGetPackageSourcePath Include="$(SolutionDir).build\specs\Bridge.Contract.nuspec">
-      <Path Condition="'$(OS)' == 'Windows_NT'">$(SolutionDir).build\specs\Bridge.Contract.nuspec</Path>
-      <Path Condition="'$(OS)' != 'Windows_NT'">$(SolutionDir).build\specs\Bridge.Contract.Mono.nuspec</Path>
+      <Path>$(SolutionDir).build\specs\Bridge.Contract.nuspec</Path>
     </NuGetPackageSourcePath>
   </ItemGroup>
   <ItemGroup />

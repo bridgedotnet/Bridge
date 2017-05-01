@@ -20,14 +20,12 @@
       <dependency id="Newtonsoft.Json" version="10.0.1" />
       <dependency id="Object.NET.Utilities" version="2.5.0" />
     </dependencies>
-    <frameworkAssemblies>
-    </frameworkAssemblies>
   </metadata>
   <files>
     <file src="../../LICENSE.md" target="LICENSE.md" />
 
     <!--NET40-->
     <file src="../../Compiler/Contract/bin/Release/Bridge.Contract.dll" target="lib/net40/Bridge.Contract.dll" />
-    <file src="../../Compiler/Contract/bin/Release/Bridge.Contract.dll.mdb" target="lib/net40/pdb/Bridge.Contract.dll.mdb" />
+    <!--file src="../../Compiler/Contract/bin/Release/Bridge.Contract.pdb" target="lib/net40/pdb/Bridge.Contract.pdb" /-->
   </files>
 </package>

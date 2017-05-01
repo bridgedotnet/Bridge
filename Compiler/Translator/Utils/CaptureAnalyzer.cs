@@ -223,7 +223,6 @@ namespace Bridge.Translator
         {
             if (this._usedVariables.Count == 0)
             {
-                var rr = this.emitter.Resolver.ResolveNode(expression, this.emitter);
                 var conversion = this.emitter.Resolver.Resolver.GetConversion(expression);
                 if (conversion != null && conversion.Method != null)
                 {
