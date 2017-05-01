@@ -26866,6 +26866,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             },
             methods: {
                 getCurrentJsFilePath: function () {
+                    var $t;
                     // Need to create a stack trace so we can break down the files in the stack trace and work out which file called us
                     try {
                         // Raise a new basic javascript error
@@ -26879,18 +26880,34 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                             // Catch the error and get the stack trace from the error
                             var stack = Bridge.cast(error.error.stack, System.String);
                             // Split the stack trace in to lines
-                            var stackLines = System.String.split(stack, [10].map(function(i) {{ return String.fromCharCode(i); }}));
+                            var stackLines = System.Linq.Enumerable.from(System.String.split(stack, [10].map(function(i) {{ return String.fromCharCode(i); }}))).where($asm.$.System.Threading.Thread.f1);
                             // Next we skip over the first two lines in the stack trace, since the first line is "Error" and the second line is this javascript file where the exception occurred
-                            var line = System.Linq.Enumerable.from(stackLines).skip(2).first();
-                            // Next we sprit the string up and extract the file name from the line, file name is inside brackets, but also includes the line and column, so we need to extract between ( and :
-                            var result = System.String.concat(System.Linq.Enumerable.from(System.String.split(System.Linq.Enumerable.from(System.String.split(line, [40].map(function(i) {{ return String.fromCharCode(i); }}))).last(), System.Array.init([".js:"], System.String), null, 0)).first(), ".js");
-                            // Return the result
-                            return result;
-                        } else {
+                            $t = Bridge.getEnumerator(stackLines.skip(1));
+                            try {
+                                while ($t.moveNext()) {
+                                    var line = $t.Current;
+                                    // Next we sprit the string up and extract the file name from the line, file name is inside brackets, but also includes the line and column, so we need to extract between ( and :
+                                    if (System.String.contains(line,"://") && System.String.contains(line,".js")) {
+                                        var s = System.String.concat(System.Linq.Enumerable.from(System.String.split(System.Linq.Enumerable.from(System.String.split(line, System.Array.init([40, 64], System.Char).map(function(i) {{ return String.fromCharCode(i); }}))).last(), System.Array.init([".js:"], System.String), null, 0)).first(), ".js");
+                                        // Remove leading or trailing whitespace
+                                        s = s.trim();
+                                        // Sometimes the line will start with "at ", so we need to check and remove
+                                        if (System.String.startsWith(s, "at")) {
+                                            s = s.substr(2);
+                                        }
+                                        // Return the result
+                                        return s.trim();
+                                    }
+                                }
+                            }finally {
+                                if (Bridge.is($t, System.IDisposable)) {
+                                    $t.System$IDisposable$dispose();
+                                }
+                            }} else {
                             throw $e1;
                         }
                     }
-                    // Never gets here, but all code paths must return a value
+                    // Should never get here
                     return null;
                 }
             }
@@ -27099,6 +27116,14 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     this._isDead = true;
                 }
             }
+        }
+    });
+
+    Bridge.ns("System.Threading.Thread", $asm.$);
+
+    Bridge.apply($asm.$.System.Threading.Thread, {
+        f1: function (e) {
+            return System.String.contains(e,"@") || System.String.contains(e,"at");
         }
     });
 
