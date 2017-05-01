@@ -9,10 +9,10 @@ Bridge.$MyPerson2189 = function(name){
 
 /**
  * Bridge Test library - test github issues up to #1999
- * @version 16.0.0
+ * @version 16.0.0-beta
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2017 Object.NET, Inc.
- * @compiler Bridge.NET 16.0.0
+ * @compiler Bridge.NET 16.0.0-beta
  */
 Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     "use strict";

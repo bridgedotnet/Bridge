@@ -34,12 +34,12 @@ Bridge.define("Program", {
 });
 ```
 
-Run the sample above at [Deck.NET](http://deck.net/5c58693ae7b44ac969f576545cac7f0c).
+Run the sample above at [Deck.NET](https://deck.net/5c58693ae7b44ac969f576545cac7f0c).
 
 ## TL;DR
 
 * Read the [Getting Started](https://github.com/bridgedotnet/Bridge/wiki) Knowledge Base article
-* Try [Deck](http://deck.net/) if you want to play
+* Try [Deck](https://deck.net/) if you want to play
 * Installation:
   * Add **Bridge.NET** Visual Studio extension, or 
   * Use [NuGet](https://www.nuget.org/packages/bridge) to install into a C# Class Library project (`Install-Package Bridge`), or
@@ -61,7 +61,7 @@ The easiest place to see Bridge in action is [Deck.NET](https://deck.net/).
 
 The following code sample demonstrates a simple **App.cs** class that will run automatically on page load and write a message to the Bridge Console.
 
-**Example ([Deck](http://deck.net/7fb39e336182bea04c695ab43379cd8c))**
+**Example ([Deck](https://deck.net/7fb39e336182bea04c695ab43379cd8c))**
 
 ```csharp
 public class Program

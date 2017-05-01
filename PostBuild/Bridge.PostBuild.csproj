@@ -81,7 +81,8 @@ mono "$(SolutionDir)Compiler/Builder/$(OutDir)bridge.exe" -p "$(SolutionDir)Brid
   </PropertyGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <NuGetPackageSourcePath Include="$(SolutionDir).build\specs\Bridge.Core.nuspec">
-      <Path>$(SolutionDir).build\specs\Bridge.Core.nuspec</Path>
+      <Path Condition="'$(OS)' == 'Windows_NT'">$(SolutionDir).build\specs\Bridge.Core.nuspec</Path>
+      <Path Condition="'$(OS)' != 'Windows_NT'">$(SolutionDir).build\specs\Bridge.Core.Mono.nuspec</Path>
     </NuGetPackageSourcePath>
   </ItemGroup>
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
