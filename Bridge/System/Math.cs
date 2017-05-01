@@ -26,6 +26,8 @@ namespace System
 
         public static extern int Max(params uint[] values);
 
+        public static extern float Max(params float[] values);
+
         public static extern double Max(params double[] values);
 
         [Template("System.Int64.max({*values})")]
@@ -40,6 +42,8 @@ namespace System
         public static extern int Min(params int[] values);
 
         public static extern int Min(params uint[] values);
+
+        public static extern float Min(params float[] value);
 
         public static extern double Min(params double[] values);
 
@@ -62,7 +66,12 @@ namespace System
         [Name("ceil")]
         public static extern double Ceiling(double d);
 
+        [Name("ceil")]
+        public static extern float Ceiling(float f);
+
         public static extern double Floor(double x);
+
+        public static extern float Floor(float f);
 
         [Template("{d}.floor()")]
         public static extern decimal Floor(decimal d);
@@ -73,6 +82,9 @@ namespace System
         [Template("Bridge.Math.round({d}, 0, 6)")]
         public static extern double Round(double d);
 
+        [Template("Bridge.Math.round({d}, 0, 6)")]
+        public static extern float Round(float f);
+
         [Template("Math.round({d})")]
         public static extern double JsRound(double d);
 
@@ -82,11 +94,17 @@ namespace System
         [Template("Bridge.Math.round({d}, {digits}, 6)")]
         public static extern double Round(double d, int digits);
 
+        [Template("Bridge.Math.round({d}, {digits}, 6)")]
+        public static extern float Round(float f, int digits);
+
         [Template("System.Decimal.round({d}, {method})")]
         public static extern decimal Round(decimal d, MidpointRounding method);
 
         [Template("Bridge.Math.round({d}, 0, {method})")]
         public static extern double Round(double d, MidpointRounding method);
+
+        [Template("Bridge.Math.round({d}, 0, {method})")]
+        public static extern float Round(float f, MidpointRounding method);
 
         [Template("System.Decimal.toDecimalPlaces({d}, {digits}, {method})")]
         public static extern decimal Round(decimal d, int digits, MidpointRounding method);
@@ -94,10 +112,15 @@ namespace System
         [Template("Bridge.Math.round({d}, {digits}, {method})")]
         public static extern double Round(double d, int digits, MidpointRounding method);
 
+        [Template("Bridge.Math.round({d}, {digits}, {method})")]
+        public static extern float Round(float f, int digits, MidpointRounding method);
+
         [Template("{x} - ({y} * Math.round({x} / {y}))")]
         public static extern double IEEERemainder(double x, double y);
 
         public static extern double Exp(double x);
+
+        public static extern double Exp(float x);
 
         [Template("{x}.exponential()")]
         public static extern decimal Exp(decimal x);
@@ -114,26 +137,49 @@ namespace System
         [Template("{x}.pow({y})")]
         public static extern decimal Pow(decimal x, decimal y);
 
+        [Template("{x}.sqrt()")]
+        public static extern decimal Sqrt(decimal x);
+
+        public static extern double Log(float x);
+
         public static extern double Pow(double x, double y);
 
         public static extern double Pow(int x, int y);
 
+        public static extern double Pow(float x, float y);
+
         public static extern double Acos(double x);
+
+        public static extern double Acos(float x);
 
         public static extern double Asin(double x);
 
+        public static extern double Asin(float x);
+
         public static extern double Atan(double x);
+
+        public static extern double Atan(float f);
 
         public static extern double Atan2(double y, double x);
 
+        public static extern double Atan2(float y, float x);
+
         public static extern double Cos(double x);
+
+        public static extern double Cos(float f);
 
         public static extern double Sin(double x);
 
+        public static extern double Sin(float x);
+
         public static extern double Tan(double x);
+
+        public static extern double Tan(float f);
 
         [Template("Bridge.Int.trunc({d})")]
         public static extern double Truncate(double d);
+
+        public static extern float Truncate(float f);
 
         [Template("{d}.trunc()")]
         public static extern decimal Truncate(decimal d);
