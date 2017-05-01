@@ -74,15 +74,25 @@ namespace System.Threading
 				// Catch the error and get the stack trace from the error
 				var stack = (string)((dynamic)error).error.stack;
 				// Split the stack trace in to lines
-				var stackLines = stack.Split('\n');
+				var stackLines = stack.Split('\n').Where(e => e.Contains("@") || e.Contains("at"));
 				// Next we skip over the first two lines in the stack trace, since the first line is "Error" and the second line is this javascript file where the exception occurred
-				var line = stackLines.Skip(2).First();
-				// Next we sprit the string up and extract the file name from the line, file name is inside brackets, but also includes the line and column, so we need to extract between ( and :
-				var result = line.Split('(').Last().Split(new[] { ".js:" }, StringSplitOptions.None).First() + ".js";
-				// Return the result
-				return result;
+				foreach (var line in stackLines.Skip(1))
+              	{
+					// Next we sprit the string up and extract the file name from the line, file name is inside brackets, but also includes the line and column, so we need to extract between ( and :
+					if (line.Contains("://") && line.Contains(".js"))
+                  	{
+						var s = line.Split(new[] { '(', '@' }).Last().Split(new[] { ".js:" }, StringSplitOptions.None).First() + ".js";
+						// Remove leading or trailing whitespace
+						s = s.Trim();
+						// Sometimes the line will start with "at ", so we need to check and remove
+						if (s.StartsWith("at"))
+							s = s.Substring(2);
+						// Return the result
+						return s.Trim();
+                  	}
+              	}
 			}
-			// Never gets here, but all code paths must return a value
+			// Should never get here
 			return null;
 		}
 
