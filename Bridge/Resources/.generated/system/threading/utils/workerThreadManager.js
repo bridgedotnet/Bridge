@@ -5,11 +5,14 @@
                 _worker: null,
                 _threadId: 0
             },
+<<<<<<< HEAD
             ctors: {
                 init: function () {
                     this._isWebWorker = false;
                 }
             },
+=======
+>>>>>>> ab3209ca4eac8b376a91f6c5acf790d9d4e3b56a
             methods: {
                 isWebWorker: function () {
                     // Return the web worker status
