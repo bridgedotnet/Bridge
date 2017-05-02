@@ -419,7 +419,7 @@
     <Compile Include="Bridge\Union.cs" />
     <Compile Include="System\Tuple.cs" />
     <Compile Include="System\Void.cs" />
-    <Compile Include="System\Threading\Utils\Worker.cs" />
+    <Compile Include="Internal\Html5\Worker\Worker.cs" />
     <Compile Include="System\Threading\Utils\WorkerThreadManager.cs" />
   </ItemGroup>
   <ItemGroup>

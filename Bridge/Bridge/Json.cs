@@ -34,7 +34,7 @@ namespace Bridge
         /// <param name="value">The raw object to parse</param>
         /// <param name="settings">Serializer settings</param>
         /// <returns>The Object corresponding to the given JSON text.</returns>
-        [Template("Bridge.Json.deserialize({value}, {T})")]
+        [Template("Bridge.Json.deserialize({value}, {T}, {settings})")]
         public static extern T Deserialize<T>(object value, JsonSettings settings);
 
         [Template("Bridge.Json.deserialize({value}, Bridge.getType({anonymousTypeObject}))")]

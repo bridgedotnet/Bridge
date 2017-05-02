@@ -3,11 +3,25 @@
             fields: {
                 _isWebWorker: false,
                 _worker: null,
-                _threadId: 0
+                _threadId: 0,
+                MessageTypeLoadScripts: 0,
+                MessageTypeStart: 0,
+                MessageTypeFinish: 0,
+                MessageTypeException: 0,
+                MessageTypeScriptLoadException: 0,
+                MessageTypeMessage: 0
+            },
+            events: {
+                OnMessage: null
             },
             ctors: {
                 init: function () {
-                    this._isWebWorker = false;
+                    this.MessageTypeLoadScripts = 0;
+                    this.MessageTypeStart = 1;
+                    this.MessageTypeFinish = 2;
+                    this.MessageTypeException = 3;
+                    this.MessageTypeScriptLoadException = 4;
+                    this.MessageTypeMessage = 5;
                 }
             },
             methods: {
@@ -47,35 +61,37 @@
                 handleMessage: function (arg) {
                     var $t;
                     // Deserialise the message
-                    var msg = Bridge.Json.deserialize(Bridge.unbox(arg.data), System.Object);
+                    var msg = arg.data;
                     // Process the message
                     switch (msg.msgType) {
-                        case System.Threading.Utils.WorkerThreadManager.MessageType.LoadScripts: 
+                        case System.Threading.Utils.WorkerThreadManager.MessageTypeLoadScripts: 
                             // The data is an array of strings representing the Uris of the scripts to load
-                            var scripts = Bridge.cast(msg.data, System.Array.type(System.String));
+                            var scripts = Bridge.as(msg.data, System.Array.type(System.String));
                             // Iterate over each script in order and load it in to the web worker
-                            $t = Bridge.getEnumerator(scripts);
-                            try {
-                                while ($t.moveNext()) {
-                                    var s = $t.Current;
-                                    // Try to import the script
-                                    try {
-                                        // Import the script
-                                        importScripts(s);
+                            if (scripts != null) {
+                                $t = Bridge.getEnumerator(scripts);
+                                try {
+                                    while ($t.moveNext()) {
+                                        var s = $t.Current;
+                                        // Try to import the script
+                                        try {
+                                            // Import the script
+                                            importScripts(s);
+                                        }
+                                        catch ($e1) {
+                                            $e1 = System.Exception.create($e1);
+                                            // An exception occurred trying to load the script
+                                            // Send a script load exception message back to the main thread
+                                            System.Threading.Utils.WorkerThreadManager._worker.postMessage({ msgType: System.Threading.Utils.WorkerThreadManager.MessageTypeScriptLoadException, data: s });
+                                        }
                                     }
-                                    catch ($e1) {
-                                        $e1 = System.Exception.create($e1);
-                                        // An exception occurred trying to load the script
-                                        // Send a script load exception message back to the main thread
-                                        System.Threading.Utils.WorkerThreadManager._worker.postMessage(Bridge.Json.serialize({ msgType: System.Threading.Utils.WorkerThreadManager.MessageType.ScriptLoadException, data: s }));
+                                }finally {
+                                    if (Bridge.is($t, System.IDisposable)) {
+                                        $t.System$IDisposable$dispose();
                                     }
-                                }
-                            }finally {
-                                if (Bridge.is($t, System.IDisposable)) {
-                                    $t.System$IDisposable$dispose();
-                                }
-                            }break;
-                        case System.Threading.Utils.WorkerThreadManager.MessageType.Start: 
+                                }}
+                            break;
+                        case System.Threading.Utils.WorkerThreadManager.MessageTypeStart: 
                             // Cast the message data to a WebWorkerStartMessage
                             var startData = msg.data;
                             // Get the function pointer of the thread entry point to call
@@ -90,19 +106,26 @@
                                 var result = entryPointRef(param);
 
                                 // Send the result back to the main thread
-                                System.Threading.Utils.WorkerThreadManager._worker.postMessage(Bridge.Json.serialize({ msgType: System.Threading.Utils.WorkerThreadManager.MessageType.Finish, data: { threadId: startData.threadId, result: Bridge.unbox(Bridge.unbox(result)) } }));
+                                System.Threading.Utils.WorkerThreadManager._worker.postMessage({ msgType: System.Threading.Utils.WorkerThreadManager.MessageTypeFinish, data: { threadId: startData.threadId, result: result } });
                             }
                             catch ($e2) {
                                 $e2 = System.Exception.create($e2);
                                 // An exception occurred running the thread start function
-                                System.Threading.Utils.WorkerThreadManager._worker.postMessage(Bridge.Json.serialize({ msgType: System.Threading.Utils.WorkerThreadManager.MessageType.Exception, data: { threadId: startData.threadId } }));
+                                System.Threading.Utils.WorkerThreadManager._worker.postMessage({ msgType: System.Threading.Utils.WorkerThreadManager.MessageTypeException, data: { threadId: startData.threadId } });
                                 // Continue raising the exception in this thread so it is printed to the console
                                 throw $e2;
                             }
                             break;
+                        case System.Threading.Utils.WorkerThreadManager.MessageTypeMessage: 
+                            !Bridge.staticEquals(System.Threading.Utils.WorkerThreadManager.OnMessage, null) ? System.Threading.Utils.WorkerThreadManager.OnMessage(msg.data) : null;
+                            break;
                         default: 
                             throw new System.ArgumentOutOfRangeException();
                     }
+                },
+                postMessage: function (msg) {
+                    // Send the result back to the main thread
+                    System.Threading.Utils.WorkerThreadManager._worker.postMessage({ msgType: System.Threading.Utils.WorkerThreadManager.MessageTypeMessage, data: msg });
                 }
             }
         }

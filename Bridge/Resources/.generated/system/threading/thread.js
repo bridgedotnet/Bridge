@@ -4,6 +4,13 @@
             fields: {
                 _globalThreadIdCounter: 0
             },
+            props: {
+                CurrentThread: {
+                    get: function () {
+                        return new System.Threading.Thread.ctor();
+                    }
+                }
+            },
             methods: {
                 getCurrentJsFileUri: function () {
                     var $t;
@@ -53,11 +60,13 @@
             }
         },
         fields: {
-            _result: null,
             _worker: null,
             _isDead: false,
             _queuedStarts: null,
             _currentThreadId: 0
+        },
+        events: {
+            OnMessageStore: null
         },
         props: {
             ManagedThreadId: {
@@ -74,13 +83,13 @@
             },
             IsAlive: {
                 get: function () {
-                    // True if there are any outstanding jobs, else false
                     return this._queuedStarts.count > 0;
                 }
             },
-            Result: {
+            Result: null,
+            IsWebWorker: {
                 get: function () {
-                    return this._result;
+                    return System.Threading.Utils.WorkerThreadManager.isWebWorker();
                 }
             }
         },
@@ -91,7 +100,7 @@
             init: function () {
                 this._queuedStarts = new (System.Collections.Generic.Dictionary$2(System.Int32,System.Object))();
             },
-            ctor: function (scripts) {
+            $ctor1: function (scripts) {
                 this.$initialize();
                 // Try to create a web worker
                 try {
@@ -102,7 +111,7 @@
                     this._worker.onmessage = Bridge.fn.cacheBind(this, this.handleMessage);
 
                     // Ask the worker to load the scripts provided
-                    this._worker.postMessage(Bridge.Json.serialize({ msgType: System.Threading.Utils.WorkerThreadManager.MessageType.LoadScripts, data: scripts }));
+                    this._worker.postMessage({ msgType: System.Threading.Utils.WorkerThreadManager.MessageTypeLoadScripts, data: System.Linq.Enumerable.from(scripts).toArray() });
                 }
                 catch ($e1) {
                     $e1 = System.Exception.create($e1);
@@ -116,13 +125,31 @@
                 // Current thread id always starts at 0 since 0 represents the main thread, or the currenly executing 
                 // thread start within this thread if web workers are not available
                 this._currentThreadId = 0;
+            },
+            ctor: function () {
+                this.$initialize();
+                this._isDead = true;
             }
         },
         methods: {
+            addOnMessage: function (value) {
+                if (!this.IsWebWorker) {
+                    this.addOnMessageStore(value);
+                } else {
+                    System.Threading.Utils.WorkerThreadManager.addOnMessage(value);
+                }
+            },
+            removeOnMessage: function (value) {
+                if (!this.IsWebWorker) {
+                    this.removeOnMessageStore(value);
+                } else {
+                    System.Threading.Utils.WorkerThreadManager.removeOnMessage(value);
+                }
+            },
             start: function (entryPoint, param, onResult) {
                 if (onResult === void 0) { onResult = null; }
                 // First we must make sure the function exists and is static
-                var threadStartRef = null;
+                var threadStartRef;
                 try {
                     // Try to get a reference to the entry point
                     threadStartRef = System.Threading.Utils.WorkerThreadManager.getObjectRefFromString(window, entryPoint);
@@ -147,14 +174,14 @@
                 }
 
                 // Can only run one thread start if there is no on result callback
-                if (Bridge.staticEquals(onResult, null) && System.Linq.Enumerable.from(this._queuedStarts).count() > 0) {
+                if (Bridge.staticEquals(onResult, null) && System.Linq.Enumerable.from(this._queuedStarts).any()) {
                     throw new System.InvalidOperationException("Attempt made to queue thread starts with no valid OnResult handler");
                 }
 
                 // Ask the worker to start the thread if web workers are available
                 if (this._worker != null) {
                     // Ask the worker to start (or queue) this function
-                    this._worker.postMessage(Bridge.Json.serialize({ msgType: System.Threading.Utils.WorkerThreadManager.MessageType.Start, data: { threadId: System.Threading.Thread._globalThreadIdCounter, threadEntryPoint: entryPoint, threadParam: Bridge.unbox(Bridge.unbox(param)) } }));
+                    this._worker.postMessage({ msgType: System.Threading.Utils.WorkerThreadManager.MessageTypeStart, data: { threadId: System.Threading.Thread._globalThreadIdCounter, threadEntryPoint: entryPoint, threadParam: param } });
                     // Add the thread to the queue of thread starts
                     this._queuedStarts.add(System.Threading.Thread._globalThreadIdCounter, { threadId: System.Threading.Thread._globalThreadIdCounter, param: param, onResult: onResult });
                 } else {
@@ -174,7 +201,7 @@
                             onResult(this, param, result);
                         } else {
                             // No, set the internal result to the result from the message
-                            this._result = result;
+                            this.Result = result;
                         }
                     }
                     catch (e) {
@@ -194,10 +221,10 @@
             },
             handleMessage: function (arg) {
                 // Deserialize the message sent from the worker
-                var msg = Bridge.Json.deserialize(Bridge.unbox(arg.data), System.Object);
+                var msg = arg.data;
                 // Process the message type
                 switch (msg.msgType) {
-                    case System.Threading.Utils.WorkerThreadManager.MessageType.Finish: 
+                    case System.Threading.Utils.WorkerThreadManager.MessageTypeFinish: 
                         // Get the WebWorkerFinishMessage data from the message
                         var finishMessage = msg.data;
                         // Get the thread start object that this message indicates just finished
@@ -208,12 +235,12 @@
                             threadStart.onResult(this, threadStart.param, finishMessage.result);
                         } else {
                             // No, set the internal result to the result from the message
-                            this._result = finishMessage.result;
+                            this.Result = finishMessage.result;
                         }
                         // Remove this finished thread start from the list of queued thread starts
                         this._queuedStarts.remove(threadStart.threadId);
                         break;
-                    case System.Threading.Utils.WorkerThreadManager.MessageType.Exception: 
+                    case System.Threading.Utils.WorkerThreadManager.MessageTypeException: 
                         // Get the WebWorkerExceptionMessage data from the message
                         var exceptionMessage = msg.data;
                         // Get the thread start object that this message indicates raised an exception
@@ -222,18 +249,31 @@
                         this._queuedStarts.remove(threadStart.threadId);
                         // Raise an execption indicating that this thread start raised an exception
                         throw new System.Exception("Unhandled exception in thread (" + threadStart.threadId + ")");
-                    case System.Threading.Utils.WorkerThreadManager.MessageType.ScriptLoadException: 
+                    case System.Threading.Utils.WorkerThreadManager.MessageTypeScriptLoadException: 
                         // Script loading exceptions are unrecoverable and will kill the thread
                         this.dispose();
                         // Raise an exception indicating the file that was loaded that caused the exception
-                        throw new System.Exception(System.String.concat("There was an exception loading script file ", Bridge.cast(msg.data, System.String), " while initialising a Web Worker"));
+                        throw new System.Exception(System.String.concat("There was an exception loading script file ", msg.data, " while initialising a Web Worker"));
+                    case System.Threading.Utils.WorkerThreadManager.MessageTypeMessage: 
+                        if (!this.IsWebWorker) {
+                            !Bridge.staticEquals(this.OnMessageStore, null) ? this.OnMessageStore(msg.data) : null;
+                        }
+                        break;
                     default: 
                         throw new System.ArgumentOutOfRangeException();
                 }
             },
+            postMessage: function (msg) {
+                if (!System.Threading.Utils.WorkerThreadManager.isWebWorker()) {
+                    // Send the result back to the main thread
+                    this._worker.postMessage({ msgType: System.Threading.Utils.WorkerThreadManager.MessageTypeMessage, data: msg });
+                } else {
+                    System.Threading.Utils.WorkerThreadManager.postMessage(msg);
+                }
+            },
             join: function (onJoin) {
                 // Check if there are any queued or running thread start objects
-                if (System.Linq.Enumerable.from(this._queuedStarts).count() > 0) {
+                if (this._queuedStarts.count > 0) {
                     // Yes, we need to wait a moment and then call on join again
                     // This must use setTimeout to allow worker messages to be processed
                     var setTimeout = window.setTimeout;
@@ -250,11 +290,23 @@
                 this.dispose();
             },
             dispose: function () {
-                if (!this._isDead) {
-                    this._worker.terminate();
-                    this._queuedStarts.clear();
-                    this._isDead = true;
+                // Don't dispose if the thread has already been killed
+                if (this._isDead) {
+                    return;
                 }
+
+                // Check if the worker is valid
+                if (this._worker != null) {
+                    // Yes, terminate it
+                    this._worker.terminate();
+                    // Clear the worker
+                    this._worker = null;
+                }
+
+                // Clear the thread starts
+                this._queuedStarts.clear();
+                // Set the thread to be dead
+                this._isDead = true;
             }
         }
     });

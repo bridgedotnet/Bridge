@@ -1,5 +1,5 @@
-﻿using System;
-using Bridge;
+﻿using Bridge;
+using Bridge.Internal.Html5;
 
 namespace System.Threading.Utils
 {
@@ -13,7 +13,7 @@ namespace System.Threading.Utils
 		/// <summary>
 		/// Global bool that indicates if this thread is a web worker or not
 		/// </summary>
-		private static bool _isWebWorker = false;
+		private static bool _isWebWorker;
 
 		/// <summary>
 		/// The worker (usually a reference to "window" when a web worker).
@@ -45,11 +45,17 @@ namespace System.Threading.Utils
 			return _threadId;
 		}
 
-		/// <summary>
-		/// The global entry point that is called as soon as the bridge runtime has loaded if this is a web worker
-		/// </summary>
-		/// <returns>Nothing.</returns>
-		public static void WorkerThreadManagerEntryPoint()
+	    /// <summary>
+	    /// OnMessage event handler for creating custom message passing between threads
+	    /// The callback parameter is the object passed to Thread::PostMessage
+	    /// </summary> 
+	    public static event Action<object> OnMessage;
+
+        /// <summary>
+        /// The global entry point that is called as soon as the bridge runtime has loaded if this is a web worker
+        /// </summary>
+        /// <returns>Nothing.</returns>
+        public static void WorkerThreadManagerEntryPoint()
 		{
 			// This is a web worker, update the flag
 			_isWebWorker = true;
@@ -100,47 +106,45 @@ namespace System.Threading.Utils
 		private static void HandleMessage(Worker.DataEvent arg)
 		{
 			// Deserialise the message
-			var msg = (WebWorkerMessage)Bridge.Json.Deserialize<WebWorkerMessage>(arg.Data);
+			var msg = (WebWorkerMessage) arg.Data;
 			// Process the message
 			switch (msg.MsgType)
 			{
 				// Check if this is a message to load a script
-				case MessageType.LoadScripts:
+				case MessageTypeLoadScripts:
 					// The data is an array of strings representing the Uris of the scripts to load
-					var scripts = (string[])msg.Data;
+				    var scripts = msg.Data as string[];
 					// Iterate over each script in order and load it in to the web worker
-					foreach (var s in scripts)
-					{
-						// Try to import the script
-						try
-						{
-							// Import the script
-							ImportScript(s);
-						}
-						catch (Exception)
-						{
-							// An exception occurred trying to load the script
-							// Send a script load exception message back to the main thread
-							_worker.PostMessage(
-								// Messages are serialized so complex objects can be sent
-								Bridge.Json.Serialize(
-									// Create a new message
-									new WebWorkerMessage
-									{
-										// It's a script load exception message
-										MsgType = MessageType.ScriptLoadException,
-										// Set data to the Uri of the script that failed to load
-										Data = s
-									}
-								)
-							);
-						}
-					}
-					break;
+				    if (scripts != null)
+				        foreach (var s in scripts)
+				        {
+				            // Try to import the script
+				            try
+				            {
+				                // Import the script
+				                ImportScript(s);
+				            }
+				            catch (Exception)
+				            {
+				                // An exception occurred trying to load the script
+				                // Send a script load exception message back to the main thread
+				                _worker.PostMessage(
+				                    // Create a new message
+				                    new WebWorkerMessage
+				                    {
+				                        // It's a script load exception message
+				                        MsgType = MessageTypeScriptLoadException,
+				                        // Set data to the Uri of the script that failed to load
+				                        Data = s
+				                    }
+				                );
+				            }
+				        }
+				    break;
 				// Check if this is a thread start message
-				case MessageType.Start:
+				case MessageTypeStart:
 					// Cast the message data to a WebWorkerStartMessage
-					var startData = (WebWorkerStartMessage)msg.Data;
+					var startData = (WebWorkerStartMessage) msg.Data;
 					// Get the function pointer of the thread entry point to call
 					var entryPointRef = GetObjectRefFromString(Script.Get<object>("window"), startData.ThreadEntryPoint);
 					// Get the param from the message
@@ -153,100 +157,118 @@ namespace System.Threading.Utils
 					try
 					{
 						// Call the function with the parameter, and get the result
-						var result = Script.Write<object>("entryPointRef(param)", entryPointRef, param);
+						var result = Script.Write<dynamic>("entryPointRef(param)", entryPointRef, param);
 
 						// Send the result back to the main thread
 						_worker.PostMessage(
-							// Messages are serialized so complex objects can be sent
-							Bridge.Json.Serialize(
-								// Create a new WebWorkerMessage
-								new WebWorkerMessage
-								{
-									// The message is a finish message
-									MsgType = MessageType.Finish,
-									// Set the data to a new WebWorkerFinishMessage
-									Data = new WebWorkerFinishMessage
+							// Create a new WebWorkerMessage
+							new WebWorkerMessage
+							{
+								// The message is a finish message
+								MsgType = MessageTypeFinish,
+								// Set the data to a new WebWorkerFinishMessage
+								Data = new WebWorkerFinishMessage
 									{
 										// Set the thread id if this thread start function that just finished
 										ThreadId = startData.ThreadId,
 										// Set the result to the result of the thread start function
-										// This is a work around for not being able to serialize boxed primitives such is System.Int32
-										Result = Script.Call<object>("Bridge.unbox", result)
-									}
-								}
-							)
+										Result = result
+                                    }
+							}
 						);
 					}
 					catch (Exception)
 					{
 						// An exception occurred running the thread start function
 						_worker.PostMessage(
-							// Messages are serialized so complex objects can be sent
-							Bridge.Json.Serialize(
-								// Create a new web worker message
-								new WebWorkerMessage
-								{
-									// The message is an exception message
-									MsgType = MessageType.Exception,
-									// Set the data to a new WebWorkerExceptionMessage
-									Data = new WebWorkerExceptionMessage
-									{
-										// Set the thread id of the thread start function that raised the exception
-										ThreadId = startData.ThreadId,
-									}
-								}
-							)
+							// Create a new web worker message
+							new WebWorkerMessage
+							{
+								// The message is an exception message
+								MsgType = MessageTypeException,
+								// Set the data to a new WebWorkerExceptionMessage
+								Data = new WebWorkerExceptionMessage
+								    {
+									    // Set the thread id of the thread start function that raised the exception
+									    ThreadId = startData.ThreadId,
+								    }
+                            }
 						);
 						// Continue raising the exception in this thread so it is printed to the console
 						throw;
 					}
 					break;
-				default:
+
+			    case MessageTypeMessage:
+			        OnMessage?.Invoke(msg.Data);
+			        break;
+
+                default:
 					throw new ArgumentOutOfRangeException();
 			}
 		}
 
+	    /// <summary>
+	    /// Posts a custom message back to the parent thread
+	    /// </summary>
+	    /// <param name="msg">The custom object to send as the message</param>
+	    public static void PostMessage(object msg)
+	    {
+	        // Send the result back to the main thread
+	        _worker.PostMessage(
+	            // Create a new WebWorkerMessage
+	            new WebWorkerMessage
+	            {
+	                // The message is a finish message
+	                MsgType = MessageTypeMessage,
+	                // Set the data to a new WebWorkerFinishMessage
+	                Data = msg
+	            }
+	        );
+	    }
+
+        /// <summary>
+        /// Message types that can be sent between the main thread and the web worker
+        /// 
+        /// Load scripts in to the web worker (Sent from the main thread to the worker)
+        /// </summary>
+        public const int MessageTypeLoadScripts = 0;
+
+	    /// <summary>
+	    /// Start and execute a thread start function (Sent from the main thread to the worker)
+	    /// </summary>
+	    public const int MessageTypeStart = 1;
+
 		/// <summary>
-		/// Message types that can be sent between the main thread and the web worker
+		/// The thread has finished, pass the result back to the main thread (Sent from the worker to the main thread)
 		/// </summary>
-		public enum MessageType
-		{
-			/// <summary>
-			/// Load scripts in to the web worker (Sent from the main thread to the worker)
-			/// </summary>
-			LoadScripts,
+		public const int MessageTypeFinish = 2;
 
-			/// <summary>
-			/// Start and execute a thread start function (Sent from the main thread to the worker)
-			/// </summary>
-			Start,
+	    /// <summary>
+	    /// An exception was raised running a thread start function (Sent from the worker to the main thread)
+	    /// </summary>
+	    public const int MessageTypeException = 3;
 
-			/// <summary>
-			/// The thread has finished, pass the result back to the main thread (Sent from the worker to the main thread)
-			/// </summary>
-			Finish,
+	    /// <summary>
+	    /// An exeption was raised while loading a script in to the web worker (Sent from the worker to the main thread)
+	    /// </summary>
+	    public const int MessageTypeScriptLoadException = 4;
 
-			/// <summary>
-			/// An exception was raised running a thread start function (Sent from the worker to the main thread)
-			/// </summary>
-			Exception,
+	    /// <summary>
+	    /// A custom message can be sent between threads
+	    /// </summary>
+	    public const int MessageTypeMessage = 5;
 
-			/// <summary>
-			/// An exeption was raised while loading a script in to the web worker (Sent from the worker to the main thread)
-			/// </summary>
-			ScriptLoadException
-		}
-
-		/// <summary>
-		/// The message that is serialised and sent between workers and the main thread
-		/// </summary>
-		[ObjectLiteral]
-		public class WebWorkerMessage
+        /// <summary>
+        /// The message that is serialised and sent between workers and the main thread
+        /// </summary>
+        [ObjectLiteral]
+        public class WebWorkerMessage
 		{
 			/// <summary>
 			/// The type of message this is
 			/// </summary>
-			public MessageType MsgType;
+			public int MsgType;
 
 			/// <summary>
 			/// The data payload of the message
@@ -254,11 +276,11 @@ namespace System.Threading.Utils
 			public object Data;
 		}
 
-		/// <summary>
-		/// Message with info to start a new thread start function (sent from the main thread to the web worker)
-		/// </summary>
-		[ObjectLiteral]
-		public class WebWorkerStartMessage
+        /// <summary>
+        /// Message with info to start a new thread start function (sent from the main thread to the web worker)
+        /// </summary>
+        [ObjectLiteral]
+        public class WebWorkerStartMessage
 		{
 			/// <summary>
 			/// The id of this thread start function
@@ -293,14 +315,14 @@ namespace System.Threading.Utils
 			public object Result;
 		}
 
-		/// <summary>
-		/// Message sent if an exception occurs while processing a thread start function (Sent from the web worker to the main thread)
-		/// </summary>
-		[ObjectLiteral]
-		public class WebWorkerExceptionMessage
-		{
-			public int ThreadId;
-		}
+	    /// <summary>
+	    /// Message sent if an exception occurs while processing a thread start function (Sent from the web worker to the main thread)
+	    /// </summary>
+	    [ObjectLiteral]
+	    public class WebWorkerExceptionMessage
+	    {
+	        public int ThreadId;
+	    }
 	}
 }
 

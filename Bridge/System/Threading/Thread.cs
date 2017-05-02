@@ -1,9 +1,8 @@
 using Bridge;
 using System.Threading.Utils;
-
-using System.ComponentModel;
 using System.Linq;
 using System.Collections.Generic;
+using Bridge.Internal.Html5;
 
 namespace System.Threading
 {
@@ -32,19 +31,16 @@ namespace System.Threading
 			}
 		}
 
-		//public static extern Thread CurrentThread
-		//{
-		//    get;
-		//}
+		public static Thread CurrentThread => new Thread();
 
-		/// <summary>
+	    /// <summary>
 		/// Suspends the current thread for the specified number of milliseconds.
 		/// Implemented as a loop checking timeout each iteration.
 		/// Please note maximum 1e7 iterations
 		/// </summary>
 		/// <param name="millisecondsTimeout">The number of milliseconds for which the thread is suspended. Should be positive or -1. -1 works the same as 0 (not Infinite)</param>
 		[Template("Bridge.sleep({millisecondsTimeout})")]
-		public extern static void Sleep(int millisecondsTimeout);
+		public static extern void Sleep(int millisecondsTimeout);
 
 		/// <summary>
 		/// Suspends the current thread for the specified anout of time.
@@ -53,7 +49,7 @@ namespace System.Threading
 		/// </summary>
 		/// <param name="timeout">The amount of time for which the thread is suspended. Should be positive or -1. -1 works the same as 0 (not Infinite)</param>
 		[Template("Bridge.sleep(null, {timeout})")]
-		public extern static void Sleep(TimeSpan timeout);
+		public static extern void Sleep(TimeSpan timeout);
 
 		/// <summary>
 		/// Gets the Uri of the javascript file that called this function.
@@ -104,7 +100,7 @@ namespace System.Threading
 		/// Javascript files in this array are loaded in order in the Web Worker. Usually you would include all javascript 
 		/// libraries and dependancies required by the javascript file containing the thread entry point(s) to be run.
 		/// </param>
-		public Thread(string[] scripts)
+		public Thread(IEnumerable<string> scripts)
 		{
 			// Try to create a web worker
 			try
@@ -117,17 +113,14 @@ namespace System.Threading
 
 				// Ask the worker to load the scripts provided
 				_worker.PostMessage(
-					// Messages are serialized so complex objects can be sent
-					Bridge.Json.Serialize(
-						// Create a new message to send to the worker
-						new WorkerThreadManager.WebWorkerMessage
-						{
-							// The message is to load scripts
-							MsgType = WorkerThreadManager.MessageType.LoadScripts,
-							// Specify the scripts to load
-							Data = scripts
-						}
-					)
+					// Create a new message to send to the worker
+					new WorkerThreadManager.WebWorkerMessage
+					{
+						// The message is to load scripts
+						MsgType = WorkerThreadManager.MessageTypeLoadScripts,
+						// Specify the scripts to load
+						Data = scripts.ToArray()
+                    }
 				);
 			}
 			catch (Exception)
@@ -143,6 +136,11 @@ namespace System.Threading
 			// thread start within this thread if web workers are not available
 			_currentThreadId = 0;
 		}
+
+	    public Thread()
+	    {
+	        _isDead = true;
+	    }
 
 		/// <summary>
 		/// Start the specified static function in the Web Worker with param passed to the function.
@@ -167,7 +165,7 @@ namespace System.Threading
 		public void Start(string entryPoint, object param, Action<Thread, object, object> onResult = null)
 		{
 			// First we must make sure the function exists and is static
-			object threadStartRef = null;
+			object threadStartRef;
 			try
 			{
 				// Try to get a reference to the entry point
@@ -193,7 +191,7 @@ namespace System.Threading
 				throw new InvalidOperationException("Attempt made to call Start on a dead thread");
 
 			// Can only run one thread start if there is no on result callback
-			if (onResult == null && _queuedStarts.Count() > 0)
+			if (onResult == null && _queuedStarts.Any())
 				// Whoops
 				throw new InvalidOperationException("Attempt made to queue thread starts with no valid OnResult handler");
 
@@ -202,26 +200,22 @@ namespace System.Threading
 			{
 				// Ask the worker to start (or queue) this function
 				_worker.PostMessage(
-					// Messages are serialized so complex objects can be sent
-					Bridge.Json.Serialize(
-						// Send a new message
-						new WorkerThreadManager.WebWorkerMessage
+					// Send a new message
+					new WorkerThreadManager.WebWorkerMessage
+					{
+						// The message is to start a function
+						MsgType = WorkerThreadManager.MessageTypeStart,
+						// The data is a WebWorkerStartMessage
+						Data = new WorkerThreadManager.WebWorkerStartMessage
 						{
-							// The message is to start a function
-							MsgType = WorkerThreadManager.MessageType.Start,
-							// The data is a WebWorkerStartMessage
-							Data = new WorkerThreadManager.WebWorkerStartMessage
-							{
-								// Set the thread id
-								ThreadId = _globalThreadIdCounter,
-								// Set the entry point
-								ThreadEntryPoint = entryPoint,
-								// Set the parameter
-								// This is a work around for not being able to serialize boxed primitives such is System.Int32
-								ThreadParam = Script.Call<object>("Bridge.unbox", param)
-							}
-						}
-					)
+							// Set the thread id
+							ThreadId = _globalThreadIdCounter,
+							// Set the entry point
+							ThreadEntryPoint = entryPoint,
+							// Set the parameter
+							ThreadParam = param
+                        }
+					}
 				);
 				// Add the thread to the queue of thread starts
 				_queuedStarts.Add(_globalThreadIdCounter,
@@ -259,7 +253,7 @@ namespace System.Threading
 					else
 					{
 						// No, set the internal result to the result from the message
-						_result = result;
+						Result = result;
 					}
 				}
 				catch (Exception e)
@@ -287,14 +281,14 @@ namespace System.Threading
 		private void HandleMessage(Worker.DataEvent arg)
 		{
 			// Deserialize the message sent from the worker
-			var msg = (WorkerThreadManager.WebWorkerMessage)Bridge.Json.Deserialize<WorkerThreadManager.WebWorkerMessage>(arg.Data);
+		    var msg = (WorkerThreadManager.WebWorkerMessage) arg.Data;
 			// Process the message type
 			switch (msg.MsgType)
 			{
 				// Check for a thread start finished message
-				case WorkerThreadManager.MessageType.Finish:
+				case WorkerThreadManager.MessageTypeFinish:
 					// Get the WebWorkerFinishMessage data from the message
-					var finishMessage = (WorkerThreadManager.WebWorkerFinishMessage)msg.Data;
+				    var finishMessage = (WorkerThreadManager.WebWorkerFinishMessage) msg.Data;
 					// Get the thread start object that this message indicates just finished
 					var threadStart = _queuedStarts[finishMessage.ThreadId];
 					// Check if this thread start had a result handler
@@ -306,16 +300,16 @@ namespace System.Threading
 					else 
 					{
 						// No, set the internal result to the result from the message
-						_result = finishMessage.Result;
+						Result = finishMessage.Result;
 					}
 					// Remove this finished thread start from the list of queued thread starts
 					_queuedStarts.Remove(threadStart.ThreadId);
 					break;
 
 				// Check for a thread start exception message
-				case WorkerThreadManager.MessageType.Exception:
+				case WorkerThreadManager.MessageTypeException:
 					// Get the WebWorkerExceptionMessage data from the message
-					var exceptionMessage = (WorkerThreadManager.WebWorkerExceptionMessage)msg.Data;
+					var exceptionMessage = (WorkerThreadManager.WebWorkerExceptionMessage) msg.Data;
 					// Get the thread start object that this message indicates raised an exception
 					threadStart = _queuedStarts[exceptionMessage.ThreadId];
 					// Remove this finished thread start object from the list of queued threads
@@ -324,16 +318,49 @@ namespace System.Threading
 					throw new Exception("Unhandled exception in thread (" + threadStart.ThreadId + ")");
 
 				// Check for a thread script load exception (Raised while loading the scripts specified in the constructor)
-				case WorkerThreadManager.MessageType.ScriptLoadException:
+				case WorkerThreadManager.MessageTypeScriptLoadException:
 					// Script loading exceptions are unrecoverable and will kill the thread
 					Dispose();
 					// Raise an exception indicating the file that was loaded that caused the exception
-					throw new Exception("There was an exception loading script file " + (string) msg.Data + " while initialising a Web Worker");
+					throw new Exception("There was an exception loading script file " + msg.Data + " while initialising a Web Worker");
 
-				default:
+                case WorkerThreadManager.MessageTypeMessage:
+                    if (!IsWebWorker)
+                    {
+                        OnMessageStore?.Invoke(msg.Data);
+                    }
+                    break;
+
+                default:
 					throw new ArgumentOutOfRangeException();
 			}
 		}
+
+	    /// <summary>
+	    /// Posts a custom message back to the parent thread
+	    /// </summary>
+	    /// <param name="msg">The custom object to send as the message</param>
+	    public void PostMessage(object msg)
+	    {
+	        if (!WorkerThreadManager.IsWebWorker())
+	        {
+	            // Send the result back to the main thread
+	            _worker.PostMessage(
+	                // Create a new WebWorkerMessage
+	                new WorkerThreadManager.WebWorkerMessage
+	                {
+	                    // The message is a finish message
+	                    MsgType = WorkerThreadManager.MessageTypeMessage,
+	                    // Set the data to a new WebWorkerFinishMessage
+	                    Data = msg
+	                }
+	            );
+            }
+	        else
+	        {
+	            WorkerThreadManager.PostMessage(msg);
+	        }
+	    }
 
 		/// <summary>
 		/// Wait for all thread starts to run, and then when all thread starts have finished will trigger the specified callback.
@@ -344,11 +371,11 @@ namespace System.Threading
 		public void Join(Action onJoin)
 		{
 			// Check if there are any queued or running thread start objects
-			if (_queuedStarts.Count() > 0)
+			if (_queuedStarts.Count > 0)
 			{
 				// Yes, we need to wait a moment and then call on join again
 				// This must use setTimeout to allow worker messages to be processed
-				Action<Action, int> setTimeout = (System.Action<System.Action, int>)Script.Get("window.setTimeout");
+				Action<Action, int> setTimeout = (Action<Action, int>)Script.Get("window.setTimeout");
 				// Check the join again in a moment
 				setTimeout(() => Join(onJoin), 0);
 			}
@@ -374,28 +401,31 @@ namespace System.Threading
 		/// </summary>
 		public void Dispose()
 		{
-			if (!_isDead)
-			{
-				_worker.Terminate();
-				_queuedStarts.Clear();
-				_isDead = true;
-			}
+            // Don't dispose if the thread has already been killed
+		    if (_isDead) return;
+
+            // Check if the worker is valid
+		    if (_worker != null)
+		    {
+                // Yes, terminate it
+		        _worker.Terminate();
+                // Clear the worker
+		        _worker = null;
+		    }
+
+            // Clear the thread starts
+		    _queuedStarts.Clear();
+            // Set the thread to be dead
+		    _isDead = true;
 		}
 
 		/// <summary>
 		/// Checks if the thread is currently busy (is still executing any thread starts
 		/// </summary>
 		/// <value>If the thread is busy.</value>
-		public bool IsAlive
-		{
-			get
-			{
-				// True if there are any outstanding jobs, else false
-				return _queuedStarts.Count > 0;
-			}
-		}
+		public bool IsAlive => _queuedStarts.Count > 0;
 
-		/// <summary>
+	    /// <summary>
 		/// The thread start function signature, takes an object as the parameter, and must return an object as the result
 		/// </summary>
 		public delegate object ThreadStart(object param);
@@ -404,14 +434,9 @@ namespace System.Threading
 		/// Gets the result of the last thread start that executed that did not have an on result callback set
 		/// </summary>
 		/// <value>The result return from the last thread start that finished that did not have an on result callback set</value>
-		public object Result { get { return _result; } }
+		public object Result { get; private set; }
 
-		/// <summary>
-		/// Used to store the actual result received from the last thread start that did not have an on result callback set
-		/// </summary>
-		private object _result;
-
-		/// <summary>
+	    /// <summary>
 		/// The web worker that is running the thread start functions
 		/// </summary>
 		private Worker _worker;
@@ -438,7 +463,7 @@ namespace System.Threading
 		/// <summary>
 		/// The dictionary of queued thread starts, with the thread id as the key and the QueuedThreadStart object as the value
 		/// </summary>
-		private Dictionary<int, QueuedThreadStart> _queuedStarts = new Dictionary<int, QueuedThreadStart>();
+		private readonly Dictionary<int, QueuedThreadStart> _queuedStarts = new Dictionary<int, QueuedThreadStart>();
 
 		/// <summary>
 		/// The global thread id counter, used to generate unique thread id's
@@ -449,5 +474,41 @@ namespace System.Threading
 		/// The current thread identifier, used only when web workers are unavailable
 		/// </summary>
 		private int _currentThreadId;
+
+	    /// <summary>
+	    /// OnMessage event handler for creating custom message passing between threads
+	    /// The callback parameter is the object passed to Thread::PostMessage
+	    /// </summary> 
+	    private event Action<object> OnMessageStore;
+	    public event Action<object> OnMessage
+        {
+            add
+            {
+                if (!IsWebWorker)
+                {
+                    OnMessageStore += value;
+                }
+                else
+                {
+                    WorkerThreadManager.OnMessage += value;
+                }
+            }
+	        remove
+	        {
+	            if (!IsWebWorker)
+	            {
+	                OnMessageStore -= value;
+	            }
+	            else
+	            {
+	                WorkerThreadManager.OnMessage -= value;
+	            }
+            }
+	    }
+
+	    /// <summary>
+        /// Tests if this is a web worker or not.
+        /// </summary>
+	    public bool IsWebWorker => WorkerThreadManager.IsWebWorker();
 	}
 }
