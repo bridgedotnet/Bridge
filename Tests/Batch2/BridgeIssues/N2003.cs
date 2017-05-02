@@ -1,0 +1,33 @@
+﻿using Bridge.Testing;
+using System;
+
+namespace Bridge.ClientTest.Batch2.BridgeIssues
+{
+    [Category(Constants.MODULE_ISSUES)]
+    [TestFixture(TestNameFormat = "#2003 - " + Constants.BATCH_NAME + " {0}")]
+    public class N2003
+    {
+        class Issue2003Helper
+        {
+            [Template("{this}.setSomeProp({this}.getSomeProp() + 1)")]
+            public extern object SomeInline();
+        
+            public int SomeProp {get; set; }
+            
+            public void CreateAndCallLambda()
+            {
+                Func<object> cb = () => { return SomeInline();};
+                cb();
+            }
+        }
+
+        [Test(ExpectedCount = 1)]
+        public static void TestThisIsBindInTemplatedMemberMethods()
+        {
+            var sut = new Issue2003Helper();
+            sut.SomeProp = 5;
+            sut.CreateAndCallLambda();
+            Assert.AreEqual(6, sut.SomeProp);
+        }
+    }
+}
