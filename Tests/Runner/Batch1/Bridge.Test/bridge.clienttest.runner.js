@@ -295,14 +295,14 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("IReadOnlyList - ArrayCastToIReadOnlyListGetItemWorks", Bridge.Test.Runtime.BridgeClientTestRunner.IReadOnlyListTests.ArrayCastToIReadOnlyListGetItemWorks);
             QUnit.test("IReadOnlyList - ClassImplementingIReadOnlyListGetItemWorks", Bridge.Test.Runtime.BridgeClientTestRunner.IReadOnlyListTests.ClassImplementingIReadOnlyListGetItemWorks);
             QUnit.test("IReadOnlyList - ClassImplementingIReadOnlyListCastToIReadOnlyListGetItemWorks", Bridge.Test.Runtime.BridgeClientTestRunner.IReadOnlyListTests.ClassImplementingIReadOnlyListCastToIReadOnlyListGetItemWorks);
-            QUnit.test("IteratorBlock - TypeReturnedByIteratorBlockReturningIEnumeratorImplementsThatInterfaceAndIDisposable", Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests.TypeReturnedByIteratorBlockReturningIEnumeratorImplementsThatInterfaceAndIDisposable);
+            QUnit.test("IteratorBlock - TypeReturnedByIteratorBlockReturningIEnumeratorImplementsThatInterfaceAndIDisposable_SPI_1554", Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests.TypeReturnedByIteratorBlockReturningIEnumeratorImplementsThatInterfaceAndIDisposable_SPI_1554);
             QUnit.test("IteratorBlock - EnumeratingIEnumeratorIteratorToEndWorks", Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests.EnumeratingIEnumeratorIteratorToEndWorks);
             QUnit.test("IteratorBlock - PrematureDisposalOfIEnumeratorIteratorExecutesFinallyBlocks", Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests.PrematureDisposalOfIEnumeratorIteratorExecutesFinallyBlocks);
-            QUnit.test("IteratorBlock - ExceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks Exception thrown not caught", Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests.ExceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks);
-            QUnit.test("IteratorBlock - TypeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface", Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests.TypeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface);
+            QUnit.test("IteratorBlock - ExceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks_SPI_1554 Exception thrown not caught", Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests.ExceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks_SPI_1554);
+            QUnit.test("IteratorBlock - TypeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface_SPI_1554", Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests.TypeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface_SPI_1554);
             QUnit.test("IteratorBlock - EnumeratingIEnumerableIteratorToEndWorks", Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests.EnumeratingIEnumerableIteratorToEndWorks);
             QUnit.test("IteratorBlock - PrematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks", Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests.PrematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks);
-            QUnit.test("IteratorBlock - ExceptionInIEnumerableIteratorBodyExecutesFinallyBlocks exception thrown not caught", Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests.ExceptionInIEnumerableIteratorBodyExecutesFinallyBlocks);
+            QUnit.test("IteratorBlock - ExceptionInIEnumerableIteratorBodyExecutesFinallyBlocks_SPI_1554 exception thrown not caught", Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests.ExceptionInIEnumerableIteratorBodyExecutesFinallyBlocks_SPI_1554);
             QUnit.test("IteratorBlock - EnumeratingAnIteratorBlockReturningIEnumerableMultipleTimesUsesTheInitialValuesForParameters", Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests.EnumeratingAnIteratorBlockReturningIEnumerableMultipleTimesUsesTheInitialValuesForParameters);
             QUnit.test("IteratorBlock - DifferentGetEnumeratorCallsOnIteratorBlockReturningIEnumerableGetOwnCopiesOfLocals", Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests.DifferentGetEnumeratorCallsOnIteratorBlockReturningIEnumerableGetOwnCopiesOfLocals);
             QUnit.test("List - TypePropertiesAreCorrect", Bridge.Test.Runtime.BridgeClientTestRunner.ListTests.TypePropertiesAreCorrect);
@@ -737,7 +737,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.module("Date and time");
             QUnit.test("DateTimeFormatInfo - TypePropertiesAreCorrect", Bridge.Test.Runtime.BridgeClientTestRunner.DateTimeFormatInfoTests.TypePropertiesAreCorrect);
             QUnit.test("DateTimeFormatInfo - GetFormatWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DateTimeFormatInfoTests.GetFormatWorks);
-            QUnit.test("DateTimeFormatInfo - InvariantWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DateTimeFormatInfoTests.InvariantWorks);
+            QUnit.test("DateTimeFormatInfo - InvariantWorks_SPI_1562", Bridge.Test.Runtime.BridgeClientTestRunner.DateTimeFormatInfoTests.InvariantWorks_SPI_1562);
             QUnit.test("DateTime - TypePropertiesAreCorrect", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.TypePropertiesAreCorrect);
             QUnit.test("DateTime - DefaultConstructorWorks_SPI_1606", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.DefaultConstructorWorks_SPI_1606);
             QUnit.test("DateTime - DefaultValueWorks_SPI_1606", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.DefaultValueWorks_SPI_1606);
@@ -2255,7 +2255,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("UInt64 - ConstantsWork", Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests.ConstantsWork);
             QUnit.test("UInt64 - FormatWorks", Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests.FormatWorks);
             QUnit.test("UInt64 - IFormattableToStringWorks", Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests.IFormattableToStringWorks);
-            QUnit.test("UInt64 - CastingOfLargeValuesToUInt64Works", Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests.CastingOfLargeValuesToUInt64Works);
+            QUnit.test("UInt64 - CastingOfLargeValuesToUInt64Works_SPI_1591", Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests.CastingOfLargeValuesToUInt64Works_SPI_1591);
             QUnit.test("UInt64 - DivisionOfLargeUInt64Works", Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests.DivisionOfLargeUInt64Works);
             QUnit.test("UInt64 - TryParseWorks", Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests.TryParseWorks);
             QUnit.test("UInt64 - ParseWorks", Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests.ParseWorks);
@@ -7206,10 +7206,10 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                     var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Format.DateTimeFormatInfoTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DateTimeFormatInfoTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetFormatWorks()", $t.Line = "19", $t));
                     t.Fixture.GetFormatWorks();
                 },
-                InvariantWorks: function (assert) {
+                InvariantWorks_SPI_1562: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Format.DateTimeFormatInfoTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DateTimeFormatInfoTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "InvariantWorks()", $t.Line = "27", $t));
-                    t.Fixture.InvariantWorks();
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Format.DateTimeFormatInfoTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DateTimeFormatInfoTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "InvariantWorks_SPI_1562()", $t.Line = "27", $t));
+                    t.Fixture.InvariantWorks_SPI_1562();
                 }
             }
         },
@@ -8059,7 +8059,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 GetValuesWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.EnumTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnumTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetValuesWorks()", $t.Line = "128", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.EnumTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.EnumTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetValuesWorks()", $t.Line = "129", $t));
                     t.Fixture.GetValuesWorks();
                 }
             }
@@ -11112,54 +11112,54 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IteratorBlockTests)],
         statics: {
             methods: {
-                TypeReturnedByIteratorBlockReturningIEnumeratorImplementsThatInterfaceAndIDisposable: function (assert) {
+                TypeReturnedByIteratorBlockReturningIEnumeratorImplementsThatInterfaceAndIDisposable_SPI_1554: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TypeReturnedByIteratorBlockReturningIEnumeratorImplementsThatInterfaceAndIDisposable()", $t.Line = "122", $t));
-                    t.Fixture.TypeReturnedByIteratorBlockReturningIEnumeratorImplementsThatInterfaceAndIDisposable();
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TypeReturnedByIteratorBlockReturningIEnumeratorImplementsThatInterfaceAndIDisposable_SPI_1554()", $t.Line = "122", $t));
+                    t.Fixture.TypeReturnedByIteratorBlockReturningIEnumeratorImplementsThatInterfaceAndIDisposable_SPI_1554();
                 },
                 EnumeratingIEnumeratorIteratorToEndWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "EnumeratingIEnumeratorIteratorToEndWorks()", $t.Line = "129", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "EnumeratingIEnumeratorIteratorToEndWorks()", $t.Line = "131", $t));
                     t.Fixture.EnumeratingIEnumeratorIteratorToEndWorks();
                 },
                 PrematureDisposalOfIEnumeratorIteratorExecutesFinallyBlocks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "PrematureDisposalOfIEnumeratorIteratorExecutesFinallyBlocks()", $t.Line = "144", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "PrematureDisposalOfIEnumeratorIteratorExecutesFinallyBlocks()", $t.Line = "146", $t));
                     t.Fixture.PrematureDisposalOfIEnumeratorIteratorExecutesFinallyBlocks();
                 },
-                ExceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks: function (assert) {
+                ExceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks_SPI_1554: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ExceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks()", $t.Line = "162", $t));
-                    t.Fixture.ExceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks();
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ExceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks_SPI_1554()", $t.Line = "164", $t));
+                    t.Fixture.ExceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks_SPI_1554();
                 },
-                TypeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface: function (assert) {
+                TypeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface_SPI_1554: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TypeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface()", $t.Line = "187", $t));
-                    t.Fixture.TypeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface();
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TypeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface_SPI_1554()", $t.Line = "190", $t));
+                    t.Fixture.TypeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface_SPI_1554();
                 },
                 EnumeratingIEnumerableIteratorToEndWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "EnumeratingIEnumerableIteratorToEndWorks()", $t.Line = "194", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "EnumeratingIEnumerableIteratorToEndWorks()", $t.Line = "199", $t));
                     t.Fixture.EnumeratingIEnumerableIteratorToEndWorks();
                 },
                 PrematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "PrematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks()", $t.Line = "218", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "PrematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks()", $t.Line = "223", $t));
                     t.Fixture.PrematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks();
                 },
-                ExceptionInIEnumerableIteratorBodyExecutesFinallyBlocks: function (assert) {
+                ExceptionInIEnumerableIteratorBodyExecutesFinallyBlocks_SPI_1554: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ExceptionInIEnumerableIteratorBodyExecutesFinallyBlocks()", $t.Line = "237", $t));
-                    t.Fixture.ExceptionInIEnumerableIteratorBodyExecutesFinallyBlocks();
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ExceptionInIEnumerableIteratorBodyExecutesFinallyBlocks_SPI_1554()", $t.Line = "242", $t));
+                    t.Fixture.ExceptionInIEnumerableIteratorBodyExecutesFinallyBlocks_SPI_1554();
                 },
                 EnumeratingAnIteratorBlockReturningIEnumerableMultipleTimesUsesTheInitialValuesForParameters: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "EnumeratingAnIteratorBlockReturningIEnumerableMultipleTimesUsesTheInitialValuesForParameters()", $t.Line = "264", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "EnumeratingAnIteratorBlockReturningIEnumerableMultipleTimesUsesTheInitialValuesForParameters()", $t.Line = "270", $t));
                     t.Fixture.EnumeratingAnIteratorBlockReturningIEnumerableMultipleTimesUsesTheInitialValuesForParameters();
                 },
                 DifferentGetEnumeratorCallsOnIteratorBlockReturningIEnumerableGetOwnCopiesOfLocals: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "DifferentGetEnumeratorCallsOnIteratorBlockReturningIEnumerableGetOwnCopiesOfLocals()", $t.Line = "278", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "DifferentGetEnumeratorCallsOnIteratorBlockReturningIEnumerableGetOwnCopiesOfLocals()", $t.Line = "284", $t));
                     t.Fixture.DifferentGetEnumeratorCallsOnIteratorBlockReturningIEnumerableGetOwnCopiesOfLocals();
                 }
             }
@@ -21053,59 +21053,59 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                     var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.UInt64Tests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "IFormattableToStringWorks()", $t.Line = "167", $t));
                     t.Fixture.IFormattableToStringWorks();
                 },
-                CastingOfLargeValuesToUInt64Works: function (assert) {
+                CastingOfLargeValuesToUInt64Works_SPI_1591: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.UInt64Tests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "CastingOfLargeValuesToUInt64Works()", $t.Line = "173", $t));
-                    t.Fixture.CastingOfLargeValuesToUInt64Works();
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.UInt64Tests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "CastingOfLargeValuesToUInt64Works_SPI_1591()", $t.Line = "173", $t));
+                    t.Fixture.CastingOfLargeValuesToUInt64Works_SPI_1591();
                 },
                 DivisionOfLargeUInt64Works: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.UInt64Tests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "DivisionOfLargeUInt64Works()", $t.Line = "181", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.UInt64Tests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "DivisionOfLargeUInt64Works()", $t.Line = "182", $t));
                     t.Fixture.DivisionOfLargeUInt64Works();
                 },
                 TryParseWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.UInt64Tests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TryParseWorks()", $t.Line = "188", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.UInt64Tests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TryParseWorks()", $t.Line = "189", $t));
                     t.Fixture.TryParseWorks();
                 },
                 ParseWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.UInt64Tests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ParseWorks()", $t.Line = "221", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.UInt64Tests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ParseWorks()", $t.Line = "222", $t));
                     t.Fixture.ParseWorks();
                 },
                 ToStringWithoutRadixWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.UInt64Tests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ToStringWithoutRadixWorks()", $t.Line = "233", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.UInt64Tests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ToStringWithoutRadixWorks()", $t.Line = "234", $t));
                     t.Fixture.ToStringWithoutRadixWorks();
                 },
                 ToStringWithRadixWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.UInt64Tests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ToStringWithRadixWorks()", $t.Line = "239", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.UInt64Tests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ToStringWithRadixWorks()", $t.Line = "240", $t));
                     t.Fixture.ToStringWithRadixWorks();
                 },
                 GetHashCodeWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.UInt64Tests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetHashCodeWorks()", $t.Line = "246", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.UInt64Tests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "GetHashCodeWorks()", $t.Line = "247", $t));
                     t.Fixture.GetHashCodeWorks();
                 },
                 EqualsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.UInt64Tests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "EqualsWorks()", $t.Line = "254", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.UInt64Tests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "EqualsWorks()", $t.Line = "255", $t));
                     t.Fixture.EqualsWorks();
                 },
                 IEquatableEqualsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.UInt64Tests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "IEquatableEqualsWorks()", $t.Line = "263", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.UInt64Tests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "IEquatableEqualsWorks()", $t.Line = "264", $t));
                     t.Fixture.IEquatableEqualsWorks();
                 },
                 CompareToWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.UInt64Tests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "CompareToWorks()", $t.Line = "277", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.UInt64Tests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "CompareToWorks()", $t.Line = "278", $t));
                     t.Fixture.CompareToWorks();
                 },
                 IComparableCompareToWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.UInt64Tests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "IComparableCompareToWorks()", $t.Line = "285", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.UInt64Tests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UInt64Tests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "IComparableCompareToWorks()", $t.Line = "286", $t));
                     t.Fixture.IComparableCompareToWorks();
                 }
             }

@@ -120,10 +120,12 @@ namespace Bridge.ClientTest.Collections.Generic
         }
 
         [Test]
-        public void TypeReturnedByIteratorBlockReturningIEnumeratorImplementsThatInterfaceAndIDisposable()
+        public void TypeReturnedByIteratorBlockReturningIEnumeratorImplementsThatInterfaceAndIDisposable_SPI_1554()
         {
             var enm = new C(new StringBuilder()).GetEnumerator(0);
+            Assert.True((object)enm is IEnumerator<int>);
             Assert.True((object)enm is IEnumerator);
+            Assert.True((object)enm is IDisposable);
         }
 
         [Test]
@@ -160,8 +162,9 @@ namespace Bridge.ClientTest.Collections.Generic
         }
 
         [Test(Name = "IteratorBlock - {0} Exception thrown not caught")]
-        public void ExceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks()
+        public void ExceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks_SPI_1554()
         {
+            // #1554
             // #1329 Yield support
 
             var sb = new StringBuilder();
@@ -185,9 +188,11 @@ namespace Bridge.ClientTest.Collections.Generic
         }
 
         [Test]
-        public void TypeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface()
+        public void TypeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface_SPI_1554()
         {
+            // #1554
             var enm = new C(new StringBuilder()).GetEnumerable(0);
+            Assert.True((object)enm is IEnumerable<int>);
             Assert.True((object)enm is IEnumerable);
         }
 
@@ -235,8 +240,9 @@ namespace Bridge.ClientTest.Collections.Generic
         }
 
         [Test(Name = "IteratorBlock - {0} exception thrown not caught")]
-        public void ExceptionInIEnumerableIteratorBodyExecutesFinallyBlocks()
+        public void ExceptionInIEnumerableIteratorBodyExecutesFinallyBlocks_SPI_1554()
         {
+            // #1554
             // #1329 Yield support
 
             var sb = new StringBuilder();

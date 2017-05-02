@@ -171,10 +171,11 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void CastingOfLargeValuesToUInt64Works()
+        public void CastingOfLargeValuesToUInt64Works_SPI_1591()
         {
             double d1 = 5e9 + 0.5, d2 = -d1;
-            Assert.True(5000000000 == (ulong)d1, "Positive");
+            Assert.AreEqual(5000000000UL, (ulong)d1, "Positive");
+            // #1591
             Assert.True((ulong)d2 > int.MaxValue, "Negative");
         }
 

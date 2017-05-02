@@ -8397,9 +8397,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 if (message === void 0) { message = null; }
                 Bridge.Test.NUnit.Assert.AreEqual$1(System.String.replaceAll(expected, "\r\n", "\n"), System.String.replaceAll(actual, "\r\n", "\n"), message);
             },
-            TypeReturnedByIteratorBlockReturningIEnumeratorImplementsThatInterfaceAndIDisposable: function () {
+            TypeReturnedByIteratorBlockReturningIEnumeratorImplementsThatInterfaceAndIDisposable_SPI_1554: function () {
                 var enm = new Bridge.ClientTest.Collections.Generic.IteratorBlockTests.C(new System.Text.StringBuilder()).GetEnumerator(0);
+                Bridge.Test.NUnit.Assert.True(Bridge.is(enm, System.Collections.Generic.IEnumerator$1(System.Int32)));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(enm, System.Collections.IEnumerator));
+                Bridge.Test.NUnit.Assert.True(Bridge.is(enm, System.IDisposable));
             },
             EnumeratingIEnumeratorIteratorToEndWorks: function () {
                 // #1329 Yield support
@@ -8426,7 +8428,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 this.AssertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
             },
-            ExceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks: function () {
+            ExceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks_SPI_1554: function () {
+                // #1554
                 // #1329 Yield support
 
                 var sb = new System.Text.StringBuilder();
@@ -8446,8 +8449,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 this.AssertEqual(sb.toString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
             },
-            TypeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface: function () {
+            TypeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface_SPI_1554: function () {
+                // #1554
                 var enm = new Bridge.ClientTest.Collections.Generic.IteratorBlockTests.C(new System.Text.StringBuilder()).GetEnumerable(0);
+                Bridge.Test.NUnit.Assert.True(Bridge.is(enm, System.Collections.Generic.IEnumerable$1(System.Int32)));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(enm, System.Collections.IEnumerable));
             },
             EnumeratingIEnumerableIteratorToEndWorks: function () {
@@ -8506,7 +8511,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 }
                 this.AssertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
             },
-            ExceptionInIEnumerableIteratorBodyExecutesFinallyBlocks: function () {
+            ExceptionInIEnumerableIteratorBodyExecutesFinallyBlocks_SPI_1554: function () {
+                // #1554
                 // #1329 Yield support
 
                 var sb = new System.Text.StringBuilder();
@@ -18335,7 +18341,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual(null, Bridge.unbox(format.getFormat(System.Int32)));
                 Bridge.Test.NUnit.Assert.AreEqual(format, Bridge.unbox(format.getFormat(System.Globalization.DateTimeFormatInfo)));
             },
-            InvariantWorks: function () {
+            InvariantWorks_SPI_1562: function () {
                 var format = System.Globalization.DateTimeFormatInfo.invariantInfo;
                 Bridge.Test.NUnit.Assert.AreEqual("AM", format.amDesignator);
                 Bridge.Test.NUnit.Assert.AreEqual("PM", format.pmDesignator);
@@ -18343,10 +18349,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual("/", format.dateSeparator);
                 Bridge.Test.NUnit.Assert.AreEqual(":", format.timeSeparator);
 
-                Bridge.Test.NUnit.Assert.AreEqual("dddd, dd MMMM yyyy HH:mm:ss", format.fullDateTimePattern);
-                Bridge.Test.NUnit.Assert.AreEqual("yyyy MMMM", format.yearMonthPattern);
-
+                // Not C# API
+                //Assert.AreEqual(format.GMTDateTimePattern, "ddd, dd MMM yyyy HH:mm:Bridge 'GMT'");
+                // #1562
+                Bridge.Test.NUnit.Assert.AreEqual("yyyy'-'MM'-'dd HH':'mm':'ss'Z'", format.universalSortableDateTimePattern);
                 Bridge.Test.NUnit.Assert.AreEqual("yyyy'-'MM'-'dd'T'HH':'mm':'ss", format.sortableDateTimePattern);
+                Bridge.Test.NUnit.Assert.AreEqual("dddd, dd MMMM yyyy HH:mm:ss", format.fullDateTimePattern);
 
                 Bridge.Test.NUnit.Assert.AreEqual("dddd, dd MMMM yyyy", format.longDatePattern);
                 Bridge.Test.NUnit.Assert.AreEqual("MM/dd/yyyy", format.shortDatePattern);
@@ -18355,9 +18363,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual("HH:mm", format.shortTimePattern);
 
                 Bridge.Test.NUnit.Assert.AreEqual(0, format.firstDayOfWeek);
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], System.String), format.dayNames);
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], System.String), format.dayNames);
+                // Not C# API
+                //Assert.AreEqual(format.ShortDayNames, new[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" });
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"], System.String), format.shortestDayNames);
 
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", ""], System.String), format.monthNames);
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", ""], System.String), format.monthNames);
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", ""], System.String), format.abbreviatedMonthNames);
             }
         }
     });
@@ -31612,8 +31624,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual("FirstValue, ThirdValue", System.Enum.toString(Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum, Bridge.box(5, Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum, $box_.Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum.toString)));
             },
             ConversionsToEnumAreTreatedAsConversionsToTheUnderlyingType: function () {
-                Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(Bridge.cast(Bridge.unbox(Bridge.box(0, System.Int32)), System.Int32)), 0);
-                Bridge.Test.NUnit.Assert.Throws($asm.$.Bridge.ClientTest.SimpleTypes.EnumTests.f3);
+                Bridge.Test.NUnit.Assert.AreEqual(0, System.Nullable.getValue(Bridge.cast(Bridge.unbox(Bridge.box(0, System.Int32)), System.Int32)));
+                // #1596
+                Bridge.Test.NUnit.Assert.Throws$6(System.InvalidCastException, $asm.$.Bridge.ClientTest.SimpleTypes.EnumTests.f3);
             },
             GetValuesWorks: function () {
                 var values = System.Enum.getValues(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum);
@@ -35023,9 +35036,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             IFormattableToStringWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("123", (System.UInt64(291)).toString("x"));
             },
-            CastingOfLargeValuesToUInt64Works: function () {
+            CastingOfLargeValuesToUInt64Works_SPI_1591: function () {
                 var d1 = 5000000000.5, d2 = -d1;
-                Bridge.Test.NUnit.Assert.True$1(System.UInt64(System.Int64([705032704,1])).equals(Bridge.Int.clipu64(d1)), "Positive");
+                Bridge.Test.NUnit.Assert.AreEqual$1(System.UInt64([705032704,1]), Bridge.Int.clipu64(d1), "Positive");
+                // #1591
                 Bridge.Test.NUnit.Assert.True$1(Bridge.Int.clipu64(d2).gt(System.UInt64(2147483647)), "Negative");
             },
             DivisionOfLargeUInt64Works: function () {
