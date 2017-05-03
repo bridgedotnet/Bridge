@@ -19273,6 +19273,30 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2636", {
+        statics: {
+            methods: {
+                TestUsingStatic: function () {
+                    var b = Other.Util.fun(System.String, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2636.f1);
+                    Bridge.Test.NUnit.Assert.True(Bridge.is(b, Function));
+                    Bridge.Test.NUnit.Assert.AreEqual("hello", b());
+
+                    var b2 = Bridge.ClientTest.Batch3.BridgeIssues.Util.fun2(System.String, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2636.f1);
+                    Bridge.Test.NUnit.Assert.True(Bridge.is(b2, Function));
+                    Bridge.Test.NUnit.Assert.AreEqual("hello", b2());
+                }
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2636", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2636, {
+        f1: function () {
+            return "hello";
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge266A", {
         statics: {
             methods: {
@@ -27646,6 +27670,16 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Util", {
+        statics: {
+            methods: {
+                fun2: function (T, a) {
+                    return a;
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.Constants", {
         statics: {
             fields: {
@@ -27697,6 +27731,16 @@ Bridge.$N1391Result =                     r;
                     if (message === void 0) { message = null; }
                     Bridge.Test.NUnit.Assert.AreStrictEqual$1(true, Bridge.is(v, System.Decimal), message);
                     Bridge.Test.NUnit.Assert.AreStrictEqual$1(Bridge.Int.format(d, 'G'), v.toString(), message);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Other.Util", {
+        statics: {
+            methods: {
+                fun: function (T, a) {
+                    return a;
                 }
             }
         }
