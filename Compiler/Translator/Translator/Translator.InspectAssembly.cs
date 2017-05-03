@@ -298,6 +298,7 @@ namespace Bridge.Translator
                     }
 
                     var syntaxTree = parser.Parse(rewriter.Rewrite(i), fileName);
+                    syntaxTree.FileName = fileName;
                     //var syntaxTree = parser.Parse(reader, fileName);
                     this.Log.Trace("\tParsing syntax tree done");
 
@@ -324,6 +325,7 @@ namespace Bridge.Translator
                         var astNode = syntaxTree.AcceptVisitor(fixer);
                         this.Log.Trace("\tAccepting lambda fixer visitor done");
                         syntaxTree = (astNode != null ? (SyntaxTree)astNode : syntaxTree);
+                        syntaxTree.FileName = fileName;
                     }
 
                     var f = new ParsedSourceFile(syntaxTree, new CSharpUnresolvedFile

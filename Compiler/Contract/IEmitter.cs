@@ -262,6 +262,18 @@ namespace Bridge.Contract
             set;
         }
 
+        string SourceFileName
+        {
+            get;
+            set;
+        }
+
+        string LastSequencePoint
+        {
+            get;
+            set;
+        }
+
         IEmitterOutputs Outputs
         {
             get;

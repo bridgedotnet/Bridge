@@ -333,6 +333,12 @@ namespace Bridge.Translator
                 {
                     var file = CreateFileDirectory(filePath);
                     logger.Trace("Output non-minified " + file.FullName);
+
+                    if (isJs)
+                    {
+                        code = this.GenerateSourceMap(file.FullName, path, code);
+                    }
+
                     this.SaveToFile(file.FullName, code);
                     files.Add(fileName, file.FullName);
                 }
@@ -348,6 +354,8 @@ namespace Bridge.Translator
 
                     var contentMinified = this.Minify(minifier, code, this.GetMinifierSettings(fileNameMin));
 
+                    contentMinified = this.GenerateSourceMap(file.FullName, path, contentMinified);
+
                     this.SaveToFile(file.FullName, contentMinified);
                 }
             }
@@ -355,6 +363,56 @@ namespace Bridge.Translator
             logger.Info("Done SaveTo path = " + path);
 
             return files;
+        }
+
+        private string GenerateSourceMap(string fileName, string outputPath, string content)
+        {
+            if (this.AssemblyInfo.SourceMap.Enabled)
+            {
+                var projectPath = Path.GetDirectoryName(this.Location);
+                SourceMapGenerator.Generate(fileName, projectPath, outputPath, this.AssemblyInfo.SourceMap.SourceRoot, ref content, (mapFileName, map) =>
+                {
+                    this.SaveToFile(mapFileName, map);
+                });
+
+                ExtractSourcesForSourceMap(outputPath, projectPath);
+            }
+            return content;
+        }
+
+        private bool sourcesExtracted = false;
+        private void ExtractSourcesForSourceMap(string outputPath, string projectPath)
+        {
+            if (!this.sourcesExtracted)
+            {
+                this.sourcesExtracted = true;
+                this.ParsedSourceFiles.Each(sf =>
+                {
+                    var content = sf.SyntaxTree.ToString();
+                    var fileName = new ConfigHelper().ConvertPath(sf.ParsedFile.FileName.Substring(projectPath.Length + 1), '/');
+                    if (fileName == "Properties/AssemblyInfo.cs")
+                    {
+                        return;
+                    }
+
+                    var root = this.AssemblyInfo.SourceMap.SourceRoot;
+
+                    if (root != null)
+                    {
+                        fileName = Path.Combine(root, fileName);
+                    }
+
+                    fileName = new ConfigHelper().ConvertPath(Path.Combine(outputPath, fileName), '/');
+                    var file = new System.IO.FileInfo(fileName);
+
+                    if (!file.Directory.Exists)
+                    {
+                        file.Directory.Create();
+                    }
+
+                    this.SaveToFile(fileName, content);
+                });
+            }
         }
 
         public void RunAfterBuild()
@@ -921,12 +979,15 @@ namespace Bridge.Translator
 
             if (this.jsbuffer != null && this.jsbuffer.Length > 0)
             {
-                File.WriteAllText(filePath, this.jsbuffer.ToString(), OutputEncoding);
+                var code = this.GenerateSourceMap(filePath, path, this.jsbuffer.ToString());
+                File.WriteAllText(filePath, code, OutputEncoding);
             }
 
             if (this.jsminbuffer != null && this.jsminbuffer.Length > 0)
             {
-                File.WriteAllText(FileHelper.GetMinifiedJSFileName(filePath), this.jsminbuffer.ToString(), OutputEncoding);
+                var filePathMin = FileHelper.GetMinifiedJSFileName(filePath);
+                var code = this.GenerateSourceMap(filePathMin, path, this.jsminbuffer.ToString());
+                File.WriteAllText(filePathMin, code, OutputEncoding);
             }
 
             this.Log.Info("Done running Flush");

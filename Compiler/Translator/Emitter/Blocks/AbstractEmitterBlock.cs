@@ -41,12 +41,24 @@ namespace Bridge.Translator
             this.EndEmit();
         }
 
+        private int startPos;
+        private int checkPos;
         protected virtual void BeginEmit()
         {
+            if (this.Emitter.Translator.EmitNode != null)
+            {
+                this.startPos = this.Emitter.Output.Length;
+                this.WriteSequencePoint(this.Emitter.Translator.EmitNode.Region);
+                this.checkPos = this.Emitter.Output.Length;
+            }
         }
 
         protected virtual void EndEmit()
         {
+            if (this.Emitter.Translator.EmitNode != null && this.checkPos == this.Emitter.Output.Length)
+            {
+                this.Emitter.Output.Length = this.startPos;
+            }
             this.Emitter.Translator.EmitNode = this.previousNode;
         }
 

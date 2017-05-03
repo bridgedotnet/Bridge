@@ -1,12 +1,12 @@
 using Bridge.Contract;
 using Bridge.Contract.Constants;
-
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using ICSharpCode.NRefactory.TypeSystem;
 
 namespace Bridge.Translator
 {
@@ -33,6 +33,22 @@ namespace Bridge.Translator
         public virtual void ResetLevel(int level)
         {
             this.Emitter.ResetLevel(level);
+        }
+
+        public virtual void WriteSequencePoint(DomRegion region)
+        {
+            if (this.Emitter.AssemblyInfo.SourceMap.Enabled)
+            {
+                var line = region.BeginLine;
+                var column = region.BeginColumn;
+                var point = string.Format("/*##|{0},{1},{2}|##*/", this.Emitter.SourceFileName, line, column);
+
+                if (this.Emitter.LastSequencePoint != point)
+                {
+                    this.Emitter.LastSequencePoint = point;
+                    this.Write(point);
+                }
+            }
         }
 
         public virtual void WriteIndent()

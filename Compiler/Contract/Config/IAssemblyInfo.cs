@@ -188,5 +188,10 @@ namespace Bridge.Contract
             get;
             set;
         }
+
+        SourceMapConfig SourceMap
+        {
+            get; set;
+        }
     }
  }

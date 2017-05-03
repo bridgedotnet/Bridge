@@ -224,6 +224,11 @@
     <Compile Include="Logging\ConsoleLoggerWriter.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Logging\FileLoggerWriter.cs" />
+    <Compile Include="SourceMaps\ISourceMapRecorder.cs" />
+    <Compile Include="SourceMaps\SourceLocation.cs" />
+    <Compile Include="SourceMaps\SourceMapBuilder.cs" />
+    <Compile Include="SourceMaps\SourceMapEntry.cs" />
+    <Compile Include="SourceMaps\SourceMapGenerator.cs" />
     <Compile Include="Translator\InvocationInterceptor.cs" />
     <Compile Include="Translator\Plugins.cs" />
     <Compile Include="Utils\Loader.cs" />

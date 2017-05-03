@@ -523,5 +523,17 @@ namespace Bridge.Translator
         {
             get;
         }
+
+        public string SourceFileName
+        {
+            get;
+            set;
+        }
+
+        public string LastSequencePoint
+        {
+            get;
+            set;
+        }
     }
 }
