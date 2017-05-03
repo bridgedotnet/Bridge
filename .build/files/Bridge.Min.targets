@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <UsingTask TaskName="GenerateScript" AssemblyFile="$(MSBuildThisFileDirectory)..\tools\Bridge.Builder.dll" />
+  <UsingTask TaskName="BridgeCompilerTask" AssemblyFile="$(MSBuildThisFileDirectory)..\tools\Bridge.Builder.v16.dll" />
 
   <PropertyGroup>
     <NoStdLib>True</NoStdLib>
@@ -9,13 +9,13 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <PrepareForRunDependsOn>$(PrepareForRunDependsOn);BridgeGenerateScript</PrepareForRunDependsOn>
+    <PrepareForRunDependsOn>$(PrepareForRunDependsOn);BridgeNetGenerateScript</PrepareForRunDependsOn>
   </PropertyGroup>
 
-  <Target Name="BridgeGenerateScript">
-    <Message Text="------ BridgeGenerateScript task started: Project: $(MSBuildProjectName), Configuration: $(Configuration) $(Platform) OutputPath: $(OutputPath) ------" Importance="high" />
+  <Target Name="BridgeNetGenerateScript">
+    <Message Text="------ BridgeNetGenerateScript task started: Project: $(MSBuildProjectName), Configuration: $(Configuration) $(Platform) OutputPath: $(OutputPath) ------" Importance="high" />
 
-    <GenerateScript
+    <BridgeCompilerTask
       Assembly="@(IntermediateAssembly)"
       AssemblyName="$(AssemblyName)"
       AssembliesPath="$(OutDir)"
@@ -30,6 +30,6 @@
       RootNamespace="$(RootNamespace)"
       Sources="@(Compile)" />
 
-    <Message Text="------ BridgeGenerateScript task done: Project: $(MSBuildProjectName), Configuration: $(Configuration) $(Platform) OutputPath: $(OutputPath) ------" Importance="high" />
+    <Message Text="------ BridgeNetGenerateScript task done: Project: $(MSBuildProjectName), Configuration: $(Configuration) $(Platform) OutputPath: $(OutputPath) ------" Importance="high" />
   </Target>
 </Project>
