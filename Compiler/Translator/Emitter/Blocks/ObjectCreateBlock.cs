@@ -115,13 +115,11 @@ namespace Bridge.Translator
 
             var customCtor = isTypeParam ? "" : (this.Emitter.Validator.GetCustomConstructor(type) ?? "");
 
-            bool isCollectionInitializer = false;
             AstNodeCollection<Expression> elements = null;
 
             if (hasInitializer)
             {
                 elements = objectCreateExpression.Initializer.Elements;
-                isCollectionInitializer = elements.Count > 0 && elements.First() is ArrayInitializerExpression;
             }
 
             var isPlainObjectCtor = Regex.Match(customCtor, @"\s*\{\s*\}\s*").Success;
@@ -226,63 +224,80 @@ namespace Bridge.Translator
                     {
                         foreach (Expression item in elements)
                         {
-                            this.WriteComma();
-                            var rr = this.Emitter.Resolver.ResolveNode(item, this.Emitter) as MemberResolveResult;
-
-                            inlineCode = ObjectCreateBlock.GetInlineInit(item, this, tempVar);
-
-                            if (inlineCode != null)
-                            {
-                                this.Write(inlineCode);
-                            }
-                            else if (item is NamedExpression)
-                            {
-                                var namedExpression = (NamedExpression)item;
-                                this.Write(tempVar);
-                                this.WriteDot();
-                                this.Write(this.Emitter.GetEntityName(rr.Member));
-                                this.Write(" = ");
-                                namedExpression.Expression.AcceptVisitor(this.Emitter);
-                            }
-                            else if (item is NamedArgumentExpression)
-                            {
-                                var namedExpression = (NamedExpression)item;
-                                this.Write(tempVar);
-                                this.WriteDot();
-                                this.Write(this.Emitter.GetEntityName(rr.Member));
-                                this.Write(" = ");
-                                namedExpression.Expression.AcceptVisitor(this.Emitter);
-                            }
-                            else if (item is ArrayInitializerExpression)
-                            {
-                                var arrayInitializer = (ArrayInitializerExpression)item;
-                                this.Write("[");
-
-                                foreach (var el in arrayInitializer.Elements)
-                                {
-                                    this.EnsureComma(false);
-                                    el.AcceptVisitor(this.Emitter);
-                                    this.Emitter.Comma = true;
-                                }
-
-                                this.Write("]");
-                                this.Emitter.Comma = false;
-                            }
-                            else if (item is IdentifierExpression)
-                            {
-                                var identifierExpression = (IdentifierExpression)item;
-                                new IdentifierBlock(this.Emitter, identifierExpression).Emit();
-                            }
+                            this.WriteInitializerExpression(item, tempVar);
                         }
                     }
 
                     this.WriteComma();
                     this.Write(tempVar);
                     this.WriteCloseParentheses();
+                    this.RemoveTempVar(tempVar);
                 }
             }
 
             //Helpers.CheckValueTypeClone(invocationResolveResult, this.ObjectCreateExpression, this, pos);
+        }
+
+        private void WriteInitializerExpression(Expression item, string tempVar)
+        {
+            var rr = this.Emitter.Resolver.ResolveNode(item, this.Emitter) as MemberResolveResult;
+
+            var inlineCode = ObjectCreateBlock.GetInlineInit(item, this, tempVar);
+
+            if (inlineCode != null)
+            {
+                this.Write(inlineCode);
+            }
+            else if (item is NamedExpression)
+            {
+                this.WriteNamedExptession(((NamedExpression)item).Expression, tempVar, rr);
+            }
+            else if (item is NamedArgumentExpression)
+            {
+                this.WriteNamedExptession(((NamedArgumentExpression)item).Expression, tempVar, rr);
+            }
+            else if (item is ArrayInitializerExpression)
+            {
+                var arrayInitializer = (ArrayInitializerExpression) item;
+
+                foreach (var el in arrayInitializer.Elements)
+                {
+                    this.WriteInitializerExpression(el, tempVar + "." + this.Emitter.GetEntityName(rr.Member));
+                }
+            }
+            else if (item is IdentifierExpression)
+            {
+                this.WriteComma();
+                var identifierExpression = (IdentifierExpression) item;
+                new IdentifierBlock(this.Emitter, identifierExpression).Emit();
+            }
+            else
+            {
+                this.WriteComma();
+                item.AcceptVisitor(this.Emitter);
+            }
+        }
+
+        private void WriteNamedExptession(Expression expression, string tempVar, MemberResolveResult rr)
+        {
+            if (expression is ArrayInitializerExpression)
+            {
+                var arrayInitializer = (ArrayInitializerExpression) expression;
+
+                foreach (var el in arrayInitializer.Elements)
+                {
+                    this.WriteInitializerExpression(el, tempVar + "." + this.Emitter.GetEntityName(rr.Member));
+                }
+            }
+            else
+            {
+                this.WriteComma();
+                this.Write(tempVar);
+                this.WriteDot();
+                this.Write(this.Emitter.GetEntityName(rr.Member));
+                this.Write(" = ");
+                expression.AcceptVisitor(this.Emitter);
+            }
         }
 
         public static string GetInlineInit(Expression item, AbstractEmitterBlock block, string thisScope)
