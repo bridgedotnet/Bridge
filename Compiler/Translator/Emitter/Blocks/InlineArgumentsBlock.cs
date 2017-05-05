@@ -236,7 +236,7 @@ namespace Bridge.Translator
             this.Write(name);
         }
 
-        private string[] allowedModifiers = new[] {"default", "defaultFn", "raw", "plain", "body", "gettmp", "version", "tmp", "type", "array", "module"};
+        private string[] allowedModifiers = new[] {"default", "defaultFn", "raw", "plain", "body", "gettmp", "version", "tmp", "type", "array", "module", "GetHashCode", "ToString"};
 
         protected virtual void EmitInlineExpressionList(ArgumentsInfo argsInfo, string inline, bool asRef = false, bool isNull = false, bool? definition = null)
         {
@@ -403,6 +403,7 @@ namespace Bridge.Translator
                 bool isRaw = m.Groups[1].Success && m.Groups[1].Value == "*";
                 bool ignoreArray = isRaw || argsInfo.ParamsExpression == null;
                 string modifier = m.Groups[1].Success ? m.Groups[4].Value : null;
+
                 bool isSimple = false;
 
                 var tempKey = key + ":" + modifier ?? "";
@@ -589,7 +590,35 @@ namespace Bridge.Translator
                 }
                 else if (key == "this" || key == argsInfo.ThisName || (key == "0" && argsInfo.IsExtensionMethod))
                 {
-                    if (modifier == "type")
+                    if(modifier == "GetHashCode" || modifier == "ToString")
+                    {
+                        AstNode node = null;
+                        if (argsInfo.ThisArgument is AstNode)
+                        {
+                            node = (AstNode)argsInfo.ThisArgument;
+                        }
+                        else
+                        {
+                            node = argsInfo.Expression;
+                        }
+
+                        if (node != null)
+                        {
+                            var rr = this.Emitter.Resolver.ResolveNode(node, this.Emitter);
+                            var type = rr.Type;
+                            var mrr = rr as MemberResolveResult;
+                            if (mrr != null && mrr.Member.ReturnType.Kind != TypeKind.Enum && mrr.TargetResult != null)
+                            {
+                                type = mrr.TargetResult.Type;
+                            }
+
+                            var inlineMethod = ConversionBlock.GetInlineMethod(this.Emitter, modifier,
+                                           modifier == "ToString" ? this.Emitter.Resolver.Compilation.FindType(KnownTypeCode.String) :
+                                            this.Emitter.Resolver.Compilation.FindType(KnownTypeCode.Int32), type, argsInfo.Expression);
+                            this.Write(inlineMethod);
+                        }
+                    }
+                    else if (modifier == "type")
                     {
                         AstNode node = null;
                         if (argsInfo.ThisArgument is AstNode)
@@ -616,7 +645,7 @@ namespace Bridge.Translator
                             if (needName)
                             {
                                 isSimple = true;
-                                var enumType = type;
+                                var enumType = NullableType.GetUnderlyingType(type);
                                 if (type.Kind == TypeKind.Enum && this.Emitter.Validator.IsExternalType(type.GetDefinition()))
                                 {
                                     var enumMode = Helpers.EnumEmitMode(type);
@@ -663,7 +692,25 @@ namespace Bridge.Translator
 
                     if (exprs.Count > 0)
                     {
-                        if (modifier == "type")
+                        if (modifier == "GetHashCode" || modifier == "ToString")
+                        {
+                            IType type = null;
+                            if (paramsName == key && paramsType != null)
+                            {
+                                type = paramsType;
+                            }
+                            else
+                            {
+                                var rr = this.Emitter.Resolver.ResolveNode(exprs[0], this.Emitter);
+                                type = rr.Type;
+                            }
+
+                            var inlineMethod = ConversionBlock.GetInlineMethod(this.Emitter, modifier,
+                                               modifier == "ToString" ? this.Emitter.Resolver.Compilation.FindType(KnownTypeCode.String) :
+                                                this.Emitter.Resolver.Compilation.FindType(KnownTypeCode.Int32), type, exprs[0]);
+                            this.Write(inlineMethod);
+                        }
+                        else if (modifier == "type")
                         {
                             IType type = null;
                             if (paramsName == key && paramsType != null)
@@ -993,34 +1040,51 @@ namespace Bridge.Translator
                     }
                     else if (typeParams != null)
                     {
-                        var type = this.GetAstTypeByKey(typeParams, key);
-
-                        if (type != null)
-                        {
-                            if (modifier == "default" || modifier == "defaultFn")
-                            {
-                                var def = Inspector.GetDefaultFieldValue(type, this.Emitter.Resolver);
-                                this.GetDefaultValue(def, modifier);
-                            }
-                            else
-                            {
-                                type.AcceptVisitor(this.Emitter);
-                            }
-                        }
-                        else
+                        if (modifier == "GetHashCode" || modifier == "ToString")
                         {
                             var iType = this.GetTypeByKey(typeParams, key);
 
                             if (iType != null)
                             {
+                                var inlineMethod = ConversionBlock.GetInlineMethod(this.Emitter, modifier,
+                                    modifier == "ToString"
+                                        ? this.Emitter.Resolver.Compilation.FindType(KnownTypeCode.String)
+                                        : this.Emitter.Resolver.Compilation.FindType(KnownTypeCode.Int32), iType.IType,
+                                    null);
+                                this.Write(inlineMethod ?? "null");
+                            }
+                        }
+                        else
+                        {
+                            var type = this.GetAstTypeByKey(typeParams, key);
+
+                            if (type != null)
+                            {
                                 if (modifier == "default" || modifier == "defaultFn")
                                 {
-                                    var def = Inspector.GetDefaultFieldValue(iType.IType, iType.AstType);
+                                    var def = Inspector.GetDefaultFieldValue(type, this.Emitter.Resolver);
                                     this.GetDefaultValue(def, modifier);
                                 }
                                 else
                                 {
-                                    new CastBlock(this.Emitter, iType.IType).Emit();
+                                    type.AcceptVisitor(this.Emitter);
+                                }
+                            }
+                            else
+                            {
+                                var iType = this.GetTypeByKey(typeParams, key);
+
+                                if (iType != null)
+                                {
+                                    if (modifier == "default" || modifier == "defaultFn")
+                                    {
+                                        var def = Inspector.GetDefaultFieldValue(iType.IType, iType.AstType);
+                                        this.GetDefaultValue(def, modifier);
+                                    }
+                                    else
+                                    {
+                                        new CastBlock(this.Emitter, iType.IType).Emit();
+                                    }
                                 }
                             }
                         }

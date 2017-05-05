@@ -53,10 +53,10 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
                 var i3 = null;
 
                 Bridge.Test.NUnit.Assert.AreStrictEqual(0, ($t13 = i1, $t13 !== null ? $t13 : i2));
-                Bridge.Test.NUnit.Assert.AreStrictEqual(0, Bridge.unbox(($t14 = i1, $t14 !== null ? Bridge.box($t14, System.Int32, $box_.System.Nullable$1.toString) : o2)));
+                Bridge.Test.NUnit.Assert.AreStrictEqual(0, Bridge.unbox(($t14 = i1, $t14 !== null ? Bridge.box($t14, System.Int32, System.Nullable.toString, System.Nullable.getHashCode) : o2)));
                 Bridge.Test.NUnit.Assert.AreStrictEqual(0, ($t15 = i1, $t15 !== null ? $t15 : 1));
                 Bridge.Test.NUnit.Assert.AreStrictEqual(1, ($t16 = i3, $t16 !== null ? $t16 : i2));
-                Bridge.Test.NUnit.Assert.AreStrictEqual("test", Bridge.unbox(($t17 = i3, $t17 !== null ? Bridge.box($t17, System.Int32, $box_.System.Nullable$1.toString) : o2)));
+                Bridge.Test.NUnit.Assert.AreStrictEqual("test", Bridge.unbox(($t17 = i3, $t17 !== null ? Bridge.box($t17, System.Int32, System.Nullable.toString, System.Nullable.getHashCode) : o2)));
                 Bridge.Test.NUnit.Assert.AreStrictEqual(1, ($t18 = i3, $t18 !== null ? $t18 : 1));
                 Bridge.Test.NUnit.Assert.AreStrictEqual(1, ($t19 = null, $t19 !== null ? $t19 : i2));
             }
@@ -1624,13 +1624,5 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
                 }
             }
         }
-    });
-
-    var $box_ = {};
-
-    Bridge.ns("System.Nullable$1", $box_);
-
-    Bridge.apply($box_.System.Nullable$1, {
-        toString: function (obj) {return System.Nullable.toString(obj);}
     });
 });

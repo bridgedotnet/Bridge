@@ -258,7 +258,7 @@ namespace Bridge.ClientTest
 
             o = new Values?(Values.Value2);
             Console.WriteLine(o);
-            AssertConsoleMessage("#9", StringHelper.CombineLinesNL("2")); // That's a bug in nullable<enum>.ToString(), expected "Value2"
+            AssertConsoleMessage("#9", StringHelper.CombineLinesNL("Value2"));
 
             o = new decimal?(1.01m);
             Console.WriteLine(o);
@@ -747,7 +747,7 @@ namespace Bridge.ClientTest
 
             o = new Values?(Values.Value2);
             Console.Write(o);
-            AssertConsoleMessage("#9", "2"); // That's a bug in nullable<enum>.ToString(), expected "Value2"
+            AssertConsoleMessage("#9", "Value2");
 
             o = new decimal?(1.01m);
             Console.Write(o);

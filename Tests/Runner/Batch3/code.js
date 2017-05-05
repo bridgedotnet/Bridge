@@ -697,13 +697,13 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                 TestNullableMethods: function () {
                     var a = 1;
                     var b = 1;
-                    Bridge.Test.NUnit.Assert.True(System.Nullable.equals(a, Bridge.box(b, System.Int32, $box_.System.Nullable$1.toString), function ($t, other) { return System.Int32.equals($t, other); }));
-                    Bridge.Test.NUnit.Assert.AreEqual("1", System.Nullable.toString(a));
-                    Bridge.Test.NUnit.Assert.AreEqual(1, System.Nullable.getHashCode(a));
+                    Bridge.Test.NUnit.Assert.True(System.Nullable.equals(a, Bridge.box(b, System.Int32, System.Nullable.toString, System.Nullable.getHashCode), function ($t, other) { return System.Int32.equals($t, other); }));
+                    Bridge.Test.NUnit.Assert.AreEqual("1", System.Nullable.toString(a, null));
+                    Bridge.Test.NUnit.Assert.AreEqual(1, System.Nullable.getHashCode(a, null));
                     a = null;
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.equals(a, Bridge.box(b, System.Int32, $box_.System.Nullable$1.toString), function ($t, other) { return System.Int32.equals($t, other); }));
-                    Bridge.Test.NUnit.Assert.AreEqual("", System.Nullable.toString(a));
-                    Bridge.Test.NUnit.Assert.AreEqual(0, System.Nullable.getHashCode(a));
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.equals(a, Bridge.box(b, System.Int32, System.Nullable.toString, System.Nullable.getHashCode), function ($t, other) { return System.Int32.equals($t, other); }));
+                    Bridge.Test.NUnit.Assert.AreEqual("", System.Nullable.toString(a, null));
+                    Bridge.Test.NUnit.Assert.AreEqual(0, System.Nullable.getHashCode(a, null));
                 }
             }
         }
@@ -2552,7 +2552,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                     var o = Bridge.box(b, System.Byte);
                     Bridge.Test.NUnit.Assert.AreEqual(System.Byte, Bridge.getType(o));
 
-                    o = Bridge.box(f, System.Single, $box_.System.Single.toString);
+                    o = Bridge.box(f, System.Single, $box_.System.Single.toString, $box_.System.Single.getHashCode);
                     Bridge.Test.NUnit.Assert.AreEqual(System.Single, Bridge.getType(o));
                 }
             }
@@ -6171,22 +6171,22 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                     Bridge.Test.NUnit.Assert.AreEqual("System.Single", Bridge.Reflection.getTypeFullName(Bridge.getType(value)));
                 },
                 TestNanFiniteType: function () {
-                    var value1 = Bridge.box(NaN, System.Double, $box_.System.Double.toString);
+                    var value1 = Bridge.box(NaN, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode);
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge1379.AssertDoubleNaN(value1);
 
-                    var value2 = Bridge.box(Infinity, System.Double, $box_.System.Double.toString);
+                    var value2 = Bridge.box(Infinity, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode);
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge1379.AssertDoubleNaN(value2);
 
-                    var value3 = Bridge.box(-Infinity, System.Double, $box_.System.Double.toString);
+                    var value3 = Bridge.box(-Infinity, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode);
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge1379.AssertDoubleNaN(value3);
 
-                    var value4 = Bridge.box(NaN, System.Single, $box_.System.Single.toString);
+                    var value4 = Bridge.box(NaN, System.Single, $box_.System.Single.toString, $box_.System.Single.getHashCode);
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge1379.AssertSingleNaN(value4);
 
-                    var value5 = Bridge.box(Infinity, System.Single, $box_.System.Single.toString);
+                    var value5 = Bridge.box(Infinity, System.Single, $box_.System.Single.toString, $box_.System.Single.getHashCode);
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge1379.AssertSingleNaN(value5);
 
-                    var value6 = Bridge.box(-Infinity, System.Single, $box_.System.Single.toString);
+                    var value6 = Bridge.box(-Infinity, System.Single, $box_.System.Single.toString, $box_.System.Single.getHashCode);
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge1379.AssertSingleNaN(value6);
                 }
             }
@@ -7467,10 +7467,10 @@ Bridge.$N1391Result =                     r;
                 var i3 = null;
 
                 Bridge.Test.NUnit.Assert.AreStrictEqual(0, ($t11 = i1, $t11 != null ? $t11 : i2));
-                Bridge.Test.NUnit.Assert.AreStrictEqual(0, Bridge.unbox(($t12 = i1, $t12 != null ? Bridge.box($t12, System.Int32, $box_.System.Nullable$1.toString) : o2)));
+                Bridge.Test.NUnit.Assert.AreStrictEqual(0, Bridge.unbox(($t12 = i1, $t12 != null ? Bridge.box($t12, System.Int32, System.Nullable.toString, System.Nullable.getHashCode) : o2)));
                 Bridge.Test.NUnit.Assert.AreStrictEqual(0, ($t13 = i1, $t13 != null ? $t13 : 1));
                 Bridge.Test.NUnit.Assert.AreStrictEqual(1, ($t14 = i3, $t14 != null ? $t14 : i2));
-                Bridge.Test.NUnit.Assert.AreStrictEqual("test", Bridge.unbox(($t15 = i3, $t15 != null ? Bridge.box($t15, System.Int32, $box_.System.Nullable$1.toString) : o2)));
+                Bridge.Test.NUnit.Assert.AreStrictEqual("test", Bridge.unbox(($t15 = i3, $t15 != null ? Bridge.box($t15, System.Int32, System.Nullable.toString, System.Nullable.getHashCode) : o2)));
                 Bridge.Test.NUnit.Assert.AreStrictEqual(1, ($t16 = i3, $t16 != null ? $t16 : 1));
                 Bridge.Test.NUnit.Assert.AreStrictEqual(1, null || i2);
             }
@@ -13672,7 +13672,7 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestBoxedChar: function () {
-                    var v = Bridge.box(97, System.Char, $box_.System.Char.toString);
+                    var v = Bridge.box(97, System.Char, $box_.System.Char.toString, $box_.System.Char.getHashCode);
                     Bridge.Test.NUnit.Assert.AreEqual("a", v.toString());
                 }
             }
@@ -13683,7 +13683,7 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestBoxedChar: function () {
-                    var v = Bridge.box(97, System.Char, $box_.System.Char.toString);
+                    var v = Bridge.box(97, System.Char, $box_.System.Char.toString, $box_.System.Char.getHashCode);
                     Bridge.Test.NUnit.Assert.AreEqual("System.Char", Bridge.Reflection.getTypeFullName(Bridge.getType(v)));
                 }
             }
@@ -13702,9 +13702,9 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.AreEqual("System.UInt16", Bridge.Reflection.getTypeFullName(Bridge.getType(v)));
                     v = Bridge.box(3, System.Int16);
                     Bridge.Test.NUnit.Assert.AreEqual("System.Int16", Bridge.Reflection.getTypeFullName(Bridge.getType(v)));
-                    v = Bridge.box(1.0, System.Double, $box_.System.Double.toString);
+                    v = Bridge.box(1.0, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode);
                     Bridge.Test.NUnit.Assert.AreEqual("System.Double", Bridge.Reflection.getTypeFullName(Bridge.getType(v)));
-                    v = Bridge.box(1.0, System.Single, $box_.System.Single.toString);
+                    v = Bridge.box(1.0, System.Single, $box_.System.Single.toString, $box_.System.Single.getHashCode);
                     Bridge.Test.NUnit.Assert.AreEqual("System.Single", Bridge.Reflection.getTypeFullName(Bridge.getType(v)));
                 }
             }
@@ -13800,7 +13800,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1347", {
         methods: {
             TestFixed: function () {
-                var types = System.Array.init([Bridge.box(7, System.Int32), Bridge.box(7, System.Byte), Bridge.box(7, System.UInt32), System.Int64(7), System.UInt64(7), Bridge.box(7, System.Int16), Bridge.box(8, System.UInt16), Bridge.box(9, System.SByte), Bridge.box(3.0, System.Double, $box_.System.Double.toString), Bridge.box(3.0, System.Single, $box_.System.Single.toString), Bridge.box(97, System.Char, $box_.System.Char.toString), System.Decimal(7.0), new $asm.$AnonymousType$15(3), $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1347.f1(new (System.Collections.Generic.List$1(System.Int32))())], System.Object);
+                var types = System.Array.init([Bridge.box(7, System.Int32), Bridge.box(7, System.Byte), Bridge.box(7, System.UInt32), System.Int64(7), System.UInt64(7), Bridge.box(7, System.Int16), Bridge.box(8, System.UInt16), Bridge.box(9, System.SByte), Bridge.box(3.0, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode), Bridge.box(3.0, System.Single, $box_.System.Single.toString, $box_.System.Single.getHashCode), Bridge.box(97, System.Char, $box_.System.Char.toString, $box_.System.Char.getHashCode), System.Decimal(7.0), new $asm.$AnonymousType$15(3), $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1347.f1(new (System.Collections.Generic.List$1(System.Int32))())], System.Object);
 
                 var expected = System.Array.init(["System.Int32", "System.Byte", "System.UInt32", "System.Int64", "System.UInt64", "System.Int16", "System.UInt16", "System.SByte", "System.Double", "System.Single", "System.Char", "System.Decimal", "$AnonymousType$15", "System.Collections.Generic.List`1[[System.Int32, mscorlib]]"], System.String);
 
@@ -16712,22 +16712,22 @@ Bridge.$N1391Result =                     r;
             methods: {
                 TestBoxedEqualsAndGetHashCode: function () {
                     var d = new (System.Collections.Generic.Dictionary$2(System.Object,System.Object))();
-                    d.add(Bridge.box(1, System.Int32), Bridge.box(2.0, System.Double, $box_.System.Double.toString));
+                    d.add(Bridge.box(1, System.Int32), Bridge.box(2.0, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode));
 
                     Bridge.Test.NUnit.Assert.True(d.containsKey(Bridge.box(1, System.Int32)));
-                    Bridge.Test.NUnit.Assert.False(d.containsKey(Bridge.box(1.0, System.Double, $box_.System.Double.toString)));
-                    Bridge.Test.NUnit.Assert.True(d.containsValue(Bridge.box(2.0, System.Double, $box_.System.Double.toString)));
+                    Bridge.Test.NUnit.Assert.False(d.containsKey(Bridge.box(1.0, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode)));
+                    Bridge.Test.NUnit.Assert.True(d.containsValue(Bridge.box(2.0, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode)));
                     Bridge.Test.NUnit.Assert.False(d.containsValue(Bridge.box(2, System.Int32)));
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.unbox(d.get(Bridge.box(1, System.Int32))), 2);
 
-                    d.add(Bridge.box(1.0, System.Double, $box_.System.Double.toString), Bridge.box(3.0, System.Double, $box_.System.Double.toString));
-                    Bridge.Test.NUnit.Assert.True(d.containsKey(Bridge.box(1.0, System.Double, $box_.System.Double.toString)));
-                    Bridge.Test.NUnit.Assert.True(d.containsValue(Bridge.box(3.0, System.Double, $box_.System.Double.toString)));
+                    d.add(Bridge.box(1.0, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode), Bridge.box(3.0, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode));
+                    Bridge.Test.NUnit.Assert.True(d.containsKey(Bridge.box(1.0, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode)));
+                    Bridge.Test.NUnit.Assert.True(d.containsValue(Bridge.box(3.0, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode)));
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.unbox(d.get(Bridge.box(1, System.Int32))), 2);
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.unbox(d.get(Bridge.box(1.0, System.Double, $box_.System.Double.toString))), 3);
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.unbox(d.get(Bridge.box(1.0, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode))), 3);
 
                     Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentException, function () {
-                        d.add(Bridge.box(1.0, System.Double, $box_.System.Double.toString), Bridge.box(4, System.Int32));
+                        d.add(Bridge.box(1.0, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode), Bridge.box(4, System.Int32));
                     });
                 }
             }
@@ -16780,7 +16780,7 @@ Bridge.$N1391Result =                     r;
                         System.Array.setItem(list, 0, Bridge.box(false, System.Boolean, $box_.System.Boolean.toString));
                     });
                     Bridge.Test.NUnit.Assert.Throws$6(System.ArgumentException, function () {
-                        System.Array.setItem(list, 0, Bridge.box(1.5, System.Double, $box_.System.Double.toString));
+                        System.Array.setItem(list, 0, Bridge.box(1.5, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode));
                     });
 
                     System.Array.setItem(list, 0, Bridge.box(1, System.Int32));
@@ -17100,27 +17100,27 @@ Bridge.$N1391Result =                     r;
                                                 return true;
                                         }
                                         case 1: {
-                                            $enumerator.current = System.Array.init([Bridge.box(7, System.Int32, $box_.System.Nullable$1.toString), null, Bridge.box(1, System.Int32)], System.Object);
+                                            $enumerator.current = System.Array.init([Bridge.box(7, System.Int32, System.Nullable.toString, System.Nullable.getHashCode), null, Bridge.box(1, System.Int32)], System.Object);
                                                 $step = 2;
                                                 return true;
                                         }
                                         case 2: {
-                                            $enumerator.current = System.Array.init([null, Bridge.box(7, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(-1, System.Int32)], System.Object);
+                                            $enumerator.current = System.Array.init([null, Bridge.box(7, System.Int32, System.Nullable.toString, System.Nullable.getHashCode), Bridge.box(-1, System.Int32)], System.Object);
                                                 $step = 3;
                                                 return true;
                                         }
                                         case 3: {
-                                            $enumerator.current = System.Array.init([Bridge.box(7, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(7, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(0, System.Int32)], System.Object);
+                                            $enumerator.current = System.Array.init([Bridge.box(7, System.Int32, System.Nullable.toString, System.Nullable.getHashCode), Bridge.box(7, System.Int32, System.Nullable.toString, System.Nullable.getHashCode), Bridge.box(0, System.Int32)], System.Object);
                                                 $step = 4;
                                                 return true;
                                         }
                                         case 4: {
-                                            $enumerator.current = System.Array.init([Bridge.box(7, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(5, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(1, System.Int32)], System.Object);
+                                            $enumerator.current = System.Array.init([Bridge.box(7, System.Int32, System.Nullable.toString, System.Nullable.getHashCode), Bridge.box(5, System.Int32, System.Nullable.toString, System.Nullable.getHashCode), Bridge.box(1, System.Int32)], System.Object);
                                                 $step = 5;
                                                 return true;
                                         }
                                         case 5: {
-                                            $enumerator.current = System.Array.init([Bridge.box(5, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(7, System.Int32, $box_.System.Nullable$1.toString), Bridge.box(-1, System.Int32)], System.Object);
+                                            $enumerator.current = System.Array.init([Bridge.box(5, System.Int32, System.Nullable.toString, System.Nullable.getHashCode), Bridge.box(7, System.Int32, System.Nullable.toString, System.Nullable.getHashCode), Bridge.box(-1, System.Int32)], System.Object);
                                                 $step = 6;
                                                 return true;
                                         }
@@ -17151,7 +17151,7 @@ Bridge.$N1391Result =                     r;
                             var expected = System.Nullable.getValue(Bridge.cast(Bridge.unbox(data[System.Array.index(2, data)]), System.Int32));
 
                             Bridge.Test.NUnit.Assert.AreEqual(expected === 0, System.Nullable.equals(n1, n2));
-                            Bridge.Test.NUnit.Assert.AreEqual(expected === 0, System.Nullable.equals(n1, Bridge.box(n2, System.Int32, $box_.System.Nullable$1.toString), function ($t, other) { return System.Int32.equals($t, other); }));
+                            Bridge.Test.NUnit.Assert.AreEqual(expected === 0, System.Nullable.equals(n1, Bridge.box(n2, System.Int32, System.Nullable.toString, System.Nullable.getHashCode), function ($t, other) { return System.Int32.equals($t, other); }));
                             Bridge.Test.NUnit.Assert.AreEqual(expected, System.Nullable.compare(n1, n2));
                         }
                     }finally {
@@ -17210,7 +17210,7 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeFullName(System.DateTime), Bridge.Reflection.getTypeFullName(Bridge.getType(Bridge.box(p.CreatedOn, System.DateTime, $box_.System.DateTime.toString))));
                     Bridge.Test.NUnit.Assert.AreEqual(new Date().getFullYear(), p.CreatedOn.getFullYear());
 
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeFullName(System.DateTime), Bridge.Reflection.getTypeFullName(Bridge.getType(Bridge.box(p.CreatedOnNullable, System.DateTime, $box_.System.Nullable$1.toString))));
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeFullName(System.DateTime), Bridge.Reflection.getTypeFullName(Bridge.getType(Bridge.box(p.CreatedOnNullable, System.DateTime, System.Nullable.toStringFn($box_.System.DateTime.toString), System.Nullable.getHashCode))));
                     Bridge.Test.NUnit.Assert.AreEqual(new Date().getFullYear(), System.Nullable.getValue(p.CreatedOnNullable).getFullYear());
                 }
             }
@@ -19545,7 +19545,7 @@ Bridge.$N1391Result =                     r;
                     var s2 = Bridge.toArray(animals).join(" ");
                     Bridge.Test.NUnit.Assert.AreEqual$1("Squirrel Gray Wolf Capybara", s2, "Join2");
 
-                    var values = System.Array.init([null, "Cobb", Bridge.box(4189, System.Int32), Bridge.box(11434, System.Int32), Bridge.box(0.366, System.Double, $box_.System.Double.toString)], System.Object);
+                    var values = System.Array.init([null, "Cobb", Bridge.box(4189, System.Int32), Bridge.box(11434, System.Int32), Bridge.box(0.366, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode)], System.Object);
                     var s31 = values.join("|");
                     Bridge.Test.NUnit.Assert.AreEqual$1("|Cobb|4189|11434|0.366", s31, "Join31");
 
@@ -25526,7 +25526,7 @@ Bridge.$N1391Result =                     r;
                 },
                 TestMakeEnumerable: function () {
                     Bridge.Test.NUnit.Assert.AreEqual$1(0, System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge889.MakeEnumerable(System.Object)).count(), "MakeEnumerable object 0");
-                    Bridge.Test.NUnit.Assert.AreEqual$1(2, System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge889.MakeEnumerable(System.Object, [Bridge.box(1, System.Int32), Bridge.box(2.0, System.Double, $box_.System.Double.toString)])).count(), "MakeEnumerable object 2");
+                    Bridge.Test.NUnit.Assert.AreEqual$1(2, System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge889.MakeEnumerable(System.Object, [Bridge.box(1, System.Int32), Bridge.box(2.0, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode)])).count(), "MakeEnumerable object 2");
 
                     Bridge.Test.NUnit.Assert.AreEqual$1(0, System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge889.MakeEnumerable(System.String)).count(), "MakeEnumerable string 0");
                     Bridge.Test.NUnit.Assert.AreEqual$1(3, System.Linq.Enumerable.from(Bridge.ClientTest.Batch3.BridgeIssues.Bridge889.MakeEnumerable(System.String, ["a", "b", "c"])).count(), "MakeEnumerable string 3");
@@ -26864,12 +26864,12 @@ Bridge.$N1391Result =                     r;
 
                     // https://msdn.microsoft.com/en-us/library/aa691289(v=vs.71).aspx
                     // If the value of the operand is NaN or infinite, the result of the conversion is an unspecified value of the destination type.
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.Byte), Bridge.box(y1, System.Byte, $box_.System.Nullable$1.toString), "PositiveInfinity -> byte");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-128, System.SByte), Bridge.box(y2, System.SByte, $box_.System.Nullable$1.toString), "PositiveInfinity -> sbyte");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-32768, System.Int16), Bridge.box(y3, System.Int16, $box_.System.Nullable$1.toString), "PositiveInfinity -> short");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.UInt16), Bridge.box(y4, System.UInt16, $box_.System.Nullable$1.toString), "PositiveInfinity -> ushort");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-2147483648, System.Int32), Bridge.box(y5, System.Int32, $box_.System.Nullable$1.toString), "PositiveInfinity -> int");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.UInt32), Bridge.box(y6, System.UInt32, $box_.System.Nullable$1.toString), "PositiveInfinity -> uint");
+                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.Byte), Bridge.box(y1, System.Byte, System.Nullable.toString, System.Nullable.getHashCode), "PositiveInfinity -> byte");
+                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-128, System.SByte), Bridge.box(y2, System.SByte, System.Nullable.toString, System.Nullable.getHashCode), "PositiveInfinity -> sbyte");
+                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-32768, System.Int16), Bridge.box(y3, System.Int16, System.Nullable.toString, System.Nullable.getHashCode), "PositiveInfinity -> short");
+                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.UInt16), Bridge.box(y4, System.UInt16, System.Nullable.toString, System.Nullable.getHashCode), "PositiveInfinity -> ushort");
+                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-2147483648, System.Int32), Bridge.box(y5, System.Int32, System.Nullable.toString, System.Nullable.getHashCode), "PositiveInfinity -> int");
+                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.UInt32), Bridge.box(y6, System.UInt32, System.Nullable.toString, System.Nullable.getHashCode), "PositiveInfinity -> uint");
                     Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(System.Int64.MinValue, y7, "PositiveInfinity -> long");
                     Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(System.UInt64.MinValue, y8, "PositiveInfinity -> ulong");
 
@@ -26886,12 +26886,12 @@ Bridge.$N1391Result =                     r;
 
                     // https://msdn.microsoft.com/en-us/library/aa691289(v=vs.71).aspx
                     // If the value of the operand is NaN or infinite, the result of the conversion is an unspecified value of the destination type.
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.Byte), Bridge.box(z1, System.Byte, $box_.System.Nullable$1.toString), "NegativeInfinity -> byte");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-128, System.SByte), Bridge.box(z2, System.SByte, $box_.System.Nullable$1.toString), "NegativeInfinity -> sbyte");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-32768, System.Int16), Bridge.box(z3, System.Int16, $box_.System.Nullable$1.toString), "NegativeInfinity -> short");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.UInt16), Bridge.box(z4, System.UInt16, $box_.System.Nullable$1.toString), "NegativeInfinity -> ushort");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-2147483648, System.Int32), Bridge.box(z5, System.Int32, $box_.System.Nullable$1.toString), "NegativeInfinity -> int");
-                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.UInt32), Bridge.box(z6, System.UInt32, $box_.System.Nullable$1.toString), "NegativeInfinity -> uint");
+                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.Byte), Bridge.box(z1, System.Byte, System.Nullable.toString, System.Nullable.getHashCode), "NegativeInfinity -> byte");
+                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-128, System.SByte), Bridge.box(z2, System.SByte, System.Nullable.toString, System.Nullable.getHashCode), "NegativeInfinity -> sbyte");
+                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-32768, System.Int16), Bridge.box(z3, System.Int16, System.Nullable.toString, System.Nullable.getHashCode), "NegativeInfinity -> short");
+                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.UInt16), Bridge.box(z4, System.UInt16, System.Nullable.toString, System.Nullable.getHashCode), "NegativeInfinity -> ushort");
+                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(-2147483648, System.Int32), Bridge.box(z5, System.Int32, System.Nullable.toString, System.Nullable.getHashCode), "NegativeInfinity -> int");
+                    Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(Bridge.box(0, System.UInt32), Bridge.box(z6, System.UInt32, System.Nullable.toString, System.Nullable.getHashCode), "NegativeInfinity -> uint");
                     Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(System.Int64.MinValue, z7, "NegativeInfinity -> long");
                     Bridge.ClientTest.Batch3.BridgeIssues.N1122.AssertNumber(System.UInt64.MinValue, z8, "NegativeInfinity -> ulong");
                 },
@@ -27374,9 +27374,9 @@ Bridge.$N1391Result =                     r;
                     var DoublePositiveInfinity = Number.POSITIVE_INFINITY;
                     var DoubleNaN = Number.NaN;
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(DoubleMaxValue, System.Double, $box_.System.Double.toString), "1.79769313486232E+308", "DoubleMaxValue");
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(DoubleMinValue, System.Double, $box_.System.Double.toString), "-1.79769313486232E+308", "DoubleMinValue");
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(DoubleEpsilon, System.Double, $box_.System.Double.toString), "4.94065645841247E-324", "DoubleEpsilon");
+                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(DoubleMaxValue, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode), "1.79769313486232E+308", "DoubleMaxValue");
+                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(DoubleMinValue, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode), "-1.79769313486232E+308", "DoubleMinValue");
+                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(DoubleEpsilon, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode), "4.94065645841247E-324", "DoubleEpsilon");
                     Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(numberNegativeInfinity), DoubleNegativeInfinity, "DoubleNegativeInfinity");
                     Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(numberPositiveInfinity), DoublePositiveInfinity, "DoublePositiveInfinity");
                     Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(numberNaN), DoubleNaN, "DoubleNaN");
@@ -27390,9 +27390,9 @@ Bridge.$N1391Result =                     r;
                     DoublePositiveInfinity = Number.POSITIVE_INFINITY + dblz;
                     DoubleNaN = Number.NaN + dblz;
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(DoubleMaxValue, System.Double, $box_.System.Double.toString), "1.79769313486232E+308", "DoubleMaxValuein expression");
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(DoubleMinValue, System.Double, $box_.System.Double.toString), "-1.79769313486232E+308", "DoubleMinValuein expression");
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(DoubleEpsilon, System.Double, $box_.System.Double.toString), "4.94065645841247E-324", "DoubleEpsilonin expression");
+                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(DoubleMaxValue, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode), "1.79769313486232E+308", "DoubleMaxValuein expression");
+                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(DoubleMinValue, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode), "-1.79769313486232E+308", "DoubleMinValuein expression");
+                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(DoubleEpsilon, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode), "4.94065645841247E-324", "DoubleEpsilonin expression");
                     Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(numberNegativeInfinity), DoubleNegativeInfinity, "DoubleNegativeInfinityin expression");
                     Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(numberPositiveInfinity), DoublePositiveInfinity, "DoublePositiveInfinityin expression");
                     Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(numberNaN), DoubleNaN, "DoubleNaNin expression");
@@ -27401,17 +27401,17 @@ Bridge.$N1391Result =                     r;
                     var MathE = Math.E;
                     var MathPI = Math.PI;
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(MathE, System.Double, $box_.System.Double.toString), "2.71828182845905", "MathE");
+                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(MathE, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode), "2.71828182845905", "MathE");
                     //IE has Math.LOG2E defined as 1.4426950408889633 instead of standard 1.4426950408889634
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(MathPI, System.Double, $box_.System.Double.toString), "3.14159265358979", "MathPI");
+                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(MathPI, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode), "3.14159265358979", "MathPI");
 
                     // Math consts in expression
                     MathE = 2.7182818284590451;
                     MathPI = 3.1415926535897931;
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(MathE, System.Double, $box_.System.Double.toString), "2.71828182845905", "MathEin expression");
+                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(MathE, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode), "2.71828182845905", "MathEin expression");
                     //IE has Math.LOG2E defined as 1.4426950408889633 instead of standard 1.4426950408889634
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(MathPI, System.Double, $box_.System.Double.toString), "3.14159265358979", "MathPIin expression");
+                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(MathPI, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode), "3.14159265358979", "MathPIin expression");
 
                     // Single consts
                     var SingleMaxValue = 3.40282347E+38;
@@ -27421,9 +27421,9 @@ Bridge.$N1391Result =                     r;
                     var SingleNegativeInfinity = Number.NEGATIVE_INFINITY;
                     var SinglePositiveInfinity = Number.POSITIVE_INFINITY;
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(SingleMaxValue, System.Single, $box_.System.Single.toString), "3.402823E+38", "SingleMaxValue");
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(SingleMinValue, System.Single, $box_.System.Single.toString), "-3.402823E+38", "SingleMinValue");
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(SingleEpsilon, System.Single, $box_.System.Single.toString), "1.401298E-45", "SingleEpsilon");
+                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(SingleMaxValue, System.Single, $box_.System.Single.toString, $box_.System.Single.getHashCode), "3.402823E+38", "SingleMaxValue");
+                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(SingleMinValue, System.Single, $box_.System.Single.toString, $box_.System.Single.getHashCode), "-3.402823E+38", "SingleMinValue");
+                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(SingleEpsilon, System.Single, $box_.System.Single.toString, $box_.System.Single.getHashCode), "1.401298E-45", "SingleEpsilon");
                     Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(numberNaN), SingleNaN, "SingleNaN");
                     Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(numberNegativeInfinity), SingleNegativeInfinity, "SingleNegativeInfinity");
                     Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(numberPositiveInfinity), SinglePositiveInfinity, "SinglePositiveInfinity");
@@ -27437,9 +27437,9 @@ Bridge.$N1391Result =                     r;
                     SingleNegativeInfinity = Number.NEGATIVE_INFINITY + fz;
                     SinglePositiveInfinity = Number.POSITIVE_INFINITY + fz;
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(SingleMaxValue, System.Single, $box_.System.Single.toString), "3.402823E+38", "SingleMaxValuein expression");
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(SingleMinValue, System.Single, $box_.System.Single.toString), "-3.402823E+38", "SingleMinValuein expression");
-                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(SingleEpsilon, System.Single, $box_.System.Single.toString), "1.401298E-45", "SingleEpsilonin expression");
+                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(SingleMaxValue, System.Single, $box_.System.Single.toString, $box_.System.Single.getHashCode), "3.402823E+38", "SingleMaxValuein expression");
+                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(SingleMinValue, System.Single, $box_.System.Single.toString, $box_.System.Single.getHashCode), "-3.402823E+38", "SingleMinValuein expression");
+                    Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues.EnsureNumber(Bridge.box(SingleEpsilon, System.Single, $box_.System.Single.toString, $box_.System.Single.getHashCode), "1.401298E-45", "SingleEpsilonin expression");
                     Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(numberNaN), SingleNaN, "SingleNaNin expression");
                     Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(numberNegativeInfinity), SingleNegativeInfinity, "SingleNegativeInfinityin expression");
                     Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(numberPositiveInfinity), SinglePositiveInfinity, "SinglePositiveInfinityin expression");
@@ -29243,17 +29243,11 @@ Bridge.$N1391Result =                     r;
 
     var $box_ = {};
 
-    Bridge.ns("System.Nullable$1", $box_);
-
-    Bridge.apply($box_.System.Nullable$1, {
-        toString: function (obj) {return System.Nullable.toString(obj);}
-    });
-
-
     Bridge.ns("System.Single", $box_);
 
     Bridge.apply($box_.System.Single, {
-        toString: function (obj) {return System.Single.format(obj, 'G');}
+        toString: function (obj) {return System.Single.format(obj, 'G');},
+        getHashCode: function (obj) {return System.Single.getHashCode(obj);}
     });
 
 
@@ -29267,14 +29261,16 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("System.Double", $box_);
 
     Bridge.apply($box_.System.Double, {
-        toString: function (obj) {return System.Double.format(obj, 'G');}
+        toString: function (obj) {return System.Double.format(obj, 'G');},
+        getHashCode: function (obj) {return System.Double.getHashCode(obj);}
     });
 
 
     Bridge.ns("System.Char", $box_);
 
     Bridge.apply($box_.System.Char, {
-        toString: function (obj) {return String.fromCharCode(obj);}
+        toString: function (obj) {return String.fromCharCode(obj);},
+        getHashCode: function (obj) {return System.Char.getHashCode(obj);}
     });
 
 
@@ -29313,52 +29309,10 @@ Bridge.$N1391Result =                     r;
     });
 
 
-    Bridge.ns("System.Nullable$1", $box_);
-
-    Bridge.apply($box_.System.Nullable$1, {
-        toString: function (obj) {return System.Nullable.toString(obj);}
-    });
-
-
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2558.Status", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2558.Status, {
         toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2558.Status, obj);}
-    });
-
-
-    Bridge.ns("System.Nullable$1", $box_);
-
-    Bridge.apply($box_.System.Nullable$1, {
-        toString: function (obj) {return System.Nullable.toString(obj);}
-    });
-
-
-    Bridge.ns("System.Nullable$1", $box_);
-
-    Bridge.apply($box_.System.Nullable$1, {
-        toString: function (obj) {return System.Nullable.toString(obj);}
-    });
-
-
-    Bridge.ns("System.Nullable$1", $box_);
-
-    Bridge.apply($box_.System.Nullable$1, {
-        toString: function (obj) {return System.Nullable.toString(obj);}
-    });
-
-
-    Bridge.ns("System.Nullable$1", $box_);
-
-    Bridge.apply($box_.System.Nullable$1, {
-        toString: function (obj) {return System.Nullable.toString(obj);}
-    });
-
-
-    Bridge.ns("System.Nullable$1", $box_);
-
-    Bridge.apply($box_.System.Nullable$1, {
-        toString: function (obj) {return System.Nullable.toString(obj);}
     });
 
     var $m = Bridge.setMetadata,
