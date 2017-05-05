@@ -526,6 +526,8 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#2592 - TestStackTrace", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2592.TestStackTrace);
             QUnit.test("#2610 - TestLambdaLifting", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2610.TestLambdaLifting);
             QUnit.test("#2614 - TestInitializers", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2614.TestInitializers);
+            QUnit.test("#2635 - TestInitializers", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2635.TestInitializers);
+            QUnit.test("#2636 - TestUsingStatic", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2636.TestUsingStatic);
             QUnit.test("#381 - TestUseCase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge381.TestUseCase);
             QUnit.test("#447 - CheckInlineExpression", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.CheckInlineExpression);
             QUnit.test("#447 - CheckInlineCalls", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.CheckInlineCalls);
@@ -10946,6 +10948,56 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 var $t;
                 if (this.context == null) {
                     this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2614", $t.File = "Batch3\\BridgeIssues\\2600\\N2614.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2635", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2635)],
+        statics: {
+            methods: {
+                TestInitializers: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2635).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2635, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestInitializers()", $t.Line = "55", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2635.TestInitializers();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2635", $t.File = "Batch3\\BridgeIssues\\2600\\N2635.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2636", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2636)],
+        statics: {
+            methods: {
+                TestUsingStatic: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2636).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2636, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestUsingStatic()", $t.Line = "13", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2636.TestUsingStatic();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2636", $t.File = "Batch3\\BridgeIssues\\2600\\N2636.cs", $t);
                 }
                 return this.context;
             }

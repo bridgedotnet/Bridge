@@ -2087,10 +2087,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     },
     methods: {
         Method1: function () {
-            var $t, $t1;
+            var $t;
             var a1 = ($t=new Bridge.ClientTest.BasicCSharp.ClassA.Aux1(), $t.Number = 1, $t);
 
-            return ($t1=new Bridge.ClientTest.BasicCSharp.ClassA.Aux1(), $t1.Number = 2, $t1.Related = a1, $t1);
+            return ($t=new Bridge.ClientTest.BasicCSharp.ClassA.Aux1(), $t.Number = 2, $t.Related = a1, $t);
         },
         Method2: function (a) {
             a.Related = a;
@@ -15896,7 +15896,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.ClientTest.DeserializationTests.AssertComplex(jsonC, Bridge.ClientTest.DeserializationTests.E1.Item1, Bridge.ClientTest.DeserializationTests.E1.Item2, Bridge.ClientTest.DeserializationTests.E1.Item3, 97, 98, 99);
                 },
                 CreateComplex: function (item1, item2, item3, l1, l2, l3) {
-                    var $t, $t1;
+                    var $t;
                     var c = new Bridge.ClientTest.DeserializationTests.Class1();
 
                     c.Sub1 = ($t=new Bridge.ClientTest.DeserializationTests.SubClass1(), $t.Owner = c, $t.List1 = function (_o22) {
@@ -15906,12 +15906,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                             return _o22;
                         }(new (System.Collections.Generic.List$1(Bridge.ClientTest.DeserializationTests.E1))()), $t);
 
-                    c.Sub2 = ($t1=new Bridge.ClientTest.DeserializationTests.SubClass2(), $t1.Owner = c, $t1.List1 = function (_o23) {
+                    c.Sub2 = ($t=new Bridge.ClientTest.DeserializationTests.SubClass2(), $t.Owner = c, $t.List1 = function (_o23) {
                             _o23.add(l1);
                             _o23.add(l2);
                             _o23.add(l3);
                             return _o23;
-                        }(new (System.Collections.Generic.List$1(System.Char))()), $t1);
+                        }(new (System.Collections.Generic.List$1(System.Char))()), $t);
 
                     return c;
                 },
@@ -22178,7 +22178,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         statics: {
             methods: {
                 Test: function () {
-                    var $t, $t1, $t2, $t3, $t4, $t5, $t6, $t7;
+                    var $t;
                     // TEST
                     var doubles = System.Array.init([1.7, 2.3, 1.9, 4.1, 2.9], System.Double);
 
@@ -22210,9 +22210,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var expectedGroupDictionary1 = new (System.Collections.Generic.Dictionary$2(System.String,Bridge.ClientTest.Utilities.Group))();
 
                     expectedGroupDictionary1.add("A", ($t=new Bridge.ClientTest.Utilities.Group(), $t.Name = "A", $t.Limit = 1000, $t));
-                    expectedGroupDictionary1.add("B", ($t1=new Bridge.ClientTest.Utilities.Group(), $t1.Name = "B", $t1.Limit = 400, $t1));
-                    expectedGroupDictionary1.add("C", ($t2=new Bridge.ClientTest.Utilities.Group(), $t2.Name = "C", $t2.Limit = 800, $t2));
-                    expectedGroupDictionary1.add("D", ($t3=new Bridge.ClientTest.Utilities.Group(), $t3.Name = "D", $t3.Limit = 200, $t3));
+                    expectedGroupDictionary1.add("B", ($t=new Bridge.ClientTest.Utilities.Group(), $t.Name = "B", $t.Limit = 400, $t));
+                    expectedGroupDictionary1.add("C", ($t=new Bridge.ClientTest.Utilities.Group(), $t.Name = "C", $t.Limit = 800, $t));
+                    expectedGroupDictionary1.add("D", ($t=new Bridge.ClientTest.Utilities.Group(), $t.Name = "D", $t.Limit = 200, $t));
                     Bridge.Test.NUnit.Assert.AreEqual$1("System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[Bridge.ClientTest.Utilities.Group, Bridge.ClientTest]]", Bridge.Reflection.getTypeFullName(Bridge.getType(groupDictionary1)), "ToDictionary(keySelector, elementSelector) conversion for <string, Group> - check type name");
                     Bridge.Test.NUnit.Assert.AreDeepEqual$1(expectedGroupDictionary1, groupDictionary1, "ToDictionary(keySelector, elementSelector) conversion for <string, Group> - check content");
 
@@ -22220,10 +22220,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var comparer = new Bridge.ClientTest.Linq.TestLinqConversionOperatorsIEqualityComparer();
                     var expectedGroupDictionary2 = new (System.Collections.Generic.Dictionary$2(System.String, Bridge.ClientTest.Utilities.Group))(null, comparer);
 
-                    expectedGroupDictionary2.add("A", ($t4=new Bridge.ClientTest.Utilities.Group(), $t4.Name = "A", $t4.Limit = 1000, $t4));
-                    expectedGroupDictionary2.add("B", ($t5=new Bridge.ClientTest.Utilities.Group(), $t5.Name = "B", $t5.Limit = 400, $t5));
-                    expectedGroupDictionary2.add("C", ($t6=new Bridge.ClientTest.Utilities.Group(), $t6.Name = "C", $t6.Limit = 800, $t6));
-                    expectedGroupDictionary2.add("D", ($t7=new Bridge.ClientTest.Utilities.Group(), $t7.Name = "D", $t7.Limit = 200, $t7));
+                    expectedGroupDictionary2.add("A", ($t=new Bridge.ClientTest.Utilities.Group(), $t.Name = "A", $t.Limit = 1000, $t));
+                    expectedGroupDictionary2.add("B", ($t=new Bridge.ClientTest.Utilities.Group(), $t.Name = "B", $t.Limit = 400, $t));
+                    expectedGroupDictionary2.add("C", ($t=new Bridge.ClientTest.Utilities.Group(), $t.Name = "C", $t.Limit = 800, $t));
+                    expectedGroupDictionary2.add("D", ($t=new Bridge.ClientTest.Utilities.Group(), $t.Name = "D", $t.Limit = 200, $t));
 
                     var groupDictionary2 = (System.Linq.Enumerable.from(groups).select($asm.$.Bridge.ClientTest.Linq.TestLinqConversionOperators.f3)).toDictionary($asm.$.Bridge.ClientTest.Linq.TestLinqConversionOperators.f4, $asm.$.Bridge.ClientTest.Linq.TestLinqConversionOperators.f3, System.String, Bridge.ClientTest.Utilities.Group, comparer);
 
@@ -26582,7 +26582,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual((Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C24, 16, 284, "Item").p || []), System.Array.init([System.Int32, System.String], Function));
             },
             PropertiesForGetMethodAreCorrectForPropertyImplementedAsGetAndSetMethods: function () {
-                var $t, $t1;
+                var $t;
                 var m1 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C14, 16, 284, "P1").g;
                 var m2 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C14, 16, 284, "P3").g;
                 var m3 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C14, 16, 284, "P13").g;
@@ -26624,7 +26624,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var p2 = Bridge.Reflection.midel(m2, null)(null);
                 Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(p2), new Date(2012, 4 - 1, 2), "m2.Invoke");
 
-                c = ($t1=new Bridge.ClientTest.Reflection.ReflectionTests.C14(), $t1.p13Field = 13, $t1);
+                c = ($t=new Bridge.ClientTest.Reflection.ReflectionTests.C14(), $t.p13Field = 13, $t);
                 var p3 = Bridge.Reflection.midel(m3, c)(null);
                 Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(p3), 13, "m3.Invoke");
 
@@ -26746,7 +26746,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.ClientTest.Reflection.ReflectionTests.C14.P4, 2.5, "m2.Invoke");
             },
             PropertiesForGetMethodAreCorrectForIndexer: function () {
-                var $t, $t1;
+                var $t;
                 var m1 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C15, 16, 284, "Item").g;
                 var m2 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C24, 16, 284, "Item").g;
 
@@ -26773,7 +26773,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var v1 = Bridge.Reflection.midel(m1, c1)(42, "Hello");
                 Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(v1), "X 42 Hello", "m1.Invoke");
 
-                var c2 = ($t1=new Bridge.ClientTest.Reflection.ReflectionTests.C24(), $t1.v = "Y", $t1);
+                var c2 = ($t=new Bridge.ClientTest.Reflection.ReflectionTests.C24(), $t.v = "Y", $t);
                 var v2 = Bridge.Reflection.midel(m2, c2)(24, "World");
                 Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(v2), "Y 24 World", "m2.Invoke");
             },
@@ -26881,7 +26881,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.True$1(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C17, 16, 284, "Item").s != null, "C17.SetMethod");
             },
             PropertyInfoGetValueWorks: function () {
-                var $t, $t1;
+                var $t;
                 var p1 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C14, 16, 284, "P1");
                 var p2 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C14, 16, 284, "P2");
                 var p3 = Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.ReflectionTests.C14, 16, 284, "P3");
@@ -26896,7 +26896,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(Bridge.Reflection.midel(p3.g, null)()), new Date(2013, 3 - 1, 5), "P3.GetValue");
                 Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(Bridge.Reflection.midel(p4.g, null)()), 7.5, "P4.GetValue");
 
-                var c15 = ($t1=new Bridge.ClientTest.Reflection.ReflectionTests.C15(), $t1.v = "X", $t1);
+                var c15 = ($t=new Bridge.ClientTest.Reflection.ReflectionTests.C15(), $t.v = "X", $t);
                 Bridge.Test.NUnit.Assert.AreEqual$1(Bridge.unbox(Bridge.Reflection.midel(i.g, c15).apply(null, System.Array.init([Bridge.box(42, System.Int32), "Hello"], System.Object))), "X 42 Hello", "Item.GetValue");
             },
             PropertyInfoSetValueWorks: function () {
@@ -30152,12 +30152,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.Test.NUnit.Assert.AreDeepEqual$1({ i1: "Item1", i2: "Item2", i3: "Item3" }, raw.dictField, "#12");
                 },
                 ComplexPropertiesWorks: function () {
-                    var $t, $t1;
+                    var $t;
                     var c = new Bridge.ClientTest.SerializationTests.Class1();
 
                     c.Sub1 = ($t=new Bridge.ClientTest.SerializationTests.SubClass1(), $t.Owner = c, $t.List1 = $asm.$.Bridge.ClientTest.SerializationTests.f3(new (System.Collections.Generic.List$1(Bridge.ClientTest.SerializationTests.E1))()), $t);
 
-                    c.Sub2 = ($t1=new Bridge.ClientTest.SerializationTests.SubClass2(), $t1.Owner = c, $t1.List1 = $asm.$.Bridge.ClientTest.SerializationTests.f4(new (System.Collections.Generic.List$1(System.Char))()), $t1);
+                    c.Sub2 = ($t=new Bridge.ClientTest.SerializationTests.SubClass2(), $t.Owner = c, $t.List1 = $asm.$.Bridge.ClientTest.SerializationTests.f4(new (System.Collections.Generic.List$1(System.Char))()), $t);
 
                     var json = Bridge.Json.serialize(c);
                     Bridge.Test.NUnit.Assert.AreEqual("{\"Sub1\":{\"List1\":[\"Item1\",\"Item2\",\"Item3\"]},\"Sub2\":{\"List1\":[\"a\",\"b\",\"c\"]}}", json);
@@ -40200,12 +40200,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         statics: {
             methods: {
                 GetGroups: function () {
-                    var $t, $t1, $t2, $t3;
+                    var $t;
                     var groups = new (System.Collections.Generic.List$1(Bridge.ClientTest.Utilities.Group))();
                     groups.add(($t=new Bridge.ClientTest.Utilities.Group(), $t.Name = "A", $t.Limit = 1000, $t));
-                    groups.add(($t1=new Bridge.ClientTest.Utilities.Group(), $t1.Name = "B", $t1.Limit = 400, $t1));
-                    groups.add(($t2=new Bridge.ClientTest.Utilities.Group(), $t2.Name = "C", $t2.Limit = 800, $t2));
-                    groups.add(($t3=new Bridge.ClientTest.Utilities.Group(), $t3.Name = "D", $t3.Limit = 200, $t3));
+                    groups.add(($t=new Bridge.ClientTest.Utilities.Group(), $t.Name = "B", $t.Limit = 400, $t));
+                    groups.add(($t=new Bridge.ClientTest.Utilities.Group(), $t.Name = "C", $t.Limit = 800, $t));
+                    groups.add(($t=new Bridge.ClientTest.Utilities.Group(), $t.Name = "D", $t.Limit = 200, $t));
 
                     return groups;
                 }
@@ -40221,17 +40221,17 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         statics: {
             methods: {
                 GetPersons: function () {
-                    var $t, $t1, $t2, $t3, $t4, $t5, $t6, $t7;
+                    var $t;
                     var persons = new (System.Collections.Generic.List$1(Bridge.ClientTest.Utilities.Person))();
 
                     persons.add(($t=new Bridge.ClientTest.Utilities.Person(), $t.ID = 1, $t.Name = "Frank", $t.City = "Edmonton", $t.Count = 300, $t.Group = "A", $t));
-                    persons.add(($t1=new Bridge.ClientTest.Utilities.Person(), $t1.ID = 2, $t1.Name = "Zeppa", $t1.City = "Tokyo", $t1.Count = 100, $t1.Group = "C", $t1));
-                    persons.add(($t2=new Bridge.ClientTest.Utilities.Person(), $t2.ID = 3, $t2.Name = "John", $t2.City = "Lisbon", $t2.Count = 700, $t2.Group = "B", $t2));
-                    persons.add(($t3=new Bridge.ClientTest.Utilities.Person(), $t3.ID = 4, $t3.Name = "Billy", $t3.City = "Paris", $t3.Count = 500, $t3.Group = "C", $t3));
-                    persons.add(($t4=new Bridge.ClientTest.Utilities.Person(), $t4.ID = 5, $t4.Name = "Dora", $t4.City = "Budapest", $t4.Count = 50, $t4.Group = "B", $t4));
-                    persons.add(($t5=new Bridge.ClientTest.Utilities.Person(), $t5.ID = 6, $t5.Name = "Ian", $t5.City = "Rome", $t5.Count = 550, $t5.Group = "B", $t5));
-                    persons.add(($t6=new Bridge.ClientTest.Utilities.Person(), $t6.ID = 7, $t6.Name = "Mary", $t6.City = "Dortmund", $t6.Count = 700, $t6.Group = "B", $t6));
-                    persons.add(($t7=new Bridge.ClientTest.Utilities.Person(), $t7.ID = 8, $t7.Name = "Nemo", $t7.City = "Ocean", $t7.Count = 3000, $t7.Group = null, $t7));
+                    persons.add(($t=new Bridge.ClientTest.Utilities.Person(), $t.ID = 2, $t.Name = "Zeppa", $t.City = "Tokyo", $t.Count = 100, $t.Group = "C", $t));
+                    persons.add(($t=new Bridge.ClientTest.Utilities.Person(), $t.ID = 3, $t.Name = "John", $t.City = "Lisbon", $t.Count = 700, $t.Group = "B", $t));
+                    persons.add(($t=new Bridge.ClientTest.Utilities.Person(), $t.ID = 4, $t.Name = "Billy", $t.City = "Paris", $t.Count = 500, $t.Group = "C", $t));
+                    persons.add(($t=new Bridge.ClientTest.Utilities.Person(), $t.ID = 5, $t.Name = "Dora", $t.City = "Budapest", $t.Count = 50, $t.Group = "B", $t));
+                    persons.add(($t=new Bridge.ClientTest.Utilities.Person(), $t.ID = 6, $t.Name = "Ian", $t.City = "Rome", $t.Count = 550, $t.Group = "B", $t));
+                    persons.add(($t=new Bridge.ClientTest.Utilities.Person(), $t.ID = 7, $t.Name = "Mary", $t.City = "Dortmund", $t.Count = 700, $t.Group = "B", $t));
+                    persons.add(($t=new Bridge.ClientTest.Utilities.Person(), $t.ID = 8, $t.Name = "Nemo", $t.City = "Ocean", $t.Count = 3000, $t.Group = null, $t));
 
                     return persons;
                 }
