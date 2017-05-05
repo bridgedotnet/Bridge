@@ -30,6 +30,23 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Base", {
+        methods: {
+            somethingElse: function () {
+                return 1;
+            },
+            somethingElse2: function () {
+                return 2;
+            },
+            somethingElse3: function () {
+                return 3;
+            },
+            somethingElse4: function () {
+                return 4;
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge069", {
         statics: {
             methods: {
@@ -19271,6 +19288,17 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2632", {
+        statics: {
+            methods: {
+                TestTemplateIdentifier: function () {
+                    var x = new Bridge.ClientTest.Batch3.BridgeIssues.Derived();
+                    x.Test();
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2635", {
         statics: {
             methods: {
@@ -29141,6 +29169,31 @@ Bridge.$N1391Result =                     r;
                 init: function () {
                     this.field1 = 1;
                 }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Derived", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Base],
+        methods: {
+            Test: function () {
+                Bridge.Test.NUnit.Assert.AreEqual(2, this.somethingElse2());
+                Bridge.Test.NUnit.Assert.AreEqual(2, this.somethingElse2());
+                Bridge.Test.NUnit.Assert.AreEqual(1, this.somethingElse());
+
+                Bridge.Test.NUnit.Assert.AreEqual(3, this.somethingElse3());
+                Bridge.Test.NUnit.Assert.AreEqual(3, this.somethingElse3());
+                Bridge.Test.NUnit.Assert.AreEqual(3, this.somethingElse3());
+
+                Bridge.Test.NUnit.Assert.AreEqual(41, this.somethingElse4_1());
+                Bridge.Test.NUnit.Assert.AreEqual(41, this.somethingElse4_1());
+                Bridge.Test.NUnit.Assert.AreEqual(4, this.somethingElse4());
+            },
+            somethingElse2$1: function () {
+                return 2;
+            },
+            somethingElse4_1: function () {
+                return 41;
             }
         }
     });
