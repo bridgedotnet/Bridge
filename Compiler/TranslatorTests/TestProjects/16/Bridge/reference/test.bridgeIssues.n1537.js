@@ -48,21 +48,24 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     Bridge.ns("System.Char", $box_);
 
     Bridge.apply($box_.System.Char, {
-        toString: function (obj) {return String.fromCharCode(obj);}
+        toString: function (obj) {return String.fromCharCode(obj);},
+        getHashCode: function (obj) {return System.Char.getHashCode(obj);}
     });
 
 
     Bridge.ns("System.Double", $box_);
 
     Bridge.apply($box_.System.Double, {
-        toString: function (obj) {return System.Double.format(obj, 'G');}
+        toString: function (obj) {return System.Double.format(obj, 'G');},
+        getHashCode: function (obj) {return System.Double.getHashCode(obj);}
     });
 
 
     Bridge.ns("System.Single", $box_);
 
     Bridge.apply($box_.System.Single, {
-        toString: function (obj) {return System.Single.format(obj, 'G');}
+        toString: function (obj) {return System.Single.format(obj, 'G');},
+        getHashCode: function (obj) {return System.Single.getHashCode(obj);}
     });
 
 
