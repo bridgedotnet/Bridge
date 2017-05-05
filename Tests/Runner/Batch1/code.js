@@ -24672,6 +24672,16 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreStrictEqual(0, ($t2 = v3, $t2 != null ? $t2 : v4));
                 Bridge.Test.NUnit.Assert.AreStrictEqual(null, ($t3 = s1, $t3 != null ? $t3 : s1));
                 Bridge.Test.NUnit.Assert.AreStrictEqual("x", ($t4 = s1, $t4 != null ? $t4 : s2));
+            },
+            BoxedandUnboxedEnumToStringWorks: function () {
+                var unboxed = Bridge.ClientTest.NullableTests.Values.Value1;
+                var boxed = Bridge.box(Bridge.ClientTest.NullableTests.Values.Value2, Bridge.ClientTest.NullableTests.Values, System.Nullable.toStringFn($box_.Bridge.ClientTest.NullableTests.Values.toString), System.Nullable.getHashCode);
+
+                var s1 = System.Nullable.toString(unboxed, $box_.Bridge.ClientTest.NullableTests.Values.toString);
+                Bridge.Test.NUnit.Assert.AreEqual("Value1", s1);
+
+                var s2 = boxed.toString();
+                Bridge.Test.NUnit.Assert.AreEqual("Value2", s2);
             }
         }
     });
@@ -24682,6 +24692,16 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         f1: function () {
             var o = "x";
             var x = System.Nullable.getValue(Bridge.cast(Bridge.unbox(o), System.Int32));
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.NullableTests.Values", {
+        $kind: "enum",
+        statics: {
+            fields: {
+                Value1: 1,
+                Value2: 2
+            }
         }
     });
 
@@ -51544,6 +51564,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.apply($box_.System.DateTime, {
         toString: function (obj) {return System.DateTime.format(obj);}
+    });
+
+
+    Bridge.ns("Bridge.ClientTest.NullableTests.Values", $box_);
+
+    Bridge.apply($box_.Bridge.ClientTest.NullableTests.Values, {
+        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.NullableTests.Values, obj);}
     });
 
 

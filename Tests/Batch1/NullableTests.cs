@@ -333,5 +333,24 @@ namespace Bridge.ClientTest
             Assert.AreStrictEqual(null, s1 ?? s1);
             Assert.AreStrictEqual("x", s1 ?? s2);
         }
+
+        enum Values
+        {
+            Value1 = 1,
+            Value2 = 2
+        }
+
+        [Test(Name = "{0} #2620")]
+        public void BoxedandUnboxedEnumToStringWorks()
+        {
+            var unboxed = new Values?(Values.Value1);
+            object boxed = new Values?(Values.Value2);
+
+            var s1 = unboxed.ToString();
+            Assert.AreEqual("Value1", s1);
+
+            var s2 = boxed.ToString();
+            Assert.AreEqual("Value2", s2);
+        }
     }
 }

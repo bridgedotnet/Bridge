@@ -1210,6 +1210,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("Nullable - LiftedUnaryPlusWorks", Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests.LiftedUnaryPlusWorks);
             QUnit.test("Nullable - LiftedOnesComplementWorks", Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests.LiftedOnesComplementWorks);
             QUnit.test("CoalesceWorks #314", Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests.CoalesceWorks);
+            QUnit.test("BoxedandUnboxedEnumToStringWorks #2620", Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests.BoxedandUnboxedEnumToStringWorks);
             QUnit.module("NumberFormatInfo");
             QUnit.test("NumberFormatInfoTests - TypePropertiesAreCorrect", Bridge.Test.Runtime.BridgeClientTestRunner.NumberFormatInfoTests.TypePropertiesAreCorrect);
             QUnit.test("NumberFormatInfoTests - GetFormatWorks", Bridge.Test.Runtime.BridgeClientTestRunner.NumberFormatInfoTests.GetFormatWorks);
@@ -12861,6 +12862,11 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                     var $t;
                     var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "CoalesceWorks()", $t.Line = "325", $t));
                     t.Fixture.CoalesceWorks();
+                },
+                BoxedandUnboxedEnumToStringWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "BoxedandUnboxedEnumToStringWorks()", $t.Line = "343", $t));
+                    t.Fixture.BoxedandUnboxedEnumToStringWorks();
                 }
             }
         },
