@@ -38,6 +38,14 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
         }
 
+        public class Class3
+        {
+            public Class1 Property3
+            {
+                get;
+            } = new Class1();
+        }
+
         [Test]
         public static void TestInitializers()
         {
@@ -60,6 +68,29 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual(5, c.SubProperty1.Property2);
             Assert.AreEqual("test2", c.SubProperty2.Property1);
             Assert.AreEqual(6, c.SubProperty2.Property2);
+
+            var c3 = new Class3()
+            {
+                Property3 =
+                {
+                    SubProperty1 =
+                    {
+                        Property1 = "test3",
+                        Property2 = 7
+                    },
+
+                    SubProperty2 =
+                    {
+                        Property1 = "test4",
+                        Property2 = 8
+                    }
+                }
+            };
+
+            Assert.AreEqual("test3", c3.Property3.SubProperty1.Property1);
+            Assert.AreEqual(7, c3.Property3.SubProperty1.Property2);
+            Assert.AreEqual("test4", c3.Property3.SubProperty2.Property1);
+            Assert.AreEqual(8, c3.Property3.SubProperty2.Property2);
         }
     }
 }

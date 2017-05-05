@@ -19282,6 +19282,13 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.AreEqual(5, c.SubProperty1.Property2);
                     Bridge.Test.NUnit.Assert.AreEqual("test2", c.SubProperty2.Property1);
                     Bridge.Test.NUnit.Assert.AreEqual(6, c.SubProperty2.Property2);
+
+                    var c3 = ($t=new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2635.Class3(), $t.Property3.SubProperty1.Property1 = "test3", $t.Property3.SubProperty1.Property2 = 7, $t.Property3.SubProperty2.Property1 = "test4", $t.Property3.SubProperty2.Property2 = 8, $t);
+
+                    Bridge.Test.NUnit.Assert.AreEqual("test3", c3.Property3.SubProperty1.Property1);
+                    Bridge.Test.NUnit.Assert.AreEqual(7, c3.Property3.SubProperty1.Property2);
+                    Bridge.Test.NUnit.Assert.AreEqual("test4", c3.Property3.SubProperty2.Property1);
+                    Bridge.Test.NUnit.Assert.AreEqual(8, c3.Property3.SubProperty2.Property2);
                 }
             }
         }
@@ -19304,6 +19311,17 @@ Bridge.$N1391Result =                     r;
         props: {
             Property1: null,
             Property2: 0
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2635.Class3", {
+        props: {
+            Property3: null
+        },
+        ctors: {
+            init: function () {
+                this.Property3 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2635.Class1();
+            }
         }
     });
 
