@@ -84,12 +84,6 @@ namespace Bridge.Translator
             set;
         }
 
-        public bool IsMethodBlock
-        {
-            get;
-            set;
-        }
-
         public bool IsYield
         {
             get;
@@ -211,11 +205,29 @@ namespace Bridge.Translator
             this.EndEmitBlock();
         }
 
+        private bool? isMethodBlock;
+        public bool IsMethodBlock
+        {
+            get
+            {
+                if (!this.isMethodBlock.HasValue)
+                {
+                    this.isMethodBlock = this.BlockStatement.Parent is MethodDeclaration ||
+                                         this.BlockStatement.Parent is AnonymousMethodExpression ||
+                                         this.BlockStatement.Parent is LambdaExpression ||
+                                         this.BlockStatement.Parent is ConstructorDeclaration ||
+                                         this.BlockStatement.Parent is OperatorDeclaration ||
+                                         this.BlockStatement.Parent is Accessor;
+                }
+
+                return this.isMethodBlock.Value;
+            }
+        }
+
         public void DoEmitBlock()
         {
             if (this.BlockStatement.Parent is MethodDeclaration)
             {
-                this.IsMethodBlock = true;
                 var methodDeclaration = (MethodDeclaration)this.BlockStatement.Parent;
                 if (!methodDeclaration.ReturnType.IsNull)
                 {
@@ -226,7 +238,6 @@ namespace Bridge.Translator
             }
             else if (this.BlockStatement.Parent is AnonymousMethodExpression)
             {
-                this.IsMethodBlock = true;
                 var methodDeclaration = (AnonymousMethodExpression)this.BlockStatement.Parent;
                 var rr = this.Emitter.Resolver.ResolveNode(methodDeclaration, this.Emitter);
                 this.ReturnType = rr.Type;
@@ -234,7 +245,6 @@ namespace Bridge.Translator
             }
             else if (this.BlockStatement.Parent is LambdaExpression)
             {
-                this.IsMethodBlock = true;
                 var methodDeclaration = (LambdaExpression)this.BlockStatement.Parent;
                 var rr = this.Emitter.Resolver.ResolveNode(methodDeclaration, this.Emitter);
                 this.ReturnType = rr.Type;
@@ -242,17 +252,14 @@ namespace Bridge.Translator
             }
             else if (this.BlockStatement.Parent is ConstructorDeclaration)
             {
-                this.IsMethodBlock = true;
                 this.ConvertParamsToReferences(((ConstructorDeclaration)this.BlockStatement.Parent).Parameters);
             }
             else if (this.BlockStatement.Parent is OperatorDeclaration)
             {
-                this.IsMethodBlock = true;
                 this.ConvertParamsToReferences(((OperatorDeclaration)this.BlockStatement.Parent).Parameters);
             }
             else if (this.BlockStatement.Parent is Accessor)
             {
-                this.IsMethodBlock = true;
                 var role = this.BlockStatement.Parent.Role.ToString();
 
                 if (role == "Setter")
@@ -309,7 +316,14 @@ namespace Bridge.Translator
 
             if (!this.NoBraces && (!this.Emitter.IsAsync || (!this.AsyncNoBraces && this.BlockStatement.Parent != this.Emitter.AsyncBlock.Node)))
             {
-                this.EndBlock();
+                if(this.IsMethodBlock && this.IsEmptyBlock)
+                {
+                    this.WriteCloseBrace();
+                }
+                else
+                {
+                    this.EndBlock();
+                }
             }
 
             if (this.AddEndBlock)
@@ -429,10 +443,20 @@ namespace Bridge.Translator
             }
             else if (!this.NoBraces && (!this.Emitter.IsAsync || (!this.AsyncNoBraces && this.BlockStatement.Parent != this.Emitter.AsyncBlock.Node)))
             {
-                this.BeginBlock();
+                if (this.IsMethodBlock && this.BlockStatement.Statements.Count == 0 && !this.BlockStatement.Children.Any(c => c is Comment))
+                {
+                    this.IsEmptyBlock = true;
+                    this.WriteOpenBrace();
+                }
+                else
+                {
+                    this.BeginBlock();
+                }
             }
 
             this.BeginPosition = this.Emitter.Output.Length;
         }
+
+        public bool IsEmptyBlock { get; set; }
     }
 }

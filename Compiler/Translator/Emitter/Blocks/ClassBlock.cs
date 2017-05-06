@@ -621,7 +621,7 @@ namespace Bridge.Translator
                 {
                     var level = this.Emitter.Level;
 
-                    this.PushWriter(JS.Types.Bridge.INIT + "(function (){0});");
+                    this.PushWriter(JS.Types.Bridge.INIT + "(function () {0});");
                     this.ResetLocals();
                     var prevMap = this.BuildLocalsMap();
                     var prevNamesMap = this.BuildLocalsNamesMap();

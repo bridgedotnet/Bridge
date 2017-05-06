@@ -42,8 +42,7 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
             }
         },
         methods: {
-            VoidFunction: function () {
-            }
+            VoidFunction: function () {}
         }
     });
 
