@@ -200,6 +200,24 @@ namespace Bridge.Translator
                     sourceFile.SyntaxTree = syntaxTree;
                     needRecompile = true;
                 }
+
+                if (this.AssemblyInfo.SourceMap.Enabled)
+                {
+                    var text = syntaxTree.ToString(FormattingOptionsFactory.CreateSharpDevelop());
+
+                    var parser = new ICSharpCode.NRefactory.CSharp.CSharpParser();
+
+                    if (this.DefineConstants != null && this.DefineConstants.Count > 0)
+                    {
+                        foreach (var defineConstant in this.DefineConstants)
+                        {
+                            parser.CompilerSettings.ConditionalSymbols.Add(defineConstant);
+                        }
+                    }
+
+                    sourceFile.SyntaxTree = parser.Parse(text, syntaxTree.FileName);
+                    needRecompile = true;
+                }
             }
 
             if (needRecompile)
@@ -388,7 +406,7 @@ namespace Bridge.Translator
                 this.sourcesExtracted = true;
                 this.ParsedSourceFiles.Each(sf =>
                 {
-                    var content = sf.SyntaxTree.ToString();
+                    var content = sf.SyntaxTree.ToString(FormattingOptionsFactory.CreateSharpDevelop());
                     var fileName = new ConfigHelper().ConvertPath(sf.ParsedFile.FileName.Substring(projectPath.Length + 1), '/');
                     if (fileName == "Properties/AssemblyInfo.cs")
                     {

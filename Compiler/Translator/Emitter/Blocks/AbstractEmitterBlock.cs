@@ -45,7 +45,7 @@ namespace Bridge.Translator
         private int checkPos;
         protected virtual void BeginEmit()
         {
-            if (this.Emitter.Translator.EmitNode != null)
+            if (this.NeedSequencePoint())
             {
                 this.startPos = this.Emitter.Output.Length;
                 this.WriteSequencePoint(this.Emitter.Translator.EmitNode.Region);
@@ -55,11 +55,16 @@ namespace Bridge.Translator
 
         protected virtual void EndEmit()
         {
-            if (this.Emitter.Translator.EmitNode != null && this.checkPos == this.Emitter.Output.Length)
+            if (this.NeedSequencePoint() && this.checkPos == this.Emitter.Output.Length)
             {
                 this.Emitter.Output.Length = this.startPos;
             }
             this.Emitter.Translator.EmitNode = this.previousNode;
+        }
+
+        protected bool NeedSequencePoint()
+        {
+            return this.Emitter.Translator.EmitNode is Statement && !(this.Emitter.Translator.EmitNode is BlockStatement);
         }
 
         public virtual void EmitBlockOrIndentedLine(AstNode node)

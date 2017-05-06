@@ -40,9 +40,11 @@ namespace Bridge.Translator
             var generator = new SourceMapGenerator(fileName, "");
             StringLocation location = null;
             string script = content;
+            int offset = 0;
             content = tokenRegex.Replace(content, match =>
             {
-                location = SourceMapGenerator.LocationFromPos(script, match.Index, location);
+                location = SourceMapGenerator.LocationFromPos(script, match.Index, location, ref offset);
+                offset += match.Length; 
                 generator.RecordLocation(location.Line, location.Column, match.Groups[1].Value.Substring(basePath.Length + 1), int.Parse(match.Groups[2].Value), int.Parse(match.Groups[3].Value));
                 return "";
             });
@@ -68,7 +70,7 @@ namespace Bridge.Translator
             saveAction(fileName, map);
         }
 
-        private static StringLocation LocationFromPos(string s, int pos, StringLocation lastLocation)
+        private static StringLocation LocationFromPos(string s, int pos, StringLocation lastLocation, ref int offset)
         {
             int res = lastLocation?.Line ?? 1;
             int startLinePosition = lastLocation?.StartLinePosition ?? 0;
@@ -78,10 +80,11 @@ namespace Bridge.Translator
                 if (s[i] == '\n')
                 {
                     startLinePosition = i;
+                    offset = 0;
                     res++;
                 }
             }
-            return new StringLocation(res, pos - startLinePosition, i, startLinePosition);
+            return new StringLocation(res, pos - startLinePosition - offset, i, startLinePosition);
         }
 
         private class StringLocation
