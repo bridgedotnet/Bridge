@@ -12490,47 +12490,46 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948", {
         methods: {
             TestCollectionLikeInitialization: function () {
-                var $t, $t1, $t2, $t3;
+                var $t, $t1, $t2;
                 $t = Bridge.getEnumerator(System.Array.init([new $asm.$AnonymousType$14()], System.Object));
                 try {
                     while ($t.moveNext()) {
-                        $t1 = (function () {
-                            var item = $t.Current;
-                            if (false) {
-                                return {jump:1};
-                            }
+                        var item = $t.Current;
+                        if (false) {
+                            continue;
+                        }
 
-                            var newJObj1 = function (_o34) {
+                        var newJObj1 = (function (item) {
+                                return function (_o34) {
                                     _o34.Add("name", item);
                                     return _o34;
-                                }(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948.AddObj());
+                                };
+                            })(item)(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948.AddObj());
 
-                            $t2 = Bridge.getEnumerator(newJObj1);
-                            try {
-                                while ($t2.moveNext()) {
-                                    var jObj = $t2.Current;
-                                }
-                            }finally {
-                                if (Bridge.is($t2, System.IDisposable)) {
-                                    $t2.System$IDisposable$dispose();
-                                }
-                            }Bridge.Test.NUnit.Assert.AreEqual(false, newJObj1.isGeneric);
-                            Bridge.Test.NUnit.Assert.AreEqual(1, newJObj1.dic.count);
+                        $t1 = Bridge.getEnumerator(newJObj1);
+                        try {
+                            while ($t1.moveNext()) {
+                                var jObj = $t1.Current;
+                            }
+                        }finally {
+                            if (Bridge.is($t1, System.IDisposable)) {
+                                $t1.System$IDisposable$dispose();
+                            }
+                        }Bridge.Test.NUnit.Assert.AreEqual(false, newJObj1.isGeneric);
+                        Bridge.Test.NUnit.Assert.AreEqual(1, newJObj1.dic.count);
 
-                            var newJObj2 = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948.f1(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948.AddObj());
-                            $t3 = Bridge.getEnumerator(newJObj2, System.Collections.Generic.KeyValuePair$2(System.String,System.Object));
-                            try {
-                                while ($t3.moveNext()) {
-                                    var jObj1 = $t3.Current;
-                                }
-                            }finally {
-                                if (Bridge.is($t3, System.IDisposable)) {
-                                    $t3.System$IDisposable$dispose();
-                                }
-                            }Bridge.Test.NUnit.Assert.AreEqual(true, Bridge.cast(newJObj2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948.AddObj).isGeneric);
-                            Bridge.Test.NUnit.Assert.AreEqual(1, Bridge.cast(newJObj2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948.AddObj).dic.count);
-                        }).call(this) || {};
-                        if($t1.jump == 1) continue;
+                        var newJObj2 = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948.f1(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948.AddObj());
+                        $t2 = Bridge.getEnumerator(newJObj2, System.Collections.Generic.KeyValuePair$2(System.String,System.Object));
+                        try {
+                            while ($t2.moveNext()) {
+                                var jObj1 = $t2.Current;
+                            }
+                        }finally {
+                            if (Bridge.is($t2, System.IDisposable)) {
+                                $t2.System$IDisposable$dispose();
+                            }
+                        }Bridge.Test.NUnit.Assert.AreEqual(true, Bridge.cast(newJObj2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948.AddObj).isGeneric);
+                        Bridge.Test.NUnit.Assert.AreEqual(1, Bridge.cast(newJObj2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948.AddObj).dic.count);
                     }
                 }finally {
                     if (Bridge.is($t, System.IDisposable)) {
@@ -19271,6 +19270,70 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2633", {
+        statics: {
+            methods: {
+                TestAsyncCaptureVariable: function () {
+                    var $step = 0,
+                        $task1, 
+                        $jumpFromFinally, 
+                        done, 
+                        array, 
+                        n, 
+                        a, 
+                        $t, 
+                        n1, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            for (;;) {
+                                $step = System.Array.min([0,1], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        done = Bridge.Test.NUnit.Assert.Async();
+
+                                        $task1 = System.Threading.Tasks.Task.delay(1);
+                                        $step = 1;
+                                        $task1.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 1: {
+                                        $task1.getAwaitedResult();
+                                        array = System.Array.init(10, null, Function);
+
+                                        for (n = 0; n < 10; n = (n + 1) | 0) {
+                                            a = ($t=new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2633.A(), $t.Value = n, $t);
+                                            array[System.Array.index(n, array)] = (function (a) {
+                                                return function (i) {
+                                                    Bridge.Test.NUnit.Assert.AreEqual(i, a.Value);
+                                                };
+                                            })(a);
+                                        }
+
+                                        for (n1 = 0; n1 < 10; n1 = (n1 + 1) | 0) {
+                                            array[System.Array.index(n1, array)](n1);
+                                        }
+
+                                        done();
+                                        return;
+                                    }
+                                    default: {
+                                        return;
+                                    }
+                                }
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2633.A", {
+        fields: {
+            Value: 0
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2635", {
         statics: {
             methods: {
@@ -21278,12 +21341,12 @@ Bridge.$N1391Result =                     r;
                     $t = Bridge.getEnumerator(keys);
                     try {
                         while ($t.moveNext()) {
-                            (function () {
-                                var itm = $t.Current;
-                                handlers[System.Array.index(((i++) | 0), handlers)] = function () {
+                            var itm = $t.Current;
+                            handlers[System.Array.index(((i++) | 0), handlers)] = (function (itm) {
+                                return function () {
                                     result += itm;
                                 };
-                            }).call(this);
+                            })(itm);
                         }
                     }finally {
                         if (Bridge.is($t, System.IDisposable)) {
@@ -21309,12 +21372,12 @@ Bridge.$N1391Result =                     r;
                     $t2 = Bridge.getEnumerator(keys);
                     try {
                         while ($t2.moveNext()) {
-                            (function () {
-                                var itm1 = $t2.Current;
-                                handlers[System.Array.index(((i++) | 0), handlers)] = function () {
+                            var itm1 = $t2.Current;
+                            handlers[System.Array.index(((i++) | 0), handlers)] = (function (itm1) {
+                                return function () {
                                     result += itm1;
                                 };
-                            }).call(this);
+                            })(itm1);
                         }
                     }finally {
                         if (Bridge.is($t2, System.IDisposable)) {
@@ -21342,12 +21405,12 @@ Bridge.$N1391Result =                     r;
                     var result = "";
 
                     for (var j = 0; j < keys.length; ((j++) | 0)) {
-                        (function () {
-                            var itm = keys[System.Array.index(j, keys)];
-                            handlers[System.Array.index(((i++) | 0), handlers)] = function () {
+                        var itm = keys[System.Array.index(j, keys)];
+                        handlers[System.Array.index(((i++) | 0), handlers)] = (function (itm) {
+                            return function () {
                                 result += itm;
                             };
-                        }).call(this);
+                        })(itm);
                     }
 
                     $t = Bridge.getEnumerator(handlers);
@@ -23028,25 +23091,23 @@ Bridge.$N1391Result =                     r;
                     $t = Bridge.getEnumerator(numbers);
                     try {
                         while ($t.moveNext()) {
-                            (function () {
-                                var n = $t.Current;
-                                var func = function (i) {
-                                    var $t1;
-                                    var bigNumbers = System.Array.init([10, 20, 30], System.Int32);
-                                    $t1 = Bridge.getEnumerator(bigNumbers);
-                                    try {
-                                        while ($t1.moveNext()) {
-                                            var bn = $t1.Current;
-                                            sum = (sum + ((i * bn) | 0)) | 0;
-                                        }
-                                    }finally {
-                                        if (Bridge.is($t1, System.IDisposable)) {
-                                            $t1.System$IDisposable$dispose();
-                                        }
-                                    }};
+                            var n = $t.Current;
+                            var func = function (i) {
+                                var $t1;
+                                var bigNumbers = System.Array.init([10, 20, 30], System.Int32);
+                                $t1 = Bridge.getEnumerator(bigNumbers);
+                                try {
+                                    while ($t1.moveNext()) {
+                                        var bn = $t1.Current;
+                                        sum = (sum + ((i * bn) | 0)) | 0;
+                                    }
+                                }finally {
+                                    if (Bridge.is($t1, System.IDisposable)) {
+                                        $t1.System$IDisposable$dispose();
+                                    }
+                                }};
 
-                                func(n);
-                            }).call(this);
+                            func(n);
                         }
                     }finally {
                         if (Bridge.is($t, System.IDisposable)) {
@@ -23885,13 +23946,11 @@ Bridge.$N1391Result =                     r;
                         $t = Bridge.getEnumerator(System.Array.init([1, 2, 3], System.Int32));
                         try {
                             while ($t.moveNext()) {
-                                (function () {
-                                    var n = $t.Current;
-                                    var g = function (i) {
-                                        sum = (sum + i) | 0;
-                                    };
-                                    g(n);
-                                }).call(this);
+                                var n = $t.Current;
+                                var g = function (i) {
+                                    sum = (sum + i) | 0;
+                                };
+                                g(n);
                             }
                         }finally {
                             if (Bridge.is($t, System.IDisposable)) {
@@ -23928,42 +23987,32 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.AreEqual$1("NoLoops", Bridge.ClientTest.Batch3.BridgeIssues.Bridge721.Check(testList), "Bridge721 NoLoops");
                 },
                 Check: function (testList) {
-                    var $t, $t1, $t2;
                     var i = 0;
                     while (i < 20) {
-                        $t = (function () {
-                            while (i < 10) {
-                                $t1 = (function () {
-                                    while (i < 5) {
-                                        $t2 = (function () {
-                                            if (System.Linq.Enumerable.from(testList).any(function (x) {
-                                                    return x === i;
-                                                })) {
-                                                return {jump: 3, v: "ThirdLoop"};
-                                            }
-                                            i = (i + 1) | 0;
-                                        }).call(this) || {};
-                                        if($t2.jump == 3) return {jump: 3, v: $t2.v};
-                                    }
-
-                                    if (System.Linq.Enumerable.from(testList).any(function (x) {
-                                            return x === i;
-                                        })) {
-                                        return {jump: 3, v: "SecondLoop"};
-                                    }
-                                    i = (i + 1) | 0;
-                                }).call(this) || {};
-                                if($t1.jump == 3) return {jump: 3, v: $t1.v};
+                        while (i < 10) {
+                            while (i < 5) {
+                                if (System.Linq.Enumerable.from(testList).any(function (x) {
+                                        return x === i;
+                                    })) {
+                                    return "ThirdLoop";
+                                }
+                                i = (i + 1) | 0;
                             }
 
                             if (System.Linq.Enumerable.from(testList).any(function (x) {
                                     return x === i;
                                 })) {
-                                return {jump: 3, v: "FirstLoop"};
+                                return "SecondLoop";
                             }
                             i = (i + 1) | 0;
-                        }).call(this) || {};
-                        if($t.jump == 3) return $t.v;
+                        }
+
+                        if (System.Linq.Enumerable.from(testList).any(function (x) {
+                                return x === i;
+                            })) {
+                            return "FirstLoop";
+                        }
+                        i = (i + 1) | 0;
                     }
 
                     return "NoLoops";
@@ -27597,23 +27646,19 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.AreNotEqual$1(b.getHashCode(), a.getHashCode(), "Call to base.GetHashCode() causes compilation to fail");
                 },
                 N469: function () {
-                    var $t;
                     var testList = new (System.Collections.Generic.List$1(System.Int32))();
                     testList.add(5);
 
                     var count = 0;
 
                     for (var i = 0; i < 10; i = (i + 1) | 0) {
-                        $t = (function () {
-                            if (!System.Linq.Enumerable.from(testList).any(function (x) {
-                                    return x === i;
-                                })) {
-                                return {jump:1};
-                            }
+                        if (!System.Linq.Enumerable.from(testList).any(function (x) {
+                                return x === i;
+                            })) {
+                            continue;
+                        }
 
-                            count = (count + 1) | 0;
-                        }).call(this) || {};
-                        if($t.jump == 1) continue;
+                        count = (count + 1) | 0;
                     }
 
                     Bridge.Test.NUnit.Assert.AreEqual$1(1, count, "\"continue\" generated correctly");
