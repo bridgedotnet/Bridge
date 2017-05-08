@@ -1,7 +1,7 @@
 Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    Bridge.init(function (){
+    Bridge.init(function () {
         // One line above the method
         var before = 5;
         before = (before + 1) | 0;
