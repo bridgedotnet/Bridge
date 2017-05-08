@@ -22,9 +22,19 @@ namespace System
         [Template("{l}.abs()")]
         public static extern decimal Abs(decimal l);
 
+        public static extern byte Max(params byte[] values);
+
+        public static extern sbyte Max(params sbyte[] values);
+
+        public static extern short Max(params short[] values);
+
+        public static extern ushort Max(params ushort[] values);
+
+        public static extern float Max(params float[] values);
+
         public static extern int Max(params int[] values);
 
-        public static extern int Max(params uint[] values);
+        public static extern uint Max(params uint[] values);
 
         public static extern double Max(params double[] values);
 
@@ -37,9 +47,19 @@ namespace System
         [Template("System.Decimal.max({*values})")]
         public static extern decimal Max(params decimal[] values);
 
+        public static extern byte Min(params byte[] values);
+
+        public static extern sbyte Min(params sbyte[] values);
+
+        public static extern short Min(params short[] values);
+
+        public static extern ushort Min(params ushort[] values);
+
+        public static extern float Min(params float[] values);
+
         public static extern int Min(params int[] values);
 
-        public static extern int Min(params uint[] values);
+        public static extern uint Min(params uint[] values);
 
         public static extern double Min(params double[] values);
 

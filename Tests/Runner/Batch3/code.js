@@ -19377,6 +19377,125 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644", {
+        statics: {
+            methods: {
+                TestMax: function () {
+                    var byte1 = 10;
+                    var byte2 = 20;
+                    byte1 = Math.max(byte1, byte2);
+                    Bridge.Test.NUnit.Assert.AreEqual(20, byte1);
+
+                    var sbyte1 = 10;
+                    var sbyte2 = 20;
+                    sbyte1 = Math.max(sbyte1, sbyte2);
+                    Bridge.Test.NUnit.Assert.AreEqual(20, sbyte1);
+
+                    var short1 = 10;
+                    var short2 = 20;
+                    short1 = Math.max(short1, short2);
+                    Bridge.Test.NUnit.Assert.AreEqual(20, short1);
+
+                    var ushort1 = 10;
+                    var ushort2 = 20;
+                    ushort1 = Math.max(ushort1, ushort2);
+                    Bridge.Test.NUnit.Assert.AreEqual(20, ushort1);
+
+                    var int1 = 10;
+                    var int2 = 20;
+                    int1 = Math.max(int1, int2);
+                    Bridge.Test.NUnit.Assert.AreEqual(20, int1);
+
+                    var uint1 = 10;
+                    var uint2 = 20;
+                    uint1 = Math.max(uint1, uint2);
+                    Bridge.Test.NUnit.Assert.AreEqual(20, uint1);
+
+                    var long1 = System.Int64(10);
+                    var long2 = System.Int64(20);
+                    long1 = System.Int64.max(long1, long2);
+                    Bridge.Test.NUnit.Assert.True(System.Int64(20).equals(long1));
+
+                    var ulong1 = System.UInt64(10);
+                    var ulong2 = System.UInt64(20);
+                    ulong1 = System.UInt64.max(ulong1, ulong2);
+                    Bridge.Test.NUnit.Assert.True(System.UInt64(20).equals(ulong1));
+
+                    var float1 = 10;
+                    var float2 = 20;
+                    float1 = Math.max(float1, float2);
+                    Bridge.Test.NUnit.Assert.AreEqual(20, float1);
+
+                    var double1 = 10;
+                    var double2 = 20;
+                    double1 = Math.max(double1, double2);
+                    Bridge.Test.NUnit.Assert.AreEqual(20, double1);
+
+                    var decimal1 = System.Decimal(10);
+                    var decimal2 = System.Decimal(20);
+                    decimal1 = System.Decimal.max(decimal1, decimal2);
+                    Bridge.Test.NUnit.Assert.True(System.Decimal(20).equalsT(decimal1));
+                },
+                TestMin: function () {
+                    var byte1 = 10;
+                    var byte2 = 20;
+                    byte1 = Math.min(byte1, byte2);
+                    Bridge.Test.NUnit.Assert.AreEqual(10, byte1);
+
+                    var sbyte1 = 10;
+                    var sbyte2 = 20;
+                    sbyte1 = Math.min(sbyte1, sbyte2);
+                    Bridge.Test.NUnit.Assert.AreEqual(10, sbyte1);
+
+                    var short1 = 10;
+                    var short2 = 20;
+                    short1 = Math.min(short1, short2);
+                    Bridge.Test.NUnit.Assert.AreEqual(10, short1);
+
+                    var ushort1 = 10;
+                    var ushort2 = 20;
+                    ushort1 = Math.min(ushort1, ushort2);
+                    Bridge.Test.NUnit.Assert.AreEqual(10, ushort1);
+
+                    var int1 = 10;
+                    var int2 = 20;
+                    int1 = Math.min(int1, int2);
+                    Bridge.Test.NUnit.Assert.AreEqual(10, int1);
+
+                    var uint1 = 10;
+                    var uint2 = 20;
+                    uint1 = Math.min(uint1, uint2);
+                    Bridge.Test.NUnit.Assert.AreEqual(10, uint1);
+
+                    var long1 = System.Int64(10);
+                    var long2 = System.Int64(20);
+                    long1 = System.Int64.min(long1, long2);
+                    Bridge.Test.NUnit.Assert.True(System.Int64(10).equals(long1));
+
+                    var ulong1 = System.UInt64(10);
+                    var ulong2 = System.UInt64(20);
+                    ulong1 = System.UInt64.min(ulong1, ulong2);
+                    Bridge.Test.NUnit.Assert.True(System.UInt64(10).equals(ulong1));
+
+                    var float1 = 10;
+                    var float2 = 20;
+                    float1 = Math.min(float1, float2);
+                    Bridge.Test.NUnit.Assert.AreEqual(10, float1);
+
+                    var double1 = 10;
+                    var double2 = 20;
+                    double1 = Math.min(double1, double2);
+                    Bridge.Test.NUnit.Assert.AreEqual(10, double1);
+
+                    var decimal1 = System.Decimal(10);
+                    var decimal2 = System.Decimal(20);
+                    decimal1 = System.Decimal.min(decimal1, decimal2);
+                    Bridge.Test.NUnit.Assert.True(System.Decimal(10).equalsT(decimal1));
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge266A", {
         statics: {
             methods: {
