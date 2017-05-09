@@ -144,6 +144,68 @@ namespace Bridge.Translator
             this.Emitter.ReplaceJump = oldReplaceJump;
         }
 
+        private Statement GetOuterLoop()
+        {
+            Statement loop = null;
+            this.Context.GetParent(node =>
+            {
+                bool stopSearch = false;
+
+                if (node is ForStatement ||
+                    node is ForeachStatement ||
+                    node is DoWhileStatement ||
+                    node is WhileStatement)
+                {
+                    loop = (Statement)node;
+                }
+                else if (node is EntityDeclaration ||
+                         node is LambdaExpression ||
+                         node is AnonymousMethodExpression)
+                {
+                    stopSearch = true;
+                }
+
+                return stopSearch;
+            });
+
+            return loop;
+        }
+
+        private string[] GetCapturedLoopVariables()
+        {
+            var loop = this.GetOuterLoop();
+            if (loop == null)
+            {
+                return null;
+            }
+
+            var loopVariablesAnalyzer = new LoopVariablesAnalyzer(this.Emitter);
+            loopVariablesAnalyzer.Analyze(loop);
+
+            var captureAnalyzer = new CaptureAnalyzer(this.Emitter);
+            captureAnalyzer.Analyze(this.Context, this.Parameters.Select(p => p.Name));
+            var capturedVariables = captureAnalyzer.UsedVariables.Where(v => loopVariablesAnalyzer.Variables.Contains(v)).ToArray();
+
+            List<string> names = new List<string>();
+            foreach (var capturedVariable in capturedVariables)
+            {
+                if (this.Emitter.LocalsMap != null && this.Emitter.LocalsMap.ContainsKey(capturedVariable))
+                {
+                    names.Add(this.Emitter.LocalsMap[capturedVariable]);
+                }
+                else if (this.Emitter.LocalsNamesMap != null && this.Emitter.LocalsNamesMap.ContainsKey(capturedVariable.Name))
+                {
+                    names.Add(this.Emitter.LocalsNamesMap[capturedVariable.Name]);
+                }
+                else
+                {
+                    names.Add(capturedVariable.Name);
+                }
+            }
+
+            return names.ToArray();
+        }
+
         protected virtual void EmitLambda(IEnumerable<ParameterDeclaration> parameters, AstNode body, AstNode context)
         {
             var rr = this.Emitter.Resolver.ResolveNode(context, this.Emitter);
@@ -185,6 +247,14 @@ namespace Bridge.Translator
 
             var savedPos = this.Emitter.Output.Length;
             var savedThisCount = this.Emitter.ThisRefCounter;
+            var capturedVariables = this.GetCapturedLoopVariables();
+
+            if (capturedVariables != null && capturedVariables.Length > 0)
+            {
+                this.Write("(function (" + string.Join(", ", capturedVariables) + ") ");
+                this.BeginBlock();
+                this.Write("return ");
+            }
 
             this.WriteFunction();
             this.EmitMethodParameters(parameters, null, context);
@@ -268,6 +338,13 @@ namespace Bridge.Translator
             {
                 this.Emitter.Output.Insert(savedPos, JS.Funcs.BRIDGE_BIND + "(this, ");
                 this.WriteCloseParentheses();
+            }
+
+            if (capturedVariables != null && capturedVariables.Length > 0)
+            {
+                this.WriteSemiColon(true);
+                this.EndBlock();
+                this.Write(")(" + string.Join(", ", capturedVariables) + ")");
             }
 
             this.PopLocals();
