@@ -867,10 +867,21 @@ namespace Bridge.Contract
             return null;
         }
 
-        public static string ToTypeScriptName(IType type, IEmitter emitter, bool asDefinition = false, bool excludens = false, bool ignoreDependency = false)
+        public static string ToTypeScriptName(IType type, IEmitter emitter, bool asDefinition = false, bool excludens = false, bool ignoreDependency = false, List<string> guard = null)
         {
             if (type.Kind == TypeKind.Delegate)
             {
+                if (guard == null)
+                {
+                    guard = new List<string>();
+                }
+
+                if (guard.Contains(type.FullName))
+                {
+                    return "Function";
+                }
+
+                guard.Add(type.FullName);
                 var method = type.GetDelegateInvokeMethod();
 
                 StringBuilder sb = new StringBuilder();
@@ -880,7 +891,7 @@ namespace Bridge.Contract
                 var last = method.Parameters.LastOrDefault();
                 foreach (var p in method.Parameters)
                 {
-                    var ptype = BridgeTypes.ToTypeScriptName(p.Type, emitter);
+                    var ptype = BridgeTypes.ToTypeScriptName(p.Type, emitter, guard:guard);
 
                     if (p.IsOut || p.IsRef)
                     {
@@ -896,9 +907,9 @@ namespace Bridge.Contract
 
                 sb.Append(")");
                 sb.Append(": ");
-                sb.Append(BridgeTypes.ToTypeScriptName(method.ReturnType, emitter));
+                sb.Append(BridgeTypes.ToTypeScriptName(method.ReturnType, emitter, guard: guard));
                 sb.Append("}");
-
+                guard.Remove(type.FullName);
                 return sb.ToString();
             }
 
@@ -943,7 +954,7 @@ namespace Bridge.Contract
             if (type.Kind == TypeKind.Array)
             {
                 ICSharpCode.NRefactory.TypeSystem.ArrayType arrayType = (ICSharpCode.NRefactory.TypeSystem.ArrayType)type;
-                return BridgeTypes.ToTypeScriptName(arrayType.ElementType, emitter, asDefinition, excludens) + "[]";
+                return BridgeTypes.ToTypeScriptName(arrayType.ElementType, emitter, asDefinition, excludens, guard: guard) + "[]";
             }
 
             if (type.Kind == TypeKind.Dynamic)
@@ -958,7 +969,7 @@ namespace Bridge.Contract
 
             if (NullableType.IsNullable(type))
             {
-                return BridgeTypes.ToTypeScriptName(NullableType.GetUnderlyingType(type), emitter, asDefinition, excludens);
+                return BridgeTypes.ToTypeScriptName(NullableType.GetUnderlyingType(type), emitter, asDefinition, excludens, guard: guard);
             }
 
             BridgeType bridgeType = emitter.BridgeTypes.Get(type, true);
@@ -1032,7 +1043,7 @@ namespace Bridge.Contract
                     }
 
                     needComma = true;
-                    sb.Append(BridgeTypes.ToTypeScriptName(typeArg, emitter, asDefinition, excludens));
+                    sb.Append(BridgeTypes.ToTypeScriptName(typeArg, emitter, asDefinition, excludens, guard: guard));
                 }
                 sb.Append(">");
                 name = sb.ToString();
