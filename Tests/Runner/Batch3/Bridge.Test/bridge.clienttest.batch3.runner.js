@@ -11090,12 +11090,12 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestMax: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2644, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestMax()", $t.Line = "12", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2644, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestMax()", $t.Line = "16", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644.TestMax();
                 },
                 TestMin: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2644, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestMin()", $t.Line = "71", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2644, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestMin()", $t.Line = "75", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644.TestMin();
                 }
             }
