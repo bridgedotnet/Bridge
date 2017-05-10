@@ -14240,7 +14240,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         statics: {
             methods: {
                 CanConvert: function (T, arg) {
-                    try { /// The variable `x' is assigned but its value is never used
+                    try {
                         var x = Bridge.cast(Bridge.unbox(arg), T);
                         return true;
                     }
