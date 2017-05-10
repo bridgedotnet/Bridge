@@ -142,10 +142,7 @@ namespace Bridge.Translator
 
         public override AstNode VisitForStatement(ForStatement forStatement)
         {
-            var visitor = new LambdaVisitor();
-            forStatement.EmbeddedStatement.AcceptVisitor(visitor);
-
-            if (visitor.LambdaExpression.Count == 0 && forStatement.EmbeddedStatement is BlockStatement)
+            if (forStatement.EmbeddedStatement is BlockStatement)
             {
                 return base.VisitForStatement(forStatement);
             }
@@ -194,10 +191,7 @@ namespace Bridge.Translator
 
         public override AstNode VisitDoWhileStatement(DoWhileStatement forStatement)
         {
-            var visitor = new LambdaVisitor();
-            forStatement.EmbeddedStatement.AcceptVisitor(visitor);
-
-            if (visitor.LambdaExpression.Count == 0 && forStatement.EmbeddedStatement is BlockStatement)
+            if (forStatement.EmbeddedStatement is BlockStatement)
             {
                 return base.VisitDoWhileStatement(forStatement);
             }
@@ -224,10 +218,7 @@ namespace Bridge.Translator
 
         public override AstNode VisitWhileStatement(WhileStatement forStatement)
         {
-            var visitor = new LambdaVisitor();
-            forStatement.EmbeddedStatement.AcceptVisitor(visitor);
-
-            if (visitor.LambdaExpression.Count == 0 && forStatement.EmbeddedStatement is BlockStatement)
+            if (forStatement.EmbeddedStatement is BlockStatement)
             {
                 return base.VisitWhileStatement(forStatement);
             }

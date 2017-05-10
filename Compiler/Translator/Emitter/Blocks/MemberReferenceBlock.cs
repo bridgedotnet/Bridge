@@ -956,7 +956,7 @@ namespace Bridge.Translator
                 else if (resolveResult is InvocationResolveResult)
                 {
                     InvocationResolveResult invocationResult = (InvocationResolveResult)resolveResult;
-                    CSharpInvocationResolveResult cInvocationResult = (CSharpInvocationResolveResult)resolveResult;
+                    CSharpInvocationResolveResult cInvocationResult = resolveResult as CSharpInvocationResolveResult;
                     var expresssionMember = expressionResolveResult as MemberResolveResult;
 
                     if (isInterfaceMember)
