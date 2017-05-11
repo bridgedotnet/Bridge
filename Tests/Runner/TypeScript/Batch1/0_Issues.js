@@ -127,3 +127,8 @@ QUnit.test("#2493", function (assert) {
     var op3 = new TypeScript.Issues.N2493Operation3();
     assert.equal(op3.Add(1), 4);
 });
+QUnit.test("#2653", function (assert) {
+    var z = new TypeScript.Issues.N2653Zig();
+    var r = z.zag();
+    assert.equal(r, 1);
+});

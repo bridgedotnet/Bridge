@@ -74,13 +74,9 @@ declare module Interfaces {
     }
     var Class3: Class3Func;
 
-    export interface Interface62 {
-        Interfaces$Interface62$GetProperty(): number;
-        GetProperty(): number;
-        Interfaces$Interface62$SetProperty$1(s: string): void;
-        SetProperty$1(s: string): void;
-        Interfaces$Interface62$SetProperty(i: number): void;
-        SetProperty(i: number): void;
+    export interface Interface61 {
+        Interfaces$Interface61$Property: number;
+        Property: number;
     }
 
     export interface Interface1 {
@@ -112,9 +108,13 @@ declare module Interfaces {
         SetProperty(i: number): void;
     }
 
-    export interface Interface61 {
-        Interfaces$Interface61$Property: number;
-        Property: number;
+    export interface Interface62 {
+        Interfaces$Interface62$GetProperty(): number;
+        GetProperty(): number;
+        Interfaces$Interface62$SetProperty$1(s: string): void;
+        SetProperty$1(s: string): void;
+        Interfaces$Interface62$SetProperty(i: number): void;
+        SetProperty(i: number): void;
     }
 
 }
