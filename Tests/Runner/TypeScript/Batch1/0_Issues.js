@@ -132,3 +132,10 @@ QUnit.test("#2653", function (assert) {
     var r = z.zag();
     assert.equal(r, 1);
 });
+QUnit.test("#2661", function (assert) {
+    var c = new TypeScript.Issues.N2661C();
+    c.fn = function (x) { return x.fn; };
+    var fn1 = c.fn;
+    var fn2 = c.fn(c);
+    assert.equal(fn1, fn2);
+});

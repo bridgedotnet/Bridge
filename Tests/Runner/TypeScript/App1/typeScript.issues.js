@@ -265,6 +265,12 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         $kind: "interface"
     });
 
+    Bridge.define("TypeScript.Issues.N2661C", {
+        fields: {
+            fn: null
+        }
+    });
+
     Bridge.define("TypeScript.Issues.N1640.GamePlay", {
         inherits: [TypeScript.Issues.N1640.IGamePlay],
         events: {
