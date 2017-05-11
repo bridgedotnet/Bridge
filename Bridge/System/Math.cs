@@ -22,35 +22,187 @@ namespace System
         [Template("{l}.abs()")]
         public static extern decimal Abs(decimal l);
 
-        public static extern int Max(params int[] values);
+        /// <summary>
+        /// Returns the larger of two 8-bit unsigned integers.
+        /// </summary>
+        /// <param name="val1">The first of two 8-bit unsigned integers to compare.</param>
+        /// <param name="val2">The second of two 8-bit unsigned integers to compare.</param>
+        /// <returns>Parameter val1 or val2, whichever is larger.</returns>
+        public static extern byte Max(byte val1, byte val2);
 
-        public static extern int Max(params uint[] values);
+        /// <summary>
+        /// Returns the larger of two 8-bit signed integers.
+        /// </summary>
+        /// <param name="val1">The first of two 8-bit signed integers to compare.</param>
+        /// <param name="val2">The second of two 8-bit signed integers to compare.</param>
+        /// <returns>Parameter val1 or val2, whichever is larger.</returns>
+        public static extern sbyte Max(sbyte val1, sbyte val2);
 
-        public static extern double Max(params double[] values);
+        /// <summary>
+        /// Returns the larger of two 16-bit signed integers.
+        /// </summary>
+        /// <param name="val1">The first of two 16-bit signed integers to compare.</param>
+        /// <param name="val2">The second of two 16-bit signed integers to compare.</param>
+        /// <returns>Parameter val1 or val2, whichever is larger.</returns>
+        public static extern short Max(short val1, short val2);
 
-        [Template("System.Int64.max({*values})")]
-        public static extern long Max(params long[] values);
+        /// <summary>
+        /// Returns the larger of two 16-bit unsigned integers.
+        /// </summary>
+        /// <param name="val1">The first of two 16-bit unsigned integers to compare.</param>
+        /// <param name="val2">The second of two 16-bit unsigned integers to compare.</param>
+        /// <returns>Parameter val1 or val2, whichever is larger.</returns>
+        public static extern ushort Max(ushort val1, ushort val2);
 
-        [Template("System.UInt64.max({*values})")]
-        public static extern ulong Max(params ulong[] values);
+        /// <summary>
+        /// Returns the larger of two single-precision floating-point numbers.
+        /// </summary>
+        /// <param name="val1">The first of two single-precision floating-point numbers to compare.</param>
+        /// <param name="val2">The second of two single-precision floating-point numbers to compare.</param>
+        /// <returns>Parameter val1 or val2, whichever is larger.</returns>
+        public static extern float Max(float val1, float val2);
 
-        [Template("System.Decimal.max({*values})")]
-        public static extern decimal Max(params decimal[] values);
+        /// <summary>
+        /// Returns the larger of two 32-bit signed integers.
+        /// </summary>
+        /// <param name="val1">The first of two 32-bit signed integers to compare.</param>
+        /// <param name="val2">The second of two 32-bit signed integers to compare.</param>
+        /// <returns>Parameter val1 or val2, whichever is larger.</returns>
+        public static extern int Max(int val1, int val2);
 
-        public static extern int Min(params int[] values);
+        /// <summary>
+        /// Returns the larger of two 32-bit unsigned integers.
+        /// </summary>
+        /// <param name="val1">The first of two 32-bit unsigned integers to compare.</param>
+        /// <param name="val2">The second of two 32-bit unsigned integers to compare.</param>
+        /// <returns>Parameter val1 or val2, whichever is larger.</returns>
+        public static extern uint Max(uint val1, uint val2);
 
-        public static extern int Min(params uint[] values);
+        /// <summary>
+        /// Returns the larger of two double-precision floating-point numbers.
+        /// </summary>
+        /// <param name="val1">The first of two double-precision floating-point numbers to compare.</param>
+        /// <param name="val2">The second of two double-precision floating-point numbers to compare.</param>
+        /// <returns>Parameter val1 or val2, whichever is larger.</returns>
+        public static extern double Max(double val1, double val2);
 
-        public static extern double Min(params double[] values);
+        /// <summary>
+        /// Returns the larger of two 64-bit signed integers.
+        /// </summary>
+        /// <param name="val1">The first of two 64-bit signed integers to compare.</param>
+        /// <param name="val2">The second of two 64-bit signed integers to compare.</param>
+        /// <returns>Parameter val1 or val2, whichever is larger.</returns>
+        [Template("System.Int64.max({val1}, {val2})")]
+        public static extern long Max(long val1, long val2);
 
-        [Template("System.Int64.min({*values})")]
-        public static extern long Min(params long[] values);
+        /// <summary>
+        /// Returns the larger of two 64-bit unsigned integers.
+        /// </summary>
+        /// <param name="val1">The first of two 64-bit unsigned integers to compare.</param>
+        /// <param name="val2">The second of two 64-bit unsigned integers to compare.</param>
+        /// <returns>Parameter val1 or val2, whichever is larger.</returns>
+        [Template("System.UInt64.max({val1}, {val2})")]
+        public static extern ulong Max(ulong val1, ulong val2);
 
-        [Template("System.UInt64.min({*values})")]
-        public static extern ulong Min(params ulong[] values);
+        /// <summary>
+        /// Returns the larger of two decimal numbers.
+        /// </summary>
+        /// <param name="val1">The first of two decimal numbers to compare.</param>
+        /// <param name="val2">The second of two decimal numbers to compare.</param>
+        /// <returns>Parameter val1 or val2, whichever is larger.</returns>
+        [Template("System.Decimal.max({val1}, {val2})")]
+        public static extern decimal Max(decimal val1, decimal val2);
 
-        [Template("System.Decimal.min({*values})")]
-        public static extern decimal Min(params decimal[] values);
+        /// <summary>
+        /// Returns the smaller of two 8-bit unsigned integers.
+        /// </summary>
+        /// <param name="val1">The first of two 8-bit unsigned integers to compare.</param>
+        /// <param name="val2">The second of two 8-bit unsigned integers to compare.</param>
+        /// <returns>Parameter val1 or val2, whichever is smaller.</returns>
+        public static extern byte Min(byte val1, byte val2);
+
+        /// <summary>
+        /// Returns the smaller of two 8-bit signed integers.
+        /// </summary>
+        /// <param name="val1">The first of two 8-bit signed integers to compare.</param>
+        /// <param name="val2">The second of two 8-bit signed integers to compare.</param>
+        /// <returns>Parameter val1 or val2, whichever is smaller.</returns>
+        public static extern sbyte Min(sbyte val1, sbyte val2);
+
+        /// <summary>
+        /// Returns the smaller of two 16-bit signed integers.
+        /// </summary>
+        /// <param name="val1">The first of two 16-bit signed integers to compare.</param>
+        /// <param name="val2">The second of two 16-bit signed integers to compare.</param>
+        /// <returns>Parameter val1 or val2, whichever is smaller.</returns>
+        public static extern short Min(short val1, short val2);
+
+        /// <summary>
+        /// Returns the smaller of two 16-bit unsigned integers.
+        /// </summary>
+        /// <param name="val1">The first of two 16-bit unsigned integers to compare.</param>
+        /// <param name="val2">The second of two 16-bit unsigned integers to compare.</param>
+        /// <returns>Parameter val1 or val2, whichever is smaller.</returns>
+        public static extern ushort Min(ushort val1, ushort val2);
+
+        /// <summary>
+        /// Returns the smaller of two single-precision floating-point numbers.
+        /// </summary>
+        /// <param name="val1">The first of two single-precision floating-point numbers to compare.</param>
+        /// <param name="val2">The second of two single-precision floating-point numbers to compare.</param>
+        /// <returns>Parameter val1 or val2, whichever is smaller.</returns>
+        public static extern float Min(float val1, float val2);
+
+        /// <summary>
+        /// Returns the smaller of two 32-bit signed integers.
+        /// </summary>
+        /// <param name="val1">The first of two 32-bit signed integers to compare.</param>
+        /// <param name="val2">The second of two 32-bit signed integers to compare.</param>
+        /// <returns>Parameter val1 or val2, whichever is smaller.</returns>
+        public static extern int Min(int val1, int val2);
+
+        /// <summary>
+        /// Returns the smaller of two 32-bit unsigned integers.
+        /// </summary>
+        /// <param name="val1">The first of two 32-bit unsigned integers to compare.</param>
+        /// <param name="val2">The second of two 32-bit unsigned integers to compare.</param>
+        /// <returns>Parameter val1 or val2, whichever is smaller.</returns>
+        public static extern uint Min(uint val1, uint val2);
+
+        /// <summary>
+        /// Returns the smaller of two double-precision floating-point numbers.
+        /// </summary>
+        /// <param name="val1">The first of two double-precision floating-point numbers to compare.</param>
+        /// <param name="val2">The second of two double-precision floating-point numbers to compare.</param>
+        /// <returns>Parameter val1 or val2, whichever is smaller.</returns>
+        public static extern double Min(double val1, double val2);
+
+        /// <summary>
+        /// Returns the smaller of two 64-bit signed integers.
+        /// </summary>
+        /// <param name="val1">The first of two 64-bit signed integers to compare.</param>
+        /// <param name="val2">The second of two 64-bit signed integers to compare.</param>
+        /// <returns>Parameter val1 or val2, whichever is smaller.</returns>
+        [Template("System.Int64.min({val1}, {val2})")]
+        public static extern long Min(long val1, long val2);
+
+        /// <summary>
+        /// Returns the smaller of two 64-bit unsigned integers.
+        /// </summary>
+        /// <param name="val1">The first of two 64-bit unsigned integers to compare.</param>
+        /// <param name="val2">The second of two 64-bit unsigned integers to compare.</param>
+        /// <returns>Parameter val1 or val2, whichever is smaller.</returns>
+        [Template("System.UInt64.min({val1}, {val2})")]
+        public static extern ulong Min(ulong val1, ulong val2);
+
+        /// <summary>
+        /// Returns the smaller of two decimal numbers.
+        /// </summary>
+        /// <param name="val1">The first of two decimal numbers to compare.</param>
+        /// <param name="val2">The second of two decimal numbers to compare.</param>
+        /// <returns>Parameter val1 or val2, whichever is smaller.</returns>
+        [Template("System.Decimal.min({val1}, {val2})")]
+        public static extern decimal Min(decimal val1, decimal val2);
 
         public static extern double Random();
 
