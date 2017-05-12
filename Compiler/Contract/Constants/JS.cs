@@ -24,8 +24,11 @@
             public const string STRUCT = "$struct";
             public const string CONFIG = "config";
             public const string EVENTS = "events";
-            public const string PROPERTIES = "properties";
+            public const string PROPERTIES = "props";
+            public const string FIELDS = "fields";
+            public const string METHODS = "methods";
             public const string STATICS = "statics";
+            public const string CTORS = "ctors";
 
             public const string ASYNC_TASK = "task";
             public const string PROTOTYPE = "prototype";
@@ -81,10 +84,11 @@
             public const string SET_EXCEPTION = "setException";
 
             public const string CONSTRUCTOR = "ctor";
+            public const string ENTRY_POINT_NAME = "main";
             public const string APPLY = "apply";
             public const string CALL = "call";
             public const string DEFINE = "define";
-            public const string DISPOSE = "dispose";
+            public const string DISPOSE = "System$IDisposable$dispose";
 
             public const string SLICE = "slice";
 

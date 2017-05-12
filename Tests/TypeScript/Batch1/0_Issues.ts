@@ -10,14 +10,14 @@ QUnit.test("#290", function (assert) {
     var c1 = new Misc.A.Class1();
     var c2 = new Misc.B.Class2();
 
-    assert.deepEqual(c1.getInt(3), 3, "Misc.A.Class1.getInt");
-    assert.deepEqual(c2.getInt(6), 6, "Use class declared in another namespace");
+    assert.deepEqual(c1.GetInt(3), 3, "Misc.A.Class1.getInt");
+    assert.deepEqual(c2.GetInt(6), 6, "Use class declared in another namespace");
 });
 
 QUnit.test("#281", function (assert) {
     var t = new Misc.A.EnumTest();
 
-    assert.deepEqual(t.doSomething(Misc.A.EnumTest.EnumA.M2), Misc.A.EnumTest.EnumA.M2, "Use enum declared inside a class");
+    assert.deepEqual(t.DoSomething(Misc.A.EnumTest.EnumA.M2), Misc.A.EnumTest.EnumA.M2, "Use enum declared inside a class");
 });
 
 QUnit.test("#336", function (assert) {
@@ -37,7 +37,7 @@ QUnit.test("#338", function (assert) {
 
 QUnit.test("#1060", function (assert) {
     var a = new (TypeScript.Issues.N1060.B$1(Number))();
-    var c = a.getC();
+    var c = a.GetC();
 
     assert.notEqual(c, null);
 });
@@ -50,8 +50,8 @@ QUnit.test("#1640", function (assert) {
 
     var iGame1: TypeScript.Issues.N1640.IGamePlay = game1;
 
-    game1.subscribe(s1);
-    iGame1.startGame("First");
+    game1.Subscribe(s1);
+    iGame1.StartGame("First");
     assert.equal(result1, "First1");
 
     var game2: TypeScript.Issues.N1640.GamePlay = new TypeScript.Issues.N1640.GamePlay();
@@ -63,18 +63,18 @@ QUnit.test("#1640", function (assert) {
 
     iGame2.addOnGameEvent(s2);
 
-    iGame2.startGame("Second");
+    iGame2.StartGame("Second");
     assert.equal(result2, "Second2");
 
     iGame2.removeOnGameEvent(s2);
 
     result2 = "Removed";
-    iGame2.startGame("");
+    iGame2.StartGame("");
     assert.equal(result2, "Removed");
 
     iGame2.addOnGameEvent(s2);
 
-    iGame2.startGame("SecondPlus");
+    iGame2.StartGame("SecondPlus");
     assert.equal(result2, "SecondPlus2");
 
 });
@@ -96,8 +96,8 @@ QUnit.test("#2030", function (assert) {
 QUnit.test("#2031", function (assert) {
     var a = new (TypeScript.Issues.N2031DictionaryMap$2(String, Number).ctor)();
 
-    a.add("1", 1);
-    a.add("2", 2);
+    a.Add("1", 1);
+    a.Add("2", 2);
 
     var f = a.Forward;
     var r = a.Reverse;
@@ -167,19 +167,35 @@ QUnit.test("#2474", function (assert) {
 });
 
 QUnit.test("#2463", function (assert) {
-    var ol = { nothing: 1 };
-    TypeScript.Issues.N2463.do(ol);
-    assert.equal(ol.nothing, 2);
+    var ol = { Nothing: 1 };
+    TypeScript.Issues.N2463.Do(ol);
+    assert.equal(ol.Nothing, 2);
 });
 
 QUnit.test("#2493", function (assert) {
     var op1 = new N2493Operation1();
-    assert.equal(op1.add(1), 2)
+    assert.equal(op1.Add(1), 2)
 
     var op2 = new Operation2();
-    assert.equal(op2.add(1), 3)
+    assert.equal(op2.Add(1), 3)
 
     var op3 = new TypeScript.Issues.N2493Operation3();
-    assert.equal(op3.add(1), 4)
+    assert.equal(op3.Add(1), 4)
+});
+
+QUnit.test("#2653", function (assert) {
+    var z = new TypeScript.Issues.N2653Zig();
+    var r = z.zag();
+    assert.equal(r, 1);
+});
+
+QUnit.test("#2661", function (assert) {
+    var c = new TypeScript.Issues.N2661C();
+    c.fn = function (x: TypeScript.Issues.N2661C) { return x.fn; };
+
+    var fn1 = c.fn;
+    var fn2 = c.fn(c);
+
+    assert.equal(fn1, fn2);
 });
 

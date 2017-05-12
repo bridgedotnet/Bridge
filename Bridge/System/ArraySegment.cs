@@ -7,6 +7,7 @@ namespace System
     /// </summary>
     [External]
     [IgnoreGeneric]
+    [Name("System.ArraySegment")]
     public class ArraySegment<T>
     {
         public extern ArraySegment(T[] array);

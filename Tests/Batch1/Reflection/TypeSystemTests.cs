@@ -200,7 +200,6 @@ namespace Bridge.ClientTest.Reflection
 
         public class BS
         {
-            [Name(false)]
             public int X;
 
             public BS(int x)

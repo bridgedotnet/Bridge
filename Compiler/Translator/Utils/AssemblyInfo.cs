@@ -22,15 +22,6 @@ namespace Bridge.Translator
         }
 
         /// <summary>
-        /// True to preserve case of the first letter of generated JavaScript members - methods, constructors, etc.
-        /// Defaults to false - the members will be forced to start with a lowercase letter.
-        /// </summary>
-        public bool PreserveMemberCase
-        {
-            get; set;
-        }
-
-        /// <summary>
         /// A file name where JavaScript is generated to. If omitted, it is [Namespace_Name].js by default.
         /// Example: "MyBridgeNetLibrary.js"
         /// Tip. You can decorate a class with a [FileName('MyClass.js')] attribute. A class script will be generated to the defined file. It supersedes a global bridge.json fileName.
@@ -49,7 +40,7 @@ namespace Bridge.Translator
             get; set;
         }
 
-        private OutputBy outputBy = OutputBy.Namespace;
+        private OutputBy outputBy = OutputBy.Project;
 
         /// <summary>
         /// The option to manage JavaScript output folders and files.

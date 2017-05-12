@@ -1,22 +1,26 @@
     Bridge.define("TestIssue1050.App", {
         statics: {
-            field: 0,
-            config: {
-                properties: {
-                    Property: 0
-                }
+            fields: {
+                Field: 0
             },
-            method: function method() {
+            props: {
+                Property: 0
+            },
+            methods: {
+                Method: function Method() {
+                }
             }
         },
-        main1: function main1() {
-            // Should be TestIssue1050.App.something = 1;
-            TestIssue1050.App.field = 1;
+        methods: {
+            Main1: function Main1() {
+                // Should be TestIssue1050.App.Field = 1;
+                TestIssue1050.App.Field = 1;
 
-            // Should be TestIssue1050.App.setProperty(2);
-            TestIssue1050.App.Property = 2;
+                // Should be TestIssue1050.App.Property = 2;
+                TestIssue1050.App.Property = 2;
 
-            // Should be TestIssue1050.App.method();
-            TestIssue1050.App.method();
+                // Should be TestIssue1050.App.Method();
+                TestIssue1050.App.Method();
+            }
         }
     });

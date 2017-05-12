@@ -62,8 +62,20 @@
             return !Bridge.hasValue(a) ? "" : (fn ? fn(a) : a.toString());
         },
 
+        toStringFn: function (fn) {
+            return function(v) {
+                return System.Nullable.toString(v, fn);
+            };
+        },
+
         getHashCode: function (a, fn) {
             return !Bridge.hasValue(a) ? 0 : (fn ? fn(a) : Bridge.getHashCode(a));
+        },
+
+        getHashCodeFn: function (fn) {
+            return function (v) {
+                return System.Nullable.getHashCode(v, fn);
+            };
         },
 
         xor: function (a, b) {

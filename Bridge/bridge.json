@@ -10,7 +10,6 @@
   "assembly": {
     "disableInitAssembly": true,
     "enableReservedNamespaces": true
-    //fullName: ""
   },
   "resources": [
     {
@@ -72,6 +71,7 @@
         "Resources/Generator.js",
         "Resources/linq.js",
         "Resources/.generated/system/guid.js",
+        "Resources/.generated/system/environment.js",
         "Resources/Text/RegularExpressions/Regex.js",
         "Resources/Text/RegularExpressions/RegexCapture.js",
         "Resources/Text/RegularExpressions/RegexCaptureCollection.js",
@@ -93,9 +93,19 @@
         "Resources/.generated/system/random.js",
         "Resources/.generated/system/bitConverter.js",
         "Resources/.generated/system/threading/timer.js",
-        "Resources/.generated/bridge/utils/console.js",
+        "Resources/.generated/system/console.js",
         "Resources/.auxiliary/End.js",
         "Resources/.auxiliary/Finally.js"
+      ]
+    },
+    {
+      "name": "bridge.console.js",
+      "extract": false,
+      "header": "Resources/.auxiliary/Header.js",
+      "files": [
+        "Resources/.auxiliary/AssemblyBegin.js",
+        "Resources/.generated/bridge/utils/console.js",
+        "Resources/.auxiliary/AssemblyEnd.js"
       ]
     },
     {

@@ -10,7 +10,7 @@ namespace System.Linq.Expressions
         [Name("dv")]
         public extern Expression DefaultValue { get; private set; }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern LabelTarget Target { get; private set; }
 
         internal extern LabelExpression();

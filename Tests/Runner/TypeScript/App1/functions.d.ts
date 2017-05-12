@@ -9,6 +9,15 @@ declare module Functions {
     }
     var Delegates: DelegatesFunc;
 
+    export interface MiddleBit {
+        fn: {(x: Functions.MiddleBit): Function};
+    }
+    export interface MiddleBitFunc extends Function {
+        prototype: MiddleBit;
+        new (): MiddleBit;
+    }
+    var MiddleBit: MiddleBitFunc;
+
     export interface DelegateInterface {
         Functions$DelegateInterface$addMethodVoidDelegate(value: {(): void}): void;
         Functions$DelegateInterface$removeMethodVoidDelegate(value: {(): void}): void;
@@ -25,9 +34,9 @@ declare module Functions {
     }
 
     export interface DelegateClass {
-        methodVoidDelegate: {(): void};
-        methodStringDelegate: {(s: string): void};
-        methodStringDelegateIntResult: {(s: string): number};
+        MethodVoidDelegate: {(): void};
+        MethodStringDelegate: {(s: string): void};
+        MethodStringDelegateIntResult: {(s: string): number};
     }
     export interface DelegateClassFunc extends Function {
         prototype: DelegateClass;
@@ -36,8 +45,8 @@ declare module Functions {
     var DelegateClass: DelegateClassFunc;
 
     export interface Parameters {
-        getSomething(i?: number): number;
-        join(numbers: number[]): string;
+        GetSomething(i?: number): number;
+        Join(numbers: number[]): string;
     }
     export interface ParametersFunc extends Function {
         prototype: Parameters;

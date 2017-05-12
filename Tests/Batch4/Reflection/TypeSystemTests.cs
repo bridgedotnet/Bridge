@@ -79,7 +79,6 @@ namespace Bridge.ClientTest.Batch4.Reflection
 
         public class BS
         {
-            [Name(false)]
             public int X;
 
             public BS(int x)

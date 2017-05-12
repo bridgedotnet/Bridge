@@ -10,6 +10,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     {
         [External]
         [ObjectLiteral(ObjectCreateMode.Constructor)]
+        [Convention(Notation.LowerCamelCase, ConventionTarget.Member)]
         public class Config1
         {
             public string Name
@@ -23,6 +24,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [External]
         [ObjectLiteral(ObjectCreateMode.Constructor)]
         [Name("Config2")]
+        [Convention(Notation.LowerCamelCase, ConventionTarget.Member)]
         public class Config2
         {
             public string Name

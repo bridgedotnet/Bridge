@@ -193,8 +193,11 @@ namespace Bridge.Translator.TypeScript
             }
 
             this.InsertDependencies(this.Emitter.Output);
+            if (this.ns != null)
+            {
+                this.EndBlock();
+            }
 
-            this.EndBlock();
             this.TransformOutputs();
         }
     }

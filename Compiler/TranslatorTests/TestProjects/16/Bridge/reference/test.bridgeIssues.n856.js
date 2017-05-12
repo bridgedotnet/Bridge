@@ -4,20 +4,22 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     
     Bridge.define("Test.BridgeIssues.N856.Bridge856", {
         statics: {
-            
-            test1: function () {
-            }
-        },
-        config: {
-            properties: {
+            methods: {
                 
-                TestProperty: 0
+                Test1: function () {
+                }
             }
         },
-        
-        test2: function (a) {
-            if (a === void 0) { a = null; }
+        props: {
+            
+            TestProperty: 0
+        },
+        methods: {
+            
+            Test2: function (a) {
+                if (a === void 0) { a = null; }
 
+            }
         }
     });
 });

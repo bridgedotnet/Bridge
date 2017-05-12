@@ -55,7 +55,7 @@ namespace Bridge.ClientTest
                     return this.field2;
                 }
 
-                [Template("{this}.prop1")]
+                [Template("{this}.Prop1")]
                 public extern int GetProp1();
 
                 public static BS Create(int i, string s)

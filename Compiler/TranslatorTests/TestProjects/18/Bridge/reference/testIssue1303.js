@@ -1,47 +1,53 @@
     Bridge.define("TestIssue1303.App", {
         statics: {
-            config: {
+            ctors: {
                 init: function () {
-                    Bridge.ready(this.notMain);
-                    Bridge.ready(this.main);
+                    Bridge.ready(this.NotMain);
+                    Bridge.ready(this.Main);
                 }
             },
-            notMain: function notMain() {
-                //Should be in config.init
-            },
-            main: function main() {
-                //Should be in config.init
+            methods: {
+                NotMain: function NotMain() {
+                    //Should be in config.init
+                },
+                Main: function Main() {
+                    //Should be in config.init
+                }
             }
         },
         $entryPoint: true
     });
 
     Bridge.define("TestIssue1303.App1", {
+        main: function Main() {
+            //Should be in config.init
+        },
         statics: {
-            config: {
+            ctors: {
                 init: function () {
-                    Bridge.ready(this.notMain);
+                    Bridge.ready(this.NotMain);
                 }
             },
-            notMain: function notMain() {
-                //Should be in config.init
+            methods: {
+                NotMain: function NotMain() {
+                    //Should be in config.init
+                }
             }
         },
-        $entryPoint: true,
-        $main: function $main() {
-            //Should be in config.init
-        }
+        $entryPoint: true
     });
 
     Bridge.define("TestIssue1303.App2", {
         statics: {
-            config: {
+            ctors: {
                 init: function () {
-                    Bridge.ready(this.main);
+                    Bridge.ready(this.Main);
                 }
             },
-            main: function main() {
-                //Should be in config.init
+            methods: {
+                Main: function Main() {
+                    //Should be in config.init
+                }
             }
         },
         $entryPoint: true

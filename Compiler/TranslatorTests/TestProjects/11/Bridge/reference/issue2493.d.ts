@@ -2,7 +2,7 @@
 
 declare module Issue2493 {
     export interface Operation3 {
-        add(a: number, b: number): number;
+        Add(a: number, b: number): number;
     }
     export interface Operation3Func extends Function {
         prototype: Operation3;

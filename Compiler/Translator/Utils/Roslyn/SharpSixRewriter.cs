@@ -503,7 +503,7 @@ namespace Bridge.Translator
             {
                 if (methodSymbol != null && methodSymbol.IsGenericMethod && methodSymbol.TypeArguments.Length > 0 && !methodSymbol.TypeArguments.Any(SyntaxHelper.IsAnonymous))
                 {
-                    var genericName = SyntaxHelper.GenerateGenericName(node.Identifier, methodSymbol.TypeArguments);
+                    var genericName = SyntaxHelper.GenerateGenericName(SyntaxFactory.Identifier(symbol.FullyQualifiedName(false)), methodSymbol.TypeArguments);
                     return genericName.WithLeadingTrivia(node.GetLeadingTrivia().ExcludeDirectivies()).WithTrailingTrivia(node.GetTrailingTrivia().ExcludeDirectivies());
                 }
 
@@ -871,7 +871,7 @@ namespace Bridge.Translator
                 var methodIdentifier = SyntaxFactory.IdentifierName("Bridge.Script.CallFor");
                 var invocation = SyntaxFactory.InvocationExpression(methodIdentifier, SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(args.Select(SyntaxFactory.Argument))));
 
-                return invocation;
+                return invocation.WithLeadingTrivia(node.GetLeadingTrivia()).WithTrailingTrivia(node.GetTrailingTrivia());
             }
 
             return node;
@@ -1097,6 +1097,7 @@ namespace Bridge.Translator
             }
 
             bool needParenthesized = node.Parent is BinaryExpressionSyntax
+                                     || node.Parent is AwaitExpressionSyntax
                                      || node.Parent is PostfixUnaryExpressionSyntax
                                      || node.Parent is PrefixUnaryExpressionSyntax;
 
@@ -1172,8 +1173,10 @@ namespace Bridge.Translator
 
             ExpressionSyntax whenFalse = lastInfo.IsResultVoid ? (ExpressionSyntax)SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression) : SyntaxFactory.CastExpression(lastInfo.ResultType, SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression));
 
-            return needParenthesized ? SyntaxFactory.ParenthesizedExpression(SyntaxFactory.ConditionalExpression(condition, whenTrue, whenFalse)) :
+            var newNode = needParenthesized ? SyntaxFactory.ParenthesizedExpression(SyntaxFactory.ConditionalExpression(condition, whenTrue, whenFalse)) :
                                        (SyntaxNode)SyntaxFactory.ConditionalExpression(condition, whenTrue, whenFalse);
+ 
+            return newNode.WithLeadingTrivia(node.GetLeadingTrivia()).WithTrailingTrivia(node.GetTrailingTrivia());
         }
     }
 }

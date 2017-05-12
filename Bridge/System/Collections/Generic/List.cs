@@ -3,7 +3,7 @@ using Bridge;
 namespace System.Collections.Generic
 {
     [External]
-    public class List<T> : IList<T>, IList, IBridgeClass
+    public class List<T> : IList<T>, IList, IReadOnlyList<T>, IBridgeClass
     {
         public extern List();
 
@@ -77,6 +77,8 @@ namespace System.Collections.Generic
         public extern void Insert(int index, T item);
 
         public extern void InsertRange(int index, IEnumerable<T> items);
+
+        public extern void ForEach(Action<T> action);
 
         public extern string Join();
 

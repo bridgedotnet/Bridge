@@ -204,6 +204,11 @@ namespace Bridge.Translator
 
             if (hasInline)
             {
+                if (!memberResult.Member.IsStatic)
+                {
+                    inlineCode = "this." + inlineCode;
+                }
+                
                 if (resolveResult is InvocationResolveResult)
                 {
                     this.PushWriter(inlineCode);
@@ -574,7 +579,7 @@ namespace Bridge.Translator
                 else
                 {
                     this.WriteTarget(memberResult);
-                    this.Write(this.Emitter.GetEntityName(memberResult.Member, true));
+                    this.Write(this.Emitter.GetEntityName(memberResult.Member));
                 }
             }
             else

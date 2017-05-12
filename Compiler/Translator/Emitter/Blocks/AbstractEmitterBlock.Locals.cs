@@ -54,7 +54,7 @@ namespace Bridge.Translator
             declarations.ToList().ForEach(item =>
             {
                 var rr = item.Parent != null ? (LocalResolveResult)this.Emitter.Resolver.ResolveNode(item, this.Emitter) : null;
-                var name = this.Emitter.GetEntityName(item);
+                var name = this.Emitter.GetParameterName(item);
                 var vName = this.AddLocal(item.Name, item, item.Type, name);
 
                 if (item.Parent == null && item.Name == "value" && visitor.DirectionExpression.Any(expr => expr is IdentifierExpression && ((IdentifierExpression)expr).Identifier == "value"))

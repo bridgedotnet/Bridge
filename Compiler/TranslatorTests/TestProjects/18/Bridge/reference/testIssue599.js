@@ -1,14 +1,23 @@
     Bridge.define("TestIssue599.Issue599", {
         statics: {
-            config: {
+            ctors: {
                 init: function () {
-                    Bridge.ready(this.main1);
+                    Bridge.ready(this.Main1);
                 }
             },
-            main1: function main1() {
-                Bridge.Console.log(new TestIssue599.Issue599()._something);
+            methods: {
+                Main1: function Main1() {
+                    System.Console.WriteLine(new TestIssue599.Issue599()._something);
+                }
             }
         },
         $entryPoint: true,
-        _something: "HI!"
+        fields: {
+            _something: null
+        },
+        ctors: {
+            init: function () {
+                this._something = "HI!";
+            }
+        }
     });

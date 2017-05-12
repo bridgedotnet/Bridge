@@ -13,18 +13,18 @@ QUnit.test("Parameters", function (assert) {
     //}
     //var result1 = buildName("Bob");
     // #293
-    assert.deepEqual(func.join([1, 2, 3]), "123", "params argument becomes Array #293");
+    assert.deepEqual(func.Join([1, 2, 3]), "123", "params argument becomes Array #293");
 });
 QUnit.test("Function types", function (assert) {
     var d = new Functions.DelegateClass();
     var ds;
     var di;
-    d.methodVoidDelegate = function () { return di = 7; };
-    d.methodVoidDelegate();
+    d.MethodVoidDelegate = function () { return di = 7; };
+    d.MethodVoidDelegate();
     assert.deepEqual(di, 7, "methodVoidDelegate");
-    d.methodStringDelegate = function (s) { return ds = s; };
-    d.methodStringDelegate("Privet");
+    d.MethodStringDelegate = function (s) { return ds = s; };
+    d.MethodStringDelegate("Privet");
     assert.deepEqual(ds, "Privet", "methodStringDelegate");
-    d.methodStringDelegateIntResult = function (s) { return s.length; };
-    assert.deepEqual(d.methodStringDelegateIntResult("Privet"), 6, "methodStringDelegateIntResult");
+    d.MethodStringDelegateIntResult = function (s) { return s.length; };
+    assert.deepEqual(d.MethodStringDelegateIntResult("Privet"), 6, "methodStringDelegateIntResult");
 });

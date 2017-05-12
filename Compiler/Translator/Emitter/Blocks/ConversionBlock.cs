@@ -175,14 +175,78 @@ namespace Bridge.Translator
             return BridgeTypes.ToJsName(itype, emitter);
         }
 
-        private static string GetInlineMethod(IEmitter emitter, string name, IType returnType, ResolveResult rr, Expression expression)
+        internal static string GetInlineMethod(IEmitter emitter, string name, IType returnType, IType type, Expression expression)
         {
-            if (emitter.NamedBoxedFunctions.ContainsKey(rr.Type) && emitter.NamedBoxedFunctions[rr.Type].ContainsKey(name) && emitter.NamedBoxedFunctions[rr.Type][name] != null)
+            if (emitter.NamedBoxedFunctions.ContainsKey(type) && emitter.NamedBoxedFunctions[type].ContainsKey(name) && emitter.NamedBoxedFunctions[type][name] != null)
             {
-                return JS.Vars.DBOX_ + "." + BridgeTypes.ToJsName(rr.Type, emitter, true) + "." + name.ToLowerCamelCase();
+                return JS.Vars.DBOX_ + "." + BridgeTypes.ToJsName(type, emitter, true) + "." + name.ToLowerCamelCase();
             }
 
-            var methodDef = rr.Type.GetMembers().FirstOrDefault(m =>
+            var methodDef = ConversionBlock.GetBoxedMethod(name, returnType, type);
+
+            if (methodDef != null)
+            {
+                var inline = emitter.GetInline(methodDef);
+
+                if (inline != null)
+                {
+                    bool isNullable = NullableType.IsNullable(type);
+
+                    if (isNullable)
+                    {
+                        string template = "System.Nullable.{1}Fn({0})";
+                        var methodRef = ConversionBlock.GetInlineMethod(emitter, name, returnType,
+                            NullableType.GetUnderlyingType(type), expression);
+
+                        return methodRef == null ? $"System.Nullable.{name.ToLowerCamelCase()}" : string.Format(template, methodRef, name.ToLowerCamelCase());
+                    }
+
+                    var writer = new Writer
+                    {
+                        InlineCode = inline,
+                        Output = emitter.Output,
+                        IsNewLine = emitter.IsNewLine
+                    };
+                    emitter.IsNewLine = false;
+                    emitter.Output = new StringBuilder();
+
+                    var argsInfo = new ArgumentsInfo(emitter, expression, (IMethod)methodDef);
+                    argsInfo.ArgumentsExpressions = new Expression[] {expression};
+                    argsInfo.ArgumentsNames = new string[] {"this"};
+                    argsInfo.ThisArgument = "obj";
+                    new InlineArgumentsBlock(emitter, argsInfo, writer.InlineCode).Emit();
+
+                    var result = emitter.Output.ToString();
+                    emitter.Output = writer.Output;
+                    emitter.IsNewLine = writer.IsNewLine;
+
+                    Dictionary<string, string> fn = null;
+
+                    if (emitter.NamedBoxedFunctions.ContainsKey(type))
+                    {
+                        fn = emitter.NamedBoxedFunctions[type];
+                    }
+                    else
+                    {
+                        fn = new Dictionary<string, string>();
+                        emitter.NamedBoxedFunctions.Add(type, fn);
+                    }
+
+                    result = string.Format("function (obj) {{return {0};}}", result);
+
+                    fn.Add(name, result);
+
+                    return JS.Vars.DBOX_ + "." + BridgeTypes.ToJsName(type, emitter, true) + "." + name.ToLowerCamelCase();
+                }
+
+            }
+
+            return null;
+        }
+
+        internal static IMember GetBoxedMethod(string name, IType returnType, IType type)
+        {
+            return type.GetMembers().FirstOrDefault(m =>
             {
                 if (m.Name == name && !m.IsStatic && m.ReturnType.Equals(returnType) && m.IsOverride)
                 {
@@ -196,54 +260,6 @@ namespace Bridge.Translator
 
                 return false;
             });
-
-            if (methodDef != null)
-            {
-                var inline = emitter.GetInline(methodDef);
-
-                if (inline != null)
-                {
-                    var writer = new Writer
-                    {
-                        InlineCode = inline,
-                        Output = emitter.Output,
-                        IsNewLine = emitter.IsNewLine
-                    };
-                    emitter.IsNewLine = false;
-                    emitter.Output = new StringBuilder();
-
-                    var argsInfo = new ArgumentsInfo(emitter, expression, rr);
-                    argsInfo.ArgumentsExpressions = new Expression[] {expression};
-                    argsInfo.ArgumentsNames = new string[] {"this"};
-                    argsInfo.ThisArgument = "obj";
-                    new InlineArgumentsBlock(emitter, argsInfo, writer.InlineCode).Emit();
-
-                    var result = emitter.Output.ToString();
-                    emitter.Output = writer.Output;
-                    emitter.IsNewLine = writer.IsNewLine;
-
-                    Dictionary<string, string> fn = null;
-
-                    if (emitter.NamedBoxedFunctions.ContainsKey(rr.Type))
-                    {
-                        fn = emitter.NamedBoxedFunctions[rr.Type];
-                    }
-                    else
-                    {
-                        fn = new Dictionary<string, string>();
-                        emitter.NamedBoxedFunctions.Add(rr.Type, fn);
-                    }
-
-                    result = string.Format("function(obj) {{return {0};}}", result);
-
-                    fn.Add(name, result);
-
-                    return JS.Vars.DBOX_ + "." + BridgeTypes.ToJsName(rr.Type, emitter, true) + "." + name.ToLowerCamelCase();
-                }
-
-            }
-
-            return null;
         }
 
         private static bool IsUnpackGenericInterfaceObject(IType interfaceType)
@@ -276,6 +292,16 @@ namespace Bridge.Translator
         private static int DoConversion(ConversionBlock block, Expression expression, Conversion conversion, IType expectedType,
             int level, ResolveResult rr, bool ignoreConversionResolveResult = false, bool ignoreBoxing = false)
         {
+            if (expression.Parent is MemberReferenceExpression && expression.Parent.Parent is InvocationExpression)
+            {
+                var inv_rr = block.Emitter.Resolver.ResolveNode(expression.Parent.Parent, block.Emitter) as CSharpInvocationResolveResult;
+
+                if (inv_rr != null && inv_rr.IsExtensionMethodInvocation)
+                {
+                    conversion = block.Emitter.Resolver.Resolver.GetConversion((Expression)expression.Parent);
+                }
+            }
+
             if (ConversionBlock.expressionIgnoreUserDefine.Contains(expression) && conversion.IsUserDefined)
             {
                 expectedType = conversion.Method.Parameters.First().Type;
@@ -368,7 +394,7 @@ namespace Bridge.Translator
                         block.AfterOutput2 += ", " + ConversionBlock.GetBoxedType(rr.Type, block.Emitter);
 
                         var inlineMethod = ConversionBlock.GetInlineMethod(block.Emitter, "ToString",
-                            block.Emitter.Resolver.Compilation.FindType(KnownTypeCode.String), rr, expression);
+                            block.Emitter.Resolver.Compilation.FindType(KnownTypeCode.String), rr.Type, expression);
 
                         if (inlineMethod != null)
                         {
@@ -376,7 +402,7 @@ namespace Bridge.Translator
                         }
 
                         inlineMethod = ConversionBlock.GetInlineMethod(block.Emitter, "GetHashCode",
-                            block.Emitter.Resolver.Compilation.FindType(KnownTypeCode.String), rr, expression);
+                            block.Emitter.Resolver.Compilation.FindType(KnownTypeCode.Int32), rr.Type, expression);
 
                         if (inlineMethod != null)
                         {
@@ -588,7 +614,7 @@ namespace Bridge.Translator
         {
             if (type.Kind == TypeKind.Enum && emitter.Validator.IsExternalType(type.GetDefinition()))
             {
-                var enumMode = emitter.Validator.EnumEmitMode(type);
+                var enumMode = Helpers.EnumEmitMode(type);
                 if (enumMode >= 3 && enumMode < 7 || enumMode == 2)
                 {
                     return false;
@@ -641,7 +667,15 @@ namespace Bridge.Translator
                         var unaryExpression = (UnaryOperatorExpression)expression;
                         var resolveOperator = block.Emitter.Resolver.ResolveNode(unaryExpression, block.Emitter);
                         OperatorResolveResult orr = resolveOperator as OperatorResolveResult;
-                        new InlineArgumentsBlock(block.Emitter, new ArgumentsInfo(block.Emitter, unaryExpression, orr, method), inline).Emit();
+                        if (orr != null)
+                        {
+                            new InlineArgumentsBlock(block.Emitter,
+                                new ArgumentsInfo(block.Emitter, unaryExpression, orr, method), inline).Emit();
+                        }
+                        else
+                        {
+                            new InlineArgumentsBlock(block.Emitter, new ArgumentsInfo(block.Emitter, expression, method), inline, method).Emit();
+                        }
                     }
                     else
                     {

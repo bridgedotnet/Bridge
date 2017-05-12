@@ -8,6 +8,7 @@ namespace System.Collections.Generic
     /// Complement and Exclusive Complement.
     /// </summary>
     [External]
+    [Convention(Target = ConventionTarget.Member, Member = ConventionMember.Method, Notation = Notation.LowerCamelCase)]
     public interface ISet<T> : ICollection<T>
     {
         // Add ITEM to the set, return true if added, false if duplicate

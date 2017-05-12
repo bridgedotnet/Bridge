@@ -27,7 +27,7 @@ namespace System.Reflection
             get;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern bool IsIndexer
         {
             [Template("({this}.i || false)")]

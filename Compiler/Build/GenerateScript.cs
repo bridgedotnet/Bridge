@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace Bridge.Build
 {
-    public class GenerateScript : Task
+    public class BridgeCompilerTask : Task
     {
         [Required]
         public ITaskItem Assembly

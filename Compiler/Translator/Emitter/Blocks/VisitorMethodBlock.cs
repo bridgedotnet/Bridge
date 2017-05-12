@@ -1,6 +1,7 @@
 using Bridge.Contract;
 using ICSharpCode.NRefactory.CSharp;
 using System.Linq;
+using System.Xml.Schema;
 using Bridge.Contract.Constants;
 using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
@@ -40,7 +41,7 @@ namespace Bridge.Translator
                     }
                     else if (rr.Type.FullName == "Bridge.InitAttribute")
                     {
-                        int initPosition = 0;
+                        InitPosition initPosition = InitPosition.After;
 
                         if (attr.HasArgumentList)
                         {
@@ -50,7 +51,7 @@ namespace Bridge.Translator
                                 var argrr = this.Emitter.Resolver.ResolveNode(argExpr, this.Emitter);
                                 if (argrr.ConstantValue is int)
                                 {
-                                    initPosition = (int)argrr.ConstantValue;
+                                    initPosition = (InitPosition)argrr.ConstantValue;
                                 }
                             }
                         }
@@ -73,21 +74,25 @@ namespace Bridge.Translator
 
             var overloads = OverloadsCollection.Create(this.Emitter, methodDeclaration);
             XmlToJsDoc.EmitComment(this, this.MethodDeclaration);
+            var isEntryPoint = Helpers.IsEntryPointMethod(this.Emitter, this.MethodDeclaration);
 
             string name = overloads.GetOverloadName(false, null, true);
 
-            if (Helpers.IsEntryPointMethod(this.Emitter, methodDeclaration))
+            if (isEntryPoint)
             {
-                name = JS.Fields.MAIN;
+                this.Write(JS.Funcs.ENTRY_POINT_NAME);
             }
-
-            this.Write(name);
+            else
+            {
+                this.Write(name);
+            }
 
             this.WriteColon();
 
             this.WriteFunction();
 
-            if (this.Emitter.AssemblyInfo.EnableNamedFunctionExpressions)
+
+            if (isEntryPoint || this.Emitter.AssemblyInfo.EnableNamedFunctionExpressions)
             {
                 // If the option enabled then use named function expressions (see #2407)
                 // like doSomething: function doSomething() { }

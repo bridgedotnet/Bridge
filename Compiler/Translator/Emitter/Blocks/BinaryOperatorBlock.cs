@@ -930,7 +930,7 @@ namespace Bridge.Translator
                         this.Emitter.Output = writer.Output;
                         this.Emitter.IsNewLine = writer.IsNewLine;
 
-                        var argsInfo = new ArgumentsInfo(this.Emitter, expression, rr);
+                        var argsInfo = new ArgumentsInfo(this.Emitter, expression, (IMethod)toStringMethod);
                         argsInfo.ArgumentsExpressions = new Expression[] { expression };
                         argsInfo.ArgumentsNames = new string[] { "this" };
                         argsInfo.ThisArgument = result;

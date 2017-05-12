@@ -7,7 +7,7 @@ namespace System.Linq.Expressions
     [Cast("{this}.ntype === 9")]
     public sealed class ConstantExpression : Expression
     {
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern object Value { get; private set; }
 
         internal extern ConstantExpression();

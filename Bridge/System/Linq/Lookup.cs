@@ -6,6 +6,7 @@ namespace System.Linq
 {
     [External]
     [IgnoreGeneric]
+    [Convention(Target = ConventionTarget.Member, Member = ConventionMember.Method, Notation = Notation.LowerCamelCase)]
     public interface ILookup<TKey, TElement> : IEnumerable<Grouping<TKey, TElement>>
     {
         int Count

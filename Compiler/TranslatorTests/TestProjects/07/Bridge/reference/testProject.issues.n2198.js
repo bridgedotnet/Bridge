@@ -18,12 +18,12 @@ Bridge.assembly("TestProject", function ($asm, globals) {
              * @memberof Module1.TestProject.Issues.N2198.N2198
              * @return  {void}
              */
-            $main: function () {
-                Bridge.Console.log("Hello World!");
+            main: function Main() {
+                System.Console.WriteLine("Hello World!");
             }
         });
 
-        Bridge.init(function() { Module1.TestProject.Issues.N2198.N2198.main(); });
+        Bridge.init(function () { Module1.TestProject.Issues.N2198.N2198.Main(); });
         return Module1;
     });
 

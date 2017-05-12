@@ -30,7 +30,7 @@ namespace Bridge.Translator
                 properties.Add("at", attrArr);
             }
 
-            if (type.Kind == TypeKind.Class || type.Kind == TypeKind.Struct || type.Kind == TypeKind.Interface)
+            if (type.Kind == TypeKind.Class || type.Kind == TypeKind.Struct || type.Kind == TypeKind.Interface || type.Kind == TypeKind.Enum)
             {
                 var members = type.Members.Where(m => MetadataUtils.IsReflectable(m, emitter, ifHasAttribute, tree))
                                           .OrderBy(m => m, MemberOrderer.Instance)
@@ -214,6 +214,11 @@ namespace Bridge.Translator
 
         public static bool IsReflectable(IMember member, IEmitter emitter, bool ifHasAttribute, SyntaxTree tree)
         {
+            if (member.IsExplicitInterfaceImplementation)
+            {
+                return false;
+            }
+
             if (member.Attributes.Any(a => a.AttributeType.FullName == "Bridge.NonScriptableAttribute"))
             {
                 return false;
@@ -332,6 +337,11 @@ namespace Bridge.Translator
 
         private static bool IsMemberReflectable(IMember member, MemberAccessibility[] memberReflectability)
         {
+            if (member.IsExplicitInterfaceImplementation)
+            {
+                return false;
+            }
+
             foreach (var memberAccessibility in memberReflectability)
             {
                 if (memberAccessibility == MemberAccessibility.All)
@@ -784,7 +794,7 @@ namespace Bridge.Translator
                 {
                     var names = constructor.Parameters.Select(p => p.Name);
 
-                    StringBuilder sb = new StringBuilder("function(" + string.Join(", ", names.ToArray()) + ") { return {");
+                    StringBuilder sb = new StringBuilder("function (" + string.Join(", ", names.ToArray()) + ") { return {");
 
                     bool needComma = false;
                     foreach (var name in names)

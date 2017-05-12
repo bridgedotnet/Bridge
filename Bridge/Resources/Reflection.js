@@ -671,20 +671,23 @@
             }
 
             var f = function (m) {
-                if ((memberTypes & m.t) && (((bindingAttr & 4) && !m.is) || ((bindingAttr & 8) && m.is)) && (!name || m.n === name)) {
-                    if (params) {
-                        if ((m.p || []).length !== params.length) {
-                            return;
-                        }
-
-                        for (var i = 0; i < params.length; i++) {
-                            if (params[i] !== m.p[i]) {
+                if ((memberTypes & m.t) && (((bindingAttr & 4) && !m.is) || ((bindingAttr & 8) && m.is)) && (!name || ((bindingAttr & 1) === 1 ? (m.n.toUpperCase() === name.toUpperCase()) : (m.n === name)))) {
+                    if ((bindingAttr & 16) === 16 && m.a === 2 ||
+                        (bindingAttr & 32) === 32 && m.a !== 2) {
+                        if (params) {
+                            if ((m.p || []).length !== params.length) {
                                 return;
                             }
-                        }
-                    }
 
-                    result.push(m);
+                            for (var i = 0; i < params.length; i++) {
+                                if (params[i] !== m.p[i]) {
+                                    return;
+                                }
+                            }
+                        }
+
+                        result.push(m);
+                    }
                 }
             };
 

@@ -2,15 +2,19 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
     Bridge.define("Test.BridgeIssues.N064.Class64", {
-        ctor: function () {
-            this.$initialize();
+        ctors: {
+            ctor: function () {
+                this.$initialize();
+            },
+            $ctor1: function (related) {
+                this.$initialize();
+            }
         },
-        $ctor1: function (related) {
-            this.$initialize();
-        },
-        test: function () {
-            var aux = new Test.BridgeIssues.N064.Class64.Aux1();
-            new Test.BridgeIssues.N064.Class64.$ctor1(aux);
+        methods: {
+            Test: function () {
+                var aux = new Test.BridgeIssues.N064.Class64.Aux1();
+                new Test.BridgeIssues.N064.Class64.$ctor1(aux);
+            }
         }
     });
 

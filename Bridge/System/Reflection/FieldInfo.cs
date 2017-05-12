@@ -14,7 +14,7 @@ namespace System.Reflection
             private set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern bool IsInitOnly
         {
             [Template("({this}.ro || false)")]

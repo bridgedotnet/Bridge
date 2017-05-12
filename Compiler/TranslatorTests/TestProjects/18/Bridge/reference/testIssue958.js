@@ -4,13 +4,15 @@
 
     Bridge.define("TestIssue958.Issue958", {
         statics: {
-            main1: function main1() {
-                var message = new TestIssue958.SetValue("Hi!");
-                TestIssue958.Issue958.processMessage(message);
-            },
-            processMessage: function processMessage(message) {
-                // The call should have generic type as function parameter
-                TestIssue958.MessageExtensions.if(TestIssue958.SetValue, TestIssue958.MessageExtensions.if(TestIssue958.SetName, message, $asm.$.TestIssue958.Issue958.f1), $asm.$.TestIssue958.Issue958.f2);
+            methods: {
+                Main1: function Main1() {
+                    var message = new TestIssue958.SetValue("Hi!");
+                    TestIssue958.Issue958.ProcessMessage(message);
+                },
+                ProcessMessage: function ProcessMessage(message) {
+                    // The call should have generic type as function parameter
+                    TestIssue958.MessageExtensions.If(TestIssue958.SetValue, TestIssue958.MessageExtensions.If(TestIssue958.SetName, message, $asm.$.TestIssue958.Issue958.f1), $asm.$.TestIssue958.Issue958.f2);
+                }
             }
         }
     });
@@ -19,46 +21,48 @@
 
     Bridge.apply($asm.$.TestIssue958.Issue958, {
         f1: function (action) {
-            Bridge.Console.log(System.String.concat("Name: ", action.Name));
+            System.Console.WriteLine(System.String.concat("Name: ", action.Name));
         },
         f2: function (action) {
-            Bridge.Console.log(System.String.concat("Value: ", action.Value));
+            System.Console.WriteLine(System.String.concat("Value: ", action.Value));
         }
     });
 
     Bridge.define("TestIssue958.MessageExtensions", {
         statics: {
-            if: function if(T, source, work) {
-                if (Bridge.is(source, T)) {
-                    work(Bridge.cast(Bridge.unbox(source), T));
+            methods: {
+                If: function If(T, source, work) {
+                    if (Bridge.is(source, T)) {
+                        work(Bridge.cast(Bridge.unbox(source), T));
+                    }
+                    return source;
                 }
-                return source;
             }
         }
     });
 
     Bridge.define("TestIssue958.SetName", {
         inherits: [TestIssue958.IMessage],
-        config: {
-            properties: {
-                Name: null
-            }
+        props: {
+            Name: null
         },
-        ctor: function (name) {
-            this.$initialize();
-            this.Name = name;
+        ctors: {
+            ctor: function (name) {
+                this.$initialize();
+                this.Name = name;
+            }
         }
     });
 
     Bridge.define("TestIssue958.SetValue", {
         inherits: [TestIssue958.IMessage],
-        config: {
-            properties: {
-                Value: null
-            }
+        props: {
+            Value: null
         },
-        ctor: function (value) {
-            this.$initialize();
-            this.Value = value;
+        ctors: {
+            ctor: function (value) {
+                this.$initialize();
+                this.Value = value;
+            }
         }
     });

@@ -1,10 +1,10 @@
         var base = {
         _initialize: function () {
-            if (this.$initialized) {
+            if (this.$init) {
                 return;
             }
 
-            this.$initialized = Bridge.emptyFn;
+            this.$init = {};
 
             if (this.$staticInit) {
                 this.$staticInit();
@@ -19,7 +19,8 @@
             var initFn,
                 name,
                 cls = (statics ? scope : scope.ctor),
-                descriptors = cls.$descriptors;
+                descriptors = cls.$descriptors,
+                aliases = cls.$aliases;
 
             if (config.fields) {
                 for (name in config.fields) {
@@ -27,9 +28,10 @@
                 }
             }
 
-            if (config.properties) {
-                for (name in config.properties) {
-                    var cfg = Bridge.property(statics ? scope : prototype, name, config.properties[name], statics, cls);
+            var props = config.properties;
+            if (props) {
+                for (name in props) {
+                    var cfg = Bridge.property(statics ? scope : prototype, name, props[name], statics, cls);
 
                     cfg.name = name;
                     cfg.cls = cls;
@@ -46,7 +48,7 @@
 
             if (config.alias) {
                 for (var i = 0; i < config.alias.length; i++) {
-                    (function (obj, name, alias) {
+                    (function (obj, name, alias, cls) {
                         var descriptor = null;
                         for (var i = descriptors.length - 1; i >= 0; i--) {
                             if (descriptors[i].name === name) {
@@ -57,6 +59,7 @@
 
                         if (descriptor != null) {
                             Object.defineProperty(obj, alias, descriptor);
+                            aliases.push({alias: alias, descriptor: descriptor});
                         } else {
                             var m = scope[name];
 
@@ -65,9 +68,10 @@
                             }
 
                             scope[alias] = m;
+                            aliases.push({ fn: name, alias: alias });
                         }
                         
-                    })(statics ? scope : prototype, config.alias[i], config.alias[i + 1]);
+                    })(statics ? scope : prototype, config.alias[i], config.alias[i + 1], cls);
 
                     i++;
                 }
@@ -88,6 +92,70 @@
                     }
                 };
             }
+        },
+
+        convertScheme: function(obj) {
+            var result = {},
+            copy = function (obj, to) {
+                var reserved = ["fields", "methods", "events", "props", "properties", "alias", "ctors"],
+                    keys = Object.keys(obj);
+
+                for (var i = 0; i < keys.length; i++) {
+                    var name = keys[i];
+                    if (reserved.indexOf(name) === -1) {
+                        to[name] = obj[name];
+                    }
+                }
+
+                if (obj.fields) {
+                    Bridge.apply(to, obj.fields);
+                }
+
+                if (obj.methods) {
+                    Bridge.apply(to, obj.methods);
+                }
+
+                var config = {};
+                if (obj.props) {
+                    config.properties = obj.props;
+                }
+                else if (obj.properties) {
+                    config.properties = obj.properties;
+                }
+
+                if (obj.events) {
+                    config.events = obj.events;
+                }
+
+                if (obj.alias) {
+                    config.alias = obj.alias;
+                }
+
+                if (obj.ctors) {
+                    if (obj.ctors.init) {
+                        config.init = obj.ctors.init;
+                        delete obj.ctors.init;
+                    }
+
+                    Bridge.apply(to, obj.ctors);
+                }
+
+                to.$config = config;
+            };
+
+            if (obj.main) {
+                result.$main = obj.main;
+                delete obj.main;
+            }
+
+            copy(obj, result);
+
+            if (obj.statics || obj.$statics) {
+                result.$statics = {};
+                copy(obj.statics || obj.$statics, result.$statics);
+            }
+
+            return result;
         },
 
         definei: function (className, gscope, prop) {
@@ -159,6 +227,41 @@
 
             if (prop.$kind === "enum" && !prop.inherits) {
                 prop.inherits = [System.IComparable, System.IFormattable];
+            }
+
+            var rNames = ["fields", "events", "props", "ctors", "methods"],
+                defaultScheme = Bridge.isFunction(prop.main) ? 0 : 1,
+                check = function (scope) {
+                    if (scope.config && Bridge.isPlainObject(scope.config) ||
+                        scope.$main && Bridge.isFunction(scope.$main) ||
+                        scope.hasOwnProperty("ctor") && Bridge.isFunction(scope.ctor)) {
+                        defaultScheme = 1;
+                        return false;
+                    }
+
+                    if (scope.alias && Bridge.isArray(scope.alias) && scope.alias.length > 0 && scope.alias.length % 2 === 0) {
+                        return true;
+                    }
+
+                    for (var j = 0; j < rNames.length; j++) {
+                        if (scope[rNames[j]] && Bridge.isPlainObject(scope[rNames[j]])) {
+                            return true;
+                        }
+                    }
+                    return false;
+                },
+                alternateScheme = check(prop);
+
+            if (!alternateScheme && prop.statics) {
+                alternateScheme = check(prop.statics);
+            }
+
+            if (!alternateScheme) {
+                alternateScheme = defaultScheme == 0;
+            }
+
+            if (alternateScheme) {
+                prop = Bridge.Class.convertScheme(prop);
             }
 
             var extend = prop.$inherits || prop.inherits,
@@ -249,6 +352,8 @@
             }
 
             Class.$$name = className;
+            Object.defineProperty(Class, "name", { value: className });
+            Object.defineProperty(Class.constructor, "name", { value: className });
             Class.$kind = prop.$kind;
 
             if (gCfg && isGenericInstance) {
@@ -322,7 +427,8 @@
 
             prop.$initialize = Bridge.Class._initialize;
 
-            var keys = [];
+            var keys = [],
+                isFF = Bridge.Browser.firefoxVersion > 0;
 
             for (name in prop) {
                 keys.push(name);
@@ -339,13 +445,18 @@
                     isCtor = true;
                 }
 
+                var member = prop[name];
                 if (isCtor) {
-                    Class[ctorName] = prop[name];
+                    Class[ctorName] = member;
                     Class[ctorName].prototype = prototype;
                     Class[ctorName].prototype.constructor = Class;
-                    prototype[ctorName] = prop[name];
+                    prototype[ctorName] = member;
                 } else {
-                    prototype[ctorName] = prop[name];
+                    prototype[ctorName] = member;
+                }
+
+                if (typeof member === "function" && name !== "$main") {
+                    Object.defineProperty(member, isFF ? "displayName" : "name", { value: className + "." + name, writable: true });
                 }
             }
 
@@ -357,10 +468,15 @@
 
             if (statics) {
                 for (name in statics) {
+                    var member = statics[name];
                     if (name === "ctor") {
-                        Class["$ctor"] = statics[name];
+                        Class["$ctor"] = member;
                     } else {
-                        Class[name] = statics[name];
+                        Class[name] = member;
+                    }
+
+                    if (typeof member === "function") {
+                        Object.defineProperty(member, isFF ? "displayName" : "name", { value: className + "." + name, writable: true });
                     }
                 }
             }
@@ -386,8 +502,11 @@
             };
 
             if (isEntryPoint || Bridge.isFunction(prototype.$main)) {
-                if (!Class.main && prototype.$main) {
-                    Class.main = prototype.$main;
+                if (prototype.$main) {
+                    var entryName = prototype.$main.name || "Main";
+                    if (!Class[entryName]) {
+                        Class[entryName] = prototype.$main;
+                    }
                 }
 
                 Bridge.Class.$queueEntry.push(Class);
@@ -443,20 +562,32 @@
             return Class;
         },
 
+        toCtorString: function() {
+            return Bridge.Reflection.getTypeName(this);
+        },
+
         createInheritors: function(cls, extend) {
             var interfaces = [],
                 baseInterfaces = [],
-                descriptors = [];
+                descriptors = [],
+                aliases = [];
 
             if (extend) {
                 for (var j = 0; j < extend.length; j++) {
                     var baseType = extend[j],
                         baseI = (baseType.$interfaces || []).concat(baseType.$baseInterfaces || []),
-                        baseDescriptors = baseType.$descriptors;
+                        baseDescriptors = baseType.$descriptors,
+                        baseAliases = baseType.$aliases;
 
                     if (baseDescriptors && baseDescriptors.length > 0) {
                         for (var d = 0; d < baseDescriptors.length; d++) {
                             descriptors.push(baseDescriptors[d]);
+                        }
+                    }
+
+                    if (baseAliases && baseAliases.length > 0) {
+                        for (var d = 0; d < baseAliases.length; d++) {
+                            aliases.push(baseAliases[d]);
                         }
                     }
 
@@ -475,6 +606,7 @@
             }
 
             cls.$descriptors = descriptors;
+            cls.$aliases = aliases;
             cls.$baseInterfaces = baseInterfaces;
             cls.$interfaces = interfaces;
             cls.$allInterfaces = interfaces.concat(baseInterfaces);
@@ -798,7 +930,12 @@
                 }
 
                 if (t.prototype.$main) {
-                    Bridge.ready(t.main);
+                    (function(cls, name) {
+                        Bridge.ready(function () {
+                             cls[name]();
+                        });
+                    })(t, t.prototype.$main.name || "Main");
+                    
                     t.prototype.$main = null;
                 }
             }

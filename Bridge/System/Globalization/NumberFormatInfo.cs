@@ -7,7 +7,7 @@ namespace System.Globalization
     {
         public extern NumberFormatInfo();
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public static extern NumberFormatInfo InvariantInfo
         {
             get;
@@ -20,154 +20,154 @@ namespace System.Globalization
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string NegativeSign
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string PositiveSign
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string NegativeInfinitySymbol
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string PositiveInfinitySymbol
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string PercentSymbol
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern int[] PercentGroupSizes
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern int PercentDecimalDigits
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string PercentDecimalSeparator
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string PercentGroupSeparator
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern int PercentPositivePattern
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern int PercentNegativePattern
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string CurrencySymbol
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern int[] CurrencyGroupSizes
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern int CurrencyDecimalDigits
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string CurrencyDecimalSeparator
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string CurrencyGroupSeparator
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern int CurrencyPositivePattern
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern int CurrencyNegativePattern
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern int[] NumberGroupSizes
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern int NumberDecimalDigits
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string NumberDecimalSeparator
         {
             get;
             set;
         }
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public extern string NumberGroupSeparator
         {
             get;
@@ -178,7 +178,7 @@ namespace System.Globalization
 
         public extern object Clone();
 
-        [Name(true)] //[Field]
+        [Convention(Notation.LowerCamelCase)] //[Field]
         public static extern NumberFormatInfo CurrentInfo
         {
             get;

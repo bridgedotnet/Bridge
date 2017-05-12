@@ -59,11 +59,6 @@ namespace Bridge.Translator
             }
         }
 
-        public static bool IsReservedStaticName(string name)
-        {
-            return JS.Reserved.StaticNames.Any(n => String.Equals(name, n, StringComparison.InvariantCultureIgnoreCase));
-        }
-
         public static object ConvertConstant(object value, Expression expression, IEmitter emitter)
         {
             try
@@ -306,7 +301,7 @@ namespace Bridge.Translator
                         var argExpr = attr.PositionalArguments.First();
                         if (argExpr.ConstantValue is int)
                         {
-                            var value = (int)argExpr.ConstantValue;
+                            var value = (InitPosition)argExpr.ConstantValue;
 
                             if (value > 0)
                             {
@@ -325,86 +320,6 @@ namespace Bridge.Translator
             var attr = this.GetAttribute(method.Attributes, Bridge.Translator.Translator.Bridge_ASSEMBLY + ".Script");
 
             return this.GetScriptArguments(attr);
-        }
-
-        public virtual string GetDefinitionName(IEmitter emitter, IMemberDefinition member, bool preserveMemberCase = false)
-        {
-            if (!preserveMemberCase)
-            {
-                preserveMemberCase = !this.IsNativeMember(member.FullName) ? this.AssemblyInfo.PreserveMemberCase : false;
-
-                if (member is FieldDefinition && ((FieldDefinition)member).HasConstant && !member.DeclaringType.IsEnum)
-                {
-                    preserveMemberCase = true;
-                }
-            }
-            string attrName = Bridge.Translator.Translator.Bridge_ASSEMBLY + ".NameAttribute";
-            var attr = Helpers.GetInheritedAttribute(emitter, member, attrName);
-
-            bool isIgnore = this.Validator.IsExternalType(member.DeclaringType);
-            string name = member.Name;
-            bool isStatic = false;
-
-            if (member is MethodDefinition)
-            {
-                var method = (MethodDefinition)member;
-                isStatic = method.IsStatic;
-                if (method.IsConstructor)
-                {
-                    name = JS.Funcs.CONSTRUCTOR;
-                }
-            }
-            else if (member is FieldDefinition)
-            {
-                isStatic = ((FieldDefinition)member).IsStatic;
-            }
-            else if (member is PropertyDefinition)
-            {
-                var prop = (PropertyDefinition)member;
-                isStatic = prop.GetMethod != null ? prop.GetMethod.IsStatic : false;
-            }
-            else if (member is EventDefinition)
-            {
-                var ev = (EventDefinition)member;
-                isStatic = ev.AddMethod != null ? ev.AddMethod.IsStatic : false;
-            }
-            if (attr != null)
-            {
-                var value = attr.ConstructorArguments.First().Value;
-                if (value is string)
-                {
-                    name = value.ToString();
-                    if (!isIgnore &&
-                        ((isStatic && Emitter.IsReservedStaticName(name)) /*||
-                        Helpers.IsReservedWord(name)*/))
-                    {
-                        name = Helpers.ChangeReservedWord(name);
-                    }
-                    return name;
-                }
-
-                preserveMemberCase = !(bool)value;
-            }
-
-            if (name.Contains("."))
-            {
-                name = Object.Net.Utilities.StringUtils.RightOfRightmostOf(name, '.');
-            }
-
-            if (name.Length > 1 && name.ToUpperInvariant() == name)
-            {
-                preserveMemberCase = true;
-            }
-
-            name = preserveMemberCase ? name : Object.Net.Utilities.StringUtils.ToLowerCamelCase(name);
-            if (!isIgnore &&
-                ((isStatic && Emitter.IsReservedStaticName(name)) /*||
-                Helpers.IsReservedWord(name)*/))
-            {
-                name = Helpers.ChangeReservedWord(name);
-            }
-
-            return name;
         }
 
         public virtual string GetEntityNameFromAttr(IEntity member, bool setter = false)
@@ -438,7 +353,7 @@ namespace Bridge.Translator
                 if (value is string)
                 {
                     name = value.ToString();
-                    if (!isIgnore && ((member.IsStatic && Emitter.IsReservedStaticName(name)) /*|| Helpers.IsReservedWord(name)*/))
+                    if (!isIgnore && member.IsStatic && Helpers.IsReservedStaticName(name))
                     {
                         name = Helpers.ChangeReservedWord(name);
                     }
@@ -449,103 +364,55 @@ namespace Bridge.Translator
             return null;
         }
 
-        Dictionary<Tuple<IEntity, bool, bool>, string> entityNameCache = new Dictionary<Tuple<IEntity, bool, bool>, string>();
-        public virtual string GetEntityName(IEntity member, bool forcePreserveMemberCase = false, bool ignoreInterface = false)
+        Dictionary<IEntity, NameSemantic> entityNameCache = new Dictionary<IEntity, NameSemantic>();
+        public virtual NameSemantic GetNameSemantic(IEntity member)
         {
-            Tuple<IEntity, bool, bool> tuple = new Tuple<IEntity, bool, bool>(member, forcePreserveMemberCase, ignoreInterface);
-
-            string result;
-            if(this.entityNameCache.TryGetValue(tuple, out result))
+            NameSemantic result;
+            if(this.entityNameCache.TryGetValue(member, out result))
             {
                 return result;
             }
 
-            bool preserveMemberChange = !this.IsNativeMember(member.FullName) ? this.AssemblyInfo.PreserveMemberCase : false;
+            result = new NameSemantic { Entity = member, Emitter = this };
 
-            int enumMode = -1;
-            if (member.DeclaringType.Kind == TypeKind.Enum && member is IField)
-            {
-                enumMode = this.Validator.EnumEmitMode(member.DeclaringType);
-            }
-
-            if (member is IMember && this.IsMemberConst((IMember)member) || member is IEvent)
-            {
-                preserveMemberChange = true;
-            }
-            var attr = Helpers.GetInheritedAttribute(member, Bridge.Translator.Translator.Bridge_ASSEMBLY + ".NameAttribute");
-            bool isIgnore = member.DeclaringTypeDefinition != null && this.Validator.IsExternalType(member.DeclaringTypeDefinition);
-            string name = member.Name;
-            if (member is IMethod && ((IMethod)member).IsConstructor)
-            {
-                name = JS.Funcs.CONSTRUCTOR;
-            }
-
-            if (attr != null)
-            {
-                var value = attr.PositionalArguments.First().ConstantValue;
-                if (value is string)
-                {
-                    name = value.ToString();
-                    if (!isIgnore && ((member.IsStatic && Emitter.IsReservedStaticName(name)) /*|| Helpers.IsReservedWord(name)*/))
-                    {
-                        name = Helpers.ChangeReservedWord(name);
-                    }
-                    this.entityNameCache.Add(tuple, name);
-                    return name;
-                }
-
-                preserveMemberChange = !(bool)value;
-                enumMode = -1;
-            }
-
-            if (name.Length > 1 && name.ToUpperInvariant() == name)
-            {
-                preserveMemberChange = true;
-            }
-
-            if (enumMode > 6)
-            {
-                switch (enumMode)
-                {
-                    case 7:
-                        break;
-
-                    case 8:
-                        name = name.ToLowerInvariant();
-                        break;
-
-                    case 9:
-                        name = name.ToUpperInvariant();
-                        break;
-                }
-            }
-            else
-            {
-                name = !preserveMemberChange && !forcePreserveMemberCase ? Object.Net.Utilities.StringUtils.ToLowerCamelCase(name) : name;
-            }
-
-            if (!isIgnore && ((member.IsStatic && Emitter.IsReservedStaticName(name))/* || Helpers.IsReservedWord(name)*/))
-            {
-                name = Helpers.ChangeReservedWord(name);
-            }
-
-            this.entityNameCache.Add(tuple, name);
-            return name;
+            this.entityNameCache.Add(member, result);
+            return result;
         }
 
-        public virtual string GetEntityName(EntityDeclaration entity, bool forcePreserveMemberCase = false, bool ignoreInterface = false)
+        public string GetEntityName(IEntity member)
+        {
+            var semantic = NameSemantic.Create(member, this);
+            semantic.IsObjectLiteral = false;
+            return semantic.Name;
+        }
+
+        public string GetTypeName(ITypeDefinition type, TypeDefinition typeDefinition)
+        {
+            var semantic = NameSemantic.Create(type, this);
+            semantic.TypeDefinition = typeDefinition;
+            return semantic.Name;
+        }
+
+        public string GetLiteralEntityName(ICSharpCode.NRefactory.TypeSystem.IEntity member)
+        {
+            var semantic = NameSemantic.Create(member, this);
+            semantic.IsObjectLiteral = true;
+            return semantic.Name;
+        }
+
+        public virtual string GetEntityName(EntityDeclaration entity)
         {
             var rr = this.Resolver.ResolveNode(entity, this) as MemberResolveResult;
 
             if (rr != null)
             {
-                return this.GetEntityName(rr.Member, forcePreserveMemberCase, ignoreInterface);
+                return this.GetEntityName(rr.Member);
             }
 
             return null;
         }
 
-        public virtual string GetEntityName(ParameterDeclaration entity, bool forcePreserveMemberCase = false)
+        public virtual string GetParameterName(ParameterDeclaration entity)
         {
             var name = entity.Name;
 
@@ -718,16 +585,10 @@ namespace Bridge.Translator
 
         public virtual bool IsMemberConst(IMember member)
         {
-            var specializedField = member as SpecializedField;
-            if (specializedField != null)
+            var field = member as IField;
+            if (field != null)
             {
-                return specializedField.IsConst && member.DeclaringType.Kind != TypeKind.Enum;
-            }
-
-            var defaultResolvedField = member as DefaultResolvedField;
-            if (defaultResolvedField != null)
-            {
-                return defaultResolvedField.IsConst && member.DeclaringType.Kind != TypeKind.Enum;
+                return field.IsConst && member.DeclaringType.Kind != TypeKind.Enum;
             }
 
             return false;

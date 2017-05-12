@@ -1,91 +1,93 @@
     Bridge.define("TestIssue921Instance.Issue921Instance", {
         statics: {
-            config: {
-                properties: {
-                    NameStatic: null
-                }
+            props: {
+                NameStatic: null
             }
         },
-        _offset: 0,
-        config: {
-            properties: {
-                Name: null
+        fields: {
+            _offset: 0
+        },
+        props: {
+            Name: null
+        },
+        ctors: {
+            ctor: function (offset) {
+                this.$initialize();
+                this._offset = offset;
+                TestIssue921Instance.Issue921Instance.NameStatic = "Static";
             }
         },
-        ctor: function (offset) {
-            this.$initialize();
-            this._offset = offset;
-            TestIssue921Instance.Issue921Instance.NameStatic = "Static";
-        },
-        computeValue: function computeValue(d) {
-            return d.add(System.Decimal(10));
-        },
-        lambaLiftingWithReadOnlyField: function lambaLiftingWithReadOnlyField() {
-            var localValue = 456;
-            return System.Linq.Enumerable.from(System.Array.init([1, 2, 3], System.Int32)).select($asm.$.TestIssue921Instance.Issue921Instance.f1).select($asm.$.TestIssue921Instance.Issue921Instance.f1).select($asm.$.TestIssue921Instance.Issue921Instance.f2).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f3)).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f4)).select(function (value) {
-                return ((value + localValue) | 0);
-            });
-        },
-        lambaLiftingWithProperty: function lambaLiftingWithProperty() {
-            var localValue = "What a name";
+        methods: {
+            ComputeValue: function ComputeValue(d) {
+                return d.add(System.Decimal(10));
+            },
+            LambaLiftingWithReadOnlyField: function LambaLiftingWithReadOnlyField() {
+                var localValue = 456;
+                return System.Linq.Enumerable.from(System.Array.init([1, 2, 3], System.Int32)).select($asm.$.TestIssue921Instance.Issue921Instance.f1).select($asm.$.TestIssue921Instance.Issue921Instance.f1).select($asm.$.TestIssue921Instance.Issue921Instance.f2).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f3)).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f4)).select(function (value) {
+                    return ((value + localValue) | 0);
+                });
+            },
+            LambaLiftingWithProperty: function LambaLiftingWithProperty() {
+                var localValue = "What a name";
 
-            return System.Linq.Enumerable.from(System.Array.init(["one", "two", "three"], System.String)).select($asm.$.TestIssue921Instance.Issue921Instance.f5).select($asm.$.TestIssue921Instance.Issue921Instance.f5).select($asm.$.TestIssue921Instance.Issue921Instance.f6).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f7)).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f8)).select(function (value) {
-                return System.String.concat(value, localValue);
-            });
-        },
-        lambaLiftingWithStaticProperty: function lambaLiftingWithStaticProperty() {
-            var localValue = "What a name";
+                return System.Linq.Enumerable.from(System.Array.init(["one", "two", "three"], System.String)).select($asm.$.TestIssue921Instance.Issue921Instance.f5).select($asm.$.TestIssue921Instance.Issue921Instance.f5).select($asm.$.TestIssue921Instance.Issue921Instance.f6).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f7)).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f8)).select(function (value) {
+                    return System.String.concat(value, localValue);
+                });
+            },
+            LambaLiftingWithStaticProperty: function LambaLiftingWithStaticProperty() {
+                var localValue = "What a name";
 
-            return System.Linq.Enumerable.from(System.Array.init(["one", "two", "three"], System.String)).select($asm.$.TestIssue921Instance.Issue921Instance.f5).select($asm.$.TestIssue921Instance.Issue921Instance.f5).select($asm.$.TestIssue921Instance.Issue921Instance.f6).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f7)).select($asm.$.TestIssue921Instance.Issue921Instance.f9).select(function (value) {
-                return System.String.concat(value, localValue);
-            });
-        },
-        lambaLiftingWithInstanceMethod: function lambaLiftingWithInstanceMethod() {
-            var localValue = System.Decimal(10.0);
+                return System.Linq.Enumerable.from(System.Array.init(["one", "two", "three"], System.String)).select($asm.$.TestIssue921Instance.Issue921Instance.f5).select($asm.$.TestIssue921Instance.Issue921Instance.f5).select($asm.$.TestIssue921Instance.Issue921Instance.f6).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f7)).select($asm.$.TestIssue921Instance.Issue921Instance.f9).select(function (value) {
+                    return System.String.concat(value, localValue);
+                });
+            },
+            LambaLiftingWithInstanceMethod: function LambaLiftingWithInstanceMethod() {
+                var localValue = System.Decimal(10.0);
 
-            return System.Linq.Enumerable.from(System.Array.init([System.Decimal(1.0), System.Decimal(2.0), System.Decimal(3.0)], System.Decimal)).select($asm.$.TestIssue921Instance.Issue921Instance.f10).select($asm.$.TestIssue921Instance.Issue921Instance.f10).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f11)).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f12)).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f13)).select(function (value) {
-                return value.add(localValue);
-            });
-        },
-        lambaLiftingWithDelegate: function lambaLiftingWithDelegate() {
-            // Lift
-            var addThousand = $asm.$.TestIssue921Instance.Issue921Instance.f14;
+                return System.Linq.Enumerable.from(System.Array.init([System.Decimal(1.0), System.Decimal(2.0), System.Decimal(3.0)], System.Decimal)).select($asm.$.TestIssue921Instance.Issue921Instance.f10).select($asm.$.TestIssue921Instance.Issue921Instance.f10).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f11)).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f12)).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f13)).select(function (value) {
+                    return value.add(localValue);
+                });
+            },
+            LambaLiftingWithDelegate: function LambaLiftingWithDelegate() {
+                // Lift
+                var addThousand = $asm.$.TestIssue921Instance.Issue921Instance.f14;
 
-            var localValue = 123;
+                var localValue = 123;
 
-            return System.Linq.Enumerable.from(System.Array.init([1, 2, 3], System.Int32)).select(function (value) {
+                return System.Linq.Enumerable.from(System.Array.init([1, 2, 3], System.Int32)).select(function (value) {
+                        return addThousand(((value + 1) | 0));
+                    }).select(function (value) {
                     return addThousand(((value + 1) | 0));
-                }).select(function (value) {
-                return addThousand(((value + 1) | 0));
-            }).select(function (value, index) {
-                return addThousand(((value + index) | 0));
-            }).select(Bridge.fn.bind(this, function (value) {
-                return ((addThousand(value) + this._offset) | 0);
-            })).select(Bridge.fn.bind(this, function (value, index) {
-                return ((((addThousand(value) + index) | 0) + this._offset) | 0);
-            })).select(function (value) {
-                return addThousand(((value + addThousand(localValue)) | 0));
-            });
-        },
-        lambaLiftingWithDelegateChangingType: function lambaLiftingWithDelegateChangingType() {
-            // Lift
-            var $toString = $asm.$.TestIssue921Instance.Issue921Instance.f15;
+                }).select(function (value, index) {
+                    return addThousand(((value + index) | 0));
+                }).select(Bridge.fn.bind(this, function (value) {
+                    return ((addThousand(value) + this._offset) | 0);
+                })).select(Bridge.fn.bind(this, function (value, index) {
+                    return ((((addThousand(value) + index) | 0) + this._offset) | 0);
+                })).select(function (value) {
+                    return addThousand(((value + addThousand(localValue)) | 0));
+                });
+            },
+            LambaLiftingWithDelegateChangingType: function LambaLiftingWithDelegateChangingType() {
+                // Lift
+                var $toString = $asm.$.TestIssue921Instance.Issue921Instance.f15;
 
-            var localValue = 7;
+                var localValue = 7;
 
-            return System.Linq.Enumerable.from(System.Array.init([1, 2, 3], System.Int32)).select(function (value) {
-                    return $toString(((value + 1) | 0));
-                }).select(function (value) {
-                return $toString(value.length);
-            }).select(function (value, index) {
-                return $toString(((value.length + index) | 0));
-            }).select(Bridge.fn.bind(this, function (value) {
-                return System.String.concat($toString(value.length), this._offset);
-            })).select(Bridge.fn.bind(this, function (value, index) {
-                return System.String.concat($toString(value.length), index, this._offset);
-            })).select(function (value) {
-                return $toString(((value.length + $toString(localValue).length) | 0));
-            });
+                return System.Linq.Enumerable.from(System.Array.init([1, 2, 3], System.Int32)).select(function (value) {
+                        return $toString(((value + 1) | 0));
+                    }).select(function (value) {
+                    return $toString(value.length);
+                }).select(function (value, index) {
+                    return $toString(((value.length + index) | 0));
+                }).select(Bridge.fn.bind(this, function (value) {
+                    return System.String.concat($toString(value.length), this._offset);
+                })).select(Bridge.fn.bind(this, function (value, index) {
+                    return System.String.concat($toString(value.length), index, this._offset);
+                })).select(function (value) {
+                    return $toString(((value.length + $toString(localValue).length) | 0));
+                });
+            }
         }
     });
 
@@ -123,13 +125,13 @@
             return value.add(System.Decimal(1));
         },
         f11: function (value, index) {
-            return value.add(this.computeValue(System.Decimal(index)));
+            return value.add(this.ComputeValue(System.Decimal(index)));
         },
         f12: function (value) {
-            return value.add(this.computeValue(System.Decimal(100.0)));
+            return value.add(this.ComputeValue(System.Decimal(100.0)));
         },
         f13: function (value, index) {
-            return value.add(System.Decimal(index)).add(this.computeValue(System.Decimal(200.0)));
+            return value.add(System.Decimal(index)).add(this.ComputeValue(System.Decimal(200.0)));
         },
         f14: function (i) {
             return ((i + 1000) | 0);

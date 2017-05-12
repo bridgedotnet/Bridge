@@ -1,7 +1,6 @@
 using System.Linq;
 using Bridge.Contract;
 using Bridge.Contract.Constants;
-
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
@@ -74,8 +73,15 @@ namespace Bridge.Translator
             {
                 if (isProperty)
                 {
-                    var name = OverloadsCollection.Create(this.Emitter, member).GetOverloadName(true);
-                    this.Write(JS.Types.Bridge.ENSURE_BASE_PROPERTY + "(this, " + this.Emitter.ToJavaScript(name) + ")");
+                    if (this.Emitter.GetInline(member) == null)
+                    {
+                        var name = OverloadsCollection.Create(this.Emitter, member).GetOverloadName(true);
+                        this.Write(JS.Types.Bridge.ENSURE_BASE_PROPERTY + "(this, " + this.Emitter.ToJavaScript(name) + ")");
+                    }
+                    else
+                    {
+                        this.WriteThis();
+                    }
                 }
                 else
                 {

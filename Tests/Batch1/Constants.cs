@@ -44,6 +44,7 @@
         public const string MODULE_BIT_CONVERTER = "BitConverter";
         public const string MODULE_CONVERT = "Convert";
         public const string MODULE_RANDOM = "Random";
+        public const string MODULE_CONVENTION = "Convention";
 
         public const string MODULE_TYPEDARRAYS = "Typed Arrays";
         public const string MODULE_ICOLLECTION = PREFIX_COLLECTIONS; // + "ICollection";
@@ -96,7 +97,8 @@
         public const string MODULE_REFLECTION = "Reflection";
         public const string MODULE_FUNCTIONS = "Functions";
         public const string MODULE_SERIALIZATION = "Serialization";
-        public const string MODULE_BRIDGECONSOLE = "Bridge Console";
+        public const string MODULE_BRIDGE_CONSOLE = "Bridge Console";
+        public const string MODULE_SYSTEM_CONSOLE = "System Console";
         public const string MODULE_OBJECTLITERAL = "[ObjectLiteral]";
 
         public const string IGNORE_DATE = null;

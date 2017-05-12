@@ -3,13 +3,15 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
     Bridge.define("Test.BridgeIssues.N2113.Bridge2113", {
         statics: {
-            test: function () {
-                var tmp1;
-                var  tmp2;
-                var tmp3; // test
-                var tmp4; //@ test
+            methods: {
+                Test: function () {
+                    var tmp1;
+                    var  tmp2;
+                    var tmp3; // test
+                    var tmp4; //@ test
 
-                return "";
+                    return "";
+                }
             }
         }
     });

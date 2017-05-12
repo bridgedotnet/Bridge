@@ -84,7 +84,7 @@ namespace Bridge.Translator
             this.Source = source;
         }
 
-        public Translator(string location, string source, bool recursive, string lib) : this(location, source, true)
+        public Translator(string location, string source, bool recursive, string lib) : this(location, source, false)
         {
             this.Recursive = recursive;
             this.AssemblyLocation = lib;
@@ -142,6 +142,7 @@ namespace Bridge.Translator
             }
 
             this.BuildSyntaxTree();
+
 
             var resolver = new MemberResolver(this.ParsedSourceFiles, Emitter.ToAssemblyReferences(references, logger), this.AssemblyDefinition);
             resolver = this.Preconvert(resolver);
@@ -937,7 +938,7 @@ namespace Bridge.Translator
                 && (this.AssemblyInfo.CleanOutputFolderBeforeBuild || !string.IsNullOrEmpty(this.AssemblyInfo.CleanOutputFolderBeforeBuildPattern)))
             {
                 var searchPattern = string.IsNullOrEmpty(this.AssemblyInfo.CleanOutputFolderBeforeBuildPattern)
-                    ? "*" + Files.Extensions.JS + "|*"+ Files.Extensions.DTS
+                    ? "*" + Files.Extensions.JS + "|*" + Files.Extensions.DTS
                     : this.AssemblyInfo.CleanOutputFolderBeforeBuildPattern;
 
                 CleanDirectory(outputPath, searchPattern);

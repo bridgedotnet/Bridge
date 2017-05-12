@@ -8,6 +8,7 @@ namespace System.Threading.Tasks
     /// </summary>
     [External]
     [Name("Bridge.IPromise")]
+    [Convention(Target = ConventionTarget.Member, Member = ConventionMember.Method, Notation = Notation.LowerCamelCase)]
     public interface IPromise
     {
         /// <summary>

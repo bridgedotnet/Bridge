@@ -94,11 +94,17 @@ namespace Bridge.Contract
 
         Mono.Cecil.TypeDefinition GetBaseTypeDefinition(Mono.Cecil.TypeDefinition type);
 
-        string GetEntityName(ICSharpCode.NRefactory.CSharp.EntityDeclaration entity, bool cancelChangeCase = false, bool ignoreInterface = false);
+        string GetEntityName(ICSharpCode.NRefactory.CSharp.EntityDeclaration entity);
 
-        string GetEntityName(ICSharpCode.NRefactory.CSharp.ParameterDeclaration entity, bool cancelChangeCase = false);
+        string GetParameterName(ICSharpCode.NRefactory.CSharp.ParameterDeclaration entity);
 
-        string GetEntityName(ICSharpCode.NRefactory.TypeSystem.IEntity member, bool forcePreserveMemberCase = false, bool ignoreInterface = false);
+        NameSemantic GetNameSemantic(IEntity member);
+
+        string GetEntityName(ICSharpCode.NRefactory.TypeSystem.IEntity member);
+
+        string GetTypeName(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition type, TypeDefinition typeDefinition);
+
+        string GetLiteralEntityName(ICSharpCode.NRefactory.TypeSystem.IEntity member);
 
         string GetInline(ICSharpCode.NRefactory.CSharp.EntityDeclaration method);
 
@@ -111,8 +117,6 @@ namespace Bridge.Contract
         Tuple<bool, bool, string> GetInlineCode(ICSharpCode.NRefactory.CSharp.MemberReferenceExpression node);
 
         bool IsForbiddenInvocation(InvocationExpression node);
-
-        string GetDefinitionName(IEmitter emitter, IMemberDefinition member, bool changeCase = true);
 
         System.Collections.Generic.IEnumerable<string> GetScript(ICSharpCode.NRefactory.CSharp.EntityDeclaration method);
 
@@ -191,6 +195,12 @@ namespace Bridge.Contract
         }
 
         int ResetLevel(int? level = null);
+
+        InitPosition? InitPosition
+        {
+            get;
+            set;
+        }
 
         System.Collections.Generic.Dictionary<string, ICSharpCode.NRefactory.CSharp.AstType> Locals
         {
@@ -346,12 +356,7 @@ namespace Bridge.Contract
             set;
         }
 
-        Dictionary<Tuple<AstNode, bool>, OverloadsCollection> OverloadsCacheNodes
-        {
-            get;
-        }
-
-        Dictionary<Tuple<IMember, bool, bool>, OverloadsCollection> OverloadsCacheMembers
+        EmitterCache Cache
         {
             get;
         }
@@ -482,7 +487,16 @@ namespace Bridge.Contract
 
         void WriteIndented(string s, int? position = null);
         string GetReflectionName(IType type);
-
         bool ForbidLifting { get; set; }
+
+        Dictionary<IAssembly, NameRule[]> AssemblyNameRuleCache
+        {
+            get;
+        }
+
+        Dictionary<ITypeDefinition, NameRule[]> ClassNameRuleCache
+        {
+            get;
+        }
     }
 }

@@ -60,7 +60,7 @@ namespace Bridge.Translator.TypeScript
                     if (initializer != null && initializer is PrimitiveExpression)
                     {
                         this.Write(" = ");
-                        if (this.Emitter.Validator.IsStringNameEnum(this.TypeInfo.Type))
+                        if (Helpers.IsStringNameEnum(this.TypeInfo.Type))
                         {
                             this.WriteScript(((PrimitiveExpression)initializer).Value);
                         }
@@ -86,39 +86,7 @@ namespace Bridge.Translator.TypeScript
         public static string GetEnumItemName(IEmitter emitter, TypeConfigItem field)
         {
             var memeber_rr = (MemberResolveResult)emitter.Resolver.ResolveNode(field.Entity, emitter);
-            var mode = emitter.Validator.EnumEmitMode(memeber_rr.Member.DeclaringTypeDefinition);
-            var mname = field.GetName(emitter, true);
-
-            var attr = Helpers.GetInheritedAttribute(memeber_rr.Member, Translator.Bridge_ASSEMBLY + ".NameAttribute");
-            if (attr != null)
-            {
-                mname = emitter.GetEntityName(memeber_rr.Member);
-            }
-            else if (mode >= 3 && mode < 7)
-            {
-                switch (mode)
-                {
-                    case 3:
-                        mname = Object.Net.Utilities.StringUtils.ToLowerCamelCase(memeber_rr.Member.Name);
-                        break;
-
-                    case 4:
-                        mname = memeber_rr.Member.Name;
-                        break;
-
-                    case 5:
-                        mname = memeber_rr.Member.Name.ToLowerInvariant();
-                        break;
-
-                    case 6:
-                        mname = memeber_rr.Member.Name.ToUpperInvariant();
-                        break;
-                }
-            }
-            else if (mode < 3 && mode != 1)
-            {
-                mname = field.Name;
-            }
+            var mname = emitter.GetEntityName(memeber_rr.Member);
             return mname;
         }
     }

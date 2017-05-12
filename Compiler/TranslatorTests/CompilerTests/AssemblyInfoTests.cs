@@ -26,10 +26,10 @@ namespace Bridge.Translator.Tests
 
             Assert.AreEqual("$(OutDir)/bridge/", config.Output, "Output");
 
-            Assert.False(config.PreserveMemberCase, "PreserveMemberCase");
+            // #2476 Assert.False(config.PreserveMemberCase, "PreserveMemberCase");
 
             Assert.Null(config.FileName, "FileName");
-            Assert.AreEqual(OutputBy.Namespace, config.OutputBy, "OutputBy");
+            Assert.AreEqual(OutputBy.Project, config.OutputBy, "OutputBy");
             Assert.AreEqual(FileNameCaseConvert.CamelCase, config.FileNameCasing, "FileNameCasing");
             Assert.AreEqual(JavaScriptOutputType.Both, config.OutputFormatting, "OutputFormatting");
             Assert.AreEqual(0, config.StartIndexInName, "StartIndexInName");

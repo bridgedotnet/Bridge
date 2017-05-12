@@ -1,22 +1,26 @@
     Bridge.define("TestIssue2407.Bridge2407", {
         statics: {
-            ChangedStaticName: function ChangedStaticName() {
+            methods: {
+                ChangedStaticName: function ChangedStaticName() {
+                    // Should use named function expressions
+                    // like doSomething: function doSomething() { }
+                    return "Static";
+                },
+                DoSomethingStatic: function DoSomethingStatic() {
+                    // Should use named function expressions
+                    // like doSomething: function doSomething() { }
+                }
+            }
+        },
+        methods: {
+            ChangedInstanceName: function ChangedInstanceName() {
                 // Should use named function expressions
                 // like doSomething: function doSomething() { }
-                return "Static";
+                return "Instance";
             },
-            doSomethingStatic: function doSomethingStatic() {
+            DoSomethingInstance: function DoSomethingInstance() {
                 // Should use named function expressions
                 // like doSomething: function doSomething() { }
             }
-        },
-        ChangedInstanceName: function ChangedInstanceName() {
-            // Should use named function expressions
-            // like doSomething: function doSomething() { }
-            return "Instance";
-        },
-        doSomethingInstance: function doSomethingInstance() {
-            // Should use named function expressions
-            // like doSomething: function doSomething() { }
         }
     });

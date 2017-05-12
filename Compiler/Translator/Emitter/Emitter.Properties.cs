@@ -10,31 +10,11 @@ namespace Bridge.Translator
 {
     public partial class Emitter : Visitor
     {
-        private Dictionary<Tuple<AstNode, bool>, OverloadsCollection> overloadsCacheNodes;
-        public Dictionary<Tuple<AstNode, bool>, OverloadsCollection> OverloadsCacheNodes
+        public EmitterCache Cache
         {
-            get
-            {
-                if (this.overloadsCacheNodes == null)
-                {
-                    this.overloadsCacheNodes = new Dictionary<Tuple<AstNode, bool>, OverloadsCollection>();
-                }
-                return this.overloadsCacheNodes;
-            }
+            get;
+            private set;
         }
-
-         private Dictionary<Tuple<IMember, bool, bool>, OverloadsCollection> overloadsCacheMembers;
-         public Dictionary<Tuple<IMember, bool, bool>, OverloadsCollection> OverloadsCacheMembers
-         {
-             get
-             {
-                 if (this.overloadsCacheMembers == null)
-                 {
-                     this.overloadsCacheMembers = new Dictionary<Tuple<IMember, bool, bool>, OverloadsCollection>();
-                 }
-                 return this.overloadsCacheMembers;
-             }
-         }
 
         public IValidator Validator
         {
@@ -123,14 +103,25 @@ namespace Bridge.Translator
                 level = InitialLevel;
             }
 
-            if (level <= InitialLevel)
+            if (level < InitialLevel && !this.InitPosition.HasValue )
             {
                 level = InitialLevel;
+            }
+
+            if (level < 0)
+            {
+                level = 0;
             }
 
             this.Level = level.Value;
 
             return this.Level;
+        }
+
+        public InitPosition? InitPosition
+        {
+            get;
+            set;
         }
 
         public bool IsNewLine
@@ -521,6 +512,16 @@ namespace Bridge.Translator
         public bool DisableDependencyTracking
         {
             get; set;
+        }
+
+        public Dictionary<IAssembly, NameRule[]> AssemblyNameRuleCache
+        {
+            get;
+        }
+
+        public Dictionary<ITypeDefinition, NameRule[]> ClassNameRuleCache
+        {
+            get;
         }
     }
 }

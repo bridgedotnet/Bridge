@@ -3,6 +3,7 @@ using Bridge.Contract.Constants;
 
 using ICSharpCode.NRefactory.CSharp;
 
+using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -29,63 +30,53 @@ namespace Bridge.Translator
         }
 
         private static Regex injectComment = new Regex("^@(.*)@?$", RegexOptions.Singleline | RegexOptions.IgnoreCase | RegexOptions.Multiline);
-        private static Regex removeStars = new Regex("(^\\s*)(\\* )", RegexOptions.Singleline | RegexOptions.IgnoreCase | RegexOptions.Multiline);
 
-        protected virtual void WriteMultiLineComment(string text, bool newline, bool wrap = true)
+        protected virtual void WriteMultiLineComment(string text, bool newline, bool wrap, bool alignedIndent, int offsetAlreadyApplied)
         {
-            bool needRemoveIndent = false;
-            var methodDeclaration = this.Comment.GetParent<MethodDeclaration>();
-            int mode = 0;
-
-            if (methodDeclaration != null)
+            if (!newline && this.RemovePenultimateEmptyLines(true))
             {
-                foreach (var attrSection in methodDeclaration.Attributes)
+                this.Emitter.IsNewLine = false;
+                this.WriteSpace();
+            }
+
+            string wrapperStart = wrap ? "/* " : null;
+            string wrapperEnd = wrap ? "*/" : null;
+
+            var lines = this.GetNormalizedWhitespaceAndAsteriskLines(text, true);
+
+            int offset = 0;
+
+            if (wrap || (lines.Length > 0 && lines[0].Any(x => !char.IsWhiteSpace(x))))
+            {
+                offset = this.Comment.StartLocation.Column + offsetAlreadyApplied;
+            }
+            else
+            {
+                var firstNotEmptyLine = lines.FirstOrDefault(x => !string.IsNullOrEmpty(x));
+
+                if (firstNotEmptyLine != null)
                 {
-                    foreach (var attr in attrSection.Attributes)
+                    for (int i = 0; i < firstNotEmptyLine.Length; i++)
                     {
-                        var rr = this.Emitter.Resolver.ResolveNode(attr.Type, this.Emitter);
-
-                        if (rr.Type.FullName == "Bridge.InitAttribute")
+                        if (!char.IsWhiteSpace(firstNotEmptyLine[i]))
                         {
-                            if (attr.HasArgumentList && attr.Arguments.Count > 0)
-                            {
-                                var argExpr = attr.Arguments.First();
-                                var argrr = this.Emitter.Resolver.ResolveNode(argExpr, this.Emitter);
-
-                                if (argrr.ConstantValue is int && (int)argrr.ConstantValue > 0)
-                                {
-                                    mode = (int)argrr.ConstantValue;
-                                    needRemoveIndent = true;
-                                }
-                            }
+                            offset = i;
+                            break;
                         }
                     }
                 }
             }
 
-            if (!newline && this.RemovePenultimateEmptyLines(true))
+            if (!wrap)
             {
-                this.Emitter.IsNewLine = false;
-                this.WriteSpace();
+                // Only if !wrap i.e. in case of injection comment
+                this.RemoveFirstAndLastEmptyElements(ref lines);
             }
 
-            if (needRemoveIndent)
-            {
-                text = AbstractEmitterBlock.RemoveIndentFromString(text, this.Comment.StartLocation.Column - (mode == 1 ? 5 : 1));
-            }
-
-            if (wrap)
-            {
-                this.Write("/* " + text + "*/");
-                this.WriteNewLine();
-            }
-            else
-            {
-                this.Write(text);
-            }
+            this.WriteLinesIndented(lines, offset, wrapperStart, wrapperEnd, alignedIndent);
         }
 
-        protected virtual void WriteSingleLineComment(string text, bool newline, bool wrap = true)
+        protected virtual void WriteSingleLineComment(string text, bool newline, bool wrap, bool alignedIndent, int offsetAlreadyApplied)
         {
             if (!newline && this.RemovePenultimateEmptyLines(true))
             {
@@ -93,8 +84,11 @@ namespace Bridge.Translator
                 this.WriteSpace();
             }
 
-            this.Write(wrap ? "//" + text : text);
-            this.WriteNewLine();
+            string wrapperStart = wrap ? "//" : null;
+
+            var lines = this.GetNormalizedWhitespaceAndAsteriskLines(text, false);
+
+            this.WriteLinesIndented(lines, offsetAlreadyApplied, wrapperStart, null, alignedIndent);
         }
 
         protected void VisitComment()
@@ -114,29 +108,68 @@ namespace Bridge.Translator
             {
                 if (comment.CommentType == CommentType.MultiLine)
                 {
-                    string code = removeStars.Replace(injection.Groups[1].Value, JS.Vars.D + "1");
+                    string code = injection.Groups[1].Value;
 
-                    if (code.EndsWith("@"))
+                    if (!string.IsNullOrEmpty(code) && code.EndsWith("@"))
                     {
                         code = code.Substring(0, code.Length - 1);
                     }
 
-                    this.WriteMultiLineComment(code, true, false);
-                    this.WriteNewLine();
+                    this.WriteMultiLineComment(code, true, false, true, 2);
                 }
                 else if (comment.CommentType == CommentType.SingleLine)
                 {
-                    string code = comment.Content.StartsWith("@ ") ? comment.Content.Substring(2) : comment.Content;
-                    this.WriteSingleLineComment(code, true, false);
+                    string code = comment.Content;
+
+                    if (!string.IsNullOrEmpty(code) && code.StartsWith("@"))
+                    {
+                        code = " " + code.Substring(1);
+                    }
+
+                    this.WriteSingleLineComment(code, true, false, true, 2);
                 }
             }
             else if (comment.CommentType == CommentType.MultiLine)
             {
-                this.WriteMultiLineComment(comment.Content, newLine);
+                this.WriteMultiLineComment(comment.Content, newLine, true, false, 0);
             }
             else if (comment.CommentType == CommentType.SingleLine)
             {
-                this.WriteSingleLineComment(comment.Content, newLine);
+                this.WriteSingleLineComment(comment.Content, newLine, true, false, 0);
+            }
+        }
+
+        private void RemoveFirstAndLastEmptyElements(ref string[] lines)
+        {
+            if (lines == null || lines.Length <= 0)
+            {
+                return;
+            }
+
+            System.Collections.Generic.List<string> l = null;
+
+            if (string.IsNullOrEmpty(lines[0]))
+            {
+                l = new System.Collections.Generic.List<string>(lines);
+                l.RemoveAt(0);
+            }
+
+            if (string.IsNullOrEmpty(lines[lines.Length - 1]))
+            {
+                if (l == null)
+                {
+                    l = new System.Collections.Generic.List<string>(lines);
+                }
+
+                if (l.Count > 0)
+                {
+                    l.RemoveAt(l.Count - 1);
+                }
+            }
+
+            if (l != null)
+            {
+                lines = l.ToArray();
             }
         }
     }

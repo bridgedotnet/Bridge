@@ -180,7 +180,6 @@ namespace Bridge.ClientTest.Reflection
 
         public class C11
         {
-            [Name(false)]
             public DateTime D;
 
             [Reflectable]
@@ -201,16 +200,12 @@ namespace Bridge.ClientTest.Reflection
 
         public class C13
         {
-            [Name(false)]
             public Action addedE3Handler;
 
-            [Name(false)]
             public Action removedE3Handler;
 
-            [Name(false)]
             public static Action addedE4Handler;
 
-            [Name(false)]
             public static Action removedE4Handler;
 
             [Reflectable]
@@ -238,10 +233,8 @@ namespace Bridge.ClientTest.Reflection
 
         public class C14
         {
-            [Name(false)]
             public int p13Field;
 
-            [Name(false)]
             public static int p14Field;
 
             [Reflectable]
@@ -330,10 +323,8 @@ namespace Bridge.ClientTest.Reflection
         [Constructor("{ }")]
         public class C19
         {
-            [Name(false)]
             public int A;
 
-            [Name(false)]
             public string B;
 
             [Reflectable]
@@ -344,10 +335,8 @@ namespace Bridge.ClientTest.Reflection
 
         public class C20
         {
-            [Name(false)]
             public int A;
 
-            [Name(false)]
             public string B;
 
             [Reflectable, Template("{ A: {a}, B: {b} }")]
@@ -358,7 +347,6 @@ namespace Bridge.ClientTest.Reflection
 
         public class C21
         {
-            [Name(false)]
             public int X;
 
             public C21(int x)
@@ -442,13 +430,10 @@ namespace Bridge.ClientTest.Reflection
 
         public class C24
         {
-            [Name(false)]
             public int x;
 
-            [Name(false)]
             public string s;
 
-            [Name(false)]
             public string v;
 
             [Reflectable]
@@ -712,8 +697,8 @@ namespace Bridge.ClientTest.Reflection
         [Test]
         public void IsStaticFlagWorksForMethod()
         {
-            Assert.AreEqual(typeof(C2).GetMembers(BindingFlags.Instance)[0].IsStatic, false, "Instance member should not be static");
-            Assert.AreEqual(typeof(C2).GetMembers(BindingFlags.Static)[0].IsStatic, true, "Static member should be static");
+            Assert.AreEqual(typeof(C2).GetMembers(BindingFlags.Instance | BindingFlags.Public)[0].IsStatic, false, "Instance member should not be static");
+            Assert.AreEqual(typeof(C2).GetMembers(BindingFlags.Static | BindingFlags.Public)[0].IsStatic, true, "Static member should be static");
         }
 
         [Test]
@@ -955,7 +940,7 @@ namespace Bridge.ClientTest.Reflection
         [Test]
         public void ScriptNameWorksForAllKindsOfMethods()
         {
-            Assert.AreEqual(typeof(C4).GetMethod("M", new[] { typeof(int) }).ScriptName, "m$1", "C4.M");
+            Assert.AreEqual(typeof(C4).GetMethod("M", new[] { typeof(int) }).ScriptName, "M$1", "C4.M");
             Assert.True(typeof(C21).GetMethod("M1").ScriptName == null, "C21.M1");
             Assert.AreEqual(typeof(C7).GetMethod("M1").ScriptName, "M1", "C7.m1");
         }
@@ -1993,89 +1978,90 @@ namespace Bridge.ClientTest.Reflection
             var c27 = typeof(C27);
             var c28 = typeof(C28);
 
-            Assert.Null(c25.GetField("A1"), "C25.A1");
-            Assert.NotNull(c25.GetField("B1"), "C25.B1");
-            Assert.NotNull(c25.GetField("C1"), "C25.C1");
-            Assert.Null(c25.GetField("D1"), "C25.D1");
-            Assert.Null(c25.GetField("A2"), "C25.A2");
-            Assert.NotNull(c25.GetField("B2"), "C25.B2");
-            Assert.NotNull(c25.GetField("C2"), "C25.C2");
-            Assert.Null(c25.GetField("D2"), "C25.D2");
-            Assert.Null(c25.GetField("A3"), "C25.A3");
-            Assert.NotNull(c25.GetField("B3"), "C25.B3");
-            Assert.NotNull(c25.GetField("C3"), "C25.C3");
-            Assert.Null(c25.GetField("D3"), "C25.D3");
-            Assert.Null(c25.GetField("A4"), "C25.A4");
-            Assert.NotNull(c25.GetField("B4"), "C25.B4");
-            Assert.NotNull(c25.GetField("C4"), "C25.C4");
-            Assert.Null(c25.GetField("D4"), "C25.D4");
-            Assert.Null(c25.GetField("A5"), "C25.A5");
-            Assert.NotNull(c25.GetField("B5"), "C25.B5");
-            Assert.NotNull(c25.GetField("C5"), "C25.C5");
-            Assert.Null(c25.GetField("D5"), "C25.D5");
+            var flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance;
+            Assert.Null(c25.GetField("A1", flags), "C25.A1");
+            Assert.NotNull(c25.GetField("B1", flags), "C25.B1");
+            Assert.NotNull(c25.GetField("C1", flags), "C25.C1");
+            Assert.Null(c25.GetField("D1", flags), "C25.D1");
+            Assert.Null(c25.GetField("A2", flags), "C25.A2");
+            Assert.NotNull(c25.GetField("B2", flags), "C25.B2");
+            Assert.NotNull(c25.GetField("C2", flags), "C25.C2");
+            Assert.Null(c25.GetField("D2", flags), "C25.D2");
+            Assert.Null(c25.GetField("A3", flags), "C25.A3");
+            Assert.NotNull(c25.GetField("B3", flags), "C25.B3");
+            Assert.NotNull(c25.GetField("C3", flags), "C25.C3");
+            Assert.Null(c25.GetField("D3", flags), "C25.D3");
+            Assert.Null(c25.GetField("A4", flags), "C25.A4");
+            Assert.NotNull(c25.GetField("B4", flags), "C25.B4");
+            Assert.NotNull(c25.GetField("C4", flags), "C25.C4");
+            Assert.Null(c25.GetField("D4", flags), "C25.D4");
+            Assert.Null(c25.GetField("A5", flags), "C25.A5");
+            Assert.NotNull(c25.GetField("B5", flags), "C25.B5");
+            Assert.NotNull(c25.GetField("C5", flags), "C25.C5");
+            Assert.Null(c25.GetField("D5", flags), "C25.D5");
 
-            Assert.NotNull(c26.GetField("A1"), "C26.A1");
-            Assert.NotNull(c26.GetField("B1"), "C26.B1");
-            Assert.NotNull(c26.GetField("C1"), "C26.C1");
-            Assert.Null(c26.GetField("D1"), "C26.D1");
-            Assert.Null(c26.GetField("A2"), "C26.A2");
-            Assert.NotNull(c26.GetField("B2"), "C26.B2");
-            Assert.NotNull(c26.GetField("C2"), "C26.C2");
-            Assert.Null(c26.GetField("D2"), "C26.D2");
-            Assert.NotNull(c26.GetField("A3"), "C26.A3");
-            Assert.NotNull(c26.GetField("B3"), "C26.B3");
-            Assert.NotNull(c26.GetField("C3"), "C26.C3");
-            Assert.Null(c26.GetField("D3"), "C26.D3");
-            Assert.NotNull(c26.GetField("A4"), "C26.A4");
-            Assert.NotNull(c26.GetField("B4"), "C26.B4");
-            Assert.NotNull(c26.GetField("C4"), "C26.C4");
-            Assert.Null(c26.GetField("D4"), "C26.D4");
-            Assert.Null(c26.GetField("A5"), "C26.A5");
-            Assert.NotNull(c26.GetField("B5"), "C26.B5");
-            Assert.NotNull(c26.GetField("C5"), "C26.C5");
-            Assert.Null(c26.GetField("D5"), "C26.D5");
+            Assert.NotNull(c26.GetField("A1", flags), "C26.A1");
+            Assert.NotNull(c26.GetField("B1", flags), "C26.B1");
+            Assert.NotNull(c26.GetField("C1", flags), "C26.C1");
+            Assert.Null(c26.GetField("D1", flags), "C26.D1");
+            Assert.Null(c26.GetField("A2", flags), "C26.A2");
+            Assert.NotNull(c26.GetField("B2", flags), "C26.B2");
+            Assert.NotNull(c26.GetField("C2", flags), "C26.C2");
+            Assert.Null(c26.GetField("D2", flags), "C26.D2");
+            Assert.NotNull(c26.GetField("A3", flags), "C26.A3");
+            Assert.NotNull(c26.GetField("B3", flags), "C26.B3");
+            Assert.NotNull(c26.GetField("C3", flags), "C26.C3");
+            Assert.Null(c26.GetField("D3", flags), "C26.D3");
+            Assert.NotNull(c26.GetField("A4", flags), "C26.A4");
+            Assert.NotNull(c26.GetField("B4", flags), "C26.B4");
+            Assert.NotNull(c26.GetField("C4", flags), "C26.C4");
+            Assert.Null(c26.GetField("D4", flags), "C26.D4");
+            Assert.Null(c26.GetField("A5", flags), "C26.A5");
+            Assert.NotNull(c26.GetField("B5", flags), "C26.B5");
+            Assert.NotNull(c26.GetField("C5", flags), "C26.C5");
+            Assert.Null(c26.GetField("D5", flags), "C26.D5");
 
-            Assert.NotNull(c27.GetField("A1"), "C27.A1");
-            Assert.NotNull(c27.GetField("B1"), "C27.B1");
-            Assert.NotNull(c27.GetField("C1"), "C27.C1");
-            Assert.Null(c27.GetField("D1"), "C27.D1");
-            Assert.NotNull(c27.GetField("A2"), "C27.A2");
-            Assert.NotNull(c27.GetField("B2"), "C27.B2");
-            Assert.NotNull(c27.GetField("C2"), "C27.C2");
-            Assert.Null(c27.GetField("D2"), "C27.D2");
-            Assert.NotNull(c27.GetField("A3"), "C27.A3");
-            Assert.NotNull(c27.GetField("B3"), "C27.B3");
-            Assert.NotNull(c27.GetField("C3"), "C27.C3");
-            Assert.Null(c27.GetField("D3"), "C27.D3");
-            Assert.NotNull(c27.GetField("A4"), "C27.A4");
-            Assert.NotNull(c27.GetField("B4"), "C27.B4");
-            Assert.NotNull(c27.GetField("C4"), "C27.C4");
-            Assert.Null(c27.GetField("D4"), "C27.D4");
-            Assert.Null(c27.GetField("A5"), "C27.A5");
-            Assert.NotNull(c27.GetField("B5"), "C27.B5");
-            Assert.NotNull(c27.GetField("C5"), "C27.C5");
-            Assert.Null(c27.GetField("D5"), "C27.D5");
+            Assert.NotNull(c27.GetField("A1", flags), "C27.A1");
+            Assert.NotNull(c27.GetField("B1", flags), "C27.B1");
+            Assert.NotNull(c27.GetField("C1", flags), "C27.C1");
+            Assert.Null(c27.GetField("D1", flags), "C27.D1");
+            Assert.NotNull(c27.GetField("A2", flags), "C27.A2");
+            Assert.NotNull(c27.GetField("B2", flags), "C27.B2");
+            Assert.NotNull(c27.GetField("C2", flags), "C27.C2");
+            Assert.Null(c27.GetField("D2", flags), "C27.D2");
+            Assert.NotNull(c27.GetField("A3", flags), "C27.A3");
+            Assert.NotNull(c27.GetField("B3", flags), "C27.B3");
+            Assert.NotNull(c27.GetField("C3", flags), "C27.C3");
+            Assert.Null(c27.GetField("D3", flags), "C27.D3");
+            Assert.NotNull(c27.GetField("A4", flags), "C27.A4");
+            Assert.NotNull(c27.GetField("B4", flags), "C27.B4");
+            Assert.NotNull(c27.GetField("C4", flags), "C27.C4");
+            Assert.Null(c27.GetField("D4", flags), "C27.D4");
+            Assert.Null(c27.GetField("A5", flags), "C27.A5");
+            Assert.NotNull(c27.GetField("B5", flags), "C27.B5");
+            Assert.NotNull(c27.GetField("C5", flags), "C27.C5");
+            Assert.Null(c27.GetField("D5", flags), "C27.D5");
 
-            Assert.NotNull(c28.GetField("A1"), "C28.A1");
-            Assert.NotNull(c28.GetField("B1"), "C28.B1");
-            Assert.NotNull(c28.GetField("C1"), "C28.C1");
-            Assert.Null(c28.GetField("D1"), "C28.D1");
-            Assert.NotNull(c28.GetField("A2"), "C28.A2");
-            Assert.NotNull(c28.GetField("B2"), "C28.B2");
-            Assert.NotNull(c28.GetField("C2"), "C28.C2");
-            Assert.Null(c28.GetField("D2"), "C28.D2");
-            Assert.NotNull(c28.GetField("A3"), "C28.A3");
-            Assert.NotNull(c28.GetField("B3"), "C28.B3");
-            Assert.NotNull(c28.GetField("C3"), "C28.C3");
-            Assert.Null(c28.GetField("D3"), "C28.D3");
-            Assert.NotNull(c28.GetField("A4"), "C28.A4");
-            Assert.NotNull(c28.GetField("B4"), "C28.B4");
-            Assert.NotNull(c28.GetField("C4"), "C28.C4");
-            Assert.Null(c28.GetField("D4"), "C28.D4");
-            Assert.NotNull(c28.GetField("A5"), "C28.A5");
-            Assert.NotNull(c28.GetField("B5"), "C28.B5");
-            Assert.NotNull(c28.GetField("C5"), "C28.C5");
-            Assert.Null(c28.GetField("D5"), "C28.D5");
+            Assert.NotNull(c28.GetField("A1", flags), "C28.A1");
+            Assert.NotNull(c28.GetField("B1", flags), "C28.B1");
+            Assert.NotNull(c28.GetField("C1", flags), "C28.C1");
+            Assert.Null(c28.GetField("D1", flags), "C28.D1");
+            Assert.NotNull(c28.GetField("A2", flags), "C28.A2");
+            Assert.NotNull(c28.GetField("B2", flags), "C28.B2");
+            Assert.NotNull(c28.GetField("C2", flags), "C28.C2");
+            Assert.Null(c28.GetField("D2", flags), "C28.D2");
+            Assert.NotNull(c28.GetField("A3", flags), "C28.A3");
+            Assert.NotNull(c28.GetField("B3", flags), "C28.B3");
+            Assert.NotNull(c28.GetField("C3", flags), "C28.C3");
+            Assert.Null(c28.GetField("D3", flags), "C28.D3");
+            Assert.NotNull(c28.GetField("A4", flags), "C28.A4");
+            Assert.NotNull(c28.GetField("B4", flags), "C28.B4");
+            Assert.NotNull(c28.GetField("C4", flags), "C28.C4");
+            Assert.Null(c28.GetField("D4", flags), "C28.D4");
+            Assert.NotNull(c28.GetField("A5", flags), "C28.A5");
+            Assert.NotNull(c28.GetField("B5", flags), "C28.B5");
+            Assert.NotNull(c28.GetField("C5", flags), "C28.C5");
+            Assert.Null(c28.GetField("D5", flags), "C28.D5");
         }
     }
 }
