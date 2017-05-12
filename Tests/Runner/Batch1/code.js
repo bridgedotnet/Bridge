@@ -508,7 +508,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.ArrayTests.ArrayTestsSet1.TestReverseComparer", {
         inherits: [System.Collections.Generic.IComparer$1(System.Int32)],
         alias: [
-            "compare", "System$Collections$Generic$IComparer$1$System$Int32$compare"
+            "compare", ["System$Collections$Generic$IComparer$1$System$Int32$compare", "System$Collections$Generic$IComparer$1$compare"]
         ],
         methods: {
             compare: function (x, y) {
@@ -595,11 +595,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var e = Bridge.getEnumerator(ils, System.String);
                     b = e.System$Collections$IEnumerator$moveNext();
                     Bridge.Test.NUnit.Assert.True(b);
-                    s = e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")];
+                    s = e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")];
                     Bridge.Test.NUnit.Assert.AreEqual(s, sa[System.Array.index(0, sa)]);
                     b = e.System$Collections$IEnumerator$moveNext();
                     Bridge.Test.NUnit.Assert.True(b);
-                    s = e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")];
+                    s = e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")];
                     Bridge.Test.NUnit.Assert.AreEqual(s, sa[System.Array.index(1, sa)]);
                     b = e.System$Collections$IEnumerator$moveNext();
                     Bridge.Test.NUnit.Assert.False(b);
@@ -1482,7 +1482,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     for (var i = index; i < ((((index + length) | 0) - 1) | 0); i = (i + 1) | 0) {
                         var tmp = result[System.Array.index(i, result)];
                         for (var j = (i + 1) | 0; j < ((index + length) | 0); j = (j + 1) | 0) {
-                            if (comparer["System$Collections$Generic$IComparer$1$" + Bridge.getTypeAlias(T) + "$compare"](tmp, result[System.Array.index(j, result)]) > 0) {
+                            if (comparer[Bridge.geti(comparer, "System$Collections$Generic$IComparer$1$" + Bridge.getTypeAlias(T) + "$compare", "System$Collections$Generic$IComparer$1$compare")](tmp, result[System.Array.index(j, result)]) > 0) {
                                 result[System.Array.index(i, result)] = result[System.Array.index(j, result)];
                                 result[System.Array.index(j, result)] = tmp;
                                 tmp = result[System.Array.index(i, result)];
@@ -1499,7 +1499,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         return false;
                     }
                     for (var i = 0; i < a.length; i = (i + 1) | 0) {
-                        if (0 !== comparer["System$Collections$Generic$IComparer$1$" + Bridge.getTypeAlias(T) + "$compare"](a[System.Array.index(i, a)], b[System.Array.index(i, b)])) {
+                        if (0 !== comparer[Bridge.geti(comparer, "System$Collections$Generic$IComparer$1$" + Bridge.getTypeAlias(T) + "$compare", "System$Collections$Generic$IComparer$1$compare")](a[System.Array.index(i, a)], b[System.Array.index(i, b)])) {
                             return false;
                         }
                     }
@@ -1866,7 +1866,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.ArrayTests.ArrayTestsSet2.IntegerComparer", {
         inherits: [System.Collections.Generic.IComparer$1(System.Int32),System.Collections.IEqualityComparer],
         alias: [
-            "compare", "System$Collections$Generic$IComparer$1$System$Int32$compare",
+            "compare", ["System$Collections$Generic$IComparer$1$System$Int32$compare", "System$Collections$Generic$IComparer$1$compare"],
             "getHashCode", "System$Collections$IEqualityComparer$getHashCode"
         ],
         methods: {
@@ -1931,7 +1931,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.ArrayTests.ArrayTestsSet2.StringComparer", {
         inherits: [System.Collections.Generic.IComparer$1(System.String)],
         alias: [
-            "compare", "System$Collections$Generic$IComparer$1$System$String$compare"
+            "compare", ["System$Collections$Generic$IComparer$1$System$String$compare", "System$Collections$Generic$IComparer$1$compare"]
         ],
         methods: {
             compare: function (x, y) {
@@ -6204,7 +6204,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             value: 0
         },
         alias: [
-            "compareTo", "System$IComparable$1$Bridge$ClientTest$Collections$Generic$ComparerTests$C$compareTo"
+            "compareTo", ["System$IComparable$1$Bridge$ClientTest$Collections$Generic$ComparerTests$C$compareTo", "System$IComparable$1$compareTo"]
         ],
         ctors: {
             ctor: function (value) {
@@ -6507,15 +6507,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var en = Bridge.getEnumerator(d, System.Collections.Generic.KeyValuePair$2(System.Int32,System.String));
 
-                var el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "Current$1")];
+                var el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")];
                 Bridge.Test.NUnit.Assert.AreEqual$1(0, el.key, "Enumerable initial key");
                 Bridge.Test.NUnit.Assert.AreEqual$1(null, el.value, "Enumerable initial value");
                 Bridge.Test.NUnit.Assert.True$1(en.System$Collections$IEnumerator$moveNext(), "Enumerable MoveNext true");
-                el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "Current$1")];
+                el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")];
                 Bridge.Test.NUnit.Assert.AreEqual$1(1, el.key, "Enumerable first key");
                 Bridge.Test.NUnit.Assert.AreEqual$1("a", el.value, "Enumerable first value");
                 Bridge.Test.NUnit.Assert.True$1(en.System$Collections$IEnumerator$moveNext(), "Enumerable MoveNext true");
-                el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "Current$1")];
+                el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")];
                 Bridge.Test.NUnit.Assert.AreEqual$1(2, el.key, "Enumerable second key");
                 Bridge.Test.NUnit.Assert.AreEqual$1("b", el.value, "Enumerable second value");
                 Bridge.Test.NUnit.Assert.False$1(en.System$Collections$IEnumerator$moveNext(), "Enumerable MoveNext false");
@@ -6529,15 +6529,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var en = Bridge.getEnumerator(d, System.Collections.Generic.KeyValuePair$2(System.Int32,System.String));
 
-                var el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "Current$1")];
+                var el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")];
                 Bridge.Test.NUnit.Assert.AreEqual$1(0, el.key, "Enumerable initial key");
                 Bridge.Test.NUnit.Assert.AreEqual$1(null, el.value, "Enumerable initial value");
                 Bridge.Test.NUnit.Assert.True$1(en.System$Collections$IEnumerator$moveNext(), "Enumerable MoveNext true");
-                el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "Current$1")];
+                el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")];
                 Bridge.Test.NUnit.Assert.AreEqual$1(1, el.key, "Enumerable first key");
                 Bridge.Test.NUnit.Assert.AreEqual$1("a", el.value, "Enumerable first value");
                 Bridge.Test.NUnit.Assert.True$1(en.System$Collections$IEnumerator$moveNext(), "Enumerable MoveNext true");
-                el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "Current$1")];
+                el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")];
                 Bridge.Test.NUnit.Assert.AreEqual$1(2, el.key, "Enumerable second key");
                 Bridge.Test.NUnit.Assert.AreEqual$1("b", el.value, "Enumerable second value");
                 Bridge.Test.NUnit.Assert.False$1(en.System$Collections$IEnumerator$moveNext(), "Enumerable MoveNext false");
@@ -6684,15 +6684,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var en = Bridge.getEnumerator(d, System.Collections.Generic.KeyValuePair$2(System.Int32,System.String));
 
                 // #2541
-                var el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "Current$1")];
+                var el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")];
                 Bridge.Test.NUnit.Assert.AreEqual$1(0, el.key, "Enumerable initial key");
                 Bridge.Test.NUnit.Assert.AreEqual$1(null, el.value, "Enumerable initial value");
                 Bridge.Test.NUnit.Assert.True$1(en.System$Collections$IEnumerator$moveNext(), "Enumerable MoveNext true");
-                el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "Current$1")];
+                el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")];
                 Bridge.Test.NUnit.Assert.AreEqual$1(1, el.key, "Enumerable first key");
                 Bridge.Test.NUnit.Assert.AreEqual$1("a", el.value, "Enumerable first value");
                 Bridge.Test.NUnit.Assert.True$1(en.System$Collections$IEnumerator$moveNext(), "Enumerable MoveNext true");
-                el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "Current$1")];
+                el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")];
                 Bridge.Test.NUnit.Assert.AreEqual$1(2, el.key, "Enumerable second key");
                 Bridge.Test.NUnit.Assert.AreEqual$1("b", el.value, "Enumerable second value");
                 Bridge.Test.NUnit.Assert.False$1(en.System$Collections$IEnumerator$moveNext(), "Enumerable MoveNext false");
@@ -6805,15 +6805,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var en = Bridge.getEnumerator(d, System.Collections.Generic.KeyValuePair$2(System.Int32,System.String));
 
-                var el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "Current$1")];
+                var el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")];
                 Bridge.Test.NUnit.Assert.AreEqual$1(0, el.key, "Enumerable initial key");
                 Bridge.Test.NUnit.Assert.AreEqual$1(null, el.value, "Enumerable initial value");
                 Bridge.Test.NUnit.Assert.True$1(en.System$Collections$IEnumerator$moveNext(), "Enumerable MoveNext true");
-                el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "Current$1")];
+                el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")];
                 Bridge.Test.NUnit.Assert.AreEqual$1(1, el.key, "Enumerable first key");
                 Bridge.Test.NUnit.Assert.AreEqual$1("a", el.value, "Enumerable first value");
                 Bridge.Test.NUnit.Assert.True$1(en.System$Collections$IEnumerator$moveNext(), "Enumerable MoveNext true");
-                el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "Current$1")];
+                el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")];
                 Bridge.Test.NUnit.Assert.AreEqual$1(2, el.key, "Enumerable second key");
                 Bridge.Test.NUnit.Assert.AreEqual$1("b", el.value, "Enumerable second value");
                 Bridge.Test.NUnit.Assert.False$1(en.System$Collections$IEnumerator$moveNext(), "Enumerable MoveNext false");
@@ -6829,15 +6829,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var en = Bridge.getEnumerator(d, System.Collections.Generic.KeyValuePair$2(System.Int32,System.String));
 
-                var el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "Current$1")];
+                var el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")];
                 Bridge.Test.NUnit.Assert.AreEqual$1(0, el.key, "Enumerable initial key");
                 Bridge.Test.NUnit.Assert.AreEqual$1(null, el.value, "Enumerable initial value");
                 Bridge.Test.NUnit.Assert.True$1(en.System$Collections$IEnumerator$moveNext(), "Enumerable MoveNext true");
-                el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "Current$1")];
+                el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")];
                 Bridge.Test.NUnit.Assert.AreEqual$1(1, el.key, "Enumerable first key");
                 Bridge.Test.NUnit.Assert.AreEqual$1("a", el.value, "Enumerable first value");
                 Bridge.Test.NUnit.Assert.True$1(en.System$Collections$IEnumerator$moveNext(), "Enumerable MoveNext true");
-                el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "Current$1")];
+                el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")];
                 Bridge.Test.NUnit.Assert.AreEqual$1(2, el.key, "Enumerable second key");
                 Bridge.Test.NUnit.Assert.AreEqual$1("b", el.value, "Enumerable second value");
                 Bridge.Test.NUnit.Assert.False$1(en.System$Collections$IEnumerator$moveNext(), "Enumerable MoveNext false");
@@ -6948,8 +6948,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.Collections.Generic.GenericDictionaryTests.TestEqualityComparer", {
         inherits: [System.Collections.Generic.EqualityComparer$1(System.String)],
         alias: [
-            "equals2", "System$Collections$Generic$IEqualityComparer$1$System$String$equals2",
-            "getHashCode2", "System$Collections$Generic$IEqualityComparer$1$System$String$getHashCode2"
+            "equals2", ["System$Collections$Generic$IEqualityComparer$1$System$String$equals2", "System$Collections$Generic$IEqualityComparer$1$equals2"],
+            "getHashCode2", ["System$Collections$Generic$IEqualityComparer$1$System$String$getHashCode2", "System$Collections$Generic$IEqualityComparer$1$getHashCode2"]
         ],
         methods: {
             equals2: function (x, y) {
@@ -7151,7 +7151,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             }
         },
         alias: [
-            "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$String$getEnumerator",
+            "getEnumerator", ["System$Collections$Generic$IEnumerable$1$System$String$getEnumerator", "System$Collections$Generic$IEnumerable$1$getEnumerator"],
             "Count", "System$Collections$Generic$ICollection$1$System$String$Count",
             "IsReadOnly", "System$Collections$Generic$ICollection$1$System$String$IsReadOnly",
             "copyTo", "System$Collections$Generic$ICollection$1$System$String$copyTo",
@@ -7478,7 +7478,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             }
         },
         alias: [
-            "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$getEnumerator",
+            "getEnumerator", ["System$Collections$Generic$IEnumerable$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$getEnumerator", "System$Collections$Generic$IEnumerable$1$getEnumerator"],
             "getItem", "System$Collections$Generic$IReadOnlyDictionary$2$System$Int32$System$String$getItem",
             "setItem", "System$Collections$Generic$IReadOnlyDictionary$2$System$Int32$System$String$setItem",
             "getItem", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$getItem",
@@ -7574,33 +7574,33 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var enm = System.Array.init(["x", "y", "z"], System.String);
                 var e = Bridge.getEnumerator(enm, System.String);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("z", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("z", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.False(e.System$Collections$IEnumerator$moveNext());
             },
             ClassImplementingIEnumerableCanBeEnumerated: function () {
                 var enm = new Bridge.ClientTest.Collections.Generic.IEnumerableTests.MyEnumerable();
                 var e = enm.getEnumerator();
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("z", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("z", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.False(e.System$Collections$IEnumerator$moveNext());
             },
             ClassImplementingIEnumerableCastToIEnumerableCanBeEnumerated: function () {
                 var enm = new Bridge.ClientTest.Collections.Generic.IEnumerableTests.MyEnumerable();
                 var e = Bridge.getEnumerator(enm, System.String);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("z", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("z", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.False(e.System$Collections$IEnumerator$moveNext());
             }
         }
@@ -7609,7 +7609,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.Collections.Generic.IEnumerableTests.MyEnumerable", {
         inherits: [System.Collections.Generic.IEnumerable$1(System.String)],
         alias: [
-            "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$String$getEnumerator"
+            "getEnumerator", ["System$Collections$Generic$IEnumerable$1$System$String$getEnumerator", "System$Collections$Generic$IEnumerable$1$getEnumerator"]
         ],
         methods: {
             getEnumerator: function () {
@@ -7861,7 +7861,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             }
         },
         alias: [
-            "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$String$getEnumerator",
+            "getEnumerator", ["System$Collections$Generic$IEnumerable$1$System$String$getEnumerator", "System$Collections$Generic$IEnumerable$1$getEnumerator"],
             "Count", "System$Collections$Generic$ICollection$1$System$String$Count",
             "IsReadOnly", "System$Collections$Generic$ICollection$1$System$String$IsReadOnly",
             "add", "System$Collections$Generic$ICollection$1$System$String$add",
@@ -7992,7 +7992,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             }
         },
         alias: [
-            "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$String$getEnumerator",
+            "getEnumerator", ["System$Collections$Generic$IEnumerable$1$System$String$getEnumerator", "System$Collections$Generic$IEnumerable$1$getEnumerator"],
             "Count", "System$Collections$Generic$IReadOnlyCollection$1$System$String$Count"
         ],
         ctors: {
@@ -8245,7 +8245,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             "containsKey", "System$Collections$Generic$IReadOnlyDictionary$2$System$Int32$System$String$containsKey",
             "tryGetValue", "System$Collections$Generic$IReadOnlyDictionary$2$System$Int32$System$String$tryGetValue",
             "Count", "System$Collections$Generic$IReadOnlyCollection$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Count",
-            "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$getEnumerator"
+            "getEnumerator", ["System$Collections$Generic$IEnumerable$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$getEnumerator", "System$Collections$Generic$IEnumerable$1$getEnumerator"]
         ],
         ctors: {
             ctor: function () {
@@ -8361,7 +8361,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             }
         },
         alias: [
-            "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$String$getEnumerator",
+            "getEnumerator", ["System$Collections$Generic$IEnumerable$1$System$String$getEnumerator", "System$Collections$Generic$IEnumerable$1$getEnumerator"],
             "Count", "System$Collections$Generic$IReadOnlyCollection$1$System$String$Count",
             "getItem", "System$Collections$Generic$IReadOnlyList$1$System$String$getItem",
             "setItem", "System$Collections$Generic$IReadOnlyList$1$System$String$setItem"
@@ -8409,7 +8409,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var enm = new Bridge.ClientTest.Collections.Generic.IteratorBlockTests.C(sb).GetEnumerator(2);
 
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    sb.appendLine("got " + enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "Current$1")]);
+                    sb.appendLine("got " + enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
 
                 this.AssertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
@@ -8422,7 +8422,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 for (var i = 0; i < 2; i = (i + 1) | 0) {
                     enm.System$Collections$IEnumerator$moveNext();
-                    sb.appendLine("got " + enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "Current$1")]);
+                    sb.appendLine("got " + enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 enm.System$IDisposable$dispose();
 
@@ -8438,7 +8438,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var enm = new Bridge.ClientTest.Collections.Generic.IteratorBlockTests.C(sb).GetEnumeratorThrows();
                     for (var i = 0; i < 100; i = (i + 1) | 0) {
                         enm.System$Collections$IEnumerator$moveNext();
-                        sb.appendLine("got " + enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "Current$1")]);
+                        sb.appendLine("got " + enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                     }
                     Bridge.Test.NUnit.Assert.Fail$1("Should have thrown an exception in the loop");
                 }
@@ -8523,7 +8523,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var enumerator = Bridge.getEnumerator(enumerable, System.Int32);
                     for (var i = 0; i < 100; i = (i + 1) | 0) {
                         enumerator.System$Collections$IEnumerator$moveNext();
-                        sb.appendLine("got " + enumerator[Bridge.geti(enumerator, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "Current$1")]);
+                        sb.appendLine("got " + enumerator[Bridge.geti(enumerator, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                     }
                     Bridge.Test.NUnit.Assert.Fail$1("Should have thrown");
                 }
@@ -8571,8 +8571,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 while (enm1.System$Collections$IEnumerator$moveNext()) {
                     enm2.System$Collections$IEnumerator$moveNext();
-                    sb.appendLine(enm1[Bridge.geti(enm1, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "Current$1")].toString());
-                    sb.appendLine(enm2[Bridge.geti(enm2, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "Current$1")].toString());
+                    sb.appendLine(enm1[Bridge.geti(enm1, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")].toString());
+                    sb.appendLine(enm2[Bridge.geti(enm2, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")].toString());
                 }
 
                 this.AssertEqual(sb.toString(), "0\n0\n1\n1\n2\n2\n-1\n-1\n");
@@ -9134,9 +9134,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             GetEnumeratorWorks: function () {
                 var e = $asm.$.Bridge.ClientTest.Collections.Generic.ListTests.f6(new (System.Collections.Generic.List$1(System.String))()).getEnumerator();
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.False(e.System$Collections$IEnumerator$moveNext());
             },
             AddWorks: function () {
@@ -9360,9 +9360,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var l = Bridge.cast($asm.$.Bridge.ClientTest.Collections.Generic.ListTests.f42(new (System.Collections.Generic.List$1(System.String))()), System.Collections.Generic.IEnumerable$1(System.String));
                 var e = Bridge.getEnumerator(l, System.String);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.False(e.System$Collections$IEnumerator$moveNext());
             },
             ICollectionCountWorks: function () {
@@ -9452,9 +9452,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var l = Bridge.cast($asm.$.Bridge.ClientTest.Collections.Generic.ListTests.f57(new (System.Collections.Generic.List$1(System.String))()), System.Collections.Generic.IReadOnlyCollection$1(System.String));
                 var e = Bridge.getEnumerator(l, System.String);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.False(e.System$Collections$IEnumerator$moveNext());
             },
             IReadOnlyListIndexingWorks: function () {
@@ -9469,9 +9469,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var l = Bridge.cast($asm.$.Bridge.ClientTest.Collections.Generic.ListTests.f60(new (System.Collections.Generic.List$1(System.String))()), System.Collections.Generic.IReadOnlyList$1(System.String));
                 var e = Bridge.getEnumerator(l, System.String);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.False(e.System$Collections$IEnumerator$moveNext());
             }
         }
@@ -9878,7 +9878,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.Collections.Generic.ListTests.TestReverseComparer", {
         inherits: [System.Collections.Generic.IComparer$1(System.Int32)],
         alias: [
-            "compare", "System$Collections$Generic$IComparer$1$System$Int32$compare"
+            "compare", ["System$Collections$Generic$IComparer$1$System$Int32$compare", "System$Collections$Generic$IComparer$1$compare"]
         ],
         methods: {
             compare: function (x, y) {
@@ -9934,9 +9934,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             GetEnumeratorWorks: function () {
                 var e = new (System.Collections.ObjectModel.ReadOnlyCollection$1(System.String))(System.Array.init(["x", "y"], System.String)).getEnumerator();
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.False(e.System$Collections$IEnumerator$moveNext());
             },
             ContainsWorks: function () {
@@ -10108,9 +10108,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var l = Bridge.cast(new (System.Collections.ObjectModel.ReadOnlyCollection$1(System.String))(System.Array.init(["x", "y"], System.String)), System.Collections.Generic.IEnumerable$1(System.String));
                 var e = Bridge.getEnumerator(l, System.String);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.False(e.System$Collections$IEnumerator$moveNext());
             },
             ICollectionCountWorks: function () {
@@ -10157,9 +10157,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var l = Bridge.cast(new (System.Collections.ObjectModel.ReadOnlyCollection$1(System.String))(System.Array.init(["x", "y"], System.String)), System.Collections.Generic.IReadOnlyCollection$1(System.String));
                 var e = Bridge.getEnumerator(l, System.String);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.False(e.System$Collections$IEnumerator$moveNext());
             },
             IReadOnlyListIndexingWorks: function () {
@@ -10174,9 +10174,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var l = Bridge.cast(new (System.Collections.ObjectModel.ReadOnlyCollection$1(System.String))(System.Array.init(["x", "y"], System.String)), System.Collections.Generic.IReadOnlyList$1(System.String));
                 var e = Bridge.getEnumerator(l, System.String);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.False(e.System$Collections$IEnumerator$moveNext());
             }
         }
@@ -10632,7 +10632,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 // #1401
                 var enm = Bridge.getEnumerator(arr);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Single$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Single$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(l.toArray(), System.Array.init([3, 6, 2, 9, 5], System.Int32));
             },
@@ -10641,7 +10641,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var l = new (System.Collections.Generic.List$1(System.Single))();
                 var enm = Bridge.getEnumerator(arr, System.Single);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Single$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Single$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(System.Array.init([3, 6, 2, 9, 5], System.Int32), l.toArray());
             },
@@ -10877,7 +10877,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 // #1401
                 var enm = Bridge.getEnumerator(arr);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Double$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Double$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(l.toArray(), System.Array.init([3, 6, 2, 9, 5], System.Int32));
             },
@@ -10886,7 +10886,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var l = new (System.Collections.Generic.List$1(System.Double))();
                 var enm = Bridge.getEnumerator(arr, System.Double);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Double$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Double$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(System.Array.init([3, 6, 2, 9, 5], System.Int32), l.toArray());
             },
@@ -11122,7 +11122,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 // #1401
                 var enm = Bridge.getEnumerator(arr);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int16$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int16$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(l.toArray(), System.Array.init([3, 6, 2, 9, 5], System.Int32));
             },
@@ -11131,7 +11131,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var l = new (System.Collections.Generic.List$1(System.Int32))();
                 var enm = Bridge.getEnumerator(arr, System.Int16);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int16$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int16$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(System.Array.init([3, 6, 2, 9, 5], System.Int32), l.toArray());
             },
@@ -11367,7 +11367,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 // #1401
                 var enm = Bridge.getEnumerator(arr);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(l.toArray(), System.Array.init([3, 6, 2, 9, 5], System.Int32));
             },
@@ -11376,7 +11376,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var l = new (System.Collections.Generic.List$1(System.Int32))();
                 var enm = Bridge.getEnumerator(arr, System.Int32);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(System.Array.init([3, 6, 2, 9, 5], System.Int32), l.toArray());
             },
@@ -11612,7 +11612,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 // #1401
                 var enm = Bridge.getEnumerator(arr);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$SByte$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$SByte$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(l.toArray(), System.Array.init([3, 6, 2, 9, 5], System.Int32));
             },
@@ -11621,7 +11621,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var l = new (System.Collections.Generic.List$1(System.Int32))();
                 var enm = Bridge.getEnumerator(arr, System.SByte);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$SByte$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$SByte$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(System.Array.init([3, 6, 2, 9, 5], System.Int32), l.toArray());
             },
@@ -11857,7 +11857,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 // #1401
                 var enm = Bridge.getEnumerator(arr);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$UInt16$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$UInt16$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(l.toArray(), System.Array.init([3, 6, 2, 9, 5], System.Int32));
             },
@@ -11866,7 +11866,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var l = new (System.Collections.Generic.List$1(System.Int32))();
                 var enm = Bridge.getEnumerator(arr, System.UInt16);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$UInt16$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$UInt16$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(System.Array.init([3, 6, 2, 9, 5], System.Int32), l.toArray());
             },
@@ -12102,7 +12102,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 // #1401
                 var enm = Bridge.getEnumerator(arr);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$UInt32$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$UInt32$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(l.toArray(), System.Array.init([3, 6, 2, 9, 5], System.Int32));
             },
@@ -12111,7 +12111,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var l = new (System.Collections.Generic.List$1(System.UInt32))();
                 var enm = Bridge.getEnumerator(arr, System.UInt32);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$UInt32$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$UInt32$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(System.Array.init([3, 6, 2, 9, 5], System.Int32), l.toArray());
             },
@@ -12347,7 +12347,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 // #1401
                 var enm = Bridge.getEnumerator(arr);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Byte$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Byte$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(l.toArray(), System.Array.init([3, 6, 2, 9, 5], System.Int32));
             },
@@ -12356,7 +12356,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var l = new (System.Collections.Generic.List$1(System.Int32))();
                 var enm = Bridge.getEnumerator(arr, System.Byte);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Byte$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Byte$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(System.Array.init([3, 6, 2, 9, 5], System.Int32), l.toArray());
             },
@@ -12604,7 +12604,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 // #1401
                 var enm = Bridge.getEnumerator(arr);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Byte$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Byte$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(l.toArray(), System.Array.init([3, 6, 2, 9, 5], System.Int32));
             },
@@ -19380,7 +19380,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             other: null
         },
         alias: [
-            "compareTo", "System$IComparable$1$Bridge$ClientTest$IComparableTests$MyComparable$compareTo"
+            "compareTo", ["System$IComparable$1$Bridge$ClientTest$IComparableTests$MyComparable$compareTo", "System$IComparable$1$compareTo"]
         ],
         methods: {
             compareTo: function (other) {
@@ -19654,8 +19654,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.Linq.AnagramEqualityComparer", {
         inherits: [System.Collections.Generic.EqualityComparer$1(System.String)],
         alias: [
-            "equals2", "System$Collections$Generic$IEqualityComparer$1$System$String$equals2",
-            "getHashCode2", "System$Collections$Generic$IEqualityComparer$1$System$String$getHashCode2"
+            "equals2", ["System$Collections$Generic$IEqualityComparer$1$System$String$equals2", "System$Collections$Generic$IEqualityComparer$1$equals2"],
+            "getHashCode2", ["System$Collections$Generic$IEqualityComparer$1$System$String$getHashCode2", "System$Collections$Generic$IEqualityComparer$1$getHashCode2"]
         ],
         methods: {
             equals2: function (x, y) {
@@ -21692,7 +21692,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             _items: null
         },
         alias: [
-            "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"
+            "getEnumerator", ["System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator", "System$Collections$Generic$IEnumerable$1$getEnumerator"]
         ],
         ctors: {
             ctor: function (items) {
@@ -22261,8 +22261,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.Linq.TestLinqConversionOperatorsIEqualityComparer", {
         inherits: [System.Collections.Generic.EqualityComparer$1(System.String)],
         alias: [
-            "equals2", "System$Collections$Generic$IEqualityComparer$1$System$String$equals2",
-            "getHashCode2", "System$Collections$Generic$IEqualityComparer$1$System$String$getHashCode2"
+            "equals2", ["System$Collections$Generic$IEqualityComparer$1$System$String$equals2", "System$Collections$Generic$IEqualityComparer$1$equals2"],
+            "getHashCode2", ["System$Collections$Generic$IEqualityComparer$1$System$String$getHashCode2", "System$Collections$Generic$IEqualityComparer$1$getHashCode2"]
         ],
         methods: {
             equals2: function (x, y) {
@@ -34020,7 +34020,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             _items: null
         },
         alias: [
-            "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"
+            "getEnumerator", ["System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator", "System$Collections$Generic$IEnumerable$1$getEnumerator"]
         ],
         ctors: {
             ctor: function (items) {

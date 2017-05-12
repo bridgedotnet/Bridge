@@ -1003,11 +1003,44 @@ namespace Bridge.Contract
             return interfaceName + (interfaceName.EndsWith(JS.Vars.D.ToString()) ? "" : JS.Vars.D.ToString()) + interfaceMemberName;
         }
 
+        public static bool ExcludeTypeParameterForDefinition(MemberResolveResult rr)
+        {
+            return rr != null && OverloadsCollection.ExcludeTypeParameterForDefinition(rr.Member);
+        }
+
+        public static bool ExcludeTypeParameterForDefinition(IMember member)
+        {
+            if (member.ImplementedInterfaceMembers.Count == 0)
+            {
+                return false;
+            }
+
+            if (member.ImplementedInterfaceMembers.Any(im =>
+                {
+                    var typeDef = im.DeclaringTypeDefinition;
+                    var type = im.DeclaringType;
+
+                    return typeDef != null && !Helpers.IsIgnoreGeneric(typeDef) && type != null &&
+                           type.TypeArguments.Count > 0 && Helpers.IsTypeParameterType(type);
+                }))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public static bool NeedCreateAlias(MemberResolveResult rr)
         {
             if (rr == null || rr.Member.ImplementedInterfaceMembers.Count == 0)
             {
                 return false;
+            }
+
+            if (rr.Member.ImplementedInterfaceMembers.Count > 0 &&
+                rr.Member.ImplementedInterfaceMembers.Any(im => im.DeclaringTypeDefinition.TypeParameters.Any(tp => tp.Variance != VarianceModifier.Invariant)))
+            {
+                return true;
             }
 
             if (rr.Member.IsExplicitInterfaceImplementation)

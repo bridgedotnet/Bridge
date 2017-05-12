@@ -451,7 +451,7 @@ namespace Bridge.Contract
                 name = OverloadsCollection.NormalizeInterfaceName(name);
             }
 
-            if (type.TypeArguments.Count > 0 && !Helpers.IsIgnoreGeneric(type, emitter))
+            if (type.TypeArguments.Count > 0 && !Helpers.IsIgnoreGeneric(type, emitter) && !asDefinition)
             {
                 if (isAlias)
                 {
@@ -525,7 +525,7 @@ namespace Bridge.Contract
 
                     name = sb.ToString();
                 }
-                else if (!asDefinition)
+                else
                 {
                     StringBuilder sb = new StringBuilder(name);
                     bool needComma = false;

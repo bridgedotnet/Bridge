@@ -35,8 +35,14 @@
 
             if (T) {
                 this["System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$getCurrent$1"] = this.getCurrent;
+                this["System$Collections$Generic$IEnumerator$1$getCurrent$1"] = this.getCurrent;
 
                 Object.defineProperty(this, "System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$Current$1", {
+                    get: this.getCurrent,
+                    enumerable: true
+                });
+
+                Object.defineProperty(this, "System$Collections$Generic$IEnumerator$1$Current$1", {
                     get: this.getCurrent,
                     enumerable: true
                 });

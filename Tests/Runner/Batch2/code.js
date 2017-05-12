@@ -510,7 +510,7 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
     Bridge.define("Bridge.ClientTest.Batch2.BridgeIssues.N772.TestReverseComparer", {
         inherits: [System.Collections.Generic.IComparer$1(System.Int32)],
         alias: [
-            "compare", "System$Collections$Generic$IComparer$1$System$Int32$compare"
+            "compare", ["System$Collections$Generic$IComparer$1$System$Int32$compare", "System$Collections$Generic$IComparer$1$compare"]
         ],
         methods: {
             compare: function (x, y) {

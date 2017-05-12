@@ -175,7 +175,7 @@
         },
         alias: [
             "clone", "System$ICloneable$clone",
-            "compareTo", "System$IComparable$1$System$Version$compareTo",
+            "compareTo", ["System$IComparable$1$System$Version$compareTo", "System$IComparable$1$compareTo"],
             "equalsT", "System$IEquatable$1$System$Version$equalsT"
         ],
         ctors: {
