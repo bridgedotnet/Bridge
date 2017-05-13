@@ -7,8 +7,7 @@
                 Property: 0
             },
             methods: {
-                Method: function Method() {
-                }
+                Method: function Method() { }
             }
         },
         methods: {

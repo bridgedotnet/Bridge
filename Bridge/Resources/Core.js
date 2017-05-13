@@ -12,7 +12,18 @@
                 return name1;
             }
 
-            return name2;
+            if (name2 && Bridge.hasValue(scope[name2])) {
+                return name2;
+            }
+
+            var name = name2 || name1;
+            var idx = name.lastIndexOf("$");
+
+            if (/\$\d+$/g.test(name)) {
+                idx = name.lastIndexOf("$", idx - 1);
+            }
+
+            return name.substr(idx + 1);
         },
 
         box: function (v, T, toStr, hashCode) {
@@ -991,6 +1002,10 @@
                 return obj[name]();
             }
 
+            if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IEnumerable$1$getEnumerator"])) {
+                return obj[name]();
+            }
+
             if (Bridge.isFunction(obj[name = "System$Collections$IEnumerable$getEnumerator"])) {
                 return obj[name]();
             }
@@ -1278,6 +1293,10 @@
                 return a[name](b);
             }
 
+            if (T && Bridge.isFunction(a[name = "System$IComparable$1$compareTo"])) {
+                return a[name](b);
+            }
+
             if (Bridge.isFunction(a[name = "System$IComparable$compareTo"])) {
                 return a[name](b);
             }
@@ -1287,6 +1306,10 @@
             }
 
             if (T && Bridge.isFunction(b[name = "System$IComparable$1$" + Bridge.getTypeAlias(T) + "$compareTo"])) {
+                return -b[name](a);
+            }
+
+            if (T && Bridge.isFunction(b[name = "System$IComparable$1$compareTo"])) {
                 return -b[name](a);
             }
 

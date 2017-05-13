@@ -31,7 +31,18 @@
                 return name1;
             }
 
-            return name2;
+            if (name2 && Bridge.hasValue(scope[name2])) {
+                return name2;
+            }
+
+            var name = name2 || name1;
+            var idx = name.lastIndexOf("$");
+
+            if (/\$\d+$/g.test(name)) {
+                idx = name.lastIndexOf("$", idx - 1);
+            }
+
+            return name.substr(idx + 1);
         },
 
         box: function (v, T, toStr, hashCode) {
@@ -1010,6 +1021,10 @@
                 return obj[name]();
             }
 
+            if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IEnumerable$1$getEnumerator"])) {
+                return obj[name]();
+            }
+
             if (Bridge.isFunction(obj[name = "System$Collections$IEnumerable$getEnumerator"])) {
                 return obj[name]();
             }
@@ -1297,6 +1312,10 @@
                 return a[name](b);
             }
 
+            if (T && Bridge.isFunction(a[name = "System$IComparable$1$compareTo"])) {
+                return a[name](b);
+            }
+
             if (Bridge.isFunction(a[name = "System$IComparable$compareTo"])) {
                 return a[name](b);
             }
@@ -1306,6 +1325,10 @@
             }
 
             if (T && Bridge.isFunction(b[name = "System$IComparable$1$" + Bridge.getTypeAlias(T) + "$compareTo"])) {
+                return -b[name](a);
+            }
+
+            if (T && Bridge.isFunction(b[name = "System$IComparable$1$compareTo"])) {
                 return -b[name](a);
             }
 
@@ -2262,20 +2285,24 @@
                             }
                         }
 
-                        if (descriptor != null) {
-                            Object.defineProperty(obj, alias, descriptor);
-                            aliases.push({alias: alias, descriptor: descriptor});
-                        } else {
-                            var m = scope[name];
+                        var arr = Array.isArray(alias) ? alias : [alias];
+                        for (var j = 0; j < arr.length; j++) {
+                            alias = arr[j];
 
-                            if (m === undefined && prototype) {
-                                m = prototype[name];
+                            if (descriptor != null) {
+                                Object.defineProperty(obj, alias, descriptor);
+                                aliases.push({ alias: alias, descriptor: descriptor });
+                            } else {
+                                var m = scope[name];
+
+                                if (m === undefined && prototype) {
+                                    m = prototype[name];
+                                }
+
+                                scope[alias] = m;
+                                aliases.push({ fn: name, alias: alias });
                             }
-
-                            scope[alias] = m;
-                            aliases.push({ fn: name, alias: alias });
                         }
-                        
                     })(statics ? scope : prototype, config.alias[i], config.alias[i + 1], cls);
 
                     i++;
@@ -3257,7 +3284,7 @@
 
     // @source systemAssemblyVersion.js
 
-    Bridge.init(function (){
+    Bridge.init(function () {
         Bridge.SystemAssembly.version = "16.0.0-beta";
         Bridge.SystemAssembly.compiler = "16.0.0-beta";
     });
@@ -9391,7 +9418,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
         config: {
             alias: [
-                "compareTo", "System$IComparable$compareTo"
+                "compareTo", ["System$IComparable$compareTo", "System$IComparable$1$compareTo", "System$IComparable$1System$TimeSpan$compareTo"]
             ]
         },
 
@@ -11506,8 +11533,14 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
             if (T) {
                 this["System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$getCurrent$1"] = this.getCurrent;
+                this["System$Collections$Generic$IEnumerator$1$getCurrent$1"] = this.getCurrent;
 
                 Object.defineProperty(this, "System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$Current$1", {
+                    get: this.getCurrent,
+                    enumerable: true
+                });
+
+                Object.defineProperty(this, "System$Collections$Generic$IEnumerator$1$Current$1", {
                     get: this.getCurrent,
                     enumerable: true
                 });
@@ -11586,8 +11619,14 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
             if (T) {
                 this["System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$getCurrent$1"] = this.getCurrent;
+                this["System$Collections$Generic$IEnumerator$1$getCurrent$1"] = this.getCurrent;
 
                 Object.defineProperty(this, "System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$Current$1", {
+                    get: this.getCurrent,
+                    enumerable: true
+                });
+
+                Object.defineProperty(this, "System$Collections$Generic$IEnumerator$1$Current$1", {
                     get: this.getCurrent,
                     enumerable: true
                 });
@@ -11650,8 +11689,8 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
             config: {
                 alias: [
-                    "equals2", "System$Collections$Generic$IEqualityComparer$1$" + Bridge.getTypeAlias(T) + "$equals2",
-                    "getHashCode2", "System$Collections$Generic$IEqualityComparer$1$" + Bridge.getTypeAlias(T) + "$getHashCode2"
+                    "equals2", ["System$Collections$Generic$IEqualityComparer$1$" + Bridge.getTypeAlias(T) + "$equals2", "System$Collections$Generic$IEqualityComparer$1$equals2"],
+                    "getHashCode2", ["System$Collections$Generic$IEqualityComparer$1$" + Bridge.getTypeAlias(T) + "$getHashCode2", "System$Collections$Generic$IEqualityComparer$1$getHashCode2"]
                 ]
             },
 
@@ -11699,6 +11738,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 this.fn = fn;
                 this.compare = fn;
                 this["System$Collections$Generic$IComparer$1$" + Bridge.getTypeAlias(T) + "$compare"] = fn;
+                this["System$Collections$Generic$IComparer$1$compare"] = fn;
             }
         }
     });
@@ -11751,7 +11791,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                     "set", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$setItem",
                     "add", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$add",
                     "containsKey", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$containsKey",
-                    "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$Collections$Generic$KeyValuePair$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getEnumerator",
+                    "getEnumerator", ["System$Collections$Generic$IEnumerable$1$System$Collections$Generic$KeyValuePair$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getEnumerator", "System$Collections$Generic$IEnumerable$1$getEnumerator"],
                     "remove", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$remove",
                     "tryGetValue", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$tryGetValue",
                     "getIsReadOnly", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(System.Collections.Generic.KeyValuePair$2(TKey, TValue)) + "$getIsReadOnly",
@@ -12048,7 +12088,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
             config: {
                 alias: [
-                  "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator",
+                  "getEnumerator", ["System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator", "System$Collections$Generic$IEnumerable$1$getEnumerator"],
                   "getCount", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getCount",
                   "add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
                   "clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
@@ -12135,7 +12175,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 "contains", "System$Collections$IList$contains",
                 "copyTo", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$copyTo",
                 "copyTo", "System$Collections$ICollection$copyTo",
-                "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator",
+                "getEnumerator", ["System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator", "System$Collections$Generic$IEnumerable$1$getEnumerator"],
                 "getEnumerator", "System$Collections$IEnumerable$getEnumerator",
                 "indexOf", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf",
                 "indexOf", "System$Collections$IList$indexOf",
@@ -13931,7 +13971,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         },
         alias: [
             "clone", "System$ICloneable$clone",
-            "compareTo", "System$IComparable$1$System$Version$compareTo",
+            "compareTo", ["System$IComparable$1$System$Version$compareTo", "System$IComparable$1$compareTo"],
             "equalsT", "System$IEquatable$1$System$Version$equalsT"
         ],
         ctors: {
@@ -16230,7 +16270,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
 
             config: {
                 alias: [
-                "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"
+                "getEnumerator", ["System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator", "System$Collections$Generic$IEnumerable$1$getEnumerator"]
                 ]
             },
 
@@ -16238,6 +16278,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                 this.$initialize();
                 this.getEnumerator = action;
                 this["System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"] = action;
+                this["System$Collections$Generic$IEnumerable$1$getEnumerator"] = action;
             }
         };
     });
@@ -16304,8 +16345,8 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
 					}
 				},
                 alias: [
-					"getCurrent", "System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$getCurrent$1",
-					"Current", "System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$Current$1",
+					"getCurrent", ["System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$getCurrent$1", "System$Collections$Generic$IEnumerator$1$getCurrent$1"],
+					"Current", ["System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1"],
 					"Current", "System$Collections$IEnumerator$Current",
 					"dispose", "System$IDisposable$dispose",
 					"moveNext", "System$Collections$IEnumerator$moveNext",
@@ -19407,7 +19448,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         },
         alias: [
             "equalsT", "System$IEquatable$1$System$Guid$equalsT",
-            "compareTo", "System$IComparable$1$System$Guid$compareTo",
+            "compareTo", ["System$IComparable$1$System$Guid$compareTo", "System$IComparable$1$compareTo"],
             "format", "System$IFormattable$format"
         ],
         ctors: {

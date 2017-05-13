@@ -64,10 +64,10 @@ namespace System
         [Template("Bridge.Int.format({this}, {format}, {provider})")]
         public extern string ToString(string format, IFormatProvider provider);
 
-        [Template("Bridge.Int.format({this}, 'G', {provider})")]
+        [Template("Bridge.Int.format({this}, \"G\", {provider})")]
         public extern string ToString(IFormatProvider provider);
 
-        [Template("Bridge.Int.format({this}, 'G')")]
+        [Template("Bridge.Int.format({this}, \"G\")")]
         public override extern string ToString();
 
         public extern decimal Abs();

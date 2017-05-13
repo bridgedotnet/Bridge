@@ -79,7 +79,7 @@
         },
         alias: [
             "equalsT", "System$IEquatable$1$System$Guid$equalsT",
-            "compareTo", "System$IComparable$1$System$Guid$compareTo",
+            "compareTo", ["System$IComparable$1$System$Guid$compareTo", "System$IComparable$1$compareTo"],
             "format", "System$IFormattable$format"
         ],
         ctors: {

@@ -685,7 +685,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             value: 0
         },
         alias: [
-            "compareTo", "System$IComparable$1$Bridge$ClientTest$Batch4$Collections$Generic$ComparerTests$C$compareTo"
+            "compareTo", ["System$IComparable$1$Bridge$ClientTest$Batch4$Collections$Generic$ComparerTests$C$compareTo", "System$IComparable$1$compareTo"]
         ],
         ctors: {
             ctor: function (value) {
@@ -1094,8 +1094,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.GenericDictionaryTests.TestEqualityComparer", {
         inherits: [System.Collections.Generic.EqualityComparer$1(System.String)],
         alias: [
-            "equals2", "System$Collections$Generic$IEqualityComparer$1$System$String$equals2",
-            "getHashCode2", "System$Collections$Generic$IEqualityComparer$1$System$String$getHashCode2"
+            "equals2", ["System$Collections$Generic$IEqualityComparer$1$System$String$equals2", "System$Collections$Generic$IEqualityComparer$1$equals2"],
+            "getHashCode2", ["System$Collections$Generic$IEqualityComparer$1$System$String$getHashCode2", "System$Collections$Generic$IEqualityComparer$1$getHashCode2"]
         ],
         methods: {
             equals2: function (x, y) {
@@ -1222,7 +1222,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             }
         },
         alias: [
-            "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$String$getEnumerator",
+            "getEnumerator", ["System$Collections$Generic$IEnumerable$1$System$String$getEnumerator", "System$Collections$Generic$IEnumerable$1$getEnumerator"],
             "Count", "System$Collections$Generic$ICollection$1$System$String$Count",
             "IsReadOnly", "System$Collections$Generic$ICollection$1$System$String$IsReadOnly",
             "add", "System$Collections$Generic$ICollection$1$System$String$add",
@@ -1546,7 +1546,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             }
         },
         alias: [
-            "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$getEnumerator",
+            "getEnumerator", ["System$Collections$Generic$IEnumerable$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$getEnumerator", "System$Collections$Generic$IEnumerable$1$getEnumerator"],
             "getItem", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$getItem",
             "setItem", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$setItem",
             "Keys", "System$Collections$Generic$IDictionary$2$System$Int32$System$String$Keys",
@@ -1637,33 +1637,33 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 var enm = System.Array.init(["x", "y", "z"], System.String);
                 var e = Bridge.getEnumerator(enm, System.String);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("z", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("z", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.False(e.System$Collections$IEnumerator$moveNext());
             },
             ClassImplementingIEnumerableCanBeEnumerated: function () {
                 var enm = new Bridge.ClientTest.Batch4.Collections.Generic.IEnumerableTests.MyEnumerable();
                 var e = enm.getEnumerator();
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("z", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("z", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.False(e.System$Collections$IEnumerator$moveNext());
             },
             ClassImplementingIEnumerableCastToIEnumerableCanBeEnumerated: function () {
                 var enm = new Bridge.ClientTest.Batch4.Collections.Generic.IEnumerableTests.MyEnumerable();
                 var e = Bridge.getEnumerator(enm, System.String);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("z", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("z", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.False(e.System$Collections$IEnumerator$moveNext());
             }
         }
@@ -1672,7 +1672,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.IEnumerableTests.MyEnumerable", {
         inherits: [System.Collections.Generic.IEnumerable$1(System.String)],
         alias: [
-            "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$String$getEnumerator"
+            "getEnumerator", ["System$Collections$Generic$IEnumerable$1$System$String$getEnumerator", "System$Collections$Generic$IEnumerable$1$getEnumerator"]
         ],
         methods: {
             getEnumerator: function () {
@@ -1839,7 +1839,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             }
         },
         alias: [
-            "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$String$getEnumerator",
+            "getEnumerator", ["System$Collections$Generic$IEnumerable$1$System$String$getEnumerator", "System$Collections$Generic$IEnumerable$1$getEnumerator"],
             "Count", "System$Collections$Generic$ICollection$1$System$String$Count",
             "IsReadOnly", "System$Collections$Generic$ICollection$1$System$String$IsReadOnly",
             "add", "System$Collections$Generic$ICollection$1$System$String$add",
@@ -1923,7 +1923,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 var enm = new Bridge.ClientTest.Batch4.Collections.Generic.IteratorBlockTests.C(sb).GetEnumerator(2);
 
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    sb.appendLine("got " + enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "Current$1")]);
+                    sb.appendLine("got " + enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
 
                 this.AssertEqual(sb.toString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
@@ -1935,7 +1935,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
                 for (var i = 0; i < 2; i = (i + 1) | 0) {
                     enm.System$Collections$IEnumerator$moveNext();
-                    sb.appendLine("got " + enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "Current$1")]);
+                    sb.appendLine("got " + enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 enm.System$IDisposable$dispose();
 
@@ -1954,7 +1954,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 try {
                     for (var i = 0; i < 100; i = (i + 1) | 0) {
                         enm.System$Collections$IEnumerator$moveNext();
-                        sb.appendLine("got " + enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "Current$1")]);
+                        sb.appendLine("got " + enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                     }
                     Bridge.Test.NUnit.Assert.Fail$1("Should have thrown an exception in the loop");
                 }
@@ -2041,7 +2041,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     var enumerator = Bridge.getEnumerator(enumerable, System.Int32);
                     for (var i = 0; i < 100; i = (i + 1) | 0) {
                         enumerator.System$Collections$IEnumerator$moveNext();
-                        sb.appendLine("got " + enumerator[Bridge.geti(enumerator, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "Current$1")]);
+                        sb.appendLine("got " + enumerator[Bridge.geti(enumerator, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                     }
                     Bridge.Test.NUnit.Assert.Fail$1("Should have thrown");
                 }
@@ -2089,8 +2089,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
                 while (enm1.System$Collections$IEnumerator$moveNext()) {
                     enm2.System$Collections$IEnumerator$moveNext();
-                    sb.appendLine(enm1[Bridge.geti(enm1, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "Current$1")].toString());
-                    sb.appendLine(enm2[Bridge.geti(enm2, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "Current$1")].toString());
+                    sb.appendLine(enm1[Bridge.geti(enm1, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")].toString());
+                    sb.appendLine(enm2[Bridge.geti(enm2, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")].toString());
                 }
 
                 this.AssertEqual(sb.toString(), "0\n0\n1\n1\n2\n2\n-1\n-1\n");
@@ -2706,9 +2706,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             GetEnumeratorWorks: function () {
                 var e = $asm.$.Bridge.ClientTest.Batch4.Collections.Generic.ListTests.f6(new (System.Collections.Generic.List$1(System.String))()).getEnumerator();
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.False(e.System$Collections$IEnumerator$moveNext());
             },
             AddWorks: function () {
@@ -2851,9 +2851,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 var l = Bridge.cast($asm.$.Bridge.ClientTest.Batch4.Collections.Generic.ListTests.f35(new (System.Collections.Generic.List$1(System.String))()), System.Collections.Generic.IEnumerable$1(System.String));
                 var e = Bridge.getEnumerator(l, System.String);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.False(e.System$Collections$IEnumerator$moveNext());
             },
             ICollectionCountWorks: function () {
@@ -3253,7 +3253,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.Collections.Generic.ListTests.TestReverseComparer", {
         inherits: [System.Collections.Generic.IComparer$1(System.Int32)],
         alias: [
-            "compare", "System$Collections$Generic$IComparer$1$System$Int32$compare"
+            "compare", ["System$Collections$Generic$IComparer$1$System$Int32$compare", "System$Collections$Generic$IComparer$1$compare"]
         ],
         methods: {
             compare: function (x, y) {
@@ -3309,9 +3309,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             GetEnumeratorWorks: function () {
                 var e = new (System.Collections.ObjectModel.ReadOnlyCollection$1(System.String))(System.Array.init(["x", "y"], System.String)).getEnumerator();
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.False(e.System$Collections$IEnumerator$moveNext());
             },
             ContainsWorks: function () {
@@ -3348,9 +3348,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 var l = Bridge.cast(new (System.Collections.ObjectModel.ReadOnlyCollection$1(System.String))(System.Array.init(["x", "y"], System.String)), System.Collections.Generic.IEnumerable$1(System.String));
                 var e = Bridge.getEnumerator(l, System.String);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("x", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.True(e.System$Collections$IEnumerator$moveNext());
-                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "Current$1")]);
+                Bridge.Test.NUnit.Assert.AreEqual("y", e[Bridge.geti(e, "System$Collections$Generic$IEnumerator$1$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 Bridge.Test.NUnit.Assert.False(e.System$Collections$IEnumerator$moveNext());
             },
             ICollectionCountWorks: function () {
@@ -3641,7 +3641,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 }
                 for (var i = 0; i < expected.length; i = (i + 1) | 0) {
                     if (actual[System.Array.index(i, actual)] !== expected[System.Array.index(i, expected)]) {
-                        Bridge.Test.NUnit.Assert.Fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[System.Array.index(i, expected)], ", actual: ", System.Single.format(actual[System.Array.index(i, actual)], 'G')));
+                        Bridge.Test.NUnit.Assert.Fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[System.Array.index(i, expected)], ", actual: ", System.Single.format(actual[System.Array.index(i, actual)], "G")));
                         return;
                     }
                 }
@@ -3804,7 +3804,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 // #1401
                 var enm = Bridge.getEnumerator(arr);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Single$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Single$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(l.toArray(), System.Array.init([3, 6, 2, 9, 5], System.Int32));
             },
@@ -3813,7 +3813,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 var l = new (System.Collections.Generic.List$1(System.Single))();
                 var enm = Bridge.getEnumerator(arr, System.Single);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Single$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Single$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(System.Array.init([3, 6, 2, 9, 5], System.Int32), l.toArray());
             },
@@ -3861,7 +3861,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 }
                 for (var i = 0; i < expected.length; i = (i + 1) | 0) {
                     if (actual[System.Array.index(i, actual)] !== expected[System.Array.index(i, expected)]) {
-                        Bridge.Test.NUnit.Assert.Fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[System.Array.index(i, expected)], ", actual: ", System.Double.format(actual[System.Array.index(i, actual)], 'G')));
+                        Bridge.Test.NUnit.Assert.Fail$1(System.String.concat(message, ": Position ", i, ": expected ", expected[System.Array.index(i, expected)], ", actual: ", System.Double.format(actual[System.Array.index(i, actual)], "G")));
                         return;
                     }
                 }
@@ -4025,7 +4025,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 // #1401
                 var enm = Bridge.getEnumerator(arr);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Double$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Double$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(l.toArray(), System.Array.init([3, 6, 2, 9, 5], System.Int32));
             },
@@ -4034,7 +4034,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 var l = new (System.Collections.Generic.List$1(System.Double))();
                 var enm = Bridge.getEnumerator(arr, System.Double);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Double$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Double$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(System.Array.init([3, 6, 2, 9, 5], System.Int32), l.toArray());
             },
@@ -4245,7 +4245,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 // #1401
                 var enm = Bridge.getEnumerator(arr);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int16$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int16$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(l.toArray(), System.Array.init([3, 6, 2, 9, 5], System.Int32));
             },
@@ -4254,7 +4254,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 var l = new (System.Collections.Generic.List$1(System.Int32))();
                 var enm = Bridge.getEnumerator(arr, System.Int16);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int16$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int16$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(System.Array.init([3, 6, 2, 9, 5], System.Int32), l.toArray());
             },
@@ -4464,7 +4464,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 // #1401
                 var enm = Bridge.getEnumerator(arr);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(l.toArray(), System.Array.init([3, 6, 2, 9, 5], System.Int32));
             },
@@ -4473,7 +4473,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 var l = new (System.Collections.Generic.List$1(System.Int32))();
                 var enm = Bridge.getEnumerator(arr, System.Int32);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Int32$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(System.Array.init([3, 6, 2, 9, 5], System.Int32), l.toArray());
             },
@@ -4683,7 +4683,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 // #1401
                 var enm = Bridge.getEnumerator(arr);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$SByte$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$SByte$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(l.toArray(), System.Array.init([3, 6, 2, 9, 5], System.Int32));
             },
@@ -4692,7 +4692,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 var l = new (System.Collections.Generic.List$1(System.Int32))();
                 var enm = Bridge.getEnumerator(arr, System.SByte);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$SByte$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$SByte$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(System.Array.init([3, 6, 2, 9, 5], System.Int32), l.toArray());
             },
@@ -4902,7 +4902,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 // #1401
                 var enm = Bridge.getEnumerator(arr);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$UInt16$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$UInt16$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(l.toArray(), System.Array.init([3, 6, 2, 9, 5], System.Int32));
             },
@@ -4911,7 +4911,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 var l = new (System.Collections.Generic.List$1(System.Int32))();
                 var enm = Bridge.getEnumerator(arr, System.UInt16);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$UInt16$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$UInt16$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(System.Array.init([3, 6, 2, 9, 5], System.Int32), l.toArray());
             },
@@ -5121,7 +5121,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 // #1401
                 var enm = Bridge.getEnumerator(arr);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$UInt32$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$UInt32$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(l.toArray(), System.Array.init([3, 6, 2, 9, 5], System.Int32));
             },
@@ -5130,7 +5130,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 var l = new (System.Collections.Generic.List$1(System.UInt32))();
                 var enm = Bridge.getEnumerator(arr, System.UInt32);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$UInt32$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$UInt32$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(System.Array.init([3, 6, 2, 9, 5], System.Int32), l.toArray());
             },
@@ -5340,7 +5340,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 // #1401
                 var enm = Bridge.getEnumerator(arr);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Byte$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Byte$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(l.toArray(), System.Array.init([3, 6, 2, 9, 5], System.Int32));
             },
@@ -5349,7 +5349,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 var l = new (System.Collections.Generic.List$1(System.Int32))();
                 var enm = Bridge.getEnumerator(arr, System.Byte);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Byte$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Byte$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(System.Array.init([3, 6, 2, 9, 5], System.Int32), l.toArray());
             },
@@ -5572,7 +5572,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 // #1401
                 var enm = Bridge.getEnumerator(arr);
                 while (enm.System$Collections$IEnumerator$moveNext()) {
-                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Byte$Current$1", "Current$1")]);
+                    l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Byte$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                 }
                 Bridge.Test.NUnit.Assert.AreEqual(l.toArray(), System.Array.init([3, 6, 2, 9, 5], System.Int32));
             },
@@ -5584,7 +5584,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
                     var enm = Bridge.getEnumerator(arr, System.Byte);
                     while (enm.System$Collections$IEnumerator$moveNext()) {
-                        l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Byte$Current$1", "Current$1")]);
+                        l.add(enm[Bridge.geti(enm, "System$Collections$Generic$IEnumerator$1$System$Byte$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")]);
                     }
                 });
                 Bridge.Test.NUnit.Assert.AreEqual(System.Array.init([3, 6, 2, 9, 5], System.Int32), l.toArray());
@@ -5881,8 +5881,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 var a2 = Bridge.fn.remove(a, a);
                 Bridge.Test.NUnit.Assert.True(Bridge.staticEquals(a2, null));
             },
-            A: function () {
-            },
+            A: function () { },
             RemoveWorksWithMethodGroupConversion_SPI_1563: function () {
                 // #1563
 
@@ -6027,8 +6026,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.ns("Bridge.ClientTest.Batch4.DelegateTests", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch4.DelegateTests, {
-        f1: function () {
-        },
+        f1: function () { },
         f2: function (x) {
             return ((this.testField + x) | 0);
         }
@@ -6036,10 +6034,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.DelegateTests.C", {
         methods: {
-            F1: function () {
-            },
-            F2: function () {
-            }
+            F1: function () { },
+            F2: function () { }
         }
     });
 
@@ -7820,7 +7816,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             other: null
         },
         alias: [
-            "compareTo", "System$IComparable$1$Bridge$ClientTest$Batch4$IComparableTests$MyComparable$compareTo"
+            "compareTo", ["System$IComparable$1$Bridge$ClientTest$Batch4$IComparableTests$MyComparable$compareTo", "System$IComparable$1$compareTo"]
         ],
         methods: {
             compareTo: function (other) {
@@ -9932,7 +9928,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             _items: null
         },
         alias: [
-            "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"
+            "getEnumerator", ["System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator", "System$Collections$Generic$IEnumerable$1$getEnumerator"]
         ],
         ctors: {
             ctor: function (items) {
@@ -9974,10 +9970,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             }
         },
         methods: {
-            Add: function (i) {
-            },
-            Add$1: function (i, j) {
-            },
+            Add: function (i) { },
+            Add$1: function (i, j) { },
             getEnumerator: function () {
                 throw new System.Exception();
             }
@@ -9995,7 +9989,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             },
             AssertIsDecimalAndEqualTo: function (v, d) {
                 Bridge.Test.NUnit.Assert.True(Bridge.is(v, System.Decimal));
-                Bridge.Test.NUnit.Assert.AreStrictEqual(System.Double.format(d, 'G'), v.toString());
+                Bridge.Test.NUnit.Assert.AreStrictEqual(System.Double.format(d, "G"), v.toString());
             },
             ConstantsWork: function () {
                 this.AssertAlmostEqual(Math.E, 2.7182818284590451);
@@ -11226,8 +11220,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 var rand = new System.Random.ctor();
                 for (var i = 0; i < 10; i = (i + 1) | 0) {
                     var randomNumber = rand.nextDouble();
-                    Bridge.Test.NUnit.Assert.True$1(randomNumber >= 0.0, System.Double.format(randomNumber, 'G') + " is greater or equal to 0.0");
-                    Bridge.Test.NUnit.Assert.True$1(randomNumber < 1.0, System.Double.format(randomNumber, 'G') + " is smaller than 1.0");
+                    Bridge.Test.NUnit.Assert.True$1(randomNumber >= 0.0, System.Double.format(randomNumber, "G") + " is greater or equal to 0.0");
+                    Bridge.Test.NUnit.Assert.True$1(randomNumber < 1.0, System.Double.format(randomNumber, "G") + " is smaller than 1.0");
                 }
             },
             NextBytesWorks: function () {
@@ -11857,8 +11851,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.AttributeTests.C22", {
         methods: {
-            M: function () {
-            }
+            M: function () { }
         }
     });
 
@@ -12261,22 +12254,14 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 PBS2: 0
             },
             methods: {
-                addEBS1: function (value) {
-                },
-                removeEBS1: function (value) {
-                },
-                addEBS2: function (value) {
-                },
-                removeEBS2: function (value) {
-                },
-                MBS: function () {
-                },
-                MBS$1: function (x) {
-                },
-                MBS$2: function (x, y) {
-                },
-                MBS2: function (x, y) {
-                }
+                addEBS1: function (value) { },
+                removeEBS1: function (value) { },
+                addEBS2: function (value) { },
+                removeEBS2: function (value) { },
+                MBS: function () { },
+                MBS$1: function (x) { },
+                MBS$2: function (x, y) { },
+                MBS2: function (x, y) { }
             }
         },
         fields: {
@@ -12302,24 +12287,15 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             getItem: function (x) {
                 return 0;
             },
-            setItem: function (x, value) {
-            },
-            addEB1: function (value) {
-            },
-            removeEB1: function (value) {
-            },
-            addEB2: function (value) {
-            },
-            removeEB2: function (value) {
-            },
-            MB: function () {
-            },
-            MB$1: function (x) {
-            },
-            MB$2: function (x, y) {
-            },
-            MB2: function (x, y) {
-            }
+            setItem: function (x, value) { },
+            addEB1: function (value) { },
+            removeEB1: function (value) { },
+            addEB2: function (value) { },
+            removeEB2: function (value) { },
+            MB: function () { },
+            MB$1: function (x) { },
+            MB$2: function (x, y) { },
+            MB2: function (x, y) { }
         }
     });
 
@@ -12338,20 +12314,13 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 PBS: 0
             },
             methods: {
-                MS: function () {
-                },
-                MBS: function () {
-                },
-                M2S: function (x) {
-                },
-                M2S$1: function (x) {
-                },
-                M2BS: function (x) {
-                },
-                M2BS$1: function (x) {
-                },
-                M3S: function (x) {
-                }
+                MS: function () { },
+                MBS: function () { },
+                M2S: function (x) { },
+                M2S$1: function (x) { },
+                M2BS: function (x) { },
+                M2BS$1: function (x) { },
+                M3S: function (x) { }
             }
         },
         fields: {
@@ -12370,27 +12339,18 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             getItem: function (x) {
                 return 0;
             },
-            setItem: function (x, value) {
-            },
+            setItem: function (x, value) { },
             getItem$1: function (x) {
                 return 0;
             },
-            setItem$1: function (x, value) {
-            },
-            M: function () {
-            },
-            MB: function () {
-            },
-            M2: function (x) {
-            },
-            M2$1: function (x) {
-            },
-            M2B: function (x) {
-            },
-            M2B$1: function (x) {
-            },
-            M3: function (x) {
-            }
+            setItem$1: function (x, value) { },
+            M: function () { },
+            MB: function () { },
+            M2: function (x) { },
+            M2$1: function (x) { },
+            M2B: function (x) { },
+            M2B$1: function (x) { },
+            M3: function (x) { }
         }
     });
 
@@ -12399,8 +12359,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             getItem: function (x) {
                 return 0;
             },
-            setItem: function (x, value) {
-            }
+            setItem: function (x, value) { }
         }
     });
 
@@ -13671,14 +13630,10 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C1", {
         methods: {
-            M1: function () {
-            },
-            M2: function () {
-            },
-            M3: function () {
-            },
-            M4: function () {
-            }
+            M1: function () { },
+            M2: function () { },
+            M3: function () { },
+            M4: function () { }
         }
     });
 
@@ -13743,10 +13698,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 E2: null
             },
             methods: {
-                addE4: function (value) {
-                },
-                removeE4: function (value) {
-                },
+                addE4: function (value) { },
+                removeE4: function (value) { },
                 RaiseE2: function () {
                     if (!Bridge.staticEquals(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C13.E2, null)) {
                         Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C13.E2();
@@ -13762,10 +13715,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             E1: null
         },
         methods: {
-            addE3: function (value) {
-            },
-            removeE3: function (value) {
-            },
+            addE3: function (value) { },
+            removeE3: function (value) { },
             RaiseE1: function () {
                 if (!Bridge.staticEquals(this.E1, null)) {
                     this.E1();
@@ -13789,8 +13740,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 },
                 P8: 0,
                 P11: {
-                    set: function (value) {
-                    }
+                    set: function (value) { }
                 },
                 P12: 0
             },
@@ -13813,8 +13763,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             },
             P6: null,
             P9: {
-                set: function (value) {
-                }
+                set: function (value) { }
             },
             P10: null
         }
@@ -13848,8 +13797,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C17", {
         methods: {
-            setItem: function (x, s, value) {
-            }
+            setItem: function (x, s, value) { }
         }
     });
 
@@ -13866,12 +13814,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             }
         },
         methods: {
-            addE: function (value) {
-            },
-            removeE: function (value) {
-            },
-            M: function () {
-            }
+            addE: function (value) { },
+            removeE: function (value) { },
+            M: function () { }
         }
     });
 
@@ -13890,13 +13835,11 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C2", {
         statics: {
             methods: {
-                M2: function () {
-                }
+                M2: function () { }
             }
         },
         methods: {
-            M1: function () {
-            }
+            M1: function () { }
         }
     });
 
@@ -13995,8 +13938,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             getItem: function (x, s) {
                 return null;
             },
-            setItem: function (x, s, value) {
-            }
+            setItem: function (x, s, value) { }
         }
     });
 
@@ -14111,19 +14053,15 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             M3: function (x, y) {
                 return 0;
             },
-            M4: function () {
-            }
+            M4: function () { }
         }
     });
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C4", {
         methods: {
-            M: function () {
-            },
-            M$1: function (i) {
-            },
-            x: function (i, s) {
-            }
+            M: function () { },
+            M$1: function (i) { },
+            x: function (i, s) { }
         }
     });
 
@@ -14146,16 +14084,14 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             M2: function (T1, s) {
                 return Bridge.getDefaultValue(T1);
             },
-            M3: function (s) {
-            }
+            M3: function (s) { }
         }
     });
 
     Bridge.define("Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C7", {
         statics: {
             methods: {
-                M2: function (x) {
-                }
+                M2: function (x) { }
             }
         },
         fields: {
@@ -14224,14 +14160,10 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             }
         },
         methods: {
-            M1: function () {
-            },
-            M2: function () {
-            },
-            M3: function () {
-            },
-            M4: function () {
-            },
+            M1: function () { },
+            M2: function () { },
+            M3: function () { },
+            M4: function () { },
             $clone: function (to) { return this; }
         }
     });
@@ -14706,8 +14638,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.ns("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests, {
-        f1: function () {
-        },
+        f1: function () { },
         f2: function () {
             Bridge.getType(null);
         }
@@ -16095,8 +16026,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.define("Bridge.ClientTest.Batch4.ScriptTests.TestType", {
         statics: {
             methods: {
-                StaticMethod: function () {
-                }
+                StaticMethod: function () { }
             }
         },
         fields: {
@@ -16113,8 +16043,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 }
             },
             P3: {
-                set: function (value) {
-                }
+                set: function (value) { }
             }
         },
         ctors: {
@@ -16130,8 +16059,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     this.Evt(this, null);
                 }
             },
-            InstanceMethod: function () {
-            },
+            InstanceMethod: function () { },
             F1: function () {
                 return 42;
             },
@@ -17749,7 +17677,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             },
             AssertIsDecimalAndEqualTo: function (v, d) {
                 Bridge.Test.NUnit.Assert.True(Bridge.is(v, System.Decimal));
-                Bridge.Test.NUnit.Assert.AreStrictEqual(System.Double.format(d, 'G'), v.toString());
+                Bridge.Test.NUnit.Assert.AreStrictEqual(System.Double.format(d, "G"), v.toString());
             },
             AssertIsDecimalAndEqualTo$1: function (v, s) {
                 Bridge.Test.NUnit.Assert.True(Bridge.is(v, System.Decimal));
@@ -18518,7 +18446,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
                 Bridge.Test.NUnit.Assert.Throws$6(System.FormatException, $asm.$.Bridge.ClientTest.Batch4.SimpleTypes.DecimalTests.f1);
                 Bridge.Test.NUnit.Assert.Throws$6(System.FormatException, $asm.$.Bridge.ClientTest.Batch4.SimpleTypes.DecimalTests.f2);
-                Bridge.Test.NUnit.Assert.AreEqual(System.Double.format((12.0), 'G'), Bridge.Int.format(System.Decimal("12."), 'G'));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Double.format((12.0), "G"), Bridge.Int.format(System.Decimal("12."), "G"));
                 //Assert.Throws<OverflowException>(() => decimal.Parse("999999999999999999999999999999"));
             },
             TryParseWorks_SPI_1586: function () {
@@ -18653,622 +18581,622 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 // #1590 All the tests below use decimal.ToString() that uses Template Bridge.Int.format({this}, 'G') with significant digits 15 instead of 29
 
                 Bridge.Test.NUnit.Assert.AreEqual$1("0", ((System.Decimal(-1)).add(System.Decimal(1))).compareTo(System.Decimal(0)).toString(), "(new Decimal(-1)).add(1).compare(0).ToString() == \"0\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format((System.Decimal.toDecimalPlaces(System.Decimal(0), 8, 6)), 'G'), "(Decimal.round(new Decimal(0), 8, Decimal.MidpointRounding.ToEven)).ToString() == \"0\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("8", Bridge.Int.format(((System.Decimal("8")).sub(System.Decimal("0"))), 'G'), "(new Decimal(\"8\").sub(\"0\").ToString() == \"8\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format((System.Decimal.toDecimalPlaces(System.Decimal(0), 8, 6)), "G"), "(Decimal.round(new Decimal(0), 8, Decimal.MidpointRounding.ToEven)).ToString() == \"0\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("8", Bridge.Int.format(((System.Decimal("8")).sub(System.Decimal("0"))), "G"), "(new Decimal(\"8\").sub(\"0\").ToString() == \"8\" FAILED");
                 // #1588
-                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format((System.Decimal("-0")), 'G'), "(new Decimal(\"-0\")).ToString() == \"0\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format((System.Decimal("-0")), "G"), "(new Decimal(\"-0\")).ToString() == \"0\" FAILED");
 
-                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format(((System.Decimal("0.3")).sub((System.Decimal("0.1")).mul(System.Decimal(3)))), 'G'), "(new Decimal(\"0.3\")).sub((new Decimal(\"0.1\")).mul(3)).toString() == \"0\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("10000000000000000000000000000", Bridge.Int.format(((System.Decimal("9999999999999999999999999999")).add(System.Decimal("1"))), 'G'), "(new Decimal(\"9999999999999999999999999999\")).add(\"1\").toString() == \"10000000000000000000000000000\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-10000000000000000000000000000", Bridge.Int.format((((System.Decimal("-9999999999999999999999999999")).sub(System.Decimal("1")))), 'G'), "(new Decimal(\"-9999999999999999999999999999\")).sub(\"1\").toString() == \"-10000000000000000000000000000\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("2", Bridge.Int.format((System.Decimal.toDecimalPlaces(System.Decimal("1.5"), 0, 6)), 'G'), "(Decimal.round(new Decimal(\"1.5\"), 0, Decimal.MidpointRounding.ToEven)).toString() == \"2\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("2", Bridge.Int.format((System.Decimal.toDecimalPlaces(System.Decimal("2.5"), 0, 6)), 'G'), "(Decimal.round(new Decimal(\"2.5\"), 0, Decimal.MidpointRounding.ToEven)).toString() == \"2\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("3", Bridge.Int.format((System.Decimal.toDecimalPlaces(System.Decimal("2.5"), 0, 4)), 'G'), "(Decimal.round(new Decimal(\"2.5\"), 0, Decimal.MidpointRounding.AwayFromZero)).toString() == \"3\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-3", Bridge.Int.format((System.Decimal.toDecimalPlaces(System.Decimal("-2.5"), 0, 4)), 'G'), "(Decimal.round(new Decimal(\"2.5\"), 0, Decimal.MidpointRounding.AwayFromZero)).toString() == \"-3\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-2", Bridge.Int.format((System.Decimal.toDecimalPlaces(System.Decimal("-2.5"), 0, 6)), 'G'), "(Decimal.round(new Decimal(\"2.5\"), 0, Decimal.MidpointRounding.ToEven)).toString() == \"-2\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("4", Bridge.Int.format((System.Decimal.toDecimalPlaces(System.Decimal("3.5"), 0, 6)), 'G'), "(Decimal.round(new Decimal(\"3.5\"), 0, Decimal.MidpointRounding.ToEven)).toString() == \"4\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-4", Bridge.Int.format((System.Decimal.toDecimalPlaces(System.Decimal("-3.5"), 0, 6)), 'G'), "(Decimal.round(new Decimal(\"-3.5\"), 0, Decimal.MidpointRounding.ToEven)).toString() == \"-4\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.000000000000000000000000002", Bridge.Int.format((System.Decimal.toDecimalPlaces(System.Decimal("0.0000000000000000000000000015"), 27, 6)), 'G'), "(Decimal.round(new Decimal(\"0.0000000000000000000000000015\"), 27, Decimal.MidpointRounding.ToEven)).toString() == \"0.000000000000000000000000002\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.000000000000000000002", Bridge.Int.format((System.Decimal.toDecimalPlaces(System.Decimal("0.0000000000000000000015"), 21, 6)), 'G'), "(Decimal.round(new Decimal(\"0.0000000000000000000015\"), 21, Decimal.MidpointRounding.ToEven)).toString() == \"0.000000000000000000002\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("4176.1574388808460777044", Bridge.Int.format(((System.Decimal("4176.15752861656")).sub(System.Decimal("0.0000897357139222956"))), 'G'), "(new Decimal(\"4176.15752861656\")).sub(\"0.0000897357139222956\").toString() == \"4176.1574388808460777044\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000000000000000893034", Bridge.Int.format(((System.Decimal("0.00000008487069606076")).div(System.Decimal("950363559159620"))), 'G'), "(new Decimal(\"0.00000008487069606076\")).div(\"950363559159620\").toString() == \"0.0000000000000000000000893034\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0446138050763932217", Bridge.Int.format(((System.Decimal("0.0000360056907106217")).add(System.Decimal("0.0445777993856826"))), 'G'), "(new Decimal(\"0.0000360056907106217\")).add(\"0.0445777993856826\").toString() == \"0.0446138050763932217\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.3811764806776453983061876207", Bridge.Int.format(((System.Decimal("264385997906.507")).div(System.Decimal("693605223062.264"))), 'G'), "(new Decimal(\"264385997906.507\")).div(\"693605223062.264\").toString() == \"0.3811764806776453983061876207\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("59.80408060158849245782", Bridge.Int.format(((System.Decimal("0.00000000734869245782")).add(System.Decimal("59.8040805942398"))), 'G'), "(new Decimal(\"0.00000000734869245782\")).add(\"59.8040805942398\").toString() == \"59.80408060158849245782\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("81663498.972849838663929672", Bridge.Int.format(((System.Decimal("81663498.9723859")).add(System.Decimal("0.000463938663929672"))), 'G'), "(new Decimal(\"81663498.9723859\")).add(\"0.000463938663929672\").toString() == \"81663498.972849838663929672\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.00775515796977892822", Bridge.Int.format(((System.Decimal("0.00775515796977801")).add(System.Decimal("0.00000000000000091822"))), 'G'), "(new Decimal(\"0.00775515796977801\")).add(\"0.00000000000000091822\").toString() == \"0.00775515796977892822\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("2.1064457175212998398851037786", Bridge.Int.format(((System.Decimal("0.00000016207366118304")).div(System.Decimal("0.00000007694176965251"))), 'G'), "(new Decimal(\"0.00000016207366118304\")).div(\"0.00000007694176965251\").toString() == \"2.1064457175212998398851037786\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000002340974167914459", Bridge.Int.format(((System.Decimal("0.00000008179731703447")).div(System.Decimal("349415.71827485"))), 'G'), "(new Decimal(\"0.00000008179731703447\")).div(\"349415.71827485\").toString() == \"0.0000000000002340974167914459\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0002294787101020031897957214", Bridge.Int.format(((System.Decimal("0.0059732997352133")).div(System.Decimal("26.029864524505"))), 'G'), "(new Decimal(\"0.0059732997352133\")).div(\"26.029864524505\").toString() == \"0.0002294787101020031897957214\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("418.23899073391138947972", Bridge.Int.format(((System.Decimal("0.00000006466138947972")).add(System.Decimal("418.23899066925"))), 'G'), "(new Decimal(\"0.00000006466138947972\")).add(\"418.23899066925\").toString() == \"418.23899073391138947972\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0131911163190212695095445568", Bridge.Int.format(((System.Decimal("0.00000034492730644761")).mul(System.Decimal("38243.1778303549"))), 'G'), "(new Decimal(\"0.00000034492730644761\")).mul(\"38243.1778303549\").toString() == \"0.0131911163190212695095445568\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("9114466.43914248870254245", Bridge.Int.format(((System.Decimal("9114466.44883345")).sub(System.Decimal("0.00969096129745755"))), 'G'), "(new Decimal(\"9114466.44883345\")).sub(\"0.00969096129745755\").toString() == \"9114466.43914248870254245\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.1084411276877017282935587367", Bridge.Int.format(((System.Decimal("86700.1936243382")).div(System.Decimal("799513.943400008"))), 'G'), "(new Decimal(\"86700.1936243382\")).div(\"799513.943400008\").toString() == \"0.1084411276877017282935587367\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("7026.76928435766970903", Bridge.Int.format(((System.Decimal("7026.76950349788")).sub(System.Decimal("0.00021914021029097"))), 'G'), "(new Decimal(\"7026.76950349788\")).sub(\"0.00021914021029097\").toString() == \"7026.76928435766970903\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.096260924858888151563666271", Bridge.Int.format(((System.Decimal("0.00000857409563314826")).div(System.Decimal("0.0000890714030196291"))), 'G'), "(new Decimal(\"0.00000857409563314826\")).div(\"0.0000890714030196291\").toString() == \"0.096260924858888151563666271\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0008115914662837657985794708", Bridge.Int.format(((System.Decimal("514.340747387307")).div(System.Decimal("633743.414950438"))), 'G'), "(new Decimal(\"514.340747387307\")).div(\"633743.414950438\").toString() == \"0.0008115914662837657985794708\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("3705.2205420798556425449221712", Bridge.Int.format(((System.Decimal("36636.1514835787")).div(System.Decimal("9.88771142432825"))), 'G'), "(new Decimal(\"36636.1514835787\")).div(\"9.88771142432825\").toString() == \"3705.2205420798556425449221712\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("6218044.0995191186755705386", Bridge.Int.format(((System.Decimal("0.0000196286755705386")).add(System.Decimal("6218044.09949949"))), 'G'), "(new Decimal(\"0.0000196286755705386\")).add(\"6218044.09949949\").toString() == \"6218044.0995191186755705386\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("5425486298351.5378945951530291", Bridge.Int.format(((System.Decimal("9271557.35402906")).mul(System.Decimal("585175.293770235"))), 'G'), "(new Decimal(\"9271557.35402906\")).mul(\"585175.293770235\").toString() == \"5425486298351.5378945951530291\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.2685349089827301535187896581", Bridge.Int.format(((System.Decimal("0.00000630784588228345")).mul(System.Decimal("42571.5710234696"))), 'G'), "(new Decimal(\"0.00000630784588228345\")).mul(\"42571.5710234696\").toString() == \"0.2685349089827301535187896581\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.008990286561656895507628185", Bridge.Int.format(((System.Decimal("79.3662822709262")).div(System.Decimal("8828.00361552648"))), 'G'), "(new Decimal(\"79.3662822709262\")).div(\"8828.00361552648\").toString() == \"0.008990286561656895507628185\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000016331518727729320183918", Bridge.Int.format(((System.Decimal("0.000195716225633266")).mul(System.Decimal("0.00834448890217789"))), 'G'), "(new Decimal(\"0.000195716225633266\")).mul(\"0.00834448890217789\").toString() == \"0.0000016331518727729320183918\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("2.7085135033764363901309324465", Bridge.Int.format(((System.Decimal("1806435.33906268")).div(System.Decimal("666947.141600282"))), 'G'), "(new Decimal(\"1806435.33906268\")).div(\"666947.141600282\").toString() == \"2.7085135033764363901309324465\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000252033112738355342", Bridge.Int.format(((System.Decimal("0.00000000625330349722")).div(System.Decimal("248.114362008923"))), 'G'), "(new Decimal(\"0.00000000625330349722\")).div(\"248.114362008923\").toString() == \"0.0000000000252033112738355342\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("201.42054334961017180748893008", Bridge.Int.format(((System.Decimal("8526.34712985081")).mul(System.Decimal("0.0236233102267717"))), 'G'), "(new Decimal(\"8526.34712985081\")).mul(\"0.0236233102267717\").toString() == \"201.42054334961017180748893008\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("10.754236522481885", Bridge.Int.format(((System.Decimal("0.859148376090055")).add(System.Decimal("9.89508814639183"))), 'G'), "(new Decimal(\"0.859148376090055\")).add(\"9.89508814639183\").toString() == \"10.754236522481885\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000264204888310194008", Bridge.Int.format(((System.Decimal("0.0000334460014633117")).mul(System.Decimal("0.00000078994461744556"))), 'G'), "(new Decimal(\"0.0000334460014633117\")).mul(\"0.00000078994461744556\").toString() == \"0.0000000000264204888310194008\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000001107996313797422688", Bridge.Int.format(((System.Decimal("0.00000007144519755218")).mul(System.Decimal("0.00155083385834044"))), 'G'), "(new Decimal(\"0.00000007144519755218\")).mul(\"0.00155083385834044\").toString() == \"0.0000000001107996313797422688\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("25826.170172550776692", Bridge.Int.format(((System.Decimal("0.911257319576692")).add(System.Decimal("25825.2589152312"))), 'G'), "(new Decimal(\"0.911257319576692\")).add(\"25825.2589152312\").toString() == \"25826.170172550776692\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.5746307910946065180997849971", Bridge.Int.format(((System.Decimal("0.00000942942031166955")).mul(System.Decimal("60940.2033318487"))), 'G'), "(new Decimal(\"0.00000942942031166955\")).mul(\"60940.2033318487\").toString() == \"0.5746307910946065180997849971\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-7131030.08640726074029256", Bridge.Int.format(((System.Decimal("0.00613527925970744")).sub(System.Decimal("7131030.09254254"))), 'G'), "(new Decimal(\"0.00613527925970744\")).sub(\"7131030.09254254\").toString() == \"-7131030.08640726074029256\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("135954446978.90433258950744003", Bridge.Int.format(((System.Decimal("19833.5587139398")).mul(System.Decimal("6854768.17044186"))), 'G'), "(new Decimal(\"19833.5587139398\")).mul(\"6854768.17044186\").toString() == \"135954446978.90433258950744003\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format(((System.Decimal("0.3")).sub((System.Decimal("0.1")).mul(System.Decimal(3)))), "G"), "(new Decimal(\"0.3\")).sub((new Decimal(\"0.1\")).mul(3)).toString() == \"0\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("10000000000000000000000000000", Bridge.Int.format(((System.Decimal("9999999999999999999999999999")).add(System.Decimal("1"))), "G"), "(new Decimal(\"9999999999999999999999999999\")).add(\"1\").toString() == \"10000000000000000000000000000\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-10000000000000000000000000000", Bridge.Int.format((((System.Decimal("-9999999999999999999999999999")).sub(System.Decimal("1")))), "G"), "(new Decimal(\"-9999999999999999999999999999\")).sub(\"1\").toString() == \"-10000000000000000000000000000\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("2", Bridge.Int.format((System.Decimal.toDecimalPlaces(System.Decimal("1.5"), 0, 6)), "G"), "(Decimal.round(new Decimal(\"1.5\"), 0, Decimal.MidpointRounding.ToEven)).toString() == \"2\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("2", Bridge.Int.format((System.Decimal.toDecimalPlaces(System.Decimal("2.5"), 0, 6)), "G"), "(Decimal.round(new Decimal(\"2.5\"), 0, Decimal.MidpointRounding.ToEven)).toString() == \"2\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("3", Bridge.Int.format((System.Decimal.toDecimalPlaces(System.Decimal("2.5"), 0, 4)), "G"), "(Decimal.round(new Decimal(\"2.5\"), 0, Decimal.MidpointRounding.AwayFromZero)).toString() == \"3\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-3", Bridge.Int.format((System.Decimal.toDecimalPlaces(System.Decimal("-2.5"), 0, 4)), "G"), "(Decimal.round(new Decimal(\"2.5\"), 0, Decimal.MidpointRounding.AwayFromZero)).toString() == \"-3\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-2", Bridge.Int.format((System.Decimal.toDecimalPlaces(System.Decimal("-2.5"), 0, 6)), "G"), "(Decimal.round(new Decimal(\"2.5\"), 0, Decimal.MidpointRounding.ToEven)).toString() == \"-2\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("4", Bridge.Int.format((System.Decimal.toDecimalPlaces(System.Decimal("3.5"), 0, 6)), "G"), "(Decimal.round(new Decimal(\"3.5\"), 0, Decimal.MidpointRounding.ToEven)).toString() == \"4\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-4", Bridge.Int.format((System.Decimal.toDecimalPlaces(System.Decimal("-3.5"), 0, 6)), "G"), "(Decimal.round(new Decimal(\"-3.5\"), 0, Decimal.MidpointRounding.ToEven)).toString() == \"-4\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.000000000000000000000000002", Bridge.Int.format((System.Decimal.toDecimalPlaces(System.Decimal("0.0000000000000000000000000015"), 27, 6)), "G"), "(Decimal.round(new Decimal(\"0.0000000000000000000000000015\"), 27, Decimal.MidpointRounding.ToEven)).toString() == \"0.000000000000000000000000002\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.000000000000000000002", Bridge.Int.format((System.Decimal.toDecimalPlaces(System.Decimal("0.0000000000000000000015"), 21, 6)), "G"), "(Decimal.round(new Decimal(\"0.0000000000000000000015\"), 21, Decimal.MidpointRounding.ToEven)).toString() == \"0.000000000000000000002\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("4176.1574388808460777044", Bridge.Int.format(((System.Decimal("4176.15752861656")).sub(System.Decimal("0.0000897357139222956"))), "G"), "(new Decimal(\"4176.15752861656\")).sub(\"0.0000897357139222956\").toString() == \"4176.1574388808460777044\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000000000000000893034", Bridge.Int.format(((System.Decimal("0.00000008487069606076")).div(System.Decimal("950363559159620"))), "G"), "(new Decimal(\"0.00000008487069606076\")).div(\"950363559159620\").toString() == \"0.0000000000000000000000893034\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0446138050763932217", Bridge.Int.format(((System.Decimal("0.0000360056907106217")).add(System.Decimal("0.0445777993856826"))), "G"), "(new Decimal(\"0.0000360056907106217\")).add(\"0.0445777993856826\").toString() == \"0.0446138050763932217\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.3811764806776453983061876207", Bridge.Int.format(((System.Decimal("264385997906.507")).div(System.Decimal("693605223062.264"))), "G"), "(new Decimal(\"264385997906.507\")).div(\"693605223062.264\").toString() == \"0.3811764806776453983061876207\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("59.80408060158849245782", Bridge.Int.format(((System.Decimal("0.00000000734869245782")).add(System.Decimal("59.8040805942398"))), "G"), "(new Decimal(\"0.00000000734869245782\")).add(\"59.8040805942398\").toString() == \"59.80408060158849245782\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("81663498.972849838663929672", Bridge.Int.format(((System.Decimal("81663498.9723859")).add(System.Decimal("0.000463938663929672"))), "G"), "(new Decimal(\"81663498.9723859\")).add(\"0.000463938663929672\").toString() == \"81663498.972849838663929672\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.00775515796977892822", Bridge.Int.format(((System.Decimal("0.00775515796977801")).add(System.Decimal("0.00000000000000091822"))), "G"), "(new Decimal(\"0.00775515796977801\")).add(\"0.00000000000000091822\").toString() == \"0.00775515796977892822\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("2.1064457175212998398851037786", Bridge.Int.format(((System.Decimal("0.00000016207366118304")).div(System.Decimal("0.00000007694176965251"))), "G"), "(new Decimal(\"0.00000016207366118304\")).div(\"0.00000007694176965251\").toString() == \"2.1064457175212998398851037786\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000002340974167914459", Bridge.Int.format(((System.Decimal("0.00000008179731703447")).div(System.Decimal("349415.71827485"))), "G"), "(new Decimal(\"0.00000008179731703447\")).div(\"349415.71827485\").toString() == \"0.0000000000002340974167914459\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0002294787101020031897957214", Bridge.Int.format(((System.Decimal("0.0059732997352133")).div(System.Decimal("26.029864524505"))), "G"), "(new Decimal(\"0.0059732997352133\")).div(\"26.029864524505\").toString() == \"0.0002294787101020031897957214\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("418.23899073391138947972", Bridge.Int.format(((System.Decimal("0.00000006466138947972")).add(System.Decimal("418.23899066925"))), "G"), "(new Decimal(\"0.00000006466138947972\")).add(\"418.23899066925\").toString() == \"418.23899073391138947972\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0131911163190212695095445568", Bridge.Int.format(((System.Decimal("0.00000034492730644761")).mul(System.Decimal("38243.1778303549"))), "G"), "(new Decimal(\"0.00000034492730644761\")).mul(\"38243.1778303549\").toString() == \"0.0131911163190212695095445568\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("9114466.43914248870254245", Bridge.Int.format(((System.Decimal("9114466.44883345")).sub(System.Decimal("0.00969096129745755"))), "G"), "(new Decimal(\"9114466.44883345\")).sub(\"0.00969096129745755\").toString() == \"9114466.43914248870254245\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.1084411276877017282935587367", Bridge.Int.format(((System.Decimal("86700.1936243382")).div(System.Decimal("799513.943400008"))), "G"), "(new Decimal(\"86700.1936243382\")).div(\"799513.943400008\").toString() == \"0.1084411276877017282935587367\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("7026.76928435766970903", Bridge.Int.format(((System.Decimal("7026.76950349788")).sub(System.Decimal("0.00021914021029097"))), "G"), "(new Decimal(\"7026.76950349788\")).sub(\"0.00021914021029097\").toString() == \"7026.76928435766970903\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.096260924858888151563666271", Bridge.Int.format(((System.Decimal("0.00000857409563314826")).div(System.Decimal("0.0000890714030196291"))), "G"), "(new Decimal(\"0.00000857409563314826\")).div(\"0.0000890714030196291\").toString() == \"0.096260924858888151563666271\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0008115914662837657985794708", Bridge.Int.format(((System.Decimal("514.340747387307")).div(System.Decimal("633743.414950438"))), "G"), "(new Decimal(\"514.340747387307\")).div(\"633743.414950438\").toString() == \"0.0008115914662837657985794708\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("3705.2205420798556425449221712", Bridge.Int.format(((System.Decimal("36636.1514835787")).div(System.Decimal("9.88771142432825"))), "G"), "(new Decimal(\"36636.1514835787\")).div(\"9.88771142432825\").toString() == \"3705.2205420798556425449221712\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("6218044.0995191186755705386", Bridge.Int.format(((System.Decimal("0.0000196286755705386")).add(System.Decimal("6218044.09949949"))), "G"), "(new Decimal(\"0.0000196286755705386\")).add(\"6218044.09949949\").toString() == \"6218044.0995191186755705386\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("5425486298351.5378945951530291", Bridge.Int.format(((System.Decimal("9271557.35402906")).mul(System.Decimal("585175.293770235"))), "G"), "(new Decimal(\"9271557.35402906\")).mul(\"585175.293770235\").toString() == \"5425486298351.5378945951530291\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.2685349089827301535187896581", Bridge.Int.format(((System.Decimal("0.00000630784588228345")).mul(System.Decimal("42571.5710234696"))), "G"), "(new Decimal(\"0.00000630784588228345\")).mul(\"42571.5710234696\").toString() == \"0.2685349089827301535187896581\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.008990286561656895507628185", Bridge.Int.format(((System.Decimal("79.3662822709262")).div(System.Decimal("8828.00361552648"))), "G"), "(new Decimal(\"79.3662822709262\")).div(\"8828.00361552648\").toString() == \"0.008990286561656895507628185\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000016331518727729320183918", Bridge.Int.format(((System.Decimal("0.000195716225633266")).mul(System.Decimal("0.00834448890217789"))), "G"), "(new Decimal(\"0.000195716225633266\")).mul(\"0.00834448890217789\").toString() == \"0.0000016331518727729320183918\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("2.7085135033764363901309324465", Bridge.Int.format(((System.Decimal("1806435.33906268")).div(System.Decimal("666947.141600282"))), "G"), "(new Decimal(\"1806435.33906268\")).div(\"666947.141600282\").toString() == \"2.7085135033764363901309324465\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000252033112738355342", Bridge.Int.format(((System.Decimal("0.00000000625330349722")).div(System.Decimal("248.114362008923"))), "G"), "(new Decimal(\"0.00000000625330349722\")).div(\"248.114362008923\").toString() == \"0.0000000000252033112738355342\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("201.42054334961017180748893008", Bridge.Int.format(((System.Decimal("8526.34712985081")).mul(System.Decimal("0.0236233102267717"))), "G"), "(new Decimal(\"8526.34712985081\")).mul(\"0.0236233102267717\").toString() == \"201.42054334961017180748893008\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("10.754236522481885", Bridge.Int.format(((System.Decimal("0.859148376090055")).add(System.Decimal("9.89508814639183"))), "G"), "(new Decimal(\"0.859148376090055\")).add(\"9.89508814639183\").toString() == \"10.754236522481885\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000264204888310194008", Bridge.Int.format(((System.Decimal("0.0000334460014633117")).mul(System.Decimal("0.00000078994461744556"))), "G"), "(new Decimal(\"0.0000334460014633117\")).mul(\"0.00000078994461744556\").toString() == \"0.0000000000264204888310194008\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000001107996313797422688", Bridge.Int.format(((System.Decimal("0.00000007144519755218")).mul(System.Decimal("0.00155083385834044"))), "G"), "(new Decimal(\"0.00000007144519755218\")).mul(\"0.00155083385834044\").toString() == \"0.0000000001107996313797422688\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("25826.170172550776692", Bridge.Int.format(((System.Decimal("0.911257319576692")).add(System.Decimal("25825.2589152312"))), "G"), "(new Decimal(\"0.911257319576692\")).add(\"25825.2589152312\").toString() == \"25826.170172550776692\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.5746307910946065180997849971", Bridge.Int.format(((System.Decimal("0.00000942942031166955")).mul(System.Decimal("60940.2033318487"))), "G"), "(new Decimal(\"0.00000942942031166955\")).mul(\"60940.2033318487\").toString() == \"0.5746307910946065180997849971\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-7131030.08640726074029256", Bridge.Int.format(((System.Decimal("0.00613527925970744")).sub(System.Decimal("7131030.09254254"))), "G"), "(new Decimal(\"0.00613527925970744\")).sub(\"7131030.09254254\").toString() == \"-7131030.08640726074029256\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("135954446978.90433258950744003", Bridge.Int.format(((System.Decimal("19833.5587139398")).mul(System.Decimal("6854768.17044186"))), "G"), "(new Decimal(\"19833.5587139398\")).mul(\"6854768.17044186\").toString() == \"135954446978.90433258950744003\" FAILED");
                 // #1650
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000000184016013412280", Bridge.Int.format(((System.Decimal("0.00000070385779892274")).mul(System.Decimal("0.00000002614391908336"))), 'G'), "(new Decimal(\"0.00000070385779892274\")).mul(\"0.00000002614391908336\").toString() == \"0.0000000000000184016013412280\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000000184016013412280", Bridge.Int.format(((System.Decimal("0.00000070385779892274")).mul(System.Decimal("0.00000002614391908336"))), "G"), "(new Decimal(\"0.00000070385779892274\")).mul(\"0.00000002614391908336\").toString() == \"0.0000000000000184016013412280\" FAILED");
 
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0967324902802857563", Bridge.Int.format(((System.Decimal("0.0966366946681574")).add(System.Decimal("0.0000957956121283563"))), 'G'), "(new Decimal(\"0.0966366946681574\")).add(\"0.0000957956121283563\").toString() == \"0.0967324902802857563\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("3.4858202900689973161525454314", Bridge.Int.format(((System.Decimal("0.0000390598294507059")).mul(System.Decimal("89243.1006251104"))), 'G'), "(new Decimal(\"0.0000390598294507059\")).mul(\"89243.1006251104\").toString() == \"3.4858202900689973161525454314\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.2996117010710819", Bridge.Int.format(((System.Decimal("0.343008653886155")).sub(System.Decimal("0.0433969528150731"))), 'G'), "(new Decimal(\"0.343008653886155\")).sub(\"0.0433969528150731\").toString() == \"0.2996117010710819\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("1019564526579.2600710122794931", Bridge.Int.format(((System.Decimal("675939.590519266")).mul(System.Decimal("1508366.34054238"))), 'G'), "(new Decimal(\"675939.590519266\")).mul(\"1508366.34054238\").toString() == \"1019564526579.2600710122794931\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("11701304382166.336357593545003", Bridge.Int.format(((System.Decimal("9346774.15031324")).div(System.Decimal("0.00000079878053292575"))), 'G'), "(new Decimal(\"9346774.15031324\")).div(\"0.00000079878053292575\").toString() == \"11701304382166.336357593545003\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("18.8587275649694", Bridge.Int.format(((System.Decimal("0.8043270324377")).add(System.Decimal("18.0544005325317"))), 'G'), "(new Decimal(\"0.8043270324377\")).add(\"18.0544005325317\").toString() == \"18.8587275649694\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.3614881075703330391274611142", Bridge.Int.format(((System.Decimal("8283.88977715927")).div(System.Decimal("22916.0782987792"))), 'G'), "(new Decimal(\"8283.88977715927\")).div(\"22916.0782987792\").toString() == \"0.3614881075703330391274611142\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0179138243756634479624427415", Bridge.Int.format(((System.Decimal("0.0000051464565215383")).mul(System.Decimal("3480.80748388581"))), 'G'), "(new Decimal(\"0.0000051464565215383\")).mul(\"3480.80748388581\").toString() == \"0.0179138243756634479624427415\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("3141.0458269720196", Bridge.Int.format(((System.Decimal("3232.22058975707")).sub(System.Decimal("91.1747627850504"))), 'G'), "(new Decimal(\"3232.22058975707\")).sub(\"91.1747627850504\").toString() == \"3141.0458269720196\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.049293336888446162", Bridge.Int.format(((System.Decimal("0.0490677212593461")).add(System.Decimal("0.000225615629100062"))), 'G'), "(new Decimal(\"0.0490677212593461\")).add(\"0.000225615629100062\").toString() == \"0.049293336888446162\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000002423683290519788850175", Bridge.Int.format(((System.Decimal("0.802657312156007")).mul(System.Decimal("0.00000030195741742009"))), 'G'), "(new Decimal(\"0.802657312156007\")).mul(\"0.00000030195741742009\").toString() == \"0.0000002423683290519788850175\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.2919303207154997", Bridge.Int.format(((System.Decimal("0.205025212003396")).add(System.Decimal("0.0869051087121037"))), 'G'), "(new Decimal(\"0.205025212003396\")).add(\"0.0869051087121037\").toString() == \"0.2919303207154997\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-2406054.4941042150782588707", Bridge.Int.format(((System.Decimal("0.0000560349217411293")).sub(System.Decimal("2406054.49416025"))), 'G'), "(new Decimal(\"0.0000560349217411293\")).sub(\"2406054.49416025\").toString() == \"-2406054.4941042150782588707\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-5980723.48834614900984", Bridge.Int.format(((System.Decimal("5.51880703099016")).sub(System.Decimal("5980729.00715318"))), 'G'), "(new Decimal(\"5.51880703099016\")).sub(\"5980729.00715318\").toString() == \"-5980723.48834614900984\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("35.122946130589056903", Bridge.Int.format(((System.Decimal("0.000517838589156903")).add(System.Decimal("35.1224282919999"))), 'G'), "(new Decimal(\"0.000517838589156903\")).add(\"35.1224282919999\").toString() == \"35.122946130589056903\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("1.0616395296301390956592254412", Bridge.Int.format(((System.Decimal("1.59909562747883")).div(System.Decimal("1.50625102292106"))), 'G'), "(new Decimal(\"1.59909562747883\")).div(\"1.50625102292106\").toString() == \"1.0616395296301390956592254412\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.000000042829703949835811464", Bridge.Int.format(((System.Decimal("0.0037773409643105")).div(System.Decimal("88194.4215335857"))), 'G'), "(new Decimal(\"0.0037773409643105\")).div(\"88194.4215335857\").toString() == \"0.000000042829703949835811464\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.4558196858208716574150445539", Bridge.Int.format(((System.Decimal("0.0000338279696804602")).mul(System.Decimal("13474.6391854597"))), 'G'), "(new Decimal(\"0.0000338279696804602\")).mul(\"13474.6391854597\").toString() == \"0.4558196858208716574150445539\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("10427310854.650511570542647536", Bridge.Int.format(((System.Decimal("929163.589109277")).div(System.Decimal("0.0000891086495896376"))), 'G'), "(new Decimal(\"929163.589109277\")).div(\"0.0000891086495896376\").toString() == \"10427310854.650511570542647536\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.00007532895142320958", Bridge.Int.format(((System.Decimal("0.0000743901701990469")).add(System.Decimal("0.00000093878122416268"))), 'G'), "(new Decimal(\"0.0000743901701990469\")).add(\"0.00000093878122416268\").toString() == \"0.00007532895142320958\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0264909276176229880949718672", Bridge.Int.format(((System.Decimal("0.00000944754593514258")).mul(System.Decimal("2804.00093309768"))), 'G'), "(new Decimal(\"0.00000944754593514258\")).mul(\"2804.00093309768\").toString() == \"0.0264909276176229880949718672\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("6656977.0298766358644049502", Bridge.Int.format(((System.Decimal("0.0000534158644049502")).add(System.Decimal("6656977.02982322"))), 'G'), "(new Decimal(\"0.0000534158644049502\")).add(\"6656977.02982322\").toString() == \"6656977.0298766358644049502\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("45.06192539196946555197", Bridge.Int.format(((System.Decimal("45.0619251211462")).add(System.Decimal("0.00000027082326555197"))), 'G'), "(new Decimal(\"45.0619251211462\")).add(\"0.00000027082326555197\").toString() == \"45.06192539196946555197\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.7532491528292065411818236803", Bridge.Int.format(((System.Decimal("0.0192431670703195")).mul(System.Decimal("39.1437204736954"))), 'G'), "(new Decimal(\"0.0192431670703195\")).mul(\"39.1437204736954\").toString() == \"0.7532491528292065411818236803\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("32841.42265702106787944802", Bridge.Int.format(((System.Decimal("32841.4226569428")).add(System.Decimal("0.00000007826787944802"))), 'G'), "(new Decimal(\"32841.4226569428\")).add(\"0.00000007826787944802\").toString() == \"32841.42265702106787944802\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-0.533546652893328", Bridge.Int.format(((System.Decimal("0.586064839077212")).sub(System.Decimal("1.11961149197054"))), 'G'), "(new Decimal(\"0.586064839077212\")).sub(\"1.11961149197054\").toString() == \"-0.533546652893328\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0152641533045431917355310935", Bridge.Int.format(((System.Decimal("0.0829612452457479")).div(System.Decimal("5.43503747574754"))), 'G'), "(new Decimal(\"0.0829612452457479\")).div(\"5.43503747574754\").toString() == \"0.0152641533045431917355310935\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("2.07943625828976430743030201", Bridge.Int.format(((System.Decimal("20551.2384514097")).mul(System.Decimal("0.0001011830145033"))), 'G'), "(new Decimal(\"20551.2384514097\")).mul(\"0.0001011830145033\").toString() == \"2.07943625828976430743030201\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.00200242491956568541", Bridge.Int.format(((System.Decimal("0.00000000928487284541")).add(System.Decimal("0.00200241563469284"))), 'G'), "(new Decimal(\"0.00000000928487284541\")).add(\"0.00200241563469284\").toString() == \"0.00200242491956568541\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("27474.82141819801736601648", Bridge.Int.format(((System.Decimal("27474.8214182792")).sub(System.Decimal("0.00000008118263398352"))), 'G'), "(new Decimal(\"27474.8214182792\")).sub(\"0.00000008118263398352\").toString() == \"27474.82141819801736601648\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("19505128.063929281919635586038", Bridge.Int.format(((System.Decimal("6414.16630540703")).mul(System.Decimal("3040.9451727946"))), 'G'), "(new Decimal(\"6414.16630540703\")).mul(\"3040.9451727946\").toString() == \"19505128.063929281919635586038\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0967324902802857563", Bridge.Int.format(((System.Decimal("0.0966366946681574")).add(System.Decimal("0.0000957956121283563"))), "G"), "(new Decimal(\"0.0966366946681574\")).add(\"0.0000957956121283563\").toString() == \"0.0967324902802857563\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("3.4858202900689973161525454314", Bridge.Int.format(((System.Decimal("0.0000390598294507059")).mul(System.Decimal("89243.1006251104"))), "G"), "(new Decimal(\"0.0000390598294507059\")).mul(\"89243.1006251104\").toString() == \"3.4858202900689973161525454314\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.2996117010710819", Bridge.Int.format(((System.Decimal("0.343008653886155")).sub(System.Decimal("0.0433969528150731"))), "G"), "(new Decimal(\"0.343008653886155\")).sub(\"0.0433969528150731\").toString() == \"0.2996117010710819\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("1019564526579.2600710122794931", Bridge.Int.format(((System.Decimal("675939.590519266")).mul(System.Decimal("1508366.34054238"))), "G"), "(new Decimal(\"675939.590519266\")).mul(\"1508366.34054238\").toString() == \"1019564526579.2600710122794931\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("11701304382166.336357593545003", Bridge.Int.format(((System.Decimal("9346774.15031324")).div(System.Decimal("0.00000079878053292575"))), "G"), "(new Decimal(\"9346774.15031324\")).div(\"0.00000079878053292575\").toString() == \"11701304382166.336357593545003\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("18.8587275649694", Bridge.Int.format(((System.Decimal("0.8043270324377")).add(System.Decimal("18.0544005325317"))), "G"), "(new Decimal(\"0.8043270324377\")).add(\"18.0544005325317\").toString() == \"18.8587275649694\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.3614881075703330391274611142", Bridge.Int.format(((System.Decimal("8283.88977715927")).div(System.Decimal("22916.0782987792"))), "G"), "(new Decimal(\"8283.88977715927\")).div(\"22916.0782987792\").toString() == \"0.3614881075703330391274611142\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0179138243756634479624427415", Bridge.Int.format(((System.Decimal("0.0000051464565215383")).mul(System.Decimal("3480.80748388581"))), "G"), "(new Decimal(\"0.0000051464565215383\")).mul(\"3480.80748388581\").toString() == \"0.0179138243756634479624427415\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("3141.0458269720196", Bridge.Int.format(((System.Decimal("3232.22058975707")).sub(System.Decimal("91.1747627850504"))), "G"), "(new Decimal(\"3232.22058975707\")).sub(\"91.1747627850504\").toString() == \"3141.0458269720196\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.049293336888446162", Bridge.Int.format(((System.Decimal("0.0490677212593461")).add(System.Decimal("0.000225615629100062"))), "G"), "(new Decimal(\"0.0490677212593461\")).add(\"0.000225615629100062\").toString() == \"0.049293336888446162\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000002423683290519788850175", Bridge.Int.format(((System.Decimal("0.802657312156007")).mul(System.Decimal("0.00000030195741742009"))), "G"), "(new Decimal(\"0.802657312156007\")).mul(\"0.00000030195741742009\").toString() == \"0.0000002423683290519788850175\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.2919303207154997", Bridge.Int.format(((System.Decimal("0.205025212003396")).add(System.Decimal("0.0869051087121037"))), "G"), "(new Decimal(\"0.205025212003396\")).add(\"0.0869051087121037\").toString() == \"0.2919303207154997\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-2406054.4941042150782588707", Bridge.Int.format(((System.Decimal("0.0000560349217411293")).sub(System.Decimal("2406054.49416025"))), "G"), "(new Decimal(\"0.0000560349217411293\")).sub(\"2406054.49416025\").toString() == \"-2406054.4941042150782588707\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-5980723.48834614900984", Bridge.Int.format(((System.Decimal("5.51880703099016")).sub(System.Decimal("5980729.00715318"))), "G"), "(new Decimal(\"5.51880703099016\")).sub(\"5980729.00715318\").toString() == \"-5980723.48834614900984\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("35.122946130589056903", Bridge.Int.format(((System.Decimal("0.000517838589156903")).add(System.Decimal("35.1224282919999"))), "G"), "(new Decimal(\"0.000517838589156903\")).add(\"35.1224282919999\").toString() == \"35.122946130589056903\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("1.0616395296301390956592254412", Bridge.Int.format(((System.Decimal("1.59909562747883")).div(System.Decimal("1.50625102292106"))), "G"), "(new Decimal(\"1.59909562747883\")).div(\"1.50625102292106\").toString() == \"1.0616395296301390956592254412\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.000000042829703949835811464", Bridge.Int.format(((System.Decimal("0.0037773409643105")).div(System.Decimal("88194.4215335857"))), "G"), "(new Decimal(\"0.0037773409643105\")).div(\"88194.4215335857\").toString() == \"0.000000042829703949835811464\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.4558196858208716574150445539", Bridge.Int.format(((System.Decimal("0.0000338279696804602")).mul(System.Decimal("13474.6391854597"))), "G"), "(new Decimal(\"0.0000338279696804602\")).mul(\"13474.6391854597\").toString() == \"0.4558196858208716574150445539\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("10427310854.650511570542647536", Bridge.Int.format(((System.Decimal("929163.589109277")).div(System.Decimal("0.0000891086495896376"))), "G"), "(new Decimal(\"929163.589109277\")).div(\"0.0000891086495896376\").toString() == \"10427310854.650511570542647536\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.00007532895142320958", Bridge.Int.format(((System.Decimal("0.0000743901701990469")).add(System.Decimal("0.00000093878122416268"))), "G"), "(new Decimal(\"0.0000743901701990469\")).add(\"0.00000093878122416268\").toString() == \"0.00007532895142320958\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0264909276176229880949718672", Bridge.Int.format(((System.Decimal("0.00000944754593514258")).mul(System.Decimal("2804.00093309768"))), "G"), "(new Decimal(\"0.00000944754593514258\")).mul(\"2804.00093309768\").toString() == \"0.0264909276176229880949718672\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("6656977.0298766358644049502", Bridge.Int.format(((System.Decimal("0.0000534158644049502")).add(System.Decimal("6656977.02982322"))), "G"), "(new Decimal(\"0.0000534158644049502\")).add(\"6656977.02982322\").toString() == \"6656977.0298766358644049502\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("45.06192539196946555197", Bridge.Int.format(((System.Decimal("45.0619251211462")).add(System.Decimal("0.00000027082326555197"))), "G"), "(new Decimal(\"45.0619251211462\")).add(\"0.00000027082326555197\").toString() == \"45.06192539196946555197\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.7532491528292065411818236803", Bridge.Int.format(((System.Decimal("0.0192431670703195")).mul(System.Decimal("39.1437204736954"))), "G"), "(new Decimal(\"0.0192431670703195\")).mul(\"39.1437204736954\").toString() == \"0.7532491528292065411818236803\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("32841.42265702106787944802", Bridge.Int.format(((System.Decimal("32841.4226569428")).add(System.Decimal("0.00000007826787944802"))), "G"), "(new Decimal(\"32841.4226569428\")).add(\"0.00000007826787944802\").toString() == \"32841.42265702106787944802\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-0.533546652893328", Bridge.Int.format(((System.Decimal("0.586064839077212")).sub(System.Decimal("1.11961149197054"))), "G"), "(new Decimal(\"0.586064839077212\")).sub(\"1.11961149197054\").toString() == \"-0.533546652893328\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0152641533045431917355310935", Bridge.Int.format(((System.Decimal("0.0829612452457479")).div(System.Decimal("5.43503747574754"))), "G"), "(new Decimal(\"0.0829612452457479\")).div(\"5.43503747574754\").toString() == \"0.0152641533045431917355310935\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("2.07943625828976430743030201", Bridge.Int.format(((System.Decimal("20551.2384514097")).mul(System.Decimal("0.0001011830145033"))), "G"), "(new Decimal(\"20551.2384514097\")).mul(\"0.0001011830145033\").toString() == \"2.07943625828976430743030201\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.00200242491956568541", Bridge.Int.format(((System.Decimal("0.00000000928487284541")).add(System.Decimal("0.00200241563469284"))), "G"), "(new Decimal(\"0.00000000928487284541\")).add(\"0.00200241563469284\").toString() == \"0.00200242491956568541\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("27474.82141819801736601648", Bridge.Int.format(((System.Decimal("27474.8214182792")).sub(System.Decimal("0.00000008118263398352"))), "G"), "(new Decimal(\"27474.8214182792\")).sub(\"0.00000008118263398352\").toString() == \"27474.82141819801736601648\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("19505128.063929281919635586038", Bridge.Int.format(((System.Decimal("6414.16630540703")).mul(System.Decimal("3040.9451727946"))), "G"), "(new Decimal(\"6414.16630540703\")).mul(\"3040.9451727946\").toString() == \"19505128.063929281919635586038\" FAILED");
                 // #1650
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000000211764764198660", Bridge.Int.format(((System.Decimal("0.00000000801082840562")).mul(System.Decimal("0.00000264348146628751"))), 'G'), "(new Decimal(\"0.00000000801082840562\")).mul(\"0.00000264348146628751\").toString() == \"0.0000000000000211764764198660\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000000211764764198660", Bridge.Int.format(((System.Decimal("0.00000000801082840562")).mul(System.Decimal("0.00000264348146628751"))), "G"), "(new Decimal(\"0.00000000801082840562\")).mul(\"0.00000264348146628751\").toString() == \"0.0000000000000211764764198660\" FAILED");
 
-                Bridge.Test.NUnit.Assert.AreEqual$1("29310.7074822921281587436", Bridge.Int.format(((System.Decimal("29310.7074821883")).add(System.Decimal("0.0000001038281587436"))), 'G'), "(new Decimal(\"29310.7074821883\")).add(\"0.0000001038281587436\").toString() == \"29310.7074822921281587436\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("617351.64866589589161", Bridge.Int.format(((System.Decimal("1.61116872989161")).add(System.Decimal("617350.037497166"))), 'G'), "(new Decimal(\"1.61116872989161\")).add(\"617350.037497166\").toString() == \"617351.64866589589161\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("337233.524335051926147", Bridge.Int.format(((System.Decimal("337234.288611093")).sub(System.Decimal("0.764276041073853"))), 'G'), "(new Decimal(\"337234.288611093\")).sub(\"0.764276041073853\").toString() == \"337233.524335051926147\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("7.6904022918582991385960050287", Bridge.Int.format(((System.Decimal("32138.4941377391")).div(System.Decimal("4179.03939456634"))), 'G'), "(new Decimal(\"32138.4941377391\")).div(\"4179.03939456634\").toString() == \"7.6904022918582991385960050287\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0047544230501718142812280295", Bridge.Int.format(((System.Decimal("0.00000007299932379881")).mul(System.Decimal("65129.6861773029"))), 'G'), "(new Decimal(\"0.00000007299932379881\")).mul(\"65129.6861773029\").toString() == \"0.0047544230501718142812280295\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("177.17069194538229090005225569", Bridge.Int.format(((System.Decimal("61.8418688242519")).mul(System.Decimal("2.86489873792273"))), 'G'), "(new Decimal(\"61.8418688242519\")).mul(\"2.86489873792273\").toString() == \"177.17069194538229090005225569\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-0.00090633373724312275", Bridge.Int.format(((System.Decimal("0.00000015291550483225")).sub(System.Decimal("0.000906486652747955"))), 'G'), "(new Decimal(\"0.00000015291550483225\")).sub(\"0.000906486652747955\").toString() == \"-0.00090633373724312275\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("210814147.39980929140353613261", Bridge.Int.format(((System.Decimal("201009.576768153")).div(System.Decimal("0.0009534918754145"))), 'G'), "(new Decimal(\"201009.576768153\")).div(\"0.0009534918754145\").toString() == \"210814147.39980929140353613261\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("65.305649646129420352210897086", Bridge.Int.format(((System.Decimal("61261.8303211694")).div(System.Decimal("938.078568288162"))), 'G'), "(new Decimal(\"61261.8303211694\")).div(\"938.078568288162\").toString() == \"65.305649646129420352210897086\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000567043665774743633592246", Bridge.Int.format(((System.Decimal("0.000743901346690907")).mul(System.Decimal("0.0762256538850375"))), 'G'), "(new Decimal(\"0.000743901346690907\")).mul(\"0.0762256538850375\").toString() == \"0.0000567043665774743633592246\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-0.05230421037247136292", Bridge.Int.format(((System.Decimal("0.00000023104058123708")).sub(System.Decimal("0.0523044414130526"))), 'G'), "(new Decimal(\"0.00000023104058123708\")).sub(\"0.0523044414130526\").toString() == \"-0.05230421037247136292\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.00017292070654543156", Bridge.Int.format(((System.Decimal("0.000172902369020927")).add(System.Decimal("0.00000001833752450456"))), 'G'), "(new Decimal(\"0.000172902369020927\")).add(\"0.00000001833752450456\").toString() == \"0.00017292070654543156\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("143190227.86340201590179660913", Bridge.Int.format(((System.Decimal("3255426.24725747")).mul(System.Decimal("43.9850934985956"))), 'G'), "(new Decimal(\"3255426.24725747\")).mul(\"43.9850934985956\").toString() == \"143190227.86340201590179660913\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.1676963823218234630227555937", Bridge.Int.format(((System.Decimal("21.2078276654742")).mul(System.Decimal("0.00790728710960005"))), 'G'), "(new Decimal(\"21.2078276654742\")).mul(\"0.00790728710960005\").toString() == \"0.1676963823218234630227555937\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("60489172470134.035656681147318", Bridge.Int.format(((System.Decimal("4188316.9832585")).div(System.Decimal("0.00000006924077173194"))), 'G'), "(new Decimal(\"4188316.9832585\")).div(\"0.00000006924077173194\").toString() == \"60489172470134.035656681147318\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000318298804579463009", Bridge.Int.format(((System.Decimal("0.00000895273411132057")).mul(System.Decimal("0.00000355532511768645"))), 'G'), "(new Decimal(\"0.00000895273411132057\")).mul(\"0.00000355532511768645\").toString() == \"0.0000000000318298804579463009\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000089928800565775915465556", Bridge.Int.format(((System.Decimal("0.00000007554147973449")).div(System.Decimal("0.00840014314204461"))), 'G'), "(new Decimal(\"0.00000007554147973449\")).div(\"0.00840014314204461\").toString() == \"0.0000089928800565775915465556\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("29310.7074822921281587436", Bridge.Int.format(((System.Decimal("29310.7074821883")).add(System.Decimal("0.0000001038281587436"))), "G"), "(new Decimal(\"29310.7074821883\")).add(\"0.0000001038281587436\").toString() == \"29310.7074822921281587436\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("617351.64866589589161", Bridge.Int.format(((System.Decimal("1.61116872989161")).add(System.Decimal("617350.037497166"))), "G"), "(new Decimal(\"1.61116872989161\")).add(\"617350.037497166\").toString() == \"617351.64866589589161\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("337233.524335051926147", Bridge.Int.format(((System.Decimal("337234.288611093")).sub(System.Decimal("0.764276041073853"))), "G"), "(new Decimal(\"337234.288611093\")).sub(\"0.764276041073853\").toString() == \"337233.524335051926147\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("7.6904022918582991385960050287", Bridge.Int.format(((System.Decimal("32138.4941377391")).div(System.Decimal("4179.03939456634"))), "G"), "(new Decimal(\"32138.4941377391\")).div(\"4179.03939456634\").toString() == \"7.6904022918582991385960050287\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0047544230501718142812280295", Bridge.Int.format(((System.Decimal("0.00000007299932379881")).mul(System.Decimal("65129.6861773029"))), "G"), "(new Decimal(\"0.00000007299932379881\")).mul(\"65129.6861773029\").toString() == \"0.0047544230501718142812280295\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("177.17069194538229090005225569", Bridge.Int.format(((System.Decimal("61.8418688242519")).mul(System.Decimal("2.86489873792273"))), "G"), "(new Decimal(\"61.8418688242519\")).mul(\"2.86489873792273\").toString() == \"177.17069194538229090005225569\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-0.00090633373724312275", Bridge.Int.format(((System.Decimal("0.00000015291550483225")).sub(System.Decimal("0.000906486652747955"))), "G"), "(new Decimal(\"0.00000015291550483225\")).sub(\"0.000906486652747955\").toString() == \"-0.00090633373724312275\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("210814147.39980929140353613261", Bridge.Int.format(((System.Decimal("201009.576768153")).div(System.Decimal("0.0009534918754145"))), "G"), "(new Decimal(\"201009.576768153\")).div(\"0.0009534918754145\").toString() == \"210814147.39980929140353613261\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("65.305649646129420352210897086", Bridge.Int.format(((System.Decimal("61261.8303211694")).div(System.Decimal("938.078568288162"))), "G"), "(new Decimal(\"61261.8303211694\")).div(\"938.078568288162\").toString() == \"65.305649646129420352210897086\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000567043665774743633592246", Bridge.Int.format(((System.Decimal("0.000743901346690907")).mul(System.Decimal("0.0762256538850375"))), "G"), "(new Decimal(\"0.000743901346690907\")).mul(\"0.0762256538850375\").toString() == \"0.0000567043665774743633592246\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-0.05230421037247136292", Bridge.Int.format(((System.Decimal("0.00000023104058123708")).sub(System.Decimal("0.0523044414130526"))), "G"), "(new Decimal(\"0.00000023104058123708\")).sub(\"0.0523044414130526\").toString() == \"-0.05230421037247136292\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.00017292070654543156", Bridge.Int.format(((System.Decimal("0.000172902369020927")).add(System.Decimal("0.00000001833752450456"))), "G"), "(new Decimal(\"0.000172902369020927\")).add(\"0.00000001833752450456\").toString() == \"0.00017292070654543156\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("143190227.86340201590179660913", Bridge.Int.format(((System.Decimal("3255426.24725747")).mul(System.Decimal("43.9850934985956"))), "G"), "(new Decimal(\"3255426.24725747\")).mul(\"43.9850934985956\").toString() == \"143190227.86340201590179660913\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.1676963823218234630227555937", Bridge.Int.format(((System.Decimal("21.2078276654742")).mul(System.Decimal("0.00790728710960005"))), "G"), "(new Decimal(\"21.2078276654742\")).mul(\"0.00790728710960005\").toString() == \"0.1676963823218234630227555937\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("60489172470134.035656681147318", Bridge.Int.format(((System.Decimal("4188316.9832585")).div(System.Decimal("0.00000006924077173194"))), "G"), "(new Decimal(\"4188316.9832585\")).div(\"0.00000006924077173194\").toString() == \"60489172470134.035656681147318\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000318298804579463009", Bridge.Int.format(((System.Decimal("0.00000895273411132057")).mul(System.Decimal("0.00000355532511768645"))), "G"), "(new Decimal(\"0.00000895273411132057\")).mul(\"0.00000355532511768645\").toString() == \"0.0000000000318298804579463009\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000089928800565775915465556", Bridge.Int.format(((System.Decimal("0.00000007554147973449")).div(System.Decimal("0.00840014314204461"))), "G"), "(new Decimal(\"0.00000007554147973449\")).div(\"0.00840014314204461\").toString() == \"0.0000089928800565775915465556\" FAILED");
                 // #1650
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.8703972221908718709658421930", Bridge.Int.format(((System.Decimal("1970.18939162148")).mul(System.Decimal("0.000441783528980698"))), 'G'), "(new Decimal(\"1970.18939162148\")).mul(\"0.000441783528980698\").toString() == \"0.8703972221908718709658421930\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.8703972221908718709658421930", Bridge.Int.format(((System.Decimal("1970.18939162148")).mul(System.Decimal("0.000441783528980698"))), "G"), "(new Decimal(\"1970.18939162148\")).mul(\"0.000441783528980698\").toString() == \"0.8703972221908718709658421930\" FAILED");
 
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0004450282480720230655413695", Bridge.Int.format(((System.Decimal("85093.5901911434")).mul(System.Decimal("0.00000000522986804379"))), 'G'), "(new Decimal(\"85093.5901911434\")).mul(\"0.00000000522986804379\").toString() == \"0.0004450282480720230655413695\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000029398859004321386304627", Bridge.Int.format(((System.Decimal("0.00000063867933891652")).div(System.Decimal("0.21724630157335"))), 'G'), "(new Decimal(\"0.00000063867933891652\")).div(\"0.21724630157335\").toString() == \"0.0000029398859004321386304627\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("27880476326.169787243758340455", Bridge.Int.format(((System.Decimal("1174.96172020909")).div(System.Decimal("0.00000004214281371894"))), 'G'), "(new Decimal(\"1174.96172020909\")).div(\"0.00000004214281371894\").toString() == \"27880476326.169787243758340455\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("3.943883571766263181", Bridge.Int.format(((System.Decimal("0.000293723326313181")).add(System.Decimal("3.94358984843995"))), 'G'), "(new Decimal(\"0.000293723326313181\")).add(\"3.94358984843995\").toString() == \"3.943883571766263181\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0600993529068002334144135817", Bridge.Int.format(((System.Decimal("8807.4719481205")).mul(System.Decimal("0.00000682367803846657"))), 'G'), "(new Decimal(\"8807.4719481205\")).mul(\"0.00000682367803846657\").toString() == \"0.0600993529068002334144135817\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000431097888386651556", Bridge.Int.format(((System.Decimal("0.00000003024844593846")).div(System.Decimal("701.660730737103"))), 'G'), "(new Decimal(\"0.00000003024844593846\")).div(\"701.660730737103\").toString() == \"0.0000000000431097888386651556\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("399060.217697562714717", Bridge.Int.format(((System.Decimal("399059.695377508")).add(System.Decimal("0.522320054714717"))), 'G'), "(new Decimal(\"399059.695377508\")).add(\"0.522320054714717\").toString() == \"399060.217697562714717\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0012047312567642078041930781", Bridge.Int.format(((System.Decimal("0.0000555624811237503")).div(System.Decimal("0.0461202287329921"))), 'G'), "(new Decimal(\"0.0000555624811237503\")).div(\"0.0461202287329921\").toString() == \"0.0012047312567642078041930781\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.00079532968335544253", Bridge.Int.format(((System.Decimal("0.000795415484716844")).sub(System.Decimal("0.00000008580136140147"))), 'G'), "(new Decimal(\"0.000795415484716844\")).sub(\"0.00000008580136140147\").toString() == \"0.00079532968335544253\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000000031232274783683", Bridge.Int.format(((System.Decimal("0.0000000384458527148")).mul(System.Decimal("0.00000008123704529425"))), 'G'), "(new Decimal(\"0.0000000384458527148\")).mul(\"0.00000008123704529425\").toString() == \"0.0000000000000031232274783683\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("7.09650010408205501", Bridge.Int.format(((System.Decimal("7.10522364224551")).sub(System.Decimal("0.00872353816345499"))), 'G'), "(new Decimal(\"7.10522364224551\")).sub(\"0.00872353816345499\").toString() == \"7.09650010408205501\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0007994485260663810953884227", Bridge.Int.format(((System.Decimal("0.00000104549135595816")).mul(System.Decimal("764.66297067919"))), 'G'), "(new Decimal(\"0.00000104549135595816\")).mul(\"764.66297067919\").toString() == \"0.0007994485260663810953884227\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.00005958359417346475", Bridge.Int.format(((System.Decimal("0.00005906747824469")).add(System.Decimal("0.00000051611592877475"))), 'G'), "(new Decimal(\"0.00005906747824469\")).add(\"0.00000051611592877475\").toString() == \"0.00005958359417346475\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("22.984133602578256", Bridge.Int.format(((System.Decimal("23.9156692400182")).sub(System.Decimal("0.931535637439944"))), 'G'), "(new Decimal(\"23.9156692400182\")).sub(\"0.931535637439944\").toString() == \"22.984133602578256\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("9044.376757482239651", Bridge.Int.format(((System.Decimal("0.847812742389651")).add(System.Decimal("9043.52894473985"))), 'G'), "(new Decimal(\"0.847812742389651\")).add(\"9043.52894473985\").toString() == \"9044.376757482239651\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("6.0742324680822732941708751327", Bridge.Int.format(((System.Decimal("0.00575696487713464")).div(System.Decimal("0.000947768283052262"))), 'G'), "(new Decimal(\"0.00575696487713464\")).div(\"0.000947768283052262\").toString() == \"6.0742324680822732941708751327\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("6530598.5049727231538", Bridge.Int.format(((System.Decimal("1.5620848031538")).add(System.Decimal("6530596.94288792"))), 'G'), "(new Decimal(\"1.5620848031538\")).add(\"6530596.94288792\").toString() == \"6530598.5049727231538\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.83028435898026679", Bridge.Int.format(((System.Decimal("0.828937773047452")).add(System.Decimal("0.00134658593281479"))), 'G'), "(new Decimal(\"0.828937773047452\")).add(\"0.00134658593281479\").toString() == \"0.83028435898026679\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("325484.521350383343706", Bridge.Int.format(((System.Decimal("0.376231768343706")).add(System.Decimal("325484.145118615"))), 'G'), "(new Decimal(\"0.376231768343706\")).add(\"325484.145118615\").toString() == \"325484.521350383343706\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000777304608453940168", Bridge.Int.format(((System.Decimal("0.00000590405144537988")).div(System.Decimal("75955.4411638321"))), 'G'), "(new Decimal(\"0.00000590405144537988\")).div(\"75955.4411638321\").toString() == \"0.0000000000777304608453940168\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("12434660348.106831437568180728", Bridge.Int.format(((System.Decimal("3653.47703623282")).mul(System.Decimal("3403514.0291804"))), 'G'), "(new Decimal(\"3653.47703623282\")).mul(\"3403514.0291804\").toString() == \"12434660348.106831437568180728\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-9833.95711193194680614", Bridge.Int.format(((System.Decimal("0.00173078235319386")).sub(System.Decimal("9833.9588427143"))), 'G'), "(new Decimal(\"0.00173078235319386\")).sub(\"9833.9588427143\").toString() == \"-9833.95711193194680614\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0015484436906515457496509768", Bridge.Int.format(((System.Decimal("0.00744602976247949")).div(System.Decimal("4.80871846191991"))), 'G'), "(new Decimal(\"0.00744602976247949\")).div(\"4.80871846191991\").toString() == \"0.0015484436906515457496509768\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-0.00052546074370409361", Bridge.Int.format(((System.Decimal("0.00000004717649661339")).sub(System.Decimal("0.000525507920200707"))), 'G'), "(new Decimal(\"0.00000004717649661339\")).sub(\"0.000525507920200707\").toString() == \"-0.00052546074370409361\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.00714578542212060626", Bridge.Int.format(((System.Decimal("0.00714523922984732")).add(System.Decimal("0.00000054619227328626"))), 'G'), "(new Decimal(\"0.00714523922984732\")).add(\"0.00000054619227328626\").toString() == \"0.00714578542212060626\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("11896454.256511241955105336836", Bridge.Int.format(((System.Decimal("0.597390746975965")).div(System.Decimal("0.00000005021586550875"))), 'G'), "(new Decimal(\"0.597390746975965\")).div(\"0.00000005021586550875\").toString() == \"11896454.256511241955105336836\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("364.437275047617911", Bridge.Int.format(((System.Decimal("363.565448840878")).add(System.Decimal("0.871826206739911"))), 'G'), "(new Decimal(\"363.565448840878\")).add(\"0.871826206739911\").toString() == \"364.437275047617911\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000147725045250754551933182", Bridge.Int.format(((System.Decimal("0.932537071375426")).div(System.Decimal("63126.5382110731"))), 'G'), "(new Decimal(\"0.932537071375426\")).div(\"63126.5382110731\").toString() == \"0.0000147725045250754551933182\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.4315077590098242678457705989", Bridge.Int.format(((System.Decimal("0.000505016916666653")).mul(System.Decimal("854.442187517156"))), 'G'), "(new Decimal(\"0.000505016916666653\")).mul(\"854.442187517156\").toString() == \"0.4315077590098242678457705989\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("412.7330880174277915666407937", Bridge.Int.format(((System.Decimal("0.00000767397499069291")).div(System.Decimal("0.00000001859306950057"))), 'G'), "(new Decimal(\"0.00000767397499069291\")).div(\"0.00000001859306950057\").toString() == \"412.7330880174277915666407937\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("4.8954788657062800977983135139", Bridge.Int.format(((System.Decimal("48.1948680468811")).div(System.Decimal("9.84477093436046"))), 'G'), "(new Decimal(\"48.1948680468811\")).div(\"9.84477093436046\").toString() == \"4.8954788657062800977983135139\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0064424440545718793484521534", Bridge.Int.format(((System.Decimal("35741.8810649504")).div(System.Decimal("5547876.0486226"))), 'G'), "(new Decimal(\"35741.8810649504\")).div(\"5547876.0486226\").toString() == \"0.0064424440545718793484521534\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-7840059.26355683558168130721", Bridge.Int.format(((System.Decimal("0.00000038441831869279")).sub(System.Decimal("7840059.26355722"))), 'G'), "(new Decimal(\"0.00000038441831869279\")).sub(\"7840059.26355722\").toString() == \"-7840059.26355683558168130721\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000010412673718308481481839", Bridge.Int.format(((System.Decimal("0.58575165205903")).mul(System.Decimal("0.00000177766015370267"))), 'G'), "(new Decimal(\"0.58575165205903\")).mul(\"0.00000177766015370267\").toString() == \"0.0000010412673718308481481839\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0231355645607838738592882811", Bridge.Int.format(((System.Decimal("0.257475164838822")).mul(System.Decimal("0.0898555189789532"))), 'G'), "(new Decimal(\"0.257475164838822\")).mul(\"0.0898555189789532\").toString() == \"0.0231355645607838738592882811\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.89438686678278632674", Bridge.Int.format(((System.Decimal("0.894392650525269")).sub(System.Decimal("0.00000578374248267326"))), 'G'), "(new Decimal(\"0.894392650525269\")).sub(\"0.00000578374248267326\").toString() == \"0.89438686678278632674\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("337199.86960434358937474129803", Bridge.Int.format(((System.Decimal("0.866065117468156")).mul(System.Decimal("389347.016527013"))), 'G'), "(new Decimal(\"0.866065117468156\")).mul(\"389347.016527013\").toString() == \"337199.86960434358937474129803\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("6945.02700940949904670415", Bridge.Int.format(((System.Decimal("6945.02700909275")).add(System.Decimal("0.00000031674904670415"))), 'G'), "(new Decimal(\"6945.02700909275\")).add(\"0.00000031674904670415\").toString() == \"6945.02700940949904670415\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-0.6270357829644514", Bridge.Int.format(((System.Decimal("0.0701352525829036")).sub(System.Decimal("0.697171035547355"))), 'G'), "(new Decimal(\"0.0701352525829036\")).sub(\"0.697171035547355\").toString() == \"-0.6270357829644514\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("4701135155925.6905911960346018", Bridge.Int.format(((System.Decimal("4111897.07187558")).div(System.Decimal("0.00000087466046720495"))), 'G'), "(new Decimal(\"4111897.07187558\")).div(\"0.00000087466046720495\").toString() == \"4701135155925.6905911960346018\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("1.2422351601221653564432762392", Bridge.Int.format(((System.Decimal("586.657266871378")).div(System.Decimal("472.25942857203"))), 'G'), "(new Decimal(\"586.657266871378\")).div(\"472.25942857203\").toString() == \"1.2422351601221653564432762392\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("110083.27919112734183960167159", Bridge.Int.format(((System.Decimal("5794135.34411887")).div(System.Decimal("52.6341092552217"))), 'G'), "(new Decimal(\"5794135.34411887\")).div(\"52.6341092552217\").toString() == \"110083.27919112734183960167159\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("2702544.8136089281527176927398", Bridge.Int.format(((System.Decimal("0.836109915671921")).div(System.Decimal("0.00000030937874238444"))), 'G'), "(new Decimal(\"0.836109915671921\")).div(\"0.00000030937874238444\").toString() == \"2702544.8136089281527176927398\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("9.5559085980678392684631700448", Bridge.Int.format(((System.Decimal("0.00855813363034191")).div(System.Decimal("0.000895585547152714"))), 'G'), "(new Decimal(\"0.00855813363034191\")).div(\"0.000895585547152714\").toString() == \"9.5559085980678392684631700448\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.00800141297577573362", Bridge.Int.format(((System.Decimal("0.00800136662460927")).add(System.Decimal("0.00000004635116646362"))), 'G'), "(new Decimal(\"0.00800136662460927\")).add(\"0.00000004635116646362\").toString() == \"0.00800141297577573362\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.00000763849065389414", Bridge.Int.format(((System.Decimal("0.00000759593656174649")).add(System.Decimal("0.00000004255409214765"))), 'G'), "(new Decimal(\"0.00000759593656174649\")).add(\"0.00000004255409214765\").toString() == \"0.00000763849065389414\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("8586.7522222217789298276464381", Bridge.Int.format(((System.Decimal("92.2359921001997")).mul(System.Decimal("93.0954611828064"))), 'G'), "(new Decimal(\"92.2359921001997\")).mul(\"93.0954611828064\").toString() == \"8586.7522222217789298276464381\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.9931136155639471788378564663", Bridge.Int.format(((System.Decimal("1609.99809932429")).mul(System.Decimal("0.000616841483217125"))), 'G'), "(new Decimal(\"1609.99809932429\")).mul(\"0.000616841483217125\").toString() == \"0.9931136155639471788378564663\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("4.8983950361677169391106759502", Bridge.Int.format(((System.Decimal("7466.33106724654")).mul(System.Decimal("0.000656064537193656"))), 'G'), "(new Decimal(\"7466.33106724654\")).mul(\"0.000656064537193656\").toString() == \"4.8983950361677169391106759502\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0940287920654541467547713549", Bridge.Int.format(((System.Decimal("5.9157444098572")).div(System.Decimal("62.9141806452135"))), 'G'), "(new Decimal(\"5.9157444098572\")).div(\"62.9141806452135\").toString() == \"0.0940287920654541467547713549\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000081194917301801093808069", Bridge.Int.format(((System.Decimal("0.00000000478547779135")).div(System.Decimal("0.00058938144780201"))), 'G'), "(new Decimal(\"0.00000000478547779135\")).div(\"0.00058938144780201\").toString() == \"0.0000081194917301801093808069\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000237129540524444766519", Bridge.Int.format(((System.Decimal("0.242301107962756")).mul(System.Decimal("0.00000009786564432916"))), 'G'), "(new Decimal(\"0.242301107962756\")).mul(\"0.00000009786564432916\").toString() == \"0.0000000237129540524444766519\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("1985896464.0383833019058040956", Bridge.Int.format(((System.Decimal("414250.732126763")).mul(System.Decimal("4793.94798855947"))), 'G'), "(new Decimal(\"414250.732126763\")).mul(\"4793.94798855947\").toString() == \"1985896464.0383833019058040956\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("3.2317284500242951973203537433", Bridge.Int.format(((System.Decimal("2102650.26060056")).div(System.Decimal("650627.146777989"))), 'G'), "(new Decimal(\"2102650.26060056\")).div(\"650627.146777989\").toString() == \"3.2317284500242951973203537433\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("105.92536134455608", Bridge.Int.format(((System.Decimal("111.791148368172")).sub(System.Decimal("5.86578702361592"))), 'G'), "(new Decimal(\"111.791148368172\")).sub(\"5.86578702361592\").toString() == \"105.92536134455608\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.8746476497299917849874735069", Bridge.Int.format(((System.Decimal("1.16457231397022")).mul(System.Decimal("0.751046233228895"))), 'G'), "(new Decimal(\"1.16457231397022\")).mul(\"0.751046233228895\").toString() == \"0.8746476497299917849874735069\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-8083400.16197386453424333806", Bridge.Int.format(((System.Decimal("0.00000185546575666194")).sub(System.Decimal("8083400.16197572"))), 'G'), "(new Decimal(\"0.00000185546575666194\")).sub(\"8083400.16197572\").toString() == \"-8083400.16197386453424333806\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("1498.0600060982110689932047605", Bridge.Int.format(((System.Decimal("90.5140531205172")).div(System.Decimal("0.0604208461290323"))), 'G'), "(new Decimal(\"90.5140531205172\")).div(\"0.0604208461290323\").toString() == \"1498.0600060982110689932047605\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0408729994202976123433973094", Bridge.Int.format(((System.Decimal("0.00000006767841650531")).mul(System.Decimal("603929.606081885"))), 'G'), "(new Decimal(\"0.00000006767841650531\")).mul(\"603929.606081885\").toString() == \"0.0408729994202976123433973094\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.00008319630302265116", Bridge.Int.format(((System.Decimal("0.000082278563073966")).add(System.Decimal("0.00000091773994868516"))), 'G'), "(new Decimal(\"0.000082278563073966\")).add(\"0.00000091773994868516\").toString() == \"0.00008319630302265116\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("5.499829306499955", Bridge.Int.format(((System.Decimal("6.2219416937893")).sub(System.Decimal("0.722112387289345"))), 'G'), "(new Decimal(\"6.2219416937893\")).sub(\"0.722112387289345\").toString() == \"5.499829306499955\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("367.786135251658876272", Bridge.Int.format(((System.Decimal("367.786185987194")).sub(System.Decimal("0.000050735535123728"))), 'G'), "(new Decimal(\"367.786185987194\")).sub(\"0.000050735535123728\").toString() == \"367.786135251658876272\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("10.312338090882360499767870669", Bridge.Int.format(((System.Decimal("517330.180628845")).div(System.Decimal("50166.1384711816"))), 'G'), "(new Decimal(\"517330.180628845\")).div(\"50166.1384711816\").toString() == \"10.312338090882360499767870669\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000050661264951214749723215", Bridge.Int.format(((System.Decimal("0.243327718807071")).div(System.Decimal("48030.3283073149"))), 'G'), "(new Decimal(\"0.243327718807071\")).div(\"48030.3283073149\").toString() == \"0.0000050661264951214749723215\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-0.00002335923605396378", Bridge.Int.format(((System.Decimal("0.00000005842985946612")).sub(System.Decimal("0.0000234176659134299"))), 'G'), "(new Decimal(\"0.00000005842985946612\")).sub(\"0.0000234176659134299\").toString() == \"-0.00002335923605396378\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("733335461.13670180722389446974", Bridge.Int.format(((System.Decimal("1060005.08231111")).mul(System.Decimal("691.822589697234"))), 'G'), "(new Decimal(\"1060005.08231111\")).mul(\"691.822589697234\").toString() == \"733335461.13670180722389446974\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("508358.93909651945980882198688", Bridge.Int.format(((System.Decimal("7.63294460141703")).mul(System.Decimal("66600.6326054226"))), 'G'), "(new Decimal(\"7.63294460141703\")).mul(\"66600.6326054226\").toString() == \"508358.93909651945980882198688\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("1830847.8153588342112017535059", Bridge.Int.format(((System.Decimal("60437.9311485393")).mul(System.Decimal("30.2930259286859"))), 'G'), "(new Decimal(\"60437.9311485393\")).mul(\"30.2930259286859\").toString() == \"1830847.8153588342112017535059\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000810736550010910727", Bridge.Int.format(((System.Decimal("0.0000225892997917669")).div(System.Decimal("278626.883066551"))), 'G'), "(new Decimal(\"0.0000225892997917669\")).div(\"278626.883066551\").toString() == \"0.0000000000810736550010910727\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("77.65643053701936456364", Bridge.Int.format(((System.Decimal("0.00000007573536456364")).add(System.Decimal("77.656430461284"))), 'G'), "(new Decimal(\"0.00000007573536456364\")).add(\"77.656430461284\").toString() == \"77.65643053701936456364\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0248440823395338596229713692", Bridge.Int.format(((System.Decimal("0.293818466502157")).mul(System.Decimal("0.0845558913818355"))), 'G'), "(new Decimal(\"0.293818466502157\")).mul(\"0.0845558913818355\").toString() == \"0.0248440823395338596229713692\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.00492439746169578524", Bridge.Int.format(((System.Decimal("0.00000572612989960524")).add(System.Decimal("0.00491867133179618"))), 'G'), "(new Decimal(\"0.00000572612989960524\")).add(\"0.00491867133179618\").toString() == \"0.00492439746169578524\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("13138076.691468148650986791474", Bridge.Int.format(((System.Decimal("3923274.88117073")).mul(System.Decimal("3.34875253185106"))), 'G'), "(new Decimal(\"3923274.88117073\")).mul(\"3.34875253185106\").toString() == \"13138076.691468148650986791474\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0008676636364626068", Bridge.Int.format(((System.Decimal("0.000932349686013698")).sub(System.Decimal("0.0000646860495510912"))), 'G'), "(new Decimal(\"0.000932349686013698\")).sub(\"0.0000646860495510912\").toString() == \"0.0008676636364626068\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("41516.8349721547454", Bridge.Int.format(((System.Decimal("41601.7347674825")).sub(System.Decimal("84.8997953277546"))), 'G'), "(new Decimal(\"41601.7347674825\")).sub(\"84.8997953277546\").toString() == \"41516.8349721547454\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.33506006843864413748", Bridge.Int.format(((System.Decimal("0.00000371631919113748")).add(System.Decimal("0.335056352119453"))), 'G'), "(new Decimal(\"0.00000371631919113748\")).add(\"0.335056352119453\").toString() == \"0.33506006843864413748\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("216355.8589961767217502328842", Bridge.Int.format(((System.Decimal("873.952093941137")).div(System.Decimal("0.00403941958399463"))), 'G'), "(new Decimal(\"873.952093941137\")).div(\"0.00403941958399463\").toString() == \"216355.8589961767217502328842\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("45.974464247116189804566774409", Bridge.Int.format(((System.Decimal("278186.309746553")).mul(System.Decimal("0.000165265013540753"))), 'G'), "(new Decimal(\"278186.309746553\")).mul(\"0.000165265013540753\").toString() == \"45.974464247116189804566774409\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("411.8834926940230607258", Bridge.Int.format(((System.Decimal("411.883402341922")).add(System.Decimal("0.0000903521010607258"))), 'G'), "(new Decimal(\"411.883402341922\")).add(\"0.0000903521010607258\").toString() == \"411.8834926940230607258\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("2010677.7183839557954851115873", Bridge.Int.format(((System.Decimal("0.280687715057604")).mul(System.Decimal("7163397.64984483"))), 'G'), "(new Decimal(\"0.280687715057604\")).mul(\"7163397.64984483\").toString() == \"2010677.7183839557954851115873\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0268467935821811160643869611", Bridge.Int.format(((System.Decimal("484.96830299728")).mul(System.Decimal("0.0000553578314629187"))), 'G'), "(new Decimal(\"484.96830299728\")).mul(\"0.0000553578314629187\").toString() == \"0.0268467935821811160643869611\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0916931643365465232681665674", Bridge.Int.format(((System.Decimal("0.00000004376192267228")).div(System.Decimal("0.00000047726483199618"))), 'G'), "(new Decimal(\"0.00000004376192267228\")).div(\"0.00000047726483199618\").toString() == \"0.0916931643365465232681665674\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0206632160994641183202944665", Bridge.Int.format(((System.Decimal("0.00000039209536760677")).div(System.Decimal("0.000018975524706289"))), 'G'), "(new Decimal(\"0.00000039209536760677\")).div(\"0.000018975524706289\").toString() == \"0.0206632160994641183202944665\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("5657.8995636199841461392843417", Bridge.Int.format(((System.Decimal("6198172.99591292")).mul(System.Decimal("0.000912833437748641"))), 'G'), "(new Decimal(\"6198172.99591292\")).mul(\"0.000912833437748641\").toString() == \"5657.8995636199841461392843417\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("36474.31596809736535", Bridge.Int.format(((System.Decimal("7.05634104416535")).add(System.Decimal("36467.2596270532"))), 'G'), "(new Decimal(\"7.05634104416535\")).add(\"36467.2596270532\").toString() == \"36474.31596809736535\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.4258812461246507845677082109", Bridge.Int.format(((System.Decimal("698.142959595725")).mul(System.Decimal("0.000610020111599015"))), 'G'), "(new Decimal(\"698.142959595725\")).mul(\"0.000610020111599015\").toString() == \"0.4258812461246507845677082109\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-3682769.2669420779522", Bridge.Int.format(((System.Decimal("88.0442409720478")).sub(System.Decimal("3682857.31118305"))), 'G'), "(new Decimal(\"88.0442409720478\")).sub(\"3682857.31118305\").toString() == \"-3682769.2669420779522\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-8049831.4965358431074197046", Bridge.Int.format(((System.Decimal("0.0000389968925802954")).sub(System.Decimal("8049831.49657484"))), 'G'), "(new Decimal(\"0.0000389968925802954\")).sub(\"8049831.49657484\").toString() == \"-8049831.4965358431074197046\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("36155.62014127020986184166", Bridge.Int.format(((System.Decimal("0.00000024290986184166")).add(System.Decimal("36155.6201410273"))), 'G'), "(new Decimal(\"0.00000024290986184166\")).add(\"36155.6201410273\").toString() == \"36155.62014127020986184166\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("3294378.802389452177", Bridge.Int.format(((System.Decimal("3294319.65169232")).add(System.Decimal("59.150697132177"))), 'G'), "(new Decimal(\"3294319.65169232\")).add(\"59.150697132177\").toString() == \"3294378.802389452177\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("126628888131.45293056779587565", Bridge.Int.format(((System.Decimal("29296.0378012136")).mul(System.Decimal("4322389.56648968"))), 'G'), "(new Decimal(\"29296.0378012136\")).mul(\"4322389.56648968\").toString() == \"126628888131.45293056779587565\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("15.17547972741327", Bridge.Int.format(((System.Decimal("7.7507224575387")).add(System.Decimal("7.42475726987457"))), 'G'), "(new Decimal(\"7.7507224575387\")).add(\"7.42475726987457\").toString() == \"15.17547972741327\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.7623358443707398129", Bridge.Int.format(((System.Decimal("0.762320778221973")).add(System.Decimal("0.0000150661487668129"))), 'G'), "(new Decimal(\"0.762320778221973\")).add(\"0.0000150661487668129\").toString() == \"0.7623358443707398129\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-30306.453181107727", Bridge.Int.format(((System.Decimal("745.766049132573")).sub(System.Decimal("31052.2192302403"))), 'G'), "(new Decimal(\"745.766049132573\")).sub(\"31052.2192302403\").toString() == \"-30306.453181107727\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("43450065.810652162786851680039", Bridge.Int.format(((System.Decimal("4.03395124898942")).div(System.Decimal("0.0000000928410849035"))), 'G'), "(new Decimal(\"4.03395124898942\")).div(\"0.0000000928410849035\").toString() == \"43450065.810652162786851680039\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("89.719799308907125", Bridge.Int.format(((System.Decimal("89.2452192442702")).add(System.Decimal("0.474580064636925"))), 'G'), "(new Decimal(\"89.2452192442702\")).add(\"0.474580064636925\").toString() == \"89.719799308907125\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("7616096.4244623971027726383725", Bridge.Int.format(((System.Decimal("0.754648202450317")).div(System.Decimal("0.00000009908595695118"))), 'G'), "(new Decimal(\"0.754648202450317\")).div(\"0.00000009908595695118\").toString() == \"7616096.4244623971027726383725\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0001721507228208858110900319", Bridge.Int.format(((System.Decimal("0.00000000703358706414")).div(System.Decimal("0.0000408571451161323"))), 'G'), "(new Decimal(\"0.00000000703358706414\")).div(\"0.0000408571451161323\").toString() == \"0.0001721507228208858110900319\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000022714462393900636", Bridge.Int.format(((System.Decimal("0.00000008484566439169")).mul(System.Decimal("0.0000267715063070746"))), 'G'), "(new Decimal(\"0.00000008484566439169\")).mul(\"0.0000267715063070746\").toString() == \"0.0000000000022714462393900636\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("95740315594.555877584430293733", Bridge.Int.format(((System.Decimal("753944.105819773")).div(System.Decimal("0.0000078748863646178"))), 'G'), "(new Decimal(\"753944.105819773\")).div(\"0.0000078748863646178\").toString() == \"95740315594.555877584430293733\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("6.4069192960141739237", Bridge.Int.format(((System.Decimal("6.40685234982839")).add(System.Decimal("0.0000669461857839237"))), 'G'), "(new Decimal(\"6.40685234982839\")).add(\"0.0000669461857839237\").toString() == \"6.4069192960141739237\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("2.7730492038105317936901033936", Bridge.Int.format(((System.Decimal("7091326.72152078")).mul(System.Decimal("0.00000039104801015512"))), 'G'), "(new Decimal(\"7091326.72152078\")).mul(\"0.00000039104801015512\").toString() == \"2.7730492038105317936901033936\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("39.225255132451082330972995533", Bridge.Int.format(((System.Decimal("0.0150400641909987")).mul(System.Decimal("2608.05104514959"))), 'G'), "(new Decimal(\"0.0150400641909987\")).mul(\"2608.05104514959\").toString() == \"39.225255132451082330972995533\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("2.48947713311905352214", Bridge.Int.format(((System.Decimal("2.48947596293384")).add(System.Decimal("0.00000117018521352214"))), 'G'), "(new Decimal(\"2.48947596293384\")).add(\"0.00000117018521352214\").toString() == \"2.48947713311905352214\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("880946682.13701250534829592747", Bridge.Int.format(((System.Decimal("720.791596789282")).div(System.Decimal("0.00000081820115950806"))), 'G'), "(new Decimal(\"720.791596789282\")).div(\"0.00000081820115950806\").toString() == \"880946682.13701250534829592747\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("267.25912423523108411359660085", Bridge.Int.format(((System.Decimal("378388.367769489")).mul(System.Decimal("0.000706309038543286"))), 'G'), "(new Decimal(\"378388.367769489\")).mul(\"0.000706309038543286\").toString() == \"267.25912423523108411359660085\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-32046.841084978907", Bridge.Int.format(((System.Decimal("978.517128610293")).sub(System.Decimal("33025.3582135892"))), 'G'), "(new Decimal(\"978.517128610293\")).sub(\"33025.3582135892\").toString() == \"-32046.841084978907\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.00139737929887948", Bridge.Int.format(((System.Decimal("0.00217247345120296")).sub(System.Decimal("0.00077509415232348"))), 'G'), "(new Decimal(\"0.00217247345120296\")).sub(\"0.00077509415232348\").toString() == \"0.00139737929887948\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000046530416190453426", Bridge.Int.format(((System.Decimal("0.000136329152219151")).mul(System.Decimal("0.0000000341309363647"))), 'G'), "(new Decimal(\"0.000136329152219151\")).mul(\"0.0000000341309363647\").toString() == \"0.0000000000046530416190453426\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-4850951.788916537256405138", Bridge.Int.format(((System.Decimal("0.000426702743594862")).sub(System.Decimal("4850951.78934324"))), 'G'), "(new Decimal(\"0.000426702743594862\")).sub(\"4850951.78934324\").toString() == \"-4850951.788916537256405138\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("3607.9677572355331381655390708", Bridge.Int.format(((System.Decimal("219.782070359114")).div(System.Decimal("0.0609157523423972"))), 'G'), "(new Decimal(\"219.782070359114\")).div(\"0.0609157523423972\").toString() == \"3607.9677572355331381655390708\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-59578.20478480686224", Bridge.Int.format(((System.Decimal("9.13404255133776")).sub(System.Decimal("59587.3388273582"))), 'G'), "(new Decimal(\"9.13404255133776\")).sub(\"59587.3388273582\").toString() == \"-59578.20478480686224\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("7579.1908166668147017746539623", Bridge.Int.format(((System.Decimal("0.000786728870489974")).div(System.Decimal("0.00000010380116948104"))), 'G'), "(new Decimal(\"0.000786728870489974\")).div(\"0.00000010380116948104\").toString() == \"7579.1908166668147017746539623\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-4.1981967099609962025", Bridge.Int.format(((System.Decimal("0.0000004602920037975")).sub(System.Decimal("4.198197170253"))), 'G'), "(new Decimal(\"0.0000004602920037975\")).sub(\"4.198197170253\").toString() == \"-4.1981967099609962025\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.00008656549534796066", Bridge.Int.format(((System.Decimal("0.0000866447461706795")).sub(System.Decimal("0.00000007925082271884"))), 'G'), "(new Decimal(\"0.0000866447461706795\")).sub(\"0.00000007925082271884\").toString() == \"0.00008656549534796066\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0004450282480720230655413695", Bridge.Int.format(((System.Decimal("85093.5901911434")).mul(System.Decimal("0.00000000522986804379"))), "G"), "(new Decimal(\"85093.5901911434\")).mul(\"0.00000000522986804379\").toString() == \"0.0004450282480720230655413695\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000029398859004321386304627", Bridge.Int.format(((System.Decimal("0.00000063867933891652")).div(System.Decimal("0.21724630157335"))), "G"), "(new Decimal(\"0.00000063867933891652\")).div(\"0.21724630157335\").toString() == \"0.0000029398859004321386304627\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("27880476326.169787243758340455", Bridge.Int.format(((System.Decimal("1174.96172020909")).div(System.Decimal("0.00000004214281371894"))), "G"), "(new Decimal(\"1174.96172020909\")).div(\"0.00000004214281371894\").toString() == \"27880476326.169787243758340455\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("3.943883571766263181", Bridge.Int.format(((System.Decimal("0.000293723326313181")).add(System.Decimal("3.94358984843995"))), "G"), "(new Decimal(\"0.000293723326313181\")).add(\"3.94358984843995\").toString() == \"3.943883571766263181\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0600993529068002334144135817", Bridge.Int.format(((System.Decimal("8807.4719481205")).mul(System.Decimal("0.00000682367803846657"))), "G"), "(new Decimal(\"8807.4719481205\")).mul(\"0.00000682367803846657\").toString() == \"0.0600993529068002334144135817\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000431097888386651556", Bridge.Int.format(((System.Decimal("0.00000003024844593846")).div(System.Decimal("701.660730737103"))), "G"), "(new Decimal(\"0.00000003024844593846\")).div(\"701.660730737103\").toString() == \"0.0000000000431097888386651556\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("399060.217697562714717", Bridge.Int.format(((System.Decimal("399059.695377508")).add(System.Decimal("0.522320054714717"))), "G"), "(new Decimal(\"399059.695377508\")).add(\"0.522320054714717\").toString() == \"399060.217697562714717\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0012047312567642078041930781", Bridge.Int.format(((System.Decimal("0.0000555624811237503")).div(System.Decimal("0.0461202287329921"))), "G"), "(new Decimal(\"0.0000555624811237503\")).div(\"0.0461202287329921\").toString() == \"0.0012047312567642078041930781\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.00079532968335544253", Bridge.Int.format(((System.Decimal("0.000795415484716844")).sub(System.Decimal("0.00000008580136140147"))), "G"), "(new Decimal(\"0.000795415484716844\")).sub(\"0.00000008580136140147\").toString() == \"0.00079532968335544253\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000000031232274783683", Bridge.Int.format(((System.Decimal("0.0000000384458527148")).mul(System.Decimal("0.00000008123704529425"))), "G"), "(new Decimal(\"0.0000000384458527148\")).mul(\"0.00000008123704529425\").toString() == \"0.0000000000000031232274783683\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("7.09650010408205501", Bridge.Int.format(((System.Decimal("7.10522364224551")).sub(System.Decimal("0.00872353816345499"))), "G"), "(new Decimal(\"7.10522364224551\")).sub(\"0.00872353816345499\").toString() == \"7.09650010408205501\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0007994485260663810953884227", Bridge.Int.format(((System.Decimal("0.00000104549135595816")).mul(System.Decimal("764.66297067919"))), "G"), "(new Decimal(\"0.00000104549135595816\")).mul(\"764.66297067919\").toString() == \"0.0007994485260663810953884227\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.00005958359417346475", Bridge.Int.format(((System.Decimal("0.00005906747824469")).add(System.Decimal("0.00000051611592877475"))), "G"), "(new Decimal(\"0.00005906747824469\")).add(\"0.00000051611592877475\").toString() == \"0.00005958359417346475\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("22.984133602578256", Bridge.Int.format(((System.Decimal("23.9156692400182")).sub(System.Decimal("0.931535637439944"))), "G"), "(new Decimal(\"23.9156692400182\")).sub(\"0.931535637439944\").toString() == \"22.984133602578256\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("9044.376757482239651", Bridge.Int.format(((System.Decimal("0.847812742389651")).add(System.Decimal("9043.52894473985"))), "G"), "(new Decimal(\"0.847812742389651\")).add(\"9043.52894473985\").toString() == \"9044.376757482239651\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("6.0742324680822732941708751327", Bridge.Int.format(((System.Decimal("0.00575696487713464")).div(System.Decimal("0.000947768283052262"))), "G"), "(new Decimal(\"0.00575696487713464\")).div(\"0.000947768283052262\").toString() == \"6.0742324680822732941708751327\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("6530598.5049727231538", Bridge.Int.format(((System.Decimal("1.5620848031538")).add(System.Decimal("6530596.94288792"))), "G"), "(new Decimal(\"1.5620848031538\")).add(\"6530596.94288792\").toString() == \"6530598.5049727231538\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.83028435898026679", Bridge.Int.format(((System.Decimal("0.828937773047452")).add(System.Decimal("0.00134658593281479"))), "G"), "(new Decimal(\"0.828937773047452\")).add(\"0.00134658593281479\").toString() == \"0.83028435898026679\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("325484.521350383343706", Bridge.Int.format(((System.Decimal("0.376231768343706")).add(System.Decimal("325484.145118615"))), "G"), "(new Decimal(\"0.376231768343706\")).add(\"325484.145118615\").toString() == \"325484.521350383343706\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000777304608453940168", Bridge.Int.format(((System.Decimal("0.00000590405144537988")).div(System.Decimal("75955.4411638321"))), "G"), "(new Decimal(\"0.00000590405144537988\")).div(\"75955.4411638321\").toString() == \"0.0000000000777304608453940168\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("12434660348.106831437568180728", Bridge.Int.format(((System.Decimal("3653.47703623282")).mul(System.Decimal("3403514.0291804"))), "G"), "(new Decimal(\"3653.47703623282\")).mul(\"3403514.0291804\").toString() == \"12434660348.106831437568180728\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-9833.95711193194680614", Bridge.Int.format(((System.Decimal("0.00173078235319386")).sub(System.Decimal("9833.9588427143"))), "G"), "(new Decimal(\"0.00173078235319386\")).sub(\"9833.9588427143\").toString() == \"-9833.95711193194680614\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0015484436906515457496509768", Bridge.Int.format(((System.Decimal("0.00744602976247949")).div(System.Decimal("4.80871846191991"))), "G"), "(new Decimal(\"0.00744602976247949\")).div(\"4.80871846191991\").toString() == \"0.0015484436906515457496509768\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-0.00052546074370409361", Bridge.Int.format(((System.Decimal("0.00000004717649661339")).sub(System.Decimal("0.000525507920200707"))), "G"), "(new Decimal(\"0.00000004717649661339\")).sub(\"0.000525507920200707\").toString() == \"-0.00052546074370409361\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.00714578542212060626", Bridge.Int.format(((System.Decimal("0.00714523922984732")).add(System.Decimal("0.00000054619227328626"))), "G"), "(new Decimal(\"0.00714523922984732\")).add(\"0.00000054619227328626\").toString() == \"0.00714578542212060626\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("11896454.256511241955105336836", Bridge.Int.format(((System.Decimal("0.597390746975965")).div(System.Decimal("0.00000005021586550875"))), "G"), "(new Decimal(\"0.597390746975965\")).div(\"0.00000005021586550875\").toString() == \"11896454.256511241955105336836\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("364.437275047617911", Bridge.Int.format(((System.Decimal("363.565448840878")).add(System.Decimal("0.871826206739911"))), "G"), "(new Decimal(\"363.565448840878\")).add(\"0.871826206739911\").toString() == \"364.437275047617911\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000147725045250754551933182", Bridge.Int.format(((System.Decimal("0.932537071375426")).div(System.Decimal("63126.5382110731"))), "G"), "(new Decimal(\"0.932537071375426\")).div(\"63126.5382110731\").toString() == \"0.0000147725045250754551933182\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.4315077590098242678457705989", Bridge.Int.format(((System.Decimal("0.000505016916666653")).mul(System.Decimal("854.442187517156"))), "G"), "(new Decimal(\"0.000505016916666653\")).mul(\"854.442187517156\").toString() == \"0.4315077590098242678457705989\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("412.7330880174277915666407937", Bridge.Int.format(((System.Decimal("0.00000767397499069291")).div(System.Decimal("0.00000001859306950057"))), "G"), "(new Decimal(\"0.00000767397499069291\")).div(\"0.00000001859306950057\").toString() == \"412.7330880174277915666407937\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("4.8954788657062800977983135139", Bridge.Int.format(((System.Decimal("48.1948680468811")).div(System.Decimal("9.84477093436046"))), "G"), "(new Decimal(\"48.1948680468811\")).div(\"9.84477093436046\").toString() == \"4.8954788657062800977983135139\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0064424440545718793484521534", Bridge.Int.format(((System.Decimal("35741.8810649504")).div(System.Decimal("5547876.0486226"))), "G"), "(new Decimal(\"35741.8810649504\")).div(\"5547876.0486226\").toString() == \"0.0064424440545718793484521534\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-7840059.26355683558168130721", Bridge.Int.format(((System.Decimal("0.00000038441831869279")).sub(System.Decimal("7840059.26355722"))), "G"), "(new Decimal(\"0.00000038441831869279\")).sub(\"7840059.26355722\").toString() == \"-7840059.26355683558168130721\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000010412673718308481481839", Bridge.Int.format(((System.Decimal("0.58575165205903")).mul(System.Decimal("0.00000177766015370267"))), "G"), "(new Decimal(\"0.58575165205903\")).mul(\"0.00000177766015370267\").toString() == \"0.0000010412673718308481481839\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0231355645607838738592882811", Bridge.Int.format(((System.Decimal("0.257475164838822")).mul(System.Decimal("0.0898555189789532"))), "G"), "(new Decimal(\"0.257475164838822\")).mul(\"0.0898555189789532\").toString() == \"0.0231355645607838738592882811\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.89438686678278632674", Bridge.Int.format(((System.Decimal("0.894392650525269")).sub(System.Decimal("0.00000578374248267326"))), "G"), "(new Decimal(\"0.894392650525269\")).sub(\"0.00000578374248267326\").toString() == \"0.89438686678278632674\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("337199.86960434358937474129803", Bridge.Int.format(((System.Decimal("0.866065117468156")).mul(System.Decimal("389347.016527013"))), "G"), "(new Decimal(\"0.866065117468156\")).mul(\"389347.016527013\").toString() == \"337199.86960434358937474129803\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("6945.02700940949904670415", Bridge.Int.format(((System.Decimal("6945.02700909275")).add(System.Decimal("0.00000031674904670415"))), "G"), "(new Decimal(\"6945.02700909275\")).add(\"0.00000031674904670415\").toString() == \"6945.02700940949904670415\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-0.6270357829644514", Bridge.Int.format(((System.Decimal("0.0701352525829036")).sub(System.Decimal("0.697171035547355"))), "G"), "(new Decimal(\"0.0701352525829036\")).sub(\"0.697171035547355\").toString() == \"-0.6270357829644514\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("4701135155925.6905911960346018", Bridge.Int.format(((System.Decimal("4111897.07187558")).div(System.Decimal("0.00000087466046720495"))), "G"), "(new Decimal(\"4111897.07187558\")).div(\"0.00000087466046720495\").toString() == \"4701135155925.6905911960346018\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("1.2422351601221653564432762392", Bridge.Int.format(((System.Decimal("586.657266871378")).div(System.Decimal("472.25942857203"))), "G"), "(new Decimal(\"586.657266871378\")).div(\"472.25942857203\").toString() == \"1.2422351601221653564432762392\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("110083.27919112734183960167159", Bridge.Int.format(((System.Decimal("5794135.34411887")).div(System.Decimal("52.6341092552217"))), "G"), "(new Decimal(\"5794135.34411887\")).div(\"52.6341092552217\").toString() == \"110083.27919112734183960167159\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("2702544.8136089281527176927398", Bridge.Int.format(((System.Decimal("0.836109915671921")).div(System.Decimal("0.00000030937874238444"))), "G"), "(new Decimal(\"0.836109915671921\")).div(\"0.00000030937874238444\").toString() == \"2702544.8136089281527176927398\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("9.5559085980678392684631700448", Bridge.Int.format(((System.Decimal("0.00855813363034191")).div(System.Decimal("0.000895585547152714"))), "G"), "(new Decimal(\"0.00855813363034191\")).div(\"0.000895585547152714\").toString() == \"9.5559085980678392684631700448\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.00800141297577573362", Bridge.Int.format(((System.Decimal("0.00800136662460927")).add(System.Decimal("0.00000004635116646362"))), "G"), "(new Decimal(\"0.00800136662460927\")).add(\"0.00000004635116646362\").toString() == \"0.00800141297577573362\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.00000763849065389414", Bridge.Int.format(((System.Decimal("0.00000759593656174649")).add(System.Decimal("0.00000004255409214765"))), "G"), "(new Decimal(\"0.00000759593656174649\")).add(\"0.00000004255409214765\").toString() == \"0.00000763849065389414\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("8586.7522222217789298276464381", Bridge.Int.format(((System.Decimal("92.2359921001997")).mul(System.Decimal("93.0954611828064"))), "G"), "(new Decimal(\"92.2359921001997\")).mul(\"93.0954611828064\").toString() == \"8586.7522222217789298276464381\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.9931136155639471788378564663", Bridge.Int.format(((System.Decimal("1609.99809932429")).mul(System.Decimal("0.000616841483217125"))), "G"), "(new Decimal(\"1609.99809932429\")).mul(\"0.000616841483217125\").toString() == \"0.9931136155639471788378564663\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("4.8983950361677169391106759502", Bridge.Int.format(((System.Decimal("7466.33106724654")).mul(System.Decimal("0.000656064537193656"))), "G"), "(new Decimal(\"7466.33106724654\")).mul(\"0.000656064537193656\").toString() == \"4.8983950361677169391106759502\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0940287920654541467547713549", Bridge.Int.format(((System.Decimal("5.9157444098572")).div(System.Decimal("62.9141806452135"))), "G"), "(new Decimal(\"5.9157444098572\")).div(\"62.9141806452135\").toString() == \"0.0940287920654541467547713549\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000081194917301801093808069", Bridge.Int.format(((System.Decimal("0.00000000478547779135")).div(System.Decimal("0.00058938144780201"))), "G"), "(new Decimal(\"0.00000000478547779135\")).div(\"0.00058938144780201\").toString() == \"0.0000081194917301801093808069\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000237129540524444766519", Bridge.Int.format(((System.Decimal("0.242301107962756")).mul(System.Decimal("0.00000009786564432916"))), "G"), "(new Decimal(\"0.242301107962756\")).mul(\"0.00000009786564432916\").toString() == \"0.0000000237129540524444766519\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("1985896464.0383833019058040956", Bridge.Int.format(((System.Decimal("414250.732126763")).mul(System.Decimal("4793.94798855947"))), "G"), "(new Decimal(\"414250.732126763\")).mul(\"4793.94798855947\").toString() == \"1985896464.0383833019058040956\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("3.2317284500242951973203537433", Bridge.Int.format(((System.Decimal("2102650.26060056")).div(System.Decimal("650627.146777989"))), "G"), "(new Decimal(\"2102650.26060056\")).div(\"650627.146777989\").toString() == \"3.2317284500242951973203537433\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("105.92536134455608", Bridge.Int.format(((System.Decimal("111.791148368172")).sub(System.Decimal("5.86578702361592"))), "G"), "(new Decimal(\"111.791148368172\")).sub(\"5.86578702361592\").toString() == \"105.92536134455608\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.8746476497299917849874735069", Bridge.Int.format(((System.Decimal("1.16457231397022")).mul(System.Decimal("0.751046233228895"))), "G"), "(new Decimal(\"1.16457231397022\")).mul(\"0.751046233228895\").toString() == \"0.8746476497299917849874735069\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-8083400.16197386453424333806", Bridge.Int.format(((System.Decimal("0.00000185546575666194")).sub(System.Decimal("8083400.16197572"))), "G"), "(new Decimal(\"0.00000185546575666194\")).sub(\"8083400.16197572\").toString() == \"-8083400.16197386453424333806\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("1498.0600060982110689932047605", Bridge.Int.format(((System.Decimal("90.5140531205172")).div(System.Decimal("0.0604208461290323"))), "G"), "(new Decimal(\"90.5140531205172\")).div(\"0.0604208461290323\").toString() == \"1498.0600060982110689932047605\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0408729994202976123433973094", Bridge.Int.format(((System.Decimal("0.00000006767841650531")).mul(System.Decimal("603929.606081885"))), "G"), "(new Decimal(\"0.00000006767841650531\")).mul(\"603929.606081885\").toString() == \"0.0408729994202976123433973094\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.00008319630302265116", Bridge.Int.format(((System.Decimal("0.000082278563073966")).add(System.Decimal("0.00000091773994868516"))), "G"), "(new Decimal(\"0.000082278563073966\")).add(\"0.00000091773994868516\").toString() == \"0.00008319630302265116\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("5.499829306499955", Bridge.Int.format(((System.Decimal("6.2219416937893")).sub(System.Decimal("0.722112387289345"))), "G"), "(new Decimal(\"6.2219416937893\")).sub(\"0.722112387289345\").toString() == \"5.499829306499955\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("367.786135251658876272", Bridge.Int.format(((System.Decimal("367.786185987194")).sub(System.Decimal("0.000050735535123728"))), "G"), "(new Decimal(\"367.786185987194\")).sub(\"0.000050735535123728\").toString() == \"367.786135251658876272\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("10.312338090882360499767870669", Bridge.Int.format(((System.Decimal("517330.180628845")).div(System.Decimal("50166.1384711816"))), "G"), "(new Decimal(\"517330.180628845\")).div(\"50166.1384711816\").toString() == \"10.312338090882360499767870669\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000050661264951214749723215", Bridge.Int.format(((System.Decimal("0.243327718807071")).div(System.Decimal("48030.3283073149"))), "G"), "(new Decimal(\"0.243327718807071\")).div(\"48030.3283073149\").toString() == \"0.0000050661264951214749723215\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-0.00002335923605396378", Bridge.Int.format(((System.Decimal("0.00000005842985946612")).sub(System.Decimal("0.0000234176659134299"))), "G"), "(new Decimal(\"0.00000005842985946612\")).sub(\"0.0000234176659134299\").toString() == \"-0.00002335923605396378\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("733335461.13670180722389446974", Bridge.Int.format(((System.Decimal("1060005.08231111")).mul(System.Decimal("691.822589697234"))), "G"), "(new Decimal(\"1060005.08231111\")).mul(\"691.822589697234\").toString() == \"733335461.13670180722389446974\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("508358.93909651945980882198688", Bridge.Int.format(((System.Decimal("7.63294460141703")).mul(System.Decimal("66600.6326054226"))), "G"), "(new Decimal(\"7.63294460141703\")).mul(\"66600.6326054226\").toString() == \"508358.93909651945980882198688\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("1830847.8153588342112017535059", Bridge.Int.format(((System.Decimal("60437.9311485393")).mul(System.Decimal("30.2930259286859"))), "G"), "(new Decimal(\"60437.9311485393\")).mul(\"30.2930259286859\").toString() == \"1830847.8153588342112017535059\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000810736550010910727", Bridge.Int.format(((System.Decimal("0.0000225892997917669")).div(System.Decimal("278626.883066551"))), "G"), "(new Decimal(\"0.0000225892997917669\")).div(\"278626.883066551\").toString() == \"0.0000000000810736550010910727\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("77.65643053701936456364", Bridge.Int.format(((System.Decimal("0.00000007573536456364")).add(System.Decimal("77.656430461284"))), "G"), "(new Decimal(\"0.00000007573536456364\")).add(\"77.656430461284\").toString() == \"77.65643053701936456364\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0248440823395338596229713692", Bridge.Int.format(((System.Decimal("0.293818466502157")).mul(System.Decimal("0.0845558913818355"))), "G"), "(new Decimal(\"0.293818466502157\")).mul(\"0.0845558913818355\").toString() == \"0.0248440823395338596229713692\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.00492439746169578524", Bridge.Int.format(((System.Decimal("0.00000572612989960524")).add(System.Decimal("0.00491867133179618"))), "G"), "(new Decimal(\"0.00000572612989960524\")).add(\"0.00491867133179618\").toString() == \"0.00492439746169578524\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("13138076.691468148650986791474", Bridge.Int.format(((System.Decimal("3923274.88117073")).mul(System.Decimal("3.34875253185106"))), "G"), "(new Decimal(\"3923274.88117073\")).mul(\"3.34875253185106\").toString() == \"13138076.691468148650986791474\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0008676636364626068", Bridge.Int.format(((System.Decimal("0.000932349686013698")).sub(System.Decimal("0.0000646860495510912"))), "G"), "(new Decimal(\"0.000932349686013698\")).sub(\"0.0000646860495510912\").toString() == \"0.0008676636364626068\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("41516.8349721547454", Bridge.Int.format(((System.Decimal("41601.7347674825")).sub(System.Decimal("84.8997953277546"))), "G"), "(new Decimal(\"41601.7347674825\")).sub(\"84.8997953277546\").toString() == \"41516.8349721547454\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.33506006843864413748", Bridge.Int.format(((System.Decimal("0.00000371631919113748")).add(System.Decimal("0.335056352119453"))), "G"), "(new Decimal(\"0.00000371631919113748\")).add(\"0.335056352119453\").toString() == \"0.33506006843864413748\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("216355.8589961767217502328842", Bridge.Int.format(((System.Decimal("873.952093941137")).div(System.Decimal("0.00403941958399463"))), "G"), "(new Decimal(\"873.952093941137\")).div(\"0.00403941958399463\").toString() == \"216355.8589961767217502328842\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("45.974464247116189804566774409", Bridge.Int.format(((System.Decimal("278186.309746553")).mul(System.Decimal("0.000165265013540753"))), "G"), "(new Decimal(\"278186.309746553\")).mul(\"0.000165265013540753\").toString() == \"45.974464247116189804566774409\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("411.8834926940230607258", Bridge.Int.format(((System.Decimal("411.883402341922")).add(System.Decimal("0.0000903521010607258"))), "G"), "(new Decimal(\"411.883402341922\")).add(\"0.0000903521010607258\").toString() == \"411.8834926940230607258\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("2010677.7183839557954851115873", Bridge.Int.format(((System.Decimal("0.280687715057604")).mul(System.Decimal("7163397.64984483"))), "G"), "(new Decimal(\"0.280687715057604\")).mul(\"7163397.64984483\").toString() == \"2010677.7183839557954851115873\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0268467935821811160643869611", Bridge.Int.format(((System.Decimal("484.96830299728")).mul(System.Decimal("0.0000553578314629187"))), "G"), "(new Decimal(\"484.96830299728\")).mul(\"0.0000553578314629187\").toString() == \"0.0268467935821811160643869611\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0916931643365465232681665674", Bridge.Int.format(((System.Decimal("0.00000004376192267228")).div(System.Decimal("0.00000047726483199618"))), "G"), "(new Decimal(\"0.00000004376192267228\")).div(\"0.00000047726483199618\").toString() == \"0.0916931643365465232681665674\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0206632160994641183202944665", Bridge.Int.format(((System.Decimal("0.00000039209536760677")).div(System.Decimal("0.000018975524706289"))), "G"), "(new Decimal(\"0.00000039209536760677\")).div(\"0.000018975524706289\").toString() == \"0.0206632160994641183202944665\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("5657.8995636199841461392843417", Bridge.Int.format(((System.Decimal("6198172.99591292")).mul(System.Decimal("0.000912833437748641"))), "G"), "(new Decimal(\"6198172.99591292\")).mul(\"0.000912833437748641\").toString() == \"5657.8995636199841461392843417\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("36474.31596809736535", Bridge.Int.format(((System.Decimal("7.05634104416535")).add(System.Decimal("36467.2596270532"))), "G"), "(new Decimal(\"7.05634104416535\")).add(\"36467.2596270532\").toString() == \"36474.31596809736535\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.4258812461246507845677082109", Bridge.Int.format(((System.Decimal("698.142959595725")).mul(System.Decimal("0.000610020111599015"))), "G"), "(new Decimal(\"698.142959595725\")).mul(\"0.000610020111599015\").toString() == \"0.4258812461246507845677082109\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-3682769.2669420779522", Bridge.Int.format(((System.Decimal("88.0442409720478")).sub(System.Decimal("3682857.31118305"))), "G"), "(new Decimal(\"88.0442409720478\")).sub(\"3682857.31118305\").toString() == \"-3682769.2669420779522\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-8049831.4965358431074197046", Bridge.Int.format(((System.Decimal("0.0000389968925802954")).sub(System.Decimal("8049831.49657484"))), "G"), "(new Decimal(\"0.0000389968925802954\")).sub(\"8049831.49657484\").toString() == \"-8049831.4965358431074197046\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("36155.62014127020986184166", Bridge.Int.format(((System.Decimal("0.00000024290986184166")).add(System.Decimal("36155.6201410273"))), "G"), "(new Decimal(\"0.00000024290986184166\")).add(\"36155.6201410273\").toString() == \"36155.62014127020986184166\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("3294378.802389452177", Bridge.Int.format(((System.Decimal("3294319.65169232")).add(System.Decimal("59.150697132177"))), "G"), "(new Decimal(\"3294319.65169232\")).add(\"59.150697132177\").toString() == \"3294378.802389452177\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("126628888131.45293056779587565", Bridge.Int.format(((System.Decimal("29296.0378012136")).mul(System.Decimal("4322389.56648968"))), "G"), "(new Decimal(\"29296.0378012136\")).mul(\"4322389.56648968\").toString() == \"126628888131.45293056779587565\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("15.17547972741327", Bridge.Int.format(((System.Decimal("7.7507224575387")).add(System.Decimal("7.42475726987457"))), "G"), "(new Decimal(\"7.7507224575387\")).add(\"7.42475726987457\").toString() == \"15.17547972741327\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.7623358443707398129", Bridge.Int.format(((System.Decimal("0.762320778221973")).add(System.Decimal("0.0000150661487668129"))), "G"), "(new Decimal(\"0.762320778221973\")).add(\"0.0000150661487668129\").toString() == \"0.7623358443707398129\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-30306.453181107727", Bridge.Int.format(((System.Decimal("745.766049132573")).sub(System.Decimal("31052.2192302403"))), "G"), "(new Decimal(\"745.766049132573\")).sub(\"31052.2192302403\").toString() == \"-30306.453181107727\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("43450065.810652162786851680039", Bridge.Int.format(((System.Decimal("4.03395124898942")).div(System.Decimal("0.0000000928410849035"))), "G"), "(new Decimal(\"4.03395124898942\")).div(\"0.0000000928410849035\").toString() == \"43450065.810652162786851680039\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("89.719799308907125", Bridge.Int.format(((System.Decimal("89.2452192442702")).add(System.Decimal("0.474580064636925"))), "G"), "(new Decimal(\"89.2452192442702\")).add(\"0.474580064636925\").toString() == \"89.719799308907125\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("7616096.4244623971027726383725", Bridge.Int.format(((System.Decimal("0.754648202450317")).div(System.Decimal("0.00000009908595695118"))), "G"), "(new Decimal(\"0.754648202450317\")).div(\"0.00000009908595695118\").toString() == \"7616096.4244623971027726383725\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0001721507228208858110900319", Bridge.Int.format(((System.Decimal("0.00000000703358706414")).div(System.Decimal("0.0000408571451161323"))), "G"), "(new Decimal(\"0.00000000703358706414\")).div(\"0.0000408571451161323\").toString() == \"0.0001721507228208858110900319\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000022714462393900636", Bridge.Int.format(((System.Decimal("0.00000008484566439169")).mul(System.Decimal("0.0000267715063070746"))), "G"), "(new Decimal(\"0.00000008484566439169\")).mul(\"0.0000267715063070746\").toString() == \"0.0000000000022714462393900636\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("95740315594.555877584430293733", Bridge.Int.format(((System.Decimal("753944.105819773")).div(System.Decimal("0.0000078748863646178"))), "G"), "(new Decimal(\"753944.105819773\")).div(\"0.0000078748863646178\").toString() == \"95740315594.555877584430293733\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("6.4069192960141739237", Bridge.Int.format(((System.Decimal("6.40685234982839")).add(System.Decimal("0.0000669461857839237"))), "G"), "(new Decimal(\"6.40685234982839\")).add(\"0.0000669461857839237\").toString() == \"6.4069192960141739237\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("2.7730492038105317936901033936", Bridge.Int.format(((System.Decimal("7091326.72152078")).mul(System.Decimal("0.00000039104801015512"))), "G"), "(new Decimal(\"7091326.72152078\")).mul(\"0.00000039104801015512\").toString() == \"2.7730492038105317936901033936\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("39.225255132451082330972995533", Bridge.Int.format(((System.Decimal("0.0150400641909987")).mul(System.Decimal("2608.05104514959"))), "G"), "(new Decimal(\"0.0150400641909987\")).mul(\"2608.05104514959\").toString() == \"39.225255132451082330972995533\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("2.48947713311905352214", Bridge.Int.format(((System.Decimal("2.48947596293384")).add(System.Decimal("0.00000117018521352214"))), "G"), "(new Decimal(\"2.48947596293384\")).add(\"0.00000117018521352214\").toString() == \"2.48947713311905352214\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("880946682.13701250534829592747", Bridge.Int.format(((System.Decimal("720.791596789282")).div(System.Decimal("0.00000081820115950806"))), "G"), "(new Decimal(\"720.791596789282\")).div(\"0.00000081820115950806\").toString() == \"880946682.13701250534829592747\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("267.25912423523108411359660085", Bridge.Int.format(((System.Decimal("378388.367769489")).mul(System.Decimal("0.000706309038543286"))), "G"), "(new Decimal(\"378388.367769489\")).mul(\"0.000706309038543286\").toString() == \"267.25912423523108411359660085\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-32046.841084978907", Bridge.Int.format(((System.Decimal("978.517128610293")).sub(System.Decimal("33025.3582135892"))), "G"), "(new Decimal(\"978.517128610293\")).sub(\"33025.3582135892\").toString() == \"-32046.841084978907\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.00139737929887948", Bridge.Int.format(((System.Decimal("0.00217247345120296")).sub(System.Decimal("0.00077509415232348"))), "G"), "(new Decimal(\"0.00217247345120296\")).sub(\"0.00077509415232348\").toString() == \"0.00139737929887948\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000046530416190453426", Bridge.Int.format(((System.Decimal("0.000136329152219151")).mul(System.Decimal("0.0000000341309363647"))), "G"), "(new Decimal(\"0.000136329152219151\")).mul(\"0.0000000341309363647\").toString() == \"0.0000000000046530416190453426\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-4850951.788916537256405138", Bridge.Int.format(((System.Decimal("0.000426702743594862")).sub(System.Decimal("4850951.78934324"))), "G"), "(new Decimal(\"0.000426702743594862\")).sub(\"4850951.78934324\").toString() == \"-4850951.788916537256405138\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("3607.9677572355331381655390708", Bridge.Int.format(((System.Decimal("219.782070359114")).div(System.Decimal("0.0609157523423972"))), "G"), "(new Decimal(\"219.782070359114\")).div(\"0.0609157523423972\").toString() == \"3607.9677572355331381655390708\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-59578.20478480686224", Bridge.Int.format(((System.Decimal("9.13404255133776")).sub(System.Decimal("59587.3388273582"))), "G"), "(new Decimal(\"9.13404255133776\")).sub(\"59587.3388273582\").toString() == \"-59578.20478480686224\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("7579.1908166668147017746539623", Bridge.Int.format(((System.Decimal("0.000786728870489974")).div(System.Decimal("0.00000010380116948104"))), "G"), "(new Decimal(\"0.000786728870489974\")).div(\"0.00000010380116948104\").toString() == \"7579.1908166668147017746539623\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-4.1981967099609962025", Bridge.Int.format(((System.Decimal("0.0000004602920037975")).sub(System.Decimal("4.198197170253"))), "G"), "(new Decimal(\"0.0000004602920037975\")).sub(\"4.198197170253\").toString() == \"-4.1981967099609962025\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.00008656549534796066", Bridge.Int.format(((System.Decimal("0.0000866447461706795")).sub(System.Decimal("0.00000007925082271884"))), "G"), "(new Decimal(\"0.0000866447461706795\")).sub(\"0.00000007925082271884\").toString() == \"0.00008656549534796066\" FAILED");
                 // #1650
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0002938065361778543390344760", Bridge.Int.format(((System.Decimal("0.00000388761161541921")).mul(System.Decimal("75.5750741695869"))), 'G'), "(new Decimal(\"0.00000388761161541921\")).mul(\"75.5750741695869\").toString() == \"0.0002938065361778543390344760\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0002938065361778543390344760", Bridge.Int.format(((System.Decimal("0.00000388761161541921")).mul(System.Decimal("75.5750741695869"))), "G"), "(new Decimal(\"0.00000388761161541921\")).mul(\"75.5750741695869\").toString() == \"0.0002938065361778543390344760\" FAILED");
 
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.07021769672083374498", Bridge.Int.format(((System.Decimal("0.0702169635660094")).add(System.Decimal("0.00000073315482434498"))), 'G'), "(new Decimal(\"0.0702169635660094\")).add(\"0.00000073315482434498\").toString() == \"0.07021769672083374498\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.07021769672083374498", Bridge.Int.format(((System.Decimal("0.0702169635660094")).add(System.Decimal("0.00000073315482434498"))), "G"), "(new Decimal(\"0.0702169635660094\")).add(\"0.00000073315482434498\").toString() == \"0.07021769672083374498\" FAILED");
                 // #1650
-                Bridge.Test.NUnit.Assert.AreEqual$1("248795975759.24153521774922170", Bridge.Int.format(((System.Decimal("274391.580035161")).mul(System.Decimal("906718.696424141"))), 'G'), "(new Decimal(\"274391.580035161\")).mul(\"906718.696424141\").toString() == \"248795975759.24153521774922170\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("248795975759.24153521774922170", Bridge.Int.format(((System.Decimal("274391.580035161")).mul(System.Decimal("906718.696424141"))), "G"), "(new Decimal(\"274391.580035161\")).mul(\"906718.696424141\").toString() == \"248795975759.24153521774922170\" FAILED");
 
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000063518043668020539957365", Bridge.Int.format(((System.Decimal("0.00000067736893644434")).mul(System.Decimal("9.37717102904672"))), 'G'), "(new Decimal(\"0.00000067736893644434\")).mul(\"9.37717102904672\").toString() == \"0.0000063518043668020539957365\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-25.24833340239167136", Bridge.Int.format(((System.Decimal("0.00810707191382864")).sub(System.Decimal("25.2564404743055"))), 'G'), "(new Decimal(\"0.00810707191382864\")).sub(\"25.2564404743055\").toString() == \"-25.24833340239167136\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("366652481671.12116866091032792", Bridge.Int.format(((System.Decimal("337218.588375123")).div(System.Decimal("0.0000009197226399182"))), 'G'), "(new Decimal(\"337218.588375123\")).div(\"0.0000009197226399182\").toString() == \"366652481671.12116866091032792\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.00097101861317670853", Bridge.Int.format(((System.Decimal("0.000970961897620448")).add(System.Decimal("0.00000005671555626053"))), 'G'), "(new Decimal(\"0.000970961897620448\")).add(\"0.00000005671555626053\").toString() == \"0.00097101861317670853\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("7179480897.0413794612790482633", Bridge.Int.format(((System.Decimal("756541.015466927")).mul(System.Decimal("9489.8766230279"))), 'G'), "(new Decimal(\"756541.015466927\")).mul(\"9489.8766230279\").toString() == \"7179480897.0413794612790482633\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-3633.6398901126231489135", Bridge.Int.format(((System.Decimal("0.0000264943868510865")).sub(System.Decimal("3633.63991660701"))), 'G'), "(new Decimal(\"0.0000264943868510865\")).sub(\"3633.63991660701\").toString() == \"-3633.6398901126231489135\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-492238.57879213989935796", Bridge.Int.format(((System.Decimal("0.00587727810064204")).sub(System.Decimal("492238.584669418"))), 'G'), "(new Decimal(\"0.00587727810064204\")).sub(\"492238.584669418\").toString() == \"-492238.57879213989935796\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("7.9661666768610785486", Bridge.Int.format(((System.Decimal("7.96619214954143")).sub(System.Decimal("0.0000254726803514514"))), 'G'), "(new Decimal(\"7.96619214954143\")).sub(\"0.0000254726803514514\").toString() == \"7.9661666768610785486\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("1.1127217455466662896347686896", Bridge.Int.format(((System.Decimal("346273.425196425")).div(System.Decimal("311194.983455909"))), 'G'), "(new Decimal(\"346273.425196425\")).div(\"311194.983455909\").toString() == \"1.1127217455466662896347686896\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("4.8468358384313691963755308986", Bridge.Int.format(((System.Decimal("85.1793199242928")).div(System.Decimal("17.5742118701219"))), 'G'), "(new Decimal(\"85.1793199242928\")).div(\"17.5742118701219\").toString() == \"4.8468358384313691963755308986\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.121457026045982637", Bridge.Int.format(((System.Decimal("0.121196779478899")).add(System.Decimal("0.000260246567083637"))), 'G'), "(new Decimal(\"0.121196779478899\")).add(\"0.000260246567083637\").toString() == \"0.121457026045982637\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-30759.91316974471503713", Bridge.Int.format(((System.Decimal("0.00907333258496287")).sub(System.Decimal("30759.9222430773"))), 'G'), "(new Decimal(\"0.00907333258496287\")).sub(\"30759.9222430773\").toString() == \"-30759.91316974471503713\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("906.6246250772131248336", Bridge.Int.format(((System.Decimal("906.624596988142")).add(System.Decimal("0.0000280890711248336"))), 'G'), "(new Decimal(\"906.624596988142\")).add(\"0.0000280890711248336\").toString() == \"906.6246250772131248336\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("279112366.91872199097653690363", Bridge.Int.format(((System.Decimal("5976325.60691625")).mul(System.Decimal("46.7030053710113"))), 'G'), "(new Decimal(\"5976325.60691625\")).mul(\"46.7030053710113\").toString() == \"279112366.91872199097653690363\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("3487.68489765640454528", Bridge.Int.format(((System.Decimal("3487.68775513754")).sub(System.Decimal("0.00285748113545472"))), 'G'), "(new Decimal(\"3487.68775513754\")).sub(\"0.00285748113545472\").toString() == \"3487.68489765640454528\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000003104791009850215294554", Bridge.Int.format(((System.Decimal("0.000475329228898198")).div(System.Decimal("1530.95402360473"))), 'G'), "(new Decimal(\"0.000475329228898198\")).div(\"1530.95402360473\").toString() == \"0.0000003104791009850215294554\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("843.49677454265676470597", Bridge.Int.format(((System.Decimal("843.496774716068")).sub(System.Decimal("0.00000017341123529403"))), 'G'), "(new Decimal(\"843.496774716068\")).sub(\"0.00000017341123529403\").toString() == \"843.49677454265676470597\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("27.32456344093503007762349601", Bridge.Int.format(((System.Decimal("0.00197717379870693")).mul(System.Decimal("13820.010895757"))), 'G'), "(new Decimal(\"0.00197717379870693\")).mul(\"13820.010895757\").toString() == \"27.32456344093503007762349601\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000133398085305956484381", Bridge.Int.format(((System.Decimal("0.000708901179353195")).div(System.Decimal("53141.7806880277"))), 'G'), "(new Decimal(\"0.000708901179353195\")).div(\"53141.7806880277\").toString() == \"0.0000000133398085305956484381\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("63225.9975649597083791267", Bridge.Int.format(((System.Decimal("63225.9976413222")).sub(System.Decimal("0.0000763624916208733"))), 'G'), "(new Decimal(\"63225.9976413222\")).sub(\"0.0000763624916208733\").toString() == \"63225.9975649597083791267\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("90165.355585698323663902", Bridge.Int.format(((System.Decimal("90165.3561229656")).sub(System.Decimal("0.000537267276336098"))), 'G'), "(new Decimal(\"90165.3561229656\")).sub(\"0.000537267276336098\").toString() == \"90165.355585698323663902\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000004084178640305073762", Bridge.Int.format(((System.Decimal("0.0000351506077382484")).div(System.Decimal("86065.3042728385"))), 'G'), "(new Decimal(\"0.0000351506077382484\")).div(\"86065.3042728385\").toString() == \"0.0000000004084178640305073762\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("6.36616576073451628351", Bridge.Int.format(((System.Decimal("6.36616601905141")).sub(System.Decimal("0.00000025831689371649"))), 'G'), "(new Decimal(\"6.36616601905141\")).sub(\"0.00000025831689371649\").toString() == \"6.36616576073451628351\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("950819.51903543659609543293061", Bridge.Int.format(((System.Decimal("0.0188125421380683")).div(System.Decimal("0.00000001978560784822"))), 'G'), "(new Decimal(\"0.0188125421380683\")).div(\"0.00000001978560784822\").toString() == \"950819.51903543659609543293061\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0001281218872841341670208902", Bridge.Int.format(((System.Decimal("0.0000201579493098696")).mul(System.Decimal("6.35589887218359"))), 'G'), "(new Decimal(\"0.0000201579493098696\")).mul(\"6.35589887218359\").toString() == \"0.0001281218872841341670208902\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("100501.68372248376", Bridge.Int.format(((System.Decimal("96670.6671736532")).add(System.Decimal("3831.01654883056"))), 'G'), "(new Decimal(\"96670.6671736532\")).add(\"3831.01654883056\").toString() == \"100501.68372248376\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.007565086812628940345573773", Bridge.Int.format(((System.Decimal("6377.50250118668")).div(System.Decimal("843017.755003189"))), 'G'), "(new Decimal(\"6377.50250118668\")).div(\"843017.755003189\").toString() == \"0.007565086812628940345573773\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("8.6365193165306442105296800123", Bridge.Int.format(((System.Decimal("0.00984376350876119")).mul(System.Decimal("877.359488456212"))), 'G'), "(new Decimal(\"0.00984376350876119\")).mul(\"877.359488456212\").toString() == \"8.6365193165306442105296800123\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("3395749.5740729445309136648368", Bridge.Int.format(((System.Decimal("9.97239828574117")).div(System.Decimal("0.00000293672959922661"))), 'G'), "(new Decimal(\"9.97239828574117\")).div(\"0.00000293672959922661\").toString() == \"3395749.5740729445309136648368\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000503282881253889121331449", Bridge.Int.format(((System.Decimal("0.00000005182576428718")).mul(System.Decimal("971.10556530352"))), 'G'), "(new Decimal(\"0.00000005182576428718\")).mul(\"971.10556530352\").toString() == \"0.0000503282881253889121331449\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("1755687.77683918075262034347", Bridge.Int.format(((System.Decimal("1755687.77683922")).sub(System.Decimal("0.00000003924737965653"))), 'G'), "(new Decimal(\"1755687.77683922\")).sub(\"0.00000003924737965653\").toString() == \"1755687.77683918075262034347\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000063518043668020539957365", Bridge.Int.format(((System.Decimal("0.00000067736893644434")).mul(System.Decimal("9.37717102904672"))), "G"), "(new Decimal(\"0.00000067736893644434\")).mul(\"9.37717102904672\").toString() == \"0.0000063518043668020539957365\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-25.24833340239167136", Bridge.Int.format(((System.Decimal("0.00810707191382864")).sub(System.Decimal("25.2564404743055"))), "G"), "(new Decimal(\"0.00810707191382864\")).sub(\"25.2564404743055\").toString() == \"-25.24833340239167136\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("366652481671.12116866091032792", Bridge.Int.format(((System.Decimal("337218.588375123")).div(System.Decimal("0.0000009197226399182"))), "G"), "(new Decimal(\"337218.588375123\")).div(\"0.0000009197226399182\").toString() == \"366652481671.12116866091032792\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.00097101861317670853", Bridge.Int.format(((System.Decimal("0.000970961897620448")).add(System.Decimal("0.00000005671555626053"))), "G"), "(new Decimal(\"0.000970961897620448\")).add(\"0.00000005671555626053\").toString() == \"0.00097101861317670853\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("7179480897.0413794612790482633", Bridge.Int.format(((System.Decimal("756541.015466927")).mul(System.Decimal("9489.8766230279"))), "G"), "(new Decimal(\"756541.015466927\")).mul(\"9489.8766230279\").toString() == \"7179480897.0413794612790482633\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-3633.6398901126231489135", Bridge.Int.format(((System.Decimal("0.0000264943868510865")).sub(System.Decimal("3633.63991660701"))), "G"), "(new Decimal(\"0.0000264943868510865\")).sub(\"3633.63991660701\").toString() == \"-3633.6398901126231489135\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-492238.57879213989935796", Bridge.Int.format(((System.Decimal("0.00587727810064204")).sub(System.Decimal("492238.584669418"))), "G"), "(new Decimal(\"0.00587727810064204\")).sub(\"492238.584669418\").toString() == \"-492238.57879213989935796\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("7.9661666768610785486", Bridge.Int.format(((System.Decimal("7.96619214954143")).sub(System.Decimal("0.0000254726803514514"))), "G"), "(new Decimal(\"7.96619214954143\")).sub(\"0.0000254726803514514\").toString() == \"7.9661666768610785486\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("1.1127217455466662896347686896", Bridge.Int.format(((System.Decimal("346273.425196425")).div(System.Decimal("311194.983455909"))), "G"), "(new Decimal(\"346273.425196425\")).div(\"311194.983455909\").toString() == \"1.1127217455466662896347686896\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("4.8468358384313691963755308986", Bridge.Int.format(((System.Decimal("85.1793199242928")).div(System.Decimal("17.5742118701219"))), "G"), "(new Decimal(\"85.1793199242928\")).div(\"17.5742118701219\").toString() == \"4.8468358384313691963755308986\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.121457026045982637", Bridge.Int.format(((System.Decimal("0.121196779478899")).add(System.Decimal("0.000260246567083637"))), "G"), "(new Decimal(\"0.121196779478899\")).add(\"0.000260246567083637\").toString() == \"0.121457026045982637\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-30759.91316974471503713", Bridge.Int.format(((System.Decimal("0.00907333258496287")).sub(System.Decimal("30759.9222430773"))), "G"), "(new Decimal(\"0.00907333258496287\")).sub(\"30759.9222430773\").toString() == \"-30759.91316974471503713\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("906.6246250772131248336", Bridge.Int.format(((System.Decimal("906.624596988142")).add(System.Decimal("0.0000280890711248336"))), "G"), "(new Decimal(\"906.624596988142\")).add(\"0.0000280890711248336\").toString() == \"906.6246250772131248336\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("279112366.91872199097653690363", Bridge.Int.format(((System.Decimal("5976325.60691625")).mul(System.Decimal("46.7030053710113"))), "G"), "(new Decimal(\"5976325.60691625\")).mul(\"46.7030053710113\").toString() == \"279112366.91872199097653690363\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("3487.68489765640454528", Bridge.Int.format(((System.Decimal("3487.68775513754")).sub(System.Decimal("0.00285748113545472"))), "G"), "(new Decimal(\"3487.68775513754\")).sub(\"0.00285748113545472\").toString() == \"3487.68489765640454528\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000003104791009850215294554", Bridge.Int.format(((System.Decimal("0.000475329228898198")).div(System.Decimal("1530.95402360473"))), "G"), "(new Decimal(\"0.000475329228898198\")).div(\"1530.95402360473\").toString() == \"0.0000003104791009850215294554\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("843.49677454265676470597", Bridge.Int.format(((System.Decimal("843.496774716068")).sub(System.Decimal("0.00000017341123529403"))), "G"), "(new Decimal(\"843.496774716068\")).sub(\"0.00000017341123529403\").toString() == \"843.49677454265676470597\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("27.32456344093503007762349601", Bridge.Int.format(((System.Decimal("0.00197717379870693")).mul(System.Decimal("13820.010895757"))), "G"), "(new Decimal(\"0.00197717379870693\")).mul(\"13820.010895757\").toString() == \"27.32456344093503007762349601\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000133398085305956484381", Bridge.Int.format(((System.Decimal("0.000708901179353195")).div(System.Decimal("53141.7806880277"))), "G"), "(new Decimal(\"0.000708901179353195\")).div(\"53141.7806880277\").toString() == \"0.0000000133398085305956484381\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("63225.9975649597083791267", Bridge.Int.format(((System.Decimal("63225.9976413222")).sub(System.Decimal("0.0000763624916208733"))), "G"), "(new Decimal(\"63225.9976413222\")).sub(\"0.0000763624916208733\").toString() == \"63225.9975649597083791267\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("90165.355585698323663902", Bridge.Int.format(((System.Decimal("90165.3561229656")).sub(System.Decimal("0.000537267276336098"))), "G"), "(new Decimal(\"90165.3561229656\")).sub(\"0.000537267276336098\").toString() == \"90165.355585698323663902\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000004084178640305073762", Bridge.Int.format(((System.Decimal("0.0000351506077382484")).div(System.Decimal("86065.3042728385"))), "G"), "(new Decimal(\"0.0000351506077382484\")).div(\"86065.3042728385\").toString() == \"0.0000000004084178640305073762\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("6.36616576073451628351", Bridge.Int.format(((System.Decimal("6.36616601905141")).sub(System.Decimal("0.00000025831689371649"))), "G"), "(new Decimal(\"6.36616601905141\")).sub(\"0.00000025831689371649\").toString() == \"6.36616576073451628351\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("950819.51903543659609543293061", Bridge.Int.format(((System.Decimal("0.0188125421380683")).div(System.Decimal("0.00000001978560784822"))), "G"), "(new Decimal(\"0.0188125421380683\")).div(\"0.00000001978560784822\").toString() == \"950819.51903543659609543293061\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0001281218872841341670208902", Bridge.Int.format(((System.Decimal("0.0000201579493098696")).mul(System.Decimal("6.35589887218359"))), "G"), "(new Decimal(\"0.0000201579493098696\")).mul(\"6.35589887218359\").toString() == \"0.0001281218872841341670208902\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("100501.68372248376", Bridge.Int.format(((System.Decimal("96670.6671736532")).add(System.Decimal("3831.01654883056"))), "G"), "(new Decimal(\"96670.6671736532\")).add(\"3831.01654883056\").toString() == \"100501.68372248376\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.007565086812628940345573773", Bridge.Int.format(((System.Decimal("6377.50250118668")).div(System.Decimal("843017.755003189"))), "G"), "(new Decimal(\"6377.50250118668\")).div(\"843017.755003189\").toString() == \"0.007565086812628940345573773\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("8.6365193165306442105296800123", Bridge.Int.format(((System.Decimal("0.00984376350876119")).mul(System.Decimal("877.359488456212"))), "G"), "(new Decimal(\"0.00984376350876119\")).mul(\"877.359488456212\").toString() == \"8.6365193165306442105296800123\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("3395749.5740729445309136648368", Bridge.Int.format(((System.Decimal("9.97239828574117")).div(System.Decimal("0.00000293672959922661"))), "G"), "(new Decimal(\"9.97239828574117\")).div(\"0.00000293672959922661\").toString() == \"3395749.5740729445309136648368\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000503282881253889121331449", Bridge.Int.format(((System.Decimal("0.00000005182576428718")).mul(System.Decimal("971.10556530352"))), "G"), "(new Decimal(\"0.00000005182576428718\")).mul(\"971.10556530352\").toString() == \"0.0000503282881253889121331449\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("1755687.77683918075262034347", Bridge.Int.format(((System.Decimal("1755687.77683922")).sub(System.Decimal("0.00000003924737965653"))), "G"), "(new Decimal(\"1755687.77683922\")).sub(\"0.00000003924737965653\").toString() == \"1755687.77683918075262034347\" FAILED");
                 // #1650
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000667441803526521607590", Bridge.Int.format(((System.Decimal("0.0000688309593912358")).mul(System.Decimal("0.000969682551906296"))), 'G'), "(new Decimal(\"0.0000688309593912358\")).mul(\"0.000969682551906296\").toString() == \"0.0000000667441803526521607590\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000667441803526521607590", Bridge.Int.format(((System.Decimal("0.0000688309593912358")).mul(System.Decimal("0.000969682551906296"))), "G"), "(new Decimal(\"0.0000688309593912358\")).mul(\"0.000969682551906296\").toString() == \"0.0000000667441803526521607590\" FAILED");
 
-                Bridge.Test.NUnit.Assert.AreEqual$1("5007756.38734349805052136446", Bridge.Int.format(((System.Decimal("5007756.38735283")).sub(System.Decimal("0.00000933194947863554"))), 'G'), "(new Decimal(\"5007756.38735283\")).sub(\"0.00000933194947863554\").toString() == \"5007756.38734349805052136446\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("8519.28502213539257358044", Bridge.Int.format(((System.Decimal("8519.28502252292")).sub(System.Decimal("0.00000038752742641956"))), 'G'), "(new Decimal(\"8519.28502252292\")).sub(\"0.00000038752742641956\").toString() == \"8519.28502213539257358044\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("8376.91325157743275230985", Bridge.Int.format(((System.Decimal("8376.9132515308")).add(System.Decimal("0.00000004663275230985"))), 'G'), "(new Decimal(\"8376.9132515308\")).add(\"0.00000004663275230985\").toString() == \"8376.91325157743275230985\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.00610815784999223683", Bridge.Int.format(((System.Decimal("0.0061082019266245")).sub(System.Decimal("0.00000004407663226317"))), 'G'), "(new Decimal(\"0.0061082019266245\")).sub(\"0.00000004407663226317\").toString() == \"0.00610815784999223683\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-6.6857970204242414917", Bridge.Int.format(((System.Decimal("0.0000091555889785083")).sub(System.Decimal("6.68580617601322"))), 'G'), "(new Decimal(\"0.0000091555889785083\")).sub(\"6.68580617601322\").toString() == \"-6.6857970204242414917\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000049877587914779734645683", Bridge.Int.format(((System.Decimal("0.679050468690251")).mul(System.Decimal("0.00000734519600744601"))), 'G'), "(new Decimal(\"0.679050468690251\")).mul(\"0.00000734519600744601\").toString() == \"0.0000049877587914779734645683\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("1331757.9219696450201665110972", Bridge.Int.format(((System.Decimal("72.9822536338969")).div(System.Decimal("0.0000548014413354925"))), 'G'), "(new Decimal(\"72.9822536338969\")).div(\"0.0000548014413354925\").toString() == \"1331757.9219696450201665110972\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0002184819375517202908665847", Bridge.Int.format(((System.Decimal("0.00000018985219774295")).div(System.Decimal("0.000868960610064194"))), 'G'), "(new Decimal(\"0.00000018985219774295\")).div(\"0.000868960610064194\").toString() == \"0.0002184819375517202908665847\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-873438.38944748009399", Bridge.Int.format(((System.Decimal("7.31134765190601")).sub(System.Decimal("873445.700795132"))), 'G'), "(new Decimal(\"7.31134765190601\")).sub(\"873445.700795132\").toString() == \"-873438.38944748009399\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("4392083.3322472776428269303282", Bridge.Int.format(((System.Decimal("4389325.52672426")).div(System.Decimal("0.999372096266305"))), 'G'), "(new Decimal(\"4389325.52672426\")).div(\"0.999372096266305\").toString() == \"4392083.3322472776428269303282\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("3511082.4535909329651685", Bridge.Int.format(((System.Decimal("3511082.54562648")).sub(System.Decimal("0.0920355470348315"))), 'G'), "(new Decimal(\"3511082.54562648\")).sub(\"0.0920355470348315\").toString() == \"3511082.4535909329651685\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("619.45098835034374784773429077", Bridge.Int.format(((System.Decimal("310.688569820807")).div(System.Decimal("0.501554724528247"))), 'G'), "(new Decimal(\"310.688569820807\")).div(\"0.501554724528247\").toString() == \"619.45098835034374784773429077\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000173331929981605953452824", Bridge.Int.format(((System.Decimal("0.00000003554128810556")).div(System.Decimal("0.00205047553034987"))), 'G'), "(new Decimal(\"0.00000003554128810556\")).div(\"0.00205047553034987\").toString() == \"0.0000173331929981605953452824\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("2197324.21086973644253935499", Bridge.Int.format(((System.Decimal("2197324.21086976")).sub(System.Decimal("0.00000002355746064501"))), 'G'), "(new Decimal(\"2197324.21086976\")).sub(\"0.00000002355746064501\").toString() == \"2197324.21086973644253935499\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("4.4226279162585874248", Bridge.Int.format(((System.Decimal("4.42253004499829")).add(System.Decimal("0.0000978712602974248"))), 'G'), "(new Decimal(\"4.42253004499829\")).add(\"0.0000978712602974248\").toString() == \"4.4226279162585874248\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("352307.69884553949094527331", Bridge.Int.format(((System.Decimal("352307.698853457")).sub(System.Decimal("0.00000791750905472669"))), 'G'), "(new Decimal(\"352307.698853457\")).sub(\"0.00000791750905472669\").toString() == \"352307.69884553949094527331\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("17096896.787851146291328234831", Bridge.Int.format(((System.Decimal("721.870396156735")).mul(System.Decimal("23684.1639148463"))), 'G'), "(new Decimal(\"721.870396156735\")).mul(\"23684.1639148463\").toString() == \"17096896.787851146291328234831\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000058569075628029528804", Bridge.Int.format(((System.Decimal("0.000786162371181959")).div(System.Decimal("134228.236104468"))), 'G'), "(new Decimal(\"0.000786162371181959\")).div(\"134228.236104468\").toString() == \"0.0000000058569075628029528804\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-5591696.2786194911832293", Bridge.Int.format(((System.Decimal("0.0291847988167707")).sub(System.Decimal("5591696.30780429"))), 'G'), "(new Decimal(\"0.0291847988167707\")).sub(\"5591696.30780429\").toString() == \"-5591696.2786194911832293\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("67077.9713607756712", Bridge.Int.format(((System.Decimal("67027.4105235131")).add(System.Decimal("50.5608372625712"))), 'G'), "(new Decimal(\"67027.4105235131\")).add(\"50.5608372625712\").toString() == \"67077.9713607756712\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000442928238101105816891", Bridge.Int.format(((System.Decimal("0.452668749472438")).mul(System.Decimal("0.00000009784820326504"))), 'G'), "(new Decimal(\"0.452668749472438\")).mul(\"0.00000009784820326504\").toString() == \"0.0000000442928238101105816891\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("796.73004845438731539809", Bridge.Int.format(((System.Decimal("796.730048394171")).add(System.Decimal("0.00000006021631539809"))), 'G'), "(new Decimal(\"796.730048394171\")).add(\"0.00000006021631539809\").toString() == \"796.73004845438731539809\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000001129027912971335249117", Bridge.Int.format(((System.Decimal("0.00393717444219495")).div(System.Decimal("34872.2506942564"))), 'G'), "(new Decimal(\"0.00393717444219495\")).div(\"34872.2506942564\").toString() == \"0.0000001129027912971335249117\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0254376983229297496691344205", Bridge.Int.format(((System.Decimal("0.00680742215216505")).mul(System.Decimal("3.73675934213063"))), 'G'), "(new Decimal(\"0.00680742215216505\")).mul(\"3.73675934213063\").toString() == \"0.0254376983229297496691344205\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-315.51025068765613449375", Bridge.Int.format(((System.Decimal("0.00000893482386550625")).sub(System.Decimal("315.51025962248"))), 'G'), "(new Decimal(\"0.00000893482386550625\")).sub(\"315.51025962248\").toString() == \"-315.51025068765613449375\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0003013325022026421797172656", Bridge.Int.format(((System.Decimal("0.000027297311009512")).mul(System.Decimal("11.0389079018677"))), 'G'), "(new Decimal(\"0.000027297311009512\")).mul(\"11.0389079018677\").toString() == \"0.0003013325022026421797172656\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("402.83617806471816721794725061", Bridge.Int.format(((System.Decimal("54243.3473999814")).div(System.Decimal("134.653614430993"))), 'G'), "(new Decimal(\"54243.3473999814\")).div(\"134.653614430993\").toString() == \"402.83617806471816721794725061\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000000039584325266911", Bridge.Int.format(((System.Decimal("0.00000021819561916319")).mul(System.Decimal("0.00000001814166820522"))), 'G'), "(new Decimal(\"0.00000021819561916319\")).mul(\"0.00000001814166820522\").toString() == \"0.0000000000000039584325266911\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.07274982420726249867", Bridge.Int.format(((System.Decimal("0.00000006649979439867")).add(System.Decimal("0.0727497577074681"))), 'G'), "(new Decimal(\"0.00000006649979439867\")).add(\"0.0727497577074681\").toString() == \"0.07274982420726249867\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("125.09829068179389161411857875", Bridge.Int.format(((System.Decimal("0.0942382432959221")).div(System.Decimal("0.000753313596711174"))), 'G'), "(new Decimal(\"0.0942382432959221\")).div(\"0.000753313596711174\").toString() == \"125.09829068179389161411857875\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("3.1072210310858812077194224446", Bridge.Int.format(((System.Decimal("0.000336303566739105")).mul(System.Decimal("9239.33415638252"))), 'G'), "(new Decimal(\"0.000336303566739105\")).mul(\"9239.33415638252\").toString() == \"3.1072210310858812077194224446\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.00000293927498163621", Bridge.Int.format(((System.Decimal("0.00000296421897735643")).sub(System.Decimal("0.00000002494399572022"))), 'G'), "(new Decimal(\"0.00000296421897735643\")).sub(\"0.00000002494399572022\").toString() == \"0.00000293927498163621\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.95424499521071008787", Bridge.Int.format(((System.Decimal("0.00000005236202508787")).add(System.Decimal("0.954244942848685"))), 'G'), "(new Decimal(\"0.00000005236202508787\")).add(\"0.954244942848685\").toString() == \"0.95424499521071008787\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0840038726281231661070730835", Bridge.Int.format(((System.Decimal("0.544814708896361")).div(System.Decimal("6.48559038829319"))), 'G'), "(new Decimal(\"0.544814708896361\")).div(\"6.48559038829319\").toString() == \"0.0840038726281231661070730835\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("5.584384619064811", Bridge.Int.format(((System.Decimal("5.92341898285012")).sub(System.Decimal("0.339034363785309"))), 'G'), "(new Decimal(\"5.92341898285012\")).sub(\"0.339034363785309\").toString() == \"5.584384619064811\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("768961.59481674478", Bridge.Int.format(((System.Decimal("761069.961246601")).add(System.Decimal("7891.63357014378"))), 'G'), "(new Decimal(\"761069.961246601\")).add(\"7891.63357014378\").toString() == \"768961.59481674478\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("7.1449367324811184962392161905", Bridge.Int.format(((System.Decimal("0.0057420220671883")).div(System.Decimal("0.000803649112956435"))), 'G'), "(new Decimal(\"0.0057420220671883\")).div(\"0.000803649112956435\").toString() == \"7.1449367324811184962392161905\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000671343925763854248084927", Bridge.Int.format(((System.Decimal("0.00000249094584141436")).div(System.Decimal("0.0371038709939941"))), 'G'), "(new Decimal(\"0.00000249094584141436\")).div(\"0.0371038709939941\").toString() == \"0.0000671343925763854248084927\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("3379.636871480214643", Bridge.Int.format(((System.Decimal("3379.79016051618")).sub(System.Decimal("0.153289035965357"))), 'G'), "(new Decimal(\"3379.79016051618\")).sub(\"0.153289035965357\").toString() == \"3379.636871480214643\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-5537047.53310281883348247913", Bridge.Int.format(((System.Decimal("0.00000000116651752087")).sub(System.Decimal("5537047.53310282"))), 'G'), "(new Decimal(\"0.00000000116651752087\")).sub(\"5537047.53310282\").toString() == \"-5537047.53310281883348247913\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-119.1551636528016", Bridge.Int.format(((System.Decimal("46.4980181523124")).sub(System.Decimal("165.653181805114"))), 'G'), "(new Decimal(\"46.4980181523124\")).sub(\"165.653181805114\").toString() == \"-119.1551636528016\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("7507411.17052143912417469505", Bridge.Int.format(((System.Decimal("7507411.17052148")).sub(System.Decimal("0.00000004087582530495"))), 'G'), "(new Decimal(\"7507411.17052148\")).sub(\"0.00000004087582530495\").toString() == \"7507411.17052143912417469505\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("3680288.3885330385286851", Bridge.Int.format(((System.Decimal("3680288.43481107")).sub(System.Decimal("0.0462780314713149"))), 'G'), "(new Decimal(\"3680288.43481107\")).sub(\"0.0462780314713149\").toString() == \"3680288.3885330385286851\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-0.00064079973490480291", Bridge.Int.format(((System.Decimal("0.00000183056355073609")).sub(System.Decimal("0.000642630298455539"))), 'G'), "(new Decimal(\"0.00000183056355073609\")).sub(\"0.000642630298455539\").toString() == \"-0.00064079973490480291\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-2.057870254878829", Bridge.Int.format(((System.Decimal("0.390304429638341")).sub(System.Decimal("2.44817468451717"))), 'G'), "(new Decimal(\"0.390304429638341\")).sub(\"2.44817468451717\").toString() == \"-2.057870254878829\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.82801381893790463861", Bridge.Int.format(((System.Decimal("0.00000077470167063861")).add(System.Decimal("0.828013044236234"))), 'G'), "(new Decimal(\"0.00000077470167063861\")).add(\"0.828013044236234\").toString() == \"0.82801381893790463861\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0575119050604619002876486373", Bridge.Int.format(((System.Decimal("71.2106066156228")).mul(System.Decimal("0.000807631163302637"))), 'G'), "(new Decimal(\"71.2106066156228\")).mul(\"0.000807631163302637\").toString() == \"0.0575119050604619002876486373\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000846380225479673155344", Bridge.Int.format(((System.Decimal("0.00000009483140771968")).mul(System.Decimal("0.892510451792046"))), 'G'), "(new Decimal(\"0.00000009483140771968\")).mul(\"0.892510451792046\").toString() == \"0.0000000846380225479673155344\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0001071853838444661455520212", Bridge.Int.format(((System.Decimal("2908.7434722617")).mul(System.Decimal("0.00000003684937666955"))), 'G'), "(new Decimal(\"2908.7434722617\")).mul(\"0.00000003684937666955\").toString() == \"0.0001071853838444661455520212\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.001658638454349077", Bridge.Int.format(((System.Decimal("0.000959274857751687")).add(System.Decimal("0.00069936359659739"))), 'G'), "(new Decimal(\"0.000959274857751687\")).add(\"0.00069936359659739\").toString() == \"0.001658638454349077\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("24639.663275647384108817333496", Bridge.Int.format(((System.Decimal("8683.4491690078")).mul(System.Decimal("2.83754333054532"))), 'G'), "(new Decimal(\"8683.4491690078\")).mul(\"2.83754333054532\").toString() == \"24639.663275647384108817333496\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("6117906.68505150707818221165", Bridge.Int.format(((System.Decimal("0.00000935707818221165")).add(System.Decimal("6117906.68504215"))), 'G'), "(new Decimal(\"0.00000935707818221165\")).add(\"6117906.68504215\").toString() == \"6117906.68505150707818221165\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("6.0121773791933949674368568908", Bridge.Int.format(((System.Decimal("6641.46798972109")).mul(System.Decimal("0.000905248265669331"))), 'G'), "(new Decimal(\"6641.46798972109\")).mul(\"0.000905248265669331\").toString() == \"6.0121773791933949674368568908\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000100639428179333997221056", Bridge.Int.format(((System.Decimal("0.0000713244643860145")).mul(System.Decimal("0.14110085374727"))), 'G'), "(new Decimal(\"0.0000713244643860145\")).mul(\"0.14110085374727\").toString() == \"0.0000100639428179333997221056\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("817567.71241020922149641", Bridge.Int.format(((System.Decimal("0.00126479322149641")).add(System.Decimal("817567.711145416"))), 'G'), "(new Decimal(\"0.00126479322149641\")).add(\"817567.711145416\").toString() == \"817567.71241020922149641\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("5911522.4475117541555222", Bridge.Int.format(((System.Decimal("5911522.42660128")).add(System.Decimal("0.0209104741555222"))), 'G'), "(new Decimal(\"5911522.42660128\")).add(\"0.0209104741555222\").toString() == \"5911522.4475117541555222\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-50.00480793221098247371", Bridge.Int.format(((System.Decimal("0.00000004386581752629")).sub(System.Decimal("50.0048079760768"))), 'G'), "(new Decimal(\"0.00000004386581752629\")).sub(\"50.0048079760768\").toString() == \"-50.00480793221098247371\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-0.00216393969813354769", Bridge.Int.format(((System.Decimal("0.00000009429415883231")).sub(System.Decimal("0.00216403399229238"))), 'G'), "(new Decimal(\"0.00000009429415883231\")).sub(\"0.00216403399229238\").toString() == \"-0.00216393969813354769\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("149554.64804066385942125034", Bridge.Int.format(((System.Decimal("0.00000007785942125034")).add(System.Decimal("149554.648040586"))), 'G'), "(new Decimal(\"0.00000007785942125034\")).add(\"149554.648040586\").toString() == \"149554.64804066385942125034\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000401579705382523868391", Bridge.Int.format(((System.Decimal("0.000514483727288658")).mul(System.Decimal("0.0000780548896072688"))), 'G'), "(new Decimal(\"0.000514483727288658\")).mul(\"0.0000780548896072688\").toString() == \"0.0000000401579705382523868391\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("4391586.0938727875920041853806", Bridge.Int.format(((System.Decimal("85.0879618362933")).div(System.Decimal("0.0000193752234426212"))), 'G'), "(new Decimal(\"85.0879618362933\")).div(\"0.0000193752234426212\").toString() == \"4391586.0938727875920041853806\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("5007756.38734349805052136446", Bridge.Int.format(((System.Decimal("5007756.38735283")).sub(System.Decimal("0.00000933194947863554"))), "G"), "(new Decimal(\"5007756.38735283\")).sub(\"0.00000933194947863554\").toString() == \"5007756.38734349805052136446\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("8519.28502213539257358044", Bridge.Int.format(((System.Decimal("8519.28502252292")).sub(System.Decimal("0.00000038752742641956"))), "G"), "(new Decimal(\"8519.28502252292\")).sub(\"0.00000038752742641956\").toString() == \"8519.28502213539257358044\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("8376.91325157743275230985", Bridge.Int.format(((System.Decimal("8376.9132515308")).add(System.Decimal("0.00000004663275230985"))), "G"), "(new Decimal(\"8376.9132515308\")).add(\"0.00000004663275230985\").toString() == \"8376.91325157743275230985\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.00610815784999223683", Bridge.Int.format(((System.Decimal("0.0061082019266245")).sub(System.Decimal("0.00000004407663226317"))), "G"), "(new Decimal(\"0.0061082019266245\")).sub(\"0.00000004407663226317\").toString() == \"0.00610815784999223683\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-6.6857970204242414917", Bridge.Int.format(((System.Decimal("0.0000091555889785083")).sub(System.Decimal("6.68580617601322"))), "G"), "(new Decimal(\"0.0000091555889785083\")).sub(\"6.68580617601322\").toString() == \"-6.6857970204242414917\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000049877587914779734645683", Bridge.Int.format(((System.Decimal("0.679050468690251")).mul(System.Decimal("0.00000734519600744601"))), "G"), "(new Decimal(\"0.679050468690251\")).mul(\"0.00000734519600744601\").toString() == \"0.0000049877587914779734645683\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("1331757.9219696450201665110972", Bridge.Int.format(((System.Decimal("72.9822536338969")).div(System.Decimal("0.0000548014413354925"))), "G"), "(new Decimal(\"72.9822536338969\")).div(\"0.0000548014413354925\").toString() == \"1331757.9219696450201665110972\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0002184819375517202908665847", Bridge.Int.format(((System.Decimal("0.00000018985219774295")).div(System.Decimal("0.000868960610064194"))), "G"), "(new Decimal(\"0.00000018985219774295\")).div(\"0.000868960610064194\").toString() == \"0.0002184819375517202908665847\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-873438.38944748009399", Bridge.Int.format(((System.Decimal("7.31134765190601")).sub(System.Decimal("873445.700795132"))), "G"), "(new Decimal(\"7.31134765190601\")).sub(\"873445.700795132\").toString() == \"-873438.38944748009399\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("4392083.3322472776428269303282", Bridge.Int.format(((System.Decimal("4389325.52672426")).div(System.Decimal("0.999372096266305"))), "G"), "(new Decimal(\"4389325.52672426\")).div(\"0.999372096266305\").toString() == \"4392083.3322472776428269303282\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("3511082.4535909329651685", Bridge.Int.format(((System.Decimal("3511082.54562648")).sub(System.Decimal("0.0920355470348315"))), "G"), "(new Decimal(\"3511082.54562648\")).sub(\"0.0920355470348315\").toString() == \"3511082.4535909329651685\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("619.45098835034374784773429077", Bridge.Int.format(((System.Decimal("310.688569820807")).div(System.Decimal("0.501554724528247"))), "G"), "(new Decimal(\"310.688569820807\")).div(\"0.501554724528247\").toString() == \"619.45098835034374784773429077\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000173331929981605953452824", Bridge.Int.format(((System.Decimal("0.00000003554128810556")).div(System.Decimal("0.00205047553034987"))), "G"), "(new Decimal(\"0.00000003554128810556\")).div(\"0.00205047553034987\").toString() == \"0.0000173331929981605953452824\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("2197324.21086973644253935499", Bridge.Int.format(((System.Decimal("2197324.21086976")).sub(System.Decimal("0.00000002355746064501"))), "G"), "(new Decimal(\"2197324.21086976\")).sub(\"0.00000002355746064501\").toString() == \"2197324.21086973644253935499\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("4.4226279162585874248", Bridge.Int.format(((System.Decimal("4.42253004499829")).add(System.Decimal("0.0000978712602974248"))), "G"), "(new Decimal(\"4.42253004499829\")).add(\"0.0000978712602974248\").toString() == \"4.4226279162585874248\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("352307.69884553949094527331", Bridge.Int.format(((System.Decimal("352307.698853457")).sub(System.Decimal("0.00000791750905472669"))), "G"), "(new Decimal(\"352307.698853457\")).sub(\"0.00000791750905472669\").toString() == \"352307.69884553949094527331\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("17096896.787851146291328234831", Bridge.Int.format(((System.Decimal("721.870396156735")).mul(System.Decimal("23684.1639148463"))), "G"), "(new Decimal(\"721.870396156735\")).mul(\"23684.1639148463\").toString() == \"17096896.787851146291328234831\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000058569075628029528804", Bridge.Int.format(((System.Decimal("0.000786162371181959")).div(System.Decimal("134228.236104468"))), "G"), "(new Decimal(\"0.000786162371181959\")).div(\"134228.236104468\").toString() == \"0.0000000058569075628029528804\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-5591696.2786194911832293", Bridge.Int.format(((System.Decimal("0.0291847988167707")).sub(System.Decimal("5591696.30780429"))), "G"), "(new Decimal(\"0.0291847988167707\")).sub(\"5591696.30780429\").toString() == \"-5591696.2786194911832293\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("67077.9713607756712", Bridge.Int.format(((System.Decimal("67027.4105235131")).add(System.Decimal("50.5608372625712"))), "G"), "(new Decimal(\"67027.4105235131\")).add(\"50.5608372625712\").toString() == \"67077.9713607756712\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000442928238101105816891", Bridge.Int.format(((System.Decimal("0.452668749472438")).mul(System.Decimal("0.00000009784820326504"))), "G"), "(new Decimal(\"0.452668749472438\")).mul(\"0.00000009784820326504\").toString() == \"0.0000000442928238101105816891\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("796.73004845438731539809", Bridge.Int.format(((System.Decimal("796.730048394171")).add(System.Decimal("0.00000006021631539809"))), "G"), "(new Decimal(\"796.730048394171\")).add(\"0.00000006021631539809\").toString() == \"796.73004845438731539809\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000001129027912971335249117", Bridge.Int.format(((System.Decimal("0.00393717444219495")).div(System.Decimal("34872.2506942564"))), "G"), "(new Decimal(\"0.00393717444219495\")).div(\"34872.2506942564\").toString() == \"0.0000001129027912971335249117\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0254376983229297496691344205", Bridge.Int.format(((System.Decimal("0.00680742215216505")).mul(System.Decimal("3.73675934213063"))), "G"), "(new Decimal(\"0.00680742215216505\")).mul(\"3.73675934213063\").toString() == \"0.0254376983229297496691344205\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-315.51025068765613449375", Bridge.Int.format(((System.Decimal("0.00000893482386550625")).sub(System.Decimal("315.51025962248"))), "G"), "(new Decimal(\"0.00000893482386550625\")).sub(\"315.51025962248\").toString() == \"-315.51025068765613449375\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0003013325022026421797172656", Bridge.Int.format(((System.Decimal("0.000027297311009512")).mul(System.Decimal("11.0389079018677"))), "G"), "(new Decimal(\"0.000027297311009512\")).mul(\"11.0389079018677\").toString() == \"0.0003013325022026421797172656\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("402.83617806471816721794725061", Bridge.Int.format(((System.Decimal("54243.3473999814")).div(System.Decimal("134.653614430993"))), "G"), "(new Decimal(\"54243.3473999814\")).div(\"134.653614430993\").toString() == \"402.83617806471816721794725061\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000000039584325266911", Bridge.Int.format(((System.Decimal("0.00000021819561916319")).mul(System.Decimal("0.00000001814166820522"))), "G"), "(new Decimal(\"0.00000021819561916319\")).mul(\"0.00000001814166820522\").toString() == \"0.0000000000000039584325266911\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.07274982420726249867", Bridge.Int.format(((System.Decimal("0.00000006649979439867")).add(System.Decimal("0.0727497577074681"))), "G"), "(new Decimal(\"0.00000006649979439867\")).add(\"0.0727497577074681\").toString() == \"0.07274982420726249867\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("125.09829068179389161411857875", Bridge.Int.format(((System.Decimal("0.0942382432959221")).div(System.Decimal("0.000753313596711174"))), "G"), "(new Decimal(\"0.0942382432959221\")).div(\"0.000753313596711174\").toString() == \"125.09829068179389161411857875\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("3.1072210310858812077194224446", Bridge.Int.format(((System.Decimal("0.000336303566739105")).mul(System.Decimal("9239.33415638252"))), "G"), "(new Decimal(\"0.000336303566739105\")).mul(\"9239.33415638252\").toString() == \"3.1072210310858812077194224446\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.00000293927498163621", Bridge.Int.format(((System.Decimal("0.00000296421897735643")).sub(System.Decimal("0.00000002494399572022"))), "G"), "(new Decimal(\"0.00000296421897735643\")).sub(\"0.00000002494399572022\").toString() == \"0.00000293927498163621\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.95424499521071008787", Bridge.Int.format(((System.Decimal("0.00000005236202508787")).add(System.Decimal("0.954244942848685"))), "G"), "(new Decimal(\"0.00000005236202508787\")).add(\"0.954244942848685\").toString() == \"0.95424499521071008787\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0840038726281231661070730835", Bridge.Int.format(((System.Decimal("0.544814708896361")).div(System.Decimal("6.48559038829319"))), "G"), "(new Decimal(\"0.544814708896361\")).div(\"6.48559038829319\").toString() == \"0.0840038726281231661070730835\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("5.584384619064811", Bridge.Int.format(((System.Decimal("5.92341898285012")).sub(System.Decimal("0.339034363785309"))), "G"), "(new Decimal(\"5.92341898285012\")).sub(\"0.339034363785309\").toString() == \"5.584384619064811\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("768961.59481674478", Bridge.Int.format(((System.Decimal("761069.961246601")).add(System.Decimal("7891.63357014378"))), "G"), "(new Decimal(\"761069.961246601\")).add(\"7891.63357014378\").toString() == \"768961.59481674478\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("7.1449367324811184962392161905", Bridge.Int.format(((System.Decimal("0.0057420220671883")).div(System.Decimal("0.000803649112956435"))), "G"), "(new Decimal(\"0.0057420220671883\")).div(\"0.000803649112956435\").toString() == \"7.1449367324811184962392161905\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000671343925763854248084927", Bridge.Int.format(((System.Decimal("0.00000249094584141436")).div(System.Decimal("0.0371038709939941"))), "G"), "(new Decimal(\"0.00000249094584141436\")).div(\"0.0371038709939941\").toString() == \"0.0000671343925763854248084927\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("3379.636871480214643", Bridge.Int.format(((System.Decimal("3379.79016051618")).sub(System.Decimal("0.153289035965357"))), "G"), "(new Decimal(\"3379.79016051618\")).sub(\"0.153289035965357\").toString() == \"3379.636871480214643\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-5537047.53310281883348247913", Bridge.Int.format(((System.Decimal("0.00000000116651752087")).sub(System.Decimal("5537047.53310282"))), "G"), "(new Decimal(\"0.00000000116651752087\")).sub(\"5537047.53310282\").toString() == \"-5537047.53310281883348247913\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-119.1551636528016", Bridge.Int.format(((System.Decimal("46.4980181523124")).sub(System.Decimal("165.653181805114"))), "G"), "(new Decimal(\"46.4980181523124\")).sub(\"165.653181805114\").toString() == \"-119.1551636528016\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("7507411.17052143912417469505", Bridge.Int.format(((System.Decimal("7507411.17052148")).sub(System.Decimal("0.00000004087582530495"))), "G"), "(new Decimal(\"7507411.17052148\")).sub(\"0.00000004087582530495\").toString() == \"7507411.17052143912417469505\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("3680288.3885330385286851", Bridge.Int.format(((System.Decimal("3680288.43481107")).sub(System.Decimal("0.0462780314713149"))), "G"), "(new Decimal(\"3680288.43481107\")).sub(\"0.0462780314713149\").toString() == \"3680288.3885330385286851\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-0.00064079973490480291", Bridge.Int.format(((System.Decimal("0.00000183056355073609")).sub(System.Decimal("0.000642630298455539"))), "G"), "(new Decimal(\"0.00000183056355073609\")).sub(\"0.000642630298455539\").toString() == \"-0.00064079973490480291\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-2.057870254878829", Bridge.Int.format(((System.Decimal("0.390304429638341")).sub(System.Decimal("2.44817468451717"))), "G"), "(new Decimal(\"0.390304429638341\")).sub(\"2.44817468451717\").toString() == \"-2.057870254878829\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.82801381893790463861", Bridge.Int.format(((System.Decimal("0.00000077470167063861")).add(System.Decimal("0.828013044236234"))), "G"), "(new Decimal(\"0.00000077470167063861\")).add(\"0.828013044236234\").toString() == \"0.82801381893790463861\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0575119050604619002876486373", Bridge.Int.format(((System.Decimal("71.2106066156228")).mul(System.Decimal("0.000807631163302637"))), "G"), "(new Decimal(\"71.2106066156228\")).mul(\"0.000807631163302637\").toString() == \"0.0575119050604619002876486373\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000846380225479673155344", Bridge.Int.format(((System.Decimal("0.00000009483140771968")).mul(System.Decimal("0.892510451792046"))), "G"), "(new Decimal(\"0.00000009483140771968\")).mul(\"0.892510451792046\").toString() == \"0.0000000846380225479673155344\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0001071853838444661455520212", Bridge.Int.format(((System.Decimal("2908.7434722617")).mul(System.Decimal("0.00000003684937666955"))), "G"), "(new Decimal(\"2908.7434722617\")).mul(\"0.00000003684937666955\").toString() == \"0.0001071853838444661455520212\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.001658638454349077", Bridge.Int.format(((System.Decimal("0.000959274857751687")).add(System.Decimal("0.00069936359659739"))), "G"), "(new Decimal(\"0.000959274857751687\")).add(\"0.00069936359659739\").toString() == \"0.001658638454349077\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("24639.663275647384108817333496", Bridge.Int.format(((System.Decimal("8683.4491690078")).mul(System.Decimal("2.83754333054532"))), "G"), "(new Decimal(\"8683.4491690078\")).mul(\"2.83754333054532\").toString() == \"24639.663275647384108817333496\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("6117906.68505150707818221165", Bridge.Int.format(((System.Decimal("0.00000935707818221165")).add(System.Decimal("6117906.68504215"))), "G"), "(new Decimal(\"0.00000935707818221165\")).add(\"6117906.68504215\").toString() == \"6117906.68505150707818221165\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("6.0121773791933949674368568908", Bridge.Int.format(((System.Decimal("6641.46798972109")).mul(System.Decimal("0.000905248265669331"))), "G"), "(new Decimal(\"6641.46798972109\")).mul(\"0.000905248265669331\").toString() == \"6.0121773791933949674368568908\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000100639428179333997221056", Bridge.Int.format(((System.Decimal("0.0000713244643860145")).mul(System.Decimal("0.14110085374727"))), "G"), "(new Decimal(\"0.0000713244643860145\")).mul(\"0.14110085374727\").toString() == \"0.0000100639428179333997221056\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("817567.71241020922149641", Bridge.Int.format(((System.Decimal("0.00126479322149641")).add(System.Decimal("817567.711145416"))), "G"), "(new Decimal(\"0.00126479322149641\")).add(\"817567.711145416\").toString() == \"817567.71241020922149641\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("5911522.4475117541555222", Bridge.Int.format(((System.Decimal("5911522.42660128")).add(System.Decimal("0.0209104741555222"))), "G"), "(new Decimal(\"5911522.42660128\")).add(\"0.0209104741555222\").toString() == \"5911522.4475117541555222\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-50.00480793221098247371", Bridge.Int.format(((System.Decimal("0.00000004386581752629")).sub(System.Decimal("50.0048079760768"))), "G"), "(new Decimal(\"0.00000004386581752629\")).sub(\"50.0048079760768\").toString() == \"-50.00480793221098247371\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-0.00216393969813354769", Bridge.Int.format(((System.Decimal("0.00000009429415883231")).sub(System.Decimal("0.00216403399229238"))), "G"), "(new Decimal(\"0.00000009429415883231\")).sub(\"0.00216403399229238\").toString() == \"-0.00216393969813354769\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("149554.64804066385942125034", Bridge.Int.format(((System.Decimal("0.00000007785942125034")).add(System.Decimal("149554.648040586"))), "G"), "(new Decimal(\"0.00000007785942125034\")).add(\"149554.648040586\").toString() == \"149554.64804066385942125034\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000401579705382523868391", Bridge.Int.format(((System.Decimal("0.000514483727288658")).mul(System.Decimal("0.0000780548896072688"))), "G"), "(new Decimal(\"0.000514483727288658\")).mul(\"0.0000780548896072688\").toString() == \"0.0000000401579705382523868391\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("4391586.0938727875920041853806", Bridge.Int.format(((System.Decimal("85.0879618362933")).div(System.Decimal("0.0000193752234426212"))), "G"), "(new Decimal(\"85.0879618362933\")).div(\"0.0000193752234426212\").toString() == \"4391586.0938727875920041853806\" FAILED");
                 // #1650
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000001434686776916788182810", Bridge.Int.format(((System.Decimal("4.70885837669897")).mul(System.Decimal("0.0000000304678260025"))), 'G'), "(new Decimal(\"4.70885837669897\")).mul(\"0.0000000304678260025\").toString() == \"0.0000001434686776916788182810\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000001434686776916788182810", Bridge.Int.format(((System.Decimal("4.70885837669897")).mul(System.Decimal("0.0000000304678260025"))), "G"), "(new Decimal(\"4.70885837669897\")).mul(\"0.0000000304678260025\").toString() == \"0.0000001434686776916788182810\" FAILED");
 
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000061473669992779179347052", Bridge.Int.format(((System.Decimal("0.00000094580709000389")).div(System.Decimal("0.153855640978485"))), 'G'), "(new Decimal(\"0.00000094580709000389\")).div(\"0.153855640978485\").toString() == \"0.0000061473669992779179347052\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.003314572249685679", Bridge.Int.format(((System.Decimal("0.000613740297785839")).add(System.Decimal("0.00270083195189984"))), 'G'), "(new Decimal(\"0.000613740297785839\")).add(\"0.00270083195189984\").toString() == \"0.003314572249685679\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("68188.770830719145", Bridge.Int.format(((System.Decimal("68943.9000417217")).sub(System.Decimal("755.129211002555"))), 'G'), "(new Decimal(\"68943.9000417217\")).sub(\"755.129211002555\").toString() == \"68188.770830719145\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0185139114429308061", Bridge.Int.format(((System.Decimal("0.0000109071683655061")).add(System.Decimal("0.0185030042745653"))), 'G'), "(new Decimal(\"0.0000109071683655061\")).add(\"0.0185030042745653\").toString() == \"0.0185139114429308061\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("88.66685930292445486", Bridge.Int.format(((System.Decimal("0.00319345103725486")).add(System.Decimal("88.6636658518872"))), 'G'), "(new Decimal(\"0.00319345103725486\")).add(\"88.6636658518872\").toString() == \"88.66685930292445486\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.00000478017811420382", Bridge.Int.format(((System.Decimal("0.00000776580248855325")).sub(System.Decimal("0.00000298562437434943"))), 'G'), "(new Decimal(\"0.00000776580248855325\")).sub(\"0.00000298562437434943\").toString() == \"0.00000478017811420382\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.3859582703495206", Bridge.Int.format(((System.Decimal("0.364325482567924")).add(System.Decimal("0.0216327877815966"))), 'G'), "(new Decimal(\"0.364325482567924\")).add(\"0.0216327877815966\").toString() == \"0.3859582703495206\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0107406507813914476055243271", Bridge.Int.format(((System.Decimal("0.00000696548845943319")).div(System.Decimal("0.000648516426164897"))), 'G'), "(new Decimal(\"0.00000696548845943319\")).div(\"0.000648516426164897\").toString() == \"0.0107406507813914476055243271\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-73.0557380282989268491", Bridge.Int.format(((System.Decimal("0.0000220559127731509")).sub(System.Decimal("73.0557600842117"))), 'G'), "(new Decimal(\"0.0000220559127731509\")).sub(\"73.0557600842117\").toString() == \"-73.0557380282989268491\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.00000195673171615076", Bridge.Int.format(((System.Decimal("0.00000148999663139228")).add(System.Decimal("0.00000046673508475848"))), 'G'), "(new Decimal(\"0.00000148999663139228\")).add(\"0.00000046673508475848\").toString() == \"0.00000195673171615076\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-838.010941593913", Bridge.Int.format(((System.Decimal("2.074972690118")).sub(System.Decimal("840.085914284031"))), 'G'), "(new Decimal(\"2.074972690118\")).sub(\"840.085914284031\").toString() == \"-838.010941593913\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000010790590363188315712", Bridge.Int.format(((System.Decimal("0.00000059002973120195")).div(System.Decimal("546.800231815688"))), 'G'), "(new Decimal(\"0.00000059002973120195\")).div(\"546.800231815688\").toString() == \"0.0000000010790590363188315712\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0485027328186321794374224174", Bridge.Int.format(((System.Decimal("0.00000004584207597461")).mul(System.Decimal("1058039.62380534"))), 'G'), "(new Decimal(\"0.00000004584207597461\")).mul(\"1058039.62380534\").toString() == \"0.0485027328186321794374224174\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("214.85514206927846582617", Bridge.Int.format(((System.Decimal("214.855142037782")).add(System.Decimal("0.00000003149646582617"))), 'G'), "(new Decimal(\"214.855142037782\")).add(\"0.00000003149646582617\").toString() == \"214.85514206927846582617\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0001626068155301757850120131", Bridge.Int.format(((System.Decimal("0.000824154042091292")).div(System.Decimal("5.06838559874724"))), 'G'), "(new Decimal(\"0.000824154042091292\")).div(\"5.06838559874724\").toString() == \"0.0001626068155301757850120131\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("20.9788078560985709559", Bridge.Int.format(((System.Decimal("20.9787698560296")).add(System.Decimal("0.0000380000689709559"))), 'G'), "(new Decimal(\"20.9787698560296\")).add(\"0.0000380000689709559\").toString() == \"20.9788078560985709559\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-81.88357175642793468", Bridge.Int.format(((System.Decimal("0.00617890391786532")).sub(System.Decimal("81.8897506603458"))), 'G'), "(new Decimal(\"0.00617890391786532\")).sub(\"81.8897506603458\").toString() == \"-81.88357175642793468\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("36.23358714435498025968", Bridge.Int.format(((System.Decimal("36.2335875333443")).sub(System.Decimal("0.00000038898931974032"))), 'G'), "(new Decimal(\"36.2335875333443\")).sub(\"0.00000038898931974032\").toString() == \"36.23358714435498025968\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0013658861233129413838425724", Bridge.Int.format(((System.Decimal("0.00000000292342323946")).mul(System.Decimal("467221.476820866"))), 'G'), "(new Decimal(\"0.00000000292342323946\")).mul(\"467221.476820866\").toString() == \"0.0013658861233129413838425724\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000074105712796113834889", Bridge.Int.format(((System.Decimal("0.000342916469715031")).div(System.Decimal("46273.958751128"))), 'G'), "(new Decimal(\"0.000342916469715031\")).div(\"46273.958751128\").toString() == \"0.0000000074105712796113834889\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("472.3234209149721", Bridge.Int.format(((System.Decimal("476.05942677523")).sub(System.Decimal("3.7360058602579"))), 'G'), "(new Decimal(\"476.05942677523\")).sub(\"3.7360058602579\").toString() == \"472.3234209149721\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("8039026.45502754950084", Bridge.Int.format(((System.Decimal("9.76490417950084")).add(System.Decimal("8039016.69012337"))), 'G'), "(new Decimal(\"9.76490417950084\")).add(\"8039016.69012337\").toString() == \"8039026.45502754950084\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000061473669992779179347052", Bridge.Int.format(((System.Decimal("0.00000094580709000389")).div(System.Decimal("0.153855640978485"))), "G"), "(new Decimal(\"0.00000094580709000389\")).div(\"0.153855640978485\").toString() == \"0.0000061473669992779179347052\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.003314572249685679", Bridge.Int.format(((System.Decimal("0.000613740297785839")).add(System.Decimal("0.00270083195189984"))), "G"), "(new Decimal(\"0.000613740297785839\")).add(\"0.00270083195189984\").toString() == \"0.003314572249685679\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("68188.770830719145", Bridge.Int.format(((System.Decimal("68943.9000417217")).sub(System.Decimal("755.129211002555"))), "G"), "(new Decimal(\"68943.9000417217\")).sub(\"755.129211002555\").toString() == \"68188.770830719145\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0185139114429308061", Bridge.Int.format(((System.Decimal("0.0000109071683655061")).add(System.Decimal("0.0185030042745653"))), "G"), "(new Decimal(\"0.0000109071683655061\")).add(\"0.0185030042745653\").toString() == \"0.0185139114429308061\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("88.66685930292445486", Bridge.Int.format(((System.Decimal("0.00319345103725486")).add(System.Decimal("88.6636658518872"))), "G"), "(new Decimal(\"0.00319345103725486\")).add(\"88.6636658518872\").toString() == \"88.66685930292445486\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.00000478017811420382", Bridge.Int.format(((System.Decimal("0.00000776580248855325")).sub(System.Decimal("0.00000298562437434943"))), "G"), "(new Decimal(\"0.00000776580248855325\")).sub(\"0.00000298562437434943\").toString() == \"0.00000478017811420382\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.3859582703495206", Bridge.Int.format(((System.Decimal("0.364325482567924")).add(System.Decimal("0.0216327877815966"))), "G"), "(new Decimal(\"0.364325482567924\")).add(\"0.0216327877815966\").toString() == \"0.3859582703495206\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0107406507813914476055243271", Bridge.Int.format(((System.Decimal("0.00000696548845943319")).div(System.Decimal("0.000648516426164897"))), "G"), "(new Decimal(\"0.00000696548845943319\")).div(\"0.000648516426164897\").toString() == \"0.0107406507813914476055243271\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-73.0557380282989268491", Bridge.Int.format(((System.Decimal("0.0000220559127731509")).sub(System.Decimal("73.0557600842117"))), "G"), "(new Decimal(\"0.0000220559127731509\")).sub(\"73.0557600842117\").toString() == \"-73.0557380282989268491\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.00000195673171615076", Bridge.Int.format(((System.Decimal("0.00000148999663139228")).add(System.Decimal("0.00000046673508475848"))), "G"), "(new Decimal(\"0.00000148999663139228\")).add(\"0.00000046673508475848\").toString() == \"0.00000195673171615076\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-838.010941593913", Bridge.Int.format(((System.Decimal("2.074972690118")).sub(System.Decimal("840.085914284031"))), "G"), "(new Decimal(\"2.074972690118\")).sub(\"840.085914284031\").toString() == \"-838.010941593913\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000010790590363188315712", Bridge.Int.format(((System.Decimal("0.00000059002973120195")).div(System.Decimal("546.800231815688"))), "G"), "(new Decimal(\"0.00000059002973120195\")).div(\"546.800231815688\").toString() == \"0.0000000010790590363188315712\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0485027328186321794374224174", Bridge.Int.format(((System.Decimal("0.00000004584207597461")).mul(System.Decimal("1058039.62380534"))), "G"), "(new Decimal(\"0.00000004584207597461\")).mul(\"1058039.62380534\").toString() == \"0.0485027328186321794374224174\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("214.85514206927846582617", Bridge.Int.format(((System.Decimal("214.855142037782")).add(System.Decimal("0.00000003149646582617"))), "G"), "(new Decimal(\"214.855142037782\")).add(\"0.00000003149646582617\").toString() == \"214.85514206927846582617\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0001626068155301757850120131", Bridge.Int.format(((System.Decimal("0.000824154042091292")).div(System.Decimal("5.06838559874724"))), "G"), "(new Decimal(\"0.000824154042091292\")).div(\"5.06838559874724\").toString() == \"0.0001626068155301757850120131\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("20.9788078560985709559", Bridge.Int.format(((System.Decimal("20.9787698560296")).add(System.Decimal("0.0000380000689709559"))), "G"), "(new Decimal(\"20.9787698560296\")).add(\"0.0000380000689709559\").toString() == \"20.9788078560985709559\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-81.88357175642793468", Bridge.Int.format(((System.Decimal("0.00617890391786532")).sub(System.Decimal("81.8897506603458"))), "G"), "(new Decimal(\"0.00617890391786532\")).sub(\"81.8897506603458\").toString() == \"-81.88357175642793468\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("36.23358714435498025968", Bridge.Int.format(((System.Decimal("36.2335875333443")).sub(System.Decimal("0.00000038898931974032"))), "G"), "(new Decimal(\"36.2335875333443\")).sub(\"0.00000038898931974032\").toString() == \"36.23358714435498025968\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0013658861233129413838425724", Bridge.Int.format(((System.Decimal("0.00000000292342323946")).mul(System.Decimal("467221.476820866"))), "G"), "(new Decimal(\"0.00000000292342323946\")).mul(\"467221.476820866\").toString() == \"0.0013658861233129413838425724\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000074105712796113834889", Bridge.Int.format(((System.Decimal("0.000342916469715031")).div(System.Decimal("46273.958751128"))), "G"), "(new Decimal(\"0.000342916469715031\")).div(\"46273.958751128\").toString() == \"0.0000000074105712796113834889\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("472.3234209149721", Bridge.Int.format(((System.Decimal("476.05942677523")).sub(System.Decimal("3.7360058602579"))), "G"), "(new Decimal(\"476.05942677523\")).sub(\"3.7360058602579\").toString() == \"472.3234209149721\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("8039026.45502754950084", Bridge.Int.format(((System.Decimal("9.76490417950084")).add(System.Decimal("8039016.69012337"))), "G"), "(new Decimal(\"9.76490417950084\")).add(\"8039016.69012337\").toString() == \"8039026.45502754950084\" FAILED");
                 // #1650
-                Bridge.Test.NUnit.Assert.AreEqual$1("40912917253931.602151150686830", Bridge.Int.format(((System.Decimal("9044513.99065764")).mul(System.Decimal("4523506.43674075"))), 'G'), "(new Decimal(\"9044513.99065764\")).mul(\"4523506.43674075\").toString() == \"40912917253931.602151150686830\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("40912917253931.602151150686830", Bridge.Int.format(((System.Decimal("9044513.99065764")).mul(System.Decimal("4523506.43674075"))), "G"), "(new Decimal(\"9044513.99065764\")).mul(\"4523506.43674075\").toString() == \"40912917253931.602151150686830\" FAILED");
 
-                Bridge.Test.NUnit.Assert.AreEqual$1("-6914.3160116610779745959", Bridge.Int.format(((System.Decimal("0.0000627560420254041")).sub(System.Decimal("6914.31607441712"))), 'G'), "(new Decimal(\"0.0000627560420254041\")).sub(\"6914.31607441712\").toString() == \"-6914.3160116610779745959\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("22.802704082181585914", Bridge.Int.format(((System.Decimal("22.8028122907518")).sub(System.Decimal("0.000108208570214086"))), 'G'), "(new Decimal(\"22.8028122907518\")).sub(\"0.000108208570214086\").toString() == \"22.802704082181585914\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("788.3274362681265223337", Bridge.Int.format(((System.Decimal("788.327495468933")).sub(System.Decimal("0.0000592008064776663"))), 'G'), "(new Decimal(\"788.327495468933\")).sub(\"0.0000592008064776663\").toString() == \"788.3274362681265223337\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("1.6066068917914018575324895115", Bridge.Int.format(((System.Decimal("8866.23474250838")).div(System.Decimal("5518.60868256474"))), 'G'), "(new Decimal(\"8866.23474250838\")).div(\"5518.60868256474\").toString() == \"1.6066068917914018575324895115\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("26.72254360394047261816", Bridge.Int.format(((System.Decimal("0.00000009113297261816")).add(System.Decimal("26.7225435128075"))), 'G'), "(new Decimal(\"0.00000009113297261816\")).add(\"26.7225435128075\").toString() == \"26.72254360394047261816\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000324317078514770886275385", Bridge.Int.format(((System.Decimal("0.815985052760683")).mul(System.Decimal("0.0000397454680594362"))), 'G'), "(new Decimal(\"0.815985052760683\")).mul(\"0.0000397454680594362\").toString() == \"0.0000324317078514770886275385\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("52977.103193989012886457", Bridge.Int.format(((System.Decimal("0.000779760512886457")).add(System.Decimal("52977.1024142285"))), 'G'), "(new Decimal(\"0.000779760512886457\")).add(\"52977.1024142285\").toString() == \"52977.103193989012886457\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("1913.0060727432645785740118483", Bridge.Int.format(((System.Decimal("126179.391576992")).div(System.Decimal("65.9586989162297"))), 'G'), "(new Decimal(\"126179.391576992\")).div(\"65.9586989162297\").toString() == \"1913.0060727432645785740118483\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("770.923422558535548909", Bridge.Int.format(((System.Decimal("0.000830289780548909")).add(System.Decimal("770.922592268755"))), 'G'), "(new Decimal(\"0.000830289780548909\")).add(\"770.922592268755\").toString() == \"770.923422558535548909\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000015660607711989182", Bridge.Int.format(((System.Decimal("0.00000279982820283614")).mul(System.Decimal("0.00000055934173732965"))), 'G'), "(new Decimal(\"0.00000279982820283614\")).mul(\"0.00000055934173732965\").toString() == \"0.0000000000015660607711989182\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.00000161712928522245", Bridge.Int.format(((System.Decimal("0.0000015461405746388")).add(System.Decimal("0.00000007098871058365"))), 'G'), "(new Decimal(\"0.0000015461405746388\")).add(\"0.00000007098871058365\").toString() == \"0.00000161712928522245\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("4253730.76659763509554093941", Bridge.Int.format(((System.Decimal("0.00000428509554093941")).add(System.Decimal("4253730.76659335"))), 'G'), "(new Decimal(\"0.00000428509554093941\")).add(\"4253730.76659335\").toString() == \"4253730.76659763509554093941\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.00008945709535687095", Bridge.Int.format(((System.Decimal("0.00000074108968849345")).add(System.Decimal("0.0000887160056683775"))), 'G'), "(new Decimal(\"0.00000074108968849345\")).add(\"0.0000887160056683775\").toString() == \"0.00008945709535687095\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("60849.566901590769612814207798", Bridge.Int.format(((System.Decimal("4.50246398081186")).div(System.Decimal("0.0000739933611704006"))), 'G'), "(new Decimal(\"4.50246398081186\")).div(\"0.0000739933611704006\").toString() == \"60849.566901590769612814207798\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("10025471.773941757", Bridge.Int.format(((System.Decimal("9073722.60423085")).add(System.Decimal("951749.169710907"))), 'G'), "(new Decimal(\"9073722.60423085\")).add(\"951749.169710907\").toString() == \"10025471.773941757\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("6314.57694669888121625", Bridge.Int.format(((System.Decimal("6314.57190789029")).add(System.Decimal("0.00503880859121625"))), 'G'), "(new Decimal(\"6314.57190789029\")).add(\"0.00503880859121625\").toString() == \"6314.57694669888121625\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("6410200.86892426925435156992", Bridge.Int.format(((System.Decimal("6410200.86892424")).add(System.Decimal("0.00000002925435156992"))), 'G'), "(new Decimal(\"6410200.86892424\")).add(\"0.00000002925435156992\").toString() == \"6410200.86892426925435156992\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-50365.02975549733950225974", Bridge.Int.format(((System.Decimal("0.00000903436049774026")).sub(System.Decimal("50365.0297645317"))), 'G'), "(new Decimal(\"0.00000903436049774026\")).sub(\"50365.0297645317\").toString() == \"-50365.02975549733950225974\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("706275.0020093632", Bridge.Int.format(((System.Decimal("773516.946366763")).sub(System.Decimal("67241.9443573998"))), 'G'), "(new Decimal(\"773516.946366763\")).sub(\"67241.9443573998\").toString() == \"706275.0020093632\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-0.0007827090090991505", Bridge.Int.format(((System.Decimal("0.0000758509746174565")).sub(System.Decimal("0.000858559983716607"))), 'G'), "(new Decimal(\"0.0000758509746174565\")).sub(\"0.000858559983716607\").toString() == \"-0.0007827090090991505\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("2221.3994020682519670422887012", Bridge.Int.format(((System.Decimal("0.0072728559734639")).div(System.Decimal("0.00000327399744804669"))), 'G'), "(new Decimal(\"0.0072728559734639\")).div(\"0.00000327399744804669\").toString() == \"2221.3994020682519670422887012\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.00797715439281503856", Bridge.Int.format(((System.Decimal("0.00000002090733708856")).add(System.Decimal("0.00797713348547795"))), 'G'), "(new Decimal(\"0.00000002090733708856\")).add(\"0.00797713348547795\").toString() == \"0.00797715439281503856\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000152803982254922538614", Bridge.Int.format(((System.Decimal("0.0000248115556430125")).mul(System.Decimal("0.00061585812858113"))), 'G'), "(new Decimal(\"0.0000248115556430125\")).mul(\"0.00061585812858113\").toString() == \"0.0000000152803982254922538614\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000661183382579908907", Bridge.Int.format(((System.Decimal("0.00000008056083325323")).mul(System.Decimal("0.000820725600617344"))), 'G'), "(new Decimal(\"0.00000008056083325323\")).mul(\"0.000820725600617344\").toString() == \"0.0000000000661183382579908907\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-0.09307075335419262842", Bridge.Int.format(((System.Decimal("0.00000025804988167158")).sub(System.Decimal("0.0930710114040743"))), 'G'), "(new Decimal(\"0.00000025804988167158\")).sub(\"0.0930710114040743\").toString() == \"-0.09307075335419262842\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.04808529221801801214", Bridge.Int.format(((System.Decimal("0.0480862194896146")).sub(System.Decimal("0.00000092727159658786"))), 'G'), "(new Decimal(\"0.0480862194896146\")).sub(\"0.00000092727159658786\").toString() == \"0.04808529221801801214\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("19.1163499301375422", Bridge.Int.format(((System.Decimal("0.0380818105014422")).add(System.Decimal("19.0782681196361"))), 'G'), "(new Decimal(\"0.0380818105014422\")).add(\"19.0782681196361\").toString() == \"19.1163499301375422\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0029230064326764054146103005", Bridge.Int.format(((System.Decimal("0.00000030766995358638")).mul(System.Decimal("9500.46112271979"))), 'G'), "(new Decimal(\"0.00000030766995358638\")).mul(\"9500.46112271979\").toString() == \"0.0029230064326764054146103005\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("9220576.9255473874609941571388", Bridge.Int.format(((System.Decimal("8460272.38688444")).mul(System.Decimal("1.08986761937377"))), 'G'), "(new Decimal(\"8460272.38688444\")).mul(\"1.08986761937377\").toString() == \"9220576.9255473874609941571388\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.00054848860491686019", Bridge.Int.format(((System.Decimal("0.000548521232115348")).sub(System.Decimal("0.00000003262719848781"))), 'G'), "(new Decimal(\"0.000548521232115348\")).sub(\"0.00000003262719848781\").toString() == \"0.00054848860491686019\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-6914.3160116610779745959", Bridge.Int.format(((System.Decimal("0.0000627560420254041")).sub(System.Decimal("6914.31607441712"))), "G"), "(new Decimal(\"0.0000627560420254041\")).sub(\"6914.31607441712\").toString() == \"-6914.3160116610779745959\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("22.802704082181585914", Bridge.Int.format(((System.Decimal("22.8028122907518")).sub(System.Decimal("0.000108208570214086"))), "G"), "(new Decimal(\"22.8028122907518\")).sub(\"0.000108208570214086\").toString() == \"22.802704082181585914\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("788.3274362681265223337", Bridge.Int.format(((System.Decimal("788.327495468933")).sub(System.Decimal("0.0000592008064776663"))), "G"), "(new Decimal(\"788.327495468933\")).sub(\"0.0000592008064776663\").toString() == \"788.3274362681265223337\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("1.6066068917914018575324895115", Bridge.Int.format(((System.Decimal("8866.23474250838")).div(System.Decimal("5518.60868256474"))), "G"), "(new Decimal(\"8866.23474250838\")).div(\"5518.60868256474\").toString() == \"1.6066068917914018575324895115\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("26.72254360394047261816", Bridge.Int.format(((System.Decimal("0.00000009113297261816")).add(System.Decimal("26.7225435128075"))), "G"), "(new Decimal(\"0.00000009113297261816\")).add(\"26.7225435128075\").toString() == \"26.72254360394047261816\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000324317078514770886275385", Bridge.Int.format(((System.Decimal("0.815985052760683")).mul(System.Decimal("0.0000397454680594362"))), "G"), "(new Decimal(\"0.815985052760683\")).mul(\"0.0000397454680594362\").toString() == \"0.0000324317078514770886275385\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("52977.103193989012886457", Bridge.Int.format(((System.Decimal("0.000779760512886457")).add(System.Decimal("52977.1024142285"))), "G"), "(new Decimal(\"0.000779760512886457\")).add(\"52977.1024142285\").toString() == \"52977.103193989012886457\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("1913.0060727432645785740118483", Bridge.Int.format(((System.Decimal("126179.391576992")).div(System.Decimal("65.9586989162297"))), "G"), "(new Decimal(\"126179.391576992\")).div(\"65.9586989162297\").toString() == \"1913.0060727432645785740118483\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("770.923422558535548909", Bridge.Int.format(((System.Decimal("0.000830289780548909")).add(System.Decimal("770.922592268755"))), "G"), "(new Decimal(\"0.000830289780548909\")).add(\"770.922592268755\").toString() == \"770.923422558535548909\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000015660607711989182", Bridge.Int.format(((System.Decimal("0.00000279982820283614")).mul(System.Decimal("0.00000055934173732965"))), "G"), "(new Decimal(\"0.00000279982820283614\")).mul(\"0.00000055934173732965\").toString() == \"0.0000000000015660607711989182\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.00000161712928522245", Bridge.Int.format(((System.Decimal("0.0000015461405746388")).add(System.Decimal("0.00000007098871058365"))), "G"), "(new Decimal(\"0.0000015461405746388\")).add(\"0.00000007098871058365\").toString() == \"0.00000161712928522245\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("4253730.76659763509554093941", Bridge.Int.format(((System.Decimal("0.00000428509554093941")).add(System.Decimal("4253730.76659335"))), "G"), "(new Decimal(\"0.00000428509554093941\")).add(\"4253730.76659335\").toString() == \"4253730.76659763509554093941\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.00008945709535687095", Bridge.Int.format(((System.Decimal("0.00000074108968849345")).add(System.Decimal("0.0000887160056683775"))), "G"), "(new Decimal(\"0.00000074108968849345\")).add(\"0.0000887160056683775\").toString() == \"0.00008945709535687095\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("60849.566901590769612814207798", Bridge.Int.format(((System.Decimal("4.50246398081186")).div(System.Decimal("0.0000739933611704006"))), "G"), "(new Decimal(\"4.50246398081186\")).div(\"0.0000739933611704006\").toString() == \"60849.566901590769612814207798\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("10025471.773941757", Bridge.Int.format(((System.Decimal("9073722.60423085")).add(System.Decimal("951749.169710907"))), "G"), "(new Decimal(\"9073722.60423085\")).add(\"951749.169710907\").toString() == \"10025471.773941757\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("6314.57694669888121625", Bridge.Int.format(((System.Decimal("6314.57190789029")).add(System.Decimal("0.00503880859121625"))), "G"), "(new Decimal(\"6314.57190789029\")).add(\"0.00503880859121625\").toString() == \"6314.57694669888121625\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("6410200.86892426925435156992", Bridge.Int.format(((System.Decimal("6410200.86892424")).add(System.Decimal("0.00000002925435156992"))), "G"), "(new Decimal(\"6410200.86892424\")).add(\"0.00000002925435156992\").toString() == \"6410200.86892426925435156992\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-50365.02975549733950225974", Bridge.Int.format(((System.Decimal("0.00000903436049774026")).sub(System.Decimal("50365.0297645317"))), "G"), "(new Decimal(\"0.00000903436049774026\")).sub(\"50365.0297645317\").toString() == \"-50365.02975549733950225974\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("706275.0020093632", Bridge.Int.format(((System.Decimal("773516.946366763")).sub(System.Decimal("67241.9443573998"))), "G"), "(new Decimal(\"773516.946366763\")).sub(\"67241.9443573998\").toString() == \"706275.0020093632\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-0.0007827090090991505", Bridge.Int.format(((System.Decimal("0.0000758509746174565")).sub(System.Decimal("0.000858559983716607"))), "G"), "(new Decimal(\"0.0000758509746174565\")).sub(\"0.000858559983716607\").toString() == \"-0.0007827090090991505\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("2221.3994020682519670422887012", Bridge.Int.format(((System.Decimal("0.0072728559734639")).div(System.Decimal("0.00000327399744804669"))), "G"), "(new Decimal(\"0.0072728559734639\")).div(\"0.00000327399744804669\").toString() == \"2221.3994020682519670422887012\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.00797715439281503856", Bridge.Int.format(((System.Decimal("0.00000002090733708856")).add(System.Decimal("0.00797713348547795"))), "G"), "(new Decimal(\"0.00000002090733708856\")).add(\"0.00797713348547795\").toString() == \"0.00797715439281503856\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000152803982254922538614", Bridge.Int.format(((System.Decimal("0.0000248115556430125")).mul(System.Decimal("0.00061585812858113"))), "G"), "(new Decimal(\"0.0000248115556430125\")).mul(\"0.00061585812858113\").toString() == \"0.0000000152803982254922538614\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000661183382579908907", Bridge.Int.format(((System.Decimal("0.00000008056083325323")).mul(System.Decimal("0.000820725600617344"))), "G"), "(new Decimal(\"0.00000008056083325323\")).mul(\"0.000820725600617344\").toString() == \"0.0000000000661183382579908907\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-0.09307075335419262842", Bridge.Int.format(((System.Decimal("0.00000025804988167158")).sub(System.Decimal("0.0930710114040743"))), "G"), "(new Decimal(\"0.00000025804988167158\")).sub(\"0.0930710114040743\").toString() == \"-0.09307075335419262842\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.04808529221801801214", Bridge.Int.format(((System.Decimal("0.0480862194896146")).sub(System.Decimal("0.00000092727159658786"))), "G"), "(new Decimal(\"0.0480862194896146\")).sub(\"0.00000092727159658786\").toString() == \"0.04808529221801801214\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("19.1163499301375422", Bridge.Int.format(((System.Decimal("0.0380818105014422")).add(System.Decimal("19.0782681196361"))), "G"), "(new Decimal(\"0.0380818105014422\")).add(\"19.0782681196361\").toString() == \"19.1163499301375422\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0029230064326764054146103005", Bridge.Int.format(((System.Decimal("0.00000030766995358638")).mul(System.Decimal("9500.46112271979"))), "G"), "(new Decimal(\"0.00000030766995358638\")).mul(\"9500.46112271979\").toString() == \"0.0029230064326764054146103005\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("9220576.9255473874609941571388", Bridge.Int.format(((System.Decimal("8460272.38688444")).mul(System.Decimal("1.08986761937377"))), "G"), "(new Decimal(\"8460272.38688444\")).mul(\"1.08986761937377\").toString() == \"9220576.9255473874609941571388\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.00054848860491686019", Bridge.Int.format(((System.Decimal("0.000548521232115348")).sub(System.Decimal("0.00000003262719848781"))), "G"), "(new Decimal(\"0.000548521232115348\")).sub(\"0.00000003262719848781\").toString() == \"0.00054848860491686019\" FAILED");
                 // #1650
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000381173298826073792060", Bridge.Int.format(((System.Decimal("0.701377586322547")).mul(System.Decimal("0.00000005434637579804"))), 'G'), "(new Decimal(\"0.701377586322547\")).mul(\"0.00000005434637579804\").toString() == \"0.0000000381173298826073792060\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000381173298826073792060", Bridge.Int.format(((System.Decimal("0.701377586322547")).mul(System.Decimal("0.00000005434637579804"))), "G"), "(new Decimal(\"0.701377586322547\")).mul(\"0.00000005434637579804\").toString() == \"0.0000000381173298826073792060\" FAILED");
 
-                Bridge.Test.NUnit.Assert.AreEqual$1("700263936625.28684891174652716", Bridge.Int.format(((System.Decimal("6085116.43301934")).div(System.Decimal("0.00000868974698646448"))), 'G'), "(new Decimal(\"6085116.43301934\")).div(\"0.00000868974698646448\").toString() == \"700263936625.28684891174652716\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("64.24562633156503374337", Bridge.Int.format(((System.Decimal("64.2456262671601")).add(System.Decimal("0.00000006440493374337"))), 'G'), "(new Decimal(\"64.2456262671601\")).add(\"0.00000006440493374337\").toString() == \"64.24562633156503374337\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.00000074888137376349", Bridge.Int.format(((System.Decimal("0.00000079138978840382")).sub(System.Decimal("0.00000004250841464033"))), 'G'), "(new Decimal(\"0.00000079138978840382\")).sub(\"0.00000004250841464033\").toString() == \"0.00000074888137376349\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0065667784902605879636671644", Bridge.Int.format(((System.Decimal("0.0068165044332")).mul(System.Decimal("0.963364515436517"))), 'G'), "(new Decimal(\"0.0068165044332\")).mul(\"0.963364515436517\").toString() == \"0.0065667784902605879636671644\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("369602.432796381529203", Bridge.Int.format(((System.Decimal("0.259988776529203")).add(System.Decimal("369602.172807605"))), 'G'), "(new Decimal(\"0.259988776529203\")).add(\"369602.172807605\").toString() == \"369602.432796381529203\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0039988533838646743", Bridge.Int.format(((System.Decimal("0.0000675051699706843")).add(System.Decimal("0.00393134821389399"))), 'G'), "(new Decimal(\"0.0000675051699706843\")).add(\"0.00393134821389399\").toString() == \"0.0039988533838646743\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.1176639241828982721945349704", Bridge.Int.format(((System.Decimal("8668689.53158552")).mul(System.Decimal("0.00000001357343849427"))), 'G'), "(new Decimal(\"8668689.53158552\")).mul(\"0.00000001357343849427\").toString() == \"0.1176639241828982721945349704\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.3461079909540908953018615851", Bridge.Int.format(((System.Decimal("0.0000312284355197234")).div(System.Decimal("0.000090227432870412"))), 'G'), "(new Decimal(\"0.0000312284355197234\")).div(\"0.000090227432870412\").toString() == \"0.3461079909540908953018615851\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("245.24585835344678889090583956", Bridge.Int.format(((System.Decimal("233330.174457901")).div(System.Decimal("951.413312438602"))), 'G'), "(new Decimal(\"233330.174457901\")).div(\"951.413312438602\").toString() == \"245.24585835344678889090583956\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("1664628220.3605620253774984042", Bridge.Int.format(((System.Decimal("4790708.12686845")).div(System.Decimal("0.00287794479768628"))), 'G'), "(new Decimal(\"4790708.12686845\")).div(\"0.00287794479768628\").toString() == \"1664628220.3605620253774984042\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("246613871.78242208656915520057", Bridge.Int.format(((System.Decimal("331493.556188184")).mul(System.Decimal("743.947709325677"))), 'G'), "(new Decimal(\"331493.556188184\")).mul(\"743.947709325677\").toString() == \"246613871.78242208656915520057\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("1207.9268535512635351310455273", Bridge.Int.format(((System.Decimal("1259.47609602449")).mul(System.Decimal("0.959070884603574"))), 'G'), "(new Decimal(\"1259.47609602449\")).mul(\"0.959070884603574\").toString() == \"1207.9268535512635351310455273\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.393178837592885421", Bridge.Int.format(((System.Decimal("0.393176919963759")).add(System.Decimal("0.000001917629126421"))), 'G'), "(new Decimal(\"0.393176919963759\")).add(\"0.000001917629126421\").toString() == \"0.393178837592885421\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("397.1793180554543142", Bridge.Int.format(((System.Decimal("0.0851948050713142")).add(System.Decimal("397.094123250383"))), 'G'), "(new Decimal(\"0.0851948050713142\")).add(\"397.094123250383\").toString() == \"397.1793180554543142\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0003282039963622138325073925", Bridge.Int.format(((System.Decimal("4.38505906815876")).mul(System.Decimal("0.0000748459692927291"))), 'G'), "(new Decimal(\"4.38505906815876\")).mul(\"0.0000748459692927291\").toString() == \"0.0003282039963622138325073925\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.423324324993102", Bridge.Int.format(((System.Decimal("0.363335922995273")).add(System.Decimal("0.059988401997829"))), 'G'), "(new Decimal(\"0.363335922995273\")).add(\"0.059988401997829\").toString() == \"0.423324324993102\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("10895.341807538831547999350349", Bridge.Int.format(((System.Decimal("0.00727318812500368")).div(System.Decimal("0.00000066755024793909"))), 'G'), "(new Decimal(\"0.00727318812500368\")).div(\"0.00000066755024793909\").toString() == \"10895.341807538831547999350349\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("3388.3696656205705172969049326", Bridge.Int.format(((System.Decimal("0.00994605123994223")).mul(System.Decimal("340674.865218194"))), 'G'), "(new Decimal(\"0.00994605123994223\")).mul(\"340674.865218194\").toString() == \"3388.3696656205705172969049326\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0141935145051432937033685765", Bridge.Int.format(((System.Decimal("545.87652978761")).div(System.Decimal("38459.5745887885"))), 'G'), "(new Decimal(\"545.87652978761\")).div(\"38459.5745887885\").toString() == \"0.0141935145051432937033685765\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0779477186180520150647853816", Bridge.Int.format(((System.Decimal("73907.2872204274")).div(System.Decimal("948164.853708895"))), 'G'), "(new Decimal(\"73907.2872204274\")).div(\"948164.853708895\").toString() == \"0.0779477186180520150647853816\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-561579.6279262661092", Bridge.Int.format(((System.Decimal("21.7019301008908")).sub(System.Decimal("561601.329856367"))), 'G'), "(new Decimal(\"21.7019301008908\")).sub(\"561601.329856367\").toString() == \"-561579.6279262661092\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.000009299200099480762053694", Bridge.Int.format(((System.Decimal("0.00000077988295712503")).div(System.Decimal("0.0838655958342671"))), 'G'), "(new Decimal(\"0.00000077988295712503\")).div(\"0.0838655958342671\").toString() == \"0.000009299200099480762053694\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0120314006051025781992414906", Bridge.Int.format(((System.Decimal("63.5544158814263")).div(System.Decimal("5282.37883247546"))), 'G'), "(new Decimal(\"63.5544158814263\")).div(\"5282.37883247546\").toString() == \"0.0120314006051025781992414906\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("3.6151189261791396129", Bridge.Int.format(((System.Decimal("3.61511963587958")).sub(System.Decimal("0.0000007097004403871"))), 'G'), "(new Decimal(\"3.61511963587958\")).sub(\"0.0000007097004403871\").toString() == \"3.6151189261791396129\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("94217597633.241379272109185751", Bridge.Int.format(((System.Decimal("466425.827921566")).div(System.Decimal("0.00000495051709699934"))), 'G'), "(new Decimal(\"466425.827921566\")).div(\"0.00000495051709699934\").toString() == \"94217597633.241379272109185751\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("705.645818421918175", Bridge.Int.format(((System.Decimal("706.5725502123")).sub(System.Decimal("0.926731790381825"))), 'G'), "(new Decimal(\"706.5725502123\")).sub(\"0.926731790381825\").toString() == \"705.645818421918175\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("528.8460503226362118", Bridge.Int.format(((System.Decimal("528.77783893085")).add(System.Decimal("0.0682113917862118"))), 'G'), "(new Decimal(\"528.77783893085\")).add(\"0.0682113917862118\").toString() == \"528.8460503226362118\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("2587.55019575690444875", Bridge.Int.format(((System.Decimal("2587.55753868611")).sub(System.Decimal("0.00734292920555125"))), 'G'), "(new Decimal(\"2587.55753868611\")).sub(\"0.00734292920555125\").toString() == \"2587.55019575690444875\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("700263936625.28684891174652716", Bridge.Int.format(((System.Decimal("6085116.43301934")).div(System.Decimal("0.00000868974698646448"))), "G"), "(new Decimal(\"6085116.43301934\")).div(\"0.00000868974698646448\").toString() == \"700263936625.28684891174652716\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("64.24562633156503374337", Bridge.Int.format(((System.Decimal("64.2456262671601")).add(System.Decimal("0.00000006440493374337"))), "G"), "(new Decimal(\"64.2456262671601\")).add(\"0.00000006440493374337\").toString() == \"64.24562633156503374337\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.00000074888137376349", Bridge.Int.format(((System.Decimal("0.00000079138978840382")).sub(System.Decimal("0.00000004250841464033"))), "G"), "(new Decimal(\"0.00000079138978840382\")).sub(\"0.00000004250841464033\").toString() == \"0.00000074888137376349\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0065667784902605879636671644", Bridge.Int.format(((System.Decimal("0.0068165044332")).mul(System.Decimal("0.963364515436517"))), "G"), "(new Decimal(\"0.0068165044332\")).mul(\"0.963364515436517\").toString() == \"0.0065667784902605879636671644\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("369602.432796381529203", Bridge.Int.format(((System.Decimal("0.259988776529203")).add(System.Decimal("369602.172807605"))), "G"), "(new Decimal(\"0.259988776529203\")).add(\"369602.172807605\").toString() == \"369602.432796381529203\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0039988533838646743", Bridge.Int.format(((System.Decimal("0.0000675051699706843")).add(System.Decimal("0.00393134821389399"))), "G"), "(new Decimal(\"0.0000675051699706843\")).add(\"0.00393134821389399\").toString() == \"0.0039988533838646743\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.1176639241828982721945349704", Bridge.Int.format(((System.Decimal("8668689.53158552")).mul(System.Decimal("0.00000001357343849427"))), "G"), "(new Decimal(\"8668689.53158552\")).mul(\"0.00000001357343849427\").toString() == \"0.1176639241828982721945349704\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.3461079909540908953018615851", Bridge.Int.format(((System.Decimal("0.0000312284355197234")).div(System.Decimal("0.000090227432870412"))), "G"), "(new Decimal(\"0.0000312284355197234\")).div(\"0.000090227432870412\").toString() == \"0.3461079909540908953018615851\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("245.24585835344678889090583956", Bridge.Int.format(((System.Decimal("233330.174457901")).div(System.Decimal("951.413312438602"))), "G"), "(new Decimal(\"233330.174457901\")).div(\"951.413312438602\").toString() == \"245.24585835344678889090583956\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("1664628220.3605620253774984042", Bridge.Int.format(((System.Decimal("4790708.12686845")).div(System.Decimal("0.00287794479768628"))), "G"), "(new Decimal(\"4790708.12686845\")).div(\"0.00287794479768628\").toString() == \"1664628220.3605620253774984042\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("246613871.78242208656915520057", Bridge.Int.format(((System.Decimal("331493.556188184")).mul(System.Decimal("743.947709325677"))), "G"), "(new Decimal(\"331493.556188184\")).mul(\"743.947709325677\").toString() == \"246613871.78242208656915520057\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("1207.9268535512635351310455273", Bridge.Int.format(((System.Decimal("1259.47609602449")).mul(System.Decimal("0.959070884603574"))), "G"), "(new Decimal(\"1259.47609602449\")).mul(\"0.959070884603574\").toString() == \"1207.9268535512635351310455273\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.393178837592885421", Bridge.Int.format(((System.Decimal("0.393176919963759")).add(System.Decimal("0.000001917629126421"))), "G"), "(new Decimal(\"0.393176919963759\")).add(\"0.000001917629126421\").toString() == \"0.393178837592885421\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("397.1793180554543142", Bridge.Int.format(((System.Decimal("0.0851948050713142")).add(System.Decimal("397.094123250383"))), "G"), "(new Decimal(\"0.0851948050713142\")).add(\"397.094123250383\").toString() == \"397.1793180554543142\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0003282039963622138325073925", Bridge.Int.format(((System.Decimal("4.38505906815876")).mul(System.Decimal("0.0000748459692927291"))), "G"), "(new Decimal(\"4.38505906815876\")).mul(\"0.0000748459692927291\").toString() == \"0.0003282039963622138325073925\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.423324324993102", Bridge.Int.format(((System.Decimal("0.363335922995273")).add(System.Decimal("0.059988401997829"))), "G"), "(new Decimal(\"0.363335922995273\")).add(\"0.059988401997829\").toString() == \"0.423324324993102\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("10895.341807538831547999350349", Bridge.Int.format(((System.Decimal("0.00727318812500368")).div(System.Decimal("0.00000066755024793909"))), "G"), "(new Decimal(\"0.00727318812500368\")).div(\"0.00000066755024793909\").toString() == \"10895.341807538831547999350349\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("3388.3696656205705172969049326", Bridge.Int.format(((System.Decimal("0.00994605123994223")).mul(System.Decimal("340674.865218194"))), "G"), "(new Decimal(\"0.00994605123994223\")).mul(\"340674.865218194\").toString() == \"3388.3696656205705172969049326\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0141935145051432937033685765", Bridge.Int.format(((System.Decimal("545.87652978761")).div(System.Decimal("38459.5745887885"))), "G"), "(new Decimal(\"545.87652978761\")).div(\"38459.5745887885\").toString() == \"0.0141935145051432937033685765\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0779477186180520150647853816", Bridge.Int.format(((System.Decimal("73907.2872204274")).div(System.Decimal("948164.853708895"))), "G"), "(new Decimal(\"73907.2872204274\")).div(\"948164.853708895\").toString() == \"0.0779477186180520150647853816\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-561579.6279262661092", Bridge.Int.format(((System.Decimal("21.7019301008908")).sub(System.Decimal("561601.329856367"))), "G"), "(new Decimal(\"21.7019301008908\")).sub(\"561601.329856367\").toString() == \"-561579.6279262661092\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.000009299200099480762053694", Bridge.Int.format(((System.Decimal("0.00000077988295712503")).div(System.Decimal("0.0838655958342671"))), "G"), "(new Decimal(\"0.00000077988295712503\")).div(\"0.0838655958342671\").toString() == \"0.000009299200099480762053694\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0120314006051025781992414906", Bridge.Int.format(((System.Decimal("63.5544158814263")).div(System.Decimal("5282.37883247546"))), "G"), "(new Decimal(\"63.5544158814263\")).div(\"5282.37883247546\").toString() == \"0.0120314006051025781992414906\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("3.6151189261791396129", Bridge.Int.format(((System.Decimal("3.61511963587958")).sub(System.Decimal("0.0000007097004403871"))), "G"), "(new Decimal(\"3.61511963587958\")).sub(\"0.0000007097004403871\").toString() == \"3.6151189261791396129\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("94217597633.241379272109185751", Bridge.Int.format(((System.Decimal("466425.827921566")).div(System.Decimal("0.00000495051709699934"))), "G"), "(new Decimal(\"466425.827921566\")).div(\"0.00000495051709699934\").toString() == \"94217597633.241379272109185751\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("705.645818421918175", Bridge.Int.format(((System.Decimal("706.5725502123")).sub(System.Decimal("0.926731790381825"))), "G"), "(new Decimal(\"706.5725502123\")).sub(\"0.926731790381825\").toString() == \"705.645818421918175\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("528.8460503226362118", Bridge.Int.format(((System.Decimal("528.77783893085")).add(System.Decimal("0.0682113917862118"))), "G"), "(new Decimal(\"528.77783893085\")).add(\"0.0682113917862118\").toString() == \"528.8460503226362118\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("2587.55019575690444875", Bridge.Int.format(((System.Decimal("2587.55753868611")).sub(System.Decimal("0.00734292920555125"))), "G"), "(new Decimal(\"2587.55753868611\")).sub(\"0.00734292920555125\").toString() == \"2587.55019575690444875\" FAILED");
                 // #1650
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0007832908360437819528979290", Bridge.Int.format(((System.Decimal("8.61752288817313")).mul(System.Decimal("0.0000908951268488984"))), 'G'), "(new Decimal(\"8.61752288817313\")).mul(\"0.0000908951268488984\").toString() == \"0.0007832908360437819528979290\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0007832908360437819528979290", Bridge.Int.format(((System.Decimal("8.61752288817313")).mul(System.Decimal("0.0000908951268488984"))), "G"), "(new Decimal(\"8.61752288817313\")).mul(\"0.0000908951268488984\").toString() == \"0.0007832908360437819528979290\" FAILED");
 
-                Bridge.Test.NUnit.Assert.AreEqual$1("85388.15485564442", Bridge.Int.format(((System.Decimal("91330.5146113646")).sub(System.Decimal("5942.35975572018"))), 'G'), "(new Decimal(\"91330.5146113646\")).sub(\"5942.35975572018\").toString() == \"85388.15485564442\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0006005125566523128396843158", Bridge.Int.format(((System.Decimal("0.00754608521589361")).mul(System.Decimal("0.0795793500168153"))), 'G'), "(new Decimal(\"0.00754608521589361\")).mul(\"0.0795793500168153\").toString() == \"0.0006005125566523128396843158\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("1020.1981723776409731715", Bridge.Int.format(((System.Decimal("1020.19813424917")).add(System.Decimal("0.0000381284709731715"))), 'G'), "(new Decimal(\"1020.19813424917\")).add(\"0.0000381284709731715\").toString() == \"1020.1981723776409731715\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0025578204022461232891799586", Bridge.Int.format(((System.Decimal("874.749045295058")).div(System.Decimal("341990.017957049"))), 'G'), "(new Decimal(\"874.749045295058\")).div(\"341990.017957049\").toString() == \"0.0025578204022461232891799586\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("1191.1626737619095274", Bridge.Int.format(((System.Decimal("0.0945538378295274")).add(System.Decimal("1191.06811992408"))), 'G'), "(new Decimal(\"0.0945538378295274\")).add(\"1191.06811992408\").toString() == \"1191.1626737619095274\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000012723850728401263936405", Bridge.Int.format(((System.Decimal("0.00174284968606329")).mul(System.Decimal("0.000730060132560348"))), 'G'), "(new Decimal(\"0.00174284968606329\")).mul(\"0.000730060132560348\").toString() == \"0.0000012723850728401263936405\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.3878144949689754244652101063", Bridge.Int.format(((System.Decimal("0.0000886363427101804")).div(System.Decimal("0.000228553454963748"))), 'G'), "(new Decimal(\"0.0000886363427101804\")).div(\"0.000228553454963748\").toString() == \"0.3878144949689754244652101063\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.6276545818966699448042492771", Bridge.Int.format(((System.Decimal("0.0088596635353098")).div(System.Decimal("0.0141155084195153"))), 'G'), "(new Decimal(\"0.0088596635353098\")).div(\"0.0141155084195153\").toString() == \"0.6276545818966699448042492771\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("887642.763737621356332488", Bridge.Int.format(((System.Decimal("887642.763968391")).sub(System.Decimal("0.000230769643667512"))), 'G'), "(new Decimal(\"887642.763968391\")).sub(\"0.000230769643667512\").toString() == \"887642.763737621356332488\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("453198251.73558506995962676469", Bridge.Int.format(((System.Decimal("23004.7123148128")).div(System.Decimal("0.0000507608143383455"))), 'G'), "(new Decimal(\"23004.7123148128\")).div(\"0.0000507608143383455\").toString() == \"453198251.73558506995962676469\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("83.7146957344276093754", Bridge.Int.format(((System.Decimal("83.7147017399383")).sub(System.Decimal("0.0000060055106906246"))), 'G'), "(new Decimal(\"83.7147017399383\")).sub(\"0.0000060055106906246\").toString() == \"83.7146957344276093754\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("87.63923156896568", Bridge.Int.format(((System.Decimal("4.66405350466448")).add(System.Decimal("82.9751780643012"))), 'G'), "(new Decimal(\"4.66405350466448\")).add(\"82.9751780643012\").toString() == \"87.63923156896568\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("1347.836978065024006220719243", Bridge.Int.format(((System.Decimal("6808.9278446552")).div(System.Decimal("5.05174435444723"))), 'G'), "(new Decimal(\"6808.9278446552\")).div(\"5.05174435444723\").toString() == \"1347.836978065024006220719243\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("7712816.5554913010058030163591", Bridge.Int.format(((System.Decimal("8813.68504316252")).div(System.Decimal("0.0011427323572071"))), 'G'), "(new Decimal(\"8813.68504316252\")).div(\"0.0011427323572071\").toString() == \"7712816.5554913010058030163591\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0066851887766319767409290909", Bridge.Int.format(((System.Decimal("0.00000007260315151541")).mul(System.Decimal("92078.4929730364"))), 'G'), "(new Decimal(\"0.00000007260315151541\")).mul(\"92078.4929730364\").toString() == \"0.0066851887766319767409290909\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000121301184342453339116", Bridge.Int.format(((System.Decimal("0.00000009849602240068")).div(System.Decimal("8.11995554162187"))), 'G'), "(new Decimal(\"0.00000009849602240068\")).div(\"8.11995554162187\").toString() == \"0.0000000121301184342453339116\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.3125741895189851492", Bridge.Int.format(((System.Decimal("0.312526527006424")).add(System.Decimal("0.0000476625125611492"))), 'G'), "(new Decimal(\"0.312526527006424\")).add(\"0.0000476625125611492\").toString() == \"0.3125741895189851492\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.2038677468092889069882980431", Bridge.Int.format(((System.Decimal("18502.905787203")).div(System.Decimal("90759.3578522836"))), 'G'), "(new Decimal(\"18502.905787203\")).div(\"90759.3578522836\").toString() == \"0.2038677468092889069882980431\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000005559422081028409448", Bridge.Int.format(((System.Decimal("0.00000294573398909799")).div(System.Decimal("5298.63346614811"))), 'G'), "(new Decimal(\"0.00000294573398909799\")).div(\"5298.63346614811\").toString() == \"0.0000000005559422081028409448\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("46411462.077440048464670213145", Bridge.Int.format(((System.Decimal("3090023.14838116")).div(System.Decimal("0.066578879657471"))), 'G'), "(new Decimal(\"3090023.14838116\")).div(\"0.066578879657471\").toString() == \"46411462.077440048464670213145\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.000002581837802588014691071", Bridge.Int.format(((System.Decimal("0.00000043088218729519")).div(System.Decimal("0.166889719742765"))), 'G'), "(new Decimal(\"0.00000043088218729519\")).div(\"0.166889719742765\").toString() == \"0.000002581837802588014691071\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("662563.86998257370710896", Bridge.Int.format(((System.Decimal("662563.871900814")).sub(System.Decimal("0.00191824029289104"))), 'G'), "(new Decimal(\"662563.871900814\")).sub(\"0.00191824029289104\").toString() == \"662563.86998257370710896\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("4.093541112069757865", Bridge.Int.format(((System.Decimal("4.09383642677862")).sub(System.Decimal("0.000295314708862135"))), 'G'), "(new Decimal(\"4.09383642677862\")).sub(\"0.000295314708862135\").toString() == \"4.093541112069757865\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0519240351822827709748263872", Bridge.Int.format(((System.Decimal("17.4083959392311")).mul(System.Decimal("0.00298270072461232"))), 'G'), "(new Decimal(\"17.4083959392311\")).mul(\"0.00298270072461232\").toString() == \"0.0519240351822827709748263872\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("56614111357.238158837814773558", Bridge.Int.format(((System.Decimal("1775.79848178467")).div(System.Decimal("0.00000003136671121762"))), 'G'), "(new Decimal(\"1775.79848178467\")).div(\"0.00000003136671121762\").toString() == \"56614111357.238158837814773558\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.18047320241517500632", Bridge.Int.format(((System.Decimal("0.00000057644597700632")).add(System.Decimal("0.180472625969198"))), 'G'), "(new Decimal(\"0.00000057644597700632\")).add(\"0.180472625969198\").toString() == \"0.18047320241517500632\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-0.00000014875716676412", Bridge.Int.format(((System.Decimal("0.0000002374956338841")).sub(System.Decimal("0.00000038625280064822"))), 'G'), "(new Decimal(\"0.0000002374956338841\")).sub(\"0.00000038625280064822\").toString() == \"-0.00000014875716676412\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("23421549.686072900974999649279", Bridge.Int.format(((System.Decimal("222.322416595333")).div(System.Decimal("0.00000949221633816707"))), 'G'), "(new Decimal(\"222.322416595333\")).div(\"0.00000949221633816707\").toString() == \"23421549.686072900974999649279\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("3.871063458479728538175789638", Bridge.Int.format(((System.Decimal("0.0221267636037091")).div(System.Decimal("0.00571593926088695"))), 'G'), "(new Decimal(\"0.0221267636037091\")).div(\"0.00571593926088695\").toString() == \"3.871063458479728538175789638\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("85388.15485564442", Bridge.Int.format(((System.Decimal("91330.5146113646")).sub(System.Decimal("5942.35975572018"))), "G"), "(new Decimal(\"91330.5146113646\")).sub(\"5942.35975572018\").toString() == \"85388.15485564442\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0006005125566523128396843158", Bridge.Int.format(((System.Decimal("0.00754608521589361")).mul(System.Decimal("0.0795793500168153"))), "G"), "(new Decimal(\"0.00754608521589361\")).mul(\"0.0795793500168153\").toString() == \"0.0006005125566523128396843158\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("1020.1981723776409731715", Bridge.Int.format(((System.Decimal("1020.19813424917")).add(System.Decimal("0.0000381284709731715"))), "G"), "(new Decimal(\"1020.19813424917\")).add(\"0.0000381284709731715\").toString() == \"1020.1981723776409731715\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0025578204022461232891799586", Bridge.Int.format(((System.Decimal("874.749045295058")).div(System.Decimal("341990.017957049"))), "G"), "(new Decimal(\"874.749045295058\")).div(\"341990.017957049\").toString() == \"0.0025578204022461232891799586\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("1191.1626737619095274", Bridge.Int.format(((System.Decimal("0.0945538378295274")).add(System.Decimal("1191.06811992408"))), "G"), "(new Decimal(\"0.0945538378295274\")).add(\"1191.06811992408\").toString() == \"1191.1626737619095274\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000012723850728401263936405", Bridge.Int.format(((System.Decimal("0.00174284968606329")).mul(System.Decimal("0.000730060132560348"))), "G"), "(new Decimal(\"0.00174284968606329\")).mul(\"0.000730060132560348\").toString() == \"0.0000012723850728401263936405\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.3878144949689754244652101063", Bridge.Int.format(((System.Decimal("0.0000886363427101804")).div(System.Decimal("0.000228553454963748"))), "G"), "(new Decimal(\"0.0000886363427101804\")).div(\"0.000228553454963748\").toString() == \"0.3878144949689754244652101063\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.6276545818966699448042492771", Bridge.Int.format(((System.Decimal("0.0088596635353098")).div(System.Decimal("0.0141155084195153"))), "G"), "(new Decimal(\"0.0088596635353098\")).div(\"0.0141155084195153\").toString() == \"0.6276545818966699448042492771\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("887642.763737621356332488", Bridge.Int.format(((System.Decimal("887642.763968391")).sub(System.Decimal("0.000230769643667512"))), "G"), "(new Decimal(\"887642.763968391\")).sub(\"0.000230769643667512\").toString() == \"887642.763737621356332488\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("453198251.73558506995962676469", Bridge.Int.format(((System.Decimal("23004.7123148128")).div(System.Decimal("0.0000507608143383455"))), "G"), "(new Decimal(\"23004.7123148128\")).div(\"0.0000507608143383455\").toString() == \"453198251.73558506995962676469\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("83.7146957344276093754", Bridge.Int.format(((System.Decimal("83.7147017399383")).sub(System.Decimal("0.0000060055106906246"))), "G"), "(new Decimal(\"83.7147017399383\")).sub(\"0.0000060055106906246\").toString() == \"83.7146957344276093754\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("87.63923156896568", Bridge.Int.format(((System.Decimal("4.66405350466448")).add(System.Decimal("82.9751780643012"))), "G"), "(new Decimal(\"4.66405350466448\")).add(\"82.9751780643012\").toString() == \"87.63923156896568\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("1347.836978065024006220719243", Bridge.Int.format(((System.Decimal("6808.9278446552")).div(System.Decimal("5.05174435444723"))), "G"), "(new Decimal(\"6808.9278446552\")).div(\"5.05174435444723\").toString() == \"1347.836978065024006220719243\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("7712816.5554913010058030163591", Bridge.Int.format(((System.Decimal("8813.68504316252")).div(System.Decimal("0.0011427323572071"))), "G"), "(new Decimal(\"8813.68504316252\")).div(\"0.0011427323572071\").toString() == \"7712816.5554913010058030163591\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0066851887766319767409290909", Bridge.Int.format(((System.Decimal("0.00000007260315151541")).mul(System.Decimal("92078.4929730364"))), "G"), "(new Decimal(\"0.00000007260315151541\")).mul(\"92078.4929730364\").toString() == \"0.0066851887766319767409290909\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000121301184342453339116", Bridge.Int.format(((System.Decimal("0.00000009849602240068")).div(System.Decimal("8.11995554162187"))), "G"), "(new Decimal(\"0.00000009849602240068\")).div(\"8.11995554162187\").toString() == \"0.0000000121301184342453339116\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.3125741895189851492", Bridge.Int.format(((System.Decimal("0.312526527006424")).add(System.Decimal("0.0000476625125611492"))), "G"), "(new Decimal(\"0.312526527006424\")).add(\"0.0000476625125611492\").toString() == \"0.3125741895189851492\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.2038677468092889069882980431", Bridge.Int.format(((System.Decimal("18502.905787203")).div(System.Decimal("90759.3578522836"))), "G"), "(new Decimal(\"18502.905787203\")).div(\"90759.3578522836\").toString() == \"0.2038677468092889069882980431\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000005559422081028409448", Bridge.Int.format(((System.Decimal("0.00000294573398909799")).div(System.Decimal("5298.63346614811"))), "G"), "(new Decimal(\"0.00000294573398909799\")).div(\"5298.63346614811\").toString() == \"0.0000000005559422081028409448\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("46411462.077440048464670213145", Bridge.Int.format(((System.Decimal("3090023.14838116")).div(System.Decimal("0.066578879657471"))), "G"), "(new Decimal(\"3090023.14838116\")).div(\"0.066578879657471\").toString() == \"46411462.077440048464670213145\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.000002581837802588014691071", Bridge.Int.format(((System.Decimal("0.00000043088218729519")).div(System.Decimal("0.166889719742765"))), "G"), "(new Decimal(\"0.00000043088218729519\")).div(\"0.166889719742765\").toString() == \"0.000002581837802588014691071\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("662563.86998257370710896", Bridge.Int.format(((System.Decimal("662563.871900814")).sub(System.Decimal("0.00191824029289104"))), "G"), "(new Decimal(\"662563.871900814\")).sub(\"0.00191824029289104\").toString() == \"662563.86998257370710896\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("4.093541112069757865", Bridge.Int.format(((System.Decimal("4.09383642677862")).sub(System.Decimal("0.000295314708862135"))), "G"), "(new Decimal(\"4.09383642677862\")).sub(\"0.000295314708862135\").toString() == \"4.093541112069757865\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0519240351822827709748263872", Bridge.Int.format(((System.Decimal("17.4083959392311")).mul(System.Decimal("0.00298270072461232"))), "G"), "(new Decimal(\"17.4083959392311\")).mul(\"0.00298270072461232\").toString() == \"0.0519240351822827709748263872\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("56614111357.238158837814773558", Bridge.Int.format(((System.Decimal("1775.79848178467")).div(System.Decimal("0.00000003136671121762"))), "G"), "(new Decimal(\"1775.79848178467\")).div(\"0.00000003136671121762\").toString() == \"56614111357.238158837814773558\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.18047320241517500632", Bridge.Int.format(((System.Decimal("0.00000057644597700632")).add(System.Decimal("0.180472625969198"))), "G"), "(new Decimal(\"0.00000057644597700632\")).add(\"0.180472625969198\").toString() == \"0.18047320241517500632\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-0.00000014875716676412", Bridge.Int.format(((System.Decimal("0.0000002374956338841")).sub(System.Decimal("0.00000038625280064822"))), "G"), "(new Decimal(\"0.0000002374956338841\")).sub(\"0.00000038625280064822\").toString() == \"-0.00000014875716676412\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("23421549.686072900974999649279", Bridge.Int.format(((System.Decimal("222.322416595333")).div(System.Decimal("0.00000949221633816707"))), "G"), "(new Decimal(\"222.322416595333\")).div(\"0.00000949221633816707\").toString() == \"23421549.686072900974999649279\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("3.871063458479728538175789638", Bridge.Int.format(((System.Decimal("0.0221267636037091")).div(System.Decimal("0.00571593926088695"))), "G"), "(new Decimal(\"0.0221267636037091\")).div(\"0.00571593926088695\").toString() == \"3.871063458479728538175789638\" FAILED");
                 // #1650
-                Bridge.Test.NUnit.Assert.AreEqual$1("16214.400846511121144041207000", Bridge.Int.format(((System.Decimal("7016.24042681243")).mul(System.Decimal("2.31098136040893"))), 'G'), "(new Decimal(\"7016.24042681243\")).mul(\"2.31098136040893\").toString() == \"16214.400846511121144041207000\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("16214.400846511121144041207000", Bridge.Int.format(((System.Decimal("7016.24042681243")).mul(System.Decimal("2.31098136040893"))), "G"), "(new Decimal(\"7016.24042681243\")).mul(\"2.31098136040893\").toString() == \"16214.400846511121144041207000\" FAILED");
 
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0019490762786253018034972934", Bridge.Int.format(((System.Decimal("0.0681883810871227")).mul(System.Decimal("0.0285837007353938"))), 'G'), "(new Decimal(\"0.0681883810871227\")).mul(\"0.0285837007353938\").toString() == \"0.0019490762786253018034972934\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("1.157187581135514", Bridge.Int.format(((System.Decimal("0.85837511246017")).add(System.Decimal("0.298812468675344"))), 'G'), "(new Decimal(\"0.85837511246017\")).add(\"0.298812468675344\").toString() == \"1.157187581135514\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-5115293.869385163952", Bridge.Int.format(((System.Decimal("193.647991956048")).sub(System.Decimal("5115487.51737712"))), 'G'), "(new Decimal(\"193.647991956048\")).sub(\"5115487.51737712\").toString() == \"-5115293.869385163952\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.05504833553420386932", Bridge.Int.format(((System.Decimal("0.0550483308988848")).add(System.Decimal("0.00000000463531906932"))), 'G'), "(new Decimal(\"0.0550483308988848\")).add(\"0.00000000463531906932\").toString() == \"0.05504833553420386932\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0226105809476949110796916402", Bridge.Int.format(((System.Decimal("0.0000007991035286333")).mul(System.Decimal("28294.9331813934"))), 'G'), "(new Decimal(\"0.0000007991035286333\")).mul(\"28294.9331813934\").toString() == \"0.0226105809476949110796916402\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000430659364069161812657506", Bridge.Int.format(((System.Decimal("0.00000001163869482076")).div(System.Decimal("0.000270252914293787"))), 'G'), "(new Decimal(\"0.00000001163869482076\")).div(\"0.000270252914293787\").toString() == \"0.0000430659364069161812657506\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("369.899752887384684", Bridge.Int.format(((System.Decimal("0.882389189620684")).add(System.Decimal("369.017363697764"))), 'G'), "(new Decimal(\"0.882389189620684\")).add(\"369.017363697764\").toString() == \"369.899752887384684\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("820.35799529420065", Bridge.Int.format(((System.Decimal("826.882673346848")).sub(System.Decimal("6.52467805264735"))), 'G'), "(new Decimal(\"826.882673346848\")).sub(\"6.52467805264735\").toString() == \"820.35799529420065\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("8665.241919876656136", Bridge.Int.format(((System.Decimal("0.916831304746136")).add(System.Decimal("8664.32508857191"))), 'G'), "(new Decimal(\"0.916831304746136\")).add(\"8664.32508857191\").toString() == \"8665.241919876656136\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("1113295905.5010739272635131771", Bridge.Int.format(((System.Decimal("3431.67145430654")).mul(System.Decimal("324417.975416602"))), 'G'), "(new Decimal(\"3431.67145430654\")).mul(\"324417.975416602\").toString() == \"1113295905.5010739272635131771\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("8694915.9254769790620115834586", Bridge.Int.format(((System.Decimal("7011684.364179")).div(System.Decimal("0.80641197962985"))), 'G'), "(new Decimal(\"7011684.364179\")).div(\"0.80641197962985\").toString() == \"8694915.9254769790620115834586\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("2.9407816183171732729079339674", Bridge.Int.format(((System.Decimal("0.0000716280695384499")).mul(System.Decimal("41056.2735707761"))), 'G'), "(new Decimal(\"0.0000716280695384499\")).mul(\"41056.2735707761\").toString() == \"2.9407816183171732729079339674\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.1127935794278807392120038243", Bridge.Int.format(((System.Decimal("80.8113612145238")).div(System.Decimal("716.453557236331"))), 'G'), "(new Decimal(\"80.8113612145238\")).div(\"716.453557236331\").toString() == \"0.1127935794278807392120038243\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("89526454.180026033061583476631", Bridge.Int.format(((System.Decimal("721.107919570575")).div(System.Decimal("0.0000080546909421937"))), 'G'), "(new Decimal(\"721.107919570575\")).div(\"0.0000080546909421937\").toString() == \"89526454.180026033061583476631\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-0.00000401257101493542", Bridge.Int.format(((System.Decimal("0.00000087664416240372")).sub(System.Decimal("0.00000488921517733914"))), 'G'), "(new Decimal(\"0.00000087664416240372\")).sub(\"0.00000488921517733914\").toString() == \"-0.00000401257101493542\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("1404309.5339384196562537720212", Bridge.Int.format(((System.Decimal("2861249.48079756")).mul(System.Decimal("0.49080289690327"))), 'G'), "(new Decimal(\"2861249.48079756\")).mul(\"0.49080289690327\").toString() == \"1404309.5339384196562537720212\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("11.799501757305484838541059295", Bridge.Int.format(((System.Decimal("0.329140784372175")).mul(System.Decimal("35.8494064471914"))), 'G'), "(new Decimal(\"0.329140784372175\")).mul(\"35.8494064471914\").toString() == \"11.799501757305484838541059295\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("86.579050768902069", Bridge.Int.format(((System.Decimal("0.887126708350669")).add(System.Decimal("85.6919240605514"))), 'G'), "(new Decimal(\"0.887126708350669\")).add(\"85.6919240605514\").toString() == \"86.579050768902069\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000066113860385206571", Bridge.Int.format(((System.Decimal("0.00000005458257806235")).div(System.Decimal("8255.84495358907"))), 'G'), "(new Decimal(\"0.00000005458257806235\")).div(\"8255.84495358907\").toString() == \"0.0000000000066113860385206571\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("265.78810758325215556973", Bridge.Int.format(((System.Decimal("265.788107768534")).sub(System.Decimal("0.00000018528184443027"))), 'G'), "(new Decimal(\"265.788107768534\")).sub(\"0.00000018528184443027\").toString() == \"265.78810758325215556973\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("36432462024050.335938886839157", Bridge.Int.format(((System.Decimal("668461.556857667")).div(System.Decimal("0.00000001834796551538"))), 'G'), "(new Decimal(\"668461.556857667\")).div(\"0.00000001834796551538\").toString() == \"36432462024050.335938886839157\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.6342358100146685424", Bridge.Int.format(((System.Decimal("0.634302762632399")).sub(System.Decimal("0.0000669526177304576"))), 'G'), "(new Decimal(\"0.634302762632399\")).sub(\"0.0000669526177304576\").toString() == \"0.6342358100146685424\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("1.926773046574916", Bridge.Int.format(((System.Decimal("1.00043254485374")).add(System.Decimal("0.926340501721176"))), 'G'), "(new Decimal(\"1.00043254485374\")).add(\"0.926340501721176\").toString() == \"1.926773046574916\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-1041.94303693225454352791", Bridge.Int.format(((System.Decimal("0.00000329803545647209")).sub(System.Decimal("1041.94304023029"))), 'G'), "(new Decimal(\"0.00000329803545647209\")).sub(\"1041.94304023029\").toString() == \"-1041.94303693225454352791\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("1.7320645654257663", Bridge.Int.format(((System.Decimal("0.0218895030309863")).add(System.Decimal("1.71017506239478"))), 'G'), "(new Decimal(\"0.0218895030309863\")).add(\"1.71017506239478\").toString() == \"1.7320645654257663\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("6.2932320008966984549725959605", Bridge.Int.format(((System.Decimal("0.00000850892723934209")).mul(System.Decimal("739603.456919828"))), 'G'), "(new Decimal(\"0.00000850892723934209\")).mul(\"739603.456919828\").toString() == \"6.2932320008966984549725959605\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-41970.90431835076483", Bridge.Int.format(((System.Decimal("5.53383796733517")).sub(System.Decimal("41976.4381563181"))), 'G'), "(new Decimal(\"5.53383796733517\")).sub(\"41976.4381563181\").toString() == \"-41970.90431835076483\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-3233365.007464948276", Bridge.Int.format(((System.Decimal("428.763072671724")).sub(System.Decimal("3233793.77053762"))), 'G'), "(new Decimal(\"428.763072671724\")).sub(\"3233793.77053762\").toString() == \"-3233365.007464948276\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000002451461856604290637149", Bridge.Int.format(((System.Decimal("0.00000003885374662413")).mul(System.Decimal("6.3094606559302"))), 'G'), "(new Decimal(\"0.00000003885374662413\")).mul(\"6.3094606559302\").toString() == \"0.0000002451461856604290637149\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("28932456.422151199951443781242", Bridge.Int.format(((System.Decimal("948527.350532137")).div(System.Decimal("0.0327841969825254"))), 'G'), "(new Decimal(\"948527.350532137\")).div(\"0.0327841969825254\").toString() == \"28932456.422151199951443781242\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-39125.788708948956168359", Bridge.Int.format(((System.Decimal("0.000126452543831641")).sub(System.Decimal("39125.7888354015"))), 'G'), "(new Decimal(\"0.000126452543831641\")).sub(\"39125.7888354015\").toString() == \"-39125.788708948956168359\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("1.3468627933517452321593950195", Bridge.Int.format(((System.Decimal("228915.375763977")).mul(System.Decimal("0.00000588367115514524"))), 'G'), "(new Decimal(\"228915.375763977\")).mul(\"0.00000588367115514524\").toString() == \"1.3468627933517452321593950195\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("39277185.990111339554907687023", Bridge.Int.format(((System.Decimal("49193.1172782523")).mul(System.Decimal("798.428482747836"))), 'G'), "(new Decimal(\"49193.1172782523\")).mul(\"798.428482747836\").toString() == \"39277185.990111339554907687023\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000000581563489873426", Bridge.Int.format(((System.Decimal("0.00000052592187771849")).mul(System.Decimal("0.00000011057982459226"))), 'G'), "(new Decimal(\"0.00000052592187771849\")).mul(\"0.00000011057982459226\").toString() == \"0.0000000000000581563489873426\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("61797.5944984525442125", Bridge.Int.format(((System.Decimal("61797.5818746712")).add(System.Decimal("0.0126237813442125"))), 'G'), "(new Decimal(\"61797.5818746712\")).add(\"0.0126237813442125\").toString() == \"61797.5944984525442125\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("198024.145522724504", Bridge.Int.format(((System.Decimal("198087.806439999")).sub(System.Decimal("63.660917274496"))), 'G'), "(new Decimal(\"198087.806439999\")).sub(\"63.660917274496\").toString() == \"198024.145522724504\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-3200.88940770525903322953", Bridge.Int.format(((System.Decimal("0.00000982426096677047")).sub(System.Decimal("3200.88941752952"))), 'G'), "(new Decimal(\"0.00000982426096677047\")).sub(\"3200.88941752952\").toString() == \"-3200.88940770525903322953\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("5.676451351339672665", Bridge.Int.format(((System.Decimal("0.000242386010122665")).add(System.Decimal("5.67620896532955"))), 'G'), "(new Decimal(\"0.000242386010122665\")).add(\"5.67620896532955\").toString() == \"5.676451351339672665\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000776963950158088336964", Bridge.Int.format(((System.Decimal("0.00000055833457250071")).mul(System.Decimal("0.139157413569818"))), 'G'), "(new Decimal(\"0.00000055833457250071\")).mul(\"0.139157413569818\").toString() == \"0.0000000776963950158088336964\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("5854.1561337260278061898964648", Bridge.Int.format(((System.Decimal("0.000561036967933661")).div(System.Decimal("0.0000000958356687314"))), 'G'), "(new Decimal(\"0.000561036967933661\")).div(\"0.0000000958356687314\").toString() == \"5854.1561337260278061898964648\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000328245876850082616", Bridge.Int.format(((System.Decimal("0.00000084970553864246")).div(System.Decimal("25886.2516963325"))), 'G'), "(new Decimal(\"0.00000084970553864246\")).div(\"25886.2516963325\").toString() == \"0.0000000000328245876850082616\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("98.5771713864016781651", Bridge.Int.format(((System.Decimal("0.0000315344957781651")).add(System.Decimal("98.5771398519059"))), 'G'), "(new Decimal(\"0.0000315344957781651\")).add(\"98.5771398519059\").toString() == \"98.5771713864016781651\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("3769.4758721824018394019909083", Bridge.Int.format(((System.Decimal("0.355002424845007")).div(System.Decimal("0.0000941781926407377"))), 'G'), "(new Decimal(\"0.355002424845007\")).div(\"0.0000941781926407377\").toString() == \"3769.4758721824018394019909083\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.34233483194482226", Bridge.Int.format(((System.Decimal("0.347713165147096")).sub(System.Decimal("0.00537833320227374"))), 'G'), "(new Decimal(\"0.347713165147096\")).sub(\"0.00537833320227374\").toString() == \"0.34233483194482226\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("2450696.875882343227315", Bridge.Int.format(((System.Decimal("2450696.35214782")).add(System.Decimal("0.523734523227315"))), 'G'), "(new Decimal(\"2450696.35214782\")).add(\"0.523734523227315\").toString() == \"2450696.875882343227315\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000078351005114308196", Bridge.Int.format(((System.Decimal("0.00000050161292520427")).div(System.Decimal("64021.2495643744"))), 'G'), "(new Decimal(\"0.00000050161292520427\")).div(\"64021.2495643744\").toString() == \"0.0000000000078351005114308196\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-6281.22716877027720895884", Bridge.Int.format(((System.Decimal("0.00000091908279104116")).sub(System.Decimal("6281.22716968936"))), 'G'), "(new Decimal(\"0.00000091908279104116\")).sub(\"6281.22716968936\").toString() == \"-6281.22716877027720895884\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0519401725231857052", Bridge.Int.format(((System.Decimal("0.0000851479899069052")).add(System.Decimal("0.0518550245332788"))), 'G'), "(new Decimal(\"0.0000851479899069052\")).add(\"0.0518550245332788\").toString() == \"0.0519401725231857052\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.00009138627400546624", Bridge.Int.format(((System.Decimal("0.00000002975221119344")).add(System.Decimal("0.0000913565217942728"))), 'G'), "(new Decimal(\"0.00000002975221119344\")).add(\"0.0000913565217942728\").toString() == \"0.00009138627400546624\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0927168588963668332272999205", Bridge.Int.format(((System.Decimal("0.00000086909218266098")).div(System.Decimal("0.00000937361546762922"))), 'G'), "(new Decimal(\"0.00000086909218266098\")).div(\"0.00000937361546762922\").toString() == \"0.0927168588963668332272999205\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("40553324.964360422490740452752", Bridge.Int.format(((System.Decimal("7678.32436025065")).mul(System.Decimal("5281.53319157731"))), 'G'), "(new Decimal(\"7678.32436025065\")).mul(\"5281.53319157731\").toString() == \"40553324.964360422490740452752\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("8581024.565256312363397899", Bridge.Int.format(((System.Decimal("8581024.56600453")).sub(System.Decimal("0.000748217636602101"))), 'G'), "(new Decimal(\"8581024.56600453\")).sub(\"0.000748217636602101\").toString() == \"8581024.565256312363397899\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0019490762786253018034972934", Bridge.Int.format(((System.Decimal("0.0681883810871227")).mul(System.Decimal("0.0285837007353938"))), "G"), "(new Decimal(\"0.0681883810871227\")).mul(\"0.0285837007353938\").toString() == \"0.0019490762786253018034972934\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("1.157187581135514", Bridge.Int.format(((System.Decimal("0.85837511246017")).add(System.Decimal("0.298812468675344"))), "G"), "(new Decimal(\"0.85837511246017\")).add(\"0.298812468675344\").toString() == \"1.157187581135514\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-5115293.869385163952", Bridge.Int.format(((System.Decimal("193.647991956048")).sub(System.Decimal("5115487.51737712"))), "G"), "(new Decimal(\"193.647991956048\")).sub(\"5115487.51737712\").toString() == \"-5115293.869385163952\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.05504833553420386932", Bridge.Int.format(((System.Decimal("0.0550483308988848")).add(System.Decimal("0.00000000463531906932"))), "G"), "(new Decimal(\"0.0550483308988848\")).add(\"0.00000000463531906932\").toString() == \"0.05504833553420386932\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0226105809476949110796916402", Bridge.Int.format(((System.Decimal("0.0000007991035286333")).mul(System.Decimal("28294.9331813934"))), "G"), "(new Decimal(\"0.0000007991035286333\")).mul(\"28294.9331813934\").toString() == \"0.0226105809476949110796916402\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000430659364069161812657506", Bridge.Int.format(((System.Decimal("0.00000001163869482076")).div(System.Decimal("0.000270252914293787"))), "G"), "(new Decimal(\"0.00000001163869482076\")).div(\"0.000270252914293787\").toString() == \"0.0000430659364069161812657506\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("369.899752887384684", Bridge.Int.format(((System.Decimal("0.882389189620684")).add(System.Decimal("369.017363697764"))), "G"), "(new Decimal(\"0.882389189620684\")).add(\"369.017363697764\").toString() == \"369.899752887384684\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("820.35799529420065", Bridge.Int.format(((System.Decimal("826.882673346848")).sub(System.Decimal("6.52467805264735"))), "G"), "(new Decimal(\"826.882673346848\")).sub(\"6.52467805264735\").toString() == \"820.35799529420065\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("8665.241919876656136", Bridge.Int.format(((System.Decimal("0.916831304746136")).add(System.Decimal("8664.32508857191"))), "G"), "(new Decimal(\"0.916831304746136\")).add(\"8664.32508857191\").toString() == \"8665.241919876656136\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("1113295905.5010739272635131771", Bridge.Int.format(((System.Decimal("3431.67145430654")).mul(System.Decimal("324417.975416602"))), "G"), "(new Decimal(\"3431.67145430654\")).mul(\"324417.975416602\").toString() == \"1113295905.5010739272635131771\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("8694915.9254769790620115834586", Bridge.Int.format(((System.Decimal("7011684.364179")).div(System.Decimal("0.80641197962985"))), "G"), "(new Decimal(\"7011684.364179\")).div(\"0.80641197962985\").toString() == \"8694915.9254769790620115834586\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("2.9407816183171732729079339674", Bridge.Int.format(((System.Decimal("0.0000716280695384499")).mul(System.Decimal("41056.2735707761"))), "G"), "(new Decimal(\"0.0000716280695384499\")).mul(\"41056.2735707761\").toString() == \"2.9407816183171732729079339674\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.1127935794278807392120038243", Bridge.Int.format(((System.Decimal("80.8113612145238")).div(System.Decimal("716.453557236331"))), "G"), "(new Decimal(\"80.8113612145238\")).div(\"716.453557236331\").toString() == \"0.1127935794278807392120038243\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("89526454.180026033061583476631", Bridge.Int.format(((System.Decimal("721.107919570575")).div(System.Decimal("0.0000080546909421937"))), "G"), "(new Decimal(\"721.107919570575\")).div(\"0.0000080546909421937\").toString() == \"89526454.180026033061583476631\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-0.00000401257101493542", Bridge.Int.format(((System.Decimal("0.00000087664416240372")).sub(System.Decimal("0.00000488921517733914"))), "G"), "(new Decimal(\"0.00000087664416240372\")).sub(\"0.00000488921517733914\").toString() == \"-0.00000401257101493542\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("1404309.5339384196562537720212", Bridge.Int.format(((System.Decimal("2861249.48079756")).mul(System.Decimal("0.49080289690327"))), "G"), "(new Decimal(\"2861249.48079756\")).mul(\"0.49080289690327\").toString() == \"1404309.5339384196562537720212\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("11.799501757305484838541059295", Bridge.Int.format(((System.Decimal("0.329140784372175")).mul(System.Decimal("35.8494064471914"))), "G"), "(new Decimal(\"0.329140784372175\")).mul(\"35.8494064471914\").toString() == \"11.799501757305484838541059295\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("86.579050768902069", Bridge.Int.format(((System.Decimal("0.887126708350669")).add(System.Decimal("85.6919240605514"))), "G"), "(new Decimal(\"0.887126708350669\")).add(\"85.6919240605514\").toString() == \"86.579050768902069\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000066113860385206571", Bridge.Int.format(((System.Decimal("0.00000005458257806235")).div(System.Decimal("8255.84495358907"))), "G"), "(new Decimal(\"0.00000005458257806235\")).div(\"8255.84495358907\").toString() == \"0.0000000000066113860385206571\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("265.78810758325215556973", Bridge.Int.format(((System.Decimal("265.788107768534")).sub(System.Decimal("0.00000018528184443027"))), "G"), "(new Decimal(\"265.788107768534\")).sub(\"0.00000018528184443027\").toString() == \"265.78810758325215556973\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("36432462024050.335938886839157", Bridge.Int.format(((System.Decimal("668461.556857667")).div(System.Decimal("0.00000001834796551538"))), "G"), "(new Decimal(\"668461.556857667\")).div(\"0.00000001834796551538\").toString() == \"36432462024050.335938886839157\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.6342358100146685424", Bridge.Int.format(((System.Decimal("0.634302762632399")).sub(System.Decimal("0.0000669526177304576"))), "G"), "(new Decimal(\"0.634302762632399\")).sub(\"0.0000669526177304576\").toString() == \"0.6342358100146685424\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("1.926773046574916", Bridge.Int.format(((System.Decimal("1.00043254485374")).add(System.Decimal("0.926340501721176"))), "G"), "(new Decimal(\"1.00043254485374\")).add(\"0.926340501721176\").toString() == \"1.926773046574916\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-1041.94303693225454352791", Bridge.Int.format(((System.Decimal("0.00000329803545647209")).sub(System.Decimal("1041.94304023029"))), "G"), "(new Decimal(\"0.00000329803545647209\")).sub(\"1041.94304023029\").toString() == \"-1041.94303693225454352791\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("1.7320645654257663", Bridge.Int.format(((System.Decimal("0.0218895030309863")).add(System.Decimal("1.71017506239478"))), "G"), "(new Decimal(\"0.0218895030309863\")).add(\"1.71017506239478\").toString() == \"1.7320645654257663\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("6.2932320008966984549725959605", Bridge.Int.format(((System.Decimal("0.00000850892723934209")).mul(System.Decimal("739603.456919828"))), "G"), "(new Decimal(\"0.00000850892723934209\")).mul(\"739603.456919828\").toString() == \"6.2932320008966984549725959605\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-41970.90431835076483", Bridge.Int.format(((System.Decimal("5.53383796733517")).sub(System.Decimal("41976.4381563181"))), "G"), "(new Decimal(\"5.53383796733517\")).sub(\"41976.4381563181\").toString() == \"-41970.90431835076483\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-3233365.007464948276", Bridge.Int.format(((System.Decimal("428.763072671724")).sub(System.Decimal("3233793.77053762"))), "G"), "(new Decimal(\"428.763072671724\")).sub(\"3233793.77053762\").toString() == \"-3233365.007464948276\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000002451461856604290637149", Bridge.Int.format(((System.Decimal("0.00000003885374662413")).mul(System.Decimal("6.3094606559302"))), "G"), "(new Decimal(\"0.00000003885374662413\")).mul(\"6.3094606559302\").toString() == \"0.0000002451461856604290637149\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("28932456.422151199951443781242", Bridge.Int.format(((System.Decimal("948527.350532137")).div(System.Decimal("0.0327841969825254"))), "G"), "(new Decimal(\"948527.350532137\")).div(\"0.0327841969825254\").toString() == \"28932456.422151199951443781242\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-39125.788708948956168359", Bridge.Int.format(((System.Decimal("0.000126452543831641")).sub(System.Decimal("39125.7888354015"))), "G"), "(new Decimal(\"0.000126452543831641\")).sub(\"39125.7888354015\").toString() == \"-39125.788708948956168359\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("1.3468627933517452321593950195", Bridge.Int.format(((System.Decimal("228915.375763977")).mul(System.Decimal("0.00000588367115514524"))), "G"), "(new Decimal(\"228915.375763977\")).mul(\"0.00000588367115514524\").toString() == \"1.3468627933517452321593950195\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("39277185.990111339554907687023", Bridge.Int.format(((System.Decimal("49193.1172782523")).mul(System.Decimal("798.428482747836"))), "G"), "(new Decimal(\"49193.1172782523\")).mul(\"798.428482747836\").toString() == \"39277185.990111339554907687023\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000000581563489873426", Bridge.Int.format(((System.Decimal("0.00000052592187771849")).mul(System.Decimal("0.00000011057982459226"))), "G"), "(new Decimal(\"0.00000052592187771849\")).mul(\"0.00000011057982459226\").toString() == \"0.0000000000000581563489873426\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("61797.5944984525442125", Bridge.Int.format(((System.Decimal("61797.5818746712")).add(System.Decimal("0.0126237813442125"))), "G"), "(new Decimal(\"61797.5818746712\")).add(\"0.0126237813442125\").toString() == \"61797.5944984525442125\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("198024.145522724504", Bridge.Int.format(((System.Decimal("198087.806439999")).sub(System.Decimal("63.660917274496"))), "G"), "(new Decimal(\"198087.806439999\")).sub(\"63.660917274496\").toString() == \"198024.145522724504\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-3200.88940770525903322953", Bridge.Int.format(((System.Decimal("0.00000982426096677047")).sub(System.Decimal("3200.88941752952"))), "G"), "(new Decimal(\"0.00000982426096677047\")).sub(\"3200.88941752952\").toString() == \"-3200.88940770525903322953\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("5.676451351339672665", Bridge.Int.format(((System.Decimal("0.000242386010122665")).add(System.Decimal("5.67620896532955"))), "G"), "(new Decimal(\"0.000242386010122665\")).add(\"5.67620896532955\").toString() == \"5.676451351339672665\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000776963950158088336964", Bridge.Int.format(((System.Decimal("0.00000055833457250071")).mul(System.Decimal("0.139157413569818"))), "G"), "(new Decimal(\"0.00000055833457250071\")).mul(\"0.139157413569818\").toString() == \"0.0000000776963950158088336964\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("5854.1561337260278061898964648", Bridge.Int.format(((System.Decimal("0.000561036967933661")).div(System.Decimal("0.0000000958356687314"))), "G"), "(new Decimal(\"0.000561036967933661\")).div(\"0.0000000958356687314\").toString() == \"5854.1561337260278061898964648\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000328245876850082616", Bridge.Int.format(((System.Decimal("0.00000084970553864246")).div(System.Decimal("25886.2516963325"))), "G"), "(new Decimal(\"0.00000084970553864246\")).div(\"25886.2516963325\").toString() == \"0.0000000000328245876850082616\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("98.5771713864016781651", Bridge.Int.format(((System.Decimal("0.0000315344957781651")).add(System.Decimal("98.5771398519059"))), "G"), "(new Decimal(\"0.0000315344957781651\")).add(\"98.5771398519059\").toString() == \"98.5771713864016781651\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("3769.4758721824018394019909083", Bridge.Int.format(((System.Decimal("0.355002424845007")).div(System.Decimal("0.0000941781926407377"))), "G"), "(new Decimal(\"0.355002424845007\")).div(\"0.0000941781926407377\").toString() == \"3769.4758721824018394019909083\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.34233483194482226", Bridge.Int.format(((System.Decimal("0.347713165147096")).sub(System.Decimal("0.00537833320227374"))), "G"), "(new Decimal(\"0.347713165147096\")).sub(\"0.00537833320227374\").toString() == \"0.34233483194482226\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("2450696.875882343227315", Bridge.Int.format(((System.Decimal("2450696.35214782")).add(System.Decimal("0.523734523227315"))), "G"), "(new Decimal(\"2450696.35214782\")).add(\"0.523734523227315\").toString() == \"2450696.875882343227315\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000078351005114308196", Bridge.Int.format(((System.Decimal("0.00000050161292520427")).div(System.Decimal("64021.2495643744"))), "G"), "(new Decimal(\"0.00000050161292520427\")).div(\"64021.2495643744\").toString() == \"0.0000000000078351005114308196\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-6281.22716877027720895884", Bridge.Int.format(((System.Decimal("0.00000091908279104116")).sub(System.Decimal("6281.22716968936"))), "G"), "(new Decimal(\"0.00000091908279104116\")).sub(\"6281.22716968936\").toString() == \"-6281.22716877027720895884\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0519401725231857052", Bridge.Int.format(((System.Decimal("0.0000851479899069052")).add(System.Decimal("0.0518550245332788"))), "G"), "(new Decimal(\"0.0000851479899069052\")).add(\"0.0518550245332788\").toString() == \"0.0519401725231857052\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.00009138627400546624", Bridge.Int.format(((System.Decimal("0.00000002975221119344")).add(System.Decimal("0.0000913565217942728"))), "G"), "(new Decimal(\"0.00000002975221119344\")).add(\"0.0000913565217942728\").toString() == \"0.00009138627400546624\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0927168588963668332272999205", Bridge.Int.format(((System.Decimal("0.00000086909218266098")).div(System.Decimal("0.00000937361546762922"))), "G"), "(new Decimal(\"0.00000086909218266098\")).div(\"0.00000937361546762922\").toString() == \"0.0927168588963668332272999205\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("40553324.964360422490740452752", Bridge.Int.format(((System.Decimal("7678.32436025065")).mul(System.Decimal("5281.53319157731"))), "G"), "(new Decimal(\"7678.32436025065\")).mul(\"5281.53319157731\").toString() == \"40553324.964360422490740452752\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("8581024.565256312363397899", Bridge.Int.format(((System.Decimal("8581024.56600453")).sub(System.Decimal("0.000748217636602101"))), "G"), "(new Decimal(\"8581024.56600453\")).sub(\"0.000748217636602101\").toString() == \"8581024.565256312363397899\" FAILED");
                 // #1650
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0344964205226649308283349310", Bridge.Int.format(((System.Decimal("0.0000244098234104038")).mul(System.Decimal("1413.21876617764"))), 'G'), "(new Decimal(\"0.0000244098234104038\")).mul(\"1413.21876617764\").toString() == \"0.0344964205226649308283349310\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0344964205226649308283349310", Bridge.Int.format(((System.Decimal("0.0000244098234104038")).mul(System.Decimal("1413.21876617764"))), "G"), "(new Decimal(\"0.0000244098234104038\")).mul(\"1413.21876617764\").toString() == \"0.0344964205226649308283349310\" FAILED");
 
-                Bridge.Test.NUnit.Assert.AreEqual$1("-0.00144899793000472471", Bridge.Int.format(((System.Decimal("0.00000002482942213529")).sub(System.Decimal("0.00144902275942686"))), 'G'), "(new Decimal(\"0.00000002482942213529\")).sub(\"0.00144902275942686\").toString() == \"-0.00144899793000472471\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0145830863052812570331711621", Bridge.Int.format(((System.Decimal("0.000910689151338623")).div(System.Decimal("0.0624483139079289"))), 'G'), "(new Decimal(\"0.000910689151338623\")).div(\"0.0624483139079289\").toString() == \"0.0145830863052812570331711621\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("131248.684342948329262", Bridge.Int.format(((System.Decimal("131248.713532113")).sub(System.Decimal("0.029189164670738"))), 'G'), "(new Decimal(\"131248.713532113\")).sub(\"0.029189164670738\").toString() == \"131248.684342948329262\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("5019.003774030302274918", Bridge.Int.format(((System.Decimal("0.000344105692274918")).add(System.Decimal("5019.00342992461"))), 'G'), "(new Decimal(\"0.000344105692274918\")).add(\"5019.00342992461\").toString() == \"5019.003774030302274918\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000714590274185505401", Bridge.Int.format(((System.Decimal("0.000617910423603798")).div(System.Decimal("8647058.96407695"))), 'G'), "(new Decimal(\"0.000617910423603798\")).div(\"8647058.96407695\").toString() == \"0.0000000000714590274185505401\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("890433.23457508275525883108", Bridge.Int.format(((System.Decimal("890433.234577269")).sub(System.Decimal("0.00000218624474116892"))), 'G'), "(new Decimal(\"890433.234577269\")).sub(\"0.00000218624474116892\").toString() == \"890433.23457508275525883108\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000043469111168706293851817", Bridge.Int.format(((System.Decimal("7.7632498637602")).div(System.Decimal("1785923.30393657"))), 'G'), "(new Decimal(\"7.7632498637602\")).div(\"1785923.30393657\").toString() == \"0.0000043469111168706293851817\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0003295105776320145972457301", Bridge.Int.format(((System.Decimal("5613.03226538609")).mul(System.Decimal("0.00000005870455790251"))), 'G'), "(new Decimal(\"5613.03226538609\")).mul(\"0.00000005870455790251\").toString() == \"0.0003295105776320145972457301\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("6769150.5330613094858", Bridge.Int.format(((System.Decimal("6769137.76284509")).add(System.Decimal("12.7702162194858"))), 'G'), "(new Decimal(\"6769137.76284509\")).add(\"12.7702162194858\").toString() == \"6769150.5330613094858\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("3245807.691775637069", Bridge.Int.format(((System.Decimal("987.946705887069")).add(System.Decimal("3244819.74506975"))), 'G'), "(new Decimal(\"987.946705887069\")).add(\"3244819.74506975\").toString() == \"3245807.691775637069\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("373.6556954120196391427", Bridge.Int.format(((System.Decimal("0.0000970930446391427")).add(System.Decimal("373.655598318975"))), 'G'), "(new Decimal(\"0.0000970930446391427\")).add(\"373.655598318975\").toString() == \"373.6556954120196391427\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-0.02061165320041153501", Bridge.Int.format(((System.Decimal("0.00000085500743326499")).sub(System.Decimal("0.0206125082078448"))), 'G'), "(new Decimal(\"0.00000085500743326499\")).sub(\"0.0206125082078448\").toString() == \"-0.02061165320041153501\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000008709359977812961424188", Bridge.Int.format(((System.Decimal("0.00000001982638995155")).mul(System.Decimal("43.9281180239879"))), 'G'), "(new Decimal(\"0.00000001982638995155\")).mul(\"43.9281180239879\").toString() == \"0.0000008709359977812961424188\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("544246.62011017191540368", Bridge.Int.format(((System.Decimal("544246.617026742")).add(System.Decimal("0.00308342991540368"))), 'G'), "(new Decimal(\"544246.617026742\")).add(\"0.00308342991540368\").toString() == \"544246.62011017191540368\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("51.73313984431529452496", Bridge.Int.format(((System.Decimal("51.7331402989724")).sub(System.Decimal("0.00000045465710547504"))), 'G'), "(new Decimal(\"51.7331402989724\")).sub(\"0.00000045465710547504\").toString() == \"51.73313984431529452496\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.000000000046298846889617716", Bridge.Int.format(((System.Decimal("0.000107662315064884")).div(System.Decimal("2325377.89378566"))), 'G'), "(new Decimal(\"0.000107662315064884\")).div(\"2325377.89378566\").toString() == \"0.000000000046298846889617716\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("18572.0885521773395175914", Bridge.Int.format(((System.Decimal("18572.0885258969")).add(System.Decimal("0.0000262804395175914"))), 'G'), "(new Decimal(\"18572.0885258969\")).add(\"0.0000262804395175914\").toString() == \"18572.0885521773395175914\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000027531871725364104883308", Bridge.Int.format(((System.Decimal("5.44742788907486")).mul(System.Decimal("0.00000050541048520497"))), 'G'), "(new Decimal(\"5.44742788907486\")).mul(\"0.00000050541048520497\").toString() == \"0.0000027531871725364104883308\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-12716.27520800453493739", Bridge.Int.format(((System.Decimal("0.00937844566506261")).sub(System.Decimal("12716.2845864502"))), 'G'), "(new Decimal(\"0.00937844566506261\")).sub(\"12716.2845864502\").toString() == \"-12716.27520800453493739\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000003087983018261781959", Bridge.Int.format(((System.Decimal("0.000613210929377568")).mul(System.Decimal("0.00000050357599160801"))), 'G'), "(new Decimal(\"0.000613210929377568\")).mul(\"0.00000050357599160801\").toString() == \"0.0000000003087983018261781959\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("102.32918883824198403740845781", Bridge.Int.format(((System.Decimal("9.79164098845406")).div(System.Decimal("0.095687663506571"))), 'G'), "(new Decimal(\"9.79164098845406\")).div(\"0.095687663506571\").toString() == \"102.32918883824198403740845781\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("9928.1819875610465252535811176", Bridge.Int.format(((System.Decimal("3509.39318701131")).mul(System.Decimal("2.82903096304696"))), 'G'), "(new Decimal(\"3509.39318701131\")).mul(\"2.82903096304696\").toString() == \"9928.1819875610465252535811176\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.005761883809120339", Bridge.Int.format(((System.Decimal("0.00550658921501906")).add(System.Decimal("0.000255294594101279"))), 'G'), "(new Decimal(\"0.00550658921501906\")).add(\"0.000255294594101279\").toString() == \"0.005761883809120339\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-0.00000018726902063344", Bridge.Int.format(((System.Decimal("0.00000003774064715846")).sub(System.Decimal("0.0000002250096677919"))), 'G'), "(new Decimal(\"0.00000003774064715846\")).sub(\"0.0000002250096677919\").toString() == \"-0.00000018726902063344\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000176594645959884060957208", Bridge.Int.format(((System.Decimal("0.000982163002706209")).mul(System.Decimal("0.0179801769638342"))), 'G'), "(new Decimal(\"0.000982163002706209\")).mul(\"0.0179801769638342\").toString() == \"0.0000176594645959884060957208\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-0.60567620163151359006", Bridge.Int.format(((System.Decimal("0.00000156584160940994")).sub(System.Decimal("0.605677767473123"))), 'G'), "(new Decimal(\"0.00000156584160940994\")).sub(\"0.605677767473123\").toString() == \"-0.60567620163151359006\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-14377.8227241141224", Bridge.Int.format(((System.Decimal("83.8072135037776")).sub(System.Decimal("14461.6299376179"))), 'G'), "(new Decimal(\"83.8072135037776\")).sub(\"14461.6299376179\").toString() == \"-14377.8227241141224\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("82431.57192252187505207205", Bridge.Int.format(((System.Decimal("0.00000005587505207205")).add(System.Decimal("82431.571922466"))), 'G'), "(new Decimal(\"0.00000005587505207205\")).add(\"82431.571922466\").toString() == \"82431.57192252187505207205\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("7479590.99871805918841", Bridge.Int.format(((System.Decimal("7479600.39762761")).sub(System.Decimal("9.39890955081159"))), 'G'), "(new Decimal(\"7479600.39762761\")).sub(\"9.39890955081159\").toString() == \"7479590.99871805918841\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.85300160231268362844", Bridge.Int.format(((System.Decimal("0.00000060434978762844")).add(System.Decimal("0.853000997962896"))), 'G'), "(new Decimal(\"0.00000060434978762844\")).add(\"0.853000997962896\").toString() == \"0.85300160231268362844\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("56119.27283704670739007136", Bridge.Int.format(((System.Decimal("56119.2728374709")).sub(System.Decimal("0.00000042419260992864"))), 'G'), "(new Decimal(\"56119.2728374709\")).sub(\"0.00000042419260992864\").toString() == \"56119.27283704670739007136\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-0.00144899793000472471", Bridge.Int.format(((System.Decimal("0.00000002482942213529")).sub(System.Decimal("0.00144902275942686"))), "G"), "(new Decimal(\"0.00000002482942213529\")).sub(\"0.00144902275942686\").toString() == \"-0.00144899793000472471\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0145830863052812570331711621", Bridge.Int.format(((System.Decimal("0.000910689151338623")).div(System.Decimal("0.0624483139079289"))), "G"), "(new Decimal(\"0.000910689151338623\")).div(\"0.0624483139079289\").toString() == \"0.0145830863052812570331711621\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("131248.684342948329262", Bridge.Int.format(((System.Decimal("131248.713532113")).sub(System.Decimal("0.029189164670738"))), "G"), "(new Decimal(\"131248.713532113\")).sub(\"0.029189164670738\").toString() == \"131248.684342948329262\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("5019.003774030302274918", Bridge.Int.format(((System.Decimal("0.000344105692274918")).add(System.Decimal("5019.00342992461"))), "G"), "(new Decimal(\"0.000344105692274918\")).add(\"5019.00342992461\").toString() == \"5019.003774030302274918\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000714590274185505401", Bridge.Int.format(((System.Decimal("0.000617910423603798")).div(System.Decimal("8647058.96407695"))), "G"), "(new Decimal(\"0.000617910423603798\")).div(\"8647058.96407695\").toString() == \"0.0000000000714590274185505401\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("890433.23457508275525883108", Bridge.Int.format(((System.Decimal("890433.234577269")).sub(System.Decimal("0.00000218624474116892"))), "G"), "(new Decimal(\"890433.234577269\")).sub(\"0.00000218624474116892\").toString() == \"890433.23457508275525883108\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000043469111168706293851817", Bridge.Int.format(((System.Decimal("7.7632498637602")).div(System.Decimal("1785923.30393657"))), "G"), "(new Decimal(\"7.7632498637602\")).div(\"1785923.30393657\").toString() == \"0.0000043469111168706293851817\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0003295105776320145972457301", Bridge.Int.format(((System.Decimal("5613.03226538609")).mul(System.Decimal("0.00000005870455790251"))), "G"), "(new Decimal(\"5613.03226538609\")).mul(\"0.00000005870455790251\").toString() == \"0.0003295105776320145972457301\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("6769150.5330613094858", Bridge.Int.format(((System.Decimal("6769137.76284509")).add(System.Decimal("12.7702162194858"))), "G"), "(new Decimal(\"6769137.76284509\")).add(\"12.7702162194858\").toString() == \"6769150.5330613094858\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("3245807.691775637069", Bridge.Int.format(((System.Decimal("987.946705887069")).add(System.Decimal("3244819.74506975"))), "G"), "(new Decimal(\"987.946705887069\")).add(\"3244819.74506975\").toString() == \"3245807.691775637069\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("373.6556954120196391427", Bridge.Int.format(((System.Decimal("0.0000970930446391427")).add(System.Decimal("373.655598318975"))), "G"), "(new Decimal(\"0.0000970930446391427\")).add(\"373.655598318975\").toString() == \"373.6556954120196391427\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-0.02061165320041153501", Bridge.Int.format(((System.Decimal("0.00000085500743326499")).sub(System.Decimal("0.0206125082078448"))), "G"), "(new Decimal(\"0.00000085500743326499\")).sub(\"0.0206125082078448\").toString() == \"-0.02061165320041153501\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000008709359977812961424188", Bridge.Int.format(((System.Decimal("0.00000001982638995155")).mul(System.Decimal("43.9281180239879"))), "G"), "(new Decimal(\"0.00000001982638995155\")).mul(\"43.9281180239879\").toString() == \"0.0000008709359977812961424188\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("544246.62011017191540368", Bridge.Int.format(((System.Decimal("544246.617026742")).add(System.Decimal("0.00308342991540368"))), "G"), "(new Decimal(\"544246.617026742\")).add(\"0.00308342991540368\").toString() == \"544246.62011017191540368\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("51.73313984431529452496", Bridge.Int.format(((System.Decimal("51.7331402989724")).sub(System.Decimal("0.00000045465710547504"))), "G"), "(new Decimal(\"51.7331402989724\")).sub(\"0.00000045465710547504\").toString() == \"51.73313984431529452496\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.000000000046298846889617716", Bridge.Int.format(((System.Decimal("0.000107662315064884")).div(System.Decimal("2325377.89378566"))), "G"), "(new Decimal(\"0.000107662315064884\")).div(\"2325377.89378566\").toString() == \"0.000000000046298846889617716\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("18572.0885521773395175914", Bridge.Int.format(((System.Decimal("18572.0885258969")).add(System.Decimal("0.0000262804395175914"))), "G"), "(new Decimal(\"18572.0885258969\")).add(\"0.0000262804395175914\").toString() == \"18572.0885521773395175914\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000027531871725364104883308", Bridge.Int.format(((System.Decimal("5.44742788907486")).mul(System.Decimal("0.00000050541048520497"))), "G"), "(new Decimal(\"5.44742788907486\")).mul(\"0.00000050541048520497\").toString() == \"0.0000027531871725364104883308\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-12716.27520800453493739", Bridge.Int.format(((System.Decimal("0.00937844566506261")).sub(System.Decimal("12716.2845864502"))), "G"), "(new Decimal(\"0.00937844566506261\")).sub(\"12716.2845864502\").toString() == \"-12716.27520800453493739\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000003087983018261781959", Bridge.Int.format(((System.Decimal("0.000613210929377568")).mul(System.Decimal("0.00000050357599160801"))), "G"), "(new Decimal(\"0.000613210929377568\")).mul(\"0.00000050357599160801\").toString() == \"0.0000000003087983018261781959\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("102.32918883824198403740845781", Bridge.Int.format(((System.Decimal("9.79164098845406")).div(System.Decimal("0.095687663506571"))), "G"), "(new Decimal(\"9.79164098845406\")).div(\"0.095687663506571\").toString() == \"102.32918883824198403740845781\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("9928.1819875610465252535811176", Bridge.Int.format(((System.Decimal("3509.39318701131")).mul(System.Decimal("2.82903096304696"))), "G"), "(new Decimal(\"3509.39318701131\")).mul(\"2.82903096304696\").toString() == \"9928.1819875610465252535811176\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.005761883809120339", Bridge.Int.format(((System.Decimal("0.00550658921501906")).add(System.Decimal("0.000255294594101279"))), "G"), "(new Decimal(\"0.00550658921501906\")).add(\"0.000255294594101279\").toString() == \"0.005761883809120339\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-0.00000018726902063344", Bridge.Int.format(((System.Decimal("0.00000003774064715846")).sub(System.Decimal("0.0000002250096677919"))), "G"), "(new Decimal(\"0.00000003774064715846\")).sub(\"0.0000002250096677919\").toString() == \"-0.00000018726902063344\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000176594645959884060957208", Bridge.Int.format(((System.Decimal("0.000982163002706209")).mul(System.Decimal("0.0179801769638342"))), "G"), "(new Decimal(\"0.000982163002706209\")).mul(\"0.0179801769638342\").toString() == \"0.0000176594645959884060957208\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-0.60567620163151359006", Bridge.Int.format(((System.Decimal("0.00000156584160940994")).sub(System.Decimal("0.605677767473123"))), "G"), "(new Decimal(\"0.00000156584160940994\")).sub(\"0.605677767473123\").toString() == \"-0.60567620163151359006\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-14377.8227241141224", Bridge.Int.format(((System.Decimal("83.8072135037776")).sub(System.Decimal("14461.6299376179"))), "G"), "(new Decimal(\"83.8072135037776\")).sub(\"14461.6299376179\").toString() == \"-14377.8227241141224\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("82431.57192252187505207205", Bridge.Int.format(((System.Decimal("0.00000005587505207205")).add(System.Decimal("82431.571922466"))), "G"), "(new Decimal(\"0.00000005587505207205\")).add(\"82431.571922466\").toString() == \"82431.57192252187505207205\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("7479590.99871805918841", Bridge.Int.format(((System.Decimal("7479600.39762761")).sub(System.Decimal("9.39890955081159"))), "G"), "(new Decimal(\"7479600.39762761\")).sub(\"9.39890955081159\").toString() == \"7479590.99871805918841\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.85300160231268362844", Bridge.Int.format(((System.Decimal("0.00000060434978762844")).add(System.Decimal("0.853000997962896"))), "G"), "(new Decimal(\"0.00000060434978762844\")).add(\"0.853000997962896\").toString() == \"0.85300160231268362844\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("56119.27283704670739007136", Bridge.Int.format(((System.Decimal("56119.2728374709")).sub(System.Decimal("0.00000042419260992864"))), "G"), "(new Decimal(\"56119.2728374709\")).sub(\"0.00000042419260992864\").toString() == \"56119.27283704670739007136\" FAILED");
                 // #1650
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000429259949352215200", Bridge.Int.format(((System.Decimal("0.00000008143559702739")).mul(System.Decimal("0.000527115862130707"))), 'G'), "(new Decimal(\"0.00000008143559702739\")).mul(\"0.000527115862130707\").toString() == \"0.0000000000429259949352215200\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000429259949352215200", Bridge.Int.format(((System.Decimal("0.00000008143559702739")).mul(System.Decimal("0.000527115862130707"))), "G"), "(new Decimal(\"0.00000008143559702739\")).mul(\"0.000527115862130707\").toString() == \"0.0000000000429259949352215200\" FAILED");
 
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0002210184665192469105090427", Bridge.Int.format(((System.Decimal("0.177999768954702")).div(System.Decimal("805.361523667984"))), 'G'), "(new Decimal(\"0.177999768954702\")).div(\"805.361523667984\").toString() == \"0.0002210184665192469105090427\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("402.38051609824775058238", Bridge.Int.format(((System.Decimal("0.00000008959675058238")).add(System.Decimal("402.380516008651"))), 'G'), "(new Decimal(\"0.00000008959675058238\")).add(\"402.380516008651\").toString() == \"402.38051609824775058238\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("1157.9235974952320582596435131", Bridge.Int.format(((System.Decimal("3201536.39800918")).mul(System.Decimal("0.000361677474045045"))), 'G'), "(new Decimal(\"3201536.39800918\")).mul(\"0.000361677474045045\").toString() == \"1157.9235974952320582596435131\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("596105387691.24201370458414998", Bridge.Int.format(((System.Decimal("9903407.65095475")).mul(System.Decimal("60191.9469238221"))), 'G'), "(new Decimal(\"9903407.65095475\")).mul(\"60191.9469238221\").toString() == \"596105387691.24201370458414998\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("159156.866445745", Bridge.Int.format(((System.Decimal("293261.767501599")).sub(System.Decimal("134104.901055854"))), 'G'), "(new Decimal(\"293261.767501599\")).sub(\"134104.901055854\").toString() == \"159156.866445745\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("25483.063870515866677174995489", Bridge.Int.format(((System.Decimal("0.0000990216107103143")).div(System.Decimal("0.000000003885781208"))), 'G'), "(new Decimal(\"0.0000990216107103143\")).div(\"0.000000003885781208\").toString() == \"25483.063870515866677174995489\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("273.43581025760547419975195832", Bridge.Int.format(((System.Decimal("0.504111655756883")).mul(System.Decimal("542.411204214399"))), 'G'), "(new Decimal(\"0.504111655756883\")).mul(\"542.411204214399\").toString() == \"273.43581025760547419975195832\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000054983344821540025900927", Bridge.Int.format(((System.Decimal("0.00000002588138930773")).mul(System.Decimal("212.443559995128"))), 'G'), "(new Decimal(\"0.00000002588138930773\")).mul(\"212.443559995128\").toString() == \"0.0000054983344821540025900927\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0401243778893816891004378948", Bridge.Int.format(((System.Decimal("0.00000005520699944124")).div(System.Decimal("0.00000137589670781786"))), 'G'), "(new Decimal(\"0.00000005520699944124\")).div(\"0.00000137589670781786\").toString() == \"0.0401243778893816891004378948\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.00005649102308903403", Bridge.Int.format(((System.Decimal("0.000056398253821022")).add(System.Decimal("0.00000009276926801203"))), 'G'), "(new Decimal(\"0.000056398253821022\")).add(\"0.00000009276926801203\").toString() == \"0.00005649102308903403\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("1217.5521632644127050450346182", Bridge.Int.format(((System.Decimal("0.0854362290750426")).div(System.Decimal("0.0000701704876824145"))), 'G'), "(new Decimal(\"0.0854362290750426\")).div(\"0.0000701704876824145\").toString() == \"1217.5521632644127050450346182\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000022138852190770639", Bridge.Int.format(((System.Decimal("0.00000001968172030509")).div(System.Decimal("8890.12679405982"))), 'G'), "(new Decimal(\"0.00000001968172030509\")).div(\"8890.12679405982\").toString() == \"0.0000000000022138852190770639\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.00004304147600337928", Bridge.Int.format(((System.Decimal("0.00000665923518438788")).add(System.Decimal("0.0000363822408189914"))), 'G'), "(new Decimal(\"0.00000665923518438788\")).add(\"0.0000363822408189914\").toString() == \"0.00004304147600337928\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.84670431087102625289", Bridge.Int.format(((System.Decimal("0.846703634525977")).add(System.Decimal("0.00000067634504925289"))), 'G'), "(new Decimal(\"0.846703634525977\")).add(\"0.00000067634504925289\").toString() == \"0.84670431087102625289\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.095390208997479793", Bridge.Int.format(((System.Decimal("0.0963102136721417")).sub(System.Decimal("0.000920004674661907"))), 'G'), "(new Decimal(\"0.0963102136721417\")).sub(\"0.000920004674661907\").toString() == \"0.095390208997479793\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-0.00981694733288462955", Bridge.Int.format(((System.Decimal("0.00000990941151041045")).sub(System.Decimal("0.00982685674439504"))), 'G'), "(new Decimal(\"0.00000990941151041045\")).sub(\"0.00982685674439504\").toString() == \"-0.00981694733288462955\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-0.00000990941151041045", Bridge.Int.format((System.Decimal("0.00000990941151041045").neg()), 'G'), "new Decimal(\"0.00000990941151041045\").neg().toString() == \"-0.00000990941151041045\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.00000990941151041045", Bridge.Int.format((System.Decimal("-0.00000990941151041045").neg()), 'G'), "new Decimal(\"-0.00000990941151041045\").neg().toString() == \"0.00000990941151041045\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-544246.617026742", Bridge.Int.format((System.Decimal("544246.617026742").neg()), 'G'), "(new Decimal(\"544246.617026742\")).neg().toString() == \"-544246.617026742\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("544246.617026742", Bridge.Int.format((System.Decimal("-544246.617026742").neg()), 'G'), "(new Decimal(\"-544246.617026742\")).neg().toString() == \"544246.617026742\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0002210184665192469105090427", Bridge.Int.format(((System.Decimal("0.177999768954702")).div(System.Decimal("805.361523667984"))), "G"), "(new Decimal(\"0.177999768954702\")).div(\"805.361523667984\").toString() == \"0.0002210184665192469105090427\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("402.38051609824775058238", Bridge.Int.format(((System.Decimal("0.00000008959675058238")).add(System.Decimal("402.380516008651"))), "G"), "(new Decimal(\"0.00000008959675058238\")).add(\"402.380516008651\").toString() == \"402.38051609824775058238\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("1157.9235974952320582596435131", Bridge.Int.format(((System.Decimal("3201536.39800918")).mul(System.Decimal("0.000361677474045045"))), "G"), "(new Decimal(\"3201536.39800918\")).mul(\"0.000361677474045045\").toString() == \"1157.9235974952320582596435131\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("596105387691.24201370458414998", Bridge.Int.format(((System.Decimal("9903407.65095475")).mul(System.Decimal("60191.9469238221"))), "G"), "(new Decimal(\"9903407.65095475\")).mul(\"60191.9469238221\").toString() == \"596105387691.24201370458414998\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("159156.866445745", Bridge.Int.format(((System.Decimal("293261.767501599")).sub(System.Decimal("134104.901055854"))), "G"), "(new Decimal(\"293261.767501599\")).sub(\"134104.901055854\").toString() == \"159156.866445745\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("25483.063870515866677174995489", Bridge.Int.format(((System.Decimal("0.0000990216107103143")).div(System.Decimal("0.000000003885781208"))), "G"), "(new Decimal(\"0.0000990216107103143\")).div(\"0.000000003885781208\").toString() == \"25483.063870515866677174995489\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("273.43581025760547419975195832", Bridge.Int.format(((System.Decimal("0.504111655756883")).mul(System.Decimal("542.411204214399"))), "G"), "(new Decimal(\"0.504111655756883\")).mul(\"542.411204214399\").toString() == \"273.43581025760547419975195832\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000054983344821540025900927", Bridge.Int.format(((System.Decimal("0.00000002588138930773")).mul(System.Decimal("212.443559995128"))), "G"), "(new Decimal(\"0.00000002588138930773\")).mul(\"212.443559995128\").toString() == \"0.0000054983344821540025900927\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0401243778893816891004378948", Bridge.Int.format(((System.Decimal("0.00000005520699944124")).div(System.Decimal("0.00000137589670781786"))), "G"), "(new Decimal(\"0.00000005520699944124\")).div(\"0.00000137589670781786\").toString() == \"0.0401243778893816891004378948\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.00005649102308903403", Bridge.Int.format(((System.Decimal("0.000056398253821022")).add(System.Decimal("0.00000009276926801203"))), "G"), "(new Decimal(\"0.000056398253821022\")).add(\"0.00000009276926801203\").toString() == \"0.00005649102308903403\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("1217.5521632644127050450346182", Bridge.Int.format(((System.Decimal("0.0854362290750426")).div(System.Decimal("0.0000701704876824145"))), "G"), "(new Decimal(\"0.0854362290750426\")).div(\"0.0000701704876824145\").toString() == \"1217.5521632644127050450346182\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.0000000000022138852190770639", Bridge.Int.format(((System.Decimal("0.00000001968172030509")).div(System.Decimal("8890.12679405982"))), "G"), "(new Decimal(\"0.00000001968172030509\")).div(\"8890.12679405982\").toString() == \"0.0000000000022138852190770639\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.00004304147600337928", Bridge.Int.format(((System.Decimal("0.00000665923518438788")).add(System.Decimal("0.0000363822408189914"))), "G"), "(new Decimal(\"0.00000665923518438788\")).add(\"0.0000363822408189914\").toString() == \"0.00004304147600337928\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.84670431087102625289", Bridge.Int.format(((System.Decimal("0.846703634525977")).add(System.Decimal("0.00000067634504925289"))), "G"), "(new Decimal(\"0.846703634525977\")).add(\"0.00000067634504925289\").toString() == \"0.84670431087102625289\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.095390208997479793", Bridge.Int.format(((System.Decimal("0.0963102136721417")).sub(System.Decimal("0.000920004674661907"))), "G"), "(new Decimal(\"0.0963102136721417\")).sub(\"0.000920004674661907\").toString() == \"0.095390208997479793\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-0.00981694733288462955", Bridge.Int.format(((System.Decimal("0.00000990941151041045")).sub(System.Decimal("0.00982685674439504"))), "G"), "(new Decimal(\"0.00000990941151041045\")).sub(\"0.00982685674439504\").toString() == \"-0.00981694733288462955\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-0.00000990941151041045", Bridge.Int.format((System.Decimal("0.00000990941151041045").neg()), "G"), "new Decimal(\"0.00000990941151041045\").neg().toString() == \"-0.00000990941151041045\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.00000990941151041045", Bridge.Int.format((System.Decimal("-0.00000990941151041045").neg()), "G"), "new Decimal(\"-0.00000990941151041045\").neg().toString() == \"0.00000990941151041045\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-544246.617026742", Bridge.Int.format((System.Decimal("544246.617026742").neg()), "G"), "(new Decimal(\"544246.617026742\")).neg().toString() == \"-544246.617026742\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("544246.617026742", Bridge.Int.format((System.Decimal("-544246.617026742").neg()), "G"), "(new Decimal(\"-544246.617026742\")).neg().toString() == \"544246.617026742\" FAILED");
                 // #1588
-                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format((System.Decimal("0").neg()), 'G'), "(new Decimal(\"0\")).neg().toString() == \"0\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format((System.Decimal("0").neg()), "G"), "(new Decimal(\"0\")).neg().toString() == \"0\" FAILED");
 
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.8", Bridge.Int.format((System.Decimal("254.9").mod(System.Decimal("12.1"))), 'G'), "254.9 % 12.1");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-0.8", Bridge.Int.format((System.Decimal("-254.9").mod(System.Decimal("12.1"))), 'G'), "-254.9 % 12.1");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.8", Bridge.Int.format((System.Decimal("254.9").mod(System.Decimal("-12.1"))), 'G'), "254.9 % -12.1");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-0.8", Bridge.Int.format((System.Decimal("-254.9").mod(System.Decimal("-12.1"))), 'G'), "-254.9 % -12.1");
-                Bridge.Test.NUnit.Assert.AreEqual$1("12.1", Bridge.Int.format((System.Decimal("12.1").mod(System.Decimal("254.9"))), 'G'), "12.1 % 254.9");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-12.1", Bridge.Int.format((System.Decimal("-12.1").mod(System.Decimal("254.9"))), 'G'), "-12.1 % 254.9");
-                Bridge.Test.NUnit.Assert.AreEqual$1("12.1", Bridge.Int.format((System.Decimal("12.1").mod(System.Decimal("-254.9"))), 'G'), "12.1 % -254.9");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-12.1", Bridge.Int.format((System.Decimal("-12.1").mod(System.Decimal("-254.9"))), 'G'), "-12.1 % -254.9");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format((System.Decimal("254.9").mod(System.Decimal("254.9"))), 'G'), "12.1 % 12.1");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format((System.Decimal("-254.9").mod(System.Decimal("254.9"))), 'G'), "-12.1 % 12.1");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format((System.Decimal("254.9").mod(System.Decimal("-254.9"))), 'G'), "12.1 % -12.1");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format((System.Decimal("-254.9").mod(System.Decimal("-254.9"))), 'G'), "-12.1 % -12.1");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.8", Bridge.Int.format((System.Decimal("254.9").mod(System.Decimal("12.1"))), "G"), "254.9 % 12.1");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-0.8", Bridge.Int.format((System.Decimal("-254.9").mod(System.Decimal("12.1"))), "G"), "-254.9 % 12.1");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.8", Bridge.Int.format((System.Decimal("254.9").mod(System.Decimal("-12.1"))), "G"), "254.9 % -12.1");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-0.8", Bridge.Int.format((System.Decimal("-254.9").mod(System.Decimal("-12.1"))), "G"), "-254.9 % -12.1");
+                Bridge.Test.NUnit.Assert.AreEqual$1("12.1", Bridge.Int.format((System.Decimal("12.1").mod(System.Decimal("254.9"))), "G"), "12.1 % 254.9");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-12.1", Bridge.Int.format((System.Decimal("-12.1").mod(System.Decimal("254.9"))), "G"), "-12.1 % 254.9");
+                Bridge.Test.NUnit.Assert.AreEqual$1("12.1", Bridge.Int.format((System.Decimal("12.1").mod(System.Decimal("-254.9"))), "G"), "12.1 % -254.9");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-12.1", Bridge.Int.format((System.Decimal("-12.1").mod(System.Decimal("-254.9"))), "G"), "-12.1 % -254.9");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format((System.Decimal("254.9").mod(System.Decimal("254.9"))), "G"), "12.1 % 12.1");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format((System.Decimal("-254.9").mod(System.Decimal("254.9"))), "G"), "-12.1 % 12.1");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format((System.Decimal("254.9").mod(System.Decimal("-254.9"))), "G"), "12.1 % -12.1");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format((System.Decimal("-254.9").mod(System.Decimal("-254.9"))), "G"), "-12.1 % -12.1");
 
-                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format(System.Decimal(".9").trunc(), 'G'), "(new Decimal(\".9\").trunc() == \"0\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format(System.Decimal(".999").trunc(), 'G'), "(new Decimal(\".999\").trunc() == \"0\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format(System.Decimal(".999999").trunc(), 'G'), "(new Decimal(\".999999\").trunc() == \"0\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("3", Bridge.Int.format(System.Decimal("3.9999999").trunc(), 'G'), "(new Decimal(\"3.9999999\").trunc() == \"3\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("12312312313123123123123123", Bridge.Int.format(System.Decimal("12312312313123123123123123.99").trunc(), 'G'), "(new Decimal(\"12312312313123123123123123.99\").trunc() == \"12312312313123123123123123\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format(System.Decimal(".9").trunc(), "G"), "(new Decimal(\".9\").trunc() == \"0\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format(System.Decimal(".999").trunc(), "G"), "(new Decimal(\".999\").trunc() == \"0\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format(System.Decimal(".999999").trunc(), "G"), "(new Decimal(\".999999\").trunc() == \"0\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("3", Bridge.Int.format(System.Decimal("3.9999999").trunc(), "G"), "(new Decimal(\"3.9999999\").trunc() == \"3\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("12312312313123123123123123", Bridge.Int.format(System.Decimal("12312312313123123123123123.99").trunc(), "G"), "(new Decimal(\"12312312313123123123123123.99\").trunc() == \"12312312313123123123123123\" FAILED");
                 // #1588
-                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format(System.Decimal("-.9").trunc(), 'G'), "(new Decimal(\"-.9\").trunc() == \"0\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format(System.Decimal("-.999").trunc(), 'G'), "(new Decimal(\"-.999\").trunc() == \"0\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format(System.Decimal("-.999999").trunc(), 'G'), "(new Decimal(\"-.999999\").trunc() == \"0\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format(System.Decimal("-.9").trunc(), "G"), "(new Decimal(\"-.9\").trunc() == \"0\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format(System.Decimal("-.999").trunc(), "G"), "(new Decimal(\"-.999\").trunc() == \"0\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format(System.Decimal("-.999999").trunc(), "G"), "(new Decimal(\"-.999999\").trunc() == \"0\" FAILED");
 
-                Bridge.Test.NUnit.Assert.AreEqual$1("-3", Bridge.Int.format(System.Decimal("-3.9999999").trunc(), 'G'), "(new Decimal(\"-3.9999999\").trunc() == \"-3\" FAILED");
-                Bridge.Test.NUnit.Assert.AreEqual$1("-12312312313123123123123123", Bridge.Int.format(System.Decimal("-12312312313123123123123123.99").trunc(), 'G'), "(new Decimal(\"-12312312313123123123123123.99\").trunc() == \"-12312312313123123123123123\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-3", Bridge.Int.format(System.Decimal("-3.9999999").trunc(), "G"), "(new Decimal(\"-3.9999999\").trunc() == \"-3\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-12312312313123123123123123", Bridge.Int.format(System.Decimal("-12312312313123123123123123.99").trunc(), "G"), "(new Decimal(\"-12312312313123123123123123.99\").trunc() == \"-12312312313123123123123123\" FAILED");
 
                 var d;
                 d = System.Decimal(0);
-                Bridge.Test.NUnit.Assert.AreEqual$1("1", Bridge.Int.format(((d = d.inc())), 'G'), "(new Decimal(\"0\").inc() == \"1\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("1", Bridge.Int.format(((d = d.inc())), "G"), "(new Decimal(\"0\").inc() == \"1\" FAILED");
                 d = System.Decimal(1);
-                Bridge.Test.NUnit.Assert.AreEqual$1("2", Bridge.Int.format(((d = d.inc())), 'G'), "(new Decimal(\"1\").inc() == \"2\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("2", Bridge.Int.format(((d = d.inc())), "G"), "(new Decimal(\"1\").inc() == \"2\" FAILED");
                 d = System.Decimal(2);
-                Bridge.Test.NUnit.Assert.AreEqual$1("3", Bridge.Int.format(((d = d.inc())), 'G'), "(new Decimal(\"2\").inc() == \"3\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("3", Bridge.Int.format(((d = d.inc())), "G"), "(new Decimal(\"2\").inc() == \"3\" FAILED");
                 d = System.Decimal(-1);
-                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format(((d = d.inc())), 'G'), "(new Decimal(\"-1\").inc() == \"0\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format(((d = d.inc())), "G"), "(new Decimal(\"-1\").inc() == \"0\" FAILED");
                 d = System.Decimal(-2);
-                Bridge.Test.NUnit.Assert.AreEqual$1("-1", Bridge.Int.format(((d = d.inc())), 'G'), "(new Decimal(\"2\").inc() == \"-1\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-1", Bridge.Int.format(((d = d.inc())), "G"), "(new Decimal(\"2\").inc() == \"-1\" FAILED");
                 d = System.Decimal(1.5);
-                Bridge.Test.NUnit.Assert.AreEqual$1("2.5", Bridge.Int.format(((d = d.inc())), 'G'), "(new Decimal(\"1.5\").inc() == \"2.5\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("2.5", Bridge.Int.format(((d = d.inc())), "G"), "(new Decimal(\"1.5\").inc() == \"2.5\" FAILED");
                 d = System.Decimal(-1.5);
-                Bridge.Test.NUnit.Assert.AreEqual$1("-0.5", Bridge.Int.format(((d = d.inc())), 'G'), "(new Decimal(\"-1.5\").inc() == \"-0.5\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-0.5", Bridge.Int.format(((d = d.inc())), "G"), "(new Decimal(\"-1.5\").inc() == \"-0.5\" FAILED");
 
                 d = System.Decimal(0);
-                Bridge.Test.NUnit.Assert.AreEqual$1("-1", Bridge.Int.format(((d = d.dec())), 'G'), "(new Decimal(\"0\").dec().toString() == \"-1\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-1", Bridge.Int.format(((d = d.dec())), "G"), "(new Decimal(\"0\").dec().toString() == \"-1\" FAILED");
                 d = System.Decimal(1);
-                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format(((d = d.dec())), 'G'), "(new Decimal(\"1\").dec().toString() == \"0\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0", Bridge.Int.format(((d = d.dec())), "G"), "(new Decimal(\"1\").dec().toString() == \"0\" FAILED");
                 d = System.Decimal(2);
-                Bridge.Test.NUnit.Assert.AreEqual$1("3", Bridge.Int.format(((d = d.inc())), 'G'), "(new Decimal(\"2\").inc() == \"1\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("3", Bridge.Int.format(((d = d.inc())), "G"), "(new Decimal(\"2\").inc() == \"1\" FAILED");
                 d = System.Decimal(-1);
-                Bridge.Test.NUnit.Assert.AreEqual$1("-2", Bridge.Int.format(((d = d.dec())), 'G'), "(new Decimal(\"-1\").dec().toString() == \"-2\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-2", Bridge.Int.format(((d = d.dec())), "G"), "(new Decimal(\"-1\").dec().toString() == \"-2\" FAILED");
                 d = System.Decimal(-2);
-                Bridge.Test.NUnit.Assert.AreEqual$1("-3", Bridge.Int.format(((d = d.dec())), 'G'), "(new Decimal(\"2\").dec().toString() == \"-3\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-3", Bridge.Int.format(((d = d.dec())), "G"), "(new Decimal(\"2\").dec().toString() == \"-3\" FAILED");
                 d = System.Decimal(1.5);
-                Bridge.Test.NUnit.Assert.AreEqual$1("0.5", Bridge.Int.format(((d = d.dec())), 'G'), "(new Decimal(\"1.5\").dec().toString() == \"0.5\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("0.5", Bridge.Int.format(((d = d.dec())), "G"), "(new Decimal(\"1.5\").dec().toString() == \"0.5\" FAILED");
                 d = System.Decimal(-1.5);
-                Bridge.Test.NUnit.Assert.AreEqual$1("-2.5", Bridge.Int.format(((d = d.dec())), 'G'), "(new Decimal(\"-1.5\").dec().toString() == \"-2.5\" FAILED");
+                Bridge.Test.NUnit.Assert.AreEqual$1("-2.5", Bridge.Int.format(((d = d.dec())), "G"), "(new Decimal(\"-1.5\").dec().toString() == \"-2.5\" FAILED");
             }
         }
     });
@@ -19341,7 +19269,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 Bridge.Test.NUnit.Assert.AreEqual("123", Bridge.format(291.0, "x", System.Globalization.CultureInfo.invariantCulture));
             },
             ToStringWorks: function () {
-                Bridge.Test.NUnit.Assert.AreEqual("123", System.Double.format((123.0), 'G'));
+                Bridge.Test.NUnit.Assert.AreEqual("123", System.Double.format((123.0), "G"));
             },
             ToExponentialWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("1.23e+2", (123.0).toExponential());
@@ -20489,7 +20417,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 Bridge.Test.NUnit.Assert.AreEqual("123", Bridge.format(291.0, "x", System.Globalization.CultureInfo.invariantCulture));
             },
             ToStringWorks: function () {
-                Bridge.Test.NUnit.Assert.AreEqual("123", System.Single.format((123.0), 'G'));
+                Bridge.Test.NUnit.Assert.AreEqual("123", System.Single.format((123.0), "G"));
             },
             ToExponentialWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("1.23e+2", (123.0).toExponential());
@@ -21084,7 +21012,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             _items: null
         },
         alias: [
-            "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"
+            "getEnumerator", ["System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator", "System$Collections$Generic$IEnumerable$1$getEnumerator"]
         ],
         ctors: {
             ctor: function (items) {
@@ -22251,7 +22179,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             },
             AppendLineDoubleWorks: function () {
                 var sb = new System.Text.StringBuilder("|");
-                Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(sb.appendLine(System.Double.format((123.0), 'G')), sb));
+                Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(sb.appendLine(System.Double.format((123.0), "G")), sb));
                 Bridge.Test.NUnit.Assert.AreEqual$1("|123\r\n", sb.toString(), "Text");
                 Bridge.Test.NUnit.Assert.AreEqual$1(6, sb.getLength(), "Length");
             },
@@ -23116,8 +23044,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.ns("Bridge.ClientTest.Batch4.Threading.CancellationTokenTests", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch4.Threading.CancellationTokenTests, {
-        f1: function () {
-        }
+        f1: function () { }
     });
 
     Bridge.define("Bridge.ClientTest.Batch4.Threading.PromiseTests", {
@@ -25795,22 +25722,14 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 PCS2: 0
             },
             methods: {
-                addECS1: function (value) {
-                },
-                removeECS1: function (value) {
-                },
-                addECS2: function (value) {
-                },
-                removeECS2: function (value) {
-                },
-                MCS: function () {
-                },
-                MCS$1: function (x) {
-                },
-                MCS$2: function (x, y) {
-                },
-                MCS2: function (x, y) {
-                }
+                addECS1: function (value) { },
+                removeECS1: function (value) { },
+                addECS2: function (value) { },
+                removeECS2: function (value) { },
+                MCS: function () { },
+                MCS$1: function (x) { },
+                MCS$2: function (x, y) { },
+                MCS2: function (x, y) { }
             }
         },
         fields: {
@@ -25839,24 +25758,15 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             getItem$1: function (x) {
                 return 0;
             },
-            setItem$1: function (x, value) {
-            },
-            addEC1: function (value) {
-            },
-            removeEC1: function (value) {
-            },
-            addEC2: function (value) {
-            },
-            removeEC2: function (value) {
-            },
-            MC: function () {
-            },
-            MC$1: function (x) {
-            },
-            MC$2: function (x, y) {
-            },
-            MC2: function (x, y) {
-            }
+            setItem$1: function (x, value) { },
+            addEC1: function (value) { },
+            removeEC1: function (value) { },
+            addEC2: function (value) { },
+            removeEC2: function (value) { },
+            MC: function () { },
+            MC$1: function (x) { },
+            MC$2: function (x, y) { },
+            MC2: function (x, y) { }
         }
     });
 
@@ -25876,20 +25786,13 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 PCS: 0
             },
             methods: {
-                MS: function () {
-                },
-                MCS: function () {
-                },
-                M2S: function (x) {
-                },
-                M2S$1: function (x) {
-                },
-                M2CS: function (x) {
-                },
-                M2CS$1: function (x) {
-                },
-                M3S: function (x) {
-                }
+                MS: function () { },
+                MCS: function () { },
+                M2S: function (x) { },
+                M2S$1: function (x) { },
+                M2CS: function (x) { },
+                M2CS$1: function (x) { },
+                M3S: function (x) { }
             }
         },
         fields: {
@@ -25908,27 +25811,18 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             getItem$2: function (x) {
                 return 0;
             },
-            setItem$2: function (x, value) {
-            },
+            setItem$2: function (x, value) { },
             getItem$3: function (x) {
                 return 0;
             },
-            setItem$3: function (x, value) {
-            },
-            M$1: function () {
-            },
-            MC: function () {
-            },
-            M2$2: function (x) {
-            },
-            M2$3: function (x) {
-            },
-            M2C: function (x) {
-            },
-            M2C$1: function (x) {
-            },
-            M3$1: function (x) {
-            }
+            setItem$3: function (x, value) { },
+            M$1: function () { },
+            MC: function () { },
+            M2$2: function (x) { },
+            M2$3: function (x) { },
+            M2C: function (x) { },
+            M2C$1: function (x) { },
+            M3$1: function (x) { }
         }
     });
 
@@ -26237,22 +26131,14 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 PDS2: 0
             },
             methods: {
-                addEDS1: function (value) {
-                },
-                removeEDS1: function (value) {
-                },
-                addEDS2: function (value) {
-                },
-                removeEDS2: function (value) {
-                },
-                MDS: function () {
-                },
-                MDS$1: function (x) {
-                },
-                MDS$2: function (x, y) {
-                },
-                MDS2: function (x, y) {
-                }
+                addEDS1: function (value) { },
+                removeEDS1: function (value) { },
+                addEDS2: function (value) { },
+                removeEDS2: function (value) { },
+                MDS: function () { },
+                MDS$1: function (x) { },
+                MDS$2: function (x, y) { },
+                MDS2: function (x, y) { }
             }
         },
         fields: {
@@ -26297,21 +26183,15 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             getItem$2: function (x) {
                 return 0;
             },
-            setItem$2: function (x, value) {
-            },
+            setItem$2: function (x, value) { },
             get_i1item: function (x) {
                 return 0;
             },
-            set_i1item: function (x, value) {
-            },
-            addED1: function (value) {
-            },
-            removeED1: function (value) {
-            },
-            addED2: function (value) {
-            },
-            removeED2: function (value) {
-            },
+            set_i1item: function (x, value) { },
+            addED1: function (value) { },
+            removeED1: function (value) { },
+            addED2: function (value) { },
+            removeED2: function (value) { },
             Bridge$ClientTest$Batch4$Reflection$GetMembersTests$I1$addEI11: function (value) {
                 throw new System.NotImplementedException();
             },
@@ -26324,14 +26204,10 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Bridge$ClientTest$Batch4$Reflection$GetMembersTests$I1$removeEI12: function (value) {
                 throw new System.NotImplementedException();
             },
-            MD: function () {
-            },
-            MD$1: function (x) {
-            },
-            MD$2: function (x, y) {
-            },
-            MD2: function (x, y) {
-            },
+            MD: function () { },
+            MD$1: function (x) { },
+            MD$2: function (x, y) { },
+            MD2: function (x, y) { },
             Bridge$ClientTest$Batch4$Reflection$GetMembersTests$I1$MI1: function () {
                 throw new System.NotImplementedException();
             },
@@ -26363,20 +26239,13 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 PDS: 0
             },
             methods: {
-                MS: function () {
-                },
-                MDS: function () {
-                },
-                M2S: function (x) {
-                },
-                M2S$1: function (x) {
-                },
-                M2DS: function (x) {
-                },
-                M2DS$1: function (x) {
-                },
-                M3S: function (x) {
-                }
+                MS: function () { },
+                MDS: function () { },
+                M2S: function (x) { },
+                M2S$1: function (x) { },
+                M2DS: function (x) { },
+                M2DS$1: function (x) { },
+                M3S: function (x) { }
             }
         },
         fields: {
@@ -26395,27 +26264,18 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             getItem$4: function (x) {
                 return 0;
             },
-            setItem$4: function (x, value) {
-            },
+            setItem$4: function (x, value) { },
             getItem$5: function (x) {
                 return 0;
             },
-            setItem$5: function (x, value) {
-            },
-            M$2: function () {
-            },
-            MD: function () {
-            },
-            M2$4: function (x) {
-            },
-            M2$5: function (x) {
-            },
-            M2D: function (x) {
-            },
-            M2D$1: function (x) {
-            },
-            M3$2: function (x) {
-            }
+            setItem$5: function (x, value) { },
+            M$2: function () { },
+            MD: function () { },
+            M2$4: function (x) { },
+            M2$5: function (x) { },
+            M2D: function (x) { },
+            M2D$1: function (x) { },
+            M3$2: function (x) { }
         }
     });
 
@@ -26556,86 +26416,75 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
     Bridge.ns("System.Double", $box_);
 
     Bridge.apply($box_.System.Double, {
-        toString: function (obj) {return System.Double.format(obj, 'G');},
-        getHashCode: function (obj) {return System.Double.getHashCode(obj);}
+        toString: function (obj) { return System.Double.format(obj, "G"); },
+        getHashCode: function (obj) { return System.Double.getHashCode(obj); }
     });
-
 
     Bridge.ns("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.E2", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.E2, {
-        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.E2, obj);}
+        toString: function (obj) { return System.Enum.toString(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.E2, obj); }
     });
-
 
     Bridge.ns("Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.E1", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.E1, {
-        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.E1, obj);}
+        toString: function (obj) { return System.Enum.toString(Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests.E1, obj); }
     });
-
 
     Bridge.ns("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E2", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E2, {
-        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E2, obj);}
+        toString: function (obj) { return System.Enum.toString(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E2, obj); }
     });
-
 
     Bridge.ns("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E1", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E1, {
-        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E1, obj);}
+        toString: function (obj) { return System.Enum.toString(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.E1, obj); }
     });
-
 
     Bridge.ns("System.Boolean", $box_);
 
     Bridge.apply($box_.System.Boolean, {
-        toString: function (obj) {return System.Boolean.toString(obj);}
+        toString: function (obj) { return System.Boolean.toString(obj); }
     });
-
 
     Bridge.ns("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.NamedValuesEnum", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.NamedValuesEnum, {
-        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.NamedValuesEnum, obj);}
+        toString: function (obj) { return System.Enum.toString(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.NamedValuesEnum, obj); }
     });
-
 
     Bridge.ns("Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.ImportedNamedValuesEnum", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.ImportedNamedValuesEnum, {
-        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.ImportedNamedValuesEnum, obj);}
+        toString: function (obj) { return System.Enum.toString(Bridge.ClientTest.Batch4.Reflection.TypeSystemTests.ImportedNamedValuesEnum, obj); }
     });
-
 
     Bridge.ns("System.DateTime", $box_);
 
     Bridge.apply($box_.System.DateTime, {
-        toString: function (obj) {return System.DateTime.format(obj);}
+        toString: function (obj) { return System.DateTime.format(obj); }
     });
-
 
     Bridge.ns("Bridge.ClientTest.Batch4.SimpleTypes.EnumTests.TestEnum", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.Batch4.SimpleTypes.EnumTests.TestEnum, {
-        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests.TestEnum, obj);}
+        toString: function (obj) { return System.Enum.toString(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests.TestEnum, obj); }
     });
-
 
     Bridge.ns("Bridge.ClientTest.Batch4.SimpleTypes.EnumTests.FlagsEnum", $box_);
 
     Bridge.apply($box_.Bridge.ClientTest.Batch4.SimpleTypes.EnumTests.FlagsEnum, {
-        toString: function (obj) {return System.Enum.toString(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests.FlagsEnum, obj);}
+        toString: function (obj) { return System.Enum.toString(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests.FlagsEnum, obj); }
     });
-
 
     Bridge.ns("System.Single", $box_);
 
     Bridge.apply($box_.System.Single, {
-        toString: function (obj) {return System.Single.format(obj, 'G');},
-        getHashCode: function (obj) {return System.Single.getHashCode(obj);}
+        toString: function (obj) { return System.Single.format(obj, "G"); },
+        getHashCode: function (obj) { return System.Single.getHashCode(obj); }
     });
 
     var $m = Bridge.setMetadata,

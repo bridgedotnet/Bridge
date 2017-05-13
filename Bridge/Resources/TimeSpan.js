@@ -3,7 +3,7 @@
 
         config: {
             alias: [
-                "compareTo", "System$IComparable$compareTo"
+                "compareTo", ["System$IComparable$compareTo", "System$IComparable$1$compareTo", "System$IComparable$1System$TimeSpan$compareTo"]
             ]
         },
 

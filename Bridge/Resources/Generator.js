@@ -21,7 +21,7 @@
 
             config: {
                 alias: [
-                "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"
+                "getEnumerator", ["System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator", "System$Collections$Generic$IEnumerable$1$getEnumerator"]
                 ]
             },
 
@@ -29,6 +29,7 @@
                 this.$initialize();
                 this.getEnumerator = action;
                 this["System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"] = action;
+                this["System$Collections$Generic$IEnumerable$1$getEnumerator"] = action;
             }
         };
     });
@@ -95,8 +96,8 @@
 					}
 				},
                 alias: [
-					"getCurrent", "System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$getCurrent$1",
-					"Current", "System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$Current$1",
+					"getCurrent", ["System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$getCurrent$1", "System$Collections$Generic$IEnumerator$1$getCurrent$1"],
+					"Current", ["System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1"],
 					"Current", "System$Collections$IEnumerator$Current",
 					"dispose", "System$IDisposable$dispose",
 					"moveNext", "System$Collections$IEnumerator$moveNext",
