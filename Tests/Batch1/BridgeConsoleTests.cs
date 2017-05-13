@@ -1,5 +1,4 @@
-﻿using Bridge.Linq;
-using Bridge.Test.NUnit;
+﻿using Bridge.Test.NUnit;
 using Bridge.ClientTestHelper;
 using System.Linq;
 using System.Text.RegularExpressions;

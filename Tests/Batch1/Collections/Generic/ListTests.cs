@@ -1,5 +1,4 @@
-﻿using Bridge.Linq;
-using Bridge.Test.NUnit;
+﻿using Bridge.Test.NUnit;
 
 using System;
 using System.Collections.Generic;
@@ -269,14 +268,6 @@ namespace Bridge.ClientTest.Collections.Generic
             string result = "";
             new List<string> { "a", "b", "c" }.ForEach(s => result += s);
             Assert.AreEqual("abc", result);
-        }
-
-        [Test]
-        public void ForeachWithListCallbackWorks()
-        {
-            string result = "";
-            new List<string> { "a", "b", "c" }.ForEach((s, i) => result += s + i);
-            Assert.AreEqual("a0b1c2", result);
         }
 
         [Test]

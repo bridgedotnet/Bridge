@@ -1,5 +1,5 @@
-using Bridge.Linq;
 using Bridge.Test.NUnit;
+using System;
 using System.Linq;
 
 namespace Bridge.ClientTest.Linq
@@ -40,7 +40,8 @@ namespace Bridge.ClientTest.Linq
             Assert.AreDeepEqual(new[] { 2, 0 }, smallerEvenNumbers.ToArray(), "Query in a query");
 
             // TEST
-            numbers.ForEach((x, index) => numbers[index] = -numbers[index]);
+            var index = 0;
+            Array.ForEach(numbers, (x) => { numbers[index] = -x; index++; });
             Assert.AreDeepEqual(new int[] { -5, -4, -1, -3, -9, -8, -6, -7, -2, 0 }, numbers.ToArray(), "ForEach()");
 
             // TEST

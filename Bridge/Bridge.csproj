@@ -172,7 +172,6 @@
     <Compile Include="Attributes\FileNameAttribute.cs" />
     <Compile Include="Attributes\ScriptAttribute.cs" />
     <Compile Include="Bridge\Console\Console.cs" />
-    <Compile Include="Bridge\Linq\Enumerable.cs" />
     <Compile Include="Bridge\IBridgeClass.cs" />
     <Compile Include="Bridge\ObjectLiteral.cs" />
     <Compile Include="Bridge\Intersection.cs" />

@@ -14642,7 +14642,7 @@ Bridge.$N1391Result =                     r;
         methods: {
             Access1: function () {
                 return Bridge.fn.bind(this, function () {
-                    Bridge.Linq.Enumerable.from(this._itms.Itms).forEach($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Holder$1.f1);
+                    Bridge.ClientTest.Batch3.BridgeIssues.Ext.ForEach(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Something$1(RecordT), this._itms.Itms, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Holder$1.f1);
 
                     this._itms.Itms["Bridge$ClientTest$Batch3$BridgeIssues$Bridge2138$ISomeCollection$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2138$Something$1$" + Bridge.getTypeAlias(RecordT) + "$getItem"](0).SomeAction();
                 });
@@ -27307,6 +27307,26 @@ Bridge.$N1391Result =                     r;
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge999_1, {
         f1: function (x) {
             return x;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Ext", {
+        statics: {
+            methods: {
+                ForEach: function (T, self, operation) {
+                    var $t;
+                    $t = Bridge.getEnumerator(self, T);
+                    try {
+                        while ($t.moveNext()) {
+                            var t = $t.Current;
+                            operation(t);
+                        }
+                    }finally {
+                        if (Bridge.is($t, System.IDisposable)) {
+                            $t.System$IDisposable$dispose();
+                        }
+                    }}
+            }
         }
     });
 
