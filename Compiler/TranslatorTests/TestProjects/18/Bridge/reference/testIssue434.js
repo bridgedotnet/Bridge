@@ -1,6 +1,6 @@
 // Top
 
-    Bridge.init(function (){
+    Bridge.init(function () {
         TestIssue434.Issue434A.DoSomething(2);
     });
 
@@ -27,7 +27,7 @@
     Bridge.init(function () { TestIssue434.Issue434A.Method3(); });
     Bridge.init(function () { TestIssue434.Issue434A.Method4(); });
 
-    Bridge.init(function (){
+    Bridge.init(function () {
         TestIssue434.Issue434B.DoSomething(2);
     });
 

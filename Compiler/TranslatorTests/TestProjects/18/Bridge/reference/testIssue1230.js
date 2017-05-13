@@ -15,12 +15,9 @@
                     TestIssue1230.Issue1230.MethodLong(System.Int64(v));
                     TestIssue1230.Issue1230.MethodLong(System.Int64(v));
                 },
-                MethodLong: function MethodLong(l) {
-                },
-                MethodDecimal: function MethodDecimal(l) {
-                },
-                MethodInt: function MethodInt(l) {
-                },
+                MethodLong: function MethodLong(l) { },
+                MethodDecimal: function MethodDecimal(l) { },
+                MethodInt: function MethodInt(l) { },
                 TestDecimal: function TestDecimal() {
                     // Conversions should not have duplicated Bridge.Decimal: Bridge.Decimal(Bridge.Decimal(v))
                     var v = 7;

@@ -1,5 +1,12 @@
 namespace Functions
 {
+    public delegate j j(MiddleBit x);
+
+    public class MiddleBit
+    {
+        public j fn;
+    }
+
     public class Parameters
     {
         // TODO #292

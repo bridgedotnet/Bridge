@@ -6,8 +6,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
         statics: {
             methods: {
                 
-                Test1: function () {
-                }
+                Test1: function () { }
             }
         },
         props: {

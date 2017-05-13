@@ -474,12 +474,12 @@ namespace Bridge.Translator
 
                 this.WriteNewLine();
                 this.Write("var " + JS.Vars.DBOX_ + " = {};");
+                this.WriteNewLine();
 
                 foreach (var boxedFunction in this.Emitter.NamedBoxedFunctions)
                 {
                     var name = BridgeTypes.ToJsName(boxedFunction.Key, this.Emitter, true);
-
-                    this.WriteNewLine();
+                    
                     this.WriteNewLine();
                     this.Write(JS.Funcs.BRIDGE_NS);
                     this.WriteOpenParentheses();

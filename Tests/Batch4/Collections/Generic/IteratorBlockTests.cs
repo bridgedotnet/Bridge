@@ -143,15 +143,7 @@ namespace Bridge.ClientTest.Batch4.Collections.Generic
                 sb.AppendLine("got " + enm.Current);
             }
 
-            AssertEqual(sb.ToString(),
-@"yielding 0
-got 0
-yielding 1
-got 1
-yielding -1
-got -1
-in finally
-");
+            AssertEqual(sb.ToString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
         }
 
         [Test]
@@ -168,13 +160,7 @@ in finally
             }
             enm.Dispose();
 
-            AssertEqual(sb.ToString(),
-@"yielding 0
-got 0
-yielding 1
-got 1
-in finally
-");
+            AssertEqual(sb.ToString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
         }
 
         [Test]
@@ -201,15 +187,7 @@ in finally
                 sb.AppendLine("caught exception");
             }
 
-            AssertEqual(sb.ToString(),
-@"yielding 1
-got 1
-yielding 2
-got 2
-throwing
-in finally
-caught exception
-");
+            AssertEqual(sb.ToString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
         }
 
         [Test]
@@ -237,23 +215,8 @@ caught exception
             foreach (var i in enm)
                 sb.AppendLine("got " + i);
 
-            AssertEqual(sb.ToString(),
-@"yielding 0
-got 0
-yielding 1
-got 1
-yielding -1
-got -1
-in finally
--
-yielding 0
-got 0
-yielding 1
-got 1
-yielding -1
-got -1
-in finally
-");
+            AssertEqual(sb.ToString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n"
+                + "-\nyielding 0\ngot 0\nyielding 1\ngot 1\nyielding -1\ngot -1\nin finally\n");
         }
 
         [Test]
@@ -269,13 +232,7 @@ in finally
                     break;
             }
 
-            AssertEqual(sb.ToString(),
-@"yielding 0
-got 0
-yielding 1
-got 1
-in finally
-");
+            AssertEqual(sb.ToString(), "yielding 0\ngot 0\nyielding 1\ngot 1\nin finally\n");
         }
 
         [Test]
@@ -303,15 +260,7 @@ in finally
                 sb.AppendLine("caught exception");
             }
 
-            AssertEqual(sb.ToString(),
-@"yielding 1
-got 1
-yielding 2
-got 2
-throwing
-in finally
-caught exception
-");
+            AssertEqual(sb.ToString(), "yielding 1\ngot 1\nyielding 2\ngot 2\nthrowing\nin finally\ncaught exception\n");
         }
 
         [Test]
@@ -325,14 +274,7 @@ caught exception
             foreach (int i in enm)
                 sb.AppendLine(i.ToString());
 
-            AssertEqual(sb.ToString(),
-@"3
-2
-1
-3
-2
-1
-");
+            AssertEqual(sb.ToString(), "3\n2\n1\n3\n2\n1\n");
         }
 
         [Test]
@@ -351,16 +293,7 @@ caught exception
                 sb.AppendLine(enm2.Current.ToString());
             }
 
-            AssertEqual(sb.ToString(),
-@"0
-0
-1
-1
-2
-2
--1
--1
-");
+            AssertEqual(sb.ToString(), "0\n0\n1\n1\n2\n2\n-1\n-1\n");
         }
     }
 }

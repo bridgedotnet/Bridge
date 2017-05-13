@@ -3,10 +3,8 @@ Bridge.assembly("TestProject", function ($asm, globals) {
 
     Bridge.define("Bridge644_With_Name_Attribute", {
         methods: {
-            DoSomething2: function () {
-            },
-            DoSomething1: function () {
-            }
+            DoSomething2: function () { },
+            DoSomething1: function () { }
         }
     });
 });

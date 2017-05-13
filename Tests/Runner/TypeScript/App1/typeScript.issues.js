@@ -261,6 +261,16 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         }
     });
 
+    Bridge.define("TypeScript.Issues.N2653IZig", {
+        $kind: "interface"
+    });
+
+    Bridge.define("TypeScript.Issues.N2661C", {
+        fields: {
+            fn: null
+        }
+    });
+
     Bridge.define("TypeScript.Issues.N1640.GamePlay", {
         inherits: [TypeScript.Issues.N1640.IGamePlay],
         events: {
@@ -291,5 +301,17 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         alias: [
             "Value1", "TypeScript$Issues$N2029Interface$1$System$Int32$Value1"
         ]
+    });
+
+    Bridge.define("TypeScript.Issues.N2653Zig", {
+        inherits: [TypeScript.Issues.N2653IZig],
+        alias: [
+            "zag", "TypeScript$Issues$N2653IZig$zag"
+        ],
+        methods: {
+            zag: function () {
+                return 1;
+            }
+        }
     });
 });

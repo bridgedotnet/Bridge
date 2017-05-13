@@ -40,10 +40,10 @@ namespace System
         [Template("System.Double.format({this}, {format}, {provider})")]
         public extern string ToString(string format, IFormatProvider provider);
 
-        [Template("System.Double.format({this}, 'G')")]
+        [Template("System.Double.format({this}, \"G\")")]
         public override extern string ToString();
 
-        [Template("System.Double.format({this}, 'G', {provider})")]
+        [Template("System.Double.format({this}, \"G\", {provider})")]
         public extern string ToString(IFormatProvider provider);
 
         [Template("System.Double.parse({s})")]

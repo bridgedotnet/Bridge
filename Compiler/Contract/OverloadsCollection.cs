@@ -689,8 +689,7 @@ namespace Bridge.Contract
 
                     foreach (var baseTypeDef in baseTypeDefinitions)
                     {
-                        var result = this.GetMethodOverloads(list, baseTypeDef.GetDefinition());
-                        list.AddRange(result);
+                        list = this.GetMethodOverloads(list, baseTypeDef.GetDefinition());
                     }
                 }
             }
@@ -797,8 +796,7 @@ namespace Bridge.Contract
 
                     foreach (var baseTypeDef in baseTypeDefinitions)
                     {
-                        var result = this.GetPropertyOverloads(list, baseTypeDef.GetDefinition());
-                        list.AddRange(result);
+                        list = this.GetPropertyOverloads(list, baseTypeDef.GetDefinition());
                     }
                 }
             }
@@ -846,8 +844,7 @@ namespace Bridge.Contract
 
                     foreach (var baseTypeDef in baseTypeDefinitions)
                     {
-                        var result = this.GetFieldOverloads(list, baseTypeDef.GetDefinition());
-                        list.AddRange(result);
+                        list = this.GetFieldOverloads(list, baseTypeDef.GetDefinition());
                     }
                 }
             }
@@ -933,8 +930,7 @@ namespace Bridge.Contract
 
                     foreach (var baseTypeDef in baseTypeDefinitions)
                     {
-                        var result = this.GetEventOverloads(list, baseTypeDef.GetDefinition());
-                        list.AddRange(result);
+                        list = this.GetEventOverloads(list, baseTypeDef.GetDefinition());
                     }
                 }
             }

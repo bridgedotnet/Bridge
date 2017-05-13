@@ -67,10 +67,10 @@
   </ItemGroup>
   <!-- Bridge Compiler -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <UsingTask Condition="$(UseBridgeTask) == true" TaskName="GenerateScript" AssemblyFile="$(ProjectDir)..\..\..\Build\bin\$(Configuration)\Bridge.Build.dll" />
+  <UsingTask Condition="$(UseBridgeTask) == true" TaskName="BridgeCompilerTask" AssemblyFile="$(ProjectDir)..\..\..\Build\bin\$(Configuration)\Bridge.Build.dll" />
   <Target Condition="$(UseBridgeTask) == true" Name="AfterBuild">
     <Message Text="Using Bridge Task" Importance="high" />
-    <GenerateScript
+    <BridgeCompilerTask
       Assembly="@(IntermediateAssembly)"
       AssemblyName="$(AssemblyName)"
       AssembliesPath="$(OutDir)"

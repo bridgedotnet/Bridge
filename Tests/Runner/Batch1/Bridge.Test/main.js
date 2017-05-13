@@ -69,10 +69,8 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             GetContext: function () {
                 return null;
             },
-            SetUp: function () {
-            },
-            TearDown: function () {
-            }
+            SetUp: function () { },
+            TearDown: function () { }
         }
     }; });
 
