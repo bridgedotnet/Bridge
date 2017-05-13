@@ -558,8 +558,8 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         f1: function () {
             return 1;
         },
-        f2: function (s) {},
-        f3: function () {}
+        f2: function (s) { },
+        f3: function () { }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C1", {
@@ -1271,7 +1271,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             getAccessor: function (key) {
                 return 1;
             },
-            setAccessor: function (key, value) {}
+            setAccessor: function (key, value) { }
         }
     });
 
@@ -2946,14 +2946,14 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     });
 
     Bridge.init(function () {
-        var Bridge1203_a2 = function () {};
+        var Bridge1203_a2 = function () { };
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1203", {
         statics: {
             methods: {
                 InitMethod1: function () {
-                    var Bridge1203_a1 = function () {};
+                    var Bridge1203_a1 = function () { };
                 },
                 TestLiftedFunctionsInsideInitMethod: function () {
                     var scope = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1203;
@@ -6685,13 +6685,13 @@ Bridge.$N1391Result =                     r;
         statics: {
             props: {
                 X: {
-                    set: function (value) {}
+                    set: function (value) { }
                 },
                 Prop1: {
                     get: function () {
                         return 5;
                     },
-                    set: function (value) {}
+                    set: function (value) { }
                 }
             },
             methods: {
@@ -6733,7 +6733,7 @@ Bridge.$N1391Result =                     r;
             getItem: function (v) {
                 return 5;
             },
-            setItem: function (v, value) {}
+            setItem: function (v, value) { }
         }
     });
 
@@ -6826,8 +6826,8 @@ Bridge.$N1391Result =                     r;
             }
         },
         methods: {
-            Method1: function () {},
-            Method2: function () {}
+            Method1: function () { },
+            Method2: function () { }
         }
     });
 
@@ -9238,8 +9238,8 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1721", {
         methods: {
-            Method1: function () {},
-            Method2: function () {},
+            Method1: function () { },
+            Method2: function () { },
             TestDelegateEquals: function () {
                 var inst = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1721();
                 var fn1 = Bridge.fn.cacheBind(inst, inst.Method1);
@@ -9446,7 +9446,7 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1754", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1754, {
-        f1: function (sender, e) {}
+        f1: function (sender, e) { }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1754.App", {
@@ -9470,11 +9470,11 @@ Bridge.$N1391Result =                     r;
             }
         },
         methods: {
-            FOO: function () {},
-            M: function (i) {},
-            M$1: function (s) {},
-            AB: function (i) {},
-            AB$1: function (s) {},
+            FOO: function () { },
+            M: function (i) { },
+            M$1: function (s) { },
+            AB: function (i) { },
+            AB$1: function (s) { },
             UseEvents: function () {
                 if (!Bridge.staticEquals(this.SOME_EVENT, null)) {
                     this.SOME_EVENT(null, null);
@@ -9606,9 +9606,9 @@ Bridge.$N1391Result =                     r;
             System$Collections$Generic$IList$1$T$getItem: function (index) {
                 return Bridge.getDefaultValue(T);
             },
-            System$Collections$Generic$IList$1$T$setItem: function (index, value) {},
-            System$Collections$Generic$ICollection$1$T$add: function (item) {},
-            System$Collections$Generic$ICollection$1$T$clear: function () {},
+            System$Collections$Generic$IList$1$T$setItem: function (index, value) { },
+            System$Collections$Generic$ICollection$1$T$add: function (item) { },
+            System$Collections$Generic$ICollection$1$T$clear: function () { },
             System$Collections$Generic$ICollection$1$T$contains: function (item) {
                 return true;
             },
@@ -9624,11 +9624,11 @@ Bridge.$N1391Result =                     r;
             System$Collections$Generic$IList$1$T$indexOf: function (item) {
                 return 200;
             },
-            System$Collections$Generic$IList$1$T$insert: function (index, item) {},
+            System$Collections$Generic$IList$1$T$insert: function (index, item) { },
             System$Collections$Generic$ICollection$1$T$remove: function (item) {
                 return true;
             },
-            System$Collections$Generic$IList$1$T$removeAt: function (index) {}
+            System$Collections$Generic$IList$1$T$removeAt: function (index) { }
         }
     }; });
 
@@ -9665,9 +9665,9 @@ Bridge.$N1391Result =                     r;
             getItem: function (index) {
                 return Bridge.getDefaultValue(T);
             },
-            setItem: function (index, value) {},
-            add: function (item) {},
-            clear: function () {},
+            setItem: function (index, value) { },
+            add: function (item) { },
+            clear: function () { },
             contains: function (item) {
                 return true;
             },
@@ -9683,11 +9683,11 @@ Bridge.$N1391Result =                     r;
             indexOf: function (item) {
                 return 2000;
             },
-            insert: function (index, item) {},
+            insert: function (index, item) { },
             remove: function (item) {
                 return true;
             },
-            removeAt: function (index) {}
+            removeAt: function (index) { }
         }
     }; });
 
@@ -10529,7 +10529,7 @@ Bridge.$N1391Result =                     r;
             System$Collections$Generic$IList$1$T$getItem: function (index) {
                 return Bridge.getDefaultValue(T);
             },
-            System$Collections$Generic$IList$1$T$setItem: function (index, value) {},
+            System$Collections$Generic$IList$1$T$setItem: function (index, value) { },
             System$Collections$Generic$ICollection$1$T$add: function (item) {
                 throw new System.NotImplementedException();
             },
@@ -10606,7 +10606,8 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1813", {
         statics: {
             methods: {
-                instance_callback: function (a) {if (a === void 0) { a = null; }
+                instance_callback: function (a) {
+                    if (a === void 0) { a = null; }
                 }
             }
         },
@@ -11145,8 +11146,8 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1852Test1$1", function (T) { return {
         statics: {
             methods: {
-                Test1Method: function () {},
-                Test1Method2: function (T1) {}
+                Test1Method: function () { },
+                Test1Method2: function (T1) { }
             }
         },
         fields: {
@@ -11253,7 +11254,7 @@ Bridge.$N1391Result =                     r;
             }
         },
         methods: {
-            Foo: function () {}
+            Foo: function () { }
         }
     }; });
 
@@ -11277,7 +11278,7 @@ Bridge.$N1391Result =                     r;
             }
         },
         methods: {
-            OnChildrenChanged: function (a) {}
+            OnChildrenChanged: function (a) { }
         }
     });
 
@@ -11431,7 +11432,7 @@ Bridge.$N1391Result =                     r;
                  * @param   {string}    args
                  * @return  {void}
                  */
-                DoSomething: function (args) {}
+                DoSomething: function (args) { }
             }
         },
         methods: {
@@ -11893,7 +11894,7 @@ Bridge.$N1391Result =                     r;
             getItem: function (key) {
                 return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1892.Obj();
             },
-            setItem: function (key, value) {},
+            setItem: function (key, value) { },
             toString: function () {
                 return this.value.toString();
             }
@@ -12617,7 +12618,7 @@ Bridge.$N1391Result =                     r;
             }
         },
         methods: {
-            method: function () {}
+            method: function () { }
         }
     });
 
@@ -12978,7 +12979,7 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2013", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2013, {
-        f1: function () {}
+        f1: function () { }
     });
 
     Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2013.IEvGen$1", function (T) { return {
@@ -13245,7 +13246,7 @@ Bridge.$N1391Result =                     r;
                 get: function () {
                     return false;
                 },
-                set: function (value) {}
+                set: function (value) { }
             }
         }
     });
@@ -14657,7 +14658,7 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Holder$1", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Holder$1, {
-        f1: function (x) {}
+        f1: function (x) { }
     });
 
     Bridge.definei("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.ISomeCollection$1", function (T) { return {
@@ -15739,7 +15740,7 @@ Bridge.$N1391Result =                     r;
             }
         },
         methods: {
-            Test: function (arr, x) {}
+            Test: function (arr, x) { }
         }
     });
 
@@ -18187,7 +18188,7 @@ Bridge.$N1391Result =                     r;
             "dispose", "System$IDisposable$dispose"
         ],
         methods: {
-            dispose: function () {}
+            dispose: function () { }
         }
     });
 
@@ -23487,7 +23488,7 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge691", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge691, {
-        f1: function (p) {}
+        f1: function (p) { }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge692", {
@@ -23701,7 +23702,7 @@ Bridge.$N1391Result =                     r;
                 get: function () {
                     return this.field1;
                 },
-                set: function (value) {}
+                set: function (value) { }
             }
         },
         ctors: {
@@ -25216,7 +25217,7 @@ Bridge.$N1391Result =                     r;
             _o11.add(2);
             return _o11;
         },
-        f2: function () {}
+        f2: function () { }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge844", {
@@ -28223,7 +28224,7 @@ Bridge.$N1391Result =                     r;
             getItem: function (index) {
                 return Bridge.getDefaultValue(T);
             },
-            setItem: function (index, value) {},
+            setItem: function (index, value) { },
             Add: function (item) {
                 return 2;
             }
@@ -28249,7 +28250,7 @@ Bridge.$N1391Result =                     r;
             Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$T$getItem: function (index) {
                 return Bridge.getDefaultValue(T);
             },
-            Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$T$setItem: function (index, value) {},
+            Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$T$setItem: function (index, value) { },
             Bridge$ClientTest$Batch3$BridgeIssues$Bridge1768$I1$1$T$Add: function (item) {
                 return 20;
             }
@@ -28302,7 +28303,7 @@ Bridge.$N1391Result =                     r;
             "DoSomething", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge1852DispatcherMessageExtensions$IMatchDispatcherMessages$DoSomething"
         ],
         methods: {
-            DoSomething: function (T, name) {}
+            DoSomething: function (T, name) { }
         }
     });
 
@@ -28339,7 +28340,7 @@ Bridge.$N1391Result =                     r;
             }
         },
         methods: {
-            Observe: function (a) {}
+            Observe: function (a) { }
         }
     }; });
 
@@ -28425,7 +28426,7 @@ Bridge.$N1391Result =                     r;
             GetValue: function () {
                 return 2; // function
             },
-            SetValue: function () {}
+            SetValue: function () { }
         }
     });
 
@@ -28489,7 +28490,7 @@ Bridge.$N1391Result =                     r;
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2048.Base],
         props: {
             property: {
-                set: function (value) {}
+                set: function (value) { }
             }
         }
     });
@@ -29228,7 +29229,7 @@ Bridge.$N1391Result =                     r;
                 }
             },
             methods: {
-                Foo: function () {}
+                Foo: function () { }
             }
         }
     });

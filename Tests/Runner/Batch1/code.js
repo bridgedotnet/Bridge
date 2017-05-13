@@ -4378,8 +4378,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.Batch1.Reflection.AttributeTests.C1", {
         methods: {
-            KeepSomething: function (i) {},
-            DoSomething: function (i) {}
+            KeepSomething: function (i) { },
+            DoSomething: function (i) { }
         }
     });
 
@@ -12930,7 +12930,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             prop1: 0
         },
         methods: {
-            method1: function () {}
+            method1: function () { }
         }
     });
 
@@ -12942,7 +12942,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             PROP1: 0
         },
         methods: {
-            METHOD1: function () {}
+            METHOD1: function () { }
         }
     });
 
@@ -12954,7 +12954,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             PROP1: 0
         },
         methods: {
-            METHOD1: function () {}
+            METHOD1: function () { }
         }
     });
 
@@ -13113,7 +13113,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             prop1: 0
         },
         methods: {
-            method1: function () {}
+            method1: function () { }
         }
     });
 
@@ -14982,7 +14982,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Method1: function (s) {
                 return s.toString();
             },
-            Method2: function () {}
+            Method2: function () { }
         }
     });
 
@@ -21733,8 +21733,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             }
         },
         methods: {
-            Add: function (i) {},
-            Add$1: function (i, j) {},
+            Add: function (i) { },
+            Add$1: function (i, j) { },
             getEnumerator: function () {
                 throw new System.Exception();
             }
@@ -25702,14 +25702,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 PBS2: 0
             },
             methods: {
-                addEBS1: function (value) {},
-                removeEBS1: function (value) {},
-                addEBS2: function (value) {},
-                removeEBS2: function (value) {},
-                MBS: function () {},
-                MBS$1: function (x) {},
-                MBS$2: function (x, y) {},
-                MBS2: function (x, y) {}
+                addEBS1: function (value) { },
+                removeEBS1: function (value) { },
+                addEBS2: function (value) { },
+                removeEBS2: function (value) { },
+                MBS: function () { },
+                MBS$1: function (x) { },
+                MBS$2: function (x, y) { },
+                MBS2: function (x, y) { }
             }
         },
         fields: {
@@ -25735,15 +25735,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             getItem: function (x) {
                 return 0;
             },
-            setItem: function (x, value) {},
-            addEB1: function (value) {},
-            removeEB1: function (value) {},
-            addEB2: function (value) {},
-            removeEB2: function (value) {},
-            MB: function () {},
-            MB$1: function (x) {},
-            MB$2: function (x, y) {},
-            MB2: function (x, y) {}
+            setItem: function (x, value) { },
+            addEB1: function (value) { },
+            removeEB1: function (value) { },
+            addEB2: function (value) { },
+            removeEB2: function (value) { },
+            MB: function () { },
+            MB$1: function (x) { },
+            MB$2: function (x, y) { },
+            MB2: function (x, y) { }
         }
     });
 
@@ -25762,13 +25762,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 PBS: 0
             },
             methods: {
-                MS: function () {},
-                MBS: function () {},
-                M2S: function (x) {},
-                M2S$1: function (x) {},
-                M2BS: function (x) {},
-                M2BS$1: function (x) {},
-                M3S: function (x) {}
+                MS: function () { },
+                MBS: function () { },
+                M2S: function (x) { },
+                M2S$1: function (x) { },
+                M2BS: function (x) { },
+                M2BS$1: function (x) { },
+                M3S: function (x) { }
             }
         },
         fields: {
@@ -25787,18 +25787,18 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             getItem: function (x) {
                 return 0;
             },
-            setItem: function (x, value) {},
+            setItem: function (x, value) { },
             getItem$1: function (x) {
                 return 0;
             },
-            setItem$1: function (x, value) {},
-            M: function () {},
-            MB: function () {},
-            M2: function (x) {},
-            M2$1: function (x) {},
-            M2B: function (x) {},
-            M2B$1: function (x) {},
-            M3: function (x) {}
+            setItem$1: function (x, value) { },
+            M: function () { },
+            MB: function () { },
+            M2: function (x) { },
+            M2$1: function (x) { },
+            M2B: function (x) { },
+            M2B$1: function (x) { },
+            M3: function (x) { }
         }
     });
 
@@ -25807,7 +25807,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             getItem: function (x) {
                 return 0;
             },
-            setItem: function (x, value) {}
+            setItem: function (x, value) { }
         }
     });
 
@@ -27079,10 +27079,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.Reflection.ReflectionTests.C1", {
         methods: {
-            M1: function () {},
-            M2: function () {},
-            M3: function () {},
-            M4: function () {}
+            M1: function () { },
+            M2: function () { },
+            M3: function () { },
+            M4: function () { }
         }
     });
 
@@ -27147,8 +27147,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 E2: null
             },
             methods: {
-                addE4: function (value) {},
-                removeE4: function (value) {},
+                addE4: function (value) { },
+                removeE4: function (value) { },
                 RaiseE2: function () {
                     if (!Bridge.staticEquals(Bridge.ClientTest.Reflection.ReflectionTests.C13.E2, null)) {
                         Bridge.ClientTest.Reflection.ReflectionTests.C13.E2();
@@ -27164,8 +27164,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             E1: null
         },
         methods: {
-            addE3: function (value) {},
-            removeE3: function (value) {},
+            addE3: function (value) { },
+            removeE3: function (value) { },
             RaiseE1: function () {
                 if (!Bridge.staticEquals(this.E1, null)) {
                     this.E1();
@@ -27189,7 +27189,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 },
                 P8: 0,
                 P11: {
-                    set: function (value) {}
+                    set: function (value) { }
                 },
                 P12: 0
             },
@@ -27212,7 +27212,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             P6: null,
             P9: {
-                set: function (value) {}
+                set: function (value) { }
             },
             P10: null
         }
@@ -27246,7 +27246,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.Reflection.ReflectionTests.C17", {
         methods: {
-            setItem: function (x, s, value) {}
+            setItem: function (x, s, value) { }
         }
     });
 
@@ -27263,9 +27263,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             }
         },
         methods: {
-            addE: function (value) {},
-            removeE: function (value) {},
-            M: function () {}
+            addE: function (value) { },
+            removeE: function (value) { },
+            M: function () { }
         }
     });
 
@@ -27284,11 +27284,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.Reflection.ReflectionTests.C2", {
         statics: {
             methods: {
-                M2: function () {}
+                M2: function () { }
             }
         },
         methods: {
-            M1: function () {}
+            M1: function () { }
         }
     });
 
@@ -27387,7 +27387,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             getItem: function (x, s) {
                 return null;
             },
-            setItem: function (x, s, value) {}
+            setItem: function (x, s, value) { }
         }
     });
 
@@ -27502,15 +27502,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             M3: function (x, y) {
                 return 0;
             },
-            M4: function () {}
+            M4: function () { }
         }
     });
 
     Bridge.define("Bridge.ClientTest.Reflection.ReflectionTests.C4", {
         methods: {
-            M: function () {},
-            M$1: function (i) {},
-            x: function (i, s) {}
+            M: function () { },
+            M$1: function (i) { },
+            x: function (i, s) { }
         }
     });
 
@@ -27533,14 +27533,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             M2: function (T1, s) {
                 return Bridge.getDefaultValue(T1);
             },
-            M3: function (s) {}
+            M3: function (s) { }
         }
     });
 
     Bridge.define("Bridge.ClientTest.Reflection.ReflectionTests.C7", {
         statics: {
             methods: {
-                M2: function (x) {}
+                M2: function (x) { }
             }
         },
         fields: {
@@ -27609,10 +27609,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             }
         },
         methods: {
-            M1: function () {},
-            M2: function () {},
-            M3: function () {},
-            M4: function () {},
+            M1: function () { },
+            M2: function () { },
+            M3: function () { },
+            M4: function () { },
             $clone: function (to) { return this; }
         }
     });
@@ -28001,7 +28001,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.Reflection.TypeAttributeTests.C22", {
         methods: {
-            M: function () {}
+            M: function () { }
         }
     });
 
@@ -28508,7 +28508,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.ns("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests, {
-        f1: function () {},
+        f1: function () { },
         f2: function () {
             Bridge.getType(null);
         }
@@ -29917,7 +29917,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             P: 0
         },
         methods: {
-            M: function (T, a) {}
+            M: function (T, a) { }
         }
     });
 
@@ -29926,7 +29926,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             P: 0
         },
         methods: {
-            M: function (T, a) {}
+            M: function (T, a) { }
         }
     });
 
@@ -29935,7 +29935,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             P1: 0
         },
         methods: {
-            M1: function () {}
+            M1: function () { }
         }
     });
 
@@ -37780,7 +37780,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.ns("Bridge.ClientTest.Threading.CancellationTokenTests", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Threading.CancellationTokenTests, {
-        f1: function () {}
+        f1: function () { }
     });
 
     Bridge.define("Bridge.ClientTest.Threading.PromiseTests", {
@@ -40352,8 +40352,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             "METHOD2", "Bridge$ClientTest$ConventionTests$Class$I1$METHOD2"
         ],
         methods: {
-            method1: function () {},
-            METHOD2: function () {}
+            method1: function () { },
+            METHOD2: function () { }
         }
     });
 
@@ -42233,14 +42233,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 PCS2: 0
             },
             methods: {
-                addECS1: function (value) {},
-                removeECS1: function (value) {},
-                addECS2: function (value) {},
-                removeECS2: function (value) {},
-                MCS: function () {},
-                MCS$1: function (x) {},
-                MCS$2: function (x, y) {},
-                MCS2: function (x, y) {}
+                addECS1: function (value) { },
+                removeECS1: function (value) { },
+                addECS2: function (value) { },
+                removeECS2: function (value) { },
+                MCS: function () { },
+                MCS$1: function (x) { },
+                MCS$2: function (x, y) { },
+                MCS2: function (x, y) { }
             }
         },
         fields: {
@@ -42269,15 +42269,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             getItem$1: function (x) {
                 return 0;
             },
-            setItem$1: function (x, value) {},
-            addEC1: function (value) {},
-            removeEC1: function (value) {},
-            addEC2: function (value) {},
-            removeEC2: function (value) {},
-            MC: function () {},
-            MC$1: function (x) {},
-            MC$2: function (x, y) {},
-            MC2: function (x, y) {}
+            setItem$1: function (x, value) { },
+            addEC1: function (value) { },
+            removeEC1: function (value) { },
+            addEC2: function (value) { },
+            removeEC2: function (value) { },
+            MC: function () { },
+            MC$1: function (x) { },
+            MC$2: function (x, y) { },
+            MC2: function (x, y) { }
         }
     });
 
@@ -42297,13 +42297,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 PCS: 0
             },
             methods: {
-                MS: function () {},
-                MCS: function () {},
-                M2S: function (x) {},
-                M2S$1: function (x) {},
-                M2CS: function (x) {},
-                M2CS$1: function (x) {},
-                M3S: function (x) {}
+                MS: function () { },
+                MCS: function () { },
+                M2S: function (x) { },
+                M2S$1: function (x) { },
+                M2CS: function (x) { },
+                M2CS$1: function (x) { },
+                M3S: function (x) { }
             }
         },
         fields: {
@@ -42322,18 +42322,18 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             getItem$2: function (x) {
                 return 0;
             },
-            setItem$2: function (x, value) {},
+            setItem$2: function (x, value) { },
             getItem$3: function (x) {
                 return 0;
             },
-            setItem$3: function (x, value) {},
-            M$1: function () {},
-            MC: function () {},
-            M2$2: function (x) {},
-            M2$3: function (x) {},
-            M2C: function (x) {},
-            M2C$1: function (x) {},
-            M3$1: function (x) {}
+            setItem$3: function (x, value) { },
+            M$1: function () { },
+            MC: function () { },
+            M2$2: function (x) { },
+            M2$3: function (x) { },
+            M2C: function (x) { },
+            M2C$1: function (x) { },
+            M3$1: function (x) { }
         }
     });
 
@@ -42629,7 +42629,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.L31$1", function (T) { return {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.L30],
         methods: {
-            M2: function (K, a) {}
+            M2: function (K, a) { }
         }
     }; });
 
@@ -51006,14 +51006,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 PDS2: 0
             },
             methods: {
-                addEDS1: function (value) {},
-                removeEDS1: function (value) {},
-                addEDS2: function (value) {},
-                removeEDS2: function (value) {},
-                MDS: function () {},
-                MDS$1: function (x) {},
-                MDS$2: function (x, y) {},
-                MDS2: function (x, y) {}
+                addEDS1: function (value) { },
+                removeEDS1: function (value) { },
+                addEDS2: function (value) { },
+                removeEDS2: function (value) { },
+                MDS: function () { },
+                MDS$1: function (x) { },
+                MDS$2: function (x, y) { },
+                MDS2: function (x, y) { }
             }
         },
         fields: {
@@ -51058,15 +51058,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             getItem$2: function (x) {
                 return 0;
             },
-            setItem$2: function (x, value) {},
+            setItem$2: function (x, value) { },
             get_i1item: function (x) {
                 return 0;
             },
-            set_i1item: function (x, value) {},
-            addED1: function (value) {},
-            removeED1: function (value) {},
-            addED2: function (value) {},
-            removeED2: function (value) {},
+            set_i1item: function (x, value) { },
+            addED1: function (value) { },
+            removeED1: function (value) { },
+            addED2: function (value) { },
+            removeED2: function (value) { },
             Bridge$ClientTest$Reflection$GetMembersTests$I1$addEI11: function (value) {
                 throw new System.NotImplementedException();
             },
@@ -51079,10 +51079,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             Bridge$ClientTest$Reflection$GetMembersTests$I1$removeEI12: function (value) {
                 throw new System.NotImplementedException();
             },
-            MD: function () {},
-            MD$1: function (x) {},
-            MD$2: function (x, y) {},
-            MD2: function (x, y) {},
+            MD: function () { },
+            MD$1: function (x) { },
+            MD$2: function (x, y) { },
+            MD2: function (x, y) { },
             Bridge$ClientTest$Reflection$GetMembersTests$I1$MI1: function () {
                 throw new System.NotImplementedException();
             },
@@ -51114,13 +51114,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 PDS: 0
             },
             methods: {
-                MS: function () {},
-                MDS: function () {},
-                M2S: function (x) {},
-                M2S$1: function (x) {},
-                M2DS: function (x) {},
-                M2DS$1: function (x) {},
-                M3S: function (x) {}
+                MS: function () { },
+                MDS: function () { },
+                M2S: function (x) { },
+                M2S$1: function (x) { },
+                M2DS: function (x) { },
+                M2DS$1: function (x) { },
+                M3S: function (x) { }
             }
         },
         fields: {
@@ -51139,18 +51139,18 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             getItem$4: function (x) {
                 return 0;
             },
-            setItem$4: function (x, value) {},
+            setItem$4: function (x, value) { },
             getItem$5: function (x) {
                 return 0;
             },
-            setItem$5: function (x, value) {},
-            M$2: function () {},
-            MD: function () {},
-            M2$4: function (x) {},
-            M2$5: function (x) {},
-            M2D: function (x) {},
-            M2D$1: function (x) {},
-            M3$2: function (x) {}
+            setItem$5: function (x, value) { },
+            M$2: function () { },
+            MD: function () { },
+            M2$4: function (x) { },
+            M2$5: function (x) { },
+            M2D: function (x) { },
+            M2D$1: function (x) { },
+            M3$2: function (x) { }
         }
     });
 
@@ -51261,9 +51261,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.L32", {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.L31$1(System.Int32)],
         methods: {
-            M1$1: function () {},
-            M4: function (K, a) {},
-            M5: function (T, a) {}
+            M1$1: function () { },
+            M4: function (K, a) { },
+            M5: function (T, a) { }
         }
     });
 

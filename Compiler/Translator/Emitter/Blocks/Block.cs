@@ -84,6 +84,12 @@ namespace Bridge.Translator
             set;
         }
 
+        public int SignaturePosition
+        {
+            get;
+            set;
+        }
+
         public bool IsYield
         {
             get;
@@ -316,9 +322,11 @@ namespace Bridge.Translator
 
             if (!this.NoBraces && (!this.Emitter.IsAsync || (!this.AsyncNoBraces && this.BlockStatement.Parent != this.Emitter.AsyncBlock.Node)))
             {
-                if (this.IsMethodBlock && this.IsEmptyBlock)
+                if (this.IsMethodBlock && this.BeginPosition == this.Emitter.Output.Length)
                 {
-                    this.WriteCloseBrace();
+                    this.EndBlock();
+                    this.Emitter.Output.Length = this.SignaturePosition;
+                    this.WriteOpenCloseBrace();
                 }
                 else
                 {
@@ -443,23 +451,11 @@ namespace Bridge.Translator
             }
             else if (!this.NoBraces && (!this.Emitter.IsAsync || (!this.AsyncNoBraces && this.BlockStatement.Parent != this.Emitter.AsyncBlock.Node)))
             {
-                if (this.IsMethodBlock && this.BlockStatement.Statements.Count == 0 && !this.BlockStatement.Children.Any(c => c is Comment))
-                {
-                    this.IsEmptyBlock = true;
-                    this.WriteOpenBrace();
-                }
-                else
-                {
-                    this.BeginBlock();
-                }
+                this.SignaturePosition = this.Emitter.Output.Length;
+                this.BeginBlock();
             }
 
             this.BeginPosition = this.Emitter.Output.Length;
-        }
-
-        public bool IsEmptyBlock
-        {
-            get; set;
         }
     }
 }
