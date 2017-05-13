@@ -554,9 +554,9 @@
     <Compile Include="BridgeIssues\2600\N2632.cs" />
     <Compile Include="BridgeIssues\2600\N2633.cs" />
     <Compile Include="BridgeIssues\2600\N2635.cs" />
-    <Compile Include="BridgeIssues\2600\N2638_1.cs" />
-    <Compile Include="BridgeIssues\2600\N2638.cs" />
     <Compile Include="BridgeIssues\2600\N2636.cs" />
+    <Compile Include="BridgeIssues\2600\N2638A.cs" />
+    <Compile Include="BridgeIssues\2600\N2638.cs" />
     <Compile Include="BridgeIssues\2600\N2641.cs" />
     <Compile Include="BridgeIssues\2600\N2644.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />

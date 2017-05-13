@@ -11146,7 +11146,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A", $t.File = "Batch3\\BridgeIssues\\2600\\N2638_1.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A", $t.File = "Batch3\\BridgeIssues\\2600\\N2638A.cs", $t);
                 }
                 return this.context;
             }
