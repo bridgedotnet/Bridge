@@ -13963,20 +13963,18 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 }
 
                 for (var i = 0; i < testValues.length; i = (i + 1) | 0) {
-                    (function () {
-                        try {
-                            Bridge.Test.NUnit.Assert.Throws$2(function () {
-                                convert(testValues[System.Array.index(i, testValues)], testBases[System.Array.index(i, testBases)]);
-                            }, function (err) {
-                                return Bridge.referenceEquals(Bridge.Reflection.getTypeFullName(Bridge.getType(err)), Bridge.Reflection.getTypeFullName(TException));
-                            }, System.String.concat("Value ", testValues[System.Array.index(i, testValues)], " base ", testBases[System.Array.index(i, testBases)]));
-                        }
-                        catch (e) {
-                            e = System.Exception.create(e);
-                            var message = System.String.format("Expected {0} converting '{1}' (base {2}) to '{3}'", Bridge.Reflection.getTypeFullName(TException), testValues[System.Array.index(i, testValues)], Bridge.box(testBases[System.Array.index(i, testBases)], System.Int32), Bridge.Reflection.getTypeFullName(TOutput));
-                            throw new System.AggregateException(message, [e]);
-                        }
-                    }).call(this);
+                    try {
+                        Bridge.Test.NUnit.Assert.Throws$2(function () {
+                            convert(testValues[System.Array.index(i, testValues)], testBases[System.Array.index(i, testBases)]);
+                        }, function (err) {
+                            return Bridge.referenceEquals(Bridge.Reflection.getTypeFullName(Bridge.getType(err)), Bridge.Reflection.getTypeFullName(TException));
+                        }, System.String.concat("Value ", testValues[System.Array.index(i, testValues)], " base ", testBases[System.Array.index(i, testBases)]));
+                    }
+                    catch (e) {
+                        e = System.Exception.create(e);
+                        var message = System.String.format("Expected {0} converting '{1}' (base {2}) to '{3}'", Bridge.Reflection.getTypeFullName(TException), testValues[System.Array.index(i, testValues)], Bridge.box(testBases[System.Array.index(i, testBases)], System.Int32), Bridge.Reflection.getTypeFullName(TOutput));
+                        throw new System.AggregateException(message, [e]);
+                    }
                 }
             },
             /**
@@ -13994,20 +13992,18 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
              */
             VerifyThrows: function (TException, TInput, convert, testValues) {
                 for (var i = 0; i < testValues.length; i = (i + 1) | 0) {
-                    (function () {
-                        try {
-                            Bridge.Test.NUnit.Assert.Throws$2(function () {
-                                convert(testValues[System.Array.index(i, testValues)]);
-                            }, function (err) {
-                                return Bridge.referenceEquals(Bridge.Reflection.getTypeFullName(Bridge.getType(err)), Bridge.Reflection.getTypeFullName(TException));
-                            }, System.String.concat("Value ", testValues[System.Array.index(i, testValues)]));
-                        }
-                        catch (e) {
-                            e = System.Exception.create(e);
-                            var message = System.String.format("Expected {0} converting '{1}' ({2}) to {3}", Bridge.Reflection.getTypeFullName(TException), testValues[System.Array.index(i, testValues)], Bridge.Reflection.getTypeFullName(TInput), Bridge.Reflection.getTypeFullName(TOutput));
-                            throw new System.AggregateException(message, [e]);
-                        }
-                    }).call(this);
+                    try {
+                        Bridge.Test.NUnit.Assert.Throws$2(function () {
+                            convert(testValues[System.Array.index(i, testValues)]);
+                        }, function (err) {
+                            return Bridge.referenceEquals(Bridge.Reflection.getTypeFullName(Bridge.getType(err)), Bridge.Reflection.getTypeFullName(TException));
+                        }, System.String.concat("Value ", testValues[System.Array.index(i, testValues)]));
+                    }
+                    catch (e) {
+                        e = System.Exception.create(e);
+                        var message = System.String.format("Expected {0} converting '{1}' ({2}) to {3}", Bridge.Reflection.getTypeFullName(TException), testValues[System.Array.index(i, testValues)], Bridge.Reflection.getTypeFullName(TInput), Bridge.Reflection.getTypeFullName(TOutput));
+                        throw new System.AggregateException(message, [e]);
+                    }
                 }
             },
             /**
@@ -14026,20 +14022,18 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
              */
             VerifyThrowsViaObj: function (TException, TInput, convert, testValues) {
                 for (var i = 0; i < testValues.length; i = (i + 1) | 0) {
-                    (function () {
-                        try {
-                            Bridge.Test.NUnit.Assert.Throws$2(function () {
-                                convert(testValues[System.Array.index(i, testValues)]);
-                            }, function (err) {
-                                return Bridge.referenceEquals(Bridge.Reflection.getTypeFullName(Bridge.getType(err)), Bridge.Reflection.getTypeFullName(TException));
-                            }, System.String.concat("Value ", testValues[System.Array.index(i, testValues)]));
-                        }
-                        catch (e) {
-                            e = System.Exception.create(e);
-                            var message = System.String.format("Expected {0} converting '{1}' ({2}) to {3}", Bridge.Reflection.getTypeFullName(TException), testValues[System.Array.index(i, testValues)], Bridge.Reflection.getTypeFullName(TInput), Bridge.Reflection.getTypeFullName(TOutput));
-                            throw new System.AggregateException(message, [e]);
-                        }
-                    }).call(this);
+                    try {
+                        Bridge.Test.NUnit.Assert.Throws$2(function () {
+                            convert(testValues[System.Array.index(i, testValues)]);
+                        }, function (err) {
+                            return Bridge.referenceEquals(Bridge.Reflection.getTypeFullName(Bridge.getType(err)), Bridge.Reflection.getTypeFullName(TException));
+                        }, System.String.concat("Value ", testValues[System.Array.index(i, testValues)]));
+                    }
+                    catch (e) {
+                        e = System.Exception.create(e);
+                        var message = System.String.format("Expected {0} converting '{1}' ({2}) to {3}", Bridge.Reflection.getTypeFullName(TException), testValues[System.Array.index(i, testValues)], Bridge.Reflection.getTypeFullName(TInput), Bridge.Reflection.getTypeFullName(TOutput));
+                        throw new System.AggregateException(message, [e]);
+                    }
                 }
             },
             /**
@@ -43021,16 +43015,16 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 $t = Bridge.getEnumerator(supportedOptions);
                 try {
                     while ($t.moveNext()) {
-                        (function () {
-                            var supportedOption = $t.Current;
-                            if (supportedOption.value) {
-                                var rgx = new System.Text.RegularExpressions.Regex.$ctor1(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexEntityTests.Pattern, supportedOption.key);
-                            } else {
-                                Bridge.Test.NUnit.Assert.Throws$6(System.NotSupportedException, function () {
+                        var supportedOption = $t.Current;
+                        if (supportedOption.value) {
+                            var rgx = new System.Text.RegularExpressions.Regex.$ctor1(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexEntityTests.Pattern, supportedOption.key);
+                        } else {
+                            Bridge.Test.NUnit.Assert.Throws$6(System.NotSupportedException, (function (supportedOption) {
+                                return function () {
                                     new System.Text.RegularExpressions.Regex.$ctor1(Bridge.ClientTest.Text.RegularExpressions.Entities.RegexEntityTests.Pattern, supportedOption.key);
-                                });
-                            }
-                        }).call(this);
+                                };
+                            })(supportedOption));
+                        }
                     }
                 }finally {
                     if (Bridge.is($t, System.IDisposable)) {
@@ -43900,13 +43894,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 $t = Bridge.getEnumerator(escapable);
                 try {
                     while ($t.moveNext()) {
-                        (function () {
-                            var ch = $t.Current;
-                            Bridge.Test.NUnit.Assert.Throws$7(System.ArgumentException, function () {
+                        var ch = $t.Current;
+                        Bridge.Test.NUnit.Assert.Throws$7(System.ArgumentException, (function (ch) {
+                            return function () {
                                 var rgx = new System.Text.RegularExpressions.Regex.ctor("\\" + String.fromCharCode(ch));
                                 rgx.match("" + String.fromCharCode(ch));
-                            }, "Char must not be escapable: " + String.fromCharCode(ch));
-                        }).call(this);
+                            };
+                        })(ch), "Char must not be escapable: " + String.fromCharCode(ch));
                     }
                 }finally {
                     if (Bridge.is($t, System.IDisposable)) {

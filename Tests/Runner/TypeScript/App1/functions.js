@@ -15,6 +15,12 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
 
     Bridge.define("Functions.Delegates");
 
+    Bridge.define("Functions.MiddleBit", {
+        fields: {
+            fn: null
+        }
+    });
+
     Bridge.define("Functions.Parameters", {
         methods: {
             GetSomething: function (i) {

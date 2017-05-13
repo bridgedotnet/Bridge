@@ -54,30 +54,6 @@ namespace Bridge.Translator
             set;
         }
 
-        public bool? WrapByFn
-        {
-            get;
-            set;
-        }
-
-        public bool? HandleContinue
-        {
-            get;
-            set;
-        }
-
-        public bool? HandleBreak
-        {
-            get;
-            set;
-        }
-
-        public bool? HandleReturn
-        {
-            get;
-            set;
-        }
-
         public int BeginPosition
         {
             get;
@@ -122,35 +98,6 @@ namespace Bridge.Translator
 
         protected override void DoEmit()
         {
-            if ((!this.WrapByFn.HasValue || this.WrapByFn.Value) && (this.BlockStatement.Parent is ForStatement ||
-                     this.BlockStatement.Parent is ForeachStatement ||
-                     this.BlockStatement.Parent is WhileStatement ||
-                     this.BlockStatement.Parent is DoWhileStatement) &&
-                     (!this.Emitter.IsAsync || this.GetAwaiters(this.BlockStatement.Parent).Length == 0))
-            {
-                var visitor = new LambdaVisitor(true, this.Emitter);
-                this.BlockStatement.AcceptVisitor(visitor);
-
-                this.WrapByFn = visitor.LambdaExpression.Count > 0;
-
-                if (this.WrapByFn.Value)
-                {
-                    var jumpVisitor = new ContinueBreakVisitor(false);
-                    this.BlockStatement.AcceptVisitor(jumpVisitor);
-                    this.HandleContinue = jumpVisitor.Continue.Count > 0;
-                    this.HandleBreak = jumpVisitor.Break.Count > 0;
-
-                    jumpVisitor = new ContinueBreakVisitor(true);
-                    this.BlockStatement.AcceptVisitor(jumpVisitor);
-                    this.HandleReturn = jumpVisitor.Return.Count > 0;
-                }
-
-                this.OldReplaceJump = this.Emitter.ReplaceJump;
-                this.Emitter.ReplaceJump = (this.HandleContinue.HasValue && this.HandleContinue.Value) ||
-                                           (this.HandleBreak.HasValue && this.HandleBreak.Value) ||
-                                           (this.HandleReturn.HasValue && this.HandleReturn.Value);
-            }
-
             this.EmitBlock();
         }
 
@@ -340,71 +287,6 @@ namespace Bridge.Translator
                 this.EndBlock();
             }
 
-            if (this.WrapByFn.HasValue && this.WrapByFn.Value)
-            {
-                var isBlock = (this.HandleContinue.HasValue && this.HandleContinue.Value) ||
-                              (this.HandleBreak.HasValue && this.HandleBreak.Value) ||
-                              (this.HandleReturn.HasValue && this.HandleReturn.Value);
-
-                if (this.NoBraces)
-                {
-                    this.Outdent();
-                }
-
-                if (this.NoBraces)
-                {
-                    this.Write("}");
-                }
-
-                this.Write(")");
-                this.WriteCall("this");
-
-                if (isBlock)
-                {
-                    this.Write(" || {}");
-                }
-
-                this.Write(";");
-
-                if (this.HandleContinue.HasValue && this.HandleContinue.Value)
-                {
-                    this.WriteNewLine();
-                    this.Write("if(" + this.LoopVar + ".jump == 1) continue;");
-                }
-
-                if (this.HandleBreak.HasValue && this.HandleBreak.Value)
-                {
-                    this.WriteNewLine();
-                    this.Write("if(" + this.LoopVar + ".jump == 2) break;");
-                }
-
-                if (this.HandleReturn.HasValue && this.HandleReturn.Value)
-                {
-                    this.WriteNewLine();
-                    this.Write("if(" + this.LoopVar + ".jump == 3) return ");
-
-                    if (this.OldReplaceJump.HasValue && this.OldReplaceJump.Value && this.Emitter.JumpStatements == null)
-                    {
-                        this.Write("{jump: 3, v: " + this.LoopVar + ".v};");
-                    }
-                    else
-                    {
-                        this.Write(this.LoopVar + ".v;");
-                    }
-                }
-
-                if (!this.NoBraces)
-                {
-                    this.WriteNewLine();
-                    this.EndBlock();
-                }
-
-                if (isBlock)
-                {
-                    this.RemoveTempVar(this.LoopVar);
-                }
-            }
-
             if (this.OldReplaceJump.HasValue)
             {
                 this.Emitter.ReplaceJump = this.OldReplaceJump.Value;
@@ -427,29 +309,7 @@ namespace Bridge.Translator
         {
             this.PushLocals();
 
-            if (this.WrapByFn.HasValue && this.WrapByFn.Value)
-            {
-                if (!this.NoBraces)
-                {
-                    this.BeginBlock();
-                }
-
-                if ((this.HandleContinue.HasValue && this.HandleContinue.Value) ||
-                    (this.HandleBreak.HasValue && this.HandleBreak.Value) ||
-                    (this.HandleReturn.HasValue && this.HandleReturn.Value))
-                {
-                    this.LoopVar = this.GetTempVarName();
-                    this.Write(this.LoopVar + " = ");
-                }
-                else if (!this.NoBraces)
-                {
-                    //this.Indent();
-                }
-
-                this.Write("(function () ");
-                this.BeginBlock();
-            }
-            else if (!this.NoBraces && (!this.Emitter.IsAsync || (!this.AsyncNoBraces && this.BlockStatement.Parent != this.Emitter.AsyncBlock.Node)))
+            if (!this.NoBraces && (!this.Emitter.IsAsync || (!this.AsyncNoBraces && this.BlockStatement.Parent != this.Emitter.AsyncBlock.Node)))
             {
                 this.SignaturePosition = this.Emitter.Output.Length;
                 this.BeginBlock();

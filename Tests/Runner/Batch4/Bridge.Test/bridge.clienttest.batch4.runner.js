@@ -7966,42 +7966,42 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
                 },
                 PrematureDisposalOfIEnumeratorIteratorExecutesFinallyBlocks_SPI_1555: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "PrematureDisposalOfIEnumeratorIteratorExecutesFinallyBlocks_SPI_1555()", $t.Line = "157", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "PrematureDisposalOfIEnumeratorIteratorExecutesFinallyBlocks_SPI_1555()", $t.Line = "149", $t));
                     t.Fixture.PrematureDisposalOfIEnumeratorIteratorExecutesFinallyBlocks_SPI_1555();
                 },
                 ExceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks_SPI_1554: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ExceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks_SPI_1554()", $t.Line = "180", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ExceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks_SPI_1554()", $t.Line = "166", $t));
                     t.Fixture.ExceptionInIEnumeratorIteratorBodyExecutesFinallyBlocks_SPI_1554();
                 },
                 TypeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface_SPI_1554: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TypeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface_SPI_1554()", $t.Line = "215", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TypeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface_SPI_1554()", $t.Line = "193", $t));
                     t.Fixture.TypeReturnedByIteratorBlockReturningIEnumerableImplementsThatInterface_SPI_1554();
                 },
                 EnumeratingIEnumerableIteratorToEndWorks_SPI_1555: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "EnumeratingIEnumerableIteratorToEndWorks_SPI_1555()", $t.Line = "227", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "EnumeratingIEnumerableIteratorToEndWorks_SPI_1555()", $t.Line = "205", $t));
                     t.Fixture.EnumeratingIEnumerableIteratorToEndWorks_SPI_1555();
                 },
                 PrematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks_SPI_1555: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "PrematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks_SPI_1555()", $t.Line = "259", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "PrematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks_SPI_1555()", $t.Line = "222", $t));
                     t.Fixture.PrematureDisposalOfIEnumerableIteratorExecutesFinallyBlocks_SPI_1555();
                 },
                 ExceptionInIEnumerableIteratorBodyExecutesFinallyBlocks_SPI_1554: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ExceptionInIEnumerableIteratorBodyExecutesFinallyBlocks_SPI_1554()", $t.Line = "281", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ExceptionInIEnumerableIteratorBodyExecutesFinallyBlocks_SPI_1554()", $t.Line = "238", $t));
                     t.Fixture.ExceptionInIEnumerableIteratorBodyExecutesFinallyBlocks_SPI_1554();
                 },
                 EnumeratingAnIteratorBlockReturningIEnumerableMultipleTimesUsesTheInitialValuesForParameters: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "EnumeratingAnIteratorBlockReturningIEnumerableMultipleTimesUsesTheInitialValuesForParameters()", $t.Line = "317", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "EnumeratingAnIteratorBlockReturningIEnumerableMultipleTimesUsesTheInitialValuesForParameters()", $t.Line = "266", $t));
                     t.Fixture.EnumeratingAnIteratorBlockReturningIEnumerableMultipleTimesUsesTheInitialValuesForParameters();
                 },
                 DifferentGetEnumeratorCallsOnIteratorBlockReturningIEnumerableGetOwnCopiesOfLocals: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "DifferentGetEnumeratorCallsOnIteratorBlockReturningIEnumerableGetOwnCopiesOfLocals()", $t.Line = "338", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.Collections.Generic.IteratorBlockTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.IteratorBlockTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "DifferentGetEnumeratorCallsOnIteratorBlockReturningIEnumerableGetOwnCopiesOfLocals()", $t.Line = "280", $t));
                     t.Fixture.DifferentGetEnumeratorCallsOnIteratorBlockReturningIEnumerableGetOwnCopiesOfLocals();
                 }
             }

@@ -175,7 +175,7 @@ namespace Bridge.ClientTest.Batch4.Reflection
         {
             try
             {
-#pragma warning disable 219    // The variable `x' is assigned but its value is never used
+#pragma warning disable 219
                 var x = (T)arg;
 #pragma warning restore 219
                 return true;

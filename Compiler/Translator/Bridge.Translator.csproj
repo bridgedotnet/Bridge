@@ -226,6 +226,7 @@
     <Compile Include="Logging\FileLoggerWriter.cs" />
     <Compile Include="Translator\InvocationInterceptor.cs" />
     <Compile Include="Translator\Plugins.cs" />
+    <Compile Include="Utils\LoopVariablesAnalyzer.cs" />
     <Compile Include="Utils\Loader.cs" />
     <Compile Include="Utils\FileHelper.cs" />
     <Compile Include="Translator\Translator.Versions.cs" />
@@ -254,7 +255,6 @@
     <Compile Include="Utils\RawValue.cs" />
     <Compile Include="Utils\GotoSearchVisitor.cs" />
     <Compile Include="Utils\YieldSearchVisitor.cs" />
-    <Compile Include="Utils\LambdaVisitor.cs" />
     <Compile Include="Utils\ParsedSourceFile.cs" />
     <Compile Include="Utils\ReferenceArgumentVisitor.cs" />
     <Compile Include="Utils\AwaitSearchVisitor.cs" />

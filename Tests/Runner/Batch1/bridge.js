@@ -1,7 +1,7 @@
 /**
  * @version   : 16.0.0-beta - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2017-01-16
+ * @date      : 2017-05-01
  * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
  */
@@ -3402,21 +3402,22 @@
                             }
                         }
                     } else {
-                        var fields = Bridge.Reflection.getMembers(type, 4, 20);
-
-                        for (i = 0; i < fields.length; i++) {
-                            raw[fields[i].n] = Bridge.Json.serialize(Bridge.Reflection.fieldAccess(fields[i], obj), settings, true, fields[i].rt);
-                        }
-
-                        var properties = Bridge.Reflection.getMembers(type, 16, 20),
+                        var fields = Bridge.Reflection.getMembers(type, 4, 20),
                             camelCase = settings && settings.CamelCasePropertyNames;
 
+                        for (i = 0; i < fields.length; i++) {
+                            var f = fields[i],
+                                fname = camelCase ? (f.n.charAt(0).toLowerCase() + f.n.substr(1)) : f.n;
+                            raw[fname] = Bridge.Json.serialize(Bridge.Reflection.fieldAccess(f, obj), settings, true, f.rt);
+                        }
+
+                        var properties = Bridge.Reflection.getMembers(type, 16, 20);
+
                         for (i = 0; i < properties.length; i++) {
-                            if (!!properties[i].g) {
-                                var pname = camelCase
-                                    ? (properties[i].n.charAt(0).toLowerCase() + properties[i].n.substr(1))
-                                    : properties[i].n;
-                                raw[pname] = Bridge.Json.serialize(Bridge.Reflection.midel(properties[i].g, obj)(), settings, true, properties[i].rt);
+                            var p = properties[i];
+                            if (!!p.g) {
+                                var pname = camelCase ? (p.n.charAt(0).toLowerCase() + p.n.substr(1)) : p.n;
+                                raw[pname] = Bridge.Json.serialize(Bridge.Reflection.midel(p.g, obj)(), settings, true, p.rt);
                             }
                         }
                     }
@@ -3634,33 +3635,37 @@
 
                     var o = Bridge.createInstance(type);
 
-                    var fields = Bridge.Reflection.getMembers(type, 4, 20),
+                    var camelCase = settings && settings.CamelCasePropertyNames,
+                        fields = Bridge.Reflection.getMembers(type, 4, 20),
                         value,
+                        f,
+                        p,
+                        mname,
                         i;
 
                     for (i = 0; i < fields.length; i++) {
-                        value = raw[fields[i].n];
+                        f = fields[i];
+                        mname = camelCase ? (f.n.charAt(0).toLowerCase() + f.n.substr(1)) : f.n;
+                        value = raw[mname];
 
                         if (value !== undefined) {
-                            Bridge.Reflection.fieldAccess(fields[i], o, Bridge.Json.deserialize(value, fields[i].rt, settings, true));
+                            Bridge.Reflection.fieldAccess(f, o, Bridge.Json.deserialize(value, f.rt, settings, true));
                         }
                     }
 
                     var properties = Bridge.Reflection.getMembers(type, 16, 20);
 
                     for (i = 0; i < properties.length; i++) {
-                        var camelCase = settings && settings.CamelCasePropertyNames,
-                            pname = camelCase
-                                    ? (properties[i].n.charAt(0).toLowerCase() + properties[i].n.substr(1))
-                                    : properties[i].n;
-                        value = raw[pname];
+                        p = properties[i];
+                        mname = camelCase ? (p.n.charAt(0).toLowerCase() + p.n.substr(1)) : p.n;
+                        value = raw[mname];
 
                         if (value !== undefined) {
-                            if (!!properties[i].s) {
-                                Bridge.Reflection.midel(properties[i].s, o)(Bridge.Json.deserialize(value, properties[i].rt, settings, true));
+                            if (!!p.s) {
+                                Bridge.Reflection.midel(p.s, o)(Bridge.Json.deserialize(value, p.rt, settings, true));
                             }
                             else if (type.$kind === "anonymous") {
-                                o[properties[i].n] = Bridge.Json.deserialize(value, properties[i].rt, settings, true);
+                                o[p.n] = Bridge.Json.deserialize(value, p.rt, settings, true);
                             }
                         }
                     }
@@ -15961,27 +15966,23 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
             var tcs = new System.Threading.Tasks.TaskCompletionSource();
 
             try {
-                var array = buffer.getArray(),
-                    data;
-
-                switch (messageType) {
-                case "binary":
-                    data = new ArrayBuffer(array.length);
-                    var dataView = new Int8Array(data);
-
-                    for (var i = 0; i < array.length; i++) {
-                        dataView[i] = array[i];
-                    }
-
-                    break;
-                case "text":
-                    data = String.fromCharCode.apply(null, array);
-                    break;
-                }
-
                 if (messageType === "close") {
                     this.socket.close();
                 } else {
+                    var array = buffer.getArray(),
+                        count = buffer.getCount(),
+                        offset = buffer.getOffset();
+ 
+                    var data = new Uint8Array(count);
+
+                    for (var i = 0; i < count; i++) {
+                        data[i] = array[i + offset];
+                    }
+
+                    if (messageType === "text") {
+                        data = String.fromCharCode.apply(null, data);
+                    }
+ 
                     this.socket.send(data);
                 }
 
