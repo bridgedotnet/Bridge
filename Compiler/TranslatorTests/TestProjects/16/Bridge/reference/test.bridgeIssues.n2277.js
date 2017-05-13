@@ -4,6 +4,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     Bridge.define("Test.BridgeIssues.N2277.N2277", {
         methods: {
             DoSomething: function () {
+
             }
         }
     });
