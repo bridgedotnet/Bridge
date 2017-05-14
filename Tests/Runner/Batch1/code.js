@@ -51174,16 +51174,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y1$1(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.X1)]
     });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y1X2", {
-        inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y1$1(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.X2)]
-    });
-
     Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y2X1", {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y2$1(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.X1)]
-    });
-
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y2X2", {
-        inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y2$1(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.X2)]
     });
 
     Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y3$2", function (T1, T2) { return {
@@ -51228,16 +51220,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y1$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.X1)]
     });
 
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y1X2", {
-        inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y1$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.X2)]
-    });
-
     Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y2X1", {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y2$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.X1)]
-    });
-
-    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y2X2", {
-        inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y2$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.X2)]
     });
 
     Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y3$2", function (T1, T2) { return {
@@ -51283,6 +51267,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.C11$1(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.K)]
     });
 
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y1X2", {
+        inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y1$1(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.X2)]
+    });
+
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y2X2", {
+        inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y2$1(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.X2)]
+    });
+
     Bridge.define("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y3X1X1", {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.Y3$2(Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.X1,Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests.X1)]
     });
@@ -51309,6 +51301,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.G5", {
         inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.G4$1(System.Int32)]
+    });
+
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y1X2", {
+        inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y1$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.X2)]
+    });
+
+    Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y2X2", {
+        inherits: [Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y2$1(Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.X2)]
     });
 
     Bridge.define("Bridge.ClientTest.Reflection.TypeSystemTests.IsAssignableFromTypes.Y3X1X1", {
