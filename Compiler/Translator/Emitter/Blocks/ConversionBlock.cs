@@ -232,7 +232,7 @@ namespace Bridge.Translator
                         emitter.NamedBoxedFunctions.Add(type, fn);
                     }
 
-                    result = string.Format("function (obj) {{return {0};}}", result);
+                    result = string.Format("function (obj) {{ return {0}; }}", result);
 
                     fn.Add(name, result);
 

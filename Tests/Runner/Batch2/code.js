@@ -289,20 +289,13 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
                     });
                 Bridge.Test.NUnit.Assert.AreEqual("abc", result);
             },
-            ForeachWithArrayCallbackWorks: function () {
-                var result = "";
-                Bridge.Linq.Enumerable.from(System.Array.init(["a", "b", "c"], System.String)).forEach(function (s, i) {
-                        result = System.String.concat(result, (System.String.concat(s, i)));
-                    });
-                Bridge.Test.NUnit.Assert.AreEqual("a0b1c2", result);
-            },
             IndexOfWithoutStartIndexWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual(1, System.Array.init(["a", "b", "c", "b"], System.String).indexOf("b"));
             },
             IndexOfWithoutStartIndexUsesEqualsMethod: function () {
                 var arr = System.Array.init([new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(1), new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(2), new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(3)], Bridge.ClientTest.Batch2.BridgeIssues.N772.C);
-                Bridge.Test.NUnit.Assert.AreEqual(1, Bridge.Linq.Enumerable.from(arr).indexOf(new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(2)));
-                Bridge.Test.NUnit.Assert.AreEqual(-1, Bridge.Linq.Enumerable.from(arr).indexOf(new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(4)));
+                Bridge.Test.NUnit.Assert.AreEqual(1, System.Array.indexOfT(arr, new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(2)));
+                Bridge.Test.NUnit.Assert.AreEqual(-1, System.Array.indexOfT(arr, new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(4)));
             },
             IndexOfWithStartIndexWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual(3, System.Array.init(["a", "b", "c", "b"], System.String).indexOf("b", 2));
@@ -452,8 +445,8 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
             },
             IListIndexOfUsesEqualsMethod: function () {
                 var arr = System.Array.init([new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(1), new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(2), new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(3)], Bridge.ClientTest.Batch2.BridgeIssues.N772.C);
-                Bridge.Test.NUnit.Assert.AreEqual(1, Bridge.Linq.Enumerable.from(arr).indexOf(new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(2)));
-                Bridge.Test.NUnit.Assert.AreEqual(-1, Bridge.Linq.Enumerable.from(arr).indexOf(new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(4)));
+                Bridge.Test.NUnit.Assert.AreEqual(1, System.Array.indexOfT(arr, new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(2)));
+                Bridge.Test.NUnit.Assert.AreEqual(-1, System.Array.indexOfT(arr, new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(4)));
             },
             IListInsertWorks: function () {
                 var l = System.Array.init(["x", "y", "z"], System.String);
@@ -510,7 +503,7 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
     Bridge.define("Bridge.ClientTest.Batch2.BridgeIssues.N772.TestReverseComparer", {
         inherits: [System.Collections.Generic.IComparer$1(System.Int32)],
         alias: [
-            "compare", "System$Collections$Generic$IComparer$1$System$Int32$compare"
+            "compare", ["System$Collections$Generic$IComparer$1$System$Int32$compare", "System$Collections$Generic$IComparer$1$compare"]
         ],
         methods: {
             compare: function (x, y) {

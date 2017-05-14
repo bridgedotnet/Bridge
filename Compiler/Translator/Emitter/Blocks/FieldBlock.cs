@@ -404,13 +404,22 @@ namespace Bridge.Translator
                 {
                     continue;
                 }
-
-                var mname = member.GetName(this.Emitter, true);
-
-                if (this.TypeInfo.IsEnum)
+                bool withoutTypeParams = true;
+                MemberResolveResult m_rr = null;
+                if (member.Entity != null)
                 {
-                    var memeber_rr = (MemberResolveResult)this.Emitter.Resolver.ResolveNode(member.Entity, this.Emitter);
-                    mname = this.Emitter.GetEntityName(memeber_rr.Member);
+                    m_rr = this.Emitter.Resolver.ResolveNode(member.Entity, this.Emitter) as MemberResolveResult;
+                    if (m_rr != null)
+                    {
+                        withoutTypeParams = OverloadsCollection.ExcludeTypeParameterForDefinition(m_rr);
+                    }
+                }
+                
+                var mname = member.GetName(this.Emitter, withoutTypeParams);
+
+                if (this.TypeInfo.IsEnum && m_rr != null)
+                {
+                    mname = this.Emitter.GetEntityName(m_rr.Member);
                 }
 
                 bool isValid = Helpers.IsValidIdentifier(mname);
@@ -644,6 +653,18 @@ namespace Bridge.Translator
                 }
             }
 
+            var excludeTypeParam = OverloadsCollection.ExcludeTypeParameterForDefinition(member);
+            var excludeAliasTypeParam = member.IsExplicitInterfaceImplementation && !excludeTypeParam;
+            var pair = false;
+            var itypeDef = interfaceMember.DeclaringTypeDefinition;
+            if (!member.IsExplicitInterfaceImplementation &&
+                MetadataUtils.IsJsGeneric(itypeDef, this.Emitter) &&
+                itypeDef.TypeParameters != null &&
+                itypeDef.TypeParameters.Any(typeParameter => typeParameter.Variance != VarianceModifier.Invariant))
+            {
+                pair = true;
+            }
+
             if (member is IProperty && ((IProperty)member).IsIndexer)
             {
                 var property = (IProperty)member;
@@ -651,9 +672,14 @@ namespace Bridge.Translator
                 {
                     nonEmpty = true;
                     this.EnsureComma();
-                    this.WriteScript(Helpers.GetPropertyRef(member, this.Emitter, false, false, false, true));
+                    this.WriteScript(Helpers.GetPropertyRef(member, this.Emitter, false, false, false, excludeTypeParam));
                     this.WriteComma();
-                    var alias = Helpers.GetPropertyRef(interfaceMember, this.Emitter, false, false, false);
+                    var alias = Helpers.GetPropertyRef(interfaceMember, this.Emitter, false, false, false, withoutTypeParams: excludeAliasTypeParam);
+
+                    if (pair)
+                    {
+                        this.WriteOpenBracket();
+                    }
 
                     if (alias.StartsWith("\""))
                     {
@@ -662,6 +688,13 @@ namespace Bridge.Translator
                     else
                     {
                         this.WriteScript(alias);
+                    }
+
+                    if (pair)
+                    {
+                        this.WriteComma();
+                        this.WriteScript(Helpers.GetPropertyRef(interfaceMember, this.Emitter, withoutTypeParams: true));
+                        this.WriteCloseBracket();
                     }
 
                     this.Emitter.Comma = true;
@@ -671,9 +704,14 @@ namespace Bridge.Translator
                 {
                     nonEmpty = true;
                     this.EnsureComma();
-                    this.WriteScript(Helpers.GetPropertyRef(member, this.Emitter, true, false, false, true));
+                    this.WriteScript(Helpers.GetPropertyRef(member, this.Emitter, true, false, false, excludeTypeParam));
                     this.WriteComma();
-                    var alias = Helpers.GetPropertyRef(interfaceMember, this.Emitter, true, false, false);
+                    var alias = Helpers.GetPropertyRef(interfaceMember, this.Emitter, true, false, false, withoutTypeParams: excludeAliasTypeParam);
+
+                    if (pair)
+                    {
+                        this.WriteOpenBracket();
+                    }
 
                     if (alias.StartsWith("\""))
                     {
@@ -682,6 +720,13 @@ namespace Bridge.Translator
                     else
                     {
                         this.WriteScript(alias);
+                    }
+
+                    if (pair)
+                    {
+                        this.WriteComma();
+                        this.WriteScript(Helpers.GetPropertyRef(interfaceMember, this.Emitter, true, withoutTypeParams: true));
+                        this.WriteCloseBracket();
                     }
 
                     this.Emitter.Comma = true;
@@ -694,9 +739,14 @@ namespace Bridge.Translator
                 {
                     nonEmpty = true;
                     this.EnsureComma();
-                    this.WriteScript(Helpers.GetEventRef(member, this.Emitter, false, false, false, true));
+                    this.WriteScript(Helpers.GetEventRef(member, this.Emitter, false, false, false, excludeTypeParam));
                     this.WriteComma();
-                    var alias = Helpers.GetEventRef(interfaceMember, this.Emitter, false, false, false);
+                    var alias = Helpers.GetEventRef(interfaceMember, this.Emitter, false, false, false, excludeAliasTypeParam);
+
+                    if (pair)
+                    {
+                        this.WriteOpenBracket();
+                    }
 
                     if (alias.StartsWith("\""))
                     {
@@ -705,6 +755,13 @@ namespace Bridge.Translator
                     else
                     {
                         this.WriteScript(alias);
+                    }
+
+                    if (pair)
+                    {
+                        this.WriteComma();
+                        this.WriteScript(Helpers.GetEventRef(interfaceMember, this.Emitter, withoutTypeParams: true));
+                        this.WriteCloseBracket();
                     }
 
                     this.Emitter.Comma = true;
@@ -714,9 +771,14 @@ namespace Bridge.Translator
                 {
                     nonEmpty = true;
                     this.EnsureComma();
-                    this.WriteScript(Helpers.GetEventRef(member, this.Emitter, true, false, false, true));
+                    this.WriteScript(Helpers.GetEventRef(member, this.Emitter, true, false, false, excludeTypeParam));
                     this.WriteComma();
-                    var alias = Helpers.GetEventRef(interfaceMember, this.Emitter, true, false, false);
+                    var alias = Helpers.GetEventRef(interfaceMember, this.Emitter, true, false, false, excludeAliasTypeParam);
+
+                    if (pair)
+                    {
+                        this.WriteOpenBracket();
+                    }
 
                     if (alias.StartsWith("\""))
                     {
@@ -727,6 +789,13 @@ namespace Bridge.Translator
                         this.WriteScript(alias);
                     }
 
+                    if (pair)
+                    {
+                        this.WriteComma();
+                        this.WriteScript(Helpers.GetEventRef(interfaceMember, this.Emitter, true, withoutTypeParams: true));
+                        this.WriteCloseBracket();
+                    }
+
                     this.Emitter.Comma = true;
                 }
             }
@@ -734,9 +803,14 @@ namespace Bridge.Translator
             {
                 nonEmpty = true;
                 this.EnsureComma();
-                this.WriteScript(OverloadsCollection.Create(Emitter, member).GetOverloadName(false, null, true));
+                this.WriteScript(OverloadsCollection.Create(Emitter, member).GetOverloadName(false, null, excludeTypeParam));
                 this.WriteComma();
-                var alias = OverloadsCollection.Create(Emitter, interfaceMember).GetOverloadName();
+                var alias = OverloadsCollection.Create(Emitter, interfaceMember).GetOverloadName(withoutTypeParams: excludeAliasTypeParam);
+
+                if (pair)
+                {
+                    this.WriteOpenBracket();
+                }
 
                 if (alias.StartsWith("\""))
                 {
@@ -745,6 +819,13 @@ namespace Bridge.Translator
                 else
                 {
                     this.WriteScript(alias);
+                }
+
+                if (pair)
+                {
+                    this.WriteComma();
+                    this.WriteScript(OverloadsCollection.Create(Emitter, interfaceMember).GetOverloadName(withoutTypeParams:true));
+                    this.WriteCloseBracket();
                 }
             }
 

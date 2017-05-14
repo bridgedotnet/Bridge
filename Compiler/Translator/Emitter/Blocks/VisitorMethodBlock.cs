@@ -76,8 +76,9 @@ namespace Bridge.Translator
             var overloads = OverloadsCollection.Create(this.Emitter, methodDeclaration);
             XmlToJsDoc.EmitComment(this, this.MethodDeclaration);
             var isEntryPoint = Helpers.IsEntryPointMethod(this.Emitter, this.MethodDeclaration);
-            var m_rr = (MemberResolveResult)this.Emitter.Resolver.ResolveNode(this.MethodDeclaration, this.Emitter);
-            string name = overloads.GetOverloadName(false, null, true);
+            var member_rr = (MemberResolveResult)this.Emitter.Resolver.ResolveNode(this.MethodDeclaration, this.Emitter);
+
+            string name = overloads.GetOverloadName(false, null, OverloadsCollection.ExcludeTypeParameterForDefinition(member_rr));
 
             if (isEntryPoint)
             {
@@ -98,7 +99,7 @@ namespace Bridge.Translator
             }
             else
             {
-                var nm = Helpers.GetFunctionName(this.Emitter.AssemblyInfo.NamedFunctions, m_rr.Member, this.Emitter);
+                var nm = Helpers.GetFunctionName(this.Emitter.AssemblyInfo.NamedFunctions, member_rr.Member, this.Emitter);
                 if (nm != null)
                 {
                     this.Write(nm);
@@ -113,7 +114,7 @@ namespace Bridge.Translator
 
             if (script == null)
             {
-                if(YieldBlock.HasYield(methodDeclaration.Body))
+                if (YieldBlock.HasYield(methodDeclaration.Body))
                 {
                     new GeneratorBlock(this.Emitter, methodDeclaration).Emit();
                 }

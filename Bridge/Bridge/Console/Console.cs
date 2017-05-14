@@ -245,8 +245,10 @@ namespace Bridge.Utils
             if (con && con.error)
             {
                 /*@
-                    Bridge.global.console.error = function (msg) {
-                        error(msg);
+                    var err = con.error;
+
+                    con.error = function (msg) {
+                        err.apply(con, arguments);
                         Bridge.Console.error(msg);
                     }
                  */

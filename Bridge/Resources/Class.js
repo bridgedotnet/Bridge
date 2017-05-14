@@ -57,20 +57,24 @@
                             }
                         }
 
-                        if (descriptor != null) {
-                            Object.defineProperty(obj, alias, descriptor);
-                            aliases.push({alias: alias, descriptor: descriptor});
-                        } else {
-                            var m = scope[name];
+                        var arr = Array.isArray(alias) ? alias : [alias];
+                        for (var j = 0; j < arr.length; j++) {
+                            alias = arr[j];
 
-                            if (m === undefined && prototype) {
-                                m = prototype[name];
+                            if (descriptor != null) {
+                                Object.defineProperty(obj, alias, descriptor);
+                                aliases.push({ alias: alias, descriptor: descriptor });
+                            } else {
+                                var m = scope[name];
+
+                                if (m === undefined && prototype) {
+                                    m = prototype[name];
+                                }
+
+                                scope[alias] = m;
+                                aliases.push({ fn: name, alias: alias });
                             }
-
-                            scope[alias] = m;
-                            aliases.push({ fn: name, alias: alias });
                         }
-                        
                     })(statics ? scope : prototype, config.alias[i], config.alias[i + 1], cls);
 
                     i++;

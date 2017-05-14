@@ -38,8 +38,9 @@ namespace Bridge.Translator
 
                 this.AddLocals(new ParameterDeclaration[] { new ParameterDeclaration { Name = "value" } }, accessor.Body);
                 XmlToJsDoc.EmitComment(this, this.CustomEventDeclaration);
+                var member_rr = (MemberResolveResult)this.Emitter.Resolver.ResolveNode(customEventDeclaration, this.Emitter);
 
-                this.Write(Helpers.GetEventRef(customEventDeclaration, this.Emitter, remover, false, false, true));
+                this.Write(Helpers.GetEventRef(customEventDeclaration, this.Emitter, remover, false, false, OverloadsCollection.ExcludeTypeParameterForDefinition(member_rr)));
                 this.WriteColon();
                 this.WriteFunction();
                 var m_rr = (MemberResolveResult)this.Emitter.Resolver.ResolveNode(customEventDeclaration, this.Emitter);
