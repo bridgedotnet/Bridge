@@ -157,8 +157,8 @@ namespace Bridge.Translator
 
                 this.WriteComma();
 
-                var interfaceName = OverloadsCollection.Create(Emitter, resolveResult.Member, isSetter).GetOverloadName(false, prefix);
-
+                var interfaceName = Helpers.GetPropertyRef(resolveResult.Member, this.Emitter, isSetter, ignoreInterface:false);
+                
                 if (interfaceName.StartsWith("\""))
                 {
                     this.Write(interfaceName);
@@ -171,22 +171,18 @@ namespace Bridge.Translator
                 if (variance)
                 {
                     this.WriteComma();
-                    this.WriteScript(OverloadsCollection.Create(Emitter, resolveResult.Member, isSetter).GetOverloadName(false, prefix, withoutTypeParams: true));
+                    this.WriteScript(Helpers.GetPropertyRef(resolveResult.Member, this.Emitter, isSetter, ignoreInterface: false, withoutTypeParams:true));
                 }
-
-                /*this.WriteComma();
-                this.WriteScript(
-                    OverloadsCollection.Create(Emitter, resolveResult.Member, isSetter).GetOverloadName(true, prefix));*/
 
                 this.Write(")");
             }
             else if (externalInterface == null || externalInterface.IsNativeImplementation)
             {
-                this.Write(OverloadsCollection.Create(Emitter, resolveResult.Member, isSetter).GetOverloadName(false, prefix));
+                this.Write(Helpers.GetPropertyRef(resolveResult.Member, this.Emitter, isSetter, ignoreInterface: false));
             }
             else
             {
-                this.Write(OverloadsCollection.Create(Emitter, resolveResult.Member, isSetter).GetOverloadName(true, prefix));
+                this.Write(Helpers.GetPropertyRef(resolveResult.Member, this.Emitter, isSetter, ignoreInterface: true));
             }
 
             this.WriteCloseBracket();
