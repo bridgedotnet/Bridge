@@ -427,8 +427,7 @@
 
             prop.$initialize = Bridge.Class._initialize;
 
-            var keys = [],
-                isFF = Bridge.Browser.firefoxVersion > 0;
+            var keys = [];
 
             for (name in prop) {
                 keys.push(name);
@@ -454,10 +453,6 @@
                 } else {
                     prototype[ctorName] = member;
                 }
-
-                if (typeof member === "function" && name !== "$main") {
-                    Object.defineProperty(member, isFF ? "displayName" : "name", { value: className + "." + name, writable: true });
-                }
             }
 
             prototype.$$name = className;
@@ -473,10 +468,6 @@
                         Class["$ctor"] = member;
                     } else {
                         Class[name] = member;
-                    }
-
-                    if (typeof member === "function") {
-                        Object.defineProperty(member, isFF ? "displayName" : "name", { value: className + "." + name, writable: true });
                     }
                 }
             }

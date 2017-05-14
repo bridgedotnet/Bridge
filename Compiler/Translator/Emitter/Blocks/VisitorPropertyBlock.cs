@@ -63,6 +63,14 @@ namespace Bridge.Translator
 
                 this.WriteColon();
                 this.WriteFunction();
+
+                var m_rr = (MemberResolveResult)this.Emitter.Resolver.ResolveNode(propertyDeclaration, this.Emitter);
+                var nm = Helpers.GetFunctionName(this.Emitter.AssemblyInfo.NamedFunctions, m_rr.Member, this.Emitter, setter);
+                if (nm != null)
+                {
+                    this.Write(nm);
+                }
+
                 this.WriteOpenParentheses();
                 this.Write(setter ? "value" : "");
                 this.WriteCloseParentheses();

@@ -19139,23 +19139,25 @@ Bridge.$N1391Result =                     r;
                         Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.AssertStackTrace(e1.StackTrace, "MethodThrowsException2");
                     }
 
-                    try {
-                        var i = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.Prop1;
-                        Bridge.Test.NUnit.Assert.Fail$1("Should have thrown at getter Prop1");
+                    /* try
+                    {
+                       var i = Prop1;
+                       Assert.Fail("Should have thrown at getter Prop1");
                     }
-                    catch (e2) {
-                        e2 = System.Exception.create(e2);
-                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.AssertStackTrace(e2.StackTrace, "Prop1.get");
+                    catch (Exception e)
+                    {
+                       AssertStackTrace(e.StackTrace, "Prop1.get");
                     }
 
-                    try {
-                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.Prop1 = 1;
-                        Bridge.Test.NUnit.Assert.Fail$1("Should have thrown at setter Prop1");
+                    try
+                    {
+                       Prop1 = 1;
+                       Assert.Fail("Should have thrown at setter Prop1");
                     }
-                    catch (e3) {
-                        e3 = System.Exception.create(e3);
-                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.AssertStackTrace(e3.StackTrace, "Prop1.set");
-                    }
+                    catch (Exception e)
+                    {
+                       AssertStackTrace(e.StackTrace, "Prop1.set");
+                    }*/
                 },
                 AssertStackTrace: function (stack, fragment) {
                     if (stack == null) {
@@ -19166,7 +19168,7 @@ Bridge.$N1391Result =                     r;
                     if (System.String.contains(stack,fragment)) {
                         Bridge.Test.NUnit.Assert.True(true);
                     } else {
-                        Bridge.Test.NUnit.Assert.True$1(false, stack);
+                        Bridge.Test.NUnit.Assert.Fail$1(stack);
                     }
                 }
             }

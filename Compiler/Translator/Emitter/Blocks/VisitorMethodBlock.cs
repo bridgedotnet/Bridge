@@ -1,3 +1,4 @@
+using System;
 using Bridge.Contract;
 using ICSharpCode.NRefactory.CSharp;
 using System.Linq;
@@ -75,7 +76,7 @@ namespace Bridge.Translator
             var overloads = OverloadsCollection.Create(this.Emitter, methodDeclaration);
             XmlToJsDoc.EmitComment(this, this.MethodDeclaration);
             var isEntryPoint = Helpers.IsEntryPointMethod(this.Emitter, this.MethodDeclaration);
-
+            var m_rr = (MemberResolveResult)this.Emitter.Resolver.ResolveNode(this.MethodDeclaration, this.Emitter);
             string name = overloads.GetOverloadName(false, null, true);
 
             if (isEntryPoint)
@@ -91,13 +92,17 @@ namespace Bridge.Translator
 
             this.WriteFunction();
 
-
-            if (isEntryPoint || this.Emitter.AssemblyInfo.EnableNamedFunctionExpressions)
+            if (isEntryPoint)
             {
-                // If the option enabled then use named function expressions (see #2407)
-                // like doSomething: function doSomething() { }
-                // instead of doSomething: function () { }
                 this.Write(name);
+            }
+            else
+            {
+                var nm = Helpers.GetFunctionName(this.Emitter.AssemblyInfo.NamedFunctions, m_rr.Member, this.Emitter);
+                if (nm != null)
+                {
+                    this.Write(nm);
+                }
             }
 
             this.EmitMethodParameters(methodDeclaration.Parameters, methodDeclaration.TypeParameters.Count > 0 && Helpers.IsIgnoreGeneric(methodDeclaration, this.Emitter) ? null : methodDeclaration.TypeParameters, methodDeclaration);

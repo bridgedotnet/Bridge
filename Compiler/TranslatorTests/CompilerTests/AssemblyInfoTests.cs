@@ -53,7 +53,7 @@ namespace Bridge.Translator.Tests
             Assert.Null(config.OverflowMode, "OverflowMode");
             Assert.Null(config.NoLoggerTimeStamps, "NoLoggerTimeStamps");
             Assert.False(config.StrictNullChecks, "StrictNullChecks");
-            Assert.False(config.EnableNamedFunctionExpressions, "EnableNamedFunctionExpressions");
+            Assert.AreEqual(NamedFunctionMode.None, config.NamedFunctions, "NamedFunctions");
         }
     }
 }

@@ -1287,5 +1287,47 @@ namespace Bridge.Contract
         {
             return JS.Reserved.StaticNames.Any(n => String.Equals(name, n, StringComparison.InvariantCultureIgnoreCase));
         }
+
+        public static string GetFunctionName(NamedFunctionMode mode, IMember member, IEmitter emitter, bool isSetter = false)
+        {
+            var overloads = OverloadsCollection.Create(emitter, member, isSetter);
+            string name = null;
+            switch (mode)
+            {
+                case NamedFunctionMode.None:
+                    break;
+                case NamedFunctionMode.Name:
+                    name = overloads.GetOverloadName(false, null, true);
+                    break;
+                case NamedFunctionMode.FullName:
+                    var td = member.DeclaringTypeDefinition;
+                    name = td != null ? BridgeTypes.ToJsName(td, emitter, true) : "";
+                    name = name.Replace(".", "_");
+                    name += "_" + overloads.GetOverloadName(false, null, true);
+                    break;
+                case NamedFunctionMode.ClassName:
+                    var t = member.DeclaringType;
+                    name = BridgeTypes.ToJsName(t, emitter, true, true);
+                    name = name.Replace(".", "_");
+                    name += "_" + overloads.GetOverloadName(false, null, true);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            if (name != null)
+            {
+                if (member is IProperty)
+                {
+                    name = name + "_" + (isSetter ? "set" : "get");
+                }
+                else if (member is IEvent)
+                {
+                    name = name + "_" + (isSetter ? "remove" : "add");
+                }
+            }
+
+            return name;
+        }
     }
 }
