@@ -19869,12 +19869,16 @@ Bridge.$N1391Result =                     r;
                 TestRoundtripFormat: function () {
                     var a = System.DateTime.format(System.DateTime.utcNow(), "o");
                     var b = System.DateTime.parseExact(a, "o", System.Globalization.CultureInfo.invariantCulture);
+
+                    // There is a diff to .Net as DateTime.Kind is not supported - Z vs +00:00 compared to .Net result
                     Bridge.Test.NUnit.Assert.AreEqual(a, System.DateTime.format(b, "o"));
 
                     var c1 = System.DateTime.parseExact("2017-05-15T14:34:03.6762498+00:00", "o", System.Globalization.CultureInfo.invariantCulture);
                     var c2 = System.DateTime.parseExact("2017-05-15T14:34:03.6760000+00:00", "o", System.Globalization.CultureInfo.invariantCulture);
+
                     Bridge.Test.NUnit.Assert.AreEqual(2017, c1.getFullYear());
                     Bridge.Test.NUnit.Assert.AreEqual(5, (c1.getMonth() + 1));
+                    // JS limitation - ms part may be different compared to .Net
                     Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.format(c1, "o"), System.DateTime.format(c2, "o"));
                 }
             }
