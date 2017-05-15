@@ -217,7 +217,7 @@ namespace Bridge.Contract
 
                 if (member != null)
                 {
-                    return !(bool) member.ConstantValue;
+                    return !(bool)member.ConstantValue;
                 }
 
                 return true;
@@ -617,7 +617,7 @@ namespace Bridge.Contract
             }
 
             string name;
-            
+
             if (!noOverload)
             {
                 var overloads = OverloadsCollection.Create(emitter, property, isSetter);
@@ -680,7 +680,7 @@ namespace Bridge.Contract
             {
                 skipPrefix = false;
             }
-            
+
             if (!noOverload)
             {
                 var overloads = OverloadsCollection.Create(emitter, property, isSetter);
@@ -1184,7 +1184,7 @@ namespace Bridge.Contract
 
             var at = m.Parameters[0].Type as ArrayType;
             return at != null && at.Dimensions == 1 && at.ElementType.IsKnownType(KnownTypeCode.String);
-                // The single parameter must be a one-dimensional array of strings.
+            // The single parameter must be a one-dimensional array of strings.
         }
 
         public static bool IsTypeParameterType(IType type)
