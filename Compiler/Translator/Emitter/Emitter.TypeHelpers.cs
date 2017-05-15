@@ -201,7 +201,7 @@ namespace Bridge.Translator
             }
 
             activeTypes.Pop();
-            list = !endPoint ? list : list.Distinct().ToList();
+            list = list.Distinct().ToList();
             cacheParents[type] = list;
 
             return list;
