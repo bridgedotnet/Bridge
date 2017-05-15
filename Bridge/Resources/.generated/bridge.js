@@ -8635,7 +8635,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
                 var needRemoveDot = false;
 
-                format = format.replace(/(\\.|'[^']*'|"[^"]*"|d{1,4}|M{1,4}|yyyy|yy|y|HH?|hh?|mm?|ss?|tt?|f{1,7}|F{1,7}|z{1,3}|\:|\/)/g,
+                format = format.replace(/(\\.|'[^']*'|"[^"]*"|d{1,4}|M{1,4}|yyyy|yy|y|HH?|hh?|mm?|ss?|tt?|u|f{1,7}|F{1,7}|z{1,3}|\:|\/)/g,
                     function (match, group, index) {
                         var part = match;
 
@@ -8771,6 +8771,8 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                                  needRemoveDot = part.length == 0;
 
                                  break;
+                            
+                            case "u":
                             case "f":
                             case "ff":
                             case "fff":
@@ -8784,7 +8786,12 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                                      part = Array(4 - part.length).join("0") + part;
                                 }
 
-                                part = part.substr(0, match.length);
+                                var ln = match === "u" ? 7 : match.length;
+                                if (part.length < ln) {
+                                    part = part + Array(8 - part.length).join("0");
+                                }
+
+                                part = part.substr(0, ln);
 
                                 break;
                             case "z":

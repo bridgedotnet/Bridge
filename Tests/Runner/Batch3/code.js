@@ -16520,13 +16520,13 @@ Bridge.$N1391Result =                     r;
                 TestFDateModifier: function () {
                     var date = new Date(2017, 2 - 1, 6, 10, 42, 52, 0);
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFFF"));
-                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.000", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fffffff"));
+                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.0000000", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fffffff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFF"));
-                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.000", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.ffffff"));
+                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.000000", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.ffffff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFFF"));
-                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.000", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fffff"));
+                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.00000", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fffff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFF"));
-                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.000", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.ffff"));
+                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.0000", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.ffff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFF"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.000", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FF"));
@@ -16536,13 +16536,13 @@ Bridge.$N1391Result =                     r;
 
                     date = new Date(2017, 2 - 1, 6, 10, 42, 52, 1);
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.001", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFFF"));
-                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.001", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fffffff"));
+                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.0010000", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fffffff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.001", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFF"));
-                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.001", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.ffffff"));
+                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.001000", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.ffffff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.001", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFFF"));
-                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.001", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fffff"));
+                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.00100", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fffff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.001", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFF"));
-                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.001", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.ffff"));
+                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.0010", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.ffff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.001", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFF"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.001", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FF"));
@@ -16552,13 +16552,13 @@ Bridge.$N1391Result =                     r;
 
                     date = new Date(2017, 2 - 1, 6, 10, 42, 52, 10);
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.01", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFFF"));
-                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.010", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fffffff"));
+                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.0100000", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fffffff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.01", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFF"));
-                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.010", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.ffffff"));
+                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.010000", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.ffffff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.01", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFFF"));
-                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.010", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fffff"));
+                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.01000", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fffff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.01", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFF"));
-                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.010", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.ffff"));
+                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.0100", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.ffff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.01", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFF"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.010", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.01", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FF"));
@@ -16568,13 +16568,13 @@ Bridge.$N1391Result =                     r;
 
                     date = new Date(2017, 2 - 1, 6, 10, 42, 52, 100);
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.1", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFFF"));
-                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.100", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fffffff"));
+                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.1000000", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fffffff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.1", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFF"));
-                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.100", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.ffffff"));
+                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.100000", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.ffffff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.1", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFFF"));
-                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.100", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fffff"));
+                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.10000", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fffff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.1", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFF"));
-                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.100", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.ffff"));
+                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.1000", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.ffff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.1", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFF"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.100", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.1", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FF"));
@@ -16584,13 +16584,13 @@ Bridge.$N1391Result =                     r;
 
                     date = new Date(2017, 2 - 1, 6, 10, 42, 52, 999);
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.999", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFFF"));
-                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.999", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fffffff"));
+                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.9990000", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fffffff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.999", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFF"));
-                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.999", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.ffffff"));
+                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.999000", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.ffffff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.999", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFFF"));
-                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.999", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fffff"));
+                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.99900", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fffff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.999", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFF"));
-                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.999", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.ffff"));
+                    Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.9990", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.ffff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.999", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFF"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.999", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.99", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FF"));
@@ -19858,6 +19858,28 @@ Bridge.$N1391Result =                     r;
                     var decimal2 = System.Decimal(20);
                     decimal2 = System.Decimal.min(decimal1, decimal2);
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644.AssertNumber(System.Decimal(10.0), decimal2, "decimal");
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2657", {
+        statics: {
+            methods: {
+                TestRoundtripFormat: function () {
+                    var a = System.DateTime.format(System.DateTime.utcNow(), "o");
+                    var b = System.DateTime.parseExact(a, "o", System.Globalization.CultureInfo.invariantCulture);
+
+                    // There is a diff to .Net as DateTime.Kind is not supported - Z vs +00:00 compared to .Net result
+                    Bridge.Test.NUnit.Assert.AreEqual(a, System.DateTime.format(b, "o"));
+
+                    var c1 = System.DateTime.parseExact("2017-05-15T14:34:03.6762498+00:00", "o", System.Globalization.CultureInfo.invariantCulture);
+                    var c2 = System.DateTime.parseExact("2017-05-15T14:34:03.6760000+00:00", "o", System.Globalization.CultureInfo.invariantCulture);
+
+                    Bridge.Test.NUnit.Assert.AreEqual(2017, c1.getFullYear());
+                    Bridge.Test.NUnit.Assert.AreEqual(5, (c1.getMonth() + 1));
+                    // JS limitation - ms part may be different compared to .Net
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.format(c1, "o"), System.DateTime.format(c2, "o"));
                 }
             }
         }
