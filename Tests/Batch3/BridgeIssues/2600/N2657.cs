@@ -18,7 +18,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual(a, b.ToString("o"));
 
             var c1 = DateTime.ParseExact("2017-05-15T14:34:03.6762498+00:00", "o", CultureInfo.InvariantCulture);
-            var c2 = DateTime.ParseExact("2017-05-15T14:34:03.676+00:00", "o", CultureInfo.InvariantCulture);
+            var c2 = DateTime.ParseExact("2017-05-15T14:34:03.6760000+00:00", "o", CultureInfo.InvariantCulture);
             Assert.AreEqual(2017, c1.Year);
             Assert.AreEqual(5, c1.Month);
             Assert.AreEqual(c1.ToString("o"), c2.ToString("o"));

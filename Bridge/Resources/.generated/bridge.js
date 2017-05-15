@@ -8786,7 +8786,12 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                                      part = Array(4 - part.length).join("0") + part;
                                 }
 
-                                part = part.substr(0, match == "u" ? 3 : match.length);
+                                var ln = match === "u" ? 7 : match.length;
+                                if (part.length < ln) {
+                                    part = part + Array(8 - part.length).join("0");
+                                }
+
+                                part = part.substr(0, ln);
 
                                 break;
                             case "z":
@@ -9051,10 +9056,6 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                             idx += ss.length;
                         } else if (token === "u") {
                             ff = this.subparseInt(str, idx, 1, 7);
-
-                            if (ff == null) {
-                                ff = this.subparseInt(str, idx, 1, 3);
-                            }
 
                             if (ff == null) {
                                 invalid = true;
