@@ -19863,6 +19863,24 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2657", {
+        statics: {
+            methods: {
+                TestRoundtripFormat: function () {
+                    var a = System.DateTime.format(System.DateTime.utcNow(), "o");
+                    var b = System.DateTime.parseExact(a, "o", System.Globalization.CultureInfo.invariantCulture);
+                    Bridge.Test.NUnit.Assert.AreEqual(a, System.DateTime.format(b, "o"));
+
+                    var c1 = System.DateTime.parseExact("2017-05-15T14:34:03.6762498+00:00", "o", System.Globalization.CultureInfo.invariantCulture);
+                    var c2 = System.DateTime.parseExact("2017-05-15T14:34:03.676+00:00", "o", System.Globalization.CultureInfo.invariantCulture);
+                    Bridge.Test.NUnit.Assert.AreEqual(2017, c1.getFullYear());
+                    Bridge.Test.NUnit.Assert.AreEqual(5, (c1.getMonth() + 1));
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.format(c1, "o"), System.DateTime.format(c2, "o"));
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2667", {
         statics: {
             methods: {
