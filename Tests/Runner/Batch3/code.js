@@ -19916,6 +19916,27 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2671", {
+        statics: {
+            methods: {
+                TestInterfaceIndexer: function () {
+                    Bridge.Test.NUnit.Assert.AreEqual(0, new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2671.GenericClass$1(System.Int32))().TestMethod());
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2671.GenericClass$1", function (T) { return {
+        methods: {
+            TestMethod: function () {
+                var dictionary = new (System.Collections.Generic.Dictionary$2(System.String,T))();
+
+                dictionary["System$Collections$Generic$IDictionary$2$System$String$" + Bridge.getTypeAlias(T) + "$setItem"]("key", Bridge.getDefaultValue(T));
+                return dictionary["System$Collections$Generic$IDictionary$2$System$String$" + Bridge.getTypeAlias(T) + "$getItem"]("key");
+            }
+        }
+    }; });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge272", {
         statics: {
             methods: {
