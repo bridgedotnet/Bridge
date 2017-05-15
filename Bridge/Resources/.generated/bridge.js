@@ -285,16 +285,6 @@
                 })(cfg, scope, backingField, v);
             }
 
-            var isFF = Bridge.Browser.firefoxVersion > 0
-
-            if (!alias && cfg.get) {
-                Object.defineProperty(cfg.get, isFF ? "displayName" : "name", { value: cls.$$name + "." + name + ".get", writable: true });
-            }
-
-            if (!alias && cfg.set) {
-                Object.defineProperty(cfg.set, isFF ? "displayName" : "name", { value: cls.$$name + "." + name + ".set", writable: true });
-            }
-
             Object.defineProperty(scope, name, cfg);
 
             return cfg;
@@ -2659,8 +2649,7 @@
 
             prop.$initialize = Bridge.Class._initialize;
 
-            var keys = [],
-                isFF = Bridge.Browser.firefoxVersion > 0;
+            var keys = [];
 
             for (name in prop) {
                 keys.push(name);
@@ -2686,10 +2675,6 @@
                 } else {
                     prototype[ctorName] = member;
                 }
-
-                if (typeof member === "function" && name !== "$main") {
-                    Object.defineProperty(member, isFF ? "displayName" : "name", { value: className + "." + name, writable: true });
-                }
             }
 
             prototype.$$name = className;
@@ -2705,10 +2690,6 @@
                         Class["$ctor"] = member;
                     } else {
                         Class[name] = member;
-                    }
-
-                    if (typeof member === "function") {
-                        Object.defineProperty(member, isFF ? "displayName" : "name", { value: className + "." + name, writable: true });
                     }
                 }
             }

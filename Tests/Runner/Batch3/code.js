@@ -14610,7 +14610,7 @@ Bridge.$N1391Result =                     r;
         methods: {
             Access1: function () {
                 return Bridge.fn.bind(this, function () {
-                    Bridge.Linq.Enumerable.from(this._itms.Itms).forEach($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Holder$1.f1);
+                    Bridge.ClientTest.Batch3.BridgeIssues.Ext.ForEach(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Something$1(RecordT), this._itms.Itms, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Holder$1.f1);
 
                     this._itms.Itms["Bridge$ClientTest$Batch3$BridgeIssues$Bridge2138$ISomeCollection$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2138$Something$1$" + Bridge.getTypeAlias(RecordT) + "$getItem"](0).SomeAction();
                 });
@@ -19067,23 +19067,25 @@ Bridge.$N1391Result =                     r;
                         Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.AssertStackTrace(e1.StackTrace, "MethodThrowsException2");
                     }
 
-                    try {
-                        var i = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.Prop1;
-                        Bridge.Test.NUnit.Assert.Fail$1("Should have thrown at getter Prop1");
+                    /* try
+                    {
+                       var i = Prop1;
+                       Assert.Fail("Should have thrown at getter Prop1");
                     }
-                    catch (e2) {
-                        e2 = System.Exception.create(e2);
-                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.AssertStackTrace(e2.StackTrace, "Prop1.get");
+                    catch (Exception e)
+                    {
+                       AssertStackTrace(e.StackTrace, "Prop1.get");
                     }
 
-                    try {
-                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.Prop1 = 1;
-                        Bridge.Test.NUnit.Assert.Fail$1("Should have thrown at setter Prop1");
+                    try
+                    {
+                       Prop1 = 1;
+                       Assert.Fail("Should have thrown at setter Prop1");
                     }
-                    catch (e3) {
-                        e3 = System.Exception.create(e3);
-                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge2592.AssertStackTrace(e3.StackTrace, "Prop1.set");
-                    }
+                    catch (Exception e)
+                    {
+                       AssertStackTrace(e.StackTrace, "Prop1.set");
+                    }*/
                 },
                 AssertStackTrace: function (stack, fragment) {
                     if (stack == null) {
@@ -19094,7 +19096,7 @@ Bridge.$N1391Result =                     r;
                     if (System.String.contains(stack,fragment)) {
                         Bridge.Test.NUnit.Assert.True(true);
                     } else {
-                        Bridge.Test.NUnit.Assert.True$1(false, stack);
+                        Bridge.Test.NUnit.Assert.Fail$1(stack);
                     }
                 }
             }
@@ -27184,6 +27186,26 @@ Bridge.$N1391Result =                     r;
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge999_1, {
         f1: function (x) {
             return x;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Ext", {
+        statics: {
+            methods: {
+                ForEach: function (T, self, operation) {
+                    var $t;
+                    $t = Bridge.getEnumerator(self, T);
+                    try {
+                        while ($t.moveNext()) {
+                            var t = $t.Current;
+                            operation(t);
+                        }
+                    }finally {
+                        if (Bridge.is($t, System.IDisposable)) {
+                            $t.System$IDisposable$dispose();
+                        }
+                    }}
+            }
         }
     });
 

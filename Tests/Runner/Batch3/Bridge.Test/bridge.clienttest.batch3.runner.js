@@ -7504,7 +7504,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestLambdaExpressionsInGenericMethod: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2019).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2019, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLambdaExpressionsInGenericMethod()", $t.Line = "49", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2019).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2019, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLambdaExpressionsInGenericMethod()", $t.Line = "48", $t));
                     t.Fixture.TestLambdaExpressionsInGenericMethod();
                 }
             }
@@ -8329,7 +8329,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestGenericInterfaceIndexer: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2138, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestGenericInterfaceIndexer()", $t.Line = "119", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2138, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestGenericInterfaceIndexer()", $t.Line = "129", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.TestGenericInterfaceIndexer();
                 }
             }
@@ -8379,7 +8379,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestIgnoreGenericForNestedClass: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2143, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestIgnoreGenericForNestedClass()", $t.Line = "43", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2143, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestIgnoreGenericForNestedClass()", $t.Line = "42", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2143.TestIgnoreGenericForNestedClass();
                 }
             }
@@ -8404,7 +8404,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestCharDefaultValue: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2146).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2146, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestCharDefaultValue()", $t.Line = "21", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2146).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2146, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestCharDefaultValue()", $t.Line = "20", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2146.TestCharDefaultValue();
                 }
             }
@@ -8504,7 +8504,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestBaseTypeForGenericDefinition: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2159).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2159, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBaseTypeForGenericDefinition()", $t.Line = "18", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2159).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2159, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBaseTypeForGenericDefinition()", $t.Line = "17", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2159.TestBaseTypeForGenericDefinition();
                 }
             }
@@ -8529,7 +8529,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestBaseTypeForGenericDefinition: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2160).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2160, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBaseTypeForGenericDefinition()", $t.Line = "19", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2160).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2160, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBaseTypeForGenericDefinition()", $t.Line = "18", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2160.TestBaseTypeForGenericDefinition();
                 }
             }

@@ -2,11 +2,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using Bridge.Linq;
 using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
 {
+    internal static class Ext
+    {
+        public static void ForEach<T>(this IEnumerable<T> self, Action<T> operation)
+        {
+            foreach (var t in self)
+            {
+                operation(t);
+            }
+        }
+    }
+
     [Category(Constants.MODULE_ISSUES)]
     [TestFixture(TestNameFormat = "#2138 - {0}")]
     public class Bridge2138

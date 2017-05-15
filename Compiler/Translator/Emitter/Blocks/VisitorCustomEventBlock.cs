@@ -43,6 +43,12 @@ namespace Bridge.Translator
                 this.Write(Helpers.GetEventRef(customEventDeclaration, this.Emitter, remover, false, false, OverloadsCollection.ExcludeTypeParameterForDefinition(member_rr)));
                 this.WriteColon();
                 this.WriteFunction();
+                var m_rr = (MemberResolveResult)this.Emitter.Resolver.ResolveNode(customEventDeclaration, this.Emitter);
+                var nm = Helpers.GetFunctionName(this.Emitter.AssemblyInfo.NamedFunctions, m_rr.Member, this.Emitter, remover);
+                if (nm != null)
+                {
+                    this.Write(nm);
+                }
                 this.WriteOpenParentheses();
                 this.Write("value");
                 this.WriteCloseParentheses();

@@ -1,3 +1,4 @@
+using System;
 using Bridge.Contract;
 using ICSharpCode.NRefactory.CSharp;
 using System.Linq;
@@ -76,8 +77,8 @@ namespace Bridge.Translator
             XmlToJsDoc.EmitComment(this, this.MethodDeclaration);
             var isEntryPoint = Helpers.IsEntryPointMethod(this.Emitter, this.MethodDeclaration);
             var member_rr = (MemberResolveResult)this.Emitter.Resolver.ResolveNode(this.MethodDeclaration, this.Emitter);
-            
-            string name = overloads.GetOverloadName(false, null, OverloadsCollection.ExcludeTypeParameterForDefinition(member_rr)); 
+
+            string name = overloads.GetOverloadName(false, null, OverloadsCollection.ExcludeTypeParameterForDefinition(member_rr));
 
             if (isEntryPoint)
             {
@@ -92,13 +93,17 @@ namespace Bridge.Translator
 
             this.WriteFunction();
 
-
-            if (isEntryPoint || this.Emitter.AssemblyInfo.EnableNamedFunctionExpressions)
+            if (isEntryPoint)
             {
-                // If the option enabled then use named function expressions (see #2407)
-                // like doSomething: function doSomething() { }
-                // instead of doSomething: function () { }
                 this.Write(name);
+            }
+            else
+            {
+                var nm = Helpers.GetFunctionName(this.Emitter.AssemblyInfo.NamedFunctions, member_rr.Member, this.Emitter);
+                if (nm != null)
+                {
+                    this.Write(nm);
+                }
             }
 
             this.EmitMethodParameters(methodDeclaration.Parameters, methodDeclaration.TypeParameters.Count > 0 && Helpers.IsIgnoreGeneric(methodDeclaration, this.Emitter) ? null : methodDeclaration.TypeParameters, methodDeclaration);
@@ -109,7 +114,7 @@ namespace Bridge.Translator
 
             if (script == null)
             {
-                if(YieldBlock.HasYield(methodDeclaration.Body))
+                if (YieldBlock.HasYield(methodDeclaration.Body))
                 {
                     new GeneratorBlock(this.Emitter, methodDeclaration).Emit();
                 }

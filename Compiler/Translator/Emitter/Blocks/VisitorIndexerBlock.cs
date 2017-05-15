@@ -80,6 +80,11 @@ namespace Bridge.Translator
                 this.Write(accName);
                 this.WriteColon();
                 this.WriteFunction();
+                var nm = Helpers.GetFunctionName(this.Emitter.AssemblyInfo.NamedFunctions, prop, this.Emitter, setter);
+                if (nm != null)
+                {
+                    this.Write(nm);
+                }
                 this.EmitMethodParameters(indexerDeclaration.Parameters, null, indexerDeclaration, setter);
 
                 if (setter)

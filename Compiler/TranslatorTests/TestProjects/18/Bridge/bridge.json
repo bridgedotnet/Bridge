@@ -10,7 +10,7 @@
   "combineLocales": true,
   "localesFileName": "allLocales.js",
   "locales": "ru-RU;en-US;es*",
-  "enableNamedFunctionExpressions": true, // #2407
+  "namedFunctions": "Name", // #2407
   "logging": {
     "level": "None"
   },
