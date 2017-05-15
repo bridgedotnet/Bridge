@@ -3272,7 +3272,7 @@
 
     Bridge.define("Bridge.Utils.SystemAssemblyVersion");
 
-    // @source Json.js
+    // @source JSON.js
 
     Bridge.Json = {
         serialize: function (obj, settings, returnRaw, possibleType) {
@@ -3393,7 +3393,7 @@
                 } else {
                     var raw = {},
                         ignoreMetaData = type === System.Object || type === Object || type.$literal || type.$kind === "anonymous",
-                        nometa = !type.$metadata;
+                        nometa = !Bridge.getMetadata(type);
 
                     if (!ignoreMetaData && nometa) {
                         throw new System.InvalidOperationException(Bridge.getTypeName(type) + " is not reflectable and cannot be serialized.");
