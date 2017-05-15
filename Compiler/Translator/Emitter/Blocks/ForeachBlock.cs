@@ -281,6 +281,7 @@ namespace Bridge.Translator
                 return;
             }
 
+            this.WriteSourceMapName(foreachStatement.VariableName);
             var iteratorVar = this.GetTempVarName();
             var iteratorName = this.AddLocal(iteratorVar, null, AstType.Null);
 

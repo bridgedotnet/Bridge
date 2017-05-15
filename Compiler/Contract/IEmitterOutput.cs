@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Bridge.Contract
 {
     public interface IEmitterOutput
@@ -47,6 +49,11 @@ namespace Bridge.Contract
         {
             get;
             set;
+        }
+
+        List<string> Names
+        {
+            get; set;
         }
     }
 }

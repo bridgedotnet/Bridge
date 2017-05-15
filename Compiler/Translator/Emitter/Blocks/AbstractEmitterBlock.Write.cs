@@ -35,13 +35,21 @@ namespace Bridge.Translator
             this.Emitter.ResetLevel(level);
         }
 
+        public virtual void WriteSourceMapName(string name)
+        {
+            if (this.Emitter.AssemblyInfo.SourceMap != null && this.Emitter.AssemblyInfo.SourceMap.Enabled && !this.Emitter.EmitterOutput.Names.Contains(name))
+            {
+                this.Emitter.EmitterOutput.Names.Add(name);
+            }
+        }
+
         public virtual void WriteSequencePoint(DomRegion region)
         {
             if (this.Emitter.AssemblyInfo.SourceMap.Enabled)
             {
                 var line = region.BeginLine;
                 var column = region.BeginColumn;
-                var point = string.Format("/*##|{0},{1},{2}|##*/", this.Emitter.SourceFileName, line, column);
+                var point = string.Format("/*##|{0},{1},{2}|##*/", this.Emitter.SourceFileNameIndex, line, column);
 
                 if (this.Emitter.LastSequencePoint != point)
                 {

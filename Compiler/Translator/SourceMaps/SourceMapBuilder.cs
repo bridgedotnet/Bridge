@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace Bridge.Translator
 {  
@@ -18,11 +19,11 @@ namespace Bridge.Translator
 		private readonly List<SourceMapEntry> _entries;
 
 		private readonly Dictionary<string, int> _sourceUrlMap;
-		private readonly List<string> _sourceUrlList;
-		private readonly Dictionary<string, int> _sourceNameMap;
-		private readonly List<string> _sourceNameList;
+        public List<string> SourceUrlList { get; }
+        private readonly Dictionary<string, int> _sourceNameMap;
+        public List<string> SourceNameList { get; }
 
-		private int _previousTargetLine;
+        private int _previousTargetLine;
 		private int _previousTargetColumn;
 		private int _previousSourceUrlIndex;
 		private int _previousSourceLine;
@@ -37,9 +38,9 @@ namespace Bridge.Translator
 			_entries = new List<SourceMapEntry>();
 
 			_sourceUrlMap = new Dictionary<string, int>();
-			_sourceUrlList = new List<string>();
+			this.SourceUrlList = new List<string>();
 			_sourceNameMap = new Dictionary<string, int>();
-			_sourceNameList = new List<string>();
+			this.SourceNameList = new List<string>();
 
 			_previousTargetLine = 0;
 			_previousTargetColumn = 0;
@@ -64,7 +65,7 @@ namespace Bridge.Translator
 			_entries.Add(new SourceMapEntry(sourceLocation, scriptLine, scriptColumn));
 		}
 
-		public string Build() {
+		public string Build(string[] sourcesContent = null) {
 			ResetPreviousSourceLocation();
 			var mappingsBuffer = new StringBuilder();
 			_entries.ForEach(entry => WriteEntry(entry, mappingsBuffer));
@@ -74,14 +75,22 @@ namespace Bridge.Translator
 			buffer.AppendFormat("  \"file\": \"{0}\",\n", _scriptFileName);
 			buffer.Append("  \"sourceRoot\": \"" + _sourceRoot + "\",\n");
 			buffer.Append("  \"sources\": ");
-			PrintStringListOn(_sourceUrlList, buffer);
+			PrintStringListOn(this.SourceUrlList, buffer);
 			buffer.Append(",\n");
 			buffer.Append("  \"names\": ");
-			PrintStringListOn(_sourceNameList, buffer);
+			PrintStringListOn(this.SourceNameList, buffer);
 			buffer.Append(",\n");
 			buffer.Append("  \"mappings\": \"");
 			buffer.Append(mappingsBuffer);
-			buffer.Append("\"\n}\n");
+            buffer.Append("\"");
+            if (sourcesContent != null)
+		    {
+                buffer.Append(",\n");
+                buffer.Append("  \"sourcesContent\": ");
+                buffer.Append(JsonConvert.SerializeObject(sourcesContent));
+            }
+
+			buffer.Append("\n}\n");
 			return buffer.ToString();
 		}
 
@@ -96,10 +105,10 @@ namespace Bridge.Translator
 			_previousSourceLine = sourceLocation.Line;
 			_previousSourceColumn = sourceLocation.Column;
 			string sourceUrl = sourceLocation.SourceUrl;
-			_previousSourceUrlIndex = IndexOf(_sourceUrlList, sourceUrl, _sourceUrlMap);
+			_previousSourceUrlIndex = IndexOf(this.SourceUrlList, sourceUrl, _sourceUrlMap);
 			string sourceName = sourceLocation.SourceName;
 			if (sourceName != null) {
-				_previousSourceNameIndex = IndexOf(_sourceNameList, sourceName, _sourceNameMap);
+				_previousSourceNameIndex = IndexOf(this.SourceNameList, sourceName, _sourceNameMap);
 			}
 		}
 
@@ -108,7 +117,7 @@ namespace Bridge.Translator
 				return true;
 			}
 
-			int sourceUrlIndex = IndexOf(_sourceUrlList, sourceLocation.SourceUrl, _sourceUrlMap);
+			int sourceUrlIndex = IndexOf(this.SourceUrlList, sourceLocation.SourceUrl, _sourceUrlMap);
 
 			return sourceUrlIndex == _previousSourceUrlIndex &&
 			       sourceLocation.Line == _previousSourceLine &&
@@ -208,13 +217,13 @@ namespace Bridge.Translator
 			int sourceColumn = entry.SourceLocation.Column;
 			string sourceName = entry.SourceLocation.SourceName;
 
-			int sourceUrlIndex = IndexOf(_sourceUrlList, sourceUrl, _sourceUrlMap);
+			int sourceUrlIndex = IndexOf(this.SourceUrlList, sourceUrl, _sourceUrlMap);
 			EncodeVLQ(output, sourceUrlIndex - _previousSourceUrlIndex);
 			EncodeVLQ(output, sourceLine - _previousSourceLine);
 			EncodeVLQ(output, sourceColumn - _previousSourceColumn);
 
 			if (sourceName != null) {
-				int sourceNameIndex = IndexOf(_sourceNameList, sourceName, _sourceNameMap);
+				int sourceNameIndex = IndexOf(this.SourceNameList, sourceName, _sourceNameMap);
 				EncodeVLQ(output, sourceNameIndex - _previousSourceNameIndex);
 			}
 

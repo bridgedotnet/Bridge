@@ -530,6 +530,12 @@ namespace Bridge.Translator
             set;
         }
 
+        public int SourceFileNameIndex
+        {
+            get;
+            set;
+        }
+
         public string LastSequencePoint
         {
             get;

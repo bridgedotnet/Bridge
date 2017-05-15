@@ -37,6 +37,8 @@ namespace Bridge.Translator
 
             foreach (var variable in this.VariableDeclarationStatement.Variables)
             {
+                this.WriteSourceMapName(variable.Name);
+
                 var varName = this.AddLocal(variable.Name, variable, this.VariableDeclarationStatement.Type);
 
                 if (variable.Initializer != null && !variable.Initializer.IsNull && variable.Initializer.ToString().Contains(JS.Vars.FIX_ARGUMENT_NAME))

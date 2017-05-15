@@ -268,6 +268,12 @@ namespace Bridge.Contract
             set;
         }
 
+        int SourceFileNameIndex
+        {
+            get;
+            set;
+        }
+
         string LastSequencePoint
         {
             get;

@@ -15,6 +15,7 @@ namespace Bridge.Translator
             this.TopOutput = new StringBuilder();
             this.BottomOutput = new StringBuilder();
             this.ModuleDependencies = new Dictionary<string, List<IPluginDependency>>();
+            this.Names = new List<string>();
         }
 
         public string FileName
@@ -65,6 +66,11 @@ namespace Bridge.Translator
             {
                 return this.FileName == AssemblyInfo.DEFAULT_FILENAME;
             }
+        }
+
+        public List<string> Names
+        {
+            get; set;
         }
     }
 

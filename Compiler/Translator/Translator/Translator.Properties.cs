@@ -131,6 +131,12 @@ namespace Bridge.Translator
             protected set;
         }
 
+        public IEmitterOutputs EmitterOutputs
+        {
+            get;
+            set;
+        }
+
         public IPlugins Plugins
         {
             get;
