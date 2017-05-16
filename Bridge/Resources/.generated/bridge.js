@@ -2575,7 +2575,6 @@
 
             Class.$$name = className;
             Object.defineProperty(Class, "name", { value: className });
-            Object.defineProperty(Class.constructor, "name", { value: className });
             Class.$kind = prop.$kind;
 
             if (gCfg && isGenericInstance) {
