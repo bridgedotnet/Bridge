@@ -98,27 +98,23 @@
             var tcs = new System.Threading.Tasks.TaskCompletionSource();
 
             try {
-                var array = buffer.getArray(),
-                    data;
-
-                switch (messageType) {
-                case "binary":
-                    data = new ArrayBuffer(array.length);
-                    var dataView = new Int8Array(data);
-
-                    for (var i = 0; i < array.length; i++) {
-                        dataView[i] = array[i];
-                    }
-
-                    break;
-                case "text":
-                    data = String.fromCharCode.apply(null, array);
-                    break;
-                }
-
                 if (messageType === "close") {
                     this.socket.close();
                 } else {
+                    var array = buffer.getArray(),
+                        count = buffer.getCount(),
+                        offset = buffer.getOffset();
+ 
+                    var data = new Uint8Array(count);
+
+                    for (var i = 0; i < count; i++) {
+                        data[i] = array[i + offset];
+                    }
+
+                    if (messageType === "text") {
+                        data = String.fromCharCode.apply(null, data);
+                    }
+ 
                     this.socket.send(data);
                 }
 

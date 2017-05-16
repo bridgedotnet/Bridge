@@ -11,8 +11,6 @@
 Compile your C#...
 
 ```csharp
-using System;
-
 class Program
 {
     static void Main(string[] args)
@@ -27,25 +25,21 @@ class Program
 into JavaScript
 
 ```js
-Bridge.assembly("Demo", function ($asm, globals) {
-    "use strict";
+Bridge.define("Program", {
+    main: function Main(args) {
+        var msg = "Hello, world!";
 
-    Bridge.define("Program", {
-        $main: function (args) {
-            var msg = "Hello, world!";
-
-            Bridge.Console.log(msg);
-        }
-    });
+        System.Console.WriteLine(msg);
+    }
 });
 ```
 
-Run the sample above at [Deck.NET](http://deck.net/5c58693ae7b44ac969f576545cac7f0c).
+Run the sample above at [Deck.NET](https://deck.net/5c58693ae7b44ac969f576545cac7f0c).
 
 ## TL;DR
 
 * Read the [Getting Started](https://github.com/bridgedotnet/Bridge/wiki) Knowledge Base article
-* Try [Deck](http://deck.net/) if you want to play
+* Try [Deck](https://deck.net/) if you want to play
 * Installation:
   * Add **Bridge.NET** Visual Studio extension, or 
   * Use [NuGet](https://www.nuget.org/packages/bridge) to install into a C# Class Library project (`Install-Package Bridge`), or
@@ -61,13 +55,13 @@ Run the sample above at [Deck.NET](http://deck.net/5c58693ae7b44ac969f576545cac7
 
 A great place to start if you're new to Bridge is reviewing the [Getting Started](https://github.com/bridgedotnet/Bridge/wiki) wiki.
 
-The easiest place to see Bridge in action is [Deck.NET](http://deck.net/). 
+The easiest place to see Bridge in action is [Deck.NET](https://deck.net/). 
 
 ## Sample
 
 The following code sample demonstrates a simple **App.cs** class that will run automatically on page load and write a message to the Bridge Console.
 
-**Example ([Deck](http://deck.net/7fb39e336182bea04c695ab43379cd8c))**
+**Example ([Deck](https://deck.net/7fb39e336182bea04c695ab43379cd8c))**
 
 ```csharp
 public class Program
@@ -82,14 +76,10 @@ public class Program
 The C# class above will be compiled into JavaScript and added to **/Bridge/ouput/demo.js** within your project. By default, Bridge will use the Namespace name as the file name. In this case: **demo.js**. There are many options to control the output of your JavaScript files, and the [Attribute Reference](https://github.com/bridgedotnet/Bridge/wiki/attribute-reference) is important [documentation](https://github.com/bridgedotnet/Bridge/wiki) to review.
 
 ```javascript
-Bridge.assembly("Demo", function ($asm, globals) {
-    "use strict";
-
-    Bridge.define("Demo.Program", {
-        $main: function () {
-            Bridge.Console.log("Hello World!");
-        }
-    });
+Bridge.define("Demo.Program", {
+    main: function Main() {
+        System.Console.WriteLine("Hello World!");
+    }
 });
 ```
 

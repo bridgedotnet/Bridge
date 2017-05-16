@@ -183,3 +183,19 @@ QUnit.test("#2493", function (assert) {
     assert.equal(op3.Add(1), 4)
 });
 
+QUnit.test("#2653", function (assert) {
+    var z = new TypeScript.Issues.N2653Zig();
+    var r = z.zag();
+    assert.equal(r, 1);
+});
+
+QUnit.test("#2661", function (assert) {
+    var c = new TypeScript.Issues.N2661C();
+    c.fn = function (x: TypeScript.Issues.N2661C) { return x.fn; };
+
+    var fn1 = c.fn;
+    var fn2 = c.fn(c);
+
+    assert.equal(fn1, fn2);
+});
+

@@ -217,7 +217,7 @@ namespace Bridge.Contract
 
                 if (member != null)
                 {
-                    return !(bool) member.ConstantValue;
+                    return !(bool)member.ConstantValue;
                 }
 
                 return true;
@@ -568,10 +568,10 @@ namespace Bridge.Contract
 
         public static string GetEventRef(CustomEventDeclaration property, IEmitter emitter, bool remove = false, bool noOverload = false, bool ignoreInterface = false, bool withoutTypeParams = false)
         {
-            ResolveResult resolveResult = emitter.Resolver.ResolveNode(property, emitter) as MemberResolveResult;
-            if (resolveResult != null && ((MemberResolveResult)resolveResult).Member != null)
+            MemberResolveResult resolveResult = emitter.Resolver.ResolveNode(property, emitter) as MemberResolveResult;
+            if (resolveResult != null && resolveResult.Member != null)
             {
-                return GetEventRef(((MemberResolveResult)resolveResult).Member, emitter, remove, noOverload, ignoreInterface);
+                return GetEventRef(resolveResult.Member, emitter, remove, noOverload, ignoreInterface, withoutTypeParams);
             }
 
             if (!noOverload)
@@ -617,7 +617,7 @@ namespace Bridge.Contract
             }
 
             string name;
-            
+
             if (!noOverload)
             {
                 var overloads = OverloadsCollection.Create(emitter, property, isSetter);
@@ -680,7 +680,7 @@ namespace Bridge.Contract
             {
                 skipPrefix = false;
             }
-            
+
             if (!noOverload)
             {
                 var overloads = OverloadsCollection.Create(emitter, property, isSetter);
@@ -1184,7 +1184,7 @@ namespace Bridge.Contract
 
             var at = m.Parameters[0].Type as ArrayType;
             return at != null && at.Dimensions == 1 && at.ElementType.IsKnownType(KnownTypeCode.String);
-                // The single parameter must be a one-dimensional array of strings.
+            // The single parameter must be a one-dimensional array of strings.
         }
 
         public static bool IsTypeParameterType(IType type)
@@ -1286,6 +1286,48 @@ namespace Bridge.Contract
         public static bool IsReservedStaticName(string name)
         {
             return JS.Reserved.StaticNames.Any(n => String.Equals(name, n, StringComparison.InvariantCultureIgnoreCase));
+        }
+
+        public static string GetFunctionName(NamedFunctionMode mode, IMember member, IEmitter emitter, bool isSetter = false)
+        {
+            var overloads = OverloadsCollection.Create(emitter, member, isSetter);
+            string name = null;
+            switch (mode)
+            {
+                case NamedFunctionMode.None:
+                    break;
+                case NamedFunctionMode.Name:
+                    name = overloads.GetOverloadName(false, null, true);
+                    break;
+                case NamedFunctionMode.FullName:
+                    var td = member.DeclaringTypeDefinition;
+                    name = td != null ? BridgeTypes.ToJsName(td, emitter, true) : "";
+                    name = name.Replace(".", "_");
+                    name += "_" + overloads.GetOverloadName(false, null, true);
+                    break;
+                case NamedFunctionMode.ClassName:
+                    var t = member.DeclaringType;
+                    name = BridgeTypes.ToJsName(t, emitter, true, true);
+                    name = name.Replace(".", "_");
+                    name += "_" + overloads.GetOverloadName(false, null, true);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            if (name != null)
+            {
+                if (member is IProperty)
+                {
+                    name = name + "_" + (isSetter ? "set" : "get");
+                }
+                else if (member is IEvent)
+                {
+                    name = name + "_" + (isSetter ? "remove" : "add");
+                }
+            }
+
+            return name;
         }
     }
 }

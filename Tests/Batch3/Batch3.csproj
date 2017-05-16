@@ -278,6 +278,7 @@
     <Compile Include="BridgeIssues\1300\N1381.cs" />
     <Compile Include="BridgeIssues\1300\N1385.cs" />
     <Compile Include="BridgeIssues\1300\N1389.cs" />
+    <Compile Include="BridgeIssues\1300\N1390.cs" />
     <Compile Include="BridgeIssues\1300\N1391.cs" />
     <Compile Include="BridgeIssues\1400\N1402.cs" />
     <Compile Include="BridgeIssues\1400\N1410.cs" />
@@ -324,6 +325,7 @@
     <Compile Include="BridgeIssues\1500\N1579.cs" />
     <Compile Include="BridgeIssues\1500\N1599.cs" />
     <Compile Include="BridgeIssues\1600\N1600.cs" />
+    <Compile Include="BridgeIssues\1600\N1627.cs" />
     <Compile Include="BridgeIssues\1600\N1641.cs" />
     <Compile Include="BridgeIssues\1600\N1653.cs" />
     <Compile Include="BridgeIssues\1600\N1684.cs" />
@@ -538,6 +540,7 @@
     <Compile Include="BridgeIssues\2500\N2523.cs" />
     <Compile Include="BridgeIssues\2500\N2525.cs" />
     <Compile Include="BridgeIssues\2500\N2538.cs" />
+    <Compile Include="BridgeIssues\2500\N2550.cs" />
     <Compile Include="BridgeIssues\2500\N2558.cs" />
     <Compile Include="BridgeIssues\2500\N2565.cs" />
     <Compile Include="BridgeIssues\2500\N2571.cs" />
@@ -546,6 +549,20 @@
     <Compile Include="BridgeIssues\2500\N2587.cs" />
     <Compile Include="BridgeIssues\2500\N2591.cs" />
     <Compile Include="BridgeIssues\2500\N2592.cs" />
+    <Compile Include="BridgeIssues\2600\N2610.cs" />
+    <Compile Include="BridgeIssues\2600\N2614.cs" />
+    <Compile Include="BridgeIssues\2600\N2632.cs" />
+    <Compile Include="BridgeIssues\2600\N2633.cs" />
+    <Compile Include="BridgeIssues\2600\N2635.cs" />
+    <Compile Include="BridgeIssues\2600\N2636.cs" />
+    <Compile Include="BridgeIssues\2600\N2638A.cs" />
+    <Compile Include="BridgeIssues\2600\N2638.cs" />
+    <Compile Include="BridgeIssues\2600\N2641.cs" />
+    <Compile Include="BridgeIssues\2600\N2644.cs" />
+    <Compile Include="BridgeIssues\2600\N2657.cs" />
+    <Compile Include="BridgeIssues\2600\N2667.cs" />
+    <Compile Include="BridgeIssues\2600\N2671.cs" />
+    <Compile Include="BridgeIssues\2600\N2679.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
     <Compile Include="Utilities\DecimalHelper.cs" />

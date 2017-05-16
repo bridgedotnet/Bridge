@@ -149,16 +149,18 @@ namespace Bridge.Translator
         private Stack<IType> activeTypes;
         private Dictionary<IType, IList<ITypeInfo>> cacheParents = new Dictionary<IType, IList<ITypeInfo>>();
 
-        public IList<ITypeInfo> GetParents(IType type, IList<ITypeInfo> list = null, bool includeSelf = false)
+        public IList<ITypeInfo> GetParents(IType type, List<ITypeInfo> list = null)
         {
             IList<ITypeInfo> result;
 
             if (this.cacheParents.TryGetValue(type, out result))
             {
+                list?.AddRange(result);
                 return result;
             }
 
-            if (list == null)
+            bool endPoint = list == null;
+            if (endPoint)
             {
                 activeTypes = new Stack<IType>();
                 list = new List<ITypeInfo>();
@@ -178,7 +180,7 @@ namespace Bridge.Translator
             {
                 var bType = BridgeTypes.Get(t, true);
 
-                if (bType != null && bType.TypeInfo != null && (includeSelf || bType.Type != typeDef))
+                if (bType?.TypeInfo != null && !bType.Type.Equals(typeDef))
                 {
                     list.Add(bType.TypeInfo);
                 }
@@ -187,17 +189,20 @@ namespace Bridge.Translator
                 {
                     foreach (var typeArgument in t.TypeArguments)
                     {
-                        this.GetParents(typeArgument, list, true);
+                        bType = BridgeTypes.Get(typeArgument, true);
+                        if (bType?.TypeInfo != null && !bType.Type.Equals(typeDef))
+                        {
+                            list.Add(bType.TypeInfo);
+                        }
+
+                        this.GetParents(typeArgument, list);
                     }
                 }
             }
 
             activeTypes.Pop();
-            list = includeSelf ? list : list.Distinct().ToList();
-            if (!includeSelf)
-            {
-                cacheParents[type] = list;
-            }
+            list = list.Distinct().ToList();
+            cacheParents[type] = list;
 
             return list;
         }

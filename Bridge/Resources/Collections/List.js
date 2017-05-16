@@ -38,7 +38,7 @@
                 "contains", "System$Collections$IList$contains",
                 "copyTo", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$copyTo",
                 "copyTo", "System$Collections$ICollection$copyTo",
-                "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator",
+                "getEnumerator", ["System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator", "System$Collections$Generic$IEnumerable$1$getEnumerator"],
                 "getEnumerator", "System$Collections$IEnumerable$getEnumerator",
                 "indexOf", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf",
                 "indexOf", "System$Collections$IList$indexOf",
@@ -350,6 +350,16 @@
                 }
 
                 return list;
+            },
+
+            forEach: function(action) {
+                if (action == null) {
+                    throw new System.ArgumentNullException("action");
+                }
+ 
+                for (var i = 0; i < this.items.length; i++) {
+                    action(this.items[i]);
+                }
             }
         };
     });

@@ -23,10 +23,10 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                 o = Bridge.box(box1, Test.BridgeIssues.N2318.N2318.JustEnum, $box_.Test.BridgeIssues.N2318.N2318.JustEnum.toString);
                 o = Bridge.box(box2, System.Boolean, $box_.System.Boolean.toString);
                 o = Bridge.box(box3, System.DateTime, $box_.System.DateTime.toString);
-                o = Bridge.box(box4, System.Char, $box_.System.Char.toString);
+                o = Bridge.box(box4, System.Char, $box_.System.Char.toString, $box_.System.Char.getHashCode);
                 o = Bridge.box(box5, System.Byte);
-                o = Bridge.box(box6, System.Double, $box_.System.Double.toString);
-                o = Bridge.box(box7, System.Single, $box_.System.Single.toString);
+                o = Bridge.box(box6, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode);
+                o = Bridge.box(box7, System.Single, $box_.System.Single.toString, $box_.System.Single.getHashCode);
                 o = Bridge.box(box8, System.Int16);
                 o = Bridge.box(box9, System.Int32);
                 o = Bridge.box(box10, System.SByte);

@@ -1,7 +1,7 @@
 /**
  * Bridge Test library - a common classes shared across all test Batches
  * @version 1.2.3.4
- * @compiler Bridge.NET 16.0.0
+ * @compiler Bridge.NET 16.0.0-beta
  */
 Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
     "use strict";
@@ -19,13 +19,18 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
     Bridge.define("Bridge.ClientTestHelper.HtmlHelper", {
         statics: {
             fields: {
-                TEST_FIXTURE_ELEMENT: "qunit-fixture"
+                TEST_FIXTURE_ELEMENT: null
             },
             props: {
                 FixtureElement: {
                     get: function () {
                         return document.getElementById(Bridge.ClientTestHelper.HtmlHelper.TEST_FIXTURE_ELEMENT);
                     }
+                }
+            },
+            ctors: {
+                init: function () {
+                    this.TEST_FIXTURE_ELEMENT = "qunit-fixture";
                 }
             }
         }

@@ -1,5 +1,4 @@
-﻿using Bridge.Linq;
-using Bridge.Test.NUnit;
+﻿using Bridge.Test.NUnit;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -187,14 +186,6 @@ namespace Bridge.ClientTest.Batch2.BridgeIssues
         }
 
         [Test]
-        public void ForeachWithArrayCallbackWorks()
-        {
-            string result = "";
-            new[] { "a", "b", "c" }.ForEach((s, i) => result += s + i);
-            Assert.AreEqual("a0b1c2", result);
-        }
-
-        [Test]
         public void IndexOfWithoutStartIndexWorks()
         {
             Assert.AreEqual(1, new[] { "a", "b", "c", "b" }.IndexOf("b"));
@@ -204,8 +195,8 @@ namespace Bridge.ClientTest.Batch2.BridgeIssues
         public void IndexOfWithoutStartIndexUsesEqualsMethod()
         {
             var arr = new[] { new C(1), new C(2), new C(3) };
-            Assert.AreEqual(1, arr.IndexOf(new C(2)));
-            Assert.AreEqual(-1, arr.IndexOf(new C(4)));
+            Assert.AreEqual(1, Array.IndexOf(arr, new C(2)));
+            Assert.AreEqual(-1, Array.IndexOf(arr, new C(4)));
         }
 
         [Test]
@@ -417,8 +408,8 @@ namespace Bridge.ClientTest.Batch2.BridgeIssues
         public void IListIndexOfUsesEqualsMethod()
         {
             var arr = new[] { new C(1), new C(2), new C(3) };
-            Assert.AreEqual(1, arr.IndexOf(new C(2)));
-            Assert.AreEqual(-1, arr.IndexOf(new C(4)));
+            Assert.AreEqual(1, Array.IndexOf(arr, new C(2)));
+            Assert.AreEqual(-1, Array.IndexOf(arr, new C(4)));
         }
 
         [Test]

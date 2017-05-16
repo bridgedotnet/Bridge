@@ -1,9 +1,9 @@
 /**
  * Bridge Test library - special tests with custom config options like useTypedArrays
- * @version 16.0.0
+ * @version 16.0.0-beta
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2017 Object.NET, Inc.
- * @compiler Bridge.NET 16.0.0
+ * @compiler Bridge.NET 16.0.0-beta
  */
 Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
     "use strict";
@@ -53,10 +53,10 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
                 var i3 = null;
 
                 Bridge.Test.NUnit.Assert.AreStrictEqual(0, ($t13 = i1, $t13 !== null ? $t13 : i2));
-                Bridge.Test.NUnit.Assert.AreStrictEqual(0, Bridge.unbox(($t14 = i1, $t14 !== null ? Bridge.box($t14, System.Int32, $box_.System.Nullable$1.toString) : o2)));
+                Bridge.Test.NUnit.Assert.AreStrictEqual(0, Bridge.unbox(($t14 = i1, $t14 !== null ? Bridge.box($t14, System.Int32, System.Nullable.toString, System.Nullable.getHashCode) : o2)));
                 Bridge.Test.NUnit.Assert.AreStrictEqual(0, ($t15 = i1, $t15 !== null ? $t15 : 1));
                 Bridge.Test.NUnit.Assert.AreStrictEqual(1, ($t16 = i3, $t16 !== null ? $t16 : i2));
-                Bridge.Test.NUnit.Assert.AreStrictEqual("test", Bridge.unbox(($t17 = i3, $t17 !== null ? Bridge.box($t17, System.Int32, $box_.System.Nullable$1.toString) : o2)));
+                Bridge.Test.NUnit.Assert.AreStrictEqual("test", Bridge.unbox(($t17 = i3, $t17 !== null ? Bridge.box($t17, System.Int32, System.Nullable.toString, System.Nullable.getHashCode) : o2)));
                 Bridge.Test.NUnit.Assert.AreStrictEqual(1, ($t18 = i3, $t18 !== null ? $t18 : 1));
                 Bridge.Test.NUnit.Assert.AreStrictEqual(1, ($t19 = null, $t19 !== null ? $t19 : i2));
             }
@@ -289,20 +289,13 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
                     });
                 Bridge.Test.NUnit.Assert.AreEqual("abc", result);
             },
-            ForeachWithArrayCallbackWorks: function () {
-                var result = "";
-                Bridge.Linq.Enumerable.from(System.Array.init(["a", "b", "c"], System.String)).forEach(function (s, i) {
-                        result = System.String.concat(result, (System.String.concat(s, i)));
-                    });
-                Bridge.Test.NUnit.Assert.AreEqual("a0b1c2", result);
-            },
             IndexOfWithoutStartIndexWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual(1, System.Array.init(["a", "b", "c", "b"], System.String).indexOf("b"));
             },
             IndexOfWithoutStartIndexUsesEqualsMethod: function () {
                 var arr = System.Array.init([new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(1), new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(2), new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(3)], Bridge.ClientTest.Batch2.BridgeIssues.N772.C);
-                Bridge.Test.NUnit.Assert.AreEqual(1, Bridge.Linq.Enumerable.from(arr).indexOf(new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(2)));
-                Bridge.Test.NUnit.Assert.AreEqual(-1, Bridge.Linq.Enumerable.from(arr).indexOf(new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(4)));
+                Bridge.Test.NUnit.Assert.AreEqual(1, System.Array.indexOfT(arr, new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(2)));
+                Bridge.Test.NUnit.Assert.AreEqual(-1, System.Array.indexOfT(arr, new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(4)));
             },
             IndexOfWithStartIndexWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual(3, System.Array.init(["a", "b", "c", "b"], System.String).indexOf("b", 2));
@@ -452,8 +445,8 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
             },
             IListIndexOfUsesEqualsMethod: function () {
                 var arr = System.Array.init([new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(1), new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(2), new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(3)], Bridge.ClientTest.Batch2.BridgeIssues.N772.C);
-                Bridge.Test.NUnit.Assert.AreEqual(1, Bridge.Linq.Enumerable.from(arr).indexOf(new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(2)));
-                Bridge.Test.NUnit.Assert.AreEqual(-1, Bridge.Linq.Enumerable.from(arr).indexOf(new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(4)));
+                Bridge.Test.NUnit.Assert.AreEqual(1, System.Array.indexOfT(arr, new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(2)));
+                Bridge.Test.NUnit.Assert.AreEqual(-1, System.Array.indexOfT(arr, new Bridge.ClientTest.Batch2.BridgeIssues.N772.C(4)));
             },
             IListInsertWorks: function () {
                 var l = System.Array.init(["x", "y", "z"], System.String);
@@ -510,7 +503,7 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
     Bridge.define("Bridge.ClientTest.Batch2.BridgeIssues.N772.TestReverseComparer", {
         inherits: [System.Collections.Generic.IComparer$1(System.Int32)],
         alias: [
-            "compare", "System$Collections$Generic$IComparer$1$System$Int32$compare"
+            "compare", ["System$Collections$Generic$IComparer$1$System$Int32$compare", "System$Collections$Generic$IComparer$1$compare"]
         ],
         methods: {
             compare: function (x, y) {
@@ -1612,18 +1605,17 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
     Bridge.define("Bridge.ClientTest.Batch2.Constants", {
         statics: {
             fields: {
-                BATCH_NAME: "Batch2",
-                MODULE_ISSUES: "Issues2",
-                MODULE_CHECKED_UNCKECKED: "Checked/Unckecked"
+                BATCH_NAME: null,
+                MODULE_ISSUES: null,
+                MODULE_CHECKED_UNCKECKED: null
+            },
+            ctors: {
+                init: function () {
+                    this.BATCH_NAME = "Batch2";
+                    this.MODULE_ISSUES = "Issues2";
+                    this.MODULE_CHECKED_UNCKECKED = "Checked/Unckecked";
+                }
             }
         }
-    });
-
-    var $box_ = {};
-
-    Bridge.ns("System.Nullable$1", $box_);
-
-    Bridge.apply($box_.System.Nullable$1, {
-        toString: function (obj) {return System.Nullable.toString(obj);}
     });
 });

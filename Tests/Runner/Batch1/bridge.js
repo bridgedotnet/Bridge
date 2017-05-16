@@ -1,7 +1,7 @@
 /**
- * @version   : 16.0.0 - Bridge.NET
+ * @version   : 16.0.0-beta - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2017-01-16
+ * @date      : 2017-05-01
  * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
  */
@@ -31,7 +31,18 @@
                 return name1;
             }
 
-            return name2;
+            if (name2 && Bridge.hasValue(scope[name2])) {
+                return name2;
+            }
+
+            var name = name2 || name1;
+            var idx = name.lastIndexOf("$");
+
+            if (/\$\d+$/g.test(name)) {
+                idx = name.lastIndexOf("$", idx - 1);
+            }
+
+            return name.substr(idx + 1);
         },
 
         box: function (v, T, toStr, hashCode) {
@@ -272,16 +283,6 @@
                         this.$init[backingField] = value;
                     };
                 })(cfg, scope, backingField, v);
-            }
-
-            var isFF = Bridge.Browser.firefoxVersion > 0
-
-            if (!alias && cfg.get) {
-                Object.defineProperty(cfg.get, isFF ? "displayName" : "name", { value: cls.$$name + "." + name + ".get", writable: true });
-            }
-
-            if (!alias && cfg.set) {
-                Object.defineProperty(cfg.set, isFF ? "displayName" : "name", { value: cls.$$name + "." + name + ".set", writable: true });
             }
 
             Object.defineProperty(scope, name, cfg);
@@ -1010,6 +1011,10 @@
                 return obj[name]();
             }
 
+            if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IEnumerable$1$getEnumerator"])) {
+                return obj[name]();
+            }
+
             if (Bridge.isFunction(obj[name = "System$Collections$IEnumerable$getEnumerator"])) {
                 return obj[name]();
             }
@@ -1297,6 +1302,10 @@
                 return a[name](b);
             }
 
+            if (T && Bridge.isFunction(a[name = "System$IComparable$1$compareTo"])) {
+                return a[name](b);
+            }
+
             if (Bridge.isFunction(a[name = "System$IComparable$compareTo"])) {
                 return a[name](b);
             }
@@ -1306,6 +1315,10 @@
             }
 
             if (T && Bridge.isFunction(b[name = "System$IComparable$1$" + Bridge.getTypeAlias(T) + "$compareTo"])) {
+                return -b[name](a);
+            }
+
+            if (T && Bridge.isFunction(b[name = "System$IComparable$1$compareTo"])) {
                 return -b[name](a);
             }
 
@@ -1794,6 +1807,10 @@
     globals.Bridge = core;
     globals.Bridge.caller = [];
 
+    if (globals.console) {
+        globals.Bridge.Console = globals.console;
+    }
+
     globals.System = {};
     globals.System.Diagnostics = {};
     globals.System.Diagnostics.Contracts = {};
@@ -2258,20 +2275,24 @@
                             }
                         }
 
-                        if (descriptor != null) {
-                            Object.defineProperty(obj, alias, descriptor);
-                            aliases.push({alias: alias, descriptor: descriptor});
-                        } else {
-                            var m = scope[name];
+                        var arr = Array.isArray(alias) ? alias : [alias];
+                        for (var j = 0; j < arr.length; j++) {
+                            alias = arr[j];
 
-                            if (m === undefined && prototype) {
-                                m = prototype[name];
+                            if (descriptor != null) {
+                                Object.defineProperty(obj, alias, descriptor);
+                                aliases.push({ alias: alias, descriptor: descriptor });
+                            } else {
+                                var m = scope[name];
+
+                                if (m === undefined && prototype) {
+                                    m = prototype[name];
+                                }
+
+                                scope[alias] = m;
+                                aliases.push({ fn: name, alias: alias });
                             }
-
-                            scope[alias] = m;
-                            aliases.push({ fn: name, alias: alias });
                         }
-                        
                     })(statics ? scope : prototype, config.alias[i], config.alias[i + 1], cls);
 
                     i++;
@@ -2628,8 +2649,7 @@
 
             prop.$initialize = Bridge.Class._initialize;
 
-            var keys = [],
-                isFF = Bridge.Browser.firefoxVersion > 0;
+            var keys = [];
 
             for (name in prop) {
                 keys.push(name);
@@ -2655,10 +2675,6 @@
                 } else {
                     prototype[ctorName] = member;
                 }
-
-                if (typeof member === "function" && name !== "$main") {
-                    Object.defineProperty(member, isFF ? "displayName" : "name", { value: className + "." + name, writable: true });
-                }
             }
 
             prototype.$$name = className;
@@ -2674,10 +2690,6 @@
                         Class["$ctor"] = member;
                     } else {
                         Class[name] = member;
-                    }
-
-                    if (typeof member === "function") {
-                        Object.defineProperty(member, isFF ? "displayName" : "name", { value: className + "." + name, writable: true });
                     }
                 }
             }
@@ -3253,9 +3265,9 @@
 
     // @source systemAssemblyVersion.js
 
-    Bridge.init(function (){
-        Bridge.SystemAssembly.version = "16.0.0";
-        Bridge.SystemAssembly.compiler = "16.0.0";
+    Bridge.init(function () {
+        Bridge.SystemAssembly.version = "16.0.0-beta";
+        Bridge.SystemAssembly.compiler = "16.0.0-beta";
     });
 
     Bridge.define("Bridge.Utils.SystemAssemblyVersion");
@@ -3381,7 +3393,7 @@
                 } else {
                     var raw = {},
                         ignoreMetaData = type === System.Object || type === Object || type.$literal || type.$kind === "anonymous",
-                        nometa = !type.$metadata;
+                        nometa = !Bridge.getMetadata(type);
 
                     if (!ignoreMetaData && nometa) {
                         throw new System.InvalidOperationException(Bridge.getTypeName(type) + " is not reflectable and cannot be serialized.");
@@ -3402,21 +3414,22 @@
                             }
                         }
                     } else {
-                        var fields = Bridge.Reflection.getMembers(type, 4, 20);
-
-                        for (i = 0; i < fields.length; i++) {
-                            raw[fields[i].n] = Bridge.Json.serialize(Bridge.Reflection.fieldAccess(fields[i], obj), settings, true, fields[i].rt);
-                        }
-
-                        var properties = Bridge.Reflection.getMembers(type, 16, 20),
+                        var fields = Bridge.Reflection.getMembers(type, 4, 20),
                             camelCase = settings && settings.CamelCasePropertyNames;
 
+                        for (i = 0; i < fields.length; i++) {
+                            var f = fields[i],
+                                fname = camelCase ? (f.n.charAt(0).toLowerCase() + f.n.substr(1)) : f.n;
+                            raw[fname] = Bridge.Json.serialize(Bridge.Reflection.fieldAccess(f, obj), settings, true, f.rt);
+                        }
+
+                        var properties = Bridge.Reflection.getMembers(type, 16, 20);
+
                         for (i = 0; i < properties.length; i++) {
-                            if (!!properties[i].g) {
-                                var pname = camelCase
-                                    ? (properties[i].n.charAt(0).toLowerCase() + properties[i].n.substr(1))
-                                    : properties[i].n;
-                                raw[pname] = Bridge.Json.serialize(Bridge.Reflection.midel(properties[i].g, obj)(), settings, true, properties[i].rt);
+                            var p = properties[i];
+                            if (!!p.g) {
+                                var pname = camelCase ? (p.n.charAt(0).toLowerCase() + p.n.substr(1)) : p.n;
+                                raw[pname] = Bridge.Json.serialize(Bridge.Reflection.midel(p.g, obj)(), settings, true, p.rt);
                             }
                         }
                     }
@@ -3634,33 +3647,37 @@
 
                     var o = Bridge.createInstance(type);
 
-                    var fields = Bridge.Reflection.getMembers(type, 4, 20),
+                    var camelCase = settings && settings.CamelCasePropertyNames,
+                        fields = Bridge.Reflection.getMembers(type, 4, 20),
                         value,
+                        f,
+                        p,
+                        mname,
                         i;
 
                     for (i = 0; i < fields.length; i++) {
-                        value = raw[fields[i].n];
+                        f = fields[i];
+                        mname = camelCase ? (f.n.charAt(0).toLowerCase() + f.n.substr(1)) : f.n;
+                        value = raw[mname];
 
                         if (value !== undefined) {
-                            Bridge.Reflection.fieldAccess(fields[i], o, Bridge.Json.deserialize(value, fields[i].rt, settings, true));
+                            Bridge.Reflection.fieldAccess(f, o, Bridge.Json.deserialize(value, f.rt, settings, true));
                         }
                     }
 
                     var properties = Bridge.Reflection.getMembers(type, 16, 20);
 
                     for (i = 0; i < properties.length; i++) {
-                        var camelCase = settings && settings.CamelCasePropertyNames,
-                            pname = camelCase
-                                    ? (properties[i].n.charAt(0).toLowerCase() + properties[i].n.substr(1))
-                                    : properties[i].n;
-                        value = raw[pname];
+                        p = properties[i];
+                        mname = camelCase ? (p.n.charAt(0).toLowerCase() + p.n.substr(1)) : p.n;
+                        value = raw[mname];
 
                         if (value !== undefined) {
-                            if (!!properties[i].s) {
-                                Bridge.Reflection.midel(properties[i].s, o)(Bridge.Json.deserialize(value, properties[i].rt, settings, true));
+                            if (!!p.s) {
+                                Bridge.Reflection.midel(p.s, o)(Bridge.Json.deserialize(value, p.rt, settings, true));
                             }
                             else if (type.$kind === "anonymous") {
-                                o[properties[i].n] = Bridge.Json.deserialize(value, properties[i].rt, settings, true);
+                                o[p.n] = Bridge.Json.deserialize(value, p.rt, settings, true);
                             }
                         }
                     }
@@ -4697,8 +4714,20 @@
             return !Bridge.hasValue(a) ? "" : (fn ? fn(a) : a.toString());
         },
 
+        toStringFn: function (fn) {
+            return function(v) {
+                return System.Nullable.toString(v, fn);
+            };
+        },
+
         getHashCode: function (a, fn) {
             return !Bridge.hasValue(a) ? 0 : (fn ? fn(a) : Bridge.getHashCode(a));
+        },
+
+        getHashCodeFn: function (fn) {
+            return function (v) {
+                return System.Nullable.getHashCode(v, fn);
+            };
         },
 
         xor: function (a, b) {
@@ -8606,7 +8635,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
                 var needRemoveDot = false;
 
-                format = format.replace(/(\\.|'[^']*'|"[^"]*"|d{1,4}|M{1,4}|yyyy|yy|y|HH?|hh?|mm?|ss?|tt?|f{1,7}|F{1,7}|z{1,3}|\:|\/)/g,
+                format = format.replace(/(\\.|'[^']*'|"[^"]*"|d{1,4}|M{1,4}|yyyy|yy|y|HH?|hh?|mm?|ss?|tt?|u|f{1,7}|F{1,7}|z{1,3}|\:|\/)/g,
                     function (match, group, index) {
                         var part = match;
 
@@ -8742,6 +8771,8 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                                  needRemoveDot = part.length == 0;
 
                                  break;
+                            
+                            case "u":
                             case "f":
                             case "ff":
                             case "fff":
@@ -8755,7 +8786,12 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                                      part = Array(4 - part.length).join("0") + part;
                                 }
 
-                                part = part.substr(0, match.length);
+                                var ln = match === "u" ? 7 : match.length;
+                                if (part.length < ln) {
+                                    part = part + Array(8 - part.length).join("0");
+                                }
+
+                                part = part.substr(0, ln);
 
                                 break;
                             case "z":
@@ -9370,7 +9406,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
         config: {
             alias: [
-                "compareTo", "System$IComparable$compareTo"
+                "compareTo", ["System$IComparable$compareTo", "System$IComparable$1$compareTo", "System$IComparable$1System$TimeSpan$compareTo"]
             ]
         },
 
@@ -11485,8 +11521,14 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
             if (T) {
                 this["System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$getCurrent$1"] = this.getCurrent;
+                this["System$Collections$Generic$IEnumerator$1$getCurrent$1"] = this.getCurrent;
 
                 Object.defineProperty(this, "System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$Current$1", {
+                    get: this.getCurrent,
+                    enumerable: true
+                });
+
+                Object.defineProperty(this, "System$Collections$Generic$IEnumerator$1$Current$1", {
                     get: this.getCurrent,
                     enumerable: true
                 });
@@ -11565,8 +11607,14 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
             if (T) {
                 this["System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$getCurrent$1"] = this.getCurrent;
+                this["System$Collections$Generic$IEnumerator$1$getCurrent$1"] = this.getCurrent;
 
                 Object.defineProperty(this, "System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$Current$1", {
+                    get: this.getCurrent,
+                    enumerable: true
+                });
+
+                Object.defineProperty(this, "System$Collections$Generic$IEnumerator$1$Current$1", {
                     get: this.getCurrent,
                     enumerable: true
                 });
@@ -11629,8 +11677,8 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
             config: {
                 alias: [
-                    "equals2", "System$Collections$Generic$IEqualityComparer$1$" + Bridge.getTypeAlias(T) + "$equals2",
-                    "getHashCode2", "System$Collections$Generic$IEqualityComparer$1$" + Bridge.getTypeAlias(T) + "$getHashCode2"
+                    "equals2", ["System$Collections$Generic$IEqualityComparer$1$" + Bridge.getTypeAlias(T) + "$equals2", "System$Collections$Generic$IEqualityComparer$1$equals2"],
+                    "getHashCode2", ["System$Collections$Generic$IEqualityComparer$1$" + Bridge.getTypeAlias(T) + "$getHashCode2", "System$Collections$Generic$IEqualityComparer$1$getHashCode2"]
                 ]
             },
 
@@ -11678,6 +11726,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 this.fn = fn;
                 this.compare = fn;
                 this["System$Collections$Generic$IComparer$1$" + Bridge.getTypeAlias(T) + "$compare"] = fn;
+                this["System$Collections$Generic$IComparer$1$compare"] = fn;
             }
         }
     });
@@ -11730,7 +11779,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                     "set", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$setItem",
                     "add", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$add",
                     "containsKey", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$containsKey",
-                    "getEnumerator", "System$Collections$Generic$IEnumerable$1$System$Collections$Generic$KeyValuePair$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getEnumerator",
+                    "getEnumerator", ["System$Collections$Generic$IEnumerable$1$System$Collections$Generic$KeyValuePair$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$getEnumerator", "System$Collections$Generic$IEnumerable$1$getEnumerator"],
                     "remove", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$remove",
                     "tryGetValue", "System$Collections$Generic$IDictionary$2$" + Bridge.getTypeAlias(TKey) + "$" + Bridge.getTypeAlias(TValue) + "$tryGetValue",
                     "getIsReadOnly", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(System.Collections.Generic.KeyValuePair$2(TKey, TValue)) + "$getIsReadOnly",
@@ -12027,7 +12076,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
             config: {
                 alias: [
-                  "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator",
+                  "getEnumerator", ["System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator", "System$Collections$Generic$IEnumerable$1$getEnumerator"],
                   "getCount", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$getCount",
                   "add", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$add",
                   "clear", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$clear",
@@ -12114,7 +12163,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 "contains", "System$Collections$IList$contains",
                 "copyTo", "System$Collections$Generic$ICollection$1$" + Bridge.getTypeAlias(T) + "$copyTo",
                 "copyTo", "System$Collections$ICollection$copyTo",
-                "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator",
+                "getEnumerator", ["System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator", "System$Collections$Generic$IEnumerable$1$getEnumerator"],
                 "getEnumerator", "System$Collections$IEnumerable$getEnumerator",
                 "indexOf", "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$indexOf",
                 "indexOf", "System$Collections$IList$indexOf",
@@ -12426,6 +12475,16 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 }
 
                 return list;
+            },
+
+            forEach: function(action) {
+                if (action == null) {
+                    throw new System.ArgumentNullException("action");
+                }
+ 
+                for (var i = 0; i < this.items.length; i++) {
+                    action(this.items[i]);
+                }
             }
         };
     });
@@ -13727,8 +13786,14 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         inherits: function () { return [System.ICloneable,System.IComparable$1(System.Version),System.IEquatable$1(System.Version)]; },
         statics: {
             fields: {
-                separatorsArray: 46,
-                ZERO_CHAR_VALUE: 48
+                separatorsArray: 0,
+                ZERO_CHAR_VALUE: 0
+            },
+            ctors: {
+                init: function () {
+                    this.separatorsArray = 46;
+                    this.ZERO_CHAR_VALUE = 48;
+                }
             },
             methods: {
                 appendPositiveNumber: function (num, sb) {
@@ -13857,8 +13922,8 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         fields: {
             _Major: 0,
             _Minor: 0,
-            _Build: -1,
-            _Revision: -1
+            _Build: 0,
+            _Revision: 0
         },
         props: {
             Major: {
@@ -13894,10 +13959,14 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         },
         alias: [
             "clone", "System$ICloneable$clone",
-            "compareTo", "System$IComparable$1$System$Version$compareTo",
+            "compareTo", ["System$IComparable$1$System$Version$compareTo", "System$IComparable$1$compareTo"],
             "equalsT", "System$IEquatable$1$System$Version$equalsT"
         ],
         ctors: {
+            init: function () {
+                this._Build = -1;
+                this._Revision = -1;
+            },
             $ctor3: function (major, minor, build, revision) {
                 this.$initialize();
                 if (major < 0) {
@@ -15929,27 +15998,23 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
             var tcs = new System.Threading.Tasks.TaskCompletionSource();
 
             try {
-                var array = buffer.getArray(),
-                    data;
-
-                switch (messageType) {
-                case "binary":
-                    data = new ArrayBuffer(array.length);
-                    var dataView = new Int8Array(data);
-
-                    for (var i = 0; i < array.length; i++) {
-                        dataView[i] = array[i];
-                    }
-
-                    break;
-                case "text":
-                    data = String.fromCharCode.apply(null, array);
-                    break;
-                }
-
                 if (messageType === "close") {
                     this.socket.close();
                 } else {
+                    var array = buffer.getArray(),
+                        count = buffer.getCount(),
+                        offset = buffer.getOffset();
+ 
+                    var data = new Uint8Array(count);
+
+                    for (var i = 0; i < count; i++) {
+                        data[i] = array[i + offset];
+                    }
+
+                    if (messageType === "text") {
+                        data = String.fromCharCode.apply(null, data);
+                    }
+ 
                     this.socket.send(data);
                 }
 
@@ -16193,7 +16258,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
 
             config: {
                 alias: [
-                "getEnumerator", "System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"
+                "getEnumerator", ["System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator", "System$Collections$Generic$IEnumerable$1$getEnumerator"]
                 ]
             },
 
@@ -16201,6 +16266,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                 this.$initialize();
                 this.getEnumerator = action;
                 this["System$Collections$Generic$IEnumerable$1$" + Bridge.getTypeAlias(T) + "$getEnumerator"] = action;
+                this["System$Collections$Generic$IEnumerable$1$getEnumerator"] = action;
             }
         };
     });
@@ -16267,8 +16333,8 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
 					}
 				},
                 alias: [
-					"getCurrent", "System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$getCurrent$1",
-					"Current", "System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$Current$1",
+					"getCurrent", ["System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$getCurrent$1", "System$Collections$Generic$IEnumerator$1$getCurrent$1"],
+					"Current", ["System$Collections$Generic$IEnumerator$1$" + Bridge.getTypeAlias(T) + "$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1"],
 					"Current", "System$Collections$IEnumerator$Current",
 					"dispose", "System$IDisposable$dispose",
 					"moveNext", "System$Collections$IEnumerator$moveNext",
@@ -19294,21 +19360,23 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         $kind: "struct",
         statics: {
             fields: {
-                error1: "Byte array for GUID must be exactly {0} bytes long",
+                error1: null,
                 valid: null,
                 split: null,
                 nonFormat: null,
                 replace: null,
-                rnd: null
+                rnd: null,
+                empty: null
             },
             ctors: {
                 init: function () {
+                    this.empty = new System.Guid();
+                    this.error1 = "Byte array for GUID must be exactly {0} bytes long";
                     this.valid = new System.Text.RegularExpressions.Regex.$ctor1("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", 1);
                     this.split = new System.Text.RegularExpressions.Regex.ctor("^(.{8})(.{4})(.{4})(.{4})(.{12})$");
                     this.nonFormat = new System.Text.RegularExpressions.Regex.$ctor1("^[{(]?([0-9a-f]{8})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{12})[)}]?$", 1);
                     this.replace = new System.Text.RegularExpressions.Regex.ctor("-");
                     this.rnd = new System.Random.ctor();
-                    this.empty = new System.Guid.ctor();
                 }
             },
             methods: {
@@ -19368,7 +19436,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         },
         alias: [
             "equalsT", "System$IEquatable$1$System$Guid$equalsT",
-            "compareTo", "System$IComparable$1$System$Guid$compareTo",
+            "compareTo", ["System$IComparable$1$System$Guid$compareTo", "System$IComparable$1$compareTo"],
             "format", "System$IFormattable$format"
         ],
         ctors: {
@@ -19718,6 +19786,9 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                 }
             },
             ctors: {
+                init: function () {
+                    this.ExitCode = 0;
+                },
                 ctor: function () {
                     System.Environment.variables = new (System.Collections.Generic.Dictionary$2(System.String,System.String))();
                     System.Environment.patchDictionary(System.Environment.variables);
@@ -25736,9 +25807,16 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
     Bridge.define("System.Random", {
         statics: {
             fields: {
-                MBIG: 2147483647,
-                MSEED: 161803398,
+                MBIG: 0,
+                MSEED: 0,
                 MZ: 0
+            },
+            ctors: {
+                init: function () {
+                    this.MBIG = 2147483647;
+                    this.MSEED = 161803398;
+                    this.MZ = 0;
+                }
             }
         },
         fields: {
@@ -25880,11 +25958,12 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         statics: {
             fields: {
                 isLittleEndian: false,
-                arg_ArrayPlusOffTooSmall: "Destination array is not long enough to copy all the items in the collection. Check array index and length."
+                arg_ArrayPlusOffTooSmall: null
             },
             ctors: {
                 init: function () {
                     this.isLittleEndian = System.BitConverter.getIsLittleEndian();
+                    this.arg_ArrayPlusOffTooSmall = "Destination array is not long enough to copy all the items in the collection. Check array index and length.";
                 }
             },
             methods: {
@@ -26175,10 +26254,18 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         inherits: [System.IDisposable],
         statics: {
             fields: {
-                MAX_SUPPORTED_TIMEOUT: 4294967294,
-                EXC_LESS: "Number must be either non-negative and less than or equal to Int32.MaxValue or -1.",
-                EXC_MORE: "Time-out interval must be less than 2^32-2.",
-                EXC_DISPOSED: "The timer has been already disposed."
+                MAX_SUPPORTED_TIMEOUT: 0,
+                EXC_LESS: null,
+                EXC_MORE: null,
+                EXC_DISPOSED: null
+            },
+            ctors: {
+                init: function () {
+                    this.MAX_SUPPORTED_TIMEOUT = 4294967294;
+                    this.EXC_LESS = "Number must be either non-negative and less than or equal to Int32.MaxValue or -1.";
+                    this.EXC_MORE = "Time-out interval must be less than 2^32-2.";
+                    this.EXC_DISPOSED = "The timer has been already disposed.";
+                }
             }
         },
         fields: {

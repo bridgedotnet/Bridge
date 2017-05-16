@@ -127,10 +127,14 @@ namespace Bridge.Translator
                 this.Write(interfaceTempVar);
             }
 
-            var externalInterface = this.Emitter.Validator.IsExternalInterface(resolveResult.Member.DeclaringTypeDefinition);
+            var itypeDef = resolveResult.Member.DeclaringTypeDefinition;
+            var externalInterface = this.Emitter.Validator.IsExternalInterface(itypeDef);
+            bool variance = MetadataUtils.IsJsGeneric(itypeDef, this.Emitter) &&
+                itypeDef.TypeParameters != null &&
+                itypeDef.TypeParameters.Any(typeParameter => typeParameter.Variance != VarianceModifier.Invariant);
 
             this.WriteOpenBracket();
-            if (externalInterface != null && externalInterface.IsDualImplementation)
+            if (externalInterface != null && externalInterface.IsDualImplementation || variance)
             {
                 this.Write(JS.Funcs.BRIDGE_GET_I);
                 this.WriteOpenParentheses();
@@ -153,8 +157,8 @@ namespace Bridge.Translator
 
                 this.WriteComma();
 
-                var interfaceName = OverloadsCollection.Create(Emitter, resolveResult.Member, isSetter).GetOverloadName(false, prefix);
-
+                var interfaceName = Helpers.GetPropertyRef(resolveResult.Member, this.Emitter, isSetter, ignoreInterface:false);
+                
                 if (interfaceName.StartsWith("\""))
                 {
                     this.Write(interfaceName);
@@ -164,19 +168,21 @@ namespace Bridge.Translator
                     this.WriteScript(interfaceName);
                 }
 
-                this.WriteComma();
-                this.WriteScript(
-                    OverloadsCollection.Create(Emitter, resolveResult.Member, isSetter).GetOverloadName(true, prefix));
+                if (variance)
+                {
+                    this.WriteComma();
+                    this.WriteScript(Helpers.GetPropertyRef(resolveResult.Member, this.Emitter, isSetter, ignoreInterface: false, withoutTypeParams:true));
+                }
 
                 this.Write(")");
             }
             else if (externalInterface == null || externalInterface.IsNativeImplementation)
             {
-                this.Write(OverloadsCollection.Create(Emitter, resolveResult.Member, isSetter).GetOverloadName(false, prefix));
+                this.Write(Helpers.GetPropertyRef(resolveResult.Member, this.Emitter, isSetter, ignoreInterface: false));
             }
             else
             {
-                this.Write(OverloadsCollection.Create(Emitter, resolveResult.Member, isSetter).GetOverloadName(true, prefix));
+                this.Write(Helpers.GetPropertyRef(resolveResult.Member, this.Emitter, isSetter, ignoreInterface: true));
             }
 
             this.WriteCloseBracket();
@@ -322,28 +328,42 @@ namespace Bridge.Translator
             if (memberResolveResult.Member.DeclaringTypeDefinition != null &&
                 memberResolveResult.Member.DeclaringTypeDefinition.Kind == TypeKind.Interface)
             {
-                var ei = this.Emitter.Validator.IsExternalInterface(memberResolveResult.Member.DeclaringTypeDefinition);
+                var itypeDef = memberResolveResult.Member.DeclaringTypeDefinition;
+                var variance = MetadataUtils.IsJsGeneric(itypeDef, this.Emitter) &&
+                    itypeDef.TypeParameters != null &&
+                    itypeDef.TypeParameters.Any(typeParameter => typeParameter.Variance != VarianceModifier.Invariant);
 
-                if (ei != null)
+                if (variance)
                 {
-                    nativeImplementation = ei.IsNativeImplementation;
-                    isExternalInterface = true;
+                    isInterfaceMember = true;
                 }
                 else
                 {
-                    nativeImplementation = memberResolveResult.Member.DeclaringTypeDefinition.ParentAssembly.AssemblyName == CS.NS.ROOT ||
-                                           !this.Emitter.Validator.IsExternalType(memberResolveResult.Member.DeclaringTypeDefinition);
-                }
+                    var ei =
+                        this.Emitter.Validator.IsExternalInterface(memberResolveResult.Member.DeclaringTypeDefinition);
 
-                if (ei != null && ei.IsSimpleImplementation)
-                {
-                    nativeImplementation = false;
-                    isExternalInterface = false;
-                }
-                else if (hasTypeParemeter || ei != null && !nativeImplementation)
-                {
-                    isInterfaceMember = true;
-                    writeTargetVar = true;
+                    if (ei != null)
+                    {
+                        nativeImplementation = ei.IsNativeImplementation;
+                        isExternalInterface = true;
+                    }
+                    else
+                    {
+                        nativeImplementation =
+                            memberResolveResult.Member.DeclaringTypeDefinition.ParentAssembly.AssemblyName == CS.NS.ROOT ||
+                            !this.Emitter.Validator.IsExternalType(memberResolveResult.Member.DeclaringTypeDefinition);
+                    }
+
+                    if (ei != null && ei.IsSimpleImplementation)
+                    {
+                        nativeImplementation = false;
+                        isExternalInterface = false;
+                    }
+                    else if (hasTypeParemeter || ei != null && !nativeImplementation)
+                    {
+                        isInterfaceMember = true;
+                        writeTargetVar = true;
+                    }
                 }
             }
 

@@ -2,8 +2,14 @@
         inherits: function () { return [System.ICloneable,System.IComparable$1(System.Version),System.IEquatable$1(System.Version)]; },
         statics: {
             fields: {
-                separatorsArray: 46,
-                ZERO_CHAR_VALUE: 48
+                separatorsArray: 0,
+                ZERO_CHAR_VALUE: 0
+            },
+            ctors: {
+                init: function () {
+                    this.separatorsArray = 46;
+                    this.ZERO_CHAR_VALUE = 48;
+                }
             },
             methods: {
                 appendPositiveNumber: function (num, sb) {
@@ -132,8 +138,8 @@
         fields: {
             _Major: 0,
             _Minor: 0,
-            _Build: -1,
-            _Revision: -1
+            _Build: 0,
+            _Revision: 0
         },
         props: {
             Major: {
@@ -169,10 +175,14 @@
         },
         alias: [
             "clone", "System$ICloneable$clone",
-            "compareTo", "System$IComparable$1$System$Version$compareTo",
+            "compareTo", ["System$IComparable$1$System$Version$compareTo", "System$IComparable$1$compareTo"],
             "equalsT", "System$IEquatable$1$System$Version$equalsT"
         ],
         ctors: {
+            init: function () {
+                this._Build = -1;
+                this._Revision = -1;
+            },
             $ctor3: function (major, minor, build, revision) {
                 this.$initialize();
                 if (major < 0) {

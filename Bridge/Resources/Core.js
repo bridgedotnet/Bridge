@@ -12,7 +12,18 @@
                 return name1;
             }
 
-            return name2;
+            if (name2 && Bridge.hasValue(scope[name2])) {
+                return name2;
+            }
+
+            var name = name2 || name1;
+            var idx = name.lastIndexOf("$");
+
+            if (/\$\d+$/g.test(name)) {
+                idx = name.lastIndexOf("$", idx - 1);
+            }
+
+            return name.substr(idx + 1);
         },
 
         box: function (v, T, toStr, hashCode) {
@@ -253,16 +264,6 @@
                         this.$init[backingField] = value;
                     };
                 })(cfg, scope, backingField, v);
-            }
-
-            var isFF = Bridge.Browser.firefoxVersion > 0
-
-            if (!alias && cfg.get) {
-                Object.defineProperty(cfg.get, isFF ? "displayName" : "name", { value: cls.$$name + "." + name + ".get", writable: true });
-            }
-
-            if (!alias && cfg.set) {
-                Object.defineProperty(cfg.set, isFF ? "displayName" : "name", { value: cls.$$name + "." + name + ".set", writable: true });
             }
 
             Object.defineProperty(scope, name, cfg);
@@ -991,6 +992,10 @@
                 return obj[name]();
             }
 
+            if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IEnumerable$1$getEnumerator"])) {
+                return obj[name]();
+            }
+
             if (Bridge.isFunction(obj[name = "System$Collections$IEnumerable$getEnumerator"])) {
                 return obj[name]();
             }
@@ -1278,6 +1283,10 @@
                 return a[name](b);
             }
 
+            if (T && Bridge.isFunction(a[name = "System$IComparable$1$compareTo"])) {
+                return a[name](b);
+            }
+
             if (Bridge.isFunction(a[name = "System$IComparable$compareTo"])) {
                 return a[name](b);
             }
@@ -1287,6 +1296,10 @@
             }
 
             if (T && Bridge.isFunction(b[name = "System$IComparable$1$" + Bridge.getTypeAlias(T) + "$compareTo"])) {
+                return -b[name](a);
+            }
+
+            if (T && Bridge.isFunction(b[name = "System$IComparable$1$compareTo"])) {
                 return -b[name](a);
             }
 
@@ -1774,6 +1787,10 @@
 
     globals.Bridge = core;
     globals.Bridge.caller = [];
+
+    if (globals.console) {
+        globals.Bridge.Console = globals.console;
+    }
 
     globals.System = {};
     globals.System.Diagnostics = {};

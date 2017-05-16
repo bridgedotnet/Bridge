@@ -1,4 +1,3 @@
-using Bridge.Linq;
 using Bridge.Test.NUnit;
 using System.Linq;
 
@@ -8,21 +7,13 @@ namespace Bridge.ClientTest.Linq
     [TestFixture(TestNameFormat = "Partitioning - {0}")]
     public class TestLinqPartitioningOperators
     {
-        [Test(ExpectedCount = 8)]
+        [Test(ExpectedCount = 6)]
         public static void Test()
         {
             // TEST
             var numbers = new[] { 1, 3, 5, 7, 9 };
             var firstTwo = numbers.Take(2).ToArray();
             Assert.AreDeepEqual(new[] { 1, 3 }, firstTwo, "Take() the first two array elements");
-
-            // TEST
-            var lastThree = numbers.TakeFromLast(3).ToArray();
-            Assert.AreDeepEqual(new[] { 5, 7, 9 }, lastThree, "TakeFromLast() the last three array elements");
-
-            // TEST
-            var exceptTwoLast = numbers.TakeExceptLast(2).ToArray();
-            Assert.AreDeepEqual(new[] { 1, 3, 5 }, exceptTwoLast, "TakeExceptLast() the first array elements except the last two");
 
             // TEST
             var takeWhileLessTwo = numbers.TakeWhile((number) => number < 2).ToArray();

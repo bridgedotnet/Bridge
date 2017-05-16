@@ -1,9 +1,16 @@
     Bridge.define("System.Random", {
         statics: {
             fields: {
-                MBIG: 2147483647,
-                MSEED: 161803398,
+                MBIG: 0,
+                MSEED: 0,
                 MZ: 0
+            },
+            ctors: {
+                init: function () {
+                    this.MBIG = 2147483647;
+                    this.MSEED = 161803398;
+                    this.MZ = 0;
+                }
             }
         },
         fields: {

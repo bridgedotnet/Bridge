@@ -70,14 +70,21 @@ namespace Bridge.Translator
 
                     if (string.IsNullOrEmpty(accName))
                     {
+                        var member_rr = (MemberResolveResult)this.Emitter.Resolver.ResolveNode(indexerDeclaration, this.Emitter);
+
                         var overloads = OverloadsCollection.Create(this.Emitter, indexerDeclaration, setter);
-                        accName = overloads.GetOverloadName(false, Helpers.GetSetOrGet(setter), true);
+                        accName = overloads.GetOverloadName(false, Helpers.GetSetOrGet(setter), OverloadsCollection.ExcludeTypeParameterForDefinition(member_rr));
                     }
                 }
 
                 this.Write(accName);
                 this.WriteColon();
                 this.WriteFunction();
+                var nm = Helpers.GetFunctionName(this.Emitter.AssemblyInfo.NamedFunctions, prop, this.Emitter, setter);
+                if (nm != null)
+                {
+                    this.Write(nm);
+                }
                 this.EmitMethodParameters(indexerDeclaration.Parameters, null, indexerDeclaration, setter);
 
                 if (setter)

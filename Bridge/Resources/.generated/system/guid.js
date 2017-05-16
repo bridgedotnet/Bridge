@@ -3,21 +3,23 @@
         $kind: "struct",
         statics: {
             fields: {
-                error1: "Byte array for GUID must be exactly {0} bytes long",
+                error1: null,
                 valid: null,
                 split: null,
                 nonFormat: null,
                 replace: null,
-                rnd: null
+                rnd: null,
+                empty: null
             },
             ctors: {
                 init: function () {
+                    this.empty = new System.Guid();
+                    this.error1 = "Byte array for GUID must be exactly {0} bytes long";
                     this.valid = new System.Text.RegularExpressions.Regex.$ctor1("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", 1);
                     this.split = new System.Text.RegularExpressions.Regex.ctor("^(.{8})(.{4})(.{4})(.{4})(.{12})$");
                     this.nonFormat = new System.Text.RegularExpressions.Regex.$ctor1("^[{(]?([0-9a-f]{8})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{4})-?([0-9a-f]{12})[)}]?$", 1);
                     this.replace = new System.Text.RegularExpressions.Regex.ctor("-");
                     this.rnd = new System.Random.ctor();
-                    this.empty = new System.Guid.ctor();
                 }
             },
             methods: {
@@ -77,7 +79,7 @@
         },
         alias: [
             "equalsT", "System$IEquatable$1$System$Guid$equalsT",
-            "compareTo", "System$IComparable$1$System$Guid$compareTo",
+            "compareTo", ["System$IComparable$1$System$Guid$compareTo", "System$IComparable$1$compareTo"],
             "format", "System$IFormattable$format"
         ],
         ctors: {

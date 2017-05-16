@@ -91,15 +91,19 @@ namespace Bridge.Translator
 
         private void WriteInterfaceMember(string interfaceTempVar, MemberResolveResult resolveResult, bool isSetter, string prefix = null)
         {
-            var externalInterface = this.Emitter.Validator.IsExternalInterface(resolveResult.Member.DeclaringTypeDefinition);
-            
-            if (interfaceTempVar != null && externalInterface == null)
+            var itypeDef = resolveResult.Member.DeclaringTypeDefinition;
+            var externalInterface = this.Emitter.Validator.IsExternalInterface(itypeDef);
+            bool variance = MetadataUtils.IsJsGeneric(itypeDef, this.Emitter) &&
+                itypeDef.TypeParameters != null &&
+                itypeDef.TypeParameters.Any(typeParameter => typeParameter.Variance != VarianceModifier.Invariant);
+
+            if (interfaceTempVar != null && externalInterface == null && !variance)
             {
                 this.WriteComma();
                 this.Write(interfaceTempVar);
             }
 
-            if (externalInterface != null && externalInterface.IsDualImplementation)
+            if (externalInterface != null && externalInterface.IsDualImplementation || variance)
             {
                 if (interfaceTempVar != null)
                 {
@@ -132,8 +136,14 @@ namespace Bridge.Translator
                     this.WriteScript(interfaceName);
                 }
 
-                this.WriteComma();
-                this.WriteScript(OverloadsCollection.Create(Emitter, resolveResult.Member, isSetter).GetOverloadName(true, prefix));
+                if (variance)
+                {
+                    this.WriteComma();
+                    this.WriteScript(OverloadsCollection.Create(Emitter, resolveResult.Member, isSetter).GetOverloadName(false, prefix, withoutTypeParams:true));
+                }
+
+                /*this.WriteComma();
+                this.WriteScript(OverloadsCollection.Create(Emitter, resolveResult.Member, isSetter).GetOverloadName(true, prefix));*/
 
                 this.Write(")");
                 this.WriteCloseBracket();
@@ -415,28 +425,40 @@ namespace Bridge.Translator
             var hasTypeParemeter = isInterface && Helpers.IsTypeParameterType(member.Member.DeclaringType);
             if (isInterface)
             {
-                var ei = this.Emitter.Validator.IsExternalInterface(member.Member.DeclaringTypeDefinition);
+                var itypeDef = member.Member.DeclaringTypeDefinition;
+                var variance = MetadataUtils.IsJsGeneric(itypeDef, this.Emitter) &&
+                    itypeDef.TypeParameters != null &&
+                    itypeDef.TypeParameters.Any(typeParameter => typeParameter.Variance != VarianceModifier.Invariant);
 
-                if (ei != null)
+                if (variance)
                 {
-                    nativeImplementation = ei.IsNativeImplementation;
+                    isInterfaceMember = true;
                 }
                 else
                 {
-                    nativeImplementation = member.Member.DeclaringTypeDefinition.ParentAssembly.AssemblyName == CS.NS.ROOT ||
-                                           !this.Emitter.Validator.IsExternalType(member.Member.DeclaringTypeDefinition);
-                }
+                    var ei = this.Emitter.Validator.IsExternalInterface(itypeDef);
 
-                if (ei != null && ei.IsSimpleImplementation)
-                {
-                    nativeImplementation = false;
-                    isInterfaceMember = false;
-                }
-                else if (ei != null || hasTypeParemeter)
-                {
-                    if (hasTypeParemeter || !nativeImplementation)
+                    if (ei != null)
                     {
-                        isInterfaceMember = true;
+                        nativeImplementation = ei.IsNativeImplementation;
+                    }
+                    else
+                    {
+                        nativeImplementation = member.Member.DeclaringTypeDefinition.ParentAssembly.AssemblyName == CS.NS.ROOT ||
+                                               !this.Emitter.Validator.IsExternalType(member.Member.DeclaringTypeDefinition);
+                    }
+
+                    if (ei != null && ei.IsSimpleImplementation)
+                    {
+                        nativeImplementation = false;
+                        isInterfaceMember = false;
+                    }
+                    else if (ei != null || hasTypeParemeter)
+                    {
+                        if (hasTypeParemeter || !nativeImplementation)
+                        {
+                            isInterfaceMember = true;
+                        }
                     }
                 }
             }
@@ -956,7 +978,7 @@ namespace Bridge.Translator
                 else if (resolveResult is InvocationResolveResult)
                 {
                     InvocationResolveResult invocationResult = (InvocationResolveResult)resolveResult;
-                    CSharpInvocationResolveResult cInvocationResult = (CSharpInvocationResolveResult)resolveResult;
+                    CSharpInvocationResolveResult cInvocationResult = resolveResult as CSharpInvocationResolveResult;
                     var expresssionMember = expressionResolveResult as MemberResolveResult;
 
                     if (isInterfaceMember)

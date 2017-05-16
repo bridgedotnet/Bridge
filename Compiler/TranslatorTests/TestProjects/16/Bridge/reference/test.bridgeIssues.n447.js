@@ -20,9 +20,16 @@ Bridge.assembly("TestProject", function ($asm, globals) {
     Bridge.define("Test.BridgeIssues.N447.N447", {
         statics: {
             fields: {
-                Five: 5,
-                Another: "Another",
-                Ten: System.Decimal(10.0)
+                Five: 0,
+                Another: null,
+                Ten: System.Decimal(0.0)
+            },
+            ctors: {
+                init: function () {
+                    this.Five = 5;
+                    this.Another = "Another";
+                    this.Ten = System.Decimal(10.0);
+                }
             },
             methods: {
                 CheckInlineExpression: function () {

@@ -41,10 +41,10 @@ namespace System
         [Template("System.Single.format({this}, {format}, {provider})")]
         public extern string ToString(string format, IFormatProvider provider);
 
-        [Template("System.Single.format({this}, 'G')")]
+        [Template("System.Single.format({this}, \"G\")")]
         public override extern string ToString();
 
-        [Template("System.Single.format({this}, 'G', {provider})")]
+        [Template("System.Single.format({this}, \"G\", {provider})")]
         public extern string ToString(IFormatProvider provider);
 
         [Template("System.Single.parse({s})")]

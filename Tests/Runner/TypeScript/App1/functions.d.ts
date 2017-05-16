@@ -9,6 +9,15 @@ declare module Functions {
     }
     var Delegates: DelegatesFunc;
 
+    export interface MiddleBit {
+        fn: {(x: Functions.MiddleBit): Function};
+    }
+    export interface MiddleBitFunc extends Function {
+        prototype: MiddleBit;
+        new (): MiddleBit;
+    }
+    var MiddleBit: MiddleBitFunc;
+
     export interface DelegateInterface {
         Functions$DelegateInterface$addMethodVoidDelegate(value: {(): void}): void;
         Functions$DelegateInterface$removeMethodVoidDelegate(value: {(): void}): void;

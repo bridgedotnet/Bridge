@@ -57,20 +57,24 @@
                             }
                         }
 
-                        if (descriptor != null) {
-                            Object.defineProperty(obj, alias, descriptor);
-                            aliases.push({alias: alias, descriptor: descriptor});
-                        } else {
-                            var m = scope[name];
+                        var arr = Array.isArray(alias) ? alias : [alias];
+                        for (var j = 0; j < arr.length; j++) {
+                            alias = arr[j];
 
-                            if (m === undefined && prototype) {
-                                m = prototype[name];
+                            if (descriptor != null) {
+                                Object.defineProperty(obj, alias, descriptor);
+                                aliases.push({ alias: alias, descriptor: descriptor });
+                            } else {
+                                var m = scope[name];
+
+                                if (m === undefined && prototype) {
+                                    m = prototype[name];
+                                }
+
+                                scope[alias] = m;
+                                aliases.push({ fn: name, alias: alias });
                             }
-
-                            scope[alias] = m;
-                            aliases.push({ fn: name, alias: alias });
                         }
-                        
                     })(statics ? scope : prototype, config.alias[i], config.alias[i + 1], cls);
 
                     i++;
@@ -427,8 +431,7 @@
 
             prop.$initialize = Bridge.Class._initialize;
 
-            var keys = [],
-                isFF = Bridge.Browser.firefoxVersion > 0;
+            var keys = [];
 
             for (name in prop) {
                 keys.push(name);
@@ -454,10 +457,6 @@
                 } else {
                     prototype[ctorName] = member;
                 }
-
-                if (typeof member === "function" && name !== "$main") {
-                    Object.defineProperty(member, isFF ? "displayName" : "name", { value: className + "." + name, writable: true });
-                }
             }
 
             prototype.$$name = className;
@@ -473,10 +472,6 @@
                         Class["$ctor"] = member;
                     } else {
                         Class[name] = member;
-                    }
-
-                    if (typeof member === "function") {
-                        Object.defineProperty(member, isFF ? "displayName" : "name", { value: className + "." + name, writable: true });
                     }
                 }
             }

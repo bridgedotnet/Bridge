@@ -289,7 +289,7 @@ namespace Bridge.Translator
             get; set;
         }
 
-        public bool EnableNamedFunctionExpressions
+        public NamedFunctionMode NamedFunctions
         {
             get;
             set;

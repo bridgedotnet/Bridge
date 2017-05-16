@@ -38,7 +38,7 @@ System.Linq.Enumerable.from("").any(function (ch) {
 Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    Bridge.init(function (){
+    Bridge.init(function () {
         console.log('Before0');
 
         if (true) {

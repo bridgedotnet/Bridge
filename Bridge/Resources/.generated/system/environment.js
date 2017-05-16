@@ -86,6 +86,9 @@
                 }
             },
             ctors: {
+                init: function () {
+                    this.ExitCode = 0;
+                },
                 ctor: function () {
                     System.Environment.variables = new (System.Collections.Generic.Dictionary$2(System.String,System.String))();
                     System.Environment.patchDictionary(System.Environment.variables);

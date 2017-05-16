@@ -55,7 +55,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 AssertStackTrace(e.StackTrace, "MethodThrowsException2");
             }
 
-            try
+            /*try
             {
                 var i = Prop1;
                 Assert.Fail("Should have thrown at getter Prop1");
@@ -73,7 +73,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             catch (Exception e)
             {
                 AssertStackTrace(e.StackTrace, "Prop1.set");
-            }
+            }*/
         }
 
         private static void AssertStackTrace(string stack, string fragment)
@@ -90,7 +90,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
             else
             {
-                Assert.True(false, stack);
+                Assert.Fail(stack);
             }
         }
     }

@@ -120,8 +120,9 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void ConversionsToEnumAreTreatedAsConversionsToTheUnderlyingType()
         {
-            Assert.AreEqual((TestEnum)(object)0, 0);
-            Assert.Throws(() => { var _ = (TestEnum)(object)0.5; });
+            Assert.AreEqual(0, (TestEnum)(object)0);
+            // #1596
+            Assert.Throws<InvalidCastException>(() => { var _ = (TestEnum)(object)0.5; });
         }
 
         // Feature #347

@@ -13,6 +13,11 @@
         },
         $entryPoint: true,
         fields: {
-            _something: "HI!"
+            _something: null
+        },
+        ctors: {
+            init: function () {
+                this._something = "HI!";
+            }
         }
     });
