@@ -64,8 +64,8 @@ namespace Bridge.Translator
 
         protected bool NeedSequencePoint()
         {
-            return this.Emitter.Translator.EmitNode != null && !this.Emitter.Translator.EmitNode.Region.IsEmpty;
-            //return this.Emitter.Translator.EmitNode is Statement && !(this.Emitter.Translator.EmitNode is BlockStatement);
+            //return this.Emitter.Translator.EmitNode != null && !this.Emitter.Translator.EmitNode.Region.IsEmpty;
+            return this.Emitter.Translator.EmitNode is Statement && !(this.Emitter.Translator.EmitNode is BlockStatement);
         }
 
         public virtual void EmitBlockOrIndentedLine(AstNode node)
