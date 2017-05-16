@@ -9,11 +9,11 @@ namespace Bridge.Translator
 {
 	public class SourceMapGenerator : ISourceMapRecorder
     {
-		private readonly SourceMapBuilder _sourceMapBuilder;
+        public SourceMapBuilder SourceMapBuilder { get; }
 
-		public SourceMapGenerator(string scriptPath, string sourceRoot) {
+        public SourceMapGenerator(string scriptPath, string sourceRoot) {
 			string scriptFileName = Path.GetFileName(scriptPath);
-			_sourceMapBuilder = new SourceMapBuilder(scriptFileName, sourceRoot);
+			this.SourceMapBuilder = new SourceMapBuilder(scriptFileName, sourceRoot);
 		}
 
 		public void RecordLocation(int scriptLine, int scriptCol, string sourcePath, int sourceLine, int sourceCol) {
@@ -25,16 +25,16 @@ namespace Bridge.Translator
 				sourceLocation = new SourceLocation(sourcePath, "", sourceLine - 1, sourceCol - 1);    // convert line and column to 0-based
 			}
 
-			_sourceMapBuilder.AddMapping(scriptLine - 1, scriptCol - 1, sourceLocation);
+			this.SourceMapBuilder.AddMapping(scriptLine - 1, scriptCol - 1, sourceLocation);
 		}
 
 		public string GetSourceMap(string[] sourcesContent)
         {
-			return _sourceMapBuilder.Build(sourcesContent);
+			return this.SourceMapBuilder.Build(sourcesContent);
 		}
 
         private static Regex tokenRegex = new Regex(@"/\*##\|(.+?),(\d+?),(\d+?)\|##\*/", RegexOptions.Compiled);
-        public static void Generate(string scriptFileName, string basePath, string outputPath, string root, ref string content, Action<string, string> saveAction, Func<string, string> sourceContent, string[] names, IList<string> sourceFiles)
+        public static void Generate(string scriptFileName, string basePath, string outputPath, string root, ref string content, Action<SourceMapBuilder> beforeGenerate, Func<string, string> sourceContent, string[] names, IList<string> sourceFiles)
         {
             var fileName = Path.GetFileName(scriptFileName);
             var generator = new SourceMapGenerator(fileName, "");
@@ -53,7 +53,7 @@ namespace Bridge.Translator
                 generator.RecordLocation(location.Line, location.Column, sourcePath, sourceLine, sourceCol);
                 return "";
             });
-            var sources = generator._sourceMapBuilder.SourceUrlList;
+            var sources = generator.SourceMapBuilder.SourceUrlList;
             List<string> contents = new List<string>();
 
             foreach (var source in sources)
@@ -63,27 +63,13 @@ namespace Bridge.Translator
 
             // Chrome handles it very strange, need more investigate
             //generator._sourceMapBuilder.SourceNameList.AddRange(names);
+
+            if (beforeGenerate != null)
+            {
+                beforeGenerate(generator.SourceMapBuilder);
+            }
             var map = generator.GetSourceMap(contents.ToArray());
             content = content + Emitter.NEW_LINE + "//# sourceMappingURL=data:application/json;base64," + System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(map));
-
-            /*fileName = fileName + ".map";
-
-            if (root != null)
-            {
-                fileName = new ConfigHelper().ConvertPath(Path.Combine(root, fileName), '/');
-            }
-
-            
-
-            fileName = new ConfigHelper().ConvertPath(Path.Combine(outputPath, fileName), '/');
-            var file = new System.IO.FileInfo(fileName);
-
-            if (!file.Directory.Exists)
-            {
-                file.Directory.Create();
-            }
-
-            saveAction(fileName, map);*/
         }
 
         private static StringLocation LocationFromPos(string s, int pos, StringLocation lastLocation, ref int offset)

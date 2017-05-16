@@ -356,7 +356,7 @@ namespace Bridge.Translator
 
                     if (!this.AssemblyInfo.CombineScripts && isJs)
                     {
-                        code = this.GenerateSourceMap(file.FullName, path, code, this.EmitterOutputs[item.Key].Names.ToArray());
+                        code = this.GenerateSourceMap(file.FullName, path, code);
                     }
 
                     this.SaveToFile(file.FullName, code);
@@ -376,7 +376,7 @@ namespace Bridge.Translator
 
                     if (!this.AssemblyInfo.CombineScripts)
                     {
-                        contentMinified = this.GenerateSourceMap(file.FullName, path, contentMinified, this.EmitterOutputs[item.Key].Names.ToArray());
+                        contentMinified = this.GenerateSourceMap(file.FullName, path, contentMinified);
                     }
 
                     this.SaveToFile(file.FullName, contentMinified);
@@ -388,20 +388,17 @@ namespace Bridge.Translator
             return files;
         }
 
-        private string GenerateSourceMap(string fileName, string outputPath, string content, string[] names = null)
+        public string GenerateSourceMap(string fileName, string outputPath, string content, Action<SourceMapBuilder> before = null)
         {
             if (this.AssemblyInfo.SourceMap.Enabled)
             {
                 var projectPath = Path.GetDirectoryName(this.Location);
-                SourceMapGenerator.Generate(fileName, projectPath, outputPath, this.AssemblyInfo.SourceMap.SourceRoot, ref content, (mapFileName, map) =>
-                {
-                    this.SaveToFile(mapFileName, map);
-                }, sourceRelativePath =>
+                SourceMapGenerator.Generate(fileName, projectPath, outputPath, this.AssemblyInfo.SourceMap.SourceRoot, ref content, before, sourceRelativePath =>
                 {
                     var path = Path.Combine(projectPath, sourceRelativePath);
                     var sourceFile = this.ParsedSourceFiles.First(pf => pf.ParsedFile.FileName == path);
                     return sourceFile.SyntaxTree.ToString(Translator.GetFormatter());
-                }, names ?? new string[0], this.SourceFiles);
+                }, new string[0], this.SourceFiles);
             }
             return content;
         }
@@ -983,28 +980,17 @@ namespace Bridge.Translator
             }
 
             string filePath = Path.Combine(path, fileName);
-            string[] names = null;
-            if (this.AssemblyInfo.SourceMap != null && this.AssemblyInfo.SourceMap.Enabled)
-            {
-                var list = new List<string>();
-                foreach (var item in this.Outputs)
-                {
-                    list.AddRange(this.EmitterOutputs[item.Key].Names);
-                }
-
-                names = list.Distinct().ToArray();
-            }
 
             if (this.jsbuffer != null && this.jsbuffer.Length > 0)
             {
-                var code = this.GenerateSourceMap(filePath, path, this.jsbuffer.ToString(), names);
+                var code = this.GenerateSourceMap(filePath, path, this.jsbuffer.ToString());
                 File.WriteAllText(filePath, code, OutputEncoding);
             }
 
             if (this.jsminbuffer != null && this.jsminbuffer.Length > 0)
             {
                 var filePathMin = FileHelper.GetMinifiedJSFileName(filePath);
-                var code = this.GenerateSourceMap(filePathMin, path, this.jsminbuffer.ToString(), names);
+                var code = this.GenerateSourceMap(filePathMin, path, this.jsminbuffer.ToString());
                 File.WriteAllText(filePathMin, code, OutputEncoding);
             }
 
