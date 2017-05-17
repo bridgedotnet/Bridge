@@ -17,7 +17,7 @@
     <dependencies>
       <dependency id="Bridge.NRefactory" version="5.5.5" />
       <dependency id="Mono.Cecil" version="0.9.6.1" />
-      <dependency id="Newtonsoft.Json" version="10.0.1" />
+      <dependency id="Newtonsoft.Json" version="10.0.2" />
       <dependency id="Object.NET.Utilities" version="2.5.0" />
     </dependencies>
     <frameworkAssemblies>

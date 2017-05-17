@@ -70,13 +70,13 @@
 
     <!--Inline tasks not supported in xbuild-->
     <!--So we will use SmallApplicationVersion matched from AssemblyIdentityInfo in non Windows-->
-    <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
+    <!--<GetAssemblyIdentity Condition="'$(OS)' == 'Windows_NT' AND $(NuGetUseExplicitVersion) == 'false'" AssemblyFiles="$(TargetPath)">
       <Output TaskParameter="Assemblies" ItemName="AssemblyIdentityInfo" />
-    </GetAssemblyIdentity>
+    </GetAssemblyIdentity>-->
 
     <PropertyGroup>
       <FirstSymbolIfPercentNotSupported>%25</FirstSymbolIfPercentNotSupported>
-      <ApplicationVersion>%(AssemblyIdentityInfo.Version)</ApplicationVersion>
+      <ApplicationVersion Condition="'$(OS)' == 'Windows_NT' AND $(NuGetUseExplicitVersion) == 'false'">%(AssemblyIdentityInfo.Version)</ApplicationVersion>
       <CouldNotGetApplicationVersion Condition="'$(ApplicationVersion)' == '' OR '$(ApplicationVersion.StartsWith($(FirstSymbolIfPercentNotSupported)))' == 'true'">true</CouldNotGetApplicationVersion>
       <ApplicationVersion Condition="'$(CouldNotGetApplicationVersion)' == 'true'">$(DefaultPackageVersion)</ApplicationVersion>
     </PropertyGroup>
@@ -92,7 +92,7 @@
 
     <Message Text="SmallApplicationVersion by matching ApplicationVersion: $(SmallApplicationVersion)" Importance="high" />-->
 
-    <GetAssemblyVersionFromTextFile Condition="'$(OS)' == 'Windows_NT' AND $(NuGetUseExplicitVersion) == 'false'" Filename="$(SolutionDir).build\common\CommonAssemblyInfo.cs">
+    <!--<GetAssemblyVersionFromTextFile Condition="'$(OS)' == 'Windows_NT' AND $(NuGetUseExplicitVersion) == 'false'" Filename="$(SolutionDir).build\common\CommonAssemblyInfo.cs">
       <Output TaskParameter="Version" ItemName="AssemblyInformationalVersion" />
     </GetAssemblyVersionFromTextFile>
 
@@ -106,7 +106,7 @@
       <Output TaskParameter="Version" ItemName="AssemblyInformationalVersion" />
     </GetAssemblyVersionFromDll>
 
-    <Message Condition="'$(NeedGetAssemblyVersionFromDll)' == 'true'" Text="AssemblyInformationalVersion by GetAssemblyVersionFromDll: @(AssemblyInformationalVersion)" Importance="high" />
+    <Message Condition="'$(NeedGetAssemblyVersionFromDll)' == 'true'" Text="AssemblyInformationalVersion by GetAssemblyVersionFromDll: @(AssemblyInformationalVersion)" Importance="high" /> -->
 
     <Message Condition="$(NuGetUseExplicitVersion) == 'true'" Text="Will use package version from nuspec" Importance="high" />
 
