@@ -1953,7 +1953,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.ActivatorTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/ActivatorTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.ActivatorTests", $t.File = "Batch4\\ActivatorTests.cs", $t);
                 }
                 return this.context;
             }
@@ -2013,7 +2013,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.AggregateExceptionTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Exceptions/AggregateExceptionTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.AggregateExceptionTests", $t.File = "Batch4\\Exceptions\\AggregateExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -2053,7 +2053,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.AmbiguousMatchExceptionTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Exceptions/AmbiguousMatchExceptionTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.AmbiguousMatchExceptionTests", $t.File = "Batch4\\Exceptions\\AmbiguousMatchExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -2078,7 +2078,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.AppDomainTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/AppDomainTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.AppDomainTests", $t.File = "Batch4\\AppDomainTests.cs", $t);
                 }
                 return this.context;
             }
@@ -2128,7 +2128,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.ArgumentExceptionTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Exceptions/ArgumentExceptionTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.ArgumentExceptionTests", $t.File = "Batch4\\Exceptions\\ArgumentExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -2173,7 +2173,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.ArgumentNullExceptionTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Exceptions/ArgumentNullExceptionTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.ArgumentNullExceptionTests", $t.File = "Batch4\\Exceptions\\ArgumentNullExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -2223,7 +2223,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.ArgumentOutOfRangeExceptionTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Exceptions/ArgumentOutOfRangeExceptionTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.ArgumentOutOfRangeExceptionTests", $t.File = "Batch4\\Exceptions\\ArgumentOutOfRangeExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -2263,7 +2263,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.ArgumentsTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/ArgumentsTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.ArgumentsTests", $t.File = "Batch4\\ArgumentsTests.cs", $t);
                 }
                 return this.context;
             }
@@ -2303,7 +2303,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.ArithmeticExceptionTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Exceptions/ArithmeticExceptionTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.ArithmeticExceptionTests", $t.File = "Batch4\\Exceptions\\ArithmeticExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -2338,7 +2338,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.TypedArrays.ArrayBufferTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Collections/TypedArrays/ArrayBufferTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.TypedArrays.ArrayBufferTests", $t.File = "Batch4\\Collections\\TypedArrays\\ArrayBufferTests.cs", $t);
                 }
                 return this.context;
             }
@@ -2588,7 +2588,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.ArrayTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/ArrayTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.ArrayTests", $t.File = "Batch4\\ArrayTests.cs", $t);
                 }
                 return this.context;
             }
@@ -2698,7 +2698,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Reflection.AssemblyTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Reflection/AssemblyTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Reflection.AssemblyTests", $t.File = "Batch4\\Reflection\\AssemblyTests.cs", $t);
                 }
                 return this.context;
             }
@@ -2748,7 +2748,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Threading.AsyncTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Threading/Tasks/AsyncTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Threading.AsyncTests", $t.File = "Batch4\\Threading\\Tasks\\AsyncTests.cs", $t);
                 }
                 return this.context;
             }
@@ -2893,7 +2893,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Reflection.AttributeTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Reflection/AttributeTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Reflection.AttributeTests", $t.File = "Batch4\\Reflection\\AttributeTests.cs", $t);
                 }
                 return this.context;
             }
@@ -2963,7 +2963,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.BooleanTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/SimpleTypes/BooleanTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.BooleanTests", $t.File = "Batch4\\SimpleTypes\\BooleanTests.cs", $t);
                 }
                 return this.context;
             }
@@ -3008,7 +3008,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.ExceptionTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/ExceptionTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.ExceptionTests", $t.File = "Batch4\\ExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -3123,7 +3123,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.ByteTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/SimpleTypes/ByteTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.ByteTests", $t.File = "Batch4\\SimpleTypes\\ByteTests.cs", $t);
                 }
                 return this.context;
             }
@@ -3283,7 +3283,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Threading.CancellationTokenTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Threading/CancellationTokenTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Threading.CancellationTokenTests", $t.File = "Batch4\\Threading\\CancellationTokenTests.cs", $t);
                 }
                 return this.context;
             }
@@ -3418,7 +3418,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.CharTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/SimpleTypes/CharTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.CharTests", $t.File = "Batch4\\SimpleTypes\\CharTests.cs", $t);
                 }
                 return this.context;
             }
@@ -3468,7 +3468,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.Generic.ComparerTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Collections/Generic/ComparerTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.Generic.ComparerTests", $t.File = "Batch4\\Collections\\Generic\\ComparerTests.cs", $t);
                 }
                 return this.context;
             }
@@ -3498,7 +3498,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.ContractExceptionTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Exceptions/ContractExceptionTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.ContractExceptionTests", $t.File = "Batch4\\Exceptions\\ContractExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -3578,7 +3578,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Diagnostics.Contracts.ContractTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Diagnostics/Contracts/ContractTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Diagnostics.Contracts.ContractTests", $t.File = "Batch4\\Diagnostics\\Contracts\\ContractTests.cs", $t);
                 }
                 return this.context;
             }
@@ -3623,7 +3623,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.ConvertTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/ConvertTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.ConvertTests", $t.File = "Batch4\\ConvertTests.cs", $t);
                 }
                 return this.context;
             }
@@ -3658,7 +3658,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.CultureInfoTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/CultureInfoTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.CultureInfoTests", $t.File = "Batch4\\CultureInfoTests.cs", $t);
                 }
                 return this.context;
             }
@@ -3778,7 +3778,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.TypedArrays.DataViewTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Collections/TypedArrays/DataViewTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.TypedArrays.DataViewTests", $t.File = "Batch4\\Collections\\TypedArrays\\DataViewTests.cs", $t);
                 }
                 return this.context;
             }
@@ -4133,7 +4133,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.DateTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/SimpleTypes/JsDateTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.DateTests", $t.File = "Batch4\\SimpleTypes\\JsDateTests.cs", $t);
                 }
                 return this.context;
             }
@@ -4168,7 +4168,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.DateTimeFormatInfoTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/DateTimeFormatInfoTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.DateTimeFormatInfoTests", $t.File = "Batch4\\DateTimeFormatInfoTests.cs", $t);
                 }
                 return this.context;
             }
@@ -4653,7 +4653,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.DateTimeTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/SimpleTypes/DateTimeTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.DateTimeTests", $t.File = "Batch4\\SimpleTypes\\DateTimeTests.cs", $t);
                 }
                 return this.context;
             }
@@ -4978,7 +4978,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.DecimalTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/SimpleTypes/DecimalTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.DecimalTests", $t.File = "Batch4\\SimpleTypes\\DecimalTests.cs", $t);
                 }
                 return this.context;
             }
@@ -5098,7 +5098,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.DelegateTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/DelegateTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.DelegateTests", $t.File = "Batch4\\DelegateTests.cs", $t);
                 }
                 return this.context;
             }
@@ -5138,7 +5138,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.DivideByZeroExceptionTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Exceptions/DivideByZeroExceptionTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.DivideByZeroExceptionTests", $t.File = "Batch4\\Exceptions\\DivideByZeroExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -5288,7 +5288,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.DoubleTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/SimpleTypes/DoubleTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.DoubleTests", $t.File = "Batch4\\SimpleTypes\\DoubleTests.cs", $t);
                 }
                 return this.context;
             }
@@ -5368,7 +5368,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.EnumTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/SimpleTypes/EnumTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.EnumTests", $t.File = "Batch4\\SimpleTypes\\EnumTests.cs", $t);
                 }
                 return this.context;
             }
@@ -5393,7 +5393,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.EnvironmentTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/EnvironmentTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.EnvironmentTests", $t.File = "Batch4\\EnvironmentTests.cs", $t);
                 }
                 return this.context;
             }
@@ -5448,7 +5448,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.Generic.EqualityComparerTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Collections/Generic/EqualityComparerTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.Generic.EqualityComparerTests", $t.File = "Batch4\\Collections\\Generic\\EqualityComparerTests.cs", $t);
                 }
                 return this.context;
             }
@@ -5483,7 +5483,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.ErrorExceptionTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Exceptions/JsErrorExceptionTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.ErrorExceptionTests", $t.File = "Batch4\\Exceptions\\JsErrorExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -5533,7 +5533,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.ExceptionTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Exceptions/ExceptionTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.ExceptionTests", $t.File = "Batch4\\Exceptions\\ExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -5778,7 +5778,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Linq/Expressions/ExpressionTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Linq.Expressions.ExpressionTests", $t.File = "Batch4\\Linq\\Expressions\\ExpressionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -5928,7 +5928,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.TypedArrays.Float32ArrayTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Collections/TypedArrays/Float32ArrayTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.TypedArrays.Float32ArrayTests", $t.File = "Batch4\\Collections\\TypedArrays\\Float32ArrayTests.cs", $t);
                 }
                 return this.context;
             }
@@ -6078,7 +6078,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.TypedArrays.Float64ArrayTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Collections/TypedArrays/Float64ArrayTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.TypedArrays.Float64ArrayTests", $t.File = "Batch4\\Collections\\TypedArrays\\Float64ArrayTests.cs", $t);
                 }
                 return this.context;
             }
@@ -6118,7 +6118,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.FormatExceptionTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Exceptions/FormatExceptionTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.FormatExceptionTests", $t.File = "Batch4\\Exceptions\\FormatExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -6188,7 +6188,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.FormattableStringTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/FormattableStringTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.FormattableStringTests", $t.File = "Batch4\\FormattableStringTests.cs", $t);
                 }
                 return this.context;
             }
@@ -6318,7 +6318,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.Generic.GenericDictionaryTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Collections/Generic/GenericDictionaryTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.Generic.GenericDictionaryTests", $t.File = "Batch4\\Collections\\Generic\\GenericDictionaryTests.cs", $t);
                 }
                 return this.context;
             }
@@ -6478,7 +6478,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Reflection.GetMembersTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Reflection/GetMembersTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Reflection.GetMembersTests", $t.File = "Batch4\\Reflection\\GetMembersTests.cs", $t);
                 }
                 return this.context;
             }
@@ -6628,7 +6628,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.GuidTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/GuidTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.GuidTests", $t.File = "Batch4\\GuidTests.cs", $t);
                 }
                 return this.context;
             }
@@ -6723,7 +6723,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.Generic.ICollectionTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Collections/Generic/ICollectionTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.Generic.ICollectionTests", $t.File = "Batch4\\Collections\\Generic\\ICollectionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -6748,7 +6748,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.IComparableTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/IComparableTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.IComparableTests", $t.File = "Batch4\\IComparableTests.cs", $t);
                 }
                 return this.context;
             }
@@ -6823,7 +6823,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.Generic.IDictionaryTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Collections/Generic/IDictionaryTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.Generic.IDictionaryTests", $t.File = "Batch4\\Collections\\Generic\\IDictionaryTests.cs", $t);
                 }
                 return this.context;
             }
@@ -6873,7 +6873,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.Generic.IEnumerableTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Collections/Generic/IEnumerableTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.Generic.IEnumerableTests", $t.File = "Batch4\\Collections\\Generic\\IEnumerableTests.cs", $t);
                 }
                 return this.context;
             }
@@ -6898,7 +6898,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.IEquatableTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/IEquatableTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.IEquatableTests", $t.File = "Batch4\\IEquatableTests.cs", $t);
                 }
                 return this.context;
             }
@@ -6928,7 +6928,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.IFormattableTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/IFormattableTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.IFormattableTests", $t.File = "Batch4\\IFormattableTests.cs", $t);
                 }
                 return this.context;
             }
@@ -7028,7 +7028,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.Generic.IListTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Collections/Generic/IListTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.Generic.IListTests", $t.File = "Batch4\\Collections\\Generic\\IListTests.cs", $t);
                 }
                 return this.context;
             }
@@ -7178,7 +7178,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.TypedArrays.Int16ArrayTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Collections/TypedArrays/Int16ArrayTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.TypedArrays.Int16ArrayTests", $t.File = "Batch4\\Collections\\TypedArrays\\Int16ArrayTests.cs", $t);
                 }
                 return this.context;
             }
@@ -7293,7 +7293,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.Int16Tests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/SimpleTypes/Int16Tests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.Int16Tests", $t.File = "Batch4\\SimpleTypes\\Int16Tests.cs", $t);
                 }
                 return this.context;
             }
@@ -7443,7 +7443,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.TypedArrays.Int32ArrayTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Collections/TypedArrays/Int32ArrayTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.TypedArrays.Int32ArrayTests", $t.File = "Batch4\\Collections\\TypedArrays\\Int32ArrayTests.cs", $t);
                 }
                 return this.context;
             }
@@ -7593,7 +7593,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.Int32Tests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/SimpleTypes/Int32Tests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.Int32Tests", $t.File = "Batch4\\SimpleTypes\\Int32Tests.cs", $t);
                 }
                 return this.context;
             }
@@ -7713,7 +7713,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.Int64Tests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/SimpleTypes/Int64Tests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.Int64Tests", $t.File = "Batch4\\SimpleTypes\\Int64Tests.cs", $t);
                 }
                 return this.context;
             }
@@ -7863,7 +7863,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.TypedArrays.Int8ArrayTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Collections/TypedArrays/Int8ArrayTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.TypedArrays.Int8ArrayTests", $t.File = "Batch4\\Collections\\TypedArrays\\Int8ArrayTests.cs", $t);
                 }
                 return this.context;
             }
@@ -7903,7 +7903,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.InvalidCastExceptionTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Exceptions/InvalidCastExceptionTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.InvalidCastExceptionTests", $t.File = "Batch4\\Exceptions\\InvalidCastExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -7943,7 +7943,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.InvalidOperationExceptionTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Exceptions/InvalidOperationExceptionTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.InvalidOperationExceptionTests", $t.File = "Batch4\\Exceptions\\InvalidOperationExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -8013,7 +8013,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.Generic.IteratorBlockTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Collections/Generic/IteratorBlockTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.Generic.IteratorBlockTests", $t.File = "Batch4\\Collections\\Generic\\IteratorBlockTests.cs", $t);
                 }
                 return this.context;
             }
@@ -8088,7 +8088,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Serialization.JsonTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Serialization/JsonTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Serialization.JsonTests", $t.File = "Batch4\\Serialization\\JsonTests.cs", $t);
                 }
                 return this.context;
             }
@@ -8128,7 +8128,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.KeyNotFoundExceptionTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Exceptions/KeyNotFoundExceptionTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.KeyNotFoundExceptionTests", $t.File = "Batch4\\Exceptions\\KeyNotFoundExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -8178,7 +8178,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.Generic.KeyValuePairTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Collections/Generic/KeyValuePairTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.Generic.KeyValuePairTests", $t.File = "Batch4\\Collections\\Generic\\KeyValuePairTests.cs", $t);
                 }
                 return this.context;
             }
@@ -8458,7 +8458,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.Generic.ListTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Collections/Generic/ListTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.Generic.ListTests", $t.File = "Batch4\\Collections\\Generic\\ListTests.cs", $t);
                 }
                 return this.context;
             }
@@ -8813,7 +8813,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.MathTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/MathTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.MathTests", $t.File = "Batch4\\MathTests.cs", $t);
                 }
                 return this.context;
             }
@@ -8908,7 +8908,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.MultidimArrayTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/MultidimArrayTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.MultidimArrayTests", $t.File = "Batch4\\MultidimArrayTests.cs", $t);
                 }
                 return this.context;
             }
@@ -8948,7 +8948,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.NotImplementedExceptionTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Exceptions/NotImplementedExceptionTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.NotImplementedExceptionTests", $t.File = "Batch4\\Exceptions\\NotImplementedExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -8988,7 +8988,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.NotSupportedExceptionTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Exceptions/NotSupportedExceptionTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.NotSupportedExceptionTests", $t.File = "Batch4\\Exceptions\\NotSupportedExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -9218,7 +9218,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.NullableTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/NullableTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.NullableTests", $t.File = "Batch4\\NullableTests.cs", $t);
                 }
                 return this.context;
             }
@@ -9263,7 +9263,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.NullReferenceExceptionTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Exceptions/NullReferenceExceptionTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.NullReferenceExceptionTests", $t.File = "Batch4\\Exceptions\\NullReferenceExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -9298,7 +9298,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.NumberFormatInfoTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/NumberFormatInfoTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.NumberFormatInfoTests", $t.File = "Batch4\\NumberFormatInfoTests.cs", $t);
                 }
                 return this.context;
             }
@@ -9358,7 +9358,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.ObjectTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/SimpleTypes/ObjectTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.ObjectTests", $t.File = "Batch4\\SimpleTypes\\ObjectTests.cs", $t);
                 }
                 return this.context;
             }
@@ -9413,7 +9413,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.OperationCanceledExceptionTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Exceptions/OperationCanceledExceptionTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.OperationCanceledExceptionTests", $t.File = "Batch4\\Exceptions\\OperationCanceledExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -9453,7 +9453,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.OverflowExceptionTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Exceptions/OverflowExceptionTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.OverflowExceptionTests", $t.File = "Batch4\\Exceptions\\OverflowExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -9493,7 +9493,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.PromiseExceptionTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Exceptions/PromiseExceptionTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.PromiseExceptionTests", $t.File = "Batch4\\Exceptions\\PromiseExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -9543,7 +9543,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Threading.PromiseTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Threading/Tasks/PromiseTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Threading.PromiseTests", $t.File = "Batch4\\Threading\\Tasks\\PromiseTests.cs", $t);
                 }
                 return this.context;
             }
@@ -9593,7 +9593,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.PropertyAccessorTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/PropertyAccessorTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.PropertyAccessorTests", $t.File = "Batch4\\PropertyAccessorTests.cs", $t);
                 }
                 return this.context;
             }
@@ -9653,7 +9653,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.RandomTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/RandomTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.RandomTests", $t.File = "Batch4\\RandomTests.cs", $t);
                 }
                 return this.context;
             }
@@ -9758,7 +9758,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.ObjectModel.ReadOnlyCollectionTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Collections/ObjectModel/ReadOnlyCollectionTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.ObjectModel.ReadOnlyCollectionTests", $t.File = "Batch4\\Collections\\ObjectModel\\ReadOnlyCollectionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -10238,7 +10238,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Reflection.ReflectionTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Reflection/ReflectionTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Reflection.ReflectionTests", $t.File = "Batch4\\Reflection\\ReflectionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -10283,7 +10283,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.RefParameterTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/RefParameterTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.RefParameterTests", $t.File = "Batch4\\RefParameterTests.cs", $t);
                 }
                 return this.context;
             }
@@ -10358,7 +10358,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Text.RegularExpressions.RegexTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Text/RegularExpressions/RegexTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Text.RegularExpressions.RegexTests", $t.File = "Batch4\\Text\\RegularExpressions\\RegexTests.cs", $t);
                 }
                 return this.context;
             }
@@ -10388,7 +10388,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Runtime.CompilerServices.RuntimeHelpersTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Runtime/CompilerServices/RuntimeHelpersTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Runtime.CompilerServices.RuntimeHelpersTests", $t.File = "Batch4\\Runtime\\CompilerServices\\RuntimeHelpersTests.cs", $t);
                 }
                 return this.context;
             }
@@ -10503,7 +10503,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.SByteTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/SimpleTypes/SByteTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.SByteTests", $t.File = "Batch4\\SimpleTypes\\SByteTests.cs", $t);
                 }
                 return this.context;
             }
@@ -10548,7 +10548,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.ScriptTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/ScriptTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.ScriptTests", $t.File = "Batch4\\ScriptTests.cs", $t);
                 }
                 return this.context;
             }
@@ -10698,7 +10698,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.SingleTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/SimpleTypes/SingleTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.SingleTests", $t.File = "Batch4\\SimpleTypes\\SingleTests.cs", $t);
                 }
                 return this.context;
             }
@@ -10753,7 +10753,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.StopwatchTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/StopwatchTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.StopwatchTests", $t.File = "Batch4\\StopwatchTests.cs", $t);
                 }
                 return this.context;
             }
@@ -10878,7 +10878,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Text.StringBuilderTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Text/StringBuilderTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Text.StringBuilderTests", $t.File = "Batch4\\Text\\StringBuilderTests.cs", $t);
                 }
                 return this.context;
             }
@@ -11328,7 +11328,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.StringTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/SimpleTypes/StringTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.StringTests", $t.File = "Batch4\\SimpleTypes\\StringTests.cs", $t);
                 }
                 return this.context;
             }
@@ -11373,7 +11373,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.TaskCanceledExceptionTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Exceptions/TaskCanceledExceptionTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Exceptions.TaskCanceledExceptionTests", $t.File = "Batch4\\Exceptions\\TaskCanceledExceptionTests.cs", $t);
                 }
                 return this.context;
             }
@@ -11618,7 +11618,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Threading.TaskTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Threading/Tasks/TaskTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Threading.TaskTests", $t.File = "Batch4\\Threading\\Tasks\\TaskTests.cs", $t);
                 }
                 return this.context;
             }
@@ -11753,7 +11753,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.TimeSpanTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/SimpleTypes/TimeSpanTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.TimeSpanTests", $t.File = "Batch4\\SimpleTypes\\TimeSpanTests.cs", $t);
                 }
                 return this.context;
             }
@@ -11813,7 +11813,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.TupleTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/SimpleTypes/TupleTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.TupleTests", $t.File = "Batch4\\SimpleTypes\\TupleTests.cs", $t);
                 }
                 return this.context;
             }
@@ -11868,7 +11868,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Reflection/TypeSystemLanguageSupportTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Reflection.TypeSystemLanguageSupportTests", $t.File = "Batch4\\Reflection\\TypeSystemLanguageSupportTests.cs", $t);
                 }
                 return this.context;
             }
@@ -12148,7 +12148,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Reflection.TypeSystemTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Reflection/TypeSystemTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Reflection.TypeSystemTests", $t.File = "Batch4\\Reflection\\TypeSystemTests.cs", $t);
                 }
                 return this.context;
             }
@@ -12298,7 +12298,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint16ArrayTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Collections/TypedArrays/Uint16ArrayTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint16ArrayTests", $t.File = "Batch4\\Collections\\TypedArrays\\Uint16ArrayTests.cs", $t);
                 }
                 return this.context;
             }
@@ -12413,7 +12413,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.UInt16Tests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/SimpleTypes/UInt16Tests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.UInt16Tests", $t.File = "Batch4\\SimpleTypes\\UInt16Tests.cs", $t);
                 }
                 return this.context;
             }
@@ -12563,7 +12563,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint32ArrayTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Collections/TypedArrays/Uint32ArrayTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint32ArrayTests", $t.File = "Batch4\\Collections\\TypedArrays\\Uint32ArrayTests.cs", $t);
                 }
                 return this.context;
             }
@@ -12678,7 +12678,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.UInt32Tests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/SimpleTypes/UInt32Tests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.UInt32Tests", $t.File = "Batch4\\SimpleTypes\\UInt32Tests.cs", $t);
                 }
                 return this.context;
             }
@@ -12803,7 +12803,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.UInt64Tests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/SimpleTypes/UInt64Tests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.UInt64Tests", $t.File = "Batch4\\SimpleTypes\\UInt64Tests.cs", $t);
                 }
                 return this.context;
             }
@@ -12953,7 +12953,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint8ArrayTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Collections/TypedArrays/Uint8ArrayTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint8ArrayTests", $t.File = "Batch4\\Collections\\TypedArrays\\Uint8ArrayTests.cs", $t);
                 }
                 return this.context;
             }
@@ -13113,7 +13113,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint8ClampedArrayTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/Collections/TypedArrays/Uint8ClampedArrayTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Collections.TypedArrays.Uint8ClampedArrayTests", $t.File = "Batch4\\Collections\\TypedArrays\\Uint8ClampedArrayTests.cs", $t);
                 }
                 return this.context;
             }
@@ -13273,7 +13273,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             GetContext: function () {
                 var $t;
                 if (this.context == null) {
-                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.UserDefinedStructTests", $t.File = "file:///C:/NET/BridgeNew/Bridge/Tests/Batch4/UserDefinedStructTests.cs", $t);
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.UserDefinedStructTests", $t.File = "Batch4\\UserDefinedStructTests.cs", $t);
                 }
                 return this.context;
             }
