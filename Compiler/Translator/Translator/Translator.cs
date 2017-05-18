@@ -202,24 +202,6 @@ namespace Bridge.Translator
                     sourceFile.SyntaxTree = syntaxTree;
                     needRecompile = true;
                 }
-
-                if (this.AssemblyInfo.SourceMap)
-                {
-                    var text = syntaxTree.ToString(Translator.GetFormatter());
-
-                    var parser = new ICSharpCode.NRefactory.CSharp.CSharpParser();
-
-                    if (this.DefineConstants != null && this.DefineConstants.Count > 0)
-                    {
-                        foreach (var defineConstant in this.DefineConstants)
-                        {
-                            parser.CompilerSettings.ConditionalSymbols.Add(defineConstant);
-                        }
-                    }
-
-                    sourceFile.SyntaxTree = parser.Parse(text, syntaxTree.FileName);
-                    needRecompile = true;
-                }
             }
 
             if (needRecompile)
@@ -406,7 +388,7 @@ namespace Bridge.Translator
                             path = Path.Combine(projectPath, sourceRelativePath);
                             sourceFile = this.ParsedSourceFiles.First(pf => pf.ParsedFile.FileName == path);
 
-                            return sourceFile.SyntaxTree.ToString(Translator.GetFormatter());
+                            return sourceFile.SyntaxTree.TextSource ?? sourceFile.SyntaxTree.ToString(Translator.GetFormatter());
                         }
                         catch (Exception ex)
                         {
@@ -433,6 +415,7 @@ namespace Bridge.Translator
             formatter.NewLineAferMethodCallOpenParentheses = NewLinePlacement.NewLine;
             formatter.ClassBraceStyle = BraceStyle.NextLine;
             formatter.ArrayInitializerBraceStyle = BraceStyle.NextLine;
+            formatter.IndentPreprocessorDirectives = false;
 
             return formatter;
         }
