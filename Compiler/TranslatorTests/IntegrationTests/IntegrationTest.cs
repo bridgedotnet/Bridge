@@ -11,6 +11,8 @@ namespace Bridge.Translator.Tests
     [TestFixture]
     internal class IntegrationTest
     {
+        private const int MaxDiffLineCount = 30;
+        private const int MaxDiffLineLength = 300;
         private const string LogFileNameWithoutExtention = "testProjectsBuild";
 
         private const string BuildArguments = "/flp:Verbosity=diagnostic;LogFile=" + LogFileNameWithoutExtention + ".log;Append"
@@ -175,9 +177,25 @@ namespace Bridge.Translator.Tests
             {
                 var sb = new StringBuilder();
 
+                var lineCount = 0;
                 foreach (var diff in comparence)
                 {
-                    sb.AppendLine(diff.ToString());
+                    lineCount++;
+
+                    if (lineCount > MaxDiffLineCount)
+                    {
+                        sb.AppendLine("The diff log cut off because of max lines limit of " + MaxDiffLineCount + " lines.");
+                        break;
+                    }
+
+                    var diffReport = diff.ToString();
+
+                    if (diffReport.Length > MaxDiffLineLength)
+                    {
+                        diffReport = diffReport.Remove(MaxDiffLineLength) + " ... the rest is removed due to too long";
+                    }
+
+                    sb.AppendLine(diffReport);
                 }
 
                 folderComparer.LogDifferences("Project " + folder + " differences:", comparence);
