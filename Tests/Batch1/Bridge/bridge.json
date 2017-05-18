@@ -6,6 +6,7 @@
   "outputBy": "Project",
   "localesOutput": "locales",
   "locales": "ru-RU;en-US;es*",
+  "sourceMap":  true,
   "test": {
     "skipCombine":  true
   }

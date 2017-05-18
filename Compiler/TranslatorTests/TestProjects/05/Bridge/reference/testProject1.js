@@ -7,3 +7,5 @@ Bridge.assembly("TestProject", function ($asm, globals) {
         }
     });
 });
+
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAiZmlsZSI6ICJ0ZXN0UHJvamVjdDEuanMiLAogICJzb3VyY2VSb290IjogIiIsCiAgInNvdXJjZXMiOiBbXSwKICAibmFtZXMiOiBbXSwKICAibWFwcGluZ3MiOiAiIiwKICAic291cmNlc0NvbnRlbnQiOiBbXQp9Cg==
