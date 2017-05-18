@@ -393,12 +393,30 @@ namespace Bridge.Translator
             if (this.AssemblyInfo.SourceMap)
             {
                 var projectPath = Path.GetDirectoryName(this.Location);
-                SourceMapGenerator.Generate(fileName, projectPath, ref content, before, sourceRelativePath =>
-                {
-                    var path = Path.Combine(projectPath, sourceRelativePath);
-                    var sourceFile = this.ParsedSourceFiles.First(pf => pf.ParsedFile.FileName == path);
-                    return sourceFile.SyntaxTree.ToString(Translator.GetFormatter());
-                }, new string[0], this.SourceFiles);
+
+                SourceMapGenerator.Generate(fileName, projectPath, ref content,
+                    before,
+                    (sourceRelativePath) =>
+                    {
+                        string path = null;
+                        ParsedSourceFile sourceFile = null;
+
+                        try
+                        {
+                            path = Path.Combine(projectPath, sourceRelativePath);
+                            sourceFile = this.ParsedSourceFiles.First(pf => pf.ParsedFile.FileName == path);
+
+                            return sourceFile.SyntaxTree.ToString(Translator.GetFormatter());
+                        }
+                        catch (Exception ex)
+                        {
+                            throw (TranslatorException)TranslatorException.Create(
+                                "Could not get ParsedSourceFile for SourceMap. Exception: {0}; projectPath: {1}; sourceRelativePath: {2}; path: {3}.",
+                                ex.ToString(), projectPath, sourceRelativePath, path);
+                        }
+
+                    },
+                    new string[0], this.SourceFiles);
             }
             return content;
         }
