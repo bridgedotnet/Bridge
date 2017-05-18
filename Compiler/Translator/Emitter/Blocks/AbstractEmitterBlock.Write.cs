@@ -20,6 +20,13 @@ namespace Bridge.Translator
             }
         }
 
+        public virtual string RemoveTokens(string code)
+        {
+            return this.Emitter.AssemblyInfo.SourceMap
+                        ? SourceMapGenerator.tokenRegex.Replace(code, "")
+                        : code;
+        }
+
         public virtual void Indent()
         {
             this.Emitter.ResetLevel(this.Emitter.Level + 1);
@@ -761,15 +768,15 @@ namespace Bridge.Translator
             return count;
         }
 
-        public bool IsOnlyWhitespaceOnPenultimateLine(bool lastTwoLines = true)
+        public bool IsOnlyWhitespaceOnPenultimateLine(bool lastTwoLines = true, string output = null)
         {
-            return AbstractEmitterBlock.IsOnlyWhitespaceOnPenultimateLine(this.Emitter.Output, lastTwoLines);
+            return AbstractEmitterBlock.IsOnlyWhitespaceOnPenultimateLine(output ?? this.Emitter.Output.ToString(), lastTwoLines);
         }
 
-        public static bool IsOnlyWhitespaceOnPenultimateLine(StringBuilder buffer, bool lastTwoLines = true)
+        public static bool IsOnlyWhitespaceOnPenultimateLine(string buffer, bool lastTwoLines = true)
         {
             int i = buffer.Length - 1;
-            var charArray = buffer.ToString().ToCharArray();
+            var charArray = buffer.ToCharArray();
 
             while (i >= 0)
             {

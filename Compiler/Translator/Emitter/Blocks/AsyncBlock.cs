@@ -463,7 +463,7 @@ namespace Bridge.Translator
             for (int i = 0; i < this.Steps.Count; i++)
             {
                 var step = this.Steps[i];
-                if (string.IsNullOrWhiteSpace(step.Output.ToString()) && step.JumpToStep == (i + 1) && step.FromTaskNumber < 0)
+                if (string.IsNullOrWhiteSpace(this.RemoveTokens(step.Output.ToString())) && step.JumpToStep == (i + 1) && step.FromTaskNumber < 0)
                 {
                     continue;
                 }
@@ -612,8 +612,9 @@ namespace Bridge.Translator
                 }
 
                 var output = step.Output.ToString();
+                var cleanOutput = this.RemoveTokens(output);
 
-                if (string.IsNullOrWhiteSpace(output) && step.JumpToStep == (i + 1) && step.FromTaskNumber < 0)
+                if (string.IsNullOrWhiteSpace(cleanOutput) && step.JumpToStep == (i + 1) && step.FromTaskNumber < 0)
                 {
                     continue;
                 }
@@ -640,7 +641,7 @@ namespace Bridge.Translator
                     addNewLine = true;
                 }
 
-                if (!string.IsNullOrWhiteSpace(output))
+                if (!string.IsNullOrWhiteSpace(cleanOutput))
                 {
                     if (addNewLine)
                     {
@@ -655,7 +656,7 @@ namespace Bridge.Translator
                     addNewLine = true;
                 }
 
-                if (step.JumpToStep > -1 && !AbstractEmitterBlock.IsJumpStatementLast(output))
+                if (step.JumpToStep > -1 && !AbstractEmitterBlock.IsJumpStatementLast(cleanOutput))
                 {
                     if (addNewLine)
                     {
@@ -666,7 +667,7 @@ namespace Bridge.Translator
                     this.WriteNewLine();
                     this.Write("continue;");
                 }
-                else if (step.JumpToNode != null && !AbstractEmitterBlock.IsJumpStatementLast(output))
+                else if (step.JumpToNode != null && !AbstractEmitterBlock.IsJumpStatementLast(cleanOutput))
                 {
                     var tostep = this.Steps.First(s => s.Node == step.JumpToNode);
 
@@ -679,7 +680,7 @@ namespace Bridge.Translator
                     this.WriteNewLine();
                     this.Write("continue;");
                 }
-                else if (i == (this.Steps.Count - 1) && !AbstractEmitterBlock.IsReturnLast(output))
+                else if (i == (this.Steps.Count - 1) && !AbstractEmitterBlock.IsReturnLast(cleanOutput))
                 {
                     if (addNewLine)
                     {

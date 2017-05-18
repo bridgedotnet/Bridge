@@ -43,7 +43,7 @@ namespace Bridge.Contract
 
         void Indent();
 
-        bool IsOnlyWhitespaceOnPenultimateLine(bool lastTwoLines = true);
+        bool IsOnlyWhitespaceOnPenultimateLine(bool lastTwoLines = true, string output = null);
 
         System.Text.StringBuilder NewWriter();
 

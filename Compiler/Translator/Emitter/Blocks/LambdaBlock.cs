@@ -311,7 +311,17 @@ namespace Bridge.Translator
                 {
                     var name = "f" + (this.Emitter.NamedFunctions.Count + 1);
                     var code = this.Emitter.Output.ToString().Substring(savedPos);
-                    var pair = this.Emitter.NamedFunctions.FirstOrDefault(p => p.Value == code);
+                    var codeForComare = this.RemoveTokens(code);
+
+                    var pair = this.Emitter.NamedFunctions.FirstOrDefault(p =>
+                    {
+                        if (this.Emitter.AssemblyInfo.SourceMap)
+                        {
+                            return this.RemoveTokens(p.Value) == codeForComare;
+                        }
+                        
+                        return p.Value == code;
+                    });
 
                     if (pair.Key != null && pair.Value != null)
                     {

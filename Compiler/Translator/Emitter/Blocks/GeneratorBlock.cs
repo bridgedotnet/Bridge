@@ -701,6 +701,7 @@ namespace Bridge.Translator
                 }
 
                 var output = step.Output.ToString();
+                var cleanOutput = this.RemoveTokens(output);
 
                 this.Write("case " + i + ": ");
 
@@ -708,7 +709,7 @@ namespace Bridge.Translator
 
                 bool addNewLine = false;
 
-                if(!string.IsNullOrWhiteSpace(output))
+                if(!string.IsNullOrWhiteSpace(cleanOutput))
                 {
                     if(addNewLine)
                     {
@@ -723,7 +724,7 @@ namespace Bridge.Translator
                     addNewLine = true;
                 }
 
-                if(step.JumpToStep > -1 && !AbstractEmitterBlock.IsJumpStatementLast(output))
+                if(step.JumpToStep > -1 && !AbstractEmitterBlock.IsJumpStatementLast(cleanOutput))
                 {
                     if(addNewLine)
                     {
@@ -734,7 +735,7 @@ namespace Bridge.Translator
                     this.WriteNewLine();
                     this.Write("continue;");
                 }
-                else if(step.JumpToNode != null && !AbstractEmitterBlock.IsJumpStatementLast(output))
+                else if(step.JumpToNode != null && !AbstractEmitterBlock.IsJumpStatementLast(cleanOutput))
                 {
                     var tostep = this.Steps.First(s => s.Node == step.JumpToNode);
 
@@ -747,7 +748,7 @@ namespace Bridge.Translator
                     this.WriteNewLine();
                     this.Write("continue;");
                 }
-                else if(i == (this.Steps.Count - 1) && !AbstractEmitterBlock.IsReturnLast(output))
+                else if(i == (this.Steps.Count - 1) && !AbstractEmitterBlock.IsReturnLast(cleanOutput))
                 {
                     if(addNewLine)
                     {

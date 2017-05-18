@@ -68,7 +68,9 @@ namespace Bridge.Translator
             {
                 if (this.Emitter.Translator.EmitNode is EntityDeclaration ||
                     this.Emitter.Translator.EmitNode is BlockStatement ||
-                    this.Emitter.Translator.EmitNode is ArrayInitializerExpression)
+                    this.Emitter.Translator.EmitNode is ArrayInitializerExpression ||
+                    this.Emitter.Translator.EmitNode is PrimitiveExpression ||
+                    this.Emitter.Translator.EmitNode is Comment)
                 {
                     return false;
                 }

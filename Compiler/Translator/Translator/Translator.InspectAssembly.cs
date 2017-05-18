@@ -285,61 +285,58 @@ namespace Bridge.Translator
 
                 this.Log.Trace("Source file " + (fileName ?? string.Empty) + " ...");
 
-                using (var reader = new StreamReader(fileName))
+                var parser = new ICSharpCode.NRefactory.CSharp.CSharpParser();
+
+                if (this.DefineConstants != null && this.DefineConstants.Count > 0)
                 {
-                    var parser = new ICSharpCode.NRefactory.CSharp.CSharpParser();
-
-                    if (this.DefineConstants != null && this.DefineConstants.Count > 0)
+                    foreach (var defineConstant in this.DefineConstants)
                     {
-                        foreach (var defineConstant in this.DefineConstants)
-                        {
-                            parser.CompilerSettings.ConditionalSymbols.Add(defineConstant);
-                        }
+                        parser.CompilerSettings.ConditionalSymbols.Add(defineConstant);
                     }
-
-                    var syntaxTree = parser.Parse(rewriter.Rewrite(i), fileName);
-                    syntaxTree.FileName = fileName;
-                    //var syntaxTree = parser.Parse(reader, fileName);
-                    this.Log.Trace("\tParsing syntax tree done");
-
-                    if (parser.HasErrors)
-                    {
-                        foreach (var error in parser.Errors)
-                        {
-                            throw new EmitterException(syntaxTree, string.Format("Parsing error in a file {0} {2}: {1}", fileName, error.Message, error.Region.Begin.ToString()));
-                        }
-                    }
-
-                    var expandResult = new QueryExpressionExpander().ExpandQueryExpressions(syntaxTree);
-                    this.Log.Trace("\tExpanding query expressions done");
-
-                    syntaxTree = (expandResult != null ? (SyntaxTree)expandResult.AstNode : syntaxTree);
-
-                    var emptyLambdaDetecter = new EmptyLambdaDetecter();
-                    syntaxTree.AcceptVisitor(emptyLambdaDetecter);
-                    this.Log.Trace("\tAccepting lambda detector visitor done");
-
-                    if (emptyLambdaDetecter.Found)
-                    {
-                        var fixer = new EmptyLambdaFixer();
-                        var astNode = syntaxTree.AcceptVisitor(fixer);
-                        this.Log.Trace("\tAccepting lambda fixer visitor done");
-                        syntaxTree = (astNode != null ? (SyntaxTree)astNode : syntaxTree);
-                        syntaxTree.FileName = fileName;
-                    }
-
-                    var f = new ParsedSourceFile(syntaxTree, new CSharpUnresolvedFile
-                    {
-                        FileName = fileName
-                    });
-                    this.ParsedSourceFiles.Add(f);
-
-                    var tcv = new TypeSystemConvertVisitor(f.ParsedFile);
-                    f.SyntaxTree.AcceptVisitor(tcv);
-                    this.Log.Trace("\tAccepting type system convert visitor done");
-
-                    this.Log.Trace("Source file " + (fileName ?? string.Empty) + " done");
                 }
+
+                var syntaxTree = parser.Parse(rewriter.Rewrite(i), fileName);
+                syntaxTree.FileName = fileName;
+                //var syntaxTree = parser.Parse(reader, fileName);
+                this.Log.Trace("\tParsing syntax tree done");
+
+                if (parser.HasErrors)
+                {
+                    foreach (var error in parser.Errors)
+                    {
+                        throw new EmitterException(syntaxTree, string.Format("Parsing error in a file {0} {2}: {1}", fileName, error.Message, error.Region.Begin.ToString()));
+                    }
+                }
+
+                var expandResult = new QueryExpressionExpander().ExpandQueryExpressions(syntaxTree);
+                this.Log.Trace("\tExpanding query expressions done");
+
+                syntaxTree = (expandResult != null ? (SyntaxTree)expandResult.AstNode : syntaxTree);
+
+                var emptyLambdaDetecter = new EmptyLambdaDetecter();
+                syntaxTree.AcceptVisitor(emptyLambdaDetecter);
+                this.Log.Trace("\tAccepting lambda detector visitor done");
+
+                if (emptyLambdaDetecter.Found)
+                {
+                    var fixer = new EmptyLambdaFixer();
+                    var astNode = syntaxTree.AcceptVisitor(fixer);
+                    this.Log.Trace("\tAccepting lambda fixer visitor done");
+                    syntaxTree = (astNode != null ? (SyntaxTree)astNode : syntaxTree);
+                    syntaxTree.FileName = fileName;
+                }
+
+                var f = new ParsedSourceFile(syntaxTree, new CSharpUnresolvedFile
+                {
+                    FileName = fileName
+                });
+                this.ParsedSourceFiles.Add(f);
+
+                var tcv = new TypeSystemConvertVisitor(f.ParsedFile);
+                f.SyntaxTree.AcceptVisitor(tcv);
+                this.Log.Trace("\tAccepting type system convert visitor done");
+
+                this.Log.Trace("Source file " + (fileName ?? string.Empty) + " done");
             }
 
             this.Log.Info("Building syntax tree done");
