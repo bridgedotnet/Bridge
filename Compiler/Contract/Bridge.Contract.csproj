@@ -89,7 +89,6 @@
     <Compile Include="Config\VersionContext.cs" />
     <Compile Include="Constants\Files.cs" />
     <Compile Include="EmitterCache.cs" />
-    <Compile Include="Config\SourceMapConfig.cs" />
     <Compile Include="Name\Converter.cs" />
     <Compile Include="Name\Semantic.cs" />
     <Compile Include="HashHelper.cs" />

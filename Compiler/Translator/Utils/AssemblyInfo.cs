@@ -19,7 +19,6 @@ namespace Bridge.Translator
             this.Resources = new ResourceConfig();
             this.Loader = new ModuleLoader();
             this.Output = DEFAULT_OUTPUT;
-            this.SourceMap = new SourceMapConfig();
         }
 
         /// <summary>
@@ -295,7 +294,7 @@ namespace Bridge.Translator
             set;
         }
 
-        public SourceMapConfig SourceMap
+        public bool SourceMap
         {
             get; set;
         }

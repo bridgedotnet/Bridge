@@ -37,7 +37,7 @@ namespace Bridge.Translator
 
         public virtual void WriteSourceMapName(string name)
         {
-            if (this.Emitter.AssemblyInfo.SourceMap != null && this.Emitter.AssemblyInfo.SourceMap.Enabled && !this.Emitter.EmitterOutput.Names.Contains(name))
+            if (this.Emitter.AssemblyInfo.SourceMap && !this.Emitter.EmitterOutput.Names.Contains(name))
             {
                 this.Emitter.EmitterOutput.Names.Add(name);
             }
@@ -45,7 +45,7 @@ namespace Bridge.Translator
 
         public virtual void WriteSequencePoint(DomRegion region)
         {
-            if (this.Emitter.AssemblyInfo.SourceMap.Enabled)
+            if (this.Emitter.AssemblyInfo.SourceMap)
             {
                 var line = region.BeginLine;
                 var column = region.BeginColumn;

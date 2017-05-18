@@ -203,7 +203,7 @@ namespace Bridge.Translator
                     needRecompile = true;
                 }
 
-                if (this.AssemblyInfo.SourceMap.Enabled)
+                if (this.AssemblyInfo.SourceMap)
                 {
                     var text = syntaxTree.ToString(Translator.GetFormatter());
 
@@ -356,7 +356,7 @@ namespace Bridge.Translator
 
                     if (!this.AssemblyInfo.CombineScripts && isJs)
                     {
-                        code = this.GenerateSourceMap(file.FullName, path, code);
+                        code = this.GenerateSourceMap(file.FullName, code);
                     }
 
                     this.SaveToFile(file.FullName, code);
@@ -376,7 +376,7 @@ namespace Bridge.Translator
 
                     if (!this.AssemblyInfo.CombineScripts)
                     {
-                        contentMinified = this.GenerateSourceMap(file.FullName, path, contentMinified);
+                        contentMinified = this.GenerateSourceMap(file.FullName, contentMinified);
                     }
 
                     this.SaveToFile(file.FullName, contentMinified);
@@ -388,12 +388,12 @@ namespace Bridge.Translator
             return files;
         }
 
-        public string GenerateSourceMap(string fileName, string outputPath, string content, Action<SourceMapBuilder> before = null)
+        public string GenerateSourceMap(string fileName, string content, Action<SourceMapBuilder> before = null)
         {
-            if (this.AssemblyInfo.SourceMap.Enabled)
+            if (this.AssemblyInfo.SourceMap)
             {
                 var projectPath = Path.GetDirectoryName(this.Location);
-                SourceMapGenerator.Generate(fileName, projectPath, outputPath, this.AssemblyInfo.SourceMap.SourceRoot, ref content, before, sourceRelativePath =>
+                SourceMapGenerator.Generate(fileName, projectPath, ref content, before, sourceRelativePath =>
                 {
                     var path = Path.Combine(projectPath, sourceRelativePath);
                     var sourceFile = this.ParsedSourceFiles.First(pf => pf.ParsedFile.FileName == path);
@@ -983,14 +983,14 @@ namespace Bridge.Translator
 
             if (this.jsbuffer != null && this.jsbuffer.Length > 0)
             {
-                var code = this.GenerateSourceMap(filePath, path, this.jsbuffer.ToString());
+                var code = this.GenerateSourceMap(filePath, this.jsbuffer.ToString());
                 File.WriteAllText(filePath, code, OutputEncoding);
             }
 
             if (this.jsminbuffer != null && this.jsminbuffer.Length > 0)
             {
                 var filePathMin = FileHelper.GetMinifiedJSFileName(filePath);
-                var code = this.GenerateSourceMap(filePathMin, path, this.jsminbuffer.ToString());
+                var code = this.GenerateSourceMap(filePathMin, this.jsminbuffer.ToString());
                 File.WriteAllText(filePathMin, code, OutputEncoding);
             }
 
