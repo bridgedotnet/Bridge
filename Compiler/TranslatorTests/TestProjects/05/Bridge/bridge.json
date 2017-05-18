@@ -3,5 +3,6 @@
   "cleanOutputFolderBeforeBuildPattern": "*.*",
   "outputBy": "Namespace",
   "outputFormatting": "Formatted",
-  "fileNameCasing": "CamelCase"
+  "fileNameCasing": "CamelCase",
+  "sourceMap": true
 }

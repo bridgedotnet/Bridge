@@ -4,5 +4,6 @@
   "outputFormatting": "Formatted",
 
   "autoPropertyToField": true,
-  "combineScripts":  true
+  "combineScripts":  true,
+  "sourceMap": true
 }
