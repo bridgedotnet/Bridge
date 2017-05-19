@@ -28,7 +28,7 @@ namespace Bridge.Contract
         {
             var config = value as SourceMapConfig;
 
-            if (!config.Eol.HasValue)
+            if (config != null && !config.Eol.HasValue)
             {
                 serializer.Serialize(writer, config.Enabled);
             }
