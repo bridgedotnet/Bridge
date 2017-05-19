@@ -9,15 +9,21 @@ namespace Bridge.Translator
 {
     public class SourceMapGenerator : ISourceMapRecorder
     {
+        public UnicodeNewline? ForceEols
+        {
+            get; set;
+        }
+
         public SourceMapBuilder SourceMapBuilder
         {
             get;
         }
 
-        public SourceMapGenerator(string scriptPath, string sourceRoot)
+        public SourceMapGenerator(string scriptPath, string sourceRoot, UnicodeNewline? forceEols = null)
         {
             string scriptFileName = Path.GetFileName(scriptPath);
             this.SourceMapBuilder = new SourceMapBuilder(scriptFileName, sourceRoot);
+            this.ForceEols = forceEols;
         }
 
         public void RecordLocation(int scriptLine, int scriptCol, string sourcePath, int sourceLine, int sourceCol)
@@ -37,7 +43,7 @@ namespace Bridge.Translator
 
         public string GetSourceMap(string[] sourcesContent)
         {
-            return this.SourceMapBuilder.Build(sourcesContent);
+            return this.SourceMapBuilder.Build(sourcesContent, this.ForceEols);
         }
 
         internal static Regex tokenRegex = new Regex(@"/\*##\|(.+?),(\d+?),(\d+?)\|##\*/", RegexOptions.Compiled);
@@ -45,7 +51,7 @@ namespace Bridge.Translator
         public static void Generate(string scriptFileName, string basePath, ref string content, Action<SourceMapBuilder> beforeGenerate, Func<string, string> sourceContent, string[] names, IList<string> sourceFiles, ILogger logger)
         {
             var fileName = Path.GetFileName(scriptFileName);
-            var generator = new SourceMapGenerator(fileName, "");
+            var generator = new SourceMapGenerator(fileName, "", UnicodeNewline.LF);
             StringLocation location = null;
             string script = content;
             int offset = 0;

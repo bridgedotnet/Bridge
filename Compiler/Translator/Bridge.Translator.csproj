@@ -231,6 +231,7 @@
     <Compile Include="SourceMaps\SourceMapGenerator.cs" />
     <Compile Include="Translator\InvocationInterceptor.cs" />
     <Compile Include="Translator\Plugins.cs" />
+    <Compile Include="Utils\TextHelper.cs" />
     <Compile Include="Utils\LoopVariablesAnalyzer.cs" />
     <Compile Include="Utils\Loader.cs" />
     <Compile Include="Utils\FileHelper.cs" />

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 
@@ -78,7 +79,7 @@ namespace Bridge.Translator
             _entries.Add(new SourceMapEntry(sourceLocation, scriptLine, scriptColumn));
         }
 
-        public string Build(string[] sourcesContent = null)
+        public string Build(string[] sourcesContent, Bridge.Contract.UnicodeNewline? forceEol = null)
         {
             ResetPreviousSourceLocation();
 
@@ -105,6 +106,11 @@ namespace Bridge.Translator
 
             if (sourcesContent != null)
             {
+                if (forceEol.HasValue)
+                {
+                    sourcesContent = sourcesContent.Select(x => TextHelper.NormilizeEols(x, forceEol.Value)).ToArray();
+                }
+
                 buffer.Append("," + nl);
                 buffer.Append("  \"sourcesContent\": ");
                 buffer.Append(JsonConvert.SerializeObject(sourcesContent));

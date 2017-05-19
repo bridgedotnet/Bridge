@@ -87,6 +87,7 @@
     <Compile Include="BridgeType.cs" />
     <Compile Include="Config\NamedFunctionMode.cs" />
     <Compile Include="Config\VersionContext.cs" />
+    <Compile Include="UnicodeNewline.cs" />
     <Compile Include="Constants\Files.cs" />
     <Compile Include="EmitterCache.cs" />
     <Compile Include="Name\Converter.cs" />
