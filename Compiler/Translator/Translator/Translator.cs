@@ -372,7 +372,7 @@ namespace Bridge.Translator
 
         public string GenerateSourceMap(string fileName, string content, Action<SourceMapBuilder> before = null)
         {
-            if (this.AssemblyInfo.SourceMap)
+            if (this.AssemblyInfo.SourceMap.Enabled)
             {
                 var projectPath = Path.GetDirectoryName(this.Location);
 
@@ -398,7 +398,7 @@ namespace Bridge.Translator
                         }
 
                     },
-                    new string[0], this.SourceFiles, this.Log);
+                    new string[0], this.SourceFiles, this.AssemblyInfo.SourceMap.Eol, this.Log);
             }
             return content;
         }

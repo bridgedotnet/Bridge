@@ -189,7 +189,7 @@ namespace Bridge.Contract
             set;
         }
 
-        bool SourceMap
+        SourceMapConfig SourceMap
         {
             get; set;
         }

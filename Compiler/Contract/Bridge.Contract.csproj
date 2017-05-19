@@ -86,7 +86,9 @@
     <Compile Include="AbstractPlugin.cs" />
     <Compile Include="BridgeType.cs" />
     <Compile Include="Config\NamedFunctionMode.cs" />
+    <Compile Include="Config\SourceMapConfig.cs" />
     <Compile Include="Config\VersionContext.cs" />
+    <Compile Include="Constants\Messages.cs" />
     <Compile Include="UnicodeNewline.cs" />
     <Compile Include="Constants\Files.cs" />
     <Compile Include="EmitterCache.cs" />

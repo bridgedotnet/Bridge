@@ -22,7 +22,7 @@ namespace Bridge.Translator
 
         public virtual string RemoveTokens(string code)
         {
-            return this.Emitter.AssemblyInfo.SourceMap
+            return this.Emitter.AssemblyInfo.SourceMap.Enabled
                         ? SourceMapGenerator.tokenRegex.Replace(code, "")
                         : code;
         }
@@ -44,7 +44,7 @@ namespace Bridge.Translator
 
         public virtual void WriteSourceMapName(string name)
         {
-            if (this.Emitter.AssemblyInfo.SourceMap && !this.Emitter.EmitterOutput.Names.Contains(name))
+            if (this.Emitter.AssemblyInfo.SourceMap.Enabled && !this.Emitter.EmitterOutput.Names.Contains(name))
             {
                 this.Emitter.EmitterOutput.Names.Add(name);
             }
@@ -52,7 +52,7 @@ namespace Bridge.Translator
 
         public virtual void WriteSequencePoint(DomRegion region)
         {
-            if (this.Emitter.AssemblyInfo.SourceMap)
+            if (this.Emitter.AssemblyInfo.SourceMap.Enabled)
             {
                 var line = region.BeginLine;
                 var column = region.BeginColumn;

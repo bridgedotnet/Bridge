@@ -5,5 +5,8 @@
 
   "autoPropertyToField": true,
   "combineScripts":  true,
-  "sourceMap": true
+  "sourceMap": {
+    "enabled": true,
+    "eol": "crlf"
+  }
 }

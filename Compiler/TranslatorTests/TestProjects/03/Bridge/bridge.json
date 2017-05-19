@@ -3,5 +3,8 @@
   "outputBy": "Namespace",
   "cleanOutputFolderBeforeBuildPattern": "*.*",
   "outputFormatting": "Minified",
-  "sourceMap": true
+  "sourceMap": {
+    "enabled": true,
+    "eol": "crlf"
+  }
 }

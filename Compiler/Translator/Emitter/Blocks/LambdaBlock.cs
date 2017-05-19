@@ -315,11 +315,11 @@ namespace Bridge.Translator
 
                     var pair = this.Emitter.NamedFunctions.FirstOrDefault(p =>
                     {
-                        if (this.Emitter.AssemblyInfo.SourceMap)
+                        if (this.Emitter.AssemblyInfo.SourceMap.Enabled)
                         {
                             return this.RemoveTokens(p.Value) == codeForComare;
                         }
-                        
+
                         return p.Value == code;
                     });
 
@@ -335,7 +335,7 @@ namespace Bridge.Translator
                     this.Emitter.Output.Remove(savedPos, this.Emitter.Output.Length - savedPos);
                     this.Emitter.Output.Insert(savedPos, JS.Vars.D_ + "." + BridgeTypes.ToJsName(this.Emitter.TypeInfo.Type, this.Emitter, true) + "." + name);
                 }
-                
+
                 this.Emitter.ResetLevel(oldLevel);
             }
 
