@@ -4,5 +4,9 @@
   "outputBy": "Namespace",
   "outputFormatting": "Formatted",
   "fileNameCasing": "CamelCase",
-  "sourceMap": true
+  "sourceMap": true,
+  "logging": {
+    "level": "Trace",
+    "folder": "../../$(OutputPath)" // output to the Integration Test common log
+  }
 }
