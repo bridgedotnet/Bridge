@@ -398,7 +398,7 @@ namespace Bridge.Translator
                         }
 
                     },
-                    new string[0], this.SourceFiles);
+                    new string[0], this.SourceFiles, this.Log);
             }
             return content;
         }

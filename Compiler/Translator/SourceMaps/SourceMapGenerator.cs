@@ -42,7 +42,7 @@ namespace Bridge.Translator
 
         internal static Regex tokenRegex = new Regex(@"/\*##\|(.+?),(\d+?),(\d+?)\|##\*/", RegexOptions.Compiled);
 
-        public static void Generate(string scriptFileName, string basePath, ref string content, Action<SourceMapBuilder> beforeGenerate, Func<string, string> sourceContent, string[] names, IList<string> sourceFiles)
+        public static void Generate(string scriptFileName, string basePath, ref string content, Action<SourceMapBuilder> beforeGenerate, Func<string, string> sourceContent, string[] names, IList<string> sourceFiles, ILogger logger)
         {
             var fileName = Path.GetFileName(scriptFileName);
             var generator = new SourceMapGenerator(fileName, "");
@@ -78,10 +78,22 @@ namespace Bridge.Translator
 
             var map = generator.GetSourceMap(contents.ToArray());
 
-            content = content
-                + Emitter.NEW_LINE
-                + "//# sourceMappingURL=data:application/json;base64,"
-                + System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(map));
+            if (logger != null)
+            {
+                logger.Trace("SourceMap for " + scriptFileName);
+                logger.Trace(map);
+            }
+
+            var encoded = "//# sourceMappingURL=data:application/json;base64,"
+                + Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(map));
+
+            if (logger != null)
+            {
+                logger.Trace("Base64 SourceMap for " + scriptFileName);
+                logger.Trace(encoded);
+            }
+
+            content = content + Emitter.NEW_LINE + encoded;
         }
 
         private static StringLocation LocationFromPos(string s, int pos, StringLocation lastLocation, ref int offset)
