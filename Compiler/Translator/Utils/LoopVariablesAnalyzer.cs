@@ -26,9 +26,15 @@ namespace Bridge.Translator
             get; set;
         }
 
-        public LoopVariablesAnalyzer(IEmitter emitter)
+        public LoopVariablesAnalyzer(IEmitter emitter, bool excludeReadOnly)
         {
             this.Emitter = emitter;
+            this.ExcludeReadOnly = excludeReadOnly;
+        }
+
+        public bool ExcludeReadOnly
+        {
+            get; set;
         }
 
         public void Analyze(AstNode node)
@@ -40,7 +46,7 @@ namespace Bridge.Translator
 
             this.VariableNames.Clear();
 
-            if (node is ForeachStatement)
+            if (node is ForeachStatement && !this.ExcludeReadOnly)
             {
                 var foreachStatement = (ForeachStatement) node;
                 this.VariableNames.Add(foreachStatement.VariableName);
@@ -60,6 +66,18 @@ namespace Bridge.Translator
                 this.Variables.Add(lrr.Variable);
             }
             base.VisitVariableDeclarationStatement(variableDeclarationStatement);
+        }
+
+        public override void VisitCatchClause(CatchClause catchClause)
+        {
+            if (!this.ExcludeReadOnly)
+            {
+                this.VariableNames.Add(catchClause.VariableName);
+                var lrr = (LocalResolveResult)this.Emitter.Resolver.ResolveNode(catchClause.VariableNameToken, this.Emitter);
+                this.Variables.Add(lrr.Variable);
+            }
+            
+            base.VisitCatchClause(catchClause);
         }
 
         public override void VisitLambdaExpression(LambdaExpression lambdaExpression)

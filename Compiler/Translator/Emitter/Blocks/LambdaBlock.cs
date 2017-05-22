@@ -144,10 +144,10 @@ namespace Bridge.Translator
             this.Emitter.ReplaceJump = oldReplaceJump;
         }
 
-        private Statement GetOuterLoop()
+        internal static Statement GetOuterLoop(AstNode context)
         {
             Statement loop = null;
-            this.Context.GetParent(node =>
+            context.GetParent(node =>
             {
                 bool stopSearch = false;
 
@@ -171,31 +171,41 @@ namespace Bridge.Translator
             return loop;
         }
 
-        private string[] GetCapturedLoopVariables()
+        internal static IVariable[] GetCapturedLoopVariables(IEmitter emitter, AstNode context, IEnumerable<ParameterDeclaration> parameters, bool excludeReadOnly = false)
         {
-            var loop = this.GetOuterLoop();
+            var loop = LambdaBlock.GetOuterLoop(context);
             if (loop == null)
             {
                 return null;
             }
 
-            var loopVariablesAnalyzer = new LoopVariablesAnalyzer(this.Emitter);
+            var loopVariablesAnalyzer = new LoopVariablesAnalyzer(emitter, excludeReadOnly);
             loopVariablesAnalyzer.Analyze(loop);
 
-            var captureAnalyzer = new CaptureAnalyzer(this.Emitter);
-            captureAnalyzer.Analyze(this.Context, this.Parameters.Select(p => p.Name));
-            var capturedVariables = captureAnalyzer.UsedVariables.Where(v => loopVariablesAnalyzer.Variables.Contains(v)).ToArray();
+            var captureAnalyzer = new CaptureAnalyzer(emitter);
+            captureAnalyzer.Analyze(context, parameters.Select(p => p.Name));
+            return captureAnalyzer.UsedVariables.Where(v => loopVariablesAnalyzer.Variables.Contains(v)).ToArray();
+        }
+
+        private string[] GetCapturedLoopVariablesNames()
+        {
+            var capturedVariables = LambdaBlock.GetCapturedLoopVariables(this.Emitter, this.Context, this.Parameters);
+
+            if (capturedVariables == null)
+            {
+                return null;
+            }
 
             List<string> names = new List<string>();
             foreach (var capturedVariable in capturedVariables)
             {
                 if (this.Emitter.LocalsMap != null && this.Emitter.LocalsMap.ContainsKey(capturedVariable))
                 {
-                    names.Add(this.Emitter.LocalsMap[capturedVariable]);
+                    names.Add(this.RemoveReferencePart(this.Emitter.LocalsMap[capturedVariable]));
                 }
                 else if (this.Emitter.LocalsNamesMap != null && this.Emitter.LocalsNamesMap.ContainsKey(capturedVariable.Name))
                 {
-                    names.Add(this.Emitter.LocalsNamesMap[capturedVariable.Name]);
+                    names.Add(this.RemoveReferencePart(this.Emitter.LocalsNamesMap[capturedVariable.Name]));
                 }
                 else
                 {
@@ -204,6 +214,16 @@ namespace Bridge.Translator
             }
 
             return names.ToArray();
+        }
+
+        private string RemoveReferencePart(string name)
+        {
+            if (name.EndsWith(".v"))
+            {
+                name = name.Remove(name.Length - 2);
+            }
+
+            return name;
         }
 
         protected virtual void EmitLambda(IEnumerable<ParameterDeclaration> parameters, AstNode body, AstNode context)
@@ -247,7 +267,7 @@ namespace Bridge.Translator
 
             var savedPos = this.Emitter.Output.Length;
             var savedThisCount = this.Emitter.ThisRefCounter;
-            var capturedVariables = this.GetCapturedLoopVariables();
+            var capturedVariables = this.GetCapturedLoopVariablesNames();
 
             if (capturedVariables != null && capturedVariables.Length > 0)
             {
