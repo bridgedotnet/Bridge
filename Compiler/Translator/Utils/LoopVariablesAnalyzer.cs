@@ -41,14 +41,14 @@ namespace Bridge.Translator
         {
             if (node is ForStatement)
             {
-                node = ((ForStatement) node).EmbeddedStatement;
+                node = ((ForStatement)node).EmbeddedStatement;
             }
 
             this.VariableNames.Clear();
 
             if (node is ForeachStatement && !this.ExcludeReadOnly)
             {
-                var foreachStatement = (ForeachStatement) node;
+                var foreachStatement = (ForeachStatement)node;
                 this.VariableNames.Add(foreachStatement.VariableName);
                 var rr = (ForEachResolveResult)this.Emitter.Resolver.ResolveNode(foreachStatement, this.Emitter);
                 this.Variables.Add(rr.ElementVariable);
@@ -76,7 +76,7 @@ namespace Bridge.Translator
                 var lrr = (LocalResolveResult)this.Emitter.Resolver.ResolveNode(catchClause.VariableNameToken, this.Emitter);
                 this.Variables.Add(lrr.Variable);
             }
-            
+
             base.VisitCatchClause(catchClause);
         }
 

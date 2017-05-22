@@ -285,7 +285,7 @@ namespace Bridge.Translator
 
                                     if (expandParams)
                                     {
-                                        this.Write(string.Format("{0} = " + JS.Types.ARRAY + "." + JS.Fields.PROTOTYPE + "." + JS.Funcs.SLICE + "." + JS.Funcs.CALL +"(" + JS.Vars.ARGUMENTS +", {1});", name, method.Parameters.IndexOf(prm) + method.TypeParameters.Count));
+                                        this.Write(string.Format("{0} = " + JS.Types.ARRAY + "." + JS.Fields.PROTOTYPE + "." + JS.Funcs.SLICE + "." + JS.Funcs.CALL + "(" + JS.Vars.ARGUMENTS + ", {1});", name, method.Parameters.IndexOf(prm) + method.TypeParameters.Count));
                                     }
                                     else
                                     {
