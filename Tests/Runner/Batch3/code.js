@@ -19982,6 +19982,17 @@ Bridge.$N1391Result =                     r;
         }
     }; });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2692", {
+        statics: {
+            methods: {
+                TestUnusedGotoLabel: function () {
+                    var value = 7;
+                    Bridge.Test.NUnit.Assert.AreEqual(7, value);
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge272", {
         statics: {
             methods: {
