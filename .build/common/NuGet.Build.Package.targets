@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <!--This value will be used if NuGetUseExplicitVersion != true and the target is not able to read version automatically-->
-    <DefaultPackageVersion>16.0.0-beta</DefaultPackageVersion>
+    <DefaultPackageVersion>16.0.0-beta2</DefaultPackageVersion>
     <OnWin>true</OnWin>
     <OnWin Condition="'$(OS)' != 'Windows_NT'">false</OnWin>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
