@@ -29,14 +29,14 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="selectors">String containing one or more CSS selectors separated by commas.</param>
         /// <returns></returns>
-        public virtual extern HTMLElement QuerySelector(string selectors);
+        public virtual extern Element QuerySelector(string selectors);
 
         /// <summary>
         /// Returns the first Element node within the DocumentFragment, in document order, that matches the specified selectors.
         /// </summary>
         /// <param name="selectors">selectors is a string containing one or more CSS selectors separated by commas.</param>
         /// <returns></returns>
-        public virtual extern T QuerySelector<T>(string selectors) where T : HTMLElement;
+        public virtual extern T QuerySelector<T>(string selectors) where T : Element;
 
         /// <summary>
         /// Returns a NodeList of all the Element nodes within the DocumentFragment that match the specified selectors.
