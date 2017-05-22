@@ -125,8 +125,9 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TopologicalSorting">
-      <HintPath>..\..\packages\TopologicalSorting.1.0.1.0\lib\net40\TopologicalSorting.dll</HintPath>
+    <Reference Include="TopologicalSorting, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\TopologicalSorting.1.0.2\lib\net40\TopologicalSorting.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
