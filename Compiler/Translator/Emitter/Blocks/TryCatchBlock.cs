@@ -5,6 +5,7 @@ using Object.Net.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ICSharpCode.NRefactory.Semantics;
 
 namespace Bridge.Translator
 {
@@ -279,6 +280,7 @@ namespace Bridge.Translator
 
                 this.BeginBlock();
                 this.Write(string.Format("{0} = " + JS.Types.System.Exception.CREATE + "({0});", varName));
+
                 this.WriteNewLine();
                 this.Emitter.NoBraceBlock = clause.Body;
                 clause.Body.AcceptVisitor(this.Emitter);

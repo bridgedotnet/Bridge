@@ -19258,10 +19258,10 @@ Bridge.$N1391Result =                     r;
                                         array = System.Array.init(10, null, Function);
 
                                         for (n = 0; n < 10; n = (n + 1) | 0) {
-                                            a = ($t=new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2633.A(), $t.Value = n, $t);
+                                            a = { v : ($t=new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2633.A(), $t.Value = n, $t) };
                                             array[System.Array.index(n, array)] = (function (a) {
                                                 return function (i) {
-                                                    Bridge.Test.NUnit.Assert.AreEqual(i, a.Value);
+                                                    Bridge.Test.NUnit.Assert.AreEqual(i, a.v.Value);
                                                 };
                                             })(a);
                                         }
@@ -19981,6 +19981,72 @@ Bridge.$N1391Result =                     r;
             }
         }
     }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2685", {
+        statics: {
+            methods: {
+                TestPartialClasses: function () {
+                    Bridge.Test.NUnit.Assert.AreEqual("123 - 456", new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2685.TestClass(123, 456).toString());
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2685.BaseClass", {
+        props: {
+            Y: 0
+        },
+        ctors: {
+            ctor: function (y) {
+                this.$initialize();
+                this.Y = y;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2685.IBase", {
+        $kind: "interface"
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2686", {
+        statics: {
+            methods: {
+                TestCapturedReferenceVariable: function () {
+                    for (var i = 0; i < 1; i = (i + 1) | 0) {
+                        var accounts = new (System.Collections.Generic.Dictionary$2(System.Int64,System.Collections.Generic.List$1(System.Object)))();
+                        var accountId = System.Int64(1);
+                        var args;
+                        var api = { v : 1 };
+                        Bridge.ClientTest.Batch3.BridgeIssues.Bridge2686.M1(api);
+                        accounts.add(accountId, (args = (function (api) {
+                                return function (_o45) {
+                                    _o45.add(Bridge.box(api.v, System.Int32));
+                                    _o45.add(Bridge.box(0, System.Int32));
+                                    return _o45;
+                                };
+                            })(api)(new (System.Collections.Generic.List$1(System.Object))())));
+
+                        Bridge.Test.NUnit.Assert.AreEqual(2, System.Nullable.getValue(Bridge.cast(Bridge.unbox(args.getItem(0)), System.Int32)));
+                    }
+                },
+                TestChangeableCapturedReferenceVariable: function () {
+                    for (var i = 0; i < 1; i = (i + 1) | 0) {
+                        var k = { v : 1 };
+                        var a = (function (k) {
+                            return function () {
+                                Bridge.identity(k.v, (k.v = (k.v + 1) | 0));
+                            };
+                        })(k);
+                        a();
+                        Bridge.Test.NUnit.Assert.AreEqual(2, k.v);
+                    }
+                },
+                M1: function (api) {
+                    api.v = 2;
+                }
+            }
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2692", {
         statics: {
@@ -21887,10 +21953,10 @@ Bridge.$N1391Result =                     r;
                     var result = "";
 
                     for (var j = 0; j < keys.length; ((j++) | 0)) {
-                        var itm = keys[System.Array.index(j, keys)];
+                        var itm = { v : keys[System.Array.index(j, keys)] };
                         handlers[System.Array.index(((i++) | 0), handlers)] = (function (itm) {
                             return function () {
-                                result += itm;
+                                result += itm.v;
                             };
                         })(itm);
                     }
@@ -28212,30 +28278,30 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues, {
-        f1: function (_o45) {
-            _o45.add(0);
-            _o45.add(1);
-            _o45.add(2);
-            _o45.add(3);
-            _o45.add(4);
-            return _o45;
-        },
-        f2: function (_o46) {
-            _o46.add(3, "b");
-            _o46.add(6, "z");
-            _o46.add(9, "x");
+        f1: function (_o46) {
+            _o46.add(0);
+            _o46.add(1);
+            _o46.add(2);
+            _o46.add(3);
+            _o46.add(4);
             return _o46;
+        },
+        f2: function (_o47) {
+            _o47.add(3, "b");
+            _o47.add(6, "z");
+            _o47.add(9, "x");
+            return _o47;
         },
         f3: function (i) {
             return ((i * 2) | 0);
         },
-        f4: function (_o47) {
-            _o47.add(0);
-            _o47.add(1);
-            _o47.add(2);
-            _o47.add(3);
-            _o47.add(4);
-            return _o47;
+        f4: function (_o48) {
+            _o48.add(0);
+            _o48.add(1);
+            _o48.add(2);
+            _o48.add(3);
+            _o48.add(4);
+            return _o48;
         }
     });
 
@@ -29837,6 +29903,25 @@ Bridge.$N1391Result =                     r;
             },
             M1: function () {
                 return 3;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2685.TestClass", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2685.BaseClass,Bridge.ClientTest.Batch3.BridgeIssues.Bridge2685.IBase],
+        props: {
+            X: 0
+        },
+        ctors: {
+            ctor: function (x, y) {
+                this.$initialize();
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2685.BaseClass.ctor.call(this, y);
+                this.X = x;
+            }
+        },
+        methods: {
+            toString: function () {
+                return System.String.format("{0} - {1}", Bridge.box(this.X, System.Int32), Bridge.box(this.Y, System.Int32));
             }
         }
     });

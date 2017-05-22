@@ -48,7 +48,7 @@ namespace Bridge.Translator
 
         public virtual void AddLocals(IEnumerable<ParameterDeclaration> declarations, AstNode statement)
         {
-            var visitor = new ReferenceArgumentVisitor();
+            var visitor = new ReferenceArgumentVisitor(this.Emitter);
             statement.AcceptVisitor(visitor);
 
             declarations.ToList().ForEach(item =>
@@ -87,6 +87,17 @@ namespace Bridge.Translator
                     }
                     this.Emitter.LocalsMap[lrr.Variable] = name + ".v";
                 }
+            }
+
+            foreach (var variable in visitor.DirectionVariables)
+            {
+                var name = variable.Name;
+
+                if (Helpers.IsReservedWord(this.Emitter, name))
+                {
+                    name = Helpers.ChangeReservedWord(name);
+                }
+                this.Emitter.LocalsMap[variable] = name + ".v";
             }
         }
 
@@ -274,7 +285,7 @@ namespace Bridge.Translator
 
                                     if (expandParams)
                                     {
-                                        this.Write(string.Format("{0} = " + JS.Types.ARRAY + "." + JS.Fields.PROTOTYPE + "." + JS.Funcs.SLICE + "." + JS.Funcs.CALL +"(" + JS.Vars.ARGUMENTS +", {1});", name, method.Parameters.IndexOf(prm) + method.TypeParameters.Count));
+                                        this.Write(string.Format("{0} = " + JS.Types.ARRAY + "." + JS.Fields.PROTOTYPE + "." + JS.Funcs.SLICE + "." + JS.Funcs.CALL + "(" + JS.Vars.ARGUMENTS + ", {1});", name, method.Parameters.IndexOf(prm) + method.TypeParameters.Count));
                                     }
                                     else
                                     {

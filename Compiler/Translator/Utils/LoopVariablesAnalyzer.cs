@@ -26,23 +26,29 @@ namespace Bridge.Translator
             get; set;
         }
 
-        public LoopVariablesAnalyzer(IEmitter emitter)
+        public LoopVariablesAnalyzer(IEmitter emitter, bool excludeReadOnly)
         {
             this.Emitter = emitter;
+            this.ExcludeReadOnly = excludeReadOnly;
+        }
+
+        public bool ExcludeReadOnly
+        {
+            get; set;
         }
 
         public void Analyze(AstNode node)
         {
             if (node is ForStatement)
             {
-                node = ((ForStatement) node).EmbeddedStatement;
+                node = ((ForStatement)node).EmbeddedStatement;
             }
 
             this.VariableNames.Clear();
 
-            if (node is ForeachStatement)
+            if (node is ForeachStatement && !this.ExcludeReadOnly)
             {
-                var foreachStatement = (ForeachStatement) node;
+                var foreachStatement = (ForeachStatement)node;
                 this.VariableNames.Add(foreachStatement.VariableName);
                 var rr = (ForEachResolveResult)this.Emitter.Resolver.ResolveNode(foreachStatement, this.Emitter);
                 this.Variables.Add(rr.ElementVariable);
@@ -60,6 +66,18 @@ namespace Bridge.Translator
                 this.Variables.Add(lrr.Variable);
             }
             base.VisitVariableDeclarationStatement(variableDeclarationStatement);
+        }
+
+        public override void VisitCatchClause(CatchClause catchClause)
+        {
+            if (!this.ExcludeReadOnly)
+            {
+                this.VariableNames.Add(catchClause.VariableName);
+                var lrr = (LocalResolveResult)this.Emitter.Resolver.ResolveNode(catchClause.VariableNameToken, this.Emitter);
+                this.Variables.Add(lrr.Variable);
+            }
+
+            base.VisitCatchClause(catchClause);
         }
 
         public override void VisitLambdaExpression(LambdaExpression lambdaExpression)
