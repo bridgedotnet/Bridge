@@ -19982,6 +19982,32 @@ Bridge.$N1391Result =                     r;
         }
     }; });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2685", {
+        statics: {
+            methods: {
+                TestPartialClasses: function () {
+                    Bridge.Test.NUnit.Assert.AreEqual("123 - 456", new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2685.TestClass(123, 456).toString());
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2685.BaseClass", {
+        props: {
+            Y: 0
+        },
+        ctors: {
+            ctor: function (y) {
+                this.$initialize();
+                this.Y = y;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2685.IBase", {
+        $kind: "interface"
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge272", {
         statics: {
             methods: {
@@ -29826,6 +29852,25 @@ Bridge.$N1391Result =                     r;
             },
             M1: function () {
                 return 3;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2685.TestClass", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2685.BaseClass,Bridge.ClientTest.Batch3.BridgeIssues.Bridge2685.IBase],
+        props: {
+            X: 0
+        },
+        ctors: {
+            ctor: function (x, y) {
+                this.$initialize();
+                Bridge.ClientTest.Batch3.BridgeIssues.Bridge2685.BaseClass.ctor.call(this, y);
+                this.X = x;
+            }
+        },
+        methods: {
+            toString: function () {
+                return System.String.format("{0} - {1}", Bridge.box(this.X, System.Int32), Bridge.box(this.Y, System.Int32));
             }
         }
     });
