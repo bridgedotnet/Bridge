@@ -8,10 +8,15 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     [TestFixture(TestNameFormat = "#2685 - {0}")]
     public class Bridge2685
     {
-        partial class TestClass : IBase { }
+        partial class TestClass : IBase
+        {
+        }
         partial class TestClass : BaseClass, IBase
         {
-            public int X { get; }
+            public int X
+            {
+                get;
+            }
 
             public TestClass(int x, int y) : base(y)
             {
@@ -31,10 +36,15 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 Y = y;
             }
 
-            public int Y { get; }
+            public int Y
+            {
+                get;
+            }
         }
 
-        partial interface IBase { }
+        partial interface IBase
+        {
+        }
 
         [Test]
         public static void TestPartialClasses()

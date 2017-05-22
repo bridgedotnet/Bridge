@@ -11321,7 +11321,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestPartialClasses: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2685).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2685, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestPartialClasses()", $t.Line = "39", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2685).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2685, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestPartialClasses()", $t.Line = "51", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2685.TestPartialClasses();
                 }
             }
