@@ -20048,6 +20048,1878 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689", {
+        statics: {
+            methods: {
+                TestAsyncConditionalExpression1: function () {
+                    var $step = 0,
+                        $task1, 
+                        $task2, 
+                        $taskResult2, 
+                        $jumpFromFinally, 
+                        done, 
+                        c, 
+                        condition, 
+                        result, 
+                        $taskResult1, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            for (;;) {
+                                $step = System.Array.min([0,1,2,3,4], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        done = Bridge.Test.NUnit.Assert.Async();
+
+                                        c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689();
+                                        condition = false;
+
+                                        if (condition) {
+                                            $step = 1;
+                                            continue;
+                                        }  else {
+                                            $step = 2;
+                                            continue;
+                                        }
+                                    }
+                                    case 1: {
+                                        $taskResult1 = c.ShouldNotBeInvoked(System.String, "1");
+                                        $step = 4;
+                                        continue;
+                                    }
+                                    case 2: {
+                                        $task2 = c.GetStr("2");
+                                        $step = 3;
+                                        $task2.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 3: {
+                                        $taskResult2 = $task2.getAwaitedResult();
+                                        $taskResult1 = ($taskResult2).toString();
+                                        $step = 4;
+                                        continue;
+                                    }
+                                    case 4: {
+                                        result = $taskResult1;
+                                        Bridge.Test.NUnit.Assert.AreEqual("2", result);
+
+                                        done();
+                                        return;
+                                    }
+                                    default: {
+                                        return;
+                                    }
+                                }
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                },
+                TestAsyncConditionalExpression2: function () {
+                    var $step = 0,
+                        $task1, 
+                        $task2, 
+                        $taskResult2, 
+                        $task3, 
+                        $taskResult3, 
+                        $jumpFromFinally, 
+                        done, 
+                        c, 
+                        condition, 
+                        result, 
+                        $taskResult1, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            for (;;) {
+                                $step = System.Array.min([0,1,2,3,4,5], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        done = Bridge.Test.NUnit.Assert.Async();
+
+                                        c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689();
+                                        condition = false;
+
+                                        if (condition) {
+                                            $step = 1;
+                                            continue;
+                                        }  else {
+                                            $step = 3;
+                                            continue;
+                                        }
+                                    }
+                                    case 1: {
+                                        $task2 = c.ShouldNotBeInvokedAsync(System.String, "1");
+                                        $step = 2;
+                                        $task2.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 2: {
+                                        $taskResult2 = $task2.getAwaitedResult();
+                                        $taskResult1 = $taskResult2;
+                                        $step = 5;
+                                        continue;
+                                    }
+                                    case 3: {
+                                        $task3 = c.GetStr("2");
+                                        $step = 4;
+                                        $task3.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 4: {
+                                        $taskResult3 = $task3.getAwaitedResult();
+                                        $taskResult1 = $taskResult3;
+                                        $step = 5;
+                                        continue;
+                                    }
+                                    case 5: {
+                                        result = $taskResult1;
+                                        Bridge.Test.NUnit.Assert.AreEqual("2", result);
+
+                                        done();
+                                        return;
+                                    }
+                                    default: {
+                                        return;
+                                    }
+                                }
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                },
+                TestAsyncConditionalExpression3: function () {
+                    var $step = 0,
+                        $task1, 
+                        $task2, 
+                        $taskResult2, 
+                        $jumpFromFinally, 
+                        done, 
+                        c, 
+                        condition, 
+                        result, 
+                        $taskResult1, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            for (;;) {
+                                $step = System.Array.min([0,1,2,3,4], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        done = Bridge.Test.NUnit.Assert.Async();
+
+                                        c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689();
+                                        condition = true;
+
+                                        if (condition) {
+                                            $step = 1;
+                                            continue;
+                                        }  else {
+                                            $step = 3;
+                                            continue;
+                                        }
+                                    }
+                                    case 1: {
+                                        $task2 = c.GetStr("1");
+                                        $step = 2;
+                                        $task2.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 2: {
+                                        $taskResult2 = $task2.getAwaitedResult();
+                                        $taskResult1 = $taskResult2;
+                                        $step = 4;
+                                        continue;
+                                    }
+                                    case 3: {
+                                        $taskResult1 = c.ShouldNotBeInvoked(System.String, "2");
+                                        $step = 4;
+                                        continue;
+                                    }
+                                    case 4: {
+                                        result = $taskResult1;
+                                        Bridge.Test.NUnit.Assert.AreEqual("1", result);
+
+                                        done();
+                                        return;
+                                    }
+                                    default: {
+                                        return;
+                                    }
+                                }
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                },
+                TestAsyncConditionalExpression4: function () {
+                    var $step = 0,
+                        $task1, 
+                        $task2, 
+                        $taskResult2, 
+                        $task3, 
+                        $taskResult3, 
+                        $jumpFromFinally, 
+                        done, 
+                        c, 
+                        condition, 
+                        result, 
+                        $taskResult1, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            for (;;) {
+                                $step = System.Array.min([0,1,2,3,4,5], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        done = Bridge.Test.NUnit.Assert.Async();
+
+                                        c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689();
+                                        condition = true;
+
+                                        if (condition) {
+                                            $step = 1;
+                                            continue;
+                                        }  else {
+                                            $step = 3;
+                                            continue;
+                                        }
+                                    }
+                                    case 1: {
+                                        $task2 = c.GetStr("1");
+                                        $step = 2;
+                                        $task2.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 2: {
+                                        $taskResult2 = $task2.getAwaitedResult();
+                                        $taskResult1 = $taskResult2;
+                                        $step = 5;
+                                        continue;
+                                    }
+                                    case 3: {
+                                        $task3 = c.ShouldNotBeInvokedAsync(System.String, "2");
+                                        $step = 4;
+                                        $task3.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 4: {
+                                        $taskResult3 = $task3.getAwaitedResult();
+                                        $taskResult1 = $taskResult3;
+                                        $step = 5;
+                                        continue;
+                                    }
+                                    case 5: {
+                                        result = $taskResult1;
+                                        Bridge.Test.NUnit.Assert.AreEqual("1", result);
+
+                                        done();
+                                        return;
+                                    }
+                                    default: {
+                                        return;
+                                    }
+                                }
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                },
+                TestAsyncConditionalExpression5: function () {
+                    var $step = 0,
+                        $task1, 
+                        $task2, 
+                        $taskResult2, 
+                        $task3, 
+                        $taskResult3, 
+                        $jumpFromFinally, 
+                        done, 
+                        c, 
+                        condition, 
+                        result, 
+                        $taskResult1, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            for (;;) {
+                                $step = System.Array.min([0,1,2,3,4,5], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        done = Bridge.Test.NUnit.Assert.Async();
+
+                                        c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689();
+                                        condition = false;
+
+                                        if (condition) {
+                                            $step = 1;
+                                            continue;
+                                        }  else {
+                                            $step = 2;
+                                            continue;
+                                        }
+                                    }
+                                    case 1: {
+                                        $taskResult1 = c.ShouldNotBeInvoked(System.String, "1");
+                                        $step = 5;
+                                        continue;
+                                    }
+                                    case 2: {
+                                        $task2 = c.GetStr("3");
+                                        $step = 3;
+                                        $task2.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 3: {
+                                        $taskResult2 = $task2.getAwaitedResult();
+                                        $task3 = c.GetStr("2", $taskResult2);
+                                        $step = 4;
+                                        $task3.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 4: {
+                                        $taskResult3 = $task3.getAwaitedResult();
+                                        $taskResult1 = $taskResult3;
+                                        $step = 5;
+                                        continue;
+                                    }
+                                    case 5: {
+                                        result = $taskResult1;
+                                        Bridge.Test.NUnit.Assert.AreEqual("3", result);
+                                        Bridge.Test.NUnit.Assert.AreEqual("32", c.tracker.toString());
+
+                                        done();
+                                        return;
+                                    }
+                                    default: {
+                                        return;
+                                    }
+                                }
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                },
+                TestAsyncConditionalExpression6: function () {
+                    var $step = 0,
+                        $task1, 
+                        $task2, 
+                        $taskResult2, 
+                        $task3, 
+                        $taskResult3, 
+                        $task4, 
+                        $taskResult4, 
+                        $jumpFromFinally, 
+                        done, 
+                        c, 
+                        condition, 
+                        result, 
+                        $taskResult1, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            for (;;) {
+                                $step = System.Array.min([0,1,2,3,4,5,6], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        done = Bridge.Test.NUnit.Assert.Async();
+
+                                        c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689();
+                                        condition = false;
+
+                                        if (condition) {
+                                            $step = 1;
+                                            continue;
+                                        }  else {
+                                            $step = 2;
+                                            continue;
+                                        }
+                                    }
+                                    case 1: {
+                                        $taskResult1 = c.ShouldNotBeInvoked(System.String, "1");
+                                        $step = 6;
+                                        continue;
+                                    }
+                                    case 2: {
+                                        $task2 = c.GetStr("4");
+                                        $step = 3;
+                                        $task2.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 3: {
+                                        $taskResult2 = $task2.getAwaitedResult();
+                                        $task3 = c.GetStr("3", $taskResult2);
+                                        $step = 4;
+                                        $task3.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 4: {
+                                        $taskResult3 = $task3.getAwaitedResult();
+                                        $task4 = c.GetStr("2", $taskResult3);
+                                        $step = 5;
+                                        $task4.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 5: {
+                                        $taskResult4 = $task4.getAwaitedResult();
+                                        $taskResult1 = $taskResult4;
+                                        $step = 6;
+                                        continue;
+                                    }
+                                    case 6: {
+                                        result = $taskResult1;
+                                        Bridge.Test.NUnit.Assert.AreEqual("4", result);
+                                        Bridge.Test.NUnit.Assert.AreEqual("432", c.tracker.toString());
+
+                                        done();
+                                        return;
+                                    }
+                                    default: {
+                                        return;
+                                    }
+                                }
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                },
+                TestAsyncConditionalExpression7: function () {
+                    var $step = 0,
+                        $task1, 
+                        $task2, 
+                        $taskResult2, 
+                        $task3, 
+                        $taskResult3, 
+                        $task4, 
+                        $taskResult4, 
+                        $jumpFromFinally, 
+                        done, 
+                        c, 
+                        condition, 
+                        result, 
+                        $taskResult1, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            for (;;) {
+                                $step = System.Array.min([0,1,2,3,4,5,6], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        done = Bridge.Test.NUnit.Assert.Async();
+
+                                        c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689();
+                                        condition = true;
+
+                                        if (condition) {
+                                            $step = 1;
+                                            continue;
+                                        }  else {
+                                            $step = 5;
+                                            continue;
+                                        }
+                                    }
+                                    case 1: {
+                                        $task2 = c.GetStr("4");
+                                        $step = 2;
+                                        $task2.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 2: {
+                                        $taskResult2 = $task2.getAwaitedResult();
+                                        $task3 = c.GetStr("3", $taskResult2);
+                                        $step = 3;
+                                        $task3.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 3: {
+                                        $taskResult3 = $task3.getAwaitedResult();
+                                        $task4 = c.GetStr("2", $taskResult3);
+                                        $step = 4;
+                                        $task4.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 4: {
+                                        $taskResult4 = $task4.getAwaitedResult();
+                                        $taskResult1 = $taskResult4;
+                                        $step = 6;
+                                        continue;
+                                    }
+                                    case 5: {
+                                        $taskResult1 = c.ShouldNotBeInvoked(System.String, "1");
+                                        $step = 6;
+                                        continue;
+                                    }
+                                    case 6: {
+                                        result = $taskResult1;
+                                        Bridge.Test.NUnit.Assert.AreEqual("4", result);
+                                        Bridge.Test.NUnit.Assert.AreEqual("432", c.tracker.toString());
+
+                                        done();
+                                        return;
+                                    }
+                                    default: {
+                                        return;
+                                    }
+                                }
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                },
+                TestAsyncConditionalExpression8: function () {
+                    var $step = 0,
+                        $task1, 
+                        $task2, 
+                        $task3, 
+                        $taskResult3, 
+                        $task4, 
+                        $taskResult4, 
+                        $task5, 
+                        $taskResult5, 
+                        $jumpFromFinally, 
+                        done, 
+                        c, 
+                        condition, 
+                        result, 
+                        $taskResult1, 
+                        $taskResult2, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            for (;;) {
+                                $step = System.Array.min([0,1,2,3,4,5,6,7,8,9], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        done = Bridge.Test.NUnit.Assert.Async();
+
+                                        c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689();
+                                        condition = false;
+
+                                        if (condition) {
+                                            $step = 1;
+                                            continue;
+                                        }  else {
+                                            $step = 2;
+                                            continue;
+                                        }
+                                    }
+                                    case 1: {
+                                        $taskResult1 = c.ShouldNotBeInvoked(System.String, "1");
+                                        $step = 9;
+                                        continue;
+                                    }
+                                    case 2: {
+                                        if (condition) {
+                                            $step = 3;
+                                            continue;
+                                        }  else {
+                                            $step = 4;
+                                            continue;
+                                        }
+                                    }
+                                    case 3: {
+                                        $taskResult2 = c.ShouldNotBeInvoked(System.String, "3_1");
+                                        $step = 6;
+                                        continue;
+                                    }
+                                    case 4: {
+                                        $task3 = c.GetStr("3_2");
+                                        $step = 5;
+                                        $task3.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 5: {
+                                        $taskResult3 = $task3.getAwaitedResult();
+                                        $taskResult2 = $taskResult3;
+                                        $step = 6;
+                                        continue;
+                                    }
+                                    case 6: {
+                                        $task4 = c.GetStr("3", $taskResult2);
+                                        $step = 7;
+                                        $task4.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 7: {
+                                        $taskResult4 = $task4.getAwaitedResult();
+                                        $task5 = c.GetStr("2", $taskResult4);
+                                        $step = 8;
+                                        $task5.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 8: {
+                                        $taskResult5 = $task5.getAwaitedResult();
+                                        $taskResult1 = $taskResult5;
+                                        $step = 9;
+                                        continue;
+                                    }
+                                    case 9: {
+                                        result = $taskResult1;
+                                        Bridge.Test.NUnit.Assert.AreEqual("3_2", result);
+                                        Bridge.Test.NUnit.Assert.AreEqual("3_232", c.tracker.toString());
+
+                                        done();
+                                        return;
+                                    }
+                                    default: {
+                                        return;
+                                    }
+                                }
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                },
+                TestAsyncConditionalExpression9: function () {
+                    var $step = 0,
+                        $task1, 
+                        $task2, 
+                        $task3, 
+                        $taskResult3, 
+                        $task4, 
+                        $taskResult4, 
+                        $jumpFromFinally, 
+                        done, 
+                        c, 
+                        condition, 
+                        result, 
+                        $taskResult1, 
+                        $taskResult2, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            for (;;) {
+                                $step = System.Array.min([0,1,2,3,4,5,6,7,8], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        done = Bridge.Test.NUnit.Assert.Async();
+
+                                        c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689();
+                                        condition = true;
+
+                                        if (condition) {
+                                            $step = 1;
+                                            continue;
+                                        }  else {
+                                            $step = 6;
+                                            continue;
+                                        }
+                                    }
+                                    case 1: {
+                                        if (!condition) {
+                                            $step = 2;
+                                            continue;
+                                        }  else {
+                                            $step = 3;
+                                            continue;
+                                        }
+                                    }
+                                    case 2: {
+                                        $taskResult2 = c.ShouldNotBeInvoked(System.String, "1");
+                                        $step = 5;
+                                        continue;
+                                    }
+                                    case 3: {
+                                        $task3 = c.GetStr("2");
+                                        $step = 4;
+                                        $task3.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 4: {
+                                        $taskResult3 = $task3.getAwaitedResult();
+                                        $taskResult2 = $taskResult3;
+                                        $step = 5;
+                                        continue;
+                                    }
+                                    case 5: {
+                                        $taskResult1 = ($taskResult2);
+                                        $step = 8;
+                                        continue;
+                                    }
+                                    case 6: {
+                                        $task4 = c.ShouldNotBeInvokedAsync(System.String, "3");
+                                        $step = 7;
+                                        $task4.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 7: {
+                                        $taskResult4 = $task4.getAwaitedResult();
+                                        $taskResult1 = $taskResult4;
+                                        $step = 8;
+                                        continue;
+                                    }
+                                    case 8: {
+                                        result = $taskResult1;
+                                        Bridge.Test.NUnit.Assert.AreEqual("2", result);
+
+                                        done();
+                                        return;
+                                    }
+                                    default: {
+                                        return;
+                                    }
+                                }
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                },
+                TestAsyncConditionalExpression10: function () {
+                    var $step = 0,
+                        $task1, 
+                        $task2, 
+                        $taskResult2, 
+                        $task3, 
+                        $taskResult3, 
+                        $task4, 
+                        $taskResult4, 
+                        $jumpFromFinally, 
+                        done, 
+                        c, 
+                        result, 
+                        $taskResult1, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            for (;;) {
+                                $step = System.Array.min([0,1,2,3,4,5,6], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        done = Bridge.Test.NUnit.Assert.Async();
+
+                                        c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689();
+
+                                        $task2 = c.GetBool("1", true);
+                                        $step = 1;
+                                        $task2.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 1: {
+                                        $taskResult2 = $task2.getAwaitedResult();
+                                        if ($taskResult2) {
+                                            $step = 2;
+                                            continue;
+                                        }  else {
+                                            $step = 4;
+                                            continue;
+                                        }
+                                    }
+                                    case 2: {
+                                        $task3 = c.GetStr("2");
+                                        $step = 3;
+                                        $task3.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 3: {
+                                        $taskResult3 = $task3.getAwaitedResult();
+                                        $taskResult1 = $taskResult3;
+                                        $step = 6;
+                                        continue;
+                                    }
+                                    case 4: {
+                                        $task4 = c.ShouldNotBeInvokedAsync(System.String, "3");
+                                        $step = 5;
+                                        $task4.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 5: {
+                                        $taskResult4 = $task4.getAwaitedResult();
+                                        $taskResult1 = $taskResult4;
+                                        $step = 6;
+                                        continue;
+                                    }
+                                    case 6: {
+                                        result = $taskResult1;
+                                        Bridge.Test.NUnit.Assert.AreEqual("2", result);
+                                        Bridge.Test.NUnit.Assert.AreEqual("12", c.tracker.toString());
+
+                                        done();
+                                        return;
+                                    }
+                                    default: {
+                                        return;
+                                    }
+                                }
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                },
+                TestAsyncBinaryExpression1: function () {
+                    var $step = 0,
+                        $task1, 
+                        $task2, 
+                        $task3, 
+                        $taskResult3, 
+                        $task4, 
+                        $taskResult4, 
+                        $task5, 
+                        $taskResult5, 
+                        $task6, 
+                        $taskResult6, 
+                        $jumpFromFinally, 
+                        done, 
+                        c, 
+                        result, 
+                        $taskResult1, 
+                        $taskResult2, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            for (;;) {
+                                $step = System.Array.min([0,1,2,3,4,5,6,7,8,9], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        done = Bridge.Test.NUnit.Assert.Async();
+
+                                        c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689();
+
+                                        $task3 = c.GetBool("1", true);
+                                        $step = 1;
+                                        $task3.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 1: {
+                                        $taskResult3 = $task3.getAwaitedResult();
+                                        if ($taskResult3) {
+                                            $step = 2;
+                                            continue;
+                                        }
+                                        $taskResult1 = false;
+                                        $step = 9;
+                                        continue;
+                                    }
+                                    case 2: {
+                                        $task4 = c.GetBool("2", true);
+                                        $step = 3;
+                                        $task4.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 3: {
+                                        $taskResult4 = $task4.getAwaitedResult();
+                                        if ($taskResult4) {
+                                            $step = 4;
+                                            continue;
+                                        }  else {
+                                            $step = 6;
+                                            continue;
+                                        }
+                                    }
+                                    case 4: {
+                                        $task5 = c.GetBool("3", true);
+                                        $step = 5;
+                                        $task5.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 5: {
+                                        $taskResult5 = $task5.getAwaitedResult();
+                                        $taskResult2 = $taskResult5;
+                                        $step = 8;
+                                        continue;
+                                    }
+                                    case 6: {
+                                        $task6 = c.ShouldNotBeInvokedAsync(System.Boolean, "4");
+                                        $step = 7;
+                                        $task6.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 7: {
+                                        $taskResult6 = $task6.getAwaitedResult();
+                                        $taskResult2 = $taskResult6;
+                                        $step = 8;
+                                        continue;
+                                    }
+                                    case 8: {
+                                        $taskResult1 = ($taskResult2);
+                                        $step = 9;
+                                        continue;
+                                    }
+                                    case 9: {
+                                        result = $taskResult1;
+                                        Bridge.Test.NUnit.Assert.True(result);
+                                        Bridge.Test.NUnit.Assert.AreEqual("123", c.tracker.toString());
+
+                                        done();
+                                        return;
+                                    }
+                                    default: {
+                                        return;
+                                    }
+                                }
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                },
+                TestAsyncBinaryExpression2: function () {
+                    var $step = 0,
+                        $task1, 
+                        $task2, 
+                        $task3, 
+                        $taskResult3, 
+                        $task4, 
+                        $taskResult4, 
+                        $task5, 
+                        $taskResult5, 
+                        $jumpFromFinally, 
+                        done, 
+                        c, 
+                        result, 
+                        $taskResult2, 
+                        $taskResult1, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            for (;;) {
+                                $step = System.Array.min([0,1,2,3,4,5,6,7], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        done = Bridge.Test.NUnit.Assert.Async();
+
+                                        c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689();
+
+                                        $task3 = c.GetBool("1", true);
+                                        $step = 1;
+                                        $task3.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 1: {
+                                        $taskResult3 = $task3.getAwaitedResult();
+                                        if ($taskResult3) {
+                                            $step = 2;
+                                            continue;
+                                        }
+                                        $taskResult2 = false;
+                                        $step = 4;
+                                        continue;
+                                    }
+                                    case 2: {
+                                        $task4 = c.GetBool("2", true);
+                                        $step = 3;
+                                        $task4.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 3: {
+                                        $taskResult4 = $task4.getAwaitedResult();
+                                        $taskResult2 = $taskResult4;
+                                        $step = 4;
+                                        continue;
+                                    }
+                                    case 4: {
+                                        if ($taskResult2) {
+                                            $step = 5;
+                                            continue;
+                                        }
+                                        $taskResult1 = false;
+                                        $step = 7;
+                                        continue;
+                                    }
+                                    case 5: {
+                                        $task5 = c.GetBool("3", true);
+                                        $step = 6;
+                                        $task5.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 6: {
+                                        $taskResult5 = $task5.getAwaitedResult();
+                                        $taskResult1 = $taskResult5;
+                                        $step = 7;
+                                        continue;
+                                    }
+                                    case 7: {
+                                        result = $taskResult1;
+                                        Bridge.Test.NUnit.Assert.True(result);
+                                        Bridge.Test.NUnit.Assert.AreEqual("123", c.tracker.toString());
+
+                                        done();
+                                        return;
+                                    }
+                                    default: {
+                                        return;
+                                    }
+                                }
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                },
+                TestAsyncBinaryExpression3: function () {
+                    var $step = 0,
+                        $task1, 
+                        $task2, 
+                        $task3, 
+                        $taskResult3, 
+                        $task4, 
+                        $taskResult4, 
+                        $task5, 
+                        $taskResult5, 
+                        $jumpFromFinally, 
+                        done, 
+                        c, 
+                        result, 
+                        $taskResult2, 
+                        $taskResult1, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            for (;;) {
+                                $step = System.Array.min([0,1,2,3,4,5,6,7], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        done = Bridge.Test.NUnit.Assert.Async();
+
+                                        c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689();
+
+                                        $task3 = c.GetBool("1", true);
+                                        $step = 1;
+                                        $task3.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 1: {
+                                        $taskResult3 = $task3.getAwaitedResult();
+                                        if ($taskResult3) {
+                                            $step = 2;
+                                            continue;
+                                        }
+                                        $taskResult2 = false;
+                                        $step = 4;
+                                        continue;
+                                    }
+                                    case 2: {
+                                        $task4 = c.GetBool("2", false);
+                                        $step = 3;
+                                        $task4.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 3: {
+                                        $taskResult4 = $task4.getAwaitedResult();
+                                        $taskResult2 = $taskResult4;
+                                        $step = 4;
+                                        continue;
+                                    }
+                                    case 4: {
+                                        if ($taskResult2) {
+                                            $step = 5;
+                                            continue;
+                                        }
+                                        $taskResult1 = false;
+                                        $step = 7;
+                                        continue;
+                                    }
+                                    case 5: {
+                                        $task5 = c.GetBool("3", true);
+                                        $step = 6;
+                                        $task5.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 6: {
+                                        $taskResult5 = $task5.getAwaitedResult();
+                                        $taskResult1 = $taskResult5;
+                                        $step = 7;
+                                        continue;
+                                    }
+                                    case 7: {
+                                        result = $taskResult1;
+                                        Bridge.Test.NUnit.Assert.False(result);
+                                        Bridge.Test.NUnit.Assert.AreEqual("12", c.tracker.toString());
+
+                                        done();
+                                        return;
+                                    }
+                                    default: {
+                                        return;
+                                    }
+                                }
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                },
+                TestAsyncBinaryExpression4: function () {
+                    var $step = 0,
+                        $task1, 
+                        $task2, 
+                        $task3, 
+                        $task4, 
+                        $taskResult4, 
+                        $task5, 
+                        $taskResult5, 
+                        $task6, 
+                        $taskResult6, 
+                        $jumpFromFinally, 
+                        done, 
+                        c, 
+                        result, 
+                        $taskResult3, 
+                        $taskResult2, 
+                        $taskResult1, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            for (;;) {
+                                $step = System.Array.min([0,1,2,3,4,5,6,7,8,9], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        done = Bridge.Test.NUnit.Assert.Async();
+
+                                        c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689();
+
+                                        if (true) {
+                                            $step = 1;
+                                            continue;
+                                        }
+                                        $taskResult3 = false;
+                                        $step = 3;
+                                        continue;
+                                    }
+                                    case 1: {
+                                        $task4 = c.GetBool("1", true);
+                                        $step = 2;
+                                        $task4.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 2: {
+                                        $taskResult4 = $task4.getAwaitedResult();
+                                        $taskResult3 = $taskResult4;
+                                        $step = 3;
+                                        continue;
+                                    }
+                                    case 3: {
+                                        if ($taskResult3) {
+                                            $step = 4;
+                                            continue;
+                                        }
+                                        $taskResult2 = false;
+                                        $step = 6;
+                                        continue;
+                                    }
+                                    case 4: {
+                                        $task5 = c.GetBool("2", true);
+                                        $step = 5;
+                                        $task5.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 5: {
+                                        $taskResult5 = $task5.getAwaitedResult();
+                                        $taskResult2 = $taskResult5;
+                                        $step = 6;
+                                        continue;
+                                    }
+                                    case 6: {
+                                        if ($taskResult2) {
+                                            $step = 7;
+                                            continue;
+                                        }
+                                        $taskResult1 = false;
+                                        $step = 9;
+                                        continue;
+                                    }
+                                    case 7: {
+                                        $task6 = c.GetBool("3", true);
+                                        $step = 8;
+                                        $task6.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 8: {
+                                        $taskResult6 = $task6.getAwaitedResult();
+                                        $taskResult1 = $taskResult6;
+                                        $step = 9;
+                                        continue;
+                                    }
+                                    case 9: {
+                                        result = $taskResult1;
+                                        Bridge.Test.NUnit.Assert.True(result);
+                                        Bridge.Test.NUnit.Assert.AreEqual("123", c.tracker.toString());
+
+                                        done();
+                                        return;
+                                    }
+                                    default: {
+                                        return;
+                                    }
+                                }
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                },
+                TestAsyncBinaryExpression5: function () {
+                    var $step = 0,
+                        $task1, 
+                        $task2, 
+                        $task3, 
+                        $taskResult3, 
+                        $task4, 
+                        $taskResult4, 
+                        $task5, 
+                        $taskResult5, 
+                        $task6, 
+                        $taskResult6, 
+                        $jumpFromFinally, 
+                        done, 
+                        c, 
+                        result, 
+                        $taskResult1, 
+                        $taskResult2, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            for (;;) {
+                                $step = System.Array.min([0,1,2,3,4,5,6,7,8,9], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        done = Bridge.Test.NUnit.Assert.Async();
+
+                                        c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689();
+
+                                        $task3 = c.GetBool("1", false);
+                                        $step = 1;
+                                        $task3.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 1: {
+                                        $taskResult3 = $task3.getAwaitedResult();
+                                        if (!$taskResult3) {
+                                            $step = 2;
+                                            continue;
+                                        }
+                                        $taskResult1 = true;
+                                        $step = 9;
+                                        continue;
+                                    }
+                                    case 2: {
+                                        $task4 = c.GetBool("2", true);
+                                        $step = 3;
+                                        $task4.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 3: {
+                                        $taskResult4 = $task4.getAwaitedResult();
+                                        if ($taskResult4) {
+                                            $step = 4;
+                                            continue;
+                                        }  else {
+                                            $step = 6;
+                                            continue;
+                                        }
+                                    }
+                                    case 4: {
+                                        $task5 = c.GetBool("3", true);
+                                        $step = 5;
+                                        $task5.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 5: {
+                                        $taskResult5 = $task5.getAwaitedResult();
+                                        $taskResult2 = $taskResult5;
+                                        $step = 8;
+                                        continue;
+                                    }
+                                    case 6: {
+                                        $task6 = c.ShouldNotBeInvokedAsync(System.Boolean, "4");
+                                        $step = 7;
+                                        $task6.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 7: {
+                                        $taskResult6 = $task6.getAwaitedResult();
+                                        $taskResult2 = $taskResult6;
+                                        $step = 8;
+                                        continue;
+                                    }
+                                    case 8: {
+                                        $taskResult1 = ($taskResult2);
+                                        $step = 9;
+                                        continue;
+                                    }
+                                    case 9: {
+                                        result = $taskResult1;
+                                        Bridge.Test.NUnit.Assert.True(result);
+                                        Bridge.Test.NUnit.Assert.AreEqual("123", c.tracker.toString());
+
+                                        done();
+                                        return;
+                                    }
+                                    default: {
+                                        return;
+                                    }
+                                }
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                },
+                TestAsyncBinaryExpression6: function () {
+                    var $step = 0,
+                        $task1, 
+                        $task2, 
+                        $task3, 
+                        $taskResult3, 
+                        $task4, 
+                        $taskResult4, 
+                        $task5, 
+                        $taskResult5, 
+                        $jumpFromFinally, 
+                        done, 
+                        c, 
+                        result, 
+                        $taskResult2, 
+                        $taskResult1, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            for (;;) {
+                                $step = System.Array.min([0,1,2,3,4,5,6,7], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        done = Bridge.Test.NUnit.Assert.Async();
+
+                                        c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689();
+
+                                        $task3 = c.GetBool("1", false);
+                                        $step = 1;
+                                        $task3.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 1: {
+                                        $taskResult3 = $task3.getAwaitedResult();
+                                        if (!$taskResult3) {
+                                            $step = 2;
+                                            continue;
+                                        }
+                                        $taskResult2 = true;
+                                        $step = 4;
+                                        continue;
+                                    }
+                                    case 2: {
+                                        $task4 = c.GetBool("2", false);
+                                        $step = 3;
+                                        $task4.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 3: {
+                                        $taskResult4 = $task4.getAwaitedResult();
+                                        $taskResult2 = $taskResult4;
+                                        $step = 4;
+                                        continue;
+                                    }
+                                    case 4: {
+                                        if (!$taskResult2) {
+                                            $step = 5;
+                                            continue;
+                                        }
+                                        $taskResult1 = true;
+                                        $step = 7;
+                                        continue;
+                                    }
+                                    case 5: {
+                                        $task5 = c.GetBool("3", true);
+                                        $step = 6;
+                                        $task5.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 6: {
+                                        $taskResult5 = $task5.getAwaitedResult();
+                                        $taskResult1 = $taskResult5;
+                                        $step = 7;
+                                        continue;
+                                    }
+                                    case 7: {
+                                        result = $taskResult1;
+                                        Bridge.Test.NUnit.Assert.True(result);
+                                        Bridge.Test.NUnit.Assert.AreEqual("123", c.tracker.toString());
+
+                                        done();
+                                        return;
+                                    }
+                                    default: {
+                                        return;
+                                    }
+                                }
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                },
+                TestAsyncBinaryExpression7: function () {
+                    var $step = 0,
+                        $task1, 
+                        $task2, 
+                        $task3, 
+                        $taskResult3, 
+                        $task4, 
+                        $taskResult4, 
+                        $task5, 
+                        $taskResult5, 
+                        $jumpFromFinally, 
+                        done, 
+                        c, 
+                        result, 
+                        $taskResult2, 
+                        $taskResult1, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            for (;;) {
+                                $step = System.Array.min([0,1,2,3,4,5,6,7], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        done = Bridge.Test.NUnit.Assert.Async();
+
+                                        c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689();
+
+                                        $task3 = c.GetBool("1", true);
+                                        $step = 1;
+                                        $task3.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 1: {
+                                        $taskResult3 = $task3.getAwaitedResult();
+                                        if (!$taskResult3) {
+                                            $step = 2;
+                                            continue;
+                                        }
+                                        $taskResult2 = true;
+                                        $step = 4;
+                                        continue;
+                                    }
+                                    case 2: {
+                                        $task4 = c.GetBool("2", false);
+                                        $step = 3;
+                                        $task4.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 3: {
+                                        $taskResult4 = $task4.getAwaitedResult();
+                                        $taskResult2 = $taskResult4;
+                                        $step = 4;
+                                        continue;
+                                    }
+                                    case 4: {
+                                        if (!$taskResult2) {
+                                            $step = 5;
+                                            continue;
+                                        }
+                                        $taskResult1 = true;
+                                        $step = 7;
+                                        continue;
+                                    }
+                                    case 5: {
+                                        $task5 = c.GetBool("3", true);
+                                        $step = 6;
+                                        $task5.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 6: {
+                                        $taskResult5 = $task5.getAwaitedResult();
+                                        $taskResult1 = $taskResult5;
+                                        $step = 7;
+                                        continue;
+                                    }
+                                    case 7: {
+                                        result = $taskResult1;
+                                        Bridge.Test.NUnit.Assert.True(result);
+                                        Bridge.Test.NUnit.Assert.AreEqual("1", c.tracker.toString());
+
+                                        done();
+                                        return;
+                                    }
+                                    default: {
+                                        return;
+                                    }
+                                }
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                },
+                TestAsyncBinaryExpression8: function () {
+                    var $step = 0,
+                        $task1, 
+                        $task2, 
+                        $task3, 
+                        $task4, 
+                        $taskResult4, 
+                        $task5, 
+                        $taskResult5, 
+                        $task6, 
+                        $taskResult6, 
+                        $jumpFromFinally, 
+                        done, 
+                        c, 
+                        result, 
+                        $taskResult3, 
+                        $taskResult2, 
+                        $taskResult1, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            for (;;) {
+                                $step = System.Array.min([0,1,2,3,4,5,6,7,8,9], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        done = Bridge.Test.NUnit.Assert.Async();
+
+                                        c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689();
+
+                                        if (!false) {
+                                            $step = 1;
+                                            continue;
+                                        }
+                                        $taskResult3 = true;
+                                        $step = 3;
+                                        continue;
+                                    }
+                                    case 1: {
+                                        $task4 = c.GetBool("1", false);
+                                        $step = 2;
+                                        $task4.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 2: {
+                                        $taskResult4 = $task4.getAwaitedResult();
+                                        $taskResult3 = $taskResult4;
+                                        $step = 3;
+                                        continue;
+                                    }
+                                    case 3: {
+                                        if (!$taskResult3) {
+                                            $step = 4;
+                                            continue;
+                                        }
+                                        $taskResult2 = true;
+                                        $step = 6;
+                                        continue;
+                                    }
+                                    case 4: {
+                                        $task5 = c.GetBool("2", false);
+                                        $step = 5;
+                                        $task5.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 5: {
+                                        $taskResult5 = $task5.getAwaitedResult();
+                                        $taskResult2 = $taskResult5;
+                                        $step = 6;
+                                        continue;
+                                    }
+                                    case 6: {
+                                        if (!$taskResult2) {
+                                            $step = 7;
+                                            continue;
+                                        }
+                                        $taskResult1 = true;
+                                        $step = 9;
+                                        continue;
+                                    }
+                                    case 7: {
+                                        $task6 = c.GetBool("3", false);
+                                        $step = 8;
+                                        $task6.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 8: {
+                                        $taskResult6 = $task6.getAwaitedResult();
+                                        $taskResult1 = $taskResult6;
+                                        $step = 9;
+                                        continue;
+                                    }
+                                    case 9: {
+                                        result = $taskResult1;
+                                        Bridge.Test.NUnit.Assert.False(result);
+                                        Bridge.Test.NUnit.Assert.AreEqual("123", c.tracker.toString());
+
+                                        done();
+                                        return;
+                                    }
+                                    default: {
+                                        return;
+                                    }
+                                }
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                },
+                TestAsyncBinaryExpression9: function () {
+                    var $step = 0,
+                        $task1, 
+                        $task2, 
+                        $task3, 
+                        $taskResult3, 
+                        $task4, 
+                        $taskResult4, 
+                        $task5, 
+                        $taskResult5, 
+                        $jumpFromFinally, 
+                        done, 
+                        c, 
+                        result, 
+                        $taskResult2, 
+                        $taskResult1, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            for (;;) {
+                                $step = System.Array.min([0,1,2,3,4,5,6,7], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        done = Bridge.Test.NUnit.Assert.Async();
+
+                                        c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689();
+
+                                        $task3 = c.GetBool("1", true);
+                                        $step = 1;
+                                        $task3.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 1: {
+                                        $taskResult3 = $task3.getAwaitedResult();
+                                        if ($taskResult3) {
+                                            $step = 2;
+                                            continue;
+                                        }
+                                        $taskResult2 = false;
+                                        $step = 4;
+                                        continue;
+                                    }
+                                    case 2: {
+                                        $task4 = c.GetBool("2", false);
+                                        $step = 3;
+                                        $task4.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 3: {
+                                        $taskResult4 = $task4.getAwaitedResult();
+                                        $taskResult2 = $taskResult4;
+                                        $step = 4;
+                                        continue;
+                                    }
+                                    case 4: {
+                                        if (!$taskResult2) {
+                                            $step = 5;
+                                            continue;
+                                        }
+                                        $taskResult1 = true;
+                                        $step = 7;
+                                        continue;
+                                    }
+                                    case 5: {
+                                        $task5 = c.GetBool("3", true);
+                                        $step = 6;
+                                        $task5.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 6: {
+                                        $taskResult5 = $task5.getAwaitedResult();
+                                        $taskResult1 = $taskResult5;
+                                        $step = 7;
+                                        continue;
+                                    }
+                                    case 7: {
+                                        result = $taskResult1;
+                                        Bridge.Test.NUnit.Assert.True(result);
+                                        Bridge.Test.NUnit.Assert.AreEqual("123", c.tracker.toString());
+
+                                        done();
+                                        return;
+                                    }
+                                    default: {
+                                        return;
+                                    }
+                                }
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                },
+                TestAsyncBinaryExpression10: function () {
+                    var $step = 0,
+                        $task1, 
+                        $task2, 
+                        $task3, 
+                        $taskResult3, 
+                        $task4, 
+                        $taskResult4, 
+                        $task5, 
+                        $taskResult5, 
+                        $jumpFromFinally, 
+                        done, 
+                        c, 
+                        result, 
+                        $taskResult2, 
+                        $taskResult1, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            for (;;) {
+                                $step = System.Array.min([0,1,2,3,4,5,6,7], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        done = Bridge.Test.NUnit.Assert.Async();
+
+                                        c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689();
+
+                                        $task3 = c.GetBool("1", true);
+                                        $step = 1;
+                                        $task3.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 1: {
+                                        $taskResult3 = $task3.getAwaitedResult();
+                                        if ($taskResult3) {
+                                            $step = 2;
+                                            continue;
+                                        }
+                                        $taskResult2 = false;
+                                        $step = 4;
+                                        continue;
+                                    }
+                                    case 2: {
+                                        $task4 = c.GetBool("2", true);
+                                        $step = 3;
+                                        $task4.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 3: {
+                                        $taskResult4 = $task4.getAwaitedResult();
+                                        $taskResult2 = $taskResult4;
+                                        $step = 4;
+                                        continue;
+                                    }
+                                    case 4: {
+                                        if (!$taskResult2) {
+                                            $step = 5;
+                                            continue;
+                                        }
+                                        $taskResult1 = true;
+                                        $step = 7;
+                                        continue;
+                                    }
+                                    case 5: {
+                                        $task5 = c.GetBool("3", false);
+                                        $step = 6;
+                                        $task5.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 6: {
+                                        $taskResult5 = $task5.getAwaitedResult();
+                                        $taskResult1 = $taskResult5;
+                                        $step = 7;
+                                        continue;
+                                    }
+                                    case 7: {
+                                        result = $taskResult1;
+                                        Bridge.Test.NUnit.Assert.True(result);
+                                        Bridge.Test.NUnit.Assert.AreEqual("12", c.tracker.toString());
+
+                                        done();
+                                        return;
+                                    }
+                                    default: {
+                                        return;
+                                    }
+                                }
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                }
+            }
+        },
+        fields: {
+            tracker: null
+        },
+        ctors: {
+            init: function () {
+                this.tracker = new System.Text.StringBuilder();
+            }
+        },
+        methods: {
+            GetStr: function (tag, arg) {
+                var $step = 0,
+                    $task1, 
+                    $jumpFromFinally, 
+                    $tcs = new System.Threading.Tasks.TaskCompletionSource(), 
+                    $returnValue, 
+                    $t, 
+                    $async_e, 
+                    $asyncBody = Bridge.fn.bind(this, function () {
+                        try {
+                            for (;;) {
+                                $step = System.Array.min([0,1], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        if (arg === void 0) { arg = null; }
+                                        this.tracker.append(tag);
+                                        $task1 = System.Threading.Tasks.Task.delay(1);
+                                        $step = 1;
+                                        $task1.continueWith($asyncBody);
+                                        return;
+                                    }
+                                    case 1: {
+                                        $task1.getAwaitedResult();
+                                        $tcs.setResult(($t = arg, $t != null ? $t : tag));
+                                        return;
+                                    }
+                                    default: {
+                                        $tcs.setResult(null);
+                                        return;
+                                    }
+                                }
+                            }
+                        } catch($async_e1) {
+                            $async_e = System.Exception.create($async_e1);
+                            $tcs.setException($async_e);
+                        }
+                    }, arguments);
+
+                $asyncBody();
+                return $tcs.task;
+            },
+            ShouldNotBeInvokedAsync: function (T, tag) {
+                var $step = 0,
+                    $task1, 
+                    $jumpFromFinally, 
+                    $tcs = new System.Threading.Tasks.TaskCompletionSource(), 
+                    $returnValue, 
+                    $async_e, 
+                    $asyncBody = Bridge.fn.bind(this, function () {
+                        try {
+                            for (;;) {
+                                $step = System.Array.min([0,1], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        $task1 = System.Threading.Tasks.Task.delay(1);
+                                        $step = 1;
+                                        $task1.continueWith($asyncBody);
+                                        return;
+                                    }
+                                    case 1: {
+                                        $task1.getAwaitedResult();
+                                        throw new System.InvalidOperationException(tag);
+                                        $tcs.setResult(null);
+                                        return;
+                                    }
+                                    default: {
+                                        $tcs.setResult(null);
+                                        return;
+                                    }
+                                }
+                            }
+                        } catch($async_e1) {
+                            $async_e = System.Exception.create($async_e1);
+                            $tcs.setException($async_e);
+                        }
+                    }, arguments);
+
+                $asyncBody();
+                return $tcs.task;
+            },
+            ShouldNotBeInvoked: function (T, tag) {
+                throw new System.InvalidOperationException(tag);
+            },
+            GetBool: function (tag, result) {
+                var $step = 0,
+                    $task1, 
+                    $jumpFromFinally, 
+                    $tcs = new System.Threading.Tasks.TaskCompletionSource(), 
+                    $returnValue, 
+                    $async_e, 
+                    $asyncBody = Bridge.fn.bind(this, function () {
+                        try {
+                            for (;;) {
+                                $step = System.Array.min([0,1], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        this.tracker.append(tag);
+                                        $task1 = System.Threading.Tasks.Task.delay(1);
+                                        $step = 1;
+                                        $task1.continueWith($asyncBody);
+                                        return;
+                                    }
+                                    case 1: {
+                                        $task1.getAwaitedResult();
+                                        $tcs.setResult(result);
+                                        return;
+                                    }
+                                    default: {
+                                        $tcs.setResult(null);
+                                        return;
+                                    }
+                                }
+                            }
+                        } catch($async_e1) {
+                            $async_e = System.Exception.create($async_e1);
+                            $tcs.setException($async_e);
+                        }
+                    }, arguments);
+
+                $asyncBody();
+                return $tcs.task;
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2692", {
         statics: {
             methods: {
@@ -20090,6 +21962,35 @@ Bridge.$N1391Result =                     r;
         methods: {
             getHashCode: function () {
                 return ((System.Single.getHashCode(this.X) + System.Single.getHashCode(this.Y)) | 0);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2705", {
+        statics: {
+            methods: {
+                TestCatchWithoutVariable: function () {
+                    var a = null;
+                    for (var i = 0; i < 1; i = (i + 1) | 0) {
+                        try {
+                            throw new System.Exception();
+                        }
+                        catch ($e1) {
+                            $e1 = System.Exception.create($e1);
+                            var i1 = { v : 2 };
+
+                            a = (function (i1) {
+                                return function () {
+                                    Bridge.Test.NUnit.Assert.AreEqual(2, i1.v);
+                                    Bridge.Test.NUnit.Assert.AreEqual(1, i);
+                                };
+                            })(i1);
+                        }
+                    }
+
+                    Bridge.Test.NUnit.Assert.NotNull(a);
+                    a();
+                }
             }
         }
     });

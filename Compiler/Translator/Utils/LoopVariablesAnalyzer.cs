@@ -49,9 +49,13 @@ namespace Bridge.Translator
             if (node is ForeachStatement && !this.ExcludeReadOnly)
             {
                 var foreachStatement = (ForeachStatement)node;
-                this.VariableNames.Add(foreachStatement.VariableName);
-                var rr = (ForEachResolveResult)this.Emitter.Resolver.ResolveNode(foreachStatement, this.Emitter);
-                this.Variables.Add(rr.ElementVariable);
+
+                if (foreachStatement.VariableNameToken != null && !foreachStatement.VariableNameToken.IsNull)
+                {
+                    this.VariableNames.Add(foreachStatement.VariableName);
+                    var rr = (ForEachResolveResult)this.Emitter.Resolver.ResolveNode(foreachStatement, this.Emitter);
+                    this.Variables.Add(rr.ElementVariable);
+                }
             }
 
             node.AcceptVisitor(this);
@@ -70,7 +74,7 @@ namespace Bridge.Translator
 
         public override void VisitCatchClause(CatchClause catchClause)
         {
-            if (!this.ExcludeReadOnly)
+            if (!this.ExcludeReadOnly && catchClause.VariableNameToken != null && !catchClause.VariableNameToken.IsNull)
             {
                 this.VariableNames.Add(catchClause.VariableName);
                 var lrr = (LocalResolveResult)this.Emitter.Resolver.ResolveNode(catchClause.VariableNameToken, this.Emitter);
