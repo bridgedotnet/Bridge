@@ -37,7 +37,7 @@ namespace Bridge.ClientTest.Linq
                               select d;
             var doublesArray = sameDoubles.ToArray();
 
-            Assert.True(doublesArray.GetType().ToString().Contains("function Array()"), "ToArray() conversion for doubles - check type name");
+            Assert.AreEqual("System.Double[]", doublesArray.GetType().ToString(), "ToArray() conversion for doubles - check type name");
             Assert.AreDeepEqual(doubles, doublesArray, "ToArray() conversion for doubles - check content");
 
             // TEST

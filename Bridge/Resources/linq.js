@@ -2263,8 +2263,8 @@
         return Enumerable.from(this);
     };
 
-    Enumerable.prototype.toArray = function () {
-        var array = [];
+    Enumerable.prototype.toArray = function (T) {
+        var array = System.Array.init([], T || System.Object);
         this.forEach(function (x) { array.push(x); });
         return array;
     };
