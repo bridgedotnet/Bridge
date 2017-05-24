@@ -133,7 +133,7 @@ namespace Bridge.Translator
 
         protected AstNode[] GetAwaiters(AstNode node)
         {
-            var awaitSearch = new AwaitSearchVisitor();
+            var awaitSearch = new AwaitSearchVisitor(this.Emitter);
             node.AcceptVisitor(awaitSearch);
 
             return awaitSearch.GetAwaitExpressions().ToArray();
@@ -153,6 +153,20 @@ namespace Bridge.Translator
 
         protected IAsyncStep WriteAwaiter(AstNode node)
         {
+            var index = System.Array.IndexOf(this.Emitter.AsyncBlock.AwaitExpressions, node) + 1;
+
+            if (node is ConditionalExpression)
+            {
+                new ConditionalBlock(this.Emitter, (ConditionalExpression)node).WriteAsyncConditionalExpression(index);
+                return null;
+            }
+
+            if (node is BinaryOperatorExpression)
+            {
+                new BinaryOperatorBlock(this.Emitter, (BinaryOperatorExpression)node).WriteAsyncBinaryExpression(index);
+                return null;
+            }
+
             if (this.Emitter.AsyncBlock.WrittenAwaitExpressions.Contains(node))
             {
                 return null;
@@ -160,7 +174,6 @@ namespace Bridge.Translator
 
             this.Emitter.AsyncBlock.WrittenAwaitExpressions.Add(node);
 
-            var index = System.Array.IndexOf(this.Emitter.AsyncBlock.AwaitExpressions, node) + 1;
             this.Write(JS.Vars.ASYNC_TASK + index + " = ");
             bool customAwaiter = false;
             var oldValue = this.Emitter.ReplaceAwaiterByVar;
