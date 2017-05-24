@@ -59,6 +59,11 @@ namespace Bridge.Contract
             get; set;
         }
 
+        bool AutoPropertyToField
+        {
+            get; set;
+        }
+
         string PluginsPath
         {
             get; set;

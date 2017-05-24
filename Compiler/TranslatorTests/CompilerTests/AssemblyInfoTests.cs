@@ -35,6 +35,7 @@ namespace Bridge.Translator.Tests
             Assert.AreEqual(0, config.StartIndexInName, "StartIndexInName");
             Assert.Null(config.BeforeBuild, "BeforeBuild");
             Assert.Null(config.AfterBuild, "AfterBuild");
+            Assert.False(config.AutoPropertyToField, "AutoPropertyToField");
             Assert.Null(config.PluginsPath, "PluginsPath");
             Assert.False(config.GenerateTypeScript, "GenerateTypeScript");
             Assert.AreEqual(DocumentationMode.Basic, config.GenerateDocumentation, "GenerateDocumentation");

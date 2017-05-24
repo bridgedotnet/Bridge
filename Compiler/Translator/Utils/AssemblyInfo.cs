@@ -144,6 +144,11 @@ namespace Bridge.Translator
             get; set;
         }
 
+        public bool AutoPropertyToField
+        {
+            get; set;
+        }
+
         public string PluginsPath
         {
             get; set;
