@@ -104,7 +104,7 @@ namespace Bridge.Translator
             if (uo != null && uo.Operator == UnaryOperatorType.Await)
             {
                 oldPos = this.InsertPosition;
-                this.InsertPosition = Math.Max(this.InsertPosition - 1,  0);
+                this.InsertPosition = Math.Max(this.InsertPosition - 1, 0);
             }
 
             base.VisitInvocationExpression(invocationExpression);
@@ -128,7 +128,7 @@ namespace Bridge.Translator
 
             base.VisitYieldBreakStatement(yieldBreakStatement);
         }
-        
+
         public override void VisitUnaryOperatorExpression(UnaryOperatorExpression unaryOperatorExpression)
         {
             if (unaryOperatorExpression.Operator == UnaryOperatorType.Await)

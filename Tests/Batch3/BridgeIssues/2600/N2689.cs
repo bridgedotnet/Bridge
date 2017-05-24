@@ -174,7 +174,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             var c = new Bridge2689();
 
-            var result = await  c.GetBool("1", true) ? await c.GetStr("2") : await c.ShouldNotBeInvokedAsync<string>("3");
+            var result = await c.GetBool("1", true) ? await c.GetStr("2") : await c.ShouldNotBeInvokedAsync<string>("3");
             Assert.AreEqual("2", result);
             Assert.AreEqual("12", c.tracker.ToString());
 

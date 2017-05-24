@@ -143,7 +143,7 @@ namespace Bridge.Translator
             writer = this.SaveWriter();
             this.Emitter.AsyncBlock.AddAsyncStep();
             this.WriteAwaiters(this.ConditionalExpression.FalseExpression);
-            
+
             oldValue = this.Emitter.ReplaceAwaiterByVar;
             oldAsyncExpressionHandling = this.Emitter.AsyncExpressionHandling;
             this.Emitter.ReplaceAwaiterByVar = true;
@@ -153,7 +153,7 @@ namespace Bridge.Translator
             this.WriteSemiColon();
             this.Emitter.ReplaceAwaiterByVar = oldValue;
             this.Emitter.AsyncExpressionHandling = oldAsyncExpressionHandling;
-            
+
             if (this.Emitter.AsyncBlock.Steps.Count > elseCount)
             {
                 elseStep = this.Emitter.AsyncBlock.Steps.Last();

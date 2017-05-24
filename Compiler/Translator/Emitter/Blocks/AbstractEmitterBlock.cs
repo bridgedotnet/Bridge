@@ -173,8 +173,7 @@ namespace Bridge.Translator
             }
 
             this.Emitter.AsyncBlock.WrittenAwaitExpressions.Add(node);
-            
-            
+
             this.Write(JS.Vars.ASYNC_TASK + index + " = ");
             bool customAwaiter = false;
             var oldValue = this.Emitter.ReplaceAwaiterByVar;

@@ -128,7 +128,7 @@ namespace Bridge.Translator
 
             if (value is double)
             {
-                double d = (double) value;
+                double d = (double)value;
                 if (double.IsNaN(d))
                 {
                     s = JS.Types.Number.NaN;

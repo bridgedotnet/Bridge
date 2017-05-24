@@ -284,7 +284,7 @@ namespace Bridge.Translator
                         new ExpressionListBlock(this.Emitter,
                         new Expression[] { binaryOperatorExpression.Left, binaryOperatorExpression.Right }, null, null, 0).Emit();
                     }
-                    
+
                     this.WriteCloseParentheses();
 
                     if (addClose)
