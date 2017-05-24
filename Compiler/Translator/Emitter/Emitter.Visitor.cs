@@ -369,9 +369,12 @@ namespace Bridge.Translator
 
         public override void VisitLabelStatement(LabelStatement labelStatement)
         {
-            var step = this.AsyncBlock.AddAsyncStep();
-            step.Label = labelStatement.Label;
-            step.Node = labelStatement;
+            if (this.AsyncBlock != null)
+            {
+                var step = this.AsyncBlock.AddAsyncStep();
+                step.Label = labelStatement.Label;
+                step.Node = labelStatement;
+            }
         }
     }
 }

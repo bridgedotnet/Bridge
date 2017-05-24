@@ -18,10 +18,10 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                                 var dimensionN = $t.Current;
                                 // $t2 should not be re-created with var
                                 var action;
-                                var xOut = 0;
+                                var xOut = { v : 0 };
                                 action = (function (xOut) {
                                     return function () {
-                                        ((xOut = (xOut + 1) | 0));
+                                        ((xOut.v = (xOut.v + 1) | 0));
                                     };
                                 })(xOut);
                                 return true;

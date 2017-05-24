@@ -1273,21 +1273,21 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="selectors">selectors is a string containing one or more CSS selectors separated by commas.</param>
         /// <returns></returns>
-        public static extern HTMLElement QuerySelector(string selectors);
+        public static extern Element QuerySelector(string selectors);
 
         /// <summary>
         /// Returns the first element within the document (using depth-first pre-order traversal of the document's nodes) that matches the specified group of selectors.
         /// </summary>
         /// <param name="selectors">selectors is a string containing one or more CSS selectors separated by commas.</param>
         /// <returns></returns>
-        public static extern T QuerySelector<T>(string selectors) where T : HTMLElement;
+        public static extern T QuerySelector<T>(string selectors) where T : Element;
 
         /// <summary>
         /// Returns a list of the elements within the document (using depth-first pre-order traversal of the document's nodes) that match the specified group of selectors. The object returned is a NodeList.
         /// </summary>
         /// <param name="selectors">selectors is a string containing one or more CSS selectors separated by commas.</param>
         /// <returns></returns>
-        public static extern ElementList QuerySelectorAll(string selectors);
+        public static extern NodeList QuerySelectorAll(string selectors);
 
         /// <summary>
         /// Closes a document stream for writing.
@@ -1323,7 +1323,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="name">name is the value of the name attribute of the element.</param>
         /// <returns>elements is an HTMLCollection of elements.</returns>
-        public static extern ElementList GetElementsByName(string name);
+        public static extern NodeList GetElementsByName(string name);
 
         /// <summary>
         /// The DOM getSelection() method is available on the Window and Document interfaces.

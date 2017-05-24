@@ -169,6 +169,19 @@ namespace Bridge.Translator
             this.Write(varName + " = ");
 
             var rr = this.Emitter.Resolver.ResolveNode(foreachStatement, this.Emitter) as ForEachResolveResult;
+
+            bool isReferenceLocal = false;
+
+            if (this.Emitter.LocalsMap != null && this.Emitter.LocalsMap.ContainsKey(rr.ElementVariable))
+            {
+                isReferenceLocal = this.Emitter.LocalsMap[rr.ElementVariable].EndsWith(".v");
+            }
+
+            if (isReferenceLocal)
+            {
+                this.Write("{ v : ");
+            }
+
             string castCode = this.GetCastCode(rr.ElementType, rr.ElementVariable.Type);
 
             if (castCode != null)
@@ -206,6 +219,11 @@ namespace Bridge.Translator
                 {
                     this.Write(", ", BridgeTypes.ToJsName(rr.ElementVariable.Type, this.Emitter), ")");
                 }
+            }
+
+            if (isReferenceLocal)
+            {
+                this.Write(" }");
             }
 
             this.WriteSemiColon();
@@ -353,10 +371,22 @@ namespace Bridge.Translator
             this.PushLocals();
             Action ac = () =>
             {
+                bool isReferenceLocal = false;
+
+                if (this.Emitter.LocalsMap != null && this.Emitter.LocalsMap.ContainsKey(rr.ElementVariable))
+                {
+                    isReferenceLocal = this.Emitter.LocalsMap[rr.ElementVariable].EndsWith(".v");
+                }
+
                 var varName = this.AddLocal(foreachStatement.VariableName, foreachStatement.VariableNameToken, foreachStatement.VariableType);
 
                 this.WriteVar();
                 this.Write(varName + " = ");
+
+                if (isReferenceLocal)
+                {
+                    this.Write("{ v : ");
+                }
 
                 string castCode = this.GetCastCode(rr.ElementType, rr.ElementVariable.Type);
 
@@ -395,6 +425,11 @@ namespace Bridge.Translator
                     {
                         this.Write(", ", BridgeTypes.ToJsName(rr.ElementVariable.Type, this.Emitter), ")");
                     }
+                }
+
+                if (isReferenceLocal)
+                {
+                    this.Write(" }");
                 }
 
                 this.WriteSemiColon();

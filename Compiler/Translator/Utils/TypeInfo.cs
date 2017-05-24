@@ -333,17 +333,26 @@ namespace Bridge.Translator
 
             foreach (var partialTypeDeclaration in this.PartialTypeDeclarations)
             {
-                var temp = new List<AstType>();
+                var appendTypes = new List<AstType>();
+                var insertTypes = new List<AstType>();
                 foreach (var baseType in partialTypeDeclaration.BaseTypes)
                 {
                     var t = emitter.Resolver.ResolveNode(baseType, emitter);
-                    if (this.baseTypes.All(bt => emitter.Resolver.ResolveNode(baseType, emitter).Type.FullName != t.Type.FullName))
+                    if (this.baseTypes.All(bt => emitter.Resolver.ResolveNode(bt, emitter).Type.FullName != t.Type.FullName))
                     {
-                        temp.Add(baseType);
+                        if (t.Type.Kind != TypeKind.Interface)
+                        {
+                            insertTypes.Add(baseType);
+                        }
+                        else
+                        {
+                            appendTypes.Add(baseType);
+                        }
                     }
                 }
 
-                this.baseTypes.AddRange(temp);
+                this.baseTypes.AddRange(appendTypes);
+                this.baseTypes.InsertRange(0, insertTypes);
             }
 
             return this.baseTypes;
@@ -387,7 +396,7 @@ namespace Bridge.Translator
 
                     if (ca.ConstructorArguments[0].Value is bool)
                     {
-                        if (!(bool) ca.ConstructorArguments[0].Value)
+                        if (!(bool)ca.ConstructorArguments[0].Value)
                         {
                             name = null;
                         }

@@ -212,7 +212,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="selectors">selectors is a group of selectors to match on.</param>
         /// <returns></returns>
-        public virtual extern Node QuerySelector(string selectors);
+        public virtual extern Element QuerySelector(string selectors);
 
         /// <summary>
         /// Returns a non-live NodeList of all elements descended from the element on which it is invoked that match the specified group of CSS selectors.
