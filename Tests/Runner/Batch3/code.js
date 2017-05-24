@@ -21940,6 +21940,7 @@ Bridge.$N1391Result =                     r;
 
                     Bridge.Test.NUnit.Assert.AreEqual(0, v1.getHashCode());
                     Bridge.Test.NUnit.Assert.AreEqual(v2.getHashCode(), v2.getHashCode());
+                    Bridge.Test.NUnit.Assert.AreNotEqual(0, v2.getHashCode());
                     var o = Bridge.box(v2.getHashCode(), System.Int32);
                     Bridge.Test.NUnit.Assert.True(Bridge.is(o, System.Int32));
                 }

@@ -30,9 +30,10 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             var v1 = new Vector2(0f, 0f);
             var v2 = new Vector2(1f, 2f);
-            
+
             Assert.AreEqual(0, v1.GetHashCode());
             Assert.AreEqual(v2.GetHashCode(), v2.GetHashCode());
+            Assert.AreNotEqual(0, v2.GetHashCode());
             object o = v2.GetHashCode();
             Assert.True(o is int);
         }
