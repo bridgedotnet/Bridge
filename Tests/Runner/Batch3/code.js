@@ -21935,15 +21935,56 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestDoubleGetHashCode: function () {
+                    var d = 0.0;
+
+                    Bridge.Test.NUnit.Assert.AreEqual(0, System.Double.getHashCode(d));
+                    var o1 = Bridge.box(System.Double.getHashCode(d), System.Int32);
+                    Bridge.Test.NUnit.Assert.True(Bridge.is(o1, System.Int32));
+
+                    var v1 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2703.Vector1(0, 0);
+                    var v2 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2703.Vector1(1, 2);
+
+                    Bridge.Test.NUnit.Assert.AreEqual(0, v1.getHashCode());
+                    Bridge.Test.NUnit.Assert.AreEqual(v2.getHashCode(), v2.getHashCode());
+                    Bridge.Test.NUnit.Assert.AreNotEqual(0, v2.getHashCode());
+                    var o2 = Bridge.box(v2.getHashCode(), System.Int32);
+                    Bridge.Test.NUnit.Assert.True(Bridge.is(o2, System.Int32));
+                },
+                TestSingleGetHashCode: function () {
+                    var d = 0.0;
+
+                    Bridge.Test.NUnit.Assert.AreEqual(0, System.Single.getHashCode(d));
+                    var o1 = Bridge.box(System.Single.getHashCode(d), System.Int32);
+                    Bridge.Test.NUnit.Assert.True(Bridge.is(o1, System.Int32));
+
                     var v1 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2703.Vector2(0.0, 0.0);
                     var v2 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2703.Vector2(1.0, 2.0);
 
                     Bridge.Test.NUnit.Assert.AreEqual(0, v1.getHashCode());
                     Bridge.Test.NUnit.Assert.AreEqual(v2.getHashCode(), v2.getHashCode());
                     Bridge.Test.NUnit.Assert.AreNotEqual(0, v2.getHashCode());
-                    var o = Bridge.box(v2.getHashCode(), System.Int32);
-                    Bridge.Test.NUnit.Assert.True(Bridge.is(o, System.Int32));
+                    var o2 = Bridge.box(v2.getHashCode(), System.Int32);
+                    Bridge.Test.NUnit.Assert.True(Bridge.is(o2, System.Int32));
                 }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2703.Vector1", {
+        fields: {
+            X: 0,
+            Y: 0
+        },
+        ctors: {
+            ctor: function (x, y) {
+                this.$initialize();
+                this.X = x;
+                this.Y = y;
+            }
+        },
+        methods: {
+            getHashCode: function () {
+                return ((System.Double.getHashCode(this.X) + System.Double.getHashCode(this.Y)) | 0);
             }
         }
     });

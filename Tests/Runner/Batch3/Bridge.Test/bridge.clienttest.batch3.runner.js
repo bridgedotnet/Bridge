@@ -571,6 +571,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#2689 - TestAsyncBinaryExpression10", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689.TestAsyncBinaryExpression10);
             QUnit.test("#2692 - TestUnusedGotoLabel", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2692.TestUnusedGotoLabel);
             QUnit.test("#2703 - TestDoubleGetHashCode", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2703.TestDoubleGetHashCode);
+            QUnit.test("#2703 - TestSingleGetHashCode", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2703.TestSingleGetHashCode);
             QUnit.test("#2705 - TestCatchWithoutVariable", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2705.TestCatchWithoutVariable);
             QUnit.test("#381 - TestUseCase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge381.TestUseCase);
             QUnit.test("#447 - CheckInlineExpression", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.CheckInlineExpression);
@@ -11544,8 +11545,13 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestDoubleGetHashCode: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2703).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2703, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestDoubleGetHashCode()", $t.Line = "28", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2703).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2703, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestDoubleGetHashCode()", $t.Line = "45", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2703.TestDoubleGetHashCode();
+                },
+                TestSingleGetHashCode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2703).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2703, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestSingleGetHashCode()", $t.Line = "64", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2703.TestSingleGetHashCode();
                 }
             }
         },
