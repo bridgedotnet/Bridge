@@ -8,7 +8,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     [TestFixture(TestNameFormat = "#2705 - {0}")]
     public class Bridge2705
     {
-        [Test]
+        [Test(ExpectedCount = 3)]
         public static void TestCatchWithoutVariable()
         {
             Action a = null;
@@ -20,9 +20,13 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 }
                 catch (Exception)
                 {
-                    int i1 = 0;
+                    int i1 = 2;
 
-                    a = () => Assert.AreEqual(0, i1);
+                    a = () =>
+                    {
+                        Assert.AreEqual(2, i1);
+                        Assert.AreEqual(1, i);
+                    };
                 }
             }
 

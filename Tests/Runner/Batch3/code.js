@@ -21942,11 +21942,12 @@ Bridge.$N1391Result =                     r;
                         }
                         catch ($e1) {
                             $e1 = System.Exception.create($e1);
-                            var i1 = { v : 0 };
+                            var i1 = { v : 2 };
 
                             a = (function (i1) {
                                 return function () {
-                                    Bridge.Test.NUnit.Assert.AreEqual(0, i1.v);
+                                    Bridge.Test.NUnit.Assert.AreEqual(2, i1.v);
+                                    Bridge.Test.NUnit.Assert.AreEqual(1, i);
                                 };
                             })(i1);
                         }
