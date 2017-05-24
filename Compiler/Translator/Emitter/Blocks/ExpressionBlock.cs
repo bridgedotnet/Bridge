@@ -30,7 +30,7 @@ namespace Bridge.Translator
 
             if (this.Emitter.IsAsync)
             {
-                var awaitSearch = new AwaitSearchVisitor();
+                var awaitSearch = new AwaitSearchVisitor(this.Emitter);
                 this.ExpressionStatement.Expression.AcceptVisitor(awaitSearch);
             }
 
