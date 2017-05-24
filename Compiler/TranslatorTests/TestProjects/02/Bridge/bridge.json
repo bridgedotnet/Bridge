@@ -3,7 +3,6 @@
   "cleanOutputFolderBeforeBuildPattern": "*.*",
   "outputFormatting": "Formatted",
 
-  "autoPropertyToField": true,
   "combineScripts":  true,
   "sourceMap": {
     "enabled": true,
