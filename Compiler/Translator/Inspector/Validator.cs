@@ -36,12 +36,13 @@ namespace Bridge.Translator
 
         public virtual void CheckType(TypeDefinition type, ITranslator translator)
         {
+            this.CheckObjectLiteral(type, translator);
+
             if (this.CanIgnoreType(type))
             {
                 return;
             }
-
-            this.CheckObjectLiteral(type, translator);
+            
             this.CheckConstructors(type, translator);
             this.CheckFields(type, translator);
             this.CheckProperties(type, translator);
