@@ -7081,6 +7081,11 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
             getHashCode: function (v) {
                 var value = Bridge.unbox(v, true);
+
+                if (value === 0) {
+                    return 0;
+                }
+
                 if (value === Number.POSITIVE_INFINITY) {
                     return 0x7FF00000;
                 }
@@ -7088,7 +7093,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 if (value === Number.NEGATIVE_INFINITY) {
                     return 0xFFF00000;
                 }
-                return value.toExponential();
+                return Bridge.getHashCode(value.toExponential());
             }
         }
     });
