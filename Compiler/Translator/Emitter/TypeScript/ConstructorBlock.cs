@@ -32,7 +32,7 @@ namespace Bridge.Translator.TypeScript
         protected virtual void EmitCtorForInstantiableClass()
         {
             var typeDef = this.Emitter.GetTypeDefinition();
-            string name = this.Emitter.Validator.GetCustomTypeName(typeDef, this.Emitter);
+            string name = this.Emitter.Validator.GetCustomTypeName(typeDef, this.Emitter, false);
 
             if (name.IsEmpty())
             {

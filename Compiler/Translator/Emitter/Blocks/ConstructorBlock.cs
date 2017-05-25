@@ -371,7 +371,7 @@ namespace Bridge.Translator
 
                     this.WriteNewLine();
 
-                    string name = this.Emitter.Validator.GetCustomTypeName(typeDef, this.Emitter);
+                    string name = this.Emitter.Validator.GetCustomTypeName(typeDef, this.Emitter, false);
                     if (name.IsEmpty())
                     {
                         name = BridgeTypes.DefinitionToJsName(this.TypeInfo.Type, this.Emitter);

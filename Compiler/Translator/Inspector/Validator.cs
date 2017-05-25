@@ -387,14 +387,14 @@ namespace Bridge.Translator
 
         private Stack<TypeDefinition> _stack = new Stack<TypeDefinition>();
 
-        public virtual string GetCustomTypeName(TypeDefinition type, IEmitter emitter)
+        public virtual string GetCustomTypeName(TypeDefinition type, IEmitter emitter, bool excludeNs)
         {
             if (this._stack.Contains(type))
             {
                 return null;
             }
 
-            var nsAtrr = this.GetAttribute(type.CustomAttributes, Translator.Bridge_ASSEMBLY + ".NamespaceAttribute");
+            var nsAtrr = excludeNs ? null : this.GetAttribute(type.CustomAttributes, Translator.Bridge_ASSEMBLY + ".NamespaceAttribute");
             bool hasNs = nsAtrr != null && nsAtrr.ConstructorArguments.Count > 0;
             var nameAttr = this.GetAttribute(type.CustomAttributes, Translator.Bridge_ASSEMBLY + ".NameAttribute");
 
@@ -461,7 +461,7 @@ namespace Bridge.Translator
 
                 if (type.IsNested)
                 {
-                    name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.GetParentNames(type);
+                    name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.GetParentNames(emitter, type);
                 }
 
                 
