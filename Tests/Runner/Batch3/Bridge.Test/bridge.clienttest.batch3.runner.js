@@ -549,7 +549,30 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#2685 - TestPartialClasses", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2685.TestPartialClasses);
             QUnit.test("#2686 - TestCapturedReferenceVariable", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2686.TestCapturedReferenceVariable);
             QUnit.test("#2686 - TestChangeableCapturedReferenceVariable", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2686.TestChangeableCapturedReferenceVariable);
+            QUnit.test("#2689 - TestAsyncConditionalExpression1", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689.TestAsyncConditionalExpression1);
+            QUnit.test("#2689 - TestAsyncConditionalExpression2", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689.TestAsyncConditionalExpression2);
+            QUnit.test("#2689 - TestAsyncConditionalExpression3", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689.TestAsyncConditionalExpression3);
+            QUnit.test("#2689 - TestAsyncConditionalExpression4", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689.TestAsyncConditionalExpression4);
+            QUnit.test("#2689 - TestAsyncConditionalExpression5", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689.TestAsyncConditionalExpression5);
+            QUnit.test("#2689 - TestAsyncConditionalExpression6", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689.TestAsyncConditionalExpression6);
+            QUnit.test("#2689 - TestAsyncConditionalExpression7", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689.TestAsyncConditionalExpression7);
+            QUnit.test("#2689 - TestAsyncConditionalExpression8", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689.TestAsyncConditionalExpression8);
+            QUnit.test("#2689 - TestAsyncConditionalExpression9", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689.TestAsyncConditionalExpression9);
+            QUnit.test("#2689 - TestAsyncConditionalExpression10", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689.TestAsyncConditionalExpression10);
+            QUnit.test("#2689 - TestAsyncBinaryExpression1", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689.TestAsyncBinaryExpression1);
+            QUnit.test("#2689 - TestAsyncBinaryExpression2", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689.TestAsyncBinaryExpression2);
+            QUnit.test("#2689 - TestAsyncBinaryExpression3", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689.TestAsyncBinaryExpression3);
+            QUnit.test("#2689 - TestAsyncBinaryExpression4", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689.TestAsyncBinaryExpression4);
+            QUnit.test("#2689 - TestAsyncBinaryExpression5", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689.TestAsyncBinaryExpression5);
+            QUnit.test("#2689 - TestAsyncBinaryExpression6", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689.TestAsyncBinaryExpression6);
+            QUnit.test("#2689 - TestAsyncBinaryExpression7", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689.TestAsyncBinaryExpression7);
+            QUnit.test("#2689 - TestAsyncBinaryExpression8", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689.TestAsyncBinaryExpression8);
+            QUnit.test("#2689 - TestAsyncBinaryExpression9", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689.TestAsyncBinaryExpression9);
+            QUnit.test("#2689 - TestAsyncBinaryExpression10", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689.TestAsyncBinaryExpression10);
             QUnit.test("#2692 - TestUnusedGotoLabel", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2692.TestUnusedGotoLabel);
+            QUnit.test("#2703 - TestDoubleGetHashCode", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2703.TestDoubleGetHashCode);
+            QUnit.test("#2703 - TestSingleGetHashCode", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2703.TestSingleGetHashCode);
+            QUnit.test("#2705 - TestCatchWithoutVariable", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2705.TestCatchWithoutVariable);
             QUnit.test("#381 - TestUseCase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge381.TestUseCase);
             QUnit.test("#447 - CheckInlineExpression", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.CheckInlineExpression);
             QUnit.test("#447 - CheckInlineCalls", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.CheckInlineCalls);
@@ -11371,6 +11394,126 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
         }
     });
 
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689)],
+        statics: {
+            methods: {
+                TestAsyncConditionalExpression1: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAsyncConditionalExpression1()", $t.Line = "40", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689.TestAsyncConditionalExpression1();
+                },
+                TestAsyncConditionalExpression2: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAsyncConditionalExpression2()", $t.Line = "54", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689.TestAsyncConditionalExpression2();
+                },
+                TestAsyncConditionalExpression3: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAsyncConditionalExpression3()", $t.Line = "68", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689.TestAsyncConditionalExpression3();
+                },
+                TestAsyncConditionalExpression4: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAsyncConditionalExpression4()", $t.Line = "82", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689.TestAsyncConditionalExpression4();
+                },
+                TestAsyncConditionalExpression5: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAsyncConditionalExpression5()", $t.Line = "96", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689.TestAsyncConditionalExpression5();
+                },
+                TestAsyncConditionalExpression6: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAsyncConditionalExpression6()", $t.Line = "111", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689.TestAsyncConditionalExpression6();
+                },
+                TestAsyncConditionalExpression7: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAsyncConditionalExpression7()", $t.Line = "126", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689.TestAsyncConditionalExpression7();
+                },
+                TestAsyncConditionalExpression8: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAsyncConditionalExpression8()", $t.Line = "141", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689.TestAsyncConditionalExpression8();
+                },
+                TestAsyncConditionalExpression9: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAsyncConditionalExpression9()", $t.Line = "156", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689.TestAsyncConditionalExpression9();
+                },
+                TestAsyncConditionalExpression10: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAsyncConditionalExpression10()", $t.Line = "170", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689.TestAsyncConditionalExpression10();
+                },
+                TestAsyncBinaryExpression1: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAsyncBinaryExpression1()", $t.Line = "184", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689.TestAsyncBinaryExpression1();
+                },
+                TestAsyncBinaryExpression2: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAsyncBinaryExpression2()", $t.Line = "198", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689.TestAsyncBinaryExpression2();
+                },
+                TestAsyncBinaryExpression3: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAsyncBinaryExpression3()", $t.Line = "212", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689.TestAsyncBinaryExpression3();
+                },
+                TestAsyncBinaryExpression4: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAsyncBinaryExpression4()", $t.Line = "226", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689.TestAsyncBinaryExpression4();
+                },
+                TestAsyncBinaryExpression5: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAsyncBinaryExpression5()", $t.Line = "240", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689.TestAsyncBinaryExpression5();
+                },
+                TestAsyncBinaryExpression6: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAsyncBinaryExpression6()", $t.Line = "254", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689.TestAsyncBinaryExpression6();
+                },
+                TestAsyncBinaryExpression7: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAsyncBinaryExpression7()", $t.Line = "268", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689.TestAsyncBinaryExpression7();
+                },
+                TestAsyncBinaryExpression8: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAsyncBinaryExpression8()", $t.Line = "282", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689.TestAsyncBinaryExpression8();
+                },
+                TestAsyncBinaryExpression9: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAsyncBinaryExpression9()", $t.Line = "296", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689.TestAsyncBinaryExpression9();
+                },
+                TestAsyncBinaryExpression10: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2689, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAsyncBinaryExpression10()", $t.Line = "310", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689.TestAsyncBinaryExpression10();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689", $t.File = "Batch3\\BridgeIssues\\2600\\N2689.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2692", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2692)],
         statics: {
@@ -11390,6 +11533,61 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 var $t;
                 if (this.context == null) {
                     this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2692", $t.File = "Batch3\\BridgeIssues\\2600\\N2692.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2703", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2703)],
+        statics: {
+            methods: {
+                TestDoubleGetHashCode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2703).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2703, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestDoubleGetHashCode()", $t.Line = "45", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2703.TestDoubleGetHashCode();
+                },
+                TestSingleGetHashCode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2703).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2703, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestSingleGetHashCode()", $t.Line = "64", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2703.TestSingleGetHashCode();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2703", $t.File = "Batch3\\BridgeIssues\\2700\\N2703.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2705", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2705)],
+        statics: {
+            methods: {
+                TestCatchWithoutVariable: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2705).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2705, 3, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestCatchWithoutVariable()", $t.Line = "11", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2705.TestCatchWithoutVariable();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2705", $t.File = "Batch3\\BridgeIssues\\2700\\N2705.cs", $t);
                 }
                 return this.context;
             }

@@ -105,7 +105,7 @@ namespace Bridge.Translator
 
         public override void VisitUsingStatement(UsingStatement usingStatement)
         {
-            var awaitSearch = new AwaitSearchVisitor();
+            var awaitSearch = new AwaitSearchVisitor(null);
             usingStatement.AcceptVisitor(awaitSearch);
 
             var awaiters = awaitSearch.GetAwaitExpressions().ToArray();
@@ -172,7 +172,7 @@ namespace Bridge.Translator
 
         public override AstNode VisitUsingStatement(UsingStatement usingStatement)
         {
-            var awaitSearch = new AwaitSearchVisitor();
+            var awaitSearch = new AwaitSearchVisitor(null);
             usingStatement.AcceptVisitor(awaitSearch);
 
             var awaiters = awaitSearch.GetAwaitExpressions().ToArray();

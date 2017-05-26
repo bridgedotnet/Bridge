@@ -3,10 +3,9 @@
   "cleanOutputFolderBeforeBuildPattern": "*.*",
   "outputFormatting": "Formatted",
 
-  "autoPropertyToField": true,
-  "combineScripts":  true,
-  "sourceMap": {
-    "enabled": true,
-    "eol": "crlf"
-  }
+  "combineScripts":  true
+  //"sourceMap": {
+  //  "enabled": true,
+  //  "eol": "crlf"
+  //}
 }

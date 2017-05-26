@@ -4,6 +4,7 @@ using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.Semantics;
 using ICSharpCode.NRefactory.TypeSystem;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -26,6 +27,12 @@ namespace Bridge.Translator
             set;
         }
 
+        public List<IAsyncStep> EmittedAsyncSteps
+        {
+            get;
+            set;
+        }
+
         protected override Expression GetExpression()
         {
             return this.BinaryOperatorExpression;
@@ -34,6 +41,99 @@ namespace Bridge.Translator
         protected override void EmitConversionExpression()
         {
             this.VisitBinaryOperatorExpression();
+        }
+
+        internal void WriteAsyncBinaryExpression(int index)
+        {
+            if (this.Emitter.AsyncBlock.WrittenAwaitExpressions.Contains(this.BinaryOperatorExpression))
+            {
+                return;
+            }
+
+            this.Emitter.AsyncBlock.WrittenAwaitExpressions.Add(this.BinaryOperatorExpression);
+
+            this.WriteAwaiters(this.BinaryOperatorExpression.Left);
+
+            this.WriteIf();
+            this.WriteOpenParentheses();
+
+            var oldValue = this.Emitter.ReplaceAwaiterByVar;
+            var oldAsyncExpressionHandling = this.Emitter.AsyncExpressionHandling;
+            this.Emitter.ReplaceAwaiterByVar = true;
+            this.Emitter.AsyncExpressionHandling = true;
+
+            var isOr = this.BinaryOperatorExpression.Operator == BinaryOperatorType.BitwiseOr ||
+                        this.BinaryOperatorExpression.Operator == BinaryOperatorType.ConditionalOr;
+
+            if (isOr)
+            {
+                this.Write("!");
+            }
+
+            this.BinaryOperatorExpression.Left.AcceptVisitor(this.Emitter);
+            this.WriteCloseParentheses();
+            this.Emitter.ReplaceAwaiterByVar = oldValue;
+            this.Emitter.AsyncExpressionHandling = oldAsyncExpressionHandling;
+
+            int startCount = 0;
+            IAsyncStep trueStep = null;
+            startCount = this.Emitter.AsyncBlock.Steps.Count;
+
+            this.EmittedAsyncSteps = this.Emitter.AsyncBlock.EmittedAsyncSteps;
+            this.Emitter.AsyncBlock.EmittedAsyncSteps = new List<IAsyncStep>();
+
+            var taskResultVar = JS.Vars.ASYNC_TASK_RESULT + index;
+            if (!this.Emitter.Locals.ContainsKey(taskResultVar))
+            {
+                this.AddLocal(taskResultVar, null, AstType.Null);
+            }
+
+            this.WriteSpace();
+            this.BeginBlock();
+            this.Write($"{JS.Vars.ASYNC_STEP} = {this.Emitter.AsyncBlock.Step};");
+            this.WriteNewLine();
+            this.Write("continue;");
+            var writer = this.SaveWriter();
+            this.Emitter.AsyncBlock.AddAsyncStep();
+
+            this.WriteAwaiters(this.BinaryOperatorExpression.Right);
+
+            oldValue = this.Emitter.ReplaceAwaiterByVar;
+            oldAsyncExpressionHandling = this.Emitter.AsyncExpressionHandling;
+            this.Emitter.ReplaceAwaiterByVar = true;
+            this.Emitter.AsyncExpressionHandling = true;
+            this.Write(taskResultVar + " = ");
+            this.BinaryOperatorExpression.Right.AcceptVisitor(this.Emitter);
+            this.WriteSemiColon();
+            this.Emitter.ReplaceAwaiterByVar = oldValue;
+            this.Emitter.AsyncExpressionHandling = oldAsyncExpressionHandling;
+
+            if (this.Emitter.AsyncBlock.Steps.Count > startCount)
+            {
+                trueStep = this.Emitter.AsyncBlock.Steps.Last();
+            }
+
+            if (this.RestoreWriter(writer) && !this.IsOnlyWhitespaceOnPenultimateLine(true))
+            {
+                this.WriteNewLine();
+            }
+
+            this.EndBlock();
+
+            this.WriteNewLine();
+            this.Write($"{taskResultVar} = {(isOr ? "true" : "false")};");
+            this.WriteNewLine();
+            this.Write($"{JS.Vars.ASYNC_STEP} = {this.Emitter.AsyncBlock.Step};");
+            this.WriteNewLine();
+            this.Write("continue;");
+            var nextStep = this.Emitter.AsyncBlock.AddAsyncStep();
+
+            if (trueStep != null)
+            {
+                trueStep.JumpToStep = nextStep.Step;
+            }
+
+            this.Emitter.AsyncBlock.EmittedAsyncSteps = this.EmittedAsyncSteps;
         }
 
         private IMethod FindOperatorTrueOrFalse(IType type, bool findTrue)
@@ -184,7 +284,7 @@ namespace Bridge.Translator
                         new ExpressionListBlock(this.Emitter,
                         new Expression[] { binaryOperatorExpression.Left, binaryOperatorExpression.Right }, null, null, 0).Emit();
                     }
-                    
+
                     this.WriteCloseParentheses();
 
                     if (addClose)
@@ -227,6 +327,23 @@ namespace Bridge.Translator
         protected void VisitBinaryOperatorExpression()
         {
             BinaryOperatorExpression binaryOperatorExpression = this.BinaryOperatorExpression;
+
+            if (this.Emitter.IsAsync && this.GetAwaiters(binaryOperatorExpression).Length > 0)
+            {
+                if (this.Emitter.AsyncBlock.WrittenAwaitExpressions.Contains(binaryOperatorExpression))
+                {
+                    var index = System.Array.IndexOf(this.Emitter.AsyncBlock.AwaitExpressions, binaryOperatorExpression) + 1;
+                    this.Write(JS.Vars.ASYNC_TASK_RESULT + index);
+                }
+                else
+                {
+                    var index = System.Array.IndexOf(this.Emitter.AsyncBlock.AwaitExpressions, binaryOperatorExpression) + 1;
+                    this.WriteAsyncBinaryExpression(index);
+                }
+
+                return;
+            }
+
             var resolveOperator = this.Emitter.Resolver.ResolveNode(binaryOperatorExpression, this.Emitter);
             var expectedType = this.Emitter.Resolver.Resolver.GetExpectedType(binaryOperatorExpression);
             bool isDecimalExpected = Helpers.IsDecimalType(expectedType, this.Emitter.Resolver);
