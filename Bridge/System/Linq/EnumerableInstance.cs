@@ -390,6 +390,7 @@ namespace System.Linq
 
         public static extern IOrderedEnumerable<TSource> ThenByDescending<TSource, TKey>(Func<TSource, TKey> keySelector, IComparer<TKey> comparer);
 
+        [Template("{this}.toArray({TElement})")]
         public extern TElement[] ToArray();
 
         [Template("{this}.toDictionary({keySelector}, null, {TKey}, {TElement})")]

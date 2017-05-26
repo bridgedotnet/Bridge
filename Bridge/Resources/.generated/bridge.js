@@ -3261,6 +3261,9 @@
         
     });
 
+    Bridge.define("System.Void", {
+        $kind: "struct"
+    });
     // @source systemAssemblyVersion.js
 
     Bridge.init(function () {
@@ -18642,8 +18645,8 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         return Enumerable.from(this);
     };
 
-    Enumerable.prototype.toArray = function () {
-        var array = [];
+    Enumerable.prototype.toArray = function (T) {
+        var array = System.Array.init([], T || System.Object);
         this.forEach(function (x) { array.push(x); });
         return array;
     };

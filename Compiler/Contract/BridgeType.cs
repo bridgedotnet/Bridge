@@ -575,13 +575,6 @@ namespace Bridge.Contract
 
         public static string ToJsName(AstType astType, IEmitter emitter)
         {
-            var primitive = astType as PrimitiveType;
-
-            if (primitive != null && primitive.KnownTypeCode == KnownTypeCode.Void)
-            {
-                return JS.Types.System.Object.NAME;
-            }
-
             var simpleType = astType as SimpleType;
 
             if (simpleType != null && simpleType.Identifier == "dynamic")
