@@ -14,6 +14,7 @@
             public const string READY_ATTRIBUTE_NAME = "Bridge.Html5.ReadyAttribute";
             public const string FIELD_PROPERTY_NAME = "Bridge.FieldPropertyAttribute";
             public const string SERIALIZABLE_NAME = "Bridge.SerializableAttribute";
+            public const string COMPILER_GENERATED_NAME = "System.Runtime.CompilerServices.CompilerGeneratedAttribute";
         }
 
         public class Methods

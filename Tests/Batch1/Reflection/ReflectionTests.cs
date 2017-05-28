@@ -888,7 +888,7 @@ namespace Bridge.ClientTest.Reflection
         [Test]
         public void VoidIsConsideredObjectAsReturnType()
         {
-            Assert.AreEqual(typeof(C3).GetMethod("M4").ReturnType, typeof(object), "Return type of void method should be object");
+            Assert.AreEqual(typeof(C3).GetMethod("M4").ReturnType, typeof(void), "Return type of void method should be void");
         }
 
         [Test]
@@ -1397,8 +1397,8 @@ namespace Bridge.ClientTest.Reflection
             Assert.AreEqual(m2.ParameterTypes, new[] { typeof(Delegate) }, "m2.ParameterTypes");
             Assert.False(m1.IsConstructor, "m1.IsConstructor");
             Assert.False(m2.IsConstructor, "m2.IsConstructor");
-            Assert.AreEqual(m1.ReturnType, typeof(object), "m1.ReturnType");
-            Assert.AreEqual(m2.ReturnType, typeof(object), "m2.ReturnType");
+            Assert.AreEqual(m1.ReturnType, typeof(void), "m1.ReturnType");
+            Assert.AreEqual(m2.ReturnType, typeof(void), "m2.ReturnType");
             Assert.AreEqual(m1.TypeParameterCount, 0, "m1.TypeParameterCount");
             Assert.AreEqual(m2.TypeParameterCount, 0, "m2.TypeParameterCount");
             Assert.AreEqual(m1.IsGenericMethodDefinition, false, "m1.IsGenericMethodDefinition");
@@ -1434,8 +1434,8 @@ namespace Bridge.ClientTest.Reflection
             Assert.AreEqual(m2.ParameterTypes, new[] { typeof(Delegate) }, "m2.ParameterTypes");
             Assert.False(m1.IsConstructor, "m1.IsConstructor");
             Assert.False(m2.IsConstructor, "m2.IsConstructor");
-            Assert.AreEqual(m1.ReturnType, typeof(object), "m1.ReturnType");
-            Assert.AreEqual(m2.ReturnType, typeof(object), "m2.ReturnType");
+            Assert.AreEqual(m1.ReturnType, typeof(void), "m1.ReturnType");
+            Assert.AreEqual(m2.ReturnType, typeof(void), "m2.ReturnType");
             Assert.AreEqual(m1.TypeParameterCount, 0, "m1.TypeParameterCount");
             Assert.AreEqual(m2.TypeParameterCount, 0, "m2.TypeParameterCount");
             Assert.AreEqual(m1.IsGenericMethodDefinition, false, "m1.IsGenericMethodDefinition");
@@ -1637,9 +1637,9 @@ namespace Bridge.ClientTest.Reflection
             Assert.False(m1.IsConstructor, "m1.IsConstructor");
             Assert.False(m2.IsConstructor, "m2.IsConstructor");
             Assert.False(m3.IsConstructor, "m3.IsConstructor");
-            Assert.AreEqual(m1.ReturnType, typeof(object), "m1.ReturnType");
-            Assert.AreEqual(m2.ReturnType, typeof(object), "m2.ReturnType");
-            Assert.AreEqual(m3.ReturnType, typeof(object), "m3.ReturnType");
+            Assert.AreEqual(m1.ReturnType, typeof(void), "m1.ReturnType");
+            Assert.AreEqual(m2.ReturnType, typeof(void), "m2.ReturnType");
+            Assert.AreEqual(m3.ReturnType, typeof(void), "m3.ReturnType");
             Assert.AreEqual(m1.TypeParameterCount, 0, "m1.TypeParameterCount");
             Assert.AreEqual(m2.TypeParameterCount, 0, "m2.TypeParameterCount");
             Assert.AreEqual(m3.TypeParameterCount, 0, "m3.TypeParameterCount");
@@ -1716,8 +1716,8 @@ namespace Bridge.ClientTest.Reflection
             Assert.AreEqual(m2.ParameterTypes, new[] { typeof(double) }, "m2.ParameterTypes");
             Assert.False(m1.IsConstructor, "m1.IsConstructor");
             Assert.False(m2.IsConstructor, "m2.IsConstructor");
-            Assert.AreEqual(m1.ReturnType, typeof(object), "m1.ReturnType");
-            Assert.AreEqual(m2.ReturnType, typeof(object), "m2.ReturnType");
+            Assert.AreEqual(m1.ReturnType, typeof(void), "m1.ReturnType");
+            Assert.AreEqual(m2.ReturnType, typeof(void), "m2.ReturnType");
             Assert.AreEqual(m1.TypeParameterCount, 0, "m1.TypeParameterCount");
             Assert.AreEqual(m2.TypeParameterCount, 0, "m2.TypeParameterCount");
             Assert.AreEqual(m1.IsGenericMethodDefinition, false, "m1.IsGenericMethodDefinition");
@@ -1784,8 +1784,8 @@ namespace Bridge.ClientTest.Reflection
             Assert.AreEqual(m2.ParameterTypes, new[] { typeof(int), typeof(string), typeof(string) }, "m2.ParameterTypes");
             Assert.False(m1.IsConstructor, "m1.IsConstructor");
             Assert.False(m2.IsConstructor, "m2.IsConstructor");
-            Assert.AreEqual(m1.ReturnType, typeof(object), "m1.ReturnType");
-            Assert.AreEqual(m2.ReturnType, typeof(object), "m2.ReturnType");
+            Assert.AreEqual(m1.ReturnType, typeof(void), "m1.ReturnType");
+            Assert.AreEqual(m2.ReturnType, typeof(void), "m2.ReturnType");
             Assert.AreEqual(m1.TypeParameterCount, 0, "m1.TypeParameterCount");
             Assert.AreEqual(m2.TypeParameterCount, 0, "m2.TypeParameterCount");
             Assert.AreEqual(m1.IsGenericMethodDefinition, false, "m1.IsGenericMethodDefinition");

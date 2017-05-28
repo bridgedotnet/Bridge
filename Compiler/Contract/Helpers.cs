@@ -552,7 +552,7 @@ namespace Bridge.Contract
             {
                 return false;
             }
-            if (propDef.GetMethod.CustomAttributes.Any(a => a.AttributeType.FullName == "System.Runtime.CompilerServices.CompilerGeneratedAttribute"))
+            if (AttributeHelper.HasCompilerGeneratedAttribute(propDef.GetMethod))
             {
                 return true;
             }

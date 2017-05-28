@@ -36,12 +36,13 @@ namespace Bridge.Translator
 
         public virtual void CheckType(TypeDefinition type, ITranslator translator)
         {
+            this.CheckObjectLiteral(type, translator);
+
             if (this.CanIgnoreType(type))
             {
                 return;
             }
 
-            this.CheckObjectLiteral(type, translator);
             this.CheckConstructors(type, translator);
             this.CheckFields(type, translator);
             this.CheckProperties(type, translator);
@@ -54,96 +55,122 @@ namespace Bridge.Translator
 
         public virtual void CheckObjectLiteral(TypeDefinition type, ITranslator translator)
         {
-            if (this.IsObjectLiteral(type))
+            if (!this.IsObjectLiteral(type))
             {
-                var objectCreateMode = this.GetObjectCreateMode(type);
+                return;
+            }
 
-                if (objectCreateMode == 0)
+            var objectCreateMode = this.GetObjectCreateMode(type);
+
+            if (objectCreateMode == 0)
+            {
+                var ctors = type.GetConstructors();
+
+                foreach (var ctor in ctors)
                 {
-                    var ctors = type.GetConstructors();
-
-                    foreach (var ctor in ctors)
+                    foreach (var parameter in ctor.Parameters)
                     {
-                        foreach (var parameter in ctor.Parameters)
+                        if (parameter.ParameterType.FullName == "Bridge.ObjectCreateMode")
                         {
-                            if (parameter.ParameterType.FullName == "Bridge.ObjectCreateMode")
-                            {
-                                TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_NO_CREATE_MODE_CUSTOM_CONSTRUCTOR, type);
-                            }
-
-                            if (parameter.ParameterType.FullName == "Bridge.ObjectInitializationMode")
-                            {
-                                continue;
-                            }
-
-                            TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_CUSTOM_CONSTRUCTOR, type);
+                            TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_NO_CREATE_MODE_CUSTOM_CONSTRUCTOR, type);
                         }
+
+                        if (parameter.ParameterType.FullName == "Bridge.ObjectInitializationMode")
+                        {
+                            continue;
+                        }
+
+                        TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_CUSTOM_CONSTRUCTOR, type);
                     }
                 }
+            }
 
-                if (type.IsInterface)
+            if (type.IsInterface)
+            {
+                if (type.HasMethods && type.Methods.GroupBy(m => m.Name).Any(g => g.Count() > 1))
                 {
-                    if (type.HasMethods && type.Methods.GroupBy(m => m.Name).Any(g => g.Count() > 1))
-                    {
-                        TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_OVERLOAD_METHODS, type);
-                    }
-
-                    if (type.HasEvents)
-                    {
-                        TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_EVENTS, type);
-                    }
-                }
-                else
-                {
-                    if (type.Methods.Any(m => !m.IsRuntimeSpecialName && m.Name.Contains(".") && !m.Name.Contains("<")) ||
-                        type.Properties.Any(m => !m.IsRuntimeSpecialName && m.Name.Contains(".") && !m.Name.Contains("<")))
-                    {
-                        TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_EXPLICIT_IMPLEMENTATION, type);
-                    }
+                    TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_OVERLOAD_METHODS, type);
                 }
 
-                if (type.BaseType != null)
+                if (type.HasEvents)
                 {
-                    TypeDefinition baseType = null;
+                    TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_EVENTS, type);
+                }
+            }
+            else
+            {
+                if (type.Methods.Any(m => !m.IsRuntimeSpecialName && m.Name.Contains(".") && !m.Name.Contains("<")) ||
+                    type.Properties.Any(m => !m.IsRuntimeSpecialName && m.Name.Contains(".") && !m.Name.Contains("<")))
+                {
+                    TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_EXPLICIT_IMPLEMENTATION, type);
+                }
+            }
+
+            if (type.BaseType != null)
+            {
+                TypeDefinition baseType = null;
+                try
+                {
+                    baseType = type.BaseType.Resolve();
+                }
+                catch (Exception)
+                {
+
+                }
+
+                if (objectCreateMode == 1 && baseType != null && baseType.FullName != "System.Object" && this.GetObjectCreateMode(baseType) == 0)
+                {
+                    TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_CONSTRUCTOR_INHERITANCE, type);
+                }
+
+                if (objectCreateMode == 0 && baseType != null && this.GetObjectCreateMode(baseType) == 1)
+                {
+                    TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_INHERITANCE, type);
+                }
+            }
+
+            if (type.Interfaces.Count > 0 && objectCreateMode == 1)
+            {
+                foreach (var @interface in type.Interfaces)
+                {
+                    TypeDefinition iDef = null;
                     try
                     {
-                        baseType = type.BaseType.Resolve();
+                        iDef = @interface.Resolve();
                     }
                     catch (Exception)
                     {
 
                     }
 
-                    if (objectCreateMode == 1 && baseType != null && baseType.FullName != "System.Object" && this.GetObjectCreateMode(baseType) == 0)
+                    if (iDef != null && iDef.FullName != "System.Object" && !this.IsObjectLiteral(iDef))
                     {
-                        TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_CONSTRUCTOR_INHERITANCE, type);
+                        TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_INHERITANCE, type);
+                    }
+                }
+            }
+
+            if (objectCreateMode == 0)
+            {
+                var hasVirtualMethods = false;
+
+                foreach (MethodDefinition method in type.Methods)
+                {
+                    if (AttributeHelper.HasCompilerGeneratedAttribute(method))
+                    {
+                        continue;
                     }
 
-                    if (objectCreateMode == 0 && baseType != null && this.GetObjectCreateMode(baseType) == 1)
+                    if (method.IsVirtual && !(method.IsSetter || method.IsGetter))
                     {
-                        TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_INHERITANCE, type);
+                        hasVirtualMethods = true;
+                        break;
                     }
                 }
 
-                if (type.Interfaces.Count > 0 && objectCreateMode == 1)
+                if (hasVirtualMethods)
                 {
-                    foreach (var @interface in type.Interfaces)
-                    {
-                        TypeDefinition iDef = null;
-                        try
-                        {
-                            iDef = @interface.Resolve();
-                        }
-                        catch (Exception)
-                        {
-
-                        }
-
-                        if (iDef != null && iDef.FullName != "System.Object" && !this.IsObjectLiteral(iDef))
-                        {
-                            TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_INHERITANCE, type);
-                        }
-                    }
+                    Bridge.Translator.TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_NO_VIRTUAL_METHODS, type);
                 }
             }
         }
@@ -349,7 +376,7 @@ namespace Bridge.Translator
                 {
                     if (args[0].Type.FullName == Translator.Bridge_ASSEMBLY + ".ObjectInitializationMode")
                     {
-                        return (int) args[0].Value;
+                        return (int)args[0].Value;
                     }
                 }
             }
@@ -464,7 +491,7 @@ namespace Bridge.Translator
                     name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.GetParentNames(type);
                 }
 
-                
+
                 var typeName = emitter.GetTypeName(emitter.BridgeTypes.Get(type).Type.GetDefinition(), type);
                 name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.ConvertName(changeCase ? typeName.ToLowerCamelCase() : typeName);
 
@@ -542,31 +569,14 @@ namespace Bridge.Translator
 
         public virtual void CheckMethods(TypeDefinition type, ITranslator translator)
         {
-            var methodsCount = 0;
-
             foreach (MethodDefinition method in type.Methods)
             {
-                if (method.HasCustomAttributes && method.CustomAttributes.Any(a => a.AttributeType.FullName == "System.Runtime.CompilerServices.CompilerGeneratedAttribute"))
+                if (AttributeHelper.HasCompilerGeneratedAttribute(method))
                 {
                     continue;
                 }
 
                 this.CheckMethodArguments(method);
-
-                if (method.IsVirtual && !(method.IsSetter || method.IsGetter))
-                {
-                    methodsCount++;
-                }
-            }
-
-            if (this.IsObjectLiteral(type) && methodsCount > 0)
-            {
-                var objectCreateMode = this.GetObjectCreateMode(type);
-
-                if (objectCreateMode == 0)
-                {
-                    Bridge.Translator.TranslatorException.Throw(Constants.Messages.Exceptions.OBJECT_LITERAL_NO_VIRTUAL_METHODS, type);
-                }
             }
         }
 

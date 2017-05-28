@@ -42,6 +42,26 @@ namespace Bridge.Translator.Tests.Helpers
                         public const string INTERFACE_INHERITANCE = PREFIX + "InterfaceInheritance";
                     }
                 }
+
+                public class N2710
+                {
+                    private const string PREFIX = Issues.PREFIX + "N2710.";
+
+                    public class ShouldFail
+                    {
+                        private const string PREFIX = N2710.PREFIX + "ShouldFail.";
+
+                        public const string NO_VIRTUAL_METHODS = PREFIX + "NoVirtualMethods";
+                        public const string PLAIN_NO_CREATE_MODE_CUSTOM_CONSTRUCTOR = PREFIX + "PlainNoCreateModeCustomConstructor";
+                        public const string PLAIN_CUSTOM_CONSTRUCTOR = PREFIX + "PlainCustomConstructor";
+                        public const string PLAIN_INHERITANCE = PREFIX + "PlainInheritance";
+                        public const string CONSTRUCTOR_INHERITANCE = PREFIX + "ConstructorInheritance";
+                        public const string INTERFACE_NO_OVERLOAD_METHODS = PREFIX + "InterfaceNoOverloadMethods";
+                        public const string INTERFACE_NO_EVENTS = PREFIX + "InterfaceNoEvents";
+                        public const string INTERFACE_NO_EXPLICIT_IMPLEMENTATION = PREFIX + "InterfaceNoExplicitImplementation";
+                        public const string INTERFACE_INHERITANCE = PREFIX + "InterfaceInheritance";
+                    }
+                }
             }
         }
     }

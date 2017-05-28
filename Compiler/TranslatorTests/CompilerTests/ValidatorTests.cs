@@ -75,7 +75,6 @@ namespace Bridge.Translator.Tests
 
         class ValidatorTests
         {
-            [TestFixture]
             class CheckTypeTests : AssemblyDefinitionTests
             {
                 protected void CheckTypeShouldFailTest(string parentType, Func<Mono.Cecil.TypeDefinition, string> expectedMessageMethod)
@@ -106,7 +105,11 @@ namespace Bridge.Translator.Tests
                         }
                     );
                 }
+            }
 
+            [TestFixture]
+            class CheckObjectLiteralTests : CheckTypeTests
+            {
                 [Test]
                 public void ObjectLiteralShouldFailNoVirtualMethodsTest()
                 {
@@ -184,6 +187,91 @@ namespace Bridge.Translator.Tests
                 {
                     CheckTypeShouldFailTest(
                         TestAssemblyHelper.TestClassNames.Issues.N2276.ShouldFail.INTERFACE_INHERITANCE,
+                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_INHERITANCE
+                    );
+                }
+            }
+
+            [TestFixture]
+            class CheckExternalObjectLiteralTests : CheckTypeTests
+            {
+                [Test]
+                public void ExternalObjectLiteralShouldFailNoVirtualMethodsTest()
+                {
+                    CheckTypeShouldFailTest(
+                        TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.NO_VIRTUAL_METHODS,
+                        Constants.Messages.Exceptions.OBJECT_LITERAL_NO_VIRTUAL_METHODS
+                    );
+                }
+
+                [Test]
+                public void ExternalObjectLiteralShouldFailPlainNoCreateModeConstructorTest()
+                {
+                    CheckTypeShouldFailTest(
+                        TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.PLAIN_NO_CREATE_MODE_CUSTOM_CONSTRUCTOR,
+                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_NO_CREATE_MODE_CUSTOM_CONSTRUCTOR
+                    );
+                }
+
+                [Test]
+                public void ExternalObjectLiteralShouldFailPlainCustomConstructorTest()
+                {
+                    CheckTypeShouldFailTest(
+                        TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.PLAIN_CUSTOM_CONSTRUCTOR,
+                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_CUSTOM_CONSTRUCTOR
+                    );
+                }
+
+                [Test]
+                public void ExternalObjectLiteralShouldFailPlainInheritanceTest()
+                {
+                    CheckTypeShouldFailTest(
+                        TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.PLAIN_INHERITANCE,
+                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_INHERITANCE
+                    );
+                }
+
+                [Test]
+                public void ExternalObjectLiteralShouldFailConstructorInheritanceTest()
+                {
+                    CheckTypeShouldFailTest(
+                        TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.CONSTRUCTOR_INHERITANCE,
+                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_CONSTRUCTOR_INHERITANCE
+                    );
+                }
+
+                [Test]
+                public void ExternalObjectLiteralShouldFailInterfaceNoOverloadMethodsTest()
+                {
+                    CheckTypeShouldFailTest(
+                        TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.INTERFACE_NO_OVERLOAD_METHODS,
+                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_OVERLOAD_METHODS
+                    );
+                }
+
+                [Test]
+                public void ExternalObjectLiteralShouldFailInterfaceNoEventsTest()
+                {
+                    CheckTypeShouldFailTest(
+                        TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.INTERFACE_NO_EVENTS,
+                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_EVENTS
+                    );
+                }
+
+                [Test]
+                public void ExternalObjectLiteralShouldFailInterfaceNoExplicitImplementationTest()
+                {
+                    CheckTypeShouldFailTest(
+                        TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.INTERFACE_NO_EXPLICIT_IMPLEMENTATION,
+                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_EXPLICIT_IMPLEMENTATION
+                    );
+                }
+
+                [Test]
+                public void ExternalObjectLiteralShouldFailInterfaceInheritanceTest()
+                {
+                    CheckTypeShouldFailTest(
+                        TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.INTERFACE_INHERITANCE,
                         Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_INHERITANCE
                     );
                 }
