@@ -258,6 +258,13 @@ namespace System
         }
 
         /// <summary>
+        /// Writes the text representation of the specified Type, followed by the current line terminator, to the standard output stream.
+        /// </summary>
+        /// <param name="value">The value to write.</param>
+        [Template("System.Console.WriteLine(Bridge.getTypeName({value}))")]
+        public static extern void WriteLine(Type value);
+
+        /// <summary>
         /// Writes the text representation of the specified single-precision floating-point value, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>

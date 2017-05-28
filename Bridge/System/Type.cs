@@ -396,5 +396,8 @@ namespace System
             [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 7)  == 5)")]
             get;
         }
+
+        [Template("Bridge.getTypeName({this})")]
+        public override extern string ToString();
     }
 }

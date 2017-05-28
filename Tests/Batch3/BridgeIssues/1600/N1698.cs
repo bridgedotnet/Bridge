@@ -48,7 +48,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.True(t.IsStatic, "IsStatic");
             Assert.AreEqual("WriteLine", t.Name, "Name");
             Assert.NotNull(t.ReturnType, "ReturnType not null");
-            Assert.AreEqual("Object", t.ReturnType.Name, "ReturnType");
+            Assert.AreEqual("System.Void", t.ReturnType.FullName, "ReturnType");
 
             var parameters = t.GetParameters();
             Assert.NotNull(parameters, "parameters not null");

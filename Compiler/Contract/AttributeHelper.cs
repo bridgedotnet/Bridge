@@ -61,6 +61,11 @@ namespace Bridge.Contract
             return attribute != null && names != null && names.Any(name => attribute.AttributeType.FullName == name);
         }
 
+        private static bool HasAttribute(ICustomAttributeProvider customAttributeProvider, params string[] names)
+        {
+            return customAttributeProvider != null && customAttributeProvider.CustomAttributes.Any(a => CheckName(a, names));
+        }
+
         #region Serializable attribute
 
         public static readonly string[] ATTRIBUTE_SERIALIZABLE_ALL_NAMES =
@@ -81,5 +86,26 @@ namespace Bridge.Contract
         }
 
         #endregion Serializable attribute
+
+        #region CompilerGeneratedAttribute attribute
+
+        public static readonly string[] ATTRIBUTE_COMPILER_GENERATED_ALL_NAMES =
+            new string[]
+            {
+                CS.Attributes.COMPILER_GENERATED_NAME, GetShortAttributeName(CS.Attributes.COMPILER_GENERATED_NAME)
+            };
+
+        public static readonly string[] ATTRIBUTE_COMPILER_GENERATED_LONG_NAMES =
+            new string[]
+            {
+                CS.Attributes.COMPILER_GENERATED_NAME
+            };
+
+        public static bool HasCompilerGeneratedAttribute(ICustomAttributeProvider customAttributeProvider)
+        {
+            return AttributeHelper.HasAttribute(customAttributeProvider, ATTRIBUTE_COMPILER_GENERATED_LONG_NAMES);
+        }
+
+        #endregion CompilerGeneratedAttribute attribute
     }
 }
