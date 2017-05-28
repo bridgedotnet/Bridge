@@ -31,51 +31,53 @@
         parse: function (enumType, s, ignoreCase, silent) {
             System.Enum.checkEnumType(enumType);
 
-            if (enumType === Number || enumType === System.String || enumType.$number) {
-                return s;
-            }
-
-            var intValue = {};
-
-            if (System.Int32.tryParse(s, intValue)) {
-                return Bridge.box(intValue.v, enumType, function (obj) { return System.Enum.toString(enumType, obj); });
-            }
-
-            var values = enumType;
-
-            if (!enumType.prototype || !enumType.prototype.$flags) {
-                for (var f in values) {
-                    if (enumMethods.nameEquals(f, s, ignoreCase)) {
-                        return Bridge.box(values[f], enumType, function (obj) { return System.Enum.toString(enumType, obj); });
-                    }
+            if (s != null) {
+                if (enumType === Number || enumType === System.String || enumType.$number) {
+                    return s;
                 }
-            } else {
-                var parts = s.split(','),
-                    value = 0,
-                    parsed = true;
 
-                for (var i = parts.length - 1; i >= 0; i--) {
-                    var part = parts[i].trim(),
-                        found = false;
+                var intValue = {};
 
+                if (System.Int32.tryParse(s, intValue)) {
+                    return Bridge.box(intValue.v, enumType, function (obj) { return System.Enum.toString(enumType, obj); });
+                }
+
+                var values = enumType;
+
+                if (!enumType.prototype || !enumType.prototype.$flags) {
                     for (var f in values) {
-                        if (enumMethods.nameEquals(f, part, ignoreCase)) {
-                            value |= values[f];
-                            found = true;
+                        if (enumMethods.nameEquals(f, s, ignoreCase)) {
+                            return Bridge.box(values[f], enumType, function (obj) { return System.Enum.toString(enumType, obj); });
+                        }
+                    }
+                } else {
+                    var parts = s.split(','),
+                        value = 0,
+                        parsed = true;
+
+                    for (var i = parts.length - 1; i >= 0; i--) {
+                        var part = parts[i].trim(),
+                            found = false;
+
+                        for (var f in values) {
+                            if (enumMethods.nameEquals(f, part, ignoreCase)) {
+                                value |= values[f];
+                                found = true;
+
+                                break;
+                            }
+                        }
+
+                        if (!found) {
+                            parsed = false;
 
                             break;
                         }
                     }
 
-                    if (!found) {
-                        parsed = false;
-
-                        break;
+                    if (parsed) {
+                        return Bridge.box(value, enumType, function (obj) { return System.Enum.toString(enumType, obj); });
                     }
-                }
-
-                if (parsed) {
-                    return Bridge.box(value, enumType, function (obj) { return System.Enum.toString(enumType, obj); });
                 }
             }
 

@@ -22058,6 +22058,35 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2722", {
+        statics: {
+            methods: {
+                TestEnumParsing: function () {
+                    var section = null;
+
+                    var mode = { v : new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2722.Mode() };
+                    if (System.Enum.tryParse(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2722.Mode, section, mode, true) === false) {
+                        mode.v = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2722.Mode.A;
+                    }
+
+                    Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2722.Mode.A === mode.v);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2722.Mode", {
+        $kind: "enum",
+        statics: {
+            fields: {
+                None: 0,
+                A: 1,
+                B: 2,
+                C: 3
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge277", {
         $kind: "enum",
         statics: {
