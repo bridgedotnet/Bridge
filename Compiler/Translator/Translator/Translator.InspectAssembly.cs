@@ -124,7 +124,7 @@ namespace Bridge.Translator
 
                 var path = Path.Combine(Path.GetDirectoryName(location), name) + ".dll";
                 var reference = this.LoadAssembly(path, references);
-
+                
                 if (reference != null && !references.Any(a => a.Name.FullName == reference.Name.FullName))
                 {
                     references.Add(reference);

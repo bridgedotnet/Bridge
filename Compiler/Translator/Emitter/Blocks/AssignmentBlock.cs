@@ -361,6 +361,9 @@ namespace Bridge.Translator
                     this.Write("= ");
                 }
 
+                oldValue = this.Emitter.ReplaceAwaiterByVar;
+                this.Emitter.ReplaceAwaiterByVar = true;
+
                 this.HandleDecimal(rr, variable);
 
                 if (this.Emitter.Writers.Count > initCount)
@@ -385,6 +388,7 @@ namespace Bridge.Translator
                     this.Write(")");
                 }
 
+                this.Emitter.ReplaceAwaiterByVar = oldValue;
                 return;
             }
 
@@ -394,6 +398,9 @@ namespace Bridge.Translator
                 {
                     this.Write("= ");
                 }
+
+                oldValue = this.Emitter.ReplaceAwaiterByVar;
+                this.Emitter.ReplaceAwaiterByVar = true;
 
                 this.HandleLong(rr, variable, isUint);
 
@@ -418,7 +425,7 @@ namespace Bridge.Translator
 
                     this.Write(")");
                 }
-
+                this.Emitter.ReplaceAwaiterByVar = oldValue;
                 return;
             }
 

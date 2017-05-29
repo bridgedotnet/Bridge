@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using ICSharpCode.NRefactory.Utils;
+using TopologicalSorting;
 using AssemblyDefinition = Mono.Cecil.AssemblyDefinition;
 
 namespace Bridge.Translator
@@ -212,41 +213,100 @@ namespace Bridge.Translator
             return resolver;
         }
 
+        private Stack<AssemblyDefinition> activeAssemblies;
+        private IList<AssemblyDefinition> GetParentAssemblies(AssemblyDefinition asm, List<AssemblyDefinition> list = null)
+        {
+            bool endPoint = list == null;
+            if (endPoint)
+            {
+                activeAssemblies = new Stack<AssemblyDefinition>();
+                list = new List<AssemblyDefinition>();
+            }
+
+            if (activeAssemblies.Any(r => r.FullName == asm.FullName))
+            {
+                return list;
+            }
+
+            activeAssemblies.Push(asm);
+
+            foreach (var assemblyReferenceName in asm.MainModule.AssemblyReferences)
+            {
+                var assemblyReference = asm.MainModule.AssemblyResolver.Resolve(assemblyReferenceName);
+                if (list.All(r => r.FullName != assemblyReference.FullName))
+                {
+                    list.Add(assemblyReference);
+                }
+
+                GetParentAssemblies(assemblyReference, list);
+            }
+
+            activeAssemblies.Pop();
+            return list;
+        }
+
         protected virtual void SortReferences()
         {
-            this.Log.Info("Sorting " + (this.References != null ? this.References.Count().ToString() : "no") + " reference(s)...");
+            var graph = new TopologicalSorting.DependencyGraph();
 
-            var list = this.References.ToList();
-            list.Sort((r1, r2) =>
+            foreach (var t in this.References)
             {
-                if (r1.Name.Name == CS.NS.ROOT)
+                var parents = this.GetParentAssemblies(t);
+                var tProcess = graph.Processes.FirstOrDefault(p => p.Name == t.FullName);
+                if (tProcess == null)
                 {
-                    return -1;
+                    tProcess = new TopologicalSorting.OrderedProcess(graph, t.FullName);
                 }
 
-                if (r2.Name.Name == CS.NS.ROOT)
+                for (int i = parents.Count - 1; i > -1; i--)
                 {
-                    return 1;
+                    var x = parents[i];
+                    if (tProcess.Predecessors.All(p => p.Name != x.FullName))
+                    {
+                        var dProcess = graph.Processes.FirstOrDefault(p => p.Name == x.FullName);
+                        if (dProcess == null)
+                        {
+                            dProcess = new TopologicalSorting.OrderedProcess(graph, x.FullName);
+                        }
+
+                        if (tProcess != dProcess && dProcess.Predecessors.All(p => p.Name != tProcess.Name))
+                        {
+                            tProcess.After(dProcess);
+                        }
+                    }
                 }
+            }
 
-                var references1 = r1.MainModule.AssemblyReferences;
-                var references2 = r2.MainModule.AssemblyReferences;
+            if (graph.ProcessCount > 0)
+            {
+                AssemblyDefinition asmDef = null;
 
-                if (references1.Any(r => r.FullName == r2.FullName))
+                try
                 {
-                    return 1;
-                }
+                    IEnumerable<IEnumerable<OrderedProcess>> sorted = graph.CalculateSort();
 
-                if (references2.Any(r => r.FullName == r1.FullName))
+                    var list = new List<AssemblyDefinition>(this.References.Count());
+                    foreach (var processes in sorted)
+                    {
+                        foreach (var process in processes)
+                        {
+                            asmDef = this.References.First(r => r.FullName == process.Name);
+                            if (list.All(r => r.FullName != asmDef.FullName))
+                            {
+                                list.Add(asmDef);
+                            }
+                        }
+                    }
+
+                    this.References = list;
+                }
+                catch (System.Exception ex)
                 {
-                    return -1;
+                    this.Log.Warn(string.Format("Topological sort failed {0} with error {1}", asmDef != null ? "at reference " + asmDef.FullName : string.Empty, ex));
                 }
-                return 0;
-            });
+            }
 
-            this.References = list;
-
-            this.Log.Info("Sorting references done");
+            activeAssemblies = null;
         }
 
         public virtual string GetCode()

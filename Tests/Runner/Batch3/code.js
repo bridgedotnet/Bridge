@@ -22126,6 +22126,34 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2716", {
+        statics: {
+            methods: {
+                Test: function (value) {
+                    return value;
+                },
+                TestDelegateWithOptionalParameter: function () {
+                    var callback = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2716.f1;
+                    Bridge.Test.NUnit.Assert.AreEqual(123, callback(123));
+                    Bridge.Test.NUnit.Assert.AreEqual(7, callback(7));
+
+                    callback = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2716.Test;
+                    Bridge.Test.NUnit.Assert.AreEqual(123, callback(123));
+                    Bridge.Test.NUnit.Assert.AreEqual(8, callback(8));
+                }
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2716", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2716, {
+        f1: function (context) {
+            var test = context;
+            return test;
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge272", {
         statics: {
             methods: {
@@ -22143,6 +22171,198 @@ Bridge.$N1391Result =                     r;
                 Abc: 1,
                 Def: 2,
                 Ghi: 3
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2720", {
+        statics: {
+            methods: {
+                TestLong: function () {
+                    var $step = 0,
+                        $task1, 
+                        $jumpFromFinally, 
+                        $tcs = new System.Threading.Tasks.TaskCompletionSource(), 
+                        $returnValue, 
+                        $async_e, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            try {
+                                for (;;) {
+                                    $step = System.Array.min([0,1], $step);
+                                    switch ($step) {
+                                        case 0: {
+                                            $task1 = System.Threading.Tasks.Task.delay(1);
+                                            $step = 1;
+                                            $task1.continueWith($asyncBody);
+                                            return;
+                                        }
+                                        case 1: {
+                                            $task1.getAwaitedResult();
+                                            $tcs.setResult(System.Int64(1));
+                                            return;
+                                        }
+                                        default: {
+                                            $tcs.setResult(null);
+                                            return;
+                                        }
+                                    }
+                                }
+                            } catch($async_e1) {
+                                $async_e = System.Exception.create($async_e1);
+                                $tcs.setException($async_e);
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                    return $tcs.task;
+                },
+                TestDecimal: function () {
+                    var $step = 0,
+                        $task1, 
+                        $jumpFromFinally, 
+                        $tcs = new System.Threading.Tasks.TaskCompletionSource(), 
+                        $returnValue, 
+                        $async_e, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            try {
+                                for (;;) {
+                                    $step = System.Array.min([0,1], $step);
+                                    switch ($step) {
+                                        case 0: {
+                                            $task1 = System.Threading.Tasks.Task.delay(1);
+                                            $step = 1;
+                                            $task1.continueWith($asyncBody);
+                                            return;
+                                        }
+                                        case 1: {
+                                            $task1.getAwaitedResult();
+                                            $tcs.setResult(System.Decimal(5.1));
+                                            return;
+                                        }
+                                        default: {
+                                            $tcs.setResult(null);
+                                            return;
+                                        }
+                                    }
+                                }
+                            } catch($async_e1) {
+                                $async_e = System.Exception.create($async_e1);
+                                $tcs.setException($async_e);
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                    return $tcs.task;
+                },
+                TestAsyncAssignmentForLong: function () {
+                    var $step = 0,
+                        $task1, 
+                        $taskResult1, 
+                        $jumpFromFinally, 
+                        done, 
+                        longResult, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            for (;;) {
+                                $step = System.Array.min([0,1], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        done = Bridge.Test.NUnit.Assert.Async();
+
+                                        longResult = System.Int64(0);
+                                        $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2720.TestLong();
+                                        $step = 1;
+                                        $task1.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 1: {
+                                        $taskResult1 = $task1.getAwaitedResult();
+                                        longResult = $taskResult1;
+
+                                        Bridge.Test.NUnit.Assert.True(longResult.equals(System.Int64(1)));
+                                        Bridge.Test.NUnit.Assert.AreEqual("1", longResult.toString());
+                                        Bridge.Test.NUnit.Assert.AreEqual("System.Int64", Bridge.Reflection.getTypeFullName(System.Int64));
+
+                                        done();
+                                        return;
+                                    }
+                                    default: {
+                                        return;
+                                    }
+                                }
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                },
+                TestAsyncAssignmentForDecimal: function () {
+                    var $step = 0,
+                        $task1, 
+                        $taskResult1, 
+                        $jumpFromFinally, 
+                        done, 
+                        decimalResult, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            for (;;) {
+                                $step = System.Array.min([0,1], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        done = Bridge.Test.NUnit.Assert.Async();
+
+                                        decimalResult = System.Decimal(0);
+                                        $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2720.TestDecimal();
+                                        $step = 1;
+                                        $task1.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 1: {
+                                        $taskResult1 = $task1.getAwaitedResult();
+                                        decimalResult = $taskResult1;
+
+                                        Bridge.Test.NUnit.Assert.True(decimalResult.equalsT(System.Decimal(5.1)));
+                                        Bridge.Test.NUnit.Assert.AreEqual("5.1", Bridge.Int.format(decimalResult, "G"));
+                                        Bridge.Test.NUnit.Assert.AreEqual("System.Decimal", Bridge.Reflection.getTypeFullName(System.Decimal));
+
+                                        done();
+                                        return;
+                                    }
+                                    default: {
+                                        return;
+                                    }
+                                }
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2722", {
+        statics: {
+            methods: {
+                TestEnumParsing: function () {
+                    var section = null;
+
+                    var mode = { v : new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2722.Mode() };
+                    if (System.Enum.tryParse(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2722.Mode, section, mode, true) === false) {
+                        mode.v = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2722.Mode.A;
+                    }
+
+                    Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2722.Mode.A === mode.v);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2722.Mode", {
+        $kind: "enum",
+        statics: {
+            fields: {
+                None: 0,
+                A: 1,
+                B: 2,
+                C: 3
             }
         }
     });
