@@ -590,6 +590,7 @@ namespace Bridge.Translator
                 var parameters = resolveResult.Member.Parameters;
                 var resolvedMethod = resolveResult.Member as IMethod;
                 var invocationResult = resolveResult as CSharpInvocationResolveResult;
+                var isDelegate = resolveResult.Member.DeclaringType.Kind == TypeKind.Delegate;
                 int shift = 0;
 
                 if (resolvedMethod != null && invocationResult != null &&
@@ -682,7 +683,7 @@ namespace Bridge.Translator
                         {
                             t = p.ConstantValue;
                         }
-                        if ((named || isInterfaceMember) && !p.IsParams)
+                        if ((named || isInterfaceMember || isDelegate) && !p.IsParams)
                         {
                             if (t == null)
                             {

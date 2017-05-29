@@ -1,0 +1,19 @@
+﻿{
+  "outputFormatting": "Formatted",
+  "resources": [
+    // Do not extract output just to keep output folder clean - we just need the projectA.js embedded
+    {
+      "extract": false
+    },
+    {
+      "name": "bridge.js"
+    },
+    {
+      "name": "bridge.console.js"
+    },
+    {
+      "name": "projectA.js",
+      "files": [ "resourceA.js" ]
+    }
+  ]
+}

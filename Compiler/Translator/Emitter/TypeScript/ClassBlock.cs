@@ -81,7 +81,7 @@ namespace Bridge.Translator.TypeScript
         protected virtual void EmitClassHeader()
         {
             var typeDef = this.Emitter.GetTypeDefinition();
-            string name = this.Emitter.Validator.GetCustomTypeName(typeDef, this.Emitter);
+            string name = this.Emitter.Validator.GetCustomTypeName(typeDef, this.Emitter, false);
             this.IsGeneric = typeDef.GenericParameters.Count > 0;
 
             if (name.IsEmpty())
@@ -256,7 +256,7 @@ namespace Bridge.Translator.TypeScript
                         continue;
                     }
 
-                    string customName = this.Emitter.Validator.GetCustomTypeName(typeDef, this.Emitter);
+                    string customName = this.Emitter.Validator.GetCustomTypeName(typeDef, this.Emitter, false);
                     string defName = customName;
 
                     if (defName.IsEmpty())
@@ -272,7 +272,7 @@ namespace Bridge.Translator.TypeScript
                     if (typeDef.IsEnum)
                     {
                         var parentTypeDef = this.Emitter.GetTypeDefinition();
-                        string parentName = this.Emitter.Validator.GetCustomTypeName(parentTypeDef, this.Emitter);
+                        string parentName = this.Emitter.Validator.GetCustomTypeName(parentTypeDef, this.Emitter, false);
                         if (parentName.IsEmpty())
                         {
                             parentName = this.TypeInfo.Type.Name;
@@ -337,7 +337,7 @@ namespace Bridge.Translator.TypeScript
                 }
 
                 var typeDef = this.Emitter.GetTypeDefinition();
-                string name = this.Emitter.Validator.GetCustomTypeName(typeDef, this.Emitter);
+                string name = this.Emitter.Validator.GetCustomTypeName(typeDef, this.Emitter, false);
                 if (name.IsEmpty())
                 {
                     name = BridgeTypes.ToJsName(this.TypeInfo.Type, this.Emitter, true, true);
