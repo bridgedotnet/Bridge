@@ -327,6 +327,41 @@ namespace Bridge.Translator
             }
         }
 
+        public static string GetFullyQualifiedNameAndValidate(this ISymbol symbol, SemanticModel semanticModel, SyntaxNode node, bool appenTypeArgs = true)
+        {
+            var name = symbol.FullyQualifiedName(appenTypeArgs);
+
+            if (symbol is ITypeSymbol)
+            {
+                var ti = semanticModel.GetSpeculativeTypeInfo(node.SpanStart, SyntaxFactory.ParseTypeName(name), SpeculativeBindingOption.BindAsTypeOrNamespace);
+                var type = ti.Type ?? ti.ConvertedType;
+                if (type == null || type.Kind == SymbolKind.ErrorType)
+                {
+                    ti = semanticModel.GetSpeculativeTypeInfo(node.SpanStart, SyntaxFactory.ParseTypeName("global::" + name), SpeculativeBindingOption.BindAsTypeOrNamespace);
+                    type = ti.Type ?? ti.ConvertedType;
+                    if (type != null && type.Kind != SymbolKind.ErrorType)
+                    {
+                        name = "global::" + name;
+                    }
+                }
+            }
+            else
+            {
+                var si = semanticModel.GetSpeculativeSymbolInfo(node.SpanStart, SyntaxFactory.ParseExpression(name), SpeculativeBindingOption.BindAsExpression);
+                if (si.Symbol == null || si.Symbol.Kind == SymbolKind.ErrorType)
+                {
+                    si = semanticModel.GetSpeculativeSymbolInfo(node.SpanStart, SyntaxFactory.ParseExpression("global::" + name), SpeculativeBindingOption.BindAsExpression);
+
+                    if (si.Symbol != null && si.Symbol.Kind != SymbolKind.ErrorType)
+                    {
+                        name = "global::" + name;
+                    }
+                }
+            }
+
+            return name;
+        }
+
         public static string FullyQualifiedName(this ISymbol symbol, bool appenTypeArgs = true)
         {
             var at = symbol as IArrayTypeSymbol;

@@ -22147,6 +22147,17 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2723", {
+        statics: {
+            methods: {
+                TestAmbigiousSymbols: function () {
+                    var problem = new Derived2723.Problem2723();
+                    problem.Test();
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge277", {
         $kind: "enum",
         statics: {
@@ -30438,6 +30449,24 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Problem2723.Classes2723.A2723");
+
+    Bridge.define("Derived2723.Problem2723", {
+        fields: {
+            b: null
+        },
+        ctors: {
+            init: function () {
+                this.b = new Derived2723.Classes2723.B2723();
+            }
+        },
+        methods: {
+            Test: function () {
+                this.b.Test(Problem2723.Classes2723.A2723.Mode.Value2);
+            }
+        }
+    });
+
     Bridge.define("Other.Util", {
         statics: {
             methods: {
@@ -30454,6 +30483,16 @@ Bridge.$N1391Result =                     r;
                 if (incomingData === void 0) { incomingData = null; }
 
                 this.$initialize();
+            }
+        }
+    });
+
+    Bridge.define("Problem2723.Classes2723.A2723.Mode", {
+        $kind: "enum",
+        statics: {
+            fields: {
+                Value1: 0,
+                Value2: 1
             }
         }
     });
@@ -32274,6 +32313,25 @@ Bridge.$N1391Result =                     r;
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.MyOtherType]
     });
 
+    Bridge.define("Derived2723.Classes2723.B2723", {
+        inherits: [Problem2723.Classes2723.A2723],
+        methods: {
+            Test: function (mode) {
+                switch (mode) {
+                    case Problem2723.Classes2723.A2723.Mode.Value1: 
+                        Bridge.Test.NUnit.Assert.Fail();
+                        break;
+                    case Problem2723.Classes2723.A2723.Mode.Value2: 
+                        break;
+                    default: 
+                        throw new System.ArgumentOutOfRangeException("mode", null, null, Bridge.box(mode, Problem2723.Classes2723.A2723.Mode, $box_.Problem2723.Classes2723.A2723.Mode.toString));
+                }
+
+                Bridge.Test.NUnit.Assert.AreEqual(Problem2723.Classes2723.A2723.Mode.Value2, mode);
+            }
+        }
+    });
+
     Bridge.define("Paige.PaigeObject.PaigeObject", {
         inherits: [Paige.Core.BaseObject],
         props: {
@@ -32630,6 +32688,12 @@ Bridge.$N1391Result =                     r;
 
     Bridge.apply($box_.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2558.Status, {
         toString: function (obj) { return System.Enum.toString(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2558.Status, obj); }
+    });
+
+    Bridge.ns("Problem2723.Classes2723.A2723.Mode", $box_);
+
+    Bridge.apply($box_.Problem2723.Classes2723.A2723.Mode, {
+        toString: function (obj) { return System.Enum.toString(Problem2723.Classes2723.A2723.Mode, obj); }
     });
 
     var $m = Bridge.setMetadata,
