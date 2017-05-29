@@ -35,7 +35,7 @@ namespace Bridge.Contract
 
         string GetCustomConstructor(Mono.Cecil.TypeDefinition type);
 
-        string GetCustomTypeName(Mono.Cecil.TypeDefinition type, IEmitter emitter);
+        string GetCustomTypeName(Mono.Cecil.TypeDefinition type, IEmitter emitter, bool excludeNs);
 
         string GetInlineCode(Mono.Cecil.MethodDefinition method);
 

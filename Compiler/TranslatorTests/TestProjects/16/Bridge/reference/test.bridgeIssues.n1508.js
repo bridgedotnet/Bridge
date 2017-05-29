@@ -19,11 +19,11 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                                 // $t2 should not be re-created with var
                                 var action;
                                 var xOut = { v : 0 };
-                                action = (function (xOut) {
+                                action = (function ($me, xOut) {
                                     return function () {
                                         ((xOut.v = (xOut.v + 1) | 0));
                                     };
-                                })(xOut);
+                                })(this, xOut);
                                 return true;
                             }
                         }finally {

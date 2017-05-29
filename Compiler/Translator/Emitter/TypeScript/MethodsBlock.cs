@@ -107,7 +107,7 @@ namespace Bridge.Translator.TypeScript
         protected virtual void EmitStructMethods()
         {
             var typeDef = this.Emitter.GetTypeDefinition();
-            string structName = this.Emitter.Validator.GetCustomTypeName(typeDef, this.Emitter);
+            string structName = this.Emitter.Validator.GetCustomTypeName(typeDef, this.Emitter, false);
 
             if (structName.IsEmpty())
             {
