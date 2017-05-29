@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <ProjectGuid>{16777B9C-A3B6-4E0B-B5A2-AA933A2F54DB}</ProjectGuid>
+    <RootNamespace>B</RootNamespace>
+    <AssemblyName>B</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <RestorePackages>true</RestorePackages>
+    <NoStdLib>True</NoStdLib>
+    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
+    <AdditionalExplicitAssemblyReferences />
+    <WarningLevel>0</WarningLevel>
+    <NoWarn>1591, 0219, 0414, 0618, 0626, 0649, 0693, 0824, 0660, 0661, 7035</NoWarn>
+    <OutputPath>bin\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <UseBridgeTask>true</UseBridgeTask>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="B.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Bridge">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Bridge\bin\$(Configuration)\Bridge.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bridge.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="resourceB.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\A\A.csproj">
+      <Project>{16777b9c-a3b6-4e0b-b5a2-aa933a2f54da}</Project>
+      <Name>A</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <!-- Bridge Compiler -->
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <UsingTask Condition="$(UseBridgeTask) == true" TaskName="BridgeCompilerTask" AssemblyFile="$(ProjectDir)..\..\..\..\..\Build\bin\$(Configuration)\Bridge.Build.dll" />
+  <Target Condition="$(UseBridgeTask) == true" Name="AfterBuild">
+    <Message Text="Using Bridge Task" Importance="high" />
+    <BridgeCompilerTask Assembly="@(IntermediateAssembly)" AssemblyName="$(AssemblyName)" AssembliesPath="$(OutDir)" CheckForOverflowUnderflow="$(CheckForOverflowUnderflow)" Configuration="$(Configuration)" DefineConstants="$(DefineConstants)" OutDir="$(OutDir)" OutputPath="$(OutputPath)" OutputType="$(OutputType)" Platform="$(Platform)" ProjectPath="$(MSBuildProjectFullPath)" RootNamespace="$(RootNamespace)" Sources="@(Compile)" />
+  </Target>
+</Project>
