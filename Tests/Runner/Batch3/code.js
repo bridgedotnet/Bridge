@@ -22134,10 +22134,12 @@ Bridge.$N1391Result =                     r;
                 },
                 TestDelegateWithOptionalParameter: function () {
                     var callback = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2716.f1;
-
                     Bridge.Test.NUnit.Assert.AreEqual(123, callback(123));
+                    Bridge.Test.NUnit.Assert.AreEqual(7, callback(7));
+
                     callback = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2716.Test;
                     Bridge.Test.NUnit.Assert.AreEqual(123, callback(123));
+                    Bridge.Test.NUnit.Assert.AreEqual(8, callback(8));
                 }
             }
         }

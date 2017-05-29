@@ -23,10 +23,12 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 int test = context;
                 return test;
             };
-
             Assert.AreEqual(123, callback());
+            Assert.AreEqual(7, callback(7));
+
             callback = Test;
             Assert.AreEqual(123, callback());
+            Assert.AreEqual(8, callback(8));
         }
     }
 }
