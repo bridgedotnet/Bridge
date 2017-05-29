@@ -230,7 +230,7 @@ namespace Bridge.Translator
         public override SyntaxNode VisitInvocationExpression(InvocationExpressionSyntax node)
         {
             var method = this.semanticModel.GetSymbolInfo(node).Symbol as IMethodSymbol;
-
+            var spanStart = node.SpanStart;
             node = (InvocationExpressionSyntax)base.VisitInvocationExpression(node);
             if (node.Expression is IdentifierNameSyntax &&
                 ((IdentifierNameSyntax)node.Expression).Identifier.Text == "nameof")
@@ -263,7 +263,7 @@ namespace Bridge.Translator
                         if (method.MethodKind == MethodKind.ReducedExtension && node.GetParent<ConditionalAccessExpressionSyntax>() == null)
                         {
                             var target = ma.Expression;
-                            var clsName = method.ContainingType.GetFullyQualifiedNameAndValidate(this.semanticModel, node);
+                            var clsName = method.ContainingType.GetFullyQualifiedNameAndValidate(this.semanticModel, spanStart);
                             ma = SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, SyntaxFactory.IdentifierName(clsName), genericName);
                             node = node.WithArgumentList(node.ArgumentList.WithArguments(node.ArgumentList.Arguments.Insert(0, SyntaxFactory.Argument(target))));
                         }
@@ -400,6 +400,7 @@ namespace Bridge.Translator
                 } while (qns != null && needHandle);
             }
 
+            var spanStart = node.SpanStart;
             node = (GenericNameSyntax)base.VisitGenericName(node);
 
             if (needHandle && !(nodeParent is MemberAccessExpressionSyntax))
@@ -407,10 +408,10 @@ namespace Bridge.Translator
                 INamedTypeSymbol namedType = symbol as INamedTypeSymbol;
                 if (namedType != null && namedType.IsGenericType && namedType.TypeArguments.Length > 0 && !namedType.TypeArguments.Any(SyntaxHelper.IsAnonymous))
                 {
-                    return SyntaxHelper.GenerateGenericName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.GetFullyQualifiedNameAndValidate(this.semanticModel, node, false), node.GetTrailingTrivia()), namedType.TypeArguments);
+                    return SyntaxHelper.GenerateGenericName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.GetFullyQualifiedNameAndValidate(this.semanticModel, spanStart, false), node.GetTrailingTrivia()), namedType.TypeArguments);
                 }
 
-                return SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.GetFullyQualifiedNameAndValidate(this.semanticModel, node), node.GetTrailingTrivia()));
+                return SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.GetFullyQualifiedNameAndValidate(this.semanticModel, spanStart), node.GetTrailingTrivia()));
             }
 
             IMethodSymbol methodSymbol = null;
@@ -427,10 +428,10 @@ namespace Bridge.Translator
             {
                 if (methodSymbol != null && methodSymbol.IsGenericMethod && methodSymbol.TypeArguments.Length > 0 && !methodSymbol.TypeArguments.Any(SyntaxHelper.IsAnonymous))
                 {
-                    return SyntaxHelper.GenerateGenericName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.GetFullyQualifiedNameAndValidate(this.semanticModel, node, false), node.GetTrailingTrivia()), methodSymbol.TypeArguments);
+                    return SyntaxHelper.GenerateGenericName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.GetFullyQualifiedNameAndValidate(this.semanticModel, spanStart, false), node.GetTrailingTrivia()), methodSymbol.TypeArguments);
                 }
 
-                return SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.GetFullyQualifiedNameAndValidate(this.semanticModel, node), node.GetTrailingTrivia()));
+                return SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.GetFullyQualifiedNameAndValidate(this.semanticModel, spanStart), node.GetTrailingTrivia()));
             }
 
             return node;
@@ -475,6 +476,7 @@ namespace Bridge.Translator
                 } while (qns != null && needHandle);
             }
 
+            var spanStart = node.SpanStart;
             node = (IdentifierNameSyntax)base.VisitIdentifierName(node);
 
             if (needHandle && !(node.Parent is MemberAccessExpressionSyntax))
@@ -486,7 +488,7 @@ namespace Bridge.Translator
                     return genericName.WithLeadingTrivia(node.GetLeadingTrivia().ExcludeDirectivies()).WithTrailingTrivia(node.GetTrailingTrivia().ExcludeDirectivies());
                 }
 
-                return SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.GetFullyQualifiedNameAndValidate(this.semanticModel, node), node.GetTrailingTrivia()));
+                return SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.GetFullyQualifiedNameAndValidate(this.semanticModel, spanStart), node.GetTrailingTrivia()));
             }
 
             IMethodSymbol methodSymbol = null;
@@ -503,11 +505,11 @@ namespace Bridge.Translator
             {
                 if (methodSymbol != null && methodSymbol.IsGenericMethod && methodSymbol.TypeArguments.Length > 0 && !methodSymbol.TypeArguments.Any(SyntaxHelper.IsAnonymous))
                 {
-                    var genericName = SyntaxHelper.GenerateGenericName(SyntaxFactory.Identifier(symbol.GetFullyQualifiedNameAndValidate(this.semanticModel, node, false)), methodSymbol.TypeArguments);
+                    var genericName = SyntaxHelper.GenerateGenericName(SyntaxFactory.Identifier(symbol.GetFullyQualifiedNameAndValidate(this.semanticModel, spanStart, false)), methodSymbol.TypeArguments);
                     return genericName.WithLeadingTrivia(node.GetLeadingTrivia().ExcludeDirectivies()).WithTrailingTrivia(node.GetTrailingTrivia().ExcludeDirectivies());
                 }
 
-                return SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.GetFullyQualifiedNameAndValidate(this.semanticModel, node), node.GetTrailingTrivia()));
+                return SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.GetFullyQualifiedNameAndValidate(this.semanticModel, spanStart), node.GetTrailingTrivia()));
             }
 
             return node;
@@ -530,17 +532,18 @@ namespace Bridge.Translator
                 thisType = this.semanticModel.GetDeclaredSymbol(parent) as ITypeSymbol;
             }
 
+            var spanStart = node.Expression.SpanStart;
             node = (MemberAccessExpressionSyntax)base.VisitMemberAccessExpression(node);
 
             if (node.Expression is IdentifierNameSyntax && symbol != null && symbol.IsStatic && symbol.ContainingType != null && thisType != null && !thisType.InheritsFromOrEquals(symbol.ContainingType) && (symbol is IMethodSymbol || symbol is IPropertySymbol || symbol is IFieldSymbol || symbol is IEventSymbol))
             {
-                return SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.GetFullyQualifiedNameAndValidate(this.semanticModel, node.Expression), node.GetTrailingTrivia())), node.OperatorToken, node.Name);
+                return SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.GetFullyQualifiedNameAndValidate(this.semanticModel, spanStart), node.GetTrailingTrivia())), node.OperatorToken, node.Name);
             }
 
             var usingType = symbol as INamedTypeSymbol;
             if (node.Expression is IdentifierNameSyntax && symbol != null && symbolNode != null && usingType != null && symbolNode.IsStatic && symbol.ContainingType != null && thisType != null && !thisType.InheritsFromOrEquals(usingType) && !usingType.IsAccessibleIn(thisType) && (symbolNode is IMethodSymbol || symbolNode is IPropertySymbol || symbolNode is IFieldSymbol || symbolNode is IEventSymbol))
             {
-                return SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.GetFullyQualifiedNameAndValidate(this.semanticModel, node.Expression), node.GetTrailingTrivia())), node.OperatorToken, node.Name);
+                return SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, SyntaxFactory.IdentifierName(SyntaxFactory.Identifier(node.GetLeadingTrivia(), symbol.GetFullyQualifiedNameAndValidate(this.semanticModel, spanStart), node.GetTrailingTrivia())), node.OperatorToken, node.Name);
             }
 
             return node;
