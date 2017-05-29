@@ -265,16 +265,18 @@ namespace Bridge.Translator
             bool block = body is BlockStatement;
             this.Write("");
 
-            var savedPos = this.Emitter.Output.Length;
             var savedThisCount = this.Emitter.ThisRefCounter;
             var capturedVariables = this.GetCapturedLoopVariablesNames();
-
-            if (capturedVariables != null && capturedVariables.Length > 0)
+            var hasCapturedVariables = capturedVariables != null && capturedVariables.Length > 0;
+            if (hasCapturedVariables)
             {
-                this.Write("(function (" + string.Join(", ", capturedVariables) + ") ");
+                this.Write("(function ($me, ");
+                this.Write(string.Join(", ", capturedVariables) + ") ");
                 this.BeginBlock();
                 this.Write("return ");
             }
+
+            var savedPos = this.Emitter.Output.Length;
 
             this.WriteFunction();
             this.EmitMethodParameters(parameters, null, context);
@@ -363,18 +365,26 @@ namespace Bridge.Translator
 
 
             var methodDeclaration = this.Body.GetParent<MethodDeclaration>();
+            var thisCaptured = this.Emitter.ThisRefCounter > savedThisCount ||
+                               this.IsAsync && methodDeclaration != null &&
+                               !methodDeclaration.HasModifier(Modifiers.Static);
 
-            if (this.Emitter.ThisRefCounter > savedThisCount || this.IsAsync && methodDeclaration != null && !methodDeclaration.HasModifier(Modifiers.Static))
+            if (thisCaptured)
             {
-                this.Emitter.Output.Insert(savedPos, JS.Funcs.BRIDGE_BIND + "(this, ");
+                this.Emitter.Output.Insert(savedPos, JS.Funcs.BRIDGE_BIND + (hasCapturedVariables ? "($me, " : "(this, "));
                 this.WriteCloseParentheses();
             }
 
-            if (capturedVariables != null && capturedVariables.Length > 0)
+            if (hasCapturedVariables)
             {
                 this.WriteSemiColon(true);
                 this.EndBlock();
-                this.Write(")(" + string.Join(", ", capturedVariables) + ")");
+                this.Write(")(");
+
+                this.Write("this, ");
+
+                this.Write(string.Join(", ", capturedVariables));
+                this.Write(")");
             }
 
             this.PopLocals();

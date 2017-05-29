@@ -30,7 +30,7 @@ namespace Bridge.Translator.TypeScript
         protected override void DoEmit()
         {
             var typeDef = this.Emitter.GetTypeDefinition();
-            string name = this.Emitter.Validator.GetCustomTypeName(typeDef, this.Emitter);
+            string name = this.Emitter.Validator.GetCustomTypeName(typeDef, this.Emitter, false);
 
             if (name.IsEmpty())
             {

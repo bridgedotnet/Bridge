@@ -779,7 +779,7 @@ namespace Bridge.Contract
                 var typeDef = bridgeType.TypeDefinition;
                 if (typeDef.IsNested)
                 {
-                    name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.GetParentNames(typeDef);
+                    name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.GetParentNames(emitter, typeDef);
                 }
 
                 name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.ConvertName(typeDef.Name);
@@ -788,7 +788,7 @@ namespace Bridge.Contract
             {
                 if (type.DeclaringType != null)
                 {
-                    name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.GetParentNames(type);
+                    name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.GetParentNames(emitter, type);
 
                     if (type.DeclaringType.TypeArguments.Count > 0)
                     {
@@ -802,7 +802,7 @@ namespace Bridge.Contract
             bool isCustomName = false;
             if (bridgeType != null)
             {
-                name = BridgeTypes.AddModule(name, bridgeType, out isCustomName);
+                name = BridgeTypes.AddModule(name, bridgeType, false, out isCustomName);
             }
 
             if (!hasTypeDef && !isCustomName && type.TypeArguments.Count > 0)
