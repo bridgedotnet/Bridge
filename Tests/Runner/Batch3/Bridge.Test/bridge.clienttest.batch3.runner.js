@@ -576,7 +576,8 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#2712 - TestLambda", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2712.TestLambda);
             QUnit.test("#2713 - TestConventionForNestedClass", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2713.TestConventionForNestedClass);
             QUnit.test("#2716 - TestDelegateWithOptionalParameter", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2716.TestDelegateWithOptionalParameter);
-            QUnit.test("#2720 - TestAsyncAssignment", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2720.TestAsyncAssignment);
+            QUnit.test("#2720 - TestAsyncAssignmentForLong", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2720.TestAsyncAssignmentForLong);
+            QUnit.test("#2720 - TestAsyncAssignmentForDecimal", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2720.TestAsyncAssignmentForDecimal);
             QUnit.test("#381 - TestUseCase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge381.TestUseCase);
             QUnit.test("#447 - CheckInlineExpression", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.CheckInlineExpression);
             QUnit.test("#447 - CheckInlineCalls", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.CheckInlineCalls);
@@ -11677,10 +11678,15 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2720)],
         statics: {
             methods: {
-                TestAsyncAssignment: function (assert) {
+                TestAsyncAssignmentForLong: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2720).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2720, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAsyncAssignment()", $t.Line = "18", $t));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2720.TestAsyncAssignment();
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2720).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2720, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAsyncAssignmentForLong()", $t.Line = "24", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2720.TestAsyncAssignmentForLong();
+                },
+                TestAsyncAssignmentForDecimal: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2720).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2720, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestAsyncAssignmentForDecimal()", $t.Line = "39", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2720.TestAsyncAssignmentForDecimal();
                 }
             }
         },
