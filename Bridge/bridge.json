@@ -26,7 +26,6 @@
         "Resources/ReflectionAssembly.js",
         "Resources/Object.js",
         "Resources/.generated/bridge/utils/systemAssemblyVersion.js",
-        "Resources/Json.js",
         "Resources/Reflection.js",
         "Resources/Interfaces.js",
         "Resources/Nullable.js",

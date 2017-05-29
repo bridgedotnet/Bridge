@@ -891,9 +891,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Decimal, {
-        f1: function (_o15) {
-            _o15.add(0, System.Decimal(5.0));
-            return _o15;
+        f1: function (_o12) {
+            _o12.add(0, System.Decimal(5.0));
+            return _o12;
         }
     });
 
@@ -1041,9 +1041,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Integer", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1041.Bridge1041Integer, {
-        f1: function (_o14) {
-            _o14.add(0, 5);
-            return _o14;
+        f1: function (_o11) {
+            _o11.add(0, 5);
+            return _o11;
         }
     });
 
@@ -1246,9 +1246,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1065", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1065, {
-        f1: function (_o16) {
-            _o16.add(System.Int64(0), System.Decimal(5));
-            return _o16;
+        f1: function (_o13) {
+            _o13.add(System.Int64(0), System.Decimal(5));
+            return _o13;
         }
     });
 
@@ -1571,9 +1571,9 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1105.Foo", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1105.Foo, {
-        f1: function (_o17) {
-            _o17.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1105.Foo.Item("test"));
-            return _o17;
+        f1: function (_o14) {
+            _o14.add(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1105.Foo.Item("test"));
+            return _o14;
         }
     });
 
@@ -1855,19 +1855,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                     var res = (x.mul(y)).gt((z.shl(32)));
 
                     Bridge.Test.NUnit.Assert.False(res);
-                }
-            }
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1134", {
-        statics: {
-            methods: {
-                TestJsonArrayParse: function () {
-                    var o = Bridge.Json.deserialize("[1]", System.Array.type(System.Int32));
-                    Bridge.Test.NUnit.Assert.True(o != null);
-                    Bridge.Test.NUnit.Assert.AreEqual(1, o.length);
-                    Bridge.Test.NUnit.Assert.AreEqual(1, o[System.Array.index(0, o)]);
                 }
             }
         }
@@ -2602,10 +2589,10 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         f2: function (value) {
             return ((value + 1) | 0);
         },
-        f3: function (_o18) {
-            _o18.add($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1186.f1);
-            _o18.add($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1186.f2);
-            return _o18;
+        f3: function (_o15) {
+            _o15.add($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1186.f1);
+            _o15.add($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1186.f2);
+            return _o15;
         }
     });
 
@@ -6877,51 +6864,6 @@ Bridge.$N1391Result =                     r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438", {
-        statics: {
-            methods: {
-                TestJSONParse: function () {
-                    var $t;
-                    var serialized = Bridge.Json.serialize(($t=new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo(), $t.Value = 100, $t));
-
-                    Bridge.Test.NUnit.Assert.NotNull$1(serialized, " serialized should not be null");
-
-                    var result = Bridge.Json.deserialize(serialized, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo);
-
-                    Bridge.Test.NUnit.Assert.NotNull$1(result, " result should not be null");
-                    Bridge.Test.NUnit.Assert.AreEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438+Foo", Bridge.Reflection.getTypeFullName(Bridge.getType(result)), "Check result type name");
-                    Bridge.Test.NUnit.Assert.AreEqual$1(100, result.Value, "result.Value = 100");
-                },
-                TestJSONParseAsArray: function () {
-                    var $t;
-                    var serialized = Bridge.Json.serialize(System.Array.init([($t=new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo(), $t.Value = 101, $t)], Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo));
-
-                    Bridge.Test.NUnit.Assert.NotNull$1(serialized, " serialized should not be null");
-
-                    var result = Bridge.Json.deserialize(serialized, System.Array.type(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo));
-
-                    Bridge.Test.NUnit.Assert.NotNull$1(result, " result should not be null");
-                    Bridge.Test.NUnit.Assert.AreEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438+Foo[]", Bridge.Reflection.getTypeFullName(Bridge.getType(result)), "Check result type name");
-                    Bridge.Test.NUnit.Assert.AreEqual$1(1, result.length, "Check result length");
-                    Bridge.Test.NUnit.Assert.NotNull$1(result[System.Array.index(0, result)], " result[0] should not be null");
-                    Bridge.Test.NUnit.Assert.AreEqual$1("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438+Foo", Bridge.Reflection.getTypeFullName(Bridge.getType(result[System.Array.index(0, result)])), "Check result[0] type name");
-                    Bridge.Test.NUnit.Assert.AreEqual$1(101, result[System.Array.index(0, result)].Value, "result[0].Value = 101");
-                }
-            }
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1438.Foo", {
-        props: {
-            Value: 0
-        },
-        methods: {
-            SomeMethod: function () {
-                return System.String.concat("I'm ", Bridge.Reflection.getTypeFullName(Bridge.getType(this)), " and my value is ", this.Value);
-            }
-        }
-    });
-
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1448", {
         statics: {
             methods: {
@@ -8408,11 +8350,11 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1627", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1627, {
-        f1: function (_o19) {
-            _o19.add("a");
-            _o19.add("b");
-            _o19.add("c");
-            return _o19;
+        f1: function (_o16) {
+            _o16.add("a");
+            _o16.add("b");
+            _o16.add("c");
+            return _o16;
         }
     });
 
@@ -8972,23 +8914,23 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712, {
-        f1: function (_o20) {
-            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712Extensions.Add(_o20, 4);
-            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712Extensions.Add(_o20, 5);
-            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712Extensions.Add(_o20, 6);
-            return _o20;
+        f1: function (_o17) {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712Extensions.Add(_o17, 4);
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712Extensions.Add(_o17, 5);
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712Extensions.Add(_o17, 6);
+            return _o17;
         },
-        f2: function (_o21) {
-            _o21.Add(System.Int32, 1);
-            _o21.Add(System.Int32, 2);
-            _o21.Add(System.Int32, 3);
-            return _o21;
+        f2: function (_o18) {
+            _o18.Add(System.Int32, 1);
+            _o18.Add(System.Int32, 2);
+            _o18.Add(System.Int32, 3);
+            return _o18;
         },
-        f3: function (_o22) {
-            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712MSDNExtensions.Add(System.Int32, _o22, 4);
-            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712MSDNExtensions.Add(System.Int32, _o22, 5);
-            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712MSDNExtensions.Add(System.Int32, _o22, 6);
-            return _o22;
+        f3: function (_o19) {
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712MSDNExtensions.Add(System.Int32, _o19, 4);
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712MSDNExtensions.Add(System.Int32, _o19, 5);
+            Bridge.ClientTest.Batch3.BridgeIssues.Bridge1712MSDNExtensions.Add(System.Int32, _o19, 6);
+            return _o19;
         }
     });
 
@@ -9201,10 +9143,10 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1715", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1715, {
-        f1: function (_o23) {
-            _o23.Add(1);
-            _o23.Add$1(2, 3);
-            return _o23;
+        f1: function (_o20) {
+            _o20.Add(1);
+            _o20.Add$1(2, 3);
+            return _o20;
         }
     });
 
@@ -9312,11 +9254,11 @@ Bridge.$N1391Result =                     r;
             TestTryGetValueOutDelegateParameter: function () {
                 var a = 1;
 
-                var delegateCache = function (_o24) {
-                        _o24.add("test", function (source) {
+                var delegateCache = function (_o21) {
+                        _o21.add("test", function (source) {
                             a = (a + 1) | 0;
                         });
-                        return _o24;
+                        return _o21;
                     }(new (System.Collections.Generic.Dictionary$2(System.String,Function))());
 
                 var setter = { };
@@ -10295,9 +10237,9 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1803.Test1", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1803.Test1, {
-        f1: function (_o25) {
-            _o25.add(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1803.Test1.s);
-            return _o25;
+        f1: function (_o22) {
+            _o22.add(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1803.Test1.s);
+            return _o22;
         }
     });
 
@@ -10322,9 +10264,9 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1803.Test2", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1803.Test2, {
-        f1: function (_o26) {
-            _o26.add(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1803.Test2.s);
-            return _o26;
+        f1: function (_o23) {
+            _o23.add(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1803.Test2.s);
+            return _o23;
         }
     });
 
@@ -10347,9 +10289,9 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1803.Test3", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1803.Test3, {
-        f1: function (_o27) {
-            _o27.add(this.s);
-            return _o27;
+        f1: function (_o24) {
+            _o24.add(this.s);
+            return _o24;
         }
     });
 
@@ -11175,16 +11117,16 @@ Bridge.$N1391Result =                     r;
         methods: {
             TestContainsUseEquals: function () {
                 var t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1853.Test();
-                var l = function (_o28) {
-                        _o28.add(t);
-                        return _o28;
+                var l = function (_o25) {
+                        _o25.add(t);
+                        return _o25;
                     }(new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1853.Test))());
                 Bridge.Test.NUnit.Assert.False(l.contains(t));
 
                 var o = {  };
-                var l1 = function (_o29) {
-                        _o29.add(o);
-                        return _o29;
+                var l1 = function (_o26) {
+                        _o26.add(o);
+                        return _o26;
                     }(new (System.Collections.Generic.List$1(System.Object))());
                 Bridge.Test.NUnit.Assert.True(l1.contains(o));
             }
@@ -11756,23 +11698,23 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1884", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1884, {
-        f1: function (_o32) {
-            _o32.add("One");
-            _o32.add("Two");
-            _o32.add("Three");
-            return _o32;
+        f1: function (_o29) {
+            _o29.add("One");
+            _o29.add("Two");
+            _o29.add("Three");
+            return _o29;
         },
-        f2: function (_o33) {
-            _o33.Items.add("One");
-            _o33.Items.add("Two");
-            _o33.Items.add("Three");
-            _o33.Items1.add($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1884.f1(new (System.Collections.Generic.List$1(System.String))()));
-            _o33.Indexed.set(1, "Lorem");
-            _o33.Indexed.set(5, "Ipsum");
-            _o33.Indexed1.get(1).add("One");
-            _o33.Indexed1.get(1).add("Two");
-            _o33.Indexed1.get(1).add("Three");
-            return _o33;
+        f2: function (_o30) {
+            _o30.Items.add("One");
+            _o30.Items.add("Two");
+            _o30.Items.add("Three");
+            _o30.Items1.add($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1884.f1(new (System.Collections.Generic.List$1(System.String))()));
+            _o30.Indexed.set(1, "Lorem");
+            _o30.Indexed.set(5, "Ipsum");
+            _o30.Indexed1.get(1).add("One");
+            _o30.Indexed1.get(1).add("Two");
+            _o30.Indexed1.get(1).add("Three");
+            return _o30;
         }
     });
 
@@ -11797,13 +11739,13 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1884.Foo", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1884.Foo, {
-        f1: function (_o30) {
-            _o30.set(100, "Dolrt");
-            return _o30;
+        f1: function (_o27) {
+            _o27.set(100, "Dolrt");
+            return _o27;
         },
-        f2: function (_o31) {
-            _o31.set(1, new (System.Collections.Generic.List$1(System.String))());
-            return _o31;
+        f2: function (_o28) {
+            _o28.set(1, new (System.Collections.Generic.List$1(System.String))());
+            return _o28;
         }
     });
 
@@ -12482,9 +12424,9 @@ Bridge.$N1391Result =                     r;
                         }
 
                         var newJObj1 = (function ($me, item) {
-                                return function (_o34) {
-                                    _o34.Add("name", item);
-                                    return _o34;
+                                return function (_o31) {
+                                    _o31.Add("name", item);
+                                    return _o31;
                                 };
                             })(this, item)(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948.AddObj());
 
@@ -12549,9 +12491,9 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge1948, {
-        f1: function (_o35) {
-            _o35.Add("name", Bridge.box(1, System.Int32));
-            return _o35;
+        f1: function (_o32) {
+            _o32.Add("name", Bridge.box(1, System.Int32));
+            return _o32;
         }
     });
 
@@ -12965,10 +12907,10 @@ Bridge.$N1391Result =                     r;
                         c["Bridge$ClientTest$Batch3$BridgeIssues$Bridge2019$ISome$1$" + Bridge.getTypeAlias(T) + "$SomeMethod"]();
                     };
 
-                    var items = function (_o36) {
+                    var items = function (_o33) {
                             var $t;
-                            _o36.add(($t=new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2019.Some$1(T))(), $t.SomeProp = 5, $t));
-                            return _o36;
+                            _o33.add(($t=new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2019.Some$1(T))(), $t.SomeProp = 5, $t));
+                            return _o33;
                         }(new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2019.ISome$1(T)))());
 
                     items.forEach(actionSet);
@@ -13295,16 +13237,16 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2050", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2050, {
-        f1: function (_o37) {
-            _o37.add(1);
-            _o37.add(2);
-            _o37.add(3);
-            return _o37;
+        f1: function (_o34) {
+            _o34.add(1);
+            _o34.add(2);
+            _o34.add(3);
+            return _o34;
         },
-        f2: function (_o38) {
-            _o38.add(1, 2);
-            _o38.add(2, 3);
-            return _o38;
+        f2: function (_o35) {
+            _o35.add(1, 2);
+            _o35.add(2, 3);
+            return _o35;
         }
     });
 
@@ -13793,11 +13735,11 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1347", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge1347, {
-        f1: function (_o39) {
-            _o39.add(1);
-            _o39.add(2);
-            _o39.add(3);
-            return _o39;
+        f1: function (_o36) {
+            _o36.add(1);
+            _o36.add(2);
+            _o36.add(3);
+            return _o36;
         },
         f2: function (v) {
             return Bridge.Reflection.getTypeFullName(Bridge.getType(v));
@@ -14545,9 +14487,9 @@ Bridge.$N1391Result =                     r;
             methods: {
                 Test1: function () {
                     var onSuccess = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.f1;
-                    var el = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Elem$1(System.Int32))(function (_o40) {
-                            _o40.add(new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Something$1(System.Int32))(onSuccess));
-                            return _o40;
+                    var el = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Elem$1(System.Int32))(function (_o37) {
+                            _o37.add(new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Something$1(System.Int32))(onSuccess));
+                            return _o37;
                         }(new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Something$1(System.Int32)))()));
 
                     var hld = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Holder$1(System.Int32))(el);
@@ -14555,9 +14497,9 @@ Bridge.$N1391Result =                     r;
                 },
                 Test2: function () {
                     var onSuccess = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.f2;
-                    var el = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Elem$1(System.Int32))(function (_o41) {
-                            _o41.add(new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Something$1(System.Int32))(onSuccess));
-                            return _o41;
+                    var el = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Elem$1(System.Int32))(function (_o38) {
+                            _o38.add(new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Something$1(System.Int32))(onSuccess));
+                            return _o38;
                         }(new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Something$1(System.Int32)))()));
 
                     var hld = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2138.Holder$1(System.Int32))(el);
@@ -15881,10 +15823,10 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2251", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2251, {
-        f1: function (_o42) {
-            _o42.add(1);
-            _o42.add(2);
-            return _o42;
+        f1: function (_o39) {
+            _o39.add(1);
+            _o39.add(2);
+            return _o39;
         }
     });
 
@@ -17012,14 +16954,14 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plants", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plants, {
-        f1: function (_o43) {
+        f1: function (_o40) {
             var $t;
-            _o43.add(($t=new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant(), $t.Common = "Anemone", $t.Light = "Shade", $t.Indoor = true, $t));
-            _o43.add(($t=new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant(), $t.Common = "Columbine", $t.Light = "Shade", $t.Indoor = true, $t));
-            _o43.add(($t=new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant(), $t.Common = "Marsh Marigold", $t.Light = "Sunny", $t.Indoor = false, $t));
-            _o43.add(($t=new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant(), $t.Common = "Gential", $t.Light = "Sun or Shade", $t.Indoor = false, $t));
-            _o43.add(($t=new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant(), $t.Common = "Woodland", $t.Light = "Sun or Shade", $t.Indoor = false, $t));
-            return _o43;
+            _o40.add(($t=new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant(), $t.Common = "Anemone", $t.Light = "Shade", $t.Indoor = true, $t));
+            _o40.add(($t=new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant(), $t.Common = "Columbine", $t.Light = "Shade", $t.Indoor = true, $t));
+            _o40.add(($t=new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant(), $t.Common = "Marsh Marigold", $t.Light = "Sunny", $t.Indoor = false, $t));
+            _o40.add(($t=new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant(), $t.Common = "Gential", $t.Light = "Sun or Shade", $t.Indoor = false, $t));
+            _o40.add(($t=new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2355.Plant(), $t.Common = "Woodland", $t.Light = "Sun or Shade", $t.Indoor = false, $t));
+            return _o40;
         }
     });
 
@@ -18903,10 +18845,10 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2571", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2571, {
-        f1: function (_o44) {
-            _o44.add(System.Int32);
-            _o44.add(System.Double);
-            return _o44;
+        f1: function (_o41) {
+            _o41.add(System.Int32);
+            _o41.add(System.Double);
+            return _o41;
         }
     });
 
@@ -19711,35 +19653,6 @@ Bridge.$N1391Result =                     r;
         $variance: [2]
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2641", {
-        statics: {
-            methods: {
-                TestJsonCamelCaseForFields: function () {
-                    var $t;
-                    var c = ($t=new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2641.Class1(), $t.Field1 = 1, $t.field2 = 2, $t);
-                    var json = Bridge.Json.serialize(c, { CamelCasePropertyNames: true });
-                    Bridge.Test.NUnit.Assert.AreEqual("{\"field1\":1,\"field2\":2}", json);
-                    var deserialized = Bridge.Json.deserialize(json, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2641.Class1, { CamelCasePropertyNames: true });
-                    Bridge.Test.NUnit.Assert.AreEqual(1, deserialized.Field1);
-                    Bridge.Test.NUnit.Assert.AreEqual(2, deserialized.field2);
-
-                    json = Bridge.Json.serialize(c);
-                    Bridge.Test.NUnit.Assert.AreEqual("{\"Field1\":1,\"field2\":2}", json);
-                    deserialized = Bridge.Json.deserialize(json, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2641.Class1);
-                    Bridge.Test.NUnit.Assert.AreEqual(1, deserialized.Field1);
-                    Bridge.Test.NUnit.Assert.AreEqual(2, deserialized.field2);
-                }
-            }
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2641.Class1", {
-        fields: {
-            Field1: 0,
-            field2: 0
-        }
-    });
-
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2644", {
         statics: {
             methods: {
@@ -19941,47 +19854,6 @@ Bridge.$N1391Result =                     r;
         }
     }; });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2679", {
-        statics: {
-            methods: {
-                TestTypeNameHandling: function () {
-                    var obj1 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2679.Test1(1);
-                    var obj2 = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2679.Test2$1(System.Int32))(2);
-
-                    var json1 = Bridge.Json.serialize(obj1, { TypeNameHandling: true });
-                    Bridge.Test.NUnit.Assert.AreEqual(System.String.concat("{\"$type\":\"", Bridge.Reflection.getTypeQName(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2679.Test1), "\",\"Value\":1}"), json1);
-
-                    var json2 = Bridge.Json.serialize(obj2, { TypeNameHandling: true });
-                    Bridge.Test.NUnit.Assert.AreEqual(System.String.concat("{\"$type\":\"", Bridge.Reflection.getTypeQName(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2679.Test2$1(System.Int32)), "\",\"Value\":2}"), json2);
-                }
-            }
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2679.Test1", {
-        props: {
-            Value: 0
-        },
-        ctors: {
-            ctor: function (value) {
-                this.$initialize();
-                this.Value = value;
-            }
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2679.Test2$1", function (T) { return {
-        props: {
-            Value: Bridge.getDefaultValue(T)
-        },
-        ctors: {
-            ctor: function (value) {
-                this.$initialize();
-                this.Value = value;
-            }
-        }
-    }; });
-
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2685", {
         statics: {
             methods: {
@@ -20019,10 +19891,10 @@ Bridge.$N1391Result =                     r;
                         var api = { v : 1 };
                         Bridge.ClientTest.Batch3.BridgeIssues.Bridge2686.M1(api);
                         accounts.add(accountId, (args = (function ($me, api) {
-                                return function (_o45) {
-                                    _o45.add(Bridge.box(api.v, System.Int32));
-                                    _o45.add(Bridge.box(0, System.Int32));
-                                    return _o45;
+                                return function (_o42) {
+                                    _o42.add(Bridge.box(api.v, System.Int32));
+                                    _o42.add(Bridge.box(0, System.Int32));
+                                    return _o42;
                                 };
                             })(this, api)(new (System.Collections.Generic.List$1(System.Object))())));
 
@@ -22995,64 +22867,6 @@ Bridge.$N1391Result =                     r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge501", {
-        statics: {
-            methods: {
-                TestUseCase: function () {
-                    var list = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge501.f1(new (System.Collections.Generic.List$1(System.Int32))());
-                    var z = Bridge.Json.serialize(list); // this is ok
-                    Bridge.Test.NUnit.Assert.AreEqual$1("[7]", z, "List<int>");
-
-                    var b = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge501.f2(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge501B());
-                    var y = Bridge.Json.serialize(b); // wrong, missing items
-                    Bridge.Test.NUnit.Assert.AreEqual$1("[1,2]", y, "Bridge501B");
-
-                    var a = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge501.f3(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge501A()); // sine items is defined as member, push fails
-                    var x = Bridge.Json.serialize(a);
-                    Bridge.Test.NUnit.Assert.AreEqual$1("[7]", x, "Bridge501A");
-
-                    var c = Bridge.Json.deserialize(x, Bridge.ClientTest.Batch3.BridgeIssues.Bridge501A);
-                    Bridge.Test.NUnit.Assert.AreEqual$1("12", c.Items, "Bridge501A Parse c.Items");
-                    Bridge.Test.NUnit.Assert.AreEqual$1(7, c.getItem(0), "Bridge501A Parse c[0]");
-                }
-            }
-        }
-    });
-
-    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge501", $asm.$);
-
-    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge501, {
-        f1: function (_o1) {
-            _o1.add(7);
-            return _o1;
-        },
-        f2: function (_o2) {
-            _o2.add(1);
-            _o2.add(2);
-            return _o2;
-        },
-        f3: function (_o3) {
-            _o3.add(7);
-            return _o3;
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge501A", {
-        inherits: [System.Collections.Generic.List$1(System.Int32)],
-        fields: {
-            Items: null
-        },
-        ctors: {
-            init: function () {
-                this.Items = "12";
-            }
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge501B", {
-        inherits: [System.Collections.Generic.List$1(System.Int32)]
-    });
-
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge502", {
         statics: {
             methods: {
@@ -23527,30 +23341,6 @@ Bridge.$N1391Result =                     r;
                     destString = System.String.concat(destString, String.fromCharCode(srcString.charCodeAt(2)));
 
                     Bridge.Test.NUnit.Assert.AreEqual$1("43", destString, "Bridge538 '43'");
-                }
-            }
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge544", {
-        statics: {
-            methods: {
-                TestUseCase: function () {
-                    var o = Bridge.Json.deserialize("true", System.Boolean);
-                    Bridge.Test.NUnit.Assert.AreEqual$1(true, o, "Bridge544 bool");
-                },
-                TestRelated: function () {
-                    var i = Bridge.Json.deserialize("25", System.Int32);
-                    Bridge.Test.NUnit.Assert.AreEqual$1(25, i, "Bridge544 int");
-
-                    var dbl = Bridge.Json.deserialize("26.1", System.Double);
-                    Bridge.Test.NUnit.Assert.AreEqual$1(26.1, dbl, "Bridge544 double");
-
-                    var d = Bridge.Json.deserialize("27.2", System.Decimal);
-                    Bridge.ClientTest.Batch3.Utilities.DecimalHelper.AssertIsDecimalAndEqualTo$1(d, 27.2, "Bridge544 decimal");
-
-                    var s = Bridge.Json.deserialize("\"Some string\"", System.String);
-                    Bridge.Test.NUnit.Assert.AreEqual$1("Some string", s, "Bridge544 string");
                 }
             }
         }
@@ -26841,21 +26631,21 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge721", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge721, {
-        f1: function (_o4) {
-            _o4.add(3);
+        f1: function (_o1) {
+            _o1.add(3);
+            return _o1;
+        },
+        f2: function (_o2) {
+            _o2.add(5);
+            return _o2;
+        },
+        f3: function (_o3) {
+            _o3.add(15);
+            return _o3;
+        },
+        f4: function (_o4) {
+            _o4.add(25);
             return _o4;
-        },
-        f2: function (_o5) {
-            _o5.add(5);
-            return _o5;
-        },
-        f3: function (_o6) {
-            _o6.add(15);
-            return _o6;
-        },
-        f4: function (_o7) {
-            _o7.add(25);
-            return _o7;
         }
     });
 
@@ -27017,15 +26807,15 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge743", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge743, {
-        f1: function (_o8) {
-            _o8.add("1");
-            _o8.add("2");
-            _o8.add("3");
-            return _o8;
+        f1: function (_o5) {
+            _o5.add("1");
+            _o5.add("2");
+            _o5.add("3");
+            return _o5;
         },
-        f2: function (_o9) {
-            _o9.add("2147483648");
-            return _o9;
+        f2: function (_o6) {
+            _o6.add("2147483648");
+            return _o6;
         },
         f3: function () {
             var list1 = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge743.f2(new (System.Collections.Generic.List$1(System.String))());
@@ -27078,10 +26868,10 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge751", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge751, {
-        f1: function (_o10) {
-            _o10.add(1);
-            _o10.add(2);
-            return _o10;
+        f1: function (_o7) {
+            _o7.add(1);
+            _o7.add(2);
+            return _o7;
         },
         f2: function (el1) {
             return el1 === 1;
@@ -28093,10 +27883,10 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge841", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge841, {
-        f1: function (_o11) {
-            _o11.add(1);
-            _o11.add(2);
-            return _o11;
+        f1: function (_o8) {
+            _o8.add(1);
+            _o8.add(2);
+            return _o8;
         },
         f2: function () { }
     });
@@ -29533,20 +29323,20 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge997", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge997, {
-        f1: function (_o12) {
-            _o12.add(1);
-            _o12.add(2);
-            _o12.add(3);
-            return _o12;
+        f1: function (_o9) {
+            _o9.add(1);
+            _o9.add(2);
+            _o9.add(3);
+            return _o9;
         },
         f2: function (x) {
             return x.toString();
         },
-        f3: function (_o13) {
-            _o13.add(1);
-            _o13.add(2);
-            _o13.add(3);
-            return _o13;
+        f3: function (_o10) {
+            _o10.add(1);
+            _o10.add(2);
+            _o10.add(3);
+            return _o10;
         }
     });
 
@@ -30576,30 +30366,30 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues, {
-        f1: function (_o46) {
-            _o46.add(0);
-            _o46.add(1);
-            _o46.add(2);
-            _o46.add(3);
-            _o46.add(4);
-            return _o46;
+        f1: function (_o43) {
+            _o43.add(0);
+            _o43.add(1);
+            _o43.add(2);
+            _o43.add(3);
+            _o43.add(4);
+            return _o43;
         },
-        f2: function (_o47) {
-            _o47.add(3, "b");
-            _o47.add(6, "z");
-            _o47.add(9, "x");
-            return _o47;
+        f2: function (_o44) {
+            _o44.add(3, "b");
+            _o44.add(6, "z");
+            _o44.add(9, "x");
+            return _o44;
         },
         f3: function (i) {
             return ((i * 2) | 0);
         },
-        f4: function (_o48) {
-            _o48.add(0);
-            _o48.add(1);
-            _o48.add(2);
-            _o48.add(3);
-            _o48.add(4);
-            return _o48;
+        f4: function (_o45) {
+            _o45.add(0);
+            _o45.add(1);
+            _o45.add(2);
+            _o45.add(3);
+            _o45.add(4);
+            return _o45;
         }
     });
 
@@ -32921,9 +32711,6 @@ Bridge.$N1391Result =                     r;
     $m($n[2].Bridge1900, function () { return {"m":[{"a":2,"n":"GetValue","is":true,"t":8,"pi":[{"n":"value","out":true,"pt":System.Object,"ps":0}],"tpc":1,"tprm":["T"],"sn":"GetValue","rt":$n[0].List$1(System.Object),"p":[System.Object]},{"a":1,"n":"TestOutRef","is":true,"t":8,"pi":[{"n":"value","out":true,"pt":$n[1].Int32,"ps":0},{"n":"s","ref":true,"pt":$n[1].String,"ps":1}],"sn":"TestOutRef","rt":$n[1].Boolean,"p":[$n[1].Int32,$n[1].String]},{"a":1,"n":"TryGetValue1","is":true,"t":8,"pi":[{"n":"value","out":true,"pt":$n[1].Int32,"ps":0}],"sn":"TryGetValue1","rt":$n[1].Boolean,"p":[$n[1].Int32]},{"a":1,"n":"TryGetValue2","is":true,"t":8,"pi":[{"n":"value","out":true,"pt":$n[1].Int32,"ps":0},{"n":"value2","out":true,"pt":$n[1].String,"ps":1}],"sn":"TryGetValue2","rt":$n[1].Boolean,"p":[$n[1].Int32,$n[1].String]}]}; });
     $m($n[2].Bridge1970.Test, function () { return {"m":[{"a":2,"n":"IsInitialized","is":true,"t":4,"rt":$n[1].Boolean,"sn":"IsInitialized","ro":true}]}; });
     $m($n[2].Bridge2558.Status, function () { return {"m":[{"at":[new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2558.DisplayAttribute("tst")],"a":2,"n":"Item1","is":true,"t":4,"rt":$n[2].Bridge2558.Status,"sn":"Item1"}]}; });
-    $m($n[2].Bridge501A, function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"Items","t":4,"rt":$n[1].String,"sn":"Items"}]}; });
-    $m($n[2].Bridge501B, function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"}]}; });
-    $m($n[2].Bridge1438.Foo, function () { return {"td":$n[2].Bridge1438,"att":1048578,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"SomeMethod","t":8,"sn":"SomeMethod","rt":$n[1].String},{"a":2,"n":"Value","t":16,"rt":$n[1].Int32,"g":{"a":2,"n":"get_Value","t":8,"rt":$n[1].Int32,"fg":"Value"},"s":{"a":2,"n":"set_Value","t":8,"p":[$n[1].Int32],"rt":$n[1].Void,"fs":"Value"},"fn":"Value"}]}; });
     $m($n[2].Bridge2051, function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"TestGetElementType","is":true,"t":8,"sn":"TestGetElementType","rt":$n[1].Void}]}; });
     $m($n[2].Bridge2052, function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"TestArrayCreateInstance","is":true,"t":8,"sn":"TestArrayCreateInstance","rt":$n[1].Void},{"a":2,"n":"TestArrayCreateInstanceShouldThrow","is":true,"t":8,"sn":"TestArrayCreateInstanceShouldThrow","rt":$n[1].Void}]}; });
     $m($n[2].Bridge2088.T, function () { return {"td":$n[2].Bridge2088,"att":1048579,"a":1,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"ShouldSeeThis","t":16,"rt":$n[1].Int32,"g":{"a":2,"n":"get_ShouldSeeThis","t":8,"rt":$n[1].Int32,"fg":"ShouldSeeThis"},"s":{"a":2,"n":"set_ShouldSeeThis","t":8,"p":[$n[1].Int32],"rt":$n[1].Void,"fs":"ShouldSeeThis"},"fn":"ShouldSeeThis"}]}; });
@@ -32940,8 +32727,5 @@ Bridge.$N1391Result =                     r;
     $m($n[2].Bridge2550.B, function () { return {"td":$n[2].Bridge2550,"att":1048578,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"}]}; });
     $m($n[2].Bridge2550.IA, function () { return {"td":$n[2].Bridge2550,"att":162,"a":2,"m":[{"ab":true,"a":2,"n":"A","t":16,"rt":$n[1].Int32,"g":{"ab":true,"a":2,"n":"get_A","t":8,"rt":$n[1].Int32,"fg":"Bridge$ClientTest$Batch3$BridgeIssues$Bridge2550$IA$A"},"s":{"ab":true,"a":1,"n":"set_A","t":8,"p":[$n[1].Int32],"rt":$n[1].Void,"fs":"Bridge$ClientTest$Batch3$BridgeIssues$Bridge2550$IA$A"},"fn":"Bridge$ClientTest$Batch3$BridgeIssues$Bridge2550$IA$A"}]}; });
     $m($n[2].Bridge2584.Class1, function () { return {"td":$n[2].Bridge2584,"att":1048579,"a":1,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"field1","t":4,"rt":$n[1].Int32,"sn":"field1"},{"a":3,"n":"field2","t":4,"rt":$n[1].Int32,"sn":"field2"},{"a":1,"n":"field3","t":4,"rt":$n[1].Int32,"sn":"field3"},{"a":4,"n":"field4","t":4,"rt":$n[1].Int32,"sn":"field4"},{"a":2,"n":"s_field1","is":true,"t":4,"rt":$n[1].Int32,"sn":"s_field1"},{"a":3,"n":"s_field2","is":true,"t":4,"rt":$n[1].Int32,"sn":"s_field2"},{"a":1,"n":"s_field3","is":true,"t":4,"rt":$n[1].Int32,"sn":"s_field3"},{"a":4,"n":"s_field4","is":true,"t":4,"rt":$n[1].Int32,"sn":"s_field4"}]}; });
-    $m($n[2].Bridge2641.Class1, function () { return {"td":$n[2].Bridge2641,"att":1048578,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"Field1","t":4,"rt":$n[1].Int32,"sn":"Field1"},{"a":2,"n":"field2","t":4,"rt":$n[1].Int32,"sn":"field2"}]}; });
-    $m($n[2].Bridge2679.Test1, function () { return {"td":$n[2].Bridge2679,"att":1048578,"a":2,"m":[{"a":2,"n":".ctor","t":1,"p":[$n[1].Int32],"pi":[{"n":"value","pt":$n[1].Int32,"ps":0}],"sn":"ctor"},{"a":2,"n":"Value","t":16,"rt":$n[1].Int32,"g":{"a":2,"n":"get_Value","t":8,"rt":$n[1].Int32,"fg":"Value"},"s":{"a":1,"n":"set_Value","t":8,"p":[$n[1].Int32],"rt":$n[1].Void,"fs":"Value"},"fn":"Value"}]}; });
-    $m($n[2].Bridge2679.Test2$1, function (T) { return {"td":$n[2].Bridge2679,"att":1048578,"a":2,"m":[{"a":2,"n":".ctor","t":1,"p":[T],"pi":[{"n":"value","pt":T,"ps":0}],"sn":"ctor"},{"a":2,"n":"Value","t":16,"rt":T,"g":{"a":2,"n":"get_Value","t":8,"rt":T,"fg":"Value"},"s":{"a":1,"n":"set_Value","t":8,"p":[T],"rt":$n[1].Void,"fs":"Value"},"fn":"Value"}]}; });
     $m($n[1].Console, function () { return {"att":1048833,"a":2,"m":[{"a":2,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"Clear","is":true,"t":8,"sn":"Clear","rt":$n[1].Void},{"a":2,"n":"Read","is":true,"t":8,"tpc":0,"def":function () { return prompt(); },"rt":$n[1].String},{"a":2,"n":"ReadLine","is":true,"t":8,"tpc":0,"def":function () { return prompt(); },"rt":$n[1].String},{"a":2,"n":"ReadLine","is":true,"t":8,"pi":[{"n":"text","pt":$n[1].String,"ps":0}],"tpc":0,"def":function (text) { return prompt(text); },"rt":$n[1].String,"p":[$n[1].String]},{"a":2,"n":"ReadLine","is":true,"t":8,"pi":[{"n":"text","pt":$n[1].String,"ps":0},{"n":"value","pt":$n[1].String,"ps":1}],"tpc":0,"def":function (text, value) { return prompt(text, value); },"rt":$n[1].String,"p":[$n[1].String,$n[1].String]},{"a":1,"n":"TransformChars","is":true,"t":8,"pi":[{"n":"buffer","pt":$n[1].Array.type(System.Char),"ps":0},{"n":"all","pt":$n[1].Int32,"ps":1},{"n":"index","pt":$n[1].Int32,"ps":2},{"n":"count","pt":$n[1].Int32,"ps":3}],"sn":"TransformChars","rt":$n[1].String,"p":[$n[1].Array.type(System.Char),$n[1].Int32,$n[1].Int32,$n[1].Int32]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Boolean,"ps":0}],"tpc":0,"def":function (value) { return System.Console.Write(System.Boolean.toString(value)); },"rt":$n[1].Void,"p":[$n[1].Boolean]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Char,"ps":0}],"tpc":0,"def":function (value) { return System.Console.Write(String.fromCharCode(value)); },"rt":$n[1].Void,"p":[$n[1].Char]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"buffer","pt":$n[1].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (buffer) { return System.Console.Write(System.Console.TransformChars(buffer, 1)); },"rt":$n[1].Void,"p":[$n[1].Array.type(System.Char)]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Decimal,"ps":0}],"tpc":0,"def":function (value) { return System.Console.Write(value.toString('G')); },"rt":$n[1].Void,"p":[$n[1].Decimal]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Double,"ps":0}],"tpc":0,"def":function (value) { return System.Console.Write(System.Double.format(value)); },"rt":$n[1].Void,"p":[$n[1].Double]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Int32,"ps":0}],"sn":"Write","rt":$n[1].Void,"p":[$n[1].Int32]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Int64,"ps":0}],"sn":"Write","rt":$n[1].Void,"p":[$n[1].Int64]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Object,"ps":0}],"sn":"Write","rt":$n[1].Void,"p":[$n[1].Object]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Single,"ps":0}],"sn":"Write","rt":$n[1].Void,"p":[$n[1].Single]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].String,"ps":0}],"sn":"Write","rt":$n[1].Void,"p":[$n[1].String]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].UInt32,"ps":0}],"sn":"Write","rt":$n[1].Void,"p":[$n[1].UInt32]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].UInt64,"ps":0}],"sn":"Write","rt":$n[1].Void,"p":[$n[1].UInt64]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1}],"tpc":0,"def":function (format, arg0) { return System.Console.Write(System.String.format(format, arg0)); },"rt":$n[1].Void,"p":[$n[1].String,$n[1].Object]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg","ip":true,"pt":$n[1].Array.type(System.Object),"ps":1}],"tpc":0,"def":function (format, arg) { return System.Console.Write(System.String.format(format, arg)); },"rt":$n[1].Void,"p":[$n[1].String,$n[1].Array.type(System.Object)]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"buffer","pt":$n[1].Array.type(System.Char),"ps":0},{"n":"index","pt":$n[1].Int32,"ps":1},{"n":"count","pt":$n[1].Int32,"ps":2}],"tpc":0,"def":function (buffer, index, count) { return System.Console.Write(System.Console.TransformChars(buffer, 0, index, count)); },"rt":$n[1].Void,"p":[$n[1].Array.type(System.Char),$n[1].Int32,$n[1].Int32]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1},{"n":"arg1","pt":$n[1].Object,"ps":2}],"tpc":0,"def":function (format, arg0, arg1) { return System.Console.Write(System.String.format(format, arg0, arg1)); },"rt":$n[1].Void,"p":[$n[1].String,$n[1].Object,$n[1].Object]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1},{"n":"arg1","pt":$n[1].Object,"ps":2},{"n":"arg2","pt":$n[1].Object,"ps":3}],"tpc":0,"def":function (format, arg0, arg1, arg2) { return System.Console.Write(System.String.format(format, arg0, arg1, arg2)); },"rt":$n[1].Void,"p":[$n[1].String,$n[1].Object,$n[1].Object,$n[1].Object]},{"a":2,"n":"Write","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1},{"n":"arg1","pt":$n[1].Object,"ps":2},{"n":"arg2","pt":$n[1].Object,"ps":3},{"n":"arg3","pt":$n[1].Object,"ps":4}],"tpc":0,"def":function (format, arg0, arg1, arg2, arg3) { return System.Console.Write(System.String.format(format, [arg0, arg1, arg2, arg3])); },"rt":$n[1].Void,"p":[$n[1].String,$n[1].Object,$n[1].Object,$n[1].Object,$n[1].Object]},{"a":2,"n":"WriteLine","is":true,"t":8,"sn":"WriteLine","rt":$n[1].Void},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Boolean,"ps":0}],"tpc":0,"def":function (value) { return System.Console.WriteLine(System.Boolean.toString(value)); },"rt":$n[1].Void,"p":[$n[1].Boolean]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Char,"ps":0}],"tpc":0,"def":function (value) { return System.Console.WriteLine(String.fromCharCode(value)); },"rt":$n[1].Void,"p":[$n[1].Char]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"buffer","pt":$n[1].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (buffer) { return System.Console.WriteLine(System.Console.TransformChars(buffer, 1)); },"rt":$n[1].Void,"p":[$n[1].Array.type(System.Char)]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Decimal,"ps":0}],"tpc":0,"def":function (value) { return System.Console.WriteLine(value.toString('G')); },"rt":$n[1].Void,"p":[$n[1].Decimal]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Double,"ps":0}],"tpc":0,"def":function (value) { return System.Console.WriteLine(System.Double.format(value)); },"rt":$n[1].Void,"p":[$n[1].Double]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Int32,"ps":0}],"sn":"WriteLine","rt":$n[1].Void,"p":[$n[1].Int32]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Int64,"ps":0}],"sn":"WriteLine","rt":$n[1].Void,"p":[$n[1].Int64]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Nullable$1(System.Decimal),"ps":0}],"tpc":0,"def":function (value) { return System.Console.WriteLine(value && value.toString('G')); },"rt":$n[1].Void,"p":[$n[1].Nullable$1(System.Decimal)]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Object,"ps":0}],"sn":"WriteLine","rt":$n[1].Void,"p":[$n[1].Object]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].Single,"ps":0}],"tpc":0,"def":function (value) { return System.Console.WriteLine(System.Single.format(value)); },"rt":$n[1].Void,"p":[$n[1].Single]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].String,"ps":0}],"sn":"WriteLine","rt":$n[1].Void,"p":[$n[1].String]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":Function,"ps":0}],"tpc":0,"def":function (value) { return System.Console.WriteLine(Bridge.getTypeName(value)); },"rt":$n[1].Void,"p":[Function]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].UInt32,"ps":0}],"sn":"WriteLine","rt":$n[1].Void,"p":[$n[1].UInt32]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"value","pt":$n[1].UInt64,"ps":0}],"sn":"WriteLine","rt":$n[1].Void,"p":[$n[1].UInt64]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1}],"tpc":0,"def":function (format, arg0) { return System.Console.WriteLine(System.String.format(format, arg0)); },"rt":$n[1].Void,"p":[$n[1].String,$n[1].Object]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg","ip":true,"pt":$n[1].Array.type(System.Object),"ps":1}],"tpc":0,"def":function (format, arg) { return System.Console.WriteLine(System.String.format(format, arg)); },"rt":$n[1].Void,"p":[$n[1].String,$n[1].Array.type(System.Object)]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"buffer","pt":$n[1].Array.type(System.Char),"ps":0},{"n":"index","pt":$n[1].Int32,"ps":1},{"n":"count","pt":$n[1].Int32,"ps":2}],"tpc":0,"def":function (buffer, index, count) { return System.Console.WriteLine(System.Console.TransformChars(buffer, 0, index, count)); },"rt":$n[1].Void,"p":[$n[1].Array.type(System.Char),$n[1].Int32,$n[1].Int32]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1},{"n":"arg1","pt":$n[1].Object,"ps":2}],"tpc":0,"def":function (format, arg0, arg1) { return System.Console.WriteLine(System.String.format(format, arg0, arg1)); },"rt":$n[1].Void,"p":[$n[1].String,$n[1].Object,$n[1].Object]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1},{"n":"arg1","pt":$n[1].Object,"ps":2},{"n":"arg2","pt":$n[1].Object,"ps":3}],"tpc":0,"def":function (format, arg0, arg1, arg2) { return System.Console.WriteLine(System.String.format(format, arg0, arg1, arg2)); },"rt":$n[1].Void,"p":[$n[1].String,$n[1].Object,$n[1].Object,$n[1].Object]},{"a":2,"n":"WriteLine","is":true,"t":8,"pi":[{"n":"format","pt":$n[1].String,"ps":0},{"n":"arg0","pt":$n[1].Object,"ps":1},{"n":"arg1","pt":$n[1].Object,"ps":2},{"n":"arg2","pt":$n[1].Object,"ps":3},{"n":"arg3","pt":$n[1].Object,"ps":4}],"tpc":0,"def":function (format, arg0, arg1, arg2, arg3) { return System.Console.WriteLine(System.String.format(format, [arg0, arg1, arg2, arg3])); },"rt":$n[1].Void,"p":[$n[1].String,$n[1].Object,$n[1].Object,$n[1].Object,$n[1].Object]}]}; });
 });
