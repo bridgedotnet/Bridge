@@ -98,7 +98,14 @@
     </Compile>
     <Compile Include="Attributes\Convention.cs" />
     <Compile Include="System\BitConverter.cs" />
+    <Compile Include="System\Collections\BitArrray.cs" />
+    <Compile Include="System\Collections\Generic\BitHelper.cs" />
+    <Compile Include="System\Collections\Generic\EnumerableHelpers.cs" />
+    <Compile Include="System\Collections\Generic\HashSet.cs" />
     <Compile Include="System\Collections\Generic\IReadOnlyDictionary.cs" />
+    <Compile Include="System\Collections\Generic\Queue.cs" />
+    <Compile Include="System\Collections\Generic\Stack.cs" />
+    <Compile Include="System\Collections\HashHelpers.cs" />
     <Compile Include="System\ComponentModel\BrowsableAttribute.cs" />
     <Compile Include="System\ComponentModel\DataAnnotations\AssociationAttribute.cs" />
     <Compile Include="System\ComponentModel\DataAnnotations\CompareAttribute.cs" />
@@ -423,6 +430,19 @@
     <Content Include="Resources\.generated\bridge\utils\console.js" />
     <Content Include="Resources\.generated\bridge\utils\systemAssemblyVersion.js" />
     <Content Include="Resources\.generated\system\bitConverter.js" />
+    <Content Include="Resources\.generated\system\collections\bitArray.js" />
+    <Content Include="Resources\.generated\system\collections\bitArray\bitArrayEnumeratorSimple.js" />
+    <Content Include="Resources\.generated\system\collections\generic\bitHelper.js" />
+    <Content Include="Resources\.generated\system\collections\generic\enumerableHelpers.js" />
+    <Content Include="Resources\.generated\system\collections\generic\hashSet.js" />
+    <Content Include="Resources\.generated\system\collections\generic\hashSet\elementCount.js" />
+    <Content Include="Resources\.generated\system\collections\generic\hashSet\enumerator.js" />
+    <Content Include="Resources\.generated\system\collections\generic\hashSet\slot.js" />
+    <Content Include="Resources\.generated\system\collections\generic\queue.js" />
+    <Content Include="Resources\.generated\system\collections\generic\queue\enumerator.js" />
+    <Content Include="Resources\.generated\system\collections\generic\stack.js" />
+    <Content Include="Resources\.generated\system\collections\generic\stack\enumerator.js" />
+    <Content Include="Resources\.generated\system\collections\hashHelpers.js" />
     <Content Include="Resources\.generated\system\console.js" />
     <Content Include="Resources\.generated\system\environment.js" />
     <Content Include="Resources\.generated\system\formattableString.js" />

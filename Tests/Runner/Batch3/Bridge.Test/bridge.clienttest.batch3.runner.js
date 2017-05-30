@@ -632,6 +632,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#615 - TestUseCase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge615.TestUseCase);
             QUnit.test("#623 - TestUseCase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge623.TestUseCase);
             QUnit.test("#625 - TestUseCase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge625.TestUseCase);
+            QUnit.test("#634 - TestUseCase1", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge634.TestUseCase1);
             QUnit.test("#634 - TestUseCase2", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge634.TestUseCase2);
             QUnit.test("#635 - TestUseCase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge635.TestUseCase);
             QUnit.test("#637 - TestUseCase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge637.TestUseCase);
@@ -12832,9 +12833,14 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge634)],
         statics: {
             methods: {
+                TestUseCase1: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge634).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge634, 1, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestUseCase1()", $t.Line = "95", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge634.TestUseCase1();
+                },
                 TestUseCase2: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge634).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge634, 21, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestUseCase2()", $t.Line = "94", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge634).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge634, 21, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestUseCase2()", $t.Line = "114", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge634.TestUseCase2();
                 }
             }

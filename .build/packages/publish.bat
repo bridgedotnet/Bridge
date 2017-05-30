@@ -39,10 +39,6 @@ IF "%proceed2%"=="y" (
     ECHO Bridge.Bootstrap has been published
 
 
-    :: ..\..\.nuget\NuGet.exe push Bridge.Collections.1.3.4.nupkg  %apikey%
-    :: ECHO Bridge.Collections has been published
-
-
     :: ..\..\.nuget\NuGet.exe push Bridge.Html5.Console.1.0.2.nupkg  %apikey%
     :: ECHO Bridge.Html5.Console has been published
 

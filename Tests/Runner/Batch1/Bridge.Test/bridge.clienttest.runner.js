@@ -368,6 +368,13 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("List - IReadOnlyListIndexingWorks", Bridge.Test.Runtime.BridgeClientTestRunner.ListTests.IReadOnlyListIndexingWorks);
             QUnit.test("List - IReadOnlyListCountWorks", Bridge.Test.Runtime.BridgeClientTestRunner.ListTests.IReadOnlyListCountWorks);
             QUnit.test("List - IReadOnlyListGetEnumeratorWorks", Bridge.Test.Runtime.BridgeClientTestRunner.ListTests.IReadOnlyListGetEnumeratorWorks);
+            QUnit.test("Queue - TypePropertiesAreCorrect", Bridge.Test.Runtime.BridgeClientTestRunner.QueueTests.TypePropertiesAreCorrect);
+            QUnit.test("Queue - CountWorks", Bridge.Test.Runtime.BridgeClientTestRunner.QueueTests.CountWorks);
+            QUnit.test("Queue - EnqueueAndDequeueWork", Bridge.Test.Runtime.BridgeClientTestRunner.QueueTests.EnqueueAndDequeueWork);
+            QUnit.test("Queue - PeekWorks", Bridge.Test.Runtime.BridgeClientTestRunner.QueueTests.PeekWorks);
+            QUnit.test("Queue - ContainsWorks", Bridge.Test.Runtime.BridgeClientTestRunner.QueueTests.ContainsWorks);
+            QUnit.test("Queue - ContainsUsesEqualsMethod", Bridge.Test.Runtime.BridgeClientTestRunner.QueueTests.ContainsUsesEqualsMethod);
+            QUnit.test("Queue - ClearWorks", Bridge.Test.Runtime.BridgeClientTestRunner.QueueTests.ClearWorks);
             QUnit.test("ReadOnlyCollection - TypePropertiesAreCorrect", Bridge.Test.Runtime.BridgeClientTestRunner.ReadOnlyCollectionTests.TypePropertiesAreCorrect);
             QUnit.test("ReadOnlyCollection - ConstructorWorks", Bridge.Test.Runtime.BridgeClientTestRunner.ReadOnlyCollectionTests.ConstructorWorks);
             QUnit.test("ReadOnlyCollection - CountWorks", Bridge.Test.Runtime.BridgeClientTestRunner.ReadOnlyCollectionTests.CountWorks);
@@ -401,6 +408,22 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("ReadOnlyCollection - IReadOnlyListIndexingWorks", Bridge.Test.Runtime.BridgeClientTestRunner.ReadOnlyCollectionTests.IReadOnlyListIndexingWorks);
             QUnit.test("ReadOnlyCollection - IReadOnlyListCountWorks", Bridge.Test.Runtime.BridgeClientTestRunner.ReadOnlyCollectionTests.IReadOnlyListCountWorks);
             QUnit.test("ReadOnlyCollection - IReadOnlyListGetEnumeratorWorks", Bridge.Test.Runtime.BridgeClientTestRunner.ReadOnlyCollectionTests.IReadOnlyListGetEnumeratorWorks);
+            QUnit.test("Stack - TypePropertiesAreCorrect", Bridge.Test.Runtime.BridgeClientTestRunner.StackTests.TypePropertiesAreCorrect);
+            QUnit.test("Stack - DefaultConstructorWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StackTests.DefaultConstructorWorks);
+            QUnit.test("Stack - ConstructorWithCapacityWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StackTests.ConstructorWithCapacityWorks);
+            QUnit.test("Stack - ConstructingFromArrayWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StackTests.ConstructingFromArrayWorks);
+            QUnit.test("Stack - ConstructingFromListWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StackTests.ConstructingFromListWorks);
+            QUnit.test("Stack - ConstructingFromIEnumerableWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StackTests.ConstructingFromIEnumerableWorks);
+            QUnit.test("Stack - CountWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StackTests.CountWorks);
+            QUnit.test("Stack - ForeachWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StackTests.ForeachWorks);
+            QUnit.test("Stack - PushWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StackTests.PushWorks);
+            QUnit.test("Stack - ClearWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StackTests.ClearWorks);
+            QUnit.test("Stack - ContainsWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StackTests.ContainsWorks);
+            QUnit.test("Stack - ContainsUsesEqualsMethod", Bridge.Test.Runtime.BridgeClientTestRunner.StackTests.ContainsUsesEqualsMethod);
+            QUnit.test("Stack - ForeachWithListItemCallbackWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StackTests.ForeachWithListItemCallbackWorks);
+            QUnit.test("Stack - PopWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StackTests.PopWorks);
+            QUnit.test("Stack - PeekWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StackTests.PeekWorks);
+            QUnit.test("Stack - ToArrayWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StackTests.ToArrayWorks);
             QUnit.test("WeakMap - GettingSettingAndDeletingWorks", Bridge.Test.Runtime.BridgeClientTestRunner.WeakMapTests.GettingSettingAndDeletingWorks);
             QUnit.test("MultidimArray - TypePropertiesAreCorrect", Bridge.Test.Runtime.BridgeClientTestRunner.MultidimArrayTests.TypePropertiesAreCorrect);
             QUnit.test("MultidimArray - LengthWorks", Bridge.Test.Runtime.BridgeClientTestRunner.MultidimArrayTests.LengthWorks);
@@ -13240,6 +13263,61 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.QueueTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.QueueTests)],
+        statics: {
+            methods: {
+                TypePropertiesAreCorrect: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.QueueTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.QueueTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TypePropertiesAreCorrect()", $t.Line = "31", $t));
+                    t.Fixture.TypePropertiesAreCorrect();
+                },
+                CountWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.QueueTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.QueueTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "CountWorks()", $t.Line = "40", $t));
+                    t.Fixture.CountWorks();
+                },
+                EnqueueAndDequeueWork: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.QueueTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.QueueTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "EnqueueAndDequeueWork()", $t.Line = "51", $t));
+                    t.Fixture.EnqueueAndDequeueWork();
+                },
+                PeekWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.QueueTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.QueueTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "PeekWorks()", $t.Line = "63", $t));
+                    t.Fixture.PeekWorks();
+                },
+                ContainsWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.QueueTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.QueueTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ContainsWorks()", $t.Line = "75", $t));
+                    t.Fixture.ContainsWorks();
+                },
+                ContainsUsesEqualsMethod: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.QueueTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.QueueTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ContainsUsesEqualsMethod()", $t.Line = "87", $t));
+                    t.Fixture.ContainsUsesEqualsMethod();
+                },
+                ClearWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.QueueTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.QueueTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ClearWorks()", $t.Line = "98", $t));
+                    t.Fixture.ClearWorks();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.QueueTests", $t.File = "Batch1\\Collections\\Generic\\QueueTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.RandomTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.RandomTests)],
         statics: {
@@ -16699,6 +16777,106 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 var $t;
                 if (this.context == null) {
                     this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.SimpleTypes.SingleTests", $t.File = "Batch1\\SimpleTypes\\SingleTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.StackTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.StackTests)],
+        statics: {
+            methods: {
+                TypePropertiesAreCorrect: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.StackTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StackTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TypePropertiesAreCorrect()", $t.Line = "49", $t));
+                    t.Fixture.TypePropertiesAreCorrect();
+                },
+                DefaultConstructorWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.StackTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StackTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultConstructorWorks()", $t.Line = "59", $t));
+                    t.Fixture.DefaultConstructorWorks();
+                },
+                ConstructorWithCapacityWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.StackTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StackTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ConstructorWithCapacityWorks()", $t.Line = "66", $t));
+                    t.Fixture.ConstructorWithCapacityWorks();
+                },
+                ConstructingFromArrayWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.StackTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StackTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ConstructingFromArrayWorks()", $t.Line = "73", $t));
+                    t.Fixture.ConstructingFromArrayWorks();
+                },
+                ConstructingFromListWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.StackTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StackTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ConstructingFromListWorks()", $t.Line = "82", $t));
+                    t.Fixture.ConstructingFromListWorks();
+                },
+                ConstructingFromIEnumerableWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.StackTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StackTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ConstructingFromIEnumerableWorks()", $t.Line = "91", $t));
+                    t.Fixture.ConstructingFromIEnumerableWorks();
+                },
+                CountWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.StackTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StackTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "CountWorks()", $t.Line = "100", $t));
+                    t.Fixture.CountWorks();
+                },
+                ForeachWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.StackTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StackTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ForeachWorks()", $t.Line = "108", $t));
+                    t.Fixture.ForeachWorks();
+                },
+                PushWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.StackTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StackTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "PushWorks()", $t.Line = "130", $t));
+                    t.Fixture.PushWorks();
+                },
+                ClearWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.StackTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StackTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ClearWorks()", $t.Line = "138", $t));
+                    t.Fixture.ClearWorks();
+                },
+                ContainsWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.StackTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StackTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ContainsWorks()", $t.Line = "146", $t));
+                    t.Fixture.ContainsWorks();
+                },
+                ContainsUsesEqualsMethod: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.StackTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StackTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ContainsUsesEqualsMethod()", $t.Line = "154", $t));
+                    t.Fixture.ContainsUsesEqualsMethod();
+                },
+                ForeachWithListItemCallbackWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.StackTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StackTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ForeachWithListItemCallbackWorks()", $t.Line = "162", $t));
+                    t.Fixture.ForeachWithListItemCallbackWorks();
+                },
+                PopWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.StackTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StackTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "PopWorks()", $t.Line = "170", $t));
+                    t.Fixture.PopWorks();
+                },
+                PeekWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.StackTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StackTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "PeekWorks()", $t.Line = "178", $t));
+                    t.Fixture.PeekWorks();
+                },
+                ToArrayWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Collections.Generic.StackTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StackTests, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "ToArrayWorks()", $t.Line = "186", $t));
+                    t.Fixture.ToArrayWorks();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t=new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Collections.Generic.StackTests", $t.File = "Batch1\\Collections\\Generic\\StackTests.cs", $t);
                 }
                 return this.context;
             }

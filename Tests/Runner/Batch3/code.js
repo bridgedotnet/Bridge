@@ -25162,6 +25162,29 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge634", {
         statics: {
             methods: {
+                TestUseCase1: function () {
+                    var $t;
+                    var hashSet = new (System.Collections.Generic.HashSet$1(System.String)).ctor();
+
+                    hashSet.add("a");
+                    hashSet.add("b");
+                    hashSet.add("c");
+
+                    var text = "";
+
+                    $t = Bridge.getEnumerator(hashSet);
+                    try {
+                        while ($t.moveNext()) {
+                            var s = $t.Current;
+                            text = System.String.concat(text, s);
+                        }
+                    }finally {
+                        if (Bridge.is($t, System.IDisposable)) {
+                            $t.System$IDisposable$dispose();
+                        }
+                    }
+                    Bridge.Test.NUnit.Assert.AreEqual$1("abc", text, "Bridge634: foreach works for HashSet");
+                },
                 TestUseCase2: function () {
                     var a = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1(System.String))();
                     var a1 = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge634A$1.Nested(System.String))();
