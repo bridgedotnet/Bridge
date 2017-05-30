@@ -38,10 +38,11 @@ namespace Bridge.Translator.TypeScript
 
             if (!propertyDeclaration.Getter.IsNull && this.Emitter.GetInline(propertyDeclaration.Getter) == null)
             {
-                XmlToJsDoc.EmitComment(this, this.PropertyDeclaration);
+                
                 var isInterface = memberResult.Member.DeclaringType.Kind == TypeKind.Interface;
                 var ignoreInterface = isInterface &&
                                       memberResult.Member.DeclaringType.TypeParameterCount > 0;
+
                 this.WriteAccessor(propertyDeclaration, memberResult, ignoreInterface);
 
                 if (!ignoreInterface && isInterface)
@@ -51,9 +52,19 @@ namespace Bridge.Translator.TypeScript
             }
         }
 
+        private bool comment = false;
         private void WriteAccessor(PropertyDeclaration p, MemberResolveResult memberResult, bool ignoreInterface)
         {
             string name = Helpers.GetPropertyRef(memberResult.Member, this.Emitter, false, false, ignoreInterface);
+            if (name.Contains("\""))
+            {
+                return;
+            }
+            if (!this.comment)
+            {
+                XmlToJsDoc.EmitComment(this, this.PropertyDeclaration);
+            }
+            this.comment = true;
             this.Write(name);
             this.WriteColon();
             name = BridgeTypes.ToTypeScriptName(p.ReturnType, this.Emitter);

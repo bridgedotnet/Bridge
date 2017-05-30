@@ -29,12 +29,12 @@ namespace Bridge.Translator.TypeScript
 
         protected void VisitMethodDeclaration(MethodDeclaration methodDeclaration)
         {
-            XmlToJsDoc.EmitComment(this, this.MethodDeclaration);
             var overloads = OverloadsCollection.Create(this.Emitter, methodDeclaration);
             var memberResult = this.Emitter.Resolver.ResolveNode(methodDeclaration, this.Emitter) as MemberResolveResult;
             var isInterface = memberResult.Member.DeclaringType.Kind == TypeKind.Interface;
             var ignoreInterface = isInterface &&
                                       memberResult.Member.DeclaringType.TypeParameterCount > 0;
+
             this.WriteSignature(methodDeclaration, overloads, ignoreInterface);
             if (!ignoreInterface && isInterface)
             {
@@ -42,9 +42,22 @@ namespace Bridge.Translator.TypeScript
             }
         }
 
+        private bool comment = false;
         private void WriteSignature(MethodDeclaration methodDeclaration, OverloadsCollection overloads, bool ignoreInterface)
         {
             string name = overloads.GetOverloadName(ignoreInterface);
+
+            if (name.Contains("\""))
+            {
+                return;
+            }
+
+            if (!this.comment)
+            {
+                XmlToJsDoc.EmitComment(this, this.MethodDeclaration);
+            }
+            
+            this.comment = true;
             this.Write(name);
 
             bool needComma = false;

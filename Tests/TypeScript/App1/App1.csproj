@@ -53,6 +53,7 @@
     <Compile Include="Issues\N2493.cs" />
     <Compile Include="Issues\N2653.cs" />
     <Compile Include="Issues\N2661.cs" />
+    <Compile Include="Issues\N2736.cs" />
     <Compile Include="Issues\N2438.cs" />
     <Compile Include="Issues\N2264.cs" />
     <Compile Include="Issues\N2031.cs" />

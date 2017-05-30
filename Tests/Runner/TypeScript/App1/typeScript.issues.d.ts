@@ -1,14 +1,9 @@
 /// <reference path="./bridge.d.ts" />
 
 declare module TypeScript.Issues {
-    export interface N2661C {
-        fn: {(x: TypeScript.Issues.N2661C): Function};
+    export interface N2736_INumber$1<T> {
+        GetNumber(): T;
     }
-    export interface N2661CFunc extends Function {
-        prototype: N2661C;
-        new (): N2661C;
-    }
-    var N2661C: N2661CFunc;
 
     export interface N1060 {
     }
@@ -92,10 +87,24 @@ declare module TypeScript.Issues {
     }
     var N2653Zig: N2653ZigFunc;
 
-    export interface N2653IZig {
-        TypeScript$Issues$N2653IZig$zag(): number;
-        zag(): number;
+    export interface N2736_Number$1<T> extends TypeScript.Issues.N2736_INumber$1<T> {
     }
+    export interface N2736_Number$1Func extends Function {
+        <T>($T: Bridge.TypeRef<T>): {
+            prototype: N2736_Number$1<T>;
+            new (): N2736_Number$1<T>;
+        }
+    }
+    var N2736_Number$1: N2736_Number$1Func;
+
+    export interface N2661C {
+        fn: {(x: TypeScript.Issues.N2661C): Function};
+    }
+    export interface N2661CFunc extends Function {
+        prototype: N2661C;
+        new (): N2661C;
+    }
+    var N2661C: N2661CFunc;
 
     export interface N2030Attribute extends System.Attribute {
         IsUnspecified: boolean;
@@ -106,27 +115,44 @@ declare module TypeScript.Issues {
     }
     var N2030Attribute: N2030AttributeFunc;
 
-    export interface N2493Operation3 {
-        Add(n: number): number;
+    export interface N2653IZig {
+        TypeScript$Issues$N2653IZig$zag(): number;
+        zag(): number;
     }
-    export interface N2493Operation3Func extends Function {
-        prototype: N2493Operation3;
-        new (): N2493Operation3;
+
+    export interface N1640 {
     }
-    var N2493Operation3: N2493Operation3Func;
+    export interface N1640Func extends Function {
+        prototype: N1640;
+        GamePlay: TypeScript.Issues.N1640.GamePlayFunc;
+        new (): N1640;
+    }
+    var N1640: N1640Func;
+    module N1640 {
+        export interface GamePlay extends TypeScript.Issues.N1640.IGamePlay {
+            addOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
+            removeOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
+            StartGame(s: string): void;
+            Subscribe(handler: {(sender: System.Object, e: string): void}): void;
+        }
+        export interface GamePlayFunc extends Function {
+            prototype: GamePlay;
+            new (): GamePlay;
+        }
+
+        export interface IGamePlay {
+            TypeScript$Issues$N1640$IGamePlay$addOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
+            TypeScript$Issues$N1640$IGamePlay$removeOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
+            addOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
+            removeOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
+            TypeScript$Issues$N1640$IGamePlay$StartGame(s: string): void;
+            StartGame(s: string): void;
+        }
+    }
 
     export interface N2029Interface$1<T> {
         Value1: number;
     }
-
-    export interface N2264 {
-        Values: System.Collections.Generic.IEnumerable$1<string>;
-    }
-    export interface N2264Func extends Function {
-        prototype: N2264;
-        new (queryParameters: System.Collections.Generic.IEnumerable$1<string>): N2264;
-    }
-    var N2264: N2264Func;
 
     export interface N2438 {
         isDefaultCtor: boolean;
@@ -161,6 +187,7 @@ declare module TypeScript.Issues {
         prototype: N2474;
         Enum: N2474.EnumFunc;
         NameEnum: N2474.NameEnumFunc;
+        NameLowerCase: N2474.NameLowerCaseFunc;
         NamePreserveCase: N2474.NamePreserveCaseFunc;
         NameUpperCase: N2474.NameUpperCaseFunc;
         StringName: N2474.StringNameFunc;
@@ -168,7 +195,6 @@ declare module TypeScript.Issues {
         StringNamePreserveCase: N2474.StringNamePreserveCaseFunc;
         StringNameUpperCase: N2474.StringNameUpperCaseFunc;
         ValueEnum: N2474.ValueEnumFunc;
-        NameLowerCase: N2474.NameLowerCaseFunc;
         new (): N2474;
     }
     var N2474: N2474Func;
@@ -184,6 +210,13 @@ declare module TypeScript.Issues {
         }
         export interface NameEnumFunc extends Function {
             prototype: NameEnum;
+            value: number;
+        }
+
+        export interface NameLowerCase {
+        }
+        export interface NameLowerCaseFunc extends Function {
+            prototype: NameLowerCase;
             value: number;
         }
 
@@ -235,43 +268,23 @@ declare module TypeScript.Issues {
             prototype: ValueEnum;
             Value: number;
         }
-
-        export interface NameLowerCase {
-        }
-        export interface NameLowerCaseFunc extends Function {
-            prototype: NameLowerCase;
-            value: number;
-        }
     }
 
-    export interface N1640 {
+    export interface N2493Operation3 {
+        Add(n: number): number;
     }
-    export interface N1640Func extends Function {
-        prototype: N1640;
-        GamePlay: TypeScript.Issues.N1640.GamePlayFunc;
-        new (): N1640;
+    export interface N2493Operation3Func extends Function {
+        prototype: N2493Operation3;
+        new (): N2493Operation3;
     }
-    var N1640: N1640Func;
-    module N1640 {
-        export interface GamePlay extends TypeScript.Issues.N1640.IGamePlay {
-            addOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
-            removeOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
-            StartGame(s: string): void;
-            Subscribe(handler: {(sender: System.Object, e: string): void}): void;
-        }
-        export interface GamePlayFunc extends Function {
-            prototype: GamePlay;
-            new (): GamePlay;
-        }
+    var N2493Operation3: N2493Operation3Func;
 
-        export interface IGamePlay {
-            TypeScript$Issues$N1640$IGamePlay$addOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
-            TypeScript$Issues$N1640$IGamePlay$removeOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
-            addOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
-            removeOnGameEvent(value: {(sender: System.Object, e: string): void}): void;
-            TypeScript$Issues$N1640$IGamePlay$StartGame(s: string): void;
-            StartGame(s: string): void;
-        }
+    export interface N2264 {
+        Values: System.Collections.Generic.IEnumerable$1<string>;
     }
-
+    export interface N2264Func extends Function {
+        prototype: N2264;
+        new (queryParameters: System.Collections.Generic.IEnumerable$1<string>): N2264;
+    }
+    var N2264: N2264Func;
 }
