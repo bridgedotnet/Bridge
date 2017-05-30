@@ -321,7 +321,7 @@ namespace Bridge.Html5
         /// Is an EventHandler representing the code to be called when the progress event is raised
         /// </summary>
         [Name("onprogress")]
-        public Action<Event> OnProgress;
+        public Action<ProgressEvent> OnProgress;
 
         /// <summary>
         /// Is an EventHandler representing the code to be called when the ratechange event is raised

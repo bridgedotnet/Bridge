@@ -37,7 +37,7 @@ namespace Bridge.Html5
         /// A function that is called periodically with information about the progress of the request.
         /// </summary>
         [Name("onprogress")]
-        public Action<Event> OnProgress;
+        public Action<ProgressEvent> OnProgress;
 
         /// <summary>
         /// A function that is called if the event times out; this only happens if a timeout has been previously established by setting the value of the XMLHttpRequest object's timeout attribute.
