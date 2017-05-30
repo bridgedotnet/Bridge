@@ -47,13 +47,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The animation-direction CSS property indicates whether the animation should play in reverse on alternate cycles.
         /// </summary>
-        public AnimationDirection AnimationDirection;
-
-        /// <summary>
-        /// The animation-direction CSS property indicates whether the animation should play in reverse on alternate cycles.
-        /// </summary>
-        [Name("animationDirection")]
-        public string AnimationDirectionString;
+        public Union<string, AnimationDirection> AnimationDirection;
 
         /// <summary>
         /// The animation-duration CSS property specifies the length of time that an animation should take to complete one cycle.
@@ -63,13 +57,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The animation-fill-mode CSS property specifies how a CSS animation should apply styles to its target before and after it is executing.
         /// </summary>
-        public AnimationFillMode AnimationFillMode;
-
-        /// <summary>
-        /// The animation-fill-mode CSS property specifies how a CSS animation should apply styles to its target before and after it is executing.
-        /// </summary>
-        [Name("animationFillMode")]
-        public string AnimationFillModeString;
+        public Union<string, AnimationFillMode> AnimationFillMode;
 
         /// <summary>
         /// The animation-iteration-count CSS property defines the number of times an animation cycle should be played before stopping.
@@ -84,24 +72,12 @@ namespace Bridge.Html5
         /// <summary>
         /// The animation-play-state CSS property determines whether an animation is running or paused. You can query this property's value to determine whether or not the animation is currently running; in addition, you can set its value to pause and resume playback of an animation.
         /// </summary>
-        public AnimationPlayState AnimationPlayState;
-
-        /// <summary>
-        /// The animation-play-state CSS property determines whether an animation is running or paused. You can query this property's value to determine whether or not the animation is currently running; in addition, you can set its value to pause and resume playback of an animation.
-        /// </summary>
-        [Name("animationPlayState")]
-        public string AnimationPlayStateString;
+        public Union<string, AnimationPlayState> AnimationPlayState;
 
         /// <summary>
         /// The CSS animation-timing-function property specifies how a CSS animation should progress over the duration of each cycle.
         /// </summary>
-        public TimingFunction AnimationTimingFunction;
-
-        /// <summary>
-        /// The CSS animation-timing-function property specifies how a CSS animation should progress over the duration of each cycle.
-        /// </summary>
-        [Name("animationTimingFunction")]
-        public string AnimationTimingFunctionString;
+        public Union<string, TimingFunction> AnimationTimingFunction;
 
         /// <summary>
         /// The CSS backface-visibility property determines whether or not the back face of the element is visible when facing the user. The back face of an element always is a transparent background, letting, when visible, a mirror image of the front face be displayed.
@@ -121,12 +97,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The background-blend-mode CSS property describes how a background should blend with the element's background that is below it and the element's background color. Background elements should be blended while content appearance should be kept unchanged.
         /// </summary>
-        public BackgroundBlendMode BackgroundBlendMode;
-
-        /// <summary>
-        /// The background-blend-mode CSS property describes how a background should blend with the element's background that is below it and the element's background color. Background elements should be blended while content appearance should be kept unchanged.
-        /// </summary>
-        public string BackgroundBlendModeString;
+        public Union<string, BackgroundBlendMode> BackgroundBlendMode;
 
         /// <summary>
         /// The background-clip CSS property specifies whether an element's background, either the color or image, extends underneath its border.
@@ -156,13 +127,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The background-repeat CSS property defines how background images are repeated. A background image can be repeated along the horizontal axis, the vertical axis, both, or not repeated at all. When the repetition of the image tiles doesn't let them exactly cover the background, the way adjustments are done can be controlled by the author: by default, the last image is clipped, but the different tiles can instead be re-sized, or space can be inserted between the tiles.
         /// </summary>
-        public BackgroundRepeat BackgroundRepeat;
-
-        /// <summary>
-        /// The background-repeat CSS property defines how background images are repeated. A background image can be repeated along the horizontal axis, the vertical axis, both, or not repeated at all. When the repetition of the image tiles doesn't let them exactly cover the background, the way adjustments are done can be controlled by the author: by default, the last image is clipped, but the different tiles can instead be re-sized, or space can be inserted between the tiles.
-        /// </summary>
-        [Name("backgroundRepeat")]
-        public string BackgroundRepeatString;
+        public Union<string, BackgroundRepeat> BackgroundRepeat;
 
         /// <summary>
         /// The background-size CSS property specifies the size of the background images. The size of the image can be fully constrained or only partially in order to preserve its intrinsic ratio.
@@ -202,13 +167,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The border-bottom-width CSS property sets the width of the bottom border of a box.
         /// </summary>
-        public BorderWidth BorderBottomWidth;
-
-        /// <summary>
-        /// The border-bottom-width CSS property sets the width of the bottom border of a box.
-        /// </summary>
-        [Name("borderBottomWidth")]
-        public string BorderBottomWidthString;
+        public Union<string, BorderWidth> BorderBottomWidth;
 
         /// <summary>
         /// The border-collapse CSS property selects a table's border model. This has a big influence on the look and style of the table cells.
@@ -233,13 +192,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The border-image-repeat CSS property defines how the middle part of a border image is handled so that it can match the size of the border. It has a one-value syntax which describes the behavior of all the sides, and a two-value syntax that sets a different value for the horizontal and vertical behavior.
         /// </summary>
-        public BorderImageRepeat BorderImageRepeat;
-
-        /// <summary>
-        /// The border-image-repeat CSS property defines how the middle part of a border image is handled so that it can match the size of the border. It has a one-value syntax which describes the behavior of all the sides, and a two-value syntax that sets a different value for the horizontal and vertical behavior.
-        /// </summary>
-        [Name("borderImageRepeat")]
-        public string BorderImageRepeatString;
+        public Union<string, BorderImageRepeat> BorderImageRepeat;
 
         /// <summary>
         /// The border-image-slice CSS property divides the image specified by border-image-source in nine regions: the four corners, the four edges and the middle. It does this by specifying 4 inwards offsets.
@@ -274,13 +227,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The border-left-width CSS property sets the width of the left border of a box.
         /// </summary>
-        public BorderWidth BorderLeftWidth;
-
-        /// <summary>
-        /// The border-left-width CSS property sets the width of the left border of a box.
-        /// </summary>
-        [Name("borderLeftWidth")]
-        public string BorderLeftWidthString;
+        public Union<string, BorderWidth> BorderLeftWidth;
 
         /// <summary>
         /// The border-radius CSS property allows Web authors to define how rounded border corners are. The curve of each corner is defined using one or two radii, defining its shape: circle or ellipse.
@@ -305,13 +252,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The border-right-width CSS property sets the width of the right border of a box.
         /// </summary>
-        public BorderWidth BorderRightWidth;
-
-        /// <summary>
-        /// The border-right-width CSS property sets the width of the right border of a box.
-        /// </summary>
-        [Name("borderRightWidth")]
-        public BorderWidth BorderRightWidthString;
+        public Union<string, BorderWidth> BorderRightWidth;
 
         /// <summary>
         /// The border-spacing CSS property specifies the distance between the borders of adjacent cells (only for the separated borders model). This is equivalent to the cellspacing attribute in presentational HTML, but an optional second value can be used to set different horizontal and vertical spacing.
@@ -351,24 +292,12 @@ namespace Bridge.Html5
         /// <summary>
         /// The border-top-width CSS property sets the width of the top border of a box.
         /// </summary>
-        public BorderWidth BorderTopWidth;
-
-        /// <summary>
-        /// The border-top-width CSS property sets the width of the top border of a box.
-        /// </summary>
-        [Name("borderTopWidth")]
-        public string BorderTopWidthString;
+        public Union<string, BorderWidth> BorderTopWidth;
 
         /// <summary>
         /// The border-width CSS property sets the width of the border of a box. Using the shorthand property border is often more convenient.
         /// </summary>
-        public BorderWidth BorderWidth;
-
-        /// <summary>
-        /// The border-width CSS property sets the width of the border of a box. Using the shorthand property border is often more convenient.
-        /// </summary>
-        [Name("borderWidth")]
-        public string BorderWidthString;
+        public Union<string, BorderWidth> BorderWidth;
 
         /// <summary>
         /// The bottom CSS property participates in specifying the position of positioned elements.
@@ -455,13 +384,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The column-rule-width CSS property lets you set the width of the rule drawn between columns in multi-column layouts.
         /// </summary>
-        public BorderWidth ColumnRuleWidth;
-
-        /// <summary>
-        /// The column-rule-width CSS property lets you set the width of the rule drawn between columns in multi-column layouts.
-        /// </summary>
-        [Name("columnRuleWidth")]
-        public string ColumnRuleWidthString;
+        public Union<string, BorderWidth> ColumnRuleWidth;
 
         /// <summary>
         /// The column-span CSS property makes it possible for an element to span across all columns when its value is set to all. An element that spans more than one column is called a spanning element.
@@ -983,13 +906,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The outline-width CSS property is used to set the width of the outline of an element. An outline is a line that is drawn around elements, outside the border edge, to make the element stand out:
         /// </summary>
-        public BorderWidth OutlineWidth;
-
-        /// <summary>
-        /// The outline-width CSS property is used to set the width of the outline of an element. An outline is a line that is drawn around elements, outside the border edge, to make the element stand out:
-        /// </summary>
-        [Name("outlineWidth")]
-        public string OutlineWidthString;
+        public Union<string, BorderWidth> OutlineWidth;
 
         /// <summary>
         /// The overflow CSS property specifies whether to clip content, render scroll bars or display overflow content of a block-level element.
@@ -1119,13 +1036,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The text-decoration CSS property is used to set the text formatting to underline, overline, line-through or blink.
         /// </summary>
-        public TextDecoration TextDecoration;
-
-        /// <summary>
-        /// The text-decoration CSS property is used to set the text formatting to underline, overline, line-through or blink.
-        /// </summary>
-        [Name("textDecoration")]
-        public string TextDecorationString;
+        public Union<string, TextDecoration> TextDecoration;
 
         /// <summary>
         /// The text-decoration-color CSS property sets the color used when drawing underlines, overlines, or strike-throughs specified by text-decoration-line.
@@ -1135,13 +1046,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The text-decoration-line CSS property sets what kind of line decorations are added to an element.
         /// </summary>
-        public TextDecorationLine TextDecorationLine;
-
-        /// <summary>
-        /// The text-decoration-line CSS property sets what kind of line decorations are added to an element.
-        /// </summary>
-        [Name("textDecorationLine")]
-        public string TextDecorationLineString;
+        public Union<string, TextDecorationLine> TextDecorationLine;
 
         /// <summary>
         /// The text-decoration-style CSS property defines the style of the lines specified by text-decoration-line. The style applies to all lines, there is no way to define different style for each of the line defined by text-decoration-line.
@@ -1231,13 +1136,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The CSS transition-timing-function property is used to describe how the intermediate values of the CSS properties being affected by a transition effect are calculated. This in essence lets you establish an acceleration curve, so that the speed of the transition can vary over its duration.
         /// </summary>
-        public TimingFunction TransitionTimingFunction;
-
-        /// <summary>
-        /// The CSS transition-timing-function property is used to describe how the intermediate values of the CSS properties being affected by a transition effect are calculated. This in essence lets you establish an acceleration curve, so that the speed of the transition can vary over its duration.
-        /// </summary>
-        [Name("transitionTimingFunction")]
-        public string TransitionTimingFunctionString;
+        public Union<string, TimingFunction> TransitionTimingFunction;
 
         /// <summary>
         /// The unicode-bidi CSS property together with the direction property relates to the handling of bidirectional text in a document.
