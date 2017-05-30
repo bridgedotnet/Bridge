@@ -110,7 +110,7 @@ namespace Bridge.Translator
             {
                 var name = r.Name;
 
-                if (name == "mscorlib" || name == "System.Core")
+                if (name == SystemAssemblyName || name == "System.Core")
                 {
                     continue;
                 }

@@ -288,7 +288,7 @@ namespace Bridge.Translator
             this.Log.Trace(listContent);
 
             // Checking if mscorlib reference added and removing if added
-            var mscorlib = assemblyDef.MainModule.AssemblyReferences.FirstOrDefault(r => r.Name == "mscorlib");
+            var mscorlib = assemblyDef.MainModule.AssemblyReferences.FirstOrDefault(r => r.Name == SystemAssemblyName);
             if (mscorlib != null)
             {
                 this.Log.Trace("Removing mscorlib reference");

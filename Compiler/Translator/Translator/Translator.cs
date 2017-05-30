@@ -24,6 +24,7 @@ namespace Bridge.Translator
         public const string LocalesPrefix = "Bridge.Resources.Locales.";
         public const string SupportedProjectType = "Library";
         public const string DefaultRootNamespace = "ClassLibrary";
+        public const string SystemAssemblyName = "mscorlib";
 
         private static readonly Encoding OutputEncoding = new UTF8Encoding(false);
         private static readonly string[] MinifierCodeSettingsInternalFileNames = new string[] { "bridge.js", "bridge.min.js", "bridge.collections.js", "bridge.collections.min.js" };
@@ -217,6 +218,7 @@ namespace Bridge.Translator
         private IList<AssemblyDefinition> GetParentAssemblies(AssemblyDefinition asm, List<AssemblyDefinition> list = null)
         {
             bool endPoint = list == null;
+
             if (endPoint)
             {
                 activeAssemblies = new Stack<AssemblyDefinition>();
@@ -232,7 +234,13 @@ namespace Bridge.Translator
 
             foreach (var assemblyReferenceName in asm.MainModule.AssemblyReferences)
             {
+                if (assemblyReferenceName.Name.Contains(SystemAssemblyName))
+                {
+                    continue;
+                }
+
                 var assemblyReference = asm.MainModule.AssemblyResolver.Resolve(assemblyReferenceName);
+
                 if (list.All(r => r.FullName != assemblyReference.FullName))
                 {
                     list.Add(assemblyReference);
@@ -242,6 +250,7 @@ namespace Bridge.Translator
             }
 
             activeAssemblies.Pop();
+
             return list;
         }
 
@@ -253,6 +262,7 @@ namespace Bridge.Translator
             {
                 var parents = this.GetParentAssemblies(t);
                 var tProcess = graph.Processes.FirstOrDefault(p => p.Name == t.FullName);
+
                 if (tProcess == null)
                 {
                     tProcess = new TopologicalSorting.OrderedProcess(graph, t.FullName);
@@ -261,9 +271,11 @@ namespace Bridge.Translator
                 for (int i = parents.Count - 1; i > -1; i--)
                 {
                     var x = parents[i];
+
                     if (tProcess.Predecessors.All(p => p.Name != x.FullName))
                     {
                         var dProcess = graph.Processes.FirstOrDefault(p => p.Name == x.FullName);
+
                         if (dProcess == null)
                         {
                             dProcess = new TopologicalSorting.OrderedProcess(graph, x.FullName);
@@ -286,11 +298,17 @@ namespace Bridge.Translator
                     IEnumerable<IEnumerable<OrderedProcess>> sorted = graph.CalculateSort();
 
                     var list = new List<AssemblyDefinition>(this.References.Count());
+
+                    this.Log.Trace("Sorting references...");
+
                     foreach (var processes in sorted)
                     {
                         foreach (var process in processes)
                         {
+                            this.Log.Trace("\tHandling " + process.Name);
+
                             asmDef = this.References.First(r => r.FullName == process.Name);
+
                             if (list.All(r => r.FullName != asmDef.FullName))
                             {
                                 list.Add(asmDef);
@@ -299,6 +317,13 @@ namespace Bridge.Translator
                     }
 
                     this.References = list;
+
+                    this.Log.Trace("Sorting references done:");
+
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        this.Log.Trace("\t" + list[i].Name);
+                    }
                 }
                 catch (System.Exception ex)
                 {
