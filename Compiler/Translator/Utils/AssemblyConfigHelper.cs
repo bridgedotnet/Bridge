@@ -130,6 +130,11 @@ namespace Bridge.Translator.Utils
                 }
             }
 
+            if (config.Html != null)
+            {
+                config.Html.Name = helper.ApplyTokens(tokens, config.Html.Name);
+            }
+
             Logger.Trace("ApplyTokens done");
         }
 
@@ -140,7 +145,16 @@ namespace Bridge.Translator.Utils
             assemblyInfo.Output = helper.ConvertPath(assemblyInfo.Output);
             assemblyInfo.PluginsPath = helper.ConvertPath(assemblyInfo.PluginsPath);
             assemblyInfo.LocalesOutput = helper.ConvertPath(assemblyInfo.LocalesOutput);
-            assemblyInfo.Logging.Folder = helper.ConvertPath(assemblyInfo.Logging.Folder);
+
+            if (assemblyInfo.Logging != null)
+            {
+                assemblyInfo.Logging.Folder = helper.ConvertPath(assemblyInfo.Logging.Folder);
+            }
+
+            if (assemblyInfo.Html != null)
+            {
+                assemblyInfo.Html.Name = helper.ConvertPath(assemblyInfo.Html.Name);
+            }
 
             if (assemblyInfo.Resources != null)
             {

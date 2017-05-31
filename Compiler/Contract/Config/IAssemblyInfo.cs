@@ -193,5 +193,10 @@ namespace Bridge.Contract
         {
             get; set;
         }
+
+        HtmlConfig Html
+        {
+            get; set;
+        }
     }
  }
