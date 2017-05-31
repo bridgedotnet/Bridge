@@ -18,10 +18,6 @@ namespace Bridge.Contract
         }
     }
 
-    internal class SourceMapConfigInt : SourceMapConfig
-    {
-    }
-
     public class SourceMapConfigConverter : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
