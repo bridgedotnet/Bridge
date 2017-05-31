@@ -41,8 +41,6 @@ namespace Bridge.Contract
             set;
         }
 
-        string GetCode();
-
         string Location
         {
             get;

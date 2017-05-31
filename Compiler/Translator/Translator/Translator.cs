@@ -334,18 +334,6 @@ namespace Bridge.Translator
             activeAssemblies = null;
         }
 
-        public virtual string GetCode()
-        {
-            StringBuilder builder = new StringBuilder();
-
-            foreach (var item in this.Outputs)
-            {
-                NewLine(builder, item.Value);
-            }
-
-            return builder.ToString();
-        }
-
         private static void NewLine(StringBuilder sb, string line = null)
         {
             if (line != null)
