@@ -76,7 +76,7 @@ namespace Bridge.Contract
             set;
         }
 
-        System.Collections.Generic.Dictionary<string, string> Emit();
+        List<TranslatorOutputItem> Emit();
 
         bool EnableSemicolon
         {

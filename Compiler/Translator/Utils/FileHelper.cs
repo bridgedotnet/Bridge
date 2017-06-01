@@ -29,6 +29,23 @@ namespace Bridge.Translator
             return s;
         }
 
+        public string GetNonMinifiedJSFileName(string fileName)
+        {
+            if (string.IsNullOrEmpty(fileName) || !IsMinJS(fileName))
+            {
+                return fileName;
+            }
+
+            var s = fileName.ReplaceLastInstanceOf(Files.Extensions.MinJS, Files.Extensions.JS);
+
+            if (IsMinJS(s))
+            {
+                s = fileName.ReplaceLastInstanceOf(Files.Extensions.MinJS.ToUpper(), Files.Extensions.JS);
+            }
+
+            return s;
+        }
+
         public bool IsJS(string fileName)
         {
             if (fileName == null)
@@ -57,6 +74,41 @@ namespace Bridge.Translator
             }
 
             return fileName.EndsWith(Files.Extensions.DTS, StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        public bool IsCSS(string fileName)
+        {
+            if (fileName == null)
+            {
+                return false;
+            }
+
+            return fileName.EndsWith(Files.Extensions.CSS, StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        public TranslatorOutputTypes GetOutputType(string fileName)
+        {
+            if (fileName == null)
+            {
+                return TranslatorOutputTypes.None;
+            }
+
+            if (IsJS(fileName))
+            {
+                return TranslatorOutputTypes.JavaScript;
+            }
+
+            if (IsDTS(fileName))
+            {
+                return TranslatorOutputTypes.TypeScript;
+            }
+
+            if (IsCSS(fileName))
+            {
+                return TranslatorOutputTypes.StyleSheets;
+            }
+
+            return TranslatorOutputTypes.None;
         }
     }
 }

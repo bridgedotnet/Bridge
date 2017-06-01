@@ -58,7 +58,7 @@ namespace Bridge.Contract
             set;
         }
 
-        System.Collections.Generic.Dictionary<string, string> Outputs
+        TranslatorOutput Outputs
         {
             get;
         }
@@ -76,7 +76,7 @@ namespace Bridge.Contract
             get;
         }
 
-        System.Collections.Generic.Dictionary<string, string> Translate();
+        void Translate();
 
         System.Collections.Generic.Dictionary<string, ITypeInfo> TypeInfoDefinitions
         {

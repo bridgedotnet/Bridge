@@ -42,7 +42,18 @@ namespace Bridge.Translator
             }
         }
 
-        public virtual void InjectResources(string outputPath, string projectPath, Dictionary<string, string> files)
+        internal virtual string ReadEmbeddedResource(EmbeddedResource resource)
+        {
+            using (var resourcesStream = resource.GetResourceStream())
+            {
+                using (StreamReader reader = new StreamReader(resourcesStream))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
+        }
+
+        public virtual void InjectResources(string outputPath, string projectPath)
         {
             this.Log.Info("Injecting resources...");
 
@@ -56,21 +67,23 @@ namespace Bridge.Translator
                 return;
             }
 
-            if ((files == null || files.Count == 0)
+            var outputs = this.Outputs;
+
+            if (outputs.Main.Count <= 0
                 && !resourcesConfig.HasEmbedResources())
             {
                 this.Log.Info("No files nor resources to inject");
                 return;
             }
 
-            var resourcesToEmbed = this.PrepareAndExtractResources(outputPath, projectPath, files);
+            var resourcesToEmbed = this.PrepareAndExtractResources(outputPath, projectPath);
 
             this.EmbeddResources(resourcesToEmbed);
 
             this.Log.Info("Done injecting resources");
         }
 
-        private Dictionary<BridgeResourceInfo, byte[]> PrepareAndExtractResources(string outputPath, string projectPath, Dictionary<string, string> files)
+        private Dictionary<BridgeResourceInfo, byte[]> PrepareAndExtractResources(string outputPath, string projectPath)
         {
             var resourcesToEmbed = new Dictionary<BridgeResourceInfo, byte[]>();
 

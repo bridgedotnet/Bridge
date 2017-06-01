@@ -125,7 +125,7 @@ namespace Bridge.Translator
             protected set;
         }
 
-        public Dictionary<string, string> Outputs
+        public TranslatorOutput Outputs
         {
             get;
             protected set;

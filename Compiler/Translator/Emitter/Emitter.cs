@@ -43,7 +43,7 @@ namespace Bridge.Translator
             this.ClassNameRuleCache = new Dictionary<ITypeDefinition, NameRule[]>();
         }
 
-        public virtual Dictionary<string, string> Emit()
+        public virtual List<TranslatorOutputItem> Emit()
         {
             this.Log.Info("Emitting...");
 

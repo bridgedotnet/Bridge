@@ -63,7 +63,7 @@ namespace Bridge.Translator
             }
         }
 
-        protected virtual Dictionary<string, string> TransformOutputs()
+        protected virtual List<TranslatorOutputItem> TransformOutputs()
         {
             this.Log.Info("Transforming outputs...");
 
@@ -76,11 +76,11 @@ namespace Bridge.Translator
             return outputs;
         }
 
-        protected virtual Dictionary<string, string> CombineOutputs()
+        protected virtual List<TranslatorOutputItem> CombineOutputs()
         {
             this.Log.Trace("Combining outputs...");
 
-            var result = new Dictionary<string, string>();
+            var result = new List<TranslatorOutputItem>();
 
             var disableAsm = this.AssemblyInfo.Assembly.DisableInitAssembly;
 
@@ -105,7 +105,7 @@ namespace Bridge.Translator
 
                 OutputBottom(output, tmp);
 
-                result.Add(fileName, tmp.ToString());
+                Emitter.AddOutputItem(result, fileName, tmp, null);
             }
 
             this.Log.Trace("Combining outputs done");
