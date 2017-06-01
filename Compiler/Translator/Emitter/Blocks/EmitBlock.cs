@@ -606,7 +606,7 @@ namespace Bridge.Translator
                 var type = bridgeType.Value.Type;
                 var typeDef = type.GetDefinition();
                 //var thisAssembly = bridgeType.Value.TypeInfo != null;
-                var thisAssembly = bridgeType.Value.TypeDefinition.Module.Assembly.Equals(thisAssemblyDef);
+                var thisAssembly = bridgeType.Value.TypeDefinition?.Module.Assembly.Equals(thisAssemblyDef) ?? false;
                 if (enable.HasValue && enable.Value && !hasSettings && thisAssembly)
                 {
                     result = true;
