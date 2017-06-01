@@ -293,7 +293,13 @@ namespace Bridge.Translator
                             return true;
                         }
                     }
-                }
+
+                    var awaiterMethod2 = rr.GetAwaiterInvocation as DynamicInvocationResolveResult;
+                    if (!(unaryExpr.Parent.Role is ICSharpCode.NRefactory.Role<ICSharpCode.NRefactory.CSharp.Statement>))
+                    {                        
+                        return true;
+                    }
+                }                
             }
 
             return false;
