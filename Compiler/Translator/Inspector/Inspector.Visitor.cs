@@ -491,6 +491,26 @@ namespace Bridge.Translator
             {
                 Expression initializer = this.GetDefaultFieldInitializer(propertyDeclaration.ReturnType);
                 TypeConfigInfo info = isStatic ? this.CurrentType.StaticConfig : this.CurrentType.InstanceConfig;
+
+                bool autoPropertyToField = false;
+                if (rr != null && rr.Member != null && Helpers.IsAutoProperty((IProperty)rr.Member))
+                {
+                    autoPropertyToField = this.HasFieldAttribute(rr.Member);
+
+                    if (!autoPropertyToField && rr.Member.ImplementedInterfaceMembers.Count > 0)
+                    {
+                        foreach (var interfaceMember in rr.Member.ImplementedInterfaceMembers)
+                        {
+                            autoPropertyToField = this.HasFieldAttribute(interfaceMember, false);
+
+                            if (autoPropertyToField)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+
                 var autoInitializer = info.AutoPropertyInitializers.FirstOrDefault(f => f.Name == key);
 
                 if (autoInitializer != null)
@@ -498,13 +518,76 @@ namespace Bridge.Translator
                     initializer = autoInitializer.Initializer;
                 }
 
-                info.Properties.Add(new TypeConfigItem
+                if (!autoPropertyToField)
                 {
-                    Name = key,
-                    Entity = propertyDeclaration,
-                    Initializer = initializer,
-                    IsPropertyInitializer = autoInitializer != null
-                });
+                    info.Properties.Add(new TypeConfigItem
+                    {
+                        Name = key,
+                        Entity = propertyDeclaration,
+                        Initializer = initializer,
+                        IsPropertyInitializer = autoInitializer != null
+                    });
+                }
+                else
+                {
+                    info.Fields.Add(new TypeConfigItem
+                    {
+                        Name = key,
+                        Entity = propertyDeclaration,
+                        Initializer = initializer
+                    });
+                }
+            }
+        }
+
+        private bool HasFieldAttribute(IMember member, bool checkAssembly = true)
+        {
+            var fieldAttributeName = "Bridge.FieldAttribute";
+            var autoPropertyToField = member.Attributes.Any(a => a.AttributeType.FullName == fieldAttributeName);
+
+            if (!autoPropertyToField)
+            {
+                autoPropertyToField = member.DeclaringTypeDefinition.Attributes.Any(a => a.AttributeType.FullName == fieldAttributeName);
+            }
+
+            if (!autoPropertyToField && checkAssembly)
+            {
+                autoPropertyToField = member.DeclaringTypeDefinition.ParentAssembly.AssemblyAttributes.Any(a => a.AttributeType.FullName == fieldAttributeName);
+            }
+
+            return autoPropertyToField;
+        }
+
+        private void CheckFieldProperty(PropertyDeclaration propertyDeclaration, MemberResolveResult resolvedProperty)
+        {
+            if (this.HasExternal(propertyDeclaration) || this.CurrentType.IsObjectLiteral)
+            {
+                return;
+            }
+
+            if (resolvedProperty != null && resolvedProperty.Member != null)
+            {
+                var possiblyWrongGetter = !propertyDeclaration.Getter.IsNull
+                        && !propertyDeclaration.Getter.Body.IsNull
+                        && !this.HasTemplate(propertyDeclaration.Getter)
+                        && !this.HasScript(propertyDeclaration.Getter);
+
+                var possiblyWrongSetter = !propertyDeclaration.Setter.IsNull
+                    && !propertyDeclaration.Setter.Body.IsNull
+                    && !this.HasTemplate(propertyDeclaration.Setter)
+                    && !this.HasScript(propertyDeclaration.Setter);
+
+                if (possiblyWrongGetter || possiblyWrongSetter)
+                {
+                    var message = string.Format(
+                            "{0} is marked with [Field] attribute but implements {1}{2}. To fix the problem either remove [Field] or add [External]/[Template] attributes",
+                            resolvedProperty.Member.ToString(),
+                            possiblyWrongGetter ? "getter" : string.Empty,
+                            possiblyWrongSetter ? (possiblyWrongGetter ? " and " : string.Empty) + "setter" : string.Empty
+                        );
+
+                    throw new EmitterException(propertyDeclaration, message);
+                }
             }
         }
 
