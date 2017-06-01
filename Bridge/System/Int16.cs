@@ -4,6 +4,7 @@ namespace System
 {
     [External]
     [Constructor("Number")]
+    [Reflectable]
 #pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
     public struct Int16 : IComparable, IComparable<Int16>, IEquatable<Int16>, IFormattable
     {

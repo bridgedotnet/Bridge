@@ -114,6 +114,14 @@
       "files": [
         "Resources/.typescript/bridge.d.ts"
       ]
+    },
+    {
+      "name": "bridge.meta.js",
+      "header": "Resources/.auxiliary/header.js",
+      "extract": false,
+      "files": [
+        "Resources/.generated/bridge.meta.js"
+      ]
     }
   ]
 }

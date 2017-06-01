@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 namespace System
 {
     [External]
+    [Reflectable]
     public class AggregateException : Exception
     {
         public extern AggregateException();

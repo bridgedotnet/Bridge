@@ -3,8 +3,7 @@ using Bridge;
 namespace System
 {
     [External]
-    //[Name("System.UInt64")]
-    //[Constructor("System.UInt64")]
+    [Reflectable]
     public struct UInt64 : IComparable, IComparable<UInt64>, IEquatable<UInt64>, IFormattable
     {
         private extern UInt64(int i);

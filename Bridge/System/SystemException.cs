@@ -3,6 +3,7 @@
 namespace System
 {
     [External]
+    [Reflectable]
     public class SystemException : Exception, IBridgeClass
     {
         public extern SystemException();

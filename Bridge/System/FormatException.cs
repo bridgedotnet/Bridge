@@ -3,6 +3,7 @@ using Bridge;
 namespace System
 {
     [External]
+    [Reflectable]
     public class FormatException : Exception, IBridgeClass
     {
         public extern FormatException();

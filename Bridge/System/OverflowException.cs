@@ -3,6 +3,7 @@ using Bridge;
 namespace System
 {
     [External]
+    [Reflectable]
     public class OverflowException : ArithmeticException, IBridgeClass
     {
         public extern OverflowException();

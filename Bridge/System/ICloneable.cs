@@ -4,6 +4,7 @@ namespace System
 {
     [External]
     [Convention(Target = ConventionTarget.Member, Member = ConventionMember.Method, Notation = Notation.LowerCamelCase)]
+    [Reflectable]
     public interface ICloneable : IBridgeClass
     {
         [Template("Bridge.clone({this})")]

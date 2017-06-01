@@ -6,6 +6,7 @@ namespace System.Text.RegularExpressions
     /// Represents the results from a single successful subexpression capture.
     /// </summary>
     [External]
+    [Reflectable]
     public class Capture
     {
         internal extern Capture(string text, int i, int l);

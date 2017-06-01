@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 namespace System
 {
     [External]
+    [Reflectable]
     public struct Boolean : IComparable, IComparable<bool>, IEquatable<bool>
     {
         [InlineConst]

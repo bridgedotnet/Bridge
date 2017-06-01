@@ -3,6 +3,7 @@ using Bridge;
 namespace System.Threading
 {
     [External]
+    [Reflectable]
     public class CancellationTokenSource : IDisposable
     {
         public extern CancellationTokenSource();

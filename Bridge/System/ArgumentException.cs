@@ -3,6 +3,7 @@ using Bridge;
 namespace System
 {
     [External]
+    [Reflectable]
     public class ArgumentException : Exception, IBridgeClass
     {
         public extern ArgumentException();

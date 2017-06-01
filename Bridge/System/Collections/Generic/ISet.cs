@@ -8,6 +8,7 @@ namespace System.Collections.Generic
     /// Complement and Exclusive Complement.
     /// </summary>
     [External]
+    [Reflectable]
     [Convention(Target = ConventionTarget.Member, Member = ConventionMember.Method, Notation = Notation.LowerCamelCase)]
     public interface ISet<T> : ICollection<T>
     {

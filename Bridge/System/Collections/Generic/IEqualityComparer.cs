@@ -3,6 +3,7 @@ using Bridge;
 namespace System.Collections.Generic
 {
     [External]
+    [Reflectable]
     [Convention(Target = ConventionTarget.Member, Member = ConventionMember.Method, Notation = Notation.LowerCamelCase)]
     public interface IEqualityComparer<in T> : IBridgeClass
     {
@@ -14,6 +15,7 @@ namespace System.Collections.Generic
     }
 
     [External]
+    [Reflectable]
     public abstract class EqualityComparer<T> : IEqualityComparer<T>, IBridgeClass
     {
         public static EqualityComparer<T> Default

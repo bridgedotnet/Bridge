@@ -393,8 +393,21 @@ namespace Bridge.Translator
             var lastOutput = this.Emitter.Output;
             var output = this.Emitter.AssemblyInfo.Reflection.Output;
 
-            if (!string.IsNullOrEmpty(output))
+            if (this.Emitter.AssemblyInfo.Reflection.Target == MetadataTarget.File)
             {
+                if (string.IsNullOrEmpty(output))
+                {
+                    if (!string.IsNullOrWhiteSpace(this.Emitter.AssemblyInfo.FileName) &&
+                        this.Emitter.AssemblyInfo.FileName != AssemblyInfo.DEFAULT_FILENAME)
+                    {
+                        output = System.IO.Path.GetFileNameWithoutExtension(this.Emitter.AssemblyInfo.FileName) + ".meta.js";
+                    }
+                    else
+                    {
+                        output = this.Emitter.Translator.ProjectProperties.AssemblyName + ".meta.js";
+                    }
+                }
+
                 this.Emitter.Output = this.GetOutputForType(null, output);
                 this.Emitter.MetaDataOutputName = this.Emitter.EmitterOutput.FileName;
             }
@@ -513,12 +526,53 @@ namespace Bridge.Translator
             }
         }
 
+        private bool SkipFromReflection(ITypeDefinition typeDef, BridgeType bridgeType)
+        {
+            var isObjectLiteral = this.Emitter.Validator.IsObjectLiteral(typeDef);
+            var isPlainMode = isObjectLiteral && this.Emitter.Validator.GetObjectCreateMode(bridgeType.TypeDefinition) == 0;
+
+            if (isPlainMode)
+            {
+                return true;
+            }
+
+            var skip = typeDef.Attributes.Any(a =>
+                    a.AttributeType.FullName == "Bridge.GlobalMethodsAttribute" ||
+                    a.AttributeType.FullName == "Bridge.NonScriptableAttribute" ||
+                    a.AttributeType.FullName == "Bridge.MixinAttribute");
+
+            if (!skip && typeDef.FullName != "System.Object")
+            {
+                var name = BridgeTypes.ToJsName(typeDef, this.Emitter);
+
+                if (name == "Object" || name == "System.Object" || name == "Function")
+                {
+                    return true;
+                }
+            }
+
+            return skip;
+        }
+
         public IType[] GetReflectableTypes()
         {
             var config = this.Emitter.AssemblyInfo.Reflection;
             var configInternal = ((AssemblyInfo)this.Emitter.AssemblyInfo).ReflectionInternal;
+            //bool? enable = config.Disabled.HasValue ? !config.Disabled : (configInternal.Disabled.HasValue ? !configInternal.Disabled : true);
+            bool? enable = null;
+            if (config.Disabled.HasValue && !config.Disabled.Value)
+            {
+                enable = true;
+            }
+            else if (configInternal.Disabled.HasValue)
+            {
+                enable = !configInternal.Disabled.Value;
+            }
+            else if(!config.Disabled.HasValue)
+            {
+                enable = true;
+            }
 
-            bool? enable = config.Enabled.HasValue ? config.Enabled : (configInternal.Enabled.HasValue ? configInternal.Enabled : null);
             TypeAccessibility? typeAccessibility = config.TypeAccessibility.HasValue ? config.TypeAccessibility : (configInternal.TypeAccessibility.HasValue ? configInternal.TypeAccessibility : null);
             string filter = !string.IsNullOrEmpty(config.Filter) ? config.Filter : (!string.IsNullOrEmpty(configInternal.Filter) ? configInternal.Filter : null);
 
@@ -545,44 +599,22 @@ namespace Bridge.Translator
             }
 
             List<IType> reflectTypes = new List<IType>();
-
+            var thisAssemblyDef = this.Emitter.Translator.AssemblyDefinition;
             foreach (var bridgeType in this.Emitter.BridgeTypes)
             {
                 var result = false;
                 var type = bridgeType.Value.Type;
-                var thisAssembly = bridgeType.Value.TypeInfo != null;
-
+                var typeDef = type.GetDefinition();
+                //var thisAssembly = bridgeType.Value.TypeInfo != null;
+                var thisAssembly = bridgeType.Value.TypeDefinition.Module.Assembly.Equals(thisAssemblyDef);
                 if (enable.HasValue && enable.Value && !hasSettings && thisAssembly)
                 {
                     result = true;
                 }
-
-                var typeDef = type.GetDefinition();
-
+                
                 if (typeDef != null)
                 {
-                    var isObjectLiteral = this.Emitter.Validator.IsObjectLiteral(typeDef);
-                    var isPlainMode = isObjectLiteral && this.Emitter.Validator.GetObjectCreateMode(bridgeType.Value.TypeDefinition) == 0;
-
-                    if (isPlainMode)
-                    {
-                        continue;
-                    }
-
-                    var skip = typeDef.Attributes.Any(a =>
-                            a.AttributeType.FullName == "Bridge.GlobalMethodsAttribute" ||
-                            a.AttributeType.FullName == "Bridge.NonScriptableAttribute" ||
-                            a.AttributeType.FullName == "Bridge.MixinAttribute");
-
-                    if (!skip && typeDef.FullName != "System.Object")
-                    {
-                        var name = BridgeTypes.ToJsName(typeDef, this.Emitter);
-
-                        if (name == "Object")
-                        {
-                            skip = true;
-                        }
-                    }
+                    var skip = this.SkipFromReflection(typeDef, bridgeType.Value);
 
                     if (skip)
                     {
@@ -620,18 +652,24 @@ namespace Bridge.Translator
                             if (thisAssembly)
                             {
                                 reflectTypes.Add(type);
+                                continue;
+                            }
+                        }
+                        else
+                        {
+                            var value = attr.PositionalArguments.First().ConstantValue;
+
+                            if ((!(value is bool) || (bool)value) && thisAssembly)
+                            {
+                                reflectTypes.Add(type);
                             }
 
                             continue;
                         }
+                    }
 
-                        var value = attr.PositionalArguments.First().ConstantValue;
-
-                        if ((!(value is bool) || (bool)value) && thisAssembly)
-                        {
-                            reflectTypes.Add(type);
-                        }
-
+                    if (this.Emitter.Validator.IsExternalType(typeDef) && attr == null)
+                    {
                         continue;
                     }
                 }

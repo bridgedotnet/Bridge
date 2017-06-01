@@ -6,6 +6,7 @@ namespace System.Text.RegularExpressions
     /// Represents the results from a single capturing group.
     /// </summary>
     [External]
+    [Reflectable]
     public class Group : Capture
     {
         internal extern Group(string text, int[] caps, int capcount);

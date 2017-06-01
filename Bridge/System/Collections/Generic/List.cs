@@ -3,6 +3,7 @@ using Bridge;
 namespace System.Collections.Generic
 {
     [External]
+    [Reflectable]
     public class List<T> : IList<T>, IList, IReadOnlyList<T>, IBridgeClass
     {
         public extern List();

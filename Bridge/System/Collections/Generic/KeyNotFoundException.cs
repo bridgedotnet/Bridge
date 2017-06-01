@@ -3,6 +3,7 @@ using Bridge;
 namespace System.Collections.Generic
 {
     [External]
+    [Reflectable]
     public class KeyNotFoundException : Exception, IBridgeClass
     {
         public extern KeyNotFoundException();

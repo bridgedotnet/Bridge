@@ -3,6 +3,7 @@ using Bridge;
 namespace System.Collections.Generic
 {
     [External]
+    [Reflectable]
     [Convention(Target = ConventionTarget.Member, Member = ConventionMember.Method, Notation = Notation.LowerCamelCase)]
     public interface IReadOnlyCollection<T> : IEnumerable<T>
     {
@@ -14,6 +15,7 @@ namespace System.Collections.Generic
     }
 
     [External]
+    [Reflectable]
     [Convention(Target = ConventionTarget.Member, Member = ConventionMember.Method, Notation = Notation.LowerCamelCase)]
     public interface IReadOnlyList<T> : IReadOnlyCollection<T>
     {

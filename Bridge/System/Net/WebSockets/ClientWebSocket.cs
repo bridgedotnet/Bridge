@@ -8,6 +8,7 @@ namespace System.Net.WebSockets
     /// Provides a client for connecting to WebSocket services.
     /// </summary>
     [External]
+    [Reflectable]
     public class ClientWebSocket : IBridgeClass, IDisposable
     {
         /// <summary>

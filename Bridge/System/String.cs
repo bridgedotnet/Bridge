@@ -11,6 +11,7 @@ namespace System
     /// </summary>
     [External]
     [Constructor("String")]
+    [Reflectable]
     public sealed class String : IEnumerable, ICloneable, IEnumerable<char>, IComparable<String>, IEquatable<String>
     {
         /// <summary>

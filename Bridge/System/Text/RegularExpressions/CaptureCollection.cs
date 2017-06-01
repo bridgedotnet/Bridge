@@ -7,6 +7,7 @@ namespace System.Text.RegularExpressions
     /// Represents the set of captures made by a single capturing group.
     /// </summary>
     [External]
+    [Reflectable]
     public class CaptureCollection : ICollection
     {
         internal extern CaptureCollection();

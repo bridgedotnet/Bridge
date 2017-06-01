@@ -3,7 +3,7 @@ using Bridge;
 namespace System
 {
     [External]
-    //[Name("System.Single")]
+    [Reflectable]
     [Constructor("Number")]
     public struct Single : IComparable, IComparable<Single>, IEquatable<Single>, IFormattable
     {

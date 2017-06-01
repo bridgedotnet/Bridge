@@ -4,6 +4,7 @@ using System.Collections.Generic;
 namespace System.Collections.ObjectModel
 {
     [External]
+    [Reflectable]
     public class ReadOnlyCollection<T> : IList<T>, IReadOnlyList<T>
     {
         public extern ReadOnlyCollection(IList<T> list);

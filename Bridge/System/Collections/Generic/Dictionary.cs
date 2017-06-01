@@ -3,6 +3,7 @@ using Bridge;
 namespace System.Collections.Generic
 {
     [External]
+    [Reflectable]
     public class Dictionary<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary,
         IReadOnlyDictionary<TKey, TValue>, IReadOnlyCollection<KeyValuePair<TKey, TValue>>, IBridgeClass
     {

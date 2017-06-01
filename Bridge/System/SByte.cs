@@ -3,7 +3,7 @@ using Bridge;
 namespace System
 {
     [External]
-    //[Name("System.SByte")]
+    [Reflectable]
     [Constructor("Number")]
 #pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
     public struct SByte : IComparable, IComparable<SByte>, IEquatable<SByte>, IFormattable

@@ -35,7 +35,7 @@ namespace Bridge.Translator.Tests
                 {
                     Reflection = new ReflectionConfig()
                     {
-                        Enabled = configEnabled,
+                        Disabled = !configEnabled,
                         TypeAccessibility = typeAccessibility
                     }
                 }

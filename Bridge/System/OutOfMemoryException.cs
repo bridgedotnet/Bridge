@@ -3,6 +3,7 @@
 namespace System
 {
     [External]
+    [Reflectable]
     public class OutOfMemoryException : SystemException, IBridgeClass
     {
         public extern OutOfMemoryException();

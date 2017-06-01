@@ -7,6 +7,7 @@ namespace System.Text.RegularExpressions
     /// Returns the set of captured groups in a single match.
     /// </summary>
     [External]
+    [Reflectable]
     public class GroupCollection : ICollection
     {
         internal extern GroupCollection();

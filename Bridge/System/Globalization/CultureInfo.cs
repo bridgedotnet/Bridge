@@ -3,6 +3,7 @@ using Bridge;
 namespace System.Globalization
 {
     [External]
+    [Reflectable]
     public sealed class CultureInfo : IFormatProvider, ICloneable, IBridgeClass
     {
         public extern CultureInfo(string name);

@@ -8,6 +8,7 @@ namespace System
     [External]
     [IgnoreGeneric]
     [Name("System.ArraySegment")]
+    [Reflectable]
     public class ArraySegment<T>
     {
         public extern ArraySegment(T[] array);

@@ -3,6 +3,7 @@ using Bridge;
 namespace System.Threading
 {
     [External]
+    [Reflectable]
     public struct CancellationTokenRegistration : IEquatable<CancellationTokenRegistration>, IDisposable
     {
         public extern bool Equals(CancellationTokenRegistration other);

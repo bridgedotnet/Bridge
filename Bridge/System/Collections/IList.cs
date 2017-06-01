@@ -4,6 +4,7 @@ namespace System.Collections
 {
     [External]
     [Convention(Target = ConventionTarget.Member, Member = ConventionMember.Method, Notation = Notation.LowerCamelCase)]
+    [Reflectable]
     public interface IList : ICollection, IEnumerable
     {
         [Template("System.Array.add({this}, {item})")]

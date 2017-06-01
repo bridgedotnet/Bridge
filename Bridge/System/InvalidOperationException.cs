@@ -3,6 +3,7 @@ using Bridge;
 namespace System
 {
     [External]
+    [Reflectable]
     public class InvalidOperationException : Exception, IBridgeClass
     {
         public extern InvalidOperationException();

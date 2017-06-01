@@ -4,13 +4,20 @@
   "outputBy": "Namespace",
   "generateTypeScript": "true",
   "outputFormatting": "Formatted",
+  "reflection": {
+    "disabled": true,
+    "target":  "Inline" 
+  },
   "resources": [
     {
       "name": "bridge.js",
       "extract": false
     }, {
+      "name": "bridge.meta.js",
+      "extract": false
+    }, {
       "name": "bridge.console.js",
       "extract": false
-    },
+    }
   ]
 }

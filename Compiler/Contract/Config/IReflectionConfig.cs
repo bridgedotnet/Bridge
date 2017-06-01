@@ -5,7 +5,7 @@ namespace Bridge.Contract
 {
     public interface IReflectionConfig
     {
-        bool? Enabled
+        bool? Disabled
         {
             get; set;
         }
@@ -31,5 +31,16 @@ namespace Bridge.Contract
         {
             get; set;
         }
+
+        MetadataTarget Target
+        {
+            get; set;
+        }
+    }
+
+    public enum MetadataTarget
+    {
+        File,
+        Inline      
     }
 }
