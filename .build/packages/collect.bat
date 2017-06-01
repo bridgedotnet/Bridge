@@ -54,9 +54,6 @@ echo f | xcopy /f /y "%root%Frameworks\AngularJS\bin\%build%\*.nupkg"           
 :: Bridge.Bootstrap3
 echo f | xcopy /f /y "%root%Frameworks\Bootstrap3\bin\%build%\*.nupkg"              %output%
 
-:: Bridge.Collections
-echo f | xcopy /f /y "%root%Frameworks\Collections\bin\%build%\*.nupkg"             %output%
-
 :: Bridge.Html5.Console
 echo f | xcopy /f /y "%root%Frameworks\Html5.Console\bin\%build%\*.nupkg"           %output%
 

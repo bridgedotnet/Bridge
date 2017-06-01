@@ -47,6 +47,8 @@
   <ItemGroup>
     <Compile Include="BitConverterTests.cs" />
     <Compile Include="BasicCSharp\TestGoto.cs" />
+    <Compile Include="Collections\Generic\QueueTests.cs" />
+    <Compile Include="Collections\Generic\StackTests.cs" />
     <Compile Include="SystemConsoleTests.cs" />
     <Compile Include="Collections\Generic\IReadOnlyCollectionTests.cs" />
     <Compile Include="Collections\Generic\IReadOnlyDictionaryTests.cs" />
