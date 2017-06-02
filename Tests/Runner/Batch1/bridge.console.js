@@ -112,7 +112,7 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                         self.consoleMessages.appendChild(m);
                         self.currentMessageElement = m;
                     } else {
-                        var m1 = self.currentMessageElement;
+                        var m1 = Bridge.unbox(self.currentMessageElement);
                         m1.lastChild.innerHTML = System.String.concat(m1.lastChild.innerHTML, v);
                     }
 

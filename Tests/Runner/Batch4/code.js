@@ -97,7 +97,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             },
             CreateInstanceWithNoArgumentsWorksForClassWithInlineCodeDefaultConstructor_SPI_1545: function () {
                 var c1 = Bridge.createInstance(Bridge.ClientTest.Batch4.ActivatorTests.C5);
-                var c2 = Bridge.createInstance(Bridge.ClientTest.Batch4.ActivatorTests.C5);
+                var c2 = Bridge.unbox(Bridge.createInstance(Bridge.ClientTest.Batch4.ActivatorTests.C5));
                 var c3 = this.Instantiate(Bridge.ClientTest.Batch4.ActivatorTests.C5);
 
                 // #1545
