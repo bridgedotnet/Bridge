@@ -12693,7 +12693,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 var argsArr = System.Array.init(["c", "d"], System.Object);
                 var c = new Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C8("X");
                 Bridge.Test.NUnit.Assert.AreEqual$1("X a b", Bridge.unbox(Bridge.Reflection.midel(m, c)("a", "b")), "Invoke with target should work");
-                Bridge.Test.NUnit.Assert.AreEqual$1("X c d", Bridge.unbox(Bridge.Reflection.midel(m, c).apply(null, argsArr)), "Invoke (non-expanded) with target should work");
+                Bridge.Test.NUnit.Assert.AreEqual$1("X c d", Bridge.unbox(Bridge.Reflection.midel(m, c).apply(null, Bridge.unbox(argsArr))), "Invoke (non-expanded) with target should work");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
                     Bridge.Reflection.midel(m, null)("a", "b");
                 }, "Invoke without target should throw");
@@ -12735,7 +12735,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 var argsArr = System.Array.init(["x"], System.Object);
                 var c = new Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C8("X");
                 Bridge.Test.NUnit.Assert.AreEqual$1("X System.Int32 System.String a", Bridge.unbox(Bridge.Reflection.midel(m, c, System.Array.init([System.Int32, System.String], Function))("a")), "Result of invoking delegate should be correct");
-                Bridge.Test.NUnit.Assert.AreEqual$1("X System.Int32 System.String x", Bridge.unbox(Bridge.Reflection.midel(m, c, System.Array.init([System.Int32, System.String], Function)).apply(null, argsArr)), "Result of invoking delegate should be correct");
+                Bridge.Test.NUnit.Assert.AreEqual$1("X System.Int32 System.String x", Bridge.unbox(Bridge.Reflection.midel(m, c, System.Array.init([System.Int32, System.String], Function)).apply(null, Bridge.unbox(argsArr))), "Result of invoking delegate should be correct");
                 Bridge.Test.NUnit.Assert.Throws$5(function () {
                     Bridge.Reflection.midel(m, null, System.Array.init([System.Int32, System.String], Function))("a");
                 }, "Null target with correct type arguments should throw");

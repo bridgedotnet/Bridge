@@ -289,6 +289,17 @@ namespace Bridge.Translator
             return false;
         }
 
+        private static bool IsUnpackArrayObject(IType type)
+        {
+            if (type is TypeWithElementType)
+            {
+                var elementType = ((TypeWithElementType)type).ElementType;
+                return elementType.IsKnownType(KnownTypeCode.Object);
+            }
+
+            return false;
+        }
+
         private static int DoConversion(ConversionBlock block, Expression expression, Conversion conversion, IType expectedType,
             int level, ResolveResult rr, bool ignoreConversionResolveResult = false, bool ignoreBoxing = false)
         {
@@ -430,7 +441,7 @@ namespace Bridge.Translator
                     }
                 }
 
-                if (conversion.IsUnboxingConversion || isArgument && expectedType.IsKnownType(KnownTypeCode.Object) && (rr.Type.IsKnownType(KnownTypeCode.Object) || ConversionBlock.IsUnpackGenericInterfaceObject(rr.Type) || ConversionBlock.IsUnpackGenericArrayInterfaceObject(rr.Type)))
+                if (conversion.IsUnboxingConversion || isArgument && (expectedType.IsKnownType(KnownTypeCode.Object) || ConversionBlock.IsUnpackArrayObject(expectedType)) && (rr.Type.IsKnownType(KnownTypeCode.Object) || ConversionBlock.IsUnpackGenericInterfaceObject(rr.Type) || ConversionBlock.IsUnpackGenericArrayInterfaceObject(rr.Type)))
                 {
                     block.Write(JS.Types.Bridge.UNBOX);
                     block.WriteOpenParentheses();
