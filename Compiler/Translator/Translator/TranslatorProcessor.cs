@@ -101,13 +101,13 @@ namespace Bridge.Translator
 
             var fileName = GetDefaultFileName(bridgeOptions);
 
-            var files = translator.SaveTo(outputPath, fileName);
+            translator.Minify();
+            translator.Combine(fileName);
+            translator.Save(outputPath, fileName);
 
-            translator.InjectResources(outputPath, projectPath, files);
+            translator.InjectResources(outputPath, projectPath);
 
             translator.RunAfterBuild();
-
-            translator.Flush(outputPath, fileName);
 
             logger.Info("Run plugins AfterOutput...");
             translator.Plugins.AfterOutput(translator, outputPath, !bridgeOptions.ExtractCore);

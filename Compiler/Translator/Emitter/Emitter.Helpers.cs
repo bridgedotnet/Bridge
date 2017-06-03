@@ -651,11 +651,6 @@ namespace Bridge.Translator
 
             var outputType = fileHelper.GetOutputType(fileName);
 
-            if (outputType != TranslatorOutputTypes.JavaScript || outputType != TranslatorOutputTypes.StyleSheets)
-            {
-                return false;
-            }
-
             TranslatorOutputItem output = null;
 
             bool isMinJs = fileHelper.IsMinJS(fileName);

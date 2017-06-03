@@ -22,11 +22,12 @@ namespace Bridge.Translator
         public const string BridgeResourcesPlusSeparatedFormatList = "Bridge.Resources.list";
         public const string BridgeResourcesJsonFormatList = "Bridge.Resources.json";
         public const string LocalesPrefix = "Bridge.Resources.Locales.";
+        public const string DefaultLocalesOutputName = "Bridge.Locales.js";
         public const string SupportedProjectType = "Library";
         public const string DefaultRootNamespace = "ClassLibrary";
         public const string SystemAssemblyName = "mscorlib";
 
-        private static readonly Encoding OutputEncoding = new UTF8Encoding(false);
+        public static readonly Encoding OutputEncoding = new UTF8Encoding(false);
         private static readonly string[] MinifierCodeSettingsInternalFileNames = new string[] { "bridge.js", "bridge.min.js", "bridge.collections.js", "bridge.collections.min.js" };
 
         private char[] invalidPathChars;
@@ -45,9 +46,6 @@ namespace Bridge.Translator
             }
         }
 
-        private StringBuilder jsbuffer;
-        private StringBuilder jsminbuffer;
-        private List<string> removeList;
         public FileHelper FileHelper
         {
             get; private set;
@@ -79,6 +77,7 @@ namespace Bridge.Translator
             this.DefineConstants = new List<string>() { "BRIDGE" };
             this.ProjectProperties = new ProjectProperties();
             this.FileHelper = new FileHelper();
+            this.Outputs = new TranslatorOutput();
         }
 
         public Translator(string location, string source, bool fromTask = false) : this(location)
@@ -174,6 +173,8 @@ namespace Bridge.Translator
             logger.Info("Before emitting...");
             this.Plugins.BeforeEmit(emitter, this);
             logger.Info("Before emitting done");
+
+            System.Diagnostics.Debugger.Launch();
 
             this.AddMainOutputs(emitter.Emit());
             this.EmitterOutputs = emitter.Outputs;
@@ -355,19 +356,15 @@ namespace Bridge.Translator
             sb.Write(nl, 0, nl.Length);
         }
 
-        public virtual Dictionary<string, string> SaveTo(string path, string defaultFileName)
+        public virtual void Save(string path, string defaultFileName)
         {
             var logger = this.Log;
-            logger.Info("Starts SaveTo path = " + path);
+            logger.Info("Starts Save path = " + path);
 
-            var minifier = new Minifier();
-            var files = new Dictionary<string, string>();
-            foreach (var item in this.Outputs)
+            foreach (var item in this.Outputs.GetAllOutputs())
             {
-                string fileName = item.Key;
-                logger.Trace("Output " + item.Key);
-
-                string code = item.Value;
+                string fileName = item.Name;
+                logger.Trace("Output " + fileName);
 
                 if (fileName.Contains(Bridge.Translator.AssemblyInfo.DEFAULT_FILENAME))
                 {
@@ -398,57 +395,53 @@ namespace Bridge.Translator
                 string filePath = Path.Combine(path, fileName);
                 logger.Trace("Output file path changed to " + filePath);
 
-                bool isJs = FileHelper.IsJS(fileName);
+                var file = FileHelper.CreateFileDirectory(filePath);
+                logger.Trace("Output full name " + file.FullName);
 
-                // We can only have Beautified, Minified or Both, so this test has inverted logic:
-                // output beautified if not minified only == (output beautified or output both)
-                // Output anyway if the class is not a JavaScript file.
-                if (this.AssemblyInfo.OutputFormatting != JavaScriptOutputType.Minified || !isJs)
+                byte[] buffer = null;
+                string content = null;
+
+                if (item.OutputType == TranslatorOutputTypes.JavaScript)
                 {
-                    var file = CreateFileDirectory(filePath);
-                    logger.Trace("Output non-minified " + file.FullName);
+                    content = item.Content.GetContentAsString();
+                    this.SaveToFile(file.FullName, content);
 
-                    if (!this.AssemblyInfo.CombineScripts && isJs)
+                    var sourceMap = this.GenerateSourceMap(file.FullName, content);
+
+                    if (sourceMap != null)
                     {
-                        code = this.GenerateSourceMap(file.FullName, code);
+                        File.AppendAllText(file.FullName, Emitter.NEW_LINE, OutputEncoding);
+                        File.AppendAllText(file.FullName, sourceMap, OutputEncoding);
                     }
-
-                    this.SaveToFile(file.FullName, code);
-                    files.Add(fileName, file.FullName);
                 }
-
-                // Like above test: output minified if not beautified only == (out minified or out both)
-                // Output minified is allowed only and only if it is a JavaScript being output.
-                if (this.AssemblyInfo.OutputFormatting != JavaScriptOutputType.Formatted && isJs)
+                else
                 {
-                    var fileNameMin = FileHelper.GetMinifiedJSFileName(Path.GetFileName(filePath));
+                    buffer = item.Content.Buffer;
 
-                    var file = CreateFileDirectory(Path.GetDirectoryName(filePath), fileNameMin);
-                    logger.Trace("Output non-formatted " + file.FullName);
-
-                    var contentMinified = this.Minify(minifier, code, this.GetMinifierSettings(fileNameMin));
-
-                    if (!this.AssemblyInfo.CombineScripts)
+                    if (buffer != null)
                     {
-                        contentMinified = this.GenerateSourceMap(file.FullName, contentMinified);
+                        this.SaveToFile(file.FullName, null, buffer);
                     }
-
-                    this.SaveToFile(file.FullName, contentMinified);
+                    else
+                    {
+                        content = item.Content.GetContentAsString();
+                        this.SaveToFile(file.FullName, content);
+                    }
                 }
             }
 
-            logger.Info("Done SaveTo path = " + path);
-
-            return files;
+            logger.Info("Done Save path = " + path);
         }
 
         public string GenerateSourceMap(string fileName, string content, Action<SourceMapBuilder> before = null)
         {
+            string sourceMap = null;
+
             if (this.AssemblyInfo.SourceMap.Enabled)
             {
                 var projectPath = Path.GetDirectoryName(this.Location);
 
-                SourceMapGenerator.Generate(fileName, projectPath, ref content,
+                sourceMap = SourceMapGenerator.Generate(fileName, projectPath, content,
                     before,
                     (sourceRelativePath) =>
                     {
@@ -472,7 +465,8 @@ namespace Bridge.Translator
                     },
                     new string[0], this.SourceFiles, this.AssemblyInfo.SourceMap.Eol, this.Log);
             }
-            return content;
+
+            return sourceMap;
         }
 
         private static CSharpFormattingOptions GetFormatter()
@@ -535,67 +529,6 @@ namespace Bridge.Translator
             return new Validator();
         }
 
-        private string Minify(Minifier minifier, string source, CodeSettings settings)
-        {
-            this.Log.Trace("Minification...");
-
-            if (string.IsNullOrEmpty(source))
-            {
-                this.Log.Trace("Skip minification as input script is empty");
-                return source;
-            }
-
-            this.Log.Trace("Input script length is " + source.Length + " symbols...");
-
-            var contentMinified = minifier.MinifyJavaScript(source, settings);
-
-            this.Log.Trace("Output script length is " + contentMinified.Length + " symbols. Done.");
-
-            return contentMinified;
-        }
-
-        private CodeSettings GetMinifierSettings(string fileName)
-        {
-            //Different settings depending on whether a file is an internal Bridge (like bridge.js) or user project's file
-            if (MinifierCodeSettingsInternalFileNames.Contains(fileName.ToLower()))
-            {
-                this.Log.Trace("Will use MinifierCodeSettingsInternal for " + fileName);
-                return MinifierCodeSettingsInternal;
-            }
-
-            var settings = MinifierCodeSettingsSafe;
-            if (this.NoStrictMode)
-            {
-                settings = settings.Clone();
-                settings.StrictMode = false;
-
-                this.Log.Trace("Will use MinifierCodeSettingsSafe with no StrictMode");
-            }
-            else
-            {
-                this.Log.Trace("Will use MinifierCodeSettingsSafe");
-            }
-
-            return settings;
-        }
-
-        private static FileInfo CreateFileDirectory(string outputPath, string fileName)
-        {
-            return CreateFileDirectory(Path.Combine(outputPath, fileName));
-        }
-
-        private static FileInfo CreateFileDirectory(string path)
-        {
-            var file = new System.IO.FileInfo(path);
-
-            if (!file.Directory.Exists)
-            {
-                file.Directory.Create();
-            }
-
-            return file;
-        }
-
         public EmitterException CreateExceptionFromLastNode()
         {
             return this.EmitNode != null ? new EmitterException(this.EmitNode) : null;
@@ -606,57 +539,6 @@ namespace Bridge.Translator
             if (content != null && binary != null)
             {
                 this.Log.Error("Both content and binary are not null for " + fileName + ". Will use content.");
-            }
-
-            bool isJs = FileHelper.IsJS(fileName);
-
-            if (this.AssemblyInfo.CombineScripts && isJs)
-            {
-                this.Log.Trace("Combining scripts...");
-
-                if (content == null)
-                {
-                    throw new InvalidOperationException("Content should not be null for JavaScript output with CombineScripts option (" + fileName + ").");
-                }
-
-                bool isMinJs = FileHelper.IsMinJS(fileName);
-                StringBuilder buffer;
-
-                bool append = false;
-                if (isMinJs)
-                {
-                    if (this.jsminbuffer == null)
-                    {
-                        this.jsminbuffer = new StringBuilder();
-                    }
-                    buffer = this.jsminbuffer;
-                    append = true;
-                }
-                else
-                {
-                    if (this.jsbuffer == null)
-                    {
-                        this.jsbuffer = new StringBuilder();
-                    }
-                    buffer = this.jsbuffer;
-                }
-
-                if (append)
-                {
-                    buffer.Append(content);
-                }
-                else
-                {
-                    NewLine(buffer, content);
-                }
-
-                if (this.removeList == null)
-                {
-                    this.removeList = new List<string>();
-                }
-                this.removeList.Add(fileName);
-
-                this.Log.Trace("Combining scripts done");
             }
 
             if (content != null)
@@ -671,58 +553,6 @@ namespace Bridge.Translator
             }
 
             this.Log.Trace("Saved file " + fileName);
-        }
-
-        public void Flush(string path, string defaultFileName)
-        {
-            this.Log.Info("Running Flush...");
-
-            if (this.removeList != null)
-            {
-                foreach (var f in this.removeList)
-                {
-                    File.Delete(f);
-                }
-            }
-
-            if (!string.IsNullOrWhiteSpace(this.AssemblyInfo.FileName))
-            {
-                defaultFileName = this.AssemblyInfo.FileName;
-            }
-
-            if (!defaultFileName.EndsWith(Files.Extensions.JS))
-            {
-                defaultFileName = defaultFileName + Files.Extensions.JS;
-            }
-
-            var fileName = defaultFileName.Replace(":", "_");
-            var oldFNlen = fileName.Length;
-            while (Path.IsPathRooted(fileName))
-            {
-                fileName = fileName.TrimStart(Path.DirectorySeparatorChar, '/', '\\');
-                if (fileName.Length == oldFNlen)
-                {
-                    break;
-                }
-                oldFNlen = fileName.Length;
-            }
-
-            string filePath = Path.Combine(path, fileName);
-
-            if (this.jsbuffer != null && this.jsbuffer.Length > 0)
-            {
-                var code = this.GenerateSourceMap(filePath, this.jsbuffer.ToString());
-                File.WriteAllText(filePath, code, OutputEncoding);
-            }
-
-            if (this.jsminbuffer != null && this.jsminbuffer.Length > 0)
-            {
-                var filePathMin = FileHelper.GetMinifiedJSFileName(filePath);
-                var code = this.GenerateSourceMap(filePathMin, this.jsminbuffer.ToString());
-                File.WriteAllText(filePathMin, code, OutputEncoding);
-            }
-
-            this.Log.Info("Done running Flush");
         }
 
         public void CleanOutputFolderIfRequired(string outputPath)

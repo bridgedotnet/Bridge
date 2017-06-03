@@ -23,16 +23,83 @@ namespace Bridge.Contract
             get; private set;
         }
 
-        //public List<TranslatorOutputItem> GetItems(TranslatorOutputTypes outputType)
-        //{
-        //    var r = new List<TranslatorOutputItem>();
+        public TranslatorOutputItem Combined
+        {
+            get; set;
+        }
 
-        //    r.AddRange(this.References.Where(x => x.OutputType == outputType));
-        //    r.AddRange(this.Locales.Where(x => x.OutputType == outputType));
-        //    r.AddRange(this.Main.Where(x => x.OutputType == outputType));
+        public TranslatorOutputItem CombinedLocales
+        {
+            get; set;
+        }
 
-        //    return r;
-        //}
+        public IEnumerable<TranslatorOutputItem> GetAllOutputs()
+        {
+            if (Combined != null)
+            {
+                if (!Combined.IsEmpty)
+                {
+                    yield return Combined;
+                }
+
+                if (Combined.MinifiedVersion != null && !Combined.MinifiedVersion.IsEmpty)
+                {
+                    yield return Combined.MinifiedVersion;
+                }
+            }
+
+            foreach (var o in References)
+            {
+                if (!o.IsEmpty)
+                {
+                    yield return o;
+                }
+
+                if (o.MinifiedVersion != null && !o.MinifiedVersion.IsEmpty)
+                {
+                    yield return o.MinifiedVersion;
+                }
+            }
+
+            if (CombinedLocales != null)
+            {
+                if (!CombinedLocales.IsEmpty)
+                {
+                    yield return CombinedLocales;
+                }
+
+                if (CombinedLocales.MinifiedVersion != null && !CombinedLocales.MinifiedVersion.IsEmpty)
+                {
+                    yield return CombinedLocales.MinifiedVersion;
+                }
+            }
+
+            foreach (var o in Locales)
+            {
+                if (!o.IsEmpty)
+                {
+                    yield return o;
+                }
+
+                if (o.MinifiedVersion != null && !o.MinifiedVersion.IsEmpty)
+                {
+                    yield return o.MinifiedVersion;
+                }
+            }
+
+            foreach (var o in Main)
+            {
+                if (!o.IsEmpty)
+                {
+                    yield return o;
+                }
+
+                if (o.MinifiedVersion != null && !o.MinifiedVersion.IsEmpty)
+                {
+                    yield return o.MinifiedVersion;
+                }
+            }
+        }
 
         public TranslatorOutput()
         {
@@ -69,9 +136,22 @@ namespace Bridge.Contract
             get; set;
         }
 
+        private bool isEmpty;
         public bool IsEmpty
         {
-            get; set;
+            get
+            {
+                return isEmpty;
+            }
+            set
+            {
+                isEmpty = value;
+
+                if (value == true)
+                {
+                    Content.SetContent(null);
+                }
+            }
         }
 
         public TranslatorOutputItem MinifiedVersion
@@ -106,18 +186,20 @@ namespace Bridge.Contract
     {
         public StringBuilder Builder
         {
-            get; set;
+            get; private set;
         }
 
         public string String
         {
-            get; set;
+            get; private set;
         }
 
         public byte[] Buffer
         {
-            get; set;
+            get; private set;
         }
+
+        private Encoding OutputEncoding = new UTF8Encoding(false);
 
         public TranslatorOutputItemContent(StringBuilder content)
         {
@@ -134,11 +216,92 @@ namespace Bridge.Contract
             this.Buffer = content;
         }
 
+        public void SetContent(string s)
+        {
+            Builder = null;
+            Buffer = null;
+            String = s;
+        }
+
+        public object GetContent(bool stringableOnly = false)
+        {
+            if (Builder != null)
+            {
+                return Builder;
+            }
+
+            if (String != null)
+            {
+                return String;
+            }
+
+            if (Buffer != null)
+            {
+                if (stringableOnly)
+                {
+                    throw new InvalidOperationException("Cannot get stringable content as underlying data is Buffer.");
+                }
+
+                return Buffer;
+            }
+
+            return null;
+        }
+
+        public string GetContentAsString()
+        {
+            if (Builder != null)
+            {
+                return Builder.ToString();
+            }
+
+            if (String != null)
+            {
+                return String;
+            }
+
+            if (Buffer != null)
+            {
+                return OutputEncoding.GetString(Buffer);
+            }
+
+            return null;
+        }
+
+        public byte[] GetContentAsBytes()
+        {
+            if (Builder != null)
+            {
+                return GetBytesFromString(Builder.ToString());
+            }
+
+            if (String != null)
+            {
+                return GetBytesFromString(String);
+            }
+
+            if (Buffer != null)
+            {
+                return Buffer;
+            }
+
+            return new byte[0];
+        }
+
+        private byte[] GetBytesFromString(string s)
+        {
+            if (s == null)
+            {
+                return new byte[0];
+            }
+
+            return OutputEncoding.GetBytes(s);
+        }
+
         public static implicit operator TranslatorOutputItemContent(StringBuilder content)
         {
             return new TranslatorOutputItemContent(content);
         }
-
         public static implicit operator TranslatorOutputItemContent(string content)
         {
             return new TranslatorOutputItemContent(content);
@@ -147,7 +310,6 @@ namespace Bridge.Contract
         {
             return new TranslatorOutputItemContent(content);
         }
-
     }
 
     public enum TranslatorOutputTypes

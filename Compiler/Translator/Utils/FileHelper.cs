@@ -1,3 +1,4 @@
+using Bridge.Contract;
 using Bridge.Contract.Constants;
 
 using Object.Net.Utilities;
@@ -109,6 +110,23 @@ namespace Bridge.Translator
             }
 
             return TranslatorOutputTypes.None;
+        }
+
+        public FileInfo CreateFileDirectory(string outputPath, string fileName)
+        {
+            return CreateFileDirectory(Path.Combine(outputPath, fileName));
+        }
+
+        public FileInfo CreateFileDirectory(string path)
+        {
+            var file = new System.IO.FileInfo(path);
+
+            if (!file.Directory.Exists)
+            {
+                file.Directory.Create();
+            }
+
+            return file;
         }
     }
 }

@@ -69,7 +69,7 @@ namespace Bridge.Contract
             set;
         }
 
-        Dictionary<string, string> SaveTo(string path, string defaultFileName);
+        void Save(string path, string defaultFileName);
 
         System.Collections.Generic.IList<string> SourceFiles
         {
@@ -143,8 +143,6 @@ namespace Bridge.Contract
             get;
             set;
         }
-
-        void Flush(string outputPath, string fileName);
 
         /// <summary>
         /// Indicates whether strict mode will be added to generated script files

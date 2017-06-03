@@ -48,7 +48,7 @@ namespace Bridge.Translator
 
         internal static Regex tokenRegex = new Regex(@"/\*##\|(.+?),(\d+?),(\d+?)\|##\*/", RegexOptions.Compiled);
 
-        public static void Generate(string scriptFileName, string basePath, ref string content, Action<SourceMapBuilder> beforeGenerate, Func<string, string> sourceContent, string[] names, IList<string> sourceFiles, UnicodeNewline? forceEols, ILogger logger)
+        public static string Generate(string scriptFileName, string basePath, string content, Action<SourceMapBuilder> beforeGenerate, Func<string, string> sourceContent, string[] names, IList<string> sourceFiles, UnicodeNewline? forceEols, ILogger logger)
         {
             var fileName = Path.GetFileName(scriptFileName);
             var generator = new SourceMapGenerator(fileName, "", forceEols);
@@ -99,7 +99,7 @@ namespace Bridge.Translator
                 logger.Trace(encoded);
             }
 
-            content = content + Emitter.NEW_LINE + encoded;
+            return encoded;
         }
 
         private static StringLocation LocationFromPos(string s, int pos, StringLocation lastLocation, ref int offset)

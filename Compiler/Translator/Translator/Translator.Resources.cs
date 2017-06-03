@@ -142,22 +142,23 @@ namespace Bridge.Translator
                 // There are no resources defined in the config so let's just grab files
                 this.Log.Trace("Preparing output files for resources");
 
-                foreach (var file in files)
+                foreach (var file in this.Outputs.GetAllOutputs())
                 {
                     try
                     {
-                        this.Log.Trace("Reading output file " + file.Value);
-                        var content = File.ReadAllBytes(file.Value);
+                        this.Log.Trace("Reading output file " + file.Name);
 
                         var info = new BridgeResourceInfo
                         {
-                            Name = file.Key,
-                            FileName = file.Key,
+                            Name = file.Name,
+                            FileName = file.Name,
                             Path = null
                         };
 
+                        var content = file.Content.GetContentAsBytes();
+
                         resourcesToEmbed.Add(info, content);
-                        this.Log.Trace("Read " + content.Length + " bytes");
+                        this.Log.Trace("Read " + content.Length + " bytes for " + info.Name);
                     }
                     catch (Exception ex)
                     {
@@ -662,6 +663,8 @@ namespace Bridge.Translator
                     this.Log.Trace("Searching files for resources in folder: " + directoryPath);
 
                     var files = directory.GetFiles(filePathCleaned, SearchOption.TopDirectoryOnly);
+
+                    System.Diagnostics.Debugger.Launch();
 
                     if (!files.Any())
                     {
