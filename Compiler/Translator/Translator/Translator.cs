@@ -354,10 +354,10 @@ namespace Bridge.Translator
             sb.Write(nl, 0, nl.Length);
         }
 
-        public virtual void Save(string path, string defaultFileName)
+        public virtual void Save(string projectOutputPath, string defaultFileName)
         {
             var logger = this.Log;
-            logger.Info("Starts Save path = " + path);
+            logger.Info("Starts Save with projectOutputPath = " + projectOutputPath);
 
             foreach (var item in this.Outputs.GetAllOutputs())
             {
@@ -387,11 +387,32 @@ namespace Bridge.Translator
                     oldFNlen = fileName.Length;
                 }
 
-                logger.Trace("Output file name changed to " + fileName);
+                if (fileName != item.Name)
+                {
+                    logger.Trace("Output file name changed to " + fileName);
+                    item.Name = fileName;
+                }
 
                 // If 'fileName' is an absolute path, Path.Combine will ignore the 'path' prefix.
-                string filePath = Path.Combine(path, fileName);
-                logger.Trace("Output file path changed to " + filePath);
+                string filePath = fileName;
+
+                if (item.Location != null)
+                {
+                    filePath = Path.Combine(item.Location, fileName);
+
+                    if (fileName != filePath)
+                    {
+                        logger.Trace("Output file name changed to " + filePath);
+                    }
+                }
+
+                var filePath1 = Path.Combine(projectOutputPath, filePath);
+
+                if (filePath1 != filePath)
+                {
+                    filePath = filePath1;
+                    logger.Trace("Output file name changed to " + filePath1);
+                }
 
                 var file = FileHelper.CreateFileDirectory(filePath);
                 logger.Trace("Output full name " + file.FullName);
@@ -428,7 +449,7 @@ namespace Bridge.Translator
                 }
             }
 
-            logger.Info("Done Save path = " + path);
+            logger.Info("Done Save path = " + projectOutputPath);
         }
 
         public string GenerateSourceMap(string fileName, string content, Action<SourceMapBuilder> before = null)

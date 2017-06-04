@@ -1413,4 +1413,3 @@ Bridge.merge(new System.Globalization.CultureInfo("es", true), {
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
     })
 });
-

@@ -225,12 +225,14 @@ namespace Bridge.Translator
                     {
                         var name = Translator.LocalesPrefix + locale.SubstringUpToFirst('*');
                         var maskedResources = localesResources.Where(r => r.Name.StartsWith(name));
+
                         this.AddLocaleOutputs(maskedResources, outputPath);
                     }
                     else
                     {
                         var name = Translator.LocalesPrefix + locale + Files.Extensions.JS;
                         var maskedResource = localesResources.First(r => r.Name == name);
+
                         this.AddLocaleOutput(maskedResource, outputPath);
                     }
                 }
@@ -291,9 +293,16 @@ namespace Bridge.Translator
                 return;
             }
 
-            var fileName = this.AssemblyInfo.LocalesFileName ?? "Bridge.Locales.js";
+            var fileName = this.AssemblyInfo.LocalesFileName ?? Translator.DefaultLocalesOutputName;
 
-            this.Outputs.CombinedLocales = Combine(null, this.Outputs.Locales, fileName, "locales");
+            var combinedLocales = Combine(null, this.Outputs.Locales, fileName, "locales");
+
+            if (!string.IsNullOrWhiteSpace(this.AssemblyInfo.LocalesOutput))
+            {
+                combinedLocales.Location = this.AssemblyInfo.LocalesOutput;
+            }
+
+            this.Outputs.CombinedLocales = combinedLocales;
 
             this.Outputs.Locales.Clear();
 
@@ -310,7 +319,7 @@ namespace Bridge.Translator
                 return;
             }
 
-            var combinedOutput = Combine(null, this.Outputs.References, fileName, "project references", TranslatorOutputTypes.JavaScript);
+            var combinedOutput = Combine(null, this.Outputs.References, fileName, "project references");
 
             if (this.Outputs.CombinedLocales != null)
             {
@@ -322,12 +331,12 @@ namespace Bridge.Translator
                 this.Outputs.CombinedLocales = null;
             }
 
-            Combine(combinedOutput, this.Outputs.Main, fileName, "project main output", TranslatorOutputTypes.JavaScript);
+            Combine(combinedOutput, this.Outputs.Main, fileName, "project main output");
 
             this.Log.Trace("Combining project outputs done");
         }
 
-        private TranslatorOutputItem Combine(TranslatorOutputItem target, List<TranslatorOutputItem> outputs, string fileName, string message, params TranslatorOutputTypes[] filter)
+        private TranslatorOutputItem Combine(TranslatorOutputItem target, List<TranslatorOutputItem> outputs, string fileName, string message, TranslatorOutputTypes[] filter = null)
         {
             this.Log.Trace("There are " + outputs.Count + " " + message);
 
@@ -335,6 +344,11 @@ namespace Bridge.Translator
             {
                 this.Log.Trace("Skipping combining " + message + " as empty.");
                 return null;
+            }
+
+            if (filter == null)
+            {
+                filter = new[] { TranslatorOutputTypes.JavaScript };
             }
 
             if (target != null)
@@ -398,6 +412,8 @@ namespace Bridge.Translator
                         firstLine = false;
                         NewLine(buffer);
                     }
+
+                    firstLine = false;
 
                     if (formattedContent != null)
                     {
