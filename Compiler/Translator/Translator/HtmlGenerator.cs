@@ -132,19 +132,36 @@ namespace Bridge.Translator
                 { tokenScript, jsBuffer.ToString() }
             };
 
-            var configHelper = new ConfigHelper();
-            var html = configHelper.ApplyTokens(tokens, htmlTemplate);
+            string htmlName = null;
+            string htmlMinName = null;
 
-            var fileName = Path.Combine(outputPath, "index.html");
-            File.WriteAllText(fileName, html, Translator.OutputEncoding);
+            if (jsBuffer.Length > 0 || cssBuffer.Length > 0)
+            {
+                htmlName = "index.html";
+            }
 
             if (jsMinBuffer.Length > 0)
             {
-                tokens[tokenScript] = jsMinBuffer.ToString();
-                html = configHelper.ApplyTokens(tokens, htmlTemplate);
+                htmlMinName = htmlName == null ? "index.html" : "index.min.html";
+            }
 
-                fileName = Path.Combine(outputPath, "index.min.html");
-                File.WriteAllText(fileName, html, Translator.OutputEncoding);
+            var configHelper = new ConfigHelper();
+
+            if (htmlName != null)
+            {
+                var html = configHelper.ApplyTokens(tokens, htmlTemplate);
+
+                htmlName = Path.Combine(outputPath, htmlName);
+                File.WriteAllText(htmlName, html, Translator.OutputEncoding);
+            }
+
+            if (htmlMinName != null)
+            {
+                tokens[tokenScript] = jsMinBuffer.ToString();
+                var html = configHelper.ApplyTokens(tokens, htmlTemplate);
+
+                htmlMinName = Path.Combine(outputPath, htmlMinName);
+                File.WriteAllText(htmlMinName, html, Translator.OutputEncoding);
             }
 
             this.Log.Trace("GenerateHtml done");
