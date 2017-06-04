@@ -127,7 +127,12 @@ namespace Bridge.Contract
             get; set;
         }
 
-        public TranslatorOutputTypes OutputType
+        public TranslatorOutputType OutputType
+        {
+            get; set;
+        }
+
+        public TranslatorOutputKind OutputKind
         {
             get; set;
         }
@@ -318,11 +323,22 @@ namespace Bridge.Contract
         }
     }
 
-    public enum TranslatorOutputTypes
+    public enum TranslatorOutputType
     {
         None,
         JavaScript,
         TypeScript,
         StyleSheets
+    }
+
+    [Flags]
+    public enum TranslatorOutputKind
+    {
+        None = 0,
+        Reference = 1,
+        Resource = 2,
+        Locale = 4,
+        ProjectOutput = 8,
+        PluginOutput = 16
     }
 }

@@ -553,5 +553,3 @@ QUnit.log(function (details) {
 
     Bridge.Test.Runtime.ContextHelper.UpdateTestSource(source, ctx.Stack);
 });
-
-//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAiZmlsZSI6ICJtYWluLmpzIiwKICAic291cmNlUm9vdCI6ICIiLAogICJzb3VyY2VzIjogW10sCiAgIm5hbWVzIjogW10sCiAgIm1hcHBpbmdzIjogIiIsCiAgInNvdXJjZXNDb250ZW50IjogW10KfQo=

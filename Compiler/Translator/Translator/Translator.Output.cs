@@ -28,7 +28,7 @@ namespace Bridge.Translator
 
             var content = this.ReadEmbeddedResource(resource);
 
-            Emitter.AddOutputItem(this.Outputs.Locales, fileName, new StringBuilder(content), outputPath);
+            Emitter.AddOutputItem(this.Outputs.Locales, fileName, new StringBuilder(content), TranslatorOutputKind.Locale, outputPath);
         }
 
         protected virtual void AddLocaleOutputs(IEnumerable<EmbeddedResource> resources, string outputPath)
@@ -55,20 +55,20 @@ namespace Bridge.Translator
                     using (var reader = new StreamReader(resourcesStream))
                     {
                         var content = reader.ReadToEnd();
-                        Emitter.AddOutputItem(this.Outputs.References, fileName, content, outputPath);
+                        Emitter.AddOutputItem(this.Outputs.References, fileName, content, TranslatorOutputKind.Reference, outputPath);
                     }
                 }
                 else
                 {
                     var binary = ReadStream(resourcesStream);
-                    Emitter.AddOutputItem(this.Outputs.References, fileName, binary, outputPath);
+                    Emitter.AddOutputItem(this.Outputs.References, fileName, binary, TranslatorOutputKind.Reference, outputPath);
                 }
             }
         }
 
         protected virtual void AddResourceOutput(ResourceConfigItem resource, byte[] content)
         {
-            Emitter.AddOutputItem(this.Outputs.Resources, resource.Name, content, resource.Output);
+            Emitter.AddOutputItem(this.Outputs.Resources, resource.Name, content, TranslatorOutputKind.Resource, resource.Output);
         }
 
         public void ExtractCore(string outputPath, string projectPath, bool nodebug = false)
@@ -372,7 +372,7 @@ namespace Bridge.Translator
             this.Log.Trace("Combining project outputs done");
         }
 
-        private TranslatorOutputItem Combine(TranslatorOutputItem target, List<TranslatorOutputItem> outputs, string fileName, string message, TranslatorOutputTypes[] filter = null)
+        private TranslatorOutputItem Combine(TranslatorOutputItem target, List<TranslatorOutputItem> outputs, string fileName, string message, TranslatorOutputType[] filter = null)
         {
             this.Log.Trace("There are " + outputs.Count + " " + message);
 
@@ -384,7 +384,7 @@ namespace Bridge.Translator
 
             if (filter == null)
             {
-                filter = new[] { TranslatorOutputTypes.JavaScript };
+                filter = new[] { TranslatorOutputType.JavaScript };
             }
 
             if (target != null)
@@ -507,7 +507,7 @@ namespace Bridge.Translator
                 this.Log.Trace("Adjusted fileName: " + fileName);
             }
 
-            var checkExtentionFileName = FileHelper.CheckFileNameAndOutputType(fileName, TranslatorOutputTypes.JavaScript);
+            var checkExtentionFileName = FileHelper.CheckFileNameAndOutputType(fileName, TranslatorOutputType.JavaScript);
 
             if (checkExtentionFileName != null)
             {
@@ -518,7 +518,7 @@ namespace Bridge.Translator
             var r = new TranslatorOutputItem
             {
                 Content = buffer,
-                OutputType = TranslatorOutputTypes.JavaScript,
+                OutputType = TranslatorOutputType.JavaScript,
                 Name = fileName
             };
 
@@ -582,7 +582,7 @@ namespace Bridge.Translator
 
         private void Minify(TranslatorOutputItem output, CodeSettings minifierSettings)
         {
-            if (output.OutputType != TranslatorOutputTypes.JavaScript)
+            if (output.OutputType != TranslatorOutputType.JavaScript)
             {
                 return;
             }

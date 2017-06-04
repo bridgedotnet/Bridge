@@ -645,7 +645,7 @@ namespace Bridge.Translator
             return true;
         }
 
-        internal static bool AddOutputItem(List<TranslatorOutputItem> target, string fileName, TranslatorOutputItemContent content, string location = null)
+        internal static bool AddOutputItem(List<TranslatorOutputItem> target, string fileName, TranslatorOutputItemContent content, TranslatorOutputKind outputKind, string location = null)
         {
             var fileHelper = new FileHelper();
 
@@ -676,6 +676,7 @@ namespace Bridge.Translator
                     {
                         Name = fileName,
                         OutputType = outputType,
+                        OutputKind = outputKind,
                         Location = location,
                         Content = content,
                         IsMinified = true
@@ -694,6 +695,7 @@ namespace Bridge.Translator
             {
                 Name = searchName,
                 OutputType = outputType,
+                OutputKind = outputKind,
                 Location = location
             };
 
@@ -705,6 +707,7 @@ namespace Bridge.Translator
                 {
                     Name = fileName,
                     OutputType = outputType,
+                    OutputKind = outputKind,
                     Location = location,
                     Content = content,
                     IsMinified = true

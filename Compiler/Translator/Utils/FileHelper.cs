@@ -87,34 +87,34 @@ namespace Bridge.Translator
             return fileName.EndsWith(Files.Extensions.CSS, StringComparison.InvariantCultureIgnoreCase);
         }
 
-        public TranslatorOutputTypes GetOutputType(string fileName)
+        public TranslatorOutputType GetOutputType(string fileName)
         {
             if (string.IsNullOrEmpty(fileName))
             {
-                return TranslatorOutputTypes.None;
+                return TranslatorOutputType.None;
             }
 
             if (IsJS(fileName))
             {
-                return TranslatorOutputTypes.JavaScript;
+                return TranslatorOutputType.JavaScript;
             }
 
             if (IsDTS(fileName))
             {
-                return TranslatorOutputTypes.TypeScript;
+                return TranslatorOutputType.TypeScript;
             }
 
             if (IsCSS(fileName))
             {
-                return TranslatorOutputTypes.StyleSheets;
+                return TranslatorOutputType.StyleSheets;
             }
 
-            return TranslatorOutputTypes.None;
+            return TranslatorOutputType.None;
         }
 
-        public string CheckFileNameAndOutputType(string fileName, TranslatorOutputTypes outputType, bool isMinified = false)
+        public string CheckFileNameAndOutputType(string fileName, TranslatorOutputType outputType, bool isMinified = false)
         {
-            if (outputType == TranslatorOutputTypes.None)
+            if (outputType == TranslatorOutputType.None)
             {
                 return null;
             }
@@ -130,7 +130,7 @@ namespace Bridge.Translator
 
             switch (outputTypeByFileName)
             {
-                case TranslatorOutputTypes.JavaScript:
+                case TranslatorOutputType.JavaScript:
                     if (IsMinJS(fileName))
                     {
                         changeExtention = Files.Extensions.MinJS;
@@ -140,10 +140,10 @@ namespace Bridge.Translator
                         changeExtention = Files.Extensions.JS;
                     }
                     break;
-                case TranslatorOutputTypes.TypeScript:
+                case TranslatorOutputType.TypeScript:
                     changeExtention = Files.Extensions.DTS;
                     break;
-                case TranslatorOutputTypes.StyleSheets:
+                case TranslatorOutputType.StyleSheets:
                     changeExtention = Files.Extensions.CSS;
                     break;
                 default:
@@ -162,7 +162,7 @@ namespace Bridge.Translator
 
             switch (outputType)
             {
-                case TranslatorOutputTypes.JavaScript:
+                case TranslatorOutputType.JavaScript:
                     if (isMinified)
                     {
                         fileName = fileName + Files.Extensions.MinJS;
@@ -173,9 +173,9 @@ namespace Bridge.Translator
                     }
 
                     return fileName;
-                case TranslatorOutputTypes.TypeScript:
+                case TranslatorOutputType.TypeScript:
                     return fileName + Files.Extensions.DTS;
-                case TranslatorOutputTypes.StyleSheets:
+                case TranslatorOutputType.StyleSheets:
                     return fileName + Files.Extensions.CSS;
                 default:
                     return null;
