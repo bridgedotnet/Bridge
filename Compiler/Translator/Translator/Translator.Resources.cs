@@ -142,7 +142,7 @@ namespace Bridge.Translator
                 // There are no resources defined in the config so let's just grab files
                 this.Log.Trace("Preparing output files for resources");
 
-                foreach (var file in this.Outputs.GetAllOutputs())
+                foreach (var file in this.Outputs.GetOutputs())
                 {
                     try
                     {
@@ -366,6 +366,8 @@ namespace Bridge.Translator
                 this.EnsureDirectoryExists(resourceOutputDirName);
 
                 File.WriteAllBytes(path, code);
+
+                this.AddResourceOutput(resource, code);
 
                 this.Log.Trace("Done writing resource into file");
             }

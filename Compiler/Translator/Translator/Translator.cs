@@ -359,7 +359,7 @@ namespace Bridge.Translator
             var logger = this.Log;
             logger.Info("Starts Save with projectOutputPath = " + projectOutputPath);
 
-            foreach (var item in this.Outputs.GetAllOutputs())
+            foreach (var item in this.Outputs.GetOutputs())
             {
                 string fileName = item.Name;
                 logger.Trace("Output " + fileName);

@@ -33,7 +33,12 @@ namespace Bridge.Contract
             get; set;
         }
 
-        public IEnumerable<TranslatorOutputItem> GetAllOutputs()
+        public List<TranslatorOutputItem> Resources
+        {
+            get; private set;
+        }
+
+        public IEnumerable<TranslatorOutputItem> GetOutputs()
         {
             if (Combined != null)
             {
@@ -106,6 +111,7 @@ namespace Bridge.Contract
             Main = new List<TranslatorOutputItem>();
             References = new List<TranslatorOutputItem>();
             Locales = new List<TranslatorOutputItem>();
+            Resources = new List<TranslatorOutputItem>();
         }
     }
 

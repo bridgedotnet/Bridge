@@ -39,7 +39,7 @@ namespace Bridge.Translator
             }
         }
 
-        protected virtual void AddResourceOutput(string outputPath, AssemblyDefinition assembly, string resourceName, string fileName, Func<string, string> preHandler = null)
+        protected virtual void AddReferencedResourceOutput(string outputPath, AssemblyDefinition assembly, string resourceName, string fileName, Func<string, string> preHandler = null)
         {
             var res = assembly.MainModule.Resources.FirstOrDefault(r => r.Name == resourceName);
 
@@ -64,6 +64,11 @@ namespace Bridge.Translator
                     Emitter.AddOutputItem(this.Outputs.References, fileName, binary, outputPath);
                 }
             }
+        }
+
+        protected virtual void AddResourceOutput(ResourceConfigItem resource, byte[] content)
+        {
+            Emitter.AddOutputItem(this.Outputs.Resources, resource.Name, content, resource.Output);
         }
 
         public void ExtractCore(string outputPath, string projectPath, bool nodebug = false)
@@ -191,7 +196,7 @@ namespace Bridge.Translator
 
                     if (!isTs || this.AssemblyInfo.GenerateTypeScript)
                     {
-                        this.AddResourceOutput(resourceOutputDirName, reference, resName, resourceOutputFileName);
+                        this.AddReferencedResourceOutput(resourceOutputDirName, reference, resName, resourceOutputFileName);
                     }
                 }
             }
