@@ -11,6 +11,9 @@
     "disableInitAssembly": true,
     "enableReservedNamespaces": true
   },
+  "html": {
+    "disabled": true
+  },
   "resources": [
     {
       // File paths relative to project root

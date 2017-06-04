@@ -7,6 +7,9 @@
   "logging": {
     "level": "None"
   },
+  "html": {
+    "disabled": true
+  },
   "resources": [
     {
       "extract": false

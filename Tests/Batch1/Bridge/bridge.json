@@ -6,7 +6,10 @@
   "outputBy": "Project",
   "localesOutput": "locales",
   "locales": "ru-RU;en-US;es*",
-  "sourceMap":  true,
+  "sourceMap": true,
+  "html": {
+    "disabled": true
+  },
   "test": {
     "skipCombine":  true
   }

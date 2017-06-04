@@ -4,7 +4,9 @@
   "outputFormatting": "Formatted",
   "fileName": "code.js",
   "outputBy": "Project",
-
+  "html": {
+    "disabled": true
+  },
   "resources": [
     {
       "extract": false

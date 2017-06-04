@@ -4,6 +4,9 @@
   "outputBy": "Namespace",
   "generateTypeScript": "true",
   "outputFormatting": "Formatted",
+  "html": {
+    "disabled": true
+  },
   "resources": [
     {
       "name": "bridge.js",
