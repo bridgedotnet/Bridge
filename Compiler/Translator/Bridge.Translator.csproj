@@ -231,6 +231,7 @@
     <Compile Include="SourceMaps\SourceMapEntry.cs" />
     <Compile Include="SourceMaps\SourceMapGenerator.cs" />
     <Compile Include="Translator\InvocationInterceptor.cs" />
+    <Compile Include="Translator\HtmlGenerator.cs" />
     <Compile Include="Translator\Translator.Output.cs" />
     <Compile Include="Translator\Plugins.cs" />
     <Compile Include="Utils\TextHelper.cs" />
@@ -304,6 +305,7 @@
     <Content Include="App_Readme\Object.NET.Utilities\BREAKING_CHANGES.txt" />
     <Content Include="App_Readme\Object.NET.Utilities\LICENSE.txt" />
     <Content Include="App_Readme\Object.NET.Utilities\README.txt" />
+    <EmbeddedResource Include="Resources\HtmlTemplate.html" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />

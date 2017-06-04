@@ -838,45 +838,16 @@ namespace Bridge.Translator
             }
         }
 
-        protected void GenerateHtml()
+        internal string GetAssemblyTitle()
         {
-            this.Log.Trace("GenerateHtml...");
+            var versionContext = this.GetVersionContext();
 
-            if (this.AssemblyInfo.Html.Disabled)
+            if (versionContext != null)
             {
-                this.Log.Trace("GenerateHtml skipped as disabled in config.");
-                return;
+                return versionContext.Assembly.Description;
             }
 
-            //var htmlTemplate = "";
-            this.Log.Trace("Applying default html template");
-
-            var output = this.Outputs;
-            this.Log.Trace("Include " + output.References + " referenced items");
-            this.Log.Trace("Include " + output.Locales + " locales");
-            this.Log.Trace("Include " + output.Main + " project items");
-
-
-            Func<TranslatorOutputItem, string> getOutputName = (item) =>
-            {
-                if (item.IsEmpty)
-                {
-                    return null;
-                }
-
-                if (string.IsNullOrEmpty(item.Location))
-                {
-                    return item.Name;
-                }
-
-                return Path.Combine(item.Location, item.Name);
-            };
-
-            //this.Log.Trace("CSS items:");
-            //foreach (var outputItem in output.GetItems(TranslatorOutputTypes.StyleSheets))
-            //{
-            //    this.Log.Trace("CSS items:");
-            //}
+            return string.Empty;
         }
     }
 }

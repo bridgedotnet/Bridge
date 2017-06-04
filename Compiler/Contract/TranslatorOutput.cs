@@ -170,7 +170,7 @@ namespace Bridge.Contract
             get; set;
         }
 
-        public string GetOutputPath()
+        public string GetOutputPath(string basePath = null, bool htmlAdjusted = false)
         {
             var item = this;
 
@@ -184,12 +184,50 @@ namespace Bridge.Contract
                 }
             }
 
-            if (string.IsNullOrEmpty(item.Location))
+            string path;
+            if (item.Location != null)
             {
-                return item.Name;
+                path = Path.Combine(item.Location, item.Name);
+            }
+            else
+            {
+                path = item.Name;
             }
 
-            return Path.Combine(item.Location, item.Name);
+            //System.Diagnostics.Debugger.Launch();
+
+            if (basePath != null)
+            {
+                path = MakeRelative(path, basePath);
+            }
+
+            if (htmlAdjusted)
+            {
+                path = new ConfigHelper().ConvertPath(path, '/');
+            }
+
+            return path;
+        }
+
+        private string MakeRelative(string filePath, string referencePath)
+        {
+            //filePath = Path.GetFullPath((new Uri(filePath)).LocalPath);
+            if (!Path.IsPathRooted(filePath))
+            {
+                filePath = Path.Combine(referencePath, filePath);
+            }
+
+            filePath = Path.GetFullPath(filePath);
+
+            var referenceUri = new Uri(referencePath);
+            Uri result;
+            if (Uri.TryCreate(referenceUri, filePath, out result))
+            {
+                return referenceUri.MakeRelativeUri(result).ToString();
+                //return result.MakeRelativeUri(new Uri(referencePath)).ToString();
+            }
+
+            return filePath;
         }
     }
 
