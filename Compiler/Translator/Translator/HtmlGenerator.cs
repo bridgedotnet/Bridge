@@ -99,7 +99,8 @@ namespace Bridge.Translator
 
                         firstMinJs = false;
 
-                        jsMinBuffer.AppendLine(string.Format(scriptTemplate, output.GetOutputPath(outputPath, true)));
+                        jsMinBuffer.Append(string.Format(scriptTemplate, output.GetOutputPath(outputPath, true)));
+                        jsMinBuffer.Append(Emitter.NEW_LINE);
                     }
                     else
                     {
@@ -110,7 +111,9 @@ namespace Bridge.Translator
 
                         firstJs = false;
 
-                        jsBuffer.AppendLine(string.Format(scriptTemplate, output.GetOutputPath(outputPath, true)));
+                        jsBuffer.Append(string.Format(scriptTemplate, output.GetOutputPath(outputPath, true)));
+                        jsBuffer.Append(Emitter.NEW_LINE);
+
                     }
                 } else if (output.OutputType == TranslatorOutputType.StyleSheets && indexCss >= 0)
                 {
@@ -121,7 +124,8 @@ namespace Bridge.Translator
 
                     firstCss = false;
 
-                    cssBuffer.AppendLine(string.Format(cssLinkTemplate, output.GetOutputPath(outputPath, true)));
+                    cssBuffer.Append(string.Format(cssLinkTemplate, output.GetOutputPath(outputPath, true)));
+                    cssBuffer.Append(Emitter.NEW_LINE);
                 }
             }
 
