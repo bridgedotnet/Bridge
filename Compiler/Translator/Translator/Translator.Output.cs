@@ -12,6 +12,132 @@ namespace Bridge.Translator
 {
     public partial class Translator
     {
+        public virtual void Save(string projectOutputPath, string defaultFileName)
+        {
+            var logger = this.Log;
+            logger.Info("Starts Save with projectOutputPath = " + projectOutputPath);
+
+            foreach (var item in this.Outputs.GetOutputs())
+            {
+                string fileName = item.Name;
+                logger.Trace("Output " + fileName);
+
+                if (fileName.Contains(Bridge.Translator.AssemblyInfo.DEFAULT_FILENAME))
+                {
+                    fileName = fileName.Replace(Bridge.Translator.AssemblyInfo.DEFAULT_FILENAME, defaultFileName);
+                }
+
+                // Ensure filename contains no ":". It could be used like "c:/absolute/path"
+                fileName = fileName.Replace(":", "_");
+
+                // Trim heading slash/backslash off file names until it does not start with slash.
+                var oldFNlen = fileName.Length;
+                while (Path.IsPathRooted(fileName))
+                {
+                    fileName = fileName.TrimStart(Path.DirectorySeparatorChar, '/', '\\');
+
+                    // Trimming didn't change the path. This way, it will just loop indefinitely.
+                    // Also, this means the absolute path specifies a fully-qualified DOS PathName with drive letter.
+                    if (fileName.Length == oldFNlen)
+                    {
+                        break;
+                    }
+                    oldFNlen = fileName.Length;
+                }
+
+                if (fileName != item.Name)
+                {
+                    logger.Trace("Output file name changed to " + fileName);
+                    item.Name = fileName;
+                }
+
+                // If 'fileName' is an absolute path, Path.Combine will ignore the 'path' prefix.
+                string filePath = fileName;
+
+                if (item.Location != null)
+                {
+                    filePath = Path.Combine(item.Location, fileName);
+
+                    if (fileName != filePath)
+                    {
+                        logger.Trace("Output file name changed to " + filePath);
+                    }
+                }
+
+                var filePath1 = Path.Combine(projectOutputPath, filePath);
+
+                if (filePath1 != filePath)
+                {
+                    filePath = filePath1;
+                    logger.Trace("Output file name changed to " + filePath1);
+                }
+
+                var file = FileHelper.CreateFileDirectory(filePath);
+                logger.Trace("Output full name " + file.FullName);
+
+                byte[] buffer = null;
+                string content = null;
+
+                if (CheckIfRequiresSourceMap(item))
+                {
+                    content = item.Content.GetContentAsString();
+                    content = this.GenerateSourceMap(file.FullName, content);
+
+                    this.SaveToFile(file.FullName, content);
+                }
+                else
+                {
+                    buffer = item.Content.Buffer;
+
+                    if (buffer != null)
+                    {
+                        this.SaveToFile(file.FullName, null, buffer);
+                    }
+                    else
+                    {
+                        content = item.Content.GetContentAsString();
+                        this.SaveToFile(file.FullName, content);
+                    }
+                }
+            }
+
+            logger.Info("Done Save path = " + projectOutputPath);
+        }
+
+        protected virtual void SaveToFile(string fileName, string content, byte[] binary = null)
+        {
+            if (content != null && binary != null)
+            {
+                this.Log.Error("Both content and binary are not null for " + fileName + ". Will use content.");
+            }
+
+            if (content != null)
+            {
+                File.WriteAllText(fileName, content, OutputEncoding);
+                this.Log.Trace("Saving content (string) into " + fileName + " ...");
+            }
+            else
+            {
+                File.WriteAllBytes(fileName, binary);
+                this.Log.Trace("Saving binary into " + fileName + " ...");
+            }
+
+            this.Log.Trace("Saved file " + fileName);
+        }
+
+        public void CleanOutputFolderIfRequired(string outputPath)
+        {
+            if (this.AssemblyInfo != null
+                && (this.AssemblyInfo.CleanOutputFolderBeforeBuild || !string.IsNullOrEmpty(this.AssemblyInfo.CleanOutputFolderBeforeBuildPattern)))
+            {
+                var searchPattern = string.IsNullOrEmpty(this.AssemblyInfo.CleanOutputFolderBeforeBuildPattern)
+                    ? "*" + Files.Extensions.JS + "|*" + Files.Extensions.DTS
+                    : this.AssemblyInfo.CleanOutputFolderBeforeBuildPattern;
+
+                CleanDirectory(outputPath, searchPattern);
+            }
+        }
+
         protected virtual void AddMainOutputs(List<TranslatorOutputItem> outputs)
         {
             this.Outputs.Main.AddRange(outputs);
@@ -662,6 +788,53 @@ namespace Bridge.Translator
             }
 
             return settings;
+        }
+
+        private void CleanDirectory(string outputPath, string searchPattern)
+        {
+            this.Log.Info("Cleaning output folder " + (outputPath ?? string.Empty) + " with search pattern (" + (searchPattern ?? string.Empty) + ") ...");
+
+            if (string.IsNullOrWhiteSpace(outputPath))
+            {
+                this.Log.Warn("Output directory is not specified. No files deleted.");
+                return;
+            }
+
+            try
+            {
+                var outputDirectory = new DirectoryInfo(outputPath);
+                if (!outputDirectory.Exists)
+                {
+                    this.Log.Warn("Output directory does not exist " + outputPath + ". No files deleted.");
+                    return;
+                }
+
+                var patterns = searchPattern.Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+
+                if (patterns.Length == 0)
+                {
+                    this.Log.Warn("Incorrect search pattern - empty. No files deleted.");
+                    return;
+                }
+
+                var filesToDelete = new List<FileInfo>();
+                foreach (var pattern in patterns)
+                {
+                    filesToDelete.AddRange(outputDirectory.GetFiles(pattern, SearchOption.AllDirectories));
+                }
+
+                foreach (var file in filesToDelete)
+                {
+                    this.Log.Trace("cleaning " + file.FullName);
+                    file.Delete();
+                }
+
+                this.Log.Info("Cleaning output folder done");
+            }
+            catch (System.Exception ex)
+            {
+                this.Log.Error(ex.ToString());
+            }
         }
 
         protected void GenerateHtml()
