@@ -197,18 +197,18 @@ namespace Bridge.Translator
             Emitter.AddOutputItem(this.Outputs.Resources, resource.Name, content, TranslatorOutputKind.Resource, resource.Output);
         }
 
-        public void ExtractCore(string outputPath, string projectPath, bool nodebug = false)
+        public void ExtractCore(string outputPath, string projectPath)
         {
             this.Log.Info("Extracting core scripts...");
 
-            ExtractResources(outputPath, projectPath, nodebug);
+            ExtractResources(outputPath, projectPath);
 
-            ExtractLocales(outputPath, nodebug);
+            ExtractLocales(outputPath);
 
             this.Log.Info("Done extracting core scripts");
         }
 
-        private void ExtractResources(string outputPath, string projectPath, bool nodebug)
+        private void ExtractResources(string outputPath, string projectPath)
         {
             this.Log.Info("Extracting resources...");
 
@@ -330,7 +330,7 @@ namespace Bridge.Translator
             this.Log.Info("Done extracting resources");
         }
 
-        private void ExtractLocales(string outputPath, bool nodebug)
+        private void ExtractLocales(string outputPath)
         {
             if (string.IsNullOrWhiteSpace(this.AssemblyInfo.Locales))
             {
