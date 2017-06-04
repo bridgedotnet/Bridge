@@ -77,4 +77,3 @@ Bridge.assembly("TestProject.I2096", function ($asm, globals) {
         ]
     });
 });
-

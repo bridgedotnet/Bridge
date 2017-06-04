@@ -89,7 +89,7 @@ namespace Bridge.Translator
 
         public TranslatorOutputTypes GetOutputType(string fileName)
         {
-            if (fileName == null)
+            if (string.IsNullOrEmpty(fileName))
             {
                 return TranslatorOutputTypes.None;
             }
@@ -110,6 +110,76 @@ namespace Bridge.Translator
             }
 
             return TranslatorOutputTypes.None;
+        }
+
+        public string CheckFileNameAndOutputType(string fileName, TranslatorOutputTypes outputType, bool isMinified = false)
+        {
+            if (outputType == TranslatorOutputTypes.None)
+            {
+                return null;
+            }
+
+            var outputTypeByFileName = GetOutputType(fileName);
+
+            if (outputTypeByFileName == outputType)
+            {
+                return null;
+            }
+
+            string changeExtention = null;
+
+            switch (outputTypeByFileName)
+            {
+                case TranslatorOutputTypes.JavaScript:
+                    if (IsMinJS(fileName))
+                    {
+                        changeExtention = Files.Extensions.MinJS;
+                    }
+                    else
+                    {
+                        changeExtention = Files.Extensions.JS;
+                    }
+                    break;
+                case TranslatorOutputTypes.TypeScript:
+                    changeExtention = Files.Extensions.DTS;
+                    break;
+                case TranslatorOutputTypes.StyleSheets:
+                    changeExtention = Files.Extensions.CSS;
+                    break;
+                default:
+                    break;
+            }
+
+            if (changeExtention != null)
+            {
+                fileName = fileName.ReplaceLastInstanceOf(changeExtention, string.Empty);
+            }
+
+            if (fileName[fileName.Length - 1] == '.')
+            {
+                fileName = fileName.Remove(fileName.Length - 1);
+            }
+
+            switch (outputType)
+            {
+                case TranslatorOutputTypes.JavaScript:
+                    if (isMinified)
+                    {
+                        fileName = fileName + Files.Extensions.MinJS;
+                    }
+                    else
+                    {
+                        fileName = fileName + Files.Extensions.JS;
+                    }
+
+                    return fileName;
+                case TranslatorOutputTypes.TypeScript:
+                    return fileName + Files.Extensions.DTS;
+                case TranslatorOutputTypes.StyleSheets:
+                    return fileName + Files.Extensions.CSS;
+                default:
+                    return null;
+            }
         }
 
         public FileInfo CreateFileDirectory(string outputPath, string fileName)

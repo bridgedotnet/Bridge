@@ -319,19 +319,50 @@ namespace Bridge.Translator
                 return;
             }
 
+            var needNewLine = false;
+
             var combinedOutput = Combine(null, this.Outputs.References, fileName, "project references");
+
+            var buffer = combinedOutput.Content.Builder;
+
+            var bufferLength = buffer.Length;
+
+            if (bufferLength > 0)
+            {
+                needNewLine = true;
+            }
 
             if (this.Outputs.CombinedLocales != null)
             {
                 this.Log.Trace("Added combined locales.");
 
-                NewLine(combinedOutput.Content.Builder);
+                if (needNewLine)
+                {
+                    NewLine(buffer);
+                    needNewLine = false;
+                }
+
                 combinedOutput.Content.Builder.Append(this.Outputs.CombinedLocales.Content.GetContent(true));
+
+                if (buffer.Length > bufferLength)
+                {
+                    needNewLine = true;
+                }
+
+                bufferLength = buffer.Length;
 
                 this.Outputs.CombinedLocales = null;
             }
 
+            if (needNewLine)
+            {
+                NewLine(buffer);
+                needNewLine = false;
+            }
+
             Combine(combinedOutput, this.Outputs.Main, fileName, "project main output");
+
+            this.Outputs.Combined = combinedOutput;
 
             this.Log.Trace("Combining project outputs done");
         }
@@ -450,22 +481,34 @@ namespace Bridge.Translator
                 return target;
             }
 
-            fileName = fileName.Replace(":", "_");
+            var adjustedFileName = fileName.Replace(":", "_");
             var fileNameLenth = fileName.Length;
 
-            while (Path.IsPathRooted(fileName))
+            while (Path.IsPathRooted(adjustedFileName))
             {
-                fileName = fileName.TrimStart(Path.DirectorySeparatorChar, '/', '\\');
+                adjustedFileName = adjustedFileName.TrimStart(Path.DirectorySeparatorChar, '/', '\\');
 
-                if (fileName.Length == fileNameLenth)
+                if (adjustedFileName.Length == fileNameLenth)
                 {
                     break;
                 }
 
-                fileNameLenth = fileName.Length;
+                fileNameLenth = adjustedFileName.Length;
             }
 
-            this.Log.Trace("Adjusted fileName: " + fileName);
+            if (adjustedFileName != fileName)
+            {
+                fileName = adjustedFileName;
+                this.Log.Trace("Adjusted fileName: " + fileName);
+            }
+
+            var checkExtentionFileName = FileHelper.CheckFileNameAndOutputType(fileName, TranslatorOutputTypes.JavaScript);
+
+            if (checkExtentionFileName != null)
+            {
+                fileName = checkExtentionFileName;
+                this.Log.Trace("Extention checked fileName: " + fileName);
+            }
 
             var r = new TranslatorOutputItem
             {
