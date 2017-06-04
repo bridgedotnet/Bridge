@@ -2,7 +2,7 @@
   "output": "Bridge\\output",
   "cleanOutputFolderBeforeBuildPattern": "*.*",
   "outputFormatting": "Formatted",
-
+  "locales": "en-US",
   "combineScripts":  true
   //"sourceMap": {
   //  "enabled": true,
