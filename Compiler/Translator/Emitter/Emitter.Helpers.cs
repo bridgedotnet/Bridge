@@ -676,7 +676,7 @@ namespace Bridge.Translator
                     {
                         Name = fileName,
                         OutputType = outputType,
-                        OutputKind = outputKind,
+                        OutputKind = outputKind | TranslatorOutputKind.Minified,
                         Location = location,
                         Content = content,
                         IsMinified = true
@@ -707,7 +707,7 @@ namespace Bridge.Translator
                 {
                     Name = fileName,
                     OutputType = outputType,
-                    OutputKind = outputKind,
+                    OutputKind = outputKind | TranslatorOutputKind.Minified,
                     Location = location,
                     Content = content,
                     IsMinified = true

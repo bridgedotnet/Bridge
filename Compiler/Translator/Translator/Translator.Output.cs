@@ -426,7 +426,7 @@ namespace Bridge.Translator
 
             var fileName = this.AssemblyInfo.LocalesFileName ?? Translator.DefaultLocalesOutputName;
 
-            var combinedLocales = Combine(null, this.Outputs.Locales, fileName, "locales");
+            var combinedLocales = Combine(null, this.Outputs.Locales, fileName, "locales", TranslatorOutputKind.Locale);
 
             if (!string.IsNullOrWhiteSpace(this.AssemblyInfo.LocalesOutput))
             {
@@ -452,7 +452,7 @@ namespace Bridge.Translator
 
             var needNewLine = false;
 
-            var combinedOutput = Combine(null, this.Outputs.References, fileName, "project references");
+            var combinedOutput = Combine(null, this.Outputs.References, fileName, "project references", TranslatorOutputKind.ProjectOutput);
 
             var buffer = combinedOutput.Content.Builder;
 
@@ -491,14 +491,14 @@ namespace Bridge.Translator
                 needNewLine = false;
             }
 
-            Combine(combinedOutput, this.Outputs.Main, fileName, "project main output");
+            Combine(combinedOutput, this.Outputs.Main, fileName, "project main output", TranslatorOutputKind.ProjectOutput);
 
             this.Outputs.Combined = combinedOutput;
 
             this.Log.Trace("Combining project outputs done");
         }
 
-        private TranslatorOutputItem Combine(TranslatorOutputItem target, List<TranslatorOutputItem> outputs, string fileName, string message, TranslatorOutputType[] filter = null)
+        private TranslatorOutputItem Combine(TranslatorOutputItem target, List<TranslatorOutputItem> outputs, string fileName, string message, TranslatorOutputKind outputKind, TranslatorOutputType[] filter = null)
         {
             this.Log.Trace("There are " + outputs.Count + " " + message);
 
@@ -736,6 +736,7 @@ namespace Bridge.Translator
                 IsMinified = true,
                 Name = minifiedName,
                 OutputType = output.OutputType,
+                OutputKind = output.OutputKind | TranslatorOutputKind.Minified,
                 Location = output.Location,
                 Content = minifiedContent
             };
