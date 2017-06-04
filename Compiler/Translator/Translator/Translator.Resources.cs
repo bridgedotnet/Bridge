@@ -664,8 +664,6 @@ namespace Bridge.Translator
 
                     var files = directory.GetFiles(filePathCleaned, SearchOption.TopDirectoryOnly);
 
-                    System.Diagnostics.Debugger.Launch();
-
                     if (!files.Any())
                     {
                         throw new InvalidOperationException("Could not find any file in folder: " + directory.FullName + " for resource " + item.Name + " and location " + fileName);

@@ -174,8 +174,6 @@ namespace Bridge.Translator
             this.Plugins.BeforeEmit(emitter, this);
             logger.Info("Before emitting done");
 
-            System.Diagnostics.Debugger.Launch();
-
             this.AddMainOutputs(emitter.Emit());
             this.EmitterOutputs = emitter.Outputs;
 
