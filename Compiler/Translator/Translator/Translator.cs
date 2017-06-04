@@ -423,15 +423,9 @@ namespace Bridge.Translator
                 if (item.OutputType == TranslatorOutputTypes.JavaScript)
                 {
                     content = item.Content.GetContentAsString();
+                    content = this.GenerateSourceMap(file.FullName, content);
+
                     this.SaveToFile(file.FullName, content);
-
-                    var sourceMap = this.GenerateSourceMap(file.FullName, content);
-
-                    if (sourceMap != null)
-                    {
-                        File.AppendAllText(file.FullName, Emitter.NEW_LINE, OutputEncoding);
-                        File.AppendAllText(file.FullName, sourceMap, OutputEncoding);
-                    }
                 }
                 else
                 {
@@ -454,13 +448,11 @@ namespace Bridge.Translator
 
         public string GenerateSourceMap(string fileName, string content, Action<SourceMapBuilder> before = null)
         {
-            string sourceMap = null;
-
             if (this.AssemblyInfo.SourceMap.Enabled)
             {
                 var projectPath = Path.GetDirectoryName(this.Location);
 
-                sourceMap = SourceMapGenerator.Generate(fileName, projectPath, content,
+                SourceMapGenerator.Generate(fileName, projectPath, ref content,
                     before,
                     (sourceRelativePath) =>
                     {
@@ -482,10 +474,11 @@ namespace Bridge.Translator
                         }
 
                     },
-                    new string[0], this.SourceFiles, this.AssemblyInfo.SourceMap.Eol, this.Log);
+                    new string[0], this.SourceFiles, this.AssemblyInfo.SourceMap.Eol, this.Log
+                );
             }
 
-            return sourceMap;
+            return content;
         }
 
         private static CSharpFormattingOptions GetFormatter()
