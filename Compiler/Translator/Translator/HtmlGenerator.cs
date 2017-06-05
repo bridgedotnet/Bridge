@@ -93,38 +93,37 @@ namespace Bridge.Translator
                     {
                         if (!firstMinJs)
                         {
+                            jsMinBuffer.Append(Emitter.NEW_LINE);
                             jsMinBuffer.Append(indentScript);
                         }
 
                         firstMinJs = false;
 
                         jsMinBuffer.Append(string.Format(scriptTemplate, output.GetOutputPath(outputPath, true)));
-                        jsMinBuffer.Append(Emitter.NEW_LINE);
                     }
                     else
                     {
                         if (!firstJs)
                         {
+                            jsBuffer.Append(Emitter.NEW_LINE);
                             jsBuffer.Append(indentScript);
                         }
 
                         firstJs = false;
 
                         jsBuffer.Append(string.Format(scriptTemplate, output.GetOutputPath(outputPath, true)));
-                        jsBuffer.Append(Emitter.NEW_LINE);
-
                     }
                 } else if (output.OutputType == TranslatorOutputType.StyleSheets && indexCss >= 0)
                 {
                     if (!firstCss)
                     {
+                        cssBuffer.Append(Emitter.NEW_LINE);
                         cssBuffer.Append(indentCss);
                     }
 
                     firstCss = false;
 
                     cssBuffer.Append(string.Format(cssLinkTemplate, output.GetOutputPath(outputPath, true)));
-                    cssBuffer.Append(Emitter.NEW_LINE);
                 }
             }
 
