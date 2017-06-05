@@ -62,7 +62,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "files", "files", "{B83954AB
 	ProjectSection(SolutionItems) = preProject
 		.build\files\bridge.json = .build\files\bridge.json
 		.build\files\Bridge.Min.targets = .build\files\Bridge.Min.targets
-		.build\files\demo.html.pp = .build\files\demo.html.pp
 		.build\files\install.ps1 = .build\files\install.ps1
 		.build\files\install_clean.ps1 = .build\files\install_clean.ps1
 		.build\files\output_readme.txt = .build\files\output_readme.txt

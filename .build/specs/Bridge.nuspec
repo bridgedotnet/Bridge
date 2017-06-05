@@ -27,6 +27,5 @@
 
     <!--content-->
     <file src="../../.build/files/bridge.json" target="content/bridge.json" />
-    <file src="../../.build/files/demo.html.pp" target="content/demo.html.pp" />
   </files>
 </package>
