@@ -580,7 +580,7 @@ namespace Bridge.Translator
                 if (possiblyWrongGetter || possiblyWrongSetter)
                 {
                     var message = string.Format(
-                            "{0} is marked with [Field] attribute but implements {1}{2}. To fix the problem either remove [Field] or add [External]/[Template] attributes",
+                            Bridge.Translator.Constants.Messages.Exceptions.FIELD_PROPERTY_MARKED_ADVISE,
                             resolvedProperty.Member.ToString(),
                             possiblyWrongGetter ? "getter" : string.Empty,
                             possiblyWrongSetter ? (possiblyWrongGetter ? " and " : string.Empty) + "setter" : string.Empty

@@ -13,10 +13,29 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         [ObjectLiteral]
-        private interface Parent
+        private interface Parent1
         {
             //[FieldProperty]
             string Name { get; set; }
+        }
+
+        [ObjectLiteral]
+        private class Child1 : Parent1
+        {
+            public string Name
+            {
+                get; set;
+            }
+        }
+
+        [ObjectLiteral]
+        private interface Parent
+        {
+            [Field]
+            string Name
+            {
+                get; set;
+            }
         }
 
         [Test]
@@ -24,6 +43,16 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             Child c = new Child { Name = "name" };
             Parent p = c;
+
+            Assert.AreEqual("name", p.Name);
+            Assert.AreEqual("name", c.Name);
+        }
+
+        [Test]
+        public void TestObjectLiteralFieldImplementingInterface()
+        {
+            Child1 c = new Child1 { Name = "name" };
+            Parent1 p = c;
 
             Assert.AreEqual("name", p.Name);
             Assert.AreEqual("name", c.Name);

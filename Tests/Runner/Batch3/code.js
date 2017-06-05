@@ -7975,6 +7975,13 @@ Bridge.$N1391Result =                     r;
 
                 Bridge.Test.NUnit.Assert.AreEqual("name", p.Name);
                 Bridge.Test.NUnit.Assert.AreEqual("name", c.Name);
+            },
+            TestObjectLiteralFieldImplementingInterface: function () {
+                var c = { Name: "name" };
+                var p = c;
+
+                Bridge.Test.NUnit.Assert.AreEqual("name", p.Name);
+                Bridge.Test.NUnit.Assert.AreEqual("name", c.Name);
             }
         }
     });
@@ -16187,6 +16194,9 @@ Bridge.$N1391Result =                     r;
                     var c1 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.Component1();
                     Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(c1.any));
 
+                    var c2 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.Component2();
+                    Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(c2.any));
+
                     var c3 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.Component3();
                     Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(c3.any));
                 }
@@ -16197,6 +16207,18 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.BaseComponent");
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.Component1", {
+        fields: {
+            config: null,
+            any: null
+        },
+        ctors: {
+            init: function () {
+                this.any = {  };
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2310.Component2", {
         fields: {
             config: null,
             any: null
@@ -17290,21 +17312,28 @@ Bridge.$N1391Result =                     r;
             },
             methods: {
                 TestPropertyInitializer: function () {
-                    var d2 = { Value1: Bridge.getDefaultValue(System.Int32) };
+                    var d2 = { Value2: Bridge.getDefaultValue(System.Int32), Value1: Bridge.getDefaultValue(System.Int32) };
                     Bridge.Test.NUnit.Assert.AreEqual(0, d2.Value1);
+                    Bridge.Test.NUnit.Assert.AreEqual(0, d2.Value2);
 
-                    var d3 = { Value7: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.IntProp, Value8: 1, Value1: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.IntProp, Value2: 1 };
+                    var d3 = { Value4: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.IntProp, Value5: 1, Value7: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.IntProp, Value8: 1, Value1: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.IntProp, Value2: 1 };
                     Bridge.Test.NUnit.Assert.AreEqual(2, d3.Value1);
                     Bridge.Test.NUnit.Assert.AreEqual(1, d3.Value2);
                     Bridge.Test.NUnit.Assert.Null(d3.Value3);
+                    Bridge.Test.NUnit.Assert.AreEqual(2, d3.Value4);
+                    Bridge.Test.NUnit.Assert.AreEqual(1, d3.Value5);
+                    Bridge.Test.NUnit.Assert.Null(d3.Value6);
                     Bridge.Test.NUnit.Assert.AreEqual(2, d3.Value7);
                     Bridge.Test.NUnit.Assert.AreEqual(1, d3.Value8);
                     Bridge.Test.NUnit.Assert.Null(d3.Value9);
 
-                    var d4 = { Value7: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.IntProp, Value8: 1, Value9: 0, Value1: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.IntProp, Value2: 1, Value3: 0 };
+                    var d4 = { Value4: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.IntProp, Value5: 1, Value6: 0, Value7: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.IntProp, Value8: 1, Value9: 0, Value1: Bridge.ClientTest.Batch3.BridgeIssues.Bridge2430.IntProp, Value2: 1, Value3: 0 };
                     Bridge.Test.NUnit.Assert.AreEqual(2, d4.Value1);
                     Bridge.Test.NUnit.Assert.AreEqual(1, d4.Value2);
                     Bridge.Test.NUnit.Assert.AreEqual(0, d4.Value3);
+                    Bridge.Test.NUnit.Assert.AreEqual(2, d4.Value4);
+                    Bridge.Test.NUnit.Assert.AreEqual(1, d4.Value5);
+                    Bridge.Test.NUnit.Assert.AreEqual(0, d4.Value6);
                     Bridge.Test.NUnit.Assert.AreEqual(2, d4.Value7);
                     Bridge.Test.NUnit.Assert.AreEqual(1, d4.Value8);
                     Bridge.Test.NUnit.Assert.AreEqual(0, d4.Value9);
@@ -26645,6 +26674,24 @@ Bridge.$N1391Result =                     r;
                     var blob2 = new Blob(System.Array.init(["data2"], Object));
                     Bridge.Test.NUnit.Assert.AreNotEqual$1(null, blob2, "blob2 is not null");
                     Bridge.Test.NUnit.Assert.AreEqual$1(5, blob2.size, "blob2.Size equals 5");
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge706", {
+        statics: {
+            fields: {
+                Value: null
+            },
+            ctors: {
+                init: function () {
+                    this.Value = Bridge.box(7, System.Int32);
+                }
+            },
+            methods: {
+                TestFieldPropertyWithInitializer: function () {
+                    Bridge.Test.NUnit.Assert.AreEqual(7, Bridge.unbox(Bridge.ClientTest.Batch3.BridgeIssues.Bridge706.Value));
                 }
             }
         }
