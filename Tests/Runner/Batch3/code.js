@@ -22250,6 +22250,51 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2745", {
+        statics: {
+            methods: {
+                TestFieldInitialization: function () {
+                    var hoho = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2745.Hoho();
+                    Bridge.Test.NUnit.Assert.AreEqual("hoho", hoho.AsdInstance.Test1);
+                    Bridge.Test.NUnit.Assert.AreEqual("haha", hoho.AsdInstance.Test2);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2745.Asd", {
+        fields: {
+            Test1: null
+        },
+        props: {
+            Test2: null
+        },
+        ctors: {
+            $ctor1: function (forTest2) {
+                this.$initialize();
+                this.Test2 = forTest2;
+            },
+            ctor: function () {
+                this.$initialize();
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2745.Hoho", {
+        fields: {
+            AsdInstance: null
+        },
+        props: {
+            Property: null
+        },
+        ctors: {
+            init: function () {
+                var $t;
+                this.AsdInstance = ($t=new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2745.Asd.$ctor1("haha"), $t.Test1 = "hoho", $t);
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2749", {
         statics: {
             methods: {

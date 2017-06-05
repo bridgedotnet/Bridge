@@ -21,6 +21,7 @@ namespace Bridge.Translator
             this.FieldsOnly = fieldsOnly;
             this.Injectors = new List<string>();
             this.IsObjectLiteral = isObjectLiteral;
+            this.ClearTempVariables = true;
         }
 
         public bool IsObjectLiteral
@@ -65,13 +66,28 @@ namespace Bridge.Translator
             private set;
         }
 
+        public bool ClearTempVariables
+        {
+            get; set;
+        }
+
         protected override void DoEmit()
         {
-            if (this.Emitter.TempVariables != null)
+            if (this.Emitter.TempVariables != null && this.ClearTempVariables)
             {
                 this.Emitter.TempVariables = new Dictionary<string, bool>();
             }
             this.EmitFields(this.StaticBlock ? this.TypeInfo.StaticConfig : this.TypeInfo.InstanceConfig);
+
+            /*if (this.Injectors.Count > 0 && this.Emitter.TempVariables != null && this.Emitter.TempVariables.Count > 0)
+            {
+                var writer = this.SaveWriter();
+                this.NewWriter();
+                this.SimpleEmitTempVars(false);
+                this.Injectors.Insert(0, this.Emitter.Output.ToString());
+                this.Emitter.TempVariables.Clear();
+                this.RestoreWriter(writer);
+            }*/
         }
 
         protected virtual void EmitFields(TypeConfigInfo info)
@@ -377,10 +393,10 @@ namespace Bridge.Translator
                         else
                         {
                             var rr = this.Emitter.Resolver.ResolveNode(member.Initializer, this.Emitter) as CSharpInvocationResolveResult;
-                            bool isDefaultInstance = rr != null && 
+                            bool isDefaultInstance = rr != null &&
                                                      rr.Member.SymbolKind == SymbolKind.Constructor &&
-                                                     rr.Arguments.Count == 0 && 
-                                                     rr.InitializerStatements.Count == 0 && 
+                                                     rr.Arguments.Count == 0 &&
+                                                     rr.InitializerStatements.Count == 0 &&
                                                      rr.Type.Kind == TypeKind.Struct;
 
                             if (!isDefaultInstance)
@@ -414,7 +430,7 @@ namespace Bridge.Translator
                         withoutTypeParams = OverloadsCollection.ExcludeTypeParameterForDefinition(m_rr);
                     }
                 }
-                
+
                 var mname = member.GetName(this.Emitter, withoutTypeParams);
 
                 if (this.TypeInfo.IsEnum && m_rr != null)
@@ -472,7 +488,7 @@ namespace Bridge.Translator
                     {
                         var name = member.GetName(this.Emitter);
                         bool isValidIdentifier = Helpers.IsValidIdentifier(name);
-                        var value = constValue is AstType ? Inspector.GetStructDefaultValue((AstType) constValue, this.Emitter) : Inspector.GetStructDefaultValue((IType)constValue, this.Emitter);
+                        var value = constValue is AstType ? Inspector.GetStructDefaultValue((AstType)constValue, this.Emitter) : Inspector.GetStructDefaultValue((IType)constValue, this.Emitter);
 
                         if (!isValidIdentifier)
                         {
@@ -824,7 +840,7 @@ namespace Bridge.Translator
                 if (pair)
                 {
                     this.WriteComma();
-                    this.WriteScript(OverloadsCollection.Create(Emitter, interfaceMember).GetOverloadName(withoutTypeParams:true));
+                    this.WriteScript(OverloadsCollection.Create(Emitter, interfaceMember).GetOverloadName(withoutTypeParams: true));
                     this.WriteCloseBracket();
                 }
             }
