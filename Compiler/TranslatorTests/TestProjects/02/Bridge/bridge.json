@@ -3,7 +3,10 @@
   "cleanOutputFolderBeforeBuildPattern": "*.*",
   "outputFormatting": "Formatted",
   "locales": "en-US",
-  "combineScripts":  true
+  "combineScripts":  true,
+  "html": {
+    "title": "This is title from Html config"
+  }
   //"sourceMap": {
   //  "enabled": true,
   //  "eol": "crlf"

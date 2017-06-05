@@ -113,11 +113,18 @@ namespace Bridge.Translator
             translator.Plugins.AfterOutput(translator, outputPath, !bridgeOptions.ExtractCore);
             logger.Info("Done plugins AfterOutput");
 
+            var htmlTitle = translator.AssemblyInfo.Html.Title;
+
+            if (string.IsNullOrEmpty(htmlTitle))
+            {
+                htmlTitle = translator.GetAssemblyTitle();
+            }
+
             var htmlGenerator = new HtmlGenerator(
                 translator.Log,
                 translator.AssemblyInfo,
                 translator.Outputs,
-                translator.GetAssemblyTitle()
+                htmlTitle
                 );
 
             htmlGenerator.GenerateHtml(outputPath);

@@ -138,6 +138,26 @@ namespace Bridge.Translator
             return assemblyDescription;
         }
 
+        internal string GetAssemblyTitle()
+        {
+            string assemblyTitle = null;
+
+            var assemblyTitleAttribute = this.AssemblyDefinition.CustomAttributes.FirstOrDefault(x => x.AttributeType.FullName == "System.Reflection.AssemblyTitleAttribute");
+
+            if (assemblyTitleAttribute != null
+                && assemblyTitleAttribute.HasConstructorArguments)
+            {
+                assemblyTitle = assemblyTitleAttribute.ConstructorArguments[0].Value as string;
+            }
+
+            if (assemblyTitle != null)
+            {
+                assemblyTitle = assemblyTitle.Trim();
+            }
+
+            return assemblyTitle;
+        }
+
         private void LogProductInfo()
         {
             var compilerInfo = this.GetCompilerVersion();

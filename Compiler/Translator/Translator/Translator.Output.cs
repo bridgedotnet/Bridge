@@ -837,17 +837,5 @@ namespace Bridge.Translator
                 this.Log.Error(ex.ToString());
             }
         }
-
-        internal string GetAssemblyTitle()
-        {
-            var versionContext = this.GetVersionContext();
-
-            if (versionContext != null)
-            {
-                return versionContext.Assembly.Description;
-            }
-
-            return string.Empty;
-        }
     }
 }

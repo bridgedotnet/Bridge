@@ -16,6 +16,11 @@ namespace Bridge.Contract
         {
             get; set;
         }
+
+        public string Title
+        {
+            get; set;
+        }
     }
 
     public class HtmlConfigConverter : JsonConverter
@@ -24,7 +29,7 @@ namespace Bridge.Contract
         {
             var config = value as HtmlConfig;
 
-            if (config != null && string.IsNullOrEmpty(config.Name))
+            if (config != null && string.IsNullOrEmpty(config.Name) && string.IsNullOrEmpty(config.Title))
             {
                 serializer.Serialize(writer, config.Disabled);
             }
