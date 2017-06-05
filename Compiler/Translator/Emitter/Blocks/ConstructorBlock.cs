@@ -81,6 +81,7 @@ namespace Bridge.Translator
                 if (this.TypeInfo.StaticConfig.HasConfigMembers)
                 {
                     var configBlock = new FieldBlock(this.Emitter, this.TypeInfo, true, false);
+                    configBlock.ClearTempVariables = false;
                     configBlock.Emit();
 
                     if (configBlock.Injectors.Count > 0)
@@ -205,6 +206,7 @@ namespace Bridge.Translator
             if (this.TypeInfo.InstanceConfig.HasConfigMembers)
             {
                 var configBlock = new FieldBlock(this.Emitter, this.TypeInfo, false, false);
+                configBlock.ClearTempVariables = false;
                 configBlock.Emit();
 
                 if (configBlock.Injectors.Count > 0)
