@@ -240,6 +240,39 @@ namespace Bridge.Html5
         public virtual extern void RemoveAttributeNS(string namespaceURI, string attrName);
 
         /// <summary>
+        /// The Element.requestFullscreen() method issues an asynchronous request to make the element be displayed full-screen.
+        /// </summary>
+        [Name("requestFullscreen")]
+        public extern void RequestFullScreen();
+
+        public extern void RequestPointerLock();
+
+        public extern void MozRequestPointerLock();
+
+        public extern void MsRequestPointerLock();
+
+        [Name("webkitRequestPointerLock")]
+        public extern void WebKitRequestPointerLock();
+
+        /// <summary>
+        /// The Element.requestFullscreen() method issues an asynchronous request to make the element be displayed full-screen.
+        /// </summary>
+        [Name("msRequestFullscreen")]
+        public extern void MsRequestFullScreen();
+
+        /// <summary>
+        /// The Element.requestFullscreen() method issues an asynchronous request to make the element be displayed full-screen.
+        /// </summary>
+        [Name("webkitRequestFullscreen")]
+        public extern void WebKitRequestFullScreen();
+
+        /// <summary>
+        /// The Element.requestFullscreen() method issues an asynchronous request to make the element be displayed full-screen.
+        /// </summary>
+        [Name("mozRequestFullscreen")]
+        public extern void MozRequestFullScreen();
+
+        /// <summary>
         /// Scrolls the page until the element gets into the view.
         /// </summary>
         /// <param name="alignWithTop">If true, the scrolled element is aligned with the top of the scroll area. If false, it is aligned with the bottom.</param>

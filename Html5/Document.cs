@@ -39,6 +39,24 @@ namespace Bridge.Html5
         /// <param name="listener">The object that receives a notification when an event of the specified type occurs. This must be an object implementing the EventListener interface, or simply a JavaScript function.</param>
         public static extern void AddEventListener(EventType type, Action listener);
 
+        [Name("webkitCancelFullscreen")]
+        public static extern void WebKitCancelFullScreen();
+
+        [Name("mozCancelFullscreen")]
+        public static extern void MozCancelFullScreen();
+
+        [Name("msCancelFullscreen")]
+        public static extern void MsCancelFullScreen();
+
+        [Name("cancelFullscreen")]
+        public static extern void CancelFullScreen();
+
+        [Name("webkitExitFullscreen")]
+        public static extern void WebKitExitFullScreen();
+
+        [Name("mozExitFullscreen")]
+        public static extern void MozExitFullScreen();
+
         /// <summary>
         /// The method registers the specified listener on the EventTarget it's called on. The event target may be an Element in a document, the Document itself, a Window, or any other object that supports events.
         /// </summary>
@@ -478,6 +496,42 @@ namespace Bridge.Html5
         public static Action<Event> OnFocus;
 
         /// <summary>
+        /// The Document.onfullscreenchange property is an event handler for the fullscreenchange event that is fire when a document goes in or out of the fullscreen mode.
+        /// </summary>
+        [Name("onfullscreenchange")]
+        public static Action<Event> OnFullScreenChange;
+
+        /// <summary>
+        /// The Document.onfullscreenchange property is an event handler for the fullscreenchange event that is fire when a document goes in or out of the fullscreen mode.
+        /// </summary>
+        [Name("onmsfullscreenchange")]
+        public static Action<Event> OnMsFullScreenChange;
+
+        /// <summary>
+        /// The Document.onfullscreenchange property is an event handler for the fullscreenchange event that is fire when a document goes in or out of the fullscreen mode.
+        /// </summary>
+        [Name("onwebkitfullscreenchange")]
+        public static Action<Event> OnWebKitFullScreenChange;
+
+        /// <summary>
+        /// The Document.onfullscreenchange property is an event handler for the fullscreenchange event that is fire when a document goes in or out of the fullscreen mode.
+        /// </summary>
+        [Name("onmozfullscreenchange")]
+        public static Action<Event> OnMozFullScreenChange;
+        
+        [Name("onfullscreenchange")]
+        public static Action<Event> OnFullScreenError;
+        
+        [Name("onwebkitfullscreenchange")]
+        public static Action<Event> OnWebKitFullScreenError;
+        
+        [Name("onmozfullscreenchange")]
+        public static Action<Event> OnMozFullScreenError;
+
+        [Name("onmsfullscreenerror")]
+        public static Action<Event> OnMsFullScreenError;
+
+        /// <summary>
         /// EventHandler representing the code to be called when the cancel event is raised.
         /// </summary>
         [Name("oncancel")]
@@ -717,6 +771,18 @@ namespace Bridge.Html5
         [Name("onplaying")]
         public static Action<Event> OnPlaying;
 
+        [Name("onpointerlockchange")]
+        public static Action<Event> OnPointerLockChange;
+
+        [Name("onmozpointerlockchange")]
+        public static Action<Event> OnMozPointerLockChange;
+
+        [Name("onwebkitpointerlockchange")]
+        public static Action<Event> OnWebKitPointerLockChange;
+
+        [Name("onmspointerlockchange")]
+        public static Action<Event> OnMsPointerLockChange;
+
         /// <summary>
         /// Is an EventHandler representing the code to be called when the progress event is raised
         /// </summary>
@@ -945,6 +1011,54 @@ namespace Bridge.Html5
         public static readonly HTMLCollection Forms;
 
         /// <summary>
+        /// The Document.fullscreenElement read-only property returns the Element that is currently being presented in full-screen mode in this document, or null if full-screen mode is not currently in use.
+        /// </summary>
+        [Name("fullscreenElement")]
+        public static readonly Element FullScreenElement;
+
+        /// <summary>
+        /// The Document.fullscreenElement read-only property returns the Element that is currently being presented in full-screen mode in this document, or null if full-screen mode is not currently in use.
+        /// </summary>
+        [Name("msFullscreenElement")]
+        public static readonly Element MsFullScreenElement;
+
+        /// <summary>
+        /// The Document.fullscreenElement read-only property returns the Element that is currently being presented in full-screen mode in this document, or null if full-screen mode is not currently in use.
+        /// </summary>
+        [Name("mozFullscreenElement")]
+        public static readonly Element MozFullScreenElement;
+
+        /// <summary>
+        /// The Document.fullscreenElement read-only property returns the Element that is currently being presented in full-screen mode in this document, or null if full-screen mode is not currently in use.
+        /// </summary>
+        [Name("webkitFullscreenElement")]
+        public static readonly Element WebKitFullScreenElement;
+
+        /// <summary>
+        /// Returns a boolean equal to whether the window is in full screen.
+        /// </summary>
+        [Name("fullscreenEnabled")]
+        public static readonly bool FullScreenEnabled;
+
+        /// <summary>
+        /// Returns a boolean equal to whether the window is in full screen.
+        /// </summary>
+        [Name("msFullscreenEnabled")]
+        public static readonly bool MsFullScreenEnabled;
+
+        /// <summary>
+        /// Returns a boolean equal to whether the window is in full screen.
+        /// </summary>
+        [Name("webkitFullscreenEnabled")]
+        public static readonly bool WebKitFullScreenEnabled;
+
+        /// <summary>
+        /// Returns a boolean equal to whether the window is in full screen.
+        /// </summary>
+        [Name("mozFullscreenEnabled")]
+        public static readonly bool MozFullScreenEnabled;
+
+        /// <summary>
         /// Returns the head element of the current document. If there are more than one head elements, the first one is returned.
         /// </summary>
         public static readonly HTMLElement Head;
@@ -978,6 +1092,15 @@ namespace Bridge.Html5
         /// Returns an HTMLCollection object containing one or more HTMLEmbedElements or null which represent the embed elements in the current document.
         /// </summary>
         public static readonly HTMLCollection Plugins;
+
+        public static readonly Element PointerLockElement;
+        
+        public static readonly Element MsPointerLockElement;
+
+        [Name("webkitPointerLockElement")]
+        public static readonly Element WebKitPointerLockElement;
+
+        public static readonly Element MozPointerLockElement;
 
         /// <summary>
         /// Returns loading status of the document.
@@ -1210,6 +1333,37 @@ namespace Bridge.Html5
         /// To track the success or failure of the request, it is necessary to listen for the pointerlockchange and pointerlockerror events.
         /// </summary>
         public static extern void ExitPointerLock();
+
+        /// <summary>
+        /// The exitPointerLock asynchronously releases a pointer lock previously requested through Element.requestPointerLock.
+        /// To track the success or failure of the request, it is necessary to listen for the pointerlockchange and pointerlockerror events.
+        /// </summary>
+        public static extern void MsExitPointerLock();
+
+        /// <summary>
+        /// The exitPointerLock asynchronously releases a pointer lock previously requested through Element.requestPointerLock.
+        /// To track the success or failure of the request, it is necessary to listen for the pointerlockchange and pointerlockerror events.
+        /// </summary>
+        [Name("webkitExitPointerLock")]
+        public static extern void WebKitExitPointerLock();
+
+        /// <summary>
+        /// The exitPointerLock asynchronously releases a pointer lock previously requested through Element.requestPointerLock.
+        /// To track the success or failure of the request, it is necessary to listen for the pointerlockchange and pointerlockerror events.
+        /// </summary>
+        public static extern void MozExitPointerLock();
+
+        /// <summary>
+        /// The Document.exitFullscrean() is a method that takes the document out of full-screen mode; this is used to reverse the effects of a call to make an element in the document full-screen using its Element.requestFullscreen() method.
+        /// </summary>
+        [Name("exitFullscreen")]
+        public static extern void ExitFullScreen();
+
+        /// <summary>
+        /// The Document.exitFullscrean() is a method that takes the document out of full-screen mode; this is used to reverse the effects of a call to make an element in the document full-screen using its Element.requestFullscreen() method.
+        /// </summary>
+        [Name("msExitFullscreen")]
+        public static extern void MsExitFullScreen();
 
         /// <summary>
         /// Returns an array-like object of all child elements which have all of the given class names. When called on the document object, the complete document is searched, including the root node. You may also call getElementsByClassName() on any element; it will return only elements which are descendants of the specified root element with the given class names.

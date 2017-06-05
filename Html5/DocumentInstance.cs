@@ -78,6 +78,42 @@ namespace Bridge.Html5
         public Action<Event> OnFocus;
 
         /// <summary>
+        /// The Document.onfullscreenchange property is an event handler for the fullscreenchange event that is fire when a document goes in or out of the fullscreen mode.
+        /// </summary>
+        [Name("onfullscreenchange")]
+        public Action<Event> OnFullScreenChange;
+
+        /// <summary>
+        /// The Document.onfullscreenchange property is an event handler for the fullscreenchange event that is fire when a document goes in or out of the fullscreen mode.
+        /// </summary>
+        [Name("onmsfullscreenchange")]
+        public static Action<Event> OnMsFullScreenChange;
+
+        /// <summary>
+        /// The Document.onfullscreenchange property is an event handler for the fullscreenchange event that is fire when a document goes in or out of the fullscreen mode.
+        /// </summary>
+        [Name("onwebkitfullscreenchange")]
+        public Action<Event> OnWebKitFullScreenChange;
+
+        /// <summary>
+        /// The Document.onfullscreenchange property is an event handler for the fullscreenchange event that is fire when a document goes in or out of the fullscreen mode.
+        /// </summary>
+        [Name("onmozfullscreenchange")]
+        public Action<Event> OnMozFullScreenChange;
+
+        [Name("onfullscreenchange")]
+        public Action<Event> OnFullScreenError;
+
+        [Name("onwebkitfullscreenchange")]
+        public Action<Event> OnWebKitFullScreenError;
+
+        [Name("onmozfullscreenchange")]
+        public Action<Event> OnMozFullScreenError;
+
+        [Name("onmsfullscreenerror")]
+        public static Action<Event> OnMsFullScreenError;
+
+        /// <summary>
         /// EventHandler representing the code to be called when the cancel event is raised.
         /// </summary>
         [Name("oncancel")]
@@ -317,6 +353,18 @@ namespace Bridge.Html5
         [Name("onplaying")]
         public Action<Event> OnPlaying;
 
+        [Name("onpointerlockchange")]
+        public static Action<Event> OnPointerLockChange;
+
+        [Name("onmozpointerlockchange")]
+        public static Action<Event> OnMozPointerLockChange;
+
+        [Name("onwebkitpointerlockchange")]
+        public static Action<Event> OnWebKitPointerLockChange;
+
+        [Name("onmspointerlockchange")]
+        public static Action<Event> OnMsPointerLockChange;
+
         /// <summary>
         /// Is an EventHandler representing the code to be called when the progress event is raised
         /// </summary>
@@ -436,6 +484,15 @@ namespace Bridge.Html5
         /// Returns the Element that is the root element of the document (for example, the &lt;html&gt; element for HTML documents).
         /// </summary>
         public readonly HTMLElement DocumentElement;
+        
+        public readonly Element PointerLockElement;
+
+        public static readonly Element MsPointerLockElement;
+
+        [Name("webkitPointerLockElement")]
+        public static readonly Element WebKitPointerLockElement;
+
+        public readonly Element MozPointerLockElement;
 
         /// <summary>
         /// Returns the document location as string.
@@ -543,6 +600,54 @@ namespace Bridge.Html5
         public readonly HTMLCollection Forms;
 
         /// <summary>
+        /// The Document.fullscreenElement read-only property returns the Element that is currently being presented in full-screen mode in this document, or null if full-screen mode is not currently in use.
+        /// </summary>
+        [Name("fullscreenElement")]
+        public readonly Element FullScreenElement;
+
+        /// <summary>
+        /// The Document.fullscreenElement read-only property returns the Element that is currently being presented in full-screen mode in this document, or null if full-screen mode is not currently in use.
+        /// </summary>
+        [Name("msFullscreenElement")]
+        public static readonly Element MsFullScreenElement;
+
+        /// <summary>
+        /// The Document.fullscreenElement read-only property returns the Element that is currently being presented in full-screen mode in this document, or null if full-screen mode is not currently in use.
+        /// </summary>
+        [Name("mozFullscreenElement")]
+        public readonly Element MozFullScreenElement;
+
+        /// <summary>
+        /// The Document.fullscreenElement read-only property returns the Element that is currently being presented in full-screen mode in this document, or null if full-screen mode is not currently in use.
+        /// </summary>
+        [Name("webkitFullscreenElement")]
+        public readonly Element WebKitFullScreenElement;
+
+        /// <summary>
+        /// Returns a boolean equal to whether the window is in full screen.
+        /// </summary>
+        [Name("fullscreenEnabled")]
+        public readonly bool FullScreenEnabled;
+
+        /// <summary>
+        /// Returns a boolean equal to whether the window is in full screen.
+        /// </summary>
+        [Name("msFullscreenEnabled")]
+        public static readonly bool MsFullScreenEnabled;
+
+        /// <summary>
+        /// Returns a boolean equal to whether the window is in full screen.
+        /// </summary>
+        [Name("webkitFullscreenEnabled")]
+        public readonly bool WebKitFullScreenEnabled;
+
+        /// <summary>
+        /// Returns a boolean equal to whether the window is in full screen.
+        /// </summary>
+        [Name("mozFullscreenEnabled")]
+        public readonly bool MozFullScreenEnabled;
+
+        /// <summary>
         /// Returns the head element of the current document. If there are more than one head elements, the first one is returned.
         /// </summary>
         public readonly HTMLElement Head;
@@ -619,6 +724,25 @@ namespace Bridge.Html5
         /// <param name="externalNode">the node from another document to be adopted.</param>
         /// <returns>the adopted node that can be used in the current document. The new node's parentNode is null, since it has not yet been inserted into the document tree.</returns>
         public virtual extern Node AdoptNode(Node externalNode);
+
+        [Name("webkitCancelFullscreen")]
+        public extern void WebKitCancelFullScreen();
+
+        [Name("mozCancelFullscreen")]
+        public extern void MozCancelFullScreen();
+
+        [Name("msCancelFullscreen")]
+        public static extern void MsCancelFullScreen();
+
+        [Name("cancelFullscreen")]
+        public extern void CancelFullScreen();
+
+        [Name("webkitExitFullscreen")]
+        public extern void WebKitExitFullScreen();
+
+        [Name("mozExitFullscreen")]
+        public extern void MozExitFullScreen();
+
 
         /// <summary>
         /// This method is used to retrieve the caret position in a document based on two coordinates. A CaretPosition is returned, containing the found DOM node and the character offset in that node.
@@ -803,6 +927,18 @@ namespace Bridge.Html5
         public virtual extern void EnableStyleSheetsForSet(string name);
 
         /// <summary>
+        /// The Document.exitFullscrean() is a method that takes the document out of full-screen mode; this is used to reverse the effects of a call to make an element in the document full-screen using its Element.requestFullscreen() method.
+        /// </summary>
+        [Name("exitFullscreen")]
+        public extern void ExitFullScreen();
+
+        /// <summary>
+        /// The Document.exitFullscrean() is a method that takes the document out of full-screen mode; this is used to reverse the effects of a call to make an element in the document full-screen using its Element.requestFullscreen() method.
+        /// </summary>
+        [Name("msExitFullscreen")]
+        public static extern void MsExitFullScreen();
+
+        /// <summary>
         /// The exitPointerLock asynchronously releases a pointer lock previously requested through Element.requestPointerLock.
         /// To track the success or failure of the request, it is necessary to listen for the pointerlockchange and pointerlockerror events.
         /// </summary>
@@ -966,6 +1102,25 @@ namespace Bridge.Html5
         /// <param name="command">The command for which to determine support.</param>
         /// <returns></returns>
         public virtual extern bool QueryCommandSupported(string command);
+
+        /// <summary>
+        /// The exitPointerLock asynchronously releases a pointer lock previously requested through Element.requestPointerLock.
+        /// To track the success or failure of the request, it is necessary to listen for the pointerlockchange and pointerlockerror events.
+        /// </summary>
+        public static extern void MsExitPointerLock();
+
+        /// <summary>
+        /// The exitPointerLock asynchronously releases a pointer lock previously requested through Element.requestPointerLock.
+        /// To track the success or failure of the request, it is necessary to listen for the pointerlockchange and pointerlockerror events.
+        /// </summary>
+        [Name("webkitExitPointerLock")]
+        public static extern void WebKitExitPointerLock();
+
+        /// <summary>
+        /// The exitPointerLock asynchronously releases a pointer lock previously requested through Element.requestPointerLock.
+        /// To track the success or failure of the request, it is necessary to listen for the pointerlockchange and pointerlockerror events.
+        /// </summary>
+        public static extern void MozExitPointerLock();
 
         /// <summary>
         /// Returns the current value of the current range for a formating command.
