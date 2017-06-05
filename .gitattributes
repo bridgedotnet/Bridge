@@ -11,7 +11,7 @@
 *.cshtml text
 *.csproj text
 *.htm text
-*.html text
+*.html eol=lf
 *.js eol=lf
 *.jsb text
 *.json text
