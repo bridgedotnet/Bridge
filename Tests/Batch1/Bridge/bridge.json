@@ -15,7 +15,6 @@
     "disabled": true,
     "target":  "Inline"
   },
-  "sourceMap":  true,
   "test": {
     "skipCombine": true
   },
