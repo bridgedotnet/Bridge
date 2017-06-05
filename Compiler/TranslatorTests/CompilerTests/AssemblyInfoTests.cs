@@ -30,7 +30,7 @@ namespace Bridge.Translator.Tests
 
             Assert.Null(config.FileName, "FileName");
             Assert.AreEqual(OutputBy.Project, config.OutputBy, "OutputBy");
-            Assert.AreEqual(FileNameCaseConvert.CamelCase, config.FileNameCasing, "FileNameCasing");
+            Assert.AreEqual(FileNameCaseConvert.None, config.FileNameCasing, "FileNameCasing");
             Assert.AreEqual(JavaScriptOutputType.Both, config.OutputFormatting, "OutputFormatting");
             Assert.AreEqual(0, config.StartIndexInName, "StartIndexInName");
             Assert.Null(config.BeforeBuild, "BeforeBuild");

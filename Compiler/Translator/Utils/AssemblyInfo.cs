@@ -65,7 +65,7 @@ namespace Bridge.Translator
             }
         }
 
-        private FileNameCaseConvert jsFileCasing = FileNameCaseConvert.CamelCase;
+        private FileNameCaseConvert jsFileCasing = FileNameCaseConvert.None;
 
         /// <summary>
         /// The option to manage JavaScript file name case converting for class grouping.
