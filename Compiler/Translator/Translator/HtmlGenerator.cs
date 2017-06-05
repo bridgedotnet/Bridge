@@ -57,7 +57,6 @@ namespace Bridge.Translator
             var tokenCss = "{css}";
             var tokenScript = "{script}";
 
-            var needTitle = htmlTemplate.IndexOf(tokenTitle, StringComparison.InvariantCultureIgnoreCase) >= 0;
             var indexCss = htmlTemplate.IndexOf(tokenCss, StringComparison.InvariantCultureIgnoreCase);
             var indexScript = htmlTemplate.IndexOf(tokenScript, StringComparison.InvariantCultureIgnoreCase);
 
