@@ -13,7 +13,11 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test(ExpectedCount = 2)]
         public static void TestAmbigiousSymbols()
         {
-            IEnumerable<object[]> testDataDates = new[] { new object[] { new DateTime(2017, 1, 1), new DateTime(2017, 1, 1) } };
+            IEnumerable<object[]> testDataDates = new[]
+            {
+                new object[] { new DateTime(2017, 1, 1), new DateTime(2018, 1, 1) }
+            };
+
             var method = typeof(Bridge2738).GetMethod("LogDates");
 
             foreach (var dates in testDataDates)
@@ -25,7 +29,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public static void LogDates(DateTime a, DateTime b)
         {
             Assert.AreEqual(2017, a.Year);
-            Assert.AreEqual(2017, b.Year);
+            Assert.AreEqual(2018, b.Year);
         }
     }
 }

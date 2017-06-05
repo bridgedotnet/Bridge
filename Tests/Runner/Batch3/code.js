@@ -22255,7 +22255,8 @@ Bridge.$N1391Result =                     r;
             methods: {
                 TestAmbigiousSymbols: function () {
                     var $t;
-                    var testDataDates = System.Array.init([System.Array.init([Bridge.box(new Date(2017, 1 - 1, 1), System.DateTime, $box_.System.DateTime.toString), Bridge.box(new Date(2017, 1 - 1, 1), System.DateTime, $box_.System.DateTime.toString)], System.Object)], System.Array.type(System.Object));
+                    var testDataDates = System.Array.init([System.Array.init([Bridge.box(new Date(2017, 1 - 1, 1), System.DateTime, $box_.System.DateTime.toString), Bridge.box(new Date(2018, 1 - 1, 1), System.DateTime, $box_.System.DateTime.toString)], System.Object)], System.Array.type(System.Object));
+
                     var method = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2738, 8, 284, "LogDates");
 
                     $t = Bridge.getEnumerator(testDataDates, System.Array.type(System.Object));
@@ -22271,7 +22272,7 @@ Bridge.$N1391Result =                     r;
                     }},
                 LogDates: function (a, b) {
                     Bridge.Test.NUnit.Assert.AreEqual(2017, a.getFullYear());
-                    Bridge.Test.NUnit.Assert.AreEqual(2017, b.getFullYear());
+                    Bridge.Test.NUnit.Assert.AreEqual(2018, b.getFullYear());
                 }
             }
         }
