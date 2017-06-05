@@ -3,6 +3,7 @@ using Bridge;
 namespace System
 {
     [External]
+    [Reflectable]
     public class ArgumentOutOfRangeException : ArgumentException, IBridgeClass
     {
         public extern ArgumentOutOfRangeException();

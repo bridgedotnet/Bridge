@@ -6,6 +6,7 @@ namespace System
     /// Specifies the day of the week.
     /// </summary>
     [External]
+    [Reflectable]
     public enum DayOfWeek
     {
         /// <summary>

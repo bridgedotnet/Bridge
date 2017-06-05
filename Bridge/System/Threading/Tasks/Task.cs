@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace System.Threading.Tasks
 {
     [External]
-    //[Name("Bridge.Task")]
+    [Reflectable]
     public class Task : IDisposable, IBridgeClass
     {
         public extern Task(Action action);
@@ -93,6 +93,7 @@ namespace System.Threading.Tasks
 
     [External]
     [IgnoreGeneric(AllowInTypeScript = true)]
+    [Reflectable]
     public class Task<TResult> : Task
     {
         public extern Task(Func<TResult> function);

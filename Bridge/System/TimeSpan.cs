@@ -3,7 +3,7 @@ using Bridge;
 namespace System
 {
     [External]
-    //[Name("System.TimeSpan")]
+    [Reflectable]
     public struct TimeSpan : IComparable, IComparable<TimeSpan>, IEquatable<TimeSpan>, IFormattable, IBridgeClass
     {
         [InlineConst]

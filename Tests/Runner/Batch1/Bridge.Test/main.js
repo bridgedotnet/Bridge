@@ -105,7 +105,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 GetAssert: function () {
                     var $t;
-                    var a = ($t = QUnit.config.current).assert;
+                    var a = Bridge.unbox(($t = QUnit.config.current).assert);
 
                     return a;
                 },

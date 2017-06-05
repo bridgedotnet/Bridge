@@ -403,7 +403,7 @@ namespace Bridge.Translator
             }
         }
 
-        protected virtual void SimpleEmitTempVars()
+        protected virtual void SimpleEmitTempVars(bool newline = true)
         {
             if (this.Emitter.TempVariables.Count > 0)
             {
@@ -418,7 +418,10 @@ namespace Bridge.Translator
 
                 this.Emitter.Comma = false;
                 this.WriteSemiColon();
-                this.WriteNewLine();
+                if (newline)
+                {
+                    this.WriteNewLine();
+                }
             }
         }
     }

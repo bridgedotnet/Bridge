@@ -6,6 +6,7 @@ namespace System.Text.RegularExpressions
     /// Represents the results from a single regular expression match.
     /// </summary>
     [External]
+    [Reflectable]
     public class Match : Group
     {
         internal extern Match(Regex regex, int capcount, String text, int begpos, int len, int startpos);

@@ -3,6 +3,7 @@ using Bridge;
 namespace System
 {
     [External]
+    [Reflectable]
     public class NotImplementedException : Exception, IBridgeClass
     {
         public extern NotImplementedException();

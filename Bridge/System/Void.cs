@@ -4,7 +4,7 @@ namespace System
 {
     [External]
     [IgnoreCast]
-    [Name("System.Void")]
+    [Reflectable]
     public struct Void
     {
     }

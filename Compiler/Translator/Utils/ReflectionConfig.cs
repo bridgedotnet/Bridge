@@ -4,7 +4,7 @@ namespace Bridge.Translator
 {
     public class ReflectionConfig : IReflectionConfig
     {
-        public bool? Enabled
+        public bool? Disabled
         {
             get; set;
         }
@@ -25,6 +25,11 @@ namespace Bridge.Translator
         }
 
         public string Output
+        {
+            get; set;
+        }
+
+        public MetadataTarget Target
         {
             get; set;
         }

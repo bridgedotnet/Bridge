@@ -3,6 +3,7 @@ using Bridge;
 namespace System.Collections.Generic
 {
     [External]
+    [Reflectable]
     [Convention(Target = ConventionTarget.Member, Member = ConventionMember.Method, Notation = Notation.LowerCamelCase)]
     public interface IDictionary<TKey, TValue> : ICollection<KeyValuePair<TKey, TValue>>, IBridgeClass
     {

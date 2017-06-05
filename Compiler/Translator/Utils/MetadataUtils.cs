@@ -589,7 +589,14 @@ namespace Bridge.Translator
                         sname = OverloadsCollection.Create(emitter, method).GetOverloadName();
                     }
 
-                    properties.Add("sn", sname);
+                    if (sname.Contains("\""))
+                    {
+                        properties.Add("sn", new JRaw(sname));
+                    }
+                    else
+                    {
+                        properties.Add("sn", sname);
+                    }
                 }
                 properties.Add("rt", new JRaw(MetadataUtils.GetTypeName(method.ReturnType, emitter, isGenericSpecialization)));
 

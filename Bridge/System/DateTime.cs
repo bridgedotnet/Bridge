@@ -4,6 +4,7 @@ using Bridge;
 namespace System
 {
     [External]
+    [Reflectable]
     public struct DateTime : IComparable, IComparable<DateTime>, IEquatable<DateTime>, IFormattable
     {
         [Template("System.DateTime.getMaxValue()")]

@@ -6,6 +6,7 @@ namespace System.Threading.Tasks
     [External]
     [IgnoreGeneric]
     [Name("System.Threading.Tasks.TaskCompletionSource")]
+    [Reflectable]
     public class TaskCompletionSource<TResult>
     {
         public extern TaskCompletionSource();

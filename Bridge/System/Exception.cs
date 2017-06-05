@@ -4,6 +4,7 @@ using System.Collections.Generic;
 namespace System
 {
     [External]
+    [Reflectable]
     public class Exception : IBridgeClass
     {
         /// <summary>

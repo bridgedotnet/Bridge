@@ -10,7 +10,18 @@
   "html": {
     "disabled": true
   },
+  "reflection": {
+    "disabled": true,
+    "target":  "Inline" 
+  },
+  "sourceMap":  true,
   "test": {
-    "skipCombine":  true
-  }
+    "skipCombine": true
+  },
+  "resources": [
+    {
+      "name": "bridge.meta.js",
+      "extract": false
+    }
+  ]
 }

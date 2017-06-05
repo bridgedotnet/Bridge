@@ -6,6 +6,7 @@ namespace System.Net.WebSockets
     /// Options to use with a <see cref="ClientWebSocket"/> object.
     /// </summary>
     [External]
+    [Reflectable]
     public class ClientWebSocketOptions
     {
         /// <summary>

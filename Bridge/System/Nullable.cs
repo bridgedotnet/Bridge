@@ -3,6 +3,7 @@ using Bridge;
 namespace System
 {
     [External]
+    [Reflectable]
     public struct Nullable<T> where T : struct
     {
         [Template("{0}")]

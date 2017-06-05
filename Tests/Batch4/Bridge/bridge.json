@@ -15,6 +15,10 @@
       "extract": false
     }
   ],
+  "reflection": {
+    "disabled": true,
+    "target":  "Inline" 
+  },
   "test": {
     "skipResources": true,
     "skipAuxiliary": true

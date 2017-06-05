@@ -3,7 +3,7 @@ using Bridge;
 namespace System
 {
     [External]
-    //[Name("System.UInt32")]
+    [Reflectable]
     [Constructor("Number")]
 #pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
     public struct UInt32 : IComparable, IComparable<UInt32>, IEquatable<UInt32>, IFormattable

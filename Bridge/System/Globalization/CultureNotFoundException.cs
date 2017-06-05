@@ -3,6 +3,7 @@ using Bridge;
 namespace System.Globalization
 {
     [External]
+    [Reflectable]
     public class CultureNotFoundException : ArgumentException, IBridgeClass
     {
         public extern CultureNotFoundException();

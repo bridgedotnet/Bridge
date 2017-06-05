@@ -35,7 +35,7 @@ namespace Bridge.Translator.Tests
                 {
                     Reflection = new ReflectionConfig()
                     {
-                        Enabled = configEnabled,
+                        Disabled = !configEnabled,
                         TypeAccessibility = typeAccessibility
                     }
                 }
@@ -75,7 +75,7 @@ namespace Bridge.Translator.Tests
                 Assert.AreEqual(0, reflectableTypes.Length);
             }
 
-            [TestCase]
+            //[TestCase]
             public void GetReflectableTypes_ShouldReturn()
             {
                 TestByOneReflectableAttribute("Reflectable1", true, true);

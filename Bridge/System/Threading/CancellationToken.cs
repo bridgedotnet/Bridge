@@ -3,7 +3,7 @@ using Bridge;
 namespace System.Threading
 {
     [External]
-    //[Name("Bridge.CancellationToken")]
+    [Reflectable]
     public struct CancellationToken
     {
         public extern CancellationToken(bool canceled);

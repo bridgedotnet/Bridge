@@ -3,6 +3,7 @@ using Bridge;
 namespace System.Text
 {
     [External]
+    [Reflectable]
     public class StringBuilder : IBridgeClass
     {
         public extern StringBuilder();

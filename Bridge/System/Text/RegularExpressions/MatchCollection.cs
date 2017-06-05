@@ -7,6 +7,7 @@ namespace System.Text.RegularExpressions
     /// Represents the set of successful matches found by iteratively applying a regular expression pattern to the input string.
     /// </summary>
     [External]
+    [Reflectable]
     public class MatchCollection : ICollection
     {
         internal extern MatchCollection(Regex regex, string input, int beginning, int length, int startat);

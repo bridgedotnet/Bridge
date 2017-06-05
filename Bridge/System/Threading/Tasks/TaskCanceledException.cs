@@ -3,6 +3,7 @@ using Bridge;
 namespace System.Threading.Tasks
 {
     [External]
+    [Reflectable]
     public class TaskCanceledException : OperationCanceledException
     {
         public extern TaskCanceledException();

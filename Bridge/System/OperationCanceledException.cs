@@ -4,6 +4,7 @@ using System.Threading;
 namespace System
 {
     [External]
+    [Reflectable]
     public class OperationCanceledException : Exception
     {
         public extern OperationCanceledException();

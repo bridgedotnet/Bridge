@@ -3,6 +3,7 @@ using Bridge;
 namespace System
 {
     [External]
+    [Reflectable]
     public class IndexOutOfRangeException : SystemException, IBridgeClass
     {
         public extern IndexOutOfRangeException();

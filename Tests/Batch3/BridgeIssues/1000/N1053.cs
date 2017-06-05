@@ -23,7 +23,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [External]
         public interface Car
         {
-            //[FieldProperty]
+            [Field]
             string Bar { get; set; }
         }
 
@@ -31,7 +31,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Name("Foo")]
         public class Foo : Car
         {
-            //[FieldProperty]
+            [Field]
             public string Bar { get; set; }
         }
     }

@@ -11,6 +11,7 @@ namespace System
     [External]
     //[Name("System.Decimal")]
     [Constructor("System.Decimal")]
+    [Reflectable]
     public struct Decimal : IComparable, IComparable<Decimal>, IEquatable<Decimal>, IFormattable
     {
         [Convention]
