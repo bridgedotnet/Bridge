@@ -92,7 +92,7 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                     var v = "";
 
                     if (value != null) {
-                        v = (value.toString == {}.toString) ? JSON.stringify(value, null, 4) : value.toString();
+                        v = (value.toString == {}.toString) ? JSON.stringify(value, null, 2) : value.toString();
                     }
 
                     if (self.bufferedOutput != null) {

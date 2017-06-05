@@ -51,7 +51,7 @@ namespace Bridge.ClientTest
             AssertLogMessageObject("#30 - ", new object(), "{}"); // Improved in #1994
             AssertLogMessageObject("#31 - ", new ClassA(), "I'm ClassA");
             AssertLogMessageObject("#32 - ", new ClassB(), "{}"); // Improved in #1994
-            AssertLogMessageObject("#33 - ", new ClassC(), StringHelper.CombineLines("{", "    \"Name\": \"Frank\",", "    \"Age\": 55,", "    \"Admin\": true", "}")); // Improved in #1994
+            AssertLogMessageObject("#33 - ", new ClassC(), StringHelper.CombineLines("{", "  \"Name\": \"Frank\",", "  \"Age\": 55,", "  \"Admin\": true", "}")); // Improved in #1994
             AssertLogMessageObject("#34 - ", new object().ToString(), "[object Object]");
             AssertLogMessageObject("#35 - ", new ClassA().ToString(), "I'm ClassA");
             AssertLogMessageObject("#36 - ", new ClassB().ToString(), "[object Object]");

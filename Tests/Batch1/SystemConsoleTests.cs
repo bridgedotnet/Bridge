@@ -282,15 +282,15 @@ namespace Bridge.ClientTest
 
             o = new { Id = 1, Name = "John" };
             Console.WriteLine(o);
-            AssertConsoleMessage("#15", StringHelper.CombineLinesNL("{", "    \"Id\": 1,", "    \"Name\": \"John\"", "}"));
+            AssertConsoleMessage("#15", StringHelper.CombineLinesNL("{", "  \"Id\": 1,", "  \"Name\": \"John\"", "}"));
 
             var a = new { Id = 2, Name = "Mary" };
             Console.WriteLine(a);
-            AssertConsoleMessage("#16", StringHelper.CombineLinesNL("{", "    \"Id\": 2,", "    \"Name\": \"Mary\"", "}"));
+            AssertConsoleMessage("#16", StringHelper.CombineLinesNL("{", "  \"Id\": 2,", "  \"Name\": \"Mary\"", "}"));
 
             //@ o = { Id: 3, Name: "Sally" };
             Console.WriteLine(o);
-            AssertConsoleMessage("#17", StringHelper.CombineLinesNL("{", "    \"Id\": 3,", "    \"Name\": \"Sally\"", "}"));
+            AssertConsoleMessage("#17", StringHelper.CombineLinesNL("{", "  \"Id\": 3,", "  \"Name\": \"Sally\"", "}"));
         }
 
         [Test]
@@ -771,15 +771,15 @@ namespace Bridge.ClientTest
 
             o = new { Id = 1, Name = "John" };
             Console.Write(o);
-            AssertConsoleMessage("#15", StringHelper.CombineLines("{", "    \"Id\": 1,", "    \"Name\": \"John\"", "}"));
+            AssertConsoleMessage("#15", StringHelper.CombineLines("{", "  \"Id\": 1,", "  \"Name\": \"John\"", "}"));
 
             var a = new { Id = 2, Name = "Mary" };
             Console.Write(a);
-            AssertConsoleMessage("#16", StringHelper.CombineLines("{", "    \"Id\": 2,", "    \"Name\": \"Mary\"", "}"));
+            AssertConsoleMessage("#16", StringHelper.CombineLines("{", "  \"Id\": 2,", "  \"Name\": \"Mary\"", "}"));
 
             //@ o = { Id: 3, Name: "Sally" };
             Console.Write(o);
-            AssertConsoleMessage("#17", StringHelper.CombineLines("{", "    \"Id\": 3,", "    \"Name\": \"Sally\"", "}"));
+            AssertConsoleMessage("#17", StringHelper.CombineLines("{", "  \"Id\": 3,", "  \"Name\": \"Sally\"", "}"));
         }
 
         [Test]
