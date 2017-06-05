@@ -3,13 +3,13 @@ namespace Bridge.Contract
     public enum FileNameCaseConvert
     {
         /// <summary>
-        /// Group contents on first file processed by compiler: this means data for 'File.js' and 'file.js' will go all
+        /// (Default), Group contents on first file processed by compiler: this means data for 'File.js' and 'file.js' will go all
         /// to either 'File.js' or 'file.js', whichever comes first in the compiling or file creation process.
         /// </summary>
         None = 1,
 
         /// <summary>
-        /// (Default) Like 'None', but all 'word' names begin lowercase. A 'word' begins either in the begining of
+        /// Like 'None', but all 'word' names begin lowercase. A 'word' begins either in the begining of
         /// the file name or after a dot (that is not the file extension separator).
         /// </summary>
         CamelCase = 2,
