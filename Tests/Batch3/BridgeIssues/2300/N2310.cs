@@ -77,9 +77,22 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             public object any = new object();
         }
 
+        public class Component2
+        {
+            [Field]
+            public object config
+            {
+                get; set;
+            }
+            public object any = new object();
+        }
+
         public class Component3
         {
-            public object config { get; set; }
+            public object config
+            {
+                get; set;
+            }
             public object any = new object();
         }
 
@@ -111,6 +124,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             var c1 = new Component1();
             Assert.NotNull(c1.any);
+
+            var c2 = new Component2();
+            Assert.NotNull(c2.any);
 
             var c3 = new Component3();
             Assert.NotNull(c3.any);

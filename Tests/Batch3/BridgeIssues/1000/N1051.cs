@@ -21,6 +21,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Name("Foo")]
         public class Foo
         {
+            [Field]
             [Name("currentBar")]
             public bool Bar
             {

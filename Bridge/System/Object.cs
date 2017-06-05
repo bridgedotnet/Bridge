@@ -43,9 +43,11 @@ namespace System
         public virtual extern int GetHashCode();
 
         [Template("Object.keys({obj})")]
+        [Unbox(true)]
         public static extern string[] Keys(object obj);
 
         [Template("Object.getOwnPropertyNames({obj})")]
+        [Unbox(true)]
         public static extern string[] GetOwnPropertyNames(object obj);
 
         [Template("{T}.prototype")]
@@ -65,6 +67,7 @@ namespace System
     public static class ObjectExtensions
     {
         [Template("{0}")]
+        [Unbox(true)]
         public static extern T As<T>(this object obj);
 
         [Template("Bridge.cast({obj}, {T})")]
