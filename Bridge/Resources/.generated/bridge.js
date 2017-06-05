@@ -3262,7 +3262,7 @@
     Bridge.define("System.Void", {
         $kind: "struct"
     });
-    // @source SystemAssemblyVersion.js
+    // @source systemAssemblyVersion.js
 
     Bridge.init(function () {
         Bridge.SystemAssembly.version = "16.0.0-beta2";
@@ -4612,7 +4612,7 @@
 
     Bridge.Class.addExtend(System.Char, [System.IComparable$1(System.Char), System.IEquatable$1(System.Char)]);
 
-    // @source FormattableString.js
+    // @source formattableString.js
 
     Bridge.define("System.FormattableString", {
         inherits: [System.IFormattable],
@@ -4633,7 +4633,7 @@
         }
     });
 
-    // @source FormattableStringImpl.js
+    // @source formattableStringImpl.js
 
     Bridge.define("System.FormattableStringImpl", {
         inherits: [System.FormattableString],
@@ -4684,7 +4684,7 @@
         toString: function (obj) { return System.Boolean.toString(obj); }
     });
 
-    // @source FormattableStringFactory.js
+    // @source formattableStringFactory.js
 
     Bridge.define("System.Runtime.CompilerServices.FormattableStringFactory", {
         statics: {
@@ -13376,7 +13376,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
 
     Bridge.Validation = validation;
 
-    // @source Version.js
+    // @source version.js
 
     Bridge.define("System.Version", {
         inherits: function () { return [System.ICloneable,System.IComparable$1(System.Version),System.IEquatable$1(System.Version)]; },
@@ -13806,7 +13806,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         }
     });
 
-    // @source ParseFailureKind.js
+    // @source parseFailureKind.js
 
     Bridge.define("System.Version.ParseFailureKind", {
         $kind: "enum",
@@ -13820,7 +13820,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         }
     });
 
-    // @source VersionResult.js
+    // @source versionResult.js
 
     Bridge.define("System.Version.VersionResult", {
         $kind: "struct",
@@ -18949,7 +18949,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
     System.Linq.OrderedEnumerable$1 = OrderedEnumerable;
 })(Bridge.global);
 
-    // @source Guid.js
+    // @source guid.js
 
     Bridge.define("System.Guid", {
         inherits: function () { return [System.IEquatable$1(System.Guid),System.IComparable$1(System.Guid),System.IFormattable]; },
@@ -19292,7 +19292,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         }
     });
 
-    // @source Environment.js
+    // @source environment.js
 
     Bridge.define("System.Environment", {
         statics: {
@@ -25398,7 +25398,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     });
 
-    // @source Random.js
+    // @source random.js
 
     Bridge.define("System.Random", {
         statics: {
@@ -25548,7 +25548,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     });
 
-    // @source BitConverter.js
+    // @source bitConverter.js
 
     Bridge.define("System.BitConverter", {
         statics: {
@@ -25844,7 +25844,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     });
 
-    // @source Timer.js
+    // @source timer.js
 
     Bridge.define("System.Threading.Timer", {
         inherits: [System.IDisposable],
@@ -25994,7 +25994,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     });
 
-    // @source Console.js
+    // @source console.js
 
     Bridge.define("System.Console", {
         statics: {
@@ -26057,7 +26057,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     });
 
-    // @source BitArray.js
+    // @source bitArray.js
 
     Bridge.define("System.Collections.BitArray", {
         inherits: [System.Collections.ICollection,System.ICloneable],
@@ -26394,7 +26394,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     });
 
-    // @source BitArrayEnumeratorSimple.js
+    // @source bitArrayEnumeratorSimple.js
 
     Bridge.define("System.Collections.BitArray.BitArrayEnumeratorSimple", {
         inherits: [System.Collections.IEnumerator],
@@ -26454,7 +26454,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     });
 
-    // @source BitHelper.js
+    // @source bitHelper.js
 
     Bridge.define("System.Collections.Generic.BitHelper", {
         statics: {
@@ -26504,7 +26504,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     });
 
-    // @source EnumerableHelpers.js
+    // @source enumerableHelpers.js
 
     Bridge.define("Bridge.Collections.EnumerableHelpers", {
         statics: {
@@ -26575,7 +26575,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     });
 
-    // @source HashSet.js
+    // @source hashSet.js
 
     Bridge.define("System.Collections.Generic.HashSet$1", function (T) { return {
         inherits: [System.Collections.Generic.ICollection$1(T),System.Collections.Generic.ISet$1(T)],
@@ -27371,7 +27371,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     }; });
 
-    // @source ElementCount.js
+    // @source elementCount.js
 
     Bridge.define("System.Collections.Generic.HashSet$1.ElementCount", function (T) { return {
         $kind: "struct",
@@ -27409,7 +27409,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     }; });
 
-    // @source Enumerator.js
+    // @source enumerator.js
 
     Bridge.define("System.Collections.Generic.HashSet$1.Enumerator", function (T) { return {
         inherits: [System.Collections.Generic.IEnumerator$1(T)],
@@ -27504,7 +27504,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     }; });
 
-    // @source Slot.js
+    // @source slot.js
 
     Bridge.define("System.Collections.Generic.HashSet$1.Slot", function (T) { return {
         $kind: "struct",
@@ -27544,7 +27544,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     }; });
 
-    // @source Queue.js
+    // @source queue.js
 
     Bridge.define("System.Collections.Generic.Queue$1", function (T) { return {
         inherits: [System.Collections.Generic.IEnumerable$1(T),System.Collections.ICollection],
@@ -27809,7 +27809,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     }; });
 
-    // @source Enumerator.js
+    // @source enumerator.js
 
     Bridge.define("System.Collections.Generic.Queue$1.Enumerator", function (T) { return {
         inherits: [System.Collections.Generic.IEnumerator$1(T),System.Collections.IEnumerator],
@@ -27914,7 +27914,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     }; });
 
-    // @source Stack.js
+    // @source stack.js
 
     Bridge.define("System.Collections.Generic.Stack$1", function (T) { return {
         inherits: [System.Collections.Generic.IEnumerable$1(T),System.Collections.ICollection],
@@ -28108,7 +28108,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     }; });
 
-    // @source Enumerator.js
+    // @source enumerator.js
 
     Bridge.define("System.Collections.Generic.Stack$1.Enumerator", function (T) { return {
         inherits: [System.Collections.Generic.IEnumerator$1(T),System.Collections.IEnumerator],
@@ -28223,7 +28223,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
         }
     }; });
 
-    // @source HashHelpers.js
+    // @source hashHelpers.js
 
     Bridge.define("System.Collections.HashHelpers", {
         statics: {

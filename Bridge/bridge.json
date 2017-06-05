@@ -4,6 +4,7 @@
   "outputFormatting": "Formatted",
   "outputBy": "ClassPath",
   "generateDocumentation": "None",
+  "fileNameCasing": "CamelCase",
   "logging": {
     "level": "None"
   },

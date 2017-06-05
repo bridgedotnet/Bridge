@@ -4,12 +4,13 @@
   "outputFormatting": "Formatted",
   "fileName": "code.js",
   "outputBy": "Project",
+  "fileNameCasing": "CamelCase",
   "html": {
     "disabled": true
   },
   "reflection": {
     "disabled": true,
-    "target":  "Inline" 
+    "target":  "Inline"
   },
   "resources": [
     {

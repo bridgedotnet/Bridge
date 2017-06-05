@@ -4,6 +4,7 @@
   "outputFormatting": "Formatted",
   "fileName": "code.js",
   "outputBy": "Project",
+  "fileNameCasing": "CamelCase",
   "logging": {
     "level": "None"
   },
@@ -17,7 +18,7 @@
   ],
   "reflection": {
     "disabled": true,
-    "target":  "Inline" 
+    "target":  "Inline"
   },
   "useTypedArrays": true,
   "overflowMode": "Javascript",
