@@ -26003,14 +26003,14 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     var con = Bridge.global.console;
 
                     if (con && con.log) {
-                        con.log(value);
+                        con.log(Bridge.unbox(value));
                     }
                 },
                 WriteLine: function (value) {
                     var con = Bridge.global.console;
 
                     if (con && con.log) {
-                        con.log(value);
+                        con.log(Bridge.unbox(value));
                     }
                 },
                 TransformChars: function (buffer, all, index, count) {

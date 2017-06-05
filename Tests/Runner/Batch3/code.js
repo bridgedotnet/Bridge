@@ -11788,10 +11788,10 @@ Bridge.$N1391Result =                     r;
                     return ($t=new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1892.Obj(), $t.value = Bridge.box(v, System.Boolean, $box_.System.Boolean.toString), $t);
                 },
                 op_Implicit$2: function (v) {
-                    return v.value;
+                    return Bridge.unbox(v.value);
                 },
                 op_Implicit$3: function (v) {
-                    return v.value;
+                    return Bridge.unbox(v.value);
                 },
                 op_Implicit$1: function (v) {
                     var $t;
@@ -19378,8 +19378,8 @@ Bridge.$N1391Result =                     r;
 
                 Bridge.Test.NUnit.Assert.AreEqual(3, i.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1());
                 Bridge.Test.NUnit.Assert.Null(Bridge.unbox(c.M1));
-                Bridge.Test.NUnit.Assert.AreEqual(i.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1(), c.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$M1());
-                Bridge.Test.NUnit.Assert.AreEqual(i.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1(), c[System.Array.index(System.String.concat("Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A.baseClassAlias, "$M1"), c)]());
+                Bridge.Test.NUnit.Assert.AreEqual(i.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1(), Bridge.unbox(c.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$M1)());
+                Bridge.Test.NUnit.Assert.AreEqual(i.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1(), Bridge.unbox(c[System.Array.index(System.String.concat("Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A.baseClassAlias, "$M1"), c)])());
             },
             TestG2: function () {
                 var c = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A.G2$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A.BaseClass))();
@@ -19410,8 +19410,8 @@ Bridge.$N1391Result =                     r;
 
                 Bridge.Test.NUnit.Assert.AreEqual(3, i.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1());
                 Bridge.Test.NUnit.Assert.Null(Bridge.unbox(c.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$M1));
-                Bridge.Test.NUnit.Assert.AreEqual(i.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1(), c.M1());
-                Bridge.Test.NUnit.Assert.AreEqual(i.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1(), c[System.Array.index(System.String.concat("Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A.baseClassAlias, "$M1"), c)]());
+                Bridge.Test.NUnit.Assert.AreEqual(i.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1(), Bridge.unbox(c.M1)());
+                Bridge.Test.NUnit.Assert.AreEqual(i.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1(), Bridge.unbox(c[System.Array.index(System.String.concat("Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A.baseClassAlias, "$M1"), c)])());
             },
             TestG3: function () {
                 var c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A.G3();
@@ -19443,7 +19443,7 @@ Bridge.$N1391Result =                     r;
                 Bridge.Test.NUnit.Assert.AreEqual(3, i.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$System$String$M1());
                 Bridge.Test.NUnit.Assert.Null(Bridge.unbox(c.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$M1));
                 Bridge.Test.NUnit.Assert.Null(Bridge.unbox(c.M1));
-                Bridge.Test.NUnit.Assert.AreEqual(i.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$System$String$M1(), c[System.Array.index(System.String.concat("Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A.stringAlias, "$M1"), c)]());
+                Bridge.Test.NUnit.Assert.AreEqual(i.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$System$String$M1(), Bridge.unbox(c[System.Array.index(System.String.concat("Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A.stringAlias, "$M1"), c)])());
             },
             TestG4: function () {
                 var c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A.G4();
@@ -19474,8 +19474,8 @@ Bridge.$N1391Result =                     r;
 
                 Bridge.Test.NUnit.Assert.AreEqual(3, i.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$System$String$M1());
                 Bridge.Test.NUnit.Assert.Null(Bridge.unbox(c.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$M1));
-                Bridge.Test.NUnit.Assert.AreEqual(i.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$System$String$M1(), c.M1());
-                Bridge.Test.NUnit.Assert.AreEqual(i.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$System$String$M1(), c[System.Array.index(System.String.concat("Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A.stringAlias, "$M1"), c)]());
+                Bridge.Test.NUnit.Assert.AreEqual(i.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$System$String$M1(), Bridge.unbox(c.M1)());
+                Bridge.Test.NUnit.Assert.AreEqual(i.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$System$String$M1(), Bridge.unbox(c[System.Array.index(System.String.concat("Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I1$1$", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A.stringAlias, "$M1"), c)])());
             },
             TestG5: function () {
                 var c = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A.G5$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A.BaseClass))();
@@ -19513,8 +19513,8 @@ Bridge.$N1391Result =                     r;
                 Bridge.Test.NUnit.Assert.AreEqual(3, i[Bridge.geti(i, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")]());
                 Bridge.Test.NUnit.Assert.AreEqual(3, id[Bridge.geti(id, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$DerivedClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")]());
                 Bridge.Test.NUnit.Assert.Null(Bridge.unbox(c.M1));
-                Bridge.Test.NUnit.Assert.AreEqual(i[Bridge.geti(i, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")](), c.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1());
-                Bridge.Test.NUnit.Assert.AreEqual(i[Bridge.geti(i, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")](), c[System.Array.index(System.String.concat("Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A.baseClassAlias, "$M1"), c)]());
+                Bridge.Test.NUnit.Assert.AreEqual(i[Bridge.geti(i, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")](), Bridge.unbox(c.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1)());
+                Bridge.Test.NUnit.Assert.AreEqual(i[Bridge.geti(i, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")](), Bridge.unbox(c[System.Array.index(System.String.concat("Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A.baseClassAlias, "$M1"), c)])());
             },
             TestG6: function () {
                 var c = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A.G6$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A.BaseClass))();
@@ -19551,9 +19551,9 @@ Bridge.$N1391Result =                     r;
 
                 Bridge.Test.NUnit.Assert.AreEqual(3, i[Bridge.geti(i, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")]());
                 Bridge.Test.NUnit.Assert.AreEqual(3, id[Bridge.geti(id, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$DerivedClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")]());
-                Bridge.Test.NUnit.Assert.AreEqual(i[Bridge.geti(i, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")](), c.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1());
-                Bridge.Test.NUnit.Assert.AreEqual(i[Bridge.geti(i, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")](), c.M1());
-                Bridge.Test.NUnit.Assert.AreEqual(i[Bridge.geti(i, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")](), c[System.Array.index(System.String.concat("Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A.baseClassAlias, "$M1"), c)]());
+                Bridge.Test.NUnit.Assert.AreEqual(i[Bridge.geti(i, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")](), Bridge.unbox(c.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1)());
+                Bridge.Test.NUnit.Assert.AreEqual(i[Bridge.geti(i, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")](), Bridge.unbox(c.M1)());
+                Bridge.Test.NUnit.Assert.AreEqual(i[Bridge.geti(i, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")](), Bridge.unbox(c[System.Array.index(System.String.concat("Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A.baseClassAlias, "$M1"), c)])());
             },
             TestG7: function () {
                 var c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A.G7();
@@ -19590,9 +19590,9 @@ Bridge.$N1391Result =                     r;
 
                 Bridge.Test.NUnit.Assert.AreEqual(3, i[Bridge.geti(i, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")]());
                 Bridge.Test.NUnit.Assert.AreEqual(3, id[Bridge.geti(id, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$DerivedClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")]());
-                Bridge.Test.NUnit.Assert.AreEqual(i[Bridge.geti(i, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")](), c.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1());
+                Bridge.Test.NUnit.Assert.AreEqual(i[Bridge.geti(i, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")](), Bridge.unbox(c.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1)());
                 Bridge.Test.NUnit.Assert.Null(Bridge.unbox(c.M1));
-                Bridge.Test.NUnit.Assert.AreEqual(i[Bridge.geti(i, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")](), c[System.Array.index(System.String.concat("Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A.baseClassAlias, "$M1"), c)]());
+                Bridge.Test.NUnit.Assert.AreEqual(i[Bridge.geti(i, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")](), Bridge.unbox(c[System.Array.index(System.String.concat("Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A.baseClassAlias, "$M1"), c)])());
             },
             TestG8: function () {
                 var c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A.G8();
@@ -19629,9 +19629,9 @@ Bridge.$N1391Result =                     r;
 
                 Bridge.Test.NUnit.Assert.AreEqual(3, i[Bridge.geti(i, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")]());
                 Bridge.Test.NUnit.Assert.AreEqual(3, id[Bridge.geti(id, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$DerivedClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")]());
-                Bridge.Test.NUnit.Assert.AreEqual(i[Bridge.geti(i, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")](), c.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1());
-                Bridge.Test.NUnit.Assert.AreEqual(i[Bridge.geti(i, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")](), c.M1());
-                Bridge.Test.NUnit.Assert.AreEqual(i[Bridge.geti(i, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")](), c[System.Array.index(System.String.concat("Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A.baseClassAlias, "$M1"), c)]());
+                Bridge.Test.NUnit.Assert.AreEqual(i[Bridge.geti(i, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")](), Bridge.unbox(c.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1)());
+                Bridge.Test.NUnit.Assert.AreEqual(i[Bridge.geti(i, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")](), Bridge.unbox(c.M1)());
+                Bridge.Test.NUnit.Assert.AreEqual(i[Bridge.geti(i, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$BaseClass$M1", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$M1")](), Bridge.unbox(c[System.Array.index(System.String.concat("Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638A$I2$1$", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2638A.baseClassAlias, "$M1"), c)])());
             }
         }
     });
@@ -22272,6 +22272,65 @@ Bridge.$N1391Result =                     r;
                 LogDates: function (a, b) {
                     Bridge.Test.NUnit.Assert.AreEqual(2017, a.getFullYear());
                     Bridge.Test.NUnit.Assert.AreEqual(2017, b.getFullYear());
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2745", {
+        statics: {
+            methods: {
+                TestFieldInitialization: function () {
+                    var hoho = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2745.Hoho();
+                    Bridge.Test.NUnit.Assert.AreEqual("hoho", hoho.AsdInstance.Test1);
+                    Bridge.Test.NUnit.Assert.AreEqual("haha", hoho.AsdInstance.Test2);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2745.Asd", {
+        fields: {
+            Test1: null
+        },
+        props: {
+            Test2: null
+        },
+        ctors: {
+            $ctor1: function (forTest2) {
+                this.$initialize();
+                this.Test2 = forTest2;
+            },
+            ctor: function () {
+                this.$initialize();
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2745.Hoho", {
+        fields: {
+            AsdInstance: null
+        },
+        props: {
+            Property: null
+        },
+        ctors: {
+            init: function () {
+                var $t;
+                this.AsdInstance = ($t=new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2745.Asd.$ctor1("haha"), $t.Test1 = "hoho", $t);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2749", {
+        statics: {
+            methods: {
+                TestExtensionMethodBoxing: function () {
+                    var val1 = System.DateTime.fromTicks(System.Int64([629669888,148154497]));
+                    var val2 = (val1);
+                    var offset = Bridge.box(val2.getTimezoneOffset(), System.Int32);
+
+                    Bridge.Test.NUnit.Assert.True(Bridge.is(offset, System.Int32));
                 }
             }
         }
