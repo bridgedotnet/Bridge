@@ -1,0 +1,25 @@
+{
+  "output": "Bridge\\output",
+  "cleanOutputFolderBeforeBuildPattern": "*.*",
+  "outputBy": "namespace",
+  "generateTypeScript": true,
+  "fileName":  "allCombined.js",
+  "combineScripts": true,
+  "sourceMap":  true,
+  "outputFormatting": "Both",
+  "resources": [
+    {
+      "name": "bridge.js",
+      "extract": false
+    },
+    // Have bridge.console.js in the output to check that there is something from referenced dlls
+    //{
+    //  "name": "bridge.console.js",
+    //  "extract": false
+    //},
+    {
+      "name":  "bridge.meta.js",
+      "extract": false
+    }
+  ]
+}
