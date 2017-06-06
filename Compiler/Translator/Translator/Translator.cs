@@ -362,7 +362,8 @@ namespace Bridge.Translator
                 && !output.OutputKind.HasFlag(TranslatorOutputKind.Locale)
                 && !output.OutputKind.HasFlag(TranslatorOutputKind.PluginOutput)
                 && !output.OutputKind.HasFlag(TranslatorOutputKind.Reference)
-                && !output.OutputKind.HasFlag(TranslatorOutputKind.Resource);
+                && !output.OutputKind.HasFlag(TranslatorOutputKind.Resource)
+                && !output.OutputKind.HasFlag(TranslatorOutputKind.Metadata);
         }
 
         public string GenerateSourceMap(string fileName, string content, Action<SourceMapBuilder> before = null)

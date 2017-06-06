@@ -27,7 +27,7 @@ namespace Bridge.Translator
             this.FileHelper = new FileHelper();
         }
 
-        protected virtual StringBuilder GetOutputForType(ITypeInfo typeInfo, string name)
+        protected virtual StringBuilder GetOutputForType(ITypeInfo typeInfo, string name, bool isMeta = false)
         {
             Module module = null;
 
@@ -165,7 +165,7 @@ namespace Bridge.Translator
             }
             else
             {
-                output = new EmitterOutput(fileName);
+                output = new EmitterOutput(fileName) { IsMetadata = isMeta };
                 this.Emitter.Outputs.Add(fileName, output);
             }
 
@@ -408,7 +408,7 @@ namespace Bridge.Translator
                     }
                 }
 
-                this.Emitter.Output = this.GetOutputForType(null, output);
+                this.Emitter.Output = this.GetOutputForType(null, output, true);
                 this.Emitter.MetaDataOutputName = this.Emitter.EmitterOutput.FileName;
             }
             var scriptableAttributes = MetadataUtils.GetScriptableAttributes(this.Emitter.Resolver.Compilation.MainAssembly.AssemblyAttributes, this.Emitter, null).ToList();
@@ -494,7 +494,7 @@ namespace Bridge.Translator
                 foreach (var boxedFunction in this.Emitter.NamedBoxedFunctions)
                 {
                     var name = BridgeTypes.ToJsName(boxedFunction.Key, this.Emitter, true);
-                    
+
                     this.WriteNewLine();
                     this.Write(JS.Funcs.BRIDGE_NS);
                     this.WriteOpenParentheses();
@@ -611,7 +611,7 @@ namespace Bridge.Translator
                 {
                     result = true;
                 }
-                
+
                 if (typeDef != null)
                 {
                     var skip = this.SkipFromReflection(typeDef, bridgeType.Value);
