@@ -136,12 +136,19 @@ namespace Bridge.Translator
 
         private string GetDefaultFileName(BridgeOptions bridgeOptions)
         {
-            if (bridgeOptions.DefaultFileName == null)
+            var defaultFileName = this.Translator.AssemblyInfo.FileName;
+
+            if (string.IsNullOrEmpty(defaultFileName))
+            {
+                defaultFileName = bridgeOptions.DefaultFileName;
+            }
+
+            if (string.IsNullOrEmpty(defaultFileName))
             {
                 return AssemblyInfo.DEFAULT_FILENAME;
             }
 
-            return Path.GetFileNameWithoutExtension(bridgeOptions.DefaultFileName);
+            return Path.GetFileNameWithoutExtension(defaultFileName);
         }
 
         private string GetOutputFolder(bool basePathOnly = false, bool strict = false)
@@ -345,7 +352,14 @@ namespace Bridge.Translator
                 {
                     translator.ReadFolderFiles();
 
-                    translator.DefaultNamespace = bridgeOptions.DefaultFileName;
+                    if (!string.IsNullOrEmpty(assemblyConfig.FileName))
+                    {
+                        translator.DefaultNamespace = Path.GetFileNameWithoutExtension(assemblyConfig.FileName);
+                    }
+                    else
+                    {
+                        translator.DefaultNamespace = bridgeOptions.DefaultFileName;
+                    }
                 }
                 else
                 {
