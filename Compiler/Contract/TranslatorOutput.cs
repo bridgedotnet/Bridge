@@ -379,6 +379,7 @@ namespace Bridge.Contract
         ProjectOutput = 8,
         PluginOutput = 16,
         Minified = 32,
-        Combined = 64
+        Combined = 64,
+        Metadata = 128
     }
 }

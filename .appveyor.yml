@@ -197,7 +197,8 @@ on_failure:
 # after build failure or success
 on_finish:
 - ps: $root = Resolve-Path Compiler\TranslatorTests; [IO.Directory]::GetFiles($root.Path, '*.log', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName TranslatorTestsLog }
-- ps: $root = Resolve-Path Compiler\TranslatorTests\TestProjects\08\Bridge\output; [IO.Directory]::GetFiles($root.Path, '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName TranslatorTestsLog }
+# Uncomment the line below if you need Integration Test output
+# - ps: $root = Resolve-Path Compiler\TranslatorTests\TestProjects\08\Bridge\output; [IO.Directory]::GetFiles($root.Path, '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName TranslatorTestsLog }
 
 
 #---------------------------------#

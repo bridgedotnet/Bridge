@@ -18,6 +18,12 @@ namespace Bridge.Translator
             this.Names = new List<string>();
         }
 
+        public bool IsMetadata
+        {
+            get;
+            set;
+        }
+
         public string FileName
         {
             get;

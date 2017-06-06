@@ -4,6 +4,12 @@ namespace Bridge.Contract
 {
     public interface IEmitterOutput
     {
+        bool IsMetadata
+        {
+            get;
+            set;
+        }
+
         string FileName
         {
             get;

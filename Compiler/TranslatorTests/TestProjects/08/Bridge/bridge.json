@@ -26,7 +26,7 @@
     }
   ],
   "logging": {
-    "level": "Trace",
+    "level": "None",
     "folder": "../../$(OutputPath)" // output to the Integration Test common log
   }
 }

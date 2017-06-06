@@ -105,7 +105,14 @@ namespace Bridge.Translator
 
                 OutputBottom(output, tmp);
 
-                Emitter.AddOutputItem(result, fileName, tmp, TranslatorOutputKind.ProjectOutput, null);
+                var outputKind = TranslatorOutputKind.ProjectOutput;
+
+                if (output.IsMetadata)
+                {
+                    outputKind = outputKind | TranslatorOutputKind.Metadata;
+                }
+
+                Emitter.AddOutputItem(result, fileName, tmp, outputKind, null);
             }
 
             this.Log.Trace("Combining outputs done");
