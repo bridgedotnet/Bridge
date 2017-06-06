@@ -165,6 +165,16 @@ namespace Bridge.Translator
                 this.Validator.CheckType(type, this);
                 this.TypeDefinitions.Add(BridgeTypes.GetTypeDefinitionKey(type), type);
                 string key = BridgeTypes.GetTypeDefinitionKey(type);
+
+                if (this.BridgeTypes.ContainsKey(key))
+                {
+                    var duplicate = this.BridgeTypes[key].TypeDefinition;
+                    var message = $"The type '{type.Module.Assembly.FullName}:{type.FullName}' is duplicated with '{duplicate.Module.Assembly.FullName}:{duplicate.FullName}'.";
+
+                    this.Log.Error(message);
+                    throw new System.InvalidOperationException(message);
+                }
+
                 this.BridgeTypes.Add(key, new BridgeType(key)
                 {
                     TypeDefinition = type
