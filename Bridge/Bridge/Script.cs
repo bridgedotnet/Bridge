@@ -234,6 +234,9 @@ namespace Bridge
         [Template("{init}({t})")]
         public static extern T CallFor<T>(T t, Func<T, T> init);
 
+        [Template("{init}({t})")]
+        public static extern Task<T> AsyncCallFor<T>(T t, Func<T, Task<T>> init);
+
         [Template("({name:tmp} = {t})")]
         public static extern T ToTemp<T>(string name, T t);
 
