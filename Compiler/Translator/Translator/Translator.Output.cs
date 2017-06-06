@@ -213,9 +213,9 @@ namespace Bridge.Translator
             }
         }
 
-        protected virtual void AddExtractedResourceOutput(ResourceConfigItem resource)
+        protected virtual void AddExtractedResourceOutput(ResourceConfigItem resource, byte[] code)
         {
-            Emitter.AddOutputItem(this.Outputs.Resources, resource.Name, null, TranslatorOutputKind.Resource, resource.Output);
+            Emitter.AddOutputItem(this.Outputs.Resources, resource.Name, code, TranslatorOutputKind.Resource, resource.Output);
         }
 
         public void ExtractCore(string outputPath, string projectPath)

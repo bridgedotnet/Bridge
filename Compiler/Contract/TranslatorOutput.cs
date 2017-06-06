@@ -221,8 +221,6 @@ namespace Bridge.Contract
                 path = item.Name;
             }
 
-            //System.Diagnostics.Debugger.Launch();
-
             if (basePath != null)
             {
                 if (!string.IsNullOrEmpty(basePath) && basePath[basePath.Length - 1] != '\\')

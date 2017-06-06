@@ -363,6 +363,12 @@ namespace Bridge.Translator
         {
             this.Log.Trace("Extracting resource " + resource.Name);
 
+            if (!resource.Extract.HasValue || !resource.Extract.Value)
+            {
+                this.Log.Trace("Skipping extracting resource as no extract option enabled for this resource");
+                return;
+            }
+
             try
             {
                 var fullPath = Path.GetFullPath(Path.Combine(path, fileName));
@@ -373,7 +379,7 @@ namespace Bridge.Translator
 
                 File.WriteAllBytes(fullPath, code);
 
-                this.AddExtractedResourceOutput(resource);
+                this.AddExtractedResourceOutput(resource, code);
 
                 this.Log.Trace("Done writing resource into file");
             }
@@ -386,11 +392,6 @@ namespace Bridge.Translator
 
         private Tuple<string, string> GetFullPathForResource(string outputPath, ResourceConfigItem resource)
         {
-            if (!resource.Extract.HasValue || !resource.Extract.Value)
-            {
-                return null;
-            }
-
             string resourceOutputFileName = null;
             string resourceOutputDirName = null;
 
