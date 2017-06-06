@@ -279,7 +279,7 @@ namespace Bridge.Translator
             if (graph.ProcessCount > 0)
             {
                 ITypeInfo tInfo = null;
-
+                OrderedProcess handlingProcess = null;
                 try
                 {
                     this.Log.Trace("\tTopological sorting third iteration...");
@@ -297,6 +297,7 @@ namespace Bridge.Translator
 
                         foreach (var process in processes)
                         {
+                            handlingProcess = process;
                             hitCounters[1]++;
 
                             tInfo = this.Types.First(ti => GetReflectionName(ti.Type) == process.Name);
@@ -321,7 +322,7 @@ namespace Bridge.Translator
                 }
                 catch (System.Exception ex)
                 {
-                    this.LogWarning(string.Format("Topological sort failed {0} with error {1}", tInfo != null ? "at type " + tInfo.Type.ReflectionName : string.Empty, ex));
+                    this.LogWarning($"Topological sort failed {(tInfo != null || handlingProcess != null ? "at type " + (tInfo != null ? tInfo.Type.ReflectionName : handlingProcess.Name) : string.Empty)} with error {ex}");
                 }
             }
             cacheParents = null;
