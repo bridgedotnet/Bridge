@@ -99,7 +99,7 @@ namespace Bridge.Translator
                 logger.Trace(encoded);
             }
 
-            content = content + Emitter.NEW_LINE + encoded;
+            content = content + Emitter.NEW_LINE + encoded + Emitter.NEW_LINE;
         }
 
         private static StringLocation LocationFromPos(string s, int pos, StringLocation lastLocation, ref int offset)
