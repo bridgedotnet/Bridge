@@ -366,6 +366,24 @@ namespace Bridge.Translator
                 && !output.OutputKind.HasFlag(TranslatorOutputKind.Metadata);
         }
 
+        public TranslatorOutputItem FindTranslatorOutputItem(string filePath)
+        {
+            if (string.IsNullOrWhiteSpace(filePath))
+            {
+                return null;
+            }
+
+            foreach (var output in this.Outputs.GetOutputs())
+            {
+                if (output.FullPath.LocalPath == filePath)
+                {
+                    return output;
+                }
+            }
+
+            return null;
+        }
+
         public string GenerateSourceMap(string fileName, string content, Action<SourceMapBuilder> before = null)
         {
             if (this.AssemblyInfo.SourceMap.Enabled)

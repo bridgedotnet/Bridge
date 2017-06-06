@@ -127,6 +127,33 @@ namespace Bridge.Contract
             get; set;
         }
 
+        public bool HasGeneratedSourceMap
+        {
+            get; set;
+        }
+
+        private Uri fullPath;
+        public Uri FullPath
+        {
+            get
+            {
+                if (fullPath == null)
+                {
+                    throw new InvalidOperationException(
+                        "Cannot get FullPath of output item as it has not been set ("
+                        + string.Format("[{0}, {1}, {2}]", this.Location, this.Name, this.OutputType)
+                        + ")");
+                }
+
+                return fullPath;
+            }
+            set
+            {
+                fullPath = value;
+            }
+        }
+
+
         public TranslatorOutputType OutputType
         {
             get; set;

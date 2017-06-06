@@ -78,15 +78,13 @@ namespace Bridge.Translator
 
             var resourcesToEmbed = this.PrepareAndExtractResources(outputPath, projectPath);
 
-            this.EmbeddResources(resourcesToEmbed);
+            this.EmbeddResources(PrepareResourcesForEmbedding(resourcesToEmbed));
 
             this.Log.Info("Done injecting resources");
         }
 
-        private Dictionary<BridgeResourceInfo, byte[]> PrepareAndExtractResources(string outputPath, string projectPath)
+        private IEnumerable<Tuple<BridgeResourceInfo, byte[]>> PrepareAndExtractResources(string outputPath, string projectPath)
         {
-            var resourcesToEmbed = new Dictionary<BridgeResourceInfo, byte[]>();
-
             if (this.AssemblyInfo.Resources.HasEmbedResources())
             {
                 // There are resources defined in the config so let's grab files
@@ -107,13 +105,28 @@ namespace Bridge.Translator
                     {
                         this.GenerateResourseHeader(resourceBuffer, resource, projectPath);
 
-                        this.ReadResourseFiles(projectPath, resourceBuffer, resource);
+                        var needSourceMap = this.ReadResourseFiles(projectPath, resourceBuffer, resource);
 
                         if (resourceBuffer.Length > 0)
                         {
-                            this.Log.Trace("Prepared files for resource " + resource.Name);
+                            this.Log.Trace("Prepared file items for resource " + resource.Name);
+
+                            var resourcePath = GetFullPathForResource(outputPath, resource);
 
                             var code = resourceBuffer.ToArray();
+
+                            if (needSourceMap)
+                            {
+                                TranslatorOutputItemContent content = code;
+
+                                var fullPath = Path.GetFullPath(Path.Combine(resourcePath.Item1, resourcePath.Item2));
+
+                                content = GenerateSourceMap(fullPath, content.GetContentAsString());
+
+                                code = content.GetContentAsBytes();
+                            }
+
+                            this.ExtractResource(resourcePath.Item1, resourcePath.Item2, resource, code);
 
                             var info = new BridgeResourceInfo
                             {
@@ -122,9 +135,7 @@ namespace Bridge.Translator
                                 Path = string.IsNullOrWhiteSpace(resource.Output) ? null : resource.Output
                             };
 
-                            resourcesToEmbed.Add(info, code);
-
-                            this.ExtractResource(outputPath, projectPath, resource, code);
+                            yield return Tuple.Create(info, code);
                         }
                         else
                         {
@@ -140,37 +151,39 @@ namespace Bridge.Translator
             else
             {
                 // There are no resources defined in the config so let's just grab files
-                this.Log.Trace("Preparing output files for resources");
+                this.Log.Trace("Preparing outputs for resources");
 
-                foreach (var file in this.Outputs.GetOutputs())
+                foreach (var outputItem in this.Outputs.GetOutputs())
                 {
-                    try
+                    this.Log.Trace("Getting output " + outputItem.FullPath.LocalPath);
+
+                    var info = new BridgeResourceInfo
                     {
-                        this.Log.Trace("Reading output file " + file.Name);
+                        Name = outputItem.Name,
+                        FileName = outputItem.Name,
+                        Path = null
+                    };
 
-                        var info = new BridgeResourceInfo
-                        {
-                            Name = file.Name,
-                            FileName = file.Name,
-                            Path = null
-                        };
+                    byte[] content;
 
-                        var content = file.Content.GetContentAsBytes();
-
-                        resourcesToEmbed.Add(info, content);
+                    if (!outputItem.HasGeneratedSourceMap)
+                    {
+                        this.Log.Trace("The output item does not have HasGeneratedSourceMap so we use it right from the Outputs");
+                        content = outputItem.Content.GetContentAsBytes();
+                        this.Log.Trace("The output is of content " + content.Length + " length");
+                    }
+                    else
+                    {
+                        this.Log.Trace("Reading content file as the output has HasGeneratedSourceMap");
+                        content = File.ReadAllBytes(outputItem.FullPath.LocalPath);
                         this.Log.Trace("Read " + content.Length + " bytes for " + info.Name);
                     }
-                    catch (Exception ex)
-                    {
-                        this.Log.Error(ex.ToString());
-                        throw;
-                    }
+
+                    yield return Tuple.Create(info, content);
                 }
 
                 this.Log.Trace("Done preparing output files for resources");
             }
-
-            return resourcesToEmbed;
         }
 
         private string ReadEmbeddedResourceList(AssemblyDefinition assemblyDefinition, string listName)
@@ -251,31 +264,35 @@ namespace Bridge.Translator
             return r.ToArray();
         }
 
-        private void EmbeddResources(Dictionary<BridgeResourceInfo, byte[]> resourcesToEmbed)
+        private List<BridgeResourceInfo> PrepareResourcesForEmbedding(IEnumerable<Tuple<BridgeResourceInfo, byte[]>> resourcesToEmbed)
         {
-            this.Log.Trace("Embedding resources...");
+            this.Log.Trace("PrepareResourcesForEmbedding...");
 
             var assemblyDef = this.AssemblyDefinition;
             var resources = assemblyDef.MainModule.Resources;
+            var resourceList = new List<BridgeResourceInfo>();
 
             var configHelper = new ConfigHelper();
 
             foreach (var item in resourcesToEmbed)
             {
-                var r = item.Key;
-                this.Log.Trace("Embedding resource " + r.Name);
+                var r = item.Item1;
+                var name = r.Name;
+
+                this.Log.Trace("Embedding resource " + name);
 
                 // No resource name normalization
                 //var name = this.NormalizePath(r.Name);
                 //this.Log.Trace("Normalized resource name " + name);
-                var name = r.Name;
+
 
                 // Normalize resourse output path to always have '/' as a directory separator
                 r.Path = configHelper.ConvertPath(r.Path, '/');
 
-                var newResource = new EmbeddedResource(name, ManifestResourceAttributes.Private, item.Value);
+                var newResource = new EmbeddedResource(name, ManifestResourceAttributes.Private, item.Item2);
 
                 var existingResource = resources.FirstOrDefault(x => x.Name == name);
+
                 if (existingResource != null)
                 {
                     this.Log.Trace("Removing already existed resource with the same name");
@@ -283,16 +300,30 @@ namespace Bridge.Translator
                 }
 
                 resources.Add(newResource);
+                resourceList.Add(r);
 
                 this.Log.Trace("Added resource " + name);
             }
+
+            this.Log.Trace("PrepareResourcesForEmbedding done");
+
+            return resourceList;
+        }
+
+        private void EmbeddResources(List<BridgeResourceInfo> resourcesToEmbed)
+        {
+            this.Log.Trace("Embedding resources...");
+
+            var assemblyDef = this.AssemblyDefinition;
+            var resources = assemblyDef.MainModule.Resources;
+            var configHelper = new ConfigHelper();
 
             CheckIfResourceExistsAndRemove(resources, Translator.BridgeResourcesPlusSeparatedFormatList);
 
             var resourceListName = Translator.BridgeResourcesJsonFormatList;
             CheckIfResourceExistsAndRemove(resources, resourceListName);
 
-            var listArray = resourcesToEmbed.Keys.ToArray();
+            var listArray = resourcesToEmbed.ToArray();
             var listContent = Newtonsoft.Json.JsonConvert.SerializeObject(listArray, Newtonsoft.Json.Formatting.Indented);
 
             var listResources = new EmbeddedResource(resourceListName, ManifestResourceAttributes.Private, Translator.OutputEncoding.GetBytes(listContent));
@@ -328,14 +359,37 @@ namespace Bridge.Translator
             }
         }
 
-        private void ExtractResource(string outputPath, string projectPath, ResourceConfigItem resource, byte[] code)
+        private void ExtractResource(string path, string fileName, ResourceConfigItem resource, byte[] code)
+        {
+            this.Log.Trace("Extracting resource " + resource.Name);
+
+            try
+            {
+                var fullPath = Path.GetFullPath(Path.Combine(path, fileName));
+
+                this.Log.Trace("Writing resource " + resource.Name + " into " + fullPath);
+
+                this.EnsureDirectoryExists(path);
+
+                File.WriteAllBytes(fullPath, code);
+
+                this.AddExtractedResourceOutput(resource);
+
+                this.Log.Trace("Done writing resource into file");
+            }
+            catch (Exception ex)
+            {
+                this.Log.Error(ex.ToString());
+                throw;
+            }
+        }
+
+        private Tuple<string, string> GetFullPathForResource(string outputPath, ResourceConfigItem resource)
         {
             if (!resource.Extract.HasValue || !resource.Extract.Value)
             {
-                return;
+                return null;
             }
-
-            this.Log.Trace("Extracting resource " + resource.Name);
 
             string resourceOutputFileName = null;
             string resourceOutputDirName = null;
@@ -357,25 +411,7 @@ namespace Bridge.Translator
                 this.Log.Trace("Using resource name as file name " + resourceOutputFileName);
             }
 
-            try
-            {
-                var path = Path.Combine(resourceOutputDirName, resourceOutputFileName);
-
-                this.Log.Trace("Writing resource " + resource.Name + " into " + path);
-
-                this.EnsureDirectoryExists(resourceOutputDirName);
-
-                File.WriteAllBytes(path, code);
-
-                this.AddResourceOutput(resource, code);
-
-                this.Log.Trace("Done writing resource into file");
-            }
-            catch (Exception ex)
-            {
-                this.Log.Error(ex.ToString());
-                throw;
-            }
+            return Tuple.Create(resourceOutputDirName, resourceOutputFileName);
         }
 
         private void EnsureDirectoryExists(string path)
@@ -630,9 +666,18 @@ namespace Bridge.Translator
             return new StringBuilder(resourceHeader);
         }
 
-        private void ReadResourseFiles(string outputPath, MemoryStream buffer, ResourceConfigItem item)
+        /// <summary>
+        /// Reads files for the resource item and return a value indication whether it is a resource for SourceMap generation
+        /// </summary>
+        /// <param name="outputPath">Project output path</param>
+        /// <param name="buffer"></param>
+        /// <param name="item">Resource</param>
+        /// <returns>Bool value indication whether it is a resource for SourceMap generation</returns>
+        private bool ReadResourseFiles(string outputPath, MemoryStream buffer, ResourceConfigItem item)
         {
             this.Log.Trace("Reading resource with " + item.Files.Length + " items");
+
+            var needSourceMap = false;
 
             foreach (var fileName in item.Files)
             {
@@ -655,58 +700,49 @@ namespace Bridge.Translator
                         filePathCleaned = Path.GetFileName(filePathCleaned);
                     }
 
-                    var directory = new DirectoryInfo(directoryPath);
+                    directoryPath = Path.GetFullPath(directoryPath);
 
-                    if (!directory.Exists)
+                    var fullFileName = Path.Combine(directoryPath, filePathCleaned);
+
+                    GenerateResourceFileRemark(buffer, item, filePathCleaned, dirPathInFileName);
+
+                    var outputItem = this.FindTranslatorOutputItem(fullFileName);
+
+                    if (outputItem != null)
                     {
-                        throw new InvalidOperationException("Could not find any folder: " + directory.FullName + " for resource " + item.Name + " and location " + fileName);
+                        this.Log.Trace("Found required file for resources in Outputs " + fullFileName);
+
+                        if (outputItem.HasGeneratedSourceMap)
+                        {
+                            this.Log.Trace("The output item HasGeneratedSourceMap so that the resource requires SourceMap also");
+                            needSourceMap = true;
+                        }
+
+                        var content = outputItem.Content.GetContentAsBytes();
+
+                        buffer.Write(content, 0, content.Length);
                     }
-
-                    this.Log.Trace("Searching files for resources in folder: " + directoryPath);
-
-                    var files = directory.GetFiles(filePathCleaned, SearchOption.TopDirectoryOnly);
-
-                    if (!files.Any())
+                    else
                     {
-                        throw new InvalidOperationException("Could not find any file in folder: " + directory.FullName + " for resource " + item.Name + " and location " + fileName);
-                    }
+                        var directory = new DirectoryInfo(directoryPath);
 
-                    //var needNewLine = files.Length > 0;
+                        if (!directory.Exists)
+                        {
+                            throw new InvalidOperationException("Could not find any folder: " + directory.FullName + " for resource " + item.Name + " and location " + fileName);
+                        }
 
-                    foreach (var file in files)
-                    {
-                        //if (needNewLine)
-                        //{
-                        //    NewLine(buffer);
-                        //}
+                        this.Log.Trace("Searching files for resources in folder: " + directoryPath);
 
-                        GenerateResourceFileRemark(buffer, item, file, dirPathInFileName);
+                        var file = directory.GetFiles(filePathCleaned, SearchOption.TopDirectoryOnly).FirstOrDefault();
+
+                        if (file == null)
+                        {
+                            throw new InvalidOperationException("Could not find any file in folder: " + directory.FullName + " for resource " + item.Name + " and location " + fileName);
+                        }
 
                         this.Log.Trace("Reading resource item at " + file.FullName);
 
-                        var content = File.ReadAllBytes(file.FullName);
-
-                        if (content.Length > 0)
-                        {
-                            var bomLength = !item.RemoveBom.HasValue || item.RemoveBom.Value
-                                ? GetBomLength(content)
-                                : 0;
-
-                            if (bomLength > 0)
-                            {
-                                this.Log.Trace("Found BOM symbols (" + bomLength + " byte length)");
-                            }
-
-                            if (bomLength < content.Length)
-                            {
-                                buffer.Write(content, bomLength, content.Length - bomLength);
-                            }
-                            else
-                            {
-                                this.Log.Trace("Skipped resource as it contains only BOM");
-                            }
-
-                        }
+                        var content = CheckResourceOnBomAndAddToBuffer(buffer, item, file);
 
                         this.Log.Trace("Read " + content.Length + " bytes");
                     }
@@ -717,6 +753,37 @@ namespace Bridge.Translator
                     throw;
                 }
             }
+
+            return needSourceMap;
+        }
+
+        private byte[] CheckResourceOnBomAndAddToBuffer(MemoryStream buffer, ResourceConfigItem item, FileInfo file)
+        {
+            var content = File.ReadAllBytes(file.FullName);
+
+            if (content.Length > 0)
+            {
+                var bomLength = !item.RemoveBom.HasValue || item.RemoveBom.Value
+                    ? GetBomLength(content)
+                    : 0;
+
+                if (bomLength > 0)
+                {
+                    this.Log.Trace("Found BOM symbols (" + bomLength + " byte length)");
+                }
+
+                if (bomLength < content.Length)
+                {
+                    buffer.Write(content, bomLength, content.Length - bomLength);
+                }
+                else
+                {
+                    this.Log.Trace("Skipped resource as it contains only BOM");
+                }
+
+            }
+
+            return content;
         }
 
         private int GetBomLength(byte[] buffer)
@@ -763,14 +830,12 @@ namespace Bridge.Translator
             return 0;
         }
 
-        private void GenerateResourceFileRemark(MemoryStream resourceBuffer, ResourceConfigItem item, FileInfo file, string dirPathInFileName)
+        private void GenerateResourceFileRemark(MemoryStream resourceBuffer, ResourceConfigItem item, string fileName, string dirPathInFileName)
         {
             if (item.Remark != null)
             {
                 this.Log.Trace("Inserting resource file remark");
 
-
-                var fileName = this.MakeStandardPath(file.Name);
                 var filePath = this.MakeStandardPath(Path.Combine(dirPathInFileName, fileName));
 
                 var remarkInfo = new Dictionary<string, string>()

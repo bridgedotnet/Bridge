@@ -19,63 +19,14 @@ namespace Bridge.Translator
 
             foreach (var item in this.Outputs.GetOutputs())
             {
-                string fileName = item.Name;
-                logger.Trace("Output " + fileName);
+                logger.Trace("Output " + item.Name);
+
+                string filePath = DefineOutputItemFullPath(item, projectOutputPath, defaultFileName);
 
                 if (item.IsEmpty && (item.MinifiedVersion == null || item.MinifiedVersion.IsEmpty))
                 {
-                    logger.Trace("Output " + fileName + " is empty");
+                    logger.Trace("Output " + filePath + " is empty");
                     continue;
-                }
-
-                if (fileName.Contains(Bridge.Translator.AssemblyInfo.DEFAULT_FILENAME))
-                {
-                    fileName = fileName.Replace(Bridge.Translator.AssemblyInfo.DEFAULT_FILENAME, defaultFileName);
-                }
-
-                // Ensure filename contains no ":". It could be used like "c:/absolute/path"
-                fileName = fileName.Replace(":", "_");
-
-                // Trim heading slash/backslash off file names until it does not start with slash.
-                var oldFNlen = fileName.Length;
-                while (Path.IsPathRooted(fileName))
-                {
-                    fileName = fileName.TrimStart(Path.DirectorySeparatorChar, '/', '\\');
-
-                    // Trimming didn't change the path. This way, it will just loop indefinitely.
-                    // Also, this means the absolute path specifies a fully-qualified DOS PathName with drive letter.
-                    if (fileName.Length == oldFNlen)
-                    {
-                        break;
-                    }
-                    oldFNlen = fileName.Length;
-                }
-
-                if (fileName != item.Name)
-                {
-                    logger.Trace("Output file name changed to " + fileName);
-                    item.Name = fileName;
-                }
-
-                // If 'fileName' is an absolute path, Path.Combine will ignore the 'path' prefix.
-                string filePath = fileName;
-
-                if (item.Location != null)
-                {
-                    filePath = Path.Combine(item.Location, fileName);
-
-                    if (fileName != filePath)
-                    {
-                        logger.Trace("Output file name changed to " + filePath);
-                    }
-                }
-
-                var filePath1 = Path.Combine(projectOutputPath, filePath);
-
-                if (filePath1 != filePath)
-                {
-                    filePath = filePath1;
-                    logger.Trace("Output file name changed to " + filePath1);
                 }
 
                 var file = FileHelper.CreateFileDirectory(filePath);
@@ -88,6 +39,8 @@ namespace Bridge.Translator
                 {
                     content = item.Content.GetContentAsString();
                     content = this.GenerateSourceMap(file.FullName, content);
+
+                    item.HasGeneratedSourceMap = true;
 
                     this.SaveToFile(file.FullName, content);
                 }
@@ -108,6 +61,68 @@ namespace Bridge.Translator
             }
 
             logger.Info("Done Save path = " + projectOutputPath);
+        }
+
+        private string DefineOutputItemFullPath(TranslatorOutputItem item, string projectOutputPath, string defaultFileName)
+        {
+            var fileName = item.Name;
+            var logger = this.Log;
+
+            if (fileName.Contains(Bridge.Translator.AssemblyInfo.DEFAULT_FILENAME))
+            {
+                fileName = fileName.Replace(Bridge.Translator.AssemblyInfo.DEFAULT_FILENAME, defaultFileName);
+            }
+
+            // Ensure filename contains no ":". It could be used like "c:/absolute/path"
+            fileName = fileName.Replace(":", "_");
+
+            // Trim heading slash/backslash off file names until it does not start with slash.
+            var oldFNlen = fileName.Length;
+            while (Path.IsPathRooted(fileName))
+            {
+                fileName = fileName.TrimStart(Path.DirectorySeparatorChar, '/', '\\');
+
+                // Trimming didn't change the path. This way, it will just loop indefinitely.
+                // Also, this means the absolute path specifies a fully-qualified DOS PathName with drive letter.
+                if (fileName.Length == oldFNlen)
+                {
+                    break;
+                }
+                oldFNlen = fileName.Length;
+            }
+
+            if (fileName != item.Name)
+            {
+                logger.Trace("Output file name changed to " + fileName);
+                item.Name = fileName;
+            }
+
+            // If 'fileName' is an absolute path, Path.Combine will ignore the 'path' prefix.
+            string filePath = fileName;
+
+            if (item.Location != null)
+            {
+                filePath = Path.Combine(item.Location, fileName);
+
+                if (fileName != filePath)
+                {
+                    logger.Trace("Output file name changed to " + filePath);
+                }
+            }
+
+            var filePath1 = Path.Combine(projectOutputPath, filePath);
+
+            if (filePath1 != filePath)
+            {
+                filePath = filePath1;
+                logger.Trace("Output file name changed to " + filePath1);
+            }
+
+            filePath = Path.GetFullPath(filePath);
+
+            item.FullPath = new Uri(filePath, UriKind.RelativeOrAbsolute);
+
+            return filePath;
         }
 
         protected virtual void SaveToFile(string fileName, string content, byte[] binary = null)
@@ -171,7 +186,7 @@ namespace Bridge.Translator
             }
         }
 
-        protected virtual void AddReferencedResourceOutput(string outputPath, AssemblyDefinition assembly, string resourceName, string fileName, Func<string, string> preHandler = null)
+        protected virtual void AddReferencedOutput(string outputPath, AssemblyDefinition assembly, string resourceName, string fileName, Func<string, string> preHandler = null)
         {
             var res = assembly.MainModule.Resources.FirstOrDefault(r => r.Name == resourceName);
 
@@ -198,9 +213,9 @@ namespace Bridge.Translator
             }
         }
 
-        protected virtual void AddResourceOutput(ResourceConfigItem resource, byte[] content)
+        protected virtual void AddExtractedResourceOutput(ResourceConfigItem resource)
         {
-            Emitter.AddOutputItem(this.Outputs.Resources, resource.Name, content, TranslatorOutputKind.Resource, resource.Output);
+            Emitter.AddOutputItem(this.Outputs.Resources, resource.Name, null, TranslatorOutputKind.Resource, resource.Output);
         }
 
         public void ExtractCore(string outputPath, string projectPath)
@@ -328,7 +343,7 @@ namespace Bridge.Translator
 
                     if (!isTs || this.AssemblyInfo.GenerateTypeScript)
                     {
-                        this.AddReferencedResourceOutput(resourceOutputDirName, reference, resName, resourceOutputFileName);
+                        this.AddReferencedOutput(resourceOutputDirName, reference, resName, resourceOutputFileName);
                     }
                 }
             }
