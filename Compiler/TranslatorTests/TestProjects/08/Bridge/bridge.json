@@ -21,5 +21,9 @@
       "name":  "bridge.meta.js",
       "extract": false
     }
-  ]
+  ],
+  "logging": {
+    "level": "Trace",
+    "folder": "../../$(OutputPath)" // output to the Integration Test common log
+  }
 }
