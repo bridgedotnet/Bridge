@@ -356,7 +356,8 @@ namespace Bridge.Translator
 
         public bool CheckIfRequiresSourceMap(TranslatorOutputItem output)
         {
-            return output.OutputType == TranslatorOutputType.JavaScript
+            return !output.IsEmpty
+                && output.OutputType == TranslatorOutputType.JavaScript
                 && output.OutputKind.HasFlag(TranslatorOutputKind.ProjectOutput)
                 && !output.OutputKind.HasFlag(TranslatorOutputKind.Locale)
                 && !output.OutputKind.HasFlag(TranslatorOutputKind.PluginOutput)

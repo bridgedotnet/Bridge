@@ -378,6 +378,7 @@ namespace Bridge.Contract
         Locale = 4,
         ProjectOutput = 8,
         PluginOutput = 16,
-        Minified = 32
+        Minified = 32,
+        Combined = 64
     }
 }

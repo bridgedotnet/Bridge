@@ -22,6 +22,12 @@ namespace Bridge.Translator
                 string fileName = item.Name;
                 logger.Trace("Output " + fileName);
 
+                if (item.IsEmpty && (item.MinifiedVersion == null || item.MinifiedVersion.IsEmpty))
+                {
+                    logger.Trace("Output " + fileName + " is empty");
+                    continue;
+                }
+
                 if (fileName.Contains(Bridge.Translator.AssemblyInfo.DEFAULT_FILENAME))
                 {
                     fileName = fileName.Replace(Bridge.Translator.AssemblyInfo.DEFAULT_FILENAME, defaultFileName);
@@ -556,13 +562,19 @@ namespace Bridge.Translator
                     formattedContent = output.Content.GetContentAsString();
                 }
 
-                if (output.MinifiedVersion != null)
+                if (output.MinifiedVersion != null && !output.MinifiedVersion.IsEmpty)
                 {
                     minifiedContent = output.MinifiedVersion.Content.GetContentAsString();
                 }
 
                 if (formattedContent == null && minifiedContent == null)
                 {
+                    output.IsEmpty = true;
+                    if (output.MinifiedVersion != null)
+                    {
+                        output.MinifiedVersion.IsEmpty = true;
+                    }
+
                     this.Log.Trace("Skipping " + output.Name + " as it does not have formatted content nor minified.");
                     continue;
                 }
@@ -603,7 +615,7 @@ namespace Bridge.Translator
 
                 if (output.MinifiedVersion != null)
                 {
-                    output.IsEmpty = true;
+                    output.MinifiedVersion.IsEmpty = true;
                 }
             }
 
@@ -645,6 +657,7 @@ namespace Bridge.Translator
             {
                 Content = buffer,
                 OutputType = TranslatorOutputType.JavaScript,
+                OutputKind = outputKind | TranslatorOutputKind.Combined,
                 Name = fileName
             };
 
@@ -657,6 +670,7 @@ namespace Bridge.Translator
                     IsMinified = true,
                     Name = minifiedName,
                     OutputType = r.OutputType,
+                    OutputKind = r.OutputKind | TranslatorOutputKind.Minified,
                     Location = r.Location,
                     Content = minifiedBuffer
                 };
