@@ -1,6 +1,6 @@
 // Content header: 1.0.0-beta  {notdate} 2017 
 // ---
-// Content remark: Path: Bridge/output/TestIssue434.js; name: TestIssue434.js
+// Content remark: Path: Bridge/output/testIssue434.js; name: testIssue434.js
 // ---
 
 // Top
@@ -63,7 +63,7 @@
 
 // Bottom
 // ---
-// Content remark: Path: Bridge/output/TestIssue461.js; name: TestIssue461.js
+// Content remark: Path: Bridge/output/testIssue461.js; name: testIssue461.js
 // ---
 
     Bridge.define("TestIssue461.Issue461", {
