@@ -198,6 +198,13 @@ namespace Bridge.Contract
 
             if (basePath != null)
             {
+                if (!string.IsNullOrEmpty(basePath) && basePath[basePath.Length - 1] != '\\')
+                {
+                    basePath = basePath + '\\';
+                }
+
+                basePath = Path.GetFullPath(basePath);
+
                 path = MakeRelative(path, basePath);
             }
 
