@@ -6,19 +6,32 @@ using Test2759.Test2.Test3;
 
 namespace Test2759.Test2.Test3
 {
-    public sealed class A : B<C<SpecialControl, IParentProperties>> { }
+    public sealed class A : B<C<SpecialControl, IParentProperties>>
+    {
+    }
 
-    public abstract class B<TProps> { }
+    public abstract class B<TProps>
+    {
+    }
 
     public abstract class C<TControl, TParentProps>
         where TControl : IControl
         where TParentProps : IParentProperties
-    { }
-    public interface IC<out TControlOut, TControlIn> { }
+    {
+    }
+    public interface IC<out TControlOut, TControlIn>
+    {
+    }
 
-    public interface IControl { }
-    public sealed class SpecialControl : IControl { }
-    public interface IParentProperties { }
+    public interface IControl
+    {
+    }
+    public sealed class SpecialControl : IControl
+    {
+    }
+    public interface IParentProperties
+    {
+    }
 }
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
