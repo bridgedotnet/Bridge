@@ -22366,6 +22366,17 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2759", {
+        statics: {
+            methods: {
+                TestOrder: function () {
+                    var a = new Test2759.Test2.Test3.A();
+                    Bridge.Test.NUnit.Assert.NotNull(a);
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge277", {
         $kind: "enum",
         statics: {
@@ -30664,6 +30675,19 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Test2759.Test2.Test3.IControl", {
+        $kind: "interface"
+    });
+
+    Bridge.define("Test2759.Test2.Test3.B$1", function (TProps) { return {
+
+    }; });
+
+    Bridge.definei("Test2759.Test2.Test3.IC$2", function (TControlOut, TControlIn) { return {
+        $kind: "interface",
+        $variance: [1,0]
+    }; });
+
     Bridge.define("achievements.content.ContentAchievements", {
         inherits: [content.ContentManagerBase],
         statics: {
@@ -32516,6 +32540,10 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Test2759.Test2.Test3.SpecialControl", {
+        inherits: [Test2759.Test2.Test3.IControl]
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C15", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.C14,Bridge.ClientTest.Batch3.BridgeIssues.Bridge1025.I9$1(System.Int32)],
         alias: [
@@ -32740,6 +32768,10 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Test2759.Test2.Test3.IParentProperties", {
+        $kind: "interface"
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1339.Foo3", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1339.Foo2],
         statics: {
@@ -32788,8 +32820,16 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Test2759.Test2.Test3.C$2", function (TControl, TParentProps) { return {
+
+    }; });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1339.Foo4", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge1339.Foo3]
+    });
+
+    Bridge.define("Test2759.Test2.Test3.A", {
+        inherits: [Test2759.Test2.Test3.B$1(Test2759.Test2.Test3.C$2(Test2759.Test2.Test3.SpecialControl,Test2759.Test2.Test3.IParentProperties))]
     });
 
     var $box_ = {};

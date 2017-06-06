@@ -176,13 +176,14 @@ namespace Bridge.Translator
             activeTypes.Push(typeDef);
 
             var types = type.GetAllBaseTypes();
+            var thisTypelist = new List<ITypeInfo>();
             foreach (var t in types)
             {
                 var bType = BridgeTypes.Get(t, true);
 
                 if (bType?.TypeInfo != null && !bType.Type.Equals(typeDef))
                 {
-                    list.Add(bType.TypeInfo);
+                    thisTypelist.Add(bType.TypeInfo);
                 }
 
                 if (t.TypeArguments.Count > 0)
@@ -192,14 +193,14 @@ namespace Bridge.Translator
                         bType = BridgeTypes.Get(typeArgument, true);
                         if (bType?.TypeInfo != null && !bType.Type.Equals(typeDef))
                         {
-                            list.Add(bType.TypeInfo);
+                            thisTypelist.Add(bType.TypeInfo);
                         }
 
-                        this.GetParents(typeArgument, list);
+                        this.GetParents(typeArgument, thisTypelist);
                     }
                 }
             }
-
+            list.AddRange(thisTypelist);
             activeTypes.Pop();
             list = list.Distinct().ToList();
             cacheParents[type] = list;
