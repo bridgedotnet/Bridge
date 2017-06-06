@@ -113,25 +113,30 @@ namespace Bridge.Translator
             translator.Plugins.AfterOutput(translator, outputPath, !bridgeOptions.ExtractCore);
             logger.Info("Done plugins AfterOutput");
 
-            var htmlTitle = translator.AssemblyInfo.Html.Title;
-
-            if (string.IsNullOrEmpty(htmlTitle))
-            {
-                htmlTitle = translator.GetAssemblyTitle();
-            }
-
-            var htmlGenerator = new HtmlGenerator(
-                translator.Log,
-                translator.AssemblyInfo,
-                translator.Outputs,
-                htmlTitle
-                );
-
-            htmlGenerator.GenerateHtml(outputPath);
+            this.GenerateHtml(outputPath);
 
             logger.Info("Done post processing");
 
             return outputPath;
+        }
+
+        private void GenerateHtml(string outputPath)
+        {
+            var htmlTitle = Translator.AssemblyInfo.Html.Title;
+
+            if (string.IsNullOrEmpty(htmlTitle))
+            {
+                htmlTitle = Translator.GetAssemblyTitle();
+            }
+
+            var htmlGenerator = new HtmlGenerator(
+                Translator.Log,
+                Translator.AssemblyInfo,
+                Translator.Outputs,
+                htmlTitle
+                );
+
+            htmlGenerator.GenerateHtml(outputPath);
         }
 
         private string GetDefaultFileName(BridgeOptions bridgeOptions)
