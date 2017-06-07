@@ -22377,6 +22377,18 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2764", {
+        statics: {
+            methods: {
+                TestNonGenericClassName: function () {
+                    var Bridge2764Generic = function () {};
+                    var c = new Bridge2764Generic();
+                    Bridge.Test.NUnit.Assert.NotNull(c);
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge277", {
         $kind: "enum",
         statics: {

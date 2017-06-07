@@ -86,12 +86,16 @@ namespace Bridge.Contract
                     if (TypeDefinition != null)
                     {
                         name = TypeDefinition.Name;
+                        if (Helpers.IsIgnoreGeneric(TypeDefinition) && typeDef.ParentAssembly.AssemblyName != CS.NS.ROOT && this.Emitter.Validator.IsExternalType(TypeDefinition))
+                        {
+                            name = name.LeftOfRightmostOf("`");
+                        }
                     }
                     else
                     {
                         name = typeDef.Name;
 
-                        if (typeDef.TypeParameterCount > 0)
+                        if (typeDef.TypeParameterCount > 0 && !(Helpers.IsIgnoreGeneric(typeDef) && typeDef.ParentAssembly.AssemblyName != CS.NS.ROOT && this.Emitter.Validator.IsExternalType(typeDef)))
                         {
                             name += "$" + typeDef.TypeParameterCount;
                         }
