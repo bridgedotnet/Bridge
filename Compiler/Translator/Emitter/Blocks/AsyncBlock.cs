@@ -184,6 +184,9 @@ namespace Bridge.Translator
 
         public void InitAsyncBlock()
         {
+            this.PreviousAsyncExpressionHandling = this.Emitter.AsyncExpressionHandling;
+            this.Emitter.AsyncExpressionHandling = false;
+
             this.PreviousIsAync = this.Emitter.IsAsync;
             this.Emitter.IsAsync = true;
 
@@ -204,6 +207,8 @@ namespace Bridge.Translator
             this.JumpLabels = new List<IAsyncJumpLabel>();
             this.WrittenAwaitExpressions = new List<AstNode>();
         }
+
+        public bool PreviousAsyncExpressionHandling { get; set; }
 
         protected void DetectReturnType()
         {
@@ -305,6 +310,7 @@ namespace Bridge.Translator
             this.Emitter.AsyncVariables = this.PreviousAsyncVariables;
             this.Emitter.AsyncBlock = this.PreviousAsyncBlock;
             this.Emitter.ReplaceAwaiterByVar = this.ReplaceAwaiterByVar;
+            this.Emitter.AsyncExpressionHandling = this.PreviousAsyncExpressionHandling;
         }
 
         protected override void DoEmit()

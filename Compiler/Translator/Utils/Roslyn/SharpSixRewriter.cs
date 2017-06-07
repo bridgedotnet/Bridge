@@ -869,12 +869,24 @@ namespace Bridge.Translator
 
                 var body = SyntaxFactory.Block(statements);
                 var lambda = SyntaxFactory.ParenthesizedLambdaExpression(SyntaxFactory.ParameterList(SyntaxFactory.SeparatedList(new[] { SyntaxFactory.Parameter(SyntaxFactory.Identifier(instance)) })), body);
+                var isAsync = AwaitersCollector.HasAwaiters(this.semanticModel, node);
+                if (isAsync)
+                {
+                    lambda = lambda.WithAsyncKeyword(SyntaxFactory.Token(SyntaxKind.AsyncKeyword));
+                }
+                
                 args[1] = lambda;
 
-                var methodIdentifier = SyntaxFactory.IdentifierName("Bridge.Script.CallFor");
+                var methodIdentifier = isAsync ? SyntaxFactory.IdentifierName("Bridge.Script.AsyncCallFor") : SyntaxFactory.IdentifierName("Bridge.Script.CallFor");
                 var invocation = SyntaxFactory.InvocationExpression(methodIdentifier, SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(args.Select(SyntaxFactory.Argument))));
+                invocation = invocation.WithLeadingTrivia(node.GetLeadingTrivia()).WithTrailingTrivia(node.GetTrailingTrivia());
 
-                return invocation.WithLeadingTrivia(node.GetLeadingTrivia()).WithTrailingTrivia(node.GetTrailingTrivia());
+                if (isAsync)
+                {
+                    return SyntaxFactory.AwaitExpression(invocation.WithLeadingTrivia(invocation.GetLeadingTrivia().Insert(0, SyntaxFactory.Whitespace(" "))));
+                }
+
+                return invocation;
             }
 
             return node;
