@@ -16,8 +16,12 @@
 
   // Generate TypeScript Definition (.d.ts) files.
   // Default is false.
-  "generateTypeScript": false
+  "generateTypeScript": false,
 
-  // More config options available at:
+  // Delete everything from the output folder
+  // Default is false
+  "cleanOutputFolderBeforeBuild": false
+
+  // More config options available at
   // https://github.com/bridgedotnet/Bridge/wiki/global-configuration
 }
