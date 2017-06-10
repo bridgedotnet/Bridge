@@ -129,7 +129,7 @@ namespace Bridge.Translator
                 }
             }
 
-            if (type.Interfaces.Count > 0 && objectCreateMode == 1)
+            if (type.Interfaces.Count > 0)
             {
                 foreach (var @interface in type.Interfaces)
                 {
