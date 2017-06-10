@@ -23,6 +23,9 @@ namespace Bridge
         [Template("delete {0}")]
         public static extern void Delete(object value);
 
+        [Template("delete {0}[{1}]")]
+        public static extern void Delete(object value, string name);
+
         [Template("Bridge.is({0}, {1})")]
         public static extern bool Is(object type, string typeName);
 
