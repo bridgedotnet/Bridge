@@ -53,6 +53,18 @@ namespace Bridge
         [Template("Bridge.getDefaultValue({0})")]
         public static extern object GetDefaultValue(Type type);
 
+        [Template("{0} === undefined")]
+        public static extern bool IsUndefined(object value);
+
+        [Template("Bridge.hasValue({0})")]
+        public static extern bool HasValue(object value);
+
+        [Template("{0} === null")]
+        public static extern bool IsNull(object value);
+
+        [Template("!!{0}")]
+        public static extern bool ToBoolean(object value);
+
         /// <summary>
         /// Inject javascript code
         /// </summary>
