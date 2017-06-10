@@ -24,9 +24,7 @@
             id: null,
             disposed: false
         },
-        alias: [
-            "dispose", "System$IDisposable$dispose"
-        ],
+        alias: ["dispose", "System$IDisposable$dispose"],
         ctors: {
             $ctor1: function (callback, state, dueTime, period) {
                 this.$initialize();

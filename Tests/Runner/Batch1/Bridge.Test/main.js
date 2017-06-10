@@ -45,7 +45,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                     var fixtureContext = instance.GetContext();
 
                     if (testContext != null || fixtureContext != null) {
-                        Bridge.Test.Runtime.ContextHelper.SetContext(assert, ($t=new Bridge.Test.Runtime.Context(), $t.FixtureCtx = fixtureContext, $t.TestCtx = testContext, $t));
+                        Bridge.Test.Runtime.ContextHelper.SetContext(assert, ($t = new Bridge.Test.Runtime.Context(), $t.FixtureCtx = fixtureContext, $t.TestCtx = testContext, $t));
                     }
 
                     try {
@@ -301,7 +301,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                             }
 
                         }
-                    }finally {
+                    } finally {
                         if (Bridge.is($t, System.IDisposable)) {
                             $t.System$IDisposable$dispose();
                         }

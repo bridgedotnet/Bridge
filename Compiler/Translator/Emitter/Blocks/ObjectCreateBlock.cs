@@ -143,7 +143,7 @@ namespace Bridge.Translator
                     tempVar = this.GetTempVarName();
                     this.WriteOpenParentheses();
                     this.Write(tempVar);
-                    this.Write("=");
+                    this.Write(" = ");
                 }
 
                 if (inlineCode != null)

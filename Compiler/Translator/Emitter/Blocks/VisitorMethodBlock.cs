@@ -96,6 +96,7 @@ namespace Bridge.Translator
             if (isEntryPoint)
             {
                 this.Write(name);
+                this.WriteSpace();
             }
             else
             {
@@ -103,6 +104,7 @@ namespace Bridge.Translator
                 if (nm != null)
                 {
                     this.Write(nm);
+                    this.WriteSpace();
                 }
             }
 
