@@ -65,6 +65,12 @@ namespace Bridge
         [Template("!!{0}")]
         public static extern bool ToBoolean(object value);
 
+        [Template("{member} in {obj}")]
+        public static extern bool In(object obj, string member);
+
+        [Template("{instance}[{name}]({*args})")]
+        public static extern object InvokeMethod(object instance, string name, params object[] args);
+
         /// <summary>
         /// Inject javascript code
         /// </summary>
