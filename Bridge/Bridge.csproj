@@ -151,6 +151,7 @@
     <Compile Include="System\ComponentModel\DataAnnotations\Validator.cs" />
     <Compile Include="System\ComponentModel\EditorBrowsableAttribute.cs" />
     <Compile Include="System\IAsyncResult.cs" />
+    <Compile Include="System\IO\BinaryWriter.cs" />
     <Compile Include="System\IO\IOException.cs" />
     <Compile Include="System\IO\MemoryStream.cs" />
     <Compile Include="System\IO\SeekOrigin.cs" />
