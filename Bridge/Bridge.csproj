@@ -97,6 +97,11 @@
       <Link>Internal\Html5\TypedArray\Uint8ClampedArray.cs</Link>
     </Compile>
     <Compile Include="Attributes\Convention.cs" />
+    <Compile Include="System\Attributes\CLSCompliantAttribute.cs" />
+    <Compile Include="System\Attributes\DataContractAttribute.cs" />
+    <Compile Include="System\Attributes\DataMemberAttribute.cs" />
+    <Compile Include="System\Attributes\DebuggerDisplayAttribute.cs" />
+    <Compile Include="System\Attributes\HostProtectionAttribute.cs" />
     <Compile Include="System\BitConverter.cs" />
     <Compile Include="System\Collections\BitArrray.cs" />
     <Compile Include="System\Collections\Generic\BitHelper.cs" />
