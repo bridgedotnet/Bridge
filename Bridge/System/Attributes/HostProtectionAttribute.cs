@@ -110,7 +110,7 @@ namespace System.Security.Permissions
 
         public extern bool SelfAffectingThreading { get; set; }
 
-        [Runtime.InteropServices.ComVisible(true)]
+        [System.Runtime.InteropServices.ComVisible(true)]
         public extern bool SecurityInfrastructure { get; set; }
 
         public extern bool UI { get; set; }

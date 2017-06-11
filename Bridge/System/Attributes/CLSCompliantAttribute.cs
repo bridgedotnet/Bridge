@@ -19,7 +19,7 @@ namespace System
 {
     [Serializable]
     [AttributeUsage(AttributeTargets.All, Inherited = true, AllowMultiple = false)]
-    [Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     [NonScriptable, External]
     public sealed class CLSCompliantAttribute : Attribute
     {
