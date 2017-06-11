@@ -38,11 +38,3 @@
             }
         }
     });
-
-    var $box_ = {};
-
-    Bridge.ns("System.Boolean", $box_);
-
-    Bridge.apply($box_.System.Boolean, {
-        toString: function (obj) { return System.Boolean.toString(obj); }
-    });
