@@ -152,6 +152,7 @@
     <Compile Include="System\ComponentModel\EditorBrowsableAttribute.cs" />
     <Compile Include="System\IAsyncResult.cs" />
     <Compile Include="System\IO\IOException.cs" />
+    <Compile Include="System\IO\MemoryStream.cs" />
     <Compile Include="System\IO\SeekOrigin.cs" />
     <Compile Include="System\IO\Stream.cs" />
     <Compile Include="System\SerializableAttribute.cs" />

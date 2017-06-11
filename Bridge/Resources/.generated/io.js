@@ -292,6 +292,470 @@
         }
     });
 
+    Bridge.define("System.IO.MemoryStream", {
+        inherits: [System.IO.Stream],
+        statics: {
+            fields: {
+                MemStreamMaxLength: 0
+            },
+            ctors: {
+                init: function () {
+                    this.MemStreamMaxLength = 2147483647;
+                }
+            }
+        },
+        fields: {
+            _buffer: null,
+            _origin: 0,
+            _position: 0,
+            _length: 0,
+            _capacity: 0,
+            _expandable: false,
+            _writable: false,
+            _exposable: false,
+            _isOpen: false
+        },
+        props: {
+            CanRead: {
+                get: function () {
+                    return this._isOpen;
+                }
+            },
+            CanSeek: {
+                get: function () {
+                    return this._isOpen;
+                }
+            },
+            CanWrite: {
+                get: function () {
+                    return this._writable;
+                }
+            },
+            Capacity: {
+                get: function () {
+                    if (!this._isOpen) {
+                        throw new System.Exception();
+                    }
+                    return ((this._capacity - this._origin) | 0);
+                },
+                set: function (value) {
+                    if (System.Int64(value).lt(this.Length)) {
+                        throw new System.ArgumentOutOfRangeException("value");
+                    }
+                    if (!this._isOpen) {
+                        throw new System.Exception();
+                    }
+                    if (!this._expandable && value !== this.Capacity) {
+                        throw new System.NotSupportedException();
+                    }
+                    if (this._expandable && value !== this._capacity) {
+                        if (value <= 0) {
+                            this._buffer = null;
+                        } else {
+                            var numArray = System.Array.init(value, 0, System.Byte);
+                            if (this._length > 0) {
+                                System.Array.copy(this._buffer, 0, numArray, 0, this._length);
+                            }
+                            this._buffer = numArray;
+                        }
+                        this._capacity = value;
+                    }
+                }
+            },
+            Length: {
+                get: function () {
+                    if (!this._isOpen) {
+                        throw new System.Exception();
+                    }
+                    return System.Int64(((this._length - this._origin) | 0));
+                }
+            },
+            Position: {
+                get: function () {
+                    if (!this._isOpen) {
+                        throw new System.Exception();
+                    }
+                    return System.Int64(((this._position - this._origin) | 0));
+                },
+                set: function (value) {
+                    if (value.lt(System.Int64(0))) {
+                        throw new System.ArgumentOutOfRangeException("value");
+                    }
+                    if (!this._isOpen) {
+                        throw new System.Exception();
+                    }
+                    if (value.gt(System.Int64(2147483647))) {
+                        throw new System.ArgumentOutOfRangeException("value");
+                    }
+                    this._position = (this._origin + System.Int64.clip32(value)) | 0;
+                }
+            }
+        },
+        ctors: {
+            ctor: function () {
+                System.IO.MemoryStream.$ctor6.call(this, 0);
+            },
+            $ctor6: function (capacity) {
+                this.$initialize();
+                System.IO.Stream.ctor.call(this);
+                if (capacity < 0) {
+                    throw new System.ArgumentOutOfRangeException("capacity");
+                }
+                this._buffer = System.Array.init(capacity, 0, System.Byte);
+                this._capacity = capacity;
+                this._expandable = true;
+                this._writable = true;
+                this._exposable = true;
+                this._origin = 0;
+                this._isOpen = true;
+            },
+            $ctor1: function (buffer) {
+                System.IO.MemoryStream.$ctor2.call(this, buffer, true);
+            },
+            $ctor2: function (buffer, writable) {
+                this.$initialize();
+                System.IO.Stream.ctor.call(this);
+                if (buffer == null) {
+                    throw new System.ArgumentNullException("buffer");
+                }
+                this._buffer = buffer;
+                var length = buffer.length;
+                var num = length;
+                this._capacity = length;
+                this._length = num;
+                this._writable = writable;
+                this._exposable = false;
+                this._origin = 0;
+                this._isOpen = true;
+            },
+            $ctor3: function (buffer, index, count) {
+                System.IO.MemoryStream.$ctor5.call(this, buffer, index, count, true, false);
+            },
+            $ctor4: function (buffer, index, count, writable) {
+                System.IO.MemoryStream.$ctor5.call(this, buffer, index, count, writable, false);
+            },
+            $ctor5: function (buffer, index, count, writable, publiclyVisible) {
+                this.$initialize();
+                System.IO.Stream.ctor.call(this);
+                if (buffer == null) {
+                    throw new System.ArgumentNullException("buffer");
+                }
+                if (index < 0) {
+                    throw new System.ArgumentOutOfRangeException("index");
+                }
+                if (count < 0) {
+                    throw new System.ArgumentOutOfRangeException("count");
+                }
+                if (((buffer.length - index) | 0) < count) {
+                    throw new System.ArgumentException();
+                }
+                this._buffer = buffer;
+                var num = index;
+                var num1 = num;
+                this._position = num;
+                this._origin = num1;
+                var num2 = (index + count) | 0;
+                num1 = num2;
+                this._capacity = num2;
+                this._length = num1;
+                this._writable = writable;
+                this._exposable = publiclyVisible;
+                this._expandable = false;
+                this._isOpen = true;
+            }
+        },
+        methods: {
+            dispose$1: function (disposing) {
+                try {
+                    if (disposing) {
+                        this._isOpen = false;
+                        this._writable = false;
+                        this._expandable = false;
+                        //this._lastReadTask = null;
+                    }
+                }
+                finally {
+                    System.IO.Stream.prototype.dispose$1.call(this, disposing);
+                }
+            },
+            ensureCapacity: function (value) {
+                if (value < 0) {
+                    throw new System.IO.IOException.ctor();
+                }
+                if (value <= this._capacity) {
+                    return false;
+                }
+                var num = value;
+                if (num < 256) {
+                    num = 256;
+                }
+                if (num < ((this._capacity * 2) | 0)) {
+                    num = (this._capacity * 2) | 0;
+                }
+                if (((this._capacity * 2) | 0) > 2147483591) {
+                    num = (value > 2147483591 ? value : 2147483591);
+                }
+                this.Capacity = num;
+                return true;
+            },
+            ensureWriteable: function () {
+                if (!this.CanWrite) {
+                    throw new System.NotSupportedException();
+                }
+            },
+            flush: function () { },
+            getBuffer: function () {
+                if (!this._exposable) {
+                    throw new System.Exception();
+                }
+                return this._buffer;
+            },
+            internalEmulateRead: function (count) {
+                if (!this._isOpen) {
+                    throw new System.Exception();
+                }
+                var num = (this._length - this._position) | 0;
+                if (num > count) {
+                    num = count;
+                }
+                if (num < 0) {
+                    num = 0;
+                }
+                this._position = (this._position + num) | 0;
+                return num;
+            },
+            internalGetBuffer: function () {
+                return this._buffer;
+            },
+            internalGetOriginAndLength: function (origin, length) {
+                if (!this._isOpen) {
+                    throw new System.Exception();
+                }
+                origin.v = this._origin;
+                length.v = this._length;
+            },
+            internalGetPosition: function () {
+                if (!this._isOpen) {
+                    throw new System.Exception();
+                }
+                return this._position;
+            },
+            internalReadInt32: function () {
+                if (!this._isOpen) {
+                    throw new System.Exception();
+                }
+                var num = (this._position + 4) | 0;
+                var num1 = num;
+                this._position = num;
+                var num2 = num1;
+                if (num2 > this._length) {
+                    this._position = this._length;
+                    throw new System.IO.IOException.ctor();
+                }
+                return this._buffer[System.Array.index(((num2 - 4) | 0), this._buffer)] | this._buffer[System.Array.index(((num2 - 3) | 0), this._buffer)] << 8 | this._buffer[System.Array.index(((num2 - 2) | 0), this._buffer)] << 16 | this._buffer[System.Array.index(((num2 - 1) | 0), this._buffer)] << 24;
+            },
+            read: function (buffer, offset, count) {
+                if (buffer == null) {
+                    throw new System.ArgumentNullException("buffer");
+                }
+                if (offset < 0) {
+                    throw new System.ArgumentOutOfRangeException("offset");
+                }
+                if (count < 0) {
+                    throw new System.ArgumentOutOfRangeException("count");
+                }
+                if (((buffer.length - offset) | 0) < count) {
+                    throw new System.ArgumentException();
+                }
+                if (!this._isOpen) {
+                    throw new System.Exception();
+                }
+                var num = (this._length - this._position) | 0;
+                if (num > count) {
+                    num = count;
+                }
+                if (num <= 0) {
+                    return 0;
+                }
+                if (num > 8) {
+                    System.Array.copy(this._buffer, this._position, buffer, offset, num);
+                } else {
+                    var num1 = num;
+                    while (true) {
+                        var num2 = (num1 - 1) | 0;
+                        num1 = num2;
+                        if (num2 < 0) {
+                            break;
+                        }
+                        buffer[System.Array.index(((offset + num1) | 0), buffer)] = this._buffer[System.Array.index(((this._position + num1) | 0), this._buffer)];
+                    }
+                }
+                this._position = (this._position + num) | 0;
+                return num;
+            },
+            readByte: function () {
+                if (!this._isOpen) {
+                    throw new System.Exception();
+                }
+                if (this._position >= this._length) {
+                    return -1;
+                }
+                var numArray = this._buffer;
+                var num = this._position;
+                this._position = (num + 1) | 0;
+                return numArray[System.Array.index(num, numArray)];
+            },
+            seek: function (offset, loc) {
+                if (!this._isOpen) {
+                    throw new System.Exception();
+                }
+                if (offset.gt(System.Int64(2147483647))) {
+                    throw new System.ArgumentOutOfRangeException("offset");
+                }
+                switch (loc) {
+                    case SeekOrigin.Begin: 
+                        {
+                            var num = (this._origin + System.Int64.clip32(offset)) | 0;
+                            if (offset.lt(System.Int64(0)) || num < this._origin) {
+                                throw new System.IO.IOException.ctor();
+                            }
+                            this._position = num;
+                            break;
+                        }
+                    case SeekOrigin.Current: 
+                        {
+                            var num1 = (this._position + System.Int64.clip32(offset)) | 0;
+                            if (System.Int64(this._position).add(offset).lt(System.Int64(this._origin)) || num1 < this._origin) {
+                                throw new System.IO.IOException.ctor();
+                            }
+                            this._position = num1;
+                            break;
+                        }
+                    case SeekOrigin.End: 
+                        {
+                            var num2 = (this._length + System.Int64.clip32(offset)) | 0;
+                            if (System.Int64(this._length).add(offset).lt(System.Int64(this._origin)) || num2 < this._origin) {
+                                throw new System.IO.IOException.ctor();
+                            }
+                            this._position = num2;
+                            break;
+                        }
+                    default: 
+                        {
+                            throw new System.ArgumentException();
+                        }
+                }
+                return System.Int64(this._position);
+            },
+            setLength: function (value) {
+                if (value.lt(System.Int64(0)) || value.gt(System.Int64(2147483647))) {
+                    throw new System.ArgumentOutOfRangeException("value");
+                }
+                this.ensureWriteable();
+                if (value.gt(System.Int64((((2147483647 - this._origin) | 0))))) {
+                    throw new System.ArgumentOutOfRangeException("value");
+                }
+                var num = (this._origin + System.Int64.clip32(value)) | 0;
+                if (!this.ensureCapacity(num) && num > this._length) {
+                    System.Array.fill(this._buffer, 0, this._length, ((num - this._length) | 0));
+                }
+                this._length = num;
+                if (this._position > num) {
+                    this._position = num;
+                }
+            },
+            toArray: function () {
+                var numArray = System.Array.init(((this._length - this._origin) | 0), 0, System.Byte);
+                System.Array.copy(this._buffer, this._origin, numArray, 0, ((this._length - this._origin) | 0));
+                return numArray;
+            },
+            tryGetBuffer: function (buffer) {
+                if (!this._exposable) {
+                    buffer.v = new System.ArraySegment();
+                    return false;
+                }
+                buffer.v = new System.ArraySegment(this._buffer, this._origin, ((this._length - this._origin) | 0));
+                return true;
+            },
+            write: function (buffer, offset, count) {
+                if (buffer == null) {
+                    throw new System.ArgumentNullException("buffer");
+                }
+                if (offset < 0) {
+                    throw new System.ArgumentOutOfRangeException("offset");
+                }
+                if (count < 0) {
+                    throw new System.ArgumentOutOfRangeException("count");
+                }
+                if (((buffer.length - offset) | 0) < count) {
+                    throw new System.ArgumentException();
+                }
+                if (!this._isOpen) {
+                    throw new System.Exception();
+                }
+                this.ensureWriteable();
+                var num = (this._position + count) | 0;
+                if (num < 0) {
+                    throw new System.IO.IOException.ctor();
+                }
+                if (num > this._length) {
+                    var flag = this._position > this._length;
+                    if (num > this._capacity && this.ensureCapacity(num)) {
+                        flag = false;
+                    }
+                    if (flag) {
+                        System.Array.fill(this._buffer, 0, this._length, ((num - this._length) | 0));
+                    }
+                    this._length = num;
+                }
+                if (count > 8 || Bridge.referenceEquals(buffer, this._buffer)) {
+                    System.Array.copy(buffer, offset, this._buffer, this._position, count);
+                } else {
+                    var num1 = count;
+                    while (true) {
+                        var num2 = (num1 - 1) | 0;
+                        num1 = num2;
+                        if (num2 < 0) {
+                            break;
+                        }
+                        this._buffer[System.Array.index(((this._position + num1) | 0), this._buffer)] = buffer[System.Array.index(((offset + num1) | 0), buffer)];
+                    }
+                }
+                this._position = num;
+            },
+            writeByte: function (value) {
+                if (!this._isOpen) {
+                    throw new System.Exception();
+                }
+                this.ensureWriteable();
+                if (this._position >= this._length) {
+                    var num = (this._position + 1) | 0;
+                    var flag = this._position > this._length;
+                    if (num >= this._capacity && this.ensureCapacity(num)) {
+                        flag = false;
+                    }
+                    if (flag) {
+                        System.Array.fill(this._buffer, 0, this._length, ((this._position - this._length) | 0));
+                    }
+                    this._length = num;
+                }
+                var numArray = this._buffer;
+                var num1 = this._position;
+                this._position = (num1 + 1) | 0;
+                numArray[System.Array.index(num1, numArray)] = value;
+            },
+            writeTo: function (stream) {
+                if (stream == null) {
+                    throw new System.ArgumentNullException("stream");
+                }
+                if (!this._isOpen) {
+                    throw new System.Exception();
+                }
+                stream.write(this._buffer, this._origin, ((this._length - this._origin) | 0));
+            }
+        }
+    });
+
     Bridge.define("System.IO.Stream.NullStream", {
         inherits: [System.IO.Stream],
         props: {

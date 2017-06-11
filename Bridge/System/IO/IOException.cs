@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 namespace System.IO
 {
     
-    [ComVisible(true)]
+    
     [Serializable]
     [FileName("io.js")]
     public class IOException : Exception

@@ -100,7 +100,7 @@ namespace System
 
 namespace System.Runtime.InteropServices
 {
-    [ComVisible(true)]
+    
     [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class)]
     [External]
     [NonScriptable]
@@ -125,7 +125,7 @@ namespace System.Runtime.InteropServices
 
 namespace System.Runtime.InteropServices
 {
-    [ComVisible(true)]
+    
     [AttributeUsage(AttributeTargets.Assembly)]
     [External]
     [NonScriptable]

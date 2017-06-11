@@ -35,7 +35,7 @@ using System.Reflection;
 namespace System.IO
 {
     [Serializable]
-    [ComVisible(true)]
+    
     [FileName("io.js")]
 #if CONTRACTS_FULL
     [ContractClass(typeof(StreamContract))]
