@@ -122,6 +122,13 @@ namespace System.Runtime.InteropServices
     public sealed class OutAttribute : Attribute
     {
     }
+
+    [AttributeUsageAttribute(AttributeTargets.Parameter)]
+    [External]
+    [NonScriptable]
+    public sealed class InAttribute : Attribute
+    {
+    }
 }
 
 namespace System.Runtime.InteropServices
