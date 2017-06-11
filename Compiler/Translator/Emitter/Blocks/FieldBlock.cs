@@ -112,7 +112,7 @@ namespace Bridge.Translator
 
             if (info.Events.Count > 0 && !this.IsObjectLiteral)
             {
-                var hasProperties = this.WriteObject(JS.Fields.EVENTS, info.Events, JS.Funcs.BRIDGE_EVENT + "(this, \"{0}\", {1});", JS.Funcs.BRIDGE_EVENT + "(this, {0}, {1});");
+                var hasProperties = this.WriteObject(JS.Fields.EVENTS, info.Events, JS.Funcs.BRIDGE_EVENT + $"(this, {Emitter.AssemblyInfo.Quote}{"{0}"}{Emitter.AssemblyInfo.Quote}, {"{1}"});", JS.Funcs.BRIDGE_EVENT + "(this, {0}, {1});");
                 if (hasProperties)
                 {
                     this.Emitter.Comma = true;

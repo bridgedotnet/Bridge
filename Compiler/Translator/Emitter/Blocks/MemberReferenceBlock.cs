@@ -129,7 +129,7 @@ namespace Bridge.Translator
 
                 if (interfaceName.StartsWith("\""))
                 {
-                    this.Write(interfaceName);
+                    this.Write(interfaceName.Replace('"', Emitter.AssemblyInfo.Quote));
                 }
                 else
                 {
@@ -930,7 +930,7 @@ namespace Bridge.Translator
                                 if (alias.StartsWith("\""))
                                 {
                                     alias = alias.Insert(1, "$");
-                                    name = alias + "+\"$" + name + "\"";
+                                    name = alias.Replace('"', Emitter.AssemblyInfo.Quote) + $"+{Emitter.AssemblyInfo.Quote}$" + name + Emitter.AssemblyInfo.Quote;
                                     this.WriteIdentifier(name, false);
                                 }
                                 else

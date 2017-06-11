@@ -203,7 +203,7 @@ namespace Bridge.Translator
 
                         tmp.Append(JS.Types.Bridge.ASSEMBLY + "(");
 
-                        tmp.AppendFormat("\"{0}\"", asmName);
+                        tmp.AppendFormat("{0}{1}{0}", AssemblyInfo.Quote, asmName);
 
                         tmp.Append(",");
 
@@ -406,7 +406,7 @@ namespace Bridge.Translator
                 return string.Empty;
             }
 
-            return "\"use strict\";";
+            return $"{AssemblyInfo.Quote}use strict{AssemblyInfo.Quote};";
         }
     }
 }
