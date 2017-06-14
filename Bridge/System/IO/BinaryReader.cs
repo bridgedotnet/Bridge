@@ -61,7 +61,7 @@ namespace System.IO
             //{
             //    maxByteCount = 16;
             //}
-            //this.m_buffer = new byte[maxByteCount];
+            this.m_buffer = new byte[8];
             //this.m_2BytesPerChar = encoding is UnicodeEncoding;
             this.m_isMemoryStream = this.m_stream.GetType() == typeof(MemoryStream);
             //this.m_leaveOpen = leaveOpen;
