@@ -13,6 +13,231 @@
         }
     });
 
+    Bridge.define("System.IO.BinaryReader", {
+        inherits: [System.IDisposable],
+        statics: {
+            fields: {
+                MaxCharBytesSize: 0
+            },
+            ctors: {
+                init: function () {
+                    this.MaxCharBytesSize = 128;
+                }
+            }
+        },
+        fields: {
+            m_stream: null,
+            m_buffer: null,
+            m_isMemoryStream: false
+        },
+        props: {
+            BaseStream: {
+                get: function () {
+                    return this.m_stream;
+                }
+            }
+        },
+        alias: [
+            "dispose", "System$IDisposable$dispose"
+        ],
+        ctors: {
+            ctor: function (input) {
+                this.$initialize();
+                if (input == null) {
+                    throw new System.ArgumentNullException("input");
+                }
+                if (!input.CanRead) {
+                    throw new System.ArgumentException();
+                }
+                this.m_stream = input;
+                //this.m_decoder = encoding.GetDecoder();
+                //this.m_maxCharsSize = encoding.GetMaxCharCount(128);
+                //int maxByteCount = encoding.GetMaxByteCount(1);
+                //if (maxByteCount < 16)
+                //{
+                //    maxByteCount = 16;
+                //}
+                //this.m_buffer = new byte[maxByteCount];
+                //this.m_2BytesPerChar = encoding is UnicodeEncoding;
+                this.m_isMemoryStream = Bridge.referenceEquals(Bridge.getType(this.m_stream), System.IO.MemoryStream);
+                //this.m_leaveOpen = leaveOpen;
+            }
+        },
+        methods: {
+            close: function () {
+                this.dispose$1(true);
+            },
+            dispose$1: function (disposing) {
+                if (disposing) {
+                    var mStream = this.m_stream;
+                    this.m_stream = null;
+                    if (mStream != null) {
+                        mStream.close();
+                    }
+                }
+                this.m_stream = null;
+                this.m_buffer = null;
+                //this.m_decoder = null;
+                //this.m_charBytes = null;
+                //this.m_singleChar = null;
+                //this.m_charBuffer = null;
+            },
+            dispose: function () {
+                this.dispose$1(true);
+            },
+            fillBuffer: function (numBytes) {
+                if (this.m_buffer != null && (numBytes < 0 || numBytes > this.m_buffer.length)) {
+                    throw new System.ArgumentOutOfRangeException("numBytes");
+                }
+                var num = 0;
+                var num1 = 0;
+                if (this.m_stream == null) {
+                    throw new System.Exception();
+                }
+                if (numBytes === 1) {
+                    num1 = this.m_stream.readByte();
+                    if (num1 === -1) {
+                        throw new System.Exception();
+                    }
+                    this.m_buffer[System.Array.index(0, this.m_buffer)] = num1 & 255;
+                    return;
+                }
+                do {
+                    num1 = this.m_stream.read(this.m_buffer, num, ((numBytes - num) | 0));
+                    if (num1 === 0) {
+                        throw new System.Exception();
+                    }
+                    num = (num + num1) | 0;
+                } while (num < numBytes);
+            },
+            read: function (buffer, index, count) {
+                if (buffer == null) {
+                    throw new System.ArgumentNullException("buffer");
+                }
+                if (index < 0) {
+                    throw new System.ArgumentOutOfRangeException("index");
+                }
+                if (count < 0) {
+                    throw new System.ArgumentOutOfRangeException("count");
+                }
+                if (((buffer.length - index) | 0) < count) {
+                    throw new System.ArgumentException();
+                }
+                if (this.m_stream == null) {
+                    throw new System.Exception();
+                }
+                return this.m_stream.read(buffer, index, count);
+            },
+            read7BitEncodedInt: function () {
+                var num;
+                var num1 = 0;
+                var num2 = 0;
+                do {
+                    if (num2 === 35) {
+                        throw new System.FormatException();
+                    }
+                    num = this.readByte();
+                    num1 = num1 | (num & 127) << (num2 & 31);
+                    num2 = (num2 + 7) | 0;
+                } while ((num & 128) !== 0);
+                return num1;
+            },
+            readBoolean: function () {
+                this.fillBuffer(1);
+                return this.m_buffer[System.Array.index(0, this.m_buffer)] !== 0;
+            },
+            readByte: function () {
+                if (this.m_stream == null) {
+                    throw new System.Exception();
+                }
+                var num = this.m_stream.readByte();
+                if (num === -1) {
+                    throw new System.Exception();
+                }
+                return (num & 255);
+            },
+            readBytes: function (count) {
+                if (count < 0) {
+                    throw new System.ArgumentOutOfRangeException("count");
+                }
+                if (this.m_stream == null) {
+                    throw new System.Exception();
+                }
+                if (count === 0) {
+                    return System.Array.init([], System.Byte);
+                }
+                var numArray = System.Array.init(count, 0, System.Byte);
+                var num = 0;
+                do {
+                    var num1 = this.m_stream.read(numArray, num, count);
+                    if (num1 === 0) {
+                        break;
+                    }
+                    num = (num + num1) | 0;
+                    count = (count - num1) | 0;
+                } while (count > 0);
+                if (num !== numArray.length) {
+                    var numArray1 = System.Array.init(num, 0, System.Byte);
+                    System.Array.copy(numArray, 0, numArray1, 0, num);
+                    numArray = numArray1;
+                }
+                return numArray;
+            },
+            readDouble: function () {
+                this.fillBuffer(8);
+                var mBuffer = (this.m_buffer[System.Array.index(0, this.m_buffer)] | this.m_buffer[System.Array.index(1, this.m_buffer)] << 8 | this.m_buffer[System.Array.index(2, this.m_buffer)] << 16 | this.m_buffer[System.Array.index(3, this.m_buffer)] << 24) >>> 0;
+                var num = (this.m_buffer[System.Array.index(4, this.m_buffer)] | this.m_buffer[System.Array.index(5, this.m_buffer)] << 8 | this.m_buffer[System.Array.index(6, this.m_buffer)] << 16 | this.m_buffer[System.Array.index(7, this.m_buffer)] << 24) >>> 0;
+                return System.BitConverter.int64BitsToDouble(System.Int64.clip64(System.UInt64(num).shl(32).or(System.UInt64(mBuffer))));
+            },
+            readInt16: function () {
+                this.fillBuffer(2);
+                return Bridge.Int.sxs((this.m_buffer[System.Array.index(0, this.m_buffer)] | this.m_buffer[System.Array.index(1, this.m_buffer)] << 8) & 65535);
+            },
+            readInt32: function () {
+                if (this.m_isMemoryStream) {
+                    if (this.m_stream == null) {
+                        throw new System.Exception();
+                    }
+                    return (Bridge.as(this.m_stream, System.IO.MemoryStream)).internalReadInt32();
+                }
+                this.fillBuffer(4);
+                return this.m_buffer[System.Array.index(0, this.m_buffer)] | this.m_buffer[System.Array.index(1, this.m_buffer)] << 8 | this.m_buffer[System.Array.index(2, this.m_buffer)] << 16 | this.m_buffer[System.Array.index(3, this.m_buffer)] << 24;
+            },
+            readInt64: function () {
+                this.fillBuffer(8);
+                var mBuffer = (this.m_buffer[System.Array.index(0, this.m_buffer)] | this.m_buffer[System.Array.index(1, this.m_buffer)] << 8 | this.m_buffer[System.Array.index(2, this.m_buffer)] << 16 | this.m_buffer[System.Array.index(3, this.m_buffer)] << 24) >>> 0;
+                var num = (this.m_buffer[System.Array.index(4, this.m_buffer)] | this.m_buffer[System.Array.index(5, this.m_buffer)] << 8 | this.m_buffer[System.Array.index(6, this.m_buffer)] << 16 | this.m_buffer[System.Array.index(7, this.m_buffer)] << 24) >>> 0;
+                return System.Int64.clip64(System.UInt64(num).shl(32).or(System.UInt64(mBuffer)));
+            },
+            readSByte: function () {
+                this.fillBuffer(1);
+                return Bridge.Int.sxb((this.m_buffer[System.Array.index(0, this.m_buffer)]) & 255);
+            },
+            readSingle: function () {
+                //unsafe
+                //{
+                this.fillBuffer(4);
+                var mBuffer = (this.m_buffer[System.Array.index(0, this.m_buffer)] | this.m_buffer[System.Array.index(1, this.m_buffer)] << 8 | this.m_buffer[System.Array.index(2, this.m_buffer)] << 16 | this.m_buffer[System.Array.index(3, this.m_buffer)] << 24) >>> 0;
+                return System.BitConverter.toSingle(System.BitConverter.getBytes$8(mBuffer), 0);
+                //}
+            },
+            readUInt16: function () {
+                this.fillBuffer(2);
+                return ((this.m_buffer[System.Array.index(0, this.m_buffer)] | this.m_buffer[System.Array.index(1, this.m_buffer)] << 8) & 65535);
+            },
+            readUInt32: function () {
+                this.fillBuffer(4);
+                return ((this.m_buffer[System.Array.index(0, this.m_buffer)] | this.m_buffer[System.Array.index(1, this.m_buffer)] << 8 | this.m_buffer[System.Array.index(2, this.m_buffer)] << 16 | this.m_buffer[System.Array.index(3, this.m_buffer)] << 24) >>> 0);
+            },
+            readUInt64: function () {
+                this.fillBuffer(8);
+                var mBuffer = (this.m_buffer[System.Array.index(0, this.m_buffer)] | this.m_buffer[System.Array.index(1, this.m_buffer)] << 8 | this.m_buffer[System.Array.index(2, this.m_buffer)] << 16 | this.m_buffer[System.Array.index(3, this.m_buffer)] << 24) >>> 0;
+                var num = (this.m_buffer[System.Array.index(4, this.m_buffer)] | this.m_buffer[System.Array.index(5, this.m_buffer)] << 8 | this.m_buffer[System.Array.index(6, this.m_buffer)] << 16 | this.m_buffer[System.Array.index(7, this.m_buffer)] << 24) >>> 0;
+                return System.UInt64(num).shl(32).or(System.UInt64(mBuffer));
+            }
+        }
+    });
+
     Bridge.define("System.IO.IOException", {
         inherits: [System.Exception],
         fields: {
