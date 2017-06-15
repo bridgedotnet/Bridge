@@ -12,9 +12,16 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Virtual]
         public class Person
         {
+            public class Worker : Person
+            {
+            }
         }
 
         public class Student : Person
+        {
+        }
+
+        public class Professor : Student
         {
         }
 
@@ -22,7 +29,13 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public static void TestVirtualType()
         {
             object s = new Student();
-            Assert.True(s is Person);
+            Assert.True(s is Person, "Student is Person");
+
+            object w = new Person.Worker();
+            Assert.True(w is Person, "Worker is Person");
+
+            object p = new Professor();
+            Assert.True(p is Person, "Professor is Person");
         }
     }
 }

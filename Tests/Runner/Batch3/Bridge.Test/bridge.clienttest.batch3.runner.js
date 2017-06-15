@@ -11814,7 +11814,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestVirtualType: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2795, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestVirtualType()", $t.Line = "21", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2795, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestVirtualType()", $t.Line = "28", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.TestVirtualType();
                 }
             }

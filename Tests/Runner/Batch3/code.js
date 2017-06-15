@@ -22561,7 +22561,13 @@ Bridge.$N1391Result =                     r;
             methods: {
                 TestVirtualType: function () {
                     var s = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Student();
-                    Bridge.Test.NUnit.Assert.True(Bridge.is(s, Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Person")));
+                    Bridge.Test.NUnit.Assert.True$1(Bridge.is(s, Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Person")), "Student is Person");
+
+                    var w = new Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Person").Worker();
+                    Bridge.Test.NUnit.Assert.True$1(Bridge.is(w, Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Person")), "Worker is Person");
+
+                    var p = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Professor();
+                    Bridge.Test.NUnit.Assert.True$1(Bridge.is(p, Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Person")), "Professor is Person");
                 }
             }
         }
@@ -32406,6 +32412,10 @@ Bridge.$N1391Result =                     r;
                 return System.String.format("{0} - {1}", Bridge.box(this.X, System.Int32), Bridge.box(this.Y, System.Int32));
             }
         }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Professor", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Student]
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge304", {
