@@ -22561,31 +22561,25 @@ Bridge.$N1391Result =                     r;
             methods: {
                 TestVirtualClass: function () {
                     var s = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Student();
-                    Bridge.Test.NUnit.Assert.True$1(Bridge.is(s, Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Person")), "Student is Person");
-
-                    var w = new Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Person").Worker();
-                    Bridge.Test.NUnit.Assert.True$1(Bridge.is(w, Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Person")), "Worker is Person");
+                    Bridge.Test.NUnit.Assert.True$1(Bridge.is(s, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Person), "Student is Person");
 
                     var p = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Professor();
-                    Bridge.Test.NUnit.Assert.True$1(Bridge.is(p, Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Person")), "Professor is Person");
+                    Bridge.Test.NUnit.Assert.True$1(Bridge.is(p, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Person), "Professor is Person");
                 },
                 TestVirtualInterface: function () {
                     var p = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Postgraduate();
                     Bridge.Test.NUnit.Assert.True$1(Bridge.is(p, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.IStudent), "Postgraduate is IStudent");
-                    Bridge.Test.NUnit.Assert.True$1(Bridge.is(p, Bridge.virtual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.IPerson")), "Postgraduate is IPerson");
+                    Bridge.Test.NUnit.Assert.True$1(Bridge.is(p, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.IPerson), "Postgraduate is IPerson");
                 }
             }
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.IStudent", {
-        inherits: [Bridge.virtual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.IPerson")],
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.IPerson", {
         $kind: "interface"
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Student", {
-        inherits: [Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Person")]
-    });
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Person");
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge294", {
         fields: {
@@ -32424,12 +32418,13 @@ Bridge.$N1391Result =                     r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Postgraduate", {
-        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.IStudent]
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.IStudent", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.IPerson],
+        $kind: "interface"
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Professor", {
-        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Student]
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Student", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Person]
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge304", {
@@ -32855,6 +32850,14 @@ Bridge.$N1391Result =                     r;
         alias: [
             "Store", ["Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638$IHaveStore$1$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638$FormEditStore$Store", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2638$IHaveStore$1$Store"]
         ]
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Postgraduate", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.IStudent]
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Professor", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Student]
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge306A", {
