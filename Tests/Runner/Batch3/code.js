@@ -22559,7 +22559,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795", {
         statics: {
             methods: {
-                TestVirtualType: function () {
+                TestVirtualClass: function () {
                     var s = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Student();
                     Bridge.Test.NUnit.Assert.True$1(Bridge.is(s, Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Person")), "Student is Person");
 
@@ -22568,9 +22568,19 @@ Bridge.$N1391Result =                     r;
 
                     var p = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Professor();
                     Bridge.Test.NUnit.Assert.True$1(Bridge.is(p, Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Person")), "Professor is Person");
+                },
+                TestVirtualInterface: function () {
+                    var p = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Postgraduate();
+                    Bridge.Test.NUnit.Assert.True$1(Bridge.is(p, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.IStudent), "Postgraduate is IStudent");
+                    Bridge.Test.NUnit.Assert.True$1(Bridge.is(p, Bridge.virtual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.IPerson")), "Postgraduate is IPerson");
                 }
             }
         }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.IStudent", {
+        inherits: [Bridge.virtual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.IPerson")],
+        $kind: "interface"
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Student", {
@@ -32412,6 +32422,10 @@ Bridge.$N1391Result =                     r;
                 return System.String.format("{0} - {1}", Bridge.box(this.X, System.Int32), Bridge.box(this.Y, System.Int32));
             }
         }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Postgraduate", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.IStudent]
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Professor", {

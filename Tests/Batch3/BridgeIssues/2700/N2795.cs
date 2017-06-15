@@ -25,8 +25,21 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
         }
 
+        [Virtual(VirtualTarget.Interface)]
+        public interface IPerson
+        {
+        }
+
+        public interface IStudent : IPerson
+        {
+        }
+
+        public class Postgraduate : IStudent
+        {
+        }
+
         [Test]
-        public static void TestVirtualType()
+        public static void TestVirtualClass()
         {
             object s = new Student();
             Assert.True(s is Person, "Student is Person");
@@ -37,5 +50,14 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             object p = new Professor();
             Assert.True(p is Person, "Professor is Person");
         }
+
+        [Test]
+        public static void TestVirtualInterface()
+        {
+            object p = new Postgraduate();
+            Assert.True(p is IStudent, "Postgraduate is IStudent");
+            Assert.True(p is IPerson, "Postgraduate is IPerson");
+        }
+
     }
 }
