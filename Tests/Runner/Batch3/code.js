@@ -15625,7 +15625,7 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.AreEqual("John Smith", person.Name);
                     Bridge.Test.NUnit.Assert.AreEqual("This is John Smith", person.Introduce());
 
-                    var iperson = Bridge.cast(person, Bridge.getInterface("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2216.IPerson"));
+                    var iperson = Bridge.cast(person, Bridge.virtual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2216.IPerson"));
                     Bridge.Test.NUnit.Assert.AreEqual("John Smith", iperson[Bridge.geti(iperson, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2216$IPerson$Name")]);
                     Bridge.Test.NUnit.Assert.AreEqual("This is John Smith", iperson[Bridge.geti(iperson, "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2216$IPerson$Introduce")]());
                 }
@@ -22554,6 +22554,21 @@ Bridge.$N1391Result =                     r;
                 Int: 0
             }
         }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795", {
+        statics: {
+            methods: {
+                TestVirtualType: function () {
+                    var s = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Student();
+                    Bridge.Test.NUnit.Assert.True(Bridge.is(s, Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Person")));
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Student", {
+        inherits: [Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Person")]
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge294", {
@@ -31670,7 +31685,7 @@ Bridge.$N1391Result =                     r;
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2216.Person", {
-        inherits: [Bridge.getInterface("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2216.IPerson")],
+        inherits: [Bridge.virtual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2216.IPerson")],
         props: {
             Name: null
         },

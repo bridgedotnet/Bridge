@@ -178,6 +178,7 @@ namespace Bridge.Translator
         public virtual bool IsExternalType(TypeDefinition type, bool ignoreLiteral = false)
         {
             string externalAttr = Translator.Bridge_ASSEMBLY + ".ExternalAttribute";
+            string virtualAttr = Translator.Bridge_ASSEMBLY + ".VirtualAttribute";
             string nonScriptableAttr = Translator.Bridge_ASSEMBLY + ".NonScriptableAttribute";
 
             var has = this.HasAttribute(type.CustomAttributes, externalAttr)
@@ -191,6 +192,40 @@ namespace Bridge.Translator
             if (!has)
             {
                 has = this.HasAttribute(type.Module.Assembly.CustomAttributes, externalAttr);
+            }
+
+            if (!has)
+            {
+                CustomAttribute attr = null;
+                if (type.DeclaringType != null)
+                {
+                    attr = type.DeclaringType.CustomAttributes.FirstOrDefault(a => a.AttributeType.FullName == virtualAttr);
+                }
+
+                if (attr == null)
+                {
+                    attr = type.Module.Assembly.CustomAttributes.FirstOrDefault(a => a.AttributeType.FullName == virtualAttr);
+                }
+
+                if (attr != null)
+                {
+                    if (attr.ConstructorArguments.Count == 0)
+                    {
+                        return true;
+                    }
+
+                    var value = (int)attr.ConstructorArguments[0].Value;
+
+                    switch (value)
+                    {
+                        case 0:
+                            return true;
+                        case 1:
+                            return !type.IsInterface;
+                        case 2:
+                            return type.IsInterface;
+                    }
+                }
             }
 
             return has;
@@ -222,7 +257,7 @@ namespace Bridge.Translator
         public virtual bool IsExternalType(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition typeDefinition, bool ignoreLiteral = false)
         {
             string externalAttr = Translator.Bridge_ASSEMBLY + ".ExternalAttribute";
-
+            
             var has = typeDefinition.Attributes.Any(attr => attr.Constructor != null && attr.Constructor.DeclaringType.FullName == externalAttr);
 
             if (!has && typeDefinition.DeclaringTypeDefinition != null)
@@ -235,7 +270,65 @@ namespace Bridge.Translator
                 has = typeDefinition.ParentAssembly.AssemblyAttributes.Any(attr => attr.Constructor != null && attr.Constructor.DeclaringType.FullName == externalAttr);
             }
 
+            if (!has)
+            {
+                has = this.IsVirtualType(typeDefinition);
+            }
+
             return has;
+        }
+
+        public bool IsVirtualType(ITypeDefinition typeDefinition)
+        {
+            return Validator.IsVirtualTypeStatic(typeDefinition);
+        }
+
+        public static bool IsVirtualTypeStatic(ITypeDefinition typeDefinition)
+        {
+            string virtualAttr = Translator.Bridge_ASSEMBLY + ".VirtualAttribute";
+            IAttribute attr = null;
+            if (typeDefinition.GetDefinition() != null)
+            {
+                attr =
+                    typeDefinition.GetDefinition().Attributes.FirstOrDefault(
+                        a => a.AttributeType.FullName == virtualAttr);
+            }
+
+            if (attr == null)
+            {
+                attr =
+                    typeDefinition.ParentAssembly.AssemblyAttributes.FirstOrDefault(a => a.AttributeType.FullName == virtualAttr);
+            }
+
+            if (attr != null)
+            {
+                if (attr.PositionalArguments.Count == 0)
+                {
+                    {
+                        return true;
+                    }
+                }
+
+                var value = (int) attr.PositionalArguments[0].ConstantValue;
+
+                switch (value)
+                {
+                    case 0:
+                    {
+                        return true;
+                    }
+                    case 1:
+                    {
+                        return typeDefinition.Kind != TypeKind.Interface;
+                    }
+                    case 2:
+                    {
+                        return typeDefinition.Kind == TypeKind.Interface;
+                    }
+                }
+            }
+
+            return false;
         }
 
         public virtual bool IsExternalInterface(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition typeDefinition, out bool isNative)
