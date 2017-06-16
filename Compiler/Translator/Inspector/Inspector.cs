@@ -73,7 +73,7 @@ namespace Bridge.Translator
 
         protected virtual bool HasExternal(EntityDeclaration declaration)
         {
-            return this.HasAttribute(declaration, Translator.Bridge_ASSEMBLY + ".External") || 
+            return this.HasAttribute(declaration, Translator.Bridge_ASSEMBLY + ".External") ||
                    this.HasAttribute(declaration, Translator.Bridge_ASSEMBLY + ".Ignore") ||
                    this.IsVirtual(declaration as TypeDeclaration);
         }
