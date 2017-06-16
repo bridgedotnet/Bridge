@@ -45,15 +45,15 @@
       <HintPath>..\..\packages\AjaxMin.5.14.5506.26202\lib\net40\AjaxMin.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.NRefactory, Version=5.0.0.0, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Bridge.NRefactory.5.5.6\lib\net40\ICSharpCode.NRefactory.dll</HintPath>
+      <HintPath>..\..\packages\Bridge.NRefactory.5.5.7\lib\net40\ICSharpCode.NRefactory.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ICSharpCode.NRefactory.Cecil, Version=5.0.0.0, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Bridge.NRefactory.5.5.6\lib\net40\ICSharpCode.NRefactory.Cecil.dll</HintPath>
+      <HintPath>..\..\packages\Bridge.NRefactory.5.5.7\lib\net40\ICSharpCode.NRefactory.Cecil.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ICSharpCode.NRefactory.CSharp, Version=5.0.0.0, Culture=neutral, PublicKeyToken=d4bfe873e7598c49, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Bridge.NRefactory.5.5.6\lib\net40\ICSharpCode.NRefactory.CSharp.dll</HintPath>
+      <HintPath>..\..\packages\Bridge.NRefactory.5.5.7\lib\net40\ICSharpCode.NRefactory.CSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Build" />
