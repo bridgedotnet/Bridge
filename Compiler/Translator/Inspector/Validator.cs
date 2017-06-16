@@ -196,8 +196,9 @@ namespace Bridge.Translator
 
             if (!has)
             {
-                CustomAttribute attr = null;
-                if (type.DeclaringType != null)
+                CustomAttribute attr = type.CustomAttributes.FirstOrDefault(a => a.AttributeType.FullName == virtualAttr);
+
+                if (attr == null && type.DeclaringType != null)
                 {
                     attr = type.DeclaringType.CustomAttributes.FirstOrDefault(a => a.AttributeType.FullName == virtualAttr);
                 }
@@ -257,7 +258,7 @@ namespace Bridge.Translator
         public virtual bool IsExternalType(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition typeDefinition, bool ignoreLiteral = false)
         {
             string externalAttr = Translator.Bridge_ASSEMBLY + ".ExternalAttribute";
-            
+
             var has = typeDefinition.Attributes.Any(attr => attr.Constructor != null && attr.Constructor.DeclaringType.FullName == externalAttr);
 
             if (!has && typeDefinition.DeclaringTypeDefinition != null)
@@ -328,10 +329,10 @@ namespace Bridge.Translator
 
             if (isVirtual && typeDefinition.NestedTypes.Count > 0)
             {
-                throw new Exception($"Virtual class {typeDefinition.FullName} cannot have nested types.");
+                throw new Exception(string.Format(Constants.Messages.Exceptions.VIRTUAL_CLASS_NO_NESTED_TYPES, typeDefinition.FullName));
             }
 
-            return false;
+            return isVirtual;
         }
 
         public virtual bool IsExternalInterface(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition typeDefinition, out bool isNative)
