@@ -22615,11 +22615,12 @@ Bridge.$N1391Result =                     r;
                     var s = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Student();
                     Bridge.Test.NUnit.Assert.True(Bridge.is(s, Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Person")), "Student is Person");
 
-                    var w = new Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Person").Worker();
-                    Bridge.Test.NUnit.Assert.True(Bridge.is(w, Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Person")), "Worker is Person");
-
                     var p = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Professor();
                     Bridge.Test.NUnit.Assert.True(Bridge.is(p, Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Person")), "Professor is Person");
+
+                    var w = new Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Wizard")();
+                    Bridge.Test.NUnit.Assert.True(Bridge.is(w, Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Person")), "Wizard is Person");
+                    Bridge.Test.NUnit.Assert.True(Bridge.is(w, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Professor), "Wizard is Professor");
                 },
                 TestVirtualInterface: function () {
                     var p = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Postgraduate();

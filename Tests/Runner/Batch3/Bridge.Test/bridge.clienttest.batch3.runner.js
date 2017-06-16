@@ -11853,12 +11853,12 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestVirtualClass: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2795, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestVirtualClass()", $t.Line = "41", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2795, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestVirtualClass()", $t.Line = "43", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.TestVirtualClass();
                 },
                 TestVirtualInterface: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2795, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestVirtualInterface()", $t.Line = "54", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2795, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestVirtualInterface()", $t.Line = "57", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.TestVirtualInterface();
                 }
             }
