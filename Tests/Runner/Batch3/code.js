@@ -22570,6 +22570,22 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.AreEqual("test", c.toString$1("test"));
                     Bridge.Test.NUnit.Assert.NotNull(c.toString());
                     Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(c.toString$1));
+                },
+                TestExternalClass: function () {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2770.ExternalClass = function() {
+                        this.Foo = function(s) {
+                            if (s == null) {
+                                return "Empty";
+                            }
+                            return s.toString();
+                        }
+                    };
+
+                    var c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2770.ExternalClass();
+
+                    Bridge.Test.NUnit.Assert.AreEqual("test", c.Foo("test"));
+                    Bridge.Test.NUnit.Assert.AreEqual("true", c.Foo(true));
+                    Bridge.Test.NUnit.Assert.AreEqual("Empty", c.Foo());
                 }
             }
         }

@@ -584,6 +584,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#2764 - TestNonGenericClassName", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2764.TestNonGenericClassName);
             QUnit.test("#2770 - TestExternalMethodName", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2770.TestExternalMethodName);
             QUnit.test("#2770 - TestExternalMethodOverload", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2770.TestExternalMethodOverload);
+            QUnit.test("#2770 - TestExternalClass", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2770.TestExternalClass);
             QUnit.test("#381 - TestUseCase", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge381.TestUseCase);
             QUnit.test("#447 - CheckInlineExpression", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.CheckInlineExpression);
             QUnit.test("#447 - CheckInlineCalls", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge447.CheckInlineCalls);
@@ -11815,13 +11816,18 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestExternalMethodName: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2770).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2770, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestExternalMethodName()", $t.Line = "30", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2770).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2770, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestExternalMethodName()", $t.Line = "43", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2770.TestExternalMethodName();
                 },
                 TestExternalMethodOverload: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2770).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2770, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestExternalMethodOverload()", $t.Line = "39", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2770).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2770, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestExternalMethodOverload()", $t.Line = "52", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2770.TestExternalMethodOverload();
+                },
+                TestExternalClass: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2770).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2770, void 0, ($t=new Bridge.Test.Runtime.TestContext(), $t.Method = "TestExternalClass()", $t.Line = "61", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2770.TestExternalClass();
                 }
             }
         },
