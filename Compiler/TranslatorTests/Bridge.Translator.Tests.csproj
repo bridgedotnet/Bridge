@@ -103,8 +103,9 @@
     <Compile Include="CompilerTests\InlineArgumentsBlockTests.cs" />
     <Compile Include="CompilerTests\ValidatorTests.cs" />
     <Compile Include="Helpers\MonoCecilAssemblyHelper.cs" />
-    <Compile Include="Helpers\TestAssemblyHelper.cs" />
     <Compile Include="Helpers\MonoCecilTypeSystemHelper.cs" />
+    <Compile Include="Helpers\TestAssemblyHelper.cs" />
+    <Compile Include="Helpers\NRefactoryTypeSystemHelper.cs" />
     <Compile Include="Helpers\ResourceHelper.cs" />
     <Compile Include="IntegrationTests\Comparence.cs" />
     <Compile Include="IntegrationTests\DiffMatchPatch.cs" />
