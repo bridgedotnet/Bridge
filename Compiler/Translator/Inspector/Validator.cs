@@ -296,36 +296,39 @@ namespace Bridge.Translator
 
             if (attr == null)
             {
-                attr =
-                    typeDefinition.ParentAssembly.AssemblyAttributes.FirstOrDefault(a => a.AttributeType.FullName == virtualAttr);
+                attr = typeDefinition.ParentAssembly.AssemblyAttributes.FirstOrDefault(a => a.AttributeType.FullName == virtualAttr);
             }
+
+            bool isVirtual = false;
 
             if (attr != null)
             {
                 if (attr.PositionalArguments.Count == 0)
                 {
-                    {
-                        return true;
-                    }
+                    isVirtual = true;
                 }
-
-                var value = (int) attr.PositionalArguments[0].ConstantValue;
-
-                switch (value)
+                else
                 {
-                    case 0:
+                    var value = (int)attr.PositionalArguments[0].ConstantValue;
+
+                    switch (value)
                     {
-                        return true;
-                    }
-                    case 1:
-                    {
-                        return typeDefinition.Kind != TypeKind.Interface;
-                    }
-                    case 2:
-                    {
-                        return typeDefinition.Kind == TypeKind.Interface;
+                        case 0:
+                            isVirtual = true;
+                            break;
+                        case 1:
+                            isVirtual = typeDefinition.Kind != TypeKind.Interface;
+                            break;
+                        case 2:
+                            isVirtual = typeDefinition.Kind == TypeKind.Interface;
+                            break;
                     }
                 }
+            }
+
+            if (isVirtual && typeDefinition.NestedTypes.Count > 0)
+            {
+                throw new Exception($"Virtual class {typeDefinition.FullName} cannot have nested types.");
             }
 
             return false;
