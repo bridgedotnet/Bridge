@@ -21,11 +21,34 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             return o;
         }
 
+        [Name("{@}_1")]
+        public int M(int i)
+        {
+            return 1;
+        }
+
+        [Name("{$}_2")]
+        public int M(string s)
+        {
+            return 2;
+        }
+
         [Test]
         public static void TestTemplateTokens()
         {
             Assert.AreEqual("test", DoSomething("test"));
             Assert.AreEqual(5, Bridge2794.DoSomething(5));
+        }
+
+        [Test]
+        public static void TestNameTokens()
+        {
+            var c = new Bridge2794();
+            Assert.AreEqual(1, c.M(1));
+            Assert.AreEqual(1, c["M_1"].As<Func<int>>()());
+
+            Assert.AreEqual(2, c.M(""));
+            Assert.AreEqual(2, c["M_2"].As<Func<int>>()());
         }
     }
 }

@@ -234,7 +234,7 @@ namespace Bridge.Translator
             var rr = this.Emitter.Resolver.ResolveNode(indexerExpression, this.Emitter) as MemberResolveResult;
             if (rr != null)
             {
-                inlineCode = InlineArgumentsBlock.ConvertTokens(this.Emitter, inlineCode, rr.Member);
+                inlineCode = Helpers.ConvertTokens(this.Emitter, inlineCode, rr.Member);
             }
             
             bool hasThis = inlineCode != null && inlineCode.Contains("{this}");

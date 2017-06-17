@@ -1103,7 +1103,7 @@ namespace Bridge.Contract
                 var value = attr.PositionalArguments.First().ConstantValue;
                 if (value is string)
                 {
-                    name = value.ToString();
+                    name = Helpers.ConvertNameTokens(value.ToString(), definition.Name);
                 }
 
                 if (!(iProperty != null || definition is IEvent))

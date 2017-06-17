@@ -253,7 +253,7 @@ namespace Bridge.Translator
 
             if (member != null)
             {
-                inline = InlineArgumentsBlock.ConvertTokens(this.Emitter, inline, member);
+                inline = Helpers.ConvertTokens(this.Emitter, inline, member);
             }
 
             IEnumerable<NamedParamExpression> expressions = argsInfo.NamedExpressions;
@@ -1363,23 +1363,6 @@ namespace Bridge.Translator
                             memberTargetrr.TargetResult is LocalResolveResult);
 
             return rr is ThisResolveResult || rr is ConstantResolveResult || rr is LocalResolveResult || isField;
-        }
-
-        public static bool HasThis(string template)
-        {
-            return template.IndexOf("{this}", StringComparison.Ordinal) > -1 || template.IndexOf("{$}", StringComparison.Ordinal) > -1;
-        }
-
-        public static string ConvertTokens(IEmitter emitter, string template, IMember member)
-        {
-            string name = OverloadsCollection.Create(emitter, member).GetOverloadName(true);
-            return template.Replace("{@}", name).Replace("{$}", "{this}." + name);
-        }
-
-        public static string ReplaceThis(IEmitter emitter, string template, string replacer, IMember member)
-        {
-            template = InlineArgumentsBlock.ConvertTokens(emitter, template, member);
-            return template.Replace("{this}", replacer);
         }
     }
 }

@@ -388,7 +388,7 @@ namespace Bridge.Translator
                                 }
                             }
 
-                            tpl = InlineArgumentsBlock.ConvertTokens(this.Emitter, tpl, templateMember);
+                            tpl = Helpers.ConvertTokens(this.Emitter, tpl, templateMember);
                             tpl = tpl.Replace("{this}", "this").Replace("{0}", v);
 
                             if (!tpl.EndsWith(";"))

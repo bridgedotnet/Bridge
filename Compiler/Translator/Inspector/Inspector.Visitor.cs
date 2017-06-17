@@ -617,6 +617,7 @@ namespace Bridge.Translator
                         if (value is string)
                         {
                             name = value.ToString();
+                            name = Helpers.ConvertNameTokens(name, enumStringName);
                         }
                         else if (value is bool)
                         {

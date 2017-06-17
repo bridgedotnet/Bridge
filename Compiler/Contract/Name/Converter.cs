@@ -166,7 +166,7 @@ namespace Bridge.Contract
             {
                 if (!string.IsNullOrWhiteSpace(rule.CustomName))
                 {
-                    return rule.CustomName;
+                    return Helpers.ConvertNameTokens(rule.CustomName, name);
                 }
 
                 switch (rule.Notation)
@@ -546,7 +546,7 @@ namespace Bridge.Contract
                 }
                 else if (value is string)
                 {
-                    rule.CustomName = (string) value;
+                    rule.CustomName = (string)value;
                 }
                 semantic.IsCustomName = true;
                 rules.Add(rule);

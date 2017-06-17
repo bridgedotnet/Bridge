@@ -544,7 +544,7 @@ namespace Bridge.Translator
             {
                 if (nameAttr.ConstructorArguments[0].Value is string)
                 {
-                    name = (string)nameAttr.ConstructorArguments[0].Value;
+                    name = Helpers.ConvertNameTokens((string)nameAttr.ConstructorArguments[0].Value, type.Name);
                 }
                 else if (nameAttr.ConstructorArguments[0].Value is bool)
                 {

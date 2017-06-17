@@ -1,3 +1,5 @@
+using System;
+using ICSharpCode.NRefactory.TypeSystem;
 using Mono.Cecil;
 
 namespace Bridge.Contract
@@ -84,7 +86,7 @@ namespace Bridge.Contract
                 return false;
             }
 
-            return TypeMatch(a.ElementType, b.ElementType);
+            return Helpers.TypeMatch(a.ElementType, b.ElementType);
         }
 
         public static bool TypeMatch(TypeSpecification a, TypeSpecification b)

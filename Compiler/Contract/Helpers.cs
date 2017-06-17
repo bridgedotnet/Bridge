@@ -241,7 +241,7 @@ namespace Bridge.Contract
             MemberResolveResult resolveResult = emitter.Resolver.ResolveNode(method, emitter) as MemberResolveResult;
             if (resolveResult != null && resolveResult.Member != null)
             {
-                return IsIgnoreGeneric(resolveResult.Member, emitter);
+                return Helpers.IsIgnoreGeneric(resolveResult.Member, emitter);
             }
 
             return false;
@@ -339,22 +339,22 @@ namespace Bridge.Contract
 
         public static bool IsDecimalType(IType type, IMemberResolver resolver, bool allowArray = false)
         {
-            return IsKnownType(KnownTypeCode.Decimal, type, resolver, allowArray);
+            return Helpers.IsKnownType(KnownTypeCode.Decimal, type, resolver, allowArray);
         }
 
         public static bool IsLongType(IType type, IMemberResolver resolver, bool allowArray = false)
         {
-            return IsKnownType(KnownTypeCode.Int64, type, resolver, allowArray);
+            return Helpers.IsKnownType(KnownTypeCode.Int64, type, resolver, allowArray);
         }
 
         public static bool IsULongType(IType type, IMemberResolver resolver, bool allowArray = false)
         {
-            return IsKnownType(KnownTypeCode.UInt64, type, resolver, allowArray);
+            return Helpers.IsKnownType(KnownTypeCode.UInt64, type, resolver, allowArray);
         }
 
         public static bool Is64Type(IType type, IMemberResolver resolver, bool allowArray = false)
         {
-            return IsKnownType(KnownTypeCode.UInt64, type, resolver, allowArray) || IsKnownType(KnownTypeCode.Int64, type, resolver, allowArray);
+            return Helpers.IsKnownType(KnownTypeCode.UInt64, type, resolver, allowArray) || Helpers.IsKnownType(KnownTypeCode.Int64, type, resolver, allowArray);
         }
 
         public static bool IsKnownType(KnownTypeCode typeCode, IType type, IMemberResolver resolver, bool allowArray = false)
@@ -576,24 +576,24 @@ namespace Bridge.Contract
             MemberResolveResult resolveResult = emitter.Resolver.ResolveNode(property, emitter) as MemberResolveResult;
             if (resolveResult != null && resolveResult.Member != null)
             {
-                return GetEventRef(resolveResult.Member, emitter, remove, noOverload, ignoreInterface, withoutTypeParams);
+                return Helpers.GetEventRef(resolveResult.Member, emitter, remove, noOverload, ignoreInterface, withoutTypeParams);
             }
 
             if (!noOverload)
             {
                 var overloads = OverloadsCollection.Create(emitter, property, remove);
-                return overloads.GetOverloadName(ignoreInterface, GetAddOrRemove(!remove), withoutTypeParams);
+                return overloads.GetOverloadName(ignoreInterface, Helpers.GetAddOrRemove(!remove), withoutTypeParams);
             }
 
             var name = emitter.GetEntityName(property);
-            return GetAddOrRemove(!remove, name);
+            return Helpers.GetAddOrRemove(!remove, name);
         }
 
         public static string GetEventRef(IMember property, IEmitter emitter, bool remove = false, bool noOverload = false, bool ignoreInterface = false, bool withoutTypeParams = false, bool skipPrefix = false)
         {
             var attrName = emitter.GetEntityNameFromAttr(property, remove);
 
-            if (!string.IsNullOrEmpty(attrName))
+            if (!String.IsNullOrEmpty(attrName))
             {
                 return Helpers.AddInterfacePrefix(property, emitter, ignoreInterface, attrName, remove);
             }
@@ -601,11 +601,11 @@ namespace Bridge.Contract
             if (!noOverload)
             {
                 var overloads = OverloadsCollection.Create(emitter, property, remove);
-                return overloads.GetOverloadName(ignoreInterface, skipPrefix ? null : GetAddOrRemove(!remove), withoutTypeParams);
+                return overloads.GetOverloadName(ignoreInterface, skipPrefix ? null : Helpers.GetAddOrRemove(!remove), withoutTypeParams);
             }
 
             var name = emitter.GetEntityName(property);
-            return skipPrefix ? name : GetAddOrRemove(!remove, name);
+            return skipPrefix ? name : Helpers.GetAddOrRemove(!remove, name);
         }
 
         public static string GetSetOrGet(bool isSetter, string name = null)
@@ -618,7 +618,7 @@ namespace Bridge.Contract
             ResolveResult resolveResult = emitter.Resolver.ResolveNode(property, emitter) as MemberResolveResult;
             if (resolveResult != null && ((MemberResolveResult)resolveResult).Member != null)
             {
-                return GetPropertyRef(((MemberResolveResult)resolveResult).Member, emitter, isSetter, noOverload, ignoreInterface, withoutTypeParams, skipPrefix);
+                return Helpers.GetPropertyRef(((MemberResolveResult)resolveResult).Member, emitter, isSetter, noOverload, ignoreInterface, withoutTypeParams, skipPrefix);
             }
 
             string name;
@@ -626,11 +626,11 @@ namespace Bridge.Contract
             if (!noOverload)
             {
                 var overloads = OverloadsCollection.Create(emitter, property, isSetter);
-                return overloads.GetOverloadName(ignoreInterface, skipPrefix ? null : GetSetOrGet(isSetter), withoutTypeParams);
+                return overloads.GetOverloadName(ignoreInterface, skipPrefix ? null : Helpers.GetSetOrGet(isSetter), withoutTypeParams);
             }
 
             name = emitter.GetEntityName(property);
-            return GetSetOrGet(isSetter, name);
+            return Helpers.GetSetOrGet(isSetter, name);
         }
 
         public static string GetPropertyRef(IndexerDeclaration property, IEmitter emitter, bool isSetter = false, bool noOverload = false, bool ignoreInterface = false)
@@ -638,24 +638,24 @@ namespace Bridge.Contract
             ResolveResult resolveResult = emitter.Resolver.ResolveNode(property, emitter) as MemberResolveResult;
             if (resolveResult != null && ((MemberResolveResult)resolveResult).Member != null)
             {
-                return GetIndexerRef(((MemberResolveResult)resolveResult).Member, emitter, isSetter, noOverload, ignoreInterface);
+                return Helpers.GetIndexerRef(((MemberResolveResult)resolveResult).Member, emitter, isSetter, noOverload, ignoreInterface);
             }
 
             if (!noOverload)
             {
                 var overloads = OverloadsCollection.Create(emitter, property, isSetter);
-                return overloads.GetOverloadName(ignoreInterface, GetSetOrGet(isSetter));
+                return overloads.GetOverloadName(ignoreInterface, Helpers.GetSetOrGet(isSetter));
             }
 
             var name = emitter.GetEntityName(property);
-            return GetSetOrGet(isSetter, name);
+            return Helpers.GetSetOrGet(isSetter, name);
         }
 
         public static string GetIndexerRef(IMember property, IEmitter emitter, bool isSetter = false, bool noOverload = false, bool ignoreInterface = false)
         {
             var attrName = emitter.GetEntityNameFromAttr(property, isSetter);
 
-            if (!string.IsNullOrEmpty(attrName))
+            if (!String.IsNullOrEmpty(attrName))
             {
                 return Helpers.AddInterfacePrefix(property, emitter, ignoreInterface, attrName, isSetter);
             }
@@ -663,18 +663,18 @@ namespace Bridge.Contract
             if (!noOverload)
             {
                 var overloads = OverloadsCollection.Create(emitter, property, isSetter);
-                return overloads.GetOverloadName(ignoreInterface, GetSetOrGet(isSetter));
+                return overloads.GetOverloadName(ignoreInterface, Helpers.GetSetOrGet(isSetter));
             }
 
             var name = emitter.GetEntityName(property);
-            return GetSetOrGet(isSetter, name);
+            return Helpers.GetSetOrGet(isSetter, name);
         }
 
         public static string GetPropertyRef(IMember property, IEmitter emitter, bool isSetter = false, bool noOverload = false, bool ignoreInterface = false, bool withoutTypeParams = false, bool skipPrefix = true)
         {
             var attrName = emitter.GetEntityNameFromAttr(property, isSetter);
 
-            if (!string.IsNullOrEmpty(attrName))
+            if (!String.IsNullOrEmpty(attrName))
             {
                 return Helpers.AddInterfacePrefix(property, emitter, ignoreInterface, attrName, isSetter);
             }
@@ -689,11 +689,11 @@ namespace Bridge.Contract
             if (!noOverload)
             {
                 var overloads = OverloadsCollection.Create(emitter, property, isSetter);
-                return overloads.GetOverloadName(ignoreInterface, skipPrefix ? null : GetSetOrGet(isSetter), withoutTypeParams);
+                return overloads.GetOverloadName(ignoreInterface, skipPrefix ? null : Helpers.GetSetOrGet(isSetter), withoutTypeParams);
             }
 
             name = emitter.GetEntityName(property);
-            return skipPrefix ? name : GetSetOrGet(isSetter, name);
+            return skipPrefix ? name : Helpers.GetSetOrGet(isSetter, name);
         }
 
         private static string AddInterfacePrefix(IMember property, IEmitter emitter, bool ignoreInterface, string attrName, bool isSetter)
@@ -1023,7 +1023,7 @@ namespace Bridge.Contract
 
             if (baseType != null)
             {
-                return GetInheritedAttribute(baseType.GetDefinition(), attrName);
+                return Helpers.GetInheritedAttribute(baseType.GetDefinition(), attrName);
             }
 
             return null;
@@ -1091,7 +1091,7 @@ namespace Bridge.Contract
 
         public static string PrefixDollar(params object[] parts)
         {
-            return JS.Vars.D + string.Join("", parts);
+            return JS.Vars.D + String.Join("", parts);
         }
 
         public static string ReplaceFirstDollar(string s)
@@ -1333,6 +1333,28 @@ namespace Bridge.Contract
             }
 
             return name;
+        }
+
+        public static bool HasThis(string template)
+        {
+            return template.IndexOf("{this}", StringComparison.Ordinal) > -1 || template.IndexOf("{$}", StringComparison.Ordinal) > -1;
+        }
+
+        public static string ConvertTokens(IEmitter emitter, string template, IMember member)
+        {
+            string name = OverloadsCollection.Create(emitter, member).GetOverloadName(true);
+            return template.Replace("{@}", name).Replace("{$}", "{this}." + name);
+        }
+
+        public static string ConvertNameTokens(string name, string replacer)
+        {
+            return name.Replace("{@}", replacer).Replace("{$}", replacer);
+        }
+
+        public static string ReplaceThis(IEmitter emitter, string template, string replacer, IMember member)
+        {
+            template = Helpers.ConvertTokens(emitter, template, member);
+            return template.Replace("{this}", replacer);
         }
     }
 }
