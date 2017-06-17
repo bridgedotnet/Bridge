@@ -17,7 +17,7 @@
                     return input;
                 }
 
-                var match = regex.match$1(input, startat);
+                var match = regex.match(input, startat);
 
                 if (!match.getSuccess()) {
                     return input;
@@ -108,7 +108,7 @@
                 }
 
                 --count;
-                var match = regex.match$1(input, startat);
+                var match = regex.match(input, startat);
 
                 if (!match.getSuccess()) {
                     result.push(input);
@@ -274,7 +274,7 @@
                 return input;
             }
 
-            var match = regex.match$1(input, startat);
+            var match = regex.match(input, startat);
 
             if (!match.getSuccess()) {
                 return input;

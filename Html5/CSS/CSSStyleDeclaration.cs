@@ -17,22 +17,22 @@ namespace Bridge.Html5
         /// <summary>
         /// The CSS align-content property aligns a flex container's lines within the flex container when there is extra space on the cross-axis. This property has no effect on single line flexible boxes.
         /// </summary>
-        public AlignContent AlignContent;
+        public Union<string, AlignContent> AlignContent;
 
         /// <summary>
         /// The CSS align-items property aligns flex items of the current flex line the same way as justify-content but in the perpendicular direction.
         /// </summary>
-        public AlignItems AlignItems;
+        public Union<string, AlignItems> AlignItems;
 
         /// <summary>
         /// The align-self CSS property aligns flex items of the current flex line overriding the align-items value. If any of the flex item's cross-axis margin is set to auto, then align-self is ignored.
         /// </summary>
-        public AlignItems AlignSelf;
+        public Union<string, AlignItems> AlignSelf;
 
         /// <summary>
         /// The CSS all shorthand property resets all properties, but unicode-bidi and direction to their initial or inherited value.
         /// </summary>
-        public All All;
+        public Union<string, All> All;
 
         /// <summary>
         /// The animation CSS property is a shorthand property for animation-name, animation-duration, animation-timing-function, animation-delay, animation-iteration-count, animation-direction and animation-fill-mode.
@@ -82,7 +82,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The CSS backface-visibility property determines whether or not the back face of the element is visible when facing the user. The back face of an element always is a transparent background, letting, when visible, a mirror image of the front face be displayed.
         /// </summary>
-        public BackfaceVisibility BackfaceVisibility;
+        public Union<string, BackfaceVisibility> BackfaceVisibility;
 
         /// <summary>
         /// The background CSS property is a shorthand for setting the individual background values in a single place in the style sheet. background can be used to set the values for one or more of: background-clip, background-color, background-image, background-origin, background-position, background-repeat, background-size, and background-attachment.
@@ -102,7 +102,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The background-clip CSS property specifies whether an element's background, either the color or image, extends underneath its border.
         /// </summary>
-        public BackgroundClip BackgroundClip;
+        public Union<string, BackgroundClip> BackgroundClip;
 
         /// <summary>
         /// The background-color CSS property sets the background color of an element, either through a color value or the keyword transparent.
@@ -117,7 +117,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The background-origin CSS property determines the background positioning area, that is the position of the origin of an image specified using the background-image CSS property.
         /// </summary>
-        public BackgroundClip BackgroundOrigin;
+        public Union<string, BackgroundClip> BackgroundOrigin;
 
         /// <summary>
         /// The background-position CSS property sets the initial position, relative to the background position layer defined by background-origin for each defined background image.
@@ -162,7 +162,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The border-bottom-style CSS property sets the line style of the bottom border of a box.
         /// </summary>
-        public BorderStyle BorderBottomStyle;
+        public Union<string, BorderStyle> BorderBottomStyle;
 
         /// <summary>
         /// The border-bottom-width CSS property sets the width of the bottom border of a box.
@@ -172,7 +172,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The border-collapse CSS property selects a table's border model. This has a big influence on the look and style of the table cells.
         /// </summary>
-        public BorderCollapse BorderCollapse;
+        public Union<string, BorderCollapse> BorderCollapse;
 
         /// <summary>
         /// The border-color CSS property is a shorthand for setting the color of the four sides of an element's border: border-top-color, border-right-color, border-bottom-color, border-left-color
@@ -222,7 +222,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The border-left-style CSS property sets the line style of the left border of a box.
         /// </summary>
-        public BorderStyle BorderLeftStyle;
+        public Union<string, BorderStyle> BorderLeftStyle;
 
         /// <summary>
         /// The border-left-width CSS property sets the width of the left border of a box.
@@ -247,7 +247,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The border-right-style CSS property sets the line style of the right border of a box.
         /// </summary>
-        public BorderStyle BorderRightStyle;
+        public Union<string, BorderStyle> BorderRightStyle;
 
         /// <summary>
         /// The border-right-width CSS property sets the width of the right border of a box.
@@ -262,7 +262,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The border-style CSS property is a shorthand property for setting the line style for all four sides of the elements border.
         /// </summary>
-        public BorderStyle BorderStyle;
+        public Union<string, BorderStyle> BorderStyle;
 
         /// <summary>
         /// The border-top CSS property is a shorthand that sets the values of border-top-color, border-top-style, and border-top-width. These properties describe the top border of elements.
@@ -287,7 +287,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The border-top-style CSS property sets the line style of the top border of a box.
         /// </summary>
-        public BorderStyle BorderTopStyle;
+        public Union<string, BorderStyle> BorderTopStyle;
 
         /// <summary>
         /// The border-top-width CSS property sets the width of the top border of a box.
@@ -309,7 +309,7 @@ namespace Bridge.Html5
         /// <summary>
         /// Allows to specify what happens to an element when it is broken due to a page break or column break, or for inline elements, a line break.
         /// </summary>
-        public BoxDecorationBreak BoxDecorationBreak;
+        public Union<string, BoxDecorationBreak> BoxDecorationBreak;
 
         /// <summary>
         /// The box-shadow CSS property describes one or more shadow effects as a comma-separated list. It allows casting a drop shadow from the frame of almost any element.
@@ -319,17 +319,17 @@ namespace Bridge.Html5
         /// <summary>
         /// The box-sizing CSS property is used to alter the default CSS box model used to calculate widths and heights of elements.
         /// </summary>
-        public BoxSizing BoxSizing;
+        public Union<string, BoxSizing> BoxSizing;
 
         /// <summary>
         /// The caption-side CSS property positions the content of a table's &lt;caption&gt; on the specified side.
         /// </summary>
-        public CaptionSide CaptionSide;
+        public Union<string, CaptionSide> CaptionSide;
 
         /// <summary>
         /// The clear CSS property specifies whether an element can be next to floating elements that precede it or must be moved down (cleared) below them.
         /// </summary>
-        public Clear Clear;
+        public Union<string, Clear> Clear;
 
         /// <summary>
         /// The clip CSS property defines what portion of an element is visible. The clip property applies only to elements with position:absolute.
@@ -359,7 +359,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The column-fill CSS property controls how contents are partitioned into columns. Contents are either balanced, which means that contents in all columns will have the same height or, when using auto, just take up the room the content needs.
         /// </summary>
-        public ColumnFill ColumnFill;
+        public Union<string, ColumnFill> ColumnFill;
 
         /// <summary>
         /// The column-gap CSS property sets the size of the gap between columns for elements which are specified to display as a multi-column element.
@@ -379,7 +379,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The column-rule-style CSS property lets you set the style of the rule drawn between columns in multi-column layouts.
         /// </summary>
-        public BorderStyle ColumnRuleStyle;
+        public Union<string, BorderStyle> ColumnRuleStyle;
 
         /// <summary>
         /// The column-rule-width CSS property lets you set the width of the rule drawn between columns in multi-column layouts.
@@ -389,7 +389,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The column-span CSS property makes it possible for an element to span across all columns when its value is set to all. An element that spans more than one column is called a spanning element.
         /// </summary>
-        public ColumnSpan ColumnSpan;
+        public Union<string, ColumnSpan> ColumnSpan;
 
         /// <summary>
         /// The column-width CSS property suggests an optimal column width. This is not a absolute value but a mere hint. Browser will adjust the width of the column around that suggested value, allowing to achieve scalable designs that fit different screen size. Especially in presence of the column-count CSS property which has precedence, to set an exact column width, all length values must be specified. In horizontal text these are width, column-width, column-gap, and column-rule-width.
@@ -414,7 +414,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The float CSS property specifies that an element should be taken from the normal flow and placed along the left or right side of its container, where text and inline elements will wrap around it. A floating element is one where the computed value of float is not none.
         /// </summary>
-        public Float CssFloat;
+        public Union<string, Float> CssFloat;
 
         /// <summary>
         /// The cssText property sets or returns the contents of a style declaration as a string.
@@ -424,27 +424,27 @@ namespace Bridge.Html5
         /// <summary>
         /// The cursor CSS property specifies the mouse cursor displayed when the mouse pointer is over an element.
         /// </summary>
-        public Cursor Cursor;
+        public Union<string, Cursor> Cursor;
 
         /// <summary>
         /// Set the direction CSS property to match the direction of the text: rtl for Hebrew or Arabic text and ltr for other scripts. This is typically done as part of the document (e.g., using the dir attribute in HTML) rather than through direct use of CSS.
         /// </summary>
-        public Direction Direction;
+        public Union<string, Direction> Direction;
 
         /// <summary>
         /// The display CSS property specifies the type of rendering box used for an element. In HTML, default display property values are taken from behaviors described in the HTML specifications or from the browser/user default stylesheet. The default value in XML is inline.
         /// </summary>
-        public Display Display;
+        public Union<string, Display> Display;
 
         /// <summary>
         /// The dominant-baseline property is used to determine or re-determine a scaled-baseline-table.
         /// </summary>
-        public DominantBaseline DominantBaseline;
+        public Union<string, DominantBaseline> DominantBaseline;
 
         /// <summary>
         ///
         /// </summary>
-        public EmptyCells EmptyCells;
+        public Union<string, EmptyCells> EmptyCells;
 
         /// <summary>
         /// Sets or retrieves a value that indicates the color to paint the interior of the given graphical element.
@@ -479,7 +479,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The CSS flex-direction property specifies how flex items are placed in t
         /// </summary>
-        public FlexDirection FlexDirection;
+        public Union<string, FlexDirection> FlexDirection;
 
         /// <summary>
         /// The CSS flex-flow property is a shorthand property for flex-direction and flex-wrap individual properties.
@@ -499,7 +499,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The CSS flex-wrap property specifies whether the children are forced into a single line or if the items can be flowed on multiple lines.
         /// </summary>
-        public FlexWrap FlexWrap;
+        public Union<string, FlexWrap> FlexWrap;
 
         /// <summary>
         /// The flood-color attribute indicates what color to use to flood the current filter primitive subregion defined through the &lt;feflood&gt; element. The keyword currentColor and ICC colors can be specified in the same manner as within a &lt;paint&gt; specification for the fill and stroke attributes.
@@ -529,7 +529,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The font-kerning property allows contextual adjustment of inter-glyph spacing, i.e. the spaces between the characters in text. This property controls <bold>metric kerning</bold> - that utilizes adjustment data contained in the font.
         /// </summary>
-        public FontKerning FontKerning;
+        public Union<string, FontKerning> FontKerning;
 
         /// <summary>
         /// The ‘font-language-override’ property allows authors to explicitly specify the language system of the font, overriding the language system implied by the content language.
@@ -549,22 +549,22 @@ namespace Bridge.Html5
         /// <summary>
         /// The font-stretch CSS property selects a normal, condensed, or expanded face from a font.
         /// </summary>
-        public FontStretch FontStretch;
+        public Union<string, FontStretch> FontStretch;
 
         /// <summary>
         /// The font-style CSS property allows italic or oblique faces to be selected within a font-family.
         /// </summary>
-        public FontStyle FontStyle;
+        public Union<string, FontStyle> FontStyle;
 
         /// <summary>
         /// This value specifies whether the user agent is allowed to synthesize bold or oblique font faces when a font family lacks bold or italic faces.
         /// </summary>
-        public FontSynthesis FontSynthesis;
+        public Union<string, FontSynthesis> FontSynthesis;
 
         /// <summary>
         /// The font-variant CSS property selects a normal, or small-caps face from a font family. Setting font-variant is also possible by using the font shorthand.
         /// </summary>
-        public FontVariant FontVariant;
+        public Union<string, FontVariant> FontVariant;
 
         /// <summary>
         /// Fonts can provide alternate glyphs in addition to default glyph for a character. This property provides control over the selection of these alternate glyphs.
@@ -574,7 +574,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The font-variant-caps property allows the selection of alternate glyphs used for small or petite capitals or for titling. These glyphs are specifically designed to blend well with the surrounding normal glyphs, to maintain the weight and readability which suffers when text is simply resized to fit this purpose.
         /// </summary>
-        public FontVariantCaps FontVariantCaps;
+        public Union<string, FontVariantCaps> FontVariantCaps;
 
         /// <summary>
         /// The font-variant-east-asian property allows control of glyph substitution and sizing in East Asian text.
@@ -584,7 +584,7 @@ namespace Bridge.Html5
         /// <summary>
         /// font-variant-ligatures is a CSS property to control ligatures in text.
         /// </summary>
-        public FontVariantLigatures FontVariantLigatures;
+        public Union<string, FontVariantLigatures> FontVariantLigatures;
 
         /// <summary>
         /// The font-variant-numeric property specifies control over numerical forms. Within normal paragraph text, proportional numbers are used while tabular numbers are used so that columns of numbers line up properly
@@ -594,7 +594,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The font-variant-position property is used to enable typographic subscript and superscript glyphs. These are alternate glyphs designed within the same em-box as default glyphs and are intended to be laid out on the same baseline as the default glyphs, with no resizing or repositioning of the baseline. They are explicitly designed to match the surrounding text and to be more readable without affecting the line height.
         /// </summary>
-        public FontVariantPosition FontVariantPosition;
+        public Union<string, FontVariantPosition> FontVariantPosition;
 
         /// <summary>
         /// The font-weight CSS property specifies the weight or boldness of the font. However, some fonts are not available in all weights; some are available only on normal and bold.
@@ -619,7 +619,7 @@ namespace Bridge.Html5
         /// <summary>
         /// Automatically places grid elements into the grid layout if an explicit location is not designated. Designates the direction of the the flow and whether rows or columns must be added to accommodate the element.
         /// </summary>
-        public GridAutoFlow GridAutoFlow;
+        public Union<string, GridAutoFlow> GridAutoFlow;
 
         /// <summary>
         /// Specifies the automatic default location if a grid container does not specify automatic-placement strategy via grid-auto-flow.
@@ -689,7 +689,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The hyphens CSS property tells the browser how to go about splitting words to improve the layout of text when line-wrapping.
         /// </summary>
-        public Hyphens Hyphens;
+        public Union<string, Hyphens> Hyphens;
 
         /// <summary>
         /// The icon property provides the author the ability to style an element with an iconic equivalent.
@@ -699,7 +699,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The image-rendering CSS property provides a hint to the user agent about how to handle its image rendering.
         /// </summary>
-        public ImageRendering ImageRendering;
+        public Union<string, ImageRendering> ImageRendering;
 
         /// <summary>
         /// The image-resolution property specifies the intrinsic resolution of all raster images used in or on the element. It affects both content images (e.g. replaced elements and generated content) and decorative images (such as 'background-image'). The intrinsic resolution of an image is used to determine the image's intrinsic dimensions.
@@ -714,12 +714,12 @@ namespace Bridge.Html5
         /// <summary>
         /// The ime-mode CSS property controls the state of the input method editor for text fields.
         /// </summary>
-        public ImeMode ImeMode;
+        public Union<string, ImeMode> ImeMode;
 
         /// <summary>
         /// The CSS justify-content property defines how a browser distributes available space between and around elements when aligning flex items in the main-axis of the current line.
         /// </summary>
-        public JustifyContent JustifyContent;
+        public Union<string, JustifyContent> JustifyContent;
 
         /// <summary>
         /// The left CSS property specifies part of the position of positioned elements.
@@ -761,12 +761,12 @@ namespace Bridge.Html5
         /// <summary>
         /// The list-style-position CSS property specifies the position of the marker box in the principal block box. It is often more convenient to use the shortcut list-style.
         /// </summary>
-        public ListStylePosition ListStylePosition;
+        public Union<string, ListStylePosition> ListStylePosition;
 
         /// <summary>
         /// The list-style-type CSS property specifies appearance of a list item element. As it is the only one who defaults to display:list-item, this is usually a &lt;li&lt; element, but can be any element with this display value.
         /// </summary>
-        public ListStyleType ListStyleType;
+        public Union<string, ListStyleType> ListStyleType;
 
         /// <summary>
         /// The margin CSS property sets the margin for all four sides. It is a shorthand to avoid setting each side separately with the other margin properties: margin-top, margin-right, margin-bottom and margin-left.
@@ -806,7 +806,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The CSS mask-type properties defines if a SVG &lt;mask&gt; element is a luminance or an alpha mask.
         /// </summary>
-        public MaskType MaskType;
+        public Union<string, MaskType> MaskType;
 
         /// <summary>
         /// The max-height CSS property is used to set the maximum height of a given element. It prevents the used value of the height property from becoming larger than the value specified for max-height.
@@ -861,7 +861,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The ‘object-fit’ property specifies how the contents of a replaced element should be fitted to the box established by its used height and width.
         /// </summary>
-        public ObjectFit ObjectFit;
+        public Union<string, ObjectFit> ObjectFit;
 
         /// <summary>
         /// The ‘object-position’ property determines the alignment of the replaced element inside its box
@@ -901,7 +901,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The outline-style CSS property is used to set the style of the outline of an element. An outline is a line that is drawn around elements, outside the border edge, to make the element stand out.
         /// </summary>
-        public BorderStyle OutlineStyle;
+        public Union<string, BorderStyle> OutlineStyle;
 
         /// <summary>
         /// The outline-width CSS property is used to set the width of the outline of an element. An outline is a line that is drawn around elements, outside the border edge, to make the element stand out:
@@ -911,7 +911,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The overflow CSS property specifies whether to clip content, render scroll bars or display overflow content of a block-level element.
         /// </summary>
-        public Overflow Overflow;
+        public Union<string, Overflow> Overflow;
 
         /// <summary>
         /// The word-wrap CSS property is used to specify whether or not the browser may break lines within words in order to prevent overflow (in other words, force wrapping) when an otherwise unbreakable string is too long to fit in its containing box.
@@ -921,12 +921,12 @@ namespace Bridge.Html5
         /// <summary>
         /// The overflow-x CSS property specifies whether to clip content, render a scroll bar or display overflow content of a block-level element, when it overflows at the left and right edges.
         /// </summary>
-        public Overflow OverflowX;
+        public Union<string, Overflow> OverflowX;
 
         /// <summary>
         /// The overflow-y CSS property specifies whether to clip content, render a scroll bar, or display overflow content of a block-level element, when it overflows at the top and bottom edges.
         /// </summary>
-        public Overflow OverflowY;
+        public Union<string, Overflow> OverflowY;
 
         /// <summary>
         ///
@@ -961,17 +961,17 @@ namespace Bridge.Html5
         /// <summary>
         /// The page-break-after CSS property adjusts page breaks after the current element.
         /// </summary>
-        public PageBreak PageBreakAfter;
+        public Union<string, PageBreak> PageBreakAfter;
 
         /// <summary>
         /// The page-break-before CSS property adjusts page breaks before the current element.
         /// </summary>
-        public PageBreak PageBreakBefore;
+        public Union<string, PageBreak> PageBreakBefore;
 
         /// <summary>
         /// The page-break-inside CSS property adjusts page breaks inside the current element.
         /// </summary>
-        public PageBreakInside PageBreakInside;
+        public Union<string, PageBreakInside> PageBreakInside;
 
         /// <summary>
         /// The perspective CSS property determines the distance between the z=0 plane and the user in order to give to the 3D-positioned element some perspective.
@@ -986,12 +986,12 @@ namespace Bridge.Html5
         /// <summary>
         /// The CSS property pointer-events allows authors to control under what circumstances (if any) a particular graphic element can become the target of mouse events. When this property is unspecified, the same characteristics of the visiblePainted value apply to SVG content.
         /// </summary>
-        public PointerEvents PointerEvents;
+        public Union<string, PointerEvents> PointerEvents;
 
         /// <summary>
         /// The position CSS property chooses alternative rules for positioning elements, designed to be useful for scripted animation effects.
         /// </summary>
-        public Position Position;
+        public Union<string, Position> Position;
 
         /// <summary>
         /// The quotes CSS property indicates how user agents should render quotation marks.
@@ -1001,7 +1001,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The resize CSS property lets you control the resizability of an element.
         /// </summary>
-        public Resize Resize;
+        public Union<string, Resize> Resize;
 
         /// <summary>
         /// The right CSS property specifies part of the position of positioned elements.
@@ -1011,7 +1011,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The table-layout CSS property defines the algorithm to be used to layout the table cells, rows, and columns.
         /// </summary>
-        public TableLayout TableLayout;
+        public Union<string, TableLayout> TableLayout;
 
         /// <summary>
         /// The tab-size CSS property is used to customize the width of a tab (U+0009) character.
@@ -1021,12 +1021,12 @@ namespace Bridge.Html5
         /// <summary>
         /// The text-align CSS property describes how inline content like text is aligned in its parent block element. text-align does not control the alignment of block elements itself, only their inline content.
         /// </summary>
-        public TextAlign TextAlign;
+        public Union<string, TextAlign> TextAlign;
 
         /// <summary>
         /// The text-align-last CSS property describes how the last line of a block or a line, right before a forced line break, is aligned.
         /// </summary>
-        public TextAlign TextAlignLast;
+        public Union<string, TextAlign> TextAlignLast;
 
         /// <summary>
         ///
@@ -1051,7 +1051,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The text-decoration-style CSS property defines the style of the lines specified by text-decoration-line. The style applies to all lines, there is no way to define different style for each of the line defined by text-decoration-line.
         /// </summary>
-        public TextDecorationStyle TextDecorationStyle;
+        public Union<string, TextDecorationStyle> TextDecorationStyle;
 
         /// <summary>
         /// The text-indent CSS property specifies how much horizontal space should be left before the beginning of the first line of the text content of an element. Horizontal spacing is with respect to the left (or right, for right-to-left layout) edge of the containing block element's box.
@@ -1066,12 +1066,12 @@ namespace Bridge.Html5
         /// <summary>
         /// The text-overflow CSS property determines how overflowed content that is not displayed is signaled to the users. It can be clipped, or display an ellipsis ('…', U+2026 HORIZONTAL ELLIPSIS) or a Web author-defined string.
         /// </summary>
-        public TextOverflow TextOverflow;
+        public Union<string, TextOverflow> TextOverflow;
 
         /// <summary>
         /// The text-rendering CSS property provides information to the rendering engine about what to optimize for when rendering text.
         /// </summary>
-        public TextRendering TextRendering;
+        public Union<string, TextRendering> TextRendering;
 
         /// <summary>
         /// The text-shadow CSS property adds shadows to text. It accepts a comma-separated list of shadows to be applied to the text and text-decorations of the element.
@@ -1081,12 +1081,12 @@ namespace Bridge.Html5
         /// <summary>
         /// The text-transform CSS property specifies how to capitalize an element's text. It can be used to make text appear in all-uppercase or all-lowercase, or with each word capitalized.
         /// </summary>
-        public TextTransform TextTransform;
+        public Union<string, TextTransform> TextTransform;
 
         /// <summary>
         /// The CSS text-underline-position property specifies the position of the underline which is set using the text-decoration property underline value.
         /// </summary>
-        public TextUnderlinePosition TextUnderlinePosition;
+        public Union<string, TextUnderlinePosition> TextUnderlinePosition;
 
         /// <summary>
         /// The top CSS property specifies part of the position of positioned elements. It has no effect on non-positioned elements.
@@ -1096,7 +1096,7 @@ namespace Bridge.Html5
         /// <summary>
         /// Determines whether touch input may trigger default behavior supplied by the user agent, such as panning or zooming.
         /// </summary>
-        public TouchAction TouchAction;
+        public Union<string, TouchAction> TouchAction;
 
         /// <summary>
         /// The CSS transform property lets you modify the coordinate space of the CSS visual formatting model. Using it, elements can be translated, rotated, scaled, and skewed according to the values set.
@@ -1111,7 +1111,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The transform-style CSS property determines if the children of the element are positioned in the 3D-space or are flattened in the plane of the element.
         /// </summary>
-        public TransformStyle TransformStyle;
+        public Union<string, TransformStyle> TransformStyle;
 
         /// <summary>
         /// The CSS transition property is a shorthand property for transition-property, transition-duration, transition-timing-function, and transition-delay.
@@ -1141,7 +1141,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The unicode-bidi CSS property together with the direction property relates to the handling of bidirectional text in a document.
         /// </summary>
-        public UnicodeBidi UnicodeBidi;
+        public Union<string, UnicodeBidi> UnicodeBidi;
 
         /// <summary>
         /// The unicode-range CSS descriptor sets the specific range of characters to be downloaded from a font defined by @font-face and made available for use on the current page.
@@ -1151,17 +1151,17 @@ namespace Bridge.Html5
         /// <summary>
         /// The vertical-align CSS property specifies the vertical alignment of an inline or table-cell box.
         /// </summary>
-        public VerticalAlign VerticalAlign;
+        public Union<string, VerticalAlign> VerticalAlign;
 
         /// <summary>
         ///
         /// </summary>
-        public Visibility Visibility;
+        public Union<string, Visibility> Visibility;
 
         /// <summary>
         /// The white-space CSS property is used to to describe how whitespace inside the element is handled.
         /// </summary>
-        public WhiteSpace WhiteSpace;
+        public Union<string, WhiteSpace> WhiteSpace;
 
         /// <summary>
         /// The widows CSS property defines how many minimum lines must be left on top of a new page, on a paged media.
@@ -1181,7 +1181,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The word-break CSS property is used to specify how (or if) to break lines within words.
         /// </summary>
-        public WordBreak WordBreak;
+        public Union<string, WordBreak> WordBreak;
 
         /// <summary>
         /// The word-spacing CSS property specifies spacing behavior between tags and words.
@@ -1191,12 +1191,12 @@ namespace Bridge.Html5
         /// <summary>
         /// The word-wrap CSS property is used to specify whether or not the browser may break lines within words in order to prevent overflow (in other words, force wrapping) when an otherwise unbreakable string is too long to fit in its containing box.
         /// </summary>
-        public WordWrap WordWrap;
+        public Union<string, WordWrap> WordWrap;
 
         /// <summary>
         /// CSS Writing Modes Level 3 defines CSS features to support various international script modes, such as left-to-right (e.g., Latin and Indic), right-to-left (e.g., Hebrew and Arabic), bidirectional (e.g., mixed Latin and Arabic) and vertical (e.g., Asian). This article is about the CSS writing-mode property.
         /// </summary>
-        public WritingMode WritingMode;
+        public Union<string, WritingMode> WritingMode;
 
         /// <summary>
         /// The z-index CSS property specifies the z-order of an element and its descendants. When elements overlap, z-order determines which one covers the other. An element with a larger z-index generally covers an element with a lower one.

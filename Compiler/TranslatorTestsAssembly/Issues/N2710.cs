@@ -261,6 +261,18 @@ namespace Bridge.Translator.Tests.Assembly.Issues
                 {
 
                 }
+
+                [ObjectLiteral(ObjectCreateMode.Plain)]
+                class ObjectLiteralInherited3 : IObjectLiteralConstructor, INonObjectLiteral
+                {
+
+                }
+
+                [ObjectLiteral(ObjectCreateMode.Plain)]
+                class ObjectLiteralInherited4 : INonObjectLiteral
+                {
+
+                }
             }
         }
     }

@@ -175,7 +175,8 @@ namespace Bridge.Translator
                         }
 
                         var typerr = this.Emitter.Resolver.ResolveNode(objectCreateExpression.Type, this.Emitter).Type;
-                        var isGeneric = typerr.TypeArguments.Count > 0 && !Helpers.IsIgnoreGeneric(typerr, this.Emitter);
+                        var td = typerr.GetDefinition();
+                        var isGeneric = typerr.TypeArguments.Count > 0 && !Helpers.IsIgnoreGeneric(typerr, this.Emitter) || td != null && Validator.IsVirtualTypeStatic(td);
 
                         if (isGeneric && !applyCtor)
                         {
