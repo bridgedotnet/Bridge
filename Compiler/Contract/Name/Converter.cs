@@ -238,10 +238,12 @@ namespace Bridge.Contract
             {
                 var typeDef = entity as ITypeDefinition;
                 string externalAttr = "Bridge.ExternalAttribute";
+                string virtualAttr = "Bridge.VirtualAttribute";
 
                 if (typeDef == null && rule.Target.HasFlag(ConventionTarget.External))
                 {
-                    acceptable = entity.GetAttribute(new FullTypeName(externalAttr), false) != null;
+                    acceptable = entity.GetAttribute(new FullTypeName(externalAttr), false) != null ||
+                                 entity.GetAttribute(new FullTypeName(virtualAttr), false) != null;
 
                     if (!acceptable)
                     {

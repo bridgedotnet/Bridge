@@ -33,14 +33,19 @@ namespace Bridge.Translator.Tests
             }
         }
 
-        protected IList<Mono.Cecil.TypeDefinition> GetTypesToTest(string parentType)
+        protected IList<Mono.Cecil.TypeDefinition> GetCecilTypesToTest(string parentType)
         {
             return MonoCecilTypeSystemHelper.GetNestedTypes(TestAssembly, parentType);
         }
 
+        protected IList<ICSharpCode.NRefactory.TypeSystem.ITypeDefinition> GetNRefactoryTypesToTest(string parentType)
+        {
+            return NRefactoryTypeSystemHelper.GetNestedTypes(TestAssembly, parentType);
+        }
+
         protected void ShouldFailTest(string parentType, Action<Mono.Cecil.TypeDefinition> testMethod, Func<Mono.Cecil.TypeDefinition, string> expectedMessageMethod)
         {
-            var types = GetTypesToTest(parentType);
+            var types = GetCecilTypesToTest(parentType);
 
             if (types.Count == 0)
             {
@@ -70,6 +75,79 @@ namespace Bridge.Translator.Tests
                 }
 
                 Assert.AreEqual(expectedMessage, caughtException.Message);
+            }
+        }
+
+        protected void ShouldFailTest(string parentType, Action<ICSharpCode.NRefactory.TypeSystem.ITypeDefinition> testMethod, Func<ICSharpCode.NRefactory.TypeSystem.ITypeDefinition, string> expectedMessageMethod)
+        {
+            var types = GetNRefactoryTypesToTest(parentType);
+
+            if (types.Count == 0)
+            {
+                Assert.Fail("Did not found types to test: " + parentType);
+            }
+
+            string expectedMessage = null;
+
+            foreach (var type in types)
+            {
+                Exception caughtException = null;
+
+                try
+                {
+                    expectedMessage = expectedMessageMethod(type);
+                    testMethod(type);
+
+                    Assert.Fail("Did not throw exception. " + type.Name + " should have failed with error message: " + expectedMessage);
+                }
+                catch (AssertionException)
+                {
+                    throw;
+                }
+                catch (Exception ex)
+                {
+                    caughtException = ex;
+                }
+
+                Assert.AreEqual(expectedMessage, caughtException.Message);
+            }
+        }
+
+        protected void CheckTypeResultTest(string parentType, Func<Mono.Cecil.TypeDefinition, object> testMethod, object expectedResult, Func<Mono.Cecil.TypeDefinition, string> message = null)
+        {
+            var types = GetCecilTypesToTest(parentType);
+
+            if (types.Count == 0)
+            {
+                Assert.Fail("Did not found types to test: " + parentType);
+            }
+
+            foreach (var type in types)
+            {
+                string testMessage = message != null ? message(type) : string.Empty;
+
+                var result = testMethod(type);
+
+                Assert.AreEqual(expectedResult, result, testMessage);
+            }
+        }
+
+        protected void CheckTypeResultTest(string parentType, Func<ICSharpCode.NRefactory.TypeSystem.ITypeDefinition, object> testMethod, object expectedResult, Func<ICSharpCode.NRefactory.TypeSystem.ITypeDefinition, string> message = null)
+        {
+            var types = GetNRefactoryTypesToTest(parentType);
+
+            if (types.Count == 0)
+            {
+                Assert.Fail("Did not found types to test: " + parentType);
+            }
+
+            foreach (var type in types)
+            {
+                string testMessage = message != null ? message(type) : string.Empty;
+
+                var result = testMethod(type);
+
+                Assert.AreEqual(expectedResult, result, testMessage);
             }
         }
 
@@ -103,6 +181,50 @@ namespace Bridge.Translator.Tests
                         {
                             return string.Format(expectedMessageFormat, type);
                         }
+                    );
+                }
+
+                protected void IsVirtualTypeShouldFailTest(string parentType, string expectedMessageFormat)
+                {
+                    ShouldFailTest(
+                        parentType,
+                        (ICSharpCode.NRefactory.TypeSystem.ITypeDefinition type) =>
+                        {
+                            var v = new Validator();
+                            v.IsVirtualType(type);
+                        },
+                        (type) =>
+                        {
+                            return string.Format(expectedMessageFormat, type.FullName);
+                        }
+                    );
+                }
+
+                protected void IsExternalTypeTest(string parentType, bool expected)
+                {
+                    CheckTypeResultTest(
+                        parentType,
+                        (Mono.Cecil.TypeDefinition type) =>
+                        {
+                            var v = new Validator();
+                            return v.IsExternalType(type);
+                        },
+                        expected,
+                        (type) => string.Format("Type {0} should {1}be recognized as external", type, expected ? "" : "not ")
+                    );
+                }
+
+                protected void IsVirtualTypeTest(string parentType, bool expected)
+                {
+                    CheckTypeResultTest(
+                        parentType,
+                        (ICSharpCode.NRefactory.TypeSystem.ITypeDefinition type) =>
+                        {
+                            var v = new Validator();
+                            return v.IsVirtualType(type);
+                        },
+                        expected,
+                        (type) => string.Format("Type {0} should be {1}recognized as [Virtual]", type, expected ? "" : "not ")
                     );
                 }
             }
@@ -274,6 +396,43 @@ namespace Bridge.Translator.Tests
                         TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.INTERFACE_INHERITANCE,
                         Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_INHERITANCE
                     );
+                }
+            }
+
+            [TestFixture]
+            class CheckVirtualClass : CheckTypeTests
+            {
+                [Test]
+                public void VirtualClassShouldFailWhenNestedClassesTest()
+                {
+                    IsVirtualTypeShouldFailTest(
+                        TestAssemblyHelper.TestClassNames.Issues.N2795.ShouldFail.NO_NESTED_TYPES,
+                        Constants.Messages.Exceptions.VIRTUAL_CLASS_NO_NESTED_TYPES
+                    );
+                }
+
+                [Test]
+                public void VirtualClassIsVirtualTest()
+                {
+                    IsVirtualTypeTest(TestAssemblyHelper.TestClassNames.Issues.N2795.ShouldNotFail.VIRTUAL_TYPES, true);
+                }
+
+                [Test]
+                public void VirtualClassIsNonVirtualTest()
+                {
+                    IsVirtualTypeTest(TestAssemblyHelper.TestClassNames.Issues.N2795.ShouldNotFail.NON_VIRTUAL_TYPES, false);
+                }
+
+                [Test]
+                public void VirtualClassIsExternalTest()
+                {
+                    IsExternalTypeTest(TestAssemblyHelper.TestClassNames.Issues.N2795.ShouldNotFail.VIRTUAL_TYPES, true);
+                }
+
+                [Test]
+                public void VirtualClassIsNonExternalTest()
+                {
+                    IsExternalTypeTest(TestAssemblyHelper.TestClassNames.Issues.N2795.ShouldNotFail.NON_VIRTUAL_TYPES, false);
                 }
             }
         }
