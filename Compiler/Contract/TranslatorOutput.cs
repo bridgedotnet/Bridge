@@ -179,13 +179,18 @@ namespace Bridge.Contract
         {
             get
             {
+                if (Content == null || (Content.Buffer == null && Content.String == null && Content.Builder == null))
+                {
+                    isEmpty = true;
+                }
+
                 return isEmpty;
             }
             set
             {
                 isEmpty = value;
 
-                if (value == true)
+                if (value == true && Content != null)
                 {
                     Content.SetContent(null);
                 }

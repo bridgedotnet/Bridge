@@ -697,7 +697,8 @@ namespace Bridge.Translator
                 Name = searchName,
                 OutputType = outputType,
                 OutputKind = outputKind,
-                Location = location
+                Location = location,
+                Content = new TranslatorOutputItemContent((string)null)
             };
 
             if (isMinJs)
