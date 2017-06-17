@@ -413,7 +413,7 @@ namespace Bridge.Contract
                 {
                     name = BridgeTypes.ToJsName(typeDef.DeclaringType, emitter, true);
                 }
-                
+
                 name = (string.IsNullOrEmpty(name) ? "" : (name + ".")) + BridgeTypes.ConvertName(emitter.GetTypeName(itypeDef, typeDef));
             }
             else
@@ -546,7 +546,13 @@ namespace Bridge.Contract
                 }
             }
 
-            if (!isAlias && itypeDef != null && itypeDef.Kind == TypeKind.Interface)
+            var td = type.GetDefinition();
+            if (td != null && emitter.Validator.IsVirtualType(td))
+            {
+                string fnName = td.Kind == TypeKind.Interface ? JS.Types.Bridge.GET_INTERFACE : JS.Types.Bridge.GET_CLASS;
+                name = fnName + "(\"" + name + "\")";
+            }
+            else if (!isAlias && itypeDef != null && itypeDef.Kind == TypeKind.Interface)
             {
                 var externalInterface = emitter.Validator.IsExternalInterface(itypeDef);
                 if (externalInterface != null && externalInterface.IsVirtual)

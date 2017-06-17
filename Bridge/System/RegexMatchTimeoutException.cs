@@ -2,7 +2,7 @@
 
 namespace System
 {
-    //[External] the class should have External attribute as it uses transpiled js code Version.js
+    [External]
     public class RegexMatchTimeoutException : TimeoutException
     {
         public extern string Pattern

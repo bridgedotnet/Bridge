@@ -53,6 +53,8 @@ namespace Bridge.Contract
 
         bool IsExternalType(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition typeDefinition, bool ignoreLiteral = false);
 
+        bool IsVirtualType(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition typeDefinition);
+
         bool IsExternalInterface(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition typeDefinition, out bool isNative);
 
         IExternalInterface IsExternalInterface(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition typeDefinition);
