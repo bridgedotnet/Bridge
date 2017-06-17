@@ -22736,9 +22736,13 @@ Bridge.$N1391Result =                     r;
                 DoSomething: function (o) {
                     return o;
                 },
+                dosomething: function (o) {
+                    return Bridge.box(77, System.Int32);
+                },
                 TestTemplateTokens: function () {
                     Bridge.Test.NUnit.Assert.AreEqual("test", Bridge.unbox(this.DoSomething("test")));
                     Bridge.Test.NUnit.Assert.AreEqual(5, Bridge.unbox(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2794.DoSomething(5)));
+                    Bridge.Test.NUnit.Assert.AreEqual(77, Bridge.unbox(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2794.dosomething()));
                 },
                 TestNameTokens: function () {
                     var c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2794();
@@ -22747,6 +22751,9 @@ Bridge.$N1391Result =                     r;
 
                     Bridge.Test.NUnit.Assert.AreEqual(2, c.M_2(""));
                     Bridge.Test.NUnit.Assert.AreEqual(2, Bridge.unbox(c.M_2)());
+
+                    Bridge.Test.NUnit.Assert.AreEqual(3, c.M_3(true));
+                    Bridge.Test.NUnit.Assert.AreEqual(3, Bridge.unbox(c.m_3)());
                 }
             }
         },
@@ -22756,6 +22763,9 @@ Bridge.$N1391Result =                     r;
             },
             M_2: function (s) {
                 return 2;
+            },
+            M_3: function (b) {
+                return 3;
             }
         }
     });
