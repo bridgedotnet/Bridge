@@ -462,6 +462,7 @@ namespace Bridge.Translator
             this.WriteNewLine();
 
             this.EndBlock();
+            this.WriteSpace();
             this.WriteFinally();
             this.BeginBlock();
             this.Write($"if ({JS.Types.Bridge.IS}({iteratorName}, {JS.Types.System.IDisposable.NAME})) ");

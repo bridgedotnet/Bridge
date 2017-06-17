@@ -7,11 +7,11 @@
                 Property: 0
             },
             methods: {
-                Method: function Method() { }
+                Method: function Method () { }
             }
         },
         methods: {
-            Main1: function Main1() {
+            Main1: function Main1 () {
                 // Should be TestIssue1050.App.Field = 1;
                 TestIssue1050.App.Field = 1;
 

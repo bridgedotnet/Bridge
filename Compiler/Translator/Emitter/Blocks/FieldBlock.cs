@@ -601,6 +601,7 @@ namespace Bridge.Translator
             bool oldNewLine = this.Emitter.IsNewLine;
             bool nonEmpty = false;
             var changedIndenting = false;
+            bool newLine = members.Count > 1;
 
             if (objectName != null)
             {
@@ -609,10 +610,13 @@ namespace Bridge.Translator
 
                 this.WriteColon();
                 this.WriteOpenBracket();
-                this.WriteNewLine();
 
-                this.Indent();
-                changedIndenting = true;
+                if (newLine)
+                {
+                    this.WriteNewLine();
+                    this.Indent();
+                    changedIndenting = true;
+                }
             }
 
             foreach (var member in members)
@@ -646,11 +650,13 @@ namespace Bridge.Translator
                 }
             }
 
-            this.WriteNewLine();
-
-            if (changedIndenting)
+            if (newLine)
             {
-                this.Outdent();
+                this.WriteNewLine();
+                if (changedIndenting)
+                {
+                    this.Outdent();
+                }
             }
 
             this.WriteCloseBracket();

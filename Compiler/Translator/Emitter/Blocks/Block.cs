@@ -19,7 +19,7 @@ namespace Bridge.Translator
                 this.Emitter.IgnoreBlock = blockStatement;
             }
 
-            if (this.Emitter.IgnoreBlock == blockStatement)
+            if (this.Emitter.IgnoreBlock == blockStatement || this.Emitter.IsAsync && this.GetAwaiters(blockStatement).Length > 0)
             {
                 this.AsyncNoBraces = true;
             }
