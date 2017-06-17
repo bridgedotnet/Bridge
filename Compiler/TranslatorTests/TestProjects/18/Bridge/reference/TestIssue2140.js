@@ -1,7 +1,7 @@
     Bridge.define("TestIssue2140.Bridge2140", {
         statics: {
             methods: {
-                Test: function Test() {
+                Test: function Test () {
                     // #2140 Enum value (number) is emitted for '[Enum(Emit.Name)]' attribute
 
                     // Should be Value1

@@ -17,7 +17,7 @@ alert("I'm header 1.0.0-beta");
                 }
             },
             methods: {
-                Main1: function Main1() {
+                Main1: function Main1 () {
                     System.Console.WriteLine(new TestIssue599.Issue599()._something);
                 }
             }
@@ -37,7 +37,7 @@ alert("I'm header 1.0.0-beta");
     Bridge.define("TestIssue948.Issue948", {
         statics: {
             methods: {
-                Test: function Test() {
+                Test: function Test () {
                     // A comment
 
                     /* global Bridge */

@@ -1,6 +1,6 @@
     Bridge.define("TestIssue960.Example", {
         methods: {
-            GetName: function GetName(x) {
+            GetName: function GetName (x) {
                 return x.TestIssue960$IHaveNamed$Name;
             }
         }
@@ -18,7 +18,7 @@
                 }
             },
             methods: {
-                Go: function Go() {
+                Go: function Go () {
                     var x = new TestIssue960.Named("Test");
                     // Should not contain generic type parameter
                     System.Console.WriteLine(new TestIssue960.Example().GetName(x));
@@ -33,9 +33,7 @@
         props: {
             Name: null
         },
-        alias: [
-            "Name", "TestIssue960$IHaveNamed$Name"
-        ],
+        alias: ["Name", "TestIssue960$IHaveNamed$Name"],
         ctors: {
             ctor: function (name) {
                 this.$initialize();

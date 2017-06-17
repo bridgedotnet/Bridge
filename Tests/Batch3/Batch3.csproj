@@ -570,12 +570,16 @@
     <Compile Include="BridgeIssues\2700\N2720.cs" />
     <Compile Include="BridgeIssues\2700\N2722.cs" />
     <Compile Include="BridgeIssues\2700\N2723.cs" />
+    <Compile Include="BridgeIssues\2700\N2735.cs" />
     <Compile Include="BridgeIssues\2700\N2738.cs" />
     <Compile Include="BridgeIssues\2700\N2745.cs" />
     <Compile Include="BridgeIssues\2700\N2749.cs" />
     <Compile Include="BridgeIssues\2700\N2759.cs" />
     <Compile Include="BridgeIssues\2700\N2763.cs" />
     <Compile Include="BridgeIssues\2700\N2764.cs" />
+    <Compile Include="BridgeIssues\2700\N2770.cs" />
+    <Compile Include="BridgeIssues\2700\N2793.cs" />
+    <Compile Include="BridgeIssues\2700\N2795.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
     <Compile Include="Utilities\DecimalHelper.cs" />

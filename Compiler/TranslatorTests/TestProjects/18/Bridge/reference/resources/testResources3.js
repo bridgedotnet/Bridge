@@ -12,16 +12,16 @@
     Bridge.define("TestIssue434.Issue434A", {
         statics: {
             methods: {
-                Method1: function Method1() {
+                Method1: function Method1 () {
                     TestIssue434.Issue434A.DoSomething(1);
                 },
-                Method3: function Method3() {
+                Method3: function Method3 () {
                     TestIssue434.Issue434A.DoSomething(3);
                 },
-                Method4: function Method4() {
+                Method4: function Method4 () {
                     TestIssue434.Issue434A.DoSomething(4);
                 },
-                DoSomething: function DoSomething(i) {
+                DoSomething: function DoSomething (i) {
                     System.Console.WriteLine(i);
                 }
             }
@@ -39,16 +39,16 @@
     Bridge.define("TestIssue434.Issue434B", {
         statics: {
             methods: {
-                Method1: function Method1() {
+                Method1: function Method1 () {
                     TestIssue434.Issue434B.DoSomething(1);
                 },
-                Method3: function Method3() {
+                Method3: function Method3 () {
                     TestIssue434.Issue434B.DoSomething(3);
                 },
-                Method4: function Method4() {
+                Method4: function Method4 () {
                     TestIssue434.Issue434B.DoSomething(4);
                 },
-                DoSomething: function DoSomething(i) {
+                DoSomething: function DoSomething (i) {
                     System.Console.WriteLine(i);
                 }
             }
@@ -69,7 +69,7 @@
     Bridge.define("TestIssue461.Issue461", {
         statics: {
             methods: {
-                Test: function Test() {
+                Test: function Test () {
                     var input = document.createElement('input');
 
                     input.onchange = Bridge.fn.combine(input.onchange, $asm.$.TestIssue461.Issue461.f1);
