@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="Issues\N2276.cs" />
     <Compile Include="Issues\N2710.cs" />
+    <Compile Include="Issues\N2795.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\..\.build\common\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
