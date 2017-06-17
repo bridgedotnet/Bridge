@@ -22752,7 +22752,7 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.AreEqual(2, c.M_2(""));
                     Bridge.Test.NUnit.Assert.AreEqual(2, Bridge.unbox(c.M_2)());
 
-                    Bridge.Test.NUnit.Assert.AreEqual(3, c.M_3(true));
+                    Bridge.Test.NUnit.Assert.AreEqual(3, c.m_3(true));
                     Bridge.Test.NUnit.Assert.AreEqual(3, Bridge.unbox(c.m_3)());
                 }
             }
@@ -22764,7 +22764,7 @@ Bridge.$N1391Result =                     r;
             M_2: function (s) {
                 return 2;
             },
-            M_3: function (b) {
+            m_3: function (b) {
                 return 3;
             }
         }

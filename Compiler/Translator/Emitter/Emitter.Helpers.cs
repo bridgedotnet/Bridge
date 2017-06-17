@@ -352,7 +352,8 @@ namespace Bridge.Translator
                 var value = attr.PositionalArguments.First().ConstantValue;
                 if (value is string)
                 {
-                    name = Helpers.ConvertNameTokens(value.ToString(), member.Name);
+                    name = this.GetEntityName(member);
+                    //name = Helpers.ConvertNameTokens(value.ToString(), member.Name);
                     if (!isIgnore && member.IsStatic && Helpers.IsReservedStaticName(name))
                     {
                         name = Helpers.ChangeReservedWord(name);

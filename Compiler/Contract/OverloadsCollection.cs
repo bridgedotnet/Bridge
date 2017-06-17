@@ -1095,17 +1095,16 @@ namespace Bridge.Contract
                 if (acceessor != null)
                 {
                     attr = Helpers.GetInheritedAttribute(acceessor, "Bridge.NameAttribute");
+
+                    if (attr != null)
+                    {
+                        name = this.Emitter.GetEntityName(acceessor);
+                    }
                 }
             }
 
             if (attr != null)
             {
-                var value = attr.PositionalArguments.First().ConstantValue;
-                if (value is string)
-                {
-                    name = Helpers.ConvertNameTokens(value.ToString(), definition.Name);
-                }
-
                 if (!(iProperty != null || definition is IEvent))
                 {
                     prefix = null;
