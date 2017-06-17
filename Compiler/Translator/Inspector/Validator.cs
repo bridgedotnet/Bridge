@@ -129,7 +129,7 @@ namespace Bridge.Translator
                 }
             }
 
-            if (type.Interfaces.Count > 0 && objectCreateMode == 1)
+            if (type.Interfaces.Count > 0)
             {
                 foreach (var @interface in type.Interfaces)
                 {
@@ -193,6 +193,11 @@ namespace Bridge.Translator
                 has = this.HasAttribute(type.Module.Assembly.CustomAttributes, externalAttr);
             }
 
+            if (!has)
+            {
+                has = IsVirtualTypeStatic(type);
+            }
+
             return has;
         }
 
@@ -235,7 +240,115 @@ namespace Bridge.Translator
                 has = typeDefinition.ParentAssembly.AssemblyAttributes.Any(attr => attr.Constructor != null && attr.Constructor.DeclaringType.FullName == externalAttr);
             }
 
+            if (!has)
+            {
+                has = this.IsVirtualType(typeDefinition);
+            }
+
             return has;
+        }
+
+        public bool IsVirtualType(ITypeDefinition typeDefinition)
+        {
+            return Validator.IsVirtualTypeStatic(typeDefinition);
+        }
+
+        public static bool IsVirtualTypeStatic(TypeDefinition typeDefinition)
+        {
+            string virtualAttr = Translator.Bridge_ASSEMBLY + ".VirtualAttribute";
+            CustomAttribute attr = attr =
+                    typeDefinition.CustomAttributes.FirstOrDefault(
+                        a => a.AttributeType.FullName == virtualAttr);
+
+            if (attr == null)
+            {
+                attr = typeDefinition.Module.Assembly.CustomAttributes.FirstOrDefault(a => a.AttributeType.FullName == virtualAttr);
+            }
+
+            bool isVirtual = false;
+
+            if (attr != null)
+            {
+                if (attr.ConstructorArguments.Count == 0)
+                {
+                    isVirtual = true;
+                }
+                else
+                {
+                    var value = (int)attr.ConstructorArguments[0].Value;
+
+                    switch (value)
+                    {
+                        case 0:
+                            isVirtual = true;
+                            break;
+                        case 1:
+                            isVirtual = !typeDefinition.IsInterface;
+                            break;
+                        case 2:
+                            isVirtual = typeDefinition.IsInterface;
+                            break;
+                    }
+                }
+            }
+
+            if (isVirtual && typeDefinition.NestedTypes.Count > 0)
+            {
+                throw new Exception(string.Format(Constants.Messages.Exceptions.VIRTUAL_CLASS_NO_NESTED_TYPES, typeDefinition.FullName));
+            }
+
+            return isVirtual;
+        }
+
+        public static bool IsVirtualTypeStatic(ITypeDefinition typeDefinition)
+        {
+            string virtualAttr = Translator.Bridge_ASSEMBLY + ".VirtualAttribute";
+            IAttribute attr = null;
+            if (typeDefinition.GetDefinition() != null)
+            {
+                attr =
+                    typeDefinition.GetDefinition().Attributes.FirstOrDefault(
+                        a => a.AttributeType.FullName == virtualAttr);
+            }
+
+            if (attr == null)
+            {
+                attr = typeDefinition.ParentAssembly.AssemblyAttributes.FirstOrDefault(a => a.AttributeType.FullName == virtualAttr);
+            }
+
+            bool isVirtual = false;
+
+            if (attr != null)
+            {
+                if (attr.PositionalArguments.Count == 0)
+                {
+                    isVirtual = true;
+                }
+                else
+                {
+                    var value = (int)attr.PositionalArguments[0].ConstantValue;
+
+                    switch (value)
+                    {
+                        case 0:
+                            isVirtual = true;
+                            break;
+                        case 1:
+                            isVirtual = typeDefinition.Kind != TypeKind.Interface;
+                            break;
+                        case 2:
+                            isVirtual = typeDefinition.Kind == TypeKind.Interface;
+                            break;
+                    }
+                }
+            }
+
+            if (isVirtual && typeDefinition.NestedTypes.Count > 0)
+            {
+                throw new Exception(string.Format(Constants.Messages.Exceptions.VIRTUAL_CLASS_NO_NESTED_TYPES, typeDefinition.FullName));
+            }
+
+            return isVirtual;
         }
 
         public virtual bool IsExternalInterface(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition typeDefinition, out bool isNative)

@@ -693,14 +693,49 @@ namespace Bridge.Translator
             return name;
         }
 
-        private static bool IsExternalType(ISymbol symbol)
+        private static bool IsExternalType(INamedTypeSymbol symbol)
         {
             string externalAttr = Translator.Bridge_ASSEMBLY + ".ExternalAttribute";
+            string virtualAttr = Translator.Bridge_ASSEMBLY + ".VirtualAttribute";
             string objectLiteralAttr = Translator.Bridge_ASSEMBLY + ".ObjectLiteralAttribute";
 
-            return SyntaxHelper.HasAttribute(symbol.GetAttributes(), externalAttr)
+            var result = SyntaxHelper.HasAttribute(symbol.GetAttributes(), externalAttr)
                    || SyntaxHelper.HasAttribute(symbol.GetAttributes(), objectLiteralAttr)
                    || SyntaxHelper.HasAttribute(symbol.ContainingAssembly.GetAttributes(), externalAttr);
+
+            if (result)
+            {
+                return true;
+            }
+
+            var attr = symbol.GetAttributes().FirstOrDefault(a => a.AttributeClass != null && a.AttributeClass.FullyQualifiedName() == virtualAttr);
+
+            if (attr == null)
+            {
+                attr = symbol.ContainingAssembly.GetAttributes().FirstOrDefault(a => a.AttributeClass != null && a.AttributeClass.FullyQualifiedName() == virtualAttr);
+            }
+
+            if (attr != null)
+            {
+                if (attr.ConstructorArguments.Length == 0)
+                {
+                    return true;
+                }
+
+                var value = (int) attr.ConstructorArguments[0].Value;
+
+                switch (value)
+                {
+                    case 0:
+                        return true;
+                    case 1:
+                        return symbol.TypeKind != TypeKind.Interface;
+                    case 2:
+                        return symbol.TypeKind == TypeKind.Interface;
+                }
+            }
+
+            return false;
         }
 
         private static bool HasAttribute(ImmutableArray<AttributeData> attributes, string attrName)

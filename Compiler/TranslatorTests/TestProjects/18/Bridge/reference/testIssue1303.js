@@ -7,10 +7,10 @@
                 }
             },
             methods: {
-                NotMain: function NotMain() {
+                NotMain: function NotMain () {
                     //Should be in config.init
                 },
-                Main: function Main() {
+                Main: function Main () {
                     //Should be in config.init
                 }
             }
@@ -19,7 +19,7 @@
     });
 
     Bridge.define("TestIssue1303.App1", {
-        main: function Main() {
+        main: function Main () {
             //Should be in config.init
         },
         statics: {
@@ -29,7 +29,7 @@
                 }
             },
             methods: {
-                NotMain: function NotMain() {
+                NotMain: function NotMain () {
                     //Should be in config.init
                 }
             }
@@ -45,7 +45,7 @@
                 }
             },
             methods: {
-                Main: function Main() {
+                Main: function Main () {
                     //Should be in config.init
                 }
             }

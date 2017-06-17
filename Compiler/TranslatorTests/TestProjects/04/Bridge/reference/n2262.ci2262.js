@@ -6,8 +6,6 @@ Bridge.assembly("TestProject", function ($asm, globals) {
         props: {
             Count: 0
         },
-        alias: [
-            "Count", "TestProject$Issues$N2262$I2262$Count"
-        ]
+        alias: ["Count", "TestProject$Issues$N2262$I2262$Count"]
     });
 });

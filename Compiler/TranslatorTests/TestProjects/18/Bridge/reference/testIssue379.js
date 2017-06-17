@@ -111,47 +111,47 @@
 
     Bridge.define("TestIssue379.Tests", {
         methods: {
-            TestDataIgnore: function TestDataIgnore() {
+            TestDataIgnore: function TestDataIgnore () {
                 var $t;
                 var d1 = TestIssue379.DataIgnore.ctor();
-                var d2 = ($t=TestIssue379.DataIgnore.ctor(), $t.Int1 = 1, $t.Int2 = 22, $t.Str3 = "3", $t.Str4 = "Str44", $t.IntNull5 = 5, $t.IntNull6 = 66, $t.Decimal7 = System.Decimal(7), $t.Decimal8 = System.Decimal(88), $t);
+                var d2 = ($t = TestIssue379.DataIgnore.ctor(), $t.Int1 = 1, $t.Int2 = 22, $t.Str3 = "3", $t.Str4 = "Str44", $t.IntNull5 = 5, $t.IntNull6 = 66, $t.Decimal7 = System.Decimal(7), $t.Decimal8 = System.Decimal(88), $t);
 
                 var d3 = TestIssue379.DataIgnore.$ctor1(0);
-                var d4 = ($t=TestIssue379.DataIgnore.$ctor1(0), $t.Int1 = 1, $t.Int2 = 22, $t.Str3 = "3", $t.Str4 = "Str44", $t.IntNull5 = 5, $t.IntNull6 = 66, $t.Decimal7 = System.Decimal(7), $t.Decimal8 = System.Decimal(88), $t);
+                var d4 = ($t = TestIssue379.DataIgnore.$ctor1(0), $t.Int1 = 1, $t.Int2 = 22, $t.Str3 = "3", $t.Str4 = "Str44", $t.IntNull5 = 5, $t.IntNull6 = 66, $t.Decimal7 = System.Decimal(7), $t.Decimal8 = System.Decimal(88), $t);
 
                 var d5 = TestIssue379.DataIgnore.$ctor1(2);
-                var d6 = ($t=TestIssue379.DataIgnore.$ctor1(2), $t.Int1 = 1, $t.Int2 = 22, $t.Str3 = "3", $t.Str4 = "Str44", $t.IntNull5 = 5, $t.IntNull6 = 66, $t.Decimal7 = System.Decimal(7), $t.Decimal8 = System.Decimal(88), $t);
+                var d6 = ($t = TestIssue379.DataIgnore.$ctor1(2), $t.Int1 = 1, $t.Int2 = 22, $t.Str3 = "3", $t.Str4 = "Str44", $t.IntNull5 = 5, $t.IntNull6 = 66, $t.Decimal7 = System.Decimal(7), $t.Decimal8 = System.Decimal(88), $t);
 
                 var d7 = TestIssue379.DataIgnore.$ctor1(1);
-                var d8 = ($t=TestIssue379.DataIgnore.$ctor1(1), $t.Int1 = 1, $t.Int2 = 22, $t.Str3 = "3", $t.Str4 = "Str44", $t.IntNull5 = 5, $t.IntNull6 = 66, $t.Decimal7 = System.Decimal(7), $t.Decimal8 = System.Decimal(88), $t);
+                var d8 = ($t = TestIssue379.DataIgnore.$ctor1(1), $t.Int1 = 1, $t.Int2 = 22, $t.Str3 = "3", $t.Str4 = "Str44", $t.IntNull5 = 5, $t.IntNull6 = 66, $t.Decimal7 = System.Decimal(7), $t.Decimal8 = System.Decimal(88), $t);
             },
-            TestDataDefaultValue: function TestDataDefaultValue() {
+            TestDataDefaultValue: function TestDataDefaultValue () {
                 var $t;
                 var d1 = TestIssue379.DataDefaultValue.ctor();
-                var d2 = ($t=TestIssue379.DataDefaultValue.ctor(), $t.Int1 = 1, $t.Int2 = 22, $t.Str3 = "3", $t.Str4 = "Str44", $t.IntNull5 = 5, $t.IntNull6 = 66, $t.Decimal7 = System.Decimal(7), $t.Decimal8 = System.Decimal(88), $t);
+                var d2 = ($t = TestIssue379.DataDefaultValue.ctor(), $t.Int1 = 1, $t.Int2 = 22, $t.Str3 = "3", $t.Str4 = "Str44", $t.IntNull5 = 5, $t.IntNull6 = 66, $t.Decimal7 = System.Decimal(7), $t.Decimal8 = System.Decimal(88), $t);
 
                 var d3 = TestIssue379.DataDefaultValue.$ctor1(0);
-                var d4 = ($t=TestIssue379.DataDefaultValue.$ctor1(0), $t.Int1 = 1, $t.Int2 = 22, $t.Str3 = "3", $t.Str4 = "Str44", $t.IntNull5 = 5, $t.IntNull6 = 66, $t.Decimal7 = System.Decimal(7), $t.Decimal8 = System.Decimal(88), $t);
+                var d4 = ($t = TestIssue379.DataDefaultValue.$ctor1(0), $t.Int1 = 1, $t.Int2 = 22, $t.Str3 = "3", $t.Str4 = "Str44", $t.IntNull5 = 5, $t.IntNull6 = 66, $t.Decimal7 = System.Decimal(7), $t.Decimal8 = System.Decimal(88), $t);
 
                 var d5 = TestIssue379.DataDefaultValue.$ctor1(2);
-                var d6 = ($t=TestIssue379.DataDefaultValue.$ctor1(2), $t.Int1 = 1, $t.Int2 = 22, $t.Str3 = "3", $t.Str4 = "Str44", $t.IntNull5 = 5, $t.IntNull6 = 66, $t.Decimal7 = System.Decimal(7), $t.Decimal8 = System.Decimal(88), $t);
+                var d6 = ($t = TestIssue379.DataDefaultValue.$ctor1(2), $t.Int1 = 1, $t.Int2 = 22, $t.Str3 = "3", $t.Str4 = "Str44", $t.IntNull5 = 5, $t.IntNull6 = 66, $t.Decimal7 = System.Decimal(7), $t.Decimal8 = System.Decimal(88), $t);
 
                 var d7 = TestIssue379.DataDefaultValue.$ctor1(1);
-                var d8 = ($t=TestIssue379.DataDefaultValue.$ctor1(1), $t.Int1 = 1, $t.Int2 = 22, $t.Str3 = "3", $t.Str4 = "Str44", $t.IntNull5 = 5, $t.IntNull6 = 66, $t.Decimal7 = System.Decimal(7), $t.Decimal8 = System.Decimal(88), $t);
+                var d8 = ($t = TestIssue379.DataDefaultValue.$ctor1(1), $t.Int1 = 1, $t.Int2 = 22, $t.Str3 = "3", $t.Str4 = "Str44", $t.IntNull5 = 5, $t.IntNull6 = 66, $t.Decimal7 = System.Decimal(7), $t.Decimal8 = System.Decimal(88), $t);
             },
-            TestDataInitializer: function TestDataInitializer() {
+            TestDataInitializer: function TestDataInitializer () {
                 var $t;
                 var d1 = TestIssue379.DataInitializer.ctor();
-                var d2 = ($t=TestIssue379.DataInitializer.ctor(), $t.Int1 = 1, $t.Int2 = 22, $t.Str3 = "3", $t.Str4 = "Str44", $t.IntNull5 = 5, $t.IntNull6 = 66, $t.Decimal7 = System.Decimal(7), $t.Decimal8 = System.Decimal(88), $t);
+                var d2 = ($t = TestIssue379.DataInitializer.ctor(), $t.Int1 = 1, $t.Int2 = 22, $t.Str3 = "3", $t.Str4 = "Str44", $t.IntNull5 = 5, $t.IntNull6 = 66, $t.Decimal7 = System.Decimal(7), $t.Decimal8 = System.Decimal(88), $t);
 
                 var d3 = TestIssue379.DataInitializer.$ctor1(0);
-                var d4 = ($t=TestIssue379.DataInitializer.$ctor1(0), $t.Int1 = 1, $t.Int2 = 22, $t.Str3 = "3", $t.Str4 = "Str44", $t.IntNull5 = 5, $t.IntNull6 = 66, $t.Decimal7 = System.Decimal(7), $t.Decimal8 = System.Decimal(88), $t);
+                var d4 = ($t = TestIssue379.DataInitializer.$ctor1(0), $t.Int1 = 1, $t.Int2 = 22, $t.Str3 = "3", $t.Str4 = "Str44", $t.IntNull5 = 5, $t.IntNull6 = 66, $t.Decimal7 = System.Decimal(7), $t.Decimal8 = System.Decimal(88), $t);
 
                 var d5 = TestIssue379.DataInitializer.$ctor1(2);
-                var d6 = ($t=TestIssue379.DataInitializer.$ctor1(2), $t.Int1 = 1, $t.Int2 = 22, $t.Str3 = "3", $t.Str4 = "Str44", $t.IntNull5 = 5, $t.IntNull6 = 66, $t.Decimal7 = System.Decimal(7), $t.Decimal8 = System.Decimal(88), $t);
+                var d6 = ($t = TestIssue379.DataInitializer.$ctor1(2), $t.Int1 = 1, $t.Int2 = 22, $t.Str3 = "3", $t.Str4 = "Str44", $t.IntNull5 = 5, $t.IntNull6 = 66, $t.Decimal7 = System.Decimal(7), $t.Decimal8 = System.Decimal(88), $t);
 
                 var d7 = TestIssue379.DataInitializer.$ctor1(1);
-                var d8 = ($t=TestIssue379.DataInitializer.$ctor1(1), $t.Int1 = 1, $t.Int2 = 22, $t.Str3 = "3", $t.Str4 = "Str44", $t.IntNull5 = 5, $t.IntNull6 = 66, $t.Decimal7 = System.Decimal(7), $t.Decimal8 = System.Decimal(88), $t);
+                var d8 = ($t = TestIssue379.DataInitializer.$ctor1(1), $t.Int1 = 1, $t.Int2 = 22, $t.Str3 = "3", $t.Str4 = "Str44", $t.IntNull5 = 5, $t.IntNull6 = 66, $t.Decimal7 = System.Decimal(7), $t.Decimal8 = System.Decimal(88), $t);
             }
         }
     });

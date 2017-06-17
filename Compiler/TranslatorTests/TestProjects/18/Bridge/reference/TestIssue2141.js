@@ -1,7 +1,7 @@
     Bridge.define("TestIssue2141.Bridge2141", {
         statics: {
             methods: {
-                Test: function Test() {
+                Test: function Test () {
                     var $t;
                     // #2141 Skip writing type information to [External] [ObjectLiteral]
 
@@ -18,14 +18,14 @@
 
                     // These below should NOT contain Bridge.literal call
                     // Bridge.merge(.ctor(), { id: "..." });
-                    var c3 = ($t=TestIssue2141.Config3.ctor(), $t.Id = "3", $t);
-                    var c3Name = ($t=Options3.ctor(), $t.Id = "3Name", $t);
+                    var c3 = ($t = TestIssue2141.Config3.ctor(), $t.Id = "3", $t);
+                    var c3Name = ($t = Options3.ctor(), $t.Id = "3Name", $t);
 
                     // These below should NOT contain Bridge.literal call
                     // Bridge.merge(Config4(), { id: "4" });
-                    var c4 = ($t=TestIssue2141.Config4(), $t.Id = "4", $t);
+                    var c4 = ($t = TestIssue2141.Config4(), $t.Id = "4", $t);
                     // Bridge.merge(Options4(), { id: "4Name" });
-                    var c4Name = ($t=Options4(), $t.Id = "4Name", $t);
+                    var c4Name = ($t = Options4(), $t.Id = "4Name", $t);
                 }
             }
         }
