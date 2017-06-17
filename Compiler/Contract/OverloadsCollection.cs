@@ -645,6 +645,7 @@ namespace Bridge.Contract
 
             if (typeDef != null)
             {
+                var isExternalType = this.Emitter.Validator.IsExternalType(typeDef);
                 var methods = typeDef.Methods.Where(m =>
                 {
                     if (m.IsExplicitInterfaceImplementation)
@@ -663,7 +664,7 @@ namespace Bridge.Contract
 
                     var name = this.Emitter.GetEntityName(m);
                     if ((name == this.JsName || name == this.AltJsName || name == this.FieldJsName) && m.IsStatic == this.Static &&
-                        ((m.IsConstructor && this.JsName == JS.Funcs.CONSTRUCTOR) || m.IsConstructor == this.Constructor))
+                        (m.IsConstructor && this.JsName == JS.Funcs.CONSTRUCTOR || m.IsConstructor == this.Constructor))
                     {
                         if (m.IsConstructor != this.Constructor && (m.Parameters.Count > 0 || m.DeclaringTypeDefinition != this.TypeDefinition))
                         {
@@ -673,6 +674,15 @@ namespace Bridge.Contract
                         if (m.IsOverride && !this.IsTemplateOverride(m))
                         {
                             return false;
+                        }
+
+                        if (!isExternalType)
+                        {
+                            var isExtern = !m.HasBody && !m.IsAbstract || this.Emitter.Validator.IsExternalType(m);
+                            if (isExtern)
+                            {
+                                return false;
+                            }
                         }
 
                         return true;

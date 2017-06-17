@@ -131,9 +131,7 @@ Bridge.assembly("TestProject.I2096", function ($asm, globals) {
         props: {
             Prop: 0
         },
-        alias: [
-            "Prop", "Test$BridgeIssues$N770$IBase$Prop"
-        ]
+        alias: ["Prop", "Test$BridgeIssues$N770$IBase$Prop"]
     });
 });
 

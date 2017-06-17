@@ -31,7 +31,7 @@
                                     return false;
                                 }
                             }
-                        }finally {
+                        } finally {
                             if (Bridge.is($t, System.IDisposable)) {
                                 $t.System$IDisposable$dispose();
                             }
@@ -51,7 +51,7 @@
                                             break;
                                         }
                                     }
-                                }finally {
+                                } finally {
                                     if (Bridge.is($t2, System.IDisposable)) {
                                         $t2.System$IDisposable$dispose();
                                     }
@@ -59,7 +59,7 @@
                                     return false;
                                 }
                             }
-                        }finally {
+                        } finally {
                             if (Bridge.is($t1, System.IDisposable)) {
                                 $t1.System$IDisposable$dispose();
                             }
@@ -264,7 +264,7 @@
                         var item = $t.Current;
                         this.addIfNotPresent(item);
                     }
-                }finally {
+                } finally {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$dispose();
                     }
@@ -308,7 +308,7 @@
                         var element = $t.Current;
                         this.remove(element);
                     }
-                }finally {
+                } finally {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$dispose();
                     }
@@ -427,7 +427,7 @@
                             return true;
                         }
                     }
-                }finally {
+                } finally {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$dispose();
                     }
@@ -578,7 +578,7 @@
                             return false;
                         }
                     }
-                }finally {
+                } finally {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$dispose();
                     }
@@ -594,7 +594,7 @@
                             return false;
                         }
                     }
-                }finally {
+                } finally {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$dispose();
                     }
@@ -626,7 +626,7 @@
                             bitHelper.markBit(index);
                         }
                     }
-                }finally {
+                } finally {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$dispose();
                     }
@@ -655,7 +655,7 @@
                             this.addIfNotPresent(item);
                         }
                     }
-                }finally {
+                } finally {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$dispose();
                     }
@@ -684,7 +684,7 @@
                             }
                         }
                     }
-                }finally {
+                } finally {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$dispose();
                     }
@@ -736,7 +736,7 @@
                             numElementsInOther = (numElementsInOther + 1) | 0;
                             break;
                         }
-                    }finally {
+                    } finally {
                         if (Bridge.is($t, System.IDisposable)) {
                             $t.System$IDisposable$dispose();
                         }
@@ -768,7 +768,7 @@
                             }
                         }
                     }
-                }finally {
+                } finally {
                     if (Bridge.is($t1, System.IDisposable)) {
                         $t1.System$IDisposable$dispose();
                     }

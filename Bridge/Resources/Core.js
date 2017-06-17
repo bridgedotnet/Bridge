@@ -105,11 +105,21 @@
             return o;
         },
 
-        getInterface: function (name) {
+        virtualc: function (name) {
+            return Bridge.virtual(name, true);
+        },
+
+        virtual: function (name, isClass) {
             var type = Bridge.unroll(name);
 
             if (!type) {
-                type = Bridge.definei(name);
+                var old = Bridge.Class.staticInitAllow;
+                type = isClass ? Bridge.define(name) : Bridge.definei(name);
+                Bridge.Class.staticInitAllow = true;
+                if (type.$staticInit) {
+                    type.$staticInit();
+                }
+                Bridge.Class.staticInitAllow = old;
             }
 
             return type;

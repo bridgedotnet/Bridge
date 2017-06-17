@@ -125,7 +125,7 @@ namespace Bridge.Translator
 
                     foreach (var fn in injectors)
                     {
-                        this.Write(fn);
+                        this.Write(WriteIndentToString(fn, this.Level - 1));
                         this.WriteNewLine();
                     }
                     this.EndBlock();
@@ -249,7 +249,7 @@ namespace Bridge.Translator
 
                 foreach (var fn in injectors)
                 {
-                    this.Write(fn);
+                    this.Write(WriteIndentToString(fn, this.Level - 1));
                     this.WriteNewLine();
                 }
 

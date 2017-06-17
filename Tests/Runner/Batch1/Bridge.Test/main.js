@@ -45,7 +45,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                     var fixtureContext = instance.GetContext();
 
                     if (testContext != null || fixtureContext != null) {
-                        Bridge.Test.Runtime.ContextHelper.SetContext(assert, ($t=new Bridge.Test.Runtime.Context(), $t.FixtureCtx = fixtureContext, $t.TestCtx = testContext, $t));
+                        Bridge.Test.Runtime.ContextHelper.SetContext(assert, ($t = new Bridge.Test.Runtime.Context(), $t.FixtureCtx = fixtureContext, $t.TestCtx = testContext, $t));
                     }
 
                     try {
@@ -301,7 +301,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                             }
 
                         }
-                    }finally {
+                    } finally {
                         if (Bridge.is($t, System.IDisposable)) {
                             $t.System$IDisposable$dispose();
                         }
@@ -363,91 +363,63 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 Async: function () {
                     return Bridge.Test.NUnit.Assert.assert.async();
                 },
-                AreEqual: function (expected, actual) {
-                    Bridge.Test.NUnit.Assert.SetStack();
-                    Bridge.Test.NUnit.Assert.assert.deepEqual(Bridge.unbox(actual), Bridge.unbox(expected));
-                },
-                AreEqual$1: function (expected, actual, description) {
+                AreEqual: function (expected, actual, description) {
+                    if (description === void 0) { description = null; }
                     Bridge.Test.NUnit.Assert.SetStack();
                     Bridge.Test.NUnit.Assert.assert.deepEqual(Bridge.unbox(actual), Bridge.unbox(expected), description);
                 },
-                AreDeepEqual: function (expected, actual) {
-                    Bridge.Test.NUnit.Assert.SetStack();
-                    Bridge.Test.NUnit.Assert.assert.deepEqual(Bridge.unbox(actual), Bridge.unbox(expected));
-                },
-                AreDeepEqual$1: function (expected, actual, description) {
+                AreDeepEqual: function (expected, actual, description) {
+                    if (description === void 0) { description = null; }
                     Bridge.Test.NUnit.Assert.SetStack();
                     Bridge.Test.NUnit.Assert.assert.deepEqual(Bridge.unbox(actual), Bridge.unbox(expected), description);
                 },
-                AreStrictEqual: function (expected, actual) {
-                    Bridge.Test.NUnit.Assert.SetStack();
-                    Bridge.Test.NUnit.Assert.assert.strictEqual(Bridge.unbox(actual), Bridge.unbox(expected));
-                },
-                AreStrictEqual$1: function (expected, actual, description) {
+                AreStrictEqual: function (expected, actual, description) {
+                    if (description === void 0) { description = null; }
                     Bridge.Test.NUnit.Assert.SetStack();
                     Bridge.Test.NUnit.Assert.assert.strictEqual(Bridge.unbox(actual), Bridge.unbox(expected), description);
                 },
-                AreNotEqual: function (expected, actual) {
-                    Bridge.Test.NUnit.Assert.SetStack();
-                    Bridge.Test.NUnit.Assert.assert.notDeepEqual(Bridge.unbox(actual), Bridge.unbox(expected));
-                },
-                AreNotEqual$1: function (expected, actual, description) {
+                AreNotEqual: function (expected, actual, description) {
+                    if (description === void 0) { description = null; }
                     Bridge.Test.NUnit.Assert.SetStack();
                     Bridge.Test.NUnit.Assert.assert.notDeepEqual(Bridge.unbox(actual), Bridge.unbox(expected), description);
                 },
-                AreNotDeepEqual: function (expected, actual) {
-                    Bridge.Test.NUnit.Assert.SetStack();
-                    Bridge.Test.NUnit.Assert.assert.notDeepEqual(Bridge.unbox(actual), Bridge.unbox(expected));
-                },
-                AreNotDeepEqual$1: function (expected, actual, description) {
+                AreNotDeepEqual: function (expected, actual, description) {
+                    if (description === void 0) { description = null; }
                     Bridge.Test.NUnit.Assert.SetStack();
                     Bridge.Test.NUnit.Assert.assert.notDeepEqual(Bridge.unbox(actual), Bridge.unbox(expected), description);
                 },
-                AreNotStrictEqual: function (expected, actual) {
-                    Bridge.Test.NUnit.Assert.SetStack();
-                    Bridge.Test.NUnit.Assert.assert.notStrictEqual(Bridge.unbox(actual), Bridge.unbox(expected));
-                },
-                AreNotStrictEqual$1: function (expected, actual, description) {
+                AreNotStrictEqual: function (expected, actual, description) {
+                    if (description === void 0) { description = null; }
                     Bridge.Test.NUnit.Assert.SetStack();
                     Bridge.Test.NUnit.Assert.assert.notStrictEqual(Bridge.unbox(actual), Bridge.unbox(expected), description);
                 },
-                True: function (condition) {
-                    Bridge.Test.NUnit.Assert.SetStack();
-                    Bridge.Test.NUnit.Assert.assert.ok(condition);
-                },
-                True$1: function (condition, message) {
+                True: function (condition, message) {
+                    if (message === void 0) { message = null; }
                     Bridge.Test.NUnit.Assert.SetStack();
                     Bridge.Test.NUnit.Assert.assert.ok(condition, message);
                 },
-                False: function (condition) {
-                    Bridge.Test.NUnit.Assert.SetStack();
-                    Bridge.Test.NUnit.Assert.assert.notOk(condition);
-                },
-                False$1: function (condition, message) {
+                False: function (condition, message) {
+                    if (message === void 0) { message = null; }
                     Bridge.Test.NUnit.Assert.SetStack();
                     Bridge.Test.NUnit.Assert.assert.notOk(condition, message);
                 },
-                Fail: function () {
-                    Bridge.Test.NUnit.Assert.SetStack();
-                    Bridge.Test.NUnit.Assert.assert.ok(false);
-                },
-                Fail$1: function (message) {
+                Fail: function (message) {
+                    if (message === void 0) { message = null; }
                     Bridge.Test.NUnit.Assert.SetStack();
                     Bridge.Test.NUnit.Assert.assert.notOk(true, message);
                 },
-                Throws: function (block) {
-                    Bridge.Test.NUnit.Assert.SetStack();
-                    Bridge.Test.NUnit.Assert.assert.throws(block, "");
-                },
-                Throws$5: function (block, message) {
+                Throws$1: function (block, message) {
+                    if (message === void 0) { message = ""; }
                     Bridge.Test.NUnit.Assert.SetStack();
                     Bridge.Test.NUnit.Assert.assert.throws(block, message);
                 },
-                Throws$6: function (T, block) {
-                    Bridge.Test.NUnit.Assert.Throws$7(T, block, "", 1);
-                },
-                Throws$7: function (T, block, message, stackOffset) {
+                Throws$2: function (T, block, message, stackOffset) {
+                    if (message === void 0) { message = ""; }
                     if (stackOffset === void 0) { stackOffset = 0; }
+                    if (Bridge.referenceEquals(message, "") && stackOffset === 0) {
+                        stackOffset = 1;
+                    }
+
                     var actual = null;
                     var expected = Bridge.Reflection.getTypeFullName(T);
 
@@ -467,35 +439,23 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                         Bridge.Test.NUnit.Assert.assert.ok(true, message);
                     }
                 },
-                Throws$3: function (block, expected) {
-                    Bridge.Test.NUnit.Assert.SetStack();
-                    Bridge.Test.NUnit.Assert.assert.throws(block, Bridge.unbox(expected));
-                },
-                Throws$4: function (block, expected, message) {
+                Throws$3: function (block, expected, message) {
+                    if (message === void 0) { message = null; }
                     Bridge.Test.NUnit.Assert.SetStack();
                     Bridge.Test.NUnit.Assert.assert.throws(block, Bridge.unbox(expected), message);
                 },
-                Throws$1: function (block, expected) {
-                    Bridge.Test.NUnit.Assert.SetStack();
-                    Bridge.Test.NUnit.Assert.assert.throws(block, expected);
-                },
-                Throws$2: function (block, expected, message) {
+                Throws$4: function (block, expected, message) {
+                    if (message === void 0) { message = null; }
                     Bridge.Test.NUnit.Assert.SetStack();
                     Bridge.Test.NUnit.Assert.assert.throws(block, expected, message);
                 },
-                Null: function (anObject) {
-                    Bridge.Test.NUnit.Assert.SetStack();
-                    Bridge.Test.NUnit.Assert.assert.ok(anObject == null);
-                },
-                Null$1: function (anObject, message) {
+                Null: function (anObject, message) {
+                    if (message === void 0) { message = null; }
                     Bridge.Test.NUnit.Assert.SetStack();
                     Bridge.Test.NUnit.Assert.assert.ok(anObject == null, message);
                 },
-                NotNull: function (anObject) {
-                    Bridge.Test.NUnit.Assert.SetStack();
-                    Bridge.Test.NUnit.Assert.assert.notOk(anObject == null);
-                },
-                NotNull$1: function (anObject, message) {
+                NotNull: function (anObject, message) {
+                    if (message === void 0) { message = null; }
                     Bridge.Test.NUnit.Assert.SetStack();
                     Bridge.Test.NUnit.Assert.assert.notOk(anObject == null, message);
                 }
