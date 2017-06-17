@@ -105,11 +105,15 @@
             return o;
         },
 
-        getInterface: function (name) {
+        virtualc: function (name) {
+            return Bridge.virtual(name, true);
+        },
+
+        virtual: function (name, isClass) {
             var type = Bridge.unroll(name);
 
             if (!type) {
-                type = Bridge.definei(name);
+                type = isClass ? Bridge.define(name) : Bridge.definei(name);
             }
 
             return type;

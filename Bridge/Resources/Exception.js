@@ -156,29 +156,19 @@ Bridge.define("System.Exception", {
             }
         },
 
-        ctor: function () {
+        ctor: function (message, innerException, matchTimeout) {
             this.$initialize();
-            System.TimeoutException.ctor.call(this);
-        },
 
-        $ctor1: function (message) {
-            this.$initialize();
-            System.TimeoutException.ctor.call(this, message);
-        },
+            if (arguments.length == 3) {
+                this._regexInput = message;
+                this._regexPattern = innerException;
+                this._matchTimeout = matchTimeout;
 
-        $ctor2: function (message, innerException) {
-            this.$initialize();
+                message = "The RegEx engine has timed out while trying to match a pattern to an input string. This can occur for many reasons, including very large inputs or excessive backtracking caused by nested quantifiers, back-references and other factors.";
+                innerException = null;
+            }
+
             System.TimeoutException.ctor.call(this, message, innerException);
-        },
-
-        $ctor3: function (regexInput, regexPattern, matchTimeout) {
-            this.$initialize();
-            this._regexInput = regexInput;
-            this._regexPattern = regexPattern;
-            this._matchTimeout = matchTimeout;
-
-            var message = "The RegEx engine has timed out while trying to match a pattern to an input string. This can occur for many reasons, including very large inputs or excessive backtracking caused by nested quantifiers, back-references and other factors.";
-            this.$ctor1(message);
         },
 
         getPattern: function () {

@@ -23,6 +23,8 @@ namespace Bridge.Translator.Constants
             public const string OBJECT_LITERAL_INTERFACE_INHERITANCE = "[ObjectLiteral] should implement an interface which must be object literal also: {0}";
 
             public const string DYNAMIC_INVOCATION_TOO_MANY_OVERLOADS = "Cannot compile this dynamic invocation because there are two or more method overloads with the same parameter count. To work around this limitation, assign the dynamic value to a non-dynamic variable before use or call a method with different parameter count";
+
+            public const string VIRTUAL_CLASS_NO_NESTED_TYPES = "Virtual class {0} cannot have nested types";
         }
     }
 }

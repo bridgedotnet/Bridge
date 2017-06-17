@@ -279,7 +279,8 @@
                 public const string GET_TYPE_ALIAS = DOTNAME + "getTypeAlias";
                 public const string DEFINE = DOTNAME + "define";
                 public const string DEFINE_I = DOTNAME + "definei";
-                public const string GET_INTERFACE = DOTNAME + "getInterface";
+                public const string GET_INTERFACE = DOTNAME + "virtual";
+                public const string GET_CLASS = DOTNAME + "virtualc";
                 public const string INIT = DOTNAME + "init";
                 public const string BOX = DOTNAME + "box";
                 public const string UNBOX = DOTNAME + "unbox";
