@@ -242,11 +242,17 @@ namespace Bridge.Translator
                 }
 
                 string tpl = null;
+                IMember templateMember = null;
                 MemberResolveResult init_rr = null;
                 if (isField && member.VarInitializer != null)
                 {
                     init_rr = this.Emitter.Resolver.ResolveNode(member.VarInitializer, this.Emitter) as MemberResolveResult;
                     tpl = init_rr != null ? this.Emitter.GetInline(init_rr.Member) : null;
+
+                    if (tpl != null)
+                    {
+                        templateMember = init_rr.Member;
+                    }
                 }
 
                 bool isAutoProperty = false;
@@ -382,6 +388,7 @@ namespace Bridge.Translator
                                 }
                             }
 
+                            tpl = InlineArgumentsBlock.ConvertTokens(this.Emitter, tpl, templateMember);
                             tpl = tpl.Replace("{this}", "this").Replace("{0}", v);
 
                             if (!tpl.EndsWith(";"))

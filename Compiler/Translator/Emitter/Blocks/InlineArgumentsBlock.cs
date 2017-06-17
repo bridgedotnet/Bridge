@@ -1,3 +1,4 @@
+using System;
 using Bridge.Contract;
 using Bridge.Contract.Constants;
 using ICSharpCode.NRefactory.CSharp;
@@ -240,6 +241,21 @@ namespace Bridge.Translator
 
         protected virtual void EmitInlineExpressionList(ArgumentsInfo argsInfo, string inline, bool asRef = false, bool isNull = false, bool? definition = null)
         {
+            IMember member = this.Method ?? argsInfo.Method ?? argsInfo.ResolveResult?.Member;
+            if (member == null && argsInfo.Expression != null && argsInfo.Expression.Parent != null)
+            {
+                var rre = this.Emitter.Resolver.ResolveNode(argsInfo.Expression, this.Emitter) as MemberResolveResult;
+                if (rre != null)
+                {
+                    member = rre.Member;
+                }
+            }
+
+            if (member != null)
+            {
+                inline = InlineArgumentsBlock.ConvertTokens(this.Emitter, inline, member);
+            }
+
             IEnumerable<NamedParamExpression> expressions = argsInfo.NamedExpressions;
             IEnumerable<TypeParamExpression> typeParams = argsInfo.TypeArguments;
             bool addClose = false;
@@ -1347,6 +1363,23 @@ namespace Bridge.Translator
                             memberTargetrr.TargetResult is LocalResolveResult);
 
             return rr is ThisResolveResult || rr is ConstantResolveResult || rr is LocalResolveResult || isField;
+        }
+
+        public static bool HasThis(string template)
+        {
+            return template.IndexOf("{this}", StringComparison.Ordinal) > -1 || template.IndexOf("{$}", StringComparison.Ordinal) > -1;
+        }
+
+        public static string ConvertTokens(IEmitter emitter, string template, IMember member)
+        {
+            string name = OverloadsCollection.Create(emitter, member).GetOverloadName(true);
+            return template.Replace("{@}", name).Replace("{$}", "{this}." + name);
+        }
+
+        public static string ReplaceThis(IEmitter emitter, string template, string replacer, IMember member)
+        {
+            template = InlineArgumentsBlock.ConvertTokens(emitter, template, member);
+            return template.Replace("{this}", replacer);
         }
     }
 }
