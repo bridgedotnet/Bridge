@@ -20,13 +20,13 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                                     var y = $t1.Current;
                                     doSomething = System.String.equals(x, y);
                                 }
-                            }finally {
+                            } finally {
                                 if (Bridge.is($t1, System.IDisposable)) {
                                     $t1.System$IDisposable$dispose();
                                 }
                             }
                         }
-                    }finally {
+                    } finally {
                         if (Bridge.is($t, System.IDisposable)) {
                             $t.System$IDisposable$dispose();
                         }
@@ -41,13 +41,13 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                                     var y1 = $t3.Current;
                                     doSomething = System.String.equals(x1, y1);
                                 }
-                            }finally {
+                            } finally {
                                 if (Bridge.is($t3, System.IDisposable)) {
                                     $t3.System$IDisposable$dispose();
                                 }
                             }
                         }
-                    }finally {
+                    } finally {
                         if (Bridge.is($t2, System.IDisposable)) {
                             $t2.System$IDisposable$dispose();
                         }

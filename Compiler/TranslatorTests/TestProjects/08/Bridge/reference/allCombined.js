@@ -443,7 +443,7 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                         var item = $t.Current;
                         el.setAttribute(item.key, item.value);
                     }
-                }finally {
+                } finally {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$dispose();
                     }
@@ -458,7 +458,7 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                         var item = $t.Current;
                         str = System.String.concat(str, (System.String.concat(item.key.toLowerCase(), ":", item.value, ";")));
                     }
-                }finally {
+                } finally {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$dispose();
                     }
