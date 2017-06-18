@@ -20,6 +20,7 @@ using System.Runtime;
 //using System.Runtime.Serialization;
 using System.Text;
 using System.Diagnostics.Contracts;
+using Bridge;
 
 namespace System.IO
 {
@@ -29,6 +30,7 @@ namespace System.IO
     //
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
+    [FileName("io.js")]
     public class BinaryWriter : IDisposable
     {
         public static readonly BinaryWriter Null = new BinaryWriter();
