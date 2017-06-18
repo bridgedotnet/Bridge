@@ -840,10 +840,17 @@ namespace Bridge.Translator
                 (resolveResult != null && resolveResult.Type != null && resolveResult.Type.FullName == (Translator.Bridge_ASSEMBLY + ".ModuleAttribute")))
             {
                 Module module = null;
-
-                if (attr.Arguments.Count == 1)
+                var args = ((InvocationResolveResult) resolveResult).Arguments.Select(a=> a.ConstantValue).ToList();
+                var positionArgs =
+                    ((InvocationResolveResult) resolveResult).InitializerStatements.Select(s => new
+                    {
+                        Name = ((MemberResolveResult)((OperatorResolveResult)s).Operands[0]).Member.Name,
+                        Value = ((OperatorResolveResult)s).Operands[1].ConstantValue
+                    }).ToList();
+                
+                if (args.Count == 1)
                 {
-                    var obj = this.GetAttributeArgumentValue(attr, resolveResult, 0);
+                    var obj = args[0];
 
                     if (obj is bool)
                     {
@@ -862,10 +869,10 @@ namespace Bridge.Translator
                         module = new Module();
                     }
                 }
-                else if (attr.Arguments.Count == 2)
+                else if (args.Count == 2)
                 {
-                    var first = this.GetAttributeArgumentValue(attr, resolveResult, 0);
-                    var second = this.GetAttributeArgumentValue(attr, resolveResult, 1);
+                    var first = args[0];
+                    var second = args[1];
 
                     if (first is string)
                     {
@@ -889,17 +896,32 @@ namespace Bridge.Translator
                         module = new Module(mname != null ? mname.ToString() : "", (ModuleType)(int)mtype);
                     }
                 }
-                else if (attr.Arguments.Count == 3)
+                else if (args.Count == 3)
                 {
-                    var mtype = this.GetAttributeArgumentValue(attr, resolveResult, 0);
-                    var mname = this.GetAttributeArgumentValue(attr, resolveResult, 1);
-                    var preventName = this.GetAttributeArgumentValue(attr, resolveResult, 2);
+                    var mtype = args[0];
+                    var mname = args[1];
+                    var preventName = args[2];
 
                     module = new Module(mname != null ? mname.ToString() : "", (ModuleType)(int)mtype, (bool)preventName);
                 }
                 else
                 {
                     module = new Module();
+                }
+
+                if (positionArgs.Count > 0)
+                {
+                    foreach (var arg in positionArgs)
+                    {
+                        if (arg.Name == "Name")
+                        {
+                            module.Name = arg.Value != null ? (string)arg.Value : "";
+                        }
+                        else if (arg.Name == "ExportAsNamespace")
+                        {
+                            module.ExportAsNamespace = arg.Value != null ? (string)arg.Value : "";
+                        }
+                    }
                 }
 
                 this.AssemblyInfo.Module = module;
