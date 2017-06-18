@@ -22678,6 +22678,30 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2792", {
+        statics: {
+            methods: {
+                TestOverridenReadOnlyProperty: function () {
+                    var b = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2792.B();
+                    Bridge.Test.NUnit.Assert.AreEqual("Pass", b.Name);
+                    Bridge.Test.NUnit.Assert.AreEqual("Fail", b.BaseName);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2792.A", {
+        props: {
+            Name: null
+        },
+        ctors: {
+            ctor: function () {
+                this.$initialize();
+                Bridge.ensureBaseProperty(this, "Name").$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2792$A$Name = "Fail";
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2793", {
         statics: {
             methods: {
@@ -32596,6 +32620,22 @@ Bridge.$N1391Result =                     r;
         methods: {
             toString: function () {
                 return System.String.format("{0} - {1}", Bridge.box(this.X, System.Int32), Bridge.box(this.Y, System.Int32));
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2792.B", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2792.A],
+        props: {
+            Name: {
+                get: function () {
+                    return "Pass";
+                }
+            },
+            BaseName: {
+                get: function () {
+                    return Bridge.ensureBaseProperty(this, "Name").$Bridge$ClientTest$Batch3$BridgeIssues$Bridge2792$A$Name;
+                }
             }
         }
     });
