@@ -21872,6 +21872,35 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2693", {
+        statics: {
+            methods: {
+                TestListCapacity: function () {
+                    var parts = new (System.Collections.Generic.List$1(System.Int32))();
+
+                    Bridge.Test.NUnit.Assert.AreEqual(0, parts.Capacity);
+
+                    parts.add(1);
+                    parts.add(2);
+                    parts.add(3);
+                    parts.add(4);
+                    parts.add(5);
+
+                    Bridge.Test.NUnit.Assert.AreEqual(8, parts.Capacity);
+                    Bridge.Test.NUnit.Assert.AreEqual(5, parts.Count);
+
+                    parts.trimExcess();
+                    Bridge.Test.NUnit.Assert.AreEqual(5, parts.Capacity);
+                    Bridge.Test.NUnit.Assert.AreEqual(5, parts.Count);
+
+                    parts.clear();
+                    Bridge.Test.NUnit.Assert.AreEqual(5, parts.Capacity);
+                    Bridge.Test.NUnit.Assert.AreEqual(0, parts.Count);
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2703", {
         statics: {
             methods: {

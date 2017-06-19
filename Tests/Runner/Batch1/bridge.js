@@ -11739,6 +11739,20 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                       get: function () {
                           return this.getIsReadOnly();
                       }
+                  },
+
+                  Capacity: {
+                      get: function() {
+                          return this._capacity;
+                      },
+
+                      set: function (value) {
+                          if (value < this.items.length) {
+                              throw new System.ArgumentOutOfRangeException("Capacity is set to a value that is less than Count.");
+                          }
+
+                          this._capacity = value;
+                      }
                   }
                 },
                 alias: [
@@ -11792,6 +11806,12 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                     this.items = [];
                 }
 
+                if (Bridge.isNumber(obj)) {
+                    this._capacity = obj;
+                } else {
+                    this._capacity = this.items.length;
+                }
+                
                 this.clear.$clearCallbacks = [];
             },
 
@@ -11829,17 +11849,34 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 this.set(index, value);
             },
 
+            ensureCapacity: function(min) {
+                if (this.items.length < min) {
+                    var newCapacity = this.items.length == 0 ? 4 : this.items.length * 2;
+                    this.Capacity = newCapacity;
+                }
+            },
+
+            trimExcess: function () {
+                var threshold = Bridge.Int.clip32(this.Capacity * 0.9);
+                if (this.items.length < threshold) {
+                    this.Capacity = this.items.length;                
+                }
+            }, 
+
             add: function (value) {
                 this.checkReadOnly();
+                this.ensureCapacity(this.items.length + 1);
                 this.items.push(value);
             },
 
             addRange: function (items) {
                 this.checkReadOnly();
-
+                
                 var array = Bridge.toArray(items),
                     i,
                     len;
+
+                this.ensureCapacity(this.items.length + array.length);
 
                 for (i = 0, len = array.length; i < len; ++i) {
                     this.items.push(array[i]);
@@ -11889,7 +11926,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 }
 
                 var array = Bridge.toArray(items);
-
+                this.ensureCapacity(this.items.length + array.length);
                 for (var i = 0; i < array.length; i++) {
                     this.insert(index++, array[i]);
                 }
@@ -11940,10 +11977,12 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 }
 
                 if (Bridge.isArray(item)) {
+                    this.ensureCapacity(this.items.length + item.length);
                     for (var i = 0; i < item.length; i++) {
                         this.insert(index++, item[i]);
                     }
                 } else {
+                    this.ensureCapacity(this.items.length + 1);
                     this.items.splice(index, 0, item);
                 }
             },
