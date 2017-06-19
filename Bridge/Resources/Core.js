@@ -139,6 +139,10 @@
             return obj;
         },
 
+        isJSObject: function(value) {
+            return Object.prototype.toString.call(value) === '[object Object]';
+        },
+
         isPlainObject: function (obj) {
             if (typeof obj == 'object' && obj !== null) {
                 if (typeof Object.getPrototypeOf == 'function') {

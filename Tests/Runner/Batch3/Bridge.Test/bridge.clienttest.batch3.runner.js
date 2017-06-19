@@ -587,6 +587,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#2770 - TestExternalMethodName", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2770.TestExternalMethodName);
             QUnit.test("#2770 - TestExternalMethodOverload", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2770.TestExternalMethodOverload);
             QUnit.test("#2770 - TestExternalClass", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2770.TestExternalClass);
+            QUnit.test("#2792 - TestOverridenReadOnlyProperty", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2792.TestOverridenReadOnlyProperty);
             QUnit.test("#2793 - TestAsyncBlockStatement", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2793.TestAsyncBlockStatement);
             QUnit.test("#2794 - TestTemplateTokens", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2794.TestTemplateTokens);
             QUnit.test("#2794 - TestNameTokens", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2794.TestNameTokens);
@@ -11896,6 +11897,31 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 var $t;
                 if (this.context == null) {
                     this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2770", $t.File = "Batch3\\BridgeIssues\\2700\\N2770.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2792", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2792)],
+        statics: {
+            methods: {
+                TestOverridenReadOnlyProperty: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2792).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2792, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestOverridenReadOnlyProperty()", $t.Line = "28", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2792.TestOverridenReadOnlyProperty();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2792", $t.File = "Batch3\\BridgeIssues\\2700\\N2792.cs", $t);
                 }
                 return this.context;
             }

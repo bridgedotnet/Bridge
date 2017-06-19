@@ -300,6 +300,7 @@ namespace Bridge.Translator
                 this.BeginBlock();
             }
 
+            this.Emitter.InConstructor = true;
             foreach (var ctor in this.TypeInfo.Ctors)
             {
                 this.EnsureComma();
@@ -522,6 +523,8 @@ namespace Bridge.Translator
                 this.ClearLocalsMap(prevMap);
                 this.ClearLocalsNamesMap(prevNamesMap);
             }
+
+            this.Emitter.InConstructor = false;
 
             if (this.ctorHeader)
             {
