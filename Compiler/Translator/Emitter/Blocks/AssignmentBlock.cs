@@ -224,7 +224,7 @@ namespace Bridge.Translator
                 this.Emitter.AssignmentType = AssignmentOperatorType.Assign;
                 var oldValue1 = this.Emitter.ReplaceAwaiterByVar;
                 this.Emitter.ReplaceAwaiterByVar = true;
-                assignmentExpression.Left.AcceptVisitor(this.Emitter);
+                this.AcceptLeftExpression(assignmentExpression.Left, memberTargetrr);
 
                 if (this.Emitter.Writers.Count == initCount)
                 {
@@ -295,7 +295,7 @@ namespace Bridge.Translator
                     {
                         this.Emitter.IsAssignment = true;
                         this.Emitter.AssignmentType = AssignmentOperatorType.Assign;
-                        assignmentExpression.Left.AcceptVisitor(this.Emitter);
+                        this.AcceptLeftExpression(assignmentExpression.Left, memberTargetrr);
                         this.Emitter.IsAssignment = false;
 
                         if (this.Emitter.Writers.Count == initCount)
@@ -333,7 +333,7 @@ namespace Bridge.Translator
                     this.Emitter.IsAssignment = false;
                 }
 
-                assignmentExpression.Left.AcceptVisitor(this.Emitter);
+                this.AcceptLeftExpression(assignmentExpression.Left, memberTargetrr);
 
                 if (delegateAssigment)
                 {
@@ -672,6 +672,46 @@ namespace Bridge.Translator
                 }
 
                 this.Write(")");
+            }
+        }
+
+        private void AcceptLeftExpression(Expression left, ResolveResult rr)
+        {
+            var mrr = rr as MemberResolveResult;
+            if (!this.Emitter.InConstructor || mrr == null || !(mrr.Member is IProperty) || mrr.Member.IsStatic || mrr.Member.DeclaringTypeDefinition == null || !mrr.Member.DeclaringTypeDefinition.Equals(this.Emitter.TypeInfo.Type))
+            {
+                left.AcceptVisitor(this.Emitter);
+            }
+            else
+            {
+                var property = (IProperty)mrr.Member;
+                var proto = mrr.IsVirtualCall || property.IsVirtual || property.IsOverride;
+
+                var td = this.Emitter.GetTypeDefinition();
+                var prop = td.Properties.FirstOrDefault(p => p.Name == mrr.Member.Name);
+
+                if (proto && prop != null && prop.SetMethod == null)
+                {
+                    var name = OverloadsCollection.Create(this.Emitter, mrr.Member).GetOverloadName();
+                    this.Write(JS.Types.Bridge.ENSURE_BASE_PROPERTY + "(this, \"" + name + "\")");
+                    this.WriteDot();
+                    var alias = BridgeTypes.ToJsName(mrr.Member.DeclaringType, this.Emitter, isAlias: true);
+                    if (alias.StartsWith("\""))
+                    {
+                        alias = alias.Insert(1, "$");
+                        name = alias + "+\"$" + name + "\"";
+                        this.WriteIdentifier(name, false);
+                    }
+                    else
+                    {
+                        name = "$" + alias + "$" + name;
+                        this.WriteIdentifier(name);
+                    }
+                }
+                else
+                {
+                    left.AcceptVisitor(this.Emitter);
+                }
             }
         }
 
