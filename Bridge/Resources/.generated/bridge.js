@@ -11894,7 +11894,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
             addRange: function (items) {
                 this.checkReadOnly();
-                
+
                 var array = Bridge.toArray(items),
                     i,
                     len;

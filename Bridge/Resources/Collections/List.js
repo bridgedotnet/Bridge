@@ -147,7 +147,7 @@
 
             addRange: function (items) {
                 this.checkReadOnly();
-                
+
                 var array = Bridge.toArray(items),
                     i,
                     len;
