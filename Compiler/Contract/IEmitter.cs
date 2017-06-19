@@ -516,5 +516,7 @@ namespace Bridge.Contract
         {
             get;
         }
+
+        bool InConstructor { get; set; }
     }
 }

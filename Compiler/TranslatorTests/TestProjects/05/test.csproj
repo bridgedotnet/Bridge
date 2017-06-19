@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="BridgeIssues\N772.cs" />
     <Compile Include="BridgeIssues\N783.cs" />
+    <Compile Include="BridgeIssues\N2806.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestClassB.cs" />
     <Compile Include="TestClassA.cs" />

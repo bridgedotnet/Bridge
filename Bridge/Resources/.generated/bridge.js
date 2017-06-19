@@ -158,6 +158,10 @@
             return obj;
         },
 
+        isJSObject: function(value) {
+            return Object.prototype.toString.call(value) === '[object Object]';
+        },
+
         isPlainObject: function (obj) {
             if (typeof obj == 'object' && obj !== null) {
                 if (typeof Object.getPrototypeOf == 'function') {
@@ -2257,8 +2261,27 @@
             var props = config.properties;
             if (props) {
                 for (name in props) {
-                    var cfg = Bridge.property(statics ? scope : prototype, name, props[name], statics, cls);
+                    var v = props[name],
+                        d,
+                        cfg;
 
+                    if (v != null && Bridge.isJSObject(v) && (!v.get || !v.set)) {
+                        for (var k = 0; k < descriptors.length; k++) {
+                            if (descriptors[k].name === name) {
+                                d = descriptors[k];
+                            }
+                        }
+
+                        if (d && d.get && !v.get) {
+                            v.get = Bridge.emptyFn;
+                        }
+
+                        if (d && d.set && !v.set) {
+                            v.set = Bridge.emptyFn;
+                        }
+                    }
+
+                    cfg = Bridge.property(statics ? scope : prototype, name, v, statics, cls);
                     cfg.name = name;
                     cfg.cls = cls;
 
