@@ -15,7 +15,7 @@
     <copyright>Copyright (c) 2008-2017, Object.NET, Inc. (http://object.net/). All rights reserved.</copyright>
     <tags>bridge bridge.net bridge js javascript C# csharp mobile ios asp.net aspnet mvc aspnetmvc web transpiler compiler object.net</tags>
     <dependencies>
-      <dependency id="Bridge.Core" version="16.0.0-beta2" />
+      <dependency id="Bridge.Core" version="16.0.0-beta3" />
     </dependencies>
     <frameworkAssemblies>
     </frameworkAssemblies>

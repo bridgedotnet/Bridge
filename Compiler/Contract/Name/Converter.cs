@@ -145,19 +145,24 @@ namespace Bridge.Contract
         public static string Convert(NameSemantic semantic)
         {
             var rules = NameConvertor.GetRules(semantic);
-
+            string customName = null;
             foreach (var rule in rules)
             {
                 if (NameConvertor.IsRuleAcceptable(semantic, rule))
                 {
-                    return NameConvertor.ApplyRule(semantic, rule);
+                    if (!string.IsNullOrWhiteSpace(rule.CustomName))
+                    {
+                        customName = rule.CustomName;
+                        continue;
+                    }
+                    return NameConvertor.ApplyRule(semantic, rule, customName);
                 }
             }
 
-            return NameConvertor.ApplyRule(semantic, null);
+            return NameConvertor.ApplyRule(semantic, null, customName);
         }
 
-        private static string ApplyRule(NameSemantic semantic, NameRule rule)
+        private static string ApplyRule(NameSemantic semantic, NameRule rule, string customName)
         {
             semantic.AppliedRule = rule;
             var name = semantic.DefaultName;
@@ -166,7 +171,7 @@ namespace Bridge.Contract
             {
                 if (!string.IsNullOrWhiteSpace(rule.CustomName))
                 {
-                    return rule.CustomName;
+                    customName = rule.CustomName;
                 }
 
                 switch (rule.Notation)
@@ -215,6 +220,11 @@ namespace Bridge.Contract
                     default:
                         throw new ArgumentOutOfRangeException(nameof(rule.Notation), rule.Notation, null);
                 }
+            }
+
+            if (!string.IsNullOrWhiteSpace(customName))
+            {
+                name = Helpers.ConvertNameTokens(customName, name);
             }
 
             if (semantic.Entity is IMember)
@@ -546,7 +556,7 @@ namespace Bridge.Contract
                 }
                 else if (value is string)
                 {
-                    rule.CustomName = (string) value;
+                    rule.CustomName = (string)value;
                 }
                 semantic.IsCustomName = true;
                 rules.Add(rule);

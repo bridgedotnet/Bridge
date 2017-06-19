@@ -14,7 +14,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                         var v = $t.Current;
 
                     }
-                }finally {
+                } finally {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$dispose();
                     }
@@ -35,7 +35,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                         var v = $t.Current;
 
                     }
-                }finally {
+                } finally {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$dispose();
                     }
@@ -56,7 +56,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                             var v = $t.Current;
 
                         }
-                    }finally {
+                    } finally {
                         if (Bridge.is($t, System.IDisposable)) {
                             $t.System$IDisposable$dispose();
                         }
@@ -78,7 +78,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                             var v = $t.Current;
 
                         }
-                    }finally {
+                    } finally {
                         if (Bridge.is($t, System.IDisposable)) {
                             $t.System$IDisposable$dispose();
                         }

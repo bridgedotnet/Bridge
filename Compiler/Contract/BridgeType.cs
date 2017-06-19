@@ -689,6 +689,21 @@ namespace Bridge.Contract
                 module = new Module();
             }
 
+            if (attr.NamedArguments.Count > 0)
+            {
+                foreach (var namedArgument in attr.NamedArguments)
+                {
+                    if (namedArgument.Key.Name == "Name")
+                    {
+                        module.Name = namedArgument.Value.ConstantValue != null ? (string)namedArgument.Value.ConstantValue : "";
+                    }
+                    else if (namedArgument.Key.Name == "ExportAsNamespace")
+                    {
+                        module.ExportAsNamespace = namedArgument.Value.ConstantValue != null ? (string)namedArgument.Value.ConstantValue : "";
+                    }
+                }
+            }
+
             type.Module = module;
         }
 
@@ -714,7 +729,7 @@ namespace Bridge.Contract
             {
                 if (!module.PreventModuleName || type.TypeInfo != null)
                 {
-                    moduleName = module.Name;
+                    moduleName = module.ExportAsNamespace;
                 }
 
                 EnsureDependencies(type, emitter, currentTypeInfo, module);
@@ -746,6 +761,7 @@ namespace Bridge.Contract
                 emitter.CurrentDependencies.Add(new ModuleDependency
                 {
                     DependencyName = module.Name,
+                    VariableName = module.ExportAsNamespace,
                     Type = module.Type,
                     PreventName = module.PreventModuleName
                 });

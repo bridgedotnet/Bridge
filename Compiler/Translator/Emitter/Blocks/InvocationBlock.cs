@@ -195,7 +195,7 @@ namespace Bridge.Translator
                     if (!String.IsNullOrEmpty(inlineScript) && (isBase || invocationExpression.Target is IdentifierExpression))
                     {
                         argsInfo.ThisArgument = "this";
-                        bool noThis = !inlineScript.Contains("{this}");
+                        bool noThis = !Helpers.HasThis(inlineScript);
 
                         if (inlineScript.StartsWith("<self>"))
                         {

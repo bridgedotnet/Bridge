@@ -1,7 +1,7 @@
     Bridge.define("TestIssue1230.Issue1230", {
         statics: {
             methods: {
-                TestLong: function TestLong() {
+                TestLong: function TestLong () {
                     // Conversions should not have duplicated Bridge.Long: Bridge.Long(Bridge.Long(v))
                     var v = 7;
                     var l = System.Int64(v);
@@ -15,10 +15,10 @@
                     TestIssue1230.Issue1230.MethodLong(System.Int64(v));
                     TestIssue1230.Issue1230.MethodLong(System.Int64(v));
                 },
-                MethodLong: function MethodLong(l) { },
-                MethodDecimal: function MethodDecimal(l) { },
-                MethodInt: function MethodInt(l) { },
-                TestDecimal: function TestDecimal() {
+                MethodLong: function MethodLong (l) { },
+                MethodDecimal: function MethodDecimal (l) { },
+                MethodInt: function MethodInt (l) { },
+                TestDecimal: function TestDecimal () {
                     // Conversions should not have duplicated Bridge.Decimal: Bridge.Decimal(Bridge.Decimal(v))
                     var v = 7;
                     var l = System.Decimal(v);
@@ -32,7 +32,7 @@
                     TestIssue1230.Issue1230.MethodDecimal(System.Decimal(v));
                     TestIssue1230.Issue1230.MethodDecimal(System.Decimal(v));
                 },
-                TestInt: function TestInt() {
+                TestInt: function TestInt () {
                     var v = 7;
                     var l = v;
                     l = v;

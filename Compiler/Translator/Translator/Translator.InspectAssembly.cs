@@ -163,17 +163,27 @@ namespace Bridge.Translator
                 }
 
                 this.Validator.CheckType(type, this);
-                this.TypeDefinitions.Add(BridgeTypes.GetTypeDefinitionKey(type), type);
+
                 string key = BridgeTypes.GetTypeDefinitionKey(type);
 
-                if (this.BridgeTypes.ContainsKey(key))
+                BridgeType duplicateBridgeType = null;
+
+                if (this.BridgeTypes.TryGetValue(key, out duplicateBridgeType))
                 {
-                    var duplicate = this.BridgeTypes[key].TypeDefinition;
-                    var message = $"The type '{type.Module.Assembly.FullName}:{type.FullName}' is duplicated with '{duplicate.Module.Assembly.FullName}:{duplicate.FullName}'.";
+                    var duplicate = duplicateBridgeType.TypeDefinition;
+
+                    var message = string.Format(
+                        Constants.Messages.Exceptions.DUPLICATE_BRIDGE_TYPE,
+                        type.Module.Assembly.FullName,
+                        type.FullName,
+                        duplicate.Module.Assembly.FullName,
+                        duplicate.FullName);
 
                     this.Log.Error(message);
                     throw new System.InvalidOperationException(message);
                 }
+
+                this.TypeDefinitions.Add(key, type);
 
                 this.BridgeTypes.Add(key, new BridgeType(key)
                 {

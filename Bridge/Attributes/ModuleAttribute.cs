@@ -41,6 +41,16 @@ namespace Bridge
         public ModuleAttribute(ModuleType type, string moduleName, bool preventModuleName)
         {
         }
+
+        public string ExportAsNamespace
+        {
+            get; set;
+        }
+
+        public string Name
+        {
+            get; set;
+        }
     }
 
     [NonScriptable]

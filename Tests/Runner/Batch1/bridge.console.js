@@ -1,7 +1,7 @@
 /**
- * @version   : 16.0.0-beta2 - Bridge.NET
+ * @version   : 16.0.0-beta3 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2017-06-07
+ * @date      : 2017-06-19
  * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
  */
@@ -443,7 +443,7 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                         var item = $t.Current;
                         el.setAttribute(item.key, item.value);
                     }
-                }finally {
+                } finally {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$dispose();
                     }
@@ -458,7 +458,7 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                         var item = $t.Current;
                         str = System.String.concat(str, (System.String.concat(item.key.toLowerCase(), ":", item.value, ";")));
                     }
-                }finally {
+                } finally {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$dispose();
                     }

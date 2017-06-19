@@ -87,7 +87,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
         export {Module2217_ES6};
     }) ();
 
-    define(["Module2217_Auto"], function (Module2217_Auto) {
+    define("MyModule", ["Module2217_Auto"], function (Module2217_Auto) {
         var MyModule = { };
     /**
      * @public

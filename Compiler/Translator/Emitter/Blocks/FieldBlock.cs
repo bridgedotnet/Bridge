@@ -242,11 +242,17 @@ namespace Bridge.Translator
                 }
 
                 string tpl = null;
+                IMember templateMember = null;
                 MemberResolveResult init_rr = null;
                 if (isField && member.VarInitializer != null)
                 {
                     init_rr = this.Emitter.Resolver.ResolveNode(member.VarInitializer, this.Emitter) as MemberResolveResult;
                     tpl = init_rr != null ? this.Emitter.GetInline(init_rr.Member) : null;
+
+                    if (tpl != null)
+                    {
+                        templateMember = init_rr.Member;
+                    }
                 }
 
                 bool isAutoProperty = false;
@@ -382,6 +388,7 @@ namespace Bridge.Translator
                                 }
                             }
 
+                            tpl = Helpers.ConvertTokens(this.Emitter, tpl, templateMember);
                             tpl = tpl.Replace("{this}", "this").Replace("{0}", v);
 
                             if (!tpl.EndsWith(";"))
@@ -594,6 +601,7 @@ namespace Bridge.Translator
             bool oldNewLine = this.Emitter.IsNewLine;
             bool nonEmpty = false;
             var changedIndenting = false;
+            bool newLine = members.Count > 1;
 
             if (objectName != null)
             {
@@ -602,10 +610,13 @@ namespace Bridge.Translator
 
                 this.WriteColon();
                 this.WriteOpenBracket();
-                this.WriteNewLine();
 
-                this.Indent();
-                changedIndenting = true;
+                if (newLine)
+                {
+                    this.WriteNewLine();
+                    this.Indent();
+                    changedIndenting = true;
+                }
             }
 
             foreach (var member in members)
@@ -639,11 +650,13 @@ namespace Bridge.Translator
                 }
             }
 
-            this.WriteNewLine();
-
-            if (changedIndenting)
+            if (newLine)
             {
-                this.Outdent();
+                this.WriteNewLine();
+                if (changedIndenting)
+                {
+                    this.Outdent();
+                }
             }
 
             this.WriteCloseBracket();

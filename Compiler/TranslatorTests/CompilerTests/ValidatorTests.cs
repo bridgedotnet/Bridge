@@ -224,7 +224,17 @@ namespace Bridge.Translator.Tests
                             return v.IsVirtualType(type);
                         },
                         expected,
-                        (type) => string.Format("Type {0} should be {1}recognized as [Virtual]", type, expected ? "" : "not ")
+                        (type) => string.Format("Type {0} should be {1}recognized as [Virtual] (via ITypeDefinition)", type, expected ? "" : "not ")
+                    );
+
+                    CheckTypeResultTest(
+                        parentType,
+                        (Mono.Cecil.TypeDefinition type) =>
+                        {
+                            return Validator.IsVirtualTypeStatic(type);
+                        },
+                        expected,
+                        (type) => string.Format("Type {0} should be {1}recognized as [Virtual] (via TypeDefinition)", type, expected ? "" : "not ")
                     );
                 }
             }
