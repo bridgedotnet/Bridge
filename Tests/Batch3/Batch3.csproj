@@ -560,6 +560,7 @@
     <Compile Include="BridgeIssues\2600\N2671.cs" />
     <Compile Include="BridgeIssues\2600\N2685.cs" />
     <Compile Include="BridgeIssues\2600\N2686.cs" />
+    <Compile Include="BridgeIssues\2600\N2688.cs" />
     <Compile Include="BridgeIssues\2600\N2689.cs" />
     <Compile Include="BridgeIssues\2600\N2692.cs" />
     <Compile Include="BridgeIssues\2700\N2703.cs" />

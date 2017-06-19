@@ -19989,6 +19989,25 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2688", {
+        statics: {
+            methods: {
+                TestCaseNull: function () {
+                    var value = Bridge.unbox(undefined);
+                    switch (value) {
+                        case null: 
+                        case undefined: 
+                            Bridge.Test.NUnit.Assert.True(true);
+                            return;
+                        default: 
+                            Bridge.Test.NUnit.Assert.Fail();
+                            break;
+                    }
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2689", {
         statics: {
             methods: {
