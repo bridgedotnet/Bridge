@@ -827,6 +827,21 @@ namespace Bridge.Translator
                 module = new Module();
             }
 
+            if (attr.Properties.Count > 0)
+            {
+                foreach (var prop in attr.Properties)
+                {
+                    if (prop.Name == "Name")
+                    {
+                        module.Name = prop.Argument.Value != null ? (string)prop.Argument.Value : "";
+                    }
+                    else if (prop.Name == "ExportAsNamespace")
+                    {
+                        module.ExportAsNamespace = prop.Argument.Value != null ? (string)prop.Argument.Value : "";
+                    }
+                }
+            }
+
             typeInfo.Module = module;
         }
 
