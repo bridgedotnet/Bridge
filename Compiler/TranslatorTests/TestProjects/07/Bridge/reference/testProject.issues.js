@@ -4,7 +4,7 @@
 Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    define(function () {
+    define("MyModule", function () {
         var MyModule = { };
     /** @namespace System */
 
