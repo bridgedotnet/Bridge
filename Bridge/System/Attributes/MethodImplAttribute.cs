@@ -5,7 +5,7 @@
 // ==--==
 namespace System.Runtime.CompilerServices
 {
-
+    using Bridge;
     using System;
     using System.Reflection;
 
@@ -13,6 +13,7 @@ namespace System.Runtime.CompilerServices
     // certain method properties.
 
     [Serializable]
+    [NonScriptable, External]
     [Flags]
     [System.Runtime.InteropServices.ComVisible(true)]
     public enum MethodImplOptions
@@ -31,6 +32,7 @@ namespace System.Runtime.CompilerServices
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
+    [NonScriptable, External]
     public enum MethodCodeType
     {
         IL,
@@ -42,6 +44,7 @@ namespace System.Runtime.CompilerServices
 
     // Custom attribute to specify additional method properties.
     [Serializable]
+    [NonScriptable, External]
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor, Inherited = false)]
     [System.Runtime.InteropServices.ComVisible(true)]
     sealed public class MethodImplAttribute : Attribute

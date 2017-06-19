@@ -83,6 +83,7 @@ namespace System.Diagnostics
     {
         [Flags]
         [ComVisible(true)]
+        [NonScriptable, External]
         public enum DebuggingModes
         {
             None = 0x0,
