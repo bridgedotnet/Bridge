@@ -22875,6 +22875,52 @@ Bridge.$N1391Result =                     r;
         inherits: [Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Person")]
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2840", {
+        statics: {
+            methods: {
+                TestScope: function () {
+                    var x = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2840.ApiCaller(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2840.NullSerialiser());
+                    Bridge.Test.NUnit.Assert.AreEqual("_abc", x.Test("abc"));
+                    Bridge.Test.NUnit.Assert.AreEqual("_abc2", x.Test2("abc2"));
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2840.ApiCaller", {
+        statics: {
+            methods: {
+                Something: function (data, serialiser) {
+                    return serialiser(data);
+                }
+            }
+        },
+        fields: {
+            _serialiser: null
+        },
+        ctors: {
+            ctor: function (serialiser) {
+                this.$initialize();
+                this._serialiser = serialiser;
+            }
+        },
+        methods: {
+            Test: function (data) {
+                return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2840.ApiCaller.Something(data, Bridge.fn.bind(this, function (value) { return this._serialiser.Bridge$ClientTest$Batch3$BridgeIssues$Bridge2840$ISerialiseToAndFromJson$Serialise(System.Object, value); }));
+            },
+            Test2: function (data) {
+                return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2840.ApiCaller.Something(data, Bridge.fn.bind(this, function (value) { return this.Serialise(System.Object, value); }));
+            },
+            Serialise: function (T, value) {
+                return System.String.concat("_", value);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2840.ISerialiseToAndFromJson", {
+        $kind: "interface"
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge294", {
         fields: {
             Name: null
@@ -32694,6 +32740,22 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Professor", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Student]
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2840.NullSerialiser", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2840.ISerialiseToAndFromJson],
+        alias: [
+            "Serialise", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2840$ISerialiseToAndFromJson$Serialise",
+            "Deserialise", "Bridge$ClientTest$Batch3$BridgeIssues$Bridge2840$ISerialiseToAndFromJson$Deserialise"
+        ],
+        methods: {
+            Serialise: function (T, value) {
+                return System.String.concat("_", value);
+            },
+            Deserialise: function (T, json) {
+                return Bridge.getDefaultValue(T);
+            }
+        }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge304", {

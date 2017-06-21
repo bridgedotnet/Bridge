@@ -271,7 +271,7 @@ namespace Bridge.Translator
                     withoutTypeParams = !definition.Value;
                 }
 
-                if (withoutTypeParams && (!this.Method.IsStatic || this.Method.IsExtensionMethod && this.TargetResolveResult is ThisResolveResult) && (this.TargetResolveResult is ThisResolveResult || this.TargetResolveResult == null) && (inline.Contains("{this}") || this.Method.IsStatic || this.Method.IsExtensionMethod && inline.Contains("{" + this.Method.Parameters.First().Name + "}")))
+                if (withoutTypeParams && (!this.Method.IsStatic || this.Method.IsExtensionMethod && this.TargetResolveResult is ThisResolveResult) /*&& (this.TargetResolveResult is ThisResolveResult || this.TargetResolveResult == null)*/ && (inline.Contains("{this}") || this.Method.IsStatic || this.Method.IsExtensionMethod && inline.Contains("{" + this.Method.Parameters.First().Name + "}")))
                 {
                     this.Write(JS.Funcs.BRIDGE_BIND);
                     this.Write("(this, ");
