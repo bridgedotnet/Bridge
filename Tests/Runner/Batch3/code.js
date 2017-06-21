@@ -22921,6 +22921,140 @@ Bridge.$N1391Result =                     r;
         $kind: "interface"
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2847", {
+        statics: {
+            methods: {
+                Test1: function () {
+                    var $step = 0,
+                        $task1, 
+                        $task2, 
+                        $jumpFromFinally, 
+                        $tcs = new System.Threading.Tasks.TaskCompletionSource(), 
+                        $returnValue, 
+                        $t, 
+                        a, 
+                        $t1, 
+                        a1, 
+                        $async_e, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            try {
+                                for (;;) {
+                                    $step = System.Array.min([0,1,2,3,4,5,6], $step);
+                                    switch ($step) {
+                                        case 0: {
+                                            $t = 1;
+                                            if ($t === 1) {
+                                                $step = 1;
+                                                continue;
+                                            }
+                                            $step = 3;
+                                            continue;
+                                        }
+                                        case 1: {
+                                            $task1 = System.Threading.Tasks.Task.delay(1);
+                                            $step = 2;
+                                            $task1.continueWith($asyncBody);
+                                            return;
+                                        }
+                                        case 2: {
+                                            $task1.getAwaitedResult();
+                                            $step = 3;
+                                            continue;
+                                        }
+                                        case 3: {
+                                            $t1 = 1;
+                                            if ($t1 === 1) {
+                                                $step = 4;
+                                                continue;
+                                            }
+                                            $step = 6;
+                                            continue;
+                                        }
+                                        case 4: {
+                                            $task2 = System.Threading.Tasks.Task.delay(1);
+                                            $step = 5;
+                                            $task2.continueWith($asyncBody);
+                                            return;
+                                        }
+                                        case 5: {
+                                            $task2.getAwaitedResult();
+                                            $step = 6;
+                                            continue;
+                                        }
+                                        case 6: {
+                                            $tcs.setResult(1);
+                                            return;
+                                        }
+                                        default: {
+                                            $tcs.setResult(null);
+                                            return;
+                                        }
+                                    }
+                                }
+                            } catch($async_e1) {
+                                $async_e = System.Exception.create($async_e1);
+                                $tcs.setException($async_e);
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                    return $tcs.task;
+                },
+                Test2: function () {
+                    switch (1) {
+                        case 1: 
+                            var a;
+                            break;
+                    }
+
+                    switch (1) {
+                        case 1: 
+                            var a1;
+                            break;
+                    }
+
+                    return 1;
+                },
+                TestCommonSwitch: function () {
+                    Bridge.Test.NUnit.Assert.AreEqual(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2847.Test2());
+                },
+                TestAsyncSwitch: function () {
+                    var $step = 0,
+                        $task1, 
+                        $taskResult1, 
+                        $jumpFromFinally, 
+                        done, 
+                        $asyncBody = Bridge.fn.bind(this, function () {
+                            for (;;) {
+                                $step = System.Array.min([0,1], $step);
+                                switch ($step) {
+                                    case 0: {
+                                        done = Bridge.Test.NUnit.Assert.Async();
+                                        $task1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2847.Test1();
+                                        $step = 1;
+                                        $task1.continueWith($asyncBody, true);
+                                        return;
+                                    }
+                                    case 1: {
+                                        $taskResult1 = $task1.getAwaitedResult();
+                                        Bridge.Test.NUnit.Assert.AreEqual(1, $taskResult1);
+
+                                        done();
+                                        return;
+                                    }
+                                    default: {
+                                        return;
+                                    }
+                                }
+                            }
+                        }, arguments);
+
+                    $asyncBody();
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge294", {
         fields: {
             Name: null

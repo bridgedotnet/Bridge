@@ -272,12 +272,13 @@ namespace Bridge.Translator
                 this.Emitter.ReplaceAwaiterByVar = oldValue;
             }
 
-            if (switchSection.Statements.Count() == 1 && switchSection.Statements.First() is BlockStatement)
+            var isBlock = false;
+            if (switchSection.Statements.Count == 1 && switchSection.Statements.First() is BlockStatement)
             {
+                isBlock = true;
                 this.Emitter.IgnoreBlock = switchSection.Statements.First();
             }
 
-            int startCount = this.Emitter.AsyncBlock.Steps.Count;
             this.WriteSpace();
             this.BeginBlock();
             this.Write(JS.Vars.ASYNC_STEP + " = " + this.Emitter.AsyncBlock.Step + ";");
@@ -287,7 +288,17 @@ namespace Bridge.Translator
             var step = this.Emitter.AsyncBlock.AddAsyncStep();
             step.Node = switchSection;
 
+            if (!isBlock)
+            {
+                this.PushLocals();
+            }
+
             switchSection.Statements.AcceptVisitor(this.Emitter);
+
+            if (!isBlock)
+            {
+                this.PopLocals();
+            }
 
             if (this.RestoreWriter(writer) && !this.IsOnlyWhitespaceOnPenultimateLine(true))
             {
@@ -352,8 +363,19 @@ namespace Bridge.Translator
             switchSection.CaseLabels.ToList().ForEach(l => l.AcceptVisitor(this.Emitter));
             this.Indent();
 
+            var isBlock = switchSection.Statements.Count == 1 && switchSection.Statements.First() is BlockStatement;
+            if (!isBlock)
+            {
+                this.PushLocals();
+            }
             var children = switchSection.Children.Where(c => c.Role == Roles.EmbeddedStatement || c.Role == Roles.Comment);
             children.ToList().ForEach(s => s.AcceptVisitor(this.Emitter));
+
+            if (!isBlock)
+            {
+                this.PopLocals();
+            }
+
             this.Outdent();
         }
 
