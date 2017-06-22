@@ -36,6 +36,7 @@
         "Resources/Char.js",
         "Resources/.generated/system/formattableString.js",
         "Resources/.generated/io.js",
+        "Resources/FileStream.js",
         "Resources/.generated/system/formattableStringImpl.js",
         "Resources/.generated/system/runtime/compilerServices/formattableStringFactory.js",
         "Resources/Exception.js",

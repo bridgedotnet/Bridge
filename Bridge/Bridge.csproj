@@ -438,6 +438,7 @@
     <Content Include="Resources\.generated\bridge.meta.js" />
     <Content Include="Resources\.generated\bridge\utils\console.js" />
     <Content Include="Resources\.generated\bridge\utils\systemAssemblyVersion.js" />
+    <Content Include="Resources\FileStream.js" />
     <Content Include="Resources\.generated\system\bitConverter.js" />
     <Content Include="Resources\.generated\system\collections\bitArray.js" />
     <Content Include="Resources\.generated\system\collections\bitArray\bitArrayEnumeratorSimple.js" />

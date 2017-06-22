@@ -37,9 +37,7 @@
                 }
             }
         },
-        alias: [
-            "dispose", "System$IDisposable$dispose"
-        ],
+        alias: ["dispose", "System$IDisposable$dispose"],
         ctors: {
             ctor: function (input) {
                 this.$initialize();
@@ -266,9 +264,7 @@
                 }
             }
         },
-        alias: [
-            "dispose", "System$IDisposable$dispose"
-        ],
+        alias: ["dispose", "System$IDisposable$dispose"],
         ctors: {
             ctor: function () {
                 this.$initialize();
@@ -509,9 +505,7 @@
                 }
             }
         },
-        alias: [
-            "dispose", "System$IDisposable$dispose"
-        ],
+        alias: ["dispose", "System$IDisposable$dispose"],
         methods: {
             copyTo: function (destination) {
                 if (destination == null) {
@@ -1358,7 +1352,7 @@
                                 return false;
                             }
                         }
-                    }finally {
+                    } finally {
                         if (Bridge.is($t, System.IDisposable)) {
                             $t.System$IDisposable$dispose();
                         }
