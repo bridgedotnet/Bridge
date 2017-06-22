@@ -105,7 +105,7 @@ namespace Bridge.Translator
         {
             if (this.Emitter.Locals.ContainsKey(name))
             {
-                throw new EmitterException(node, $"Duplicated local variable '{name}'");
+                throw new EmitterException(node, string.Format(Constants.Messages.Exceptions.DUPLICATE_LOCAL_VARIABLE, name));
             }
 
             this.Emitter.Locals.Add(name, type);
