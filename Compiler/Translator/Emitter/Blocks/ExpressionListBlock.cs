@@ -11,7 +11,7 @@ namespace Bridge.Translator
 {
     public class ExpressionListBlock : AbstractEmitterBlock
     {
-        public ExpressionListBlock(IEmitter emitter, IEnumerable<Expression> expressions, Expression paramArg, AstNode invocation, int openBracketPosition)
+        public ExpressionListBlock(IEmitter emitter, IEnumerable<Expression> expressions, Expression paramArg, AstNode invocation, int openBracketPosition, bool newLine = false)
             : base(emitter, null)
         {
             this.Emitter = emitter;
@@ -19,6 +19,13 @@ namespace Bridge.Translator
             this.ParamExpression = paramArg;
             this.InvocationExpression = invocation;
             this.OpenBracketPosition = openBracketPosition;
+            this.NewLine = newLine;
+        }
+
+        public bool NewLine
+        {
+            get;
+            set;
         }
 
         public int OpenBracketPosition
@@ -129,6 +136,12 @@ namespace Bridge.Translator
                 }
             }
 
+            if (this.NewLine)
+            {
+                this.WriteNewLine();
+                this.Indent();
+            }
+
             foreach (var expr in expressions)
             {
                 if (expr == null)
@@ -142,6 +155,11 @@ namespace Bridge.Translator
                 if (needComma && !(isParamsArg && isApply))
                 {
                     this.WriteComma();
+                    if (this.NewLine)
+                    {
+                        this.WriteNewLine();
+                        this.WriteIndent();
+                    }
                 }
 
                 needComma = true;
@@ -210,6 +228,12 @@ namespace Bridge.Translator
                 {
                     Helpers.CheckValueTypeClone(this.Emitter.Resolver.ResolveNode(expr, this.Emitter), expr, this, pos);
                 }
+            }
+
+            if (this.NewLine)
+            {
+                this.WriteNewLine();
+                this.Outdent();
             }
 
             if (wrapByBrackets && paramArg != null)

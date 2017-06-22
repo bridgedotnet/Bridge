@@ -1,7 +1,7 @@
     Bridge.define("TestIssue948.Issue948", {
         statics: {
             methods: {
-                Test: function Test() {
+                Test: function Test () {
                     // A comment
 
                     /* global Bridge */

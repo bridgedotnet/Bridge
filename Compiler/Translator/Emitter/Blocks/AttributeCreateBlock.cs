@@ -290,7 +290,8 @@ namespace Bridge.Translator
                 block.Emitter.IsAssignment = true;
                 block.Emitter.IsUnaryAccessor = false;
 
-                bool hasThis = inlineCode.Contains("{this}");
+                bool hasThis = Helpers.HasThis(inlineCode);
+                inlineCode = Helpers.ConvertTokens(block.Emitter, inlineCode, member);
                 if (inlineCode.StartsWith("<self>"))
                 {
                     hasThis = true;

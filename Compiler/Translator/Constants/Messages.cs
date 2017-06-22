@@ -25,6 +25,8 @@ namespace Bridge.Translator.Constants
             public const string DYNAMIC_INVOCATION_TOO_MANY_OVERLOADS = "Cannot compile this dynamic invocation because there are two or more method overloads with the same parameter count. To work around this limitation, assign the dynamic value to a non-dynamic variable before use or call a method with different parameter count";
 
             public const string VIRTUAL_CLASS_NO_NESTED_TYPES = "Virtual class {0} cannot have nested types";
+
+            public const string DUPLICATE_BRIDGE_TYPE = "Cannot add nested type as the type '{0}:{1}' is duplicated with '{2}:{3}'";
         }
     }
 }

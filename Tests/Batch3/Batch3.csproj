@@ -560,6 +560,7 @@
     <Compile Include="BridgeIssues\2600\N2671.cs" />
     <Compile Include="BridgeIssues\2600\N2685.cs" />
     <Compile Include="BridgeIssues\2600\N2686.cs" />
+    <Compile Include="BridgeIssues\2600\N2688.cs" />
     <Compile Include="BridgeIssues\2600\N2689.cs" />
     <Compile Include="BridgeIssues\2600\N2692.cs" />
     <Compile Include="BridgeIssues\2700\N2703.cs" />
@@ -570,6 +571,7 @@
     <Compile Include="BridgeIssues\2700\N2720.cs" />
     <Compile Include="BridgeIssues\2700\N2722.cs" />
     <Compile Include="BridgeIssues\2700\N2723.cs" />
+    <Compile Include="BridgeIssues\2700\N2735.cs" />
     <Compile Include="BridgeIssues\2700\N2738.cs" />
     <Compile Include="BridgeIssues\2700\N2745.cs" />
     <Compile Include="BridgeIssues\2700\N2749.cs" />
@@ -577,6 +579,9 @@
     <Compile Include="BridgeIssues\2700\N2763.cs" />
     <Compile Include="BridgeIssues\2700\N2764.cs" />
     <Compile Include="BridgeIssues\2700\N2770.cs" />
+    <Compile Include="BridgeIssues\2700\N2792.cs" />
+    <Compile Include="BridgeIssues\2700\N2793.cs" />
+    <Compile Include="BridgeIssues\2700\N2794.cs" />
     <Compile Include="BridgeIssues\2700\N2795.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />

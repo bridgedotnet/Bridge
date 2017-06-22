@@ -58,10 +58,18 @@ namespace Bridge.Contract
             this.InitName();
         }
 
+        private string _name;
         public string Name
         {
-            get;
-            set;
+            get
+            {
+                return this._name;
+            }
+            set
+            {
+                this._name = value;
+                this.NoName = false;
+            }
         }
 
         public ModuleType Type
@@ -80,6 +88,19 @@ namespace Bridge.Contract
         {
             get;
             private set;
+        }
+
+        private string _exportAsNamespace;
+        public string ExportAsNamespace
+        {
+            get
+            {
+                return this._exportAsNamespace ?? this.Name;
+            }
+            set
+            {
+                this._exportAsNamespace = value;
+            }
         }
 
         private static int counter = 0;

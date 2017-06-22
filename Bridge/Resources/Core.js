@@ -113,7 +113,13 @@
             var type = Bridge.unroll(name);
 
             if (!type) {
+                var old = Bridge.Class.staticInitAllow;
                 type = isClass ? Bridge.define(name) : Bridge.definei(name);
+                Bridge.Class.staticInitAllow = true;
+                if (type.$staticInit) {
+                    type.$staticInit();
+                }
+                Bridge.Class.staticInitAllow = old;
             }
 
             return type;
@@ -131,6 +137,10 @@
         literal: function (type, obj) {
             obj.$getType = function () { return type };
             return obj;
+        },
+
+        isJSObject: function(value) {
+            return Object.prototype.toString.call(value) === '[object Object]';
         },
 
         isPlainObject: function (obj) {

@@ -151,7 +151,15 @@ namespace Bridge.Build
             }
             catch (EmitterException e)
             {
-                this.Log.LogError(null, null, null, e.FileName, e.StartLine + 1, e.StartColumn + 1, e.EndLine + 1, e.EndColumn + 1, "Error: {0} {1}", e.Message, e.StackTrace);
+                if (logger != null)
+                {
+                    logger.Error(e.ToString());
+                }
+                else
+                {
+                    this.Log.LogError(null, null, null, e.FileName, e.StartLine + 1, e.StartColumn + 1, e.EndLine + 1, e.EndColumn + 1, "Error: {0} {1}", e.Message, e.StackTrace);
+                }
+
                 success = false;
             }
             catch (Exception e)
@@ -160,11 +168,23 @@ namespace Bridge.Build
 
                 if (ee != null)
                 {
+                    if (logger != null)
+                    {
+                        logger.Error(e.ToString());
+                    }
+
                     this.Log.LogError(null, null, null, ee.FileName, ee.StartLine + 1, ee.StartColumn + 1, ee.EndLine + 1, ee.EndColumn + 1, "Error: {0} {1}", e.Message, e.StackTrace);
                 }
                 else
                 {
-                    this.Log.LogError("Error: {0} {1}", e.Message, e.StackTrace);
+                    if (logger != null)
+                    {
+                        logger.Error(e.ToString());
+                    }
+                    else
+                    {
+                        this.Log.LogError("Bridge.NET Compiler error: {0} {1}", e.Message, e.StackTrace);
+                    }
                 }
 
                 success = false;

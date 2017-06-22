@@ -231,6 +231,12 @@ namespace Bridge.Translator
             var oldIsAssignment = this.Emitter.IsAssignment;
             var oldUnary = this.Emitter.IsUnaryAccessor;
             var inlineCode = current.InlineCode;
+            var rr = this.Emitter.Resolver.ResolveNode(indexerExpression, this.Emitter) as MemberResolveResult;
+            if (rr != null)
+            {
+                inlineCode = Helpers.ConvertTokens(this.Emitter, inlineCode, rr.Member);
+            }
+            
             bool hasThis = inlineCode != null && inlineCode.Contains("{this}");
 
             if (inlineCode != null && inlineCode.StartsWith("<self>"))
@@ -262,7 +268,7 @@ namespace Bridge.Translator
 
                 this.Emitter.Output = new StringBuilder();
                 inlineCode = inlineCode.Replace("{0}", "[[0]]");
-                new InlineArgumentsBlock(this.Emitter, new ArgumentsInfo(this.Emitter, indexerExpression, this.Emitter.Resolver.ResolveNode(indexerExpression, this.Emitter) as InvocationResolveResult), inlineCode).Emit();
+                new InlineArgumentsBlock(this.Emitter, new ArgumentsInfo(this.Emitter, indexerExpression, rr as InvocationResolveResult), inlineCode).Emit();
                 inlineCode = this.Emitter.Output.ToString();
                 inlineCode = inlineCode.Replace("[[0]]", "{0}");
 

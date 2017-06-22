@@ -18,7 +18,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
              * @memberof Module1.TestProject.Issues.N2198.N2198
              * @return  {void}
              */
-            main: function Main() {
+            main: function Main () {
                 System.Console.WriteLine("Hello World!");
             }
         });

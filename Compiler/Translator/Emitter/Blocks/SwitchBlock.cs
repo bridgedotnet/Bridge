@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ICSharpCode.NRefactory.Semantics;
+using ICSharpCode.NRefactory.TypeSystem;
 
 namespace Bridge.Translator
 {
@@ -255,6 +256,15 @@ namespace Bridge.Translator
                         this.Write(")");
                     }
 
+                    if (label.Expression is NullReferenceExpression)
+                    {
+                        this.WriteSpace();
+                        this.Write("||");
+                        this.WriteSpace();
+                        this.Write(switchKey);
+                        this.Write(" === undefined");
+                    }
+
                     writeOr = true;
                 }
 
@@ -379,6 +389,13 @@ namespace Bridge.Translator
                 else
                 {
                     caseLabel.Expression.AcceptVisitor(this.Emitter);
+                }
+
+                if (caserr.Type.Kind == TypeKind.Null)
+                {
+                    this.WriteColon();
+                    this.WriteNewLine();
+                    this.Write("case undefined");
                 }
             }
 

@@ -51,7 +51,7 @@ namespace Bridge.Builder
             }
             catch (EmitterException ex)
             {
-                logger.Error(string.Format("Error: {2} ({3}, {4}) {0} {1}", ex.Message, ex.StackTrace, ex.FileName, ex.StartLine, ex.StartColumn, ex.EndLine, ex.EndColumn));
+                logger.Error(string.Format("Bridge.NET Compiler error: {2} ({3}, {4}) {0} {1}", ex.Message, ex.StackTrace, ex.FileName, ex.StartLine, ex.StartColumn, ex.EndLine, ex.EndColumn));
                 return 1;
             }
             catch (Exception ex)
@@ -60,7 +60,7 @@ namespace Bridge.Builder
 
                 if (ee != null)
                 {
-                    logger.Error(string.Format("Error: {2} ({3}, {4}) {0} {1}", ex.Message, ex.StackTrace, ee.FileName, ee.StartLine, ee.StartColumn, ee.EndLine, ee.EndColumn));
+                    logger.Error(string.Format("Bridge.NET Compiler error: {2} ({3}, {4}) {0} {1}", ex.Message, ex.StackTrace, ee.FileName, ee.StartLine, ee.StartColumn, ee.EndLine, ee.EndColumn));
                 }
                 else
                 {
@@ -69,7 +69,7 @@ namespace Bridge.Builder
                     var elvl = 0;
                     while (ine != null)
                     {
-                        logger.Error(string.Format("Error: exception level: {0} - {1}\nStack trace:\n{2}", elvl++, ine.Message, ine.StackTrace));
+                        logger.Error(string.Format("Bridge.NET Compiler error: exception level: {0} - {1}\nStack trace:\n{2}", elvl++, ine.Message, ine.StackTrace));
                         ine = ine.InnerException;
                     }
                 }
