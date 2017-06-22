@@ -479,11 +479,13 @@ namespace Bridge.Translator
                 bool close = false;
                 if (isProperty && !IsObjectLiteral && !isAutoProperty)
                 {
+                    var oldTempVars = this.Emitter.TempVariables;
                     this.BeginBlock();
                     new VisitorPropertyBlock(this.Emitter, (PropertyDeclaration)member.Entity).Emit();
                     this.WriteNewLine();
                     this.EndBlock();
                     this.Emitter.Comma = true;
+                    this.Emitter.TempVariables = oldTempVars;
                     continue;
                 }
 

@@ -6605,7 +6605,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             },
             ctors: {
                 init: function () {
-                    var $t;
                     Bridge.ready(this.RunMe);
                 }
             },
@@ -22919,6 +22918,65 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2840.ISerialiseToAndFromJson", {
         $kind: "interface"
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2844", {
+        statics: {
+            methods: {
+                TestPropertyInitialization: function () {
+                    var $t;
+                    var chartControl = ($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2844.ChartControl(), $t.Properties = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2844.ChartProperties(), $t);
+                    Bridge.Test.NUnit.Assert.NotNull(chartControl.Properties);
+                    Bridge.Test.NUnit.Assert.NotNull(chartControl.Properties.Font);
+                    Bridge.Test.NUnit.Assert.AreEqual("Arial", chartControl.Properties.Font.FontFamily);
+                    Bridge.Test.NUnit.Assert.AreEqual(14, chartControl.Properties.Font.Height);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2844.ChartControl", {
+        props: {
+            Properties: null
+        },
+        ctors: {
+            init: function () {
+                this.Properties = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2844.ChartProperties();
+            },
+            ctor: function () {
+                this.$initialize();
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2844.ChartProperties", {
+        props: {
+            Font: null,
+            HalfYAxisLabelHeight: {
+                get: function () {
+                    return Bridge.Int.clip32(Math.ceil(1.2 * this.Font.Height / 2));
+                }
+            }
+        },
+        ctors: {
+            init: function () {
+                var $t;
+                this.Font = ($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2844.Font(), $t.FontFamily = "Arial", $t.Height = 14, $t);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2844.Font", {
+        props: {
+            FontFamily: null,
+            Height: 0
+        },
+        ctors: {
+            init: function () {
+                this.FontFamily = "Arial";
+                this.Height = 12;
+            }
+        }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2847", {
