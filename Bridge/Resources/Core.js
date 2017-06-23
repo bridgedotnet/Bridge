@@ -112,7 +112,7 @@
         virtual: function (name, isClass) {
             var type = Bridge.unroll(name);
 
-            if (!type) {
+            if (!type || !Bridge.isFunction(type)) {
                 var old = Bridge.Class.staticInitAllow;
                 type = isClass ? Bridge.define(name) : Bridge.definei(name);
                 Bridge.Class.staticInitAllow = true;
