@@ -2385,30 +2385,32 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("StringBuilder - LengthPropertyWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.LengthPropertyWorks);
             QUnit.test("StringBuilder - StringBuilders", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.StringBuilders);
             QUnit.module("Struct");
-            QUnit.test("TestUserDefinedStructs - IsClassIsFalse", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.IsClassIsFalse);
-            QUnit.test("TestUserDefinedStructs - UserDefinedStructCanBeUsed", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.UserDefinedStructCanBeUsed);
-            QUnit.test("TestUserDefinedStructs - DefaultConstructorOfStructReturnsInstanceWithAllMembersInitialized", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultConstructorOfStructReturnsInstanceWithAllMembersInitialized);
-            QUnit.test("TestUserDefinedStructs - DefaultConstructorOfStructReturnsInstanceWithAllMembersInitializedGeneric", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultConstructorOfStructReturnsInstanceWithAllMembersInitializedGeneric);
-            QUnit.test("TestUserDefinedStructs - DefaultValueOfStructIsInstanceWithAllMembersInitialized", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultValueOfStructIsInstanceWithAllMembersInitialized);
-            QUnit.test("TestUserDefinedStructs - DefaultValueOfStructIsInstanceWithAllMembersInitializedGeneric", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultValueOfStructIsInstanceWithAllMembersInitializedGeneric);
-            QUnit.test("TestUserDefinedStructs - DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirect", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirect);
-            QUnit.test("TestUserDefinedStructs - DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirectGeneric", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirectGeneric);
-            QUnit.test("TestUserDefinedStructs - DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorks", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorks);
-            QUnit.test("TestUserDefinedStructs - DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorksGeneric", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorksGeneric);
-            QUnit.test("TestUserDefinedStructs - DefaultGetHashCodeGeneratesHashCodeBasedOnAllInstanceFields", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultGetHashCodeGeneratesHashCodeBasedOnAllInstanceFields);
-            QUnit.test("TestUserDefinedStructs - DefaultEqualsUsesValueEqualityForAllMembers", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultEqualsUsesValueEqualityForAllMembers);
-            QUnit.test("TestUserDefinedStructs - CanOverrideGetHashCode", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.CanOverrideGetHashCode);
-            QUnit.test("TestUserDefinedStructs - CanOverrideEquals", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.CanOverrideEquals);
-            QUnit.test("TestUserDefinedStructs - CanLiftUserDefinedBinaryOperator", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.CanLiftUserDefinedBinaryOperator);
-            QUnit.test("TestUserDefinedStructs - CanLiftUserDefinedUnaryOperator_SPI_1634", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.CanLiftUserDefinedUnaryOperator_SPI_1634);
-            QUnit.test("TestUserDefinedStructs - ClonedValueTypeIsCorrectType", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.ClonedValueTypeIsCorrectType);
-            QUnit.test("TestUserDefinedStructs - FieldsAreClonedWhenValueTypeIsCopied", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.FieldsAreClonedWhenValueTypeIsCopied);
-            QUnit.test("TestUserDefinedStructs - AutoPropertyBackingFieldsAreClonedWhenValueTypeIsCopied", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.AutoPropertyBackingFieldsAreClonedWhenValueTypeIsCopied);
-            QUnit.test("TestUserDefinedStructs - PropertiesWithFieldImplementationAreClonedWhenValueTypeIsCopied", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.PropertiesWithFieldImplementationAreClonedWhenValueTypeIsCopied);
-            QUnit.test("TestUserDefinedStructs - NestedStructsAreClonedWhenValueTypeIsCopied_SPI_1613", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.NestedStructsAreClonedWhenValueTypeIsCopied_SPI_1613);
-            QUnit.test("TestUserDefinedStructs - GenericMutableValueTypeWorks", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.GenericMutableValueTypeWorks);
-            QUnit.test("TestUserDefinedStructs - CloningValueTypeWithNamedDefaultConstructorWorks", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.CloningValueTypeWithNamedDefaultConstructorWorks);
-            QUnit.test("TestUserDefinedStructs - CloningNullableValueTypesWorks", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.CloningNullableValueTypesWorks);
+            QUnit.test("Structs - IsClassIsFalse", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.IsClassIsFalse);
+            QUnit.test("Structs - UserDefinedStructCanBeUsed", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.UserDefinedStructCanBeUsed);
+            QUnit.test("Structs - DefaultConstructorOfStructReturnsInstanceWithAllMembersInitialized", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultConstructorOfStructReturnsInstanceWithAllMembersInitialized);
+            QUnit.test("Structs - DefaultConstructorOfStructReturnsInstanceWithAllMembersInitializedGeneric", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultConstructorOfStructReturnsInstanceWithAllMembersInitializedGeneric);
+            QUnit.test("Structs - DefaultValueOfStructIsInstanceWithAllMembersInitialized", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultValueOfStructIsInstanceWithAllMembersInitialized);
+            QUnit.test("Structs - DefaultValueOfStructIsInstanceWithAllMembersInitializedGeneric", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultValueOfStructIsInstanceWithAllMembersInitializedGeneric);
+            QUnit.test("Structs - DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirect", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirect);
+            QUnit.test("Structs - DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirectGeneric", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirectGeneric);
+            QUnit.test("Structs - DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorks", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorks);
+            QUnit.test("Structs - DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorksGeneric", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorksGeneric);
+            QUnit.test("Structs - DefaultGetHashCodeGeneratesHashCodeBasedOnAllInstanceFields", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultGetHashCodeGeneratesHashCodeBasedOnAllInstanceFields);
+            QUnit.test("Structs - DefaultEqualsUsesValueEqualityForAllMembers", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultEqualsUsesValueEqualityForAllMembers);
+            QUnit.test("Structs - CanOverrideGetHashCode", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.CanOverrideGetHashCode);
+            QUnit.test("Structs - CanOverrideEquals", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.CanOverrideEquals);
+            QUnit.test("Structs - CanLiftUserDefinedBinaryOperator", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.CanLiftUserDefinedBinaryOperator);
+            QUnit.test("Structs - CanLiftUserDefinedUnaryOperator_SPI_1634", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.CanLiftUserDefinedUnaryOperator_SPI_1634);
+            QUnit.test("Structs - ClonedValueTypeIsCorrectType", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.ClonedValueTypeIsCorrectType);
+            QUnit.test("Structs - FieldsAreClonedWhenValueTypeIsCopied", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.FieldsAreClonedWhenValueTypeIsCopied);
+            QUnit.test("Structs - AutoPropertyBackingFieldsAreClonedWhenValueTypeIsCopied", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.AutoPropertyBackingFieldsAreClonedWhenValueTypeIsCopied);
+            QUnit.test("Structs - PropertiesWithFieldImplementationAreClonedWhenValueTypeIsCopied", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.PropertiesWithFieldImplementationAreClonedWhenValueTypeIsCopied);
+            QUnit.test("Structs - NestedStructsAreClonedWhenValueTypeIsCopied_SPI_1613", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.NestedStructsAreClonedWhenValueTypeIsCopied_SPI_1613);
+            QUnit.test("Structs - GenericMutableValueTypeWorks", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.GenericMutableValueTypeWorks);
+            QUnit.test("Structs - CloningValueTypeWithNamedDefaultConstructorWorks", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.CloningValueTypeWithNamedDefaultConstructorWorks);
+            QUnit.test("Structs - CloningNullableValueTypesWorks", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.CloningNullableValueTypesWorks);
+            QUnit.test("Structs - ToStringWorks", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.ToStringWorks);
+            QUnit.test("Structs - ToStringNullabeTypeWorks", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.ToStringNullabeTypeWorks);
             QUnit.module("System Console");
             QUnit.test("TestClear", Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests.TestClear);
             QUnit.test("TestWriteLine", Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests.TestWriteLine);
@@ -19420,123 +19422,133 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             methods: {
                 IsClassIsFalse: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsClassIsFalse()", $t.Line = "187", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsClassIsFalse()", $t.Line = "203", $t));
                     t.Fixture.IsClassIsFalse();
                 },
                 UserDefinedStructCanBeUsed: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "UserDefinedStructCanBeUsed()", $t.Line = "194", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "UserDefinedStructCanBeUsed()", $t.Line = "210", $t));
                     t.Fixture.UserDefinedStructCanBeUsed();
                 },
                 DefaultConstructorOfStructReturnsInstanceWithAllMembersInitialized: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultConstructorOfStructReturnsInstanceWithAllMembersInitialized()", $t.Line = "201", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultConstructorOfStructReturnsInstanceWithAllMembersInitialized()", $t.Line = "217", $t));
                     t.Fixture.DefaultConstructorOfStructReturnsInstanceWithAllMembersInitialized();
                 },
                 DefaultConstructorOfStructReturnsInstanceWithAllMembersInitializedGeneric: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultConstructorOfStructReturnsInstanceWithAllMembersInitializedGeneric()", $t.Line = "212", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultConstructorOfStructReturnsInstanceWithAllMembersInitializedGeneric()", $t.Line = "228", $t));
                     t.Fixture.DefaultConstructorOfStructReturnsInstanceWithAllMembersInitializedGeneric();
                 },
                 DefaultValueOfStructIsInstanceWithAllMembersInitialized: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultValueOfStructIsInstanceWithAllMembersInitialized()", $t.Line = "223", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultValueOfStructIsInstanceWithAllMembersInitialized()", $t.Line = "239", $t));
                     t.Fixture.DefaultValueOfStructIsInstanceWithAllMembersInitialized();
                 },
                 DefaultValueOfStructIsInstanceWithAllMembersInitializedGeneric: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultValueOfStructIsInstanceWithAllMembersInitializedGeneric()", $t.Line = "234", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultValueOfStructIsInstanceWithAllMembersInitializedGeneric()", $t.Line = "250", $t));
                     t.Fixture.DefaultValueOfStructIsInstanceWithAllMembersInitializedGeneric();
                 },
                 DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirect: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirect()", $t.Line = "245", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirect()", $t.Line = "261", $t));
                     t.Fixture.DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirect();
                 },
                 DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirectGeneric: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirectGeneric()", $t.Line = "256", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirectGeneric()", $t.Line = "272", $t));
                     t.Fixture.DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirectGeneric();
                 },
                 DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorks()", $t.Line = "267", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorks()", $t.Line = "283", $t));
                     t.Fixture.DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorks();
                 },
                 DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorksGeneric: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorksGeneric()", $t.Line = "274", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorksGeneric()", $t.Line = "290", $t));
                     t.Fixture.DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorksGeneric();
                 },
                 DefaultGetHashCodeGeneratesHashCodeBasedOnAllInstanceFields: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultGetHashCodeGeneratesHashCodeBasedOnAllInstanceFields()", $t.Line = "281", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultGetHashCodeGeneratesHashCodeBasedOnAllInstanceFields()", $t.Line = "297", $t));
                     t.Fixture.DefaultGetHashCodeGeneratesHashCodeBasedOnAllInstanceFields();
                 },
                 DefaultEqualsUsesValueEqualityForAllMembers: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultEqualsUsesValueEqualityForAllMembers()", $t.Line = "295", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultEqualsUsesValueEqualityForAllMembers()", $t.Line = "311", $t));
                     t.Fixture.DefaultEqualsUsesValueEqualityForAllMembers();
                 },
                 CanOverrideGetHashCode: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CanOverrideGetHashCode()", $t.Line = "307", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CanOverrideGetHashCode()", $t.Line = "323", $t));
                     t.Fixture.CanOverrideGetHashCode();
                 },
                 CanOverrideEquals: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CanOverrideEquals()", $t.Line = "314", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CanOverrideEquals()", $t.Line = "330", $t));
                     t.Fixture.CanOverrideEquals();
                 },
                 CanLiftUserDefinedBinaryOperator: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CanLiftUserDefinedBinaryOperator()", $t.Line = "324", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CanLiftUserDefinedBinaryOperator()", $t.Line = "340", $t));
                     t.Fixture.CanLiftUserDefinedBinaryOperator();
                 },
                 CanLiftUserDefinedUnaryOperator_SPI_1634: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CanLiftUserDefinedUnaryOperator_SPI_1634()", $t.Line = "332", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CanLiftUserDefinedUnaryOperator_SPI_1634()", $t.Line = "348", $t));
                     t.Fixture.CanLiftUserDefinedUnaryOperator_SPI_1634();
                 },
                 ClonedValueTypeIsCorrectType: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ClonedValueTypeIsCorrectType()", $t.Line = "341", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ClonedValueTypeIsCorrectType()", $t.Line = "357", $t));
                     t.Fixture.ClonedValueTypeIsCorrectType();
                 },
                 FieldsAreClonedWhenValueTypeIsCopied: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FieldsAreClonedWhenValueTypeIsCopied()", $t.Line = "352", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FieldsAreClonedWhenValueTypeIsCopied()", $t.Line = "368", $t));
                     t.Fixture.FieldsAreClonedWhenValueTypeIsCopied();
                 },
                 AutoPropertyBackingFieldsAreClonedWhenValueTypeIsCopied: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AutoPropertyBackingFieldsAreClonedWhenValueTypeIsCopied()", $t.Line = "366", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AutoPropertyBackingFieldsAreClonedWhenValueTypeIsCopied()", $t.Line = "382", $t));
                     t.Fixture.AutoPropertyBackingFieldsAreClonedWhenValueTypeIsCopied();
                 },
                 PropertiesWithFieldImplementationAreClonedWhenValueTypeIsCopied: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "PropertiesWithFieldImplementationAreClonedWhenValueTypeIsCopied()", $t.Line = "380", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "PropertiesWithFieldImplementationAreClonedWhenValueTypeIsCopied()", $t.Line = "396", $t));
                     t.Fixture.PropertiesWithFieldImplementationAreClonedWhenValueTypeIsCopied();
                 },
                 NestedStructsAreClonedWhenValueTypeIsCopied_SPI_1613: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "NestedStructsAreClonedWhenValueTypeIsCopied_SPI_1613()", $t.Line = "394", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "NestedStructsAreClonedWhenValueTypeIsCopied_SPI_1613()", $t.Line = "410", $t));
                     t.Fixture.NestedStructsAreClonedWhenValueTypeIsCopied_SPI_1613();
                 },
                 GenericMutableValueTypeWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GenericMutableValueTypeWorks()", $t.Line = "413", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GenericMutableValueTypeWorks()", $t.Line = "429", $t));
                     t.Fixture.GenericMutableValueTypeWorks();
                 },
                 CloningValueTypeWithNamedDefaultConstructorWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CloningValueTypeWithNamedDefaultConstructorWorks()", $t.Line = "428", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CloningValueTypeWithNamedDefaultConstructorWorks()", $t.Line = "444", $t));
                     t.Fixture.CloningValueTypeWithNamedDefaultConstructorWorks();
                 },
                 CloningNullableValueTypesWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CloningNullableValueTypesWorks()", $t.Line = "441", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CloningNullableValueTypesWorks()", $t.Line = "457", $t));
                     t.Fixture.CloningNullableValueTypesWorks();
+                },
+                ToStringWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToStringWorks()", $t.Line = "473", $t));
+                    t.Fixture.ToStringWorks();
+                },
+                ToStringNullabeTypeWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToStringNullabeTypeWorks()", $t.Line = "483", $t));
+                    t.Fixture.ToStringNullabeTypeWorks();
                 }
             }
         },

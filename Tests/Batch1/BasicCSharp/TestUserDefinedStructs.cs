@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 namespace Bridge.ClientTest
 {
     [Category(Constants.MODULE_STRUCT)]
-    [TestFixture(TestNameFormat = "TestUserDefinedStructs - {0}")]
+    [TestFixture(TestNameFormat = "Structs - {0}")]
     public class TestUserDefinedStructs
     {
 #pragma warning disable 649
@@ -128,6 +128,22 @@ namespace Bridge.ClientTest
             {
                 return s.I;
             }
+        }
+
+        private struct S8
+        {
+            public int Number;
+
+            public S8(int i)
+            {
+                Number = i;
+            }
+
+            public override string ToString()
+            {
+                return Number.ToString();
+            }
+
         }
 
         private struct MS1
@@ -452,6 +468,26 @@ namespace Bridge.ClientTest
             Assert.Null(s3, "s3 should be null");
             Assert.AreEqual(42, s4.Value.i, "s4.i should be 42");
             Assert.False(ReferenceEquals(s2, s4), "s2 and s4 should not be the same object");
+        }
+
+        [Test]
+        public void ToStringWorks()
+        {
+            var s = new S8(5);
+            object o = new S8(6);
+
+            Assert.AreEqual("5", s.ToString(), "Struct");
+            Assert.AreEqual("6", o.ToString(), "Boxed");
+        }
+
+        [Test]
+        public void ToStringNullabeTypeWorks()
+        {
+            var s = new S8?(new S8(5));
+            object o = new S8?(new S8(6));
+
+            Assert.AreEqual("5", s.ToString(), "Struct Nullable type");
+            Assert.AreEqual("6", o.ToString(), "Boxed Nullable type");
         }
     }
 }
