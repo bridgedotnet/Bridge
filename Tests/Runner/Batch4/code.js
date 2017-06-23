@@ -24949,62 +24949,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Create: function (T) {
                 return Bridge.createInstance(T);
             },
-            IsClassIsFalse: function () {
-                Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isClass(Bridge.ClientTest.Batch4.UserDefinedStructTests.S1), "#1");
-                Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isClass(Bridge.ClientTest.Batch4.UserDefinedStructTests.S2G$1(System.Int32)), "#2");
-            },
-            UserDefinedStructCanBeUsed: function () {
-                var s1 = new Bridge.ClientTest.Batch4.UserDefinedStructTests.S1.$ctor1(42);
-                Bridge.Test.NUnit.Assert.AreEqual(42, s1.I);
-            },
-            DefaultConstructorOfStructReturnsInstanceWithAllMembersInitialized: function () {
-                var s2 = Bridge.getDefaultValue(Bridge.ClientTest.Batch4.UserDefinedStructTests.S2);
-                Bridge.Test.NUnit.Assert.AreEqual(0, s2.I, "I");
-                Bridge.Test.NUnit.Assert.AreEqual(0, s2.D, "D");
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.getDefaultValue(System.DateTime), s2.DT, "DT");
-                Bridge.Test.NUnit.Assert.Null(Bridge.unbox(s2.O), "O");
-                Bridge.Test.NUnit.Assert.AreEqual(0, s2.T, "T");
-            },
-            DefaultConstructorOfStructReturnsInstanceWithAllMembersInitializedGeneric: function () {
-                var s2 = Bridge.getDefaultValue(Bridge.ClientTest.Batch4.UserDefinedStructTests.S2G$1(System.Int32));
-                Bridge.Test.NUnit.Assert.AreEqual(0, s2.I, "I");
-                Bridge.Test.NUnit.Assert.AreEqual(0, s2.D, "D");
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.getDefaultValue(System.DateTime), s2.DT, "DT");
-                Bridge.Test.NUnit.Assert.Null(Bridge.unbox(s2.O), "O");
-                Bridge.Test.NUnit.Assert.AreEqual(0, s2.T, "T");
-            },
-            DefaultValueOfStructIsInstanceWithAllMembersInitialized: function () {
-                var s2 = Bridge.getDefaultValue(Bridge.ClientTest.Batch4.UserDefinedStructTests.S2);
-                Bridge.Test.NUnit.Assert.AreEqual(0, s2.I, "I");
-                Bridge.Test.NUnit.Assert.AreEqual(0, s2.D, "D");
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.getDefaultValue(System.DateTime), s2.DT, "DT");
-                Bridge.Test.NUnit.Assert.Null(Bridge.unbox(s2.O), "O");
-                Bridge.Test.NUnit.Assert.AreEqual(0, s2.T, "T");
-            },
-            DefaultValueOfStructIsInstanceWithAllMembersInitializedGeneric: function () {
-                var s2 = Bridge.getDefaultValue(Bridge.ClientTest.Batch4.UserDefinedStructTests.S2G$1(System.Int32));
-                Bridge.Test.NUnit.Assert.AreEqual(0, s2.I, "I");
-                Bridge.Test.NUnit.Assert.AreEqual(0, s2.D, "D");
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.getDefaultValue(System.DateTime), s2.DT, "DT");
-                Bridge.Test.NUnit.Assert.Null(Bridge.unbox(s2.O), "O");
-                Bridge.Test.NUnit.Assert.AreEqual(0, s2.T, "T");
-            },
-            DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirect: function () {
-                var s2 = this.Create(Bridge.ClientTest.Batch4.UserDefinedStructTests.S2);
-                Bridge.Test.NUnit.Assert.AreEqual(0, s2.I, "I");
-                Bridge.Test.NUnit.Assert.AreEqual(0, s2.D, "D");
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.getDefaultValue(System.DateTime), s2.DT, "DT");
-                Bridge.Test.NUnit.Assert.Null(Bridge.unbox(s2.O), "O");
-                Bridge.Test.NUnit.Assert.AreEqual(0, s2.T, "T");
-            },
-            DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirectGeneric: function () {
-                var s2 = this.Create(Bridge.ClientTest.Batch4.UserDefinedStructTests.S2G$1(System.DateTime));
-                Bridge.Test.NUnit.Assert.AreEqual(0, s2.I, "I");
-                Bridge.Test.NUnit.Assert.AreEqual(0, s2.D, "D");
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.getDefaultValue(System.DateTime), s2.DT, "DT");
-                Bridge.Test.NUnit.Assert.Null(Bridge.unbox(s2.O), "O");
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.getDefaultValue(System.DateTime), s2.T, "T");
-            },
             DefaultValueOfStructWithInlineCodeDefaultConstructorWorks_SPI_1610: function () {
                 var s1 = Bridge.getDefaultValue(Bridge.ClientTest.Batch4.UserDefinedStructTests.S6);
                 var s2 = this.Create(Bridge.ClientTest.Batch4.UserDefinedStructTests.S6);
@@ -25019,56 +24963,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 Bridge.Test.NUnit.Assert.AreEqual(42, s1.i, "#1");
                 Bridge.Test.NUnit.Assert.AreEqual(42, s2.i, "#2");
             },
-            DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorks: function () {
-                var s1 = { i: 42 };
-                Bridge.Test.NUnit.Assert.AreEqual(42, s1.i);
-            },
-            DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorksGeneric: function () {
-                var s1 = { i: 42 };
-                Bridge.Test.NUnit.Assert.AreEqual(42, s1.i);
-            },
-            DefaultGetHashCodeGeneratesHashCodeBasedOnAllInstanceFields: function () {
-                Bridge.ClientTest.Batch4.UserDefinedStructTests.S3.StaticField = 10;
-                var s1 = new Bridge.ClientTest.Batch4.UserDefinedStructTests.S3.$ctor1(235, 45);
-                var s2 = new Bridge.ClientTest.Batch4.UserDefinedStructTests.S3.$ctor1(235, 45);
-                var s3 = new Bridge.ClientTest.Batch4.UserDefinedStructTests.S3.$ctor1(235, 44);
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.getHashCode(s2), Bridge.getHashCode(s1), "#1");
-                Bridge.Test.NUnit.Assert.AreNotEqual(Bridge.getHashCode(s3), Bridge.getHashCode(s1), "#2");
-                var hc = Bridge.getHashCode(s1);
-                Bridge.ClientTest.Batch4.UserDefinedStructTests.S3.StaticField = 20;
-                Bridge.Test.NUnit.Assert.AreEqual(hc, Bridge.getHashCode(s1), "#3");
-            },
-            DefaultEqualsUsesValueEqualityForAllMembers: function () {
-                var s1 = new Bridge.ClientTest.Batch4.UserDefinedStructTests.S3.$ctor1(235, 45);
-                var s2 = new Bridge.ClientTest.Batch4.UserDefinedStructTests.S3.$ctor1(235, 45);
-                var s3 = new Bridge.ClientTest.Batch4.UserDefinedStructTests.S3.$ctor1(235, 44);
-                var s4 = new Bridge.ClientTest.Batch4.UserDefinedStructTests.S4.$ctor1(235, 45);
-                Bridge.Test.NUnit.Assert.True(Bridge.equals(s1, s2.$clone()), "#1");
-                Bridge.Test.NUnit.Assert.False(Bridge.equals(s1, s3.$clone()), "#2");
-                Bridge.Test.NUnit.Assert.False(Bridge.equals(s1, s4), "#3");
-            },
-            CanOverrideGetHashCode: function () {
-                var s1 = new Bridge.ClientTest.Batch4.UserDefinedStructTests.S5.$ctor1(42);
-                Bridge.Test.NUnit.Assert.AreEqual(43, s1.getHashCode());
-            },
-            CanOverrideEquals: function () {
-                var s1 = new Bridge.ClientTest.Batch4.UserDefinedStructTests.S5.$ctor1(42);
-                var s2 = new Bridge.ClientTest.Batch4.UserDefinedStructTests.S5.$ctor1(43);
-                var s3 = new Bridge.ClientTest.Batch4.UserDefinedStructTests.S5.$ctor1(44);
-                Bridge.Test.NUnit.Assert.True(s1.equals(s2), "#1");
-                Bridge.Test.NUnit.Assert.False(s1.equals(s3), "#2");
-            },
-            CanLiftUserDefinedBinaryOperator: function () {
-                var a = new Bridge.ClientTest.Batch4.UserDefinedStructTests.S7.$ctor1(42), b = new Bridge.ClientTest.Batch4.UserDefinedStructTests.S7.$ctor1(32), c = null;
-                Bridge.Test.NUnit.Assert.AreEqual(74, System.Nullable.getValue((System.Nullable.lift(Bridge.ClientTest.Batch4.UserDefinedStructTests.S7.op_Addition, a, b))).I, "#1");
-                Bridge.Test.NUnit.Assert.Null((System.Nullable.lift(Bridge.ClientTest.Batch4.UserDefinedStructTests.S7.op_Addition, a, c)), "#2");
-            },
-            CanLiftUserDefinedUnaryOperator_SPI_1634: function () {
-                var a = new Bridge.ClientTest.Batch4.UserDefinedStructTests.S7.$ctor1(42), b = null;
-                Bridge.Test.NUnit.Assert.AreEqual(-42, ((-System.Nullable.getValue(a).I) | 0), "#1");
-                // #1634 #SPI
-                Bridge.Test.NUnit.Assert.Null(System.Nullable.lift(Bridge.ClientTest.Batch4.UserDefinedStructTests.S7.op_UnaryNegation, b), "#2");
-            },
             CanLiftUserDefinedConversionOperator_SPI_1611: function () {
                 var a = new Bridge.ClientTest.Batch4.UserDefinedStructTests.S7.$ctor1(42), b = null;
                 var d1 = null;
@@ -25082,39 +24976,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                     d2 = Bridge.ClientTest.Batch4.UserDefinedStructTests.S7.op_Explicit(b);
                 });
                 Bridge.Test.NUnit.Assert.Null(d2, "#2");
-            },
-            ClonedValueTypeIsCorrectType: function () {
-                var $t;
-                var s1 = ($t = new Bridge.ClientTest.Batch4.UserDefinedStructTests.MS1(), $t.i = 42, $t);
-                var s2 = s1.$clone();
-                Bridge.Test.NUnit.Assert.True(Bridge.is(s2.$clone(), Bridge.ClientTest.Batch4.UserDefinedStructTests.MS1));
-            },
-            FieldsAreClonedWhenValueTypeIsCopied: function () {
-                var $t;
-                var s1 = ($t = new Bridge.ClientTest.Batch4.UserDefinedStructTests.MS1(), $t.i = 42, $t);
-                var s2 = s1.$clone();
-                Bridge.Test.NUnit.Assert.AreEqual(42, s2.i);
-                s2.i = 43;
-                Bridge.Test.NUnit.Assert.AreEqual(42, s1.i);
-                Bridge.Test.NUnit.Assert.AreEqual(43, s2.i);
-            },
-            AutoPropertyBackingFieldsAreClonedWhenValueTypeIsCopied: function () {
-                var $t;
-                var s1 = ($t = new Bridge.ClientTest.Batch4.UserDefinedStructTests.MS1(), $t.P1 = "hello", $t);
-                var s2 = s1.$clone();
-                Bridge.Test.NUnit.Assert.AreEqual("hello", s2.P1);
-                s2.P1 = "world";
-                Bridge.Test.NUnit.Assert.AreEqual("hello", s1.P1);
-                Bridge.Test.NUnit.Assert.AreEqual("world", s2.P1);
-            },
-            PropertiesWithFieldImplementationAreClonedWhenValueTypeIsCopied: function () {
-                var $t;
-                var s1 = ($t = new Bridge.ClientTest.Batch4.UserDefinedStructTests.MS1(), $t.P2 = 42, $t);
-                var s2 = s1.$clone();
-                Bridge.Test.NUnit.Assert.AreEqual(42, s2.P2);
-                s2.P2 = 43;
-                Bridge.Test.NUnit.Assert.AreEqual(42, s1.P2);
-                Bridge.Test.NUnit.Assert.AreEqual(43, s2.P2);
             },
             AutoEventBackingFieldsAreClonedWhenValueTypeIsCopied_SPI_1612: function () {
                 var count = 0;
@@ -25132,46 +24993,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 s2.RaiseE();
                 // #1612
                 Bridge.Test.NUnit.Assert.AreEqual(3, count);
-            },
-            NestedStructsAreClonedWhenValueTypeIsCopied_SPI_1613: function () {
-                var $t, $t1;
-                var s1 = ($t = new Bridge.ClientTest.Batch4.UserDefinedStructTests.MS1(), $t.N = ($t1 = new Bridge.ClientTest.Batch4.UserDefinedStructTests.MS2(), $t1.i = 42, $t1), $t);
-                var s2 = s1.$clone();
-                Bridge.Test.NUnit.Assert.AreEqual(42, s2.N.i);
-                s2.N.i = 43;
-                // #1613
-                Bridge.Test.NUnit.Assert.AreEqual(42, s1.N.i);
-
-                Bridge.Test.NUnit.Assert.AreEqual(43, s2.N.i);
-            },
-            GenericMutableValueTypeWorks: function () {
-                var $t;
-                var s1 = ($t = new (Bridge.ClientTest.Batch4.UserDefinedStructTests.MS3$1(System.Int32))(), $t.t = 42, $t);
-                var s2 = s1.$clone();
-                Bridge.Test.NUnit.Assert.AreEqual(42, s2.t);
-                s2.t = 43;
-                Bridge.Test.NUnit.Assert.True(Bridge.is(s2.$clone(), Bridge.ClientTest.Batch4.UserDefinedStructTests.MS3$1(System.Int32)));
-                Bridge.Test.NUnit.Assert.AreEqual(42, s1.t);
-                Bridge.Test.NUnit.Assert.AreEqual(43, s2.t);
-            },
-            CloningValueTypeWithNamedDefaultConstructorWorks: function () {
-                var $t;
-                var s1 = ($t = new Bridge.ClientTest.Batch4.UserDefinedStructTests.MS1(), $t.i = 42, $t);
-                var s2 = s1.$clone();
-                s1.i = 10;
-                Bridge.Test.NUnit.Assert.AreEqual(42, s2.i);
-                Bridge.Test.NUnit.Assert.True(Bridge.is(s2.$clone(), Bridge.ClientTest.Batch4.UserDefinedStructTests.MS1));
-            },
-            CloningNullableValueTypesWorks: function () {
-                var $t;
-                var s1 = null;
-                var s2 = ($t = new Bridge.ClientTest.Batch4.UserDefinedStructTests.MS1(), $t.i = 42, $t);
-                var s3 = System.Nullable.lift1("$clone", s1);
-                var s4 = System.Nullable.lift1("$clone", s2);
-
-                Bridge.Test.NUnit.Assert.Null(System.Nullable.lift1("$clone", s3), "s3 should be null");
-                Bridge.Test.NUnit.Assert.AreEqual(42, System.Nullable.getValue(s4).i, "s4.i should be 42");
-                Bridge.Test.NUnit.Assert.False(Bridge.referenceEquals(System.Nullable.lift1("$clone", s2), System.Nullable.lift1("$clone", s4)), "s2 and s4 should not be the same object");
             }
         }
     });
