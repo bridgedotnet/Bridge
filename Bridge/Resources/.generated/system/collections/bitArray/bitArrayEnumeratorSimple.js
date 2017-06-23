@@ -15,7 +15,7 @@
                     if (this.index >= this.bitarray.Count) {
                         throw new System.InvalidOperationException("Enumeration already finished.");
                     }
-                    return Bridge.box(this.currentElement, System.Boolean, $box_.System.Boolean.toString);
+                    return Bridge.box(this.currentElement, System.Boolean, System.Boolean.toString);
                 }
             }
         },

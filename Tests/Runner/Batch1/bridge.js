@@ -1918,6 +1918,12 @@
             return null;
         },
 
+        toStringFn: function(type) {
+            return function(value) {
+                return System.Enum.toString(type, value);
+            };
+        },
+
         toString: function (enumType, value, forceFlags) {
             if (arguments.length === 0) {
                 return "System.Enum";
@@ -4712,14 +4718,6 @@
         }
     });
 
-    var $box_ = {};
-
-    Bridge.ns("System.Boolean", $box_);
-
-    Bridge.apply($box_.System.Boolean, {
-        toString: function (obj) { return System.Boolean.toString(obj); }
-    });
-
     // @source formattableStringFactory.js
 
     Bridge.define("System.Runtime.CompilerServices.FormattableStringFactory", {
@@ -6683,7 +6681,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             },
 
             format: function (number, format, provider) {
-                return Bridge.Int.format(number, format, provider, System.Double);
+                return Bridge.Int.format(number, format || 'G', provider, System.Double);
             },
 
             equals: function (v1, v2) {
@@ -6740,7 +6738,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             tryParse: System.Double.tryParse,
 
             format: function (number, format, provider) {
-                return Bridge.Int.format(number, format, provider, System.Single);
+                return Bridge.Int.format(number, format || 'G', provider, System.Single);
             },
 
             equals: function (v1, v2) {
@@ -26393,7 +26391,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     if (this.index >= this.bitarray.Count) {
                         throw new System.InvalidOperationException("Enumeration already finished.");
                     }
-                    return Bridge.box(this.currentElement, System.Boolean, $box_.System.Boolean.toString);
+                    return Bridge.box(this.currentElement, System.Boolean, System.Boolean.toString);
                 }
             }
         },

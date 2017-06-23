@@ -21,5 +21,10 @@ namespace Bridge
         public TemplateAttribute(string format, string nonExpandedFormat)
         {
         }
+
+        public string DelegateTo
+        {
+            get; set;
+        }
     }
 }

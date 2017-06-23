@@ -35,10 +35,10 @@ namespace System
         [Template("System.Nullable.equalsT({this}, {other})")]
         public override extern bool Equals(object other);
 
-        [Template("System.Nullable.getHashCode({this}, {T:GetHashCode})")]
+        [Template("System.Nullable.getHashCode({this}, {T:GetHashCode})", DelegateTo = "System.Nullable.getHashCode({T:GetHashCode})")]
         public override extern int GetHashCode();
 
-        [Template("System.Nullable.toString({this}, {T:ToString})")]
+        [Template("System.Nullable.toString({this}, {T:ToString})", DelegateTo = "System.Nullable.toStringFn({T:ToString})")]
         public override extern string ToString();
     }
 

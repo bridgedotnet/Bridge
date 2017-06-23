@@ -646,16 +646,24 @@ namespace Bridge.Translator
                             node = argsInfo.Expression;
                         }
 
+                        IType type = null;
                         if (node != null)
                         {
                             var rr = this.Emitter.Resolver.ResolveNode(node, this.Emitter);
-                            var type = rr.Type;
+                            type = rr.Type;
                             var mrr = rr as MemberResolveResult;
                             if (mrr != null && mrr.Member.ReturnType.Kind != TypeKind.Enum && mrr.TargetResult != null)
                             {
                                 type = mrr.TargetResult.Type;
                             }
+                        }
+                        else
+                        {
+                            type = this.ArgumentsInfo.ThisType;
+                        }
 
+                        if (type != null)
+                        {
                             bool needName = this.NeedName(type);
 
                             if (needName)
