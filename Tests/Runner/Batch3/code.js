@@ -22874,6 +22874,72 @@ Bridge.$N1391Result =                     r;
         inherits: [Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Person")]
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2818", {
+        statics: {
+            methods: {
+                MyStructToString: function (s) {
+                    return s.Value;
+                },
+                MyStructGetHashCode: function (s) {
+                    return 143;
+                },
+                TestMethod: function (i) {
+                    return i;
+                },
+                TestDelegateTo: function () {
+                    Bridge.Test.NUnit.Assert.AreEqual("abc", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2818.MyStructToString(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2818.MyStruct.$ctor1("abc")));
+                    Bridge.Test.NUnit.Assert.AreEqual(143, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2818.MyStructGetHashCode(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2818.MyStruct.$ctor1("abc")));
+
+                    var o = Bridge.box(1.0, System.Double, System.Double.format, System.Double.getHashCode);
+                    Bridge.Test.NUnit.Assert.AreEqual(System.Double.getHashCode((1.0)), Bridge.getHashCode(o));
+
+                    Bridge.Test.NUnit.Assert.AreEqual(10, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2818.TestMethod(10));
+
+                    var func = function (i) { return Bridge.ClientTest.Batch3.BridgeIssues.Bridge2818.TestMethod(i); };
+                    Bridge.Test.NUnit.Assert.AreEqual(10, func(10));
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2818.MyStruct", {
+        $kind: "struct",
+        statics: {
+            methods: {
+                getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2818.MyStruct(); }
+            }
+        },
+        props: {
+            Value: null
+        },
+        ctors: {
+            $ctor1: function (value) {
+                this.$initialize();
+                this.Value = value;
+            },
+            ctor: function () {
+                this.$initialize();
+            }
+        },
+        methods: {
+            getHashCode: function () {
+                var h = Bridge.addHash([3904302783, this.Value]);
+                return h;
+            },
+            equals: function (o) {
+                if (!Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2818.MyStruct)) {
+                    return false;
+                }
+                return Bridge.equals(this.Value, o.Value);
+            },
+            $clone: function (to) {
+                var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2818.MyStruct();
+                s.Value = this.Value;
+                return s;
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2840", {
         statics: {
             methods: {
