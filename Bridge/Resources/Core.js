@@ -7,6 +7,8 @@
             return x;
         },
 
+        isNode: !(new Function("try{return window===this;}catch(e){return false;}")()),
+
         geti: function (scope, name1, name2) {
             if (Bridge.hasValue(scope[name1])) {
                 return name1;

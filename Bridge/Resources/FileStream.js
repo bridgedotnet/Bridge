@@ -1,4 +1,4 @@
-    Bridge.define("System.IO.FileStream", {
+    Bridge.define("Bridge.FileStream", {
         inherits: [System.IO.Stream],
         fields: {
             _isOpen: false,
