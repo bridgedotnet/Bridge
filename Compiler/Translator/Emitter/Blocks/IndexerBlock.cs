@@ -195,7 +195,6 @@ namespace Bridge.Translator
 
         public static IndexerAccessor GetIndexerAccessor(IEmitter emitter, IProperty member, bool setter)
         {
-            string inlineCode = null;
             var method = setter ? member.Setter : member.Getter;
 
             if (method == null)
@@ -204,24 +203,13 @@ namespace Bridge.Translator
             }
 
             var inlineAttr = emitter.GetAttribute(method.Attributes, Translator.Bridge_ASSEMBLY + ".TemplateAttribute");
-
             var ignoreAccessor = emitter.Validator.IsExternalType(method);
-
-            if (inlineAttr != null)
-            {
-                var inlineArg = inlineAttr.PositionalArguments[0];
-
-                if (inlineArg.ConstantValue != null)
-                {
-                    inlineCode = inlineArg.ConstantValue.ToString();
-                }
-            }
 
             return new IndexerAccessor
             {
                 IgnoreAccessor = ignoreAccessor,
                 InlineAttr = inlineAttr,
-                InlineCode = inlineCode,
+                InlineCode = emitter.GetInline(method),
                 Method = method
             };
         }

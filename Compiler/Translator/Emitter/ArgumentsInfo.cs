@@ -99,6 +99,11 @@ namespace Bridge.Translator
             get; set;
         }
 
+        public IType ThisType
+        {
+            get; set;
+        }
+
         public ArgumentsInfo(IEmitter emitter, IMethod method)
         {
             this.Emitter = emitter;
