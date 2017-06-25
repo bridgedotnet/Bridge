@@ -200,7 +200,7 @@ namespace Bridge.Translator
                     bool delegated = false;
                     if (attr != null && attr.NamedArguments.Count > 0)
                     {
-                        var namedArg = attr.NamedArguments.FirstOrDefault(arg => arg.Key.Name == "DelegateTo");
+                        var namedArg = attr.NamedArguments.FirstOrDefault(arg => arg.Key.Name == CS.Attributes.Template.PROPERTY_FN);
 
                         if (namedArg.Key != null)
                         {

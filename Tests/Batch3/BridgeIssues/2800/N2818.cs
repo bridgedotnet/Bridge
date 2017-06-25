@@ -23,13 +23,13 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 this.Value = value;
             }
 
-            [Template(DelegateTo = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2818.MyStructToString")]
+            [Template(Fn = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2818.MyStructToString")]
             public override extern string ToString();
 
-            [Template(DelegateTo = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2818.MyStructGetHashCode")]
+            [Template(Fn = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2818.MyStructGetHashCode")]
             public override extern int GetHashCode();
 
-            [Template("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2818.TestMethod({i})", DelegateTo = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2818.TestMethod")]
+            [Template("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2818.TestMethod({i})", Fn = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2818.TestMethod")]
             public static extern int TestMethod(int i);
         }
 
@@ -49,7 +49,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         [Test]
-        public static void TestDelegateTo()
+        public static void TestFnProperty()
         {
             Assert.AreEqual("abc", new MyStruct("abc").ToString());
             Assert.AreEqual(143, new MyStruct("abc").GetHashCode());

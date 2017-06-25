@@ -10,7 +10,7 @@ namespace Bridge
     [NonScriptable]
     public sealed class TemplateAttribute : Attribute
     {
-        public TemplateAttribute()
+        internal TemplateAttribute()
         {
         }
 
@@ -22,7 +22,7 @@ namespace Bridge
         {
         }
 
-        public string DelegateTo
+        public string Fn
         {
             get; set;
         }

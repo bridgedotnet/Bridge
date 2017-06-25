@@ -37,7 +37,7 @@ namespace System
         [Template("Bridge.compare({this}, {other})")]
         public extern int CompareTo(object obj);
 
-        [Template(DelegateTo = "System.Boolean.toString")]
+        [Template(Fn = "System.Boolean.toString")]
         public override extern string ToString();
     }
 }

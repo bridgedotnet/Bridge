@@ -521,7 +521,7 @@ namespace Bridge.Translator
                 if (attr != null && entity is IMethod && attr.PositionalArguments.Count == 0 &&
                     attr.NamedArguments.Count > 0)
                 {
-                    var namedArg = attr.NamedArguments.FirstOrDefault(arg => arg.Key.Name == "DelegateTo");
+                    var namedArg = attr.NamedArguments.FirstOrDefault(arg => arg.Key.Name == CS.Attributes.Template.PROPERTY_FN);
                     if (namedArg.Value != null)
                     {
                         inlineCode = namedArg.Value.ConstantValue as string;

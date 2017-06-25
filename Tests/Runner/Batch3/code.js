@@ -22886,7 +22886,7 @@ Bridge.$N1391Result =                     r;
                 TestMethod: function (i) {
                     return i;
                 },
-                TestDelegateTo: function () {
+                TestFnProperty: function () {
                     Bridge.Test.NUnit.Assert.AreEqual("abc", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2818.MyStructToString(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2818.MyStruct.$ctor1("abc")));
                     Bridge.Test.NUnit.Assert.AreEqual(143, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2818.MyStructGetHashCode(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2818.MyStruct.$ctor1("abc")));
 
