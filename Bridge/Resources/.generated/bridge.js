@@ -9691,13 +9691,13 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 throw new System.Diagnostics.Contracts.ContractException(failureKind, displayMessage, userMessage, conditionText, innerException);
             }
         },
-        assert: function (failureKind, condition, message) {
-            if (!condition()) {
+        assert: function (failureKind, scope, condition, message) {
+            if (!condition.call(scope)) {
                 System.Diagnostics.Contracts.Contract.reportFailure(failureKind, message, condition, null);
             }
         },
-        requires: function (TException, condition, message) {
-            if (!condition()) {
+        requires: function (TException, scope, condition, message) {
+            if (!condition.call(scope)) {
                 System.Diagnostics.Contracts.Contract.reportFailure(0, message, condition, null, TException);
             }
         },

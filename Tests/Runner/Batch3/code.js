@@ -23113,6 +23113,42 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2859", {
+        statics: {
+            methods: {
+                TestContractAssertWithThis: function () {
+                    new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2859.A().Works();
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2859.A", {
+        props: {
+            J: {
+                get: function () {
+                    return 3;
+                }
+            }
+        },
+        methods: {
+            Works: function () {
+                Bridge.Test.NUnit.Assert.Throws$2(System.Diagnostics.Contracts.ContractException, Bridge.fn.bind(this, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2859.A.f1));
+
+                System.Diagnostics.Contracts.Contract.assert(4, this, function () { return this.J === 3; });
+                Bridge.Test.NUnit.Assert.True(true);
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2859.A", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2859.A, {
+        f1: function () {
+            System.Diagnostics.Contracts.Contract.assert(5, this, function () { return this.J === 4; });
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge294", {
         fields: {
             Name: null

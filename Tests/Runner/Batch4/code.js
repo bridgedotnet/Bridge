@@ -6071,91 +6071,91 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             Assume: function () {
                 var a = 0;
                 Bridge.Test.NUnit.Assert.Throws$2(System.Diagnostics.Contracts.ContractException, function () {
-                    System.Diagnostics.Contracts.Contract.assert(5, function () { return a !== 0; });
+                    System.Diagnostics.Contracts.Contract.assert(5, this, function () { return a !== 0; });
                 }, "ContractException");
                 this.AssertNoExceptions(function () {
-                    System.Diagnostics.Contracts.Contract.assert(5, function () { return a === 0; });
+                    System.Diagnostics.Contracts.Contract.assert(5, this, function () { return a === 0; });
                 });
                 this.AssertException(function () {
-                    System.Diagnostics.Contracts.Contract.assert(5, function () { return a === 99; });
+                    System.Diagnostics.Contracts.Contract.assert(5, this, function () { return a === 99; });
                 }, System.Diagnostics.Contracts.ContractFailureKind.assume, "Contract 'a === 99' failed", null, null);
             },
             AssumeWithUserMessage: function () {
                 var a = 0;
                 Bridge.Test.NUnit.Assert.Throws$2(System.Diagnostics.Contracts.ContractException, function () {
-                    System.Diagnostics.Contracts.Contract.assert(5, function () { return a !== 0; }, "is not zero");
+                    System.Diagnostics.Contracts.Contract.assert(5, this, function () { return a !== 0; }, "is not zero");
                 }, "ContractException");
                 this.AssertNoExceptions(function () {
-                    System.Diagnostics.Contracts.Contract.assert(5, function () { return a === 0; }, "is zero");
+                    System.Diagnostics.Contracts.Contract.assert(5, this, function () { return a === 0; }, "is zero");
                 });
                 this.AssertException(function () {
-                    System.Diagnostics.Contracts.Contract.assert(5, function () { return a === 99; }, "is 99");
+                    System.Diagnostics.Contracts.Contract.assert(5, this, function () { return a === 99; }, "is 99");
                 }, System.Diagnostics.Contracts.ContractFailureKind.assume, "Contract 'a === 99' failed: is 99", "is 99", null);
             },
             Assert: function () {
                 var a = 0;
                 Bridge.Test.NUnit.Assert.Throws$2(System.Diagnostics.Contracts.ContractException, function () {
-                    System.Diagnostics.Contracts.Contract.assert(4, function () { return a !== 0; });
+                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return a !== 0; });
                 }, "ContractException");
                 this.AssertNoExceptions(function () {
-                    System.Diagnostics.Contracts.Contract.assert(4, function () { return a === 0; });
+                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return a === 0; });
                 });
                 this.AssertException(function () {
-                    System.Diagnostics.Contracts.Contract.assert(4, function () { return a === 99; });
+                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return a === 99; });
                 }, System.Diagnostics.Contracts.ContractFailureKind.assert, "Contract 'a === 99' failed", null, null);
             },
             AssertWithUserMessage: function () {
                 var a = 0;
                 Bridge.Test.NUnit.Assert.Throws$2(System.Diagnostics.Contracts.ContractException, function () {
-                    System.Diagnostics.Contracts.Contract.assert(4, function () { return a !== 0; }, "is not zero");
+                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return a !== 0; }, "is not zero");
                 }, "ContractException");
                 this.AssertNoExceptions(function () {
-                    System.Diagnostics.Contracts.Contract.assert(4, function () { return a === 0; }, "is zero");
+                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return a === 0; }, "is zero");
                 });
                 this.AssertException(function () {
-                    System.Diagnostics.Contracts.Contract.assert(4, function () { return a === 99; }, "is 99");
+                    System.Diagnostics.Contracts.Contract.assert(4, this, function () { return a === 99; }, "is 99");
                 }, System.Diagnostics.Contracts.ContractFailureKind.assert, "Contract 'a === 99' failed: is 99", "is 99", null);
             },
             Requires: function () {
                 var a = 0;
                 Bridge.Test.NUnit.Assert.Throws$2(System.Diagnostics.Contracts.ContractException, function () {
-                    System.Diagnostics.Contracts.Contract.assert(0, function () { return a !== 0; });
+                    System.Diagnostics.Contracts.Contract.assert(0, this, function () { return a !== 0; });
                 }, "ContractException");
                 this.AssertNoExceptions(function () {
-                    System.Diagnostics.Contracts.Contract.assert(0, function () { return a === 0; });
+                    System.Diagnostics.Contracts.Contract.assert(0, this, function () { return a === 0; });
                 });
                 this.AssertException(function () {
-                    System.Diagnostics.Contracts.Contract.assert(0, function () { return a === 99; });
+                    System.Diagnostics.Contracts.Contract.assert(0, this, function () { return a === 99; });
                 }, System.Diagnostics.Contracts.ContractFailureKind.precondition, "Contract 'a === 99' failed", null, null);
             },
             RequiresWithUserMessage: function () {
                 var a = 0;
                 Bridge.Test.NUnit.Assert.Throws$2(System.Diagnostics.Contracts.ContractException, function () {
-                    System.Diagnostics.Contracts.Contract.assert(0, function () { return a !== 0; }, "must not be zero");
+                    System.Diagnostics.Contracts.Contract.assert(0, this, function () { return a !== 0; }, "must not be zero");
                 }, "ContractException");
                 this.AssertNoExceptions(function () {
-                    System.Diagnostics.Contracts.Contract.assert(0, function () { return a === 0; }, "can only be zero");
+                    System.Diagnostics.Contracts.Contract.assert(0, this, function () { return a === 0; }, "can only be zero");
                 });
                 this.AssertException(function () {
-                    System.Diagnostics.Contracts.Contract.assert(0, function () { return a === 99; }, "can only be 99");
+                    System.Diagnostics.Contracts.Contract.assert(0, this, function () { return a === 99; }, "can only be 99");
                 }, System.Diagnostics.Contracts.ContractFailureKind.precondition, "Contract 'a === 99' failed: can only be 99", "can only be 99", null);
             },
             RequiresWithTypeException: function () {
                 var a = 0;
                 Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
-                    System.Diagnostics.Contracts.Contract.requires(System.Exception, function () { return a !== 0; });
+                    System.Diagnostics.Contracts.Contract.requires(System.Exception, this, function () { return a !== 0; });
                 }, "Exception");
                 this.AssertNoExceptions(function () {
-                    System.Diagnostics.Contracts.Contract.requires(System.Exception, function () { return a === 0; });
+                    System.Diagnostics.Contracts.Contract.requires(System.Exception, this, function () { return a === 0; });
                 });
             },
             RequiredWithTypeExceptionAndUserMessage: function () {
                 var a = 0;
                 Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
-                    System.Diagnostics.Contracts.Contract.requires(System.Exception, function () { return a !== 0; }, "must not be zero");
+                    System.Diagnostics.Contracts.Contract.requires(System.Exception, this, function () { return a !== 0; }, "must not be zero");
                 }, "Exception");
                 this.AssertNoExceptions(function () {
-                    System.Diagnostics.Contracts.Contract.requires(System.Exception, function () { return a === 0; }, "can only be zero");
+                    System.Diagnostics.Contracts.Contract.requires(System.Exception, this, function () { return a === 0; }, "can only be zero");
                 });
             },
             ForAll: function () {
