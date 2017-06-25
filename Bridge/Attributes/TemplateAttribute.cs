@@ -10,7 +10,7 @@ namespace Bridge
     [NonScriptable]
     public sealed class TemplateAttribute : Attribute
     {
-        internal TemplateAttribute()
+        public TemplateAttribute()
         {
         }
 
