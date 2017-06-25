@@ -176,6 +176,9 @@ namespace Bridge.ClientTest
             decimal? m = -4;
             long? l = -5;
             bool? b = true;
+            char? c = 'a';
+            Values? v = Values.Value1;
+            DateTime? dt = new DateTime();
 
             int ea = -12345;
             double ed = -2;
@@ -183,6 +186,9 @@ namespace Bridge.ClientTest
             decimal em = -4;
             long el = -5;
             bool eb = true;
+            char ec = 'a';
+            Values ev = Values.Value1;
+            DateTime edt = new DateTime();
 
             o = a;
             Assert.AreEqual(a.GetHashCode(), o.GetHashCode());
@@ -207,6 +213,18 @@ namespace Bridge.ClientTest
             o = b;
             Assert.AreEqual(b.GetHashCode(), o.GetHashCode());
             Assert.AreEqual(eb.GetHashCode(), b.GetHashCode());
+
+            o = c;
+            Assert.AreEqual(c.GetHashCode(), o.GetHashCode());
+            Assert.AreEqual(ec.GetHashCode(), c.GetHashCode());
+
+            o = v;
+            Assert.AreEqual(v.GetHashCode(), o.GetHashCode());
+            Assert.AreEqual(ev.GetHashCode(), v.GetHashCode());
+
+            o = dt;
+            Assert.AreEqual(dt.GetHashCode(), o.GetHashCode());
+            Assert.AreEqual(edt.GetHashCode(), dt.GetHashCode());
         }
 
         [Test]

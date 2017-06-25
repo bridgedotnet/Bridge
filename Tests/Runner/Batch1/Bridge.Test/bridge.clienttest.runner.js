@@ -12644,132 +12644,132 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 LiftedEqualityWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedEqualityWorks()", $t.Line = "212", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedEqualityWorks()", $t.Line = "230", $t));
                     t.Fixture.LiftedEqualityWorks();
                 },
                 LiftedInequalityWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedInequalityWorks()", $t.Line = "222", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedInequalityWorks()", $t.Line = "240", $t));
                     t.Fixture.LiftedInequalityWorks();
                 },
                 LiftedLessThanWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedLessThanWorks()", $t.Line = "232", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedLessThanWorks()", $t.Line = "250", $t));
                     t.Fixture.LiftedLessThanWorks();
                 },
                 LiftedGreaterThanWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedGreaterThanWorks()", $t.Line = "242", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedGreaterThanWorks()", $t.Line = "260", $t));
                     t.Fixture.LiftedGreaterThanWorks();
                 },
                 LiftedLessThanOrEqualWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedLessThanOrEqualWorks()", $t.Line = "252", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedLessThanOrEqualWorks()", $t.Line = "270", $t));
                     t.Fixture.LiftedLessThanOrEqualWorks();
                 },
                 LiftedGreaterThanOrEqualWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedGreaterThanOrEqualWorks()", $t.Line = "262", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedGreaterThanOrEqualWorks()", $t.Line = "280", $t));
                     t.Fixture.LiftedGreaterThanOrEqualWorks();
                 },
                 LiftedSubtractionWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedSubtractionWorks()", $t.Line = "272", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedSubtractionWorks()", $t.Line = "290", $t));
                     t.Fixture.LiftedSubtractionWorks();
                 },
                 LiftedAdditionWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedAdditionWorks()", $t.Line = "280", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedAdditionWorks()", $t.Line = "298", $t));
                     t.Fixture.LiftedAdditionWorks();
                 },
                 LiftedModWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedModWorks()", $t.Line = "288", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedModWorks()", $t.Line = "306", $t));
                     t.Fixture.LiftedModWorks();
                 },
                 LiftedFloatingPointDivisionWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedFloatingPointDivisionWorks()", $t.Line = "296", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedFloatingPointDivisionWorks()", $t.Line = "314", $t));
                     t.Fixture.LiftedFloatingPointDivisionWorks();
                 },
                 LiftedIntegerDivisionWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedIntegerDivisionWorks()", $t.Line = "304", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedIntegerDivisionWorks()", $t.Line = "322", $t));
                     t.Fixture.LiftedIntegerDivisionWorks();
                 },
                 LiftedMultiplicationWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedMultiplicationWorks()", $t.Line = "312", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedMultiplicationWorks()", $t.Line = "330", $t));
                     t.Fixture.LiftedMultiplicationWorks();
                 },
                 LiftedBitwiseAndWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedBitwiseAndWorks()", $t.Line = "320", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedBitwiseAndWorks()", $t.Line = "338", $t));
                     t.Fixture.LiftedBitwiseAndWorks();
                 },
                 LiftedBitwiseOrWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedBitwiseOrWorks()", $t.Line = "328", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedBitwiseOrWorks()", $t.Line = "346", $t));
                     t.Fixture.LiftedBitwiseOrWorks();
                 },
                 LiftedBitwiseXorWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedBitwiseXorWorks()", $t.Line = "336", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedBitwiseXorWorks()", $t.Line = "354", $t));
                     t.Fixture.LiftedBitwiseXorWorks();
                 },
                 LiftedLeftShiftWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedLeftShiftWorks()", $t.Line = "344", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedLeftShiftWorks()", $t.Line = "362", $t));
                     t.Fixture.LiftedLeftShiftWorks();
                 },
                 LiftedSignedRightShiftWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedSignedRightShiftWorks()", $t.Line = "352", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedSignedRightShiftWorks()", $t.Line = "370", $t));
                     t.Fixture.LiftedSignedRightShiftWorks();
                 },
                 LiftedUnsignedRightShiftWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedUnsignedRightShiftWorks()", $t.Line = "360", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedUnsignedRightShiftWorks()", $t.Line = "378", $t));
                     t.Fixture.LiftedUnsignedRightShiftWorks();
                 },
                 LiftedBooleanAndWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedBooleanAndWorks()", $t.Line = "368", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedBooleanAndWorks()", $t.Line = "386", $t));
                     t.Fixture.LiftedBooleanAndWorks();
                 },
                 LiftedBooleanOrWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedBooleanOrWorks()", $t.Line = "383", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedBooleanOrWorks()", $t.Line = "401", $t));
                     t.Fixture.LiftedBooleanOrWorks();
                 },
                 LiftedBooleanNotWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedBooleanNotWorks()", $t.Line = "398", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedBooleanNotWorks()", $t.Line = "416", $t));
                     t.Fixture.LiftedBooleanNotWorks();
                 },
                 LiftedNegationWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedNegationWorks()", $t.Line = "407", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedNegationWorks()", $t.Line = "425", $t));
                     t.Fixture.LiftedNegationWorks();
                 },
                 LiftedUnaryPlusWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedUnaryPlusWorks()", $t.Line = "415", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedUnaryPlusWorks()", $t.Line = "433", $t));
                     t.Fixture.LiftedUnaryPlusWorks();
                 },
                 LiftedOnesComplementWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedOnesComplementWorks()", $t.Line = "423", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedOnesComplementWorks()", $t.Line = "441", $t));
                     t.Fixture.LiftedOnesComplementWorks();
                 },
                 CoalesceWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CoalesceWorks()", $t.Line = "431", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CoalesceWorks()", $t.Line = "449", $t));
                     t.Fixture.CoalesceWorks();
                 },
                 BoxedandUnboxedEnumToStringWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "BoxedandUnboxedEnumToStringWorks()", $t.Line = "449", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "BoxedandUnboxedEnumToStringWorks()", $t.Line = "467", $t));
                     t.Fixture.BoxedandUnboxedEnumToStringWorks();
                 }
             }
