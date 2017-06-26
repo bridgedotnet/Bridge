@@ -97,7 +97,7 @@ namespace Bridge
         /// <param name="obj">The object to convert.</param>
         /// <returns>true if the object is not null, zero, empty string or undefined.</returns>
         [Template("!!{0}")]
-        public static extern bool ToBoolean(object obj);
+        public static extern bool Boolean(object obj);
 
         /// <summary>
         /// Generate <c>member in obj</c>.
@@ -115,7 +115,7 @@ namespace Bridge
         /// <param name="name">The method to invoke.</param>
         /// <param name="args">The arguments passed into the method.</param>
         /// <returns></returns>
-        [Template("{instance}[{name}]({*args})")]
+        [Template("{obj}[{name}]({*args})")]
         public static extern object InvokeMethod(object obj, string name, params object[] args);
 
         /// <summary>
