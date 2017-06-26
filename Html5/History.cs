@@ -8,9 +8,7 @@ namespace Bridge.Html5
     [Name("History")]
     public class History
     {
-        private History()
-        {
-        }
+        extern History();
 
         /// <summary>
         /// Returns an Integer representing the number of elements in the session history, including the currently loaded page. For example, for a page loaded in a new tab this property returns 1.

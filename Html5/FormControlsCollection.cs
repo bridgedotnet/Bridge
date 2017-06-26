@@ -8,22 +8,14 @@ namespace Bridge.Html5
     [Name("HTMLFormControlsCollection")]
     public class FormControlsCollection : HTMLCollection
     {
-        internal FormControlsCollection()
-        {
-        }
+        extern internal FormControlsCollection();
 
         /// <summary>
         /// Gets the node or list of nodes in the collection whose name or id match the specified name, or null if no nodes match.
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public new virtual Union<ElementList, HTMLElement> this[string name]
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public extern new virtual Union<ElementList, HTMLElement> this[string name] { get; }
 
         /// <summary>
         /// Gets the node or list of nodes in the collection whose name or id match the specified name, or null if no nodes match.

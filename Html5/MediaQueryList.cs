@@ -13,9 +13,7 @@ namespace Bridge.Html5
     [Name("MediaQueryList")]
     public class MediaQueryList
     {
-        private MediaQueryList()
-        {
-        }
+        extern MediaQueryList();
 
         /// <summary>
         /// Adds a new listener to the media query list. If the specified listener is already in the list, this method has no effect.

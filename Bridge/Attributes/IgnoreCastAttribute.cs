@@ -14,8 +14,6 @@ namespace Bridge
     [NonScriptable]
     public sealed class CastAttribute : Attribute
     {
-        public CastAttribute(string value)
-        {
-        }
+        public extern CastAttribute(string value);
     }
 }

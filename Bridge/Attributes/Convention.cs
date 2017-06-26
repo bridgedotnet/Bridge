@@ -32,7 +32,7 @@ namespace Bridge
         /// <summary>
         /// Specifies notation to be applied by [Convention] attribute.
         /// </summary>
-        public Notation Notation
+        public extern Notation Notation
         {
             get; set;
         }
@@ -40,7 +40,7 @@ namespace Bridge
         /// <summary>
         /// Specifies target(s) to be filtered by [Convention] attribute.
         /// </summary>
-        public ConventionTarget Target
+        public extern ConventionTarget Target
         {
             get; set;
         }
@@ -48,7 +48,7 @@ namespace Bridge
         /// <summary>
         /// Specifies type member(s) to be filtered by [Convention] attribute.
         /// </summary>
-        public ConventionMember Member
+        public extern ConventionMember Member
         {
             get; set;
         }
@@ -56,7 +56,7 @@ namespace Bridge
         /// <summary>
         /// Specifies access modifiers to be filtered by [Convention] attribute.
         /// </summary>
-        public ConventionAccessibility Accessibility
+        public extern ConventionAccessibility Accessibility
         {
             get; set;
         }
@@ -67,7 +67,7 @@ namespace Bridge
         /// It can contain a simple path like "YourNamespace.*"
         /// or a regex form with "regex:" prefix like "regex:YourNamespace\.([A-Za-z0-9\-]*)YourEntity"
         /// </summary>
-        public string Filter
+        public extern string Filter
         {
             get; set;
         }
@@ -75,7 +75,7 @@ namespace Bridge
         /// <summary>
         /// Applied to assembly attributes only
         /// </summary>
-        public int Priority
+        public extern int Priority
         {
             get; set;
         }
@@ -115,7 +115,7 @@ namespace Bridge
         Const = 0x10,
         EnumItem = 0x20
     }
-
+    
     /// <summary>
     /// Specifies access modifiers to be filtered by [Convention] attribute.
     /// </summary>

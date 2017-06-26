@@ -10,12 +10,8 @@ namespace System
     [Constructor("ReferenceError")]
     public class ReferenceException : Exception
     {
-        public ReferenceException()
-        {
-        }
+        public extern ReferenceException();
 
-        public ReferenceException(string message)
-        {
-        }
+        public extern ReferenceException(string message);
     }
 }

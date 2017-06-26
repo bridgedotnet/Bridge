@@ -7,9 +7,7 @@ namespace Bridge.Html5
     [Name("DocumentType")]
     public class DocumentType : Node
     {
-        internal DocumentType()
-        {
-        }
+        extern internal DocumentType();
 
         public readonly string Name;
 

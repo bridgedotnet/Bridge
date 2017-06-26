@@ -8,9 +8,7 @@ namespace Bridge.Html5
     [Name("NodeIterator")]
     public class NodeIterator
     {
-        internal NodeIterator()
-        {
-        }
+        extern internal NodeIterator();
 
         /// <summary>
         /// Returns a Node representing the root node as specified when the NodeIterator was created.

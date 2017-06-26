@@ -4,9 +4,7 @@ namespace Bridge.Html5
     [Name("Storage")]
     public class Storage
     {
-        private Storage()
-        {
-        }
+        extern Storage();
 
         /// <summary>
         ///
@@ -18,16 +16,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public override object this[string key]
-        {
-            get
-            {
-                return null;
-            }
-            set
-            {
-            }
-        }
+        public extern override object this[string key] { get; set; }
 
         /// <summary>
         ///

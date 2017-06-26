@@ -15,9 +15,7 @@ namespace Bridge.Html5
     [Name("Object")]
     public class Geolocation
     {
-        private Geolocation()
-        {
-        }
+        extern Geolocation();
 
         /// <summary>
         /// Determines the device's current location and gives back a Position object with the data.

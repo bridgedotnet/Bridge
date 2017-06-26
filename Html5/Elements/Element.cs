@@ -12,19 +12,13 @@ namespace Bridge.Html5
     public class Element : Node
     {
         [Template("document.createElement('div')")]
-        public Element()
-        {
-        }
+        public extern Element();
 
         [Template("document.createElement({0})")]
-        public Element(ElementType type)
-        {
-        }
+        public extern Element(ElementType type);
 
         [Template("document.createElement({0})")]
-        public Element(string tagName)
-        {
-        }
+        public extern Element(string tagName);
 
         /// <summary>
         /// Collection of all attribute nodes registered to the specified node.

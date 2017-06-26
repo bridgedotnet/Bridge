@@ -10,12 +10,8 @@ namespace System
     [Constructor("EvalError")]
     public class EvalException : Exception
     {
-        public EvalException()
-        {
-        }
+        public extern EvalException();
 
-        public EvalException(string message)
-        {
-        }
+        public extern EvalException(string message);
     }
 }

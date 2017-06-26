@@ -10,9 +10,7 @@ namespace Bridge.Html5
     [Name("Object")]
     public class GeolocationCoordinates
     {
-        private GeolocationCoordinates()
-        {
-        }
+        extern GeolocationCoordinates();
 
         /// <summary>
         /// Returns a double representing the latitude of the position in decimal degrees.

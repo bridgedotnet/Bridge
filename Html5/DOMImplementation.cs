@@ -7,9 +7,7 @@ namespace Bridge.Html5
     [Name("DOMImplementation")]
     public partial class DOMImplementation
     {
-        internal DOMImplementation()
-        {
-        }
+        extern internal DOMImplementation();
 
         /// <summary>
         /// The DOMImplementation.createDocument() method creates and returns an XMLDocument.

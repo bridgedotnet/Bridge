@@ -11,17 +11,9 @@ namespace Bridge.Html5
     [Name("StyleSheetList")]
     public class StyleSheetList : IEnumerable<StyleSheet>
     {
-        internal StyleSheetList()
-        {
-        }
+        extern internal StyleSheetList();
 
-        public virtual StyleSheet this[int index]
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public extern virtual StyleSheet this[int index] { get; }
 
         [Name("item")]
         public virtual extern StyleSheet GetItem(int index);

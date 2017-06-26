@@ -12,8 +12,6 @@ namespace Bridge
     [NonScriptable]
     public sealed class ScriptAttribute : Attribute
     {
-        public ScriptAttribute(params string[] lines)
-        {
-        }
+        public extern ScriptAttribute(params string[] lines);
     }
 }

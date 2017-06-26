@@ -7,8 +7,6 @@ namespace Bridge
     [NonScriptable]
     public class GlobalTargetAttribute : Attribute
     {
-        public GlobalTargetAttribute(string name)
-        {
-        }
+        public extern GlobalTargetAttribute(string name);
     }
 }

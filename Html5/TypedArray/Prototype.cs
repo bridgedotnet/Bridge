@@ -21,6 +21,7 @@ namespace Bridge.Html5.TypedArray
     /// </summary>
     [External]
     [Namespace(false)]
+    [IgnoreGeneric]
 #if CORE
     internal
 #else
@@ -76,10 +77,7 @@ namespace Bridge.Html5.TypedArray
         /// <param name="target">Target start index position where to copy the elements to.</param>
         /// <param name="start">Source start index position where to start copying elements from.</param>
         /// <remarks>Most browsers do not support this yet.</remarks>
-        public void CopyWithin(Union<int, uint> target, Union<int, uint> start)
-        {
-            return;
-        }
+        public extern void CopyWithin(Union<int, uint> target, Union<int, uint> start);
 
         /// <summary>
         /// Copies a sequence of array elements within the array to the position starting at target.
@@ -90,11 +88,7 @@ namespace Bridge.Html5.TypedArray
         /// <param name="start">Source start index position where to start copying elements from.</param>
         /// <param name="end">Optional. Source end index position where to end copying elements from.</param>
         /// <remarks>Most browsers do not support this yet.</remarks>
-        public void CopyWithin(Union<int, uint> target, Union<int, uint> start,
-            Union<int, uint> end)
-        {
-            return;
-        }
+        public extern void CopyWithin(Union<int, uint> target, Union<int, uint> start, Union<int, uint> end);
 
         // <summary>
         // Returns a new Array Iterator object that contains the key/value pairs for each index in the array.
@@ -115,21 +109,15 @@ namespace Bridge.Html5.TypedArray
         /// <param name="thisArg">Optional. Value to use as this when executing callback.</param>
         /// <returns>True if callback returns true for all elements on array, false otherwise.</returns>
         /// <remarks>Most browsers do not support this yet.</remarks>
-        public bool Every(Func<TypedElement, Union<int, uint>, TypedArray, bool> callback,
-            TypedArray thisArg = default(TypedArray))
-        {
-            return default(bool);
-        }
+        public extern bool Every(Func<TypedElement, Union<int, uint>, TypedArray, bool> callback,
+            TypedArray thisArg = default(TypedArray));
 
         /// <summary>
         /// Fills all the elements of an array from a start index to an end index with a static value.
         /// </summary>
         /// <param name="value">Value to fill the typed array with.</param>
         /// <remarks>Most browsers do not support this yet.</remarks>
-        public void Fill(TypedElement value)
-        {
-            return;
-        }
+        public extern void Fill(TypedElement value);
 
         /// <summary>
         /// Fills all the elements of an array from a start index to an end index with a static value.
@@ -137,10 +125,7 @@ namespace Bridge.Html5.TypedArray
         /// <param name="value">Value to fill the typed array with.</param>
         /// <param name="start">Optional. Start index. Defaults to 0.</param>
         /// <remarks>Most browsers do not support this yet.</remarks>
-        public void Fill(TypedElement value, Union<int, uint> start)
-        {
-            return;
-        }
+        public extern void Fill(TypedElement value, Union<int, uint> start);
 
         /// <summary>
         /// Fills all the elements of an array from a start index to an end index with a static value.
@@ -149,11 +134,8 @@ namespace Bridge.Html5.TypedArray
         /// <param name="start">Optional. Start index. Defaults to 0.</param>
         /// <param name="end">Optional. End index. Defaults to 0.</param>
         /// <remarks>Most browsers do not support this yet.</remarks>
-        public void Fill(TypedElement value,
-            Union<int, uint> start, Union<int, uint> end)
-        {
-            return;
-        }
+        public extern void Fill(TypedElement value,
+            Union<int, uint> start, Union<int, uint> end);
 
         /// <summary>
         /// Creates a new array with all of the elements of this array for which the provided filtering
@@ -166,11 +148,8 @@ namespace Bridge.Html5.TypedArray
         /// <param name="thisArg">Value to use as this when executing callback.</param>
         /// <returns></returns>
         /// <remarks>Most browsers do not support this yet.</remarks>
-        public TypedArray Filter(Func<TypedElement, Union<int, uint>, TypedArray, bool> callback,
-            TypedArray thisArg = default(TypedArray))
-        {
-            return default(TypedArray);
-        }
+        public extern TypedArray Filter(Func<TypedElement, Union<int, uint>, TypedArray, bool> callback,
+            TypedArray thisArg = default(TypedArray));
 
         // find() pertains to ECMAScript 6 proposal and should not be used in production environment.
         // findIndex() pertains to ECMAScript 6 proposal and should not be used in production environment.
@@ -186,11 +165,8 @@ namespace Bridge.Html5.TypedArray
         /// </param>
         /// <param name="thisArg">Optional. Value to use as 'this' when executing callback.</param>
         /// <remarks>Most browsers do not support this yet.</remarks>
-        public void ForEach(Func<TypedElement, Union<int, uint>, TypedArray, TypedElement> callback,
-            TypedArray thisArg = default(TypedArray))
-        {
-            return;
-        }
+        public extern void ForEach(Func<TypedElement, Union<int, uint>, TypedArray, TypedElement> callback,
+            TypedArray thisArg = default(TypedArray));
 
         /// <summary>
         /// Returns the first (least) index of an element within the array equal to the specified
@@ -210,10 +186,7 @@ namespace Bridge.Html5.TypedArray
         /// not present.
         /// </returns>
         /// <remarks>Most browsers do not support this yet.</remarks>
-        public int IndexOf(TypedElement searchElement, Union<int, uint> fromIndex)
-        {
-            return default(int);
-        }
+        public extern int IndexOf(TypedElement searchElement, Union<int, uint> fromIndex);
 
         /// <summary>
         /// Joins all elements of an array into a string.
@@ -224,10 +197,7 @@ namespace Bridge.Html5.TypedArray
         /// </param>
         /// <returns>A string containing the elements, separated by "," or the specified separator.</returns>
         /// <remarks>Most browsers do not support this yet.</remarks>
-        public string Join(char separator = ',')
-        {
-            return default(string);
-        }
+        public extern string Join(char separator = ',');
 
         /// <summary>
         /// Joins all elements of an array into a string.
@@ -238,10 +208,7 @@ namespace Bridge.Html5.TypedArray
         /// </param>
         /// <returns>A string containing the elements, separated by "," or the specified separator.</returns>
         /// <remarks>Most browsers do not support this yet.</remarks>
-        public string Join(string separator)
-        {
-            return default(string);
-        }
+        public extern string Join(string separator);
 
         // keys() pertains to ECMAScript 6 proposal and should not be used in production environment.
 
@@ -255,10 +222,7 @@ namespace Bridge.Html5.TypedArray
         /// not present.
         /// </returns>
         /// <remarks>Most browsers do not support this yet.</remarks>
-        public int LastIndexOf(TypedElement searchElement)
-        {
-            return default(int);
-        }
+        public extern int LastIndexOf(TypedElement searchElement);
 
         /// <summary>
         /// Returns the last (greatest) index of an element within the array equal to the specified
@@ -278,10 +242,7 @@ namespace Bridge.Html5.TypedArray
         /// not present.
         /// </returns>
         /// <remarks>Most browsers do not support this yet.</remarks>
-        public int LastIndexOf(TypedElement searchElement, Union<int, uint> fromIndex)
-        {
-            return default(int);
-        }
+        public extern int LastIndexOf(TypedElement searchElement, Union<int, uint> fromIndex);
 
         /// <summary>
         /// Creates a new array with the results of calling a provided function on every element in this array.
@@ -294,11 +255,8 @@ namespace Bridge.Html5.TypedArray
         /// </param>
         /// <param name="thisArg">Optional. Value to use as 'this' when executing callback.</param>
         /// <remarks>Most browsers do not support this yet.</remarks>
-        public TypedArray Map(Func<TypedElement, Union<int, uint>, TypedArray, TypedElement> callback,
-            TypedArray thisArg = default(TypedArray))
-        {
-            return default(TypedArray);
-        }
+        public extern TypedArray Map(Func<TypedElement, Union<int, uint>, TypedArray, TypedElement> callback,
+            TypedArray thisArg = default(TypedArray));
 
         // move() is marked as obsolete since Gecko 34. It is now copyWithin()
 
@@ -319,12 +277,9 @@ namespace Bridge.Html5.TypedArray
         /// </param>
         /// <returns></returns>
         /// <remarks>Most browsers do not support this yet.</remarks>
-        public TypedElement Reduce(
+        public extern TypedElement Reduce(
             Func<TypedElement, TypedElement, Union<int, uint>, TypedArray, TypedElement> callback,
-            TypedElement initialValue = default(TypedElement))
-        {
-            return default(TypedElement);
-        }
+            TypedElement initialValue = default(TypedElement));
 
         /// <summary>
         /// Apply a function against an accumulator and each value of the array (from right-to-left)
@@ -343,22 +298,16 @@ namespace Bridge.Html5.TypedArray
         /// </param>
         /// <returns></returns>
         /// <remarks>Most browsers do not support this yet.</remarks>
-        public TypedElement ReduceRight(
+        public extern TypedElement ReduceRight(
             Func<TypedElement, TypedElement, Union<int, uint>, TypedArray, TypedElement> callback,
-            TypedElement initialValue = default(TypedElement))
-        {
-            return default(TypedElement);
-        }
+            TypedElement initialValue = default(TypedElement));
 
         /// <summary>
         /// Reverses the order of the elements of an array — the first becomes the last,
         /// and the last becomes the first.
         /// </summary>
         /// <remarks>Most browsers do not support this yet.</remarks>
-        public void Reverse()
-        {
-            return;
-        }
+        public extern void Reverse();
 
         /// <summary>
         /// Stores multiple values in the typed array, reading input values from a specified array.
@@ -368,10 +317,7 @@ namespace Bridge.Html5.TypedArray
         /// target array, unless the length of the source array plus the offset exceeds the length of
         /// the target array, in which case an exception is thrown.
         /// </param>
-        public void Set(Array array)
-        {
-            return;
-        }
+        public extern void Set(Array array);
 
         /// <summary>
         /// Stores multiple values in the typed array, reading input values from a specified array.
@@ -386,15 +332,9 @@ namespace Bridge.Html5.TypedArray
         /// If you omit this value, 0 is assumed (that is, the source array will overwrite values in
         /// the target array starting at index 0).
         /// </param>
-        public void Set(Array array, Union<int, uint> offset)
-        {
-            return;
-        }
+        public extern void Set(Array array, Union<int, uint> offset);
 
-        public void Set(TypedArray typedArray)
-        {
-            return;
-        }
+        public extern void Set(TypedArray typedArray);
 
         /// <summary>
         /// Stores multiple values in the typed array, reading input values from a specified array.
@@ -409,20 +349,14 @@ namespace Bridge.Html5.TypedArray
         /// If you omit this value, 0 is assumed (that is, the source array will overwrite values in
         /// the target array starting at index 0).
         /// </param>
-        public void Set(TypedArray typedArray, Union<int, uint> offset)
-        {
-            return;
-        }
+        public extern void Set(TypedArray typedArray, Union<int, uint> offset);
 
         /// <summary>
         /// Extracts a section of an array and returns a new array.
         /// </summary>
         /// <returns>A shallow copy of elements from the original typed array</returns>
         /// <remarks>Most browsers do not support this yet.</remarks>
-        public TypedArray Slice()
-        {
-            return default(TypedArray);
-        }
+        public extern TypedArray Slice();
 
         /// <summary>
         /// Extracts a section of an array and returns a new array.
@@ -435,10 +369,7 @@ namespace Bridge.Html5.TypedArray
         /// </param>
         /// <returns>A shallow copy of elements from the original typed array</returns>
         /// <remarks>Most browsers do not support this yet.</remarks>
-        public TypedArray Slice(Union<int, uint> begin)
-        {
-            return default(TypedArray);
-        }
+        public extern TypedArray Slice(Union<int, uint> begin);
 
         /// <summary>
         /// Extracts a section of an array and returns a new array.
@@ -459,10 +390,7 @@ namespace Bridge.Html5.TypedArray
         /// </param>
         /// <returns>A shallow copy of elements from the original typed array</returns>
         /// <remarks>Most browsers do not support this yet.</remarks>
-        public TypedArray Slice(Union<int, uint> begin, Union<int, uint> end)
-        {
-            return default(TypedArray);
-        }
+        public extern TypedArray Slice(Union<int, uint> begin, Union<int, uint> end);
 
         /// <summary>
         /// Returns true if at least one element in this array satisfies the provided testing function.
@@ -479,21 +407,15 @@ namespace Bridge.Html5.TypedArray
         /// False otherwise.
         /// </returns>
         /// <remarks>Most browsers do not support this yet.</remarks>
-        public bool Some(Func<TypedElement, Union<int, uint>, TypedArray, TypedElement> callback,
-            TypedArray thisArg = default(TypedArray))
-        {
-            return default(bool);
-        }
+        public extern bool Some(Func<TypedElement, Union<int, uint>, TypedArray, TypedElement> callback,
+            TypedArray thisArg = default(TypedArray));
 
         /// <summary>
         /// Sorts the elements of an array in place and returns the array.
         /// </summary>
         /// <returns>Sorted TypedArray.</returns>
         /// <remarks>Most browsers do not support this yet.</remarks>
-        public TypedArray Sort()
-        {
-            return default(TypedArray);
-        }
+        public extern TypedArray Sort();
 
         /// <summary>
         /// Sorts the elements of an array in place and returns the array.
@@ -518,10 +440,7 @@ namespace Bridge.Html5.TypedArray
         ///   and b as its two arguments. If inconsistent results are returned then the sort order is undefined.
         /// </remarks>
         /// <returns>Sorted TypedArray.</returns>
-        public TypedArray Sort(Func<TypedElement, TypedElement, int> compareFunction)
-        {
-            return default(TypedArray);
-        }
+        public extern TypedArray Sort(Func<TypedElement, TypedElement, int> compareFunction);
 
         /// <summary>
         /// Returns a new TypedArray from the given start and end element index.
@@ -534,10 +453,7 @@ namespace Bridge.Html5.TypedArray
         /// Some browsers do not support this yet (may require begin and end parameters).
         /// </remarks>
         [Name("subarray")]
-        public TypedArray SubArray()
-        {
-            return default(TypedArray);
-        }
+        public extern TypedArray SubArray();
 
         /// <summary>
         /// Returns a new TypedArray from the given start and end element index.
@@ -548,10 +464,7 @@ namespace Bridge.Html5.TypedArray
         /// as for this TypedArray object.
         /// </returns>
         [Name("subarray")]
-        public TypedArray SubArray(Union<int, uint> begin)
-        {
-            return default(TypedArray);
-        }
+        public extern TypedArray SubArray(Union<int, uint> begin);
 
         /// <summary>
         /// Returns a new TypedArray from the given start and end element index.
@@ -566,10 +479,7 @@ namespace Bridge.Html5.TypedArray
         /// as for this TypedArray object.
         /// </returns>
         [Name("subarray")]
-        public TypedArray SubArray(Union<int, uint> begin, Union<int, uint> end)
-        {
-            return default(TypedArray);
-        }
+        public extern TypedArray SubArray(Union<int, uint> begin, Union<int, uint> end);
 
         // values() pertains to ECMAScript 6 proposal and should not be used in production environment.
 
@@ -578,19 +488,13 @@ namespace Bridge.Html5.TypedArray
         /// are separated by a locale-specific String (such as a comma “,”).
         /// </summary>
         /// <returns>A localized string representing the array and its elements.</returns>
-        public override string ToLocaleString()
-        {
-            return default(string);
-        }
+        public extern override string ToLocaleString();
 
         /// <summary>
         /// Joins the array and returns one string containing each array element separated by commas.
         /// </summary>
         /// <returns>A string representing the array and its elements.</returns>
-        public override string ToString()
-        {
-            return default(string);
-        }
+        public extern override string ToString();
 
         // TypedArray.prototype[@@iterator]() pertains to ECMAScript 6 proposal and should not be used in
         // production environment.

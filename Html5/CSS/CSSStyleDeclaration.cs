@@ -10,9 +10,7 @@ namespace Bridge.Html5
     [Name("CSSStyleDeclaration")]
     public class CSSStyleDeclaration : IEnumerable<string>
     {
-        protected internal CSSStyleDeclaration()
-        {
-        }
+        protected extern internal CSSStyleDeclaration();
 
         /// <summary>
         /// The CSS align-content property aligns a flex container's lines within the flex container when there is extra space on the cross-axis. This property has no effect on single line flexible boxes.
@@ -1229,13 +1227,7 @@ namespace Bridge.Html5
         /// <summary>
         ///
         /// </summary>
-        public virtual CSSRule ParentRule
-        {
-            get
-            {
-                return default(CSSRule);
-            }
-        }
+        public extern virtual CSSRule ParentRule { get; }
 
         /// <summary>
         /// Returns the value deleted. Example: valString= styleObj.removeProperty('color')

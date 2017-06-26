@@ -7,17 +7,11 @@ namespace Bridge.Html5
     [Name("UIEvent")]
     public class UIEvent : Event
     {
-        internal UIEvent()
-        {
-        }
+        extern internal UIEvent();
 
-        public UIEvent(string type)
-        {
-        }
+        public extern UIEvent(string type);
 
-        public UIEvent(string type, UIEventInit eventInit)
-        {
-        }
+        public extern UIEvent(string type, UIEventInit eventInit);
 
         /// <summary>
         /// Returns additional numerical information about the event, depending on the type of event.
@@ -90,5 +84,6 @@ namespace Bridge.Html5
     /// <typeparam name="TCurrentTarget">The CurrentTarget type</typeparam>
     [External]
     [Name("UIEvent")]
+    [IgnoreGeneric]
     public class UIEvent<TCurrentTarget> : Event<TCurrentTarget> where TCurrentTarget : HTMLElement { }
 }

@@ -7,9 +7,7 @@ namespace Bridge.Html5
     [Name("Location")]
     public class Location
     {
-        private Location()
-        {
-        }
+        extern Location();
 
         /// <summary>
         /// String containing the whole URL.

@@ -7,9 +7,7 @@ namespace Bridge.Html5
     [Name("CompositionEvent")]
     public class CompositionEvent : UIEvent
     {
-        internal CompositionEvent()
-        {
-        }
+        extern internal CompositionEvent();
 
         /// <summary>
         /// For compositionstart events, this is the currently selected text that will be replaced by the string being composed. This value doesn't change even if content changes the selection range; rather, it indicates the string that was selected when composition started.
@@ -30,6 +28,7 @@ namespace Bridge.Html5
     /// <typeparam name="TCurrentTarget">The CurrentTarget type</typeparam>
     [External]
     [Name("CompositionEvent")]
+    [IgnoreGeneric]
     public class CompositionEvent<TCurrentTarget> : CompositionEvent where TCurrentTarget : HTMLElement
     {
         /// <summary>

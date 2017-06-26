@@ -4,9 +4,7 @@ namespace Bridge.Html5
     [Name("ClientRect")]
     public class ClientRect
     {
-        public ClientRect()
-        {
-        }
+        public extern ClientRect();
 
         /// <summary>
         /// Y-coordinate, relative to the viewport origin, of the bottom of the rectangle box. Read only.

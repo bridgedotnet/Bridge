@@ -31,104 +31,44 @@ namespace Bridge.Html5
 #endif
     class ArrayBufferView
     {
-        public static implicit operator ArrayBufferView(Int8Array t)
-        {
-            return null;
-        }
+        public extern static implicit operator ArrayBufferView(Int8Array t);
 
-        public static implicit operator ArrayBufferView(Uint8Array t)
-        {
-            return null;
-        }
+        public extern static implicit operator ArrayBufferView(Uint8Array t);
 
-        public static implicit operator ArrayBufferView(Uint8ClampedArray t)
-        {
-            return null;
-        }
+        public extern static implicit operator ArrayBufferView(Uint8ClampedArray t);
 
-        public static implicit operator ArrayBufferView(Int16Array t)
-        {
-            return null;
-        }
+        public extern static implicit operator ArrayBufferView(Int16Array t);
 
-        public static implicit operator ArrayBufferView(Uint16Array t)
-        {
-            return null;
-        }
+        public extern static implicit operator ArrayBufferView(Uint16Array t);
 
-        public static implicit operator ArrayBufferView(Int32Array t)
-        {
-            return null;
-        }
+        public extern static implicit operator ArrayBufferView(Int32Array t);
 
-        public static implicit operator ArrayBufferView(Uint32Array t)
-        {
-            return null;
-        }
+        public extern static implicit operator ArrayBufferView(Uint32Array t);
 
-        public static implicit operator ArrayBufferView(Float32Array t)
-        {
-            return null;
-        }
+        public extern static implicit operator ArrayBufferView(Float32Array t);
 
-        public static implicit operator ArrayBufferView(Float64Array t)
-        {
-            return null;
-        }
+        public extern static implicit operator ArrayBufferView(Float64Array t);
 
-        public static implicit operator ArrayBufferView(DataView t)
-        {
-            return null;
-        }
+        public extern static implicit operator ArrayBufferView(DataView t);
 
-        public static explicit operator Int8Array(ArrayBufferView value)
-        {
-            return default(Int8Array);
-        }
+        public static extern explicit operator Int8Array(ArrayBufferView value);
 
-        public static explicit operator Uint8Array(ArrayBufferView value)
-        {
-            return default(Uint8Array);
-        }
+        public static extern explicit operator Uint8Array(ArrayBufferView value);
 
-        public static explicit operator Uint8ClampedArray(ArrayBufferView value)
-        {
-            return default(Uint8ClampedArray);
-        }
+        public extern static explicit operator Uint8ClampedArray(ArrayBufferView value);
 
-        public static explicit operator Int16Array(ArrayBufferView value)
-        {
-            return default(Int16Array);
-        }
+        public extern static explicit operator Int16Array(ArrayBufferView value);
 
-        public static explicit operator Uint16Array(ArrayBufferView value)
-        {
-            return default(Uint16Array);
-        }
+        public static extern explicit operator Uint16Array(ArrayBufferView value);
 
-        public static explicit operator Int32Array(ArrayBufferView value)
-        {
-            return default(Int32Array);
-        }
+        public extern static explicit operator Int32Array(ArrayBufferView value);
 
-        public static explicit operator Uint32Array(ArrayBufferView value)
-        {
-            return default(Uint32Array);
-        }
+        public extern static explicit operator Uint32Array(ArrayBufferView value);
 
-        public static explicit operator Float32Array(ArrayBufferView value)
-        {
-            return default(Float32Array);
-        }
+        public extern static explicit operator Float32Array(ArrayBufferView value);
 
-        public static explicit operator Float64Array(ArrayBufferView value)
-        {
-            return default(Float64Array);
-        }
+        public extern static explicit operator Float64Array(ArrayBufferView value);
 
-        public static explicit operator DataView(ArrayBufferView value)
-        {
-            return default(DataView);
-        }
+        public extern static explicit operator DataView(ArrayBufferView value);
     }
 }

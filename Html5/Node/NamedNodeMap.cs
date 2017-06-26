@@ -10,35 +10,21 @@ namespace Bridge.Html5
     [Name("NamedNodeMap")]
     public class NamedNodeMap : IEnumerable<Node>
     {
-        protected internal NamedNodeMap()
-        {
-        }
+        protected extern internal NamedNodeMap();
 
         /// <summary>
         /// Returns the item at the given index (or null if the index is higher or equal to the number of nodes)
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public virtual Node this[int index]
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public extern virtual Node this[int index] { get; }
 
         /// <summary>
         /// Returns the item at the given index (or null if the index is higher or equal to the number of nodes)
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public new virtual Node this[string name]
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public extern new virtual Node this[string name] { get; }
 
         /// <summary>
         /// Gets a node by name

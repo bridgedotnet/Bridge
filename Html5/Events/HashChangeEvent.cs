@@ -7,9 +7,7 @@ namespace Bridge.Html5
     [Name("HashChangeEvent")]
     public class HashChangeEvent : Event
     {
-        internal HashChangeEvent()
-        {
-        }
+        extern internal HashChangeEvent();
 
         /// <summary>
         /// The new URL to which the window is navigating.
@@ -28,6 +26,7 @@ namespace Bridge.Html5
     /// <typeparam name="TCurrentTarget">The CurrentTarget type</typeparam>
     [External]
     [Name("HashChangeEvent")]
+    [IgnoreGeneric]
     public class HashChangeEvent<TCurrentTarget> : HashChangeEvent where TCurrentTarget : HTMLElement
     {
         /// <summary>

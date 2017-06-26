@@ -7,8 +7,6 @@ namespace Bridge
     [NonScriptable]
     public class PriorityAttribute : Attribute
     {
-        public PriorityAttribute(int priority)
-        {
-        }
+        public extern PriorityAttribute(int priority);
     }
 }

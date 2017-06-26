@@ -10,17 +10,9 @@ namespace Bridge.Html5
     [Name("MediaList")]
     public class MediaList : IEnumerable<string>
     {
-        internal MediaList()
-        {
-        }
+        extern internal MediaList();
 
-        public virtual string this[int index]
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public extern virtual string this[int index] { get; }
 
         public virtual extern void AppendMedium(string newMedium);
 

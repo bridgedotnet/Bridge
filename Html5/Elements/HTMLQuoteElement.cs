@@ -13,9 +13,7 @@ namespace Bridge.Html5
         public extern HTMLQuoteElement();
 
         [Template("document.createElement({0})")]
-        public HTMLQuoteElement(QuoteType type)
-        {
-        }
+        public extern HTMLQuoteElement(QuoteType type);
 
         /// <summary>
         /// Reflects the cite HTML attribute, containing a URL for the source of the quotation.

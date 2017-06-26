@@ -25,13 +25,9 @@ namespace Bridge.Html5
     {
         public const bool IsCommonEvent = true;
 
-        public HtmlEventAttribute(string eventName, string selector, HtmlEventTarget target = HtmlEventTarget.QuerySelector)
-        {
-        }
+        public extern HtmlEventAttribute(string eventName, string selector, HtmlEventTarget target = HtmlEventTarget.QuerySelector);
 
-        public HtmlEventAttribute(EventType eventName, string selector, HtmlEventTarget target = HtmlEventTarget.QuerySelector)
-        {
-        }
+        public extern HtmlEventAttribute(EventType eventName, string selector, HtmlEventTarget target = HtmlEventTarget.QuerySelector);
     }
 
     /// <summary>
@@ -46,9 +42,7 @@ namespace Bridge.Html5
         public const string Event = "ready";
         public const bool StaticOnly = true;
 
-        public ReadyAttribute()
-        {
-        }
+        public extern ReadyAttribute();
     }
 
     [External]
@@ -56,8 +50,6 @@ namespace Bridge.Html5
     {
         public const string Event = "click";
 
-        public ClickAttribute(string selector, HtmlEventTarget target = HtmlEventTarget.QuerySelector)
-        {
-        }
+        public extern ClickAttribute(string selector, HtmlEventTarget target = HtmlEventTarget.QuerySelector);
     }
 }

@@ -49,6 +49,7 @@ namespace Bridge.Html5
     /// <typeparam name="TCurrentTarget">The CurrentTarget type</typeparam>
     [External]
     [Name("TouchEvent")]
+    [IgnoreGeneric]
     public class TouchEvent<TCurrentTarget> : TouchEvent where TCurrentTarget : HTMLElement
     {
         /// <summary>

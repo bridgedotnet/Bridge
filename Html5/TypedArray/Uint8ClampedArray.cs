@@ -27,26 +27,20 @@ namespace Bridge.Html5
         /// Creates a new Uint8ClampedArray of the specified length.
         /// </summary>
         /// <param name="length">Length of array to create</param>
-        public Uint8ClampedArray(Union<int, uint> length)
-        {
-        }
+        public extern Uint8ClampedArray(Union<int, uint> length);
 
         // FIXME: Make overloads for other types, as this one is supposed to clamp values?
         /// <summary>
         /// Creates a new Uint8ClampedArray out of the specified Uint8ClampedArray.
         /// </summary>
         /// <param name="typedArray">Uint8ClampedArray to use as initial contents to the new array.</param>
-        public Uint8ClampedArray(Uint8ClampedArray typedArray)
-        {
-        }
+        public extern Uint8ClampedArray(Uint8ClampedArray typedArray);
 
         /// <summary>
         /// Creates a new Uint8ClampedArray out of the specified object.
         /// </summary>
         /// <param name="objectInstance">Object to be converted into the new array.</param>
-        public Uint8ClampedArray(object objectInstance)
-        {
-        }
+        public extern Uint8ClampedArray(object objectInstance);
 
         /// <summary>
         /// Creates a new Uint8ClampedArray out of the specified buffer and byteOffset with the specified length.
@@ -54,9 +48,7 @@ namespace Bridge.Html5
         /// <param name="buffer">Arraybuffer to use as base for contents.</param>
         /// <param name="byteOffset">Optional. Position in the buffer to start reading data from.</param>
         /// <param name="length">Optional. Number of elements to consider while creating the array.</param>
-        public Uint8ClampedArray(ArrayBuffer buffer, uint byteOffset = 0, uint length = 0)
-        {
-        }
+        public extern Uint8ClampedArray(ArrayBuffer buffer, uint byteOffset = 0, uint length = 0);
 
         // FIXME: Make overloads for other types, as this one is supposed to clamp values?
         /// <summary>
@@ -64,16 +56,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="i">Index position in the array.</param>
         /// <returns>The element in the specified position.</returns>
-        public byte this[Union<int, uint> i]
-        {
-            get
-            {
-                return default(byte);
-            }
-            set
-            {
-            }
-        }
+        public extern byte this[Union<int, uint> i] { get; set; }
 
         #region Properties
 

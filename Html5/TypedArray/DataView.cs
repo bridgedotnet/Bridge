@@ -23,18 +23,14 @@ namespace Bridge.Html5
         /// Returns a new DataView object using the passed ArrayBuffer for its storage.
         /// </summary>
         /// <param name="buffer">An existing ArrayBuffer to use as the storage for the new DataView object.</param>
-        public DataView(ArrayBuffer buffer)
-        {
-        }
+        public extern DataView(ArrayBuffer buffer);
 
         /// <summary>
         /// Returns a new DataView object using the passed ArrayBuffer for its storage.
         /// </summary>
         /// <param name="buffer">An existing ArrayBuffer to use as the storage for the new DataView object.</param>
         /// <param name="byteOffset">The offset, in bytes, to the first byte in the specified buffer for the new view to reference. If not specified, the view of the buffer will start with the first byte.</param>
-        public DataView(ArrayBuffer buffer, int byteOffset)
-        {
-        }
+        public extern DataView(ArrayBuffer buffer, int byteOffset);
 
         /// <summary>
         /// Returns a new DataView object using the passed ArrayBuffer for its storage.
@@ -42,9 +38,7 @@ namespace Bridge.Html5
         /// <param name="buffer">An existing ArrayBuffer to use as the storage for the new DataView object.</param>
         /// <param name="byteOffset">The offset, in bytes, to the first byte in the specified buffer for the new view to reference. If not specified, the view of the buffer will start with the first byte.</param>
         /// <param name="byteLength">The number of elements in the byte array. If unspecified, length of the view will match the buffer's length.</param>
-        public DataView(ArrayBuffer buffer, int byteOffset, int byteLength)
-        {
-        }
+        public extern DataView(ArrayBuffer buffer, int byteOffset, int byteLength);
 
         /// <summary>
         /// The buffer this view references. Read only.

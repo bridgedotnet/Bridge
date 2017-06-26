@@ -9,14 +9,10 @@ namespace Bridge.Html5
     public class Text : CharacterData
     {
         [Template("document.createTextNode('')")]
-        public Text()
-        {
-        }
+        public extern Text();
 
         [Template("document.createTextNode({data})")]
-        public Text(string data)
-        {
-        }
+        public extern Text(string data);
 
         /// <summary>
         /// Returns a DOMString containing the text of all Text nodes logically adjacent to this Node, concatenated in document order.

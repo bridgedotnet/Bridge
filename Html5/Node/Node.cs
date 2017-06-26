@@ -7,9 +7,7 @@ namespace Bridge.Html5
     [Name("Node")]
     public class Node : EventTarget
     {
-        protected internal Node()
-        {
-        }
+        protected extern internal Node();
 
         /// <summary>
         /// Returns a DOMString representing the base URL. The concept of base URL changes from one language to another; in HTML, it corresponds to the protocol, the domain name and the directory structure, that is all until the last '/'.
@@ -101,10 +99,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="node">is the node that's being compared against.</param>
         /// <returns>The return value is computed as the relationship that otherNode has with node.</returns>
-        public virtual DocumentPosition CompareDocumentPosition(Node node)
-        {
-            return default(DocumentPosition);
-        }
+        public extern virtual DocumentPosition CompareDocumentPosition(Node node);
 
         /// <summary>
         /// Indicates whether a node is a descendant of a given node.

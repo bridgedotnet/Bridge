@@ -20,8 +20,6 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="urlString">The src property of the constructed HTMLAudioElement.</param>
         [Template("new Audio({0})")]
-        public HTMLAudioElement(string urlString)
-        {
-        }
+        public extern HTMLAudioElement(string urlString);
     }
 }

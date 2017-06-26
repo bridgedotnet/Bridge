@@ -7,9 +7,7 @@ namespace Bridge.Html5
     [Name("ProcessingInstruction")]
     public class ProcessingInstruction : CharacterData
     {
-        internal ProcessingInstruction()
-        {
-        }
+        extern internal ProcessingInstruction();
 
         /// <summary>
         /// after the &lt;? and before whitespace delimiting it from data

@@ -69,13 +69,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="index">The index of a TextTrack</param>
         /// <returns>The TextTrack instance</returns>
-        public virtual TextTrack this[int index]
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public extern virtual TextTrack this[int index] { get; }
 
         public virtual extern IEnumerator<TextTrack> GetEnumerator();
 

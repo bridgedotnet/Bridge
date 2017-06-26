@@ -15,13 +15,9 @@ namespace Bridge
     [NonScriptable]
     public sealed class NameAttribute : Attribute
     {
-        public NameAttribute(string value)
-        {
-        }
+        public extern NameAttribute(string value);
 
         [Obsolete("Please replace [Name(true)] with [Convention(Notation.LowerCamelCase)] (by default [Name(false)] is used which is an equivalent of [Convention]). See Issue #2477 for details.", true)]
-        public NameAttribute(bool changeCase)
-        {
-        }
+        public extern NameAttribute(bool changeCase);
     }
 }

@@ -10,22 +10,14 @@ namespace Bridge.Html5
     [Name("DOMTokenList")]
     public class DOMTokenList : IEnumerable<string>
     {
-        protected internal DOMTokenList()
-        {
-        }
+        protected extern internal DOMTokenList();
 
         /// <summary>
         /// Returns an item in the list by its index (or undefined if the number is greater than or equal to the length of the list, prior to Gecko 7.0 returned null)
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public virtual string this[int index]
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public virtual extern string this[int index] { get; }
 
         /// <summary>
         /// Returns an item in the list by its index (or undefined if the number is greater than or equal to the length of the list, prior to Gecko 7.0 returned null)

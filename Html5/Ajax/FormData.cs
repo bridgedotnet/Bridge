@@ -11,17 +11,13 @@ namespace Bridge.Html5
         /// <summary>
         ///
         /// </summary>
-        public FormData()
-        {
-        }
+        public extern FormData();
 
         /// <summary>
         ///
         /// </summary>
         /// <param name="form">HTML Form Element to send for keys/values. It will also encode file input content.</param>
-        public FormData(HTMLFormElement form)
-        {
-        }
+        public extern FormData(HTMLFormElement form);
 
         /// <summary>
         /// Appends a key/value pair to the FormData object.

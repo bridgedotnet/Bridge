@@ -349,10 +349,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="node">is the node that's being compared against.</param>
         /// <returns>The return value is computed as the relationship that otherNode has with node.</returns>
-        public static DocumentPosition CompareDocumentPosition(Node node)
-        {
-            return default(DocumentPosition);
-        }
+        public static extern DocumentPosition CompareDocumentPosition(Node node);
 
         /// <summary>
         /// Indicates whether a node is a descendant of a given node.

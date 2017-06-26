@@ -7,9 +7,7 @@ namespace Bridge.Html5
     [Name("CharacterData")]
     public class CharacterData : Node
     {
-        protected internal CharacterData()
-        {
-        }
+        protected extern internal CharacterData();
 
         /// <summary>
         /// Is a DOMString representing the textual data contained in this object.

@@ -16,9 +16,7 @@ namespace Bridge.Html5
         /// <summary>
         /// Creates an ImageData object.
         /// </summary>
-        public ImageData()
-        {
-        }
+        public extern ImageData();
 
         /// <summary>
         /// Creates an ImageData object from a given Uint8ClampedArray and the size of the image it contains.
@@ -32,9 +30,7 @@ namespace Bridge.Html5
         /// if an array is given: it will be inferred from its size and the given width.
         /// </param>
         /// <remarks>This is experimental API that should not be used in production code.</remarks>
-        public ImageData(Uint8ClampedArray array, uint width, uint? height = null)
-        {
-        }
+        public extern ImageData(Uint8ClampedArray array, uint width, uint? height = null);
 
         /// <summary>
         /// Creates an ImageData object from the size of the image. Without specifying the array, an image of
@@ -44,9 +40,7 @@ namespace Bridge.Html5
         /// <param name="width">An unsigned number representing the width of the represented image.</param>
         /// <param name="height">An unsigned number representing the height of the represented image.</param>
         /// <remarks>This is experimental API that should not be used in production code.</remarks>
-        public ImageData(uint width, uint height)
-        {
-        }
+        public extern ImageData(uint width, uint height);
 
         // TODO: implement Uint8ClampedArray following the link on the top of this source file!
         /// <summary>

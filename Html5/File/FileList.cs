@@ -10,22 +10,14 @@ namespace Bridge.Html5
     [Name("FileList")]
     public class FileList : IEnumerable<File>
     {
-        internal FileList()
-        {
-        }
+        extern internal FileList();
 
         /// <summary>
         /// Returns a File object representing the file at the specified index in the file list.
         /// </summary>
         /// <param name="index">The zero-based index of the file to retrieve from the list.</param>
         /// <returns>The File representing the requested file.</returns>
-        public virtual File this[int index]
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public virtual extern File this[int index] { get; }
 
         /// <summary>
         /// Returns a File object representing the file at the specified index in the file list.
@@ -33,10 +25,7 @@ namespace Bridge.Html5
         /// <param name="index">The zero-based index of the file to retrieve from the list.</param>
         /// <returns>The File representing the requested file.</returns>
         [Name("Item")]
-        public virtual File GetItem(int index)
-        {
-            return default(File);
-        }
+        public extern virtual File GetItem(int index);
 
         /// <summary>
         /// A read-only value indicating the number of files in the list.

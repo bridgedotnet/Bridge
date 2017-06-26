@@ -10,9 +10,7 @@ namespace Bridge.Html5
     [Name("Object")]
     public class GeolocationPositionError
     {
-        private GeolocationPositionError()
-        {
-        }
+        extern GeolocationPositionError();
 
         /// <summary>
         /// Returns an unsigned short representing the error code.

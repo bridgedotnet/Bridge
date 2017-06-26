@@ -7,9 +7,7 @@ namespace Bridge.Html5
     [Name("CSSStyleSheet")]
     public partial class CSSStyleSheet : StyleSheet
     {
-        protected internal CSSStyleSheet()
-        {
-        }
+        protected extern internal CSSStyleSheet();
 
         /// <summary>
         /// Returns a CSSRuleList of the CSS rules in the style sheet.

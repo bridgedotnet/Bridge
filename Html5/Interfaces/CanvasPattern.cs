@@ -16,9 +16,6 @@ namespace Bridge.Html5
         /// it on the pattern.
         /// </summary>
         /// <remarks>This is experimental API that should not be used in production code.</remarks>
-        public virtual void SetTransform(SVGMatrix matrix)
-        {
-            return;
-        }
+        public extern virtual void SetTransform(SVGMatrix matrix);
     }
 }

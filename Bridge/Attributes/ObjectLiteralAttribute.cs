@@ -7,21 +7,13 @@ namespace Bridge
     [NonScriptable]
     public sealed class ObjectLiteralAttribute : Attribute
     {
-        public ObjectLiteralAttribute()
-        {
-        }
+        public extern ObjectLiteralAttribute();
 
-        public ObjectLiteralAttribute(ObjectInitializationMode initializationMode)
-        {
-        }
+        public extern ObjectLiteralAttribute(ObjectInitializationMode initializationMode);
 
-        public ObjectLiteralAttribute(ObjectCreateMode createMode)
-        {
-        }
+        public extern ObjectLiteralAttribute(ObjectCreateMode createMode);
 
-        public ObjectLiteralAttribute(ObjectInitializationMode initializationMode, ObjectCreateMode createMode)
-        {
-        }
+        public extern ObjectLiteralAttribute(ObjectInitializationMode initializationMode, ObjectCreateMode createMode);
     }
 
     [External]

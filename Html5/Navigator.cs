@@ -11,9 +11,7 @@ namespace Bridge.Html5
     [Namespace(false)]
     public class Navigator
     {
-        private Navigator()
-        {
-        }
+        extern Navigator();
 
         /// <summary>
         /// Returns a DOMString with the official name of the browser. Do not rely on this property to return the correct value.

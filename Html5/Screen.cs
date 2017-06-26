@@ -10,9 +10,7 @@ namespace Bridge.Html5
     [Name("Screen")]
     public class Screen
     {
-        private Screen()
-        {
-        }
+        extern Screen();
 
         /// <summary>
         /// Specifies the y-coordinate of the first pixel that is not allocated to permanent or semipermanent user interface features.

@@ -4,9 +4,7 @@
     [Name("DataTransfer")]
     public class DataTransfer
     {
-        private DataTransfer()
-        {
-        }
+        private extern DataTransfer();
 
         /// <summary>
         /// Type of drag-and-drop.

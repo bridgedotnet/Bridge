@@ -7,8 +7,6 @@ namespace Bridge.Html5
     [Name("CDATASection")]
     public class CDATASection : Text
     {
-        internal CDATASection()
-        {
-        }
+        extern internal CDATASection();
     }
 }

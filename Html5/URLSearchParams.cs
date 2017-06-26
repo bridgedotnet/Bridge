@@ -7,25 +7,18 @@ namespace Bridge.Html5
     [Name("URLSearchParams")]
     public partial class URLSearchParams
     {
-        public URLSearchParams()
-        {
-        }
+        public extern URLSearchParams();
 
         /// <summary>
         /// Constructor returning a URLSearchParams object.
         /// </summary>
         /// <param name="init"></param>
-        public URLSearchParams(string init)
-        {
-        }
-
+        public extern URLSearchParams(string init);
         /// <summary>
         /// Copy constructor returning a URLSearchParams object.
         /// </summary>
         /// <param name="init"></param>
-        public URLSearchParams(URLSearchParams init)
-        {
-        }
+        public extern URLSearchParams(URLSearchParams init);
 
         public virtual extern void Append(string name, string value);
 

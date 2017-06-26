@@ -28,10 +28,7 @@ namespace Bridge.Html5
         /// <param name="y">The y axis of the coordinate for the rectangle starting point.</param>
         /// <param name="width">The rectangle's width.</param>
         /// <param name="height">The rectangle's height.</param>
-        public virtual void ClearRect(Union<uint, int> x, Union<uint, int> y, Union<uint, int> width, Union<uint, int> height)
-        {
-            return;
-        }
+        public extern virtual void ClearRect(Union<uint, int> x, Union<uint, int> y, Union<uint, int> width, Union<uint, int> height);
 
         /// <summary>
         /// Draws a filled rectangle at (x, y) position whose size is determined by width and height.
@@ -40,10 +37,7 @@ namespace Bridge.Html5
         /// <param name="y">The y axis of the coordinate for the rectangle starting point.</param>
         /// <param name="width">The rectangle's width.</param>
         /// <param name="height">The rectangle's height.</param>
-        public virtual void FillRect(Union<uint, int> x, Union<uint, int> y, Union<uint, int> width, Union<uint, int> height)
-        {
-            return;
-        }
+        public extern virtual void FillRect(Union<uint, int> x, Union<uint, int> y, Union<uint, int> width, Union<uint, int> height);
 
         /// <summary>
         /// Paints a rectangle which has a starting point at (x, y) and has a w width and an h height
@@ -53,10 +47,7 @@ namespace Bridge.Html5
         /// <param name="y">The y axis of the coordinate for the rectangle starting point.</param>
         /// <param name="width">The rectangle's width.</param>
         /// <param name="height">The rectangle's height.</param>
-        public virtual void StrokeRect(Union<uint, int> x, Union<uint, int> y, Union<uint, int> width, Union<uint, int> height)
-        {
-            return;
-        }
+        public extern virtual void StrokeRect(Union<uint, int> x, Union<uint, int> y, Union<uint, int> width, Union<uint, int> height);
 
         #endregion Drawing Rectangles
 
@@ -73,10 +64,7 @@ namespace Bridge.Html5
         /// </param>
         /// <param name="x">The x axis of the coordinate for the text starting point.</param>
         /// <param name="y">The y axis of the coordinate for the text starting point.</param>
-        public virtual void FillText(string text, Union<uint, int> x, Union<uint, int> y)
-        {
-            return;
-        }
+        public extern virtual void FillText(string text, Union<uint, int> x, Union<uint, int> y);
 
         /// <summary>
         /// Draws (fills) a given text at the given (x,y) position.
@@ -92,10 +80,7 @@ namespace Bridge.Html5
         /// available or if a reasonably readable one can be synthesized by scaling the current
         /// font horizontally) or a smaller font.
         /// </param>
-        public virtual void FillText(string text, Union<uint, int> x, Union<uint, int> y, Union<uint?, int?> maxWidth)
-        {
-            return;
-        }
+        public extern virtual void FillText(string text, Union<uint, int> x, Union<uint, int> y, Union<uint?, int?> maxWidth);
 
         /// <summary>
         /// Draws (strokes) a given text at the given (x, y) position.
@@ -105,10 +90,7 @@ namespace Bridge.Html5
         /// </param>
         /// <param name="x">The x axis of the coordinate for the text starting point.</param>
         /// <param name="y">The y axis of the coordinate for the text starting point.</param>
-        public virtual void StrokeText(string text, Union<uint, int> x, Union<uint, int> y)
-        {
-            return;
-        }
+        public extern virtual void StrokeText(string text, Union<uint, int> x, Union<uint, int> y);
 
         /// <summary>
         /// Draws (strokes) a given text at the given (x, y) position.
@@ -124,10 +106,7 @@ namespace Bridge.Html5
         /// available or if a reasonably readable one can be synthesized by scaling the current
         /// font horizontally) or a smaller font.
         /// </param>
-        public virtual void StrokeText(string text, Union<uint, int> x, Union<uint, int> y, Union<uint?, int?> maxWidth)
-        {
-            return;
-        }
+        public extern virtual void StrokeText(string text, Union<uint, int> x, Union<uint, int> y, Union<uint?, int?> maxWidth);
 
         /// <summary>
         /// Returns a TextMetrics object.
@@ -183,10 +162,7 @@ namespace Bridge.Html5
         /// of the array get copied and concatenated.
         /// For example, [5, 15, 25] will become [5, 15, 25, 5, 15, 25].
         /// </param>
-        public virtual void SetLineDash(Union<double[], uint[], int[], IEnumerable<Union<double, uint, int>>> segments)
-        {
-            return;
-        }
+        public extern virtual void SetLineDash(Union<double[], uint[], int[], IEnumerable<Union<double, uint, int>>> segments);
 
         /// <summary>
         /// Specifies where to start a dash array on a line.
@@ -324,10 +300,7 @@ namespace Bridge.Html5
         /// Starts a new path by emptying the list of sub-paths. Call this method when you want
         /// to create a new path.
         /// </summary>
-        public virtual void BeginPath()
-        {
-            return;
-        }
+        public extern virtual void BeginPath();
 
         // All remaining methods here are inherited from SVGOperations, which are common to the Path2D interface.
 
@@ -338,10 +311,7 @@ namespace Bridge.Html5
         /// <summary>
         /// Fills the subpaths with the current fill style.
         /// </summary>
-        public virtual void Fill()
-        {
-            return;
-        }
+        public extern virtual void Fill();
 
         /// <summary>
         /// Fills the subpaths with the specified fill rule.
@@ -349,10 +319,7 @@ namespace Bridge.Html5
         /// <param name="fillRule">
         /// The algorithm by which to determine if a point is inside a path or outside a path.
         /// </param>
-        public virtual void Fill(CanvasTypes.CanvasFillRule fillRule)
-        {
-            return;
-        }
+        public extern virtual void Fill(CanvasTypes.CanvasFillRule fillRule);
 
         /// <summary>
         /// Fills the specified path with the specified fill rule.
@@ -361,75 +328,50 @@ namespace Bridge.Html5
         /// <param name="fillRule">
         /// The algorithm by which to determine if a point is inside a path or outside a path.
         /// </param>
-        public virtual void Fill(Path2D path, CanvasTypes.CanvasFillRule fillRule)
-        {
-            return;
-        }
-
+        public extern virtual void Fill(Path2D path, CanvasTypes.CanvasFillRule fillRule);
         /// <summary>
         /// Strokes the subpaths with the current stroke style.
         /// </summary>
-        public virtual void Stroke()
-        {
-            return;
-        }
+        public extern virtual void Stroke();
 
         /// <summary>
         /// Strokes the subpaths with the current stroke style.
         /// </summary>
         /// <param name="path">A Path2D path to stroke.</param>
-        public virtual void Stroke(Path2D path)
-        {
-            return;
-        }
+        public extern virtual void Stroke(Path2D path);
 
         /// <summary>
         /// If a given element is focused, this method draws a focus ring around the current path.
         /// </summary>
         /// <param name="element">The element to check whether it is focused or not.</param>
-        public virtual void DrawFocusIfNeeded(HTMLElement element)
-        {
-            return;
-        }
+        public extern virtual void DrawFocusIfNeeded(HTMLElement element);
 
         /// <summary>
         /// If a given element is focused, this method draws a focus ring around the current path.
         /// </summary>
         /// <param name="path">A Path2D path to use.</param>
         /// <param name="element">The element to check whether it is focused or not.</param>
-        public virtual void DrawFocusIfNeeded(Path2D path, HTMLElement element)
-        {
-            return;
-        }
+        public extern virtual void DrawFocusIfNeeded(Path2D path, HTMLElement element);
 
         /// <summary>
         /// Scrolls the current path or a given path into the view.
         /// </summary>
         /// <remarks>This is experimental API that should not be used in production code.</remarks>
-        public virtual void ScrollPathIntoView()
-        {
-            return;
-        }
+        public extern virtual void ScrollPathIntoView();
 
         /// <summary>
         /// Scrolls the current path or a given path into the view.
         /// </summary>
         /// <param name="path">A Path2D path to use.</param>
         /// <remarks>This is experimental API that should not be used in production code.</remarks>
-        public virtual void ScrollPathIntoView(Path2D path)
-        {
-            return;
-        }
+        public extern virtual void ScrollPathIntoView(Path2D path);
 
         /// <summary>
         /// Creates a clipping path from the current sub-paths. Everything drawn after clip() is
         /// called appears inside the clipping path only. For an example, see Clipping paths in
         /// the Canvas tutorial.
         /// </summary>
-        public virtual void Clip()
-        {
-            return;
-        }
+        public extern virtual void Clip();
 
         /// <summary>
         /// Creates a clipping path from the current sub-paths. Everything drawn after clip() is
@@ -439,10 +381,7 @@ namespace Bridge.Html5
         /// <param name="fillRule">
         /// The algorithm by which to determine if a point is inside a path or outside a path.
         /// </param>
-        public virtual void Clip(CanvasTypes.CanvasFillRule fillRule)
-        {
-            return;
-        }
+        public extern virtual void Clip(CanvasTypes.CanvasFillRule fillRule);
 
         /// <summary>
         /// Creates a clipping path from the current sub-paths. Everything drawn after clip() is
@@ -453,10 +392,7 @@ namespace Bridge.Html5
         /// <param name="fillRule">
         /// The algorithm by which to determine if a point is inside a path or outside a path.
         /// </param>
-        public virtual void Clip(Path2D path, CanvasTypes.CanvasFillRule fillRule)
-        {
-            return;
-        }
+        public extern virtual void Clip(Path2D path, CanvasTypes.CanvasFillRule fillRule);
 
         /// <summary>
         /// Reports whether or not the specified point is contained in the current path.
@@ -559,20 +495,14 @@ namespace Bridge.Html5
         /// The angle to rotate clockwise in radians. You can use degree * Math.PI / 180 if you want to
         /// calculate from a degree value.
         /// </param>
-        public virtual void Rotate(double angle)
-        {
-            return;
-        }
+        public extern virtual void Rotate(double angle);
 
         /// <summary>
         /// Adds a scaling transformation to the canvas units by x horizontally and by y vertically.
         /// </summary>
         /// <param name="x">Scaling factor in the horizontal direction.</param>
         /// <param name="y">Scaling factor in the vertical direction.</param>
-        public virtual void Scale(Union<int, double> x, Union<int, double> y)
-        {
-            return;
-        }
+        public extern virtual void Scale(Union<int, double> x, Union<int, double> y);
 
         /// <summary>
         /// Adds a translation transformation by moving the canvas and its origin x horizontally and
@@ -580,10 +510,7 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="x">Distance to move in the horizontal direction.</param>
         /// <param name="y">Distance to move in the vertical direction.</param>
-        public virtual void Translate(Union<int, double> x, Union<int, double> y)
-        {
-            return;
-        }
+        public extern virtual void Translate(Union<int, double> x, Union<int, double> y);
 
         /*
          * Transformation matrix is described by:
@@ -602,11 +529,8 @@ namespace Bridge.Html5
         /// <param name="d">m22: Vertical scaling.</param>
         /// <param name="e">dx: Horizontal moving.</param>
         /// <param name="f">dy: Vertical moving.</param>
-        public virtual void Transform(Union<int, double> a, Union<int, double> b, Union<int, double> c,
-                                      Union<int, double> d, Union<int, double> e, Union<int, double> f)
-        {
-            return;
-        }
+        public extern virtual void Transform(Union<int, double> a, Union<int, double> b, Union<int, double> c,
+                                      Union<int, double> d, Union<int, double> e, Union<int, double> f);
 
         /// <summary>
         /// Resets the current transform to the identity matrix, and then invokes the transform()
@@ -619,20 +543,14 @@ namespace Bridge.Html5
         /// <param name="d">m22: Vertical scaling.</param>
         /// <param name="e">dx: Horizontal moving.</param>
         /// <param name="f">dy: Vertical moving.</param>
-        public virtual void SetTransform(Union<int, double> a, Union<int, double> b, Union<int, double> c,
-                                         Union<int, double> d, Union<int, double> e, Union<int, double> f)
-        {
-            return;
-        }
+        public extern virtual void SetTransform(Union<int, double> a, Union<int, double> b, Union<int, double> c,
+                                         Union<int, double> d, Union<int, double> e, Union<int, double> f);
 
         /// <summary>
         /// Resets the current transform by the identity matrix.
         /// </summary>
         /// <remarks>This is experimental API that should not be used in production code.</remarks>
-        public virtual void ResetTransform()
-        {
-            return;
-        }
+        public extern virtual void ResetTransform();
 
         #endregion Transformations
 
@@ -666,11 +584,8 @@ namespace Bridge.Html5
         /// <param name="dy">
         /// The Y coordinate in the destination canvas at which to place the top-left corner of the source image.
         /// </param>
-        public virtual void DrawImage(Union<HTMLImageElement, HTMLVideoElement, HTMLCanvasElement, CanvasRenderingContext2D> image,
-                                      Union<int, uint, float, double> dx, Union<int, uint, float, double> dy)
-        {
-            return;
-        }
+        public extern virtual void DrawImage(Union<HTMLImageElement, HTMLVideoElement, HTMLCanvasElement, CanvasRenderingContext2D> image,
+                                      Union<int, uint, float, double> dx, Union<int, uint, float, double> dy);
 
         /// <summary>
         /// Draws the specified image. This method is available in multiple formats, providing a great
@@ -693,12 +608,9 @@ namespace Bridge.Html5
         /// The height to draw the image in the destination canvas. This allows scaling of the drawn image.
         /// If null, the image is not scaled in height when drawn.
         /// </param>
-        public virtual void DrawImage(Union<HTMLImageElement, HTMLVideoElement, HTMLCanvasElement, CanvasRenderingContext2D> image,
+        public extern virtual void DrawImage(Union<HTMLImageElement, HTMLVideoElement, HTMLCanvasElement, CanvasRenderingContext2D> image,
                                       Union<int, uint, float, double> dx, Union<int, uint, float, double> dy,
-                                      Union<int?, uint?, float?, double?> dWidth, Union<int?, uint?, float?, double?> dHeight)
-        {
-            return;
-        }
+                                      Union<int?, uint?, float?, double?> dWidth, Union<int?, uint?, float?, double?> dHeight);
 
         /// <summary>
         /// Draws the specified image. This method is available in multiple formats, providing a great
@@ -735,16 +647,13 @@ namespace Bridge.Html5
         /// The height to draw the image in the destination canvas. This allows scaling of the drawn image.
         /// If not specified or null, the image is not scaled in height when drawn.
         /// </param>
-        public virtual void DrawImage(Union<HTMLImageElement, HTMLVideoElement, HTMLCanvasElement, CanvasRenderingContext2D> image,
+        public extern virtual void DrawImage(Union<HTMLImageElement, HTMLVideoElement, HTMLCanvasElement, CanvasRenderingContext2D> image,
                                       Union<int, uint, float, double> sx, Union<int, uint, float, double> sy,
                                       Union<int?, uint?, float?, double?> sWidth,
                                       Union<int?, uint?, float?, double?> sHeight,
                                       Union<int, uint, float, double> dx, Union<int, uint, float, double> dy,
                                       Union<int?, uint?, float?, double?> dWidth,
-                                      Union<int?, uint?, float?, double?> dHeight)
-        {
-            return;
-        }
+                                      Union<int?, uint?, float?, double?> dHeight);
 
         #endregion Drawing Images
 
@@ -809,10 +718,7 @@ namespace Bridge.Html5
         /// Position offset in the target canvas context of the rectangle to be painted, relative to the
         /// rectangle in the origin image data.
         /// </param>
-        public virtual void PutImageData(ImageData imagedata, int dx, int dy)
-        {
-            return;
-        }
+        public extern virtual void PutImageData(ImageData imagedata, int dx, int dy);
 
         /// <summary>
         /// Paints data from the given ImageData object onto the bitmap. If a dirty rectangle is provided,
@@ -841,12 +747,9 @@ namespace Bridge.Html5
         /// <param name="dirtyHeight">
         /// Height of the rectangle to be painted, in the origin image data. Defaults to the height of the image data.
         /// </param>
-        public virtual void PutImageData(ImageData imagedata, int dx, int dy,
+        public extern virtual void PutImageData(ImageData imagedata, int dx, int dy,
                                          Union<uint?, int?> dirtyX, Union<uint?, int?> dirtyY,
-                                         Union<uint?, int?> dirtyWidth, Union<uint?, int?> dirtyHeight)
-        {
-            return;
-        }
+                                         Union<uint?, int?> dirtyWidth, Union<uint?, int?> dirtyHeight);
 
         #endregion Pixel Manipulation
 
@@ -870,18 +773,12 @@ namespace Bridge.Html5
         /// Saves the current drawing style state using a stack so you can revert any change you make to it
         /// using Restore().
         /// </summary>
-        public virtual void Save()
-        {
-            return;
-        }
+        public extern virtual void Save();
 
         /// <summary>
         /// Restores the drawing style state to the last element on the 'state stack' saved by save().
         /// </summary>
-        public virtual void Restore()
-        {
-            return;
-        }
+        public extern virtual void Restore();
 
         /// <summary>
         /// A read-only back-reference to the HTMLCanvasElement.
@@ -897,10 +794,7 @@ namespace Bridge.Html5
         /// Adds a hit region to the canvas.
         /// </summary>
         /// <remarks>This is experimental API that should not be used in production code.</remarks>
-        public virtual void AddHitRegion()
-        {
-            return;
-        }
+        public extern virtual void AddHitRegion();
 
         /// <summary>
         /// Adds a hit region to the canvas.
@@ -910,29 +804,20 @@ namespace Bridge.Html5
         /// object with one or more of its properties set.
         /// </param>
         /// <remarks>This is experimental API that should not be used in production code.</remarks>
-        public virtual void AddHitRegion(CanvasHitRegionOptions options)
-        {
-            return;
-        }
+        public extern virtual void AddHitRegion(CanvasHitRegionOptions options);
 
         /// <summary>
         /// Removes the hit region with the specified id from the canvas.
         /// </summary>
         /// <param name="id">A DOMString representing the id of the region that is to be removed.</param>
         /// <remarks>This is experimental API that should not be used in production code.</remarks>
-        public virtual void RemoveHitRegion(string id)
-        {
-            return;
-        }
+        public extern virtual void RemoveHitRegion(string id);
 
         /// <summary>
         /// Removes all hit regions from the canvas.
         /// </summary>
         /// <remarks>This is experimental API that should not be used in production code.</remarks>
-        public virtual void ClearHitRegions()
-        {
-            return;
-        }
+        public extern virtual void ClearHitRegions();
 
         #endregion Hit Regions
 

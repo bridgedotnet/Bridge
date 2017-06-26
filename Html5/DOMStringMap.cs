@@ -4,19 +4,8 @@ namespace Bridge.Html5
     [Name("DOMStringMap")]
     public class DOMStringMap
     {
-        internal DOMStringMap()
-        {
-        }
+        extern internal DOMStringMap();
 
-        public new virtual string this[string name]
-        {
-            get
-            {
-                return null;
-            }
-            set
-            {
-            }
-        }
+        public extern new virtual string this[string name] { get; set; }
     }
 }

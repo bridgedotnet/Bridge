@@ -10,9 +10,7 @@ namespace Bridge.Html5
     [Name("Object")]
     public class GeolocationPosition
     {
-        private GeolocationPosition()
-        {
-        }
+        extern GeolocationPosition();
 
         /// <summary>
         /// Returns a GeolocationCoordinates object defining the current location.

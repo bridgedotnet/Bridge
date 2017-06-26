@@ -63,7 +63,7 @@
     <Compile Include="DragDrop\DataTransferItemList.cs" />
     <Compile Include="DragDrop\DataTransfer.cs" />
     <Compile Include="Elements\Element.cs" />
-    <Compile Include="Elements\MarkElement.cs" />
+    <Compile Include="Elements\HTMLMarkElement.cs" />
     <Compile Include="Elements\HTMLTemplateElement.cs" />
     <Compile Include="Events\GamepadEvent.cs" />
     <Compile Include="Events\DragEvent.cs" />

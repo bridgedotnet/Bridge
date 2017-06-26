@@ -7,13 +7,9 @@ namespace Bridge
     [NonScriptable]
     public class InitAttribute : Attribute
     {
-        public InitAttribute()
-        {
-        }
+        public extern InitAttribute();
 
-        public InitAttribute(InitPosition position)
-        {
-        }
+        public extern InitAttribute(InitPosition position);
     }
 
     [External]

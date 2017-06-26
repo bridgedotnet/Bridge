@@ -7,9 +7,7 @@ namespace Bridge.Html5
     [Name("CSSRule")]
     public class CSSRule
     {
-        protected internal CSSRule()
-        {
-        }
+        protected extern internal CSSRule();
 
         public const ushort STYLE_RULE = 1;
         public const ushort CHARSET_RULE = 2;

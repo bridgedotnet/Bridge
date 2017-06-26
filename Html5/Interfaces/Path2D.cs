@@ -19,37 +19,25 @@ namespace Bridge.Html5
         /// <summary>
         /// Creates a new Path2D object.
         /// </summary>
-        public Path2D()
-        {
-            return;
-        }
+        public extern Path2D();
 
         /// <summary>
         /// Creates a new Path2D object from an specified Path2D object.
         /// </summary>
-        public Path2D(Path2D path)
-        {
-            return;
-        }
+        public extern Path2D(Path2D path);
 
         /// <summary>
         /// Creates a new Path2D object from an specified string consisting of SVG path data.
         /// </summary>
         /// <param name="d"></param>
-        public Path2D(string d)
-        {
-            return;
-        }
+        public extern Path2D(string d);
 
         /// <summary>
         /// Adds a path to the current path.
         /// </summary>
         /// <param name="path"></param>
         /// <param name="transform"></param>
-        public void AddPath(Path2D path, SVGMatrix transform = null)
-        {
-            return;
-        }
+        public extern void AddPath(Path2D path, SVGMatrix transform = null);
 
         // The remaining methods are all inherited from SVGOperations, which is common to CanvasRenderingContext2D.
     }

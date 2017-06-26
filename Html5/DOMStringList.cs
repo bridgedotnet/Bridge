@@ -10,22 +10,14 @@ namespace Bridge.Html5
     [Name("DOMStringList")]
     public class DOMStringList : IEnumerable<string>
     {
-        internal DOMStringList()
-        {
-        }
+        extern internal DOMStringList();
 
         /// <summary>
         /// returns a DOMString (a string)
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public virtual string this[int index]
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public virtual extern string this[int index] { get; }
 
         /// <summary>
         ///  Returns true/false depending on whether the given string is in the list

@@ -22,17 +22,13 @@ namespace Bridge.Html5
         /// <summary>
         ///  The empty constuctor
         /// </summary>
-        public ArrayBuffer()
-        {
-        }
+        public extern ArrayBuffer();
 
         /// <summary>
         /// The constructor accepts as input a byte length for the new buffer, and returns the newly-created ArrayBuffer object.
         /// </summary>
         /// <param name="length">The size, in bytes, of the array buffer to create.</param>
-        public ArrayBuffer(int length)
-        {
-        }
+        public extern ArrayBuffer(int length);
 
         /// <summary>
         /// The size, in bytes, of the array. This is established when the array is constructed and cannot be changed. Read only.

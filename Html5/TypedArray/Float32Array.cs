@@ -27,25 +27,19 @@ namespace Bridge.Html5
         /// Creates a new Float32Array of the specified length.
         /// </summary>
         /// <param name="length">Length of array to create</param>
-        public Float32Array(Union<int, uint> length)
-        {
-        }
+        public extern Float32Array(Union<int, uint> length);
 
         /// <summary>
         /// Creates a new Float32Array out of the specified Float32Array.
         /// </summary>
         /// <param name="typedArray">Float32Array to use as initial contents to the new array.</param>
-        public Float32Array(Float32Array typedArray)
-        {
-        }
+        public extern Float32Array(Float32Array typedArray);
 
         /// <summary>
         /// Creates a new Float32Array out of the specified object.
         /// </summary>
         /// <param name="objectInstance">Object to be converted into the new array.</param>
-        public Float32Array(object objectInstance)
-        {
-        }
+        public extern Float32Array(object objectInstance);
 
         /// <summary>
         /// Creates a new Float32Array out of the specified buffer and byteOffset with the specified length.
@@ -53,25 +47,14 @@ namespace Bridge.Html5
         /// <param name="buffer">Arraybuffer to use as base for contents.</param>
         /// <param name="byteOffset">Optional. Position in the buffer to start reading data from.</param>
         /// <param name="length">Optional. Number of elements to consider while creating the array.</param>
-        public Float32Array(ArrayBuffer buffer, uint byteOffset = 0, uint length = 0)
-        {
-        }
+        public extern Float32Array(ArrayBuffer buffer, uint byteOffset = 0, uint length = 0);
 
         /// <summary>
         /// Allows index operations on the array.
         /// </summary>
         /// <param name="i">Index position in the array.</param>
         /// <returns>The element in the specified position.</returns>
-        public float this[Union<int, uint> i]
-        {
-            get
-            {
-                return default(float);
-            }
-            set
-            {
-            }
-        }
+        public extern float this[Union<int, uint> i] { get; set; }
 
         #region Properties
 

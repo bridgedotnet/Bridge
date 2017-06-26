@@ -8,9 +8,7 @@ namespace Bridge.Html5
     [Name("TreeWalker")]
     public class TreeWalker
     {
-        internal TreeWalker()
-        {
-        }
+        extern internal TreeWalker();
 
         /// <summary>
         /// Returns a Node representing the root node as specified when the TreeWalker was created.

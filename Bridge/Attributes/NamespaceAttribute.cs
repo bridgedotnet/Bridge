@@ -11,12 +11,8 @@ namespace Bridge
     [NonScriptable]
     public sealed class NamespaceAttribute : Attribute
     {
-        public NamespaceAttribute(bool includeNamespace)
-        {
-        }
+        public extern NamespaceAttribute(bool includeNamespace);
 
-        public NamespaceAttribute(string ns)
-        {
-        }
+        public extern NamespaceAttribute(string ns);
     }
 }

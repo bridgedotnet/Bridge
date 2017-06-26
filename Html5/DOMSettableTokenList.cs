@@ -7,9 +7,7 @@ namespace Bridge.Html5
     [Name("DOMSettableTokenList")]
     public class DOMSettableTokenList : DOMTokenList
     {
-        protected internal DOMSettableTokenList()
-        {
-        }
+        protected extern internal DOMSettableTokenList();
 
         /// <summary>
         /// Gets or sets the underlying string.

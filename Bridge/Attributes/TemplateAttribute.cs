@@ -10,19 +10,13 @@ namespace Bridge
     [NonScriptable]
     public sealed class TemplateAttribute : Attribute
     {
-        internal TemplateAttribute()
-        {
-        }
+        extern internal TemplateAttribute();
 
-        public TemplateAttribute(string format)
-        {
-        }
+        public extern TemplateAttribute(string format);
 
-        public TemplateAttribute(string format, string nonExpandedFormat)
-        {
-        }
+        public extern TemplateAttribute(string format, string nonExpandedFormat);
 
-        public string Fn
+        public extern string Fn
         {
             get; set;
         }

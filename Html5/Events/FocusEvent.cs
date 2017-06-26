@@ -7,9 +7,7 @@ namespace Bridge.Html5
     [Name("FocusEvent")]
     public class FocusEvent : UIEvent
     {
-        internal FocusEvent()
-        {
-        }
+        extern internal FocusEvent();
 
         /// <summary>
         /// The FocusEvent.relatedTarget read-only property represents a secondary target for this event, which will depend of the event itself. As in some cases (like when tabbing in or out a page), this property may be set to null for security reasons.
@@ -23,6 +21,7 @@ namespace Bridge.Html5
     /// <typeparam name="TCurrentTarget">The CurrentTarget type</typeparam>
     [External]
     [Name("FocusEvent")]
+    [IgnoreGeneric]
     public class FocusEvent<TCurrentTarget> : FocusEvent where TCurrentTarget : HTMLElement
     {
         /// <summary>

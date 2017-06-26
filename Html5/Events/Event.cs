@@ -10,17 +10,11 @@ namespace Bridge.Html5
     [Namespace(false)]
     public class Event
     {
-        internal Event()
-        {
-        }
+        extern internal Event();
 
-        public Event(string type)
-        {
-        }
+        public extern Event(string type);
 
-        public Event(string type, EventInit eventInit)
-        {
-        }
+        public extern Event(string type, EventInit eventInit);
 
         /// <summary>
         /// Indicates whether the given event bubbles up through the DOM or not.
@@ -101,6 +95,7 @@ namespace Bridge.Html5
     /// <typeparam name="TCurrentTarget">The CurrentTarget type</typeparam>
     [External]
     [Name("Event")]
+    [IgnoreGeneric]
     public class Event<TCurrentTarget> : Event where TCurrentTarget : HTMLElement
     {
         /// <summary>

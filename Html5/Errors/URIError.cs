@@ -10,12 +10,8 @@ namespace System
     [Constructor("URIError")]
     public class URIException : Exception
     {
-        public URIException()
-        {
-        }
+        public extern URIException();
 
-        public URIException(string message)
-        {
-        }
+        public extern URIException(string message);
     }
 }

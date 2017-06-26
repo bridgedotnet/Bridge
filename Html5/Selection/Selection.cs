@@ -7,9 +7,7 @@ namespace Bridge.Html5
     [Name("Selection")]
     public class Selection
     {
-        private Selection()
-        {
-        }
+        extern Selection();
 
         /// <summary>
         /// Returns the Node in which the selection begins.

@@ -10,44 +10,28 @@ namespace Bridge
     [NonScriptable]
     public sealed class ModuleAttribute : Attribute
     {
-        public ModuleAttribute()
-        {
-        }
+        public extern ModuleAttribute();
 
-        public ModuleAttribute(bool preventModuleName)
-        {
-        }
+        public extern ModuleAttribute(bool preventModuleName);
 
-        public ModuleAttribute(string moduleName)
-        {
-        }
+        public extern ModuleAttribute(string moduleName);
 
-        public ModuleAttribute(string moduleName, bool preventModuleName)
-        {
-        }
+        public extern ModuleAttribute(string moduleName, bool preventModuleName);
 
-        public ModuleAttribute(ModuleType type)
-        {
-        }
+        public extern ModuleAttribute(ModuleType type);
 
-        public ModuleAttribute(ModuleType type, bool preventModuleName)
-        {
-        }
+        public extern ModuleAttribute(ModuleType type, bool preventModuleName);
 
-        public ModuleAttribute(ModuleType type, string moduleName)
-        {
-        }
+        public extern ModuleAttribute(ModuleType type, string moduleName);
 
-        public ModuleAttribute(ModuleType type, string moduleName, bool preventModuleName)
-        {
-        }
+        public extern ModuleAttribute(ModuleType type, string moduleName, bool preventModuleName);
 
-        public string ExportAsNamespace
+        public extern string ExportAsNamespace
         {
             get; set;
         }
 
-        public string Name
+        public extern string Name
         {
             get; set;
         }

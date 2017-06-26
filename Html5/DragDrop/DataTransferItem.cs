@@ -6,9 +6,7 @@ namespace Bridge.Html5
     [Name("DataTransferItem")]
     public class DataTransferItem
     {
-        private DataTransferItem()
-        {
-        }
+        extern DataTransferItem();
 
         /// <summary>
         /// The kind of drag data item such as a string or a file.

@@ -4,9 +4,7 @@ namespace Bridge.Html5
     [Name("CSSValue")]
     public class CSSValue
     {
-        protected internal CSSValue()
-        {
-        }
+        protected extern internal CSSValue();
 
         /// <summary>
         /// The value is a custom value.

@@ -10,12 +10,8 @@ namespace System
     [Constructor("RangeError")]
     public class RangeException : Exception
     {
-        public RangeException()
-        {
-        }
+        public extern RangeException();
 
-        public RangeException(string message)
-        {
-        }
+        public extern RangeException(string message);
     }
 }

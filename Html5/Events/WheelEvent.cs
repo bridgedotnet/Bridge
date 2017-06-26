@@ -7,9 +7,7 @@ namespace Bridge.Html5
     [Name("WheelEvent")]
     public class WheelEvent : Event
     {
-        internal WheelEvent()
-        {
-        }
+        extern internal WheelEvent();
 
         /// <summary>
         /// Horizontal scroll amount. Read only.
@@ -60,6 +58,7 @@ namespace Bridge.Html5
     /// <typeparam name="TCurrentTarget">The CurrentTarget type</typeparam>
     [External]
     [Name("WheelEvent")]
+    [IgnoreGeneric]
     public class WheelEvent<TCurrentTarget> : WheelEvent where TCurrentTarget : HTMLElement
     {
         /// <summary>

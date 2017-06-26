@@ -10,12 +10,8 @@ namespace System
     [Constructor("TypeError")]
     public class TypeException : Exception
     {
-        public TypeException()
-        {
-        }
+        public extern TypeException();
 
-        public TypeException(string message)
-        {
-        }
+        public extern TypeException(string message);
     }
 }

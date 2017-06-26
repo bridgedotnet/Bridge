@@ -7,9 +7,7 @@ namespace Bridge
     [NonScriptable]
     public class EnumAttribute : Attribute
     {
-        public EnumAttribute(Emit emit)
-        {
-        }
+        public extern EnumAttribute(Emit emit);
     }
 
     [External]

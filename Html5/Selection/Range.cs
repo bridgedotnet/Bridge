@@ -8,9 +8,7 @@ namespace Bridge.Html5
     [Name("Range")]
     public partial class Range
     {
-        public Range()
-        {
-        }
+        public extern Range();
 
         /// <summary>
         /// Returns a Boolean indicating whether the range's start and end points are at the same position.

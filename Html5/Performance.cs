@@ -7,9 +7,7 @@ namespace Bridge.Html5
     [Name("Performance")]
     public class Performance
     {
-        private Performance()
-        {
-        }
+        extern Performance();
 
         /// <summary>
         /// Returns a DOMHighResTimeStamp representing the amount of miliseconds elapsed since the start of the navigation, as give by PerformanceTiming.navigationStart to the call of the method.
@@ -36,9 +34,7 @@ namespace Bridge.Html5
     [Name("PerformanceTiming")]
     public class PerformanceTiming
     {
-        private PerformanceTiming()
-        {
-        }
+        extern PerformanceTiming();
 
         /// <summary>
         /// Is an int representing the moment, in miliseconds since the UNIX epoch, right after the prompt for unload terminates on the previous document in the same browsing context. If there is no previous document, this value will be the same as PerformanceTiming.fetchStart.
@@ -154,9 +150,7 @@ namespace Bridge.Html5
     [Name("PerformanceNavigation")]
     public class PerformanceNavigation
     {
-        private PerformanceNavigation()
-        {
-        }
+        extern PerformanceNavigation();
 
         /// <summary>
         /// Is an  short containing a constant describing how the navigation to this page was done.

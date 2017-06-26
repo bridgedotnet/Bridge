@@ -7,9 +7,7 @@ namespace Bridge.Html5
     [Name("ValidityState")]
     public class ValidityState
     {
-        internal ValidityState()
-        {
-        }
+        extern internal ValidityState();
 
         /// <summary>
         /// The element's custom validity message has been set to a non-empty string by calling the element's setCustomValidity() method.

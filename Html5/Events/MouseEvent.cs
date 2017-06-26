@@ -7,17 +7,11 @@ namespace Bridge.Html5
     [Name("MouseEvent")]
     public class MouseEvent : UIEvent
     {
-        internal MouseEvent()
-        {
-        }
+        extern internal MouseEvent();
 
-        public MouseEvent(string type)
-        {
-        }
+        public extern MouseEvent(string type);
 
-        public MouseEvent(string type, MouseEventInit eventInit)
-        {
-        }
+        public extern MouseEvent(string type, MouseEventInit eventInit);
 
         /// <summary>
         /// Indicates whether the ALT key was pressed when the event fired.
@@ -192,6 +186,7 @@ namespace Bridge.Html5
     /// <typeparam name="TCurrentTarget">The CurrentTarget type</typeparam>
     [External]
     [Name("MouseEvent")]
+    [IgnoreGeneric]
     public class MouseEvent<TCurrentTarget> : MouseEvent where TCurrentTarget : HTMLElement
     {
         /// <summary>

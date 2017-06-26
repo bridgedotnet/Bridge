@@ -7,17 +7,11 @@ namespace Bridge.Html5
     [Name("KeyboardEvent")]
     public class KeyboardEvent : UIEvent
     {
-        internal KeyboardEvent()
-        {
-        }
+        extern internal KeyboardEvent();
 
-        public KeyboardEvent(string type)
-        {
-        }
+        public extern KeyboardEvent(string type);
 
-        public KeyboardEvent(string type, KeyboardEventInit eventInit)
-        {
-        }
+        public extern KeyboardEvent(string type, KeyboardEventInit eventInit);
 
         /// <summary>
         /// Indicates whether the ALT key was pressed when the event fired.
@@ -1319,6 +1313,7 @@ namespace Bridge.Html5
     /// <typeparam name="TCurrentTarget">The CurrentTarget type</typeparam>
     [External]
     [Name("KeyboardEvent")]
+    [IgnoreGeneric]
     public class KeyboardEvent<TCurrentTarget> : KeyboardEvent where TCurrentTarget : HTMLElement
     {
         /// <summary>

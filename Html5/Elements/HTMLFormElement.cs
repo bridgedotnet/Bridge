@@ -89,26 +89,14 @@ namespace Bridge.Html5
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public HTMLElement this[int index]
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public extern HTMLElement this[int index] { get; }
 
         /// <summary>
         /// Gets the item or list of items in elements collection whose name or id match the specified name, or null if no items match. You can also specify the name in array-style brackets or parentheses after the form object name, without calling this method explicitly.
         /// </summary>
         /// <param name="name">The name to match the Elements' name and id</param>
         /// <returns>An Element or an HTMLCollection</returns>
-        public new Union<HTMLElement, HTMLCollection> this[string name]
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public extern new Union<HTMLElement, HTMLCollection> this[string name] { get; }
 
         /// <summary>
         /// Gets the item in the elements collection at the specified index, or null if there is no item at that index. You can also specify the index in array-style brackets or parentheses after the form object name, without calling this method explicitly.

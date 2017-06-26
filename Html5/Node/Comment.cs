@@ -7,12 +7,8 @@ namespace Bridge.Html5
     [Name("Comment")]
     public class Comment : CharacterData
     {
-        public Comment()
-        {
-        }
+        public extern Comment();
 
-        public Comment(string data)
-        {
-        }
+        public extern Comment(string data);
     }
 }

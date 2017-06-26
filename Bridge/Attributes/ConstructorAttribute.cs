@@ -7,8 +7,6 @@ namespace Bridge
     [NonScriptable]
     public sealed class ConstructorAttribute : Attribute
     {
-        public ConstructorAttribute(string value)
-        {
-        }
+        public extern ConstructorAttribute(string value);
     }
 }

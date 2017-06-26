@@ -26,25 +26,19 @@ namespace Bridge.Html5
         /// Creates a new Int8Array of the specified length.
         /// </summary>
         /// <param name="length">Length of array to create</param>
-        public Int8Array(int length)
-        {
-        }
+        public extern Int8Array(int length);
 
         /// <summary>
         /// Creates a new Int8Array out of the specified Int8Array.
         /// </summary>
         /// <param name="typedArray">Int8Array to use as initial contents to the new array.</param>
-        public Int8Array(Int8Array typedArray)
-        {
-        }
+        public extern Int8Array(Int8Array typedArray);
 
         /// <summary>
         /// Creates a new Int8Array out of the specified object.
         /// </summary>
         /// <param name="objectInstance">Object to be converted into the new array.</param>
-        public Int8Array(object objectInstance)
-        {
-        }
+        public extern Int8Array(object objectInstance);
 
         /// <summary>
         /// Creates a new Int8Array out of the specified buffer and byteOffset with the specified length.
@@ -52,25 +46,14 @@ namespace Bridge.Html5
         /// <param name="buffer">Arraybuffer to use as base for contents.</param>
         /// <param name="byteOffset">Optional. Position in the buffer to start reading data from.</param>
         /// <param name="length">Optional. Number of elements to consider while creating the array.</param>
-        public Int8Array(ArrayBuffer buffer, uint byteOffset = 0, uint length = 0)
-        {
-        }
+        public extern Int8Array(ArrayBuffer buffer, uint byteOffset = 0, uint length = 0);
 
         /// <summary>
         /// Allows index operations on the array.
         /// </summary>
         /// <param name="i">Index position in the array.</param>
         /// <returns>The element in the specified position.</returns>
-        public SByte this[Union<int, uint> i]
-        {
-            get
-            {
-                return default(SByte);
-            }
-            set
-            {
-            }
-        }
+        public extern SByte this[Union<int, uint> i] { get; set; }
 
         #region Properties
 

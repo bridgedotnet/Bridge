@@ -9,9 +9,7 @@ namespace Bridge.Html5
     [Name("File")]
     public class File : Blob
     {
-        internal File()
-        {
-        }
+        extern internal File();
 
         /// <summary>
         /// The last modified Date of the file referenced by the File object.

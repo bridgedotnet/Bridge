@@ -7,9 +7,7 @@ namespace Bridge.Html5
     [Name("Attr")]
     public class Attr : Node
     {
-        protected internal Attr()
-        {
-        }
+        protected extern internal Attr();
 
         /// <summary>
         /// Indicates whether the attribute is an "ID attribute". An "ID attribute" being an attribute which value is expected to be unique across a DOM Document. In HTML DOM, "id" is the only ID attribute, but XML documents could define others. Whether or not an attribute is unique is often determined by a DTD or other schema description.

@@ -7,8 +7,6 @@ namespace Bridge.Html5
     [Name("XMLHttpRequestUpload")]
     public class XMLHttpRequestUpload : XMLHttpRequestEventTarget
     {
-        internal XMLHttpRequestUpload()
-        {
-        }
+        extern internal XMLHttpRequestUpload();
     }
 }

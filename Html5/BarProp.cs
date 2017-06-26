@@ -4,9 +4,7 @@ namespace Bridge.Html5
     [Name("BarProp")]
     public class BarProp
     {
-        private BarProp()
-        {
-        }
+        extern BarProp();
 
         /// <summary>
         /// False to hide location bar

@@ -10,12 +10,8 @@ namespace Bridge
     [NonScriptable]
     public sealed class ModuleDependencyAttribute : Attribute
     {
-        public ModuleDependencyAttribute(string dependencyName)
-        {
-        }
+        public extern ModuleDependencyAttribute(string dependencyName);
 
-        public ModuleDependencyAttribute(string dependencyName, string variableName)
-        {
-        }
+        public extern ModuleDependencyAttribute(string dependencyName, string variableName);
     }
 }

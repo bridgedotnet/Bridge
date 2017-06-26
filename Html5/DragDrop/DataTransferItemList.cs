@@ -7,17 +7,9 @@ namespace Bridge.Html5
     [Name("DataTransferItemList")]
     public class DataTransferItemList : IEnumerable<DataTransferItem>
     {
-        internal DataTransferItemList()
-        {
-        }
+        extern internal DataTransferItemList();
 
-        public virtual DataTransferItem this[int index]
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public extern virtual DataTransferItem this[int index] { get; }
 
         /// <summary>
         /// Adds an File to the drag item list and returns a DataTransferItem for the new item.

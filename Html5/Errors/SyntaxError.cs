@@ -10,12 +10,8 @@ namespace System
     [Constructor("SyntaxError")]
     public class SyntaxException : Exception
     {
-        public SyntaxException()
-        {
-        }
+        public extern SyntaxException();
 
-        public SyntaxException(string message)
-        {
-        }
+        public extern SyntaxException(string message);
     }
 }

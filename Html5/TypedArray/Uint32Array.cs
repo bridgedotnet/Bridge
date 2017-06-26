@@ -26,25 +26,19 @@ namespace Bridge.Html5
         /// Creates a new Uint32Array of the specified length.
         /// </summary>
         /// <param name="length">Length of array to create</param>
-        public Uint32Array(Union<int, uint> length)
-        {
-        }
+        public extern Uint32Array(Union<int, uint> length);
 
         /// <summary>
         /// Creates a new Uint32Array out of the specified Uint32Array.
         /// </summary>
         /// <param name="typedArray">Uint32Array to use as initial contents to the new array.</param>
-        public Uint32Array(Uint32Array typedArray)
-        {
-        }
+        public extern Uint32Array(Uint32Array typedArray);
 
         /// <summary>
         /// Creates a new Uint32Array out of the specified object.
         /// </summary>
         /// <param name="objectInstance">Object to be converted into the new array.</param>
-        public Uint32Array(object objectInstance)
-        {
-        }
+        public extern Uint32Array(object objectInstance);
 
         /// <summary>
         /// Creates a new Uint32Array out of the specified buffer and byteOffset with the specified length.
@@ -52,25 +46,14 @@ namespace Bridge.Html5
         /// <param name="buffer">Arraybuffer to use as base for contents.</param>
         /// <param name="byteOffset">Optional. Position in the buffer to start reading data from.</param>
         /// <param name="length">Optional. Number of elements to consider while creating the array.</param>
-        public Uint32Array(ArrayBuffer buffer, uint byteOffset = 0, uint length = 0)
-        {
-        }
+        public extern Uint32Array(ArrayBuffer buffer, uint byteOffset = 0, uint length = 0);
 
         /// <summary>
         /// Allows index operations on the array.
         /// </summary>
         /// <param name="i">Index position in the array.</param>
         /// <returns>The element in the specified position.</returns>
-        public uint this[Union<int, uint> i]
-        {
-            get
-            {
-                return default(uint);
-            }
-            set
-            {
-            }
-        }
+        public extern uint this[Union<int, uint> i] { get; set; }
 
         #region Properties
 

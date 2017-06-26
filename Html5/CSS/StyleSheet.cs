@@ -7,9 +7,7 @@ namespace Bridge.Html5
     [Name("StyleSheet")]
     public class StyleSheet
     {
-        protected internal StyleSheet()
-        {
-        }
+        protected extern internal StyleSheet();
 
         /// <summary>
         /// Is a Boolean representing whether the current stylesheet has been applied or not.

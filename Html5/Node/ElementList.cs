@@ -10,22 +10,14 @@ namespace Bridge.Html5
     [Name("NodeList")]
     public class ElementList : IEnumerable<HTMLElement>
     {
-        protected internal ElementList()
-        {
-        }
+        protected extern internal ElementList();
 
         /// <summary>
         /// Returns an item in the list by its index, or null if out-of-bounds.
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public virtual HTMLElement this[int index]
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public extern virtual HTMLElement this[int index] { get; }
 
         /// <summary>
         /// Returns an item in the list by its index, or null if out-of-bounds. Equivalent to nodeList[idx].

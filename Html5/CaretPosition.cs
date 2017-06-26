@@ -7,9 +7,7 @@ namespace Bridge.Html5
     [Name("CaretPosition")]
     public class CaretPosition
     {
-        internal CaretPosition()
-        {
-        }
+        extern internal CaretPosition();
 
         /// <summary>
         /// Returns a Node containing the found node at the caret's position.
