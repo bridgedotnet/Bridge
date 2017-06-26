@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bridge.Html
+namespace Bridge.Html5
 {
     [External, Reflectable, Namespace("Bridge")]
     public class FileStream : Stream

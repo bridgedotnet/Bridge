@@ -414,41 +414,6 @@
         }
     });
 
-    Bridge.define("System.IO.IOException", {
-        inherits: [System.Exception],
-        fields: {
-            _maybeFullPath: null
-        },
-        ctors: {
-            ctor: function () {
-                this.$initialize();
-                System.Exception.ctor.call(this);
-                //base.SetErrorCode(-2146232800);
-            },
-            $ctor1: function (message) {
-                this.$initialize();
-                System.Exception.ctor.call(this);
-                //base.SetErrorCode(-2146232800);
-            },
-            $ctor3: function (message, hresult) {
-                this.$initialize();
-                System.Exception.ctor.call(this, message);
-                //base.SetErrorCode(hresult);
-            },
-            $ctor4: function (message, hresult, maybeFullPath) {
-                this.$initialize();
-                System.Exception.ctor.call(this, message);
-                //base.SetErrorCode(hresult);
-                this._maybeFullPath = maybeFullPath;
-            },
-            $ctor2: function (message, innerException) {
-                this.$initialize();
-                System.Exception.ctor.call(this, message, innerException);
-                //base.SetErrorCode(-2146232800);
-            }
-        }
-    });
-
     Bridge.define("System.IO.Stream", {
         inherits: [System.IDisposable],
         statics: {
@@ -687,6 +652,154 @@
                 }
 
                 return asyncResult;
+            }
+        }
+    });
+
+    Bridge.define("System.IO.IOException", {
+        inherits: [System.Exception],
+        fields: {
+            _maybeFullPath: null
+        },
+        ctors: {
+            ctor: function () {
+                this.$initialize();
+                System.Exception.ctor.call(this);
+                //base.SetErrorCode(-2146232800);
+            },
+            $ctor1: function (message) {
+                this.$initialize();
+                System.Exception.ctor.call(this);
+                //base.SetErrorCode(-2146232800);
+            },
+            $ctor3: function (message, hresult) {
+                this.$initialize();
+                System.Exception.ctor.call(this, message);
+                //base.SetErrorCode(hresult);
+            },
+            $ctor4: function (message, hresult, maybeFullPath) {
+                this.$initialize();
+                System.Exception.ctor.call(this, message);
+                //base.SetErrorCode(hresult);
+                this._maybeFullPath = maybeFullPath;
+            },
+            $ctor2: function (message, innerException) {
+                this.$initialize();
+                System.Exception.ctor.call(this, message, innerException);
+                //base.SetErrorCode(-2146232800);
+            }
+        }
+    });
+
+    Bridge.define("System.IO.FileStream", {
+        inherits: [System.IO.Stream],
+        fields: {
+            _buffer: null
+        },
+        props: {
+            CanRead: {
+                get: function () {
+                    return true;
+                }
+            },
+            CanSeek: {
+                get: function () {
+                    return false;
+                }
+            },
+            CanWrite: {
+                get: function () {
+                    return false;
+                }
+            },
+            Length: {
+                get: function () {
+                    return System.Int64(this._buffer.byteLength);
+                }
+            },
+            Position: System.Int64(0)
+        },
+        ctors: {
+            ctor: function (path, mode) {
+                this.$initialize();
+                System.IO.Stream.ctor.call(this);
+                if (Bridge.isNode) {
+                    var fs = require("fs");
+                    this._buffer = fs.readFileSync(path);
+                } else {
+                    var request = new XMLHttpRequest();
+                    request.open("GET", path, false);
+                    request.send(null);
+                    request.responseType = "ArrayBuffer";
+                    this._buffer = request.response;
+                }
+            }
+        },
+        methods: {
+            flush: function () { },
+            read: function (buffer, offset, count) {
+                
+            if (buffer == null)
+            {
+                throw new System.ArgumentNullException("buffer");
+            }
+            if (offset < 0)
+            {
+                throw new System.ArgumentOutOfRangeException("offset");
+            }
+            if (count < 0)
+            {
+                throw new System.ArgumentOutOfRangeException("count");
+            }
+            if (this.Length.sub(System.Int64(offset)).lt(System.Int64(count)))
+            {
+                throw new System.ArgumentException();
+            }
+            if (!this._isOpen)
+            {
+                throw new System.Exception();
+            }
+            var num = this.Length.sub(this.Position);
+            if (num.gt(System.Int64(count)))
+            {
+                num = System.Int64(count);
+            }
+            if (num.lte(System.Int64(0)))
+            {
+                return 0;
+            }
+            if (num.gt(System.Int64(8)))
+            {
+                for (var n = 0; System.Int64(n).lt(num); n = (n + 1) | 0)
+                {
+                    buffer[System.Array.index(((n + offset) | 0), buffer)] = this._buffer[System.Array.index(System.Int64.toNumber(this.Position.add(System.Int64(n))), this._buffer)];
+                }
+            }
+            else
+            {
+                var num1 = num;
+                while (true)
+                {
+                    var num2 = num1.sub(System.Int64(1));
+                    num1 = num2;
+                    if (num2.lt(System.Int64(0)))
+                    {
+                        break;
+                    }
+                    buffer[System.Array.index(System.Int64.toNumber(System.Int64(offset).add(num1)), buffer)] = this._buffer[System.Array.index(System.Int64.toNumber(this.Position.add(num1)), this._buffer)];
+                }
+            }
+            this.Position = this.Position.add(num);
+            return System.Int64.clip32(num);
+            },
+            seek: function (offset, origin) {
+                throw new System.NotImplementedException();
+            },
+            setLength: function (value) {
+                throw new System.NotImplementedException();
+            },
+            write: function (buffer, offset, count) {
+                throw new System.NotImplementedException();
             }
         }
     });
