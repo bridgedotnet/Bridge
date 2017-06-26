@@ -41,7 +41,7 @@ namespace Bridge.Translator.Tests
                 "  \"version\": 3,",
                 "  \"file\": \"test.map\",",
                 "  \"sourceRoot\": \"C:\\AC\\ACD\",",
-                "  \"sources\": [\"..\\\\..\\\\AC\\\\ACD\\\\sourceUrl1\",\"..\\\\..\\\\AC\\\\ACD\\\\X\\\\sourceUrl2\",\"..\\\\..\\\\AC\\\\ACD\\\\Y\\\\Z\\\\sourceUrl3\",\"..\\\\..\\\\B\\\\sourceUrl4\",\"ABE\\\\sourceUrl5\",\"AB F\\\\sourceUrl6\"],",
+                "  \"sources\": [\"../../AC/ACD/sourceUrl1\",\"../../AC/ACD/X/sourceUrl2\",\"../../AC/ACD/Y/Z/sourceUrl3\",\"../../B/sourceUrl4\",\"ABE/sourceUrl5\",\"AB F/sourceUrl6\"],",
                 "  \"names\": [\"sourceName1\",\"sourceName2\",\"sourceName3\",\"sourceName4\",\"sourceName5\",\"sourceName6\"],",
                 "  \"mappings\": \";WAUUA;qBCUUC;+BCUUC;yCCUUC;mDCUUC;6DCUUC\",",
                 "  \"sourcesContent\": [\"1\",\"2\",\"3\",\"4\",\"5\",\"6\"]",

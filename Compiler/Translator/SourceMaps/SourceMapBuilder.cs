@@ -221,8 +221,13 @@ namespace Bridge.Translator
             {
                 folder += Path.DirectorySeparatorChar;
             }
+
             Uri folderUri = new Uri(folder);
-            return Uri.UnescapeDataString(folderUri.MakeRelativeUri(pathUri).ToString().Replace('/', Path.DirectorySeparatorChar));
+
+            var path = folderUri.MakeRelativeUri(pathUri).ToString();
+            path = new Bridge.Contract.ConfigHelper().ConvertPath(path, '/');
+
+            return Uri.UnescapeDataString(path);
         }
 
         private void PrintStringListOn(List<string> strings, bool isPath, StringBuilder buffer)
