@@ -22,6 +22,14 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }
         }
 
+        [Virtual]
+        public class Person: Person.IPerson
+        {
+            public interface IPerson
+            {
+            }
+        }
+
         [Test]
         public static void TestVirtualNestedClasses()
         {
@@ -34,6 +42,13 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.False(sub1 is BaseClass.I1);
             Assert.True(sub1_1 is BaseClass.Sub1);
             Assert.False(sub1_1 is BaseClass.I1);
+
+            object p = new Person();
+            Assert.True(p is Person);
+            Assert.False(p is Person.IPerson);
+            Assert.False(p is BaseClass);
+            Assert.False(p is BaseClass.I1);
+
         }
     }
 }

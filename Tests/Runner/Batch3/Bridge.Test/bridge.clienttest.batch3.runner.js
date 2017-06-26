@@ -12157,7 +12157,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestVirtualNestedClasses: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2855).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2855, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestVirtualNestedClasses()", $t.Line = "25", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2855).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2855, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestVirtualNestedClasses()", $t.Line = "33", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2855.TestVirtualNestedClasses();
                 }
             }

@@ -23192,6 +23192,13 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.False(Bridge.is(sub1, Bridge.virtual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2855.BaseClass.I1")));
                     Bridge.Test.NUnit.Assert.True(Bridge.is(sub1_1, Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2855.BaseClass.Sub1")));
                     Bridge.Test.NUnit.Assert.False(Bridge.is(sub1_1, Bridge.virtual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2855.BaseClass.I1")));
+
+                    var p = new (Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2855.Person"))();
+                    Bridge.Test.NUnit.Assert.True(Bridge.is(p, Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2855.Person")));
+                    Bridge.Test.NUnit.Assert.False(Bridge.is(p, Bridge.virtual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2855.Person.IPerson")));
+                    Bridge.Test.NUnit.Assert.False(Bridge.is(p, Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2855.BaseClass")));
+                    Bridge.Test.NUnit.Assert.False(Bridge.is(p, Bridge.virtual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2855.BaseClass.I1")));
+
                 }
             }
         }
