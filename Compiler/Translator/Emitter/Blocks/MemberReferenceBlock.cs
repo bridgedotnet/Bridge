@@ -411,7 +411,8 @@ namespace Bridge.Translator
             }
 
             bool hasInline = !string.IsNullOrEmpty(inline);
-            bool hasThis = hasInline && inline.Contains("{this}");
+            bool hasThis = hasInline && Helpers.HasThis(inline);
+            inline = hasInline ? Helpers.ConvertTokens(this.Emitter, inline, member.Member) : inline;
             bool isInterfaceMember = false;
 
             if (hasInline && inline.StartsWith("<self>"))
@@ -506,7 +507,7 @@ namespace Bridge.Translator
                 }
 
                 int thisIndex;
-
+                inline = member != null ? Helpers.ConvertTokens(this.Emitter, inline, member.Member) : inline;
                 if (!isSimple)
                 {
                     StringBuilder sb = new StringBuilder();

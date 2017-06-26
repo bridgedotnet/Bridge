@@ -5,11 +5,11 @@
     Bridge.define("TestIssue958.Issue958", {
         statics: {
             methods: {
-                Main1: function Main1() {
+                Main1: function Main1 () {
                     var message = new TestIssue958.SetValue("Hi!");
                     TestIssue958.Issue958.ProcessMessage(message);
                 },
-                ProcessMessage: function ProcessMessage(message) {
+                ProcessMessage: function ProcessMessage (message) {
                     // The call should have generic type as function parameter
                     TestIssue958.MessageExtensions.If(TestIssue958.SetValue, TestIssue958.MessageExtensions.If(TestIssue958.SetName, message, $asm.$.TestIssue958.Issue958.f1), $asm.$.TestIssue958.Issue958.f2);
                 }
@@ -31,7 +31,7 @@
     Bridge.define("TestIssue958.MessageExtensions", {
         statics: {
             methods: {
-                If: function If(T, source, work) {
+                If: function If (T, source, work) {
                     if (Bridge.is(source, T)) {
                         work(Bridge.cast(Bridge.unbox(source), T));
                     }

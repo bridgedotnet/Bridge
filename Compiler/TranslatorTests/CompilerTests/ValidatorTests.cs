@@ -151,290 +151,299 @@ namespace Bridge.Translator.Tests
             }
         }
 
-        class ValidatorTests
+    }
+
+    class ValidatorTests
+    {
+        class CheckTypeTests : AssemblyDefinitionTests
         {
-            class CheckTypeTests : AssemblyDefinitionTests
+            protected void CheckTypeShouldFailTest(string parentType, Func<Mono.Cecil.TypeDefinition, string> expectedMessageMethod)
             {
-                protected void CheckTypeShouldFailTest(string parentType, Func<Mono.Cecil.TypeDefinition, string> expectedMessageMethod)
-                {
-                    ShouldFailTest(
-                        parentType,
-                        (type) =>
-                        {
-                            var v = new Validator();
-                            v.CheckType(type, null);
-                        },
-                        expectedMessageMethod
-                    );
-                }
-
-                protected void CheckTypeShouldFailTest(string parentType, string expectedMessageFormat)
-                {
-                    ShouldFailTest(
-                        parentType,
-                        (type) =>
-                        {
-                            var v = new Validator();
-                            v.CheckType(type, null);
-                        },
-                        (type) =>
-                        {
-                            return string.Format(expectedMessageFormat, type);
-                        }
-                    );
-                }
-
-                protected void IsVirtualTypeShouldFailTest(string parentType, string expectedMessageFormat)
-                {
-                    ShouldFailTest(
-                        parentType,
-                        (ICSharpCode.NRefactory.TypeSystem.ITypeDefinition type) =>
-                        {
-                            var v = new Validator();
-                            v.IsVirtualType(type);
-                        },
-                        (type) =>
-                        {
-                            return string.Format(expectedMessageFormat, type.FullName);
-                        }
-                    );
-                }
-
-                protected void IsExternalTypeTest(string parentType, bool expected)
-                {
-                    CheckTypeResultTest(
-                        parentType,
-                        (Mono.Cecil.TypeDefinition type) =>
-                        {
-                            var v = new Validator();
-                            return v.IsExternalType(type);
-                        },
-                        expected,
-                        (type) => string.Format("Type {0} should {1}be recognized as external", type, expected ? "" : "not ")
-                    );
-                }
-
-                protected void IsVirtualTypeTest(string parentType, bool expected)
-                {
-                    CheckTypeResultTest(
-                        parentType,
-                        (ICSharpCode.NRefactory.TypeSystem.ITypeDefinition type) =>
-                        {
-                            var v = new Validator();
-                            return v.IsVirtualType(type);
-                        },
-                        expected,
-                        (type) => string.Format("Type {0} should be {1}recognized as [Virtual]", type, expected ? "" : "not ")
-                    );
-                }
+                ShouldFailTest(
+                    parentType,
+                    (type) =>
+                    {
+                        var v = new Validator();
+                        v.CheckType(type, null);
+                    },
+                    expectedMessageMethod
+                );
             }
 
-            [TestFixture]
-            class CheckObjectLiteralTests : CheckTypeTests
+            protected void CheckTypeShouldFailTest(string parentType, string expectedMessageFormat)
             {
-                [Test]
-                public void ObjectLiteralShouldFailNoVirtualMethodsTest()
-                {
-                    CheckTypeShouldFailTest(
-                        TestAssemblyHelper.TestClassNames.Issues.N2276.ShouldFail.NO_VIRTUAL_METHODS,
-                        Constants.Messages.Exceptions.OBJECT_LITERAL_NO_VIRTUAL_METHODS
-                    );
-                }
-
-                [Test]
-                public void ObjectLiteralShouldFailPlainNoCreateModeConstructorTest()
-                {
-                    CheckTypeShouldFailTest(
-                        TestAssemblyHelper.TestClassNames.Issues.N2276.ShouldFail.PLAIN_NO_CREATE_MODE_CUSTOM_CONSTRUCTOR,
-                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_NO_CREATE_MODE_CUSTOM_CONSTRUCTOR
-                    );
-                }
-
-                [Test]
-                public void ObjectLiteralShouldFailPlainCustomConstructorTest()
-                {
-                    CheckTypeShouldFailTest(
-                        TestAssemblyHelper.TestClassNames.Issues.N2276.ShouldFail.PLAIN_CUSTOM_CONSTRUCTOR,
-                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_CUSTOM_CONSTRUCTOR
-                    );
-                }
-
-                [Test]
-                public void ObjectLiteralShouldFailPlainInheritanceTest()
-                {
-                    CheckTypeShouldFailTest(
-                        TestAssemblyHelper.TestClassNames.Issues.N2276.ShouldFail.PLAIN_INHERITANCE,
-                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_INHERITANCE
-                    );
-                }
-
-                [Test]
-                public void ObjectLiteralShouldFailConstructorInheritanceTest()
-                {
-                    CheckTypeShouldFailTest(
-                        TestAssemblyHelper.TestClassNames.Issues.N2276.ShouldFail.CONSTRUCTOR_INHERITANCE,
-                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_CONSTRUCTOR_INHERITANCE
-                    );
-                }
-
-                [Test]
-                public void ObjectLiteralShouldFailInterfaceNoOverloadMethodsTest()
-                {
-                    CheckTypeShouldFailTest(
-                        TestAssemblyHelper.TestClassNames.Issues.N2276.ShouldFail.INTERFACE_NO_OVERLOAD_METHODS,
-                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_OVERLOAD_METHODS
-                    );
-                }
-
-                [Test]
-                public void ObjectLiteralShouldFailInterfaceNoEventsTest()
-                {
-                    CheckTypeShouldFailTest(
-                        TestAssemblyHelper.TestClassNames.Issues.N2276.ShouldFail.INTERFACE_NO_EVENTS,
-                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_EVENTS
-                    );
-                }
-
-                [Test]
-                public void ObjectLiteralShouldFailInterfaceNoExplicitImplementationTest()
-                {
-                    CheckTypeShouldFailTest(
-                        TestAssemblyHelper.TestClassNames.Issues.N2276.ShouldFail.INTERFACE_NO_EXPLICIT_IMPLEMENTATION,
-                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_EXPLICIT_IMPLEMENTATION
-                    );
-                }
-
-                [Test]
-                public void ObjectLiteralShouldFailInterfaceInheritanceTest()
-                {
-                    CheckTypeShouldFailTest(
-                        TestAssemblyHelper.TestClassNames.Issues.N2276.ShouldFail.INTERFACE_INHERITANCE,
-                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_INHERITANCE
-                    );
-                }
+                ShouldFailTest(
+                    parentType,
+                    (type) =>
+                    {
+                        var v = new Validator();
+                        v.CheckType(type, null);
+                    },
+                    (type) =>
+                    {
+                        return string.Format(expectedMessageFormat, type);
+                    }
+                );
             }
 
-            [TestFixture]
-            class CheckExternalObjectLiteralTests : CheckTypeTests
+            protected void IsVirtualTypeShouldFailTest(string parentType, string expectedMessageFormat)
             {
-                [Test]
-                public void ExternalObjectLiteralShouldFailNoVirtualMethodsTest()
-                {
-                    CheckTypeShouldFailTest(
-                        TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.NO_VIRTUAL_METHODS,
-                        Constants.Messages.Exceptions.OBJECT_LITERAL_NO_VIRTUAL_METHODS
-                    );
-                }
-
-                [Test]
-                public void ExternalObjectLiteralShouldFailPlainNoCreateModeConstructorTest()
-                {
-                    CheckTypeShouldFailTest(
-                        TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.PLAIN_NO_CREATE_MODE_CUSTOM_CONSTRUCTOR,
-                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_NO_CREATE_MODE_CUSTOM_CONSTRUCTOR
-                    );
-                }
-
-                [Test]
-                public void ExternalObjectLiteralShouldFailPlainCustomConstructorTest()
-                {
-                    CheckTypeShouldFailTest(
-                        TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.PLAIN_CUSTOM_CONSTRUCTOR,
-                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_CUSTOM_CONSTRUCTOR
-                    );
-                }
-
-                [Test]
-                public void ExternalObjectLiteralShouldFailPlainInheritanceTest()
-                {
-                    CheckTypeShouldFailTest(
-                        TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.PLAIN_INHERITANCE,
-                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_INHERITANCE
-                    );
-                }
-
-                [Test]
-                public void ExternalObjectLiteralShouldFailConstructorInheritanceTest()
-                {
-                    CheckTypeShouldFailTest(
-                        TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.CONSTRUCTOR_INHERITANCE,
-                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_CONSTRUCTOR_INHERITANCE
-                    );
-                }
-
-                [Test]
-                public void ExternalObjectLiteralShouldFailInterfaceNoOverloadMethodsTest()
-                {
-                    CheckTypeShouldFailTest(
-                        TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.INTERFACE_NO_OVERLOAD_METHODS,
-                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_OVERLOAD_METHODS
-                    );
-                }
-
-                [Test]
-                public void ExternalObjectLiteralShouldFailInterfaceNoEventsTest()
-                {
-                    CheckTypeShouldFailTest(
-                        TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.INTERFACE_NO_EVENTS,
-                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_EVENTS
-                    );
-                }
-
-                [Test]
-                public void ExternalObjectLiteralShouldFailInterfaceNoExplicitImplementationTest()
-                {
-                    CheckTypeShouldFailTest(
-                        TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.INTERFACE_NO_EXPLICIT_IMPLEMENTATION,
-                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_EXPLICIT_IMPLEMENTATION
-                    );
-                }
-
-                [Test]
-                public void ExternalObjectLiteralShouldFailInterfaceInheritanceTest()
-                {
-                    CheckTypeShouldFailTest(
-                        TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.INTERFACE_INHERITANCE,
-                        Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_INHERITANCE
-                    );
-                }
+                ShouldFailTest(
+                    parentType,
+                    (ICSharpCode.NRefactory.TypeSystem.ITypeDefinition type) =>
+                    {
+                        var v = new Validator();
+                        v.IsVirtualType(type);
+                    },
+                    (type) =>
+                    {
+                        return string.Format(expectedMessageFormat, type.FullName);
+                    }
+                );
             }
 
-            [TestFixture]
-            class CheckVirtualClass : CheckTypeTests
+            protected void IsExternalTypeTest(string parentType, bool expected)
             {
-                [Test]
-                public void VirtualClassShouldFailWhenNestedClassesTest()
-                {
-                    IsVirtualTypeShouldFailTest(
-                        TestAssemblyHelper.TestClassNames.Issues.N2795.ShouldFail.NO_NESTED_TYPES,
-                        Constants.Messages.Exceptions.VIRTUAL_CLASS_NO_NESTED_TYPES
-                    );
-                }
+                CheckTypeResultTest(
+                    parentType,
+                    (Mono.Cecil.TypeDefinition type) =>
+                    {
+                        var v = new Validator();
+                        return v.IsExternalType(type);
+                    },
+                    expected,
+                    (type) => string.Format("Type {0} should {1}be recognized as external", type, expected ? "" : "not ")
+                );
+            }
 
-                [Test]
-                public void VirtualClassIsVirtualTest()
-                {
-                    IsVirtualTypeTest(TestAssemblyHelper.TestClassNames.Issues.N2795.ShouldNotFail.VIRTUAL_TYPES, true);
-                }
+            protected void IsVirtualTypeTest(string parentType, bool expected)
+            {
+                CheckTypeResultTest(
+                    parentType,
+                    (ICSharpCode.NRefactory.TypeSystem.ITypeDefinition type) =>
+                    {
+                        var v = new Validator();
+                        return v.IsVirtualType(type);
+                    },
+                    expected,
+                    (type) => string.Format("Type {0} should be {1}recognized as [Virtual] (via ITypeDefinition)", type, expected ? "" : "not ")
+                );
 
-                [Test]
-                public void VirtualClassIsNonVirtualTest()
-                {
-                    IsVirtualTypeTest(TestAssemblyHelper.TestClassNames.Issues.N2795.ShouldNotFail.NON_VIRTUAL_TYPES, false);
-                }
+                CheckTypeResultTest(
+                    parentType,
+                    (Mono.Cecil.TypeDefinition type) =>
+                    {
+                        return Validator.IsVirtualTypeStatic(type);
+                    },
+                    expected,
+                    (type) => string.Format("Type {0} should be {1}recognized as [Virtual] (via TypeDefinition)", type, expected ? "" : "not ")
+                );
+            }
+        }
 
-                [Test]
-                public void VirtualClassIsExternalTest()
-                {
-                    IsExternalTypeTest(TestAssemblyHelper.TestClassNames.Issues.N2795.ShouldNotFail.VIRTUAL_TYPES, true);
-                }
+        [TestFixture]
+        class CheckObjectLiteralTests : CheckTypeTests
+        {
+            [Test]
+            public void ObjectLiteralShouldFailNoVirtualMethodsTest()
+            {
+                CheckTypeShouldFailTest(
+                    TestAssemblyHelper.TestClassNames.Issues.N2276.ShouldFail.NO_VIRTUAL_METHODS,
+                    Constants.Messages.Exceptions.OBJECT_LITERAL_NO_VIRTUAL_METHODS
+                );
+            }
 
-                [Test]
-                public void VirtualClassIsNonExternalTest()
-                {
-                    IsExternalTypeTest(TestAssemblyHelper.TestClassNames.Issues.N2795.ShouldNotFail.NON_VIRTUAL_TYPES, false);
-                }
+            [Test]
+            public void ObjectLiteralShouldFailPlainNoCreateModeConstructorTest()
+            {
+                CheckTypeShouldFailTest(
+                    TestAssemblyHelper.TestClassNames.Issues.N2276.ShouldFail.PLAIN_NO_CREATE_MODE_CUSTOM_CONSTRUCTOR,
+                    Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_NO_CREATE_MODE_CUSTOM_CONSTRUCTOR
+                );
+            }
+
+            [Test]
+            public void ObjectLiteralShouldFailPlainCustomConstructorTest()
+            {
+                CheckTypeShouldFailTest(
+                    TestAssemblyHelper.TestClassNames.Issues.N2276.ShouldFail.PLAIN_CUSTOM_CONSTRUCTOR,
+                    Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_CUSTOM_CONSTRUCTOR
+                );
+            }
+
+            [Test]
+            public void ObjectLiteralShouldFailPlainInheritanceTest()
+            {
+                CheckTypeShouldFailTest(
+                    TestAssemblyHelper.TestClassNames.Issues.N2276.ShouldFail.PLAIN_INHERITANCE,
+                    Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_INHERITANCE
+                );
+            }
+
+            [Test]
+            public void ObjectLiteralShouldFailConstructorInheritanceTest()
+            {
+                CheckTypeShouldFailTest(
+                    TestAssemblyHelper.TestClassNames.Issues.N2276.ShouldFail.CONSTRUCTOR_INHERITANCE,
+                    Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_CONSTRUCTOR_INHERITANCE
+                );
+            }
+
+            [Test]
+            public void ObjectLiteralShouldFailInterfaceNoOverloadMethodsTest()
+            {
+                CheckTypeShouldFailTest(
+                    TestAssemblyHelper.TestClassNames.Issues.N2276.ShouldFail.INTERFACE_NO_OVERLOAD_METHODS,
+                    Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_OVERLOAD_METHODS
+                );
+            }
+
+            [Test]
+            public void ObjectLiteralShouldFailInterfaceNoEventsTest()
+            {
+                CheckTypeShouldFailTest(
+                    TestAssemblyHelper.TestClassNames.Issues.N2276.ShouldFail.INTERFACE_NO_EVENTS,
+                    Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_EVENTS
+                );
+            }
+
+            [Test]
+            public void ObjectLiteralShouldFailInterfaceNoExplicitImplementationTest()
+            {
+                CheckTypeShouldFailTest(
+                    TestAssemblyHelper.TestClassNames.Issues.N2276.ShouldFail.INTERFACE_NO_EXPLICIT_IMPLEMENTATION,
+                    Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_EXPLICIT_IMPLEMENTATION
+                );
+            }
+
+            [Test]
+            public void ObjectLiteralShouldFailInterfaceInheritanceTest()
+            {
+                CheckTypeShouldFailTest(
+                    TestAssemblyHelper.TestClassNames.Issues.N2276.ShouldFail.INTERFACE_INHERITANCE,
+                    Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_INHERITANCE
+                );
+            }
+        }
+
+        [TestFixture]
+        class CheckExternalObjectLiteralTests : CheckTypeTests
+        {
+            [Test]
+            public void ExternalObjectLiteralShouldFailNoVirtualMethodsTest()
+            {
+                CheckTypeShouldFailTest(
+                    TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.NO_VIRTUAL_METHODS,
+                    Constants.Messages.Exceptions.OBJECT_LITERAL_NO_VIRTUAL_METHODS
+                );
+            }
+
+            [Test]
+            public void ExternalObjectLiteralShouldFailPlainNoCreateModeConstructorTest()
+            {
+                CheckTypeShouldFailTest(
+                    TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.PLAIN_NO_CREATE_MODE_CUSTOM_CONSTRUCTOR,
+                    Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_NO_CREATE_MODE_CUSTOM_CONSTRUCTOR
+                );
+            }
+
+            [Test]
+            public void ExternalObjectLiteralShouldFailPlainCustomConstructorTest()
+            {
+                CheckTypeShouldFailTest(
+                    TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.PLAIN_CUSTOM_CONSTRUCTOR,
+                    Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_CUSTOM_CONSTRUCTOR
+                );
+            }
+
+            [Test]
+            public void ExternalObjectLiteralShouldFailPlainInheritanceTest()
+            {
+                CheckTypeShouldFailTest(
+                    TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.PLAIN_INHERITANCE,
+                    Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_PLAIN_INHERITANCE
+                );
+            }
+
+            [Test]
+            public void ExternalObjectLiteralShouldFailConstructorInheritanceTest()
+            {
+                CheckTypeShouldFailTest(
+                    TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.CONSTRUCTOR_INHERITANCE,
+                    Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_CONSTRUCTOR_INHERITANCE
+                );
+            }
+
+            [Test]
+            public void ExternalObjectLiteralShouldFailInterfaceNoOverloadMethodsTest()
+            {
+                CheckTypeShouldFailTest(
+                    TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.INTERFACE_NO_OVERLOAD_METHODS,
+                    Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_OVERLOAD_METHODS
+                );
+            }
+
+            [Test]
+            public void ExternalObjectLiteralShouldFailInterfaceNoEventsTest()
+            {
+                CheckTypeShouldFailTest(
+                    TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.INTERFACE_NO_EVENTS,
+                    Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_EVENTS
+                );
+            }
+
+            [Test]
+            public void ExternalObjectLiteralShouldFailInterfaceNoExplicitImplementationTest()
+            {
+                CheckTypeShouldFailTest(
+                    TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.INTERFACE_NO_EXPLICIT_IMPLEMENTATION,
+                    Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_NO_EXPLICIT_IMPLEMENTATION
+                );
+            }
+
+            [Test]
+            public void ExternalObjectLiteralShouldFailInterfaceInheritanceTest()
+            {
+                CheckTypeShouldFailTest(
+                    TestAssemblyHelper.TestClassNames.Issues.N2710.ShouldFail.INTERFACE_INHERITANCE,
+                    Bridge.Translator.Constants.Messages.Exceptions.OBJECT_LITERAL_INTERFACE_INHERITANCE
+                );
+            }
+        }
+
+        [TestFixture]
+        class CheckVirtualClass : CheckTypeTests
+        {
+            [Test]
+            public void VirtualClassCanHaveNestedTypesTest()
+            {
+                IsVirtualTypeTest(TestAssemblyHelper.TestClassNames.Issues.N2795.ShouldNotFail.NESTED_TYPES, true);
+            }
+
+            [Test]
+            public void VirtualClassIsVirtualTest()
+            {
+                IsVirtualTypeTest(TestAssemblyHelper.TestClassNames.Issues.N2795.ShouldNotFail.VIRTUAL_TYPES, true);
+            }
+
+            [Test]
+            public void VirtualClassIsNonVirtualTest()
+            {
+                IsVirtualTypeTest(TestAssemblyHelper.TestClassNames.Issues.N2795.ShouldNotFail.NON_VIRTUAL_TYPES, false);
+            }
+
+            [Test]
+            public void VirtualClassIsExternalTest()
+            {
+                IsExternalTypeTest(TestAssemblyHelper.TestClassNames.Issues.N2795.ShouldNotFail.VIRTUAL_TYPES, true);
+            }
+
+            [Test]
+            public void VirtualClassIsNonExternalTest()
+            {
+                IsExternalTypeTest(TestAssemblyHelper.TestClassNames.Issues.N2795.ShouldNotFail.NON_VIRTUAL_TYPES, false);
             }
         }
     }
 }
+

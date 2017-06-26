@@ -20,13 +20,13 @@ Bridge.assembly("TestProject", function ($asm, globals) {
                 var box12 = 0;
 
                 // The code below SHOULD contain box calls for standart primitives (except custim long, ulong, decimal) and enums #2318
-                o = Bridge.box(box1, Test.BridgeIssues.N2318.N2318.JustEnum, $box_.Test.BridgeIssues.N2318.N2318.JustEnum.toString);
-                o = Bridge.box(box2, System.Boolean, $box_.System.Boolean.toString);
-                o = Bridge.box(box3, System.DateTime, $box_.System.DateTime.toString);
-                o = Bridge.box(box4, System.Char, $box_.System.Char.toString, $box_.System.Char.getHashCode);
+                o = Bridge.box(box1, Test.BridgeIssues.N2318.N2318.JustEnum, System.Enum.toStringFn(Test.BridgeIssues.N2318.N2318.JustEnum));
+                o = Bridge.box(box2, System.Boolean, System.Boolean.toString);
+                o = Bridge.box(box3, System.DateTime, System.DateTime.format);
+                o = Bridge.box(box4, System.Char, String.fromCharCode, System.Char.getHashCode);
                 o = Bridge.box(box5, System.Byte);
-                o = Bridge.box(box6, System.Double, $box_.System.Double.toString, $box_.System.Double.getHashCode);
-                o = Bridge.box(box7, System.Single, $box_.System.Single.toString, $box_.System.Single.getHashCode);
+                o = Bridge.box(box6, System.Double, System.Double.format, System.Double.getHashCode);
+                o = Bridge.box(box7, System.Single, System.Single.format, System.Single.getHashCode);
                 o = Bridge.box(box8, System.Int16);
                 o = Bridge.box(box9, System.Int32);
                 o = Bridge.box(box10, System.SByte);

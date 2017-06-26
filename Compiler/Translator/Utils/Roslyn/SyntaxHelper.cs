@@ -652,6 +652,7 @@ namespace Bridge.Translator
                     if (value is string)
                     {
                         name = value.ToString();
+                        name = Helpers.ConvertNameTokens(name, symbol.Name);
                         if (!isIgnore && symbol.IsStatic && Helpers.IsReservedStaticName(name))
                         {
                             name = Helpers.ChangeReservedWord(name);

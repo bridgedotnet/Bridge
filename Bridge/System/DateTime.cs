@@ -90,7 +90,7 @@ namespace System
         [Template("System.DateTime.format({this}, {format}, {provider})")]
         public extern string Format(string format, IFormatProvider provider);
 
-        [Template("System.DateTime.format({this})")]
+        [Template(Fn = "System.DateTime.format")]
         public override extern string ToString();
 
         [Template("System.DateTime.format({this}, {format})")]

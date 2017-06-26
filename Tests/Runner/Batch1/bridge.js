@@ -1,7 +1,7 @@
 /**
- * @version   : 16.0.0-beta2 - Bridge.NET
+ * @version   : 16.0.0-beta3 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2017-06-07
+ * @date      : 2017-06-19
  * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
  */
@@ -131,8 +131,14 @@
         virtual: function (name, isClass) {
             var type = Bridge.unroll(name);
 
-            if (!type) {
+            if (!type || !Bridge.isFunction(type)) {
+                var old = Bridge.Class.staticInitAllow;
                 type = isClass ? Bridge.define(name) : Bridge.definei(name);
+                Bridge.Class.staticInitAllow = true;
+                if (type.$staticInit) {
+                    type.$staticInit();
+                }
+                Bridge.Class.staticInitAllow = old;
             }
 
             return type;
@@ -150,6 +156,10 @@
         literal: function (type, obj) {
             obj.$getType = function () { return type };
             return obj;
+        },
+
+        isJSObject: function(value) {
+            return Object.prototype.toString.call(value) === '[object Object]';
         },
 
         isPlainObject: function (obj) {
@@ -1908,6 +1918,12 @@
             return null;
         },
 
+        toStringFn: function(type) {
+            return function(value) {
+                return System.Enum.toString(type, value);
+            };
+        },
+
         toString: function (enumType, value, forceFlags) {
             if (arguments.length === 0) {
                 return "System.Enum";
@@ -2251,8 +2267,27 @@
             var props = config.properties;
             if (props) {
                 for (name in props) {
-                    var cfg = Bridge.property(statics ? scope : prototype, name, props[name], statics, cls);
+                    var v = props[name],
+                        d,
+                        cfg;
 
+                    if (v != null && Bridge.isJSObject(v) && (!v.get || !v.set)) {
+                        for (var k = 0; k < descriptors.length; k++) {
+                            if (descriptors[k].name === name) {
+                                d = descriptors[k];
+                            }
+                        }
+
+                        if (d && d.get && !v.get) {
+                            v.get = Bridge.emptyFn;
+                        }
+
+                        if (d && d.set && !v.set) {
+                            v.set = Bridge.emptyFn;
+                        }
+                    }
+
+                    cfg = Bridge.property(statics ? scope : prototype, name, v, statics, cls);
                     cfg.name = name;
                     cfg.cls = cls;
 
@@ -2544,7 +2579,10 @@
                             if (Class.$$inherits && Class.$$inherits.length > 0 && Class.$$inherits[0].$staticInit) {
                                 Class.$$inherits[0].$staticInit();
                             }
-                            Class.$base.ctor.call(this);
+
+                            if (Class.$base.ctor) {
+                                Class.$base.ctor.call(this);
+                            }
                         }
                     };
                 }
@@ -3269,8 +3307,8 @@
     // @source systemAssemblyVersion.js
 
     Bridge.init(function () {
-        Bridge.SystemAssembly.version = "16.0.0-beta2";
-        Bridge.SystemAssembly.compiler = "16.0.0-beta2";
+        Bridge.SystemAssembly.version = "16.0.0-beta3";
+        Bridge.SystemAssembly.compiler = "16.0.0-beta3";
     });
 
     Bridge.define("Bridge.Utils.SystemAssemblyVersion");
@@ -4678,14 +4716,6 @@
                 return System.String.formatProvider.apply(System.String, [formatProvider, this.format].concat(this.args));
             }
         }
-    });
-
-    var $box_ = {};
-
-    Bridge.ns("System.Boolean", $box_);
-
-    Bridge.apply($box_.System.Boolean, {
-        toString: function (obj) { return System.Boolean.toString(obj); }
     });
 
     // @source formattableStringFactory.js
@@ -6651,7 +6681,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             },
 
             format: function (number, format, provider) {
-                return Bridge.Int.format(number, format, provider, System.Double);
+                return Bridge.Int.format(number, format || 'G', provider, System.Double);
             },
 
             equals: function (v1, v2) {
@@ -6708,7 +6738,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             tryParse: System.Double.tryParse,
 
             format: function (number, format, provider) {
-                return Bridge.Int.format(number, format, provider, System.Single);
+                return Bridge.Int.format(number, format || 'G', provider, System.Single);
             },
 
             equals: function (v1, v2) {
@@ -9659,13 +9689,13 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 throw new System.Diagnostics.Contracts.ContractException(failureKind, displayMessage, userMessage, conditionText, innerException);
             }
         },
-        assert: function (failureKind, condition, message) {
-            if (!condition()) {
+        assert: function (failureKind, scope, condition, message) {
+            if (!condition.call(scope)) {
                 System.Diagnostics.Contracts.Contract.reportFailure(failureKind, message, condition, null);
             }
         },
-        requires: function (TException, condition, message) {
-            if (!condition()) {
+        requires: function (TException, scope, condition, message) {
+            if (!condition.call(scope)) {
                 System.Diagnostics.Contracts.Contract.reportFailure(0, message, condition, null, TException);
             }
         },
@@ -11730,6 +11760,20 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                       get: function () {
                           return this.getIsReadOnly();
                       }
+                  },
+
+                  Capacity: {
+                      get: function() {
+                          return this._capacity;
+                      },
+
+                      set: function (value) {
+                          if (value < this.items.length) {
+                              throw new System.ArgumentOutOfRangeException("Capacity is set to a value that is less than Count.");
+                          }
+
+                          this._capacity = value;
+                      }
                   }
                 },
                 alias: [
@@ -11783,6 +11827,12 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                     this.items = [];
                 }
 
+                if (Bridge.isNumber(obj)) {
+                    this._capacity = obj;
+                } else {
+                    this._capacity = this.items.length;
+                }
+                
                 this.clear.$clearCallbacks = [];
             },
 
@@ -11820,8 +11870,23 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 this.set(index, value);
             },
 
+            ensureCapacity: function(min) {
+                if (this.items.length < min) {
+                    var newCapacity = this.items.length == 0 ? 4 : this.items.length * 2;
+                    this.Capacity = newCapacity;
+                }
+            },
+
+            trimExcess: function () {
+                var threshold = Bridge.Int.clip32(this.Capacity * 0.9);
+                if (this.items.length < threshold) {
+                    this.Capacity = this.items.length;                
+                }
+            }, 
+
             add: function (value) {
                 this.checkReadOnly();
+                this.ensureCapacity(this.items.length + 1);
                 this.items.push(value);
             },
 
@@ -11831,6 +11896,8 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 var array = Bridge.toArray(items),
                     i,
                     len;
+
+                this.ensureCapacity(this.items.length + array.length);
 
                 for (i = 0, len = array.length; i < len; ++i) {
                     this.items.push(array[i]);
@@ -11880,7 +11947,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 }
 
                 var array = Bridge.toArray(items);
-
+                this.ensureCapacity(this.items.length + array.length);
                 for (var i = 0; i < array.length; i++) {
                     this.insert(index++, array[i]);
                 }
@@ -11931,10 +11998,12 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 }
 
                 if (Bridge.isArray(item)) {
+                    this.ensureCapacity(this.items.length + item.length);
                     for (var i = 0; i < item.length; i++) {
                         this.insert(index++, item[i]);
                     }
                 } else {
+                    this.ensureCapacity(this.items.length + 1);
                     this.items.splice(index, 0, item);
                 }
             },
@@ -19406,7 +19475,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                             var pair = $t.Current;
                             name = System.String.replaceAll(name, System.String.concat("%", pair.key, "%"), pair.value);
                         }
-                    }finally {
+                    } finally {
                         if (Bridge.is($t, System.IDisposable)) {
                             $t.System$IDisposable$dispose();
                         }
@@ -25783,9 +25852,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             id: null,
             disposed: false
         },
-        alias: [
-            "dispose", "System$IDisposable$dispose"
-        ],
+        alias: ["dispose", "System$IDisposable$dispose"],
         ctors: {
             $ctor1: function (callback, state, dueTime, period) {
                 this.$initialize();
@@ -26324,7 +26391,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     if (this.index >= this.bitarray.Count) {
                         throw new System.InvalidOperationException("Enumeration already finished.");
                     }
-                    return Bridge.box(this.currentElement, System.Boolean, $box_.System.Boolean.toString);
+                    return Bridge.box(this.currentElement, System.Boolean, System.Boolean.toString);
                 }
             }
         },
@@ -26521,7 +26588,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                                     return false;
                                 }
                             }
-                        }finally {
+                        } finally {
                             if (Bridge.is($t, System.IDisposable)) {
                                 $t.System$IDisposable$dispose();
                             }
@@ -26541,7 +26608,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                                             break;
                                         }
                                     }
-                                }finally {
+                                } finally {
                                     if (Bridge.is($t2, System.IDisposable)) {
                                         $t2.System$IDisposable$dispose();
                                     }
@@ -26549,7 +26616,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                                     return false;
                                 }
                             }
-                        }finally {
+                        } finally {
                             if (Bridge.is($t1, System.IDisposable)) {
                                 $t1.System$IDisposable$dispose();
                             }
@@ -26754,7 +26821,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                         var item = $t.Current;
                         this.addIfNotPresent(item);
                     }
-                }finally {
+                } finally {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$dispose();
                     }
@@ -26798,7 +26865,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                         var element = $t.Current;
                         this.remove(element);
                     }
-                }finally {
+                } finally {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$dispose();
                     }
@@ -26917,7 +26984,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                             return true;
                         }
                     }
-                }finally {
+                } finally {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$dispose();
                     }
@@ -27068,7 +27135,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                             return false;
                         }
                     }
-                }finally {
+                } finally {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$dispose();
                     }
@@ -27084,7 +27151,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                             return false;
                         }
                     }
-                }finally {
+                } finally {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$dispose();
                     }
@@ -27116,7 +27183,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                             bitHelper.markBit(index);
                         }
                     }
-                }finally {
+                } finally {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$dispose();
                     }
@@ -27145,7 +27212,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                             this.addIfNotPresent(item);
                         }
                     }
-                }finally {
+                } finally {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$dispose();
                     }
@@ -27174,7 +27241,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                             }
                         }
                     }
-                }finally {
+                } finally {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$dispose();
                     }
@@ -27226,7 +27293,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                             numElementsInOther = (numElementsInOther + 1) | 0;
                             break;
                         }
-                    }finally {
+                    } finally {
                         if (Bridge.is($t, System.IDisposable)) {
                             $t.System$IDisposable$dispose();
                         }
@@ -27258,7 +27325,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                             }
                         }
                     }
-                }finally {
+                } finally {
                     if (Bridge.is($t1, System.IDisposable)) {
                         $t1.System$IDisposable$dispose();
                     }
@@ -28146,7 +28213,80 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             ctors: {
                 init: function () {
                     this.HashPrime = 101;
-                    this.primes = System.Array.init([3, 7, 11, 17, 23, 29, 37, 47, 59, 71, 89, 107, 131, 163, 197, 239, 293, 353, 431, 521, 631, 761, 919, 1103, 1327, 1597, 1931, 2333, 2801, 3371, 4049, 4861, 5839, 7013, 8419, 10103, 12143, 14591, 17519, 21023, 25229, 30293, 36353, 43627, 52361, 62851, 75431, 90523, 108631, 130363, 156437, 187751, 225307, 270371, 324449, 389357, 467237, 560689, 672827, 807403, 968897, 1162687, 1395263, 1674319, 2009191, 2411033, 2893249, 3471899, 4166287, 4999559, 5999471, 7199369], System.Int32);
+                    this.primes = System.Array.init([
+                        3, 
+                        7, 
+                        11, 
+                        17, 
+                        23, 
+                        29, 
+                        37, 
+                        47, 
+                        59, 
+                        71, 
+                        89, 
+                        107, 
+                        131, 
+                        163, 
+                        197, 
+                        239, 
+                        293, 
+                        353, 
+                        431, 
+                        521, 
+                        631, 
+                        761, 
+                        919, 
+                        1103, 
+                        1327, 
+                        1597, 
+                        1931, 
+                        2333, 
+                        2801, 
+                        3371, 
+                        4049, 
+                        4861, 
+                        5839, 
+                        7013, 
+                        8419, 
+                        10103, 
+                        12143, 
+                        14591, 
+                        17519, 
+                        21023, 
+                        25229, 
+                        30293, 
+                        36353, 
+                        43627, 
+                        52361, 
+                        62851, 
+                        75431, 
+                        90523, 
+                        108631, 
+                        130363, 
+                        156437, 
+                        187751, 
+                        225307, 
+                        270371, 
+                        324449, 
+                        389357, 
+                        467237, 
+                        560689, 
+                        672827, 
+                        807403, 
+                        968897, 
+                        1162687, 
+                        1395263, 
+                        1674319, 
+                        2009191, 
+                        2411033, 
+                        2893249, 
+                        3471899, 
+                        4166287, 
+                        4999559, 
+                        5999471, 
+                        7199369
+                    ], System.Int32);
                     this.MaxPrimeArrayLength = 2146435069;
                 }
             },

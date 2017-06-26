@@ -37,10 +37,6 @@ namespace Bridge.Contract
 
         string GetCustomTypeName(Mono.Cecil.TypeDefinition type, IEmitter emitter, bool excludeNs);
 
-        string GetInlineCode(Mono.Cecil.MethodDefinition method);
-
-        string GetInlineCode(Mono.Cecil.PropertyDefinition property);
-
         System.Collections.Generic.HashSet<string> GetParentTypes(System.Collections.Generic.IDictionary<string, Mono.Cecil.TypeDefinition> allTypes);
 
         bool HasAttribute(System.Collections.Generic.IEnumerable<ICSharpCode.NRefactory.TypeSystem.IAttribute> attributes, string name);
@@ -64,8 +60,6 @@ namespace Bridge.Contract
         bool IsExternalType(IEntity enity, bool ignoreLiteral = false);
 
         bool IsBridgeClass(Mono.Cecil.TypeDefinition type);
-
-        bool IsInlineMethod(Mono.Cecil.MethodDefinition method);
 
         bool IsObjectLiteral(ICSharpCode.NRefactory.TypeSystem.ITypeDefinition type);
 

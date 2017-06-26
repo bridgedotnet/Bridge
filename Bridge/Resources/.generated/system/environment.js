@@ -116,7 +116,7 @@
                             var pair = $t.Current;
                             name = System.String.replaceAll(name, System.String.concat("%", pair.key, "%"), pair.value);
                         }
-                    }finally {
+                    } finally {
                         if (Bridge.is($t, System.IDisposable)) {
                             $t.System$IDisposable$dispose();
                         }

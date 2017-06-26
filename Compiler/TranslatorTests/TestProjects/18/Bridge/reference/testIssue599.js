@@ -6,7 +6,7 @@
                 }
             },
             methods: {
-                Main1: function Main1() {
+                Main1: function Main1 () {
                     System.Console.WriteLine(new TestIssue599.Issue599()._something);
                 }
             }
