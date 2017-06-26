@@ -145,7 +145,6 @@
     <Compile Include="SimpleTypes\TupleTests.cs" />
     <Compile Include="RandomTests.cs" />
     <Compile Include="SimpleTypes\SingleTests.cs" />
-    <Compile Include="ScriptTests.cs" />
     <Compile Include="SimpleTypes\SByteTests.cs" />
     <Compile Include="NullableTests.cs" />
     <Compile Include="MathTests.cs" />

@@ -87,6 +87,7 @@
     <Compile Include="BridgeType.cs" />
     <Compile Include="Config\NamedFunctionMode.cs" />
     <Compile Include="Config\HtmlConfig.cs" />
+    <Compile Include="Config\ConsoleConfig.cs" />
     <Compile Include="Config\SourceMapConfig.cs" />
     <Compile Include="Config\VersionContext.cs" />
     <Compile Include="Constants\Messages.cs" />

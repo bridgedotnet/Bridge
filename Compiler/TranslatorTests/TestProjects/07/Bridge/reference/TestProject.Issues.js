@@ -1,10 +1,10 @@
 /**
- * @compiler Bridge.NET 16.0.0-beta2
+ * @compiler Bridge.NET 16.0.0-beta3
  */
 Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";
 
-    define(function () {
+    define("MyModule", function () {
         var MyModule = { };
     /** @namespace System */
 

@@ -920,6 +920,8 @@ namespace Bridge.Translator
                 this.Log.Trace("The resources config section has " + resources.Count + " non-default settings");
             }
 
+            CheckConsoleConfigSetting(resources);
+
             var toEmbed = resources.Where(x => x.Files != null && x.Files.Count() > 0).ToArray();
             var toExtract = resources.Where(x => x.Files == null || x.Files.Count() <= 0).ToArray();
 
@@ -927,6 +929,63 @@ namespace Bridge.Translator
             this.Log.Trace("Done preparing resources config");
 
             return;
+        }
+
+        private void CheckConsoleConfigSetting(List<ResourceConfigItem> resources)
+        {
+            if (this.AssemblyInfo.Console.Disabled)
+            {
+                this.Log.Trace("Switching off Bridge Console...");
+
+                var consoleResourceName = "bridge.console.js";
+                var consoleResourceMinifiedName = FileHelper.GetMinifiedJSFileName(consoleResourceName);
+
+                var consoleFormatted = resources.Where(x => x.Name == consoleResourceName && (x.Assembly == null || x.Assembly == Translator.Bridge_ASSEMBLY)).FirstOrDefault();
+                var consoleMinified = resources.Where(x => x.Name == consoleResourceMinifiedName && (x.Assembly == null || x.Assembly == Translator.Bridge_ASSEMBLY)).FirstOrDefault();
+
+                if (consoleFormatted == null)
+                {
+                    consoleFormatted = new ResourceConfigItem()
+                    {
+                        Name = consoleResourceName
+                    };
+
+                    this.Log.Trace("Adding resource setting for " + consoleResourceName);
+                    resources.Add(consoleFormatted);
+                }
+                else
+                {
+                    this.Log.Trace("Overriding resource setting for " + consoleResourceName);
+                }
+
+
+                consoleFormatted.Output = null;
+                consoleFormatted.Extract = false;
+                consoleFormatted.Inject = false;
+                consoleFormatted.Files = new string[0];
+
+                if (consoleMinified == null)
+                {
+                    consoleMinified = new ResourceConfigItem()
+                    {
+                        Name = consoleResourceMinifiedName
+                    };
+
+                    this.Log.Trace("Adding resource setting for " + consoleResourceMinifiedName);
+                    resources.Add(consoleMinified);
+                }
+                else
+                {
+                    this.Log.Trace("Overriding resource setting for " + consoleResourceMinifiedName);
+                }
+
+                consoleMinified.Output = null;
+                consoleMinified.Extract = false;
+                consoleMinified.Inject = false;
+                consoleMinified.Files = new string[0];
+
+                this.Log.Trace("Switching off Bridge Console done");
+            }
         }
 
         private void ValidateResourceSettings(ResourceConfigItem defaultSetting, IEnumerable<ResourceConfigItem> rawNonDefaultResources)

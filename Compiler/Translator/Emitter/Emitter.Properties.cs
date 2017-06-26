@@ -541,5 +541,10 @@ namespace Bridge.Translator
             get;
             set;
         }
+
+        public bool InConstructor
+        {
+            get; set;
+        }
     }
 }

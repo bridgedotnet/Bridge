@@ -88,6 +88,12 @@
             return null;
         },
 
+        toStringFn: function(type) {
+            return function(value) {
+                return System.Enum.toString(type, value);
+            };
+        },
+
         toString: function (enumType, value, forceFlags) {
             if (arguments.length === 0) {
                 return "System.Enum";

@@ -178,7 +178,6 @@ namespace Bridge.Translator
         public virtual bool IsExternalType(TypeDefinition type, bool ignoreLiteral = false)
         {
             string externalAttr = Translator.Bridge_ASSEMBLY + ".ExternalAttribute";
-            string virtualAttr = Translator.Bridge_ASSEMBLY + ".VirtualAttribute";
             string nonScriptableAttr = Translator.Bridge_ASSEMBLY + ".NonScriptableAttribute";
 
             var has = this.HasAttribute(type.CustomAttributes, externalAttr)
@@ -196,37 +195,7 @@ namespace Bridge.Translator
 
             if (!has)
             {
-                CustomAttribute attr = type.CustomAttributes.FirstOrDefault(a => a.AttributeType.FullName == virtualAttr);
-
-                if (attr == null && type.DeclaringType != null)
-                {
-                    attr = type.DeclaringType.CustomAttributes.FirstOrDefault(a => a.AttributeType.FullName == virtualAttr);
-                }
-
-                if (attr == null)
-                {
-                    attr = type.Module.Assembly.CustomAttributes.FirstOrDefault(a => a.AttributeType.FullName == virtualAttr);
-                }
-
-                if (attr != null)
-                {
-                    if (attr.ConstructorArguments.Count == 0)
-                    {
-                        return true;
-                    }
-
-                    var value = (int)attr.ConstructorArguments[0].Value;
-
-                    switch (value)
-                    {
-                        case 0:
-                            return true;
-                        case 1:
-                            return !type.IsInterface;
-                        case 2:
-                            return type.IsInterface;
-                    }
-                }
+                has = IsVirtualTypeStatic(type);
             }
 
             return has;
@@ -284,6 +253,53 @@ namespace Bridge.Translator
             return Validator.IsVirtualTypeStatic(typeDefinition);
         }
 
+        public static bool IsVirtualTypeStatic(TypeDefinition typeDefinition)
+        {
+            string virtualAttr = Translator.Bridge_ASSEMBLY + ".VirtualAttribute";
+            CustomAttribute attr = attr =
+                    typeDefinition.CustomAttributes.FirstOrDefault(
+                        a => a.AttributeType.FullName == virtualAttr);
+
+            if (attr == null && typeDefinition.DeclaringType != null)
+            {
+                return Validator.IsVirtualTypeStatic(typeDefinition.DeclaringType);
+            }
+
+            if (attr == null)
+            {
+                attr = typeDefinition.Module.Assembly.CustomAttributes.FirstOrDefault(a => a.AttributeType.FullName == virtualAttr);
+            }
+
+            bool isVirtual = false;
+
+            if (attr != null)
+            {
+                if (attr.ConstructorArguments.Count == 0)
+                {
+                    isVirtual = true;
+                }
+                else
+                {
+                    var value = (int)attr.ConstructorArguments[0].Value;
+
+                    switch (value)
+                    {
+                        case 0:
+                            isVirtual = true;
+                            break;
+                        case 1:
+                            isVirtual = !typeDefinition.IsInterface;
+                            break;
+                        case 2:
+                            isVirtual = typeDefinition.IsInterface;
+                            break;
+                    }
+                }
+            }
+
+            return isVirtual;
+        }
+
         public static bool IsVirtualTypeStatic(ITypeDefinition typeDefinition)
         {
             string virtualAttr = Translator.Bridge_ASSEMBLY + ".VirtualAttribute";
@@ -293,6 +309,11 @@ namespace Bridge.Translator
                 attr =
                     typeDefinition.GetDefinition().Attributes.FirstOrDefault(
                         a => a.AttributeType.FullName == virtualAttr);
+            }
+
+            if (attr == null && typeDefinition.DeclaringType != null)
+            {
+                return Validator.IsVirtualTypeStatic(typeDefinition.DeclaringType.GetDefinition());
             }
 
             if (attr == null)
@@ -325,11 +346,6 @@ namespace Bridge.Translator
                             break;
                     }
                 }
-            }
-
-            if (isVirtual && typeDefinition.NestedTypes.Count > 0)
-            {
-                throw new Exception(string.Format(Constants.Messages.Exceptions.VIRTUAL_CLASS_NO_NESTED_TYPES, typeDefinition.FullName));
             }
 
             return isVirtual;
@@ -439,23 +455,6 @@ namespace Bridge.Translator
             return null;
         }
 
-        public virtual bool IsInlineMethod(MethodDefinition method)
-        {
-            var attr = this.GetAttribute(method.CustomAttributes, Translator.Bridge_ASSEMBLY + ".TemplateAttribute");
-
-            return attr != null && !attr.HasConstructorArguments;
-        }
-
-        public virtual string GetInlineCode(MethodDefinition method)
-        {
-            return this.GetAttributeValue(method.CustomAttributes, Translator.Bridge_ASSEMBLY + ".TemplateAttribute");
-        }
-
-        public virtual string GetInlineCode(PropertyDefinition property)
-        {
-            return this.GetAttributeValue(property.CustomAttributes, Translator.Bridge_ASSEMBLY + ".TemplateAttribute");
-        }
-
         public virtual bool IsObjectLiteral(TypeDefinition type)
         {
             return this.HasAttribute(type.CustomAttributes, Translator.Bridge_ASSEMBLY + ".ObjectLiteralAttribute");
@@ -528,7 +527,7 @@ namespace Bridge.Translator
             {
                 if (nameAttr.ConstructorArguments[0].Value is string)
                 {
-                    name = (string)nameAttr.ConstructorArguments[0].Value;
+                    name = Helpers.ConvertNameTokens((string)nameAttr.ConstructorArguments[0].Value, type.Name);
                 }
                 else if (nameAttr.ConstructorArguments[0].Value is bool)
                 {
@@ -809,6 +808,21 @@ namespace Bridge.Translator
             else
             {
                 module = new Module();
+            }
+
+            if (attr.Properties.Count > 0)
+            {
+                foreach (var prop in attr.Properties)
+                {
+                    if (prop.Name == "Name")
+                    {
+                        module.Name = prop.Argument.Value != null ? (string)prop.Argument.Value : "";
+                    }
+                    else if (prop.Name == "ExportAsNamespace")
+                    {
+                        module.ExportAsNamespace = prop.Argument.Value != null ? (string)prop.Argument.Value : "";
+                    }
+                }
             }
 
             typeInfo.Module = module;

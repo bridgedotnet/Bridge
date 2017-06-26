@@ -21,6 +21,7 @@ namespace Bridge.Translator
             this.Output = DEFAULT_OUTPUT;
             this.SourceMap = new SourceMapConfig();
             this.Html = new HtmlConfig();
+            this.Console = new ConsoleConfig();
         }
 
         /// <summary>
@@ -304,6 +305,12 @@ namespace Bridge.Translator
 
         [Newtonsoft.Json.JsonConverter(typeof(HtmlConfigConverter))]
         public HtmlConfig Html
+        {
+            get; set;
+        }
+
+        [Newtonsoft.Json.JsonConverter(typeof(ConsoleConfigConverter))]
+        public ConsoleConfig Console
         {
             get; set;
         }

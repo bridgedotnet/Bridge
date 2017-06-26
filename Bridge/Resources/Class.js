@@ -31,8 +31,27 @@
             var props = config.properties;
             if (props) {
                 for (name in props) {
-                    var cfg = Bridge.property(statics ? scope : prototype, name, props[name], statics, cls);
+                    var v = props[name],
+                        d,
+                        cfg;
 
+                    if (v != null && Bridge.isJSObject(v) && (!v.get || !v.set)) {
+                        for (var k = 0; k < descriptors.length; k++) {
+                            if (descriptors[k].name === name) {
+                                d = descriptors[k];
+                            }
+                        }
+
+                        if (d && d.get && !v.get) {
+                            v.get = Bridge.emptyFn;
+                        }
+
+                        if (d && d.set && !v.set) {
+                            v.set = Bridge.emptyFn;
+                        }
+                    }
+
+                    cfg = Bridge.property(statics ? scope : prototype, name, v, statics, cls);
                     cfg.name = name;
                     cfg.cls = cls;
 
@@ -324,7 +343,10 @@
                             if (Class.$$inherits && Class.$$inherits.length > 0 && Class.$$inherits[0].$staticInit) {
                                 Class.$$inherits[0].$staticInit();
                             }
-                            Class.$base.ctor.call(this);
+
+                            if (Class.$base.ctor) {
+                                Class.$base.ctor.call(this);
+                            }
                         }
                     };
                 }

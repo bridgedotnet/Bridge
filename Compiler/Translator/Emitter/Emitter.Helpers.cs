@@ -352,7 +352,8 @@ namespace Bridge.Translator
                 var value = attr.PositionalArguments.First().ConstantValue;
                 if (value is string)
                 {
-                    name = value.ToString();
+                    name = this.GetEntityName(member);
+                    //name = Helpers.ConvertNameTokens(value.ToString(), member.Name);
                     if (!isIgnore && member.IsStatic && Helpers.IsReservedStaticName(name))
                     {
                         name = Helpers.ChangeReservedWord(name);
@@ -484,15 +485,15 @@ namespace Bridge.Translator
             return attr != null ? new Tuple<bool, string>(true, (string)attr.PositionalArguments.First().ConstantValue) : null;
         }
 
-        public virtual string GetInline(ICustomAttributeProvider provider)
-        {
-            var attr = this.GetAttribute(provider.CustomAttributes, Bridge.Translator.Translator.Bridge_ASSEMBLY + ".TemplateAttribute");
-
-            return attr != null && attr.ConstructorArguments.Count > 0 ? ((string)attr.ConstructorArguments.First().Value) : null;
-        }
-
         public virtual string GetInline(EntityDeclaration method)
         {
+            var mrr = this.Resolver.ResolveNode(method, this) as MemberResolveResult;
+
+            if (mrr != null)
+            {
+                return this.GetInline(mrr.Member);
+            }
+
             var attr = this.GetAttribute(method.Attributes, Bridge.Translator.Translator.Bridge_ASSEMBLY + ".TemplateAttribute");
 
             return attr != null && attr.Arguments.Count > 0 ? ((string)((PrimitiveExpression)attr.Arguments.First()).Value) : null;
@@ -516,7 +517,26 @@ namespace Bridge.Translator
                     return a.AttributeType.FullName == attrName;
                 });
 
-                var inlineCode = attr != null && attr.PositionalArguments.Count > 0 ? attr.PositionalArguments[0].ConstantValue.ToString() : null;
+                string inlineCode = null;
+                if (attr != null && entity is IMethod && attr.PositionalArguments.Count == 0 &&
+                    attr.NamedArguments.Count > 0)
+                {
+                    var namedArg = attr.NamedArguments.FirstOrDefault(arg => arg.Key.Name == CS.Attributes.Template.PROPERTY_FN);
+                    if (namedArg.Value != null)
+                    {
+                        inlineCode = namedArg.Value.ConstantValue as string;
+
+                        if (inlineCode != null)
+                        {
+                            inlineCode = Helpers.DelegateToTemplate(inlineCode, (IMethod) entity, this);
+                        }
+                    }
+                }
+
+                if(inlineCode == null)
+                {
+                    inlineCode = attr != null && attr.PositionalArguments.Count > 0 ? attr.PositionalArguments[0].ConstantValue.ToString() : null;
+                }
 
                 if (!string.IsNullOrEmpty(inlineCode) && isProp)
                 {
@@ -540,7 +560,7 @@ namespace Bridge.Translator
                     return a.AttributeType.FullName == attrName;
                 });
 
-                return attr != null && attr.PositionalArguments.Count == 0;
+                return attr != null && attr.PositionalArguments.Count == 0 && attr.NamedArguments.Count == 0;
             }
 
             return false;
@@ -696,7 +716,8 @@ namespace Bridge.Translator
                 Name = searchName,
                 OutputType = outputType,
                 OutputKind = outputKind,
-                Location = location
+                Location = location,
+                Content = new TranslatorOutputItemContent((string)null)
             };
 
             if (isMinJs)

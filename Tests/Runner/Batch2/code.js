@@ -1,9 +1,9 @@
 /**
  * Bridge Test library - special tests with custom config options like useTypedArrays
- * @version 16.0.0-beta2
+ * @version 16.0.0-beta3
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2017 Object.NET, Inc.
- * @compiler Bridge.NET 16.0.0-beta2
+ * @compiler Bridge.NET 16.0.0-beta3
  */
 Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
     "use strict";
@@ -246,7 +246,7 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
                         var s = $t.Current;
                         result = System.String.concat(result, s);
                     }
-                }finally {
+                } finally {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$dispose();
                     }
@@ -394,7 +394,7 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
                         var s = $t.Current;
                         result = System.String.concat(result, s);
                     }
-                }finally {
+                } finally {
                     if (Bridge.is($t, System.IDisposable)) {
                         $t.System$IDisposable$dispose();
                     }
@@ -502,9 +502,7 @@ Bridge.assembly("Bridge.ClientTest.Batch2", function ($asm, globals) {
 
     Bridge.define("Bridge.ClientTest.Batch2.BridgeIssues.N772.TestReverseComparer", {
         inherits: [System.Collections.Generic.IComparer$1(System.Int32)],
-        alias: [
-            "compare", ["System$Collections$Generic$IComparer$1$System$Int32$compare", "System$Collections$Generic$IComparer$1$compare"]
-        ],
+        alias: ["compare", ["System$Collections$Generic$IComparer$1$System$Int32$compare", "System$Collections$Generic$IComparer$1$compare"]],
         methods: {
             compare: function (x, y) {
                 return x === y ? 0 : (x > y ? -1 : 1);

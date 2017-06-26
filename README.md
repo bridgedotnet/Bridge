@@ -1,4 +1,4 @@
-# ![Bridge.NET - C# to JavaScript Compiler](https://cloud.githubusercontent.com/assets/62210/13193769/bce9470e-d73b-11e5-8fc6-1ab4c8f9218f.png)
+![bridge-repo-header](https://user-images.githubusercontent.com/62210/27444113-89c3f518-5732-11e7-9911-f8cb31aaef14.png)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/nm2f0c0u1jx0sniq/branch/master?svg=true)](https://ci.appveyor.com/project/ObjectDotNet/bridge/branch/master)
 [![Build Status](https://travis-ci.org/bridgedotnet/Bridge.svg?branch=master)](https://travis-ci.org/bridgedotnet/Bridge)

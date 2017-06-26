@@ -109,7 +109,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The outerHTML attribute of the element DOM interface gets the serialized HTML fragment describing the element including its descendants. It can be set to replace the element with nodes parsed from the given string.
         /// </summary>
-        public readonly string OuterHTML;
+        public string OuterHTML;
 
         /// <summary>
         /// The Element.scrollHeight read-only attribute is a measurement of the height of an element's content including content not visible on the screen due to overflow. The scrollHeight value is equal to the minimum clientHeight the element would require in order to fit all the content in the viewpoint without using a vertical scrollbar. It includes the element padding but not its margin.

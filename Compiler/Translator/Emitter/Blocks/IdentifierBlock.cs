@@ -124,7 +124,8 @@ namespace Bridge.Translator
             }
 
             bool hasInline = !string.IsNullOrEmpty(inlineCode);
-            bool hasThis = hasInline && inlineCode.Contains("{this}");
+            inlineCode = hasInline ? Helpers.ConvertTokens(this.Emitter, inlineCode, memberResult.Member) : inlineCode;
+            bool hasThis = hasInline && Helpers.HasThis(inlineCode);
 
             if (hasInline && inlineCode.StartsWith("<self>"))
             {

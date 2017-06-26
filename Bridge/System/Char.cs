@@ -24,7 +24,7 @@ namespace System
         [Template("System.Char.charCodeAt({s}, 0)")]
         public static extern char Parse(string s);
 
-        [Template("String.fromCharCode({this})")]
+        [Template(Fn = "String.fromCharCode")]
         public override extern string ToString();
 
         [Template("System.Char.format({this}, {format})")]
@@ -135,7 +135,7 @@ namespace System
         [Template("System.Char.equals({this}, {other})")]
         public override extern bool Equals(object other);
 
-        [Template("System.Char.getHashCode({this})")]
+        [Template(Fn = "System.Char.getHashCode")]
         public override extern int GetHashCode();
     }
 }

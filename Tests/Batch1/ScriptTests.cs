@@ -2,9 +2,10 @@ using Bridge.Html5;
 using Bridge.Test.NUnit;
 using System;
 
-namespace Bridge.ClientTest.Batch4
+namespace Bridge.ClientTest
 {
-    [TestFixture(TestNameFormat = "ScriptTests - {0}")]
+    [Category(Constants.MODULE_SCRIPT)]
+    [TestFixture]
     public class ScriptTests
     {
         public class TestType
@@ -148,29 +149,78 @@ namespace Bridge.ClientTest.Batch4
             }), "#8");
         }
 
-        [Test(ExpectedCount = 4)]
-        public void DeleteWorks_SPI_1571()
+        [Test(ExpectedCount = 9)]
+        public void DeleteWorksForJsClass_SPI_1571()
         {
             // #1571
-            TestType c = null;
-            TestHelper.Safe(() => c = new TestType());
-            int i1 = 0;
-            TestHelper.Safe(() => i1 = c.i);
-            Assert.AreEqual(42, i1);
-            //Script.Delete(c, "i");
-            object ui = null;
-            TestHelper.Safe(() => ui = c.i);
-            Assert.AreEqual("undefined", Script.TypeOf(ui));
+            dynamic c = new object();
+            c.i = 42;
+            Assert.AreEqual(42, c.i);
 
-            TestType c2 = null;
-            TestHelper.Safe(() => c2 = new TestType() { i = 43 });
+            var r = Script.Delete(c, "i");
+            Assert.True(r);
+            Assert.Null(c.i);
+            Assert.AreEqual("undefined", Script.TypeOf(c.i));
 
-            int i2 = 0;
-            TestHelper.Safe(() => i1 = c2.i);
-            Assert.AreEqual(43, i2);
-            // Gets incorrect js code delete c2;
-            // Script.Delete(c2);
-            Assert.AreEqual("undefined", Script.TypeOf(c2));
+            dynamic c2 = new object();
+            c2.i = 43;
+            Assert.AreEqual(43, c2.i);
+            Func<string> f = () => { return "i"; };
+
+            var r2 = Script.Delete(c2, "i");
+            Assert.True(r2);
+            Assert.Null(c2.i);
+            Assert.AreEqual("undefined", Script.TypeOf(c2.i));
+
+            Assert.Throws(() =>
+            {
+                dynamic o = Script.Get("Object");
+                Script.Delete(o.prototype); // throws a TypeError in strict mode
+            });
+
+
+            // The test cannot be run in strict mode due to
+            // 'SyntaxError: Delete of an unqualified identifier in strict mode.'
+            //r = Script.Delete(c2);
+            //Assert.True(r);
+            //Assert.Null(c2);
+            //Assert.AreEqual("undefined", Script.TypeOf(c2));
+        }
+
+        [Test(ExpectedCount = 9)]
+        public void DeleteWorksForClassPrototype_SPI_1571()
+        {
+            // #1571
+            TestType c = new TestType();
+            Assert.AreEqual(42, c.i);
+
+            var r = Script.Delete(c, "i");
+            Assert.True(r);
+            Assert.AreEqual(0, c.i);
+            Assert.AreEqual("number", Script.TypeOf(c.i));
+
+            TestType c2 = new TestType() { i = 43 };
+            Assert.AreEqual(43, c2.i);
+            Func<string> f = () => { return "i"; };
+
+            var r2 = Script.Delete(c2, "i");
+            Assert.True(r2);
+            Assert.AreEqual(0, c2.i);
+            Assert.AreEqual("number", Script.TypeOf(c2.i));
+
+            Assert.Throws(() =>
+            {
+                dynamic o = Script.Get("Object");
+                Script.Delete(o.prototype); // throws a TypeError in strict mode
+            });
+
+
+            // The test cannot be run in strict mode due to
+            // 'SyntaxError: Delete of an unqualified identifier in strict mode.'
+            //r = Script.Delete(c2);
+            //Assert.True(r);
+            //Assert.Null(c2);
+            //Assert.AreEqual("undefined", Script.TypeOf(c2));
         }
 
         // #SPI

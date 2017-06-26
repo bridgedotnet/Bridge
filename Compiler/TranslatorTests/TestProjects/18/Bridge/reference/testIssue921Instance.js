@@ -18,37 +18,37 @@
             }
         },
         methods: {
-            ComputeValue: function ComputeValue(d) {
+            ComputeValue: function ComputeValue (d) {
                 return d.add(System.Decimal(10));
             },
-            LambaLiftingWithReadOnlyField: function LambaLiftingWithReadOnlyField() {
+            LambaLiftingWithReadOnlyField: function LambaLiftingWithReadOnlyField () {
                 var localValue = 456;
                 return System.Linq.Enumerable.from(System.Array.init([1, 2, 3], System.Int32)).select($asm.$.TestIssue921Instance.Issue921Instance.f1).select($asm.$.TestIssue921Instance.Issue921Instance.f1).select($asm.$.TestIssue921Instance.Issue921Instance.f2).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f3)).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f4)).select(function (value) {
                     return ((value + localValue) | 0);
                 });
             },
-            LambaLiftingWithProperty: function LambaLiftingWithProperty() {
+            LambaLiftingWithProperty: function LambaLiftingWithProperty () {
                 var localValue = "What a name";
 
                 return System.Linq.Enumerable.from(System.Array.init(["one", "two", "three"], System.String)).select($asm.$.TestIssue921Instance.Issue921Instance.f5).select($asm.$.TestIssue921Instance.Issue921Instance.f5).select($asm.$.TestIssue921Instance.Issue921Instance.f6).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f7)).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f8)).select(function (value) {
                     return System.String.concat(value, localValue);
                 });
             },
-            LambaLiftingWithStaticProperty: function LambaLiftingWithStaticProperty() {
+            LambaLiftingWithStaticProperty: function LambaLiftingWithStaticProperty () {
                 var localValue = "What a name";
 
                 return System.Linq.Enumerable.from(System.Array.init(["one", "two", "three"], System.String)).select($asm.$.TestIssue921Instance.Issue921Instance.f5).select($asm.$.TestIssue921Instance.Issue921Instance.f5).select($asm.$.TestIssue921Instance.Issue921Instance.f6).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f7)).select($asm.$.TestIssue921Instance.Issue921Instance.f9).select(function (value) {
                     return System.String.concat(value, localValue);
                 });
             },
-            LambaLiftingWithInstanceMethod: function LambaLiftingWithInstanceMethod() {
+            LambaLiftingWithInstanceMethod: function LambaLiftingWithInstanceMethod () {
                 var localValue = System.Decimal(10.0);
 
                 return System.Linq.Enumerable.from(System.Array.init([System.Decimal(1.0), System.Decimal(2.0), System.Decimal(3.0)], System.Decimal)).select($asm.$.TestIssue921Instance.Issue921Instance.f10).select($asm.$.TestIssue921Instance.Issue921Instance.f10).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f11)).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f12)).select(Bridge.fn.bind(this, $asm.$.TestIssue921Instance.Issue921Instance.f13)).select(function (value) {
                     return value.add(localValue);
                 });
             },
-            LambaLiftingWithDelegate: function LambaLiftingWithDelegate() {
+            LambaLiftingWithDelegate: function LambaLiftingWithDelegate () {
                 // Lift
                 var addThousand = $asm.$.TestIssue921Instance.Issue921Instance.f14;
 
@@ -68,7 +68,7 @@
                     return addThousand(((value + addThousand(localValue)) | 0));
                 });
             },
-            LambaLiftingWithDelegateChangingType: function LambaLiftingWithDelegateChangingType() {
+            LambaLiftingWithDelegateChangingType: function LambaLiftingWithDelegateChangingType () {
                 // Lift
                 var $toString = $asm.$.TestIssue921Instance.Issue921Instance.f15;
 

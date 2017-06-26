@@ -125,7 +125,7 @@ namespace Bridge.Translator
 
                     foreach (var fn in injectors)
                     {
-                        this.Write(fn);
+                        this.Write(WriteIndentToString(fn, this.Level - 1));
                         this.WriteNewLine();
                     }
                     this.EndBlock();
@@ -249,7 +249,7 @@ namespace Bridge.Translator
 
                 foreach (var fn in injectors)
                 {
-                    this.Write(fn);
+                    this.Write(WriteIndentToString(fn, this.Level - 1));
                     this.WriteNewLine();
                 }
 
@@ -300,6 +300,7 @@ namespace Bridge.Translator
                 this.BeginBlock();
             }
 
+            this.Emitter.InConstructor = true;
             foreach (var ctor in this.TypeInfo.Ctors)
             {
                 this.EnsureComma();
@@ -522,6 +523,8 @@ namespace Bridge.Translator
                 this.ClearLocalsMap(prevMap);
                 this.ClearLocalsNamesMap(prevNamesMap);
             }
+
+            this.Emitter.InConstructor = false;
 
             if (this.ctorHeader)
             {

@@ -5,6 +5,9 @@
   "outputFormatting": "Formatted",
   "ignoreCast": true,
   "fileNameCasing": "Lowercase",
+  "console": {
+    "disabled": true
+  },
   "logging": {
     "level":  "None"
   }

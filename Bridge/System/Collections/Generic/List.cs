@@ -24,6 +24,13 @@ namespace System.Collections.Generic
             get;
         }
 
+        public int Capacity
+        {
+            get; set;
+        }
+
+        public extern void TrimExcess();
+
         /// <summary>
         /// Gets a value indicating whether the List is read-only.
         /// </summary>
