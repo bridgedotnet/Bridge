@@ -278,11 +278,11 @@ namespace Bridge.Translator
 
                     if (resourceExtractItems != null)
                     {
-                        this.Log.Trace("Found resource option for resource name " + resourceExtractItems.Name + " and reference " + resourceExtractItems.Assembly);
+                        this.Log.Trace("Found resource option for resource name " + resName + " and reference " + resourceExtractItems.Assembly);
 
                         if (resourceExtractItems.Extract != true)
                         {
-                            this.Log.Info("Skipping resource " + resourceExtractItems.Name + " as it has setting resources.extract != true");
+                            this.Log.Info("Skipping resource " + resName + " as it has setting resources.extract != true");
                             continue;
                         }
 
@@ -309,6 +309,12 @@ namespace Bridge.Translator
                     }
                     else
                     {
+                        if (resourceOption.Default != null && resourceOption.Default.Extract != true)
+                        {
+                            this.Log.Info("Skipping resource " + resName + " as it has no setting resources.extract = true and default setting is resources.extract != true");
+                            continue;
+                        }
+
                         this.Log.Trace("Did not find extract resource option for resource name " + resName + ". Will use default embed behavior");
 
                         if (resource.Path != null)
