@@ -1,5 +1,6 @@
 using Bridge.Contract;
 using System.Collections.Generic;
+using System;
 
 namespace Bridge.Translator
 {
@@ -307,5 +308,10 @@ namespace Bridge.Translator
         {
             get; set;
         }
+        public char Quote
+        {
+            get;
+            set;
+        } = '"';
     }
 }

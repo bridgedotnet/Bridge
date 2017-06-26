@@ -432,7 +432,7 @@ namespace Bridge.Translator
                     {
                         if (nullable)
                         {
-                            block.Write(JS.Types.SYSTEM_NULLABLE + "." + JS.Funcs.Math.LIFT1 + "(\"" + JS.Funcs.CLONE + "\", ");
+                            block.Write(JS.Types.SYSTEM_NULLABLE + "." + JS.Funcs.Math.LIFT1 + "(" + block.Emitter.AssemblyInfo.Quote + JS.Funcs.CLONE + block.Emitter.AssemblyInfo.Quote + ", ");
                             block.AfterOutput2 += ")";
                         }
                         else
@@ -452,7 +452,7 @@ namespace Bridge.Translator
                 {
                     if (nullable)
                     {
-                        block.Write(JS.Types.SYSTEM_NULLABLE + "." + JS.Funcs.Math.LIFT1 + "(\"" + JS.Funcs.CLONE + "\", ");
+                        block.Write(JS.Types.SYSTEM_NULLABLE + "." + JS.Funcs.Math.LIFT1 + "(" + block.Emitter.AssemblyInfo.Quote + JS.Funcs.CLONE + block.Emitter.AssemblyInfo.Quote + ", ");
                         block.AfterOutput2 += ")";
                     }
                     else

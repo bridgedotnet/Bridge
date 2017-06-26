@@ -198,5 +198,10 @@ namespace Bridge.Contract
         {
             get; set;
         }
+
+        char Quote
+        {
+            get; set;
+        }
     }
  }

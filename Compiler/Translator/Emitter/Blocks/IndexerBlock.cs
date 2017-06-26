@@ -161,7 +161,7 @@ namespace Bridge.Translator
                 
                 if (interfaceName.StartsWith("\""))
                 {
-                    this.Write(interfaceName);
+                    this.Write(interfaceName.Replace("\"", "'"));
                 }
                 else
                 {
