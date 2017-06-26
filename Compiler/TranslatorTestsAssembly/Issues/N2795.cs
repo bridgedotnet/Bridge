@@ -2,9 +2,10 @@
 {
     class N2795
     {
-        class ShouldFail
+
+        class ShouldNotFail
         {
-            class NoNestedTypesInVirtualClass
+            class NestedTypesInVirtualClass
             {
                 [Virtual]
                 class NestedClassInVirtualClass
@@ -30,10 +31,7 @@
                     }
                 }
             }
-        }
 
-        class ShouldNotFail
-        {
             class VirtualTypes
             {
                 [Virtual]
