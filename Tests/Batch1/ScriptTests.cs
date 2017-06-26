@@ -72,14 +72,14 @@ namespace Bridge.ClientTest
         }
 
         // #SPI
-        //[Test]
-        //public void BooleanWorks_SPI_1619()
-        //{
-        //    // #1619
-        //    Assert.AreStrictEqual(Script.Boolean(0), false);
-        //    Assert.AreStrictEqual(Script.Boolean(""), false);
-        //    Assert.AreStrictEqual(Script.Boolean("1"), true);
-        //}
+        [Test]
+        public void BooleanWorks_SPI_1619()
+        {
+            // #1619
+            Assert.AreStrictEqual(Script.Boolean(0), false);
+            Assert.AreStrictEqual(Script.Boolean(""), false);
+            Assert.AreStrictEqual(Script.Boolean("1"), true);
+        }
 
         [Test]
         public void EvalWorks()
@@ -97,34 +97,34 @@ namespace Bridge.ClientTest
         }
 
         // #SPI
-        //[Test]
-        //public void IsNullWorks_SPI_1618()
-        //{
-        //    // #1618
-        //    Assert.True(Script.IsNull(null));
-        //    Assert.False(Script.IsNull(Undefined));
-        //    Assert.False(Script.IsNull(3));
-        //}
+        [Test]
+        public void IsNullWorks_SPI_1618()
+        {
+            // #1618
+            Assert.True(Script.IsNull(null));
+            Assert.False(Script.IsNull(Undefined));
+            Assert.False(Script.IsNull(3));
+        }
 
         // #SPI
-        //[Test]
-        //public void IsNullOrUndefinedWorks_SPI_1616()
-        //{
-        //    // #1616
-        //    Assert.True(Script.IsNullOrUndefined(null));
-        //    Assert.True(Script.IsNullOrUndefined(Undefined));
-        //    Assert.False(Script.IsNullOrUndefined(3));
-        //}
+        [Test]
+        public void IsUndefinedWorks_SPI_1616()
+        {
+            // #1616
+            Assert.False(Script.IsUndefined(null));
+            Assert.True(Script.IsUndefined(Undefined));
+            Assert.False(Script.IsUndefined(3));
+        }
 
         // #SPI
-        //[Test]
-        //public void IsValueWorks_SPI_1617()
-        //{
-        //    // 1617
-        //    Assert.False(Script.IsValue(null));
-        //    Assert.False(Script.IsValue(Undefined));
-        //    Assert.True(Script.IsValue(3));
-        //}
+        [Test]
+        public void HasValueWorks_SPI_1617()
+        {
+            // 1617
+            Assert.False(Script.HasValue(null));
+            Assert.False(Script.HasValue(Undefined));
+            Assert.True(Script.HasValue(3));
+        }
 
         // #SPI
         //[Test]
@@ -224,25 +224,25 @@ namespace Bridge.ClientTest
         }
 
         // #SPI
-        //[Test]
-        //public void InWorks_SPI_1573()
-        //{
-        //    // #1573
-        //    var c = new TestType();
-        //    Assert.True(Script.In(c, "i"));
-        //    Assert.False(Script.In(c, "x"));
-        //    Assert.False(Script.In(c, "P"));
-        //}
+        [Test]
+        public void InWorks_SPI_1573()
+        {
+            // #1573
+            var c = new TestType();
+            Assert.True(Script.In(c, "i"));
+            Assert.False(Script.In(c, "x"));
+            Assert.True(Script.In(c, "P"));
+        }
 
         // #SPI
-        //[Test]
-        //public void InvokeMethodWorks_SPI_1572()
-        //{
-        //    var c = new TestType();
-        //    Assert.AreEqual(Script.InvokeMethod(c, "F1"), 42);
-        //    Assert.AreEqual(Script.InvokeMethod(c, "F2", 17), 27);
-        //    Assert.AreEqual(Script.InvokeMethod(c, "F3", 19, 2), 21);
-        //}
+        [Test]
+        public void InvokeMethodWorks_SPI_1572()
+        {
+            var c = new TestType();
+            Assert.AreEqual(Script.InvokeMethod(c, "F1"), 42);
+            Assert.AreEqual(Script.InvokeMethod(c, "F2", 17), 27);
+            Assert.AreEqual(Script.InvokeMethod(c, "F3", 19, 2), 21);
+        }
 
         [Test]
         public void ParseIntWithoutRadixWorks()

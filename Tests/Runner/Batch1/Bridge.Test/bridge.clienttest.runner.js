@@ -1920,10 +1920,16 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("LastIndexWorks", Bridge.Test.Runtime.BridgeClientTestRunner.BridgeRegexTests.LastIndexWorks);
             QUnit.test("TestWorks", Bridge.Test.Runtime.BridgeClientTestRunner.BridgeRegexTests.TestWorks);
             QUnit.module("Script");
+            QUnit.test("BooleanWorks_SPI_1619", Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests.BooleanWorks_SPI_1619);
             QUnit.test("EvalWorks", Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests.EvalWorks);
+            QUnit.test("IsNullWorks_SPI_1618", Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests.IsNullWorks_SPI_1618);
+            QUnit.test("IsUndefinedWorks_SPI_1616", Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests.IsUndefinedWorks_SPI_1616);
+            QUnit.test("HasValueWorks_SPI_1617", Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests.HasValueWorks_SPI_1617);
             QUnit.test("TypeOfWorks", Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests.TypeOfWorks);
             QUnit.test("DeleteWorksForJsClass_SPI_1571", Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests.DeleteWorksForJsClass_SPI_1571);
             QUnit.test("DeleteWorksForClassPrototype_SPI_1571", Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests.DeleteWorksForClassPrototype_SPI_1571);
+            QUnit.test("InWorks_SPI_1573", Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests.InWorks_SPI_1573);
+            QUnit.test("InvokeMethodWorks_SPI_1572", Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests.InvokeMethodWorks_SPI_1572);
             QUnit.test("ParseIntWithoutRadixWorks", Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests.ParseIntWithoutRadixWorks);
             QUnit.test("ParseIntWithRadixWorks", Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests.ParseIntWithRadixWorks);
             QUnit.module("Serialization");
@@ -16699,10 +16705,30 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ScriptTests)],
         statics: {
             methods: {
+                BooleanWorks_SPI_1619: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "BooleanWorks_SPI_1619()", $t.Line = "75", $t));
+                    t.Fixture.BooleanWorks_SPI_1619();
+                },
                 EvalWorks: function (assert) {
                     var $t;
                     var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "EvalWorks()", $t.Line = "84", $t));
                     t.Fixture.EvalWorks();
+                },
+                IsNullWorks_SPI_1618: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsNullWorks_SPI_1618()", $t.Line = "100", $t));
+                    t.Fixture.IsNullWorks_SPI_1618();
+                },
+                IsUndefinedWorks_SPI_1616: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsUndefinedWorks_SPI_1616()", $t.Line = "110", $t));
+                    t.Fixture.IsUndefinedWorks_SPI_1616();
+                },
+                HasValueWorks_SPI_1617: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "HasValueWorks_SPI_1617()", $t.Line = "120", $t));
+                    t.Fixture.HasValueWorks_SPI_1617();
                 },
                 TypeOfWorks: function (assert) {
                     var $t;
@@ -16718,6 +16744,16 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                     var $t;
                     var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests, 9, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DeleteWorksForClassPrototype_SPI_1571()", $t.Line = "190", $t));
                     t.Fixture.DeleteWorksForClassPrototype_SPI_1571();
+                },
+                InWorks_SPI_1573: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "InWorks_SPI_1573()", $t.Line = "227", $t));
+                    t.Fixture.InWorks_SPI_1573();
+                },
+                InvokeMethodWorks_SPI_1572: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "InvokeMethodWorks_SPI_1572()", $t.Line = "238", $t));
+                    t.Fixture.InvokeMethodWorks_SPI_1572();
                 },
                 ParseIntWithoutRadixWorks: function (assert) {
                     var $t;
