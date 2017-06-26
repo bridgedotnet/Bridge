@@ -933,7 +933,7 @@ namespace Bridge.Translator
 
         private void CheckConsoleConfigSetting(List<ResourceConfigItem> resources)
         {
-            if (this.AssemblyInfo.Console.Disabled)
+            if (this.AssemblyInfo.Console.Enabled != true)
             {
                 this.Log.Trace("Switching off Bridge Console...");
 
@@ -955,14 +955,24 @@ namespace Bridge.Translator
                 }
                 else
                 {
-                    this.Log.Trace("Overriding resource setting for " + consoleResourceName);
+                    if (this.AssemblyInfo.Console.Enabled.HasValue)
+                    {
+                        this.Log.Trace("Overriding resource setting for " + consoleResourceName + " as bridge.json has console option explicitly");
+                    }
+                    else
+                    {
+                        this.Log.Trace("Not overriding resource setting for " + consoleResourceName + " as bridge.json does NOT have console option explicitly");
+                        consoleFormatted = null;
+                    }
                 }
 
-
-                consoleFormatted.Output = null;
-                consoleFormatted.Extract = false;
-                consoleFormatted.Inject = false;
-                consoleFormatted.Files = new string[0];
+                if (consoleFormatted != null)
+                {
+                    consoleFormatted.Output = null;
+                    consoleFormatted.Extract = false;
+                    consoleFormatted.Inject = false;
+                    consoleFormatted.Files = new string[0];
+                }
 
                 if (consoleMinified == null)
                 {
@@ -976,13 +986,24 @@ namespace Bridge.Translator
                 }
                 else
                 {
-                    this.Log.Trace("Overriding resource setting for " + consoleResourceMinifiedName);
+                    if (this.AssemblyInfo.Console.Enabled.HasValue)
+                    {
+                        this.Log.Trace("Overriding resource setting for " + consoleResourceMinifiedName + " as bridge.json has console option explicitly");
+                    }
+                    else
+                    {
+                        this.Log.Trace("Not overriding resource setting for " + consoleResourceMinifiedName + " as bridge.json does NOT have console option explicitly");
+                        consoleMinified = null;
+                    }
                 }
 
-                consoleMinified.Output = null;
-                consoleMinified.Extract = false;
-                consoleMinified.Inject = false;
-                consoleMinified.Files = new string[0];
+                if (consoleMinified != null)
+                {
+                    consoleMinified.Output = null;
+                    consoleMinified.Extract = false;
+                    consoleMinified.Inject = false;
+                    consoleMinified.Files = new string[0];
+                }
 
                 this.Log.Trace("Switching off Bridge Console done");
             }
