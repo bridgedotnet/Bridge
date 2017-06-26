@@ -12,7 +12,7 @@ namespace Bridge
 
         public static extern T Apply<T>(T obj, object values);
 
-        public static extern bool IsDefined(object value);
+        public static extern bool IsDefined(object obj);
 
         public static extern bool IsArray(object obj);
 
@@ -45,7 +45,7 @@ namespace Bridge
         public static extern object NS(string ns);
 
         [Template("Bridge.getHashCode({0})")]
-        public static extern int GetHashCode(object value);
+        public static extern int GetHashCode(object obj);
 
         [Template("Bridge.getDefaultValue({0})")]
         public static extern T GetDefaultValue<T>(Type type);
@@ -53,23 +53,56 @@ namespace Bridge
         [Template("Bridge.getDefaultValue({0})")]
         public static extern object GetDefaultValue(Type type);
 
+        /// <summary>
+        /// Checks if the specified object is undefined. The object passed in should be a local variable, and not a member of a class (to avoid potential script warnings).
+        /// </summary>
+        /// <param name="obj">The object to test against undefined.</param>
+        /// <returns>true if the object is undefined; false otherwise.</returns>
         [Template("{0} === undefined")]
-        public static extern bool IsUndefined(object value);
+        public static extern bool IsUndefined(object obj);
 
+        /// <summary>
+        /// Checks if the object has a value.
+        /// </summary>
+        /// <param name="obj">The object to test if there is a value.</param>
+        /// <returns>true if the object has a value; false otherwise.</returns>
         [Template("Bridge.hasValue({0})")]
-        public static extern bool HasValue(object value);
+        public static extern bool HasValue(object obj);
 
+        /// <summary>
+        /// Checks if the specified object is null.
+        /// </summary>
+        /// <param name="obj">The object to test against null.</param>
+        /// <returns>true if the object is null; false otherwise.</returns>
         [Template("{0} === null")]
-        public static extern bool IsNull(object value);
+        public static extern bool IsNull(object obj);
 
+        /// <summary>
+        /// Converts an object into a boolean.
+        /// </summary>
+        /// <param name="obj">The object to convert.</param>
+        /// <returns>true if the object is not null, zero, empty string or undefined.</returns>
         [Template("!!{0}")]
-        public static extern bool ToBoolean(object value);
+        public static extern bool ToBoolean(object obj);
 
+        /// <summary>
+        /// Generate <c>member in obj</c>.
+        /// </summary>
+        /// <param name="obj">The object to test against.</param>
+        /// <param name="member">The member to check if in the object.</param>
+        /// <returns>true if member in object; false otherwise.</returns>
         [Template("{member} in {obj}")]
         public static extern bool In(object obj, string member);
 
+        /// <summary>
+        /// Invoke a method on an object
+        /// </summary>
+        /// <param name="obj">The object to invoke the method against.</param>
+        /// <param name="name">The method to invoke.</param>
+        /// <param name="args">The arguments passed into the method.</param>
+        /// <returns></returns>
         [Template("{instance}[{name}]({*args})")]
-        public static extern object InvokeMethod(object instance, string name, params object[] args);
+        public static extern object InvokeMethod(object obj, string name, params object[] args);
 
         /// <summary>
         /// Inject javascript code
