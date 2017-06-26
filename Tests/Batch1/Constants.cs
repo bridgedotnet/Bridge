@@ -101,6 +101,7 @@
         public const string MODULE_BRIDGE_CONSOLE = "Bridge Console";
         public const string MODULE_SYSTEM_CONSOLE = "System Console";
         public const string MODULE_OBJECTLITERAL = "[ObjectLiteral]";
+        public const string MODULE_SCRIPT = "Script";
 
         public const string IGNORE_DATE = null;
     }

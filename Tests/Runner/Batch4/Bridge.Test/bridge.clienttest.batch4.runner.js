@@ -1099,11 +1099,6 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             QUnit.test("RefParameterTests - CanUseReferenceToThis_SPI_1569", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.RefParameterTests.CanUseReferenceToThis_SPI_1569);
             QUnit.test("RuntimeHelpersTests - GetHashCodeWoksForObject_SPI_1570", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.RuntimeHelpersTests.GetHashCodeWoksForObject_SPI_1570);
             QUnit.test("RuntimeHelpersTests - GetHashCodeCallsGetHashCodeNonVirtually_SPI_1570", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.RuntimeHelpersTests.GetHashCodeCallsGetHashCodeNonVirtually_SPI_1570);
-            QUnit.test("ScriptTests - EvalWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ScriptTests.EvalWorks);
-            QUnit.test("ScriptTests - TypeOfWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ScriptTests.TypeOfWorks);
-            QUnit.test("ScriptTests - DeleteWorks_SPI_1571", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ScriptTests.DeleteWorks_SPI_1571);
-            QUnit.test("ScriptTests - ParseIntWithoutRadixWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ScriptTests.ParseIntWithoutRadixWorks);
-            QUnit.test("ScriptTests - ParseIntWithRadixWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ScriptTests.ParseIntWithRadixWorks);
             QUnit.test("JsonTests - NonGenericParseWorks_SPI_1574", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.JsonTests.NonGenericParseWorks_SPI_1574);
             QUnit.test("JsonTests - GenericParseWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.JsonTests.GenericParseWorks);
             QUnit.test("JsonTests - NonGenericParseWithCallbackWorks_SPI_1574", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.JsonTests.NonGenericParseWithCallbackWorks_SPI_1574);
@@ -10480,51 +10475,6 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
                 var $t;
                 if (this.context == null) {
                     this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.SByteTests", $t.File = "Batch4\\SimpleTypes\\SByteTests.cs", $t);
-                }
-                return this.context;
-            }
-        }
-    });
-
-    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ScriptTests", {
-        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.ScriptTests)],
-        statics: {
-            methods: {
-                EvalWorks: function (assert) {
-                    var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ScriptTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "EvalWorks()", $t.Line = "83", $t));
-                    t.Fixture.EvalWorks();
-                },
-                TypeOfWorks: function (assert) {
-                    var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ScriptTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TypeOfWorks()", $t.Line = "135", $t));
-                    t.Fixture.TypeOfWorks();
-                },
-                DeleteWorks_SPI_1571: function (assert) {
-                    var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ScriptTests, 4, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DeleteWorks_SPI_1571()", $t.Line = "151", $t));
-                    t.Fixture.DeleteWorks_SPI_1571();
-                },
-                ParseIntWithoutRadixWorks: function (assert) {
-                    var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ScriptTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ParseIntWithoutRadixWorks()", $t.Line = "197", $t));
-                    t.Fixture.ParseIntWithoutRadixWorks();
-                },
-                ParseIntWithRadixWorks: function (assert) {
-                    var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ScriptTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ParseIntWithRadixWorks()", $t.Line = "203", $t));
-                    t.Fixture.ParseIntWithRadixWorks();
-                }
-            }
-        },
-        fields: {
-            context: null
-        },
-        methods: {
-            GetContext: function () {
-                var $t;
-                if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.ScriptTests", $t.File = "Batch4\\ScriptTests.cs", $t);
                 }
                 return this.context;
             }
