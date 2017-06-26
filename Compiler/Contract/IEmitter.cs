@@ -110,8 +110,6 @@ namespace Bridge.Contract
 
         string GetInline(ICSharpCode.NRefactory.TypeSystem.IEntity entity);
 
-        string GetInline(Mono.Cecil.ICustomAttributeProvider provider);
-
         Tuple<bool, bool, string> GetInlineCode(ICSharpCode.NRefactory.CSharp.InvocationExpression node);
 
         Tuple<bool, bool, string> GetInlineCode(ICSharpCode.NRefactory.CSharp.MemberReferenceExpression node);

@@ -19,7 +19,7 @@ namespace System.Diagnostics.Contracts
         /// </remarks>
         [Pure]
         [Conditional("DEBUG"), Conditional("CONTRACTS_FULL")]
-        [Template("System.Diagnostics.Contracts.Contract.assert(5, function () { return {condition}; })")]
+        [Template("System.Diagnostics.Contracts.Contract.assert(5, this, function () { return {condition}; })")]
         public static extern void Assume(bool condition);
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace System.Diagnostics.Contracts
         /// </remarks>
         [Pure]
         [Conditional("DEBUG"), Conditional("CONTRACTS_FULL")]
-        [Template("System.Diagnostics.Contracts.Contract.assert(5, function () { return {condition}; }, {userMessage})")]
+        [Template("System.Diagnostics.Contracts.Contract.assert(5, this, function () { return {condition}; }, {userMessage})")]
         public static extern void Assume(bool condition, string userMessage);
 
         #endregion Assume
@@ -45,7 +45,7 @@ namespace System.Diagnostics.Contracts
         /// <param name="condition">Expression to check to always be true.</param>
         [Pure]
         [Conditional("DEBUG"), Conditional("CONTRACTS_FULL")]
-        [Template("System.Diagnostics.Contracts.Contract.assert(4, function () { return {condition}; })")]
+        [Template("System.Diagnostics.Contracts.Contract.assert(4, this, function () { return {condition}; })")]
         public static extern void Assert(bool condition);
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace System.Diagnostics.Contracts
         /// <param name="userMessage">If it is not a constant string literal, then the contract may not be understood by tools.</param>
         [Pure]
         [Conditional("DEBUG"), Conditional("CONTRACTS_FULL")]
-        [Template("System.Diagnostics.Contracts.Contract.assert(4, function () { return {condition}; }, {userMessage})")]
+        [Template("System.Diagnostics.Contracts.Contract.assert(4, this, function () { return {condition}; }, {userMessage})")]
         public static extern void Assert(bool condition, string userMessage);
 
         #endregion Assert
@@ -73,7 +73,7 @@ namespace System.Diagnostics.Contracts
         /// </remarks>
         [Pure]
         [Conditional("CONTRACTS_FULL")]
-        [Template("System.Diagnostics.Contracts.Contract.assert(0, function () { return {condition}; })")]
+        [Template("System.Diagnostics.Contracts.Contract.assert(0, this, function () { return {condition}; })")]
         public static extern void Requires(bool condition);
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace System.Diagnostics.Contracts
         /// </remarks>
         [Pure]
         [Conditional("CONTRACTS_FULL")]
-        [Template("System.Diagnostics.Contracts.Contract.assert(0, function () { return {condition}; }, {userMessage})")]
+        [Template("System.Diagnostics.Contracts.Contract.assert(0, this, function () { return {condition}; }, {userMessage})")]
         public static extern void Requires(bool condition, string userMessage);
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace System.Diagnostics.Contracts
         /// Use this form when you want to throw a particular exception.
         /// </remarks>
         [Pure]
-        [Template("System.Diagnostics.Contracts.Contract.requires({TException}, function () { return {condition}; })")]
+        [Template("System.Diagnostics.Contracts.Contract.requires({TException}, this, function () { return {condition}; })")]
         public static extern void Requires<TException>(bool condition) where TException : Exception;
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace System.Diagnostics.Contracts
         /// Use this form when you want to throw a particular exception.
         /// </remarks>
         [Pure]
-        [Template("System.Diagnostics.Contracts.Contract.requires({TException}, function () { return {condition}; }, {userMessage})")]
+        [Template("System.Diagnostics.Contracts.Contract.requires({TException}, this, function () { return {condition}; }, {userMessage})")]
         public static extern void Requires<TException>(bool condition, string userMessage) where TException : Exception;
 
         #endregion Requires

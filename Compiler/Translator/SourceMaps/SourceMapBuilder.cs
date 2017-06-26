@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
@@ -38,8 +39,9 @@ namespace Bridge.Translator
         private int _previousSourceColumn;
         private int _previousSourceNameIndex;
         private bool _firstEntryInLine;
+        private string _basePath;
 
-        public SourceMapBuilder(string scriptFileName, string sourceRoot)
+        public SourceMapBuilder(string scriptFileName, string sourceRoot, string basePath)
         {
             this._scriptFileName = scriptFileName;
             this._sourceRoot = sourceRoot;
@@ -58,6 +60,7 @@ namespace Bridge.Translator
             _previousSourceColumn = 0;
             _previousSourceNameIndex = 0;
             _firstEntryInLine = true;
+            _basePath = basePath;
         }
 
         public void AddMapping(int scriptLine, int scriptColumn, SourceLocation sourceLocation)
@@ -95,10 +98,10 @@ namespace Bridge.Translator
             buffer.AppendFormat("  \"file\": \"{0}\"," + nl, _scriptFileName);
             buffer.Append("  \"sourceRoot\": \"" + _sourceRoot + "\"," + nl);
             buffer.Append("  \"sources\": ");
-            PrintStringListOn(this.SourceUrlList, buffer);
+            PrintStringListOn(this.SourceUrlList, true, buffer);
             buffer.Append("," + nl);
             buffer.Append("  \"names\": ");
-            PrintStringListOn(this.SourceNameList, buffer);
+            PrintStringListOn(this.SourceNameList, false, buffer);
             buffer.Append("," + nl);
             buffer.Append("  \"mappings\": \"");
             buffer.Append(mappingsBuffer);
@@ -210,7 +213,24 @@ namespace Bridge.Translator
             return sb.ToString();
         }
 
-        private void PrintStringListOn(List<string> strings, StringBuilder buffer)
+        private string GetRelativePath(string filespec, string folder)
+        {
+            Uri pathUri = new Uri(filespec);
+            // Folders must end in a slash
+            if (!folder.EndsWith(Path.DirectorySeparatorChar.ToString()))
+            {
+                folder += Path.DirectorySeparatorChar;
+            }
+
+            Uri folderUri = new Uri(folder);
+
+            var path = folderUri.MakeRelativeUri(pathUri).ToString();
+            path = new Bridge.Contract.ConfigHelper().ConvertPath(path, '/');
+
+            return Uri.UnescapeDataString(path);
+        }
+
+        private void PrintStringListOn(List<string> strings, bool isPath, StringBuilder buffer)
         {
             bool first = true;
 
@@ -222,7 +242,7 @@ namespace Bridge.Translator
                     buffer.Append(",");
                 }
 
-                buffer.Append(SourceMapBuilder.EscapeQuotedStringLiteral(str, true));
+                buffer.Append(SourceMapBuilder.EscapeQuotedStringLiteral(isPath ? GetRelativePath(str, this._basePath) : str, true));
                 first = false;
             }
 

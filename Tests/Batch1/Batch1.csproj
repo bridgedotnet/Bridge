@@ -194,6 +194,7 @@
     <Compile Include="Threading\Tasks\AsyncTests.cs" />
     <Compile Include="Threading\Tasks\PromiseTests.cs" />
     <Compile Include="Threading\Tasks\TaskTests.cs" />
+    <Compile Include="BasicCSharp\TestUserDefinedStructs.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
     <Compile Include="Utilities\DecimalHelper.cs" />
     <Compile Include="Utilities\TestData.cs" />

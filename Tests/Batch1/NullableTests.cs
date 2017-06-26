@@ -104,6 +104,130 @@ namespace Bridge.ClientTest
         }
 
         [Test]
+        public void LiftedGetHashCode1Works()
+        {
+            object o;
+
+            int? a = 1;
+            double? d = 0;
+            float? f = 0;
+            decimal? m = 0;
+            long? l = 0;
+            bool? b = true;
+
+            o = a;
+            Assert.AreEqual(1, o.GetHashCode());
+
+            o = d;
+            Assert.AreEqual(0, o.GetHashCode());
+
+            o = f;
+            Assert.AreEqual(0, o.GetHashCode());
+
+            o = m;
+            Assert.AreEqual(0, o.GetHashCode());
+
+            o = l;
+            Assert.AreEqual(0, o.GetHashCode());
+
+            o = b;
+            Assert.AreEqual(1, o.GetHashCode());
+        }
+
+        [Test]
+        public void LiftedGetHashCode2Works()
+        {
+            object o;
+
+            int? a = 12345;
+            double? d = 2;
+            float? f = 3;
+            decimal? m = 4;
+            long? l = 5;
+            bool? b = false;
+
+            o = a;
+            Assert.AreEqual(a.GetHashCode(), o.GetHashCode());
+
+            o = d;
+            Assert.AreEqual(d.GetHashCode(), o.GetHashCode());
+
+            o = f;
+            Assert.AreEqual(f.GetHashCode(), o.GetHashCode());
+
+            o = m;
+            Assert.AreEqual(m.GetHashCode(), o.GetHashCode());
+
+            o = l;
+            Assert.AreEqual(l.GetHashCode(), o.GetHashCode());
+
+            o = b;
+            Assert.AreEqual(b.GetHashCode(), o.GetHashCode());
+        }
+
+        [Test]
+        public void LiftedGetHashCode3Works()
+        {
+            object o;
+
+            int? a = -12345;
+            double? d = -2;
+            float? f = -3;
+            decimal? m = -4;
+            long? l = -5;
+            bool? b = true;
+            char? c = 'a';
+            Values? v = Values.Value1;
+            DateTime? dt = new DateTime();
+
+            int ea = -12345;
+            double ed = -2;
+            float ef = -3;
+            decimal em = -4;
+            long el = -5;
+            bool eb = true;
+            char ec = 'a';
+            Values ev = Values.Value1;
+            DateTime edt = new DateTime();
+
+            o = a;
+            Assert.AreEqual(a.GetHashCode(), o.GetHashCode());
+            Assert.AreEqual(ea.GetHashCode(), a.GetHashCode());
+
+            o = d;
+            Assert.AreEqual(d.GetHashCode(), o.GetHashCode());
+            Assert.AreEqual(ed.GetHashCode(), d.GetHashCode());
+
+            o = f;
+            Assert.AreEqual(f.GetHashCode(), o.GetHashCode());
+            Assert.AreEqual(ef.GetHashCode(), f.GetHashCode());
+
+            o = m;
+            Assert.AreEqual(m.GetHashCode(), o.GetHashCode());
+            Assert.AreEqual(em.GetHashCode(), m.GetHashCode());
+
+            o = l;
+            Assert.AreEqual(l.GetHashCode(), o.GetHashCode());
+            Assert.AreEqual(el.GetHashCode(), l.GetHashCode());
+
+            o = b;
+            Assert.AreEqual(b.GetHashCode(), o.GetHashCode());
+            Assert.AreEqual(eb.GetHashCode(), b.GetHashCode());
+
+            o = c;
+            Assert.AreEqual(c.GetHashCode(), o.GetHashCode());
+            Assert.AreEqual(ec.GetHashCode(), c.GetHashCode());
+
+            o = v;
+            Assert.AreEqual(v.GetHashCode(), o.GetHashCode());
+            Assert.AreEqual(ev.GetHashCode(), v.GetHashCode());
+
+            o = dt;
+            Assert.AreEqual(dt.GetHashCode(), o.GetHashCode());
+            Assert.AreEqual(edt.GetHashCode(), dt.GetHashCode());
+        }
+
+        [Test]
         public void LiftedEqualityWorks()
         {
             int? a = 1, b = 1, c = 2, d = null, e = null;

@@ -35,7 +35,7 @@ namespace System
         [Template("System.Enum.tryParse({TEnum}, {value}, {result}, {ignoreCase})")]
         public static extern bool TryParse<TEnum>(string value, bool ignoreCase, out TEnum result) where TEnum : struct;
 
-        [Template("System.Enum.toString({this:type}, {this})")]
+        [Template("System.Enum.toString({this:type}, {this})", Fn = "System.Enum.toStringFn({this:type})")]
         public override extern string ToString();
 
         [Template("System.Enum.format({this:type}, {this}, {format})")]

@@ -26,7 +26,7 @@
             },
 
             format: function (number, format, provider) {
-                return Bridge.Int.format(number, format, provider, System.Double);
+                return Bridge.Int.format(number, format || 'G', provider, System.Double);
             },
 
             equals: function (v1, v2) {
@@ -83,7 +83,7 @@
             tryParse: System.Double.tryParse,
 
             format: function (number, format, provider) {
-                return Bridge.Int.format(number, format, provider, System.Single);
+                return Bridge.Int.format(number, format || 'G', provider, System.Single);
             },
 
             equals: function (v1, v2) {

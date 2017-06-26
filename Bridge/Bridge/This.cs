@@ -5,7 +5,7 @@ namespace Bridge
     public static class This
     {
         [Template("this")]
-        public static ThisInstance Instance;
+        public static object Instance;
 
         [Template("{this}[{name}].call(null, {args})")]
         public static extern void Call(string name, params object[] args);
@@ -21,11 +21,5 @@ namespace Bridge
 
         [Template("{this}[{name}] = {value}")]
         public static extern void Set(string name, object value);
-    }
-
-    [External]
-    [Name("this")]
-    public class ThisInstance
-    {
     }
 }
