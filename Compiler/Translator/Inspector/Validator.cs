@@ -455,23 +455,6 @@ namespace Bridge.Translator
             return null;
         }
 
-        public virtual bool IsInlineMethod(MethodDefinition method)
-        {
-            var attr = this.GetAttribute(method.CustomAttributes, Translator.Bridge_ASSEMBLY + ".TemplateAttribute");
-
-            return attr != null && !attr.HasConstructorArguments;
-        }
-
-        public virtual string GetInlineCode(MethodDefinition method)
-        {
-            return this.GetAttributeValue(method.CustomAttributes, Translator.Bridge_ASSEMBLY + ".TemplateAttribute");
-        }
-
-        public virtual string GetInlineCode(PropertyDefinition property)
-        {
-            return this.GetAttributeValue(property.CustomAttributes, Translator.Bridge_ASSEMBLY + ".TemplateAttribute");
-        }
-
         public virtual bool IsObjectLiteral(TypeDefinition type)
         {
             return this.HasAttribute(type.CustomAttributes, Translator.Bridge_ASSEMBLY + ".ObjectLiteralAttribute");

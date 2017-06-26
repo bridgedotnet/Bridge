@@ -98,12 +98,14 @@
     <Compile Include="CompilerTests\AssemblyInfoTests.cs" />
     <Compile Include="CompilerTests\AssemblyConfigHelperTests.cs" />
     <Compile Include="BuilderTests\BuilderTests.cs" />
+    <Compile Include="CompilerTests\SourceMapTests.cs" />
     <Compile Include="ContractTests\BridgeTypeTests.cs" />
     <Compile Include="Helpers\EmitterHelper.cs" />
     <Compile Include="CompilerTests\InlineArgumentsBlockTests.cs" />
     <Compile Include="CompilerTests\ValidatorTests.cs" />
     <Compile Include="Helpers\MonoCecilAssemblyHelper.cs" />
     <Compile Include="Helpers\MonoCecilTypeSystemHelper.cs" />
+    <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Helpers\TestAssemblyHelper.cs" />
     <Compile Include="Helpers\NRefactoryTypeSystemHelper.cs" />
     <Compile Include="Helpers\ResourceHelper.cs" />

@@ -41,7 +41,7 @@ namespace System
         [Template("System.Single.format({this}, {format}, {provider})")]
         public extern string ToString(string format, IFormatProvider provider);
 
-        [Template("System.Single.format({this}, \"G\")")]
+        [Template(Fn = "System.Single.format")]
         public override extern string ToString();
 
         [Template("System.Single.format({this}, \"G\", {provider})")]
@@ -98,7 +98,7 @@ namespace System
         [Template("System.Single.equals({this}, {other})")]
         public override extern bool Equals(object other);
 
-        [Template("System.Single.getHashCode({this})")]
+        [Template(Fn = "System.Single.getHashCode")]
         public override extern int GetHashCode();
     }
 }

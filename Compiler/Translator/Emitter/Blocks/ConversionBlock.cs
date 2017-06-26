@@ -177,11 +177,6 @@ namespace Bridge.Translator
 
         internal static string GetInlineMethod(IEmitter emitter, string name, IType returnType, IType type, Expression expression)
         {
-            if (emitter.NamedBoxedFunctions.ContainsKey(type) && emitter.NamedBoxedFunctions[type].ContainsKey(name) && emitter.NamedBoxedFunctions[type][name] != null)
-            {
-                return JS.Vars.DBOX_ + "." + BridgeTypes.ToJsName(type, emitter, true) + "." + name.ToLowerCamelCase();
-            }
-
             var methodDef = ConversionBlock.GetBoxedMethod(name, returnType, type);
 
             if (methodDef != null)
@@ -201,6 +196,19 @@ namespace Bridge.Translator
                         return methodRef == null ? $"System.Nullable.{name.ToLowerCamelCase()}" : string.Format(template, methodRef, name.ToLowerCamelCase());
                     }
 
+                    var attr = methodDef.Attributes.First(a => a.AttributeType.FullName == "Bridge.TemplateAttribute");
+                    bool delegated = false;
+                    if (attr != null && attr.NamedArguments.Count > 0)
+                    {
+                        var namedArg = attr.NamedArguments.FirstOrDefault(arg => arg.Key.Name == CS.Attributes.Template.PROPERTY_FN);
+
+                        if (namedArg.Key != null)
+                        {
+                            inline = namedArg.Value.ConstantValue.ToString();
+                            delegated = true;
+                        }
+                    }
+
                     var writer = new Writer
                     {
                         InlineCode = inline,
@@ -214,29 +222,15 @@ namespace Bridge.Translator
                     argsInfo.ArgumentsExpressions = new Expression[] {expression};
                     argsInfo.ArgumentsNames = new string[] {"this"};
                     argsInfo.ThisArgument = "obj";
+                    argsInfo.ThisType = type;
                     new InlineArgumentsBlock(emitter, argsInfo, writer.InlineCode).Emit();
 
                     var result = emitter.Output.ToString();
                     emitter.Output = writer.Output;
                     emitter.IsNewLine = writer.IsNewLine;
 
-                    Dictionary<string, string> fn = null;
-
-                    if (emitter.NamedBoxedFunctions.ContainsKey(type))
-                    {
-                        fn = emitter.NamedBoxedFunctions[type];
-                    }
-                    else
-                    {
-                        fn = new Dictionary<string, string>();
-                        emitter.NamedBoxedFunctions.Add(type, fn);
-                    }
-
-                    result = string.Format("function (obj) {{ return {0}; }}", result);
-
-                    fn.Add(name, result);
-
-                    return JS.Vars.DBOX_ + "." + BridgeTypes.ToJsName(type, emitter, true) + "." + name.ToLowerCamelCase();
+                    result = delegated ? result : string.Format("function (obj) {{ return {0}; }}", result);
+                    return result;
                 }
 
             }

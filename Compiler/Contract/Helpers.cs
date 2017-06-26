@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using ArrayType = ICSharpCode.NRefactory.TypeSystem.ArrayType;
 
@@ -1355,6 +1356,67 @@ namespace Bridge.Contract
         {
             template = Helpers.ConvertTokens(emitter, template, member);
             return template.Replace("{this}", replacer);
+        }
+
+        public static string DelegateToTemplate(string tpl, IMethod method, IEmitter emitter)
+        {
+            bool addThis = !method.IsStatic;
+
+            StringBuilder sb = new StringBuilder(tpl);
+            sb.Append("(");
+
+            bool comma = false;
+            if (addThis)
+            {
+                sb.Append("{this}");
+                comma = true;
+            }
+
+            if (!Helpers.IsIgnoreGeneric(method, emitter) && method.TypeArguments.Count > 0)
+            {
+                foreach (var typeParameter in method.TypeArguments)
+                {
+                    if (comma)
+                    {
+                        sb.Append(", ");
+                    }
+
+                    if (typeParameter.Kind == TypeKind.TypeParameter)
+                    {
+                        sb.Append("{");
+                        sb.Append(typeParameter.Name);
+                        sb.Append("}");
+                    }
+                    else
+                    {
+                        sb.Append(BridgeTypes.ToJsName(typeParameter, emitter));
+                    }
+                    comma = true;
+                }
+            }
+
+            foreach (var parameter in method.Parameters)
+            {
+                if (comma)
+                {
+                    sb.Append(", ");
+                }
+
+                sb.Append("{");
+
+                if (parameter.IsParams &&
+                    method.Attributes.Any(a => a.AttributeType.FullName == "Bridge.ExpandParamsAttribute"))
+                {
+                    sb.Append("*");
+                }
+
+                sb.Append(parameter.Name);
+                sb.Append("}");
+                comma = true;
+            }
+
+            sb.Append(")");
+            return sb.ToString();
         }
     }
 }

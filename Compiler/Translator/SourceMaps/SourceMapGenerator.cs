@@ -19,10 +19,10 @@ namespace Bridge.Translator
             get;
         }
 
-        public SourceMapGenerator(string scriptPath, string sourceRoot, UnicodeNewline? forceEols = null)
+        public SourceMapGenerator(string scriptPath, string sourceRoot, string basePath, UnicodeNewline? forceEols = null)
         {
             string scriptFileName = Path.GetFileName(scriptPath);
-            this.SourceMapBuilder = new SourceMapBuilder(scriptFileName, sourceRoot);
+            this.SourceMapBuilder = new SourceMapBuilder(scriptFileName, sourceRoot, basePath);
             this.ForceEols = forceEols;
         }
 
@@ -51,7 +51,7 @@ namespace Bridge.Translator
         public static void Generate(string scriptFileName, string basePath, ref string content, Action<SourceMapBuilder> beforeGenerate, Func<string, string> sourceContent, string[] names, IList<string> sourceFiles, UnicodeNewline? forceEols, ILogger logger)
         {
             var fileName = Path.GetFileName(scriptFileName);
-            var generator = new SourceMapGenerator(fileName, "", forceEols);
+            var generator = new SourceMapGenerator(fileName, "", basePath, forceEols);
             StringLocation location = null;
             string script = content;
             int offset = 0;
@@ -63,7 +63,7 @@ namespace Bridge.Translator
                 var sourceLine = int.Parse(match.Groups[2].Value);
                 var sourceCol = int.Parse(match.Groups[3].Value);
                 var sourcePath = sourceFiles[int.Parse(match.Groups[1].Value)];
-                sourcePath = sourcePath.Substring(basePath.Length + 1);
+                //sourcePath = sourcePath.Substring(basePath.Length + 1);
 
                 generator.RecordLocation(location.Line, location.Column, sourcePath, sourceLine, sourceCol);
                 return "";
