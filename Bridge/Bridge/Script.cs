@@ -20,11 +20,20 @@ namespace Bridge
 
         public static extern T Identity<T>(T arg, params object[] args);
 
+        /// <summary>
+        /// The delete operator removes a property from an object.
+        /// </summary>
+        /// <param name="obj">The name of an object, or an expression evaluating to an object.</param>
         [Template("delete {0}")]
-        public static extern void Delete(object value);
+        public static extern void Delete(object obj);
 
+        /// <summary>
+        /// The delete operator removes a property from an object.
+        /// </summary>
+        /// <param name="obj">The name of an object, or an expression evaluating to an object.</param>
+        /// <param name="prop">The property to delete.</param>
         [Template("delete {0}[{1}]")]
-        public static extern void Delete(object value, string name);
+        public static extern void Delete(object obj, string prop);
 
         [Template("Bridge.is({0}, {1})")]
         public static extern bool Is(object type, string typeName);
