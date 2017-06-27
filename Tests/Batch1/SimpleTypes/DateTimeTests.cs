@@ -875,6 +875,32 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual(new DateTime(2011, 7, 12, 2, 42, 56, 345), dt);
         }
 
+        [Test(Name = "#2542 - {0}")]
+        public void AddMonthsEdgeCasesWorks()
+        {
+            var dt = new DateTime(2017, 3, 31, 16, 10, 10);
+            Assert.AreEqual(new DateTime(2017, 3, 31, 16, 10, 10), dt);
+
+            var actual = dt.AddMonths(1);
+            Assert.AreEqual(new DateTime(2017, 4, 30, 16, 10, 10), actual);
+            actual = dt.AddMonths(2);
+            Assert.AreEqual(new DateTime(2017, 5, 31, 16, 10, 10), actual);
+            actual = dt.AddMonths(3);
+            Assert.AreEqual(new DateTime(2017, 6, 30, 16, 10, 10), actual);
+            actual = dt.AddMonths(12);
+            Assert.AreEqual(new DateTime(2018, 3, 31, 16, 10, 10), actual);
+
+            dt = new DateTime(2020, 2, 29, 16, 10, 10);
+            Assert.AreEqual(new DateTime(2020, 2, 29, 16, 10, 10), dt);
+
+            actual = dt.AddMonths(1);
+            Assert.AreEqual(new DateTime(2020, 3, 29, 16, 10, 10), actual);
+            actual = dt.AddMonths(2);
+            Assert.AreEqual(new DateTime(2020, 4, 29, 16, 10, 10), actual);
+            actual = dt.AddMonths(12);
+            Assert.AreEqual(new DateTime(2021, 2, 28, 16, 10, 10), actual);
+        }
+
         [Test]
         public void AddSecondsWorks()
         {
