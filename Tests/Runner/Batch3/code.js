@@ -30283,7 +30283,7 @@ Bridge.$N1391Result =                     r;
                     var d2 = System.DateTime.toUTC(d1);
 
                     // This is required to change d1 to UTC without changing time
-                    d1 = new Date(d1.getFullYear(), d1.getMonth() + (((d1.getMonth() + 1) - (d2.getMonth() + 1)) | 0), d1.getDate(), d1.getHours(), d1.getMinutes(), d1.getSeconds(), d1.getMilliseconds());
+                    d1 = System.DateTime.addMonths(d1, (((d1.getMonth() + 1) - (d2.getMonth() + 1)) | 0));
                     d1 = new Date(d1.valueOf() + Math.round((((d1.getDate() - d2.getDate()) | 0)) * 864e5));
                     d1 = new Date(d1.valueOf() + Math.round((((d1.getHours() - d2.getHours()) | 0)) * 36e5));
                     d1 = new Date(d1.valueOf() + Math.round((((d1.getMinutes() - d2.getMinutes()) | 0)) * 6e4));
