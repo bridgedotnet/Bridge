@@ -61,19 +61,7 @@ namespace System.IO
         //string nodePath;
         public FileStream(string path, FileMode mode)
         {
-            if (Browser.IsNodeJs)
-            {
-                var fs = Script.Write<dynamic>(@"require(""fs"")");
-                _buffer = fs.readFileSync(path);
-            }
-            else
-            {
-                dynamic request = Script.Write<dynamic>("new XMLHttpRequest()");
-                request.open("GET", path, false);
-                request.send(null);
-                request.responseType = "ArrayBuffer";
-                _buffer = request.response;
-            }
+            _buffer = File.ReadAllBytesAsBuffer(path);
         }
 
         public override bool CanRead => true;

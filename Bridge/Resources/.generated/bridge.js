@@ -5089,6 +5089,49 @@
         }
     });
 
+    Bridge.define("System.IO.File", {
+        statics: {
+            methods: {
+                readAllText: function (path) {
+                    if (Bridge.isNode) {
+                        var fs = require("fs");
+                        return fs.readFileSync(path).toString();
+                    } else {
+                        var request = new XMLHttpRequest();
+                        request.open("GET", path, false);
+                        request.send(null);
+                        return request.responseText;
+                    }
+                },
+                readAllBytesAsBuffer: function (path) {
+                    if (Bridge.isNode) {
+                        var fs = require("fs");
+                        return Bridge.cast(fs.readFileSync(path), ArrayBuffer);
+                    } else {
+                        var req = new XMLHttpRequest();
+                        req.open("GET", path, false);
+                        //XHR binary charset opt by Marcus Granado 2006 [http://mgran.blogspot.com]
+                        req.overrideMimeType("text/plain; charset=binary-data");
+                        req.send(null);
+                        if (!Bridge.referenceEquals(req.status, 200)) {
+                            throw new System.IO.IOException.$ctor1(System.String.format("Status of request to {0} returned status: {1}", path, Bridge.box(Bridge.cast(req.status, System.UInt16), System.UInt16)));
+                        }
+                        var text = Bridge.cast(req.responseText, System.String);
+                        var resultArray = new Uint8Array(text.length);
+                        System.String.toCharArray(text, 0, text.length).forEach(function (v, index, array) {
+                                var $t;
+                                return ($t = (v & 255) & 255, resultArray[System.Array.index(index, resultArray)] = $t, $t);
+                            });
+                        return resultArray.buffer;
+                    }
+                },
+                readAllBytes: function (path) {
+                    return System.Linq.Enumerable.from(new Uint8Array(System.IO.File.readAllBytesAsBuffer(path))).toArray();
+                }
+            }
+        }
+    });
+
     Bridge.define("System.IO.Stream", {
         inherits: [System.IDisposable],
         statics: {
@@ -5398,16 +5441,7 @@
             ctor: function (path, mode) {
                 this.$initialize();
                 System.IO.Stream.ctor.call(this);
-                if (Bridge.isNode) {
-                    var fs = require("fs");
-                    this._buffer = fs.readFileSync(path);
-                } else {
-                    var request = new XMLHttpRequest();
-                    request.open("GET", path, false);
-                    request.send(null);
-                    request.responseType = "ArrayBuffer";
-                    this._buffer = request.response;
-                }
+                this._buffer = System.IO.File.readAllBytesAsBuffer(path);
             }
         },
         methods: {
