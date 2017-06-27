@@ -1,5 +1,5 @@
 /**
- * @compiler Bridge.NET 16.0.0-beta3
+ * @compiler Bridge.NET 16.0.0-beta4
  */
 Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch2", function ($asm, globals) {
     
