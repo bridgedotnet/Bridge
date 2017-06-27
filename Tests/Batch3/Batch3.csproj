@@ -632,10 +632,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Readme\Bridge.NET\README.Bridge.Test.txt" />
-    <Content Include="App_Readme\Bridge.NET\README.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="BridgeIssues\0200\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
