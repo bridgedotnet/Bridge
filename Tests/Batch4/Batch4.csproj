@@ -157,7 +157,6 @@
     <Compile Include="SimpleTypes\DecimalTests.cs" />
     <Compile Include="SimpleTypes\StringTests.cs" />
     <Compile Include="SimpleTypes\JsDateTests.cs" />
-    <Compile Include="SimpleTypes\DateTimeTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Reflection\Resource2.bin" />
