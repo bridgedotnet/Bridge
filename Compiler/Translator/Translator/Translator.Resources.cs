@@ -920,7 +920,7 @@ namespace Bridge.Translator
                 this.Log.Trace("The resources config section has " + resources.Count + " non-default settings");
             }
 
-            CheckConsoleConfigSetting(resources);
+            CheckConsoleConfigSetting(resources, defaultSetting);
 
             var toEmbed = resources.Where(x => x.Files != null && x.Files.Count() > 0).ToArray();
             var toExtract = resources.Where(x => x.Files == null || x.Files.Count() <= 0).ToArray();
@@ -931,17 +931,19 @@ namespace Bridge.Translator
             return;
         }
 
-        private void CheckConsoleConfigSetting(List<ResourceConfigItem> resources)
+        private void CheckConsoleConfigSetting(List<ResourceConfigItem> resources, ResourceConfigItem @default)
         {
+            this.Log.Trace("CheckConsoleConfigSetting...");
+
+            var consoleResourceName = "bridge.console.js";
+            var consoleResourceMinifiedName = FileHelper.GetMinifiedJSFileName(consoleResourceName);
+
+            var consoleFormatted = resources.Where(x => x.Name == consoleResourceName && (x.Assembly == null || x.Assembly == Translator.Bridge_ASSEMBLY)).FirstOrDefault();
+            var consoleMinified = resources.Where(x => x.Name == consoleResourceMinifiedName && (x.Assembly == null || x.Assembly == Translator.Bridge_ASSEMBLY)).FirstOrDefault();
+
             if (this.AssemblyInfo.Console.Enabled != true)
             {
                 this.Log.Trace("Switching off Bridge Console...");
-
-                var consoleResourceName = "bridge.console.js";
-                var consoleResourceMinifiedName = FileHelper.GetMinifiedJSFileName(consoleResourceName);
-
-                var consoleFormatted = resources.Where(x => x.Name == consoleResourceName && (x.Assembly == null || x.Assembly == Translator.Bridge_ASSEMBLY)).FirstOrDefault();
-                var consoleMinified = resources.Where(x => x.Name == consoleResourceMinifiedName && (x.Assembly == null || x.Assembly == Translator.Bridge_ASSEMBLY)).FirstOrDefault();
 
                 if (consoleFormatted == null)
                 {
@@ -1007,6 +1009,58 @@ namespace Bridge.Translator
 
                 this.Log.Trace("Switching off Bridge Console done");
             }
+            else
+            {
+                if (consoleFormatted != null)
+                {
+                    if (consoleFormatted.Extract != true)
+                    {
+                        consoleFormatted.Extract = true;
+                        this.Log.Trace("Setting resources.extract = true for " + consoleResourceName + " as bridge.json has console option has true explicitly");
+                    }
+                }
+                else
+                {
+                    if (@default != null && @default.Extract != true)
+                    {
+                        consoleFormatted = new ResourceConfigItem()
+                        {
+                            Name = consoleResourceName,
+                            Extract = true,
+                            Inject = false
+                        };
+
+                        this.Log.Trace("Adding resource setting for " + consoleResourceName + " as default resource has extract != true");
+                        resources.Add(consoleFormatted);
+                    }
+                }
+
+                if (consoleMinified != null)
+                {
+                    if (consoleMinified.Extract != true)
+                    {
+                        consoleMinified.Extract = true;
+                        this.Log.Trace("Setting resources.extract = true for " + consoleResourceMinifiedName + " as bridge.json has console option has true explicitly");
+                    }
+                }
+                else
+                {
+                    if (@default != null && @default.Extract != true)
+                    {
+                        consoleMinified = new ResourceConfigItem()
+                        {
+                            Name = consoleResourceMinifiedName,
+                            Extract = true,
+                            Inject = false
+                        };
+
+                        this.Log.Trace("Adding resource setting for " + consoleResourceMinifiedName + " as default resource has extract != true");
+                        resources.Add(consoleMinified);
+                    }
+                }
+            }
+            this.Log.Trace("CheckConsoleConfigSetting done");
+
         }
 
         private void ValidateResourceSettings(ResourceConfigItem defaultSetting, IEnumerable<ResourceConfigItem> rawNonDefaultResources)

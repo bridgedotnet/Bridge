@@ -6,7 +6,7 @@
   "ignoreCast": true,
   "fileNameCasing": "Lowercase",
   "console": {
-    "disabled": true
+    "enabled": false
   },
   "logging": {
     "level":  "None"

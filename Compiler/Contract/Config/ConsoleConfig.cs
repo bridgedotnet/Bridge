@@ -7,7 +7,7 @@ namespace Bridge.Contract
 {
     public class ConsoleConfig
     {
-        public bool Disabled
+        public bool? Enabled
         {
             get; set;
         }
@@ -21,7 +21,7 @@ namespace Bridge.Contract
 
             if (config != null)
             {
-                serializer.Serialize(writer, !config.Disabled);
+                serializer.Serialize(writer, !config.Enabled.HasValue ? null : config.Enabled);
             }
             else
             {
@@ -34,9 +34,9 @@ namespace Bridge.Contract
         {
             if (reader.TokenType == JsonToken.Boolean)
             {
-                var disabled = !serializer.Deserialize<bool>(reader);
+                var enabled = serializer.Deserialize<bool>(reader);
 
-                return new ConsoleConfig() { Disabled = disabled };
+                return new ConsoleConfig() { Enabled = enabled };
             }
             else if (reader.TokenType == JsonToken.StartObject)
             {
@@ -45,8 +45,12 @@ namespace Bridge.Contract
 
                 return existingValue;
             }
-            else if (reader.TokenType == JsonToken.Null
-                || reader.TokenType == JsonToken.None)
+            else if (reader.TokenType == JsonToken.Null)
+            {
+                existingValue = new ConsoleConfig();
+                return existingValue;
+            }
+            else if (reader.TokenType == JsonToken.None)
             {
                 return existingValue;
             }

@@ -20,7 +20,9 @@
     "enableReservedNamespaces": false,
     "fullName": "BridgeTest18Assembly"
   },
-
+  "console": {
+    "enabled": true
+  },
   // #1680 test
   "resources": [
     // Check defaults are used

@@ -7,6 +7,7 @@
   "localesOutput": "locales",
   "locales": "ru-RU;en-US;es*",
   "fileNameCasing": "CamelCase",
+  "console": true,
   "sourceMap": true,
   "html": {
     "disabled": true

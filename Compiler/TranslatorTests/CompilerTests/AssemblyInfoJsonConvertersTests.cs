@@ -80,44 +80,49 @@ namespace Bridge.Translator.Tests
 
             AssertJsonSerialization(
                 new ConsoleInfo { Console = new ConsoleConfig() },
-                "{\"Console\":true}",
+                "{\"Console\":null}",
                 "2");
 
             AssertJsonSerialization(
-                new ConsoleInfo { Console = new ConsoleConfig() { Disabled = true } },
-                "{\"Console\":false}",
+                new ConsoleInfo { Console = new ConsoleConfig() { Enabled = true } },
+                "{\"Console\":true}",
                 "3");
+
+            AssertJsonSerialization(
+                new ConsoleInfo { Console = new ConsoleConfig() { Enabled = false } },
+                "{\"Console\":false}",
+                "4");
         }
 
         [Test]
         public void AssemblyInfoJsonConverters_ConsoleConfigConverterDeserialization()
         {
-            AssertJsonDeserialization("{\"Console\":null}", new ConsoleInfo(), "1");
+            AssertJsonDeserialization("{\"Console\":null}", new ConsoleInfo { Console = new ConsoleConfig() }, "1");
 
             AssertJsonDeserialization(
-                "{\"Console\":{\"disabled\":false}}",
+                "{\"Console\":null}",
                 new ConsoleInfo { Console = new ConsoleConfig() },
                 "2");
 
             AssertJsonDeserialization(
-                "{\"Console\":{\"disabled\":true}}",
-                new ConsoleInfo { Console = new ConsoleConfig() { Disabled = true } },
+                "{\"Console\":{\"enabled\":true}}",
+                new ConsoleInfo { Console = new ConsoleConfig() { Enabled = true } },
                 "3");
 
             AssertJsonDeserialization(
-                "{\"Console\":{\"disabled\":false}}",
-                new ConsoleInfo { Console = new ConsoleConfig() { Disabled = false } },
+                "{\"Console\":{\"enabled\":false}}",
+                new ConsoleInfo { Console = new ConsoleConfig() { Enabled = false } },
                 "4");
 
             AssertJsonDeserialization(
                 "{\"Console\":true}",
-                new ConsoleInfo { Console = new ConsoleConfig() { Disabled = false } },
-                "6");
+                new ConsoleInfo { Console = new ConsoleConfig() { Enabled = true } },
+                "5");
 
             AssertJsonDeserialization(
                 "{\"Console\":false}",
-                new ConsoleInfo { Console = new ConsoleConfig() { Disabled = true} },
-                "7");
+                new ConsoleInfo { Console = new ConsoleConfig() { Enabled = false } },
+                "6");
         }
 
         private static void AssertJsonSerialization(object value, string expected, string message = null)
@@ -215,7 +220,7 @@ namespace Bridge.Translator.Tests
                     return false;
                 }
 
-                return c1.Disabled == c2.Disabled;
+                return c1.Enabled == c2.Enabled;
             }
 
             public override int GetHashCode()

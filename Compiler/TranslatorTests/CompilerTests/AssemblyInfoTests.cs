@@ -57,7 +57,7 @@ namespace Bridge.Translator.Tests
             Assert.False(config.SourceMap.Enabled, "SourceMap.Enabled");
             Assert.Null(config.SourceMap.Eol, "SourceMap.Eol");
             Assert.False(config.Html.Disabled, "Html.Disabled");
-            Assert.False(config.Console.Disabled, "Console.Disabled");
+            Assert.Null(config.Console.Enabled, "Console.Enabled");
         }
     }
 }
