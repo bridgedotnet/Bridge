@@ -8391,7 +8391,6 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                                  needRemoveDot = part.length == 0;
 
                                  break;
-                            
                             case "u":
                             case "f":
                             case "ff":
@@ -8996,6 +8995,22 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
             subdd: function (a, b) {
                 return Bridge.hasValue$1(a, b) ? (new System.TimeSpan((a - b) * 10000)) : null;
+            },
+
+            addMonths: function (dt, m) {
+                if (!Bridge.hasValue(dt)) {
+                    return null;
+                }
+
+                var r = new Date(dt.getTime());
+                var d = r.getDate();
+                r.setMonth(r.getMonth() + m);
+
+                if (r.getDate() != d) {
+                    r.setDate(0);
+                }
+
+                return r;
             },
 
             gt: function (a, b) {
