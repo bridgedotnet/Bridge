@@ -206,6 +206,11 @@ namespace Bridge.Contract
             private set;
         }
 
+        public IMember OriginalMember
+        {
+            get; set;
+        }
+
         private OverloadsCollection(IEmitter emitter, FieldDeclaration fieldDeclaration)
         {
             this.Emitter = emitter;
@@ -642,6 +647,17 @@ namespace Bridge.Contract
 
             bool isTop = list == null;
             list = list ?? new List<IMethod>();
+
+            if (this.Member != null && this.Member.IsOverride && !this.IsTemplateOverride(this.Member))
+            {
+                if (this.OriginalMember == null)
+                {
+                    this.OriginalMember = this.Member;
+                }
+
+                this.Member = InheritanceHelper.GetBaseMember(this.Member);
+                typeDef = this.Member.DeclaringTypeDefinition;
+            }
 
             if (typeDef != null)
             {

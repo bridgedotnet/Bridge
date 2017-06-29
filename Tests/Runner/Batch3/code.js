@@ -11,6 +11,14 @@ var Person2735 = (function () {
     }
     return Person2735;
 }());
+var Bridge2874Base = (function () {
+    function Bridge2874Base() {
+    }
+    Bridge2874Base.prototype.Foo = function (msg) {
+        return 1;
+    };
+    return Bridge2874Base;
+}());
 
 /**
  * Bridge Test library - test github issues up to #1999
@@ -23237,6 +23245,29 @@ Bridge.$N1391Result =                     r;
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2859.A, {
         f1: function () {
             System.Diagnostics.Contracts.Contract.assert(5, this, function () { return this.J === 4; });
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874", {
+        statics: {
+            methods: {
+                TestExternalOverriding: function () {
+                    var d = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived();
+                    Bridge.Test.NUnit.Assert.Null(Bridge.unbox(d.Foo$1));
+                    Bridge.Test.NUnit.Assert.AreEqual(2, Bridge.unbox(d.Foo)());
+                    Bridge.Test.NUnit.Assert.AreEqual(2, d.Foo());
+                    Bridge.Test.NUnit.Assert.AreEqual(2, d.Foo(""));
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived", {
+        inherits: [Bridge2874Base],
+        methods: {
+            Foo: function (msg) {
+                return 2;
+            }
         }
     });
 
