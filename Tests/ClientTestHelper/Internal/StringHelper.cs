@@ -37,27 +37,5 @@ namespace Bridge.ClientTestHelper
 
             return s + System.Environment.NewLine;
         }
-
-        public static string CombineLinesBR(params string[] lines)
-        {
-            if (lines == null)
-            {
-                return null;
-            }
-
-            var s = "";
-
-            for (int i = 0; i < lines.Length; i++)
-            {
-                if (i != 0)
-                {
-                    s += "<br>";
-                }
-
-                s += lines[i];
-            }
-
-            return s;
-        }
     }
 }

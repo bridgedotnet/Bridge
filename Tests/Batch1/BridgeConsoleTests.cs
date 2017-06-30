@@ -1,5 +1,6 @@
 ﻿using Bridge.Test.NUnit;
 using Bridge.ClientTestHelper;
+using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -51,7 +52,7 @@ namespace Bridge.ClientTest
             AssertLogMessageObject("#30 - ", new object(), "{}"); // Improved in #1994
             AssertLogMessageObject("#31 - ", new ClassA(), "I'm ClassA");
             AssertLogMessageObject("#32 - ", new ClassB(), "{}"); // Improved in #1994
-            AssertLogMessageObject("#33 - ", new ClassC(), StringHelper.CombineLinesBR("{", "  \"Name\": \"Frank\",", "  \"Age\": 55,", "  \"Admin\": true", "}")); // Improved in #1994
+            AssertLogMessageObject("#33 - ", new ClassC(), StringHelper.CombineLines("{", "  \"Name\": \"Frank\",", "  \"Age\": 55,", "  \"Admin\": true", "}")); // Improved in #1994
             AssertLogMessageObject("#34 - ", new object().ToString(), "[object Object]");
             AssertLogMessageObject("#35 - ", new ClassA().ToString(), "I'm ClassA");
             AssertLogMessageObject("#36 - ", new ClassB().ToString(), "[object Object]");
@@ -112,6 +113,13 @@ namespace Bridge.ClientTest
             Bridge.Utils.Console.Show();
             Bridge.Utils.Console.Log("Hide/Show/Hide/Show/Log");
             AssertMessage("#6 - ", "Hide/Show/Hide/Show/Log");
+        }
+
+        [Test(Name = "#2880 - {0}")]
+        public void TestHtmlTag()
+        {
+            AssertLogMessageObject("", "<a>", "<a>");
+            AssertLogMessageObject("", "<a", "<a");
         }
 
         private class ClassA
@@ -180,7 +188,7 @@ namespace Bridge.ClientTest
             }
 
             Assert.True(true, description + "Message container <div> element exists");
-            Assert.AreEqual(expected, textContainer.InnerHTML, description + "Message is correct");
+            Assert.AreEqual(expected, textContainer.As<dynamic>().innerText, description + "Message innerText is correct");
             Assert.AreEqual(NormalizeHexStyleColor(color), ConvertStyleColor(textContainer.Style.Color), description + "Message <span> color (" + textContainer.Style.Color + ") should be " + color);
         }
 

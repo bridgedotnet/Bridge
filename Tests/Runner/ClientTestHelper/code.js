@@ -92,24 +92,6 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
                     }
 
                     return System.String.concat(s, '\n');
-                },
-                CombineLinesBR: function (lines) {
-                    if (lines === void 0) { lines = []; }
-                    if (lines == null) {
-                        return null;
-                    }
-
-                    var s = "";
-
-                    for (var i = 0; i < lines.length; i = (i + 1) | 0) {
-                        if (i !== 0) {
-                            s = System.String.concat(s, "<br>");
-                        }
-
-                        s = System.String.concat(s, lines[System.Array.index(i, lines)]);
-                    }
-
-                    return s;
                 }
             }
         }
