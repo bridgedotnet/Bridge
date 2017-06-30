@@ -1,5 +1,6 @@
 ﻿using Bridge.Test.NUnit;
 using Bridge.ClientTestHelper;
+using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -114,6 +115,13 @@ namespace Bridge.ClientTest
             AssertMessage("#6 - ", "Hide/Show/Hide/Show/Log");
         }
 
+        [Test(Name = "#2880 - {0}")]
+        public void TestHtmlTag()
+        {
+            AssertLogMessageObject("", "<a>", "<a>");
+            AssertLogMessageObject("", "<a", "<a");
+        }
+
         private class ClassA
         {
             public override string ToString()
@@ -180,7 +188,7 @@ namespace Bridge.ClientTest
             }
 
             Assert.True(true, description + "Message container <div> element exists");
-            Assert.AreEqual(expected, textContainer.InnerHTML, description + "Message is correct");
+            Assert.AreEqual(expected, textContainer.As<dynamic>().innerText, description + "Message innerText is correct");
             Assert.AreEqual(NormalizeHexStyleColor(color), ConvertStyleColor(textContainer.Style.Color), description + "Message <span> color (" + textContainer.Style.Color + ") should be " + color);
         }
 

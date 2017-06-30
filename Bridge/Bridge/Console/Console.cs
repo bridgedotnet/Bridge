@@ -93,6 +93,7 @@ namespace Bridge.Utils
 
             public string id;
             public string innerHTML;
+            public string innerText;
             public readonly Element firstChild;
             public readonly Element lastChild;
             public readonly cssStyle style;
@@ -707,7 +708,7 @@ namespace Bridge.Utils
             messageIcon.appendChild(messageIconPath);
 
             var messageContainer = document.createElement("div");
-            messageContainer.innerHTML = message;
+            messageContainer.innerText = message;
             messageContainer.setAttribute("style", "color:" + color + ";white-space:pre;margin-left:12px;line-height:1.4;min-height:18px;");
 
             messageItem.appendChild(messageIcon);
