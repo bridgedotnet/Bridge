@@ -23240,6 +23240,49 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2886", {
+        statics: {
+            methods: {
+                Test2DArrayDefValue: function () {
+                    var $t, $t1, $t2;
+                    $t = Bridge.getEnumerator(System.Array.create(0, null, System.Int32, 1, 1));
+                    try {
+                        while ($t.moveNext()) {
+                            var value = $t.Current;
+                            Bridge.Test.NUnit.Assert.AreEqual(0, value);
+                        }
+                    } finally {
+                        if (Bridge.is($t, System.IDisposable)) {
+                            $t.System$IDisposable$dispose();
+                        }
+                    }
+                    $t1 = Bridge.getEnumerator(System.Array.create(false, null, System.Boolean, 1, 1));
+                    try {
+                        while ($t1.moveNext()) {
+                            var value1 = $t1.Current;
+                            Bridge.Test.NUnit.Assert.AreEqual(false, value1);
+                        }
+                    } finally {
+                        if (Bridge.is($t1, System.IDisposable)) {
+                            $t1.System$IDisposable$dispose();
+                        }
+                    }
+                    $t2 = Bridge.getEnumerator(System.Array.create(System.Int64(0), null, System.Int64, 1, 1));
+                    try {
+                        while ($t2.moveNext()) {
+                            var value2 = $t2.Current;
+                            var o = value2;
+                            Bridge.Test.NUnit.Assert.True(Bridge.is(o, System.Int64));
+                        }
+                    } finally {
+                        if (Bridge.is($t2, System.IDisposable)) {
+                            $t2.System$IDisposable$dispose();
+                        }
+                    }}
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge294", {
         fields: {
             Name: null
