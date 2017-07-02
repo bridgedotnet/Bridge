@@ -106,6 +106,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             var d1 = new Derived1();
             Assert.Null(d1["Foo$1"], "Derived1 in group 1 should not have Foo$1");
+            Assert.Null(d1["Foo$2"], "Derived1 in group 1 should not have Foo$2");
             Assert.AreEqual(2, d1["Foo"].As<Func<int>>()(), "Derived1 in group 1 [Foo] should return 2");
             Assert.AreEqual(2, d1.Foo(), "Derived1 in group 1 Foo should return 2");
             Assert.AreEqual(2, d1.Foo(""), "Derived1 in group 1 Foo() should return 2");
@@ -113,6 +114,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             var d11 = new Derived11();
             Assert.Null(d11["Foo$1"], "Derived11 in group 3 should not have Foo$1");
+            Assert.Null(d11["Foo$2"], "Derived11 in group 3 should not have Foo$2");
             Assert.AreEqual(11, d11["Foo"].As<Func<int>>()(), "Derived11 in group 3 [Foo] should return 11");
             Assert.AreEqual(11, d11.Foo(), "Derived11 in group 3 Foo should return 11");
             Assert.AreEqual(11, d11.Foo(""), "Derived11 in group 3 Foo() should return 11");
@@ -120,6 +122,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             var d12 = new Derived12();
             Assert.Null(d12["Foo$1"], "Derived12 in group 5 should not have Foo$1");
+            Assert.Null(d12["Foo$2"], "Derived12 in group 5 should not have Foo$2");
             Assert.AreEqual(1, d12["Foo"].As<Func<int>>()(), "Derived12 in group 5 [Foo] should return 1");
             Assert.AreEqual(1, d12.Foo(), "Derived12 in group 5 Foo should return 1");
             Assert.AreEqual(1, d12.Foo(""), "Derived12 in group 5 Foo() should return 1");
@@ -127,6 +130,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             var d21 = new Derived21();
             Assert.Null(d21["Foo$1"], "Derived21 in group 7 should not have Foo$1");
+            Assert.Null(d21["Foo$2"], "Derived21 in group 7 should not have Foo$2");
             Assert.AreEqual(21, d21["Foo"].As<Func<int>>()(), "Derived21 in group 7 [Foo] should return 21");
             Assert.AreEqual(21, d21.Foo(), "Derived21 in group 7 Foo should return 21");
             Assert.AreEqual(21, d21.Foo(""), "Derived21 in group 7 Foo() should return 21");
@@ -134,13 +138,15 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             var d22 = new Derived22();
             Assert.NotNull(d22["Foo$1"], "Derived22 in group 9 should have Foo$1");
+            Assert.Null(d22["Foo$2"], "Derived22 in group 9 should not have Foo$2");
             Assert.AreEqual(22, d22["Foo$1"].As<Func<int>>()(), "Derived22 in group 9 [Foo$1] should return 22");
             Assert.AreEqual(22, d22.Foo(), "Derived22 in group 9 Foo should return 22");
-            Assert.AreEqual(2, d22.Foo(""), "Derived22 in group 9 Foo() should return 22");
+            Assert.AreEqual(2, d22.Foo(""), "Derived22 in group 9 Foo() should return 2");
             CheckBridge2874Base(d22, "10", 2, false);
 
             var d23 = new Derived23();
             Assert.Null(d23["Foo$1"], "Derived23 in group 11 should not have Foo$1");
+            Assert.Null(d23["Foo$2"], "Derived23 in group 11 should not have Foo$2");
             Assert.AreEqual(23, d23["Foo"].As<Func<int>>()(), "Derived23 in group 11 [Foo] should return 23");
             Assert.AreEqual(23, d23.Foo(), "Derived23 in group 11 Foo should return 23");
             Assert.AreEqual(23, d23.Foo(""), "Derived23 in group 11 Foo() should return 23");
@@ -148,6 +154,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             var d24 = new Derived24();
             Assert.NotNull(d24["Foo$1"], "Derived24 in group 13 should not have Foo$1");
+            Assert.Null(d24["Foo$2"], "Derived24 in group 13 should not have Foo$2");
             Assert.AreEqual(24, d24["Foo$1"].As<Func<int>>()(), "Derived24 in group 13 [Foo] should return 24");
             Assert.AreEqual(2, d24.Foo(), "Derived24 in group 13 Foo should return 2");
             Assert.AreEqual(24, d24.Foo(""), "Derived24 in group 13 Foo() should return 24");
@@ -155,6 +162,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             var d25 = new Derived25();
             Assert.Null(d25["Foo$1"], "Derived25 in group 15 should not have Foo$1");
+            Assert.Null(d25["Foo$2"], "Derived25 in group 15 should not have Foo$2");
             Assert.AreEqual(2, d25["Foo"].As<Func<int>>()(), "Derived25 in group 15 [Foo] should return 2");
             Assert.AreEqual(2, d25.Foo(), "Derived25 in group 15 Foo should return 2");
             Assert.AreEqual(2, d25.Foo(""), "Derived25 in group 15 Foo() should return 2");
@@ -167,7 +175,13 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             {
                 Assert.Null(d["Foo$1"], "Bridge2874Base in group " + n + " should not have Foo$1");
             }
-            
+            else
+            {
+                Assert.NotNull(d["Foo$1"], "Bridge2874Base in group " + n + " should have Foo$1");
+            }
+
+            Assert.Null(d["Foo$2"], "Bridge2874Base in group " + n + " should not have Foo$2");
+
             Assert.AreEqual(expected, d["Foo"].As<Func<int>>()(), "Bridge2874Base in group " + n + " [Foo] should return " + expected);
             Assert.AreEqual(expected, d.Foo(), "Bridge2874Base in group " + n + " Foo should return " + expected);
             Assert.AreEqual(expected, d.Foo(""), "Bridge2874Base in group " + n + " Foo() should return " + expected);
