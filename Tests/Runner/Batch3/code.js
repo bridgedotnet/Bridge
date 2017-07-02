@@ -23434,12 +23434,12 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 Test2DArrayDefValue: function () {
-                    var $t, $t1, $t2;
+                    var $t, $t1, $t2, $t3, $t4, $t5;
                     $t = Bridge.getEnumerator(System.Array.create(0, null, System.Int32, 1, 1));
                     try {
                         while ($t.moveNext()) {
                             var value = $t.Current;
-                            Bridge.Test.NUnit.Assert.AreEqual(0, value);
+                            Bridge.Test.NUnit.Assert.AreEqual(0, value, "Default int[,]");
                         }
                     } finally {
                         if (Bridge.is($t, System.IDisposable)) {
@@ -23450,7 +23450,7 @@ Bridge.$N1391Result =                     r;
                     try {
                         while ($t1.moveNext()) {
                             var value1 = $t1.Current;
-                            Bridge.Test.NUnit.Assert.AreEqual(false, value1);
+                            Bridge.Test.NUnit.Assert.AreEqual(false, value1, "Default bool[,]");
                         }
                     } finally {
                         if (Bridge.is($t1, System.IDisposable)) {
@@ -23462,16 +23462,58 @@ Bridge.$N1391Result =                     r;
                         while ($t2.moveNext()) {
                             var value2 = $t2.Current;
                             var o = value2;
-                            Bridge.Test.NUnit.Assert.True(Bridge.is(o, System.Int64));
+                            Bridge.Test.NUnit.Assert.True(Bridge.is(o, System.Int64), "Default long[,] is long");
+                            Bridge.Test.NUnit.Assert.AreEqual(System.Int64(0), value2, "Default long[,] is 0L");
                         }
                     } finally {
                         if (Bridge.is($t2, System.IDisposable)) {
                             $t2.System$IDisposable$dispose();
                         }
+                    }
+                    $t3 = Bridge.getEnumerator(System.Array.create(System.Decimal(0.0), null, System.Decimal, 1, 1));
+                    try {
+                        while ($t3.moveNext()) {
+                            var value3 = $t3.Current;
+                            var o1 = value3;
+                            Bridge.Test.NUnit.Assert.True(Bridge.is(o1, System.Decimal), "Default decimal[,] is decimal");
+                            Bridge.Test.NUnit.Assert.AreEqual(System.Decimal(0.0), value3, "Default decimal[,] is 0m");
+                        }
+                    } finally {
+                        if (Bridge.is($t3, System.IDisposable)) {
+                            $t3.System$IDisposable$dispose();
+                        }
+                    }
+                    $t4 = Bridge.getEnumerator(System.Array.create(System.DateTime.getDefaultValue(), null, System.DateTime, 1, 1));
+                    try {
+                        while ($t4.moveNext()) {
+                            var value4 = $t4.Current;
+                            var o2 = Bridge.box(value4, System.DateTime, System.DateTime.format);
+                            Bridge.Test.NUnit.Assert.True(Bridge.is(o2, System.DateTime), "Default DateTime[,] is DateTime");
+                            Bridge.Test.NUnit.Assert.AreEqual(Bridge.getDefaultValue(System.DateTime), value4, "Default DateTime[,] is default(DateTime)");
+                        }
+                    } finally {
+                        if (Bridge.is($t4, System.IDisposable)) {
+                            $t4.System$IDisposable$dispose();
+                        }
+                    }
+                    $t5 = Bridge.getEnumerator(System.Array.create(null, null, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2886.Class1, 1, 1));
+                    try {
+                        while ($t5.moveNext()) {
+                            var value5 = $t5.Current;
+                            var o3 = value5;
+                            Bridge.Test.NUnit.Assert.True(Bridge.is(o3, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2886.Class1), "Default Class1[,] is Class1");
+                            Bridge.Test.NUnit.Assert.AreEqual(null, value5, "Default Class1[,] is default(Class1)");
+                        }
+                    } finally {
+                        if (Bridge.is($t5, System.IDisposable)) {
+                            $t5.System$IDisposable$dispose();
+                        }
                     }}
             }
         }
     });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2886.Class1");
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge294", {
         fields: {
