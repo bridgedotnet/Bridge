@@ -4,3 +4,4 @@ Resources (name, path, length):
     testResources4.js resources 1479
     issue2429_NoBom.css resources 501
     issue2429_Bom.css resources 507
+    issue2890.js resources 239
