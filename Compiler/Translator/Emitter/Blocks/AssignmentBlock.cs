@@ -597,7 +597,9 @@ namespace Bridge.Translator
 
             if (needTempVar)
             {
+                int pos = this.Emitter.Output.Length;
                 this.Write(variable);
+                Helpers.CheckValueTypeClone(rr, assignmentExpression.Right, this, pos);
             }
             else
             {
