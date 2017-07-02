@@ -100,8 +100,16 @@ namespace Bridge.Translator.Utils
 
             if (config.Logging != null)
             {
-                config.Logging.FileName = helper.ApplyPathTokens(tokens, config.Logging.FileName);
-                config.Logging.Folder = helper.ApplyPathTokens(tokens, config.Logging.Folder);
+                var logging = config.Logging;
+
+                logging.FileName = helper.ApplyPathTokens(tokens, logging.FileName);
+                logging.Folder = helper.ApplyPathTokens(tokens, logging.Folder);
+
+                if (logging.Report != null)
+                {
+                    logging.Report.FileName = helper.ApplyPathTokens(tokens, logging.Report.FileName);
+                    logging.Report.Folder = helper.ApplyPathTokens(tokens, logging.Report.Folder);
+                }
             }
 
             if (config.Reflection != null)
@@ -149,6 +157,11 @@ namespace Bridge.Translator.Utils
             if (assemblyInfo.Logging != null)
             {
                 assemblyInfo.Logging.Folder = helper.ConvertPath(assemblyInfo.Logging.Folder);
+
+                if (assemblyInfo.Logging.Report != null)
+                {
+                    assemblyInfo.Logging.Report.Folder = helper.ConvertPath(assemblyInfo.Logging.Report.Folder);
+                }
             }
 
             if (assemblyInfo.Html != null)

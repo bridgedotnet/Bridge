@@ -12,7 +12,7 @@ namespace Bridge.Translator
         {
             this.Dependencies = new List<IPluginDependency>();
             this.DefineConstants = new List<string>();
-            this.Logging = new LoggingOptions();
+            this.Logging = new LoggingOptions() { Report = new ReportConfig() };
             this.Reflection = new ReflectionConfig();
             this.ReflectionInternal = new ReflectionConfig();
             this.Assembly = new AssemblyConfig();
