@@ -15,6 +15,7 @@
 *.js eol=lf
 *.jsb text
 *.json text
+*.log eol=lf
 *.md text
 *.php text
 *.ps1 text
