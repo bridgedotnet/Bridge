@@ -11,6 +11,14 @@ var Person2735 = (function () {
     }
     return Person2735;
 }());
+var Bridge2874Base = (function () {
+    function Bridge2874Base() {
+    }
+    Bridge2874Base.prototype.Foo = function (msg) {
+        return 1;
+    };
+    return Bridge2874Base;
+}());
 
 /**
  * Bridge Test library - test github issues up to #1999
@@ -23314,6 +23322,198 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874", {
+        statics: {
+            methods: {
+                TestExternalOverriding: function () {
+                    var d1 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived1();
+                    Bridge.Test.NUnit.Assert.Null(Bridge.unbox(d1.Foo$1), "Derived1 in group 1 should not have Foo$1");
+                    Bridge.Test.NUnit.Assert.Null(Bridge.unbox(d1.Foo$2), "Derived1 in group 1 should not have Foo$2");
+                    Bridge.Test.NUnit.Assert.AreEqual(2, Bridge.unbox(d1.Foo)(), "Derived1 in group 1 [Foo] should return 2");
+                    Bridge.Test.NUnit.Assert.AreEqual(2, d1.Foo(), "Derived1 in group 1 Foo should return 2");
+                    Bridge.Test.NUnit.Assert.AreEqual(2, d1.Foo(""), "Derived1 in group 1 Foo() should return 2");
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.CheckBridge2874Base(d1, "2", 2);
+
+                    var d11 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived11();
+                    Bridge.Test.NUnit.Assert.Null(Bridge.unbox(d11.Foo$1), "Derived11 in group 3 should not have Foo$1");
+                    Bridge.Test.NUnit.Assert.Null(Bridge.unbox(d11.Foo$2), "Derived11 in group 3 should not have Foo$2");
+                    Bridge.Test.NUnit.Assert.AreEqual(11, Bridge.unbox(d11.Foo)(), "Derived11 in group 3 [Foo] should return 11");
+                    Bridge.Test.NUnit.Assert.AreEqual(11, d11.Foo(), "Derived11 in group 3 Foo should return 11");
+                    Bridge.Test.NUnit.Assert.AreEqual(11, d11.Foo(""), "Derived11 in group 3 Foo() should return 11");
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.CheckBridge2874Base(d11, "4", 11);
+
+                    var d12 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived12();
+                    Bridge.Test.NUnit.Assert.Null(Bridge.unbox(d12.Foo$1), "Derived12 in group 5 should not have Foo$1");
+                    Bridge.Test.NUnit.Assert.Null(Bridge.unbox(d12.Foo$2), "Derived12 in group 5 should not have Foo$2");
+                    Bridge.Test.NUnit.Assert.AreEqual(1, Bridge.unbox(d12.Foo)(), "Derived12 in group 5 [Foo] should return 1");
+                    Bridge.Test.NUnit.Assert.AreEqual(1, d12.Foo(), "Derived12 in group 5 Foo should return 1");
+                    Bridge.Test.NUnit.Assert.AreEqual(1, d12.Foo(""), "Derived12 in group 5 Foo() should return 1");
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.CheckBridge2874Base(d12, "6", 1);
+
+                    var d21 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived21();
+                    Bridge.Test.NUnit.Assert.Null(Bridge.unbox(d21.Foo$1), "Derived21 in group 7 should not have Foo$1");
+                    Bridge.Test.NUnit.Assert.Null(Bridge.unbox(d21.Foo$2), "Derived21 in group 7 should not have Foo$2");
+                    Bridge.Test.NUnit.Assert.AreEqual(21, Bridge.unbox(d21.Foo)(), "Derived21 in group 7 [Foo] should return 21");
+                    Bridge.Test.NUnit.Assert.AreEqual(21, d21.Foo(), "Derived21 in group 7 Foo should return 21");
+                    Bridge.Test.NUnit.Assert.AreEqual(21, d21.Foo(""), "Derived21 in group 7 Foo() should return 21");
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.CheckBridge2874Base(d21, "8", 21);
+
+                    var d22 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived22();
+                    Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(d22.Foo$1), "Derived22 in group 9 should have Foo$1");
+                    Bridge.Test.NUnit.Assert.Null(Bridge.unbox(d22.Foo$2), "Derived22 in group 9 should not have Foo$2");
+                    Bridge.Test.NUnit.Assert.AreEqual(22, Bridge.unbox(d22.Foo$1)(), "Derived22 in group 9 [Foo$1] should return 22");
+                    Bridge.Test.NUnit.Assert.AreEqual(22, d22.Foo$1(), "Derived22 in group 9 Foo should return 22");
+                    Bridge.Test.NUnit.Assert.AreEqual(2, d22.Foo(""), "Derived22 in group 9 Foo() should return 2");
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.CheckBridge2874Base(d22, "10", 2, false);
+
+                    var d23 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived23();
+                    Bridge.Test.NUnit.Assert.Null(Bridge.unbox(d23.Foo$1), "Derived23 in group 11 should not have Foo$1");
+                    Bridge.Test.NUnit.Assert.Null(Bridge.unbox(d23.Foo$2), "Derived23 in group 11 should not have Foo$2");
+                    Bridge.Test.NUnit.Assert.AreEqual(23, Bridge.unbox(d23.Foo)(), "Derived23 in group 11 [Foo] should return 23");
+                    Bridge.Test.NUnit.Assert.AreEqual(23, d23.Foo(), "Derived23 in group 11 Foo should return 23");
+                    Bridge.Test.NUnit.Assert.AreEqual(23, d23.Foo(""), "Derived23 in group 11 Foo() should return 23");
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.CheckBridge2874Base(d23, "12", 23);
+
+                    var d24 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived24();
+                    Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(d24.Foo$1), "Derived24 in group 13 should not have Foo$1");
+                    Bridge.Test.NUnit.Assert.Null(Bridge.unbox(d24.Foo$2), "Derived24 in group 13 should not have Foo$2");
+                    Bridge.Test.NUnit.Assert.AreEqual(24, Bridge.unbox(d24.Foo$1)(), "Derived24 in group 13 [Foo] should return 24");
+                    Bridge.Test.NUnit.Assert.AreEqual(2, d24.Foo(), "Derived24 in group 13 Foo should return 2");
+                    Bridge.Test.NUnit.Assert.AreEqual(24, d24.Foo$1(""), "Derived24 in group 13 Foo() should return 24");
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.CheckBridge2874Base(d24, "14", 2, false);
+
+                    var d25 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived25();
+                    Bridge.Test.NUnit.Assert.Null(Bridge.unbox(d25.Foo$1), "Derived25 in group 15 should not have Foo$1");
+                    Bridge.Test.NUnit.Assert.Null(Bridge.unbox(d25.Foo$2), "Derived25 in group 15 should not have Foo$2");
+                    Bridge.Test.NUnit.Assert.AreEqual(2, Bridge.unbox(d25.Foo)(), "Derived25 in group 15 [Foo] should return 2");
+                    Bridge.Test.NUnit.Assert.AreEqual(2, d25.Foo(), "Derived25 in group 15 Foo should return 2");
+                    Bridge.Test.NUnit.Assert.AreEqual(2, d25.Foo(""), "Derived25 in group 15 Foo() should return 2");
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.CheckBridge2874Base(d25, "16", 2);
+                },
+                CheckBridge2874Base: function (d, n, expected, checkIndex) {
+                    if (checkIndex === void 0) { checkIndex = true; }
+                    if (checkIndex) {
+                        Bridge.Test.NUnit.Assert.Null(Bridge.unbox(d.Foo$1), System.String.concat("Bridge2874Base in group ", n, " should not have Foo$1"));
+                    } else {
+                        Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(d.Foo$1), System.String.concat("Bridge2874Base in group ", n, " should have Foo$1"));
+                    }
+
+                    Bridge.Test.NUnit.Assert.Null(Bridge.unbox(d.Foo$2), System.String.concat("Bridge2874Base in group ", n, " should not have Foo$2"));
+
+                    Bridge.Test.NUnit.Assert.AreEqual(expected, Bridge.unbox(d.Foo)(), System.String.concat("Bridge2874Base in group ", n, " [Foo] should return ", expected));
+                    Bridge.Test.NUnit.Assert.AreEqual(expected, d.Foo(), System.String.concat("Bridge2874Base in group ", n, " Foo should return ", expected));
+                    Bridge.Test.NUnit.Assert.AreEqual(expected, d.Foo(""), System.String.concat("Bridge2874Base in group ", n, " Foo() should return ", expected));
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived1", {
+        inherits: [Bridge2874Base],
+        methods: {
+            Foo: function (msg) {
+                return 2;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived11", {
+        inherits: [Bridge2874Base],
+        methods: {
+            Foo: function () {
+                return 11;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived12", {
+        inherits: [Bridge2874Base]
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2886", {
+        statics: {
+            methods: {
+                Test2DArrayDefValue: function () {
+                    var $t, $t1, $t2, $t3, $t4, $t5;
+                    $t = Bridge.getEnumerator(System.Array.create(0, null, System.Int32, 1, 1));
+                    try {
+                        while ($t.moveNext()) {
+                            var value = $t.Current;
+                            Bridge.Test.NUnit.Assert.AreEqual(0, value, "Default int[,]");
+                        }
+                    } finally {
+                        if (Bridge.is($t, System.IDisposable)) {
+                            $t.System$IDisposable$dispose();
+                        }
+                    }
+                    $t1 = Bridge.getEnumerator(System.Array.create(false, null, System.Boolean, 1, 1));
+                    try {
+                        while ($t1.moveNext()) {
+                            var value1 = $t1.Current;
+                            Bridge.Test.NUnit.Assert.AreEqual(false, value1, "Default bool[,]");
+                        }
+                    } finally {
+                        if (Bridge.is($t1, System.IDisposable)) {
+                            $t1.System$IDisposable$dispose();
+                        }
+                    }
+                    $t2 = Bridge.getEnumerator(System.Array.create(System.Int64(0), null, System.Int64, 1, 1));
+                    try {
+                        while ($t2.moveNext()) {
+                            var value2 = $t2.Current;
+                            var o = value2;
+                            Bridge.Test.NUnit.Assert.True(Bridge.is(o, System.Int64), "Default long[,] is long");
+                            Bridge.Test.NUnit.Assert.AreEqual(System.Int64(0), value2, "Default long[,] is 0L");
+                        }
+                    } finally {
+                        if (Bridge.is($t2, System.IDisposable)) {
+                            $t2.System$IDisposable$dispose();
+                        }
+                    }
+                    $t3 = Bridge.getEnumerator(System.Array.create(System.Decimal(0.0), null, System.Decimal, 1, 1));
+                    try {
+                        while ($t3.moveNext()) {
+                            var value3 = $t3.Current;
+                            var o1 = value3;
+                            Bridge.Test.NUnit.Assert.True(Bridge.is(o1, System.Decimal), "Default decimal[,] is decimal");
+                            Bridge.Test.NUnit.Assert.AreEqual(System.Decimal(0.0), value3, "Default decimal[,] is 0m");
+                        }
+                    } finally {
+                        if (Bridge.is($t3, System.IDisposable)) {
+                            $t3.System$IDisposable$dispose();
+                        }
+                    }
+                    $t4 = Bridge.getEnumerator(System.Array.create(System.DateTime.getDefaultValue(), null, System.DateTime, 1, 1));
+                    try {
+                        while ($t4.moveNext()) {
+                            var value4 = $t4.Current;
+                            var o2 = Bridge.box(value4, System.DateTime, System.DateTime.format);
+                            Bridge.Test.NUnit.Assert.True(Bridge.is(o2, System.DateTime), "Default DateTime[,] is DateTime");
+                            Bridge.Test.NUnit.Assert.AreEqual(Bridge.getDefaultValue(System.DateTime), value4, "Default DateTime[,] is default(DateTime)");
+                        }
+                    } finally {
+                        if (Bridge.is($t4, System.IDisposable)) {
+                            $t4.System$IDisposable$dispose();
+                        }
+                    }
+                    $t5 = Bridge.getEnumerator(System.Array.create(null, null, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2886.Class1, 1, 1));
+                    try {
+                        while ($t5.moveNext()) {
+                            var value5 = $t5.Current;
+                            var o3 = value5;
+                            Bridge.Test.NUnit.Assert.AreEqual(null, value5, "Default Class1[,] is default(Class1)");
+                        }
+                    } finally {
+                        if (Bridge.is($t5, System.IDisposable)) {
+                            $t5.System$IDisposable$dispose();
+                        }
+                    }}
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2886.Class1");
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2903", {
         statics: {
             methods: {
@@ -33230,6 +33430,46 @@ Bridge.$N1391Result =                     r;
                 return Bridge.getDefaultValue(T);
             }
         }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived21", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived1],
+        methods: {
+            Foo: function () {
+                return 21;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived22", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived1],
+        methods: {
+            Foo$1: function () {
+                return 22;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived23", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived1],
+        methods: {
+            Foo: function (s) {
+                return 23;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived24", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived1],
+        methods: {
+            Foo$1: function (s) {
+                return 24;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived25", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived1]
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge304", {
