@@ -23501,7 +23501,6 @@ Bridge.$N1391Result =                     r;
                         while ($t5.moveNext()) {
                             var value5 = $t5.Current;
                             var o3 = value5;
-                            Bridge.Test.NUnit.Assert.True(Bridge.is(o3, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2886.Class1), "Default Class1[,] is Class1");
                             Bridge.Test.NUnit.Assert.AreEqual(null, value5, "Default Class1[,] is default(Class1)");
                         }
                     } finally {

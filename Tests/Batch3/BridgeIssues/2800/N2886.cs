@@ -52,7 +52,6 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             foreach (var value in new Class1[1, 1])
             {
                 object o = value;
-                Assert.True(o is Class1, "Default Class1[,] is Class1");
                 Assert.AreEqual(default(Class1), value, "Default Class1[,] is default(Class1)");
             }
         }
