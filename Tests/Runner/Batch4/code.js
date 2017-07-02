@@ -5786,11 +5786,11 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 var c1 = new Bridge.ClientTest.Batch4.DelegateTests.C(), c2 = new Bridge.ClientTest.Batch4.DelegateTests.C();
                 var a = Bridge.fn.cacheBind(c1, c1.F1);
                 a = Bridge.fn.combine(a, Bridge.fn.cacheBind(c1, c1.F2));
-                Bridge.Test.NUnit.Assert.AreEqual(2, a.$invocationList.length);
+                Bridge.Test.NUnit.Assert.AreEqual(2, Bridge.fn.getInvocationList(a).length);
                 a = Bridge.fn.combine(a, Bridge.fn.cacheBind(c2, c2.F1));
-                Bridge.Test.NUnit.Assert.AreEqual(3, a.$invocationList.length);
+                Bridge.Test.NUnit.Assert.AreEqual(3, Bridge.fn.getInvocationList(a).length);
                 a = Bridge.fn.combine(a, Bridge.fn.cacheBind(c1, c1.F1));
-                Bridge.Test.NUnit.Assert.AreEqual(4, a.$invocationList.length);
+                Bridge.Test.NUnit.Assert.AreEqual(4, Bridge.fn.getInvocationList(a).length);
             },
             CombineDoesNotAffectOriginal_SPI_1563: function () {
                 // #1563
@@ -5800,13 +5800,13 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 // Test restructure to keep assertion count correct (prevent uncaught test exception)
                 var l = 0;
                 Bridge.ClientTest.Batch4.TestHelper.Safe(function () {
-                    l = a.$invocationList.length;
+                    l = Bridge.fn.getInvocationList(a).length;
                 });
                 Bridge.Test.NUnit.Assert.AreEqual(1, l);
 
                 var l2 = 0;
                 Bridge.ClientTest.Batch4.TestHelper.Safe(function () {
-                    l2 = a2.$invocationList.length;
+                    l2 = Bridge.fn.getInvocationList(a2).length;
                 });
                 Bridge.Test.NUnit.Assert.AreEqual(2, l2);
             },
@@ -5854,19 +5854,19 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 // Test restructure to keep assertion count correct (prevent uncaught test exception)
                 var l = 0;
                 Bridge.ClientTest.Batch4.TestHelper.Safe(function () {
-                    l = a.$invocationList.length;
+                    l = Bridge.fn.getInvocationList(a).length;
                 });
                 Bridge.Test.NUnit.Assert.AreEqual(1, l);
 
                 var l2 = 0;
                 Bridge.ClientTest.Batch4.TestHelper.Safe(function () {
-                    l2 = a2.$invocationList.length;
+                    l2 = Bridge.fn.getInvocationList(a2).length;
                 });
                 Bridge.Test.NUnit.Assert.AreEqual(2, l2);
 
                 var l3 = 0;
                 Bridge.ClientTest.Batch4.TestHelper.Safe(function () {
-                    l3 = a3.$invocationList.length;
+                    l3 = Bridge.fn.getInvocationList(a3).length;
                 });
                 Bridge.Test.NUnit.Assert.AreEqual(1, l3);
             },
@@ -5994,7 +5994,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             GetInvocationListWorksForImportedFunction_SPI_1563: function () {
                 var f = new Function("");
                 // #1563
-                var l = f.$invocationList;
+                var l = Bridge.fn.getInvocationList(f);
                 // Test restructure to keep assertion count correct (prevent uncaught test exception)
                 var c = 0;
                 Bridge.ClientTest.Batch4.TestHelper.Safe(function () {
@@ -6007,7 +6007,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 var c1 = new Bridge.ClientTest.Batch4.DelegateTests.C(), c2 = new Bridge.ClientTest.Batch4.DelegateTests.C();
                 var f11 = Bridge.fn.cacheBind(c1, c1.F1), f11_2 = Bridge.fn.cacheBind(c1, c1.F1), f12 = Bridge.fn.cacheBind(c1, c1.F2), f21 = Bridge.fn.cacheBind(c2, c2.F1);
                 var combined = Bridge.fn.combine(Bridge.fn.combine(Bridge.fn.combine(f11, f21), f12), f11_2);
-                var l = combined.$invocationList;
+                var l = Bridge.fn.getInvocationList(combined);
                 Bridge.Test.NUnit.Assert.True(l.length === 4);
                 Bridge.Test.NUnit.Assert.True(Bridge.staticEquals(l[System.Array.index(0, l)], f11));
                 Bridge.Test.NUnit.Assert.True(Bridge.staticEquals(l[System.Array.index(1, l)], f21));

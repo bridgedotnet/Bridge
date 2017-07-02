@@ -65,7 +65,7 @@ namespace System
         [Template("!Bridge.staticEquals({a}, {b})")]
         public static extern bool operator !=(MulticastDelegate a, MulticastDelegate b);
 
-        [Template("{this}.$invocationList")]
+        [Template("Bridge.fn.getInvocationList({this})")]
         public extern Delegate[] GetInvocationList();
     }
 }

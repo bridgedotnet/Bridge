@@ -23314,6 +23314,87 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2903", {
+        statics: {
+            methods: {
+                TestGetInvocationList: function () {
+                    var i = 0;
+                    var test = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2903.Test();
+                    test.addRegister(function (sender, args) {
+                        i = (i + 1) | 0;
+                    });
+                    test.addRegister(function (sender, args) {
+                        i = (i + 5) | 0;
+                    });
+
+                    test.OnRegister(System.Object.empty);
+                    Bridge.Test.NUnit.Assert.AreEqual(6, i);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2903.Test", {
+        fields: {
+            register: null
+        },
+        methods: {
+            addRegister: function (value) {
+                if (Bridge.staticEquals(this.register, null) || System.Array.contains(Bridge.fn.getInvocationList(this.register), value, Function) === false) {
+                    this.register = Bridge.fn.combine(this.register, value);
+                }
+            },
+            removeRegister: function (value) {
+                this.register = Bridge.fn.remove(this.register, value);
+            },
+            OnRegister: function (args) {
+                !Bridge.staticEquals(this.register, null) ? this.register(this, args) : null;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2904", {
+        statics: {
+            fields: {
+                temp: 0
+            },
+            methods: {
+                Test_RegisterCommon: function (sender, e) {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2904.temp = (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2904.temp + 1) | 0;
+                },
+                TestGetInvocationList: function () {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2904.temp = 0;
+
+                    var test = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2904.Test();
+                    test.addRegister(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2904.Test_RegisterCommon);
+                    test.addRegister(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2904.Test_RegisterCommon);
+
+                    test.OnRegister(System.Object.empty);
+                    Bridge.Test.NUnit.Assert.AreEqual(1, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2904.temp);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2904.Test", {
+        fields: {
+            register: null
+        },
+        methods: {
+            addRegister: function (value) {
+                if (Bridge.staticEquals(this.register, null) || System.Linq.Enumerable.from(Bridge.fn.getInvocationList(this.register)).any() === false) {
+                    this.register = Bridge.fn.combine(this.register, value);
+                }
+            },
+            removeRegister: function (value) {
+                this.register = Bridge.fn.remove(this.register, value);
+            },
+            OnRegister: function (args) {
+                !Bridge.staticEquals(this.register, null) ? this.register(this, args) : null;
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge294", {
         fields: {
             Name: null

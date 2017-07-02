@@ -1699,7 +1699,8 @@
 
             combine: function (fn1, fn2) {
                 if (!fn1 || !fn2) {
-                    return fn1 || fn2;
+                    var fn = fn1 || fn2;
+                    return fn ? Bridge.fn.$build([fn]) : fn;
                 }
 
                 var list1 = fn1.$invocationList ? fn1.$invocationList : [fn1],
@@ -1708,7 +1709,16 @@
                 return Bridge.fn.$build(list1.concat(list2));
             },
 
-            getInvocationList: function () {
+            getInvocationList: function (fn) {
+                if (fn == null) {
+                    throw new System.ArgumentNullException();
+                }
+
+                if(!fn.$invocationList) {
+                    fn.$invocationList = [fn];
+                }
+
+                return fn.$invocationList;
             },
 
             remove: function (fn1, fn2) {
