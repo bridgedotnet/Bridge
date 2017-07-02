@@ -23248,6 +23248,80 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2871", {
+        statics: {
+            methods: {
+                TestCloneOnAssignment: function () {
+                    var $t, $t1;
+                    var vector3s = System.Array.init(3, function (){
+                        return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2871.Vector3();
+                    }, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2871.Vector3);
+                    var vec = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2871.Vector3();
+                    vector3s[System.Array.index(0, vector3s)] = (vector3s[System.Array.index(1, vector3s)] = vec.$clone(), vec.$clone());
+                    vector3s[System.Array.index(0, vector3s)].x = 1;
+                    Bridge.Test.NUnit.Assert.AreNotEqual(vector3s[System.Array.index(0, vector3s)].x, vector3s[System.Array.index(1, vector3s)].x);
+
+                    var transform = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2871.Transform();
+                    vector3s[System.Array.index(0, vector3s)] = ($t = ($t1 = transform.localPosition.$clone(), vector3s[System.Array.index(2, vector3s)] = $t1.$clone(), $t1), vector3s[System.Array.index(1, vector3s)] = $t.$clone(), $t);
+                    vector3s[System.Array.index(0, vector3s)].x = 1;
+                    Bridge.Test.NUnit.Assert.AreNotEqual(vector3s[System.Array.index(0, vector3s)].x, vector3s[System.Array.index(1, vector3s)].x);
+                    Bridge.Test.NUnit.Assert.AreNotEqual(vector3s[System.Array.index(0, vector3s)].x, vector3s[System.Array.index(2, vector3s)].x);
+
+                    vector3s[System.Array.index(1, vector3s)].x = 2;
+                    Bridge.Test.NUnit.Assert.AreNotEqual(vector3s[System.Array.index(1, vector3s)].x, vector3s[System.Array.index(2, vector3s)].x);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2871.Transform", {
+        props: {
+            localPosition: {
+                get: function () {
+                    return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2871.Vector3();
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2871.Vector3", {
+        $kind: "struct",
+        statics: {
+            methods: {
+                getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2871.Vector3(); }
+            }
+        },
+        fields: {
+            x: 0,
+            y: 0,
+            z: 0
+        },
+        ctors: {
+            ctor: function () {
+                this.$initialize();
+            }
+        },
+        methods: {
+            getHashCode: function () {
+                var h = Bridge.addHash([1956042693, this.x, this.y, this.z]);
+                return h;
+            },
+            equals: function (o) {
+                if (!Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2871.Vector3)) {
+                    return false;
+                }
+                return Bridge.equals(this.x, o.x) && Bridge.equals(this.y, o.y) && Bridge.equals(this.z, o.z);
+            },
+            $clone: function (to) {
+                var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2871.Vector3();
+                s.x = this.x;
+                s.y = this.y;
+                s.z = this.z;
+                return s;
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874", {
         statics: {
             methods: {
