@@ -38,6 +38,11 @@ namespace Bridge.Contract
             get; private set;
         }
 
+        public TranslatorOutputItem Report
+        {
+            get; set;
+        }
+
         public IEnumerable<TranslatorOutputItem> GetOutputs()
         {
             if (Combined != null)
@@ -112,6 +117,7 @@ namespace Bridge.Contract
             References = new List<TranslatorOutputItem>();
             Locales = new List<TranslatorOutputItem>();
             Resources = new List<TranslatorOutputItem>();
+            Report = new TranslatorOutputItem();
         }
     }
 
@@ -417,6 +423,7 @@ namespace Bridge.Contract
         PluginOutput = 16,
         Minified = 32,
         Combined = 64,
-        Metadata = 128
+        Metadata = 128,
+        Report = 256
     }
 }

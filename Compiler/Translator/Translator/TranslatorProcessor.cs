@@ -115,6 +115,8 @@ namespace Bridge.Translator
 
             this.GenerateHtml(outputPath);
 
+            translator.Report(outputPath);
+
             logger.Info("Done post processing");
 
             return outputPath;
@@ -269,15 +271,7 @@ namespace Bridge.Translator
 
                 if (fileLoggerWriter != null)
                 {
-                    var logFileFolder = assemblyConfig.Logging.Folder;
-                    if (string.IsNullOrWhiteSpace(logFileFolder))
-                    {
-                        logFileFolder = this.GetOutputFolder(false, false);
-                    }
-                    else if (!Path.IsPathRooted(logFileFolder))
-                    {
-                        logFileFolder = Path.Combine(this.GetOutputFolder(true, false), logFileFolder);
-                    }
+                    string logFileFolder = GetLoggerFolder(assemblyConfig);
 
                     fileLoggerWriter.SetParameters(logFileFolder, assemblyConfig.Logging.FileName, assemblyConfig.Logging.MaxSize);
                 }
@@ -294,6 +288,21 @@ namespace Bridge.Translator
             }
 
             return false;
+        }
+
+        private string GetLoggerFolder(IAssemblyInfo assemblyConfig)
+        {
+            var logFileFolder = assemblyConfig.Logging.Folder;
+            if (string.IsNullOrWhiteSpace(logFileFolder))
+            {
+                logFileFolder = this.GetOutputFolder(false, false);
+            }
+            else if (!Path.IsPathRooted(logFileFolder))
+            {
+                logFileFolder = Path.Combine(this.GetOutputFolder(true, false), logFileFolder);
+            }
+
+            return logFileFolder;
         }
 
         private Translator SetTranslatorProperties()
