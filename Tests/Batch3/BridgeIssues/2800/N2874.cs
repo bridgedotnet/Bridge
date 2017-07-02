@@ -133,11 +133,11 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             CheckBridge2874Base(d21, "8", 21);
 
             var d22 = new Derived22();
-            Assert.Null(d22["Foo$1"], "Derived22 in group 9 should not have Foo$1");
-            Assert.AreEqual(2, d22["Foo"].As<Func<int>>()(), "Derived22 in group 9 [Foo] should return 22");
+            Assert.NotNull(d22["Foo$1"], "Derived22 in group 9 should have Foo$1");
+            Assert.AreEqual(22, d22["Foo$1"].As<Func<int>>()(), "Derived22 in group 9 [Foo$1] should return 22");
             Assert.AreEqual(22, d22.Foo(), "Derived22 in group 9 Foo should return 22");
             Assert.AreEqual(2, d22.Foo(""), "Derived22 in group 9 Foo() should return 22");
-            CheckBridge2874Base(d22, "10", 2);
+            CheckBridge2874Base(d22, "10", 2, false);
 
             var d23 = new Derived23();
             Assert.Null(d23["Foo$1"], "Derived23 in group 11 should not have Foo$1");
@@ -147,11 +147,11 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             CheckBridge2874Base(d23, "12", 23);
 
             var d24 = new Derived24();
-            Assert.Null(d24["Foo$1"], "Derived24 in group 13 should not have Foo$1");
-            Assert.AreEqual(2, d24["Foo"].As<Func<int>>()(), "Derived24 in group 13 [Foo] should return 2");
+            Assert.NotNull(d24["Foo$1"], "Derived24 in group 13 should not have Foo$1");
+            Assert.AreEqual(24, d24["Foo$1"].As<Func<int>>()(), "Derived24 in group 13 [Foo] should return 24");
             Assert.AreEqual(2, d24.Foo(), "Derived24 in group 13 Foo should return 2");
-            Assert.AreEqual(24, d24.Foo(""), "Derived24 in group 13 Foo() should return 2");
-            CheckBridge2874Base(d24, "14", 2);
+            Assert.AreEqual(24, d24.Foo(""), "Derived24 in group 13 Foo() should return 24");
+            CheckBridge2874Base(d24, "14", 2, false);
 
             var d25 = new Derived25();
             Assert.Null(d25["Foo$1"], "Derived25 in group 15 should not have Foo$1");
@@ -161,9 +161,13 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             CheckBridge2874Base(d25, "16", 2);
         }
 
-        private static void CheckBridge2874Base(Bridge2874Base d, string n, int expected)
+        private static void CheckBridge2874Base(Bridge2874Base d, string n, int expected, bool checkIndex = true)
         {
-            Assert.Null(d["Foo$1"], "Bridge2874Base in group " + n + " should not have Foo$1");
+            if (checkIndex)
+            {
+                Assert.Null(d["Foo$1"], "Bridge2874Base in group " + n + " should not have Foo$1");
+            }
+            
             Assert.AreEqual(expected, d["Foo"].As<Func<int>>()(), "Bridge2874Base in group " + n + " [Foo] should return " + expected);
             Assert.AreEqual(expected, d.Foo(), "Bridge2874Base in group " + n + " Foo should return " + expected);
             Assert.AreEqual(expected, d.Foo(""), "Bridge2874Base in group " + n + " Foo() should return " + expected);

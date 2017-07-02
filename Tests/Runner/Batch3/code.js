@@ -23281,11 +23281,11 @@ Bridge.$N1391Result =                     r;
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.CheckBridge2874Base(d21, "8", 21);
 
                     var d22 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived22();
-                    Bridge.Test.NUnit.Assert.Null(Bridge.unbox(d22.Foo$1), "Derived22 in group 9 should not have Foo$1");
-                    Bridge.Test.NUnit.Assert.AreEqual(2, Bridge.unbox(d22.Foo)(), "Derived22 in group 9 [Foo] should return 22");
-                    Bridge.Test.NUnit.Assert.AreEqual(22, d22.Foo$2(), "Derived22 in group 9 Foo should return 22");
+                    Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(d22.Foo$1), "Derived22 in group 9 should have Foo$1");
+                    Bridge.Test.NUnit.Assert.AreEqual(22, Bridge.unbox(d22.Foo$1)(), "Derived22 in group 9 [Foo$1] should return 22");
+                    Bridge.Test.NUnit.Assert.AreEqual(22, d22.Foo$1(), "Derived22 in group 9 Foo should return 22");
                     Bridge.Test.NUnit.Assert.AreEqual(2, d22.Foo(""), "Derived22 in group 9 Foo() should return 22");
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.CheckBridge2874Base(d22, "10", 2);
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.CheckBridge2874Base(d22, "10", 2, false);
 
                     var d23 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived23();
                     Bridge.Test.NUnit.Assert.Null(Bridge.unbox(d23.Foo$1), "Derived23 in group 11 should not have Foo$1");
@@ -23295,11 +23295,11 @@ Bridge.$N1391Result =                     r;
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.CheckBridge2874Base(d23, "12", 23);
 
                     var d24 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived24();
-                    Bridge.Test.NUnit.Assert.Null(Bridge.unbox(d24.Foo$1), "Derived24 in group 13 should not have Foo$1");
-                    Bridge.Test.NUnit.Assert.AreEqual(2, Bridge.unbox(d24.Foo)(), "Derived24 in group 13 [Foo] should return 2");
+                    Bridge.Test.NUnit.Assert.NotNull(Bridge.unbox(d24.Foo$1), "Derived24 in group 13 should not have Foo$1");
+                    Bridge.Test.NUnit.Assert.AreEqual(24, Bridge.unbox(d24.Foo$1)(), "Derived24 in group 13 [Foo] should return 24");
                     Bridge.Test.NUnit.Assert.AreEqual(2, d24.Foo(), "Derived24 in group 13 Foo should return 2");
-                    Bridge.Test.NUnit.Assert.AreEqual(24, d24.Foo$2(""), "Derived24 in group 13 Foo() should return 2");
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.CheckBridge2874Base(d24, "14", 2);
+                    Bridge.Test.NUnit.Assert.AreEqual(24, d24.Foo$1(""), "Derived24 in group 13 Foo() should return 24");
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.CheckBridge2874Base(d24, "14", 2, false);
 
                     var d25 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived25();
                     Bridge.Test.NUnit.Assert.Null(Bridge.unbox(d25.Foo$1), "Derived25 in group 15 should not have Foo$1");
@@ -23308,8 +23308,12 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.AreEqual(2, d25.Foo(""), "Derived25 in group 15 Foo() should return 2");
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.CheckBridge2874Base(d25, "16", 2);
                 },
-                CheckBridge2874Base: function (d, n, expected) {
-                    Bridge.Test.NUnit.Assert.Null(Bridge.unbox(d.Foo$1), System.String.concat("Bridge2874Base in group ", n, " should not have Foo$1"));
+                CheckBridge2874Base: function (d, n, expected, checkIndex) {
+                    if (checkIndex === void 0) { checkIndex = true; }
+                    if (checkIndex) {
+                        Bridge.Test.NUnit.Assert.Null(Bridge.unbox(d.Foo$1), System.String.concat("Bridge2874Base in group ", n, " should not have Foo$1"));
+                    }
+
                     Bridge.Test.NUnit.Assert.AreEqual(expected, Bridge.unbox(d.Foo)(), System.String.concat("Bridge2874Base in group ", n, " [Foo] should return ", expected));
                     Bridge.Test.NUnit.Assert.AreEqual(expected, d.Foo(), System.String.concat("Bridge2874Base in group ", n, " Foo should return ", expected));
                     Bridge.Test.NUnit.Assert.AreEqual(expected, d.Foo(""), System.String.concat("Bridge2874Base in group ", n, " Foo() should return ", expected));
@@ -33189,7 +33193,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived22", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived1],
         methods: {
-            Foo$2: function () {
+            Foo$1: function () {
                 return 22;
             }
         }
@@ -33207,7 +33211,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived24", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived1],
         methods: {
-            Foo$2: function (s) {
+            Foo$1: function (s) {
                 return 24;
             }
         }

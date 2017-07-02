@@ -662,6 +662,7 @@ namespace Bridge.Contract
             if (typeDef != null)
             {
                 var isExternalType = this.Emitter.Validator.IsExternalType(typeDef);
+                bool externalFound = false;
                 var methods = typeDef.Methods.Where(m =>
                 {
                     if (m.IsExplicitInterfaceImplementation)
@@ -700,6 +701,15 @@ namespace Bridge.Contract
                                 return false;
                             }
                         }
+                        else
+                        {
+                            if (externalFound)
+                            {
+                                return false;
+                            }
+
+                            externalFound = true;
+                        }
 
                         return true;
                     }
@@ -730,6 +740,17 @@ namespace Bridge.Contract
 
             bool isTop = list == null;
             list = list ?? new List<IProperty>();
+
+            if (this.Member != null && this.Member.IsOverride && !this.IsTemplateOverride(this.Member))
+            {
+                if (this.OriginalMember == null)
+                {
+                    this.OriginalMember = this.Member;
+                }
+
+                this.Member = InheritanceHelper.GetBaseMember(this.Member);
+                typeDef = this.Member.DeclaringTypeDefinition;
+            }
 
             if (typeDef != null)
             {
