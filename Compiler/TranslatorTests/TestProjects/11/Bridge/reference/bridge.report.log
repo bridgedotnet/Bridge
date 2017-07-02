@@ -1,7 +1,4 @@
 Resources (name, path, length):
-    bridge.js  1090397
-    bridge.d.ts  60964
-    bridge.meta.js  333019
     TestProject.js  434
     Issue2493.js  249
     TestProject1.js  185

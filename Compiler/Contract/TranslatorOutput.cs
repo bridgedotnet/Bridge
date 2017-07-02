@@ -43,7 +43,7 @@ namespace Bridge.Contract
             get; set;
         }
 
-        public IEnumerable<TranslatorOutputItem> GetOutputs()
+        public IEnumerable<TranslatorOutputItem> GetOutputs(bool projectOutputOnly = false)
         {
             if (Combined != null)
             {
@@ -58,16 +58,19 @@ namespace Bridge.Contract
                 }
             }
 
-            foreach (var o in References)
+            if (!projectOutputOnly)
             {
-                if (!o.IsEmpty)
+                foreach (var o in References)
                 {
-                    yield return o;
-                }
+                    if (!o.IsEmpty)
+                    {
+                        yield return o;
+                    }
 
-                if (o.MinifiedVersion != null && !o.MinifiedVersion.IsEmpty)
-                {
-                    yield return o.MinifiedVersion;
+                    if (o.MinifiedVersion != null && !o.MinifiedVersion.IsEmpty)
+                    {
+                        yield return o.MinifiedVersion;
+                    }
                 }
             }
 

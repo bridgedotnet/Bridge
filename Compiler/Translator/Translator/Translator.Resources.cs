@@ -153,7 +153,7 @@ namespace Bridge.Translator
                 // There are no resources defined in the config so let's just grab files
                 this.Log.Trace("Preparing outputs for resources");
 
-                foreach (var outputItem in this.Outputs.GetOutputs())
+                foreach (var outputItem in this.Outputs.GetOutputs(true))
                 {
                     this.Log.Trace("Getting output " + outputItem.FullPath.LocalPath);
 
