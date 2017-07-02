@@ -945,6 +945,7 @@
   <ItemGroup>
     <None Include="bridge.json" />
     <None Include="AdditionalCompilerOptions.txt" />
+    <None Include="Resources\.generated\bridge.report.log" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\.typescript\bridge.d.ts" />
