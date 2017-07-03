@@ -9320,8 +9320,11 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             } else if (arguments.length === 2) {
                 this.append(arguments[0]);
                 this.setCapacity(arguments[1]);
-            } else if (arguments.length === 3) {
+            } else if (arguments.length >= 3) {
                 this.append(arguments[0], arguments[1], arguments[2]);
+                if (arguments.length === 4) {
+                    this.setCapacity(arguments[3]);
+                }
             }
         },
 
@@ -9330,11 +9333,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 return this.buffer[0] ? this.buffer[0].length : 0;
             }
 
-            var s = this.buffer.join("");
-
-            this.buffer = [];
-            this.buffer[0] = s;
-
+            var s = this.getString();
             return s.length;
         },
 
@@ -9373,10 +9372,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
         },
 
         toString: function () {
-            var s = this.buffer.join("");
-
-            this.buffer = [];
-            this.buffer[0] = s;
+            var s = this.getString();
 
             if (arguments.length === 2) {
                 var startIndex = arguments[0],
@@ -9420,6 +9416,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             }
 
             this.buffer[this.buffer.length] = value;
+            this.clearString();
 
             return this;
         },
@@ -9430,6 +9427,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
         clear: function () {
             this.buffer = [];
+            this.clearString();
 
             return this;
         },
@@ -9455,7 +9453,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
         },
 
         remove: function (startIndex, length) {
-            var s = this.buffer.join("");
+            var s = this.getString();
 
             this.checkLimits(s, startIndex, length);
 
@@ -9468,6 +9466,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 this.buffer = [];
                 this.buffer[0] = s.substring(0, startIndex);
                 this.buffer[1] = s.substring(startIndex + length, s.length);
+                this.clearString();
             }
 
             return this;
@@ -9491,7 +9490,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 value = Array(count + 1).join(value).toString();
             }
 
-            var s = this.buffer.join("");
+            var s = this.getString();
             this.buffer = [];
 
             if (index < 1) {
@@ -9505,6 +9504,8 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 this.buffer[1] = value;
                 this.buffer[2] = s.substring(index, s.length);
             }
+
+            this.clearString();
 
             return this;
         },
@@ -9529,6 +9530,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 this.buffer[0] = s.replace(r, newValue);
             }
 
+            this.clearString();
             return this;
         },
 
@@ -9544,6 +9546,43 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             if (length > value.length - startIndex) {
                 throw new System.ArgumentOutOfRangeException("Index and length must refer to a location within the string");
             }
+        },
+
+        clearString: function() {
+            this.$str = null;
+        },
+
+        getString: function() {
+            if (!this.$str) {
+                this.$str = this.buffer.join("");
+                this.buffer = [];
+                this.buffer[0] = this.$str;
+            }
+
+            return this.$str;
+        },
+
+        getChar: function (index) {
+            var str = this.getString();
+            if (index < 0 || index >= str.length) {
+                throw new System.IndexOutOfRangeException();
+            }
+
+            return str.charCodeAt(index);
+        },
+
+        setChar: function(index, value) {
+            var str = this.getString();
+            if (index < 0 || index >= str.length) {
+                throw new System.ArgumentOutOfRangeException();
+            }
+
+            value = String.fromCharCode(value);
+            this.buffer = [];
+            this.buffer[0] = str.substring(0, index);
+            this.buffer[1] = value;
+            this.buffer[2] = str.substring(index + 1, str.length);
+            this.clearString();
         }
     });
 

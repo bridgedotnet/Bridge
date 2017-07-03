@@ -12,6 +12,8 @@ namespace System.Text
 
         public extern StringBuilder(string value, int startIndex, int length);
 
+        public extern StringBuilder(string value, int startIndex, int length, int capacity);
+
         public extern StringBuilder(string value, int capacity);
 
         [Template("new System.Text.StringBuilder(\"\", {capacity})")]
@@ -120,5 +122,13 @@ namespace System.Text
         public extern StringBuilder Replace(char oldChar, char newChar, int startIndex, int count);
 
         public extern StringBuilder Replace(string oldValue, string newValue, int startIndex, int count);
+
+        [Name("Char")]
+        [AccessorsIndexer]
+        public extern char this[int index]
+        {
+            get;
+            set;
+        }
     }
 }
