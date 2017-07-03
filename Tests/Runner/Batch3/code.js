@@ -14392,8 +14392,14 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNumberFormatInfoNaNSymbol: function () {
-                    var c = System.Globalization.CultureInfo.getCultureInfo("ru-RU");
+                    var c = System.Globalization.CultureInfo.getCultureInfo("es-US");
                     var nanSymbol = c.numberFormat.nanSymbol;
+
+                    Bridge.Test.NUnit.Assert.AreEqual("NaN", nanSymbol);
+
+
+                    c = System.Globalization.CultureInfo.getCultureInfo("nb-NO");
+                    nanSymbol = c.numberFormat.nanSymbol;
 
                     Bridge.Test.NUnit.Assert.AreEqual("NaN", nanSymbol);
                 }
@@ -22900,10 +22906,25 @@ Bridge.$N1391Result =                     r;
                         Bridge.Test.NUnit.Assert.Fail("Date is not parsed correctly");
                     }
 
+                    culture = new System.Globalization.CultureInfo("ru-RU");
+                    culture.dateTimeFormat.timeSeparator = ".";
+                    if (System.DateTime.tryParseExact("13.00", System.String.format("H{0}mm", culture.dateTimeFormat.timeSeparator), culture, testValue)) {
+                        var now1 = new Date();
+                        Bridge.Test.NUnit.Assert.AreEqual(now1.getFullYear(), testValue.v.getFullYear());
+                        Bridge.Test.NUnit.Assert.AreEqual((now1.getMonth() + 1), (testValue.v.getMonth() + 1));
+                        Bridge.Test.NUnit.Assert.AreEqual(now1.getDate(), testValue.v.getDate());
+                        Bridge.Test.NUnit.Assert.AreEqual(13, testValue.v.getHours());
+                        Bridge.Test.NUnit.Assert.AreEqual(0, testValue.v.getMinutes());
+                    } else {
+                        Bridge.Test.NUnit.Assert.Fail("Date is not parsed correctly");
+                    }
+
                     Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.parse("13:00", new System.Globalization.CultureInfo("en-GB")).getHours());
                     Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.parse("13:00", new System.Globalization.CultureInfo("nb-NO")).getHours());
+                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.parse("13:00", new System.Globalization.CultureInfo("ru-RU")).getHours());
                     Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.parse("13:00", new System.Globalization.CultureInfo("es-ES")).getHours());
                     Bridge.Test.NUnit.Assert.AreEqual(1, System.DateTime.parse("01:00", new System.Globalization.CultureInfo("nb-NO")).getHours());
+                    Bridge.Test.NUnit.Assert.AreEqual(1, System.DateTime.parse("01:00", new System.Globalization.CultureInfo("ru-RU")).getHours());
                 }
             }
         }
