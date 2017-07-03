@@ -507,7 +507,7 @@ namespace Bridge.Translator
             {
                 var add = binaryOperatorExpression.Operator == BinaryOperatorType.Add;
 
-                if (this.Emitter.Validator.IsDelegateOrLambda(leftResolverResult) && this.Emitter.Validator.IsDelegateOrLambda(rightResolverResult))
+                if (expectedType.Kind == TypeKind.Delegate || this.Emitter.Validator.IsDelegateOrLambda(leftResolverResult) && this.Emitter.Validator.IsDelegateOrLambda(rightResolverResult))
                 {
                     delegateOperator = true;
                     this.Write(add ? JS.Funcs.BRIDGE_COMBINE : JS.Funcs.BRIDGE_REMOVE);

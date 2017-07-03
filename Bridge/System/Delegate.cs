@@ -44,7 +44,7 @@ namespace System
         [Template("!Bridge.staticEquals({a}, {b})")]
         public static extern bool operator !=(Delegate a, Delegate b);
 
-        [Template("Bridge.Reflection.midel({method}, {firstArgument})")]
+        [Template("Bridge.Reflection.createDelegate({method}, {firstArgument})")]
         public static extern Delegate CreateDelegate(Type type, object firstArgument, MethodInfo method);
     }
 

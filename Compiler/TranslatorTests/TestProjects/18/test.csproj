@@ -87,6 +87,8 @@
     <Content Include="Bridge\res\header.js" />
     <Content Include="Bridge\res\style2429_1.css" />
     <Content Include="Bridge\res\style2429_2.css" />
+    <Content Include="Bridge\res\utf16.js" />
+    <Content Include="Bridge\res\utf8.js" />
   </ItemGroup>
   <!-- Bridge Compiler -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

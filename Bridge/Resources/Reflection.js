@@ -736,11 +736,36 @@
             return result;
         },
 
-        midel: function (mi, target, typeArguments) {
-            if (mi.is && !!target) {
-                throw new System.ArgumentException('Cannot specify target for static method');
-            } else if (!mi.is && !target)
-                throw new System.ArgumentException('Must specify target for instance method');
+        createDelegate: function(mi, firstArgument) {
+            var isStatic = mi.is || mi.sm,
+                bind = firstArgument != null && !isStatic,
+                method = Bridge.Reflection.midel(mi, firstArgument, null, bind);
+
+            if (!bind) {
+                if (isStatic) {
+                    return function () {
+                        var args = firstArgument != null ? [firstArgument] : [];
+                        return method.apply(mi.td, args.concat(Array.prototype.slice.call(arguments, 0)));
+                    };
+                }
+                else {
+                    return function (target) {
+                        return method.apply(target, Array.prototype.slice.call(arguments, 1));
+                    };
+                }
+            }
+
+            return method;
+        },
+
+        midel: function (mi, target, typeArguments, bind) {
+            if (bind !== false) {
+                if (mi.is && !!target) {
+                    throw new System.ArgumentException('Cannot specify target for static method');
+                } else if (!mi.is && !target) {
+                    throw new System.ArgumentException('Must specify target for instance method');
+                }
+            }
 
             var method;
 
@@ -749,7 +774,7 @@
             } else if (mi.fs) {
                 method = function (v) { (mi.is ? mi.td : this)[mi.fs] = v; };
             } else {
-                method = mi.def || (mi.is || mi.sm ? mi.td[mi.sn] : target[mi.sn]);
+                method = mi.def || (mi.is || mi.sm ? mi.td[mi.sn] : (target ? target[mi.sn] : mi.td.prototype[mi.sn]));
 
                 if (mi.tpc) {
                     if (!typeArguments || typeArguments.length !== mi.tpc) {
@@ -780,7 +805,7 @@
                 }
             }
 
-            return Bridge.fn.bind(target, method);
+            return bind !== false ? Bridge.fn.bind(target, method) : method;
         },
 
         invokeCI: function (ci, args) {
