@@ -1713,26 +1713,23 @@
                     exclude,
                     i, j;
 
-                for (i = list1.length - 1; i >= 0; i--) {
-                    exclude = false;
+                for (j = 0; j < list2.length; j++) {
+                    exclude = -1;
 
-                    for (j = 0; j < list2.length; j++) {
+                    for (i = list1.length - 1; i >= 0; i--) {
                         if (list1[i] === list2[j] ||
                             ((list1[i].$method && (list1[i].$method === list2[j].$method)) && (list1[i].$scope && (list1[i].$scope === list2[j].$scope)))) {
-                            exclude = true;
-
+                            exclude = i;
                             break;
                         }
                     }
 
-                    if (!exclude) {
-                        result.push(list1[i]);
+                    if (exclude > -1) {
+                        list1.splice(exclude, 1);
                     }
                 }
 
-                result.reverse();
-
-                return Bridge.fn.$build(result);
+                return Bridge.fn.$build(list1);
             }
         },
 
