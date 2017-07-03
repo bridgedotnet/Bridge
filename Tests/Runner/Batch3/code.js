@@ -22882,6 +22882,33 @@ Bridge.$N1391Result =                     r;
         inherits: [Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Person")]
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2802", {
+        statics: {
+            methods: {
+                TestLocalesWithoutAmPm: function () {
+                    var culture = new System.Globalization.CultureInfo("nb-NO");
+                    culture.dateTimeFormat.timeSeparator = ".";
+                    var testValue = { };
+                    if (System.DateTime.tryParseExact("13.00", System.String.format("H{0}mm", culture.dateTimeFormat.timeSeparator), culture, testValue)) {
+                        var now = new Date();
+                        Bridge.Test.NUnit.Assert.AreEqual(now.getFullYear(), testValue.v.getFullYear());
+                        Bridge.Test.NUnit.Assert.AreEqual((now.getMonth() + 1), (testValue.v.getMonth() + 1));
+                        Bridge.Test.NUnit.Assert.AreEqual(now.getDate(), testValue.v.getDate());
+                        Bridge.Test.NUnit.Assert.AreEqual(13, testValue.v.getHours());
+                        Bridge.Test.NUnit.Assert.AreEqual(0, testValue.v.getMinutes());
+                    } else {
+                        Bridge.Test.NUnit.Assert.Fail("Date is not parsed correctly");
+                    }
+
+                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.parse("13:00", new System.Globalization.CultureInfo("en-GB")).getHours());
+                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.parse("13:00", new System.Globalization.CultureInfo("nb-NO")).getHours());
+                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.parse("13:00", new System.Globalization.CultureInfo("es-ES")).getHours());
+                    Bridge.Test.NUnit.Assert.AreEqual(1, System.DateTime.parse("01:00", new System.Globalization.CultureInfo("nb-NO")).getHours());
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2818", {
         statics: {
             methods: {
