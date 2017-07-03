@@ -9335,15 +9335,30 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
         ctor: function () {
             this.$initialize();
             this.buffer = [],
-            this.capacity = 16;
-
-            if (arguments.length === 1) {
-                this.append(arguments[0]);
-            } else if (arguments.length === 2) {
-                this.append(arguments[0]);
-                this.setCapacity(arguments[1]);
-            } else if (arguments.length === 3) {
-                this.append(arguments[0], arguments[1], arguments[2]);
+                this.capacity = 16;
+            switch (arguments.length)
+            {
+                case 1:
+                    {
+                        this.append(arguments[0]);
+                        break;
+                    }
+                case 2:
+                    {
+                        this.append(arguments[0]);
+                        this.setCapacity(arguments[1]);
+                    }
+                case 3:
+                    {
+                        this.append(arguments[0], arguments[1], arguments[2]);
+                        break;
+                    }
+                case 4:
+                    {
+                        this.append(arguments[0], arguments[1], arguments[2]);
+                        this.setCapacity(arguments[3]);
+                        break;
+                    }
             }
         },
 
