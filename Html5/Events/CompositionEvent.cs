@@ -29,7 +29,8 @@ namespace Bridge.Html5
     /// </summary>
     /// <typeparam name="TCurrentTarget">The CurrentTarget type</typeparam>
     [External]
-    [Name("CompositionEvent")]
+    [Namespace(false)]
+    [IgnoreGeneric]
     public class CompositionEvent<TCurrentTarget> : CompositionEvent where TCurrentTarget : HTMLElement
     {
         /// <summary>

@@ -22,7 +22,8 @@ namespace Bridge.Html5
     /// </summary>
     /// <typeparam name="TCurrentTarget">The CurrentTarget type</typeparam>
     [External]
-    [Name("FocusEvent")]
+    [Namespace(false)]
+    [IgnoreGeneric]
     public class FocusEvent<TCurrentTarget> : FocusEvent where TCurrentTarget : HTMLElement
     {
         /// <summary>

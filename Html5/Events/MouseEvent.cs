@@ -191,7 +191,8 @@ namespace Bridge.Html5
     /// </summary>
     /// <typeparam name="TCurrentTarget">The CurrentTarget type</typeparam>
     [External]
-    [Name("MouseEvent")]
+    [Namespace(false)]
+    [IgnoreGeneric]
     public class MouseEvent<TCurrentTarget> : MouseEvent where TCurrentTarget : HTMLElement
     {
         /// <summary>

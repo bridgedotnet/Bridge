@@ -27,7 +27,8 @@ namespace Bridge.Html5
     /// </summary>
     /// <typeparam name="TCurrentTarget">The CurrentTarget type</typeparam>
     [External]
-    [Name("HashChangeEvent")]
+    [Namespace(false)]
+    [IgnoreGeneric]
     public class HashChangeEvent<TCurrentTarget> : HashChangeEvent where TCurrentTarget : HTMLElement
     {
         /// <summary>

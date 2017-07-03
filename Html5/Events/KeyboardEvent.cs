@@ -1318,7 +1318,8 @@ namespace Bridge.Html5
     /// </summary>
     /// <typeparam name="TCurrentTarget">The CurrentTarget type</typeparam>
     [External]
-    [Name("KeyboardEvent")]
+    [Namespace(false)]
+    [IgnoreGeneric]
     public class KeyboardEvent<TCurrentTarget> : KeyboardEvent where TCurrentTarget : HTMLElement
     {
         /// <summary>

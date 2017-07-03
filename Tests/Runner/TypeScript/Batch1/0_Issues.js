@@ -139,3 +139,10 @@ QUnit.test("#2661", function (assert) {
     var fn2 = c.fn(c);
     assert.equal(fn1, fn2);
 });
+QUnit.test("#2911", function (assert) {
+    var initButton = document.createElement("button");
+    initButton.onclick = TypeScript.Issues.N2911.initButton_Clicked;
+    initButton.addEventListener("onclick", TypeScript.Issues.N2911.initButton_Clicked);
+    // TypeScript syntax would broke if TypeScript.Issues.N2911.initButton_Clicked used generic syntax
+    assert.ok(true);
+});
