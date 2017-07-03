@@ -784,6 +784,8 @@ namespace Bridge.Translator
 
                 using (var m = new StreamReader(file.FullName, Translator.OutputEncoding, true))
                 {
+                    content = Translator.OutputEncoding.GetBytes(m.ReadToEnd());
+
                     if (m.CurrentEncoding != OutputEncoding)
                     {
                         this.Log.Info("Converting resource file "
@@ -793,8 +795,6 @@ namespace Bridge.Translator
                                        + " into default encoding"
                                        + Translator.OutputEncoding.EncodingName);
                     }
-
-                    content = Translator.OutputEncoding.GetBytes(m.ReadToEnd());
                 }
             }
 
