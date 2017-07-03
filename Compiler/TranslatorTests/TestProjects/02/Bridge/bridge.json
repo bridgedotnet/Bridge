@@ -9,7 +9,7 @@
   },
   "logging": {
     "level":  "None",
-    "report": true
+    "report": false
   }
   //"sourceMap": {
   //  "enabled": true,

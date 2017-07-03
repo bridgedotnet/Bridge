@@ -5769,7 +5769,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 // Not C# API
                 //var d = (Func<int, int>)Delegate.CreateDelegate(this, new Function("x", "{ return x + this.testField; }"));
                 // The call above replace with the call below
-                var d = Bridge.Reflection.midel(Bridge.Reflection.getMembers(Bridge.getType(this), 8, 284, "AddForCreateWorks"), this);
+                var d = Bridge.Reflection.createDelegate(Bridge.Reflection.getMembers(Bridge.getType(this), 8, 284, "AddForCreateWorks"), this);
                 Bridge.Test.NUnit.Assert.AreEqual(25, d(13));
             },
             CombineWorks: function () {
@@ -5796,7 +5796,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 // #1563
                 var c = new Bridge.ClientTest.Batch4.DelegateTests.C();
                 var a = Bridge.fn.cacheBind(c, c.F1);
-                var a2 = a + Bridge.fn.cacheBind(c, c.F2);
+                var a2 = Bridge.fn.combine(a, Bridge.fn.cacheBind(c, c.F2));
                 // Test restructure to keep assertion count correct (prevent uncaught test exception)
                 var l = 0;
                 Bridge.ClientTest.Batch4.TestHelper.Safe(function () {
@@ -5849,7 +5849,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 // #1563
                 var c = new Bridge.ClientTest.Batch4.DelegateTests.C();
                 var a = Bridge.fn.cacheBind(c, c.F1);
-                var a2 = a + Bridge.fn.cacheBind(c, c.F2);
+                var a2 = Bridge.fn.combine(a, Bridge.fn.cacheBind(c, c.F2));
                 var a3 = Bridge.fn.remove(a2, a);
                 // Test restructure to keep assertion count correct (prevent uncaught test exception)
                 var l = 0;
@@ -5881,8 +5881,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
 
                 var a = $asm.$.Bridge.ClientTest.Batch4.DelegateTests.f1;
 
-                var a2 = a + Bridge.fn.cacheBind(this, this.A);
-                var a3 = a2 - Bridge.fn.cacheBind(this, this.A);
+                var a2 = Bridge.fn.combine(a, Bridge.fn.cacheBind(this, this.A));
+                var a3 = Bridge.fn.remove(a2, Bridge.fn.cacheBind(this, this.A));
 
                 Bridge.Test.NUnit.Assert.False(Bridge.equals(a, a2));
                 Bridge.Test.NUnit.Assert.True(Bridge.equals(a, a3));
@@ -12655,7 +12655,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             },
             DelegateCreateDelegateWorksForNonGenericInstanceMethods: function () {
                 var m = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C8, 8, 284, "M1");
-                var f1 = Bridge.Reflection.midel(m, new Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C8("X"));
+                var f1 = Bridge.Reflection.createDelegate(m, new Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C8("X"));
                 Bridge.Test.NUnit.Assert.AreEqual("X a b", f1("a", "b"), "Delegate should be correct");
             },
             CreateDelegateWorksNonGenericStaticMethods: function () {
