@@ -9,6 +9,7 @@ namespace Bridge.Html5
     /// </summary>
     [External]
     [Name("HTMLCollection")]
+    [IgnoreGeneric]
     public class HTMLCollection<T> : IEnumerable<T> where T : HTMLElement
     {
         protected internal HTMLCollection()

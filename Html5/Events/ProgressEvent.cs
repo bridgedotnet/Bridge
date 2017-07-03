@@ -33,6 +33,7 @@ namespace Bridge.Html5
     /// <typeparam name="TCurrentTarget">The CurrentTarget type</typeparam>
     [External]
     [Name("ProgressEvent")]
+    [IgnoreGeneric]
     public class ProgressEvent<TCurrentTarget> : ProgressEvent where TCurrentTarget : EventTarget
     {
         /// <summary>

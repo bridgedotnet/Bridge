@@ -533,6 +533,8 @@ namespace Bridge.Html5
     /// A generic version of the Element class. The type parameter is a type of Events' CurrentTarget.
     /// </summary>
     /// <typeparam name="TCurrentTarget">The CurrentTarget type of all Element's events</typeparam>
+    [External]
+    [IgnoreGeneric]
     public class HTMLElement<TCurrentTarget> : HTMLElement where TCurrentTarget : HTMLElement
     {
         /// <summary>

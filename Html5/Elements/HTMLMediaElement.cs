@@ -7,6 +7,7 @@ namespace Bridge.Html5
     /// <typeparam name="TCurrentTarget">The CurrentTarget type of all MediaElement's events</typeparam>
     [External]
     [Name("HTMLMediaElement")]
+    [IgnoreGeneric]
     public abstract class HTMLMediaElement<TCurrentTarget> : HTMLElement<TCurrentTarget> where TCurrentTarget : HTMLElement<TCurrentTarget>
     {
         /// <summary>
