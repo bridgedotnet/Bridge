@@ -685,6 +685,8 @@ namespace Bridge.Translator
 
             var needSourceMap = false;
 
+            var useDefaultEncoding = item.Files.Length > 1;
+
             foreach (var fileName in item.Files)
             {
                 this.Log.Trace("Reading resource item(s) in location " + fileName);
@@ -748,7 +750,11 @@ namespace Bridge.Translator
 
                         this.Log.Trace("Reading resource item at " + file.FullName);
 
-                        var content = CheckResourceOnBomAndAddToBuffer(buffer, item, file);
+                        var resourceAsOneFile = item.Header == null
+                                                && item.Remark == null
+                                                && item.Files.Length <= 1;
+
+                        var content = CheckResourceOnBomAndAddToBuffer(buffer, item, file, resourceAsOneFile);
 
                         this.Log.Trace("Read " + content.Length + " bytes");
                     }
@@ -763,13 +769,41 @@ namespace Bridge.Translator
             return needSourceMap;
         }
 
-        private byte[] CheckResourceOnBomAndAddToBuffer(MemoryStream buffer, ResourceConfigItem item, FileInfo file)
+        private byte[] CheckResourceOnBomAndAddToBuffer(MemoryStream buffer, ResourceConfigItem item, FileInfo file, bool oneFileResource)
         {
-            var content = File.ReadAllBytes(file.FullName);
+            byte[] content;
+
+            if (oneFileResource)
+            {
+                this.Log.Trace("Reading resource file " + file.FullName + " as one-file-resource");
+                content = File.ReadAllBytes(file.FullName);
+            }
+            else
+            {
+                this.Log.Trace("Reading resource file " + file.FullName + " via StreamReader with byte order mark detection option");
+
+                using (var m = new StreamReader(file.FullName, Translator.OutputEncoding, true))
+                {
+                    if (m.CurrentEncoding != OutputEncoding)
+                    {
+                        this.Log.Info("Converting resource file "
+                                       + file.FullName
+                                       + " from encoding "
+                                       + m.CurrentEncoding.EncodingName
+                                       + " into default encoding"
+                                       + Translator.OutputEncoding.EncodingName);
+                    }
+
+                    content = Translator.OutputEncoding.GetBytes(m.ReadToEnd());
+                }
+            }
 
             if (content.Length > 0)
             {
-                var bomLength = !item.RemoveBom.HasValue || item.RemoveBom.Value
+                var checkBom = (oneFileResource && item.RemoveBom == true)
+                   || (!oneFileResource && (!item.RemoveBom.HasValue || item.RemoveBom.Value));
+
+                var bomLength = checkBom
                     ? GetBomLength(content)
                     : 0;
 
