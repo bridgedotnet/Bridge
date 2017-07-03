@@ -657,11 +657,24 @@ namespace Bridge.Translator
                 {
                     this.Log.Trace("Reading header content file at " + fullHeaderPath);
 
-                    var sb = new StringBuilder(File.ReadAllText(fullHeaderPath, OutputEncoding));
+                    using (var m = new StreamReader(fullHeaderPath, Translator.OutputEncoding, true))
+                    {
+                        var sb = new StringBuilder(m.ReadToEnd());
 
-                    this.Log.Trace("Read " + sb.Length + " symbols from the header file " + fullHeaderPath);
+                        if (m.CurrentEncoding != OutputEncoding)
+                        {
+                            this.Log.Info("Converting resource header file "
+                                           + fullHeaderPath
+                                           + " from encoding "
+                                           + m.CurrentEncoding.EncodingName
+                                           + " into default encoding"
+                                           + Translator.OutputEncoding.EncodingName);
+                        }
 
-                    return sb;
+                        this.Log.Trace("Read " + sb.Length + " symbols from the header file " + fullHeaderPath);
+
+                        return sb;
+                    }
                 }
 
                 this.Log.Warn("Could not find header content file at " + fullHeaderPath + "for resource " + resource.Name);
