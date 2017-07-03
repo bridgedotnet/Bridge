@@ -1,4 +1,5 @@
 ﻿using Bridge.Test.NUnit;
+using System;
 using System.Text;
 
 namespace Bridge.ClientTest.Text
@@ -20,6 +21,7 @@ namespace Bridge.ClientTest.Text
         {
             var sb = new StringBuilder();
             Assert.AreEqual("System.Text.StringBuilder", typeof(StringBuilder).FullName);
+            Assert.True(typeof(StringBuilder).IsClass);
             Assert.True(sb is StringBuilder);
         }
 
@@ -61,6 +63,16 @@ namespace Bridge.ClientTest.Text
             var sb = new StringBuilder("some text", 5, 3);
             Assert.AreEqual("tex", sb.ToString(), "Text");
             Assert.AreEqual(3, sb.Length, "Length");
+        }
+
+        [Test(Name = "#1615 - {0}")]
+        public void SubstringConstructorWorks_SPI_1615()
+        {
+            // #1615
+            var sb = new StringBuilder("some text", 5, 3, 55);
+            Assert.AreEqual("tex", sb.ToString(), "Text");
+            Assert.AreEqual(3, sb.Length, "Length");
+            Assert.AreEqual(55, sb.Capacity, "Capacity");
         }
 
         [Test]
@@ -136,6 +148,51 @@ namespace Bridge.ClientTest.Text
         }
 
         [Test]
+        public void AppendLineBoolWorks()
+        {
+            var sb = new StringBuilder("|");
+            Assert.True(sb.AppendLine(true.ToString()) == sb);
+            Assert.AreEqual("|True\r\n", sb.ToString(), "Text");
+            Assert.AreEqual(7, sb.Length, "Length");
+        }
+
+        [Test]
+        public void AppendLineCharWorks()
+        {
+            var sb = new StringBuilder("|");
+            Assert.True(sb.AppendLine('c'.ToString()) == sb);
+            Assert.AreEqual("|c\r\n", sb.ToString(), "Text");
+            Assert.AreEqual(4, sb.Length, "Length");
+        }
+
+        [Test]
+        public void AppendLineIntWorks()
+        {
+            var sb = new StringBuilder("|");
+            Assert.True(sb.AppendLine(123.ToString()) == sb);
+            Assert.AreEqual("|123\r\n", sb.ToString(), "Text");
+            Assert.AreEqual(6, sb.Length, "Length");
+        }
+
+        [Test]
+        public void AppendLineDoubleWorks()
+        {
+            var sb = new StringBuilder("|");
+            Assert.True(sb.AppendLine((123.0).ToString()) == sb);
+            Assert.AreEqual("|123\r\n", sb.ToString(), "Text");
+            Assert.AreEqual(6, sb.Length, "Length");
+        }
+
+        [Test]
+        public void AppendLineObjectWorks()
+        {
+            var sb = new StringBuilder("|");
+            Assert.True(sb.AppendLine((new SomeClass()).ToString()) == sb);
+            Assert.AreEqual("|some text\r\n", sb.ToString(), "Length");
+            Assert.AreEqual(12, sb.Length, "Length");
+        }
+
+        [Test]
         public void ClearWorks()
         {
             var sb = new StringBuilder("some text");
@@ -143,7 +200,6 @@ namespace Bridge.ClientTest.Text
             Assert.AreEqual("", sb.ToString(), "Text");
             Assert.AreEqual(0, sb.Length, "Length");
         }
-
 
         [Test]
         public void SetLengthWorks()
@@ -199,6 +255,26 @@ namespace Bridge.ClientTest.Text
             var sb = new StringBuilder("some text");
             Assert.AreEqual(9, sb.Length);
         }
+
+        // Not C# API
+        //[Test]
+        //public void IsEmptyPropertyWorks()
+        //{
+        //    var sb = new StringBuilder("some text");
+        //    Assert.False(sb.IsEmpty, "#1");
+        //    sb.Clear();
+        //    Assert.True(sb.IsEmpty, "#2");
+
+        //    sb = new StringBuilder("");
+        //    Assert.True(sb.IsEmpty, "#3");
+
+        //    sb = new StringBuilder();
+        //    Assert.True(sb.IsEmpty, "#4");
+        //    sb.Append("");
+        //    Assert.True(sb.IsEmpty, "#5");
+        //    sb.Append("x");
+        //    Assert.False(sb.IsEmpty, "#6");
+        //}
 
         [Test(ExpectedCount = 21)]
         public static void StringBuilders()
@@ -272,6 +348,42 @@ namespace Bridge.ClientTest.Text
             Assert.AreEqual("56.7true=123\n\nbar foo\n\n(Foo, False)", sb.ToString(), ".Replace(char, char, start, length)");
             sb.Replace("Foo", "foo", 23, 6);
             Assert.AreEqual("56.7true=123\n\nbar foo\n\n(foo, False)", sb.ToString(), ".Replace(string, string, start, length)");
+        }
+
+        [Test(Name = "#2902 - {0}")]
+        public static void StringBuilderIndexerGetWorks()
+        {
+            int nAlphabeticChars = 0;
+            int nWhitespace = 0;
+            int nPunctuation = 0;
+            StringBuilder sb = new StringBuilder("This is a simple sentence.");
+
+            for (int ctr = 0; ctr < sb.Length; ctr++)
+            {
+                char ch = sb[ctr];
+                if (Char.IsLetter(ch)) { nAlphabeticChars++; continue; }
+                if (Char.IsWhiteSpace(ch)) { nWhitespace++; continue; }
+                if (Char.IsPunctuation(ch)) nPunctuation++;
+            }
+
+            Assert.AreEqual("This is a simple sentence.", sb.ToString());
+            Assert.AreEqual(21, nAlphabeticChars);
+            Assert.AreEqual(4, nWhitespace);
+            Assert.AreEqual(1, nPunctuation);
+
+            Assert.Throws<IndexOutOfRangeException>(() => { Console.WriteLine(sb[100]); });
+        }
+
+        [Test(Name = "#2902 - {0}")]
+        public static void StringBuilderIndexerSetWorks()
+        {
+            StringBuilder sb = new StringBuilder("ABC");
+            sb[0] = '1';
+            sb[1] = '2';
+            sb[2] = '3';
+
+            Assert.AreEqual("123", sb.ToString());
+            Assert.Throws<ArgumentOutOfRangeException>(() => { sb[3] = '4'; });
         }
     }
 }

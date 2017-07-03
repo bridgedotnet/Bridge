@@ -8357,17 +8357,6 @@ Bridge.$N1391Result =                     r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1615", {
-        methods: {
-            TestStringBuilderSubstringConstructor: function () {
-                var sb = new System.Text.StringBuilder("some text", 5, 3, 55);
-                Bridge.Test.NUnit.Assert.AreEqual("tex", sb.toString(), "Text");
-                Bridge.Test.NUnit.Assert.AreEqual(3, sb.getLength(), "Length");
-                Bridge.Test.NUnit.Assert.AreEqual(55, sb.getCapacity(), "Capacity");
-            }
-        }
-    });
-
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1627", {
         methods: {
             ForeachWithListItemCallbackWorks: function () {
@@ -23678,54 +23667,6 @@ Bridge.$N1391Result =                     r;
                     var combo = (Bridge.fn.combine(a, a));
                     (Bridge.fn.remove(combo, a))();
                     Bridge.Test.NUnit.Assert.AreEqual(4, x);
-                }
-            }
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2902", {
-        statics: {
-            methods: {
-                TestStringBuilderIndexerGet: function () {
-                    var nAlphabeticChars = 0;
-                    var nWhitespace = 0;
-                    var nPunctuation = 0;
-                    var sb = new System.Text.StringBuilder("This is a simple sentence.");
-
-                    for (var ctr = 0; ctr < sb.getLength(); ctr = (ctr + 1) | 0) {
-                        var ch = sb.getChar(ctr);
-                        if (System.Char.isLetter(ch)) {
-                            nAlphabeticChars = (nAlphabeticChars + 1) | 0;
-                            continue;
-                        }
-                        if (System.Char.isWhiteSpace(String.fromCharCode(ch))) {
-                            nWhitespace = (nWhitespace + 1) | 0;
-                            continue;
-                        }
-                        if (System.Char.isPunctuation(ch)) {
-                            nPunctuation = (nPunctuation + 1) | 0;
-                        }
-                    }
-
-                    Bridge.Test.NUnit.Assert.AreEqual("This is a simple sentence.", sb.toString());
-                    Bridge.Test.NUnit.Assert.AreEqual(21, nAlphabeticChars);
-                    Bridge.Test.NUnit.Assert.AreEqual(4, nWhitespace);
-                    Bridge.Test.NUnit.Assert.AreEqual(1, nPunctuation);
-
-                    Bridge.Test.NUnit.Assert.Throws$2(System.IndexOutOfRangeException, function () {
-                        System.Console.WriteLine(String.fromCharCode(sb.getChar(100)));
-                    });
-                },
-                TestStringBuilderIndexerSet: function () {
-                    var sb = new System.Text.StringBuilder("ABC");
-                    sb.setChar(0, 49);
-                    sb.setChar(1, 50);
-                    sb.setChar(2, 51);
-
-                    Bridge.Test.NUnit.Assert.AreEqual("123", sb.toString());
-                    Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentOutOfRangeException, function () {
-                        sb.setChar(3, 52);
-                    });
                 }
             }
         }
