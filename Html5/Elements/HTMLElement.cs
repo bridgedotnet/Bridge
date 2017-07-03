@@ -535,6 +535,7 @@ namespace Bridge.Html5
     /// <typeparam name="TCurrentTarget">The CurrentTarget type of all Element's events</typeparam>
     [External]
     [IgnoreGeneric]
+    [Namespace(false)]
     public class HTMLElement<TCurrentTarget> : HTMLElement where TCurrentTarget : HTMLElement
     {
         /// <summary>

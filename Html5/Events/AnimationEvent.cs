@@ -32,7 +32,7 @@ namespace Bridge.Html5
     /// </summary>
     /// <typeparam name="TCurrentTarget">The CurrentTarget type</typeparam>
     [External]
-    [Name("AnimationEvent")]
+    [Namespace(false)]
     [IgnoreGeneric]
     public class AnimationEvent<TCurrentTarget> : AnimationEvent where TCurrentTarget : HTMLElement
     {
