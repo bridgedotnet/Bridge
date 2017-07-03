@@ -23753,6 +23753,17 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2911", {
+        statics: {
+            methods: {
+                TestGenericHtmlClass: function () {
+                    var mouseEventList = new (System.Collections.Generic.List$1(MouseEvent))();
+                    Bridge.Test.NUnit.Assert.NotNull(mouseEventList);
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge294", {
         fields: {
             Name: null
