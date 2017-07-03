@@ -6,6 +6,10 @@
   "combineScripts":  true,
   "html": {
     "title": "This is title from Html config"
+  },
+  "logging": {
+    "level":  "None",
+    "report": true
   }
   //"sourceMap": {
   //  "enabled": true,

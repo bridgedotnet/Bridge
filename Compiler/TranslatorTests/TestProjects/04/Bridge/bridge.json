@@ -9,6 +9,7 @@
     "enabled": false
   },
   "logging": {
-    "level":  "None"
+    "level":  "None",
+    "report": true
   }
 }

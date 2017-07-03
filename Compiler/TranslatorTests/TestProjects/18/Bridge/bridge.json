@@ -12,7 +12,8 @@
   "locales": "ru-RU;en-US;es*",
   "namedFunctions": "Name", // #2407
   "logging": {
-    "level": "None"
+    "level":  "None",
+    "report": true
   },
   // #1656 test
   "assembly": {

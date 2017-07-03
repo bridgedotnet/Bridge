@@ -12,5 +12,9 @@
       "name": "bridge.console.min.js",
       "extract": true
     }
-  ]
+  ],
+  "logging": {
+    "level":  "None",
+    "report": true
+  }
 }

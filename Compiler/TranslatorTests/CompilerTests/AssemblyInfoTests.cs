@@ -19,6 +19,10 @@ namespace Bridge.Translator.Tests
             Assert.NotNull(config.Dependencies, "Dependencies");
             Assert.NotNull(config.DefineConstants, "DefineConstants");
             Assert.NotNull(config.Logging, "Logging");
+            Assert.NotNull(config.Logging.Report, "Logging.Report");
+            Assert.False(config.Logging.Report.Enabled, "Logging.Report.Enabled");
+            Assert.Null(config.Logging.Report.Folder, "Logging.Report.Folder");
+            Assert.Null(config.Logging.Report.FileName, "Logging.Report.FileName");
             Assert.NotNull(config.Reflection, "Reflection");
             Assert.NotNull(config.Assembly, "Assembly");
             Assert.NotNull(config.Resources, "Resources");

@@ -125,6 +125,99 @@ namespace Bridge.Translator.Tests
                 "6");
         }
 
+        [Test]
+        public void AssemblyInfoJsonConverters_ReportConfigConverterSerialization()
+        {
+            AssertJsonSerialization(
+                new ReportInfo(),
+                "{\"Report\":null}",
+                "1");
+
+            AssertJsonSerialization(
+                new ReportInfo { Report = new ReportConfig() },
+                "{\"Report\":false}",
+                "2");
+
+            AssertJsonSerialization(
+                new ReportInfo { Report = new ReportConfig() { Enabled = true } },
+                "{\"Report\":true}",
+                "3");
+
+            AssertJsonSerialization(
+                new ReportInfo { Report = new ReportConfig() { Enabled = false } },
+                "{\"Report\":false}",
+                "4");
+
+            AssertJsonSerialization(
+                new ReportInfo { Report = new ReportConfig() { Enabled = true, Folder = "" } },
+                "{\"Report\":true}",
+                "5");
+
+            AssertJsonSerialization(
+                new ReportInfo { Report = new ReportConfig() { Enabled = true, Folder = "Folder1" } },
+                "{\"Report\":\"Folder1/\"}",
+                "6");
+
+            AssertJsonSerialization(
+                new ReportInfo { Report = new ReportConfig() { Enabled = true, Folder = "..\\Folder1/Folder2", FileName = "report.log" } },
+                "{\"Report\":\"../Folder1/Folder2/report.log\"}",
+                "7");
+
+            AssertJsonSerialization(
+                new ReportInfo { Report = new ReportConfig() { Enabled = false, Folder = "" } },
+                "{\"Report\":false}",
+                "8");
+
+            AssertJsonSerialization(
+                new ReportInfo { Report = new ReportConfig() { Enabled = false, Folder = "Folder1" } },
+                "{\"Report\":{\"Enabled\":false,\"FileName\":null,\"Folder\":\"Folder1\"}}",
+                "9");
+
+            AssertJsonSerialization(
+                new ReportInfo { Report = new ReportConfig() { Enabled = false, Folder = "..\\Folder1/Folder2", FileName = "report.log" } },
+                "{\"Report\":{\"Enabled\":false,\"FileName\":\"report.log\",\"Folder\":\"../Folder1/Folder2\"}}",
+                "10");
+        }
+
+        [Test]
+        public void AssemblyInfoJsonConverters_ReportConfigConverterDeserialization()
+        {
+            AssertJsonDeserialization(
+                "{\"Report\":null}",
+                new ReportInfo(),
+                "1");
+
+            AssertJsonDeserialization(
+                "{\"Report\":false}",
+                new ReportInfo { Report = new ReportConfig { Enabled = false } },
+                "2");
+
+            AssertJsonDeserialization(
+                "{\"Report\":true}",
+                new ReportInfo { Report = new ReportConfig() { Enabled = true } },
+                "3");
+
+            AssertJsonDeserialization(
+                "{\"Report\":\"Folder1/\"}",
+                new ReportInfo { Report = new ReportConfig() { Enabled = true, Folder = "Folder1/" } },
+                "4");
+
+            AssertJsonDeserialization(
+                "{\"Report\":\"../Folder1\\\\Folder2/report.log\"}",
+                new ReportInfo { Report = new ReportConfig() { Enabled = true, Folder = "../Folder1/Folder2", FileName = "report.log" } },
+                "5");
+
+            AssertJsonDeserialization(
+                "{\"Report\":{\"Enabled\":false,\"Folder\":\"Folder1\",\"FileName\":null}}",
+                new ReportInfo { Report = new ReportConfig() { Enabled = false, Folder = "Folder1" } },
+                "6");
+
+            AssertJsonDeserialization(
+                "{\"Report\":{\"Enabled\":false,\"FileName\":\"report.log\",\"Folder\":\"../Folder1\\\\Folder2\"}}",
+                new ReportInfo { Report = new ReportConfig() { Enabled = false, Folder = "../Folder1/Folder2", FileName = "report.log" } },
+                "7");
+        }
+
         private static void AssertJsonSerialization(object value, string expected, string message = null)
         {
             var actual = JsonConvert.SerializeObject(value, Formatting.None);
@@ -221,6 +314,52 @@ namespace Bridge.Translator.Tests
                 }
 
                 return c1.Enabled == c2.Enabled;
+            }
+
+            public override int GetHashCode()
+            {
+                return base.GetHashCode();
+            }
+        }
+
+        class ReportInfo
+        {
+            [JsonConverter(typeof(ReportConfigConverter))]
+            public ReportConfig Report
+            {
+                get; set;
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (obj == null)
+                {
+                    return false;
+                }
+
+                var ci = obj as ReportInfo;
+
+                if (ci == null)
+                {
+                    return false;
+                }
+
+                var c1 = this.Report;
+                var c2 = ci.Report;
+
+                if (c1 == null && c2 == null)
+                {
+                    return true;
+                }
+
+                if (c1 == null || c2 == null)
+                {
+                    return false;
+                }
+
+                return c1.Enabled == c2.Enabled
+                    && c1.Folder == c2.Folder
+                    && c1.FileName == c2.FileName;
             }
 
             public override int GetHashCode()

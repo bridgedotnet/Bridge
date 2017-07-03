@@ -7,5 +7,9 @@
     "enabled": true,
     "eol": "crlf"
   },
-  "console":true
+  "console":true,
+  "logging": {
+    "level":  "None",
+    "report": true
+  }
 }

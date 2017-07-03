@@ -153,7 +153,7 @@ namespace Bridge.Translator
                 // There are no resources defined in the config so let's just grab files
                 this.Log.Trace("Preparing outputs for resources");
 
-                foreach (var outputItem in this.Outputs.GetOutputs())
+                foreach (var outputItem in this.Outputs.GetOutputs(true))
                 {
                     this.Log.Trace("Getting output " + outputItem.FullPath.LocalPath);
 
@@ -273,6 +273,9 @@ namespace Bridge.Translator
             var resourceList = new List<BridgeResourceInfo>();
 
             var configHelper = new ConfigHelper();
+            var reportBuilder = this.Outputs.Report.Content.Builder;
+
+            NewLine(reportBuilder, "Resources (name, path, length):");
 
             foreach (var item in resourcesToEmbed)
             {
@@ -301,6 +304,8 @@ namespace Bridge.Translator
 
                 resources.Add(newResource);
                 resourceList.Add(r);
+
+                NewLine(reportBuilder, string.Format("    {0} {1} {2}", name, item.Item1.Path, item.Item2 != null ? item.Item2.Length : 0));
 
                 this.Log.Trace("Added resource " + name);
             }

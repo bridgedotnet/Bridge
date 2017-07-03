@@ -63,6 +63,33 @@ namespace Bridge.Translator
             logger.Info("Done Save path = " + projectOutputPath);
         }
 
+        public void Report(string projectOutputPath)
+        {
+            var logger = this.Log;
+
+            logger.Trace("Report...");
+
+            var config = this.AssemblyInfo;
+
+            if (!config.Logging.Report.Enabled)
+            {
+                logger.Trace("Report skipped as disabled in config.");
+                return;
+            }
+
+            var reportContent = this.Outputs.Report.Content.Builder;
+
+            string filePath = DefineOutputItemFullPath(this.Outputs.Report, projectOutputPath, null);
+
+            var file = FileHelper.CreateFileDirectory(filePath);
+            logger.Trace("Report file full name: " + file.FullName);
+
+            this.SaveToFile(file.FullName, reportContent.ToString());
+
+            logger.Trace("Report done");
+
+        }
+
         private string DefineOutputItemFullPath(TranslatorOutputItem item, string projectOutputPath, string defaultFileName)
         {
             var fileName = item.Name;
