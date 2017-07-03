@@ -1,5 +1,5 @@
 Bridge.merge(new System.Globalization.CultureInfo("st", true), {
-    englishName: "Southern Sotho",
+    englishName: "Sesotho",
     nativeName: "Sesotho",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
@@ -10,10 +10,10 @@ Bridge.merge(new System.Globalization.CultureInfo("st", true), {
         positiveInfinitySymbol: "∞",
         percentSymbol: "%",
         percentGroupSizes: [3],
-        percentDecimalDigits: 0,
+        percentDecimalDigits: 2,
         percentDecimalSeparator: ",",
         percentGroupSeparator: " ",
-        percentPositivePattern: 2,
+        percentPositivePattern: 1,
         percentNegativePattern: 1,
         currencySymbol: "R",
         currencyGroupSizes: [3],
@@ -23,7 +23,7 @@ Bridge.merge(new System.Globalization.CultureInfo("st", true), {
         currencyNegativePattern: 1,
         currencyPositivePattern: 0,
         numberGroupSizes: [3],
-        numberDecimalDigits: 0,
+        numberDecimalDigits: 2,
         numberDecimalSeparator: ",",
         numberGroupSeparator: " ",
         numberNegativePattern: 1

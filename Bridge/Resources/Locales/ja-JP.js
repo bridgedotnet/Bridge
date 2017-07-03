@@ -3,11 +3,11 @@ Bridge.merge(new System.Globalization.CultureInfo("ja-JP", true), {
     nativeName: "日本語 (日本)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        nanSymbol: "NaN (非数値)",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",
-        positiveInfinitySymbol: "+∞",
+        positiveInfinitySymbol: "∞",
         percentSymbol: "%",
         percentGroupSizes: [3],
         percentDecimalDigits: 2,
@@ -40,7 +40,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ja-JP", true), {
         fullDateTimePattern: "yyyy'年'M'月'd'日' H:mm:ss",
         longDatePattern: "yyyy'年'M'月'd'日'",
         longTimePattern: "H:mm:ss",
-        monthDayPattern: "M'月'd'日'",
+        monthDayPattern: "M月d日",
         monthGenitiveNames: ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月",""],
         monthNames: ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月",""],
         pmDesignator: "午後",

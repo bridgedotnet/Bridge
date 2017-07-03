@@ -1,6 +1,6 @@
 Bridge.merge(new System.Globalization.CultureInfo("gn-PY", true), {
     englishName: "Guarani (Paraguay)",
-    nativeName: "Guarani (Paraguái)",
+    nativeName: "Avañe’ẽ (Paraguái)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
         nanSymbol: "ndaha’éi papaha",

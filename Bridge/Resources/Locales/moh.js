@@ -1,6 +1,6 @@
 Bridge.merge(new System.Globalization.CultureInfo("moh", true), {
     englishName: "Mohawk",
-    nativeName: "Kanien'kéha",
+    nativeName: "Kanien’kéha",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
         nanSymbol: "NaN",
@@ -20,7 +20,7 @@ Bridge.merge(new System.Globalization.CultureInfo("moh", true), {
         currencyDecimalDigits: 2,
         currencyDecimalSeparator: ".",
         currencyGroupSeparator: ",",
-        currencyNegativePattern: 0,
+        currencyNegativePattern: 1,
         currencyPositivePattern: 0,
         numberGroupSizes: [3],
         numberDecimalDigits: 2,

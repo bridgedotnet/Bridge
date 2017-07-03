@@ -40,7 +40,7 @@ Bridge.merge(new System.Globalization.CultureInfo("az-Cyrl", true), {
         fullDateTimePattern: "d MMMM yyyy HH:mm:ss",
         longDatePattern: "d MMMM yyyy",
         longTimePattern: "HH:mm:ss",
-        monthDayPattern: "d MMMM",
+        monthDayPattern: "MMMM d",
         monthGenitiveNames: ["јанвар","феврал","март","апрел","мај","ијун","ијул","август","сентјабр","октјабр","нојабр","декабр",""],
         monthNames: ["jанвар","феврал","март","апрел","мај","ијун","ијул","август","сентјабр","октјабр","нојабр","декабр",""],
         pmDesignator: "",

@@ -3,11 +3,11 @@ Bridge.merge(new System.Globalization.CultureInfo("ug-CN", true), {
     nativeName: "ئۇيغۇرچە (جۇڭخۇا خەلق جۇمھۇرىيىتى)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        nanSymbol: "سان ئەمەس",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
-        negativeInfinitySymbol: "مەنپىي چەكسىزلىك",
-        positiveInfinitySymbol: "مۇسبەت چەكسىزلىك",
+        negativeInfinitySymbol: "-∞",
+        positiveInfinitySymbol: "∞",
         percentSymbol: "%",
         percentGroupSizes: [3],
         percentDecimalDigits: 2,

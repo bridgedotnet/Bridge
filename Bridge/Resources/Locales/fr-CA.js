@@ -3,11 +3,11 @@ Bridge.merge(new System.Globalization.CultureInfo("fr-CA", true), {
     nativeName: "français (Canada)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        nanSymbol: "Non numérique",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
-        negativeInfinitySymbol: "-Infini",
-        positiveInfinitySymbol: "+Infini",
+        negativeInfinitySymbol: "-∞",
+        positiveInfinitySymbol: "∞",
         percentSymbol: "%",
         percentGroupSizes: [3],
         percentDecimalDigits: 2,

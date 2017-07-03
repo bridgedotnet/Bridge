@@ -1,6 +1,6 @@
 Bridge.merge(new System.Globalization.CultureInfo("gn", true), {
     englishName: "Guarani",
-    nativeName: "Guarani",
+    nativeName: "Avañe’ẽ",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
         nanSymbol: "ndaha’éi papaha",

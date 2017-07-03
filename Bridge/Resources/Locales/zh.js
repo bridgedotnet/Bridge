@@ -3,11 +3,11 @@ Bridge.merge(new System.Globalization.CultureInfo("zh", true), {
     nativeName: "中文",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        nanSymbol: "非数字",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
-        negativeInfinitySymbol: "负无穷大",
-        positiveInfinitySymbol: "正无穷大",
+        negativeInfinitySymbol: "-∞",
+        positiveInfinitySymbol: "∞",
         percentSymbol: "%",
         percentGroupSizes: [3],
         percentDecimalDigits: 2,
@@ -40,7 +40,7 @@ Bridge.merge(new System.Globalization.CultureInfo("zh", true), {
         fullDateTimePattern: "yyyy'年'M'月'd'日' H:mm:ss",
         longDatePattern: "yyyy'年'M'月'd'日'",
         longTimePattern: "H:mm:ss",
-        monthDayPattern: "M'月'd'日'",
+        monthDayPattern: "M月d日",
         monthGenitiveNames: ["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月",""],
         monthNames: ["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月",""],
         pmDesignator: "下午",

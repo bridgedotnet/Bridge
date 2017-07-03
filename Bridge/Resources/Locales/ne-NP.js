@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ne-NP", true), {
     nativeName: "नेपाली (नेपाल)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        nanSymbol: "अंक नभएको",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",
@@ -20,8 +20,8 @@ Bridge.merge(new System.Globalization.CultureInfo("ne-NP", true), {
         currencyDecimalDigits: 2,
         currencyDecimalSeparator: ".",
         currencyGroupSeparator: ",",
-        currencyNegativePattern: 1,
-        currencyPositivePattern: 0,
+        currencyNegativePattern: 9,
+        currencyPositivePattern: 2,
         numberGroupSizes: [3,2],
         numberDecimalDigits: 2,
         numberDecimalSeparator: ".",

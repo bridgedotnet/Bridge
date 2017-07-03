@@ -40,7 +40,7 @@ Bridge.merge(new System.Globalization.CultureInfo("arn-CL", true), {
         fullDateTimePattern: "dddd, dd' de 'MMMM' de 'yyyy H:mm:ss",
         longDatePattern: "dddd, dd' de 'MMMM' de 'yyyy",
         longTimePattern: "H:mm:ss",
-        monthDayPattern: "d' de 'MMMM",
+        monthDayPattern: "d 'de' MMMM",
         monthGenitiveNames: ["Kiñe Tripantu","Epu","Kila","Meli","Kechu","Cayu","Regle","Purha","Aiya","Marhi","Marhi Kiñe","Marhi Epu",""],
         monthNames: ["Kiñe Tripantu","Epu","Kila","Meli","Kechu","Cayu","Regle","Purha","Aiya","Marhi","Marhi Kiñe","Marhi Epu",""],
         pmDesignator: "",

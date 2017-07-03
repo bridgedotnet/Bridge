@@ -3,11 +3,11 @@ Bridge.merge(new System.Globalization.CultureInfo("el", true), {
     nativeName: "Ελληνικά",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        nanSymbol: "μη αριθμός",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
-        negativeInfinitySymbol: "-Άπειρο",
-        positiveInfinitySymbol: "Άπειρο",
+        negativeInfinitySymbol: "-∞",
+        positiveInfinitySymbol: "∞",
         percentSymbol: "%",
         percentGroupSizes: [3],
         percentDecimalDigits: 2,
