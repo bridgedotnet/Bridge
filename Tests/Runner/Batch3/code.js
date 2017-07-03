@@ -23523,11 +23523,14 @@ Bridge.$N1391Result =                     r;
             methods: {
                 TestCreateDelegate: function () {
                     Bridge.Reflection.createDelegate(Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898, 8, 284, "Run"), null)(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898.ctor(), "Hello", "World");
-                    Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898.a, "Hello") && Bridge.referenceEquals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898.b, "World"));
+                    Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898.a, "Hello"));
+                    Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898.b, "World"));
 
                     var c = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898.$ctor1(5);
                     Bridge.Reflection.createDelegate(Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898, 8, 284, "Run1"), null)(c, "Hello1", "World1", 9);
-                    Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898.a, "Hello1") && Bridge.referenceEquals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898.b, "World1") && c.x === 9);
+                    Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898.a, "Hello1"));
+                    Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898.b, "World1"));
+                    Bridge.Test.NUnit.Assert.True(c.x === 9);
                 }
             }
         },
@@ -23563,7 +23566,7 @@ Bridge.$N1391Result =                     r;
                 buffer: null
             },
             methods: {
-                TestCreateDelegate: function () {
+                TestCreateDelegateReflection: function () {
                     var c1 = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898_2.C(42);
 
                     var mi1 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898_2.C, 8, 20 | 256, "M1");
@@ -23575,15 +23578,15 @@ Bridge.$N1391Result =                     r;
 
                     var test = Bridge.Reflection.createDelegate(mi1, c1);
 
-                    if (!Bridge.staticEquals(test, null)) {
-                        d2 = test;
+                    Bridge.Test.NUnit.Assert.NotNull(test);
 
-                        d2("S1");
-                        Bridge.Test.NUnit.Assert.AreEqual("M1,42,S1", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898_2.buffer);
+                    d2 = test;
 
-                        d2("S2");
-                        Bridge.Test.NUnit.Assert.AreEqual("M1,42,S2", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898_2.buffer);
-                    }
+                    d2("S1");
+                    Bridge.Test.NUnit.Assert.AreEqual("M1,42,S1", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898_2.buffer);
+
+                    d2("S2");
+                    Bridge.Test.NUnit.Assert.AreEqual("M1,42,S2", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898_2.buffer);
 
                     d1 = Bridge.Reflection.createDelegate(mi1, null);
 

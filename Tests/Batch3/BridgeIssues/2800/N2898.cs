@@ -4,7 +4,6 @@ using System.Diagnostics.Contracts;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Bridge.Html5;
 using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
@@ -44,11 +43,14 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public static void TestCreateDelegate()
         {
             ((Action<Bridge2898, string, string>)Delegate.CreateDelegate(typeof(Action<Bridge2898, string, string>), null, typeof(Bridge2898).GetMethod("Run")))(new Bridge2898(), "Hello", "World");
-            Assert.True(a == "Hello" && b == "World");
+            Assert.True(a == "Hello");
+            Assert.True(b == "World");
 
             var c = new Bridge2898(5);
             ((Action<Bridge2898, string, string, int>)Delegate.CreateDelegate(typeof(Action<Bridge2898, string, string, int>), null, typeof(Bridge2898).GetMethod("Run1")))(c, "Hello1", "World1", 9);
-            Assert.True(a == "Hello1" && b == "World1" && c.x == 9);
+            Assert.True(a == "Hello1");
+            Assert.True(b == "World1");
+            Assert.True(c.x == 9);
         }
     }
 
@@ -81,7 +83,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
 
         [Test]
-        public static void TestCreateDelegate()
+        public static void TestCreateDelegateReflection()
         {
             C c1 = new C(42);
 
@@ -96,16 +98,15 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             Delegate test = Delegate.CreateDelegate(typeof(D2), c1, mi1);
 
-            if (test != null)
-            {
-                d2 = (D2)test;
+            Assert.NotNull(test);
 
-                d2("S1");
-                Assert.AreEqual("M1,42,S1", Bridge2898_2.buffer);
+            d2 = (D2)test;
 
-                d2("S2");
-                Assert.AreEqual("M1,42,S2", Bridge2898_2.buffer);
-            }
+            d2("S1");
+            Assert.AreEqual("M1,42,S1", Bridge2898_2.buffer);
+
+            d2("S2");
+            Assert.AreEqual("M1,42,S2", Bridge2898_2.buffer);
 
             d1 = (D1)Delegate.CreateDelegate(typeof(D1), null, mi1);
 
@@ -116,7 +117,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual("M1,5280,S4", Bridge2898_2.buffer);
 
             d2 = (D2)Delegate.CreateDelegate(typeof(D2), null, mi2);
-            
+
             d2("S5");
             Assert.AreEqual("M2,S5", Bridge2898_2.buffer);
 

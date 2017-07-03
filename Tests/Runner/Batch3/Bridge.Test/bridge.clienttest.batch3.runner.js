@@ -605,7 +605,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#2874 - TestExternalOverriding", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2874.TestExternalOverriding);
             QUnit.test("#2886 - Test2DArrayDefValue", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2886.Test2DArrayDefValue);
             QUnit.test("#2898 - TestCreateDelegate", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2898.TestCreateDelegate);
-            QUnit.test("#2898 - TestCreateDelegate", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2898_2.TestCreateDelegate);
+            QUnit.test("#2898 - TestCreateDelegateReflection", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2898_2.TestCreateDelegateReflection);
             QUnit.test("#2899 - TestDelegateCombining", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2899.TestDelegateCombining);
             QUnit.test("#2901 - TestDelegateRemoving", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2901.TestDelegateRemoving);
             QUnit.test("#2903 - TestGetInvocationList", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2903.TestGetInvocationList);
@@ -12291,7 +12291,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestCreateDelegate: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2898, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestCreateDelegate()", $t.Line = "43", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2898, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestCreateDelegate()", $t.Line = "42", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898.TestCreateDelegate();
                 }
             }
@@ -12314,10 +12314,10 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898_2)],
         statics: {
             methods: {
-                TestCreateDelegate: function (assert) {
+                TestCreateDelegateReflection: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898_2).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2898_2, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestCreateDelegate()", $t.Line = "83", $t));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898_2.TestCreateDelegate();
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898_2).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2898_2, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestCreateDelegateReflection()", $t.Line = "85", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2898_2.TestCreateDelegateReflection();
                 }
             }
         },
@@ -12341,7 +12341,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestDelegateCombining: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2899).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2899, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestDelegateCombining()", $t.Line = "26", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2899).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2899, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestDelegateCombining()", $t.Line = "25", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2899.TestDelegateCombining();
                 }
             }
@@ -12366,7 +12366,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestDelegateRemoving: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2901).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2901, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestDelegateRemoving()", $t.Line = "14", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2901).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2901, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestDelegateRemoving()", $t.Line = "13", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2901.TestDelegateRemoving();
                 }
             }
