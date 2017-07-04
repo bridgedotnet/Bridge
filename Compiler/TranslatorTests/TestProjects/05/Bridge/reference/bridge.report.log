@@ -1,7 +1,7 @@
-Resources (name, path, length):
-    test.bridgeIssues.n2806.js  1785
-    test.bridgeIssues.n772.js  4068
-    test.bridgeIssues.n783.js  2079
-    testProject1.js  429
-    testProject2.js  429
-    testProject.meta.js  2166
+Resources:
+    test.bridgeIssues.n2806.js  1.743 KB
+    test.bridgeIssues.n772.js  3.973 KB
+    test.bridgeIssues.n783.js  2.03 KB
+    testProject1.js  429 B
+    testProject2.js  429 B
+    testProject.meta.js  2.115 KB

@@ -1,7 +1,7 @@
-Resources (name, path, length):
-    testResources1.js  8790
-    testResources3.js resources 3730
-    testResources4.js resources 1479
-    issue2429_NoBom.css resources 501
-    issue2429_Bom.css resources 501
-    issue2890.js resources 156
+Resources:
+    testResources1.js  8.584 KB
+    testResources3.js resources 3.643 KB
+    testResources4.js resources 1.444 KB
+    issue2429_NoBom.css resources 501 B
+    issue2429_Bom.css resources 501 B
+    issue2890.js resources 156 B
