@@ -8,9 +8,9 @@
     "title": "This is title from Html config"
   },
   "logging": {
-    "level":  "None",
-    "report": false
-  }
+    "level":  "None"
+  },
+  "report": false
   //"sourceMap": {
   //  "enabled": true,
   //  "eol": "crlf"

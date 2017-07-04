@@ -18,7 +18,7 @@ namespace Bridge.Contract
             get; set;
         }
 
-        public string Folder
+        public string Path
         {
             get; set;
         }
@@ -34,7 +34,7 @@ namespace Bridge.Contract
             {
                 return;
             }
-            else if (string.IsNullOrEmpty(config.FileName) && string.IsNullOrEmpty(config.Folder))
+            else if (string.IsNullOrEmpty(config.FileName) && string.IsNullOrEmpty(config.Path))
             {
                 serializer.Serialize(writer, config.Enabled);
             }
@@ -44,12 +44,12 @@ namespace Bridge.Contract
 
                 var location = configHelper.ConvertPath(config.FileName);
 
-                if (!string.IsNullOrEmpty(config.Folder))
+                if (!string.IsNullOrEmpty(config.Path))
                 {
                     if (string.IsNullOrEmpty(location))
                     {
                         // No FileName path
-                        location = configHelper.ConvertPath(config.Folder);
+                        location = configHelper.ConvertPath(config.Path);
 
                         if (location[location.Length - 1] != Path.DirectorySeparatorChar)
                         {
@@ -59,7 +59,7 @@ namespace Bridge.Contract
                     else
                     {
                         // FileName path as well
-                        location = Path.Combine(configHelper.ConvertPath(config.Folder), location);
+                        location = Path.Combine(configHelper.ConvertPath(config.Path), location);
                     }
                 }
 
@@ -74,7 +74,7 @@ namespace Bridge.Contract
 
                 // Normalize to have '/' as DirectorySeparatorChar in config
                 config.FileName = configHelper.ConvertPath(config.FileName, '/');
-                config.Folder = configHelper.ConvertPath(config.Folder, '/');
+                config.Path = configHelper.ConvertPath(config.Path, '/');
 
                 var s = JObject.FromObject(config);
                 s.WriteTo(writer);
@@ -116,11 +116,11 @@ namespace Bridge.Contract
 
                 if (location[location.Length - 1] == Path.DirectorySeparatorChar)
                 {
-                    config.Folder = configHelper.ConvertPath(location, '/');
+                    config.Path = configHelper.ConvertPath(location, '/');
                     return config;
                 }
 
-                config.Folder = configHelper.ConvertPath(Path.GetDirectoryName(location), '/');
+                config.Path = configHelper.ConvertPath(Path.GetDirectoryName(location), '/');
                 config.FileName = configHelper.ConvertPath(Path.GetFileName(location), '/');
 
                 return config;
@@ -132,7 +132,7 @@ namespace Bridge.Contract
 
                 serializer.Populate(reader, config);
 
-                config.Folder = configHelper.ConvertPath(config.Folder, '/');
+                config.Path = configHelper.ConvertPath(config.Path, '/');
                 config.FileName = configHelper.ConvertPath(config.FileName, '/');
 
                 existingValue = config;

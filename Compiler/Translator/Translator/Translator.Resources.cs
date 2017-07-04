@@ -273,9 +273,8 @@ namespace Bridge.Translator
             var resourceList = new List<BridgeResourceInfo>();
 
             var configHelper = new ConfigHelper();
-            var reportBuilder = this.Outputs.Report.Content.Builder;
 
-            NewLine(reportBuilder, "Resources (name, path, length):");
+            var reportResources = new List<Tuple<string, string, string>>();
 
             foreach (var item in resourcesToEmbed)
             {
@@ -305,14 +304,62 @@ namespace Bridge.Translator
                 resources.Add(newResource);
                 resourceList.Add(r);
 
-                NewLine(reportBuilder, string.Format("    {0} {1} {2}", name, item.Item1.Path, item.Item2 != null ? item.Item2.Length : 0));
+                var sizeInBytes = Utils.ByteSizeHelper.ToSizeInBytes(item.Item2 != null ? item.Item2.Length : 0, "0.000 KB");
+
+                var resourceLocation = name;
+                if (!string.IsNullOrEmpty(r.Path) && !string.IsNullOrEmpty(resourceLocation))
+                {
+                    resourceLocation = Path.Combine(
+                        configHelper.ConvertPath(r.Path),
+                        configHelper.ConvertPath(resourceLocation));
+
+                    resourceLocation = configHelper.ConvertPath(resourceLocation, '/');
+                }
+
+                reportResources.Add(Tuple.Create(name, resourceLocation, sizeInBytes));
 
                 this.Log.Trace("Added resource " + name);
             }
 
+            BuildReportForResources(reportResources);
+
             this.Log.Trace("PrepareResourcesForEmbedding done");
 
             return resourceList;
+        }
+
+        private void BuildReportForResources(List<Tuple<string, string, string>> reportResources)
+        {
+            var reportBuilder = this.Outputs.Report.Content.Builder;
+
+            if (reportBuilder == null)
+            {
+                return;
+            }
+
+            NewLine(reportBuilder, "Resources:");
+
+            if (reportResources == null || !reportResources.Any())
+            {
+                NewLine(reportBuilder, "    No resources");
+                return;
+            }
+
+            var maxResourceNameLength = reportResources.Max(x => x.Item2 != null ? x.Item2.Length : 0);
+            var maxResourceSizeLength = reportResources.Max(x => x.Item3 != null ? x.Item3.Length : 0);
+
+            foreach (var item in reportResources)
+            {
+                var fullPath = item.Item2;
+                var length = item.Item3;
+
+                var toAdd = Math.Abs(maxResourceNameLength + maxResourceSizeLength
+                    - (fullPath != null ? fullPath.Length : 0) - (length != null ? length.Length : 0));
+
+                var reportLine = string.Format("    {0}   {1}{2}", fullPath, new string(' ', toAdd), length);
+
+                NewLine(reportBuilder, reportLine);
+            }
         }
 
         private void EmbeddResources(List<BridgeResourceInfo> resourcesToEmbed)

@@ -6,9 +6,9 @@
   "generateDocumentation": "None",
   "fileNameCasing": "CamelCase",
   "logging": {
-    "level": "None",
-    "report": true
+    "level": "None"
   },
+  "report": true,
   "assembly": {
     "disableInitAssembly": true,
     "enableReservedNamespaces": true

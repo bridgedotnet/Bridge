@@ -203,5 +203,10 @@ namespace Bridge.Contract
         {
             get; set;
         }
+
+        ReportConfig Report
+        {
+            get; set;
+        }
     }
  }
