@@ -20,7 +20,7 @@ Bridge.merge(new System.Globalization.CultureInfo("moh-CA", true), {
         currencyDecimalDigits: 2,
         currencyDecimalSeparator: ".",
         currencyGroupSeparator: ",",
-        currencyNegativePattern: 0,
+        currencyNegativePattern: 1,
         currencyPositivePattern: 0,
         numberGroupSizes: [3],
         numberDecimalDigits: 2,

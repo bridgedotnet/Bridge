@@ -8524,7 +8524,8 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                     throw new System.FormatException("String does not contain a valid string representation of a date and time.");
                 }
 
-                var df = (provider || System.Globalization.CultureInfo.getCurrentCulture()).getFormat(System.Globalization.DateTimeFormatInfo),
+                var now = new Date(),
+                    df = (provider || System.Globalization.CultureInfo.getCurrentCulture()).getFormat(System.Globalization.DateTimeFormatInfo),
                     am = df.amDesignator,
                     pm = df.pmDesignator,
                     idx = 0,
@@ -8532,9 +8533,9 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                     i = 0,
                     c,
                     token,
-                    year = 0,
-                    month = 1,
-                    date = 1,
+                    year = now.getFullYear(),
+                    month = now.getMonth() + 1,
+                    date = now.getDate(),
                     hh = 0,
                     mm = 0,
                     ss = 0,
@@ -8845,7 +8846,9 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                     if (inQuotes || !tokenMatched) {
                         name = str.substring(idx, idx + token.length);
 
-                        if ((!inQuotes && ((token === ":" && name !== df.timeSeparator) ||
+                        if (!inQuotes && name === ":" && (token === df.timeSeparator || token === ":")) {
+
+                        } else if ((!inQuotes && ((token === ":" && name !== df.timeSeparator) ||
                             (token === "/" && name !== df.dateSeparator))) ||
                             (name !== token && token !== "'" && token !== '"' && token !== "\\")) {
                             invalid = true;
@@ -8904,10 +8907,12 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                     throw new System.FormatException("String does not contain a valid string representation of a date and time.");
                 }
 
-                if (hh < 12 && tt === pm) {
-                    hh = hh - 0 + 12;
-                } else if (hh > 11 && tt === am) {
-                    hh -= 12;
+                if (tt) {
+                    if (hh < 12 && tt === pm) {
+                        hh = hh - 0 + 12;
+                    } else if (hh > 11 && tt === am) {
+                        hh -= 12;
+                    }
                 }
 
                 if (zzh === 0 && zzm === 0 && !utc) {
@@ -9970,7 +9975,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
         },
 
         $set: function (indices, value) {
-            this[System.Array.toIndex(this, Array.prototype.slice.call(indices, 0))] = value;
+            this[System.Array.toIndex(this, indices)] = value;
         },
 
         set: function (arr, value) {

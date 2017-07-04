@@ -1,6 +1,6 @@
 Bridge.merge(new System.Globalization.CultureInfo("tzm", true), {
-    englishName: "Tamazight",
-    nativeName: "Tamazight",
+    englishName: "Central Atlas Tamazight",
+    nativeName: "Tamaziɣt n laṭlaṣ",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
         nanSymbol: "war amdhan",
@@ -12,20 +12,20 @@ Bridge.merge(new System.Globalization.CultureInfo("tzm", true), {
         percentGroupSizes: [3],
         percentDecimalDigits: 2,
         percentDecimalSeparator: ",",
-        percentGroupSeparator: " ",
+        percentGroupSeparator: " ",
         percentPositivePattern: 0,
         percentNegativePattern: 0,
         currencySymbol: "DA",
         currencyGroupSizes: [3],
         currencyDecimalDigits: 2,
         currencyDecimalSeparator: ",",
-        currencyGroupSeparator: " ",
+        currencyGroupSeparator: " ",
         currencyNegativePattern: 8,
         currencyPositivePattern: 3,
         numberGroupSizes: [3],
         numberDecimalDigits: 2,
         numberDecimalSeparator: ",",
-        numberGroupSeparator: " ",
+        numberGroupSeparator: " ",
         numberNegativePattern: 1
     }),
 

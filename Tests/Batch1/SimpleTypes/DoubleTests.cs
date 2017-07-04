@@ -264,7 +264,7 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual(10.0, double.Parse("10,0"), "1");
             Assert.AreEqual(10.1, double.Parse("  10,10  "), "2");
             Assert.AreEqual(10.0, double.Parse("10,00"), "3");
-            Assert.AreEqual(double.NaN, double.Parse(CultureInfo.CurrentCulture.NumberFormat.NaNSymbol), "4" + CultureInfo.CurrentCulture.NumberFormat.NaNSymbol);
+            //Assert.AreEqual(double.NaN, double.Parse(CultureInfo.CurrentCulture.NumberFormat.NaNSymbol), "4" + CultureInfo.CurrentCulture.NumberFormat.NaNSymbol);
             Assert.AreEqual(double.NegativeInfinity, double.Parse(CultureInfo.CurrentCulture.NumberFormat.NegativeInfinitySymbol), "5" + CultureInfo.CurrentCulture.NumberFormat.NegativeInfinitySymbol);
             Assert.AreEqual(double.PositiveInfinity, double.Parse(CultureInfo.CurrentCulture.NumberFormat.PositiveInfinitySymbol), "6" + CultureInfo.CurrentCulture.NumberFormat.PositiveInfinitySymbol);
             Assert.AreEqual(-123.0, double.Parse("-123"), "7");
@@ -343,7 +343,6 @@ namespace Bridge.ClientTest.SimpleTypes
             AssertTryParse(true, 10.0, "10", "t1");
             AssertTryParse(true, 10.1, "  10,10  ", "t2");
             AssertTryParse(true, 10.0, "10,00", "t3");
-            AssertTryParse(true, double.NaN, CultureInfo.CurrentCulture.NumberFormat.NaNSymbol, "t4" + CultureInfo.CurrentCulture.NumberFormat.NaNSymbol);
             AssertTryParse(true, double.NegativeInfinity, CultureInfo.CurrentCulture.NumberFormat.NegativeInfinitySymbol, "t5" + CultureInfo.CurrentCulture.NumberFormat.NegativeInfinitySymbol);
             AssertTryParse(true, double.PositiveInfinity, CultureInfo.CurrentCulture.NumberFormat.PositiveInfinitySymbol, "t6" + CultureInfo.CurrentCulture.NumberFormat.PositiveInfinitySymbol);
             AssertTryParse(true, -123.0, "-123", "t7");
@@ -354,6 +353,7 @@ namespace Bridge.ClientTest.SimpleTypes
             AssertTryParse(true, -567.89, "-567,89", "t12");
             AssertTryParse(true, 1E23, "1E23", "t13");
 
+            AssertTryParse(false, 0.0, CultureInfo.CurrentCulture.NumberFormat.NaNSymbol, "t4" + CultureInfo.CurrentCulture.NumberFormat.NaNSymbol);
             AssertTryParse(false, 0.0, "", "f1");
             AssertTryParse(false, 0.0, "b", "f2");
             AssertTryParse(false, 0.0, "10a", "f3");

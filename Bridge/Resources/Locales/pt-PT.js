@@ -3,11 +3,11 @@ Bridge.merge(new System.Globalization.CultureInfo("pt-PT", true), {
     nativeName: "português (Portugal)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        nanSymbol: "NaN (Não numérico)",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
-        negativeInfinitySymbol: "-Infinito",
-        positiveInfinitySymbol: "+Infinito",
+        negativeInfinitySymbol: "-∞",
+        positiveInfinitySymbol: "∞",
         percentSymbol: "%",
         percentGroupSizes: [3],
         percentDecimalDigits: 2,
@@ -40,7 +40,7 @@ Bridge.merge(new System.Globalization.CultureInfo("pt-PT", true), {
         fullDateTimePattern: "d' de 'MMMM' de 'yyyy HH:mm:ss",
         longDatePattern: "d' de 'MMMM' de 'yyyy",
         longTimePattern: "HH:mm:ss",
-        monthDayPattern: "d' de 'MMMM",
+        monthDayPattern: "d 'de' MMMM",
         monthGenitiveNames: ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro",""],
         monthNames: ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro",""],
         pmDesignator: "",

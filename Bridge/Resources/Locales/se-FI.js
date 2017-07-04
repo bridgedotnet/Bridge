@@ -3,11 +3,11 @@ Bridge.merge(new System.Globalization.CultureInfo("se-FI", true), {
     nativeName: "davvisámegiella (Suopma)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        nanSymbol: "NaN",
+        nanSymbol: "¤¤¤",
         negativeSign: "-",
         positiveSign: "+",
-        negativeInfinitySymbol: "-Infinity",
-        positiveInfinitySymbol: "Infinity",
+        negativeInfinitySymbol: "-∞",
+        positiveInfinitySymbol: "∞",
         percentSymbol: "%",
         percentGroupSizes: [3],
         percentDecimalDigits: 2,

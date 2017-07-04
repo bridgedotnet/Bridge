@@ -14360,8 +14360,14 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNumberFormatInfoNaNSymbol: function () {
-                    var c = System.Globalization.CultureInfo.getCultureInfo("ru-RU");
+                    var c = System.Globalization.CultureInfo.getCultureInfo("es-US");
                     var nanSymbol = c.numberFormat.nanSymbol;
+
+                    Bridge.Test.NUnit.Assert.AreEqual("NaN", nanSymbol);
+
+
+                    c = System.Globalization.CultureInfo.getCultureInfo("nb-NO");
+                    nanSymbol = c.numberFormat.nanSymbol;
 
                     Bridge.Test.NUnit.Assert.AreEqual("NaN", nanSymbol);
                 }
@@ -22850,6 +22856,48 @@ Bridge.$N1391Result =                     r;
         inherits: [Bridge.virtualc("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2795.Person")]
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2802", {
+        statics: {
+            methods: {
+                TestLocalesWithoutAmPm: function () {
+                    var culture = new System.Globalization.CultureInfo("nb-NO");
+                    culture.dateTimeFormat.timeSeparator = ".";
+                    var testValue = { };
+                    if (System.DateTime.tryParseExact("13.00", System.String.format("H{0}mm", culture.dateTimeFormat.timeSeparator), culture, testValue)) {
+                        var now = new Date();
+                        Bridge.Test.NUnit.Assert.AreEqual(now.getFullYear(), testValue.v.getFullYear());
+                        Bridge.Test.NUnit.Assert.AreEqual((now.getMonth() + 1), (testValue.v.getMonth() + 1));
+                        Bridge.Test.NUnit.Assert.AreEqual(now.getDate(), testValue.v.getDate());
+                        Bridge.Test.NUnit.Assert.AreEqual(13, testValue.v.getHours());
+                        Bridge.Test.NUnit.Assert.AreEqual(0, testValue.v.getMinutes());
+                    } else {
+                        Bridge.Test.NUnit.Assert.Fail("Date is not parsed correctly");
+                    }
+
+                    culture = new System.Globalization.CultureInfo("ru-RU");
+                    culture.dateTimeFormat.timeSeparator = ".";
+                    if (System.DateTime.tryParseExact("13.00", System.String.format("H{0}mm", culture.dateTimeFormat.timeSeparator), culture, testValue)) {
+                        var now1 = new Date();
+                        Bridge.Test.NUnit.Assert.AreEqual(now1.getFullYear(), testValue.v.getFullYear());
+                        Bridge.Test.NUnit.Assert.AreEqual((now1.getMonth() + 1), (testValue.v.getMonth() + 1));
+                        Bridge.Test.NUnit.Assert.AreEqual(now1.getDate(), testValue.v.getDate());
+                        Bridge.Test.NUnit.Assert.AreEqual(13, testValue.v.getHours());
+                        Bridge.Test.NUnit.Assert.AreEqual(0, testValue.v.getMinutes());
+                    } else {
+                        Bridge.Test.NUnit.Assert.Fail("Date is not parsed correctly");
+                    }
+
+                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.parse("13:00", new System.Globalization.CultureInfo("en-GB")).getHours());
+                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.parse("13:00", new System.Globalization.CultureInfo("nb-NO")).getHours());
+                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.parse("13:00", new System.Globalization.CultureInfo("ru-RU")).getHours());
+                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.parse("13:00", new System.Globalization.CultureInfo("es-ES")).getHours());
+                    Bridge.Test.NUnit.Assert.AreEqual(1, System.DateTime.parse("01:00", new System.Globalization.CultureInfo("nb-NO")).getHours());
+                    Bridge.Test.NUnit.Assert.AreEqual(1, System.DateTime.parse("01:00", new System.Globalization.CultureInfo("ru-RU")).getHours());
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2818", {
         statics: {
             methods: {
@@ -23727,6 +23775,26 @@ Bridge.$N1391Result =                     r;
                 TestGenericHtmlClass: function () {
                     var mouseEventList = new (System.Collections.Generic.List$1(MouseEvent))();
                     Bridge.Test.NUnit.Assert.NotNull(mouseEventList);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2915", {
+        statics: {
+            methods: {
+                TestLocalesWithoutColonInTime: function () {
+                    var culture = new System.Globalization.CultureInfo("en-GB");
+                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.parse("13:00", culture).getHours());
+
+                    culture.dateTimeFormat.timeSeparator = ".";
+                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.parse("13:00", culture).getHours());
+
+                    culture = new System.Globalization.CultureInfo("nb-NO");
+                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.parse("13:00", culture).getHours());
+
+                    culture.dateTimeFormat.timeSeparator = ".";
+                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.parse("13:00", culture).getHours());
                 }
             }
         }

@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("nl-BE", true), {
     nativeName: "Nederlands (België)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        nanSymbol: "NaN (geen getal)",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",
@@ -20,8 +20,8 @@ Bridge.merge(new System.Globalization.CultureInfo("nl-BE", true), {
         currencyDecimalDigits: 2,
         currencyDecimalSeparator: ",",
         currencyGroupSeparator: ".",
-        currencyNegativePattern: 12,
-        currencyPositivePattern: 2,
+        currencyNegativePattern: 8,
+        currencyPositivePattern: 3,
         numberGroupSizes: [3],
         numberDecimalDigits: 2,
         numberDecimalSeparator: ",",

@@ -56,7 +56,7 @@
         },
 
         $set: function (indices, value) {
-            this[System.Array.toIndex(this, Array.prototype.slice.call(indices, 0))] = value;
+            this[System.Array.toIndex(this, indices)] = value;
         },
 
         set: function (arr, value) {
