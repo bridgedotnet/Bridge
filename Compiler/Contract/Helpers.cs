@@ -412,7 +412,8 @@ namespace Bridge.Contract
                 }
                 else
                 {
-                    var prop = ((MemberResolveResult) resolveResult).Member as IProperty;
+                    var prop = (resolveResult as MemberResolveResult)?.Member as IProperty;
+
                     if (prop != null && prop.IsIndexer)
                     {
                         ret = false;
@@ -434,7 +435,7 @@ namespace Bridge.Contract
             {
                 rrtype = forEachResolveResult.ElementType;
             }
-            
+
             var type = nullable ? ((ParameterizedType)rrtype).TypeArguments[0] : rrtype;
             if (type.Kind == TypeKind.Struct)
             {
