@@ -8847,7 +8847,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                         name = str.substring(idx, idx + token.length);
 
                         if (!inQuotes && name === ":" && (token === df.timeSeparator || token === ":")) {
-                            
+
                         } else if ((!inQuotes && ((token === ":" && name !== df.timeSeparator) ||
                             (token === "/" && name !== df.dateSeparator))) ||
                             (name !== token && token !== "'" && token !== '"' && token !== "\\")) {
