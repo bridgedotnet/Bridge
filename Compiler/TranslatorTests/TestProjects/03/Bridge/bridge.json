@@ -11,5 +11,5 @@
   "logging": {
     "level":  "None"
   },
-  "report": true
+  "report": "reports/"
 }

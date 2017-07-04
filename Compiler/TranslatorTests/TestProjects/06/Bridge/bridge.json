@@ -16,5 +16,8 @@
   "logging": {
     "level":  "None"
   },
-  "report": true
+  "report": {
+    "enabled": true,
+    "fileName": "report.log"
+  }
 }

@@ -32,5 +32,5 @@
     "level": "None",
     "folder": "../../$(OutputPath)" // output to the Integration Test common log
   },
-  "report": "bridge.report.log"
+  "report": "bridge.report.custom.name.log"
 }
