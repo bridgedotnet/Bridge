@@ -4,5 +4,9 @@
   "cleanOutputFolderBeforeBuildPattern": "*.*",
   "fileNameCasing": "None",
   "outputFormatting": "Formatted",
-  "generateDocumentation": "Basic"
+  "generateDocumentation": "Basic",
+  "logging": {
+    "level":  "None"
+  },
+  "report": true
 }

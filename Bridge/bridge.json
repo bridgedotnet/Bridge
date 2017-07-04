@@ -8,6 +8,7 @@
   "logging": {
     "level": "None"
   },
+  "report": true,
   "assembly": {
     "disableInitAssembly": true,
     "enableReservedNamespaces": true

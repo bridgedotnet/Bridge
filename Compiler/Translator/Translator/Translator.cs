@@ -117,6 +117,15 @@ namespace Bridge.Translator
                 }
             }
 
+            this.Outputs.Report = new TranslatorOutputItem
+            {
+                Content = new StringBuilder(),
+                OutputKind = TranslatorOutputKind.Report,
+                OutputType = TranslatorOutputType.None,
+                Name = this.AssemblyInfo.Report.FileName ?? "bridge.report.log",
+                Location = this.AssemblyInfo.Report.Path
+            };
+
             var references = this.InspectReferences();
             this.References = references;
 

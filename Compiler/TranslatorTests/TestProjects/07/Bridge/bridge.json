@@ -9,5 +9,13 @@
   "generateDocumentation": "Full",
   "loader": {
     "manualLoadingMask": "Module2217_Manual"
+  },
+  "logging": {
+    "level":  "None"
+  },
+  "report": {
+    "enabled": true,
+    "fileName": "report.log",
+    "path": "reports"
   }
 }

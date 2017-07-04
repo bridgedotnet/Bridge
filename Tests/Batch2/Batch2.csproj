@@ -73,12 +73,9 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Bridge.Test, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Bridge.Test.Core.1.0.0\lib\net40\Bridge.Test.dll</HintPath>
+      <HintPath>..\..\packages\Bridge.Test.Core.1.0.0-beta4\lib\net40\Bridge.Test.dll</HintPath>
       <Private>True</Private>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Readme\Bridge.NET\README.Bridge.Test.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir).nuget\NuGet.targets" Condition="Exists('$(SolutionDir).nuget\NuGet.targets')" />

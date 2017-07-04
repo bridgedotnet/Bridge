@@ -198,5 +198,15 @@ namespace Bridge.Contract
         {
             get; set;
         }
+
+        ConsoleConfig Console
+        {
+            get; set;
+        }
+
+        ReportConfig Report
+        {
+            get; set;
+        }
     }
  }

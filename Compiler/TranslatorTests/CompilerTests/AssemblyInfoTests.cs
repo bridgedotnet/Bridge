@@ -56,6 +56,12 @@ namespace Bridge.Translator.Tests
             Assert.AreEqual(NamedFunctionMode.None, config.NamedFunctions, "NamedFunctions");
             Assert.False(config.SourceMap.Enabled, "SourceMap.Enabled");
             Assert.Null(config.SourceMap.Eol, "SourceMap.Eol");
+            Assert.False(config.Html.Disabled, "Html.Disabled");
+            Assert.Null(config.Console.Enabled, "Console.Enabled");
+            Assert.NotNull(config.Report, "Report");
+            Assert.False(config.Report.Enabled, "Report.Enabled");
+            Assert.Null(config.Report.Path, "Report.Folder");
+            Assert.Null(config.Report.FileName, "Report.FileName");
         }
     }
 }

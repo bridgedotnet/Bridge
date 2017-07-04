@@ -12,15 +12,18 @@
   "locales": "ru-RU;en-US;es*",
   "namedFunctions": "Name", // #2407
   "logging": {
-    "level": "None"
+    "level":  "None"
   },
+  "report": true,
   // #1656 test
   "assembly": {
     "disableInitAssembly": true,
     "enableReservedNamespaces": false,
     "fullName": "BridgeTest18Assembly"
   },
-
+  "console": {
+    "enabled": true
+  },
   // #1680 test
   "resources": [
     // Check defaults are used
@@ -90,12 +93,19 @@
     {
       "name": "issue2429_Bom.css",
       "extract": true,
-      "removeBom":  false,
+      "removeBom": false,
       "output": "resources",
       "files": [
         "Bridge/res/style2429_1.css",
         "Bridge/res/style2429_2.css"
       ]
+    },
+    // #2890 Bad handling of file encoding for javascript files included in Bridge projects
+    {
+      "name": "issue2890.js",
+      "extract": true,
+      "output": "resources",
+      "files": [ "Bridge/res/utf8.js", "Bridge/res/utf16.js" ]
     }
   ]
 }

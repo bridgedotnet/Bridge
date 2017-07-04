@@ -122,6 +122,10 @@
 
             arr.length = length;
 
+            for (var k = 0; k < length; k++) {
+                arr[k] = defvalue;
+            }
+
             if (initValues) {
                 for (i = 0; i < arr.length; i++) {
                     indices = [];

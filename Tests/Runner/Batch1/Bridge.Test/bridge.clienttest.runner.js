@@ -1,5 +1,5 @@
 /**
- * @compiler Bridge.NET 16.0.0-beta3
+ * @compiler Bridge.NET 16.0.0-beta4
  */
 Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
     
@@ -37,6 +37,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("TestDebugMessageString", Bridge.Test.Runtime.BridgeClientTestRunner.BridgeConsoleTests.TestDebugMessageString);
             QUnit.test("TestErrorMessageString", Bridge.Test.Runtime.BridgeClientTestRunner.BridgeConsoleTests.TestErrorMessageString);
             QUnit.test("TestToggling", Bridge.Test.Runtime.BridgeClientTestRunner.BridgeConsoleTests.TestToggling);
+            QUnit.test("#2880 - TestHtmlTag", Bridge.Test.Runtime.BridgeClientTestRunner.BridgeConsoleTests.TestHtmlTag);
             QUnit.module("C#");
             QUnit.test("Abstract types - TestB", Bridge.Test.Runtime.BridgeClientTestRunner.TestAbstractClass.TestB);
             QUnit.test("Abstract types - TestC", Bridge.Test.Runtime.BridgeClientTestRunner.TestAbstractClass.TestC);
@@ -759,10 +760,11 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("DateTimeFormatInfo - TypePropertiesAreCorrect", Bridge.Test.Runtime.BridgeClientTestRunner.DateTimeFormatInfoTests.TypePropertiesAreCorrect);
             QUnit.test("DateTimeFormatInfo - GetFormatWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DateTimeFormatInfoTests.GetFormatWorks);
             QUnit.test("DateTimeFormatInfo - InvariantWorks_SPI_1562", Bridge.Test.Runtime.BridgeClientTestRunner.DateTimeFormatInfoTests.InvariantWorks_SPI_1562);
-            QUnit.test("DateTime - TypePropertiesAreCorrect", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.TypePropertiesAreCorrect);
+            QUnit.test("DateTime - TypePropertiesAreCorrect_SPI_1607_1608_1609", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.TypePropertiesAreCorrect_SPI_1607_1608_1609);
             QUnit.test("DateTime - DefaultConstructorWorks_SPI_1606", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.DefaultConstructorWorks_SPI_1606);
             QUnit.test("DateTime - DefaultValueWorks_SPI_1606", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.DefaultValueWorks_SPI_1606);
             QUnit.test("DateTime - CreatingInstanceReturnsDateWithZeroValue_SPI_1606", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.CreatingInstanceReturnsDateWithZeroValue_SPI_1606);
+            QUnit.test("DateTime - MillisecondSinceEpochConstructorWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.MillisecondSinceEpochConstructorWorks);
             QUnit.test("DateTime - LongConstructorWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.LongConstructorWorks);
             QUnit.test("DateTime - StringConstructorWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.StringConstructorWorks);
             QUnit.test("DateTime - YMDConstructorWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.YMDConstructorWorks);
@@ -773,11 +775,13 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("DateTime - MinWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.MinWorks);
             QUnit.test("DateTime - MaxWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.MaxWorks);
             QUnit.test("DateTime - NowWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.NowWorks);
-            QUnit.test("DateTime - UTCNowWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.UTCNowWorks);
+            QUnit.test("DateTime - UtcNowWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.UtcNowWorks);
             QUnit.test("DateTime - ToUniversalWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.ToUniversalWorks);
             QUnit.test("DateTime - ToLocalWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.ToLocalWorks);
             QUnit.test("DateTime - TodayWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.TodayWorks);
             QUnit.test("DateTime - FormatWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.FormatWorks);
+            QUnit.test("DateTime - ToStringWithFormatWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.ToStringWithFormatWorks);
+            QUnit.test("DateTime - ToStringWithFormatAndProviderWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.ToStringWithFormatAndProviderWorks);
             QUnit.test("DateTime - IFormattableToStringWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.IFormattableToStringWorks);
             QUnit.test("DateTime - LocaleFormatWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.LocaleFormatWorks);
             QUnit.test("DateTime - GetFullYearWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.GetFullYearWorks);
@@ -801,14 +805,23 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("DateTime - GetUTCDayWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.GetUTCDayWorks);
             QUnit.test("DateTime - ParseWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.ParseWorks);
             QUnit.test("DateTime - ParseExactWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.ParseExactWorks);
+            QUnit.test("DateTime - ParseExactReturnsNullIfTheInputIsInvalid", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.ParseExactReturnsNullIfTheInputIsInvalid);
             QUnit.test("DateTime - ParseExactWithCultureWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.ParseExactWithCultureWorks);
+            QUnit.test("DateTime - ParseExactWithCultureReturnsNullIfTheInputIsInvalid", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.ParseExactWithCultureReturnsNullIfTheInputIsInvalid);
             QUnit.test("DateTime - ParseExactUTCWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.ParseExactUTCWorks);
+            QUnit.test("DateTime - ParseExactUtcReturnsNullIfTheInputIsInvalid", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.ParseExactUtcReturnsNullIfTheInputIsInvalid);
             QUnit.test("DateTime - ParseExactUTCWithCultureWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.ParseExactUTCWithCultureWorks);
+            QUnit.test("DateTime - ParseExactUtcWithCultureReturnsNullIfTheInputIsInvalid", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.ParseExactUtcWithCultureReturnsNullIfTheInputIsInvalid);
             QUnit.test("DateTime - ToDateStringWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.ToDateStringWorks);
             QUnit.test("DateTime - ToTimeStringWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.ToTimeStringWorks);
             QUnit.test("DateTime - ToUTCStringWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.ToUTCStringWorks);
             QUnit.test("DateTime - ToLocaleDateStringWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.ToLocaleDateStringWorks);
             QUnit.test("DateTime - ToLocaleTimeStringWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.ToLocaleTimeStringWorks);
+            QUnit.test("DateTime - UtcYMDWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.UtcYMDWorks);
+            QUnit.test("DateTime - UtcYMDHWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.UtcYMDHWorks);
+            QUnit.test("DateTime - UtcYMDHNWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.UtcYMDHNWorks);
+            QUnit.test("DateTime - UtcYMDHNSWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.UtcYMDHNSWorks);
+            QUnit.test("DateTime - UtcYMDHNSUWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.UtcYMDHNSUWorks);
             QUnit.test("DateTime - SubtractingDatesWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.SubtractingDatesWorks);
             QUnit.test("DateTime - SubtractMethodReturningTimeSpanWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.SubtractMethodReturningTimeSpanWorks);
             QUnit.test("DateTime - DateEqualityWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.DateEqualityWorks);
@@ -819,8 +832,31 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("DateTime - DateGreaterEqualWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.DateGreaterEqualWorks);
             QUnit.test("DateTime - GetHashCodeWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.GetHashCodeWorks);
             QUnit.test("DateTime - EqualsWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.EqualsWorks);
-            QUnit.test("DateTime - DateTimeEqualsWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.DateTimeEqualsWorks);
+            QUnit.test("DateTime - IEquatableEqualsWorks_SPI_1608", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.IEquatableEqualsWorks_SPI_1608);
+            QUnit.test("DateTime - StaticEqualsWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.StaticEqualsWorks);
             QUnit.test("DateTime - CompareToWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.CompareToWorks);
+            QUnit.test("DateTime - StaticCompareWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.StaticCompareWorks);
+            QUnit.test("DateTime - IComparableCompareToWorks_SPI_1609", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.IComparableCompareToWorks_SPI_1609);
+            QUnit.test("DateTime - DatePropertyWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.DatePropertyWorks);
+            QUnit.test("DateTime - DayPropertyWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.DayPropertyWorks);
+            QUnit.test("DateTime - DayOfWeekPropertyWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.DayOfWeekPropertyWorks);
+            QUnit.test("DateTime - DayOfYearPropertyWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.DayOfYearPropertyWorks);
+            QUnit.test("DateTime - HourPropertyWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.HourPropertyWorks);
+            QUnit.test("DateTime - MillisecondPropertyWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.MillisecondPropertyWorks);
+            QUnit.test("DateTime - MinutePropertyWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.MinutePropertyWorks);
+            QUnit.test("DateTime - MonthPropertyWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.MonthPropertyWorks);
+            QUnit.test("DateTime - SecondPropertyWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.SecondPropertyWorks);
+            QUnit.test("DateTime - YearPropertyWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.YearPropertyWorks);
+            QUnit.test("DateTime - AddDaysWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.AddDaysWorks);
+            QUnit.test("DateTime - AddHoursWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.AddHoursWorks);
+            QUnit.test("DateTime - AddMillisecondsWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.AddMillisecondsWorks);
+            QUnit.test("DateTime - AddMinutesWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.AddMinutesWorks);
+            QUnit.test("DateTime - AddMonthsWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.AddMonthsWorks);
+            QUnit.test("#2542 - AddMonthsEdgeCasesWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.AddMonthsEdgeCasesWorks);
+            QUnit.test("DateTime - AddSecondsWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.AddSecondsWorks);
+            QUnit.test("DateTime - AddYearsWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.AddYearsWorks);
+            QUnit.test("DateTime - DaysInMonthWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.DaysInMonthWorks);
+            QUnit.test("DateTime - IsLeapYearWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.IsLeapYearWorks);
             QUnit.test("DateTime - DateTimes", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.DateTimes);
             QUnit.test("DateTime - CreateUnixTimestampAndConvertBackToDateTime", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.CreateUnixTimestampAndConvertBackToDateTime);
             QUnit.test("#2149 - ToShortDateStringWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests.ToShortDateStringWorks);
@@ -1206,6 +1242,9 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("Nullable - ValueWorks", Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests.ValueWorks);
             QUnit.test("Nullable - UnboxingValueOfWrongTypeThrowsAnException", Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests.UnboxingValueOfWrongTypeThrowsAnException);
             QUnit.test("Nullable - GetValueOrDefaultWithArgWorks", Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests.GetValueOrDefaultWithArgWorks);
+            QUnit.test("Nullable - LiftedGetHashCode1Works", Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests.LiftedGetHashCode1Works);
+            QUnit.test("Nullable - LiftedGetHashCode2Works", Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests.LiftedGetHashCode2Works);
+            QUnit.test("Nullable - LiftedGetHashCode3Works", Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests.LiftedGetHashCode3Works);
             QUnit.test("Nullable - LiftedEqualityWorks", Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests.LiftedEqualityWorks);
             QUnit.test("Nullable - LiftedInequalityWorks", Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests.LiftedInequalityWorks);
             QUnit.test("Nullable - LiftedLessThanWorks", Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests.LiftedLessThanWorks);
@@ -1916,6 +1955,19 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("ExecWorks", Bridge.Test.Runtime.BridgeClientTestRunner.BridgeRegexTests.ExecWorks);
             QUnit.test("LastIndexWorks", Bridge.Test.Runtime.BridgeClientTestRunner.BridgeRegexTests.LastIndexWorks);
             QUnit.test("TestWorks", Bridge.Test.Runtime.BridgeClientTestRunner.BridgeRegexTests.TestWorks);
+            QUnit.module("Script");
+            QUnit.test("BooleanWorks_SPI_1619", Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests.BooleanWorks_SPI_1619);
+            QUnit.test("EvalWorks", Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests.EvalWorks);
+            QUnit.test("IsNullWorks_SPI_1618", Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests.IsNullWorks_SPI_1618);
+            QUnit.test("IsUndefinedWorks_SPI_1616", Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests.IsUndefinedWorks_SPI_1616);
+            QUnit.test("HasValueWorks_SPI_1617", Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests.HasValueWorks_SPI_1617);
+            QUnit.test("TypeOfWorks", Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests.TypeOfWorks);
+            QUnit.test("DeleteWorksForJsClass_SPI_1571", Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests.DeleteWorksForJsClass_SPI_1571);
+            QUnit.test("DeleteWorksForClassPrototype_SPI_1571", Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests.DeleteWorksForClassPrototype_SPI_1571);
+            QUnit.test("InWorks_SPI_1573", Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests.InWorks_SPI_1573);
+            QUnit.test("InvokeMethodWorks_SPI_1572", Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests.InvokeMethodWorks_SPI_1572);
+            QUnit.test("ParseIntWithoutRadixWorks", Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests.ParseIntWithoutRadixWorks);
+            QUnit.test("ParseIntWithRadixWorks", Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests.ParseIntWithRadixWorks);
             QUnit.module("Serialization");
             QUnit.test("NonGenericParseWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsonTests.NonGenericParseWorks);
             QUnit.test("GenericParseWorks", Bridge.Test.Runtime.BridgeClientTestRunner.JsonTests.GenericParseWorks);
@@ -2371,6 +2423,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("StringBuilder - InitialTextConstructorWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.InitialTextConstructorWorks);
             QUnit.test("StringBuilder - InitialTextConstructorWithCapacityWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.InitialTextConstructorWithCapacityWorks);
             QUnit.test("StringBuilder - SubstringConstructorWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.SubstringConstructorWorks);
+            QUnit.test("#1615 - SubstringConstructorWorks_SPI_1615", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.SubstringConstructorWorks_SPI_1615);
             QUnit.test("StringBuilder - AppendBoolWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.AppendBoolWorks);
             QUnit.test("StringBuilder - AppendCharWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.AppendCharWorks);
             QUnit.test("StringBuilder - AppendIntWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.AppendIntWorks);
@@ -2379,11 +2432,45 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("StringBuilder - AppendStringWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.AppendStringWorks);
             QUnit.test("StringBuilder - AppendLineWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.AppendLineWorks);
             QUnit.test("StringBuilder - AppendLineStringWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.AppendLineStringWorks);
+            QUnit.test("StringBuilder - AppendLineBoolWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.AppendLineBoolWorks);
+            QUnit.test("StringBuilder - AppendLineCharWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.AppendLineCharWorks);
+            QUnit.test("StringBuilder - AppendLineIntWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.AppendLineIntWorks);
+            QUnit.test("StringBuilder - AppendLineDoubleWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.AppendLineDoubleWorks);
+            QUnit.test("StringBuilder - AppendLineObjectWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.AppendLineObjectWorks);
             QUnit.test("StringBuilder - ClearWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.ClearWorks);
             QUnit.test("StringBuilder - SetLengthWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.SetLengthWorks);
             QUnit.test("StringBuilder - ToStringWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.ToStringWorks);
             QUnit.test("StringBuilder - LengthPropertyWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.LengthPropertyWorks);
             QUnit.test("StringBuilder - StringBuilders", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.StringBuilders);
+            QUnit.test("#2902 - StringBuilderIndexerGetWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.StringBuilderIndexerGetWorks);
+            QUnit.test("#2902 - StringBuilderIndexerSetWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests.StringBuilderIndexerSetWorks);
+            QUnit.module("Struct");
+            QUnit.test("Structs - IsClassIsFalse", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.IsClassIsFalse);
+            QUnit.test("Structs - UserDefinedStructCanBeUsed", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.UserDefinedStructCanBeUsed);
+            QUnit.test("Structs - DefaultConstructorOfStructReturnsInstanceWithAllMembersInitialized", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultConstructorOfStructReturnsInstanceWithAllMembersInitialized);
+            QUnit.test("Structs - DefaultConstructorOfStructReturnsInstanceWithAllMembersInitializedGeneric", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultConstructorOfStructReturnsInstanceWithAllMembersInitializedGeneric);
+            QUnit.test("Structs - DefaultValueOfStructIsInstanceWithAllMembersInitialized", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultValueOfStructIsInstanceWithAllMembersInitialized);
+            QUnit.test("Structs - DefaultValueOfStructIsInstanceWithAllMembersInitializedGeneric", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultValueOfStructIsInstanceWithAllMembersInitializedGeneric);
+            QUnit.test("Structs - DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirect", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirect);
+            QUnit.test("Structs - DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirectGeneric", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirectGeneric);
+            QUnit.test("Structs - DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorks", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorks);
+            QUnit.test("Structs - DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorksGeneric", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorksGeneric);
+            QUnit.test("Structs - DefaultGetHashCodeGeneratesHashCodeBasedOnAllInstanceFields", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultGetHashCodeGeneratesHashCodeBasedOnAllInstanceFields);
+            QUnit.test("Structs - DefaultEqualsUsesValueEqualityForAllMembers", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.DefaultEqualsUsesValueEqualityForAllMembers);
+            QUnit.test("Structs - CanOverrideGetHashCode", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.CanOverrideGetHashCode);
+            QUnit.test("Structs - CanOverrideEquals", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.CanOverrideEquals);
+            QUnit.test("Structs - CanLiftUserDefinedBinaryOperator", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.CanLiftUserDefinedBinaryOperator);
+            QUnit.test("Structs - CanLiftUserDefinedUnaryOperator_SPI_1634", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.CanLiftUserDefinedUnaryOperator_SPI_1634);
+            QUnit.test("Structs - ClonedValueTypeIsCorrectType", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.ClonedValueTypeIsCorrectType);
+            QUnit.test("Structs - FieldsAreClonedWhenValueTypeIsCopied", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.FieldsAreClonedWhenValueTypeIsCopied);
+            QUnit.test("Structs - AutoPropertyBackingFieldsAreClonedWhenValueTypeIsCopied", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.AutoPropertyBackingFieldsAreClonedWhenValueTypeIsCopied);
+            QUnit.test("Structs - PropertiesWithFieldImplementationAreClonedWhenValueTypeIsCopied", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.PropertiesWithFieldImplementationAreClonedWhenValueTypeIsCopied);
+            QUnit.test("Structs - NestedStructsAreClonedWhenValueTypeIsCopied_SPI_1613", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.NestedStructsAreClonedWhenValueTypeIsCopied_SPI_1613);
+            QUnit.test("Structs - GenericMutableValueTypeWorks", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.GenericMutableValueTypeWorks);
+            QUnit.test("Structs - CloningValueTypeWithNamedDefaultConstructorWorks", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.CloningValueTypeWithNamedDefaultConstructorWorks);
+            QUnit.test("Structs - CloningNullableValueTypesWorks", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.CloningNullableValueTypesWorks);
+            QUnit.test("Structs - ToStringWorks", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.ToStringWorks);
+            QUnit.test("Structs - ToStringNullabeTypeWorks", Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs.ToStringNullabeTypeWorks);
             QUnit.module("System Console");
             QUnit.test("TestClear", Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests.TestClear);
             QUnit.test("TestWriteLine", Bridge.Test.Runtime.BridgeClientTestRunner.SystemConsoleTests.TestWriteLine);
@@ -4215,7 +4302,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             methods: {
                 TestLogMessageObject: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BridgeConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BridgeConsoleTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLogMessageObject()", $t.Line = "18", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BridgeConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BridgeConsoleTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLogMessageObject()", $t.Line = "19", $t));
                     try {
                         t.Fixture.TestLogMessageObject();
                     }
@@ -4225,7 +4312,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestLogMessageString: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BridgeConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BridgeConsoleTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLogMessageString()", $t.Line = "61", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BridgeConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BridgeConsoleTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLogMessageString()", $t.Line = "62", $t));
                     try {
                         t.Fixture.TestLogMessageString();
                     }
@@ -4235,7 +4322,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestDebugMessageString: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BridgeConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BridgeConsoleTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestDebugMessageString()", $t.Line = "68", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BridgeConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BridgeConsoleTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestDebugMessageString()", $t.Line = "69", $t));
                     try {
                         t.Fixture.TestDebugMessageString();
                     }
@@ -4245,7 +4332,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestErrorMessageString: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BridgeConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BridgeConsoleTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestErrorMessageString()", $t.Line = "75", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BridgeConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BridgeConsoleTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestErrorMessageString()", $t.Line = "76", $t));
                     try {
                         t.Fixture.TestErrorMessageString();
                     }
@@ -4255,9 +4342,19 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 TestToggling: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BridgeConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BridgeConsoleTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestToggling()", $t.Line = "82", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BridgeConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BridgeConsoleTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestToggling()", $t.Line = "83", $t));
                     try {
                         t.Fixture.TestToggling();
+                    }
+                    finally {
+                        t.TearDown();
+                    }
+                },
+                TestHtmlTag: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BridgeConsoleTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.BridgeConsoleTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestHtmlTag()", $t.Line = "118", $t));
+                    try {
+                        t.Fixture.TestHtmlTag();
                     }
                     finally {
                         t.TearDown();
@@ -11047,334 +11144,509 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests)],
         statics: {
             methods: {
-                TypePropertiesAreCorrect: function (assert) {
+                TypePropertiesAreCorrect_SPI_1607_1608_1609: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TypePropertiesAreCorrect()", $t.Line = "11", $t));
-                    t.Fixture.TypePropertiesAreCorrect();
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TypePropertiesAreCorrect_SPI_1607_1608_1609()", $t.Line = "11", $t));
+                    t.Fixture.TypePropertiesAreCorrect_SPI_1607_1608_1609();
                 },
                 DefaultConstructorWorks_SPI_1606: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultConstructorWorks_SPI_1606()", $t.Line = "58", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultConstructorWorks_SPI_1606()", $t.Line = "76", $t));
                     t.Fixture.DefaultConstructorWorks_SPI_1606();
                 },
                 DefaultValueWorks_SPI_1606: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultValueWorks_SPI_1606()", $t.Line = "66", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultValueWorks_SPI_1606()", $t.Line = "84", $t));
                     t.Fixture.DefaultValueWorks_SPI_1606();
                 },
                 CreatingInstanceReturnsDateWithZeroValue_SPI_1606: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CreatingInstanceReturnsDateWithZeroValue_SPI_1606()", $t.Line = "74", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CreatingInstanceReturnsDateWithZeroValue_SPI_1606()", $t.Line = "92", $t));
                     t.Fixture.CreatingInstanceReturnsDateWithZeroValue_SPI_1606();
+                },
+                MillisecondSinceEpochConstructorWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "MillisecondSinceEpochConstructorWorks()", $t.Line = "100", $t));
+                    t.Fixture.MillisecondSinceEpochConstructorWorks();
                 },
                 LongConstructorWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LongConstructorWorks()", $t.Line = "82", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LongConstructorWorks()", $t.Line = "107", $t));
                     t.Fixture.LongConstructorWorks();
                 },
                 StringConstructorWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StringConstructorWorks()", $t.Line = "95", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StringConstructorWorks()", $t.Line = "120", $t));
                     t.Fixture.StringConstructorWorks();
                 },
                 YMDConstructorWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "YMDConstructorWorks()", $t.Line = "102", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "YMDConstructorWorks()", $t.Line = "127", $t));
                     t.Fixture.YMDConstructorWorks();
                 },
                 YMDHConstructorWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "YMDHConstructorWorks()", $t.Line = "109", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "YMDHConstructorWorks()", $t.Line = "134", $t));
                     t.Fixture.YMDHConstructorWorks();
                 },
                 YMDHNConstructorWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "YMDHNConstructorWorks()", $t.Line = "116", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "YMDHNConstructorWorks()", $t.Line = "141", $t));
                     t.Fixture.YMDHNConstructorWorks();
                 },
                 YMDHNSConstructorWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "YMDHNSConstructorWorks()", $t.Line = "123", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "YMDHNSConstructorWorks()", $t.Line = "148", $t));
                     t.Fixture.YMDHNSConstructorWorks();
                 },
                 YMDHNSUConstructorWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "YMDHNSUConstructorWorks()", $t.Line = "130", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "YMDHNSUConstructorWorks()", $t.Line = "155", $t));
                     t.Fixture.YMDHNSUConstructorWorks();
                 },
                 MinWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "MinWorks()", $t.Line = "137", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "MinWorks()", $t.Line = "162", $t));
                     t.Fixture.MinWorks();
                 },
                 MaxWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "MaxWorks()", $t.Line = "144", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "MaxWorks()", $t.Line = "169", $t));
                     t.Fixture.MaxWorks();
                 },
                 NowWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "NowWorks()", $t.Line = "151", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "NowWorks()", $t.Line = "176", $t));
                     t.Fixture.NowWorks();
                 },
-                UTCNowWorks: function (assert) {
+                UtcNowWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "UTCNowWorks()", $t.Line = "159", $t));
-                    t.Fixture.UTCNowWorks();
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "UtcNowWorks()", $t.Line = "184", $t));
+                    t.Fixture.UtcNowWorks();
                 },
                 ToUniversalWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToUniversalWorks()", $t.Line = "171", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToUniversalWorks()", $t.Line = "196", $t));
                     t.Fixture.ToUniversalWorks();
                 },
                 ToLocalWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToLocalWorks()", $t.Line = "185", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToLocalWorks()", $t.Line = "210", $t));
                     t.Fixture.ToLocalWorks();
                 },
                 TodayWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TodayWorks()", $t.Line = "199", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TodayWorks()", $t.Line = "224", $t));
                     t.Fixture.TodayWorks();
                 },
                 FormatWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FormatWorks()", $t.Line = "210", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FormatWorks()", $t.Line = "235", $t));
                     t.Fixture.FormatWorks();
+                },
+                ToStringWithFormatWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToStringWithFormatWorks()", $t.Line = "242", $t));
+                    t.Fixture.ToStringWithFormatWorks();
+                },
+                ToStringWithFormatAndProviderWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToStringWithFormatAndProviderWorks()", $t.Line = "249", $t));
+                    t.Fixture.ToStringWithFormatAndProviderWorks();
                 },
                 IFormattableToStringWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IFormattableToStringWorks()", $t.Line = "217", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IFormattableToStringWorks()", $t.Line = "256", $t));
                     t.Fixture.IFormattableToStringWorks();
                 },
                 LocaleFormatWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LocaleFormatWorks()", $t.Line = "225", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LocaleFormatWorks()", $t.Line = "265", $t));
                     t.Fixture.LocaleFormatWorks();
                 },
                 GetFullYearWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetFullYearWorks()", $t.Line = "232", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetFullYearWorks()", $t.Line = "272", $t));
                     t.Fixture.GetFullYearWorks();
                 },
                 GetMonthWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetMonthWorks()", $t.Line = "239", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetMonthWorks()", $t.Line = "279", $t));
                     t.Fixture.GetMonthWorks();
                 },
                 GetDateWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetDateWorks()", $t.Line = "246", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetDateWorks()", $t.Line = "286", $t));
                     t.Fixture.GetDateWorks();
                 },
                 GetHoursWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetHoursWorks()", $t.Line = "253", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetHoursWorks()", $t.Line = "293", $t));
                     t.Fixture.GetHoursWorks();
                 },
                 GetMinutesWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetMinutesWorks()", $t.Line = "260", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetMinutesWorks()", $t.Line = "300", $t));
                     t.Fixture.GetMinutesWorks();
                 },
                 GetSecondsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetSecondsWorks()", $t.Line = "267", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetSecondsWorks()", $t.Line = "307", $t));
                     t.Fixture.GetSecondsWorks();
                 },
                 GetMillisecondsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetMillisecondsWorks()", $t.Line = "274", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetMillisecondsWorks()", $t.Line = "314", $t));
                     t.Fixture.GetMillisecondsWorks();
                 },
                 GetDayWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetDayWorks()", $t.Line = "281", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetDayWorks()", $t.Line = "321", $t));
                     t.Fixture.GetDayWorks();
                 },
                 GetTimeWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetTimeWorks()", $t.Line = "288", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetTimeWorks()", $t.Line = "328", $t));
                     t.Fixture.GetTimeWorks();
                 },
                 ValueOfWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ValueOfWorks()", $t.Line = "295", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ValueOfWorks()", $t.Line = "335", $t));
                     t.Fixture.ValueOfWorks();
                 },
                 TicksWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TicksWorks()", $t.Line = "302", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TicksWorks()", $t.Line = "342", $t));
                     t.Fixture.TicksWorks();
                 },
                 GetUTCFullYearWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetUTCFullYearWorks()", $t.Line = "323", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetUTCFullYearWorks()", $t.Line = "363", $t));
                     t.Fixture.GetUTCFullYearWorks();
                 },
                 GetUtcMonthWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetUtcMonthWorks()", $t.Line = "330", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetUtcMonthWorks()", $t.Line = "370", $t));
                     t.Fixture.GetUtcMonthWorks();
                 },
                 GetUTCDateWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetUTCDateWorks()", $t.Line = "337", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetUTCDateWorks()", $t.Line = "377", $t));
                     t.Fixture.GetUTCDateWorks();
                 },
                 GetUTCHoursWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetUTCHoursWorks()", $t.Line = "344", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetUTCHoursWorks()", $t.Line = "384", $t));
                     t.Fixture.GetUTCHoursWorks();
                 },
                 GetUTCMinutesWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetUTCMinutesWorks()", $t.Line = "351", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetUTCMinutesWorks()", $t.Line = "391", $t));
                     t.Fixture.GetUTCMinutesWorks();
                 },
                 GetUTCSecondsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetUTCSecondsWorks()", $t.Line = "358", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetUTCSecondsWorks()", $t.Line = "398", $t));
                     t.Fixture.GetUTCSecondsWorks();
                 },
                 GetUTCMillisecondsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetUTCMillisecondsWorks()", $t.Line = "365", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetUTCMillisecondsWorks()", $t.Line = "405", $t));
                     t.Fixture.GetUTCMillisecondsWorks();
                 },
                 GetUTCDayWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetUTCDayWorks()", $t.Line = "372", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetUTCDayWorks()", $t.Line = "412", $t));
                     t.Fixture.GetUTCDayWorks();
                 },
                 ParseWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ParseWorks()", $t.Line = "379", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ParseWorks()", $t.Line = "419", $t));
                     t.Fixture.ParseWorks();
                 },
                 ParseExactWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ParseExactWorks()", $t.Line = "386", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ParseExactWorks()", $t.Line = "426", $t));
                     t.Fixture.ParseExactWorks();
+                },
+                ParseExactReturnsNullIfTheInputIsInvalid: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ParseExactReturnsNullIfTheInputIsInvalid()", $t.Line = "433", $t));
+                    t.Fixture.ParseExactReturnsNullIfTheInputIsInvalid();
                 },
                 ParseExactWithCultureWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ParseExactWithCultureWorks()", $t.Line = "393", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ParseExactWithCultureWorks()", $t.Line = "439", $t));
                     t.Fixture.ParseExactWithCultureWorks();
+                },
+                ParseExactWithCultureReturnsNullIfTheInputIsInvalid: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ParseExactWithCultureReturnsNullIfTheInputIsInvalid()", $t.Line = "446", $t));
+                    t.Fixture.ParseExactWithCultureReturnsNullIfTheInputIsInvalid();
                 },
                 ParseExactUTCWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ParseExactUTCWorks()", $t.Line = "400", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ParseExactUTCWorks()", $t.Line = "452", $t));
                     t.Fixture.ParseExactUTCWorks();
+                },
+                ParseExactUtcReturnsNullIfTheInputIsInvalid: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ParseExactUtcReturnsNullIfTheInputIsInvalid()", $t.Line = "462", $t));
+                    t.Fixture.ParseExactUtcReturnsNullIfTheInputIsInvalid();
                 },
                 ParseExactUTCWithCultureWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ParseExactUTCWithCultureWorks()", $t.Line = "410", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ParseExactUTCWithCultureWorks()", $t.Line = "468", $t));
                     t.Fixture.ParseExactUTCWithCultureWorks();
+                },
+                ParseExactUtcWithCultureReturnsNullIfTheInputIsInvalid: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ParseExactUtcWithCultureReturnsNullIfTheInputIsInvalid()", $t.Line = "478", $t));
+                    t.Fixture.ParseExactUtcWithCultureReturnsNullIfTheInputIsInvalid();
                 },
                 ToDateStringWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToDateStringWorks()", $t.Line = "420", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToDateStringWorks()", $t.Line = "484", $t));
                     t.Fixture.ToDateStringWorks();
                 },
                 ToTimeStringWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToTimeStringWorks()", $t.Line = "428", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToTimeStringWorks()", $t.Line = "492", $t));
                     t.Fixture.ToTimeStringWorks();
                 },
                 ToUTCStringWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToUTCStringWorks()", $t.Line = "436", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToUTCStringWorks()", $t.Line = "500", $t));
                     t.Fixture.ToUTCStringWorks();
                 },
                 ToLocaleDateStringWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToLocaleDateStringWorks()", $t.Line = "444", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToLocaleDateStringWorks()", $t.Line = "508", $t));
                     t.Fixture.ToLocaleDateStringWorks();
                 },
                 ToLocaleTimeStringWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToLocaleTimeStringWorks()", $t.Line = "452", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToLocaleTimeStringWorks()", $t.Line = "516", $t));
                     t.Fixture.ToLocaleTimeStringWorks();
+                },
+                UtcYMDWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "UtcYMDWorks()", $t.Line = "570", $t));
+                    t.Fixture.UtcYMDWorks();
+                },
+                UtcYMDHWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "UtcYMDHWorks()", $t.Line = "576", $t));
+                    t.Fixture.UtcYMDHWorks();
+                },
+                UtcYMDHNWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "UtcYMDHNWorks()", $t.Line = "582", $t));
+                    t.Fixture.UtcYMDHNWorks();
+                },
+                UtcYMDHNSWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "UtcYMDHNSWorks()", $t.Line = "588", $t));
+                    t.Fixture.UtcYMDHNSWorks();
+                },
+                UtcYMDHNSUWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "UtcYMDHNSUWorks()", $t.Line = "594", $t));
+                    t.Fixture.UtcYMDHNSUWorks();
                 },
                 SubtractingDatesWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SubtractingDatesWorks()", $t.Line = "471", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SubtractingDatesWorks()", $t.Line = "599", $t));
                     t.Fixture.SubtractingDatesWorks();
                 },
                 SubtractMethodReturningTimeSpanWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SubtractMethodReturningTimeSpanWorks()", $t.Line = "478", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SubtractMethodReturningTimeSpanWorks()", $t.Line = "606", $t));
                     t.Fixture.SubtractMethodReturningTimeSpanWorks();
                 },
                 DateEqualityWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateEqualityWorks()", $t.Line = "485", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateEqualityWorks()", $t.Line = "635", $t));
                     t.Fixture.DateEqualityWorks();
                 },
                 DateInequalityWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateInequalityWorks()", $t.Line = "500", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateInequalityWorks()", $t.Line = "650", $t));
                     t.Fixture.DateInequalityWorks();
                 },
                 DateLessThanWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateLessThanWorks()", $t.Line = "515", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateLessThanWorks()", $t.Line = "665", $t));
                     t.Fixture.DateLessThanWorks();
                 },
                 DateLessEqualWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateLessEqualWorks()", $t.Line = "523", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateLessEqualWorks()", $t.Line = "673", $t));
                     t.Fixture.DateLessEqualWorks();
                 },
                 DateGreaterThanWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateGreaterThanWorks()", $t.Line = "531", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateGreaterThanWorks()", $t.Line = "681", $t));
                     t.Fixture.DateGreaterThanWorks();
                 },
                 DateGreaterEqualWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateGreaterEqualWorks()", $t.Line = "539", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateGreaterEqualWorks()", $t.Line = "689", $t));
                     t.Fixture.DateGreaterEqualWorks();
                 },
                 GetHashCodeWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetHashCodeWorks()", $t.Line = "688", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetHashCodeWorks()", $t.Line = "697", $t));
                     t.Fixture.GetHashCodeWorks();
                 },
                 EqualsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "EqualsWorks()", $t.Line = "697", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "EqualsWorks()", $t.Line = "706", $t));
                     t.Fixture.EqualsWorks();
                 },
-                DateTimeEqualsWorks: function (assert) {
+                IEquatableEqualsWorks_SPI_1608: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateTimeEqualsWorks()", $t.Line = "706", $t));
-                    t.Fixture.DateTimeEqualsWorks();
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IEquatableEqualsWorks_SPI_1608()", $t.Line = "715", $t));
+                    t.Fixture.IEquatableEqualsWorks_SPI_1608();
+                },
+                StaticEqualsWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StaticEqualsWorks()", $t.Line = "729", $t));
+                    t.Fixture.StaticEqualsWorks();
                 },
                 CompareToWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CompareToWorks()", $t.Line = "725", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CompareToWorks()", $t.Line = "738", $t));
                     t.Fixture.CompareToWorks();
+                },
+                StaticCompareWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StaticCompareWorks()", $t.Line = "746", $t));
+                    t.Fixture.StaticCompareWorks();
+                },
+                IComparableCompareToWorks_SPI_1609: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IComparableCompareToWorks_SPI_1609()", $t.Line = "754", $t));
+                    t.Fixture.IComparableCompareToWorks_SPI_1609();
+                },
+                DatePropertyWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DatePropertyWorks()", $t.Line = "763", $t));
+                    t.Fixture.DatePropertyWorks();
+                },
+                DayPropertyWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DayPropertyWorks()", $t.Line = "770", $t));
+                    t.Fixture.DayPropertyWorks();
+                },
+                DayOfWeekPropertyWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DayOfWeekPropertyWorks()", $t.Line = "777", $t));
+                    t.Fixture.DayOfWeekPropertyWorks();
+                },
+                DayOfYearPropertyWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DayOfYearPropertyWorks()", $t.Line = "784", $t));
+                    t.Fixture.DayOfYearPropertyWorks();
+                },
+                HourPropertyWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "HourPropertyWorks()", $t.Line = "791", $t));
+                    t.Fixture.HourPropertyWorks();
+                },
+                MillisecondPropertyWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "MillisecondPropertyWorks()", $t.Line = "798", $t));
+                    t.Fixture.MillisecondPropertyWorks();
+                },
+                MinutePropertyWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "MinutePropertyWorks()", $t.Line = "805", $t));
+                    t.Fixture.MinutePropertyWorks();
+                },
+                MonthPropertyWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "MonthPropertyWorks()", $t.Line = "812", $t));
+                    t.Fixture.MonthPropertyWorks();
+                },
+                SecondPropertyWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SecondPropertyWorks()", $t.Line = "819", $t));
+                    t.Fixture.SecondPropertyWorks();
+                },
+                YearPropertyWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "YearPropertyWorks()", $t.Line = "826", $t));
+                    t.Fixture.YearPropertyWorks();
+                },
+                AddDaysWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddDaysWorks()", $t.Line = "833", $t));
+                    t.Fixture.AddDaysWorks();
+                },
+                AddHoursWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddHoursWorks()", $t.Line = "842", $t));
+                    t.Fixture.AddHoursWorks();
+                },
+                AddMillisecondsWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddMillisecondsWorks()", $t.Line = "851", $t));
+                    t.Fixture.AddMillisecondsWorks();
+                },
+                AddMinutesWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddMinutesWorks()", $t.Line = "860", $t));
+                    t.Fixture.AddMinutesWorks();
+                },
+                AddMonthsWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddMonthsWorks()", $t.Line = "869", $t));
+                    t.Fixture.AddMonthsWorks();
+                },
+                AddMonthsEdgeCasesWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddMonthsEdgeCasesWorks()", $t.Line = "878", $t));
+                    t.Fixture.AddMonthsEdgeCasesWorks();
+                },
+                AddSecondsWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddSecondsWorks()", $t.Line = "904", $t));
+                    t.Fixture.AddSecondsWorks();
+                },
+                AddYearsWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddYearsWorks()", $t.Line = "913", $t));
+                    t.Fixture.AddYearsWorks();
+                },
+                DaysInMonthWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DaysInMonthWorks()", $t.Line = "922", $t));
+                    t.Fixture.DaysInMonthWorks();
+                },
+                IsLeapYearWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsLeapYearWorks()", $t.Line = "941", $t));
+                    t.Fixture.IsLeapYearWorks();
                 },
                 DateTimes: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, 1, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateTimes()", $t.Line = "742", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, 1, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateTimes()", $t.Line = "949", $t));
                     Bridge.ClientTest.SimpleTypes.JsDateTimeTests.DateTimes();
                 },
                 CreateUnixTimestampAndConvertBackToDateTime: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, 11, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CreateUnixTimestampAndConvertBackToDateTime()", $t.Line = "763", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, 11, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CreateUnixTimestampAndConvertBackToDateTime()", $t.Line = "970", $t));
                     t.Fixture.CreateUnixTimestampAndConvertBackToDateTime();
                 },
                 ToShortDateStringWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToShortDateStringWorks()", $t.Line = "789", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToShortDateStringWorks()", $t.Line = "996", $t));
                     t.Fixture.ToShortDateStringWorks();
                 },
                 ToShortTimeStringWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToShortTimeStringWorks()", $t.Line = "814", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.JsDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.JsDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToShortTimeStringWorks()", $t.Line = "1021", $t));
                     t.Fixture.ToShortTimeStringWorks();
                 }
             }
@@ -12597,134 +12869,149 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                     var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetValueOrDefaultWithArgWorks()", $t.Line = "98", $t));
                     t.Fixture.GetValueOrDefaultWithArgWorks();
                 },
+                LiftedGetHashCode1Works: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedGetHashCode1Works()", $t.Line = "106", $t));
+                    t.Fixture.LiftedGetHashCode1Works();
+                },
+                LiftedGetHashCode2Works: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedGetHashCode2Works()", $t.Line = "137", $t));
+                    t.Fixture.LiftedGetHashCode2Works();
+                },
+                LiftedGetHashCode3Works: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedGetHashCode3Works()", $t.Line = "168", $t));
+                    t.Fixture.LiftedGetHashCode3Works();
+                },
                 LiftedEqualityWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedEqualityWorks()", $t.Line = "106", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedEqualityWorks()", $t.Line = "230", $t));
                     t.Fixture.LiftedEqualityWorks();
                 },
                 LiftedInequalityWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedInequalityWorks()", $t.Line = "116", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedInequalityWorks()", $t.Line = "240", $t));
                     t.Fixture.LiftedInequalityWorks();
                 },
                 LiftedLessThanWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedLessThanWorks()", $t.Line = "126", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedLessThanWorks()", $t.Line = "250", $t));
                     t.Fixture.LiftedLessThanWorks();
                 },
                 LiftedGreaterThanWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedGreaterThanWorks()", $t.Line = "136", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedGreaterThanWorks()", $t.Line = "260", $t));
                     t.Fixture.LiftedGreaterThanWorks();
                 },
                 LiftedLessThanOrEqualWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedLessThanOrEqualWorks()", $t.Line = "146", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedLessThanOrEqualWorks()", $t.Line = "270", $t));
                     t.Fixture.LiftedLessThanOrEqualWorks();
                 },
                 LiftedGreaterThanOrEqualWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedGreaterThanOrEqualWorks()", $t.Line = "156", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedGreaterThanOrEqualWorks()", $t.Line = "280", $t));
                     t.Fixture.LiftedGreaterThanOrEqualWorks();
                 },
                 LiftedSubtractionWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedSubtractionWorks()", $t.Line = "166", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedSubtractionWorks()", $t.Line = "290", $t));
                     t.Fixture.LiftedSubtractionWorks();
                 },
                 LiftedAdditionWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedAdditionWorks()", $t.Line = "174", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedAdditionWorks()", $t.Line = "298", $t));
                     t.Fixture.LiftedAdditionWorks();
                 },
                 LiftedModWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedModWorks()", $t.Line = "182", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedModWorks()", $t.Line = "306", $t));
                     t.Fixture.LiftedModWorks();
                 },
                 LiftedFloatingPointDivisionWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedFloatingPointDivisionWorks()", $t.Line = "190", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedFloatingPointDivisionWorks()", $t.Line = "314", $t));
                     t.Fixture.LiftedFloatingPointDivisionWorks();
                 },
                 LiftedIntegerDivisionWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedIntegerDivisionWorks()", $t.Line = "198", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedIntegerDivisionWorks()", $t.Line = "322", $t));
                     t.Fixture.LiftedIntegerDivisionWorks();
                 },
                 LiftedMultiplicationWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedMultiplicationWorks()", $t.Line = "206", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedMultiplicationWorks()", $t.Line = "330", $t));
                     t.Fixture.LiftedMultiplicationWorks();
                 },
                 LiftedBitwiseAndWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedBitwiseAndWorks()", $t.Line = "214", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedBitwiseAndWorks()", $t.Line = "338", $t));
                     t.Fixture.LiftedBitwiseAndWorks();
                 },
                 LiftedBitwiseOrWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedBitwiseOrWorks()", $t.Line = "222", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedBitwiseOrWorks()", $t.Line = "346", $t));
                     t.Fixture.LiftedBitwiseOrWorks();
                 },
                 LiftedBitwiseXorWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedBitwiseXorWorks()", $t.Line = "230", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedBitwiseXorWorks()", $t.Line = "354", $t));
                     t.Fixture.LiftedBitwiseXorWorks();
                 },
                 LiftedLeftShiftWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedLeftShiftWorks()", $t.Line = "238", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedLeftShiftWorks()", $t.Line = "362", $t));
                     t.Fixture.LiftedLeftShiftWorks();
                 },
                 LiftedSignedRightShiftWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedSignedRightShiftWorks()", $t.Line = "246", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedSignedRightShiftWorks()", $t.Line = "370", $t));
                     t.Fixture.LiftedSignedRightShiftWorks();
                 },
                 LiftedUnsignedRightShiftWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedUnsignedRightShiftWorks()", $t.Line = "254", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedUnsignedRightShiftWorks()", $t.Line = "378", $t));
                     t.Fixture.LiftedUnsignedRightShiftWorks();
                 },
                 LiftedBooleanAndWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedBooleanAndWorks()", $t.Line = "262", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedBooleanAndWorks()", $t.Line = "386", $t));
                     t.Fixture.LiftedBooleanAndWorks();
                 },
                 LiftedBooleanOrWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedBooleanOrWorks()", $t.Line = "277", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedBooleanOrWorks()", $t.Line = "401", $t));
                     t.Fixture.LiftedBooleanOrWorks();
                 },
                 LiftedBooleanNotWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedBooleanNotWorks()", $t.Line = "292", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedBooleanNotWorks()", $t.Line = "416", $t));
                     t.Fixture.LiftedBooleanNotWorks();
                 },
                 LiftedNegationWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedNegationWorks()", $t.Line = "301", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedNegationWorks()", $t.Line = "425", $t));
                     t.Fixture.LiftedNegationWorks();
                 },
                 LiftedUnaryPlusWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedUnaryPlusWorks()", $t.Line = "309", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedUnaryPlusWorks()", $t.Line = "433", $t));
                     t.Fixture.LiftedUnaryPlusWorks();
                 },
                 LiftedOnesComplementWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedOnesComplementWorks()", $t.Line = "317", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedOnesComplementWorks()", $t.Line = "441", $t));
                     t.Fixture.LiftedOnesComplementWorks();
                 },
                 CoalesceWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CoalesceWorks()", $t.Line = "325", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CoalesceWorks()", $t.Line = "449", $t));
                     t.Fixture.CoalesceWorks();
                 },
                 BoxedandUnboxedEnumToStringWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "BoxedandUnboxedEnumToStringWorks()", $t.Line = "343", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.NullableTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.NullableTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "BoxedandUnboxedEnumToStringWorks()", $t.Line = "467", $t));
                     t.Fixture.BoxedandUnboxedEnumToStringWorks();
                 }
             }
@@ -16643,6 +16930,86 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ScriptTests)],
+        statics: {
+            methods: {
+                BooleanWorks_SPI_1619: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "BooleanWorks_SPI_1619()", $t.Line = "75", $t));
+                    t.Fixture.BooleanWorks_SPI_1619();
+                },
+                EvalWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "EvalWorks()", $t.Line = "84", $t));
+                    t.Fixture.EvalWorks();
+                },
+                IsNullWorks_SPI_1618: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsNullWorks_SPI_1618()", $t.Line = "100", $t));
+                    t.Fixture.IsNullWorks_SPI_1618();
+                },
+                IsUndefinedWorks_SPI_1616: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsUndefinedWorks_SPI_1616()", $t.Line = "110", $t));
+                    t.Fixture.IsUndefinedWorks_SPI_1616();
+                },
+                HasValueWorks_SPI_1617: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "HasValueWorks_SPI_1617()", $t.Line = "120", $t));
+                    t.Fixture.HasValueWorks_SPI_1617();
+                },
+                TypeOfWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TypeOfWorks()", $t.Line = "136", $t));
+                    t.Fixture.TypeOfWorks();
+                },
+                DeleteWorksForJsClass_SPI_1571: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests, 9, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DeleteWorksForJsClass_SPI_1571()", $t.Line = "152", $t));
+                    t.Fixture.DeleteWorksForJsClass_SPI_1571();
+                },
+                DeleteWorksForClassPrototype_SPI_1571: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests, 9, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DeleteWorksForClassPrototype_SPI_1571()", $t.Line = "190", $t));
+                    t.Fixture.DeleteWorksForClassPrototype_SPI_1571();
+                },
+                InWorks_SPI_1573: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "InWorks_SPI_1573()", $t.Line = "227", $t));
+                    t.Fixture.InWorks_SPI_1573();
+                },
+                InvokeMethodWorks_SPI_1572: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "InvokeMethodWorks_SPI_1572()", $t.Line = "238", $t));
+                    t.Fixture.InvokeMethodWorks_SPI_1572();
+                },
+                ParseIntWithoutRadixWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ParseIntWithoutRadixWorks()", $t.Line = "247", $t));
+                    t.Fixture.ParseIntWithoutRadixWorks();
+                },
+                ParseIntWithRadixWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ScriptTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ScriptTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ParseIntWithRadixWorks()", $t.Line = "253", $t));
+                    t.Fixture.ParseIntWithRadixWorks();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ScriptTests", $t.File = "Batch1\\ScriptTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.SingleTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.SingleTests)],
         statics: {
@@ -16964,98 +17331,138 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             methods: {
                 TypePropertiesAreCorrect: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TypePropertiesAreCorrect()", $t.Line = "18", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TypePropertiesAreCorrect()", $t.Line = "19", $t));
                     t.Fixture.TypePropertiesAreCorrect();
                 },
                 DefaultConstructorWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultConstructorWorks()", $t.Line = "26", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultConstructorWorks()", $t.Line = "28", $t));
                     t.Fixture.DefaultConstructorWorks();
                 },
                 ConstructorWithCapacityWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ConstructorWithCapacityWorks()", $t.Line = "34", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ConstructorWithCapacityWorks()", $t.Line = "36", $t));
                     t.Fixture.ConstructorWithCapacityWorks();
                 },
                 InitialTextConstructorWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "InitialTextConstructorWorks()", $t.Line = "42", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "InitialTextConstructorWorks()", $t.Line = "44", $t));
                     t.Fixture.InitialTextConstructorWorks();
                 },
                 InitialTextConstructorWithCapacityWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "InitialTextConstructorWithCapacityWorks()", $t.Line = "50", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "InitialTextConstructorWithCapacityWorks()", $t.Line = "52", $t));
                     t.Fixture.InitialTextConstructorWithCapacityWorks();
                 },
                 SubstringConstructorWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SubstringConstructorWorks()", $t.Line = "58", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SubstringConstructorWorks()", $t.Line = "60", $t));
                     t.Fixture.SubstringConstructorWorks();
+                },
+                SubstringConstructorWorks_SPI_1615: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SubstringConstructorWorks_SPI_1615()", $t.Line = "68", $t));
+                    t.Fixture.SubstringConstructorWorks_SPI_1615();
                 },
                 AppendBoolWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AppendBoolWorks()", $t.Line = "66", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AppendBoolWorks()", $t.Line = "78", $t));
                     t.Fixture.AppendBoolWorks();
                 },
                 AppendCharWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AppendCharWorks()", $t.Line = "75", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AppendCharWorks()", $t.Line = "87", $t));
                     t.Fixture.AppendCharWorks();
                 },
                 AppendIntWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AppendIntWorks()", $t.Line = "84", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AppendIntWorks()", $t.Line = "96", $t));
                     t.Fixture.AppendIntWorks();
                 },
                 AppendDoubleWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AppendDoubleWorks()", $t.Line = "93", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AppendDoubleWorks()", $t.Line = "105", $t));
                     t.Fixture.AppendDoubleWorks();
                 },
                 AppendObjectWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AppendObjectWorks()", $t.Line = "102", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AppendObjectWorks()", $t.Line = "114", $t));
                     t.Fixture.AppendObjectWorks();
                 },
                 AppendStringWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AppendStringWorks()", $t.Line = "111", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AppendStringWorks()", $t.Line = "123", $t));
                     t.Fixture.AppendStringWorks();
                 },
                 AppendLineWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AppendLineWorks()", $t.Line = "120", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AppendLineWorks()", $t.Line = "132", $t));
                     t.Fixture.AppendLineWorks();
                 },
                 AppendLineStringWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AppendLineStringWorks()", $t.Line = "129", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AppendLineStringWorks()", $t.Line = "141", $t));
                     t.Fixture.AppendLineStringWorks();
+                },
+                AppendLineBoolWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AppendLineBoolWorks()", $t.Line = "150", $t));
+                    t.Fixture.AppendLineBoolWorks();
+                },
+                AppendLineCharWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AppendLineCharWorks()", $t.Line = "159", $t));
+                    t.Fixture.AppendLineCharWorks();
+                },
+                AppendLineIntWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AppendLineIntWorks()", $t.Line = "168", $t));
+                    t.Fixture.AppendLineIntWorks();
+                },
+                AppendLineDoubleWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AppendLineDoubleWorks()", $t.Line = "177", $t));
+                    t.Fixture.AppendLineDoubleWorks();
+                },
+                AppendLineObjectWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AppendLineObjectWorks()", $t.Line = "186", $t));
+                    t.Fixture.AppendLineObjectWorks();
                 },
                 ClearWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ClearWorks()", $t.Line = "138", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ClearWorks()", $t.Line = "195", $t));
                     t.Fixture.ClearWorks();
                 },
                 SetLengthWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SetLengthWorks()", $t.Line = "148", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SetLengthWorks()", $t.Line = "204", $t));
                     t.Fixture.SetLengthWorks();
                 },
                 ToStringWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToStringWorks()", $t.Line = "187", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToStringWorks()", $t.Line = "243", $t));
                     t.Fixture.ToStringWorks();
                 },
                 LengthPropertyWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LengthPropertyWorks()", $t.Line = "195", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LengthPropertyWorks()", $t.Line = "251", $t));
                     t.Fixture.LengthPropertyWorks();
                 },
                 StringBuilders: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, 21, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StringBuilders()", $t.Line = "203", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, 21, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StringBuilders()", $t.Line = "279", $t));
                     Bridge.ClientTest.Text.StringBuilderTests.StringBuilders();
+                },
+                StringBuilderIndexerGetWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StringBuilderIndexerGetWorks()", $t.Line = "353", $t));
+                    Bridge.ClientTest.Text.StringBuilderTests.StringBuilderIndexerGetWorks();
+                },
+                StringBuilderIndexerSetWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.StringBuilderTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.StringBuilderTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StringBuilderIndexerSetWorks()", $t.Line = "377", $t));
+                    Bridge.ClientTest.Text.StringBuilderTests.StringBuilderIndexerSetWorks();
                 }
             }
         },
@@ -19383,6 +19790,156 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 var $t;
                 if (this.context == null) {
                     this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.BasicCSharp.TestTryCatchFinallyBlocks", $t.File = "Batch1\\BasicCSharp\\TestTryCatchFinallyBlocks.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs)],
+        statics: {
+            methods: {
+                IsClassIsFalse: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsClassIsFalse()", $t.Line = "203", $t));
+                    t.Fixture.IsClassIsFalse();
+                },
+                UserDefinedStructCanBeUsed: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "UserDefinedStructCanBeUsed()", $t.Line = "210", $t));
+                    t.Fixture.UserDefinedStructCanBeUsed();
+                },
+                DefaultConstructorOfStructReturnsInstanceWithAllMembersInitialized: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultConstructorOfStructReturnsInstanceWithAllMembersInitialized()", $t.Line = "217", $t));
+                    t.Fixture.DefaultConstructorOfStructReturnsInstanceWithAllMembersInitialized();
+                },
+                DefaultConstructorOfStructReturnsInstanceWithAllMembersInitializedGeneric: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultConstructorOfStructReturnsInstanceWithAllMembersInitializedGeneric()", $t.Line = "228", $t));
+                    t.Fixture.DefaultConstructorOfStructReturnsInstanceWithAllMembersInitializedGeneric();
+                },
+                DefaultValueOfStructIsInstanceWithAllMembersInitialized: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultValueOfStructIsInstanceWithAllMembersInitialized()", $t.Line = "239", $t));
+                    t.Fixture.DefaultValueOfStructIsInstanceWithAllMembersInitialized();
+                },
+                DefaultValueOfStructIsInstanceWithAllMembersInitializedGeneric: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultValueOfStructIsInstanceWithAllMembersInitializedGeneric()", $t.Line = "250", $t));
+                    t.Fixture.DefaultValueOfStructIsInstanceWithAllMembersInitializedGeneric();
+                },
+                DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirect: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirect()", $t.Line = "261", $t));
+                    t.Fixture.DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirect();
+                },
+                DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirectGeneric: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirectGeneric()", $t.Line = "272", $t));
+                    t.Fixture.DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirectGeneric();
+                },
+                DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorks()", $t.Line = "283", $t));
+                    t.Fixture.DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorks();
+                },
+                DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorksGeneric: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorksGeneric()", $t.Line = "290", $t));
+                    t.Fixture.DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorksGeneric();
+                },
+                DefaultGetHashCodeGeneratesHashCodeBasedOnAllInstanceFields: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultGetHashCodeGeneratesHashCodeBasedOnAllInstanceFields()", $t.Line = "297", $t));
+                    t.Fixture.DefaultGetHashCodeGeneratesHashCodeBasedOnAllInstanceFields();
+                },
+                DefaultEqualsUsesValueEqualityForAllMembers: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultEqualsUsesValueEqualityForAllMembers()", $t.Line = "311", $t));
+                    t.Fixture.DefaultEqualsUsesValueEqualityForAllMembers();
+                },
+                CanOverrideGetHashCode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CanOverrideGetHashCode()", $t.Line = "323", $t));
+                    t.Fixture.CanOverrideGetHashCode();
+                },
+                CanOverrideEquals: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CanOverrideEquals()", $t.Line = "330", $t));
+                    t.Fixture.CanOverrideEquals();
+                },
+                CanLiftUserDefinedBinaryOperator: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CanLiftUserDefinedBinaryOperator()", $t.Line = "340", $t));
+                    t.Fixture.CanLiftUserDefinedBinaryOperator();
+                },
+                CanLiftUserDefinedUnaryOperator_SPI_1634: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CanLiftUserDefinedUnaryOperator_SPI_1634()", $t.Line = "348", $t));
+                    t.Fixture.CanLiftUserDefinedUnaryOperator_SPI_1634();
+                },
+                ClonedValueTypeIsCorrectType: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ClonedValueTypeIsCorrectType()", $t.Line = "357", $t));
+                    t.Fixture.ClonedValueTypeIsCorrectType();
+                },
+                FieldsAreClonedWhenValueTypeIsCopied: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FieldsAreClonedWhenValueTypeIsCopied()", $t.Line = "368", $t));
+                    t.Fixture.FieldsAreClonedWhenValueTypeIsCopied();
+                },
+                AutoPropertyBackingFieldsAreClonedWhenValueTypeIsCopied: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AutoPropertyBackingFieldsAreClonedWhenValueTypeIsCopied()", $t.Line = "382", $t));
+                    t.Fixture.AutoPropertyBackingFieldsAreClonedWhenValueTypeIsCopied();
+                },
+                PropertiesWithFieldImplementationAreClonedWhenValueTypeIsCopied: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "PropertiesWithFieldImplementationAreClonedWhenValueTypeIsCopied()", $t.Line = "396", $t));
+                    t.Fixture.PropertiesWithFieldImplementationAreClonedWhenValueTypeIsCopied();
+                },
+                NestedStructsAreClonedWhenValueTypeIsCopied_SPI_1613: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "NestedStructsAreClonedWhenValueTypeIsCopied_SPI_1613()", $t.Line = "410", $t));
+                    t.Fixture.NestedStructsAreClonedWhenValueTypeIsCopied_SPI_1613();
+                },
+                GenericMutableValueTypeWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GenericMutableValueTypeWorks()", $t.Line = "429", $t));
+                    t.Fixture.GenericMutableValueTypeWorks();
+                },
+                CloningValueTypeWithNamedDefaultConstructorWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CloningValueTypeWithNamedDefaultConstructorWorks()", $t.Line = "444", $t));
+                    t.Fixture.CloningValueTypeWithNamedDefaultConstructorWorks();
+                },
+                CloningNullableValueTypesWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CloningNullableValueTypesWorks()", $t.Line = "457", $t));
+                    t.Fixture.CloningNullableValueTypesWorks();
+                },
+                ToStringWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToStringWorks()", $t.Line = "473", $t));
+                    t.Fixture.ToStringWorks();
+                },
+                ToStringNullabeTypeWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.TestUserDefinedStructs).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestUserDefinedStructs, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToStringNullabeTypeWorks()", $t.Line = "483", $t));
+                    t.Fixture.ToStringNullabeTypeWorks();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.TestUserDefinedStructs", $t.File = "Batch1\\BasicCSharp\\TestUserDefinedStructs.cs", $t);
                 }
                 return this.context;
             }

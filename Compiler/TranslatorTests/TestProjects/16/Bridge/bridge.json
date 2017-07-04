@@ -2,5 +2,9 @@
   "output": "Bridge\\output",
   "cleanOutputFolderBeforeBuildPattern": "*.*",
   "outputFormatting": "Formatted",
-  "outputBy": "Namespace"
+  "outputBy": "Namespace",
+  "logging": {
+    "level":  "None"
+  },
+  "report": true
 }

@@ -6,5 +6,10 @@
   "sourceMap": {
     "enabled": true,
     "eol": "crlf"
-  }
+  },
+  "console":true,
+  "logging": {
+    "level":  "None"
+  },
+  "report": "reports/"
 }

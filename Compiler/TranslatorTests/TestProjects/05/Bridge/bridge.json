@@ -4,6 +4,14 @@
   "outputBy": "Namespace",
   "outputFormatting": "Formatted",
   "fileNameCasing": "CamelCase",
+  // console setting has precedence over resources
+  "console": true,
+  "resources":[
+    {
+      "name": "bridge.console.js",
+      "extract": false
+    }
+  ],
   "sourceMap": {
     "enabled": true,
     "eol": "crlf"
@@ -11,5 +19,6 @@
   "logging": {
     "level": "None",
     "folder": "../../$(OutputPath)" // output to the Integration Test common log
-  }
+  },
+  "report": "bridge.report.log"
 }

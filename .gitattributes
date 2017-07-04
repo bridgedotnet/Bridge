@@ -10,11 +10,14 @@
 *.cs text
 *.cshtml text
 *.csproj text
+*.css eol=lf
+*.d.ts eol=lf
 *.htm text
 *.html eol=lf
 *.js eol=lf
 *.jsb text
 *.json text
+*.log eol=lf
 *.md text
 *.php text
 *.ps1 text
@@ -22,7 +25,6 @@
 *.sln text
 *.sql text
 *.svg eol=lf
-*.d.ts eol=lf
 *.target text
 *.txt eol=lf
 *.xml text

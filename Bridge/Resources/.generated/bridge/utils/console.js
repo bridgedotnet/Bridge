@@ -417,7 +417,7 @@
                 messageIcon.appendChild(messageIconPath);
 
                 var messageContainer = document.createElement("div");
-                messageContainer.innerHTML = message;
+                messageContainer.innerText = message;
                 messageContainer.setAttribute("style", System.String.concat("color:", color, ";white-space:pre;margin-left:12px;line-height:1.4;min-height:18px;"));
 
                 messageItem.appendChild(messageIcon);

@@ -5,6 +5,9 @@
   "generateTypeScript": true,
   "fileName":  "allCombined.js",
   "combineScripts": true,
+  "console": {
+    "enabled": true
+  },
   "sourceMap": {
     "enabled": true,
     "eol": "crlf"
@@ -28,5 +31,6 @@
   "logging": {
     "level": "None",
     "folder": "../../$(OutputPath)" // output to the Integration Test common log
-  }
+  },
+  "report": "bridge.report.custom.name.log"
 }

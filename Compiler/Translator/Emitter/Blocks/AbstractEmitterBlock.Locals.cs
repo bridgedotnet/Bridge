@@ -103,6 +103,11 @@ namespace Bridge.Translator
 
         public string AddLocal(string name, AstNode node, AstType type, string valueName = null)
         {
+            if (this.Emitter.Locals.ContainsKey(name))
+            {
+                throw new EmitterException(node, string.Format(Constants.Messages.Exceptions.DUPLICATE_LOCAL_VARIABLE, name));
+            }
+
             this.Emitter.Locals.Add(name, type);
 
             name = name.StartsWith(JS.Vars.FIX_ARGUMENT_NAME) ? name.Substring(JS.Vars.FIX_ARGUMENT_NAME.Length) : name;

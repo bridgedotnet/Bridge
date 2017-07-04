@@ -49,6 +49,7 @@
     <Compile Include="BasicCSharp\TestGoto.cs" />
     <Compile Include="Collections\Generic\QueueTests.cs" />
     <Compile Include="Collections\Generic\StackTests.cs" />
+    <Compile Include="ScriptTests.cs" />
     <Compile Include="SystemConsoleTests.cs" />
     <Compile Include="Collections\Generic\IReadOnlyCollectionTests.cs" />
     <Compile Include="Collections\Generic\IReadOnlyDictionaryTests.cs" />
@@ -194,6 +195,7 @@
     <Compile Include="Threading\Tasks\AsyncTests.cs" />
     <Compile Include="Threading\Tasks\PromiseTests.cs" />
     <Compile Include="Threading\Tasks\TaskTests.cs" />
+    <Compile Include="BasicCSharp\TestUserDefinedStructs.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
     <Compile Include="Utilities\DecimalHelper.cs" />
     <Compile Include="Utilities\TestData.cs" />
@@ -288,19 +290,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Bridge.Test, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Bridge.Test.Core.1.0.0\lib\net40\Bridge.Test.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Readme\Bridge.NET\README.Bridge.Test.txt" />
-    <Content Include="App_Readme\Bridge.NET\README.txt" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
     <EmbeddedResource Include="Reflection\Resource1.bin" />
     <EmbeddedResource Include="Reflection\Resource2.bin" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Bridge.Test, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Bridge.Test.Core.1.0.0-beta4\lib\net40\Bridge.Test.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir).nuget\NuGet.targets" Condition="Exists('$(SolutionDir).nuget\NuGet.targets')" />

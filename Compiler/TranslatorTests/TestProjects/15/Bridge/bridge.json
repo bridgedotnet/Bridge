@@ -3,5 +3,9 @@
   "cleanOutputFolderBeforeBuildPattern": "*.*",
   "fileName": "code.js",
   "preserveMemberCase": "true",
-  "outputFormatting": "Formatted"
+  "outputFormatting": "Formatted",
+  "logging": {
+    "level":  "None"
+  },
+  "report": true
 }

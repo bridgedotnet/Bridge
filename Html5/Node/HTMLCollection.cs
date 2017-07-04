@@ -8,7 +8,8 @@ namespace Bridge.Html5
     /// HTMLCollection is an class representing a generic collection (array) of elements (in document order) and offers methods and properties for selecting from the list.
     /// </summary>
     [External]
-    [Name("HTMLCollection")]
+    [Namespace(false)]
+    [IgnoreGeneric]
     public class HTMLCollection<T> : IEnumerable<T> where T : HTMLElement
     {
         protected internal HTMLCollection()

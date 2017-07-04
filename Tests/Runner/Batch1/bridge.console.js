@@ -1,7 +1,7 @@
 /**
- * @version   : 16.0.0-beta3 - Bridge.NET
+ * @version   : 16.0.0-beta4 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2017-06-19
+ * @date      : 2017-06-27
  * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
  */
@@ -427,7 +427,7 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                 messageIcon.appendChild(messageIconPath);
 
                 var messageContainer = document.createElement("div");
-                messageContainer.innerHTML = message;
+                messageContainer.innerText = message;
                 messageContainer.setAttribute("style", System.String.concat("color:", color, ";white-space:pre;margin-left:12px;line-height:1.4;min-height:18px;"));
 
                 messageItem.appendChild(messageIcon);

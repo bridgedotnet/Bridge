@@ -67,20 +67,13 @@ namespace Bridge.Translator.Tests.Helpers
                 {
                     private const string PREFIX = Issues.PREFIX + "N2795.";
 
-                    public class ShouldFail
-                    {
-                        private const string PREFIX = N2795.PREFIX + "ShouldFail.";
-
-                        public const string NO_NESTED_TYPES = PREFIX + "NoNestedTypesInVirtualClass";
-                    }
-
-
                     public class ShouldNotFail
                     {
                         private const string PREFIX = N2795.PREFIX + "ShouldNotFail.";
 
                         public const string VIRTUAL_TYPES = PREFIX + "VirtualTypes";
                         public const string NON_VIRTUAL_TYPES = PREFIX + "NonVirtualTypes";
+                        public const string NESTED_TYPES = PREFIX + "NestedTypesInVirtualClass";
                     }
                 }
             }

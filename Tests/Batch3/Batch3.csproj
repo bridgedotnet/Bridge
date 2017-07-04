@@ -247,7 +247,6 @@
     <Compile Include="BridgeIssues\1200\N1226.cs" />
     <Compile Include="BridgeIssues\1200\N1231.cs" />
     <Compile Include="BridgeIssues\1200\N1232.cs" />
-    <Compile Include="BridgeIssues\1200\N1241.cs" />
     <Compile Include="BridgeIssues\1200\N1249.cs" />
     <Compile Include="BridgeIssues\1200\N1253.cs" />
     <Compile Include="BridgeIssues\1200\N1256.cs" />
@@ -584,6 +583,21 @@
     <Compile Include="BridgeIssues\2700\N2793.cs" />
     <Compile Include="BridgeIssues\2700\N2794.cs" />
     <Compile Include="BridgeIssues\2700\N2795.cs" />
+    <Compile Include="BridgeIssues\2800\N2818.cs" />
+    <Compile Include="BridgeIssues\2800\N2840.cs" />
+    <Compile Include="BridgeIssues\2800\N2844.cs" />
+    <Compile Include="BridgeIssues\2800\N2847.cs" />
+    <Compile Include="BridgeIssues\2800\N2855.cs" />
+    <Compile Include="BridgeIssues\2800\N2859.cs" />
+    <Compile Include="BridgeIssues\2800\N2871.cs" />
+    <Compile Include="BridgeIssues\2800\N2874.cs" />
+    <Compile Include="BridgeIssues\2800\N2886.cs" />
+    <Compile Include="BridgeIssues\2800\N2898.cs" />
+    <Compile Include="BridgeIssues\2800\N2899.cs" />
+    <Compile Include="BridgeIssues\2900\N2901.cs" />
+    <Compile Include="BridgeIssues\2900\N2903.cs" />
+    <Compile Include="BridgeIssues\2900\N2904.cs" />
+    <Compile Include="BridgeIssues\2900\N2911.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />
     <Compile Include="Utilities\DecimalHelper.cs" />
@@ -620,17 +634,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="BridgeIssues\0200\" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="Bridge.Test, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Bridge.Test.Core.1.0.0\lib\net40\Bridge.Test.dll</HintPath>
+      <HintPath>..\..\packages\Bridge.Test.Core.1.0.0-beta4\lib\net40\Bridge.Test.dll</HintPath>
       <Private>True</Private>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Readme\Bridge.NET\README.Bridge.Test.txt" />
-    <Content Include="App_Readme\Bridge.NET\README.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BridgeIssues\0200\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir).nuget\NuGet.targets" Condition="Exists('$(SolutionDir).nuget\NuGet.targets')" />

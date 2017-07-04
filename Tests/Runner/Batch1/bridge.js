@@ -1,7 +1,7 @@
 /**
- * @version   : 16.0.0-beta3 - Bridge.NET
+ * @version   : 16.0.0-beta4 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2017-06-19
+ * @date      : 2017-06-27
  * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
  */
@@ -131,7 +131,7 @@
         virtual: function (name, isClass) {
             var type = Bridge.unroll(name);
 
-            if (!type) {
+            if (!type || !Bridge.isFunction(type)) {
                 var old = Bridge.Class.staticInitAllow;
                 type = isClass ? Bridge.define(name) : Bridge.definei(name);
                 Bridge.Class.staticInitAllow = true;
@@ -1699,7 +1699,8 @@
 
             combine: function (fn1, fn2) {
                 if (!fn1 || !fn2) {
-                    return fn1 || fn2;
+                    var fn = fn1 || fn2;
+                    return fn ? Bridge.fn.$build([fn]) : fn;
                 }
 
                 var list1 = fn1.$invocationList ? fn1.$invocationList : [fn1],
@@ -1708,7 +1709,16 @@
                 return Bridge.fn.$build(list1.concat(list2));
             },
 
-            getInvocationList: function () {
+            getInvocationList: function (fn) {
+                if (fn == null) {
+                    throw new System.ArgumentNullException();
+                }
+
+                if(!fn.$invocationList) {
+                    fn.$invocationList = [fn];
+                }
+
+                return fn.$invocationList;
             },
 
             remove: function (fn1, fn2) {
@@ -1722,26 +1732,23 @@
                     exclude,
                     i, j;
 
-                for (i = list1.length - 1; i >= 0; i--) {
-                    exclude = false;
+                for (j = 0; j < list2.length; j++) {
+                    exclude = -1;
 
-                    for (j = 0; j < list2.length; j++) {
+                    for (i = list1.length - 1; i >= 0; i--) {
                         if (list1[i] === list2[j] ||
                             ((list1[i].$method && (list1[i].$method === list2[j].$method)) && (list1[i].$scope && (list1[i].$scope === list2[j].$scope)))) {
-                            exclude = true;
-
+                            exclude = i;
                             break;
                         }
                     }
 
-                    if (!exclude) {
-                        result.push(list1[i]);
+                    if (exclude > -1) {
+                        list1.splice(exclude, 1);
                     }
                 }
 
-                result.reverse();
-
-                return Bridge.fn.$build(result);
+                return Bridge.fn.$build(list1);
             }
         },
 
@@ -1916,6 +1923,12 @@
             }
 
             return null;
+        },
+
+        toStringFn: function(type) {
+            return function(value) {
+                return System.Enum.toString(type, value);
+            };
         },
 
         toString: function (enumType, value, forceFlags) {
@@ -3301,8 +3314,8 @@
     // @source systemAssemblyVersion.js
 
     Bridge.init(function () {
-        Bridge.SystemAssembly.version = "16.0.0-beta3";
-        Bridge.SystemAssembly.compiler = "16.0.0-beta3";
+        Bridge.SystemAssembly.version = "16.0.0-beta4";
+        Bridge.SystemAssembly.compiler = "16.0.0-beta4";
     });
 
     Bridge.define("Bridge.Utils.SystemAssemblyVersion");
@@ -4047,11 +4060,36 @@
             return result;
         },
 
-        midel: function (mi, target, typeArguments) {
-            if (mi.is && !!target) {
-                throw new System.ArgumentException('Cannot specify target for static method');
-            } else if (!mi.is && !target)
-                throw new System.ArgumentException('Must specify target for instance method');
+        createDelegate: function(mi, firstArgument) {
+            var isStatic = mi.is || mi.sm,
+                bind = firstArgument != null && !isStatic,
+                method = Bridge.Reflection.midel(mi, firstArgument, null, bind);
+
+            if (!bind) {
+                if (isStatic) {
+                    return function () {
+                        var args = firstArgument != null ? [firstArgument] : [];
+                        return method.apply(mi.td, args.concat(Array.prototype.slice.call(arguments, 0)));
+                    };
+                }
+                else {
+                    return function (target) {
+                        return method.apply(target, Array.prototype.slice.call(arguments, 1));
+                    };
+                }
+            }
+
+            return method;
+        },
+
+        midel: function (mi, target, typeArguments, bind) {
+            if (bind !== false) {
+                if (mi.is && !!target) {
+                    throw new System.ArgumentException('Cannot specify target for static method');
+                } else if (!mi.is && !target) {
+                    throw new System.ArgumentException('Must specify target for instance method');
+                }
+            }
 
             var method;
 
@@ -4060,7 +4098,7 @@
             } else if (mi.fs) {
                 method = function (v) { (mi.is ? mi.td : this)[mi.fs] = v; };
             } else {
-                method = mi.def || (mi.is || mi.sm ? mi.td[mi.sn] : target[mi.sn]);
+                method = mi.def || (mi.is || mi.sm ? mi.td[mi.sn] : (target ? target[mi.sn] : mi.td.prototype[mi.sn]));
 
                 if (mi.tpc) {
                     if (!typeArguments || typeArguments.length !== mi.tpc) {
@@ -4091,7 +4129,7 @@
                 }
             }
 
-            return Bridge.fn.bind(target, method);
+            return bind !== false ? Bridge.fn.bind(target, method) : method;
         },
 
         invokeCI: function (ci, args) {
@@ -4710,14 +4748,6 @@
                 return System.String.formatProvider.apply(System.String, [formatProvider, this.format].concat(this.args));
             }
         }
-    });
-
-    var $box_ = {};
-
-    Bridge.ns("System.Boolean", $box_);
-
-    Bridge.apply($box_.System.Boolean, {
-        toString: function (obj) { return System.Boolean.toString(obj); }
     });
 
     // @source formattableStringFactory.js
@@ -6683,7 +6713,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             },
 
             format: function (number, format, provider) {
-                return Bridge.Int.format(number, format, provider, System.Double);
+                return Bridge.Int.format(number, format || 'G', provider, System.Double);
             },
 
             equals: function (v1, v2) {
@@ -6740,7 +6770,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             tryParse: System.Double.tryParse,
 
             format: function (number, format, provider) {
-                return Bridge.Int.format(number, format, provider, System.Single);
+                return Bridge.Int.format(number, format || 'G', provider, System.Single);
             },
 
             equals: function (v1, v2) {
@@ -8393,7 +8423,6 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                                  needRemoveDot = part.length == 0;
 
                                  break;
-                            
                             case "u":
                             case "f":
                             case "ff":
@@ -9000,6 +9029,22 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 return Bridge.hasValue$1(a, b) ? (new System.TimeSpan((a - b) * 10000)) : null;
             },
 
+            addMonths: function (dt, m) {
+                if (!Bridge.hasValue(dt)) {
+                    return null;
+                }
+
+                var r = new Date(dt.getTime());
+                var d = r.getDate();
+                r.setMonth(r.getMonth() + m);
+
+                if (r.getDate() != d) {
+                    r.setDate(0);
+                }
+
+                return r;
+            },
+
             gt: function (a, b) {
                 return Bridge.hasValue$1(a, b) ? (a > b) : false;
             },
@@ -9297,8 +9342,11 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             } else if (arguments.length === 2) {
                 this.append(arguments[0]);
                 this.setCapacity(arguments[1]);
-            } else if (arguments.length === 3) {
+            } else if (arguments.length >= 3) {
                 this.append(arguments[0], arguments[1], arguments[2]);
+                if (arguments.length === 4) {
+                    this.setCapacity(arguments[3]);
+                }
             }
         },
 
@@ -9307,11 +9355,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 return this.buffer[0] ? this.buffer[0].length : 0;
             }
 
-            var s = this.buffer.join("");
-
-            this.buffer = [];
-            this.buffer[0] = s;
-
+            var s = this.getString();
             return s.length;
         },
 
@@ -9350,10 +9394,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
         },
 
         toString: function () {
-            var s = this.buffer.join("");
-
-            this.buffer = [];
-            this.buffer[0] = s;
+            var s = this.getString();
 
             if (arguments.length === 2) {
                 var startIndex = arguments[0],
@@ -9397,6 +9438,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             }
 
             this.buffer[this.buffer.length] = value;
+            this.clearString();
 
             return this;
         },
@@ -9407,6 +9449,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
         clear: function () {
             this.buffer = [];
+            this.clearString();
 
             return this;
         },
@@ -9432,7 +9475,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
         },
 
         remove: function (startIndex, length) {
-            var s = this.buffer.join("");
+            var s = this.getString();
 
             this.checkLimits(s, startIndex, length);
 
@@ -9445,6 +9488,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 this.buffer = [];
                 this.buffer[0] = s.substring(0, startIndex);
                 this.buffer[1] = s.substring(startIndex + length, s.length);
+                this.clearString();
             }
 
             return this;
@@ -9468,7 +9512,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 value = Array(count + 1).join(value).toString();
             }
 
-            var s = this.buffer.join("");
+            var s = this.getString();
             this.buffer = [];
 
             if (index < 1) {
@@ -9482,6 +9526,8 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 this.buffer[1] = value;
                 this.buffer[2] = s.substring(index, s.length);
             }
+
+            this.clearString();
 
             return this;
         },
@@ -9506,6 +9552,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 this.buffer[0] = s.replace(r, newValue);
             }
 
+            this.clearString();
             return this;
         },
 
@@ -9521,6 +9568,43 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             if (length > value.length - startIndex) {
                 throw new System.ArgumentOutOfRangeException("Index and length must refer to a location within the string");
             }
+        },
+
+        clearString: function() {
+            this.$str = null;
+        },
+
+        getString: function() {
+            if (!this.$str) {
+                this.$str = this.buffer.join("");
+                this.buffer = [];
+                this.buffer[0] = this.$str;
+            }
+
+            return this.$str;
+        },
+
+        getChar: function (index) {
+            var str = this.getString();
+            if (index < 0 || index >= str.length) {
+                throw new System.IndexOutOfRangeException();
+            }
+
+            return str.charCodeAt(index);
+        },
+
+        setChar: function(index, value) {
+            var str = this.getString();
+            if (index < 0 || index >= str.length) {
+                throw new System.ArgumentOutOfRangeException();
+            }
+
+            value = String.fromCharCode(value);
+            this.buffer = [];
+            this.buffer[0] = str.substring(0, index);
+            this.buffer[1] = value;
+            this.buffer[2] = str.substring(index + 1, str.length);
+            this.clearString();
         }
     });
 
@@ -9691,13 +9775,13 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 throw new System.Diagnostics.Contracts.ContractException(failureKind, displayMessage, userMessage, conditionText, innerException);
             }
         },
-        assert: function (failureKind, condition, message) {
-            if (!condition()) {
+        assert: function (failureKind, scope, condition, message) {
+            if (!condition.call(scope)) {
                 System.Diagnostics.Contracts.Contract.reportFailure(failureKind, message, condition, null);
             }
         },
-        requires: function (TException, condition, message) {
-            if (!condition()) {
+        requires: function (TException, scope, condition, message) {
+            if (!condition.call(scope)) {
                 System.Diagnostics.Contracts.Contract.reportFailure(0, message, condition, null, TException);
             }
         },
@@ -9951,6 +10035,10 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             }
 
             arr.length = length;
+
+            for (var k = 0; k < length; k++) {
+                arr[k] = defvalue;
+            }
 
             if (initValues) {
                 for (i = 0; i < arr.length; i++) {
@@ -26393,7 +26481,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     if (this.index >= this.bitarray.Count) {
                         throw new System.InvalidOperationException("Enumeration already finished.");
                     }
-                    return Bridge.box(this.currentElement, System.Boolean, $box_.System.Boolean.toString);
+                    return Bridge.box(this.currentElement, System.Boolean, System.Boolean.toString);
                 }
             }
         },

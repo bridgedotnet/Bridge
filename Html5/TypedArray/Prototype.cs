@@ -21,6 +21,7 @@ namespace Bridge.Html5.TypedArray
     /// </summary>
     [External]
     [Namespace(false)]
+    [IgnoreGeneric]
 #if CORE
     internal
 #else

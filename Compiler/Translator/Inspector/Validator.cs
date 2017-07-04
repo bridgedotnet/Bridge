@@ -260,6 +260,11 @@ namespace Bridge.Translator
                     typeDefinition.CustomAttributes.FirstOrDefault(
                         a => a.AttributeType.FullName == virtualAttr);
 
+            if (attr == null && typeDefinition.DeclaringType != null)
+            {
+                return Validator.IsVirtualTypeStatic(typeDefinition.DeclaringType);
+            }
+
             if (attr == null)
             {
                 attr = typeDefinition.Module.Assembly.CustomAttributes.FirstOrDefault(a => a.AttributeType.FullName == virtualAttr);
@@ -292,11 +297,6 @@ namespace Bridge.Translator
                 }
             }
 
-            if (isVirtual && typeDefinition.NestedTypes.Count > 0)
-            {
-                throw new Exception(string.Format(Constants.Messages.Exceptions.VIRTUAL_CLASS_NO_NESTED_TYPES, typeDefinition.FullName));
-            }
-
             return isVirtual;
         }
 
@@ -309,6 +309,11 @@ namespace Bridge.Translator
                 attr =
                     typeDefinition.GetDefinition().Attributes.FirstOrDefault(
                         a => a.AttributeType.FullName == virtualAttr);
+            }
+
+            if (attr == null && typeDefinition.DeclaringType != null)
+            {
+                return Validator.IsVirtualTypeStatic(typeDefinition.DeclaringType.GetDefinition());
             }
 
             if (attr == null)
@@ -341,11 +346,6 @@ namespace Bridge.Translator
                             break;
                     }
                 }
-            }
-
-            if (isVirtual && typeDefinition.NestedTypes.Count > 0)
-            {
-                throw new Exception(string.Format(Constants.Messages.Exceptions.VIRTUAL_CLASS_NO_NESTED_TYPES, typeDefinition.FullName));
             }
 
             return isVirtual;
@@ -453,23 +453,6 @@ namespace Bridge.Translator
             }
 
             return null;
-        }
-
-        public virtual bool IsInlineMethod(MethodDefinition method)
-        {
-            var attr = this.GetAttribute(method.CustomAttributes, Translator.Bridge_ASSEMBLY + ".TemplateAttribute");
-
-            return attr != null && !attr.HasConstructorArguments;
-        }
-
-        public virtual string GetInlineCode(MethodDefinition method)
-        {
-            return this.GetAttributeValue(method.CustomAttributes, Translator.Bridge_ASSEMBLY + ".TemplateAttribute");
-        }
-
-        public virtual string GetInlineCode(PropertyDefinition property)
-        {
-            return this.GetAttributeValue(property.CustomAttributes, Translator.Bridge_ASSEMBLY + ".TemplateAttribute");
         }
 
         public virtual bool IsObjectLiteral(TypeDefinition type)

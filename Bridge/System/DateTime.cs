@@ -90,7 +90,7 @@ namespace System
         [Template("System.DateTime.format({this}, {format}, {provider})")]
         public extern string Format(string format, IFormatProvider provider);
 
-        [Template("System.DateTime.format({this})")]
+        [Template(Fn = "System.DateTime.format")]
         public override extern string ToString();
 
         [Template("System.DateTime.format({this}, {format})")]
@@ -333,7 +333,7 @@ namespace System
         [Template("new Date({this}.valueOf() + Math.round(({value}) * 6e4))")]
         public extern DateTime AddMinutes(double value);
 
-        [Template("new Date({this}.getFullYear(), {this}.getMonth() + {months}, {this}.getDate(), {this}.getHours(), {this}.getMinutes(), {this}.getSeconds(), {this}.getMilliseconds())")]
+        [Template("System.DateTime.addMonths({this}, {months})")]
         public extern DateTime AddMonths(int months);
 
         [Template("new Date({this}.valueOf() + Math.round(({value}) * 1e3))")]

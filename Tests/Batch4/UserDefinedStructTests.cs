@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace Bridge.ClientTest.Batch4
 {
+    // Moved
     [TestFixture(TestNameFormat = "UserDefinedStructTests - {0}")]
     public class UserDefinedStructTests
     {
@@ -184,86 +185,6 @@ namespace Bridge.ClientTest.Batch4
         }
 
         [Test]
-        public void IsClassIsFalse()
-        {
-            Assert.False(typeof(S1).IsClass, "#1");
-            Assert.False(typeof(S2G<int>).IsClass, "#2");
-        }
-
-        [Test]
-        public void UserDefinedStructCanBeUsed()
-        {
-            var s1 = new S1(42);
-            Assert.AreEqual(42, s1.I);
-        }
-
-        [Test]
-        public void DefaultConstructorOfStructReturnsInstanceWithAllMembersInitialized()
-        {
-            var s2 = default(S2);
-            Assert.AreEqual(0, s2.I, "I");
-            Assert.AreEqual(0, s2.D, "D");
-            Assert.AreEqual(default(DateTime), s2.DT, "DT");
-            Assert.Null(s2.O, "O");
-            Assert.AreEqual(0, s2.T, "T");
-        }
-
-        [Test]
-        public void DefaultConstructorOfStructReturnsInstanceWithAllMembersInitializedGeneric()
-        {
-            var s2 = default(S2G<int>);
-            Assert.AreEqual(0, s2.I, "I");
-            Assert.AreEqual(0, s2.D, "D");
-            Assert.AreEqual(default(DateTime), s2.DT, "DT");
-            Assert.Null(s2.O, "O");
-            Assert.AreEqual(0, s2.T, "T");
-        }
-
-        [Test]
-        public void DefaultValueOfStructIsInstanceWithAllMembersInitialized()
-        {
-            var s2 = default(S2);
-            Assert.AreEqual(0, s2.I, "I");
-            Assert.AreEqual(0, s2.D, "D");
-            Assert.AreEqual(default(DateTime), s2.DT, "DT");
-            Assert.Null(s2.O, "O");
-            Assert.AreEqual(0, s2.T, "T");
-        }
-
-        [Test]
-        public void DefaultValueOfStructIsInstanceWithAllMembersInitializedGeneric()
-        {
-            var s2 = default(S2G<int>);
-            Assert.AreEqual(0, s2.I, "I");
-            Assert.AreEqual(0, s2.D, "D");
-            Assert.AreEqual(default(DateTime), s2.DT, "DT");
-            Assert.Null(s2.O, "O");
-            Assert.AreEqual(0, s2.T, "T");
-        }
-
-        [Test]
-        public void DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirect()
-        {
-            var s2 = Create<S2>();
-            Assert.AreEqual(0, s2.I, "I");
-            Assert.AreEqual(0, s2.D, "D");
-            Assert.AreEqual(default(DateTime), s2.DT, "DT");
-            Assert.Null(s2.O, "O");
-            Assert.AreEqual(0, s2.T, "T");
-        }
-
-        [Test]
-        public void DefaultValueOfStructIsInstanceWithAllMembersInitializedIndirectGeneric()
-        {
-            var s2 = Create<S2G<DateTime>>();
-            Assert.AreEqual(0, s2.I, "I");
-            Assert.AreEqual(0, s2.D, "D");
-            Assert.AreEqual(default(DateTime), s2.DT, "DT");
-            Assert.Null(s2.O, "O");
-            Assert.AreEqual(default(DateTime), s2.T, "T");
-        }
-
-        [Test]
         public void DefaultValueOfStructWithInlineCodeDefaultConstructorWorks_SPI_1610()
         {
             var s1 = default(S6);
@@ -284,80 +205,6 @@ namespace Bridge.ClientTest.Batch4
         }
 
         [Test]
-        public void DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorks()
-        {
-            var s1 = new S6();
-            Assert.AreEqual(42, s1.I);
-        }
-
-        [Test]
-        public void DefaultConstructorOfStructWithInlineCodeDefaultConstructorWorksGeneric()
-        {
-            var s1 = new S6G<int>();
-            Assert.AreEqual(42, s1.I);
-        }
-
-        [Test]
-        public void DefaultGetHashCodeGeneratesHashCodeBasedOnAllInstanceFields()
-        {
-            S3.StaticField = 10;
-            var s1 = new S3(235, 45);
-            var s2 = new S3(235, 45);
-            var s3 = new S3(235, 44);
-            Assert.AreEqual(s2.GetHashCode(), s1.GetHashCode(), "#1");
-            Assert.AreNotEqual(s3.GetHashCode(), s1.GetHashCode(), "#2");
-            int hc = s1.GetHashCode();
-            S3.StaticField = 20;
-            Assert.AreEqual(hc, s1.GetHashCode(), "#3");
-        }
-
-        [Test]
-        public void DefaultEqualsUsesValueEqualityForAllMembers()
-        {
-            var s1 = new S3(235, 45);
-            var s2 = new S3(235, 45);
-            var s3 = new S3(235, 44);
-            var s4 = new S4(235, 45);
-            Assert.True(s1.Equals(s2), "#1");
-            Assert.False(s1.Equals(s3), "#2");
-            Assert.False(s1.Equals(s4), "#3");
-        }
-
-        [Test]
-        public void CanOverrideGetHashCode()
-        {
-            var s1 = new S5(42);
-            Assert.AreEqual(43, s1.GetHashCode());
-        }
-
-        [Test]
-        public void CanOverrideEquals()
-        {
-            var s1 = new S5(42);
-            var s2 = new S5(43);
-            var s3 = new S5(44);
-            Assert.True(s1.Equals(s2), "#1");
-            Assert.False(s1.Equals(s3), "#2");
-        }
-
-        [Test]
-        public void CanLiftUserDefinedBinaryOperator()
-        {
-            S7? a = new S7(42), b = new S7(32), c = null;
-            Assert.AreEqual(74, (a + b).Value.I, "#1");
-            Assert.Null((a + c), "#2");
-        }
-
-        [Test]
-        public void CanLiftUserDefinedUnaryOperator_SPI_1634()
-        {
-            S7? a = new S7(42), b = null;
-            Assert.AreEqual(-42, -a.Value.I, "#1");
-            // #1634 #SPI
-            Assert.Null(-b, "#2");
-        }
-
-        [Test]
         public void CanLiftUserDefinedConversionOperator_SPI_1611()
         {
             S7? a = new S7(42), b = null;
@@ -368,59 +215,6 @@ namespace Bridge.ClientTest.Batch4
             double? d2 = 1;
             TestHelper.Safe(() => d2 = (double?)b);
             Assert.Null(d2, "#2");
-        }
-
-        [Test]
-        public void ClonedValueTypeIsCorrectType()
-        {
-            var s1 = new MS1
-            {
-                i = 42
-            };
-            var s2 = s1;
-            Assert.True((object)s2 is MS1);
-        }
-
-        [Test]
-        public void FieldsAreClonedWhenValueTypeIsCopied()
-        {
-            var s1 = new MS1
-            {
-                i = 42
-            };
-            var s2 = s1;
-            Assert.AreEqual(42, s2.i);
-            s2.i = 43;
-            Assert.AreEqual(42, s1.i);
-            Assert.AreEqual(43, s2.i);
-        }
-
-        [Test]
-        public void AutoPropertyBackingFieldsAreClonedWhenValueTypeIsCopied()
-        {
-            var s1 = new MS1
-            {
-                P1 = "hello"
-            };
-            var s2 = s1;
-            Assert.AreEqual("hello", s2.P1);
-            s2.P1 = "world";
-            Assert.AreEqual("hello", s1.P1);
-            Assert.AreEqual("world", s2.P1);
-        }
-
-        [Test]
-        public void PropertiesWithFieldImplementationAreClonedWhenValueTypeIsCopied()
-        {
-            var s1 = new MS1
-            {
-                P2 = 42
-            };
-            var s2 = s1;
-            Assert.AreEqual(42, s2.P2);
-            s2.P2 = 43;
-            Assert.AreEqual(42, s1.P2);
-            Assert.AreEqual(43, s2.P2);
         }
 
         [Test]
@@ -439,69 +233,6 @@ namespace Bridge.ClientTest.Batch4
             s2.RaiseE();
             // #1612
             Assert.AreEqual(3, count);
-        }
-
-        [Test]
-        public void NestedStructsAreClonedWhenValueTypeIsCopied_SPI_1613()
-        {
-            var s1 = new MS1
-            {
-                N = new MS2
-                {
-                    i = 42
-                }
-            };
-            var s2 = s1;
-            Assert.AreEqual(42, s2.N.i);
-            s2.N.i = 43;
-            // #1613
-            Assert.AreEqual(42, s1.N.i);
-
-            Assert.AreEqual(43, s2.N.i);
-        }
-
-        [Test]
-        public void GenericMutableValueTypeWorks()
-        {
-            var s1 = new MS3<int>
-            {
-                t = 42
-            };
-            var s2 = s1;
-            Assert.AreEqual(42, s2.t);
-            s2.t = 43;
-            Assert.True((object)s2 is MS3<int>);
-            Assert.AreEqual(42, s1.t);
-            Assert.AreEqual(43, s2.t);
-        }
-
-        [Test]
-        public void CloningValueTypeWithNamedDefaultConstructorWorks()
-        {
-            var s1 = new MS1
-            {
-                i = 42
-            };
-            var s2 = s1;
-            s1.i = 10;
-            Assert.AreEqual(42, s2.i);
-            Assert.True((object)s2 is MS1);
-        }
-
-        [Test]
-        public void CloningNullableValueTypesWorks()
-        {
-            MS1? s1 = null;
-            MS1? s2 = new MS1
-            {
-                i = 42
-            };
-            var s3 = s1;
-            var s4 = s2;
-
-            Assert.Null(s3, "s3 should be null");
-            Assert.AreEqual(42, s4.Value.i, "s4.i should be 42");
-            Assert.False(ReferenceEquals(s2, s4), "s2 and s4 should not be the same object");
         }
     }
 }

@@ -271,6 +271,16 @@ Bridge.assembly("TypeScriptTest", function ($asm, globals) {
         }
     });
 
+    Bridge.define("TypeScript.Issues.N2911", {
+        statics: {
+            methods: {
+                initButton_Clicked: function (arg) {
+                    // Should build non generic TS initButton_Clicked(arg: MouseEvent): void;
+                }
+            }
+        }
+    });
+
     Bridge.define("TypeScript.Issues.N1640.GamePlay", {
         inherits: [TypeScript.Issues.N1640.IGamePlay],
         events: {

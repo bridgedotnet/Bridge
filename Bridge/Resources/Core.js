@@ -112,7 +112,7 @@
         virtual: function (name, isClass) {
             var type = Bridge.unroll(name);
 
-            if (!type) {
+            if (!type || !Bridge.isFunction(type)) {
                 var old = Bridge.Class.staticInitAllow;
                 type = isClass ? Bridge.define(name) : Bridge.definei(name);
                 Bridge.Class.staticInitAllow = true;
@@ -1680,7 +1680,8 @@
 
             combine: function (fn1, fn2) {
                 if (!fn1 || !fn2) {
-                    return fn1 || fn2;
+                    var fn = fn1 || fn2;
+                    return fn ? Bridge.fn.$build([fn]) : fn;
                 }
 
                 var list1 = fn1.$invocationList ? fn1.$invocationList : [fn1],
@@ -1689,7 +1690,16 @@
                 return Bridge.fn.$build(list1.concat(list2));
             },
 
-            getInvocationList: function () {
+            getInvocationList: function (fn) {
+                if (fn == null) {
+                    throw new System.ArgumentNullException();
+                }
+
+                if(!fn.$invocationList) {
+                    fn.$invocationList = [fn];
+                }
+
+                return fn.$invocationList;
             },
 
             remove: function (fn1, fn2) {
@@ -1703,26 +1713,23 @@
                     exclude,
                     i, j;
 
-                for (i = list1.length - 1; i >= 0; i--) {
-                    exclude = false;
+                for (j = 0; j < list2.length; j++) {
+                    exclude = -1;
 
-                    for (j = 0; j < list2.length; j++) {
+                    for (i = list1.length - 1; i >= 0; i--) {
                         if (list1[i] === list2[j] ||
                             ((list1[i].$method && (list1[i].$method === list2[j].$method)) && (list1[i].$scope && (list1[i].$scope === list2[j].$scope)))) {
-                            exclude = true;
-
+                            exclude = i;
                             break;
                         }
                     }
 
-                    if (!exclude) {
-                        result.push(list1[i]);
+                    if (exclude > -1) {
+                        list1.splice(exclude, 1);
                     }
                 }
 
-                result.reverse();
-
-                return Bridge.fn.$build(result);
+                return Bridge.fn.$build(list1);
             }
         },
 

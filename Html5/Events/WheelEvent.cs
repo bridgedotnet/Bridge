@@ -59,7 +59,8 @@ namespace Bridge.Html5
     /// </summary>
     /// <typeparam name="TCurrentTarget">The CurrentTarget type</typeparam>
     [External]
-    [Name("WheelEvent")]
+    [Namespace(false)]
+    [IgnoreGeneric]
     public class WheelEvent<TCurrentTarget> : WheelEvent where TCurrentTarget : HTMLElement
     {
         /// <summary>

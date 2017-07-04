@@ -31,4 +31,4 @@ namespace Bridge.Contract
             get; set;
         }
     }
- }
+}

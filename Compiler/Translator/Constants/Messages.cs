@@ -27,6 +27,8 @@ namespace Bridge.Translator.Constants
             public const string VIRTUAL_CLASS_NO_NESTED_TYPES = "Virtual class {0} cannot have nested types";
 
             public const string DUPLICATE_BRIDGE_TYPE = "Cannot add nested type as the type '{0}:{1}' is duplicated with '{2}:{3}'";
+
+            public const string DUPLICATE_LOCAL_VARIABLE = "Duplicated local variable '{0}'";
         }
     }
 }

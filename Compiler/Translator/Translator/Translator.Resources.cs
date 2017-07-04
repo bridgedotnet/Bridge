@@ -153,7 +153,7 @@ namespace Bridge.Translator
                 // There are no resources defined in the config so let's just grab files
                 this.Log.Trace("Preparing outputs for resources");
 
-                foreach (var outputItem in this.Outputs.GetOutputs())
+                foreach (var outputItem in this.Outputs.GetOutputs(true))
                 {
                     this.Log.Trace("Getting output " + outputItem.FullPath.LocalPath);
 
@@ -274,6 +274,8 @@ namespace Bridge.Translator
 
             var configHelper = new ConfigHelper();
 
+            var reportResources = new List<Tuple<string, string, string>>();
+
             foreach (var item in resourcesToEmbed)
             {
                 var r = item.Item1;
@@ -302,12 +304,62 @@ namespace Bridge.Translator
                 resources.Add(newResource);
                 resourceList.Add(r);
 
+                var sizeInBytes = Utils.ByteSizeHelper.ToSizeInBytes(item.Item2 != null ? item.Item2.Length : 0, "0.000 KB");
+
+                var resourceLocation = name;
+                if (!string.IsNullOrEmpty(r.Path) && !string.IsNullOrEmpty(resourceLocation))
+                {
+                    resourceLocation = Path.Combine(
+                        configHelper.ConvertPath(r.Path),
+                        configHelper.ConvertPath(resourceLocation));
+
+                    resourceLocation = configHelper.ConvertPath(resourceLocation, '/');
+                }
+
+                reportResources.Add(Tuple.Create(name, resourceLocation, sizeInBytes));
+
                 this.Log.Trace("Added resource " + name);
             }
+
+            BuildReportForResources(reportResources);
 
             this.Log.Trace("PrepareResourcesForEmbedding done");
 
             return resourceList;
+        }
+
+        private void BuildReportForResources(List<Tuple<string, string, string>> reportResources)
+        {
+            var reportBuilder = this.Outputs.Report.Content.Builder;
+
+            if (reportBuilder == null)
+            {
+                return;
+            }
+
+            NewLine(reportBuilder, "Resources:");
+
+            if (reportResources == null || !reportResources.Any())
+            {
+                NewLine(reportBuilder, "    No resources");
+                return;
+            }
+
+            var maxResourceNameLength = reportResources.Max(x => x.Item2 != null ? x.Item2.Length : 0);
+            var maxResourceSizeLength = reportResources.Max(x => x.Item3 != null ? x.Item3.Length : 0);
+
+            foreach (var item in reportResources)
+            {
+                var fullPath = item.Item2;
+                var length = item.Item3;
+
+                var toAdd = Math.Abs(maxResourceNameLength + maxResourceSizeLength
+                    - (fullPath != null ? fullPath.Length : 0) - (length != null ? length.Length : 0));
+
+                var reportLine = string.Format("    {0}   {1}{2}", fullPath, new string(' ', toAdd), length);
+
+                NewLine(reportBuilder, reportLine);
+            }
         }
 
         private void EmbeddResources(List<BridgeResourceInfo> resourcesToEmbed)
@@ -652,11 +704,24 @@ namespace Bridge.Translator
                 {
                     this.Log.Trace("Reading header content file at " + fullHeaderPath);
 
-                    var sb = new StringBuilder(File.ReadAllText(fullHeaderPath, OutputEncoding));
+                    using (var m = new StreamReader(fullHeaderPath, Translator.OutputEncoding, true))
+                    {
+                        var sb = new StringBuilder(m.ReadToEnd());
 
-                    this.Log.Trace("Read " + sb.Length + " symbols from the header file " + fullHeaderPath);
+                        if (m.CurrentEncoding != OutputEncoding)
+                        {
+                            this.Log.Info("Converting resource header file "
+                                           + fullHeaderPath
+                                           + " from encoding "
+                                           + m.CurrentEncoding.EncodingName
+                                           + " into default encoding"
+                                           + Translator.OutputEncoding.EncodingName);
+                        }
 
-                    return sb;
+                        this.Log.Trace("Read " + sb.Length + " symbols from the header file " + fullHeaderPath);
+
+                        return sb;
+                    }
                 }
 
                 this.Log.Warn("Could not find header content file at " + fullHeaderPath + "for resource " + resource.Name);
@@ -679,6 +744,8 @@ namespace Bridge.Translator
             this.Log.Trace("Reading resource with " + item.Files.Length + " items");
 
             var needSourceMap = false;
+
+            var useDefaultEncoding = item.Files.Length > 1;
 
             foreach (var fileName in item.Files)
             {
@@ -743,7 +810,11 @@ namespace Bridge.Translator
 
                         this.Log.Trace("Reading resource item at " + file.FullName);
 
-                        var content = CheckResourceOnBomAndAddToBuffer(buffer, item, file);
+                        var resourceAsOneFile = item.Header == null
+                                                && item.Remark == null
+                                                && item.Files.Length <= 1;
+
+                        var content = CheckResourceOnBomAndAddToBuffer(buffer, item, file, resourceAsOneFile);
 
                         this.Log.Trace("Read " + content.Length + " bytes");
                     }
@@ -758,13 +829,41 @@ namespace Bridge.Translator
             return needSourceMap;
         }
 
-        private byte[] CheckResourceOnBomAndAddToBuffer(MemoryStream buffer, ResourceConfigItem item, FileInfo file)
+        private byte[] CheckResourceOnBomAndAddToBuffer(MemoryStream buffer, ResourceConfigItem item, FileInfo file, bool oneFileResource)
         {
-            var content = File.ReadAllBytes(file.FullName);
+            byte[] content;
+
+            if (oneFileResource)
+            {
+                this.Log.Trace("Reading resource file " + file.FullName + " as one-file-resource");
+                content = File.ReadAllBytes(file.FullName);
+            }
+            else
+            {
+                this.Log.Trace("Reading resource file " + file.FullName + " via StreamReader with byte order mark detection option");
+
+                using (var m = new StreamReader(file.FullName, Translator.OutputEncoding, true))
+                {
+                    content = Translator.OutputEncoding.GetBytes(m.ReadToEnd());
+
+                    if (m.CurrentEncoding != OutputEncoding)
+                    {
+                        this.Log.Info("Converting resource file "
+                                       + file.FullName
+                                       + " from encoding "
+                                       + m.CurrentEncoding.EncodingName
+                                       + " into default encoding"
+                                       + Translator.OutputEncoding.EncodingName);
+                    }
+                }
+            }
 
             if (content.Length > 0)
             {
-                var bomLength = !item.RemoveBom.HasValue || item.RemoveBom.Value
+                var checkBom = (oneFileResource && item.RemoveBom == true)
+                   || (!oneFileResource && (!item.RemoveBom.HasValue || item.RemoveBom.Value));
+
+                var bomLength = checkBom
                     ? GetBomLength(content)
                     : 0;
 
@@ -920,6 +1019,8 @@ namespace Bridge.Translator
                 this.Log.Trace("The resources config section has " + resources.Count + " non-default settings");
             }
 
+            CheckConsoleConfigSetting(resources, defaultSetting);
+
             var toEmbed = resources.Where(x => x.Files != null && x.Files.Count() > 0).ToArray();
             var toExtract = resources.Where(x => x.Files == null || x.Files.Count() <= 0).ToArray();
 
@@ -927,6 +1028,138 @@ namespace Bridge.Translator
             this.Log.Trace("Done preparing resources config");
 
             return;
+        }
+
+        private void CheckConsoleConfigSetting(List<ResourceConfigItem> resources, ResourceConfigItem @default)
+        {
+            this.Log.Trace("CheckConsoleConfigSetting...");
+
+            var consoleResourceName = "bridge.console.js";
+            var consoleResourceMinifiedName = FileHelper.GetMinifiedJSFileName(consoleResourceName);
+
+            var consoleFormatted = resources.Where(x => x.Name == consoleResourceName && (x.Assembly == null || x.Assembly == Translator.Bridge_ASSEMBLY)).FirstOrDefault();
+            var consoleMinified = resources.Where(x => x.Name == consoleResourceMinifiedName && (x.Assembly == null || x.Assembly == Translator.Bridge_ASSEMBLY)).FirstOrDefault();
+
+            if (this.AssemblyInfo.Console.Enabled != true)
+            {
+                this.Log.Trace("Switching off Bridge Console...");
+
+                if (consoleFormatted == null)
+                {
+                    consoleFormatted = new ResourceConfigItem()
+                    {
+                        Name = consoleResourceName
+                    };
+
+                    this.Log.Trace("Adding resource setting for " + consoleResourceName);
+                    resources.Add(consoleFormatted);
+                }
+                else
+                {
+                    if (this.AssemblyInfo.Console.Enabled.HasValue)
+                    {
+                        this.Log.Trace("Overriding resource setting for " + consoleResourceName + " as bridge.json has console option explicitly");
+                    }
+                    else
+                    {
+                        this.Log.Trace("Not overriding resource setting for " + consoleResourceName + " as bridge.json does NOT have console option explicitly");
+                        consoleFormatted = null;
+                    }
+                }
+
+                if (consoleFormatted != null)
+                {
+                    consoleFormatted.Output = null;
+                    consoleFormatted.Extract = false;
+                    consoleFormatted.Inject = false;
+                    consoleFormatted.Files = new string[0];
+                }
+
+                if (consoleMinified == null)
+                {
+                    consoleMinified = new ResourceConfigItem()
+                    {
+                        Name = consoleResourceMinifiedName
+                    };
+
+                    this.Log.Trace("Adding resource setting for " + consoleResourceMinifiedName);
+                    resources.Add(consoleMinified);
+                }
+                else
+                {
+                    if (this.AssemblyInfo.Console.Enabled.HasValue)
+                    {
+                        this.Log.Trace("Overriding resource setting for " + consoleResourceMinifiedName + " as bridge.json has console option explicitly");
+                    }
+                    else
+                    {
+                        this.Log.Trace("Not overriding resource setting for " + consoleResourceMinifiedName + " as bridge.json does NOT have console option explicitly");
+                        consoleMinified = null;
+                    }
+                }
+
+                if (consoleMinified != null)
+                {
+                    consoleMinified.Output = null;
+                    consoleMinified.Extract = false;
+                    consoleMinified.Inject = false;
+                    consoleMinified.Files = new string[0];
+                }
+
+                this.Log.Trace("Switching off Bridge Console done");
+            }
+            else
+            {
+                if (consoleFormatted != null)
+                {
+                    if (consoleFormatted.Extract != true)
+                    {
+                        consoleFormatted.Extract = true;
+                        this.Log.Trace("Setting resources.extract = true for " + consoleResourceName + " as bridge.json has console option has true explicitly");
+                    }
+                }
+                else
+                {
+                    if (@default != null && @default.Extract != true)
+                    {
+                        consoleFormatted = new ResourceConfigItem()
+                        {
+                            Name = consoleResourceName,
+                            Extract = true,
+                            Inject = false
+                        };
+
+                        this.Log.Trace("Adding resource setting for " + consoleResourceName + " as default resource has extract != true");
+                        resources.Add(consoleFormatted);
+                    }
+                }
+
+                if (consoleMinified != null)
+                {
+                    if (consoleMinified.Extract != true)
+                    {
+                        consoleMinified.Extract = true;
+                        this.Log.Trace("Setting resources.extract = true for " + consoleResourceMinifiedName + " as bridge.json has console option has true explicitly");
+                    }
+                }
+                else
+                {
+                    if (@default != null && @default.Extract != true)
+                    {
+                        consoleMinified = new ResourceConfigItem()
+                        {
+                            Name = consoleResourceMinifiedName,
+                            Extract = true,
+                            Inject = false
+                        };
+
+                        this.Log.Trace("Adding resource setting for " + consoleResourceMinifiedName + " as default resource has extract != true");
+                        resources.Add(consoleMinified);
+                    }
+                }
+            }
+            this.Log.Trace("CheckConsoleConfigSetting done");
+
         }
 
         private void ValidateResourceSettings(ResourceConfigItem defaultSetting, IEnumerable<ResourceConfigItem> rawNonDefaultResources)

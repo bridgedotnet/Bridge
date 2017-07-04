@@ -6,7 +6,8 @@ namespace Bridge.Html5
     /// </summary>
     /// <typeparam name="TCurrentTarget">The CurrentTarget type of all TableCellElement's events</typeparam>
     [External]
-    [Name("HTMLTableCellElement")]
+    [Namespace(false)]
+    [IgnoreGeneric]
     public abstract class HTMLTableCellElement<TCurrentTarget> : HTMLElement<TCurrentTarget> where TCurrentTarget : HTMLElement<TCurrentTarget>
     {
         /// <summary>

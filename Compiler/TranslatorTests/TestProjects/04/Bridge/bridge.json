@@ -5,7 +5,11 @@
   "outputFormatting": "Formatted",
   "ignoreCast": true,
   "fileNameCasing": "Lowercase",
+  "console": {
+    "enabled": false
+  },
   "logging": {
     "level":  "None"
-  }
+  },
+  "report": "reports/bridge.report.custom.log"
 }

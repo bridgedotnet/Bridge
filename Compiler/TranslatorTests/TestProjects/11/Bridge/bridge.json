@@ -3,5 +3,9 @@
   "outputBy": "Namespace",
   "cleanOutputFolderBeforeBuildPattern": "*.*",
   "generateTypeScript": "true",
-  "outputFormatting": "Formatted"
+  "outputFormatting": "Formatted",
+  "logging": {
+    "level":  "None"
+  },
+  "report": true
 }

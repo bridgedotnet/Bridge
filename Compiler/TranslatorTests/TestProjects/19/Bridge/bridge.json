@@ -4,6 +4,7 @@
   "cleanOutputFolderBeforeBuildPattern": "*.*",
   "outputFormatting": "Formatted",
   "logging": {
-    "level": "None"
-  }
+    "level":  "None"
+  },
+  "report": true
 }

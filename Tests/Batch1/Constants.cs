@@ -37,6 +37,7 @@
         public const string MODULE_REGEX_JS = "RegexJS";
         public const string MODULE_ENUM = "Enum";
         public const string MODULE_GUID = "Guid";
+        public const string MODULE_STRUCT = "Struct";
 
         public const string MODULE_MATH = "Math";
         public const string MODULE_DECIMAL_MATH = "Decimal Math";
@@ -100,6 +101,7 @@
         public const string MODULE_BRIDGE_CONSOLE = "Bridge Console";
         public const string MODULE_SYSTEM_CONSOLE = "System Console";
         public const string MODULE_OBJECTLITERAL = "[ObjectLiteral]";
+        public const string MODULE_SCRIPT = "Script";
 
         public const string IGNORE_DATE = null;
     }

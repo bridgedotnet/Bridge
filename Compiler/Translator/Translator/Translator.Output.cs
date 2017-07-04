@@ -63,6 +63,33 @@ namespace Bridge.Translator
             logger.Info("Done Save path = " + projectOutputPath);
         }
 
+        public void Report(string projectOutputPath)
+        {
+            var logger = this.Log;
+
+            logger.Trace("Report...");
+
+            var config = this.AssemblyInfo;
+
+            if (!config.Report.Enabled)
+            {
+                logger.Trace("Report skipped as disabled in config.");
+                return;
+            }
+
+            var reportContent = this.Outputs.Report.Content.Builder;
+
+            string filePath = DefineOutputItemFullPath(this.Outputs.Report, projectOutputPath, null);
+
+            var file = FileHelper.CreateFileDirectory(filePath);
+            logger.Trace("Report file full name: " + file.FullName);
+
+            this.SaveToFile(file.FullName, reportContent.ToString());
+
+            logger.Trace("Report done");
+
+        }
+
         private string DefineOutputItemFullPath(TranslatorOutputItem item, string projectOutputPath, string defaultFileName)
         {
             var fileName = item.Name;
@@ -278,11 +305,11 @@ namespace Bridge.Translator
 
                     if (resourceExtractItems != null)
                     {
-                        this.Log.Trace("Found resource option for resource name " + resourceExtractItems.Name + " and reference " + resourceExtractItems.Assembly);
+                        this.Log.Trace("Found resource option for resource name " + resName + " and reference " + resourceExtractItems.Assembly);
 
                         if (resourceExtractItems.Extract != true)
                         {
-                            this.Log.Info("Skipping resource " + resourceExtractItems.Name + " as it has setting resources.extract != true");
+                            this.Log.Info("Skipping resource " + resName + " as it has setting resources.extract != true");
                             continue;
                         }
 
@@ -309,6 +336,12 @@ namespace Bridge.Translator
                     }
                     else
                     {
+                        if (resourceOption.Default != null && resourceOption.Default.Extract != true)
+                        {
+                            this.Log.Info("Skipping resource " + resName + " as it has no setting resources.extract = true and default setting is resources.extract != true");
+                            continue;
+                        }
+
                         this.Log.Trace("Did not find extract resource option for resource name " + resName + ". Will use default embed behavior");
 
                         if (resource.Path != null)

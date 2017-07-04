@@ -2,6 +2,12 @@
   // The folder to output JavaScript (.js) files.
   "output": "$(OutDir)/bridge/",
 
+  // Enable the Bridge Console.
+  // Default is false.
+  "console": {
+    "enabled": true
+  },
+
   // Enable browser debugging of C# files.
   // Default is false.
   "sourceMap": {
@@ -20,7 +26,13 @@
 
   // Delete everything from the output folder
   // Default is false
-  "cleanOutputFolderBeforeBuild": false
+  "cleanOutputFolderBeforeBuild": false,
+
+  // Set to false to disable Report generation.
+  // Default is false.
+  "report": {
+    "enabled": true
+  }
 
   // More config options available at
   // https://github.com/bridgedotnet/Bridge/wiki/global-configuration

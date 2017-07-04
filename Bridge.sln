@@ -64,7 +64,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "files", "files", "{B83954AB
 		.build\files\Bridge.Min.targets = .build\files\Bridge.Min.targets
 		.build\files\install.ps1 = .build\files\install.ps1
 		.build\files\install_clean.ps1 = .build\files\install_clean.ps1
-		.build\files\output_readme.txt = .build\files\output_readme.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "packages", "packages", "{0A8F2D26-ED54-4A8C-A323-A8018F6DD742}"
