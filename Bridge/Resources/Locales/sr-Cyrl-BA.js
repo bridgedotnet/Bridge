@@ -3,11 +3,11 @@ Bridge.merge(new System.Globalization.CultureInfo("sr-Cyrl-BA", true), {
     nativeName: "српски (Босна и Херцеговина)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        nanSymbol: "није број",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
-        negativeInfinitySymbol: "-бесконачност",
-        positiveInfinitySymbol: "+бесконачност",
+        negativeInfinitySymbol: "-∞",
+        positiveInfinitySymbol: "∞",
         percentSymbol: "%",
         percentGroupSizes: [3],
         percentDecimalDigits: 2,

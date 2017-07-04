@@ -3,11 +3,11 @@ Bridge.merge(new System.Globalization.CultureInfo("ii-CN", true), {
     nativeName: "ꆈꌠꁱꂷ (ꍏꉸꏓꂱꇭꉼꇩ)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        nanSymbol: "ꌗꂷꀋꉬ",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
-        negativeInfinitySymbol: "ꀄꊭꌐꀋꉆ",
-        positiveInfinitySymbol: "ꈤꇁꑖꀋꉬ",
+        negativeInfinitySymbol: "-∞",
+        positiveInfinitySymbol: "∞",
         percentSymbol: "%",
         percentGroupSizes: [3],
         percentDecimalDigits: 2,
@@ -40,7 +40,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ii-CN", true), {
         fullDateTimePattern: "yyyy'ꈎ' M'ꆪ' d'ꑍ' tt h:mm:ss",
         longDatePattern: "yyyy'ꈎ' M'ꆪ' d'ꑍ'",
         longTimePattern: "tt h:mm:ss",
-        monthDayPattern: "M'’ ꆪ’'d'’ ꑍ’'",
+        monthDayPattern: "M’ ꆪ’d’ ꑍ’",
         monthGenitiveNames: ["ꋍꆪ","ꑍꆪ","ꌕꆪ","ꇖꆪ","ꉬꆪ","ꃘꆪ","ꏃꆪ","ꉆꆪ","ꈬꆪ","ꊰꆪ","ꊯꊪꆪ","ꊰꑋꆪ",""],
         monthNames: ["ꋍꆪ","ꑍꆪ","ꌕꆪ","ꇖꆪ","ꉬꆪ","ꃘꆪ","ꏃꆪ","ꉆꆪ","ꈬꆪ","ꊰꆪ","ꊯꊪꆪ","ꊰꑋꆪ",""],
         pmDesignator: "ꂵꆪꈌꉈ",

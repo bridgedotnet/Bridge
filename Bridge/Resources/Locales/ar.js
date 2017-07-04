@@ -3,11 +3,11 @@ Bridge.merge(new System.Globalization.CultureInfo("ar", true), {
     nativeName: "العربية",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        nanSymbol: "ليس برقم",
+        nanSymbol: "ليس رقمًا",
         negativeSign: "-",
         positiveSign: "+",
-        negativeInfinitySymbol: "-لا نهاية",
-        positiveInfinitySymbol: "+لا نهاية",
+        negativeInfinitySymbol: "-∞",
+        positiveInfinitySymbol: "∞",
         percentSymbol: "%",
         percentGroupSizes: [3],
         percentDecimalDigits: 2,
@@ -20,13 +20,13 @@ Bridge.merge(new System.Globalization.CultureInfo("ar", true), {
         currencyDecimalDigits: 2,
         currencyDecimalSeparator: ".",
         currencyGroupSeparator: ",",
-        currencyNegativePattern: 3,
-        currencyPositivePattern: 2,
+        currencyNegativePattern: 8,
+        currencyPositivePattern: 3,
         numberGroupSizes: [3],
         numberDecimalDigits: 2,
         numberDecimalSeparator: ".",
         numberGroupSeparator: ",",
-        numberNegativePattern: 3
+        numberNegativePattern: 1
     }),
 
     dateTimeFormat: Bridge.merge(new System.Globalization.DateTimeFormatInfo(), {
