@@ -26,7 +26,13 @@
 
   // Delete everything from the output folder
   // Default is false
-  "cleanOutputFolderBeforeBuild": false
+  "cleanOutputFolderBeforeBuild": false,
+
+  // Set to false to disable Report generation.
+  // Default is false.
+  "report": {
+    "enabled": true
+  }
 
   // More config options available at
   // https://github.com/bridgedotnet/Bridge/wiki/global-configuration
