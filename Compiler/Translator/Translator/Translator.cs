@@ -123,7 +123,7 @@ namespace Bridge.Translator
                 OutputKind = TranslatorOutputKind.Report,
                 OutputType = TranslatorOutputType.None,
                 Name = this.AssemblyInfo.Report.FileName ?? "bridge.report.log",
-                Location = this.AssemblyInfo.Report.Folder
+                Location = this.AssemblyInfo.Report.Path
             };
 
             var references = this.InspectReferences();

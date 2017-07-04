@@ -60,7 +60,7 @@ namespace Bridge.Translator.Tests
             Assert.Null(config.Console.Enabled, "Console.Enabled");
             Assert.NotNull(config.Report, "Report");
             Assert.False(config.Report.Enabled, "Report.Enabled");
-            Assert.Null(config.Report.Folder, "Report.Folder");
+            Assert.Null(config.Report.Path, "Report.Folder");
             Assert.Null(config.Report.FileName, "Report.FileName");
         }
     }

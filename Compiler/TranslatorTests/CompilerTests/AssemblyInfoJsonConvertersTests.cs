@@ -149,33 +149,33 @@ namespace Bridge.Translator.Tests
                 "4");
 
             AssertJsonSerialization(
-                new ReportInfo { Report = new ReportConfig() { Enabled = true, Folder = "" } },
+                new ReportInfo { Report = new ReportConfig() { Enabled = true, Path = "" } },
                 "{\"Report\":true}",
                 "5");
 
             AssertJsonSerialization(
-                new ReportInfo { Report = new ReportConfig() { Enabled = true, Folder = "Folder1" } },
+                new ReportInfo { Report = new ReportConfig() { Enabled = true, Path = "Folder1" } },
                 "{\"Report\":\"Folder1/\"}",
                 "6");
 
             AssertJsonSerialization(
-                new ReportInfo { Report = new ReportConfig() { Enabled = true, Folder = "..\\Folder1/Folder2", FileName = "report.log" } },
+                new ReportInfo { Report = new ReportConfig() { Enabled = true, Path = "..\\Folder1/Folder2", FileName = "report.log" } },
                 "{\"Report\":\"../Folder1/Folder2/report.log\"}",
                 "7");
 
             AssertJsonSerialization(
-                new ReportInfo { Report = new ReportConfig() { Enabled = false, Folder = "" } },
+                new ReportInfo { Report = new ReportConfig() { Enabled = false, Path = "" } },
                 "{\"Report\":false}",
                 "8");
 
             AssertJsonSerialization(
-                new ReportInfo { Report = new ReportConfig() { Enabled = false, Folder = "Folder1" } },
-                "{\"Report\":{\"Enabled\":false,\"FileName\":null,\"Folder\":\"Folder1\"}}",
+                new ReportInfo { Report = new ReportConfig() { Enabled = false, Path = "Folder1" } },
+                "{\"Report\":{\"Enabled\":false,\"FileName\":null,\"Path\":\"Folder1\"}}",
                 "9");
 
             AssertJsonSerialization(
-                new ReportInfo { Report = new ReportConfig() { Enabled = false, Folder = "..\\Folder1/Folder2", FileName = "report.log" } },
-                "{\"Report\":{\"Enabled\":false,\"FileName\":\"report.log\",\"Folder\":\"../Folder1/Folder2\"}}",
+                new ReportInfo { Report = new ReportConfig() { Enabled = false, Path = "..\\Folder1/Folder2", FileName = "report.log" } },
+                "{\"Report\":{\"Enabled\":false,\"FileName\":\"report.log\",\"Path\":\"../Folder1/Folder2\"}}",
                 "10");
         }
 
@@ -199,22 +199,22 @@ namespace Bridge.Translator.Tests
 
             AssertJsonDeserialization(
                 "{\"Report\":\"Folder1/\"}",
-                new ReportInfo { Report = new ReportConfig() { Enabled = true, Folder = "Folder1/" } },
+                new ReportInfo { Report = new ReportConfig() { Enabled = true, Path = "Folder1/" } },
                 "4");
 
             AssertJsonDeserialization(
                 "{\"Report\":\"../Folder1\\\\Folder2/report.log\"}",
-                new ReportInfo { Report = new ReportConfig() { Enabled = true, Folder = "../Folder1/Folder2", FileName = "report.log" } },
+                new ReportInfo { Report = new ReportConfig() { Enabled = true, Path = "../Folder1/Folder2", FileName = "report.log" } },
                 "5");
 
             AssertJsonDeserialization(
-                "{\"Report\":{\"Enabled\":false,\"Folder\":\"Folder1\",\"FileName\":null}}",
-                new ReportInfo { Report = new ReportConfig() { Enabled = false, Folder = "Folder1" } },
+                "{\"Report\":{\"Enabled\":false,\"Path\":\"Folder1\",\"FileName\":null}}",
+                new ReportInfo { Report = new ReportConfig() { Enabled = false, Path = "Folder1" } },
                 "6");
 
             AssertJsonDeserialization(
-                "{\"Report\":{\"Enabled\":false,\"FileName\":\"report.log\",\"Folder\":\"../Folder1\\\\Folder2\"}}",
-                new ReportInfo { Report = new ReportConfig() { Enabled = false, Folder = "../Folder1/Folder2", FileName = "report.log" } },
+                "{\"Report\":{\"Enabled\":false,\"FileName\":\"report.log\",\"Path\":\"../Folder1\\\\Folder2\"}}",
+                new ReportInfo { Report = new ReportConfig() { Enabled = false, Path = "../Folder1/Folder2", FileName = "report.log" } },
                 "7");
         }
 
@@ -358,7 +358,7 @@ namespace Bridge.Translator.Tests
                 }
 
                 return c1.Enabled == c2.Enabled
-                    && c1.Folder == c2.Folder
+                    && c1.Path == c2.Path
                     && c1.FileName == c2.FileName;
             }
 

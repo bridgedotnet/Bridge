@@ -140,7 +140,7 @@ namespace Bridge.Translator.Utils
             if (config.Report != null)
             {
                 config.Report.FileName = helper.ApplyPathTokens(tokens, config.Report.FileName);
-                config.Report.Folder = helper.ApplyPathTokens(tokens, config.Report.Folder);
+                config.Report.Path = helper.ApplyPathTokens(tokens, config.Report.Path);
             }
 
             Logger.Trace("ApplyTokens done");
@@ -166,7 +166,7 @@ namespace Bridge.Translator.Utils
 
             if (assemblyInfo.Report != null)
             {
-                assemblyInfo.Report.Folder = helper.ConvertPath(assemblyInfo.Logging.Folder);
+                assemblyInfo.Report.Path = helper.ConvertPath(assemblyInfo.Report.Path);
             }
 
             if (assemblyInfo.Resources != null)
