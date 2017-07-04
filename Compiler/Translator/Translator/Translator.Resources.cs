@@ -275,7 +275,7 @@ namespace Bridge.Translator
             var configHelper = new ConfigHelper();
             var reportBuilder = this.Outputs.Report.Content.Builder;
 
-            NewLine(reportBuilder, "Resources (name, path, length):");
+            NewLine(reportBuilder, "Resources:");
 
             foreach (var item in resourcesToEmbed)
             {
