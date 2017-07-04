@@ -23812,6 +23812,26 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2915", {
+        statics: {
+            methods: {
+                TestLocalesWithoutColonInTime: function () {
+                    var culture = new System.Globalization.CultureInfo("en-GB");
+                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.parse("13:00", culture).getHours());
+
+                    culture.dateTimeFormat.timeSeparator = ".";
+                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.parse("13:00", culture).getHours());
+
+                    culture = new System.Globalization.CultureInfo("nb-NO");
+                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.parse("13:00", culture).getHours());
+
+                    culture.dateTimeFormat.timeSeparator = ".";
+                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.parse("13:00", culture).getHours());
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge294", {
         fields: {
             Name: null
