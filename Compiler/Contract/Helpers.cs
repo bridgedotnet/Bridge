@@ -11,6 +11,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using ICSharpCode.NRefactory.CSharp.Resolver;
 using ArrayType = ICSharpCode.NRefactory.TypeSystem.ArrayType;
 
 namespace Bridge.Contract
@@ -389,6 +390,7 @@ namespace Bridge.Contract
                 return;
             }
 
+            bool writeClone = false;
             if (resolveResult is InvocationResolveResult)
             {
                 bool ret = true;
@@ -408,6 +410,15 @@ namespace Bridge.Contract
                 {
                     ret = false;
                 }
+                else
+                {
+                    var prop = ((MemberResolveResult) resolveResult).Member as IProperty;
+                    if (prop != null && prop.IsIndexer)
+                    {
+                        ret = false;
+                        writeClone = true;
+                    }
+                }
 
                 if (ret)
                 {
@@ -416,19 +427,25 @@ namespace Bridge.Contract
             }
 
             var rrtype = resolveResult.Type;
+            var nullable = rrtype.IsKnownType(KnownTypeCode.NullableOfT);
 
             var forEachResolveResult = resolveResult as ForEachResolveResult;
             if (forEachResolveResult != null)
             {
                 rrtype = forEachResolveResult.ElementType;
             }
-
-            var nullable = rrtype.IsKnownType(KnownTypeCode.NullableOfT);
+            
             var type = nullable ? ((ParameterizedType)rrtype).TypeArguments[0] : rrtype;
             if (type.Kind == TypeKind.Struct)
             {
                 if (Helpers.IsImmutableStruct(block.Emitter, type))
                 {
+                    return;
+                }
+
+                if (writeClone)
+                {
+                    Helpers.WriteClone(block, insertPosition, nullable);
                     return;
                 }
 
@@ -438,16 +455,7 @@ namespace Bridge.Contract
 
                 if (field != null && field.IsReadOnly)
                 {
-                    if (nullable)
-                    {
-                        block.Emitter.Output.Insert(insertPosition, JS.Types.SYSTEM_NULLABLE + "." + JS.Funcs.Math.LIFT1 + "(\"" + JS.Funcs.CLONE + "\", ");
-                        block.WriteCloseParentheses();
-                    }
-                    else
-                    {
-                        block.Write("." + JS.Funcs.CLONE + "()");
-                    }
-
+                    Helpers.WriteClone(block, insertPosition, nullable);
                     return;
                 }
 
@@ -479,16 +487,22 @@ namespace Bridge.Contract
                         }
                     }
 
-                    if (nullable)
-                    {
-                        block.Emitter.Output.Insert(insertPosition, JS.Types.SYSTEM_NULLABLE + "." + JS.Funcs.Math.LIFT1 + "(\"" + JS.Funcs.CLONE + "\", ");
-                        block.WriteCloseParentheses();
-                    }
-                    else
-                    {
-                        block.Write("." + JS.Funcs.CLONE + "()");
-                    }
+                    Helpers.WriteClone(block, insertPosition, nullable);
                 }
+            }
+        }
+
+        private static void WriteClone(IAbstractEmitterBlock block, int insertPosition, bool nullable)
+        {
+            if (nullable)
+            {
+                block.Emitter.Output.Insert(insertPosition,
+                    JS.Types.SYSTEM_NULLABLE + "." + JS.Funcs.Math.LIFT1 + "(\"" + JS.Funcs.CLONE + "\", ");
+                block.WriteCloseParentheses();
+            }
+            else
+            {
+                block.Write("." + JS.Funcs.CLONE + "()");
             }
         }
 

@@ -2486,7 +2486,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                     var vec = list.getItem(0).$clone();
                     vec.x = 5.0;
 
-                    Bridge.Test.NUnit.Assert.AreEqual(0, list.getItem(0).x);
+                    Bridge.Test.NUnit.Assert.AreEqual(0, list.getItem(0).$clone().x);
                     Bridge.Test.NUnit.Assert.AreEqual(5, vec.x);
                 }
             }
@@ -23728,6 +23728,74 @@ Bridge.$N1391Result =                     r;
                     var mouseEventList = new (System.Collections.Generic.List$1(MouseEvent))();
                     Bridge.Test.NUnit.Assert.NotNull(mouseEventList);
                 }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2916", {
+        statics: {
+            methods: {
+                Test: function (values) {
+                    for (var i = 0; i < values.Count; i = (i + 1) | 0) {
+                        values.getItem(i).$clone().Intersect(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2916.MyStruct.$ctor1(5, 20));
+                    }
+                },
+                TestIndexerClone: function () {
+                    var x = new (System.Collections.Generic.List$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2916.MyStruct))(System.Array.init([new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2916.MyStruct.$ctor1(1, 10)], Bridge.ClientTest.Batch3.BridgeIssues.Bridge2916.MyStruct));
+                    Bridge.Test.NUnit.Assert.AreEqual("1-10", x.getItem(0).$clone().toString());
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2916.Test(x);
+                    Bridge.Test.NUnit.Assert.AreEqual("1-10", x.getItem(0).$clone().toString());
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2916.MyStruct", {
+        $kind: "struct",
+        statics: {
+            methods: {
+                getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2916.MyStruct(); }
+            }
+        },
+        props: {
+            X1: 0,
+            X2: 0
+        },
+        ctors: {
+            $ctor1: function (x1, x2) {
+                this.$initialize();
+                this.X1 = x1;
+                this.X2 = x2;
+            },
+            ctor: function () {
+                this.$initialize();
+            }
+        },
+        methods: {
+            Intersect: function (other) {
+                var x1 = Math.max(this.X1, other.X1);
+                var x2 = Math.min(this.X2, other.X2);
+                this.X1 = x1;
+                this.X2 = x2;
+            },
+            toString: function () {
+                return this.X1 + "-" + this.X2;
+            },
+            getHashCode: function () {
+                var h = Bridge.addHash([3904302783, this.X1, this.X2]);
+                return h;
+            },
+            equals: function (o) {
+                if (!Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2916.MyStruct)) {
+                    return false;
+                }
+                return Bridge.equals(this.X1, o.X1) && Bridge.equals(this.X2, o.X2);
+            },
+            $clone: function (to) {
+                var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2916.MyStruct();
+                s.X1 = this.X1;
+                s.X2 = this.X2;
+                return s;
             }
         }
     });
