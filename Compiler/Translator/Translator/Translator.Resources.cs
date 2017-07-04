@@ -305,7 +305,9 @@ namespace Bridge.Translator
                 resources.Add(newResource);
                 resourceList.Add(r);
 
-                NewLine(reportBuilder, string.Format("    {0} {1} {2}", name, item.Item1.Path, item.Item2 != null ? item.Item2.Length : 0));
+                var sizeInBytes = Utils.ByteSizeHelper.ToSizeInBytes(item.Item2 != null ? item.Item2.Length : 0, "#.###");
+
+                NewLine(reportBuilder, string.Format("    {0} {1} {2}", name, item.Item1.Path, sizeInBytes));
 
                 this.Log.Trace("Added resource " + name);
             }
