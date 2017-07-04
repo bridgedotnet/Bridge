@@ -14,7 +14,7 @@
     }
   ],
   "logging": {
-    "level":  "None",
-    "report": true
-  }
+    "level":  "None"
+  },
+  "report": true
 }

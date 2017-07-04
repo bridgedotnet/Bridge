@@ -11,7 +11,7 @@
     "manualLoadingMask": "Module2217_Manual"
   },
   "logging": {
-    "level":  "None",
-    "report": true
-  }
+    "level":  "None"
+  },
+  "report": true
 }
