@@ -64,5 +64,7 @@ namespace Bridge
         public static readonly bool IsPhone;
         public static readonly bool iOS;
         public static readonly bool Standalone;
+        [Template("Bridge.isNode")]
+        public static readonly bool IsNodeJs;
     }
 }

@@ -97,6 +97,7 @@
       <Link>Internal\Html5\TypedArray\Uint8ClampedArray.cs</Link>
     </Compile>
     <Compile Include="Attributes\Convention.cs" />
+    <Compile Include="System\AsyncCallback.cs" />
     <Compile Include="System\BitConverter.cs" />
     <Compile Include="System\Collections\BitArrray.cs" />
     <Compile Include="System\Collections\Generic\BitHelper.cs" />
@@ -149,6 +150,15 @@
     <Compile Include="System\ComponentModel\DataAnnotations\ValidationResult.cs" />
     <Compile Include="System\ComponentModel\DataAnnotations\Validator.cs" />
     <Compile Include="System\ComponentModel\EditorBrowsableAttribute.cs" />
+    <Compile Include="System\IAsyncResult.cs" />
+    <Compile Include="System\IO\BinaryReader.cs" />
+    <Compile Include="System\IO\BinaryWriter.cs" />
+    <Compile Include="System\IO\File.cs" />
+    <Compile Include="System\IO\FileStream.cs" />
+    <Compile Include="System\IO\IOException.cs" />
+    <Compile Include="System\IO\MemoryStream.cs" />
+    <Compile Include="System\IO\SeekOrigin.cs" />
+    <Compile Include="System\IO\Stream.cs" />
     <Compile Include="System\SerializableAttribute.cs" />
     <Compile Include="Attributes\UnboxAttribute.cs" />
     <Compile Include="Attributes\GlobalMethodsAttribute.cs" />
@@ -430,6 +440,7 @@
     <Content Include="Resources\.generated\bridge.meta.js" />
     <Content Include="Resources\.generated\bridge\utils\console.js" />
     <Content Include="Resources\.generated\bridge\utils\systemAssemblyVersion.js" />
+    <Content Include="Resources\FileStream.js" />
     <Content Include="Resources\.generated\system\bitConverter.js" />
     <Content Include="Resources\.generated\system\collections\bitArray.js" />
     <Content Include="Resources\.generated\system\collections\bitArray\bitArrayEnumeratorSimple.js" />

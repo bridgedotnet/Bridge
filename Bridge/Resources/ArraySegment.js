@@ -1,7 +1,7 @@
     Bridge.define('System.ArraySegment', {
         ctor: function (array, offset, count) {
             this.$initialize();
-            this.array = array;
+            this.array = array || null;
             this.offset = offset || 0;
             this.count = count || array.length;
         },

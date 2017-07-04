@@ -9,8 +9,10 @@ namespace System
     [IgnoreGeneric]
     [Name("System.ArraySegment")]
     [Reflectable]
-    public class ArraySegment<T>
+    public struct ArraySegment<T>
     {
+        //public extern ArraySegment();
+
         public extern ArraySegment(T[] array);
 
         public extern ArraySegment(T[] array, int offset, int count);
