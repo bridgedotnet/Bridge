@@ -3302,38 +3302,6 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1241", {
-        statics: {
-            methods: {
-                TestMarkElement: function () {
-                    var root = Bridge.ClientTestHelper.HtmlHelper.FixtureElement;
-
-                    var markElement1 = document.createElement('mark');
-                    Bridge.Test.NUnit.Assert.NotNull(markElement1, "MarkElement created");
-                    Bridge.Test.NUnit.Assert.AreEqual(markElement1.tagName, "MARK");
-
-                    var p = document.createElement('p');
-                    root.appendChild(p);
-
-                    markElement1.id = "markElement1";
-                    p.appendChild(markElement1);
-                    markElement1.innerHTML = "I'm highlighted";
-
-                    var m1 = document.getElementById("markElement1");
-                    Bridge.Test.NUnit.Assert.AreEqual("I'm highlighted", m1.innerHTML, "m1.InnerHTML");
-
-                    var markElement2 = document.createElement('mark');
-                    markElement2.id = "markElement2";
-                    p.appendChild(markElement2);
-                    markElement2.innerHTML = "Me too";
-
-                    var m2 = document.getElementById("markElement2");
-                    Bridge.Test.NUnit.Assert.AreEqual("Me too", m2.innerHTML, "m2.InnerHTML");
-                }
-            }
-        }
-    });
-
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1249", {
         statics: {
             methods: {
