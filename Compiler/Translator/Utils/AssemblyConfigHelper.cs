@@ -104,12 +104,6 @@ namespace Bridge.Translator.Utils
 
                 logging.FileName = helper.ApplyPathTokens(tokens, logging.FileName);
                 logging.Folder = helper.ApplyPathTokens(tokens, logging.Folder);
-
-                if (logging.Report != null)
-                {
-                    logging.Report.FileName = helper.ApplyPathTokens(tokens, logging.Report.FileName);
-                    logging.Report.Folder = helper.ApplyPathTokens(tokens, logging.Report.Folder);
-                }
             }
 
             if (config.Reflection != null)
@@ -143,6 +137,12 @@ namespace Bridge.Translator.Utils
                 config.Html.Name = helper.ApplyTokens(tokens, config.Html.Name);
             }
 
+            if (config.Report != null)
+            {
+                config.Report.FileName = helper.ApplyPathTokens(tokens, config.Report.FileName);
+                config.Report.Folder = helper.ApplyPathTokens(tokens, config.Report.Folder);
+            }
+
             Logger.Trace("ApplyTokens done");
         }
 
@@ -157,16 +157,16 @@ namespace Bridge.Translator.Utils
             if (assemblyInfo.Logging != null)
             {
                 assemblyInfo.Logging.Folder = helper.ConvertPath(assemblyInfo.Logging.Folder);
-
-                if (assemblyInfo.Logging.Report != null)
-                {
-                    assemblyInfo.Logging.Report.Folder = helper.ConvertPath(assemblyInfo.Logging.Report.Folder);
-                }
             }
 
             if (assemblyInfo.Html != null)
             {
                 assemblyInfo.Html.Name = helper.ConvertPath(assemblyInfo.Html.Name);
+            }
+
+            if (assemblyInfo.Report != null)
+            {
+                assemblyInfo.Report.Folder = helper.ConvertPath(assemblyInfo.Logging.Folder);
             }
 
             if (assemblyInfo.Resources != null)

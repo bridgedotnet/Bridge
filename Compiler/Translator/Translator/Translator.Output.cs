@@ -71,7 +71,7 @@ namespace Bridge.Translator
 
             var config = this.AssemblyInfo;
 
-            if (!config.Logging.Report.Enabled)
+            if (!config.Report.Enabled)
             {
                 logger.Trace("Report skipped as disabled in config.");
                 return;

@@ -12,7 +12,7 @@ namespace Bridge.Translator
         {
             this.Dependencies = new List<IPluginDependency>();
             this.DefineConstants = new List<string>();
-            this.Logging = new LoggingOptions() { Report = new ReportConfig() };
+            this.Logging = new LoggingOptions();
             this.Reflection = new ReflectionConfig();
             this.ReflectionInternal = new ReflectionConfig();
             this.Assembly = new AssemblyConfig();
@@ -22,6 +22,7 @@ namespace Bridge.Translator
             this.SourceMap = new SourceMapConfig();
             this.Html = new HtmlConfig();
             this.Console = new ConsoleConfig();
+            this.Report = new ReportConfig();
         }
 
         /// <summary>
@@ -311,6 +312,12 @@ namespace Bridge.Translator
 
         [Newtonsoft.Json.JsonConverter(typeof(ConsoleConfigConverter))]
         public ConsoleConfig Console
+        {
+            get; set;
+        }
+
+        [Newtonsoft.Json.JsonConverter(typeof(ReportConfigConverter))]
+        public ReportConfig Report
         {
             get; set;
         }

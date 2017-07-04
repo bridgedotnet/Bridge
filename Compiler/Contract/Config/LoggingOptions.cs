@@ -30,11 +30,5 @@ namespace Bridge.Contract
         {
             get; set;
         }
-
-        [JsonConverter(typeof(ReportConfigConverter))]
-        public ReportConfig Report
-        {
-            get; set;
-        }
     }
 }
