@@ -11,6 +11,7 @@
   "html": {
     "disabled": true
   },
+  "sourceMap": true,
   "resources": [
     {
       "extract": false

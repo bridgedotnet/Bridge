@@ -9,7 +9,7 @@
   "combineLocales":  true,
   "fileNameCasing": "CamelCase",
   "console": true,
-  "sourceMap": true,
+  "sourceMap": false,
   "html": {
     "disabled": true
   },
