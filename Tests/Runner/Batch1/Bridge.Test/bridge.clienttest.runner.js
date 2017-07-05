@@ -4810,32 +4810,32 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 },
                 ToLowerWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToLowerWorks()", $t.Line = "186", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToLowerWorks()", $t.Line = "199", $t));
                     t.Fixture.ToLowerWorks();
                 },
                 ToUpperWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToUpperWorks()", $t.Line = "194", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToUpperWorks()", $t.Line = "207", $t));
                     t.Fixture.ToUpperWorks();
                 },
                 IsDigitWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsDigitWorks()", $t.Line = "202", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsDigitWorks()", $t.Line = "215", $t));
                     t.Fixture.IsDigitWorks();
                 },
                 IsWhiteSpaceWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsWhiteSpaceWorks()", $t.Line = "210", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsWhiteSpaceWorks()", $t.Line = "223", $t));
                     t.Fixture.IsWhiteSpaceWorks();
                 },
                 IsDigitWithStringAndIndexWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsDigitWithStringAndIndexWorks()", $t.Line = "218", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsDigitWithStringAndIndexWorks()", $t.Line = "231", $t));
                     t.Fixture.IsDigitWithStringAndIndexWorks();
                 },
                 IsWhiteSpaceWithStringAndIndexWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsWhiteSpaceWithStringAndIndexWorks()", $t.Line = "230", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsWhiteSpaceWithStringAndIndexWorks()", $t.Line = "243", $t));
                     t.Fixture.IsWhiteSpaceWithStringAndIndexWorks();
                 }
             }

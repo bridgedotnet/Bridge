@@ -181,6 +181,19 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.True(char.IsUpper('A'), "#1");
             Assert.False(char.IsUpper('a'), "#2");
             Assert.False(char.IsUpper('3'), "#3");
+
+            string val = "Ab1#Z";
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => char.IsUpper(val, -1), "throws an ArgumentOutOfRangeException");
+
+            Assert.True(char.IsUpper(val, 0), "A is uppercase");
+            Assert.False(char.IsUpper(val, 1), "b is not uppercase");
+            Assert.False(char.IsUpper(val, 2), "1 is not uppercase");
+            Assert.False(char.IsUpper(val, 3), "# is not uppercase");
+            Assert.True(char.IsUpper(val, 4), "Z is uppercase");
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => char.IsUpper(val, 5), "throws an ArgumentOutOfRangeException");
+            Assert.Throws<ArgumentNullException>(() => char.IsUpper(null, 0), "null throws an ArgumentNullException");
         }
 
         [Test]
