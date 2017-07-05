@@ -2067,7 +2067,8 @@
         },
 
         hasFlag: function (value, flag) {
-            return !!(value & flag);
+            flag = Bridge.unbox(flag, true);
+            return flag === 0 || !!(value & flag);
         },
 
         isDefined: function (enumType, value) {
