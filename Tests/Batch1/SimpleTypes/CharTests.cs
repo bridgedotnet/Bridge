@@ -15,6 +15,9 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.False((object)-1 is char);
             Assert.False((object)65536 is char);
             Assert.AreEqual("System.Char", typeof(char).FullName);
+            Assert.False(typeof(char).IsClass);
+            Assert.False(typeof(IComparable<byte>).IsAssignableFrom(typeof(char)));
+            Assert.False(typeof(IEquatable<byte>).IsAssignableFrom(typeof(char)));
         }
 
         [Test]
@@ -98,6 +101,7 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.True(a < b);
         }
 
+
         [Test]
         public void ParseWorks()
         {
@@ -119,11 +123,32 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual("0023", '\x23'.ToString("x4"));
         }
 
+        // Not C# API
+        //[Test]
+        //public void LocaleFormatWorks()
+        //{
+        //    Assert.AreEqual('\x23'.LocaleFormat("x4"), "0023");
+        //}
+
         [Test]
         public void ToStringWorks()
         {
             Assert.AreEqual("A", 'A'.ToString());
         }
+
+        // Not C# API
+        //[Test]
+        //public void ToLocaleStringWorks()
+        //{
+        //    Assert.AreEqual('A'.ToLocaleString(), "A");
+        //}
+
+        // Not C# API
+        //[Test]
+        //public void CastCharToStringWorks()
+        //{
+        //    Assert.AreEqual((string)'c', "c");
+        //}
 
         [Test]
         public void GetHashCodeWorks()
