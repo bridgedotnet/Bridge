@@ -1294,18 +1294,6 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             QUnit.test("DoubleTests - IEquatableEqualsWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DoubleTests.IEquatableEqualsWorks);
             QUnit.test("DoubleTests - CompareToWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DoubleTests.CompareToWorks);
             QUnit.test("DoubleTests - IComparableCompareToWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.DoubleTests.IComparableCompareToWorks);
-            QUnit.test("EnumTests - TypePropertiesAreCorrect", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests.TypePropertiesAreCorrect);
-            QUnit.test("EnumTests - DefaultValueOfEnumClassIsNull", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests.DefaultValueOfEnumClassIsNull);
-            QUnit.test("EnumTests - DefaultValueOfEnumTypeIsZero_SPI_1595", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests.DefaultValueOfEnumTypeIsZero_SPI_1595);
-            QUnit.test("EnumTests - DefaultConstructorOfEnumTypeReturnsZero_SPI_1595", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests.DefaultConstructorOfEnumTypeReturnsZero_SPI_1595);
-            QUnit.test("EnumTests - CreatingInstanceOfEnumTypeReturnsZero_SPI_1595", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests.CreatingInstanceOfEnumTypeReturnsZero_SPI_1595);
-            QUnit.test("EnumTests - DefaultExpressionWithEnumReturnsZero_SPI_1595", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests.DefaultExpressionWithEnumReturnsZero_SPI_1595);
-            QUnit.test("EnumTests - ParseWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests.ParseWorks);
-            QUnit.test("EnumTests - StaticToStringWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests.StaticToStringWorks);
-            QUnit.test("EnumTests - GetHashCodeWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests.GetHashCodeWorks);
-            QUnit.test("EnumTests - EqualsWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests.EqualsWorks);
-            QUnit.test("EnumTests - ConversionsToEnumAreTreatedAsConversionsToTheUnderlyingType_SPI_1596", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests.ConversionsToEnumAreTreatedAsConversionsToTheUnderlyingType_SPI_1596);
-            QUnit.test("EnumTests - GetValuesWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests.GetValuesWorks);
             QUnit.test("Int16Tests - TypePropertiesAreCorrect_SPI_1717", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.Int16Tests.TypePropertiesAreCorrect_SPI_1717);
             QUnit.test("Int16Tests - CastsWork", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.Int16Tests.CastsWork);
             QUnit.test("Int16Tests - DefaultValueIs0", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.Int16Tests.DefaultValueIs0);
@@ -4529,86 +4517,6 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
                 var $t;
                 if (this.context == null) {
                     this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.DoubleTests", $t.File = "Batch4\\SimpleTypes\\DoubleTests.cs", $t);
-                }
-                return this.context;
-            }
-        }
-    });
-
-    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests", {
-        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests)],
-        statics: {
-            methods: {
-                TypePropertiesAreCorrect: function (assert) {
-                    var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TypePropertiesAreCorrect()", $t.Line = "27", $t));
-                    t.Fixture.TypePropertiesAreCorrect();
-                },
-                DefaultValueOfEnumClassIsNull: function (assert) {
-                    var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultValueOfEnumClassIsNull()", $t.Line = "47", $t));
-                    t.Fixture.DefaultValueOfEnumClassIsNull();
-                },
-                DefaultValueOfEnumTypeIsZero_SPI_1595: function (assert) {
-                    var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultValueOfEnumTypeIsZero_SPI_1595()", $t.Line = "53", $t));
-                    t.Fixture.DefaultValueOfEnumTypeIsZero_SPI_1595();
-                },
-                DefaultConstructorOfEnumTypeReturnsZero_SPI_1595: function (assert) {
-                    var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultConstructorOfEnumTypeReturnsZero_SPI_1595()", $t.Line = "60", $t));
-                    t.Fixture.DefaultConstructorOfEnumTypeReturnsZero_SPI_1595();
-                },
-                CreatingInstanceOfEnumTypeReturnsZero_SPI_1595: function (assert) {
-                    var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CreatingInstanceOfEnumTypeReturnsZero_SPI_1595()", $t.Line = "67", $t));
-                    t.Fixture.CreatingInstanceOfEnumTypeReturnsZero_SPI_1595();
-                },
-                DefaultExpressionWithEnumReturnsZero_SPI_1595: function (assert) {
-                    var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultExpressionWithEnumReturnsZero_SPI_1595()", $t.Line = "74", $t));
-                    t.Fixture.DefaultExpressionWithEnumReturnsZero_SPI_1595();
-                },
-                ParseWorks: function (assert) {
-                    var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ParseWorks()", $t.Line = "81", $t));
-                    t.Fixture.ParseWorks();
-                },
-                StaticToStringWorks: function (assert) {
-                    var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StaticToStringWorks()", $t.Line = "88", $t));
-                    t.Fixture.StaticToStringWorks();
-                },
-                GetHashCodeWorks: function (assert) {
-                    var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetHashCodeWorks()", $t.Line = "95", $t));
-                    t.Fixture.GetHashCodeWorks();
-                },
-                EqualsWorks: function (assert) {
-                    var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "EqualsWorks()", $t.Line = "102", $t));
-                    t.Fixture.EqualsWorks();
-                },
-                ConversionsToEnumAreTreatedAsConversionsToTheUnderlyingType_SPI_1596: function (assert) {
-                    var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ConversionsToEnumAreTreatedAsConversionsToTheUnderlyingType_SPI_1596()", $t.Line = "109", $t));
-                    t.Fixture.ConversionsToEnumAreTreatedAsConversionsToTheUnderlyingType_SPI_1596();
-                },
-                GetValuesWorks: function (assert) {
-                    var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.SimpleTypes.EnumTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.EnumTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetValuesWorks()", $t.Line = "120", $t));
-                    t.Fixture.GetValuesWorks();
-                }
-            }
-        },
-        fields: {
-            context: null
-        },
-        methods: {
-            GetContext: function () {
-                var $t;
-                if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.SimpleTypes.EnumTests", $t.File = "Batch4\\SimpleTypes\\EnumTests.cs", $t);
                 }
                 return this.context;
             }
