@@ -79,7 +79,6 @@
     <Compile Include="BasicCSharp\TestInterfaces.cs" />
     <Compile Include="BasicCSharp\TestOverloadInstanceMethods.cs" />
     <Compile Include="BasicCSharp\TestOverloadStaticMethods.cs" />
-    <Compile Include="BasicCSharp\TestEnum.cs" />
     <Compile Include="BasicCSharp\TestVirtualMethods.cs" />
     <Compile Include="BasicCSharp\TestAbstractClass.cs" />
     <Compile Include="BasicCSharp\TestTryCatchFinallyBlocks.cs" />

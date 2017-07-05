@@ -2252,283 +2252,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     });
 
-    Bridge.define("Bridge.ClientTest.BasicCSharp.EnumTests", {
-        statics: {
-            methods: {
-                TestParse: function () {
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.BasicCSharp.EnumTests.Digits.Zero, System.Enum.parse(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, "Zero"), "Parse Digits.Zero");
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.BasicCSharp.EnumTests.Digits.One, System.Enum.parse(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, "One"), "Parse Digits.One");
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.BasicCSharp.EnumTests.Digits.Two, System.Enum.parse(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, "Two"), "Parse Digits.Two");
-                    Bridge.Test.NUnit.Assert.AreEqual(3, System.Enum.parse(Bridge.ClientTest.BasicCSharp.EnumTests.Pets, "Dog, Cat"), "Parse Dog, Cat");
-                    Bridge.Test.NUnit.Assert.AreEqual(14, System.Enum.parse(Bridge.ClientTest.BasicCSharp.EnumTests.Pets, "Bird, Cat, Rabbit"), "Parse Bird, Cat, Rabbit");
-
-                    Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.BasicCSharp.EnumTests.f1, "Parse ONE");
-                },
-                TestParseIgnoreCase: function () {
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.BasicCSharp.EnumTests.Digits.Zero, System.Enum.parse(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, "zero", true), "Parse Digits.Zero");
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.BasicCSharp.EnumTests.Digits.One, System.Enum.parse(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, "oNe", true), "Parse Digits.One");
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.BasicCSharp.EnumTests.Digits.Two, System.Enum.parse(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, "TWO", true), "Parse Digits.Two");
-
-                    Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.BasicCSharp.EnumTests.f2, "Parse ONN");
-                },
-                TestToString: function () {
-                    Bridge.Test.NUnit.Assert.AreEqual("Zero", System.Enum.toString(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, Bridge.box(Bridge.ClientTest.BasicCSharp.EnumTests.Digits.Zero, Bridge.ClientTest.BasicCSharp.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Digits))), "ToString Digits.Zero");
-                    Bridge.Test.NUnit.Assert.AreEqual("One", System.Enum.toString(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, Bridge.box(Bridge.ClientTest.BasicCSharp.EnumTests.Digits.One, Bridge.ClientTest.BasicCSharp.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Digits))), "ToString Digits.One");
-                    Bridge.Test.NUnit.Assert.AreEqual("Two", System.Enum.toString(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, Bridge.box(Bridge.ClientTest.BasicCSharp.EnumTests.Digits.Two, Bridge.ClientTest.BasicCSharp.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Digits))), "ToString Digits.Two");
-                    Bridge.Test.NUnit.Assert.AreEqual("150", System.Enum.toString(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, Bridge.box(150, Bridge.ClientTest.BasicCSharp.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Digits))), "ToString (Digits)150");
-                },
-                TestGetValues: function () {
-                    Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init([Bridge.ClientTest.BasicCSharp.EnumTests.Abc.A, Bridge.ClientTest.BasicCSharp.EnumTests.Abc.B, Bridge.ClientTest.BasicCSharp.EnumTests.Abc.C], Bridge.ClientTest.BasicCSharp.EnumTests.Abc), System.Enum.getValues(Bridge.ClientTest.BasicCSharp.EnumTests.Abc), "Abc values");
-
-                    Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init([Bridge.ClientTest.BasicCSharp.EnumTests.Digits.Zero, Bridge.ClientTest.BasicCSharp.EnumTests.Digits.One, Bridge.ClientTest.BasicCSharp.EnumTests.Digits.Two], Bridge.ClientTest.BasicCSharp.EnumTests.Digits), System.Enum.getValues(Bridge.ClientTest.BasicCSharp.EnumTests.Digits), "Digits values");
-                },
-                TestCompareTo: function () {
-                    Bridge.Test.NUnit.Assert.AreEqual(0, Bridge.compare(Bridge.ClientTest.BasicCSharp.EnumTests.Digits.Two, Bridge.box(Bridge.ClientTest.BasicCSharp.EnumTests.Digits.Two, Bridge.ClientTest.BasicCSharp.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Digits))), "CompareTo Digits.Two with Digits.Two");
-                    Bridge.Test.NUnit.Assert.AreEqual(-1, Bridge.compare(Bridge.ClientTest.BasicCSharp.EnumTests.Digits.One, Bridge.box(Bridge.ClientTest.BasicCSharp.EnumTests.Digits.Two, Bridge.ClientTest.BasicCSharp.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Digits))), "CompareTo Digits.One with Digits.Two");
-                    Bridge.Test.NUnit.Assert.AreEqual(1, Bridge.compare(Bridge.ClientTest.BasicCSharp.EnumTests.Digits.Two, Bridge.box(Bridge.ClientTest.BasicCSharp.EnumTests.Digits.Zero, Bridge.ClientTest.BasicCSharp.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Digits))), "CompareTo Digits.Two with Digits.Zero");
-                },
-                TestFormat: function () {
-                    Bridge.Test.NUnit.Assert.AreEqual("Two", System.Enum.format(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, Bridge.box(Bridge.ClientTest.BasicCSharp.EnumTests.Digits.Two, Bridge.ClientTest.BasicCSharp.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Digits)), "G"), "Format Digits.Two G");
-                    Bridge.Test.NUnit.Assert.AreEqual("Two", System.Enum.format(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, Bridge.box(Bridge.ClientTest.BasicCSharp.EnumTests.Digits.Two, Bridge.ClientTest.BasicCSharp.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Digits)), "g"), "Format Digits.Two g");
-                    Bridge.Test.NUnit.Assert.AreEqual("150", System.Enum.format(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, Bridge.box(150, Bridge.ClientTest.BasicCSharp.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Digits)), "G"), "Format (Digits)150 G");
-                    Bridge.Test.NUnit.Assert.AreEqual("150", System.Enum.format(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, Bridge.box(150, Bridge.ClientTest.BasicCSharp.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Digits)), "g"), "Format (Digits)150 g");
-                    Bridge.Test.NUnit.Assert.AreEqual("Dog, Cat", System.Enum.format(Bridge.ClientTest.BasicCSharp.EnumTests.Pets, Bridge.box(3, Bridge.ClientTest.BasicCSharp.EnumTests.Pets, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Pets)), "G"), "Format Pets.Dog | Pets.Cat G");
-                    Bridge.Test.NUnit.Assert.AreEqual("Bird, Rabbit, Other", System.Enum.format(Bridge.ClientTest.BasicCSharp.EnumTests.Pets, Bridge.box(28, Bridge.ClientTest.BasicCSharp.EnumTests.Pets, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Pets)), "g"), "Format Pets.Bird | Pets.Rabbit | Pets.Other g");
-                    Bridge.Test.NUnit.Assert.AreEqual("3", System.Enum.format(Bridge.ClientTest.BasicCSharp.EnumTests.Pets1, Bridge.box(3, Bridge.ClientTest.BasicCSharp.EnumTests.Pets1, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Pets1)), "G"), "Format Pets1.Cat | Pets1.Dog G");
-                    Bridge.Test.NUnit.Assert.AreEqual("3", System.Enum.format(Bridge.ClientTest.BasicCSharp.EnumTests.Pets1, Bridge.box(3, Bridge.ClientTest.BasicCSharp.EnumTests.Pets1, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Pets1)), "g"), "Format Pets1.Cat | Pets1.Dog g");
-
-                    Bridge.Test.NUnit.Assert.AreEqual("2", System.Enum.format(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, Bridge.box(Bridge.ClientTest.BasicCSharp.EnumTests.Digits.Two, Bridge.ClientTest.BasicCSharp.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Digits)), "X"), "Format Digits.Two X");
-                    Bridge.Test.NUnit.Assert.AreEqual("1", System.Enum.format(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, Bridge.box(Bridge.ClientTest.BasicCSharp.EnumTests.Digits.One, Bridge.ClientTest.BasicCSharp.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Digits)), "x"), "Format Digits.One x");
-                    Bridge.Test.NUnit.Assert.AreEqual("ff", System.Enum.format(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, Bridge.box(255, Bridge.ClientTest.BasicCSharp.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Digits)), "X"), "Format (Digits)255 X");
-                    Bridge.Test.NUnit.Assert.AreEqual("ff", System.Enum.format(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, Bridge.box(255, Bridge.ClientTest.BasicCSharp.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Digits)), "x"), "Format (Digits)255 x");
-                    Bridge.Test.NUnit.Assert.AreEqual("18", System.Enum.format(Bridge.ClientTest.BasicCSharp.EnumTests.Pets, Bridge.box(24, Bridge.ClientTest.BasicCSharp.EnumTests.Pets, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Pets)), "X"), "Format Pets.Rabbit | Pets.Other X");
-                    Bridge.Test.NUnit.Assert.AreEqual("10", System.Enum.format(Bridge.ClientTest.BasicCSharp.EnumTests.Pets, Bridge.box(Bridge.ClientTest.BasicCSharp.EnumTests.Pets.Other, Bridge.ClientTest.BasicCSharp.EnumTests.Pets, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Pets)), "x"), "Format Pets.Other x");
-
-                    Bridge.Test.NUnit.Assert.AreEqual("2", System.Enum.format(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, Bridge.box(Bridge.ClientTest.BasicCSharp.EnumTests.Digits.Two, Bridge.ClientTest.BasicCSharp.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Digits)), "D"), "Format Digits.Two D");
-                    Bridge.Test.NUnit.Assert.AreEqual("1", System.Enum.format(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, Bridge.box(Bridge.ClientTest.BasicCSharp.EnumTests.Digits.One, Bridge.ClientTest.BasicCSharp.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Digits)), "d"), "Format Digits.One d");
-                    Bridge.Test.NUnit.Assert.AreEqual("255", System.Enum.format(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, Bridge.box(255, Bridge.ClientTest.BasicCSharp.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Digits)), "D"), "Format (Digits)255 D");
-                    Bridge.Test.NUnit.Assert.AreEqual("255", System.Enum.format(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, Bridge.box(255, Bridge.ClientTest.BasicCSharp.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Digits)), "d"), "Format (Digits)255 d");
-                    Bridge.Test.NUnit.Assert.AreEqual("24", System.Enum.format(Bridge.ClientTest.BasicCSharp.EnumTests.Pets, Bridge.box(24, Bridge.ClientTest.BasicCSharp.EnumTests.Pets, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Pets)), "D"), "Format Pets.Rabbit | Pets.Other D");
-                    Bridge.Test.NUnit.Assert.AreEqual("16", System.Enum.format(Bridge.ClientTest.BasicCSharp.EnumTests.Pets, Bridge.box(Bridge.ClientTest.BasicCSharp.EnumTests.Pets.Other, Bridge.ClientTest.BasicCSharp.EnumTests.Pets, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Pets)), "d"), "Format Pets.Other d");
-
-                    Bridge.Test.NUnit.Assert.AreEqual("Dog, Cat", System.Enum.format(Bridge.ClientTest.BasicCSharp.EnumTests.Pets1, Bridge.box(3, Bridge.ClientTest.BasicCSharp.EnumTests.Pets1, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Pets1)), "F"), "Format Pets1.Cat | Pets1.Dog F");
-                    Bridge.Test.NUnit.Assert.AreEqual("Dog, Cat", System.Enum.format(Bridge.ClientTest.BasicCSharp.EnumTests.Pets1, Bridge.box(3, Bridge.ClientTest.BasicCSharp.EnumTests.Pets1, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Pets1)), "f"), "Format Pets1.Cat | Pets1.Dog f");
-                },
-                TestGetName: function () {
-                    Bridge.Test.NUnit.Assert.AreEqual("Two", System.Enum.getName(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, Bridge.box(2, System.Int32)), "GetName 2");
-                    Bridge.Test.NUnit.Assert.AreEqual("One", System.Enum.getName(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, Bridge.box(1, System.Int32)), "GetName 1");
-                    Bridge.Test.NUnit.Assert.AreEqual(null, System.Enum.getName(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, Bridge.box(100, System.Int32)), "GetName 100");
-                },
-                TestGetNames: function () {
-                    Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["A", "B", "C"], System.String), System.Enum.getNames(Bridge.ClientTest.BasicCSharp.EnumTests.Abc), "Abc names");
-
-                    Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["Zero", "One", "Two"], System.String), System.Enum.getNames(Bridge.ClientTest.BasicCSharp.EnumTests.Digits), "Digits names");
-                },
-                TestHasFlag: function () {
-                    Bridge.Test.NUnit.Assert.AreEqual(true, System.Enum.hasFlag((3), Bridge.box(Bridge.ClientTest.BasicCSharp.EnumTests.Pets.Cat, Bridge.ClientTest.BasicCSharp.EnumTests.Pets, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Pets))), "(Pets.Dog | Pets.Cat).HasFlag(Pets.Cat)");
-                    Bridge.Test.NUnit.Assert.AreEqual(true, System.Enum.hasFlag((3), Bridge.box(Bridge.ClientTest.BasicCSharp.EnumTests.Pets.Dog, Bridge.ClientTest.BasicCSharp.EnumTests.Pets, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Pets))), "(Pets.Dog | Pets.Cat).HasFlag(Pets.Dog)");
-                    Bridge.Test.NUnit.Assert.AreEqual(false, System.Enum.hasFlag((3), Bridge.box(Bridge.ClientTest.BasicCSharp.EnumTests.Pets.Bird, Bridge.ClientTest.BasicCSharp.EnumTests.Pets, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Pets))), "(Pets.Dog | Pets.Cat).HasFlag(Pets.Bird)");
-                    Bridge.Test.NUnit.Assert.AreEqual(true, System.Enum.hasFlag(Bridge.ClientTest.BasicCSharp.EnumTests.Pets.Dog, Bridge.box(Bridge.ClientTest.BasicCSharp.EnumTests.Pets.Dog, Bridge.ClientTest.BasicCSharp.EnumTests.Pets, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Pets))), "Pets.Dog.HasFlag(Pets.Dog)");
-                    Bridge.Test.NUnit.Assert.AreEqual(false, System.Enum.hasFlag(Bridge.ClientTest.BasicCSharp.EnumTests.Pets.Dog, Bridge.box(Bridge.ClientTest.BasicCSharp.EnumTests.Pets.Cat, Bridge.ClientTest.BasicCSharp.EnumTests.Pets, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Pets))), "Pets.Dog.HasFlag(Pets.Cat)");
-
-                    Bridge.Test.NUnit.Assert.True(System.Enum.hasFlag(Bridge.ClientTest.BasicCSharp.EnumTests.A.A, Bridge.box(Bridge.ClientTest.BasicCSharp.EnumTests.A.A, Bridge.ClientTest.BasicCSharp.EnumTests.A, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.A))), "#2930");
-                },
-                TestIsDefined: function () {
-                    Bridge.Test.NUnit.Assert.AreEqual(true, System.Enum.isDefined(Bridge.ClientTest.BasicCSharp.EnumTests.Pets, Bridge.box(1, System.Int32)), "Enum.IsDefined(typeof(Pets), 1)");
-                    Bridge.Test.NUnit.Assert.AreEqual(false, System.Enum.isDefined(Bridge.ClientTest.BasicCSharp.EnumTests.Pets, Bridge.box(17, System.Int32)), "Enum.IsDefined(typeof(Pets), 17)");
-                    Bridge.Test.NUnit.Assert.AreEqual(true, System.Enum.isDefined(Bridge.ClientTest.BasicCSharp.EnumTests.Pets, "Rabbit"), "Enum.IsDefined(typeof(Pets), \"Rabbit\")");
-                    Bridge.Test.NUnit.Assert.AreEqual(false, System.Enum.isDefined(Bridge.ClientTest.BasicCSharp.EnumTests.Pets, "Parrot"), "Enum.IsDefined(typeof(Pets), \"Parrot\")");
-                    Bridge.Test.NUnit.Assert.AreEqual(false, System.Enum.isDefined(Bridge.ClientTest.BasicCSharp.EnumTests.Pets, "RABBIT"), "Enum.IsDefined(typeof(Pets), \"RABBIT\")");
-                    Bridge.Test.NUnit.Assert.AreEqual(false, System.Enum.isDefined(Bridge.ClientTest.BasicCSharp.EnumTests.Pets, Bridge.box(3, Bridge.ClientTest.BasicCSharp.EnumTests.Pets, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.Pets))), "Enum.IsDefined(typeof(Pets), Pets.Dog | Pets.Cat)");
-                },
-                TestTryParse: function () {
-                    var outVar = { v : new Bridge.ClientTest.BasicCSharp.EnumTests.Digits() };
-                    var outPets = { v : new Bridge.ClientTest.BasicCSharp.EnumTests.Pets() };
-                    Bridge.Test.NUnit.Assert.AreEqual(true, System.Enum.tryParse(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, "Zero", outVar), "TryParse Digits.Zero");
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.BasicCSharp.EnumTests.Digits.Zero, outVar.v);
-                    Bridge.Test.NUnit.Assert.AreEqual(true, System.Enum.tryParse(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, "One", outVar), "TryParse Digits.One");
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.BasicCSharp.EnumTests.Digits.One, outVar.v);
-                    Bridge.Test.NUnit.Assert.AreEqual(true, System.Enum.tryParse(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, "Two", outVar), "TryParse Digits.Two");
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.BasicCSharp.EnumTests.Digits.Two, outVar.v);
-                    Bridge.Test.NUnit.Assert.AreEqual(true, System.Enum.tryParse(Bridge.ClientTest.BasicCSharp.EnumTests.Pets, "Dog, Cat", outPets), "TryParse Dog, Cat");
-                    Bridge.Test.NUnit.Assert.AreEqual(3, outPets.v);
-                    Bridge.Test.NUnit.Assert.AreEqual(true, System.Enum.tryParse(Bridge.ClientTest.BasicCSharp.EnumTests.Pets, "Bird, Cat, Rabbit", outPets), "TryParse Bird, Cat, Rabbit");
-                    Bridge.Test.NUnit.Assert.AreEqual(14, outPets.v);
-                    Bridge.Test.NUnit.Assert.AreEqual(false, System.Enum.tryParse(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, "ONE", outVar), "TryParse ONE");
-                }
-            }
-        },
-        methods: {
-            TypePropertiesAreCorrect: function () {
-                Bridge.Test.NUnit.Assert.AreEqual("System.Enum", Bridge.Reflection.getTypeFullName(System.Enum));
-                Bridge.Test.NUnit.Assert.AreEqual("Bridge.ClientTest.SimpleTypes.EnumTests+TestEnum", Bridge.Reflection.getTypeFullName(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum));
-                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isEnum(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum));
-                Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isFlags(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum));
-                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isEnum(Bridge.ClientTest.BasicCSharp.EnumTests.FlagsEnum));
-                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isFlags(Bridge.ClientTest.BasicCSharp.EnumTests.FlagsEnum));
-                Bridge.Test.NUnit.Assert.True(Bridge.is(Bridge.box(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum.FirstValue, Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum)), System.Int32));
-
-                var interfaces = Bridge.Reflection.getInterfaces(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum);
-                Bridge.Test.NUnit.Assert.AreEqual(2, interfaces.length);
-            },
-            GetDefaultValue: function (T) {
-                return Bridge.getDefaultValue(T);
-            },
-            DefaultValueOfEnumClassIsNull: function () {
-                Bridge.Test.NUnit.Assert.AreStrictEqual(null, this.GetDefaultValue(System.Enum));
-            },
-            DefaultValueOfEnumTypeIsZero_SPI_1595: function () {
-                // #1595
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum.FirstValue, this.GetDefaultValue(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum));
-            },
-            DefaultConstructorOfEnumTypeReturnsZero_SPI_1595: function () {
-                // #1595
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum.FirstValue, (0));
-            },
-            CreatingInstanceOfEnumTypeReturnsZero_SPI_1595: function () {
-                // #1595
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum.FirstValue, Bridge.createInstance(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum));
-            },
-            DefaultExpressionWithEnumReturnsZero_SPI_1595: function () {
-                // #1595
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum.FirstValue, 0);
-            },
-            ParseWorks: function () {
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum.FirstValue, System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Enum.parse(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum, "FirstValue")), System.Int32)));
-                Bridge.Test.NUnit.Assert.AreEqual(5, System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Enum.parse(Bridge.ClientTest.BasicCSharp.EnumTests.FlagsEnum, "FirstValue, ThirdValue")), System.Int32)));
-            },
-            StaticToStringWorks: function () {
-                Bridge.Test.NUnit.Assert.AreEqual("FirstValue", System.Enum.toString(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum, Bridge.box(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum.FirstValue, Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum))));
-                Bridge.Test.NUnit.Assert.AreEqual("FirstValue, ThirdValue", System.Enum.toString(Bridge.ClientTest.BasicCSharp.EnumTests.FlagsEnum, Bridge.box(5, Bridge.ClientTest.BasicCSharp.EnumTests.FlagsEnum, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.FlagsEnum))));
-            },
-            GetHashCodeWorks: function () {
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.getHashCode(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum.FirstValue), Bridge.getHashCode(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum.FirstValue));
-                Bridge.Test.NUnit.Assert.AreNotEqual(Bridge.getHashCode(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum.SecondValue), Bridge.getHashCode(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum.FirstValue));
-            },
-            EqualsWorks: function () {
-                Bridge.Test.NUnit.Assert.True(System.Enum.equals(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum.FirstValue, Bridge.box(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum.FirstValue, Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum)), Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum));
-                Bridge.Test.NUnit.Assert.False(System.Enum.equals(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum.FirstValue, Bridge.box(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum.SecondValue, Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum, System.Enum.toStringFn(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum)), Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum));
-            },
-            ConversionsToEnumAreTreatedAsConversionsToTheUnderlyingType_SPI_1596: function () {
-                Bridge.Test.NUnit.Assert.AreEqual(0, System.Nullable.getValue(Bridge.cast(Bridge.unbox(Bridge.box(0, System.Int32)), System.Int32)));
-                // #1596
-                Bridge.Test.NUnit.Assert.Throws$2(System.InvalidCastException, $asm.$.Bridge.ClientTest.BasicCSharp.EnumTests.f3);
-            },
-            GetValuesWorks: function () {
-                var values = System.Enum.getValues(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum);
-                Bridge.Test.NUnit.Assert.AreEqual(3, values.length);
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum.FirstValue, Bridge.unbox(System.Array.get(values, 0)));
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum.SecondValue, Bridge.unbox(System.Array.get(values, 1)));
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum.ThirdValue, Bridge.unbox(System.Array.get(values, 2)));
-
-                values = System.Enum.getValues(Bridge.ClientTest.BasicCSharp.EnumTests.FlagsEnum);
-                Bridge.Test.NUnit.Assert.AreEqual(4, values.length);
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.BasicCSharp.EnumTests.FlagsEnum.None, Bridge.unbox(System.Array.get(values, 0)));
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.BasicCSharp.EnumTests.FlagsEnum.FirstValue, Bridge.unbox(System.Array.get(values, 1)));
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.BasicCSharp.EnumTests.FlagsEnum.SecondValue, Bridge.unbox(System.Array.get(values, 2)));
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.BasicCSharp.EnumTests.FlagsEnum.ThirdValue, Bridge.unbox(System.Array.get(values, 3)));
-            }
-        }
-    });
-
-    Bridge.ns("Bridge.ClientTest.BasicCSharp.EnumTests", $asm.$);
-
-    Bridge.apply($asm.$.Bridge.ClientTest.BasicCSharp.EnumTests, {
-        f1: function () {
-            var d = System.Enum.parse(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, "ONE");
-        },
-        f2: function () {
-            var d = System.Enum.parse(Bridge.ClientTest.BasicCSharp.EnumTests.Digits, "ONN", true);
-        },
-        f3: function () {
-            var _ = System.Nullable.getValue(Bridge.cast(Bridge.unbox(Bridge.box(0.5, System.Double, System.Double.format, System.Double.getHashCode)), System.Int32));
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.BasicCSharp.EnumTests.A", {
-        $kind: "enum",
-        statics: {
-            fields: {
-                A: 0
-            }
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.BasicCSharp.EnumTests.Abc", {
-        $kind: "enum",
-        statics: {
-            fields: {
-                A: -1,
-                B: 0,
-                C: 1
-            }
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.BasicCSharp.EnumTests.Digits", {
-        $kind: "enum",
-        statics: {
-            fields: {
-                Zero: 0,
-                One: 1,
-                Two: 2
-            }
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.BasicCSharp.EnumTests.FlagsEnum", {
-        $kind: "enum",
-        statics: {
-            fields: {
-                None: 0,
-                FirstValue: 1,
-                SecondValue: 2,
-                ThirdValue: 4
-            }
-        },
-        $flags: true
-    });
-
-    Bridge.define("Bridge.ClientTest.BasicCSharp.EnumTests.Pets", {
-        $kind: "enum",
-        statics: {
-            fields: {
-                None: 0,
-                Dog: 1,
-                Cat: 2,
-                Bird: 4,
-                Rabbit: 8,
-                Other: 16
-            }
-        },
-        $flags: true
-    });
-
-    Bridge.define("Bridge.ClientTest.BasicCSharp.EnumTests.Pets1", {
-        $kind: "enum",
-        statics: {
-            fields: {
-                None: 0,
-                Dog: 1,
-                Cat: 2,
-                Bird: 4,
-                Rabbit: 8,
-                Other: 16
-            }
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.BasicCSharp.EnumTests.TestEnum", {
-        $kind: "enum",
-        statics: {
-            fields: {
-                FirstValue: 0,
-                SecondValue: 1,
-                ThirdValue: 2
-            }
-        }
-    });
-
     Bridge.define("Bridge.ClientTest.BasicCSharp.Point", {
         $kind: "struct",
         statics: {
@@ -32717,6 +32440,111 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     });
 
     Bridge.define("Bridge.ClientTest.SimpleTypes.EnumTests", {
+        statics: {
+            methods: {
+                TestParse: function () {
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.Zero, System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, "Zero"), "Parse Digits.Zero");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.One, System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, "One"), "Parse Digits.One");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.Two, System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, "Two"), "Parse Digits.Two");
+                    Bridge.Test.NUnit.Assert.AreEqual(3, System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.Pets, "Dog, Cat"), "Parse Dog, Cat");
+                    Bridge.Test.NUnit.Assert.AreEqual(14, System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.Pets, "Bird, Cat, Rabbit"), "Parse Bird, Cat, Rabbit");
+
+                    Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.EnumTests.f1, "Parse ONE");
+                },
+                TestParseIgnoreCase: function () {
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.Zero, System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, "zero", true), "Parse Digits.Zero");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.One, System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, "oNe", true), "Parse Digits.One");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.Two, System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, "TWO", true), "Parse Digits.Two");
+
+                    Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.EnumTests.f2, "Parse ONN");
+                },
+                TestToString: function () {
+                    Bridge.Test.NUnit.Assert.AreEqual("Zero", System.Enum.toString(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, Bridge.box(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.Zero, Bridge.ClientTest.SimpleTypes.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Digits))), "ToString Digits.Zero");
+                    Bridge.Test.NUnit.Assert.AreEqual("One", System.Enum.toString(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, Bridge.box(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.One, Bridge.ClientTest.SimpleTypes.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Digits))), "ToString Digits.One");
+                    Bridge.Test.NUnit.Assert.AreEqual("Two", System.Enum.toString(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, Bridge.box(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.Two, Bridge.ClientTest.SimpleTypes.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Digits))), "ToString Digits.Two");
+                    Bridge.Test.NUnit.Assert.AreEqual("150", System.Enum.toString(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, Bridge.box(150, Bridge.ClientTest.SimpleTypes.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Digits))), "ToString (Digits)150");
+                },
+                TestGetValues: function () {
+                    Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init([Bridge.ClientTest.SimpleTypes.EnumTests.Abc.A, Bridge.ClientTest.SimpleTypes.EnumTests.Abc.B, Bridge.ClientTest.SimpleTypes.EnumTests.Abc.C], Bridge.ClientTest.SimpleTypes.EnumTests.Abc), System.Enum.getValues(Bridge.ClientTest.SimpleTypes.EnumTests.Abc), "Abc values");
+
+                    Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init([Bridge.ClientTest.SimpleTypes.EnumTests.Digits.Zero, Bridge.ClientTest.SimpleTypes.EnumTests.Digits.One, Bridge.ClientTest.SimpleTypes.EnumTests.Digits.Two], Bridge.ClientTest.SimpleTypes.EnumTests.Digits), System.Enum.getValues(Bridge.ClientTest.SimpleTypes.EnumTests.Digits), "Digits values");
+                },
+                TestCompareTo: function () {
+                    Bridge.Test.NUnit.Assert.AreEqual(0, Bridge.compare(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.Two, Bridge.box(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.Two, Bridge.ClientTest.SimpleTypes.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Digits))), "CompareTo Digits.Two with Digits.Two");
+                    Bridge.Test.NUnit.Assert.AreEqual(-1, Bridge.compare(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.One, Bridge.box(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.Two, Bridge.ClientTest.SimpleTypes.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Digits))), "CompareTo Digits.One with Digits.Two");
+                    Bridge.Test.NUnit.Assert.AreEqual(1, Bridge.compare(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.Two, Bridge.box(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.Zero, Bridge.ClientTest.SimpleTypes.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Digits))), "CompareTo Digits.Two with Digits.Zero");
+                },
+                TestFormat: function () {
+                    Bridge.Test.NUnit.Assert.AreEqual("Two", System.Enum.format(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, Bridge.box(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.Two, Bridge.ClientTest.SimpleTypes.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Digits)), "G"), "Format Digits.Two G");
+                    Bridge.Test.NUnit.Assert.AreEqual("Two", System.Enum.format(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, Bridge.box(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.Two, Bridge.ClientTest.SimpleTypes.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Digits)), "g"), "Format Digits.Two g");
+                    Bridge.Test.NUnit.Assert.AreEqual("150", System.Enum.format(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, Bridge.box(150, Bridge.ClientTest.SimpleTypes.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Digits)), "G"), "Format (Digits)150 G");
+                    Bridge.Test.NUnit.Assert.AreEqual("150", System.Enum.format(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, Bridge.box(150, Bridge.ClientTest.SimpleTypes.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Digits)), "g"), "Format (Digits)150 g");
+                    Bridge.Test.NUnit.Assert.AreEqual("Dog, Cat", System.Enum.format(Bridge.ClientTest.SimpleTypes.EnumTests.Pets, Bridge.box(3, Bridge.ClientTest.SimpleTypes.EnumTests.Pets, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Pets)), "G"), "Format Pets.Dog | Pets.Cat G");
+                    Bridge.Test.NUnit.Assert.AreEqual("Bird, Rabbit, Other", System.Enum.format(Bridge.ClientTest.SimpleTypes.EnumTests.Pets, Bridge.box(28, Bridge.ClientTest.SimpleTypes.EnumTests.Pets, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Pets)), "g"), "Format Pets.Bird | Pets.Rabbit | Pets.Other g");
+                    Bridge.Test.NUnit.Assert.AreEqual("3", System.Enum.format(Bridge.ClientTest.SimpleTypes.EnumTests.Pets1, Bridge.box(3, Bridge.ClientTest.SimpleTypes.EnumTests.Pets1, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Pets1)), "G"), "Format Pets1.Cat | Pets1.Dog G");
+                    Bridge.Test.NUnit.Assert.AreEqual("3", System.Enum.format(Bridge.ClientTest.SimpleTypes.EnumTests.Pets1, Bridge.box(3, Bridge.ClientTest.SimpleTypes.EnumTests.Pets1, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Pets1)), "g"), "Format Pets1.Cat | Pets1.Dog g");
+
+                    Bridge.Test.NUnit.Assert.AreEqual("2", System.Enum.format(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, Bridge.box(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.Two, Bridge.ClientTest.SimpleTypes.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Digits)), "X"), "Format Digits.Two X");
+                    Bridge.Test.NUnit.Assert.AreEqual("1", System.Enum.format(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, Bridge.box(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.One, Bridge.ClientTest.SimpleTypes.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Digits)), "x"), "Format Digits.One x");
+                    Bridge.Test.NUnit.Assert.AreEqual("ff", System.Enum.format(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, Bridge.box(255, Bridge.ClientTest.SimpleTypes.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Digits)), "X"), "Format (Digits)255 X");
+                    Bridge.Test.NUnit.Assert.AreEqual("ff", System.Enum.format(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, Bridge.box(255, Bridge.ClientTest.SimpleTypes.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Digits)), "x"), "Format (Digits)255 x");
+                    Bridge.Test.NUnit.Assert.AreEqual("18", System.Enum.format(Bridge.ClientTest.SimpleTypes.EnumTests.Pets, Bridge.box(24, Bridge.ClientTest.SimpleTypes.EnumTests.Pets, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Pets)), "X"), "Format Pets.Rabbit | Pets.Other X");
+                    Bridge.Test.NUnit.Assert.AreEqual("10", System.Enum.format(Bridge.ClientTest.SimpleTypes.EnumTests.Pets, Bridge.box(Bridge.ClientTest.SimpleTypes.EnumTests.Pets.Other, Bridge.ClientTest.SimpleTypes.EnumTests.Pets, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Pets)), "x"), "Format Pets.Other x");
+
+                    Bridge.Test.NUnit.Assert.AreEqual("2", System.Enum.format(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, Bridge.box(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.Two, Bridge.ClientTest.SimpleTypes.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Digits)), "D"), "Format Digits.Two D");
+                    Bridge.Test.NUnit.Assert.AreEqual("1", System.Enum.format(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, Bridge.box(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.One, Bridge.ClientTest.SimpleTypes.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Digits)), "d"), "Format Digits.One d");
+                    Bridge.Test.NUnit.Assert.AreEqual("255", System.Enum.format(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, Bridge.box(255, Bridge.ClientTest.SimpleTypes.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Digits)), "D"), "Format (Digits)255 D");
+                    Bridge.Test.NUnit.Assert.AreEqual("255", System.Enum.format(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, Bridge.box(255, Bridge.ClientTest.SimpleTypes.EnumTests.Digits, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Digits)), "d"), "Format (Digits)255 d");
+                    Bridge.Test.NUnit.Assert.AreEqual("24", System.Enum.format(Bridge.ClientTest.SimpleTypes.EnumTests.Pets, Bridge.box(24, Bridge.ClientTest.SimpleTypes.EnumTests.Pets, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Pets)), "D"), "Format Pets.Rabbit | Pets.Other D");
+                    Bridge.Test.NUnit.Assert.AreEqual("16", System.Enum.format(Bridge.ClientTest.SimpleTypes.EnumTests.Pets, Bridge.box(Bridge.ClientTest.SimpleTypes.EnumTests.Pets.Other, Bridge.ClientTest.SimpleTypes.EnumTests.Pets, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Pets)), "d"), "Format Pets.Other d");
+
+                    Bridge.Test.NUnit.Assert.AreEqual("Dog, Cat", System.Enum.format(Bridge.ClientTest.SimpleTypes.EnumTests.Pets1, Bridge.box(3, Bridge.ClientTest.SimpleTypes.EnumTests.Pets1, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Pets1)), "F"), "Format Pets1.Cat | Pets1.Dog F");
+                    Bridge.Test.NUnit.Assert.AreEqual("Dog, Cat", System.Enum.format(Bridge.ClientTest.SimpleTypes.EnumTests.Pets1, Bridge.box(3, Bridge.ClientTest.SimpleTypes.EnumTests.Pets1, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Pets1)), "f"), "Format Pets1.Cat | Pets1.Dog f");
+                },
+                TestGetName: function () {
+                    Bridge.Test.NUnit.Assert.AreEqual("Two", System.Enum.getName(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, Bridge.box(2, System.Int32)), "GetName 2");
+                    Bridge.Test.NUnit.Assert.AreEqual("One", System.Enum.getName(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, Bridge.box(1, System.Int32)), "GetName 1");
+                    Bridge.Test.NUnit.Assert.AreEqual(null, System.Enum.getName(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, Bridge.box(100, System.Int32)), "GetName 100");
+                },
+                TestGetNames: function () {
+                    Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["A", "B", "C"], System.String), System.Enum.getNames(Bridge.ClientTest.SimpleTypes.EnumTests.Abc), "Abc names");
+
+                    Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["Zero", "One", "Two"], System.String), System.Enum.getNames(Bridge.ClientTest.SimpleTypes.EnumTests.Digits), "Digits names");
+                },
+                TestHasFlag: function () {
+                    Bridge.Test.NUnit.Assert.AreEqual(true, System.Enum.hasFlag((3), Bridge.box(Bridge.ClientTest.SimpleTypes.EnumTests.Pets.Cat, Bridge.ClientTest.SimpleTypes.EnumTests.Pets, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Pets))), "(Pets.Dog | Pets.Cat).HasFlag(Pets.Cat)");
+                    Bridge.Test.NUnit.Assert.AreEqual(true, System.Enum.hasFlag((3), Bridge.box(Bridge.ClientTest.SimpleTypes.EnumTests.Pets.Dog, Bridge.ClientTest.SimpleTypes.EnumTests.Pets, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Pets))), "(Pets.Dog | Pets.Cat).HasFlag(Pets.Dog)");
+                    Bridge.Test.NUnit.Assert.AreEqual(false, System.Enum.hasFlag((3), Bridge.box(Bridge.ClientTest.SimpleTypes.EnumTests.Pets.Bird, Bridge.ClientTest.SimpleTypes.EnumTests.Pets, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Pets))), "(Pets.Dog | Pets.Cat).HasFlag(Pets.Bird)");
+                    Bridge.Test.NUnit.Assert.AreEqual(true, System.Enum.hasFlag(Bridge.ClientTest.SimpleTypes.EnumTests.Pets.Dog, Bridge.box(Bridge.ClientTest.SimpleTypes.EnumTests.Pets.Dog, Bridge.ClientTest.SimpleTypes.EnumTests.Pets, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Pets))), "Pets.Dog.HasFlag(Pets.Dog)");
+                    Bridge.Test.NUnit.Assert.AreEqual(false, System.Enum.hasFlag(Bridge.ClientTest.SimpleTypes.EnumTests.Pets.Dog, Bridge.box(Bridge.ClientTest.SimpleTypes.EnumTests.Pets.Cat, Bridge.ClientTest.SimpleTypes.EnumTests.Pets, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Pets))), "Pets.Dog.HasFlag(Pets.Cat)");
+
+                    Bridge.Test.NUnit.Assert.True(System.Enum.hasFlag(Bridge.ClientTest.SimpleTypes.EnumTests.A.A, Bridge.box(Bridge.ClientTest.SimpleTypes.EnumTests.A.A, Bridge.ClientTest.SimpleTypes.EnumTests.A, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.A))), "#2930");
+                },
+                TestIsDefined: function () {
+                    Bridge.Test.NUnit.Assert.AreEqual(true, System.Enum.isDefined(Bridge.ClientTest.SimpleTypes.EnumTests.Pets, Bridge.box(1, System.Int32)), "Enum.IsDefined(typeof(Pets), 1)");
+                    Bridge.Test.NUnit.Assert.AreEqual(false, System.Enum.isDefined(Bridge.ClientTest.SimpleTypes.EnumTests.Pets, Bridge.box(17, System.Int32)), "Enum.IsDefined(typeof(Pets), 17)");
+                    Bridge.Test.NUnit.Assert.AreEqual(true, System.Enum.isDefined(Bridge.ClientTest.SimpleTypes.EnumTests.Pets, "Rabbit"), "Enum.IsDefined(typeof(Pets), \"Rabbit\")");
+                    Bridge.Test.NUnit.Assert.AreEqual(false, System.Enum.isDefined(Bridge.ClientTest.SimpleTypes.EnumTests.Pets, "Parrot"), "Enum.IsDefined(typeof(Pets), \"Parrot\")");
+                    Bridge.Test.NUnit.Assert.AreEqual(false, System.Enum.isDefined(Bridge.ClientTest.SimpleTypes.EnumTests.Pets, "RABBIT"), "Enum.IsDefined(typeof(Pets), \"RABBIT\")");
+                    Bridge.Test.NUnit.Assert.AreEqual(false, System.Enum.isDefined(Bridge.ClientTest.SimpleTypes.EnumTests.Pets, Bridge.box(3, Bridge.ClientTest.SimpleTypes.EnumTests.Pets, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.Pets))), "Enum.IsDefined(typeof(Pets), Pets.Dog | Pets.Cat)");
+                },
+                TestTryParse: function () {
+                    var outVar = { v : new Bridge.ClientTest.SimpleTypes.EnumTests.Digits() };
+                    var outPets = { v : new Bridge.ClientTest.SimpleTypes.EnumTests.Pets() };
+                    Bridge.Test.NUnit.Assert.AreEqual(true, System.Enum.tryParse(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, "Zero", outVar), "TryParse Digits.Zero");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.Zero, outVar.v);
+                    Bridge.Test.NUnit.Assert.AreEqual(true, System.Enum.tryParse(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, "One", outVar), "TryParse Digits.One");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.One, outVar.v);
+                    Bridge.Test.NUnit.Assert.AreEqual(true, System.Enum.tryParse(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, "Two", outVar), "TryParse Digits.Two");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.Two, outVar.v);
+                    Bridge.Test.NUnit.Assert.AreEqual(true, System.Enum.tryParse(Bridge.ClientTest.SimpleTypes.EnumTests.Pets, "Dog, Cat", outPets), "TryParse Dog, Cat");
+                    Bridge.Test.NUnit.Assert.AreEqual(3, outPets.v);
+                    Bridge.Test.NUnit.Assert.AreEqual(true, System.Enum.tryParse(Bridge.ClientTest.SimpleTypes.EnumTests.Pets, "Bird, Cat, Rabbit", outPets), "TryParse Bird, Cat, Rabbit");
+                    Bridge.Test.NUnit.Assert.AreEqual(14, outPets.v);
+                    Bridge.Test.NUnit.Assert.AreEqual(false, System.Enum.tryParse(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, "ONE", outVar), "TryParse ONE");
+                }
+            }
+        },
         methods: {
             TypePropertiesAreCorrect: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("Bridge.ClientTest.SimpleTypes.EnumTests+TestEnum", Bridge.Reflection.getTypeFullName(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum));
@@ -32728,8 +32556,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var interfaces = Bridge.Reflection.getInterfaces(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum);
                 Bridge.Test.NUnit.Assert.AreEqual(2, interfaces.length);
-                Bridge.Test.NUnit.Assert.NotNull(System.Linq.Enumerable.from(interfaces).firstOrDefault($asm.$.Bridge.ClientTest.SimpleTypes.EnumTests.f1, null));
-                Bridge.Test.NUnit.Assert.NotNull(System.Linq.Enumerable.from(interfaces).firstOrDefault($asm.$.Bridge.ClientTest.SimpleTypes.EnumTests.f2, null));
+                Bridge.Test.NUnit.Assert.NotNull(System.Linq.Enumerable.from(interfaces).firstOrDefault($asm.$.Bridge.ClientTest.SimpleTypes.EnumTests.f3, null));
+                Bridge.Test.NUnit.Assert.NotNull(System.Linq.Enumerable.from(interfaces).firstOrDefault($asm.$.Bridge.ClientTest.SimpleTypes.EnumTests.f4, null));
 
                 Bridge.Test.NUnit.Assert.AreEqual("System.Enum", Bridge.Reflection.getTypeFullName(System.Enum));
             },
@@ -32739,19 +32567,26 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             DefaultValueOfEnumClassIsNull: function () {
                 Bridge.Test.NUnit.Assert.AreStrictEqual(null, this.GetDefaultValue(System.Enum));
             },
-            DefaultValueOfEnumTypeIsFirstValue: function () {
+            DefaultValueOfEnumTypeIsFirstValue_SPI_1595: function () {
+                // #1595
                 Bridge.Test.NUnit.Assert.AreStrictEqual(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.FirstValue, this.GetDefaultValue(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum));
             },
             DefaultConstructorOfEnumTypeReturnsZero: function () {
                 Bridge.Test.NUnit.Assert.AreStrictEqual(0, Bridge.unbox((0).valueOf()));
             },
+            DefaultConstructorOfEnumTypeReturnsZero_SPI_1595: function () {
+                // #1595
+                Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.FirstValue, (0));
+            },
             FirstValueOfEnumIsZero: function () {
                 Bridge.Test.NUnit.Assert.AreStrictEqual(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.FirstValue, Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.FirstValue);
             },
-            CreatingInstanceOfEnumTypeReturnsZero: function () {
+            CreatingInstanceOfEnumTypeReturnsZero_SPI_1595: function () {
+                // #1595
                 Bridge.Test.NUnit.Assert.AreStrictEqual(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.FirstValue, Bridge.createInstance(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum));
             },
-            DefaultExpressionWithEnumReturnsZero: function () {
+            DefaultExpressionWithEnumReturnsZero_SPI_1595: function () {
+                // #1595
                 Bridge.Test.NUnit.Assert.AreStrictEqual(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.FirstValue, 0);
             },
             GetHashCodeWorks: function () {
@@ -32770,24 +32605,24 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual("FirstValue", System.Enum.toString(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum, Bridge.box(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.FirstValue, Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum))));
                 Bridge.Test.NUnit.Assert.AreEqual("FirstValue, ThirdValue", System.Enum.toString(Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum, Bridge.box(5, Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum, System.Enum.toStringFn(Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum))));
             },
-            ConversionsToEnumAreTreatedAsConversionsToTheUnderlyingType: function () {
+            ConversionsToEnumAreTreatedAsConversionsToTheUnderlyingType_SPI_1596: function () {
                 Bridge.Test.NUnit.Assert.AreEqual(0, System.Nullable.getValue(Bridge.cast(Bridge.unbox(Bridge.box(0, System.Int32)), System.Int32)));
                 // #1596
-                Bridge.Test.NUnit.Assert.Throws$2(System.InvalidCastException, $asm.$.Bridge.ClientTest.SimpleTypes.EnumTests.f3);
+                Bridge.Test.NUnit.Assert.Throws$2(System.InvalidCastException, $asm.$.Bridge.ClientTest.SimpleTypes.EnumTests.f5);
             },
             GetValuesWorks: function () {
                 var values = System.Enum.getValues(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum);
-                Bridge.Test.NUnit.Assert.AreEqual(values.length, 3);
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.unbox(System.Array.get(values, 0)), Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.FirstValue);
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.unbox(System.Array.get(values, 1)), Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.SecondValue);
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.unbox(System.Array.get(values, 2)), Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.ThirdValue);
+                Bridge.Test.NUnit.Assert.AreEqual(3, values.length);
+                Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.FirstValue, Bridge.unbox(System.Array.get(values, 0)));
+                Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.SecondValue, Bridge.unbox(System.Array.get(values, 1)));
+                Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum.ThirdValue, Bridge.unbox(System.Array.get(values, 2)));
 
                 values = System.Enum.getValues(Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum);
-                Bridge.Test.NUnit.Assert.AreEqual(values.length, 4);
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.unbox(System.Array.get(values, 0)), Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum.None);
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.unbox(System.Array.get(values, 1)), Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum.FirstValue);
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.unbox(System.Array.get(values, 2)), Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum.SecondValue);
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.unbox(System.Array.get(values, 3)), Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum.ThirdValue);
+                Bridge.Test.NUnit.Assert.AreEqual(4, values.length);
+                Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum.None, Bridge.unbox(System.Array.get(values, 0)));
+                Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum.FirstValue, Bridge.unbox(System.Array.get(values, 1)));
+                Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum.SecondValue, Bridge.unbox(System.Array.get(values, 2)));
+                Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.FlagsEnum.ThirdValue, Bridge.unbox(System.Array.get(values, 3)));
             }
         }
     });
@@ -32795,14 +32630,51 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.ns("Bridge.ClientTest.SimpleTypes.EnumTests", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.SimpleTypes.EnumTests, {
-        f1: function (x) {
+        f1: function () {
+            var d = System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, "ONE");
+        },
+        f2: function () {
+            var d = System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, "ONN", true);
+        },
+        f3: function (x) {
             return Bridge.referenceEquals(x, System.IComparable);
         },
-        f2: function (x) {
+        f4: function (x) {
             return Bridge.referenceEquals(x, System.IFormattable);
         },
-        f3: function () {
+        f5: function () {
             var _ = System.Nullable.getValue(Bridge.cast(Bridge.unbox(Bridge.box(0.5, System.Double, System.Double.format, System.Double.getHashCode)), System.Int32));
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.SimpleTypes.EnumTests.A", {
+        $kind: "enum",
+        statics: {
+            fields: {
+                A: 0
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.SimpleTypes.EnumTests.Abc", {
+        $kind: "enum",
+        statics: {
+            fields: {
+                A: -1,
+                B: 0,
+                C: 1
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.SimpleTypes.EnumTests.Digits", {
+        $kind: "enum",
+        statics: {
+            fields: {
+                Zero: 0,
+                One: 1,
+                Two: 2
+            }
         }
     });
 
@@ -32817,6 +32689,35 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             }
         },
         $flags: true
+    });
+
+    Bridge.define("Bridge.ClientTest.SimpleTypes.EnumTests.Pets", {
+        $kind: "enum",
+        statics: {
+            fields: {
+                None: 0,
+                Dog: 1,
+                Cat: 2,
+                Bird: 4,
+                Rabbit: 8,
+                Other: 16
+            }
+        },
+        $flags: true
+    });
+
+    Bridge.define("Bridge.ClientTest.SimpleTypes.EnumTests.Pets1", {
+        $kind: "enum",
+        statics: {
+            fields: {
+                None: 0,
+                Dog: 1,
+                Cat: 2,
+                Bird: 4,
+                Rabbit: 8,
+                Other: 16
+            }
+        }
     });
 
     Bridge.define("Bridge.ClientTest.SimpleTypes.EnumTests.TestEnum", {
