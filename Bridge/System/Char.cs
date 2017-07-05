@@ -48,6 +48,14 @@ namespace System
         [Template("Bridge.isUpper({ch})")]
         public static extern bool IsUpper(char ch);
 
+        /// <summary>
+        /// Indicates whether the character at the specified position in a specified string is categorized as an uppercase letter.
+        /// </summary>
+        /// <param name="s">A string.</param>
+        /// <param name="index">The position of the character to evaluate in s.</param>
+        /// <returns>true if the character at position index in s is an uppercase letter; otherwise, false.</returns>
+        public extern static bool IsUpper(String s, int index);
+
         [Template("String.fromCharCode({ch}).toLowerCase().charCodeAt(0)")]
         public static extern char ToLower(char ch);
 
