@@ -98,6 +98,7 @@
     </Compile>
     <Compile Include="Attributes\Convention.cs" />
     <Compile Include="System\BitConverter.cs" />
+    <Compile Include="System\Collections\ArrayList.cs" />
     <Compile Include="System\Collections\BitArrray.cs" />
     <Compile Include="System\Collections\Generic\BitHelper.cs" />
     <Compile Include="System\Collections\Generic\EnumerableHelpers.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="System\Collections\Generic\Queue.cs" />
     <Compile Include="System\Collections\Generic\Stack.cs" />
     <Compile Include="System\Collections\HashHelpers.cs" />
+    <Compile Include="System\Collections\IComparer.cs" />
     <Compile Include="System\ComponentModel\BrowsableAttribute.cs" />
     <Compile Include="System\ComponentModel\DataAnnotations\AssociationAttribute.cs" />
     <Compile Include="System\ComponentModel\DataAnnotations\CompareAttribute.cs" />
