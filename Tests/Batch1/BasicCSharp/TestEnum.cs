@@ -42,6 +42,11 @@ namespace Bridge.ClientTest.BasicCSharp
             Other = 16
         }
 
+                enum A
+        {
+            A
+        }
+
         [Test(ExpectedCount = 6)]
         public static void TestParse()
         {
@@ -135,7 +140,7 @@ namespace Bridge.ClientTest.BasicCSharp
             Assert.AreDeepEqual(new[] { "Zero", "One", "Two" }, Enum.GetNames(typeof(Digits)), "Digits names");
         }
 
-        [Test(ExpectedCount = 5)]
+        [Test(ExpectedCount = 6)]
         public static void TestHasFlag()
         {
             Assert.AreEqual(true, (Pets.Dog | Pets.Cat).HasFlag(Pets.Cat), "(Pets.Dog | Pets.Cat).HasFlag(Pets.Cat)");
@@ -143,6 +148,8 @@ namespace Bridge.ClientTest.BasicCSharp
             Assert.AreEqual(false, (Pets.Dog | Pets.Cat).HasFlag(Pets.Bird), "(Pets.Dog | Pets.Cat).HasFlag(Pets.Bird)");
             Assert.AreEqual(true, Pets.Dog.HasFlag(Pets.Dog), "Pets.Dog.HasFlag(Pets.Dog)");
             Assert.AreEqual(false, Pets.Dog.HasFlag(Pets.Cat), "Pets.Dog.HasFlag(Pets.Cat)");
+
+            Assert.True(A.A.HasFlag(A.A), "#2930");
         }
 
         [Test(ExpectedCount = 6)]

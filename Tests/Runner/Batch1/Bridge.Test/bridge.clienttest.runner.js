@@ -18927,57 +18927,57 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             methods: {
                 TestParse: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestEnum).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestEnum, 6, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestParse()", $t.Line = "45", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestEnum).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestEnum, 6, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestParse()", $t.Line = "50", $t));
                     Bridge.ClientTest.BasicCSharp.TestEnum.TestParse();
                 },
                 TestParseIgnoreCase: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestEnum).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestEnum, 4, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestParseIgnoreCase()", $t.Line = "57", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestEnum).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestEnum, 4, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestParseIgnoreCase()", $t.Line = "62", $t));
                     Bridge.ClientTest.BasicCSharp.TestEnum.TestParseIgnoreCase();
                 },
                 TestToString: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestEnum).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestEnum, 4, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestToString()", $t.Line = "67", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestEnum).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestEnum, 4, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestToString()", $t.Line = "72", $t));
                     Bridge.ClientTest.BasicCSharp.TestEnum.TestToString();
                 },
                 TestGetValues: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestEnum).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestEnum, 2, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestGetValues()", $t.Line = "76", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestEnum).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestEnum, 2, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestGetValues()", $t.Line = "81", $t));
                     Bridge.ClientTest.BasicCSharp.TestEnum.TestGetValues();
                 },
                 TestCompareTo: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestEnum).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestEnum, 3, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestCompareTo()", $t.Line = "84", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestEnum).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestEnum, 3, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestCompareTo()", $t.Line = "89", $t));
                     Bridge.ClientTest.BasicCSharp.TestEnum.TestCompareTo();
                 },
                 TestFormat: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestEnum).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestEnum, 22, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestFormat()", $t.Line = "92", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestEnum).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestEnum, 22, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestFormat()", $t.Line = "97", $t));
                     Bridge.ClientTest.BasicCSharp.TestEnum.TestFormat();
                 },
                 TestGetName: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestEnum).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestEnum, 3, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestGetName()", $t.Line = "122", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestEnum).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestEnum, 3, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestGetName()", $t.Line = "127", $t));
                     Bridge.ClientTest.BasicCSharp.TestEnum.TestGetName();
                 },
                 TestGetNames: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestEnum).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestEnum, 2, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestGetNames()", $t.Line = "130", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestEnum).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestEnum, 2, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestGetNames()", $t.Line = "135", $t));
                     Bridge.ClientTest.BasicCSharp.TestEnum.TestGetNames();
                 },
                 TestHasFlag: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestEnum).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestEnum, 5, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestHasFlag()", $t.Line = "138", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestEnum).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestEnum, 6, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestHasFlag()", $t.Line = "143", $t));
                     Bridge.ClientTest.BasicCSharp.TestEnum.TestHasFlag();
                 },
                 TestIsDefined: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestEnum).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestEnum, 6, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestIsDefined()", $t.Line = "148", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestEnum).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestEnum, 6, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestIsDefined()", $t.Line = "155", $t));
                     Bridge.ClientTest.BasicCSharp.TestEnum.TestIsDefined();
                 },
                 TestTryParse: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestEnum).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestEnum, 11, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestTryParse()", $t.Line = "159", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.TestEnum).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestEnum, 11, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestTryParse()", $t.Line = "166", $t));
                     Bridge.ClientTest.BasicCSharp.TestEnum.TestTryParse();
                 }
             }
