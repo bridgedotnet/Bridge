@@ -1,7 +1,7 @@
 /**
- * @version   : 16.0.0-beta4 - Bridge.NET
+ * @version   : 16.0.0-rc - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2017-06-27
+ * @date      : 2017-07-04
  * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
  */
@@ -3315,8 +3315,8 @@
     // @source systemAssemblyVersion.js
 
     Bridge.init(function () {
-        Bridge.SystemAssembly.version = "16.0.0-beta4";
-        Bridge.SystemAssembly.compiler = "16.0.0-beta4";
+        Bridge.SystemAssembly.version = "16.0.0-rc";
+        Bridge.SystemAssembly.compiler = "16.0.0-rc";
     });
 
     Bridge.define("Bridge.Utils.SystemAssemblyVersion");
@@ -4665,6 +4665,34 @@
                 }
 
                 return new RegExp("[\u0000-\u001F\u007F\u0080-\u009F]").test(String.fromCharCode(value));
+            },
+
+            isLatin1: function (ch) {
+                return (ch <= 255);
+            },
+
+            isAscii: function (ch) {
+                return (ch <= 127);
+            },
+
+            isUpper: function (s, index) {
+                if (s == null) {
+                    throw new System.ArgumentNullException("s");
+                }
+
+                if ((index >>> 0) >= ((s.length) >>> 0)) {
+                    throw new System.ArgumentOutOfRangeException("index");
+                }
+
+                var c = s.charCodeAt(index);
+
+                if (System.Char.isLatin1(c)) {
+                    if (System.Char.isAscii(c)) {
+                        return (c >= 65 && c <= 90);
+                    }
+                }
+
+                return Bridge.isUpper(c);
             },
 
             equals: function (v1, v2) {
