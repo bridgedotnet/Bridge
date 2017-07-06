@@ -18,7 +18,6 @@ namespace System.Diagnostics
     using System;
     using System.Runtime.InteropServices;
     using System.Diagnostics.Contracts;
-    using Bridge;
     using System.ComponentModel;
 
     [Serializable]
