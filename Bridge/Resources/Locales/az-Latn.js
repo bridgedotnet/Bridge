@@ -1,6 +1,6 @@
 Bridge.merge(new System.Globalization.CultureInfo("az-Latn", true), {
     englishName: "Azerbaijani (Latin)",
-    nativeName: "Azərbaycan dili",
+    nativeName: "azərbaycan",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
         nanSymbol: "NaN",
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("az-Latn", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy MMMM",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

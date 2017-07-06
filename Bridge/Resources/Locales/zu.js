@@ -37,22 +37,22 @@ Bridge.merge(new System.Globalization.CultureInfo("zu", true), {
         dateSeparator: "/",
         dayNames: ["ISonto","UMsombuluko","ULwesibili","ULwesithathu","ULwesine","ULwesihlanu","UMgqibelo"],
         firstDayOfWeek: 0,
-        fullDateTimePattern: "dddd, MMMM d, yyyy h:mm:ss tt",
+        fullDateTimePattern: "dddd, MMMM d, yyyy HH:mm:ss",
         longDatePattern: "dddd, MMMM d, yyyy",
-        longTimePattern: "h:mm:ss tt",
+        longTimePattern: "HH:mm:ss",
         monthDayPattern: "MMMM d",
-        monthGenitiveNames: ["Januwari","Februwari","Mashi","Ephreli","Meyi","Juni","Julayi","Agasti","Septhemba","Okthoba","Novemba","Disemba",""],
+        monthGenitiveNames: ["UMasingana","Februwari","Mashi","Ephreli","Meyi","Juni","Julayi","Agasti","Septhemba","Okthoba","Novemba","Disemba",""],
         monthNames: ["Januwari","Februwari","Mashi","Ephreli","Meyi","Juni","Julayi","Agasti","Septhemba","Okthoba","Novemba","Disemba",""],
         pmDesignator: "PM",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "M/d/yyyy",
         shortestDayNames: ["Son","Mso","Bil","Tha","Sin","Hla","Mgq"],
-        shortTimePattern: "h:mm tt",
+        shortTimePattern: "HH:mm",
         sortableDateTimePattern: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
         sortableDateTimePattern1: "yyyy'-'MM'-'dd",
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });
