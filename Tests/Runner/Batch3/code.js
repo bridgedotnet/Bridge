@@ -23878,6 +23878,19 @@ Bridge.$N1391Result =                     r;
                     // 2011-10-05T20:48:15.0000000Z
 
                     Bridge.Test.NUnit.Assert.AreEqual("2011-10-05T20:48:15.0000000Z", System.DateTime.format(d2, "O"));
+
+                    // Bridge[#2524]
+                    var d3 = System.DateTime.toUTC(d2);
+                    Bridge.Test.NUnit.Assert.AreEqual("2011-10-05T20:48:15.0000000Z", System.DateTime.format(d3, "O"));
+                },
+                DateTimeToLocalTimeWorks: function () {
+                    var d1 = new Date(2011, 10 - 1, 5, 14, 48, 15);
+                    var d2 = System.DateTime.toUTC(d1);
+                    var d3 = System.DateTime.toLocal(d2);
+                    var d4 = System.DateTime.toLocal(d3);
+
+                    // Bridge["2524"]
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.format(d4, "O"), System.DateTime.format(d3, "O"));
                 }
             }
         }

@@ -1,7 +1,7 @@
     Bridge.define("System.DateTime", {
         inherits: [System.IComparable, System.IFormattable],
         fields: {
-            kind: 0
+            kind: 2
         },
         statics: {
             offset: 62135596800000,
@@ -832,40 +832,50 @@
                 return temp.getTimezoneOffset() !== dt.getTimezoneOffset();
             },
 
-            toUTC: function (date) {
-                var year = date.getUTCFullYear(),
-                    dt = new Date(year,
-                        date.getUTCMonth(),
-                        date.getUTCDate(),
-                        date.getUTCHours(),
-                        date.getUTCMinutes(),
-                        date.getUTCSeconds(),
-                        date.getUTCMilliseconds()
-                    );
-
-                if (year < 100) {
-                    dt.setFullYear(year);
+            toUTC: function (d) {
+                if (d.kind === 1) {
+                    return d;
                 }
 
-                dt.kind = System.DateTimeKind.Utc;
+                var y = d.getUTCFullYear(),
+                    dt = new Date(y,
+                        d.getUTCMonth(),
+                        d.getUTCDate(),
+                        d.getUTCHours(),
+                        d.getUTCMinutes(),
+                        d.getUTCSeconds(),
+                        d.getUTCMilliseconds()
+                    );
+
+                if (y < 100) {
+                    dt.setFullYear(y);
+                }
+
+                dt.kind = 1;
 
                 return dt;
-             },
+            },
 
-            toLocal: function (date) {
-                var year = date.getFullYear(),
-                    dt = new Date(Date.UTC(year,
-                        date.getMonth(),
-                        date.getDate(),
-                        date.getHours(),
-                        date.getMinutes(),
-                        date.getSeconds(),
-                        date.getMilliseconds())
+            toLocal: function (d) {
+                if (d.kind === 2) {
+                    return d;
+                }
+
+                var y = d.getFullYear(),
+                    dt = new Date(Date.UTC(y,
+                        d.getMonth(),
+                        d.getDate(),
+                        d.getHours(),
+                        d.getMinutes(),
+                        d.getSeconds(),
+                        d.getMilliseconds())
                     );
 
-                if (year < 100) {
-                    dt.setFullYear(year);
+                if (y < 100) {
+                    dt.setFullYear(y);
                 }
+
+                dt.kind = 2;
 
                 return dt;
             },
