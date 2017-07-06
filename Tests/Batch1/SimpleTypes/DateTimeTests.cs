@@ -70,7 +70,6 @@ namespace Bridge.ClientTest.SimpleTypes
             {
                 Assert.AreEqual(ms.Value, dt.Millisecond, "Millisecond");
             }
-
         }
 
         [Test]
@@ -134,14 +133,14 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void YMDHConstructorWorks()
         {
-            var dt = new DateTime(2011, 7, 12, 13);
+            var dt = new DateTime(2011, 7, 12, 13, 0, 0);
             AssertDate(dt, 2011, 7, 12, 13);
         }
 
         [Test]
         public void YMDHNConstructorWorks()
         {
-            var dt = new DateTime(2011, 7, 12, 13, 42);
+            var dt = new DateTime(2011, 7, 12, 13, 42, 0, 0);
             AssertDate(dt, 2011, 7, 12, 13, 42);
         }
 
@@ -184,7 +183,7 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void UtcNowWorks()
         {
-            var utc= DateTime.UtcNow;
+            var utc = DateTime.UtcNow;
             var local = DateTime.Now;
             Assert.True(
                 Math.Abs(
@@ -235,7 +234,7 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void FormatWorks()
         {
-            var dt = new DateTime(2011, 7, 12, 13);
+            var dt = new DateTime(2011, 7, 12);
             Assert.AreEqual("2011-07-12", dt.Format("yyyy-MM-dd"));
         }
 
@@ -256,7 +255,7 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void IFormattableToStringWorks()
         {
-            var dt = new DateTime(2011, 7, 12, 13);
+            var dt = new DateTime(2011, 7, 12);
             Assert.AreEqual(dt.ToString("yyyy-MM-dd"), "2011-07-12");
             Assert.AreEqual(((IFormattable)dt).ToString("yyyy-MM-dd", CultureInfo.CurrentCulture), "2011-07-12");
         }
@@ -265,7 +264,7 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void LocaleFormatWorks()
         {
-            var dt = new DateTime(2011, 7, 12, 13);
+            var dt = new DateTime(2011, 7, 12);
             Assert.AreEqual("2011-07-12", dt.Format("yyyy-MM-dd"));
         }
 
@@ -484,7 +483,7 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void ToDateStringWorks()
         {
-            var dt = new DateTime(2011, 7, 12, 13, 42);
+            var dt = new DateTime(2011, 7, 12, 13, 42, 0);
             var s = dt.ToDateString();
             Assert.True(s.IndexOf("2011") >= 0 && s.IndexOf("42") < 0);
         }
@@ -492,7 +491,7 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void ToTimeStringWorks()
         {
-            var dt = new DateTime(2011, 7, 12, 13, 42);
+            var dt = new DateTime(2011, 7, 12, 13, 42, 0);
             var s = dt.ToTimeString();
             Assert.True(s.IndexOf("2011") < 0 && s.IndexOf("42") >= 0);
         }
@@ -500,7 +499,7 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void ToUTCStringWorks()
         {
-            var dt = new DateTime(2011, 7, 12, 13, 42);
+            var dt = new DateTime(2011, 7, 12, 13, 42, 0);
             var s = dt.ToUtcString();
             Assert.True(s.IndexOf("2011") >= 0 && s.IndexOf("42") >= 0);
         }
@@ -508,7 +507,7 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void ToLocaleDateStringWorks()
         {
-            var dt = new DateTime(2011, 7, 12, 13, 42);
+            var dt = new DateTime(2011, 7, 12, 13, 42, 0);
             var s = dt.ToLocaleDateString();
             Assert.True(s.IndexOf("2011") >= 0 && s.IndexOf("42") < 0);
         }
@@ -516,7 +515,7 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void ToLocaleTimeStringWorks()
         {
-            var dt = new DateTime(2011, 7, 12, 13, 42);
+            var dt = new DateTime(2011, 7, 12, 13, 42, 0);
             var s = dt.ToLocaleTimeString();
             Assert.True(s.IndexOf("2011") < 0 && s.IndexOf("42") >= 0);
         }
@@ -576,13 +575,13 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void UtcYMDHWorks()
         {
-            AssertDateUTC(new DateTime(DateTime.Utc(2011, 7, 12, 13)), 2011, 7, 12, 13, 0, 0, 0);
+            AssertDateUTC(new DateTime(DateTime.Utc(2011, 7, 12, 13, 0, 0)), 2011, 7, 12, 13, 0, 0, 0);
         }
 
         [Test]
         public void UtcYMDHNWorks()
         {
-            AssertDateUTC(new DateTime(DateTime.Utc(2011, 7, 12, 13, 42)), 2011, 7, 12, 13, 42, 0, 0);
+            AssertDateUTC(new DateTime(DateTime.Utc(2011, 7, 12, 13, 42, 0)), 2011, 7, 12, 13, 42, 0, 0);
         }
 
         [Test]
@@ -596,6 +595,7 @@ namespace Bridge.ClientTest.SimpleTypes
         {
             AssertDateUTC(new DateTime(DateTime.Utc(2011, 7, 12, 13, 42, 56, 345)), 2011, 7, 12, 13, 42, 56, 345);
         }
+
         [Test]
         public void SubtractingDatesWorks()
         {
