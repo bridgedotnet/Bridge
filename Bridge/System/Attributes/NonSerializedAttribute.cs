@@ -1,4 +1,3 @@
-﻿using Bridge;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +8,8 @@ namespace System
 {
     [AttributeUsage(AttributeTargets.Field, Inherited = false)]
     [ComVisible(true)]
-    [External, NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public sealed class NonSerializedAttribute : Attribute
     {
 
