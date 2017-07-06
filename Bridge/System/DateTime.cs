@@ -30,17 +30,8 @@ namespace System
         [Template("new Date({dateString})")]
         public extern DateTime(string dateString);
 
-        [Template("new Date({year}, {month} - 1)")]
-        public extern DateTime(int year, int month);
-
         [Template("new Date({year}, {month} - 1, {day})")]
         public extern DateTime(int year, int month, int day);
-
-        [Template("new Date({year}, {month} - 1, {day}, {hours})")]
-        public extern DateTime(int year, int month, int day, int hours);
-
-        [Template("new Date({year}, {month} - 1, {day}, {hours}, {minutes})")]
-        public extern DateTime(int year, int month, int day, int hours, int minutes);
 
         [Template("new Date({year}, {month} - 1, {day}, {hours}, {minutes}, {seconds})")]
         public extern DateTime(int year, int month, int day, int hours, int minutes, int seconds);
@@ -54,17 +45,8 @@ namespace System
         [Template("System.DateTime.utc({year}, {month}, {day}, {hours}, {minutes}, {seconds})")]
         public static extern long Utc(int year, int month, int day, int hours, int minutes, int seconds);
 
-        [Template("System.DateTime.utc({year}, {month}, {day}, {hours}, {minutes})")]
-        public static extern long Utc(int year, int month, int day, int hours, int minutes);
-
-        [Template("System.DateTime.utc({year}, {month}, {day}, {hours})")]
-        public static extern long Utc(int year, int month, int day, int hours);
-
         [Template("System.DateTime.utc({year}, {month}, {day})")]
         public static extern long Utc(int year, int month, int day);
-
-        [Template("System.DateTime.utc({year}, {month})")]
-        public static extern long Utc(int year, int month);
 
         public static extern DateTime Now
         {
