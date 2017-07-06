@@ -18,7 +18,6 @@ namespace System.Security.Permissions
     using System.Reflection;
     using System.Globalization;
     using System.Diagnostics.Contracts;
-    using Bridge;
 
     [Serializable]
     [Bridge.NonScriptable]
