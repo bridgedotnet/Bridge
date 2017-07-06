@@ -1,4 +1,4 @@
-﻿// ==++==
+// ==++==
 // 
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
 // 
@@ -13,7 +13,6 @@
 **
 ===========================================================*/
 
-
 namespace System.Diagnostics
 {
     using System;
@@ -25,9 +24,9 @@ namespace System.Diagnostics
     [Serializable]
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Method | AttributeTargets.Constructor, Inherited = false)]
     [ComVisible(true)]
-    [NonScriptable]
-    [External]
     [EditorBrowsable(EditorBrowsableState.Never)]
+    [Bridge.NonScriptable]
+    [Bridge.External]
     public sealed class DebuggerStepThroughAttribute : Attribute
     {
         public extern DebuggerStepThroughAttribute();
@@ -36,9 +35,9 @@ namespace System.Diagnostics
     [Serializable]
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor, Inherited = false)]
     [ComVisible(true)]
-    [NonScriptable]
     [EditorBrowsable(EditorBrowsableState.Never)]
-    [External]
+    [Bridge.NonScriptable]
+    [Bridge.External]
     public sealed class DebuggerStepperBoundaryAttribute : Attribute
     {
         public extern DebuggerStepperBoundaryAttribute();
@@ -47,9 +46,9 @@ namespace System.Diagnostics
     [Serializable]
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Constructor, Inherited = false)]
     [ComVisible(true)]
-    [NonScriptable]
     [EditorBrowsable(EditorBrowsableState.Never)]
-    [External]
+    [Bridge.NonScriptable]
+    [Bridge.External]
     public sealed class DebuggerHiddenAttribute : Attribute
     {
         public extern DebuggerHiddenAttribute();
@@ -58,9 +57,9 @@ namespace System.Diagnostics
     [Serializable]
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Constructor | AttributeTargets.Struct, Inherited = false)]
     [ComVisible(true)]
-    [NonScriptable]
     [EditorBrowsable(EditorBrowsableState.Never)]
-    [External]
+    [Bridge.NonScriptable]
+    [Bridge.External]
     public sealed class DebuggerNonUserCodeAttribute : Attribute
     {
         public extern DebuggerNonUserCodeAttribute();
@@ -76,14 +75,15 @@ namespace System.Diagnostics
     // a JIT attach difficult.
     [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Module, AllowMultiple = false)]
     [ComVisible(true)]
-    [NonScriptable]
     [EditorBrowsable(EditorBrowsableState.Never)]
-    [External]
+    [Bridge.NonScriptable]
+    [Bridge.External]
     public sealed class DebuggableAttribute : Attribute
     {
         [Flags]
         [ComVisible(true)]
-        [NonScriptable, External]
+        [Bridge.NonScriptable]
+        [Bridge.External]
         public enum DebuggingModes
         {
             None = 0x0,
@@ -116,8 +116,8 @@ namespace System.Diagnostics
     //  Please also change the code which validates DebuggerBrowsableState variable (in this file)
     //  if you change this enum.
     [ComVisible(true)]
-    [External]
-    [NonScriptable]
+    [Bridge.NonScriptable]
+    [Bridge.External]
     public enum DebuggerBrowsableState
     {
         Never = 0,
@@ -132,7 +132,8 @@ namespace System.Diagnostics
     // (mcee.dat, autoexp.dat) file. 
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false)]
     [ComVisible(true)]
-    [NonScriptable, External]
+    [Bridge.NonScriptable]
+    [Bridge.External]
     public sealed class DebuggerBrowsableAttribute : Attribute
     {
         public extern DebuggerBrowsableAttribute(DebuggerBrowsableState state);
@@ -143,7 +144,8 @@ namespace System.Diagnostics
     // DebuggerTypeProxyAttribute
     [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Class | AttributeTargets.Assembly, AllowMultiple = true)]
     [ComVisible(true)]
-    [NonScriptable, External]
+    [Bridge.NonScriptable]
+    [Bridge.External]
     public sealed class DebuggerTypeProxyAttribute : Attribute
     {
         public extern DebuggerTypeProxyAttribute(Type type);
@@ -164,7 +166,8 @@ namespace System.Diagnostics
     // In addition, attributes on properties referenced in the expression are not processed.
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Delegate | AttributeTargets.Enum | AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Assembly, AllowMultiple = true)]
     [ComVisible(true)]
-    [NonScriptable, External]
+    [Bridge.NonScriptable]
+    [Bridge.External]
     public class DebuggerDisplayAttribute : Attribute
     {
         public extern DebuggerDisplayAttribute(string value);
@@ -187,7 +190,8 @@ namespace System.Diagnostics
     /// </summary>
     [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Class | AttributeTargets.Assembly, AllowMultiple = true)]
     [ComVisible(true)]
-    [NonScriptable, External]
+    [Bridge.NonScriptable]
+    [Bridge.External]
     public sealed class DebuggerVisualizerAttribute : Attribute
     {
         public extern DebuggerVisualizerAttribute(string visualizerTypeName);
