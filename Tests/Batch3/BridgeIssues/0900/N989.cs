@@ -12,7 +12,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test(ExpectedCount = 1)]
         public static void DateTimeToISOStringWorks()
         {
-            var d1 = new DateTime(2011, 10, 5, 14, 48);
+            var d1 = new DateTime(2011, 10, 5, 14, 48, 15);
             var d2 = d1.ToUniversalTime();
 
             // This is required to change d1 to UTC without changing time
@@ -20,6 +20,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             d1 = d1.AddDays(d1.Day - d2.Day);
             d1 = d1.AddHours(d1.Hour - d2.Hour);
             d1 = d1.AddMinutes(d1.Minute - d2.Minute);
+            d1 = d1.AddMinutes(d1.Second - d2.Second);
 
             Assert.AreEqual("2011-10-05T14:48:00.000Z", d1.ToISOString());
         }

@@ -33530,7 +33530,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 if (System.Nullable.hasValue(ms)) {
                     Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(ms), dt.getMilliseconds(), "Millisecond");
                 }
-
             },
             DefaultConstructorWorks_SPI_1606: function () {
                 var dt = System.DateTime.getDefaultValue();
@@ -33570,11 +33569,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 this.AssertDate(dt, 2011, 7, 12);
             },
             YMDHConstructorWorks: function () {
-                var dt = new Date(2011, 7 - 1, 12, 13);
+                var dt = new Date(2011, 7 - 1, 12, 13, 0, 0);
                 this.AssertDate(dt, 2011, 7, 12, 13);
             },
             YMDHNConstructorWorks: function () {
-                var dt = new Date(2011, 7 - 1, 12, 13, 42);
+                var dt = new Date(2011, 7 - 1, 12, 13, 42, 0, 0);
                 this.AssertDate(dt, 2011, 7, 12, 13, 42);
             },
             YMDHNSConstructorWorks: function () {
@@ -33634,7 +33633,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual(0, dt.getMilliseconds());
             },
             FormatWorks: function () {
-                var dt = new Date(2011, 7 - 1, 12, 13);
+                var dt = new Date(2011, 7 - 1, 12);
                 Bridge.Test.NUnit.Assert.AreEqual("2011-07-12", System.DateTime.format(dt, "yyyy-MM-dd"));
             },
             ToStringWithFormatWorks: function () {
@@ -33646,12 +33645,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual("2011-07-12", System.DateTime.format(dt, "yyyy-MM-dd", System.Globalization.CultureInfo.invariantCulture));
             },
             IFormattableToStringWorks: function () {
-                var dt = new Date(2011, 7 - 1, 12, 13);
+                var dt = new Date(2011, 7 - 1, 12);
                 Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.format(dt, "yyyy-MM-dd"), "2011-07-12");
                 Bridge.Test.NUnit.Assert.AreEqual(Bridge.format(Bridge.cast(Bridge.box(dt, System.DateTime, System.DateTime.format), System.IFormattable), "yyyy-MM-dd", System.Globalization.CultureInfo.getCurrentCulture()), "2011-07-12");
             },
             LocaleFormatWorks: function () {
-                var dt = new Date(2011, 7 - 1, 12, 13);
+                var dt = new Date(2011, 7 - 1, 12);
                 Bridge.Test.NUnit.Assert.AreEqual("2011-07-12", System.DateTime.format(dt, "yyyy-MM-dd"));
             },
             GetFullYearWorks: function () {
@@ -33769,27 +33768,27 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.JsDateTimeTests.f4);
             },
             ToDateStringWorks: function () {
-                var dt = new Date(2011, 7 - 1, 12, 13, 42);
+                var dt = new Date(2011, 7 - 1, 12, 13, 42, 0);
                 var s = dt.toDateString();
                 Bridge.Test.NUnit.Assert.True(System.String.indexOf(s, "2011") >= 0 && System.String.indexOf(s, "42") < 0);
             },
             ToTimeStringWorks: function () {
-                var dt = new Date(2011, 7 - 1, 12, 13, 42);
+                var dt = new Date(2011, 7 - 1, 12, 13, 42, 0);
                 var s = dt.toTimeString();
                 Bridge.Test.NUnit.Assert.True(System.String.indexOf(s, "2011") < 0 && System.String.indexOf(s, "42") >= 0);
             },
             ToUTCStringWorks: function () {
-                var dt = new Date(2011, 7 - 1, 12, 13, 42);
+                var dt = new Date(2011, 7 - 1, 12, 13, 42, 0);
                 var s = dt.toUTCString();
                 Bridge.Test.NUnit.Assert.True(System.String.indexOf(s, "2011") >= 0 && System.String.indexOf(s, "42") >= 0);
             },
             ToLocaleDateStringWorks: function () {
-                var dt = new Date(2011, 7 - 1, 12, 13, 42);
+                var dt = new Date(2011, 7 - 1, 12, 13, 42, 0);
                 var s = dt.toLocaleDateString();
                 Bridge.Test.NUnit.Assert.True(System.String.indexOf(s, "2011") >= 0 && System.String.indexOf(s, "42") < 0);
             },
             ToLocaleTimeStringWorks: function () {
-                var dt = new Date(2011, 7 - 1, 12, 13, 42);
+                var dt = new Date(2011, 7 - 1, 12, 13, 42, 0);
                 var s = dt.toLocaleTimeString();
                 Bridge.Test.NUnit.Assert.True(System.String.indexOf(s, "2011") < 0 && System.String.indexOf(s, "42") >= 0);
             },
@@ -33806,10 +33805,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 this.AssertDateUTC(System.DateTime.fromTicks(System.DateTime.utc(2011, 7, 12)), 2011, 7, 12, 0, 0, 0, 0);
             },
             UtcYMDHWorks: function () {
-                this.AssertDateUTC(System.DateTime.fromTicks(System.DateTime.utc(2011, 7, 12, 13)), 2011, 7, 12, 13, 0, 0, 0);
+                this.AssertDateUTC(System.DateTime.fromTicks(System.DateTime.utc(2011, 7, 12, 13, 0, 0)), 2011, 7, 12, 13, 0, 0, 0);
             },
             UtcYMDHNWorks: function () {
-                this.AssertDateUTC(System.DateTime.fromTicks(System.DateTime.utc(2011, 7, 12, 13, 42)), 2011, 7, 12, 13, 42, 0, 0);
+                this.AssertDateUTC(System.DateTime.fromTicks(System.DateTime.utc(2011, 7, 12, 13, 42, 0)), 2011, 7, 12, 13, 42, 0, 0);
             },
             UtcYMDHNSWorks: function () {
                 this.AssertDateUTC(System.DateTime.fromTicks(System.DateTime.utc(2011, 7, 12, 13, 42, 56)), 2011, 7, 12, 13, 42, 56, 0);

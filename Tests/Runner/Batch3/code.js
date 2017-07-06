@@ -741,8 +741,8 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         statics: {
             methods: {
                 TestMoreThanDecimalDigitsFromTotalHours: function () {
-                    var a = new Date(2015, 1 - 1, 1, 9);
-                    var b = new Date(2015, 1 - 1, 1, 12, 52);
+                    var a = new Date(2015, 1 - 1, 1, 9, 0, 0);
+                    var b = new Date(2015, 1 - 1, 1, 12, 52, 0);
 
                     var value = System.Decimal((System.DateTime.subdd(b, a)).getTotalHours(), null, System.Double);
 
@@ -23868,6 +23868,21 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2929", {
+        statics: {
+            methods: {
+                DateTimeToUniversalTimeWorks: function () {
+                    var d1 = new Date(2011, 10 - 1, 5, 14, 48, 15);
+                    var d2 = System.DateTime.toUTC(d1);
+
+                    // 2011-10-05T20:48:15.0000000Z
+
+                    Bridge.Test.NUnit.Assert.AreEqual("2011-10-05T20:48:15.0000000Z", System.DateTime.format(d2, "O"));
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge294", {
         fields: {
             Name: null
@@ -25884,7 +25899,7 @@ Bridge.$N1391Result =                     r;
                 },
                 TestTicks: function () {
                     var centuryBegin = new Date(2001, 1 - 1, 1);
-                    var currentDate = new Date(2007, 12 - 1, 14, 15, 23);
+                    var currentDate = new Date(2007, 12 - 1, 14, 15, 23, 0);
                     var elapsedTicks = System.DateTime.getTicks(currentDate).sub(System.DateTime.getTicks(centuryBegin));
                     var elapsedSpan = new System.TimeSpan(elapsedTicks);
 
@@ -30907,7 +30922,7 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 DateTimeToISOStringWorks: function () {
-                    var d1 = new Date(2011, 10 - 1, 5, 14, 48);
+                    var d1 = new Date(2011, 10 - 1, 5, 14, 48, 15);
                     var d2 = System.DateTime.toUTC(d1);
 
                     // This is required to change d1 to UTC without changing time
@@ -30915,6 +30930,7 @@ Bridge.$N1391Result =                     r;
                     d1 = new Date(d1.valueOf() + Math.round((((d1.getDate() - d2.getDate()) | 0)) * 864e5));
                     d1 = new Date(d1.valueOf() + Math.round((((d1.getHours() - d2.getHours()) | 0)) * 36e5));
                     d1 = new Date(d1.valueOf() + Math.round((((d1.getMinutes() - d2.getMinutes()) | 0)) * 6e4));
+                    d1 = new Date(d1.valueOf() + Math.round((((d1.getSeconds() - d2.getSeconds()) | 0)) * 6e4));
 
                     Bridge.Test.NUnit.Assert.AreEqual("2011-10-05T14:48:00.000Z", d1.toISOString());
                 },
