@@ -1,19 +1,8 @@
-    Bridge.define("System.DayOfWeek", {
-        $kind: "enum",
-        $statics: {
-            Sunday: 0,
-            Monday: 1,
-            Tuesday: 2,
-            Wednesday: 3,
-            Thursday: 4,
-            Friday: 5,
-            Saturday: 6
-        }
-    });
-
     Bridge.define("System.DateTime", {
         inherits: [System.IComparable, System.IFormattable],
-
+        fields: {
+            kind: 0
+        },
         statics: {
             offset: 62135596800000,
             timezoneOffset: null,
@@ -138,6 +127,7 @@
                     second = date.getSeconds(),
                     millisecond = date.getMilliseconds(),
                     timezoneOffset = date.getTimezoneOffset(),
+                    kind = date.kind || 2,
                     formats;
 
                 format = format || "G";
@@ -287,7 +277,6 @@
                                  needRemoveDot = part.length == 0;
 
                                  break;
-                            case "u":
                             case "f":
                             case "ff":
                             case "fff":
@@ -316,6 +305,11 @@
                                 break;
                             case "zz":
                             case "zzz":
+                                if (kind === 1) {
+                                    part = "Z";
+
+                                    break;
+                                }
                                 part = timezoneOffset / 60;
                                 part = ((part >= 0) ? "-" : "+") + System.String.alignString(Math.floor(Math.abs(part)).toString(), 2, "0", 2);
 
@@ -838,7 +832,7 @@
                 return temp.getTimezoneOffset() !== dt.getTimezoneOffset();
             },
 
-             toUTC: function (date) {
+            toUTC: function (date) {
                 var year = date.getUTCFullYear(),
                     dt = new Date(year,
                         date.getUTCMonth(),
@@ -852,6 +846,8 @@
                 if (year < 100) {
                     dt.setFullYear(year);
                 }
+
+                dt.kind = System.DateTimeKind.Utc;
 
                 return dt;
              },

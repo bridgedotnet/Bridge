@@ -5381,7 +5381,7 @@ Bridge.define("System.Exception", {
                     timeSeparator: ":",
                     universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
                     yearMonthPattern: "yyyy MMMM",
-                    roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+                    roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
                 });
             }
         },
@@ -8161,24 +8161,43 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
     System.Decimal.MaxValue = System.Decimal("79228162514264337593543950335");
     System.Decimal.precision = 29;
 
-    // @source Date.js
+    // @source dayOfWeek.js
 
     Bridge.define("System.DayOfWeek", {
         $kind: "enum",
-        $statics: {
-            Sunday: 0,
-            Monday: 1,
-            Tuesday: 2,
-            Wednesday: 3,
-            Thursday: 4,
-            Friday: 5,
-            Saturday: 6
+        statics: {
+            fields: {
+                Sunday: 0,
+                Monday: 1,
+                Tuesday: 2,
+                Wednesday: 3,
+                Thursday: 4,
+                Friday: 5,
+                Saturday: 6
+            }
         }
     });
 
+    // @source dateTimeKind.js
+
+    Bridge.define("System.DateTimeKind", {
+        $kind: "enum",
+        statics: {
+            fields: {
+                Unspecified: 0,
+                Utc: 1,
+                Local: 2
+            }
+        }
+    });
+
+    // @source Date.js
+
     Bridge.define("System.DateTime", {
         inherits: [System.IComparable, System.IFormattable],
-
+        fields: {
+            kind: 0
+        },
         statics: {
             offset: 62135596800000,
             timezoneOffset: null,
@@ -8303,6 +8322,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                     second = date.getSeconds(),
                     millisecond = date.getMilliseconds(),
                     timezoneOffset = date.getTimezoneOffset(),
+                    kind = date.kind || 2,
                     formats;
 
                 format = format || "G";
@@ -8452,7 +8472,6 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                                  needRemoveDot = part.length == 0;
 
                                  break;
-                            case "u":
                             case "f":
                             case "ff":
                             case "fff":
@@ -8481,6 +8500,11 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                                 break;
                             case "zz":
                             case "zzz":
+                                if (kind === 1) {
+                                    part = "Z";
+
+                                    break;
+                                }
                                 part = timezoneOffset / 60;
                                 part = ((part >= 0) ? "-" : "+") + System.String.alignString(Math.floor(Math.abs(part)).toString(), 2, "0", 2);
 
@@ -9003,7 +9027,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 return temp.getTimezoneOffset() !== dt.getTimezoneOffset();
             },
 
-             toUTC: function (date) {
+            toUTC: function (date) {
                 var year = date.getUTCFullYear(),
                     dt = new Date(year,
                         date.getUTCMonth(),
@@ -9017,6 +9041,8 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 if (year < 100) {
                     dt.setFullYear(year);
                 }
+
+                dt.kind = System.DateTimeKind.Utc;
 
                 return dt;
              },
