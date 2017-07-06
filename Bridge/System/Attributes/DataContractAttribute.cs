@@ -1,13 +1,12 @@
-﻿//------------------------------------------------------------
+//------------------------------------------------------------
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
-
-using Bridge;
 
 namespace System.Runtime.Serialization
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Enum, Inherited = false, AllowMultiple = false)]
-    [External, NonScriptable]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public sealed class DataContractAttribute : Attribute
     {
         public extern DataContractAttribute();
