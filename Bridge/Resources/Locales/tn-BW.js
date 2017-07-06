@@ -30,7 +30,7 @@ Bridge.merge(new System.Globalization.CultureInfo("tn-BW", true), {
     }),
 
     dateTimeFormat: Bridge.merge(new System.Globalization.DateTimeFormatInfo(), {
-        abbreviatedDayNames: ["Tsh","Mos","Bed","Rar","Ne","Tla","Mat"],
+        abbreviatedDayNames: ["Tsh","Mos","Labb","Labr","Labn","Labt","Mat"],
         abbreviatedMonthGenitiveNames: ["Fer","Tlh","Mop","Mor","Mot","See","Phu","Pha","Lwe","Dip","Ngw","Sed",""],
         abbreviatedMonthNames: ["Fer","Tlh","Mop","Mor","Mot","See","Phu","Pha","Lwe","Dip","Ngw","Sed",""],
         amDesignator: "AM",
@@ -46,13 +46,13 @@ Bridge.merge(new System.Globalization.CultureInfo("tn-BW", true), {
         pmDesignator: "PM",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "yyyy-MM-dd",
-        shortestDayNames: ["Tsh","Mos","Bed","Rar","Ne","Tla","Mat"],
+        shortestDayNames: ["Tsh","Mos","Labb","Labr","Labn","Labt","Mat"],
         shortTimePattern: "HH:mm",
         sortableDateTimePattern: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
         sortableDateTimePattern1: "yyyy'-'MM'-'dd",
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy MMMM",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

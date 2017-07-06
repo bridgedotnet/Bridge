@@ -20,8 +20,8 @@ Bridge.merge(new System.Globalization.CultureInfo("my", true), {
         currencyDecimalDigits: 0,
         currencyDecimalSeparator: ".",
         currencyGroupSeparator: ",",
-        currencyNegativePattern: 9,
-        currencyPositivePattern: 2,
+        currencyNegativePattern: 8,
+        currencyPositivePattern: 3,
         numberGroupSizes: [3],
         numberDecimalDigits: 2,
         numberDecimalSeparator: ".",
@@ -31,16 +31,16 @@ Bridge.merge(new System.Globalization.CultureInfo("my", true), {
 
     dateTimeFormat: Bridge.merge(new System.Globalization.DateTimeFormatInfo(), {
         abbreviatedDayNames: ["တနင်္ဂနွေ","တနင်္လာ","အင်္ဂါ","ဗုဒ္ဓဟူး","ကြာသပတေး","သောကြာ","စနေ"],
-        abbreviatedMonthGenitiveNames: ["ဇန်","ဖေ","မတ်","ဧပြီ","မေ","ဇွန်","ဇူ","ဩ","စက်","အောက်","နို","ဒီ",""],
-        abbreviatedMonthNames: ["ဇန်","ဖေ","မတ်","ဧပြီ","မေ","ဇွန်","ဇူ","ဩ","စက်","အောက်","နို","ဒီ",""],
+        abbreviatedMonthGenitiveNames: ["ဇန်","ဖေ","မတ်","ဧ","မေ","ဇွန်","ဇူ","ဩ","စက်","အောက်","နို","ဒီ",""],
+        abbreviatedMonthNames: ["ဇန်","ဖေ","မတ်","ဧ","မေ","ဇွန်","ဇူ","ဩ","စက်","အောက်","နို","ဒီ",""],
         amDesignator: "နံနက်",
         dateSeparator: "-",
         dayNames: ["တနင်္ဂနွေ","တနင်္လာ","အင်္ဂါ","ဗုဒ္ဓဟူး","ကြာသပတေး","သောကြာ","စနေ"],
         firstDayOfWeek: 0,
-        fullDateTimePattern: "dddd၊ dd MMMM yyyy HH:mm:ss",
-        longDatePattern: "dddd၊ dd MMMM yyyy",
+        fullDateTimePattern: "dddd d MMMM yyyy HH:mm:ss",
+        longDatePattern: "dddd d MMMM yyyy",
         longTimePattern: "HH:mm:ss",
-        monthDayPattern: "d MMMM",
+        monthDayPattern: "MMMM d",
         monthGenitiveNames: ["ဇန်နဝါရီ","ဖေဖော်ဝါရီ","မတ်","ဧပြီ","မေ","ဇွန်","ဇူလိုင်","ဩဂုတ်","စက်တင်ဘာ","အောက်တိုဘာ","နိုဝင်ဘာ","ဒီဇင်ဘာ",""],
         monthNames: ["ဇန်နဝါရီ","ဖေဖော်ဝါရီ","မတ်","ဧပြီ","မေ","ဇွန်","ဇူလိုင်","ဩဂုတ်","စက်တင်ဘာ","အောက်တိုဘာ","နိုဝင်ဘာ","ဒီဇင်ဘာ",""],
         pmDesignator: "ညနေ",
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("my", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

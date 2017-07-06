@@ -20,8 +20,8 @@ Bridge.merge(new System.Globalization.CultureInfo("tr-CY", true), {
         currencyDecimalDigits: 2,
         currencyDecimalSeparator: ",",
         currencyGroupSeparator: ".",
-        currencyNegativePattern: 8,
-        currencyPositivePattern: 3,
+        currencyNegativePattern: 1,
+        currencyPositivePattern: 0,
         numberGroupSizes: [3],
         numberDecimalDigits: 2,
         numberDecimalSeparator: ",",
@@ -40,7 +40,7 @@ Bridge.merge(new System.Globalization.CultureInfo("tr-CY", true), {
         fullDateTimePattern: "d MMMM yyyy dddd h:mm:ss tt",
         longDatePattern: "d MMMM yyyy dddd",
         longTimePattern: "h:mm:ss tt",
-        monthDayPattern: "dd MMMM",
+        monthDayPattern: "d MMMM",
         monthGenitiveNames: ["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık",""],
         monthNames: ["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık",""],
         pmDesignator: "ÖS",
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("tr-CY", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

@@ -1,6 +1,6 @@
 Bridge.merge(new System.Globalization.CultureInfo("os-RU", true), {
-    englishName: "Ossetian (Russia)",
-    nativeName: "Ирон æвзаг (Уӕрӕсе)",
+    englishName: "Ossetic (Russia)",
+    nativeName: "ирон (Уӕрӕсе)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
         nanSymbol: "НН",
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("os-RU", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy MMMM",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("kea", true), {
         abbreviatedDayNames: ["dum","sig","ter","kua","kin","ses","sab"],
         abbreviatedMonthGenitiveNames: ["Jan","Feb","Mar","Abr","Mai","Jun","Jul","Ago","Set","Otu","Nuv","Diz",""],
         abbreviatedMonthNames: ["Jan","Feb","Mar","Abr","Mai","Jun","Jul","Ago","Set","Otu","Nuv","Diz",""],
-        amDesignator: "AM",
+        amDesignator: "am",
         dateSeparator: "/",
         dayNames: ["dumingu","sigunda-fera","tersa-fera","kuarta-fera","kinta-fera","sesta-fera","sabadu"],
         firstDayOfWeek: 1,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("kea", true), {
         monthDayPattern: "d 'di' MMMM",
         monthGenitiveNames: ["Janeru","Febreru","Marsu","Abril","Maiu","Junhu","Julhu","Agostu","Setenbru","Otubru","Nuvenbru","Dizenbru",""],
         monthNames: ["Janeru","Febreru","Marsu","Abril","Maiu","Junhu","Julhu","Agostu","Setenbru","Otubru","Nuvenbru","Dizenbru",""],
-        pmDesignator: "PM",
+        pmDesignator: "pm",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "d/M/yyyy",
         shortestDayNames: ["du","si","te","ku","ki","se","sa"],
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("kea", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM 'di' yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

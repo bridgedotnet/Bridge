@@ -32,7 +32,7 @@ Bridge.merge(new System.Globalization.CultureInfo("eu-ES", true), {
     dateTimeFormat: Bridge.merge(new System.Globalization.DateTimeFormatInfo(), {
         abbreviatedDayNames: ["ig.","al.","ar.","az.","og.","or.","lr."],
         abbreviatedMonthGenitiveNames: ["urt.","ots.","mar.","api.","mai.","eka.","uzt.","abu.","ira.","urr.","aza.","abe.",""],
-        abbreviatedMonthNames: ["Urt.","Ots.","Mar.","Api.","Mai.","Eka.","Uzt.","Abu.","Ira.","Urr.","Aza.","Abe.",""],
+        abbreviatedMonthNames: ["urt.","ots.","mar.","api.","mai.","eka.","uzt.","abu.","ira.","urr.","aza.","abe.",""],
         amDesignator: "AM",
         dateSeparator: "/",
         dayNames: ["igandea","astelehena","asteartea","asteazkena","osteguna","ostirala","larunbata"],
@@ -41,11 +41,11 @@ Bridge.merge(new System.Globalization.CultureInfo("eu-ES", true), {
         longDatePattern: "yyyy('e')'ko' MMMM d, dddd",
         longTimePattern: "HH:mm:ss",
         monthDayPattern: "MMMM d",
-        monthGenitiveNames: ["urtarrilak","otsailak","martxoak","apirilak","maiatzak","ekainak","uztailak","abuztuak","irailak","urriak","azaroak","abenduak",""],
-        monthNames: ["Urtarrila","Otsaila","Martxoa","Apirila","Maiatza","Ekaina","Uztaila","Abuztua","Iraila","Urria","Azaroa","Abendua",""],
+        monthGenitiveNames: ["urtarrila","otsaila","martxoa","apirila","maiatza","ekaina","uztaila","abuztua","iraila","urria","azaroa","abendua",""],
+        monthNames: ["urtarrila","Otsaila","Martxoa","Apirila","Maiatza","Ekaina","Uztaila","Abuztua","Iraila","Urria","Azaroa","Abendua",""],
         pmDesignator: "PM",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
-        shortDatePattern: "yyyy/MM/dd",
+        shortDatePattern: "yyyy/M/d",
         shortestDayNames: ["ig.","al.","ar.","az.","og.","or.","lr."],
         shortTimePattern: "HH:mm",
         sortableDateTimePattern: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("eu-ES", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy('e')'ko' MMMM",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

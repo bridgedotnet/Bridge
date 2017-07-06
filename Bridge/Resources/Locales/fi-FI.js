@@ -31,7 +31,7 @@ Bridge.merge(new System.Globalization.CultureInfo("fi-FI", true), {
 
     dateTimeFormat: Bridge.merge(new System.Globalization.DateTimeFormatInfo(), {
         abbreviatedDayNames: ["su","ma","ti","ke","to","pe","la"],
-        abbreviatedMonthGenitiveNames: ["tammikuuta","helmikuuta","maaliskuuta","huhtikuuta","toukokuuta","kesäkuuta","heinäkuuta","elokuuta","syyskuuta","lokakuuta","marraskuuta","joulukuuta",""],
+        abbreviatedMonthGenitiveNames: ["tammik.","helmik.","maalisk.","huhtik.","toukok.","kesäk.","heinäk.","elok.","syysk.","lokak.","marrask.","jouluk.",""],
         abbreviatedMonthNames: ["tammi","helmi","maalis","huhti","touko","kesä","heinä","elo","syys","loka","marras","joulu",""],
         amDesignator: "ap.",
         dateSeparator: ".",
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("fi-FI", true), {
         timeSeparator: ".",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

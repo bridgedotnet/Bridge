@@ -34,7 +34,7 @@ Bridge.merge(new System.Globalization.CultureInfo("sk-SK", true), {
         abbreviatedMonthGenitiveNames: ["jan","feb","mar","apr","máj","jún","júl","aug","sep","okt","nov","dec",""],
         abbreviatedMonthNames: ["jan","feb","mar","apr","máj","jún","júl","aug","sep","okt","nov","dec",""],
         amDesignator: "AM",
-        dateSeparator: ".",
+        dateSeparator: ". ",
         dayNames: ["nedeľa","pondelok","utorok","streda","štvrtok","piatok","sobota"],
         firstDayOfWeek: 1,
         fullDateTimePattern: "dddd, d. MMMM yyyy H:mm:ss",
@@ -45,7 +45,7 @@ Bridge.merge(new System.Globalization.CultureInfo("sk-SK", true), {
         monthNames: ["január","február","marec","apríl","máj","jún","júl","august","september","október","november","december",""],
         pmDesignator: "PM",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
-        shortDatePattern: "d.M.yyyy",
+        shortDatePattern: "d. M. yyyy",
         shortestDayNames: ["ne","po","ut","st","št","pi","so"],
         shortTimePattern: "H:mm",
         sortableDateTimePattern: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("sk-SK", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

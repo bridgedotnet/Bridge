@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("kk", true), {
     nativeName: "қазақ тілі",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        nanSymbol: "NaN",
+        nanSymbol: "сан емес",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",
@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("kk", true), {
         abbreviatedDayNames: ["Жс","Дс","Сс","Ср","Бс","Жм","Сб"],
         abbreviatedMonthGenitiveNames: ["қаң.","ақп.","нау.","сәу.","мам.","мау.","шіл.","там.","қыр.","қаз.","қар.","жел.",""],
         abbreviatedMonthNames: ["Қаң.","Ақп.","Нау.","Сәу.","Мам.","Мау.","Шіл.","Там.","Қыр.","Қаз.","Қар.","Жел.",""],
-        amDesignator: "таңғы",
+        amDesignator: "AM",
         dateSeparator: ".",
         dayNames: ["жексенбі","дүйсенбі","сейсенбі","сәрсенбі","бейсенбі","жұма","сенбі"],
         firstDayOfWeek: 1,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("kk", true), {
         monthDayPattern: "d MMMM",
         monthGenitiveNames: ["қаңтар","ақпан","наурыз","сәуір","мамыр","маусым","шілде","тамыз","қыркүйек","қазан","қараша","желтоқсан",""],
         monthNames: ["Қаңтар","Ақпан","Наурыз","Сәуір","Мамыр","Маусым","Шілде","Тамыз","Қыркүйек","Қазан","Қараша","Желтоқсан",""],
-        pmDesignator: "түскі/кешкі",
+        pmDesignator: "PM",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "dd.MM.yyyy",
         shortestDayNames: ["Жс","Дс","Сс","Ср","Бс","Жм","Сб"],
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("kk", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy 'ж'. MMMM",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

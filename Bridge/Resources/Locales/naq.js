@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("naq", true), {
         abbreviatedDayNames: ["Son","Ma","De","Wu","Do","Fr","Sat"],
         abbreviatedMonthGenitiveNames: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",""],
         abbreviatedMonthNames: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",""],
-        amDesignator: "AM",
+        amDesignator: "ǁgoagas",
         dateSeparator: "/",
         dayNames: ["Sontaxtsees","Mantaxtsees","Denstaxtsees","Wunstaxtsees","Dondertaxtsees","Fraitaxtsees","Satertaxtsees"],
         firstDayOfWeek: 1,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("naq", true), {
         monthDayPattern: "MMMM d",
         monthGenitiveNames: ["ǃKhanni","ǃKhanǀgôab","ǀKhuuǁkhâb","ǃHôaǂkhaib","ǃKhaitsâb","Gamaǀaeb","ǂKhoesaob","Aoǁkhuumûǁkhâb","Taraǀkhuumûǁkhâb","ǂNûǁnâiseb","ǀHooǂgaeb","Hôasoreǁkhâb",""],
         monthNames: ["ǃKhanni","ǃKhanǀgôab","ǀKhuuǁkhâb","ǃHôaǂkhaib","ǃKhaitsâb","Gamaǀaeb","ǂKhoesaob","Aoǁkhuumûǁkhâb","Taraǀkhuumûǁkhâb","ǂNûǁnâiseb","ǀHooǂgaeb","Hôasoreǁkhâb",""],
-        pmDesignator: "PM",
+        pmDesignator: "ǃuias",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "dd/MM/yyyy",
         shortestDayNames: ["Son","Ma","De","Wu","Do","Fr","Sat"],
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("naq", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

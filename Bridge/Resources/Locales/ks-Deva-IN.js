@@ -1,6 +1,6 @@
 Bridge.merge(new System.Globalization.CultureInfo("ks-Deva-IN", true), {
-    englishName: "Kashmiri (Devanagari, India)",
-    nativeName: "कॉशुर (India)",
+    englishName: "Kashmiri (Devanagari)",
+    nativeName: "कॉशुर",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
         nanSymbol: "NaN",
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("ks-Deva-IN", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM, yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

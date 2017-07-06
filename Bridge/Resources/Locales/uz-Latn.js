@@ -30,18 +30,18 @@ Bridge.merge(new System.Globalization.CultureInfo("uz-Latn", true), {
     }),
 
     dateTimeFormat: Bridge.merge(new System.Globalization.DateTimeFormatInfo(), {
-        abbreviatedDayNames: ["Ya","Du","Se","Ch","Pa","Ju","Sh"],
+        abbreviatedDayNames: ["Yak","Dush","Sesh","Chor","Pay","Jum","Shan"],
         abbreviatedMonthGenitiveNames: ["yan","fev","mar","apr","may","iyn","iyl","avg","sen","okt","noy","dek",""],
-        abbreviatedMonthNames: ["Yanv","Fev","Mar","Apr","May","Iyun","Iyul","Avg","Sen","Okt","Noya","Dek",""],
+        abbreviatedMonthNames: ["Yan","Fev","Mar","Apr","May","Iyn","Iyl","Avg","Sen","Okt","Noy","Dek",""],
         amDesignator: "TO",
         dateSeparator: "/",
         dayNames: ["yakshanba","dushanba","seshanba","chorshanba","payshanba","juma","shanba"],
         firstDayOfWeek: 1,
-        fullDateTimePattern: "dddd, yyyy MMMM dd HH:mm:ss",
-        longDatePattern: "dddd, yyyy MMMM dd",
+        fullDateTimePattern: "dddd, d-MMMM, yyyy HH:mm:ss",
+        longDatePattern: "dddd, d-MMMM, yyyy",
         longTimePattern: "HH:mm:ss",
         monthDayPattern: "d-MMMM",
-        monthGenitiveNames: ["yanvar","fevral","mart","aprel","may","iyun","iyul","avgust","Sentabr","Oktabr","noyabr","dekabr",""],
+        monthGenitiveNames: ["yanvar","fevral","mart","aprel","may","iyun","iyul","avgust","sentabr","oktabr","noyabr","dekabr",""],
         monthNames: ["Yanvar","Fevral","Mart","Aprel","May","Iyun","Iyul","Avgust","Sentabr","Oktabr","Noyabr","Dekabr",""],
         pmDesignator: "TK",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("uz-Latn", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM, yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

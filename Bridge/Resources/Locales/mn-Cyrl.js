@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("mn-Cyrl", true), {
         abbreviatedDayNames: ["Ня","Да","Мя","Лх","Пү","Ба","Бя"],
         abbreviatedMonthGenitiveNames: ["1-р сар","2-р сар","3-р сар","4-р сар","5-р сар","6-р сар","7-р сар","8-р сар","9-р сар","10-р сар","11-р сар","12-р сар",""],
         abbreviatedMonthNames: ["1-р сар","2-р сар","3-р сар","4-р сар","5-р сар","6-р сар","7-р сар","8-р сар","9-р сар","10-р сар","11-р сар","12-р сар",""],
-        amDesignator: "AM",
+        amDesignator: "ҮӨ",
         dateSeparator: "-",
         dayNames: ["ням","даваа","мягмар","лхагва","пүрэв","баасан","бямба"],
         firstDayOfWeek: 1,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("mn-Cyrl", true), {
         monthDayPattern: "MMMM d",
         monthGenitiveNames: ["Нэгдүгээр сар","Хоёрдугаар сар","Гуравдугаар сар","Дөрөвдүгээр сар","Тавдугаар сар","Зургадугаар сар","Долдугаар сар","Наймдугаар сар","Есдүгээр сар","Аравдугаар сар","Арван нэгдүгээр сар","Арван хоёрдугаар сар",""],
         monthNames: ["Нэгдүгээр сар","Хоёрдугаар сар","Гуравдугаар сар","Дөрөвдүгээр сар","Тавдугаар сар","Зургадугаар сар","Долдугаар сар","Наймдугаар сар","Есдүгээр сар","Аравдугаар сар","Арван нэгдүгээр сар","Арван хоёрдугаар сар",""],
-        pmDesignator: "PM",
+        pmDesignator: "ҮХ",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "yyyy-MM-dd",
         shortestDayNames: ["Ня","Да","Мя","Лх","Пү","Ба","Бя"],
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("mn-Cyrl", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy MMMM",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

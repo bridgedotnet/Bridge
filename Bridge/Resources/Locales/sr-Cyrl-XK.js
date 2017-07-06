@@ -30,29 +30,29 @@ Bridge.merge(new System.Globalization.CultureInfo("sr-Cyrl-XK", true), {
     }),
 
     dateTimeFormat: Bridge.merge(new System.Globalization.DateTimeFormatInfo(), {
-        abbreviatedDayNames: ["нед","пон","уто","сре","чет","пет","суб"],
-        abbreviatedMonthGenitiveNames: ["јан","феб","мар","апр","мај","јун","јул","авг","сеп","окт","нов","дец",""],
-        abbreviatedMonthNames: ["јан","феб","мар","апр","мај","јун","јул","авг","сеп","окт","нов","дец",""],
+        abbreviatedDayNames: ["нед.","пон.","ут.","ср.","чет.","пет.","суб."],
+        abbreviatedMonthGenitiveNames: ["јан.","феб.","март","апр.","мај","јун","јул","авг.","септ.","окт.","нов.","дец.",""],
+        abbreviatedMonthNames: ["јан.","феб.","март","апр.","мај","јун","јул","авг.","септ.","окт.","нов.","дец.",""],
         amDesignator: "пре подне",
         dateSeparator: ".",
         dayNames: ["недеља","понедељак","уторак","среда","четвртак","петак","субота"],
         firstDayOfWeek: 1,
-        fullDateTimePattern: "dddd, dd. MMMM yyyy. HH.mm.ss",
+        fullDateTimePattern: "dddd, dd. MMMM yyyy. HH:mm:ss",
         longDatePattern: "dddd, dd. MMMM yyyy.",
-        longTimePattern: "HH.mm.ss",
+        longTimePattern: "HH:mm:ss",
         monthDayPattern: "d. MMMM",
         monthGenitiveNames: ["јануар","фебруар","март","април","мај","јун","јул","август","септембар","октобар","новембар","децембар",""],
         monthNames: ["јануар","фебруар","март","април","мај","јун","јул","август","септембар","октобар","новембар","децембар",""],
         pmDesignator: "по подне",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "d.M.yyyy.",
-        shortestDayNames: ["нед","пон","уто","сре","чет","пет","суб"],
-        shortTimePattern: "HH.mm",
+        shortestDayNames: ["не","по","ут","ср","че","пе","су"],
+        shortTimePattern: "HH:mm",
         sortableDateTimePattern: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
         sortableDateTimePattern1: "yyyy'-'MM'-'dd",
-        timeSeparator: ".",
+        timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy.",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

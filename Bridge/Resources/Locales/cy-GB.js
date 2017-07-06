@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("cy-GB", true), {
         abbreviatedDayNames: ["Sul","Llun","Maw","Mer","Iau","Gwen","Sad"],
         abbreviatedMonthGenitiveNames: ["Ion","Chwef","Maw","Ebrill","Mai","Meh","Gorff","Awst","Medi","Hyd","Tach","Rhag",""],
         abbreviatedMonthNames: ["Ion","Chw","Maw","Ebr","Mai","Meh","Gor","Awst","Medi","Hyd","Tach","Rhag",""],
-        amDesignator: "AM",
+        amDesignator: "yb",
         dateSeparator: "/",
         dayNames: ["Dydd Sul","Dydd Llun","Dydd Mawrth","Dydd Mercher","Dydd Iau","Dydd Gwener","Dydd Sadwrn"],
         firstDayOfWeek: 1,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("cy-GB", true), {
         monthDayPattern: "MMMM d",
         monthGenitiveNames: ["Ionawr","Chwefror","Mawrth","Ebrill","Mai","Mehefin","Gorffennaf","Awst","Medi","Hydref","Tachwedd","Rhagfyr",""],
         monthNames: ["Ionawr","Chwefror","Mawrth","Ebrill","Mai","Mehefin","Gorffennaf","Awst","Medi","Hydref","Tachwedd","Rhagfyr",""],
-        pmDesignator: "PM",
+        pmDesignator: "yh",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "dd/MM/yyyy",
         shortestDayNames: ["Su","Ll","Ma","Me","Ia","Gw","Sa"],
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("cy-GB", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

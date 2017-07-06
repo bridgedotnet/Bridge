@@ -13,8 +13,8 @@ Bridge.merge(new System.Globalization.CultureInfo("sl-SI", true), {
         percentDecimalDigits: 2,
         percentDecimalSeparator: ",",
         percentGroupSeparator: ".",
-        percentPositivePattern: 1,
-        percentNegativePattern: 1,
+        percentPositivePattern: 0,
+        percentNegativePattern: 0,
         currencySymbol: "€",
         currencyGroupSizes: [3],
         currencyDecimalDigits: 2,
@@ -32,7 +32,7 @@ Bridge.merge(new System.Globalization.CultureInfo("sl-SI", true), {
     dateTimeFormat: Bridge.merge(new System.Globalization.DateTimeFormatInfo(), {
         abbreviatedDayNames: ["ned.","pon.","tor.","sre.","čet.","pet.","sob."],
         abbreviatedMonthGenitiveNames: ["jan.","feb.","mar.","apr.","maj","jun.","jul.","avg.","sep.","okt.","nov.","dec.",""],
-        abbreviatedMonthNames: ["jan","feb","mar","apr","maj","jun","jul","avg","sep","okt","nov","dec",""],
+        abbreviatedMonthNames: ["jan.","feb.","mar.","apr.","maj","jun.","jul.","avg.","sep.","okt.","nov.","dec.",""],
         amDesignator: "dop.",
         dateSeparator: ". ",
         dayNames: ["nedelja","ponedeljek","torek","sreda","četrtek","petek","sobota"],
@@ -40,7 +40,7 @@ Bridge.merge(new System.Globalization.CultureInfo("sl-SI", true), {
         fullDateTimePattern: "dddd, dd. MMMM yyyy HH:mm:ss",
         longDatePattern: "dddd, dd. MMMM yyyy",
         longTimePattern: "HH:mm:ss",
-        monthDayPattern: "d MMMM",
+        monthDayPattern: "d. MMMM",
         monthGenitiveNames: ["januar","februar","marec","april","maj","junij","julij","avgust","september","oktober","november","december",""],
         monthNames: ["januar","februar","marec","april","maj","junij","julij","avgust","september","oktober","november","december",""],
         pmDesignator: "pop.",
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("sl-SI", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

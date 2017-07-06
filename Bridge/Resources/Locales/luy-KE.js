@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("luy-KE", true), {
         abbreviatedDayNames: ["J2","J3","J4","J5","Al","Ij","J1"],
         abbreviatedMonthGenitiveNames: ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Ago","Sep","Okt","Nov","Des",""],
         abbreviatedMonthNames: ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Ago","Sep","Okt","Nov","Des",""],
-        amDesignator: "AM",
+        amDesignator: "a.m.",
         dateSeparator: "/",
         dayNames: ["Jumapiri","Jumatatu","Jumanne","Jumatano","Murwa wa Kanne","Murwa wa Katano","Jumamosi"],
         firstDayOfWeek: 0,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("luy-KE", true), {
         monthDayPattern: "MMMM d",
         monthGenitiveNames: ["Januari","Februari","Machi","Aprili","Mei","Juni","Julai","Agosti","Septemba","Oktoba","Novemba","Desemba",""],
         monthNames: ["Januari","Februari","Machi","Aprili","Mei","Juni","Julai","Agosti","Septemba","Oktoba","Novemba","Desemba",""],
-        pmDesignator: "PM",
+        pmDesignator: "p.m.",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "dd/MM/yyyy",
         shortestDayNames: ["J2","J3","J4","J5","Al","Ij","J1"],
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("luy-KE", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

@@ -1,5 +1,5 @@
 Bridge.merge(new System.Globalization.CultureInfo("fr-CD", true), {
-    englishName: "French (Congo DRC)",
+    englishName: "French (DRC)",
     nativeName: "français (Congo, République démocratique du)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("fr-CD", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

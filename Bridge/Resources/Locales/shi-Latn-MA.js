@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("shi-Latn-MA", true), {
         abbreviatedDayNames: ["asa","ayn","asi","akṛ","akw","asim","asiḍ"],
         abbreviatedMonthGenitiveNames: ["inn","bṛa","maṛ","ibr","may","yun","yul","ɣuc","cut","ktu","nuw","duj",""],
         abbreviatedMonthNames: ["inn","bṛa","maṛ","ibr","may","yun","yul","ɣuc","cut","ktu","nuw","duj",""],
-        amDesignator: "AM",
+        amDesignator: "tifawt",
         dateSeparator: "/",
         dayNames: ["asamas","aynas","asinas","akṛas","akwas","asimwas","asiḍyas"],
         firstDayOfWeek: 6,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("shi-Latn-MA", true), {
         monthDayPattern: "d MMMM",
         monthGenitiveNames: ["innayr","bṛayṛ","maṛṣ","ibrir","mayyu","yunyu","yulyuz","ɣuct","cutanbir","ktubr","nuwanbir","dujanbir",""],
         monthNames: ["innayr","bṛayṛ","maṛṣ","ibrir","mayyu","yunyu","yulyuz","ɣuct","cutanbir","ktubr","nuwanbir","dujanbir",""],
-        pmDesignator: "PM",
+        pmDesignator: "tadggʷat",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "d/M/yyyy",
         shortestDayNames: ["asa","ayn","asi","akṛ","akw","asim","asiḍ"],
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("shi-Latn-MA", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

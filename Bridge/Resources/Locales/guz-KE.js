@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("guz-KE", true), {
         abbreviatedDayNames: ["Cpr","Ctt","Cmn","Cmt","Ars","Icm","Est"],
         abbreviatedMonthGenitiveNames: ["Can","Feb","Mac","Apr","Mei","Jun","Cul","Agt","Sep","Okt","Nob","Dis",""],
         abbreviatedMonthNames: ["Can","Feb","Mac","Apr","Mei","Jun","Cul","Agt","Sep","Okt","Nob","Dis",""],
-        amDesignator: "AM",
+        amDesignator: "Ma",
         dateSeparator: "/",
         dayNames: ["Chumapiri","Chumatato","Chumaine","Chumatano","Aramisi","Ichuma","Esabato"],
         firstDayOfWeek: 0,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("guz-KE", true), {
         monthDayPattern: "MMMM d",
         monthGenitiveNames: ["Chanuari","Feburari","Machi","Apiriri","Mei","Juni","Chulai","Agosti","Septemba","Okitoba","Nobemba","Disemba",""],
         monthNames: ["Chanuari","Feburari","Machi","Apiriri","Mei","Juni","Chulai","Agosti","Septemba","Okitoba","Nobemba","Disemba",""],
-        pmDesignator: "PM",
+        pmDesignator: "Mo",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "dd/MM/yyyy",
         shortestDayNames: ["Cpr","Ctt","Cmn","Cmt","Ars","Icm","Est"],
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("guz-KE", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

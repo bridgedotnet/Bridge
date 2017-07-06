@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("xog", true), {
         abbreviatedDayNames: ["Sabi","Bala","Kubi","Kusa","Kuna","Kuta","Muka"],
         abbreviatedMonthGenitiveNames: ["Jan","Feb","Mar","Apu","Maa","Juu","Jul","Agu","Seb","Oki","Nov","Des",""],
         abbreviatedMonthNames: ["Jan","Feb","Mar","Apu","Maa","Juu","Jul","Agu","Seb","Oki","Nov","Des",""],
-        amDesignator: "AM",
+        amDesignator: "Munkyo",
         dateSeparator: "/",
         dayNames: ["Sabiiti","Balaza","Owokubili","Owokusatu","Olokuna","Olokutaanu","Olomukaaga"],
         firstDayOfWeek: 1,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("xog", true), {
         monthDayPattern: "MMMM d",
         monthGenitiveNames: ["Janwaliyo","Febwaliyo","Marisi","Apuli","Maayi","Juuni","Julaayi","Agusito","Sebuttemba","Okitobba","Novemba","Desemba",""],
         monthNames: ["Janwaliyo","Febwaliyo","Marisi","Apuli","Maayi","Juuni","Julaayi","Agusito","Sebuttemba","Okitobba","Novemba","Desemba",""],
-        pmDesignator: "PM",
+        pmDesignator: "Eigulo",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "dd/MM/yyyy",
         shortestDayNames: ["Sabi","Bala","Kubi","Kusa","Kuna","Kuta","Muka"],
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("xog", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });
