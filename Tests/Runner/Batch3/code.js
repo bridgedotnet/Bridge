@@ -30932,7 +30932,7 @@ Bridge.$N1391Result =                     r;
                     d1 = new Date(d1.valueOf() + Math.round((((d1.getMinutes() - d2.getMinutes()) | 0)) * 6e4));
                     d1 = new Date(d1.valueOf() + Math.round((((d1.getSeconds() - d2.getSeconds()) | 0)) * 6e4));
 
-                    Bridge.Test.NUnit.Assert.AreEqual("2011-10-05T14:48:00.000Z", d1.toISOString());
+                    Bridge.Test.NUnit.Assert.AreEqual("2011-10-05T14:48:15.000Z", d1.toISOString());
                 },
                 DateToISOStringWorks: function () {
                     var d1 = new Date("05 October 2011 14:48 UTC");

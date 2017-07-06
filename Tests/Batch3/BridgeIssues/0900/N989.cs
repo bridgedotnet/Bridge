@@ -22,7 +22,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             d1 = d1.AddMinutes(d1.Minute - d2.Minute);
             d1 = d1.AddMinutes(d1.Second - d2.Second);
 
-            Assert.AreEqual("2011-10-05T14:48:00.000Z", d1.ToISOString());
+            Assert.AreEqual("2011-10-05T14:48:15.000Z", d1.ToISOString());
         }
 
         [Test(ExpectedCount = 1)]
