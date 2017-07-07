@@ -187,7 +187,7 @@
 
                                 break;
                             case "yyyy":
-                                part = year;
+                                part = ("0000" + year).substring(year.toString().length);
 
                                 break;
                             case "yy":
