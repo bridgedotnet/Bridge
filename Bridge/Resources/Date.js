@@ -8,6 +8,7 @@
             $clone: function (to) { return this; }
         },
         statics: {
+            // Difference in Milliseconds from 1-Jan-0001 to 1-Jan-1970 at UTC
             offset: 62135596800000,
             timezoneOffset: null,
 
