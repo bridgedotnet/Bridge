@@ -12,11 +12,10 @@
             timezoneOffset: null,
 
             getTimezoneOffset: function () {
-                var winter = System.DateTime.today();
-                winter.setMonth(0);
-                winter.setDate(1);
+                var w = System.DateTime.today();
 
-                System.DateTime.timezoneOffset = winter.getTimezoneOffset() * 60 * 1000;
+                w.setMonth(0);
+                w.setDate(1);
 
                 System.DateTime.getTimezoneOffset = function() {
                     return System.DateTime.timezoneOffset;
@@ -61,12 +60,13 @@
                return new Date(value - System.DateTime.getOffset());
             },
 
-            getTicks: function(dt) {
-               return System.Int64(dt.getTime()).add(System.DateTime.getOffset()).mul(10000);
+            getTicks: function(d) {
+               return System.Int64(d.getTime()).add(System.DateTime.getOffset()).mul(10000);
             },
 
             utc: function(year, month, day, hours, minutes, seconds, ms) {
                 var utd = Date.UTC(year, month - 1, day || 0, hours || 0, minutes || 0, seconds || 0, ms || 0);
+
                 return System.Int64(utd).add(System.DateTime.getOffset()).mul(10000);
             },
 
@@ -815,11 +815,11 @@
                 return true;
             },
 
-            tryParseExact: function (value, format, provider, result, utc) {
-                result.v = this.parseExact(value, format, provider, utc, true);
+            tryParseExact: function (v, f, p, r, utc) {
+                r.v = this.parseExact(v, f, p, utc, true);
 
-                if (result.v == null) {
-                    result.v = System.DateTime.getDefaultValue();
+                if (r.v == null) {
+                    r.v = System.DateTime.getDefaultValue();
 
                     return false;
                 }
@@ -885,15 +885,15 @@
             },
 
             dateAddSubTimespan: function (d, t, direction) {
-                var result = new Date(d.getTime());
+                var r = new Date(d.getTime());
 
-                result.setDate(result.getDate() + (direction * t.getDays()));
-                result.setHours(result.getHours() + (direction * t.getHours()));
-                result.setMinutes(result.getMinutes() + (direction * t.getMinutes()));
-                result.setSeconds(result.getSeconds() + (direction * t.getSeconds()));
-                result.setMilliseconds(result.getMilliseconds() + (direction * t.getMilliseconds()));
+                r.setDate(r.getDate() + (direction * t.getDays()));
+                r.setHours(r.getHours() + (direction * t.getHours()));
+                r.setMinutes(r.getMinutes() + (direction * t.getMinutes()));
+                r.setSeconds(r.getSeconds() + (direction * t.getSeconds()));
+                r.setMilliseconds(r.getMilliseconds() + (direction * t.getMilliseconds()));
 
-                return result;
+                return r;
             },
 
             subdt: function (d, t) {
