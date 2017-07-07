@@ -1,7 +1,11 @@
     Bridge.define("System.DateTime", {
-        inherits: [System.IComparable, System.IFormattable],
+        inherits: function () { return [System.IComparable, System.IComparable$1(System.DateTime), System.IEquatable$1(System.DateTime), System.IFormattable]; },
+        $kind: "struct",
         fields: {
             kind: 2
+        },
+        methods: {
+            $clone: function (to) { return this; }
         },
         statics: {
             offset: 62135596800000,
@@ -937,6 +941,3 @@
             }
         }
     });
-
-    System.DateTime.$kind = "";
-    Bridge.Class.addExtend(System.DateTime, [System.IComparable$1(System.DateTime), System.IEquatable$1(System.DateTime)]);
