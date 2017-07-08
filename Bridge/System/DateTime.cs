@@ -462,7 +462,7 @@ namespace System
         /// </summary>
         /// <param name="year">A 4-digit year.</param>
         /// <returns>true if year is a leap year; otherwise, false.</returns>
-        [Template("System.DateTime.isLeapYear({0})")]
+        [Template("System.DateTime.getIsLeapYear({0})")]
         public static extern bool IsLeapYear(int year);
 
         [Template("Bridge.compare({this}, {other})")]
