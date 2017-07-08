@@ -46,5 +46,8 @@
     <file src="../../Compiler/Build/bin/Release/System.Collections.Immutable.dll" target="tools/System.Collections.Immutable.dll" />
     <file src="../../Compiler/Build/bin/Release/System.Reflection.Metadata.dll" target="tools/System.Reflection.Metadata.dll" />
     <file src="../../Compiler/Build/bin/Release/TopologicalSorting.dll" target="tools/TopologicalSorting.dll" />
+    <file src="../../Compiler/Build/bin/Release/System.ValueTuple.dll" target="tools/System.ValueTuple.dll" />
+    <file src="../../Compiler/Build/bin/Release/System.IO.FileSystem.dll" target="tools/System.IO.FileSystem.dll" />
+    <file src="../../Compiler/Build/bin/Release/System.IO.FileSystem.Primitives.dll" target="tools/System.IO.FileSystem.Primitives.dll" />
   </files>
 </package>
