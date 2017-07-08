@@ -23,7 +23,7 @@
                 this.seedArray = System.Array.init(56, 0, System.Int32);
             },
             ctor: function () {
-                System.Random.$ctor1.call(this, System.Int64.clip32(System.DateTime.getTicks(new Date())));
+                System.Random.$ctor1.call(this, System.Int64.clip32(System.DateTime.getTicks(System.DateTime.now())));
             },
             $ctor1: function (seed) {
                 this.$initialize();

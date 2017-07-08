@@ -12840,8 +12840,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 Bridge.Test.NUnit.Assert.AreEqual("Hello", o2.S, "o2.S");
 
                 var c3 = Bridge.cast(($t2 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C11, 31, 28))[System.Array.index(0, $t2)], System.Reflection.ConstructorInfo);
-                var o3 = Bridge.cast(Bridge.Reflection.invokeCI(c3, [new Date(2012, 1 - 1, 2)]), Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C11);
-                Bridge.Test.NUnit.Assert.AreEqual(new Date(2012, 1 - 1, 2), o3.D, "o3.D");
+                var o3 = Bridge.cast(Bridge.Reflection.invokeCI(c3, [System.DateTime.create(2012, 1, 2)]), Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C11);
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.create(2012, 1, 2), o3.D, "o3.D");
 
                 var c19 = Bridge.cast(($t3 = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C19, 31, 28))[System.Array.index(0, $t3)], System.Reflection.ConstructorInfo);
                 var o4 = Bridge.Reflection.invokeCI(c19, [42, "Hello"]);
@@ -13191,9 +13191,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 var p1 = Bridge.Reflection.midel(m1, c)(null);
                 Bridge.Test.NUnit.Assert.AreEqual(78, Bridge.unbox(p1), "m1.Invoke");
 
-                Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C14.P3 = new Date(2012, 4 - 1, 2);
+                Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C14.P3 = System.DateTime.create(2012, 4, 2);
                 var p2 = Bridge.Reflection.midel(m2, null)(null);
-                Bridge.Test.NUnit.Assert.AreEqual(new Date(2012, 4 - 1, 2), Bridge.unbox(p2), "m2.Invoke");
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.create(2012, 4, 2), Bridge.unbox(p2), "m2.Invoke");
 
                 c = ($t = new Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C14(), $t.p13Field = 13, $t);
                 var p3 = Bridge.Reflection.midel(m3, c)(null);
@@ -13241,9 +13241,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 Bridge.Reflection.midel(m1, c)(42);
                 Bridge.Test.NUnit.Assert.AreEqual(42, c.P1, "m1.Invoke");
 
-                Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C14.P3 = new Date(2010, 1 - 1, 1);
-                Bridge.Reflection.midel(m2, null)(new Date(2012, 2 - 1, 3));
-                Bridge.Test.NUnit.Assert.AreEqual(new Date(2012, 2 - 1, 3), Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C14.P3, "m2.Invoke");
+                Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C14.P3 = System.DateTime.create(2010, 1, 1);
+                Bridge.Reflection.midel(m2, null)(System.DateTime.create(2012, 2, 3));
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.create(2012, 2, 3), Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C14.P3, "m2.Invoke");
 
                 c = new Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C14();
                 Bridge.Reflection.midel(m3, c)(422);
@@ -13460,11 +13460,11 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 var i = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C15, 16, 284, "Item");
 
                 var c14 = ($t = new Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C14(), $t.P1 = 42, $t.P2 = "Hello, world!", $t);
-                Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C14.P3 = new Date(2013, 3 - 1, 5);
+                Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C14.P3 = System.DateTime.create(2013, 3, 5);
                 Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C14.P4 = 7.5;
                 Bridge.Test.NUnit.Assert.AreEqual(42, Bridge.unbox(Bridge.Reflection.midel(p1.g, c14)()), "P1.GetValue");
                 Bridge.Test.NUnit.Assert.AreEqual("Hello, world!", Bridge.unbox(Bridge.Reflection.midel(p2.g, c14)()), "P2.GetValue");
-                Bridge.Test.NUnit.Assert.AreEqual(new Date(2013, 3 - 1, 5), Bridge.unbox(Bridge.Reflection.midel(p3.g, null)()), "P3.GetValue");
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.create(2013, 3, 5), Bridge.unbox(Bridge.Reflection.midel(p3.g, null)()), "P3.GetValue");
                 Bridge.Test.NUnit.Assert.AreEqual(7.5, Bridge.unbox(Bridge.Reflection.midel(p4.g, null)()), "P4.GetValue");
 
                 var c15 = ($t = new Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C15(), $t.v = "X", $t);
@@ -13481,12 +13481,12 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 var c14 = new Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C14();
                 Bridge.Reflection.midel(p1.s, c14)(42);
                 Bridge.Reflection.midel(p2.s, c14)("Hello, world!");
-                Bridge.Reflection.midel(p3.s, null)(new Date(2013, 3 - 1, 5));
+                Bridge.Reflection.midel(p3.s, null)(System.DateTime.create(2013, 3, 5));
                 Bridge.Reflection.midel(p4.s, null)(7.5);
 
                 Bridge.Test.NUnit.Assert.AreEqual(42, c14.P1, "P1.SetValue");
                 Bridge.Test.NUnit.Assert.AreEqual("Hello, world!", c14.P2, "P2.SetValue");
-                Bridge.Test.NUnit.Assert.AreEqual(new Date(2013, 3 - 1, 5), Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C14.P3, "P3.SetValue");
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.create(2013, 3, 5), Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C14.P3, "P3.SetValue");
                 Bridge.Test.NUnit.Assert.AreEqual(7.5, Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C14.P4, "P4.SetValue");
 
                 var c15 = ($t = new Bridge.ClientTest.Batch4.Reflection.ReflectionTests.C15(), $t.v = "X", $t);
@@ -16517,7 +16517,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 var d1 = new Date(Date.now());
                 var d2 = System.DateTime.today();
 
-                Bridge.Test.NUnit.Assert.AreEqual(d1.getFullYear(), d2.getFullYear());
+                Bridge.Test.NUnit.Assert.AreEqual(d1.getFullYear(), System.DateTime.getYear(d2));
             },
             GetFullYearWorks: function () {
                 var dt = new Date(2011, 7, 12, 13, 42, 56, 345);
@@ -21108,9 +21108,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 Bridge.Test.NUnit.Assert.AreEqual(System.Int64(0), watch.milliseconds());
                 Bridge.Test.NUnit.Assert.AreEqual(new System.TimeSpan(), watch.timeSpan());
                 watch.start();
-                var before = new Date();
+                var before = System.DateTime.now();
                 var hasIncreased = false;
-                while ((System.DateTime.subdd(new Date(), before)).getMilliseconds() < 200) {
+                while ((System.DateTime.subdd(System.DateTime.now(), before)).getMilliseconds() < 200) {
                     if (watch.ticks().gt(System.Int64(0))) {
                         hasIncreased = true;
                     }
@@ -21126,8 +21126,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 var t1 = System.Diagnostics.Stopwatch.getTimestamp();
                 Bridge.Test.NUnit.Assert.True(Bridge.is(t1, System.Int64), "is long");
 
-                var before = new Date();
-                while ((System.DateTime.subdd(new Date(), before)).getMilliseconds() < 50) {
+                var before = System.DateTime.now();
+                while ((System.DateTime.subdd(System.DateTime.now(), before)).getMilliseconds() < 50) {
                 }
                 var t2 = System.Diagnostics.Stopwatch.getTimestamp();
                 Bridge.Test.NUnit.Assert.True(t2.gt(t1), "Should increase");

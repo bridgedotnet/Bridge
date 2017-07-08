@@ -12521,12 +12521,12 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 DateTimeToUniversalTimeWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2929).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2929, 2, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateTimeToUniversalTimeWorks()", $t.Line = "12", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2929).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2929, 5, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateTimeToUniversalTimeWorks()", $t.Line = "12", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2929.DateTimeToUniversalTimeWorks();
                 },
                 DateTimeToLocalTimeWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2929).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2929, 1, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateTimeToLocalTimeWorks()", $t.Line = "27", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2929).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2929, 4, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateTimeToLocalTimeWorks()", $t.Line = "31", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2929.DateTimeToLocalTimeWorks();
                 }
             }
