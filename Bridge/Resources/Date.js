@@ -142,15 +142,19 @@
             },
 
             toUniversalTime: function (d) {
-                d.kind = 1;
+                var d1 = new Date(d.getTime());
 
-                return d;
+                d1.kind = 1;
+
+                return d1;
             },
 
             toLocalTime: function (d) {
-                d.kind = 2;
+                var d1 = new Date(d.getTime());
 
-                return d;
+                d1.kind = 2;
+
+                return d1;
             },
 
             getKind: function (d) {
