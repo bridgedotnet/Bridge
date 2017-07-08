@@ -657,7 +657,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             DateTime d1;
             var b1 = DateTime.TryParse("2001-01-01", out d1, true);
-            Assert.True(b1, "TryParse parsed '2001 - 01 - 01'");
+            Assert.True(b1, "TryParse parsed '2001-01-01'");
             Assert.AreEqual(2001, d1.Year, "TryParse works Year");
             Assert.AreEqual(1, d1.Month, "TryParse works Month");
             Assert.AreEqual(1, d1.Day, "TryParse works Day");

@@ -30942,22 +30942,16 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 DateTimeToISOStringWorks: function () {
-                    var d1 = System.DateTime.create(2011, 10, 5, 14, 48, 15);
-                    var d2 = System.DateTime.toUniversalTime(d1);
+                    var d1 = System.DateTime.create(2011, 10, 5, 14, 48, 15, 0, System.DateTimeKind.Utc);
+                    var d2 = System.DateTime.toLocalTime(d1);
+                    var d3 = System.DateTime.toUniversalTime(d2);
 
-                    // This is required to change d1 to UTC without changing time
-                    d1 = System.DateTime.addMonths(d1, ((System.DateTime.getMonth(d1) - System.DateTime.getMonth(d2)) | 0));
-                    d1 = System.DateTime.addDays(d1, ((System.DateTime.getDay(d1) - System.DateTime.getDay(d2)) | 0));
-                    d1 = System.DateTime.addHours(d1, ((System.DateTime.getHour(d1) - System.DateTime.getHour(d2)) | 0));
-                    d1 = System.DateTime.addMinutes(d1, ((System.DateTime.getMinute(d1) - System.DateTime.getMinute(d2)) | 0));
-                    d1 = System.DateTime.addMinutes(d1, ((System.DateTime.getSecond(d1) - System.DateTime.getSecond(d2)) | 0));
-
-                    Bridge.Test.NUnit.Assert.AreEqual("2011-10-05T14:48:15.000Z", System.DateTime.format(d1, "O"));
+                    Bridge.Test.NUnit.Assert.AreEqual("2011-10-05T14:48:15.0000000Z", System.DateTime.format(d3, "O"));
                 },
                 DateToISOStringWorks: function () {
                     var d1 = new Date("05 October 2011 14:48 UTC");
 
-                    Bridge.Test.NUnit.Assert.AreEqual("2011-10-05T14:48:00.000Z", d1.toISOString());
+                    Bridge.Test.NUnit.Assert.AreEqual("2011-10-05T14:48:15.0000000Z", d1.toISOString());
                 }
             }
         }
@@ -31562,7 +31556,7 @@ Bridge.$N1391Result =                     r;
                 N329: function () {
                     var d1 = { };
                     var b1 = System.DateTime.tryParse("2001-01-01", null, d1, true);
-                    Bridge.Test.NUnit.Assert.True(b1, "TryParse parsed '2001 - 01 - 01'");
+                    Bridge.Test.NUnit.Assert.True(b1, "TryParse parsed '2001-01-01'");
                     Bridge.Test.NUnit.Assert.AreEqual(2001, System.DateTime.getYear(d1.v), "TryParse works Year");
                     Bridge.Test.NUnit.Assert.AreEqual(1, System.DateTime.getMonth(d1.v), "TryParse works Month");
                     Bridge.Test.NUnit.Assert.AreEqual(1, System.DateTime.getDay(d1.v), "TryParse works Day");

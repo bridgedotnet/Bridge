@@ -924,6 +924,7 @@ namespace Bridge.ClientTest.SimpleTypes
         {
             var dt = new DateTime(2011, 7, 12, 2, 42, 56, 345);
             var actual = dt.AddYears(3);
+
             Assert.AreEqual(new DateTime(2014, 7, 12, 2, 42, 56, 345), actual);
             Assert.AreEqual(new DateTime(2011, 7, 12, 2, 42, 56, 345), dt);
         }

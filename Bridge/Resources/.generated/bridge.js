@@ -8224,7 +8224,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
             // UTC Max Value
             getMaxValue: function () {
-                var d = new Date(-System.DateTime.maxOffset);
+                var d = new Date(System.DateTime.maxOffset);
 
                 d.kind = 1;
 
@@ -8337,15 +8337,19 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             },
 
             toUniversalTime: function (d) {
-                d.kind = 1;
+                var d1 = new Date(d.getTime());
 
-                return d;
+                d1.kind = 1;
+
+                return d1;
             },
 
             toLocalTime: function (d) {
-                d.kind = 2;
+                var d1 = new Date(d.getTime());
 
-                return d;
+                d1.kind = 2;
+
+                return d1;
             },
 
             getKind: function (d) {
@@ -9052,10 +9056,10 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 }
 
                 if (zzh === 0 && zzm === 0 && !utc) {
-                    return new Date(year, month - 1, date, hh, mm, ss, ff);
+                    return System.DateTime.create(year, month, date, hh, mm, ss, ff, 2);
                 }
 
-                return new Date(Date.UTC(year, month - 1, date, hh - zzh, mm - zzm, ss, ff));
+                return System.DateTime.create(year, month, date, hh - zzh, mm - zzm, ss, ff, 1);
             },
 
             subparseInt: function (str, index, min, max) {
@@ -9140,9 +9144,13 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
                 d.kind = (d.kind !== undefined) ? d.kind : 2;
 
-                d.setFullYear(d.getFullYear() + v);
+                var d1 = new Date(d.getTime());
 
-                return d;
+                d1.setFullYear(d.getFullYear() + v);
+                
+                d1.kind = d.kind;
+
+                return d1;
             },
 
             addMonths: function (d, v) {
@@ -9151,9 +9159,13 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
                 d.kind = (d.kind !== undefined) ? d.kind : 2;
 
-                d.setMonth(d.getMonth() + v);
+                var d1 = new Date(d.getTime());
 
-                return d;
+                d1.setMonth(d.getMonth() + v);
+
+                d1.kind = d.kind;
+
+                return d1;
             },
 
             addDays: function (d, v) {
@@ -9162,9 +9174,11 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
                 d.kind = (d.kind !== undefined) ? d.kind : 2;
 
-                d.setDate(d.getDate() + v);
+                var d1 = new Date(d.getTime() + Math.round(v * 864e5));
 
-                return d;
+                d1.kind = d.kind;
+
+                return d1;
             },
 
             addHours: function (d, v) {
@@ -9173,9 +9187,11 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
                 d.kind = (d.kind !== undefined) ? d.kind : 2;
 
-                d.setHours(d.getHours() + v);
+                var d1 = new Date(d.getTime() + Math.round(v * 36e5));
 
-                return d;
+                d1.kind = d.kind;
+
+                return d1;
             },
 
             addMinutes: function (d, v) {
@@ -9184,9 +9200,11 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
                 d.kind = (d.kind !== undefined) ? d.kind : 2;
 
-                d.setMinutes(d.getMinutes() + v);
+                var d1 = new Date(d.getTime() + Math.round(v * 6e4));
 
-                return d;
+                d1.kind = d.kind;
+
+                return d1;
             },
 
             addSeconds: function (d, v) {
@@ -9195,9 +9213,11 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
                 d.kind = (d.kind !== undefined) ? d.kind : 2;
 
-                d.setSeconds(d.getSeconds() + v);
+                var d1 = new Date(d.getTime() + Math.round(v * 1e3));
+                
+                d1.kind = d.kind;
 
-                return d;
+                return d1;
             },
 
             addMilliseonds: function (d, v) {
@@ -9206,20 +9226,18 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
                 d.kind = (d.kind !== undefined) ? d.kind : 2;
 
-                d.setMilliseconds(d.getMilliseconds() + v);
+                var d1 = new Date(d.getTime() + Math.round(v));
 
-                return d;
+                d1.kind = d.kind;
+
+                return d1;
             },
 
             addTicks: function (d, v) {
                 d = (d !== undefined) ? d : System.DateTime.getDefaultValue();
                 v = (v !== undefined) ? v : 0;
 
-                d.kind = (d.kind !== undefined) ? d.kind : 2;
-
-                d.setMilliseconds(System.Int64(d.getMilliseconds()).add(v).div(10000).toNumber());
-
-                return d;
+                return System.DateTime.addMilliseonds(d, v / 10000);
             },
 
             add: function (d, value) {
