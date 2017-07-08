@@ -29,7 +29,7 @@
 
             // UTC Max Value
             getMaxValue: function () {
-                var d = new Date(-System.DateTime.maxOffset);
+                var d = new Date(System.DateTime.maxOffset);
 
                 d.kind = 1;
 
