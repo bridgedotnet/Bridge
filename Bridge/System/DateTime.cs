@@ -505,7 +505,7 @@ namespace System
         /// Converts the value of the current DateTime object to its equivalent short date string representation.
         /// </summary>
         /// <returns>A string that contains the short date string representation of the current DateTime object.</returns>
-        [Template("System.DateTime.format({this}, 'd')")]
+        [Template("System.DateTime.format({this}, \"d\")")]
         public extern string ToShortDateString();
 
         /// <summary>
