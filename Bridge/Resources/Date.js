@@ -107,9 +107,17 @@
                 return d;
             },
 
-            // Get the number of ticks since 0001-01-01T00:00:00.0000000
+            // Get the number of ticks since 0001-01-01T00:00:00.0000000 UTC
             getTicks: function (d) {
-                return System.Int64(d.getTime() + System.DateTime.minOffset).mul(10000);
+                d.kind = (d.kind !== undefined) ? d.kind : 2;
+
+                var offset = 0;
+
+                if (d.kind !== 1) {
+                    offset = d.getTimezoneOffset() * 60 * 1000;
+                }
+
+                return System.Int64(d.getTime()).add(-System.DateTime.minOffset - offset).mul(10000);
             },
 
             today: function () {
@@ -1080,7 +1088,7 @@
                 ny.setDate(1);
                 ny.setHours(0);
                 ny.setMinutes(0);
-                nu.setMilliseconds(0);
+                ny.setMilliseconds(0);
 
                 return Math.ceil((d - ny) / 864e5);
             },
