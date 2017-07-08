@@ -152,112 +152,112 @@ namespace System
         [Template(Fn = "System.DateTime.format")]
         public override extern string ToString();
 
-        [Template("System.DateTime.format({this}, {format})")]
+        [Template("System.DateTime.format({this}, {0})")]
         public extern string ToString(string format);
 
-        [Template("System.DateTime.format({this}, {format}, {provider})")]
+        [Template("System.DateTime.format({this}, {0}, {1})")]
         public extern string ToString(string format, IFormatProvider provider);
 
-        [Template("System.DateTime.parse({value})")]
+        [Template("System.DateTime.parse({0})")]
         public static extern DateTime Parse(string value);
 
-        [Template("System.DateTime.parse({value}, {provider})")]
+        [Template("System.DateTime.parse({0}, {1})")]
         public static extern DateTime Parse(string value, IFormatProvider provider);
 
-        [Template("System.DateTime.parse({value}, {provider}, {utc})")]
+        [Template("System.DateTime.parse({0}, {1}, {2})")]
         public static extern DateTime Parse(string value, IFormatProvider provider, bool utc);
 
-        [Template("System.DateTime.parse({value}, null, {utc})")]
+        [Template("System.DateTime.parse({0}, null, {1})")]
         public static extern DateTime Parse(string value, bool utc);
 
-        [Template("System.DateTime.tryParse({value}, null, {result})")]
+        [Template("System.DateTime.tryParse({0}, null, {1})")]
         public static extern bool TryParse(string value, out DateTime result);
 
-        [Template("System.DateTime.tryParse({value}, null, {result}, {utc})")]
+        [Template("System.DateTime.tryParse({0}, null, {1}, {2})")]
         public static extern bool TryParse(string value, out DateTime result, bool utc);
 
-        [Template("System.DateTime.tryParse({value}, {provider}, {result})")]
+        [Template("System.DateTime.tryParse({0}, {1}, {2})")]
         public static extern bool TryParse(string value, IFormatProvider provider, out DateTime result);
 
-        [Template("System.DateTime.tryParse({value}, {provider}, {result}, {utc})")]
+        [Template("System.DateTime.tryParse({0}, {1}, {2}, {3})")]
         public static extern bool TryParse(string value, IFormatProvider provider, out DateTime result, bool utc);
 
-        [Template("System.DateTime.parseExact({value}, {format})")]
+        [Template("System.DateTime.parseExact({0}, {1})")]
         public static extern DateTime ParseExact(string value, string format);
 
-        [Template("System.DateTime.parseExact({value}, {format}, null, {utc})")]
+        [Template("System.DateTime.parseExact({0}, {1}, null, {2})")]
         public static extern DateTime ParseExact(string value, string format, bool utc);
 
-        [Template("System.DateTime.parseExact({value}, {formats})")]
+        [Template("System.DateTime.parseExact({0}, {1})")]
         public static extern DateTime ParseExact(string value, string[] formats);
 
-        [Template("System.DateTime.parseExact({value}, {formats}, null, {utc})")]
+        [Template("System.DateTime.parseExact({0}, {1}, null, {2})")]
         public static extern DateTime ParseExact(string value, string[] formats, bool utc);
 
-        [Template("System.DateTime.parseExact({value}, {format}, {provider})")]
+        [Template("System.DateTime.parseExact({0}, {1}, {2})")]
         public static extern DateTime ParseExact(string value, string format, IFormatProvider provider);
 
-        [Template("System.DateTime.parseExact({value}, {format}, {provider}, {utc})")]
+        [Template("System.DateTime.parseExact({0}, {1}, {2}, {3})")]
         public static extern DateTime ParseExact(string value, string format, IFormatProvider provider, bool utc);
 
-        [Template("System.DateTime.parseExact({value}, {formats}, {provider})")]
+        [Template("System.DateTime.parseExact({0}, {1}, {2})")]
         public static extern DateTime ParseExact(string value, string[] formats, IFormatProvider provider);
 
-        [Template("System.DateTime.parseExact({value}, {formats}, {provider}, {utc})")]
+        [Template("System.DateTime.parseExact({0}, {1}, {2}, {3})")]
         public static extern DateTime ParseExact(string value, string[] formats, IFormatProvider provider, bool utc);
 
-        [Template("System.DateTime.tryParseExact({value}, {format}, null, {result})")]
+        [Template("System.DateTime.tryParseExact({0}, {1}, null, {2})")]
         public static extern bool TryParseExact(string value, string format, out DateTime result);
 
-        [Template("System.DateTime.tryParseExact({value}, {format}, null, {result}, {utc})")]
+        [Template("System.DateTime.tryParseExact({0}, {1}, null, {2}, {3})")]
         public static extern bool TryParseExact(string value, string format, out DateTime result, bool utc);
 
-        [Template("System.DateTime.tryParseExact({value}, {formats}, null, {result})")]
+        [Template("System.DateTime.tryParseExact({0}, {1}, null, {2})")]
         public static extern bool TryParseExact(string value, string[] formats, out DateTime result);
 
-        [Template("System.DateTime.tryParseExact({value}, {formats}, null, {result}, {utc})")]
+        [Template("System.DateTime.tryParseExact({0}, {1}, null, {2}, {3})")]
         public static extern bool TryParseExact(string value, string[] formats, out DateTime result, bool utc);
 
-        [Template("System.DateTime.tryParseExact({value}, {format}, {provider}, {result})")]
+        [Template("System.DateTime.tryParseExact({0}, {1}, {2}, {3})")]
         public static extern bool TryParseExact(string value, string format, IFormatProvider provider, out DateTime result);
 
-        [Template("System.DateTime.tryParseExact({value}, {format}, {provider}, {result}, {utc})")]
+        [Template("System.DateTime.tryParseExact({0}, {1}, {2}, {3}, {4})")]
         public static extern bool TryParseExact(string value, string format, IFormatProvider provider, out DateTime result, bool utc);
 
-        [Template("System.DateTime.tryParseExact({value}, {formats}, {provider}, {result})")]
+        [Template("System.DateTime.tryParseExact({0}, {1}, {2}, {3})")]
         public static extern bool TryParseExact(string value, string[] formats, IFormatProvider provider, out DateTime result);
 
-        [Template("System.DateTime.tryParseExact({value}, {formats}, {provider}, {result}, {utc})")]
+        [Template("System.DateTime.tryParseExact({0}, {1}, {2}, {3}, {4})")]
         public static extern bool TryParseExact(string value, string[] formats, IFormatProvider provider, out DateTime result, bool utc);
 
-        [Template("System.DateTime.subdt({d}, {t})")]
+        [Template("System.DateTime.subdt({0}, {1})")]
         public static extern DateTime operator -(DateTime d, TimeSpan t);
 
-        [Template("System.DateTime.adddt({d}, {t})")]
+        [Template("System.DateTime.adddt({0}, {1})")]
         public static extern DateTime operator +(DateTime d, TimeSpan t);
 
-        [Template("System.DateTime.subdd({a}, {b})")]
+        [Template("System.DateTime.subdd({0}, {1})")]
         public static extern TimeSpan operator -(DateTime a, DateTime b);
 
-        [Template("System.DateTime.subdd({this}, {value})")]
+        [Template("System.DateTime.subdd({this}, {0})")]
         public extern TimeSpan Subtract(DateTime value);
 
-        [Template("Bridge.equals({a}, {b})")]
+        [Template("Bridge.equals({0}, {1})")]
         public static extern bool operator ==(DateTime a, DateTime b);
 
-        [Template("!Bridge.equals({a}, {b})")]
+        [Template("!Bridge.equals({0}, {1})")]
         public static extern bool operator !=(DateTime a, DateTime b);
 
-        [Template("System.DateTime.lt({a}, {b})")]
+        [Template("System.DateTime.lt({0}, {1})")]
         public static extern bool operator <(DateTime a, DateTime b);
 
-        [Template("System.DateTime.gt({a}, {b})")]
+        [Template("System.DateTime.gt({0}, {1})")]
         public static extern bool operator >(DateTime a, DateTime b);
 
-        [Template("System.DateTime.lte({a}, {b})")]
+        [Template("System.DateTime.lte({0}, {1})")]
         public static extern bool operator <=(DateTime a, DateTime b);
 
-        [Template("System.DateTime.gte({a}, {b})")]
+        [Template("System.DateTime.gte({0}, {1})")]
         public static extern bool operator >=(DateTime a, DateTime b);
 
         /// <summary>
@@ -465,19 +465,19 @@ namespace System
         [Template("System.DateTime.getIsLeapYear({0})")]
         public static extern bool IsLeapYear(int year);
 
-        [Template("Bridge.compare({this}, {other})")]
+        [Template("Bridge.compare({this}, {0})")]
         public extern int CompareTo(DateTime other);
 
-        [Template("Bridge.compare({this}, {other})")]
+        [Template("Bridge.compare({this}, {0})")]
         public extern int CompareTo(object other);
 
         [Template("Bridge.compare({t1}, {t2})")]
         public static extern int Compare(DateTime t1, DateTime t2);
 
-        [Template("Bridge.equalsT({this}, {other})")]
+        [Template("Bridge.equalsT({this}, {0})")]
         public extern bool Equals(DateTime other);
 
-        [Template("Bridge.equalsT({t1}, {t2})")]
+        [Template("Bridge.equalsT({0}, {1})")]
         public static extern bool Equals(DateTime t1, DateTime t2);
 
         /// <summary>
