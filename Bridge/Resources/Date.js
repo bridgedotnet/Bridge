@@ -1025,7 +1025,7 @@
                 return d1;
             },
 
-            addMilliseonds: function (d, v) {
+            addMilliseconds: function (d, v) {
                 d = (d !== undefined) ? d : System.DateTime.getDefaultValue();
                 v = (v !== undefined) ? v : 0;
 
