@@ -16515,7 +16515,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             NowWorks_SPI_1624: function () {
                 // #1624
                 var d1 = new Date(Date.now());
-                var d2 = System.DateTime.today();
+                var d2 = System.DateTime.getToday();
 
                 Bridge.Test.NUnit.Assert.AreEqual(d1.getFullYear(), System.DateTime.getYear(d2));
             },
@@ -21108,9 +21108,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 Bridge.Test.NUnit.Assert.AreEqual(System.Int64(0), watch.milliseconds());
                 Bridge.Test.NUnit.Assert.AreEqual(new System.TimeSpan(), watch.timeSpan());
                 watch.start();
-                var before = System.DateTime.now();
+                var before = System.DateTime.getNow();
                 var hasIncreased = false;
-                while ((System.DateTime.subdd(System.DateTime.now(), before)).getMilliseconds() < 200) {
+                while ((System.DateTime.subdd(System.DateTime.getNow(), before)).getMilliseconds() < 200) {
                     if (watch.ticks().gt(System.Int64(0))) {
                         hasIncreased = true;
                     }
@@ -21126,8 +21126,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 var t1 = System.Diagnostics.Stopwatch.getTimestamp();
                 Bridge.Test.NUnit.Assert.True(Bridge.is(t1, System.Int64), "is long");
 
-                var before = System.DateTime.now();
-                while ((System.DateTime.subdd(System.DateTime.now(), before)).getMilliseconds() < 50) {
+                var before = System.DateTime.getNow();
+                while ((System.DateTime.subdd(System.DateTime.getNow(), before)).getMilliseconds() < 50) {
                 }
                 var t2 = System.Diagnostics.Stopwatch.getTimestamp();
                 Bridge.Test.NUnit.Assert.True(t2.gt(t1), "Should increase");

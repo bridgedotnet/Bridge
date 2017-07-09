@@ -187,33 +187,35 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void ToUniversalWorks()
+        public void ToUniversalWorksDoesNotDoubleCompute()
         {
-            var d1 = new DateTime(2011, 7, 12, 13, 42, 56, 345);
-            var d2 = new DateTime(2011, 7, 12, 13, 42, 56, 345, DateTimeKind.Utc);
-            var UTC = d1.ToUniversalTime();
+            var d = new DateTime(2011, 7, 12, 13, 42, 56, 345);
+            var d1 = d.ToUniversalTime();
+            var d2 = d1.ToUniversalTime();
 
-            Assert.AreEqual(UTC.Year, d2.Year);
-            Assert.AreEqual(UTC.Month, d2.Month);
-            Assert.AreEqual(UTC.Day, d2.Day);
-            Assert.AreEqual(UTC.Hour, d2.Hour);
-            Assert.AreEqual(UTC.Minute, d2.Minute);
-            Assert.AreEqual(UTC.Second, d2.Second);
-            Assert.AreEqual(UTC.Millisecond, d2.Millisecond);
+            Assert.AreEqual(d2.Year, d1.Year);
+            Assert.AreEqual(d2.Month, d1.Month);
+            Assert.AreEqual(d2.Day, d1.Day);
+            Assert.AreEqual(d2.Hour, d1.Hour);
+            Assert.AreEqual(d2.Minute, d1.Minute);
+            Assert.AreEqual(d2.Second, d1.Second);
+            Assert.AreEqual(d2.Millisecond, d1.Millisecond);
         }
 
         [Test]
-        public void ToLocalWorks()
+        public void ToLocalWorksDoesNotDoubleCompute()
         {
-            var UTC = new DateTime(2011, 7, 12, 13, 42, 56, 345);
-            var dt = UTC.ToLocalTime();
-            Assert.AreEqual(UTC.Year, dt.Year);
-            Assert.AreEqual(UTC.Month, dt.Month);
-            Assert.AreEqual(UTC.Day, dt.Day);
-            Assert.AreEqual(UTC.Hour, dt.Hour);
-            Assert.AreEqual(UTC.Minute, dt.Minute);
-            Assert.AreEqual(UTC.Second, dt.Second);
-            Assert.AreEqual(UTC.Millisecond, dt.Millisecond);
+            var d = new DateTime(2011, 7, 12, 13, 42, 56, 345);
+            var d1 = d.ToLocalTime();
+            var d2 = d1.ToLocalTime();
+
+            Assert.AreEqual(d2.Year, d1.Year);
+            Assert.AreEqual(d2.Month, d1.Month);
+            Assert.AreEqual(d2.Day, d1.Day);
+            Assert.AreEqual(d2.Hour, d1.Hour);
+            Assert.AreEqual(d2.Minute, d1.Minute);
+            Assert.AreEqual(d2.Second, d1.Second);
+            Assert.AreEqual(d2.Millisecond, d1.Millisecond);
         }
 
         [Test]
@@ -320,19 +322,22 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual(2, dt.DayOfWeek);
         }
 
-        [Test]
-        public void GetTimeWorks()
-        {
-            var dt = new DateTime(1000, 1, 2, 0, 0, 0, DateTimeKind.Utc);
-            Assert.AreEqual((-30610137600000).ToString(), (dt.Ticks / 10000).ToString());
-        }
+        // Not C# API
 
-        [Test]
-        public void ValueOfWorks()
-        {
-            var dt = new DateTime(1000, 1, 2, 0, 0, 0, DateTimeKind.Utc);
-            Assert.AreEqual((-30610137600000).ToString(), (dt.Ticks / 10000).ToString());
-        }
+        //[Test]
+        //public void GetTimeWorks()
+        //{
+        //    var dt = new DateTime(1000, 1, 2, 0, 0, 0, DateTimeKind.Utc);
+        //    Assert.AreEqual((-30610137600000).ToString(), (dt.Ticks / 10000).ToString());
+        //}
+
+        // Not C# API
+        //[Test]
+        //public void ValueOfWorks()
+        //{
+        //    var dt = new DateTime(1000, 1, 2, 0, 0, 0, DateTimeKind.Utc);
+        //    Assert.AreEqual((-30610137600000).ToString(), (dt.Ticks / 10000).ToString());
+        //}
 
         [Test]
         public void TicksWorks()
@@ -408,7 +413,7 @@ namespace Bridge.ClientTest.SimpleTypes
         public void GetUTCDayWorks()
         {
             var dt = new DateTime(2011, 7, 12, 13, 42, 56, 345, DateTimeKind.Utc);
-            Assert.AreEqual(2, dt.Day);
+            Assert.AreEqual(12, dt.Day);
         }
 
         [Test]
@@ -447,13 +452,16 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void ParseExactUTCWorks()
         {
-            //var dt = DateTime.ParseExactUTC("2012-12-08", "yyyy-dd-MM");
+            // ParseExactUTC is not part of the .NET API, but we'll reuse this
+            // test to check that converting to Utc Kind from ParseExact works.
+            // var dt = DateTime.ParseExactUTC("2012-12-08", "yyyy-dd-MM");
             var d1 = DateTime.ParseExact("2012-12-08", "yyyy-dd-MM", true);
             var d2 = DateTime.SpecifyKind(d1, DateTimeKind.Utc);
+            var utc = new DateTime(2012, 8, 12, 0, 0, 0, DateTimeKind.Utc);
 
-            Assert.AreEqual(2012, d2.Year);
-            Assert.AreEqual(8, d2.Month);
-            Assert.AreEqual(12, d2.Day);
+            Assert.AreEqual(utc.Year, d2.Year);
+            Assert.AreEqual(utc.Month, d2.Month);
+            Assert.AreEqual(utc.Day, d2.Day);
         }
 
         [Test]
@@ -467,10 +475,11 @@ namespace Bridge.ClientTest.SimpleTypes
         {
             var d1 = DateTime.ParseExact("2012-12-08", "yyyy-dd-MM", CultureInfo.InvariantCulture, true);
             var d2 = DateTime.SpecifyKind(d1, DateTimeKind.Utc);
-            //var dt = DateTime.ParseExact("2012-12-08", "yyyy-dd-MM", CultureInfo.InvariantCulture);
-            Assert.AreEqual(2012, d1.Year);
-            Assert.AreEqual(8, d1.Month);
-            Assert.AreEqual(12, d1.Day);
+            var utc = new DateTime(2012, 8, 12, 0, 0, 0, DateTimeKind.Utc);
+
+            Assert.AreEqual(utc.Year, d2.Year);
+            Assert.AreEqual(utc.Month, d2.Month);
+            Assert.AreEqual(utc.Day, d2.Day);
         }
 
         [Test]

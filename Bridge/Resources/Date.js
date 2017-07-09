@@ -85,10 +85,10 @@
 
                 if (kind === 1) {
                     d = System.DateTime.create(date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds(), date.getUTCMilliseconds(), 1);
-                    d.setFullYear(date.getUTCFullYear);
+                    d.setFullYear(date.getUTCFullYear());
                 } else {
                     d = System.DateTime.create(date.getFullYear(), date.getMonth() + 1, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds(), kind);
-                    d.setFullYear(date.getFullYear);
+                    d.setFullYear(date.getFullYear());
                 }
                 
 
@@ -101,6 +101,10 @@
                 ticks = System.Int64.is64Bit(ticks) ? ticks.div(10000).toNumber() : ticks / 10000;
 
                 var d = new Date(ticks + System.DateTime.minOffset);
+
+                if (kind !== 1) {
+                    d = System.DateTime.addMilliseconds(d, d.getTimezoneOffset() * 60 * 1000);
+                }
 
                 d.kind = kind;
 
@@ -120,7 +124,7 @@
                 return System.Int64(d.getTime()).add(-System.DateTime.minOffset - offset).mul(10000);
             },
 
-            today: function () {
+            getToday: function () {
                 var d = new Date();
 
                 var d2 = new Date(d.getFullYear(), d.getMonth(), d.getDate());
@@ -130,7 +134,7 @@
                 return d2;
             },
 
-            now: function () {
+            getNow: function () {
                 var d = new Date();
 
                 d.kind = 2;
@@ -138,13 +142,12 @@
                 return d;
             },
 
-            utcNow: function () {
+            getUtcNow: function () {
                 return System.DateTime.create$1(new Date(), 1);
             },
 
-            timeOfDay: function (d) {
-                var d1 = new Date(d.getFullYear(), d.getMonth(), d.getDate());
-                d1.setFullYear(d.getFullYear);
+            getTimeOfDay: function (d) {
+                var d1 = System.DateTime.getDate(d);
 
                 return new System.TimeSpan((d - d1) * 10000);
             },
@@ -172,7 +175,13 @@
             },
 
             specifyKind: function (d, kind) {
-                return System.DateTime.create$2(d.getTime() * 10000, kind);
+                kind = (kind !== undefined) ? kind : 2;
+
+                var d = new Date(d.getTime());
+
+                d.kind = kind;
+
+                return d;
             },
 
             isUseGenitiveForm: function (format, index, tokenLen, patternToMatch) {
@@ -740,6 +749,13 @@
                                 zzh = -zzh;
                             }
                         } else if (token === "zzz") {
+                            if (str.substring(idx, idx + 1) === "Z") {
+                                utc = true;
+                                idx += 1;
+
+                                break;
+                            }
+
                             name = str.substring(idx, idx + 6);
                             idx += 6;
 
@@ -919,7 +935,7 @@
             },
 
             isDaylightSavingTime: function (d) {
-                var temp = System.DateTime.today();
+                var temp = System.DateTime.getToday();
 
                 temp.setMonth(0);
                 temp.setDate(1);
@@ -972,9 +988,14 @@
 
                 d.kind = (d.kind !== undefined) ? d.kind : 2;
 
-                var d1 = new Date(d.getTime());
+                var d1 = new Date(d.getTime()),
+                    day = d1.getDate();
 
-                d1.setMonth(d.getMonth() + v);
+                d1.setMonth(d1.getMonth() + v);
+
+                if (d1.getDate() != day) {
+                    d1.setDate(0);
+                }
 
                 d1.kind = d.kind;
 
@@ -1050,7 +1071,7 @@
                 d = (d !== undefined) ? d : System.DateTime.getDefaultValue();
                 v = (v !== undefined) ? v : 0;
 
-                return System.DateTime.addMilliseonds(d, v / 10000);
+                return System.DateTime.addMilliseconds(d, v / 10000);
             },
 
             add: function (d, value) {
@@ -1094,12 +1115,16 @@
             },
 
             getDate: function (d) {
-                d.kind = (d.kind !== undefined) ? d.kind : 2;
+                var kind = (d.kind !== undefined) ? d.kind : 2;
+
+                d = new Date(d.getTime());
 
                 d.setHours(0);
                 d.setMinutes(0);
                 d.setSeconds(0);
                 d.setMilliseconds(0);
+
+                d.kind = kind;
 
                 return d;
             },

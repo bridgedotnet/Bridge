@@ -8251,6 +8251,10 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 millisecond = (millisecond !== undefined) ? millisecond : 0;
                 kind = (kind !== undefined) ? kind : 2;
 
+                if (year === 1) {
+                    console.log('here', year);
+                }
+
                 var d;
 
                 if (kind === 1) {
@@ -8280,10 +8284,10 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
                 if (kind === 1) {
                     d = System.DateTime.create(date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds(), date.getUTCMilliseconds(), 1);
-                    d.setFullYear(date.getUTCFullYear);
+                    d.setFullYear(date.getUTCFullYear());
                 } else {
                     d = System.DateTime.create(date.getFullYear(), date.getMonth() + 1, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds(), kind);
-                    d.setFullYear(date.getFullYear);
+                    d.setFullYear(date.getFullYear());
                 }
                 
 
@@ -8297,17 +8301,29 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
                 var d = new Date(ticks + System.DateTime.minOffset);
 
+                if (kind !== 1) {
+                    d = System.DateTime.addMilliseconds(d, d.getTimezoneOffset() * 60 * 1000);
+                }
+
                 d.kind = kind;
 
                 return d;
             },
 
-            // Get the number of ticks since 0001-01-01T00:00:00.0000000
+            // Get the number of ticks since 0001-01-01T00:00:00.0000000 UTC
             getTicks: function (d) {
-                return System.Int64(d.getTime() + System.DateTime.minOffset).mul(10000);
+                d.kind = (d.kind !== undefined) ? d.kind : 2;
+
+                var offset = 0;
+
+                if (d.kind !== 1) {
+                    offset = d.getTimezoneOffset() * 60 * 1000;
+                }
+
+                return System.Int64(d.getTime()).add(-System.DateTime.minOffset - offset).mul(10000);
             },
 
-            today: function () {
+            getToday: function () {
                 var d = new Date();
 
                 var d2 = new Date(d.getFullYear(), d.getMonth(), d.getDate());
@@ -8317,7 +8333,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 return d2;
             },
 
-            now: function () {
+            getNow: function () {
                 var d = new Date();
 
                 d.kind = 2;
@@ -8325,13 +8341,12 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 return d;
             },
 
-            utcNow: function () {
+            getUtcNow: function () {
                 return System.DateTime.create$1(new Date(), 1);
             },
 
-            timeOfDay: function (d) {
-                var d1 = new Date(d.getFullYear(), d.getMonth(), d.getDate());
-                d1.setFullYear(d.getFullYear);
+            getTimeOfDay: function (d) {
+                var d1 = System.DateTime.getDate(d);
 
                 return new System.TimeSpan((d - d1) * 10000);
             },
@@ -8359,7 +8374,13 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             },
 
             specifyKind: function (d, kind) {
-                return System.DateTime.create$2(d.getTime() * 10000, kind);
+                kind = (kind !== undefined) ? kind : 2;
+
+                var d = new Date(d.getTime());
+
+                d.kind = kind;
+
+                return d;
             },
 
             isUseGenitiveForm: function (format, index, tokenLen, patternToMatch) {
@@ -8927,6 +8948,13 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                                 zzh = -zzh;
                             }
                         } else if (token === "zzz") {
+                            if (str.substring(idx, idx + 1) === "Z") {
+                                utc = true;
+                                idx += 1;
+
+                                break;
+                            }
+
                             name = str.substring(idx, idx + 6);
                             idx += 6;
 
@@ -9106,7 +9134,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             },
 
             isDaylightSavingTime: function (d) {
-                var temp = System.DateTime.today();
+                var temp = System.DateTime.getToday();
 
                 temp.setMonth(0);
                 temp.setDate(1);
@@ -9159,9 +9187,14 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
                 d.kind = (d.kind !== undefined) ? d.kind : 2;
 
-                var d1 = new Date(d.getTime());
+                var d1 = new Date(d.getTime()),
+                    day = d1.getDate();
 
-                d1.setMonth(d.getMonth() + v);
+                d1.setMonth(d1.getMonth() + v);
+
+                if (d1.getDate() != day) {
+                    d1.setDate(0);
+                }
 
                 d1.kind = d.kind;
 
@@ -9220,7 +9253,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 return d1;
             },
 
-            addMilliseonds: function (d, v) {
+            addMilliseconds: function (d, v) {
                 d = (d !== undefined) ? d : System.DateTime.getDefaultValue();
                 v = (v !== undefined) ? v : 0;
 
@@ -9237,7 +9270,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 d = (d !== undefined) ? d : System.DateTime.getDefaultValue();
                 v = (v !== undefined) ? v : 0;
 
-                return System.DateTime.addMilliseonds(d, v / 10000);
+                return System.DateTime.addMilliseconds(d, v / 10000);
             },
 
             add: function (d, value) {
@@ -9275,18 +9308,22 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 ny.setDate(1);
                 ny.setHours(0);
                 ny.setMinutes(0);
-                nu.setMilliseconds(0);
+                ny.setMilliseconds(0);
 
                 return Math.ceil((d - ny) / 864e5);
             },
 
             getDate: function (d) {
-                d.kind = (d.kind !== undefined) ? d.kind : 2;
+                var kind = (d.kind !== undefined) ? d.kind : 2;
+
+                d = new Date(d.getTime());
 
                 d.setHours(0);
                 d.setMinutes(0);
                 d.setSeconds(0);
                 d.setMilliseconds(0);
+
+                d.kind = kind;
 
                 return d;
             },
@@ -14596,7 +14633,15 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         toDateTime: function (value, formatProvider) {
             var typeCodes = scope.convert.typeCodes;
 
+            //if (formatProvider !== undefined) {
+            //    console.log('v0', value);
+            //}
+
             value = Bridge.unbox(value, true);
+
+            //if (formatProvider !== undefined) {
+            //    console.log('v00', value);
+            //}
 
             switch (typeof (value)) {
                 case "boolean":
@@ -14607,7 +14652,16 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                     scope.internal.throwInvalidCastEx(fromType, typeCodes.DateTime);
 
                 case "string":
+                    
+                    var temp = value;
+                    
                     value = System.DateTime.parse(value, formatProvider || null);
+
+                    if (value.toString().indexOf('2001') > 3) {
+                        console.log('1', temp);
+                        console.log('1', value);
+                        console.log('1', formatProvider);
+                    }
 
                     return value;
 
@@ -25785,7 +25839,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 this.seedArray = System.Array.init(56, 0, System.Int32);
             },
             ctor: function () {
-                System.Random.$ctor1.call(this, System.Int64.clip32(System.DateTime.getTicks(System.DateTime.now())));
+                System.Random.$ctor1.call(this, System.Int64.clip32(System.DateTime.getTicks(System.DateTime.getNow())));
             },
             $ctor1: function (seed) {
                 this.$initialize();

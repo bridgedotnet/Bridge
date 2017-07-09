@@ -33,6 +33,7 @@ namespace Bridge.ClientTest.ConvertTests
             var dateTimeFormat = CultureInfo.CurrentCulture.DateTimeFormat;
             string pattern = dateTimeFormat.LongDatePattern + ' ' + dateTimeFormat.LongTimePattern;
             string[] testValues = new string[expectedValues.Length];
+
             for (int i = 0; i < expectedValues.Length; i++)
             {
                 testValues[i] = expectedValues[i].ToString(pattern, dateTimeFormat);

@@ -24,7 +24,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             var d1 = new Date("05 October 2011 14:48 UTC");
 
-            Assert.AreEqual("2011-10-05T14:48:15.0000000Z", d1.ToISOString());
+            Assert.AreEqual("2011-10-05T14:48:00.000Z", d1.ToISOString());
         }
     }
 }

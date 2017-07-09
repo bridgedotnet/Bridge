@@ -109,7 +109,7 @@ namespace System
         /// </summary>
         public static extern DateTime Today
         {
-            [Template("System.DateTime.today()")]
+            [Template("System.DateTime.getToday()")]
             get;
         }
 
@@ -118,7 +118,7 @@ namespace System
         /// </summary>
         public static extern DateTime Now
         {
-            [Template("System.DateTime.now()")]
+            [Template("System.DateTime.getNow()")]
             get;
         }
 
@@ -127,7 +127,7 @@ namespace System
         /// </summary>
         public static extern DateTime UtcNow
         {
-            [Template("System.DateTime.utcNow()")]
+            [Template("System.DateTime.getUtcNow()")]
             get;
         }
 
@@ -355,7 +355,7 @@ namespace System
         /// </summary>
         public extern TimeSpan TimeOfDay
         {
-            [Template("System.DateTime.timeOfDay({this})")]
+            [Template("System.DateTime.getTimeOfDay({this})")]
             get;
         }
 
