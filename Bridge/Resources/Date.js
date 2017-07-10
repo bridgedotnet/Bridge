@@ -2,7 +2,7 @@
         inherits: function () { return [System.IComparable, System.IComparable$1(System.DateTime), System.IEquatable$1(System.DateTime), System.IFormattable]; },
         $kind: "struct",
         fields: {
-            kind: 2
+            kind: 0
         },
         methods: {
             $clone: function (to) { return this; }
@@ -22,7 +22,7 @@
             getMinValue: function () {
                 var d = new Date(System.DateTime.minOffset);
 
-                d.kind = 1;
+                d.kind = 0;
 
                 return d;
             },
@@ -31,7 +31,7 @@
             getMaxValue: function () {
                 var d = new Date(System.DateTime.maxOffset);
 
-                d.kind = 1;
+                d.kind = 0;
 
                 return d;
             },
@@ -41,7 +41,7 @@
 
                 d = new Date(d.getTime() + (d.getTimezoneOffset() * 60 * 1000));
 
-                d.kind = 2;
+                d.kind = 0;
 
                 return d;
             },
@@ -54,7 +54,7 @@
                 minute = (minute !== undefined) ? minute : 0;
                 second = (second !== undefined) ? second : 0;
                 millisecond = (millisecond !== undefined) ? millisecond : 0;
-                kind = (kind !== undefined) ? kind : 2;
+                kind = (kind !== undefined) ? kind : 0;
 
                 var d;
 
@@ -79,7 +79,7 @@
             },
 
             create$1: function (date, kind) {
-                kind = (kind !== undefined) ? kind : 2;
+                kind = (kind !== undefined) ? kind : 0;
 
                 var d;
 
@@ -96,7 +96,7 @@
             },
 
             create$2: function (ticks, kind) {
-                kind = (kind !== undefined) ? kind : 2;
+                kind = (kind !== undefined) ? kind : 0;
 
                 ticks = System.Int64.is64Bit(ticks) ? ticks.div(10000).toNumber() : ticks / 10000;
 
@@ -113,7 +113,7 @@
 
             // Get the number of ticks since 0001-01-01T00:00:00.0000000 UTC
             getTicks: function (d) {
-                d.kind = (d.kind !== undefined) ? d.kind : 2;
+                d.kind = (d.kind !== undefined) ? d.kind : 0;
 
                 var offset = 0;
 
@@ -169,13 +169,13 @@
             },
 
             getKind: function (d) {
-                var kind = (d.kind !== undefined) ? d.kind : 2;
+                var kind = (d.kind !== undefined) ? d.kind : 0;
 
                 return kind;
             },
 
             specifyKind: function (d, kind) {
-                kind = (kind !== undefined) ? kind : 2;
+                kind = (kind !== undefined) ? kind : 0;
 
                 var d = new Date(d.getTime());
 
@@ -219,7 +219,7 @@
 
             format: function (d, f, p) {
                 var me = this,
-                    kind = d.kind || 2,
+                    kind = d.kind || 0,
                     isUtc = (kind === 1),
                     df = (p || System.Globalization.CultureInfo.getCurrentCulture()).getFormat(System.Globalization.DateTimeFormatInfo),
                     year = isUtc ? d.getUTCFullYear() : d.getFullYear(),
@@ -971,7 +971,7 @@
                 d = (d !== undefined) ? d : System.DateTime.getDefaultValue();
                 v = (v !== undefined) ? v : 0;
 
-                d.kind = (d.kind !== undefined) ? d.kind : 2;
+                d.kind = (d.kind !== undefined) ? d.kind : 0;
 
                 var d1 = new Date(d.getTime());
 
@@ -986,7 +986,7 @@
                 d = (d !== undefined) ? d : System.DateTime.getDefaultValue();
                 v = (v !== undefined) ? v : 0;
 
-                d.kind = (d.kind !== undefined) ? d.kind : 2;
+                d.kind = (d.kind !== undefined) ? d.kind : 0;
 
                 var d1 = new Date(d.getTime()),
                     day = d1.getDate();
@@ -1006,7 +1006,7 @@
                 d = (d !== undefined) ? d : System.DateTime.getDefaultValue();
                 v = (v !== undefined) ? v : 0;
 
-                d.kind = (d.kind !== undefined) ? d.kind : 2;
+                d.kind = (d.kind !== undefined) ? d.kind : 0;
 
                 var d1 = new Date(d.getTime() + Math.round(v * 864e5));
 
@@ -1019,7 +1019,7 @@
                 d = (d !== undefined) ? d : System.DateTime.getDefaultValue();
                 v = (v !== undefined) ? v : 0;
 
-                d.kind = (d.kind !== undefined) ? d.kind : 2;
+                d.kind = (d.kind !== undefined) ? d.kind : 0;
 
                 var d1 = new Date(d.getTime() + Math.round(v * 36e5));
 
@@ -1032,7 +1032,7 @@
                 d = (d !== undefined) ? d : System.DateTime.getDefaultValue();
                 v = (v !== undefined) ? v : 0;
 
-                d.kind = (d.kind !== undefined) ? d.kind : 2;
+                d.kind = (d.kind !== undefined) ? d.kind : 0;
 
                 var d1 = new Date(d.getTime() + Math.round(v * 6e4));
 
@@ -1045,7 +1045,7 @@
                 d = (d !== undefined) ? d : System.DateTime.getDefaultValue();
                 v = (v !== undefined) ? v : 0;
 
-                d.kind = (d.kind !== undefined) ? d.kind : 2;
+                d.kind = (d.kind !== undefined) ? d.kind : 0;
 
                 var d1 = new Date(d.getTime() + Math.round(v * 1e3));
                 
@@ -1058,7 +1058,7 @@
                 d = (d !== undefined) ? d : System.DateTime.getDefaultValue();
                 v = (v !== undefined) ? v : 0;
 
-                d.kind = (d.kind !== undefined) ? d.kind : 2;
+                d.kind = (d.kind !== undefined) ? d.kind : 0;
 
                 var d1 = new Date(d.getTime() + Math.round(v));
 
@@ -1075,7 +1075,7 @@
             },
 
             add: function (d, value) {
-                d.kind = (d.kind !== undefined) ? d.kind : 2;
+                d.kind = (d.kind !== undefined) ? d.kind : 0;
 
                 var d1 = new Date(d.getTime() + value.ticks.div(10000).toNumber());
 
@@ -1085,7 +1085,7 @@
             },
 
             subtract: function (d, value) {
-                d.kind = (d.kind !== undefined) ? d.kind : 2;
+                d.kind = (d.kind !== undefined) ? d.kind : 0;
 
                 var d1 = new Date(d.getTime() - value.ticks.div(10000).toNumber());
 
@@ -1115,7 +1115,7 @@
             },
 
             getDate: function (d) {
-                var kind = (d.kind !== undefined) ? d.kind : 2;
+                var kind = (d.kind !== undefined) ? d.kind : 0;
 
                 d = new Date(d.getTime());
 
@@ -1130,49 +1130,49 @@
             },
 
             getDayOfWeek: function (d) {
-                d.kind = (d.kind !== undefined) ? d.kind : 2;
+                d.kind = (d.kind !== undefined) ? d.kind : 0;
 
                 return (d.kind === 1) ? d.getUTCDay() : d.getDay();
             },
 
             getYear: function (d) {
-                d.kind = (d.kind !== undefined) ? d.kind : 2;
+                d.kind = (d.kind !== undefined) ? d.kind : 0;
 
                 return (d.kind === 1) ? d.getUTCFullYear() : d.getFullYear();
             },
 
             getMonth: function (d) {
-                d.kind = (d.kind !== undefined) ? d.kind : 2;
+                d.kind = (d.kind !== undefined) ? d.kind : 0;
 
                 return ((d.kind === 1) ? d.getUTCMonth() : d.getMonth()) + 1;
             },
 
             getDay: function (d) {
-                d.kind = (d.kind !== undefined) ? d.kind : 2;
+                d.kind = (d.kind !== undefined) ? d.kind : 0;
 
                 return (d.kind === 1) ? d.getUTCDate() : d.getDate();
             },
 
             getHour: function (d) {
-                d.kind = (d.kind !== undefined) ? d.kind : 2;
+                d.kind = (d.kind !== undefined) ? d.kind : 0;
 
                 return (d.kind === 1) ? d.getUTCHours() : d.getHours();
             },
 
             getMinute: function (d) {
-                d.kind = (d.kind !== undefined) ? d.kind : 2;
+                d.kind = (d.kind !== undefined) ? d.kind : 0;
 
                 return (d.kind === 1) ? d.getUTCMinutes() : d.getMinutes();
             },
 
             getSecond: function (d) {
-                d.kind = (d.kind !== undefined) ? d.kind : 2;
+                d.kind = (d.kind !== undefined) ? d.kind : 0;
 
                 return (d.kind === 1) ? d.getUTCSeconds() : d.getSeconds();
             },
 
             getMillisecond: function (d) {
-                d.kind = (d.kind !== undefined) ? d.kind : 2;
+                d.kind = (d.kind !== undefined) ? d.kind : 0;
 
                 return (d.kind === 1) ? d.getUTCMilliseconds() : d.getMilliseconds();
             },
