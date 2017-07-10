@@ -122,6 +122,7 @@
                 public const string ADD = "add";
                 public const string SUB = "sub";
                 public const string MUL = "mul";
+                public const string UMUL = "umul";
                 public const string DIV = "div";
                 public const string TO_NUMBER_DIVIDED = "toNumberDivided";
                 public const string MOD = "mod";

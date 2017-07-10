@@ -323,7 +323,7 @@
                 this._b = Bridge.Int.sxs((System.UInt16.parse(s.substr(8, 4), 16)) & 65535);
                 this._c = Bridge.Int.sxs((System.UInt16.parse(s.substr(12, 4), 16)) & 65535);
                 for (var i = 8; i < 16; i = (i + 1) | 0) {
-                    r[System.Array.index(((i - 8) | 0), r)] = System.Byte.parse(s.substr(((i * 2) | 0), 2), 16);
+                    r[System.Array.index(((i - 8) | 0), r)] = System.Byte.parse(s.substr(Bridge.Int.mul(i, 2), 2), 16);
                 }
 
                 this._d = r[System.Array.index(0, r)];

@@ -502,6 +502,27 @@ namespace Bridge.Translator
                 return;
             }
 
+            if (binaryOperatorExpression.Operator == BinaryOperatorType.Multiply &&
+                !(this.Emitter.IsJavaScriptOverflowMode || ConversionBlock.InsideOverflowContext(this.Emitter, binaryOperatorExpression)) &&
+                (
+                    (Helpers.IsInteger32Type(leftResolverResult.Type, this.Emitter.Resolver) &&
+                    Helpers.IsInteger32Type(rightResolverResult.Type, this.Emitter.Resolver) &&
+                    Helpers.IsInteger32Type(resolveOperator.Type, this.Emitter.Resolver)) ||
+
+                    (Helpers.IsInteger32Type(this.Emitter.Resolver.Resolver.GetExpectedType(binaryOperatorExpression.Left), this.Emitter.Resolver) &&
+                    Helpers.IsInteger32Type(this.Emitter.Resolver.Resolver.GetExpectedType(binaryOperatorExpression.Right), this.Emitter.Resolver) &&
+                    Helpers.IsInteger32Type(resolveOperator.Type, this.Emitter.Resolver))
+                ))
+            {
+                isUint = NullableType.GetUnderlyingType(resolveOperator.Type).IsKnownType(KnownTypeCode.UInt32);
+                this.Write(JS.Types.BRIDGE_INT + "." + (isUint ? JS.Funcs.Math.UMUL : JS.Funcs.Math.MUL) + "(");
+                this.WritePart(binaryOperatorExpression.Left, toStringForLeft, leftResolverResult);
+                this.Write(", ");
+                this.WritePart(binaryOperatorExpression.Right, toStringForRight, rightResolverResult);
+                this.Write(")");
+                return;
+            }
+
             if (binaryOperatorExpression.Operator == BinaryOperatorType.Add ||
                 binaryOperatorExpression.Operator == BinaryOperatorType.Subtract)
             {

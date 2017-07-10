@@ -119,7 +119,7 @@
                     return System.Collections.HashHelpers.primes[System.Array.index(0, System.Collections.HashHelpers.primes)];
                 },
                 expandPrime: function (oldSize) {
-                    var newSize = (2 * oldSize) | 0;
+                    var newSize = Bridge.Int.mul(2, oldSize);
                     if ((newSize >>> 0) > System.Collections.HashHelpers.MaxPrimeArrayLength && System.Collections.HashHelpers.MaxPrimeArrayLength > oldSize) {
                         return System.Collections.HashHelpers.MaxPrimeArrayLength;
                     }

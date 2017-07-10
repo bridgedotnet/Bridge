@@ -150,7 +150,7 @@
             },
             enqueue: function (item) {
                 if (this._size === this._array.length) {
-                    var newcapacity = (Bridge.Int.div(((this._array.length * System.Collections.Generic.Queue$1(T).GrowFactor) | 0), 100)) | 0;
+                    var newcapacity = (Bridge.Int.div(Bridge.Int.mul(this._array.length, System.Collections.Generic.Queue$1(T).GrowFactor), 100)) | 0;
                     if (newcapacity < ((this._array.length + System.Collections.Generic.Queue$1(T).MinimumGrow) | 0)) {
                         newcapacity = (this._array.length + System.Collections.Generic.Queue$1(T).MinimumGrow) | 0;
                     }

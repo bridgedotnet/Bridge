@@ -4417,7 +4417,7 @@
         },
 
         mul: function (a, b) {
-            return Bridge.hasValue$1(a, b) ? a * b : null;
+            return Bridge.hasValue$1(a, b) ? Bridge.Int.mul(a, b) : null;
         },
 
         sl: function (a, b) {
@@ -6609,7 +6609,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             },
 
             div: function (x, y) {
-                if (!Bridge.isNumber(x) || !Bridge.isNumber(y)) {
+                if (x == null || y == null) {
                     return null;
                 }
 
@@ -6621,7 +6621,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             },
 
             mod: function (x, y) {
-                if (!Bridge.isNumber(x) || !Bridge.isNumber(y)) {
+                if (x == null || y == null) {
                     return null;
                 }
 
@@ -6705,6 +6705,30 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
             sign: function (x) {
                 return Bridge.isNumber(x) ? (x === 0 ? 0 : (x < 0 ? -1 : 1)) : null;
+            },
+
+            $mul: Math.imul || function (a, b) {
+                var ah = (a >>> 16) & 0xffff,
+                    al = a & 0xffff,
+                    bh = (b >>> 16) & 0xffff,
+                    bl = b & 0xffff;
+                return ((al * bl) + (((ah * bl + al * bh) << 16) >>> 0) | 0);
+            },
+
+            mul: function (a, b) {
+                if (a == null || b == null) {
+                    return null;
+                }
+
+                return Bridge.Int.$mul(a, b);
+            },
+
+            umul: function (a, b) {
+                if (a == null || b == null) {
+                    return null;
+                }
+
+                return Bridge.Int.$mul(a, b) >>> 0;
             }
         }
     });
@@ -19463,7 +19487,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                 this._b = Bridge.Int.sxs((System.UInt16.parse(s.substr(8, 4), 16)) & 65535);
                 this._c = Bridge.Int.sxs((System.UInt16.parse(s.substr(12, 4), 16)) & 65535);
                 for (var i = 8; i < 16; i = (i + 1) | 0) {
-                    r[System.Array.index(((i - 8) | 0), r)] = System.Byte.parse(s.substr(((i * 2) | 0), 2), 16);
+                    r[System.Array.index(((i - 8) | 0), r)] = System.Byte.parse(s.substr(Bridge.Int.mul(i, 2), 2), 16);
                 }
 
                 this._d = r[System.Array.index(0, r)];
@@ -25543,7 +25567,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 this.seedArray[System.Array.index(55, this.seedArray)] = mj;
                 mk = 1;
                 for (var i = 1; i < 55; i = (i + 1) | 0) { //Apparently the range [1..55] is special (Knuth) and so we're wasting the 0'th position.
-                    ii = (((21 * i) | 0)) % 55;
+                    ii = (Bridge.Int.mul(21, i)) % 55;
                     this.seedArray[System.Array.index(ii, this.seedArray)] = mk;
                     mk = (mj - mk) | 0;
                     if (mk < 0) {
@@ -25815,7 +25839,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                         throw new System.ArgumentOutOfRangeException("length", (715827882).toString());
                     }
 
-                    var chArrayLength = (length * 3) | 0;
+                    var chArrayLength = Bridge.Int.mul(length, 3);
 
                     var chArray = System.Array.init(chArrayLength, 0, System.Char);
                     var i = 0;
@@ -26278,7 +26302,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 }
 
                 this.m_array = System.Array.init(System.Collections.BitArray.getArrayLength(bytes.length, System.Collections.BitArray.BytesPerInt32), 0, System.Int32);
-                this.m_length = (bytes.length * System.Collections.BitArray.BitsPerByte) | 0;
+                this.m_length = Bridge.Int.mul(bytes.length, System.Collections.BitArray.BitsPerByte);
 
                 var i = 0;
                 var j = 0;
@@ -26332,7 +26356,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                 }
 
                 this.m_array = System.Array.init(values.length, 0, System.Int32);
-                this.m_length = (values.length * System.Collections.BitArray.BitsPerInt32) | 0;
+                this.m_length = Bridge.Int.mul(values.length, System.Collections.BitArray.BitsPerInt32);
 
                 System.Array.copy(values, 0, this.m_array, 0, values.length);
 
@@ -26383,7 +26407,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
 
                     var b = Bridge.cast(array, System.Array.type(System.Byte));
                     for (var i = 0; i < arrayLength; i = (i + 1) | 0) {
-                        b[System.Array.index(((index + i) | 0), b)] = ((this.m_array[System.Array.index(((Bridge.Int.div(i, 4)) | 0), this.m_array)] >> ((((i % 4) * 8) | 0))) & 255) & 255; // Shift to bring the required byte to LSB, then mask
+                        b[System.Array.index(((index + i) | 0), b)] = ((this.m_array[System.Array.index(((Bridge.Int.div(i, 4)) | 0), this.m_array)] >> (Bridge.Int.mul((i % 4), 8))) & 255) & 255; // Shift to bring the required byte to LSB, then mask
                     }
                 } else if (Bridge.is(array, System.Array.type(System.Boolean))) {
                     if (((array.length - index) | 0) < this.m_length) {
@@ -27800,7 +27824,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             },
             enqueue: function (item) {
                 if (this._size === this._array.length) {
-                    var newcapacity = (Bridge.Int.div(((this._array.length * System.Collections.Generic.Queue$1(T).GrowFactor) | 0), 100)) | 0;
+                    var newcapacity = (Bridge.Int.div(Bridge.Int.mul(this._array.length, System.Collections.Generic.Queue$1(T).GrowFactor), 100)) | 0;
                     if (newcapacity < ((this._array.length + System.Collections.Generic.Queue$1(T).MinimumGrow) | 0)) {
                         newcapacity = (this._array.length + System.Collections.Generic.Queue$1(T).MinimumGrow) | 0;
                     }
@@ -28190,7 +28214,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
             push: function (item) {
                 if (this._size === this._array.length) {
                     var localArray = { v : this._array };
-                    System.Array.resize(localArray, (this._array.length === 0) ? System.Collections.Generic.Stack$1(T).DefaultCapacity : ((2 * this._array.length) | 0), Bridge.getDefaultValue(T));
+                    System.Array.resize(localArray, (this._array.length === 0) ? System.Collections.Generic.Stack$1(T).DefaultCapacity : Bridge.Int.mul(2, this._array.length), Bridge.getDefaultValue(T));
                     this._array = localArray.v;
                 }
                 this._array[System.Array.index(Bridge.identity(this._size, (this._size = (this._size + 1) | 0)), this._array)] = item;
@@ -28448,7 +28472,7 @@ Bridge.define("System.Text.RegularExpressions.RegexParser", {
                     return System.Collections.HashHelpers.primes[System.Array.index(0, System.Collections.HashHelpers.primes)];
                 },
                 expandPrime: function (oldSize) {
-                    var newSize = (2 * oldSize) | 0;
+                    var newSize = Bridge.Int.mul(2, oldSize);
                     if ((newSize >>> 0) > System.Collections.HashHelpers.MaxPrimeArrayLength && System.Collections.HashHelpers.MaxPrimeArrayLength > oldSize) {
                         return System.Collections.HashHelpers.MaxPrimeArrayLength;
                     }

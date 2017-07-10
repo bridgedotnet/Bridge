@@ -37,7 +37,7 @@
                 this.seedArray[System.Array.index(55, this.seedArray)] = mj;
                 mk = 1;
                 for (var i = 1; i < 55; i = (i + 1) | 0) { //Apparently the range [1..55] is special (Knuth) and so we're wasting the 0'th position.
-                    ii = (((21 * i) | 0)) % 55;
+                    ii = (Bridge.Int.mul(21, i)) % 55;
                     this.seedArray[System.Array.index(ii, this.seedArray)] = mk;
                     mk = (mj - mk) | 0;
                     if (mk < 0) {

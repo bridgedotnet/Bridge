@@ -115,7 +115,7 @@
                 }
 
                 this.m_array = System.Array.init(System.Collections.BitArray.getArrayLength(bytes.length, System.Collections.BitArray.BytesPerInt32), 0, System.Int32);
-                this.m_length = (bytes.length * System.Collections.BitArray.BitsPerByte) | 0;
+                this.m_length = Bridge.Int.mul(bytes.length, System.Collections.BitArray.BitsPerByte);
 
                 var i = 0;
                 var j = 0;
@@ -169,7 +169,7 @@
                 }
 
                 this.m_array = System.Array.init(values.length, 0, System.Int32);
-                this.m_length = (values.length * System.Collections.BitArray.BitsPerInt32) | 0;
+                this.m_length = Bridge.Int.mul(values.length, System.Collections.BitArray.BitsPerInt32);
 
                 System.Array.copy(values, 0, this.m_array, 0, values.length);
 
@@ -220,7 +220,7 @@
 
                     var b = Bridge.cast(array, System.Array.type(System.Byte));
                     for (var i = 0; i < arrayLength; i = (i + 1) | 0) {
-                        b[System.Array.index(((index + i) | 0), b)] = ((this.m_array[System.Array.index(((Bridge.Int.div(i, 4)) | 0), this.m_array)] >> ((((i % 4) * 8) | 0))) & 255) & 255; // Shift to bring the required byte to LSB, then mask
+                        b[System.Array.index(((index + i) | 0), b)] = ((this.m_array[System.Array.index(((Bridge.Int.div(i, 4)) | 0), this.m_array)] >> (Bridge.Int.mul((i % 4), 8))) & 255) & 255; // Shift to bring the required byte to LSB, then mask
                     }
                 } else if (Bridge.is(array, System.Array.type(System.Boolean))) {
                     if (((array.length - index) | 0) < this.m_length) {
