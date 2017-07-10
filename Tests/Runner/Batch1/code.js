@@ -33450,57 +33450,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.SimpleTypes.JsDateTimeTests", {
         methods: {
-            AssertDate$1: function (dt, kind, ticks, year, month, day, hour, minute, second, ms) {
-                if (year === void 0) { year = null; }
-                if (month === void 0) { month = null; }
-                if (day === void 0) { day = null; }
-                if (hour === void 0) { hour = null; }
-                if (minute === void 0) { minute = null; }
-                if (second === void 0) { second = null; }
-                if (ms === void 0) { ms = null; }
-                Bridge.Test.NUnit.Assert.AreEqual(kind, System.DateTime.getKind(dt), "Kind");
-                Bridge.Test.NUnit.Assert.AreEqual(ticks.toString(), System.DateTime.getTicks(dt).toString(), "Ticks");
-
-                if (System.Nullable.hasValue(year)) {
-                    Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(year), System.DateTime.getYear(dt), "Year");
-                }
-
-                if (System.Nullable.hasValue(month)) {
-                    Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(month), System.DateTime.getMonth(dt), "Month");
-                }
-
-                if (System.Nullable.hasValue(day)) {
-                    Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(day), System.DateTime.getDay(dt), "Day");
-                }
-
-                if (System.Nullable.hasValue(hour)) {
-                    Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(hour), System.DateTime.getHour(dt), "Hour");
-                }
-
-                if (System.Nullable.hasValue(minute)) {
-                    Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(minute), System.DateTime.getMinute(dt), "Minute");
-                }
-
-                if (System.Nullable.hasValue(second)) {
-                    Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(second), System.DateTime.getSecond(dt), "Second");
-                }
-
-                if (System.Nullable.hasValue(ms)) {
-                    Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(ms), System.DateTime.getMillisecond(dt), "Millisecond");
-                }
-            },
-            AssertDate: function (expected, actual) {
-                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getKind(expected), System.DateTime.getKind(actual), "Kind");
-                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getTicks(expected).toString(), System.DateTime.getTicks(actual).toString(), "Ticks");
-
-                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getYear(expected), System.DateTime.getYear(actual), "Year");
-                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getMonth(expected), System.DateTime.getMonth(actual), "Month");
-                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getDay(expected), System.DateTime.getDay(actual), "Day");
-                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getHour(expected), System.DateTime.getHour(actual), "Hour");
-                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getMinute(expected), System.DateTime.getMinute(actual), "Minute");
-                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getSecond(expected), System.DateTime.getSecond(actual), "Second");
-                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getMillisecond(expected), System.DateTime.getMillisecond(actual), "Millisecond");
-            },
             TypePropertiesAreCorrect_SPI_1607_1608_1609: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("System.DateTime", Bridge.Reflection.getTypeFullName(System.DateTime), "#2064");
                 Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isClass(System.DateTime));
@@ -33527,17 +33476,17 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             DefaultConstructorWorks_SPI_1606: function () {
                 var dt = System.DateTime.getDefaultValue();
                 // #1606
-                this.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64(0), 1, 1, 1);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64(0), 1, 1, 1);
             },
             DefaultValueWorks_SPI_1606: function () {
                 var dt = Bridge.getDefaultValue(System.DateTime);
                 // #1606
-                this.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64(0), 1, 1, 1);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64(0), 1, 1, 1);
             },
             CreatingInstanceReturnsDateWithZeroValue_SPI_1606: function () {
                 var dt = Bridge.createInstance(System.DateTime);
                 // #1606
-                this.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64(0), 1, 1, 1);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64(0), 1, 1, 1);
             },
             MillisecondSinceEpochConstructorWorks: function () {
                 var dt = System.DateTime.create$2(System.Int64([250327040,10]), System.DateTimeKind.Utc);
@@ -33548,85 +33497,85 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual(1, System.DateTime.getYear(dt));
 
                 var dt1 = System.DateTime.create$2(System.Int64(0));
-                this.AssertDate$1(dt1, System.DateTimeKind.Unspecified, System.Int64(0), 1, 1, 1);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt1, System.DateTimeKind.Unspecified, System.Int64(0), 1, 1, 1);
 
                 var dt2 = System.DateTime.create$2(System.Int64([-1486618624,232830643]));
-                this.AssertDate$1(dt2, System.DateTimeKind.Unspecified, System.Int64([-1486618624,232830643]), 3169, 11, 16);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt2, System.DateTimeKind.Unspecified, System.Int64([-1486618624,232830643]), 3169, 11, 16);
             },
             LongConstructorUtcWorks: function () {
                 var dt = System.DateTime.create$2(System.Int64([250327040,10]), System.DateTimeKind.Local);
                 Bridge.Test.NUnit.Assert.AreEqual(1, System.DateTime.getYear(dt));
 
                 var dt1 = System.DateTime.create$2(System.Int64(0), System.DateTimeKind.Local);
-                this.AssertDate$1(dt1, System.DateTimeKind.Local, System.Int64(0), 1, 1, 1);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt1, System.DateTimeKind.Local, System.Int64(0), 1, 1, 1);
 
                 var dt2 = System.DateTime.create$2(System.Int64([-1486618624,232830643]), System.DateTimeKind.Local);
-                this.AssertDate$1(dt2, System.DateTimeKind.Local, System.Int64([-1486618624,232830643]), 3169, 11, 16);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt2, System.DateTimeKind.Local, System.Int64([-1486618624,232830643]), 3169, 11, 16);
 
                 var dt3 = System.DateTime.create$2(System.Int64([250327040,10]), System.DateTimeKind.Utc);
                 Bridge.Test.NUnit.Assert.AreEqual(1, System.DateTime.getYear(dt3));
 
                 var dt4 = System.DateTime.create$2(System.Int64(0), System.DateTimeKind.Utc);
-                this.AssertDate$1(dt4, System.DateTimeKind.Utc, System.Int64(0), 1, 1, 1);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt4, System.DateTimeKind.Utc, System.Int64(0), 1, 1, 1);
 
                 var dt5 = System.DateTime.create$2(System.Int64([-1486618624,232830643]), System.DateTimeKind.Utc);
-                this.AssertDate$1(dt5, System.DateTimeKind.Utc, System.Int64([-1486618624,232830643]), 3169, 11, 16);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt5, System.DateTimeKind.Utc, System.Int64([-1486618624,232830643]), 3169, 11, 16);
             },
             YMDConstructorWorks: function () {
                 var dt = System.DateTime.create(2011, 7, 12);
-                this.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64([-956579840,147721789]), 2011, 7, 12);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64([-956579840,147721789]), 2011, 7, 12);
             },
             YMDHConstructorWorks: function () {
                 var dt = System.DateTime.create(2011, 7, 12, 13, 0, 0);
-                this.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64([-1108015104,147721898]), 2011, 7, 12, 13);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64([-1108015104,147721898]), 2011, 7, 12, 13);
             },
             YMDHConstructorUtcWorks: function () {
                 var dt = System.DateTime.create(2011, 7, 12, 13, 0, 0, 0, System.DateTimeKind.Local);
-                this.AssertDate$1(dt, System.DateTimeKind.Local, System.Int64([-1108015104,147721898]), 2011, 7, 12, 13);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt, System.DateTimeKind.Local, System.Int64([-1108015104,147721898]), 2011, 7, 12, 13);
 
                 var dt1 = System.DateTime.create(2011, 7, 12, 13, 0, 0, 0, System.DateTimeKind.Utc);
-                this.AssertDate$1(dt1, System.DateTimeKind.Utc, System.Int64([-1108015104,147721898]), 2011, 7, 12, 13);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt1, System.DateTimeKind.Utc, System.Int64([-1108015104,147721898]), 2011, 7, 12, 13);
             },
             YMDHNConstructorWorks: function () {
                 var dt = System.DateTime.create(2011, 7, 12, 13, 42, 0, 0);
-                this.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64([-1677818880,147721904]), 2011, 7, 12, 13, 42);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64([-1677818880,147721904]), 2011, 7, 12, 13, 42);
             },
             YMDHNConstructorUtcWorks: function () {
                 var dt = System.DateTime.create(2011, 7, 12, 13, 42, 0, 0, System.DateTimeKind.Local);
-                this.AssertDate$1(dt, System.DateTimeKind.Local, System.Int64([-1677818880,147721904]), 2011, 7, 12, 13, 42);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt, System.DateTimeKind.Local, System.Int64([-1677818880,147721904]), 2011, 7, 12, 13, 42);
 
                 var dt1 = System.DateTime.create(2011, 7, 12, 13, 42, 0, 0, System.DateTimeKind.Utc);
-                this.AssertDate$1(dt1, System.DateTimeKind.Utc, System.Int64([-1677818880,147721904]), 2011, 7, 12, 13, 42);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt1, System.DateTimeKind.Utc, System.Int64([-1677818880,147721904]), 2011, 7, 12, 13, 42);
             },
             YMDHNSConstructorWorks: function () {
                 var dt = System.DateTime.create(2011, 7, 12, 13, 42, 56);
-                this.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64([-1117818880,147721904]), 2011, 7, 12, 13, 42, 56);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64([-1117818880,147721904]), 2011, 7, 12, 13, 42, 56);
             },
             YMDHNSConstructorUtcWorks: function () {
                 var dt = System.DateTime.create(2011, 7, 12, 13, 42, 56, 0, System.DateTimeKind.Local);
-                this.AssertDate$1(dt, System.DateTimeKind.Local, System.Int64([-1117818880,147721904]), 2011, 7, 12, 13, 42, 56);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt, System.DateTimeKind.Local, System.Int64([-1117818880,147721904]), 2011, 7, 12, 13, 42, 56);
 
                 var dt1 = System.DateTime.create(2011, 7, 12, 13, 42, 56, 0, System.DateTimeKind.Utc);
-                this.AssertDate$1(dt1, System.DateTimeKind.Utc, System.Int64([-1117818880,147721904]), 2011, 7, 12, 13, 42, 56);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt1, System.DateTimeKind.Utc, System.Int64([-1117818880,147721904]), 2011, 7, 12, 13, 42, 56);
             },
             YMDHNSUConstructorWorks: function () {
                 var dt = System.DateTime.create(2011, 7, 12, 13, 42, 56, 345);
-                this.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64([-1114368880,147721904]), 2011, 7, 12, 13, 42, 56, 345);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64([-1114368880,147721904]), 2011, 7, 12, 13, 42, 56, 345);
             },
             YMDHNSUConstructorUtcWorks: function () {
                 var dt = System.DateTime.create(2011, 7, 12, 13, 42, 56, 345, System.DateTimeKind.Local);
-                this.AssertDate$1(dt, System.DateTimeKind.Local, System.Int64([-1114368880,147721904]), 2011, 7, 12, 13, 42, 56, 345);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt, System.DateTimeKind.Local, System.Int64([-1114368880,147721904]), 2011, 7, 12, 13, 42, 56, 345);
 
                 var dt1 = System.DateTime.create(2011, 7, 12, 13, 42, 56, 345, System.DateTimeKind.Utc);
-                this.AssertDate$1(dt1, System.DateTimeKind.Utc, System.Int64([-1114368880,147721904]), 2011, 7, 12, 13, 42, 56, 345);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt1, System.DateTimeKind.Utc, System.Int64([-1114368880,147721904]), 2011, 7, 12, 13, 42, 56, 345);
             },
             MinWorks: function () {
                 var dt = System.DateTime.getMinValue();
-                this.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64(0), 1, 1, 1);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64(0), 1, 1, 1);
             },
             MaxWorks: function () {
                 var dt = System.DateTime.getMaxValue();
-                this.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64([-197705729,734668917]), 9999, 12, 31);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64([-197705729,734668917]), 9999, 12, 31);
             },
             NowWorks: function () {
                 var dt = System.DateTime.getNow();
@@ -33656,14 +33605,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var d1 = System.DateTime.toUniversalTime(d);
                 var d2 = System.DateTime.toUniversalTime(d1);
 
-                this.AssertDate(d2, d1);
+                Bridge.ClientTestHelper.DateHelper.AssertDate(d2, d1);
             },
             ToLocalWorksDoesNotDoubleCompute: function () {
                 var d = System.DateTime.create(2011, 7, 12, 13, 42, 56, 345);
                 var d1 = System.DateTime.toLocalTime(d);
                 var d2 = System.DateTime.toLocalTime(d1);
 
-                this.AssertDate(d2, d1);
+                Bridge.ClientTestHelper.DateHelper.AssertDate(d2, d1);
             },
             TodayWorks: function () {
                 var dt = System.DateTime.getToday();
@@ -33767,18 +33716,18 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             ParseWorks: function () {
                 var dt = System.DateTime.parse("Aug 12, 2012");
-                this.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64([-1929740288,147801652]), 2012, 8, 12);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64([-1929740288,147801652]), 2012, 8, 12);
             },
             ParseExactWorks: function () {
                 var dt = System.DateTime.parseExact("2012-12-08", "yyyy-dd-MM");
-                this.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64([-1929740288,147801652]), 2012, 8, 12);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64([-1929740288,147801652]), 2012, 8, 12);
             },
             ParseExactReturnsNullIfTheInputIsInvalid: function () {
                 Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.JsDateTimeTests.f1);
             },
             ParseExactWithCultureWorks: function () {
                 var dt = System.DateTime.parseExact("2012-12-08", "yyyy-dd-MM", System.Globalization.CultureInfo.invariantCulture);
-                this.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64([-1929740288,147801652]), 2012, 8, 12);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64([-1929740288,147801652]), 2012, 8, 12);
             },
             ParseExactWithCultureReturnsNullIfTheInputIsInvalid: function () {
                 Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.JsDateTimeTests.f2);
@@ -33791,7 +33740,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var d2 = System.DateTime.specifyKind(d1, System.DateTimeKind.Utc);
                 var utc = System.DateTime.create(2012, 8, 12, 0, 0, 0, 0, System.DateTimeKind.Utc);
 
-                this.AssertDate(utc, d2);
+                Bridge.ClientTestHelper.DateHelper.AssertDate(utc, d2);
             },
             ParseExactUtcReturnsNullIfTheInputIsInvalid: function () {
                 Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.JsDateTimeTests.f3);
@@ -33801,7 +33750,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var d2 = System.DateTime.specifyKind(d1, System.DateTimeKind.Utc);
                 var utc = System.DateTime.create(2012, 8, 12, 0, 0, 0, 0, System.DateTimeKind.Utc);
 
-                this.AssertDate(utc, d2);
+                Bridge.ClientTestHelper.DateHelper.AssertDate(utc, d2);
             },
             ParseExactWithLocalKinds: function () {
                 var s1 = "2008-05-01T07:34:42-5:00";
@@ -34028,50 +33977,50 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             AddMinutesWorks: function () {
                 var dt = System.DateTime.create(2011, 7, 12, 2, 42, 56, 345);
                 var actual = System.DateTime.addMinutes(dt, 2.5);
-                this.AssertDate(System.DateTime.create(2011, 7, 12, 2, 45, 26, 345), actual);
-                this.AssertDate(System.DateTime.create(2011, 7, 12, 2, 42, 56, 345), dt);
+                Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create(2011, 7, 12, 2, 45, 26, 345), actual);
+                Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create(2011, 7, 12, 2, 42, 56, 345), dt);
             },
             AddMonthsWorks: function () {
                 var dt = System.DateTime.create(2011, 7, 12, 2, 42, 56, 345);
                 var actual = System.DateTime.addMonths(dt, 6);
-                this.AssertDate(System.DateTime.create(2012, 1, 12, 2, 42, 56, 345), actual);
-                this.AssertDate(System.DateTime.create(2011, 7, 12, 2, 42, 56, 345), dt);
+                Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create(2012, 1, 12, 2, 42, 56, 345), actual);
+                Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create(2011, 7, 12, 2, 42, 56, 345), dt);
             },
             AddMonthsEdgeCasesWorks: function () {
                 var dt = System.DateTime.create(2017, 3, 31, 16, 10, 10);
-                this.AssertDate(System.DateTime.create(2017, 3, 31, 16, 10, 10), dt);
+                Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create(2017, 3, 31, 16, 10, 10), dt);
 
                 var actual = System.DateTime.addMonths(dt, 1);
-                this.AssertDate(System.DateTime.create(2017, 4, 30, 16, 10, 10), actual);
+                Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create(2017, 4, 30, 16, 10, 10), actual);
                 actual = System.DateTime.addMonths(dt, 2);
-                this.AssertDate(System.DateTime.create(2017, 5, 31, 16, 10, 10), actual);
+                Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create(2017, 5, 31, 16, 10, 10), actual);
                 actual = System.DateTime.addMonths(dt, 3);
-                this.AssertDate(System.DateTime.create(2017, 6, 30, 16, 10, 10), actual);
+                Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create(2017, 6, 30, 16, 10, 10), actual);
                 actual = System.DateTime.addMonths(dt, 12);
-                this.AssertDate(System.DateTime.create(2018, 3, 31, 16, 10, 10), actual);
+                Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create(2018, 3, 31, 16, 10, 10), actual);
 
                 dt = System.DateTime.create(2020, 2, 29, 16, 10, 10);
-                this.AssertDate(System.DateTime.create(2020, 2, 29, 16, 10, 10), dt);
+                Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create(2020, 2, 29, 16, 10, 10), dt);
 
                 actual = System.DateTime.addMonths(dt, 1);
-                this.AssertDate(System.DateTime.create(2020, 3, 29, 16, 10, 10), actual);
+                Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create(2020, 3, 29, 16, 10, 10), actual);
                 actual = System.DateTime.addMonths(dt, 2);
-                this.AssertDate(System.DateTime.create(2020, 4, 29, 16, 10, 10), actual);
+                Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create(2020, 4, 29, 16, 10, 10), actual);
                 actual = System.DateTime.addMonths(dt, 12);
-                this.AssertDate(System.DateTime.create(2021, 2, 28, 16, 10, 10), actual);
+                Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create(2021, 2, 28, 16, 10, 10), actual);
             },
             AddSecondsWorks: function () {
                 var dt = System.DateTime.create(2011, 7, 12, 2, 42, 56, 345);
                 var actual = System.DateTime.addSeconds(dt, 2.5);
-                this.AssertDate(System.DateTime.create(2011, 7, 12, 2, 42, 58, 845), actual);
-                this.AssertDate(System.DateTime.create(2011, 7, 12, 2, 42, 56, 345), dt);
+                Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create(2011, 7, 12, 2, 42, 58, 845), actual);
+                Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create(2011, 7, 12, 2, 42, 56, 345), dt);
             },
             AddYearsWorks: function () {
                 var dt = System.DateTime.create(2011, 7, 12, 2, 42, 56, 345);
                 var actual = System.DateTime.addYears(dt, 3);
 
-                this.AssertDate(System.DateTime.create(2014, 7, 12, 2, 42, 56, 345), actual);
-                this.AssertDate(System.DateTime.create(2011, 7, 12, 2, 42, 56, 345), dt);
+                Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create(2014, 7, 12, 2, 42, 56, 345), actual);
+                Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create(2011, 7, 12, 2, 42, 56, 345), dt);
             },
             DaysInMonthWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual(31, System.DateTime.getDaysInMonth(2013, 1));

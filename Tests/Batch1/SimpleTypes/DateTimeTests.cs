@@ -1,4 +1,5 @@
 ﻿using Bridge.Test.NUnit;
+using Bridge.ClientTestHelper;
 using System;
 using System.Globalization;
 
@@ -8,61 +9,6 @@ namespace Bridge.ClientTest.SimpleTypes
     [TestFixture(TestNameFormat = "DateTime - {0}")]
     public class JsDateTimeTests
     {
-        private void AssertDate(DateTime dt, DateTimeKind kind, long ticks, int? year = null, int? month = null, int? day = null, int? hour = null, int? minute = null, int? second = null, int? ms = null)
-        {
-            Assert.AreEqual(kind, dt.Kind, "Kind");
-            Assert.AreEqual(ticks.ToString(), dt.Ticks.ToString(), "Ticks");
-
-            if (year.HasValue)
-            {
-                Assert.AreEqual(year.Value, dt.Year, "Year");
-            }
-
-            if (month.HasValue)
-            {
-                Assert.AreEqual(month.Value, dt.Month, "Month");
-            }
-
-            if (day.HasValue)
-            {
-                Assert.AreEqual(day.Value, dt.Day, "Day");
-            }
-
-            if (hour.HasValue)
-            {
-                Assert.AreEqual(hour.Value, dt.Hour, "Hour");
-            }
-
-            if (minute.HasValue)
-            {
-                Assert.AreEqual(minute.Value, dt.Minute, "Minute");
-            }
-
-            if (second.HasValue)
-            {
-                Assert.AreEqual(second.Value, dt.Second, "Second");
-            }
-
-            if (ms.HasValue)
-            {
-                Assert.AreEqual(ms.Value, dt.Millisecond, "Millisecond");
-            }
-        }
-
-        private void AssertDate(DateTime expected, DateTime actual)
-        {
-            Assert.AreEqual(expected.Kind, actual.Kind, "Kind");
-            Assert.AreEqual(expected.Ticks.ToString(), actual.Ticks.ToString(), "Ticks");
-
-            Assert.AreEqual(expected.Year, actual.Year, "Year");
-            Assert.AreEqual(expected.Month, actual.Month, "Month");
-            Assert.AreEqual(expected.Day, actual.Day, "Day");
-            Assert.AreEqual(expected.Hour, actual.Hour, "Hour");
-            Assert.AreEqual(expected.Minute, actual.Minute, "Minute");
-            Assert.AreEqual(expected.Second, actual.Second, "Second");
-            Assert.AreEqual(expected.Millisecond, actual.Millisecond, "Millisecond");
-        }
-
         [Test]
         public void TypePropertiesAreCorrect_SPI_1607_1608_1609()
         {
@@ -94,7 +40,7 @@ namespace Bridge.ClientTest.SimpleTypes
         {
             var dt = new DateTime();
             // #1606
-            AssertDate(dt, DateTimeKind.Unspecified, 0, 1, 1, 1);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 0, 1, 1, 1);
         }
 
         [Test]
@@ -102,7 +48,7 @@ namespace Bridge.ClientTest.SimpleTypes
         {
             var dt = default(DateTime);
             // #1606
-            AssertDate(dt, DateTimeKind.Unspecified, 0, 1, 1, 1);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 0, 1, 1, 1);
         }
 
         [Test]
@@ -110,7 +56,7 @@ namespace Bridge.ClientTest.SimpleTypes
         {
             var dt = Activator.CreateInstance<DateTime>();
             // #1606
-            AssertDate(dt, DateTimeKind.Unspecified, 0, 1, 1, 1);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 0, 1, 1, 1);
         }
 
         [Test]
@@ -127,10 +73,10 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual(1, dt.Year);
 
             var dt1 = new DateTime(0);
-            AssertDate(dt1, DateTimeKind.Unspecified, 0, 1, 1, 1);
+            DateHelper.AssertDate(dt1, DateTimeKind.Unspecified, 0, 1, 1, 1);
 
             var dt2 = new DateTime(1000000000000000000);
-            AssertDate(dt2, DateTimeKind.Unspecified, 1000000000000000000, 3169, 11, 16);
+            DateHelper.AssertDate(dt2, DateTimeKind.Unspecified, 1000000000000000000, 3169, 11, 16);
         }
 
         [Test]
@@ -140,19 +86,19 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual(1, dt.Year);
 
             var dt1 = new DateTime(0, DateTimeKind.Local);
-            AssertDate(dt1, DateTimeKind.Local, 0, 1, 1, 1);
+            DateHelper.AssertDate(dt1, DateTimeKind.Local, 0, 1, 1, 1);
 
             var dt2 = new DateTime(1000000000000000000, DateTimeKind.Local);
-            AssertDate(dt2, DateTimeKind.Local, 1000000000000000000, 3169, 11, 16);
+            DateHelper.AssertDate(dt2, DateTimeKind.Local, 1000000000000000000, 3169, 11, 16);
 
             var dt3 = new DateTime(1440L * 60 * 500 * 1000, DateTimeKind.Utc);
             Assert.AreEqual(1, dt3.Year);
 
             var dt4 = new DateTime(0, DateTimeKind.Utc);
-            AssertDate(dt4, DateTimeKind.Utc, 0, 1, 1, 1);
+            DateHelper.AssertDate(dt4, DateTimeKind.Utc, 0, 1, 1, 1);
 
             var dt5 = new DateTime(1000000000000000000, DateTimeKind.Utc);
-            AssertDate(dt5, DateTimeKind.Utc, 1000000000000000000, 3169, 11, 16);
+            DateHelper.AssertDate(dt5, DateTimeKind.Utc, 1000000000000000000, 3169, 11, 16);
         }
 
 
@@ -160,89 +106,89 @@ namespace Bridge.ClientTest.SimpleTypes
         public void YMDConstructorWorks()
         {
             var dt = new DateTime(2011, 7, 12);
-            AssertDate(dt, DateTimeKind.Unspecified, 634460256000000000, 2011, 7, 12);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 634460256000000000, 2011, 7, 12);
         }
 
         [Test]
         public void YMDHConstructorWorks()
         {
             var dt = new DateTime(2011, 7, 12, 13, 0, 0);
-            AssertDate(dt, DateTimeKind.Unspecified, 634460724000000000, 2011, 7, 12, 13);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 634460724000000000, 2011, 7, 12, 13);
         }
 
         [Test]
         public void YMDHConstructorUtcWorks()
         {
             var dt = new DateTime(2011, 7, 12, 13, 0, 0, DateTimeKind.Local);
-            AssertDate(dt, DateTimeKind.Local, 634460724000000000, 2011, 7, 12, 13);
+            DateHelper.AssertDate(dt, DateTimeKind.Local, 634460724000000000, 2011, 7, 12, 13);
 
             var dt1 = new DateTime(2011, 7, 12, 13, 0, 0, DateTimeKind.Utc);
-            AssertDate(dt1, DateTimeKind.Utc, 634460724000000000, 2011, 7, 12, 13);
+            DateHelper.AssertDate(dt1, DateTimeKind.Utc, 634460724000000000, 2011, 7, 12, 13);
         }
 
         [Test]
         public void YMDHNConstructorWorks()
         {
             var dt = new DateTime(2011, 7, 12, 13, 42, 0, 0);
-            AssertDate(dt, DateTimeKind.Unspecified, 634460749200000000, 2011, 7, 12, 13, 42);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 634460749200000000, 2011, 7, 12, 13, 42);
         }
 
         [Test]
         public void YMDHNConstructorUtcWorks()
         {
             var dt = new DateTime(2011, 7, 12, 13, 42, 0, 0, DateTimeKind.Local);
-            AssertDate(dt, DateTimeKind.Local, 634460749200000000, 2011, 7, 12, 13, 42);
+            DateHelper.AssertDate(dt, DateTimeKind.Local, 634460749200000000, 2011, 7, 12, 13, 42);
 
             var dt1 = new DateTime(2011, 7, 12, 13, 42, 0, 0, DateTimeKind.Utc);
-            AssertDate(dt1, DateTimeKind.Utc, 634460749200000000, 2011, 7, 12, 13, 42);
+            DateHelper.AssertDate(dt1, DateTimeKind.Utc, 634460749200000000, 2011, 7, 12, 13, 42);
         }
 
         [Test]
         public void YMDHNSConstructorWorks()
         {
             var dt = new DateTime(2011, 7, 12, 13, 42, 56);
-            AssertDate(dt, DateTimeKind.Unspecified, 634460749760000000, 2011, 7, 12, 13, 42, 56);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 634460749760000000, 2011, 7, 12, 13, 42, 56);
         }
 
         [Test]
         public void YMDHNSConstructorUtcWorks()
         {
             var dt = new DateTime(2011, 7, 12, 13, 42, 56, DateTimeKind.Local);
-            AssertDate(dt, DateTimeKind.Local, 634460749760000000, 2011, 7, 12, 13, 42, 56);
+            DateHelper.AssertDate(dt, DateTimeKind.Local, 634460749760000000, 2011, 7, 12, 13, 42, 56);
 
             var dt1 = new DateTime(2011, 7, 12, 13, 42, 56, DateTimeKind.Utc);
-            AssertDate(dt1, DateTimeKind.Utc, 634460749760000000, 2011, 7, 12, 13, 42, 56);
+            DateHelper.AssertDate(dt1, DateTimeKind.Utc, 634460749760000000, 2011, 7, 12, 13, 42, 56);
         }
 
         [Test]
         public void YMDHNSUConstructorWorks()
         {
             var dt = new DateTime(2011, 7, 12, 13, 42, 56, 345);
-            AssertDate(dt, DateTimeKind.Unspecified, 634460749763450000, 2011, 7, 12, 13, 42, 56, 345);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 634460749763450000, 2011, 7, 12, 13, 42, 56, 345);
         }
 
         [Test]
         public void YMDHNSUConstructorUtcWorks()
         {
             var dt = new DateTime(2011, 7, 12, 13, 42, 56, 345, DateTimeKind.Local);
-            AssertDate(dt, DateTimeKind.Local, 634460749763450000, 2011, 7, 12, 13, 42, 56, 345);
+            DateHelper.AssertDate(dt, DateTimeKind.Local, 634460749763450000, 2011, 7, 12, 13, 42, 56, 345);
 
             var dt1 = new DateTime(2011, 7, 12, 13, 42, 56, 345, DateTimeKind.Utc);
-            AssertDate(dt1, DateTimeKind.Utc, 634460749763450000, 2011, 7, 12, 13, 42, 56, 345);
+            DateHelper.AssertDate(dt1, DateTimeKind.Utc, 634460749763450000, 2011, 7, 12, 13, 42, 56, 345);
         }
 
         [Test]
         public void MinWorks()
         {
             var dt = DateTime.MinValue;
-            AssertDate(dt, DateTimeKind.Unspecified, 0, 1, 1, 1);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 0, 1, 1, 1);
         }
 
         [Test]
         public void MaxWorks()
         {
             var dt = DateTime.MaxValue;
-            AssertDate(dt, DateTimeKind.Unspecified, 3155378975999999999, 9999, 12, 31);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 3155378975999999999, 9999, 12, 31);
         }
 
         [Test]
@@ -285,7 +231,7 @@ namespace Bridge.ClientTest.SimpleTypes
             var d1 = d.ToUniversalTime();
             var d2 = d1.ToUniversalTime();
 
-            AssertDate(d2, d1);
+            DateHelper.AssertDate(d2, d1);
         }
 
         [Test]
@@ -295,7 +241,7 @@ namespace Bridge.ClientTest.SimpleTypes
             var d1 = d.ToLocalTime();
             var d2 = d1.ToLocalTime();
 
-            AssertDate(d2, d1);
+            DateHelper.AssertDate(d2, d1);
         }
 
         [Test]
@@ -503,14 +449,14 @@ namespace Bridge.ClientTest.SimpleTypes
         public void ParseWorks()
         {
             var dt = DateTime.Parse("Aug 12, 2012");
-            AssertDate(dt, DateTimeKind.Unspecified, 634803264000000000, 2012, 8, 12);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 634803264000000000, 2012, 8, 12);
         }
 
         [Test]
         public void ParseExactWorks()
         {
             var dt = DateTime.ParseExact("2012-12-08", "yyyy-dd-MM");
-            AssertDate(dt, DateTimeKind.Unspecified, 634803264000000000, 2012, 8, 12);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 634803264000000000, 2012, 8, 12);
         }
 
         [Test]
@@ -523,7 +469,7 @@ namespace Bridge.ClientTest.SimpleTypes
         public void ParseExactWithCultureWorks()
         {
             var dt = DateTime.ParseExact("2012-12-08", "yyyy-dd-MM", CultureInfo.InvariantCulture);
-            AssertDate(dt, DateTimeKind.Unspecified, 634803264000000000, 2012, 8, 12);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 634803264000000000, 2012, 8, 12);
         }
 
         [Test]
@@ -542,7 +488,7 @@ namespace Bridge.ClientTest.SimpleTypes
             var d2 = DateTime.SpecifyKind(d1, DateTimeKind.Utc);
             var utc = new DateTime(2012, 8, 12, 0, 0, 0, DateTimeKind.Utc);
 
-            AssertDate(utc, d2);
+            DateHelper.AssertDate(utc, d2);
         }
 
         [Test]
@@ -558,7 +504,7 @@ namespace Bridge.ClientTest.SimpleTypes
             var d2 = DateTime.SpecifyKind(d1, DateTimeKind.Utc);
             var utc = new DateTime(2012, 8, 12, 0, 0, 0, DateTimeKind.Utc);
 
-            AssertDate(utc, d2);
+            DateHelper.AssertDate(utc, d2);
         }
 
         [Test]
@@ -1018,8 +964,8 @@ namespace Bridge.ClientTest.SimpleTypes
         {
             var dt = new DateTime(2011, 7, 12, 2, 42, 56, 345);
             var actual = dt.AddMinutes(2.5);
-            AssertDate(new DateTime(2011, 7, 12, 2, 45, 26, 345), actual);
-            AssertDate(new DateTime(2011, 7, 12, 2, 42, 56, 345), dt);
+            DateHelper.AssertDate(new DateTime(2011, 7, 12, 2, 45, 26, 345), actual);
+            DateHelper.AssertDate(new DateTime(2011, 7, 12, 2, 42, 56, 345), dt);
         }
 
         [Test]
@@ -1027,34 +973,34 @@ namespace Bridge.ClientTest.SimpleTypes
         {
             var dt = new DateTime(2011, 7, 12, 2, 42, 56, 345);
             var actual = dt.AddMonths(6);
-            AssertDate(new DateTime(2012, 1, 12, 2, 42, 56, 345), actual);
-            AssertDate(new DateTime(2011, 7, 12, 2, 42, 56, 345), dt);
+            DateHelper.AssertDate(new DateTime(2012, 1, 12, 2, 42, 56, 345), actual);
+            DateHelper.AssertDate(new DateTime(2011, 7, 12, 2, 42, 56, 345), dt);
         }
 
         [Test(Name = "#2542 - {0}")]
         public void AddMonthsEdgeCasesWorks()
         {
             var dt = new DateTime(2017, 3, 31, 16, 10, 10);
-            AssertDate(new DateTime(2017, 3, 31, 16, 10, 10), dt);
+            DateHelper.AssertDate(new DateTime(2017, 3, 31, 16, 10, 10), dt);
 
             var actual = dt.AddMonths(1);
-            AssertDate(new DateTime(2017, 4, 30, 16, 10, 10), actual);
+            DateHelper.AssertDate(new DateTime(2017, 4, 30, 16, 10, 10), actual);
             actual = dt.AddMonths(2);
-            AssertDate(new DateTime(2017, 5, 31, 16, 10, 10), actual);
+            DateHelper.AssertDate(new DateTime(2017, 5, 31, 16, 10, 10), actual);
             actual = dt.AddMonths(3);
-            AssertDate(new DateTime(2017, 6, 30, 16, 10, 10), actual);
+            DateHelper.AssertDate(new DateTime(2017, 6, 30, 16, 10, 10), actual);
             actual = dt.AddMonths(12);
-            AssertDate(new DateTime(2018, 3, 31, 16, 10, 10), actual);
+            DateHelper.AssertDate(new DateTime(2018, 3, 31, 16, 10, 10), actual);
 
             dt = new DateTime(2020, 2, 29, 16, 10, 10);
-            AssertDate(new DateTime(2020, 2, 29, 16, 10, 10), dt);
+            DateHelper.AssertDate(new DateTime(2020, 2, 29, 16, 10, 10), dt);
 
             actual = dt.AddMonths(1);
-            AssertDate(new DateTime(2020, 3, 29, 16, 10, 10), actual);
+            DateHelper.AssertDate(new DateTime(2020, 3, 29, 16, 10, 10), actual);
             actual = dt.AddMonths(2);
-            AssertDate(new DateTime(2020, 4, 29, 16, 10, 10), actual);
+            DateHelper.AssertDate(new DateTime(2020, 4, 29, 16, 10, 10), actual);
             actual = dt.AddMonths(12);
-            AssertDate(new DateTime(2021, 2, 28, 16, 10, 10), actual);
+            DateHelper.AssertDate(new DateTime(2021, 2, 28, 16, 10, 10), actual);
         }
 
         [Test]
@@ -1062,8 +1008,8 @@ namespace Bridge.ClientTest.SimpleTypes
         {
             var dt = new DateTime(2011, 7, 12, 2, 42, 56, 345);
             var actual = dt.AddSeconds(2.5);
-            AssertDate(new DateTime(2011, 7, 12, 2, 42, 58, 845), actual);
-            AssertDate(new DateTime(2011, 7, 12, 2, 42, 56, 345), dt);
+            DateHelper.AssertDate(new DateTime(2011, 7, 12, 2, 42, 58, 845), actual);
+            DateHelper.AssertDate(new DateTime(2011, 7, 12, 2, 42, 56, 345), dt);
         }
 
         [Test]
@@ -1072,8 +1018,8 @@ namespace Bridge.ClientTest.SimpleTypes
             var dt = new DateTime(2011, 7, 12, 2, 42, 56, 345);
             var actual = dt.AddYears(3);
 
-            AssertDate(new DateTime(2014, 7, 12, 2, 42, 56, 345), actual);
-            AssertDate(new DateTime(2011, 7, 12, 2, 42, 56, 345), dt);
+            DateHelper.AssertDate(new DateTime(2014, 7, 12, 2, 42, 56, 345), actual);
+            DateHelper.AssertDate(new DateTime(2011, 7, 12, 2, 42, 56, 345), dt);
         }
 
         [Test]
