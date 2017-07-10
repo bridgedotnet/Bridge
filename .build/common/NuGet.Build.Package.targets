@@ -61,6 +61,7 @@
     <Message Text="NuGetPackageSourcePath: %(NuGetPackageSourcePath.Path)" Importance="high" />
     <Message Text="OS: $(OS)" Importance="high" />
     <Message Text="TargetPlatformIdentifier: $(TargetPlatformIdentifier)" Importance="high" />
+    <Message Text="OnWin: $(OnWin)" Importance="high" />
     <Message Text="MonoBuild: $(MonoBuild)" Importance="high" />
     <Message Text="NetCoreBuild: $(NetCoreBuild)" Importance="high" />
 
@@ -77,14 +78,14 @@
 
     <!--Inline tasks not supported in xbuild-->
     <!--So we will use SmallApplicationVersion matched from AssemblyIdentityInfo in non Windows-->
-    <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
+    <GetAssemblyIdentity Condition="$(OnWin) == true" AssemblyFiles="$(TargetPath)">
       <Output TaskParameter="Assemblies" ItemName="AssemblyIdentityInfo" />
     </GetAssemblyIdentity>
 
     <PropertyGroup>
       <FirstSymbolIfPercentNotSupported>%25</FirstSymbolIfPercentNotSupported>
       <ApplicationVersion>%(AssemblyIdentityInfo.Version)</ApplicationVersion>
-      <CouldNotGetApplicationVersion Condition="'$(ApplicationVersion)' == '' OR '$(ApplicationVersion.StartsWith($(FirstSymbolIfPercentNotSupported)))' == 'true'">true</CouldNotGetApplicationVersion>
+      <CouldNotGetApplicationVersion Condition="$(ApplicationVersion) == '*Undefined*' OR '$(ApplicationVersion)' == '' OR '$(ApplicationVersion.StartsWith($(FirstSymbolIfPercentNotSupported)))' == 'true'">true</CouldNotGetApplicationVersion>
       <ApplicationVersion Condition="'$(CouldNotGetApplicationVersion)' == 'true'">$(DefaultPackageVersion)</ApplicationVersion>
     </PropertyGroup>
 
