@@ -57,6 +57,13 @@
   </Target>
 
   <Target Name="BuildPackage" DependsOnTargets="CheckPrerequisites; AfterBuild">
+    <Message Text="Starting nuget packaging:" Importance="high" />
+    <Message Text="NuGetPackageSourcePath: %(NuGetPackageSourcePath.Path)" Importance="high" />
+    <Message Text="OS: $(OS)" Importance="high" />
+    <Message Text="TargetPlatformIdentifier: $(TargetPlatformIdentifier)" Importance="high" />
+    <Message Text="MonoBuild: $(MonoBuild)" Importance="high" />
+    <Message Text="NetCoreBuild: $(NetCoreBuild)" Importance="high" />
+
     <PropertyGroup>
       <NuGetUseExplicitVersion Condition=" '$(NuGetUseExplicitVersion)' == '' ">false</NuGetUseExplicitVersion>
       <!-- Set default NuGetPackageOutputDir if not defined-->
