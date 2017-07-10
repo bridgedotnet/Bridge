@@ -562,6 +562,56 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
+        public void ParseExactWithLocalKinds()
+        {
+            var s1 = "2008-05-01T07:34:42-5:00";
+            var s2 = "2008-05-01 7:34:42Z";
+            var s3 = "Thu, 01 May 2008 07:34:42 GMT";
+
+            var d1 = DateTime.Parse(s1);
+            Assert.AreEqual(DateTimeKind.Local, d1.Kind);
+            Assert.AreEqual("5/1/2008 5:34:42 AM", d1.ToString());
+
+            var d2 = DateTime.Parse(s2);
+            Assert.AreEqual(DateTimeKind.Local, d2.Kind);
+            Assert.AreEqual("5/1/2008 12:34:42 AM", d2.ToString());
+
+            var d3 = DateTime.Parse(s3);
+            Assert.AreEqual(DateTimeKind.Local, d3.Kind);
+            Assert.AreEqual("5/1/2008 12:34:42 AM", d3.ToString());
+        }
+
+        [Test]
+        public void ParseExactWithDifferentKinds()
+        {
+            var s1 = "2008-09-15T09:30:41.7752486-07:00";
+            var s2 = "2008-09-15T09:30:41.7752486Z";
+            var s3 = "2008-09-15T09:30:41.7752486";
+            var s4 = "2008-09-15T09:30:41.7752486-04:00";
+            var s5 = "Mon, 15 Sep 2008 09:30:41 GMT";
+
+            var d1 = DateTime.Parse(s1, null);
+            Assert.AreEqual(DateTimeKind.Local, d1.Kind);
+            Assert.AreEqual("9/15/2008 9:30:41 AM", d1.ToString());
+
+            var d2 = DateTime.Parse(s2);
+            Assert.AreEqual(DateTimeKind.Local, d2.Kind);
+            Assert.AreEqual("9/15/2008 2:30:41 AM", d2.ToString());
+
+            var d3 = DateTime.Parse(s3);
+            Assert.AreEqual(DateTimeKind.Unspecified, d3.Kind);
+            Assert.AreEqual("9/15/2008 9:30:41 AM", d3.ToString());
+
+            var d4 = DateTime.Parse(s4);
+            Assert.AreEqual(DateTimeKind.Local, d4.Kind);
+            Assert.AreEqual("9/15/2008 6:30:41 AM", d4.ToString());
+
+            var d5 = DateTime.Parse(s5);
+            Assert.AreEqual(DateTimeKind.Local, d5.Kind);
+            Assert.AreEqual("9/15/2008 2:30:41 AM", d5.ToString());
+        }
+
+        [Test]
         public void ParseExactUtcWithCultureReturnsNullIfTheInputIsInvalid()
         {
             Assert.Throws<FormatException>(() => { var dt = DateTime.ParseExact("X", "yyyy-dd-MM", CultureInfo.InvariantCulture, true); });

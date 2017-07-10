@@ -33803,6 +33803,50 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 this.AssertDate(utc, d2);
             },
+            ParseExactWithLocalKinds: function () {
+                var s1 = "2008-05-01T07:34:42-5:00";
+                var s2 = "2008-05-01 7:34:42Z";
+                var s3 = "Thu, 01 May 2008 07:34:42 GMT";
+
+                var d1 = System.DateTime.parse(s1);
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTimeKind.Local, System.DateTime.getKind(d1));
+                Bridge.Test.NUnit.Assert.AreEqual("5/1/2008 5:34:42 AM", System.DateTime.format(d1));
+
+                var d2 = System.DateTime.parse(s2);
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTimeKind.Local, System.DateTime.getKind(d2));
+                Bridge.Test.NUnit.Assert.AreEqual("5/1/2008 12:34:42 AM", System.DateTime.format(d2));
+
+                var d3 = System.DateTime.parse(s3);
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTimeKind.Local, System.DateTime.getKind(d3));
+                Bridge.Test.NUnit.Assert.AreEqual("5/1/2008 12:34:42 AM", System.DateTime.format(d3));
+            },
+            ParseExactWithDifferentKinds: function () {
+                var s1 = "2008-09-15T09:30:41.7752486-07:00";
+                var s2 = "2008-09-15T09:30:41.7752486Z";
+                var s3 = "2008-09-15T09:30:41.7752486";
+                var s4 = "2008-09-15T09:30:41.7752486-04:00";
+                var s5 = "Mon, 15 Sep 2008 09:30:41 GMT";
+
+                var d1 = System.DateTime.parse(s1, null);
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTimeKind.Local, System.DateTime.getKind(d1));
+                Bridge.Test.NUnit.Assert.AreEqual("9/15/2008 9:30:41 AM", System.DateTime.format(d1));
+
+                var d2 = System.DateTime.parse(s2);
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTimeKind.Local, System.DateTime.getKind(d2));
+                Bridge.Test.NUnit.Assert.AreEqual("9/15/2008 2:30:41 AM", System.DateTime.format(d2));
+
+                var d3 = System.DateTime.parse(s3);
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTimeKind.Unspecified, System.DateTime.getKind(d3));
+                Bridge.Test.NUnit.Assert.AreEqual("9/15/2008 9:30:41 AM", System.DateTime.format(d3));
+
+                var d4 = System.DateTime.parse(s4);
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTimeKind.Local, System.DateTime.getKind(d4));
+                Bridge.Test.NUnit.Assert.AreEqual("9/15/2008 6:30:41 AM", System.DateTime.format(d4));
+
+                var d5 = System.DateTime.parse(s5);
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTimeKind.Local, System.DateTime.getKind(d5));
+                Bridge.Test.NUnit.Assert.AreEqual("9/15/2008 2:30:41 AM", System.DateTime.format(d5));
+            },
             ParseExactUtcWithCultureReturnsNullIfTheInputIsInvalid: function () {
                 Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.JsDateTimeTests.f4);
             },
