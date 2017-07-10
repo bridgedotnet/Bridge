@@ -822,9 +822,7 @@
                 case typeCodes.Decimal:
                     return scope.internal.typeRanges.Decimal_MinValue;
                 case typeCodes.DateTime:
-                    var date = new Date(0);
-                    date.setFullYear(1);
-                    return date;
+                    return System.DateTime.getMinValue();
 
                 default:
                     return null;
@@ -859,6 +857,8 @@
                     return scope.internal.typeRanges.Double_MaxValue;
                 case typeCodes.Decimal:
                     return scope.internal.typeRanges.Decimal_MaxValue;
+                case typeCodes.DateTime:
+                    return System.DateTime.getMaxValue();
                 default:
                     throw new System.ArgumentOutOfRangeException("typeCode", "The specified typeCode is undefined.");
             }
