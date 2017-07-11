@@ -6245,6 +6245,44 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.Collections.Generic.GenericDictionaryTests", {
         methods: {
+            TestPerformance: function () {
+                var dict = new (System.Collections.Generic.Dictionary$2(System.String,System.Int32))();
+
+                var key = System.String.fromCharCount(120, 10000);
+                dict.set(key, 123);
+
+                var timer = System.Diagnostics.Stopwatch.startNew();
+                for (var i = 0; i < 100000; i = (i + 1) | 0) {
+                    var f = dict.get(key);
+                }
+                timer.stop();
+
+                Bridge.Test.NUnit.Assert.True(timer.milliseconds().lt(System.Int64(3000)), "Performance shoud be faster than 3000ms, actual = " + timer.milliseconds());
+            },
+            TestOrder: function () {
+                var $t;
+                var data = new (System.Collections.Generic.Dictionary$2(System.Int32,System.String))();
+
+                data.add(30, "a");
+                data.add(10, "c");
+                data.add(20, "b");
+
+                var actualOutput = "";
+                var expectedOutput = "30 10 20 ";
+
+                $t = Bridge.getEnumerator(data.getKeys(), System.Int32);
+                try {
+                    while ($t.moveNext()) {
+                        var k = $t.Current;
+                        actualOutput = System.String.concat(actualOutput, (System.String.concat(k.toString(), " ")));
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }
+                Bridge.Test.NUnit.Assert.AreEqual(expectedOutput, actualOutput);
+            },
             TypePropertiesAreCorrect: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[System.String, mscorlib]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.Dictionary$2(System.Int32,System.String)), "FullName should be correct");
                 var dict = new (System.Collections.Generic.Dictionary$2(System.Int32,System.String))();
@@ -6648,12 +6686,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual(null, el.value, "Enumerable initial value");
                 Bridge.Test.NUnit.Assert.True(en.System$Collections$IEnumerator$moveNext(), "Enumerable MoveNext true");
                 el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")];
-                Bridge.Test.NUnit.Assert.AreEqual(1, el.key, "Enumerable first key");
-                Bridge.Test.NUnit.Assert.AreEqual("a", el.value, "Enumerable first value");
+                Bridge.Test.NUnit.Assert.AreEqual(2, el.key, "Enumerable first key");
+                Bridge.Test.NUnit.Assert.AreEqual("b", el.value, "Enumerable first value");
                 Bridge.Test.NUnit.Assert.True(en.System$Collections$IEnumerator$moveNext(), "Enumerable MoveNext true");
                 el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")];
-                Bridge.Test.NUnit.Assert.AreEqual(2, el.key, "Enumerable second key");
-                Bridge.Test.NUnit.Assert.AreEqual("b", el.value, "Enumerable second value");
+                Bridge.Test.NUnit.Assert.AreEqual(1, el.key, "Enumerable second key");
+                Bridge.Test.NUnit.Assert.AreEqual("a", el.value, "Enumerable second value");
                 Bridge.Test.NUnit.Assert.False(en.System$Collections$IEnumerator$moveNext(), "Enumerable MoveNext false");
 
 
@@ -6679,11 +6717,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 }, System.Collections.Generic.KeyValuePair$2(System.Int32,System.String));
                 System.Array.copyTo(d, cta, 0, System.Collections.Generic.KeyValuePair$2(System.Int32,System.String));
 
-                Bridge.Test.NUnit.Assert.AreEqual(1, cta[System.Array.index(0, cta)].key, "ICollection<KeyValuePair> CopyTo Getter[0] Key");
-                Bridge.Test.NUnit.Assert.AreEqual("a", cta[System.Array.index(0, cta)].value, "ICollection<KeyValuePair> CopyTo Getter[0] Value");
+                Bridge.Test.NUnit.Assert.AreEqual(2, cta[System.Array.index(0, cta)].key, "ICollection<KeyValuePair> CopyTo Getter[0] Key");
+                Bridge.Test.NUnit.Assert.AreEqual("b", cta[System.Array.index(0, cta)].value, "ICollection<KeyValuePair> CopyTo Getter[0] Value");
 
-                Bridge.Test.NUnit.Assert.AreEqual(2, cta[System.Array.index(1, cta)].key, "ICollection<KeyValuePair> CopyTo Getter[1] Key");
-                Bridge.Test.NUnit.Assert.AreEqual("b", cta[System.Array.index(1, cta)].value, "ICollection<KeyValuePair> CopyTo Getter[1] Value");
+                Bridge.Test.NUnit.Assert.AreEqual(1, cta[System.Array.index(1, cta)].key, "ICollection<KeyValuePair> CopyTo Getter[1] Key");
+                Bridge.Test.NUnit.Assert.AreEqual("a", cta[System.Array.index(1, cta)].value, "ICollection<KeyValuePair> CopyTo Getter[1] Value");
 
                 Bridge.Test.NUnit.Assert.AreEqual(0, cta[System.Array.index(2, cta)].key, "ICollection<KeyValuePair> CopyTo Getter[2] Key");
                 Bridge.Test.NUnit.Assert.AreEqual(null, cta[System.Array.index(2, cta)].value, "ICollection<KeyValuePair> CopyTo Getter[2] Value");

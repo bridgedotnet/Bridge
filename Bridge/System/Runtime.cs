@@ -101,7 +101,8 @@ namespace System
 namespace System.Runtime.InteropServices
 {
     [ComVisible(true)]
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Enum | AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Interface | AttributeTargets.Delegate,
+    Inherited = false)]
     [External]
     [NonScriptable]
     public sealed class ComVisibleAttribute : Attribute
@@ -119,6 +120,13 @@ namespace System.Runtime.InteropServices
     [External]
     [NonScriptable]
     public sealed class OutAttribute : Attribute
+    {
+    }
+
+    [AttributeUsageAttribute(AttributeTargets.Parameter)]
+    [External]
+    [NonScriptable]
+    public sealed class InAttribute : Attribute
     {
     }
 }
@@ -655,16 +663,6 @@ namespace Microsoft.CSharp.RuntimeBinder
         IsRef = 8,
         IsOut = 16,
         IsStaticType = 32,
-    }
-}
-
-namespace System.Diagnostics
-{
-    [External]
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Constructor | AttributeTargets.Method)]
-    [NonScriptable]
-    public sealed class DebuggerStepThroughAttribute : Attribute
-    {
     }
 }
 

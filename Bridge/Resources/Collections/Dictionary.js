@@ -7,7 +7,7 @@
             config: {
                 properties: {
                     Keys: {
-                        get: function() {
+                        get: function () {
                             return this.getKeys();
                         }
                     },
@@ -72,6 +72,7 @@
                 this.$initialize();
                 this.comparer = comparer || System.Collections.Generic.EqualityComparer$1(TKey).def;
                 this.clear();
+                this.isSimpleKey = ((TKey === System.String) || (TKey.$number === true && TKey !== System.Int64 && TKey !== System.UInt64) || (TKey === System.Char)) && (this.comparer === System.Collections.Generic.EqualityComparer$1(TKey).def);
 
                 if (Bridge.is(obj, System.Collections.Generic.Dictionary$2(TKey, TValue))) {
                     var e = Bridge.getEnumerator(obj),
@@ -92,7 +93,7 @@
                 }
             },
 
-            containsPair: function(pair) {
+            containsPair: function (pair) {
                 var entry = this.findEntry(pair.key);
                 return entry && this.comparer.equals2(entry.value, pair.value);
             },
@@ -117,22 +118,44 @@
             },
 
             getKeys: function () {
+                if (this.isSimpleKey) {
+                    return System.Array.init(this.keys, TKey);
+                }
+
                 return new (System.Collections.Generic.DictionaryCollection$1(TKey))(this, true);
             },
 
             getValues: function () {
+                if (this.isSimpleKey) {
+                    var values = [];
+
+                    for (var i = 0; i < this.keys.length; i++) {
+                        values.push(this.entries[this.keys[i]].value);
+                    }
+
+                    return System.Array.init(values, TValue);
+                }
+
                 return new (System.Collections.Generic.DictionaryCollection$1(TValue))(this, false);
             },
 
             clear: function () {
-                this.entries = { };
+                this.entries = {};
+                this.keys = [];
                 this.count = 0;
             },
 
             findEntry: function (key) {
-                var hash = this.comparer.getHashCode2(key),
-                    entries,
-                    i;
+                var hash, entries, i;
+
+                if (this.isSimpleKey) {
+                    if (this.entries.hasOwnProperty(key)) {
+                        return this.entries[key];
+                    }
+                    return;
+                }
+
+                hash = this.comparer.getHashCode2(key);
 
                 if (Bridge.isDefined(this.entries[hash])) {
                     entries = this.entries[hash];
@@ -154,7 +177,7 @@
 
                 for (e in this.entries) {
                     if (this.entries.hasOwnProperty(e)) {
-                        var entries = this.entries[e];
+                        var entries = this.isSimpleKey ? [this.entries[e]] : this.entries[e];
 
                         for (i = 0; i < entries.length; i++) {
                             if (this.comparer.equals2(entries[i].value, value)) {
@@ -171,7 +194,7 @@
                 var entry = this.findEntry(key);
 
                 if (!entry) {
-                    if (this.noKeyCheck){
+                    if (this.noKeyCheck) {
                         return Bridge.getDefaultValue(TValue);
                     }
 
@@ -198,13 +221,21 @@
                     return;
                 }
 
-                hash = this.comparer.getHashCode2(key);
                 entry = new (System.Collections.Generic.KeyValuePair$2(TKey, TValue))(key, value);
 
-                if (this.entries[hash]) {
-                    this.entries[hash].push(entry);
-                } else {
-                    this.entries[hash] = [entry];
+                if (this.isSimpleKey) {
+                    this.entries[key] = entry;
+                    this.keys.push(key);
+                }
+                else {
+                    hash = this.comparer.getHashCode2(key);
+
+                    if (this.entries[hash]) {
+                        this.entries[hash].push(entry);
+                    } else {
+                        this.entries[hash] = [entry];
+                        this.keys.push(hash);
+                    }
                 }
 
                 this.count++;
@@ -223,9 +254,19 @@
             },
 
             remove: function (key) {
-                var hash = this.comparer.getHashCode2(key),
-                    entries,
-                    i;
+                var hash, entries, i;
+
+                if (this.isSimpleKey) {
+                    if (this.entries.hasOwnProperty(key)) {
+                        delete this.entries[key];
+                        this.keys.splice(this.keys.indexOf(key), 1);
+                        this.count--;
+                        return true;
+                    }
+                    return false;
+                }
+
+                hash = this.comparer.getHashCode2(key);
 
                 if (!this.entries[hash]) {
                     return false;
@@ -239,6 +280,7 @@
 
                         if (entries.length == 0) {
                             delete this.entries[hash];
+                            this.keys.splice(this.keys.indexOf(hash), 1);
                         }
 
                         this.count--;
@@ -267,12 +309,12 @@
             },
 
             getCustomEnumerator: function (fn) {
-                var hashes = Bridge.getPropertyNames(this.entries),
+                var hashes = this.keys,
                     hashIndex = -1,
                     keyIndex;
 
                 return new Bridge.CustomEnumerator(function () {
-                    if (hashIndex < 0 || keyIndex >= (this.entries[hashes[hashIndex]].length - 1)) {
+                    if (hashIndex < 0 || this.isSimpleKey || keyIndex >= (this.entries[hashes[hashIndex]].length - 1)) {
                         keyIndex = -1;
                         hashIndex++;
                     }
@@ -289,7 +331,7 @@
                         return new (System.Collections.Generic.KeyValuePair$2(TKey, TValue))()
                     }
 
-                    return fn(this.entries[hashes[hashIndex]][keyIndex]);
+                    return fn(this.isSimpleKey ? this.entries[hashes[hashIndex]] : this.entries[hashes[hashIndex]][keyIndex]);
                 }, function () {
                     hashIndex = -1;
                 }, null, this, System.Collections.Generic.KeyValuePair$2(TKey, TValue));
@@ -297,13 +339,13 @@
 
             getEnumerator: function () {
                 return this.getCustomEnumerator(function (e) {
-                     return e;
+                    return e;
                 });
             }
         };
     });
 
-    System.Collections.Generic.Dictionary$2.getTypeParameters = function(type) {
+    System.Collections.Generic.Dictionary$2.getTypeParameters = function (type) {
         var interfaceType;
         if (System.String.startsWith(type.$$name, "System.Collections.Generic.IDictionary")) {
             interfaceType = type;
