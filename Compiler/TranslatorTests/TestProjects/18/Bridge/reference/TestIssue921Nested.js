@@ -169,10 +169,10 @@
 
     Bridge.apply($asm.$.TestIssue921Nested.Issue921NestedOuter.Issue921Nested, {
         f1: function (i) {
-            return ((((3 * i) | 0) + TestIssue921Nested.Issue921NestedOuter.Issue921Nested.IntStatic) | 0);
+            return ((Bridge.Int.mul(3, i) + TestIssue921Nested.Issue921NestedOuter.Issue921Nested.IntStatic) | 0);
         },
         f2: function (i) {
-            return ((((2 * i) | 0) + TestIssue921Nested.Issue921NestedOuter.Issue921Nested.IntStatic) | 0);
+            return ((Bridge.Int.mul(2, i) + TestIssue921Nested.Issue921NestedOuter.Issue921Nested.IntStatic) | 0);
         },
         f3: function (i, j) {
             return ((((i + j) | 0) + TestIssue921Nested.Issue921NestedOuter.Issue921Nested.IntStatic) | 0);

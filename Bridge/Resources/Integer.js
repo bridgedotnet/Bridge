@@ -732,7 +732,7 @@
             },
 
             div: function (x, y) {
-                if (!Bridge.isNumber(x) || !Bridge.isNumber(y)) {
+                if (x == null || y == null) {
                     return null;
                 }
 
@@ -744,7 +744,7 @@
             },
 
             mod: function (x, y) {
-                if (!Bridge.isNumber(x) || !Bridge.isNumber(y)) {
+                if (x == null || y == null) {
                     return null;
                 }
 
@@ -828,6 +828,30 @@
 
             sign: function (x) {
                 return Bridge.isNumber(x) ? (x === 0 ? 0 : (x < 0 ? -1 : 1)) : null;
+            },
+
+            $mul: Math.imul || function (a, b) {
+                var ah = (a >>> 16) & 0xffff,
+                    al = a & 0xffff,
+                    bh = (b >>> 16) & 0xffff,
+                    bl = b & 0xffff;
+                return ((al * bl) + (((ah * bl + al * bh) << 16) >>> 0) | 0);
+            },
+
+            mul: function (a, b) {
+                if (a == null || b == null) {
+                    return null;
+                }
+
+                return Bridge.Int.$mul(a, b);
+            },
+
+            umul: function (a, b) {
+                if (a == null || b == null) {
+                    return null;
+                }
+
+                return Bridge.Int.$mul(a, b) >>> 0;
             }
         }
     });

@@ -276,6 +276,76 @@ namespace Bridge.Translator
                 return;
             }
 
+            if (assignmentExpression.Operator == AssignmentOperatorType.Multiply &&
+                !(this.Emitter.IsJavaScriptOverflowMode || ConversionBlock.InsideOverflowContext(this.Emitter, assignmentExpression)) &&
+                !isLong && !isLongExpected &&
+                (
+                    (Helpers.IsInteger32Type(leftResolverResult.Type, this.Emitter.Resolver) &&
+                    Helpers.IsInteger32Type(rightResolverResult.Type, this.Emitter.Resolver) &&
+                    Helpers.IsInteger32Type(rr.Type, this.Emitter.Resolver)) ||
+
+                    (Helpers.IsInteger32Type(this.Emitter.Resolver.Resolver.GetExpectedType(assignmentExpression.Left), this.Emitter.Resolver) &&
+                    Helpers.IsInteger32Type(this.Emitter.Resolver.Resolver.GetExpectedType(assignmentExpression.Right), this.Emitter.Resolver) &&
+                    Helpers.IsInteger32Type(rr.Type, this.Emitter.Resolver))
+                ))
+            {
+                this.Emitter.IsAssignment = true;
+                this.Emitter.AssignmentType = AssignmentOperatorType.Assign;
+                var oldValue1 = this.Emitter.ReplaceAwaiterByVar;
+                this.Emitter.ReplaceAwaiterByVar = true;
+                this.AcceptLeftExpression(assignmentExpression.Left, memberTargetrr);
+
+                if (this.Emitter.Writers.Count == initCount)
+                {
+                    this.Write(" = ");
+                }
+
+                this.Emitter.ReplaceAwaiterByVar = oldValue1;
+                this.Emitter.AssignmentType = oldAssigmentType;
+                this.Emitter.IsAssignment = oldAssigment;
+
+                isUint = NullableType.GetUnderlyingType(rr.Type).IsKnownType(KnownTypeCode.UInt32);
+                this.Write(JS.Types.BRIDGE_INT + "." + (isUint ? JS.Funcs.Math.UMUL : JS.Funcs.Math.MUL) + "(");
+                assignmentExpression.Left.AcceptVisitor(this.Emitter);
+                this.Write(", ");
+                oldValue1 = this.Emitter.ReplaceAwaiterByVar;
+                this.Emitter.ReplaceAwaiterByVar = true;
+
+                assignmentExpression.Right.AcceptVisitor(this.Emitter);
+
+                this.Write(")");
+
+                this.Emitter.ReplaceAwaiterByVar = oldValue1;
+                this.Emitter.AsyncExpressionHandling = asyncExpressionHandling;
+
+                if (this.Emitter.Writers.Count > initCount)
+                {
+                    this.PopWriter();
+                }
+
+                if (needReturnValue && !isField)
+                {
+                    if (needTempVar)
+                    {
+                        this.Write(", " + variable);
+                    }
+                    else
+                    {
+                        this.Write(", ");
+                        this.Emitter.IsAssignment = false;
+                        assignmentExpression.Right.AcceptVisitor(this.Emitter);
+                        this.Emitter.IsAssignment = oldAssigment;
+                    }
+                }
+
+                if (needReturnValue)
+                {
+                    this.Write(")");
+                }
+
+                return;
+            }
+
             if (assignmentExpression.Operator == AssignmentOperatorType.Add ||
                 assignmentExpression.Operator == AssignmentOperatorType.Subtract)
             {

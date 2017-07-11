@@ -5950,7 +5950,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var rMax1 = (max + 1) | 0;
                     var rMax2 = Bridge.identity(max1, (max1 = (max1 + 1) | 0));
                     var rMax3 = ((max2 = (max2 + 1) | 0));
-                    var rMax4 = (2 * max) | 0;
+                    var rMax4 = Bridge.Int.mul(2, max);
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2147483648", Bridge.box(rMax1, System.Int32), "Through identifier +");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("2147483647", Bridge.box(rMax2, System.Int32), "Through identifier post++");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2147483648", Bridge.box(rMax3, System.Int32), "Through identifier ++pre");
@@ -5959,7 +5959,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2147483648", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max + 1) | 0), System.Int32)), "Through parameter +");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("2147483647", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.identity(max3, (max3 = (max3 + 1) | 0)), System.Int32)), "Through parameter post++");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2147483648", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max4 = (max4 + 1) | 0)), System.Int32)), "Through parameter ++pre");
-                    Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((2 * max) | 0), System.Int32)), "Through parameter *");
+                    Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.Int.mul(2, max), System.Int32)), "Through parameter *");
 
                     var min = -2147483648;
 
@@ -5993,7 +5993,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var rMax1 = (max + 1) >>> 0;
                     var rMax2 = Bridge.identity(max1, (max1 = (max1 + 1) >>> 0));
                     var rMax3 = ((max2 = (max2 + 1) >>> 0));
-                    var rMax4 = (2 * max) >>> 0;
+                    var rMax4 = Bridge.Int.umul(2, max);
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("0", Bridge.box(rMax1, System.UInt32), "Through identifier +");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("4294967295", Bridge.box(rMax2, System.UInt32), "Through identifier post++");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("0", Bridge.box(rMax3, System.UInt32), "Through identifier ++pre");
@@ -6002,7 +6002,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("0", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max + 1) >>> 0), System.UInt32)), "Through parameter +");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("4294967295", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.identity(max3, (max3 = (max3 + 1) >>> 0)), System.UInt32)), "Through parameter post++");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("0", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max4 = (max4 + 1) >>> 0)), System.UInt32)), "Through parameter ++pre");
-                    Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("4294967294", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((2 * max) >>> 0), System.UInt32)), "Through parameter *");
+                    Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("4294967294", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.Int.umul(2, max), System.UInt32)), "Through parameter *");
 
                     var min = 0;
 
@@ -6245,6 +6245,44 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.Collections.Generic.GenericDictionaryTests", {
         methods: {
+            TestPerformance: function () {
+                var dict = new (System.Collections.Generic.Dictionary$2(System.String,System.Int32))();
+
+                var key = System.String.fromCharCount(120, 10000);
+                dict.set(key, 123);
+
+                var timer = System.Diagnostics.Stopwatch.startNew();
+                for (var i = 0; i < 100000; i = (i + 1) | 0) {
+                    var f = dict.get(key);
+                }
+                timer.stop();
+
+                Bridge.Test.NUnit.Assert.True(timer.milliseconds().lt(System.Int64(3000)), "Performance shoud be faster than 3000ms, actual = " + timer.milliseconds());
+            },
+            TestOrder: function () {
+                var $t;
+                var data = new (System.Collections.Generic.Dictionary$2(System.Int32,System.String))();
+
+                data.add(30, "a");
+                data.add(10, "c");
+                data.add(20, "b");
+
+                var actualOutput = "";
+                var expectedOutput = "30 10 20 ";
+
+                $t = Bridge.getEnumerator(data.getKeys(), System.Int32);
+                try {
+                    while ($t.moveNext()) {
+                        var k = $t.Current;
+                        actualOutput = System.String.concat(actualOutput, (System.String.concat(k.toString(), " ")));
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }
+                Bridge.Test.NUnit.Assert.AreEqual(expectedOutput, actualOutput);
+            },
             TypePropertiesAreCorrect: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[System.String, mscorlib]]", Bridge.Reflection.getTypeFullName(System.Collections.Generic.Dictionary$2(System.Int32,System.String)), "FullName should be correct");
                 var dict = new (System.Collections.Generic.Dictionary$2(System.Int32,System.String))();
@@ -6648,12 +6686,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual(null, el.value, "Enumerable initial value");
                 Bridge.Test.NUnit.Assert.True(en.System$Collections$IEnumerator$moveNext(), "Enumerable MoveNext true");
                 el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")];
-                Bridge.Test.NUnit.Assert.AreEqual(1, el.key, "Enumerable first key");
-                Bridge.Test.NUnit.Assert.AreEqual("a", el.value, "Enumerable first value");
+                Bridge.Test.NUnit.Assert.AreEqual(2, el.key, "Enumerable first key");
+                Bridge.Test.NUnit.Assert.AreEqual("b", el.value, "Enumerable first value");
                 Bridge.Test.NUnit.Assert.True(en.System$Collections$IEnumerator$moveNext(), "Enumerable MoveNext true");
                 el = en[Bridge.geti(en, "System$Collections$Generic$IEnumerator$1$System$Collections$Generic$KeyValuePair$2$System$Int32$System$String$Current$1", "System$Collections$Generic$IEnumerator$1$Current$1")];
-                Bridge.Test.NUnit.Assert.AreEqual(2, el.key, "Enumerable second key");
-                Bridge.Test.NUnit.Assert.AreEqual("b", el.value, "Enumerable second value");
+                Bridge.Test.NUnit.Assert.AreEqual(1, el.key, "Enumerable second key");
+                Bridge.Test.NUnit.Assert.AreEqual("a", el.value, "Enumerable second value");
                 Bridge.Test.NUnit.Assert.False(en.System$Collections$IEnumerator$moveNext(), "Enumerable MoveNext false");
 
 
@@ -6679,11 +6717,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 }, System.Collections.Generic.KeyValuePair$2(System.Int32,System.String));
                 System.Array.copyTo(d, cta, 0, System.Collections.Generic.KeyValuePair$2(System.Int32,System.String));
 
-                Bridge.Test.NUnit.Assert.AreEqual(1, cta[System.Array.index(0, cta)].key, "ICollection<KeyValuePair> CopyTo Getter[0] Key");
-                Bridge.Test.NUnit.Assert.AreEqual("a", cta[System.Array.index(0, cta)].value, "ICollection<KeyValuePair> CopyTo Getter[0] Value");
+                Bridge.Test.NUnit.Assert.AreEqual(2, cta[System.Array.index(0, cta)].key, "ICollection<KeyValuePair> CopyTo Getter[0] Key");
+                Bridge.Test.NUnit.Assert.AreEqual("b", cta[System.Array.index(0, cta)].value, "ICollection<KeyValuePair> CopyTo Getter[0] Value");
 
-                Bridge.Test.NUnit.Assert.AreEqual(2, cta[System.Array.index(1, cta)].key, "ICollection<KeyValuePair> CopyTo Getter[1] Key");
-                Bridge.Test.NUnit.Assert.AreEqual("b", cta[System.Array.index(1, cta)].value, "ICollection<KeyValuePair> CopyTo Getter[1] Value");
+                Bridge.Test.NUnit.Assert.AreEqual(1, cta[System.Array.index(1, cta)].key, "ICollection<KeyValuePair> CopyTo Getter[1] Key");
+                Bridge.Test.NUnit.Assert.AreEqual("a", cta[System.Array.index(1, cta)].value, "ICollection<KeyValuePair> CopyTo Getter[1] Value");
 
                 Bridge.Test.NUnit.Assert.AreEqual(0, cta[System.Array.index(2, cta)].key, "ICollection<KeyValuePair> CopyTo Getter[2] Key");
                 Bridge.Test.NUnit.Assert.AreEqual(null, cta[System.Array.index(2, cta)].value, "ICollection<KeyValuePair> CopyTo Getter[2] Value");
@@ -24313,7 +24351,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             return p.Count < 501 && Bridge.referenceEquals(p.Group, "A");
         },
         f5: function (p, index) {
-            return p.Count < ((index * 100) | 0);
+            return p.Count < Bridge.Int.mul(index, 100);
         }
     });
 
@@ -25528,8 +25566,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             LiftedMultiplicationWorks: function () {
                 var a = 2, b = 3, c = null;
-                Bridge.Test.NUnit.Assert.AreStrictEqual(6, Bridge.Int.clip32(System.Nullable.mul(a, b)));
-                Bridge.Test.NUnit.Assert.AreStrictEqual(null, Bridge.Int.clip32(System.Nullable.mul(a, c)));
+                Bridge.Test.NUnit.Assert.AreStrictEqual(6, Bridge.Int.mul(a, b));
+                Bridge.Test.NUnit.Assert.AreStrictEqual(null, Bridge.Int.mul(a, c));
             },
             LiftedBitwiseAndWorks: function () {
                 var a = 6, b = 3, c = null;
@@ -42424,7 +42462,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         methods: {
             HandleNumber$1: function (i) {
-                return ((i * 100) | 0);
+                return Bridge.Int.mul(i, 100);
             }
         }
     });

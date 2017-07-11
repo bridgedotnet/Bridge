@@ -159,7 +159,7 @@
                         throw new System.ArgumentOutOfRangeException("length", (715827882).toString());
                     }
 
-                    var chArrayLength = (length * 3) | 0;
+                    var chArrayLength = Bridge.Int.mul(length, 3);
 
                     var chArray = System.Array.init(chArrayLength, 0, System.Char);
                     var i = 0;

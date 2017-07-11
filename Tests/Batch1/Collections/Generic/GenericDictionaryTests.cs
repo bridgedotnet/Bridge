@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Bridge.ClientTest.Collections.Generic
 {
@@ -20,6 +21,44 @@ namespace Bridge.ClientTest.Collections.Generic
             {
                 return obj[0];
             }
+        }
+
+        [Test]
+        public void TestPerformance()
+        {
+            var dict = new Dictionary<string, int>();
+
+            var key = new String('x', 10000);
+            dict[key] = 123;
+
+            var timer = Stopwatch.StartNew();
+            for (var i = 0; i < 100000; i++)
+            {
+                var f = dict[key];
+            }
+            timer.Stop();
+
+            Assert.True(timer.ElapsedMilliseconds < 3000, "Performance shoud be faster than 3000ms, actual = " + timer.ElapsedMilliseconds);
+        }
+
+        [Test]
+        public void TestOrder()
+        {
+            Dictionary<int, string> data = new Dictionary<int, string>();
+
+            data.Add(30, "a");
+            data.Add(10, "c");
+            data.Add(20, "b");
+
+            string actualOutput = "";
+            string expectedOutput = "30 10 20 ";
+
+            foreach (int k in data.Keys)
+            {
+                actualOutput += k.ToString() + " ";
+            }
+
+            Assert.AreEqual(expectedOutput, actualOutput);
         }
 
         [Test]
@@ -450,12 +489,12 @@ namespace Bridge.ClientTest.Collections.Generic
             Assert.AreEqual(null, el.Value, "Enumerable initial value");
             Assert.True(en.MoveNext(), "Enumerable MoveNext true");
             el = en.Current;
-            Assert.AreEqual(1, el.Key, "Enumerable first key");
-            Assert.AreEqual("a", el.Value, "Enumerable first value");
+            Assert.AreEqual(2, el.Key, "Enumerable first key");
+            Assert.AreEqual("b", el.Value, "Enumerable first value");
             Assert.True(en.MoveNext(), "Enumerable MoveNext true");
             el = en.Current;
-            Assert.AreEqual(2, el.Key, "Enumerable second key");
-            Assert.AreEqual("b", el.Value, "Enumerable second value");
+            Assert.AreEqual(1, el.Key, "Enumerable second key");
+            Assert.AreEqual("a", el.Value, "Enumerable second value");
             Assert.False(en.MoveNext(), "Enumerable MoveNext false");
 
 
@@ -477,11 +516,11 @@ namespace Bridge.ClientTest.Collections.Generic
             var cta = new KeyValuePair<int, string>[3];
             d.CopyTo(cta, 0);
 
-            Assert.AreEqual(1, cta[0].Key, "ICollection<KeyValuePair> CopyTo Getter[0] Key");
-            Assert.AreEqual("a", cta[0].Value, "ICollection<KeyValuePair> CopyTo Getter[0] Value");
+            Assert.AreEqual(2, cta[0].Key, "ICollection<KeyValuePair> CopyTo Getter[0] Key");
+            Assert.AreEqual("b", cta[0].Value, "ICollection<KeyValuePair> CopyTo Getter[0] Value");
 
-            Assert.AreEqual(2, cta[1].Key, "ICollection<KeyValuePair> CopyTo Getter[1] Key");
-            Assert.AreEqual("b", cta[1].Value, "ICollection<KeyValuePair> CopyTo Getter[1] Value");
+            Assert.AreEqual(1, cta[1].Key, "ICollection<KeyValuePair> CopyTo Getter[1] Key");
+            Assert.AreEqual("a", cta[1].Value, "ICollection<KeyValuePair> CopyTo Getter[1] Value");
 
             Assert.AreEqual(0, cta[2].Key, "ICollection<KeyValuePair> CopyTo Getter[2] Key");
             Assert.AreEqual(null, cta[2].Value, "ICollection<KeyValuePair> CopyTo Getter[2] Value");

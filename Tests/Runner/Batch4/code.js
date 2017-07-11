@@ -5623,9 +5623,9 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             GetTestArr: function () {
                 var result = System.Array.init(192, 0, System.Byte);
                 for (var i = 0; i < 64; i = (i + 1) | 0) {
-                    result[System.Array.index(((i * 3) | 0), result)] = (i << 2) & 255;
-                    result[System.Array.index(((((i * 3) | 0) + 1) | 0), result)] = 0;
-                    result[System.Array.index(((((i * 3) | 0) + 2) | 0), result)] = 0;
+                    result[System.Array.index(Bridge.Int.mul(i, 3), result)] = (i << 2) & 255;
+                    result[System.Array.index(((Bridge.Int.mul(i, 3) + 1) | 0), result)] = 0;
+                    result[System.Array.index(((Bridge.Int.mul(i, 3) + 2) | 0), result)] = 0;
                 }
                 return result;
             },
@@ -10676,8 +10676,8 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
             },
             LiftedMultiplicationWorks: function () {
                 var a = 2, b = 3, c = null;
-                Bridge.Test.NUnit.Assert.AreStrictEqual(6, Bridge.Int.clip32(System.Nullable.mul(a, b)));
-                Bridge.Test.NUnit.Assert.AreStrictEqual(null, Bridge.Int.clip32(System.Nullable.mul(a, c)));
+                Bridge.Test.NUnit.Assert.AreStrictEqual(6, Bridge.Int.mul(a, b));
+                Bridge.Test.NUnit.Assert.AreStrictEqual(null, Bridge.Int.mul(a, c));
             },
             LiftedBitwiseAndWorks: function () {
                 var a = 6, b = 3, c = null;
@@ -16434,7 +16434,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
         statics: {
             methods: {
                 AddTimezoneMinutesOffset: function (dt) {
-                    return new Date(dt.getTime() - ((dt.getTimezoneOffset() * 60000) | 0));
+                    return new Date(dt.getTime() - Bridge.Int.mul(dt.getTimezoneOffset(), 60000));
                 }
             }
         },

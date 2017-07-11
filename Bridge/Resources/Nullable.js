@@ -107,7 +107,7 @@
         },
 
         mul: function (a, b) {
-            return Bridge.hasValue$1(a, b) ? a * b : null;
+            return Bridge.hasValue$1(a, b) ? Bridge.Int.mul(a, b) : null;
         },
 
         sl: function (a, b) {

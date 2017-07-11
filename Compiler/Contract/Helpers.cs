@@ -330,6 +330,14 @@ namespace Bridge.Contract
                 || type.Equals(resolver.Compilation.FindType(KnownTypeCode.UInt64));
         }
 
+        public static bool IsInteger32Type(IType type, IMemberResolver resolver)
+        {
+            type = type.IsKnownType(KnownTypeCode.NullableOfT) ? ((ParameterizedType)type).TypeArguments[0] : type;
+
+            return type.Equals(resolver.Compilation.FindType(KnownTypeCode.Int32))
+                || type.Equals(resolver.Compilation.FindType(KnownTypeCode.UInt32));
+        }
+
         public static bool IsFloatType(IType type, IMemberResolver resolver)
         {
             type = type.IsKnownType(KnownTypeCode.NullableOfT) ? ((ParameterizedType)type).TypeArguments[0] : type;
