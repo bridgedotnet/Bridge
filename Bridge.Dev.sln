@@ -65,6 +65,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "packages", "packages", "{0A8F2D26-ED54-4A8C-A323-A8018F6DD742}"
 	ProjectSection(SolutionItems) = preProject
 		.build\packages\collect.bat = .build\packages\collect.bat
+		.build\packages\collect.sh = .build\packages\collect.sh
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{3E6E252D-69D8-4B9A-8E6C-E994697F8090}"
