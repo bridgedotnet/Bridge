@@ -38,7 +38,7 @@ namespace Bridge.ClientTest.Collections.Generic
             }
             timer.Stop();
 
-            Assert.True(timer.ElapsedMilliseconds < 300, "Performance shoud be faster than 300ms, actual = " + timer.ElapsedMilliseconds);
+            Assert.True(timer.ElapsedMilliseconds < 3000, "Performance shoud be faster than 3000ms, actual = " + timer.ElapsedMilliseconds);
         }
 
         [Test]

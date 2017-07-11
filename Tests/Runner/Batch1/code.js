@@ -6257,7 +6257,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 }
                 timer.stop();
 
-                Bridge.Test.NUnit.Assert.True(timer.milliseconds().lt(System.Int64(300)), "Performance shoud be faster than 300ms, actual = " + timer.milliseconds());
+                Bridge.Test.NUnit.Assert.True(timer.milliseconds().lt(System.Int64(3000)), "Performance shoud be faster than 3000ms, actual = " + timer.milliseconds());
             },
             TestOrder: function () {
                 var $t;
