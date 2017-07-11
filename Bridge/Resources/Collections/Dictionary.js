@@ -90,6 +90,12 @@
                         this.add(name, obj[name]);
                     }
                 }
+
+                // If the keys are strings and the default comparer is being used (not one like that has to "normalise" strings, such as a case-insensitive comparer) then
+                // we can attach the key/value pairs directly to the entries object, which avoids having to hash the keys when storing or searching for them. This will mean
+                // that more work is done by the browser's native code (which is optimised for object property updates and retrievals) and less work needs to be done by
+                // JavaScript. The longer the string keys, the more beneficial this is (since the hashing cost is O(N) for strings).
+                this.isSimpleStringKey = (TKey === System.String) && (this.comparer === System.Collections.Generic.EqualityComparer$1(TKey).def);
             },
 
             containsPair: function(pair) {
@@ -117,10 +123,38 @@
             },
 
             getKeys: function () {
+                var e, keys;
+
+                if (this.isSimpleStringKey) {
+                    var keys = [];
+
+                    for (e in this.entries) {
+                        if (this.entries.hasOwnProperty(e)) {
+                            keys.push(e);
+                        }
+                    }
+
+                    return System.Array.init(keys, TKey);
+                }
+
                 return new (System.Collections.Generic.DictionaryCollection$1(TKey))(this, true);
             },
 
             getValues: function () {
+                var e, values;
+
+                if (this.isSimpleStringKey) {
+                    var values = [];
+
+                    for (e in this.entries) {
+                        if (this.entries.hasOwnProperty(e)) {
+                            values.push(this.entries[e].value);
+                        }
+                    }
+
+                    return System.Array.init(values, TValue);
+                }
+
                 return new (System.Collections.Generic.DictionaryCollection$1(TValue))(this, false);
             },
 
@@ -130,9 +164,16 @@
             },
 
             findEntry: function (key) {
-                var hash = this.comparer.getHashCode2(key),
-                    entries,
-                    i;
+                var hash, entries, i;
+
+                if (this.isSimpleStringKey) {
+                    if (this.entries.hasOwnProperty(key)) {
+                        return this.entries[key];
+                    }
+                    return;
+                }
+
+                hash = this.comparer.getHashCode2(key);
 
                 if (Bridge.isDefined(this.entries[hash])) {
                     entries = this.entries[hash];
@@ -154,7 +195,7 @@
 
                 for (e in this.entries) {
                     if (this.entries.hasOwnProperty(e)) {
-                        var entries = this.entries[e];
+                        var entries = this.isSimpleStringKey ? [this.entries[e]] : this.entries[e];
 
                         for (i = 0; i < entries.length; i++) {
                             if (this.comparer.equals2(entries[i].value, value)) {
@@ -198,13 +239,19 @@
                     return;
                 }
 
-                hash = this.comparer.getHashCode2(key);
                 entry = new (System.Collections.Generic.KeyValuePair$2(TKey, TValue))(key, value);
 
-                if (this.entries[hash]) {
-                    this.entries[hash].push(entry);
-                } else {
-                    this.entries[hash] = [entry];
+                if (this.isSimpleStringKey) {
+                    this.entries[key] = entry;
+                }
+                else {
+                    hash = this.comparer.getHashCode2(key);
+
+                    if (this.entries[hash]) {
+                        this.entries[hash].push(entry);
+                    } else {
+                        this.entries[hash] = [entry];
+                    }
                 }
 
                 this.count++;
@@ -223,9 +270,18 @@
             },
 
             remove: function (key) {
-                var hash = this.comparer.getHashCode2(key),
-                    entries,
-                    i;
+                var hash, entries, i;
+
+                if (this.isSimpleStringKey) {
+                    if (this.entries.hasOwnProperty(key)) {
+                        delete this.entries[key];
+                        this.count--;
+                        return true;
+                    }
+                    return false;
+                }
+
+                hash = this.comparer.getHashCode2(key);
 
                 if (!this.entries[hash]) {
                     return false;
