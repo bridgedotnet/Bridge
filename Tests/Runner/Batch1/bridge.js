@@ -11766,7 +11766,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 for (i = 0; i < entries.length; i++) {
                     if (this.comparer.equals2(entries[i].key, key)) {
                         entries.splice(i, 1);
-                        
+
                         if (entries.length == 0) {
                             delete this.entries[hash];
                             this.keys.splice(this.keys.indexOf(hash), 1);
@@ -11906,6 +11906,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             }
         };
     });
+
     // @source List.js
 
     Bridge.define('System.Collections.Generic.List$1', function (T) {

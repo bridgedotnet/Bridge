@@ -277,7 +277,7 @@
                 for (i = 0; i < entries.length; i++) {
                     if (this.comparer.equals2(entries[i].key, key)) {
                         entries.splice(i, 1);
-                        
+
                         if (entries.length == 0) {
                             delete this.entries[hash];
                             this.keys.splice(this.keys.indexOf(hash), 1);
