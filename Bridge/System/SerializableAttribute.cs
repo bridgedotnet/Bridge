@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Reflection;
-using Bridge;
 
 namespace System
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, Inherited = false)]
-    [External]
-    [NonScriptable]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Enum | AttributeTargets.Delegate, Inherited = false)]
+    [Bridge.External]
+    [Bridge.NonScriptable]
     public sealed class SerializableAttribute : Attribute
     {
     }
