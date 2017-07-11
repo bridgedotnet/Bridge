@@ -43,11 +43,31 @@
     <file src="../../Compiler/Contract/bin/Release/Mono.Cecil.Rocks.dll" target="tools/Mono.Cecil.Rocks.dll" />
     <file src="../../Compiler/Build/bin/Release/Newtonsoft.Json.dll" target="tools/Newtonsoft.Json.dll" />
     <file src="../../Compiler/Build/bin/Release/Object.Net.Utilities.dll" target="tools/Object.Net.Utilities.dll" />
+    <file src="../../Compiler/Translator/bin/Release/System.AppContext.dll" target="tools/System.AppContext.dll" />
     <file src="../../Compiler/Build/bin/Release/System.Collections.Immutable.dll" target="tools/System.Collections.Immutable.dll" />
-    <file src="../../Compiler/Build/bin/Release/System.Reflection.Metadata.dll" target="tools/System.Reflection.Metadata.dll" />
-    <file src="../../Compiler/Build/bin/Release/TopologicalSorting.dll" target="tools/TopologicalSorting.dll" />
-    <file src="../../Compiler/Build/bin/Release/System.ValueTuple.dll" target="tools/System.ValueTuple.dll" />
+    <file src="../../Compiler/Translator/bin/Release/System.Composition.AttributedModel.dll" target="tools/System.Composition.AttributedModel.dll" />
+    <file src="../../Compiler/Translator/bin/Release/System.Composition.Convention.dll" target="tools/System.Composition.Convention.dll" />
+    <file src="../../Compiler/Translator/bin/Release/System.Composition.Hosting.dll" target="tools/System.Composition.Hosting.dll" />
+    <file src="../../Compiler/Translator/bin/Release/System.Composition.Runtime.dll" target="tools/System.Composition.Runtime.dll" />
+    <file src="../../Compiler/Translator/bin/Release/System.Composition.TypedParts.dll" target="tools/System.Composition.TypedParts.dll" />
+    <file src="../../Compiler/Translator/bin/Release/System.Console.dll" target="tools/System.Console.dll" />
+    <file src="../../Compiler/Translator/bin/Release/System.Diagnostics.FileVersionInfo.dll" target="tools/System.Diagnostics.FileVersionInfo.dll" />
+    <file src="../../Compiler/Translator/bin/Release/System.Diagnostics.StackTrace.dll" target="tools/System.Diagnostics.StackTrace.dll" />
+    <file src="../../Compiler/Translator/bin/Release/System.IO.Compression.dll" target="tools/System.IO.Compression.dll" />
     <file src="../../Compiler/Build/bin/Release/System.IO.FileSystem.dll" target="tools/System.IO.FileSystem.dll" />
     <file src="../../Compiler/Build/bin/Release/System.IO.FileSystem.Primitives.dll" target="tools/System.IO.FileSystem.Primitives.dll" />
+    <file src="../../Compiler/Build/bin/Release/System.Reflection.Metadata.dll" target="tools/System.Reflection.Metadata.dll" />
+    <file src="../../Compiler/Translator/bin/Release/System.Security.Cryptography.Algorithms.dll" target="tools/System.Security.Cryptography.Algorithms.dll" />
+    <file src="../../Compiler/Translator/bin/Release/System.Security.Cryptography.Encoding.dll" target="tools/System.Security.Cryptography.Encoding.dll" />
+    <file src="../../Compiler/Translator/bin/Release/System.Security.Cryptography.Primitives.dll" target="tools/System.Security.Cryptography.Primitives.dll" />
+    <file src="../../Compiler/Translator/bin/Release/System.Security.Cryptography.X509Certificates.dll" target="tools/System.Security.Cryptography.X509Certificates.dll" />
+    <file src="../../Compiler/Build/bin/Release/System.Text.Encoding.CodePages.dll" target="tools/System.Text.Encoding.CodePages.dll" />
+    <file src="../../Compiler/Translator/bin/Release/System.Threading.Thread.dll" target="tools/System.Threading.Thread.dll" />
+    <file src="../../Compiler/Build/bin/Release/System.ValueTuple.dll" target="tools/System.ValueTuple.dll" />
+    <file src="../../Compiler/Build/bin/Release/System.Xml.ReaderWriter.dll" target="tools/System.Xml.ReaderWriter.dll" />
+    <file src="../../Compiler/Translator/bin/Release/System.Xml.XmlDocument.dll" target="tools/System.Xml.XmlDocument.dll" />
+    <file src="../../Compiler/Translator/bin/Release/System.Xml.XPath.dll" target="tools/System.Xml.XPath.dll" />
+    <file src="../../Compiler/Translator/bin/Release/System.Xml.XPath.XDocument.dll" target="tools/System.Xml.XPath.XDocument.dll" />
+    <file src="../../Compiler/Build/bin/Release/TopologicalSorting.dll" target="tools/TopologicalSorting.dll" />
   </files>
 </package>
