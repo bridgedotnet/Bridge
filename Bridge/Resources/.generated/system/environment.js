@@ -90,7 +90,7 @@
                     this.ExitCode = 0;
                 },
                 ctor: function () {
-                    System.Environment.variables = new (System.Collections.Generic.Dictionary$2(System.String,System.String))();
+                    System.Environment.variables = new (System.Collections.Generic.Dictionary$2(System.String,System.String)).ctor();
                     System.Environment.patchDictionary(System.Environment.variables);
                 }
             },
@@ -177,7 +177,7 @@
                     return System.Environment.getEnvironmentVariable(variable);
                 },
                 getEnvironmentVariables: function () {
-                    return System.Environment.patchDictionary(new (System.Collections.Generic.Dictionary$2(System.String,System.String))(System.Environment.variables));
+                    return System.Environment.patchDictionary(new (System.Collections.Generic.Dictionary$2(System.String,System.String)).$ctor1(System.Environment.variables));
                 },
                 getEnvironmentVariables$1: function (target) {
                     return System.Environment.getEnvironmentVariables();
@@ -201,7 +201,7 @@
                             System.Environment.variables.remove(variable);
                         }
                     } else {
-                        System.Environment.variables.set(variable, value);
+                        System.Environment.variables.setItem(variable, value);
                     }
                 },
                 setEnvironmentVariable$1: function (variable, value, target) {

@@ -1344,7 +1344,6 @@
     <Content Include="Resources\Collections\List.js" />
     <Content Include="Resources\Collections\ArrayEnumerator.js" />
     <Content Include="Resources\Collections\CustomEnumerator.js" />
-    <Content Include="Resources\Collections\Dictionary.js" />
     <Content Include="Resources\Collections\Interfaces.js" />
     <Content Include="Resources\Globalization.js" />
     <Content Include="Resources\Exception.js" />

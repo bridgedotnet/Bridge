@@ -59,7 +59,7 @@
         "Resources/Collections/ArrayEnumerator.js",
         "Resources/Collections/EqualityComparer.js",
         "Resources/Collections/Comparer.js",
-        "Resources/Collections/Dictionary.js",
+        "Resources/.generated/dictionary.js",
         "Resources/Collections/List.js",
         "Resources/String.js",
         "Resources/Task.js",
