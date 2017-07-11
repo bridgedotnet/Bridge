@@ -35,7 +35,6 @@
     <NoStdLib>true</NoStdLib>
     <Prefer32Bit>false</Prefer32Bit>
     <NoWarn>1591, 0626, 0824, 0660, 0661</NoWarn>
-    <LangVersion>6</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
