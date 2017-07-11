@@ -37,7 +37,8 @@ namespace Bridge.ClientTest.Collections.Generic
                 var f = dict[key];
             }
             timer.Stop();
-            Assert.True(timer.ElapsedMilliseconds < 100);
+
+            Assert.True(timer.ElapsedMilliseconds < 300, "Performance shoud be faster than 300ms, actual = " + timer.ElapsedMilliseconds);
         }
 
         [Test]
