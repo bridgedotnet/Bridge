@@ -6,7 +6,7 @@
   "generateDocumentation": "None",
   "fileNameCasing": "CamelCase",
   "logging": {
-    "level": "None"
+    "level": "Trace"
   },
   "report": true,
   "assembly": {
