@@ -194,7 +194,7 @@ namespace Bridge.Translator
             logger.Trace("Loaded assemblies:");
             foreach (var a in AppDomain.CurrentDomain.GetAssemblies())
             {
-                logger.Trace("\t" + a.FullName);
+                logger.Trace(string.Format("\t{0} {1} {2}", a.FullName, a.Location, a.GlobalAssemblyCache));
             }
 
             var path = GetPluginPath(translator, config);
