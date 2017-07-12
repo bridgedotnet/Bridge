@@ -928,7 +928,7 @@
                 result.v = this.parse(value, provider, utc, true);
 
                 if (result.v == null) {
-                    result.v = System.DateTime.getDefaultValue();
+                    result.v = System.DateTime.getMinValue();
 
                     return false;
                 }
@@ -940,7 +940,7 @@
                 r.v = this.parseExact(v, f, p, utc, true);
 
                 if (r.v == null) {
-                    r.v = System.DateTime.getDefaultValue();
+                    r.v = System.DateTime.getMinValue();
 
                     return false;
                 }
@@ -982,7 +982,7 @@
             },
 
             addYears: function (d, v) {
-                d = (d !== undefined) ? d : System.DateTime.getDefaultValue();
+                d = (d !== undefined) ? d : System.DateTime.getMinValue();
                 v = (v !== undefined) ? v : 0;
 
                 d.kind = (d.kind !== undefined) ? d.kind : 0;
@@ -997,7 +997,7 @@
             },
 
             addMonths: function (d, v) {
-                d = (d !== undefined) ? d : System.DateTime.getDefaultValue();
+                d = (d !== undefined) ? d : System.DateTime.getMinValue();
                 v = (v !== undefined) ? v : 0;
 
                 d.kind = (d.kind !== undefined) ? d.kind : 0;
@@ -1017,7 +1017,7 @@
             },
 
             addDays: function (d, v) {
-                d = (d !== undefined) ? d : System.DateTime.getDefaultValue();
+                d = (d !== undefined) ? d : System.DateTime.getMinValue();
                 v = (v !== undefined) ? v : 0;
 
                 d.kind = (d.kind !== undefined) ? d.kind : 0;
@@ -1030,7 +1030,7 @@
             },
 
             addHours: function (d, v) {
-                d = (d !== undefined) ? d : System.DateTime.getDefaultValue();
+                d = (d !== undefined) ? d : System.DateTime.getMinValue();
                 v = (v !== undefined) ? v : 0;
 
                 d.kind = (d.kind !== undefined) ? d.kind : 0;
@@ -1043,7 +1043,7 @@
             },
 
             addMinutes: function (d, v) {
-                d = (d !== undefined) ? d : System.DateTime.getDefaultValue();
+                d = (d !== undefined) ? d : System.DateTime.getMinValue();
                 v = (v !== undefined) ? v : 0;
 
                 d.kind = (d.kind !== undefined) ? d.kind : 0;
@@ -1056,7 +1056,7 @@
             },
 
             addSeconds: function (d, v) {
-                d = (d !== undefined) ? d : System.DateTime.getDefaultValue();
+                d = (d !== undefined) ? d : System.DateTime.getMinValue();
                 v = (v !== undefined) ? v : 0;
 
                 d.kind = (d.kind !== undefined) ? d.kind : 0;
@@ -1069,7 +1069,7 @@
             },
 
             addMilliseconds: function (d, v) {
-                d = (d !== undefined) ? d : System.DateTime.getDefaultValue();
+                d = (d !== undefined) ? d : System.DateTime.getMinValue();
                 v = (v !== undefined) ? v : 0;
 
                 d.kind = (d.kind !== undefined) ? d.kind : 0;
@@ -1082,7 +1082,7 @@
             },
 
             addTicks: function (d, v) {
-                d = (d !== undefined) ? d : System.DateTime.getDefaultValue();
+                d = (d !== undefined) ? d : System.DateTime.getMinValue();
                 v = (v !== undefined) ? v : 0;
 
                 return System.DateTime.addMilliseconds(d, v / 10000);
