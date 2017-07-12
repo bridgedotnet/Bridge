@@ -101,7 +101,6 @@ namespace Bridge.ClientTest.SimpleTypes
             DateHelper.AssertDate(dt5, DateTimeKind.Utc, 1000000000000000000, 3169, 11, 16);
         }
 
-
         [Test]
         public void YMDConstructorWorks()
         {
@@ -188,7 +187,7 @@ namespace Bridge.ClientTest.SimpleTypes
         public void MaxWorks()
         {
             var dt = DateTime.MaxValue;
-            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 3155378975999999999, 9999, 12, 31);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 3155378975999990000, 9999, 12, 31);
         }
 
         [Test]
@@ -478,34 +477,34 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.Throws<FormatException>(() => { var dt = DateTime.ParseExact("X", "yyyy-dd-MM", CultureInfo.InvariantCulture); });
         }
 
-        [Test]
-        public void ParseExactUTCWorks()
-        {
-            // ParseExactUTC is not part of the .NET API, but we'll reuse this
-            // test to check that converting to Utc Kind from ParseExact works.
-            // var dt = DateTime.ParseExactUTC("2012-12-08", "yyyy-dd-MM");
-            var d1 = DateTime.ParseExact("2012-12-08", "yyyy-dd-MM", true);
-            var d2 = DateTime.SpecifyKind(d1, DateTimeKind.Utc);
-            var utc = new DateTime(2012, 8, 12, 0, 0, 0, DateTimeKind.Utc);
+        // Not C# API
+        //[Test]
+        //public void ParseExactUTCWorks()
+        //{
+        //    var d1 = DateTime.ParseExact("2012-12-08", "yyyy-dd-MM", true);
+        //    var d2 = DateTime.SpecifyKind(d1, DateTimeKind.Utc);
+        //    var utc = new DateTime(2012, 8, 12, 0, 0, 0, DateTimeKind.Utc);
 
-            DateHelper.AssertDate(utc, d2);
-        }
+        //    DateHelper.AssertDate(utc, d2);
+        //}
 
-        [Test]
-        public void ParseExactUtcReturnsNullIfTheInputIsInvalid()
-        {
-            Assert.Throws<FormatException>(() => { var dt = DateTime.ParseExact("X", "yyyy-dd-MM", true); });
-        }
+        // Not C# API
+        //[Test]
+        //public void ParseExactUtcReturnsNullIfTheInputIsInvalid()
+        //{
+        //    Assert.Throws<FormatException>(() => { var dt = DateTime.ParseExact("X", "yyyy-dd-MM", true); });
+        //}
 
-        [Test]
-        public void ParseExactUTCWithCultureWorks()
-        {
-            var d1 = DateTime.ParseExact("2012-12-08", "yyyy-dd-MM", CultureInfo.InvariantCulture, true);
-            var d2 = DateTime.SpecifyKind(d1, DateTimeKind.Utc);
-            var utc = new DateTime(2012, 8, 12, 0, 0, 0, DateTimeKind.Utc);
+        // Not C# API
+        //[Test]
+        //public void ParseExactUTCWithCultureWorks()
+        //{
+        //    var d1 = DateTime.ParseExact("2012-12-08", "yyyy-dd-MM", CultureInfo.InvariantCulture, true);
+        //    var d2 = DateTime.SpecifyKind(d1, DateTimeKind.Utc);
+        //    var utc = new DateTime(2012, 8, 12, 0, 0, 0, DateTimeKind.Utc);
 
-            DateHelper.AssertDate(utc, d2);
-        }
+        //    DateHelper.AssertDate(utc, d2);
+        //}
 
         [Test]
         public void ParseExactWithLocalKinds()
@@ -557,11 +556,12 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual("9/15/2008 2:30:41 AM", d5.ToString());
         }
 
-        [Test]
-        public void ParseExactUtcWithCultureReturnsNullIfTheInputIsInvalid()
-        {
-            Assert.Throws<FormatException>(() => { var dt = DateTime.ParseExact("X", "yyyy-dd-MM", CultureInfo.InvariantCulture, true); });
-        }
+        // Not C# API
+        //[Test]
+        //public void ParseExactUtcWithCultureReturnsNullIfTheInputIsInvalid()
+        //{
+        //    Assert.Throws<FormatException>(() => { var dt = DateTime.ParseExact("X", "yyyy-dd-MM", CultureInfo.InvariantCulture, true); });
+        //}
 
         // Not C# API
         //[Test]

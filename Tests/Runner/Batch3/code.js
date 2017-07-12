@@ -1493,11 +1493,11 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             methods: {
                 TestClippingIssues: function () {
                     var v = 1;
-                    var result = ((v >>> 0) * 8) >>> 0;
+                    var result = Bridge.Int.umul((v >>> 0), 8);
                     Bridge.Test.NUnit.Assert.AreEqual(8, result);
 
                     var a = 1, b = 4;
-                    var res = (Bridge.Int.clip32(Math.ceil(a / 1.0)) * b) | 0;
+                    var res = Bridge.Int.mul(Bridge.Int.clip32(Math.ceil(a / 1.0)), b);
                     Bridge.Test.NUnit.Assert.AreEqual(4, res);
                 }
             }
@@ -3063,7 +3063,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                     var x = 0;
                     var y = 1;
 
-                    var retval = (x >= 0 && x < Bridge.ClientTest.Batch3.BridgeIssues.Bridge122.nx && Bridge.ClientTest.Batch3.BridgeIssues.Bridge122.breaker.length > ((((((x + 1) | 0)) * Bridge.ClientTest.Batch3.BridgeIssues.Bridge122.nx) | 0))) ? Bridge.ClientTest.Batch3.BridgeIssues.Bridge122.breaker.get([x, y]) : 0;
+                    var retval = (x >= 0 && x < Bridge.ClientTest.Batch3.BridgeIssues.Bridge122.nx && Bridge.ClientTest.Batch3.BridgeIssues.Bridge122.breaker.length > (Bridge.Int.mul((((x + 1) | 0)), Bridge.ClientTest.Batch3.BridgeIssues.Bridge122.nx))) ? Bridge.ClientTest.Batch3.BridgeIssues.Bridge122.breaker.get([x, y]) : 0;
 
                     Bridge.Test.NUnit.Assert.AreEqual(2, retval);
                 }
@@ -7463,10 +7463,10 @@ Bridge.$N1391Result =                     r;
         methods: {
             TestPropertyChangedEventArgs: function () {
                 var a = 3;
-                Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1510.Function(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1510.IntWrap(), {v:((a * 1000) | 0)})) === 3000);
-                Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1510.Function2(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1510.IntWrap2.op_Implicit(((a * 1000) | 0))) === 3000);
-                Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1510.Function3(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1510.IntWrap3(), {v:System.Int64(a * 1000)})).equals(System.Int64(3000)));
-                Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1510.Function4(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1510.IntWrap4.op_Implicit(System.Int64(((a * 1000) | 0)))).equals(System.Int64(3000)));
+                Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1510.Function(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1510.IntWrap(), {v:Bridge.Int.mul(a, 1000)})) === 3000);
+                Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1510.Function2(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1510.IntWrap2.op_Implicit(Bridge.Int.mul(a, 1000))) === 3000);
+                Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1510.Function3(Bridge.merge(new Bridge.ClientTest.Batch3.BridgeIssues.Bridge1510.IntWrap3(), {v:System.Int64(Bridge.Int.mul(a, 1000))})).equals(System.Int64(3000)));
+                Bridge.Test.NUnit.Assert.True(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1510.Function4(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1510.IntWrap4.op_Implicit(System.Int64(Bridge.Int.mul(a, 1000)))).equals(System.Int64(3000)));
             }
         }
     });
@@ -7836,7 +7836,7 @@ Bridge.$N1391Result =                     r;
                 var x1 = 1;
                 var y1 = System.Nullable.hasValue(x1) ? System.Decimal(((-System.Nullable.getValue(x1)) | 0)) : System.Decimal(0.0);
                 Bridge.Test.NUnit.Assert.False(y1.gt(System.Decimal(1)));
-                y1 = System.Nullable.hasValue(x1) ? System.Decimal(((-1 * (System.Nullable.getValue(x1))) | 0)) : System.Decimal(0.0);
+                y1 = System.Nullable.hasValue(x1) ? System.Decimal(Bridge.Int.mul(-1, (System.Nullable.getValue(x1)))) : System.Decimal(0.0);
                 Bridge.Test.NUnit.Assert.False(y1.gt(System.Decimal(1)));
             }
         }
@@ -17823,7 +17823,7 @@ Bridge.$N1391Result =                     r;
                                             continue;
                                         }
                                         case 3: {
-                                            step = (step * 10) | 0;
+                                            step = Bridge.Int.mul(step, 10);
 
                                             if ($jumpFromFinally > -1) {
                                                 $step = $jumpFromFinally;
@@ -24112,7 +24112,7 @@ Bridge.$N1391Result =                     r;
 
                     var sArr = System.Array.init(10, null, System.String);
                     for (var i = 0; i < 10; i = (i + 1) | 0) {
-                        sArr[System.Array.index(i, sArr)] = System.String.format("{0,-3}", Bridge.box(((i * 5) | 0), System.Int32));
+                        sArr[System.Array.index(i, sArr)] = System.String.format("{0,-3}", Bridge.box(Bridge.Int.mul(i, 5), System.Int32));
                     }
 
                     var s4 = sArr.join(":");
@@ -25003,7 +25003,7 @@ Bridge.$N1391Result =                     r;
                     var date = System.DateTime.create(2015, 1, 1, 0, 0, 0, 0);
 
                     var i = 1;
-                    var d = System.DateTime.addMinutes(date, ((10 + ((20 * i) | 0)) | 0));
+                    var d = System.DateTime.addMinutes(date, ((10 + Bridge.Int.mul(20, i)) | 0));
 
                     Bridge.Test.NUnit.Assert.AreEqual(30, System.DateTime.getMinute(d), "Bridge546 30 minutes");
                 },
@@ -25019,13 +25019,13 @@ Bridge.$N1391Result =                     r;
                     var d2 = System.DateTime.adddt(System.DateTime.adddt(date, span1), span2);
                     Bridge.Test.NUnit.Assert.AreEqual(22, System.DateTime.getMinute(d2), "Bridge546 d2");
 
-                    var d3 = System.DateTime.addDays(date, ((10 + ((20 * i) | 0)) | 0));
+                    var d3 = System.DateTime.addDays(date, ((10 + Bridge.Int.mul(20, i)) | 0));
                     Bridge.Test.NUnit.Assert.AreEqual(31, System.DateTime.getDay(d3), "Bridge546 d3");
 
-                    var d4 = System.DateTime.addHours(date, ((10 + ((20 * i) | 0)) | 0));
+                    var d4 = System.DateTime.addHours(date, ((10 + Bridge.Int.mul(20, i)) | 0));
                     Bridge.Test.NUnit.Assert.AreEqual(6, System.DateTime.getHour(d4), "Bridge546 d4");
 
-                    var d5 = System.DateTime.addSeconds(date, ((12 + ((20 * i) | 0)) | 0));
+                    var d5 = System.DateTime.addSeconds(date, ((12 + Bridge.Int.mul(20, i)) | 0));
                     Bridge.Test.NUnit.Assert.AreEqual(32, System.DateTime.getSecond(d5), "Bridge546 d5");
                 }
             }
@@ -27386,7 +27386,7 @@ Bridge.$N1391Result =                     r;
                                 try {
                                     while ($t1.moveNext()) {
                                         var bn = $t1.Current;
-                                        sum = (sum + ((i * bn) | 0)) | 0;
+                                        sum = (sum + Bridge.Int.mul(i, bn)) | 0;
                                     }
                                 } finally {
                                     if (Bridge.is($t1, System.IDisposable)) {
@@ -28260,7 +28260,7 @@ Bridge.$N1391Result =                     r;
                                 $t.System$IDisposable$dispose();
                             }
                         }var h = function () {
-                            sum = (sum * 2) | 0;
+                            sum = Bridge.Int.mul(sum, 2);
                         };
                         h();
                     };
@@ -31562,17 +31562,6 @@ Bridge.$N1391Result =                     r;
                     var a = Bridge.ClientTest.Batch3.BridgeIssues.Bridge306A.New(($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge306A.Props(), $t.Name = "A", $t));
                     Bridge.Test.NUnit.Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge306A+Props:A", a, "Bridge306A.New() works");
                 },
-                N329: function () {
-                    var d1 = { };
-                    var b1 = System.DateTime.tryParse("2001-01-01", null, d1, true);
-                    Bridge.Test.NUnit.Assert.True(b1, "TryParse parsed '2001-01-01'");
-                    Bridge.Test.NUnit.Assert.AreEqual(2001, System.DateTime.getYear(d1.v), "TryParse works Year");
-                    Bridge.Test.NUnit.Assert.AreEqual(1, System.DateTime.getMonth(d1.v), "TryParse works Month");
-                    Bridge.Test.NUnit.Assert.AreEqual(1, System.DateTime.getDay(d1.v), "TryParse works Day");
-
-                    var d2 = System.DateTime.parse("2001-01-01", null, true);
-                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.format(d1.v), System.DateTime.format(d2), "TryParse And Parse give the same result");
-                },
                 N335: function () {
                     var l = new (System.Collections.Generic.List$1(System.String))(System.Array.init(["1", "2", "3", "1"], System.String));
                     Bridge.Test.NUnit.Assert.AreEqual(3, l.indexOf("1", 2), "IndexOf with startIndex used");
@@ -31654,18 +31643,13 @@ Bridge.$N1391Result =                     r;
                         var r = interfacedDictionary.System$Collections$Generic$IDictionary$2$System$Int32$System$String$getItem(1);
                     }, "IDictionary getter throws exception when incorrect key used");
                 },
-                N349: function () {
-                    var date = { };
-                    var culture = new System.Globalization.CultureInfo("ru-RU");
-
-                    Bridge.Test.NUnit.Assert.True(culture != null, "Created CultureInfo(\"ru-RU\")");
-
-                    var parsed = System.DateTime.tryParse("22.08.2015", culture, date);
-                    Bridge.Test.NUnit.Assert.True(parsed, "Parsed \"22.08.2015\"");
-                    Bridge.Test.NUnit.Assert.AreEqual(2015, System.DateTime.getYear(date.v), "TryParse works Year");
-                    Bridge.Test.NUnit.Assert.AreEqual(8, System.DateTime.getMonth(date.v), "TryParse works Month");
-                    Bridge.Test.NUnit.Assert.AreEqual(22, System.DateTime.getDay(date.v), "TryParse works Day");
-                },
+                /**
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues
+                 * @return  {void}
+                 */
                 N377: function () {
                     var objectLiteralInstance = { field1: "field1 value", field3: 7 };
 
@@ -32090,7 +32074,7 @@ Bridge.$N1391Result =                     r;
             return _o45;
         },
         f3: function (i) {
-            return ((i * 2) | 0);
+            return Bridge.Int.mul(i, 2);
         },
         f4: function (_o46) {
             _o46.add(0);
@@ -33969,7 +33953,7 @@ Bridge.$N1391Result =                     r;
         },
         methods: {
             GetFoo: function () {
-                return ((2 * this.foo) | 0);
+                return Bridge.Int.mul(2, this.foo);
             }
         }
     });
@@ -34234,7 +34218,7 @@ Bridge.$N1391Result =                     r;
         },
         methods: {
             GetFoo: function () {
-                return ((3 * this.foo) | 0);
+                return Bridge.Int.mul(3, this.foo);
             },
             Call: function () {
                 return ((this.func() + 1000) | 0);

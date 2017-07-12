@@ -33613,7 +33613,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             MaxWorks: function () {
                 var dt = System.DateTime.getMaxValue();
-                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64([-197705729,734668917]), 9999, 12, 31);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64([-197715728,734668917]), 9999, 12, 31);
             },
             NowWorks: function () {
                 var dt = System.DateTime.getNow();
@@ -33770,26 +33770,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             ParseExactWithCultureReturnsNullIfTheInputIsInvalid: function () {
                 Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.JsDateTimeTests.f2);
             },
-            ParseExactUTCWorks: function () {
-                // ParseExactUTC is not part of the .NET API, but we'll reuse this
-                // test to check that converting to Utc Kind from ParseExact works.
-                // var dt = DateTime.ParseExactUTC("2012-12-08", "yyyy-dd-MM");
-                var d1 = System.DateTime.parseExact("2012-12-08", "yyyy-dd-MM", null, true);
-                var d2 = System.DateTime.specifyKind(d1, System.DateTimeKind.Utc);
-                var utc = System.DateTime.create(2012, 8, 12, 0, 0, 0, 0, System.DateTimeKind.Utc);
-
-                Bridge.ClientTestHelper.DateHelper.AssertDate(utc, d2);
-            },
-            ParseExactUtcReturnsNullIfTheInputIsInvalid: function () {
-                Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.JsDateTimeTests.f3);
-            },
-            ParseExactUTCWithCultureWorks: function () {
-                var d1 = System.DateTime.parseExact("2012-12-08", "yyyy-dd-MM", System.Globalization.CultureInfo.invariantCulture, true);
-                var d2 = System.DateTime.specifyKind(d1, System.DateTimeKind.Utc);
-                var utc = System.DateTime.create(2012, 8, 12, 0, 0, 0, 0, System.DateTimeKind.Utc);
-
-                Bridge.ClientTestHelper.DateHelper.AssertDate(utc, d2);
-            },
             ParseExactWithLocalKinds: function () {
                 var s1 = "2008-05-01T07:34:42-5:00";
                 var s2 = "2008-05-01 7:34:42Z";
@@ -33833,9 +33813,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var d5 = System.DateTime.parse(s5);
                 Bridge.Test.NUnit.Assert.AreEqual(System.DateTimeKind.Local, System.DateTime.getKind(d5));
                 Bridge.Test.NUnit.Assert.AreEqual("9/15/2008 2:30:41 AM", System.DateTime.format(d5));
-            },
-            ParseExactUtcWithCultureReturnsNullIfTheInputIsInvalid: function () {
-                Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.JsDateTimeTests.f4);
             },
             SubtractingDatesWorks: function () {
                 var ts = System.DateTime.subdd(System.DateTime.create(2011, 7, 12), System.DateTime.create(2011, 7, 11));
@@ -34154,12 +34131,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         f2: function () {
             var dt = System.DateTime.parseExact("X", "yyyy-dd-MM", System.Globalization.CultureInfo.invariantCulture);
-        },
-        f3: function () {
-            var dt = System.DateTime.parseExact("X", "yyyy-dd-MM", null, true);
-        },
-        f4: function () {
-            var dt = System.DateTime.parseExact("X", "yyyy-dd-MM", System.Globalization.CultureInfo.invariantCulture, true);
         }
     });
 
