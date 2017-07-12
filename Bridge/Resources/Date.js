@@ -10,7 +10,6 @@
         statics: {
             // Difference in Milliseconds from 1-Jan-0001 to 1-Jan-1970 at UTC
             minOffset: -62135596800000,
-
             // Difference in Milliseconds from 1-Jan-1970 to 9999-12-31T23:59:59.999
             maxOffset: 253402300799999,
 
@@ -20,7 +19,7 @@
 
             // UTC Min Value
             getMinValue: function () {
-                var d = new Date(System.DateTime.minOffset);
+                var d = new Date(System.DateTime.minOffset + (new Date(0).getTimezoneOffset() * 60 * 1000));
 
                 d.kind = 0;
 
@@ -29,21 +28,66 @@
 
             // UTC Max Value
             getMaxValue: function () {
-                var d = new Date(System.DateTime.maxOffset);
+                var d = new Date(System.DateTime.maxOffset + (new Date(0).getTimezoneOffset() * 60 * 1000));
 
                 d.kind = 0;
 
                 return d;
             },
 
+            // Get the number of ticks since 0001-01-01T00:00:00.0000000 UTC
+            getTicks: function (d) {
+                d.kind = (d.kind !== undefined) ? d.kind : 0;
+
+                var offset = 0;
+
+                if (d.kind !== 1) {
+                    offset = d.getTimezoneOffset() * 60 * 1000;
+                }
+
+                return System.Int64(d.getTime()).add(-System.DateTime.minOffset - offset).mul(10000);
+            },
+
+            toLocalTime: function (d) {
+                d.kind = (d.kind !== undefined) ? d.kind : 0;
+
+                var offset = 0;
+
+                if (d.kind !== 2) {
+                    offset += d.getTimezoneOffset() * 60 * 1000;
+                }
+
+                var d1 = new Date(d.getTime() - offset);
+
+                d1.kind = 2;
+
+                var ticks = System.DateTime.getTicks(d1);
+
+                if (ticks.gt(System.DateTime.getTicks(System.DateTime.getMaxValue())) || ticks.lt(0)) {
+                    d1 = new Date(d1.getTime() + (d1.getTimezoneOffset() * 60 * 1000));
+                    d1.kind = 2;
+                }
+
+                return d1;
+            },
+
+            toUniversalTime: function (d) {
+                var d1 = new Date(d.getTime());
+
+                d1.kind = 1;
+
+                var ticks = System.DateTime.getTicks(d1);
+
+                if (ticks.gt(System.DateTime.getTicks(System.DateTime.getMaxValue())) || ticks.lt(0)) {
+                    d1 = new Date(d1.getTime() - (d1.getTimezoneOffset() * 60 * 1000));
+                    d1.kind = 1;
+                }
+
+                return d1;
+            },
+
             getDefaultValue: function () {
-                var d = System.DateTime.getMinValue();
-
-                d = new Date(d.getTime() + (d.getTimezoneOffset() * 60 * 1000));
-
-                d.kind = 0;
-
-                return d;
+                return System.DateTime.getMinValue();
             },
 
             create: function (year, month, day, hour, minute, second, millisecond, kind) {
@@ -91,7 +135,6 @@
                     d.setFullYear(date.getFullYear());
                 }
                 
-
                 return d;
             },
 
@@ -109,19 +152,6 @@
                 d.kind = kind;
 
                 return d;
-            },
-
-            // Get the number of ticks since 0001-01-01T00:00:00.0000000 UTC
-            getTicks: function (d) {
-                d.kind = (d.kind !== undefined) ? d.kind : 0;
-
-                var offset = 0;
-
-                if (d.kind !== 1) {
-                    offset = d.getTimezoneOffset() * 60 * 1000;
-                }
-
-                return System.Int64(d.getTime()).add(-System.DateTime.minOffset - offset).mul(10000);
             },
 
             getToday: function () {
@@ -150,22 +180,6 @@
                 var d1 = System.DateTime.getDate(d);
 
                 return new System.TimeSpan((d - d1) * 10000);
-            },
-
-            toUniversalTime: function (d) {
-                var d1 = new Date(d.getTime());
-
-                d1.kind = 1;
-
-                return d1;
-            },
-
-            toLocalTime: function (d) {
-                var d1 = new Date(d.getTime());
-
-                d1.kind = 2;
-
-                return d1;
             },
 
             getKind: function (d) {
