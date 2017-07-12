@@ -881,13 +881,37 @@ namespace Bridge.Translator
                 }
 
                 var filesToDelete = new List<FileInfo>();
+                var filesToSkip = new List<Tuple<string, FileInfo>>();
                 foreach (var pattern in patterns)
                 {
-                    filesToDelete.AddRange(outputDirectory.GetFiles(pattern, SearchOption.AllDirectories));
+                    if (string.IsNullOrEmpty(pattern))
+                    {
+                        continue;
+                    }
+
+                    if (pattern.StartsWith("!"))
+                    {
+                        if (pattern.Length > 1)
+                        {
+                            filesToSkip.AddRange(outputDirectory.GetFiles(pattern.Substring(1), SearchOption.AllDirectories).Select(x => Tuple.Create(pattern, x)));
+                        }
+                    }
+                    else
+                    {
+                        filesToDelete.AddRange(outputDirectory.GetFiles(pattern, SearchOption.AllDirectories));
+                    }
                 }
 
                 foreach (var file in filesToDelete)
                 {
+                    var skipPattern = filesToSkip.FirstOrDefault(x => x.Item2.FullName == file.FullName);
+
+                    if (skipPattern != null)
+                    {
+                        this.Log.Trace("skip cleaning " + file.FullName + " as it has skip pattern " + skipPattern.Item1);
+                        continue;
+                    }
+
                     this.Log.Trace("cleaning " + file.FullName);
                     file.Delete();
                 }
