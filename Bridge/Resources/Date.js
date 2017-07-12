@@ -899,7 +899,7 @@
                 }
 
                 if (zzh === 0 && zzm === 0 && !utc) {
-                    return System.DateTime.create(year, month, date, hh, mm, ss, ff, 2);
+                    return System.DateTime.create(year, month, date, hh, mm, ss, ff, 0);
                 }
 
                 return System.DateTime.create(year, month, date, hh - zzh, mm - zzm, ss, ff, 1);
