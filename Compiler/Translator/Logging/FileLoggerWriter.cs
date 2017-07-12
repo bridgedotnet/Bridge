@@ -22,6 +22,7 @@ namespace Bridge.Translator.Logging
 
         private bool IsInitializedSuccessfully { get; set; }
         private int InitializationCount { get; set; }
+        private bool IsCleanedUp { get; set; }
         private Queue<BufferedMessage> Buffer { get; set; }
 
         public bool AlwaysLogErrors { get { return false; } }
@@ -50,6 +51,7 @@ namespace Bridge.Translator.Logging
         public void SetParameters(string baseDir, string fileName, long? maxSize)
         {
             IsInitializedSuccessfully = false;
+            IsCleanedUp = false;
             InitializationCount = 0;
 
             if (string.IsNullOrEmpty(baseDir))
@@ -110,10 +112,11 @@ namespace Bridge.Translator.Logging
                     loggerFile.Directory.Create();
                 }
 
-                if (loggerFile.Exists && loggerFile.Length > MaxLogFileSize)
-                {
-                    loggerFile.Delete();
-                }
+                // Uncomment this lines if max file size logic required and handle fileMode in Flush()
+                //if (loggerFile.Exists && loggerFile.Length > MaxLogFileSize)
+                //{
+                //    loggerFile.Delete();
+                //}
 
                 IsInitializedSuccessfully = true;
             }
@@ -164,7 +167,11 @@ namespace Bridge.Translator.Logging
                 try
                 {
                     FileInfo file = new FileInfo(this.FullName);
-                    using (Stream stream = file.Open(FileMode.Append, FileAccess.Write, FileShare.Write | FileShare.ReadWrite | FileShare.Delete))
+
+                    var fileMode = IsCleanedUp ? FileMode.Append : FileMode.Create;
+                    IsCleanedUp = true;
+
+                    using (Stream stream = file.Open(fileMode, FileAccess.Write, FileShare.Write | FileShare.ReadWrite | FileShare.Delete))
                     {
                         using (StreamWriter writer = new StreamWriter(stream, Encoding.UTF8))
                         {
