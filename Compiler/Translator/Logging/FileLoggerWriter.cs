@@ -60,14 +60,7 @@ namespace Bridge.Translator.Logging
             }
             else
             {
-                if (string.IsNullOrWhiteSpace(Path.GetExtension(baseDir)))
-                {
-                    this.BaseDirectory = baseDir;
-                }
-                else
-                {
-                    this.BaseDirectory = Path.GetDirectoryName(baseDir);
-                }
+                this.BaseDirectory = (new FileHelper()).GetDirectoryAndFilenamePathComponents(baseDir)[0];
             }
 
             this.FileName = string.IsNullOrEmpty(fileName) ? LoggerFileName : Path.GetFileName(fileName);

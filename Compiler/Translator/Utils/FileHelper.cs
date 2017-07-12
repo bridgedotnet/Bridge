@@ -198,5 +198,32 @@ namespace Bridge.Translator
 
             return file;
         }
+
+        /// <summary>
+        /// Splits a path into directory and file name. Not fully qualified file name considered as directory path.
+        /// </summary>
+        /// <param name="path">The path of a file or directory.</param>
+        /// <returns>Returns directory at index 0 (null if no directory part) and file name at index 1 (null if no file name path).</returns>
+        public string[] GetDirectoryAndFilenamePathComponents(string path)
+        {
+            var r = new string[2];
+
+            var directory = Path.GetDirectoryName(path);
+            var fileNameWithoutExtention = Path.GetFileNameWithoutExtension(path);
+            var fileExtention = Path.GetExtension(path);
+
+            if (string.IsNullOrEmpty(fileNameWithoutExtention) || string.IsNullOrEmpty(fileExtention))
+            {
+                r[0] = Path.Combine(directory, fileNameWithoutExtention, fileExtention);
+                r[1] = null;
+            }
+            else
+            {
+                r[0] = directory;
+                r[1] = fileNameWithoutExtention + fileExtention;
+            }
+
+            return r;
+        }
     }
 }
