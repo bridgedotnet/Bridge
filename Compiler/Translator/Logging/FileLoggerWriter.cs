@@ -159,10 +159,15 @@ namespace Bridge.Translator.Logging
             {
                 try
                 {
-                    FileInfo file = new FileInfo(this.FullName);
+                    var fileMode = FileMode.Append;
 
-                    var fileMode = IsCleanedUp ? FileMode.Append : FileMode.Create;
-                    IsCleanedUp = true;
+                    if (!IsCleanedUp)
+                    {
+                        fileMode = FileMode.Create;
+                        IsCleanedUp = true;
+                    }
+
+                    FileInfo file = new FileInfo(this.FullName);
 
                     using (Stream stream = file.Open(fileMode, FileAccess.Write, FileShare.Write | FileShare.ReadWrite | FileShare.Delete))
                     {
