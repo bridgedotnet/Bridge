@@ -53,7 +53,7 @@
 
                 var offset = 0;
 
-                if (d.kind !== 2) {
+                if (d.kind === 0) {
                     offset += d.getTimezoneOffset() * 60 * 1000;
                 }
 
