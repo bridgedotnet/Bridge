@@ -8272,7 +8272,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
                 var offset = 0;
 
-                if (d.kind !== 2) {
+                if (d.kind === 0) {
                     offset += d.getTimezoneOffset() * 60 * 1000;
                 }
 
@@ -9118,7 +9118,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 }
 
                 if (zzh === 0 && zzm === 0 && !utc) {
-                    return System.DateTime.create(year, month, date, hh, mm, ss, ff, 2);
+                    return System.DateTime.create(year, month, date, hh, mm, ss, ff, 0);
                 }
 
                 return System.DateTime.create(year, month, date, hh - zzh, mm - zzm, ss, ff, 1);
