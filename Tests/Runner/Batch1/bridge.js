@@ -8227,10 +8227,9 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             $clone: function (to) { return this; }
         },
         statics: {
-            // Difference in Milliseconds from 1-Jan-0001 to 1-Jan-1970 at UTC
-            minOffset: -62135596800000,
-            // Difference in Milliseconds from 1-Jan-1970 to 9999-12-31T23:59:59.999
-            maxOffset: 253402300799999,
+            // Difference in Ticks from 1-Jan-0001 to 1-Jan-1970 at UTC
+            minOffset: System.Int64("621355968000000000"),
+            maxTicks: System.Int64("3155378975999999999"),
 
             $is: function (instance) {
                 return Bridge.isDate(instance);
@@ -8238,18 +8237,20 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
             // UTC Min Value
             getMinValue: function () {
-                var d = new Date(System.DateTime.minOffset + (new Date(0).getTimezoneOffset() * 60 * 1000));
+                var ticks = System.Int64(0),
+                    d = System.DateTime.create$2(ticks, 0);
 
-                d.kind = 0;
+                d.ticks = ticks;
 
                 return d;
             },
 
             // UTC Max Value
             getMaxValue: function () {
-                var d = new Date(System.DateTime.maxOffset + (new Date(0).getTimezoneOffset() * 60 * 1000));
+                var ticks = System.DateTime.maxTicks,
+                    d = System.DateTime.create$2(ticks, 0);
 
-                d.kind = 0;
+                d.ticks = ticks;
 
                 return d;
             },
@@ -8257,50 +8258,58 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             // Get the number of ticks since 0001-01-01T00:00:00.0000000 UTC
             getTicks: function (d) {
                 d.kind = (d.kind !== undefined) ? d.kind : 0;
+                d.ticks = (d.ticks !== undefined) ? d.ticks : System.Int64(d.getTime() - (d.getTimezoneOffset() * 60 * 1000)).mul(10000).add(System.DateTime.minOffset);
 
-                var offset = 0;
-
-                if (d.kind !== 1) {
-                    offset = d.getTimezoneOffset() * 60 * 1000;
-                }
-
-                return System.Int64(d.getTime()).add(-System.DateTime.minOffset - offset).mul(10000);
+                return d.ticks;
             },
 
             toLocalTime: function (d) {
                 d.kind = (d.kind !== undefined) ? d.kind : 0;
+                d.ticks = (d.ticks !== undefined) ? d.ticks : System.Int64(d.getTime()).mul(10000);
 
-                var offset = 0;
+                var d1,
+                    ticks = d.ticks;
 
                 if (d.kind === 0) {
-                    offset += d.getTimezoneOffset() * 60 * 1000;
+                    ticks = d.ticks.sub(System.Int64(d.getTimezoneOffset() * 60 * 1000).mul(10000));
                 }
 
-                var d1 = new Date(d.getTime() - offset);
-
+                d1 = System.DateTime.create$2(ticks, 2);
                 d1.kind = 2;
 
-                var ticks = System.DateTime.getTicks(d1);
-
-                if (ticks.gt(System.DateTime.getTicks(System.DateTime.getMaxValue())) || ticks.lt(0)) {
-                    d1 = new Date(d1.getTime() + (d1.getTimezoneOffset() * 60 * 1000));
-                    d1.kind = 2;
+                // Check if Ticks are out of range 
+                if (ticks.gt(System.DateTime.maxTicks) || ticks.lt(0)) {
+                    ticks = ticks.add(System.Int64(d1.getTimezoneOffset() * 60 * 1000).mul(10000));
+                    d1 = System.DateTime.create$2(ticks, 2);
                 }
+
+                d1.ticks = ticks;
+                d1.kind = 2;
 
                 return d1;
             },
 
             toUniversalTime: function (d) {
-                var d1 = new Date(d.getTime());
+                d.kind = (d.kind !== undefined) ? d.kind : 0;
+                d.ticks = (d.ticks !== undefined) ? d.ticks : System.Int64(d.getTime() + (d.getTimezoneOffset() * 60 * 1000)).mul(10000);
 
-                d1.kind = 1;
+                var d1,
+                    ticks = d.ticks;
 
-                var ticks = System.DateTime.getTicks(d1);
-
-                if (ticks.gt(System.DateTime.getTicks(System.DateTime.getMaxValue())) || ticks.lt(0)) {
-                    d1 = new Date(d1.getTime() - (d1.getTimezoneOffset() * 60 * 1000));
-                    d1.kind = 1;
+                // Assuming d is Local time, so adjust to UTC
+                if (d.kind !== 1) {
+                    ticks = ticks.add(System.Int64(d.getTimezoneOffset() * 60 * 1000).mul(10000));
                 }
+
+                d1 = System.DateTime.create$2(ticks, 1);
+
+                // Check if Ticks are out of range 
+                if (ticks.gt(System.DateTime.maxTicks) || ticks.lt(0)) {
+                    ticks = ticks.sub(System.Int64(d1.getTimezoneOffset() * 60 * 1000).mul(10000));
+                    d1 = System.DateTime.create$2(ticks, 1);
+                }
+
+                d1.ticks = ticks;
 
                 return d1;
             },
@@ -8319,24 +8328,20 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 millisecond = (millisecond !== undefined) ? millisecond : 0;
                 kind = (kind !== undefined) ? kind : 0;
 
-                var d;
+                var d,
+                    ticks;
+
+                d = new Date(year, month - 1, day, hour, minute, second, millisecond);
+                d.setFullYear(year);
+
+                ticks = System.DateTime.getTicks(d);
 
                 if (kind === 1) {
-                    d = System.DateTime.getMinValue();
-                    d.setFullYear(year);
-                    d.setMonth(month - 1);
-                    d.setDate(day);
-                    d.setHours(hour);
-                    d.setMinutes(minute);
-                    d.setSeconds(second);
-                    d.setMilliseconds(millisecond);
                     d = new Date(d.getTime() - (d.getTimezoneOffset() * 60 * 1000))
-                } else {
-                    d = new Date(year, month - 1, day, hour, minute, second, millisecond);
-                    d.setFullYear(year);
                 }
 
                 d.kind = kind;
+                d.ticks = ticks;
 
                 return d;
             },
@@ -8353,22 +8358,26 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                     d = System.DateTime.create(date.getFullYear(), date.getMonth() + 1, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds(), kind);
                     d.setFullYear(date.getFullYear());
                 }
-                
+
+                d.kind = kind;
+                d.ticks = System.DateTime.getTicks(d)
+
                 return d;
             },
 
             create$2: function (ticks, kind) {
                 kind = (kind !== undefined) ? kind : 0;
 
-                ticks = System.Int64.is64Bit(ticks) ? ticks.div(10000).toNumber() : ticks / 10000;
+                ticks = System.Int64.is64Bit(ticks) ? ticks : System.Int64(ticks);
 
-                var d = new Date(ticks + System.DateTime.minOffset);
+                var d = new Date(ticks.sub(System.DateTime.minOffset).div(10000).toNumber());
 
                 if (kind !== 1) {
                     d = System.DateTime.addMilliseconds(d, d.getTimezoneOffset() * 60 * 1000);
                 }
 
                 d.kind = kind;
+                d.ticks = ticks;
 
                 return d;
             },
