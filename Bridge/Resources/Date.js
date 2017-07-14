@@ -109,25 +109,20 @@
                 millisecond = (millisecond !== undefined) ? millisecond : 0;
                 kind = (kind !== undefined) ? kind : 0;
 
-                var d;
+                var d,
+                    ticks;
+
+                d = new Date(year, month - 1, day, hour, minute, second, millisecond);
+                d.setFullYear(year);
+
+                ticks = System.DateTime.getTicks(d);
 
                 if (kind === 1) {
-                    d = System.DateTime.getMinValue();
-                    d.setFullYear(year);
-                    d.setMonth(month - 1);
-                    d.setDate(day);
-                    d.setHours(hour);
-                    d.setMinutes(minute);
-                    d.setSeconds(second);
-                    d.setMilliseconds(millisecond);
-                    d = new Date(d.getTime() + (d.getTimezoneOffset() * 60 * 1000))
-                } else {
-                    d = new Date(year, month - 1, day, hour, minute, second, millisecond);
-                    d.setFullYear(year);
+                    d = new Date(d.getTime() - (d.getTimezoneOffset() * 60 * 1000))
                 }
 
                 d.kind = kind;
-                d.ticks = System.DateTime.getTicks(d)
+                d.ticks = ticks;
 
                 return d;
             },
