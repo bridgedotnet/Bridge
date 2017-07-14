@@ -8277,7 +8277,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 d1 = System.DateTime.create$2(ticks, 2);
                 d1.kind = 2;
 
-                // Check if Ticks are out of range 
+                // Check if Ticks are out of range
                 if (ticks.gt(System.DateTime.maxTicks) || ticks.lt(0)) {
                     ticks = ticks.add(System.Int64(d1.getTimezoneOffset() * 60 * 1000).mul(10000));
                     d1 = System.DateTime.create$2(ticks, 2);
@@ -8303,7 +8303,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
                 d1 = System.DateTime.create$2(ticks, 1);
 
-                // Check if Ticks are out of range 
+                // Check if Ticks are out of range
                 if (ticks.gt(System.DateTime.maxTicks) || ticks.lt(0)) {
                     ticks = ticks.sub(System.Int64(d1.getTimezoneOffset() * 60 * 1000).mul(10000));
                     d1 = System.DateTime.create$2(ticks, 1);
@@ -9218,7 +9218,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 var d1 = new Date(d.getTime());
 
                 d1.setFullYear(d.getFullYear() + v);
-                
+
                 d1.kind = d.kind;
 
                 return d1;
@@ -9290,7 +9290,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 d.kind = (d.kind !== undefined) ? d.kind : 0;
 
                 var d1 = new Date(d.getTime() + Math.round(v * 1e3));
-                
+
                 d1.kind = d.kind;
 
                 return d1;
