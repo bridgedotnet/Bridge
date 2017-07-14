@@ -483,7 +483,7 @@ namespace Bridge.Translator
 
             try
             {
-                var pathParts = this.GetPathComponents(output);
+                var pathParts = this.FileHelper.GetDirectoryAndFilenamePathComponents(output);
 
                 resourceOutputDirName = pathParts[0];
                 this.Log.Trace("Resource output setting directory relative to base path is " + resourceOutputDirName);
@@ -757,7 +757,7 @@ namespace Bridge.Translator
 
                     directoryPath = outputPath;
 
-                    var dirPathInFileName = this.GetPathComponents(fileName)[0];
+                    var dirPathInFileName = this.FileHelper.GetDirectoryAndFilenamePathComponents(fileName)[0];
 
                     var filePathCleaned = fileName;
                     if (!string.IsNullOrEmpty(dirPathInFileName))
@@ -1223,33 +1223,6 @@ namespace Bridge.Translator
             {
                 current.Remark = defaultSetting.Remark;
             }
-        }
-
-        /// <summary>
-        /// Splits a path into directory and file name. Not fully qualified file name considered as directory path.
-        /// </summary>
-        /// <param name="path">The path of a file or directory.</param>
-        /// <returns>Returns directory at index 0 (null if no directory part) and file name at index 1 (null if no file name path).</returns>
-        private string[] GetPathComponents(string path)
-        {
-            var r = new string[2];
-
-            var directory = Path.GetDirectoryName(path);
-            var fileNameWithoutExtention = Path.GetFileNameWithoutExtension(path);
-            var fileExtention = Path.GetExtension(path);
-
-            if (string.IsNullOrEmpty(fileNameWithoutExtention) || string.IsNullOrEmpty(fileExtention))
-            {
-                r[0] = Path.Combine(directory, fileNameWithoutExtention, fileExtention);
-                r[1] = null;
-            }
-            else
-            {
-                r[0] = directory;
-                r[1] = fileNameWithoutExtention + fileExtention;
-            }
-
-            return r;
         }
 
         /// <summary>

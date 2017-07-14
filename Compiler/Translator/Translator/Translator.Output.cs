@@ -1,5 +1,6 @@
 using Bridge.Contract;
 using Bridge.Contract.Constants;
+using Bridge.Translator.Logging;
 using Microsoft.Ajax.Utilities;
 using Mono.Cecil;
 using System;
@@ -182,7 +183,20 @@ namespace Bridge.Translator
                     ? "*" + Files.Extensions.JS + "|*" + Files.Extensions.DTS
                     : this.AssemblyInfo.CleanOutputFolderBeforeBuildPattern;
 
-                CleanDirectory(outputPath, searchPattern);
+                string logFileFullPath = null;
+                var l = this.Log as Logger;
+
+                if (l != null)
+                {
+                    var fileWriter = l.GetFileLogger();
+
+                    if (fileWriter != null)
+                    {
+                        logFileFullPath = fileWriter.FullName;
+                    }
+                }
+
+                CleanDirectory(outputPath, searchPattern, logFileFullPath);
             }
         }
 
@@ -853,7 +867,7 @@ namespace Bridge.Translator
             return settings;
         }
 
-        private void CleanDirectory(string outputPath, string searchPattern)
+        private void CleanDirectory(string outputPath, string searchPattern, params string[] systemFilesToIgnore)
         {
             this.Log.Info("Cleaning output folder " + (outputPath ?? string.Empty) + " with search pattern (" + (searchPattern ?? string.Empty) + ") ...");
 
@@ -881,13 +895,48 @@ namespace Bridge.Translator
                 }
 
                 var filesToDelete = new List<FileInfo>();
+                var filesToSkip = new List<Tuple<string, FileInfo>>();
                 foreach (var pattern in patterns)
                 {
-                    filesToDelete.AddRange(outputDirectory.GetFiles(pattern, SearchOption.AllDirectories));
+                    if (string.IsNullOrEmpty(pattern))
+                    {
+                        continue;
+                    }
+
+                    if (pattern.StartsWith("!"))
+                    {
+                        if (pattern.Length > 1)
+                        {
+                            filesToSkip.AddRange(outputDirectory.GetFiles(pattern.Substring(1), SearchOption.AllDirectories).Select(x => Tuple.Create(pattern, x)));
+                        }
+                    }
+                    else
+                    {
+                        filesToDelete.AddRange(outputDirectory.GetFiles(pattern, SearchOption.AllDirectories));
+                    }
+                }
+
+                if (systemFilesToIgnore != null && systemFilesToIgnore.All(x => string.IsNullOrEmpty(x)))
+                {
+                    systemFilesToIgnore = null;
                 }
 
                 foreach (var file in filesToDelete)
                 {
+                    if (systemFilesToIgnore != null && systemFilesToIgnore.Any(x => x == file.FullName))
+                    {
+                        this.Log.Trace("skip cleaning " + file.FullName + " as it is a system file");
+                        continue;
+                    }
+
+                    var skipPattern = filesToSkip.FirstOrDefault(x => x.Item2.FullName == file.FullName);
+
+                    if (skipPattern != null)
+                    {
+                        this.Log.Trace("skip cleaning " + file.FullName + " as it has skip pattern " + skipPattern.Item1);
+                        continue;
+                    }
+
                     this.Log.Trace("cleaning " + file.FullName);
                     file.Delete();
                 }

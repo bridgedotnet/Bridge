@@ -46,13 +46,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "specs", "specs", "{E12E9F2A-984B-4340-A62E-E356C716358E}"
 	ProjectSection(SolutionItems) = preProject
 		.build\specs\Bridge.Clean.nuspec = .build\specs\Bridge.Clean.nuspec
-		.build\specs\Bridge.Compiler.Mono.nuspec = .build\specs\Bridge.Compiler.Mono.nuspec
 		.build\specs\Bridge.Compiler.nuspec = .build\specs\Bridge.Compiler.nuspec
-		.build\specs\Bridge.Contract.Mono.nuspec = .build\specs\Bridge.Contract.Mono.nuspec
 		.build\specs\Bridge.Contract.nuspec = .build\specs\Bridge.Contract.nuspec
-		.build\specs\Bridge.Core.Mono.nuspec = .build\specs\Bridge.Core.Mono.nuspec
 		.build\specs\Bridge.Core.nuspec = .build\specs\Bridge.Core.nuspec
-		.build\specs\Bridge.Html5.Mono.nuspec = .build\specs\Bridge.Html5.Mono.nuspec
 		.build\specs\Bridge.Html5.nuspec = .build\specs\Bridge.Html5.nuspec
 		.build\specs\Bridge.Min.nuspec = .build\specs\Bridge.Min.nuspec
 		.build\specs\Bridge.nuspec = .build\specs\Bridge.nuspec
@@ -69,6 +65,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "packages", "packages", "{0A8F2D26-ED54-4A8C-A323-A8018F6DD742}"
 	ProjectSection(SolutionItems) = preProject
 		.build\packages\collect.bat = .build\packages\collect.bat
+		.build\packages\collect.sh = .build\packages\collect.sh
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{3E6E252D-69D8-4B9A-8E6C-E994697F8090}"
@@ -130,12 +127,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Batch1", "Tests\TypeScript\
 		{518C57D4-62CC-47F7-A310-23405F5ED3AD} = {518C57D4-62CC-47F7-A310-23405F5ED3AD}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bridge.PostBuild", "PostBuild\Bridge.PostBuild.csproj", "{8DAF3989-FF37-470C-A55D-3E7868613AA5}"
-	ProjectSection(ProjectDependencies) = postProject
-		{243BB709-3912-4C65-82D4-787A5E2201D7} = {243BB709-3912-4C65-82D4-787A5E2201D7}
-		{DE78B8B7-C0F5-415B-A70B-02194433F450} = {DE78B8B7-C0F5-415B-A70B-02194433F450}
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Batch3", "Tests\Batch3\Batch3.csproj", "{85F91198-C10C-47F4-94DF-E65EE65FA542}"
 	ProjectSection(ProjectDependencies) = postProject
 		{8DAF3989-FF37-470C-A55D-3E7868613AA5} = {8DAF3989-FF37-470C-A55D-3E7868613AA5}
@@ -161,6 +152,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bridge.Translator.Tests.Assembly", "Compiler\TranslatorTestsAssembly\Bridge.Translator.Tests.Assembly.csproj", "{55DAE049-E2A3-4935-B2BE-63BD1E91D387}"
 	ProjectSection(ProjectDependencies) = postProject
 		{8DAF3989-FF37-470C-A55D-3E7868613AA5} = {8DAF3989-FF37-470C-A55D-3E7868613AA5}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bridge.PostBuild", "PostBuild\Bridge.PostBuild.csproj", "{8DAF3989-FF37-470C-A55D-3E7868613AA5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{243BB709-3912-4C65-82D4-787A5E2201D7} = {243BB709-3912-4C65-82D4-787A5E2201D7}
+		{DE78B8B7-C0F5-415B-A70B-02194433F450} = {DE78B8B7-C0F5-415B-A70B-02194433F450}
 	EndProjectSection
 EndProject
 Global

@@ -35,6 +35,19 @@ namespace Bridge.Translator
             return path;
         }
 
+        static Dictionary<string, AssemblyName> assemblyBindings = new Dictionary<string, AssemblyName>
+        {
+            { "System.ValueTuple", new AssemblyName("System.ValueTuple, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51") },
+            { "System.Collections.Immutable", new AssemblyName("System.Collections.Immutable, Version=1.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a") },
+            { "System.IO.Compression", new AssemblyName("System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089") },
+            { "System.Security.Cryptography.Algorithms", new AssemblyName("System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a") },
+            { "System.IO.FileSystem", new AssemblyName("System.IO.FileSystem, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a") },
+            { "System.IO.FileSystem.Primitives", new AssemblyName("System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a") },
+            { "System.Security.Cryptography.Primitives", new AssemblyName("System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a") },
+            { "System.Xml.XPath.XDocument", new AssemblyName("System.Xml.XPath.XDocument, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a") },
+            { "System.Diagnostics.FileVersionInfo", new AssemblyName("System.Diagnostics.FileVersionInfo, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a") }
+        };
+
         protected class AssemblyResolver
         {
             public ILogger Logger { get; set; }
@@ -54,7 +67,15 @@ namespace Bridge.Translator
                     + " ...");
 
                 AssemblyName askedAssembly = new AssemblyName(args.Name);
-                var assemblyLoaded = AssemblyResolver.CheckIfAssemblyLoaded(askedAssembly.Name, domain);
+                Assembly assemblyLoaded = null;
+                if (Plugins.assemblyBindings.ContainsKey(askedAssembly.Name))
+                {
+                    assemblyLoaded = AssemblyResolver.CheckIfFullAssemblyLoaded(Plugins.assemblyBindings[askedAssembly.Name], domain);
+                }
+                else
+                {
+                    assemblyLoaded = AssemblyResolver.CheckIfAssemblyLoaded(askedAssembly.Name, domain);
+                }
 
                 if (assemblyLoaded != null)
                 {
@@ -74,13 +95,47 @@ namespace Bridge.Translator
                         return assemblyLoaded;
                     }
 
+                    assemblyLoaded = this.CheckAssemblyBinding(askedAssembly.Name);
+
+                    if (assemblyLoaded != null)
+                    {
+                        this.Logger.Trace("Resolved for " + assemblyLoaded.FullName);
+                        return assemblyLoaded;
+                    }
+
                     this.Logger.Trace("Did not resolve assembly " + args.Name + " in " + args.RequestingAssembly.FullName + " resources");
                 }
                 else
                 {
+                    assemblyLoaded = this.CheckAssemblyBinding(askedAssembly.Name);
+
+                    if (assemblyLoaded != null)
+                    {
+                        this.Logger.Trace("Resolved for " + assemblyLoaded.FullName);
+                        return assemblyLoaded;
+                    }
+
                     this.Logger.Trace("Did not resolve assembly " + args.Name + ". Requesting assembly is null. Will not try to load the asked assembly in resources");
                 }
 
+                return null;
+            }
+
+            private Stack<string> loadedStack = new Stack<string>();
+            private Assembly CheckAssemblyBinding(string fullAssemblyName)
+            {
+                if (this.loadedStack.Contains(fullAssemblyName))
+                {
+                    return null;
+                }
+
+                if (Plugins.assemblyBindings.ContainsKey(fullAssemblyName))
+                {
+                    this.loadedStack.Push(fullAssemblyName);
+                    var asm = Assembly.Load(Plugins.assemblyBindings[fullAssemblyName]);
+                    this.loadedStack.Pop();
+                    return asm;
+                }
                 return null;
             }
 
@@ -91,6 +146,21 @@ namespace Bridge.Translator
                 {
                     var assemblyName = new AssemblyName(assembly.FullName);
                     if (assemblyName.Name == fullAssemblyName)
+                    {
+                        return assembly;
+                    }
+                }
+
+                return null;
+            }
+
+            public static Assembly CheckIfFullAssemblyLoaded(AssemblyName name, AppDomain domain)
+            {
+                var assemblies = domain.GetAssemblies();
+                foreach (var assembly in assemblies)
+                {
+                    var assemblyName = new AssemblyName(assembly.FullName);
+                    if (assemblyName.FullName == name.FullName)
                     {
                         return assembly;
                     }
@@ -124,7 +194,8 @@ namespace Bridge.Translator
             logger.Trace("Loaded assemblies:");
             foreach (var a in AppDomain.CurrentDomain.GetAssemblies())
             {
-                logger.Trace("\t" + a.FullName);
+                var location = a.IsDynamic ? "dynamic" : a.Location;
+                logger.Trace(string.Format("\t{0} {1} {2}", a.FullName, location, a.GlobalAssemblyCache));
             }
 
             var path = GetPluginPath(translator, config);
