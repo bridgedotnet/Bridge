@@ -187,7 +187,7 @@ namespace Bridge.ClientTest.SimpleTypes
         public void MaxWorks()
         {
             var dt = DateTime.MaxValue;
-            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 3155378975999990000, 9999, 12, 31);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 3155378975999999999, 9999, 12, 31);
         }
 
         [Test]
@@ -206,17 +206,27 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void UtcNowWorks()
         {
-            var utc = DateTime.UtcNow;
-            var local = DateTime.Now.ToUniversalTime();
-            Assert.True(
-                Math.Abs(
-                    (new DateTime(local.Year, local.Month, local.Day, local.Hour, local.Minute, local.Second, local.Millisecond)
-                    - utc).TotalMinutes
-                ) < 1000);
+            var utcNow = DateTime.UtcNow;
+            var localNowToUtc = DateTime.Now.ToUniversalTime();
 
-            var year = utc.Year;
-            var kind = utc.Kind;
-            var ticks = utc.Ticks;
+            var utcString = utcNow.ToString("o");
+            var utcFromLocalString = localNowToUtc.ToString("o");
+
+            Assert.AreEqual(utcString, utcFromLocalString, "String representaions should equal");
+
+            var fromLocal = new DateTime(localNowToUtc.Year, localNowToUtc.Month, localNowToUtc.Day, localNowToUtc.Hour, localNowToUtc.Minute, localNowToUtc.Second, localNowToUtc.Millisecond);
+            var tickDiff = fromLocal.Ticks - utcNow.Ticks;
+
+            Assert.True(Math.Abs(tickDiff) < 10000, "Tick diff: Abs(" + tickDiff + ") < 10000");
+
+            var dateDiff = fromLocal - utcNow;
+            var minutes = dateDiff.TotalMinutes;
+
+            Assert.True(Math.Abs(minutes) < 1000, "Date diff in minutes: Abs(" + minutes + ") < 1000");
+
+            var year = utcNow.Year;
+            var kind = utcNow.Kind;
+            var ticks = utcNow.Ticks;
 
             Assert.True(year > 2016, year + " > 2016");
             Assert.AreEqual(DateTimeKind.Utc, kind, kind + " = Utc");

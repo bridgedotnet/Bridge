@@ -33613,7 +33613,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             MaxWorks: function () {
                 var dt = System.DateTime.getMaxValue();
-                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64([-197715728,734668917]), 9999, 12, 31);
+                Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64([-197705729,734668917]), 9999, 12, 31);
             },
             NowWorks: function () {
                 var dt = System.DateTime.getNow();
@@ -33626,13 +33626,27 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.True(ticks.gt(System.Int64([-2048858785,148162484])), ticks + " > 636353025520231775");
             },
             UtcNowWorks: function () {
-                var utc = System.DateTime.getUtcNow();
-                var local = System.DateTime.toUniversalTime(System.DateTime.getNow());
-                Bridge.Test.NUnit.Assert.True(Math.abs((System.DateTime.subdd(System.DateTime.create(System.DateTime.getYear(local), System.DateTime.getMonth(local), System.DateTime.getDay(local), System.DateTime.getHour(local), System.DateTime.getMinute(local), System.DateTime.getSecond(local), System.DateTime.getMillisecond(local)), utc)).getTotalMinutes()) < 1000);
+                var utcNow = System.DateTime.getUtcNow();
+                var localNowToUtc = System.DateTime.toUniversalTime(System.DateTime.getNow());
 
-                var year = System.DateTime.getYear(utc);
-                var kind = System.DateTime.getKind(utc);
-                var ticks = System.DateTime.getTicks(utc);
+                var utcString = System.DateTime.format(utcNow, "o");
+                var utcFromLocalString = System.DateTime.format(localNowToUtc, "o");
+
+                Bridge.Test.NUnit.Assert.AreEqual(utcString, utcFromLocalString, "String representaions should equal");
+
+                var fromLocal = System.DateTime.create(System.DateTime.getYear(localNowToUtc), System.DateTime.getMonth(localNowToUtc), System.DateTime.getDay(localNowToUtc), System.DateTime.getHour(localNowToUtc), System.DateTime.getMinute(localNowToUtc), System.DateTime.getSecond(localNowToUtc), System.DateTime.getMillisecond(localNowToUtc));
+                var tickDiff = System.DateTime.getTicks(fromLocal).sub(System.DateTime.getTicks(utcNow));
+
+                Bridge.Test.NUnit.Assert.True(tickDiff.abs().lt(System.Int64(10000)), "Tick diff: Abs(" + tickDiff + ") < 10000");
+
+                var dateDiff = System.DateTime.subdd(fromLocal, utcNow);
+                var minutes = dateDiff.getTotalMinutes();
+
+                Bridge.Test.NUnit.Assert.True(Math.abs(minutes) < 1000, "Date diff in minutes: Abs(" + System.Double.format(minutes) + ") < 1000");
+
+                var year = System.DateTime.getYear(utcNow);
+                var kind = System.DateTime.getKind(utcNow);
+                var ticks = System.DateTime.getTicks(utcNow);
 
                 Bridge.Test.NUnit.Assert.True(year > 2016, year + " > 2016");
                 Bridge.Test.NUnit.Assert.AreEqual(System.DateTimeKind.Utc, kind, System.Enum.toString(System.DateTimeKind, kind) + " = Utc");
