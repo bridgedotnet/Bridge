@@ -130,17 +130,17 @@ namespace Bridge.ClientTest.ConvertTests
                     {
                         if (useTrue)
                         {
-                            Assert.True(expected.Equals(result), "Test: " + testValue + " Expected: " + expected.ToString() + " Result: " + result.ToString());
+                            Assert.True(expected.Equals(result), "Test set " + i + ": " + testValue + " Expected: " + expected.ToString() + " Result: " + result.ToString());
                         }
                         else
                         {
-                            Assert.AreEqual(expected, result, "Test: " + testValue + " Expected: " + expected.ToString() + " Result: " + result.ToString());
+                            Assert.AreEqual(expected, result, "Test set " + i + ": " + testValue + " Expected: " + expected.ToString() + " Result: " + result.ToString());
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    Assert.Fail("Exception occurred while Verify " + testValue + " Exception: " + ex.ToString());
+                    Assert.Fail("Test set " + i + ": " + "Exception occurred while Verify " + testValue + " Exception: " + ex.ToString());
                 }
             }
         }
@@ -335,7 +335,7 @@ namespace Bridge.ClientTest.ConvertTests
 
             public object GetFormat(Type formatType)
             {
-                return this;
+                return System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat;
             }
 
             public string Format(string format, object arg, IFormatProvider formatProvider)
@@ -343,9 +343,9 @@ namespace Bridge.ClientTest.ConvertTests
                 return arg.ToString();
             }
 
-            public string GetAllDateTimePatterns(string format, bool returnNull)
+            public string[] GetAllDateTimePatterns(string format, bool returnNull)
             {
-                return "G";
+                return new[] { System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.FullDateTimePattern };
             }
         }
     }

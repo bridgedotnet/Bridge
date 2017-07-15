@@ -14042,15 +14042,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                             assert(expected, result, "Test set " + i + ": ");
                         } else {
                             if (useTrue) {
-                                Bridge.Test.NUnit.Assert.True(Bridge.equals(expected, result), System.String.concat("Test: ", testValue, " Expected: ", expected.toString(), " Result: ", result.toString()));
+                                Bridge.Test.NUnit.Assert.True(Bridge.equals(expected, result), System.String.concat("Test set " + i + ": ", testValue, " Expected: ", expected.toString(), " Result: ", result.toString()));
                             } else {
-                                Bridge.Test.NUnit.Assert.AreEqual(expected, result, System.String.concat("Test: ", testValue, " Expected: ", expected.toString(), " Result: ", result.toString()));
+                                Bridge.Test.NUnit.Assert.AreEqual(expected, result, System.String.concat("Test set " + i + ": ", testValue, " Expected: ", expected.toString(), " Result: ", result.toString()));
                             }
                         }
                     }
                     catch (ex) {
                         ex = System.Exception.create(ex);
-                        Bridge.Test.NUnit.Assert.Fail(System.String.concat("Exception occurred while Verify ", testValue, " Exception: ", ex.toString()));
+                        Bridge.Test.NUnit.Assert.Fail(System.String.concat("Test set " + i + ": " + "Exception occurred while Verify ", testValue, " Exception: ", ex.toString()));
                     }
                 }
             },
@@ -14339,13 +14339,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         },
         methods: {
             getFormat: function (formatType) {
-                return this;
+                return System.Globalization.CultureInfo.getCurrentCulture().dateTimeFormat;
             },
             format: function (format, arg, formatProvider) {
                 return arg.toString();
             },
             getAllDateTimePatterns: function (format, returnNull) {
-                return "G";
+                return System.Array.init([System.Globalization.CultureInfo.getCurrentCulture().dateTimeFormat.fullDateTimePattern], System.String);
             }
         }
     }; });
