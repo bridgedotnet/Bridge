@@ -16,6 +16,23 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.ClientTestHelper.CommonHelper", {
+        statics: {
+            methods: {
+                Safe: function (a, failMessage) {
+                    if (failMessage === void 0) { failMessage = null; }
+                    try {
+                        a();
+                    }
+                    catch (ex) {
+                        ex = System.Exception.create(ex);
+                        Bridge.Test.NUnit.Assert.Fail(System.String.concat(failMessage, ex.toString()));
+                    }
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTestHelper.DateHelper", {
         statics: {
             methods: {

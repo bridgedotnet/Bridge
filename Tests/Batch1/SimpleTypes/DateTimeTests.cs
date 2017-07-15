@@ -518,28 +518,34 @@ namespace Bridge.ClientTest.SimpleTypes
 
         // Not Supported in 16.0.0-beta5
         //[Test]
-        //public void ParseExactWithLocalKinds()
+        //public void ParseWithLocalKinds()
         //{
         //    var s1 = "2008-05-01T07:34:42-5:00";
         //    var s2 = "2008-05-01 7:34:42Z";
         //    var s3 = "Thu, 01 May 2008 07:34:42 GMT";
 
-        //    var d1 = DateTime.Parse(s1);
-        //    Assert.AreEqual(DateTimeKind.Local, d1.Kind);
-        //    Assert.AreEqual("5/1/2008 5:34:42 AM", d1.ToString());
+        //    CommonHelper.Safe(() =>
+        //    {
+        //        var d1 = DateTime.Parse(s1);
+        //        DateHelper.AssertDate(new DateTime(2008, 5, 1, 16, 34, 42, DateTimeKind.Local), d1, "d1: ");
+        //    }, "d1: ");
 
-        //    var d2 = DateTime.Parse(s2);
-        //    Assert.AreEqual(DateTimeKind.Local, d2.Kind);
-        //    Assert.AreEqual("5/1/2008 12:34:42 AM", d2.ToString());
+        //    CommonHelper.Safe(() =>
+        //    {
+        //        var d2 = DateTime.Parse(s2);
+        //        DateHelper.AssertDate(new DateTime(2008, 5, 1, 11, 34, 42, DateTimeKind.Local), d2, "d2: ");
+        //    }, "d2: ");
 
-        //    var d3 = DateTime.Parse(s3);
-        //    Assert.AreEqual(DateTimeKind.Local, d3.Kind);
-        //    Assert.AreEqual("5/1/2008 12:34:42 AM", d3.ToString());
+        //    CommonHelper.Safe(() =>
+        //    {
+        //        var d3 = DateTime.Parse(s3);
+        //        DateHelper.AssertDate(new DateTime(2008, 5, 1, 11, 34, 42, DateTimeKind.Local), d3, "d3: ");
+        //    }, "d3: ");
         //}
 
         // Not Supported in 16.0.0-beta5
         //[Test]
-        //public void ParseExactWithDifferentKinds()
+        //public void ParseWithDifferentKinds()
         //{
         //    var s1 = "2008-09-15T09:30:41.7752486-07:00";
         //    var s2 = "2008-09-15T09:30:41.7752486Z";
@@ -547,25 +553,35 @@ namespace Bridge.ClientTest.SimpleTypes
         //    var s4 = "2008-09-15T09:30:41.7752486-04:00";
         //    var s5 = "Mon, 15 Sep 2008 09:30:41 GMT";
 
-        //    var d1 = DateTime.Parse(s1, null);
-        //    Assert.AreEqual(DateTimeKind.Local, d1.Kind);
-        //    Assert.AreEqual("9/15/2008 9:30:41 AM", d1.ToString());
+        //    CommonHelper.Safe(() =>
+        //    {
+        //        var d1 = DateTime.Parse(s1);
+        //        DateHelper.AssertDate(new DateTime(633571074417752486, DateTimeKind.Local), d1, "d1: ");
+        //    }, "d1: ");
 
-        //    var d2 = DateTime.Parse(s2);
-        //    Assert.AreEqual(DateTimeKind.Local, d2.Kind);
-        //    Assert.AreEqual("9/15/2008 2:30:41 AM", d2.ToString());
+        //    CommonHelper.Safe(() =>
+        //    {
+        //        var d2 = DateTime.Parse(s2);
+        //        DateHelper.AssertDate(new DateTime(633570822417752486, DateTimeKind.Local), d2, "d2: ");
+        //    }, "d2: ");
 
-        //    var d3 = DateTime.Parse(s3);
-        //    Assert.AreEqual(DateTimeKind.Unspecified, d3.Kind);
-        //    Assert.AreEqual("9/15/2008 9:30:41 AM", d3.ToString());
+        //    CommonHelper.Safe(() =>
+        //    {
+        //        var d3 = DateTime.Parse(s3);
+        //        DateHelper.AssertDate(new DateTime(633570678417752486, DateTimeKind.Unspecified), d3, "d3: ");
+        //    }, "d3: ");
 
-        //    var d4 = DateTime.Parse(s4);
-        //    Assert.AreEqual(DateTimeKind.Local, d4.Kind);
-        //    Assert.AreEqual("9/15/2008 6:30:41 AM", d4.ToString());
+        //    CommonHelper.Safe(() =>
+        //    {
+        //        var d4 = DateTime.Parse(s4);
+        //        DateHelper.AssertDate(new DateTime(633570966417752486, DateTimeKind.Local), d4, "d4: ");
+        //    }, "d4: ");
 
-        //    var d5 = DateTime.Parse(s5);
-        //    Assert.AreEqual(DateTimeKind.Local, d5.Kind);
-        //    Assert.AreEqual("9/15/2008 2:30:41 AM", d5.ToString());
+        //    CommonHelper.Safe(() =>
+        //    {
+        //        var d5 = DateTime.Parse(s5);
+        //        DateHelper.AssertDate(new DateTime(633570822410000000, DateTimeKind.Local), d5, "d5: ");
+        //    }, "d5: ");
         //}
 
         // Not C# API

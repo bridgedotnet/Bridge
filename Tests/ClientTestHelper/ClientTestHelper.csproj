@@ -45,6 +45,7 @@
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Internal\CommonHelper.cs" />
     <Compile Include="Internal\DateHelper.cs" />
     <Compile Include="Internal\StringHelper.cs" />
     <Compile Include="Internal\HtmlHelper.cs" />
