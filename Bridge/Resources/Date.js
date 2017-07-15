@@ -36,10 +36,14 @@
                 return d;
             },
 
+            getOffset: function(d) {
+                return d.getTimezoneOffset() * 60 * 1000;
+            },
+
             // Get the number of ticks since 0001-01-01T00:00:00.0000000 UTC
             getTicks: function (d) {
                 d.kind = (d.kind !== undefined) ? d.kind : 0;
-                d.ticks = (d.ticks !== undefined) ? d.ticks : System.Int64(d.getTime() - (d.getTimezoneOffset() * 60 * 1000)).mul(10000).add(System.DateTime.minOffset);
+                d.ticks = (d.ticks !== undefined) ? d.ticks : System.Int64(d.getTime() - System.DateTime.getOffset(d)).mul(10000).add(System.DateTime.minOffset);
 
                 return d.ticks;
             },
@@ -52,7 +56,7 @@
                     ticks = d.ticks;
 
                 if (d.kind !== 2) {
-                    ticks = d.ticks.sub(System.Int64(d.getTimezoneOffset() * 60 * 1000).mul(10000));
+                    ticks = d.ticks.sub(System.Int64(System.DateTime.getOffset(d)).mul(10000));
                 }
 
                 d1 = System.DateTime.create$2(ticks, 2);
@@ -72,14 +76,14 @@
 
             toUniversalTime: function (d) {
                 d.kind = (d.kind !== undefined) ? d.kind : 0;
-                d.ticks = (d.ticks !== undefined) ? d.ticks : System.Int64(d.getTime() + (d.getTimezoneOffset() * 60 * 1000)).mul(10000).add(System.DateTime.minOffset);
+                d.ticks = (d.ticks !== undefined) ? d.ticks : System.Int64(d.getTime() + System.DateTime.getOffset(d)).mul(10000).add(System.DateTime.minOffset);
 
                 var d1,
                     ticks = d.ticks;
 
                 // Assuming d is Local time, so adjust to UTC
                 if (d.kind !== 1) {
-                    ticks = ticks.add(System.Int64(d.getTimezoneOffset() * 60 * 1000).mul(10000));
+                    ticks = ticks.add(System.Int64(System.DateTime.getOffset(d)).mul(10000));
                 }
 
                 d1 = System.DateTime.create$2(ticks, 1);
@@ -118,7 +122,7 @@
                 ticks = System.DateTime.getTicks(d);
 
                 if (kind === 1) {
-                    d = new Date(d.getTime() - (d.getTimezoneOffset() * 60 * 1000))
+                    d = new Date(d.getTime() - System.DateTime.getOffset(d))
                 }
 
                 d.kind = kind;
@@ -154,7 +158,7 @@
                 var d = new Date(ticks.sub(System.DateTime.minOffset).div(10000).toNumber());
 
                 if (kind !== 1) {
-                    d = System.DateTime.addMilliseconds(d, d.getTimezoneOffset() * 60 * 1000);
+                    d = System.DateTime.addMilliseconds(d, System.DateTime.getOffset(d));
                 }
 
                 d.kind = kind;
