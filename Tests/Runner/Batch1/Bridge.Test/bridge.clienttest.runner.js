@@ -5710,77 +5710,77 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             methods: {
                 FromString: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromString()", $t.Line = "17", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromString()", $t.Line = "23", $t));
                     t.Fixture.FromString();
                 },
                 FromStringWithCustomFormatProvider: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromStringWithCustomFormatProvider()", $t.Line = "54", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromStringWithCustomFormatProvider()", $t.Line = "60", $t));
                     t.Fixture.FromStringWithCustomFormatProvider();
                 },
                 FromDateTime: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromDateTime()", $t.Line = "84", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromDateTime()", $t.Line = "90", $t));
                     t.Fixture.FromDateTime();
                 },
                 FromObject: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromObject()", $t.Line = "95", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromObject()", $t.Line = "101", $t));
                     t.Fixture.FromObject();
                 },
                 FromBoolean: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromBoolean()", $t.Line = "102", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromBoolean()", $t.Line = "108", $t));
                     t.Fixture.FromBoolean();
                 },
                 FromChar: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromChar()", $t.Line = "108", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromChar()", $t.Line = "114", $t));
                     t.Fixture.FromChar();
                 },
                 FromInt16: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromInt16()", $t.Line = "114", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromInt16()", $t.Line = "120", $t));
                     t.Fixture.FromInt16();
                 },
                 FromInt32: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromInt32()", $t.Line = "120", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromInt32()", $t.Line = "126", $t));
                     t.Fixture.FromInt32();
                 },
                 FromInt64: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromInt64()", $t.Line = "126", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromInt64()", $t.Line = "132", $t));
                     t.Fixture.FromInt64();
                 },
                 FromUInt16: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromUInt16()", $t.Line = "132", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromUInt16()", $t.Line = "138", $t));
                     t.Fixture.FromUInt16();
                 },
                 FromUInt32: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromUInt32()", $t.Line = "138", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromUInt32()", $t.Line = "144", $t));
                     t.Fixture.FromUInt32();
                 },
                 FromUInt64: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromUInt64()", $t.Line = "144", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromUInt64()", $t.Line = "150", $t));
                     t.Fixture.FromUInt64();
                 },
                 FromSingle: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromSingle()", $t.Line = "150", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromSingle()", $t.Line = "156", $t));
                     t.Fixture.FromSingle();
                 },
                 FromDouble: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromDouble()", $t.Line = "156", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromDouble()", $t.Line = "162", $t));
                     t.Fixture.FromDouble();
                 },
                 FromDecimal: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromDecimal()", $t.Line = "162", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ConvertTests.ConvertToDateTimeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ConvertToDateTimeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FromDecimal()", $t.Line = "168", $t));
                     t.Fixture.FromDecimal();
                 }
             }

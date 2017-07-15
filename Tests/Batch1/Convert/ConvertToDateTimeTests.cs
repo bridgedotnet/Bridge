@@ -3,6 +3,7 @@
 // https://github.com/dotnet/corefx/blob/master/LICENSE
 
 using Bridge.Test.NUnit;
+using Bridge.ClientTestHelper;
 using System;
 using System.Globalization;
 
@@ -13,6 +14,11 @@ namespace Bridge.ClientTest.ConvertTests
     public class ConvertToDateTimeTests : ConvertTestBase<DateTime>
     {
         private static readonly DateTimeFormatInfo s_dateTimeFormatInfo = new DateTimeFormatInfo();
+
+        private void DateTimeAssert(DateTime expected, DateTime actual, string message)
+        {
+            DateHelper.AssertDate(expected, actual, message);
+        }
 
         [Test]
         public void FromString()
@@ -39,8 +45,8 @@ namespace Bridge.ClientTest.ConvertTests
                 testValues[i] = expectedValues[i].ToString(pattern, dateTimeFormat);
             }
 
-            VerifyFromString(Convert.ToDateTime, Convert.ToDateTime, testValues, expectedValues);
-            VerifyFromObject(Convert.ToDateTime, Convert.ToDateTime, testValues, expectedValues);
+            VerifyFromString(Convert.ToDateTime, Convert.ToDateTime, testValues, expectedValues, DateTimeAssert);
+            VerifyFromObject(Convert.ToDateTime, Convert.ToDateTime, testValues, expectedValues, DateTimeAssert);
 
             string[] formatExceptionValues =
             {

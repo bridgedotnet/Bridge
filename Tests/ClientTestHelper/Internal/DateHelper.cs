@@ -5,59 +5,59 @@
 
     public static class DateHelper
     {
-        public static void AssertDate(DateTime dt, DateTimeKind kind, long ticks, int? year = null, int? month = null, int? day = null, int? hour = null, int? minute = null, int? second = null, int? ms = null)
+        public static void AssertDate(DateTime dt, DateTimeKind kind, long ticks, int? year = null, int? month = null, int? day = null, int? hour = null, int? minute = null, int? second = null, int? ms = null, string message = null)
         {
-            Assert.AreEqual(kind, dt.Kind, "Kind");
-            Assert.AreEqual(ticks.ToString(), dt.Ticks.ToString(), "Ticks");
+            Assert.AreEqual(kind, dt.Kind, message + "Kind");
+            Assert.AreEqual(ticks.ToString(), dt.Ticks.ToString(), message + "Ticks");
 
             if (year.HasValue)
             {
-                Assert.AreEqual(year.Value, dt.Year, "Year");
+                Assert.AreEqual(year.Value, dt.Year, message + "Year");
             }
 
             if (month.HasValue)
             {
-                Assert.AreEqual(month.Value, dt.Month, "Month");
+                Assert.AreEqual(month.Value, dt.Month, message + "Month");
             }
 
             if (day.HasValue)
             {
-                Assert.AreEqual(day.Value, dt.Day, "Day");
+                Assert.AreEqual(day.Value, dt.Day, message + "Day");
             }
 
             if (hour.HasValue)
             {
-                Assert.AreEqual(hour.Value, dt.Hour, "Hour");
+                Assert.AreEqual(hour.Value, dt.Hour, message + "Hour");
             }
 
             if (minute.HasValue)
             {
-                Assert.AreEqual(minute.Value, dt.Minute, "Minute");
+                Assert.AreEqual(minute.Value, dt.Minute, message + "Minute");
             }
 
             if (second.HasValue)
             {
-                Assert.AreEqual(second.Value, dt.Second, "Second");
+                Assert.AreEqual(second.Value, dt.Second, message + "Second");
             }
 
             if (ms.HasValue)
             {
-                Assert.AreEqual(ms.Value, dt.Millisecond, "Millisecond");
+                Assert.AreEqual(ms.Value, dt.Millisecond, message + "Millisecond");
             }
         }
 
-        public static void AssertDate(DateTime expected, DateTime actual)
+        public static void AssertDate(DateTime expected, DateTime actual, string message = null)
         {
-            Assert.AreEqual(expected.Kind, actual.Kind, "Kind");
-            Assert.AreEqual(expected.Ticks.ToString(), actual.Ticks.ToString(), "Ticks");
+            Assert.AreEqual(expected.Kind, actual.Kind, message + "Kind");
+            Assert.AreEqual(expected.Ticks.ToString(), actual.Ticks.ToString(), message + "Ticks");
 
-            Assert.AreEqual(expected.Year, actual.Year, "Year");
-            Assert.AreEqual(expected.Month, actual.Month, "Month");
-            Assert.AreEqual(expected.Day, actual.Day, "Day");
-            Assert.AreEqual(expected.Hour, actual.Hour, "Hour");
-            Assert.AreEqual(expected.Minute, actual.Minute, "Minute");
-            Assert.AreEqual(expected.Second, actual.Second, "Second");
-            Assert.AreEqual(expected.Millisecond, actual.Millisecond, "Millisecond");
+            Assert.AreEqual(expected.Year, actual.Year, message + "Year");
+            Assert.AreEqual(expected.Month, actual.Month, message + "Month");
+            Assert.AreEqual(expected.Day, actual.Day, message + "Day");
+            Assert.AreEqual(expected.Hour, actual.Hour, message + "Hour");
+            Assert.AreEqual(expected.Minute, actual.Minute, message + "Minute");
+            Assert.AreEqual(expected.Second, actual.Second, message + "Second");
+            Assert.AreEqual(expected.Millisecond, actual.Millisecond, message + "Millisecond");
         }
     }
 }

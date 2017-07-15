@@ -13987,6 +13987,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     });
 
+    /**
+     * @memberof System
+     * @callback System.Action
+     * @param   {TOutput}    arg1    
+     * @param   {TOutput}    arg2    
+     * @param   {string}     arg3
+     * @return  {void}
+     */
+
     /** @namespace System */
 
     /**
@@ -14009,10 +14018,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
              * @param   {System.Func}        convert           
              * @param   {Array.<TInput>}     testValues        
              * @param   {Array.<TOutput>}    expectedValues    
+             * @param   {System.Action}      assert            
              * @param   {boolean}            useTrue
              * @return  {void}
              */
-            Verify: function (TInput, convert, testValues, expectedValues, useTrue) {
+            Verify: function (TInput, convert, testValues, expectedValues, assert, useTrue) {
+                if (assert === void 0) { assert = null; }
                 if (useTrue === void 0) { useTrue = false; }
                 if (expectedValues == null || testValues == null || expectedValues.length !== testValues.length) {
                     Bridge.Test.NUnit.Assert.Fail("Test data should have the same lenght");
@@ -14027,10 +14038,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                         var expected = expectedValues[System.Array.index(i, expectedValues)];
 
-                        if (useTrue) {
-                            Bridge.Test.NUnit.Assert.True(Bridge.equals(expected, result), System.String.concat("Test: ", testValue, " Expected: ", expected.toString(), " Result: ", result.toString()));
+                        if (!Bridge.staticEquals(assert, null)) {
+                            assert(expected, result, "Test set " + i + ": ");
                         } else {
-                            Bridge.Test.NUnit.Assert.AreEqual(expected, result, System.String.concat("Test: ", testValue, " Expected: ", expected.toString(), " Result: ", result.toString()));
+                            if (useTrue) {
+                                Bridge.Test.NUnit.Assert.True(Bridge.equals(expected, result), System.String.concat("Test: ", testValue, " Expected: ", expected.toString(), " Result: ", result.toString()));
+                            } else {
+                                Bridge.Test.NUnit.Assert.AreEqual(expected, result, System.String.concat("Test: ", testValue, " Expected: ", expected.toString(), " Result: ", result.toString()));
+                            }
                         }
                     }
                     catch (ex) {
@@ -14086,15 +14101,17 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
              * @param   {System.Func}        convertWithFormatProvider    
              * @param   {Array.<string>}     testValues                   
              * @param   {Array.<TOutput>}    expectedValues               
+             * @param   {System.Action}      assert                       
              * @param   {boolean}            useTrue
              * @return  {void}
              */
-            VerifyFromString: function (convert, convertWithFormatProvider, testValues, expectedValues, useTrue) {
+            VerifyFromString: function (convert, convertWithFormatProvider, testValues, expectedValues, assert, useTrue) {
+                if (assert === void 0) { assert = null; }
                 if (useTrue === void 0) { useTrue = false; }
-                this.Verify(System.String, convert, testValues, expectedValues, useTrue);
+                this.Verify(System.String, convert, testValues, expectedValues, assert, useTrue);
                 this.Verify(System.String, function (input) {
                     return convertWithFormatProvider(input, Bridge.ClientTest.ConvertTests.ConvertTestBase$1.TestFormatProvider(TOutput).s_instance);
-                }, testValues, expectedValues, useTrue);
+                }, testValues, expectedValues, assert, useTrue);
             },
             /**
              * Verify that the provided convert delegates produce expectedValues given testValues
@@ -14106,14 +14123,16 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
              * @param   {System.Func}              convert                      
              * @param   {System.Func}              convertWithFormatProvider    
              * @param   {Array.<System.Object>}    testValues                   
-             * @param   {Array.<TOutput>}          expectedValues
+             * @param   {Array.<TOutput>}          expectedValues               
+             * @param   {System.Action}            assert
              * @return  {void}
              */
-            VerifyFromObject: function (convert, convertWithFormatProvider, testValues, expectedValues) {
-                this.Verify(System.Object, convert, testValues, expectedValues);
+            VerifyFromObject: function (convert, convertWithFormatProvider, testValues, expectedValues, assert) {
+                if (assert === void 0) { assert = null; }
+                this.Verify(System.Object, convert, testValues, expectedValues, assert);
                 this.Verify(System.Object, function (input) {
                     return convertWithFormatProvider(input, Bridge.ClientTest.ConvertTests.ConvertTestBase$1.TestFormatProvider(TOutput).s_instance);
-                }, testValues, expectedValues);
+                }, testValues, expectedValues, assert);
             },
             /**
              * Verify that the provided convert delegate produces expectedValues given testValues and testBases
@@ -43281,6 +43300,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             }
         },
         methods: {
+            DateTimeAssert: function (expected, actual, message) {
+                Bridge.ClientTestHelper.DateHelper.AssertDate(expected, actual, message);
+            },
             FromString: function () {
                 var expectedValues = System.Array.init([
                     System.DateTime.create(1999, 12, 31, 23, 59, 59), 
@@ -43302,8 +43324,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     testValues[System.Array.index(i, testValues)] = System.DateTime.format(expectedValues[System.Array.index(i, expectedValues)], pattern, dateTimeFormat);
                 }
 
-                this.VerifyFromString(function (value) { return System.Convert.toDateTime(value); }, function (value, provider) { return System.Convert.toDateTime(value, provider); }, testValues, expectedValues);
-                this.VerifyFromObject(function (value) { return System.Convert.toDateTime(value); }, function (value, provider) { return System.Convert.toDateTime(value, provider); }, testValues, expectedValues);
+                this.VerifyFromString(function (value) { return System.Convert.toDateTime(value); }, function (value, provider) { return System.Convert.toDateTime(value, provider); }, testValues, expectedValues, Bridge.fn.cacheBind(this, this.DateTimeAssert));
+                this.VerifyFromObject(function (value) { return System.Convert.toDateTime(value); }, function (value, provider) { return System.Convert.toDateTime(value, provider); }, testValues, expectedValues, Bridge.fn.cacheBind(this, this.DateTimeAssert));
 
                 var formatExceptionValues = System.Array.init(["null", "201-5-14T00:00:00"], System.String);
 
@@ -44472,7 +44494,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     longMaxValue, 
                     System.Int64(0)
                 ], System.Int64);
-                this.VerifyFromString(function (value) { return System.Convert.toInt64(value); }, function (value, provider) { return System.Convert.toInt64(value, provider); }, testValues, expectedValues, true);
+                this.VerifyFromString(function (value) { return System.Convert.toInt64(value); }, function (value, provider) { return System.Convert.toInt64(value, provider); }, testValues, expectedValues, void 0, true);
 
                 var overflowValues = System.Array.init([Bridge.ClientTest.ConvertTests.ConvertConstants.INT64_OVERFLOW_MAX_STRING, Bridge.ClientTest.ConvertTests.ConvertConstants.INT64_OVERFLOW_MIN_STRING], System.String);
                 this.VerifyFromStringThrows(System.OverflowException, function (value) { return System.Convert.toInt64(value); }, function (value, provider) { return System.Convert.toInt64(value, provider); }, overflowValues);

@@ -19,7 +19,7 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
     Bridge.define("Bridge.ClientTestHelper.DateHelper", {
         statics: {
             methods: {
-                AssertDate$1: function (dt, kind, ticks, year, month, day, hour, minute, second, ms) {
+                AssertDate$1: function (dt, kind, ticks, year, month, day, hour, minute, second, ms, message) {
                     if (year === void 0) { year = null; }
                     if (month === void 0) { month = null; }
                     if (day === void 0) { day = null; }
@@ -27,48 +27,50 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
                     if (minute === void 0) { minute = null; }
                     if (second === void 0) { second = null; }
                     if (ms === void 0) { ms = null; }
-                    Bridge.Test.NUnit.Assert.AreEqual(kind, System.DateTime.getKind(dt), "Kind");
-                    Bridge.Test.NUnit.Assert.AreEqual(ticks.toString(), System.DateTime.getTicks(dt).toString(), "Ticks");
+                    if (message === void 0) { message = null; }
+                    Bridge.Test.NUnit.Assert.AreEqual(kind, System.DateTime.getKind(dt), System.String.concat(message, "Kind"));
+                    Bridge.Test.NUnit.Assert.AreEqual(ticks.toString(), System.DateTime.getTicks(dt).toString(), System.String.concat(message, "Ticks"));
 
                     if (System.Nullable.hasValue(year)) {
-                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(year), System.DateTime.getYear(dt), "Year");
+                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(year), System.DateTime.getYear(dt), System.String.concat(message, "Year"));
                     }
 
                     if (System.Nullable.hasValue(month)) {
-                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(month), System.DateTime.getMonth(dt), "Month");
+                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(month), System.DateTime.getMonth(dt), System.String.concat(message, "Month"));
                     }
 
                     if (System.Nullable.hasValue(day)) {
-                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(day), System.DateTime.getDay(dt), "Day");
+                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(day), System.DateTime.getDay(dt), System.String.concat(message, "Day"));
                     }
 
                     if (System.Nullable.hasValue(hour)) {
-                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(hour), System.DateTime.getHour(dt), "Hour");
+                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(hour), System.DateTime.getHour(dt), System.String.concat(message, "Hour"));
                     }
 
                     if (System.Nullable.hasValue(minute)) {
-                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(minute), System.DateTime.getMinute(dt), "Minute");
+                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(minute), System.DateTime.getMinute(dt), System.String.concat(message, "Minute"));
                     }
 
                     if (System.Nullable.hasValue(second)) {
-                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(second), System.DateTime.getSecond(dt), "Second");
+                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(second), System.DateTime.getSecond(dt), System.String.concat(message, "Second"));
                     }
 
                     if (System.Nullable.hasValue(ms)) {
-                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(ms), System.DateTime.getMillisecond(dt), "Millisecond");
+                        Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.getValue(ms), System.DateTime.getMillisecond(dt), System.String.concat(message, "Millisecond"));
                     }
                 },
-                AssertDate: function (expected, actual) {
-                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getKind(expected), System.DateTime.getKind(actual), "Kind");
-                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getTicks(expected).toString(), System.DateTime.getTicks(actual).toString(), "Ticks");
+                AssertDate: function (expected, actual, message) {
+                    if (message === void 0) { message = null; }
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getKind(expected), System.DateTime.getKind(actual), System.String.concat(message, "Kind"));
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getTicks(expected).toString(), System.DateTime.getTicks(actual).toString(), System.String.concat(message, "Ticks"));
 
-                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getYear(expected), System.DateTime.getYear(actual), "Year");
-                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getMonth(expected), System.DateTime.getMonth(actual), "Month");
-                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getDay(expected), System.DateTime.getDay(actual), "Day");
-                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getHour(expected), System.DateTime.getHour(actual), "Hour");
-                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getMinute(expected), System.DateTime.getMinute(actual), "Minute");
-                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getSecond(expected), System.DateTime.getSecond(actual), "Second");
-                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getMillisecond(expected), System.DateTime.getMillisecond(actual), "Millisecond");
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getYear(expected), System.DateTime.getYear(actual), System.String.concat(message, "Year"));
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getMonth(expected), System.DateTime.getMonth(actual), System.String.concat(message, "Month"));
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getDay(expected), System.DateTime.getDay(actual), System.String.concat(message, "Day"));
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getHour(expected), System.DateTime.getHour(actual), System.String.concat(message, "Hour"));
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getMinute(expected), System.DateTime.getMinute(actual), System.String.concat(message, "Minute"));
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getSecond(expected), System.DateTime.getSecond(actual), System.String.concat(message, "Second"));
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getMillisecond(expected), System.DateTime.getMillisecond(actual), System.String.concat(message, "Millisecond"));
                 }
             }
         }
