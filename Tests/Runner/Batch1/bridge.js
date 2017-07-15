@@ -8270,7 +8270,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 var d1,
                     ticks = d.ticks;
 
-                if (d.kind === 0) {
+                if (d.kind !== 2) {
                     ticks = d.ticks.sub(System.Int64(d.getTimezoneOffset() * 60 * 1000).mul(10000));
                 }
 
@@ -8291,7 +8291,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
             toUniversalTime: function (d) {
                 d.kind = (d.kind !== undefined) ? d.kind : 0;
-                d.ticks = (d.ticks !== undefined) ? d.ticks : System.Int64(d.getTime() + (d.getTimezoneOffset() * 60 * 1000)).mul(10000);
+                d.ticks = (d.ticks !== undefined) ? d.ticks : System.Int64(d.getTime() + (d.getTimezoneOffset() * 60 * 1000)).mul(10000).add(System.DateTime.minOffset);
 
                 var d1,
                     ticks = d.ticks;
@@ -8385,19 +8385,11 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             getToday: function () {
                 var d = new Date();
 
-                var d2 = new Date(d.getFullYear(), d.getMonth(), d.getDate());
-
-                d2.kind = 2;
-
-                return d2;
+                return System.DateTime.create(d.getFullYear(), d.getMonth() + 1, d.getDate(), 0, 0, 0, 0, 2);
             },
 
             getNow: function () {
-                var d = new Date();
-
-                d.kind = 2;
-
-                return d;
+                return System.DateTime.create$1(new Date(), 2);
             },
 
             getUtcNow: function () {
