@@ -9202,18 +9202,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             },
 
             addYears: function (d, v) {
-                d = (d !== undefined) ? d : System.DateTime.getMinValue();
-                v = (v !== undefined) ? v : 0;
-
-                d.kind = (d.kind !== undefined) ? d.kind : 0;
-
-                var d1 = new Date(d.getTime());
-
-                d1.setFullYear(d.getFullYear() + v);
-
-                d1.kind = d.kind;
-
-                return d1;
+                return System.DateTime.addMonths(d, v * 12);
             },
 
             addMonths: function (d, v) {
@@ -9240,52 +9229,25 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 d = (d !== undefined) ? d : System.DateTime.getMinValue();
                 v = (v !== undefined) ? v : 0;
 
-                d.kind = (d.kind !== undefined) ? d.kind : 0;
+                var d1 = new Date(d.getTime());
 
-                var d1 = new Date(d.getTime() + Math.round(v * 864e5));
+                d1.setDate(d.getDate() + Math.floor(v));
 
-                d1.kind = d.kind;
+                d1.kind = (d.kind !== undefined) ? d.kind : 0;
 
-                return d1;
+                return System.DateTime.addMilliseconds(d1, Math.round((v % 1) * 864e5));
             },
 
             addHours: function (d, v) {
-                d = (d !== undefined) ? d : System.DateTime.getMinValue();
-                v = (v !== undefined) ? v : 0;
-
-                d.kind = (d.kind !== undefined) ? d.kind : 0;
-
-                var d1 = new Date(d.getTime() + Math.round(v * 36e5));
-
-                d1.kind = d.kind;
-
-                return d1;
+                return System.DateTime.addMilliseconds(d, Math.round(v * 36e5));
             },
 
             addMinutes: function (d, v) {
-                d = (d !== undefined) ? d : System.DateTime.getMinValue();
-                v = (v !== undefined) ? v : 0;
-
-                d.kind = (d.kind !== undefined) ? d.kind : 0;
-
-                var d1 = new Date(d.getTime() + Math.round(v * 6e4));
-
-                d1.kind = d.kind;
-
-                return d1;
+                return System.DateTime.addMilliseconds(d, Math.round(v * 6e4));
             },
 
             addSeconds: function (d, v) {
-                d = (d !== undefined) ? d : System.DateTime.getMinValue();
-                v = (v !== undefined) ? v : 0;
-
-                d.kind = (d.kind !== undefined) ? d.kind : 0;
-
-                var d1 = new Date(d.getTime() + Math.round(v * 1e3));
-
-                d1.kind = d.kind;
-
-                return d1;
+                return System.DateTime.addMilliseconds(d, Math.round(v * 1e3));
             },
 
             addMilliseconds: function (d, v) {
@@ -9302,9 +9264,6 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             },
 
             addTicks: function (d, v) {
-                d = (d !== undefined) ? d : System.DateTime.getMinValue();
-                v = (v !== undefined) ? v : 0;
-
                 return System.DateTime.addMilliseconds(d, v / 10000);
             },
 
