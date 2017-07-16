@@ -991,9 +991,6 @@
             },
 
             addMonths: function (d, v) {
-                d = (d !== undefined) ? d : System.DateTime.getMinValue();
-                v = (v !== undefined) ? v : 0;
-
                 d.kind = (d.kind !== undefined) ? d.kind : 0;
 
                 var d1 = new Date(d.getTime()),
@@ -1011,9 +1008,6 @@
             },
 
             addDays: function (d, v) {
-                d = (d !== undefined) ? d : System.DateTime.getMinValue();
-                v = (v !== undefined) ? v : 0;
-
                 var d1 = new Date(d.getTime());
 
                 d1.setDate(d.getDate() + Math.floor(v));
@@ -1036,9 +1030,6 @@
             },
 
             addMilliseconds: function (d, v) {
-                d = (d !== undefined) ? d : System.DateTime.getMinValue();
-                v = (v !== undefined) ? v : 0;
-
                 d.kind = (d.kind !== undefined) ? d.kind : 0;
 
                 var d1 = new Date(d.getTime() + Math.round(v));
