@@ -33678,12 +33678,39 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 Bridge.ClientTestHelper.DateHelper.AssertDate(d2, d1);
             },
+            ToUniversalTimeWorks_N2929_N2524: function () {
+                var d1 = System.DateTime.create(2011, 10, 5, 14, 48, 15, 0, System.DateTimeKind.Utc);
+                var d2 = System.DateTime.toLocalTime(d1);
+                var d3 = System.DateTime.toUniversalTime(d2);
+                var d4 = System.DateTime.toUniversalTime(d3);
+
+                // 2011-10-05T20:48:15.0000000Z
+                Bridge.Test.NUnit.Assert.AreEqual("2011-10-05T14:48:15.0000000Z", System.DateTime.format(d3, "O"));
+
+                // #2524
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.format(d3, "O"), System.DateTime.format(d4, "O"));
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.format(d3, "o"), System.DateTime.format(d4, "o"));
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.format(d3, "o"), System.DateTime.format(d4, "O"));
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.format(d3, "O"), System.DateTime.format(d4, "o"));
+            },
             ToLocalWorksDoesNotDoubleCompute: function () {
                 var d = System.DateTime.create(2011, 7, 12, 13, 42, 56, 345);
                 var d1 = System.DateTime.toLocalTime(d);
                 var d2 = System.DateTime.toLocalTime(d1);
 
                 Bridge.ClientTestHelper.DateHelper.AssertDate(d2, d1);
+            },
+            ToLocalTimeWorks_N2929_N2524: function () {
+                var d1 = System.DateTime.create(2011, 10, 5, 14, 48, 15);
+                var d2 = System.DateTime.toUniversalTime(d1);
+                var d3 = System.DateTime.toLocalTime(d2);
+                var d4 = System.DateTime.toLocalTime(d3);
+
+                // #2524
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.format(d3, "O"), System.DateTime.format(d4, "O"));
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.format(d3, "o"), System.DateTime.format(d4, "o"));
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.format(d3, "o"), System.DateTime.format(d4, "O"));
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.format(d3, "O"), System.DateTime.format(d4, "o"));
             },
             TodayWorks: function () {
                 var dt = System.DateTime.getToday();

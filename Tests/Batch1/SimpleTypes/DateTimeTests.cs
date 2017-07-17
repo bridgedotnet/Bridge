@@ -243,6 +243,24 @@ namespace Bridge.ClientTest.SimpleTypes
             DateHelper.AssertDate(d2, d1);
         }
 
+        [Test(Name = "#2929 #2524 - {0}", ExpectedCount = 5)]
+        public void ToUniversalTimeWorks_N2929_N2524()
+        {
+            var d1 = new DateTime(2011, 10, 5, 14, 48, 15, DateTimeKind.Utc);
+            var d2 = d1.ToLocalTime();
+            var d3 = d2.ToUniversalTime();
+            var d4 = d3.ToUniversalTime();
+
+            // 2011-10-05T20:48:15.0000000Z
+            Assert.AreEqual("2011-10-05T14:48:15.0000000Z", d3.ToString("O"));
+
+            // #2524
+            Assert.AreEqual(d3.ToString("O"), d4.ToString("O"));
+            Assert.AreEqual(d3.ToString("o"), d4.ToString("o"));
+            Assert.AreEqual(d3.ToString("o"), d4.ToString("O"));
+            Assert.AreEqual(d3.ToString("O"), d4.ToString("o"));
+        }
+
         [Test]
         public void ToLocalWorksDoesNotDoubleCompute()
         {
@@ -251,6 +269,21 @@ namespace Bridge.ClientTest.SimpleTypes
             var d2 = d1.ToLocalTime();
 
             DateHelper.AssertDate(d2, d1);
+        }
+
+        [Test(Name = "#2929 #2524 - {0}", ExpectedCount = 4)]
+        public void ToLocalTimeWorks_N2929_N2524()
+        {
+            var d1 = new DateTime(2011, 10, 5, 14, 48, 15);
+            var d2 = d1.ToUniversalTime();
+            var d3 = d2.ToLocalTime();
+            var d4 = d3.ToLocalTime();
+
+            // #2524
+            Assert.AreEqual(d3.ToString("O"), d4.ToString("O"));
+            Assert.AreEqual(d3.ToString("o"), d4.ToString("o"));
+            Assert.AreEqual(d3.ToString("o"), d4.ToString("O"));
+            Assert.AreEqual(d3.ToString("O"), d4.ToString("o"));
         }
 
         [Test]
