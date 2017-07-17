@@ -968,6 +968,25 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual(new DateTime(2011, 7, 14, 14, 42, 56, 345), actual);
             Assert.AreEqual(new DateTime(2011, 7, 12, 2, 42, 56, 345), dt);
         }
+        [Test]
+        public void AddDaysForDSTWorks_N2967()
+        {
+            // #2967 This should be tested in time zone where daylight time change in April
+            // Like AEST – Australian Eastern Standard Time / Eastern Standard Time (Standard Time)
+            var x = new DateTime(2017, 04, 1);
+            Assert.AreEqual(new DateTime(2017, 4, 1), x);
+            x = x.AddDays(1);
+            Assert.AreEqual(new DateTime(2017, 4, 2), x);
+            x = x.AddDays(1);
+            Assert.AreEqual(new DateTime(2017, 4, 3), x);
+
+            var y = new DateTime(2017, 05, 1);
+            Assert.AreEqual(new DateTime(2017, 5, 1), y);
+            y = y.AddDays(1);
+            Assert.AreEqual(new DateTime(2017, 5, 2), y);
+            y = y.AddDays(1);
+            Assert.AreEqual(new DateTime(2017, 5, 3), y);
+        }
 
         [Test]
         public void AddHoursWorks()

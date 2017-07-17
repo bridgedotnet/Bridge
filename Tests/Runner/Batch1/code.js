@@ -33966,6 +33966,23 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.create(2011, 7, 14, 14, 42, 56, 345), actual);
                 Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.create(2011, 7, 12, 2, 42, 56, 345), dt);
             },
+            AddDaysForDSTWorks_N2967: function () {
+                // #2967 This should be tested in time zone where daylight time change in April
+                // Like AEST – Australian Eastern Standard Time / Eastern Standard Time (Standard Time)
+                var x = System.DateTime.create(2017, 4, 1);
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.create(2017, 4, 1), x);
+                x = System.DateTime.addDays(x, 1);
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.create(2017, 4, 2), x);
+                x = System.DateTime.addDays(x, 1);
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.create(2017, 4, 3), x);
+
+                var y = System.DateTime.create(2017, 5, 1);
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.create(2017, 5, 1), y);
+                y = System.DateTime.addDays(y, 1);
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.create(2017, 5, 2), y);
+                y = System.DateTime.addDays(y, 1);
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.create(2017, 5, 3), y);
+            },
             AddHoursWorks: function () {
                 var dt = System.DateTime.create(2011, 7, 12, 2, 42, 56, 345);
                 var actual = System.DateTime.addHours(dt, 2.5);
