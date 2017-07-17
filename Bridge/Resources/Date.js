@@ -18,20 +18,13 @@
 
             // UTC Min Value
             getMinValue: function () {
-                var ticks = System.Int64(0),
-                    d = System.DateTime.create$2(ticks, 0);
-
-                d.ticks = ticks;
-
-                return d;
+                return System.DateTime.create$2(0);
             },
 
             // UTC Max Value
             getMaxValue: function () {
-                var ticks = System.DateTime.maxTicks,
-                    d = System.DateTime.create$2(ticks, 0);
-
-                d.ticks = ticks;
+                var d = System.DateTime.create$2(System.DateTime.maxTicks);
+                d.ticks = System.DateTime.maxTicks;
 
                 return d;
             },
@@ -64,16 +57,12 @@
                 }
 
                 d1 = System.DateTime.create$2(ticks, 2);
-                d1.kind = 2;
 
                 // Check if Ticks are out of range
                 if (ticks.gt(System.DateTime.maxTicks) || ticks.lt(0)) {
                     ticks = ticks.add(System.Int64(d1.getTimezoneOffset() * 60 * 1000).mul(10000));
                     d1 = System.DateTime.create$2(ticks, 2);
                 }
-
-                d1.ticks = ticks;
-                d1.kind = 2;
 
                 return d1;
             },
@@ -97,8 +86,6 @@
                     ticks = ticks.sub(System.Int64(d1.getTimezoneOffset() * 60 * 1000).mul(10000));
                     d1 = System.DateTime.create$2(ticks, 1);
                 }
-
-                d1.ticks = ticks;
 
                 return d1;
             },
@@ -141,14 +128,11 @@
                 var d;
 
                 if (kind === 1) {
-                    d = System.DateTime.create(date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds(), date.getUTCMilliseconds(), 1);
-                    d.setFullYear(date.getUTCFullYear());
+                    d = System.DateTime.create(date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds(), date.getUTCMilliseconds(), kind);
                 } else {
                     d = System.DateTime.create(date.getFullYear(), date.getMonth() + 1, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds(), kind);
-                    d.setFullYear(date.getFullYear());
                 }
 
-                d.kind = kind;
                 d.ticks = System.DateTime.getTicks(d)
 
                 return d;
