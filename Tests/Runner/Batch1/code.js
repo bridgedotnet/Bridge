@@ -33967,7 +33967,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.create(2011, 7, 12, 2, 42, 56, 345), dt);
             },
             AddDaysForDSTWorks_N2967: function () {
-                // #2967 This should be tested in time zone where daylight time change in April
+                // This should be tested in time zone where daylight time change in April
                 // Like AEST – Australian Eastern Standard Time / Eastern Standard Time (Standard Time)
                 var x = System.DateTime.create(2017, 4, 1);
                 Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.create(2017, 4, 1), x);
@@ -34042,6 +34042,17 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create(2014, 7, 12, 2, 42, 56, 345), actual);
                 Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create(2011, 7, 12, 2, 42, 56, 345), dt);
+            },
+            AddYearsWorks_N2963: function () {
+                var d = System.DateTime.create(2017, 1, 2);
+
+                var b = false;
+                var d1 = System.DateTime.addYears(d, b ? -1 : 1);
+                Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create(2018, 1, 2), d1);
+
+                b = true;
+                var d2 = System.DateTime.addYears(d, b ? -1 : 1);
+                Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create(2016, 1, 2), d2);
             },
             DaysInMonthWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual(31, System.DateTime.getDaysInMonth(2013, 1));
