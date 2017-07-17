@@ -34047,6 +34047,40 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.True(System.DateTime.getIsLeapYear(2000));
                 Bridge.Test.NUnit.Assert.False(System.DateTime.getIsLeapYear(2003));
             },
+            SpecifyKindWorks: function () {
+                var d = System.DateTime.create(2017, 1, 2, 3, 0, 0);
+                var t = System.DateTime.getTicks(d);
+
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTimeKind.Unspecified, System.DateTime.getKind(d), "Unspecified Kind");
+
+                var d1 = System.DateTime.specifyKind(d, System.DateTimeKind.Local);
+
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTimeKind.Unspecified, System.DateTime.getKind(d), "1. Kind not changed");
+                Bridge.Test.NUnit.Assert.AreEqual(t, System.DateTime.getTicks(d), "1 Ticks not changed");
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTimeKind.Local, System.DateTime.getKind(d1), "1 Local Kind");
+                Bridge.Test.NUnit.Assert.AreEqual(t, System.DateTime.getTicks(d1), "1 Local Ticks");
+
+                var d2 = System.DateTime.specifyKind(d, System.DateTimeKind.Utc);
+
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTimeKind.Unspecified, System.DateTime.getKind(d), "2. Kind not changed");
+                Bridge.Test.NUnit.Assert.AreEqual(t, System.DateTime.getTicks(d), "2 Ticks not changed");
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTimeKind.Utc, System.DateTime.getKind(d2), "2 Utc Kind");
+                Bridge.Test.NUnit.Assert.AreEqual(t, System.DateTime.getTicks(d2), "2 Utc Ticks");
+
+                var d3 = System.DateTime.specifyKind(d, System.DateTimeKind.Local);
+
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTimeKind.Unspecified, System.DateTime.getKind(d), "3. Kind not changed");
+                Bridge.Test.NUnit.Assert.AreEqual(t, System.DateTime.getTicks(d), "3 Ticks not changed");
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTimeKind.Local, System.DateTime.getKind(d3), "3 Local Kind");
+                Bridge.Test.NUnit.Assert.AreEqual(t, System.DateTime.getTicks(d3), "3 Local Ticks");
+
+                var d4 = System.DateTime.specifyKind(d, System.DateTimeKind.Unspecified);
+
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTimeKind.Unspecified, System.DateTime.getKind(d), "4. Kind not changed");
+                Bridge.Test.NUnit.Assert.AreEqual(t, System.DateTime.getTicks(d), "4 Ticks not changed");
+                Bridge.Test.NUnit.Assert.AreEqual(System.DateTimeKind.Unspecified, System.DateTime.getKind(d4), "4 Unspecified Kind");
+                Bridge.Test.NUnit.Assert.AreEqual(t, System.DateTime.getTicks(d4), "4 Unspecified Ticks");
+            },
             CreateUnixTimestampAndConvertBackToDateTime: function () {
                 var now = System.DateTime.getNow();
                 var unixNow = System.DateTime.subdd(now, System.DateTime.create(1970, 1, 1)).getTicks();

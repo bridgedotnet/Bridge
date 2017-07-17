@@ -8237,38 +8237,35 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
             // UTC Min Value
             getMinValue: function () {
-                var ticks = System.Int64(0),
-                    d = System.DateTime.create$2(ticks, 0);
-
-                d.ticks = ticks;
-
-                return d;
+                return System.DateTime.create$2(0);
             },
 
             // UTC Max Value
             getMaxValue: function () {
-                var ticks = System.DateTime.maxTicks,
-                    d = System.DateTime.create$2(ticks, 0);
-
-                d.ticks = ticks;
+                var d = System.DateTime.create$2(System.DateTime.maxTicks);
+                d.ticks = System.DateTime.maxTicks;
 
                 return d;
             },
 
-            getOffset: function(d) {
+            ensureKind: function (d) {
+                d.kind = (d.kind !== undefined) ? d.kind : 0;
+            },
+
+            getOffset: function (d) {
                 return d.getTimezoneOffset() * 60 * 1000;
             },
 
             // Get the number of ticks since 0001-01-01T00:00:00.0000000 UTC
             getTicks: function (d) {
-                d.kind = (d.kind !== undefined) ? d.kind : 0;
+                System.DateTime.ensureKind(d);
                 d.ticks = (d.ticks !== undefined) ? d.ticks : System.Int64(d.getTime() - System.DateTime.getOffset(d)).mul(10000).add(System.DateTime.minOffset);
 
                 return d.ticks;
             },
 
             toLocalTime: function (d) {
-                d.kind = (d.kind !== undefined) ? d.kind : 0;
+                System.DateTime.ensureKind(d);
                 d.ticks = (d.ticks !== undefined) ? d.ticks : System.Int64(d.getTime()).mul(10000);
 
                 var d1,
@@ -8279,7 +8276,6 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 }
 
                 d1 = System.DateTime.create$2(ticks, 2);
-                d1.kind = 2;
 
                 // Check if Ticks are out of range
                 if (ticks.gt(System.DateTime.maxTicks) || ticks.lt(0)) {
@@ -8287,14 +8283,11 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                     d1 = System.DateTime.create$2(ticks, 2);
                 }
 
-                d1.ticks = ticks;
-                d1.kind = 2;
-
                 return d1;
             },
 
             toUniversalTime: function (d) {
-                d.kind = (d.kind !== undefined) ? d.kind : 0;
+                System.DateTime.ensureKind(d);
                 d.ticks = (d.ticks !== undefined) ? d.ticks : System.Int64(d.getTime() + System.DateTime.getOffset(d)).mul(10000).add(System.DateTime.minOffset);
 
                 var d1,
@@ -8312,8 +8305,6 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                     ticks = ticks.sub(System.Int64(d1.getTimezoneOffset() * 60 * 1000).mul(10000));
                     d1 = System.DateTime.create$2(ticks, 1);
                 }
-
-                d1.ticks = ticks;
 
                 return d1;
             },
@@ -8356,31 +8347,27 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 var d;
 
                 if (kind === 1) {
-                    d = System.DateTime.create(date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds(), date.getUTCMilliseconds(), 1);
-                    d.setFullYear(date.getUTCFullYear());
+                    d = System.DateTime.create(date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds(), date.getUTCMilliseconds(), kind);
                 } else {
                     d = System.DateTime.create(date.getFullYear(), date.getMonth() + 1, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds(), kind);
-                    d.setFullYear(date.getFullYear());
                 }
 
-                d.kind = kind;
                 d.ticks = System.DateTime.getTicks(d)
 
                 return d;
             },
 
             create$2: function (ticks, kind) {
-                kind = (kind !== undefined) ? kind : 0;
-
                 ticks = System.Int64.is64Bit(ticks) ? ticks : System.Int64(ticks);
 
                 var d = new Date(ticks.sub(System.DateTime.minOffset).div(10000).toNumber());
+                d.kind = kind;
+                System.DateTime.ensureKind(d);
 
-                if (kind !== 1) {
+                if (d.kind !== 1) {
                     d = System.DateTime.addMilliseconds(d, System.DateTime.getOffset(d));
                 }
 
-                d.kind = kind;
                 d.ticks = ticks;
 
                 return d;
@@ -8407,17 +8394,16 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             },
 
             getKind: function (d) {
-                var kind = (d.kind !== undefined) ? d.kind : 0;
+                System.DateTime.ensureKind(d);
 
-                return kind;
+                return d.kind;
             },
 
             specifyKind: function (d, kind) {
-                kind = (kind !== undefined) ? kind : 0;
-
                 var d = new Date(d.getTime());
 
                 d.kind = kind;
+                System.DateTime.ensureKind(d);
 
                 return d;
             },
@@ -9210,10 +9196,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             },
 
             addMonths: function (d, v) {
-                d = (d !== undefined) ? d : System.DateTime.getMinValue();
-                v = (v !== undefined) ? v : 0;
-
-                d.kind = (d.kind !== undefined) ? d.kind : 0;
+                System.DateTime.ensureKind(d);
 
                 var d1 = new Date(d.getTime()),
                     day = d1.getDate();
@@ -9230,14 +9213,13 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             },
 
             addDays: function (d, v) {
-                d = (d !== undefined) ? d : System.DateTime.getMinValue();
-                v = (v !== undefined) ? v : 0;
+                System.DateTime.ensureKind(d);
 
                 var d1 = new Date(d.getTime());
 
                 d1.setDate(d.getDate() + Math.floor(v));
 
-                d1.kind = (d.kind !== undefined) ? d.kind : 0;
+                d1.kind = d.kind;
 
                 return System.DateTime.addMilliseconds(d1, Math.round((v % 1) * 864e5));
             },
@@ -9255,10 +9237,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             },
 
             addMilliseconds: function (d, v) {
-                d = (d !== undefined) ? d : System.DateTime.getMinValue();
-                v = (v !== undefined) ? v : 0;
-
-                d.kind = (d.kind !== undefined) ? d.kind : 0;
+                System.DateTime.ensureKind(d);
 
                 var d1 = new Date(d.getTime() + Math.round(v));
 
@@ -9272,7 +9251,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             },
 
             add: function (d, value) {
-                d.kind = (d.kind !== undefined) ? d.kind : 0;
+                System.DateTime.ensureKind(d);
 
                 var d1 = new Date(d.getTime() + value.ticks.div(10000).toNumber());
 
@@ -9282,7 +9261,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             },
 
             subtract: function (d, value) {
-                d.kind = (d.kind !== undefined) ? d.kind : 0;
+                System.DateTime.ensureKind(d);
 
                 var d1 = new Date(d.getTime() - value.ticks.div(10000).toNumber());
 
@@ -9312,66 +9291,48 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             },
 
             getDate: function (d) {
-                var kind = (d.kind !== undefined) ? d.kind : 0;
+                System.DateTime.ensureKind(d);
 
-                d = new Date(d.getTime());
+                var d1 = new Date(d.getTime());
+                d1.setHours(0);
+                d1.setMinutes(0);
+                d1.setSeconds(0);
+                d1.setMilliseconds(0);
+                d1.kind = d.kind;
 
-                d.setHours(0);
-                d.setMinutes(0);
-                d.setSeconds(0);
-                d.setMilliseconds(0);
-
-                d.kind = kind;
-
-                return d;
+                return d1;
             },
 
             getDayOfWeek: function (d) {
-                d.kind = (d.kind !== undefined) ? d.kind : 0;
-
-                return (d.kind === 1) ? d.getUTCDay() : d.getDay();
+                return (System.DateTime.getKind(d) === 1) ? d.getUTCDay() : d.getDay();
             },
 
             getYear: function (d) {
-                d.kind = (d.kind !== undefined) ? d.kind : 0;
-
-                return (d.kind === 1) ? d.getUTCFullYear() : d.getFullYear();
+                return (System.DateTime.getKind(d) === 1) ? d.getUTCFullYear() : d.getFullYear();
             },
 
             getMonth: function (d) {
-                d.kind = (d.kind !== undefined) ? d.kind : 0;
-
-                return ((d.kind === 1) ? d.getUTCMonth() : d.getMonth()) + 1;
+                return ((System.DateTime.getKind(d) === 1) ? d.getUTCMonth() : d.getMonth()) + 1;
             },
 
             getDay: function (d) {
-                d.kind = (d.kind !== undefined) ? d.kind : 0;
-
-                return (d.kind === 1) ? d.getUTCDate() : d.getDate();
+                return (System.DateTime.getKind(d) === 1) ? d.getUTCDate() : d.getDate();
             },
 
             getHour: function (d) {
-                d.kind = (d.kind !== undefined) ? d.kind : 0;
-
-                return (d.kind === 1) ? d.getUTCHours() : d.getHours();
+                return (System.DateTime.getKind(d) === 1) ? d.getUTCHours() : d.getHours();
             },
 
             getMinute: function (d) {
-                d.kind = (d.kind !== undefined) ? d.kind : 0;
-
-                return (d.kind === 1) ? d.getUTCMinutes() : d.getMinutes();
+                return (System.DateTime.getKind(d) === 1) ? d.getUTCMinutes() : d.getMinutes();
             },
 
             getSecond: function (d) {
-                d.kind = (d.kind !== undefined) ? d.kind : 0;
-
-                return (d.kind === 1) ? d.getUTCSeconds() : d.getSeconds();
+                return (System.DateTime.getKind(d) === 1) ? d.getUTCSeconds() : d.getSeconds();
             },
 
             getMillisecond: function (d) {
-                d.kind = (d.kind !== undefined) ? d.kind : 0;
-
-                return (d.kind === 1) ? d.getUTCMilliseconds() : d.getMilliseconds();
+                return (System.DateTime.getKind(d) === 1) ? d.getUTCMilliseconds() : d.getMilliseconds();
             },
 
             gt: function (a, b) {

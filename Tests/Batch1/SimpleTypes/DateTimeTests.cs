@@ -1077,6 +1077,43 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.False(DateTime.IsLeapYear(2003));
         }
 
+        [Test]
+        public void SpecifyKindWorks()
+        {
+            var d = new DateTime(2017, 1, 2, 3, 0, 0);
+            var t = d.Ticks;
+
+            Assert.AreEqual(DateTimeKind.Unspecified, d.Kind, "Unspecified Kind");
+
+            var d1 = DateTime.SpecifyKind(d, DateTimeKind.Local);
+
+            Assert.AreEqual(DateTimeKind.Unspecified, d.Kind, "1. Kind not changed");
+            Assert.AreEqual(t, d.Ticks, "1 Ticks not changed");
+            Assert.AreEqual(DateTimeKind.Local, d1.Kind, "1 Local Kind");
+            Assert.AreEqual(t, d1.Ticks, "1 Local Ticks");
+
+            var d2 = DateTime.SpecifyKind(d, DateTimeKind.Utc);
+
+            Assert.AreEqual(DateTimeKind.Unspecified, d.Kind, "2. Kind not changed");
+            Assert.AreEqual(t, d.Ticks, "2 Ticks not changed");
+            Assert.AreEqual(DateTimeKind.Utc, d2.Kind, "2 Utc Kind");
+            Assert.AreEqual(t, d2.Ticks, "2 Utc Ticks");
+
+            var d3 = DateTime.SpecifyKind(d, DateTimeKind.Local);
+
+            Assert.AreEqual(DateTimeKind.Unspecified, d.Kind, "3. Kind not changed");
+            Assert.AreEqual(t, d.Ticks, "3 Ticks not changed");
+            Assert.AreEqual(DateTimeKind.Local, d3.Kind, "3 Local Kind");
+            Assert.AreEqual(t, d3.Ticks, "3 Local Ticks");
+
+            var d4 = DateTime.SpecifyKind(d, DateTimeKind.Unspecified);
+
+            Assert.AreEqual(DateTimeKind.Unspecified, d.Kind, "4. Kind not changed");
+            Assert.AreEqual(t, d.Ticks, "4 Ticks not changed");
+            Assert.AreEqual(DateTimeKind.Unspecified, d4.Kind, "4 Unspecified Kind");
+            Assert.AreEqual(t, d4.Ticks, "4 Unspecified Ticks");
+        }
+
         [Test(ExpectedCount = 11)]
         public void CreateUnixTimestampAndConvertBackToDateTime()
         {
