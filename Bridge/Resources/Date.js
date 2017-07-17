@@ -29,31 +29,23 @@
                 return d;
             },
 
-            ensureKind: function (d) {
-                d.kind = (d.kind !== undefined) ? d.kind : 0;
-            },
-
-            getOffset: function (d) {
-                return d.getTimezoneOffset() * 60 * 1000;
-            },
-
             // Get the number of ticks since 0001-01-01T00:00:00.0000000 UTC
             getTicks: function (d) {
-                System.DateTime.ensureKind(d);
-                d.ticks = (d.ticks !== undefined) ? d.ticks : System.Int64(d.getTime() - System.DateTime.getOffset(d)).mul(10000).add(System.DateTime.minOffset);
+                d.kind = (d.kind !== undefined) ? d.kind : 0
+                d.ticks = (d.ticks !== undefined) ? d.ticks : System.Int64(d.getTime() - d.getTimezoneOffset() * 60 * 1000).mul(10000).add(System.DateTime.minOffset);
 
                 return d.ticks;
             },
 
             toLocalTime: function (d) {
-                System.DateTime.ensureKind(d);
+                d.kind = (d.kind !== undefined) ? d.kind : 0
                 d.ticks = (d.ticks !== undefined) ? d.ticks : System.Int64(d.getTime()).mul(10000);
 
                 var d1,
                     ticks = d.ticks;
 
                 if (d.kind !== 2) {
-                    ticks = d.ticks.sub(System.Int64(System.DateTime.getOffset(d)).mul(10000));
+                    ticks = d.ticks.sub(System.Int64(d.getTimezoneOffset() * 60 * 1000).mul(10000));
                 }
 
                 d1 = System.DateTime.create$2(ticks, 2);
@@ -68,15 +60,15 @@
             },
 
             toUniversalTime: function (d) {
-                System.DateTime.ensureKind(d);
-                d.ticks = (d.ticks !== undefined) ? d.ticks : System.Int64(d.getTime() + System.DateTime.getOffset(d)).mul(10000).add(System.DateTime.minOffset);
+                d.kind = (d.kind !== undefined) ? d.kind : 0
+                d.ticks = (d.ticks !== undefined) ? d.ticks : System.Int64(d.getTime() + d.getTimezoneOffset() * 60 * 1000).mul(10000).add(System.DateTime.minOffset);
 
                 var d1,
                     ticks = d.ticks;
 
                 // Assuming d is Local time, so adjust to UTC
                 if (d.kind !== 1) {
-                    ticks = ticks.add(System.Int64(System.DateTime.getOffset(d)).mul(10000));
+                    ticks = ticks.add(System.Int64(d.getTimezoneOffset() * 60 * 1000).mul(10000));
                 }
 
                 d1 = System.DateTime.create$2(ticks, 1);
@@ -113,7 +105,7 @@
                 ticks = System.DateTime.getTicks(d);
 
                 if (kind === 1) {
-                    d = new Date(d.getTime() - System.DateTime.getOffset(d))
+                    d = new Date(d.getTime() - d.getTimezoneOffset() * 60 * 1000)
                 }
 
                 d.kind = kind;
@@ -140,16 +132,16 @@
 
             create$2: function (ticks, kind) {
                 ticks = System.Int64.is64Bit(ticks) ? ticks : System.Int64(ticks);
+                kind = (kind !== undefined) ? kind : 0
 
                 var d = new Date(ticks.sub(System.DateTime.minOffset).div(10000).toNumber());
-                d.kind = kind;
-                System.DateTime.ensureKind(d);
 
-                if (d.kind !== 1) {
-                    d = System.DateTime.addMilliseconds(d, System.DateTime.getOffset(d));
+                if (kind !== 1) {
+                    d = System.DateTime.addMilliseconds(d, d.getTimezoneOffset() * 60 * 1000);
                 }
 
                 d.ticks = ticks;
+                d.kind = kind;
 
                 return d;
             },
@@ -175,16 +167,16 @@
             },
 
             getKind: function (d) {
-                System.DateTime.ensureKind(d);
+                d.kind = (d.kind !== undefined) ? d.kind : 0
 
                 return d.kind;
             },
 
             specifyKind: function (d, kind) {
-                var d = new Date(d.getTime());
+                kind = (kind !== undefined) ? kind : 0
 
+                var d = new Date(d.getTime());
                 d.kind = kind;
-                System.DateTime.ensureKind(d);
 
                 return d;
             },
@@ -977,7 +969,7 @@
             },
 
             addMonths: function (d, v) {
-                System.DateTime.ensureKind(d);
+                d.kind = (d.kind !== undefined) ? d.kind : 0
 
                 var d1 = new Date(d.getTime()),
                     day = d1.getDate();
@@ -994,7 +986,7 @@
             },
 
             addDays: function (d, v) {
-                System.DateTime.ensureKind(d);
+                d.kind = (d.kind !== undefined) ? d.kind : 0
 
                 var d1 = new Date(d.getTime());
 
@@ -1018,7 +1010,7 @@
             },
 
             addMilliseconds: function (d, v) {
-                System.DateTime.ensureKind(d);
+                d.kind = (d.kind !== undefined) ? d.kind : 0
 
                 var d1 = new Date(d.getTime() + Math.round(v));
 
@@ -1032,7 +1024,7 @@
             },
 
             add: function (d, value) {
-                System.DateTime.ensureKind(d);
+                d.kind = (d.kind !== undefined) ? d.kind : 0
 
                 var d1 = new Date(d.getTime() + value.ticks.div(10000).toNumber());
 
@@ -1042,7 +1034,7 @@
             },
 
             subtract: function (d, value) {
-                System.DateTime.ensureKind(d);
+                d.kind = (d.kind !== undefined) ? d.kind : 0
 
                 var d1 = new Date(d.getTime() - value.ticks.div(10000).toNumber());
 
@@ -1072,7 +1064,7 @@
             },
 
             getDate: function (d) {
-                System.DateTime.ensureKind(d);
+                d.kind = (d.kind !== undefined) ? d.kind : 0
 
                 var d1 = new Date(d.getTime());
                 d1.setHours(0);
