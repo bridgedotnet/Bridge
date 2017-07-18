@@ -8460,7 +8460,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
                 var needRemoveDot = false;
 
-                f = f.replace(/(\\.|'[^']*'|"[^"]*"|d{1,4}|M{1,4}|yyyy|yy|y|HH?|hh?|mm?|ss?|tt?|u|f{1,7}|F{1,7}|z{1,3}|\:|\/)/g,
+                f = f.replace(/(\\.|'[^']*'|"[^"]*"|d{1,4}|M{1,4}|yyyy|yy|y|HH?|hh?|mm?|ss?|tt?|u|f{1,7}|F{1,7}|K|z{1,3}|\:|\/)/g,
                     function (match, group, index) {
                         var part = match;
 
@@ -8622,6 +8622,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                                 part = ((part >= 0) ? "-" : "+") + Math.floor(Math.abs(part));
 
                                 break;
+                            case "K":
                             case "zz":
                             case "zzz":
                                 if (kind === 0) {
@@ -8630,9 +8631,9 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                                     part = "Z";
                                 } else {
                                     part = timezoneOffset / 60;
-                                    part = ((part >= 0) ? "-" : "+") + System.String.alignString(Math.floor(Math.abs(part)).toString(), 2, "0", 2);
+                                    part = ((part > 0) ? "-" : "+") + System.String.alignString(Math.floor(Math.abs(part)).toString(), 2, "0", 2);
 
-                                    if (match === "zzz") {
+                                    if (match === "zzz" || match === "K") {
                                         part += df.timeSeparator + System.String.alignString(Math.floor(Math.abs(timezoneOffset % 60)).toString(), 2, "0", 2);
                                     }
                                 }
