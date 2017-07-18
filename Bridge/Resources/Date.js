@@ -542,6 +542,12 @@
                         token += c;
                         index++;
                     } else {
+                        var nextChar = format.charAt(index + 1);
+                        if (c === '.' && str.charAt(idx) !== c && (nextChar === 'F' || nextChar === 'f')) {
+                            index++;
+                            c = nextChar;
+                        }
+
                         while ((format.charAt(index) === c) && (index < format.length)) {
                             token += c;
                             index++;
@@ -781,9 +787,9 @@
                                 break;
                             }
 
-                            idx += 6;
+                            idx += name.length;
 
-                            if (name.length !== 6) {
+                            if (name.length !== 6 && name.length !== 5) {
                                 invalid = true;
 
                                 break;
@@ -802,7 +808,7 @@
                             }
 
                             zzi = 1;
-                            zzh = this.subparseInt(name, zzi, 1, 2);
+                            zzh = this.subparseInt(name, zzi, 1, name.length === 6 ? 2 : 1);
 
                             if (zzh == null || zzh > 14) {
                                 invalid = true;

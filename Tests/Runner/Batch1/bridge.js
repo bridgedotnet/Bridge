@@ -8761,6 +8761,12 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                         token += c;
                         index++;
                     } else {
+                        var nextChar = format.charAt(index + 1);
+                        if (c === '.' && str.charAt(idx + 1) !== c && nextChar === 'F' || nextChar === 'f') {
+                            index++;
+                            c = nextChar;
+                        }
+
                         while ((format.charAt(index) === c) && (index < format.length)) {
                             token += c;
                             index++;
