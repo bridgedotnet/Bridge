@@ -441,9 +441,9 @@
                     });
 
                 if (removeDot) {
-                    if (f.endsWith(f, ".")) {
+                    if (System.String.endsWith(f, ".")) {
                         f = f.substring(0, f.length - 1);
-                    } else if (f.endsWith(".Z")) {
+                    } else if (System.String.endsWith(f, ".Z")) {
                         f = f.substring(0, f.length - 2) + "Z";
                     }
                 }
