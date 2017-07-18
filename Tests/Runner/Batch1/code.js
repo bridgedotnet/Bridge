@@ -33830,6 +33830,50 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             ParseExactWithCultureReturnsNullIfTheInputIsInvalid: function () {
                 Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.JsDateTimeTests.f2);
             },
+            ParseExactWithLocalKindsWithFormatK: function () {
+                var s1 = "2008-05-01T07:34:42-5:00";
+                var s2 = "2008-05-01T07:34:42Z";
+
+                var format = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK";
+
+                Bridge.ClientTestHelper.CommonHelper.Safe(function () {
+                    var d1 = System.DateTime.parseExact(s1, format, null);
+                    Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create(2008, 5, 1, 16, 34, 42, 0, System.DateTimeKind.Local), d1, "d1: ");
+                }, "d1: ");
+
+                Bridge.ClientTestHelper.CommonHelper.Safe(function () {
+                    var d2 = System.DateTime.parseExact(s2, format, null);
+                    Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create(2008, 5, 1, 11, 34, 42, 0, System.DateTimeKind.Local), d2, "d2: ");
+                }, "d2: ");
+            },
+            ParseExactWithDifferentKindsWithFormatK: function () {
+                var s1 = "2008-09-15T09:30:41.7752486-07:00";
+                var s2 = "2008-09-15T09:30:41.7752486Z";
+                var s3 = "2008-09-15T09:30:41.7752486";
+                var s4 = "2008-09-15T09:30:41.7752486-04:00";
+
+                var format = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK";
+
+                Bridge.ClientTestHelper.CommonHelper.Safe(function () {
+                    var d1 = System.DateTime.parseExact(s1, format, null);
+                    Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create$2(System.Int64([245496230,147514761]), System.DateTimeKind.Local), d1, "d1: ");
+                }, "d1: ");
+
+                Bridge.ClientTestHelper.CommonHelper.Safe(function () {
+                    var d2 = System.DateTime.parseExact(s2, format, null);
+                    Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create$2(System.Int64([1648566694,147514702]), System.DateTimeKind.Local), d2, "d2: ");
+                }, "d2: ");
+
+                Bridge.ClientTestHelper.CommonHelper.Safe(function () {
+                    var d3 = System.DateTime.parseExact(s3, format, null);
+                    Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create$2(System.Int64([-617512538,147514668]), System.DateTimeKind.Unspecified), d3, "d3: ");
+                }, "d3: ");
+
+                Bridge.ClientTestHelper.CommonHelper.Safe(function () {
+                    var d4 = System.DateTime.parseExact(s4, format, null);
+                    Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create$2(System.Int64([-380321370,147514735]), System.DateTimeKind.Local), d4, "d4: ");
+                }, "d4: ");
+            },
             SubtractingDatesWorks: function () {
                 var ts = System.DateTime.subdd(System.DateTime.create(2011, 7, 12), System.DateTime.create(2011, 7, 11));
                 Bridge.Test.NUnit.Assert.AreEqual(86400000, ts.getTotalMilliseconds());
