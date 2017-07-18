@@ -239,7 +239,7 @@
                     f = f.charAt(1);
                 }
 
-                var needRemoveDot = false;
+                var removeDot = false;
 
                 f = f.replace(/(\\.|'[^']*'|"[^"]*"|d{1,4}|M{1,4}|yyyy|yy|y|HH?|hh?|mm?|ss?|tt?|u|f{1,7}|F{1,7}|K|z{1,3}|\:|\/)/g,
                     function (match, group, index) {
@@ -356,27 +356,30 @@
                                 }
 
                                 break;
-                             case "F":
-                             case "FF":
-                             case "FFF":
-                             case "FFFF":
-                             case "FFFFF":
-                             case "FFFFFF":
-                             case "FFFFFFF":
-                                 part = millisecond.toString();
-                                 if (part.length < 3) {
-                                     part = Array(4 - part.length).join("0") + part;
-                                 }
+                            case "F":
+                            case "FF":
+                            case "FFF":
+                            case "FFFF":
+                            case "FFFFF":
+                            case "FFFFFF":
+                            case "FFFFFFF":
+                                part = millisecond.toString();
 
-                                 part = part.substr(0, match.length);
+                                if (part.length < 3) {
+                                    part = Array(4 - part.length).join("0") + part;
+                                }
 
-                                 var c = '0';
-                                 var i = part.length - 1;
-                                 for (; i >= 0 && part.charAt(i) === c; i--);
-                                 part = part.substring(0, i + 1);
-                                 needRemoveDot = part.length == 0;
+                                part = part.substr(0, match.length);
 
-                                 break;
+                                var c = '0',
+                                    i = part.length - 1;
+
+                                for (; i >= 0 && part.charAt(i) === c; i--);
+                                part = part.substring(0, i + 1);
+
+                                removeDot = part.length == 0;
+
+                                break;
                             case "f":
                             case "ff":
                             case "fff":
@@ -387,7 +390,7 @@
                                 part = millisecond.toString();
 
                                 if (part.length < 3) {
-                                     part = Array(4 - part.length).join("0") + part;
+                                    part = Array(4 - part.length).join("0") + part;
                                 }
 
                                 var ln = match === "u" ? 7 : match.length;
@@ -437,8 +440,12 @@
                         return part;
                     });
 
-                if (needRemoveDot && System.String.endsWith(f, ".")) {
-                    f = f.substring(0, f.length - 1);
+                if (removeDot) {
+                    if (f.endsWith(f, ".")) {
+                        f = f.substring(0, f.length - 1);
+                    } else if (f.endsWith(".Z")) {
+                        f = f.substring(0, f.length - 2) + "Z";
+                    }
                 }
 
                 return f;
@@ -696,12 +703,14 @@
                                 ff = ff.substring(0, 3);
                             }
                         } else if (token.match(/F{1,7}/) !== null) {
-                            ff = this.subparseInt(str, idx, 1, 7);
+                            ff = this.subparseInt(str, idx, 0, 7);
 
-                            idx += ff.length;
+                            if (ff !== null) {
+                                idx += ff.length;
 
-                            if (ff.length > 3) {
-                                ff = ff.substring(0, 3);
+                                if (ff.length > 3) {
+                                    ff = ff.substring(0, 3);
+                                }
                             }
                         } else if (token === "t") {
                             if (str.substring(idx, idx + 1).toLowerCase() === am.charAt(0).toLowerCase()) {
@@ -829,14 +838,17 @@
                         }
                     }
 
-                    if (inQuotes || !tokenMatched) {
+                    if (tokenMatched && token === ".") {
+                        // skip
+                    } else if (inQuotes || !tokenMatched) {
                         name = str.substring(idx, idx + token.length);
 
                         if (!inQuotes && name === ":" && (token === df.timeSeparator || token === ":")) {
 
-                        } else if ((!inQuotes && ((token === ":" && name !== df.timeSeparator) ||
-                            (token === "/" && name !== df.dateSeparator))) ||
-                            (name !== token && token !== "'" && token !== '"' && token !== "\\")) {
+                        } else if ((!inQuotes && (
+                                (token === ":" && name !== df.timeSeparator) ||
+                                (token === "/" && name !== df.dateSeparator)
+                                )) || (name !== token && token !== "'" && token !== '"' && token !== "\\")) {
                             invalid = true;
 
                             break;
