@@ -8460,7 +8460,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
                 var needRemoveDot = false;
 
-                f = f.replace(/(\\.|'[^']*'|"[^"]*"|d{1,4}|M{1,4}|yyyy|yy|y|HH?|hh?|mm?|ss?|tt?|u|f{1,7}|F{1,7}|z{1,3}|\:|\/)/g,
+                f = f.replace(/(\\.|'[^']*'|"[^"]*"|d{1,4}|M{1,4}|yyyy|yy|y|HH?|hh?|mm?|ss?|tt?|u|f{1,7}|F{1,7}|K|z{1,3}|\:|\/)/g,
                     function (match, group, index) {
                         var part = match;
 
@@ -8622,6 +8622,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                                 part = ((part >= 0) ? "-" : "+") + Math.floor(Math.abs(part));
 
                                 break;
+                            case "K":
                             case "zz":
                             case "zzz":
                                 if (kind === 0) {
@@ -8630,9 +8631,9 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                                     part = "Z";
                                 } else {
                                     part = timezoneOffset / 60;
-                                    part = ((part >= 0) ? "-" : "+") + System.String.alignString(Math.floor(Math.abs(part)).toString(), 2, "0", 2);
+                                    part = ((part > 0) ? "-" : "+") + System.String.alignString(Math.floor(Math.abs(part)).toString(), 2, "0", 2);
 
-                                    if (match === "zzz") {
+                                    if (match === "zzz" || match === "K") {
                                         part += df.timeSeparator + System.String.alignString(Math.floor(Math.abs(timezoneOffset % 60)).toString(), 2, "0", 2);
                                     }
                                 }
@@ -8729,7 +8730,8 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                     invalid = false,
                     inQuotes = false,
                     tokenMatched,
-                    formats;
+                    formats,
+                    kind = 0;
 
                 if (str == null) {
                     throw new System.ArgumentNullException("str");
@@ -8898,7 +8900,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                             if (ff.length > 3) {
                                 ff = ff.substring(0, 3);
                             }
-                        } else if (token === "fffffff" || token === "ffffff" || token === "fffff" || token === "ffff" || token === "fff" || token === "ff" || token === "f") {
+                        } else if (token.match(/f{1,7}/) !== null) {
                             ff = this.subparseInt(str, idx, token.length, 7);
 
                             if (ff == null) {
@@ -8906,6 +8908,14 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
                                 break;
                             }
+
+                            idx += ff.length;
+
+                            if (ff.length > 3) {
+                                ff = ff.substring(0, 3);
+                            }
+                        } else if (token.match(/F{1,7}/) !== null) {
+                            ff = this.subparseInt(str, idx, 1, 7);
 
                             idx += ff.length;
 
@@ -8964,15 +8974,23 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                             if (neg) {
                                 zzh = -zzh;
                             }
-                        } else if (token === "zzz") {
+                        } else if (token === "zzz" || token === "K") {
                             if (str.substring(idx, idx + 1) === "Z") {
                                 utc = true;
+                                kind = 1;
                                 idx += 1;
 
                                 break;
                             }
 
                             name = str.substring(idx, idx + 6);
+
+                            if (name === "") {
+                                kind = 0;
+
+                                break;
+                            }
+
                             idx += 6;
 
                             if (name.length !== 6) {
@@ -9023,6 +9041,8 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
                                 break;
                             }
+
+                            kind = 2;
                         } else {
                             tokenMatched = false;
                         }
@@ -9100,11 +9120,11 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                     }
                 }
 
-                if (zzh === 0 && zzm === 0 && !utc) {
-                    return System.DateTime.create(year, month, date, hh, mm, ss, ff, 0);
+                if ((zzh === 0 && zzm === 0 && !utc) || kind !== 1) {
+                    return System.DateTime.create(year, month, date, hh, mm, ss, ff, kind);
                 }
 
-                return System.DateTime.create(year, month, date, hh - zzh, mm - zzm, ss, ff, 1);
+                return System.DateTime.create(year, month, date, hh - zzh, mm - zzm, ss, ff, kind);
             },
 
             subparseInt: function (str, index, min, max) {
