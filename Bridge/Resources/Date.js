@@ -173,12 +173,7 @@
             },
 
             specifyKind: function (d, kind) {
-                kind = (kind !== undefined) ? kind : 0
-
-                var d = new Date(d.getTime());
-                d.kind = kind;
-
-                return d;
+                return System.DateTime.create$2(System.DateTime.getTicks(d), kind);
             },
 
             isUseGenitiveForm: function (format, index, tokenLen, patternToMatch) {
