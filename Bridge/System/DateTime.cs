@@ -167,14 +167,8 @@ namespace System
         [Template("System.DateTime.tryParse({0}, null, {1})")]
         public static extern bool TryParse(string s, out DateTime result);
 
-        [Template("System.DateTime.parseExact({0}, {1})")]
-        public static extern DateTime ParseExact(string s, string format);
-
         [Template("System.DateTime.parseExact({0}, {1}, {2})")]
         public static extern DateTime ParseExact(string s, string format, IFormatProvider provider);
-
-        [Template("System.DateTime.tryParseExact({0}, {1}, null, {2})")]
-        public static extern bool TryParseExact(string s, string format, out DateTime result);
 
         [Template("System.DateTime.tryParseExact({0}, {1}, {2}, {3})")]
         public static extern bool TryParseExact(string s, string format, IFormatProvider provider, out DateTime result);
