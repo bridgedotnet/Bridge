@@ -8279,11 +8279,8 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             },
 
             toUniversalTime: function (d) {
-                d.kind = (d.kind !== undefined) ? d.kind : 0
-                d.ticks = (d.ticks !== undefined) ? d.ticks : System.Int64(d.getTime() + d.getTimezoneOffset() * 60 * 1000).mul(10000).add(System.DateTime.minOffset);
-
-                var d1,
-                    ticks = d.ticks;
+                var ticks = System.DateTime.getTicks(d),
+                    d1;
 
                 // Assuming d is Local time, so adjust to UTC
                 if (d.kind !== 1) {
@@ -8392,12 +8389,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             },
 
             specifyKind: function (d, kind) {
-                kind = (kind !== undefined) ? kind : 0
-
-                var d = new Date(d.getTime());
-                d.kind = kind;
-
-                return d;
+                return System.DateTime.create$2(System.DateTime.getTicks(d), kind);
             },
 
             isUseGenitiveForm: function (format, index, tokenLen, patternToMatch) {
@@ -8664,6 +8656,8 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                         f = f.substring(0, f.length - 1);
                     } else if (System.String.endsWith(f, ".Z")) {
                         f = f.substring(0, f.length - 2) + "Z";
+                    } else if (kind === 2 && f.match(/\.([+-])/g) !== null) {
+                        f = f.replace(/\.([+-])/g, '$1');
                     }
                 }
 
@@ -8738,7 +8732,9 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                     inQuotes = false,
                     tokenMatched,
                     formats,
-                    kind = 0;
+                    kind = 0,
+                    adjust = false,
+                    offset = 0;
 
                 if (str == null) {
                     throw new System.ArgumentNullException("str");
@@ -8986,13 +8982,15 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
                             idx += zzh.length;
 
+                            offset = zzh * 60 * 60 * 1000;
+
                             if (neg) {
-                                zzh = -zzh;
+                                offset = -offset;
                             }
                         } else if (token === "zzz" || token === "K") {
                             if (str.substring(idx, idx + 1) === "Z") {
-                                utc = true;
-                                kind = 1;
+                                kind = 2;
+                                adjust = true;
                                 idx += 1;
 
                                 break;
@@ -9037,10 +9035,6 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
                             zzi += zzh.length;
 
-                            if (neg) {
-                                zzh = -zzh;
-                            }
-
                             if (name.charAt(zzi) !== df.timeSeparator) {
                                 invalid = true;
 
@@ -9057,23 +9051,24 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                                 break;
                             }
 
+                            offset = zzh * 60 * 60 * 1000 + zzm * 60 * 1000;
+
+                            if (neg) {
+                                offset = -offset;
+                            }
+
                             kind = 2;
                         } else {
                             tokenMatched = false;
                         }
                     }
 
-                    if (tokenMatched && token === ".") {
-                        // skip
-                    } else if (inQuotes || !tokenMatched) {
+                    if (inQuotes || !tokenMatched) {
                         name = str.substring(idx, idx + token.length);
 
                         if (!inQuotes && name === ":" && (token === df.timeSeparator || token === ":")) {
 
-                        } else if ((!inQuotes && (
-                                (token === ":" && name !== df.timeSeparator) ||
-                                (token === "/" && name !== df.dateSeparator)
-                                )) || (name !== token && token !== "'" && token !== '"' && token !== "\\")) {
+                        } else if ((!inQuotes && ((token === ":" && name !== df.timeSeparator) || (token === "/" && name !== df.dateSeparator))) || (name !== token && token !== "'" && token !== '"' && token !== "\\")) {
                             invalid = true;
 
                             break;
@@ -9138,11 +9133,20 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                     }
                 }
 
-                if ((zzh === 0 && zzm === 0 && !utc) || kind !== 1) {
-                    return System.DateTime.create(year, month, date, hh, mm, ss, ff, kind);
+                var d = System.DateTime.create(year, month, date, hh, mm, ss, ff, kind);
+
+                if (kind === 2) {
+                    if (adjust === true) {
+                        d = new Date(d.getTime() - d.getTimezoneOffset() * 60 * 1000);
+                        d.kind = kind;
+                    } else if (offset !== 0) {
+                        d = new Date(d.getTime() - d.getTimezoneOffset() * 60 * 1000);
+                        d = System.DateTime.addMilliseconds(d, -offset);
+                        d.kind = kind;
+                    }
                 }
 
-                return System.DateTime.create(year, month, date, hh - zzh, mm - zzm, ss, ff, kind);
+                return d;
             },
 
             subparseInt: function (str, index, min, max) {

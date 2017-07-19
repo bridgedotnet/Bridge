@@ -15,7 +15,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             var a = DateTime.UtcNow.ToString("o");
             var b = DateTime.ParseExact(a, "o", CultureInfo.InvariantCulture);
 
-            // There is a diff to .Net as DateTime.Kind is not supported - Z vs +00:00 compared to .Net result
+            b = b.ToUniversalTime();
+
             Assert.AreEqual(a, b.ToString("o"));
 
             var c1 = DateTime.ParseExact("2017-05-15T14:34:03.6762498+00:00", "o", CultureInfo.InvariantCulture);

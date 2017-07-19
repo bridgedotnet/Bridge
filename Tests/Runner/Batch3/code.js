@@ -19833,7 +19833,8 @@ Bridge.$N1391Result =                     r;
                     var a = System.DateTime.format(System.DateTime.getUtcNow(), "o");
                     var b = System.DateTime.parseExact(a, "o", System.Globalization.CultureInfo.invariantCulture);
 
-                    // There is a diff to .Net as DateTime.Kind is not supported - Z vs +00:00 compared to .Net result
+                    b = System.DateTime.toUniversalTime(b);
+
                     Bridge.Test.NUnit.Assert.AreEqual(a, System.DateTime.format(b, "o"));
 
                     var c1 = System.DateTime.parseExact("2017-05-15T14:34:03.6762498+00:00", "o", System.Globalization.CultureInfo.invariantCulture);

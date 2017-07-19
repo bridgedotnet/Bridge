@@ -531,13 +531,13 @@ namespace Bridge.ClientTest.SimpleTypes
             CommonHelper.Safe(() =>
             {
                 var d1 = DateTime.ParseExact(s1, format, null);
-                DateHelper.AssertDate(new DateTime(2008, 5, 1, 16, 34, 42, DateTimeKind.Local), d1, "d1: ");
+                DateHelper.AssertDate(new DateTime(2008, 5, 1, 15, 34, 42, DateTimeKind.Local), d1, "d1: ");
             }, "d1: ");
 
             CommonHelper.Safe(() =>
             {
                 var d2 = DateTime.ParseExact(s2, format, null);
-                DateHelper.AssertDate(new DateTime(2008, 5, 1, 11, 34, 42, DateTimeKind.Local), d2, "d2: ");
+                DateHelper.AssertDate(new DateTime(2008, 5, 1, 10, 34, 42, DateTimeKind.Local), d2, "d2: ");
             }, "d2: ");
         }
 
@@ -554,25 +554,25 @@ namespace Bridge.ClientTest.SimpleTypes
             CommonHelper.Safe(() =>
             {
                 var d1 = DateTime.ParseExact(s1, format, null);
-                DateHelper.AssertDate(new DateTime(633571074417752486, DateTimeKind.Local), d1, "d1: ");
+                DateHelper.AssertDate(new DateTime(633571038417750000, DateTimeKind.Local), d1, "d1: ");
             }, "d1: ");
 
             CommonHelper.Safe(() =>
             {
                 var d2 = DateTime.ParseExact(s2, format, null);
-                DateHelper.AssertDate(new DateTime(633570822417752486, DateTimeKind.Local), d2, "d2: ");
+                DateHelper.AssertDate(new DateTime(633570786417750000, DateTimeKind.Local), d2, "d2: ");
             }, "d2: ");
 
             CommonHelper.Safe(() =>
             {
                 var d3 = DateTime.ParseExact(s3, format, null);
-                DateHelper.AssertDate(new DateTime(633570678417752486, DateTimeKind.Unspecified), d3, "d3: ");
+                DateHelper.AssertDate(new DateTime(633570678417750000, DateTimeKind.Unspecified), d3, "d3: ");
             }, "d3: ");
 
             CommonHelper.Safe(() =>
             {
                 var d4 = DateTime.ParseExact(s4, format, null);
-                DateHelper.AssertDate(new DateTime(633570966417752486, DateTimeKind.Local), d4, "d4: ");
+                DateHelper.AssertDate(new DateTime(633570930417750000, DateTimeKind.Local), d4, "d4: ");
             }, "d4: ");
         }
 
