@@ -96,7 +96,7 @@ namespace System
 
             if (con && con.log)
             {
-                con.log(value.As<dynamic>());
+                con.log(!Script.IsDefined(value) ? "" : value.As<dynamic>());
             }
         }
 
@@ -253,7 +253,7 @@ namespace System
 
             if (con && con.log)
             {
-                con.log(value.As<dynamic>());
+                con.log(!Script.IsDefined(value) ? "" : value.As<dynamic>());
             }
         }
 
