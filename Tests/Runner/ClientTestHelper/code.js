@@ -88,6 +88,22 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
                     Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getMinute(expected), System.DateTime.getMinute(actual), System.String.concat(message, "Minute"));
                     Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getSecond(expected), System.DateTime.getSecond(actual), System.String.concat(message, "Second"));
                     Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getMillisecond(expected), System.DateTime.getMillisecond(actual), System.String.concat(message, "Millisecond"));
+                },
+                GetOffsetString: function (adjustment) {
+                    if (adjustment === void 0) { adjustment = 0; }
+                    var minutes = (Bridge.ClientTestHelper.DateHelper.GetOffsetMinutes() + adjustment) | 0;
+
+                    var b = minutes < 0 ? "+" : "-";
+                    minutes = Math.abs(minutes);
+
+                    var offset = minutes !== 0 ? (System.String.concat(b, System.Int32.format((((Bridge.Int.div(minutes, 60)) | 0)), "00"), ":", System.Int32.format((minutes % 60), "00"))) : "Z";
+
+                    return offset;
+                },
+                GetOffsetMinutes: function () {
+                    var d = System.DateTime.getDefaultValue();
+
+                    return d.getTimezoneOffset();
                 }
             }
         }

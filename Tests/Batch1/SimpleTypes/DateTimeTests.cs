@@ -520,62 +520,64 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.Throws<FormatException>(() => { var dt = DateTime.ParseExact("X", "yyyy-dd-MM", CultureInfo.InvariantCulture); });
         }
 
-        // Removed because dependent on Local Time
+        // The test is restructured to run correctly within any TimeZone
+        // And commented out due to DST problem
         //[Test]
         //public void ParseExactWithLocalKindsWithFormatK()
         //{
-        //    var s1 = "2008-05-01T07:34:42-5:00";
-        //    var s2 = "2008-05-01T07:34:42Z";
-
         //    var format = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK";
 
-        //    CommonHelper.Safe(() =>
-        //    {
-        //        var d1 = DateTime.ParseExact(s1, format, null);
-        //        DateHelper.AssertDate(new DateTime(2008, 5, 1, 15, 34, 42, DateTimeKind.Local), d1, "d1: ");
-        //    }, "d1: ");
+        //    var baseOffsetHours = 8;
+        //    var firstTestZone = (DateHelper.GetOffsetMinutes() / 60) + baseOffsetHours;
+        //    var testShift = 4 - firstTestZone;
 
-        //    CommonHelper.Safe(() =>
+        //    // This iterates offsets through -04:00 to +04:00 (including 00:00 which is replaced by 'Z')
+        //    for (int i = 0; i < 8; i++)
         //    {
-        //        var d2 = DateTime.ParseExact(s2, format, null);
-        //        DateHelper.AssertDate(new DateTime(2008, 5, 1, 10, 34, 42, DateTimeKind.Local), d2, "d2: ");
-        //    }, "d2: ");
+        //        var testId = "d" + (i + 1) + ": ";
+
+        //        CommonHelper.Safe(() =>
+        //        {
+        //            var s1 = "2008-05-01T07:34:42" + DateHelper.GetOffsetString((baseOffsetHours - i + testShift) * 60);
+        //            var d1 = DateTime.ParseExact(s1, format, null);
+
+        //            Assert.True(true, testId + "input " + s1);
+        //            DateHelper.AssertDate(new DateTime(2008, 5, 1, 15 - i + 1 + testShift, 34, 42, DateTimeKind.Local), d1, testId);
+        //        }, testId);
+        //    }
+
+        //    // This iterates offsets through -04:00 to +04:00 (including 00:00 which is replaced by 'Z')
+        //    for (int i = 0; i < 8; i++)
+        //    {
+        //        var testId = "m" + (i + 1) + ": ";
+
+        //        CommonHelper.Safe(() =>
+        //        {
+        //            var s2 = "2008-09-15T09:30:41.7752486" + DateHelper.GetOffsetString((baseOffsetHours - i + testShift) * 60);
+        //            var d2 = DateTime.ParseExact(s2, format, null);
+
+        //            Assert.True(true, testId + "input " + s2);
+        //            DateHelper.AssertDate(new DateTime(2008, 9, 15, 17 - i + 1 + testShift, 30, 41, 775, DateTimeKind.Local), d2, testId);
+        //        }, testId);
+        //    }
         //}
 
-        // Removed because dependent on Local Time
+        // The test is restructured to run correctly within any TimeZone
+        // And commented out due to DST problem
         //[Test]
-        //public void ParseExactWithDifferentKindsWithFormatK()
+        //public void ParseExactWithNoZNorOffsetWithFormatK()
         //{
-        //    var s1 = "2008-09-15T09:30:41.7752486-07:00";
-        //    var s2 = "2008-09-15T09:30:41.7752486Z";
-        //    var s3 = "2008-09-15T09:30:41.7752486";
-        //    var s4 = "2008-09-15T09:30:41.7752486-04:00";
+        //    var s = "2008-09-15T09:30:41.7752486";
 
         //    var format = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK";
 
         //    CommonHelper.Safe(() =>
         //    {
-        //        var d1 = DateTime.ParseExact(s1, format, null);
-        //        DateHelper.AssertDate(new DateTime(633571038417750000, DateTimeKind.Local), d1, "d1: ");
-        //    }, "d1: ");
+        //        var d = DateTime.ParseExact(s, format, null);
+        //        var l = d.ToString();
 
-        //    CommonHelper.Safe(() =>
-        //    {
-        //        var d2 = DateTime.ParseExact(s2, format, null);
-        //        DateHelper.AssertDate(new DateTime(633570786417750000, DateTimeKind.Local), d2, "d2: ");
-        //    }, "d2: ");
-
-        //    CommonHelper.Safe(() =>
-        //    {
-        //        var d3 = DateTime.ParseExact(s3, format, null);
-        //        DateHelper.AssertDate(new DateTime(633570678417750000, DateTimeKind.Unspecified), d3, "d3: ");
-        //    }, "d3: ");
-
-        //    CommonHelper.Safe(() =>
-        //    {
-        //        var d4 = DateTime.ParseExact(s4, format, null);
-        //        DateHelper.AssertDate(new DateTime(633570930417750000, DateTimeKind.Local), d4, "d4: ");
-        //    }, "d4: ");
+        //        DateHelper.AssertDate(new DateTime(2008, 9, 15, 9, 30, 41, 775, DateTimeKind.Unspecified), d, l + ": ");
+        //    }, s + ": ");
         //}
 
         // Not C# API

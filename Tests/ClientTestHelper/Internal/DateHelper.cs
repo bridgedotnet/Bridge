@@ -59,5 +59,30 @@
             Assert.AreEqual(expected.Second, actual.Second, message + "Second");
             Assert.AreEqual(expected.Millisecond, actual.Millisecond, message + "Millisecond");
         }
+
+        public static string GetOffsetString(int adjustment = 0)
+        {
+            var minutes = GetOffsetMinutes() + adjustment;
+
+            var b = minutes < 0 ? "+" : "-";
+            minutes = Math.Abs(minutes);
+
+            var offset = minutes != 0
+                ? (b + (minutes / 60).ToString("00") + ":" + (minutes % 60).ToString("00"))
+                : "Z";
+
+            return offset;
+        }
+
+        public static int GetOffsetMinutes()
+        {
+#if BRIDGE
+            dynamic d = new DateTime();
+
+            return d.getTimezoneOffset();
+#else
+            return -(int)TimeZoneInfo.Local.GetUtcOffset(DateTime.Now).TotalMinutes;
+#endif
+        }
     }
 }
