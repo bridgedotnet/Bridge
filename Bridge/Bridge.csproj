@@ -1303,6 +1303,14 @@
     <Content Include="Resources\.lib\LongLib.js" />
     <Content Include="Resources\Generator.js" />
     <Content Include="Resources\Double.js" />
+    <Content Include="Resources\Locales\de-IT.js" />
+    <Content Include="Resources\Locales\es-BR.js" />
+    <Content Include="Resources\Locales\nds-DE.js" />
+    <Content Include="Resources\Locales\nds-NL.js" />
+    <Content Include="Resources\Locales\nds.js" />
+    <Content Include="Resources\Locales\pt-CH.js" />
+    <Content Include="Resources\Locales\pt-GQ.js" />
+    <Content Include="Resources\Locales\pt-LU.js" />
     <Content Include="Resources\Long.js" />
     <Content Include="Resources\Math.js" />
     <Content Include="Resources\ReflectionAssembly.js" />
