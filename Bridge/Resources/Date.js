@@ -513,7 +513,9 @@
                     inQuotes = false,
                     tokenMatched,
                     formats,
-                    kind = 0;
+                    kind = 0,
+                    adjust = false,
+                    offset = 0;
 
                 if (str == null) {
                     throw new System.ArgumentNullException("str");
@@ -761,13 +763,15 @@
 
                             idx += zzh.length;
 
+                            offset = zzh * 60 * 60 * 1000;
+
                             if (neg) {
-                                zzh = -zzh;
+                                offset = -offset;
                             }
                         } else if (token === "zzz" || token === "K") {
                             if (str.substring(idx, idx + 1) === "Z") {
-                                utc = true;
-                                kind = 1;
+                                kind = 2;
+                                adjust = true;
                                 idx += 1;
 
                                 break;
@@ -812,10 +816,6 @@
 
                             zzi += zzh.length;
 
-                            if (neg) {
-                                zzh = -zzh;
-                            }
-
                             if (name.charAt(zzi) !== df.timeSeparator) {
                                 invalid = true;
 
@@ -832,23 +832,24 @@
                                 break;
                             }
 
+                            offset = zzh * 60 * 60 * 1000 + zzm * 60 * 1000;
+
+                            if (neg) {
+                                offset = -offset;
+                            }
+
                             kind = 2;
                         } else {
                             tokenMatched = false;
                         }
                     }
 
-                    if (tokenMatched && token === ".") {
-                        // skip
-                    } else if (inQuotes || !tokenMatched) {
+                    if (inQuotes || !tokenMatched) {
                         name = str.substring(idx, idx + token.length);
 
                         if (!inQuotes && name === ":" && (token === df.timeSeparator || token === ":")) {
 
-                        } else if ((!inQuotes && (
-                                (token === ":" && name !== df.timeSeparator) ||
-                                (token === "/" && name !== df.dateSeparator)
-                                )) || (name !== token && token !== "'" && token !== '"' && token !== "\\")) {
+                        } else if ((!inQuotes && ((token === ":" && name !== df.timeSeparator) || (token === "/" && name !== df.dateSeparator))) || (name !== token && token !== "'" && token !== '"' && token !== "\\")) {
                             invalid = true;
 
                             break;
@@ -913,11 +914,20 @@
                     }
                 }
 
-                if ((zzh === 0 && zzm === 0 && !utc) || kind !== 1) {
-                    return System.DateTime.create(year, month, date, hh, mm, ss, ff, kind);
+                var d = System.DateTime.create(year, month, date, hh, mm, ss, ff, kind);
+
+                if (kind === 2) {
+                    if (adjust === true) {
+                        d = new Date(d.getTime() - d.getTimezoneOffset() * 60 * 1000);
+                        d.kind = kind;
+                    } else if (offset !== 0) {
+                        d = new Date(d.getTime() - d.getTimezoneOffset() * 60 * 1000);
+                        d = System.DateTime.addMilliseconds(d, -offset);
+                        d.kind = kind;
+                    }
                 }
 
-                return System.DateTime.create(year, month, date, hh - zzh, mm - zzm, ss, ff, kind);
+                return d;
             },
 
             subparseInt: function (str, index, min, max) {
