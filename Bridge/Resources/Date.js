@@ -60,11 +60,8 @@
             },
 
             toUniversalTime: function (d) {
-                d.kind = (d.kind !== undefined) ? d.kind : 0
-                d.ticks = (d.ticks !== undefined) ? d.ticks : System.Int64(d.getTime() + d.getTimezoneOffset() * 60 * 1000).mul(10000).add(System.DateTime.minOffset);
-
-                var d1,
-                    ticks = d.ticks;
+                var ticks = System.DateTime.getTicks(d),
+                    d1;
 
                 // Assuming d is Local time, so adjust to UTC
                 if (d.kind !== 1) {
