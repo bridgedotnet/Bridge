@@ -437,6 +437,8 @@
                         f = f.substring(0, f.length - 1);
                     } else if (System.String.endsWith(f, ".Z")) {
                         f = f.substring(0, f.length - 2) + "Z";
+                    } else if (kind === 2 && f.match(/\.([+-])/g) !== null) {
+                        f = f.replace(/\.([+-])/g, '$1');
                     }
                 }
 
