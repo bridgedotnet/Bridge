@@ -33817,7 +33817,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64([-1929740288,147801652]), 2012, 8, 12);
             },
             ParseExactWorks: function () {
-                var dt = System.DateTime.parseExact("2012-12-08", "yyyy-dd-MM");
+                var dt = System.DateTime.parseExact("2012-12-08", "yyyy-dd-MM", null);
                 Bridge.ClientTestHelper.DateHelper.AssertDate$1(dt, System.DateTimeKind.Unspecified, System.Int64([-1929740288,147801652]), 2012, 8, 12);
             },
             ParseExactReturnsNullIfTheInputIsInvalid: function () {
@@ -33829,50 +33829,6 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             ParseExactWithCultureReturnsNullIfTheInputIsInvalid: function () {
                 Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.JsDateTimeTests.f2);
-            },
-            ParseExactWithLocalKindsWithFormatK: function () {
-                var s1 = "2008-05-01T07:34:42-5:00";
-                var s2 = "2008-05-01T07:34:42Z";
-
-                var format = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK";
-
-                Bridge.ClientTestHelper.CommonHelper.Safe(function () {
-                    var d1 = System.DateTime.parseExact(s1, format, null);
-                    Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create(2008, 5, 1, 15, 34, 42, 0, System.DateTimeKind.Local), d1, "d1: ");
-                }, "d1: ");
-
-                Bridge.ClientTestHelper.CommonHelper.Safe(function () {
-                    var d2 = System.DateTime.parseExact(s2, format, null);
-                    Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create(2008, 5, 1, 10, 34, 42, 0, System.DateTimeKind.Local), d2, "d2: ");
-                }, "d2: ");
-            },
-            ParseExactWithDifferentKindsWithFormatK: function () {
-                var s1 = "2008-09-15T09:30:41.7752486-07:00";
-                var s2 = "2008-09-15T09:30:41.7752486Z";
-                var s3 = "2008-09-15T09:30:41.7752486";
-                var s4 = "2008-09-15T09:30:41.7752486-04:00";
-
-                var format = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK";
-
-                Bridge.ClientTestHelper.CommonHelper.Safe(function () {
-                    var d1 = System.DateTime.parseExact(s1, format, null);
-                    Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create$2(System.Int64([-1394767888,147514752]), System.DateTimeKind.Local), d1, "d1: ");
-                }, "d1: ");
-
-                Bridge.ClientTestHelper.CommonHelper.Safe(function () {
-                    var d2 = System.DateTime.parseExact(s2, format, null);
-                    Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create$2(System.Int64([8302576,147514694]), System.DateTimeKind.Local), d2, "d2: ");
-                }, "d2: ");
-
-                Bridge.ClientTestHelper.CommonHelper.Safe(function () {
-                    var d3 = System.DateTime.parseExact(s3, format, null);
-                    Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create$2(System.Int64([-617515024,147514668]), System.DateTimeKind.Unspecified), d3, "d3: ");
-                }, "d3: ");
-
-                Bridge.ClientTestHelper.CommonHelper.Safe(function () {
-                    var d4 = System.DateTime.parseExact(s4, format, null);
-                    Bridge.ClientTestHelper.DateHelper.AssertDate(System.DateTime.create$2(System.Int64([-2020585488,147514727]), System.DateTimeKind.Local), d4, "d4: ");
-                }, "d4: ");
             },
             SubtractingDatesWorks: function () {
                 var ts = System.DateTime.subdd(System.DateTime.create(2011, 7, 12), System.DateTime.create(2011, 7, 11));
@@ -34249,7 +34205,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.apply($asm.$.Bridge.ClientTest.SimpleTypes.JsDateTimeTests, {
         f1: function () {
-            var dt = System.DateTime.parseExact("X", "yyyy-dd-MM");
+            var dt = System.DateTime.parseExact("X", "yyyy-dd-MM", null);
         },
         f2: function () {
             var dt = System.DateTime.parseExact("X", "yyyy-dd-MM", System.Globalization.CultureInfo.invariantCulture);
