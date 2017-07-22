@@ -6,6 +6,38 @@ Bridge.define("System.String", {
             return typeof (instance) === "string";
         },
 
+        charCodeAt: function (str, idx) {
+            idx = idx || 0;
+            var code = str.charCodeAt(idx),
+                hi,
+                low;
+
+            if (0xD800 <= code && code <= 0xDBFF) {
+                hi = code;
+                low = str.charCodeAt(idx + 1);
+                if (isNaN(low)) {
+                    throw new System.Exception("High surrogate not followed by low surrogate");
+                }
+
+                return ((hi - 0xD800) * 0x400) + (low - 0xDC00) + 0x10000;
+            }
+
+            if (0xDC00 <= code && code <= 0xDFFF) {
+                return false;
+            }
+
+            return code;
+        },
+
+        fromCharCode: function (codePt) {
+            if (codePt > 0xFFFF) {
+                codePt -= 0x10000;
+                return String.fromCharCode(0xD800 + (codePt >> 10), 0xDC00 + (codePt & 0x3FF));
+            }
+
+            return String.fromCharCode(codePt);
+        },
+
         lastIndexOf: function (s, search, startIndex, count) {
             var index = s.lastIndexOf(search, startIndex);
 
@@ -476,6 +508,34 @@ Bridge.define("System.String", {
             }
 
             return s;
+        },
+
+        copyTo: function (str, sourceIndex, destination, destinationIndex, count) {
+            if (destination == null) {
+                throw new System.ArgumentNullException("destination");
+            }
+                
+            if (count < 0) {
+                throw new System.ArgumentOutOfRangeException("count");
+            }
+                
+            if (sourceIndex < 0) {
+                throw new System.ArgumentOutOfRangeException("sourceIndex");
+            }
+                
+            if (count > Length - sourceIndex) {
+                throw new System.ArgumentOutOfRangeException("sourceIndex");
+            }
+                
+            if (destinationIndex > destination.Length - count || destinationIndex < 0) {
+                throw new System.ArgumentOutOfRangeException("destinationIndex");
+            }
+
+            if (count > 0) {
+                for (var i = 0; i < count; i++) {
+                    destination[destinationIndex + i] = str.charCodeAt(sourceIndex + i);
+                }
+            }
         }
     }
 });

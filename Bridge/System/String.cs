@@ -947,5 +947,8 @@ namespace System
         /// <returns>This instance of String.</returns>
         [Template("{this}")]
         public extern Object Clone();
+
+        [Template("System.String.copyTo({this}, {sourceIndex}, {destination}, {destinationIndex}, {count})")]
+        public extern void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count);
     }
 }

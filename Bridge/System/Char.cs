@@ -135,5 +135,8 @@ namespace System
 
         [Template(Fn = "System.Char.getHashCode")]
         public override extern int GetHashCode();
+
+        [Template("String.fromCharCode({c})")]
+        public static extern string ToString(Char c);
     }
 }

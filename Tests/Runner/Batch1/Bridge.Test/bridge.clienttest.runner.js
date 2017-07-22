@@ -912,6 +912,37 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("Stopwatch - StartAndStopWork", Bridge.Test.Runtime.BridgeClientTestRunner.StopwatchTests.StartAndStopWork);
             QUnit.test("Stopwatch - ElapsedWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StopwatchTests.ElapsedWorks);
             QUnit.test("Stopwatch - GetTimestampWorks", Bridge.Test.Runtime.BridgeClientTestRunner.StopwatchTests.GetTimestampWorks);
+            QUnit.module("Encoding");
+            QUnit.test("ASCIIEncoding - Decode", Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingDecodeTests.Decode);
+            QUnit.test("ASCIIEncoding - Decode_InvalidBytes", Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingDecodeTests.Decode_InvalidBytes);
+            QUnit.test("ASCIIEncoding - Encode", Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingEncodeTests.Encode);
+            QUnit.test("ASCIIEncoding - Encode_InvalidChars", Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingEncodeTests.Encode_InvalidChars);
+            QUnit.test("ASCIIEncoding - GetMaxByteCount", Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingGetMaxTests.GetMaxByteCount);
+            QUnit.test("ASCIIEncoding - GetMaxCharCount", Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingGetMaxTests.GetMaxCharCount);
+            QUnit.test("UnicodeEncoding - Decode", Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingDecodeTests.Decode);
+            QUnit.test("UnicodeEncoding - Decode_InvalidBytes", Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingDecodeTests.Decode_InvalidBytes);
+            QUnit.test("UnicodeEncoding - Encode", Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingEncodeTests.Encode);
+            QUnit.test("UnicodeEncoding - Encode_InvalidChars", Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingEncodeTests.Encode_InvalidChars);
+            QUnit.test("UnicodeEncoding - GetMaxByteCount", Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingGetMaxTests.GetMaxByteCount);
+            QUnit.test("UnicodeEncoding - GetMaxCharCount", Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingGetMaxTests.GetMaxCharCount);
+            QUnit.test("UTF32Encoding - Decode", Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingDecodeTests.Decode);
+            QUnit.test("UTF32Encoding - Decode_InvalidBytes", Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingDecodeTests.Decode_InvalidBytes);
+            QUnit.test("UTF32Encoding - Encode", Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingEncodeTests.Encode);
+            QUnit.test("UTF32Encoding - Encode_InvalidChars", Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingEncodeTests.Encode_InvalidChars);
+            QUnit.test("UTF32Encoding - GetMaxByteCount", Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingGetMaxTests.GetMaxByteCount);
+            QUnit.test("UTF32Encoding - GetMaxCharCount", Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingGetMaxTests.GetMaxCharCount);
+            QUnit.test("UTF7Encoding - Decode", Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingDecodeTests.Decode);
+            QUnit.test("UTF7Encoding - Encode", Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingEncodeTests.Encode);
+            QUnit.test("UTF7Encoding - EncodeAdvanced", Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingEncodeTests.EncodeAdvanced);
+            QUnit.test("UTF7Encoding - GetMaxByteCount", Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingGetMaxTests.GetMaxByteCount);
+            QUnit.test("UTF7Encoding - GetMaxCharCount", Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingGetMaxTests.GetMaxCharCount);
+            QUnit.test("UTF8Encoding - Decode", Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingDecodeTests.Decode);
+            QUnit.test("UTF8Encoding - Encode", Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingEncodeTests.Encode);
+            QUnit.test("UTF8Encoding - GetBytes_ValidASCIIUnicode", Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingEncodeTests.GetBytes_ValidASCIIUnicode);
+            QUnit.test("UTF8Encoding - GetBytes_InvalidASCIIUnicode", Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingEncodeTests.GetBytes_InvalidASCIIUnicode);
+            QUnit.test("UTF8Encoding - Encode_InvalidChars", Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingEncodeTests.Encode_InvalidChars);
+            QUnit.test("UTF8Encoding - GetMaxByteCount", Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingGetMaxTests.GetMaxByteCount);
+            QUnit.test("UTF8Encoding - GetMaxCharCount", Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingGetMaxTests.GetMaxCharCount);
             QUnit.module("Enum");
             QUnit.test("Enum - TypePropertiesAreCorrect", Bridge.Test.Runtime.BridgeClientTestRunner.EnumTests.TypePropertiesAreCorrect);
             QUnit.test("Enum - DefaultValueOfEnumClassIsNull", Bridge.Test.Runtime.BridgeClientTestRunner.EnumTests.DefaultValueOfEnumClassIsNull);
@@ -3718,6 +3749,96 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 var $t;
                 if (this.context == null) {
                     this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ArrayTests.ArrayTestsSet2", $t.File = "Batch1\\ArrayTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingDecodeTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.ASCIIEncodingDecodeTests)],
+        statics: {
+            methods: {
+                Decode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.ASCIIEncodingDecodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingDecodeTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Decode()", $t.Line = "33", $t));
+                    t.Fixture.Decode();
+                },
+                Decode_InvalidBytes: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.ASCIIEncodingDecodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingDecodeTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Decode_InvalidBytes()", $t.Line = "63", $t));
+                    t.Fixture.Decode_InvalidBytes();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.ASCIIEncodingDecodeTests", $t.File = "Batch1\\Text\\Encoding\\ASCIIEncoding\\ASCIIEncodingDecodeTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingEncodeTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.ASCIIEncodingEncodeTests)],
+        statics: {
+            methods: {
+                Encode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.ASCIIEncodingEncodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingEncodeTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Encode()", $t.Line = "39", $t));
+                    t.Fixture.Encode();
+                },
+                Encode_InvalidChars: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.ASCIIEncodingEncodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingEncodeTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Encode_InvalidChars()", $t.Line = "92", $t));
+                    t.Fixture.Encode_InvalidChars();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.ASCIIEncodingEncodeTests", $t.File = "Batch1\\Text\\Encoding\\ASCIIEncoding\\ASCIIEncodingEncodeTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingGetMaxTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.ASCIIEncodingGetMaxTests)],
+        statics: {
+            methods: {
+                GetMaxByteCount: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.ASCIIEncodingGetMaxTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingGetMaxTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetMaxByteCount()", $t.Line = "12", $t));
+                    t.Fixture.GetMaxByteCount();
+                },
+                GetMaxCharCount: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.ASCIIEncodingGetMaxTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ASCIIEncodingGetMaxTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetMaxCharCount()", $t.Line = "22", $t));
+                    t.Fixture.GetMaxCharCount();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.ASCIIEncodingGetMaxTests", $t.File = "Batch1\\Text\\Encoding\\ASCIIEncoding\\ASCIIEncodingGetMaxTests.cs", $t);
                 }
                 return this.context;
             }
@@ -18925,7 +19046,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             methods: {
                 TestBasic: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestAutoProps).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestAutoProps, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "27", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestAutoProps).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestAutoProps, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "31", $t));
                     Bridge.ClientTest.CSharp6.TestAutoProps.TestBasic();
                 }
             }
@@ -19195,7 +19316,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             methods: {
                 TestBasic: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestInterpolatedStrings).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestInterpolatedStrings, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "35", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestInterpolatedStrings).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestInterpolatedStrings, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "37", $t));
                     Bridge.ClientTest.CSharp6.TestInterpolatedStrings.TestBasic();
                 }
             }
@@ -21988,6 +22109,366 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                 var $t;
                 if (this.context == null) {
                     this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.CheckedUncheckedTests.UncheckedTests", $t.File = "Batch1\\CheckedUncheckedTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingDecodeTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UnicodeEncodingDecodeTests)],
+        statics: {
+            methods: {
+                Decode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UnicodeEncodingDecodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingDecodeTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Decode()", $t.Line = "74", $t));
+                    t.Fixture.Decode();
+                },
+                Decode_InvalidBytes: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UnicodeEncodingDecodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingDecodeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Decode_InvalidBytes()", $t.Line = "137", $t));
+                    t.Fixture.Decode_InvalidBytes();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.UnicodeEncodingDecodeTests", $t.File = "Batch1\\Text\\Encoding\\UnicodeEncoding\\UnicodeEncodingDecodeTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingEncodeTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UnicodeEncodingEncodeTests)],
+        statics: {
+            methods: {
+                Encode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UnicodeEncodingEncodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingEncodeTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Encode()", $t.Line = "56", $t));
+                    t.Fixture.Encode();
+                },
+                Encode_InvalidChars: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UnicodeEncodingEncodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingEncodeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Encode_InvalidChars()", $t.Line = "108", $t));
+                    t.Fixture.Encode_InvalidChars();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.UnicodeEncodingEncodeTests", $t.File = "Batch1\\Text\\Encoding\\UnicodeEncoding\\UnicodeEncodingEncodeTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingGetMaxTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UnicodeEncodingGetMaxTests)],
+        statics: {
+            methods: {
+                GetMaxByteCount: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UnicodeEncodingGetMaxTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingGetMaxTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetMaxByteCount()", $t.Line = "12", $t));
+                    t.Fixture.GetMaxByteCount();
+                },
+                GetMaxCharCount: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UnicodeEncodingGetMaxTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UnicodeEncodingGetMaxTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetMaxCharCount()", $t.Line = "31", $t));
+                    t.Fixture.GetMaxCharCount();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.UnicodeEncodingGetMaxTests", $t.File = "Batch1\\Text\\Encoding\\UnicodeEncoding\\UnicodeEncodingGetMaxTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingDecodeTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF32EncodingDecodeTests)],
+        statics: {
+            methods: {
+                Decode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF32EncodingDecodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingDecodeTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Decode()", $t.Line = "49", $t));
+                    t.Fixture.Decode();
+                },
+                Decode_InvalidBytes: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF32EncodingDecodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingDecodeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Decode_InvalidBytes()", $t.Line = "96", $t));
+                    t.Fixture.Decode_InvalidBytes();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.UTF32EncodingDecodeTests", $t.File = "Batch1\\Text\\Encoding\\UTF32Encoding\\UTF32EncodingDecodeTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingEncodeTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF32EncodingEncodeTests)],
+        statics: {
+            methods: {
+                Encode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF32EncodingEncodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingEncodeTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Encode()", $t.Line = "49", $t));
+                    t.Fixture.Encode();
+                },
+                Encode_InvalidChars: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF32EncodingEncodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingEncodeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Encode_InvalidChars()", $t.Line = "96", $t));
+                    t.Fixture.Encode_InvalidChars();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.UTF32EncodingEncodeTests", $t.File = "Batch1\\Text\\Encoding\\UTF32Encoding\\UTF32EncodingEncodeTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingGetMaxTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF32EncodingGetMaxTests)],
+        statics: {
+            methods: {
+                GetMaxByteCount: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF32EncodingGetMaxTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingGetMaxTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetMaxByteCount()", $t.Line = "12", $t));
+                    t.Fixture.GetMaxByteCount();
+                },
+                GetMaxCharCount: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF32EncodingGetMaxTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF32EncodingGetMaxTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetMaxCharCount()", $t.Line = "30", $t));
+                    t.Fixture.GetMaxCharCount();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.UTF32EncodingGetMaxTests", $t.File = "Batch1\\Text\\Encoding\\UTF32Encoding\\UTF32EncodingGetMaxTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingDecodeTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF7EncodingDecodeTests)],
+        statics: {
+            methods: {
+                Decode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF7EncodingDecodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingDecodeTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Decode()", $t.Line = "104", $t));
+                    t.Fixture.Decode();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.UTF7EncodingDecodeTests", $t.File = "Batch1\\Text\\Encoding\\UTF7Encoding\\UTF7EncodingDecodeTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingEncodeTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF7EncodingEncodeTests)],
+        statics: {
+            methods: {
+                Encode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF7EncodingEncodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingEncodeTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Encode()", $t.Line = "62", $t));
+                    t.Fixture.Encode();
+                },
+                EncodeAdvanced: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF7EncodingEncodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingEncodeTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "EncodeAdvanced()", $t.Line = "108", $t));
+                    t.Fixture.EncodeAdvanced();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.UTF7EncodingEncodeTests", $t.File = "Batch1\\Text\\Encoding\\UTF7Encoding\\UTF7EncodingEncodeTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingGetMaxTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF7EncodingGetMaxTests)],
+        statics: {
+            methods: {
+                GetMaxByteCount: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF7EncodingGetMaxTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingGetMaxTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetMaxByteCount()", $t.Line = "12", $t));
+                    t.Fixture.GetMaxByteCount();
+                },
+                GetMaxCharCount: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF7EncodingGetMaxTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF7EncodingGetMaxTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetMaxCharCount()", $t.Line = "24", $t));
+                    t.Fixture.GetMaxCharCount();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.UTF7EncodingGetMaxTests", $t.File = "Batch1\\Text\\Encoding\\UTF7Encoding\\UTF7EncodingGetMaxTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingDecodeTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF8EncodingDecodeTests)],
+        statics: {
+            methods: {
+                Decode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF8EncodingDecodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingDecodeTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Decode()", $t.Line = "104", $t));
+                    t.Fixture.Decode();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.UTF8EncodingDecodeTests", $t.File = "Batch1\\Text\\Encoding\\UTF8Encoding\\UTF8EncodingDecodeTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingEncodeTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF8EncodingEncodeTests)],
+        statics: {
+            methods: {
+                Encode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF8EncodingEncodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingEncodeTests, 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Encode()", $t.Line = "117", $t));
+                    t.Fixture.Encode();
+                },
+                GetBytes_ValidASCIIUnicode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF8EncodingEncodeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingEncodeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetBytes_ValidASCIIUnicode()", $t.Line = "178", $t));
+                    Bridge.ClientTest.Text.UTF8EncodingEncodeTests.GetBytes_ValidASCIIUnicode();
+                },
+                GetBytes_InvalidASCIIUnicode: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF8EncodingEncodeTests).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingEncodeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetBytes_InvalidASCIIUnicode()", $t.Line = "196", $t));
+                    Bridge.ClientTest.Text.UTF8EncodingEncodeTests.GetBytes_InvalidASCIIUnicode();
+                },
+                Encode_InvalidChars: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF8EncodingEncodeTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingEncodeTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "Encode_InvalidChars()", $t.Line = "214", $t));
+                    t.Fixture.Encode_InvalidChars();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.UTF8EncodingEncodeTests", $t.File = "Batch1\\Text\\Encoding\\UTF8Encoding\\UTF8EncodingEncodeTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingGetMaxTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF8EncodingGetMaxTests)],
+        statics: {
+            methods: {
+                GetMaxByteCount: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF8EncodingGetMaxTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingGetMaxTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetMaxByteCount()", $t.Line = "12", $t));
+                    t.Fixture.GetMaxByteCount();
+                },
+                GetMaxCharCount: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Text.UTF8EncodingGetMaxTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.UTF8EncodingGetMaxTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetMaxCharCount()", $t.Line = "26", $t));
+                    t.Fixture.GetMaxCharCount();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.Text.UTF8EncodingGetMaxTests", $t.File = "Batch1\\Text\\Encoding\\UTF8Encoding\\UTF8EncodingGetMaxTests.cs", $t);
                 }
                 return this.context;
             }

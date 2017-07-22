@@ -6845,100 +6845,100 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.ns("Bridge.ClientTest.Collections.Generic.GenericDictionaryTests", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Collections.Generic.GenericDictionaryTests, {
-        f1: function (_o30) {
-            _o30.add("1", "a");
-            _o30.add("2", "b");
-            return _o30;
-        },
-        f2: function (_o31) {
-            _o31.add(1, "a");
-            _o31.add(2, "b");
-            return _o31;
-        },
-        f3: function (_o32) {
-            _o32.add(1, "a");
-            _o32.add(2, "b");
+        f1: function (_o32) {
+            _o32.add("1", "a");
+            _o32.add("2", "b");
             return _o32;
         },
-        f4: function (_o33) {
+        f2: function (_o33) {
             _o33.add(1, "a");
             _o33.add(2, "b");
             return _o33;
         },
-        f5: function (_o34) {
+        f3: function (_o34) {
             _o34.add(1, "a");
             _o34.add(2, "b");
             return _o34;
         },
-        f6: function (_o35) {
+        f4: function (_o35) {
             _o35.add(1, "a");
             _o35.add(2, "b");
             return _o35;
         },
-        f7: function (_o36) {
+        f5: function (_o36) {
             _o36.add(1, "a");
             _o36.add(2, "b");
             return _o36;
         },
-        f8: function (_o37) {
+        f6: function (_o37) {
             _o37.add(1, "a");
             _o37.add(2, "b");
             return _o37;
         },
-        f9: function (_o38) {
+        f7: function (_o38) {
             _o38.add(1, "a");
             _o38.add(2, "b");
             return _o38;
         },
-        f10: function (_o39) {
-            _o39.add("1", "a");
-            _o39.add("2", "b");
+        f8: function (_o39) {
+            _o39.add(1, "a");
+            _o39.add(2, "b");
             return _o39;
         },
-        f11: function (_o40) {
+        f9: function (_o40) {
             _o40.add(1, "a");
             _o40.add(2, "b");
             return _o40;
         },
-        f12: function (_o41) {
-            _o41.add("a", 1);
-            _o41.add("b", 2);
+        f10: function (_o41) {
+            _o41.add("1", "a");
+            _o41.add("2", "b");
             return _o41;
         },
-        f13: function (_o42) {
-            _o42.add("a", Bridge.box(1, System.Int32));
-            _o42.add("b", "X");
+        f11: function (_o42) {
+            _o42.add(1, "a");
+            _o42.add(2, "b");
             return _o42;
         },
-        f14: function (_o43) {
+        f12: function (_o43) {
             _o43.add("a", 1);
             _o43.add("b", 2);
             return _o43;
         },
-        f15: function (_o44) {
-            _o44.add(1, "a");
-            _o44.add(2, "b");
+        f13: function (_o44) {
+            _o44.add("a", Bridge.box(1, System.Int32));
+            _o44.add("b", "X");
             return _o44;
         },
-        f16: function (_o45) {
-            _o45.add(1, "a");
-            _o45.add(2, "b");
+        f14: function (_o45) {
+            _o45.add("a", 1);
+            _o45.add("b", 2);
             return _o45;
         },
-        f17: function (_o46) {
+        f15: function (_o46) {
             _o46.add(1, "a");
             _o46.add(2, "b");
             return _o46;
         },
-        f18: function (_o47) {
+        f16: function (_o47) {
             _o47.add(1, "a");
             _o47.add(2, "b");
             return _o47;
         },
-        f19: function (_o48) {
+        f17: function (_o48) {
             _o48.add(1, "a");
             _o48.add(2, "b");
             return _o48;
+        },
+        f18: function (_o49) {
+            _o49.add(1, "a");
+            _o49.add(2, "b");
+            return _o49;
+        },
+        f19: function (_o50) {
+            _o50.add(1, "a");
+            _o50.add(2, "b");
+            return _o50;
         }
     });
 
@@ -7381,59 +7381,59 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.ns("Bridge.ClientTest.Collections.Generic.IDictionaryTests", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Collections.Generic.IDictionaryTests, {
-        f1: function (_o21) {
-            _o21.add(3, "c");
-            return _o21;
-        },
-        f2: function (_o22) {
-            _o22.add(3, "b");
-            _o22.add(6, "z");
-            _o22.add(9, "x");
-            return _o22;
-        },
-        f3: function (_o23) {
-            _o23.add(3, "b");
-            _o23.add(6, "z");
-            _o23.add(9, "x");
+        f1: function (_o23) {
+            _o23.add(3, "c");
             return _o23;
         },
-        f4: function (_o24) {
+        f2: function (_o24) {
             _o24.add(3, "b");
             _o24.add(6, "z");
             _o24.add(9, "x");
             return _o24;
         },
-        f5: function (_o25) {
+        f3: function (_o25) {
             _o25.add(3, "b");
             _o25.add(6, "z");
             _o25.add(9, "x");
             return _o25;
         },
-        f6: function (_o26) {
+        f4: function (_o26) {
             _o26.add(3, "b");
             _o26.add(6, "z");
             _o26.add(9, "x");
             return _o26;
         },
-        f7: function (_o27) {
+        f5: function (_o27) {
             _o27.add(3, "b");
             _o27.add(6, "z");
             _o27.add(9, "x");
             return _o27;
         },
-        f8: function (_o28) {
+        f6: function (_o28) {
             _o28.add(3, "b");
             _o28.add(6, "z");
             _o28.add(9, "x");
-            _o28.add(13, "y");
             return _o28;
         },
-        f9: function (_o29) {
+        f7: function (_o29) {
             _o29.add(3, "b");
             _o29.add(6, "z");
             _o29.add(9, "x");
-            _o29.add(13, "y");
             return _o29;
+        },
+        f8: function (_o30) {
+            _o30.add(3, "b");
+            _o30.add(6, "z");
+            _o30.add(9, "x");
+            _o30.add(13, "y");
+            return _o30;
+        },
+        f9: function (_o31) {
+            _o31.add(3, "b");
+            _o31.add(6, "z");
+            _o31.add(9, "x");
+            _o31.add(13, "y");
+            return _o31;
         }
     });
 
@@ -9468,64 +9468,46 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.ns("Bridge.ClientTest.Collections.Generic.ListTests", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Collections.Generic.ListTests, {
-        f1: function (_o49) {
-            _o49.add("x");
-            return _o49;
-        },
-        f2: function (_o50) {
-            _o50.add("x");
-            _o50.add("y");
-            return _o50;
-        },
-        f3: function (_o51) {
+        f1: function (_o51) {
             _o51.add("x");
-            _o51.add("y");
             return _o51;
         },
-        f4: function (_o52) {
+        f2: function (_o52) {
             _o52.add("x");
             _o52.add("y");
             return _o52;
         },
-        f5: function (_o53) {
+        f3: function (_o53) {
             _o53.add("x");
             _o53.add("y");
             return _o53;
         },
-        f6: function (_o54) {
+        f4: function (_o54) {
             _o54.add("x");
             _o54.add("y");
             return _o54;
         },
-        f7: function (_o55) {
+        f5: function (_o55) {
             _o55.add("x");
             _o55.add("y");
             return _o55;
         },
-        f8: function (_o56) {
+        f6: function (_o56) {
             _o56.add("x");
             _o56.add("y");
             return _o56;
         },
-        f9: function (_o57) {
-            _o57.add(1);
-            _o57.add(2);
-            _o57.add(3);
-            _o57.add(3);
-            _o57.add(4);
-            _o57.add(5);
+        f7: function (_o57) {
+            _o57.add("x");
+            _o57.add("y");
             return _o57;
         },
-        f10: function (_o58) {
-            _o58.add(1);
-            _o58.add(2);
-            _o58.add(3);
-            _o58.add(3);
-            _o58.add(4);
-            _o58.add(5);
+        f8: function (_o58) {
+            _o58.add("x");
+            _o58.add("y");
             return _o58;
         },
-        f11: function (_o59) {
+        f9: function (_o59) {
             _o59.add(1);
             _o59.add(2);
             _o59.add(3);
@@ -9534,7 +9516,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             _o59.add(5);
             return _o59;
         },
-        f12: function (_o60) {
+        f10: function (_o60) {
             _o60.add(1);
             _o60.add(2);
             _o60.add(3);
@@ -9543,174 +9525,173 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             _o60.add(5);
             return _o60;
         },
-        f13: function (_o61) {
-            _o61.add("x");
-            _o61.add("y");
+        f11: function (_o61) {
+            _o61.add(1);
+            _o61.add(2);
+            _o61.add(3);
+            _o61.add(3);
+            _o61.add(4);
+            _o61.add(5);
             return _o61;
         },
-        f14: function (_o62) {
-            _o62.add("x");
-            _o62.add("y");
+        f12: function (_o62) {
+            _o62.add(1);
+            _o62.add(2);
+            _o62.add(3);
+            _o62.add(3);
+            _o62.add(4);
+            _o62.add(5);
             return _o62;
         },
-        f15: function (_o63) {
-            _o63.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
-            _o63.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
-            _o63.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
+        f13: function (_o63) {
+            _o63.add("x");
+            _o63.add("y");
             return _o63;
         },
-        f16: function (_o64) {
-            _o64.add("0");
-            _o64.add("1");
-            _o64.add("2");
+        f14: function (_o64) {
+            _o64.add("x");
+            _o64.add("y");
             return _o64;
         },
-        f17: function (_o65) {
-            _o65.add("0");
-            _o65.add("1");
-            _o65.add("2");
+        f15: function (_o65) {
+            _o65.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
+            _o65.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
+            _o65.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
             return _o65;
         },
-        f18: function (_o66) {
+        f16: function (_o66) {
             _o66.add("0");
             _o66.add("1");
             _o66.add("2");
             return _o66;
         },
-        f19: function (_o67) {
-            _o67.add("a");
-            _o67.add("b");
-            _o67.add("c");
-            _o67.add("d");
+        f17: function (_o67) {
+            _o67.add("0");
+            _o67.add("1");
+            _o67.add("2");
             return _o67;
         },
-        f20: function (_o68) {
-            _o68.add("a");
-            _o68.add("b");
-            _o68.add("c");
-            _o68.add("d");
+        f18: function (_o68) {
+            _o68.add("0");
+            _o68.add("1");
+            _o68.add("2");
             return _o68;
         },
-        f21: function (_o69) {
+        f19: function (_o69) {
             _o69.add("a");
             _o69.add("b");
             _o69.add("c");
+            _o69.add("d");
             return _o69;
         },
-        f22: function (_o70) {
-            _o70.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
-            _o70.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
-            _o70.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
+        f20: function (_o70) {
+            _o70.add("a");
+            _o70.add("b");
+            _o70.add("c");
+            _o70.add("d");
             return _o70;
         },
-        f23: function (_o71) {
+        f21: function (_o71) {
             _o71.add("a");
             _o71.add("b");
             _o71.add("c");
-            _o71.add("b");
             return _o71;
         },
-        f24: function (_o72) {
+        f22: function (_o72) {
             _o72.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
             _o72.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
             _o72.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
-            _o72.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
             return _o72;
         },
-        f25: function (_o73) {
-            _o73.add("x");
-            _o73.add("y");
+        f23: function (_o73) {
+            _o73.add("a");
+            _o73.add("b");
+            _o73.add("c");
+            _o73.add("b");
             return _o73;
         },
-        f26: function (_o74) {
-            _o74.add("x");
-            _o74.add("y");
+        f24: function (_o74) {
+            _o74.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
+            _o74.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
+            _o74.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
+            _o74.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
             return _o74;
         },
-        f27: function (_o75) {
-            _o75.add("a");
-            _o75.add("b");
-            _o75.add("c");
-            _o75.add("b");
+        f25: function (_o75) {
+            _o75.add("x");
+            _o75.add("y");
             return _o75;
         },
-        f28: function (_o76) {
-            _o76.add("a");
-            _o76.add("b");
-            _o76.add("c");
-            _o76.add("b");
+        f26: function (_o76) {
+            _o76.add("x");
+            _o76.add("y");
             return _o76;
         },
-        f29: function (_o77) {
+        f27: function (_o77) {
             _o77.add("a");
             _o77.add("b");
             _o77.add("c");
-            _o77.add("a");
+            _o77.add("b");
             return _o77;
         },
-        f30: function (_o78) {
+        f28: function (_o78) {
             _o78.add("a");
             _o78.add("b");
             _o78.add("c");
-            _o78.add("a");
+            _o78.add("b");
             return _o78;
         },
-        f31: function (_o79) {
+        f29: function (_o79) {
             _o79.add("a");
-            _o79.add(null);
+            _o79.add("b");
             _o79.add("c");
-            _o79.add(null);
+            _o79.add("a");
             return _o79;
         },
-        f32: function (_o80) {
-            _o80.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
-            _o80.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
-            _o80.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
+        f30: function (_o80) {
+            _o80.add("a");
+            _o80.add("b");
+            _o80.add("c");
+            _o80.add("a");
             return _o80;
         },
-        f33: function (_o81) {
+        f31: function (_o81) {
             _o81.add("a");
-            _o81.add("b");
+            _o81.add(null);
             _o81.add("c");
-            _o81.add("a");
+            _o81.add(null);
             return _o81;
         },
-        f34: function (_o82) {
-            _o82.add("a");
-            _o82.add("b");
-            _o82.add("c");
-            _o82.add("d");
+        f32: function (_o82) {
+            _o82.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
+            _o82.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
+            _o82.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
             return _o82;
         },
-        f35: function (_o83) {
-            _o83.add(1);
-            _o83.add(3);
-            _o83.add(4);
-            _o83.add(1);
-            _o83.add(3);
-            _o83.add(2);
+        f33: function (_o83) {
+            _o83.add("a");
+            _o83.add("b");
+            _o83.add("c");
+            _o83.add("a");
             return _o83;
         },
-        f36: function (_o84) {
-            _o84.add(1);
-            _o84.add(6);
-            _o84.add(6);
-            _o84.add(4);
-            _o84.add(2);
+        f34: function (_o84) {
+            _o84.add("a");
+            _o84.add("b");
+            _o84.add("c");
+            _o84.add("d");
             return _o84;
         },
-        f37: function (_o85) {
+        f35: function (_o85) {
             _o85.add(1);
-            _o85.add(6);
-            _o85.add(6);
+            _o85.add(3);
             _o85.add(4);
+            _o85.add(1);
+            _o85.add(3);
             _o85.add(2);
             return _o85;
         },
-        f38: function (x, y) {
-            return ((y - x) | 0);
-        },
-        f39: function (_o86) {
+        f36: function (_o86) {
             _o86.add(1);
             _o86.add(6);
             _o86.add(6);
@@ -9718,122 +9699,141 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             _o86.add(2);
             return _o86;
         },
-        f40: function (_o87) {
-            _o87.add("x");
-            _o87.add("y");
+        f37: function (_o87) {
+            _o87.add(1);
+            _o87.add(6);
+            _o87.add(6);
+            _o87.add(4);
+            _o87.add(2);
             return _o87;
         },
-        f41: function (_o88) {
-            _o88.add("x");
-            _o88.add("y");
+        f38: function (x, y) {
+            return ((y - x) | 0);
+        },
+        f39: function (_o88) {
+            _o88.add(1);
+            _o88.add(6);
+            _o88.add(6);
+            _o88.add(4);
+            _o88.add(2);
             return _o88;
         },
-        f42: function (_o89) {
+        f40: function (_o89) {
             _o89.add("x");
             _o89.add("y");
-            _o89.add("z");
             return _o89;
         },
-        f43: function (_o90) {
+        f41: function (_o90) {
             _o90.add("x");
             _o90.add("y");
-            _o90.add("z");
             return _o90;
         },
-        f44: function (_o91) {
+        f42: function (_o91) {
             _o91.add("x");
             _o91.add("y");
             _o91.add("z");
             return _o91;
         },
-        f45: function (_o92) {
+        f43: function (_o92) {
             _o92.add("x");
             _o92.add("y");
             _o92.add("z");
             return _o92;
         },
-        f46: function (_o93) {
-            _o93.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
-            _o93.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
-            _o93.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
+        f44: function (_o93) {
+            _o93.add("x");
+            _o93.add("y");
+            _o93.add("z");
             return _o93;
         },
-        f47: function (_o94) {
+        f45: function (_o94) {
             _o94.add("x");
             _o94.add("y");
             _o94.add("z");
             return _o94;
         },
-        f48: function (_o95) {
-            _o95.add("a");
-            _o95.add(null);
-            _o95.add("c");
-            _o95.add(null);
+        f46: function (_o95) {
+            _o95.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
+            _o95.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
+            _o95.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
             return _o95;
         },
-        f49: function (_o96) {
-            _o96.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
-            _o96.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
-            _o96.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
+        f47: function (_o96) {
+            _o96.add("x");
+            _o96.add("y");
+            _o96.add("z");
             return _o96;
         },
-        f50: function (_o97) {
-            _o97.add("x");
-            _o97.add("y");
-            _o97.add("z");
+        f48: function (_o97) {
+            _o97.add("a");
+            _o97.add(null);
+            _o97.add("c");
+            _o97.add(null);
             return _o97;
         },
-        f51: function (_o98) {
-            _o98.add("x");
-            _o98.add("y");
-            _o98.add("z");
+        f49: function (_o98) {
+            _o98.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
+            _o98.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
+            _o98.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
             return _o98;
         },
-        f52: function (_o99) {
-            _o99.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
-            _o99.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
-            _o99.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
+        f50: function (_o99) {
+            _o99.add("x");
+            _o99.add("y");
+            _o99.add("z");
             return _o99;
         },
-        f53: function (_o100) {
+        f51: function (_o100) {
             _o100.add("x");
             _o100.add("y");
             _o100.add("z");
             return _o100;
         },
-        f54: function (_o101) {
-            _o101.add("x");
-            _o101.add("y");
-            _o101.add("z");
+        f52: function (_o101) {
+            _o101.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(1));
+            _o101.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(2));
+            _o101.add(new Bridge.ClientTest.Collections.Generic.ListTests.C(3));
             return _o101;
         },
-        f55: function (_o102) {
+        f53: function (_o102) {
             _o102.add("x");
             _o102.add("y");
             _o102.add("z");
             return _o102;
         },
-        f56: function (_o103) {
+        f54: function (_o103) {
             _o103.add("x");
             _o103.add("y");
+            _o103.add("z");
             return _o103;
         },
-        f57: function (_o104) {
+        f55: function (_o104) {
             _o104.add("x");
             _o104.add("y");
             _o104.add("z");
             return _o104;
         },
-        f58: function (_o105) {
+        f56: function (_o105) {
             _o105.add("x");
             _o105.add("y");
-            _o105.add("z");
             return _o105;
         },
-        f59: function (_o106) {
+        f57: function (_o106) {
             _o106.add("x");
             _o106.add("y");
+            _o106.add("z");
             return _o106;
+        },
+        f58: function (_o107) {
+            _o107.add("x");
+            _o107.add("y");
+            _o107.add("z");
+            return _o107;
+        },
+        f59: function (_o108) {
+            _o108.add("x");
+            _o108.add("y");
+            return _o108;
         }
     });
 
@@ -12922,6 +12922,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 MODULE_ENUM: null,
                 MODULE_GUID: null,
                 MODULE_STRUCT: null,
+                MODULE_ENCODING: null,
                 MODULE_MATH: null,
                 MODULE_DECIMAL_MATH: null,
                 MODULE_BIT_CONVERTER: null,
@@ -13014,6 +13015,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     this.MODULE_ENUM = "Enum";
                     this.MODULE_GUID = "Guid";
                     this.MODULE_STRUCT = "Struct";
+                    this.MODULE_ENCODING = "Encoding";
                     this.MODULE_MATH = "Math";
                     this.MODULE_DECIMAL_MATH = "Decimal Math";
                     this.MODULE_BIT_CONVERTER = "BitConverter";
@@ -38233,6 +38235,494 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Text.ASCIIEncodingDecodeTests", {
+        statics: {
+            methods: {
+                Decode_TestData: function () {
+                    var list = new (System.Collections.Generic.List$1(System.Array.type(System.Object)))();
+                    // All ASCII chars
+                    for (var i = 0; i <= 127; i = (i + 1) | 0) {
+                        var b = i & 255;
+                        list.add(System.Array.init([System.Array.init([b], System.Byte), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32)], System.Object));
+                        list.add(System.Array.init([System.Array.init([96, b, 97], System.Byte), Bridge.box(1, System.Int32), Bridge.box(1, System.Int32)], System.Object));
+                        list.add(System.Array.init([System.Array.init([96, b, 98], System.Byte), Bridge.box(2, System.Int32), Bridge.box(1, System.Int32)], System.Object));
+                        list.add(System.Array.init([System.Array.init([97, b, 97], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32)], System.Object));
+                    }
+
+                    // Empty strings
+                    list.add(System.Array.init([System.Array.init(0, 0, System.Byte), Bridge.box(0, System.Int32), Bridge.box(0, System.Int32)], System.Object));
+                    list.add(System.Array.init([System.Array.init(10, 0, System.Byte), Bridge.box(5, System.Int32), Bridge.box(0, System.Int32)], System.Object));
+                    list.add(System.Array.init([System.Array.init(10, 0, System.Byte), Bridge.box(5, System.Int32), Bridge.box(5, System.Int32)], System.Object));
+
+                    return list;
+                },
+                Decode_InvalidBytes_TestData: function () {
+                    var list = new (System.Collections.Generic.List$1(System.Array.type(System.Object)))();
+                    // All Latin-1 Supplement bytes
+                    for (var i = 128; i <= 255; i = (i + 1) | 0) {
+                        var b = i & 255;
+                        list.add(System.Array.init([System.Array.init([b], System.Byte), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32)], System.Object));
+                        list.add(System.Array.init([System.Array.init([96, b, 97], System.Byte), Bridge.box(1, System.Int32), Bridge.box(1, System.Int32)], System.Object));
+                        list.add(System.Array.init([System.Array.init([97, b, 97], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32)], System.Object));
+                    }
+
+                    list.add(System.Array.init([System.Array.init([193, 65, 240, 66], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32)], System.Object));
+                    return list;
+                },
+                GetString: function (bytes, index, count) {
+                    var chars = System.Array.init(count, 0, System.Char);
+                    for (var i = 0; i < count; i = (i + 1) | 0) {
+                        var b = bytes[System.Array.index(((i + index) | 0), bytes)];
+                        chars[System.Array.index(i, chars)] = b <= 127 ? b : 63;
+                    }
+                    return String.fromCharCode.apply(null, chars);
+                }
+            }
+        },
+        methods: {
+            Decode: function () {
+                var $t;
+                $t = Bridge.getEnumerator(Bridge.ClientTest.Text.ASCIIEncodingDecodeTests.Decode_TestData(), System.Array.type(System.Object));
+                try {
+                    while ($t.moveNext()) {
+                        var objectse = $t.Current;
+                        var bytes = Bridge.as(objectse[System.Array.index(0, objectse)], System.Array.type(System.Byte));
+                        var index = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(1, objectse)]), System.Int32));
+                        var count = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(2, objectse)]), System.Int32));
+
+                        var expected = Bridge.ClientTest.Text.ASCIIEncodingDecodeTests.GetString(bytes, index, count);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.ASCIIEncoding(), bytes, index, count, expected);
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }},
+            Decode_InvalidBytes: function () {
+                var $t;
+                $t = Bridge.getEnumerator(Bridge.ClientTest.Text.ASCIIEncodingDecodeTests.Decode_InvalidBytes_TestData(), System.Array.type(System.Object));
+                try {
+                    while ($t.moveNext()) {
+                        var objectse = $t.Current;
+                        var bytes = Bridge.as(objectse[System.Array.index(0, objectse)], System.Array.type(System.Byte));
+                        var index = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(1, objectse)]), System.Int32));
+                        var count = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(2, objectse)]), System.Int32));
+
+                        var expected = Bridge.ClientTest.Text.ASCIIEncodingDecodeTests.GetString(bytes, index, count);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.ASCIIEncoding(), bytes, index, count, expected);
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }}
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Text.ASCIIEncodingEncodeTests", {
+        statics: {
+            methods: {
+                Encode_TestData: function () {
+                    var list = new (System.Collections.Generic.List$1(System.Array.type(System.Object)))();
+                    // All ASCII chars
+                    for (var i = 0; i <= 127; i = (i + 1) | 0) {
+                        var b = i & 65535;
+                        list.add(System.Array.init([String.fromCharCode(b), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32)], System.Object));
+                        list.add(System.Array.init(["a" + String.fromCharCode(b) + "c", Bridge.box(1, System.Int32), Bridge.box(1, System.Int32)], System.Object));
+                        list.add(System.Array.init(["a" + String.fromCharCode(b) + "c", Bridge.box(2, System.Int32), Bridge.box(1, System.Int32)], System.Object));
+                        list.add(System.Array.init(["a" + String.fromCharCode(b) + "c", Bridge.box(0, System.Int32), Bridge.box(3, System.Int32)], System.Object));
+                    }
+
+                    var testString = "Hello World123#?!";
+                    list.add(System.Array.init([testString, Bridge.box(0, System.Int32), Bridge.box(testString.length, System.Int32)], System.Object));
+                    list.add(System.Array.init([testString, Bridge.box(4, System.Int32), Bridge.box(5, System.Int32)], System.Object));
+
+                    list.add(System.Array.init(["ABCDEFGH", Bridge.box(0, System.Int32), Bridge.box(8, System.Int32)], System.Object));
+
+                    // Empty strings
+                    list.add(System.Array.init(["", Bridge.box(0, System.Int32), Bridge.box(0, System.Int32)], System.Object));
+                    list.add(System.Array.init(["abc", Bridge.box(3, System.Int32), Bridge.box(0, System.Int32)], System.Object));
+                    list.add(System.Array.init(["abc", Bridge.box(0, System.Int32), Bridge.box(0, System.Int32)], System.Object));
+
+                    return list;
+                },
+                Encode_InvalidChars_TestData: function () {
+                    var list = new (System.Collections.Generic.List$1(System.Array.type(System.Object)))();
+                    // All non-ASCII Latin1 chars
+                    for (var i = 128; i <= 255; i = (i + 1) | 0) {
+                        var b = i & 65535;
+                        list.add(System.Array.init([String.fromCharCode(b), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32)], System.Object));
+                    }
+
+                    // Unicode chars
+                    list.add(System.Array.init(["ሴ⍅", Bridge.box(0, System.Int32), Bridge.box(2, System.Int32)], System.Object));
+                    list.add(System.Array.init(["aሴ⍅b", Bridge.box(0, System.Int32), Bridge.box(4, System.Int32)], System.Object));
+
+                    list.add(System.Array.init(["𐀀", Bridge.box(0, System.Int32), Bridge.box(2, System.Int32)], System.Object));
+                    list.add(System.Array.init(["a𐀀b", Bridge.box(0, System.Int32), Bridge.box(2, System.Int32)], System.Object));
+
+                    list.add(System.Array.init(["𐀀a೿", Bridge.box(0, System.Int32), Bridge.box(4, System.Int32)], System.Object));
+
+                    // Invalid Unicode
+                    list.add(System.Array.init(["�", Bridge.box(0, System.Int32), Bridge.box(1, System.Int32)], System.Object)); // Lone high surrogate
+                    list.add(System.Array.init(["�", Bridge.box(0, System.Int32), Bridge.box(1, System.Int32)], System.Object)); // Lone low surrogate
+                    list.add(System.Array.init(["𐀀", Bridge.box(0, System.Int32), Bridge.box(1, System.Int32)], System.Object)); // Surrogate pair out of range
+                    list.add(System.Array.init(["𐀀", Bridge.box(1, System.Int32), Bridge.box(1, System.Int32)], System.Object)); // Surrogate pair out of range
+
+                    list.add(System.Array.init(["��", Bridge.box(0, System.Int32), Bridge.box(2, System.Int32)], System.Object)); // High, high
+                    list.add(System.Array.init(["��", Bridge.box(0, System.Int32), Bridge.box(2, System.Int32)], System.Object)); // Low, high
+                    list.add(System.Array.init(["��", Bridge.box(0, System.Int32), Bridge.box(2, System.Int32)], System.Object)); // Low, low
+
+                    list.add(System.Array.init(["ÿୱ￿𐏿", Bridge.box(0, System.Int32), Bridge.box(6, System.Int32)], System.Object));
+
+                    // High BMP non-chars
+                    list.add(System.Array.init(["�", Bridge.box(0, System.Int32), Bridge.box(1, System.Int32)], System.Object));
+                    list.add(System.Array.init(["￾", Bridge.box(0, System.Int32), Bridge.box(1, System.Int32)], System.Object));
+                    list.add(System.Array.init(["￿", Bridge.box(0, System.Int32), Bridge.box(1, System.Int32)], System.Object));
+
+                    return list;
+                },
+                GetBytes: function (source, index, count) {
+                    var bytes = System.Array.init(count, 0, System.Byte);
+                    for (var i = 0; i < bytes.length; i = (i + 1) | 0) {
+                        if (source.charCodeAt(i) <= 127) {
+                            bytes[System.Array.index(i, bytes)] = (source.charCodeAt(((i + index) | 0))) & 255;
+                        } else {
+                            // Verify the fallback character for non-ASCII chars
+                            bytes[System.Array.index(i, bytes)] = 63;
+                        }
+                    }
+                    return bytes;
+                }
+            }
+        },
+        methods: {
+            Encode: function () {
+                var $t;
+                $t = Bridge.getEnumerator(Bridge.ClientTest.Text.ASCIIEncodingEncodeTests.Encode_TestData(), System.Array.type(System.Object));
+                try {
+                    while ($t.moveNext()) {
+                        var objectse = $t.Current;
+                        var source = Bridge.as(objectse[System.Array.index(0, objectse)], System.String);
+                        var index = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(1, objectse)]), System.Int32));
+                        var count = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(2, objectse)]), System.Int32));
+
+                        var expected = Bridge.ClientTest.Text.ASCIIEncodingEncodeTests.GetBytes(source, index, count);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.ASCIIEncoding(), source, index, count, expected);
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }},
+            Encode_InvalidChars: function () {
+                var $t;
+                $t = Bridge.getEnumerator(Bridge.ClientTest.Text.ASCIIEncodingEncodeTests.Encode_InvalidChars_TestData(), System.Array.type(System.Object));
+                try {
+                    while ($t.moveNext()) {
+                        var objectse = $t.Current;
+                        var source = Bridge.as(objectse[System.Array.index(0, objectse)], System.String);
+                        var index = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(1, objectse)]), System.Int32));
+                        var count = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(2, objectse)]), System.Int32));
+
+                        var expected = Bridge.ClientTest.Text.ASCIIEncodingEncodeTests.GetBytes(source, index, count);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.ASCIIEncoding(), source, index, count, expected);
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }}
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Text.ASCIIEncodingGetMaxTests", {
+        methods: {
+            GetMaxByteCount: function () {
+                var $t;
+                var data = System.Array.init([0, 1, 2147483646], System.Int32);
+                $t = Bridge.getEnumerator(data);
+                try {
+                    while ($t.moveNext()) {
+                        var charCount = $t.Current;
+                        Bridge.Test.NUnit.Assert.AreEqual(((charCount + 1) | 0), new System.Text.ASCIIEncoding().getMaxByteCount(charCount));
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }},
+            GetMaxCharCount: function () {
+                var $t;
+                var data = System.Array.init([0, 1, 2147483647], System.Int32);
+                $t = Bridge.getEnumerator(data);
+                try {
+                    while ($t.moveNext()) {
+                        var byteCount = $t.Current;
+                        Bridge.Test.NUnit.Assert.AreEqual(byteCount, new System.Text.ASCIIEncoding().getMaxCharCount(byteCount));
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }}
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Text.EncodingHelpers", {
+        statics: {
+            methods: {
+                ToString: function (codes) {
+                    var $t;
+                    var s = "";
+                    $t = Bridge.getEnumerator(codes);
+                    try {
+                        while ($t.moveNext()) {
+                            var code = $t.Current;
+                            s = System.String.concat(s, (String.fromCharCode((code & 65535))));
+                        }
+                    } finally {
+                        if (Bridge.is($t, System.IDisposable)) {
+                            $t.System$IDisposable$dispose();
+                        }
+                    }
+                    return s;
+                },
+                AreEqual: function (o1, o2, message) {
+                    if (message === void 0) { message = null; }
+                    if (!Bridge.referenceEquals(o1, o2)) {
+                        Bridge.Test.NUnit.Assert.AreEqual(Bridge.unbox(o1), Bridge.unbox(o2), message);
+                    }
+                },
+                Encode: function (encoding, chars, index, count, expected) {
+                    Bridge.ClientTest.Text.EncodingHelpers.GetByteCount(encoding, chars, index, count, expected.length);
+                    Bridge.ClientTest.Text.EncodingHelpers.GetBytes(encoding, chars, index, count, expected);
+                },
+                GetByteCount: function (encoding, chars, index, count, expected) {
+                    var charArray = System.String.toCharArray(chars, 0, chars.length);
+                    if (index === 0 && count === chars.length) {
+                        // Use GetByteCount(string) or GetByteCount(char[])
+                        Bridge.ClientTest.Text.EncodingHelpers.AreEqual(expected, encoding.getByteCount(chars));
+                        Bridge.ClientTest.Text.EncodingHelpers.AreEqual(expected, encoding.getByteCount(charArray));
+                    }
+
+                    // Use GetByteCount(char[], int, int)
+                    Bridge.ClientTest.Text.EncodingHelpers.AreEqual(expected, encoding.getByteCount(charArray, index, count));
+                },
+                GetBytes: function (encoding, source, index, count, expectedBytes) {
+                    var fullArray = System.Array.init(((expectedBytes.length + 4) | 0), 0, System.Byte);
+                    for (var i = 0; i < fullArray.length; i = (i + 1) | 0) {
+                        fullArray[System.Array.index(i, fullArray)] = i & 255;
+                    }
+
+                    Bridge.ClientTest.Text.EncodingHelpers.VerifyGetBytes$1(encoding, source, index, count, System.Array.init(expectedBytes.length, 0, System.Byte), 0, expectedBytes);
+                    Bridge.ClientTest.Text.EncodingHelpers.VerifyGetBytes$1(encoding, source, index, count, fullArray, 2, expectedBytes);
+
+                    if (count === 0) {
+                        // If count == 0, GetBytes should not throw even though byteIndex is invalid
+                        Bridge.ClientTest.Text.EncodingHelpers.VerifyGetBytes$1(encoding, source, index, count, System.Array.init(10, 0, System.Byte), 10, expectedBytes);
+                    }
+                },
+                VerifyGetBytes$1: function (encoding, source, index, count, bytes, byteIndex, expectedBytes) {
+                    var originalBytes = Bridge.cast(System.Array.clone(bytes), System.Array.type(System.Byte));
+
+                    if (index === 0 && count === source.length) {
+                        // Use GetBytes(string)
+                        var stringResultBasic = encoding.getBytes(source);
+                        Bridge.ClientTest.Text.EncodingHelpers.VerifyGetBytes(stringResultBasic, 0, stringResultBasic.length, originalBytes, expectedBytes);
+
+                        // Use GetBytes(char[])
+                        var charArrayResultBasic = encoding.getBytes(System.String.toCharArray(source, 0, source.length));
+                        Bridge.ClientTest.Text.EncodingHelpers.VerifyGetBytes(charArrayResultBasic, 0, charArrayResultBasic.length, originalBytes, expectedBytes);
+                    }
+
+                    // Use GetBytes(char[], int, int)
+                    var charArrayResultAdvanced = encoding.getBytes(System.String.toCharArray(source, 0, source.length), index, count);
+                    Bridge.ClientTest.Text.EncodingHelpers.VerifyGetBytes(charArrayResultAdvanced, 0, charArrayResultAdvanced.length, originalBytes, expectedBytes);
+
+                    // Use GetBytes(string, int, int, byte[], int)
+                    var stringBytes = Bridge.cast(System.Array.clone(bytes), System.Array.type(System.Byte));
+                    var stringByteCount = encoding.getBytes(source, index, count, stringBytes, byteIndex);
+                    Bridge.ClientTest.Text.EncodingHelpers.VerifyGetBytes(stringBytes, byteIndex, stringByteCount, originalBytes, expectedBytes);
+                    Bridge.ClientTest.Text.EncodingHelpers.AreEqual(expectedBytes.length, stringByteCount);
+
+                    // Use GetBytes(char[], int, int, byte[], int)
+                    var charArrayBytes = Bridge.cast(System.Array.clone(bytes), System.Array.type(System.Byte));
+                    var charArrayByteCount = encoding.getBytes(System.String.toCharArray(source, 0, source.length), index, count, charArrayBytes, byteIndex);
+                    Bridge.ClientTest.Text.EncodingHelpers.VerifyGetBytes(charArrayBytes, byteIndex, charArrayByteCount, originalBytes, expectedBytes);
+                    Bridge.ClientTest.Text.EncodingHelpers.AreEqual(expectedBytes.length, charArrayByteCount);
+                },
+                VerifyGetBytes: function (bytes, byteIndex, byteCount, originalBytes, expectedBytes) {
+                    for (var i = 0; i < byteIndex; i = (i + 1) | 0) {
+                        if (originalBytes[System.Array.index(i, originalBytes)] !== bytes[System.Array.index(i, bytes)]) {
+                            Bridge.Test.NUnit.Assert.Fail(System.String.format("EncodingHelpers.VerifyGetBytes - {0} != {1}", Bridge.box(originalBytes[System.Array.index(i, originalBytes)], System.Byte), Bridge.box(bytes[System.Array.index(i, bytes)], System.Byte)));
+                        }
+                    }
+                    for (var i1 = byteIndex; i1 < ((byteIndex + byteCount) | 0); i1 = (i1 + 1) | 0) {
+                        if (expectedBytes[System.Array.index(((i1 - byteIndex) | 0), expectedBytes)] !== bytes[System.Array.index(i1, bytes)]) {
+                            Bridge.Test.NUnit.Assert.Fail(System.String.format("EncodingHelpers.VerifyGetBytes - {0} != {1}", Bridge.box(expectedBytes[System.Array.index(((i1 - byteIndex) | 0), expectedBytes)], System.Byte), Bridge.box(bytes[System.Array.index(i1, bytes)], System.Byte)));
+                        }
+                    }
+                    for (var i2 = (byteIndex + byteCount) | 0; i2 < bytes.length; i2 = (i2 + 1) | 0) {
+                        // Bytes outside the range should be ignored
+                        if (originalBytes[System.Array.index(i2, originalBytes)] !== bytes[System.Array.index(i2, bytes)]) {
+                            Bridge.Test.NUnit.Assert.Fail(System.String.format("EncodingHelpers.VerifyGetBytes - {0} != {1}", Bridge.box(originalBytes[System.Array.index(i2, originalBytes)], System.Byte), Bridge.box(bytes[System.Array.index(i2, bytes)], System.Byte)));
+                        }
+                    }
+
+                    //Assert.True(true, "VerifyGetBytes passed");
+                },
+                Decode: function (encoding, bytes, index, count, expected) {
+                    Bridge.ClientTest.Text.EncodingHelpers.GetCharCount(encoding, bytes, index, count, expected.length);
+                    Bridge.ClientTest.Text.EncodingHelpers.GetChars(encoding, bytes, index, count, System.String.toCharArray(expected, 0, expected.length));
+                    Bridge.ClientTest.Text.EncodingHelpers.GetString(encoding, bytes, index, count, expected);
+                },
+                GetCharCount: function (encoding, bytes, index, count, expected) {
+                    if (index === 0 && count === bytes.length) {
+                        // Use GetCharCount(byte[])
+                        Bridge.ClientTest.Text.EncodingHelpers.AreEqual(expected, encoding.getCharCount(bytes));
+                    }
+                    // Use GetCharCount(byte[], int, int)
+                    Bridge.ClientTest.Text.EncodingHelpers.AreEqual(expected, encoding.getCharCount(bytes, index, count));
+                },
+                GetChars: function (encoding, bytes, index, count, expectedChars) {
+                    var fullArray = System.Array.init(((expectedChars.length + 4) | 0), 0, System.Char);
+                    for (var i = 0; i < fullArray.length; i = (i + 1) | 0) {
+                        fullArray[System.Array.index(i, fullArray)] = i & 65535;
+                    }
+
+                    Bridge.ClientTest.Text.EncodingHelpers.VerifyGetChars$1(encoding, bytes, index, count, System.Array.init(expectedChars.length, 0, System.Char), 0, expectedChars);
+                    Bridge.ClientTest.Text.EncodingHelpers.VerifyGetChars$1(encoding, bytes, index, count, fullArray, 2, expectedChars);
+
+                    if (count === 0) {
+                        // If count == 0, GetChars should not throw even though charIndex is invalid
+                        Bridge.ClientTest.Text.EncodingHelpers.VerifyGetChars$1(encoding, bytes, index, count, System.Array.init(10, 0, System.Char), 10, expectedChars);
+                    }
+                },
+                VerifyGetChars$1: function (encoding, bytes, byteIndex, byteCount, chars, charIndex, expectedChars) {
+                    var originalChars = Bridge.cast(System.Array.clone(chars), System.Array.type(System.Char));
+
+                    // Use GetChars(byte[])
+                    if (byteIndex === 0 && byteCount === bytes.length) {
+                        var resultBasic = encoding.getChars(bytes);
+                        Bridge.ClientTest.Text.EncodingHelpers.VerifyGetChars(resultBasic, 0, resultBasic.length, originalChars, expectedChars);
+                    }
+
+                    // Use GetChars(byte[], int, int)
+                    var resultAdvanced = encoding.getChars(bytes, byteIndex, byteCount);
+                    Bridge.ClientTest.Text.EncodingHelpers.VerifyGetChars(resultAdvanced, 0, resultAdvanced.length, originalChars, expectedChars);
+
+                    // Use GetChars(byte[], int, int, char[], int)
+                    var byteChars = Bridge.cast(System.Array.clone(chars), System.Array.type(System.Char));
+                    var charCount = encoding.getChars(bytes, byteIndex, byteCount, byteChars, charIndex);
+                    Bridge.ClientTest.Text.EncodingHelpers.VerifyGetChars(byteChars, charIndex, charCount, originalChars, expectedChars);
+                    Bridge.ClientTest.Text.EncodingHelpers.AreEqual(expectedChars.length, charCount);
+                },
+                VerifyGetChars: function (chars, charIndex, charCount, originalChars, expectedChars) {
+                    for (var i = 0; i < charIndex; i = (i + 1) | 0) {
+                        // Chars outside the range should be ignored
+                        if (originalChars[System.Array.index(i, originalChars)] !== chars[System.Array.index(i, chars)]) {
+                            Bridge.Test.NUnit.Assert.Fail(System.String.format("EncodingHelpers.VerifyGetChars - {0} != {1}", Bridge.box(originalChars[System.Array.index(i, originalChars)], System.Char, String.fromCharCode, System.Char.getHashCode), Bridge.box(chars[System.Array.index(i, chars)], System.Char, String.fromCharCode, System.Char.getHashCode)));
+                        }
+                    }
+                    for (var i1 = charIndex; i1 < ((charIndex + charCount) | 0); i1 = (i1 + 1) | 0) {
+                        if (expectedChars[System.Array.index(((i1 - charIndex) | 0), expectedChars)] !== chars[System.Array.index(i1, chars)]) {
+                            Bridge.Test.NUnit.Assert.Fail(System.String.format("EncodingHelpers.VerifyGetChars - {0} != {1}", Bridge.box(expectedChars[System.Array.index(((i1 - charIndex) | 0), expectedChars)], System.Char, String.fromCharCode, System.Char.getHashCode), Bridge.box(chars[System.Array.index(i1, chars)], System.Char, String.fromCharCode, System.Char.getHashCode)));
+                        }
+                    }
+                    for (var i2 = (charIndex + charCount) | 0; i2 < chars.length; i2 = (i2 + 1) | 0) {
+                        // Chars outside the range should be ignored
+                        if (originalChars[System.Array.index(i2, originalChars)] !== chars[System.Array.index(i2, chars)]) {
+                            Bridge.Test.NUnit.Assert.Fail(System.String.format("EncodingHelpers.VerifyGetChars - {0} != {1}", Bridge.box(originalChars[System.Array.index(i2, originalChars)], System.Char, String.fromCharCode, System.Char.getHashCode), Bridge.box(chars[System.Array.index(i2, chars)], System.Char, String.fromCharCode, System.Char.getHashCode)));
+                        }
+                    }
+                    //Assert.True(true, "VerifyGetChars passed");
+                },
+                GetString: function (encoding, bytes, index, count, expected) {
+                    if (index === 0 && count === bytes.length) {
+                        // Use GetString(byte[])
+                        Bridge.ClientTest.Text.EncodingHelpers.AreEqual(expected, encoding.getString(bytes));
+                    }
+                    // Use GetString(byte[], int, int)
+                    Bridge.ClientTest.Text.EncodingHelpers.AreEqual(expected, encoding.getString(bytes, index, count));
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Text.NegativeEncodingTests", {
+        statics: {
+            methods: {
+                Encode_Invalid: function (encoding, chars, index, count) {
+                    var charsArray = System.String.toCharArray(chars, 0, chars.length);
+                    var bytes = System.Array.init(encoding.getMaxByteCount(count), 0, System.Byte);
+
+                    if (index === 0 && count === chars.length) {
+                        Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
+                            encoding.getByteCount(chars);
+                        });
+                        Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
+                            encoding.getByteCount(charsArray);
+                        });
+
+                        Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
+                            encoding.getBytes(chars);
+                        });
+                        Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
+                            encoding.getBytes(charsArray);
+                        });
+                    }
+
+                    Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
+                        encoding.getByteCount(charsArray, index, count);
+                    });
+
+                    Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
+                        encoding.getBytes(charsArray, index, count);
+                    });
+
+                    Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
+                        encoding.getBytes(chars, index, count, bytes, 0);
+                    });
+                    Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
+                        encoding.getBytes(charsArray, index, count, bytes, 0);
+                    });
+                },
+                Decode_Invalid: function (encoding, bytes, index, count) {
+                    var chars = System.Array.init(encoding.getMaxCharCount(count), 0, System.Char);
+
+                    if (index === 0 && count === bytes.length) {
+                        Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
+                            encoding.getCharCount(bytes);
+                        });
+
+                        Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
+                            encoding.getChars(bytes);
+                        });
+                        Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
+                            encoding.getString(bytes);
+                        });
+                    }
+
+                    Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
+                        encoding.getCharCount(bytes, index, count);
+                    });
+
+                    Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
+                        encoding.getChars(bytes, index, count);
+                    });
+                    Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
+                        encoding.getString(bytes, index, count);
+                    });
+
+                    Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
+                        encoding.getChars(bytes, index, count, chars, 0);
+                    });
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Text.RegularExpressions.RegexTestBase", {
         methods: {
             ValidateMatchNotFound: function (match) {
@@ -38487,20 +38977,20 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.ns("Bridge.ClientTest.Text.RegularExpressions.Methods.RegexIsMatchTests", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Text.RegularExpressions.Methods.RegexIsMatchTests, {
-        f1: function (_o18) {
-            _o18.add({ item1: "1298-673-4192", item2: true });
-            _o18.add({ item1: "1298-673-4192", item2: true });
-            _o18.add({ item1: "A08Z-931-468A", item2: true });
-            _o18.add({ item1: "_A90-123-129X", item2: false });
-            _o18.add({ item1: "12345-KKA-1230", item2: false });
-            _o18.add({ item1: "0919-2893-1256", item2: false });
-            return _o18;
+        f1: function (_o20) {
+            _o20.add({ item1: "1298-673-4192", item2: true });
+            _o20.add({ item1: "1298-673-4192", item2: true });
+            _o20.add({ item1: "A08Z-931-468A", item2: true });
+            _o20.add({ item1: "_A90-123-129X", item2: false });
+            _o20.add({ item1: "12345-KKA-1230", item2: false });
+            _o20.add({ item1: "0919-2893-1256", item2: false });
+            return _o20;
         },
-        f2: function (_o19) {
-            _o19.add({ item1: "ID: 1234-567-8901", item2: true });
-            _o19.add({ item1: "Identifier: A170-222-777z", item2: true });
-            _o19.add({ item1: "1234-567-8901 IDENTITY: 9287-5555-1233", item2: false });
-            return _o19;
+        f2: function (_o21) {
+            _o21.add({ item1: "ID: 1234-567-8901", item2: true });
+            _o21.add({ item1: "Identifier: A170-222-777z", item2: true });
+            _o21.add({ item1: "1234-567-8901 IDENTITY: 9287-5555-1233", item2: false });
+            return _o21;
         }
     });
 
@@ -39194,6 +39684,3352 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             toString: function () {
                 return "some text";
             }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Text.UnicodeEncodingDecodeTests", {
+        statics: {
+            methods: {
+                Decode_TestData: function () {
+                    return new (Bridge.GeneratorEnumerable$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function ()  {
+                        var $step = 0,
+                            $jumpFromFinally,
+                            $returnValue,
+                            i,
+                            c,
+                            unicodeBytes,
+                            surrogateBytes,
+                            $async_e;
+
+                        var $enumerator = new (Bridge.GeneratorEnumerator$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function () {
+                            try {
+                                for (;;) {
+                                    switch ($step) {
+                                        case 0: {
+                                            // All ASCII chars
+                                                i = 0;
+                                                $step = 1;
+                                                continue;
+                                        }
+                                        case 1: {
+                                            if ( i <= 255 ) {
+                                                    $step = 2;
+                                                    continue;
+                                                }
+                                            $step = 6;
+                                            continue;
+                                        }
+                                        case 2: {
+                                            c = i & 65535;
+                                                $enumerator.current = System.Array.init([System.Array.init([97, 0, (c & 255), 0, 98, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(6, System.Int32), "a" + String.fromCharCode(c) + "b"], System.Object);
+                                                $step = 3;
+                                                return true;
+                                        }
+                                        case 3: {
+                                            $enumerator.current = System.Array.init([System.Array.init([97, 0, (c & 255), 0, 98, 0], System.Byte), Bridge.box(2, System.Int32), Bridge.box(2, System.Int32), String.fromCharCode(c)], System.Object);
+                                                $step = 4;
+                                                return true;
+                                        }
+                                        case 4: {
+                                            $step = 5;
+                                            continue;
+                                        }
+                                        case 5: {
+                                            i = (i + 1) | 0;
+                                            $step = 1;
+                                            continue;
+                                        }
+                                        case 6: {
+                                            // Long ASCII strings
+                                                $enumerator.current = System.Array.init([System.Array.init([97, 0, 98, 0, 99, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(6, System.Int32), "abc"], System.Object);
+                                                $step = 7;
+                                                return true;
+                                        }
+                                        case 7: {
+                                            $enumerator.current = System.Array.init([System.Array.init([97, 0, 98, 0, 99, 0], System.Byte), Bridge.box(4, System.Int32), Bridge.box(2, System.Int32), "c"], System.Object);
+                                                $step = 8;
+                                                return true;
+                                        }
+                                        case 8: {
+                                            // Unicode
+                                                unicodeBytes = System.Array.init([97, 0, 52, 18, 98, 0], System.Byte);
+                                                $enumerator.current = System.Array.init([unicodeBytes, Bridge.box(0, System.Int32), Bridge.box(6, System.Int32), "aሴb"], System.Object);
+                                                $step = 9;
+                                                return true;
+                                        }
+                                        case 9: {
+                                            $enumerator.current = System.Array.init([unicodeBytes, Bridge.box(2, System.Int32), Bridge.box(2, System.Int32), "ሴ"], System.Object);
+                                                $step = 10;
+                                                return true;
+                                        }
+                                        case 10: {
+                                            // Surrogate pairs
+                                                surrogateBytes = System.Array.init([97, 0, 0, 216, 0, 220, 98, 0], System.Byte);
+                                                $enumerator.current = System.Array.init([surrogateBytes, Bridge.box(0, System.Int32), Bridge.box(8, System.Int32), "a𐀀b"], System.Object);
+                                                $step = 11;
+                                                return true;
+                                        }
+                                        case 11: {
+                                            $enumerator.current = System.Array.init([surrogateBytes, Bridge.box(2, System.Int32), Bridge.box(4, System.Int32), "𐀀"], System.Object);
+                                                $step = 12;
+                                                return true;
+                                        }
+                                        case 12: {
+                                            // Mixture of ASCII and Unicode
+                                                $enumerator.current = System.Array.init([System.Array.init([84, 0, 101, 0, 115, 0, 116, 0, 84, 0, 101, 0, 115, 0, 116, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(16, System.Int32), "TestTest"], System.Object);
+                                                $step = 13;
+                                                return true;
+                                        }
+                                        case 13: {
+                                            $enumerator.current = System.Array.init([System.Array.init([84, 0, 101, 0, 115, 0, 116, 0, 83, 0, 116, 0, 114, 0, 105, 0, 110, 0, 103, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(20, System.Int32), "TestString"], System.Object);
+                                                $step = 14;
+                                                return true;
+                                        }
+                                        case 14: {
+                                            $enumerator.current = System.Array.init([System.Array.init([70, 0, 111, 0, 111, 0, 66, 0, 65, 0, 0, 4, 82, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(14, System.Int32), "FooBAЀR"], System.Object);
+                                                $step = 15;
+                                                return true;
+                                        }
+                                        case 15: {
+                                            $enumerator.current = System.Array.init([System.Array.init([192, 0, 110, 0, 105, 0, 109, 0, 97, 0, 0, 3, 108, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(14, System.Int32), "Ànimàl"], System.Object);
+                                                $step = 16;
+                                                return true;
+                                        }
+                                        case 16: {
+                                            $enumerator.current = System.Array.init([System.Array.init([122, 0, 97, 0, 6, 3, 253, 1, 178, 3], System.Byte), Bridge.box(0, System.Int32), Bridge.box(10, System.Int32), "zăǽβ"], System.Object);
+                                                $step = 17;
+                                                return true;
+                                        }
+                                        case 17: {
+                                            $enumerator.current = System.Array.init([System.Array.init([122, 0, 97, 0, 6, 3, 253, 1, 178, 3], System.Byte), Bridge.box(0, System.Int32), Bridge.box(8, System.Int32), "zăǽ"], System.Object);
+                                                $step = 18;
+                                                return true;
+                                        }
+                                        case 18: {
+                                            $enumerator.current = System.Array.init([System.Array.init([84, 0, 101, 0, 115, 0, 116, 0, 3, 216, 117, 221, 84, 0, 101, 0, 115, 0, 116, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(20, System.Int32), "Test𐵵Test"], System.Object);
+                                                $step = 19;
+                                                return true;
+                                        }
+                                        case 19: {
+                                            $enumerator.current = System.Array.init([System.Array.init([0, 0, 84, 0, 101, 0, 10, 0, 115, 0, 116, 0, 0, 0, 9, 0, 0, 0, 84, 0, 15, 0, 101, 0, 115, 0, 116, 0, 0, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(30, System.Int32), "\u0000Te\nst\u0000\t\u0000T\u000fest\u0000"], System.Object);
+                                                $step = 20;
+                                                return true;
+                                        }
+                                        case 20: {
+                                            $enumerator.current = System.Array.init([System.Array.init([3, 216, 117, 221, 3, 216, 117, 221, 3, 216, 117, 221], System.Byte), Bridge.box(0, System.Int32), Bridge.box(12, System.Int32), "𐵵𐵵𐵵"], System.Object);
+                                                $step = 21;
+                                                return true;
+                                        }
+                                        case 21: {
+                                            $enumerator.current = System.Array.init([System.Array.init([3, 216, 117, 221, 3, 216, 117, 221], System.Byte), Bridge.box(0, System.Int32), Bridge.box(8, System.Int32), "𐵵𐵵"], System.Object);
+                                                $step = 22;
+                                                return true;
+                                        }
+                                        case 22: {
+                                            $enumerator.current = System.Array.init([System.Array.init([48, 1], System.Byte), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), "İ"], System.Object);
+                                                $step = 23;
+                                                return true;
+                                        }
+                                        case 23: {
+                                            $enumerator.current = System.Array.init([System.Array.init([92, 0, 97, 0, 98, 0, 99, 0, 32, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(10, System.Int32), "\\abc "], System.Object);
+                                                $step = 24;
+                                                return true;
+                                        }
+                                        case 24: {
+                                            // High BMP non-chars
+                                                $enumerator.current = System.Array.init([System.Array.init([253, 255], System.Byte), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), "�"], System.Object);
+                                                $step = 25;
+                                                return true;
+                                        }
+                                        case 25: {
+                                            $enumerator.current = System.Array.init([System.Array.init([254, 255], System.Byte), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), "￾"], System.Object);
+                                                $step = 26;
+                                                return true;
+                                        }
+                                        case 26: {
+                                            $enumerator.current = System.Array.init([System.Array.init([255, 255], System.Byte), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), "￿"], System.Object);
+                                                $step = 27;
+                                                return true;
+                                        }
+                                        case 27: {
+                                            $enumerator.current = System.Array.init([System.Array.init([255, 255, 254, 255], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), "￿￾"], System.Object);
+                                                $step = 28;
+                                                return true;
+                                        }
+                                        case 28: {
+                                            // U+FDD0 - U+FDEF
+                                                $enumerator.current = System.Array.init([System.Array.init([208, 253, 239, 253], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), "﷐﷯"], System.Object);
+                                                $step = 29;
+                                                return true;
+                                        }
+                                        case 29: {
+                                            $enumerator.current = System.Array.init([System.Array.init([0, 216, 0, 220], System.Byte), Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), "Ø"], System.Object);
+                                                $step = 30;
+                                                return true;
+                                        }
+                                        case 30: {
+                                            // Empty string
+                                                $enumerator.current = System.Array.init([System.Array.init(0, 0, System.Byte), Bridge.box(0, System.Int32), Bridge.box(0, System.Int32), ""], System.Object);
+                                                $step = 31;
+                                                return true;
+                                        }
+                                        case 31: {
+                                            $enumerator.current = System.Array.init([System.Array.init(10, 0, System.Byte), Bridge.box(0, System.Int32), Bridge.box(0, System.Int32), ""], System.Object);
+                                                $step = 32;
+                                                return true;
+                                        }
+                                        case 32: {
+                                            $enumerator.current = System.Array.init([System.Array.init(10, 0, System.Byte), Bridge.box(10, System.Int32), Bridge.box(0, System.Int32), ""], System.Object);
+                                                $step = 33;
+                                                return true;
+                                        }
+                                        case 33: {
+                                            $enumerator.current = System.Array.init([unicodeBytes, Bridge.box(6, System.Int32), Bridge.box(0, System.Int32), ""], System.Object);
+                                                $step = 34;
+                                                return true;
+                                        }
+                                        case 34: {
+                                            $enumerator.current = System.Array.init([unicodeBytes, Bridge.box(0, System.Int32), Bridge.box(0, System.Int32), ""], System.Object);
+                                                $step = 35;
+                                                return true;
+                                        }
+                                        case 35: {
+
+                                        }
+                                        default: {
+                                            return false;
+                                        }
+                                    }
+                                }
+                            } catch($async_e1) {
+                                $async_e = System.Exception.create($async_e1);
+                                throw $async_e;
+                            }
+                        }));
+                        return $enumerator;
+                    }));
+                },
+                Decode_InvalidBytes_TestData: function () {
+                    return new (Bridge.GeneratorEnumerable$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function ()  {
+                        var $step = 0,
+                            $jumpFromFinally,
+                            $returnValue,
+                            validSurrogateBytes1,
+                            $async_e;
+
+                        var $enumerator = new (Bridge.GeneratorEnumerator$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function () {
+                            try {
+                                for (;;) {
+                                    switch ($step) {
+                                        case 0: {
+                                            $enumerator.current = System.Array.init([System.Array.init([70, 0, 111, 0, 111, 0, 66, 0, 65, 0, 0, 4, 82, 0, 70], System.Byte), Bridge.box(0, System.Int32), Bridge.box(15, System.Int32), "FooBAЀR�"], System.Object);
+                                                $step = 1;
+                                                return true;
+                                        }
+                                        case 1: {
+                                            $enumerator.current = System.Array.init([System.Array.init([84, 0, 101, 0, 115, 0, 116, 0, 83, 0, 116, 0, 114, 0, 105, 0, 110, 0, 103, 0, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(21, System.Int32), "TestString�"], System.Object);
+                                                $step = 2;
+                                                return true;
+                                        }
+                                        case 2: {
+                                            $enumerator.current = System.Array.init([System.Array.init([84, 0, 101, 0, 115, 0, 116, 0, 84, 0, 101, 0, 115, 0, 116, 0, 117, 221], System.Byte), Bridge.box(0, System.Int32), Bridge.box(18, System.Int32), "TestTest�"], System.Object);
+                                                $step = 3;
+                                                return true;
+                                        }
+                                        case 3: {
+                                            $enumerator.current = System.Array.init([System.Array.init([84, 0, 101, 0, 115, 0, 116, 0, 84, 0, 101, 0, 115, 0, 116, 0, 3, 216], System.Byte), Bridge.box(0, System.Int32), Bridge.box(17, System.Int32), "TestTest�"], System.Object);
+                                                $step = 4;
+                                                return true;
+                                        }
+                                        case 4: {
+                                            $enumerator.current = System.Array.init([System.Array.init([84, 0, 0, 0, 84, 0, 101, 0, 10, 0, 115, 0, 116, 0, 0, 0, 9, 0, 0, 0, 84, 0, 15, 0, 101, 0, 115, 0, 116, 0, 0, 0, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(33, System.Int32), "T\u0000Te\nst\u0000\t\u0000T\u000fest\u0000�"], System.Object);
+                                                $step = 5;
+                                                return true;
+                                        }
+                                        case 5: {
+                                            $enumerator.current = System.Array.init([System.Array.init([3, 216, 84], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "��"], System.Object);
+                                                $step = 6;
+                                                return true;
+                                        }
+                                        case 6: {
+                                            // Invalid surrogate bytes
+                                                validSurrogateBytes1 = System.Array.init([0, 216, 0, 220], System.Byte);
+                                                $enumerator.current = System.Array.init([validSurrogateBytes1, Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "��"], System.Object);
+                                                $step = 7;
+                                                return true;
+                                        }
+                                        case 7: {
+                                            $enumerator.current = System.Array.init([validSurrogateBytes1, Bridge.box(1, System.Int32), Bridge.box(3, System.Int32), "Ø�"], System.Object);
+                                                $step = 8;
+                                                return true;
+                                        }
+                                        case 8: {
+                                            $enumerator.current = System.Array.init([validSurrogateBytes1, Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), "�"], System.Object);
+                                                $step = 9;
+                                                return true;
+                                        }
+                                        case 9: {
+                                            $enumerator.current = System.Array.init([validSurrogateBytes1, Bridge.box(2, System.Int32), Bridge.box(2, System.Int32), "�"], System.Object);
+                                                $step = 10;
+                                                return true;
+                                        }
+                                        case 10: {
+                                            $enumerator.current = System.Array.init([validSurrogateBytes1, Bridge.box(2, System.Int32), Bridge.box(1, System.Int32), "�"], System.Object);
+                                                $step = 11;
+                                                return true;
+                                        }
+                                        case 11: {
+                                            $enumerator.current = System.Array.init([System.Array.init([255, 219, 0, 220], System.Byte), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), "�"], System.Object);
+                                                $step = 12;
+                                                return true;
+                                        }
+                                        case 12: {
+                                            $enumerator.current = System.Array.init([System.Array.init([255, 219, 0, 220], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "��"], System.Object);
+                                                $step = 13;
+                                                return true;
+                                        }
+                                        case 13: {
+                                            $enumerator.current = System.Array.init([System.Array.init([255, 219, 255, 223], System.Byte), Bridge.box(1, System.Int32), Bridge.box(3, System.Int32), "ￛ�"], System.Object);
+                                                $step = 14;
+                                                return true;
+                                        }
+                                        case 14: {
+                                            $enumerator.current = System.Array.init([System.Array.init([0, 216, 255, 223], System.Byte), Bridge.box(2, System.Int32), Bridge.box(2, System.Int32), "�"], System.Object);
+                                                $step = 15;
+                                                return true;
+                                        }
+                                        case 15: {
+                                            $enumerator.current = System.Array.init([System.Array.init([255, 223], System.Byte), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), "�"], System.Object);
+                                                $step = 16;
+                                                return true;
+                                        }
+                                        case 16: {
+                                            // Odd number of bytes
+                                                $enumerator.current = System.Array.init([System.Array.init([97], System.Byte), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), "�"], System.Object);
+                                                $step = 17;
+                                                return true;
+                                        }
+                                        case 17: {
+                                            $enumerator.current = System.Array.init([System.Array.init([97, 0, 97], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "a�"], System.Object);
+                                                $step = 18;
+                                                return true;
+                                        }
+                                        case 18: {
+                                            $enumerator.current = System.Array.init([System.Array.init([3, 216, 48], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "��"], System.Object);
+                                                $step = 19;
+                                                return true;
+                                        }
+                                        case 19: {
+                                            $enumerator.current = System.Array.init([System.Array.init([97, 0, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "a�"], System.Object);
+                                                $step = 20;
+                                                return true;
+                                        }
+                                        case 20: {
+                                            $enumerator.current = System.Array.init([System.Array.init([97], System.Byte), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), "�"], System.Object);
+                                                $step = 21;
+                                                return true;
+                                        }
+                                        case 21: {
+
+                                        }
+                                        default: {
+                                            return false;
+                                        }
+                                    }
+                                }
+                            } catch($async_e1) {
+                                $async_e = System.Exception.create($async_e1);
+                                throw $async_e;
+                            }
+                        }));
+                        return $enumerator;
+                    }));
+                },
+                GetBigEndianBytes: function (littleEndianBytes, index, count) {
+                    var bytes = System.Array.init(littleEndianBytes.length, 0, System.Byte);
+
+                    var i;
+                    for (i = index; ((i + 1) | 0) < ((index + count) | 0); i = (i + 2) | 0) {
+                        bytes[System.Array.index(i, bytes)] = littleEndianBytes[System.Array.index(((i + 1) | 0), littleEndianBytes)];
+                        bytes[System.Array.index(((i + 1) | 0), bytes)] = littleEndianBytes[System.Array.index(i, littleEndianBytes)];
+                    }
+
+                    // Invalid byte arrays may not have a multiple of 2 length
+                    // Since they are invalid in both big and little endian orderings,
+                    // we don't need to convert the ordering.
+                    for (; i < ((index + count) | 0); i = (i + 1) | 0) {
+                        bytes[System.Array.index(i, bytes)] = littleEndianBytes[System.Array.index(i, littleEndianBytes)];
+                    }
+
+                    return bytes;
+                }
+            }
+        },
+        methods: {
+            Decode: function () {
+                var $t;
+                $t = Bridge.getEnumerator(Bridge.ClientTest.Text.UnicodeEncodingDecodeTests.Decode_TestData(), System.Array.type(System.Object));
+                try {
+                    while ($t.moveNext()) {
+                        var objectse = $t.Current;
+                        var littleEndianBytes = Bridge.cast(objectse[System.Array.index(0, objectse)], System.Array.type(System.Byte));
+                        var index = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(1, objectse)]), System.Int32));
+                        var count = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(2, objectse)]), System.Int32));
+                        var expected = Bridge.cast(objectse[System.Array.index(3, objectse)], System.String);
+
+                        var bigEndianBytes = Bridge.ClientTest.Text.UnicodeEncodingDecodeTests.GetBigEndianBytes(littleEndianBytes, index, count);
+
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding(false, true, false), littleEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding(false, false, false), littleEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding(true, false, false), bigEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding(true, true, false), bigEndianBytes, index, count, expected);
+
+                        // Decoding valid bytes should throw with a DecoderExceptionFallback
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding(false, true, true), littleEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding(false, false, true), littleEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding(true, false, true), bigEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding(true, true, true), bigEndianBytes, index, count, expected);
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }},
+            Decode_InvalidBytes: function () {
+                var $t;
+                $t = Bridge.getEnumerator(Bridge.ClientTest.Text.UnicodeEncodingDecodeTests.Decode_InvalidBytes_TestData(), System.Array.type(System.Object));
+                try {
+                    while ($t.moveNext()) {
+                        var objectse = $t.Current;
+                        var littleEndianBytes = Bridge.cast(objectse[System.Array.index(0, objectse)], System.Array.type(System.Byte));
+                        var index = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(1, objectse)]), System.Int32));
+                        var count = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(2, objectse)]), System.Int32));
+                        var expected = Bridge.cast(objectse[System.Array.index(3, objectse)], System.String);
+
+                        var bigEndianBytes = Bridge.ClientTest.Text.UnicodeEncodingDecodeTests.GetBigEndianBytes(littleEndianBytes, index, count);
+
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding(false, true, false), littleEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding(false, false, false), littleEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding(true, false, false), bigEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding(true, true, false), bigEndianBytes, index, count, expected);
+
+                        // Decoding invalid bytes should throw with a DecoderExceptionFallback
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UnicodeEncoding(false, true, true), littleEndianBytes, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UnicodeEncoding(false, false, true), littleEndianBytes, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UnicodeEncoding(true, false, true), bigEndianBytes, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UnicodeEncoding(true, true, true), bigEndianBytes, index, count);
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }}
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Text.UnicodeEncodingEncodeTests", {
+        statics: {
+            methods: {
+                Encode_TestData: function () {
+                    return new (Bridge.GeneratorEnumerable$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function ()  {
+                        var $step = 0,
+                            $jumpFromFinally,
+                            $returnValue,
+                            i,
+                            c,
+                            $async_e;
+
+                        var $enumerator = new (Bridge.GeneratorEnumerator$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function () {
+                            try {
+                                for (;;) {
+                                    switch ($step) {
+                                        case 0: {
+                                            // All ASCII chars
+                                                i = 0;
+                                                $step = 1;
+                                                continue;
+                                        }
+                                        case 1: {
+                                            if ( i <= 255 ) {
+                                                    $step = 2;
+                                                    continue;
+                                                }
+                                            $step = 7;
+                                            continue;
+                                        }
+                                        case 2: {
+                                            c = i & 65535;
+                                                $enumerator.current = System.Array.init(["a" + String.fromCharCode(c) + "b", Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), System.Array.init([97, 0, (c & 255), 0, 98, 0], System.Byte)], System.Object);
+                                                $step = 3;
+                                                return true;
+                                        }
+                                        case 3: {
+                                            $enumerator.current = System.Array.init(["a" + String.fromCharCode(c) + "b", Bridge.box(1, System.Int32), Bridge.box(1, System.Int32), System.Array.init([(c & 255), 0], System.Byte)], System.Object);
+                                                $step = 4;
+                                                return true;
+                                        }
+                                        case 4: {
+                                            $enumerator.current = System.Array.init(["a" + String.fromCharCode(c) + "b", Bridge.box(2, System.Int32), Bridge.box(1, System.Int32), System.Array.init([98, 0], System.Byte)], System.Object);
+                                                $step = 5;
+                                                return true;
+                                        }
+                                        case 5: {
+                                            $step = 6;
+                                            continue;
+                                        }
+                                        case 6: {
+                                            i = (i + 1) | 0;
+                                            $step = 1;
+                                            continue;
+                                        }
+                                        case 7: {
+                                            // Unicode
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([97, 4660, 98], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), System.Array.init([97, 0, 52, 18, 98, 0], System.Byte)], System.Object);
+                                                $step = 8;
+                                                return true;
+                                        }
+                                        case 8: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([97, 4660, 98], System.Int32)), Bridge.box(1, System.Int32), Bridge.box(1, System.Int32), System.Array.init([52, 18], System.Byte)], System.Object);
+                                                $step = 9;
+                                                return true;
+                                        }
+                                        case 9: {
+                                            // Surrogate pairs
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), System.Array.init([0, 216, 0, 220], System.Byte)], System.Object);
+                                                $step = 10;
+                                                return true;
+                                        }
+                                        case 10: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([97, 55296, 56320, 98], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), System.Array.init([97, 0, 0, 216, 0, 220, 98, 0], System.Byte)], System.Object);
+                                                $step = 11;
+                                                return true;
+                                        }
+                                        case 11: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 56320, 65533, 65207], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), System.Array.init([0, 216, 0, 220, 253, 255, 183, 254], System.Byte)], System.Object);
+                                                $step = 12;
+                                                return true;
+                                        }
+                                        case 12: {
+                                            // Mixture of ASCII and Unicode
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([70, 111, 111, 66, 65, 1024, 82], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(7, System.Int32), System.Array.init([70, 0, 111, 0, 111, 0, 66, 0, 65, 0, 0, 4, 82, 0], System.Byte)], System.Object);
+                                                $step = 13;
+                                                return true;
+                                        }
+                                        case 13: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([192, 110, 105, 109, 97, 768, 108], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(7, System.Int32), System.Array.init([192, 0, 110, 0, 105, 0, 109, 0, 97, 0, 0, 3, 108, 0], System.Byte)], System.Object);
+                                                $step = 14;
+                                                return true;
+                                        }
+                                        case 14: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([84, 101, 115, 116, 55299, 56693, 84, 101, 115, 116], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(10, System.Int32), System.Array.init([84, 0, 101, 0, 115, 0, 116, 0, 3, 216, 117, 221, 84, 0, 101, 0, 115, 0, 116, 0], System.Byte)], System.Object);
+                                                $step = 15;
+                                                return true;
+                                        }
+                                        case 15: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55299, 56693, 55299, 56693, 55299, 56693], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(6, System.Int32), System.Array.init([3, 216, 117, 221, 3, 216, 117, 221, 3, 216, 117, 221], System.Byte)], System.Object);
+                                                $step = 16;
+                                                return true;
+                                        }
+                                        case 16: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([304], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([48, 1], System.Byte)], System.Object);
+                                                $step = 17;
+                                                return true;
+                                        }
+                                        case 17: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([122, 97, 774, 509, 946], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(5, System.Int32), System.Array.init([122, 0, 97, 0, 6, 3, 253, 1, 178, 3], System.Byte)], System.Object);
+                                                $step = 18;
+                                                return true;
+                                        }
+                                        case 18: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([122, 97, 774, 509, 946, 55551, 56575], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(7, System.Int32), System.Array.init([122, 0, 97, 0, 6, 3, 253, 1, 178, 3, 255, 216, 255, 220], System.Byte)], System.Object);
+                                                $step = 19;
+                                                return true;
+                                        }
+                                        case 19: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([122, 97, 774, 509, 946, 55551, 56575], System.Int32)), Bridge.box(4, System.Int32), Bridge.box(3, System.Int32), System.Array.init([178, 3, 255, 216, 255, 220], System.Byte)], System.Object);
+                                                $step = 20;
+                                                return true;
+                                        }
+                                        case 20: {
+                                            // High BMP non-chars
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65533], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([253, 255], System.Byte)], System.Object);
+                                                $step = 21;
+                                                return true;
+                                        }
+                                        case 21: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65534], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([254, 255], System.Byte)], System.Object);
+                                                $step = 22;
+                                                return true;
+                                        }
+                                        case 22: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65535], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([255, 255], System.Byte)], System.Object);
+                                                $step = 23;
+                                                return true;
+                                        }
+                                        case 23: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65535, 65534], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), System.Array.init([255, 255, 254, 255], System.Byte)], System.Object);
+                                                $step = 24;
+                                                return true;
+                                        }
+                                        case 24: {
+                                            // Empty strings
+                                                $enumerator.current = System.Array.init(["", Bridge.box(0, System.Int32), Bridge.box(0, System.Int32), System.Array.init(0, 0, System.Byte)], System.Object);
+                                                $step = 25;
+                                                return true;
+                                        }
+                                        case 25: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([97, 4660, 98], System.Int32)), Bridge.box(3, System.Int32), Bridge.box(0, System.Int32), System.Array.init(0, 0, System.Byte)], System.Object);
+                                                $step = 26;
+                                                return true;
+                                        }
+                                        case 26: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([97, 4660, 98], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(0, System.Int32), System.Array.init(0, 0, System.Byte)], System.Object);
+                                                $step = 27;
+                                                return true;
+                                        }
+                                        case 27: {
+
+                                        }
+                                        default: {
+                                            return false;
+                                        }
+                                    }
+                                }
+                            } catch($async_e1) {
+                                $async_e = System.Exception.create($async_e1);
+                                throw $async_e;
+                            }
+                        }));
+                        return $enumerator;
+                    }));
+                },
+                Encode_InvalidChars_TestData: function () {
+                    return new (Bridge.GeneratorEnumerable$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function ()  {
+                        var $step = 0,
+                            $jumpFromFinally,
+                            $returnValue,
+                            unicodeReplacementBytes1,
+                            unicodeReplacementBytes2,
+                            $async_e;
+
+                        var $enumerator = new (Bridge.GeneratorEnumerator$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function () {
+                            try {
+                                for (;;) {
+                                    switch ($step) {
+                                        case 0: {
+                                            unicodeReplacementBytes1 = System.Array.init([253, 255], System.Byte);
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), unicodeReplacementBytes1], System.Object);
+                                                $step = 1;
+                                                return true;
+                                        }
+                                        case 1: {
+                                            // Lone high surrogate
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), unicodeReplacementBytes1], System.Object);
+                                                $step = 2;
+                                                return true;
+                                        }
+                                        case 2: {
+                                            // Lone low surrogate
+
+                                                // Surrogate pair out of range
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), unicodeReplacementBytes1], System.Object);
+                                                $step = 3;
+                                                return true;
+                                        }
+                                        case 3: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 56320], System.Int32)), Bridge.box(1, System.Int32), Bridge.box(1, System.Int32), unicodeReplacementBytes1], System.Object);
+                                                $step = 4;
+                                                return true;
+                                        }
+                                        case 4: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56319, 57343], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), unicodeReplacementBytes1], System.Object);
+                                                $step = 5;
+                                                return true;
+                                        }
+                                        case 5: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56319, 57343], System.Int32)), Bridge.box(1, System.Int32), Bridge.box(1, System.Int32), unicodeReplacementBytes1], System.Object);
+                                                $step = 6;
+                                                return true;
+                                        }
+                                        case 6: {
+                                            unicodeReplacementBytes2 = System.Array.init([253, 255, 253, 255], System.Byte);
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 55296], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), unicodeReplacementBytes2], System.Object);
+                                                $step = 7;
+                                                return true;
+                                        }
+                                        case 7: {
+                                            // High, high
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56320, 55296], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), unicodeReplacementBytes2], System.Object);
+                                                $step = 8;
+                                                return true;
+                                        }
+                                        case 8: {
+                                            // Low, high
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56320, 56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), unicodeReplacementBytes2], System.Object);
+                                                $step = 9;
+                                                return true;
+                                        }
+                                        case 9: {
+                                            // Low, low
+
+                                                // Mixture of ASCII, valid Unicode and invalid Unicode
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([84, 101, 115, 116, 55299, 84, 101, 115, 116], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(9, System.Int32), System.Array.init([84, 0, 101, 0, 115, 0, 116, 0, 253, 255, 84, 0, 101, 0, 115, 0, 116, 0], System.Byte)], System.Object);
+                                                $step = 10;
+                                                return true;
+                                        }
+                                        case 10: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([84, 101, 115, 116, 56693, 84, 101, 115, 116], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(9, System.Int32), System.Array.init([84, 0, 101, 0, 115, 0, 116, 0, 253, 255, 84, 0, 101, 0, 115, 0, 116, 0], System.Byte)], System.Object);
+                                                $step = 11;
+                                                return true;
+                                        }
+                                        case 11: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([84, 101, 115, 116, 84, 101, 115, 116, 56693], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(9, System.Int32), System.Array.init([84, 0, 101, 0, 115, 0, 116, 0, 84, 0, 101, 0, 115, 0, 116, 0, 253, 255], System.Byte)], System.Object);
+                                                $step = 12;
+                                                return true;
+                                        }
+                                        case 12: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([84, 101, 115, 116, 84, 101, 115, 116, 55299], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(9, System.Int32), System.Array.init([84, 0, 101, 0, 115, 0, 116, 0, 84, 0, 101, 0, 115, 0, 116, 0, 253, 255], System.Byte)], System.Object);
+                                                $step = 13;
+                                                return true;
+                                        }
+                                        case 13: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56693], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([253, 255], System.Byte)], System.Object);
+                                                $step = 14;
+                                                return true;
+                                        }
+                                        case 14: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56693, 56693, 55299, 56693, 56693, 56693, 56693, 55299, 55299, 55299, 56693, 56693, 56693, 56693], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(14, System.Int32), System.Array.init([253, 255, 253, 255, 3, 216, 117, 221, 253, 255, 253, 255, 253, 255, 253, 255, 253, 255, 3, 216, 117, 221, 253, 255, 253, 255, 253, 255], System.Byte)], System.Object);
+                                                $step = 15;
+                                                return true;
+                                        }
+                                        case 15: {
+
+                                        }
+                                        default: {
+                                            return false;
+                                        }
+                                    }
+                                }
+                            } catch($async_e1) {
+                                $async_e = System.Exception.create($async_e1);
+                                throw $async_e;
+                            }
+                        }));
+                        return $enumerator;
+                    }));
+                },
+                GetBigEndianBytes: function (littleEndianBytes) {
+                    var bigEndianBytes = Bridge.cast(System.Array.clone(littleEndianBytes), System.Array.type(System.Byte));
+                    for (var i = 0; i < bigEndianBytes.length; i = (i + 2) | 0) {
+                        var b1 = bigEndianBytes[System.Array.index(i, bigEndianBytes)];
+                        var b2 = bigEndianBytes[System.Array.index(((i + 1) | 0), bigEndianBytes)];
+
+                        bigEndianBytes[System.Array.index(i, bigEndianBytes)] = b2;
+                        bigEndianBytes[System.Array.index(((i + 1) | 0), bigEndianBytes)] = b1;
+                    }
+                    return bigEndianBytes;
+                }
+            }
+        },
+        methods: {
+            Encode: function () {
+                var $t;
+                $t = Bridge.getEnumerator(Bridge.ClientTest.Text.UnicodeEncodingEncodeTests.Encode_TestData(), System.Array.type(System.Object));
+                try {
+                    while ($t.moveNext()) {
+                        var objectse = $t.Current;
+                        var source = Bridge.cast(objectse[System.Array.index(0, objectse)], System.String);
+                        var index = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(1, objectse)]), System.Int32));
+                        var count = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(2, objectse)]), System.Int32));
+                        var expectedLittleEndian = Bridge.cast(objectse[System.Array.index(3, objectse)], System.Array.type(System.Byte));
+
+                        var expectedBigEndian = Bridge.ClientTest.Text.UnicodeEncodingEncodeTests.GetBigEndianBytes(expectedLittleEndian);
+
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding(false, true, false), source, index, count, expectedLittleEndian);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding(false, false, false), source, index, count, expectedLittleEndian);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding(true, true, false), source, index, count, expectedBigEndian);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding(true, false, false), source, index, count, expectedBigEndian);
+
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding(false, true, true), source, index, count, expectedLittleEndian);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding(false, false, true), source, index, count, expectedLittleEndian);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding(true, true, true), source, index, count, expectedBigEndian);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding(true, false, true), source, index, count, expectedBigEndian);
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }
+
+            },
+            Encode_InvalidChars: function () {
+                var $t;
+                $t = Bridge.getEnumerator(Bridge.ClientTest.Text.UnicodeEncodingEncodeTests.Encode_InvalidChars_TestData(), System.Array.type(System.Object));
+                try {
+                    while ($t.moveNext()) {
+                        var objectse = $t.Current;
+                        var source = Bridge.cast(objectse[System.Array.index(0, objectse)], System.String);
+                        var index = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(1, objectse)]), System.Int32));
+                        var count = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(2, objectse)]), System.Int32));
+                        var expectedLittleEndian = Bridge.cast(objectse[System.Array.index(3, objectse)], System.Array.type(System.Byte));
+
+                        var expectedBigEndian = Bridge.ClientTest.Text.UnicodeEncodingEncodeTests.GetBigEndianBytes(expectedLittleEndian);
+
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding(false, true, false), source, index, count, expectedLittleEndian);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding(false, false, false), source, index, count, expectedLittleEndian);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding(true, true, false), source, index, count, expectedBigEndian);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding(true, false, false), source, index, count, expectedBigEndian);
+
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UnicodeEncoding(false, true, true), source, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UnicodeEncoding(false, false, true), source, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UnicodeEncoding(true, true, true), source, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UnicodeEncoding(true, false, true), source, index, count);
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }}
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Text.UnicodeEncodingGetMaxTests", {
+        methods: {
+            GetMaxByteCount: function () {
+                var $t;
+                var data = System.Array.init([0, 1, 1073741822], System.Int32);
+                $t = Bridge.getEnumerator(data);
+                try {
+                    while ($t.moveNext()) {
+                        var charCount = $t.Current;
+                        var expected = Bridge.Int.mul((((charCount + 1) | 0)), 2);
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(false, true, false).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(false, false, false).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(true, true, false).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(true, false, false).getMaxByteCount(charCount));
+
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(false, true, true).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(false, false, true).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(true, true, true).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(true, false, true).getMaxByteCount(charCount));
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }},
+            GetMaxCharCount: function () {
+                var $t;
+                var data = $asm.$.Bridge.ClientTest.Text.UnicodeEncodingGetMaxTests.f1(new (System.Collections.Generic.Dictionary$2(System.Int32,System.Int32))());
+                $t = Bridge.getEnumerator(data);
+                try {
+                    while ($t.moveNext()) {
+                        var pair = $t.Current;
+                        var byteCount = pair.key;
+                        var expected = pair.value;
+
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(false, true, false).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(false, false, false).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(true, true, false).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(true, false, false).getMaxCharCount(byteCount));
+
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(false, true, true).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(false, false, true).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(true, true, true).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(true, false, true).getMaxCharCount(byteCount));
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }}
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Text.UnicodeEncodingGetMaxTests", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Text.UnicodeEncodingGetMaxTests, {
+        f1: function (_o18) {
+            _o18.add(0, 1);
+            _o18.add(1, 2);
+            _o18.add(10, 6);
+            _o18.add(2147483647, 1073741825);
+            return _o18;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Text.UTF32EncodingDecodeTests", {
+        statics: {
+            methods: {
+                Decode_TestData: function () {
+                    var list = new (System.Collections.Generic.List$1(System.Array.type(System.Object)))();
+                    // All ASCII chars
+                    for (var c = 0; c <= 255; c = (c + 1) & 65535) {
+                        list.add(System.Array.init([System.Array.init([(c & 255), 0, 0, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), String.fromCharCode(c)], System.Object));
+                        list.add(System.Array.init([System.Array.init([97, 0, 0, 0, (c & 255), 0, 0, 0, 98, 0, 0, 0], System.Byte), Bridge.box(4, System.Int32), Bridge.box(4, System.Int32), String.fromCharCode(c)], System.Object));
+                        list.add(System.Array.init([System.Array.init([97, 0, 0, 0, (c & 255), 0, 0, 0, 98, 0, 0, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(12, System.Int32), System.String.concat("a", String.fromCharCode(c), "b")], System.Object));
+                    }
+
+                    // Surrogate pairs
+                    list.add(System.Array.init([System.Array.init([0, 0, 1, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 56320], System.Int32))], System.Object));
+                    list.add(System.Array.init([System.Array.init([97, 0, 0, 0, 0, 0, 1, 0, 98, 0, 0, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(12, System.Int32), System.String.concat("a", Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 56320], System.Int32)), "b")], System.Object));
+
+                    list.add(System.Array.init([System.Array.init([0, 0, 1, 0, 255, 255, 16, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(8, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 56320, 56319, 57343], System.Int32))], System.Object));
+
+                    // Mixture of ASCII and Unciode
+                    list.add(System.Array.init([System.Array.init([70, 0, 0, 0, 111, 0, 0, 0, 111, 0, 0, 0, 66, 0, 0, 0, 65, 0, 0, 0, 0, 4, 0, 0, 82, 0, 0, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(28, System.Int32), System.String.concat("FooBA", Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([1024], System.Int32)), "R")], System.Object));
+
+                    // U+FDD0 - U+FDEF
+                    list.add(System.Array.init([System.Array.init([208, 253, 0, 0, 239, 253, 0, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(8, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([64976, 65007], System.Int32))], System.Object));
+                    list.add(System.Array.init([System.Array.init([208, 253, 0, 0, 239, 253, 0, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(8, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([64976, 65007], System.Int32))], System.Object));
+
+                    // High BMP non-chars: U+FFFF, U+FFFE, U+FFFD
+                    list.add(System.Array.init([System.Array.init([253, 255, 0, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65533], System.Int32))], System.Object));
+                    list.add(System.Array.init([System.Array.init([254, 255, 0, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65534], System.Int32))], System.Object));
+                    list.add(System.Array.init([System.Array.init([255, 255, 0, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65535], System.Int32))], System.Object));
+                    list.add(System.Array.init([System.Array.init([255, 255, 0, 0, 254, 255, 0, 0, 253, 255, 0, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(12, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65535, 65534, 65533], System.Int32))], System.Object));
+
+                    // Empty strings
+                    list.add(System.Array.init([System.Array.init(0, 0, System.Byte), Bridge.box(0, System.Int32), Bridge.box(0, System.Int32), ""], System.Object));
+                    list.add(System.Array.init([System.Array.init(10, 0, System.Byte), Bridge.box(10, System.Int32), Bridge.box(0, System.Int32), ""], System.Object));
+
+                    return list;
+                },
+                Decode_InvalidBytes_TestData: function () {
+                    var list = new (System.Collections.Generic.List$1(System.Array.type(System.Object)))();
+                    list.add(System.Array.init([System.Array.init([123], System.Byte), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65533], System.Int32))], System.Object));
+                    list.add(System.Array.init([System.Array.init([123, 123], System.Byte), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65533], System.Int32))], System.Object));
+                    list.add(System.Array.init([System.Array.init([123, 123, 123], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65533], System.Int32))], System.Object));
+                    list.add(System.Array.init([System.Array.init([123, 123, 123, 123], System.Byte), Bridge.box(1, System.Int32), Bridge.box(3, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65533], System.Int32))], System.Object));
+                    list.add(System.Array.init([System.Array.init([97, 0, 0, 0, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(5, System.Int32), System.String.concat("a", Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65533], System.Int32)))], System.Object));
+                    list.add(System.Array.init([System.Array.init([255, 219, 0, 0, 255, 223, 0, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(8, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65533, 65533], System.Int32))], System.Object));
+                    list.add(System.Array.init([System.Array.init([255, 219, 0, 0, 255, 223, 0, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65533], System.Int32))], System.Object));
+                    list.add(System.Array.init([System.Array.init([255, 219, 0, 0, 255, 223, 0, 0], System.Byte), Bridge.box(4, System.Int32), Bridge.box(4, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65533], System.Int32))], System.Object));
+                    list.add(System.Array.init([System.Array.init([0, 216, 0, 0, 0, 220, 0, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(8, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65533, 65533], System.Int32))], System.Object));
+                    list.add(System.Array.init([System.Array.init([255, 219, 0, 0, 253, 255, 0, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(8, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65533, 65533], System.Int32))], System.Object));
+                    list.add(System.Array.init([System.Array.init([0, 128, 0, 0, 255, 223, 0, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(8, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([32768, 65533], System.Int32))], System.Object));
+                    list.add(System.Array.init([System.Array.init([255, 255, 17, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65533], System.Int32))], System.Object));
+                    list.add(System.Array.init([System.Array.init([0, 0, 17, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65533], System.Int32))], System.Object));
+                    list.add(System.Array.init([System.Array.init([0, 0, 0, 1], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65533], System.Int32))], System.Object));
+                    list.add(System.Array.init([System.Array.init([255, 255, 16, 1], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65533], System.Int32))], System.Object));
+                    list.add(System.Array.init([System.Array.init([0, 0, 0, 255], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65533], System.Int32))], System.Object));
+                    list.add(System.Array.init([System.Array.init([255, 255, 255, 255], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65533], System.Int32))], System.Object));
+                    return list;
+                },
+                GetBigEndianBytes: function (littleEndianBytes, index, count) {
+                    var bytes = System.Array.init(littleEndianBytes.length, 0, System.Byte);
+
+                    var i;
+                    for (i = index; ((i + 3) | 0) < ((index + count) | 0); i = (i + 4) | 0) {
+                        bytes[System.Array.index(i, bytes)] = littleEndianBytes[System.Array.index(((i + 3) | 0), littleEndianBytes)];
+                        bytes[System.Array.index(((i + 1) | 0), bytes)] = littleEndianBytes[System.Array.index(((i + 2) | 0), littleEndianBytes)];
+                        bytes[System.Array.index(((i + 2) | 0), bytes)] = littleEndianBytes[System.Array.index(((i + 1) | 0), littleEndianBytes)];
+                        bytes[System.Array.index(((i + 3) | 0), bytes)] = littleEndianBytes[System.Array.index(i, littleEndianBytes)];
+                    }
+
+                    // Invalid byte arrays may not have a multiple of 4 length
+                    // Since they are invalid in both big and little endian orderings,
+                    // we don't need to convert the ordering.
+                    for (; i < ((index + count) | 0); i = (i + 1) | 0) {
+                        bytes[System.Array.index(i, bytes)] = littleEndianBytes[System.Array.index(i, littleEndianBytes)];
+                    }
+
+                    return bytes;
+                }
+            }
+        },
+        methods: {
+            Decode: function () {
+                var $t;
+                $t = Bridge.getEnumerator(Bridge.ClientTest.Text.UTF32EncodingDecodeTests.Decode_TestData(), System.Array.type(System.Object));
+                try {
+                    while ($t.moveNext()) {
+                        var objectse = $t.Current;
+                        var littleEndianBytes = Bridge.as(objectse[System.Array.index(0, objectse)], System.Array.type(System.Byte));
+                        var index = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(1, objectse)]), System.Int32));
+                        var count = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(2, objectse)]), System.Int32));
+                        var expected = Bridge.as(objectse[System.Array.index(3, objectse)], System.String);
+
+                        var bigEndianBytes = Bridge.ClientTest.Text.UTF32EncodingDecodeTests.GetBigEndianBytes(littleEndianBytes, index, count);
+
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding(true, true, false), bigEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding(true, false, false), bigEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding(false, true, false), littleEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding(false, false, false), littleEndianBytes, index, count, expected);
+
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding(true, true, true), bigEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding(true, false, true), bigEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding(false, true, true), littleEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding(false, false, true), littleEndianBytes, index, count, expected);
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }},
+            Decode_InvalidBytes: function () {
+                var $t;
+                $t = Bridge.getEnumerator(Bridge.ClientTest.Text.UTF32EncodingDecodeTests.Decode_InvalidBytes_TestData(), System.Array.type(System.Object));
+                try {
+                    while ($t.moveNext()) {
+                        var objectse = $t.Current;
+                        var littleEndianBytes = Bridge.as(objectse[System.Array.index(0, objectse)], System.Array.type(System.Byte));
+                        var index = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(1, objectse)]), System.Int32));
+                        var count = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(2, objectse)]), System.Int32));
+                        var expected = Bridge.as(objectse[System.Array.index(3, objectse)], System.String);
+
+                        var bigEndianBytes = Bridge.ClientTest.Text.UTF32EncodingDecodeTests.GetBigEndianBytes(littleEndianBytes, index, count);
+
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding(true, true, false), bigEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding(true, false, false), bigEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding(false, true, false), littleEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding(false, false, false), littleEndianBytes, index, count, expected);
+
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UTF32Encoding(true, true, true), bigEndianBytes, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UTF32Encoding(true, false, true), bigEndianBytes, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UTF32Encoding(false, true, true), littleEndianBytes, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UTF32Encoding(false, false, true), littleEndianBytes, index, count);
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }}
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Text.UTF32EncodingEncodeTests", {
+        statics: {
+            methods: {
+                Encode_TestData: function () {
+                    var list = new (System.Collections.Generic.List$1(System.Array.type(System.Object)))();
+                    // All ASCII chars
+                    for (var c = 0; c <= 255; c = (c + 1) & 65535) {
+                        list.add(System.Array.init([String.fromCharCode(c), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([(c & 255), 0, 0, 0], System.Byte)], System.Object));
+                        list.add(System.Array.init([System.String.concat("a", String.fromCharCode(c), "b"), Bridge.box(1, System.Int32), Bridge.box(1, System.Int32), System.Array.init([(c & 255), 0, 0, 0], System.Byte)], System.Object));
+                        list.add(System.Array.init([System.String.concat("a", String.fromCharCode(c), "b"), Bridge.box(2, System.Int32), Bridge.box(1, System.Int32), System.Array.init([98, 0, 0, 0], System.Byte)], System.Object));
+                        list.add(System.Array.init([System.String.concat("a", String.fromCharCode(c), "b"), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), System.Array.init([97, 0, 0, 0, (c & 255), 0, 0, 0, 98, 0, 0, 0], System.Byte)], System.Object));
+                    }
+
+                    // Surrogate pairs
+                    list.add(System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), System.Array.init([0, 0, 1, 0], System.Byte)], System.Object));
+                    list.add(System.Array.init([System.String.concat("a", Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 56320], System.Int32)), "b"), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), System.Array.init([97, 0, 0, 0, 0, 0, 1, 0, 98, 0, 0, 0], System.Byte)], System.Object));
+
+                    list.add(System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 57343], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), System.Array.init([255, 3, 1, 0], System.Byte)], System.Object));
+                    list.add(System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56319, 56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), System.Array.init([0, 252, 16, 0], System.Byte)], System.Object));
+                    list.add(System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56319, 57343], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), System.Array.init([255, 255, 16, 0], System.Byte)], System.Object));
+
+                    // Mixture of ASCII and Unciode
+                    list.add(System.Array.init([System.String.concat("FooBA", Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([1024], System.Int32)), "R"), Bridge.box(0, System.Int32), Bridge.box(7, System.Int32), System.Array.init([70, 0, 0, 0, 111, 0, 0, 0, 111, 0, 0, 0, 66, 0, 0, 0, 65, 0, 0, 0, 0, 4, 0, 0, 82, 0, 0, 0], System.Byte)], System.Object));
+
+                    // High BMP non-chars: U+FFFF, U+FFFE, U+FFFD
+                    list.add(System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65533], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([253, 255, 0, 0], System.Byte)], System.Object));
+                    list.add(System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65534], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([254, 255, 0, 0], System.Byte)], System.Object));
+                    list.add(System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65535], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([255, 255, 0, 0], System.Byte)], System.Object));
+                    list.add(System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65535, 65534, 65533], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), System.Array.init([255, 255, 0, 0, 254, 255, 0, 0, 253, 255, 0, 0], System.Byte)], System.Object));
+
+                    // Empty strings
+                    list.add(System.Array.init(["abc", Bridge.box(3, System.Int32), Bridge.box(0, System.Int32), System.Array.init(0, 0, System.Byte)], System.Object));
+                    list.add(System.Array.init(["abc", Bridge.box(0, System.Int32), Bridge.box(0, System.Int32), System.Array.init(0, 0, System.Byte)], System.Object));
+                    list.add(System.Array.init(["", Bridge.box(0, System.Int32), Bridge.box(0, System.Int32), System.Array.init(0, 0, System.Byte)], System.Object));
+
+                    return list;
+                },
+                Encode_InvalidChars_TestData: function () {
+                    var list = new (System.Collections.Generic.List$1(System.Array.type(System.Object)))();
+
+                    var unicodeReplacementBytes1 = System.Array.init([253, 255, 0, 0], System.Byte);
+                    list.add(System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), unicodeReplacementBytes1], System.Object)); // Lone high surrogate
+                    list.add(System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56693], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), unicodeReplacementBytes1], System.Object)); // Lone high surrogate
+                    list.add(System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), unicodeReplacementBytes1], System.Object)); // Lone low surrogate
+                    list.add(System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), unicodeReplacementBytes1], System.Object)); // Surrogate pair out of range
+                    list.add(System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 56320], System.Int32)), Bridge.box(1, System.Int32), Bridge.box(1, System.Int32), unicodeReplacementBytes1], System.Object)); // Surrogate pair out of range
+
+                    var unicodeReplacementBytes2 = System.Array.init([253, 255, 0, 0, 253, 255, 0, 0], System.Byte);
+                    list.add(System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 55296], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), unicodeReplacementBytes2], System.Object)); // High, high
+                    list.add(System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56320, 55296], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), unicodeReplacementBytes2], System.Object)); // Low, high
+                    list.add(System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56320, 56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), unicodeReplacementBytes2], System.Object)); // Low, low
+
+                    // Invalid first/second in surrogate pair
+                    list.add(System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 65], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), System.Array.init([253, 255, 0, 0, 65, 0, 0, 0], System.Byte)], System.Object));
+                    list.add(System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([101, 56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), System.Array.init([101, 0, 0, 0, 253, 255, 0, 0], System.Byte)], System.Object));
+
+                    return list;
+                },
+                GetBigEndianBytes: function (littleEndianBytes) {
+                    var bigEndianBytes = Bridge.cast(System.Array.clone(littleEndianBytes), System.Array.type(System.Byte));
+                    for (var i = 0; i < littleEndianBytes.length; i = (i + 4) | 0) {
+                        var b1 = bigEndianBytes[System.Array.index(i, bigEndianBytes)];
+                        var b2 = bigEndianBytes[System.Array.index(((i + 1) | 0), bigEndianBytes)];
+                        var b3 = bigEndianBytes[System.Array.index(((i + 2) | 0), bigEndianBytes)];
+                        var b4 = bigEndianBytes[System.Array.index(((i + 3) | 0), bigEndianBytes)];
+
+                        bigEndianBytes[System.Array.index(i, bigEndianBytes)] = b4;
+                        bigEndianBytes[System.Array.index(((i + 1) | 0), bigEndianBytes)] = b3;
+                        bigEndianBytes[System.Array.index(((i + 2) | 0), bigEndianBytes)] = b2;
+                        bigEndianBytes[System.Array.index(((i + 3) | 0), bigEndianBytes)] = b1;
+                    }
+                    return bigEndianBytes;
+                }
+            }
+        },
+        methods: {
+            Encode: function () {
+                var $t;
+                $t = Bridge.getEnumerator(Bridge.ClientTest.Text.UTF32EncodingEncodeTests.Encode_TestData(), System.Array.type(System.Object));
+                try {
+                    while ($t.moveNext()) {
+                        var objectse = $t.Current;
+                        var chars = Bridge.as(objectse[System.Array.index(0, objectse)], System.String);
+                        var index = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(1, objectse)]), System.Int32));
+                        var count = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(2, objectse)]), System.Int32));
+                        var littleEndianExpected = Bridge.as(objectse[System.Array.index(3, objectse)], System.Array.type(System.Byte));
+
+                        var bigEndianExpected = Bridge.ClientTest.Text.UTF32EncodingEncodeTests.GetBigEndianBytes(littleEndianExpected);
+
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding(true, true, false), chars, index, count, bigEndianExpected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding(true, false, false), chars, index, count, bigEndianExpected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding(false, true, false), chars, index, count, littleEndianExpected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding(false, false, false), chars, index, count, littleEndianExpected);
+
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding(true, true, true), chars, index, count, bigEndianExpected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding(true, false, true), chars, index, count, bigEndianExpected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding(false, true, true), chars, index, count, littleEndianExpected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding(false, false, true), chars, index, count, littleEndianExpected);
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }},
+            Encode_InvalidChars: function () {
+                var $t;
+                $t = Bridge.getEnumerator(Bridge.ClientTest.Text.UTF32EncodingEncodeTests.Encode_InvalidChars_TestData(), System.Array.type(System.Object));
+                try {
+                    while ($t.moveNext()) {
+                        var objectse = $t.Current;
+                        var chars = Bridge.as(objectse[System.Array.index(0, objectse)], System.String);
+                        var index = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(1, objectse)]), System.Int32));
+                        var count = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(2, objectse)]), System.Int32));
+                        var littleEndianExpected = Bridge.as(objectse[System.Array.index(3, objectse)], System.Array.type(System.Byte));
+
+                        var bigEndianExpected = Bridge.ClientTest.Text.UTF32EncodingEncodeTests.GetBigEndianBytes(littleEndianExpected);
+
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding(true, true, false), chars, index, count, bigEndianExpected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding(true, false, false), chars, index, count, bigEndianExpected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding(false, true, false), chars, index, count, littleEndianExpected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding(false, false, false), chars, index, count, littleEndianExpected);
+
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UTF32Encoding(true, true, true), chars, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UTF32Encoding(true, false, true), chars, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UTF32Encoding(false, true, true), chars, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UTF32Encoding(false, false, true), chars, index, count);
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }}
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Text.UTF32EncodingGetMaxTests", {
+        methods: {
+            GetMaxByteCount: function () {
+                var $t;
+                var data = System.Array.init([0, 1, 2, 4, 10, 268435455, 536870910], System.Int32);
+                $t = Bridge.getEnumerator(data);
+                try {
+                    while ($t.moveNext()) {
+                        var charCount = $t.Current;
+                        var expected = Bridge.Int.mul((((charCount + 1) | 0)), 4);
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(true, false, false).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(true, true, false).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(true, false, true).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(true, true, true).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(false, true, true).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(false, true, false).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(false, false, true).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(false, false, false).getMaxByteCount(charCount));
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }},
+            GetMaxCharCount: function () {
+                var $t;
+                var data = $asm.$.Bridge.ClientTest.Text.UTF32EncodingGetMaxTests.f1(new (System.Collections.Generic.Dictionary$2(System.Int32,System.Int32))());
+                $t = Bridge.getEnumerator(data);
+                try {
+                    while ($t.moveNext()) {
+                        var pair = $t.Current;
+                        var byteCount = pair.key;
+                        var expected = pair.value;
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(true, false, false).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(true, true, false).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(true, false, true).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(true, true, true).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(false, true, true).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(false, true, false).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(false, false, true).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(false, false, false).getMaxCharCount(byteCount));
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }}
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Text.UTF32EncodingGetMaxTests", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Text.UTF32EncodingGetMaxTests, {
+        f1: function (_o19) {
+            _o19.add(0, 2);
+            _o19.add(1, 2);
+            _o19.add(2, 3);
+            _o19.add(3, 3);
+            _o19.add(4, 4);
+            _o19.add(5, 4);
+            _o19.add(6, 5);
+            _o19.add(7, 5);
+            _o19.add(8, 6);
+            _o19.add(9, 6);
+            _o19.add(10, 7);
+            _o19.add(11, 7);
+            _o19.add(12, 8);
+            _o19.add(13, 8);
+            _o19.add(14, 9);
+            _o19.add(2147483647, 1073741825);
+            return _o19;
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Text.UTF7EncodingDecodeTests", {
+        statics: {
+            methods: {
+                Decode_TestData: function () {
+                    return new (Bridge.GeneratorEnumerable$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function ()  {
+                        var $step = 0,
+                            $jumpFromFinally,
+                            $returnValue,
+                            i,
+                            c,
+                            $async_e;
+
+                        var $enumerator = new (Bridge.GeneratorEnumerator$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function () {
+                            try {
+                                for (;;) {
+                                    switch ($step) {
+                                        case 0: {
+                                            // All ASCII chars
+                                                i = 0;
+                                                $step = 1;
+                                                continue;
+                                        }
+                                        case 1: {
+                                            if ( i <= 255 ) {
+                                                    $step = 2;
+                                                    continue;
+                                                }
+                                            $step = 8;
+                                            continue;
+                                        }
+                                        case 2: {
+                                            c = i & 65535;
+                                                if (c === 43) {
+                                                    $step = 7;
+                                                    continue;
+                                                }
+                                                $enumerator.current = System.Array.init([System.Array.init([(c & 255)], System.Byte), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), String.fromCharCode(c)], System.Object);
+                                                $step = 3;
+                                                return true;
+                                        }
+                                        case 3: {
+                                            $enumerator.current = System.Array.init([System.Array.init([97, (c & 255), 98], System.Byte), Bridge.box(1, System.Int32), Bridge.box(1, System.Int32), String.fromCharCode(c)], System.Object);
+                                                $step = 4;
+                                                return true;
+                                        }
+                                        case 4: {
+                                            $enumerator.current = System.Array.init([System.Array.init([97, (c & 255), 98], System.Byte), Bridge.box(2, System.Int32), Bridge.box(1, System.Int32), "b"], System.Object);
+                                                $step = 5;
+                                                return true;
+                                        }
+                                        case 5: {
+                                            $enumerator.current = System.Array.init([System.Array.init([97, (c & 255), 98], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), System.String.concat("a", String.fromCharCode(c), "b")], System.Object);
+                                                $step = 6;
+                                                return true;
+                                        }
+                                        case 6: {
+                                            $step = 7;
+                                            continue;
+                                        }
+                                        case 7: {
+                                            i = (i + 1) | 0;
+                                            $step = 1;
+                                            continue;
+                                        }
+                                        case 8: {
+                                            // Plus
+                                                $enumerator.current = System.Array.init([System.Array.init([43], System.Byte), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), ""], System.Object);
+                                                $step = 9;
+                                                return true;
+                                        }
+                                        case 9: {
+                                            $enumerator.current = System.Array.init([System.Array.init([43, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), "+"], System.Object);
+                                                $step = 10;
+                                                return true;
+                                        }
+                                        case 10: {
+                                            $enumerator.current = System.Array.init([System.Array.init([43, 45, 65], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "+A"], System.Object);
+                                                $step = 11;
+                                                return true;
+                                        }
+                                        case 11: {
+                                            $enumerator.current = System.Array.init([System.Array.init([43, 45, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "+-"], System.Object);
+                                                $step = 12;
+                                                return true;
+                                        }
+                                        case 12: {
+                                            // UTF7 code points can be represented in different sequences of bytes
+                                                $enumerator.current = System.Array.init([System.Array.init([65, 9, 13, 10, 32, 47, 122], System.Byte), Bridge.box(0, System.Int32), Bridge.box(7, System.Int32), "A\t\r\n /z"], System.Object);
+                                                $step = 13;
+                                                return true;
+                                        }
+                                        case 13: {
+                                            $enumerator.current = System.Array.init([System.Array.init([43, 65, 69, 69, 65, 67, 81], System.Byte), Bridge.box(0, System.Int32), Bridge.box(7, System.Int32), "A\t"], System.Object);
+                                                $step = 14;
+                                                return true;
+                                        }
+                                        case 14: {
+                                            $enumerator.current = System.Array.init([System.Array.init([43, 9], System.Byte), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), "\t"], System.Object);
+                                                $step = 15;
+                                                return true;
+                                        }
+                                        case 15: {
+                                            $enumerator.current = System.Array.init([System.Array.init([43, 9, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "\t-"], System.Object);
+                                                $step = 16;
+                                                return true;
+                                        }
+                                        case 16: {
+                                            $enumerator.current = System.Array.init([System.Array.init([43, 30, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), System.String.concat(Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([30], System.Int32)), "-")], System.Object);
+                                                $step = 17;
+                                                return true;
+                                        }
+                                        case 17: {
+                                            $enumerator.current = System.Array.init([System.Array.init([43, 127, 30, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), System.String.concat(Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([127, 30], System.Int32)), "-")], System.Object);
+                                                $step = 18;
+                                                return true;
+                                        }
+                                        case 18: {
+                                            $enumerator.current = System.Array.init([System.Array.init([30], System.Byte), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([30], System.Int32))], System.Object);
+                                                $step = 19;
+                                                return true;
+                                        }
+                                        case 19: {
+                                            $enumerator.current = System.Array.init([System.Array.init([33], System.Byte), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), "!"], System.Object);
+                                                $step = 20;
+                                                return true;
+                                        }
+                                        case 20: {
+                                            $enumerator.current = System.Array.init([System.Array.init([43, 33, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "!-"], System.Object);
+                                                $step = 21;
+                                                return true;
+                                        }
+                                        case 21: {
+                                            $enumerator.current = System.Array.init([System.Array.init([43, 33, 65, 65, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(5, System.Int32), "!AA-"], System.Object);
+                                                $step = 22;
+                                                return true;
+                                        }
+                                        case 22: {
+                                            $enumerator.current = System.Array.init([System.Array.init([43, 128, 129, 130, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(5, System.Int32), System.String.concat(Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([128, 129, 130], System.Int32)), "-")], System.Object);
+                                                $step = 23;
+                                                return true;
+                                        }
+                                        case 23: {
+                                            $enumerator.current = System.Array.init([System.Array.init([43, 128, 129, 130, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([128, 129, 130], System.Int32))], System.Object);
+                                                $step = 24;
+                                                return true;
+                                        }
+                                        case 24: {
+                                            $enumerator.current = System.Array.init([System.Array.init([128, 129], System.Byte), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([128, 129], System.Int32))], System.Object);
+                                                $step = 25;
+                                                return true;
+                                        }
+                                        case 25: {
+                                            $enumerator.current = System.Array.init([System.Array.init([43, 128, 33, 128, 33, 30, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(7, System.Int32), System.String.concat(Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([128], System.Int32)), "!", Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([128], System.Int32)), "!\u001e-")], System.Object);
+                                                $step = 26;
+                                                return true;
+                                        }
+                                        case 26: {
+                                            // Exclamation mark
+                                                $enumerator.current = System.Array.init([System.Array.init([43, 65, 67, 69, 65, 102, 81], System.Byte), Bridge.box(0, System.Int32), Bridge.box(7, System.Int32), "!}"], System.Object);
+                                                $step = 27;
+                                                return true;
+                                        }
+                                        case 27: {
+                                            $enumerator.current = System.Array.init([System.Array.init([43, 65, 67, 69, 65, 102, 81, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(8, System.Int32), "!}"], System.Object);
+                                                $step = 28;
+                                                return true;
+                                        }
+                                        case 28: {
+                                            $enumerator.current = System.Array.init([System.Array.init([33, 125], System.Byte), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), "!}"], System.Object);
+                                                $step = 29;
+                                                return true;
+                                        }
+                                        case 29: {
+                                            $enumerator.current = System.Array.init([System.Array.init([43, 65, 67, 69, 65, 102, 81, 45], System.Byte), Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), "AC"], System.Object);
+                                                $step = 30;
+                                                return true;
+                                        }
+                                        case 30: {
+                                            $enumerator.current = System.Array.init([System.Array.init([43, 65, 67, 69, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(5, System.Int32), "!"], System.Object);
+                                                $step = 31;
+                                                return true;
+                                        }
+                                        case 31: {
+                                            $enumerator.current = System.Array.init([System.Array.init([43, 65, 67, 69, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), ""], System.Object);
+                                                $step = 32;
+                                                return true;
+                                        }
+                                        case 32: {
+                                            $enumerator.current = System.Array.init([System.Array.init([43, 65, 67, 69, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), ""], System.Object);
+                                                $step = 33;
+                                                return true;
+                                        }
+                                        case 33: {
+                                            $enumerator.current = System.Array.init([System.Array.init([43, 65, 67, 72, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(5, System.Int32), "!"], System.Object);
+                                                $step = 34;
+                                                return true;
+                                        }
+                                        case 34: {
+                                            // Unicode
+                                                $enumerator.current = System.Array.init([System.Array.init([43, 68, 108, 107, 70, 48, 81, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(8, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([3673, 1489], System.Int32))], System.Object);
+                                                $step = 35;
+                                                return true;
+                                        }
+                                        case 35: {
+                                            $enumerator.current = System.Array.init([System.Array.init([43, 68, 108, 107, 70, 48, 81], System.Byte), Bridge.box(0, System.Int32), Bridge.box(7, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([3673, 1489], System.Int32))], System.Object);
+                                                $step = 36;
+                                                return true;
+                                        }
+                                        case 36: {
+                                            $enumerator.current = System.Array.init([System.Array.init([65, 43, 65, 67, 69, 65, 102, 81, 45, 9, 43, 68, 108, 107, 70, 48, 81], System.Byte), Bridge.box(0, System.Int32), Bridge.box(17, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65, 33, 125, 9, 3673, 1489], System.Int32))], System.Object);
+                                                $step = 37;
+                                                return true;
+                                        }
+                                        case 37: {
+                                            $enumerator.current = System.Array.init([System.Array.init([65, 43, 65, 67, 69, 65, 102, 81, 45, 9, 43, 68, 108, 107, 70, 48, 81, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(18, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65, 33, 125, 9, 3673, 1489], System.Int32))], System.Object);
+                                                $step = 38;
+                                                return true;
+                                        }
+                                        case 38: {
+                                            $enumerator.current = System.Array.init([System.Array.init([65, 33, 125, 9, 43, 68, 108, 107, 70, 48, 81, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(12, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65, 33, 125, 9, 3673, 1489], System.Int32))], System.Object);
+                                                $step = 39;
+                                                return true;
+                                        }
+                                        case 39: {
+                                            $enumerator.current = System.Array.init([System.Array.init([65, 33, 125, 9, 43, 68, 108, 107, 70, 48, 81], System.Byte), Bridge.box(0, System.Int32), Bridge.box(11, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65, 33, 125, 9, 3673, 1489], System.Int32))], System.Object);
+                                                $step = 40;
+                                                return true;
+                                        }
+                                        case 40: {
+                                            //TODO: this test case is failed, need to fix it
+                                                //yield return new object[] { new byte[] { 0x2B, 0x2B, 0x41, 0x41, 0x2D }, 0, 5, EncodingHelpers.ToString(new int[] { 0xF800 }) };
+                                                $enumerator.current = System.Array.init([System.Array.init([43, 65, 67, 72, 53, 65, 65, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(8, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([33, 63744], System.Int32))], System.Object);
+                                                $step = 41;
+                                                return true;
+                                        }
+                                        case 41: {
+                                            $enumerator.current = System.Array.init([System.Array.init([43, 65, 67, 72, 53, 65, 65, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), "!"], System.Object);
+                                                $step = 42;
+                                                return true;
+                                        }
+                                        case 42: {
+                                            // Surrogate pairs
+                                                $enumerator.current = System.Array.init([System.Array.init([43, 50, 65, 68, 102, 47, 119, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(8, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 57343], System.Int32))], System.Object);
+                                                $step = 43;
+                                                return true;
+                                        }
+                                        case 43: {
+                                            // Invalid Unicode
+                                                $enumerator.current = System.Array.init([System.Array.init([43, 50, 65, 65, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(5, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296], System.Int32))], System.Object);
+                                                $step = 44;
+                                                return true;
+                                        }
+                                        case 44: {
+                                            // Lone high surrogate
+                                                $enumerator.current = System.Array.init([System.Array.init([43, 51, 65, 65, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(5, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56320], System.Int32))], System.Object);
+                                                $step = 45;
+                                                return true;
+                                        }
+                                        case 45: {
+                                            // Lone low surrogate
+                                                $enumerator.current = System.Array.init([System.Array.init([43, 51, 47, 56, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(5, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([57343], System.Int32))], System.Object);
+                                                $step = 46;
+                                                return true;
+                                        }
+                                        case 46: {
+                                            // Lone low surrogate
+
+                                                $enumerator.current = System.Array.init([System.Array.init([43, 50, 65, 68, 89, 65, 65, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(8, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 55296], System.Int32))], System.Object);
+                                                $step = 47;
+                                                return true;
+                                        }
+                                        case 47: {
+                                            // High, high
+                                                $enumerator.current = System.Array.init([System.Array.init([43, 51, 65, 68, 89, 65, 65, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(8, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56320, 55296], System.Int32))], System.Object);
+                                                $step = 48;
+                                                return true;
+                                        }
+                                        case 48: {
+                                            // Low, high
+                                                $enumerator.current = System.Array.init([System.Array.init([43, 51, 65, 68, 99, 65, 65, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(8, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56320, 56320], System.Int32))], System.Object);
+                                                $step = 49;
+                                                return true;
+                                        }
+                                        case 49: {
+                                            // Low, low
+
+                                                // High BMP non-chars
+                                                $enumerator.current = System.Array.init([System.Array.init([43, 47, 47, 48, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(5, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65533], System.Int32))], System.Object);
+                                                $step = 50;
+                                                return true;
+                                        }
+                                        case 50: {
+                                            $enumerator.current = System.Array.init([System.Array.init([43, 47, 47, 52, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(5, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65534], System.Int32))], System.Object);
+                                                $step = 51;
+                                                return true;
+                                        }
+                                        case 51: {
+                                            $enumerator.current = System.Array.init([System.Array.init([43, 47, 47, 56, 45], System.Byte), Bridge.box(0, System.Int32), Bridge.box(5, System.Int32), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65535], System.Int32))], System.Object);
+                                                $step = 52;
+                                                return true;
+                                        }
+                                        case 52: {
+                                            // Empty strings
+                                                $enumerator.current = System.Array.init([System.Array.init(0, 0, System.Byte), Bridge.box(0, System.Int32), Bridge.box(0, System.Int32), ""], System.Object);
+                                                $step = 53;
+                                                return true;
+                                        }
+                                        case 53: {
+                                            $enumerator.current = System.Array.init([System.Array.init(10, 0, System.Byte), Bridge.box(0, System.Int32), Bridge.box(0, System.Int32), ""], System.Object);
+                                                $step = 54;
+                                                return true;
+                                        }
+                                        case 54: {
+                                            $enumerator.current = System.Array.init([System.Array.init(10, 0, System.Byte), Bridge.box(10, System.Int32), Bridge.box(0, System.Int32), ""], System.Object);
+                                                $step = 55;
+                                                return true;
+                                        }
+                                        case 55: {
+
+                                        }
+                                        default: {
+                                            return false;
+                                        }
+                                    }
+                                }
+                            } catch($async_e1) {
+                                $async_e = System.Exception.create($async_e1);
+                                throw $async_e;
+                            }
+                        }));
+                        return $enumerator;
+                    }));
+                }
+            }
+        },
+        methods: {
+            Decode: function () {
+                var $t;
+                $t = Bridge.getEnumerator(Bridge.ClientTest.Text.UTF7EncodingDecodeTests.Decode_TestData(), System.Array.type(System.Object));
+                try {
+                    while ($t.moveNext()) {
+                        var objectse = $t.Current;
+                        var bytes = Bridge.as(objectse[System.Array.index(0, objectse)], System.Array.type(System.Byte));
+                        var index = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(1, objectse)]), System.Int32));
+                        var count = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(2, objectse)]), System.Int32));
+                        var expected = Bridge.as(objectse[System.Array.index(3, objectse)], System.String);
+
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF7Encoding(true), bytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF7Encoding(false), bytes, index, count, expected);
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }}
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Text.UTF7EncodingEncodeTests", {
+        statics: {
+            methods: {
+                Encode_Basic_TestData: function () {
+                    return new (Bridge.GeneratorEnumerable$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function ()  {
+                        var $step = 0,
+                            $jumpFromFinally,
+                            $returnValue,
+                            chars2,
+                            $async_e;
+
+                        var $enumerator = new (Bridge.GeneratorEnumerator$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function () {
+                            try {
+                                for (;;) {
+                                    switch ($step) {
+                                        case 0: {
+                                            // ASCII
+                                                $enumerator.current = System.Array.init(["\t\n\rXYZabc123", Bridge.box(0, System.Int32), Bridge.box(12, System.Int32), System.Array.init([9, 10, 13, 88, 89, 90, 97, 98, 99, 49, 50, 51], System.Byte)], System.Object);
+                                                $step = 1;
+                                                return true;
+                                        }
+                                        case 1: {
+                                            $enumerator.current = System.Array.init(["A\t\r\n /z", Bridge.box(0, System.Int32), Bridge.box(7, System.Int32), System.Array.init([65, 9, 13, 10, 32, 47, 122], System.Byte)], System.Object);
+                                                $step = 2;
+                                                return true;
+                                        }
+                                        case 2: {
+                                            $enumerator.current = System.Array.init(["\f", Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([43, 65, 65, 119, 45], System.Byte)], System.Object);
+                                                $step = 3;
+                                                return true;
+                                        }
+                                        case 3: {
+                                            chars2 = "UTF7 Encoding Example";
+                                                $enumerator.current = System.Array.init([chars2, Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), System.Array.init([84, 70], System.Byte)], System.Object);
+                                                $step = 4;
+                                                return true;
+                                        }
+                                        case 4: {
+                                            // Unicode
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([3673, 1489], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), System.Array.init([43, 68, 108, 107, 70, 48, 81, 45], System.Byte)], System.Object);
+                                                $step = 5;
+                                                return true;
+                                        }
+                                        case 5: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([8491], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([43, 73, 83, 115, 45], System.Byte)], System.Object);
+                                                $step = 6;
+                                                return true;
+                                        }
+                                        case 6: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([928, 931], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), System.Array.init([43, 65, 54, 65, 68, 111, 119, 45], System.Byte)], System.Object);
+                                                $step = 7;
+                                                return true;
+                                        }
+                                        case 7: {
+                                            // Surrogate pairs
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), System.Array.init([43, 50, 65, 68, 99, 65, 65, 45], System.Byte)], System.Object);
+                                                $step = 8;
+                                                return true;
+                                        }
+                                        case 8: {
+                                            $enumerator.current = System.Array.init([System.String.concat("a", Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 56320], System.Int32)), "b"), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), System.Array.init([97, 43, 50, 65, 68, 99, 65, 65, 45, 98], System.Byte)], System.Object);
+                                                $step = 9;
+                                                return true;
+                                        }
+                                        case 9: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 57343], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), System.Array.init([43, 50, 65, 68, 102, 47, 119, 45], System.Byte)], System.Object);
+                                                $step = 10;
+                                                return true;
+                                        }
+                                        case 10: {
+                                            // Plus and minus
+                                                $enumerator.current = System.Array.init(["+", Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([43, 45], System.Byte)], System.Object);
+                                                $step = 11;
+                                                return true;
+                                        }
+                                        case 11: {
+                                            $enumerator.current = System.Array.init(["-", Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([45], System.Byte)], System.Object);
+                                                $step = 12;
+                                                return true;
+                                        }
+                                        case 12: {
+                                            $enumerator.current = System.Array.init(["+-", Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), System.Array.init([43, 45, 45], System.Byte)], System.Object);
+                                                $step = 13;
+                                                return true;
+                                        }
+                                        case 13: {
+                                            // Empty strings
+                                                $enumerator.current = System.Array.init(["", Bridge.box(0, System.Int32), Bridge.box(0, System.Int32), System.Array.init(0, 0, System.Byte)], System.Object);
+                                                $step = 14;
+                                                return true;
+                                        }
+                                        case 14: {
+                                            $enumerator.current = System.Array.init(["abc", Bridge.box(3, System.Int32), Bridge.box(0, System.Int32), System.Array.init(0, 0, System.Byte)], System.Object);
+                                                $step = 15;
+                                                return true;
+                                        }
+                                        case 15: {
+                                            $enumerator.current = System.Array.init(["abc", Bridge.box(0, System.Int32), Bridge.box(0, System.Int32), System.Array.init(0, 0, System.Byte)], System.Object);
+                                                $step = 16;
+                                                return true;
+                                        }
+                                        case 16: {
+                                            // Invalid Unicode
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([43, 50, 65, 65, 45], System.Byte)], System.Object);
+                                                $step = 17;
+                                                return true;
+                                        }
+                                        case 17: {
+                                            // Lone high surrogate
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([43, 51, 65, 65, 45], System.Byte)], System.Object);
+                                                $step = 18;
+                                                return true;
+                                        }
+                                        case 18: {
+                                            // Lone low surrogate
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([57343], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([43, 51, 47, 56, 45], System.Byte)], System.Object);
+                                                $step = 19;
+                                                return true;
+                                        }
+                                        case 19: {
+                                            // Lone low surrogate
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([43, 50, 65, 65, 45], System.Byte)], System.Object);
+                                                $step = 20;
+                                                return true;
+                                        }
+                                        case 20: {
+                                            // Surrogate pair out of range
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 56320], System.Int32)), Bridge.box(1, System.Int32), Bridge.box(1, System.Int32), System.Array.init([43, 51, 65, 65, 45], System.Byte)], System.Object);
+                                                $step = 21;
+                                                return true;
+                                        }
+                                        case 21: {
+                                            // Surrogate pair out of range
+
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 55296], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), System.Array.init([43, 50, 65, 68, 89, 65, 65, 45], System.Byte)], System.Object);
+                                                $step = 22;
+                                                return true;
+                                        }
+                                        case 22: {
+                                            // High, high
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56320, 55296], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), System.Array.init([43, 51, 65, 68, 89, 65, 65, 45], System.Byte)], System.Object);
+                                                $step = 23;
+                                                return true;
+                                        }
+                                        case 23: {
+                                            // Low, high
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56320, 56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), System.Array.init([43, 51, 65, 68, 99, 65, 65, 45], System.Byte)], System.Object);
+                                                $step = 24;
+                                                return true;
+                                        }
+                                        case 24: {
+                                            // Low, low
+
+                                                // High BMP non-chars
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65533], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([43, 47, 47, 48, 45], System.Byte)], System.Object);
+                                                $step = 25;
+                                                return true;
+                                        }
+                                        case 25: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65534], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([43, 47, 47, 52, 45], System.Byte)], System.Object);
+                                                $step = 26;
+                                                return true;
+                                        }
+                                        case 26: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65535], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([43, 47, 47, 56, 45], System.Byte)], System.Object);
+                                                $step = 27;
+                                                return true;
+                                        }
+                                        case 27: {
+
+                                        }
+                                        default: {
+                                            return false;
+                                        }
+                                    }
+                                }
+                            } catch($async_e1) {
+                                $async_e = System.Exception.create($async_e1);
+                                throw $async_e;
+                            }
+                        }));
+                        return $enumerator;
+                    }));
+                },
+                Encode_Advanced_TestData: function () {
+                    return new (Bridge.GeneratorEnumerable$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function ()  {
+                        var $step = 0,
+                            $jumpFromFinally,
+                            $returnValue,
+                            optionalChars1,
+                            optionalFalseBytes,
+                            optionalTrueBytes,
+                            $async_e;
+
+                        var $enumerator = new (Bridge.GeneratorEnumerator$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function () {
+                            try {
+                                for (;;) {
+                                    switch ($step) {
+                                        case 0: {
+                                            optionalChars1 = "!\"#$%&*;<=>@[]^_`{|}";
+                                                optionalFalseBytes = System.Array.init([43, 65, 67, 69, 65, 73, 103, 65, 106, 65, 67, 81, 65, 74, 81, 65, 109, 65, 67, 111, 65, 79, 119, 65, 56, 65, 68, 48, 65, 80, 103, 66, 65, 65, 70, 115, 65, 88, 81, 66, 101, 65, 70, 56, 65, 89, 65, 66, 55, 65, 72, 119, 65, 102, 81, 45], System.Byte);
+                                                optionalTrueBytes = System.Array.init([33, 34, 35, 36, 37, 38, 42, 59, 60, 61, 62, 64, 91, 93, 94, 95, 96, 123, 124, 125], System.Byte);
+
+                                                $enumerator.current = System.Array.init([Bridge.box(false, System.Boolean, System.Boolean.toString), optionalChars1, Bridge.box(0, System.Int32), Bridge.box(optionalChars1.length, System.Int32), optionalFalseBytes], System.Object);
+                                                $step = 1;
+                                                return true;
+                                        }
+                                        case 1: {
+                                            $enumerator.current = System.Array.init([Bridge.box(true, System.Boolean, System.Boolean.toString), optionalChars1, Bridge.box(0, System.Int32), Bridge.box(optionalChars1.length, System.Int32), optionalTrueBytes], System.Object);
+                                                $step = 2;
+                                                return true;
+                                        }
+                                        case 2: {
+                                            $enumerator.current = System.Array.init([Bridge.box(false, System.Boolean, System.Boolean.toString), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([35, 37, 928, 931], System.Int32)), Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), System.Array.init([43, 65, 67, 85, 68, 111, 65, 45], System.Byte)], System.Object);
+                                                $step = 3;
+                                                return true;
+                                        }
+                                        case 3: {
+                                            $enumerator.current = System.Array.init([Bridge.box(true, System.Boolean, System.Boolean.toString), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([35, 37, 928, 931], System.Int32)), Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), System.Array.init([37, 43, 65, 54, 65, 45], System.Byte)], System.Object);
+                                                $step = 4;
+                                                return true;
+                                        }
+                                        case 4: {
+                                            $enumerator.current = System.Array.init([Bridge.box(false, System.Boolean, System.Boolean.toString), "!}", Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), System.Array.init([43, 65, 67, 69, 65, 102, 81, 45], System.Byte)], System.Object);
+                                                $step = 5;
+                                                return true;
+                                        }
+                                        case 5: {
+                                            $enumerator.current = System.Array.init([Bridge.box(false, System.Boolean, System.Boolean.toString), "!}", Bridge.box(1, System.Int32), Bridge.box(1, System.Int32), System.Array.init([43, 65, 72, 48, 45], System.Byte)], System.Object);
+                                                $step = 6;
+                                                return true;
+                                        }
+                                        case 6: {
+                                            $enumerator.current = System.Array.init([Bridge.box(false, System.Boolean, System.Boolean.toString), Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65, 33, 125, 9, 3673, 1489], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(6, System.Int32), System.Array.init([65, 43, 65, 67, 69, 65, 102, 81, 45, 9, 43, 68, 108, 107, 70, 48, 81, 45], System.Byte)], System.Object);
+                                                $step = 7;
+                                                return true;
+                                        }
+                                        case 7: {
+
+                                        }
+                                        default: {
+                                            return false;
+                                        }
+                                    }
+                                }
+                            } catch($async_e1) {
+                                $async_e = System.Exception.create($async_e1);
+                                throw $async_e;
+                            }
+                        }));
+                        return $enumerator;
+                    }));
+                }
+            }
+        },
+        methods: {
+            Encode: function () {
+                var $t;
+                $t = Bridge.getEnumerator(Bridge.ClientTest.Text.UTF7EncodingEncodeTests.Encode_Basic_TestData(), System.Array.type(System.Object));
+                try {
+                    while ($t.moveNext()) {
+                        var objectse = $t.Current;
+                        var source = Bridge.cast(objectse[System.Array.index(0, objectse)], System.String);
+                        var index = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(1, objectse)]), System.Int32));
+                        var count = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(2, objectse)]), System.Int32));
+                        var expected = Bridge.cast(objectse[System.Array.index(3, objectse)], System.Array.type(System.Byte));
+
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF7Encoding(true), source, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF7Encoding(false), source, index, count, expected);
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }},
+            EncodeAdvanced: function () {
+                var $t;
+                $t = Bridge.getEnumerator(Bridge.ClientTest.Text.UTF7EncodingEncodeTests.Encode_Advanced_TestData(), System.Array.type(System.Object));
+                try {
+                    while ($t.moveNext()) {
+                        var objectse = $t.Current;
+                        var allowOptionals = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(0, objectse)]), System.Boolean));
+                        var source = Bridge.cast(objectse[System.Array.index(1, objectse)], System.String);
+                        var index = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(2, objectse)]), System.Int32));
+                        var count = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(3, objectse)]), System.Int32));
+                        var expected = Bridge.cast(objectse[System.Array.index(4, objectse)], System.Array.type(System.Byte));
+
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF7Encoding(allowOptionals), source, index, count, expected);
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }}
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Text.UTF7EncodingGetMaxTests", {
+        methods: {
+            GetMaxByteCount: function () {
+                var $t;
+                var data = System.Array.init([0, 1, 8, 10, 715827881, 715827881], System.Int32);
+                $t = Bridge.getEnumerator(data);
+                try {
+                    while ($t.moveNext()) {
+                        var charCount = $t.Current;
+                        var expected = (Bridge.Int.mul(charCount, 3) + 2) | 0;
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF7Encoding(true).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF7Encoding(false).getMaxByteCount(charCount));
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }},
+            GetMaxCharCount: function () {
+                var $t;
+                var data = System.Array.init([0, 1, 10, 2147483647], System.Int32);
+                $t = Bridge.getEnumerator(data);
+                try {
+                    while ($t.moveNext()) {
+                        var byteCount = $t.Current;
+                        var expected = Math.max(byteCount, 1);
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF7Encoding(true).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF7Encoding(false).getMaxCharCount(byteCount));
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }}
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Text.UTF8EncodingDecodeTests", {
+        statics: {
+            methods: {
+                Decode_TestData: function () {
+                    return new (Bridge.GeneratorEnumerable$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function ()  {
+                        var $step = 0,
+                            $jumpFromFinally,
+                            $returnValue,
+                            c,
+                            $async_e;
+
+                        var $enumerator = new (Bridge.GeneratorEnumerator$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function () {
+                            try {
+                                for (;;) {
+                                    switch ($step) {
+                                        case 0: {
+                                            // All ASCII chars
+                                                c = 0;
+                                                $step = 1;
+                                                continue;
+                                        }
+                                        case 1: {
+                                            if ( c <= 127 ) {
+                                                    $step = 2;
+                                                    continue;
+                                                }
+                                            $step = 7;
+                                            continue;
+                                        }
+                                        case 2: {
+                                            $enumerator.current = System.Array.init([System.Array.init([(c & 255)], System.Byte), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), String.fromCharCode(c)], System.Object);
+                                                $step = 3;
+                                                return true;
+                                        }
+                                        case 3: {
+                                            $enumerator.current = System.Array.init([System.Array.init([97, (c & 255), 98], System.Byte), Bridge.box(1, System.Int32), Bridge.box(1, System.Int32), String.fromCharCode(c)], System.Object);
+                                                $step = 4;
+                                                return true;
+                                        }
+                                        case 4: {
+                                            $enumerator.current = System.Array.init([System.Array.init([97, (c & 255), 98], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), System.String.concat("a", String.fromCharCode(c), "b")], System.Object);
+                                                $step = 5;
+                                                return true;
+                                        }
+                                        case 5: {
+                                            $step = 6;
+                                            continue;
+                                        }
+                                        case 6: {
+                                            c = (c + 1) & 65535;
+                                            $step = 1;
+                                            continue;
+                                        }
+                                        case 7: {
+                                            // Mixture of ASCII and Unicode
+                                                $enumerator.current = System.Array.init([System.Array.init([70, 111, 111, 66, 65, 208, 128, 82], System.Byte), Bridge.box(0, System.Int32), Bridge.box(8, System.Int32), "FooBAЀR"], System.Object);
+                                                $step = 8;
+                                                return true;
+                                        }
+                                        case 8: {
+                                            $enumerator.current = System.Array.init([System.Array.init([195, 128, 110, 105, 109, 97, 204, 128, 108], System.Byte), Bridge.box(0, System.Int32), Bridge.box(9, System.Int32), "Ànimàl"], System.Object);
+                                                $step = 9;
+                                                return true;
+                                        }
+                                        case 9: {
+                                            $enumerator.current = System.Array.init([System.Array.init([84, 101, 115, 116, 240, 144, 181, 181, 84, 101, 115, 116], System.Byte), Bridge.box(0, System.Int32), Bridge.box(12, System.Int32), "Test𐵵Test"], System.Object);
+                                                $step = 10;
+                                                return true;
+                                        }
+                                        case 10: {
+                                            $enumerator.current = System.Array.init([System.Array.init([0, 84, 101, 10, 115, 116, 0, 9, 0, 84, 15, 101, 115, 116, 0], System.Byte), Bridge.box(0, System.Int32), Bridge.box(15, System.Int32), "\u0000Te\nst\u0000\t\u0000T\u000fest\u0000"], System.Object);
+                                                $step = 11;
+                                                return true;
+                                        }
+                                        case 11: {
+                                            $enumerator.current = System.Array.init([System.Array.init([240, 144, 181, 181, 240, 144, 181, 181, 240, 144, 181, 181], System.Byte), Bridge.box(0, System.Int32), Bridge.box(12, System.Int32), "𐵵𐵵𐵵"], System.Object);
+                                                $step = 12;
+                                                return true;
+                                        }
+                                        case 12: {
+                                            $enumerator.current = System.Array.init([System.Array.init([196, 176], System.Byte), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), "İ"], System.Object);
+                                                $step = 13;
+                                                return true;
+                                        }
+                                        case 13: {
+                                            $enumerator.current = System.Array.init([System.Array.init([97, 204, 138], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "å"], System.Object);
+                                                $step = 14;
+                                                return true;
+                                        }
+                                        case 14: {
+                                            $enumerator.current = System.Array.init([System.Array.init([194, 164, 195, 144, 97, 82, 124, 123, 65, 110, 71, 101, 194, 163, 194, 164], System.Byte), Bridge.box(0, System.Int32), Bridge.box(16, System.Int32), "¤ÐaR|{AnGe£¤"], System.Object);
+                                                $step = 15;
+                                                return true;
+                                        }
+                                        case 15: {
+                                            $enumerator.current = System.Array.init([System.Array.init([0, 127], System.Byte), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), "\u0000"], System.Object);
+                                                $step = 16;
+                                                return true;
+                                        }
+                                        case 16: {
+                                            $enumerator.current = System.Array.init([System.Array.init([0, 127, 0, 127, 0, 127, 0, 127, 0, 127, 0, 127, 0, 127], System.Byte), Bridge.box(0, System.Int32), Bridge.box(14, System.Int32), "\u0000\u0000\u0000\u0000\u0000\u0000\u0000"], System.Object);
+                                                $step = 17;
+                                                return true;
+                                        }
+                                        case 17: {
+                                            $enumerator.current = System.Array.init([System.Array.init([194, 128, 223, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), "߿"], System.Object);
+                                                $step = 18;
+                                                return true;
+                                        }
+                                        case 18: {
+                                            $enumerator.current = System.Array.init([System.Array.init([194, 128, 223, 191, 194, 128, 223, 191, 194, 128, 223, 191, 194, 128, 223, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(16, System.Int32), "߿߿߿߿"], System.Object);
+                                                $step = 19;
+                                                return true;
+                                        }
+                                        case 19: {
+                                            $enumerator.current = System.Array.init([System.Array.init([224, 160, 128, 224, 191, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(6, System.Int32), "ࠀ࿿"], System.Object);
+                                                $step = 20;
+                                                return true;
+                                        }
+                                        case 20: {
+                                            $enumerator.current = System.Array.init([System.Array.init([224, 160, 128, 224, 191, 191, 224, 160, 128, 224, 191, 191, 224, 160, 128, 224, 191, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(18, System.Int32), "ࠀ࿿ࠀ࿿ࠀ࿿"], System.Object);
+                                                $step = 21;
+                                                return true;
+                                        }
+                                        case 21: {
+                                            $enumerator.current = System.Array.init([System.Array.init([225, 128, 128, 236, 191, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(6, System.Int32), "က쿿"], System.Object);
+                                                $step = 22;
+                                                return true;
+                                        }
+                                        case 22: {
+                                            $enumerator.current = System.Array.init([System.Array.init([225, 128, 128, 236, 191, 191, 225, 128, 128, 236, 191, 191, 225, 128, 128, 236, 191, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(18, System.Int32), "က쿿က쿿က쿿"], System.Object);
+                                                $step = 23;
+                                                return true;
+                                        }
+                                        case 23: {
+                                            $enumerator.current = System.Array.init([System.Array.init([237, 128, 128, 237, 159, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(6, System.Int32), "퀀퟿"], System.Object);
+                                                $step = 24;
+                                                return true;
+                                        }
+                                        case 24: {
+                                            $enumerator.current = System.Array.init([System.Array.init([237, 128, 128, 237, 159, 191, 237, 128, 128, 237, 159, 191, 237, 128, 128, 237, 159, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(18, System.Int32), "퀀퟿퀀퟿퀀퟿"], System.Object);
+                                                $step = 25;
+                                                return true;
+                                        }
+                                        case 25: {
+                                            $enumerator.current = System.Array.init([System.Array.init([240, 144, 128, 128, 240, 191, 191, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(8, System.Int32), "𐀀𿿿"], System.Object);
+                                                $step = 26;
+                                                return true;
+                                        }
+                                        case 26: {
+                                            $enumerator.current = System.Array.init([System.Array.init([240, 144, 128, 128, 240, 191, 191, 191, 240, 144, 128, 128, 240, 191, 191, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(16, System.Int32), "𐀀𿿿𐀀𿿿"], System.Object);
+                                                $step = 27;
+                                                return true;
+                                        }
+                                        case 27: {
+                                            $enumerator.current = System.Array.init([System.Array.init([241, 128, 128, 128, 243, 191, 191, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(8, System.Int32), "񀀀󿿿"], System.Object);
+                                                $step = 28;
+                                                return true;
+                                        }
+                                        case 28: {
+                                            $enumerator.current = System.Array.init([System.Array.init([241, 128, 128, 128, 243, 191, 191, 191, 241, 128, 128, 128, 243, 191, 191, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(16, System.Int32), "񀀀󿿿񀀀󿿿"], System.Object);
+                                                $step = 29;
+                                                return true;
+                                        }
+                                        case 29: {
+                                            $enumerator.current = System.Array.init([System.Array.init([244, 128, 128, 128, 244, 143, 191, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(8, System.Int32), "􀀀􏿿"], System.Object);
+                                                $step = 30;
+                                                return true;
+                                        }
+                                        case 30: {
+                                            $enumerator.current = System.Array.init([System.Array.init([244, 128, 128, 128, 244, 143, 191, 191, 244, 128, 128, 128, 244, 143, 191, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(16, System.Int32), "􀀀􏿿􀀀􏿿"], System.Object);
+                                                $step = 31;
+                                                return true;
+                                        }
+                                        case 31: {
+                                            // Long ASCII strings
+                                                $enumerator.current = System.Array.init([System.Array.init([84, 101, 115, 116, 83, 116, 114, 105, 110, 103], System.Byte), Bridge.box(0, System.Int32), Bridge.box(10, System.Int32), "TestString"], System.Object);
+                                                $step = 32;
+                                                return true;
+                                        }
+                                        case 32: {
+                                            $enumerator.current = System.Array.init([System.Array.init([84, 101, 115, 116, 84, 101, 115, 116], System.Byte), Bridge.box(0, System.Int32), Bridge.box(8, System.Int32), "TestTest"], System.Object);
+                                                $step = 33;
+                                                return true;
+                                        }
+                                        case 33: {
+                                            // Control codes
+                                                $enumerator.current = System.Array.init([System.Array.init([31, 16, 0, 9], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), "\u001f\u0010\u0000\t"], System.Object);
+                                                $step = 34;
+                                                return true;
+                                        }
+                                        case 34: {
+                                            $enumerator.current = System.Array.init([System.Array.init([31, 0, 16, 9], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), "\u001f\u0000\u0010\t"], System.Object);
+                                                $step = 35;
+                                                return true;
+                                        }
+                                        case 35: {
+                                            $enumerator.current = System.Array.init([System.Array.init([0, 31, 16, 9], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), "\u0000\u001f\u0010\t"], System.Object);
+                                                $step = 36;
+                                                return true;
+                                        }
+                                        case 36: {
+                                            // BOM
+                                                $enumerator.current = System.Array.init([System.Array.init([239, 187, 191, 65], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), "﻿A"], System.Object);
+                                                $step = 37;
+                                                return true;
+                                        }
+                                        case 37: {
+                                            // U+FDD0 - U+FDEF
+                                                $enumerator.current = System.Array.init([System.Array.init([239, 183, 144, 239, 183, 175], System.Byte), Bridge.box(0, System.Int32), Bridge.box(6, System.Int32), "﷐﷯"], System.Object);
+                                                $step = 38;
+                                                return true;
+                                        }
+                                        case 38: {
+                                            // 2 byte encoding
+                                                $enumerator.current = System.Array.init([System.Array.init([195, 161], System.Byte), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), "á"], System.Object);
+                                                $step = 39;
+                                                return true;
+                                        }
+                                        case 39: {
+                                            $enumerator.current = System.Array.init([System.Array.init([195, 133], System.Byte), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), "Å"], System.Object);
+                                                $step = 40;
+                                                return true;
+                                        }
+                                        case 40: {
+                                            // 3 byte encoding
+                                                $enumerator.current = System.Array.init([System.Array.init([232, 128, 128], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "耀"], System.Object);
+                                                $step = 41;
+                                                return true;
+                                        }
+                                        case 41: {
+                                            $enumerator.current = System.Array.init([System.Array.init([226, 132, 171], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "Å"], System.Object);
+                                                $step = 42;
+                                                return true;
+                                        }
+                                        case 42: {
+                                            // Surrogate pairs
+                                                $enumerator.current = System.Array.init([System.Array.init([240, 144, 128, 128], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), "𐀀"], System.Object);
+                                                $step = 43;
+                                                return true;
+                                        }
+                                        case 43: {
+                                            $enumerator.current = System.Array.init([System.Array.init([97, 240, 144, 128, 128, 98], System.Byte), Bridge.box(0, System.Int32), Bridge.box(6, System.Int32), "a𐀀b"], System.Object);
+                                                $step = 44;
+                                                return true;
+                                        }
+                                        case 44: {
+                                            $enumerator.current = System.Array.init([System.Array.init([240, 144, 143, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), "𐏿"], System.Object);
+                                                $step = 45;
+                                                return true;
+                                        }
+                                        case 45: {
+                                            $enumerator.current = System.Array.init([System.Array.init([244, 143, 176, 128], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), "􏰀"], System.Object);
+                                                $step = 46;
+                                                return true;
+                                        }
+                                        case 46: {
+                                            $enumerator.current = System.Array.init([System.Array.init([244, 143, 191, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), "􏿿"], System.Object);
+                                                $step = 47;
+                                                return true;
+                                        }
+                                        case 47: {
+                                            $enumerator.current = System.Array.init([System.Array.init([243, 176, 128, 128], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), "󰀀"], System.Object);
+                                                $step = 48;
+                                                return true;
+                                        }
+                                        case 48: {
+                                            // High BMP non-chars
+                                                $enumerator.current = System.Array.init([System.Array.init([239, 191, 189], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "�"], System.Object);
+                                                $step = 49;
+                                                return true;
+                                        }
+                                        case 49: {
+                                            $enumerator.current = System.Array.init([System.Array.init([239, 191, 190], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "￾"], System.Object);
+                                                $step = 50;
+                                                return true;
+                                        }
+                                        case 50: {
+                                            $enumerator.current = System.Array.init([System.Array.init([239, 191, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "￿"], System.Object);
+                                                $step = 51;
+                                                return true;
+                                        }
+                                        case 51: {
+                                            $enumerator.current = System.Array.init([System.Array.init([239, 191, 174], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "￮"], System.Object);
+                                                $step = 52;
+                                                return true;
+                                        }
+                                        case 52: {
+                                            $enumerator.current = System.Array.init([System.Array.init([238, 128, 128, 239, 191, 191, 238, 128, 128, 239, 191, 191, 238, 128, 128, 239, 191, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(18, System.Int32), "￿￿￿"], System.Object);
+                                                $step = 53;
+                                                return true;
+                                        }
+                                        case 53: {
+                                            // Empty strings
+                                                $enumerator.current = System.Array.init([System.Array.init(0, 0, System.Byte), Bridge.box(0, System.Int32), Bridge.box(0, System.Int32), ""], System.Object);
+                                                $step = 54;
+                                                return true;
+                                        }
+                                        case 54: {
+                                            $enumerator.current = System.Array.init([System.Array.init(10, 0, System.Byte), Bridge.box(10, System.Int32), Bridge.box(0, System.Int32), ""], System.Object);
+                                                $step = 55;
+                                                return true;
+                                        }
+                                        case 55: {
+                                            $enumerator.current = System.Array.init([System.Array.init(10, 0, System.Byte), Bridge.box(0, System.Int32), Bridge.box(0, System.Int32), ""], System.Object);
+                                                $step = 56;
+                                                return true;
+                                        }
+                                        case 56: {
+
+                                        }
+                                        default: {
+                                            return false;
+                                        }
+                                    }
+                                }
+                            } catch($async_e1) {
+                                $async_e = System.Exception.create($async_e1);
+                                throw $async_e;
+                            }
+                        }));
+                        return $enumerator;
+                    }));
+                },
+                Decode_InvalidBytes_TestData: function () {
+                    return new (Bridge.GeneratorEnumerable$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function ()  {
+                        var $step = 0,
+                            $jumpFromFinally,
+                            $returnValue,
+                            validSurrogateBytes,
+                            $async_e;
+
+                        var $enumerator = new (Bridge.GeneratorEnumerator$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function () {
+                            try {
+                                for (;;) {
+                                    switch ($step) {
+                                        case 0: {
+                                            $enumerator.current = System.Array.init([System.Array.init([196, 84, 101, 115, 116, 196, 196, 196, 176, 176, 84, 101, 115, 116, 176], System.Byte), Bridge.box(0, System.Int32), Bridge.box(15, System.Int32), "�Test��İ�Test�"], System.Object);
+                                                $step = 1;
+                                                return true;
+                                        }
+                                        case 1: {
+                                            $enumerator.current = System.Array.init([System.Array.init([240, 240, 144, 181, 181, 240, 144, 181, 181, 240, 144, 240], System.Byte), Bridge.box(0, System.Int32), Bridge.box(12, System.Int32), "�𐵵𐵵��"], System.Object);
+                                                $step = 2;
+                                                return true;
+                                        }
+                                        case 2: {
+                                            // Invalid surrogate bytes
+                                                validSurrogateBytes = System.Array.init([240, 144, 128, 128], System.Byte);
+                                                $enumerator.current = System.Array.init([validSurrogateBytes, Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "�"], System.Object);
+                                                $step = 3;
+                                                return true;
+                                        }
+                                        case 3: {
+                                            $enumerator.current = System.Array.init([validSurrogateBytes, Bridge.box(1, System.Int32), Bridge.box(3, System.Int32), "���"], System.Object);
+                                                $step = 4;
+                                                return true;
+                                        }
+                                        case 4: {
+                                            $enumerator.current = System.Array.init([validSurrogateBytes, Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), "�"], System.Object);
+                                                $step = 5;
+                                                return true;
+                                        }
+                                        case 5: {
+                                            $enumerator.current = System.Array.init([validSurrogateBytes, Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), "��"], System.Object);
+                                                $step = 6;
+                                                return true;
+                                        }
+                                        case 6: {
+                                            $enumerator.current = System.Array.init([validSurrogateBytes, Bridge.box(2, System.Int32), Bridge.box(2, System.Int32), "��"], System.Object);
+                                                $step = 7;
+                                                return true;
+                                        }
+                                        case 7: {
+                                            $enumerator.current = System.Array.init([validSurrogateBytes, Bridge.box(2, System.Int32), Bridge.box(1, System.Int32), "�"], System.Object);
+                                                $step = 8;
+                                                return true;
+                                        }
+                                        case 8: {
+                                            $enumerator.current = System.Array.init([System.Array.init([237, 160, 128], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "��"], System.Object);
+                                                $step = 9;
+                                                return true;
+                                        }
+                                        case 9: {
+                                            $enumerator.current = System.Array.init([System.Array.init([237, 175, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "��"], System.Object);
+                                                $step = 10;
+                                                return true;
+                                        }
+                                        case 10: {
+                                            $enumerator.current = System.Array.init([System.Array.init([237, 176, 128], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "��"], System.Object);
+                                                $step = 11;
+                                                return true;
+                                        }
+                                        case 11: {
+                                            $enumerator.current = System.Array.init([System.Array.init([237, 191, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "��"], System.Object);
+                                                $step = 12;
+                                                return true;
+                                        }
+                                        case 12: {
+                                            // Invalid surrogate pair (low/low, high/high, low/high)
+                                                $enumerator.current = System.Array.init([System.Array.init([237, 160, 128, 237, 175, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(6, System.Int32), "����"], System.Object);
+                                                $step = 13;
+                                                return true;
+                                        }
+                                        case 13: {
+                                            $enumerator.current = System.Array.init([System.Array.init([237, 176, 128, 237, 176, 128], System.Byte), Bridge.box(0, System.Int32), Bridge.box(6, System.Int32), "����"], System.Object);
+                                                $step = 14;
+                                                return true;
+                                        }
+                                        case 14: {
+                                            $enumerator.current = System.Array.init([System.Array.init([237, 160, 128, 237, 160, 128], System.Byte), Bridge.box(0, System.Int32), Bridge.box(6, System.Int32), "����"], System.Object);
+                                                $step = 15;
+                                                return true;
+                                        }
+                                        case 15: {
+                                            // Too high scalar value in surrogates
+                                                $enumerator.current = System.Array.init([System.Array.init([237, 160, 128, 238, 128, 128], System.Byte), Bridge.box(0, System.Int32), Bridge.box(6, System.Int32), "��"], System.Object);
+                                                $step = 16;
+                                                return true;
+                                        }
+                                        case 16: {
+                                            $enumerator.current = System.Array.init([System.Array.init([244, 144, 128, 128], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), "���"], System.Object);
+                                                $step = 17;
+                                                return true;
+                                        }
+                                        case 17: {
+                                            // These are examples of overlong sequences. This can cause security
+                                                // vulnerabilities (e.g. MS00-078) so it is important we parse these as invalid.
+                                                $enumerator.current = System.Array.init([System.Array.init([192], System.Byte), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), "�"], System.Object);
+                                                $step = 18;
+                                                return true;
+                                        }
+                                        case 18: {
+                                            $enumerator.current = System.Array.init([System.Array.init([192, 175], System.Byte), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), "��"], System.Object);
+                                                $step = 19;
+                                                return true;
+                                        }
+                                        case 19: {
+                                            $enumerator.current = System.Array.init([System.Array.init([224, 128, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "��"], System.Object);
+                                                $step = 20;
+                                                return true;
+                                        }
+                                        case 20: {
+                                            $enumerator.current = System.Array.init([System.Array.init([240, 128, 128, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), "���"], System.Object);
+                                                $step = 21;
+                                                return true;
+                                        }
+                                        case 21: {
+                                            $enumerator.current = System.Array.init([System.Array.init([248, 128, 128, 128, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(5, System.Int32), "�����"], System.Object);
+                                                $step = 22;
+                                                return true;
+                                        }
+                                        case 22: {
+                                            $enumerator.current = System.Array.init([System.Array.init([252, 128, 128, 128, 128, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(6, System.Int32), "������"], System.Object);
+                                                $step = 23;
+                                                return true;
+                                        }
+                                        case 23: {
+                                            $enumerator.current = System.Array.init([System.Array.init([192, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), "��"], System.Object);
+                                                $step = 24;
+                                                return true;
+                                        }
+                                        case 24: {
+                                            $enumerator.current = System.Array.init([System.Array.init([224, 156, 144], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "��"], System.Object);
+                                                $step = 25;
+                                                return true;
+                                        }
+                                        case 25: {
+                                            $enumerator.current = System.Array.init([System.Array.init([240, 143, 164, 128], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), "���"], System.Object);
+                                                $step = 26;
+                                                return true;
+                                        }
+                                        case 26: {
+                                            $enumerator.current = System.Array.init([System.Array.init([239, 65], System.Byte), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), "�A"], System.Object);
+                                                $step = 27;
+                                                return true;
+                                        }
+                                        case 27: {
+                                            $enumerator.current = System.Array.init([System.Array.init([239, 191, 174], System.Byte), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), "�"], System.Object);
+                                                $step = 28;
+                                                return true;
+                                        }
+                                        case 28: {
+                                            $enumerator.current = System.Array.init([System.Array.init([239, 191, 65], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "�A"], System.Object);
+                                                $step = 29;
+                                                return true;
+                                        }
+                                        case 29: {
+                                            $enumerator.current = System.Array.init([System.Array.init([239, 191, 97], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "�a"], System.Object);
+                                                $step = 30;
+                                                return true;
+                                        }
+                                        case 30: {
+                                            $enumerator.current = System.Array.init([System.Array.init([239, 191, 239, 191, 174], System.Byte), Bridge.box(0, System.Int32), Bridge.box(5, System.Int32), "�￮"], System.Object);
+                                                $step = 31;
+                                                return true;
+                                        }
+                                        case 31: {
+                                            $enumerator.current = System.Array.init([System.Array.init([239, 191, 192, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), "���"], System.Object);
+                                                $step = 32;
+                                                return true;
+                                        }
+                                        case 32: {
+                                            $enumerator.current = System.Array.init([System.Array.init([240, 196, 128], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "�Ā"], System.Object);
+                                                $step = 33;
+                                                return true;
+                                        }
+                                        case 33: {
+                                            $enumerator.current = System.Array.init([System.Array.init([176], System.Byte), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), "�"], System.Object);
+                                                $step = 34;
+                                                return true;
+                                        }
+                                        case 34: {
+                                            $enumerator.current = System.Array.init([System.Array.init([196], System.Byte), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), "�"], System.Object);
+                                                $step = 35;
+                                                return true;
+                                        }
+                                        case 35: {
+                                            $enumerator.current = System.Array.init([System.Array.init([164, 208, 97, 82, 124, 123, 65, 110, 71, 101, 163, 164], System.Byte), Bridge.box(0, System.Int32), Bridge.box(12, System.Int32), "��aR|{AnGe��"], System.Object);
+                                                $step = 36;
+                                                return true;
+                                        }
+                                        case 36: {
+                                            $enumerator.current = System.Array.init([System.Array.init([163], System.Byte), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), "�"], System.Object);
+                                                $step = 37;
+                                                return true;
+                                        }
+                                        case 37: {
+                                            $enumerator.current = System.Array.init([System.Array.init([163, 164], System.Byte), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), "��"], System.Object);
+                                                $step = 38;
+                                                return true;
+                                        }
+                                        case 38: {
+                                            $enumerator.current = System.Array.init([System.Array.init([101, 163, 164], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "e��"], System.Object);
+                                                $step = 39;
+                                                return true;
+                                        }
+                                        case 39: {
+                                            $enumerator.current = System.Array.init([System.Array.init([71, 101, 163, 164], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), "Ge��"], System.Object);
+                                                $step = 40;
+                                                return true;
+                                        }
+                                        case 40: {
+                                            $enumerator.current = System.Array.init([System.Array.init([164, 208, 97, 163, 164], System.Byte), Bridge.box(0, System.Int32), Bridge.box(5, System.Int32), "��a��"], System.Object);
+                                                $step = 41;
+                                                return true;
+                                        }
+                                        case 41: {
+                                            $enumerator.current = System.Array.init([System.Array.init([164, 208, 97, 163], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), "��a�"], System.Object);
+                                                $step = 42;
+                                                return true;
+                                        }
+                                        case 42: {
+                                            $enumerator.current = System.Array.init([System.Array.init([208, 97, 163], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "�a�"], System.Object);
+                                                $step = 43;
+                                                return true;
+                                        }
+                                        case 43: {
+                                            $enumerator.current = System.Array.init([System.Array.init([164, 97, 163], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "�a�"], System.Object);
+                                                $step = 44;
+                                                return true;
+                                        }
+                                        case 44: {
+                                            $enumerator.current = System.Array.init([System.Array.init([208, 97, 82, 163], System.Byte), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), "�aR�"], System.Object);
+                                                $step = 45;
+                                                return true;
+                                        }
+                                        case 45: {
+                                            $enumerator.current = System.Array.init([System.Array.init([170], System.Byte), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), "�"], System.Object);
+                                                $step = 46;
+                                                return true;
+                                        }
+                                        case 46: {
+                                            $enumerator.current = System.Array.init([System.Array.init([170, 65], System.Byte), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), "�A"], System.Object);
+                                                $step = 47;
+                                                return true;
+                                        }
+                                        case 47: {
+                                            $enumerator.current = System.Array.init([System.Array.init([239, 255, 238], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "���"], System.Object);
+                                                $step = 48;
+                                                return true;
+                                        }
+                                        case 48: {
+                                            $enumerator.current = System.Array.init([System.Array.init([239, 255, 174], System.Byte), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), "���"], System.Object);
+                                                $step = 49;
+                                                return true;
+                                        }
+                                        case 49: {
+                                            $enumerator.current = System.Array.init([System.Array.init([128, 144, 160, 176, 193], System.Byte), Bridge.box(0, System.Int32), Bridge.box(5, System.Int32), "�����"], System.Object);
+                                                $step = 50;
+                                                return true;
+                                        }
+                                        case 50: {
+                                            $enumerator.current = System.Array.init([System.Array.init([127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 128, 144, 160, 176, 193], System.Byte), Bridge.box(0, System.Int32), Bridge.box(15, System.Int32), "�����"], System.Object);
+                                                $step = 51;
+                                                return true;
+                                        }
+                                        case 51: {
+                                            $enumerator.current = System.Array.init([System.Array.init([128, 144, 160, 176, 193, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127], System.Byte), Bridge.box(0, System.Int32), Bridge.box(15, System.Int32), "�����"], System.Object);
+                                                $step = 52;
+                                                return true;
+                                        }
+                                        case 52: {
+                                            $enumerator.current = System.Array.init([System.Array.init([194, 127, 194, 192, 223, 127, 223, 192], System.Byte), Bridge.box(0, System.Int32), Bridge.box(8, System.Int32), "������"], System.Object);
+                                                $step = 53;
+                                                return true;
+                                        }
+                                        case 53: {
+                                            $enumerator.current = System.Array.init([System.Array.init([194, 223], System.Byte), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), "��"], System.Object);
+                                                $step = 54;
+                                                return true;
+                                        }
+                                        case 54: {
+                                            $enumerator.current = System.Array.init([System.Array.init([128, 128, 193, 128, 193, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(6, System.Int32), "������"], System.Object);
+                                                $step = 55;
+                                                return true;
+                                        }
+                                        case 55: {
+                                            $enumerator.current = System.Array.init([System.Array.init([194, 127, 194, 192, 127, 127, 127, 127, 195, 161, 223, 127, 223, 192], System.Byte), Bridge.box(0, System.Int32), Bridge.box(14, System.Int32), "���á���"], System.Object);
+                                                $step = 56;
+                                                return true;
+                                        }
+                                        case 56: {
+                                            $enumerator.current = System.Array.init([System.Array.init([224, 160, 127, 224, 160, 192, 224, 191, 127, 224, 191, 192], System.Byte), Bridge.box(0, System.Int32), Bridge.box(12, System.Int32), "������"], System.Object);
+                                                $step = 57;
+                                                return true;
+                                        }
+                                        case 57: {
+                                            $enumerator.current = System.Array.init([System.Array.init([224, 159, 128, 224, 192, 128, 224, 159, 191, 224, 192, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(12, System.Int32), "����������"], System.Object);
+                                                $step = 58;
+                                                return true;
+                                        }
+                                        case 58: {
+                                            $enumerator.current = System.Array.init([System.Array.init([224, 160, 127, 224, 160, 192, 127, 224, 191, 127, 195, 161, 224, 191, 192], System.Byte), Bridge.box(0, System.Int32), Bridge.box(15, System.Int32), "����á��"], System.Object);
+                                                $step = 59;
+                                                return true;
+                                        }
+                                        case 59: {
+                                            $enumerator.current = System.Array.init([System.Array.init([225, 128, 127, 225, 128, 192, 225, 191, 127, 225, 191, 192, 236, 128, 127, 236, 128, 192, 236, 191, 127, 236, 191, 192], System.Byte), Bridge.box(0, System.Int32), Bridge.box(24, System.Int32), "������������"], System.Object);
+                                                $step = 60;
+                                                return true;
+                                        }
+                                        case 60: {
+                                            $enumerator.current = System.Array.init([System.Array.init([225, 127, 128, 225, 192, 128, 225, 127, 191, 225, 192, 191, 236, 127, 128, 236, 192, 128, 236, 127, 191, 236, 192, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(24, System.Int32), "��������������������"], System.Object);
+                                                $step = 61;
+                                                return true;
+                                        }
+                                        case 61: {
+                                            $enumerator.current = System.Array.init([System.Array.init([237, 128, 127, 237, 128, 192, 237, 159, 127, 237, 159, 192], System.Byte), Bridge.box(0, System.Int32), Bridge.box(12, System.Int32), "������"], System.Object);
+                                                $step = 62;
+                                                return true;
+                                        }
+                                        case 62: {
+                                            $enumerator.current = System.Array.init([System.Array.init([237, 127, 128, 237, 160, 128, 237, 127, 191, 237, 160, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(12, System.Int32), "��������"], System.Object);
+                                                $step = 63;
+                                                return true;
+                                        }
+                                        case 63: {
+                                            $enumerator.current = System.Array.init([System.Array.init([237, 127, 128, 237, 160, 128, 232, 128, 128, 237, 127, 191, 237, 160, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(15, System.Int32), "����耀����"], System.Object);
+                                                $step = 64;
+                                                return true;
+                                        }
+                                        case 64: {
+                                            $enumerator.current = System.Array.init([System.Array.init([238, 128, 127, 238, 128, 192, 238, 191, 127, 238, 191, 192, 239, 128, 127, 239, 128, 192, 239, 191, 127, 239, 191, 192], System.Byte), Bridge.box(0, System.Int32), Bridge.box(24, System.Int32), "������������"], System.Object);
+                                                $step = 65;
+                                                return true;
+                                        }
+                                        case 65: {
+                                            $enumerator.current = System.Array.init([System.Array.init([238, 127, 128, 238, 192, 128, 238, 127, 191, 238, 192, 191, 239, 127, 128, 239, 192, 128, 239, 127, 191, 239, 192, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(24, System.Int32), "��������������������"], System.Object);
+                                                $step = 66;
+                                                return true;
+                                        }
+                                        case 66: {
+                                            $enumerator.current = System.Array.init([System.Array.init([240, 144, 128, 127, 240, 144, 128, 192, 240, 191, 191, 127, 240, 191, 191, 192], System.Byte), Bridge.box(0, System.Int32), Bridge.box(16, System.Int32), "������"], System.Object);
+                                                $step = 67;
+                                                return true;
+                                        }
+                                        case 67: {
+                                            $enumerator.current = System.Array.init([System.Array.init([240, 144, 127, 128, 240, 144, 192, 128, 240, 144, 127, 191, 240, 144, 192, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(16, System.Int32), "����������"], System.Object);
+                                                $step = 68;
+                                                return true;
+                                        }
+                                        case 68: {
+                                            $enumerator.current = System.Array.init([System.Array.init([240, 143, 128, 128, 240, 192, 128, 128, 240, 143, 191, 191, 240, 192, 191, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(16, System.Int32), "��������������"], System.Object);
+                                                $step = 69;
+                                                return true;
+                                        }
+                                        case 69: {
+                                            $enumerator.current = System.Array.init([System.Array.init([241, 128, 128, 127, 241, 128, 128, 192, 241, 191, 191, 127, 241, 191, 191, 192, 243, 128, 128, 127, 243, 128, 128, 192, 243, 191, 191, 127, 243, 191, 191, 192], System.Byte), Bridge.box(0, System.Int32), Bridge.box(32, System.Int32), "������������"], System.Object);
+                                                $step = 70;
+                                                return true;
+                                        }
+                                        case 70: {
+                                            $enumerator.current = System.Array.init([System.Array.init([241, 128, 127, 128, 241, 128, 192, 128, 241, 128, 127, 191, 241, 128, 192, 191, 243, 128, 127, 128, 243, 128, 192, 128, 243, 128, 127, 191, 243, 128, 192, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(32, System.Int32), "��������������������"], System.Object);
+                                                $step = 71;
+                                                return true;
+                                        }
+                                        case 71: {
+                                            $enumerator.current = System.Array.init([System.Array.init([241, 127, 128, 128, 241, 192, 128, 128, 241, 127, 191, 191, 241, 192, 191, 191, 243, 127, 128, 128, 243, 192, 128, 128, 243, 127, 191, 191, 243, 192, 191, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(32, System.Int32), "����������������������������"], System.Object);
+                                                $step = 72;
+                                                return true;
+                                        }
+                                        case 72: {
+                                            $enumerator.current = System.Array.init([System.Array.init([244, 128, 128, 127, 244, 128, 128, 192, 244, 143, 191, 127, 244, 143, 191, 192], System.Byte), Bridge.box(0, System.Int32), Bridge.box(16, System.Int32), "������"], System.Object);
+                                                $step = 73;
+                                                return true;
+                                        }
+                                        case 73: {
+                                            $enumerator.current = System.Array.init([System.Array.init([244, 128, 127, 128, 244, 128, 192, 128, 244, 128, 127, 191, 244, 128, 192, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(16, System.Int32), "����������"], System.Object);
+                                                $step = 74;
+                                                return true;
+                                        }
+                                        case 74: {
+                                            $enumerator.current = System.Array.init([System.Array.init([244, 127, 128, 128, 244, 144, 128, 128, 244, 127, 191, 191, 244, 144, 191, 191], System.Byte), Bridge.box(0, System.Int32), Bridge.box(16, System.Int32), "������������"], System.Object);
+                                                $step = 75;
+                                                return true;
+                                        }
+                                        case 75: {
+
+                                        }
+                                        default: {
+                                            return false;
+                                        }
+                                    }
+                                }
+                            } catch($async_e1) {
+                                $async_e = System.Exception.create($async_e1);
+                                throw $async_e;
+                            }
+                        }));
+                        return $enumerator;
+                    }));
+                },
+                Decode_InvalidBytes: function () {
+                    var $t;
+                    $t = Bridge.getEnumerator(Bridge.ClientTest.Text.UTF8EncodingDecodeTests.Decode_InvalidBytes_TestData(), System.Array.type(System.Object));
+                    try {
+                        while ($t.moveNext()) {
+                            var objectse = $t.Current;
+                            var bytes = Bridge.as(objectse[System.Array.index(0, objectse)], System.Array.type(System.Byte));
+                            var index = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(1, objectse)]), System.Int32));
+                            var count = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(2, objectse)]), System.Int32));
+                            var expected = Bridge.as(objectse[System.Array.index(3, objectse)], System.String);
+
+                            Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF8Encoding(true, false), bytes, index, count, expected);
+                            Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF8Encoding(false, false), bytes, index, count, expected);
+
+                            Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UTF8Encoding(false, true), bytes, index, count);
+                            Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UTF8Encoding(true, true), bytes, index, count);
+                        }
+                    } finally {
+                        if (Bridge.is($t, System.IDisposable)) {
+                            $t.System$IDisposable$dispose();
+                        }
+                    }}
+            }
+        },
+        methods: {
+            Decode: function () {
+                var $t;
+                $t = Bridge.getEnumerator(Bridge.ClientTest.Text.UTF8EncodingDecodeTests.Decode_TestData(), System.Array.type(System.Object));
+                try {
+                    while ($t.moveNext()) {
+                        var objectse = $t.Current;
+                        var bytes = Bridge.as(objectse[System.Array.index(0, objectse)], System.Array.type(System.Byte));
+                        var index = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(1, objectse)]), System.Int32));
+                        var count = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(2, objectse)]), System.Int32));
+                        var expected = Bridge.as(objectse[System.Array.index(3, objectse)], System.String);
+
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF8Encoding(true, false), bytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF8Encoding(false, false), bytes, index, count, expected);
+
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF8Encoding(false, true), bytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF8Encoding(true, true), bytes, index, count, expected);
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }}
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Text.UTF8EncodingEncodeTests", {
+        statics: {
+            methods: {
+                Encode_TestData: function () {
+                    return new (Bridge.GeneratorEnumerable$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function ()  {
+                        var $step = 0,
+                            $jumpFromFinally,
+                            $returnValue,
+                            c,
+                            $async_e;
+
+                        var $enumerator = new (Bridge.GeneratorEnumerator$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function () {
+                            try {
+                                for (;;) {
+                                    switch ($step) {
+                                        case 0: {
+                                            // All ASCII chars
+                                                c = 0;
+                                                $step = 1;
+                                                continue;
+                                        }
+                                        case 1: {
+                                            if ( c <= 127 ) {
+                                                    $step = 2;
+                                                    continue;
+                                                }
+                                            $step = 8;
+                                            continue;
+                                        }
+                                        case 2: {
+                                            $enumerator.current = System.Array.init([String.fromCharCode(c), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([(c & 255)], System.Byte)], System.Object);
+                                                $step = 3;
+                                                return true;
+                                        }
+                                        case 3: {
+                                            $enumerator.current = System.Array.init([System.String.concat("a", String.fromCharCode(c), "b"), Bridge.box(1, System.Int32), Bridge.box(1, System.Int32), System.Array.init([(c & 255)], System.Byte)], System.Object);
+                                                $step = 4;
+                                                return true;
+                                        }
+                                        case 4: {
+                                            $enumerator.current = System.Array.init([System.String.concat("a", String.fromCharCode(c), "b"), Bridge.box(2, System.Int32), Bridge.box(1, System.Int32), System.Array.init([98], System.Byte)], System.Object);
+                                                $step = 5;
+                                                return true;
+                                        }
+                                        case 5: {
+                                            $enumerator.current = System.Array.init([System.String.concat("a", String.fromCharCode(c), "b"), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), System.Array.init([97, (c & 255), 98], System.Byte)], System.Object);
+                                                $step = 6;
+                                                return true;
+                                        }
+                                        case 6: {
+                                            $step = 7;
+                                            continue;
+                                        }
+                                        case 7: {
+                                            c = (c + 1) & 65535;
+                                            $step = 1;
+                                            continue;
+                                        }
+                                        case 8: {
+                                            // Misc ASCII and Unicode strings
+                                                $enumerator.current = System.Array.init([System.String.concat("FooBA", Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([1024], System.Int32)), "R"), Bridge.box(0, System.Int32), Bridge.box(7, System.Int32), System.Array.init([70, 111, 111, 66, 65, 208, 128, 82], System.Byte)], System.Object);
+                                                $step = 9;
+                                                return true;
+                                        }
+                                        case 9: {
+                                            $enumerator.current = System.Array.init([System.String.concat(Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([192], System.Int32)), "nima", Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([768], System.Int32)), "l"), Bridge.box(0, System.Int32), Bridge.box(7, System.Int32), System.Array.init([195, 128, 110, 105, 109, 97, 204, 128, 108], System.Byte)], System.Object);
+                                                $step = 10;
+                                                return true;
+                                        }
+                                        case 10: {
+                                            $enumerator.current = System.Array.init([System.String.concat("Test", Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55299, 56693], System.Int32)), "Test"), Bridge.box(0, System.Int32), Bridge.box(10, System.Int32), System.Array.init([84, 101, 115, 116, 240, 144, 181, 181, 84, 101, 115, 116], System.Byte)], System.Object);
+                                                $step = 11;
+                                                return true;
+                                        }
+                                        case 11: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([304], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([196, 176], System.Byte)], System.Object);
+                                                $step = 12;
+                                                return true;
+                                        }
+                                        case 12: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55299, 56693, 55299, 56693, 55299, 56693], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(6, System.Int32), System.Array.init([240, 144, 181, 181, 240, 144, 181, 181, 240, 144, 181, 181], System.Byte)], System.Object);
+                                                $step = 13;
+                                                return true;
+                                        }
+                                        case 13: {
+                                            $enumerator.current = System.Array.init([System.String.concat("za", Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([774, 509, 946, 55551, 56575], System.Int32))), Bridge.box(0, System.Int32), Bridge.box(7, System.Int32), System.Array.init([122, 97, 204, 134, 199, 189, 206, 178, 241, 143, 179, 191], System.Byte)], System.Object);
+                                                $step = 14;
+                                                return true;
+                                        }
+                                        case 14: {
+                                            $enumerator.current = System.Array.init([System.String.concat("za", Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([774, 509, 946, 55551, 56575], System.Int32))), Bridge.box(4, System.Int32), Bridge.box(3, System.Int32), System.Array.init([206, 178, 241, 143, 179, 191], System.Byte)], System.Object);
+                                                $step = 15;
+                                                return true;
+                                        }
+                                        case 15: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([35, 37, 928, 931], System.Int32)), Bridge.box(1, System.Int32), Bridge.box(2, System.Int32), System.Array.init([37, 206, 160], System.Byte)], System.Object);
+                                                $step = 16;
+                                                return true;
+                                        }
+                                        case 16: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([197], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([195, 133], System.Byte)], System.Object);
+                                                $step = 17;
+                                                return true;
+                                        }
+                                        case 17: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([101, 101, 225, 101, 101, 32768, 225, 101, 55296, 56320, 32768, 225, 101, 101, 101], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(15, System.Int32), System.Array.init([101, 101, 195, 161, 101, 101, 232, 128, 128, 195, 161, 101, 240, 144, 128, 128, 232, 128, 128, 195, 161, 101, 101, 101], System.Byte)], System.Object);
+                                                $step = 18;
+                                                return true;
+                                        }
+                                        case 18: {
+                                            $enumerator.current = System.Array.init([System.String.concat(Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([164, 208], System.Int32)), "aR|{AnGe", Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([163, 164], System.Int32))), Bridge.box(0, System.Int32), Bridge.box(12, System.Int32), System.Array.init([194, 164, 195, 144, 97, 82, 124, 123, 65, 110, 71, 101, 194, 163, 194, 164], System.Byte)], System.Object);
+                                                $step = 19;
+                                                return true;
+                                        }
+                                        case 19: {
+                                            // Control codes
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([31, 16, 0, 9], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), System.Array.init([31, 16, 0, 9], System.Byte)], System.Object);
+                                                $step = 20;
+                                                return true;
+                                        }
+                                        case 20: {
+                                            // Long ASCII strings
+                                                $enumerator.current = System.Array.init(["eeeee", Bridge.box(0, System.Int32), Bridge.box(5, System.Int32), System.Array.init([101, 101, 101, 101, 101], System.Byte)], System.Object);
+                                                $step = 21;
+                                                return true;
+                                        }
+                                        case 21: {
+                                            $enumerator.current = System.Array.init([System.String.concat("e", Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([225], System.Int32)), "eee"), Bridge.box(0, System.Int32), Bridge.box(5, System.Int32), System.Array.init([101, 195, 161, 101, 101, 101], System.Byte)], System.Object);
+                                                $step = 22;
+                                                return true;
+                                        }
+                                        case 22: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([101, 32768, 101, 101, 101], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(5, System.Int32), System.Array.init([101, 232, 128, 128, 101, 101, 101], System.Byte)], System.Object);
+                                                $step = 23;
+                                                return true;
+                                        }
+                                        case 23: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([101, 55296, 56320, 101, 101, 101], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(6, System.Int32), System.Array.init([101, 240, 144, 128, 128, 101, 101, 101], System.Byte)], System.Object);
+                                                $step = 24;
+                                                return true;
+                                        }
+                                        case 24: {
+                                            $enumerator.current = System.Array.init(["eeeeeeeeeeeeeee", Bridge.box(0, System.Int32), Bridge.box(15, System.Int32), System.Array.init([101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101], System.Byte)], System.Object);
+                                                $step = 25;
+                                                return true;
+                                        }
+                                        case 25: {
+                                            $enumerator.current = System.Array.init([System.String.concat("eeeeee", Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([225], System.Int32)), "eeeeeeee"), Bridge.box(0, System.Int32), Bridge.box(15, System.Int32), System.Array.init([101, 101, 101, 101, 101, 101, 195, 161, 101, 101, 101, 101, 101, 101, 101, 101], System.Byte)], System.Object);
+                                                $step = 26;
+                                                return true;
+                                        }
+                                        case 26: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([101, 101, 101, 101, 101, 101, 32768, 101, 101, 101, 101, 101, 101, 101, 101], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(15, System.Int32), System.Array.init([101, 101, 101, 101, 101, 101, 232, 128, 128, 101, 101, 101, 101, 101, 101, 101, 101], System.Byte)], System.Object);
+                                                $step = 27;
+                                                return true;
+                                        }
+                                        case 27: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([101, 101, 101, 101, 101, 101, 55296, 56320, 101, 101, 101, 101, 101, 101, 101, 101], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(16, System.Int32), System.Array.init([101, 101, 101, 101, 101, 101, 240, 144, 128, 128, 101, 101, 101, 101, 101, 101, 101, 101], System.Byte)], System.Object);
+                                                $step = 28;
+                                                return true;
+                                        }
+                                        case 28: {
+                                            // 2 bytes
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([225], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([195, 161], System.Byte)], System.Object);
+                                                $step = 29;
+                                                return true;
+                                        }
+                                        case 29: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([225, 225, 225, 225, 225], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(5, System.Int32), System.Array.init([195, 161, 195, 161, 195, 161, 195, 161, 195, 161], System.Byte)], System.Object);
+                                                $step = 30;
+                                                return true;
+                                        }
+                                        case 30: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([225, 101, 225, 225, 225], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(5, System.Int32), System.Array.init([195, 161, 101, 195, 161, 195, 161, 195, 161], System.Byte)], System.Object);
+                                                $step = 31;
+                                                return true;
+                                        }
+                                        case 31: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([225, 32768, 225, 225, 225], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(5, System.Int32), System.Array.init([195, 161, 232, 128, 128, 195, 161, 195, 161, 195, 161], System.Byte)], System.Object);
+                                                $step = 32;
+                                                return true;
+                                        }
+                                        case 32: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([225, 55296, 56320, 225, 225, 225], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(6, System.Int32), System.Array.init([195, 161, 240, 144, 128, 128, 195, 161, 195, 161, 195, 161], System.Byte)], System.Object);
+                                                $step = 33;
+                                                return true;
+                                        }
+                                        case 33: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([225, 225, 225, 225, 225, 225, 225, 225, 225, 225, 225, 225, 225, 225, 225], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(15, System.Int32), System.Array.init([195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161], System.Byte)], System.Object);
+                                                $step = 34;
+                                                return true;
+                                        }
+                                        case 34: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([225, 225, 101, 225, 225, 225, 225, 225, 225, 225, 225, 225, 225, 225, 225], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(15, System.Int32), System.Array.init([195, 161, 195, 161, 101, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161], System.Byte)], System.Object);
+                                                $step = 35;
+                                                return true;
+                                        }
+                                        case 35: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([225, 225, 32768, 225, 225, 225, 225, 225, 225, 225, 225, 225, 225, 225, 225], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(15, System.Int32), System.Array.init([195, 161, 195, 161, 232, 128, 128, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161], System.Byte)], System.Object);
+                                                $step = 36;
+                                                return true;
+                                        }
+                                        case 36: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([225, 225, 55296, 56320, 225, 225, 225, 225, 225, 225, 225, 225, 225, 225, 225, 225], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(16, System.Int32), System.Array.init([195, 161, 195, 161, 240, 144, 128, 128, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161, 195, 161], System.Byte)], System.Object);
+                                                $step = 37;
+                                                return true;
+                                        }
+                                        case 37: {
+                                            // 3 bytes
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([32768], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([232, 128, 128], System.Byte)], System.Object);
+                                                $step = 38;
+                                                return true;
+                                        }
+                                        case 38: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([32768, 32768, 32768, 32768], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), System.Array.init([232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128], System.Byte)], System.Object);
+                                                $step = 39;
+                                                return true;
+                                        }
+                                        case 39: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([32768, 101, 32768, 32768], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), System.Array.init([232, 128, 128, 101, 232, 128, 128, 232, 128, 128], System.Byte)], System.Object);
+                                                $step = 40;
+                                                return true;
+                                        }
+                                        case 40: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([32768, 225, 32768, 32768], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), System.Array.init([232, 128, 128, 195, 161, 232, 128, 128, 232, 128, 128], System.Byte)], System.Object);
+                                                $step = 41;
+                                                return true;
+                                        }
+                                        case 41: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([32768, 55296, 56320, 32768, 32768], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(5, System.Int32), System.Array.init([232, 128, 128, 240, 144, 128, 128, 232, 128, 128, 232, 128, 128], System.Byte)], System.Object);
+                                                $step = 42;
+                                                return true;
+                                        }
+                                        case 42: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([32768, 32768, 32768, 32768, 32768, 32768, 32768, 32768, 32768, 32768, 32768, 32768, 32768, 32768, 32768], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(15, System.Int32), System.Array.init([232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128], System.Byte)], System.Object);
+                                                $step = 43;
+                                                return true;
+                                        }
+                                        case 43: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([32768, 32768, 32768, 101, 32768, 32768, 32768, 32768, 32768, 32768, 32768, 32768, 32768, 32768, 32768], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(15, System.Int32), System.Array.init([232, 128, 128, 232, 128, 128, 232, 128, 128, 101, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128], System.Byte)], System.Object);
+                                                $step = 44;
+                                                return true;
+                                        }
+                                        case 44: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([32768, 32768, 32768, 225, 32768, 32768, 32768, 32768, 32768, 32768, 32768, 32768, 32768, 32768, 32768], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(15, System.Int32), System.Array.init([232, 128, 128, 232, 128, 128, 232, 128, 128, 195, 161, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128], System.Byte)], System.Object);
+                                                $step = 45;
+                                                return true;
+                                        }
+                                        case 45: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([32768, 32768, 32768, 55296, 56320, 32768, 32768, 32768, 32768, 32768, 32768, 32768, 32768, 32768, 32768, 32768], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(16, System.Int32), System.Array.init([232, 128, 128, 232, 128, 128, 232, 128, 128, 240, 144, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128, 232, 128, 128], System.Byte)], System.Object);
+                                                $step = 46;
+                                                return true;
+                                        }
+                                        case 46: {
+                                            // Surrogate pairs
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), System.Array.init([240, 144, 128, 128], System.Byte)], System.Object);
+                                                $step = 47;
+                                                return true;
+                                        }
+                                        case 47: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([97, 55296, 56320, 98], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(4, System.Int32), System.Array.init([97, 240, 144, 128, 128, 98], System.Byte)], System.Object);
+                                                $step = 48;
+                                                return true;
+                                        }
+                                        case 48: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56192, 56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), System.Array.init([243, 176, 128, 128], System.Byte)], System.Object);
+                                                $step = 49;
+                                                return true;
+                                        }
+                                        case 49: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 57343], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), System.Array.init([240, 144, 143, 191], System.Byte)], System.Object);
+                                                $step = 50;
+                                                return true;
+                                        }
+                                        case 50: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56319, 56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), System.Array.init([244, 143, 176, 128], System.Byte)], System.Object);
+                                                $step = 51;
+                                                return true;
+                                        }
+                                        case 51: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56319, 57343], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), System.Array.init([244, 143, 191, 191], System.Byte)], System.Object);
+                                                $step = 52;
+                                                return true;
+                                        }
+                                        case 52: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 56320, 55296, 56320, 55296, 56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(6, System.Int32), System.Array.init([240, 144, 128, 128, 240, 144, 128, 128, 240, 144, 128, 128], System.Byte)], System.Object);
+                                                $step = 53;
+                                                return true;
+                                        }
+                                        case 53: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 56320, 101, 55296, 56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(5, System.Int32), System.Array.init([240, 144, 128, 128, 101, 240, 144, 128, 128], System.Byte)], System.Object);
+                                                $step = 54;
+                                                return true;
+                                        }
+                                        case 54: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 56320, 225, 55296, 56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(5, System.Int32), System.Array.init([240, 144, 128, 128, 195, 161, 240, 144, 128, 128], System.Byte)], System.Object);
+                                                $step = 55;
+                                                return true;
+                                        }
+                                        case 55: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 56320, 32768, 55296, 56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(5, System.Int32), System.Array.init([240, 144, 128, 128, 232, 128, 128, 240, 144, 128, 128], System.Byte)], System.Object);
+                                                $step = 56;
+                                                return true;
+                                        }
+                                        case 56: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 56320, 55296, 56320, 55296, 56320, 55296, 56320, 55296, 56320, 55296, 56320, 55296, 56320, 55296, 56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(16, System.Int32), System.Array.init([240, 144, 128, 128, 240, 144, 128, 128, 240, 144, 128, 128, 240, 144, 128, 128, 240, 144, 128, 128, 240, 144, 128, 128, 240, 144, 128, 128, 240, 144, 128, 128], System.Byte)], System.Object);
+                                                $step = 57;
+                                                return true;
+                                        }
+                                        case 57: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 56320, 101, 55296, 56320, 55296, 56320, 55296, 56320, 55296, 56320, 55296, 56320, 55296, 56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(15, System.Int32), System.Array.init([240, 144, 128, 128, 101, 240, 144, 128, 128, 240, 144, 128, 128, 240, 144, 128, 128, 240, 144, 128, 128, 240, 144, 128, 128, 240, 144, 128, 128], System.Byte)], System.Object);
+                                                $step = 58;
+                                                return true;
+                                        }
+                                        case 58: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 56320, 225, 55296, 56320, 55296, 56320, 55296, 56320, 55296, 56320, 55296, 56320, 55296, 56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(15, System.Int32), System.Array.init([240, 144, 128, 128, 195, 161, 240, 144, 128, 128, 240, 144, 128, 128, 240, 144, 128, 128, 240, 144, 128, 128, 240, 144, 128, 128, 240, 144, 128, 128], System.Byte)], System.Object);
+                                                $step = 59;
+                                                return true;
+                                        }
+                                        case 59: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 56320, 32768, 55296, 56320, 55296, 56320, 55296, 56320, 55296, 56320, 55296, 56320, 55296, 56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(15, System.Int32), System.Array.init([240, 144, 128, 128, 232, 128, 128, 240, 144, 128, 128, 240, 144, 128, 128, 240, 144, 128, 128, 240, 144, 128, 128, 240, 144, 128, 128, 240, 144, 128, 128], System.Byte)], System.Object);
+                                                $step = 60;
+                                                return true;
+                                        }
+                                        case 60: {
+                                            // U+FDD0 - U+FDEF
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([64976, 65007], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), System.Array.init([239, 183, 144, 239, 183, 175], System.Byte)], System.Object);
+                                                $step = 61;
+                                                return true;
+                                        }
+                                        case 61: {
+                                            // BOM
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65279, 65], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), System.Array.init([239, 187, 191, 65], System.Byte)], System.Object);
+                                                $step = 62;
+                                                return true;
+                                        }
+                                        case 62: {
+                                            // High BMP non-chars
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65533], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([239, 191, 189], System.Byte)], System.Object);
+                                                $step = 63;
+                                                return true;
+                                        }
+                                        case 63: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65534], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([239, 191, 190], System.Byte)], System.Object);
+                                                $step = 64;
+                                                return true;
+                                        }
+                                        case 64: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65535], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), System.Array.init([239, 191, 191], System.Byte)], System.Object);
+                                                $step = 65;
+                                                return true;
+                                        }
+                                        case 65: {
+                                            // Empty strings
+                                                $enumerator.current = System.Array.init(["", Bridge.box(0, System.Int32), Bridge.box(0, System.Int32), System.Array.init(0, 0, System.Byte)], System.Object);
+                                                $step = 66;
+                                                return true;
+                                        }
+                                        case 66: {
+                                            $enumerator.current = System.Array.init(["abc", Bridge.box(3, System.Int32), Bridge.box(0, System.Int32), System.Array.init(0, 0, System.Byte)], System.Object);
+                                                $step = 67;
+                                                return true;
+                                        }
+                                        case 67: {
+                                            $enumerator.current = System.Array.init(["abc", Bridge.box(0, System.Int32), Bridge.box(0, System.Int32), System.Array.init(0, 0, System.Byte)], System.Object);
+                                                $step = 68;
+                                                return true;
+                                        }
+                                        case 68: {
+
+                                        }
+                                        default: {
+                                            return false;
+                                        }
+                                    }
+                                }
+                            } catch($async_e1) {
+                                $async_e = System.Exception.create($async_e1);
+                                throw $async_e;
+                            }
+                        }));
+                        return $enumerator;
+                    }));
+                },
+                Encode_InvalidChars_TestData: function () {
+                    return new (Bridge.GeneratorEnumerable$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function ()  {
+                        var $step = 0,
+                            $jumpFromFinally,
+                            $returnValue,
+                            unicodeReplacementBytes1,
+                            unicodeReplacementBytes2,
+                            $async_e;
+
+                        var $enumerator = new (Bridge.GeneratorEnumerator$1(System.Array.type(System.Object)))(Bridge.fn.bind(this, function () {
+                            try {
+                                for (;;) {
+                                    switch ($step) {
+                                        case 0: {
+                                            unicodeReplacementBytes1 = System.Array.init([239, 191, 189], System.Byte);
+
+                                                // Lone high surrogate
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), unicodeReplacementBytes1], System.Object);
+                                                $step = 1;
+                                                return true;
+                                        }
+                                        case 1: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56693], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), unicodeReplacementBytes1], System.Object);
+                                                $step = 2;
+                                                return true;
+                                        }
+                                        case 2: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56319], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), unicodeReplacementBytes1], System.Object);
+                                                $step = 3;
+                                                return true;
+                                        }
+                                        case 3: {
+                                            // Lone low surrogate
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), unicodeReplacementBytes1], System.Object);
+                                                $step = 4;
+                                                return true;
+                                        }
+                                        case 4: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), unicodeReplacementBytes1], System.Object);
+                                                $step = 5;
+                                                return true;
+                                        }
+                                        case 5: {
+                                            // Surrogate pair out of range
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(1, System.Int32), unicodeReplacementBytes1], System.Object);
+                                                $step = 6;
+                                                return true;
+                                        }
+                                        case 6: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 56320], System.Int32)), Bridge.box(1, System.Int32), Bridge.box(1, System.Int32), unicodeReplacementBytes1], System.Object);
+                                                $step = 7;
+                                                return true;
+                                        }
+                                        case 7: {
+                                            // Invalid surrogate pair
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([65, 55296, 57344], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), System.Array.init([65, 239, 191, 189, 238, 128, 128], System.Byte)], System.Object);
+                                                $step = 8;
+                                                return true;
+                                        }
+                                        case 8: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 65, 56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(3, System.Int32), System.Array.init([239, 191, 189, 65, 239, 191, 189], System.Byte)], System.Object);
+                                                $step = 9;
+                                                return true;
+                                        }
+                                        case 9: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 65, 66, 2047, 67, 56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(6, System.Int32), System.Array.init([239, 191, 189, 65, 66, 223, 191, 67, 239, 191, 189], System.Byte)], System.Object);
+                                                $step = 10;
+                                                return true;
+                                        }
+                                        case 10: {
+                                            // Mixture of ASCII, valid Unicode and invalid unicode
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56693, 56693, 55299, 56693, 56693, 56693, 56693, 55299, 55299, 55299, 56693, 56693, 56693, 56693], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(14, System.Int32), System.Array.init([239, 191, 189, 239, 191, 189, 240, 144, 181, 181, 239, 191, 189, 239, 191, 189, 239, 191, 189, 239, 191, 189, 239, 191, 189, 240, 144, 181, 181, 239, 191, 189, 239, 191, 189, 239, 191, 189], System.Byte)], System.Object);
+                                                $step = 11;
+                                                return true;
+                                        }
+                                        case 11: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([84, 101, 115, 116, 55299, 84, 101, 115, 116], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(9, System.Int32), System.Array.init([84, 101, 115, 116, 239, 191, 189, 84, 101, 115, 116], System.Byte)], System.Object);
+                                                $step = 12;
+                                                return true;
+                                        }
+                                        case 12: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([84, 101, 115, 116, 56693, 84, 101, 115, 116], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(9, System.Int32), System.Array.init([84, 101, 115, 116, 239, 191, 189, 84, 101, 115, 116], System.Byte)], System.Object);
+                                                $step = 13;
+                                                return true;
+                                        }
+                                        case 13: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([84, 101, 115, 116, 84, 101, 115, 116, 56693], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(9, System.Int32), System.Array.init([84, 101, 115, 116, 84, 101, 115, 116, 239, 191, 189], System.Byte)], System.Object);
+                                                $step = 14;
+                                                return true;
+                                        }
+                                        case 14: {
+                                            $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([84, 101, 115, 116, 84, 101, 115, 116, 55299], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(9, System.Int32), System.Array.init([84, 101, 115, 116, 84, 101, 115, 116, 239, 191, 189], System.Byte)], System.Object);
+                                                $step = 15;
+                                                return true;
+                                        }
+                                        case 15: {
+                                            unicodeReplacementBytes2 = System.Array.init([239, 191, 189, 239, 191, 189], System.Byte);
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([55296, 55296], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), unicodeReplacementBytes2], System.Object);
+                                                $step = 16;
+                                                return true;
+                                        }
+                                        case 16: {
+                                            // High, high
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56320, 55296], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), unicodeReplacementBytes2], System.Object);
+                                                $step = 17;
+                                                return true;
+                                        }
+                                        case 17: {
+                                            // Low, high
+                                                $enumerator.current = System.Array.init([Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([56320, 56320], System.Int32)), Bridge.box(0, System.Int32), Bridge.box(2, System.Int32), unicodeReplacementBytes2], System.Object);
+                                                $step = 18;
+                                                return true;
+                                        }
+                                        case 18: {
+                                            // Low, low
+
+                                        }
+                                        default: {
+                                            return false;
+                                        }
+                                    }
+                                }
+                            } catch($async_e1) {
+                                $async_e = System.Exception.create($async_e1);
+                                throw $async_e;
+                            }
+                        }));
+                        return $enumerator;
+                    }));
+                },
+                GetBytes_ValidASCIIUnicode: function () {
+                    var encoding = System.Text.Encoding.UTF8;
+                    // Bytes has enough capacity to accomodate result
+                    var s = Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([84, 55357, 56833, 101, 115, 116], System.Int32));
+                    Bridge.Test.NUnit.Assert.AreEqual(4, encoding.getBytes(s, 0, 2, System.Array.init(4, 0, System.Byte), 0));
+                    Bridge.Test.NUnit.Assert.AreEqual(5, encoding.getBytes(s, 0, 3, System.Array.init(5, 0, System.Byte), 0));
+                    Bridge.Test.NUnit.Assert.AreEqual(6, encoding.getBytes(s, 0, 4, System.Array.init(6, 0, System.Byte), 0));
+                    Bridge.Test.NUnit.Assert.AreEqual(7, encoding.getBytes(s, 0, 5, System.Array.init(7, 0, System.Byte), 0));
+
+                    var c = System.String.toCharArray(s, 0, s.length);
+                    Bridge.Test.NUnit.Assert.AreEqual(4, encoding.getBytes(c, 0, 2, System.Array.init(4, 0, System.Byte), 0));
+                    Bridge.Test.NUnit.Assert.AreEqual(5, encoding.getBytes(c, 0, 3, System.Array.init(5, 0, System.Byte), 0));
+                    Bridge.Test.NUnit.Assert.AreEqual(6, encoding.getBytes(c, 0, 4, System.Array.init(6, 0, System.Byte), 0));
+                    Bridge.Test.NUnit.Assert.AreEqual(7, encoding.getBytes(c, 0, 5, System.Array.init(7, 0, System.Byte), 0));
+                },
+                GetBytes_InvalidASCIIUnicode: function () {
+                    var encoding = System.Text.Encoding.UTF8;
+                    // Bytes does not have enough capacity to accomodate result
+                    var s = Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([84, 55357, 56833, 101, 115, 116], System.Int32));
+                    Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
+                        encoding.getBytes(s, 0, 2, System.Array.init(3, 0, System.Byte), 0);
+                    });
+                    Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
+                        encoding.getBytes(s, 0, 3, System.Array.init(4, 0, System.Byte), 0);
+                    });
+                    Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
+                        encoding.getBytes(s, 0, 4, System.Array.init(5, 0, System.Byte), 0);
+                    });
+                    Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
+                        encoding.getBytes(s, 0, 5, System.Array.init(6, 0, System.Byte), 0);
+                    });
+
+                    var c = System.String.toCharArray(s, 0, s.length);
+                    Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
+                        encoding.getBytes(c, 0, 2, System.Array.init(3, 0, System.Byte), 0);
+                    });
+                    Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
+                        encoding.getBytes(c, 0, 3, System.Array.init(4, 0, System.Byte), 0);
+                    });
+                    Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
+                        encoding.getBytes(c, 0, 4, System.Array.init(5, 0, System.Byte), 0);
+                    });
+                    Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
+                        encoding.getBytes(c, 0, 5, System.Array.init(6, 0, System.Byte), 0);
+                    });
+                }
+            }
+        },
+        methods: {
+            Encode: function () {
+                var $t;
+                $t = Bridge.getEnumerator(Bridge.ClientTest.Text.UTF8EncodingEncodeTests.Encode_TestData(), System.Array.type(System.Object));
+                try {
+                    while ($t.moveNext()) {
+                        var objectse = $t.Current;
+                        var chars = Bridge.cast(objectse[System.Array.index(0, objectse)], System.String);
+                        var index = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(1, objectse)]), System.Int32));
+                        var count = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(2, objectse)]), System.Int32));
+                        var expected = Bridge.cast(objectse[System.Array.index(3, objectse)], System.Array.type(System.Byte));
+
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF8Encoding(true, false), chars, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF8Encoding(false, false), chars, index, count, expected);
+
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF8Encoding(false, true), chars, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF8Encoding(true, true), chars, index, count, expected);
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }},
+            Encode_InvalidChars: function () {
+                var $t;
+                $t = Bridge.getEnumerator(Bridge.ClientTest.Text.UTF8EncodingEncodeTests.Encode_InvalidChars_TestData(), System.Array.type(System.Object));
+                try {
+                    while ($t.moveNext()) {
+                        var objectse = $t.Current;
+                        var chars = Bridge.cast(objectse[System.Array.index(0, objectse)], System.String);
+                        var index = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(1, objectse)]), System.Int32));
+                        var count = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(2, objectse)]), System.Int32));
+                        var expected = Bridge.cast(objectse[System.Array.index(3, objectse)], System.Array.type(System.Byte));
+
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF8Encoding(true, false), chars, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF8Encoding(false, false), chars, index, count, expected);
+
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UTF8Encoding(false, true), chars, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UTF8Encoding(true, true), chars, index, count);
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }}
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Text.UTF8EncodingGetMaxTests", {
+        methods: {
+            GetMaxByteCount: function () {
+                var $t;
+                var data = System.Array.init([0, 1, 10, 715827881, 715827881], System.Int32);
+                $t = Bridge.getEnumerator(data);
+                try {
+                    while ($t.moveNext()) {
+                        var charCount = $t.Current;
+                        var expected = Bridge.Int.mul((((charCount + 1) | 0)), 3);
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF8Encoding(true, true).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF8Encoding(true, false).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF8Encoding(false, true).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF8Encoding(false, false).getMaxByteCount(charCount));
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }},
+            GetMaxCharCount: function () {
+                var $t;
+                var data = System.Array.init([0, 1, 10, 2147483646], System.Int32);
+                $t = Bridge.getEnumerator(data);
+                try {
+                    while ($t.moveNext()) {
+                        var byteCount = $t.Current;
+                        var expected = (byteCount + 1) | 0;
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF8Encoding(true, true).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF8Encoding(true, false).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF8Encoding(false, true).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF8Encoding(false, false).getMaxCharCount(byteCount));
+                    }
+                } finally {
+                    if (Bridge.is($t, System.IDisposable)) {
+                        $t.System$IDisposable$dispose();
+                    }
+                }}
         }
     });
 
@@ -46938,18 +50774,18 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.ns("Bridge.ClientTest.Text.RegularExpressions.Entities.RegexEntityTests", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Text.RegularExpressions.Entities.RegexEntityTests, {
-        f1: function (_o20) {
-            _o20.add(0, true);
-            _o20.add(1, true);
-            _o20.add(2, true);
-            _o20.add(4, true);
-            _o20.add(8, false);
-            _o20.add(16, true);
-            _o20.add(32, true);
-            _o20.add(64, false);
-            _o20.add(256, false);
-            _o20.add(512, false);
-            return _o20;
+        f1: function (_o22) {
+            _o22.add(0, true);
+            _o22.add(1, true);
+            _o22.add(2, true);
+            _o22.add(4, true);
+            _o22.add(8, false);
+            _o22.add(16, true);
+            _o22.add(32, true);
+            _o22.add(64, false);
+            _o22.add(256, false);
+            _o22.add(512, false);
+            return _o22;
         }
     });
 
@@ -55302,7 +59138,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     $m($n[3].TypeSystemTests.ProtectedClass, function () { return {"td":$n[3].TypeSystemTests,"att":1048580,"a":3,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"}]}; });
     $m($n[3].TypeSystemTests.E1, function () { return {"td":$n[3].TypeSystemTests,"att":258,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"V1","is":true,"t":4,"rt":$n[3].TypeSystemTests.E1,"sn":"V1"},{"a":2,"n":"V2","is":true,"t":4,"rt":$n[3].TypeSystemTests.E1,"sn":"V2"},{"a":2,"n":"V3","is":true,"t":4,"rt":$n[3].TypeSystemTests.E1,"sn":"V3"}]}; });
     $m($n[0].Int32, function () { return {"att":1048841,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"def":function () { return Number; }},{"a":1,"n":".ctor","t":1,"p":[$n[0].Int32],"pi":[{"n":"i","pt":$n[0].Int32,"ps":0}],"def":function (i) { return Number; }},{"a":2,"n":"CompareTo","t":8,"pi":[{"n":"other","pt":$n[0].Int32,"ps":0}],"tpc":0,"def":function (other) { return Bridge.compare(this, other); },"rt":$n[0].Int32,"p":[$n[0].Int32]},{"a":2,"n":"CompareTo","t":8,"pi":[{"n":"obj","pt":$n[0].Object,"ps":0}],"tpc":0,"def":function (obj) { return Bridge.compare(this, obj); },"rt":$n[0].Int32,"p":[$n[0].Object]},{"a":2,"n":"Equals","t":8,"pi":[{"n":"other","pt":$n[0].Int32,"ps":0}],"tpc":0,"def":function (other) { return this === other; },"rt":$n[0].Boolean,"p":[$n[0].Int32]},{"ov":true,"a":2,"n":"Equals","t":8,"pi":[{"n":"other","pt":$n[0].Object,"ps":0}],"tpc":0,"def":function (other) { return System.Int32.equals(this, other); },"rt":$n[0].Boolean,"p":[$n[0].Object]},{"a":2,"n":"Format","t":8,"pi":[{"n":"format","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (format) { return System.Int32.format(this, format); },"rt":$n[0].String,"p":[$n[0].String]},{"a":2,"n":"Format","t":8,"pi":[{"n":"format","pt":$n[0].String,"ps":0},{"n":"provider","pt":$n[0].IFormatProvider,"ps":1}],"tpc":0,"def":function (format, provider) { return System.Int32.format(this, format, provider); },"rt":$n[0].String,"p":[$n[0].String,$n[0].IFormatProvider]},{"a":2,"n":"Parse","is":true,"t":8,"pi":[{"n":"s","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (s) { return System.Int32.parse(s); },"rt":$n[0].Int32,"p":[$n[0].String]},{"a":2,"n":"Parse","is":true,"t":8,"pi":[{"n":"s","pt":$n[0].String,"ps":0},{"n":"radix","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (s, radix) { return System.Int32.parse(s, radix); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32]},{"a":2,"n":"ToString","t":8,"pi":[{"n":"radix","pt":$n[0].Int32,"ps":0}],"sn":"toString","rt":$n[0].String,"p":[$n[0].Int32]},{"a":2,"n":"ToString","t":8,"pi":[{"n":"format","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (format) { return System.Int32.format(this, format); },"rt":$n[0].String,"p":[$n[0].String]},{"a":2,"n":"ToString","t":8,"pi":[{"n":"format","pt":$n[0].String,"ps":0},{"n":"provider","pt":$n[0].IFormatProvider,"ps":1}],"tpc":0,"def":function (format, provider) { return System.Int32.format(this, format, provider); },"rt":$n[0].String,"p":[$n[0].String,$n[0].IFormatProvider]},{"a":2,"n":"TryParse","is":true,"t":8,"pi":[{"n":"s","pt":$n[0].String,"ps":0},{"n":"result","out":true,"pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (s, result) { return System.Int32.tryParse(s, result); },"rt":$n[0].Boolean,"p":[$n[0].String,$n[0].Int32]},{"a":2,"n":"TryParse","is":true,"t":8,"pi":[{"n":"s","pt":$n[0].String,"ps":0},{"n":"result","out":true,"pt":$n[0].Int32,"ps":1},{"n":"radix","pt":$n[0].Int32,"ps":2}],"tpc":0,"def":function (s, result, radix) { return System.Int32.tryParse(s, result, radix); },"rt":$n[0].Boolean,"p":[$n[0].String,$n[0].Int32,$n[0].Int32]},{"a":2,"n":"MaxValue","is":true,"t":4,"rt":$n[0].Int32,"sn":"MaxValue"},{"a":2,"n":"MinValue","is":true,"t":4,"rt":$n[0].Int32,"sn":"MinValue"}]}; });
-    $m($n[0].String, function () { return {"att":1048833,"a":2,"m":[{"a":2,"n":".ctor","t":1,"def":function () { return ""; }},{"a":2,"n":".ctor","t":1,"p":[$n[0].Array.type(System.Char)],"pi":[{"n":"value","pt":$n[0].Array.type(System.Char),"ps":0}],"def":function (value) { return String.fromCharCode.apply(null, value); }},{"a":2,"n":".ctor","t":1,"p":[$n[0].Char,$n[0].Int32],"pi":[{"n":"c","pt":$n[0].Char,"ps":0},{"n":"count","pt":$n[0].Int32,"ps":1}],"def":function (c, count) { return System.String.fromCharCount(c, count); }},{"a":2,"n":".ctor","t":1,"p":[$n[0].Array.type(System.Char),$n[0].Int32,$n[0].Int32],"pi":[{"n":"value","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"length","pt":$n[0].Int32,"ps":2}],"def":function (value, startIndex, length) { return String.fromCharCode.apply(null, value.slice(startIndex, startIndex + length)); }},{"a":2,"n":"Clone","t":8,"tpc":0,"def":function () { return this; },"rt":$n[0].Object},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"strB","pt":$n[0].String,"ps":1}],"tpc":0,"def":function (strA, strB) { return System.String.compare(strA, strB); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].String]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"strB","pt":$n[0].String,"ps":1},{"n":"ignoreCase","pt":$n[0].Boolean,"ps":2}],"tpc":0,"def":function (strA, strB, ignoreCase) { return System.String.compare(strA, strB, ignoreCase); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].String,$n[0].Boolean]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"strB","pt":$n[0].String,"ps":1},{"n":"comparisonType","pt":Number,"ps":2}],"tpc":0,"def":function (strA, strB, comparisonType) { return System.String.compare(strA, strB, comparisonType); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].String,Number]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"strB","pt":$n[0].String,"ps":1},{"n":"ignoreCase","pt":$n[0].Boolean,"ps":2},{"n":"culture","pt":$n[4].CultureInfo,"ps":3}],"tpc":0,"def":function (strA, strB, ignoreCase, culture) { return System.String.compare(strA, strB, ignoreCase, culture); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].String,$n[0].Boolean,$n[4].CultureInfo]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"indexA","pt":$n[0].Int32,"ps":1},{"n":"strB","pt":$n[0].String,"ps":2},{"n":"indexB","pt":$n[0].Int32,"ps":3},{"n":"length","pt":$n[0].Int32,"ps":4}],"tpc":0,"def":function (strA, indexA, strB, indexB, length) { return System.String.compare(strA.substr(indexA, length), strB.substr(indexB, length)); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].String,$n[0].Int32,$n[0].Int32]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"indexA","pt":$n[0].Int32,"ps":1},{"n":"strB","pt":$n[0].String,"ps":2},{"n":"indexB","pt":$n[0].Int32,"ps":3},{"n":"length","pt":$n[0].Int32,"ps":4},{"n":"ignoreCase","pt":$n[0].Boolean,"ps":5}],"tpc":0,"def":function (strA, indexA, strB, indexB, length, ignoreCase) { return System.String.compare(strA.substr(indexA, length), strB.substr(indexB, length), ignoreCase); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].String,$n[0].Int32,$n[0].Int32,$n[0].Boolean]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"indexA","pt":$n[0].Int32,"ps":1},{"n":"strB","pt":$n[0].String,"ps":2},{"n":"indexB","pt":$n[0].Int32,"ps":3},{"n":"length","pt":$n[0].Int32,"ps":4},{"n":"comparisonType","pt":Number,"ps":5}],"tpc":0,"def":function (strA, indexA, strB, indexB, length, comparisonType) { return System.String.compare(strA.substr(indexA, length), strB.substr(indexB, length), comparisonType); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].String,$n[0].Int32,$n[0].Int32,Number]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"indexA","pt":$n[0].Int32,"ps":1},{"n":"strB","pt":$n[0].String,"ps":2},{"n":"indexB","pt":$n[0].Int32,"ps":3},{"n":"length","pt":$n[0].Int32,"ps":4},{"n":"ignoreCase","pt":$n[0].Boolean,"ps":5},{"n":"culture","pt":$n[4].CultureInfo,"ps":6}],"tpc":0,"def":function (strA, indexA, strB, indexB, length, ignoreCase, culture) { return System.String.compare(strA.substr(indexA, length), strB.substr(indexB, length), ignoreCase, culture); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].String,$n[0].Int32,$n[0].Int32,$n[0].Boolean,$n[4].CultureInfo]},{"a":2,"n":"CompareTo","t":8,"pi":[{"n":"value","pt":$n[0].Object,"ps":0}],"tpc":0,"def":function (value) { return System.String.compare(this, value.toString()); },"rt":$n[0].Int32,"p":[$n[0].Object]},{"a":2,"n":"CompareTo","t":8,"pi":[{"n":"strB","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (strB) { return System.String.compare(this, strB); },"rt":$n[0].Int32,"p":[$n[0].String]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"values","pt":$n[5].IEnumerable$1(System.String),"ps":0}],"tpc":0,"def":function (values) { return System.String.concat(Bridge.toArray(values)); },"rt":$n[0].String,"p":[$n[5].IEnumerable$1(System.String)]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"values","pt":$n[5].IEnumerable$1(System.Object),"ps":0}],"tpc":1,"def":function (T, values) { return System.String.concat(Bridge.toArray(values)); },"rt":$n[0].String,"p":[$n[5].IEnumerable$1(System.Object)]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"arg0","pt":$n[0].Object,"ps":0}],"tpc":0,"def":function (arg0) { return System.String.concat(arg0); },"rt":$n[0].String,"p":[$n[0].Object]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"args","ip":true,"pt":$n[0].Array.type(System.Object),"ps":0}],"tpc":0,"def":function (args) { return System.String.concat(Array.prototype.slice.call((arguments, 0))); },"rt":$n[0].String,"p":[$n[0].Array.type(System.Object)]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"values","ip":true,"pt":$n[0].Array.type(System.String),"ps":0}],"tpc":0,"def":function (values) { return System.String.concat(Array.prototype.slice.call((arguments, 0))); },"rt":$n[0].String,"p":[$n[0].Array.type(System.String)]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"arg0","pt":$n[0].Object,"ps":0},{"n":"arg1","pt":$n[0].Object,"ps":1}],"tpc":0,"def":function (arg0, arg1) { return System.String.concat(arg0, arg1); },"rt":$n[0].String,"p":[$n[0].Object,$n[0].Object]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"str0","pt":$n[0].String,"ps":0},{"n":"str1","pt":$n[0].String,"ps":1}],"tpc":0,"def":function (str0, str1) { return System.String.concat(str0, str1); },"rt":$n[0].String,"p":[$n[0].String,$n[0].String]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"arg0","pt":$n[0].Object,"ps":0},{"n":"arg1","pt":$n[0].Object,"ps":1},{"n":"arg2","pt":$n[0].Object,"ps":2}],"tpc":0,"def":function (arg0, arg1, arg2) { return System.String.concat(arg0, arg1, arg2); },"rt":$n[0].String,"p":[$n[0].Object,$n[0].Object,$n[0].Object]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"str0","pt":$n[0].String,"ps":0},{"n":"str1","pt":$n[0].String,"ps":1},{"n":"str2","pt":$n[0].String,"ps":2}],"tpc":0,"def":function (str0, str1, str2) { return System.String.concat(str0, str1, str2); },"rt":$n[0].String,"p":[$n[0].String,$n[0].String,$n[0].String]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"arg0","pt":$n[0].Object,"ps":0},{"n":"arg1","pt":$n[0].Object,"ps":1},{"n":"arg2","pt":$n[0].Object,"ps":2},{"n":"arg3","pt":$n[0].Object,"ps":3}],"tpc":0,"def":function (arg0, arg1, arg2, arg3) { return System.String.concat(arg0, arg1, arg2, arg3); },"rt":$n[0].String,"p":[$n[0].Object,$n[0].Object,$n[0].Object,$n[0].Object]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"str0","pt":$n[0].String,"ps":0},{"n":"str1","pt":$n[0].String,"ps":1},{"n":"str2","pt":$n[0].String,"ps":2},{"n":"str3","pt":$n[0].String,"ps":3}],"tpc":0,"def":function (str0, str1, str2, str3) { return System.String.concat(str0, str1, str2, str3); },"rt":$n[0].String,"p":[$n[0].String,$n[0].String,$n[0].String,$n[0].String]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"arg0","pt":$n[0].Object,"ps":0},{"n":"arg1","pt":$n[0].Object,"ps":1},{"n":"arg2","pt":$n[0].Object,"ps":2},{"n":"arg3","pt":$n[0].Object,"ps":3},{"n":"args","ip":true,"pt":$n[0].Array.type(System.Object),"ps":4}],"tpc":0,"def":function (arg0, arg1, arg2, arg3, args) { return System.String.concat(arg0, arg1, arg2, arg3, args); },"rt":$n[0].String,"p":[$n[0].Object,$n[0].Object,$n[0].Object,$n[0].Object,$n[0].Array.type(System.Object)]},{"a":2,"n":"Contains","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.contains(this,value); },"rt":$n[0].Boolean,"p":[$n[0].String]},{"a":2,"n":"EndsWith","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.endsWith(this, value); },"rt":$n[0].Boolean,"p":[$n[0].String]},{"a":2,"n":"Equals","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.equals(this, value); },"rt":$n[0].Boolean,"p":[$n[0].String]},{"a":2,"n":"Equals","is":true,"t":8,"pi":[{"n":"a","pt":$n[0].String,"ps":0},{"n":"b","pt":$n[0].String,"ps":1}],"tpc":0,"def":function (a, b) { return System.String.equals(a, b); },"rt":$n[0].Boolean,"p":[$n[0].String,$n[0].String]},{"a":2,"n":"Equals","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"comparisonType","pt":Number,"ps":1}],"tpc":0,"def":function (value, comparisonType) { return System.String.equals(this, value, comparisonType); },"rt":$n[0].Boolean,"p":[$n[0].String,Number]},{"a":2,"n":"Equals","is":true,"t":8,"pi":[{"n":"a","pt":$n[0].String,"ps":0},{"n":"b","pt":$n[0].String,"ps":1},{"n":"comparisonType","pt":Number,"ps":2}],"tpc":0,"def":function (a, b, comparisonType) { return System.String.equals(a, b, comparisonType); },"rt":$n[0].Boolean,"p":[$n[0].String,$n[0].String,Number]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"format","pt":$n[0].String,"ps":0},{"n":"arg0","pt":$n[0].Object,"ps":1}],"tpc":0,"def":function (format, arg0) { return System.String.format(format, arg0); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Object]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"format","pt":$n[0].String,"ps":0},{"n":"args","ip":true,"pt":$n[0].Array.type(System.Object),"ps":1}],"tpc":0,"def":function (format, args) { return System.String.format(format, args); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Array.type(System.Object)]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"provider","pt":$n[0].IFormatProvider,"ps":0},{"n":"format","pt":$n[0].String,"ps":1},{"n":"arg0","pt":$n[0].Object,"ps":2}],"tpc":0,"def":function (provider, format, arg0) { return System.String.formatProvider(provider, format, arg0); },"rt":$n[0].String,"p":[$n[0].IFormatProvider,$n[0].String,$n[0].Object]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"provider","pt":$n[0].IFormatProvider,"ps":0},{"n":"format","pt":$n[0].String,"ps":1},{"n":"args","ip":true,"pt":$n[0].Array.type(System.Object),"ps":2}],"tpc":0,"def":function (provider, format, args) { return System.String.formatProvider(provider, format, args); },"rt":$n[0].String,"p":[$n[0].IFormatProvider,$n[0].String,$n[0].Array.type(System.Object)]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"format","pt":$n[0].String,"ps":0},{"n":"arg0","pt":$n[0].Object,"ps":1},{"n":"arg1","pt":$n[0].Object,"ps":2}],"tpc":0,"def":function (format, arg0, arg1) { return System.String.format(format, arg0, arg1); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Object,$n[0].Object]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"provider","pt":$n[0].IFormatProvider,"ps":0},{"n":"format","pt":$n[0].String,"ps":1},{"n":"arg0","pt":$n[0].Object,"ps":2},{"n":"arg1","pt":$n[0].Object,"ps":3}],"tpc":0,"def":function (provider, format, arg0, arg1) { return System.String.formatProvider(provider, format, arg0, arg1); },"rt":$n[0].String,"p":[$n[0].IFormatProvider,$n[0].String,$n[0].Object,$n[0].Object]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"format","pt":$n[0].String,"ps":0},{"n":"arg0","pt":$n[0].Object,"ps":1},{"n":"arg1","pt":$n[0].Object,"ps":2},{"n":"arg2","pt":$n[0].Object,"ps":3}],"tpc":0,"def":function (format, arg0, arg1, arg2) { return System.String.format(format, arg0, arg1, arg2); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Object,$n[0].Object,$n[0].Object]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"provider","pt":$n[0].IFormatProvider,"ps":0},{"n":"format","pt":$n[0].String,"ps":1},{"n":"arg0","pt":$n[0].Object,"ps":2},{"n":"arg1","pt":$n[0].Object,"ps":3},{"n":"arg2","pt":$n[0].Object,"ps":4}],"tpc":0,"def":function (provider, format, arg0, arg1, arg2) { return System.String.formatProvider(provider, format, arg0, arg1, arg2); },"rt":$n[0].String,"p":[$n[0].IFormatProvider,$n[0].String,$n[0].Object,$n[0].Object,$n[0].Object]},{"a":2,"n":"GetEnumerator","t":8,"tpc":0,"def":function () { return Bridge.getEnumerator(this); },"rt":$n[0].CharEnumerator},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].Char,"ps":0}],"tpc":0,"def":function (value) { return System.String.indexOf(this, String.fromCharCode(value)); },"rt":$n[0].Int32,"p":[$n[0].Char]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.indexOf(this, value); },"rt":$n[0].Int32,"p":[$n[0].String]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].Char,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (value, startIndex) { return System.String.indexOf(this, String.fromCharCode(value), startIndex); },"rt":$n[0].Int32,"p":[$n[0].Char,$n[0].Int32]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (value, startIndex) { return System.String.indexOf(this, value, startIndex); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"comparisonType","pt":Number,"ps":1}],"tpc":0,"def":function (value, comparisonType) { return ($t = this, System.String.indexOf($t, value, 0, $t.length, comparisonType)); },"rt":$n[0].Int32,"p":[$n[0].String,Number]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].Char,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2}],"tpc":0,"def":function (value, startIndex, count) { return System.String.indexOf(this, String.fromCharCode(value), startIndex, count); },"rt":$n[0].Int32,"p":[$n[0].Char,$n[0].Int32,$n[0].Int32]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"searchValue","pt":$n[0].String,"ps":0},{"n":"fromIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2}],"tpc":0,"def":function (searchValue, fromIndex, count) { return System.String.indexOf(this, searchValue, fromIndex, count); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].Int32]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"comparisonType","pt":Number,"ps":2}],"tpc":0,"def":function (value, startIndex, comparisonType) { return ($t1 = this, System.String.indexOf($t1, value, startIndex, $t1.length, comparisonType)); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,Number]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2},{"n":"comparisonType","pt":Number,"ps":3}],"tpc":0,"def":function (value, startIndex, count, comparisonType) { return System.String.indexOf(this, value, startIndex, count, comparisonType); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].Int32,Number]},{"a":2,"n":"IndexOfAny","t":8,"pi":[{"n":"anyOf","pt":$n[0].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (anyOf) { return System.String.indexOfAny(this, anyOf); },"rt":$n[0].Int32,"p":[$n[0].Array.type(System.Char)]},{"a":2,"n":"IndexOfAny","t":8,"pi":[{"n":"anyOf","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (anyOf, startIndex) { return System.String.indexOfAny(this, anyOf, startIndex); },"rt":$n[0].Int32,"p":[$n[0].Array.type(System.Char),$n[0].Int32]},{"a":2,"n":"IndexOfAny","t":8,"pi":[{"n":"anyOf","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2}],"tpc":0,"def":function (anyOf, startIndex, count) { return System.String.indexOfAny(this, anyOf, startIndex, count); },"rt":$n[0].Int32,"p":[$n[0].Array.type(System.Char),$n[0].Int32,$n[0].Int32]},{"a":2,"n":"Insert","t":8,"pi":[{"n":"startIndex","pt":$n[0].Int32,"ps":0},{"n":"value","pt":$n[0].String,"ps":1}],"tpc":0,"def":function (startIndex, value) { return System.String.insert(startIndex, this, value); },"rt":$n[0].String,"p":[$n[0].Int32,$n[0].String]},{"a":2,"n":"IsNullOrEmpty","is":true,"t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.isNullOrEmpty(value); },"rt":$n[0].Boolean,"p":[$n[0].String]},{"a":2,"n":"IsNullOrWhiteSpace","is":true,"t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.isNullOrWhiteSpace(value); },"rt":$n[0].Boolean,"p":[$n[0].String]},{"a":2,"n":"Join","is":true,"t":8,"pi":[{"n":"separator","pt":$n[0].String,"ps":0},{"n":"values","pt":$n[5].IEnumerable$1(System.String),"ps":1}],"tpc":0,"def":function (separator, values) { return Bridge.toArray(values).join(separator); },"rt":$n[0].String,"p":[$n[0].String,$n[5].IEnumerable$1(System.String)]},{"a":2,"n":"Join","is":true,"t":8,"pi":[{"n":"separator","pt":$n[0].String,"ps":0},{"n":"values","pt":$n[5].IEnumerable$1(System.Object),"ps":1}],"tpc":1,"def":function (T, separator, values) { return Bridge.toArray(values).join(separator); },"rt":$n[0].String,"p":[$n[0].String,$n[5].IEnumerable$1(System.Object)]},{"a":2,"n":"Join","is":true,"t":8,"pi":[{"n":"separator","pt":$n[0].String,"ps":0},{"n":"values","ip":true,"pt":$n[0].Array.type(System.Object),"ps":1}],"tpc":0,"def":function (separator, values) { return Array.prototype.slice.call((arguments, 1)).join(separator); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Array.type(System.Object)]},{"a":2,"n":"Join","is":true,"t":8,"pi":[{"n":"separator","pt":$n[0].String,"ps":0},{"n":"value","ip":true,"pt":$n[0].Array.type(System.String),"ps":1}],"tpc":0,"def":function (separator, value) { return Array.prototype.slice.call((arguments, 1)).join(separator); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Array.type(System.String)]},{"a":2,"n":"Join","is":true,"t":8,"pi":[{"n":"separator","pt":$n[0].String,"ps":0},{"n":"value","pt":$n[0].Array.type(System.String),"ps":1},{"n":"startIndex","pt":$n[0].Int32,"ps":2},{"n":"count","pt":$n[0].Int32,"ps":3}],"tpc":0,"def":function (separator, value, startIndex, count) { return value.slice(startIndex, startIndex + count).join(separator); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Array.type(System.String),$n[0].Int32,$n[0].Int32]},{"a":2,"n":"LastIndexOf","t":8,"pi":[{"n":"value","pt":$n[0].Char,"ps":0}],"tpc":0,"def":function (value) { return this.lastIndexOf(String.fromCharCode(value)); },"rt":$n[0].Int32,"p":[$n[0].Char]},{"a":2,"n":"LastIndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"sn":"lastIndexOf","rt":$n[0].Int32,"p":[$n[0].String]},{"a":2,"n":"LastIndexOf","t":8,"pi":[{"n":"value","pt":$n[0].Char,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (value, startIndex) { return this.lastIndexOf(String.fromCharCode(value), startIndex); },"rt":$n[0].Int32,"p":[$n[0].Char,$n[0].Int32]},{"a":2,"n":"LastIndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1}],"sn":"lastIndexOf","rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32]},{"a":2,"n":"LastIndexOf","t":8,"pi":[{"n":"value","pt":$n[0].Char,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2}],"tpc":0,"def":function (value, startIndex, count) { return System.String.lastIndexOf(this, String.fromCharCode(value), startIndex, count); },"rt":$n[0].Int32,"p":[$n[0].Char,$n[0].Int32,$n[0].Int32]},{"a":2,"n":"LastIndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2}],"tpc":0,"def":function (value, startIndex, count) { return System.String.lastIndexOf(this, value, startIndex, count); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].Int32]},{"a":2,"n":"LastIndexOfAny","t":8,"pi":[{"n":"anyOf","ip":true,"pt":$n[0].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (anyOf) { return System.String.lastIndexOfAny(this, Array.prototype.slice.call((arguments, 0))); },"rt":$n[0].Int32,"p":[$n[0].Array.type(System.Char)]},{"a":2,"n":"LastIndexOfAny","t":8,"pi":[{"n":"anyOf","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (anyOf, startIndex) { return System.String.lastIndexOfAny(this, anyOf, startIndex); },"rt":$n[0].Int32,"p":[$n[0].Array.type(System.Char),$n[0].Int32]},{"a":2,"n":"LastIndexOfAny","t":8,"pi":[{"n":"anyOf","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2}],"tpc":0,"def":function (anyOf, startIndex, count) { return System.String.lastIndexOfAny(this, anyOf, startIndex, count); },"rt":$n[0].Int32,"p":[$n[0].Array.type(System.Char),$n[0].Int32,$n[0].Int32]},{"a":2,"n":"PadLeft","t":8,"pi":[{"n":"totalWidth","pt":$n[0].Int32,"ps":0}],"tpc":0,"def":function (totalWidth) { return System.String.alignString(this, totalWidth); },"rt":$n[0].String,"p":[$n[0].Int32]},{"a":2,"n":"PadLeft","t":8,"pi":[{"n":"totalWidth","pt":$n[0].Int32,"ps":0},{"n":"paddingChar","pt":$n[0].Char,"ps":1}],"tpc":0,"def":function (totalWidth, paddingChar) { return System.String.alignString(this, totalWidth, paddingChar); },"rt":$n[0].String,"p":[$n[0].Int32,$n[0].Char]},{"a":2,"n":"PadRight","t":8,"pi":[{"n":"totalWidth","pt":$n[0].Int32,"ps":0}],"tpc":0,"def":function (totalWidth) { return System.String.alignString(this, -totalWidth); },"rt":$n[0].String,"p":[$n[0].Int32]},{"a":2,"n":"PadRight","t":8,"pi":[{"n":"totalWidth","pt":$n[0].Int32,"ps":0},{"n":"paddingChar","pt":$n[0].Char,"ps":1}],"tpc":0,"def":function (totalWidth, paddingChar) { return System.String.alignString(this, -totalWidth, paddingChar); },"rt":$n[0].String,"p":[$n[0].Int32,$n[0].Char]},{"a":2,"n":"Remove","t":8,"pi":[{"n":"startIndex","pt":$n[0].Int32,"ps":0}],"tpc":0,"def":function (startIndex) { return System.String.remove(this, startIndex); },"rt":$n[0].String,"p":[$n[0].Int32]},{"a":2,"n":"Remove","t":8,"pi":[{"n":"startIndex","pt":$n[0].Int32,"ps":0},{"n":"count","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (startIndex, count) { return System.String.remove(this, startIndex, count); },"rt":$n[0].String,"p":[$n[0].Int32,$n[0].Int32]},{"a":2,"n":"Replace","t":8,"pi":[{"n":"oldChar","pt":$n[0].Char,"ps":0},{"n":"newChar","pt":$n[0].Char,"ps":1}],"tpc":0,"def":function (oldChar, newChar) { return System.String.replaceAll(this, String.fromCharCode(oldChar), String.fromCharCode(newChar)); },"rt":$n[0].String,"p":[$n[0].Char,$n[0].Char]},{"a":2,"n":"Replace","t":8,"pi":[{"n":"oldValue","pt":$n[0].String,"ps":0},{"n":"newValue","pt":$n[0].String,"ps":1}],"tpc":0,"def":function (oldValue, newValue) { return System.String.replaceAll(this, oldValue, newValue); },"rt":$n[0].String,"p":[$n[0].String,$n[0].String]},{"a":2,"n":"Split","t":8,"pi":[{"n":"separator","ip":true,"pt":$n[0].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (separator) { return System.String.split(this, Array.prototype.slice.call((arguments, 0)).map(function(i) {{ return String.fromCharCode(i); }})); },"rt":$n[0].Array.type(System.String),"p":[$n[0].Array.type(System.Char)]},{"a":2,"n":"Split","t":8,"pi":[{"n":"separator","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"count","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (separator, count) { return System.String.split(this, separator.map(function(i) {{ return String.fromCharCode(i); }}), count); },"rt":$n[0].Array.type(System.String),"p":[$n[0].Array.type(System.Char),$n[0].Int32]},{"a":2,"n":"Split","t":8,"pi":[{"n":"separator","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"options","pt":Number,"ps":1}],"tpc":0,"def":function (separator, options) { return System.String.split(this, separator.map(function(i) {{ return String.fromCharCode(i); }}), null, options); },"rt":$n[0].Array.type(System.String),"p":[$n[0].Array.type(System.Char),Number]},{"a":2,"n":"Split","t":8,"pi":[{"n":"separator","pt":$n[0].Array.type(System.String),"ps":0},{"n":"options","pt":Number,"ps":1}],"tpc":0,"def":function (separator, options) { return System.String.split(this, separator, null, options); },"rt":$n[0].Array.type(System.String),"p":[$n[0].Array.type(System.String),Number]},{"a":2,"n":"Split","t":8,"pi":[{"n":"separator","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"count","pt":$n[0].Int32,"ps":1},{"n":"options","pt":Number,"ps":2}],"tpc":0,"def":function (separator, count, options) { return System.String.split(this, separator.map(function(i) {{ return String.fromCharCode(i); }}), count, options); },"rt":$n[0].Array.type(System.String),"p":[$n[0].Array.type(System.Char),$n[0].Int32,Number]},{"a":2,"n":"Split","t":8,"pi":[{"n":"separator","pt":$n[0].Array.type(System.String),"ps":0},{"n":"count","pt":$n[0].Int32,"ps":1},{"n":"options","pt":Number,"ps":2}],"tpc":0,"def":function (separator, count, options) { return System.String.split(this, separator, count, options); },"rt":$n[0].Array.type(System.String),"p":[$n[0].Array.type(System.String),$n[0].Int32,Number]},{"a":2,"n":"StartsWith","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.startsWith(this, value); },"rt":$n[0].Boolean,"p":[$n[0].String]},{"a":2,"n":"Substring","t":8,"pi":[{"n":"startIndex","pt":$n[0].Int32,"ps":0}],"sn":"substr","rt":$n[0].String,"p":[$n[0].Int32]},{"a":2,"n":"Substring","t":8,"pi":[{"n":"startIndex","pt":$n[0].Int32,"ps":0},{"n":"length","pt":$n[0].Int32,"ps":1}],"sn":"substr","rt":$n[0].String,"p":[$n[0].Int32,$n[0].Int32]},{"a":2,"n":"ToCharArray","t":8,"tpc":0,"def":function () { return ($t2 = this, System.String.toCharArray($t2, 0, $t2.length)); },"rt":$n[0].Array.type(System.Char)},{"a":2,"n":"ToCharArray","t":8,"pi":[{"n":"startIndex","pt":$n[0].Int32,"ps":0},{"n":"length","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (startIndex, length) { return System.String.toCharArray(this, startIndex, length); },"rt":$n[0].Array.type(System.Char),"p":[$n[0].Int32,$n[0].Int32]},{"a":2,"n":"ToLower","t":8,"tpc":0,"def":function () { return this.toLowerCase(); },"rt":$n[0].String},{"a":2,"n":"ToUpper","t":8,"tpc":0,"def":function () { return this.toUpperCase(); },"rt":$n[0].String},{"a":2,"n":"Trim","t":8,"sn":"trim","rt":$n[0].String},{"a":2,"n":"Trim","t":8,"pi":[{"n":"trimChars","ip":true,"pt":$n[0].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (trimChars) { return System.String.trim(this, Array.prototype.slice.call((arguments, 0))); },"rt":$n[0].String,"p":[$n[0].Array.type(System.Char)]},{"a":2,"n":"TrimEnd","t":8,"tpc":0,"def":function () { return System.String.trimEnd(this); },"rt":$n[0].String},{"a":2,"n":"TrimEnd","t":8,"pi":[{"n":"trimChars","ip":true,"pt":$n[0].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (trimChars) { return System.String.trimEnd(this, Array.prototype.slice.call((arguments, 0))); },"rt":$n[0].String,"p":[$n[0].Array.type(System.Char)]},{"a":2,"n":"TrimStart","t":8,"tpc":0,"def":function () { return System.String.trimStart(this); },"rt":$n[0].String},{"a":2,"n":"TrimStart","t":8,"pi":[{"n":"trimChars","ip":true,"pt":$n[0].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (trimChars) { return System.String.trimStart(this, Array.prototype.slice.call((arguments, 0))); },"rt":$n[0].String,"p":[$n[0].Array.type(System.Char)]},{"a":2,"n":"op_Equality","is":true,"t":8,"pi":[{"n":"s1","pt":$n[0].String,"ps":0},{"n":"s2","pt":$n[0].String,"ps":1}],"sn":"op_Equality","rt":$n[0].Boolean,"p":[$n[0].String,$n[0].String]},{"a":2,"n":"op_Inequality","is":true,"t":8,"pi":[{"n":"s1","pt":$n[0].String,"ps":0},{"n":"s2","pt":$n[0].String,"ps":1}],"sn":"op_Inequality","rt":$n[0].Boolean,"p":[$n[0].String,$n[0].String]},{"a":2,"n":"Chars","t":16,"rt":$n[0].Char,"p":[$n[0].Int32],"i":true,"ipi":[{"n":"index","pt":$n[0].Int32,"ps":0}],"g":{"a":2,"n":"get_Chars","t":8,"pi":[{"n":"index","pt":$n[0].Int32,"ps":0}],"tpc":0,"def":function (index) { return charCodeAt(index); },"rt":$n[0].Char,"p":[$n[0].Int32]}},{"a":2,"n":"Length","t":16,"rt":$n[0].Int32,"g":{"a":2,"n":"get_Length","t":8,"rt":$n[0].Int32,"fg":"length"},"fn":"length"},{"a":2,"n":"Empty","is":true,"t":4,"rt":$n[0].String,"sn":"Empty"}]}; });
+    $m($n[0].String, function () { return {"att":1048833,"a":2,"m":[{"a":2,"n":".ctor","t":1,"def":function () { return ""; }},{"a":2,"n":".ctor","t":1,"p":[$n[0].Array.type(System.Char)],"pi":[{"n":"value","pt":$n[0].Array.type(System.Char),"ps":0}],"def":function (value) { return String.fromCharCode.apply(null, value); }},{"a":2,"n":".ctor","t":1,"p":[$n[0].Char,$n[0].Int32],"pi":[{"n":"c","pt":$n[0].Char,"ps":0},{"n":"count","pt":$n[0].Int32,"ps":1}],"def":function (c, count) { return System.String.fromCharCount(c, count); }},{"a":2,"n":".ctor","t":1,"p":[$n[0].Array.type(System.Char),$n[0].Int32,$n[0].Int32],"pi":[{"n":"value","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"length","pt":$n[0].Int32,"ps":2}],"def":function (value, startIndex, length) { return String.fromCharCode.apply(null, value.slice(startIndex, startIndex + length)); }},{"a":2,"n":"Clone","t":8,"tpc":0,"def":function () { return this; },"rt":$n[0].Object},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"strB","pt":$n[0].String,"ps":1}],"tpc":0,"def":function (strA, strB) { return System.String.compare(strA, strB); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].String]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"strB","pt":$n[0].String,"ps":1},{"n":"ignoreCase","pt":$n[0].Boolean,"ps":2}],"tpc":0,"def":function (strA, strB, ignoreCase) { return System.String.compare(strA, strB, ignoreCase); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].String,$n[0].Boolean]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"strB","pt":$n[0].String,"ps":1},{"n":"comparisonType","pt":Number,"ps":2}],"tpc":0,"def":function (strA, strB, comparisonType) { return System.String.compare(strA, strB, comparisonType); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].String,Number]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"strB","pt":$n[0].String,"ps":1},{"n":"ignoreCase","pt":$n[0].Boolean,"ps":2},{"n":"culture","pt":$n[4].CultureInfo,"ps":3}],"tpc":0,"def":function (strA, strB, ignoreCase, culture) { return System.String.compare(strA, strB, ignoreCase, culture); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].String,$n[0].Boolean,$n[4].CultureInfo]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"indexA","pt":$n[0].Int32,"ps":1},{"n":"strB","pt":$n[0].String,"ps":2},{"n":"indexB","pt":$n[0].Int32,"ps":3},{"n":"length","pt":$n[0].Int32,"ps":4}],"tpc":0,"def":function (strA, indexA, strB, indexB, length) { return System.String.compare(strA.substr(indexA, length), strB.substr(indexB, length)); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].String,$n[0].Int32,$n[0].Int32]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"indexA","pt":$n[0].Int32,"ps":1},{"n":"strB","pt":$n[0].String,"ps":2},{"n":"indexB","pt":$n[0].Int32,"ps":3},{"n":"length","pt":$n[0].Int32,"ps":4},{"n":"ignoreCase","pt":$n[0].Boolean,"ps":5}],"tpc":0,"def":function (strA, indexA, strB, indexB, length, ignoreCase) { return System.String.compare(strA.substr(indexA, length), strB.substr(indexB, length), ignoreCase); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].String,$n[0].Int32,$n[0].Int32,$n[0].Boolean]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"indexA","pt":$n[0].Int32,"ps":1},{"n":"strB","pt":$n[0].String,"ps":2},{"n":"indexB","pt":$n[0].Int32,"ps":3},{"n":"length","pt":$n[0].Int32,"ps":4},{"n":"comparisonType","pt":Number,"ps":5}],"tpc":0,"def":function (strA, indexA, strB, indexB, length, comparisonType) { return System.String.compare(strA.substr(indexA, length), strB.substr(indexB, length), comparisonType); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].String,$n[0].Int32,$n[0].Int32,Number]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"indexA","pt":$n[0].Int32,"ps":1},{"n":"strB","pt":$n[0].String,"ps":2},{"n":"indexB","pt":$n[0].Int32,"ps":3},{"n":"length","pt":$n[0].Int32,"ps":4},{"n":"ignoreCase","pt":$n[0].Boolean,"ps":5},{"n":"culture","pt":$n[4].CultureInfo,"ps":6}],"tpc":0,"def":function (strA, indexA, strB, indexB, length, ignoreCase, culture) { return System.String.compare(strA.substr(indexA, length), strB.substr(indexB, length), ignoreCase, culture); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].String,$n[0].Int32,$n[0].Int32,$n[0].Boolean,$n[4].CultureInfo]},{"a":2,"n":"CompareTo","t":8,"pi":[{"n":"value","pt":$n[0].Object,"ps":0}],"tpc":0,"def":function (value) { return System.String.compare(this, value.toString()); },"rt":$n[0].Int32,"p":[$n[0].Object]},{"a":2,"n":"CompareTo","t":8,"pi":[{"n":"strB","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (strB) { return System.String.compare(this, strB); },"rt":$n[0].Int32,"p":[$n[0].String]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"values","pt":$n[5].IEnumerable$1(System.String),"ps":0}],"tpc":0,"def":function (values) { return System.String.concat(Bridge.toArray(values)); },"rt":$n[0].String,"p":[$n[5].IEnumerable$1(System.String)]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"values","pt":$n[5].IEnumerable$1(System.Object),"ps":0}],"tpc":1,"def":function (T, values) { return System.String.concat(Bridge.toArray(values)); },"rt":$n[0].String,"p":[$n[5].IEnumerable$1(System.Object)]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"arg0","pt":$n[0].Object,"ps":0}],"tpc":0,"def":function (arg0) { return System.String.concat(arg0); },"rt":$n[0].String,"p":[$n[0].Object]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"args","ip":true,"pt":$n[0].Array.type(System.Object),"ps":0}],"tpc":0,"def":function (args) { return System.String.concat(Array.prototype.slice.call((arguments, 0))); },"rt":$n[0].String,"p":[$n[0].Array.type(System.Object)]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"values","ip":true,"pt":$n[0].Array.type(System.String),"ps":0}],"tpc":0,"def":function (values) { return System.String.concat(Array.prototype.slice.call((arguments, 0))); },"rt":$n[0].String,"p":[$n[0].Array.type(System.String)]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"arg0","pt":$n[0].Object,"ps":0},{"n":"arg1","pt":$n[0].Object,"ps":1}],"tpc":0,"def":function (arg0, arg1) { return System.String.concat(arg0, arg1); },"rt":$n[0].String,"p":[$n[0].Object,$n[0].Object]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"str0","pt":$n[0].String,"ps":0},{"n":"str1","pt":$n[0].String,"ps":1}],"tpc":0,"def":function (str0, str1) { return System.String.concat(str0, str1); },"rt":$n[0].String,"p":[$n[0].String,$n[0].String]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"arg0","pt":$n[0].Object,"ps":0},{"n":"arg1","pt":$n[0].Object,"ps":1},{"n":"arg2","pt":$n[0].Object,"ps":2}],"tpc":0,"def":function (arg0, arg1, arg2) { return System.String.concat(arg0, arg1, arg2); },"rt":$n[0].String,"p":[$n[0].Object,$n[0].Object,$n[0].Object]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"str0","pt":$n[0].String,"ps":0},{"n":"str1","pt":$n[0].String,"ps":1},{"n":"str2","pt":$n[0].String,"ps":2}],"tpc":0,"def":function (str0, str1, str2) { return System.String.concat(str0, str1, str2); },"rt":$n[0].String,"p":[$n[0].String,$n[0].String,$n[0].String]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"arg0","pt":$n[0].Object,"ps":0},{"n":"arg1","pt":$n[0].Object,"ps":1},{"n":"arg2","pt":$n[0].Object,"ps":2},{"n":"arg3","pt":$n[0].Object,"ps":3}],"tpc":0,"def":function (arg0, arg1, arg2, arg3) { return System.String.concat(arg0, arg1, arg2, arg3); },"rt":$n[0].String,"p":[$n[0].Object,$n[0].Object,$n[0].Object,$n[0].Object]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"str0","pt":$n[0].String,"ps":0},{"n":"str1","pt":$n[0].String,"ps":1},{"n":"str2","pt":$n[0].String,"ps":2},{"n":"str3","pt":$n[0].String,"ps":3}],"tpc":0,"def":function (str0, str1, str2, str3) { return System.String.concat(str0, str1, str2, str3); },"rt":$n[0].String,"p":[$n[0].String,$n[0].String,$n[0].String,$n[0].String]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"arg0","pt":$n[0].Object,"ps":0},{"n":"arg1","pt":$n[0].Object,"ps":1},{"n":"arg2","pt":$n[0].Object,"ps":2},{"n":"arg3","pt":$n[0].Object,"ps":3},{"n":"args","ip":true,"pt":$n[0].Array.type(System.Object),"ps":4}],"tpc":0,"def":function (arg0, arg1, arg2, arg3, args) { return System.String.concat(arg0, arg1, arg2, arg3, args); },"rt":$n[0].String,"p":[$n[0].Object,$n[0].Object,$n[0].Object,$n[0].Object,$n[0].Array.type(System.Object)]},{"a":2,"n":"Contains","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.contains(this,value); },"rt":$n[0].Boolean,"p":[$n[0].String]},{"a":2,"n":"CopyTo","t":8,"pi":[{"n":"sourceIndex","pt":$n[0].Int32,"ps":0},{"n":"destination","pt":$n[0].Array.type(System.Char),"ps":1},{"n":"destinationIndex","pt":$n[0].Int32,"ps":2},{"n":"count","pt":$n[0].Int32,"ps":3}],"tpc":0,"def":function (sourceIndex, destination, destinationIndex, count) { return System.String.copyTo(this, sourceIndex, destination, destinationIndex, count); },"rt":$n[0].Void,"p":[$n[0].Int32,$n[0].Array.type(System.Char),$n[0].Int32,$n[0].Int32]},{"a":2,"n":"EndsWith","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.endsWith(this, value); },"rt":$n[0].Boolean,"p":[$n[0].String]},{"a":2,"n":"Equals","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.equals(this, value); },"rt":$n[0].Boolean,"p":[$n[0].String]},{"a":2,"n":"Equals","is":true,"t":8,"pi":[{"n":"a","pt":$n[0].String,"ps":0},{"n":"b","pt":$n[0].String,"ps":1}],"tpc":0,"def":function (a, b) { return System.String.equals(a, b); },"rt":$n[0].Boolean,"p":[$n[0].String,$n[0].String]},{"a":2,"n":"Equals","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"comparisonType","pt":Number,"ps":1}],"tpc":0,"def":function (value, comparisonType) { return System.String.equals(this, value, comparisonType); },"rt":$n[0].Boolean,"p":[$n[0].String,Number]},{"a":2,"n":"Equals","is":true,"t":8,"pi":[{"n":"a","pt":$n[0].String,"ps":0},{"n":"b","pt":$n[0].String,"ps":1},{"n":"comparisonType","pt":Number,"ps":2}],"tpc":0,"def":function (a, b, comparisonType) { return System.String.equals(a, b, comparisonType); },"rt":$n[0].Boolean,"p":[$n[0].String,$n[0].String,Number]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"format","pt":$n[0].String,"ps":0},{"n":"arg0","pt":$n[0].Object,"ps":1}],"tpc":0,"def":function (format, arg0) { return System.String.format(format, arg0); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Object]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"format","pt":$n[0].String,"ps":0},{"n":"args","ip":true,"pt":$n[0].Array.type(System.Object),"ps":1}],"tpc":0,"def":function (format, args) { return System.String.format(format, args); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Array.type(System.Object)]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"provider","pt":$n[0].IFormatProvider,"ps":0},{"n":"format","pt":$n[0].String,"ps":1},{"n":"arg0","pt":$n[0].Object,"ps":2}],"tpc":0,"def":function (provider, format, arg0) { return System.String.formatProvider(provider, format, arg0); },"rt":$n[0].String,"p":[$n[0].IFormatProvider,$n[0].String,$n[0].Object]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"provider","pt":$n[0].IFormatProvider,"ps":0},{"n":"format","pt":$n[0].String,"ps":1},{"n":"args","ip":true,"pt":$n[0].Array.type(System.Object),"ps":2}],"tpc":0,"def":function (provider, format, args) { return System.String.formatProvider(provider, format, args); },"rt":$n[0].String,"p":[$n[0].IFormatProvider,$n[0].String,$n[0].Array.type(System.Object)]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"format","pt":$n[0].String,"ps":0},{"n":"arg0","pt":$n[0].Object,"ps":1},{"n":"arg1","pt":$n[0].Object,"ps":2}],"tpc":0,"def":function (format, arg0, arg1) { return System.String.format(format, arg0, arg1); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Object,$n[0].Object]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"provider","pt":$n[0].IFormatProvider,"ps":0},{"n":"format","pt":$n[0].String,"ps":1},{"n":"arg0","pt":$n[0].Object,"ps":2},{"n":"arg1","pt":$n[0].Object,"ps":3}],"tpc":0,"def":function (provider, format, arg0, arg1) { return System.String.formatProvider(provider, format, arg0, arg1); },"rt":$n[0].String,"p":[$n[0].IFormatProvider,$n[0].String,$n[0].Object,$n[0].Object]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"format","pt":$n[0].String,"ps":0},{"n":"arg0","pt":$n[0].Object,"ps":1},{"n":"arg1","pt":$n[0].Object,"ps":2},{"n":"arg2","pt":$n[0].Object,"ps":3}],"tpc":0,"def":function (format, arg0, arg1, arg2) { return System.String.format(format, arg0, arg1, arg2); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Object,$n[0].Object,$n[0].Object]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"provider","pt":$n[0].IFormatProvider,"ps":0},{"n":"format","pt":$n[0].String,"ps":1},{"n":"arg0","pt":$n[0].Object,"ps":2},{"n":"arg1","pt":$n[0].Object,"ps":3},{"n":"arg2","pt":$n[0].Object,"ps":4}],"tpc":0,"def":function (provider, format, arg0, arg1, arg2) { return System.String.formatProvider(provider, format, arg0, arg1, arg2); },"rt":$n[0].String,"p":[$n[0].IFormatProvider,$n[0].String,$n[0].Object,$n[0].Object,$n[0].Object]},{"a":2,"n":"GetEnumerator","t":8,"tpc":0,"def":function () { return Bridge.getEnumerator(this); },"rt":$n[0].CharEnumerator},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].Char,"ps":0}],"tpc":0,"def":function (value) { return System.String.indexOf(this, String.fromCharCode(value)); },"rt":$n[0].Int32,"p":[$n[0].Char]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.indexOf(this, value); },"rt":$n[0].Int32,"p":[$n[0].String]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].Char,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (value, startIndex) { return System.String.indexOf(this, String.fromCharCode(value), startIndex); },"rt":$n[0].Int32,"p":[$n[0].Char,$n[0].Int32]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (value, startIndex) { return System.String.indexOf(this, value, startIndex); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"comparisonType","pt":Number,"ps":1}],"tpc":0,"def":function (value, comparisonType) { return ($t = this, System.String.indexOf($t, value, 0, $t.length, comparisonType)); },"rt":$n[0].Int32,"p":[$n[0].String,Number]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].Char,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2}],"tpc":0,"def":function (value, startIndex, count) { return System.String.indexOf(this, String.fromCharCode(value), startIndex, count); },"rt":$n[0].Int32,"p":[$n[0].Char,$n[0].Int32,$n[0].Int32]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"searchValue","pt":$n[0].String,"ps":0},{"n":"fromIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2}],"tpc":0,"def":function (searchValue, fromIndex, count) { return System.String.indexOf(this, searchValue, fromIndex, count); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].Int32]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"comparisonType","pt":Number,"ps":2}],"tpc":0,"def":function (value, startIndex, comparisonType) { return ($t1 = this, System.String.indexOf($t1, value, startIndex, $t1.length, comparisonType)); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,Number]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2},{"n":"comparisonType","pt":Number,"ps":3}],"tpc":0,"def":function (value, startIndex, count, comparisonType) { return System.String.indexOf(this, value, startIndex, count, comparisonType); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].Int32,Number]},{"a":2,"n":"IndexOfAny","t":8,"pi":[{"n":"anyOf","pt":$n[0].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (anyOf) { return System.String.indexOfAny(this, anyOf); },"rt":$n[0].Int32,"p":[$n[0].Array.type(System.Char)]},{"a":2,"n":"IndexOfAny","t":8,"pi":[{"n":"anyOf","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (anyOf, startIndex) { return System.String.indexOfAny(this, anyOf, startIndex); },"rt":$n[0].Int32,"p":[$n[0].Array.type(System.Char),$n[0].Int32]},{"a":2,"n":"IndexOfAny","t":8,"pi":[{"n":"anyOf","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2}],"tpc":0,"def":function (anyOf, startIndex, count) { return System.String.indexOfAny(this, anyOf, startIndex, count); },"rt":$n[0].Int32,"p":[$n[0].Array.type(System.Char),$n[0].Int32,$n[0].Int32]},{"a":2,"n":"Insert","t":8,"pi":[{"n":"startIndex","pt":$n[0].Int32,"ps":0},{"n":"value","pt":$n[0].String,"ps":1}],"tpc":0,"def":function (startIndex, value) { return System.String.insert(startIndex, this, value); },"rt":$n[0].String,"p":[$n[0].Int32,$n[0].String]},{"a":2,"n":"IsNullOrEmpty","is":true,"t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.isNullOrEmpty(value); },"rt":$n[0].Boolean,"p":[$n[0].String]},{"a":2,"n":"IsNullOrWhiteSpace","is":true,"t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.isNullOrWhiteSpace(value); },"rt":$n[0].Boolean,"p":[$n[0].String]},{"a":2,"n":"Join","is":true,"t":8,"pi":[{"n":"separator","pt":$n[0].String,"ps":0},{"n":"values","pt":$n[5].IEnumerable$1(System.String),"ps":1}],"tpc":0,"def":function (separator, values) { return Bridge.toArray(values).join(separator); },"rt":$n[0].String,"p":[$n[0].String,$n[5].IEnumerable$1(System.String)]},{"a":2,"n":"Join","is":true,"t":8,"pi":[{"n":"separator","pt":$n[0].String,"ps":0},{"n":"values","pt":$n[5].IEnumerable$1(System.Object),"ps":1}],"tpc":1,"def":function (T, separator, values) { return Bridge.toArray(values).join(separator); },"rt":$n[0].String,"p":[$n[0].String,$n[5].IEnumerable$1(System.Object)]},{"a":2,"n":"Join","is":true,"t":8,"pi":[{"n":"separator","pt":$n[0].String,"ps":0},{"n":"values","ip":true,"pt":$n[0].Array.type(System.Object),"ps":1}],"tpc":0,"def":function (separator, values) { return Array.prototype.slice.call((arguments, 1)).join(separator); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Array.type(System.Object)]},{"a":2,"n":"Join","is":true,"t":8,"pi":[{"n":"separator","pt":$n[0].String,"ps":0},{"n":"value","ip":true,"pt":$n[0].Array.type(System.String),"ps":1}],"tpc":0,"def":function (separator, value) { return Array.prototype.slice.call((arguments, 1)).join(separator); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Array.type(System.String)]},{"a":2,"n":"Join","is":true,"t":8,"pi":[{"n":"separator","pt":$n[0].String,"ps":0},{"n":"value","pt":$n[0].Array.type(System.String),"ps":1},{"n":"startIndex","pt":$n[0].Int32,"ps":2},{"n":"count","pt":$n[0].Int32,"ps":3}],"tpc":0,"def":function (separator, value, startIndex, count) { return value.slice(startIndex, startIndex + count).join(separator); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Array.type(System.String),$n[0].Int32,$n[0].Int32]},{"a":2,"n":"LastIndexOf","t":8,"pi":[{"n":"value","pt":$n[0].Char,"ps":0}],"tpc":0,"def":function (value) { return this.lastIndexOf(String.fromCharCode(value)); },"rt":$n[0].Int32,"p":[$n[0].Char]},{"a":2,"n":"LastIndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"sn":"lastIndexOf","rt":$n[0].Int32,"p":[$n[0].String]},{"a":2,"n":"LastIndexOf","t":8,"pi":[{"n":"value","pt":$n[0].Char,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (value, startIndex) { return this.lastIndexOf(String.fromCharCode(value), startIndex); },"rt":$n[0].Int32,"p":[$n[0].Char,$n[0].Int32]},{"a":2,"n":"LastIndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1}],"sn":"lastIndexOf","rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32]},{"a":2,"n":"LastIndexOf","t":8,"pi":[{"n":"value","pt":$n[0].Char,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2}],"tpc":0,"def":function (value, startIndex, count) { return System.String.lastIndexOf(this, String.fromCharCode(value), startIndex, count); },"rt":$n[0].Int32,"p":[$n[0].Char,$n[0].Int32,$n[0].Int32]},{"a":2,"n":"LastIndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2}],"tpc":0,"def":function (value, startIndex, count) { return System.String.lastIndexOf(this, value, startIndex, count); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].Int32]},{"a":2,"n":"LastIndexOfAny","t":8,"pi":[{"n":"anyOf","ip":true,"pt":$n[0].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (anyOf) { return System.String.lastIndexOfAny(this, Array.prototype.slice.call((arguments, 0))); },"rt":$n[0].Int32,"p":[$n[0].Array.type(System.Char)]},{"a":2,"n":"LastIndexOfAny","t":8,"pi":[{"n":"anyOf","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (anyOf, startIndex) { return System.String.lastIndexOfAny(this, anyOf, startIndex); },"rt":$n[0].Int32,"p":[$n[0].Array.type(System.Char),$n[0].Int32]},{"a":2,"n":"LastIndexOfAny","t":8,"pi":[{"n":"anyOf","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2}],"tpc":0,"def":function (anyOf, startIndex, count) { return System.String.lastIndexOfAny(this, anyOf, startIndex, count); },"rt":$n[0].Int32,"p":[$n[0].Array.type(System.Char),$n[0].Int32,$n[0].Int32]},{"a":2,"n":"PadLeft","t":8,"pi":[{"n":"totalWidth","pt":$n[0].Int32,"ps":0}],"tpc":0,"def":function (totalWidth) { return System.String.alignString(this, totalWidth); },"rt":$n[0].String,"p":[$n[0].Int32]},{"a":2,"n":"PadLeft","t":8,"pi":[{"n":"totalWidth","pt":$n[0].Int32,"ps":0},{"n":"paddingChar","pt":$n[0].Char,"ps":1}],"tpc":0,"def":function (totalWidth, paddingChar) { return System.String.alignString(this, totalWidth, paddingChar); },"rt":$n[0].String,"p":[$n[0].Int32,$n[0].Char]},{"a":2,"n":"PadRight","t":8,"pi":[{"n":"totalWidth","pt":$n[0].Int32,"ps":0}],"tpc":0,"def":function (totalWidth) { return System.String.alignString(this, -totalWidth); },"rt":$n[0].String,"p":[$n[0].Int32]},{"a":2,"n":"PadRight","t":8,"pi":[{"n":"totalWidth","pt":$n[0].Int32,"ps":0},{"n":"paddingChar","pt":$n[0].Char,"ps":1}],"tpc":0,"def":function (totalWidth, paddingChar) { return System.String.alignString(this, -totalWidth, paddingChar); },"rt":$n[0].String,"p":[$n[0].Int32,$n[0].Char]},{"a":2,"n":"Remove","t":8,"pi":[{"n":"startIndex","pt":$n[0].Int32,"ps":0}],"tpc":0,"def":function (startIndex) { return System.String.remove(this, startIndex); },"rt":$n[0].String,"p":[$n[0].Int32]},{"a":2,"n":"Remove","t":8,"pi":[{"n":"startIndex","pt":$n[0].Int32,"ps":0},{"n":"count","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (startIndex, count) { return System.String.remove(this, startIndex, count); },"rt":$n[0].String,"p":[$n[0].Int32,$n[0].Int32]},{"a":2,"n":"Replace","t":8,"pi":[{"n":"oldChar","pt":$n[0].Char,"ps":0},{"n":"newChar","pt":$n[0].Char,"ps":1}],"tpc":0,"def":function (oldChar, newChar) { return System.String.replaceAll(this, String.fromCharCode(oldChar), String.fromCharCode(newChar)); },"rt":$n[0].String,"p":[$n[0].Char,$n[0].Char]},{"a":2,"n":"Replace","t":8,"pi":[{"n":"oldValue","pt":$n[0].String,"ps":0},{"n":"newValue","pt":$n[0].String,"ps":1}],"tpc":0,"def":function (oldValue, newValue) { return System.String.replaceAll(this, oldValue, newValue); },"rt":$n[0].String,"p":[$n[0].String,$n[0].String]},{"a":2,"n":"Split","t":8,"pi":[{"n":"separator","ip":true,"pt":$n[0].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (separator) { return System.String.split(this, Array.prototype.slice.call((arguments, 0)).map(function(i) {{ return String.fromCharCode(i); }})); },"rt":$n[0].Array.type(System.String),"p":[$n[0].Array.type(System.Char)]},{"a":2,"n":"Split","t":8,"pi":[{"n":"separator","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"count","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (separator, count) { return System.String.split(this, separator.map(function(i) {{ return String.fromCharCode(i); }}), count); },"rt":$n[0].Array.type(System.String),"p":[$n[0].Array.type(System.Char),$n[0].Int32]},{"a":2,"n":"Split","t":8,"pi":[{"n":"separator","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"options","pt":Number,"ps":1}],"tpc":0,"def":function (separator, options) { return System.String.split(this, separator.map(function(i) {{ return String.fromCharCode(i); }}), null, options); },"rt":$n[0].Array.type(System.String),"p":[$n[0].Array.type(System.Char),Number]},{"a":2,"n":"Split","t":8,"pi":[{"n":"separator","pt":$n[0].Array.type(System.String),"ps":0},{"n":"options","pt":Number,"ps":1}],"tpc":0,"def":function (separator, options) { return System.String.split(this, separator, null, options); },"rt":$n[0].Array.type(System.String),"p":[$n[0].Array.type(System.String),Number]},{"a":2,"n":"Split","t":8,"pi":[{"n":"separator","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"count","pt":$n[0].Int32,"ps":1},{"n":"options","pt":Number,"ps":2}],"tpc":0,"def":function (separator, count, options) { return System.String.split(this, separator.map(function(i) {{ return String.fromCharCode(i); }}), count, options); },"rt":$n[0].Array.type(System.String),"p":[$n[0].Array.type(System.Char),$n[0].Int32,Number]},{"a":2,"n":"Split","t":8,"pi":[{"n":"separator","pt":$n[0].Array.type(System.String),"ps":0},{"n":"count","pt":$n[0].Int32,"ps":1},{"n":"options","pt":Number,"ps":2}],"tpc":0,"def":function (separator, count, options) { return System.String.split(this, separator, count, options); },"rt":$n[0].Array.type(System.String),"p":[$n[0].Array.type(System.String),$n[0].Int32,Number]},{"a":2,"n":"StartsWith","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.startsWith(this, value); },"rt":$n[0].Boolean,"p":[$n[0].String]},{"a":2,"n":"Substring","t":8,"pi":[{"n":"startIndex","pt":$n[0].Int32,"ps":0}],"sn":"substr","rt":$n[0].String,"p":[$n[0].Int32]},{"a":2,"n":"Substring","t":8,"pi":[{"n":"startIndex","pt":$n[0].Int32,"ps":0},{"n":"length","pt":$n[0].Int32,"ps":1}],"sn":"substr","rt":$n[0].String,"p":[$n[0].Int32,$n[0].Int32]},{"a":2,"n":"ToCharArray","t":8,"tpc":0,"def":function () { return ($t2 = this, System.String.toCharArray($t2, 0, $t2.length)); },"rt":$n[0].Array.type(System.Char)},{"a":2,"n":"ToCharArray","t":8,"pi":[{"n":"startIndex","pt":$n[0].Int32,"ps":0},{"n":"length","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (startIndex, length) { return System.String.toCharArray(this, startIndex, length); },"rt":$n[0].Array.type(System.Char),"p":[$n[0].Int32,$n[0].Int32]},{"a":2,"n":"ToLower","t":8,"tpc":0,"def":function () { return this.toLowerCase(); },"rt":$n[0].String},{"a":2,"n":"ToUpper","t":8,"tpc":0,"def":function () { return this.toUpperCase(); },"rt":$n[0].String},{"a":2,"n":"Trim","t":8,"sn":"trim","rt":$n[0].String},{"a":2,"n":"Trim","t":8,"pi":[{"n":"trimChars","ip":true,"pt":$n[0].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (trimChars) { return System.String.trim(this, Array.prototype.slice.call((arguments, 0))); },"rt":$n[0].String,"p":[$n[0].Array.type(System.Char)]},{"a":2,"n":"TrimEnd","t":8,"tpc":0,"def":function () { return System.String.trimEnd(this); },"rt":$n[0].String},{"a":2,"n":"TrimEnd","t":8,"pi":[{"n":"trimChars","ip":true,"pt":$n[0].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (trimChars) { return System.String.trimEnd(this, Array.prototype.slice.call((arguments, 0))); },"rt":$n[0].String,"p":[$n[0].Array.type(System.Char)]},{"a":2,"n":"TrimStart","t":8,"tpc":0,"def":function () { return System.String.trimStart(this); },"rt":$n[0].String},{"a":2,"n":"TrimStart","t":8,"pi":[{"n":"trimChars","ip":true,"pt":$n[0].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (trimChars) { return System.String.trimStart(this, Array.prototype.slice.call((arguments, 0))); },"rt":$n[0].String,"p":[$n[0].Array.type(System.Char)]},{"a":2,"n":"op_Equality","is":true,"t":8,"pi":[{"n":"s1","pt":$n[0].String,"ps":0},{"n":"s2","pt":$n[0].String,"ps":1}],"sn":"op_Equality","rt":$n[0].Boolean,"p":[$n[0].String,$n[0].String]},{"a":2,"n":"op_Inequality","is":true,"t":8,"pi":[{"n":"s1","pt":$n[0].String,"ps":0},{"n":"s2","pt":$n[0].String,"ps":1}],"sn":"op_Inequality","rt":$n[0].Boolean,"p":[$n[0].String,$n[0].String]},{"a":2,"n":"Chars","t":16,"rt":$n[0].Char,"p":[$n[0].Int32],"i":true,"ipi":[{"n":"index","pt":$n[0].Int32,"ps":0}],"g":{"a":2,"n":"get_Chars","t":8,"pi":[{"n":"index","pt":$n[0].Int32,"ps":0}],"tpc":0,"def":function (index) { return charCodeAt(index); },"rt":$n[0].Char,"p":[$n[0].Int32]}},{"a":2,"n":"Length","t":16,"rt":$n[0].Int32,"g":{"a":2,"n":"get_Length","t":8,"rt":$n[0].Int32,"fg":"length"},"fn":"length"},{"a":2,"n":"Empty","is":true,"t":4,"rt":$n[0].String,"sn":"Empty"}]}; });
     $asm.attr= [Bridge.apply(new Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A2Attribute.$ctor1(64), {
         P: 23
     } ),Bridge.apply(new Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A3Attribute.$ctor1(15), {

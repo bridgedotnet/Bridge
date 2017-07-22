@@ -72,3 +72,7 @@
     Bridge.define("System.IDisposable", {
         $kind: "interface"
     });
+
+    Bridge.define("System.IAsyncResult", {
+        $kind: "interface"
+    });
