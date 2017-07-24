@@ -10770,12 +10770,13 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
             if (Bridge.isArray(obj)) {
                 return obj.$type && Bridge.getDefaultValue(obj.$type.$elementType) != null ? Bridge.box(obj[idx], obj.$type.$elementType) : obj[idx];
+            } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem"])) {
+                v = obj[name](idx);
+                return v;
             } else if (Bridge.isFunction(obj.get)) {
                 v = obj.get(idx);
             } else if (Bridge.isFunction(obj.getItem)) {
                 v = obj.getItem(idx);
-            } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem"])) {
-                v = obj[name](idx);
             } else if (Bridge.isFunction(obj[name = "System$Collections$IList$$getItem"])) {
                 v = obj[name](idx);
             } else if (Bridge.isFunction(obj.get_Item)) {
