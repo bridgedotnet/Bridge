@@ -23889,6 +23889,16 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2981", {
+        statics: {
+            methods: {
+                TestCharIsPunctuation: function () {
+                    Bridge.Test.NUnit.Assert.False(System.Char.isPunctuation(256));
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.IBridge304", {
         $kind: "interface"
     });
