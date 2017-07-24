@@ -40538,7 +40538,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             TaskTypePropertiesAreCorrect: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("System.Threading.Tasks.Task", Bridge.Reflection.getTypeFullName(System.Threading.Tasks.Task), "FullName for non-generic task should be correct");
-                Bridge.Test.NUnit.Assert.AreEqual("System.Threading.Tasks.Task`1", Bridge.Reflection.getTypeFullName(System.Threading.Tasks.Task$1), "FullName for generic task should be correct");
+                Bridge.Test.NUnit.Assert.AreEqual("System.Threading.Tasks.Task`1[[System.Int32, mscorlib]]", Bridge.Reflection.getTypeFullName(System.Threading.Tasks.Task$1(System.Int32)), "FullName for generic task should be correct");
 
                 var task = new System.Threading.Tasks.TaskCompletionSource().task;
                 Bridge.Test.NUnit.Assert.True(Bridge.hasValue(task));
@@ -41247,7 +41247,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.Test.NUnit.Assert.False(continuationRun, "Continuation should not be run too early.");
                 });
 
-                var task = System.Threading.Tasks.Task.whenAll(this.MakeEnumerable(System.Threading.Tasks.Task$1, [tcs1.task, tcs2.task, tcs3.task]));
+                var task = System.Threading.Tasks.Task.whenAll(this.MakeEnumerable(System.Threading.Tasks.Task$1(System.Int32), [tcs1.task, tcs2.task, tcs3.task]));
 
                 var doneTask = task.continueWith(function (t) {
                     Bridge.Test.NUnit.Assert.False(continuationRun, "Continuation should only be run once.");
@@ -41530,7 +41530,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var tcs2 = new System.Threading.Tasks.TaskCompletionSource();
                 var tcs3 = new System.Threading.Tasks.TaskCompletionSource();
 
-                var task = System.Threading.Tasks.Task.whenAny(this.MakeEnumerable(System.Threading.Tasks.Task$1, [tcs1.task, tcs2.task, tcs3.task]));
+                var task = System.Threading.Tasks.Task.whenAny(this.MakeEnumerable(System.Threading.Tasks.Task$1(System.Int32), [tcs1.task, tcs2.task, tcs3.task]));
 
                 var task1 = task.continueWith(function (t) {
                     Bridge.Test.NUnit.Assert.False(continuationRun, "Continuation should only be run once.");
@@ -41655,7 +41655,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var tcs3 = new System.Threading.Tasks.TaskCompletionSource();
                 var ex = new System.Exception("Some text");
 
-                var task = System.Threading.Tasks.Task.whenAny(this.MakeEnumerable(System.Threading.Tasks.Task$1, [tcs1.task, tcs2.task, tcs3.task]));
+                var task = System.Threading.Tasks.Task.whenAny(this.MakeEnumerable(System.Threading.Tasks.Task$1(System.Int32), [tcs1.task, tcs2.task, tcs3.task]));
 
                 var task1 = task.continueWith(function (t) {
                     Bridge.Test.NUnit.Assert.False(continuationRun, "Continuation should only be run once.");
@@ -41695,7 +41695,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var tcs2 = new System.Threading.Tasks.TaskCompletionSource();
                 var tcs3 = new System.Threading.Tasks.TaskCompletionSource();
 
-                var task = System.Threading.Tasks.Task.whenAny(this.MakeEnumerable(System.Threading.Tasks.Task$1, [tcs1.task, tcs2.task, tcs3.task]));
+                var task = System.Threading.Tasks.Task.whenAny(this.MakeEnumerable(System.Threading.Tasks.Task$1(System.Int32), [tcs1.task, tcs2.task, tcs3.task]));
 
                 var task1 = task.continueWith(function (t) {
                     Bridge.Test.NUnit.Assert.False(continuationRun, "Continuation should only be run once.");
@@ -41833,7 +41833,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var taskRun = false, continuationRun = false;
 
-                var task = new System.Threading.Tasks.Task$1(function () {
+                var task = new (System.Threading.Tasks.Task$1(System.Int32))(function () {
                     taskRun = true;
                     return 42;
                 });
@@ -41869,7 +41869,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var taskRun = false, continuationRun = false;
                 var state = {  };
 
-                var task = new System.Threading.Tasks.Task$1(function (s) {
+                var task = new (System.Threading.Tasks.Task$1(System.Int32))(function (s) {
                     Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(state, s), "The state should be correct.");
                     taskRun = true;
                     return 42;
