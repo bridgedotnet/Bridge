@@ -54,7 +54,6 @@
     <Compile Include="Collections\Generic\IReadOnlyListTests.cs" />
     <Compile Include="Collections\Generic\IReadOnlyDictionaryTests.cs" />
     <Compile Include="Collections\Generic\IReadOnlyCollectionTests.cs" />
-    <Compile Include="Collections\Generic\IDictionaryTests.cs" />
     <Compile Include="FormattableStringTests.cs" />
     <Compile Include="Exceptions\ArithmeticExceptionTests.cs" />
     <Compile Include="Exceptions\OverflowExceptionTests.cs" />
