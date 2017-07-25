@@ -265,7 +265,7 @@ namespace Bridge.ClientTest.Batch1.Reflection
                 Assert.True(((AssemblyAttributes.A3Attribute)a3[0]).P == 45);
             }
 
-            foreach (var a in new[] { asm.GetCustomAttributes(typeof(A2Attribute)), asm.GetCustomAttributes(typeof(A2Attribute), true), asm.GetCustomAttributes(typeof(A2Attribute), false) })
+            foreach (var a in new[] { asm.GetCustomAttributes(typeof(AssemblyAttributes.A2Attribute)), asm.GetCustomAttributes(typeof(AssemblyAttributes.A2Attribute), true), asm.GetCustomAttributes(typeof(AssemblyAttributes.A2Attribute), false) })
             {
                 Assert.AreEqual(1, a.Length);
                 Assert.True(((AssemblyAttributes.A2Attribute)a[0]).X == 64);

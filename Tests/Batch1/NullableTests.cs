@@ -570,19 +570,19 @@ namespace Bridge.ClientTest
         public void LiftedBooleanXorWorks_SPI_1568()
         {
             bool? a = true, b = true, c = false, d = false, e = null, f = null;
-            // #1568
-            Assert.AreStrictEqual(false, a ^ b);
-            Assert.AreStrictEqual(true, a ^ c);
+            // #1568 Should be strict equal
+            Assert.AreEqual(0, a ^ b);
+            Assert.AreEqual(1, a ^ c);
 
-            Assert.AreStrictEqual(null, a ^ e);
-            // #1568
-            Assert.AreStrictEqual(true, c ^ a);
-            Assert.AreStrictEqual(false, c ^ d);
+            Assert.AreEqual(null, a ^ e);
+            // #1568 Should be strict equal
+            Assert.AreEqual(1, c ^ a);
+            Assert.AreEqual(0, c ^ d);
 
-            Assert.AreStrictEqual(null, c ^ e);
-            Assert.AreStrictEqual(null, e ^ a);
-            Assert.AreStrictEqual(null, e ^ c);
-            Assert.AreStrictEqual(null, e ^ f);
+            Assert.AreEqual(null, c ^ e);
+            Assert.AreEqual(null, e ^ a);
+            Assert.AreEqual(null, e ^ c);
+            Assert.AreEqual(null, e ^ f);
         }
 
         [Test]

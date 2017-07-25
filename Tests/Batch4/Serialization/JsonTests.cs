@@ -5,6 +5,7 @@ using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch4.Serialization
 {
+#pragma warning disable 649 // CS0649  Field is never assigned to, and will always have its default value null
     [TestFixture(TestNameFormat = "JsonTests - {0}")]
     public class JsonTests
     {
@@ -95,4 +96,5 @@ namespace Bridge.ClientTest.Batch4.Serialization
             Assert.AreEqual("test", vs);
         }
     }
+#pragma warning restore 649 // CS0649  Field is never assigned to, and will always have its default value null
 }
