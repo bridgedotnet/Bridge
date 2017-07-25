@@ -60,7 +60,6 @@
     <Compile Include="SimpleTypes\CharTests.cs" />
     <Compile Include="Threading\Tasks\AsyncTests.cs" />
     <Compile Include="Web\HttpUtilityTests.cs" />
-    <Compile Include="Linq\Expressions\ExpressionTests.cs" />
     <Compile Include="Reflection\GetMembersTests.cs" />
     <Compile Include="Reflection\ReflectionTests.cs" />
     <Compile Include="Runtime\CompilerServices\RuntimeHelpersTests.cs" />
