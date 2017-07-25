@@ -49,7 +49,6 @@
     <Compile Include="Collections\JsDictionaryTests.cs" />
     <Compile Include="TestHelper.cs" />
     <Compile Include="RefParameterTests.cs" />
-    <Compile Include="ArgumentsTests.cs" />
     <Compile Include="ArrayTests.cs" />
     <Compile Include="AppDomainTests.cs" />
     <Compile Include="Collections\Generic\KeyValuePairTests.cs" />
