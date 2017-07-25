@@ -113,7 +113,6 @@
     <Compile Include="LazyTests.cs" />
     <Compile Include="IEquatableTests.cs" />
     <Compile Include="Collections\Generic\EqualityComparerTests.cs" />
-    <Compile Include="IComparableTests.cs" />
     <Compile Include="SimpleTypes\ObjectTests.cs" />
     <Compile Include="Threading\Tasks\PromiseTests.cs" />
     <Compile Include="Threading\Tasks\TaskTests.cs" />
