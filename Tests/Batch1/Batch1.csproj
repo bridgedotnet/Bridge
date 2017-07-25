@@ -50,6 +50,7 @@
     <Compile Include="BasicCSharp\TestGoto.cs" />
     <Compile Include="Collections\Generic\QueueTests.cs" />
     <Compile Include="Collections\Generic\StackTests.cs" />
+    <Compile Include="DelegateTests.cs" />
     <Compile Include="ScriptTests.cs" />
     <Compile Include="SystemConsoleTests.cs" />
     <Compile Include="Collections\Generic\IReadOnlyCollectionTests.cs" />
