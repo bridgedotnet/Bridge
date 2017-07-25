@@ -50,7 +50,6 @@
     <Compile Include="RefParameterTests.cs" />
     <Compile Include="AppDomainTests.cs" />
     <Compile Include="FormattableStringTests.cs" />
-    <Compile Include="Exceptions\OverflowExceptionTests.cs" />
     <Compile Include="Exceptions\TaskCanceledExceptionTests.cs" />
     <Compile Include="CustomInitializationTests.cs" />
     <Compile Include="Exceptions\ContractExceptionTests.cs" />
