@@ -92,6 +92,7 @@
         public const string MODULE_ARGUMENTOUTOFRANGEEXCEPTION = PREFIX_EXCEPTIONS; // + "ArgumentOutOfRangeException";
 
         public const string MODULE_ACTIVATOR = "Activator";
+        public const string MODULE_IFORMATTABLE = "IFormattable";
         public const string MODULE_DELEGATE = "Delegate";
         public const string MODULE_THREADING = "Threading";
         public const string MODULE_DIAGNOSTICS = "Diagnostics";

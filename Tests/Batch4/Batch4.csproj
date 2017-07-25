@@ -105,7 +105,6 @@
     <Compile Include="Linq\Expressions\ExpressionTests.cs" />
     <Compile Include="Reflection\GetMembersTests.cs" />
     <Compile Include="Reflection\ReflectionTests.cs" />
-    <Compile Include="IFormattableTests.cs" />
     <Compile Include="Runtime\CompilerServices\RuntimeHelpersTests.cs" />
     <Compile Include="Collections\Generic\IListTests.cs" />
     <Compile Include="Collections\Generic\ICollectionTests.cs" />

@@ -1,9 +1,9 @@
 using Bridge.Test.NUnit;
 using System;
 
-namespace Bridge.ClientTest.Batch4
+namespace Bridge.ClientTest
 {
-    [TestFixture(TestNameFormat = "IFormattableTests - {0}")]
+    [Category(Constants.MODULE_IFORMATTABLE)]
     public class IFormattableTests
     {
         private class MyFormatProvider : IFormatProvider
