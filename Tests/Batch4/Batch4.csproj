@@ -63,17 +63,6 @@
     <Compile Include="Exceptions\NotImplementedExceptionTests.cs" />
     <Compile Include="Exceptions\DivideByZeroExceptionTests.cs" />
     <Compile Include="Reflection\AssemblyTests.cs" />
-    <Compile Include="Collections\TypedArrays\ArrayBufferTests.cs" />
-    <Compile Include="Collections\TypedArrays\DataViewTests.cs" />
-    <Compile Include="Collections\TypedArrays\Uint8ClampedArrayTests.cs" />
-    <Compile Include="Collections\TypedArrays\Float64ArrayTests.cs" />
-    <Compile Include="Collections\TypedArrays\Float32ArrayTests.cs" />
-    <Compile Include="Collections\TypedArrays\Uint16ArrayTests.cs" />
-    <Compile Include="Collections\TypedArrays\Uint32ArrayTests.cs" />
-    <Compile Include="Collections\TypedArrays\Uint8ArrayTests.cs" />
-    <Compile Include="Collections\TypedArrays\Int16ArrayTests.cs" />
-    <Compile Include="Collections\TypedArrays\Int8ArrayTests.cs" />
-    <Compile Include="Collections\TypedArrays\Int32ArrayTests.cs" />
     <Compile Include="Exceptions\AggregateExceptionTests.cs" />
     <Compile Include="Exceptions\ArgumentExceptionTests.cs" />
     <Compile Include="Exceptions\ArgumentNullExceptionTests.cs" />
