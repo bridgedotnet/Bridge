@@ -111,7 +111,6 @@
     <Compile Include="Collections\Generic\IListTests.cs" />
     <Compile Include="Collections\Generic\ICollectionTests.cs" />
     <Compile Include="Collections\Generic\IEnumerableTests.cs" />
-    <Compile Include="ExceptionTests.cs" />
     <Compile Include="LazyTests.cs" />
     <Compile Include="IEquatableTests.cs" />
     <Compile Include="Collections\Generic\EqualityComparerTests.cs" />
