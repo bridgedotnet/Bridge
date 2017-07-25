@@ -82,7 +82,6 @@
     <Compile Include="Collections\TypedArrays\Int16ArrayTests.cs" />
     <Compile Include="Collections\TypedArrays\Int8ArrayTests.cs" />
     <Compile Include="Collections\TypedArrays\Int32ArrayTests.cs" />
-    <Compile Include="GuidTests.cs" />
     <Compile Include="Exceptions\AggregateExceptionTests.cs" />
     <Compile Include="Exceptions\ArgumentExceptionTests.cs" />
     <Compile Include="Exceptions\ArgumentNullExceptionTests.cs" />
