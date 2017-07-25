@@ -106,7 +106,6 @@
     <Compile Include="Collections\Generic\ICollectionTests.cs" />
     <Compile Include="Collections\Generic\IEnumerableTests.cs" />
     <Compile Include="LazyTests.cs" />
-    <Compile Include="Collections\Generic\EqualityComparerTests.cs" />
     <Compile Include="SimpleTypes\ObjectTests.cs" />
     <Compile Include="Threading\Tasks\PromiseTests.cs" />
     <Compile Include="Threading\Tasks\TaskTests.cs" />
