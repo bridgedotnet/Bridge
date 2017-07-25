@@ -55,7 +55,6 @@
     <Compile Include="Threading\CancellationTokenTests.cs" />
     <Compile Include="UserDefinedStructTests.cs" />
     <Compile Include="Exceptions\JsErrorExceptionTests.cs" />
-    <Compile Include="Reflection\AttributeTests.cs" />
     <Compile Include="SimpleTypes\CharTests.cs" />
     <Compile Include="Threading\Tasks\AsyncTests.cs" />
     <Compile Include="Web\HttpUtilityTests.cs" />
