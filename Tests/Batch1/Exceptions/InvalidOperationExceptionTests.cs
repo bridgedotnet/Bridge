@@ -11,9 +11,14 @@ namespace Bridge.ClientTest.Exceptions
         public void TypePropertiesAreCorrect()
         {
             Assert.AreEqual("System.InvalidOperationException", typeof(InvalidOperationException).FullName, "Name");
+            Assert.True(typeof(InvalidOperationException).IsClass, "IsClass");
+            Assert.AreEqual(typeof(Exception), typeof(InvalidOperationException).BaseType, "BaseType");
             object d = new InvalidOperationException();
             Assert.True(d is InvalidOperationException, "is InvalidOperationException");
             Assert.True(d is Exception, "is Exception");
+
+            var interfaces = typeof(InvalidOperationException).GetInterfaces();
+            Assert.AreEqual(0, interfaces.Length, "Interfaces length");
         }
 
         [Test]
