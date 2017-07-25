@@ -133,7 +133,6 @@
     <Compile Include="RandomTests.cs" />
     <Compile Include="SimpleTypes\SingleTests.cs" />
     <Compile Include="SimpleTypes\SByteTests.cs" />
-    <Compile Include="NullableTests.cs" />
     <Compile Include="SimpleTypes\Int64Tests.cs" />
     <Compile Include="SimpleTypes\Int32Tests.cs" />
     <Compile Include="SimpleTypes\Int16Tests.cs" />
