@@ -4,7 +4,6 @@ using System.Runtime.CompilerServices;
 
 namespace Bridge.ClientTest.Batch4
 {
-    // Moved
     [TestFixture(TestNameFormat = "UserDefinedStructTests - {0}")]
     public class UserDefinedStructTests
     {
