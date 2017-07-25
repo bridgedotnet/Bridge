@@ -55,7 +55,6 @@
     <Compile Include="Exceptions\TaskCanceledExceptionTests.cs" />
     <Compile Include="Exceptions\OperationCanceledExceptionTests.cs" />
     <Compile Include="CustomInitializationTests.cs" />
-    <Compile Include="Diagnostics\Contracts\ContractTests.cs" />
     <Compile Include="Exceptions\ContractExceptionTests.cs" />
     <Compile Include="Threading\CancellationTokenTests.cs" />
     <Compile Include="UserDefinedStructTests.cs" />
