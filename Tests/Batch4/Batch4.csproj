@@ -114,7 +114,6 @@
     <Compile Include="SimpleTypes\ObjectTests.cs" />
     <Compile Include="Threading\Tasks\PromiseTests.cs" />
     <Compile Include="Threading\Tasks\TaskTests.cs" />
-    <Compile Include="MultidimArrayTests.cs" />
     <Compile Include="Collections\Generic\IteratorBlockTests.cs" />
     <Compile Include="Collections\Generic\QueueTests.cs" />
     <Compile Include="SimpleTypes\BooleanTests.cs" />
