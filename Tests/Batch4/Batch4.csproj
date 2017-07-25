@@ -96,7 +96,6 @@
     <Compile Include="Reflection\AttributeTests.cs" />
     <Compile Include="SimpleTypes\CharTests.cs" />
     <Compile Include="Threading\Tasks\AsyncTests.cs" />
-    <Compile Include="Collections\Generic\ComparerTests.cs" />
     <Compile Include="Web\HttpUtilityTests.cs" />
     <Compile Include="Collections\ObjectModel\ReadOnlyCollectionTests.cs" />
     <Compile Include="Linq\Expressions\ExpressionTests.cs" />
