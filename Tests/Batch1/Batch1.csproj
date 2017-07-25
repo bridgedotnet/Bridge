@@ -54,6 +54,7 @@
     <Compile Include="DelegateTests.cs" />
     <Compile Include="IFormattableTests.cs" />
     <Compile Include="BasicCSharp\RefParameterTests.cs" />
+    <Compile Include="Runtime\CompilerServices\RuntimeHelpersTests.cs" />
     <Compile Include="ScriptTests.cs" />
     <Compile Include="SystemConsoleTests.cs" />
     <Compile Include="Collections\Generic\IReadOnlyCollectionTests.cs" />
