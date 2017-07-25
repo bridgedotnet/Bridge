@@ -59,7 +59,6 @@
     <Compile Include="UserDefinedStructTests.cs" />
     <Compile Include="Exceptions\NotImplementedExceptionTests.cs" />
     <Compile Include="Reflection\AssemblyTests.cs" />
-    <Compile Include="Exceptions\ExceptionTests.cs" />
     <Compile Include="Exceptions\InvalidCastExceptionTests.cs" />
     <Compile Include="Exceptions\NullReferenceExceptionTests.cs" />
     <Compile Include="Exceptions\KeyNotFoundExceptionTests.cs" />
