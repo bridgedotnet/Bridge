@@ -48,6 +48,7 @@
     <Compile Include="ActivatorTests.cs" />
     <Compile Include="BitConverterTests.cs" />
     <Compile Include="BasicCSharp\TestGoto.cs" />
+    <Compile Include="Collections\Generic\KeyValuePairTests.cs" />
     <Compile Include="Collections\Generic\QueueTests.cs" />
     <Compile Include="Collections\Generic\StackTests.cs" />
     <Compile Include="DelegateTests.cs" />

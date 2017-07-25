@@ -4,8 +4,9 @@ using System.Collections.Generic;
 
 #pragma warning disable 183, 184
 
-namespace Bridge.ClientTest.Batch4.Collections.Generic
+namespace Bridge.ClientTest.Collections.Generic
 {
+    [Category(Constants.PREFIX_COLLECTIONS)]
     [TestFixture(TestNameFormat = "KeyValuePairTests - {0}")]
     public class KeyValuePairTests
     {

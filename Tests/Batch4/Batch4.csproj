@@ -50,7 +50,6 @@
     <Compile Include="TestHelper.cs" />
     <Compile Include="RefParameterTests.cs" />
     <Compile Include="AppDomainTests.cs" />
-    <Compile Include="Collections\Generic\KeyValuePairTests.cs" />
     <Compile Include="FormattableStringTests.cs" />
     <Compile Include="Exceptions\ArithmeticExceptionTests.cs" />
     <Compile Include="Exceptions\OverflowExceptionTests.cs" />
