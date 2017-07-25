@@ -21,9 +21,14 @@ namespace Bridge.ClientTest.Exceptions
         public void TypePropertiesAreCorrect()
         {
             Assert.AreEqual("System.AggregateException", typeof(AggregateException).FullName, "Name");
+            Assert.True(typeof(AggregateException).IsClass, "IsClass");
+            Assert.AreEqual(typeof(Exception), typeof(AggregateException).BaseType, "BaseType");
             object d = new AggregateException();
             Assert.True(d is AggregateException);
             Assert.True(d is Exception);
+
+            var interfaces = typeof(AggregateException).GetInterfaces();
+            Assert.AreEqual(0, interfaces.Length);
         }
 
         [Test]
@@ -176,12 +181,12 @@ namespace Bridge.ClientTest.Exceptions
         public void FlattenWorks()
         {
             Exception ex0 = new Exception("ex0"),
-                ex1 = new Exception("ex1"),
-                ex2 = new Exception("ex2"),
-                ex3 = new Exception("ex3"),
-                ex4 = new Exception("ex4"),
-                ex5 = new Exception("ex5"),
-                ex6 = new Exception("ex6");
+    ex1 = new Exception("ex1"),
+    ex2 = new Exception("ex2"),
+    ex3 = new Exception("ex3"),
+    ex4 = new Exception("ex4"),
+    ex5 = new Exception("ex5"),
+    ex6 = new Exception("ex6");
 
             var ae = new AggregateException("The message",
                 ex0,
