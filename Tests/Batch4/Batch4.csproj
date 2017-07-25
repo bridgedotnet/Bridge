@@ -58,7 +58,6 @@
     <Compile Include="SimpleTypes\CharTests.cs" />
     <Compile Include="Threading\Tasks\AsyncTests.cs" />
     <Compile Include="Web\HttpUtilityTests.cs" />
-    <Compile Include="Reflection\ReflectionTests.cs" />
     <Compile Include="Runtime\CompilerServices\RuntimeHelpersTests.cs" />
     <Compile Include="LazyTests.cs" />
     <Compile Include="SimpleTypes\ObjectTests.cs" />
@@ -85,10 +84,6 @@
     <Compile Include="SimpleTypes\DecimalTests.cs" />
     <Compile Include="SimpleTypes\StringTests.cs" />
     <Compile Include="SimpleTypes\JsDateTests.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Reflection\Resource2.bin" />
-    <EmbeddedResource Include="Reflection\Resource1.bin" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
