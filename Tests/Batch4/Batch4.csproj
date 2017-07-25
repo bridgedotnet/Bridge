@@ -60,7 +60,6 @@
     <Compile Include="Exceptions\NotImplementedExceptionTests.cs" />
     <Compile Include="Reflection\AssemblyTests.cs" />
     <Compile Include="Exceptions\NullReferenceExceptionTests.cs" />
-    <Compile Include="Exceptions\KeyNotFoundExceptionTests.cs" />
     <Compile Include="Exceptions\PromiseExceptionTests.cs" />
     <Compile Include="Exceptions\JsErrorExceptionTests.cs" />
     <Compile Include="Exceptions\NotSupportedExceptionTests.cs" />
