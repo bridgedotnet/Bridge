@@ -108,7 +108,6 @@
     <Compile Include="Collections\Generic\StackTests.cs" />
     <Compile Include="Serialization\JsonTests.cs" />
     <Compile Include="Text\RegularExpressions\RegexTests.cs" />
-    <Compile Include="Collections\Generic\ListTests.cs" />
     <Compile Include="Reflection\TypeSystemLanguageSupportTests.cs" />
     <Compile Include="Reflection\TypeSystemTests.cs" />
     <Compile Include="SimpleTypes\UInt16Tests.cs" />
