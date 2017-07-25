@@ -115,7 +115,6 @@
     <Compile Include="SimpleTypes\TimeSpanTests.cs" />
     <Compile Include="SimpleTypes\ByteTests.cs" />
     <Compile Include="Collections\Generic\StackTests.cs" />
-    <Compile Include="Collections\Generic\GenericDictionaryTests.cs" />
     <Compile Include="Serialization\JsonTests.cs" />
     <Compile Include="Text\RegularExpressions\RegexTests.cs" />
     <Compile Include="Collections\Generic\ListTests.cs" />
