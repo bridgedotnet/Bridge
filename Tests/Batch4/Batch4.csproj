@@ -92,7 +92,6 @@
     <Compile Include="SimpleTypes\CharTests.cs" />
     <Compile Include="Threading\Tasks\AsyncTests.cs" />
     <Compile Include="Web\HttpUtilityTests.cs" />
-    <Compile Include="Collections\ObjectModel\ReadOnlyCollectionTests.cs" />
     <Compile Include="Linq\Expressions\ExpressionTests.cs" />
     <Compile Include="Reflection\GetMembersTests.cs" />
     <Compile Include="Reflection\ReflectionTests.cs" />
@@ -151,6 +150,7 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir).nuget\NuGet.targets" Condition="Exists('$(SolutionDir).nuget\NuGet.targets')" />
   <Target Name="CleanBridgeTest" BeforeTargets="Clean">
