@@ -66,7 +66,6 @@
     <Compile Include="Exceptions\JsErrorExceptionTests.cs" />
     <Compile Include="Exceptions\InvalidOperationExceptionTests.cs" />
     <Compile Include="Exceptions\NotSupportedExceptionTests.cs" />
-    <Compile Include="Exceptions\FormatExceptionTests.cs" />
     <Compile Include="Reflection\AttributeTests.cs" />
     <Compile Include="SimpleTypes\CharTests.cs" />
     <Compile Include="Threading\Tasks\AsyncTests.cs" />
