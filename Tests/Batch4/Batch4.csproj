@@ -61,7 +61,6 @@
     <Compile Include="Exceptions\NullReferenceExceptionTests.cs" />
     <Compile Include="Exceptions\PromiseExceptionTests.cs" />
     <Compile Include="Exceptions\JsErrorExceptionTests.cs" />
-    <Compile Include="Exceptions\NotSupportedExceptionTests.cs" />
     <Compile Include="Reflection\AttributeTests.cs" />
     <Compile Include="SimpleTypes\CharTests.cs" />
     <Compile Include="Threading\Tasks\AsyncTests.cs" />
