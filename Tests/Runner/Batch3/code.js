@@ -23889,6 +23889,67 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2964", {
+        statics: {
+            fields: {
+                lastOperatorTypeName: null
+            },
+            methods: {
+                DoSomething: function (value) { },
+                DoSomethingElse: function (value) { },
+                TestGenericOperator: function () {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2964.DoSomething(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2964.Wrapped$1(System.String).op_Implicit(null));
+                    Bridge.Test.NUnit.Assert.AreEqual(System.String, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2964.lastOperatorTypeName);
+
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2964.DoSomethingElse(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2964.Wrapped$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2964.IWhatever).op_Implicit(null));
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2964.IWhatever, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2964.lastOperatorTypeName);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2964.IWhatever", {
+        $kind: "interface"
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2964.Wrapped$1", function (T) { return {
+        $kind: "struct",
+        statics: {
+            methods: {
+                op_Implicit: function (value) {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2964.lastOperatorTypeName = T;
+                    return new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2964.Wrapped$1(T)).$ctor1(value);
+                },
+                getDefaultValue: function () { return new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge2964.Wrapped$1(T))(); }
+            }
+        },
+        props: {
+            Value: Bridge.getDefaultValue(T)
+        },
+        ctors: {
+            $ctor1: function (value) {
+                this.$initialize();
+                this.Value = value;
+            },
+            ctor: function () {
+                this.$initialize();
+            }
+        },
+        methods: {
+            getHashCode: function () {
+                var h = Bridge.addHash([1892014023, this.Value]);
+                return h;
+            },
+            equals: function (o) {
+                if (!Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2964.Wrapped$1(T))) {
+                    return false;
+                }
+                return Bridge.equals(this.Value, o.Value);
+            },
+            $clone: function (to) { return this; }
+        }
+    }; });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.IBridge304", {
         $kind: "interface"
     });
