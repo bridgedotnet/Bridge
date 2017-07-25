@@ -52,7 +52,6 @@
     <Compile Include="FormattableStringTests.cs" />
     <Compile Include="Exceptions\OverflowExceptionTests.cs" />
     <Compile Include="Exceptions\TaskCanceledExceptionTests.cs" />
-    <Compile Include="Exceptions\OperationCanceledExceptionTests.cs" />
     <Compile Include="CustomInitializationTests.cs" />
     <Compile Include="Exceptions\ContractExceptionTests.cs" />
     <Compile Include="Threading\CancellationTokenTests.cs" />
