@@ -61,7 +61,6 @@
     <Compile Include="Exceptions\NotImplementedExceptionTests.cs" />
     <Compile Include="Exceptions\DivideByZeroExceptionTests.cs" />
     <Compile Include="Reflection\AssemblyTests.cs" />
-    <Compile Include="Exceptions\ArgumentExceptionTests.cs" />
     <Compile Include="Exceptions\ArgumentNullExceptionTests.cs" />
     <Compile Include="Exceptions\ArgumentOutOfRangeExceptionTests.cs" />
     <Compile Include="Exceptions\ExceptionTests.cs" />
