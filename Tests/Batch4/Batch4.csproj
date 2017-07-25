@@ -68,7 +68,6 @@
     <Compile Include="SimpleTypes\ByteTests.cs" />
     <Compile Include="Serialization\JsonTests.cs" />
     <Compile Include="Text\RegularExpressions\RegexTests.cs" />
-    <Compile Include="Reflection\TypeSystemTests.cs" />
     <Compile Include="SimpleTypes\UInt16Tests.cs" />
     <Compile Include="SimpleTypes\UInt32Tests.cs" />
     <Compile Include="SimpleTypes\UInt64Tests.cs" />
