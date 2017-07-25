@@ -103,7 +103,6 @@
     <Compile Include="Reflection\ReflectionTests.cs" />
     <Compile Include="Runtime\CompilerServices\RuntimeHelpersTests.cs" />
     <Compile Include="Collections\Generic\IListTests.cs" />
-    <Compile Include="Collections\Generic\ICollectionTests.cs" />
     <Compile Include="Collections\Generic\IEnumerableTests.cs" />
     <Compile Include="LazyTests.cs" />
     <Compile Include="SimpleTypes\ObjectTests.cs" />
