@@ -57,7 +57,6 @@
     <Compile Include="Exceptions\ContractExceptionTests.cs" />
     <Compile Include="Threading\CancellationTokenTests.cs" />
     <Compile Include="UserDefinedStructTests.cs" />
-    <Compile Include="Exceptions\NotImplementedExceptionTests.cs" />
     <Compile Include="Reflection\AssemblyTests.cs" />
     <Compile Include="Exceptions\NullReferenceExceptionTests.cs" />
     <Compile Include="Exceptions\PromiseExceptionTests.cs" />
