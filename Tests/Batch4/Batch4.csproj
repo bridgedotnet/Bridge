@@ -71,7 +71,6 @@
     <Compile Include="Exceptions\DivideByZeroExceptionTests.cs" />
     <Compile Include="Reflection\AssemblyTests.cs" />
     <Compile Include="StopwatchTests.cs" />
-    <Compile Include="CultureInfoTests.cs" />
     <Compile Include="NumberFormatInfoTests.cs" />
     <Compile Include="DateTimeFormatInfoTests.cs" />
     <Compile Include="Collections\TypedArrays\ArrayBufferTests.cs" />
