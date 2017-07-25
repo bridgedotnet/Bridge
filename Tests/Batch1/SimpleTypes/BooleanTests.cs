@@ -9,7 +9,10 @@ namespace Bridge.ClientTest.SimpleTypes
     {
         private class Counter
         {
-            public int Count { get; set; }
+            public int Count
+            {
+                get; set;
+            }
 
             public bool Increment(bool r = true)
             {
@@ -20,10 +23,24 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void TypePropertiesAreCorrect()
+        public void TypePropertiesAreCorrect_SPI_1575()
         {
             Assert.True((object)true is bool);
-            Assert.AreEqual("System.Boolean", typeof(bool).FullName, "#2062");
+            Assert.AreEqual("System.Boolean", typeof(bool).FullName);
+            // #1575
+            Assert.AreEqual(typeof(object), typeof(bool).BaseType);
+            Assert.False(typeof(bool).IsClass);
+            Assert.True(typeof(IComparable<bool>).IsAssignableFrom(typeof(bool)));
+            Assert.True(typeof(IEquatable<bool>).IsAssignableFrom(typeof(bool)));
+
+            object b = false;
+            Assert.True(b is IComparable<bool>);
+            Assert.True(b is IEquatable<bool>);
+
+            var interfaces = typeof(bool).GetInterfaces();
+            Assert.AreEqual(3, interfaces.Length);
+            Assert.True(interfaces.Contains(typeof(IComparable<bool>)));
+            Assert.True(interfaces.Contains(typeof(IEquatable<bool>)));
         }
 
         private T GetDefaultValue<T>()
@@ -44,8 +61,9 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void DefaultConstructorReturnsFalse()
+        public void DefaultConstructorReturnsFalse_SPI_1576()
         {
+            // #1576
             Assert.AreEqual(false, new bool());
         }
 
@@ -67,7 +85,7 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void BoolEqualsWorks()
+        public void IEquatableEqualsWorks()
         {
             Assert.True(true.Equals(true));
             Assert.False(true.Equals(false));

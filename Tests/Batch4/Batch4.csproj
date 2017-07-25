@@ -63,7 +63,6 @@
     <Compile Include="SimpleTypes\ObjectTests.cs" />
     <Compile Include="Threading\Tasks\PromiseTests.cs" />
     <Compile Include="Threading\Tasks\TaskTests.cs" />
-    <Compile Include="SimpleTypes\BooleanTests.cs" />
     <Compile Include="SimpleTypes\TimeSpanTests.cs" />
     <Compile Include="SimpleTypes\ByteTests.cs" />
     <Compile Include="Serialization\JsonTests.cs" />
