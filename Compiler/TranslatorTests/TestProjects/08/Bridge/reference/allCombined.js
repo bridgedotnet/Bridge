@@ -1,7 +1,7 @@
 /**
- * @version   : 16.0.0-beta5 - Bridge.NET
+ * @version   : 16.0.0-rc - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2017-07-17
+ * @date      : 2017-07-25
  * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
  */
@@ -532,7 +532,7 @@ Bridge.assembly("Bridge", function ($asm, globals) {
     Bridge.init(function () { Bridge.Console.initConsoleFunctions(); });
 });
 /**
- * @compiler Bridge.NET 16.0.0-beta5
+ * @compiler Bridge.NET 16.0.0-rc
  */
 Bridge.assembly("TestProject", function ($asm, globals) {
     "use strict";

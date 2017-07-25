@@ -609,7 +609,7 @@ namespace Bridge.ClientTest.SimpleTypes
         //    DateHelper.AssertDate(utc, d2);
         //}
 
-        // Not Supported in 16.0.0-beta5
+        // Not Supported in 16.0.0-rc
         //[Test]
         //public void ParseWithLocalKinds()
         //{
@@ -636,7 +636,7 @@ namespace Bridge.ClientTest.SimpleTypes
         //    }, "d3: ");
         //}
 
-        // Not Supported in 16.0.0-beta5
+        // Not Supported in 16.0.0-rc
         //[Test]
         //public void ParseWithDifferentKinds()
         //{
