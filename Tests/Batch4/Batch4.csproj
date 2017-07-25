@@ -70,7 +70,6 @@
     <Compile Include="Exceptions\DivideByZeroExceptionTests.cs" />
     <Compile Include="Reflection\AssemblyTests.cs" />
     <Compile Include="StopwatchTests.cs" />
-    <Compile Include="NumberFormatInfoTests.cs" />
     <Compile Include="Collections\TypedArrays\ArrayBufferTests.cs" />
     <Compile Include="Collections\TypedArrays\DataViewTests.cs" />
     <Compile Include="Collections\TypedArrays\Uint8ClampedArrayTests.cs" />
