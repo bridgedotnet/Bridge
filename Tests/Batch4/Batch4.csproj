@@ -58,7 +58,6 @@
     <Compile Include="Threading\CancellationTokenTests.cs" />
     <Compile Include="UserDefinedStructTests.cs" />
     <Compile Include="Exceptions\NotImplementedExceptionTests.cs" />
-    <Compile Include="Exceptions\DivideByZeroExceptionTests.cs" />
     <Compile Include="Reflection\AssemblyTests.cs" />
     <Compile Include="Exceptions\ExceptionTests.cs" />
     <Compile Include="Exceptions\InvalidCastExceptionTests.cs" />
