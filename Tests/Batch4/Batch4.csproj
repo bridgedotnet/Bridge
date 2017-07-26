@@ -70,7 +70,6 @@
     <Compile Include="SimpleTypes\UInt32Tests.cs" />
     <Compile Include="SimpleTypes\UInt64Tests.cs" />
     <Compile Include="SimpleTypes\TupleTests.cs" />
-    <Compile Include="SimpleTypes\SingleTests.cs" />
     <Compile Include="SimpleTypes\SByteTests.cs" />
     <Compile Include="SimpleTypes\Int32Tests.cs" />
     <Compile Include="SimpleTypes\Int16Tests.cs" />
