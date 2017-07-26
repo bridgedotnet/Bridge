@@ -1027,25 +1027,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
 
     Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.DecimalTests", {
         methods: {
-            TypePropertiesAreCorrect_SPI_1717: function () {
-                Bridge.Test.NUnit.Assert.True(Bridge.is(System.Decimal(0.5), System.Decimal));
-                Bridge.Test.NUnit.Assert.AreEqual("System.Decimal", Bridge.Reflection.getTypeFullName(System.Decimal));
-                Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isClass(System.Decimal));
-                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IComparable$1(System.Decimal), System.Decimal));
-                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IEquatable$1(System.Decimal), System.Decimal));
-                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IFormattable, System.Decimal));
-                var d = System.Decimal(0.0);
-                Bridge.Test.NUnit.Assert.True(Bridge.is(d, System.Decimal));
-                Bridge.Test.NUnit.Assert.True(Bridge.is(d, System.IComparable$1(System.Decimal)));
-                Bridge.Test.NUnit.Assert.True(Bridge.is(d, System.IEquatable$1(System.Decimal)));
-                Bridge.Test.NUnit.Assert.True(Bridge.is(d, System.IFormattable));
-
-                var interfaces = Bridge.Reflection.getInterfaces(System.Decimal);
-                Bridge.Test.NUnit.Assert.AreEqual(4, interfaces.length);
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.Decimal), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.Decimal), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Function));
-            },
             GetDefaultValue: function (T) {
                 return Bridge.getDefaultValue(T);
             },
@@ -1056,54 +1037,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
             AssertIsDecimalAndEqualTo$1: function (v, s) {
                 Bridge.Test.NUnit.Assert.True(Bridge.is(v, System.Decimal));
                 Bridge.Test.NUnit.Assert.AreStrictEqual(s, v.toString());
-            },
-            DefaultValueIsDecimal0: function () {
-                this.AssertIsDecimalAndEqualTo(this.GetDefaultValue(System.Decimal), 0);
-            },
-            CreatingInstanceReturnsZero: function () {
-                this.AssertIsDecimalAndEqualTo(Bridge.createInstance(System.Decimal), 0);
-            },
-            LiteralDecimalsWork_SPI_1590: function () {
-                this.AssertIsDecimalAndEqualTo(System.Decimal(1.0), 1);
-                this.AssertIsDecimalAndEqualTo(System.Decimal(-1.0), -1);
-
-                // #1590
-                this.AssertIsDecimalAndEqualTo$1(System.Decimal("7922816251426433759354395033"), "7922816251426433759354395033");
-                this.AssertIsDecimalAndEqualTo$1(System.Decimal("-7922816251426433759354395033"), "-7922816251426433759354395033");
-            },
-            ConstantsWork_SPI_1590: function () {
-                this.AssertIsDecimalAndEqualTo(System.Decimal.One, 1);
-                this.AssertIsDecimalAndEqualTo(System.Decimal.Zero, 0);
-                this.AssertIsDecimalAndEqualTo(System.Decimal.MinusOne, -1);
-                // #1590
-                this.AssertIsDecimalAndEqualTo$1(System.Decimal.MinValue, "-79228162514264337593543950335");
-                this.AssertIsDecimalAndEqualTo$1(System.Decimal.MaxValue, "79228162514264337593543950335");
-            },
-            DefaultConstructorReturnsZero: function () {
-                this.AssertIsDecimalAndEqualTo(System.Decimal(0), 0);
-            },
-            ConvertingConstructorsWork: function () {
-                this.AssertIsDecimalAndEqualTo(System.Decimal(0.5), 0.5);
-                this.AssertIsDecimalAndEqualTo(System.Decimal(1.5), 1.5);
-                this.AssertIsDecimalAndEqualTo(System.Decimal(2), 2);
-                this.AssertIsDecimalAndEqualTo(System.Decimal(System.Int64(3)), 3);
-                this.AssertIsDecimalAndEqualTo(System.Decimal(4), 4);
-                this.AssertIsDecimalAndEqualTo(System.Decimal(System.UInt64(5)), 5);
-            },
-            FormatWorks: function () {
-                Bridge.Test.NUnit.Assert.AreEqual("123", Bridge.Int.format(System.Decimal(291.0), "x"));
-            },
-            ToStringWithFormatWorks: function () {
-                Bridge.Test.NUnit.Assert.AreEqual("123", Bridge.Int.format(System.Decimal(291.0), "x"));
-            },
-            ToStringWithFormatAndProviderWorks: function () {
-                Bridge.Test.NUnit.Assert.AreEqual("123", Bridge.Int.format(System.Decimal(291.0), "x", System.Globalization.CultureInfo.invariantCulture));
-            },
-            IFormattableToStringWorks: function () {
-                Bridge.Test.NUnit.Assert.AreEqual("291", Bridge.format(System.Decimal(291.0), "", System.Globalization.CultureInfo.invariantCulture));
-            },
-            ToStringWithoutRadixWorks: function () {
-                Bridge.Test.NUnit.Assert.AreEqual("123", System.Decimal(123.0).toString());
             },
             ConversionsToDecimalWork_SPI_1580: function () {
                 var x = 0;
@@ -1297,17 +1230,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
                     var _ = System.Decimal.toInt(x.add(System.Decimal(65536)));
                 });
             },
-            DecimalToChar: function () {
-                var x = System.Decimal(0);
-                Bridge.Test.NUnit.Assert.AreEqual(0, System.Decimal.toInt(x.sub(System.Decimal(0.9)), System.Char));
-                Bridge.Test.NUnit.Assert.AreEqual(65535, System.Decimal.toInt(x.add(System.Decimal(65535.9)), System.Char));
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(x.sub(System.Decimal(1)), System.Char);
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(x.add(System.Decimal(65536)), System.Char);
-                });
-            },
             DecimalToInt_SPI_1580: function () {
                 var x = System.Decimal(0);
                 Bridge.Test.NUnit.Assert.AreEqual(-2147483648, System.Decimal.toInt(x.sub(System.Decimal(2147483648.9)), System.Int32));
@@ -1398,177 +1320,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
                     var _ = System.Decimal.toInt(x.sub(System.Decimal(1)));
                 });
             },
-            DecimalToFloat: function () {
-                var x = System.Decimal(0);
-                Bridge.Test.NUnit.Assert.AreEqual(10.5, System.Decimal.toFloat(x.add(System.Decimal(10.5))));
-                Bridge.Test.NUnit.Assert.AreEqual(10.5, System.Decimal.toFloat(x.add(System.Decimal(10.5))));
-            },
-            DecimalToDouble: function () {
-                var x = System.Decimal(0);
-                Bridge.Test.NUnit.Assert.AreEqual(10.5, System.Decimal.toFloat(x.add(System.Decimal(10.5))));
-                Bridge.Test.NUnit.Assert.AreEqual(10.5, System.Decimal.toFloat(x.add(System.Decimal(10.5))));
-            },
-            NullableDecimalToSByte: function () {
-                var x1 = System.Decimal(0), x2 = System.Decimal.lift(null);
-                Bridge.Test.NUnit.Assert.AreEqual(-128, System.Decimal.toInt(System.Nullable.lift2("sub", x1, System.Decimal(128)), System.Nullable$1(System.SByte)));
-                Bridge.Test.NUnit.Assert.AreEqual(127, System.Decimal.toInt(System.Nullable.lift2("add", x1, System.Decimal(127)), System.Nullable$1(System.SByte)));
-                Bridge.Test.NUnit.Assert.AreEqual(-128, System.Decimal.toInt(System.Nullable.getValue(System.Nullable.lift2("sub", x1, System.Decimal(128))), System.SByte));
-                Bridge.Test.NUnit.Assert.AreEqual(127, System.Decimal.toInt(System.Nullable.getValue(System.Nullable.lift2("add", x1, System.Decimal(127))), System.SByte));
-                Bridge.Test.NUnit.Assert.AreEqual(null, System.Decimal.toInt(x2, System.Nullable$1(System.SByte)));
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.lift2("sub", x1, System.Decimal(129)), System.Nullable$1(System.SByte));
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.lift2("add", x1, System.Decimal(128)), System.Nullable$1(System.SByte));
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.getValue(System.Nullable.lift2("sub", x1, System.Decimal(129))), System.SByte);
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.getValue(System.Nullable.lift2("add", x1, System.Decimal(128))), System.SByte);
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.InvalidOperationException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.getValue(x2), System.SByte);
-                });
-            },
-            NullableDecimalToByte: function () {
-                var x1 = System.Decimal(0), x2 = System.Decimal.lift(null);
-                Bridge.Test.NUnit.Assert.AreEqual(0, System.Decimal.toInt(x1, System.Nullable$1(System.Byte)));
-                Bridge.Test.NUnit.Assert.AreEqual(255, System.Decimal.toInt(System.Nullable.lift2("add", x1, System.Decimal(255)), System.Nullable$1(System.Byte)));
-                Bridge.Test.NUnit.Assert.AreEqual(0, System.Decimal.toInt(System.Nullable.getValue(x1), System.Byte));
-                Bridge.Test.NUnit.Assert.AreEqual(255, System.Decimal.toInt(System.Nullable.getValue(System.Nullable.lift2("add", x1, System.Decimal(255))), System.Byte));
-                Bridge.Test.NUnit.Assert.AreEqual(null, System.Decimal.toInt(x2, System.Nullable$1(System.Byte)));
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.lift2("sub", x1, System.Decimal(1)), System.Nullable$1(System.Byte));
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.lift2("add", x1, System.Decimal(256)), System.Nullable$1(System.Byte));
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.getValue(System.Nullable.lift2("sub", x1, System.Decimal(1))), System.Byte);
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.getValue(System.Nullable.lift2("add", x1, System.Decimal(256))), System.Byte);
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.InvalidOperationException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.getValue(x2), System.SByte);
-                });
-            },
-            NullableDecimalToShort: function () {
-                var x1 = System.Decimal(0), x2 = System.Decimal.lift(null);
-                Bridge.Test.NUnit.Assert.AreEqual(-32768, System.Decimal.toInt(System.Nullable.lift2("sub", x1, System.Decimal(32768)), System.Nullable$1(System.Int16)));
-                Bridge.Test.NUnit.Assert.AreEqual(32767, System.Decimal.toInt(System.Nullable.lift2("add", x1, System.Decimal(32767)), System.Nullable$1(System.Int16)));
-                Bridge.Test.NUnit.Assert.AreEqual(-32768, System.Decimal.toInt(System.Nullable.getValue(System.Nullable.lift2("sub", x1, System.Decimal(32768))), System.Int16));
-                Bridge.Test.NUnit.Assert.AreEqual(32767, System.Decimal.toInt(System.Nullable.getValue(System.Nullable.lift2("add", x1, System.Decimal(32767))), System.Int16));
-                Bridge.Test.NUnit.Assert.AreEqual(null, System.Decimal.toInt(x2, System.Nullable$1(System.Int16)));
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.lift2("sub", x1, System.Decimal(32769)), System.Nullable$1(System.Int16));
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.lift2("add", x1, System.Decimal(32768)), System.Nullable$1(System.Int16));
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.getValue(System.Nullable.lift2("sub", x1, System.Decimal(32769))), System.Int16);
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.getValue(System.Nullable.lift2("add", x1, System.Decimal(32768))), System.Int16);
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.InvalidOperationException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.getValue(x2), System.Int16);
-                });
-            },
-            NullableDecimalToUShort: function () {
-                var x1 = System.Decimal(0), x2 = System.Decimal.lift(null);
-                Bridge.Test.NUnit.Assert.AreEqual(0, System.Decimal.toInt(x1, System.Nullable$1(System.UInt16)));
-                Bridge.Test.NUnit.Assert.AreEqual(65535, System.Decimal.toInt(System.Nullable.lift2("add", x1, System.Decimal(65535)), System.Nullable$1(System.UInt16)));
-                Bridge.Test.NUnit.Assert.AreEqual(0, System.Decimal.toInt(System.Nullable.getValue(x1), System.UInt16));
-                Bridge.Test.NUnit.Assert.AreEqual(65535, System.Decimal.toInt(System.Nullable.getValue(System.Nullable.lift2("add", x1, System.Decimal(65535))), System.UInt16));
-                Bridge.Test.NUnit.Assert.AreEqual(null, System.Decimal.toInt(x2, System.Nullable$1(System.UInt16)));
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.lift2("sub", x1, System.Decimal(1)), System.Nullable$1(System.UInt16));
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.lift2("add", x1, System.Decimal(65536)), System.Nullable$1(System.UInt16));
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.getValue(System.Nullable.lift2("sub", x1, System.Decimal(1))), System.UInt16);
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.getValue(System.Nullable.lift2("add", x1, System.Decimal(65536))), System.UInt16);
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.InvalidOperationException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.getValue(x2), System.UInt16);
-                });
-            },
-            NullableDecimalToChar: function () {
-                var x1 = System.Decimal(0), x2 = System.Decimal.lift(null);
-                Bridge.Test.NUnit.Assert.AreEqual(0, System.Decimal.toInt(x1, System.Nullable$1(System.Char)));
-                Bridge.Test.NUnit.Assert.AreEqual(65535, System.Decimal.toInt(System.Nullable.lift2("add", x1, System.Decimal(65535)), System.Nullable$1(System.Char)));
-                Bridge.Test.NUnit.Assert.AreEqual(0, System.Decimal.toInt(System.Nullable.getValue(x1), System.Char));
-                Bridge.Test.NUnit.Assert.AreEqual(65535, System.Decimal.toInt(System.Nullable.getValue(System.Nullable.lift2("add", x1, System.Decimal(65535))), System.Char));
-                Bridge.Test.NUnit.Assert.AreEqual(null, System.Decimal.toInt(x2, System.Nullable$1(System.Char)));
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.lift2("sub", x1, System.Decimal(1)), System.Nullable$1(System.Char));
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.lift2("add", x1, System.Decimal(65536)), System.Nullable$1(System.Char));
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.getValue(System.Nullable.lift2("sub", x1, System.Decimal(1))), System.Char);
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.getValue(System.Nullable.lift2("add", x1, System.Decimal(65536))), System.Char);
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.InvalidOperationException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.getValue(x2), System.Char);
-                });
-            },
-            NullableDecimalToInt: function () {
-                var x1 = System.Decimal(0), x2 = System.Decimal.lift(null);
-                Bridge.Test.NUnit.Assert.AreEqual(-2147483648, System.Decimal.toInt(System.Nullable.lift2("sub", x1, System.Decimal(2147483648)), System.Nullable$1(System.Int32)));
-                Bridge.Test.NUnit.Assert.AreEqual(2147483647, System.Decimal.toInt(System.Nullable.lift2("add", x1, System.Decimal(2147483647)), System.Nullable$1(System.Int32)));
-                Bridge.Test.NUnit.Assert.AreEqual(-2147483648, System.Decimal.toInt(System.Nullable.getValue(System.Nullable.lift2("sub", x1, System.Decimal(2147483648))), System.Int32));
-                Bridge.Test.NUnit.Assert.AreEqual(2147483647, System.Decimal.toInt(System.Nullable.getValue(System.Nullable.lift2("add", x1, System.Decimal(2147483647))), System.Int32));
-                Bridge.Test.NUnit.Assert.AreEqual(null, System.Decimal.toInt(x2, System.Nullable$1(System.Int32)));
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.lift2("sub", x1, System.Decimal(2147483649)), System.Nullable$1(System.Int32));
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.lift2("add", x1, System.Decimal(2147483648)), System.Nullable$1(System.Int32));
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.getValue(System.Nullable.lift2("sub", x1, System.Decimal(2147483649))), System.Int32);
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.getValue(System.Nullable.lift2("add", x1, System.Decimal(2147483648))), System.Int32);
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.InvalidOperationException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.getValue(x2), System.Int32);
-                });
-            },
-            NullableDecimalToUInt: function () {
-                var x1 = System.Decimal(0), x2 = System.Decimal.lift(null);
-                Bridge.Test.NUnit.Assert.AreEqual(0, System.Decimal.toInt(x1, System.Nullable$1(System.UInt32)));
-                Bridge.Test.NUnit.Assert.AreEqual(4294967295, System.Decimal.toInt(System.Nullable.lift2("add", x1, System.Decimal(4294967295)), System.Nullable$1(System.UInt32)));
-                Bridge.Test.NUnit.Assert.AreEqual(0, System.Decimal.toInt(System.Nullable.getValue(x1), System.UInt32));
-                Bridge.Test.NUnit.Assert.AreEqual(4294967295, System.Decimal.toInt(System.Nullable.getValue(System.Nullable.lift2("add", x1, System.Decimal(4294967295))), System.UInt32));
-                Bridge.Test.NUnit.Assert.AreEqual(null, System.Decimal.toInt(x2, System.Nullable$1(System.UInt32)));
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.lift2("sub", x1, System.Decimal(1)), System.Nullable$1(System.UInt32));
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.lift2("add", x1, System.Decimal(System.Int64([0,1]))), System.Nullable$1(System.UInt32));
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.getValue(System.Nullable.lift2("sub", x1, System.Decimal(1))), System.UInt32);
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.getValue(System.Nullable.lift2("add", x1, System.Decimal(System.Int64([0,1])))), System.UInt32);
-                });
-                Bridge.Test.NUnit.Assert.Throws$2(System.InvalidOperationException, function () {
-                    var _ = System.Decimal.toInt(System.Nullable.getValue(x2), System.UInt32);
-                });
-            },
             NullableDecimalToLong_SPI_1582: function () {
                 var x1 = System.Decimal(0), x2 = System.Decimal.lift(null);
                 Bridge.Test.NUnit.Assert.AreEqual(System.Int64([0,-5]), System.Decimal.toInt(System.Nullable.lift2("sub", x1, System.Decimal(System.Int64([0,5]))), System.Nullable$1(System.Int64)));
@@ -1599,52 +1350,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
                 // #1582
                 Bridge.Test.NUnit.Assert.Throws$2(System.InvalidOperationException, function () {
                     var _ = System.Decimal.toInt(x2, System.UInt64);
-                });
-            },
-            NullableDecimalToFloat_SPI_1579: function () {
-                var x1 = System.Decimal(0), x2 = System.Decimal.lift(null);
-
-                var f1 = null;
-                Bridge.ClientTest.Batch4.TestHelper.Safe(function () {
-                    f1 = System.Decimal.toFloat(System.Nullable.lift2("add", x1, System.Decimal(10.5)));
-                });
-                Bridge.Test.NUnit.Assert.AreEqual(10.5, f1);
-                // #1579
-                // Test restructure to keep assertion count correct (prevent uncaught test exception)
-                var f2 = 0;
-                Bridge.ClientTest.Batch4.TestHelper.Safe(function () {
-                    f2 = System.Decimal.toFloat(System.Nullable.getValue(System.Nullable.lift2("add", x1, System.Decimal(10.5))));
-                });
-                Bridge.Test.NUnit.Assert.AreEqual(10.5, f2);
-
-                var f3 = null;
-                Bridge.ClientTest.Batch4.TestHelper.Safe(function () {
-                    f3 = System.Decimal.toFloat(x2);
-                });
-                Bridge.Test.NUnit.Assert.AreEqual(null, f3);
-                Bridge.Test.NUnit.Assert.Throws$2(System.InvalidOperationException, function () {
-                    var _ = System.Decimal.toFloat(System.Nullable.getValue(x2));
-                });
-            },
-            NullableDecimalToDouble_SPI_1579: function () {
-                var x1 = System.Decimal(0), x2 = System.Decimal.lift(null);
-                Bridge.Test.NUnit.Assert.AreEqual(10.5, System.Decimal.toFloat(System.Nullable.lift2("add", x1, System.Decimal(10.5))));
-
-                // #1579
-                // Test restructure to keep assertion count correct(prevent uncaught test exception)
-                var d1 = 0;
-                Bridge.ClientTest.Batch4.TestHelper.Safe(function () {
-                    d1 = System.Decimal.toFloat(System.Nullable.getValue(System.Nullable.lift2("add", x1, System.Decimal(10.5))));
-                });
-                Bridge.Test.NUnit.Assert.AreEqual(10.5, d1);
-
-                var d2 = null;
-                Bridge.ClientTest.Batch4.TestHelper.Safe(function () {
-                    d2 = System.Decimal.toFloat(x2);
-                });
-                Bridge.Test.NUnit.Assert.AreEqual(null, d2);
-                Bridge.Test.NUnit.Assert.Throws$2(System.InvalidOperationException, function () {
-                    var _ = System.Decimal.toFloat(System.Nullable.getValue(x2));
                 });
             },
             OperatorsWork_SPI_1583: function () {
@@ -1773,31 +1478,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
                 Bridge.Test.NUnit.Assert.False(System.Nullable.liftcmp("lte", System.Decimal.lift(null), x1));
                 Bridge.Test.NUnit.Assert.False(System.Nullable.liftcmp("lte", x2, System.Decimal.lift(null)));
             },
-            AddWorks: function () {
-                this.AssertIsDecimalAndEqualTo(System.Decimal(3.0).add(System.Decimal(4.0)), 7);
-            },
-            CeilingWorks: function () {
-                this.AssertIsDecimalAndEqualTo(System.Decimal(3.1).ceil(), 4);
-                this.AssertIsDecimalAndEqualTo(System.Decimal(-3.9).ceil(), -3);
-                this.AssertIsDecimalAndEqualTo(System.Decimal(3.0).ceil(), 3);
-            },
-            DivideWorks: function () {
-                this.AssertIsDecimalAndEqualTo(System.Decimal(3.0).div(System.Decimal(4.0)), 0.75);
-            },
-            FloorWorks: function () {
-                this.AssertIsDecimalAndEqualTo(System.Decimal(3.9).floor(), 3);
-                this.AssertIsDecimalAndEqualTo(System.Decimal(-3.1).floor(), -4);
-                this.AssertIsDecimalAndEqualTo(System.Decimal(3.0).floor(), 3);
-            },
-            RemainderWorks: function () {
-                this.AssertIsDecimalAndEqualTo(System.Decimal(14.0).mod(System.Decimal(3.0)), 2);
-            },
-            MultiplyWorks: function () {
-                this.AssertIsDecimalAndEqualTo(System.Decimal(3.0).mul(System.Decimal(2.0)), 6);
-            },
-            NegateWorks: function () {
-                this.AssertIsDecimalAndEqualTo(System.Decimal(0).sub(System.Decimal(3.0)), -3);
-            },
             ParseWorks_SPI_1586: function () {
                 this.AssertIsDecimalAndEqualTo(System.Decimal("123"), 123);
                 this.AssertIsDecimalAndEqualTo(System.Decimal("0.123"), 0.123);
@@ -1870,86 +1550,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
                 //b = decimal.TryParse("999999999999999999999999999999", out d);
                 //Assert.False(b);
                 //AssertIsDecimalAndEqualTo(d, 0);
-            },
-            RoundWorks: function () {
-                this.AssertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(3.2), 6), 3);
-                this.AssertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(4.5), 6), 4);
-            },
-            RoundWithDecimalsWorks: function () {
-                this.AssertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(3.2209), 2, 6), 3.22);
-                this.AssertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(0.2209), 2, 6), 0.22);
-                this.AssertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(3.225), 2, 6), 3.22);
-            },
-            RoundWithMidpointRoundingWorks: function () {
-                this.AssertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(4.5), 4), 5);
-                this.AssertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(-4.5), 4), -5);
-                this.AssertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(4.5), 6), 4);
-                this.AssertIsDecimalAndEqualTo(System.Decimal.round(System.Decimal(-4.5), 6), -4);
-            },
-            RoundWithDecimalsAndMidpointRoundingWorks: function () {
-                this.AssertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(4.225), 2, 4), 4.23);
-                this.AssertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(-4.225), 2, 4), -4.23);
-                this.AssertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(4.2249), 2, 4), 4.22);
-                this.AssertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(-4.2249), 2, 4), -4.22);
-                this.AssertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(4.225), 2, 6), 4.22);
-                this.AssertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(-4.225), 2, 6), -4.22);
-                this.AssertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(4.2251), 2, 6), 4.23);
-                this.AssertIsDecimalAndEqualTo(System.Decimal.toDecimalPlaces(System.Decimal(-4.2251), 2, 6), -4.23);
-            },
-            TruncateWorks: function () {
-                this.AssertIsDecimalAndEqualTo(System.Decimal(3.9).trunc(), 3);
-                this.AssertIsDecimalAndEqualTo(System.Decimal(-3.9).trunc(), -3);
-                this.AssertIsDecimalAndEqualTo(System.Decimal(3.0).trunc(), 3);
-            },
-            SubtractWorks: function () {
-                this.AssertIsDecimalAndEqualTo(System.Decimal(7.0).sub(System.Decimal(3.0)), 4);
-            },
-            GetHashCodeWorks: function () {
-                Bridge.Test.NUnit.Assert.AreEqual((System.Decimal(0.0)).getHashCode(), (System.Decimal(0.0)).getHashCode());
-                Bridge.Test.NUnit.Assert.AreEqual((System.Decimal(1.0)).getHashCode(), (System.Decimal(1.0)).getHashCode());
-                Bridge.Test.NUnit.Assert.AreNotEqual((System.Decimal(1.0)).getHashCode(), (System.Decimal(0.0)).getHashCode());
-                Bridge.Test.NUnit.Assert.AreNotEqual((System.Decimal(0.5)).getHashCode(), (System.Decimal(0.0)).getHashCode());
-            },
-            EqualsWorks: function () {
-                Bridge.Test.NUnit.Assert.True((System.Decimal(0.0)).equals(System.Decimal(0.0)));
-                Bridge.Test.NUnit.Assert.False((System.Decimal(1.0)).equals(System.Decimal(0.0)));
-                Bridge.Test.NUnit.Assert.False((System.Decimal(0.0)).equals(System.Decimal(0.5)));
-                Bridge.Test.NUnit.Assert.True((System.Decimal(1.0)).equals(System.Decimal(1.0)));
-            },
-            StaticEqualsWorks: function () {
-                Bridge.Test.NUnit.Assert.True(System.Decimal(0).equals(System.Decimal(0)));
-                Bridge.Test.NUnit.Assert.False(System.Decimal(1).equals(System.Decimal(0)));
-                Bridge.Test.NUnit.Assert.False(Bridge.equals(Bridge.box(0, System.Int32), Bridge.box(0.5, System.Double, System.Double.format, System.Double.getHashCode)));
-                Bridge.Test.NUnit.Assert.True(System.Decimal(1).equals(System.Decimal(1)));
-            },
-            IEquatableEqualsWorks: function () {
-                Bridge.Test.NUnit.Assert.True((System.Decimal(0.0)).equalsT(System.Decimal(0.0)));
-                Bridge.Test.NUnit.Assert.False((System.Decimal(1.0)).equalsT(System.Decimal(0.0)));
-                Bridge.Test.NUnit.Assert.False((System.Decimal(0.0)).equalsT(System.Decimal(0.5)));
-                Bridge.Test.NUnit.Assert.True((System.Decimal(1.0)).equalsT(System.Decimal(1.0)));
-
-                Bridge.Test.NUnit.Assert.True(Bridge.equalsT(System.Decimal(0.0), System.Decimal(0.0), System.Decimal));
-                Bridge.Test.NUnit.Assert.False(Bridge.equalsT(System.Decimal(1.0), System.Decimal(0.0), System.Decimal));
-                Bridge.Test.NUnit.Assert.False(Bridge.equalsT(System.Decimal(0.0), System.Decimal(0.5), System.Decimal));
-                Bridge.Test.NUnit.Assert.True(Bridge.equalsT(System.Decimal(1.0), System.Decimal(1.0), System.Decimal));
-            },
-            CompareToWorks: function () {
-                Bridge.Test.NUnit.Assert.True((System.Decimal(0.0)).compareTo(System.Decimal(0.0)) === 0);
-                Bridge.Test.NUnit.Assert.True((System.Decimal(1.0)).compareTo(System.Decimal(0.0)) > 0);
-                Bridge.Test.NUnit.Assert.True((System.Decimal(0.0)).compareTo(System.Decimal(0.5)) < 0);
-                Bridge.Test.NUnit.Assert.True((System.Decimal(1.0)).compareTo(System.Decimal(1.0)) === 0);
-            },
-            StaticCompareWorks: function () {
-                Bridge.Test.NUnit.Assert.True(System.Decimal(0.0).compareTo(System.Decimal(0.0)) === 0);
-                Bridge.Test.NUnit.Assert.True(System.Decimal(1.0).compareTo(System.Decimal(0.0)) > 0);
-                Bridge.Test.NUnit.Assert.True(System.Decimal(0.0).compareTo(System.Decimal(0.5)) < 0);
-                Bridge.Test.NUnit.Assert.True(System.Decimal(1.0).compareTo(System.Decimal(1.0)) === 0);
-            },
-            IComparableCompareToWorks: function () {
-                Bridge.Test.NUnit.Assert.True(Bridge.compare(System.Decimal(0.0), System.Decimal(0.0), false, System.Decimal) === 0);
-                Bridge.Test.NUnit.Assert.True(Bridge.compare(System.Decimal(1.0), System.Decimal(0.0), false, System.Decimal) > 0);
-                Bridge.Test.NUnit.Assert.True(Bridge.compare(System.Decimal(0.0), System.Decimal(0.5), false, System.Decimal) < 0);
-                Bridge.Test.NUnit.Assert.True(Bridge.compare(System.Decimal(1.0), System.Decimal(1.0), false, System.Decimal) === 0);
             },
             ImplementationTests_SPI_1588_1590_1650: function () {
                 // #1590 All the tests below use decimal.ToString() that uses Template Bridge.Int.format({this}, 'G') with significant digits 15 instead of 29

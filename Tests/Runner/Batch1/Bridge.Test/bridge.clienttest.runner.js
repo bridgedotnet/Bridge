@@ -2151,19 +2151,44 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("Char - IsWhiteSpaceWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CharTests.IsWhiteSpaceWorks);
             QUnit.test("Char - IsDigitWithStringAndIndexWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CharTests.IsDigitWithStringAndIndexWorks);
             QUnit.test("Char - IsWhiteSpaceWithStringAndIndexWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CharTests.IsWhiteSpaceWithStringAndIndexWorks);
-            QUnit.test("Decimal - TypePropertiesAreCorrect", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.TypePropertiesAreCorrect);
-            QUnit.test("Decimal - DefaultValueIs0", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.DefaultValueIs0);
+            QUnit.test("Decimal - TypePropertiesAreCorrect_SPI_1717", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.TypePropertiesAreCorrect_SPI_1717);
+            QUnit.test("Decimal - DefaultValueIsDecimal0", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.DefaultValueIsDecimal0);
             QUnit.test("Decimal - CreatingInstanceReturnsZero", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.CreatingInstanceReturnsZero);
-            QUnit.test("Decimal - ConstantsWork", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.ConstantsWork);
+            QUnit.test("Decimal - LiteralDecimalsWork_SPI_1590", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.LiteralDecimalsWork_SPI_1590);
+            QUnit.test("Decimal - ConstantsWork_SPI_1590", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.ConstantsWork_SPI_1590);
             QUnit.test("Decimal - DefaultConstructorReturnsZero", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.DefaultConstructorReturnsZero);
             QUnit.test("Decimal - ConvertingConstructorsWork", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.ConvertingConstructorsWork);
             QUnit.test("Decimal - FormatWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.FormatWorks);
-            QUnit.test("Decimal - IFormattableToStringWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.IFormattableToStringWorks);
+            QUnit.test("Decimal - ToStringWithRadixWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.ToStringWithRadixWorks);
             QUnit.test("Decimal - ToStringWithoutRadixWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.ToStringWithoutRadixWorks);
+            QUnit.test("Decimal - ToStringWithFormatAndProviderWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.ToStringWithFormatAndProviderWorks);
+            QUnit.test("Decimal - IFormattableToStringWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.IFormattableToStringWorks);
             QUnit.test("Decimal - AddWithStringWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.AddWithStringWorks);
-            QUnit.test("Decimal - ConversionsToDecimalWork", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.ConversionsToDecimalWork);
+            QUnit.test("Decimal - ConversionsToDecimalWork_SPI_1580", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.ConversionsToDecimalWork_SPI_1580);
             QUnit.test("Decimal - ConversionsFromDecimalWork", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.ConversionsFromDecimalWork);
-            QUnit.test("Decimal - OperatorsWork", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.OperatorsWork);
+            QUnit.test("Decimal - NullableConversionsToDecimalWork_SPI_1580_1581_1587", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.NullableConversionsToDecimalWork_SPI_1580_1581_1587);
+            QUnit.test("Decimal - DecimalToSByte_SPI_1580", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.DecimalToSByte_SPI_1580);
+            QUnit.test("Decimal - DecimalToByte_SPI_1580", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.DecimalToByte_SPI_1580);
+            QUnit.test("Decimal - DecimalToShort_SPI_1580", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.DecimalToShort_SPI_1580);
+            QUnit.test("Decimal - DecimalToUShort_SPI_1580", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.DecimalToUShort_SPI_1580);
+            QUnit.test("Decimal - DecimalToChar", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.DecimalToChar);
+            QUnit.test("Decimal - DecimalToInt_SPI_1580", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.DecimalToInt_SPI_1580);
+            QUnit.test("Decimal - DecimalToUInt_SPI_1580", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.DecimalToUInt_SPI_1580);
+            QUnit.test("Decimal - DecimalToLong_SPI_1578", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.DecimalToLong_SPI_1578);
+            QUnit.test("Decimal - DecimalToULong_SPI_1584_1585", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.DecimalToULong_SPI_1584_1585);
+            QUnit.test("Decimal - DecimalToFloat", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.DecimalToFloat);
+            QUnit.test("Decimal - DecimalToDouble", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.DecimalToDouble);
+            QUnit.test("Decimal - NullableDecimalToSByte", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.NullableDecimalToSByte);
+            QUnit.test("Decimal - NullableDecimalToByte", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.NullableDecimalToByte);
+            QUnit.test("Decimal - NullableDecimalToShort", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.NullableDecimalToShort);
+            QUnit.test("Decimal - NullableDecimalToUShort", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.NullableDecimalToUShort);
+            QUnit.test("Decimal - NullableDecimalToChar", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.NullableDecimalToChar);
+            QUnit.test("Decimal - NullableDecimalToInt", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.NullableDecimalToInt);
+            QUnit.test("Decimal - NullableDecimalToUInt", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.NullableDecimalToUInt);
+            QUnit.test("Decimal - NullableDecimalToFloat_SPI_1579", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.NullableDecimalToFloat_SPI_1579);
+            QUnit.test("Decimal - NullableDecimalToDouble_SPI_1579", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.NullableDecimalToDouble_SPI_1579);
+            QUnit.test("Decimal - OperatorsWork_SPI_1583", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.OperatorsWork_SPI_1583);
+            QUnit.test("Decimal - LiftedOperatorsWork_SPI_1583", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.LiftedOperatorsWork_SPI_1583);
             QUnit.test("Decimal - AddWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.AddWorks);
             QUnit.test("Decimal - CeilingWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.CeilingWorks);
             QUnit.test("Decimal - DivideWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.DivideWorks);
@@ -2173,14 +2198,20 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("Decimal - NegateWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.NegateWorks);
             QUnit.test("Decimal - RoundWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.RoundWorks);
             QUnit.test("Decimal - RoundWithModeWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.RoundWithModeWorks);
+            QUnit.test("Decimal - ParseWorks_SPI_1586", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.ParseWorks_SPI_1586);
+            QUnit.test("Decimal - TryParseWorks_SPI_1586", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.TryParseWorks_SPI_1586);
+            QUnit.test("Decimal - TruncateWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.TruncateWorks);
             QUnit.test("Decimal - SubtractWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.SubtractWorks);
             QUnit.test("Decimal - GetHashCodeWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.GetHashCodeWorks);
             QUnit.test("Decimal - ObjectEqualsWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.ObjectEqualsWorks);
             QUnit.test("Decimal - DecimalEqualsWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.DecimalEqualsWorks);
+            QUnit.test("Decimal - IEquatableEqualsWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.IEquatableEqualsWorks);
             QUnit.test("Decimal - CompareToWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.CompareToWorks);
+            QUnit.test("Decimal - StaticCompareWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.StaticCompareWorks);
             QUnit.test("Decimal - IComparableCompareToWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.IComparableCompareToWorks);
             QUnit.test("Decimal - FullCoalesceWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.FullCoalesceWorks);
             QUnit.test("Decimal - ShortCoalesceWorks", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.ShortCoalesceWorks);
+            QUnit.test("Decimal - ImplementationTests_SPI_1588_1590_1650", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.ImplementationTests_SPI_1588_1590_1650);
             QUnit.test("Double - TypePropertiesAreCorrect", Bridge.Test.Runtime.BridgeClientTestRunner.DoubleTests.TypePropertiesAreCorrect);
             QUnit.test("Double - DefaultValueIs0", Bridge.Test.Runtime.BridgeClientTestRunner.DoubleTests.DefaultValueIs0);
             QUnit.test("Double - CreatingInstanceReturnsZero", Bridge.Test.Runtime.BridgeClientTestRunner.DoubleTests.CreatingInstanceReturnsZero);
@@ -7638,155 +7669,310 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests)],
         statics: {
             methods: {
-                TypePropertiesAreCorrect: function (assert) {
+                TypePropertiesAreCorrect_SPI_1717: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TypePropertiesAreCorrect()", $t.Line = "16", $t));
-                    t.Fixture.TypePropertiesAreCorrect();
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TypePropertiesAreCorrect_SPI_1717()", $t.Line = "18", $t));
+                    t.Fixture.TypePropertiesAreCorrect_SPI_1717();
                 },
-                DefaultValueIs0: function (assert) {
+                DefaultValueIsDecimal0: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultValueIs0()", $t.Line = "31", $t));
-                    t.Fixture.DefaultValueIs0();
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultValueIsDecimal0()", $t.Line = "45", $t));
+                    t.Fixture.DefaultValueIsDecimal0();
                 },
                 CreatingInstanceReturnsZero: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CreatingInstanceReturnsZero()", $t.Line = "37", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CreatingInstanceReturnsZero()", $t.Line = "51", $t));
                     t.Fixture.CreatingInstanceReturnsZero();
                 },
-                ConstantsWork: function (assert) {
+                LiteralDecimalsWork_SPI_1590: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ConstantsWork()", $t.Line = "43", $t));
-                    t.Fixture.ConstantsWork();
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiteralDecimalsWork_SPI_1590()", $t.Line = "57", $t));
+                    t.Fixture.LiteralDecimalsWork_SPI_1590();
+                },
+                ConstantsWork_SPI_1590: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ConstantsWork_SPI_1590()", $t.Line = "68", $t));
+                    t.Fixture.ConstantsWork_SPI_1590();
                 },
                 DefaultConstructorReturnsZero: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultConstructorReturnsZero()", $t.Line = "51", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DefaultConstructorReturnsZero()", $t.Line = "79", $t));
                     t.Fixture.DefaultConstructorReturnsZero();
                 },
                 ConvertingConstructorsWork: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ConvertingConstructorsWork()", $t.Line = "57", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ConvertingConstructorsWork()", $t.Line = "85", $t));
                     t.Fixture.ConvertingConstructorsWork();
                 },
                 FormatWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FormatWorks()", $t.Line = "68", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FormatWorks()", $t.Line = "96", $t));
                     t.Fixture.FormatWorks();
                 },
-                IFormattableToStringWorks: function (assert) {
+                ToStringWithRadixWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IFormattableToStringWorks()", $t.Line = "74", $t));
-                    t.Fixture.IFormattableToStringWorks();
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToStringWithRadixWorks()", $t.Line = "102", $t));
+                    t.Fixture.ToStringWithRadixWorks();
                 },
                 ToStringWithoutRadixWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToStringWithoutRadixWorks()", $t.Line = "80", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToStringWithoutRadixWorks()", $t.Line = "108", $t));
                     t.Fixture.ToStringWithoutRadixWorks();
+                },
+                ToStringWithFormatAndProviderWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ToStringWithFormatAndProviderWorks()", $t.Line = "114", $t));
+                    t.Fixture.ToStringWithFormatAndProviderWorks();
+                },
+                IFormattableToStringWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IFormattableToStringWorks()", $t.Line = "120", $t));
+                    t.Fixture.IFormattableToStringWorks();
                 },
                 AddWithStringWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddWithStringWorks()", $t.Line = "129", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddWithStringWorks()", $t.Line = "176", $t));
                     t.Fixture.AddWithStringWorks();
                 },
-                ConversionsToDecimalWork: function (assert) {
+                ConversionsToDecimalWork_SPI_1580: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ConversionsToDecimalWork()", $t.Line = "143", $t));
-                    t.Fixture.ConversionsToDecimalWork();
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ConversionsToDecimalWork_SPI_1580()", $t.Line = "190", $t));
+                    t.Fixture.ConversionsToDecimalWork_SPI_1580();
                 },
                 ConversionsFromDecimalWork: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ConversionsFromDecimalWork()", $t.Line = "160", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ConversionsFromDecimalWork()", $t.Line = "225", $t));
                     t.Fixture.ConversionsFromDecimalWork();
                 },
-                OperatorsWork: function (assert) {
+                NullableConversionsToDecimalWork_SPI_1580_1581_1587: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "OperatorsWork()", $t.Line = "177", $t));
-                    t.Fixture.OperatorsWork();
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "NullableConversionsToDecimalWork_SPI_1580_1581_1587()", $t.Line = "242", $t));
+                    t.Fixture.NullableConversionsToDecimalWork_SPI_1580_1581_1587();
+                },
+                DecimalToSByte_SPI_1580: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DecimalToSByte_SPI_1580()", $t.Line = "336", $t));
+                    t.Fixture.DecimalToSByte_SPI_1580();
+                },
+                DecimalToByte_SPI_1580: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DecimalToByte_SPI_1580()", $t.Line = "365", $t));
+                    t.Fixture.DecimalToByte_SPI_1580();
+                },
+                DecimalToShort_SPI_1580: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DecimalToShort_SPI_1580()", $t.Line = "394", $t));
+                    t.Fixture.DecimalToShort_SPI_1580();
+                },
+                DecimalToUShort_SPI_1580: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DecimalToUShort_SPI_1580()", $t.Line = "423", $t));
+                    t.Fixture.DecimalToUShort_SPI_1580();
+                },
+                DecimalToChar: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DecimalToChar()", $t.Line = "452", $t));
+                    t.Fixture.DecimalToChar();
+                },
+                DecimalToInt_SPI_1580: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DecimalToInt_SPI_1580()", $t.Line = "468", $t));
+                    t.Fixture.DecimalToInt_SPI_1580();
+                },
+                DecimalToUInt_SPI_1580: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DecimalToUInt_SPI_1580()", $t.Line = "497", $t));
+                    t.Fixture.DecimalToUInt_SPI_1580();
+                },
+                DecimalToLong_SPI_1578: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DecimalToLong_SPI_1578()", $t.Line = "526", $t));
+                    t.Fixture.DecimalToLong_SPI_1578();
+                },
+                DecimalToULong_SPI_1584_1585: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DecimalToULong_SPI_1584_1585()", $t.Line = "538", $t));
+                    t.Fixture.DecimalToULong_SPI_1584_1585();
+                },
+                DecimalToFloat: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DecimalToFloat()", $t.Line = "572", $t));
+                    t.Fixture.DecimalToFloat();
+                },
+                DecimalToDouble: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DecimalToDouble()", $t.Line = "580", $t));
+                    t.Fixture.DecimalToDouble();
+                },
+                NullableDecimalToSByte: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "NullableDecimalToSByte()", $t.Line = "588", $t));
+                    t.Fixture.NullableDecimalToSByte();
+                },
+                NullableDecimalToByte: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "NullableDecimalToByte()", $t.Line = "619", $t));
+                    t.Fixture.NullableDecimalToByte();
+                },
+                NullableDecimalToShort: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "NullableDecimalToShort()", $t.Line = "650", $t));
+                    t.Fixture.NullableDecimalToShort();
+                },
+                NullableDecimalToUShort: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "NullableDecimalToUShort()", $t.Line = "681", $t));
+                    t.Fixture.NullableDecimalToUShort();
+                },
+                NullableDecimalToChar: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "NullableDecimalToChar()", $t.Line = "712", $t));
+                    t.Fixture.NullableDecimalToChar();
+                },
+                NullableDecimalToInt: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "NullableDecimalToInt()", $t.Line = "743", $t));
+                    t.Fixture.NullableDecimalToInt();
+                },
+                NullableDecimalToUInt: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "NullableDecimalToUInt()", $t.Line = "774", $t));
+                    t.Fixture.NullableDecimalToUInt();
+                },
+                NullableDecimalToFloat_SPI_1579: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "NullableDecimalToFloat_SPI_1579()", $t.Line = "847", $t));
+                    t.Fixture.NullableDecimalToFloat_SPI_1579();
+                },
+                NullableDecimalToDouble_SPI_1579: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "NullableDecimalToDouble_SPI_1579()", $t.Line = "870", $t));
+                    t.Fixture.NullableDecimalToDouble_SPI_1579();
+                },
+                OperatorsWork_SPI_1583: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "OperatorsWork_SPI_1583()", $t.Line = "891", $t));
+                    t.Fixture.OperatorsWork_SPI_1583();
+                },
+                LiftedOperatorsWork_SPI_1583: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "LiftedOperatorsWork_SPI_1583()", $t.Line = "937", $t));
+                    t.Fixture.LiftedOperatorsWork_SPI_1583();
                 },
                 AddWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddWorks()", $t.Line = "206", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "AddWorks()", $t.Line = "1029", $t));
                     t.Fixture.AddWorks();
                 },
                 CeilingWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CeilingWorks()", $t.Line = "212", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CeilingWorks()", $t.Line = "1035", $t));
                     t.Fixture.CeilingWorks();
                 },
                 DivideWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DivideWorks()", $t.Line = "218", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DivideWorks()", $t.Line = "1043", $t));
                     t.Fixture.DivideWorks();
                 },
                 FloorWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FloorWorks()", $t.Line = "224", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FloorWorks()", $t.Line = "1049", $t));
                     t.Fixture.FloorWorks();
                 },
                 RemainderWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "RemainderWorks()", $t.Line = "230", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "RemainderWorks()", $t.Line = "1057", $t));
                     t.Fixture.RemainderWorks();
                 },
                 MultiplyWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "MultiplyWorks()", $t.Line = "236", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "MultiplyWorks()", $t.Line = "1063", $t));
                     t.Fixture.MultiplyWorks();
                 },
                 NegateWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "NegateWorks()", $t.Line = "242", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "NegateWorks()", $t.Line = "1069", $t));
                     t.Fixture.NegateWorks();
                 },
                 RoundWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "RoundWorks()", $t.Line = "248", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "RoundWorks()", $t.Line = "1075", $t));
                     t.Fixture.RoundWorks();
                 },
                 RoundWithModeWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "RoundWithModeWorks()", $t.Line = "254", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "RoundWithModeWorks()", $t.Line = "1081", $t));
                     t.Fixture.RoundWithModeWorks();
+                },
+                ParseWorks_SPI_1586: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ParseWorks_SPI_1586()", $t.Line = "1148", $t));
+                    t.Fixture.ParseWorks_SPI_1586();
+                },
+                TryParseWorks_SPI_1586: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TryParseWorks_SPI_1586()", $t.Line = "1172", $t));
+                    t.Fixture.TryParseWorks_SPI_1586();
+                },
+                TruncateWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TruncateWorks()", $t.Line = "1223", $t));
+                    t.Fixture.TruncateWorks();
                 },
                 SubtractWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SubtractWorks()", $t.Line = "321", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "SubtractWorks()", $t.Line = "1231", $t));
                     t.Fixture.SubtractWorks();
                 },
                 GetHashCodeWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetHashCodeWorks()", $t.Line = "327", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "GetHashCodeWorks()", $t.Line = "1237", $t));
                     t.Fixture.GetHashCodeWorks();
                 },
                 ObjectEqualsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ObjectEqualsWorks()", $t.Line = "336", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ObjectEqualsWorks()", $t.Line = "1246", $t));
                     t.Fixture.ObjectEqualsWorks();
                 },
                 DecimalEqualsWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DecimalEqualsWorks()", $t.Line = "346", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DecimalEqualsWorks()", $t.Line = "1256", $t));
                     t.Fixture.DecimalEqualsWorks();
+                },
+                IEquatableEqualsWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IEquatableEqualsWorks()", $t.Line = "1266", $t));
+                    t.Fixture.IEquatableEqualsWorks();
                 },
                 CompareToWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CompareToWorks()", $t.Line = "356", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CompareToWorks()", $t.Line = "1275", $t));
                     t.Fixture.CompareToWorks();
+                },
+                StaticCompareWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "StaticCompareWorks()", $t.Line = "1284", $t));
+                    t.Fixture.StaticCompareWorks();
                 },
                 IComparableCompareToWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IComparableCompareToWorks()", $t.Line = "365", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IComparableCompareToWorks()", $t.Line = "1293", $t));
                     t.Fixture.IComparableCompareToWorks();
                 },
                 FullCoalesceWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FullCoalesceWorks()", $t.Line = "374", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "FullCoalesceWorks()", $t.Line = "1302", $t));
                     t.Fixture.FullCoalesceWorks();
                 },
                 ShortCoalesceWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ShortCoalesceWorks()", $t.Line = "383", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ShortCoalesceWorks()", $t.Line = "1311", $t));
                     t.Fixture.ShortCoalesceWorks();
+                },
+                ImplementationTests_SPI_1588_1590_1650: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.DecimalTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "ImplementationTests_SPI_1588_1590_1650()", $t.Line = "1325", $t));
+                    t.Fixture.ImplementationTests_SPI_1588_1590_1650();
                 }
             }
         },
