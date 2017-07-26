@@ -60,7 +60,6 @@
     <Compile Include="Web\HttpUtilityTests.cs" />
     <Compile Include="Runtime\CompilerServices\RuntimeHelpersTests.cs" />
     <Compile Include="LazyTests.cs" />
-    <Compile Include="SimpleTypes\ObjectTests.cs" />
     <Compile Include="Threading\Tasks\PromiseTests.cs" />
     <Compile Include="Threading\Tasks\TaskTests.cs" />
     <Compile Include="SimpleTypes\TimeSpanTests.cs" />
