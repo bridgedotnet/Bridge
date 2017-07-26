@@ -35651,18 +35651,27 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.SimpleTypes.Int16Tests", {
         methods: {
-            TypePropertiesAreCorrect: function () {
+            TypePropertiesAreCorrect_SPI_1717: function () {
                 Bridge.Test.NUnit.Assert.True(Bridge.is(Bridge.box(0, System.Int16), System.Int16));
                 Bridge.Test.NUnit.Assert.False(Bridge.is(Bridge.box(0.5, System.Double, System.Double.format, System.Double.getHashCode), System.Int16));
                 Bridge.Test.NUnit.Assert.False(Bridge.is(Bridge.box(-32769, System.Int32), System.Int16));
                 Bridge.Test.NUnit.Assert.False(Bridge.is(Bridge.box(32768, System.Int32), System.Int16));
                 Bridge.Test.NUnit.Assert.AreEqual("System.Int16", Bridge.Reflection.getTypeFullName(System.Int16));
-
+                Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isClass(System.Int16));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IComparable$1(System.Int16), System.Int16));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IEquatable$1(System.Int16), System.Int16));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IFormattable, System.Int16));
                 var s = Bridge.box(0, System.Int16);
                 Bridge.Test.NUnit.Assert.True(Bridge.is(s, System.Int16));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(s, System.IComparable$1(System.Int16)));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(s, System.IEquatable$1(System.Int16)));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(s, System.IFormattable));
+
+                var interfaces = Bridge.Reflection.getInterfaces(System.Int16);
+                Bridge.Test.NUnit.Assert.AreEqual(4, interfaces.length);
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.Int16), Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.Int16), Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Function));
             },
             CastsWork: function () {
                 var i1 = -32769, i2 = -32768, i3 = 5754, i4 = 32767, i5 = 32768;
@@ -35681,25 +35690,25 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreStrictEqual(-32768, Bridge.Int.clip16(ni5), "nullable 32768 unchecked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(null, Bridge.Int.clip16(ni6), "null unchecked");
 
-                Bridge.Test.NUnit.Assert.Throws$4(function () {
-                    var b = Bridge.Int.check(i1, System.Int16);
-                }, $asm.$.Bridge.ClientTest.SimpleTypes.Int16Tests.f1);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
+                    var x = Bridge.Int.check(i1, System.Int16);
+                }, "-32769 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(-32768, Bridge.Int.check(i2, System.Int16), "-32768 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(5754, Bridge.Int.check(i3, System.Int16), "5754 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(32767, Bridge.Int.check(i4, System.Int16), "32767 checked");
-                Bridge.Test.NUnit.Assert.Throws$4(function () {
-                    var b = Bridge.Int.check(i5, System.Int16);
-                }, $asm.$.Bridge.ClientTest.SimpleTypes.Int16Tests.f1);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
+                    var x = Bridge.Int.check(i5, System.Int16);
+                }, "32768 checked");
 
-                Bridge.Test.NUnit.Assert.Throws$4(function () {
-                    var b = Bridge.Int.check(ni1, System.Int16);
-                }, $asm.$.Bridge.ClientTest.SimpleTypes.Int16Tests.f1);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
+                    var x = Bridge.Int.check(ni1, System.Int16);
+                }, "nullable -32769 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(-32768, Bridge.Int.check(ni2, System.Int16), "nullable -32768 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(5754, Bridge.Int.check(ni3, System.Int16), "nullable 5754 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(32767, Bridge.Int.check(ni4, System.Int16), "nullable 32767 checked");
-                Bridge.Test.NUnit.Assert.Throws$4(function () {
-                    var b = Bridge.Int.check(ni5, System.Int16);
-                }, $asm.$.Bridge.ClientTest.SimpleTypes.Int16Tests.f1);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
+                    var x = Bridge.Int.check(ni5, System.Int16);
+                }, "nullable 32768 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(null, Bridge.Int.check(ni6, System.Int16), "null checked");
             },
             GetDefaultValue: function (T) {
@@ -35721,10 +35730,16 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             FormatWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("123", System.Int16.format((291), "x"));
             },
-            IFormattableToStringWorks: function () {
+            ToStringWithFormatWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("123", System.Int16.format((291), "x"));
             },
-            TryParseWorks: function () {
+            ToStringWithFormatAndProviderWorks: function () {
+                Bridge.Test.NUnit.Assert.AreEqual("123", System.Int16.format((291), "x", System.Globalization.CultureInfo.invariantCulture));
+            },
+            IFormattableToStringWorks: function () {
+                Bridge.Test.NUnit.Assert.AreEqual("123", Bridge.format(291, "x", System.Globalization.CultureInfo.invariantCulture));
+            },
+            TryParseWorks_SPI_1592: function () {
                 var numberResult = { };
                 var result = System.Int16.tryParse("234", numberResult);
                 Bridge.Test.NUnit.Assert.True(result);
@@ -35744,11 +35759,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 result = System.Int16.tryParse("54768", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
-                Bridge.Test.NUnit.Assert.AreEqual(54768, numberResult.v);
+                // #1592
+                //Assert.AreEqual(0, numberResult);
 
                 result = System.Int16.tryParse("-55678", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
-                Bridge.Test.NUnit.Assert.AreEqual(-55678, numberResult.v);
+                // #1592
+                //Assert.AreEqual(0, numberResult);
 
                 result = System.Int16.tryParse("2.5", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
@@ -35756,12 +35773,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             ParseWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual(234, System.Int16.parse("234"));
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.Int16Tests.f2);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.Int16Tests.f3);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.Int16Tests.f4);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.Int16Tests.f5);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.Int16Tests.f6);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.Int16Tests.f7);
+                Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.Int16Tests.f1);
+                Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentNullException, $asm.$.Bridge.ClientTest.SimpleTypes.Int16Tests.f2);
+                Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.Int16Tests.f3);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, $asm.$.Bridge.ClientTest.SimpleTypes.Int16Tests.f4);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, $asm.$.Bridge.ClientTest.SimpleTypes.Int16Tests.f5);
+                Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.Int16Tests.f6);
             },
             ToStringWithoutRadixWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("123", (123).toString());
@@ -35808,43 +35825,49 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.ns("Bridge.ClientTest.SimpleTypes.Int16Tests", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.SimpleTypes.Int16Tests, {
-        f1: function (err) {
-            return Bridge.is(err, System.OverflowException);
-        },
-        f2: function () {
+        f1: function () {
             System.Int16.parse("");
         },
-        f3: function () {
+        f2: function () {
             System.Int16.parse(null);
         },
-        f4: function () {
+        f3: function () {
             System.Int16.parse("notanumber");
         },
-        f5: function () {
+        f4: function () {
             System.Int16.parse("54768");
         },
-        f6: function () {
+        f5: function () {
             System.Int16.parse("-55678");
         },
-        f7: function () {
+        f6: function () {
             System.Int16.parse("2.5");
         }
     });
 
     Bridge.define("Bridge.ClientTest.SimpleTypes.Int32Tests", {
         methods: {
-            TypePropertiesAreCorrect: function () {
+            TypePropertiesAreCorrect_SPI_1717: function () {
                 Bridge.Test.NUnit.Assert.True(Bridge.is(Bridge.box(0, System.Int32), System.Int32));
                 Bridge.Test.NUnit.Assert.False(Bridge.is(Bridge.box(0.5, System.Double, System.Double.format, System.Double.getHashCode), System.Int32));
                 Bridge.Test.NUnit.Assert.False(Bridge.is(System.Int64([2147483647,-1]), System.Int32));
                 Bridge.Test.NUnit.Assert.False(Bridge.is(Bridge.box(2147483648, System.UInt32), System.Int32));
                 Bridge.Test.NUnit.Assert.AreEqual("System.Int32", Bridge.Reflection.getTypeFullName(System.Int32));
-
+                Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isClass(System.Int32));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IComparable$1(System.Int32), System.Int32));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IEquatable$1(System.Int32), System.Int32));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IFormattable, System.Int32));
                 var i = Bridge.box(0, System.Int32);
                 Bridge.Test.NUnit.Assert.True(Bridge.is(i, System.Int32));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(i, System.IComparable$1(System.Int32)));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(i, System.IEquatable$1(System.Int32)));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(i, System.IFormattable));
+
+                var interfaces = Bridge.Reflection.getInterfaces(System.Int32);
+                Bridge.Test.NUnit.Assert.AreEqual(4, interfaces.length);
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.Int32), Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.Int32), Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Function));
             },
             CastsWork: function () {
                 var i1 = System.Int64([2147483647,-1]), i2 = System.Int64.lift(-2147483648), i3 = System.Int64(5754), i4 = System.Int64(2147483647), i5 = System.Int64(2147483648);
@@ -35863,25 +35886,25 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreStrictEqual(-2147483648, System.Int64.clip32(ni5), "nullable 2147483648 unchecked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(null, System.Int64.clip32(ni6), "null unchecked");
 
-                Bridge.Test.NUnit.Assert.Throws$4(function () {
-                    var b = System.Int64.check(System.Nullable.getValue(i1), System.Int32);
-                }, $asm.$.Bridge.ClientTest.SimpleTypes.Int32Tests.f1);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
+                    var x = System.Int64.check(System.Nullable.getValue(i1), System.Int32);
+                }, "-2147483649 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(-2147483648, System.Int64.check(System.Nullable.getValue(i2), System.Int32), "-2147483648 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(5754, System.Int64.check(System.Nullable.getValue(i3), System.Int32), "5754 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(2147483647, System.Int64.check(System.Nullable.getValue(i4), System.Int32), "2147483647 checked");
-                Bridge.Test.NUnit.Assert.Throws$4(function () {
-                    var b = System.Int64.check(System.Nullable.getValue(i5), System.Int32);
-                }, $asm.$.Bridge.ClientTest.SimpleTypes.Int32Tests.f1);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
+                    var x = System.Int64.check(System.Nullable.getValue(i5), System.Int32);
+                }, "32768 checked");
 
-                Bridge.Test.NUnit.Assert.Throws$4(function () {
-                    var b = System.Int64.check(ni1, System.Int32);
-                }, $asm.$.Bridge.ClientTest.SimpleTypes.Int32Tests.f1);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
+                    var x = System.Int64.check(ni1, System.Int32);
+                }, "nullable -2147483649 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(-2147483648, System.Int64.check(ni2, System.Int32), "nullable -2147483648 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(5754, System.Int64.check(ni3, System.Int32), "nullable 5754 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(2147483647, System.Int64.check(ni4, System.Int32), "nullable 2147483647 checked");
-                Bridge.Test.NUnit.Assert.Throws$4(function () {
-                    var b = System.Int64.check(ni5, System.Int32);
-                }, $asm.$.Bridge.ClientTest.SimpleTypes.Int32Tests.f1);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
+                    var x = System.Int64.check(ni5, System.Int32);
+                }, "nullable 2147483648 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(null, System.Int64.check(ni6, System.Int32), "null checked");
             },
             TypeIsWorksForInt32: function () {
@@ -35904,10 +35927,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual(null, Bridge.cast(Bridge.unbox(_null), System.Int32, true));
                 Bridge.Test.NUnit.Assert.Throws$1(function () {
                     var _ = Bridge.cast(Bridge.unbox(o), System.Int32, true);
-                }, "Cannot cast object to int?");
+                });
                 Bridge.Test.NUnit.Assert.Throws$1(function () {
                     var _ = Bridge.cast(Bridge.unbox(d), System.Int32, true);
-                }, "Cannot cast decimal to int?");
+                });
                 Bridge.Test.NUnit.Assert.AreEqual(1, Bridge.cast(Bridge.unbox(i), System.Int32, true));
             },
             GetDefaultValue: function (T) {
@@ -35929,8 +35952,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             FormatWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("123", System.Int32.format((291), "x"));
             },
-            IFormattableToStringWorks: function () {
+            ToStringWithFormatWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("123", System.Int32.format((291), "x"));
+            },
+            ToStringWithFormatAndProviderWorks: function () {
+                Bridge.Test.NUnit.Assert.AreEqual("123", System.Int32.format((291), "x", System.Globalization.CultureInfo.invariantCulture));
+            },
+            IFormattableToStringWorks: function () {
+                Bridge.Test.NUnit.Assert.AreEqual("123", Bridge.format(291, "x", System.Globalization.CultureInfo.invariantCulture));
             },
             TryParseWorks: function () {
                 var numberResult = { };
@@ -35962,12 +35991,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual(57574, System.Int32.parse("57574"));
                 Bridge.Test.NUnit.Assert.AreEqual(-14, System.Int32.parse("-14"));
 
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.Int32Tests.f2);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.Int32Tests.f3);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.Int32Tests.f4);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.Int32Tests.f5);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.Int32Tests.f6);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.Int32Tests.f7);
+                Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.Int32Tests.f1);
+                Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentNullException, $asm.$.Bridge.ClientTest.SimpleTypes.Int32Tests.f2);
+                Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.Int32Tests.f3);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, $asm.$.Bridge.ClientTest.SimpleTypes.Int32Tests.f4);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, $asm.$.Bridge.ClientTest.SimpleTypes.Int32Tests.f5);
+                Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.Int32Tests.f6);
             },
             ToStringWithoutRadixWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("123", (123).toString());
@@ -36014,21 +36043,25 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual(-4, ((Bridge.Int.div(((-a) | 0), b)) | 0));
                 Bridge.Test.NUnit.Assert.AreEqual(-4, ((Bridge.Int.div(a, ((-b) | 0))) | 0));
                 Bridge.Test.NUnit.Assert.AreEqual(4, ((Bridge.Int.div(((-a) | 0), ((-b) | 0))) | 0));
-                Bridge.Test.NUnit.Assert.Throws$1(function () {
+                Bridge.Test.NUnit.Assert.Throws$2(System.DivideByZeroException, function () {
                     var x = (Bridge.Int.div(a, c)) | 0;
                 });
             },
-            IntegerModuloWorks: function () {
+            IntegerModuloWorks_SPI_1602: function () {
                 var a = 17, b = 4, c = 0;
                 Bridge.Test.NUnit.Assert.AreEqual(1, a % b);
                 Bridge.Test.NUnit.Assert.AreEqual(-1, ((-a) | 0) % b);
                 Bridge.Test.NUnit.Assert.AreEqual(1, a % ((-b) | 0));
                 Bridge.Test.NUnit.Assert.AreEqual(-1, ((-a) | 0) % ((-b) | 0));
-                //Assert.Throws(() => { var x = a % c; });
+                // #1602
+                //Assert.Throws<DivideByZeroException>(() =>
+                //{
+                //    var x = a % c;
+                //});
             },
             IntegerDivisionByZeroThrowsDivideByZeroException: function () {
                 var a = 17, b = 0;
-                Bridge.Test.NUnit.Assert.Throws$1(function () {
+                Bridge.Test.NUnit.Assert.Throws$2(System.DivideByZeroException, function () {
                     var x = (Bridge.Int.div(a, b)) | 0;
                 });
             },
@@ -36050,25 +36083,22 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.ns("Bridge.ClientTest.SimpleTypes.Int32Tests", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.SimpleTypes.Int32Tests, {
-        f1: function (err) {
-            return Bridge.is(err, System.OverflowException);
-        },
-        f2: function () {
+        f1: function () {
             System.Int32.parse("");
         },
-        f3: function () {
+        f2: function () {
             System.Int32.parse(null);
         },
-        f4: function () {
+        f3: function () {
             System.Int32.parse("notanumber");
         },
-        f5: function () {
+        f4: function () {
             System.Int32.parse("2147483648");
         },
-        f6: function () {
+        f5: function () {
             System.Int32.parse("-2147483649");
         },
-        f7: function () {
+        f6: function () {
             System.Int32.parse("2.5");
         }
     });
@@ -36087,17 +36117,26 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), actual.toString(), message);
             },
-            TypePropertiesAreCorrect: function () {
+            TypePropertiesAreCorrect_SPI_1717: function () {
                 Bridge.Test.NUnit.Assert.True(Bridge.is(System.Int64(0), System.Int64));
                 Bridge.Test.NUnit.Assert.False(Bridge.is(Bridge.box(0.5, System.Double, System.Double.format, System.Double.getHashCode), System.Int64));
                 Bridge.Test.NUnit.Assert.False(Bridge.is(Bridge.box(1E+100, System.Double, System.Double.format, System.Double.getHashCode), System.Int64));
                 Bridge.Test.NUnit.Assert.AreEqual("System.Int64", Bridge.Reflection.getTypeFullName(System.Int64));
-
+                Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isClass(System.Int64));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IComparable$1(System.Int64), System.Int64));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IEquatable$1(System.Int64), System.Int64));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IFormattable, System.Int64));
                 var l = System.Int64(0);
                 Bridge.Test.NUnit.Assert.True(Bridge.is(l, System.Int64));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(l, System.IComparable$1(System.Int64)));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(l, System.IEquatable$1(System.Int64)));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(l, System.IFormattable));
+
+                var interfaces = Bridge.Reflection.getInterfaces(System.Int64);
+                Bridge.Test.NUnit.Assert.AreEqual(4, interfaces.length);
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.Int64), Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.Int64), Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Function));
             },
             MinMaxValuesAreCorrect: function () {
                 this.AssertLong("-9223372036854775808", System.Int64.MinValue);
@@ -36107,21 +36146,27 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var i3 = System.UInt64(5754), i4 = System.UInt64(System.Int64([-808,2147483647])), i5 = System.UInt64([-1816395584,-517669143]);
                 var ni3 = System.UInt64(5754), ni4 = System.UInt64(System.Int64([-808,2147483647])), ni5 = System.UInt64([-1816395584,-517669143]), ni6 = System.UInt64.lift(null);
 
-                Bridge.Test.NUnit.Assert.True(System.Int64(5754).equals(System.Int64.clip64(i3)), "5754 unchecked");
-                Bridge.Test.NUnit.Assert.True(System.Int64([-808,2147483647]).equals(System.Int64.clip64(i4)), "9223372036854775000 unchecked");
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64(5754), System.Int64.clip64(i3), "5754 unchecked");
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64([-808,2147483647]), System.Int64.clip64(i4), "9223372036854775000 unchecked");
                 Bridge.Test.NUnit.Assert.True(System.Int64.clip64(i5).lt(System.Int64(0)), "16223372036854776000 unchecked");
 
-                Bridge.Test.NUnit.Assert.True(System.Nullable.lifteq("equals", System.Int64(5754), System.Int64.clip64(ni3)), "nullable 5754 unchecked");
-                Bridge.Test.NUnit.Assert.True(System.Nullable.lifteq("equals", System.Int64([-808,2147483647]), System.Int64.clip64(ni4)), "nullable 9223372036854775000 unchecked");
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64(5754), System.Int64.clip64(ni3), "nullable 5754 unchecked");
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64([-808,2147483647]), System.Int64.clip64(ni4), "nullable 9223372036854775000 unchecked");
                 Bridge.Test.NUnit.Assert.True(System.Nullable.liftcmp("lt", System.Int64.clip64(ni5), System.Int64(0)), "nullable 16223372036854776000 unchecked");
-                Bridge.Test.NUnit.Assert.True(System.Nullable.lifteq("equals", System.Int64.lift(null), System.Int64.clip64(ni6)), "null unchecked");
+                Bridge.Test.NUnit.Assert.AreEqual(null, System.Int64.clip64(ni6), "null unchecked");
 
-                Bridge.Test.NUnit.Assert.True(System.Int64(5754).equals(System.Int64.check(i3, System.Int64)), "5754 checked");
-                Bridge.Test.NUnit.Assert.True(System.Int64([-808,2147483647]).equals(System.Int64.check(i4, System.Int64)), "9223372036854775000 checked");
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64(5754), System.Int64.check(i3, System.Int64), "5754 checked");
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64([-808,2147483647]), System.Int64.check(i4, System.Int64), "9223372036854775000 checked");
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
+                    var x = System.Int64.check(i5, System.Int64);
+                }, "16223372036854776000 checked");
 
-                Bridge.Test.NUnit.Assert.True(System.Nullable.lifteq("equals", System.Int64(5754), System.Int64.check(ni3, System.Int64)), "nullable 5754 checked");
-                Bridge.Test.NUnit.Assert.True(System.Nullable.lifteq("equals", System.Int64([-808,2147483647]), System.Int64.check(ni4, System.Int64)), "nullable 9223372036854775000 checked");
-                Bridge.Test.NUnit.Assert.True(System.Nullable.lifteq("equals", System.Int64.lift(null), System.Int64.check(ni6, System.Int64)), "null checked");
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64(5754), System.Int64.check(ni3, System.Int64), "nullable 5754 checked");
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64([-808,2147483647]), System.Int64.check(ni4, System.Int64), "nullable 9223372036854775000 checked");
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
+                    var x = System.Int64.check(ni5, System.Int64);
+                }, "nullable 16223372036854776000 checked");
+                Bridge.Test.NUnit.Assert.AreEqual(null, System.Int64.check(ni6, System.Int64), "null checked");
             },
             OverflowWorks: function () {
                 var min = System.Int64.MinValue;
@@ -36189,73 +36234,79 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 return Bridge.getDefaultValue(T);
             },
             DefaultValueIs0: function () {
-                Bridge.Test.NUnit.Assert.True(System.Int64(0).equals(this.GetDefaultValue(System.Int64)));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64(0), this.GetDefaultValue(System.Int64));
             },
             DefaultConstructorReturnsZero: function () {
-                Bridge.Test.NUnit.Assert.True(System.Int64(0).equals(new System.Int64()));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64(0), new System.Int64());
             },
             CreatingInstanceReturnsZero: function () {
-                Bridge.Test.NUnit.Assert.True(System.Int64(0).equals(Bridge.createInstance(System.Int64)));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64(0), Bridge.createInstance(System.Int64));
             },
             FormatWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("123", (System.Int64(291)).format("x"));
             },
-            IFormattableToStringWorks: function () {
+            ToStringWithFormatWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("123", (System.Int64(291)).toString("x"));
+            },
+            ToStringWithFormatAndProviderWorks: function () {
+                Bridge.Test.NUnit.Assert.AreEqual("123", (System.Int64(291)).format("x", System.Globalization.CultureInfo.invariantCulture));
+            },
+            IFormattableToStringWorks: function () {
+                Bridge.Test.NUnit.Assert.AreEqual("123", Bridge.format(System.Int64(291), "x", System.Globalization.CultureInfo.invariantCulture));
             },
             TryParseWorks: function () {
                 var numberResult = { };
                 var result = System.Int64.tryParse("57574", numberResult);
                 Bridge.Test.NUnit.Assert.True(result);
-                Bridge.Test.NUnit.Assert.True(System.Int64(57574).equals(numberResult.v));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64(57574), numberResult.v);
 
                 result = System.Int64.tryParse("-14", numberResult);
                 Bridge.Test.NUnit.Assert.True(result);
-                Bridge.Test.NUnit.Assert.True(System.Int64(-14).equals(numberResult.v));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64(-14), numberResult.v);
 
                 result = System.Int64.tryParse("", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
-                Bridge.Test.NUnit.Assert.True(System.Int64(0).equals(numberResult.v));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64(0), numberResult.v);
 
                 result = System.Int64.tryParse(null, numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
-                Bridge.Test.NUnit.Assert.True(System.Int64(0).equals(numberResult.v));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64(0), numberResult.v);
 
                 result = System.Int64.tryParse("notanumber", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
-                Bridge.Test.NUnit.Assert.True(System.Int64(0).equals(numberResult.v));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64(0), numberResult.v);
 
                 result = System.Int64.tryParse("2.5", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
-                Bridge.Test.NUnit.Assert.True(System.Int64(0).equals(numberResult.v));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64(0), numberResult.v);
 
                 result = System.Int64.tryParse("-10000000000000000000", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
-                Bridge.Test.NUnit.Assert.True(numberResult.v.equals(System.Int64(0)));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64(0), numberResult.v);
 
                 result = System.Int64.tryParse("10000000000000000000", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
-                Bridge.Test.NUnit.Assert.True(numberResult.v.equals(System.Int64(0)));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64(0), numberResult.v);
             },
             ParseWorks: function () {
-                Bridge.Test.NUnit.Assert.True(System.Int64([568732647,3]).equals(System.Int64.parse("13453634535")));
-                Bridge.Test.NUnit.Assert.True(System.Int64([-1258093817,-54542]).equals(System.Int64.parse("-234253069384953")));
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.Int64Tests.f2);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.Int64Tests.f3);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.Int64Tests.f4);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.Int64Tests.f5);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.Int64Tests.f6);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.Int64Tests.f7);
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64([568732647,3]), System.Int64.parse("13453634535"));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64([-1258093817,-54542]), System.Int64.parse("-234253069384953"));
+                Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.Int64Tests.f2);
+                Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentNullException, $asm.$.Bridge.ClientTest.SimpleTypes.Int64Tests.f3);
+                Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.Int64Tests.f4);
+                Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.Int64Tests.f5);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, $asm.$.Bridge.ClientTest.SimpleTypes.Int64Tests.f6);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, $asm.$.Bridge.ClientTest.SimpleTypes.Int64Tests.f7);
             },
             CastingOfLargeDoublesToInt64Works: function () {
                 var d1 = 5000000000.5, d2 = -d1;
-                Bridge.Test.NUnit.Assert.True(System.Int64([705032704,1]).equals(Bridge.Int.clip64(d1)), "Positive");
-                Bridge.Test.NUnit.Assert.True(System.Int64([-705032704,-2]).equals(Bridge.Int.clip64(d2)), "Negative");
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64([705032704,1]), Bridge.Int.clip64(d1), "Positive");
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64([-705032704,-2]), Bridge.Int.clip64(d2), "Negative");
             },
             DivisionOfLargeInt64Works: function () {
                 var v1 = System.Int64([-1539607552,11]), v2 = v1.neg(), v3 = System.Int64(3);
-                Bridge.Test.NUnit.Assert.True(System.Int64([-513202518,3]).equals((v1.div(v3))), "Positive");
-                Bridge.Test.NUnit.Assert.True(System.Int64([513202518,-4]).equals((v2.div(v3))), "Negative");
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64([-513202518,3]), v1.div(v3), "Positive");
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64([513202518,-4]), v2.div(v3), "Negative");
             },
             ToStringWithoutRadixWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("123", (System.Int64(123)).toString());
@@ -37201,7 +37252,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         methods: {
             TypePropertiesAreCorrect: function () {
                 Bridge.Test.NUnit.Assert.True(Bridge.hasValue({  }));
-                Bridge.Test.NUnit.Assert.AreEqual("System.Object", Bridge.Reflection.getTypeFullName(System.Object), "#2069");
+                Bridge.Test.NUnit.Assert.AreEqual("System.Object", Bridge.Reflection.getTypeFullName(System.Object));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isClass(System.Object));
             },
             CanGetHashCodeForObject: function () {
                 var o = {  };
@@ -37254,16 +37306,27 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.SimpleTypes.SByteTests", {
         methods: {
-            TypePropertiesAreCorrect: function () {
+            TypePropertiesAreCorrect_SPI_1717: function () {
                 Bridge.Test.NUnit.Assert.False(Bridge.is(Bridge.box(0, System.Byte), System.SByte));
                 Bridge.Test.NUnit.Assert.False(Bridge.is(Bridge.box(0.5, System.Double, System.Double.format, System.Double.getHashCode), System.SByte));
                 Bridge.Test.NUnit.Assert.False(Bridge.is(Bridge.box(-129, System.Int32), System.SByte));
                 Bridge.Test.NUnit.Assert.False(Bridge.is(Bridge.box(128, System.Int32), System.SByte));
                 Bridge.Test.NUnit.Assert.AreEqual("System.SByte", Bridge.Reflection.getTypeFullName(System.SByte));
-
+                Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isClass(System.SByte));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IComparable$1(System.SByte), System.SByte));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IEquatable$1(System.SByte), System.SByte));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IFormattable, System.SByte));
                 var b = Bridge.box(0, System.SByte);
                 Bridge.Test.NUnit.Assert.True(Bridge.is(b, System.SByte));
+                Bridge.Test.NUnit.Assert.True(Bridge.is(b, System.IComparable$1(System.SByte)));
+                Bridge.Test.NUnit.Assert.True(Bridge.is(b, System.IEquatable$1(System.SByte)));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(b, System.IFormattable));
+
+                var interfaces = Bridge.Reflection.getInterfaces(System.SByte);
+                Bridge.Test.NUnit.Assert.AreEqual(4, interfaces.length);
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.SByte), Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.SByte), Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Function));
             },
             CastsWork: function () {
                 var i1 = -129, i2 = -128, i3 = 80, i4 = 127, i5 = 128;
@@ -37282,25 +37345,25 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreStrictEqual(-128, Bridge.Int.clip8(ni5), "nullable 128 unchecked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(null, Bridge.Int.clip8(ni6), "null unchecked");
 
-                Bridge.Test.NUnit.Assert.Throws$4(function () {
-                    var b = Bridge.Int.check(i1, System.SByte);
-                }, $asm.$.Bridge.ClientTest.SimpleTypes.SByteTests.f1);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
+                    var x = Bridge.Int.check(i1, System.Byte);
+                }, "-129 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(-128, Bridge.Int.check(i2, System.SByte), "-128 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(80, Bridge.Int.check(i3, System.SByte), "80 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(127, Bridge.Int.check(i4, System.SByte), "127 checked");
-                Bridge.Test.NUnit.Assert.Throws$4(function () {
-                    var b = Bridge.Int.check(i5, System.SByte);
-                }, $asm.$.Bridge.ClientTest.SimpleTypes.SByteTests.f1);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
+                    var x = Bridge.Int.check(i5, System.SByte);
+                }, "-128 checked");
 
-                Bridge.Test.NUnit.Assert.Throws$4(function () {
-                    var b = Bridge.Int.check(ni1, System.SByte);
-                }, $asm.$.Bridge.ClientTest.SimpleTypes.SByteTests.f1);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
+                    var x = Bridge.Int.check(ni1, System.SByte);
+                }, "nullable -129 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(-128, Bridge.Int.check(ni2, System.SByte), "nullable -128 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(80, Bridge.Int.check(ni3, System.SByte), "nullable 80 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(127, Bridge.Int.check(ni4, System.SByte), "nullable 127 checked");
-                Bridge.Test.NUnit.Assert.Throws$4(function () {
-                    var b = Bridge.Int.check(ni5, System.SByte);
-                }, $asm.$.Bridge.ClientTest.SimpleTypes.SByteTests.f1);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
+                    var x = Bridge.Int.check(ni5, System.SByte);
+                }, "nullable 128 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(null, Bridge.Int.check(ni6, System.SByte), "null checked");
             },
             GetDefaultValue: function (T) {
@@ -37322,10 +37385,16 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             FormatWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("12", System.SByte.format((18), "x"));
             },
-            IFormattableToStringWorks: function () {
+            ToStringWithFormatWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("12", System.SByte.format((18), "x"));
             },
-            TryParseWorks: function () {
+            ToStringWithFormatAndProviderWorks: function () {
+                Bridge.Test.NUnit.Assert.AreEqual("12", System.SByte.format((18), "x", System.Globalization.CultureInfo.invariantCulture));
+            },
+            IFormattableToStringWorks: function () {
+                Bridge.Test.NUnit.Assert.AreEqual("12", Bridge.format(18, "x", System.Globalization.CultureInfo.invariantCulture));
+            },
+            TryParseWorks_SPI_1592: function () {
                 var numberResult = { };
                 var result = System.SByte.tryParse("124", numberResult);
                 Bridge.Test.NUnit.Assert.True(result);
@@ -37349,7 +37418,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 result = System.SByte.tryParse("54768", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
+                // #1592
                 Bridge.Test.NUnit.Assert.AreEqual(54768, numberResult.v);
+                //Assert.AreEqual(0, numberResult);
 
                 result = System.SByte.tryParse("2.5", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
@@ -37358,11 +37429,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             ParseWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual(124, System.SByte.parse("124"));
                 Bridge.Test.NUnit.Assert.AreEqual(-123, System.SByte.parse("-123"));
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.SByteTests.f2);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.SByteTests.f3);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.SByteTests.f4);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.SByteTests.f5);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.SByteTests.f6);
+                Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.SByteTests.f1);
+                Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentNullException, $asm.$.Bridge.ClientTest.SimpleTypes.SByteTests.f2);
+                Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.SByteTests.f3);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, $asm.$.Bridge.ClientTest.SimpleTypes.SByteTests.f4);
+                Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.SByteTests.f5);
             },
             ToStringWithoutRadixWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("123", (123).toString());
@@ -37409,35 +37480,43 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.ns("Bridge.ClientTest.SimpleTypes.SByteTests", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.SimpleTypes.SByteTests, {
-        f1: function (err) {
-            return Bridge.is(err, System.OverflowException);
-        },
-        f2: function () {
+        f1: function () {
             System.SByte.parse("");
         },
-        f3: function () {
+        f2: function () {
             System.SByte.parse(null);
         },
-        f4: function () {
+        f3: function () {
             System.SByte.parse("notanumber");
         },
-        f5: function () {
+        f4: function () {
             System.SByte.parse("54768");
         },
-        f6: function () {
+        f5: function () {
             System.SByte.parse("2.5");
         }
     });
 
     Bridge.define("Bridge.ClientTest.SimpleTypes.SingleTests", {
         methods: {
-            TypePropertiesAreCorrect: function () {
+            TypePropertiesAreCorrect_SPI_1717: function () {
                 Bridge.Test.NUnit.Assert.True(Bridge.is(Bridge.box(0.5, System.Single, System.Single.format, System.Single.getHashCode), System.Single));
                 Bridge.Test.NUnit.Assert.AreEqual("System.Single", Bridge.Reflection.getTypeFullName(System.Single));
-
+                Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isClass(System.Single));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IComparable$1(System.Single), System.Single));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IEquatable$1(System.Single), System.Single));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IFormattable, System.Single));
                 var f = Bridge.box(0.0, System.Single, System.Single.format, System.Single.getHashCode);
                 Bridge.Test.NUnit.Assert.True(Bridge.is(f, System.Single));
+                Bridge.Test.NUnit.Assert.True(Bridge.is(f, System.IComparable$1(System.Single)));
+                Bridge.Test.NUnit.Assert.True(Bridge.is(f, System.IEquatable$1(System.Single)));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(f, System.IFormattable));
+
+                var interfaces = Bridge.Reflection.getInterfaces(System.Single);
+                Bridge.Test.NUnit.Assert.AreEqual(4, interfaces.length);
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.Single), Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.Single), Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Function));
             },
             GetDefaultValue: function (T) {
                 return Bridge.getDefaultValue(T);
@@ -37446,7 +37525,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreStrictEqual(0, this.GetDefaultValue(System.Single));
             },
             CreatingInstanceReturnsZero: function () {
-                Bridge.Test.NUnit.Assert.AreEqual(0, Bridge.createInstance(System.Single));
+                Bridge.Test.NUnit.Assert.AreStrictEqual(0, Bridge.createInstance(System.Single));
             },
             ConstantsWork: function () {
                 var zero = 0;
@@ -37463,8 +37542,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             FormatWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("123", System.Single.format((291.0), "x"));
             },
-            IFormattableToStringWorks: function () {
+            ToStringWithFormatWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("123", System.Single.format((291.0), "x"));
+            },
+            ToStringWithFormatAndProviderWorks: function () {
+                Bridge.Test.NUnit.Assert.AreEqual("123", System.Single.format((291.0), "x", System.Globalization.CultureInfo.invariantCulture));
+            },
+            IFormattableToStringWorks: function () {
+                Bridge.Test.NUnit.Assert.AreEqual("123", Bridge.format(291.0, "x", System.Globalization.CultureInfo.invariantCulture));
             },
             ToStringWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("123", System.Single.format((123.0)));
@@ -37487,10 +37572,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             ToPrecisionWithPrecisionWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("1.2e+4", (12345.0).toPrecision(2));
             },
-            IsPositiveInfinityWorks: function () {
+            IsPositiveInfinityWorks_SPI_1600: function () {
                 var inf = Infinity;
-                // TODO Bug
-                //Assert.True (float.IsPositiveInfinity(inf));
+                // #1600
+                Bridge.Test.NUnit.Assert.True((inf === Number.POSITIVE_INFINITY));
+
                 Bridge.Test.NUnit.Assert.False((-inf === Number.POSITIVE_INFINITY));
                 Bridge.Test.NUnit.Assert.False((0.0 === Number.POSITIVE_INFINITY));
                 Bridge.Test.NUnit.Assert.False((Number.NaN === Number.POSITIVE_INFINITY));
@@ -37738,16 +37824,22 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             }
         },
         methods: {
-            TypePropertiesAreCorrect: function () {
+            TypePropertiesAreCorrect_SPI_1597: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("System.String", Bridge.Reflection.getTypeFullName(System.String), "#2066");
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isClass(System.String));
+                // #1597
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IComparable$1(System.String), System.String));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IEquatable$1(System.String), System.String));
                 var s = "X";
                 Bridge.Test.NUnit.Assert.True(Bridge.is(s, System.String));
-            },
-            StringInterfaces: function () {
-                var s = "X";
                 Bridge.Test.NUnit.Assert.True(Bridge.hasValue(s), "string is object");
                 Bridge.Test.NUnit.Assert.True(Bridge.is(s, System.IComparable$1(System.String)));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(s, System.IEquatable$1(System.String)));
+
+                var interfaces = Bridge.Reflection.getInterfaces(System.String);
+                Bridge.Test.NUnit.Assert.AreEqual(7, interfaces.length);
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.String), Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.String), Function));
             },
             DefaultConstructorWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("", "");
@@ -37757,6 +37849,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             CharArrayConstructorWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("abC", String.fromCharCode.apply(null, System.Array.init([97, 98, 67], System.Char)));
+            },
+            CharArrayWithStartIndexAndLengthConstructorWorks: function () {
+                Bridge.Test.NUnit.Assert.AreEqual("bc", String.fromCharCode.apply(null, System.Array.init([97, 98, 99, 68], System.Char).slice(1, 1 + 2)));
             },
             EmptyFieldWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("", "");
@@ -37774,11 +37869,17 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 // Phantom JS engine has different implementation of stringCompare
                 var expected = !Bridge.ClientTest.Utilities.BrowserHelper.IsPhantomJs() ? -1 : 1;
                 Bridge.Test.NUnit.Assert.AreEqual(expected, System.String.compare(("abcd"), "ABCD"));
+
+                Bridge.Test.NUnit.Assert.True(System.String.compare((""), null) > 0);
             },
             CompareWorks: function () {
                 Bridge.Test.NUnit.Assert.True(System.String.compare("abcd", "abcd") === 0);
                 Bridge.Test.NUnit.Assert.True(System.String.compare("abcd", "abcb") > 0);
                 Bridge.Test.NUnit.Assert.True(System.String.compare("abcd", "abce") < 0);
+
+                Bridge.Test.NUnit.Assert.True(System.String.compare(null, "") < 0);
+                Bridge.Test.NUnit.Assert.True(System.String.compare("", null) > 0);
+                Bridge.Test.NUnit.Assert.True(System.String.compare(null, null) === 0);
             },
             CompareWithIgnoreCaseArgWorks: function () {
                 Bridge.Test.NUnit.Assert.True(System.String.compare("abcd", "abcd", false) === 0);
@@ -37787,6 +37888,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.True(System.String.compare("abcd", "ABCD", true) === 0);
                 Bridge.Test.NUnit.Assert.True(System.String.compare("abcd", "ABCB", true) > 0);
                 Bridge.Test.NUnit.Assert.True(System.String.compare("abcd", "ABCE", true) < 0);
+
+                Bridge.Test.NUnit.Assert.True(System.String.compare(null, "", true) < 0);
+                Bridge.Test.NUnit.Assert.True(System.String.compare("", null, true) > 0);
+                Bridge.Test.NUnit.Assert.True(System.String.compare(null, null, true) === 0);
             },
             ConcatWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("ab", System.String.concat("a", "b"));
@@ -37818,12 +37923,28 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.False(System.String.endsWith(("abcd"), "e"));
             },
             StaticEqualsWorks: function () {
+                Bridge.Test.NUnit.Assert.True(System.String.equals("abcd", "abcd", 2));
+                Bridge.Test.NUnit.Assert.False(System.String.equals("abcd", "abce", 2));
+                Bridge.Test.NUnit.Assert.False(System.String.equals("abcd", "ABCD", 2));
+                Bridge.Test.NUnit.Assert.True(System.String.equals("abcd", "abcd", 3));
+                Bridge.Test.NUnit.Assert.False(System.String.equals("abcd", "abce", 3));
+                Bridge.Test.NUnit.Assert.True(System.String.equals("abcd", "ABCD", 3));
+
                 Bridge.Test.NUnit.Assert.True(System.String.equals("abcd", "abcd"));
                 Bridge.Test.NUnit.Assert.False(System.String.equals("abcd", "abce"));
                 Bridge.Test.NUnit.Assert.False(System.String.equals("abcd", "ABCD"));
                 Bridge.Test.NUnit.Assert.True(System.String.equals("abcd", "abcd"));
                 Bridge.Test.NUnit.Assert.False(System.String.equals("abcd", "abce"));
                 Bridge.Test.NUnit.Assert.False(System.String.equals("abcd", "ABCD"));
+
+                Bridge.Test.NUnit.Assert.True(System.String.equals("", ""));
+                Bridge.Test.NUnit.Assert.True(System.String.equals("", "", 3));
+                Bridge.Test.NUnit.Assert.True(System.String.equals(null, null));
+                Bridge.Test.NUnit.Assert.True(System.String.equals(null, null, 3));
+                Bridge.Test.NUnit.Assert.False(System.String.equals(null, ""));
+                Bridge.Test.NUnit.Assert.False(System.String.equals(null, "", 3));
+                Bridge.Test.NUnit.Assert.False(System.String.equals("", null));
+                Bridge.Test.NUnit.Assert.False(System.String.equals("", null, 3));
             },
             FormatWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("x", System.String.format("x", null));
@@ -37850,8 +37971,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual("xabc", System.String.format.apply(System.String, ["x{0}{1}{2}"].concat(arr3)));
                 Bridge.Test.NUnit.Assert.AreEqual("xabcd", System.String.format.apply(System.String, ["x{0}{1}{2}{3}"].concat(arr4)));
             },
-            FormatWorksWithIFormattable: function () {
+            FormatWorksWithIFormattable_SPI_1598: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("3.14", System.String.format("{0:F2}", Bridge.box(3.1428571428571428, System.Double, System.Double.format, System.Double.getHashCode)));
+                // #1598
+                //Assert.AreEqual("Formatted: FMT, null formatProvider", string.Format("{0:FMT}", new MyFormattable()));
+            },
+            FormatWorksWithIFormattableAndFormatProvider_SPI_1598: function () {
+                Bridge.Test.NUnit.Assert.AreEqual("3.14", System.String.formatProvider(new Bridge.ClientTest.SimpleTypes.StringTests.MyFormatProvider(), "{0:F2}", Bridge.box(3.1428571428571428, System.Double, System.Double.format, System.Double.getHashCode)));
+                // #1598
+                //Assert.AreEqual("Formatted: FMT, StringTests+MyFormatProvider", string.Format(new MyFormatProvider(), "{0:FMT}", new MyFormattable()));
             },
             FormatCanUseEscapedBraces: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("{0}", System.String.format("{{0}}", null));
@@ -37911,16 +38039,16 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.False(System.String.isNullOrEmpty("0"));
             },
             LastIndexOfCharWorks: function () {
-                Bridge.Test.NUnit.Assert.AreEqual(1, ("abc").lastIndexOf("b"));
-                Bridge.Test.NUnit.Assert.AreEqual(-1, ("abc").lastIndexOf("d"));
+                Bridge.Test.NUnit.Assert.AreEqual(1, ("abc").lastIndexOf(String.fromCharCode(98)));
+                Bridge.Test.NUnit.Assert.AreEqual(-1, ("abc").lastIndexOf(String.fromCharCode(100)));
             },
             LastIndexOfStringWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual(1, ("abc").lastIndexOf("bc"));
                 Bridge.Test.NUnit.Assert.AreEqual(-1, ("abc").lastIndexOf("bd"));
             },
             LastIndexOfCharWithStartIndexWorks: function () {
-                Bridge.Test.NUnit.Assert.AreEqual(1, ("abcabc").lastIndexOf("b", 3));
-                Bridge.Test.NUnit.Assert.AreEqual(-1, ("abcabc").lastIndexOf("d", 3));
+                Bridge.Test.NUnit.Assert.AreEqual(1, ("abcabc").lastIndexOf(String.fromCharCode(98), 3));
+                Bridge.Test.NUnit.Assert.AreEqual(-1, ("abcabc").lastIndexOf(String.fromCharCode(100), 3));
             },
             LastIndexOfStringWithStartIndexWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual(1, ("abcabc").lastIndexOf("bc", 3));
@@ -38021,61 +38149,57 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual("xcxcxc", System.String.replaceAll(("abcabcabc"), "ab", "x"));
             },
             ReplaceCharWorks: function () {
-                Bridge.Test.NUnit.Assert.AreEqual("xbcxbcxbc", System.String.replaceAll(("abcabcabc"), "a", "x"));
+                Bridge.Test.NUnit.Assert.AreEqual("xbcxbcxbc", System.String.replaceAll(("abcabcabc"), String.fromCharCode(97), String.fromCharCode(120)));
             },
             SplitWithCharWorks: function () {
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["a", "ca", "ca", "c"], System.String), System.String.split(("abcabcabc"), [98].map(function(i) {{ return String.fromCharCode(i); }})));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["a", "ca", "ca", "c"], System.String), System.String.split(("abcabcabc"), [98].map(function(i) {{ return String.fromCharCode(i); }})));
             },
             SplitWithCharsAndLimitWorks: function () {
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["a", "cabcabc"], System.String), System.String.split(("abcabcabc"), System.Array.init([98], System.Char).map(function(i) {{ return String.fromCharCode(i); }}), 2));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["a", "cabcabc"], System.String), System.String.split(("abcabcabc"), System.Array.init([98], System.Char).map(function(i) {{ return String.fromCharCode(i); }}), 2));
             },
             SplitWithCharsAndStringSplitOptionsAndLimitWorks: function () {
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["a", "cabcabc"], System.String), System.String.split(("abxcabcabc"), System.Array.init([98, 120], System.Char).map(function(i) {{ return String.fromCharCode(i); }}), 2, 1));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["a", "cabcabc"], System.String), System.String.split(("abxcabcabc"), System.Array.init([98, 120], System.Char).map(function(i) {{ return String.fromCharCode(i); }}), 2, 1));
             },
             SomeNetSplitTests: function () {
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["a", "bc", "de"], System.String), System.String.split(("axybcxzde"), System.Array.init(["xy", "xz"], System.String), null, 0));
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["a", "bc", "de", ""], System.String), System.String.split(("axybcxzdexz"), System.Array.init(["xy", "xz"], System.String), null, 0));
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["", "a", "bc", "de", ""], System.String), System.String.split(("xzaxybcxzdexz"), System.Array.init(["xy", "xz"], System.String), null, 0));
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["", "a", "", "bc", "de", ""], System.String), System.String.split(("xzaxyxzbcxzdexz"), System.Array.init(["xy", "xz"], System.String), null, 0));
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["", "a", "", "", "bc", "de", ""], System.String), System.String.split(("xzaxyxzxybcxzdexz"), System.Array.init(["xy", "xz"], System.String), null, 0));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["a", "bc", "de"], System.String), System.String.split(("axybcxzde"), System.Array.init(["xy", "xz"], System.String), null, 0));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["a", "bc", "de", ""], System.String), System.String.split(("axybcxzdexz"), System.Array.init(["xy", "xz"], System.String), null, 0));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["", "a", "bc", "de", ""], System.String), System.String.split(("xzaxybcxzdexz"), System.Array.init(["xy", "xz"], System.String), null, 0));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["", "a", "", "bc", "de", ""], System.String), System.String.split(("xzaxyxzbcxzdexz"), System.Array.init(["xy", "xz"], System.String), null, 0));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["", "a", "", "", "bc", "de", ""], System.String), System.String.split(("xzaxyxzxybcxzdexz"), System.Array.init(["xy", "xz"], System.String), null, 0));
 
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["a", "bc", "de"], System.String), System.String.split(("axybcxzde"), System.Array.init(["xy", "xz"], System.String), null, 1));
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["a", "bc", "de"], System.String), System.String.split(("axybcxzdexz"), System.Array.init(["xy", "xz"], System.String), null, 1));
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["a", "bc", "de"], System.String), System.String.split(("xzaxybcxzdexz"), System.Array.init(["xy", "xz"], System.String), null, 1));
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["a", "bc", "de"], System.String), System.String.split(("xzaxyxzbcxzdexz"), System.Array.init(["xy", "xz"], System.String), null, 1));
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["a", "bc", "de"], System.String), System.String.split(("xzaxyxzxybcxzdexz"), System.Array.init(["xy", "xz"], System.String), null, 1));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["a", "bc", "de"], System.String), System.String.split(("axybcxzde"), System.Array.init(["xy", "xz"], System.String), null, 1));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["a", "bc", "de"], System.String), System.String.split(("axybcxzdexz"), System.Array.init(["xy", "xz"], System.String), null, 1));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["a", "bc", "de"], System.String), System.String.split(("xzaxybcxzdexz"), System.Array.init(["xy", "xz"], System.String), null, 1));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["a", "bc", "de"], System.String), System.String.split(("xzaxyxzbcxzdexz"), System.Array.init(["xy", "xz"], System.String), null, 1));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["a", "bc", "de"], System.String), System.String.split(("xzaxyxzxybcxzdexz"), System.Array.init(["xy", "xz"], System.String), null, 1));
 
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["a", "bc", "de"], System.String), System.String.split(("axybcxzde"), System.Array.init(["xy", "xz"], System.String), 100, 0));
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["a", "bc", "de", ""], System.String), System.String.split(("axybcxzdexz"), System.Array.init(["xy", "xz"], System.String), 100, 0));
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["", "a", "bc", "de", ""], System.String), System.String.split(("xzaxybcxzdexz"), System.Array.init(["xy", "xz"], System.String), 100, 0));
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["", "a", "", "bc", "de", ""], System.String), System.String.split(("xzaxyxzbcxzdexz"), System.Array.init(["xy", "xz"], System.String), 100, 0));
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["", "a", "", "", "bc", "de", ""], System.String), System.String.split(("xzaxyxzxybcxzdexz"), System.Array.init(["xy", "xz"], System.String), 100, 0));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["a", "bc", "de"], System.String), System.String.split(("axybcxzde"), System.Array.init(["xy", "xz"], System.String), 100, 0));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["a", "bc", "de", ""], System.String), System.String.split(("axybcxzdexz"), System.Array.init(["xy", "xz"], System.String), 100, 0));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["", "a", "bc", "de", ""], System.String), System.String.split(("xzaxybcxzdexz"), System.Array.init(["xy", "xz"], System.String), 100, 0));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["", "a", "", "bc", "de", ""], System.String), System.String.split(("xzaxyxzbcxzdexz"), System.Array.init(["xy", "xz"], System.String), 100, 0));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["", "a", "", "", "bc", "de", ""], System.String), System.String.split(("xzaxyxzxybcxzdexz"), System.Array.init(["xy", "xz"], System.String), 100, 0));
 
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["a", "bcxzde"], System.String), System.String.split(("axybcxzde"), System.Array.init(["xy", "xz"], System.String), 2, 0));
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["a", "bcxzdexz"], System.String), System.String.split(("axybcxzdexz"), System.Array.init(["xy", "xz"], System.String), 2, 0));
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["a", "xzbcxzdexz"], System.String), System.String.split(("axyxzbcxzdexz"), System.Array.init(["xy", "xz"], System.String), 2, 0));
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["", "axybcxzdexz"], System.String), System.String.split(("xzaxybcxzdexz"), System.Array.init(["xy", "xz"], System.String), 2, 0));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["a", "bcxzde"], System.String), System.String.split(("axybcxzde"), System.Array.init(["xy", "xz"], System.String), 2, 0));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["a", "bcxzdexz"], System.String), System.String.split(("axybcxzdexz"), System.Array.init(["xy", "xz"], System.String), 2, 0));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["a", "xzbcxzdexz"], System.String), System.String.split(("axyxzbcxzdexz"), System.Array.init(["xy", "xz"], System.String), 2, 0));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["", "axybcxzdexz"], System.String), System.String.split(("xzaxybcxzdexz"), System.Array.init(["xy", "xz"], System.String), 2, 0));
 
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["a", "bcxzde"], System.String), System.String.split(("axybcxzde"), System.Array.init(["xy", "xz"], System.String), 2, 1));
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["a", "bcxzdexz"], System.String), System.String.split(("axybcxzdexz"), System.Array.init(["xy", "xz"], System.String), 2, 1));
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["a", "bcxzdexz"], System.String), System.String.split(("axyxzbcxzdexz"), System.Array.init(["xy", "xz"], System.String), 2, 1));
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["a", "bcxzdexz"], System.String), System.String.split(("xzaxyxzbcxzdexz"), System.Array.init(["xy", "xz"], System.String), 2, 1));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["a", "bcxzde"], System.String), System.String.split(("axybcxzde"), System.Array.init(["xy", "xz"], System.String), 2, 1));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["a", "bcxzdexz"], System.String), System.String.split(("axybcxzdexz"), System.Array.init(["xy", "xz"], System.String), 2, 1));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["a", "bcxzdexz"], System.String), System.String.split(("axyxzbcxzdexz"), System.Array.init(["xy", "xz"], System.String), 2, 1));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["a", "bcxzdexz"], System.String), System.String.split(("xzaxyxzbcxzdexz"), System.Array.init(["xy", "xz"], System.String), 2, 1));
             },
             SplitWithCharsWorks: function () {
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["Lorem", "Ipsum", "", "dolor", "sit", "amet"], System.String), System.String.split(("Lorem Ipsum, dolor[sit amet"), System.Array.init([44, 32, 91], System.Char).map(function(i) {{ return String.fromCharCode(i); }})));
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["Lorem", "Ipsum", "", "dolor", "sit", "amet"], System.String), System.String.split(("Lorem Ipsum, dolor[sit amet"), System.Array.init([44, 32, 91], System.Char).map(function(i) {{ return String.fromCharCode(i); }}), null, 0));
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["Lorem", "Ipsum", "dolor", "sit", "amet"], System.String), System.String.split(("Lorem Ipsum, dolor[sit amet"), System.Array.init([44, 32, 91], System.Char).map(function(i) {{ return String.fromCharCode(i); }}), null, 1));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["Lorem", "Ipsum", "", "dolor", "sit", "amet"], System.String), System.String.split(("Lorem Ipsum, dolor[sit amet"), System.Array.init([44, 32, 91], System.Char).map(function(i) {{ return String.fromCharCode(i); }})));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["Lorem", "Ipsum", "", "dolor", "sit", "amet"], System.String), System.String.split(("Lorem Ipsum, dolor[sit amet"), System.Array.init([44, 32, 91], System.Char).map(function(i) {{ return String.fromCharCode(i); }}), null, 0));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["Lorem", "Ipsum", "dolor", "sit", "amet"], System.String), System.String.split(("Lorem Ipsum, dolor[sit amet"), System.Array.init([44, 32, 91], System.Char).map(function(i) {{ return String.fromCharCode(i); }}), null, 1));
             },
             SplitWithStringsWorks: function () {
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["a ", " b ", " b ", " c and c ", "", "", " d ", " d ", " e"], System.String), System.String.split(("a is b if b is c and c isifis d if d is e"), System.Array.init(["is", "if"], System.String), null, 0));
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["a ", " b ", " b ", " c and c ", " d ", " d ", " e"], System.String), System.String.split(("a is b if b is c and c isifis d if d is e"), System.Array.init(["is", "if"], System.String), null, 1));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["a ", " b ", " b ", " c and c ", "", "", " d ", " d ", " e"], System.String), System.String.split(("a is b if b is c and c isifis d if d is e"), System.Array.init(["is", "if"], System.String), null, 0));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["a ", " b ", " b ", " c and c ", " d ", " d ", " e"], System.String), System.String.split(("a is b if b is c and c isifis d if d is e"), System.Array.init(["is", "if"], System.String), null, 1));
             },
             SplitWithStringsAndLimitWorks: function () {
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init(["a", "abcabc"], System.String), System.String.split(("abcbcabcabc"), System.Array.init(["bc"], System.String), 2, 1));
-            },
-            StartsWithCharWorks: function () {
-                Bridge.Test.NUnit.Assert.True(System.String.startsWith(("abc"), "a"));
-                Bridge.Test.NUnit.Assert.False(System.String.startsWith(("abc"), "b"));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init(["a", "abcabc"], System.String), System.String.split(("abcbcabcabc"), System.Array.init(["bc"], System.String), 2, 1));
             },
             StartsWithStringWorks: function () {
                 Bridge.Test.NUnit.Assert.True(System.String.startsWith(("abc"), "ab"));
@@ -38105,6 +38229,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual(numbers.substr(100, 101), "");
 
                 Bridge.Test.NUnit.Assert.AreEqual(numbers.substr(2, 4), "2345");
+            },
+            SubstringWithLengthWorks: function () {
+                Bridge.Test.NUnit.Assert.AreEqual("cd", ("abcde").substr(2, 2));
             },
             ToLowerCaseWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("abcd", ("ABcd").toLowerCase());
@@ -38199,11 +38326,19 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.False(System.String.equals(("a"), "A"));
                 Bridge.Test.NUnit.Assert.False(System.String.equals(("a"), "ab"));
             },
-            CompareToWorks: function () {
+            StaticCompareToWorks: function () {
                 Bridge.Test.NUnit.Assert.True(System.String.compare("abcd", "abcd") === 0);
                 Bridge.Test.NUnit.Assert.True(System.String.compare("abcd", "abcD") !== 0);
                 Bridge.Test.NUnit.Assert.True(System.String.compare("abcd", "abcb") > 0);
                 Bridge.Test.NUnit.Assert.True(System.String.compare("abcd", "abce") < 0);
+            },
+            CompareToWorks: function () {
+                Bridge.Test.NUnit.Assert.True(System.String.compare(("abcd"), "abcd") === 0);
+                Bridge.Test.NUnit.Assert.True(System.String.compare(("abcd"), "abcD") !== 0);
+                Bridge.Test.NUnit.Assert.True(System.String.compare(("abcd"), "abcb") > 0);
+                Bridge.Test.NUnit.Assert.True(System.String.compare(("abcd"), "abce") < 0);
+
+                Bridge.Test.NUnit.Assert.True(System.String.compare((""), null) > 0);
             },
             IComparableCompareToWorks: function () {
                 Bridge.Test.NUnit.Assert.True(Bridge.compare("abcd", "abcd", false, System.String) === 0);
@@ -38213,12 +38348,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 Bridge.Test.NUnit.Assert.True(Bridge.compare("", null, false, System.String) > 0);
             },
-            JoinWorks: function () {
+            JoinWorks_SPI_1599: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("a, ab, abc, abcd", System.Array.init(["a", "ab", "abc", "abcd"], System.String).join(", "));
                 Bridge.Test.NUnit.Assert.AreEqual("ab, abc", System.Array.init(["a", "ab", "abc", "abcd"], System.String).slice(1, 1 + 2).join(", "));
 
                 var intValues = new (Bridge.ClientTest.SimpleTypes.StringTests.MyEnumerable$1(System.Int32))(System.Array.init([1, 5, 6], System.Int32));
+                // #1599
                 Bridge.Test.NUnit.Assert.AreEqual("1, 5, 6", Bridge.toArray(intValues).join(", "));
+
                 var stringValues = new (Bridge.ClientTest.SimpleTypes.StringTests.MyEnumerable$1(System.String))(System.Array.init(["a", "ab", "abc", "abcd"], System.String));
                 Bridge.Test.NUnit.Assert.AreEqual("a, ab, abc, abcd", Bridge.toArray(stringValues).join(", "));
                 Bridge.Test.NUnit.Assert.AreEqual("a, 1, abc, False", System.Array.init(["a", Bridge.box(1, System.Int32), "abc", Bridge.box(false, System.Boolean, System.Boolean.toString)], System.Object).join(", "));
@@ -38231,7 +38368,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             ToCharArrayWorks: function () {
                 var text = "Lorem sit dolor";
-                Bridge.Test.NUnit.Assert.AreDeepEqual(System.Array.init([76, 111, 114, 101, 109, 32, 115, 105, 116, 32, 100, 111, 108, 111, 114], System.Char), System.String.toCharArray(text, 0, text.length));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Array.init([76, 111, 114, 101, 109, 32, 115, 105, 116, 32, 100, 111, 108, 111, 114], System.Char), System.String.toCharArray(text, 0, text.length));
             }
         }
     });
@@ -38257,6 +38394,26 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             }
         }
     }; });
+
+    Bridge.define("Bridge.ClientTest.SimpleTypes.StringTests.MyFormatProvider", {
+        inherits: [System.IFormatProvider],
+        alias: ["getFormat", "System$IFormatProvider$getFormat"],
+        methods: {
+            getFormat: function (type) {
+                return System.Globalization.CultureInfo.invariantCulture.getFormat(type);
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.SimpleTypes.StringTests.MyFormattable", {
+        inherits: [System.IFormattable],
+        alias: ["format", "System$IFormattable$format"],
+        methods: {
+            format: function (format, formatProvider) {
+                return System.String.concat("Formatted: ", format, ", ", (formatProvider == null ? "null formatProvider" : Bridge.Reflection.getTypeFullName(Bridge.getType(formatProvider))));
+            }
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.SimpleTypes.TestVersion", {
         statics: {
