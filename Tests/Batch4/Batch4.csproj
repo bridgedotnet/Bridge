@@ -52,16 +52,12 @@
     <Compile Include="FormattableStringTests.cs" />
     <Compile Include="CustomInitializationTests.cs" />
     <Compile Include="Exceptions\ContractExceptionTests.cs" />
-    <Compile Include="Threading\CancellationTokenTests.cs" />
     <Compile Include="UserDefinedStructTests.cs" />
     <Compile Include="Exceptions\JsErrorExceptionTests.cs" />
     <Compile Include="SimpleTypes\CharTests.cs" />
-    <Compile Include="Threading\Tasks\AsyncTests.cs" />
     <Compile Include="Web\HttpUtilityTests.cs" />
     <Compile Include="Runtime\CompilerServices\RuntimeHelpersTests.cs" />
     <Compile Include="LazyTests.cs" />
-    <Compile Include="Threading\Tasks\PromiseTests.cs" />
-    <Compile Include="Threading\Tasks\TaskTests.cs" />
     <Compile Include="SimpleTypes\ByteTests.cs" />
     <Compile Include="Serialization\JsonTests.cs" />
     <Compile Include="SimpleTypes\UInt16Tests.cs" />
