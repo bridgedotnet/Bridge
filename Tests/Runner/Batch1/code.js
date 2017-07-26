@@ -33357,6 +33357,455 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         }
     });
 
+    Bridge.define("Bridge.ClientTest.SimpleTypes.DateTests", {
+        statics: {
+            methods: {
+                AddTimezoneMinutesOffset: function (dt) {
+                    return new Date(dt.getTime() - Bridge.Int.mul(dt.getTimezoneOffset(), 60000));
+                }
+            }
+        },
+        methods: {
+            TypePropertiesAreCorrect_SPI_1608_1609: function () {
+                Bridge.Test.NUnit.Assert.AreEqual("Date", Bridge.Reflection.getTypeFullName(Date));
+                //Assert.True(typeof(Date).IsClass);
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IComparable$1(Date), Date));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IEquatable$1(Date), Date));
+                var o = new Date();
+                Bridge.Test.NUnit.Assert.True(Bridge.is(o, Date));
+                Bridge.Test.NUnit.Assert.True(Bridge.is(o, System.IComparable$1(Date)));
+                Bridge.Test.NUnit.Assert.True(Bridge.is(o, System.IEquatable$1(Date)));
+
+                var interfaces = Bridge.Reflection.getInterfaces(Date);
+                Bridge.Test.NUnit.Assert.AreEqual(4, interfaces.length);
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(Date), Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(Date), Function));
+            },
+            DefaultConstructorReturnsTodaysDate: function () {
+                var dt = new Date();
+                Bridge.Test.NUnit.Assert.True(dt.getFullYear() > 2011);
+            },
+            CreatingInstanceReturnsTodaysDate_SPI_1604: function () {
+                var fullYear = Bridge.createInstance(Date).getFullYear();
+                Bridge.Test.NUnit.Assert.True(fullYear > 2011, fullYear + " > 2011");
+            },
+            MillisecondSinceEpochConstructorWorks: function () {
+                var dt = new Date(43200000000.0);
+                Bridge.Test.NUnit.Assert.AreEqual(1971, dt.getFullYear());
+            },
+            StringConstructorWorks: function () {
+                var dt = new Date("Aug 12, 2012");
+                Bridge.Test.NUnit.Assert.AreEqual(2012, dt.getFullYear());
+                Bridge.Test.NUnit.Assert.AreEqual(7, dt.getMonth());
+                Bridge.Test.NUnit.Assert.AreEqual(12, dt.getDate());
+            },
+            YMDConstructorWorks: function () {
+                var dt = new Date(2011, 7, 12);
+                Bridge.Test.NUnit.Assert.AreEqual(2011, dt.getFullYear());
+                Bridge.Test.NUnit.Assert.AreEqual(7, dt.getMonth());
+                Bridge.Test.NUnit.Assert.AreEqual(12, dt.getDate());
+            },
+            YMDHConstructorWorks: function () {
+                var dt = new Date(2011, 7, 12, 13);
+                Bridge.Test.NUnit.Assert.AreEqual(2011, dt.getFullYear());
+                Bridge.Test.NUnit.Assert.AreEqual(7, dt.getMonth());
+                Bridge.Test.NUnit.Assert.AreEqual(12, dt.getDate());
+                Bridge.Test.NUnit.Assert.AreEqual(13, dt.getHours());
+            },
+            YMDHNConstructorWorks: function () {
+                var dt = new Date(2011, 7, 12, 13, 42);
+                Bridge.Test.NUnit.Assert.AreEqual(2011, dt.getFullYear());
+                Bridge.Test.NUnit.Assert.AreEqual(7, dt.getMonth());
+                Bridge.Test.NUnit.Assert.AreEqual(12, dt.getDate());
+                Bridge.Test.NUnit.Assert.AreEqual(13, dt.getHours());
+                Bridge.Test.NUnit.Assert.AreEqual(42, dt.getMinutes());
+            },
+            YMDHNSConstructorWorks: function () {
+                var dt = new Date(2011, 7, 12, 13, 42, 56);
+                Bridge.Test.NUnit.Assert.AreEqual(2011, dt.getFullYear());
+                Bridge.Test.NUnit.Assert.AreEqual(7, dt.getMonth());
+                Bridge.Test.NUnit.Assert.AreEqual(12, dt.getDate());
+                Bridge.Test.NUnit.Assert.AreEqual(13, dt.getHours());
+                Bridge.Test.NUnit.Assert.AreEqual(42, dt.getMinutes());
+                Bridge.Test.NUnit.Assert.AreEqual(56, dt.getSeconds());
+            },
+            YMDHNSUConstructorWorks: function () {
+                var dt = new Date(2011, 7, 12, 13, 42, 56, 345);
+                Bridge.Test.NUnit.Assert.AreEqual(2011, dt.getFullYear());
+                Bridge.Test.NUnit.Assert.AreEqual(7, dt.getMonth());
+                Bridge.Test.NUnit.Assert.AreEqual(12, dt.getDate());
+                Bridge.Test.NUnit.Assert.AreEqual(13, dt.getHours());
+                Bridge.Test.NUnit.Assert.AreEqual(42, dt.getMinutes());
+                Bridge.Test.NUnit.Assert.AreEqual(56, dt.getSeconds());
+                Bridge.Test.NUnit.Assert.AreEqual(345, dt.getMilliseconds());
+            },
+            NowWorks_SPI_1624: function () {
+                // #1624
+                var d1 = new Date(Date.now());
+                var d2 = System.DateTime.getToday();
+
+                Bridge.Test.NUnit.Assert.AreEqual(d1.getFullYear(), System.DateTime.getYear(d2));
+            },
+            GetFullYearWorks: function () {
+                var dt = new Date(2011, 7, 12, 13, 42, 56, 345);
+                Bridge.Test.NUnit.Assert.AreEqual(2011, dt.getFullYear());
+            },
+            GetMonthWorks: function () {
+                var dt = new Date(2011, 7, 12, 13, 42, 56, 345);
+                Bridge.Test.NUnit.Assert.AreEqual(7, dt.getMonth());
+            },
+            GetDateWorks: function () {
+                var dt = new Date(2011, 7, 12, 13, 42, 56, 345);
+                Bridge.Test.NUnit.Assert.AreEqual(12, dt.getDate());
+            },
+            GetHoursWorks: function () {
+                var dt = new Date(2011, 7, 12, 13, 42, 56, 345);
+                Bridge.Test.NUnit.Assert.AreEqual(13, dt.getHours());
+            },
+            GetMinutesWorks: function () {
+                var dt = new Date(2011, 7, 12, 13, 42, 56, 345);
+                Bridge.Test.NUnit.Assert.AreEqual(42, dt.getMinutes());
+            },
+            GetSecondsWorks: function () {
+                var dt = new Date(2011, 7, 12, 13, 42, 56, 345);
+                Bridge.Test.NUnit.Assert.AreEqual(56, dt.getSeconds());
+            },
+            GetMillisecondsWorks: function () {
+                var dt = new Date(2011, 7, 12, 13, 42, 56, 345);
+                Bridge.Test.NUnit.Assert.AreEqual(345, dt.getMilliseconds());
+            },
+            GetDayWorks: function () {
+                var dt = new Date(2011, 7, 12, 13, 42, 56, 345);
+                Bridge.Test.NUnit.Assert.AreEqual(5, dt.getDay());
+            },
+            GetTimeWorks: function () {
+                var dt = new Date(1970, 0, 2);
+                dt = Bridge.ClientTest.SimpleTypes.DateTests.AddTimezoneMinutesOffset(dt);
+                Bridge.Test.NUnit.Assert.AreEqual(86400000, dt.getTime());
+            },
+            ValueOfWorks_SPI_1624: function () {
+                var dt = new Date(1970, 0, 2);
+                dt = Bridge.ClientTest.SimpleTypes.DateTests.AddTimezoneMinutesOffset(dt);
+                Bridge.Test.NUnit.Assert.AreEqual(86400000, dt.valueOf());
+            },
+            GetTimezoneOffsetWorks: function () {
+                var dt = new Date(0);
+                Bridge.Test.NUnit.Assert.AreEqual((new Date(1970, 0, 1).valueOf()) / 60000, dt.getTimezoneOffset());
+            },
+            GetUtcFullYearWorks: function () {
+                var dt = new Date(2011, 7, 12, 13, 42, 56, 345);
+                Bridge.Test.NUnit.Assert.AreEqual(2011, dt.getUTCFullYear());
+            },
+            GetUtcMonthWorks: function () {
+                var dt = new Date(2011, 7, 12, 13, 42, 56, 345);
+                Bridge.Test.NUnit.Assert.AreEqual(7, dt.getUTCMonth());
+            },
+            GetUtcDateWorks: function () {
+                var dt = new Date(2011, 7, 12, 13, 42, 56, 345);
+                Bridge.Test.NUnit.Assert.AreEqual(12, dt.getUTCDate());
+            },
+            GetUtcHoursWorks: function () {
+                var dt = new Date(2011, 7, 12, 13, 42, 56, 345);
+                dt = Bridge.ClientTest.SimpleTypes.DateTests.AddTimezoneMinutesOffset(dt);
+                Bridge.Test.NUnit.Assert.AreEqual(13, dt.getUTCHours());
+            },
+            GetUtcMinutesWorks: function () {
+                var dt = new Date(2011, 7, 12, 13, 42, 56, 345);
+                Bridge.Test.NUnit.Assert.AreEqual(42, dt.getUTCMinutes());
+            },
+            GetUtcSecondsWorks: function () {
+                var dt = new Date(2011, 7, 12, 13, 42, 56, 345);
+                Bridge.Test.NUnit.Assert.AreEqual(56, dt.getUTCSeconds());
+            },
+            GetUtcMillisecondsWorks: function () {
+                var dt = new Date(2011, 7, 12, 13, 42, 56, 345);
+                Bridge.Test.NUnit.Assert.AreEqual(345, dt.getUTCMilliseconds());
+            },
+            GetUtcDayWorks: function () {
+                var dt = new Date(2011, 7, 12, 13, 42, 56, 345);
+                Bridge.Test.NUnit.Assert.AreEqual(5, dt.getUTCDay());
+            },
+            ParseWorks_SPI_1624: function () {
+                // #1624
+                var utc = Date.UTC(2017, 7, 12);
+                var local = (new Date(2017, 7, 12)).valueOf();
+                var offset = utc - local;
+
+                var d1 = Date.parse("Aug 12, 2012");
+                var d2 = Date.parse("1970-01-01");
+                var d3 = Date.parse("March 7, 2014");
+                var d4 = Date.parse("Wed, 09 Aug 1995 00:00:00 GMT");
+                var d5 = Date.parse("Thu, 01 Jan 1970 00:00:00 GMT-0400");
+
+                Bridge.Test.NUnit.Assert.AreEqual(1344729600000.0 - offset, d1);
+                Bridge.Test.NUnit.Assert.AreEqual(0.0, d2);
+                Bridge.Test.NUnit.Assert.AreEqual(1394150400000.0 - offset, d3);
+                Bridge.Test.NUnit.Assert.AreEqual(807926400000.0, d4);
+                Bridge.Test.NUnit.Assert.AreEqual(14400000.0, d5);
+            },
+            ToLocaleDateStringIsWorking_1624: function () {
+                var d1 = new Date(Date.UTC(2012, 11, 12, 3, 0, 0));
+
+                // Tough to test because varies by timezone/location
+                // Just testing that a string is generated
+                Bridge.Test.NUnit.Assert.True(!System.String.isNullOrEmpty(d1.toLocaleDateString()));
+
+                //var d2 = new Date(Date.UTC(2012, 11, 20, 3, 0, 0));
+
+
+                //Assert.AreEqual("12/19/2012", d2.ToLocaleDateString("en-US")); // "12/19/2012"
+
+                //Assert.AreEqual("20/12/2012", d2.ToLocaleDateString("en-GB")); // "20/12/2012"
+
+                //Assert.AreEqual("2012. 12. 20.", d2.ToLocaleDateString("ko-KR")); // "2012. 12. 20."
+
+                //Assert.AreEqual("24/12/20", d2.ToLocaleDateString("ja-JP-u-ca-japanese")); // "24/12/20"
+
+                //Assert.AreEqual("20/12/2012", d2.ToLocaleDateString(new string[] { "ban", "id" })); // "20/12/2012"
+
+                //var d3 = new Date(Date.UTC(2012, 11, 20, 3, 0, 0));
+
+                //var options = new Date.ToLocaleStringOptions
+                //{
+                //    Weekday = "long",
+                //    Year = "numeric",
+                //    Month = "long",
+                //    Day = "numeric"
+                //};
+
+                //Assert.AreEqual("Donnerstag, 20. Dezember 2012", d3.ToLocaleDateString("de-DE", options)); // "Donnerstag, 20. Dezember 2012"
+
+                //options.TimeZone = "UTC";
+                //options.TimeZoneName = "short";
+
+                //Assert.AreEqual("Thursday, December 20, 2012, GMT", d3.ToLocaleDateString("en-US", options)); // "Thursday, December 20, 2012, GMT"
+            },
+            ToDateStringWorks: function () {
+                var dt = new Date(2011, 7, 12, 13, 42);
+                var s = dt.toDateString();
+                Bridge.Test.NUnit.Assert.True(System.String.indexOf(s, "2011") >= 0 && System.String.indexOf(s, "42") < 0);
+            },
+            ToTimeStringWorks: function () {
+                var dt = new Date(2011, 7, 12, 13, 42);
+                var s = dt.toTimeString();
+                Bridge.Test.NUnit.Assert.True(System.String.indexOf(s, "2011") < 0 && System.String.indexOf(s, "42") >= 0);
+            },
+            ToUtcStringWorks: function () {
+                var dt = new Date(2011, 7, 12, 13, 42);
+                var s = dt.toUTCString();
+                Bridge.Test.NUnit.Assert.True(System.String.indexOf(s, "2011") >= 0 && System.String.indexOf(s, "42") >= 0);
+            },
+            ToLocaleDateStringWorks_SPI_1624: function () {
+                var dt = new Date(2011, 7, 12, 13, 42);
+                var s = dt.toLocaleDateString();
+                Bridge.Test.NUnit.Assert.True(System.String.indexOf(s, "2011") >= 0 && System.String.indexOf(s, "42") < 0);
+            },
+            DateUTCIsWorking_SPI_1624: function () {
+                var d = new Date();
+                var year = 2017;
+                var month = 1;
+                var day = 12;
+                var hour = 4;
+                var minute = 36;
+                var second = 55;
+                var millisecond = 255;
+
+                d.setUTCFullYear(year); // 2017
+                d.setUTCMonth(month); // 1
+                d.setUTCDate(day); // 12
+                d.setUTCHours(hour); // 4
+                d.setUTCMinutes(minute); // 36
+                d.setUTCSeconds(second); // 55
+                d.setUTCMilliseconds(millisecond); // 255
+
+                var utc1 = Date.UTC(year, month); // 1485907200000
+                var utc2 = Date.UTC(year, month, day); // 1486857600000
+                var utc3 = Date.UTC(year, month, day, hour); // 1486872000000
+                var utc4 = Date.UTC(year, month, day, hour, minute); // 1486874160000
+                var utc5 = Date.UTC(year, month, day, hour, minute, second); // 1486874215000
+                var utc6 = Date.UTC(year, month, day, hour, minute, second, millisecond); // 1486874215255
+
+                Bridge.Test.NUnit.Assert.AreEqual(1485907200000.0, utc1);
+                Bridge.Test.NUnit.Assert.AreEqual(1486857600000.0, utc2);
+                Bridge.Test.NUnit.Assert.AreEqual(1486872000000.0, utc3);
+                Bridge.Test.NUnit.Assert.AreEqual(1486874160000.0, utc4);
+                Bridge.Test.NUnit.Assert.AreEqual(1486874215000.0, utc5);
+                Bridge.Test.NUnit.Assert.AreEqual(1486874215255.0, utc6);
+            },
+            ToLocaleTimeStringWorks: function () {
+                var dt = new Date(2011, 7, 12, 13, 42);
+                var s = dt.toLocaleTimeString();
+                Bridge.Test.NUnit.Assert.True(System.String.indexOf(s, "2011") < 0 && System.String.indexOf(s, "42") >= 0);
+            },
+            AssertDateUtc: function (dt, year, month, day, hours, minutes, seconds, milliseconds) {
+                Bridge.Test.NUnit.Assert.AreEqual(year, dt.getUTCFullYear());
+                Bridge.Test.NUnit.Assert.AreEqual(month, dt.getUTCMonth());
+                Bridge.Test.NUnit.Assert.AreEqual(day, dt.getUTCDate());
+                Bridge.Test.NUnit.Assert.AreEqual(hours, dt.getUTCHours());
+                Bridge.Test.NUnit.Assert.AreEqual(minutes, dt.getUTCMinutes());
+                Bridge.Test.NUnit.Assert.AreEqual(seconds, dt.getUTCSeconds());
+                Bridge.Test.NUnit.Assert.AreEqual(milliseconds, dt.getUTCMilliseconds());
+            },
+            SubtractingDatesWorks: function () {
+                Bridge.Test.NUnit.Assert.AreEqual(86400000, new Date(2011, 7, 12) - new Date(2011, 7, 11));
+            },
+            DateEqualityWorks: function () {
+                Bridge.Test.NUnit.Assert.True(Bridge.equals(new Date(2011, 7, 12), new Date(2011, 7, 12)));
+                Bridge.Test.NUnit.Assert.False(Bridge.equals(new Date(2011, 7, 12), new Date(2011, 7, 13)));
+                Bridge.Test.NUnit.Assert.AreStrictEqual(false, Bridge.equals(new Date(2011, 7, 12), null));
+                Bridge.Test.NUnit.Assert.AreStrictEqual(false, Bridge.equals(null, new Date(2011, 7, 12)));
+                Bridge.Test.NUnit.Assert.AreStrictEqual(true, Bridge.equals(null, null));
+            },
+            DateInequalityWorks: function () {
+                Bridge.Test.NUnit.Assert.False(!Bridge.equals(new Date(2011, 7, 12), new Date(2011, 7, 12)));
+                Bridge.Test.NUnit.Assert.True(!Bridge.equals(new Date(2011, 7, 12), new Date(2011, 7, 13)));
+                Bridge.Test.NUnit.Assert.AreStrictEqual(true, !Bridge.equals(new Date(2011, 7, 12), null));
+                Bridge.Test.NUnit.Assert.AreStrictEqual(true, !Bridge.equals(null, new Date(2011, 7, 12)));
+                Bridge.Test.NUnit.Assert.AreStrictEqual(false, !Bridge.equals(null, null));
+            },
+            DateLessThanWorks: function () {
+                Bridge.Test.NUnit.Assert.True(new Date(2011, 7, 11) < new Date(2011, 7, 12));
+                Bridge.Test.NUnit.Assert.False(new Date(2011, 7, 12) < new Date(2011, 7, 12));
+                Bridge.Test.NUnit.Assert.False(new Date(2011, 7, 13) < new Date(2011, 7, 12));
+            },
+            DateLessEqualWorks: function () {
+                Bridge.Test.NUnit.Assert.True(new Date(2011, 7, 11) <= new Date(2011, 7, 12));
+                Bridge.Test.NUnit.Assert.True(new Date(2011, 7, 12) <= new Date(2011, 7, 12));
+                Bridge.Test.NUnit.Assert.False(new Date(2011, 7, 13) <= new Date(2011, 7, 12));
+            },
+            DateGreaterThanWorks: function () {
+                Bridge.Test.NUnit.Assert.False(new Date(2011, 7, 11) > new Date(2011, 7, 12));
+                Bridge.Test.NUnit.Assert.False(new Date(2011, 7, 12) > new Date(2011, 7, 12));
+                Bridge.Test.NUnit.Assert.True(new Date(2011, 7, 13) > new Date(2011, 7, 12));
+            },
+            DateGreaterEqualWorks: function () {
+                Bridge.Test.NUnit.Assert.False(new Date(2011, 7, 11) >= new Date(2011, 7, 12));
+                Bridge.Test.NUnit.Assert.True(new Date(2011, 7, 12) >= new Date(2011, 7, 12));
+                Bridge.Test.NUnit.Assert.True(new Date(2011, 7, 13) >= new Date(2011, 7, 12));
+            },
+            SetFullYearWithOneParameterWorks: function () {
+                var dt = new Date(2000, 0, 1);
+                dt.setFullYear(2021);
+                Bridge.Test.NUnit.Assert.AreEqual(2021, dt.getFullYear());
+            },
+            SetFullYearWithTwoParametersWorks: function () {
+                var dt = new Date(2000, 0, 1);
+                dt.setFullYear(2021, 7);
+                Bridge.Test.NUnit.Assert.AreEqual(2021, dt.getFullYear());
+                Bridge.Test.NUnit.Assert.AreEqual(7, dt.getMonth());
+            },
+            SetFullYearWithThreeParametersWorks: function () {
+                var dt = new Date(2000, 0, 1);
+                dt.setFullYear(2021, 7, 13);
+                Bridge.Test.NUnit.Assert.AreEqual(2021, dt.getFullYear());
+                Bridge.Test.NUnit.Assert.AreEqual(7, dt.getMonth());
+                Bridge.Test.NUnit.Assert.AreEqual(13, dt.getDate());
+            },
+            SetMonthWorks: function () {
+                var dt = new Date(2000, 0, 1);
+                dt.setMonth(3);
+                Bridge.Test.NUnit.Assert.AreEqual(3, dt.getMonth());
+            },
+            SetDateWorks: function () {
+                var dt = new Date(2000, 0, 1);
+                dt.setDate(12);
+                Bridge.Test.NUnit.Assert.AreEqual(12, dt.getDate());
+            },
+            SetHoursWorks: function () {
+                var dt = new Date(2000, 0, 1);
+                dt.setHours(11);
+                Bridge.Test.NUnit.Assert.AreEqual(11, dt.getHours());
+            },
+            SetMinutesWorks: function () {
+                var dt = new Date(2000, 0, 1);
+                dt.setMinutes(34);
+                Bridge.Test.NUnit.Assert.AreEqual(34, dt.getMinutes());
+            },
+            SetSecondsWorks: function () {
+                var dt = new Date(2000, 0, 1);
+                dt.setSeconds(23);
+                Bridge.Test.NUnit.Assert.AreEqual(23, dt.getSeconds());
+            },
+            SetMillisecondsWorks: function () {
+                var dt = new Date(2000, 0, 1);
+                dt.setMilliseconds(435);
+                Bridge.Test.NUnit.Assert.AreEqual(435, dt.getMilliseconds());
+            },
+            SetTimeWorks: function () {
+                var dt = new Date();
+                dt.setTime(System.Int64([-2095997006,814]));
+                Bridge.Test.NUnit.Assert.AreEqual(3498302349234.0, dt.getTime());
+            },
+            SetTimeAsDoubleWorks: function () {
+                var dt = new Date();
+                dt.setTime(3498302349234.0);
+                Bridge.Test.NUnit.Assert.AreEqual(3498302349234.0, dt.getTime());
+            },
+            SetUtcFullYearWithOneParameterWorks: function () {
+                var dt = new Date(2000, 0, 1);
+                dt.setUTCFullYear(2021);
+                Bridge.Test.NUnit.Assert.AreEqual(2021, dt.getUTCFullYear());
+            },
+            SetUtcFullYearWithTwoParametersWorks: function () {
+                var dt = new Date(2000, 0, 1);
+                dt.setUTCFullYear(2021, 7);
+                Bridge.Test.NUnit.Assert.AreEqual(2021, dt.getUTCFullYear());
+                Bridge.Test.NUnit.Assert.AreEqual(7, dt.getUTCMonth());
+            },
+            SetUtcFullYearWithThreeParametersWorks: function () {
+                var dt = new Date(2000, 0, 1);
+                dt.setUTCFullYear(2021, 7, 13);
+                Bridge.Test.NUnit.Assert.AreEqual(2021, dt.getUTCFullYear());
+                Bridge.Test.NUnit.Assert.AreEqual(7, dt.getUTCMonth());
+                Bridge.Test.NUnit.Assert.AreEqual(13, dt.getUTCDate());
+            },
+            SetUtcMonthWorks: function () {
+                var dt = new Date(2000, 0, 1);
+                dt = Bridge.ClientTest.SimpleTypes.DateTests.AddTimezoneMinutesOffset(dt);
+
+                dt.setUTCMonth(3);
+                Bridge.Test.NUnit.Assert.AreEqual(3, dt.getUTCMonth());
+            },
+            SetUtcDateWorks: function () {
+                var dt = new Date(2000, 0, 1);
+                dt.setUTCDate(12);
+                Bridge.Test.NUnit.Assert.AreEqual(12, dt.getUTCDate());
+            },
+            SetUtcHoursWorks: function () {
+                var dt = new Date(2000, 0, 1);
+                dt.setUTCHours(11);
+                Bridge.Test.NUnit.Assert.AreEqual(11, dt.getUTCHours());
+            },
+            SetUtcMinutesWorks: function () {
+                var dt = new Date(2000, 0, 1);
+                dt.setUTCMinutes(34);
+                Bridge.Test.NUnit.Assert.AreEqual(34, dt.getUTCMinutes());
+            },
+            SetUtcSecondsWorks: function () {
+                var dt = new Date(2000, 0, 1);
+                dt.setUTCSeconds(23);
+                Bridge.Test.NUnit.Assert.AreEqual(23, dt.getUTCSeconds());
+            },
+            SetUtcMillisecondsWorks: function () {
+                var dt = new Date(2000, 0, 1);
+                dt.setUTCMilliseconds(435);
+                Bridge.Test.NUnit.Assert.AreEqual(435, dt.getUTCMilliseconds());
+            },
+            GetHashCodeWorks: function () {
+                Bridge.Test.NUnit.Assert.AreEqual(Bridge.getHashCode(new Date(0)), Bridge.getHashCode(new Date(0)));
+                Bridge.Test.NUnit.Assert.AreEqual(Bridge.getHashCode(new Date(1)), Bridge.getHashCode(new Date(1)));
+                Bridge.Test.NUnit.Assert.AreNotEqual(Bridge.getHashCode(new Date(1)), Bridge.getHashCode(new Date(0)));
+                Bridge.Test.NUnit.Assert.True(System.Int64(Bridge.getHashCode(new Date(3000, 1, 1))).lt(System.Int64([-1,0])));
+            },
+            EqualsWorks: function () {
+                Bridge.Test.NUnit.Assert.True(Bridge.equals(new Date(0), new Date(0)));
+                Bridge.Test.NUnit.Assert.False(Bridge.equals(new Date(1), new Date(0)));
+                Bridge.Test.NUnit.Assert.False(Bridge.equals(new Date(0), new Date(1)));
+                Bridge.Test.NUnit.Assert.True(Bridge.equals(new Date(1), new Date(1)));
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.SimpleTypes.DecimalTests", {
         methods: {
             AssertIsDecimalAndEqualTo: function (v, d, message) {
@@ -38634,70 +39083,78 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.SimpleTypes.TimeSpanTests", {
         methods: {
-            TypePropertiesAreCorrect: function () {
+            TypePropertiesAreCorrect_SPI_1717: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("System.TimeSpan", Bridge.Reflection.getTypeFullName(System.TimeSpan));
+                Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isClass(System.TimeSpan));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IComparable$1(System.TimeSpan), System.TimeSpan));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IEquatable$1(System.TimeSpan), System.TimeSpan));
                 var d = new System.TimeSpan();
-                Bridge.Test.NUnit.Assert.True(Bridge.is(d, System.TimeSpan), "d is TimeSpan");
-                Bridge.Test.NUnit.Assert.True(Bridge.is(d, System.IComparable$1(System.TimeSpan)), "d is IComparable<TimeSpan>");
-                Bridge.Test.NUnit.Assert.True(Bridge.is(d, System.IEquatable$1(System.TimeSpan)), "d is IEquatable<TimeSpan>");
+                Bridge.Test.NUnit.Assert.True(Bridge.is(d, System.TimeSpan));
+                Bridge.Test.NUnit.Assert.True(Bridge.is(d, System.IComparable$1(System.TimeSpan)));
+                Bridge.Test.NUnit.Assert.True(Bridge.is(d, System.IEquatable$1(System.TimeSpan)));
+
+                var interfaces = Bridge.Reflection.getInterfaces(System.TimeSpan);
+                Bridge.Test.NUnit.Assert.AreEqual(3, interfaces.length);
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.TimeSpan), Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.TimeSpan), Function));
             },
             DefaultConstructorWorks: function () {
                 var time = new System.TimeSpan();
-                Bridge.Test.NUnit.Assert.True(System.Int64(0).equals(time.getTicks()));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64(0), time.getTicks());
             },
             DefaultValueWorks: function () {
                 var ts = Bridge.getDefaultValue(System.TimeSpan);
-                Bridge.Test.NUnit.Assert.True(System.Int64(0).equals(ts.getTicks()));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64(0), ts.getTicks());
             },
             ZeroWorks: function () {
                 var ts = System.TimeSpan.zero;
-                Bridge.Test.NUnit.Assert.True(System.Int64(0).equals(ts.getTicks()));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64(0), ts.getTicks());
             },
             CreatingInstanceReturnsTimeSpanWithZeroValue: function () {
                 var ts = Bridge.createInstance(System.TimeSpan);
-                Bridge.Test.NUnit.Assert.True(System.Int64(0).equals(ts.getTicks()));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64(0), ts.getTicks());
             },
             ParameterConstructorsWorks: function () {
                 var time = new System.TimeSpan(System.Int64(34567));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(time, System.TimeSpan), "ticks type");
-                Bridge.Test.NUnit.Assert.True(System.Int64(34567).equals(time.getTicks()), "ticks value");
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64(34567), time.getTicks(), "ticks value");
 
                 time = new System.TimeSpan(10, 20, 5);
                 Bridge.Test.NUnit.Assert.True(Bridge.is(time, System.TimeSpan), "h, m, s type");
-                Bridge.Test.NUnit.Assert.True(System.Int64([-1612154752,86]).equals(time.getTicks()), "h, m, s value");
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64([-1612154752,86]), time.getTicks(), "h, m, s value");
 
                 time = new System.TimeSpan(15, 10, 20, 5);
                 Bridge.Test.NUnit.Assert.True(Bridge.is(time, System.TimeSpan), "d, h, m, s type");
-                Bridge.Test.NUnit.Assert.True(System.Int64([471513216,3104]).equals(time.getTicks()), "d, h, m, s value");
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64([471513216,3104]), time.getTicks(), "d, h, m, s value");
 
                 time = new System.TimeSpan(15, 10, 20, 5, 14);
                 Bridge.Test.NUnit.Assert.True(Bridge.is(time, System.TimeSpan), "full type");
-                Bridge.Test.NUnit.Assert.True(System.Int64([471653216,3104]).equals(time.getTicks()), "full value");
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64([471653216,3104]), time.getTicks(), "full value");
             },
             FactoryMethodsWork: function () {
                 var time = System.TimeSpan.fromDays(3);
                 Bridge.Test.NUnit.Assert.True(Bridge.is(time, System.TimeSpan), "FromDays type");
-                Bridge.Test.NUnit.Assert.True(System.Int64([2134720512,603]).equals(time.getTicks()), "FromDays value");
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64([2134720512,603]), time.getTicks(), "FromDays value");
 
                 time = System.TimeSpan.fromHours(3);
                 Bridge.Test.NUnit.Assert.True(Bridge.is(time, System.TimeSpan), "FromHours type");
-                Bridge.Test.NUnit.Assert.True(System.Int64([625817600,25]).equals(time.getTicks()), "FromHours value");
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64([625817600,25]), time.getTicks(), "FromHours value");
 
                 time = System.TimeSpan.fromMinutes(3);
                 Bridge.Test.NUnit.Assert.True(Bridge.is(time, System.TimeSpan), "FromMinutes type");
-                Bridge.Test.NUnit.Assert.True(System.Int64(1800000000).equals(time.getTicks()), "FromMinutes value");
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64(1800000000), time.getTicks(), "FromMinutes value");
 
                 time = System.TimeSpan.fromSeconds(3);
                 Bridge.Test.NUnit.Assert.True(Bridge.is(time, System.TimeSpan), "FromSeconds type");
-                Bridge.Test.NUnit.Assert.True(System.Int64(30000000).equals(time.getTicks()), "FromSeconds value");
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64(30000000), time.getTicks(), "FromSeconds value");
 
                 time = System.TimeSpan.fromMilliseconds(3);
                 Bridge.Test.NUnit.Assert.True(Bridge.is(time, System.TimeSpan), "FromMilliseconds type");
-                Bridge.Test.NUnit.Assert.True(System.Int64(30000).equals(time.getTicks()), "FromMilliseconds value");
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64(30000), time.getTicks(), "FromMilliseconds value");
 
                 time = System.TimeSpan.fromTicks(System.Int64(3));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(time, System.TimeSpan), "FromTicks type");
-                Bridge.Test.NUnit.Assert.True(System.Int64(3).equals(time.getTicks()), "FromTicks value");
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64(3), time.getTicks(), "FromTicks value");
             },
             PropertiesWork: function () {
                 var time = new System.TimeSpan(15, 10, 20, 5, 14);
@@ -38711,7 +39168,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 this.AssertAlmostEqual(time.getTotalMinutes(), 22220.083566666668);
                 this.AssertAlmostEqual(time.getTotalSeconds(), 1333205.014);
                 this.AssertAlmostEqual(time.getTotalMilliseconds(), 1333205014.0);
-                Bridge.Test.NUnit.Assert.True(System.Int64([471653216,3104]).equals(time.getTicks()));
+                Bridge.Test.NUnit.Assert.AreEqual(System.Int64([471653216,3104]), time.getTicks());
             },
             CompareToWorks: function () {
                 var time1 = new System.TimeSpan(15, 10, 20, 5, 14);
@@ -38947,18 +39404,27 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
     Bridge.define("Bridge.ClientTest.SimpleTypes.UInt16Tests", {
         methods: {
-            TypePropertiesAreCorrect: function () {
+            TypePropertiesAreCorrect_SPI_1717: function () {
                 Bridge.Test.NUnit.Assert.True(Bridge.is(Bridge.box(0, System.UInt16), System.UInt16));
                 Bridge.Test.NUnit.Assert.False(Bridge.is(Bridge.box(0.5, System.Double, System.Double.format, System.Double.getHashCode), System.UInt16));
                 Bridge.Test.NUnit.Assert.False(Bridge.is(Bridge.box(-1, System.Int32), System.UInt16));
                 Bridge.Test.NUnit.Assert.False(Bridge.is(Bridge.box(65536, System.Int32), System.UInt16));
                 Bridge.Test.NUnit.Assert.AreEqual("System.UInt16", Bridge.Reflection.getTypeFullName(System.UInt16));
-
+                Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isClass(System.UInt16));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IComparable$1(System.UInt16), System.UInt16));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IEquatable$1(System.UInt16), System.UInt16));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IFormattable, System.UInt16));
                 var s = Bridge.box(0, System.UInt16);
                 Bridge.Test.NUnit.Assert.True(Bridge.is(s, System.UInt16));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(s, System.IComparable$1(System.UInt16)));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(s, System.IEquatable$1(System.UInt16)));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(s, System.IFormattable));
+
+                var interfaces = Bridge.Reflection.getInterfaces(System.UInt16);
+                Bridge.Test.NUnit.Assert.AreEqual(4, interfaces.length);
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.UInt16), Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.UInt16), Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Function));
             },
             CastsWork: function () {
                 var i1 = -1, i2 = 0, i3 = 234, i4 = 65535, i5 = 65536;
@@ -38977,25 +39443,25 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreStrictEqual(0, Bridge.Int.clipu16(ni5), "nullable 65536 unchecked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(null, Bridge.Int.clipu16(ni6), "null unchecked");
 
-                Bridge.Test.NUnit.Assert.Throws$4(function () {
-                    var b = Bridge.Int.check(i1, System.UInt16);
-                }, $asm.$.Bridge.ClientTest.SimpleTypes.UInt16Tests.f1);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
+                    var x = Bridge.Int.check(i1, System.UInt16);
+                }, "-1 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(0, Bridge.Int.check(i2, System.UInt16), "0 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(234, Bridge.Int.check(i3, System.UInt16), "234 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(65535, Bridge.Int.check(i4, System.UInt16), "65535 checked");
-                Bridge.Test.NUnit.Assert.Throws$4(function () {
-                    var b = Bridge.Int.check(i5, System.UInt16);
-                }, $asm.$.Bridge.ClientTest.SimpleTypes.UInt16Tests.f1);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
+                    var x = Bridge.Int.check(i5, System.UInt16);
+                }, "65536 checked");
 
-                Bridge.Test.NUnit.Assert.Throws$4(function () {
-                    var b = Bridge.Int.check(ni1, System.UInt16);
-                }, $asm.$.Bridge.ClientTest.SimpleTypes.UInt16Tests.f1);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
+                    var x = Bridge.Int.check(ni1, System.UInt16);
+                }, "nullable -1 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(0, Bridge.Int.check(ni2, System.UInt16), "nullable 0 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(234, Bridge.Int.check(ni3, System.UInt16), "nullable 234 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(65535, Bridge.Int.check(ni4, System.UInt16), "nullable 65535 checked");
-                Bridge.Test.NUnit.Assert.Throws$4(function () {
-                    var b = Bridge.Int.check(ni5, System.UInt16);
-                }, $asm.$.Bridge.ClientTest.SimpleTypes.UInt16Tests.f1);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
+                    var x = Bridge.Int.check(ni5, System.UInt16);
+                }, "nullable 65536 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(null, Bridge.Int.check(ni6, System.UInt16), "null checked");
             },
             GetDefaultValue: function (T) {
@@ -39017,10 +39483,16 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             FormatWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("123", System.UInt16.format((291), "x"));
             },
-            IFormattableToStringWorks: function () {
+            ToStringWithFormatWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("123", System.UInt16.format((291), "x"));
             },
-            TryParseWorks: function () {
+            ToStringWithFormatAndProviderWorks: function () {
+                Bridge.Test.NUnit.Assert.AreEqual("123", System.UInt16.format((291), "x", System.Globalization.CultureInfo.invariantCulture));
+            },
+            IFormattableToStringWorks: function () {
+                Bridge.Test.NUnit.Assert.AreEqual("123", Bridge.format(291, "x", System.Globalization.CultureInfo.invariantCulture));
+            },
+            TryParseWorks_SPI_1592: function () {
                 var numberResult = { };
                 var result = System.UInt16.tryParse("23445", numberResult);
                 Bridge.Test.NUnit.Assert.True(result);
@@ -39044,7 +39516,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 result = System.UInt16.tryParse("-1", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
+                // #1592
                 Bridge.Test.NUnit.Assert.AreEqual(-1, numberResult.v);
+                //Assert.AreEqual(0, numberResult);
 
                 result = System.UInt16.tryParse("2.5", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
@@ -39052,12 +39526,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             ParseWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual(23445, System.UInt16.parse("23445"));
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.UInt16Tests.f2);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.UInt16Tests.f3);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.UInt16Tests.f4);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.UInt16Tests.f5);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.UInt16Tests.f6);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.UInt16Tests.f7);
+                Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.UInt16Tests.f1);
+                Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentNullException, $asm.$.Bridge.ClientTest.SimpleTypes.UInt16Tests.f2);
+                Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.UInt16Tests.f3);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, $asm.$.Bridge.ClientTest.SimpleTypes.UInt16Tests.f4);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, $asm.$.Bridge.ClientTest.SimpleTypes.UInt16Tests.f5);
+                Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.UInt16Tests.f6);
             },
             ToStringWithoutRadixWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("123", (123).toString());
@@ -39104,42 +39578,49 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.ns("Bridge.ClientTest.SimpleTypes.UInt16Tests", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.SimpleTypes.UInt16Tests, {
-        f1: function (err) {
-            return Bridge.is(err, System.OverflowException);
-        },
-        f2: function () {
+        f1: function () {
             System.UInt16.parse("");
         },
-        f3: function () {
+        f2: function () {
             System.UInt16.parse(null);
         },
-        f4: function () {
+        f3: function () {
             System.UInt16.parse("notanumber");
         },
-        f5: function () {
+        f4: function () {
             System.UInt16.parse("65536");
         },
-        f6: function () {
+        f5: function () {
             System.UInt16.parse("-1");
         },
-        f7: function () {
+        f6: function () {
             System.UInt16.parse("2.5");
         }
     });
 
     Bridge.define("Bridge.ClientTest.SimpleTypes.UInt32Tests", {
         methods: {
-            TypePropertiesAreCorrect: function () {
+            TypePropertiesAreCorrect_SPI_1717: function () {
                 Bridge.Test.NUnit.Assert.False(Bridge.is(Bridge.box(0, System.Int32), System.UInt32));
                 Bridge.Test.NUnit.Assert.False(Bridge.is(Bridge.box(0.5, System.Double, System.Double.format, System.Double.getHashCode), System.UInt32));
                 Bridge.Test.NUnit.Assert.False(Bridge.is(Bridge.box(-1, System.Int32), System.UInt32));
                 Bridge.Test.NUnit.Assert.False(Bridge.is(System.Int64([0,1]), System.UInt32));
                 Bridge.Test.NUnit.Assert.AreEqual("System.UInt32", Bridge.Reflection.getTypeFullName(System.UInt32));
+                Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isClass(System.UInt32));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IComparable$1(System.UInt32), System.UInt32));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IEquatable$1(System.UInt32), System.UInt32));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IFormattable, System.UInt32));
                 var i = Bridge.box(0, System.UInt32);
                 Bridge.Test.NUnit.Assert.True(Bridge.is(i, System.UInt32));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(i, System.IComparable$1(System.UInt32)));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(i, System.IEquatable$1(System.UInt32)));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(i, System.IFormattable));
+
+                var interfaces = Bridge.Reflection.getInterfaces(System.UInt32);
+                Bridge.Test.NUnit.Assert.AreEqual(4, interfaces.length);
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.UInt32), Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.UInt32), Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Function));
             },
             CastsWork: function () {
                 var i1 = System.Int64(-1), i2 = System.Int64(0), i3 = System.Int64(234), i4 = System.Int64(4294967295), i5 = System.Int64([0,1]);
@@ -39158,25 +39639,25 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreStrictEqual(0, System.Int64.clipu32(ni5), "nullable 4294967296 unchecked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(null, System.Int64.clipu32(ni6), "null unchecked");
 
-                Bridge.Test.NUnit.Assert.Throws$4(function () {
-                    var b = System.Int64.check(i1, System.UInt32);
-                }, $asm.$.Bridge.ClientTest.SimpleTypes.UInt32Tests.f1);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
+                    var x = System.Int64.check(i1, System.UInt32);
+                }, "-1 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(0, System.Int64.check(i2, System.UInt32), "0 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(234, System.Int64.check(i3, System.UInt32), "234 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(4294967295, System.Int64.check(i4, System.UInt32), "4294967295 checked");
-                Bridge.Test.NUnit.Assert.Throws$4(function () {
-                    var b = System.Int64.check(i5, System.UInt32);
-                }, $asm.$.Bridge.ClientTest.SimpleTypes.UInt32Tests.f1);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
+                    var x = System.Int64.check(i5, System.UInt32);
+                }, "4294967296 checked");
 
-                Bridge.Test.NUnit.Assert.Throws$4(function () {
-                    var b = System.Int64.check(ni1, System.UInt32);
-                }, $asm.$.Bridge.ClientTest.SimpleTypes.UInt32Tests.f1);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
+                    var x = System.Int64.check(ni1, System.UInt32);
+                }, "nullable -1 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(0, System.Int64.check(ni2, System.UInt32), "nullable 0 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(234, System.Int64.check(ni3, System.UInt32), "nullable 234 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(4294967295, System.Int64.check(ni4, System.UInt32), "nullable 4294967295 checked");
-                Bridge.Test.NUnit.Assert.Throws$4(function () {
-                    var b = System.Int64.check(ni5, System.UInt32);
-                }, $asm.$.Bridge.ClientTest.SimpleTypes.UInt32Tests.f1);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
+                    var x = System.Int64.check(ni5, System.UInt32);
+                }, "nullable 4294967296 checked");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(null, System.Int64.check(ni6, System.UInt32), "null checked");
             },
             GetDefaultValue: function (T) {
@@ -39198,10 +39679,16 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             FormatWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("123", System.UInt32.format((291), "x"));
             },
-            IFormattableToStringWorks: function () {
+            ToStringWithFormatWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("123", System.UInt32.format((291), "x"));
             },
-            TryParseWorks: function () {
+            ToStringWithFormatAndProviderWorks: function () {
+                Bridge.Test.NUnit.Assert.AreEqual("123", System.UInt32.format((291), "x", System.Globalization.CultureInfo.invariantCulture));
+            },
+            IFormattableToStringWorks: function () {
+                Bridge.Test.NUnit.Assert.AreEqual("123", Bridge.format(291, "x", System.Globalization.CultureInfo.invariantCulture));
+            },
+            TryParseWorks_SPI_1592: function () {
                 var numberResult = { };
                 var result = System.UInt32.tryParse("23445", numberResult);
                 Bridge.Test.NUnit.Assert.True(result);
@@ -39221,7 +39708,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 result = System.UInt32.tryParse("-1", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
+                // #1592
                 Bridge.Test.NUnit.Assert.AreEqual(-1, numberResult.v);
+                //Assert.AreEqual(0, numberResult);
 
                 result = System.UInt32.tryParse("2.5", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
@@ -39229,12 +39718,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             ParseWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual(23445, System.UInt32.parse("23445"));
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.UInt32Tests.f2);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.UInt32Tests.f3);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.UInt32Tests.f4);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.UInt32Tests.f5);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.UInt32Tests.f6);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.UInt32Tests.f7);
+                Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.UInt32Tests.f1);
+                Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentNullException, $asm.$.Bridge.ClientTest.SimpleTypes.UInt32Tests.f2);
+                Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.UInt32Tests.f3);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, $asm.$.Bridge.ClientTest.SimpleTypes.UInt32Tests.f4);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, $asm.$.Bridge.ClientTest.SimpleTypes.UInt32Tests.f5);
+                Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.UInt32Tests.f6);
             },
             ToStringWithoutRadixWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("123", (123).toString());
@@ -39281,25 +39770,22 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     Bridge.ns("Bridge.ClientTest.SimpleTypes.UInt32Tests", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.SimpleTypes.UInt32Tests, {
-        f1: function (err) {
-            return Bridge.is(err, System.OverflowException);
-        },
-        f2: function () {
+        f1: function () {
             System.UInt32.parse("");
         },
-        f3: function () {
+        f2: function () {
             System.UInt32.parse(null);
         },
-        f4: function () {
+        f3: function () {
             System.UInt32.parse("notanumber");
         },
-        f5: function () {
+        f4: function () {
             System.UInt32.parse("4294967296");
         },
-        f6: function () {
+        f5: function () {
             System.UInt32.parse("-1");
         },
-        f7: function () {
+        f6: function () {
             System.UInt32.parse("2.5");
         }
     });
@@ -39318,41 +39804,59 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), actual.toString(), message);
             },
-            TypePropertiesAreCorrect: function () {
+            TypePropertiesAreCorrect_SPI_1717: function () {
                 Bridge.Test.NUnit.Assert.True(Bridge.is(System.UInt64(0), System.UInt64));
                 Bridge.Test.NUnit.Assert.False(Bridge.is(Bridge.box(0.5, System.Double, System.Double.format, System.Double.getHashCode), System.UInt64));
                 Bridge.Test.NUnit.Assert.AreEqual("System.UInt64", Bridge.Reflection.getTypeFullName(System.UInt64));
+                Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isClass(System.UInt64));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IComparable$1(System.UInt64), System.UInt64));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IEquatable$1(System.UInt64), System.UInt64));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IFormattable, System.UInt64));
                 var l = System.UInt64(0);
                 Bridge.Test.NUnit.Assert.True(Bridge.is(l, System.UInt64));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(l, System.IComparable$1(System.UInt64)));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(l, System.IEquatable$1(System.UInt64)));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(l, System.IFormattable));
+
+                var interfaces = Bridge.Reflection.getInterfaces(System.UInt64);
+                Bridge.Test.NUnit.Assert.AreEqual(4, interfaces.length);
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.UInt64), Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.UInt64), Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Function));
             },
             MinMaxValuesAreCorrect: function () {
                 this.AssertULong("0", System.UInt64.MinValue);
                 this.AssertULong("18446744073709551615", System.UInt64.MaxValue);
             },
             CastsWork: function () {
-                var i2 = System.Int64(0), i3 = System.Int64(234), i4 = System.Int64([-808,2147483647]);
-                var ni2 = System.Int64(0), ni3 = System.Int64(234), ni4 = System.Int64([-808,2147483647]), ni6 = System.Int64.lift(null);
+                var i1 = System.Int64(-1), i2 = System.Int64(0), i3 = System.Int64(234), i4 = System.Int64([-808,2147483647]);
+                var ni1 = System.Int64.lift(-1), ni2 = System.Int64(0), ni3 = System.Int64(234), ni4 = System.Int64([-808,2147483647]), ni6 = System.Int64.lift(null);
 
-                Bridge.Test.NUnit.Assert.True(System.UInt64(0).equals(System.Int64.clipu64(i2)), "0 unchecked");
-                Bridge.Test.NUnit.Assert.True(System.UInt64(234).equals(System.Int64.clipu64(i3)), "234 unchecked");
-                Bridge.Test.NUnit.Assert.True(System.UInt64(System.Int64([-808,2147483647])).equals(System.Int64.clipu64(i4)), "9223372036854775000 unchecked");
+                Bridge.Test.NUnit.Assert.True(System.Int64.toNumber(System.Int64.clipu64(i1)) > 1E+18, "-1 unchecked");
+                Bridge.Test.NUnit.Assert.AreEqual(System.UInt64(0), System.Int64.clipu64(i2), "0 unchecked");
+                Bridge.Test.NUnit.Assert.AreEqual(System.UInt64(234), System.Int64.clipu64(i3), "234 unchecked");
+                Bridge.Test.NUnit.Assert.AreEqual(System.UInt64([-808,2147483647]), System.Int64.clipu64(i4), "9223372036854775000 unchecked");
 
-                Bridge.Test.NUnit.Assert.True(System.Nullable.lifteq("equals", System.UInt64(0), System.Int64.clipu64(ni2)), "nullable 0 unchecked");
-                Bridge.Test.NUnit.Assert.True(System.Nullable.lifteq("equals", System.UInt64(234), System.Int64.clipu64(ni3)), "nullable 234 unchecked");
-                Bridge.Test.NUnit.Assert.True(System.Nullable.lifteq("equals", System.UInt64(System.Int64([-808,2147483647])), System.Int64.clipu64(ni4)), "nullable 9223372036854775000 unchecked");
-                Bridge.Test.NUnit.Assert.True(System.Nullable.lifteq("equals", System.UInt64.lift(null), System.Int64.clipu64(ni6)), "null unchecked");
+                Bridge.Test.NUnit.Assert.True(System.Nullable.gt(System.Int64.clipu64(ni1), 1E+18), "nullable -1 unchecked");
+                Bridge.Test.NUnit.Assert.AreEqual(System.UInt64(0), System.Int64.clipu64(ni2), "nullable 0 unchecked");
+                Bridge.Test.NUnit.Assert.AreEqual(System.UInt64(234), System.Int64.clipu64(ni3), "nullable 234 unchecked");
+                Bridge.Test.NUnit.Assert.AreEqual(System.UInt64([-808,2147483647]), System.Int64.clipu64(ni4), "nullable 9223372036854775000 unchecked");
+                Bridge.Test.NUnit.Assert.AreEqual(null, System.Int64.clipu64(ni6), "null unchecked");
 
-                Bridge.Test.NUnit.Assert.True(System.UInt64(0).equals(System.Int64.check(i2, System.UInt64)), "0 checked");
-                Bridge.Test.NUnit.Assert.True(System.UInt64(234).equals(System.Int64.check(i3, System.UInt64)), "234 checked");
-                Bridge.Test.NUnit.Assert.True(System.UInt64(System.Int64([-808,2147483647])).equals(System.Int64.check(i4, System.UInt64)), "9223372036854775000 checked");
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
+                    var x = System.Int64.check(i1, System.UInt64);
+                }, "-1 checked");
+                Bridge.Test.NUnit.Assert.AreEqual(System.UInt64(0), System.Int64.check(i2, System.UInt64), "0 checked");
+                Bridge.Test.NUnit.Assert.AreEqual(System.UInt64(234), System.Int64.check(i3, System.UInt64), "234 checked");
+                Bridge.Test.NUnit.Assert.AreEqual(System.UInt64([-808,2147483647]), System.Int64.check(i4, System.UInt64), "9223372036854775000 checked");
 
-                Bridge.Test.NUnit.Assert.True(System.Nullable.lifteq("equals", System.UInt64(0), System.Int64.check(ni2, System.UInt64)), "nullable 0 checked");
-                Bridge.Test.NUnit.Assert.True(System.Nullable.lifteq("equals", System.UInt64(234), System.Int64.check(ni3, System.UInt64)), "nullable 234 checked");
-                Bridge.Test.NUnit.Assert.True(System.Nullable.lifteq("equals", System.UInt64(System.Int64([-808,2147483647])), System.Int64.check(ni4, System.UInt64)), "nullable 9223372036854775000 checked");
-                Bridge.Test.NUnit.Assert.True(System.Nullable.lifteq("equals", System.UInt64.lift(null), System.Int64.check(ni6, System.UInt64)), "null checked");
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
+                    var x = System.Int64.check(ni1, System.UInt64);
+                }, "nullable -1 checked");
+                Bridge.Test.NUnit.Assert.AreEqual(System.UInt64(0), System.Int64.check(ni2, System.UInt64), "nullable 0 checked");
+                Bridge.Test.NUnit.Assert.AreEqual(System.UInt64(234), System.Int64.check(ni3, System.UInt64), "nullable 234 checked");
+                Bridge.Test.NUnit.Assert.AreEqual(System.UInt64([-808,2147483647]), System.Int64.check(ni4, System.UInt64), "nullable 9223372036854775000 checked");
+                Bridge.Test.NUnit.Assert.AreEqual(null, System.Int64.check(ni6, System.UInt64), "null checked");
             },
             OverflowWorks: function () {
                 var min = System.UInt64.MinValue;
@@ -39410,22 +39914,28 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 return Bridge.getDefaultValue(T);
             },
             DefaultValueIs0: function () {
-                Bridge.Test.NUnit.Assert.True(System.UInt64(0).equals(this.GetDefaultValue(System.UInt64)));
+                Bridge.Test.NUnit.Assert.AreEqual(System.UInt64(0), this.GetDefaultValue(System.UInt64));
             },
             DefaultConstructorReturnsZero: function () {
-                Bridge.Test.NUnit.Assert.True(System.UInt64(0).equals(new System.UInt64()));
+                Bridge.Test.NUnit.Assert.AreEqual(System.UInt64(0), new System.UInt64());
             },
             CreatingInstanceReturnsZero: function () {
-                Bridge.Test.NUnit.Assert.True(System.UInt64(0).equals(Bridge.createInstance(System.UInt64)));
+                Bridge.Test.NUnit.Assert.AreEqual(System.UInt64(0), Bridge.createInstance(System.UInt64));
             },
             ConstantsWork: function () {
-                Bridge.Test.NUnit.Assert.True(true);
+                Bridge.Test.NUnit.Assert.AreEqual(System.UInt64(0), System.UInt64.MinValue);
             },
             FormatWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("123", (System.UInt64(291)).format("x"));
             },
-            IFormattableToStringWorks: function () {
+            ToStringWithFormatWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("123", (System.UInt64(291)).toString("x"));
+            },
+            ToStringWithFormatAndProviderWorks: function () {
+                Bridge.Test.NUnit.Assert.AreEqual("123", (System.UInt64(291)).format("x", System.Globalization.CultureInfo.invariantCulture));
+            },
+            IFormattableToStringWorks: function () {
+                Bridge.Test.NUnit.Assert.AreEqual("123", Bridge.format(System.UInt64(291), "x", System.Globalization.CultureInfo.invariantCulture));
             },
             CastingOfLargeValuesToUInt64Works_SPI_1591: function () {
                 var d1 = 5000000000.5, d2 = -d1;
@@ -39435,46 +39945,46 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             DivisionOfLargeUInt64Works: function () {
                 var v1 = System.UInt64(System.Int64([-1539607552,11])), v2 = System.UInt64(3);
-                Bridge.Test.NUnit.Assert.True(System.UInt64(System.Int64([-513202518,3])).equals((v1.div(v2))));
+                Bridge.Test.NUnit.Assert.AreEqual(System.UInt64([-513202518,3]), v1.div(v2));
             },
             TryParseWorks: function () {
                 var numberResult = { };
                 var result = System.UInt64.tryParse("23445", numberResult);
                 Bridge.Test.NUnit.Assert.True(result);
-                Bridge.Test.NUnit.Assert.True(System.UInt64(23445).equals(numberResult.v));
+                Bridge.Test.NUnit.Assert.AreEqual(System.UInt64(23445), numberResult.v);
 
                 result = System.UInt64.tryParse("", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
-                Bridge.Test.NUnit.Assert.True(System.UInt64(0).equals(numberResult.v));
+                Bridge.Test.NUnit.Assert.AreEqual(System.UInt64(0), numberResult.v);
 
                 result = System.UInt64.tryParse(null, numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
-                Bridge.Test.NUnit.Assert.True(System.UInt64(0).equals(numberResult.v));
+                Bridge.Test.NUnit.Assert.AreEqual(System.UInt64(0), numberResult.v);
 
                 result = System.UInt64.tryParse("notanumber", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
-                Bridge.Test.NUnit.Assert.True(System.UInt64(0).equals(numberResult.v));
+                Bridge.Test.NUnit.Assert.AreEqual(System.UInt64(0), numberResult.v);
 
                 result = System.UInt64.tryParse("-1", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
-                Bridge.Test.NUnit.Assert.True(System.UInt64(0).equals(numberResult.v));
+                Bridge.Test.NUnit.Assert.AreEqual(System.UInt64(0), numberResult.v);
 
                 result = System.UInt64.tryParse("2.5", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
-                Bridge.Test.NUnit.Assert.True(System.UInt64(0).equals(numberResult.v));
+                Bridge.Test.NUnit.Assert.AreEqual(System.UInt64(0), numberResult.v);
 
                 result = System.UInt64.tryParse("100000000000000000000", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
-                Bridge.Test.NUnit.Assert.True(numberResult.v.equals(System.UInt64(0)));
+                Bridge.Test.NUnit.Assert.AreEqual(System.UInt64(0), numberResult.v);
             },
             ParseWorks: function () {
-                Bridge.Test.NUnit.Assert.True(System.UInt64(23445).equals(System.UInt64.parse("23445")));
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.UInt64Tests.f2);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.UInt64Tests.f3);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.UInt64Tests.f4);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.UInt64Tests.f5);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.UInt64Tests.f6);
-                Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.UInt64Tests.f7);
+                Bridge.Test.NUnit.Assert.AreEqual(System.UInt64(23445), System.UInt64.parse("23445"));
+                Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.UInt64Tests.f2);
+                Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentNullException, $asm.$.Bridge.ClientTest.SimpleTypes.UInt64Tests.f3);
+                Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.UInt64Tests.f4);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, $asm.$.Bridge.ClientTest.SimpleTypes.UInt64Tests.f5);
+                Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.UInt64Tests.f6);
+                Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, $asm.$.Bridge.ClientTest.SimpleTypes.UInt64Tests.f7);
             },
             ToStringWithoutRadixWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("123", (System.UInt64(123)).toString());
@@ -41439,6 +41949,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             TypePropertiesAreCorrect: function () {
                 var re = new RegExp("");
                 Bridge.Test.NUnit.Assert.AreEqual("RegExp", Bridge.Reflection.getTypeFullName(RegExp));
+                //Assert.AreEqual(typeof(Regex).IsClass, true);
                 Bridge.Test.NUnit.Assert.True(Bridge.hasValue(re));
             },
             StringOnlyConstructorWorks: function () {

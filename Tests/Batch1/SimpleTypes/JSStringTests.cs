@@ -3,8 +3,8 @@ using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.SimpleTypes
 {
-    [Category(Constants.MODULE_STRING)]
-    [TestFixture(TestNameFormat = "JsString - {0}")]
+    [Category(Constants.MODULE_HTML5)]
+    [TestFixture(TestNameFormat = "String - {0}")]
     public class JsStringTests
     {
         // Not C# API #2392

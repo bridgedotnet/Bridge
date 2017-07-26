@@ -2,9 +2,10 @@ using Bridge.Html5;
 using Bridge.Test.NUnit;
 using System;
 
-namespace Bridge.ClientTest.Batch4.SimpleTypes
+namespace Bridge.ClientTest.SimpleTypes
 {
-    [TestFixture(TestNameFormat = "DateTests - {0}")]
+    [Category(Constants.MODULE_HTML5)]
+    [TestFixture(TestNameFormat = "Date - {0}")]
     public class DateTests
     {
         [Test]

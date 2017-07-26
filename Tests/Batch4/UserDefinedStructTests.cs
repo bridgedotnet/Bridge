@@ -8,78 +8,6 @@ namespace Bridge.ClientTest.Batch4
     public class UserDefinedStructTests
     {
 #pragma warning disable 649
-
-        private struct S1
-        {
-            public readonly int I;
-
-            public S1(int i)
-            {
-                I = i;
-            }
-        }
-
-        private struct S2
-        {
-            public readonly int I;
-            public readonly double D;
-            public readonly DateTime DT;
-            public readonly object O;
-            public readonly int T;
-        }
-
-        private struct S2G<TT>
-        {
-            public readonly int I;
-            public readonly double D;
-            public readonly DateTime DT;
-            public readonly object O;
-            public readonly TT T;
-        }
-
-        private struct S3
-        {
-            public readonly int I1, I2;
-            public static int StaticField;
-
-            public S3(int i1, int i2)
-            {
-                I1 = i1;
-                I2 = i2;
-            }
-        }
-
-        private struct S4
-        {
-            public readonly int I1, I2;
-
-            public S4(int i1, int i2)
-            {
-                I1 = i1;
-                I2 = i2;
-            }
-        }
-
-        private struct S5
-        {
-            public readonly int I;
-
-            public S5(int i)
-            {
-                I = i;
-            }
-
-            public override int GetHashCode()
-            {
-                return I + 1;
-            }
-
-            public override bool Equals(object o)
-            {
-                return Math.Abs(((S5)o).I - I) <= 1;
-            }
-        }
-
         private struct S6
         {
             [Name("i")]
@@ -158,11 +86,6 @@ namespace Bridge.ClientTest.Batch4
         private struct MS2
         {
             public int i;
-        }
-
-        private struct MS3<T>
-        {
-            public T t;
         }
 
         private struct MS4

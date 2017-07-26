@@ -2,8 +2,8 @@
 
 namespace Bridge.ClientTest
 {
-    [Category(Constants.MODULE_SERIALIZATION)]
-    [TestFixture]
+    [Category(Constants.MODULE_HTML5)]
+    [TestFixture(TestNameFormat = "JSON - {0}")]
     public class JsonTests
     {
         // #1574

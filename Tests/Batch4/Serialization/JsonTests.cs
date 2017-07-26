@@ -11,13 +11,6 @@ namespace Bridge.ClientTest.Batch4.Serialization
     {
         // #1574
         //[Serializable]
-        private class TestClass1
-        {
-            public int i;
-        }
-
-        // #1574
-        //[Serializable]
         private class TestClass2
         {
             public int i;
@@ -50,7 +43,6 @@ namespace Bridge.ClientTest.Batch4.Serialization
             Assert.AreEqual("test", o.s);
         }
 
-        // TODO Fix test NEWCI Run client tests to see the test errors
         [Test]
         public void NonGenericParseWithCallbackWorks_SPI_1574()
         {
@@ -74,7 +66,6 @@ namespace Bridge.ClientTest.Batch4.Serialization
             Assert.AreEqual("test", vs);
         }
 
-        // TODO Fix test NEWCI Run client tests to see the test errors
         [Test]
         public void GenericParseWithCallbackWorks_SPI_1574()
         {
