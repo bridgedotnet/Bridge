@@ -35005,12 +35005,24 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             SetRuCulture: function () {
                 System.Globalization.CultureInfo.setCurrentCulture(System.Globalization.CultureInfo.getCultureInfo("ru-RU"));
             },
-            TypePropertiesAreCorrect: function () {
+            TypePropertiesAreCorrect_SPI_1717: function () {
                 Bridge.Test.NUnit.Assert.True(Bridge.is(Bridge.box(0.5, System.Double, System.Double.format, System.Double.getHashCode), System.Double));
                 Bridge.Test.NUnit.Assert.AreEqual("System.Double", Bridge.Reflection.getTypeFullName(System.Double));
+                Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isClass(System.Double));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IComparable$1(System.Double), System.Double));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IEquatable$1(System.Double), System.Double));
+                Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IFormattable, System.Double));
                 var d = Bridge.box(0.0, System.Double, System.Double.format, System.Double.getHashCode);
                 Bridge.Test.NUnit.Assert.True(Bridge.is(d, System.Double));
+                Bridge.Test.NUnit.Assert.True(Bridge.is(d, System.IComparable$1(System.Double)));
+                Bridge.Test.NUnit.Assert.True(Bridge.is(d, System.IEquatable$1(System.Double)));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(d, System.IFormattable));
+
+                var interfaces = Bridge.Reflection.getInterfaces(System.Double);
+                Bridge.Test.NUnit.Assert.AreEqual(4, interfaces.length);
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.Double), Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.Double), Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Function));
             },
             GetDefaultValue: function (T) {
                 return Bridge.getDefaultValue(T);
@@ -35023,7 +35035,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             ConstantsWork: function () {
                 var zero = 0;
+                Bridge.Test.NUnit.Assert.True(System.Double.min < System.Nullable.getValue(Bridge.cast(Bridge.unbox(Bridge.box(-1.7E+308, System.Double, System.Double.format, System.Double.getHashCode)), System.Double)), "MinValue should be correct");
                 Bridge.Test.NUnit.Assert.True(System.Double.max > System.Nullable.getValue(Bridge.cast(Bridge.unbox(Bridge.box(1.7E+308, System.Double, System.Double.format, System.Double.getHashCode)), System.Double)), "MaxValue should be correct");
+                // Not C# API
+                //Assert.AreEqual(double.JsMinValue, 5e-324, "MinValue should be correct");
                 Bridge.Test.NUnit.Assert.AreEqual(4.94065645841247E-324, 4.94065645841247E-324, "MinValue should be correct");
                 Bridge.Test.NUnit.Assert.True(isNaN(Number.NaN), "NaN should be correct");
                 Bridge.Test.NUnit.Assert.AreStrictEqual(1 / zero, Number.POSITIVE_INFINITY, "PositiveInfinity should be correct");
@@ -35035,8 +35050,17 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             FormatWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("123", System.Double.format((291.0), "x"));
             },
+            ToStringWithFormatWorks: function () {
+                Bridge.Test.NUnit.Assert.AreEqual("123", System.Double.format((291.0), "x"));
+            },
+            ToStringWithFormatAndProviderWorks: function () {
+                Bridge.Test.NUnit.Assert.AreEqual("123", System.Double.format((291.0), "x", System.Globalization.CultureInfo.invariantCulture));
+            },
             IFormattableToStringWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("123", System.Double.format((291.0), "x"));
+            },
+            IFormattableToStringWithCultureInfoWorks: function () {
+                Bridge.Test.NUnit.Assert.AreEqual("123", Bridge.format(291.0, "x", System.Globalization.CultureInfo.invariantCulture));
             },
             ToStringWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("123", System.Double.format((123.0)));
@@ -35059,8 +35083,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             ToPrecisionWithPrecisionWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("1.2e+4", (12345.0).toPrecision(2));
             },
-            IsPositiveInfinityWorks: function () {
+            IsPositiveInfinityWorks_SPI_1600: function () {
                 var inf = Infinity;
+
+                // #1600
+                Bridge.Test.NUnit.Assert.True((inf === Number.POSITIVE_INFINITY), "inf");
                 Bridge.Test.NUnit.Assert.False((-inf === Number.POSITIVE_INFINITY), "-inf");
                 Bridge.Test.NUnit.Assert.False((0.0 === Number.POSITIVE_INFINITY), "0.0");
                 Bridge.Test.NUnit.Assert.False((Number.NaN === Number.POSITIVE_INFINITY), "Double.NaN");
@@ -35103,11 +35130,16 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.False(System.Double.equals((0.0), Bridge.box(0.5, System.Double, System.Double.format, System.Double.getHashCode)));
                 Bridge.Test.NUnit.Assert.True(System.Double.equals((1.0), Bridge.box(1.0, System.Double, System.Double.format, System.Double.getHashCode)));
             },
-            DoubleEqualsWorks: function () {
+            IEquatableEqualsWorks: function () {
                 Bridge.Test.NUnit.Assert.True((0.0) === 0.0);
                 Bridge.Test.NUnit.Assert.False((1.0) === 0.0);
                 Bridge.Test.NUnit.Assert.False((0.0) === 0.5);
                 Bridge.Test.NUnit.Assert.True((1.0) === 1.0);
+
+                Bridge.Test.NUnit.Assert.True(Bridge.equalsT(0.0, 0.0, System.Double));
+                Bridge.Test.NUnit.Assert.False(Bridge.equalsT(1.0, 0.0, System.Double));
+                Bridge.Test.NUnit.Assert.False(Bridge.equalsT(0.0, 0.5, System.Double));
+                Bridge.Test.NUnit.Assert.True(Bridge.equalsT(1.0, 1.0, System.Double));
             },
             CompareToWorks: function () {
                 Bridge.Test.NUnit.Assert.True(Bridge.compare((0.0), 0.0) === 0);

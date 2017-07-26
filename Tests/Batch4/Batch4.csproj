@@ -76,7 +76,6 @@
     <Compile Include="SimpleTypes\Int64Tests.cs" />
     <Compile Include="SimpleTypes\Int32Tests.cs" />
     <Compile Include="SimpleTypes\Int16Tests.cs" />
-    <Compile Include="SimpleTypes\DoubleTests.cs" />
     <Compile Include="DelegateTests.cs" />
     <Compile Include="SimpleTypes\DecimalTests.cs" />
     <Compile Include="SimpleTypes\StringTests.cs" />
