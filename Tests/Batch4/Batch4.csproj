@@ -62,7 +62,6 @@
     <Compile Include="LazyTests.cs" />
     <Compile Include="Threading\Tasks\PromiseTests.cs" />
     <Compile Include="Threading\Tasks\TaskTests.cs" />
-    <Compile Include="SimpleTypes\TimeSpanTests.cs" />
     <Compile Include="SimpleTypes\ByteTests.cs" />
     <Compile Include="Serialization\JsonTests.cs" />
     <Compile Include="Text\RegularExpressions\RegexTests.cs" />
