@@ -64,7 +64,6 @@
     <Compile Include="Threading\Tasks\TaskTests.cs" />
     <Compile Include="SimpleTypes\ByteTests.cs" />
     <Compile Include="Serialization\JsonTests.cs" />
-    <Compile Include="Text\RegularExpressions\RegexTests.cs" />
     <Compile Include="SimpleTypes\UInt16Tests.cs" />
     <Compile Include="SimpleTypes\UInt32Tests.cs" />
     <Compile Include="SimpleTypes\SByteTests.cs" />
