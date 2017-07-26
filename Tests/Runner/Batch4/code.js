@@ -559,6 +559,29 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.DateTests", {
+        methods: {
+            ParseWorks_SPI_1624: function () {
+                // #1624
+                var utc = Date.UTC(2017, 7, 12);
+                var local = (new Date(2017, 7, 12)).valueOf();
+                var offset = utc - local;
+
+                var d1 = Date.parse("Aug 12, 2012");
+                var d2 = Date.parse("1970-01-01");
+                var d3 = Date.parse("March 7, 2014");
+                var d4 = Date.parse("Wed, 09 Aug 1995 00:00:00 GMT");
+                var d5 = Date.parse("Thu, 01 Jan 1970 00:00:00 GMT-0400");
+
+                Bridge.Test.NUnit.Assert.AreEqual(1344729600000.0 - offset, d1);
+                Bridge.Test.NUnit.Assert.AreEqual(0.0, d2);
+                Bridge.Test.NUnit.Assert.AreEqual(1394150400000.0 - offset, d3);
+                Bridge.Test.NUnit.Assert.AreEqual(807926400000.0, d4);
+                Bridge.Test.NUnit.Assert.AreEqual(14400000.0, d5);
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.DecimalTests", {
         methods: {
             AssertIsDecimalAndEqualTo: function (v, d) {
