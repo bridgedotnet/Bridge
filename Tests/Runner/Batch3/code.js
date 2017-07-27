@@ -23889,6 +23889,24 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2962", {
+        statics: {
+            methods: {
+                TestGenericMethodIdentifier: function () {
+                    new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2962.Class2().Method2();
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2962.Class1", {
+        methods: {
+            Method1: function (T, parameter1) {
+                Bridge.Test.NUnit.Assert.AreEqual("parameter1", parameter1);
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992", {
         statics: {
             methods: {
@@ -33823,6 +33841,15 @@ Bridge.$N1391Result =                     r;
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived25", {
         inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2874.Derived1]
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2962.Class2", {
+        inherits: [Bridge.ClientTest.Batch3.BridgeIssues.Bridge2962.Class1],
+        methods: {
+            Method2: function () {
+                this.Method1(System.String, "parameter1");
+            }
+        }
     });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge304", {
