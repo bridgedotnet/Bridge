@@ -1236,6 +1236,36 @@ namespace Bridge.Html5
     public class KeyboardEventInit : UIEventInit
     {
         /// <summary>
+        /// optional and defaulting to "", of type DOMString, that sets the value of KeyboardEvent.key.
+        /// </summary>
+        public string Key;
+
+        /// <summary>
+        /// optional and defaulting to "", of type DOMString, that sets the value of KeyboardEvent.code.
+        /// </summary>
+        public string Code;
+
+        /// <summary>
+        /// optional and defaulting to 0, of type unsigned long, that sets the value of KeyboardEvent.location.
+        /// </summary>
+        public long Location;
+
+        /// <summary>
+        /// optional and defaulting to false, of type Boolean, that sets the value of KeyboardEvent.repeat.
+        /// </summary>
+        public bool Repeat;
+
+        /// <summary>
+        /// optional and defaulting to false, of type Boolean, that sets the value of KeyboardEvent.isComposing.
+        /// </summary>
+        public bool IsComposing;
+
+        /// <summary>
+        /// optional and defaulting to 0, of type unsigned long, that sets the value of the deprecated KeyboardEvent.which.
+        /// </summary>
+        public long Which;
+
+        /// <summary>
         /// Indicates whether the ALT key was pressed when the event fired.
         /// </summary>
         public bool AltKey;
