@@ -601,6 +601,7 @@
     <Compile Include="BridgeIssues\2900\N2911.cs" />
     <Compile Include="BridgeIssues\2900\N2915.cs" />
     <Compile Include="BridgeIssues\2900\N2916.cs" />
+    <Compile Include="BridgeIssues\2900\N2955.cs" />
     <Compile Include="BridgeIssues\2900\N2992.cs" />
     <Compile Include="BridgeIssues\TestBridgeIssues.cs" />
     <Compile Include="Utilities\BrowserHelper.cs" />

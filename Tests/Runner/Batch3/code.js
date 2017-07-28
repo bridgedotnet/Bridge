@@ -12916,7 +12916,7 @@ Bridge.$N1391Result =                     r;
             methods: {
                 TestAccessEnumInAnotherClassUsingStatic: function () {
                     Bridge.Test.NUnit.Assert.AreEqual(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2024.Class2.Options.Hello);
-                    Bridge.Test.NUnit.Assert.AreEqual("Test", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2024.Class2.Inner.$Name);
+                    Bridge.Test.NUnit.Assert.AreEqual("Test", Bridge.ClientTest.Batch3.BridgeIssues.Bridge2024.Class2.Inner.Name);
                 }
             }
         }
@@ -12927,7 +12927,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2024.Class2.Inner", {
         statics: {
             props: {
-                $Name: {
+                Name: {
                     get: function () {
                         return "Test";
                     }
@@ -23889,6 +23889,36 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2955", {
+        statics: {
+            methods: {
+                TestNestedClassName: function () {
+                    Bridge.Test.NUnit.Assert.AreEqual(2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2955.Validation.Options.Name.Minimum);
+                    Bridge.Test.NUnit.Assert.AreEqual(400, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2955.Validation.Options.Name.Maximum);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2955.Validation");
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2955.Validation.Options");
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2955.Validation.Options.Name", {
+        statics: {
+            fields: {
+                Minimum: 0,
+                Maximum: 0
+            },
+            ctors: {
+                init: function () {
+                    this.Minimum = 2;
+                    this.Maximum = 400;
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992", {
         statics: {
             methods: {
@@ -29850,8 +29880,8 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestUseCase: function () {
-                    var i = Bridge.ClientTest.Batch3.BridgeIssues.Bridge881A.$Name;
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge881A.$Name, i);
+                    var i = Bridge.ClientTest.Batch3.BridgeIssues.Bridge881A.Name;
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge881A.Name, i);
                 }
             }
         }
@@ -29861,7 +29891,7 @@ Bridge.$N1391Result =                     r;
         $kind: "enum",
         statics: {
             fields: {
-                $Name: 0
+                Name: 0
             }
         }
     });

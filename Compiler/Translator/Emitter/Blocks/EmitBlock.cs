@@ -313,6 +313,12 @@ namespace Bridge.Translator
                     this.Indent();
                 }
 
+                var name = BridgeTypes.ToJsName(type.Type, this.Emitter, true, true, true);
+                if (type.Type.DeclaringType != null && JS.Reserved.StaticNames.Any(n => String.Equals(name, n, StringComparison.InvariantCulture)))
+                {
+                    throw new EmitterException(type.TypeDeclaration, "Nested class cannot have such name: " + name + ". Please rename it.");
+                }
+
                 new ClassBlock(this.Emitter, this.Emitter.TypeInfo).Emit();
                 this.Emitter.Translator.Plugins.AfterTypeEmit(this.Emitter, type);
 
