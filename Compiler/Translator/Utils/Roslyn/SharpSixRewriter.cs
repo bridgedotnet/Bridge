@@ -231,11 +231,14 @@ namespace Bridge.Translator
         {
             var method = this.semanticModel.GetSymbolInfo(node).Symbol as IMethodSymbol;
             var spanStart = node.SpanStart;
+            var si = node.ArgumentList.Arguments.Count > 0 ? semanticModel.GetSymbolInfo(node.ArgumentList.Arguments[0].Expression) : default(SymbolInfo);
+            var costValue = (string)semanticModel.GetConstantValue(node).Value;
+
             node = (InvocationExpressionSyntax)base.VisitInvocationExpression(node);
             if (node.Expression is IdentifierNameSyntax &&
                 ((IdentifierNameSyntax)node.Expression).Identifier.Text == "nameof")
             {
-                string name = SyntaxHelper.GetSymbolName(node, semanticModel);
+                string name = SyntaxHelper.GetSymbolName(node, si, costValue, semanticModel);
                 return SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal(name));
             }
             else
