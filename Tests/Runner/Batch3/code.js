@@ -22,10 +22,10 @@ var Bridge2874Base = (function () {
 
 /**
  * Bridge Test library - test github issues up to #1999
- * @version 16.0.0-rc
+ * @version 16.0.0
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2017 Object.NET, Inc.
- * @compiler Bridge.NET 16.0.0-rc
+ * @compiler Bridge.NET 16.0.0
  */
 Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     "use strict";
