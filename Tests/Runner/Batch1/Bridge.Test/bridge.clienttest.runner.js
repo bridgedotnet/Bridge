@@ -2228,9 +2228,13 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("Char - ToLowerWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CharTests.ToLowerWorks);
             QUnit.test("Char - ToUpperWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CharTests.ToUpperWorks);
             QUnit.test("Char - IsDigitWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CharTests.IsDigitWorks);
-            QUnit.test("Char - IsWhiteSpaceWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CharTests.IsWhiteSpaceWorks);
             QUnit.test("Char - IsDigitWithStringAndIndexWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CharTests.IsDigitWithStringAndIndexWorks);
+            QUnit.test("Char - IsWhiteSpaceWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CharTests.IsWhiteSpaceWorks);
             QUnit.test("Char - IsWhiteSpaceWithStringAndIndexWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CharTests.IsWhiteSpaceWithStringAndIndexWorks);
+            QUnit.test("Char - IsPunctuationWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CharTests.IsPunctuationWorks);
+            QUnit.test("Char - IsPunctuationWithStringAndIndexWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CharTests.IsPunctuationWithStringAndIndexWorks);
+            QUnit.test("Char - IsLetterWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CharTests.IsLetterWorks);
+            QUnit.test("Char - IsLetterWithStringAndIndexWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CharTests.IsLetterWithStringAndIndexWorks);
             QUnit.test("Decimal - TypePropertiesAreCorrect_SPI_1717", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.TypePropertiesAreCorrect_SPI_1717);
             QUnit.test("Decimal - DefaultValueIsDecimal0", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.DefaultValueIsDecimal0);
             QUnit.test("Decimal - CreatingInstanceReturnsZero", Bridge.Test.Runtime.BridgeClientTestRunner.DecimalTests.CreatingInstanceReturnsZero);
@@ -5161,20 +5165,40 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                     var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsDigitWorks()", $t.Line = "240", $t));
                     t.Fixture.IsDigitWorks();
                 },
-                IsWhiteSpaceWorks: function (assert) {
-                    var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsWhiteSpaceWorks()", $t.Line = "248", $t));
-                    t.Fixture.IsWhiteSpaceWorks();
-                },
                 IsDigitWithStringAndIndexWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsDigitWithStringAndIndexWorks()", $t.Line = "256", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsDigitWithStringAndIndexWorks()", $t.Line = "249", $t));
                     t.Fixture.IsDigitWithStringAndIndexWorks();
+                },
+                IsWhiteSpaceWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsWhiteSpaceWorks()", $t.Line = "263", $t));
+                    t.Fixture.IsWhiteSpaceWorks();
                 },
                 IsWhiteSpaceWithStringAndIndexWorks: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsWhiteSpaceWithStringAndIndexWorks()", $t.Line = "268", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsWhiteSpaceWithStringAndIndexWorks()", $t.Line = "272", $t));
                     t.Fixture.IsWhiteSpaceWithStringAndIndexWorks();
+                },
+                IsPunctuationWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsPunctuationWorks()", $t.Line = "286", $t));
+                    t.Fixture.IsPunctuationWorks();
+                },
+                IsPunctuationWithStringAndIndexWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsPunctuationWithStringAndIndexWorks()", $t.Line = "296", $t));
+                    t.Fixture.IsPunctuationWithStringAndIndexWorks();
+                },
+                IsLetterWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsLetterWorks()", $t.Line = "307", $t));
+                    t.Fixture.IsLetterWorks();
+                },
+                IsLetterWithStringAndIndexWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.CharTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CharTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "IsLetterWithStringAndIndexWorks()", $t.Line = "316", $t));
+                    t.Fixture.IsLetterWithStringAndIndexWorks();
                 }
             }
         },
