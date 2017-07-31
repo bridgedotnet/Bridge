@@ -414,8 +414,7 @@ namespace Bridge.Translator
                 if (rr != null)
                 {
                     if (binaryOperatorExpression.Operator == BinaryOperatorType.Multiply &&
-                        !(block.Emitter.IsJavaScriptOverflowMode ||
-                          ConversionBlock.InsideOverflowContext(block.Emitter, binaryOperatorExpression)) &&
+                        !(block.Emitter.IsJavaScriptOverflowMode && !ConversionBlock.InsideOverflowContext(block.Emitter, binaryOperatorExpression)) &&
                         (
                             (Helpers.IsInteger32Type(leftResolverResult.Type, block.Emitter.Resolver) &&
                             Helpers.IsInteger32Type(rightResolverResult.Type, block.Emitter.Resolver) &&

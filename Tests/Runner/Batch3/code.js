@@ -23980,6 +23980,35 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3009", {
+        statics: {
+            methods: {
+                TestMultiplicationInOverflowContext: function () {
+                    var x = (715827882);
+                    x = Bridge.Int.mul(x, x);
+                    Bridge.Test.NUnit.Assert.AreEqual(-477218588, x);
+
+                    x = (715827882);
+                    x = Bridge.Int.mul(x, x);
+                    Bridge.Test.NUnit.Assert.AreEqual(-477218588, x);
+
+                    Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3009.f1);
+
+                    Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3009.f1);
+                }
+            }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3009", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge3009, {
+        f1: function () {
+            var x1 = (Bridge.Int.check(715827882, System.Int32));
+            x1 = Bridge.Int.mul(x1, x1, 1);
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.IBridge304", {
         $kind: "interface"
     });

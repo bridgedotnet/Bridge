@@ -6726,17 +6726,25 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 return ((al * bl) + (((ah * bl + al * bh) << 16) >>> 0) | 0);
             },
 
-            mul: function (a, b) {
+            mul: function (a, b, overflow) {
                 if (a == null || b == null) {
                     return null;
+                }
+
+                if (overflow) {
+                    Bridge.Int.check(a * b, System.Int32)
                 }
 
                 return Bridge.Int.$mul(a, b);
             },
 
-            umul: function (a, b) {
+            umul: function (a, b, overflow) {
                 if (a == null || b == null) {
                     return null;
+                }
+
+                if (overflow) {
+                    Bridge.Int.check(a * b, System.UInt32)
                 }
 
                 return Bridge.Int.$mul(a, b) >>> 0;

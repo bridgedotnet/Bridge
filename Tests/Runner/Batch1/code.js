@@ -5569,7 +5569,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         var r = ((max3 = Bridge.Int.check(max3 + 1, System.Int32)));
                     }, "Through identifier ++pre");
                     Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                        var r = Bridge.Int.check(2 * max, System.Int32);
+                        var r = Bridge.Int.mul(2, max, 1);
                     }, "Through identifier *");
 
                     Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
@@ -5582,7 +5582,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max4 = Bridge.Int.check(max4 + 1, System.Int32))), System.Int32));
                     }, "Through parameter ++pre");
                     Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                        Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.Int.check(2 * max, System.Int32), System.Int32));
+                        Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.Int.mul(2, max, 1), System.Int32));
                     }, "Through parameter *");
 
                     var min = -2147483648;
@@ -5636,7 +5636,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         var r = ((max2 = Bridge.Int.check(max2 + 1, System.UInt32)));
                     }, "Through identifier ++pre");
                     Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                        var r = Bridge.Int.check(2 * max, System.UInt32);
+                        var r = Bridge.Int.umul(2, max, 1);
                     }, "Through identifier *");
 
                     Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
@@ -5649,7 +5649,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max4 = Bridge.Int.check(max4 + 1, System.UInt32))), System.UInt32));
                     }, "Through parameter ++pre");
                     Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                        Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.Int.check(2 * max, System.UInt32), System.UInt32));
+                        Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.Int.umul(2, max, 1), System.UInt32));
                     }, "Through parameter *");
 
                     var min = 0;
@@ -5840,7 +5840,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         var r = ((max3 = Bridge.Int.check(max3 + 1, System.Int32)));
                     }, "Through identifier ++pre");
                     Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                        var r = Bridge.Int.check(2 * max, System.Int32);
+                        var r = Bridge.Int.mul(2, max, 1);
                     }, "Through identifier *");
 
                     Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
@@ -5853,7 +5853,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max4 = Bridge.Int.check(max4 + 1, System.Int32))), System.Int32));
                     }, "Through parameter ++pre");
                     Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                        Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.Int.check(2 * max, System.Int32), System.Int32));
+                        Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.Int.mul(2, max, 1), System.Int32));
                     }, "Through parameter *");
 
                     var min = -2147483648;
@@ -5907,7 +5907,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         var r = ((max2 = Bridge.Int.check(max2 + 1, System.UInt32)));
                     }, "Through identifier ++pre");
                     Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                        var r = Bridge.Int.check(2 * max, System.UInt32);
+                        var r = Bridge.Int.umul(2, max, 1);
                     }, "Through identifier *");
 
                     Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
@@ -5920,7 +5920,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max4 = Bridge.Int.check(max4 + 1, System.UInt32))), System.UInt32));
                     }, "Through parameter ++pre");
                     Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                        Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.Int.check(2 * max, System.UInt32), System.UInt32));
+                        Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.Int.umul(2, max, 1), System.UInt32));
                     }, "Through parameter *");
 
                     var min = 0;
@@ -6104,7 +6104,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var rMax1 = (max + 1) | 0;
                     var rMax2 = Bridge.identity(max1, (max1 = (max1 + 1) | 0));
                     var rMax3 = ((max2 = (max2 + 1) | 0));
-                    var rMax4 = (2 * max) | 0;
+                    var rMax4 = Bridge.Int.mul(2, max);
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2147483648", Bridge.box(rMax1, System.Int32), "Through identifier +");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("2147483647", Bridge.box(rMax2, System.Int32), "Through identifier post++");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2147483648", Bridge.box(rMax3, System.Int32), "Through identifier ++pre");
@@ -6113,7 +6113,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2147483648", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max + 1) | 0), System.Int32)), "Through parameter +");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("2147483647", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.identity(max3, (max3 = (max3 + 1) | 0)), System.Int32)), "Through parameter post++");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2147483648", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max4 = (max4 + 1) | 0)), System.Int32)), "Through parameter ++pre");
-                    Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((2 * max) | 0), System.Int32)), "Through parameter *");
+                    Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.Int.mul(2, max), System.Int32)), "Through parameter *");
 
                     var min = -2147483648;
 
@@ -6147,7 +6147,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var rMax1 = (max + 1) >>> 0;
                     var rMax2 = Bridge.identity(max1, (max1 = (max1 + 1) >>> 0));
                     var rMax3 = ((max2 = (max2 + 1) >>> 0));
-                    var rMax4 = (2 * max) >>> 0;
+                    var rMax4 = Bridge.Int.umul(2, max);
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("0", Bridge.box(rMax1, System.UInt32), "Through identifier +");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("4294967295", Bridge.box(rMax2, System.UInt32), "Through identifier post++");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("0", Bridge.box(rMax3, System.UInt32), "Through identifier ++pre");
@@ -6156,7 +6156,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("0", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max + 1) >>> 0), System.UInt32)), "Through parameter +");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("4294967295", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.identity(max3, (max3 = (max3 + 1) >>> 0)), System.UInt32)), "Through parameter post++");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("0", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max4 = (max4 + 1) >>> 0)), System.UInt32)), "Through parameter ++pre");
-                    Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("4294967294", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((2 * max) >>> 0), System.UInt32)), "Through parameter *");
+                    Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("4294967294", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.Int.umul(2, max), System.UInt32)), "Through parameter *");
 
                     var min = 0;
 
@@ -6282,7 +6282,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var rMax1 = (max + 1) | 0;
                     var rMax2 = Bridge.identity(max1, (max1 = (max1 + 1) | 0));
                     var rMax3 = ((max2 = (max2 + 1) | 0));
-                    var rMax4 = (2 * max) | 0;
+                    var rMax4 = Bridge.Int.mul(2, max);
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2147483648", Bridge.box(rMax1, System.Int32), "Through identifier +");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("2147483647", Bridge.box(rMax2, System.Int32), "Through identifier post++");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2147483648", Bridge.box(rMax3, System.Int32), "Through identifier ++pre");
@@ -6291,7 +6291,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2147483648", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max + 1) | 0), System.Int32)), "Through parameter +");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("2147483647", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.identity(max3, (max3 = (max3 + 1) | 0)), System.Int32)), "Through parameter post++");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2147483648", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max4 = (max4 + 1) | 0)), System.Int32)), "Through parameter ++pre");
-                    Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((2 * max) | 0), System.Int32)), "Through parameter *");
+                    Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.Int.mul(2, max), System.Int32)), "Through parameter *");
 
                     var min = -2147483648;
 
@@ -6325,7 +6325,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var rMax1 = (max + 1) >>> 0;
                     var rMax2 = Bridge.identity(max1, (max1 = (max1 + 1) >>> 0));
                     var rMax3 = ((max2 = (max2 + 1) >>> 0));
-                    var rMax4 = (2 * max) >>> 0;
+                    var rMax4 = Bridge.Int.umul(2, max);
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("0", Bridge.box(rMax1, System.UInt32), "Through identifier +");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("4294967295", Bridge.box(rMax2, System.UInt32), "Through identifier post++");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("0", Bridge.box(rMax3, System.UInt32), "Through identifier ++pre");
@@ -6334,7 +6334,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("0", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max + 1) >>> 0), System.UInt32)), "Through parameter +");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("4294967295", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.identity(max3, (max3 = (max3 + 1) >>> 0)), System.UInt32)), "Through parameter post++");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("0", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max4 = (max4 + 1) >>> 0)), System.UInt32)), "Through parameter ++pre");
-                    Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("4294967294", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((2 * max) >>> 0), System.UInt32)), "Through parameter *");
+                    Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("4294967294", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.Int.umul(2, max), System.UInt32)), "Through parameter *");
 
                     var min = 0;
 
