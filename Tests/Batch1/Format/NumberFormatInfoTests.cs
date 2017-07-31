@@ -1,5 +1,5 @@
 ﻿using Bridge.Test.NUnit;
-
+using System;
 using System.Globalization;
 
 namespace Bridge.ClientTest.Format
@@ -13,7 +13,9 @@ namespace Bridge.ClientTest.Format
         {
             var format = NumberFormatInfo.InvariantInfo;
             Assert.AreEqual("System.Globalization.NumberFormatInfo", typeof(NumberFormatInfo).FullName);
+            Assert.True(typeof(NumberFormatInfo).IsClass);
             Assert.True(format is NumberFormatInfo);
+            Assert.AreEqual(new[] { typeof(IFormatProvider), typeof(ICloneable) }, typeof(NumberFormatInfo).GetInterfaces());
         }
 
         [Test]
@@ -35,7 +37,7 @@ namespace Bridge.ClientTest.Format
             Assert.AreEqual("Infinity", format.PositiveInfinitySymbol);
 
             Assert.AreEqual("%", format.PercentSymbol);
-            Assert.AreDeepEqual(new[] { 3 }, format.PercentGroupSizes);
+            Assert.AreEqual(new[] { 3 }, format.PercentGroupSizes);
             Assert.AreEqual(2, format.PercentDecimalDigits);
             Assert.AreEqual(".", format.PercentDecimalSeparator);
             Assert.AreEqual(",", format.PercentGroupSeparator);
@@ -43,14 +45,14 @@ namespace Bridge.ClientTest.Format
             Assert.AreEqual(0, format.PercentNegativePattern);
 
             Assert.AreEqual("¤", format.CurrencySymbol);
-            Assert.AreDeepEqual(new[] { 3 }, format.CurrencyGroupSizes);
+            Assert.AreEqual(new[] { 3 }, format.CurrencyGroupSizes);
             Assert.AreEqual(2, format.CurrencyDecimalDigits);
             Assert.AreEqual(".", format.CurrencyDecimalSeparator);
             Assert.AreEqual(",", format.CurrencyGroupSeparator);
             Assert.AreEqual(0, format.CurrencyNegativePattern);
             Assert.AreEqual(0, format.CurrencyPositivePattern);
 
-            Assert.AreDeepEqual(new[] { 3 }, format.NumberGroupSizes);
+            Assert.AreEqual(new[] { 3 }, format.NumberGroupSizes);
             Assert.AreEqual(2, format.NumberDecimalDigits);
             Assert.AreEqual(".", format.NumberDecimalSeparator);
             Assert.AreEqual(",", format.NumberGroupSeparator);

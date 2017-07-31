@@ -10,31 +10,57 @@ namespace Bridge.ClientTest.Reflection
     [TestFixture(TestNameFormat = "Reflection - TypeSystemLanguageSupport {0}")]
     public class TypeSystemLanguageSupportTests
     {
-        public class C1 { }
+        public class C1
+        {
+        }
 
-        public class C2<T> { }
+        public class C2<T>
+        {
+        }
 
-        public interface I1 { }
+        public interface I1
+        {
+        }
 
-        public interface I2<T1> { }
+        public interface I2<T1>
+        {
+        }
 
-        public interface I3 : I1 { }
+        public interface I3 : I1
+        {
+        }
 
-        public interface I4 { }
+        public interface I4
+        {
+        }
 
-        public interface I5<T1> : I2<T1> { }
+        public interface I5<T1> : I2<T1>
+        {
+        }
 
-        public interface I6<out T> { }
+        public interface I6<out T>
+        {
+        }
 
-        public interface I7<in T> { }
+        public interface I7<in T>
+        {
+        }
 
-        public interface I8<out T1, in T2> : I6<T1>, I7<T2> { }
+        public interface I8<out T1, in T2> : I6<T1>, I7<T2>
+        {
+        }
 
-        public interface I9<T1, out T2> { }
+        public interface I9<T1, out T2>
+        {
+        }
 
-        public interface I10<out T1, in T2> : I8<T1, T2> { }
+        public interface I10<out T1, in T2> : I8<T1, T2>
+        {
+        }
 
-        public class D1 : C1, I1 { }
+        public class D1 : C1, I1
+        {
+        }
 
         public class D2<T> : C2<T>, I2<T>, I1
         {
@@ -56,37 +82,69 @@ namespace Bridge.ClientTest.Reflection
         {
         }
 
-        public class Y1<T> : I6<T> { }
+        public class Y1<T> : I6<T>
+        {
+        }
 
-        public class Y1X1 : Y1<X1> { }
+        public class Y1X1 : Y1<X1>
+        {
+        }
 
-        public class Y1X2 : Y1<X2> { }
+        public class Y1X2 : Y1<X2>
+        {
+        }
 
-        public class Y2<T> : I7<T> { }
+        public class Y2<T> : I7<T>
+        {
+        }
 
-        public class Y2X1 : Y2<X1> { }
+        public class Y2X1 : Y2<X1>
+        {
+        }
 
-        public class Y2X2 : Y2<X2> { }
+        public class Y2X2 : Y2<X2>
+        {
+        }
 
-        public class Y3<T1, T2> : I8<T1, T2> { }
+        public class Y3<T1, T2> : I8<T1, T2>
+        {
+        }
 
-        public class Y3X1X1 : Y3<X1, X1> { }
+        public class Y3X1X1 : Y3<X1, X1>
+        {
+        }
 
-        public class Y3X1X2 : Y3<X1, X2> { }
+        public class Y3X1X2 : Y3<X1, X2>
+        {
+        }
 
-        public class Y3X2X1 : Y3<X2, X1> { }
+        public class Y3X2X1 : Y3<X2, X1>
+        {
+        }
 
-        public class Y3X2X2 : Y3<X2, X2> { }
+        public class Y3X2X2 : Y3<X2, X2>
+        {
+        }
 
-        public class Y4<T1, T2> : I9<T1, T2> { }
+        public class Y4<T1, T2> : I9<T1, T2>
+        {
+        }
 
-        public class Y5<T1, T2> : I6<I8<T1, T2>> { }
+        public class Y5<T1, T2> : I6<I8<T1, T2>>
+        {
+        }
 
-        public class Y6<T1, T2> : I7<I8<T1, T2>> { }
+        public class Y6<T1, T2> : I7<I8<T1, T2>>
+        {
+        }
 
-        public enum E1 { }
+        public enum E1
+        {
+        }
 
-        public enum E2 { }
+        public enum E2
+        {
+        }
 
         [ObjectLiteral]
         public class OL
@@ -118,7 +176,9 @@ namespace Bridge.ClientTest.Reflection
         {
             try
             {
+#pragma warning disable 219
                 var x = (T)arg;
+#pragma warning restore 219
                 return x == null || x != null; // return true;
             }
             catch
@@ -128,7 +188,8 @@ namespace Bridge.ClientTest.Reflection
         }
 
         private class K
-        { }
+        {
+        }
 
         private class C10<T> where T : K
         {
@@ -575,14 +636,14 @@ namespace Bridge.ClientTest.Reflection
         public void GetTypeWorksOnObjects()
         {
             Action a = () => { };
-            Assert.AreEqual(new C1().GetType().FullName, "Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests+C1");
-            Assert.AreEqual(new C2<int>().GetType().FullName, "Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests+C2`1[[System.Int32, mscorlib]]");
-            Assert.AreEqual(new C2<string>().GetType().FullName, "Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests+C2`1[[System.String, mscorlib]]");
-            Assert.AreEqual((1).GetType().FullName, "System.Int32");
-            Assert.AreEqual("X".GetType().FullName, "System.String");
-            Assert.AreEqual(a.GetType().FullName, "Function");
-            Assert.AreEqual(new object().GetType().FullName, "System.Object");
-            Assert.AreEqual(new[] { 1, 2 }.GetType().FullName, "System.Int32[]");
+            Assert.AreEqual("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests+C1", new C1().GetType().FullName);
+            Assert.AreEqual("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests+C2`1[[System.Int32, mscorlib]]", new C2<int>().GetType().FullName);
+            Assert.AreEqual("Bridge.ClientTest.Reflection.TypeSystemLanguageSupportTests+C2`1[[System.String, mscorlib]]", new C2<string>().GetType().FullName);
+            Assert.AreEqual("System.Int32", (1).GetType().FullName);
+            Assert.AreEqual("System.String", "X".GetType().FullName);
+            Assert.AreEqual("Function", a.GetType().FullName);
+            Assert.AreEqual("System.Object", new object().GetType().FullName);
+            Assert.AreEqual("System.Int32[]", new[] { 1, 2 }.GetType().FullName);
         }
 
         [Test]

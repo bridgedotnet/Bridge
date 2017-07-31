@@ -11,9 +11,14 @@ namespace Bridge.ClientTest.Exceptions
         public void TypePropertiesAreCorrect()
         {
             Assert.AreEqual("System.InvalidCastException", typeof(InvalidCastException).FullName, "Name");
+            Assert.True(typeof(InvalidCastException).IsClass, "IsClass");
+            Assert.AreEqual(typeof(Exception), typeof(InvalidCastException).BaseType, "BaseType");
             object d = new InvalidCastException();
             Assert.True(d is InvalidCastException, "is InvalidCastException");
             Assert.True(d is Exception, "is Exception");
+
+            var interfaces = typeof(InvalidCastException).GetInterfaces();
+            Assert.AreEqual(0, interfaces.Length, "Interfaces length");
         }
 
         [Test]

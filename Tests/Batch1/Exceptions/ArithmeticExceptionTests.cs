@@ -11,9 +11,14 @@ namespace Bridge.ClientTest.Exceptions
         public void TypePropertiesAreCorrect()
         {
             Assert.AreEqual("System.ArithmeticException", typeof(ArithmeticException).FullName, "Name");
+            Assert.True(typeof(ArithmeticException).IsClass, "IsClass");
+            Assert.AreEqual(typeof(Exception), typeof(ArithmeticException).BaseType, "BaseType");
             object d = new ArithmeticException();
             Assert.True(d is ArithmeticException, "is DivideByZeroException");
             Assert.True(d is Exception, "is Exception");
+
+            var interfaces = typeof(ArithmeticException).GetInterfaces();
+            Assert.AreEqual(0, interfaces.Length, "Interfaces length");
         }
 
         [Test]

@@ -1,7 +1,7 @@
 /**
- * @version   : 16.0.0-beta5 - Bridge.NET
+ * @version   : 16.0.0 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2017-07-17
+ * @date      : 2017-08-01
  * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
  */
@@ -218,10 +218,21 @@
 
             Object.defineProperty(proxy, "v", {
                 get: function () {
+                    if (n == null) {
+                        return o;
+                    }
+
                     return o[n];
                 },
 
                 set: function (value) {
+                    if (n == null) {
+                        if (value && value.$clone) {
+                            value.$clone(o);
+                        } else {
+                            o = value;
+                        }
+                    }
                     o[n] = value;
                 }
             });
@@ -3315,8 +3326,8 @@
     // @source systemAssemblyVersion.js
 
     Bridge.init(function () {
-        Bridge.SystemAssembly.version = "16.0.0-beta5";
-        Bridge.SystemAssembly.compiler = "16.0.0-beta5";
+        Bridge.SystemAssembly.version = "16.0.0";
+        Bridge.SystemAssembly.compiler = "16.0.0";
     });
 
     Bridge.define("Bridge.Utils.SystemAssemblyVersion");

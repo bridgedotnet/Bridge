@@ -13,6 +13,7 @@ namespace Bridge.ClientTest
         public void TypePropertiesAreCorrect()
         {
             Assert.AreEqual("System.Int32[,]", typeof(int[,]).FullName, "FullName should be Array");
+            Assert.True(typeof(int[,]).IsClass, "IsClass should be true");
             object arr = new int[1, 1];
             Assert.True(arr is Array, "is Array should be true");
             Assert.True(arr is int[,], "is int[,] should be true");
@@ -23,6 +24,30 @@ namespace Bridge.ClientTest
         {
             var arr = new int[3, 2];
             Assert.AreEqual(arr.Length, 6);
+        }
+
+        [Test]
+        public void GettingValueByIndexWorks()
+        {
+            var arr = new[,] { { 1, 2 }, { 3, 4 }, { 5, 6 } };
+            Assert.AreEqual(1, arr[0, 0]);
+            Assert.AreEqual(2, arr[0, 1]);
+            Assert.AreEqual(3, arr[1, 0]);
+            Assert.AreEqual(4, arr[1, 1]);
+            Assert.AreEqual(5, arr[2, 0]);
+            Assert.AreEqual(6, arr[2, 1]);
+        }
+
+        [Test]
+        public void GetValueWorks()
+        {
+            var arr = new[,] { { 1, 2 }, { 3, 4 }, { 5, 6 } };
+            Assert.AreEqual(1, arr.GetValue(0, 0));
+            Assert.AreEqual(2, arr.GetValue(0, 1));
+            Assert.AreEqual(3, arr.GetValue(1, 0));
+            Assert.AreEqual(4, arr.GetValue(1, 1));
+            Assert.AreEqual(5, arr.GetValue(2, 0));
+            Assert.AreEqual(6, arr.GetValue(2, 1));
         }
 
         [Test]
@@ -73,44 +98,6 @@ namespace Bridge.ClientTest
             Assert.AreEqual("d", arr[1, 1]);
             Assert.AreEqual("e", arr[2, 0]);
             Assert.AreEqual("f", arr[2, 1]);
-        }
-
-        private int[,] SetUpArray(params object[] values)
-        {
-            var arr = new int[values.Length, 2];
-
-            for (int i = 0; i < values.Length; i++)
-            {
-                var v = values[i] as int[];
-                arr.SetValue(v[0], i, 0);
-                arr.SetValue(v[1], i, 1);
-            }
-
-            return arr;
-        }
-
-        [Test]
-        public void GetValueWorks()
-        {
-            var arr = SetUpArray(new object[] { new int[] { 1, 2 }, new int[] { 3, 4 }, new int[] { 5, 6 } });
-            Assert.AreEqual(1, arr.GetValue(0, 0));
-            Assert.AreEqual(2, arr.GetValue(0, 1));
-            Assert.AreEqual(3, arr.GetValue(1, 0));
-            Assert.AreEqual(4, arr.GetValue(1, 1));
-            Assert.AreEqual(5, arr.GetValue(2, 0));
-            Assert.AreEqual(6, arr.GetValue(2, 1));
-        }
-
-        [Test]
-        public void GettingValueByIndexWorks()
-        {
-            var arr = SetUpArray(new object[] { new int[] { 1, 2 }, new int[] { 3, 4 }, new int[] { 5, 6 } });
-            Assert.AreEqual(1, arr[0, 0]);
-            Assert.AreEqual(2, arr[0, 1]);
-            Assert.AreEqual(3, arr[1, 0]);
-            Assert.AreEqual(4, arr[1, 1]);
-            Assert.AreEqual(5, arr[2, 0]);
-            Assert.AreEqual(6, arr[2, 1]);
         }
 
         [Test]

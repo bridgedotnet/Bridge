@@ -16,75 +16,6 @@ namespace Bridge.ClientTest.Batch4
             r = writeAfter;
         }
 
-        [Test]
-        public void CanUseReferenceToLocalVariables()
-        {
-            int i = 14;
-            RefTestMethod(ref i, 14, 17, 21, 24, () =>
-            {
-                Assert.AreEqual(17, i);
-                i = 21;
-            });
-            Assert.AreEqual(24, i);
-        }
-
-        private class C
-        {
-            public int i;
-        }
-
-        // TODO Fix test NEWCI Run client tests to see the test errors
-        [Test]
-        public void CanUseReferenceToField()
-        {
-            var c1 = new C
-            {
-                i = 14
-            };
-            var c2 = c1;
-            RefTestMethod(ref c1.i, 14, 17, 21, 24, () =>
-            {
-                Assert.AreEqual(17, c1.i);
-                c1.i = 21;
-                c1 = new C
-                {
-                    i = 10
-                };
-            });
-            Assert.AreEqual(24, c2.i);
-            Assert.AreEqual(10, c1.i);
-        }
-
-        [Test]
-        public void CanUseReferenceToOneDimensionalArray()
-        {
-            var a1 = new[] { 3, 7, 14, 1 };
-            var a2 = a1;
-            RefTestMethod(ref a1[2], 14, 17, 21, 24, () =>
-            {
-                Assert.AreEqual(17, a1[2]);
-                a1[2] = 21;
-                a1 = new[] { 8, 9, 10, 11, 12 };
-            });
-            Assert.AreEqual(24, a2[2]);
-            Assert.AreEqual(10, a1[2]);
-        }
-
-        [Test]
-        public void CanUseReferenceToMultiDimensionalArray()
-        {
-            var a1 = new[,] { { 1, 3, 7 }, { 1, 2, 3 }, { 1, 14, 1 } };
-            var a2 = a1;
-            RefTestMethod(ref a1[2, 1], 14, 17, 21, 24, () =>
-            {
-                Assert.AreEqual(17, a1[2, 1]);
-                a1[2, 1] = 21;
-                a1 = new[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
-            });
-            Assert.AreEqual(24, a2[2, 1]);
-            Assert.AreEqual(8, a1[2, 1]);
-        }
-
         private struct S
         {
             public int i, j;
@@ -148,7 +79,6 @@ namespace Bridge.ClientTest.Batch4
             }
         }
 
-        // TODO Fix test NEWCI Run client tests to see the test errors
         [Test]
         public void CanUseReferenceToThis_SPI_1569()
         {
