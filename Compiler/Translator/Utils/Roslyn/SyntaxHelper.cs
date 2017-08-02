@@ -603,17 +603,14 @@ namespace Bridge.Translator
                 .WithTrailingTrivia(property.GetTrailingTrivia());
         }
 
-        public static string GetSymbolName(InvocationExpressionSyntax node, SemanticModel semanticModel)
+        public static string GetSymbolName(InvocationExpressionSyntax node, SymbolInfo si, string name, SemanticModel semanticModel)
         {
-            var si = semanticModel.GetSymbolInfo(node.ArgumentList.Arguments[0].Expression);
             var symbol = si.Symbol;
 
             if (symbol == null && si.CandidateSymbols.Any())
             {
                 symbol = si.CandidateSymbols.First();
             }
-
-            var name = (string)semanticModel.GetConstantValue(node).Value;
 
             if (symbol != null && symbol.Kind != SymbolKind.Namespace)
             {
@@ -635,11 +632,6 @@ namespace Bridge.Translator
                         }
                     }
                 }
-
-                //if (symbol is IFieldSymbol && ((IFieldSymbol)symbol).IsConst)
-                //{
-                //    preserveMemberChange = true;
-                //}
 
                 var nameAttr = SyntaxHelper.GetInheritedAttribute(symbol, Bridge.Translator.Translator.Bridge_ASSEMBLY + ".NameAttribute");
                 bool isIgnore = symbol.ContainingType != null && SyntaxHelper.IsExternalType(symbol.ContainingType);

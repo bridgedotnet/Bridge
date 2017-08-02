@@ -64,70 +64,70 @@ namespace System
 
         public static extern bool IsLetter(char c);
 
-        [Template("System.Char.isLetter({0}.charCodeAt({1}))")]
+        [Template("System.Char.isLetter(({0}).charCodeAt({1}))")]
         public static extern bool IsLetter(string s, int index);
 
         public static extern bool IsDigit(char c);
 
-        [Template("System.Char.isDigit({0}.charCodeAt({1}))")]
+        [Template("System.Char.isDigit(({0}).charCodeAt({1}))")]
         public static extern bool IsDigit(string s, int index);
 
         [Template("(System.Char.isDigit({0}) || System.Char.isLetter({0}))")]
         public static extern bool IsLetterOrDigit(char c);
 
-        [Template("(System.Char.isDigit({0}.charCodeAt({1})) || System.Char.isLetter({0}.charCodeAt({1})))")]
+        [Template("(System.Char.isDigit(({0}).charCodeAt({1})) || System.Char.isLetter(({0}).charCodeAt({1})))")]
         public static extern bool IsLetterOrDigit(string s, int index);
 
         [Template("System.Char.isWhiteSpace(String.fromCharCode({0}))")]
         public static extern bool IsWhiteSpace(char c);
 
-        [Template("System.Char.isWhiteSpace({0}.charAt({1}))")]
+        [Template("System.Char.isWhiteSpace(({0}).charAt({1}))")]
         public static extern bool IsWhiteSpace(string s, int index);
 
         public static extern bool IsHighSurrogate(char c);
 
-        [Template("System.Char.isHighSurrogate({0}.charCodeAt({1}))")]
+        [Template("System.Char.isHighSurrogate(({0}).charCodeAt({1}))")]
         public static extern bool IsHighSurrogate(string s, int index);
 
         public static extern bool IsLowSurrogate(char c);
 
-        [Template("System.Char.isLowSurrogate({0}.charCodeAt({1}))")]
+        [Template("System.Char.isLowSurrogate(({0}).charCodeAt({1}))")]
         public static extern bool IsLowSurrogate(string s, int index);
 
         public static extern bool IsSurrogate(char c);
 
-        [Template("System.Char.isSurrogate({0}.charCodeAt({1}))")]
+        [Template("System.Char.isSurrogate(({0}).charCodeAt({1}))")]
         public static extern bool IsSurrogate(string s, int index);
 
         [Template("(System.Char.isHighSurrogate({0}) && System.Char.isLowSurrogate({1}))")]
         public static extern bool IsSurrogatePair(char highSurrogate, char lowSurrogate);
 
-        [Template("(System.Char.isHighSurrogate({0}.charCodeAt({1})) && System.Char.isLowSurrogate({0}.charCodeAt({1} + 1)))")]
+        [Template("(System.Char.isHighSurrogate(({0}).charCodeAt({1})) && System.Char.isLowSurrogate(({0}).charCodeAt({1} + 1)))")]
         public static extern bool IsSurrogatePair(string s, int index);
 
         public static extern bool IsSymbol(char c);
 
-        [Template("System.Char.isSymbol({0}.charCodeAt({1}))")]
+        [Template("System.Char.isSymbol(({0}).charCodeAt({1}))")]
         public static extern bool IsSymbol(string s, int index);
 
         public static extern bool IsSeparator(char c);
 
-        [Template("System.Char.isSeparator({0}.charCodeAt({1}))")]
+        [Template("System.Char.isSeparator(({0}).charCodeAt({1}))")]
         public static extern bool IsSeparator(string s, int index);
 
         public static extern bool IsPunctuation(char c);
 
-        [Template("System.Char.isPunctuation({0}.charCodeAt({1}))")]
+        [Template("System.Char.isPunctuation(({0}).charCodeAt({1}))")]
         public static extern bool IsPunctuation(string s, int index);
 
         public static extern bool IsNumber(char c);
 
-        [Template("System.Char.isNumber({0}.charCodeAt({1}))")]
+        [Template("System.Char.isNumber(({0}).charCodeAt({1}))")]
         public static extern bool IsNumber(string s, int index);
 
         public static extern bool IsControl(char c);
 
-        [Template("System.Char.isControl({0}.charCodeAt({1}))")]
+        [Template("System.Char.isControl(({0}).charCodeAt({1}))")]
         public static extern bool IsControl(string s, int index);
 
         [Template("System.Char.equals({this}, {0})")]
