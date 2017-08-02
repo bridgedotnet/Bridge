@@ -1,6 +1,6 @@
 ﻿using Bridge.Test.NUnit;
-
 using System;
+using System.Globalization;
 
 namespace Bridge.ClientTest.SimpleTypes
 {
@@ -22,18 +22,27 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void TypePropertiesAreCorrect()
+        public void TypePropertiesAreCorrect_SPI_1717()
         {
             Assert.True((object)(long)0 is long);
             Assert.False((object)0.5 is long);
             Assert.False((object)1e100 is long);
             Assert.AreEqual("System.Int64", typeof(long).FullName);
-
+            Assert.False(typeof(long).IsClass);
+            Assert.True(typeof(IComparable<long>).IsAssignableFrom(typeof(long)));
+            Assert.True(typeof(IEquatable<long>).IsAssignableFrom(typeof(long)));
+            Assert.True(typeof(IFormattable).IsAssignableFrom(typeof(long)));
             object l = (long)0;
             Assert.True(l is long);
             Assert.True(l is IComparable<long>);
             Assert.True(l is IEquatable<long>);
             Assert.True(l is IFormattable);
+
+            var interfaces = typeof(long).GetInterfaces();
+            Assert.AreEqual(4, interfaces.Length);
+            Assert.True(interfaces.Contains(typeof(IComparable<long>)));
+            Assert.True(interfaces.Contains(typeof(IEquatable<long>)));
+            Assert.True(interfaces.Contains(typeof(IFormattable)));
         }
 
         [Test]
@@ -51,24 +60,32 @@ namespace Bridge.ClientTest.SimpleTypes
 
             unchecked
             {
-                Assert.True(5754 == (long)i3, "5754 unchecked");
-                Assert.True(9223372036854775000 == (long)i4, "9223372036854775000 unchecked");
+                Assert.AreEqual(5754L, (long)i3, "5754 unchecked");
+                Assert.AreEqual(9223372036854775000L, (long)i4, "9223372036854775000 unchecked");
                 Assert.True((long)i5 < 0, "16223372036854776000 unchecked");
 
-                Assert.True(5754 == (long?)ni3, "nullable 5754 unchecked");
-                Assert.True(9223372036854775000 == (long?)ni4, "nullable 9223372036854775000 unchecked");
+                Assert.AreEqual(5754L, (long?)ni3, "nullable 5754 unchecked");
+                Assert.AreEqual(9223372036854775000L, (long?)ni4, "nullable 9223372036854775000 unchecked");
                 Assert.True((long?)ni5 < 0, "nullable 16223372036854776000 unchecked");
-                Assert.True(null == (long?)ni6, "null unchecked");
+                Assert.AreEqual(null, (long?)ni6, "null unchecked");
             }
 
             checked
             {
-                Assert.True(5754 == (long)i3, "5754 checked");
-                Assert.True(9223372036854775000 == (long)i4, "9223372036854775000 checked");
+                Assert.AreEqual(5754L, (long)i3, "5754 checked");
+                Assert.AreEqual(9223372036854775000L, (long)i4, "9223372036854775000 checked");
+                Assert.Throws<OverflowException>(() =>
+                {
+                    var x = (long)i5;
+                }, "16223372036854776000 checked");
 
-                Assert.True(5754 == (long?)ni3, "nullable 5754 checked");
-                Assert.True(9223372036854775000 == (long?)ni4, "nullable 9223372036854775000 checked");
-                Assert.True(null == (long?)ni6, "null checked");
+                Assert.AreEqual(5754L, (long?)ni3, "nullable 5754 checked");
+                Assert.AreEqual(9223372036854775000L, (long?)ni4, "nullable 9223372036854775000 checked");
+                Assert.Throws<OverflowException>(() =>
+                {
+                    var x = (long?)ni5;
+                }, "nullable 16223372036854776000 checked");
+                Assert.AreEqual(null, (long?)ni6, "null checked");
             }
         }
 
@@ -142,19 +159,19 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void DefaultValueIs0()
         {
-            Assert.True(0 == GetDefaultValue<long>());
+            Assert.AreEqual(0L, GetDefaultValue<long>());
         }
 
         [Test]
         public void DefaultConstructorReturnsZero()
         {
-            Assert.True(0 == new long());
+            Assert.AreEqual(0L, new long());
         }
 
         [Test]
         public void CreatingInstanceReturnsZero()
         {
-            Assert.True(0 == Activator.CreateInstance<long>());
+            Assert.AreEqual(0L, Activator.CreateInstance<long>());
         }
 
         [Test]
@@ -164,10 +181,29 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void IFormattableToStringWorks()
+        public void ToStringWithFormatWorks()
         {
             Assert.AreEqual("123", ((long)0x123).ToString("x"));
         }
+
+        [Test]
+        public void ToStringWithFormatAndProviderWorks()
+        {
+            Assert.AreEqual("123", ((long)0x123).ToString("x", CultureInfo.InvariantCulture));
+        }
+
+        [Test]
+        public void IFormattableToStringWorks()
+        {
+            Assert.AreEqual("123", ((IFormattable)((long)0x123)).ToString("x", CultureInfo.InvariantCulture));
+        }
+
+        // Not C# API
+        //[Test]
+        //public void LocaleFormatWorks()
+        //{
+        //    Assert.AreEqual(((long)0x123).LocaleFormat("x"), "123");
+        //}
 
         [Test]
         public void TryParseWorks()
@@ -175,64 +211,64 @@ namespace Bridge.ClientTest.SimpleTypes
             long numberResult;
             bool result = long.TryParse("57574", out numberResult);
             Assert.True(result);
-            Assert.True(57574 == numberResult);
+            Assert.AreEqual(57574L, numberResult);
 
             result = long.TryParse("-14", out numberResult);
             Assert.True(result);
-            Assert.True(-14 == numberResult);
+            Assert.AreEqual(-14L, numberResult);
 
             result = long.TryParse("", out numberResult);
             Assert.False(result);
-            Assert.True(0 == numberResult);
+            Assert.AreEqual(0L, numberResult);
 
             result = long.TryParse(null, out numberResult);
             Assert.False(result);
-            Assert.True(0 == numberResult);
+            Assert.AreEqual(0L, numberResult);
 
             result = long.TryParse("notanumber", out numberResult);
             Assert.False(result);
-            Assert.True(0 == numberResult);
+            Assert.AreEqual(0L, numberResult);
 
             result = long.TryParse("2.5", out numberResult);
             Assert.False(result);
-            Assert.True(0 == numberResult);
+            Assert.AreEqual(0L, numberResult);
 
             result = long.TryParse("-10000000000000000000", out numberResult);
             Assert.False(result);
-            Assert.True(numberResult == 0);
+            Assert.AreEqual(0L, numberResult);
 
             result = long.TryParse("10000000000000000000", out numberResult);
             Assert.False(result);
-            Assert.True(numberResult == 0);
+            Assert.AreEqual(0L, numberResult);
         }
 
         [Test]
         public void ParseWorks()
         {
-            Assert.True(13453634535 == long.Parse("13453634535"));
-            Assert.True(-234253069384953 == long.Parse("-234253069384953"));
-            Assert.Throws(() => long.Parse(""));
-            Assert.Throws(() => long.Parse(null));
-            Assert.Throws(() => long.Parse("notanumber"));
-            Assert.Throws(() => long.Parse("2.5"));
-            Assert.Throws(() => long.Parse("-10000000000000000000"));
-            Assert.Throws(() => long.Parse("10000000000000000000"));
+            Assert.AreEqual(13453634535L, long.Parse("13453634535"));
+            Assert.AreEqual(-234253069384953L, long.Parse("-234253069384953"));
+            Assert.Throws<FormatException>(() => long.Parse(""));
+            Assert.Throws<ArgumentNullException>(() => long.Parse(null));
+            Assert.Throws<FormatException>(() => long.Parse("notanumber"));
+            Assert.Throws<FormatException>(() => long.Parse("2.5"));
+            Assert.Throws<OverflowException>(() => long.Parse("-10000000000000000000"));
+            Assert.Throws<OverflowException>(() => long.Parse("10000000000000000000"));
         }
 
         [Test]
         public void CastingOfLargeDoublesToInt64Works()
         {
             double d1 = 5e9 + 0.5, d2 = -d1;
-            Assert.True(5000000000 == (long)d1, "Positive");
-            Assert.True(-5000000000 == (long)d2, "Negative");
+            Assert.AreEqual(5000000000L, (long)d1, "Positive");
+            Assert.AreEqual(-5000000000L, (long)d2, "Negative");
         }
 
         [Test]
         public void DivisionOfLargeInt64Works()
         {
             long v1 = 50000000000L, v2 = -v1, v3 = 3;
-            Assert.True(16666666666 == (v1 / v3), "Positive");
-            Assert.True(-16666666666 == (v2 / v3), "Negative");
+            Assert.AreEqual(16666666666L, v1 / v3, "Positive");
+            Assert.AreEqual(-16666666666L, v2 / v3, "Negative");
         }
 
         [Test]

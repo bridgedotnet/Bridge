@@ -1,4 +1,5 @@
-﻿using Bridge.Test.NUnit;
+﻿using Bridge.ClientTestHelper;
+using Bridge.Test.NUnit;
 using System;
 
 #pragma warning disable 219
@@ -14,12 +15,80 @@ namespace Bridge.ClientTest
             return value is T;
         }
 
+#pragma warning disable 660, 661
+
+        private struct MyType
+        {
+            public readonly int V;
+
+            public MyType(int v)
+            {
+                V = v;
+            }
+
+            public static implicit operator MyType(int i)
+            {
+                return new MyType(i);
+            }
+
+            public static int operator +(MyType a, MyType b)
+            {
+                return a.V + b.V;
+            }
+
+            public static int operator -(MyType a)
+            {
+                return -a.V;
+            }
+
+            public static bool operator <(MyType a, MyType b)
+            {
+                return a.V < b.V;
+            }
+
+            public static bool operator >(MyType a, MyType b)
+            {
+                return a.V > b.V;
+            }
+
+            public static bool operator <=(MyType a, MyType b)
+            {
+                return a.V <= b.V;
+            }
+
+            public static bool operator >=(MyType a, MyType b)
+            {
+                return a.V >= b.V;
+            }
+
+            public static bool operator ==(MyType a, MyType b)
+            {
+                return a.V == b.V;
+            }
+
+            public static bool operator !=(MyType a, MyType b)
+            {
+                return a.V != b.V;
+            }
+        }
+
+#pragma warning restore 660, 661
+
         [Test]
-        public void TypePropertiesAreCorrect()
+        public void TypePropertiesAreCorrect_SPI_1567()
         {
             int? a = 3, b = null;
             Assert.AreEqual("System.Nullable`1[[System.Boolean, mscorlib]]", typeof(Nullable<bool>).FullName, "Open FullName");
+            // #1567
+            Assert.AreEqual("System.Nullable`1[[System.Double, mscorlib]]", typeof(Nullable<double>).FullName, "Open FullName");
             Assert.AreEqual("System.Nullable`1[[System.Int32, mscorlib]]", typeof(int?).FullName, "Instantiated FullName");
+            Assert.True(typeof(Nullable<>).IsGenericTypeDefinition, "IsGenericTypeDefinition");
+            Assert.AreEqual(typeof(Nullable<>), typeof(int?).GetGenericTypeDefinition(), "GetGenericTypeDefinition");
+            // Test restructure to keep assertion count correct (prevent uncaught test exception)
+            bool b1 = false;
+            CommonHelper.Safe(() => b1 = typeof(int?).GetGenericArguments()[0] == typeof(int));
+            Assert.True(b1, "GenericArguments");
+
             Assert.True((object)a is int?, "is int? #1");
             Assert.False((object)b is int?, "is int? #2");
 
@@ -383,6 +452,90 @@ namespace Bridge.ClientTest
             Assert.AreStrictEqual(null, a >> c);
         }
 
+        [Test]
+        public void LiftedEqualityWorksWithUserDefinedOperators()
+        {
+            MyType? a = 1, b = 1, c = 2, d = null, e = null;
+            Assert.AreStrictEqual(true, a == b);
+            Assert.AreStrictEqual(false, a == c);
+            Assert.AreStrictEqual(false, a == d);
+            Assert.AreStrictEqual(false, d == a);
+            Assert.AreStrictEqual(true, d == e);
+        }
+
+        [Test]
+        public void LiftedInequalityWorksWithUserDefinedOperators()
+        {
+            MyType? a = 1, b = 1, c = 2, d = null, e = null;
+            Assert.AreStrictEqual(false, a != b);
+            Assert.AreStrictEqual(true, a != c);
+            Assert.AreStrictEqual(true, a != d);
+            Assert.AreStrictEqual(true, d != a);
+            Assert.AreStrictEqual(false, d != e);
+        }
+
+        [Test]
+        public void LiftedLessThanWorksWithUserDefinedOperators()
+        {
+            MyType? a = 1, b = 1, c = 2, d = null, e = null;
+            Assert.AreStrictEqual(false, a < b);
+            Assert.AreStrictEqual(true, a < c);
+            Assert.AreStrictEqual(false, a < d);
+            Assert.AreStrictEqual(false, d < a);
+            Assert.AreStrictEqual(false, d < e);
+        }
+
+        [Test]
+        public void LiftedGreaterThanWorksWithUserDefinedOperators()
+        {
+            MyType? a = 1, b = 1, c = 2, d = null, e = null;
+            Assert.AreStrictEqual(false, a > b);
+            Assert.AreStrictEqual(true, c > a);
+            Assert.AreStrictEqual(false, a > d);
+            Assert.AreStrictEqual(false, d > a);
+            Assert.AreStrictEqual(false, d > e);
+        }
+
+        [Test]
+        public void LiftedLessThanOrEqualWorksWithUserDefinedOperators()
+        {
+            MyType? a = 1, b = 1, c = 2, d = null, e = null;
+            Assert.AreStrictEqual(true, a <= b);
+            Assert.AreStrictEqual(false, c <= a);
+            Assert.AreStrictEqual(false, a <= d);
+            Assert.AreStrictEqual(false, d <= a);
+            Assert.AreStrictEqual(false, d <= e);
+        }
+
+        [Test]
+        public void LiftedGreaterThanOrEqualWorksWithUserDefinedOperators()
+        {
+            MyType? a = 1, b = 1, c = 2, d = null, e = null;
+            Assert.AreStrictEqual(true, a >= b);
+            Assert.AreStrictEqual(false, a >= c);
+            Assert.AreStrictEqual(false, a >= d);
+            Assert.AreStrictEqual(false, d >= a);
+            Assert.AreStrictEqual(false, d >= e);
+        }
+
+        [Test]
+        public void LiftedAdditionWorksWithUserDefinedOperators()
+        {
+            MyType? a = 2, b = 3, c = null;
+            Assert.AreStrictEqual(5, a + b);
+            Assert.AreStrictEqual(null, a + c);
+        }
+
+        // #SPI
+        [Test]
+        public void LiftedUnaryMinusWorksWithUserDefinedOperators_SPI_1634()
+        {
+            MyType? a = 2, c = null;
+            // #1634
+            Assert.AreStrictEqual(-a, -2);
+            Assert.AreStrictEqual(-c, null);
+        }
+
         [Test(Name = "{0} #314")]
         public void LiftedBooleanAndWorks()
         {
@@ -411,6 +564,25 @@ namespace Bridge.ClientTest
             Assert.AreStrictEqual(true, e | a);
             Assert.AreStrictEqual(null, e | c);
             Assert.AreStrictEqual(null, e | f);
+        }
+
+        [Test]
+        public void LiftedBooleanXorWorks_SPI_1568()
+        {
+            bool? a = true, b = true, c = false, d = false, e = null, f = null;
+            // #1568 Should be strict equal
+            Assert.AreEqual(0, a ^ b);
+            Assert.AreEqual(1, a ^ c);
+
+            Assert.AreEqual(null, a ^ e);
+            // #1568 Should be strict equal
+            Assert.AreEqual(1, c ^ a);
+            Assert.AreEqual(0, c ^ d);
+
+            Assert.AreEqual(null, c ^ e);
+            Assert.AreEqual(null, e ^ a);
+            Assert.AreEqual(null, e ^ c);
+            Assert.AreEqual(null, e ^ f);
         }
 
         [Test]

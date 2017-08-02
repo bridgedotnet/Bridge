@@ -1,20 +1,21 @@
-﻿using Bridge.Html5;
-using Bridge.Test.NUnit;
+﻿using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest
 {
-    [Category(Constants.MODULE_SERIALIZATION)]
-    [TestFixture]
+    [Category(Constants.MODULE_HTML5)]
+    [TestFixture(TestNameFormat = "JSON - {0}")]
     public class JsonTests
     {
+        // #1574
+        //[Serializable]
         [ObjectLiteral]
         private class TestClass1
         {
-#pragma warning disable 414
             public int i;
-#pragma warning restore 414
         }
 
+        // #1574
+        //[Serializable]
         [ObjectLiteral]
         private class TestClass2
         {
@@ -190,43 +191,70 @@ namespace Bridge.ClientTest
         [Test]
         public void StringifyWorks()
         {
-            Assert.AreEqual("{\"i\":3}", Bridge.Html5.JSON.Stringify(new TestClass1 { i = 3 }));
+            Assert.AreEqual("{\"i\":3}", Bridge.Html5.JSON.Stringify(new TestClass1
+            {
+                i = 3
+            }));
         }
 
         [Test]
         public void StringifyWithSerializableMembersArrayWorks()
         {
-            Assert.AreEqual("{\"i\":3}", Bridge.Html5.JSON.Stringify(new TestClass2 { i = 3, s = "test" }, new[] { "i" }));
+            Assert.AreEqual("{\"i\":3}", Bridge.Html5.JSON.Stringify(new TestClass2
+            {
+                i = 3,
+                s = "test"
+            }, new[] { "i" }));
         }
 
         [Test]
         public void StringifyWithSerializableMembersArrayAndIntentCountWorks()
         {
-            Assert.AreEqual("{\n    \"i\": 3\n}", Bridge.Html5.JSON.Stringify(new TestClass2 { i = 3, s = "test" }, new[] { "i" }, 4));
+            Assert.AreEqual("{\n    \"i\": 3\n}", Bridge.Html5.JSON.Stringify(new TestClass2
+            {
+                i = 3,
+                s = "test"
+            }, new[] { "i" }, 4));
         }
 
         [Test]
         public void StringifyWithSerializableMembersArrayAndIntentTextWorks()
         {
-            Assert.AreEqual("{\n    \"i\": 3\n}", Bridge.Html5.JSON.Stringify(new TestClass2 { i = 3, s = "test" }, new[] { "i" }, "    "));
+            Assert.AreEqual("{\n    \"i\": 3\n}", Bridge.Html5.JSON.Stringify(new TestClass2
+            {
+                i = 3,
+                s = "test"
+            }, new[] { "i" }, "    "));
         }
 
         [Test]
         public void StringifyWithCallbackWorks()
         {
-            Assert.AreEqual("{\"i\":3}", Bridge.Html5.JSON.Stringify(new TestClass2 { i = 3, s = "test" }, (key, value) => key == "s" ? Script.Undefined : value));
+            Assert.AreEqual("{\"i\":3}", Bridge.Html5.JSON.Stringify(new TestClass2
+            {
+                i = 3,
+                s = "test"
+            }, (key, value) => key == "s" ? Script.Undefined : value));
         }
 
         [Test]
         public void StringifyWithCallbackAndIndentCountWorks()
         {
-            Assert.AreEqual("{\n    \"i\": 3\n}", Bridge.Html5.JSON.Stringify(new TestClass2 { i = 3, s = "test" }, (key, value) => key == "s" ? Script.Undefined : value, 4));
+            Assert.AreEqual("{\n    \"i\": 3\n}", Bridge.Html5.JSON.Stringify(new TestClass2
+            {
+                i = 3,
+                s = "test"
+            }, (key, value) => key == "s" ? Script.Undefined : value, 4));
         }
 
         [Test]
         public void StringifyWithCallbackAndIndentTextWorks()
         {
-            Assert.AreEqual("{\n    \"i\": 3\n}", Bridge.Html5.JSON.Stringify(new TestClass2 { i = 3, s = "test" }, (key, value) => key == "s" ? Script.Undefined : value, "    "));
+            Assert.AreEqual("{\n    \"i\": 3\n}", Bridge.Html5.JSON.Stringify(new TestClass2
+            {
+                i = 3,
+                s = "test"
+            }, (key, value) => key == "s" ? Script.Undefined : value, "    "));
         }
 
         [Test]

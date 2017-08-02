@@ -21,14 +21,24 @@ namespace Bridge.ClientTest.Collections.Generic
                 return GetEnumerator();
             }
 
-            public List<string> Items { get; private set; }
+            public List<string> Items
+            {
+                get;
+                private set;
+            }
 
             public IEnumerator<string> GetEnumerator()
             {
                 return Items.GetEnumerator();
             }
 
-            public int Count { get { return Items.Count; } }
+            public int Count
+            {
+                get
+                {
+                    return Items.Count;
+                }
+            }
 
             public bool IsReadOnly
             {
@@ -82,6 +92,17 @@ namespace Bridge.ClientTest.Collections.Generic
             {
                 return _i;
             }
+        }
+
+        [Test]
+        public void TypePropertiesAreCorrect()
+        {
+            Assert.AreEqual("System.Collections.Generic.ICollection`1[[System.Object, mscorlib]]", typeof(ICollection<object>).FullName, "FullName should be correct");
+            Assert.True(typeof(ICollection<object>).IsInterface, "IsInterface should be true");
+
+            var interfaces = typeof(ICollection<object>).GetInterfaces();
+            Assert.AreEqual(2, interfaces.Length, "Interfaces length");
+            Assert.AreEqual(typeof(IEnumerable<object>), interfaces[0], "Interfaces");
         }
 
         [Test]
