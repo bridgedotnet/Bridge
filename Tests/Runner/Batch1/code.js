@@ -37052,12 +37052,50 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var utcString = System.DateTime.format(utcNow, "o");
                 var utcFromLocalString = System.DateTime.format(localNowToUtc, "o");
 
-                Bridge.Test.NUnit.Assert.AreEqual(utcString, utcFromLocalString, "String representaions should equal");
+                var useSimpleEqual = Bridge.referenceEquals(utcString, utcFromLocalString);
+
+                if (!useSimpleEqual) {
+                    // Some browsers may get result diff of 10000 ticks
+                    // So allow tick diff be different not more than 10000 ticks in string representations
+                    try {
+                        var utcParts = System.String.split(utcString, [46].map(function(i) {{ return String.fromCharCode(i); }}));
+                        var utcFromLocalParts = System.String.split(utcFromLocalString, [46].map(function(i) {{ return String.fromCharCode(i); }}));
+
+                        if (!Bridge.referenceEquals(utcParts[System.Array.index(0, utcParts)], utcFromLocalParts[System.Array.index(0, utcFromLocalParts)]) || utcParts.length !== utcFromLocalParts.length) {
+                            useSimpleEqual = true;
+                        } else {
+                            var utcTicksString = utcParts[System.Array.index(1, utcParts)];
+                            var utcFromLocalTicksString = utcFromLocalParts[System.Array.index(1, utcFromLocalParts)];
+
+                            if (utcTicksString.length === utcFromLocalTicksString.length && System.Linq.Enumerable.from(utcTicksString).last() === 90 && System.Linq.Enumerable.from(utcFromLocalTicksString).last() === 90) {
+                                var utcTicks = System.Int32.parse(System.String.remove(utcTicksString, ((utcTicksString.length - 1) | 0)));
+                                var utcFromLocalTicks = System.Int32.parse(System.String.remove(utcFromLocalTicksString, ((utcFromLocalTicksString.length - 1) | 0)));
+
+                                var utcTicksDiff = (utcTicks - utcFromLocalTicks) | 0;
+
+                                var message = System.String.format("String representaions should equal {0} vs {1}; (Abs(Diff({2}, {3})) = {4}) <= 10000", utcString, utcFromLocalString, Bridge.box(utcTicks, System.Int32), Bridge.box(utcFromLocalTicks, System.Int32), Bridge.box(utcTicksDiff, System.Int32));
+
+                                Bridge.Test.NUnit.Assert.True(Math.abs(utcTicksDiff) <= 10000, message);
+                            } else {
+                                useSimpleEqual = true;
+                            }
+                        }
+                    }
+                    catch ($e1) {
+                        $e1 = System.Exception.create($e1);
+                        useSimpleEqual = true;
+                    }
+
+                }
+
+                if (useSimpleEqual) {
+                    Bridge.Test.NUnit.Assert.AreEqual(utcString, utcFromLocalString, "String representaions should equal");
+                }
 
                 var fromLocal = System.DateTime.create(System.DateTime.getYear(localNowToUtc), System.DateTime.getMonth(localNowToUtc), System.DateTime.getDay(localNowToUtc), System.DateTime.getHour(localNowToUtc), System.DateTime.getMinute(localNowToUtc), System.DateTime.getSecond(localNowToUtc), System.DateTime.getMillisecond(localNowToUtc));
                 var tickDiff = System.DateTime.getTicks(fromLocal).sub(System.DateTime.getTicks(utcNow));
 
-                Bridge.Test.NUnit.Assert.True(tickDiff.abs().lt(System.Int64(10000)), "Tick diff: Abs(" + tickDiff + ") < 10000");
+                Bridge.Test.NUnit.Assert.True(tickDiff.abs().lte(System.Int64(10000)), "Tick diff: Abs(" + tickDiff + ") <= 10000");
 
                 var dateDiff = System.DateTime.subdd(fromLocal, utcNow);
                 var minutes = dateDiff.getTotalMinutes();
