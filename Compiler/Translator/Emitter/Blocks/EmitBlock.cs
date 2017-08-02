@@ -613,6 +613,8 @@ namespace Bridge.Translator
                 var typeDef = type.GetDefinition();
                 //var thisAssembly = bridgeType.Value.TypeInfo != null;
                 var thisAssembly = bridgeType.Value.TypeDefinition?.Module.Assembly.Equals(thisAssemblyDef) ?? false;
+                var external = typeDef != null && this.Emitter.Validator.IsExternalType(typeDef);
+
                 if (enable.HasValue && enable.Value && !hasSettings && thisAssembly)
                 {
                     result = true;
@@ -674,8 +676,13 @@ namespace Bridge.Translator
                         }
                     }
 
-                    if (this.Emitter.Validator.IsExternalType(typeDef) && attr == null)
+                    if (external && attr == null)
                     {
+                        if (!string.IsNullOrWhiteSpace(filter) && EmitBlock.MatchFilter(type, filter, thisAssembly, result))
+                        {
+                            reflectTypes.Add(type);
+                        }
+
                         continue;
                     }
                 }
@@ -717,35 +724,7 @@ namespace Bridge.Translator
 
                 if (!string.IsNullOrEmpty(filter))
                 {
-                    var fullName = type.FullName;
-                    var parts = filter.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-
-                    foreach (var part in parts)
-                    {
-                        string pattern;
-                        bool exclude = part.StartsWith("!");
-
-                        if (part == "this")
-                        {
-                            result = !exclude && thisAssembly;
-                        }
-                        else
-                        {
-                            if (part.StartsWith("regex:"))
-                            {
-                                pattern = part.Substring(6);
-                            }
-                            else
-                            {
-                                pattern = "^" + Regex.Escape(part).Replace("\\*", ".*").Replace("\\?", ".") + "$";
-                            }
-
-                            if (Regex.IsMatch(fullName, pattern))
-                            {
-                                result = !exclude;
-                            }
-                        }
-                    }
+                    result = EmitBlock.MatchFilter(type, filter, thisAssembly, result);
 
                     if (!result)
                     {
@@ -760,6 +739,47 @@ namespace Bridge.Translator
             }
 
             return reflectTypes.ToArray();
+        }
+
+        private static bool MatchFilter(IType type, string filters, bool thisAssembly, bool def)
+        {
+            var fullName = type.FullName;
+            var parts = filters.Split(new char[] {';'}, StringSplitOptions.RemoveEmptyEntries);
+            var result = def;
+
+            foreach (var part in parts)
+            {
+                string pattern;
+                string filter = part;
+                bool exclude = filter.StartsWith("!");
+
+                if (exclude)
+                {
+                    filter = filter.Substring(1);
+                }
+
+                if (filter == "this")
+                {
+                    result = !exclude && thisAssembly;
+                }
+                else
+                {
+                    if (filter.StartsWith("regex:"))
+                    {
+                        pattern = filter.Substring(6);
+                    }
+                    else
+                    {
+                        pattern = "^" + Regex.Escape(filter).Replace("\\*", ".*").Replace("\\?", ".") + "$";
+                    }
+
+                    if (Regex.IsMatch(fullName, pattern))
+                    {
+                        result = !exclude;
+                    }
+                }
+            }
+            return result;
         }
     }
 }
