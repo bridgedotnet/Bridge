@@ -1,9 +1,9 @@
 /**
  * Bridge Test library - general C# language tests
- * @version 16.0.0-rc
+ * @version 16.0.0
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2017 Object.NET, Inc.
- * @compiler Bridge.NET 16.0.0-rc
+ * @compiler Bridge.NET 16.0.0
  */
 Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resource1.bin":"AAECAwQFBgc=","Bridge.ClientTest.Batch1.Reflection.Resource2.bin":"EBESExQV"}, function ($asm, globals) {
     "use strict";
@@ -33313,29 +33313,68 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.True(System.Char.isDigit(48), "#1");
                 Bridge.Test.NUnit.Assert.False(System.Char.isDigit(46), "#2");
                 Bridge.Test.NUnit.Assert.False(System.Char.isDigit(65), "#3");
+                Bridge.Test.NUnit.Assert.False(System.Char.isDigit(256), "#4");
+            },
+            IsDigitWithStringAndIndexWorks: function () {
+                Bridge.Test.NUnit.Assert.True(System.Char.isDigit(("abc0def").charCodeAt(3)), "#1");
+                Bridge.Test.NUnit.Assert.True(System.Char.isDigit(("1").charCodeAt(0)), "#2");
+                Bridge.Test.NUnit.Assert.True(System.Char.isDigit(("abcdef5").charCodeAt(6)), "#3");
+                Bridge.Test.NUnit.Assert.True(System.Char.isDigit(("9abcdef").charCodeAt(0)), "#4");
+                Bridge.Test.NUnit.Assert.False(System.Char.isDigit((".012345").charCodeAt(0)), "#5");
+                Bridge.Test.NUnit.Assert.False(System.Char.isDigit(("012345.").charCodeAt(6)), "#6");
+                Bridge.Test.NUnit.Assert.False(System.Char.isDigit(("012.345").charCodeAt(3)), "#7");
+                Bridge.Test.NUnit.Assert.False(System.Char.isDigit(("012.345").charCodeAt(3)), "#8");
+                Bridge.Test.NUnit.Assert.False(System.Char.isDigit(("0" + String.fromCharCode(256)).charCodeAt(1)), "#9");
             },
             IsWhiteSpaceWorks: function () {
                 Bridge.Test.NUnit.Assert.True(System.Char.isWhiteSpace(String.fromCharCode(32)), "#1");
                 Bridge.Test.NUnit.Assert.True(System.Char.isWhiteSpace(String.fromCharCode(10)), "#2");
                 Bridge.Test.NUnit.Assert.False(System.Char.isWhiteSpace(String.fromCharCode(65)), "#3");
-            },
-            IsDigitWithStringAndIndexWorks: function () {
-                Bridge.Test.NUnit.Assert.True(System.Char.isDigit("abc0def".charCodeAt(3)), "#1");
-                Bridge.Test.NUnit.Assert.True(System.Char.isDigit("1".charCodeAt(0)), "#2");
-                Bridge.Test.NUnit.Assert.True(System.Char.isDigit("abcdef5".charCodeAt(6)), "#3");
-                Bridge.Test.NUnit.Assert.True(System.Char.isDigit("9abcdef".charCodeAt(0)), "#4");
-                Bridge.Test.NUnit.Assert.False(System.Char.isDigit(".012345".charCodeAt(0)), "#5");
-                Bridge.Test.NUnit.Assert.False(System.Char.isDigit("012345.".charCodeAt(6)), "#6");
-                Bridge.Test.NUnit.Assert.False(System.Char.isDigit("012.345".charCodeAt(3)), "#7");
+                Bridge.Test.NUnit.Assert.False(System.Char.isWhiteSpace(String.fromCharCode(256)), "#4");
             },
             IsWhiteSpaceWithStringAndIndexWorks: function () {
-                Bridge.Test.NUnit.Assert.True(System.Char.isWhiteSpace("abc def".charAt(3)), "#1");
-                Bridge.Test.NUnit.Assert.True(System.Char.isWhiteSpace("\t".charAt(0)), "#2");
-                Bridge.Test.NUnit.Assert.True(System.Char.isWhiteSpace("abcdef\r".charAt(6)), "#3");
-                Bridge.Test.NUnit.Assert.True(System.Char.isWhiteSpace("\nabcdef".charAt(0)), "#4");
-                Bridge.Test.NUnit.Assert.False(System.Char.isWhiteSpace(".\r\n     ".charAt(0)), "#5");
-                Bridge.Test.NUnit.Assert.False(System.Char.isWhiteSpace("\r\n    .".charAt(6)), "#6");
-                Bridge.Test.NUnit.Assert.False(System.Char.isWhiteSpace("\r  .\n  ".charAt(3)), "#7");
+                Bridge.Test.NUnit.Assert.True(System.Char.isWhiteSpace(("abc def").charAt(3)), "#1");
+                Bridge.Test.NUnit.Assert.True(System.Char.isWhiteSpace(("\t").charAt(0)), "#2");
+                Bridge.Test.NUnit.Assert.True(System.Char.isWhiteSpace(("abcdef\r").charAt(6)), "#3");
+                Bridge.Test.NUnit.Assert.True(System.Char.isWhiteSpace(("\nabcdef").charAt(0)), "#4");
+                Bridge.Test.NUnit.Assert.False(System.Char.isWhiteSpace((".\r\n     ").charAt(0)), "#5");
+                Bridge.Test.NUnit.Assert.False(System.Char.isWhiteSpace(("\r\n    .").charAt(6)), "#6");
+                Bridge.Test.NUnit.Assert.False(System.Char.isWhiteSpace(("\r  .\n  ").charAt(3)), "#7");
+                Bridge.Test.NUnit.Assert.False(System.Char.isWhiteSpace((" " + String.fromCharCode(256)).charAt(1)), "#8");
+                Bridge.Test.NUnit.Assert.True(System.Char.isWhiteSpace((" " + String.fromCharCode(256)).charAt(0)), "#9");
+            },
+            IsPunctuationWorks: function () {
+                Bridge.Test.NUnit.Assert.False(System.Char.isPunctuation(97));
+                Bridge.Test.NUnit.Assert.True(System.Char.isPunctuation(45));
+                Bridge.Test.NUnit.Assert.False(System.Char.isPunctuation(98));
+                Bridge.Test.NUnit.Assert.True(System.Char.isPunctuation(44));
+                Bridge.Test.NUnit.Assert.False(System.Char.isPunctuation(256));
+            },
+            IsPunctuationWithStringAndIndexWorks: function () {
+                var s = "a-b," + String.fromCharCode(256);
+                Bridge.Test.NUnit.Assert.False(System.Char.isPunctuation((s).charCodeAt(0)), "0");
+                Bridge.Test.NUnit.Assert.True(System.Char.isPunctuation((s).charCodeAt(1)), "1");
+                Bridge.Test.NUnit.Assert.False(System.Char.isPunctuation((s).charCodeAt(2)), "2");
+                Bridge.Test.NUnit.Assert.True(System.Char.isPunctuation((s).charCodeAt(3)), "3");
+                Bridge.Test.NUnit.Assert.False(System.Char.isPunctuation((s).charCodeAt(4)), "4");
+            },
+            IsLetterWorks: function () {
+                Bridge.Test.NUnit.Assert.False(System.Char.isLetter(48), "#1");
+                Bridge.Test.NUnit.Assert.False(System.Char.isLetter(46), "#2");
+                Bridge.Test.NUnit.Assert.True(System.Char.isLetter(65), "#3");
+                Bridge.Test.NUnit.Assert.True(System.Char.isLetter(256), "#4");
+            },
+            IsLetterWithStringAndIndexWorks: function () {
+                Bridge.Test.NUnit.Assert.False(System.Char.isLetter(("abc0def").charCodeAt(3)), "#1");
+                Bridge.Test.NUnit.Assert.False(System.Char.isLetter(("1").charCodeAt(0)), "#2");
+                Bridge.Test.NUnit.Assert.False(System.Char.isLetter(("abcdef5").charCodeAt(6)), "#3");
+                Bridge.Test.NUnit.Assert.True(System.Char.isLetter(("9abcdef").charCodeAt(1)), "#4");
+                Bridge.Test.NUnit.Assert.False(System.Char.isLetter((".012345").charCodeAt(0)), "#5");
+                Bridge.Test.NUnit.Assert.False(System.Char.isLetter(("012345.").charCodeAt(6)), "#6");
+                Bridge.Test.NUnit.Assert.False(System.Char.isLetter(("012.345").charCodeAt(3)), "#7");
+                Bridge.Test.NUnit.Assert.False(System.Char.isLetter(("012.345").charCodeAt(3)), "#8");
+                Bridge.Test.NUnit.Assert.True(System.Char.isLetter(("0" + String.fromCharCode(256)).charCodeAt(1)), "#9");
+                Bridge.Test.NUnit.Assert.False(System.Char.isLetter(("0" + String.fromCharCode(256)).charCodeAt(0)), "#10");
             }
         }
     });
@@ -44068,7 +44107,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             TaskTypePropertiesAreCorrect: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("System.Threading.Tasks.Task", Bridge.Reflection.getTypeFullName(System.Threading.Tasks.Task), "FullName for non-generic task should be correct");
-                Bridge.Test.NUnit.Assert.AreEqual("System.Threading.Tasks.Task`1", Bridge.Reflection.getTypeFullName(System.Threading.Tasks.Task$1), "FullName for generic task should be correct");
+                Bridge.Test.NUnit.Assert.AreEqual("System.Threading.Tasks.Task`1[[System.Int32, mscorlib]]", Bridge.Reflection.getTypeFullName(System.Threading.Tasks.Task$1(System.Int32)), "FullName for generic task should be correct");
 
                 var task = new System.Threading.Tasks.TaskCompletionSource().task;
                 Bridge.Test.NUnit.Assert.True(Bridge.hasValue(task));
@@ -44777,7 +44816,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.Test.NUnit.Assert.False(continuationRun, "Continuation should not be run too early.");
                 });
 
-                var task = System.Threading.Tasks.Task.whenAll(this.MakeEnumerable(System.Threading.Tasks.Task$1, [tcs1.task, tcs2.task, tcs3.task]));
+                var task = System.Threading.Tasks.Task.whenAll(this.MakeEnumerable(System.Threading.Tasks.Task$1(System.Int32), [tcs1.task, tcs2.task, tcs3.task]));
 
                 var doneTask = task.continueWith(function (t) {
                     Bridge.Test.NUnit.Assert.False(continuationRun, "Continuation should only be run once.");
@@ -45060,7 +45099,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var tcs2 = new System.Threading.Tasks.TaskCompletionSource();
                 var tcs3 = new System.Threading.Tasks.TaskCompletionSource();
 
-                var task = System.Threading.Tasks.Task.whenAny(this.MakeEnumerable(System.Threading.Tasks.Task$1, [tcs1.task, tcs2.task, tcs3.task]));
+                var task = System.Threading.Tasks.Task.whenAny(this.MakeEnumerable(System.Threading.Tasks.Task$1(System.Int32), [tcs1.task, tcs2.task, tcs3.task]));
 
                 var task1 = task.continueWith(function (t) {
                     Bridge.Test.NUnit.Assert.False(continuationRun, "Continuation should only be run once.");
@@ -45185,7 +45224,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var tcs3 = new System.Threading.Tasks.TaskCompletionSource();
                 var ex = new System.Exception("Some text");
 
-                var task = System.Threading.Tasks.Task.whenAny(this.MakeEnumerable(System.Threading.Tasks.Task$1, [tcs1.task, tcs2.task, tcs3.task]));
+                var task = System.Threading.Tasks.Task.whenAny(this.MakeEnumerable(System.Threading.Tasks.Task$1(System.Int32), [tcs1.task, tcs2.task, tcs3.task]));
 
                 var task1 = task.continueWith(function (t) {
                     Bridge.Test.NUnit.Assert.False(continuationRun, "Continuation should only be run once.");
@@ -45225,7 +45264,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var tcs2 = new System.Threading.Tasks.TaskCompletionSource();
                 var tcs3 = new System.Threading.Tasks.TaskCompletionSource();
 
-                var task = System.Threading.Tasks.Task.whenAny(this.MakeEnumerable(System.Threading.Tasks.Task$1, [tcs1.task, tcs2.task, tcs3.task]));
+                var task = System.Threading.Tasks.Task.whenAny(this.MakeEnumerable(System.Threading.Tasks.Task$1(System.Int32), [tcs1.task, tcs2.task, tcs3.task]));
 
                 var task1 = task.continueWith(function (t) {
                     Bridge.Test.NUnit.Assert.False(continuationRun, "Continuation should only be run once.");
@@ -45363,7 +45402,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var taskRun = false, continuationRun = false;
 
-                var task = new System.Threading.Tasks.Task$1(function () {
+                var task = new (System.Threading.Tasks.Task$1(System.Int32))(function () {
                     taskRun = true;
                     return 42;
                 });
@@ -45399,7 +45438,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var taskRun = false, continuationRun = false;
                 var state = {  };
 
-                var task = new System.Threading.Tasks.Task$1(function (s) {
+                var task = new (System.Threading.Tasks.Task$1(System.Int32))(function (s) {
                     Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(state, s), "The state should be correct.");
                     taskRun = true;
                     return 42;

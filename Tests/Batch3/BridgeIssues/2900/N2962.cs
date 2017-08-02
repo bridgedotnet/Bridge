@@ -16,7 +16,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
             public void Method1<T>(string parameter1)
             {
-                Assert.AreEqual("parameter1", parameter1);
+                Assert.AreEqual("parameter1value", parameter1);
             }
         }
 
@@ -26,7 +26,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             {
                 Method1<string>
                 (
-                    parameter1: "parameter1"
+                    parameter1: "parameter1value"
                 );
             }
         }

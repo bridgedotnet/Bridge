@@ -243,14 +243,7 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.True(char.IsDigit('0'), "#1");
             Assert.False(char.IsDigit('.'), "#2");
             Assert.False(char.IsDigit('A'), "#3");
-        }
-
-        [Test]
-        public void IsWhiteSpaceWorks()
-        {
-            Assert.True(char.IsWhiteSpace(' '), "#1");
-            Assert.True(char.IsWhiteSpace('\n'), "#2");
-            Assert.False(char.IsWhiteSpace('A'), "#3");
+            Assert.False(char.IsDigit('\u0100'), "#4");
         }
 
         [Test]
@@ -263,6 +256,17 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.False(char.IsDigit(".012345", 0), "#5");
             Assert.False(char.IsDigit("012345.", 6), "#6");
             Assert.False(char.IsDigit("012.345", 3), "#7");
+            Assert.False(char.IsDigit("012.345", 3), "#8");
+            Assert.False(char.IsDigit("0"+ '\u0100', 1), "#9");
+        }
+
+        [Test]
+        public void IsWhiteSpaceWorks()
+        {
+            Assert.True(char.IsWhiteSpace(' '), "#1");
+            Assert.True(char.IsWhiteSpace('\n'), "#2");
+            Assert.False(char.IsWhiteSpace('A'), "#3");
+            Assert.False(char.IsWhiteSpace('\u0100'), "#4");
         }
 
         [Test]
@@ -275,6 +279,53 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.False(char.IsWhiteSpace(".\r\n     ", 0), "#5");
             Assert.False(char.IsWhiteSpace("\r\n    .", 6), "#6");
             Assert.False(char.IsWhiteSpace("\r  .\n  ", 3), "#7");
+            Assert.False(char.IsWhiteSpace(" " + '\u0100', 1), "#8");
+            Assert.True(char.IsWhiteSpace(" " + '\u0100', 0), "#9");
+        }
+
+        [Test]
+        public void IsPunctuationWorks()
+        {
+            Assert.False(char.IsPunctuation('a'));
+            Assert.True(char.IsPunctuation('-'));
+            Assert.False(char.IsPunctuation('b'));
+            Assert.True(char.IsPunctuation(','));
+            Assert.False(char.IsPunctuation('\u0100'));
+        }
+
+        [Test]
+        public void IsPunctuationWithStringAndIndexWorks()
+        {
+            var s = "a-b," + '\u0100';
+            Assert.False(char.IsPunctuation(s, 0), "0");
+            Assert.True(char.IsPunctuation(s, 1), "1");
+            Assert.False(char.IsPunctuation(s, 2), "2");
+            Assert.True(char.IsPunctuation(s, 3), "3");
+            Assert.False(char.IsPunctuation(s, 4), "4");
+        }
+
+        [Test]
+        public void IsLetterWorks()
+        {
+            Assert.False(char.IsLetter('0'), "#1");
+            Assert.False(char.IsLetter('.'), "#2");
+            Assert.True(char.IsLetter('A'), "#3");
+            Assert.True(char.IsLetter('\u0100'), "#4");
+        }
+
+        [Test]
+        public void IsLetterWithStringAndIndexWorks()
+        {
+            Assert.False(char.IsLetter("abc0def", 3), "#1");
+            Assert.False(char.IsLetter("1", 0), "#2");
+            Assert.False(char.IsLetter("abcdef5", 6), "#3");
+            Assert.True(char.IsLetter("9abcdef", 1), "#4");
+            Assert.False(char.IsLetter(".012345", 0), "#5");
+            Assert.False(char.IsLetter("012345.", 6), "#6");
+            Assert.False(char.IsLetter("012.345", 3), "#7");
+            Assert.False(char.IsLetter("012.345", 3), "#8");
+            Assert.True(char.IsLetter("0" + '\u0100', 1), "#9");
+            Assert.False(char.IsLetter("0" + '\u0100', 0), "#10");
         }
     }
 }

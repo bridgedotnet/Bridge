@@ -87,7 +87,10 @@ namespace Bridge.Translator
             this.Write(target);
         }
 
-        public bool NoTarget { get; set; }
+        public bool NoTarget
+        {
+            get; set;
+        }
 
         private void WriteInterfaceMember(string interfaceTempVar, MemberResolveResult resolveResult, bool isSetter, string prefix = null)
         {
@@ -139,7 +142,7 @@ namespace Bridge.Translator
                 if (variance)
                 {
                     this.WriteComma();
-                    this.WriteScript(OverloadsCollection.Create(Emitter, resolveResult.Member, isSetter).GetOverloadName(false, prefix, withoutTypeParams:true));
+                    this.WriteScript(OverloadsCollection.Create(Emitter, resolveResult.Member, isSetter).GetOverloadName(false, prefix, withoutTypeParams: true));
                 }
 
                 /*this.WriteComma();
@@ -246,7 +249,7 @@ namespace Bridge.Translator
             bool isDynamic = false;
             if (resolveResult is DynamicInvocationResolveResult)
             {
-                var dynamicResolveResult = (DynamicInvocationResolveResult) resolveResult;
+                var dynamicResolveResult = (DynamicInvocationResolveResult)resolveResult;
                 var group = dynamicResolveResult.Target as MethodGroupResolveResult;
 
                 if (group != null && group.Methods.Count() > 1)
@@ -644,7 +647,7 @@ namespace Bridge.Translator
 
                         if (enumMode >= 3 && enumMode < 7)
                         {
-                            string enumStringName = this.Emitter.GetEntityName(member.Member); 
+                            string enumStringName = this.Emitter.GetEntityName(member.Member);
                             this.WriteScript(enumStringName);
                             return;
                         }
@@ -930,7 +933,7 @@ namespace Bridge.Translator
                         else
                         {
                             var name = OverloadsCollection.Create(this.Emitter, member.Member).GetOverloadName(!nativeImplementation);
-                            var property = (IProperty) member.Member;
+                            var property = (IProperty)member.Member;
                             var proto = member.IsVirtualCall || property.IsVirtual || property.IsOverride;
 
                             if (this.MemberReferenceExpression.Target is BaseReferenceExpression && !property.IsIndexer && proto)

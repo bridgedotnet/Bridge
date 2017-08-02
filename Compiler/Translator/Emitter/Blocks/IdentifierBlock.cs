@@ -53,7 +53,7 @@ namespace Bridge.Translator
 
             if (this.Emitter.Locals != null && this.Emitter.Locals.ContainsKey(id) && resolveResult is LocalResolveResult)
             {
-                var lrr = (LocalResolveResult) resolveResult;
+                var lrr = (LocalResolveResult)resolveResult;
                 if (this.Emitter.LocalsMap != null && this.Emitter.LocalsMap.ContainsKey(lrr.Variable) && !(identifierExpression.Parent is DirectionExpression))
                 {
                     this.Write(this.Emitter.LocalsMap[lrr.Variable]);
@@ -213,7 +213,7 @@ namespace Bridge.Translator
                 {
                     inlineCode = "this." + inlineCode;
                 }
-                
+
                 if (resolveResult is InvocationResolveResult)
                 {
                     this.PushWriter(inlineCode);
@@ -658,7 +658,7 @@ namespace Bridge.Translator
             {
                 this.WriteComma();
             }
-            else if(!noTarget)
+            else if (!noTarget)
             {
                 this.WriteDot();
             }
