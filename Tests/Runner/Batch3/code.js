@@ -23924,6 +23924,59 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2961", {
+        statics: {
+            methods: {
+                TestEnumMemberName: function () {
+                    var o = null;
+
+                    o = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2961.TestEnum1.Name;
+                    Bridge.Test.NUnit.Assert.AreEqual(1, o);
+
+                    o = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2961.TestEnum2.$name;
+                    Bridge.Test.NUnit.Assert.AreEqual(3, o);
+
+                    o = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2961.TestEnum3.$name;
+                    Bridge.Test.NUnit.Assert.AreEqual(4, o);
+
+                    o = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2961.TestEnum3.Name;
+                    Bridge.Test.NUnit.Assert.AreEqual(5, o);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2961.TestEnum1", {
+        $kind: "enum",
+        statics: {
+            fields: {
+                Name: 1,
+                Life: 2
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2961.TestEnum2", {
+        $kind: "enum",
+        statics: {
+            fields: {
+                One: 1,
+                $name: 3
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2961.TestEnum3", {
+        $kind: "enum",
+        statics: {
+            fields: {
+                Two: 2,
+                $name: 4,
+                Name: 5
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2962", {
         statics: {
             methods: {
