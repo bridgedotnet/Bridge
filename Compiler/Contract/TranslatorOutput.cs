@@ -188,7 +188,10 @@ namespace Bridge.Contract
         {
             get
             {
-                if (Content == null || (Content.Buffer == null && Content.String == null && Content.Builder == null))
+                if (Content == null ||
+                    ((Content.Buffer == null || Content.Buffer.Length == 0)
+                    && (Content.String == null || Content.String.Length == 0)
+                    && (Content.Builder == null || Content.Builder.Length == 0)))
                 {
                     isEmpty = true;
                 }
