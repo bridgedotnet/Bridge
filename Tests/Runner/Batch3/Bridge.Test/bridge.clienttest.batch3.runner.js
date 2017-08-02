@@ -822,6 +822,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#469", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.TestBridgeIssues.N469);
             QUnit.test("#470", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.TestBridgeIssues.N470);
             QUnit.test("#499", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.TestBridgeIssues.N499);
+            QUnit.test("#2954 - TestLoopIndexRenaming", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2954.TestLoopIndexRenaming);
         }
     });
 
@@ -12513,6 +12514,31 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 var $t;
                 if (this.context == null) {
                     this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge2916", $t.File = "Batch3\\BridgeIssues\\2900\\N2916.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2954", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Test2954_1.Bridge2954)],
+        statics: {
+            methods: {
+                TestLoopIndexRenaming: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Test2954_1.Bridge2954).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2954, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestLoopIndexRenaming()", $t.Line = "23", $t));
+                    Test2954_1.Bridge2954.TestLoopIndexRenaming();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "Test2954_1.Bridge2954", $t.File = "Batch3\\BridgeIssues\\2900\\N2954.cs", $t);
                 }
                 return this.context;
             }

@@ -32459,6 +32459,38 @@ Bridge.$N1391Result =                     r;
         $variance: [1,0]
     }; });
 
+    Bridge.define("Test2954_1.Bridge2954", {
+        statics: {
+            methods: {
+                TestLoopIndexRenaming: function () {
+                    // Bridge.NET will rename to $Test2954_1 to avoid conflict with root of namespace Test2954_1
+                    var $Test2954_1 = 1;
+
+                    for (var Test2954_ = 0; Test2954_ < 1; Test2954_ = (Test2954_ + 1) | 0) {
+                    }
+
+                    Test2954_1.Person.Name = "Sally";
+
+                    // The following line was failing in javascript, because there is a generated local variable named Test2954_1 which
+                    // is hiding the global variable Test2954_1 corresponding to the root of namespace Test2954_1
+                    for (var Test2954_2 = 0; Test2954_2 < 1; Test2954_2 = (Test2954_2 + 1) | 0) {
+                    }
+
+                    Bridge.Test.NUnit.Assert.AreEqual(1, $Test2954_1);
+                    Bridge.Test.NUnit.Assert.AreEqual("Sally", Test2954_1.Person.Name);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Test2954_1.Person", {
+        statics: {
+            props: {
+                Name: null
+            }
+        }
+    });
+
     Bridge.define("achievements.content.ContentAchievements", {
         inherits: [content.ContentManagerBase],
         statics: {
