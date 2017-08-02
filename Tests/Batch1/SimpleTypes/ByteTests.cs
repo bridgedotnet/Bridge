@@ -1,5 +1,6 @@
 ﻿using Bridge.Test.NUnit;
 using System;
+using System.Globalization;
 
 namespace Bridge.ClientTest.SimpleTypes
 {
@@ -8,18 +9,28 @@ namespace Bridge.ClientTest.SimpleTypes
     public class ByteTests
     {
         [Test]
-        public void TypePropertiesAreCorrect()
+        public void TypePropertiesAreCorrect_SPI_1717()
         {
             Assert.True((object)(byte)0 is byte);
             Assert.False((object)0.5 is byte);
             Assert.False((object)-1 is byte);
             Assert.False((object)256 is byte);
             Assert.AreEqual("System.Byte", typeof(byte).FullName);
+            Assert.False(typeof(byte).IsClass);
+            Assert.True(typeof(IComparable<byte>).IsAssignableFrom(typeof(byte)));
+            Assert.True(typeof(IEquatable<byte>).IsAssignableFrom(typeof(byte)));
+            Assert.True(typeof(IFormattable).IsAssignableFrom(typeof(byte)));
             object b = (byte)0;
             Assert.True(b is byte);
             Assert.True(b is IComparable<byte>);
             Assert.True(b is IEquatable<byte>);
             Assert.True(b is IFormattable);
+
+            var interfaces = typeof(byte).GetInterfaces();
+            Assert.AreEqual(4, interfaces.Length);
+            Assert.True(interfaces.Contains(typeof(IComparable<byte>)));
+            Assert.True(interfaces.Contains(typeof(IEquatable<byte>)));
+            Assert.True(interfaces.Contains(typeof(IFormattable)));
         }
 
         [Test]
@@ -46,17 +57,29 @@ namespace Bridge.ClientTest.SimpleTypes
 
             checked
             {
-                Assert.Throws(() => { var b = (byte)i1; }, err => err is OverflowException);
+                Assert.Throws<OverflowException>(() =>
+                {
+                    var x = (byte)i1;
+                }, "-1 checked");
                 Assert.AreStrictEqual(0, (byte)i2, "0 checked");
                 Assert.AreStrictEqual(234, (byte)i3, "234 checked");
                 Assert.AreStrictEqual(255, (byte)i4, "256 checked");
-                Assert.Throws(() => { var b = (byte)i5; }, err => err is OverflowException);
+                Assert.Throws<OverflowException>(() =>
+                {
+                    var x = (byte)i5;
+                }, "256 checked");
 
-                Assert.Throws(() => { var b = (byte?)ni1; }, err => err is OverflowException);
+                Assert.Throws<OverflowException>(() =>
+                {
+                    var x = (byte?)ni1;
+                }, "nullable -1 checked");
                 Assert.AreStrictEqual(0, (byte?)ni2, "nullable 0 checked");
                 Assert.AreStrictEqual(234, (byte?)ni3, "nullable 234 checked");
                 Assert.AreStrictEqual(255, (byte?)ni4, "nullable 255 checked");
-                Assert.Throws(() => { var b = (byte?)ni5; }, err => err is OverflowException);
+                Assert.Throws<OverflowException>(() =>
+                {
+                    var x = (byte?)ni5;
+                }, "nullable 256 checked");
                 Assert.AreStrictEqual(null, (byte?)ni6, "null checked");
             }
         }
@@ -81,7 +104,7 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void CreatingInstanceReturnsZero()
         {
-            Assert.AreEqual(0, Activator.CreateInstance<byte>());
+            Assert.AreStrictEqual(0, Activator.CreateInstance<byte>());
         }
 
         [Test]
@@ -98,13 +121,32 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void IFormattableToStringWorks()
+        public void ToStringWithFormatWorks()
         {
             Assert.AreEqual("12", ((byte)0x12).ToString("x"));
         }
 
         [Test]
-        public void TryParseWorks()
+        public void ToStringWithFormatAndProviderWorks()
+        {
+            Assert.AreEqual("12", ((byte)0x12).ToString("x", CultureInfo.InvariantCulture));
+        }
+
+        [Test]
+        public void IFormattableToStringWorks()
+        {
+            Assert.AreEqual("12", ((IFormattable)((byte)0x12)).ToString("x", CultureInfo.InvariantCulture));
+        }
+
+        // Not C# API
+        //[Test]
+        //public void LocaleFormatWorks()
+        //{
+        //    Assert.AreEqual(((byte)0x12).LocaleFormat("x"), "12");
+        //}
+
+        [Test]
+        public void TryParseWorks_SPI_1592()
         {
             byte numberResult;
             bool result = byte.TryParse("234", out numberResult);
@@ -125,11 +167,15 @@ namespace Bridge.ClientTest.SimpleTypes
 
             result = byte.TryParse("54768", out numberResult);
             Assert.False(result);
-            Assert.AreEqual(54768, numberResult);
+            // #1592
+            Assert.AreEqual(54768, numberResult, "#1592");
+            //Assert.AreEqual(0, numberResult);
 
             result = byte.TryParse("-1", out numberResult);
             Assert.False(result);
-            Assert.AreEqual(-1, numberResult);
+            // #1592
+            Assert.AreEqual(-1, numberResult, "#1592");
+            //Assert.AreEqual(0, numberResult);
 
             result = byte.TryParse("2.5", out numberResult);
             Assert.False(result);
@@ -140,12 +186,12 @@ namespace Bridge.ClientTest.SimpleTypes
         public void ParseWorks()
         {
             Assert.AreEqual(234, byte.Parse("234"));
-            Assert.Throws(() => byte.Parse(""));
-            Assert.Throws(() => byte.Parse(null));
-            Assert.Throws(() => byte.Parse("notanumber"));
-            Assert.Throws(() => byte.Parse("54768"));
-            Assert.Throws(() => byte.Parse("-1"));
-            Assert.Throws(() => byte.Parse("2.5"));
+            Assert.Throws<FormatException>(() => byte.Parse(""));
+            Assert.Throws<ArgumentNullException>(() => byte.Parse(null));
+            Assert.Throws<FormatException>(() => byte.Parse("notanumber"));
+            Assert.Throws<OverflowException>(() => byte.Parse("54768"));
+            Assert.Throws<OverflowException>(() => byte.Parse("-1"));
+            Assert.Throws<FormatException>(() => byte.Parse("2.5"));
         }
 
         [Test]

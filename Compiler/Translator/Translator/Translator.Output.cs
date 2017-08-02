@@ -496,7 +496,7 @@ namespace Bridge.Translator
 
             var combinedLocales = Combine(null, this.Outputs.Locales, fileName, "locales", TranslatorOutputKind.Locale);
 
-            if (!string.IsNullOrWhiteSpace(this.AssemblyInfo.LocalesOutput))
+            if (combinedLocales != null && !string.IsNullOrWhiteSpace(this.AssemblyInfo.LocalesOutput))
             {
                 combinedLocales.Location = this.AssemblyInfo.LocalesOutput;
             }
@@ -519,38 +519,46 @@ namespace Bridge.Translator
             }
 
             var needNewLine = false;
+            StringBuilder buffer = null;
+            int bufferLength = 0;
 
             var combinedOutput = Combine(null, this.Outputs.References, fileName, "project references", TranslatorOutputKind.ProjectOutput);
 
-            var buffer = combinedOutput.Content.Builder;
-
-            var bufferLength = buffer.Length;
-
-            if (bufferLength > 0)
+            if (combinedOutput != null)
             {
-                needNewLine = true;
+                buffer = combinedOutput.Content.Builder;
+
+                bufferLength = buffer.Length;
+
+                if (bufferLength > 0)
+                {
+                    needNewLine = true;
+                }
             }
 
             if (this.Outputs.CombinedLocales != null)
             {
-                this.Log.Trace("Added combined locales.");
-
                 if (needNewLine)
                 {
                     NewLine(buffer);
                     needNewLine = false;
                 }
 
-                combinedOutput.Content.Builder.Append(this.Outputs.CombinedLocales.Content.GetContent(true));
-
-                if (buffer.Length > bufferLength)
-                {
-                    needNewLine = true;
-                }
-
-                bufferLength = buffer.Length;
+                combinedOutput = Combine(combinedOutput, new List<TranslatorOutputItem> { this.Outputs.CombinedLocales }, fileName, "combined locales output", TranslatorOutputKind.ProjectOutput);
 
                 this.Outputs.CombinedLocales = null;
+
+                if (combinedOutput != null)
+                {
+                    buffer = combinedOutput.Content.Builder;
+
+                    if (buffer.Length > bufferLength)
+                    {
+                        needNewLine = true;
+                    }
+
+                    bufferLength = buffer.Length;
+                }
             }
 
             if (needNewLine)
@@ -559,7 +567,7 @@ namespace Bridge.Translator
                 needNewLine = false;
             }
 
-            Combine(combinedOutput, this.Outputs.Main, fileName, "project main output", TranslatorOutputKind.ProjectOutput);
+            combinedOutput = Combine(combinedOutput, this.Outputs.Main, fileName, "project main output", TranslatorOutputKind.ProjectOutput);
 
             this.Outputs.Combined = combinedOutput;
 

@@ -35,18 +35,30 @@ namespace Bridge.ClientTest.Collections.Generic
 
             public string this[int key]
             {
-                get { return _backingDictionary[key]; }
-                set { _backingDictionary[key] = value; }
+                get
+                {
+                    return _backingDictionary[key];
+                }
+                set
+                {
+                    _backingDictionary[key] = value;
+                }
             }
 
             public new ICollection<int> Keys
             {
-                get { return _backingDictionary.Keys; }
+                get
+                {
+                    return _backingDictionary.Keys;
+                }
             }
 
             IEnumerable<string> IReadOnlyDictionary<int, string>.Values
             {
-                get { return _backingDictionary.Values; }
+                get
+                {
+                    return _backingDictionary.Values;
+                }
             }
 
             IEnumerable<int> IReadOnlyDictionary<int, string>.Keys
@@ -65,11 +77,20 @@ namespace Bridge.ClientTest.Collections.Generic
                 }
             }
 
-            public int Count { get { return _backingDictionary.Count; } }
+            public int Count
+            {
+                get
+                {
+                    return _backingDictionary.Count;
+                }
+            }
 
             public bool IsReadOnly
             {
-                get { return this._backingDictionary.IsReadOnly; }
+                get
+                {
+                    return this._backingDictionary.IsReadOnly;
+                }
             }
 
             public void Add(KeyValuePair<int, string> item)
@@ -122,13 +143,21 @@ namespace Bridge.ClientTest.Collections.Generic
         public void TypePropertiesAreCorrect()
         {
             Assert.AreEqual("System.Collections.Generic.IDictionary`2[[System.Object, mscorlib],[System.Object, mscorlib]]", typeof(IDictionary<object, object>).FullName, "FullName should be correct");
+            Assert.True(typeof(IDictionary<object, object>).IsInterface, "IsInterface should be true");
+
+            var interfaces = typeof(IDictionary<object, object>).GetInterfaces();
+            Assert.AreEqual(3, interfaces.Length, "Interfaces length");
+            Assert.True(interfaces.Contains(typeof(IEnumerable<KeyValuePair<object, object>>)), "IEnumerable<>");
+            Assert.True(interfaces.Contains(typeof(ICollection<KeyValuePair<object, object>>)), "ICollection<>");
+            Assert.True(interfaces.Contains(typeof(IEnumerable)), "IEnumerable");
         }
 
         [Test]
-        public void ClassImplementsInterfaces()
+        public void ClassImplementsInterfaces_SPI_1626()
         {
             Assert.True((object)new MyDictionary() is IDictionary<int, string>);
-            Assert.True((object)new MyDictionary() is IReadOnlyDictionary<int, string>, "#1626");
+            // #1626
+            Assert.True((object)new MyDictionary() is IReadOnlyDictionary<int, string>);
         }
 
         [Test]
@@ -166,15 +195,25 @@ namespace Bridge.ClientTest.Collections.Generic
         public void GetItemWorks()
         {
             var d = new MyDictionary(new Dictionary<int, string> { { 3, "b" }, { 6, "z" }, { 9, "x" } });
-
+            var di = (IDictionary<int, string>)d;
             var di2 = (IDictionary<int, string>)d;
 
             Assert.AreEqual("x", d[9]);
+            Assert.AreEqual("b", di[3]);
             Assert.AreEqual("z", di2[6]);
 
             try
             {
                 var x = d[1];
+                Assert.Fail("Should throw");
+            }
+            catch (Exception)
+            {
+            }
+
+            try
+            {
+                var x = di[1];
                 Assert.Fail("Should throw");
             }
             catch (Exception)

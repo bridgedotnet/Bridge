@@ -18,25 +18,45 @@ namespace Bridge.ClientTest.Exceptions
                 _innerException = innerException;
             }
 
-            public override string Message { get { return _message; } }
-            public override Exception InnerException { get { return _innerException; } }
+            public override string Message
+            {
+                get
+                {
+                    return _message;
+                }
+            }
+
+            public override Exception InnerException
+            {
+                get
+                {
+                    return _innerException;
+                }
+            }
         }
 
         [Test]
         public void TypePropertiesAreCorrect()
         {
             Assert.AreEqual("System.Exception", typeof(Exception).FullName, "Name");
+            Assert.True(typeof(Exception).IsClass, "IsClass");
+            Assert.AreEqual(typeof(object), typeof(Exception).BaseType, "BaseType");
             object d = new Exception();
             Assert.True(d is Exception);
+
+            var interfaces = typeof(Exception).GetInterfaces();
+            Assert.AreEqual(0, interfaces.Length);
         }
 
         [Test]
-        public void DefaultConstructorWorks()
+        public void DefaultConstructorWorks_SPI_1669()
         {
             var ex = new Exception();
             Assert.True((object)ex is Exception, "is Exception");
             Assert.AreEqual(null, ex.InnerException, "InnerException");
+            // #1669
             Assert.AreEqual("Exception of type 'System.Exception' was thrown.", ex.Message);
+            Assert.False(string.IsNullOrEmpty(ex.StackTrace), "Stack available");
         }
 
         [Test]
@@ -46,6 +66,7 @@ namespace Bridge.ClientTest.Exceptions
             Assert.True((object)ex is Exception, "is Exception");
             Assert.AreEqual(null, ex.InnerException, "InnerException");
             Assert.AreEqual("The message", ex.Message);
+            Assert.False(string.IsNullOrEmpty(ex.StackTrace), "Stack available");
         }
 
         [Test]
@@ -56,6 +77,7 @@ namespace Bridge.ClientTest.Exceptions
             Assert.True((object)ex is Exception, "is Exception");
             Assert.True(ReferenceEquals(ex.InnerException, inner), "InnerException");
             Assert.AreEqual("The message", ex.Message);
+            Assert.False(string.IsNullOrEmpty(ex.StackTrace), "Stack available");
         }
 
         [Test]

@@ -91,6 +91,9 @@
         public const string MODULE_NULLREFERENCEEXCEPTION = PREFIX_EXCEPTIONS; // + "NullReferenceException";
         public const string MODULE_ARGUMENTOUTOFRANGEEXCEPTION = PREFIX_EXCEPTIONS; // + "ArgumentOutOfRangeException";
 
+        public const string MODULE_ACTIVATOR = "Activator";
+        public const string MODULE_IFORMATTABLE = "IFormattable";
+        public const string MODULE_DELEGATE = "Delegate";
         public const string MODULE_THREADING = "Threading";
         public const string MODULE_DIAGNOSTICS = "Diagnostics";
         public const string MODULE_CHECKED_UNCKECKED = "Checked/Unckecked";
@@ -102,6 +105,7 @@
         public const string MODULE_SYSTEM_CONSOLE = "System Console";
         public const string MODULE_OBJECTLITERAL = "[ObjectLiteral]";
         public const string MODULE_SCRIPT = "Script";
+        public const string MODULE_RUNTIME = "Runtime helpers"; // + "Array";
 
         public const string IGNORE_DATE = null;
     }

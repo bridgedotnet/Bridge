@@ -28,13 +28,25 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void TypePropertiesAreCorrect()
+        public void TypePropertiesAreCorrect_SPI_1717()
         {
             Assert.True((object)(double)0.5 is double);
             Assert.AreEqual("System.Double", typeof(double).FullName);
+            Assert.False(typeof(double).IsClass);
+            Assert.True(typeof(IComparable<double>).IsAssignableFrom(typeof(double)));
+            Assert.True(typeof(IEquatable<double>).IsAssignableFrom(typeof(double)));
+            Assert.True(typeof(IFormattable).IsAssignableFrom(typeof(double)));
             object d = (double)0;
             Assert.True((object)d is double);
+            Assert.True((object)d is IComparable<double>);
+            Assert.True((object)d is IEquatable<double>);
             Assert.True((object)d is IFormattable);
+
+            var interfaces = typeof(double).GetInterfaces();
+            Assert.AreEqual(4, interfaces.Length);
+            Assert.True(interfaces.Contains(typeof(IComparable<double>)));
+            Assert.True(interfaces.Contains(typeof(IEquatable<double>)));
+            Assert.True(interfaces.Contains(typeof(IFormattable)));
         }
 
         private T GetDefaultValue<T>()
@@ -58,7 +70,10 @@ namespace Bridge.ClientTest.SimpleTypes
         public void ConstantsWork()
         {
             double zero = 0;
+            Assert.True(double.MinValue < (double)(object)-1.7e+308, "MinValue should be correct");
             Assert.True(double.MaxValue > (double)(object)1.7e+308, "MaxValue should be correct");
+            // Not C# API
+            //Assert.AreEqual(double.JsMinValue, 5e-324, "MinValue should be correct");
             Assert.AreEqual(4.94065645841247E-324, double.Epsilon, "MinValue should be correct");
             Assert.True(double.IsNaN(double.NaN), "NaN should be correct");
             Assert.AreStrictEqual(1 / zero, double.PositiveInfinity, "PositiveInfinity should be correct");
@@ -78,10 +93,35 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
+        public void ToStringWithFormatWorks()
+        {
+            Assert.AreEqual("123", (291.0).ToString("x"));
+        }
+
+        [Test]
+        public void ToStringWithFormatAndProviderWorks()
+        {
+            Assert.AreEqual("123", (291.0).ToString("x", CultureInfo.InvariantCulture));
+        }
+
+        [Test]
         public void IFormattableToStringWorks()
         {
             Assert.AreEqual("123", 291.0.ToString("x"));
         }
+
+        [Test]
+        public void IFormattableToStringWithCultureInfoWorks()
+        {
+            Assert.AreEqual("123", ((IFormattable)(291.0)).ToString("x", CultureInfo.InvariantCulture));
+        }
+
+        // Not C# API
+        //[Test]
+        //public void LocaleFormatWorks()
+        //{
+        //    Assert.AreEqual((291.0).LocaleFormat("x"), "123");
+        //}
 
         [Test]
         public void ToStringWorks()
@@ -126,9 +166,12 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void IsPositiveInfinityWorks()
+        public void IsPositiveInfinityWorks_SPI_1600()
         {
             double inf = 1.0 / 0.0;
+
+            // #1600
+            Assert.True(double.IsPositiveInfinity(inf), "inf");
             Assert.False(double.IsPositiveInfinity(-inf), "-inf");
             Assert.False(double.IsPositiveInfinity(0.0), "0.0");
             Assert.False(double.IsPositiveInfinity(Double.NaN), "Double.NaN");
@@ -191,12 +234,17 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void DoubleEqualsWorks()
+        public void IEquatableEqualsWorks()
         {
             Assert.True(((double)0).Equals((double)0));
             Assert.False(((double)1).Equals((double)0));
             Assert.False(((double)0).Equals((double)0.5));
             Assert.True(((double)1).Equals((double)1));
+
+            Assert.True(((IEquatable<double>)((double)0)).Equals((double)0));
+            Assert.False(((IEquatable<double>)((double)1)).Equals((double)0));
+            Assert.False(((IEquatable<double>)((double)0)).Equals((double)0.5));
+            Assert.True(((IEquatable<double>)((double)1)).Equals((double)1));
         }
 
         [Test]

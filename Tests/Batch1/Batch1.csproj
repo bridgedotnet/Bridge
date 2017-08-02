@@ -45,11 +45,18 @@
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ActivatorTests.cs" />
     <Compile Include="BitConverterTests.cs" />
     <Compile Include="BasicCSharp\TestGoto.cs" />
+    <Compile Include="Collections\Generic\KeyValuePairTests.cs" />
     <Compile Include="Collections\Generic\QueueTests.cs" />
     <Compile Include="Collections\Generic\StackTests.cs" />
+    <Compile Include="DelegateTests.cs" />
+    <Compile Include="IFormattableTests.cs" />
+    <Compile Include="BasicCSharp\RefParameterTests.cs" />
+    <Compile Include="Runtime\CompilerServices\RuntimeHelpersTests.cs" />
     <Compile Include="ScriptTests.cs" />
+    <Compile Include="SimpleTypes\JsDateTests.cs" />
     <Compile Include="SystemConsoleTests.cs" />
     <Compile Include="Collections\Generic\IReadOnlyCollectionTests.cs" />
     <Compile Include="Collections\Generic\IReadOnlyDictionaryTests.cs" />
@@ -294,7 +301,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Bridge.Test, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Bridge.Test.Core.1.0.0-beta5\lib\net40\Bridge.Test.dll</HintPath>
+      <HintPath>..\..\packages\Bridge.Test.Core.1.0.0\lib\net40\Bridge.Test.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

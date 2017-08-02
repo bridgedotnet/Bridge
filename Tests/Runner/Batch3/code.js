@@ -22,10 +22,10 @@ var Bridge2874Base = (function () {
 
 /**
  * Bridge Test library - test github issues up to #1999
- * @version 16.0.0-beta5
+ * @version 16.0.0
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2017 Object.NET, Inc.
- * @compiler Bridge.NET 16.0.0-beta5
+ * @compiler Bridge.NET 16.0.0
  */
 Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     "use strict";
@@ -23910,6 +23910,97 @@ Bridge.$N1391Result =                     r;
         $kind: "interface"
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992", {
+        statics: {
+            methods: {
+                TestRefThis: function () {
+                    var q = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992.Vector2.$ctor1(10, 10);
+                    var x = q.X;
+                    var y = q.Y;
+
+                    q.Normalize();
+                    Bridge.Test.NUnit.Assert.AreNotEqual(x, q.X);
+                    Bridge.Test.NUnit.Assert.AreNotEqual(y, q.Y);
+
+                    q.Normalize(true);
+                    Bridge.Test.NUnit.Assert.AreEqual(7, q.X);
+                    Bridge.Test.NUnit.Assert.AreEqual(7, q.Y);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992.Vector2", {
+        $kind: "struct",
+        statics: {
+            fields: {
+                zeroVector: null
+            },
+            ctors: {
+                init: function () {
+                    this.zeroVector = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992.Vector2();
+                    this.zeroVector = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992.Vector2.$ctor1(0.0, 0.0);
+                }
+            },
+            methods: {
+                DistanceSquared: function (value1, value2) {
+                    return (value1.X - value2.X) * (value1.X - value2.X) + (value1.Y - value2.Y) * (value1.Y - value2.Y);
+                },
+                Normalize: function (value, result) {
+                    var factor = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992.Vector2.DistanceSquared(value.v.$clone(), Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992.Vector2.zeroVector.$clone());
+                    factor = 1.0 / Math.sqrt(factor);
+                    result.v.X = value.v.X * factor;
+                    result.v.Y = value.v.Y * factor;
+                },
+                SetNewValue: function (value) {
+                    value.v = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992.Vector2.$ctor1(7, 7);
+                },
+                getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992.Vector2(); }
+            }
+        },
+        fields: {
+            X: 0,
+            Y: 0
+        },
+        ctors: {
+            $ctor1: function (x, y) {
+                this.$initialize();
+                this.X = x;
+                this.Y = y;
+            },
+            ctor: function () {
+                this.$initialize();
+            }
+        },
+        methods: {
+            Normalize: function (setNewValue) {
+                if (setNewValue === void 0) { setNewValue = false; }
+                if (setNewValue) {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992.Vector2.SetNewValue(Bridge.ref(this));
+                } else {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992.Vector2.Normalize(Bridge.ref(this), Bridge.ref(this));
+                }
+
+            },
+            getHashCode: function () {
+                var h = Bridge.addHash([1955977157, this.X, this.Y]);
+                return h;
+            },
+            equals: function (o) {
+                if (!Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992.Vector2)) {
+                    return false;
+                }
+                return Bridge.equals(this.X, o.X) && Bridge.equals(this.Y, o.Y);
+            },
+            $clone: function (to) {
+                var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992.Vector2();
+                s.X = this.X;
+                s.Y = this.Y;
+                return s;
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.IBridge304", {
         $kind: "interface"
     });
@@ -29236,10 +29327,10 @@ Bridge.$N1391Result =                     r;
             methods: {
                 TestUseCase: function () {
                     Bridge.Test.NUnit.Assert.True((System.Char.isDigit(65) || System.Char.isLetter(65)), "Bridge817 IsLetterOrDigit");
-                    Bridge.Test.NUnit.Assert.True((System.Char.isDigit("A".charCodeAt(0)) || System.Char.isLetter("A".charCodeAt(0))), "Bridge817 IsLetterOrDigit string");
+                    Bridge.Test.NUnit.Assert.True((System.Char.isDigit(("A").charCodeAt(0)) || System.Char.isLetter(("A").charCodeAt(0))), "Bridge817 IsLetterOrDigit string");
 
                     Bridge.Test.NUnit.Assert.False(!(System.Char.isDigit(65) || System.Char.isLetter(65)), "Bridge817 IsLetterOrDigit !");
-                    Bridge.Test.NUnit.Assert.False(!(System.Char.isDigit("A".charCodeAt(0)) || System.Char.isLetter("A".charCodeAt(0))), "Bridge817 IsLetterOrDigit string !");
+                    Bridge.Test.NUnit.Assert.False(!(System.Char.isDigit(("A").charCodeAt(0)) || System.Char.isLetter(("A").charCodeAt(0))), "Bridge817 IsLetterOrDigit string !");
                 }
             }
         }

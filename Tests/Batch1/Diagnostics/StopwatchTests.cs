@@ -10,6 +10,17 @@ namespace Bridge.ClientTest.Diagnostics
     public class StopwatchTests
     {
         [Test]
+        public void TypePropertiesAreCorrect()
+        {
+            Assert.AreEqual("System.Diagnostics.Stopwatch", typeof(Stopwatch).FullName, "Class name");
+            Assert.True(typeof(Stopwatch).IsClass, "IsClass");
+            var watch = new Stopwatch();
+            Assert.True((object)watch is Stopwatch, "is StopWatch");
+
+            Assert.AreEqual(typeof(Stopwatch).GetInterfaces().Length, 0, "Interfaces should be empty");
+        }
+
+        [Test]
         public static void GetTimestamp()
         {
             long ts1 = Stopwatch.GetTimestamp();
@@ -108,7 +119,7 @@ namespace Bridge.ClientTest.Diagnostics
         private static void Sleep(int milliseconds = 2)
         {
             TimeSpan start = new TimeSpan(DateTime.Now.Ticks);
-            
+
             while ((new TimeSpan(DateTime.Now.Ticks) - start).TotalMilliseconds < milliseconds)
             {
             }

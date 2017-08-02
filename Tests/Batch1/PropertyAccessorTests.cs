@@ -11,57 +11,255 @@ namespace Bridge.ClientTest
         public class C1
         {
             public int F1, F2, F3;
-            public int P1 { get { return F1 + 1; } set { F1 = value - 1; } }
-            public int P2 { get { return F2 + 1; } }
-            public int P3 { set { F3 = value - 1; } }
+
+            public int P1
+            {
+                get
+                {
+                    return F1 + 1;
+                }
+                set
+                {
+                    F1 = value - 1;
+                }
+            }
+
+            public int P2
+            {
+                get
+                {
+                    return F2 + 1;
+                }
+            }
+
+            public int P3
+            {
+                set
+                {
+                    F3 = value - 1;
+                }
+            }
 
             public static int FS1, FS2, FS3;
-            public static int PS1 { get { return FS1 + 1; } set { FS1 = value - 1; } }
-            public static int PS2 { get { return FS2 + 1; } }
-            public static int PS3 { set { FS3 = value - 1; } }
+
+            public static int PS1
+            {
+                get
+                {
+                    return FS1 + 1;
+                }
+                set
+                {
+                    FS1 = value - 1;
+                }
+            }
+
+            public static int PS2
+            {
+                get
+                {
+                    return FS2 + 1;
+                }
+            }
+
+            public static int PS3
+            {
+                set
+                {
+                    FS3 = value - 1;
+                }
+            }
         }
 
         public class C2<T>
         {
             public T F1, F2, F3;
-            public int P1 { get { return (dynamic)F1 + 1; } set { F1 = (dynamic)value - 1; } }
-            public int P2 { get { return (dynamic)F2 + 1; } }
-            public int P3 { set { F3 = (dynamic)value - 1; } }
+
+            public int P1
+            {
+                get
+                {
+                    return (dynamic)F1 + 1;
+                }
+                set
+                {
+                    F1 = (dynamic)value - 1;
+                }
+            }
+
+            public int P2
+            {
+                get
+                {
+                    return (dynamic)F2 + 1;
+                }
+            }
+
+            public int P3
+            {
+                set
+                {
+                    F3 = (dynamic)value - 1;
+                }
+            }
 
             public static T FS1, FS2, FS3;
-            public static int PS1 { get { return (dynamic)FS1 + 1; } set { FS1 = (dynamic)value - 1; } }
-            public static int PS2 { get { return (dynamic)FS2 + 1; } }
-            public static int PS3 { set { FS3 = (dynamic)value - 1; } }
+
+            public static int PS1
+            {
+                get
+                {
+                    return (dynamic)FS1 + 1;
+                }
+                set
+                {
+                    FS1 = (dynamic)value - 1;
+                }
+            }
+
+            public static int PS2
+            {
+                get
+                {
+                    return (dynamic)FS2 + 1;
+                }
+            }
+
+            public static int PS3
+            {
+                set
+                {
+                    FS3 = (dynamic)value - 1;
+                }
+            }
         }
 
         public class B3
         {
             public int F1, F2, F3;
-            public virtual int P1 { get { return F1; } set { F1 = value; } }
-            public virtual int P2 { get { return F2; } }
-            public virtual int P3 { set { F3 = value; } }
+
+            public virtual int P1
+            {
+                get
+                {
+                    return F1;
+                }
+                set
+                {
+                    F1 = value;
+                }
+            }
+
+            public virtual int P2
+            {
+                get
+                {
+                    return F2;
+                }
+            }
+
+            public virtual int P3
+            {
+                set
+                {
+                    F3 = value;
+                }
+            }
         }
 
         public class D3 : B3
         {
-            public override int P1 { get { return base.P1 + 1; } set { base.P1 = value - 1; } }
-            public override int P2 { get { return base.P2 + 1; } }
-            public override int P3 { set { base.P3 = value - 1; } }
+            public override int P1
+            {
+                get
+                {
+                    return base.P1 + 1;
+                }
+                set
+                {
+                    base.P1 = value - 1;
+                }
+            }
+
+            public override int P2
+            {
+                get
+                {
+                    return base.P2 + 1;
+                }
+            }
+
+            public override int P3
+            {
+                set
+                {
+                    base.P3 = value - 1;
+                }
+            }
         }
 
         public class B4<T>
         {
             public T F1, F2, F3;
-            public virtual T P1 { get { return F1; } set { F1 = value; } }
-            public virtual T P2 { get { return F2; } }
-            public virtual T P3 { set { F3 = value; } }
+
+            public virtual T P1
+            {
+                get
+                {
+                    return F1;
+                }
+                set
+                {
+                    F1 = value;
+                }
+            }
+
+            public virtual T P2
+            {
+                get
+                {
+                    return F2;
+                }
+            }
+
+            public virtual T P3
+            {
+                set
+                {
+                    F3 = value;
+                }
+            }
         }
 
         public class D4<T> : B4<T>
         {
-            public override T P1 { get { return (dynamic)base.P1 + 1; } set { base.P1 = (dynamic)value - 1; } }
-            public override T P2 { get { return (dynamic)base.P2 + 1; } }
-            public override T P3 { set { base.P3 = (dynamic)value - 1; } }
+            public override T P1
+            {
+                get
+                {
+                    return (dynamic)base.P1 + 1;
+                }
+                set
+                {
+                    base.P1 = (dynamic)value - 1;
+                }
+            }
+
+            public override T P2
+            {
+                get
+                {
+                    return (dynamic)base.P2 + 1;
+                }
+            }
+
+            public override T P3
+            {
+                set
+                {
+                    base.P3 = (dynamic)value - 1;
+                }
+            }
         }
 
 #pragma warning restore 649

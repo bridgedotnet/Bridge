@@ -12,9 +12,14 @@ namespace Bridge.ClientTest.Exceptions
         public void TypePropertiesAreCorrect()
         {
             Assert.AreEqual("System.OperationCanceledException", typeof(OperationCanceledException).FullName, "Name");
+            Assert.True(typeof(OperationCanceledException).IsClass, "IsClass");
+            Assert.AreEqual(typeof(Exception), typeof(OperationCanceledException).BaseType, "BaseType");
             object d = new OperationCanceledException();
             Assert.True(d is OperationCanceledException, "is OperationCanceledException");
             Assert.True(d is Exception, "is Exception");
+
+            var interfaces = typeof(OperationCanceledException).GetInterfaces();
+            Assert.AreEqual(0, interfaces.Length, "Interfaces length");
         }
 
         [Test]

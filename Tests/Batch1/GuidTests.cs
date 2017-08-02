@@ -28,7 +28,7 @@ namespace Bridge.ClientTest
         {
             object result = default(Guid);
             Assert.True(result is Guid);
-            Assert.AreEqual(result.ToString(), "00000000-0000-0000-0000-000000000000");
+            Assert.AreEqual("00000000-0000-0000-0000-000000000000", result.ToString());
         }
 
         [Test]
@@ -36,7 +36,7 @@ namespace Bridge.ClientTest
         {
             object result = Activator.CreateInstance<Guid>();
             Assert.True(result is Guid);
-            Assert.AreEqual(result.ToString(), "00000000-0000-0000-0000-000000000000");
+            Assert.AreEqual("00000000-0000-0000-0000-000000000000", result.ToString());
         }
 
         [Test]
@@ -44,20 +44,20 @@ namespace Bridge.ClientTest
         {
             object result = new Guid();
             Assert.True(result is Guid);
-            Assert.AreEqual(result.ToString(), "00000000-0000-0000-0000-000000000000");
+            Assert.AreEqual("00000000-0000-0000-0000-000000000000", result.ToString());
         }
 
         [Test]
         public void EmptyWorks()
         {
-            Assert.AreEqual(Guid.Empty.ToString(), "00000000-0000-0000-0000-000000000000");
+            Assert.AreEqual("00000000-0000-0000-0000-000000000000", Guid.Empty.ToString());
         }
 
         [Test]
         public void ToStringWithoutArgumentsWorks()
         {
             var guid = new Guid("223310CC-1F48-4489-B87E-88C779C77CB3");
-            Assert.AreEqual(guid.ToString(), "223310cc-1f48-4489-b87e-88c779c77cb3");
+            Assert.AreEqual("223310cc-1f48-4489-b87e-88c779c77cb3", guid.ToString());
         }
 
         [Test]
@@ -65,7 +65,7 @@ namespace Bridge.ClientTest
         {
             var g = new Guid(new byte[] { 0x78, 0x95, 0x62, 0xa8, 0x26, 0x7a, 0x45, 0x61, 0x90, 0x32, 0xd9, 0x1a, 0x3d, 0x54, 0xbd, 0x68 });
             Assert.True((object)g is Guid, "Should be Guid");
-            Assert.AreEqual(g.ToString(), "a8629578-7a26-6145-9032-d91a3d54bd68", "value");
+            Assert.AreEqual("a8629578-7a26-6145-9032-d91a3d54bd68", g.ToString(), "value");
             Assert.Throws(() => new Guid(new byte[] { 0x78, 0x95, 0x62, 0xa8, 0x26, 0x7a }), typeof(ArgumentException), "Invalid array should throw");
         }
 
@@ -74,7 +74,7 @@ namespace Bridge.ClientTest
         {
             var g = new Guid((int)0x789562a8, (short)0x267a, (short)0x4561, new byte[] { 0x90, 0x32, 0xd9, 0x1a, 0x3d, 0x54, 0xbd, 0x68 });
             Assert.True((object)g is Guid, "Should be Guid");
-            Assert.AreEqual(g.ToString(), "789562a8-267a-4561-9032-d91a3d54bd68", "value");
+            Assert.AreEqual("789562a8-267a-4561-9032-d91a3d54bd68", g.ToString(), "value");
         }
 
         [Test]
@@ -82,7 +82,7 @@ namespace Bridge.ClientTest
         {
             var g = new Guid((int)0x789562a8, (short)0x267a, (short)0x4561, (byte)0x90, (byte)0x32, (byte)0xd9, (byte)0x1a, (byte)0x3d, (byte)0x54, (byte)0xbd, (byte)0x68);
             Assert.True((object)g is Guid, "Should be Guid");
-            Assert.AreEqual(g.ToString(), "789562a8-267a-4561-9032-d91a3d54bd68", "value");
+            Assert.AreEqual("789562a8-267a-4561-9032-d91a3d54bd68", g.ToString(), "value");
         }
 
         [Test]
@@ -90,7 +90,7 @@ namespace Bridge.ClientTest
         {
             var g = new Guid((uint)0x789562a8, (ushort)0x267a, (ushort)0x4561, (byte)0x90, (byte)0x32, (byte)0xd9, (byte)0x1a, (byte)0x3d, (byte)0x54, (byte)0xbd, (byte)0x68);
             Assert.True((object)g is Guid, "Should be Guid");
-            Assert.AreEqual(g.ToString(), "789562a8-267a-4561-9032-d91a3d54bd68", "value");
+            Assert.AreEqual("789562a8-267a-4561-9032-d91a3d54bd68", g.ToString(), "value");
         }
 
         [Test]
@@ -104,10 +104,10 @@ namespace Bridge.ClientTest
             Assert.True(g2 is Guid);
             Assert.True(g3 is Guid);
             Assert.True(g4 is Guid);
-            Assert.AreEqual(g1.ToString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g1");
-            Assert.AreEqual(g2.ToString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g2");
-            Assert.AreEqual(g3.ToString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g3");
-            Assert.AreEqual(g4.ToString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g4");
+            Assert.AreEqual("a6993c0a-a8cb-45d9-994b-90e7203e4fc6", g1.ToString(), "g1");
+            Assert.AreEqual("a6993c0a-a8cb-45d9-994b-90e7203e4fc6", g2.ToString(), "g2");
+            Assert.AreEqual("a6993c0a-a8cb-45d9-994b-90e7203e4fc6", g3.ToString(), "g3");
+            Assert.AreEqual("a6993c0a-a8cb-45d9-994b-90e7203e4fc6", g4.ToString(), "g4");
             Assert.Throws(() => new Guid("x"), typeof(FormatException), "Invalid should throw");
         }
 
@@ -122,10 +122,10 @@ namespace Bridge.ClientTest
             Assert.True(g2 is Guid);
             Assert.True(g3 is Guid);
             Assert.True(g4 is Guid);
-            Assert.AreEqual(g1.ToString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g1");
-            Assert.AreEqual(g2.ToString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g2");
-            Assert.AreEqual(g3.ToString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g3");
-            Assert.AreEqual(g4.ToString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g4");
+            Assert.AreEqual("a6993c0a-a8cb-45d9-994b-90e7203e4fc6", g1.ToString(), "g1");
+            Assert.AreEqual("a6993c0a-a8cb-45d9-994b-90e7203e4fc6", g2.ToString(), "g2");
+            Assert.AreEqual("a6993c0a-a8cb-45d9-994b-90e7203e4fc6", g3.ToString(), "g3");
+            Assert.AreEqual("a6993c0a-a8cb-45d9-994b-90e7203e4fc6", g4.ToString(), "g4");
             Assert.Throws(() => Guid.Parse("x"), typeof(FormatException), "Invalid should throw");
         }
 
@@ -140,10 +140,10 @@ namespace Bridge.ClientTest
             Assert.True(g2 is Guid);
             Assert.True(g3 is Guid);
             Assert.True(g4 is Guid);
-            Assert.AreEqual(g1.ToString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g1");
-            Assert.AreEqual(g2.ToString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g2");
-            Assert.AreEqual(g3.ToString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g3");
-            Assert.AreEqual(g4.ToString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g4");
+            Assert.AreEqual("a6993c0a-a8cb-45d9-994b-90e7203e4fc6", g1.ToString(), "g1");
+            Assert.AreEqual("a6993c0a-a8cb-45d9-994b-90e7203e4fc6", g2.ToString(), "g2");
+            Assert.AreEqual("a6993c0a-a8cb-45d9-994b-90e7203e4fc6", g3.ToString(), "g3");
+            Assert.AreEqual("a6993c0a-a8cb-45d9-994b-90e7203e4fc6", g4.ToString(), "g4");
             Assert.Throws(() => Guid.ParseExact("A6993C0A-A8CB-45D9-994B-90E7203E4FC6", "B"), typeof(FormatException), "Invalid B should throw");
             Assert.Throws(() => Guid.ParseExact("A6993C0A-A8CB-45D9-994B-90E7203E4FC6", "P"), typeof(FormatException), "Invalid P should throw");
             Assert.Throws(() => Guid.ParseExact("A6993C0A-A8CB-45D9-994B-90E7203E4FC6", "N"), typeof(FormatException), "Invalid N should throw");
@@ -164,11 +164,11 @@ namespace Bridge.ClientTest
             Assert.True((object)g3 is Guid, "g3 is Guid");
             Assert.True((object)g4 is Guid, "g4 is Guid");
             Assert.True((object)g5 is Guid, "g5 is Guid");
-            Assert.AreEqual(g1.ToString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g1");
-            Assert.AreEqual(g2.ToString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g2");
-            Assert.AreEqual(g3.ToString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g3");
-            Assert.AreEqual(g4.ToString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g4");
-            Assert.AreEqual(g5.ToString(), "00000000-0000-0000-0000-000000000000", "g5");
+            Assert.AreEqual("a6993c0a-a8cb-45d9-994b-90e7203e4fc6", g1.ToString(), "g1");
+            Assert.AreEqual("a6993c0a-a8cb-45d9-994b-90e7203e4fc6", g2.ToString(), "g2");
+            Assert.AreEqual("a6993c0a-a8cb-45d9-994b-90e7203e4fc6", g3.ToString(), "g3");
+            Assert.AreEqual("a6993c0a-a8cb-45d9-994b-90e7203e4fc6", g4.ToString(), "g4");
+            Assert.AreEqual("00000000-0000-0000-0000-000000000000", g5.ToString(), "g5");
         }
 
         [Test]
@@ -191,30 +191,30 @@ namespace Bridge.ClientTest
             Assert.True((object)g6 is Guid);
             Assert.True((object)g7 is Guid);
             Assert.True((object)g8 is Guid);
-            Assert.AreEqual(g1.ToString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g1");
-            Assert.AreEqual(g2.ToString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g2");
-            Assert.AreEqual(g3.ToString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g3");
-            Assert.AreEqual(g4.ToString(), "a6993c0a-a8cb-45d9-994b-90e7203e4fc6", "g4");
-            Assert.AreEqual(g5.ToString(), "00000000-0000-0000-0000-000000000000", "g5");
-            Assert.AreEqual(g6.ToString(), "00000000-0000-0000-0000-000000000000", "g6");
-            Assert.AreEqual(g7.ToString(), "00000000-0000-0000-0000-000000000000", "g7");
-            Assert.AreEqual(g8.ToString(), "00000000-0000-0000-0000-000000000000", "g8");
+            Assert.AreEqual("a6993c0a-a8cb-45d9-994b-90e7203e4fc6", g1.ToString(), "g1");
+            Assert.AreEqual("a6993c0a-a8cb-45d9-994b-90e7203e4fc6", g2.ToString(), "g2");
+            Assert.AreEqual("a6993c0a-a8cb-45d9-994b-90e7203e4fc6", g3.ToString(), "g3");
+            Assert.AreEqual("a6993c0a-a8cb-45d9-994b-90e7203e4fc6", g4.ToString(), "g4");
+            Assert.AreEqual("00000000-0000-0000-0000-000000000000", g5.ToString(), "g5");
+            Assert.AreEqual("00000000-0000-0000-0000-000000000000", g6.ToString(), "g6");
+            Assert.AreEqual("00000000-0000-0000-0000-000000000000", g7.ToString(), "g7");
+            Assert.AreEqual("00000000-0000-0000-0000-000000000000", g8.ToString(), "g8");
         }
 
         [Test]
         public void CompareToWorks()
         {
             var g = new Guid("F3D8B3C0-88F0-4148-844C-232ED03C153C");
-            Assert.AreEqual(g.CompareTo(new Guid("F3D8B3C0-88F0-4148-844C-232ED03C153C")), 0, "equal");
-            Assert.AreNotEqual(g.CompareTo(new Guid("E4C221BE-9B39-4398-B82A-48BA4648CAE0")), 0, "not equal");
+            Assert.AreEqual(0, g.CompareTo(new Guid("F3D8B3C0-88F0-4148-844C-232ED03C153C")), "equal");
+            Assert.AreNotEqual(0, g.CompareTo(new Guid("E4C221BE-9B39-4398-B82A-48BA4648CAE0")), "not equal");
         }
 
         [Test]
         public void IComparableCompareToWorks()
         {
             var g = (IComparable<Guid>)new Guid("F3D8B3C0-88F0-4148-844C-232ED03C153C");
-            Assert.AreEqual(g.CompareTo(new Guid("F3D8B3C0-88F0-4148-844C-232ED03C153C")), 0, "Equal");
-            Assert.AreNotEqual(g.CompareTo(new Guid("E4C221BE-9B39-4398-B82A-48BA4648CAE0")), 0, "Not equal");
+            Assert.AreEqual(0, g.CompareTo(new Guid("F3D8B3C0-88F0-4148-844C-232ED03C153C")), "Equal");
+            Assert.AreNotEqual(0, g.CompareTo(new Guid("E4C221BE-9B39-4398-B82A-48BA4648CAE0")), "Not equal");
         }
 
         [Test]
@@ -245,8 +245,8 @@ namespace Bridge.ClientTest
         [Test]
         public void GetHashCodeWorks()
         {
-            Assert.AreEqual(new Guid("F3D8B3C0-88F0-4148-844C-232ED03C153C").GetHashCode(), new Guid("f3d8b3c0-88f0-4148-844c-232ed03c153c").GetHashCode());
-            Assert.AreNotEqual(new Guid("F3D8B3C0-88F0-4148-844C-232ED03C153C").GetHashCode(), new Guid("F3D8B3C0-88F0-4148-844C-232ED03C153D").GetHashCode());
+            Assert.AreEqual(new Guid("f3d8b3c0-88f0-4148-844c-232ed03c153c").GetHashCode(), new Guid("F3D8B3C0-88F0-4148-844C-232ED03C153C").GetHashCode());
+            Assert.AreNotEqual(new Guid("F3D8B3C0-88F0-4148-844C-232ED03C153D").GetHashCode(), new Guid("F3D8B3C0-88F0-4148-844C-232ED03C153C").GetHashCode());
         }
 
         [Test]
@@ -267,12 +267,12 @@ namespace Bridge.ClientTest
         public void ToStringWithFormatWorks()
         {
             var g = new Guid("DE33AC65-09CB-465C-AD7E-53124B2104E8");
-            Assert.AreEqual(g.ToString("N"), "de33ac6509cb465cad7e53124b2104e8", "N");
-            Assert.AreEqual(g.ToString("D"), "de33ac65-09cb-465c-ad7e-53124b2104e8", "D");
-            Assert.AreEqual(g.ToString("B"), "{de33ac65-09cb-465c-ad7e-53124b2104e8}", "B");
-            Assert.AreEqual(g.ToString("P"), "(de33ac65-09cb-465c-ad7e-53124b2104e8)", "P");
-            Assert.AreEqual(g.ToString(""), "de33ac65-09cb-465c-ad7e-53124b2104e8", "empty");
-            Assert.AreEqual(g.ToString(null), "de33ac65-09cb-465c-ad7e-53124b2104e8", "null");
+            Assert.AreEqual("de33ac6509cb465cad7e53124b2104e8", g.ToString("N"), "N");
+            Assert.AreEqual("de33ac65-09cb-465c-ad7e-53124b2104e8", g.ToString("D"), "D");
+            Assert.AreEqual("{de33ac65-09cb-465c-ad7e-53124b2104e8}", g.ToString("B"), "B");
+            Assert.AreEqual("(de33ac65-09cb-465c-ad7e-53124b2104e8)", g.ToString("P"), "P");
+            Assert.AreEqual("de33ac65-09cb-465c-ad7e-53124b2104e8", g.ToString(""), "empty");
+            Assert.AreEqual("de33ac65-09cb-465c-ad7e-53124b2104e8", g.ToString(null), "null");
         }
 
         [Test]
@@ -288,7 +288,7 @@ namespace Bridge.ClientTest
                 Assert.True(s[12] == '4', "Should be type 4 guid");
                 d[s] = null;
             }
-            Assert.AreEqual(d.Count, 1000, "No duplicates should have been generated");
+            Assert.AreEqual(1000, d.Count, "No duplicates should have been generated");
         }
 
         [Test]

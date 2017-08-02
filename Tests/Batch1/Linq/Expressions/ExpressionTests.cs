@@ -337,20 +337,20 @@ namespace Bridge.ClientTest.Linq.Expressions
         public void ExpressionProtectedConstructorWorks()
         {
             var expr = new MyExpression();
-            Assert.AreEqual(expr.NodeType, 9999, "NodeType");
-            Assert.AreEqual(expr.Type, typeof(string), "Type");
+            Assert.AreEqual(9999, expr.NodeType, "NodeType");
+            Assert.AreEqual(typeof(string), expr.Type, "Type");
         }
 
         [Test]
         public void SimpleExpressionTreeWorks()
         {
             Expression<Func<int>> f = () => 42;
-            Assert.AreEqual(f.NodeType, ExpressionType.Lambda);
-            Assert.AreEqual(f.Type, typeof(Func<int>));
-            Assert.AreEqual(f.ReturnType, typeof(int));
-            Assert.AreEqual(f.Body.NodeType, ExpressionType.Constant);
-            Assert.AreEqual(f.Body.Type, typeof(int));
-            Assert.AreEqual(((ConstantExpression)f.Body).Value, 42);
+            Assert.AreEqual(ExpressionType.Lambda, f.NodeType);
+            Assert.AreEqual(typeof(Func<int>), f.Type);
+            Assert.AreEqual(typeof(int), f.ReturnType);
+            Assert.AreEqual(ExpressionType.Constant, f.Body.NodeType);
+            Assert.AreEqual(typeof(int), f.Body.Type);
+            Assert.AreEqual(42, ((ConstantExpression)f.Body).Value);
         }
 
         [Test]
@@ -360,15 +360,15 @@ namespace Bridge.ClientTest.Linq.Expressions
             {
                 Assert.True((object)expr is LambdaExpression, title + " is lambda");
                 Assert.False(expr.Body is LambdaExpression, title + " body is lambda");
-                Assert.AreEqual(expr.NodeType, ExpressionType.Lambda, title + " node type");
-                Assert.AreEqual(expr.Type, typeof(Function), title + " type");
-                Assert.AreEqual(expr.ReturnType, returnType, title + " return type");
-                Assert.AreEqual(expr.Parameters.Count, parmTypes.Length, title + " param count");
+                Assert.AreEqual(ExpressionType.Lambda, expr.NodeType, title + " node type");
+                Assert.AreEqual(typeof(Function), expr.Type, title + " type");
+                Assert.AreEqual(returnType, expr.ReturnType, title + " return type");
+                Assert.AreEqual(parmTypes.Length, expr.Parameters.Count, title + " param count");
                 for (int i = 0; i < expr.Parameters.Count; i++)
                 {
-                    Assert.AreEqual(expr.Parameters[i].NodeType, ExpressionType.Parameter, title + " parameter " + i + " node type");
-                    Assert.AreEqual(expr.Parameters[i].Name, parmNames[i], title + " parameter " + i + " name");
-                    Assert.AreEqual(expr.Parameters[i].Type, parmTypes[i], title + " parameter " + i + " type");
+                    Assert.AreEqual(ExpressionType.Parameter, expr.Parameters[i].NodeType, title + " parameter " + i + " node type");
+                    Assert.AreEqual(parmNames[i], expr.Parameters[i].Name, title + " parameter " + i + " name");
+                    Assert.AreEqual(parmTypes[i], expr.Parameters[i].Type, title + " parameter " + i + " type");
                 }
             };
 
@@ -400,18 +400,18 @@ namespace Bridge.ClientTest.Linq.Expressions
             Assert.True((object)p2 is ParameterExpression, "p2 is ParameterExpression");
             Assert.True((object)p3 is ParameterExpression, "p3 is ParameterExpression");
             Assert.True((object)p4 is ParameterExpression, "p4 is ParameterExpression");
-            Assert.AreEqual(p1.NodeType, ExpressionType.Parameter, "p1.NodeType");
-            Assert.AreEqual(p2.NodeType, ExpressionType.Parameter, "p2.NodeType");
-            Assert.AreEqual(p3.NodeType, ExpressionType.Parameter, "p3.NodeType");
-            Assert.AreEqual(p4.NodeType, ExpressionType.Parameter, "p4.NodeType");
-            Assert.AreEqual(p1.Type, typeof(int), "p1.Type");
-            Assert.AreEqual(p2.Type, typeof(string), "p2.Type");
-            Assert.AreEqual(p3.Type, typeof(int), "p3.Type");
-            Assert.AreEqual(p4.Type, typeof(string), "p4.Type");
+            Assert.AreEqual(ExpressionType.Parameter, p1.NodeType, "p1.NodeType");
+            Assert.AreEqual(ExpressionType.Parameter, p2.NodeType, "p2.NodeType");
+            Assert.AreEqual(ExpressionType.Parameter, p3.NodeType, "p3.NodeType");
+            Assert.AreEqual(ExpressionType.Parameter, p4.NodeType, "p4.NodeType");
+            Assert.AreEqual(typeof(int), p1.Type, "p1.Type");
+            Assert.AreEqual(typeof(string), p2.Type, "p2.Type");
+            Assert.AreEqual(typeof(int), p3.Type, "p3.Type");
+            Assert.AreEqual(typeof(string), p4.Type, "p4.Type");
             Assert.True(p1.Name == null, "p1.Name");
-            Assert.AreEqual(p2.Name, "par", "p2.Name");
+            Assert.AreEqual("par", p2.Name, "p2.Name");
             Assert.True(p3.Name == null, "p3.Name");
-            Assert.AreEqual(p4.Name, "var", "p4.Name");
+            Assert.AreEqual("var", p4.Name, "p4.Name");
 
             Assert.False((object)Expression.Constant(0, typeof(int)) is ParameterExpression, "Constant is ParameterExpression");
         }
@@ -426,15 +426,15 @@ namespace Bridge.ClientTest.Linq.Expressions
             Assert.True((object)c1 is ConstantExpression, "c1 is ConstantExpression");
             Assert.True((object)c2 is ConstantExpression, "c2 is ConstantExpression");
             Assert.True((object)c3 is ConstantExpression, "c3 is ConstantExpression");
-            Assert.AreEqual(c1.NodeType, ExpressionType.Constant, "c1.NodeType");
-            Assert.AreEqual(c2.NodeType, ExpressionType.Constant, "c2.NodeType");
-            Assert.AreEqual(c3.NodeType, ExpressionType.Constant, "c3.NodeType");
-            Assert.AreEqual(c1.Type, typeof(int), "c1.Type");
-            Assert.AreEqual(c2.Type, typeof(string), "c2.Type");
-            Assert.AreEqual(c3.Type, typeof(int), "c3.Type");
-            Assert.AreEqual(c1.Value, 42, "c1.Value");
-            Assert.AreEqual(c2.Value, "Hello, world", "c2.Value");
-            Assert.AreEqual(c3.Value, 17, "c3.Value");
+            Assert.AreEqual(ExpressionType.Constant, c1.NodeType, "c1.NodeType");
+            Assert.AreEqual(ExpressionType.Constant, c2.NodeType, "c2.NodeType");
+            Assert.AreEqual(ExpressionType.Constant, c3.NodeType, "c3.NodeType");
+            Assert.AreEqual(typeof(int), c1.Type, "c1.Type");
+            Assert.AreEqual(typeof(string), c2.Type, "c2.Type");
+            Assert.AreEqual(typeof(int), c3.Type, "c3.Type");
+            Assert.AreEqual(42, c1.Value, "c1.Value");
+            Assert.AreEqual("Hello, world", c2.Value, "c2.Value");
+            Assert.AreEqual(17, c3.Value, "c3.Value");
 
             Assert.False((object)Expression.Parameter(typeof(int)) is ConstantExpression, "Parameter is ConstantExpression");
         }
@@ -447,8 +447,8 @@ namespace Bridge.ClientTest.Linq.Expressions
                 var be = expr as BinaryExpression;
                 Assert.True(be != null, title + " is BinaryExpression");
                 Assert.False(expr is ConstantExpression, title + " is ConstantExpression");
-                Assert.AreEqual(be.NodeType, nodeType, title + " node type");
-                Assert.AreEqual(be.Type, type, title + " type");
+                Assert.AreEqual(nodeType, be.NodeType, title + " node type");
+                Assert.AreEqual(type, be.Type, title + " type");
                 Assert.True(be.Left is ParameterExpression && ((ParameterExpression)be.Left).Name == "a", title + " left");
                 Assert.True(be.Right is ParameterExpression && ((ParameterExpression)be.Right).Name == "b", title + " right");
                 if (method == null)
@@ -458,8 +458,8 @@ namespace Bridge.ClientTest.Linq.Expressions
                 else
                 {
                     Assert.True(be.Method != null, title + " method should not be null");
-                    Assert.AreEqual(be.Method.DeclaringType, typeof(C), title + " method declaring type should be correct");
-                    Assert.AreEqual(be.Method.Name, method, title + " method name should be correct");
+                    Assert.AreEqual(typeof(C), be.Method.DeclaringType, title + " method declaring type should be correct");
+                    Assert.AreEqual(method, be.Method.Name, title + " method name should be correct");
                 }
             };
 
@@ -721,8 +721,8 @@ namespace Bridge.ClientTest.Linq.Expressions
             {
                 var ue = expr as UnaryExpression;
                 Assert.True(ue != null, title + " is UnaryExpression");
-                Assert.AreEqual(ue.NodeType, nodeType, title + " node type");
-                Assert.AreEqual(ue.Type, type, title + " type");
+                Assert.AreEqual(nodeType, ue.NodeType, title + " node type");
+                Assert.AreEqual(type, ue.Type, title + " type");
                 Assert.True(ue.Operand is ParameterExpression && ((ParameterExpression)ue.Operand).Name == "a", title + " operand");
                 if (method == null)
                 {
@@ -731,8 +731,8 @@ namespace Bridge.ClientTest.Linq.Expressions
                 else
                 {
                     Assert.True(ue.Method != null, title + " method should not be null");
-                    Assert.AreEqual(ue.Method.DeclaringType, typeof(C), title + " method declaring type should be correct");
-                    Assert.AreEqual(ue.Method.Name, method, title + " method name should be correct");
+                    Assert.AreEqual(typeof(C), ue.Method.DeclaringType, title + " method declaring type should be correct");
+                    Assert.AreEqual(method, ue.Method.Name, title + " method name should be correct");
                 }
             };
 
@@ -838,14 +838,14 @@ namespace Bridge.ClientTest.Linq.Expressions
             Expression e2 = Expression.ArrayLength(Expression.Parameter(typeof(double[]), "a"));
 
             Assert.True(e1.Body is UnaryExpression, "e1 is UnaryExpression");
-            Assert.AreEqual(e1.Body.NodeType, ExpressionType.ArrayLength, "e1 node type");
-            Assert.AreEqual(e1.Body.Type, typeof(int), "e1 type");
+            Assert.AreEqual(ExpressionType.ArrayLength, e1.Body.NodeType, "e1 node type");
+            Assert.AreEqual(typeof(int), e1.Body.Type, "e1 type");
             Assert.True(((UnaryExpression)e1.Body).Operand is ParameterExpression && ((ParameterExpression)((UnaryExpression)e1.Body).Operand).Name == "a", "e1 operand");
             Assert.True(((UnaryExpression)e1.Body).Method == null, "e1 method");
 
             Assert.True(e2 is UnaryExpression, "e2 is UnaryExpression");
-            Assert.AreEqual(e2.NodeType, ExpressionType.ArrayLength, "e2 node type");
-            Assert.AreEqual(e2.Type, typeof(int), "e2 type");
+            Assert.AreEqual(ExpressionType.ArrayLength, e2.NodeType, "e2 node type");
+            Assert.AreEqual(typeof(int), e2.Type, "e2 type");
             Assert.True(((UnaryExpression)e2).Operand is ParameterExpression && ((ParameterExpression)((UnaryExpression)e2).Operand).Name == "a", "e2 operand");
             Assert.True(((UnaryExpression)e2).Method == null, "e2 method");
         }
@@ -857,8 +857,8 @@ namespace Bridge.ClientTest.Linq.Expressions
             {
                 var ue = expr as UnaryExpression;
                 Assert.True(ue != null, title + " is UnaryExpression");
-                Assert.AreEqual(ue.NodeType, nodeType, title + " node type");
-                Assert.AreEqual(ue.Type, type, title + " type");
+                Assert.AreEqual(nodeType, ue.NodeType, title + " node type");
+                Assert.AreEqual(type, ue.Type, title + " type");
                 Assert.True(ue.Operand is ParameterExpression && ((ParameterExpression)ue.Operand).Name == "a", title + " operand");
                 if (method == null)
                 {
@@ -867,8 +867,8 @@ namespace Bridge.ClientTest.Linq.Expressions
                 else
                 {
                     Assert.True(ue.Method != null, title + " method should not be null");
-                    Assert.AreEqual(ue.Method.DeclaringType, typeof(C), title + " method declaring type should be correct");
-                    Assert.AreEqual(ue.Method.Name, method, title + " method name should be correct");
+                    Assert.AreEqual(typeof(C), ue.Method.DeclaringType, title + " method declaring type should be correct");
+                    Assert.AreEqual(method, ue.Method.Name, title + " method name should be correct");
                 }
             };
 
@@ -912,15 +912,15 @@ namespace Bridge.ClientTest.Linq.Expressions
             Expression e2 = Expression.ArrayIndex(typeof(double), Expression.Parameter(typeof(double[]), "a"), Expression.Parameter(typeof(int), "b"));
 
             Assert.True(e1.Body is BinaryExpression, "e1 is BinaryExpression");
-            Assert.AreEqual(e1.Body.NodeType, ExpressionType.ArrayIndex, "e1 node type");
-            Assert.AreEqual(e1.Body.Type, typeof(double), "e1 type");
+            Assert.AreEqual(ExpressionType.ArrayIndex, e1.Body.NodeType, "e1 node type");
+            Assert.AreEqual(typeof(double), e1.Body.Type, "e1 type");
             Assert.True(((BinaryExpression)e1.Body).Left is ParameterExpression && ((ParameterExpression)((BinaryExpression)e1.Body).Left).Name == "a", "e1 left");
             Assert.True(((BinaryExpression)e1.Body).Right is ParameterExpression && ((ParameterExpression)((BinaryExpression)e1.Body).Right).Name == "b", "e1 right");
             Assert.True(((BinaryExpression)e1.Body).Method == null, "e1 method");
 
             Assert.True(e2 is BinaryExpression, "e2 is BinaryExpression");
-            Assert.AreEqual(e2.NodeType, ExpressionType.ArrayIndex, "e2 node type");
-            Assert.AreEqual(e2.Type, typeof(double), "e2 type");
+            Assert.AreEqual(ExpressionType.ArrayIndex, e2.NodeType, "e2 node type");
+            Assert.AreEqual(typeof(double), e2.Type, "e2 type");
             Assert.True(((BinaryExpression)e1.Body).Left is ParameterExpression && ((ParameterExpression)((BinaryExpression)e1.Body).Left).Name == "a", "e2 left");
             Assert.True(((BinaryExpression)e1.Body).Right is ParameterExpression && ((ParameterExpression)((BinaryExpression)e1.Body).Right).Name == "b", "e2 right");
             Assert.True(((BinaryExpression)e1.Body).Method == null, "e2 method");
@@ -939,20 +939,20 @@ namespace Bridge.ClientTest.Linq.Expressions
             {
                 var me = expr as MethodCallExpression;
                 Assert.True(me != null, title + " is MethodCallExpression");
-                Assert.AreEqual(me.NodeType, ExpressionType.Call, title + " node type");
-                Assert.AreEqual(me.Type, typeof(double), title + " type");
+                Assert.AreEqual(ExpressionType.Call, me.NodeType, title + " node type");
+                Assert.AreEqual(typeof(double), me.Type, title + " type");
                 Assert.True(me.Object is ParameterExpression && ((ParameterExpression)me.Object).Name == "a", title + " object");
-                Assert.AreEqual(me.Arguments.Count, 2, title + " argument count");
+                Assert.AreEqual(2, me.Arguments.Count, title + " argument count");
                 Assert.True(me.Arguments[0] is ParameterExpression && ((ParameterExpression)me.Arguments[0]).Name == "b", title + " argument 0");
                 Assert.True(me.Arguments[1] is ParameterExpression && ((ParameterExpression)me.Arguments[1]).Name == "c", title + " argument 1");
-                Assert.AreEqual(me.Method.MemberType, MemberTypes.Method, title + "method type");
+                Assert.AreEqual(MemberTypes.Method, me.Method.MemberType, title + "method type");
                 Assert.False(me.Method.IsConstructor, title + "method is constructor");
                 Assert.False(me.Method.IsStatic, title + "method isstatic");
-                Assert.AreEqual(me.Method.ReturnType, typeof(double), title + " method return value");
-                Assert.AreEqual(me.Method.Name, "Get", title + " method name");
-                Assert.AreEqual(me.Method.DeclaringType, typeof(double[,]), title + " method declaring type");
-                Assert.AreEqual(me.Method.ParameterTypes, new[] { typeof(int), typeof(int) }, title + " method parameter types");
-                Assert.AreEqual(me.Method.Invoke(arr, 1, 2), 2.5, title + " method invoke result");
+                Assert.AreEqual(typeof(double), me.Method.ReturnType, title + " method return value");
+                Assert.AreEqual("Get", me.Method.Name, title + " method name");
+                Assert.AreEqual(typeof(double[,]), me.Method.DeclaringType, title + " method declaring type");
+                Assert.AreEqual(new[] { typeof(int), typeof(int) }, me.Method.ParameterTypes, title + " method parameter types");
+                Assert.AreEqual(2.5, me.Method.Invoke(arr, 1, 2), title + " method invoke result");
             };
 
             asserter(e1.Body, "e1");
@@ -967,15 +967,15 @@ namespace Bridge.ClientTest.Linq.Expressions
             Expression e2 = Expression.Condition(Expression.Parameter(typeof(bool), "a"), Expression.Parameter(typeof(int), "b"), Expression.Parameter(typeof(int), "c"), typeof(int));
 
             Assert.True(e1.Body is ConditionalExpression, "e1 is ConditionalExpression");
-            Assert.AreEqual(e1.Body.NodeType, ExpressionType.Conditional, "e1 node type");
-            Assert.AreEqual(e1.Body.Type, typeof(int), "e1 type");
+            Assert.AreEqual(ExpressionType.Conditional, e1.Body.NodeType, "e1 node type");
+            Assert.AreEqual(typeof(int), e1.Body.Type, "e1 type");
             Assert.True(((ConditionalExpression)e1.Body).Test is ParameterExpression && ((ParameterExpression)((ConditionalExpression)e1.Body).Test).Name == "a", "e1 test");
             Assert.True(((ConditionalExpression)e1.Body).IfTrue is ParameterExpression && ((ParameterExpression)((ConditionalExpression)e1.Body).IfTrue).Name == "b", "e1 iftrue");
             Assert.True(((ConditionalExpression)e1.Body).IfFalse is ParameterExpression && ((ParameterExpression)((ConditionalExpression)e1.Body).IfFalse).Name == "c", "e1 iffalse");
 
             Assert.True(e2 is ConditionalExpression, "e2 is ConditionalExpression");
-            Assert.AreEqual(e2.NodeType, ExpressionType.Conditional, "e2 node type");
-            Assert.AreEqual(e2.Type, typeof(int), "e2 type");
+            Assert.AreEqual(ExpressionType.Conditional, e2.NodeType, "e2 node type");
+            Assert.AreEqual(typeof(int), e2.Type, "e2 type");
             Assert.True(((ConditionalExpression)e2).Test is ParameterExpression && ((ParameterExpression)((ConditionalExpression)e2).Test).Name == "a", "e2 test");
             Assert.True(((ConditionalExpression)e2).IfTrue is ParameterExpression && ((ParameterExpression)((ConditionalExpression)e2).IfTrue).Name == "b", "e2 iftrue");
             Assert.True(((ConditionalExpression)e2).IfFalse is ParameterExpression && ((ParameterExpression)((ConditionalExpression)e2).IfFalse).Name == "c", "e2 iffalse");
@@ -990,13 +990,13 @@ namespace Bridge.ClientTest.Linq.Expressions
             {
                 var ce = expr as MethodCallExpression;
                 Assert.True(ce != null, title + " is CallExpression");
-                Assert.AreEqual(ce.NodeType, ExpressionType.Call, title + " node type");
-                Assert.AreEqual(ce.Type, typeof(int), title + " type");
-                Assert.AreEqual(ce.Arguments.Count, 2, title + " argument count");
+                Assert.AreEqual(ExpressionType.Call, ce.NodeType, title + " node type");
+                Assert.AreEqual(typeof(int), ce.Type, title + " type");
+                Assert.AreEqual(2, ce.Arguments.Count, title + " argument count");
                 Assert.True(ce.Arguments[0] is ParameterExpression && ((ParameterExpression)ce.Arguments[0]).Name == "a", title + " argument 0");
                 Assert.True(ce.Arguments[1] is ParameterExpression && ((ParameterExpression)ce.Arguments[1]).Name == "b", title + " argument 1");
-                Assert.AreEqual(ce.Method.DeclaringType, typeof(C), title + " method declaring type");
-                Assert.AreEqual(ce.Method.Name, method, title + " method name");
+                Assert.AreEqual(typeof(C), ce.Method.DeclaringType, title + " method declaring type");
+                Assert.AreEqual(method, ce.Method.Name, title + " method name");
                 if (isStatic)
                 {
                     Assert.True(ce.Object == null, title + " object should be null");
@@ -1028,8 +1028,8 @@ namespace Bridge.ClientTest.Linq.Expressions
             asserter(e8, "M2", true, "e8");
 
             Assert.True(ReferenceEquals(((MethodCallExpression)e9.Body).Method, typeof(C).GetMethod("M1")), "e9 member");
-            Assert.AreEqual(((MethodCallExpression)e10.Body).Method.Name, "M3", "e10 member name");
-            Assert.AreEqual(((MethodCallExpression)e10.Body).Method.Invoke(new C(), 39), 73, "e10 member result");
+            Assert.AreEqual("M3", ((MethodCallExpression)e10.Body).Method.Name, "e10 member name");
+            Assert.AreEqual(73, ((MethodCallExpression)e10.Body).Method.Invoke(new C(), 39), "e10 member result");
 
             Assert.False((object)Expression.Constant(null, typeof(object)) is MethodCallExpression, "Constant should not be MethodCallExpression");
         }
@@ -1041,18 +1041,18 @@ namespace Bridge.ClientTest.Linq.Expressions
 
             Assert.True(e1.Body.NodeType == ExpressionType.Convert, "e1 body node type");
             var e2 = (UnaryExpression)e1.Body;
-            Assert.AreEqual(e2.Type, typeof(Func<int, int>), "e2 type");
-            Assert.AreEqual(e2.Operand.NodeType, ExpressionType.Call, "2 operand type");
+            Assert.AreEqual(typeof(Func<int, int>), e2.Type, "e2 type");
+            Assert.AreEqual(ExpressionType.Call, e2.Operand.NodeType, "2 operand type");
             var e3 = (MethodCallExpression)e2.Operand;
-            Assert.AreEqual(e3.Object.NodeType, ExpressionType.Constant, "e3 object node type");
+            Assert.AreEqual(ExpressionType.Constant, e3.Object.NodeType, "e3 object node type");
             var e4 = (ConstantExpression)e3.Object;
-            Assert.AreEqual(e4.Type, typeof(MethodInfo), "e4 type");
+            Assert.AreEqual(typeof(MethodInfo), e4.Type, "e4 type");
             Assert.True(e4.Value == typeof(C).GetMethod("M4"), "e4 value");
-            Assert.AreEqual(e3.Method.DeclaringType, typeof(MethodInfo), "e3 method declaring type");
-            Assert.AreEqual(e3.Method.Name, "CreateDelegate", "e3 method name");
-            Assert.AreEqual(e3.Method.ParameterTypes, new[] { typeof(Type), typeof(object) }, "e3 method parameters");
-            Assert.AreEqual(e3.Arguments.Count, 2, "e3 arguments");
-            Assert.AreEqual(e3.Arguments[0], typeof(Func<int, int>), "e3 argument 0");
+            Assert.AreEqual(typeof(MethodInfo), e3.Method.DeclaringType, "e3 method declaring type");
+            Assert.AreEqual("CreateDelegate", e3.Method.Name, "e3 method name");
+            Assert.AreEqual(new[] { typeof(Type), typeof(object) }, e3.Method.ParameterTypes, "e3 method parameters");
+            Assert.AreEqual(2, e3.Arguments.Count, "e3 arguments");
+            Assert.AreEqual(typeof(Func<int, int>), e3.Arguments[0], "e3 argument 0");
             Assert.True(e3.Arguments[1] is ParameterExpression && ((ParameterExpression)e3.Arguments[1]).Name == "a", "e3 argument 1");
         }
 
@@ -1067,10 +1067,10 @@ namespace Bridge.ClientTest.Linq.Expressions
             {
                 var ie = expr as InvocationExpression;
                 Assert.True(ie != null, title + " is InvocationExpression");
-                Assert.AreEqual(ie.NodeType, ExpressionType.Invoke, title + " node type");
-                Assert.AreEqual(ie.Type, typeof(string), title + " type");
+                Assert.AreEqual(ExpressionType.Invoke, ie.NodeType, title + " node type");
+                Assert.AreEqual(typeof(string), ie.Type, title + " type");
                 Assert.True(ie.Expression is ParameterExpression && ((ParameterExpression)ie.Expression).Name == "a", title + " expression");
-                Assert.AreEqual(ie.Arguments.Count, 2, title + " argument count");
+                Assert.AreEqual(2, ie.Arguments.Count, title + " argument count");
                 Assert.True(ie.Arguments[0] is ParameterExpression && ((ParameterExpression)ie.Arguments[0]).Name == "b", title + " argument 0");
                 Assert.True(ie.Arguments[1] is ParameterExpression && ((ParameterExpression)ie.Arguments[1]).Name == "c", title + " argument 1");
             };
@@ -1094,50 +1094,50 @@ namespace Bridge.ClientTest.Linq.Expressions
             Expression e7 = Expression.NewArrayInit(typeof(int), new MyEnumerable<Expression>(new Expression[] { Expression.Parameter(typeof(int), "a"), Expression.Parameter(typeof(int), "b") }));
 
             Assert.True(e1.Body is NewArrayExpression, "e1 is NewArrayExpression");
-            Assert.AreEqual(e1.Body.NodeType, ExpressionType.NewArrayBounds, "e1 node type");
-            Assert.AreEqual(e1.Body.Type, typeof(int[]), "e1 type");
-            Assert.AreEqual(((NewArrayExpression)e1.Body).Expressions.Count, 1, "e1 expression count");
+            Assert.AreEqual(ExpressionType.NewArrayBounds, e1.Body.NodeType, "e1 node type");
+            Assert.AreEqual(typeof(int[]), e1.Body.Type, "e1 type");
+            Assert.AreEqual(1, ((NewArrayExpression)e1.Body).Expressions.Count, "e1 expression count");
             Assert.True(((NewArrayExpression)e1.Body).Expressions[0] is ParameterExpression && ((ParameterExpression)((NewArrayExpression)e1.Body).Expressions[0]).Name == "a", "e1 expression 0");
 
             Assert.True(e2.Body is NewArrayExpression, "e2 is NewArrayExpression");
-            Assert.AreEqual(e2.Body.NodeType, ExpressionType.NewArrayBounds, "e2 node type");
-            Assert.AreEqual(e2.Body.Type, typeof(int[,]), "e2 type");
-            Assert.AreEqual(((NewArrayExpression)e2.Body).Expressions.Count, 2, "e2 expression count");
+            Assert.AreEqual(ExpressionType.NewArrayBounds, e2.Body.NodeType, "e2 node type");
+            Assert.AreEqual(typeof(int[,]), e2.Body.Type, "e2 type");
+            Assert.AreEqual(2, ((NewArrayExpression)e2.Body).Expressions.Count, "e2 expression count");
             Assert.True(((NewArrayExpression)e2.Body).Expressions[0] is ParameterExpression && ((ParameterExpression)((NewArrayExpression)e2.Body).Expressions[0]).Name == "a", "e2 expression 0");
             Assert.True(((NewArrayExpression)e2.Body).Expressions[1] is ParameterExpression && ((ParameterExpression)((NewArrayExpression)e2.Body).Expressions[1]).Name == "b", "e2 expression 1");
 
             Assert.True(e3.Body is NewArrayExpression, "e3 is NewArrayExpression");
-            Assert.AreEqual(e3.Body.NodeType, ExpressionType.NewArrayInit, "e3 node type");
-            Assert.AreEqual(e3.Body.Type, typeof(int[]), "e3 type");
-            Assert.AreEqual(((NewArrayExpression)e3.Body).Expressions.Count, 2, "e3 expression count");
+            Assert.AreEqual(ExpressionType.NewArrayInit, e3.Body.NodeType, "e3 node type");
+            Assert.AreEqual(typeof(int[]), e3.Body.Type, "e3 type");
+            Assert.AreEqual(2, ((NewArrayExpression)e3.Body).Expressions.Count, "e3 expression count");
             Assert.True(((NewArrayExpression)e3.Body).Expressions[0] is ParameterExpression && ((ParameterExpression)((NewArrayExpression)e3.Body).Expressions[0]).Name == "a", "e3 expression 0");
             Assert.True(((NewArrayExpression)e3.Body).Expressions[1] is ParameterExpression && ((ParameterExpression)((NewArrayExpression)e3.Body).Expressions[1]).Name == "b", "e3 expression 1");
 
             Assert.True(e4 is NewArrayExpression, "e4 is NewArrayExpression");
-            Assert.AreEqual(e4.NodeType, ExpressionType.NewArrayBounds, "e4 node type");
-            Assert.AreEqual(e4.Type, typeof(int[,]), "e4 type");
-            Assert.AreEqual(((NewArrayExpression)e4).Expressions.Count, 2, "e4 expression count");
+            Assert.AreEqual(ExpressionType.NewArrayBounds, e4.NodeType, "e4 node type");
+            Assert.AreEqual(typeof(int[,]), e4.Type, "e4 type");
+            Assert.AreEqual(2, ((NewArrayExpression)e4).Expressions.Count, "e4 expression count");
             Assert.True(((NewArrayExpression)e4).Expressions[0] is ParameterExpression && ((ParameterExpression)((NewArrayExpression)e4).Expressions[0]).Name == "a", "e4 expression 0");
             Assert.True(((NewArrayExpression)e4).Expressions[1] is ParameterExpression && ((ParameterExpression)((NewArrayExpression)e4).Expressions[1]).Name == "b", "e4 expression 1");
 
             Assert.True(e5 is NewArrayExpression, "e5 is NewArrayExpression");
-            Assert.AreEqual(e5.NodeType, ExpressionType.NewArrayBounds, "e5 node type");
-            Assert.AreEqual(e5.Type, typeof(int[,]), "e5 type");
-            Assert.AreEqual(((NewArrayExpression)e5).Expressions.Count, 2, "e5 expression count");
+            Assert.AreEqual(ExpressionType.NewArrayBounds, e5.NodeType, "e5 node type");
+            Assert.AreEqual(typeof(int[,]), e5.Type, "e5 type");
+            Assert.AreEqual(2, ((NewArrayExpression)e5).Expressions.Count, "e5 expression count");
             Assert.True(((NewArrayExpression)e5).Expressions[0] is ParameterExpression && ((ParameterExpression)((NewArrayExpression)e5).Expressions[0]).Name == "a", "e5 expression 0");
             Assert.True(((NewArrayExpression)e5).Expressions[1] is ParameterExpression && ((ParameterExpression)((NewArrayExpression)e5).Expressions[1]).Name == "b", "e5 expression 1");
 
             Assert.True(e6 is NewArrayExpression, "e6 is NewArrayExpression");
-            Assert.AreEqual(e6.NodeType, ExpressionType.NewArrayInit, "e6 node type");
-            Assert.AreEqual(e6.Type, typeof(int[]), "e6 type");
-            Assert.AreEqual(((NewArrayExpression)e6).Expressions.Count, 2, "e6 expression count");
+            Assert.AreEqual(ExpressionType.NewArrayInit, e6.NodeType, "e6 node type");
+            Assert.AreEqual(typeof(int[]), e6.Type, "e6 type");
+            Assert.AreEqual(2, ((NewArrayExpression)e6).Expressions.Count, "e6 expression count");
             Assert.True(((NewArrayExpression)e6).Expressions[0] is ParameterExpression && ((ParameterExpression)((NewArrayExpression)e6).Expressions[0]).Name == "a", "e6 expression 0");
             Assert.True(((NewArrayExpression)e6).Expressions[1] is ParameterExpression && ((ParameterExpression)((NewArrayExpression)e6).Expressions[1]).Name == "b", "e6 expression 1");
 
             Assert.True(e7 is NewArrayExpression, "e7 is NewArrayExpression");
-            Assert.AreEqual(e7.NodeType, ExpressionType.NewArrayInit, "e7 node type");
-            Assert.AreEqual(e7.Type, typeof(int[]), "e7 type");
-            Assert.AreEqual(((NewArrayExpression)e7).Expressions.Count, 2, "e7 expression count");
+            Assert.AreEqual(ExpressionType.NewArrayInit, e7.NodeType, "e7 node type");
+            Assert.AreEqual(typeof(int[]), e7.Type, "e7 type");
+            Assert.AreEqual(2, ((NewArrayExpression)e7).Expressions.Count, "e7 expression count");
             Assert.True(((NewArrayExpression)e7).Expressions[0] is ParameterExpression && ((ParameterExpression)((NewArrayExpression)e7).Expressions[0]).Name == "a", "e7 expression 0");
             Assert.True(((NewArrayExpression)e7).Expressions[1] is ParameterExpression && ((ParameterExpression)((NewArrayExpression)e7).Expressions[1]).Name == "b", "e7 expression 1");
 
@@ -1166,8 +1166,8 @@ namespace Bridge.ClientTest.Linq.Expressions
             {
                 var me = expr as MemberExpression;
                 Assert.True(me != null, title + " is MemberExpression");
-                Assert.AreEqual(me.NodeType, ExpressionType.MemberAccess, title + " node type");
-                Assert.AreEqual(me.Type, typeof(int), title + " type");
+                Assert.AreEqual(ExpressionType.MemberAccess, me.NodeType, title + " node type");
+                Assert.AreEqual(typeof(int), me.Type, title + " type");
                 Assert.True(me.Expression is ParameterExpression && ((ParameterExpression)me.Expression).Name == "a", title + " expression");
                 if (memberName == "F1" || memberName == "P1")
                 {
@@ -1175,10 +1175,10 @@ namespace Bridge.ClientTest.Linq.Expressions
                 }
                 else
                 {
-                    Assert.AreEqual(me.Member.MemberType, memberName.StartsWith("F") ? MemberTypes.Field : MemberTypes.Property, title + " member type");
-                    Assert.AreEqual(me.Member.Name, memberName, title + " name");
+                    Assert.AreEqual(memberName.StartsWith("F") ? MemberTypes.Field : MemberTypes.Property, me.Member.MemberType, title + " member type");
+                    Assert.AreEqual(memberName, me.Member.Name, title + " name");
                 }
-                Assert.AreEqual(me.Member is FieldInfo ? ((FieldInfo)me.Member).GetValue(new C()) : ((PropertyInfo)me.Member).GetMethod.Invoke(new C()), result, title + " member result");
+                Assert.AreEqual(result, me.Member is FieldInfo ? ((FieldInfo)me.Member).GetValue(new C()) : ((PropertyInfo)me.Member).GetMethod.Invoke(new C()), title + " member result");
             };
 
             asserter(e1.Body, "F1", 234, "e1");
@@ -1206,10 +1206,10 @@ namespace Bridge.ClientTest.Linq.Expressions
 
             var ie = e1.Body as MethodCallExpression;
             Assert.True(ie != null, "is MethodCallExpression");
-            Assert.AreEqual(ie.NodeType, ExpressionType.Call, "node type");
-            Assert.AreEqual(ie.Type, typeof(string), "type");
+            Assert.AreEqual(ExpressionType.Call, ie.NodeType, "node type");
+            Assert.AreEqual(typeof(string), ie.Type, "type");
             Assert.True(ie.Object is ParameterExpression && ((ParameterExpression)ie.Object).Name == "a", "expression");
-            Assert.AreEqual(ie.Arguments.Count, 2, "argument count");
+            Assert.AreEqual(2, ie.Arguments.Count, "argument count");
             Assert.True(ReferenceEquals(ie.Method, typeof(C).GetProperty("Item").GetMethod), "get method");
             Assert.True(ie.Arguments[0] is ParameterExpression && ((ParameterExpression)ie.Arguments[0]).Name == "b", "argument 0");
             Assert.True(ie.Arguments[1] is ParameterExpression && ((ParameterExpression)ie.Arguments[1]).Name == "c", "argument 1");
@@ -1229,10 +1229,10 @@ namespace Bridge.ClientTest.Linq.Expressions
             {
                 var ie = expr as IndexExpression;
                 Assert.True(ie != null, title + " is IndexExpression");
-                Assert.AreEqual(ie.NodeType, ExpressionType.Index, title + " node type");
-                Assert.AreEqual(ie.Type, type, title + " type");
+                Assert.AreEqual(ExpressionType.Index, ie.NodeType, title + " node type");
+                Assert.AreEqual(type, ie.Type, title + " type");
                 Assert.True(ie.Object is ParameterExpression && ((ParameterExpression)ie.Object).Name == "a", title + " object");
-                Assert.AreEqual(ie.Arguments.Count, 2, title + " argument count");
+                Assert.AreEqual(2, ie.Arguments.Count, title + " argument count");
                 Assert.True(ie.Arguments[0] is ParameterExpression && ((ParameterExpression)ie.Arguments[0]).Name == "b", title + " argument 0");
                 Assert.True(ie.Arguments[1] is ParameterExpression && ((ParameterExpression)ie.Arguments[1]).Name == "c", title + " argument 1");
                 Assert.True(ReferenceEquals(ie.Indexer, member), title + " member");
@@ -1258,17 +1258,17 @@ namespace Bridge.ClientTest.Linq.Expressions
             {
                 var ne = expr as NewExpression;
                 Assert.True(ne != null, title + " is NewExpression");
-                Assert.AreEqual(ne.NodeType, ExpressionType.New, title + " node type");
-                Assert.AreEqual(ne.Type, typeof(C), title + " type");
-                Assert.AreEqual(ne.Arguments.Count, argTypes.Length, title + " argument count");
+                Assert.AreEqual(ExpressionType.New, ne.NodeType, title + " node type");
+                Assert.AreEqual(typeof(C), ne.Type, title + " type");
+                Assert.AreEqual(argTypes.Length, ne.Arguments.Count, title + " argument count");
                 for (int i = 0; i < ne.Arguments.Count; i++)
                 {
                     Assert.True(ne.Arguments[i] is ParameterExpression && ((ParameterExpression)ne.Arguments[i]).Name == ((char)('a' + i)).ToString(), title + " argument " + i);
                 }
-                Assert.AreEqual(ne.Constructor.ParameterTypes.Length, argTypes.Length, title + " constructor argument length");
+                Assert.AreEqual(argTypes.Length, ne.Constructor.ParameterTypes.Length, title + " constructor argument length");
                 for (int i = 0; i < ne.Constructor.ParameterTypes.Length; i++)
                 {
-                    Assert.AreEqual(ne.Constructor.ParameterTypes[i], argTypes[i], title + " constructor parameter type " + i);
+                    Assert.AreEqual(argTypes[i], ne.Constructor.ParameterTypes[i], title + " constructor parameter type " + i);
                 }
                 if (checkReference)
                 {
@@ -1302,36 +1302,36 @@ namespace Bridge.ClientTest.Linq.Expressions
                 A = a,
                 B = b
             };
-            Assert.AreEqual(e.Body.NodeType, ExpressionType.Convert);
+            Assert.AreEqual(ExpressionType.Convert, e.Body.NodeType);
 
             var ne = ((UnaryExpression)e.Body).Operand as NewExpression;
             Assert.True(ne != null, "is NewExpression");
-            Assert.AreEqual(ne.NodeType, ExpressionType.New, "node type");
+            Assert.AreEqual(ExpressionType.New, ne.NodeType, "node type");
             Assert.True(ne.Type.FullName.Contains("$AnonymousType$"), "type");
-            Assert.AreEqual(ne.Arguments.Count, 2, "argument count");
+            Assert.AreEqual(2, ne.Arguments.Count, "argument count");
             Assert.True(ne.Arguments[0] is ParameterExpression && ((ParameterExpression)ne.Arguments[0]).Name == "a", "argument 0");
             Assert.True(ne.Arguments[1] is ParameterExpression && ((ParameterExpression)ne.Arguments[1]).Name == "b", "argument 1");
-            Assert.AreEqual(ne.Members.Count, 2, "member count");
+            Assert.AreEqual(2, ne.Members.Count, "member count");
             var propA = ne.Members[0];
             var propB = ne.Members[1];
             Assert.True(propA is PropertyInfo, "A should be property");
-            Assert.AreEqual(propA.Name, "A", "A name");
-            Assert.AreEqual(((PropertyInfo)propA).GetMethod.Invoke(new
+            Assert.AreEqual("A", propA.Name, "A name");
+            Assert.AreEqual(42, ((PropertyInfo)propA).GetMethod.Invoke(new
             {
                 A = 42,
                 B = 17
-            }), 42, "A getter result");
+            }), "A getter result");
             Assert.True(propB is PropertyInfo, "B should be property");
-            Assert.AreEqual(propB.Name, "B", "B name");
-            Assert.AreEqual(((PropertyInfo)propB).GetMethod.Invoke(new
+            Assert.AreEqual("B", propB.Name, "B name");
+            Assert.AreEqual(17, ((PropertyInfo)propB).GetMethod.Invoke(new
             {
                 A = 42,
                 B = 17
-            }), 17, "B getter result");
+            }), "B getter result");
 
             var instance = ne.Constructor.Invoke(42, 17);
-            Assert.AreEqual(((dynamic)instance).A, 42, "Constructor invocation result A");
-            Assert.AreEqual(((dynamic)instance).B, 17, "Constructor invocation result B");
+            Assert.AreEqual(42, ((dynamic)instance).A, "Constructor invocation result A");
+            Assert.AreEqual(17, ((dynamic)instance).B, "Constructor invocation result B");
         }
 
         public class ClassWithQueryPattern<T>
@@ -1359,37 +1359,37 @@ namespace Bridge.ClientTest.Linq.Expressions
             var outer = (MethodCallExpression)f.Body;
             //var outerLambda = (LambdaExpression)outer.Arguments[0];
             var inner = (MethodCallExpression)outer.Object;
-            Assert.AreEqual(inner.Method.Name, "Select");
+            Assert.AreEqual("Select", inner.Method.Name);
             var innerLambda = (LambdaExpression)inner.Arguments[0];
             var ne = (NewExpression)innerLambda.Body;
 
             Assert.True(ne != null, "is NewExpression");
-            Assert.AreEqual(ne.NodeType, ExpressionType.New, "node type");
+            Assert.AreEqual(ExpressionType.New, ne.NodeType, "node type");
             Assert.True(ne.Type.FullName.Contains("$AnonymousType$"), "type");
-            Assert.AreEqual(ne.Arguments.Count, 2, "argument count");
+            Assert.AreEqual(2, ne.Arguments.Count, "argument count");
             Assert.True(ne.Arguments[0] is ParameterExpression && ((ParameterExpression)ne.Arguments[0]).Name == "a", "argument 0");
-            Assert.AreEqual(ne.Arguments[1].NodeType, ExpressionType.Add, "argument 1");
-            Assert.AreEqual(ne.Members.Count, 2, "member count");
+            Assert.AreEqual(ExpressionType.Add, ne.Arguments[1].NodeType, "argument 1");
+            Assert.AreEqual(2, ne.Members.Count, "member count");
             var propA = ne.Members[0];
             var propB = ne.Members[1];
             Assert.True(propA is PropertyInfo, "A should be property");
-            Assert.AreEqual(propA.Name, "a", "a name");
-            Assert.AreEqual(((PropertyInfo)propA).GetMethod.Invoke(new
+            Assert.AreEqual("a", propA.Name, "a name");
+            Assert.AreEqual(42, ((PropertyInfo)propA).GetMethod.Invoke(new
             {
                 a = 42,
                 b = 17
-            }), 42, "a getter result");
+            }), "a getter result");
             Assert.True(propB is PropertyInfo, "B should be property");
-            Assert.AreEqual(propB.Name, "b", "b name");
-            Assert.AreEqual(((PropertyInfo)propB).GetMethod.Invoke(new
+            Assert.AreEqual("b", propB.Name, "b name");
+            Assert.AreEqual(17, ((PropertyInfo)propB).GetMethod.Invoke(new
             {
                 a = 42,
                 b = 17
-            }), 17, "b getter result");
+            }), "b getter result");
 
             var instance = ne.Constructor.Invoke(42, 17);
-            Assert.AreEqual(((dynamic)instance).a, 42, "Constructor invocation result a");
-            Assert.AreEqual(((dynamic)instance).b, 17, "Constructor invocation result b");
+            Assert.AreEqual(42, ((dynamic)instance).a, "Constructor invocation result a");
+            Assert.AreEqual(17, ((dynamic)instance).b, "Constructor invocation result b");
         }
 
         [Test]
@@ -1402,13 +1402,13 @@ namespace Bridge.ClientTest.Linq.Expressions
             {
                 var ne = expr as NewExpression;
                 Assert.True(ne != null, title + " is NewExpression");
-                Assert.AreEqual(ne.NodeType, ExpressionType.New, title + " node type");
-                Assert.AreEqual(ne.Type, typeof(C), title + " type");
-                Assert.AreEqual(ne.Arguments.Count, 2, title + " argument count");
+                Assert.AreEqual(ExpressionType.New, ne.NodeType, title + " node type");
+                Assert.AreEqual(typeof(C), ne.Type, title + " type");
+                Assert.AreEqual(2, ne.Arguments.Count, title + " argument count");
                 Assert.True(ReferenceEquals(ne.Constructor, typeof(C).GetConstructor(new[] { typeof(int), typeof(int) })), title + " constructor reference");
                 Assert.True(ReferenceEquals(ne.Arguments[0], a), title + " argument 0");
                 Assert.True(ReferenceEquals(ne.Arguments[1], b), title + " argument 1");
-                Assert.AreEqual(ne.Members.Count, 2, title + " member count");
+                Assert.AreEqual(2, ne.Members.Count, title + " member count");
                 Assert.True(ReferenceEquals(ne.Members[0], typeof(C).GetField("F1")), title + " member 0");
                 Assert.True(ReferenceEquals(ne.Members[1], typeof(C).GetProperty("P1").GetMethod), title + " member 1");
             };
@@ -1442,25 +1442,25 @@ namespace Bridge.ClientTest.Linq.Expressions
 
             var ma1 = b1 as MemberAssignment;
             Assert.True(ma1 != null, "b1 should be MemberAssignment");
-            Assert.AreEqual(ma1.BindingType, MemberBindingType.Assignment, "b1 BindingType");
+            Assert.AreEqual(MemberBindingType.Assignment, ma1.BindingType, "b1 BindingType");
             Assert.True(ReferenceEquals(ma1.Member, typeof(C).GetField("F1")), "b1 member");
             Assert.True(ma1.Expression is ParameterExpression && ((ParameterExpression)ma1.Expression).Name == "a", "b1 expression");
 
             var ma2 = b2 as MemberAssignment;
             Assert.True(ma2 != null, "b2 should be MemberAssignment");
-            Assert.AreEqual(ma2.BindingType, MemberBindingType.Assignment, "b2 BindingType");
+            Assert.AreEqual(MemberBindingType.Assignment, ma2.BindingType, "b2 BindingType");
             Assert.True(ReferenceEquals(ma2.Member, typeof(C).GetProperty("P1")), "b2 member");
             Assert.True(ma2.Expression is ParameterExpression && ((ParameterExpression)ma2.Expression).Name == "a", "b2 expression");
 
             var ma3 = b3 as MemberAssignment;
             Assert.True(ma3 != null, "b3 should be MemberAssignment");
-            Assert.AreEqual(ma3.BindingType, MemberBindingType.Assignment, "b3 BindingType");
+            Assert.AreEqual(MemberBindingType.Assignment, ma3.BindingType, "b3 BindingType");
             Assert.True(ReferenceEquals(ma3.Member, typeof(C).GetField("F1")), "b3 member");
             Assert.True(ma3.Expression is ParameterExpression && ((ParameterExpression)ma3.Expression).Name == "a", "b3 expression");
 
             var ma4 = b4 as MemberAssignment;
             Assert.True(ma4 != null, "b4 should be MemberAssignment");
-            Assert.AreEqual(ma4.BindingType, MemberBindingType.Assignment, "b4 BindingType");
+            Assert.AreEqual(MemberBindingType.Assignment, ma4.BindingType, "b4 BindingType");
             Assert.True(ReferenceEquals(ma4.Member, typeof(C).GetProperty("P1")), "b4 member");
             Assert.True(ma4.Expression is ParameterExpression && ((ParameterExpression)ma4.Expression).Name == "a", "b4 expression");
 
@@ -1481,20 +1481,20 @@ namespace Bridge.ClientTest.Linq.Expressions
             var i4 = Expression.ElementInit(add2, new MyEnumerable<Expression>(new Expression[] { pa, pb }));
 
             Assert.True(ReferenceEquals(i1.AddMethod, add1), "i1 add method");
-            Assert.AreEqual(i1.Arguments.Count, 1, "i1 argument count");
+            Assert.AreEqual(1, i1.Arguments.Count, "i1 argument count");
             Assert.True(ReferenceEquals(i1.Arguments[0], pa), "i1 argument");
 
             Assert.True(ReferenceEquals(i2.AddMethod, add1), "i2 add method");
-            Assert.AreEqual(i2.Arguments.Count, 1, "i2 argument count");
+            Assert.AreEqual(1, i2.Arguments.Count, "i2 argument count");
             Assert.True(ReferenceEquals(i2.Arguments[0], pa), "i2 argument");
 
             Assert.True(ReferenceEquals(i3.AddMethod, add2), "i3 add method");
-            Assert.AreEqual(i3.Arguments.Count, 2, "i3 argument count");
+            Assert.AreEqual(2, i3.Arguments.Count, "i3 argument count");
             Assert.True(ReferenceEquals(i3.Arguments[0], pa), "i3 argument 0");
             Assert.True(ReferenceEquals(i3.Arguments[1], pb), "i3 argument 1");
 
             Assert.True(ReferenceEquals(i4.AddMethod, add2), "i4 add method");
-            Assert.AreEqual(i4.Arguments.Count, 2, "i4 argument count");
+            Assert.AreEqual(2, i4.Arguments.Count, "i4 argument count");
             Assert.True(ReferenceEquals(i4.Arguments[0], pa), "i4 argument 0");
             Assert.True(ReferenceEquals(i4.Arguments[1], pb), "i4 argument 1");
         }
@@ -1508,14 +1508,14 @@ namespace Bridge.ClientTest.Linq.Expressions
             {
                 var mlb = binding as MemberListBinding;
                 Assert.True(mlb != null, title + " is MemberListBinding");
-                Assert.AreEqual(binding.BindingType, MemberBindingType.ListBinding, title + " node type");
+                Assert.AreEqual(MemberBindingType.ListBinding, binding.BindingType, title + " node type");
                 Assert.True(ReferenceEquals(binding.Member, member), title + " member");
-                Assert.AreEqual(mlb.Initializers.Count, 2, title + " initializer count");
+                Assert.AreEqual(2, mlb.Initializers.Count, title + " initializer count");
                 Assert.True(ReferenceEquals(mlb.Initializers[0].AddMethod, add1), title + " initializer 0 add method");
-                Assert.AreEqual(mlb.Initializers[0].Arguments.Count, 1, title + " initializer 0 argument count");
+                Assert.AreEqual(1, mlb.Initializers[0].Arguments.Count, title + " initializer 0 argument count");
                 Assert.True(mlb.Initializers[0].Arguments[0] is ParameterExpression && ((ParameterExpression)mlb.Initializers[0].Arguments[0]).Name == "a", title + " initializer 0 argument");
                 Assert.True(ReferenceEquals(mlb.Initializers[0].AddMethod, add1), title + " initializer 1 add method");
-                Assert.AreEqual(mlb.Initializers[1].Arguments.Count, 1, title + " initializer 1 argument count");
+                Assert.AreEqual(1, mlb.Initializers[1].Arguments.Count, title + " initializer 1 argument count");
                 Assert.True(mlb.Initializers[1].Arguments[0] is ParameterExpression && ((ParameterExpression)mlb.Initializers[1].Arguments[0]).Name == "b", title + " initializer 1 argument");
             };
 
@@ -1550,14 +1550,14 @@ namespace Bridge.ClientTest.Linq.Expressions
 
             var mlb7 = b7 as MemberListBinding;
             Assert.True(mlb7 != null, "b7 is MemberListBinding");
-            Assert.AreEqual(b7.BindingType, MemberBindingType.ListBinding, "b7 node type");
+            Assert.AreEqual(MemberBindingType.ListBinding, b7.BindingType, "b7 node type");
             Assert.True(ReferenceEquals(b7.Member, typeof(C).GetField("LF")), "b7 member");
-            Assert.AreEqual(mlb7.Initializers.Count, 2, "b7 initializer count");
+            Assert.AreEqual(2, mlb7.Initializers.Count, "b7 initializer count");
             Assert.True(ReferenceEquals(mlb7.Initializers[0].AddMethod, add1), "b7 initializer 0 add method");
-            Assert.AreEqual(mlb7.Initializers[0].Arguments.Count, 1, "b7 initializer 0 argument count");
+            Assert.AreEqual(1, mlb7.Initializers[0].Arguments.Count, "b7 initializer 0 argument count");
             Assert.True(mlb7.Initializers[0].Arguments[0] is ParameterExpression && ((ParameterExpression)mlb7.Initializers[0].Arguments[0]).Name == "a", "b7 initializer 0 argument");
             Assert.True(ReferenceEquals(mlb7.Initializers[1].AddMethod, add2), "b7 initializer 1 add method");
-            Assert.AreEqual(mlb7.Initializers[1].Arguments.Count, 2, "b7 initializer 1 argument count");
+            Assert.AreEqual(2, mlb7.Initializers[1].Arguments.Count, "b7 initializer 1 argument count");
             Assert.True(mlb7.Initializers[1].Arguments[0] is ParameterExpression && ((ParameterExpression)mlb7.Initializers[1].Arguments[0]).Name == "a", "b7 initializer 1 argument 0");
             Assert.True(mlb7.Initializers[1].Arguments[1] is ParameterExpression && ((ParameterExpression)mlb7.Initializers[1].Arguments[1]).Name == "b", "b7 initializer 1 argument 1");
 
@@ -1593,33 +1593,33 @@ namespace Bridge.ClientTest.Linq.Expressions
 
             var mb1 = b1 as MemberMemberBinding;
             Assert.True(mb1 != null, "b1 should be MemberMemberBinding");
-            Assert.AreEqual(mb1.BindingType, MemberBindingType.MemberBinding, "b1 BindingType");
+            Assert.AreEqual(MemberBindingType.MemberBinding, mb1.BindingType, "b1 BindingType");
             Assert.True(ReferenceEquals(mb1.Member, typeof(C).GetField("CF")), "b1 member");
-            Assert.AreEqual(mb1.Bindings.Count, 2, "b1 binding count");
+            Assert.AreEqual(2, mb1.Bindings.Count, "b1 binding count");
             Assert.True(mb1.Bindings[0] is MemberAssignment && ReferenceEquals(mb1.Bindings[0].Member, typeof(C).GetField("F1")), "b1 binding 0");
             Assert.True(mb1.Bindings[1] is MemberAssignment && ReferenceEquals(mb1.Bindings[1].Member, typeof(C).GetProperty("P1")), "b1 binding 1");
 
             var mb2 = b2 as MemberMemberBinding;
             Assert.True(mb2 != null, "b2 should be MemberMemberBinding");
-            Assert.AreEqual(mb2.BindingType, MemberBindingType.MemberBinding, "b2 BindingType");
+            Assert.AreEqual(MemberBindingType.MemberBinding, mb2.BindingType, "b2 BindingType");
             Assert.True(ReferenceEquals(mb2.Member, typeof(C).GetProperty("CP")), "b2 member");
-            Assert.AreEqual(mb2.Bindings.Count, 2, "b2 binding count");
+            Assert.AreEqual(2, mb2.Bindings.Count, "b2 binding count");
             Assert.True(mb2.Bindings[0] is MemberAssignment && ReferenceEquals(mb2.Bindings[0].Member, typeof(C).GetField("F1")), "b1 binding 0");
             Assert.True(mb2.Bindings[1] is MemberAssignment && ReferenceEquals(mb2.Bindings[1].Member, typeof(C).GetProperty("P1")), "b1 binding 1");
 
             var mb3 = b3 as MemberMemberBinding;
             Assert.True(mb3 != null, "b3 should be MemberMemberBinding");
-            Assert.AreEqual(mb3.BindingType, MemberBindingType.MemberBinding, "b3 BindingType");
+            Assert.AreEqual(MemberBindingType.MemberBinding, mb3.BindingType, "b3 BindingType");
             Assert.True(ReferenceEquals(mb3.Member, typeof(C).GetField("CF")), "b3 member");
-            Assert.AreEqual(mb3.Bindings.Count, 2, "b3 binding count");
+            Assert.AreEqual(2, mb3.Bindings.Count, "b3 binding count");
             Assert.True(ReferenceEquals(mb3.Bindings[0], bindings[0]), "b3 binding 0");
             Assert.True(ReferenceEquals(mb3.Bindings[1], bindings[1]), "b3 binding 1");
 
             var mb4 = b4 as MemberMemberBinding;
             Assert.True(mb4 != null, "b4 should be MemberMemberBinding");
-            Assert.AreEqual(mb4.BindingType, MemberBindingType.MemberBinding, "b4 BindingType");
+            Assert.AreEqual(MemberBindingType.MemberBinding, mb4.BindingType, "b4 BindingType");
             Assert.True(ReferenceEquals(mb4.Member, typeof(C).GetProperty("CP")), "b4 member");
-            Assert.AreEqual(mb4.Bindings.Count, 2, "b4 binding count");
+            Assert.AreEqual(2, mb4.Bindings.Count, "b4 binding count");
             Assert.True(ReferenceEquals(mb4.Bindings[0], bindings[0]), "b4 binding 0");
             Assert.True(ReferenceEquals(mb4.Bindings[1], bindings[1]), "b4 binding 1");
 
@@ -1633,9 +1633,9 @@ namespace Bridge.ClientTest.Linq.Expressions
             {
                 var mie = expr as MemberInitExpression;
                 Assert.True(mie != null, title + " is MemberInitExpression");
-                Assert.AreEqual(expr.NodeType, ExpressionType.MemberInit, title + " node type");
-                Assert.AreEqual(expr.Type, typeof(C), title + " type");
-                Assert.AreEqual(mie.Bindings.Count, 2, title + " binding count");
+                Assert.AreEqual(ExpressionType.MemberInit, expr.NodeType, title + " node type");
+                Assert.AreEqual(typeof(C), expr.Type, title + " type");
+                Assert.AreEqual(2, mie.Bindings.Count, title + " binding count");
                 Assert.True(ReferenceEquals(mie.NewExpression.Constructor, typeof(C).GetConstructor(new Type[0])), title + " new expression");
                 Assert.True(mie.Bindings[0] is MemberAssignment, title + " binding 0 type");
                 Assert.True(ReferenceEquals(mie.Bindings[0].Member, typeof(C).GetField("F1")), title + " binding 0 member");
@@ -1672,15 +1672,15 @@ namespace Bridge.ClientTest.Linq.Expressions
             {
                 var lie = expr as ListInitExpression;
                 Assert.True(lie != null, title + " is ListInitExpression");
-                Assert.AreEqual(expr.NodeType, ExpressionType.ListInit, title + " node type");
-                Assert.AreEqual(expr.Type, typeof(MyList), title + " type");
+                Assert.AreEqual(ExpressionType.ListInit, expr.NodeType, title + " node type");
+                Assert.AreEqual(typeof(MyList), expr.Type, title + " type");
                 Assert.True(ReferenceEquals(lie.NewExpression.Constructor, typeof(MyList).GetConstructor(new Type[0])), title + " new expression");
-                Assert.AreEqual(lie.Initializers.Count, 2, title + " initializer count");
+                Assert.AreEqual(2, lie.Initializers.Count, title + " initializer count");
                 Assert.True(ReferenceEquals(lie.Initializers[0].AddMethod, add1), title + " initializer 0 add method");
-                Assert.AreEqual(lie.Initializers[0].Arguments.Count, 1, title + " initializer 0 argument count");
+                Assert.AreEqual(1, lie.Initializers[0].Arguments.Count, title + " initializer 0 argument count");
                 Assert.True(lie.Initializers[0].Arguments[0] is ParameterExpression && ((ParameterExpression)lie.Initializers[0].Arguments[0]).Name == "a", title + " initializer 0 argument");
                 Assert.True(ReferenceEquals(lie.Initializers[1].AddMethod, add1), title + " initializer 1 add method");
-                Assert.AreEqual(lie.Initializers[1].Arguments.Count, 1, title + " initializer 1 argument count");
+                Assert.AreEqual(1, lie.Initializers[1].Arguments.Count, title + " initializer 1 argument count");
                 Assert.True(lie.Initializers[1].Arguments[0] is ParameterExpression && ((ParameterExpression)lie.Initializers[1].Arguments[0]).Name == "b", title + " initializer 1 argument");
             };
 
@@ -1701,15 +1701,15 @@ namespace Bridge.ClientTest.Linq.Expressions
 
             var lie6 = e6.Body as ListInitExpression;
             Assert.True(lie6 != null, "e6 is ListInitExpression");
-            Assert.AreEqual(lie6.NodeType, ExpressionType.ListInit, "e6 node type");
-            Assert.AreEqual(lie6.Type, typeof(MyList), "e6 type");
+            Assert.AreEqual(ExpressionType.ListInit, lie6.NodeType, "e6 node type");
+            Assert.AreEqual(typeof(MyList), lie6.Type, "e6 type");
             Assert.True(ReferenceEquals(lie6.NewExpression.Constructor, typeof(MyList).GetConstructor(new Type[0])), "e6 new expression");
-            Assert.AreEqual(lie6.Initializers.Count, 2, "e6 initializer count");
+            Assert.AreEqual(2, lie6.Initializers.Count, "e6 initializer count");
             Assert.True(ReferenceEquals(lie6.Initializers[0].AddMethod, add1), "e6 initializer 0 add method");
-            Assert.AreEqual(lie6.Initializers[0].Arguments.Count, 1, "e6 initializer 0 argument count");
+            Assert.AreEqual(1, lie6.Initializers[0].Arguments.Count, "e6 initializer 0 argument count");
             Assert.True(lie6.Initializers[0].Arguments[0] is ParameterExpression && ((ParameterExpression)lie6.Initializers[0].Arguments[0]).Name == "a", "e6 initializer 0 argument");
             Assert.True(ReferenceEquals(lie6.Initializers[1].AddMethod, add2), "e6 initializer 1 add method");
-            Assert.AreEqual(lie6.Initializers[1].Arguments.Count, 2, "e6 initializer 1 argument count");
+            Assert.AreEqual(2, lie6.Initializers[1].Arguments.Count, "e6 initializer 1 argument count");
             Assert.True(lie6.Initializers[1].Arguments[0] is ParameterExpression && ((ParameterExpression)lie6.Initializers[1].Arguments[0]).Name == "a", "e6 initializer 1 argument 0");
             Assert.True(lie6.Initializers[1].Arguments[1] is ParameterExpression && ((ParameterExpression)lie6.Initializers[1].Arguments[1]).Name == "b", "e6 initializer 1 argument 1");
 
@@ -1724,22 +1724,22 @@ namespace Bridge.ClientTest.Linq.Expressions
             Expression e3 = Expression.TypeEqual(Expression.Parameter(typeof(object), "a"), typeof(C));
 
             Assert.True(e1.Body is TypeBinaryExpression, "e1 is TypeBinaryExpression");
-            Assert.AreEqual(e1.Body.NodeType, ExpressionType.TypeIs, "e1 node type");
-            Assert.AreEqual(e1.Body.Type, typeof(bool), "e1 type");
+            Assert.AreEqual(ExpressionType.TypeIs, e1.Body.NodeType, "e1 node type");
+            Assert.AreEqual(typeof(bool), e1.Body.Type, "e1 type");
             Assert.True(((TypeBinaryExpression)e1.Body).Expression is ParameterExpression && ((ParameterExpression)((TypeBinaryExpression)e1.Body).Expression).Name == "a", "e1 expression");
-            Assert.AreEqual(((TypeBinaryExpression)e1.Body).TypeOperand, typeof(C), "e1 type operand");
+            Assert.AreEqual(typeof(C), ((TypeBinaryExpression)e1.Body).TypeOperand, "e1 type operand");
 
             Assert.True(e2 is TypeBinaryExpression, "e2 is TypeBinaryExpression");
-            Assert.AreEqual(e2.NodeType, ExpressionType.TypeIs, "e2 node type");
-            Assert.AreEqual(e2.Type, typeof(bool), "e2 type");
+            Assert.AreEqual(ExpressionType.TypeIs, e2.NodeType, "e2 node type");
+            Assert.AreEqual(typeof(bool), e2.Type, "e2 type");
             Assert.True(((TypeBinaryExpression)e2).Expression is ParameterExpression && ((ParameterExpression)((TypeBinaryExpression)e2).Expression).Name == "a", "e2 expression");
-            Assert.AreEqual(((TypeBinaryExpression)e2).TypeOperand, typeof(C), "e2 type operand");
+            Assert.AreEqual(typeof(C), ((TypeBinaryExpression)e2).TypeOperand, "e2 type operand");
 
             Assert.True(e3 is TypeBinaryExpression, "e3 is TypeBinaryExpression");
-            Assert.AreEqual(e3.NodeType, ExpressionType.TypeEqual, "e3 node type");
-            Assert.AreEqual(e3.Type, typeof(bool), "e3 type");
+            Assert.AreEqual(ExpressionType.TypeEqual, e3.NodeType, "e3 node type");
+            Assert.AreEqual(typeof(bool), e3.Type, "e3 type");
             Assert.True(((TypeBinaryExpression)e3).Expression is ParameterExpression && ((ParameterExpression)((TypeBinaryExpression)e2).Expression).Name == "a", "e3 expression");
-            Assert.AreEqual(((TypeBinaryExpression)e3).TypeOperand, typeof(C), "e3 type operand");
+            Assert.AreEqual(typeof(C), ((TypeBinaryExpression)e3).TypeOperand, "e3 type operand");
 
             Assert.False((object)Expression.Constant(0, typeof(int)) is TypeBinaryExpression, "Constant is TypeBinaryExpression");
         }
@@ -1753,20 +1753,20 @@ namespace Bridge.ClientTest.Linq.Expressions
 
             var q1 = ((MethodCallExpression)e1.Body).Arguments[0];
             Assert.True(q1 is UnaryExpression, "e1 is UnaryExpression");
-            Assert.AreEqual(q1.NodeType, ExpressionType.Quote, "e1 node type");
-            Assert.AreEqual(q1.Type, typeof(Expression), "e1 type");
+            Assert.AreEqual(ExpressionType.Quote, q1.NodeType, "e1 node type");
+            Assert.AreEqual(typeof(Expression), q1.Type, "e1 type");
             var l1 = ((UnaryExpression)q1).Operand as LambdaExpression;
             Assert.True(l1 != null, "e1 operand should be LambdaExpression");
-            Assert.AreEqual(l1.Parameters.Count, 1, "e1 lambda parameter count");
-            Assert.AreEqual(l1.Parameters[0].Name, "x", "e1 lambda parameter name");
+            Assert.AreEqual(1, l1.Parameters.Count, "e1 lambda parameter count");
+            Assert.AreEqual("x", l1.Parameters[0].Name, "e1 lambda parameter name");
 
             Assert.True(e2 is UnaryExpression, "e2 is UnaryExpression");
-            Assert.AreEqual(e2.NodeType, ExpressionType.Quote, "e2 node type");
-            Assert.AreEqual(e2.Type, typeof(Expression), "e2 type");
+            Assert.AreEqual(ExpressionType.Quote, e2.NodeType, "e2 node type");
+            Assert.AreEqual(typeof(Expression), e2.Type, "e2 type");
             var l2 = ((UnaryExpression)e2).Operand as LambdaExpression;
             Assert.True(l2 != null, "e2 operand should be LambdaExpression");
-            Assert.AreEqual(l2.Parameters.Count, 1, "e2 lambda parameter count");
-            Assert.AreEqual(l2.Parameters[0].Name, "x", "e2 lambda parameter name");
+            Assert.AreEqual(1, l2.Parameters.Count, "e2 lambda parameter count");
+            Assert.AreEqual("x", l2.Parameters[0].Name, "e2 lambda parameter name");
         }
 
         [Test]
@@ -1776,49 +1776,49 @@ namespace Bridge.ClientTest.Linq.Expressions
             Expression<Func<int>> e = () => a;
             var me = e.Body as MemberExpression;
             Assert.True(me != null, "e is MemberExpression");
-            Assert.AreEqual(me.NodeType, ExpressionType.MemberAccess, "e node type");
-            Assert.AreEqual(me.Type, typeof(int), "e type");
+            Assert.AreEqual(ExpressionType.MemberAccess, me.NodeType, "e node type");
+            Assert.AreEqual(typeof(int), me.Type, "e type");
 
             var expr = me.Expression as ConstantExpression;
             Assert.True(expr != null, "expression should be ConstantExpression");
-            Assert.AreEqual(expr.NodeType, ExpressionType.Constant, "expression node type");
-            Assert.AreEqual(expr.Type, typeof(int), "expression type");
+            Assert.AreEqual(ExpressionType.Constant, expr.NodeType, "expression node type");
+            Assert.AreEqual(typeof(int), expr.Type, "expression type");
             Assert.True(expr.Value != null, "expression value");
 
             var prop = ((MemberExpression)e.Body).Member as PropertyInfo;
             Assert.True(prop != null, "property not null");
 
-            Assert.AreEqual(prop.MemberType, MemberTypes.Property, "property member type");
-            Assert.AreEqual(prop.Name, "a", "property name");
+            Assert.AreEqual(MemberTypes.Property, prop.MemberType, "property member type");
+            Assert.AreEqual("a", prop.Name, "property name");
             Assert.True(prop.DeclaringType != null, "property declaring type");
             Assert.False(prop.IsStatic, "property is static");
-            Assert.AreEqual(prop.PropertyType, typeof(int), "property type");
-            Assert.AreEqual(prop.IndexParameterTypes.Length, 0, "property indexer parameters");
+            Assert.AreEqual(typeof(int), prop.PropertyType, "property type");
+            Assert.AreEqual(0, prop.IndexParameterTypes.Length, "property indexer parameters");
             Assert.True(prop.CanRead, "property can read");
             Assert.True(prop.CanWrite, "property can write");
 
-            Assert.AreEqual(prop.GetMethod.MemberType, MemberTypes.Method, "getter member type");
-            Assert.AreEqual(prop.GetMethod.Name, "geta", "getter name");
+            Assert.AreEqual(MemberTypes.Method, prop.GetMethod.MemberType, "getter member type");
+            Assert.AreEqual("geta", prop.GetMethod.Name, "getter name");
             Assert.True(prop.GetMethod.DeclaringType != null, "getter declaring type");
             Assert.False(prop.GetMethod.IsStatic, "getter is static");
-            Assert.AreEqual(prop.GetMethod.ParameterTypes.Length, 0, "getter parameters");
+            Assert.AreEqual(0, prop.GetMethod.ParameterTypes.Length, "getter parameters");
             Assert.False(prop.GetMethod.IsConstructor, "getter is constructor");
-            Assert.AreEqual(prop.GetMethod.ReturnType, typeof(int), "getter return type");
-            Assert.AreEqual(prop.GetMethod.TypeParameterCount, 0, "getter type parameter count");
+            Assert.AreEqual(typeof(int), prop.GetMethod.ReturnType, "getter return type");
+            Assert.AreEqual(0, prop.GetMethod.TypeParameterCount, "getter type parameter count");
 
-            Assert.AreEqual(prop.SetMethod.MemberType, MemberTypes.Method, "setter member type");
-            Assert.AreEqual(prop.SetMethod.Name, "seta", "setter name");
+            Assert.AreEqual(MemberTypes.Method, prop.SetMethod.MemberType, "setter member type");
+            Assert.AreEqual("seta", prop.SetMethod.Name, "setter name");
             Assert.True(prop.SetMethod.DeclaringType != null, "setter declaring type");
             Assert.False(prop.SetMethod.IsStatic, "setter is static");
-            Assert.AreEqual(prop.SetMethod.ParameterTypes.Length, 1, "setter parameter count");
-            Assert.AreEqual(prop.SetMethod.ParameterTypes[0], typeof(int), "setter parameter type");
+            Assert.AreEqual(1, prop.SetMethod.ParameterTypes.Length, "setter parameter count");
+            Assert.AreEqual(typeof(int), prop.SetMethod.ParameterTypes[0], "setter parameter type");
             Assert.False(prop.SetMethod.IsConstructor, "setter is constructor");
-            Assert.AreEqual(prop.SetMethod.ReturnType, typeof(object) /*really: void*/, "setter return type");
-            Assert.AreEqual(prop.SetMethod.TypeParameterCount, 0, "setter type parameter count");
+            Assert.AreEqual(typeof(object) /*really: void*/, prop.SetMethod.ReturnType, "setter return type");
+            Assert.AreEqual(0, prop.SetMethod.TypeParameterCount, "setter type parameter count");
 
-            Assert.AreEqual(prop.GetValue(expr.Value), 42, "property get");
+            Assert.AreEqual(42, prop.GetValue(expr.Value), "property get");
             prop.SetValue(expr.Value, 120);
-            Assert.AreEqual(a, 120, "property set");
+            Assert.AreEqual(120, a, "property set");
         }
 
         [Test]
@@ -1834,8 +1834,8 @@ namespace Bridge.ClientTest.Linq.Expressions
             {
                 var ue = expr as UnaryExpression;
                 Assert.True(ue != null, title + " is UnaryExpression");
-                Assert.AreEqual(ue.NodeType, ExpressionType.Throw, title + " node type");
-                Assert.AreEqual(ue.Type, type, title + " type");
+                Assert.AreEqual(ExpressionType.Throw, ue.NodeType, title + " node type");
+                Assert.AreEqual(type, ue.Type, title + " type");
                 if (hasOperand)
                 {
                     Assert.True(ue.Operand is ParameterExpression && ((ParameterExpression)ue.Operand).Name == "a", title + " operand");
@@ -1860,12 +1860,12 @@ namespace Bridge.ClientTest.Linq.Expressions
             Expression e2 = Expression.Default(typeof(string));
 
             Assert.True(e1 is DefaultExpression, "e1 is DefaultExpression");
-            Assert.AreEqual(e1.NodeType, ExpressionType.Default, "e1 node type");
-            Assert.AreEqual(e1.Type, typeof(object) /*really: void*/, "e1 type");
+            Assert.AreEqual(ExpressionType.Default, e1.NodeType, "e1 node type");
+            Assert.AreEqual(typeof(object) /*really: void*/, e1.Type, "e1 type");
 
             Assert.True(e2 is DefaultExpression, "e2 is DefaultExpression");
-            Assert.AreEqual(e2.NodeType, ExpressionType.Default, "e2 node type");
-            Assert.AreEqual(e2.Type, typeof(string), "e2 type");
+            Assert.AreEqual(ExpressionType.Default, e2.NodeType, "e2 node type");
+            Assert.AreEqual(typeof(string), e2.Type, "e2 type");
 
             Assert.False((object)Expression.Constant(0, typeof(int)) is TypeBinaryExpression, "Constant is DefaultExpression");
         }
@@ -1895,21 +1895,21 @@ namespace Bridge.ClientTest.Linq.Expressions
             {
                 var be = expr as BlockExpression;
                 Assert.True(be != null, title + " is BlockExpression");
-                Assert.AreEqual(be.NodeType, ExpressionType.Block, title + " node type");
-                Assert.AreEqual(be.Type, type, title + " type");
-                Assert.AreEqual(be.Expressions.Count, 2, title + " expression count");
+                Assert.AreEqual(ExpressionType.Block, be.NodeType, title + " node type");
+                Assert.AreEqual(type, be.Type, title + " type");
+                Assert.AreEqual(2, be.Expressions.Count, title + " expression count");
                 Assert.True(ReferenceEquals(be.Expressions[0], c1), title + " expression 0");
                 Assert.True(ReferenceEquals(be.Expressions[1], c2), title + " expression 1");
                 Assert.True(ReferenceEquals(be.Result, c2), title + " result");
                 if (hasVariables)
                 {
-                    Assert.AreEqual(be.Variables.Count, 2, title + " variable count");
+                    Assert.AreEqual(2, be.Variables.Count, title + " variable count");
                     Assert.True(ReferenceEquals(be.Variables[0], v1), title + " variable 0");
                     Assert.True(ReferenceEquals(be.Variables[1], v2), title + " variable 1");
                 }
                 else
                 {
-                    Assert.AreEqual(be.Variables.Count, 0, title + " variable count");
+                    Assert.AreEqual(0, be.Variables.Count, title + " variable count");
                 }
             };
 
@@ -1941,17 +1941,17 @@ namespace Bridge.ClientTest.Linq.Expressions
 
             var ce1 = e1 as ConditionalExpression;
             Assert.True(ce1 != null, "e1 is ConditionalExpression");
-            Assert.AreEqual(ce1.NodeType, ExpressionType.Conditional, "e1 node type");
-            Assert.AreEqual(ce1.Type, typeof(object) /*really: void*/, "e1 type");
+            Assert.AreEqual(ExpressionType.Conditional, ce1.NodeType, "e1 node type");
+            Assert.AreEqual(typeof(object) /*really: void*/, ce1.Type, "e1 type");
             Assert.True(ReferenceEquals(ce1.Test, a), "e1 test");
             Assert.True(ReferenceEquals(ce1.IfTrue, b), "e1 iftrue");
-            Assert.AreEqual(ce1.IfFalse.NodeType, ExpressionType.Default, "e1 iffalse node type");
-            Assert.AreEqual(ce1.IfFalse.Type, typeof(object) /* really: void */, "e1 iffalse type");
+            Assert.AreEqual(ExpressionType.Default, ce1.IfFalse.NodeType, "e1 iffalse node type");
+            Assert.AreEqual(typeof(object) /* really: void */, ce1.IfFalse.Type, "e1 iffalse type");
 
             var ce2 = e2 as ConditionalExpression;
             Assert.True(ce2 != null, "e2 is ConditionalExpression");
-            Assert.AreEqual(ce2.NodeType, ExpressionType.Conditional, "e2 node type");
-            Assert.AreEqual(ce2.Type, typeof(object) /*really: void*/, "e2 type");
+            Assert.AreEqual(ExpressionType.Conditional, ce2.NodeType, "e2 node type");
+            Assert.AreEqual(typeof(object) /*really: void*/, ce2.Type, "e2 type");
             Assert.True(ReferenceEquals(ce2.Test, a), "e2 test");
             Assert.True(ReferenceEquals(ce2.IfTrue, b), "e2 iftrue");
             Assert.True(ReferenceEquals(ce2.IfFalse, c), "e2 iffalse");
@@ -1966,13 +1966,13 @@ namespace Bridge.ClientTest.Linq.Expressions
             LabelTarget l4 = Expression.Label(typeof(string), "name2");
 
             Assert.True(l1.Name == null, "l1 name");
-            Assert.AreEqual(l1.Type, typeof(object)/*really: void*/, "l1 type");
-            Assert.AreEqual(l2.Name, "name1", "l2 name");
-            Assert.AreEqual(l2.Type, typeof(object)/*really: void*/, "l2 type");
+            Assert.AreEqual(typeof(object)/*really: void*/, l1.Type, "l1 type");
+            Assert.AreEqual("name1", l2.Name, "l2 name");
+            Assert.AreEqual(typeof(object)/*really: void*/, l2.Type, "l2 type");
             Assert.True(l3.Name == null, "l3 name");
-            Assert.AreEqual(l3.Type, typeof(int), "l3 type");
-            Assert.AreEqual(l4.Name, "name2", "l4 name");
-            Assert.AreEqual(l4.Type, typeof(string), "l4 type");
+            Assert.AreEqual(typeof(int), l3.Type, "l3 type");
+            Assert.AreEqual("name2", l4.Name, "l4 name");
+            Assert.AreEqual(typeof(string), l4.Type, "l4 type");
         }
 
         [Test]
@@ -2001,9 +2001,9 @@ namespace Bridge.ClientTest.Linq.Expressions
             {
                 var ge = expr as GotoExpression;
                 Assert.True(ge != null, title + " is GotoExpression");
-                Assert.AreEqual(ge.NodeType, ExpressionType.Goto, title + " node type");
-                Assert.AreEqual(ge.Type, type, title + " type");
-                Assert.AreEqual(ge.Kind, kind, title + " kind");
+                Assert.AreEqual(ExpressionType.Goto, ge.NodeType, title + " node type");
+                Assert.AreEqual(type, ge.Type, title + " type");
+                Assert.AreEqual(kind, ge.Kind, title + " kind");
                 Assert.True(ReferenceEquals(ge.Target, target), title + " target");
                 Assert.True(ReferenceEquals(ge.Value, value), title + " target");
             };
@@ -2038,20 +2038,20 @@ namespace Bridge.ClientTest.Linq.Expressions
             Expression e3 = Expression.Label(lbl2, v);
 
             Assert.True(e1 is LabelExpression, "e1 is LabelExpression");
-            Assert.AreEqual(e1.NodeType, ExpressionType.Label, "e1 node type");
-            Assert.AreEqual(e1.Type, typeof(object) /*really: void*/, "e1 type");
+            Assert.AreEqual(ExpressionType.Label, e1.NodeType, "e1 node type");
+            Assert.AreEqual(typeof(object) /*really: void*/, e1.Type, "e1 type");
             Assert.True(ReferenceEquals(((LabelExpression)e1).Target, lbl1), "e1 target");
             Assert.True(((LabelExpression)e1).DefaultValue == null, "e1 default value");
 
             Assert.True(e2 is LabelExpression, "e2 is LabelExpression");
-            Assert.AreEqual(e2.NodeType, ExpressionType.Label, "e2 node type");
-            Assert.AreEqual(e2.Type, typeof(object) /*really: void*/, "e2 type");
+            Assert.AreEqual(ExpressionType.Label, e2.NodeType, "e2 node type");
+            Assert.AreEqual(typeof(object) /*really: void*/, e2.Type, "e2 type");
             Assert.True(ReferenceEquals(((LabelExpression)e2).Target, lbl1), "e2 target");
             Assert.True(ReferenceEquals(((LabelExpression)e2).DefaultValue, v), "e2 default value");
 
             Assert.True(e3 is LabelExpression, "e3 is LabelExpression");
-            Assert.AreEqual(e3.NodeType, ExpressionType.Label, "e3 node type");
-            Assert.AreEqual(e3.Type, typeof(string), "e3 type");
+            Assert.AreEqual(ExpressionType.Label, e3.NodeType, "e3 node type");
+            Assert.AreEqual(typeof(string), e3.Type, "e3 type");
             Assert.True(ReferenceEquals(((LabelExpression)e3).Target, lbl2), "e3 target");
             Assert.True(ReferenceEquals(((LabelExpression)e3).DefaultValue, v), "e3 default value");
 
@@ -2071,29 +2071,29 @@ namespace Bridge.ClientTest.Linq.Expressions
             Expression e4 = Expression.Loop(c, null, null);
 
             Assert.True(e1 is LoopExpression, "e1 is LoopExpression");
-            Assert.AreEqual(e1.NodeType, ExpressionType.Loop, "e1 node type");
-            Assert.AreEqual(e1.Type, typeof(object) /*really: void*/, "e1 type");
+            Assert.AreEqual(ExpressionType.Loop, e1.NodeType, "e1 node type");
+            Assert.AreEqual(typeof(object) /*really: void*/, e1.Type, "e1 type");
             Assert.True(ReferenceEquals(((LoopExpression)e1).Body, c), "e1 body");
             Assert.True(((LoopExpression)e1).BreakLabel == null, "e1 break label");
             Assert.True(((LoopExpression)e1).ContinueLabel == null, "e1 continue label");
 
             Assert.True(e2 is LoopExpression, "e2 is LoopExpression");
-            Assert.AreEqual(e2.NodeType, ExpressionType.Loop, "e2 node type");
-            Assert.AreEqual(e2.Type, typeof(string), "e2 type");
+            Assert.AreEqual(ExpressionType.Loop, e2.NodeType, "e2 node type");
+            Assert.AreEqual(typeof(string), e2.Type, "e2 type");
             Assert.True(ReferenceEquals(((LoopExpression)e2).Body, c), "e2 target");
             Assert.True(ReferenceEquals(((LoopExpression)e2).BreakLabel, lb), "e2 break label");
             Assert.True(((LoopExpression)e2).ContinueLabel == null, "e1 continue label");
 
             Assert.True(e3 is LoopExpression, "e3 is LoopExpression");
-            Assert.AreEqual(e3.NodeType, ExpressionType.Loop, "e3 node type");
-            Assert.AreEqual(e3.Type, typeof(string), "e3 type");
+            Assert.AreEqual(ExpressionType.Loop, e3.NodeType, "e3 node type");
+            Assert.AreEqual(typeof(string), e3.Type, "e3 type");
             Assert.True(ReferenceEquals(((LoopExpression)e3).Body, c), "e3 target");
             Assert.True(ReferenceEquals(((LoopExpression)e3).BreakLabel, lb), "e3 break label");
             Assert.True(ReferenceEquals(((LoopExpression)e3).ContinueLabel, lc), "e3 continue label");
 
             Assert.True(e4 is LoopExpression, "e4 is LoopExpression");
-            Assert.AreEqual(e4.NodeType, ExpressionType.Loop, "e4 node type");
-            Assert.AreEqual(e4.Type, typeof(object) /*really: void*/, "e4 type");
+            Assert.AreEqual(ExpressionType.Loop, e4.NodeType, "e4 node type");
+            Assert.AreEqual(typeof(object) /*really: void*/, e4.Type, "e4 type");
             Assert.True(ReferenceEquals(((LoopExpression)e4).Body, c), "e4 body");
             Assert.True(((LoopExpression)e4).BreakLabel == null, "e4 break label");
             Assert.True(((LoopExpression)e4).ContinueLabel == null, "e4 continue label");
@@ -2112,12 +2112,12 @@ namespace Bridge.ClientTest.Linq.Expressions
             var sc2 = Expression.SwitchCase(v1, new MyEnumerable<Expression>(new Expression[] { v2, v3 }));
 
             Assert.True(ReferenceEquals(sc1.Body, v1), "sc1 body");
-            Assert.AreEqual(sc1.TestValues.Count, 2, "sc1 test values count");
+            Assert.AreEqual(2, sc1.TestValues.Count, "sc1 test values count");
             Assert.True(ReferenceEquals(sc1.TestValues[0], v2), "sc1 test value 0");
             Assert.True(ReferenceEquals(sc1.TestValues[1], v3), "sc1 test value 1");
 
             Assert.True(ReferenceEquals(sc2.Body, v1), "sc2 body");
-            Assert.AreEqual(sc2.TestValues.Count, 2, "sc2 test values count");
+            Assert.AreEqual(2, sc2.TestValues.Count, "sc2 test values count");
             Assert.True(ReferenceEquals(sc2.TestValues[0], v2), "sc2 test value 0");
             Assert.True(ReferenceEquals(sc2.TestValues[1], v3), "sc2 test value 1");
         }
@@ -2145,12 +2145,12 @@ namespace Bridge.ClientTest.Linq.Expressions
             {
                 var se = expr as SwitchExpression;
                 Assert.True(se != null, title + " is SwitchExpression");
-                Assert.AreEqual(se.NodeType, ExpressionType.Switch, title + " node type");
-                Assert.AreEqual(se.Type, type, title + " type");
+                Assert.AreEqual(ExpressionType.Switch, se.NodeType, title + " node type");
+                Assert.AreEqual(type, se.Type, title + " type");
                 Assert.True(ReferenceEquals(se.Comparison, comparison), title + " comparison");
                 Assert.True(ReferenceEquals(se.SwitchValue, switchValue), title + " switch value");
                 Assert.True(ReferenceEquals(se.DefaultBody, defaultBody), title + " default value");
-                Assert.AreEqual(se.Cases.Count, cases.Length, title + " cases count");
+                Assert.AreEqual(cases.Length, se.Cases.Count, title + " cases count");
                 for (int i = 0; i < se.Cases.Count; i++)
                 {
                     Assert.True(ReferenceEquals(se.Cases[i], cases[i]), title + " case " + i);
@@ -2184,7 +2184,7 @@ namespace Bridge.ClientTest.Linq.Expressions
             Action<CatchBlock, ParameterExpression, Expression, string> asserter = (block, variable, filter, title) =>
             {
                 Assert.True(ReferenceEquals(block.Variable, variable), title + " variable");
-                Assert.AreEqual(block.Test, typeof(NotSupportedException), title + " test");
+                Assert.AreEqual(typeof(NotSupportedException), block.Test, title + " test");
                 Assert.True(ReferenceEquals(block.Body, b), title + " body");
                 Assert.True(ReferenceEquals(block.Filter, filter), title + " filter");
             };
@@ -2216,20 +2216,20 @@ namespace Bridge.ClientTest.Linq.Expressions
             {
                 var te = expr as TryExpression;
                 Assert.True(te != null, title + " is TryExpression");
-                Assert.AreEqual(te.NodeType, ExpressionType.Try, title + " node type");
-                Assert.AreEqual(te.Type, type, title + " type");
+                Assert.AreEqual(ExpressionType.Try, te.NodeType, title + " node type");
+                Assert.AreEqual(type, te.Type, title + " type");
                 Assert.True(ReferenceEquals(te.Body, b1), title + " body");
                 Assert.True(ReferenceEquals(te.Fault, fault), title + " fault");
                 Assert.True(ReferenceEquals(te.Finally, @finally), title + " finally");
                 if (hasHandlers)
                 {
-                    Assert.AreEqual(te.Handlers.Count, 2, title + " handler count");
+                    Assert.AreEqual(2, te.Handlers.Count, title + " handler count");
                     Assert.True(ReferenceEquals(te.Handlers[0], cs[0]), title + " handler 0");
                     Assert.True(ReferenceEquals(te.Handlers[1], cs[1]), title + " handler 1");
                 }
                 else
                 {
-                    Assert.AreEqual(te.Handlers.Count, 0, title + " handler count");
+                    Assert.AreEqual(0, te.Handlers.Count, title + " handler count");
                 }
             };
 
@@ -2264,11 +2264,11 @@ namespace Bridge.ClientTest.Linq.Expressions
                 var dme = expr as DynamicMemberExpression;
                 Assert.True(expr is DynamicExpression, title + " is DynamicExpression");
                 Assert.True(dme != null, title + " is DynamicMemberExpression");
-                Assert.AreEqual(dme.NodeType, ExpressionType.Dynamic, title + " node type");
-                Assert.AreEqual(dme.Type, type, title + " type");
-                Assert.AreEqual(dme.DynamicType, DynamicExpressionType.MemberAccess, title + " dynamic type");
+                Assert.AreEqual(ExpressionType.Dynamic, dme.NodeType, title + " node type");
+                Assert.AreEqual(type, dme.Type, title + " type");
+                Assert.AreEqual(DynamicExpressionType.MemberAccess, dme.DynamicType, title + " dynamic type");
                 Assert.True(ReferenceEquals(dme.Expression, a), title + " expression");
-                Assert.AreEqual(dme.Member, "member1", title + " member name");
+                Assert.AreEqual("member1", dme.Member, title + " member name");
             };
 
             Action<Expression, Type, string> assertInvocation = (expr, type, title) =>
@@ -2276,11 +2276,11 @@ namespace Bridge.ClientTest.Linq.Expressions
                 var dme = expr as DynamicInvocationExpression;
                 Assert.True(expr is DynamicExpression, title + " is DynamicExpression");
                 Assert.True(dme != null, title + " is DynamicInvocationExpression");
-                Assert.AreEqual(dme.NodeType, ExpressionType.Dynamic, title + " node type");
-                Assert.AreEqual(dme.Type, type, title + " type");
-                Assert.AreEqual(dme.DynamicType, DynamicExpressionType.Invocation, title + " dynamic type");
+                Assert.AreEqual(ExpressionType.Dynamic, dme.NodeType, title + " node type");
+                Assert.AreEqual(type, dme.Type, title + " type");
+                Assert.AreEqual(DynamicExpressionType.Invocation, dme.DynamicType, title + " dynamic type");
                 Assert.True(ReferenceEquals(dme.Expression, a), title + " expression");
-                Assert.AreEqual(dme.Arguments.Count, 2, title + " argument count");
+                Assert.AreEqual(2, dme.Arguments.Count, title + " argument count");
                 Assert.True(ReferenceEquals(dme.Arguments[0], b), title + " argument 0");
                 Assert.True(ReferenceEquals(dme.Arguments[1], c), title + " argument 1");
             };
@@ -2290,9 +2290,9 @@ namespace Bridge.ClientTest.Linq.Expressions
                 var dme = expr as DynamicIndexExpression;
                 Assert.True(expr is DynamicExpression, title + " is DynamicExpression");
                 Assert.True(dme != null, title + " is DynamicIndexExpression");
-                Assert.AreEqual(dme.NodeType, ExpressionType.Dynamic, title + " node type");
-                Assert.AreEqual(dme.Type, type, title + " type");
-                Assert.AreEqual(dme.DynamicType, DynamicExpressionType.Index, title + " dynamic type");
+                Assert.AreEqual(ExpressionType.Dynamic, dme.NodeType, title + " node type");
+                Assert.AreEqual(type, dme.Type, title + " type");
+                Assert.AreEqual(DynamicExpressionType.Index, dme.DynamicType, title + " dynamic type");
                 Assert.True(ReferenceEquals(dme.Expression, a), title + " expression");
                 Assert.True(ReferenceEquals(dme.Argument, b), title + " argument");
             };
