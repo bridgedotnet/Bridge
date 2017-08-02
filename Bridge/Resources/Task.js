@@ -354,12 +354,14 @@
         }
     });
 
-    Bridge.define("System.Threading.Tasks.Task$1", {
-        inherits: [System.Threading.Tasks.Task],
-        ctor: function (action, state) {
-            this.$initialize();
-            System.Threading.Tasks.Task.ctor.call(this, action, state);
-        }
+    Bridge.define("System.Threading.Tasks.Task$1", function (T) {
+        return {
+            inherits: [System.Threading.Tasks.Task],
+            ctor: function(action, state) {
+                this.$initialize();
+                System.Threading.Tasks.Task.ctor.call(this, action, state);
+            }
+        };
     });
 
     Bridge.define("System.Threading.Tasks.TaskStatus", {

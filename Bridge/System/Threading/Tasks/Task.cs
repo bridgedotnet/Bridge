@@ -92,7 +92,6 @@ namespace System.Threading.Tasks
     }
 
     [External]
-    [IgnoreGeneric(AllowInTypeScript = true)]
     [Reflectable]
     public class Task<TResult> : Task
     {
