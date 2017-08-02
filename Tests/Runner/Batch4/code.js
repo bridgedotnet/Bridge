@@ -554,7 +554,7 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
                 // #1603
                 Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isAssignableFrom(System.IFormattable, System.Char));
                 var interfaces = Bridge.Reflection.getInterfaces(System.Char);
-                Bridge.Test.NUnit.Assert.False(System.Array.contains(interfaces, System.IFormattable, Function));
+                Bridge.Test.NUnit.Assert.False(System.Array.contains(interfaces, System.IFormattable, Bridge.global.Function));
             }
         }
     });

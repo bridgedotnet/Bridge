@@ -297,10 +297,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var interfaces = Bridge.Reflection.getInterfaces(System.Array.type(System.Int32));
                 Bridge.Test.NUnit.Assert.AreEqual(7, interfaces.length, "Interface count should be 7");
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.Collections.Generic.IEnumerable$1(System.Int32), Function), "Interfaces should contain IEnumerable<int>");
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.Collections.Generic.ICollection$1(System.Int32), Function), "Interfaces should contain ICollection<int>");
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.Collections.Generic.IList$1(System.Int32), Function), "Interfaces should contain IList<int>");
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.Collections.Generic.IReadOnlyCollection$1(System.Int32), Function), "Interfaces should contain IReadOnlyCollection<int>");
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.Collections.Generic.IEnumerable$1(System.Int32), Bridge.global.Function), "Interfaces should contain IEnumerable<int>");
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.Collections.Generic.ICollection$1(System.Int32), Bridge.global.Function), "Interfaces should contain ICollection<int>");
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.Collections.Generic.IList$1(System.Int32), Bridge.global.Function), "Interfaces should contain IList<int>");
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.Collections.Generic.IReadOnlyCollection$1(System.Int32), Bridge.global.Function), "Interfaces should contain IReadOnlyCollection<int>");
                 // #1626
                 //Assert.True(interfaces.Contains(typeof(IReadOnlyList<int>)), "Interfaces should contain IReadOnlyList<int>");
             },
@@ -4224,9 +4224,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var asm = this.ImportedModuleTestCase;
                 var types = Bridge.Reflection.getAssemblyTypes(asm);
                 Bridge.Test.NUnit.Assert.AreEqual(3, types.length, "Length");
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(types, Bridge.cast(asm.Foo.Bar.Inner.OtherFunction, Function), Function), "#1");
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(types, Bridge.cast(asm.Foo.Bar.Something, Function), Function), "#2");
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(types, Bridge.cast(asm.Foo.baz.Test, Function), Function), "#3");
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(types, Bridge.cast(asm.Foo.Bar.Inner.OtherFunction, Function), Bridge.global.Function), "#1");
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(types, Bridge.cast(asm.Foo.Bar.Something, Function), Bridge.global.Function), "#2");
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(types, Bridge.cast(asm.Foo.baz.Test, Function), Bridge.global.Function), "#3");
             },
             GetTypeWorks: function () {
                 Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(Bridge.Reflection.getType(Bridge.Reflection.getTypeFullName(Bridge.ClientTest.Batch1.Reflection.AssemblyTests), $asm), Bridge.ClientTest.Batch1.Reflection.AssemblyTests));
@@ -7765,9 +7765,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var interfaces = Bridge.Reflection.getInterfaces(System.Collections.Generic.IDictionary$2(System.Object,System.Object));
                 Bridge.Test.NUnit.Assert.AreEqual(3, interfaces.length, "Interfaces length");
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.Collections.Generic.IEnumerable$1(System.Collections.Generic.KeyValuePair$2(System.Object,System.Object)), Function), "IEnumerable<>");
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.Collections.Generic.ICollection$1(System.Collections.Generic.KeyValuePair$2(System.Object,System.Object)), Function), "ICollection<>");
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.Collections.IEnumerable, Function), "IEnumerable");
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.Collections.Generic.IEnumerable$1(System.Collections.Generic.KeyValuePair$2(System.Object,System.Object)), Bridge.global.Function), "IEnumerable<>");
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.Collections.Generic.ICollection$1(System.Collections.Generic.KeyValuePair$2(System.Object,System.Object)), Bridge.global.Function), "ICollection<>");
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.Collections.IEnumerable, Bridge.global.Function), "IEnumerable");
             },
             ClassImplementsInterfaces_SPI_1626: function () {
                 Bridge.Test.NUnit.Assert.True(Bridge.is(new Bridge.ClientTest.Collections.Generic.IDictionaryTests.MyDictionary.ctor(), System.Collections.Generic.IDictionary$2(System.Int32,System.String)));
@@ -8247,9 +8247,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var interfaces = Bridge.Reflection.getInterfaces(System.Collections.Generic.IList$1(System.Object));
                 Bridge.Test.NUnit.Assert.AreEqual(3, interfaces.length, "Interfaces length");
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.Collections.IEnumerable, Function), "Interfaces should contain IEnumerable");
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.Collections.Generic.IEnumerable$1(System.Object), Function), "Interfaces should contain IEnumerable<>");
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.Collections.Generic.ICollection$1(System.Object), Function), "Interfaces should contain ICollection<>");
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.Collections.IEnumerable, Bridge.global.Function), "Interfaces should contain IEnumerable");
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.Collections.Generic.IEnumerable$1(System.Object), Bridge.global.Function), "Interfaces should contain IEnumerable<>");
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.Collections.Generic.ICollection$1(System.Object), Bridge.global.Function), "Interfaces should contain ICollection<>");
             },
             ArrayImplementsIList: function () {
                 Bridge.Test.NUnit.Assert.True(Bridge.is(System.Array.init(1, 0, System.Int32), System.Collections.Generic.IList$1(System.Int32)));
@@ -8888,9 +8888,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var interfaces = Bridge.Reflection.getInterfaces(System.Collections.Generic.IReadOnlyList$1(System.Object));
                 Bridge.Test.NUnit.Assert.AreEqual(3, interfaces.length, "Interfaces length");
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.Collections.Generic.IEnumerable$1(System.Object), Function), "Interfaces should contain IEnumerable<object>");
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.Collections.Generic.IReadOnlyCollection$1(System.Object), Function), "Interfaces should contain IReadOnlyCollection");
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.Collections.IEnumerable, Function), "Interfaces should contain IEnumerable");
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.Collections.Generic.IEnumerable$1(System.Object), Bridge.global.Function), "Interfaces should contain IEnumerable<object>");
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.Collections.Generic.IReadOnlyCollection$1(System.Object), Bridge.global.Function), "Interfaces should contain IReadOnlyCollection");
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.Collections.IEnumerable, Bridge.global.Function), "Interfaces should contain IEnumerable");
             },
             CustomClassThatShouldImplementIReadOnlyListDoesSo: function () {
                 Bridge.Test.NUnit.Assert.True(Bridge.is(new Bridge.ClientTest.Collections.Generic.IReadOnlyListTests.MyList(System.Array.init(0, null, System.String)), System.Collections.Generic.IReadOnlyList$1(System.String)));
@@ -18713,7 +18713,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual(0, ex1.innerExceptions.Count, "ex1 InnerExceptions.Length");
                 Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.Exceptions.AggregateExceptionTests.DefaultMessage, ex1.Message, "ex1 Message");
 
-                var ex2 = new System.AggregateException(null, this.MakeEnumerable(System.Exception, [inner1]));
+                var ex2 = new System.AggregateException(null, this.MakeEnumerable(Bridge.global.System.Exception, [inner1]));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(ex2, System.AggregateException), "ex2 is AggregateException");
                 Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(ex2.InnerException, inner1), "ex2 InnerException");
                 Bridge.Test.NUnit.Assert.True(Bridge.is(ex2.innerExceptions, System.Collections.ObjectModel.ReadOnlyCollection$1(System.Exception)), "ex2 InnerExceptions is ReadOnlyCollection");
@@ -18721,7 +18721,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(ex2.innerExceptions.get(0), inner1), "ex2 InnerExceptions[0]");
                 Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.Exceptions.AggregateExceptionTests.DefaultMessage, ex2.Message, "ex2 Message");
 
-                var ex3 = new System.AggregateException(null, this.MakeEnumerable(System.Exception, [inner1, inner2]));
+                var ex3 = new System.AggregateException(null, this.MakeEnumerable(Bridge.global.System.Exception, [inner1, inner2]));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(ex3, System.AggregateException), "ex3 is AggregateException");
                 Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(ex3.InnerException, inner1), "ex3 InnerException");
                 Bridge.Test.NUnit.Assert.True(Bridge.is(ex3.innerExceptions, System.Collections.ObjectModel.ReadOnlyCollection$1(System.Exception)), "ex3 InnerExceptions is ReadOnlyCollection");
@@ -18777,7 +18777,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual(0, ex1.innerExceptions.Count, "ex1 InnerExceptions.Length");
                 Bridge.Test.NUnit.Assert.AreEqual("Message #1", ex1.Message, "ex1 Message");
 
-                var ex2 = new System.AggregateException("Message #2", this.MakeEnumerable(System.Exception, [inner1]));
+                var ex2 = new System.AggregateException("Message #2", this.MakeEnumerable(Bridge.global.System.Exception, [inner1]));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(ex2, System.AggregateException), "ex2 is AggregateException");
                 Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(ex2.InnerException, inner1), "ex2 InnerException");
                 Bridge.Test.NUnit.Assert.True(Bridge.is(ex2.innerExceptions, System.Collections.ObjectModel.ReadOnlyCollection$1(System.Exception)), "ex2 InnerExceptions is ReadOnlyCollection");
@@ -18785,7 +18785,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(ex2.innerExceptions.get(0), inner1), "ex2 InnerExceptions[0]");
                 Bridge.Test.NUnit.Assert.AreEqual("Message #2", ex2.Message, "ex2 Message");
 
-                var ex3 = new System.AggregateException("Message #3", this.MakeEnumerable(System.Exception, [inner1, inner2]));
+                var ex3 = new System.AggregateException("Message #3", this.MakeEnumerable(Bridge.global.System.Exception, [inner1, inner2]));
                 Bridge.Test.NUnit.Assert.True(Bridge.is(ex3, System.AggregateException), "ex3 is AggregateException");
                 Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(ex3.InnerException, inner1), "ex3 InnerException");
                 Bridge.Test.NUnit.Assert.True(Bridge.is(ex3.innerExceptions, System.Collections.ObjectModel.ReadOnlyCollection$1(System.Exception)), "ex3 InnerExceptions is ReadOnlyCollection");
@@ -20554,7 +20554,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isAssignableFrom(System.IFormattable, System.FormattableString), "IFormattable.IsAssignableFrom");
                 var interfaces = Bridge.Reflection.getInterfaces(System.FormattableString);
                 Bridge.Test.NUnit.Assert.AreEqual(1, interfaces.length, "interfaces length");
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Function), "interfaces contains IFormattable");
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Bridge.global.Function), "interfaces contains IFormattable");
             },
             ArgumentCountWorks: function () {
                 var s1 = System.Runtime.CompilerServices.FormattableStringFactory.create("{0}", ["x"]);
@@ -31128,10 +31128,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             GettingImplementedInterfacesWorks: function () {
                 var ifs = Bridge.Reflection.getInterfaces(Bridge.ClientTest.Reflection.TypeSystemTests.C);
                 Bridge.Test.NUnit.Assert.AreEqual(4, ifs.length);
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(ifs, Bridge.ClientTest.Reflection.TypeSystemTests.I1, Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(ifs, Bridge.ClientTest.Reflection.TypeSystemTests.I2, Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(ifs, Bridge.ClientTest.Reflection.TypeSystemTests.I3, Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(ifs, Bridge.ClientTest.Reflection.TypeSystemTests.I4, Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(ifs, Bridge.ClientTest.Reflection.TypeSystemTests.I1, Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(ifs, Bridge.ClientTest.Reflection.TypeSystemTests.I2, Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(ifs, Bridge.ClientTest.Reflection.TypeSystemTests.I3, Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(ifs, Bridge.ClientTest.Reflection.TypeSystemTests.I4, Bridge.global.Function));
             },
             TypeOfAnOpenGenericClassWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("Bridge.ClientTest.Reflection.TypeSystemTests+G`2", Bridge.Reflection.getTypeFullName(Bridge.ClientTest.Reflection.TypeSystemTests.G$2));
@@ -32658,8 +32658,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var interfaces = Bridge.Reflection.getInterfaces(System.Boolean);
                 Bridge.Test.NUnit.Assert.AreEqual(3, interfaces.length);
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.Boolean), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.Boolean), Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.Boolean), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.Boolean), Bridge.global.Function));
             },
             GetDefaultValue: function (T) {
                 return Bridge.getDefaultValue(T);
@@ -32974,9 +32974,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var interfaces = Bridge.Reflection.getInterfaces(System.Byte);
                 Bridge.Test.NUnit.Assert.AreEqual(4, interfaces.length);
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.Byte), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.Byte), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.Byte), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.Byte), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Bridge.global.Function));
             },
             CastsWork: function () {
                 var i1 = -1, i2 = 0, i3 = 234, i4 = 255, i5 = 256;
@@ -33378,8 +33378,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var interfaces = Bridge.Reflection.getInterfaces(Date);
                 Bridge.Test.NUnit.Assert.AreEqual(4, interfaces.length);
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(Date), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(Date), Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(Date), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(Date), Bridge.global.Function));
             },
             DefaultConstructorReturnsTodaysDate: function () {
                 var dt = new Date();
@@ -33829,9 +33829,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var interfaces = Bridge.Reflection.getInterfaces(System.Decimal);
                 Bridge.Test.NUnit.Assert.AreEqual(4, interfaces.length);
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.Decimal), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.Decimal), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.Decimal), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.Decimal), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Bridge.global.Function));
             },
             GetDefaultValue: function (T) {
                 return Bridge.getDefaultValue(T);
@@ -35470,9 +35470,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var interfaces = Bridge.Reflection.getInterfaces(System.Double);
                 Bridge.Test.NUnit.Assert.AreEqual(4, interfaces.length);
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.Double), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.Double), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.Double), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.Double), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Bridge.global.Function));
             },
             GetDefaultValue: function (T) {
                 return Bridge.getDefaultValue(T);
@@ -36119,9 +36119,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var interfaces = Bridge.Reflection.getInterfaces(System.Int16);
                 Bridge.Test.NUnit.Assert.AreEqual(4, interfaces.length);
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.Int16), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.Int16), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.Int16), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.Int16), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Bridge.global.Function));
             },
             CastsWork: function () {
                 var i1 = -32769, i2 = -32768, i3 = 5754, i4 = 32767, i5 = 32768;
@@ -36315,9 +36315,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var interfaces = Bridge.Reflection.getInterfaces(System.Int32);
                 Bridge.Test.NUnit.Assert.AreEqual(4, interfaces.length);
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.Int32), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.Int32), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.Int32), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.Int32), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Bridge.global.Function));
             },
             CastsWork: function () {
                 var i1 = System.Int64([2147483647,-1]), i2 = System.Int64.lift(-2147483648), i3 = System.Int64(5754), i4 = System.Int64(2147483647), i5 = System.Int64(2147483648);
@@ -36584,9 +36584,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var interfaces = Bridge.Reflection.getInterfaces(System.Int64);
                 Bridge.Test.NUnit.Assert.AreEqual(4, interfaces.length);
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.Int64), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.Int64), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.Int64), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.Int64), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Bridge.global.Function));
             },
             MinMaxValuesAreCorrect: function () {
                 this.AssertLong("-9223372036854775808", System.Int64.MinValue);
@@ -36888,9 +36888,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var interfaces = Bridge.Reflection.getInterfaces(System.DateTime);
                 Bridge.Test.NUnit.Assert.AreEqual(4, interfaces.length);
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.DateTime), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.DateTime), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.DateTime), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.DateTime), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Bridge.global.Function));
             },
             DefaultConstructorWorks_SPI_1606: function () {
                 var dt = System.DateTime.getDefaultValue();
@@ -37774,9 +37774,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var interfaces = Bridge.Reflection.getInterfaces(System.SByte);
                 Bridge.Test.NUnit.Assert.AreEqual(4, interfaces.length);
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.SByte), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.SByte), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.SByte), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.SByte), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Bridge.global.Function));
             },
             CastsWork: function () {
                 var i1 = -129, i2 = -128, i3 = 80, i4 = 127, i5 = 128;
@@ -37964,9 +37964,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var interfaces = Bridge.Reflection.getInterfaces(System.Single);
                 Bridge.Test.NUnit.Assert.AreEqual(4, interfaces.length);
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.Single), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.Single), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.Single), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.Single), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Bridge.global.Function));
             },
             GetDefaultValue: function (T) {
                 return Bridge.getDefaultValue(T);
@@ -38288,8 +38288,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var interfaces = Bridge.Reflection.getInterfaces(System.String);
                 Bridge.Test.NUnit.Assert.AreEqual(7, interfaces.length);
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.String), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.String), Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.String), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.String), Bridge.global.Function));
             },
             DefaultConstructorWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("", "");
@@ -39096,8 +39096,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var interfaces = Bridge.Reflection.getInterfaces(System.TimeSpan);
                 Bridge.Test.NUnit.Assert.AreEqual(3, interfaces.length);
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.TimeSpan), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.TimeSpan), Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.TimeSpan), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.TimeSpan), Bridge.global.Function));
             },
             DefaultConstructorWorks: function () {
                 var time = new System.TimeSpan();
@@ -39423,9 +39423,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var interfaces = Bridge.Reflection.getInterfaces(System.UInt16);
                 Bridge.Test.NUnit.Assert.AreEqual(4, interfaces.length);
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.UInt16), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.UInt16), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.UInt16), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.UInt16), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Bridge.global.Function));
             },
             CastsWork: function () {
                 var i1 = -1, i2 = 0, i3 = 234, i4 = 65535, i5 = 65536;
@@ -39619,9 +39619,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var interfaces = Bridge.Reflection.getInterfaces(System.UInt32);
                 Bridge.Test.NUnit.Assert.AreEqual(4, interfaces.length);
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.UInt32), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.UInt32), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.UInt32), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.UInt32), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Bridge.global.Function));
             },
             CastsWork: function () {
                 var i1 = System.Int64(-1), i2 = System.Int64(0), i3 = System.Int64(234), i4 = System.Int64(4294967295), i5 = System.Int64([0,1]);
@@ -39821,9 +39821,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var interfaces = Bridge.Reflection.getInterfaces(System.UInt64);
                 Bridge.Test.NUnit.Assert.AreEqual(4, interfaces.length);
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.UInt64), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.UInt64), Function));
-                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IComparable$1(System.UInt64), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IEquatable$1(System.UInt64), Bridge.global.Function));
+                Bridge.Test.NUnit.Assert.True(System.Array.contains(interfaces, System.IFormattable, Bridge.global.Function));
             },
             MinMaxValuesAreCorrect: function () {
                 this.AssertULong("0", System.UInt64.MinValue);
@@ -44173,7 +44173,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual(System.Threading.Tasks.TaskStatus.running, task.status, "The task should be running before the SetException() call");
                 Bridge.Test.NUnit.Assert.False(callbackRun, "Callback should not be run before SetException() is called");
 
-                tcs.setException(this.MakeEnumerable(System.Exception, System.Array.init([ex1, ex2], System.Exception)));
+                tcs.setException(this.MakeEnumerable(Bridge.global.System.Exception, System.Array.init([ex1, ex2], System.Exception)));
 
                 Bridge.Test.NUnit.Assert.AreEqual(System.Threading.Tasks.TaskStatus.faulted, task.status, "The task should be faulted immediately after the SetException() call");
                 Bridge.Test.NUnit.Assert.True(Bridge.is(task.exception, System.AggregateException));
@@ -44777,7 +44777,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.Test.NUnit.Assert.False(continuationRun, "Continuation should not be run too early.");
                 });
 
-                var task = System.Threading.Tasks.Task.whenAll(this.MakeEnumerable(System.Threading.Tasks.Task$1, [tcs1.task, tcs2.task, tcs3.task]));
+                var task = System.Threading.Tasks.Task.whenAll(this.MakeEnumerable(Bridge.global.System.Threading.Tasks.Task$1, [tcs1.task, tcs2.task, tcs3.task]));
 
                 var doneTask = task.continueWith(function (t) {
                     Bridge.Test.NUnit.Assert.False(continuationRun, "Continuation should only be run once.");
@@ -44874,7 +44874,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.Test.NUnit.Assert.False(continuationRun, "Continuation should not be run too early.");
                 });
 
-                var task = System.Threading.Tasks.Task.whenAll(this.MakeEnumerable(System.Threading.Tasks.Task, [Bridge.cast(tcs1.task, System.Threading.Tasks.Task), Bridge.cast(tcs2.task, System.Threading.Tasks.Task), Bridge.cast(tcs3.task, System.Threading.Tasks.Task)]));
+                var task = System.Threading.Tasks.Task.whenAll(this.MakeEnumerable(Bridge.global.System.Threading.Tasks.Task, [Bridge.cast(tcs1.task, System.Threading.Tasks.Task), Bridge.cast(tcs2.task, System.Threading.Tasks.Task), Bridge.cast(tcs3.task, System.Threading.Tasks.Task)]));
 
                 var doneTask = task.continueWith(function (t) {
                     Bridge.Test.NUnit.Assert.False(continuationRun, "Continuation should only be run once.");
@@ -44930,7 +44930,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var ex1 = new System.Exception("exception 1");
                 var ex2 = new System.Exception("exception 1");
 
-                var task = System.Threading.Tasks.Task.whenAll(this.MakeEnumerable(System.Threading.Tasks.Task, [Bridge.cast(tcs1.task, System.Threading.Tasks.Task), Bridge.cast(tcs2.task, System.Threading.Tasks.Task), Bridge.cast(tcs3.task, System.Threading.Tasks.Task), Bridge.cast(tcs4.task, System.Threading.Tasks.Task)]));
+                var task = System.Threading.Tasks.Task.whenAll(this.MakeEnumerable(Bridge.global.System.Threading.Tasks.Task, [Bridge.cast(tcs1.task, System.Threading.Tasks.Task), Bridge.cast(tcs2.task, System.Threading.Tasks.Task), Bridge.cast(tcs3.task, System.Threading.Tasks.Task), Bridge.cast(tcs4.task, System.Threading.Tasks.Task)]));
 
                 var doneTask = task.continueWith(function (t) {
                     Bridge.Test.NUnit.Assert.False(continuationRun, "Continuation should only be run once.");
@@ -45060,7 +45060,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var tcs2 = new System.Threading.Tasks.TaskCompletionSource();
                 var tcs3 = new System.Threading.Tasks.TaskCompletionSource();
 
-                var task = System.Threading.Tasks.Task.whenAny(this.MakeEnumerable(System.Threading.Tasks.Task$1, [tcs1.task, tcs2.task, tcs3.task]));
+                var task = System.Threading.Tasks.Task.whenAny(this.MakeEnumerable(Bridge.global.System.Threading.Tasks.Task$1, [tcs1.task, tcs2.task, tcs3.task]));
 
                 var task1 = task.continueWith(function (t) {
                     Bridge.Test.NUnit.Assert.False(continuationRun, "Continuation should only be run once.");
@@ -45143,7 +45143,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var tcs2 = new System.Threading.Tasks.TaskCompletionSource();
                 var tcs3 = new System.Threading.Tasks.TaskCompletionSource();
 
-                var task = System.Threading.Tasks.Task.whenAny(this.MakeEnumerable(System.Threading.Tasks.Task, [Bridge.cast(tcs1.task, System.Threading.Tasks.Task), Bridge.cast(tcs2.task, System.Threading.Tasks.Task), Bridge.cast(tcs3.task, System.Threading.Tasks.Task)]));
+                var task = System.Threading.Tasks.Task.whenAny(this.MakeEnumerable(Bridge.global.System.Threading.Tasks.Task, [Bridge.cast(tcs1.task, System.Threading.Tasks.Task), Bridge.cast(tcs2.task, System.Threading.Tasks.Task), Bridge.cast(tcs3.task, System.Threading.Tasks.Task)]));
 
                 var task1 = task.continueWith(function (t) {
                     Bridge.Test.NUnit.Assert.False(continuationRun, "Continuation should only be run once.");
@@ -45185,7 +45185,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var tcs3 = new System.Threading.Tasks.TaskCompletionSource();
                 var ex = new System.Exception("Some text");
 
-                var task = System.Threading.Tasks.Task.whenAny(this.MakeEnumerable(System.Threading.Tasks.Task$1, [tcs1.task, tcs2.task, tcs3.task]));
+                var task = System.Threading.Tasks.Task.whenAny(this.MakeEnumerable(Bridge.global.System.Threading.Tasks.Task$1, [tcs1.task, tcs2.task, tcs3.task]));
 
                 var task1 = task.continueWith(function (t) {
                     Bridge.Test.NUnit.Assert.False(continuationRun, "Continuation should only be run once.");
@@ -45225,7 +45225,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var tcs2 = new System.Threading.Tasks.TaskCompletionSource();
                 var tcs3 = new System.Threading.Tasks.TaskCompletionSource();
 
-                var task = System.Threading.Tasks.Task.whenAny(this.MakeEnumerable(System.Threading.Tasks.Task$1, [tcs1.task, tcs2.task, tcs3.task]));
+                var task = System.Threading.Tasks.Task.whenAny(this.MakeEnumerable(Bridge.global.System.Threading.Tasks.Task$1, [tcs1.task, tcs2.task, tcs3.task]));
 
                 var task1 = task.continueWith(function (t) {
                     Bridge.Test.NUnit.Assert.False(continuationRun, "Continuation should only be run once.");

@@ -84,6 +84,13 @@ namespace Bridge.Translator
             }
             var target = BridgeTypes.ToJsName(member.Member.DeclaringType, this.Emitter);
             this.NoTarget = string.IsNullOrWhiteSpace(target);
+
+            if (member.Member.IsStatic && !target.StartsWith("Bridge.") &&
+                this.MemberReferenceExpression.Target.ToString().StartsWith("global::"))
+            {
+                this.Write("Bridge.global.");
+            }
+
             this.Write(target);
         }
 

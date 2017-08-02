@@ -594,8 +594,9 @@ namespace Bridge.Contract
             var resolveResult = emitter.Resolver.ResolveNode(astType, emitter);
 
             var symbol = resolveResult.Type as ISymbol;
-
-            return BridgeTypes.ToJsName(resolveResult.Type, emitter, astType.Parent is TypeOfExpression && symbol != null && symbol.SymbolKind == SymbolKind.TypeDefinition);
+            var name = BridgeTypes.ToJsName(resolveResult.Type, emitter,
+                astType.Parent is TypeOfExpression && symbol != null && symbol.SymbolKind == SymbolKind.TypeDefinition);
+            return (!name.StartsWith("Bridge.") && astType.ToString().StartsWith("global::") ? "Bridge.global." : "") + name;
         }
 
         public static void EnsureModule(BridgeType type)
