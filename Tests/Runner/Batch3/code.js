@@ -23895,7 +23895,11 @@ Bridge.$N1391Result =                     r;
                 TestIListIndexer: function () {
                     var list = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2983.f1(new (System.Collections.Generic.List$1(System.Int32))());
                     var num = System.Array.getItem(list, 0, System.Int32);
-                    Bridge.Test.NUnit.Assert.True(0 === num);
+                    Bridge.Test.NUnit.Assert.True(0 === num, num.toString());
+
+                    list = $asm.$.Bridge.ClientTest.Batch3.BridgeIssues.Bridge2983.f2(new (System.Collections.Generic.List$1(System.Int32))());
+                    num = System.Array.getItem(list, 1, System.Int32);
+                    Bridge.Test.NUnit.Assert.True(7 === num, num.toString());
                 }
             }
         }
@@ -23907,6 +23911,11 @@ Bridge.$N1391Result =                     r;
         f1: function (_o44) {
             _o44.add(0);
             return _o44;
+        },
+        f2: function (_o45) {
+            _o45.add(0);
+            _o45.add(7);
+            return _o45;
         }
     });
 
@@ -32158,30 +32167,30 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues, {
-        f1: function (_o45) {
-            _o45.add(0);
-            _o45.add(1);
-            _o45.add(2);
-            _o45.add(3);
-            _o45.add(4);
-            return _o45;
-        },
-        f2: function (_o46) {
-            _o46.add(3, "b");
-            _o46.add(6, "z");
-            _o46.add(9, "x");
+        f1: function (_o46) {
+            _o46.add(0);
+            _o46.add(1);
+            _o46.add(2);
+            _o46.add(3);
+            _o46.add(4);
             return _o46;
+        },
+        f2: function (_o47) {
+            _o47.add(3, "b");
+            _o47.add(6, "z");
+            _o47.add(9, "x");
+            return _o47;
         },
         f3: function (i) {
             return Bridge.Int.mul(i, 2);
         },
-        f4: function (_o47) {
-            _o47.add(0);
-            _o47.add(1);
-            _o47.add(2);
-            _o47.add(3);
-            _o47.add(4);
-            return _o47;
+        f4: function (_o48) {
+            _o48.add(0);
+            _o48.add(1);
+            _o48.add(2);
+            _o48.add(3);
+            _o48.add(4);
+            return _o48;
         }
     });
 
