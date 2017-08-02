@@ -156,7 +156,7 @@ namespace Bridge.Translator
             int index = 1;
             string tempName = name + index;
 
-            while (this.Emitter.LocalsNamesMap.ContainsValue(tempName))
+            while (this.Emitter.LocalsNamesMap.ContainsValue(tempName) || Helpers.IsReservedWord(this.Emitter, tempName))
             {
                 tempName = name + ++index;
             }
@@ -187,7 +187,7 @@ namespace Bridge.Translator
 
             string tempName = name + index;
 
-            while (this.Emitter.LocalsNamesMap.ContainsValue(tempName))
+            while (this.Emitter.LocalsNamesMap.ContainsValue(tempName) || Helpers.IsReservedWord(this.Emitter, tempName))
             {
                 tempName = name + ++index;
             }

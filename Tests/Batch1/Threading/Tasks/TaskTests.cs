@@ -28,7 +28,7 @@ namespace Bridge.ClientTest.Threading
         public void TaskTypePropertiesAreCorrect()
         {
             Assert.AreEqual("System.Threading.Tasks.Task", typeof(Task).FullName, "FullName for non-generic task should be correct");
-            Assert.AreEqual("System.Threading.Tasks.Task`1", typeof(Task<int>).FullName, "FullName for generic task should be correct");
+            Assert.AreEqual("System.Threading.Tasks.Task`1[[System.Int32, mscorlib]]", typeof(Task<int>).FullName, "FullName for generic task should be correct");
 
             var task = new TaskCompletionSource<int>().Task;
             Assert.True(task is Task<int>);
