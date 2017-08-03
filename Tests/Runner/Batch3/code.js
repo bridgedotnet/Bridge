@@ -23937,7 +23937,7 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2944", {
         statics: {
             methods: {
-                TestRefThis: function () {
+                TestGenericsNaming: function () {
                     Bridge.Test.NUnit.Assert.AreEqual(9, Bridge2944_A$1(System.Int32).Get());
                 }
             }

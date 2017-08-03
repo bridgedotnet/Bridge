@@ -614,7 +614,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#2915 - TestLocalesWithoutColonInTime", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2915.TestLocalesWithoutColonInTime);
             QUnit.test("#2916 - TestIndexerClone", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2916.TestIndexerClone);
             QUnit.test("#2943 - TestStaticCtorGenericClass", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2943.TestStaticCtorGenericClass);
-            QUnit.test("#2944 - TestRefThis", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2944.TestRefThis);
+            QUnit.test("#2944 - TestGenericsNaming", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2944.TestGenericsNaming);
             QUnit.test("#2950 - TestNullCast", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2950.TestNullCast);
             QUnit.test("#2955 - TestNestedClassName", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2955.TestNestedClassName);
             QUnit.test("#2957 - TestNameof", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2957.TestNameof);
@@ -12553,10 +12553,10 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2944)],
         statics: {
             methods: {
-                TestRefThis: function (assert) {
+                TestGenericsNaming: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2944).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2944, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestRefThis()", $t.Line = "9", $t));
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2944.TestRefThis();
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2944).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2944, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestGenericsNaming()", $t.Line = "9", $t));
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2944.TestGenericsNaming();
                 }
             }
         },

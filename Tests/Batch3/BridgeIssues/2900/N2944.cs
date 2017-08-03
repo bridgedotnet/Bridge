@@ -7,7 +7,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge2944
     {
         [Test]
-        public static void TestRefThis()
+        public static void TestGenericsNaming()
         {
             Assert.AreEqual(9, Bridge2944_A<int>.Get());
         }
