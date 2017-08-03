@@ -295,6 +295,12 @@
                     private const string DOTNAME_GENERIC = NAME_GENERIC + ".";
                 }
 
+                public class Global
+                {
+                    public const string NAME = Bridge.DOTNAME + "global";
+                    public const string DOTNAME = NAME + ".";
+                }
+
                 public class Reflection
                 {
                     public const string NAME = Bridge.DOTNAME + "Reflection";

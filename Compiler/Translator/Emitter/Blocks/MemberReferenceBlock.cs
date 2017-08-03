@@ -85,10 +85,11 @@ namespace Bridge.Translator
             var target = BridgeTypes.ToJsName(member.Member.DeclaringType, this.Emitter);
             this.NoTarget = string.IsNullOrWhiteSpace(target);
 
-            if (member.Member.IsStatic && !target.StartsWith("Bridge.") &&
-                this.MemberReferenceExpression.Target.ToString().StartsWith("global::"))
+            if (member.Member.IsStatic
+                && !target.StartsWith(CS.Bridge.DOTNAME)
+                && this.MemberReferenceExpression.Target.ToString().StartsWith(CS.NS.GLOBAL))
             {
-                this.Write("Bridge.global.");
+                this.Write(JS.Types.Bridge.Global.DOTNAME);
             }
 
             this.Write(target);
@@ -459,7 +460,7 @@ namespace Bridge.Translator
                     }
                     else
                     {
-                        nativeImplementation = member.Member.DeclaringTypeDefinition.ParentAssembly.AssemblyName == CS.NS.ROOT ||
+                        nativeImplementation = member.Member.DeclaringTypeDefinition.ParentAssembly.AssemblyName == CS.NS.BRIDGE ||
                                                !this.Emitter.Validator.IsExternalType(member.Member.DeclaringTypeDefinition);
                     }
 

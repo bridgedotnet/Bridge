@@ -541,12 +541,12 @@ namespace Bridge.Contract
 
         public static bool IsScript(IMethod method)
         {
-            return method.Attributes.Any(a => a.AttributeType.FullName == CS.NS.ROOT + ".ScriptAttribute");
+            return method.Attributes.Any(a => a.AttributeType.FullName == CS.NS.BRIDGE + ".ScriptAttribute");
         }
 
         public static bool IsScript(MethodDefinition method)
         {
-            return method.CustomAttributes.Any(a => a.AttributeType.FullName == CS.NS.ROOT + ".ScriptAttribute");
+            return method.CustomAttributes.Any(a => a.AttributeType.FullName == CS.NS.BRIDGE + ".ScriptAttribute");
         }
 
         public static bool IsAutoProperty(IProperty propertyDeclaration)
