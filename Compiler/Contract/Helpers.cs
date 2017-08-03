@@ -1312,9 +1312,9 @@ namespace Bridge.Contract
             return mode >= 3 && mode <= 6;
         }
 
-        public static bool IsReservedStaticName(string name)
+        public static bool IsReservedStaticName(string name, bool ignoreCase = true)
         {
-            return JS.Reserved.StaticNames.Any(n => String.Equals(name, n, StringComparison.InvariantCultureIgnoreCase));
+            return JS.Reserved.StaticNames.Any(n => String.Equals(name, n, ignoreCase ? StringComparison.InvariantCultureIgnoreCase : StringComparison.InvariantCulture));
         }
 
         public static string GetFunctionName(NamedFunctionMode mode, IMember member, IEmitter emitter, bool isSetter = false)

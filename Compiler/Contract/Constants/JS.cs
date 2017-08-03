@@ -337,7 +337,7 @@
 
         public class Reserved
         {
-            public static readonly List<string> StaticNames = new List<string> { "Name", "Arguments", "Caller", "Length", "Prototype", "ctor" };
+            public static readonly List<string> StaticNames = new List<string> { "name", "arguments", "caller", "length", "prototype", "ctor" };
             public static readonly string[] Words = new string[]
             {
                 "Bridge", "__proto__", "abstract", "arguments", "as", "boolean", "break", "byte", "case", "catch", "char",

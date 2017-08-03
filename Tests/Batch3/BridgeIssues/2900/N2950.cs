@@ -17,6 +17,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         {
 #pragma warning disable CS0458 // The result of the expression is always 'null'
             Assert.False((((object)null) as Int64?).HasValue);
+            Assert.False((((object)null) as Int64?).HasValue ? true : false);
 #pragma warning restore CS0458 // The result of the expression is always 'null'
         }
     }

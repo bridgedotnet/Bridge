@@ -4,7 +4,7 @@
                 _offset: 0
             },
             props: {
-                $Name: null
+                Name: null
             },
             ctors: {
                 ctor: function () {
@@ -101,10 +101,10 @@
             return System.String.concat(value, index);
         },
         f7: function (value) {
-            return System.String.concat(value, TestIssue921Static.Issue921Static.$Name);
+            return System.String.concat(value, TestIssue921Static.Issue921Static.Name);
         },
         f8: function (value, index) {
-            return System.String.concat(value, index, TestIssue921Static.Issue921Static.$Name);
+            return System.String.concat(value, index, TestIssue921Static.Issue921Static.Name);
         },
         f9: function (value) {
             return value.add(System.Decimal(1));
