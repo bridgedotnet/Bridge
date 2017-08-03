@@ -1,4 +1,5 @@
 ﻿using Bridge.Contract;
+using Bridge.Contract.Constants;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -209,11 +210,13 @@ namespace Bridge.Translator
         private static string GetTypeName(Type type)
         {
             var name = type.Name.Replace("+", ".");
+
             if (name.Contains("`"))
             {
                 name = name.Substring(0, name.IndexOf("`"));
             }
-            return "global::" + name;
+
+            return CS.NS.GLOBAL + name;
         }
 
         /// <summary>
@@ -335,26 +338,29 @@ namespace Bridge.Translator
             {
                 var ti = semanticModel.GetSpeculativeTypeInfo(position, SyntaxFactory.ParseTypeName(name), SpeculativeBindingOption.BindAsTypeOrNamespace);
                 var type = ti.Type ?? ti.ConvertedType;
+
                 if (type == null || type.Kind == SymbolKind.ErrorType)
                 {
-                    ti = semanticModel.GetSpeculativeTypeInfo(position, SyntaxFactory.ParseTypeName("global::" + name), SpeculativeBindingOption.BindAsTypeOrNamespace);
+                    ti = semanticModel.GetSpeculativeTypeInfo(position, SyntaxFactory.ParseTypeName(CS.NS.GLOBAL + name), SpeculativeBindingOption.BindAsTypeOrNamespace);
                     type = ti.Type ?? ti.ConvertedType;
+
                     if (type != null && type.Kind != SymbolKind.ErrorType)
                     {
-                        name = "global::" + name;
+                        name = CS.NS.GLOBAL + name;
                     }
                 }
             }
             else
             {
                 var si = semanticModel.GetSpeculativeSymbolInfo(position, SyntaxFactory.ParseExpression(name), SpeculativeBindingOption.BindAsExpression);
+
                 if (si.Symbol == null || si.Symbol.Kind == SymbolKind.ErrorType)
                 {
-                    si = semanticModel.GetSpeculativeSymbolInfo(position, SyntaxFactory.ParseExpression("global::" + name), SpeculativeBindingOption.BindAsExpression);
+                    si = semanticModel.GetSpeculativeSymbolInfo(position, SyntaxFactory.ParseExpression(CS.NS.GLOBAL + name), SpeculativeBindingOption.BindAsExpression);
 
                     if (si.Symbol != null && si.Symbol.Kind != SymbolKind.ErrorType)
                     {
-                        name = "global::" + name;
+                        name = CS.NS.GLOBAL + name;
                     }
                 }
             }
@@ -412,7 +418,7 @@ namespace Bridge.Translator
             {
                 if (symbol.ContainingNamespace.IsGlobalNamespace)
                 {
-                    //return "global::" + localName;
+                    //return CS.NS.GLOBAL + localName;
                     return localName;
                 }
 
@@ -603,17 +609,14 @@ namespace Bridge.Translator
                 .WithTrailingTrivia(property.GetTrailingTrivia());
         }
 
-        public static string GetSymbolName(InvocationExpressionSyntax node, SemanticModel semanticModel)
+        public static string GetSymbolName(InvocationExpressionSyntax node, SymbolInfo si, string name, SemanticModel semanticModel)
         {
-            var si = semanticModel.GetSymbolInfo(node.ArgumentList.Arguments[0].Expression);
             var symbol = si.Symbol;
 
             if (symbol == null && si.CandidateSymbols.Any())
             {
                 symbol = si.CandidateSymbols.First();
             }
-
-            var name = (string)semanticModel.GetConstantValue(node).Value;
 
             if (symbol != null && symbol.Kind != SymbolKind.Namespace)
             {
@@ -635,11 +638,6 @@ namespace Bridge.Translator
                         }
                     }
                 }
-
-                //if (symbol is IFieldSymbol && ((IFieldSymbol)symbol).IsConst)
-                //{
-                //    preserveMemberChange = true;
-                //}
 
                 var nameAttr = SyntaxHelper.GetInheritedAttribute(symbol, Bridge.Translator.Translator.Bridge_ASSEMBLY + ".NameAttribute");
                 bool isIgnore = symbol.ContainingType != null && SyntaxHelper.IsExternalType(symbol.ContainingType);

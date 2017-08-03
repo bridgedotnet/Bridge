@@ -84,10 +84,21 @@ namespace Bridge.Translator
             }
             var target = BridgeTypes.ToJsName(member.Member.DeclaringType, this.Emitter);
             this.NoTarget = string.IsNullOrWhiteSpace(target);
+
+            if (member.Member.IsStatic
+                && !target.StartsWith(CS.Bridge.DOTNAME)
+                && this.MemberReferenceExpression.Target.ToString().StartsWith(CS.NS.GLOBAL))
+            {
+                this.Write(JS.Types.Bridge.Global.DOTNAME);
+            }
+
             this.Write(target);
         }
 
-        public bool NoTarget { get; set; }
+        public bool NoTarget
+        {
+            get; set;
+        }
 
         private void WriteInterfaceMember(string interfaceTempVar, MemberResolveResult resolveResult, bool isSetter, string prefix = null)
         {
@@ -139,7 +150,7 @@ namespace Bridge.Translator
                 if (variance)
                 {
                     this.WriteComma();
-                    this.WriteScript(OverloadsCollection.Create(Emitter, resolveResult.Member, isSetter).GetOverloadName(false, prefix, withoutTypeParams:true));
+                    this.WriteScript(OverloadsCollection.Create(Emitter, resolveResult.Member, isSetter).GetOverloadName(false, prefix, withoutTypeParams: true));
                 }
 
                 /*this.WriteComma();
@@ -246,7 +257,7 @@ namespace Bridge.Translator
             bool isDynamic = false;
             if (resolveResult is DynamicInvocationResolveResult)
             {
-                var dynamicResolveResult = (DynamicInvocationResolveResult) resolveResult;
+                var dynamicResolveResult = (DynamicInvocationResolveResult)resolveResult;
                 var group = dynamicResolveResult.Target as MethodGroupResolveResult;
 
                 if (group != null && group.Methods.Count() > 1)
@@ -388,10 +399,14 @@ namespace Bridge.Translator
                     )
                 )
             {
-                var method = (IMethod)member.Member;
-                if (method.TypeArguments.Count > 0)
+                var parentInvocation = memberReferenceExpression.Parent as InvocationExpression;
+                if (parentInvocation == null || parentInvocation.Target != memberReferenceExpression)
                 {
-                    inline = MemberReferenceBlock.GenerateInlineForMethodReference(method, this.Emitter);
+                    var method = (IMethod)member.Member;
+                    if (method.TypeArguments.Count > 0)
+                    {
+                        inline = MemberReferenceBlock.GenerateInlineForMethodReference(method, this.Emitter);
+                    }
                 }
             }
 
@@ -445,7 +460,7 @@ namespace Bridge.Translator
                     }
                     else
                     {
-                        nativeImplementation = member.Member.DeclaringTypeDefinition.ParentAssembly.AssemblyName == CS.NS.ROOT ||
+                        nativeImplementation = member.Member.DeclaringTypeDefinition.ParentAssembly.AssemblyName == CS.NS.BRIDGE ||
                                                !this.Emitter.Validator.IsExternalType(member.Member.DeclaringTypeDefinition);
                     }
 
@@ -640,7 +655,7 @@ namespace Bridge.Translator
 
                         if (enumMode >= 3 && enumMode < 7)
                         {
-                            string enumStringName = this.Emitter.GetEntityName(member.Member); 
+                            string enumStringName = this.Emitter.GetEntityName(member.Member);
                             this.WriteScript(enumStringName);
                             return;
                         }
@@ -653,115 +668,120 @@ namespace Bridge.Translator
                     this.Write(BridgeTypes.ToJsName(typeResolveResult.Type, this.Emitter));
                     return;
                 }
-                else if (member != null &&
-                         member.Member is IMethod &&
-                         !(member is InvocationResolveResult) &&
-                         !(
+                else
+                {
+                    if (member != null &&
+                        member.Member is IMethod &&
+                        !(member is InvocationResolveResult) &&
+                        !(
                             memberReferenceExpression.Parent is InvocationExpression &&
                             memberReferenceExpression.NextSibling != null &&
                             memberReferenceExpression.NextSibling.Role is TokenRole &&
                             ((TokenRole)memberReferenceExpression.NextSibling.Role).Token == "("
-                         )
+                        )
                     )
-                {
-                    if (!string.IsNullOrEmpty(inline))
                     {
-                        if (!(resolveResult is InvocationResolveResult) && member != null && member.Member is IMethod)
+                        var parentInvocation = memberReferenceExpression.Parent as InvocationExpression;
+                        if (parentInvocation == null || parentInvocation.Target != memberReferenceExpression)
                         {
-                            new InlineArgumentsBlock(this.Emitter,
-                                new ArgumentsInfo(this.Emitter, memberReferenceExpression, resolveResult), inline,
-                                (IMethod)member.Member, targetrr).EmitFunctionReference();
-                        }
-                        else if (resolveResult is InvocationResolveResult ||
-                                 (member.Member.SymbolKind == SymbolKind.Property && this.Emitter.IsAssignment))
-                        {
-                            this.PushWriter(inline);
-                        }
-                        else
-                        {
-                            this.Write(inline);
-                        }
-                    }
-                    else
-                    {
-                        var resolvedMethod = (IMethod)member.Member;
-                        bool isStatic = resolvedMethod != null && resolvedMethod.IsStatic;
-
-                        var isExtensionMethod = resolvedMethod.IsExtensionMethod;
-
-                        this.Emitter.IsAssignment = false;
-                        this.Emitter.IsUnaryAccessor = false;
-
-                        if (!isStatic)
-                        {
-                            this.Write(isExtensionMethod ? JS.Funcs.BRIDGE_BIND_SCOPE : JS.Funcs.BRIDGE_CACHE_BIND);
-                            this.WriteOpenParentheses();
-
-                            if (memberReferenceExpression.Target is BaseReferenceExpression)
+                            if (!string.IsNullOrEmpty(inline))
                             {
-                                this.WriteThis();
+                                if (!(resolveResult is InvocationResolveResult) && member != null && member.Member is IMethod)
+                                {
+                                    new InlineArgumentsBlock(this.Emitter,
+                                        new ArgumentsInfo(this.Emitter, memberReferenceExpression, resolveResult), inline,
+                                        (IMethod)member.Member, targetrr).EmitFunctionReference();
+                                }
+                                else if (resolveResult is InvocationResolveResult ||
+                                         (member.Member.SymbolKind == SymbolKind.Property && this.Emitter.IsAssignment))
+                                {
+                                    this.PushWriter(inline);
+                                }
+                                else
+                                {
+                                    this.Write(inline);
+                                }
                             }
                             else
                             {
-                                interfaceTempVar = this.WriteTarget(resolveResult, isInterfaceMember, memberTargetrr, targetrr, false);
+                                var resolvedMethod = (IMethod)member.Member;
+                                bool isStatic = resolvedMethod != null && resolvedMethod.IsStatic;
+
+                                var isExtensionMethod = resolvedMethod.IsExtensionMethod;
+
+                                this.Emitter.IsAssignment = false;
+                                this.Emitter.IsUnaryAccessor = false;
+
+                                if (!isStatic)
+                                {
+                                    this.Write(isExtensionMethod ? JS.Funcs.BRIDGE_BIND_SCOPE : JS.Funcs.BRIDGE_CACHE_BIND);
+                                    this.WriteOpenParentheses();
+
+                                    if (memberReferenceExpression.Target is BaseReferenceExpression)
+                                    {
+                                        this.WriteThis();
+                                    }
+                                    else
+                                    {
+                                        interfaceTempVar = this.WriteTarget(resolveResult, isInterfaceMember, memberTargetrr, targetrr, false);
+                                    }
+
+                                    this.Write(", ");
+                                }
+
+                                this.Emitter.IsAssignment = oldIsAssignment;
+                                this.Emitter.IsUnaryAccessor = oldUnary;
+
+                                if (isExtensionMethod)
+                                {
+                                    this.Write(BridgeTypes.ToJsName(resolvedMethod.DeclaringType, this.Emitter));
+                                }
+                                else
+                                {
+                                    this.Emitter.IsAssignment = false;
+                                    this.Emitter.IsUnaryAccessor = false;
+                                    if (isConstTarget)
+                                    {
+                                        this.Write("(");
+                                    }
+
+                                    if (interfaceTempVar != null)
+                                    {
+                                        this.Write(interfaceTempVar);
+                                    }
+                                    else
+                                    {
+                                        this.WriteSimpleTarget(resolveResult);
+                                    }
+
+                                    if (isConstTarget)
+                                    {
+                                        this.Write(")");
+                                    }
+                                    this.Emitter.IsAssignment = oldIsAssignment;
+                                    this.Emitter.IsUnaryAccessor = oldUnary;
+                                }
+
+                                if (isInterfaceMember)
+                                {
+                                    this.WriteInterfaceMember(interfaceTempVar, member, false);
+                                }
+                                else
+                                {
+                                    this.WriteDot();
+                                    this.Write(OverloadsCollection.Create(this.Emitter, member.Member).GetOverloadName(!nativeImplementation));
+                                }
+
+                                if (!isStatic)
+                                {
+                                    this.Write(")");
+                                }
                             }
 
-                            this.Write(", ");
-                        }
-
-                        this.Emitter.IsAssignment = oldIsAssignment;
-                        this.Emitter.IsUnaryAccessor = oldUnary;
-
-                        if (isExtensionMethod)
-                        {
-                            this.Write(BridgeTypes.ToJsName(resolvedMethod.DeclaringType, this.Emitter));
-                        }
-                        else
-                        {
-                            this.Emitter.IsAssignment = false;
-                            this.Emitter.IsUnaryAccessor = false;
-                            if (isConstTarget)
-                            {
-                                this.Write("(");
-                            }
-
-                            if (interfaceTempVar != null)
-                            {
-                                this.Write(interfaceTempVar);
-                            }
-                            else
-                            {
-                                this.WriteSimpleTarget(resolveResult);
-                            }
-
-                            if (isConstTarget)
-                            {
-                                this.Write(")");
-                            }
-                            this.Emitter.IsAssignment = oldIsAssignment;
-                            this.Emitter.IsUnaryAccessor = oldUnary;
-                        }
-
-                        if (isInterfaceMember)
-                        {
-                            this.WriteInterfaceMember(interfaceTempVar, member, false);
-                        }
-                        else
-                        {
-                            this.WriteDot();
-                            this.Write(OverloadsCollection.Create(this.Emitter, member.Member).GetOverloadName(!nativeImplementation));
-                        }
-
-                        if (!isStatic)
-                        {
-                            this.Write(")");
+                            return;
                         }
                     }
 
-                    return;
-                }
-                else
-                {
                     bool isProperty = false;
 
                     if (member != null && member.Member.SymbolKind == SymbolKind.Property && (member.Member.DeclaringTypeDefinition == null || !this.Emitter.Validator.IsObjectLiteral(member.Member.DeclaringTypeDefinition)))
@@ -921,7 +941,7 @@ namespace Bridge.Translator
                         else
                         {
                             var name = OverloadsCollection.Create(this.Emitter, member.Member).GetOverloadName(!nativeImplementation);
-                            var property = (IProperty) member.Member;
+                            var property = (IProperty)member.Member;
                             var proto = member.IsVirtualCall || property.IsVirtual || property.IsOverride;
 
                             if (this.MemberReferenceExpression.Target is BaseReferenceExpression && !property.IsIndexer && proto)

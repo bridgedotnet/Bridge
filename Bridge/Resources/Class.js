@@ -642,7 +642,7 @@
                             descriptor = descriptors[i];
                             break;
                         }
-                    }    
+                    }
                 }
 
                 var dcount = key.split("$").length;
@@ -958,7 +958,7 @@
                              cls[name]();
                         });
                     })(t, t.prototype.$main.name || "Main");
-                    
+
                     t.prototype.$main = null;
                 }
             }

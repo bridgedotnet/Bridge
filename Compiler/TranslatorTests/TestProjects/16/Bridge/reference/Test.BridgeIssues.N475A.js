@@ -37,7 +37,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
             methods: {
                 N475: function () {
                     var b = new Test.BridgeIssues.N475A.Bridge475();
-                    Test.BridgeIssues.N475A.Bridge475Extension1.KeyDown(Test.BridgeIssues.N475A.Bridge475Event, b, $asm.$.Test.BridgeIssues.N475A.Test.f1);
+                    Test.BridgeIssues.N475A.Bridge475Extension1.KeyDown(Bridge.global.Test.BridgeIssues.N475A.Bridge475Event, b, $asm.$.Test.BridgeIssues.N475A.Test.f1);
 
                     b.KeyDown(4);
 
