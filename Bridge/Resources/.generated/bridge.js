@@ -828,7 +828,7 @@
 
         as: function (obj, type, allowNull) {
             if (Bridge.is(obj, type, false, allowNull)) {
-                return obj.$boxed && type !== Object && type !== System.Object ? obj.v : obj;
+                return obj != null && obj.$boxed && type !== Object && type !== System.Object ? obj.v : obj;
             }
             return null;
         },
@@ -2551,7 +2551,7 @@
                     obj = prop.apply(null, args);
                     c = Bridge.define(Bridge.Class.genericName(className, args), obj, true, { fn: fn, args: args });
 
-                    if (!Bridge.Class.staticInitAllow) {
+                    if (!Bridge.Class.staticInitAllow && !Bridge.Class.queueIsBlocked) {
                         Bridge.Class.$queue.push(c);
                     }
 
@@ -2841,7 +2841,7 @@
             Bridge.Class.setInheritors(Class, extend);
 
             fn = function () {
-                if (Bridge.Class.staticInitAllow) {
+                if (Bridge.Class.staticInitAllow && !Class.$isGenericTypeDefinition) {
                     Class.$staticInit = null;
 
                     if (Class.$initMembers) {
@@ -2980,7 +2980,7 @@
                             descriptor = descriptors[i];
                             break;
                         }
-                    }    
+                    }
                 }
 
                 var dcount = key.split("$").length;
@@ -3235,8 +3235,16 @@
             fn.$staticInit = function() {
                 fn.$typeArguments = Bridge.Reflection.createTypeParams(prop);
 
+                var old = Bridge.Class.staticInitAllow,
+                    oldIsBlocked = Bridge.Class.queueIsBlocked;
+                Bridge.Class.staticInitAllow = false;
+                Bridge.Class.queueIsBlocked = true;
+
                 var cfg = prop.apply(null, fn.$typeArguments),
                     extend = cfg.$inherits || cfg.inherits;
+
+                Bridge.Class.staticInitAllow = old;
+                Bridge.Class.queueIsBlocked = oldIsBlocked;
 
                 if (extend && Bridge.isFunction(extend)) {
                     extend = extend();
@@ -3288,7 +3296,7 @@
                              cls[name]();
                         });
                     })(t, t.prototype.$main.name || "Main");
-                    
+
                     t.prototype.$main = null;
                 }
             }
@@ -3323,7 +3331,12 @@
         Bridge.$currentAssembly = asm;
 
         if (callback) {
+            var old = Bridge.Class.staticInitAllow;
+            Bridge.Class.staticInitAllow = false;
+
             callback.call(Bridge.global, asm, Bridge.global);
+
+            Bridge.Class.staticInitAllow = old;
         }
 
         Bridge.init();

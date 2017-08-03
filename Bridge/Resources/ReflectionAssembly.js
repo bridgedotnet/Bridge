@@ -17,7 +17,12 @@
         Bridge.$currentAssembly = asm;
 
         if (callback) {
+            var old = Bridge.Class.staticInitAllow;
+            Bridge.Class.staticInitAllow = false;
+
             callback.call(Bridge.global, asm, Bridge.global);
+
+            Bridge.Class.staticInitAllow = old;
         }
 
         Bridge.init();

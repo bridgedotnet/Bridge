@@ -408,7 +408,7 @@ namespace Bridge.Translator
 
             this.Log.Info("Extracting Locales...");
 
-            var bridgeAssembly = this.References.FirstOrDefault(r => r.Name.Name == CS.NS.ROOT);
+            var bridgeAssembly = this.References.FirstOrDefault(r => r.Name.Name == CS.NS.BRIDGE);
             var localesResources = bridgeAssembly.MainModule.Resources.Where(r => r.Name.StartsWith(Translator.LocalesPrefix)).Cast<EmbeddedResource>();
             var locales = this.AssemblyInfo.Locales.Split(';');
 
