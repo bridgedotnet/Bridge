@@ -1896,6 +1896,7 @@
                 if (!enumType.prototype || !enumType.prototype.$flags) {
                     for (var i = 0; i < names.length; i++) {
                         var name = names[i];
+
                         if (enumMethods.nameEquals(name, s, ignoreCase)) {
                             return Bridge.box(values[name], enumType, function (obj) { return System.Enum.toString(enumType, obj); });
                         }
@@ -1911,6 +1912,7 @@
 
                         for (var n = 0; n < names.length; n++) {
                             var name = names[n];
+
                             if (enumMethods.nameEquals(name, part, ignoreCase)) {
                                 value |= values[name];
                                 found = true;
@@ -1969,6 +1971,7 @@
             if (((!enumType.prototype || !enumType.prototype.$flags) && forceFlags !== true) || (value === 0)) {
                 for (var i = 0; i < names.length; i++) {
                     var name = names[i];
+
                     if (isLong && System.Int64.is64Bit(values[name]) ? (values[name].eq(value)) : (values[name] === value)) {
                         return enumMethods.toName(name);
                     }
@@ -1984,7 +1987,7 @@
 
                 while (index >= 0) {
                     var entry = entries[index],
-                        long = isLong && System.Int64.is64Bit(entry.value)
+                        long = isLong && System.Int64.is64Bit(entry.value);
 
                     if ((index == 0) && (long ? entry.value.isZero() : entry.value == 0)) {
                         break;
@@ -1996,7 +1999,7 @@
                         } else {
                             value -= entry.value;
                         }
-                        
+
                         parts.unshift(entry.name);
                     }
 
@@ -2121,8 +2124,10 @@
 
             var names = System.Enum.getNames(enumType),
                 values = enumType;
+
             for (var i = 0; i < names.length; i++) {
                 var name = names[i];
+
                 if (isLong ? value.eq(values[name]) : (values[name] === value)) {
                     return name;
                 }
@@ -2438,6 +2443,7 @@
 
                 for (var i = 0; i < keys.length; i++) {
                     var name = keys[i];
+
                     if (reserved.indexOf(name) === -1) {
                         to[name] = obj[name];
                     }
@@ -2453,11 +2459,11 @@
 
                 var config = {},
                     write = false;
+
                 if (obj.props) {
                     config.properties = obj.props;
                     write = true;
-                }
-                else if (obj.properties) {
+                } else if (obj.properties) {
                     config.properties = obj.properties;
                     write = true;
                 }
