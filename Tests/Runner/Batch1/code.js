@@ -2736,6 +2736,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 });
                 Bridge.Test.NUnit.Assert.AreEqual(24, a2.get([2, 1]));
                 Bridge.Test.NUnit.Assert.AreEqual(8, a1.get([2, 1]));
+            },
+            CanUseReferenceToThis_SPI_1569: function () {
+                // #1569
+                new Bridge.ClientTest.BasicCSharp.RefParameterTests.S.ctor().RefThisTest();
             }
         }
     });

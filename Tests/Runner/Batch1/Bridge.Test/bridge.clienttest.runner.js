@@ -56,6 +56,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("RefParameterTests - CanUseReferenceToField", Bridge.Test.Runtime.BridgeClientTestRunner.RefParameterTests.CanUseReferenceToField);
             QUnit.test("RefParameterTests - CanUseReferenceToOneDimensionalArray", Bridge.Test.Runtime.BridgeClientTestRunner.RefParameterTests.CanUseReferenceToOneDimensionalArray);
             QUnit.test("RefParameterTests - CanUseReferenceToMultiDimensionalArray", Bridge.Test.Runtime.BridgeClientTestRunner.RefParameterTests.CanUseReferenceToMultiDimensionalArray);
+            QUnit.test("RefParameterTests - CanUseReferenceToThis_SPI_1569", Bridge.Test.Runtime.BridgeClientTestRunner.RefParameterTests.CanUseReferenceToThis_SPI_1569);
             QUnit.test("Abstract types - TestB", Bridge.Test.Runtime.BridgeClientTestRunner.TestAbstractClass.TestB);
             QUnit.test("Abstract types - TestC", Bridge.Test.Runtime.BridgeClientTestRunner.TestAbstractClass.TestC);
             QUnit.test("Abstract types - TestBC", Bridge.Test.Runtime.BridgeClientTestRunner.TestAbstractClass.TestBC);
@@ -15685,6 +15686,11 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                     var $t;
                     var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.RefParameterTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.RefParameterTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CanUseReferenceToMultiDimensionalArray()", $t.Line = "74", $t));
                     t.Fixture.CanUseReferenceToMultiDimensionalArray();
+                },
+                CanUseReferenceToThis_SPI_1569: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.BasicCSharp.RefParameterTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.RefParameterTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CanUseReferenceToThis_SPI_1569()", $t.Line = "152", $t));
+                    t.Fixture.CanUseReferenceToThis_SPI_1569();
                 }
             }
         },

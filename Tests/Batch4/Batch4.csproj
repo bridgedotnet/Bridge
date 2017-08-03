@@ -48,7 +48,6 @@
     <Compile Include="ActivatorTests.cs" />
     <Compile Include="SimpleTypes\JsDateTests.cs" />
     <Compile Include="TestHelper.cs" />
-    <Compile Include="RefParameterTests.cs" />
     <Compile Include="AppDomainTests.cs" />
     <Compile Include="FormattableStringTests.cs" />
     <Compile Include="CustomInitializationTests.cs" />
