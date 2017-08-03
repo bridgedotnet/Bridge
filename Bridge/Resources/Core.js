@@ -199,10 +199,21 @@
 
             Object.defineProperty(proxy, "v", {
                 get: function () {
+                    if (n == null) {
+                        return o;
+                    }
+
                     return o[n];
                 },
 
                 set: function (value) {
+                    if (n == null) {
+                        if (value && value.$clone) {
+                            value.$clone(o);
+                        } else {
+                            o = value;
+                        }
+                    }
                     o[n] = value;
                 }
             });
@@ -798,7 +809,7 @@
 
         as: function (obj, type, allowNull) {
             if (Bridge.is(obj, type, false, allowNull)) {
-                return obj.$boxed && type !== Object && type !== System.Object ? obj.v : obj;
+                return obj != null && obj.$boxed && type !== Object && type !== System.Object ? obj.v : obj;
             }
             return null;
         },

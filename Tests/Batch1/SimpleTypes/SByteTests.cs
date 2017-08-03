@@ -1,5 +1,6 @@
 ﻿using Bridge.Test.NUnit;
 using System;
+using System.Globalization;
 
 namespace Bridge.ClientTest.SimpleTypes
 {
@@ -8,17 +9,28 @@ namespace Bridge.ClientTest.SimpleTypes
     public class SByteTests
     {
         [Test]
-        public void TypePropertiesAreCorrect()
+        public void TypePropertiesAreCorrect_SPI_1717()
         {
             Assert.False((object)(byte)0 is sbyte);
             Assert.False((object)0.5 is sbyte);
             Assert.False((object)-129 is sbyte);
             Assert.False((object)128 is sbyte);
             Assert.AreEqual("System.SByte", typeof(sbyte).FullName);
-
+            Assert.False(typeof(sbyte).IsClass);
+            Assert.True(typeof(IComparable<sbyte>).IsAssignableFrom(typeof(sbyte)));
+            Assert.True(typeof(IEquatable<sbyte>).IsAssignableFrom(typeof(sbyte)));
+            Assert.True(typeof(IFormattable).IsAssignableFrom(typeof(sbyte)));
             object b = (sbyte)0;
             Assert.True(b is sbyte);
+            Assert.True(b is IComparable<sbyte>);
+            Assert.True(b is IEquatable<sbyte>);
             Assert.True(b is IFormattable);
+
+            var interfaces = typeof(sbyte).GetInterfaces();
+            Assert.AreEqual(4, interfaces.Length);
+            Assert.True(interfaces.Contains(typeof(IComparable<sbyte>)));
+            Assert.True(interfaces.Contains(typeof(IEquatable<sbyte>)));
+            Assert.True(interfaces.Contains(typeof(IFormattable)));
         }
 
         [Test]
@@ -45,17 +57,29 @@ namespace Bridge.ClientTest.SimpleTypes
 
             checked
             {
-                Assert.Throws(() => { var b = (sbyte)i1; }, err => err is OverflowException);
+                Assert.Throws<OverflowException>(() =>
+                {
+                    var x = (byte)i1;
+                }, "-129 checked");
                 Assert.AreStrictEqual(-128, (sbyte)i2, "-128 checked");
                 Assert.AreStrictEqual(80, (sbyte)i3, "80 checked");
                 Assert.AreStrictEqual(127, (sbyte)i4, "127 checked");
-                Assert.Throws(() => { var b = (sbyte)i5; }, err => err is OverflowException);
+                Assert.Throws<OverflowException>(() =>
+                {
+                    var x = (sbyte)i5;
+                }, "-128 checked");
 
-                Assert.Throws(() => { var b = (sbyte?)ni1; }, err => err is OverflowException);
+                Assert.Throws<OverflowException>(() =>
+                {
+                    var x = (sbyte?)ni1;
+                }, "nullable -129 checked");
                 Assert.AreStrictEqual(-128, (sbyte?)ni2, "nullable -128 checked");
                 Assert.AreStrictEqual(80, (sbyte?)ni3, "nullable 80 checked");
                 Assert.AreStrictEqual(127, (sbyte?)ni4, "nullable 127 checked");
-                Assert.Throws(() => { var b = (sbyte?)ni5; }, err => err is OverflowException);
+                Assert.Throws<OverflowException>(() =>
+                {
+                    var x = (sbyte?)ni5;
+                }, "nullable 128 checked");
                 Assert.AreStrictEqual(null, (sbyte?)ni6, "null checked");
             }
         }
@@ -97,13 +121,32 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void IFormattableToStringWorks()
+        public void ToStringWithFormatWorks()
         {
             Assert.AreEqual("12", ((sbyte)0x12).ToString("x"));
         }
 
         [Test]
-        public void TryParseWorks()
+        public void ToStringWithFormatAndProviderWorks()
+        {
+            Assert.AreEqual("12", ((sbyte)0x12).ToString("x", CultureInfo.InvariantCulture));
+        }
+
+        [Test]
+        public void IFormattableToStringWorks()
+        {
+            Assert.AreEqual("12", ((IFormattable)((sbyte)0x12)).ToString("x", CultureInfo.InvariantCulture));
+        }
+
+        // Not C# API
+        //[Test]
+        //public void LocaleFormatWorks()
+        //{
+        //    Assert.AreEqual(((sbyte)0x12).LocaleFormat("x"), "12");
+        //}
+
+        [Test]
+        public void TryParseWorks_SPI_1592()
         {
             sbyte numberResult;
             bool result = sbyte.TryParse("124", out numberResult);
@@ -128,7 +171,9 @@ namespace Bridge.ClientTest.SimpleTypes
 
             result = sbyte.TryParse("54768", out numberResult);
             Assert.False(result);
+            // #1592
             Assert.AreEqual(54768, numberResult);
+            //Assert.AreEqual(0, numberResult);
 
             result = sbyte.TryParse("2.5", out numberResult);
             Assert.False(result);
@@ -140,11 +185,11 @@ namespace Bridge.ClientTest.SimpleTypes
         {
             Assert.AreEqual(124, sbyte.Parse("124"));
             Assert.AreEqual(-123, sbyte.Parse("-123"));
-            Assert.Throws(() => sbyte.Parse(""));
-            Assert.Throws(() => sbyte.Parse(null));
-            Assert.Throws(() => sbyte.Parse("notanumber"));
-            Assert.Throws(() => sbyte.Parse("54768"));
-            Assert.Throws(() => sbyte.Parse("2.5"));
+            Assert.Throws<FormatException>(() => sbyte.Parse(""));
+            Assert.Throws<ArgumentNullException>(() => sbyte.Parse(null));
+            Assert.Throws<FormatException>(() => sbyte.Parse("notanumber"));
+            Assert.Throws<OverflowException>(() => sbyte.Parse("54768"));
+            Assert.Throws<FormatException>(() => sbyte.Parse("2.5"));
         }
 
         [Test]

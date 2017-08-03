@@ -21,14 +21,24 @@ namespace Bridge.ClientTest.Collections.Generic
                 return GetEnumerator();
             }
 
-            public List<string> Items { get; private set; }
+            public List<string> Items
+            {
+                get;
+                private set;
+            }
 
             public IEnumerator<string> GetEnumerator()
             {
                 return Items.GetEnumerator();
             }
 
-            public int Count { get { return Items.Count; } }
+            public int Count
+            {
+                get
+                {
+                    return Items.Count;
+                }
+            }
 
             public bool IsReadOnly
             {
@@ -63,7 +73,17 @@ namespace Bridge.ClientTest.Collections.Generic
                 return Items.Remove(item);
             }
 
-            public string this[int index] { get { return Items[index]; } set { Items[index] = value; } }
+            public string this[int index]
+            {
+                get
+                {
+                    return Items[index];
+                }
+                set
+                {
+                    Items[index] = value;
+                }
+            }
 
             public int IndexOf(string item)
             {
@@ -105,11 +125,13 @@ namespace Bridge.ClientTest.Collections.Generic
         public void TypePropertiesAreCorrect()
         {
             Assert.AreEqual("System.Collections.Generic.IList`1[[System.Object, mscorlib]]", typeof(IList<object>).FullName, "FullName should be correct");
+            Assert.True(typeof(IList<object>).IsInterface, "IsInterface should be true");
 
-            IList<object> iList = new List<object>();
-
-            Assert.True(iList is IEnumerable<object>, "Interfaces should contain IEnumerable");
-            Assert.True(iList is ICollection<object>, "Interfaces should contain ICollection");
+            var interfaces = typeof(IList<object>).GetInterfaces();
+            Assert.AreEqual(3, interfaces.Length, "Interfaces length");
+            Assert.True(interfaces.Contains(typeof(IEnumerable)), "Interfaces should contain IEnumerable");
+            Assert.True(interfaces.Contains(typeof(IEnumerable<object>)), "Interfaces should contain IEnumerable<>");
+            Assert.True(interfaces.Contains(typeof(ICollection<object>)), "Interfaces should contain ICollection<>");
         }
 
         [Test]

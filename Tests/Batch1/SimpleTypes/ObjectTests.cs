@@ -14,13 +14,16 @@ namespace Bridge.ClientTest.SimpleTypes
             }
         }
 
-        private class C2 : C1 { }
+        private class C2 : C1
+        {
+        }
 
         [Test]
         public void TypePropertiesAreCorrect()
         {
             Assert.True(new object() is object);
-            Assert.AreEqual("System.Object", typeof(object).FullName, "#2069");
+            Assert.AreEqual("System.Object", typeof(object).FullName);
+            Assert.True(typeof(object).IsClass);
         }
 
         [Test]

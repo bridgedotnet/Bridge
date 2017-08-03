@@ -1163,7 +1163,7 @@ namespace Bridge.Contract
             {
                 if (definition.DeclaringTypeDefinition.Kind == TypeKind.Interface)
                 {
-                    skipSuffix = definition.DeclaringTypeDefinition.ParentAssembly.AssemblyName != CS.NS.ROOT;
+                    skipSuffix = definition.DeclaringTypeDefinition.ParentAssembly.AssemblyName != CS.NS.BRIDGE;
                 }
                 else
                 {

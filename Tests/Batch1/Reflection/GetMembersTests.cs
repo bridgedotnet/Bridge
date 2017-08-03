@@ -13,13 +13,13 @@ namespace Bridge.ClientTest.Reflection
             var actualValues = actual.Filter(m => m.DeclaringType != typeof(object)).Map(m => { var arr = (A1Attribute[])m.GetCustomAttributes(typeof(A1Attribute), true); return arr.Length > 0 ? arr[0].I : 0; }).Filter(x => x != 0);
             actualValues.Sort();
             expected.Sort();
-            Assert.AreEqual(actualValues, expected);
+            Assert.AreEqual(expected, actualValues);
         }
 
         private void AssertEqual(MemberInfo actual, int? expected)
         {
             int? actualValue = actual != null ? ((A1Attribute)actual.GetCustomAttributes(typeof(A1Attribute), true)[0]).I : (int?)null;
-            Assert.AreEqual(actualValue, expected);
+            Assert.AreEqual(expected, actualValue);
         }
 
         private void AssertAmbiguous(Action action)
@@ -29,7 +29,10 @@ namespace Bridge.ClientTest.Reflection
 
         private class A1Attribute : Attribute
         {
-            public int I { get; set; }
+            public int I
+            {
+                get; set;
+            }
 
             public A1Attribute(int i)
             {
@@ -42,37 +45,59 @@ namespace Bridge.ClientTest.Reflection
         private class B1
         {
             [A1(101)]
-            public B1() { }
+            public B1()
+            {
+            }
 
             [A1(102)]
-            public B1(int x) { }
+            public B1(int x)
+            {
+            }
 
             [A1(103)]
-            public B1(int x, string y) { }
+            public B1(int x, string y)
+            {
+            }
 
             [A1(111)]
-            public void MB() { }
+            public void MB()
+            {
+            }
 
             [A1(112)]
-            public void MB(int x) { }
+            public void MB(int x)
+            {
+            }
 
             [A1(113)]
-            public void MB(int x, string y) { }
+            public void MB(int x, string y)
+            {
+            }
 
             [A1(114)]
-            public void MB2(int x, string y) { }
+            public void MB2(int x, string y)
+            {
+            }
 
             [A1(121)]
-            public static void MBS() { }
+            public static void MBS()
+            {
+            }
 
             [A1(122)]
-            public static void MBS(int x) { }
+            public static void MBS(int x)
+            {
+            }
 
             [A1(123)]
-            public static void MBS(int x, string y) { }
+            public static void MBS(int x, string y)
+            {
+            }
 
             [A1(124)]
-            public static void MBS2(int x, string y) { }
+            public static void MBS2(int x, string y)
+            {
+            }
 
             [A1(131)]
             public int FB1;
@@ -87,19 +112,39 @@ namespace Bridge.ClientTest.Reflection
             public static int FBS2;
 
             [A1(151)]
-            public int PB1 { [A1(152)] get; [A1(153)] set; }
+            public int PB1
+            {
+                [A1(152)]
+                get; [A1(153)]
+                set;
+            }
 
             [A1(154)]
-            public int PB2 { [A1(155)] get; [A1(156)] set; }
+            public int PB2
+            {
+                [A1(155)]
+                get; [A1(156)]
+                set;
+            }
 
             [A1(157)]
             public int this[int x] { [A1(158)] get { return 0; } [A1(159)] set { } }
 
             [A1(161)]
-            public static int PBS1 { [A1(162)] get; [A1(163)] set; }
+            public static int PBS1
+            {
+                [A1(162)]
+                get; [A1(163)]
+                set;
+            }
 
             [A1(164)]
-            public static int PBS2 { [A1(165)] get; [A1(166)] set; }
+            public static int PBS2
+            {
+                [A1(165)]
+                get; [A1(166)]
+                set;
+            }
 
             [A1(171)]
             public event Action EB1 { [A1(172)] add { } [A1(173)] remove { } }
@@ -119,37 +164,59 @@ namespace Bridge.ClientTest.Reflection
         private class C1 : B1
         {
             [A1(201)]
-            public C1() { }
+            public C1()
+            {
+            }
 
             [A1(202)]
-            public C1(int x) { }
+            public C1(int x)
+            {
+            }
 
             [A1(203)]
-            public C1(int x, string y) { }
+            public C1(int x, string y)
+            {
+            }
 
             [A1(211)]
-            public void MC() { }
+            public void MC()
+            {
+            }
 
             [A1(212)]
-            public void MC(int x) { }
+            public void MC(int x)
+            {
+            }
 
             [A1(213)]
-            public void MC(int x, string y) { }
+            public void MC(int x, string y)
+            {
+            }
 
             [A1(214)]
-            public void MC2(int x, string y) { }
+            public void MC2(int x, string y)
+            {
+            }
 
             [A1(221)]
-            public static void MCS() { }
+            public static void MCS()
+            {
+            }
 
             [A1(222)]
-            public static void MCS(int x) { }
+            public static void MCS(int x)
+            {
+            }
 
             [A1(223)]
-            public static void MCS(int x, string y) { }
+            public static void MCS(int x, string y)
+            {
+            }
 
             [A1(224)]
-            public static void MCS2(int x, string y) { }
+            public static void MCS2(int x, string y)
+            {
+            }
 
             [A1(231)]
             public int FC1;
@@ -164,19 +231,39 @@ namespace Bridge.ClientTest.Reflection
             public static int FCS2;
 
             [A1(251)]
-            public int PC1 { [A1(252)] get; [A1(253)] set; }
+            public int PC1
+            {
+                [A1(252)]
+                get; [A1(253)]
+                set;
+            }
 
             [A1(254)]
-            public int PC2 { [A1(255)] get; [A1(256)] set; }
+            public int PC2
+            {
+                [A1(255)]
+                get; [A1(256)]
+                set;
+            }
 
             [A1(257)]
             public int this[string x] { [A1(258)] get { return 0; } [A1(259)] set { } }
 
             [A1(261)]
-            public static int PCS1 { [A1(262)] get; [A1(263)] set; }
+            public static int PCS1
+            {
+                [A1(262)]
+                get; [A1(263)]
+                set;
+            }
 
             [A1(264)]
-            public static int PCS2 { [A1(265)] get; [A1(266)] set; }
+            public static int PCS2
+            {
+                [A1(265)]
+                get; [A1(266)]
+                set;
+            }
 
             [A1(271)]
             public event Action EC1 { [A1(272)] add { } [A1(273)] remove { } }
@@ -194,37 +281,59 @@ namespace Bridge.ClientTest.Reflection
         private class D1 : C1, I1
         {
             [A1(301)]
-            public D1() { }
+            public D1()
+            {
+            }
 
             [A1(302)]
-            public D1(int x) { }
+            public D1(int x)
+            {
+            }
 
             [A1(303)]
-            public D1(int x, string y) { }
+            public D1(int x, string y)
+            {
+            }
 
             [A1(311)]
-            public void MD() { }
+            public void MD()
+            {
+            }
 
             [A1(312)]
-            public void MD(int x) { }
+            public void MD(int x)
+            {
+            }
 
             [A1(313)]
-            public void MD(int x, string y) { }
+            public void MD(int x, string y)
+            {
+            }
 
             [A1(314)]
-            public void MD2(int x, string y) { }
+            public void MD2(int x, string y)
+            {
+            }
 
             [A1(321)]
-            public static void MDS() { }
+            public static void MDS()
+            {
+            }
 
             [A1(322)]
-            public static void MDS(int x) { }
+            public static void MDS(int x)
+            {
+            }
 
             [A1(323)]
-            public static void MDS(int x, string y) { }
+            public static void MDS(int x, string y)
+            {
+            }
 
             [A1(324)]
-            public static void MDS2(int x, string y) { }
+            public static void MDS2(int x, string y)
+            {
+            }
 
             [A1(331)]
             public int FD1;
@@ -239,19 +348,39 @@ namespace Bridge.ClientTest.Reflection
             public static int FDS2;
 
             [A1(351)]
-            public int PD1 { [A1(352)] get; [A1(353)] set; }
+            public int PD1
+            {
+                [A1(352)]
+                get; [A1(353)]
+                set;
+            }
 
             [A1(354)]
-            public int PD2 { [A1(355)] get; [A1(356)] set; }
+            public int PD2
+            {
+                [A1(355)]
+                get; [A1(356)]
+                set;
+            }
 
             [A1(357)]
             public int this[double x] { [A1(358)] get { return 0; } [A1(359)] set { } }
 
             [A1(361)]
-            public static int PDS1 { [A1(362)] get; [A1(363)] set; }
+            public static int PDS1
+            {
+                [A1(362)]
+                get; [A1(363)]
+                set;
+            }
 
             [A1(364)]
-            public static int PDS2 { [A1(365)] get; [A1(366)] set; }
+            public static int PDS2
+            {
+                [A1(365)]
+                get; [A1(366)]
+                set;
+            }
 
             [A1(371)]
             public event Action ED1 { [A1(372)] add { } [A1(373)] remove { } }
@@ -285,8 +414,29 @@ namespace Bridge.ClientTest.Reflection
                 throw new NotImplementedException();
             }
 
-            int I1.PI11 { get { throw new NotImplementedException(); } set { throw new NotImplementedException(); } }
-            int I1.PI12 { get { throw new NotImplementedException(); } set { throw new NotImplementedException(); } }
+            int I1.PI11
+            {
+                get
+                {
+                    throw new NotImplementedException();
+                }
+                set
+                {
+                    throw new NotImplementedException();
+                }
+            }
+
+            int I1.PI12
+            {
+                get
+                {
+                    throw new NotImplementedException();
+                }
+                set
+                {
+                    throw new NotImplementedException();
+                }
+            }
 
             event Action I1.EI11 { add { throw new NotImplementedException(); } remove { throw new NotImplementedException(); } }
 
@@ -298,46 +448,74 @@ namespace Bridge.ClientTest.Reflection
         private class B2
         {
             [A1(111)]
-            public void M() { }
+            public void M()
+            {
+            }
 
             [A1(112)]
-            public void MB() { }
+            public void MB()
+            {
+            }
 
             [A1(113)]
-            public void M2(int x) { }
+            public void M2(int x)
+            {
+            }
 
             [A1(114)]
-            public void M2(string x) { }
+            public void M2(string x)
+            {
+            }
 
             [A1(115)]
-            public void M2B(int x) { }
+            public void M2B(int x)
+            {
+            }
 
             [A1(116)]
-            public void M2B(string x) { }
+            public void M2B(string x)
+            {
+            }
 
             [A1(117)]
-            public void M3(int x) { }
+            public void M3(int x)
+            {
+            }
 
             [A1(121)]
-            public static void MS() { }
+            public static void MS()
+            {
+            }
 
             [A1(122)]
-            public static void MBS() { }
+            public static void MBS()
+            {
+            }
 
             [A1(123)]
-            public static void M2S(int x) { }
+            public static void M2S(int x)
+            {
+            }
 
             [A1(124)]
-            public static void M2S(string x) { }
+            public static void M2S(string x)
+            {
+            }
 
             [A1(125)]
-            public static void M2BS(int x) { }
+            public static void M2BS(int x)
+            {
+            }
 
             [A1(126)]
-            public static void M2BS(string x) { }
+            public static void M2BS(string x)
+            {
+            }
 
             [A1(127)]
-            public static void M3S(int x) { }
+            public static void M3S(int x)
+            {
+            }
 
             [A1(131)]
             public int F;
@@ -352,10 +530,16 @@ namespace Bridge.ClientTest.Reflection
             public static int FBS;
 
             [A1(151)]
-            public int P { get; set; }
+            public int P
+            {
+                get; set;
+            }
 
             [A1(152)]
-            public int PB { get; set; }
+            public int PB
+            {
+                get; set;
+            }
 
             [A1(153)]
             public int this[int x] { get { return 0; } set { } }
@@ -364,10 +548,16 @@ namespace Bridge.ClientTest.Reflection
             public int this[string x] { get { return 0; } set { } }
 
             [A1(161)]
-            public static int PS { get; set; }
+            public static int PS
+            {
+                get; set;
+            }
 
             [A1(162)]
-            public static int PBS { get; set; }
+            public static int PBS
+            {
+                get; set;
+            }
 
             [A1(171)]
             public event Action E;
@@ -385,46 +575,74 @@ namespace Bridge.ClientTest.Reflection
         private class C2 : B2
         {
             [A1(211)]
-            public void M() { }
+            public void M()
+            {
+            }
 
             [A1(212)]
-            public void MC() { }
+            public void MC()
+            {
+            }
 
             [A1(213)]
-            public void M2(int x) { }
+            public void M2(int x)
+            {
+            }
 
             [A1(214)]
-            public void M2(string x) { }
+            public void M2(string x)
+            {
+            }
 
             [A1(215)]
-            public void M2C(int x) { }
+            public void M2C(int x)
+            {
+            }
 
             [A1(216)]
-            public void M2C(string x) { }
+            public void M2C(string x)
+            {
+            }
 
             [A1(217)]
-            public void M3(string x) { }
+            public void M3(string x)
+            {
+            }
 
             [A1(221)]
-            public static void MS() { }
+            public static void MS()
+            {
+            }
 
             [A1(222)]
-            public static void MCS() { }
+            public static void MCS()
+            {
+            }
 
             [A1(223)]
-            public static void M2S(int x) { }
+            public static void M2S(int x)
+            {
+            }
 
             [A1(224)]
-            public static void M2S(string x) { }
+            public static void M2S(string x)
+            {
+            }
 
             [A1(225)]
-            public static void M2CS(int x) { }
+            public static void M2CS(int x)
+            {
+            }
 
             [A1(226)]
-            public static void M2CS(string x) { }
+            public static void M2CS(string x)
+            {
+            }
 
             [A1(227)]
-            public static void M3S(string x) { }
+            public static void M3S(string x)
+            {
+            }
 
             [A1(231)]
             public int F;
@@ -439,10 +657,16 @@ namespace Bridge.ClientTest.Reflection
             public static int FCS;
 
             [A1(251)]
-            public int P { get; set; }
+            public int P
+            {
+                get; set;
+            }
 
             [A1(252)]
-            public int PC { get; set; }
+            public int PC
+            {
+                get; set;
+            }
 
             [A1(253)]
             public int this[int x] { get { return 0; } set { } }
@@ -451,10 +675,16 @@ namespace Bridge.ClientTest.Reflection
             public int this[double x] { get { return 0; } set { } }
 
             [A1(261)]
-            public static int PS { get; set; }
+            public static int PS
+            {
+                get; set;
+            }
 
             [A1(262)]
-            public static int PCS { get; set; }
+            public static int PCS
+            {
+                get; set;
+            }
 
             [A1(271)]
             public event Action E;
@@ -472,46 +702,74 @@ namespace Bridge.ClientTest.Reflection
         private class D2 : C2
         {
             [A1(311)]
-            public void M() { }
+            public void M()
+            {
+            }
 
             [A1(312)]
-            public void MD() { }
+            public void MD()
+            {
+            }
 
             [A1(313)]
-            public void M2(int x) { }
+            public void M2(int x)
+            {
+            }
 
             [A1(314)]
-            public void M2(string x) { }
+            public void M2(string x)
+            {
+            }
 
             [A1(315)]
-            public void M2D(int x) { }
+            public void M2D(int x)
+            {
+            }
 
             [A1(316)]
-            public void M2D(string x) { }
+            public void M2D(string x)
+            {
+            }
 
             [A1(317)]
-            public void M3(DateTime x) { }
+            public void M3(DateTime x)
+            {
+            }
 
             [A1(321)]
-            public static void MS() { }
+            public static void MS()
+            {
+            }
 
             [A1(322)]
-            public static void MDS() { }
+            public static void MDS()
+            {
+            }
 
             [A1(323)]
-            public static void M2S(int x) { }
+            public static void M2S(int x)
+            {
+            }
 
             [A1(324)]
-            public static void M2S(string x) { }
+            public static void M2S(string x)
+            {
+            }
 
             [A1(325)]
-            public static void M2DS(int x) { }
+            public static void M2DS(int x)
+            {
+            }
 
             [A1(326)]
-            public static void M2DS(string x) { }
+            public static void M2DS(string x)
+            {
+            }
 
             [A1(327)]
-            public static void M3S(DateTime x) { }
+            public static void M3S(DateTime x)
+            {
+            }
 
             [A1(331)]
             public int F;
@@ -526,10 +784,16 @@ namespace Bridge.ClientTest.Reflection
             public static int FDS;
 
             [A1(351)]
-            public int P { get; set; }
+            public int P
+            {
+                get; set;
+            }
 
             [A1(352)]
-            public int PD { get; set; }
+            public int PD
+            {
+                get; set;
+            }
 
             [A1(353)]
             public int this[int x] { get { return 0; } set { } }
@@ -538,10 +802,16 @@ namespace Bridge.ClientTest.Reflection
             public int this[DateTime x] { get { return 0; } set { } }
 
             [A1(361)]
-            public static int PS { get; set; }
+            public static int PS
+            {
+                get; set;
+            }
 
             [A1(362)]
-            public static int PDS { get; set; }
+            public static int PDS
+            {
+                get; set;
+            }
 
             [A1(371)]
             public event Action E;
@@ -577,10 +847,20 @@ namespace Bridge.ClientTest.Reflection
             void MI12(int x, string y);
 
             [A1(451)]
-            int PI11 { [A1(452)] get; [A1(453)] set; }
+            int PI11
+            {
+                [A1(452)]
+                get; [A1(453)]
+                set;
+            }
 
             [A1(454)]
-            int PI12 { [A1(455)] get; [A1(456)] set; }
+            int PI12
+            {
+                [A1(455)]
+                get; [A1(456)]
+                set;
+            }
 
             [A1(457)]
             int this[int x] { [A1(458), Name("get_i1item")] get; [A1(459), Name("set_i1item")] set; }
@@ -607,10 +887,20 @@ namespace Bridge.ClientTest.Reflection
             void MI22(int x, string y);
 
             [A1(551)]
-            int PI21 { [A1(552)] get; [A1(553)] set; }
+            int PI21
+            {
+                [A1(552)]
+                get; [A1(553)]
+                set;
+            }
 
             [A1(554)]
-            int PI22 { [A1(555)] get; [A1(556)] set; }
+            int PI22
+            {
+                [A1(555)]
+                get; [A1(556)]
+                set;
+            }
 
             [A1(557)]
             int this[string x] { [A1(558), Name("get_item2")] get; [A1(559), Name("set_item2")] set; }

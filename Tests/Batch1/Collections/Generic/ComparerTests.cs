@@ -24,9 +24,17 @@ namespace Bridge.ClientTest.Collections.Generic
         }
 
         [Test]
+        public void TypePropertiesAreCorrect_SPI_1546()
+        {
+            // #1546
+            Assert.AreStrictEqual(typeof(object), typeof(Comparer<object>).BaseType, "BaseType should be correct");
+        }
+
+        [Test]
         public void TypePropertiesAreCorrect()
         {
             Assert.AreEqual("System.Collections.Generic.Comparer`1[[System.Object, mscorlib]]", typeof(Comparer<object>).FullName, "FullName");
+            Assert.True(typeof(Comparer<object>).IsClass, "IsClass should be true");
 
             var comparer = Comparer<object>.Default;
             Assert.True(comparer is Comparer<object>, "is Comparer<object> should be true");

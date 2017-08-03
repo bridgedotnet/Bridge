@@ -12,7 +12,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     [TestFixture(TestNameFormat = "#2964 - {0}")]
     public class Bridge2964
     {
-        public interface IWhatever { }
+        public interface IWhatever
+        {
+        }
 
         public struct Wrapped<T>
         {
@@ -21,8 +23,11 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
                 Value = value;
             }
 
-            public T Value { get; }
-            
+            public T Value
+            {
+                get;
+            }
+
             public static implicit operator Wrapped<T>(T value)
             {
                 Bridge2964.lastOperatorTypeName = typeof(T);
@@ -31,9 +36,13 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         }
 
         private static Type lastOperatorTypeName;
-        private static void DoSomething(Wrapped<string> value) { }
+        private static void DoSomething(Wrapped<string> value)
+        {
+        }
 
-        private static void DoSomethingElse(Wrapped<IWhatever> value) { }
+        private static void DoSomethingElse(Wrapped<IWhatever> value)
+        {
+        }
 
         [Test]
         public static void TestGenericOperator()

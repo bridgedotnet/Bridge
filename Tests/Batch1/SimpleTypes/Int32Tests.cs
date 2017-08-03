@@ -1,5 +1,6 @@
 ﻿using Bridge.Test.NUnit;
 using System;
+using System.Globalization;
 
 #pragma warning disable 184, 219, 458
 
@@ -10,19 +11,28 @@ namespace Bridge.ClientTest.SimpleTypes
     public class Int32Tests
     {
         [Test]
-        public void TypePropertiesAreCorrect()
+        public void TypePropertiesAreCorrect_SPI_1717()
         {
             Assert.True((object)(int)0 is int);
             Assert.False((object)0.5 is int);
             Assert.False((object)-2147483649 is int);
             Assert.False((object)2147483648 is int);
             Assert.AreEqual("System.Int32", typeof(int).FullName);
-
+            Assert.False(typeof(int).IsClass);
+            Assert.True(typeof(IComparable<int>).IsAssignableFrom(typeof(int)));
+            Assert.True(typeof(IEquatable<int>).IsAssignableFrom(typeof(int)));
+            Assert.True(typeof(IFormattable).IsAssignableFrom(typeof(int)));
             object i = (int)0;
             Assert.True(i is int);
             Assert.True(i is IComparable<int>);
             Assert.True(i is IEquatable<int>);
             Assert.True(i is IFormattable);
+
+            var interfaces = typeof(int).GetInterfaces();
+            Assert.AreEqual(4, interfaces.Length);
+            Assert.True(interfaces.Contains(typeof(IComparable<int>)));
+            Assert.True(interfaces.Contains(typeof(IEquatable<int>)));
+            Assert.True(interfaces.Contains(typeof(IFormattable)));
         }
 
         [Test]
@@ -49,17 +59,29 @@ namespace Bridge.ClientTest.SimpleTypes
 
             checked
             {
-                Assert.Throws(() => { var b = (int)i1; }, err => err is OverflowException);
+                Assert.Throws<OverflowException>(() =>
+                {
+                    var x = (int)i1;
+                }, "-2147483649 checked");
                 Assert.AreStrictEqual(-2147483648, (int)i2, "-2147483648 checked");
                 Assert.AreStrictEqual(5754, (int)i3, "5754 checked");
                 Assert.AreStrictEqual(2147483647, (int)i4, "2147483647 checked");
-                Assert.Throws(() => { var b = (int)i5; }, err => err is OverflowException);
+                Assert.Throws<OverflowException>(() =>
+                {
+                    var x = (int)i5;
+                }, "32768 checked");
 
-                Assert.Throws(() => { var b = (int?)ni1; }, err => err is OverflowException);
+                Assert.Throws<OverflowException>(() =>
+                {
+                    var x = (int?)ni1;
+                }, "nullable -2147483649 checked");
                 Assert.AreStrictEqual(-2147483648, (int?)ni2, "nullable -2147483648 checked");
                 Assert.AreStrictEqual(5754, (int?)ni3, "nullable 5754 checked");
                 Assert.AreStrictEqual(2147483647, (int?)ni4, "nullable 2147483647 checked");
-                Assert.Throws(() => { var b = (int?)ni5; }, err => err is OverflowException);
+                Assert.Throws<OverflowException>(() =>
+                {
+                    var x = (int?)ni5;
+                }, "nullable 2147483648 checked");
                 Assert.AreStrictEqual(null, (int?)ni6, "null checked");
             }
         }
@@ -90,8 +112,14 @@ namespace Bridge.ClientTest.SimpleTypes
             object d = 1.5;
             object i = 1;
             Assert.AreEqual(null, (int?)_null);
-            Assert.Throws(() => { var _ = (int?)o; }, "Cannot cast object to int?");
-            Assert.Throws(() => { var _ = (int?)d; }, "Cannot cast decimal to int?");
+            Assert.Throws(() =>
+            {
+                var _ = (int?)o;
+            });
+            Assert.Throws(() =>
+            {
+                var _ = (int?)d;
+            });
             Assert.AreEqual(1, (int?)i);
         }
 
@@ -132,10 +160,29 @@ namespace Bridge.ClientTest.SimpleTypes
         }
 
         [Test]
-        public void IFormattableToStringWorks()
+        public void ToStringWithFormatWorks()
         {
             Assert.AreEqual("123", ((int)0x123).ToString("x"));
         }
+
+        [Test]
+        public void ToStringWithFormatAndProviderWorks()
+        {
+            Assert.AreEqual("123", ((int)0x123).ToString("x", CultureInfo.InvariantCulture));
+        }
+
+        [Test]
+        public void IFormattableToStringWorks()
+        {
+            Assert.AreEqual("123", ((IFormattable)((int)0x123)).ToString("x", CultureInfo.InvariantCulture));
+        }
+
+        // Not C# API
+        //[Test]
+        //public void LocaleFormatWorks()
+        //{
+        //    Assert.AreEqual(((int)0x123).LocaleFormat("x"), "123");
+        //}
 
         [Test]
         public void TryParseWorks()
@@ -172,12 +219,12 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual(57574, int.Parse("57574"));
             Assert.AreEqual(-14, int.Parse("-14"));
 
-            Assert.Throws(() => int.Parse(""));
-            Assert.Throws(() => int.Parse(null));
-            Assert.Throws(() => int.Parse("notanumber"));
-            Assert.Throws(() => int.Parse("2147483648"));
-            Assert.Throws(() => int.Parse("-2147483649"));
-            Assert.Throws(() => int.Parse("2.5"));
+            Assert.Throws<FormatException>(() => int.Parse(""));
+            Assert.Throws<ArgumentNullException>(() => int.Parse(null));
+            Assert.Throws<FormatException>(() => int.Parse("notanumber"));
+            Assert.Throws<OverflowException>(() => int.Parse("2147483648"));
+            Assert.Throws<OverflowException>(() => int.Parse("-2147483649"));
+            Assert.Throws<FormatException>(() => int.Parse("2.5"));
         }
 
         [Test]
@@ -248,25 +295,35 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual(-4, -a / b);
             Assert.AreEqual(-4, a / -b);
             Assert.AreEqual(4, -a / -b);
-            Assert.Throws(() => { var x = a / c; });
+            Assert.Throws<DivideByZeroException>(() =>
+            {
+                var x = a / c;
+            });
         }
 
         [Test]
-        public void IntegerModuloWorks()
+        public void IntegerModuloWorks_SPI_1602()
         {
             int a = 17, b = 4, c = 0;
             Assert.AreEqual(1, a % b);
             Assert.AreEqual(-1, -a % b);
             Assert.AreEqual(1, a % -b);
             Assert.AreEqual(-1, -a % -b);
-            //Assert.Throws(() => { var x = a % c; });
+            // #1602
+            //Assert.Throws<DivideByZeroException>(() =>
+            //{
+            //    var x = a % c;
+            //});
         }
 
         [Test]
         public void IntegerDivisionByZeroThrowsDivideByZeroException()
         {
             int a = 17, b = 0;
-            Assert.Throws(() => { var x = a / b; });
+            Assert.Throws<DivideByZeroException>(() =>
+            {
+                var x = a / b;
+            });
         }
 
         [Test]
