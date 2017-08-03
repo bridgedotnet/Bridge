@@ -24104,7 +24104,7 @@ Bridge.$N1391Result =                     r;
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2964.DoSomething(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2964.Wrapped$1(System.String).op_Implicit(null));
                     Bridge.Test.NUnit.Assert.AreEqual(System.String, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2964.lastOperatorTypeName);
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2964.DoSomethingElse(null);
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2964.DoSomethingElse(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2964.Wrapped$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2964.IWhatever).op_Implicit(null));
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2964.IWhatever, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2964.lastOperatorTypeName);
                 }
             }
