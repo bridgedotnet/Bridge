@@ -42,12 +42,14 @@
                     return Bridge.box(intValue.v, enumType, function (obj) { return System.Enum.toString(enumType, obj); });
                 }
 
-                var values = enumType;
+                var names = System.Enum.getNames(enumType),
+                    values = enumType;
 
                 if (!enumType.prototype || !enumType.prototype.$flags) {
-                    for (var f in values) {
-                        if (enumMethods.nameEquals(f, s, ignoreCase)) {
-                            return Bridge.box(values[f], enumType, function (obj) { return System.Enum.toString(enumType, obj); });
+                    for (var i = 0; i < names.length; i++) {
+                        var name = names[i];
+                        if (enumMethods.nameEquals(name, s, ignoreCase)) {
+                            return Bridge.box(values[name], enumType, function (obj) { return System.Enum.toString(enumType, obj); });
                         }
                     }
                 } else {
@@ -59,9 +61,10 @@
                         var part = parts[i].trim(),
                             found = false;
 
-                        for (var f in values) {
-                            if (enumMethods.nameEquals(f, part, ignoreCase)) {
-                                value |= values[f];
+                        for (var n = 0; n < names.length; n++) {
+                            var name = names[n];
+                            if (enumMethods.nameEquals(name, part, ignoreCase)) {
+                                value |= values[name];
                                 found = true;
 
                                 break;
@@ -112,49 +115,92 @@
             System.Enum.checkEnumType(enumType);
 
             var values = enumType,
+                names = System.Enum.getNames(enumType),
                 isLong = System.Int64.is64Bit(value);
 
             if (((!enumType.prototype || !enumType.prototype.$flags) && forceFlags !== true) || (value === 0)) {
-                for (var i in values) {
-                    if (isLong && System.Int64.is64Bit(values[i]) ? (values[i].eq(value)) : (values[i] === value)) {
-                        return enumMethods.toName(i);
+                for (var i = 0; i < names.length; i++) {
+                    var name = names[i];
+                    if (isLong && System.Int64.is64Bit(values[name]) ? (values[name].eq(value)) : (values[name] === value)) {
+                        return enumMethods.toName(name);
                     }
                 }
 
                 //throw new System.ArgumentException('Invalid Enumeration Value');
                 return value.toString();
             } else {
-                var parts = [];
+                var parts = [],
+                    entries = System.Enum.getValuesAndNames(enumType),
+                    index = entries.length - 1,
+                    saveResult = value;
 
-                for (var i in values) {
-                    if (isLong && System.Int64.is64Bit(values[i]) ? (!values[i].and(value).isZero()) : (values[i] & value)) {
-                        parts.push(enumMethods.toName(i));
+                while (index >= 0) {
+                    var entry = entries[index],
+                        long = isLong && System.Int64.is64Bit(entry.value)
+
+                    if ((index == 0) && (long ? entry.value.isZero() : entry.value == 0)) {
+                        break;
                     }
+
+                    if (long ? (value.and(entry.value).eq(entry.value)) : ((value & entry.value) == entry.value)) {
+                        if (long) {
+                            value = value.sub(entry.value);
+                        } else {
+                            value -= entry.value;
+                        }
+                        
+                        parts.unshift(entry.name);
+                    }
+
+                    index--;
                 }
 
-                if (!parts.length) {
-                    //throw new System.ArgumentException('Invalid Enumeration Value');
-                    return value.toString();
+                if (isLong ? !value.isZero() : value !== 0) {
+                    return saveResult.toString();
+                }
+
+                if (isLong ? saveResult.isZero() : saveResult === 0) {
+                    var entry = entries[0];
+                    if (entry && (System.Int64.is64Bit(entry.value) ? entry.value.isZero() : (entry.value == 0))) {
+                        return entry.name;
+                    }
+
+                    return "0";
                 }
 
                 return parts.join(', ');
             }
         },
 
+        getValuesAndNames: function (enumType) {
+            System.Enum.checkEnumType(enumType);
+
+            var parts = [],
+                names = System.Enum.getNames(enumType),
+                values = enumType;
+
+            for (var i = 0; i < names.length; i++) {
+                parts.push({ name: names[i], value: values[names[i]] });
+            }
+
+            return parts.sort(function (i1, i2) {
+                return System.Int64.is64Bit(i1.value) ? i1.value.sub(i2.value).sign() : (i1.value - i2.value);
+            });
+        },
+
         getValues: function (enumType) {
             System.Enum.checkEnumType(enumType);
 
             var parts = [],
+                names = System.Enum.getNames(enumType),
                 values = enumType;
 
-            for (var i in values) {
-                if (values.hasOwnProperty(i) && i.indexOf("$") < 0 && typeof values[i] !== "function") {
-                    parts.push(values[i]);
-                }
+            for (var i = 0; i < names.length; i++) {
+                parts.push(values[names[i]]);
             }
 
             return parts.sort(function (i1, i2) {
-                return i1 - i2;
+                return System.Int64.is64Bit(i1) ? i1.sub(i2).sign() : (i1 - i2);
             });
         },
 
@@ -193,6 +239,10 @@
             var parts = [],
                 values = enumType;
 
+            if (enumType.$names) {
+                return enumType.$names.slice(0);
+            }
+
             for (var i in values) {
                 if (values.hasOwnProperty(i) && i.indexOf("$") < 0 && typeof values[i] !== "function") {
                     parts.push([enumMethods.toName(i), values[i]]);
@@ -200,7 +250,7 @@
             }
 
             return parts.sort(function (i1, i2) {
-                return i1[1] - i2[1];
+                return System.Int64.is64Bit(i1[1]) ? i1[1].sub(i2[1]).sign() : (i1[1] - i2[1]);
             }).map(function (i) {
                 return i[0];
             });
@@ -213,16 +263,20 @@
                 throw new System.ArgumentNullException("value");
             }
 
-            if (!(typeof (value) === "number" && Math.floor(value, 0) === value)) {
+            var isLong = System.Int64.is64Bit(value);
+
+            if (!isLong && !(typeof (value) === "number" && Math.floor(value, 0) === value)) {
                 throw new System.ArgumentException("Argument must be integer", "value");
             }
 
             System.Enum.checkEnumType(enumType);
 
-            var values = enumType;
-            for (var i in values) {
-                if (values[i] === value) {
-                    return i;
+            var names = System.Enum.getNames(enumType),
+                values = enumType;
+            for (var i = 0; i < names.length; i++) {
+                var name = names[i];
+                if (isLong ? value.eq(values[name]) : (values[name] === value)) {
+                    return name;
                 }
             }
 
@@ -231,7 +285,8 @@
 
         hasFlag: function (value, flag) {
             flag = Bridge.unbox(flag, true);
-            return flag === 0 || !!(value & flag);
+            var isLong = System.Int64.is64Bit(value);
+            return flag === 0 || (isLong ? !value.and(flag).isZero() : !!(value & flag));
         },
 
         isDefined: function (enumType, value) {
@@ -240,10 +295,13 @@
             System.Enum.checkEnumType(enumType);
 
             var values = enumType,
-                isString = Bridge.isString(value);
+                names = System.Enum.getNames(enumType),
+                isString = Bridge.isString(value),
+                isLong = System.Int64.is64Bit(value);
 
-            for (var i in values) {
-                if (isString ? enumMethods.nameEquals(i, value, false) : values[i] === value) {
+            for (var i = 0; i < names.length; i++) {
+                var name = names[i];
+                if (isString ? enumMethods.nameEquals(name, value, false) : (isLong ? value.eq(values[name]) : (values[name] === value))) {
                     return true;
                 }
             }
@@ -269,11 +327,11 @@
                 }
             }
 
-            return Bridge.unbox(v1, true) === Bridge.unbox(v2, true);
+            return System.Enum.equalsT(v1, v2);
         },
 
         equalsT: function (v1, v2) {
-            return Bridge.unbox(v1, true) === Bridge.unbox(v2, true);
+            return Bridge.equals(Bridge.unbox(v1, true), Bridge.unbox(v2, true));
         }
     };
 

@@ -23894,6 +23894,30 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2942", {
+        statics: {
+            methods: {
+                TestEnumFlagsToStr: function () {
+                    Bridge.Test.NUnit.Assert.AreEqual("E, B A", System.String.format("{0} {1}", Bridge.box(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2942.SimpleEnum.B, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2942.SimpleEnum, System.Enum.toStringFn(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2942.SimpleEnum)), Bridge.box(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2942.SimpleEnum.E, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2942.SimpleEnum, System.Enum.toStringFn(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2942.SimpleEnum))));
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2942.SimpleEnum", {
+        $kind: "enum",
+        statics: {
+            fields: {
+                A: 0,
+                B: 3,
+                C: 4,
+                D: 10,
+                E: 0
+            }
+        },
+        $flags: true
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2955", {
         statics: {
             methods: {
