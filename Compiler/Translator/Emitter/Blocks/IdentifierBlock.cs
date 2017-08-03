@@ -53,7 +53,7 @@ namespace Bridge.Translator
 
             if (this.Emitter.Locals != null && this.Emitter.Locals.ContainsKey(id) && resolveResult is LocalResolveResult)
             {
-                var lrr = (LocalResolveResult) resolveResult;
+                var lrr = (LocalResolveResult)resolveResult;
                 if (this.Emitter.LocalsMap != null && this.Emitter.LocalsMap.ContainsKey(lrr.Variable) && !(identifierExpression.Parent is DirectionExpression))
                 {
                     this.Write(this.Emitter.LocalsMap[lrr.Variable]);
@@ -116,10 +116,14 @@ namespace Bridge.Translator
                     )
                 )
             {
-                var method = (IMethod)memberResult.Member;
-                if (method.TypeArguments.Count > 0)
+                var parentInvocation = identifierExpression.Parent as InvocationExpression;
+                if (parentInvocation == null || parentInvocation.Target != identifierExpression)
                 {
-                    inlineCode = MemberReferenceBlock.GenerateInlineForMethodReference(method, this.Emitter);
+                    var method = (IMethod)memberResult.Member;
+                    if (method.TypeArguments.Count > 0)
+                    {
+                        inlineCode = MemberReferenceBlock.GenerateInlineForMethodReference(method, this.Emitter);
+                    }
                 }
             }
 
@@ -209,7 +213,7 @@ namespace Bridge.Translator
                 {
                     inlineCode = "this." + inlineCode;
                 }
-                
+
                 if (resolveResult is InvocationResolveResult)
                 {
                     this.PushWriter(inlineCode);
@@ -251,31 +255,35 @@ namespace Bridge.Translator
                         )
                 )
             {
-                if (!string.IsNullOrEmpty(inlineCode))
+                var parentInvocation = identifierExpression.Parent as InvocationExpression;
+                if (parentInvocation == null || parentInvocation.Target != identifierExpression)
                 {
-                    ResolveResult targetrr = null;
-                    if (memberResult.Member.IsStatic)
+                    if (!string.IsNullOrEmpty(inlineCode))
                     {
-                        targetrr = new TypeResolveResult(memberResult.Member.DeclaringType);
+                        ResolveResult targetrr = null;
+                        if (memberResult.Member.IsStatic)
+                        {
+                            targetrr = new TypeResolveResult(memberResult.Member.DeclaringType);
+                        }
+
+                        new InlineArgumentsBlock(this.Emitter,
+                                new ArgumentsInfo(this.Emitter, identifierExpression, resolveResult), inlineCode,
+                                (IMethod)memberResult.Member, targetrr).EmitFunctionReference();
                     }
-
-                    new InlineArgumentsBlock(this.Emitter,
-                            new ArgumentsInfo(this.Emitter, identifierExpression, resolveResult), inlineCode,
-                            (IMethod)memberResult.Member, targetrr).EmitFunctionReference();
-                }
-                else
-                {
-                    var resolvedMethod = (IMethod)memberResult.Member;
-                    bool isStatic = resolvedMethod != null && resolvedMethod.IsStatic;
-
-                    if (!isStatic)
+                    else
                     {
-                        var isExtensionMethod = resolvedMethod.IsExtensionMethod;
-                        this.Write(isExtensionMethod ? JS.Funcs.BRIDGE_BIND_SCOPE : JS.Funcs.BRIDGE_CACHE_BIND);
-                        this.WriteOpenParentheses();
-                        this.WriteThis();
-                        this.Write(", ");
-                        appendAdditionalCode = ")";
+                        var resolvedMethod = (IMethod)memberResult.Member;
+                        bool isStatic = resolvedMethod != null && resolvedMethod.IsStatic;
+
+                        if (!isStatic)
+                        {
+                            var isExtensionMethod = resolvedMethod.IsExtensionMethod;
+                            this.Write(isExtensionMethod ? JS.Funcs.BRIDGE_BIND_SCOPE : JS.Funcs.BRIDGE_CACHE_BIND);
+                            this.WriteOpenParentheses();
+                            this.WriteThis();
+                            this.Write(", ");
+                            appendAdditionalCode = ")";
+                        }
                     }
                 }
             }
@@ -650,7 +658,7 @@ namespace Bridge.Translator
             {
                 this.WriteComma();
             }
-            else if(!noTarget)
+            else if (!noTarget)
             {
                 this.WriteDot();
             }

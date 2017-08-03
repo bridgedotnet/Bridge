@@ -277,7 +277,7 @@ namespace Bridge.Translator
             }
 
             if (assignmentExpression.Operator == AssignmentOperatorType.Multiply &&
-                !(this.Emitter.IsJavaScriptOverflowMode || ConversionBlock.InsideOverflowContext(this.Emitter, assignmentExpression)) &&
+                !(this.Emitter.IsJavaScriptOverflowMode && !ConversionBlock.InsideOverflowContext(this.Emitter, assignmentExpression)) &&
                 !isLong && !isLongExpected &&
                 (
                     (Helpers.IsInteger32Type(leftResolverResult.Type, this.Emitter.Resolver) &&
@@ -312,6 +312,11 @@ namespace Bridge.Translator
                 this.Emitter.ReplaceAwaiterByVar = true;
 
                 assignmentExpression.Right.AcceptVisitor(this.Emitter);
+
+                if (ConversionBlock.IsInCheckedContext(this.Emitter, assignmentExpression))
+                {
+                    this.Write(", 1");
+                }
 
                 this.Write(")");
 

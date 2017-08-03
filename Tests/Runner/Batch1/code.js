@@ -5569,7 +5569,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         var r = ((max3 = Bridge.Int.check(max3 + 1, System.Int32)));
                     }, "Through identifier ++pre");
                     Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                        var r = Bridge.Int.check(2 * max, System.Int32);
+                        var r = Bridge.Int.mul(2, max, 1);
                     }, "Through identifier *");
 
                     Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
@@ -5582,7 +5582,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max4 = Bridge.Int.check(max4 + 1, System.Int32))), System.Int32));
                     }, "Through parameter ++pre");
                     Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                        Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.Int.check(2 * max, System.Int32), System.Int32));
+                        Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.Int.mul(2, max, 1), System.Int32));
                     }, "Through parameter *");
 
                     var min = -2147483648;
@@ -5636,7 +5636,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         var r = ((max2 = Bridge.Int.check(max2 + 1, System.UInt32)));
                     }, "Through identifier ++pre");
                     Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                        var r = Bridge.Int.check(2 * max, System.UInt32);
+                        var r = Bridge.Int.umul(2, max, 1);
                     }, "Through identifier *");
 
                     Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
@@ -5649,7 +5649,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max4 = Bridge.Int.check(max4 + 1, System.UInt32))), System.UInt32));
                     }, "Through parameter ++pre");
                     Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                        Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.Int.check(2 * max, System.UInt32), System.UInt32));
+                        Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.Int.umul(2, max, 1), System.UInt32));
                     }, "Through parameter *");
 
                     var min = 0;
@@ -5840,7 +5840,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         var r = ((max3 = Bridge.Int.check(max3 + 1, System.Int32)));
                     }, "Through identifier ++pre");
                     Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                        var r = Bridge.Int.check(2 * max, System.Int32);
+                        var r = Bridge.Int.mul(2, max, 1);
                     }, "Through identifier *");
 
                     Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
@@ -5853,7 +5853,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max4 = Bridge.Int.check(max4 + 1, System.Int32))), System.Int32));
                     }, "Through parameter ++pre");
                     Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                        Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.Int.check(2 * max, System.Int32), System.Int32));
+                        Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.Int.mul(2, max, 1), System.Int32));
                     }, "Through parameter *");
 
                     var min = -2147483648;
@@ -5907,7 +5907,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         var r = ((max2 = Bridge.Int.check(max2 + 1, System.UInt32)));
                     }, "Through identifier ++pre");
                     Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                        var r = Bridge.Int.check(2 * max, System.UInt32);
+                        var r = Bridge.Int.umul(2, max, 1);
                     }, "Through identifier *");
 
                     Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
@@ -5920,7 +5920,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max4 = Bridge.Int.check(max4 + 1, System.UInt32))), System.UInt32));
                     }, "Through parameter ++pre");
                     Bridge.Test.NUnit.Assert.Throws$2(System.OverflowException, function () {
-                        Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.Int.check(2 * max, System.UInt32), System.UInt32));
+                        Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.Int.umul(2, max, 1), System.UInt32));
                     }, "Through parameter *");
 
                     var min = 0;
@@ -6104,7 +6104,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var rMax1 = (max + 1) | 0;
                     var rMax2 = Bridge.identity(max1, (max1 = (max1 + 1) | 0));
                     var rMax3 = ((max2 = (max2 + 1) | 0));
-                    var rMax4 = (2 * max) | 0;
+                    var rMax4 = Bridge.Int.mul(2, max);
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2147483648", Bridge.box(rMax1, System.Int32), "Through identifier +");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("2147483647", Bridge.box(rMax2, System.Int32), "Through identifier post++");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2147483648", Bridge.box(rMax3, System.Int32), "Through identifier ++pre");
@@ -6113,7 +6113,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2147483648", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max + 1) | 0), System.Int32)), "Through parameter +");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("2147483647", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.identity(max3, (max3 = (max3 + 1) | 0)), System.Int32)), "Through parameter post++");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2147483648", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max4 = (max4 + 1) | 0)), System.Int32)), "Through parameter ++pre");
-                    Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((2 * max) | 0), System.Int32)), "Through parameter *");
+                    Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.Int.mul(2, max), System.Int32)), "Through parameter *");
 
                     var min = -2147483648;
 
@@ -6147,7 +6147,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var rMax1 = (max + 1) >>> 0;
                     var rMax2 = Bridge.identity(max1, (max1 = (max1 + 1) >>> 0));
                     var rMax3 = ((max2 = (max2 + 1) >>> 0));
-                    var rMax4 = (2 * max) >>> 0;
+                    var rMax4 = Bridge.Int.umul(2, max);
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("0", Bridge.box(rMax1, System.UInt32), "Through identifier +");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("4294967295", Bridge.box(rMax2, System.UInt32), "Through identifier post++");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("0", Bridge.box(rMax3, System.UInt32), "Through identifier ++pre");
@@ -6156,7 +6156,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("0", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max + 1) >>> 0), System.UInt32)), "Through parameter +");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("4294967295", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.identity(max3, (max3 = (max3 + 1) >>> 0)), System.UInt32)), "Through parameter post++");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("0", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max4 = (max4 + 1) >>> 0)), System.UInt32)), "Through parameter ++pre");
-                    Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("4294967294", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((2 * max) >>> 0), System.UInt32)), "Through parameter *");
+                    Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("4294967294", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.Int.umul(2, max), System.UInt32)), "Through parameter *");
 
                     var min = 0;
 
@@ -6282,7 +6282,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var rMax1 = (max + 1) | 0;
                     var rMax2 = Bridge.identity(max1, (max1 = (max1 + 1) | 0));
                     var rMax3 = ((max2 = (max2 + 1) | 0));
-                    var rMax4 = (2 * max) | 0;
+                    var rMax4 = Bridge.Int.mul(2, max);
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2147483648", Bridge.box(rMax1, System.Int32), "Through identifier +");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("2147483647", Bridge.box(rMax2, System.Int32), "Through identifier post++");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2147483648", Bridge.box(rMax3, System.Int32), "Through identifier ++pre");
@@ -6291,7 +6291,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2147483648", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max + 1) | 0), System.Int32)), "Through parameter +");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("2147483647", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.identity(max3, (max3 = (max3 + 1) | 0)), System.Int32)), "Through parameter post++");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2147483648", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max4 = (max4 + 1) | 0)), System.Int32)), "Through parameter ++pre");
-                    Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((2 * max) | 0), System.Int32)), "Through parameter *");
+                    Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("-2", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.Int.mul(2, max), System.Int32)), "Through parameter *");
 
                     var min = -2147483648;
 
@@ -6325,7 +6325,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var rMax1 = (max + 1) >>> 0;
                     var rMax2 = Bridge.identity(max1, (max1 = (max1 + 1) >>> 0));
                     var rMax3 = ((max2 = (max2 + 1) >>> 0));
-                    var rMax4 = (2 * max) >>> 0;
+                    var rMax4 = Bridge.Int.umul(2, max);
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("0", Bridge.box(rMax1, System.UInt32), "Through identifier +");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("4294967295", Bridge.box(rMax2, System.UInt32), "Through identifier post++");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("0", Bridge.box(rMax3, System.UInt32), "Through identifier ++pre");
@@ -6334,7 +6334,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("0", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max + 1) >>> 0), System.UInt32)), "Through parameter +");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("4294967295", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.identity(max3, (max3 = (max3 + 1) >>> 0)), System.UInt32)), "Through parameter post++");
                     Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("0", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((max4 = (max4 + 1) >>> 0)), System.UInt32)), "Through parameter ++pre");
-                    Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("4294967294", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(((2 * max) >>> 0), System.UInt32)), "Through parameter *");
+                    Bridge.ClientTest.CheckedUncheckedTests.AssertEqual("4294967294", Bridge.ClientTest.CheckedUncheckedTests.Bypass(Bridge.box(Bridge.Int.umul(2, max), System.UInt32)), "Through parameter *");
 
                     var min = 0;
 
@@ -33313,29 +33313,68 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.True(System.Char.isDigit(48), "#1");
                 Bridge.Test.NUnit.Assert.False(System.Char.isDigit(46), "#2");
                 Bridge.Test.NUnit.Assert.False(System.Char.isDigit(65), "#3");
+                Bridge.Test.NUnit.Assert.False(System.Char.isDigit(256), "#4");
+            },
+            IsDigitWithStringAndIndexWorks: function () {
+                Bridge.Test.NUnit.Assert.True(System.Char.isDigit(("abc0def").charCodeAt(3)), "#1");
+                Bridge.Test.NUnit.Assert.True(System.Char.isDigit(("1").charCodeAt(0)), "#2");
+                Bridge.Test.NUnit.Assert.True(System.Char.isDigit(("abcdef5").charCodeAt(6)), "#3");
+                Bridge.Test.NUnit.Assert.True(System.Char.isDigit(("9abcdef").charCodeAt(0)), "#4");
+                Bridge.Test.NUnit.Assert.False(System.Char.isDigit((".012345").charCodeAt(0)), "#5");
+                Bridge.Test.NUnit.Assert.False(System.Char.isDigit(("012345.").charCodeAt(6)), "#6");
+                Bridge.Test.NUnit.Assert.False(System.Char.isDigit(("012.345").charCodeAt(3)), "#7");
+                Bridge.Test.NUnit.Assert.False(System.Char.isDigit(("012.345").charCodeAt(3)), "#8");
+                Bridge.Test.NUnit.Assert.False(System.Char.isDigit(("0" + String.fromCharCode(256)).charCodeAt(1)), "#9");
             },
             IsWhiteSpaceWorks: function () {
                 Bridge.Test.NUnit.Assert.True(System.Char.isWhiteSpace(String.fromCharCode(32)), "#1");
                 Bridge.Test.NUnit.Assert.True(System.Char.isWhiteSpace(String.fromCharCode(10)), "#2");
                 Bridge.Test.NUnit.Assert.False(System.Char.isWhiteSpace(String.fromCharCode(65)), "#3");
-            },
-            IsDigitWithStringAndIndexWorks: function () {
-                Bridge.Test.NUnit.Assert.True(System.Char.isDigit("abc0def".charCodeAt(3)), "#1");
-                Bridge.Test.NUnit.Assert.True(System.Char.isDigit("1".charCodeAt(0)), "#2");
-                Bridge.Test.NUnit.Assert.True(System.Char.isDigit("abcdef5".charCodeAt(6)), "#3");
-                Bridge.Test.NUnit.Assert.True(System.Char.isDigit("9abcdef".charCodeAt(0)), "#4");
-                Bridge.Test.NUnit.Assert.False(System.Char.isDigit(".012345".charCodeAt(0)), "#5");
-                Bridge.Test.NUnit.Assert.False(System.Char.isDigit("012345.".charCodeAt(6)), "#6");
-                Bridge.Test.NUnit.Assert.False(System.Char.isDigit("012.345".charCodeAt(3)), "#7");
+                Bridge.Test.NUnit.Assert.False(System.Char.isWhiteSpace(String.fromCharCode(256)), "#4");
             },
             IsWhiteSpaceWithStringAndIndexWorks: function () {
-                Bridge.Test.NUnit.Assert.True(System.Char.isWhiteSpace("abc def".charAt(3)), "#1");
-                Bridge.Test.NUnit.Assert.True(System.Char.isWhiteSpace("\t".charAt(0)), "#2");
-                Bridge.Test.NUnit.Assert.True(System.Char.isWhiteSpace("abcdef\r".charAt(6)), "#3");
-                Bridge.Test.NUnit.Assert.True(System.Char.isWhiteSpace("\nabcdef".charAt(0)), "#4");
-                Bridge.Test.NUnit.Assert.False(System.Char.isWhiteSpace(".\r\n     ".charAt(0)), "#5");
-                Bridge.Test.NUnit.Assert.False(System.Char.isWhiteSpace("\r\n    .".charAt(6)), "#6");
-                Bridge.Test.NUnit.Assert.False(System.Char.isWhiteSpace("\r  .\n  ".charAt(3)), "#7");
+                Bridge.Test.NUnit.Assert.True(System.Char.isWhiteSpace(("abc def").charAt(3)), "#1");
+                Bridge.Test.NUnit.Assert.True(System.Char.isWhiteSpace(("\t").charAt(0)), "#2");
+                Bridge.Test.NUnit.Assert.True(System.Char.isWhiteSpace(("abcdef\r").charAt(6)), "#3");
+                Bridge.Test.NUnit.Assert.True(System.Char.isWhiteSpace(("\nabcdef").charAt(0)), "#4");
+                Bridge.Test.NUnit.Assert.False(System.Char.isWhiteSpace((".\r\n     ").charAt(0)), "#5");
+                Bridge.Test.NUnit.Assert.False(System.Char.isWhiteSpace(("\r\n    .").charAt(6)), "#6");
+                Bridge.Test.NUnit.Assert.False(System.Char.isWhiteSpace(("\r  .\n  ").charAt(3)), "#7");
+                Bridge.Test.NUnit.Assert.False(System.Char.isWhiteSpace((" " + String.fromCharCode(256)).charAt(1)), "#8");
+                Bridge.Test.NUnit.Assert.True(System.Char.isWhiteSpace((" " + String.fromCharCode(256)).charAt(0)), "#9");
+            },
+            IsPunctuationWorks: function () {
+                Bridge.Test.NUnit.Assert.False(System.Char.isPunctuation(97));
+                Bridge.Test.NUnit.Assert.True(System.Char.isPunctuation(45));
+                Bridge.Test.NUnit.Assert.False(System.Char.isPunctuation(98));
+                Bridge.Test.NUnit.Assert.True(System.Char.isPunctuation(44));
+                Bridge.Test.NUnit.Assert.False(System.Char.isPunctuation(256));
+            },
+            IsPunctuationWithStringAndIndexWorks: function () {
+                var s = "a-b," + String.fromCharCode(256);
+                Bridge.Test.NUnit.Assert.False(System.Char.isPunctuation((s).charCodeAt(0)), "0");
+                Bridge.Test.NUnit.Assert.True(System.Char.isPunctuation((s).charCodeAt(1)), "1");
+                Bridge.Test.NUnit.Assert.False(System.Char.isPunctuation((s).charCodeAt(2)), "2");
+                Bridge.Test.NUnit.Assert.True(System.Char.isPunctuation((s).charCodeAt(3)), "3");
+                Bridge.Test.NUnit.Assert.False(System.Char.isPunctuation((s).charCodeAt(4)), "4");
+            },
+            IsLetterWorks: function () {
+                Bridge.Test.NUnit.Assert.False(System.Char.isLetter(48), "#1");
+                Bridge.Test.NUnit.Assert.False(System.Char.isLetter(46), "#2");
+                Bridge.Test.NUnit.Assert.True(System.Char.isLetter(65), "#3");
+                Bridge.Test.NUnit.Assert.True(System.Char.isLetter(256), "#4");
+            },
+            IsLetterWithStringAndIndexWorks: function () {
+                Bridge.Test.NUnit.Assert.False(System.Char.isLetter(("abc0def").charCodeAt(3)), "#1");
+                Bridge.Test.NUnit.Assert.False(System.Char.isLetter(("1").charCodeAt(0)), "#2");
+                Bridge.Test.NUnit.Assert.False(System.Char.isLetter(("abcdef5").charCodeAt(6)), "#3");
+                Bridge.Test.NUnit.Assert.True(System.Char.isLetter(("9abcdef").charCodeAt(1)), "#4");
+                Bridge.Test.NUnit.Assert.False(System.Char.isLetter((".012345").charCodeAt(0)), "#5");
+                Bridge.Test.NUnit.Assert.False(System.Char.isLetter(("012345.").charCodeAt(6)), "#6");
+                Bridge.Test.NUnit.Assert.False(System.Char.isLetter(("012.345").charCodeAt(3)), "#7");
+                Bridge.Test.NUnit.Assert.False(System.Char.isLetter(("012.345").charCodeAt(3)), "#8");
+                Bridge.Test.NUnit.Assert.True(System.Char.isLetter(("0" + String.fromCharCode(256)).charCodeAt(1)), "#9");
+                Bridge.Test.NUnit.Assert.False(System.Char.isLetter(("0" + String.fromCharCode(256)).charCodeAt(0)), "#10");
             }
         }
     });
@@ -37013,12 +37052,50 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var utcString = System.DateTime.format(utcNow, "o");
                 var utcFromLocalString = System.DateTime.format(localNowToUtc, "o");
 
-                Bridge.Test.NUnit.Assert.AreEqual(utcString, utcFromLocalString, "String representaions should equal");
+                var useSimpleEqual = Bridge.referenceEquals(utcString, utcFromLocalString);
+
+                if (!useSimpleEqual) {
+                    // Some browsers may get result diff of 10000 ticks
+                    // So allow tick diff be different not more than 10000 ticks in string representations
+                    try {
+                        var utcParts = System.String.split(utcString, [46].map(function(i) {{ return String.fromCharCode(i); }}));
+                        var utcFromLocalParts = System.String.split(utcFromLocalString, [46].map(function(i) {{ return String.fromCharCode(i); }}));
+
+                        if (!Bridge.referenceEquals(utcParts[System.Array.index(0, utcParts)], utcFromLocalParts[System.Array.index(0, utcFromLocalParts)]) || utcParts.length !== utcFromLocalParts.length) {
+                            useSimpleEqual = true;
+                        } else {
+                            var utcTicksString = utcParts[System.Array.index(1, utcParts)];
+                            var utcFromLocalTicksString = utcFromLocalParts[System.Array.index(1, utcFromLocalParts)];
+
+                            if (utcTicksString.length === utcFromLocalTicksString.length && System.Linq.Enumerable.from(utcTicksString).last() === 90 && System.Linq.Enumerable.from(utcFromLocalTicksString).last() === 90) {
+                                var utcTicks = System.Int32.parse(System.String.remove(utcTicksString, ((utcTicksString.length - 1) | 0)));
+                                var utcFromLocalTicks = System.Int32.parse(System.String.remove(utcFromLocalTicksString, ((utcFromLocalTicksString.length - 1) | 0)));
+
+                                var utcTicksDiff = (utcTicks - utcFromLocalTicks) | 0;
+
+                                var message = System.String.format("String representaions should equal {0} vs {1}; (Abs(Diff({2}, {3})) = {4}) <= 10000", utcString, utcFromLocalString, Bridge.box(utcTicks, System.Int32), Bridge.box(utcFromLocalTicks, System.Int32), Bridge.box(utcTicksDiff, System.Int32));
+
+                                Bridge.Test.NUnit.Assert.True(Math.abs(utcTicksDiff) <= 10000, message);
+                            } else {
+                                useSimpleEqual = true;
+                            }
+                        }
+                    }
+                    catch ($e1) {
+                        $e1 = System.Exception.create($e1);
+                        useSimpleEqual = true;
+                    }
+
+                }
+
+                if (useSimpleEqual) {
+                    Bridge.Test.NUnit.Assert.AreEqual(utcString, utcFromLocalString, "String representaions should equal");
+                }
 
                 var fromLocal = System.DateTime.create(System.DateTime.getYear(localNowToUtc), System.DateTime.getMonth(localNowToUtc), System.DateTime.getDay(localNowToUtc), System.DateTime.getHour(localNowToUtc), System.DateTime.getMinute(localNowToUtc), System.DateTime.getSecond(localNowToUtc), System.DateTime.getMillisecond(localNowToUtc));
                 var tickDiff = System.DateTime.getTicks(fromLocal).sub(System.DateTime.getTicks(utcNow));
 
-                Bridge.Test.NUnit.Assert.True(tickDiff.abs().lt(System.Int64(10000)), "Tick diff: Abs(" + tickDiff + ") < 10000");
+                Bridge.Test.NUnit.Assert.True(tickDiff.abs().lte(System.Int64(10000)), "Tick diff: Abs(" + tickDiff + ") <= 10000");
 
                 var dateDiff = System.DateTime.subdd(fromLocal, utcNow);
                 var minutes = dateDiff.getTotalMinutes();
@@ -44068,7 +44145,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             TaskTypePropertiesAreCorrect: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("System.Threading.Tasks.Task", Bridge.Reflection.getTypeFullName(System.Threading.Tasks.Task), "FullName for non-generic task should be correct");
-                Bridge.Test.NUnit.Assert.AreEqual("System.Threading.Tasks.Task`1", Bridge.Reflection.getTypeFullName(System.Threading.Tasks.Task$1), "FullName for generic task should be correct");
+                Bridge.Test.NUnit.Assert.AreEqual("System.Threading.Tasks.Task`1[[System.Int32, mscorlib]]", Bridge.Reflection.getTypeFullName(System.Threading.Tasks.Task$1(System.Int32)), "FullName for generic task should be correct");
 
                 var task = new System.Threading.Tasks.TaskCompletionSource().task;
                 Bridge.Test.NUnit.Assert.True(Bridge.hasValue(task));
@@ -44777,7 +44854,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.Test.NUnit.Assert.False(continuationRun, "Continuation should not be run too early.");
                 });
 
-                var task = System.Threading.Tasks.Task.whenAll(this.MakeEnumerable(Bridge.global.System.Threading.Tasks.Task$1, [tcs1.task, tcs2.task, tcs3.task]));
+                var task = System.Threading.Tasks.Task.whenAll(this.MakeEnumerable(Bridge.global.System.Threading.Tasks.Task$1(System.Int32), [tcs1.task, tcs2.task, tcs3.task]));
 
                 var doneTask = task.continueWith(function (t) {
                     Bridge.Test.NUnit.Assert.False(continuationRun, "Continuation should only be run once.");
@@ -45060,7 +45137,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var tcs2 = new System.Threading.Tasks.TaskCompletionSource();
                 var tcs3 = new System.Threading.Tasks.TaskCompletionSource();
 
-                var task = System.Threading.Tasks.Task.whenAny(this.MakeEnumerable(Bridge.global.System.Threading.Tasks.Task$1, [tcs1.task, tcs2.task, tcs3.task]));
+                var task = System.Threading.Tasks.Task.whenAny(this.MakeEnumerable(Bridge.global.System.Threading.Tasks.Task$1(System.Int32), [tcs1.task, tcs2.task, tcs3.task]));
 
                 var task1 = task.continueWith(function (t) {
                     Bridge.Test.NUnit.Assert.False(continuationRun, "Continuation should only be run once.");
@@ -45185,7 +45262,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var tcs3 = new System.Threading.Tasks.TaskCompletionSource();
                 var ex = new System.Exception("Some text");
 
-                var task = System.Threading.Tasks.Task.whenAny(this.MakeEnumerable(Bridge.global.System.Threading.Tasks.Task$1, [tcs1.task, tcs2.task, tcs3.task]));
+                var task = System.Threading.Tasks.Task.whenAny(this.MakeEnumerable(Bridge.global.System.Threading.Tasks.Task$1(System.Int32), [tcs1.task, tcs2.task, tcs3.task]));
 
                 var task1 = task.continueWith(function (t) {
                     Bridge.Test.NUnit.Assert.False(continuationRun, "Continuation should only be run once.");
@@ -45225,7 +45302,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var tcs2 = new System.Threading.Tasks.TaskCompletionSource();
                 var tcs3 = new System.Threading.Tasks.TaskCompletionSource();
 
-                var task = System.Threading.Tasks.Task.whenAny(this.MakeEnumerable(Bridge.global.System.Threading.Tasks.Task$1, [tcs1.task, tcs2.task, tcs3.task]));
+                var task = System.Threading.Tasks.Task.whenAny(this.MakeEnumerable(Bridge.global.System.Threading.Tasks.Task$1(System.Int32), [tcs1.task, tcs2.task, tcs3.task]));
 
                 var task1 = task.continueWith(function (t) {
                     Bridge.Test.NUnit.Assert.False(continuationRun, "Continuation should only be run once.");
@@ -45363,7 +45440,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 var taskRun = false, continuationRun = false;
 
-                var task = new System.Threading.Tasks.Task$1(function () {
+                var task = new (System.Threading.Tasks.Task$1(System.Int32))(function () {
                     taskRun = true;
                     return 42;
                 });
@@ -45399,7 +45476,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var taskRun = false, continuationRun = false;
                 var state = {  };
 
-                var task = new System.Threading.Tasks.Task$1(function (s) {
+                var task = new (System.Threading.Tasks.Task$1(System.Int32))(function (s) {
                     Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(state, s), "The state should be correct.");
                     taskRun = true;
                     return 42;
