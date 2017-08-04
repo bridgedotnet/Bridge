@@ -165,7 +165,7 @@ namespace Bridge.Translator
             return 0;
         }
 
-        private static string GetBoxedType(IType itype, IEmitter emitter)
+        internal static string GetBoxedType(IType itype, IEmitter emitter)
         {
             if (NullableType.IsNullable(itype))
             {
