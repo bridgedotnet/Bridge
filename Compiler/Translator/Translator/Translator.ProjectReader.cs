@@ -104,7 +104,7 @@ namespace Bridge.Translator
             {
                 foreach (var tag in combined_tags)
                 {
-                    if (tag.Value == CS.NS.ROOT)
+                    if (tag.Value == CS.NS.BRIDGE)
                     {
                         valid = false;
                         if (!failList.Contains(tag.Value))

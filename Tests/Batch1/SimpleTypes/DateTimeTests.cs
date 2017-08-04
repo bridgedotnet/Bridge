@@ -2,6 +2,7 @@
 using Bridge.ClientTestHelper;
 using System;
 using System.Globalization;
+using System.Linq;
 
 namespace Bridge.ClientTest.SimpleTypes
 {
@@ -212,12 +213,62 @@ namespace Bridge.ClientTest.SimpleTypes
             var utcString = utcNow.ToString("o");
             var utcFromLocalString = localNowToUtc.ToString("o");
 
-            Assert.AreEqual(utcString, utcFromLocalString, "String representaions should equal");
+            var useSimpleEqual = utcString == utcFromLocalString;
+
+            if (!useSimpleEqual)
+            {
+                // Some browsers may get result diff of 10000 ticks
+                // So allow tick diff be different not more than 10000 ticks in string representations
+                try
+                {
+                    var utcParts = utcString.Split('.');
+                    var utcFromLocalParts = utcFromLocalString.Split('.');
+
+                    if (utcParts[0] != utcFromLocalParts[0] || utcParts.Length != utcFromLocalParts.Length)
+                    {
+                        useSimpleEqual = true;
+                    }
+                    else
+                    {
+                        var utcTicksString = utcParts[1];
+                        var utcFromLocalTicksString = utcFromLocalParts[1];
+
+                        if (utcTicksString.Length == utcFromLocalTicksString.Length
+                            && utcTicksString.Last() == 'Z'
+                            && utcFromLocalTicksString.Last() == 'Z')
+                        {
+                            var utcTicks = int.Parse(utcTicksString.Remove(utcTicksString.Length - 1));
+                            var utcFromLocalTicks = int.Parse(utcFromLocalTicksString.Remove(utcFromLocalTicksString.Length - 1));
+
+                            var utcTicksDiff = utcTicks - utcFromLocalTicks;
+
+                            var message = string.Format("String representaions should equal {0} vs {1}; (Abs(Diff({2}, {3})) = {4}) <= 10000",
+                                utcString, utcFromLocalString, utcTicks, utcFromLocalTicks, utcTicksDiff);
+
+                            Assert.True(Math.Abs(utcTicksDiff) <= 10000, message);
+                        }
+                        else
+                        {
+                            useSimpleEqual = true;
+                        }
+                    }
+                }
+                catch
+                {
+                    useSimpleEqual = true;
+                }
+
+            }
+
+            if (useSimpleEqual)
+            {
+                Assert.AreEqual(utcString, utcFromLocalString, "String representaions should equal");
+            }
 
             var fromLocal = new DateTime(localNowToUtc.Year, localNowToUtc.Month, localNowToUtc.Day, localNowToUtc.Hour, localNowToUtc.Minute, localNowToUtc.Second, localNowToUtc.Millisecond);
             var tickDiff = fromLocal.Ticks - utcNow.Ticks;
 
-            Assert.True(Math.Abs(tickDiff) < 10000, "Tick diff: Abs(" + tickDiff + ") < 10000");
+            Assert.True(Math.Abs(tickDiff) <= 10000, "Tick diff: Abs(" + tickDiff + ") <= 10000");
 
             var dateDiff = fromLocal - utcNow;
             var minutes = dateDiff.TotalMinutes;
@@ -609,7 +660,7 @@ namespace Bridge.ClientTest.SimpleTypes
         //    DateHelper.AssertDate(utc, d2);
         //}
 
-        // Not Supported in 16.0.0-rc
+        // Not Supported in 16.0.0
         //[Test]
         //public void ParseWithLocalKinds()
         //{
@@ -636,7 +687,7 @@ namespace Bridge.ClientTest.SimpleTypes
         //    }, "d3: ");
         //}
 
-        // Not Supported in 16.0.0-rc
+        // Not Supported in 16.0.0
         //[Test]
         //public void ParseWithDifferentKinds()
         //{

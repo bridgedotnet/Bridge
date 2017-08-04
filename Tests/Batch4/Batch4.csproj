@@ -48,7 +48,6 @@
     <Compile Include="ActivatorTests.cs" />
     <Compile Include="SimpleTypes\JsDateTests.cs" />
     <Compile Include="TestHelper.cs" />
-    <Compile Include="RefParameterTests.cs" />
     <Compile Include="AppDomainTests.cs" />
     <Compile Include="FormattableStringTests.cs" />
     <Compile Include="CustomInitializationTests.cs" />
@@ -90,11 +89,10 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Bridge.Test, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Bridge.Test.Core.1.0.0-beta5\lib\net40\Bridge.Test.dll</HintPath>
+      <HintPath>..\..\packages\Bridge.Test.Core.1.0.0\lib\net40\Bridge.Test.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir).nuget\NuGet.targets" Condition="Exists('$(SolutionDir).nuget\NuGet.targets')" />
   <Target Name="CleanBridgeTest" BeforeTargets="Clean">

@@ -353,8 +353,7 @@ namespace Bridge.Translator
                 if (value is string)
                 {
                     name = this.GetEntityName(member);
-                    //name = Helpers.ConvertNameTokens(value.ToString(), member.Name);
-                    if (!isIgnore && member.IsStatic && Helpers.IsReservedStaticName(name))
+                    if (!isIgnore && member.IsStatic && Helpers.IsReservedStaticName(name, false))
                     {
                         name = Helpers.ChangeReservedWord(name);
                     }

@@ -1,5 +1,5 @@
 /**
- * @compiler Bridge.NET 16.0.0-rc
+ * @compiler Bridge.NET 16.0.0
  */
 Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals) {
     
@@ -22,7 +22,6 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
             QUnit.test("ErrorExceptionTests - ErrorAndMessageAndInnerExceptionConstructorWorks_SPI_1564", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.ErrorExceptionTests.ErrorAndMessageAndInnerExceptionConstructorWorks_SPI_1564);
             QUnit.test("FormattableStringTests - ToStringWithFormatProviderWorks_SPI_1651", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.FormattableStringTests.ToStringWithFormatProviderWorks_SPI_1651);
             QUnit.test("FormattableStringTests - IFormattableToStringWorks_SPI_1633_1651", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.FormattableStringTests.IFormattableToStringWorks_SPI_1633_1651);
-            QUnit.test("RefParameterTests - CanUseReferenceToThis_SPI_1569", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.RefParameterTests.CanUseReferenceToThis_SPI_1569);
             QUnit.test("RuntimeHelpersTests - GetHashCodeCallsGetHashCodeNonVirtually_SPI_1570", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.RuntimeHelpersTests.GetHashCodeCallsGetHashCodeNonVirtually_SPI_1570);
             QUnit.test("JsonTests - NonGenericParseWorks_SPI_1574", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.JsonTests.NonGenericParseWorks_SPI_1574);
             QUnit.test("JsonTests - GenericParseWorks", Bridge.Test.Runtime.BridgeClientTestBatch4Runner.JsonTests.GenericParseWorks);
@@ -521,31 +520,6 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch4", function ($asm, globals)
                 var $t;
                 if (this.context == null) {
                     this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.Serialization.JsonTests", $t.File = "Batch4\\Serialization\\JsonTests.cs", $t);
-                }
-                return this.context;
-            }
-        }
-    });
-
-    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch4Runner.RefParameterTests", {
-        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.RefParameterTests)],
-        statics: {
-            methods: {
-                CanUseReferenceToThis_SPI_1569: function (assert) {
-                    var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch4.RefParameterTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestBatch4Runner.RefParameterTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "CanUseReferenceToThis_SPI_1569()", $t.Line = "82", $t));
-                    t.Fixture.CanUseReferenceToThis_SPI_1569();
-                }
-            }
-        },
-        fields: {
-            context: null
-        },
-        methods: {
-            GetContext: function () {
-                var $t;
-                if (this.context == null) {
-                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch4", $t.ClassName = "Bridge.ClientTest.Batch4.RefParameterTests", $t.File = "Batch4\\RefParameterTests.cs", $t);
                 }
                 return this.context;
             }
