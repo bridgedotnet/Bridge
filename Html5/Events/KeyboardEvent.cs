@@ -65,7 +65,7 @@ namespace Bridge.Html5
         /// <summary>
         /// The location of the key on the keyboard or other input device
         /// </summary>
-        public readonly KeyLocation Location;
+        public readonly Union<ulong, KeyLocation> Location;
 
         /// <summary>
         /// Indicates whether the "meta" key was pressed when the event fired.
@@ -1236,32 +1236,33 @@ namespace Bridge.Html5
     public class KeyboardEventInit : UIEventInit
     {
         /// <summary>
-        /// optional and defaulting to "", of type DOMString, that sets the value of KeyboardEvent.key.
+        /// Optional and defaulting to "", of type DOMString, that sets the value of KeyboardEvent.Key.
         /// </summary>
         public string Key;
 
         /// <summary>
-        /// optional and defaulting to "", of type DOMString, that sets the value of KeyboardEvent.code.
+        /// Optional and defaulting to "", of type DOMString, that sets the value of KeyboardEvent.Code.
         /// </summary>
         public string Code;
 
         /// <summary>
-        /// optional and defaulting to 0, of type unsigned long, that sets the value of KeyboardEvent.location.
+        /// The location of the key on the keyboard or other input device.
+        /// Optional and defaulting to Standard (0), of type unsigned long, that sets the value of KeyboardEvent.Location.
         /// </summary>
-        public long Location;
+        public Union<ulong, KeyLocation> Location;
 
         /// <summary>
-        /// optional and defaulting to false, of type Boolean, that sets the value of KeyboardEvent.repeat.
+        /// Optional and defaulting to false, of type Boolean, that sets the value of KeyboardEvent.Repeat.
         /// </summary>
         public bool Repeat;
 
         /// <summary>
-        /// optional and defaulting to false, of type Boolean, that sets the value of KeyboardEvent.isComposing.
+        /// Optional and defaulting to false, of type Boolean, that sets the value of KeyboardEvent.IsComposing.
         /// </summary>
         public bool IsComposing;
 
         /// <summary>
-        /// optional and defaulting to 0, of type unsigned long, that sets the value of the deprecated KeyboardEvent.which.
+        /// Optional and defaulting to 0, of type unsigned long, that sets the value of the deprecated KeyboardEvent.Which.
         /// </summary>
         public long Which;
 
