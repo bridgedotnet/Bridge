@@ -365,7 +365,7 @@ namespace Bridge.Translator
 
             if (attr == null)
             {
-                isNative = typeDefinition.ParentAssembly.AssemblyName == CS.NS.ROOT || !this.IsExternalType(typeDefinition);
+                isNative = typeDefinition.ParentAssembly.AssemblyName == CS.NS.BRIDGE || !this.IsExternalType(typeDefinition);
             }
 
             return attr != null;

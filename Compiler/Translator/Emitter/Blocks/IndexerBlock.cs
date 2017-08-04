@@ -344,7 +344,7 @@ namespace Bridge.Translator
                     else
                     {
                         nativeImplementation =
-                            memberResolveResult.Member.DeclaringTypeDefinition.ParentAssembly.AssemblyName == CS.NS.ROOT ||
+                            memberResolveResult.Member.DeclaringTypeDefinition.ParentAssembly.AssemblyName == CS.NS.BRIDGE ||
                             !this.Emitter.Validator.IsExternalType(memberResolveResult.Member.DeclaringTypeDefinition);
                     }
 

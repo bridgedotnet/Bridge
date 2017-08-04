@@ -108,11 +108,6 @@ namespace Bridge.Translator
                     IsObjectLiteral = this.IsObjectLiteral(typeDeclaration),
                     Type = rr.Type
                 };
-
-                if (parentTypeInfo != null && JS.Reserved.StaticNames.Any(n => String.Equals(this.CurrentType.Name, n, StringComparison.InvariantCultureIgnoreCase)))
-                {
-                    throw new EmitterException(typeDeclaration, "Nested class cannot have such name: " + this.CurrentType.Name + ". Please rename it.");
-                }
             }
             else
             {
@@ -624,7 +619,7 @@ namespace Bridge.Translator
                             name = (bool)value ? Object.Net.Utilities.StringUtils.ToLowerCamelCase(member.Member.Name) : member.Member.Name;
                         }
 
-                        if (member.Member.IsStatic && Helpers.IsReservedStaticName(name))
+                        if (member.Member.IsStatic && Helpers.IsReservedStaticName(name, false))
                         {
                             name = Helpers.ChangeReservedWord(name);
                         }

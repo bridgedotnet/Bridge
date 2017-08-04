@@ -149,11 +149,11 @@ namespace Bridge.ClientTest.BasicCSharp
             }
         }
 
-        //[Test]
-        //public void CanUseReferenceToThis_SPI_1569()
-        //{
-        //    // #1569
-        //    new S().RefThisTest();
-        //}
+        [Test]
+        public void CanUseReferenceToThis_SPI_1569()
+        {
+            // #1569
+            new S().RefThisTest();
+        }
     }
 }

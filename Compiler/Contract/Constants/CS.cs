@@ -4,8 +4,19 @@
     {
         public class NS
         {
-            public const string ROOT = "Bridge";
-            public const string System = "System";
+            public const string GLOBAL = "global::";
+            public const string BRIDGE = "Bridge";
+            public const string SYSTEM = "System";
+        }
+
+        public class Bridge
+        {
+            public const string DOTNAME = NS.BRIDGE + ".";
+        }
+
+        public class System
+        {
+            public const string DOTNAME = NS.SYSTEM + ".";
         }
 
         public class Attributes

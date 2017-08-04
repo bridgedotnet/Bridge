@@ -295,6 +295,12 @@
                     private const string DOTNAME_GENERIC = NAME_GENERIC + ".";
                 }
 
+                public class Global
+                {
+                    public const string NAME = Bridge.DOTNAME + "global";
+                    public const string DOTNAME = NAME + ".";
+                }
+
                 public class Reflection
                 {
                     public const string NAME = Bridge.DOTNAME + "Reflection";
@@ -337,7 +343,7 @@
 
         public class Reserved
         {
-            public static readonly List<string> StaticNames = new List<string> { "Name", "Arguments", "Caller", "Length", "Prototype", "ctor" };
+            public static readonly List<string> StaticNames = new List<string> { "name", "arguments", "caller", "length", "prototype", "ctor" };
             public static readonly string[] Words = new string[]
             {
                 "Bridge", "__proto__", "abstract", "arguments", "as", "boolean", "break", "byte", "case", "catch", "char",

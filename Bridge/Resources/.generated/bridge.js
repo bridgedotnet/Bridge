@@ -828,7 +828,7 @@
 
         as: function (obj, type, allowNull) {
             if (Bridge.is(obj, type, false, allowNull)) {
-                return obj.$boxed && type !== Object && type !== System.Object ? obj.v : obj;
+                return obj != null && obj.$boxed && type !== Object && type !== System.Object ? obj.v : obj;
             }
             return null;
         },
@@ -1890,12 +1890,15 @@
                     return Bridge.box(intValue.v, enumType, function (obj) { return System.Enum.toString(enumType, obj); });
                 }
 
-                var values = enumType;
+                var names = System.Enum.getNames(enumType),
+                    values = enumType;
 
                 if (!enumType.prototype || !enumType.prototype.$flags) {
-                    for (var f in values) {
-                        if (enumMethods.nameEquals(f, s, ignoreCase)) {
-                            return Bridge.box(values[f], enumType, function (obj) { return System.Enum.toString(enumType, obj); });
+                    for (var i = 0; i < names.length; i++) {
+                        var name = names[i];
+
+                        if (enumMethods.nameEquals(name, s, ignoreCase)) {
+                            return Bridge.box(values[name], enumType, function (obj) { return System.Enum.toString(enumType, obj); });
                         }
                     }
                 } else {
@@ -1907,9 +1910,11 @@
                         var part = parts[i].trim(),
                             found = false;
 
-                        for (var f in values) {
-                            if (enumMethods.nameEquals(f, part, ignoreCase)) {
-                                value |= values[f];
+                        for (var n = 0; n < names.length; n++) {
+                            var name = names[n];
+
+                            if (enumMethods.nameEquals(name, part, ignoreCase)) {
+                                value |= values[name];
                                 found = true;
 
                                 break;
@@ -1960,49 +1965,93 @@
             System.Enum.checkEnumType(enumType);
 
             var values = enumType,
+                names = System.Enum.getNames(enumType),
                 isLong = System.Int64.is64Bit(value);
 
             if (((!enumType.prototype || !enumType.prototype.$flags) && forceFlags !== true) || (value === 0)) {
-                for (var i in values) {
-                    if (isLong && System.Int64.is64Bit(values[i]) ? (values[i].eq(value)) : (values[i] === value)) {
-                        return enumMethods.toName(i);
+                for (var i = 0; i < names.length; i++) {
+                    var name = names[i];
+
+                    if (isLong && System.Int64.is64Bit(values[name]) ? (values[name].eq(value)) : (values[name] === value)) {
+                        return enumMethods.toName(name);
                     }
                 }
 
                 //throw new System.ArgumentException('Invalid Enumeration Value');
                 return value.toString();
             } else {
-                var parts = [];
+                var parts = [],
+                    entries = System.Enum.getValuesAndNames(enumType),
+                    index = entries.length - 1,
+                    saveResult = value;
 
-                for (var i in values) {
-                    if (isLong && System.Int64.is64Bit(values[i]) ? (!values[i].and(value).isZero()) : (values[i] & value)) {
-                        parts.push(enumMethods.toName(i));
+                while (index >= 0) {
+                    var entry = entries[index],
+                        long = isLong && System.Int64.is64Bit(entry.value);
+
+                    if ((index == 0) && (long ? entry.value.isZero() : entry.value == 0)) {
+                        break;
                     }
+
+                    if (long ? (value.and(entry.value).eq(entry.value)) : ((value & entry.value) == entry.value)) {
+                        if (long) {
+                            value = value.sub(entry.value);
+                        } else {
+                            value -= entry.value;
+                        }
+
+                        parts.unshift(entry.name);
+                    }
+
+                    index--;
                 }
 
-                if (!parts.length) {
-                    //throw new System.ArgumentException('Invalid Enumeration Value');
-                    return value.toString();
+                if (isLong ? !value.isZero() : value !== 0) {
+                    return saveResult.toString();
+                }
+
+                if (isLong ? saveResult.isZero() : saveResult === 0) {
+                    var entry = entries[0];
+                    if (entry && (System.Int64.is64Bit(entry.value) ? entry.value.isZero() : (entry.value == 0))) {
+                        return entry.name;
+                    }
+
+                    return "0";
                 }
 
                 return parts.join(', ');
             }
         },
 
+        getValuesAndNames: function (enumType) {
+            System.Enum.checkEnumType(enumType);
+
+            var parts = [],
+                names = System.Enum.getNames(enumType),
+                values = enumType;
+
+            for (var i = 0; i < names.length; i++) {
+                parts.push({ name: names[i], value: values[names[i]] });
+            }
+
+            return parts.sort(function (i1, i2) {
+                return System.Int64.is64Bit(i1.value) ? i1.value.sub(i2.value).sign() : (i1.value - i2.value);
+            });
+        },
+
         getValues: function (enumType) {
             System.Enum.checkEnumType(enumType);
 
             var parts = [],
+                names = System.Enum.getNames(enumType),
                 values = enumType;
 
-            for (var i in values) {
-                if (values.hasOwnProperty(i) && i.indexOf("$") < 0 && typeof values[i] !== "function") {
-                    parts.push(values[i]);
-                }
+            for (var i = 0; i < names.length; i++) {
+                parts.push(values[names[i]]);
             }
 
             return parts.sort(function (i1, i2) {
-                return i1 - i2;
+                return System.Int64.is64Bit(i1) ? i1.sub(i2).sign() : (i1 - i2);
             });
         },
 
@@ -2041,6 +2090,10 @@
             var parts = [],
                 values = enumType;
 
+            if (enumType.$names) {
+                return enumType.$names.slice(0);
+            }
+
             for (var i in values) {
                 if (values.hasOwnProperty(i) && i.indexOf("$") < 0 && typeof values[i] !== "function") {
                     parts.push([enumMethods.toName(i), values[i]]);
@@ -2048,7 +2101,7 @@
             }
 
             return parts.sort(function (i1, i2) {
-                return i1[1] - i2[1];
+                return System.Int64.is64Bit(i1[1]) ? i1[1].sub(i2[1]).sign() : (i1[1] - i2[1]);
             }).map(function (i) {
                 return i[0];
             });
@@ -2061,16 +2114,22 @@
                 throw new System.ArgumentNullException("value");
             }
 
-            if (!(typeof (value) === "number" && Math.floor(value, 0) === value)) {
+            var isLong = System.Int64.is64Bit(value);
+
+            if (!isLong && !(typeof (value) === "number" && Math.floor(value, 0) === value)) {
                 throw new System.ArgumentException("Argument must be integer", "value");
             }
 
             System.Enum.checkEnumType(enumType);
 
-            var values = enumType;
-            for (var i in values) {
-                if (values[i] === value) {
-                    return i;
+            var names = System.Enum.getNames(enumType),
+                values = enumType;
+
+            for (var i = 0; i < names.length; i++) {
+                var name = names[i];
+
+                if (isLong ? value.eq(values[name]) : (values[name] === value)) {
+                    return name;
                 }
             }
 
@@ -2079,7 +2138,8 @@
 
         hasFlag: function (value, flag) {
             flag = Bridge.unbox(flag, true);
-            return flag === 0 || !!(value & flag);
+            var isLong = System.Int64.is64Bit(value);
+            return flag === 0 || (isLong ? !value.and(flag).isZero() : !!(value & flag));
         },
 
         isDefined: function (enumType, value) {
@@ -2088,10 +2148,13 @@
             System.Enum.checkEnumType(enumType);
 
             var values = enumType,
-                isString = Bridge.isString(value);
+                names = System.Enum.getNames(enumType),
+                isString = Bridge.isString(value),
+                isLong = System.Int64.is64Bit(value);
 
-            for (var i in values) {
-                if (isString ? enumMethods.nameEquals(i, value, false) : values[i] === value) {
+            for (var i = 0; i < names.length; i++) {
+                var name = names[i];
+                if (isString ? enumMethods.nameEquals(name, value, false) : (isLong ? value.eq(values[name]) : (values[name] === value))) {
                     return true;
                 }
             }
@@ -2117,11 +2180,11 @@
                 }
             }
 
-            return Bridge.unbox(v1, true) === Bridge.unbox(v2, true);
+            return System.Enum.equalsT(v1, v2);
         },
 
         equalsT: function (v1, v2) {
-            return Bridge.unbox(v1, true) === Bridge.unbox(v2, true);
+            return Bridge.equals(Bridge.unbox(v1, true), Bridge.unbox(v2, true));
         }
     };
 
@@ -2380,6 +2443,7 @@
 
                 for (var i = 0; i < keys.length; i++) {
                     var name = keys[i];
+
                     if (reserved.indexOf(name) === -1) {
                         to[name] = obj[name];
                     }
@@ -2393,32 +2457,40 @@
                     Bridge.apply(to, obj.methods);
                 }
 
-                var config = {};
+                var config = {},
+                    write = false;
+
                 if (obj.props) {
                     config.properties = obj.props;
-                }
-                else if (obj.properties) {
+                    write = true;
+                } else if (obj.properties) {
                     config.properties = obj.properties;
+                    write = true;
                 }
 
                 if (obj.events) {
                     config.events = obj.events;
+                    write = true;
                 }
 
                 if (obj.alias) {
                     config.alias = obj.alias;
+                    write = true;
                 }
 
                 if (obj.ctors) {
                     if (obj.ctors.init) {
                         config.init = obj.ctors.init;
+                        write = true;
                         delete obj.ctors.init;
                     }
 
                     Bridge.apply(to, obj.ctors);
                 }
 
-                to.$config = config;
+                if (write) {
+                    to.$config = config;
+                }
             };
 
             if (obj.main) {
@@ -2485,7 +2557,7 @@
                     obj = prop.apply(null, args);
                     c = Bridge.define(Bridge.Class.genericName(className, args), obj, true, { fn: fn, args: args });
 
-                    if (!Bridge.Class.staticInitAllow) {
+                    if (!Bridge.Class.staticInitAllow && !Bridge.Class.queueIsBlocked) {
                         Bridge.Class.$queue.push(c);
                     }
 
@@ -2746,8 +2818,25 @@
                     if (name === "ctor") {
                         Class["$ctor"] = member;
                     } else {
+                        if (prop.$kind === "enum" && !Bridge.isFunction(member) && name.charAt(0) !== "$") {
+                            Class.$names = Class.$names || [];
+                            Class.$names.push({name: name, value: member});
+                        }
+
                         Class[name] = member;
                     }
+                }
+
+                if (prop.$kind === "enum" && Class.$names) {
+                    Class.$names = Class.$names.sort(function (i1, i2) {
+                        if (Bridge.isFunction(i1.value.eq)) {
+                            return i1.value.sub(i2.value).sign();
+                        }
+
+                        return i1.value - i2.value;
+                    }).map(function(i) {
+                        return i.name;
+                    });
                 }
             }
 
@@ -2758,7 +2847,7 @@
             Bridge.Class.setInheritors(Class, extend);
 
             fn = function () {
-                if (Bridge.Class.staticInitAllow) {
+                if (Bridge.Class.staticInitAllow && !Class.$isGenericTypeDefinition) {
                     Class.$staticInit = null;
 
                     if (Class.$initMembers) {
@@ -2897,7 +2986,7 @@
                             descriptor = descriptors[i];
                             break;
                         }
-                    }    
+                    }
                 }
 
                 var dcount = key.split("$").length;
@@ -3152,8 +3241,16 @@
             fn.$staticInit = function() {
                 fn.$typeArguments = Bridge.Reflection.createTypeParams(prop);
 
+                var old = Bridge.Class.staticInitAllow,
+                    oldIsBlocked = Bridge.Class.queueIsBlocked;
+                Bridge.Class.staticInitAllow = false;
+                Bridge.Class.queueIsBlocked = true;
+
                 var cfg = prop.apply(null, fn.$typeArguments),
                     extend = cfg.$inherits || cfg.inherits;
+
+                Bridge.Class.staticInitAllow = old;
+                Bridge.Class.queueIsBlocked = oldIsBlocked;
 
                 if (extend && Bridge.isFunction(extend)) {
                     extend = extend();
@@ -3205,7 +3302,7 @@
                              cls[name]();
                         });
                     })(t, t.prototype.$main.name || "Main");
-                    
+
                     t.prototype.$main = null;
                 }
             }
@@ -3240,7 +3337,12 @@
         Bridge.$currentAssembly = asm;
 
         if (callback) {
+            var old = Bridge.Class.staticInitAllow;
+            Bridge.Class.staticInitAllow = false;
+
             callback.call(Bridge.global, asm, Bridge.global);
+
+            Bridge.Class.staticInitAllow = old;
         }
 
         Bridge.init();
@@ -6726,17 +6828,25 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 return ((al * bl) + (((ah * bl + al * bh) << 16) >>> 0) | 0);
             },
 
-            mul: function (a, b) {
+            mul: function (a, b, overflow) {
                 if (a == null || b == null) {
                     return null;
+                }
+
+                if (overflow) {
+                    Bridge.Int.check(a * b, System.Int32)
                 }
 
                 return Bridge.Int.$mul(a, b);
             },
 
-            umul: function (a, b) {
+            umul: function (a, b, overflow) {
                 if (a == null || b == null) {
                     return null;
+                }
+
+                if (overflow) {
+                    Bridge.Int.check(a * b, System.UInt32)
                 }
 
                 return Bridge.Int.$mul(a, b) >>> 0;
@@ -10781,12 +10891,13 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
             if (Bridge.isArray(obj)) {
                 return obj.$type && Bridge.getDefaultValue(obj.$type.$elementType) != null ? Bridge.box(obj[idx], obj.$type.$elementType) : obj[idx];
+            } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem"])) {
+                v = obj[name](idx);
+                return v;
             } else if (Bridge.isFunction(obj.get)) {
                 v = obj.get(idx);
             } else if (Bridge.isFunction(obj.getItem)) {
                 v = obj.getItem(idx);
-            } else if (T && Bridge.isFunction(obj[name = "System$Collections$Generic$IList$1$" + Bridge.getTypeAlias(T) + "$getItem"])) {
-                v = obj[name](idx);
             } else if (Bridge.isFunction(obj[name = "System$Collections$IList$$getItem"])) {
                 v = obj[name](idx);
             } else if (Bridge.isFunction(obj.get_Item)) {
@@ -13500,12 +13611,14 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
         }
     });
 
-    Bridge.define("System.Threading.Tasks.Task$1", {
-        inherits: [System.Threading.Tasks.Task],
-        ctor: function (action, state) {
-            this.$initialize();
-            System.Threading.Tasks.Task.ctor.call(this, action, state);
-        }
+    Bridge.define("System.Threading.Tasks.Task$1", function (T) {
+        return {
+            inherits: [System.Threading.Tasks.Task],
+            ctor: function(action, state) {
+                this.$initialize();
+                System.Threading.Tasks.Task.ctor.call(this, action, state);
+            }
+        };
     });
 
     Bridge.define("System.Threading.Tasks.TaskStatus", {

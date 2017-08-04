@@ -257,7 +257,7 @@ namespace Bridge.Translator
             var finallyBlock = new BlockStatement();
             var dispose = new InvocationExpression(
                 new MemberReferenceExpression(
-                    new MemberReferenceExpression(new IdentifierExpression(CS.NS.ROOT), "Script"), "Write"),
+                    new MemberReferenceExpression(new IdentifierExpression(CS.NS.BRIDGE), "Script"), "Write"),
                 new PrimitiveExpression(
                     string.Format("if (" + JS.Funcs.BRIDGE_HASVALUE + "({0})) {0}." + JS.Funcs.DISPOSE + "();", name))
             );
@@ -323,7 +323,7 @@ namespace Bridge.Translator
 
                     if (isPost && !isStatement)
                     {
-                        return new InvocationExpression(new MemberReferenceExpression(new MemberReferenceExpression(new IdentifierExpression(CS.NS.ROOT), "Script"), "Identity"), clonUnaryOperatorExpression.Expression.Clone(), ae);
+                        return new InvocationExpression(new MemberReferenceExpression(new MemberReferenceExpression(new IdentifierExpression(CS.NS.BRIDGE), "Script"), "Identity"), clonUnaryOperatorExpression.Expression.Clone(), ae);
                     }
                     else
                     {
@@ -369,7 +369,7 @@ namespace Bridge.Translator
 
                     if (isPost && !isStatement)
                     {
-                        return new InvocationExpression(new MemberReferenceExpression(new MemberReferenceExpression(new IdentifierExpression(CS.NS.ROOT), "Script"), "Identity"), clonUnaryOperatorExpression.Expression.Clone(), ae);
+                        return new InvocationExpression(new MemberReferenceExpression(new MemberReferenceExpression(new IdentifierExpression(CS.NS.BRIDGE), "Script"), "Identity"), clonUnaryOperatorExpression.Expression.Clone(), ae);
                     }
                     else
                     {
