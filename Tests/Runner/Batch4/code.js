@@ -418,24 +418,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.ByteTests", {
-        methods: {
-            TryParseWorks_SPI_1592: function () {
-                var numberResult = { };
-
-                var result = System.Byte.tryParse("54768", numberResult);
-                Bridge.Test.NUnit.Assert.False(result);
-                // #1592
-                Bridge.Test.NUnit.Assert.AreEqual(0, numberResult.v);
-
-                result = System.Byte.tryParse("-1", numberResult);
-                Bridge.Test.NUnit.Assert.False(result);
-                // #1592
-                Bridge.Test.NUnit.Assert.AreEqual(0, numberResult.v);
-            }
-        }
-    });
-
     Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.CharTests", {
         methods: {
             TypePropertiesAreInt32_SPI_1603: function () {
@@ -754,23 +736,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.Int16Tests", {
-        methods: {
-            TryParseWorks_SPI_1592: function () {
-                var numberResult = { };
-                var result = System.Int16.tryParse("54768", numberResult);
-                Bridge.Test.NUnit.Assert.False(result);
-                // #1592
-                Bridge.Test.NUnit.Assert.AreEqual(0, numberResult.v);
-
-                result = System.Int16.tryParse("-55678", numberResult);
-                Bridge.Test.NUnit.Assert.False(result);
-                // #1592
-                Bridge.Test.NUnit.Assert.AreEqual(0, numberResult.v);
-            }
-        }
-    });
-
     Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.Int32Tests", {
         methods: {
             IntegerModuloWorks_SPI_1602: function () {
@@ -779,18 +744,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
                 Bridge.Test.NUnit.Assert.Throws$2(System.DivideByZeroException, function () {
                     var x = a % c;
                 });
-            }
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.SByteTests", {
-        methods: {
-            TryParseWorks_SPI_1592: function () {
-                var numberResult = { };
-                var result = System.SByte.tryParse("54768", numberResult);
-                Bridge.Test.NUnit.Assert.False(result);
-                // #1592
-                Bridge.Test.NUnit.Assert.AreEqual(0, numberResult.v);
             }
         }
     });
@@ -824,28 +777,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
         methods: {
             format: function (format, formatProvider) {
                 return System.String.concat("Formatted: ", format, ", ", (formatProvider == null ? "null formatProvider" : Bridge.Reflection.getTypeFullName(Bridge.getType(formatProvider))));
-            }
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.UInt16Tests", {
-        methods: {
-            TryParseWorks_SPI_1592: function () {
-                var numberResult = { };
-                var result = System.UInt16.tryParse("-1", numberResult);
-                // #1592
-                Bridge.Test.NUnit.Assert.AreEqual(0, numberResult.v);
-            }
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.UInt32Tests", {
-        methods: {
-            TryParseWorks_SPI_1592: function () {
-                var numberResult = { };
-                var result = System.UInt32.tryParse("-1", numberResult);
-                // #1592
-                Bridge.Test.NUnit.Assert.AreEqual(0, numberResult.v);
             }
         }
     });

@@ -6703,6 +6703,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 result.v = parseInt(str, radix);
 
                 if (result.v < min || result.v > max) {
+                    result.v = 0;
                     return false;
                 }
 
