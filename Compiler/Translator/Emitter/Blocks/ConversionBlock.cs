@@ -156,6 +156,21 @@ namespace Bridge.Translator
                 var expectedType = block.Emitter.Resolver.Resolver.GetExpectedType(expression);
                 int level = 0;
 
+                if (expression.Parent is ParenthesizedExpression && expression.Parent.Parent is CastExpression)
+                {
+                    var prr = block.Emitter.Resolver.ResolveNode(expression.Parent, block.Emitter);
+                    var pconversion = block.Emitter.Resolver.Resolver.GetConversion((Expression)expression.Parent);
+                    var pexpectedType = block.Emitter.Resolver.Resolver.GetExpectedType((Expression)expression.Parent);
+
+                    if (pconversion.IsBoxingConversion)
+                    {
+                        rr = prr;
+                        conversion = pconversion;
+                        expectedType = pexpectedType;
+                        expression = (Expression)expression.Parent;
+                    }
+                }
+
                 return ConversionBlock.DoConversion(block, expression, conversion, expectedType, level, rr);
             }
             catch

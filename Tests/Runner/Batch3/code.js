@@ -23874,6 +23874,29 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2937", {
+        statics: {
+            methods: {
+                TestAssignmentConversion: function () {
+                    var e = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2937.A.C;
+                    Bridge.Test.NUnit.Assert.AreEqual("A", Bridge.box((e = (e - 2) | 0), Bridge.ClientTest.Batch3.BridgeIssues.Bridge2937.A, System.Enum.toStringFn(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2937.A)).toString());
+                    Bridge.Test.NUnit.Assert.AreEqual("A", Bridge.box(e, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2937.A, System.Enum.toStringFn(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2937.A)).toString());
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2937.A", {
+        $kind: "enum",
+        statics: {
+            fields: {
+                A: 0,
+                B: 1,
+                C: 2
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge294", {
         fields: {
             Name: null
@@ -23972,10 +23995,8 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
-
-
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
                 }
             }
         }
