@@ -12,11 +12,13 @@ namespace System
         /// <summary>
         /// Represents an event with no event data.
         /// </summary>
+        [Template("{}")]
         public static readonly EventArgs Empty;
 
         /// <summary>
         /// Initializes a new instance of the System.EventArgs class.
         /// </summary>
+        [Template("{}")]
         public extern EventArgs();
     }
 }
