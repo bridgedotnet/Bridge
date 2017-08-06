@@ -226,6 +226,19 @@ namespace Bridge.ClientTest.ConvertTests
             }
         }
 
+        [Test]
+        public void FromBase64StringWorks()
+        {
+            Assert.AreEqual(GetTestArr(), Convert.FromBase64String("AAAABAAACAAADAAAEAAAFAAAGAAAHAAAIAAAJAAAKAAALAAAMAAANAAAOAAAPAAAQAAARAAASAAATAAAUAAAVAAAWAAAXAAAYAAAZAAAaAAAbAAAcAAAdAAAeAAAfAAAgAAAhAAAiAAAjAAAkAAAlAAAmAAAnAAAoAAApAAAqAAArAAAsAAAtAAAuAAAvAAAwAAAxAAAyAAAzAAA0AAA1AAA2AAA3AAA4AAA5AAA6AAA7AAA8AAA9AAA+AAA/AAA"));
+            Assert.AreEqual(new byte[] { 1, 2, 3 }, Convert.FromBase64String("AQID"));
+            Assert.AreEqual(new byte[] { 1, 2, 3, 4 }, Convert.FromBase64String("AQIDBA=="));
+            Assert.AreEqual(new byte[] { 1, 2, 3, 4, 5 }, Convert.FromBase64String("AQIDBAU="));
+            Assert.AreEqual(new byte[] { 1, 2, 3, 4, 5, 6 }, Convert.FromBase64String("AQIDBAUG"));
+            Assert.AreEqual(new byte[] { 1, 2, 3, 4, 5 }, Convert.FromBase64String("AQIDBAU="));
+            Assert.AreEqual(new byte[] { 1, 2, 3 }, Convert.FromBase64String("A Q\nI\tD"));
+            Assert.AreEqual(new byte[0], Convert.FromBase64String(""));
+        }
+
         private static void VerifyRoundtrip(string input, string expected = null, int? expectedLengthBytes = null)
         {
             if (expected == null)
@@ -260,5 +273,17 @@ namespace Bridge.ClientTest.ConvertTests
                 action(Convert.FromBase64String(input));
             }
         }
+        private byte[] GetTestArr()
+        {
+            var result = new byte[64 * 3];
+            for (int i = 0; i < 64; i++)
+            {
+                result[i * 3] = (byte)(i << 2);
+                result[i * 3 + 1] = 0;
+                result[i * 3 + 2] = 0;
+            }
+            return result;
+        }
+
     }
 }

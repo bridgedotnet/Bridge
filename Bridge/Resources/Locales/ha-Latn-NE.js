@@ -30,7 +30,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ha-Latn-NE", true), {
     }),
 
     dateTimeFormat: Bridge.merge(new System.Globalization.DateTimeFormatInfo(), {
-        abbreviatedDayNames: ["Lh","Li","Ta","Lr","Al","Ju","As"],
+        abbreviatedDayNames: ["Lah","Lit","Tal","Lar","Alh","Jum","Asa"],
         abbreviatedMonthGenitiveNames: ["Jan","Fab","Mar","Afi","May","Yun","Yul","Agu","Sat","Okt","Nuw","Dis",""],
         abbreviatedMonthNames: ["Jan","Fab","Mar","Afi","May","Yun","Yul","Agu","Sat","Okt","Nuw","Dis",""],
         amDesignator: "AM",
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("ha-Latn-NE", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

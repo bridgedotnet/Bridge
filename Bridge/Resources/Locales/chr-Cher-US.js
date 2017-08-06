@@ -1,6 +1,6 @@
 Bridge.merge(new System.Globalization.CultureInfo("chr-Cher-US", true), {
-    englishName: "Cherokee (Cherokee)",
-    nativeName: "ᏣᎳᎩ (ᏣᎳᎩ)",
+    englishName: "Cherokee (Cherokee, United States)",
+    nativeName: "ᏣᎳᎩ (ᏌᏊ ᎢᏳᎾᎵᏍᏔᏅ ᏍᎦᏚᎩ)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
         nanSymbol: "NaN",
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("chr-Cher-US", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM, yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

@@ -1,12 +1,25 @@
-using Bridge;
+// ==++==
+//
+//   Copyright (c) Microsoft Corporation.  All rights reserved.
+//
+// ==--==
+/*============================================================
+**
+** Class: DayOfWeek
+**
+**
+** Purpose: Enum for the day of the week.
+**
+**
+============================================================*/
 
 namespace System
 {
     /// <summary>
     /// Specifies the day of the week.
     /// </summary>
-    [External]
-    [Reflectable]
+    [Serializable]
+    //[System.Runtime.InteropServices.ComVisible(true)]
     public enum DayOfWeek
     {
         /// <summary>

@@ -18,8 +18,16 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test(ExpectedCount = 2)]
         public static void TestUseCase()
         {
-            Assert.True(DateA == DateTime.MinValue, "Bridge733 DateA");
-            Assert.True(dateb == DateTime.MinValue, "Bridge733 dateb");
+            // These objects will never be equal, fails in .NET native too.
+            // MinValue returns a UTC instance.
+            // DateA and dateb return Local (or Unspecified) instances.
+            // Change to compare to new Date() instead of MinValue
+
+            // Assert.True(DateA.ToString("O") == DateTime.MinValue.ToString("O"), "Bridge733 DateA");
+            // Assert.True(dateb.ToString("O") == DateTime.MinValue.ToString("O"), "Bridge733 dateb");
+
+            Assert.True(DateA.ToString("O") == new DateTime().ToString("O"), "Bridge733 DateA");
+            Assert.True(dateb.ToString("O") == new DateTime().ToString("O"), "Bridge733 dateb");
 
             dateb = DateTime.Now; // to prevent warning that dateb is never assigned
         }

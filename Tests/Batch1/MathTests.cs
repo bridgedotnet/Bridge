@@ -1,4 +1,5 @@
-﻿using Bridge.Test.NUnit;
+﻿using Bridge.ClientTestHelper;
+using Bridge.Test.NUnit;
 using System;
 
 namespace Bridge.ClientTest
@@ -85,6 +86,9 @@ namespace Bridge.ClientTest
         public void AbsOfDecimalWorks()
         {
             AssertIsDecimalAndEqualTo(Math.Abs(-10.0m), 10.0);
+            AssertIsDecimalAndEqualTo(Math.Abs(10.5m), 10.5);
+            AssertIsDecimalAndEqualTo(Math.Abs(-10.5m), 10.5);
+            AssertIsDecimalAndEqualTo(Math.Abs(0m), 0);
         }
 
         [Test]
@@ -112,9 +116,42 @@ namespace Bridge.ClientTest
         }
 
         [Test]
+        public void CeilingOfDoubleWorks()
+        {
+            Assert.AreEqual(4.0, Math.Ceiling(3.2));
+            Assert.AreEqual(-3.0, Math.Ceiling(-3.2));
+        }
+
+        [Test]
+        public void CeilingOfDecimalWorks()
+        {
+            AssertIsDecimalAndEqualTo(Math.Ceiling(3.1m), 4);
+            AssertIsDecimalAndEqualTo(Math.Ceiling(-3.9m), -3);
+            AssertIsDecimalAndEqualTo(Math.Ceiling(3m), 3);
+        }
+
+        [Test]
         public void CosWorks()
         {
             AssertAlmostEqual(Math.Cos(0.5), 0.8775825618903728);
+        }
+
+        [Test]
+        public void CoshWorks()
+        {
+            AssertAlmostEqual(Math.Cosh(0.1), 1.0050041680558035E+000);
+        }
+
+        [Test]
+        public void SinhWorks()
+        {
+            AssertAlmostEqual(Math.Sinh(-0.98343), -1.1497925156481d);
+        }
+
+        [Test]
+        public void TanhWorks()
+        {
+            AssertAlmostEqual(Math.Tanh(5.4251848), 0.999961205877d);
         }
 
         [Test]
@@ -138,6 +175,13 @@ namespace Bridge.ClientTest
 
             Math.DivRem(2341, 157, out resultLong);
             Assert.True(143 == resultLong);
+
+            int result;
+            Assert.AreEqual(1073741823, Math.DivRem(2147483647, 2, out result));
+            Assert.AreEqual(1, result);
+            long longResult;
+            Assert.AreEqual(23058430092136L, Math.DivRem(92233720368547L, 4L, out longResult));
+            Assert.AreEqual(3L, longResult);
         }
 
         [Test]
@@ -158,12 +202,36 @@ namespace Bridge.ClientTest
         {
             AssertIsDecimalAndEqualTo(Math.Floor(3.6m), 3.0);
             AssertIsDecimalAndEqualTo(Math.Floor(-3.6m), -4.0);
+            AssertIsDecimalAndEqualTo(decimal.Floor(3m), 3);
         }
 
         [Test]
         public void LogWorks()
         {
             AssertAlmostEqual(Math.Log(0.5), -0.6931471805599453);
+        }
+
+        [Test]
+        public void LogWithBaseWorks_SPI_1566()
+        {
+            // #1566
+            // Test restructure to keep assertion count correct (prevent uncaught test exception)
+            var d1 = 0d;
+            CommonHelper.Safe(() => d1 = Math.Log(16, 2));
+            Assert.AreEqual(4.0, d1);
+
+            var d2 = 0d;
+            CommonHelper.Safe(() => d2 = Math.Log(16, 4));
+            Assert.AreEqual(2.0, d2);
+        }
+
+        // #SPI
+        [Test]
+        public void Log10Works_SPI_1629()
+        {
+            // #1629
+            Assert.AreEqual(Math.Log10(10), 1.0);
+            Assert.AreEqual(Math.Log10(100), 2.0);
         }
 
         [Test]
@@ -239,8 +307,8 @@ namespace Bridge.ClientTest
         [Test]
         public void MaxOfULongWorks()
         {
-            Assert.True((ulong)300 == Math.Max((ulong)100, (ulong)300));
-            Assert.True((ulong)500 == Math.Max((ulong)500, (ulong)300));
+            Assert.AreEqual((ulong)300, Math.Max((ulong)100, (ulong)300));
+            Assert.AreEqual((ulong)500, Math.Max((ulong)500, (ulong)300));
         }
 
         [Test]
@@ -281,8 +349,8 @@ namespace Bridge.ClientTest
         [Test]
         public void MinOfLongWorks()
         {
-            Assert.True(1L == Math.Min(1L, 3L));
-            Assert.True(3L == Math.Min(4L, 3L));
+            Assert.AreEqual(1L, Math.Min(1L, 3L));
+            Assert.AreEqual(3L, Math.Min(4L, 3L));
         }
 
         [Test]
@@ -316,8 +384,8 @@ namespace Bridge.ClientTest
         [Test]
         public void MinOfULongWorks()
         {
-            Assert.True((ulong)100 == Math.Min((ulong)100, (ulong)300));
-            Assert.True((ulong)300 == Math.Min((ulong)500, (ulong)300));
+            Assert.AreEqual((ulong)100, Math.Min((ulong)100, (ulong)300));
+            Assert.AreEqual((ulong)300, Math.Min((ulong)500, (ulong)300));
         }
 
         [Test]
@@ -666,6 +734,82 @@ namespace Bridge.ClientTest
             AssertAlmostEqual(Math.IEEERemainder(4.0, 16.1), 4.0);
             AssertAlmostEqual(Math.IEEERemainder(3.1, 3.2), -0.1);
             AssertAlmostEqual(Math.IEEERemainder(3.2, 3.1), 0.1);
+
+            Assert.AreEqual(-1.0, Math.IEEERemainder(3.0, 2.0));
+            Assert.AreEqual(0.0, Math.IEEERemainder(4.0, 2.0));
+            Assert.AreEqual(1.0, Math.IEEERemainder(10.0, 3.0));
+            Assert.AreEqual(-1.0, Math.IEEERemainder(11.0, 3.0));
+            Assert.AreEqual(-1.0, Math.IEEERemainder(27.0, 4.0));
+            Assert.AreEqual(-2.0, Math.IEEERemainder(28.0, 5.0));
+            AssertAlmostEqual(Math.IEEERemainder(17.8, 4.0), 1.8);
+            AssertAlmostEqual(Math.IEEERemainder(17.8, 4.1), 1.4);
+            AssertAlmostEqual(Math.IEEERemainder(-16.3, 4.1), 0.0999999999999979);
+            AssertAlmostEqual(Math.IEEERemainder(17.8, -4.1), 1.4);
+            AssertAlmostEqual(Math.IEEERemainder(-17.8, -4.1), -1.4);
+        }
+
+        [Test]
+        public void SignWithDecimalWorks()
+        {
+            Assert.AreEqual(-1, Math.Sign(-0.5m));
+            Assert.AreEqual(0, Math.Sign(0.0m));
+            Assert.AreEqual(1, Math.Sign(3.35m));
+        }
+
+        [Test]
+        public void SignWithDoubleWorks()
+        {
+            Assert.AreEqual(-1, Math.Sign(-0.5));
+            Assert.AreEqual(0, Math.Sign(0.0));
+            Assert.AreEqual(1, Math.Sign(3.35));
+        }
+
+        // #SPI
+        //[Test]
+        //public void SignWithShortWorks_SPI_1629()
+        //{
+        //    // #1629
+        //    Assert.AreEqual(Math.Sign((short)-15), -1);
+        //    Assert.AreEqual(Math.Sign((short)0), 0);
+        //    Assert.AreEqual(Math.Sign((short)4), 1);
+        //}
+
+        // #SPI
+        //[Test]
+        //public void SignWithIntWorks_SPI_1629()
+        //{
+        //    // #1629
+        //    Assert.AreEqual(Math.Sign(-15), -1);
+        //    Assert.AreEqual(Math.Sign(0), 0);
+        //    Assert.AreEqual(Math.Sign(4), 1);
+        //}
+
+        // #SPI
+        //[Test]
+        //public void SignWithLongWorks_SPI_1629()
+        //{
+        //    // #1629
+        //    Assert.AreEqual(Math.Sign(-15L), -1);
+        //    Assert.AreEqual(Math.Sign(0L), 0);
+        //    Assert.AreEqual(Math.Sign(4L), 1);
+        //}
+
+        // #SPI
+        //[Test]
+        //public void SignWithSByteWorks_SPI_1629()
+        //{
+        //    // #1629
+        //    Assert.AreEqual(Math.Sign((sbyte)-15), -1);
+        //    Assert.AreEqual(Math.Sign((sbyte)0), 0);
+        //    Assert.AreEqual(Math.Sign((sbyte)4), 1);
+        //}
+
+        [Test]
+        public void SignWithFloatWorks()
+        {
+            Assert.AreEqual(-1, Math.Sign(-0.5f));
+            Assert.AreEqual(0, Math.Sign(0.0f));
+            Assert.AreEqual(1, Math.Sign(3.35f));
         }
 
         [Test]
@@ -685,5 +829,27 @@ namespace Bridge.ClientTest
         {
             AssertAlmostEqual(Math.Tan(0.5), 0.5463024898437905);
         }
+
+        [Test]
+        public void TruncateWithDoubleWorks()
+        {
+            Assert.AreEqual(3.0, Math.Truncate(3.9));
+            Assert.AreEqual(-3.0, Math.Truncate(-3.9));
+        }
+
+        [Test]
+        public void TruncateWithDecimalWorks()
+        {
+            AssertIsDecimalAndEqualTo(Math.Truncate(3.9m), 3.0);
+            AssertIsDecimalAndEqualTo(Math.Truncate(-3.9m), -3.0);
+        }
+
+        // #SPI
+        //[Test]
+        //public void BigMulWorks_SPI_1629()
+        //{
+        //    // #1629
+        //    Assert.AreEqual(Math.BigMul(214748364, 214748364), 46116859840676496L);
+        //}
     }
 }

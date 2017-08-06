@@ -3,7 +3,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ku-Arab-IQ", true), {
     nativeName: "کوردیی ناوەڕاست (کوردستان)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        nanSymbol: "ناژمارە",
+        nanSymbol: "NaN",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("ku-Arab-IQ", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM, yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

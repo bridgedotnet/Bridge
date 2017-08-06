@@ -119,7 +119,7 @@ namespace Bridge.ClientTest.ConvertTests
 
             string[] testValues = { "100", "-100", "0", longMinValue.ToString(), longMaxValue.ToString(), null };
             long[] expectedValues = { 100, -100, 0, longMinValue, longMaxValue, 0 };
-            VerifyFromString(Convert.ToInt64, Convert.ToInt64, testValues, expectedValues, true);
+            VerifyFromString(Convert.ToInt64, Convert.ToInt64, testValues, expectedValues, useTrue: true);
 
             string[] overflowValues = { ConvertConstants.INT64_OVERFLOW_MAX_STRING, ConvertConstants.INT64_OVERFLOW_MIN_STRING };
             VerifyFromStringThrows<OverflowException>(Convert.ToInt64, Convert.ToInt64, overflowValues);

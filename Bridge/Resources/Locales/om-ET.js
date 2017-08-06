@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("om-ET", true), {
         abbreviatedDayNames: ["Dil","Wix","Qib","Rob","Kam","Jim","San"],
         abbreviatedMonthGenitiveNames: ["Ama","Gur","Bit","Elb","Cam","Wax","Ado","Hag","Ful","Onk","Sad","Mud",""],
         abbreviatedMonthNames: ["Ama","Gur","Bit","Elb","Cam","Wax","Ado","Hag","Ful","Onk","Sad","Mud",""],
-        amDesignator: "AM",
+        amDesignator: "WD",
         dateSeparator: "/",
         dayNames: ["Dilbata","Wiixata","Qibxata","Roobii","Kamiisa","Jimaata","Sanbata"],
         firstDayOfWeek: 0,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("om-ET", true), {
         monthDayPattern: "MMMM d",
         monthGenitiveNames: ["Amajjii","Guraandhala","Bitooteessa","Elba","Caamsa","Waxabajjii","Adooleessa","Hagayya","Fuulbana","Onkololeessa","Sadaasa","Muddee",""],
         monthNames: ["Amajjii","Guraandhala","Bitooteessa","Elba","Caamsa","Waxabajjii","Adooleessa","Hagayya","Fuulbana","Onkololeessa","Sadaasa","Muddee",""],
-        pmDesignator: "PM",
+        pmDesignator: "WB",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "dd/MM/yyyy",
         shortestDayNames: ["Dil","Wix","Qib","Rob","Kam","Jim","San"],
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("om-ET", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

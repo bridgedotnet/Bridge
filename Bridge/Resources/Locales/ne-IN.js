@@ -30,10 +30,10 @@ Bridge.merge(new System.Globalization.CultureInfo("ne-IN", true), {
     }),
 
     dateTimeFormat: Bridge.merge(new System.Globalization.DateTimeFormatInfo(), {
-        abbreviatedDayNames: ["आइत","सोम","मङ्गल","बुध","बिही","शुक्र","शनि"],
+        abbreviatedDayNames: ["आइत","सोम","मङ्गल","बुध","बिहि","शुक्र","शनि"],
         abbreviatedMonthGenitiveNames: ["जनवरी","फेब्रुअरी","मार्च","अप्रिल","मे","जुन","जुलाई","अगस्ट","सेप्टेम्बर","अक्टोबर","नोभेम्बर","डिसेम्बर",""],
         abbreviatedMonthNames: ["जनवरी","फेब्रुअरी","मार्च","अप्रिल","मे","जुन","जुलाई","अगस्ट","सेप्टेम्बर","अक्टोबर","नोभेम्बर","डिसेम्बर",""],
-        amDesignator: "AM",
+        amDesignator: "पूर्वाह्न",
         dateSeparator: "-",
         dayNames: ["आइतबार","सोमबार","मङ्गलबार","बुधबार","बिहिबार","शुक्रबार","शनिबार"],
         firstDayOfWeek: 0,
@@ -43,16 +43,16 @@ Bridge.merge(new System.Globalization.CultureInfo("ne-IN", true), {
         monthDayPattern: "MMMM d",
         monthGenitiveNames: ["जनवरी","फेब्रुअरी","मार्च","अप्रिल","मई","जुन","जुलाई","अगस्ट","सेप्टेम्बर","अक्टोबर","नोभेम्बर","डिसेम्बर",""],
         monthNames: ["जनवरी","फेब्रुअरी","मार्च","अप्रिल","मे","जुन","जुलाई","अगस्ट","सेप्टेम्बर","अक्टोबर","नोभेम्बर","डिसेम्बर",""],
-        pmDesignator: "PM",
+        pmDesignator: "अपराह्न",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "yyyy-MM-dd",
-        shortestDayNames: ["आइत","सोम","मङ्गल","बुध","बिही","शुक्र","शनि"],
+        shortestDayNames: ["आइत","सोम","मङ्गल","बुध","बिहि","शुक्र","शनि"],
         shortTimePattern: "h:mm tt",
         sortableDateTimePattern: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
         sortableDateTimePattern1: "yyyy'-'MM'-'dd",
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy MMMM",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

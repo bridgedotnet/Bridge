@@ -1,6 +1,6 @@
 Bridge.merge(new System.Globalization.CultureInfo("mn-Mong-MN", true), {
     englishName: "Mongolian (Traditional Mongolian, Mongolia)",
-    nativeName: "ᠮᠤᠨᠭᠭᠤᠯ ᠬᠡᠯᠡ (ᠮᠤᠨᠭᠭᠤᠯ ᠣᠯᠣᠰ)",
+    nativeName: "ᠮᠣᠩᠭᠣᠯ ᠬᠡᠯᠡ (ᠮᠣᠩᠭᠣᠯ ᠣᠯᠣᠰ)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
         nanSymbol: "ᠲᠤᠭᠠᠠ ᠪᠤᠰᠤ",
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("mn-Mong-MN", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyyᠣᠨ MMMM",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

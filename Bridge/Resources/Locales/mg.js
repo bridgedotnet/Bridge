@@ -20,8 +20,8 @@ Bridge.merge(new System.Globalization.CultureInfo("mg", true), {
         currencyDecimalDigits: 0,
         currencyDecimalSeparator: ".",
         currencyGroupSeparator: ",",
-        currencyNegativePattern: 1,
-        currencyPositivePattern: 0,
+        currencyNegativePattern: 9,
+        currencyPositivePattern: 2,
         numberGroupSizes: [3],
         numberDecimalDigits: 2,
         numberDecimalSeparator: ".",
@@ -34,7 +34,7 @@ Bridge.merge(new System.Globalization.CultureInfo("mg", true), {
         abbreviatedMonthGenitiveNames: ["Jan","Feb","Mar","Apr","Mey","Jon","Jol","Aog","Sep","Okt","Nov","Des",""],
         abbreviatedMonthNames: ["Jan","Feb","Mar","Apr","Mey","Jon","Jol","Aog","Sep","Okt","Nov","Des",""],
         amDesignator: "AM",
-        dateSeparator: "/",
+        dateSeparator: "-",
         dayNames: ["Alahady","Alatsinainy","Talata","Alarobia","Alakamisy","Zoma","Asabotsy"],
         firstDayOfWeek: 1,
         fullDateTimePattern: "dddd d MMMM yyyy HH:mm:ss",
@@ -45,7 +45,7 @@ Bridge.merge(new System.Globalization.CultureInfo("mg", true), {
         monthNames: ["Janoary","Febroary","Martsa","Aprily","Mey","Jona","Jolay","Aogositra","Septambra","Oktobra","Novambra","Desambra",""],
         pmDesignator: "PM",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
-        shortDatePattern: "d/M/yyyy",
+        shortDatePattern: "yyyy-MM-dd",
         shortestDayNames: ["Alah","Alats","Tal","Alar","Alak","Zom","Asab"],
         shortTimePattern: "HH:mm",
         sortableDateTimePattern: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("mg", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

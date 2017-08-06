@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("bo-IN", true), {
         abbreviatedDayNames: ["ཉི་མ་","ཟླ་བ་","མིག་དམར་","ལྷག་པ་","ཕུར་བུ་","པ་སངས་","སྤེན་པ་"],
         abbreviatedMonthGenitiveNames: ["ཟླ་༡","ཟླ་༢","ཟླ་༣","ཟླ་༤","ཟླ་༥","ཟླ་༦","ཟླ་༧","ཟླ་༨","ཟླ་༩","ཟླ་༡༠","ཟླ་༡༡","ཟླ་༡༢",""],
         abbreviatedMonthNames: ["ཟླ་༡","ཟླ་༢","ཟླ་༣","ཟླ་༤","ཟླ་༥","ཟླ་༦","ཟླ་༧","ཟླ་༨","ཟླ་༩","ཟླ་༡༠","ཟླ་༡༡","ཟླ་༡༢",""],
-        amDesignator: "AM",
+        amDesignator: "སྔ་དྲོ་",
         dateSeparator: "-",
         dayNames: ["གཟའ་ཉི་མ་","གཟའ་ཟླ་བ་","གཟའ་མིག་དམར་","གཟའ་ལྷག་པ་","གཟའ་ཕུར་བུ་","གཟའ་པ་སངས་","གཟའ་སྤེན་པ་"],
         firstDayOfWeek: 0,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("bo-IN", true), {
         monthDayPattern: "MMMMའི་ཚེས་d",
         monthGenitiveNames: ["ཟླ་བ་དང་པོ","ཟླ་བ་གཉིས་པ","ཟླ་བ་གསུམ་པ","ཟླ་བ་བཞི་པ","ཟླ་བ་ལྔ་པ","ཟླ་བ་དྲུག་པ","ཟླ་བ་བདུན་པ","ཟླ་བ་བརྒྱད་པ","ཟླ་བ་དགུ་པ","ཟླ་བ་བཅུ་པ","ཟླ་བ་བཅུ་གཅིག་པ","ཟླ་བ་བཅུ་གཉིས་པ",""],
         monthNames: ["ཟླ་བ་དང་པོ་","ཟླ་བ་གཉིས་པ་","ཟླ་བ་གསུམ་པ་","ཟླ་བ་བཞི་པ་","ཟླ་བ་ལྔ་པ་","ཟླ་བ་དྲུག་པ་","ཟླ་བ་བདུན་པ་","ཟླ་བ་བརྒྱད་པ་","ཟླ་བ་དགུ་པ་","ཟླ་བ་བཅུ་པ་","ཟླ་བ་བཅུ་གཅིག་པ་","ཟླ་བ་བཅུ་གཉིས་པ་",""],
-        pmDesignator: "PM",
+        pmDesignator: "ཕྱི་དྲོ་",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "yyyy-MM-dd",
         shortestDayNames: ["ཉི་མ་","ཟླ་བ་","མིག་དམར་","ལྷག་པ་","ཕུར་བུ་","པ་སངས་","སྤེན་པ་"],
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("bo-IN", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy MMMM",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

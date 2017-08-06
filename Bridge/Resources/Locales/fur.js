@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("fur", true), {
         abbreviatedDayNames: ["dom","lun","mar","mie","joi","vin","sab"],
         abbreviatedMonthGenitiveNames: ["Zen","Fev","Mar","Avr","Mai","Jug","Lui","Avo","Set","Otu","Nov","Dic",""],
         abbreviatedMonthNames: ["Zen","Fev","Mar","Avr","Mai","Jug","Lui","Avo","Set","Otu","Nov","Dic",""],
-        amDesignator: "AM",
+        amDesignator: "a.",
         dateSeparator: "/",
         dayNames: ["domenie","lunis","martars","miercus","joibe","vinars","sabide"],
         firstDayOfWeek: 1,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("fur", true), {
         monthDayPattern: "d 'di' MMMM",
         monthGenitiveNames: ["Zenâr","Fevrâr","Març","Avrîl","Mai","Jugn","Lui","Avost","Setembar","Otubar","Novembar","Dicembar",""],
         monthNames: ["Zenâr","Fevrâr","Març","Avrîl","Mai","Jugn","Lui","Avost","Setembar","Otubar","Novembar","Dicembar",""],
-        pmDesignator: "PM",
+        pmDesignator: "p.",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "dd/MM/yyyy",
         shortestDayNames: ["dom","lun","mar","mie","joi","vin","sab"],
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("fur", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM 'dal' yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

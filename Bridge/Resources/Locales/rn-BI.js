@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("rn-BI", true), {
         abbreviatedDayNames: ["cu.","mbe.","kab.","gtu.","kan.","gnu.","gnd."],
         abbreviatedMonthGenitiveNames: ["Mut.","Gas.","Wer.","Mat.","Gic.","Kam.","Nya.","Kan.","Nze.","Ukw.","Ugu.","Uku.",""],
         abbreviatedMonthNames: ["Mut.","Gas.","Wer.","Mat.","Gic.","Kam.","Nya.","Kan.","Nze.","Ukw.","Ugu.","Uku.",""],
-        amDesignator: "AM",
+        amDesignator: "Z.MU.",
         dateSeparator: "/",
         dayNames: ["Ku w’indwi","Ku wa mbere","Ku wa kabiri","Ku wa gatatu","Ku wa kane","Ku wa gatanu","Ku wa gatandatu"],
         firstDayOfWeek: 1,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("rn-BI", true), {
         monthDayPattern: "MMMM d",
         monthGenitiveNames: ["Nzero","Ruhuhuma","Ntwarante","Ndamukiza","Rusama","Ruheshi","Mukakaro","Nyandagaro","Nyakanga","Gitugutu","Munyonyo","Kigarama",""],
         monthNames: ["Nzero","Ruhuhuma","Ntwarante","Ndamukiza","Rusama","Ruheshi","Mukakaro","Nyandagaro","Nyakanga","Gitugutu","Munyonyo","Kigarama",""],
-        pmDesignator: "PM",
+        pmDesignator: "Z.MW.",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "d/M/yyyy",
         shortestDayNames: ["cu.","mbe.","kab.","gtu.","kan.","gnu.","gnd."],
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("rn-BI", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy MMMM",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

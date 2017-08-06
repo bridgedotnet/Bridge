@@ -37,9 +37,9 @@ Bridge.merge(new System.Globalization.CultureInfo("af", true), {
         dateSeparator: "-",
         dayNames: ["Sondag","Maandag","Dinsdag","Woensdag","Donderdag","Vrydag","Saterdag"],
         firstDayOfWeek: 0,
-        fullDateTimePattern: "dddd, dd MMMM yyyy h:mm:ss tt",
+        fullDateTimePattern: "dddd, dd MMMM yyyy HH:mm:ss",
         longDatePattern: "dddd, dd MMMM yyyy",
-        longTimePattern: "h:mm:ss tt",
+        longTimePattern: "HH:mm:ss",
         monthDayPattern: "d MMMM",
         monthGenitiveNames: ["Januarie","Februarie","Maart","April","Mei","Junie","Julie","Augustus","September","Oktober","November","Desember",""],
         monthNames: ["Januarie","Februarie","Maart","April","Mei","Junie","Julie","Augustus","September","Oktober","November","Desember",""],
@@ -47,12 +47,12 @@ Bridge.merge(new System.Globalization.CultureInfo("af", true), {
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "yyyy-MM-dd",
         shortestDayNames: ["So.","Ma.","Di.","Wo.","Do.","Vr.","Sa."],
-        shortTimePattern: "h:mm tt",
+        shortTimePattern: "HH:mm",
         sortableDateTimePattern: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
         sortableDateTimePattern1: "yyyy'-'MM'-'dd",
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

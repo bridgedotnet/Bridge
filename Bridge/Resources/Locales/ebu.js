@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ebu", true), {
         abbreviatedDayNames: ["Kma","Tat","Ine","Tan","Arm","Maa","NMM"],
         abbreviatedMonthGenitiveNames: ["Mbe","Kai","Kat","Kan","Gat","Gan","Mug","Knn","Ken","Iku","Imw","Igi",""],
         abbreviatedMonthNames: ["Mbe","Kai","Kat","Kan","Gat","Gan","Mug","Knn","Ken","Iku","Imw","Igi",""],
-        amDesignator: "AM",
+        amDesignator: "KI",
         dateSeparator: "/",
         dayNames: ["Kiumia","Njumatatu","Njumaine","Njumatano","Aramithi","Njumaa","NJumamothii"],
         firstDayOfWeek: 0,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ebu", true), {
         monthDayPattern: "MMMM d",
         monthGenitiveNames: ["Mweri wa mbere","Mweri wa kaĩri","Mweri wa kathatũ","Mweri wa kana","Mweri wa gatano","Mweri wa gatantatũ","Mweri wa mũgwanja","Mweri wa kanana","Mweri wa kenda","Mweri wa ikũmi","Mweri wa ikũmi na ũmwe","Mweri wa ikũmi na Kaĩrĩ",""],
         monthNames: ["Mweri wa mbere","Mweri wa kaĩri","Mweri wa kathatũ","Mweri wa kana","Mweri wa gatano","Mweri wa gatantatũ","Mweri wa mũgwanja","Mweri wa kanana","Mweri wa kenda","Mweri wa ikũmi","Mweri wa ikũmi na ũmwe","Mweri wa ikũmi na Kaĩrĩ",""],
-        pmDesignator: "PM",
+        pmDesignator: "UT",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "dd/MM/yyyy",
         shortestDayNames: ["Kma","Tat","Ine","Tan","Arm","Maa","NMM"],
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("ebu", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

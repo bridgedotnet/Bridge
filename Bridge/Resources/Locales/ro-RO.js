@@ -15,7 +15,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ro-RO", true), {
         percentGroupSeparator: ".",
         percentPositivePattern: 0,
         percentNegativePattern: 0,
-        currencySymbol: "RON",
+        currencySymbol: "lei",
         currencyGroupSizes: [3],
         currencyDecimalDigits: 2,
         currencyDecimalSeparator: ",",
@@ -46,13 +46,13 @@ Bridge.merge(new System.Globalization.CultureInfo("ro-RO", true), {
         pmDesignator: "p.m.",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "dd.MM.yyyy",
-        shortestDayNames: ["du.","lu.","ma.","mi.","jo.","vi.","sâ."],
+        shortestDayNames: ["du.","lu.","ma.","mi.","joi","vi.","sâ."],
         shortTimePattern: "HH:mm",
         sortableDateTimePattern: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
         sortableDateTimePattern1: "yyyy'-'MM'-'dd",
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

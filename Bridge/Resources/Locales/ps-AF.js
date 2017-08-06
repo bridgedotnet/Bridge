@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ps-AF", true), {
         abbreviatedDayNames: ["یکشنبه","دوشنبه","سه‌شنبه","چارشنبه","پنجشنبه","جمعه","شنبه"],
         abbreviatedMonthGenitiveNames: ["وری","غويی","غبرګولی","چنګاښ","زمری","وږی","تله","لړم","ليندۍ","مرغومی","سلواغه","كب",""],
         abbreviatedMonthNames: ["وری","غويی","غبرګولی","چنګاښ","زمری","وږی","تله","لړم","ليندۍ","مرغومی","سلواغه","كب",""],
-        amDesignator: "AM",
+        amDesignator: "غ.م.",
         dateSeparator: "/",
         dayNames: ["یکشنبه","دوشنبه","سه‌شنبه","چارشنبه","پنجشنبه","جمعه","شنبه"],
         firstDayOfWeek: 6,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ps-AF", true), {
         monthDayPattern: "d MMMM",
         monthGenitiveNames: ["وری","غويی","غبرګولی","چنګاښ","زمری","وږی","تله","لړم","ليندۍ","مرغومی","سلواغه","كب",""],
         monthNames: ["وری","غويی","غبرګولی","چنګاښ","زمری","وږی","تله","لړم","ليندۍ","مرغومی","سلواغه","كب",""],
-        pmDesignator: "PM",
+        pmDesignator: "غ.و.",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "yyyy/M/d",
         shortestDayNames: ["ی","د","س","چ","پ","ج","ش"],
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("ps-AF", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

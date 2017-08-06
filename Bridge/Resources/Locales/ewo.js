@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ewo", true), {
         abbreviatedDayNames: ["sɔ́n","mɔ́n","smb","sml","smn","fúl","sér"],
         abbreviatedMonthGenitiveNames: ["ngo","ngb","ngl","ngn","ngt","ngs","ngz","ngm","nge","nga","ngad","ngab",""],
         abbreviatedMonthNames: ["ngo","ngb","ngl","ngn","ngt","ngs","ngz","ngm","nge","nga","ngad","ngab",""],
-        amDesignator: "AM",
+        amDesignator: "kíkíríg",
         dateSeparator: "/",
         dayNames: ["sɔ́ndɔ","mɔ́ndi","sɔ́ndɔ məlú mə́bɛ̌","sɔ́ndɔ məlú mə́lɛ́","sɔ́ndɔ məlú mə́nyi","fúladé","séradé"],
         firstDayOfWeek: 1,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ewo", true), {
         monthDayPattern: "MMMM d",
         monthGenitiveNames: ["ngɔn osú","ngɔn bɛ̌","ngɔn lála","ngɔn nyina","ngɔn tána","ngɔn saməna","ngɔn zamgbála","ngɔn mwom","ngɔn ebulú","ngɔn awóm","ngɔn awóm ai dziá","ngɔn awóm ai bɛ̌",""],
         monthNames: ["ngɔn osú","ngɔn bɛ̌","ngɔn lála","ngɔn nyina","ngɔn tána","ngɔn saməna","ngɔn zamgbála","ngɔn mwom","ngɔn ebulú","ngɔn awóm","ngɔn awóm ai dziá","ngɔn awóm ai bɛ̌",""],
-        pmDesignator: "PM",
+        pmDesignator: "ngəgógəle",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "d/M/yyyy",
         shortestDayNames: ["sɔ́n","mɔ́n","smb","sml","smn","fúl","sér"],
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("ewo", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy MMMM",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

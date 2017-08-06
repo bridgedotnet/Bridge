@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("mua", true), {
         abbreviatedDayNames: ["Cya","Cla","Czi","Cko","Cka","Cga","Cze"],
         abbreviatedMonthGenitiveNames: ["FLO","CLA","CKI","FMF","MAD","MBI","MLI","MAM","FDE","FMU","FGW","FYU",""],
         abbreviatedMonthNames: ["FLO","CLA","CKI","FMF","MAD","MBI","MLI","MAM","FDE","FMU","FGW","FYU",""],
-        amDesignator: "AM",
+        amDesignator: "comme",
         dateSeparator: "/",
         dayNames: ["Com’yakke","Comlaaɗii","Comzyiiɗii","Comkolle","Comkaldǝɓlii","Comgaisuu","Comzyeɓsuu"],
         firstDayOfWeek: 1,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("mua", true), {
         monthDayPattern: "MMMM d",
         monthGenitiveNames: ["Fĩi Loo","Cokcwaklaŋne","Cokcwaklii","Fĩi Marfoo","Madǝǝuutǝbijaŋ","Mamǝŋgwãafahbii","Mamǝŋgwãalii","Madǝmbii","Fĩi Dǝɓlii","Fĩi Mundaŋ","Fĩi Gwahlle","Fĩi Yuru",""],
         monthNames: ["Fĩi Loo","Cokcwaklaŋne","Cokcwaklii","Fĩi Marfoo","Madǝǝuutǝbijaŋ","Mamǝŋgwãafahbii","Mamǝŋgwãalii","Madǝmbii","Fĩi Dǝɓlii","Fĩi Mundaŋ","Fĩi Gwahlle","Fĩi Yuru",""],
-        pmDesignator: "PM",
+        pmDesignator: "lilli",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "d/M/yyyy",
         shortestDayNames: ["Cya","Cla","Czi","Cko","Cka","Cga","Cze"],
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("mua", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy MMMM",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

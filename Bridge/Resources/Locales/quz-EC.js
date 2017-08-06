@@ -1,6 +1,6 @@
 Bridge.merge(new System.Globalization.CultureInfo("quz-EC", true), {
     englishName: "Quichua (Ecuador)",
-    nativeName: "runa shimi (Ecuador Suyu)",
+    nativeName: "Runasimi (Ecuador)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
         nanSymbol: "NaN",
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("quz-EC", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM' de 'yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

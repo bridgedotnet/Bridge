@@ -46,6 +46,8 @@
         "Resources/Double.js",
         "Resources/Long.js",
         "Resources/Decimal.js",
+        "Resources/.generated/system/dayOfWeek.js",
+        "Resources/.generated/system/dateTimeKind.js",
         "Resources/Date.js",
         "Resources/TimeSpan.js",
         "Resources/Text/StringBuilder.js",

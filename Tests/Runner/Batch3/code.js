@@ -22,10 +22,10 @@ var Bridge2874Base = (function () {
 
 /**
  * Bridge Test library - test github issues up to #1999
- * @version 16.0.0-beta5
+ * @version 16.0.0
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2017 Object.NET, Inc.
- * @compiler Bridge.NET 16.0.0-beta5
+ * @compiler Bridge.NET 16.0.0
  */
 Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
     "use strict";
@@ -741,8 +741,8 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
         statics: {
             methods: {
                 TestMoreThanDecimalDigitsFromTotalHours: function () {
-                    var a = new Date(2015, 1 - 1, 1, 9);
-                    var b = new Date(2015, 1 - 1, 1, 12, 52);
+                    var a = System.DateTime.create(2015, 1, 1, 9, 0, 0);
+                    var b = System.DateTime.create(2015, 1, 1, 12, 52, 0);
 
                     var value = System.Decimal((System.DateTime.subdd(b, a)).getTotalHours(), null, System.Double);
 
@@ -6184,7 +6184,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                     try {
                         var $Date = 3;
 
-                        var m = (System.DateTime.getDefaultValue().getMonth() + 1);
+                        var m = System.DateTime.getMonth(System.DateTime.getDefaultValue());
 
                         Bridge.Test.NUnit.Assert.AreEqual(3, $Date, "Date");
                     }
@@ -6476,7 +6476,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
                     this.b = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1390.a;
                     this.a = 5;
                     this.time = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1390.MinDate;
-                    this.MinDate = new Date(1800, 1 - 1, 1);
+                    this.MinDate = System.DateTime.create(1800, 1, 1);
                     this.d1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1390.d2;
                     this.d2 = 6;
                     this.ar1 = Bridge.ClientTest.Batch3.BridgeIssues.Bridge1390.ar2;
@@ -6488,7 +6488,7 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             methods: {
                 TestFieldInitializer: function () {
                     Bridge.Test.NUnit.Assert.AreEqual(0, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1390.b);
-                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getDefaultValue(), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1390.time);
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getMinValue(), Bridge.ClientTest.Batch3.BridgeIssues.Bridge1390.time);
                     Bridge.Test.NUnit.Assert.AreEqual(null, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1390.d1);
                     Bridge.Test.NUnit.Assert.AreEqual(null, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1390.ar1);
                     Bridge.Test.NUnit.Assert.AreEqual(8, Bridge.ClientTest.Batch3.BridgeIssues.Bridge1390.order2);
@@ -12047,9 +12047,9 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge1904", {
         methods: {
             TestDateTimeConstructorConvertsValueToMs: function () {
-                var d1 = new Date();
+                var d1 = System.DateTime.getNow();
                 var tickValue = System.DateTime.getTicks(d1);
-                var d2 = System.DateTime.fromTicks(tickValue);
+                var d2 = System.DateTime.create$2(tickValue);
 
                 Bridge.Test.NUnit.Assert.True(Bridge.equals(d1, d2), System.String.concat("d1 (", System.DateTime.format(d1), ") == d2(", System.DateTime.format(d2), ")"));
             }
@@ -13105,7 +13105,7 @@ Bridge.$N1391Result =                     r;
             methods: {
                 TestSafeNavigationOperator: function () {
                     var $t;
-                    var dt = new Date();
+                    var dt = System.DateTime.getNow();
                     var ndt = Bridge.cast(dt, System.DateTime, true);
                     var s1 = !Bridge.equals(System.Nullable.getValue(ndt), null) ? System.DateTime.format(System.Nullable.getValue(ndt), "yyyy-MM-dd HH:mm:ss") : null;
                     var s2 = !Bridge.equals(($t = Bridge.cast(dt, System.DateTime, true)), null) ? System.DateTime.format($t, "yyyy-MM-dd HH:mm:ss") : null;
@@ -16490,7 +16490,7 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestFDateModifier: function () {
-                    var date = new Date(2017, 2 - 1, 6, 10, 42, 52, 0);
+                    var date = System.DateTime.create(2017, 2, 6, 10, 42, 52, 0);
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFFF"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.0000000", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fffffff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFF"));
@@ -16506,7 +16506,7 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.F"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.0", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.f"));
 
-                    date = new Date(2017, 2 - 1, 6, 10, 42, 52, 1);
+                    date = System.DateTime.create(2017, 2, 6, 10, 42, 52, 1);
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.001", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFFF"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.0010000", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fffffff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.001", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFF"));
@@ -16522,7 +16522,7 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.F"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.0", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.f"));
 
-                    date = new Date(2017, 2 - 1, 6, 10, 42, 52, 10);
+                    date = System.DateTime.create(2017, 2, 6, 10, 42, 52, 10);
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.01", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFFF"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.0100000", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fffffff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.01", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFF"));
@@ -16538,7 +16538,7 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.F"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.0", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.f"));
 
-                    date = new Date(2017, 2 - 1, 6, 10, 42, 52, 100);
+                    date = System.DateTime.create(2017, 2, 6, 10, 42, 52, 100);
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.1", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFFF"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.1000000", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fffffff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.1", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFF"));
@@ -16554,7 +16554,7 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.1", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.F"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.1", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.f"));
 
-                    date = new Date(2017, 2 - 1, 6, 10, 42, 52, 999);
+                    date = System.DateTime.create(2017, 2, 6, 10, 42, 52, 999);
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.999", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFFF"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.9990000", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.fffffff"));
                     Bridge.Test.NUnit.Assert.AreEqual("2017-02-06 10:42:52.999", System.DateTime.format(date, "yyyy-MM-dd HH:mm:ss.FFFFFF"));
@@ -17123,10 +17123,10 @@ Bridge.$N1391Result =                     r;
                     var p = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2374.Person();
 
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeFullName(System.DateTime), Bridge.Reflection.getTypeFullName(Bridge.getType(Bridge.box(p.CreatedOn, System.DateTime, System.DateTime.format))));
-                    Bridge.Test.NUnit.Assert.AreEqual(new Date().getFullYear(), p.CreatedOn.getFullYear());
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getYear(System.DateTime.getNow()), System.DateTime.getYear(p.CreatedOn));
 
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeFullName(System.DateTime), Bridge.Reflection.getTypeFullName(Bridge.getType(Bridge.box(p.CreatedOnNullable, System.DateTime, System.Nullable.toStringFn(System.DateTime.format), System.Nullable.getHashCode))));
-                    Bridge.Test.NUnit.Assert.AreEqual(new Date().getFullYear(), System.Nullable.getValue(p.CreatedOnNullable).getFullYear());
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getYear(System.DateTime.getNow()), System.DateTime.getYear(System.Nullable.getValue(p.CreatedOnNullable)));
                 }
             }
         }
@@ -17140,8 +17140,8 @@ Bridge.$N1391Result =                     r;
         ctors: {
             init: function () {
                 this.CreatedOn = System.DateTime.getDefaultValue();
-                this.CreatedOn = new Date();
-                this.CreatedOnNullable = new Date();
+                this.CreatedOn = System.DateTime.getNow();
+                this.CreatedOnNullable = System.DateTime.getNow();
             }
         }
     });
@@ -19830,17 +19830,18 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestRoundtripFormat: function () {
-                    var a = System.DateTime.format(System.DateTime.utcNow(), "o");
+                    var a = System.DateTime.format(System.DateTime.getUtcNow(), "o");
                     var b = System.DateTime.parseExact(a, "o", System.Globalization.CultureInfo.invariantCulture);
 
-                    // There is a diff to .Net as DateTime.Kind is not supported - Z vs +00:00 compared to .Net result
+                    b = System.DateTime.toUniversalTime(b);
+
                     Bridge.Test.NUnit.Assert.AreEqual(a, System.DateTime.format(b, "o"));
 
                     var c1 = System.DateTime.parseExact("2017-05-15T14:34:03.6762498+00:00", "o", System.Globalization.CultureInfo.invariantCulture);
                     var c2 = System.DateTime.parseExact("2017-05-15T14:34:03.6760000+00:00", "o", System.Globalization.CultureInfo.invariantCulture);
 
-                    Bridge.Test.NUnit.Assert.AreEqual(2017, c1.getFullYear());
-                    Bridge.Test.NUnit.Assert.AreEqual(5, (c1.getMonth() + 1));
+                    Bridge.Test.NUnit.Assert.AreEqual(2017, System.DateTime.getYear(c1));
+                    Bridge.Test.NUnit.Assert.AreEqual(5, System.DateTime.getMonth(c1));
                     // JS limitation - ms part may be different compared to .Net
                     Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.format(c1, "o"), System.DateTime.format(c2, "o"));
                 }
@@ -22383,7 +22384,7 @@ Bridge.$N1391Result =                     r;
             methods: {
                 TestAmbigiousSymbols: function () {
                     var $t;
-                    var testDataDates = System.Array.init([System.Array.init([Bridge.box(new Date(2017, 1 - 1, 1), System.DateTime, System.DateTime.format), Bridge.box(new Date(2018, 1 - 1, 1), System.DateTime, System.DateTime.format)], System.Object)], System.Array.type(System.Object));
+                    var testDataDates = System.Array.init([System.Array.init([Bridge.box(System.DateTime.create(2017, 1, 1), System.DateTime, System.DateTime.format), Bridge.box(System.DateTime.create(2018, 1, 1), System.DateTime, System.DateTime.format)], System.Object)], System.Array.type(System.Object));
 
                     var method = Bridge.Reflection.getMembers(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2738, 8, 284, "LogDates");
 
@@ -22399,8 +22400,8 @@ Bridge.$N1391Result =                     r;
                         }
                     }},
                 LogDates: function (a, b) {
-                    Bridge.Test.NUnit.Assert.AreEqual(2017, a.getFullYear());
-                    Bridge.Test.NUnit.Assert.AreEqual(2018, b.getFullYear());
+                    Bridge.Test.NUnit.Assert.AreEqual(2017, System.DateTime.getYear(a));
+                    Bridge.Test.NUnit.Assert.AreEqual(2018, System.DateTime.getYear(b));
                 }
             }
         }
@@ -22455,7 +22456,7 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestExtensionMethodBoxing: function () {
-                    var val1 = System.DateTime.fromTicks(System.Int64([629669888,148154497]));
+                    var val1 = System.DateTime.create$2(System.Int64([629669888,148154497]));
                     var val2 = (val1);
                     var offset = Bridge.box(val2.getTimezoneOffset(), System.Int32);
 
@@ -22864,12 +22865,12 @@ Bridge.$N1391Result =                     r;
                     culture.dateTimeFormat.timeSeparator = ".";
                     var testValue = { };
                     if (System.DateTime.tryParseExact("13.00", System.String.format("H{0}mm", culture.dateTimeFormat.timeSeparator), culture, testValue)) {
-                        var now = new Date();
-                        Bridge.Test.NUnit.Assert.AreEqual(now.getFullYear(), testValue.v.getFullYear());
-                        Bridge.Test.NUnit.Assert.AreEqual((now.getMonth() + 1), (testValue.v.getMonth() + 1));
-                        Bridge.Test.NUnit.Assert.AreEqual(now.getDate(), testValue.v.getDate());
-                        Bridge.Test.NUnit.Assert.AreEqual(13, testValue.v.getHours());
-                        Bridge.Test.NUnit.Assert.AreEqual(0, testValue.v.getMinutes());
+                        var now = System.DateTime.getNow();
+                        Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getYear(now), System.DateTime.getYear(testValue.v));
+                        Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getMonth(now), System.DateTime.getMonth(testValue.v));
+                        Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getDay(now), System.DateTime.getDay(testValue.v));
+                        Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.getHour(testValue.v));
+                        Bridge.Test.NUnit.Assert.AreEqual(0, System.DateTime.getMinute(testValue.v));
                     } else {
                         Bridge.Test.NUnit.Assert.Fail("Date is not parsed correctly");
                     }
@@ -22877,22 +22878,22 @@ Bridge.$N1391Result =                     r;
                     culture = new System.Globalization.CultureInfo("ru-RU");
                     culture.dateTimeFormat.timeSeparator = ".";
                     if (System.DateTime.tryParseExact("13.00", System.String.format("H{0}mm", culture.dateTimeFormat.timeSeparator), culture, testValue)) {
-                        var now1 = new Date();
-                        Bridge.Test.NUnit.Assert.AreEqual(now1.getFullYear(), testValue.v.getFullYear());
-                        Bridge.Test.NUnit.Assert.AreEqual((now1.getMonth() + 1), (testValue.v.getMonth() + 1));
-                        Bridge.Test.NUnit.Assert.AreEqual(now1.getDate(), testValue.v.getDate());
-                        Bridge.Test.NUnit.Assert.AreEqual(13, testValue.v.getHours());
-                        Bridge.Test.NUnit.Assert.AreEqual(0, testValue.v.getMinutes());
+                        var now1 = System.DateTime.getNow();
+                        Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getYear(now1), System.DateTime.getYear(testValue.v));
+                        Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getMonth(now1), System.DateTime.getMonth(testValue.v));
+                        Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.getDay(now1), System.DateTime.getDay(testValue.v));
+                        Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.getHour(testValue.v));
+                        Bridge.Test.NUnit.Assert.AreEqual(0, System.DateTime.getMinute(testValue.v));
                     } else {
                         Bridge.Test.NUnit.Assert.Fail("Date is not parsed correctly");
                     }
 
-                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.parse("13:00", new System.Globalization.CultureInfo("en-GB")).getHours());
-                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.parse("13:00", new System.Globalization.CultureInfo("nb-NO")).getHours());
-                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.parse("13:00", new System.Globalization.CultureInfo("ru-RU")).getHours());
-                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.parse("13:00", new System.Globalization.CultureInfo("es-ES")).getHours());
-                    Bridge.Test.NUnit.Assert.AreEqual(1, System.DateTime.parse("01:00", new System.Globalization.CultureInfo("nb-NO")).getHours());
-                    Bridge.Test.NUnit.Assert.AreEqual(1, System.DateTime.parse("01:00", new System.Globalization.CultureInfo("ru-RU")).getHours());
+                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.getHour(System.DateTime.parse("13:00", new System.Globalization.CultureInfo("en-GB"))));
+                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.getHour(System.DateTime.parse("13:00", new System.Globalization.CultureInfo("nb-NO"))));
+                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.getHour(System.DateTime.parse("13:00", new System.Globalization.CultureInfo("ru-RU"))));
+                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.getHour(System.DateTime.parse("13:00", new System.Globalization.CultureInfo("es-ES"))));
+                    Bridge.Test.NUnit.Assert.AreEqual(1, System.DateTime.getHour(System.DateTime.parse("01:00", new System.Globalization.CultureInfo("nb-NO"))));
+                    Bridge.Test.NUnit.Assert.AreEqual(1, System.DateTime.getHour(System.DateTime.parse("01:00", new System.Globalization.CultureInfo("ru-RU"))));
                 }
             }
         }
@@ -23785,16 +23786,16 @@ Bridge.$N1391Result =                     r;
             methods: {
                 TestLocalesWithoutColonInTime: function () {
                     var culture = new System.Globalization.CultureInfo("en-GB");
-                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.parse("13:00", culture).getHours());
+                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.getHour(System.DateTime.parse("13:00", culture)));
 
                     culture.dateTimeFormat.timeSeparator = ".";
-                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.parse("13:00", culture).getHours());
+                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.getHour(System.DateTime.parse("13:00", culture)));
 
                     culture = new System.Globalization.CultureInfo("nb-NO");
-                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.parse("13:00", culture).getHours());
+                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.getHour(System.DateTime.parse("13:00", culture)));
 
                     culture.dateTimeFormat.timeSeparator = ".";
-                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.parse("13:00", culture).getHours());
+                    Bridge.Test.NUnit.Assert.AreEqual(13, System.DateTime.getHour(System.DateTime.parse("13:00", culture)));
                 }
             }
         }
@@ -23888,46 +23889,93 @@ Bridge.$N1391Result =                     r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2949", {
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992", {
         statics: {
             methods: {
-                Test32bitMultiplication: function () {
-                    var a = 715827882;
-                    a = Bridge.Int.mul(a, a);
-                    Bridge.Test.NUnit.Assert.AreEqual(-477218588, a);
+                TestRefThis: function () {
+                    var q = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992.Vector2.$ctor1(10, 10);
+                    var x = q.X;
+                    var y = q.Y;
 
-                    a = 715827882;
-                    a = Bridge.Int.mul(a, a);
-                    Bridge.Test.NUnit.Assert.AreEqual(-477218588, a);
+                    q.Normalize();
+                    Bridge.Test.NUnit.Assert.AreNotEqual(x, q.X);
+                    Bridge.Test.NUnit.Assert.AreNotEqual(y, q.Y);
 
-                    var b = 715827882;
-                    b = Bridge.Int.mul(b, b);
-                    Bridge.Test.NUnit.Assert.AreEqual(-477218588, b);
-
-                    b = 715827882;
-                    b = Bridge.Int.mul(b, b);
-                    Bridge.Test.NUnit.Assert.AreEqual(-477218588, b);
-
-                    var c = 1431655765;
-                    c = Bridge.Int.umul(c, 2);
-                    Bridge.Test.NUnit.Assert.AreEqual(2863311530, c);
-
-                    c = 1431655765;
-                    c = Bridge.Int.umul(c, 2);
-                    Bridge.Test.NUnit.Assert.AreEqual(2863311530, c);
-
-                    var d = 1431655765;
-                    d = Bridge.Int.umul(d, 2);
-                    Bridge.Test.NUnit.Assert.AreEqual(2863311530, d);
-
-                    d = 1431655765;
-                    d = Bridge.Int.umul(d, 2);
-                    Bridge.Test.NUnit.Assert.AreEqual(2863311530, d);
-
-                    var i1 = 2147483647;
-                    var i2 = 4294967295;
-                    Bridge.Test.NUnit.Assert.True(System.Int64([-2147483647,2147483646]).equals(System.Int64(i1).mul(System.Int64(i2))));
+                    q.Normalize(true);
+                    Bridge.Test.NUnit.Assert.AreEqual(7, q.X);
+                    Bridge.Test.NUnit.Assert.AreEqual(7, q.Y);
                 }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992.Vector2", {
+        $kind: "struct",
+        statics: {
+            fields: {
+                zeroVector: null
+            },
+            ctors: {
+                init: function () {
+                    this.zeroVector = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992.Vector2();
+                    this.zeroVector = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992.Vector2.$ctor1(0.0, 0.0);
+                }
+            },
+            methods: {
+                DistanceSquared: function (value1, value2) {
+                    return (value1.X - value2.X) * (value1.X - value2.X) + (value1.Y - value2.Y) * (value1.Y - value2.Y);
+                },
+                Normalize: function (value, result) {
+                    var factor = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992.Vector2.DistanceSquared(value.v.$clone(), Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992.Vector2.zeroVector.$clone());
+                    factor = 1.0 / Math.sqrt(factor);
+                    result.v.X = value.v.X * factor;
+                    result.v.Y = value.v.Y * factor;
+                },
+                SetNewValue: function (value) {
+                    value.v = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992.Vector2.$ctor1(7, 7);
+                },
+                getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992.Vector2(); }
+            }
+        },
+        fields: {
+            X: 0,
+            Y: 0
+        },
+        ctors: {
+            $ctor1: function (x, y) {
+                this.$initialize();
+                this.X = x;
+                this.Y = y;
+            },
+            ctor: function () {
+                this.$initialize();
+            }
+        },
+        methods: {
+            Normalize: function (setNewValue) {
+                if (setNewValue === void 0) { setNewValue = false; }
+                if (setNewValue) {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992.Vector2.SetNewValue(Bridge.ref(this));
+                } else {
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992.Vector2.Normalize(Bridge.ref(this), Bridge.ref(this));
+                }
+
+            },
+            getHashCode: function () {
+                var h = Bridge.addHash([1955977157, this.X, this.Y]);
+                return h;
+            },
+            equals: function (o) {
+                if (!Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992.Vector2)) {
+                    return false;
+                }
+                return Bridge.equals(this.X, o.X) && Bridge.equals(this.Y, o.Y);
+            },
+            $clone: function (to) {
+                var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge2992.Vector2();
+                s.X = this.X;
+                s.Y = this.Y;
+                return s;
             }
         }
     });
@@ -25009,33 +25057,33 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestUseCase: function () {
-                    var date = new Date(2015, 1 - 1, 1, 0, 0, 0, 0);
+                    var date = System.DateTime.create(2015, 1, 1, 0, 0, 0, 0);
 
                     var i = 1;
-                    var d = new Date(date.valueOf() + Math.round((((10 + Bridge.Int.mul(20, i)) | 0)) * 6e4));
+                    var d = System.DateTime.addMinutes(date, ((10 + Bridge.Int.mul(20, i)) | 0));
 
-                    Bridge.Test.NUnit.Assert.AreEqual(30, d.getMinutes(), "Bridge546 30 minutes");
+                    Bridge.Test.NUnit.Assert.AreEqual(30, System.DateTime.getMinute(d), "Bridge546 30 minutes");
                 },
                 TestRelated: function () {
-                    var date = new Date(2015, 1 - 1, 1, 0, 0, 0, 0);
+                    var date = System.DateTime.create(2015, 1, 1, 0, 0, 0, 0);
                     var span1 = new System.TimeSpan(0, 15, 0);
                     var span2 = new System.TimeSpan(0, 7, 0);
                     var i = 1;
 
                     var d1 = System.DateTime.subdt(System.DateTime.subdt(date, span1), span2);
-                    Bridge.Test.NUnit.Assert.AreEqual(38, d1.getMinutes(), "Bridge546 d1");
+                    Bridge.Test.NUnit.Assert.AreEqual(38, System.DateTime.getMinute(d1), "Bridge546 d1");
 
                     var d2 = System.DateTime.adddt(System.DateTime.adddt(date, span1), span2);
-                    Bridge.Test.NUnit.Assert.AreEqual(22, d2.getMinutes(), "Bridge546 d2");
+                    Bridge.Test.NUnit.Assert.AreEqual(22, System.DateTime.getMinute(d2), "Bridge546 d2");
 
-                    var d3 = new Date(date.valueOf() + Math.round((((10 + Bridge.Int.mul(20, i)) | 0)) * 864e5));
-                    Bridge.Test.NUnit.Assert.AreEqual(31, d3.getDate(), "Bridge546 d3");
+                    var d3 = System.DateTime.addDays(date, ((10 + Bridge.Int.mul(20, i)) | 0));
+                    Bridge.Test.NUnit.Assert.AreEqual(31, System.DateTime.getDay(d3), "Bridge546 d3");
 
-                    var d4 = new Date(date.valueOf() + Math.round((((10 + Bridge.Int.mul(20, i)) | 0)) * 36e5));
-                    Bridge.Test.NUnit.Assert.AreEqual(6, d4.getHours(), "Bridge546 d4");
+                    var d4 = System.DateTime.addHours(date, ((10 + Bridge.Int.mul(20, i)) | 0));
+                    Bridge.Test.NUnit.Assert.AreEqual(6, System.DateTime.getHour(d4), "Bridge546 d4");
 
-                    var d5 = new Date(date.valueOf() + Math.round((((12 + Bridge.Int.mul(20, i)) | 0)) * 1e3));
-                    Bridge.Test.NUnit.Assert.AreEqual(32, d5.getSeconds(), "Bridge546 d5");
+                    var d5 = System.DateTime.addSeconds(date, ((12 + Bridge.Int.mul(20, i)) | 0));
+                    Bridge.Test.NUnit.Assert.AreEqual(32, System.DateTime.getSecond(d5), "Bridge546 d5");
                 }
             }
         }
@@ -25904,31 +25952,31 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestAddTimeSpan: function () {
-                    var today = new Date(2006, 1 - 1, 1);
+                    var today = System.DateTime.create(2006, 1, 1);
                     var duration = new System.TimeSpan(36, 0, 0, 0);
-                    var answer = new Date((today).getTime() + ((duration).ticks.div(10000).toNumber()));
+                    var answer = System.DateTime.add(today, duration);
 
-                    Bridge.Test.NUnit.Assert.AreEqual(2006, answer.getFullYear(), "Bridge582 TestAddTimeSpan Year");
-                    Bridge.Test.NUnit.Assert.AreEqual(2, (answer.getMonth() + 1), "Bridge582 TestAddTimeSpan Month");
-                    Bridge.Test.NUnit.Assert.AreEqual(6, answer.getDate(), "Bridge582 TestAddTimeSpan Day");
-                    Bridge.Test.NUnit.Assert.AreEqual(0, answer.getHours(), "Bridge582 TestAddTimeSpan Hours");
-                    Bridge.Test.NUnit.Assert.AreEqual(0, answer.getMinutes(), "Bridge582 TestAddTimeSpan Minutes");
-                    Bridge.Test.NUnit.Assert.AreEqual(0, answer.getSeconds(), "Bridge582 TestAddTimeSpan Seconds");
+                    Bridge.Test.NUnit.Assert.AreEqual(2006, System.DateTime.getYear(answer), "Bridge582 TestAddTimeSpan Year");
+                    Bridge.Test.NUnit.Assert.AreEqual(2, System.DateTime.getMonth(answer), "Bridge582 TestAddTimeSpan Month");
+                    Bridge.Test.NUnit.Assert.AreEqual(6, System.DateTime.getDay(answer), "Bridge582 TestAddTimeSpan Day");
+                    Bridge.Test.NUnit.Assert.AreEqual(0, System.DateTime.getHour(answer), "Bridge582 TestAddTimeSpan Hours");
+                    Bridge.Test.NUnit.Assert.AreEqual(0, System.DateTime.getMinute(answer), "Bridge582 TestAddTimeSpan Minutes");
+                    Bridge.Test.NUnit.Assert.AreEqual(0, System.DateTime.getSecond(answer), "Bridge582 TestAddTimeSpan Seconds");
                 },
                 TestAddTicks: function () {
-                    var dt = new Date(2001, 1 - 1, 1);
-                    dt = new Date(System.Int64((dt).getTime()).add((System.Int64(20000000)).div(10000)).toNumber());
+                    var dt = System.DateTime.create(2001, 1, 1);
+                    dt = System.DateTime.addTicks(dt, System.Int64(20000000));
 
-                    Bridge.Test.NUnit.Assert.AreEqual(2001, dt.getFullYear(), "Bridge582 TestAddTicks Year");
-                    Bridge.Test.NUnit.Assert.AreEqual(1, (dt.getMonth() + 1), "Bridge582 TestAddTicks Month");
-                    Bridge.Test.NUnit.Assert.AreEqual(1, dt.getDate(), "Bridge582 TestAddTicks Day");
-                    Bridge.Test.NUnit.Assert.AreEqual(0, dt.getHours(), "Bridge582 TestAddTicks Hour");
-                    Bridge.Test.NUnit.Assert.AreEqual(0, dt.getMinutes(), "Bridge582 TestAddTicks Minute");
-                    Bridge.Test.NUnit.Assert.AreEqual(2, dt.getSeconds(), "Bridge582 TestAddTicks Second");
+                    Bridge.Test.NUnit.Assert.AreEqual(2001, System.DateTime.getYear(dt), "Bridge582 TestAddTicks Year");
+                    Bridge.Test.NUnit.Assert.AreEqual(1, System.DateTime.getMonth(dt), "Bridge582 TestAddTicks Month");
+                    Bridge.Test.NUnit.Assert.AreEqual(1, System.DateTime.getDay(dt), "Bridge582 TestAddTicks Day");
+                    Bridge.Test.NUnit.Assert.AreEqual(0, System.DateTime.getHour(dt), "Bridge582 TestAddTicks Hour");
+                    Bridge.Test.NUnit.Assert.AreEqual(0, System.DateTime.getMinute(dt), "Bridge582 TestAddTicks Minute");
+                    Bridge.Test.NUnit.Assert.AreEqual(2, System.DateTime.getSecond(dt), "Bridge582 TestAddTicks Second");
                 },
                 TestTicks: function () {
-                    var centuryBegin = new Date(2001, 1 - 1, 1);
-                    var currentDate = new Date(2007, 12 - 1, 14, 15, 23);
+                    var centuryBegin = System.DateTime.create(2001, 1, 1);
+                    var currentDate = System.DateTime.create(2007, 12, 14, 15, 23, 0);
                     var elapsedTicks = System.DateTime.getTicks(currentDate).sub(System.DateTime.getTicks(centuryBegin));
                     var elapsedSpan = new System.TimeSpan(elapsedTicks);
 
@@ -25941,9 +25989,9 @@ Bridge.$N1391Result =                     r;
                     Bridge.Test.NUnit.Assert.AreEqual(0, elapsedSpan.getSeconds(), "Bridge582 TestTicks minutes");
                 },
                 TestSubtractTimeSpan: function () {
-                    var date1 = new Date(1996, 1 - 1, 1, 1, 1, 1, 1);
-                    var date2 = new Date(1996, 2 - 1, 2, 2, 2, 2, 2);
-                    var date3 = new Date(1996, 3 - 1, 3, 3, 3, 3, 3);
+                    var date1 = System.DateTime.create(1996, 1, 1, 1, 1, 1, 1);
+                    var date2 = System.DateTime.create(1996, 2, 2, 2, 2, 2, 2);
+                    var date3 = System.DateTime.create(1996, 3, 3, 3, 3, 3, 3);
 
                     var diff1 = System.DateTime.subdd(date2, date1);
 
@@ -25963,24 +26011,25 @@ Bridge.$N1391Result =                     r;
 
                     Bridge.Test.NUnit.Assert.True(diff1.equalsT(ts1), "Bridge582 TestSubtractTimeSpan diff1");
 
-                    var date4 = new Date(date3 - new Date((diff1).ticks.div(10000).toNumber()));
-                    Bridge.Test.NUnit.Assert.True(Bridge.equalsT(date4, new Date(1996, 1 - 1, 31, 2, 2, 2, 2)), "Bridge582 TestSubtractTimeSpan date4");
+                    var date4 = System.DateTime.subtract(date3, diff1);
+                    Bridge.Test.NUnit.Assert.True(Bridge.equalsT(date4, System.DateTime.create(1996, 1, 31, 2, 2, 2, 2)), "Bridge582 TestSubtractTimeSpan date4");
 
                     var diff2 = System.DateTime.subdd(date3, date1);
                     Bridge.Test.NUnit.Assert.True(diff2.equalsT(new System.TimeSpan(62, 2, 2, 2, 2)), "Bridge582 TestSubtractTimeSpan diff2");
                 },
                 TestTimeOfDay: function () {
-                    var date = new Date(2013, 9 - 1, 14, 9, 28, 0);
-                    Bridge.Test.NUnit.Assert.True(Bridge.equalsT(new Date(date.getFullYear(), date.getMonth(), date.getDate()), new Date(2013, 9 - 1, 14)), "Bridge582 TestTimeOfDay Date 2013, 9, 14, 9, 28, 0");
-                    Bridge.Test.NUnit.Assert.True(System.DateTime.timeOfDay(date).equalsT(new System.TimeSpan(9, 28, 0)), "Bridge582 TestTimeOfDay TimeOfDay 2013, 9, 14, 9, 28, 0");
+                    var date = System.DateTime.create(2013, 9, 14, 9, 28, 0);
 
-                    date = new Date(2011, 5 - 1, 28, 10, 35, 0);
-                    Bridge.Test.NUnit.Assert.True(Bridge.equalsT(new Date(date.getFullYear(), date.getMonth(), date.getDate()), new Date(2011, 5 - 1, 28)), "Bridge582 TestTimeOfDay Date 2011, 5, 28, 10, 35, 0");
-                    Bridge.Test.NUnit.Assert.True(System.DateTime.timeOfDay(date).equalsT(new System.TimeSpan(10, 35, 0)), "Bridge582 TestTimeOfDay TimeOfDay 2011, 5, 28, 10, 35, 0");
+                    Bridge.Test.NUnit.Assert.True(Bridge.equalsT(System.DateTime.getDate(date), System.DateTime.create(2013, 9, 14)), "Bridge582 TestTimeOfDay Date 2013, 9, 14, 9, 28, 0");
+                    Bridge.Test.NUnit.Assert.True(System.DateTime.getTimeOfDay(date).equalsT(new System.TimeSpan(9, 28, 0)), "Bridge582 TestTimeOfDay TimeOfDay 2013, 9, 14, 9, 28, 0");
 
-                    date = new Date(1979, 12 - 1, 25, 14, 30, 0);
-                    Bridge.Test.NUnit.Assert.True(Bridge.equalsT(new Date(date.getFullYear(), date.getMonth(), date.getDate()), new Date(1979, 12 - 1, 25)), "Bridge582 TestTimeOfDay Date 1979, 12, 25, 14, 30, 0");
-                    Bridge.Test.NUnit.Assert.True(System.DateTime.timeOfDay(date).equalsT(new System.TimeSpan(14, 30, 0)), "Bridge582 TestTimeOfDay TimeOfDay 1979, 12, 25, 14, 30, 0");
+                    date = System.DateTime.create(2011, 5, 28, 10, 35, 0);
+                    Bridge.Test.NUnit.Assert.True(Bridge.equalsT(System.DateTime.getDate(date), System.DateTime.create(2011, 5, 28)), "Bridge582 TestTimeOfDay Date 2011, 5, 28, 10, 35, 0");
+                    Bridge.Test.NUnit.Assert.True(System.DateTime.getTimeOfDay(date).equalsT(new System.TimeSpan(10, 35, 0)), "Bridge582 TestTimeOfDay TimeOfDay 2011, 5, 28, 10, 35, 0");
+
+                    date = System.DateTime.create(1979, 12, 25, 14, 30, 0);
+                    Bridge.Test.NUnit.Assert.True(Bridge.equalsT(System.DateTime.getDate(date), System.DateTime.create(1979, 12, 25)), "Bridge582 TestTimeOfDay Date 1979, 12, 25, 14, 30, 0");
+                    Bridge.Test.NUnit.Assert.True(System.DateTime.getTimeOfDay(date).equalsT(new System.TimeSpan(14, 30, 0)), "Bridge582 TestTimeOfDay TimeOfDay 1979, 12, 25, 14, 30, 0");
                 }
             }
         }
@@ -26279,7 +26328,7 @@ Bridge.$N1391Result =                     r;
         methods: {
             Render: function () {
                 this.buffer.append("Render0");
-                this.Render$1(new Date());
+                this.Render$1(System.DateTime.getNow());
             },
             Render$1: function (when) {
                 this.buffer.append("Render1");
@@ -28473,10 +28522,18 @@ Bridge.$N1391Result =                     r;
             },
             methods: {
                 TestUseCase: function () {
-                    Bridge.Test.NUnit.Assert.True(Bridge.equals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.DateA, System.DateTime.getDefaultValue()), "Bridge733 DateA");
-                    Bridge.Test.NUnit.Assert.True(Bridge.equals(Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.dateb, System.DateTime.getDefaultValue()), "Bridge733 dateb");
+                    // These objects will never be equal, fails in .NET native too.
+                    // MinValue returns a UTC instance.
+                    // DateA and dateb return Local (or Unspecified) instances.
+                    // Change to compare to new Date() instead of MinValue
 
-                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.dateb = new Date(); // to prevent warning that dateb is never assigned
+                    // Assert.True(DateA.ToString("O") == DateTime.MinValue.ToString("O"), "Bridge733 DateA");
+                    // Assert.True(dateb.ToString("O") == DateTime.MinValue.ToString("O"), "Bridge733 dateb");
+
+                    Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(System.DateTime.format(Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.DateA, "O"), System.DateTime.format(System.DateTime.getDefaultValue(), "O")), "Bridge733 DateA");
+                    Bridge.Test.NUnit.Assert.True(Bridge.referenceEquals(System.DateTime.format(Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.dateb, "O"), System.DateTime.format(System.DateTime.getDefaultValue(), "O")), "Bridge733 dateb");
+
+                    Bridge.ClientTest.Batch3.BridgeIssues.Bridge733.dateb = System.DateTime.getNow(); // to prevent warning that dateb is never assigned
                 }
             }
         }
@@ -28593,14 +28650,14 @@ Bridge.$N1391Result =                     r;
             methods: {
                 TestUseCase: function () {
                     var list = new (System.Collections.Generic.List$1(System.DateTime))();
-                    list.add(new Date(2015, 1 - 1, 2));
-                    list.add(new Date(2015, 1 - 1, 1));
-                    list.add(new Date(2015, 1 - 1, 3));
+                    list.add(System.DateTime.create(2015, 1, 2));
+                    list.add(System.DateTime.create(2015, 1, 1));
+                    list.add(System.DateTime.create(2015, 1, 3));
 
                     list.sort();
-                    Bridge.Test.NUnit.Assert.True(Bridge.equals(list.getItem(0), new Date(2015, 1 - 1, 1)), "Bridge758 2015/1/1");
-                    Bridge.Test.NUnit.Assert.True(Bridge.equals(list.getItem(1), new Date(2015, 1 - 1, 2)), "Bridge758 2015/1/2");
-                    Bridge.Test.NUnit.Assert.True(Bridge.equals(list.getItem(2), new Date(2015, 1 - 1, 3)), "Bridge758 2015/1/3");
+                    Bridge.Test.NUnit.Assert.True(Bridge.equals(list.getItem(0), System.DateTime.create(2015, 1, 1)), "Bridge758 2015/1/1");
+                    Bridge.Test.NUnit.Assert.True(Bridge.equals(list.getItem(1), System.DateTime.create(2015, 1, 2)), "Bridge758 2015/1/2");
+                    Bridge.Test.NUnit.Assert.True(Bridge.equals(list.getItem(2), System.DateTime.create(2015, 1, 3)), "Bridge758 2015/1/3");
                 }
             }
         }
@@ -29325,9 +29382,9 @@ Bridge.$N1391Result =                     r;
                 GetTicksReturnsCorrectValue: function () {
                     var val = System.Int64([-57829376,2204230]);
 
-                    var ticks = System.DateTime.getTicks(System.DateTime.fromTicks(val));
-                    var ticksPlusOne = System.DateTime.getTicks(System.DateTime.fromTicks(val)).add(System.Int64(1));
-                    var ticksString = System.DateTime.getTicks(System.DateTime.fromTicks(val)).toString();
+                    var ticks = System.DateTime.getTicks(System.DateTime.create$2(val));
+                    var ticksPlusOne = System.DateTime.getTicks(System.DateTime.create$2(val)).add(System.Int64(1));
+                    var ticksString = System.DateTime.getTicks(System.DateTime.create$2(val)).toString();
 
                     Bridge.Test.NUnit.Assert.AreDeepEqual(val, ticks, "Ticks returning correct int value");
                     Bridge.Test.NUnit.Assert.AreDeepEqual(val.add(System.Int64(1)), ticksPlusOne, "Adding to a Tick value is correct");
@@ -29605,7 +29662,7 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 NullableAndSimpleDateTimeToStringEquals: function () {
-                    var dt1 = new Date();
+                    var dt1 = System.DateTime.getNow();
                     var dt2 = dt1;
 
                     Bridge.Test.NUnit.Assert.AreEqual(System.Nullable.toString(dt2, function ($t) { return System.DateTime.format($t); }), System.DateTime.format(dt1), "Bridge844");
@@ -30381,7 +30438,7 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullableDateTimeGreaterThanWorks: function () {
-                    var a = new Date();
+                    var a = System.DateTime.getNow();
                     var b = null;
 
                     Bridge.Test.NUnit.Assert.False(System.DateTime.gt(a, b), "Bridge913 gt");
@@ -30951,16 +31008,11 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 DateTimeToISOStringWorks: function () {
-                    var d1 = new Date(2011, 10 - 1, 5, 14, 48);
-                    var d2 = System.DateTime.toUTC(d1);
+                    var d1 = System.DateTime.create(2011, 10, 5, 14, 48, 15, 0, System.DateTimeKind.Utc);
+                    var d2 = System.DateTime.toLocalTime(d1);
+                    var d3 = System.DateTime.toUniversalTime(d2);
 
-                    // This is required to change d1 to UTC without changing time
-                    d1 = System.DateTime.addMonths(d1, (((d1.getMonth() + 1) - (d2.getMonth() + 1)) | 0));
-                    d1 = new Date(d1.valueOf() + Math.round((((d1.getDate() - d2.getDate()) | 0)) * 864e5));
-                    d1 = new Date(d1.valueOf() + Math.round((((d1.getHours() - d2.getHours()) | 0)) * 36e5));
-                    d1 = new Date(d1.valueOf() + Math.round((((d1.getMinutes() - d2.getMinutes()) | 0)) * 6e4));
-
-                    Bridge.Test.NUnit.Assert.AreEqual("2011-10-05T14:48:00.000Z", d1.toISOString());
+                    Bridge.Test.NUnit.Assert.AreEqual("2011-10-05T14:48:15.0000000Z", System.DateTime.format(d3, "O"));
                 },
                 DateToISOStringWorks: function () {
                     var d1 = new Date("05 October 2011 14:48 UTC");
@@ -31567,17 +31619,6 @@ Bridge.$N1391Result =                     r;
                     var a = Bridge.ClientTest.Batch3.BridgeIssues.Bridge306A.New(($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge306A.Props(), $t.Name = "A", $t));
                     Bridge.Test.NUnit.Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge306A+Props:A", a, "Bridge306A.New() works");
                 },
-                N329: function () {
-                    var d1 = { };
-                    var b1 = System.DateTime.tryParse("2001-01-01", null, d1, true);
-                    Bridge.Test.NUnit.Assert.True(b1, "TryParse parsed '2001 - 01 - 01'");
-                    Bridge.Test.NUnit.Assert.AreEqual(2001, d1.v.getUTCFullYear(), "TryParse works Year");
-                    Bridge.Test.NUnit.Assert.AreEqual(1, (d1.v.getUTCMonth() + 1), "TryParse works Month");
-                    Bridge.Test.NUnit.Assert.AreEqual(1, d1.v.getUTCDay(), "TryParse works Day");
-
-                    var d2 = System.DateTime.parse("2001-01-01", null, true);
-                    Bridge.Test.NUnit.Assert.AreEqual(System.DateTime.format(d1.v), System.DateTime.format(d2), "TryParse And Parse give the same result");
-                },
                 N335: function () {
                     var l = new (System.Collections.Generic.List$1(System.String))(System.Array.init(["1", "2", "3", "1"], System.String));
                     Bridge.Test.NUnit.Assert.AreEqual(3, l.indexOf("1", 2), "IndexOf with startIndex used");
@@ -31659,18 +31700,13 @@ Bridge.$N1391Result =                     r;
                         var r = interfacedDictionary.System$Collections$Generic$IDictionary$2$System$Int32$System$String$getItem(1);
                     }, "IDictionary getter throws exception when incorrect key used");
                 },
-                N349: function () {
-                    var date = { };
-                    var culture = new System.Globalization.CultureInfo("ru-RU");
-
-                    Bridge.Test.NUnit.Assert.True(culture != null, "Created CultureInfo(\"ru-RU\")");
-
-                    var parsed = System.DateTime.tryParse("22.08.2015", culture, date);
-                    Bridge.Test.NUnit.Assert.True(parsed, "Parsed \"22.08.2015\"");
-                    Bridge.Test.NUnit.Assert.AreEqual(2015, date.v.getFullYear(), "TryParse works Year");
-                    Bridge.Test.NUnit.Assert.AreEqual(8, (date.v.getMonth() + 1), "TryParse works Month");
-                    Bridge.Test.NUnit.Assert.AreEqual(22, date.v.getDate(), "TryParse works Day");
-                },
+                /**
+                 * @static
+                 * @public
+                 * @this Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues
+                 * @memberof Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues
+                 * @return  {void}
+                 */
                 N377: function () {
                     var objectLiteralInstance = { field1: "field1 value", field3: 7 };
 

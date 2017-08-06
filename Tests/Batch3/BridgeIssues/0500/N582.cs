@@ -41,7 +41,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public static void TestTicks()
         {
             DateTime centuryBegin = new DateTime(2001, 1, 1);
-            DateTime currentDate = new DateTime(2007, 12, 14, 15, 23);
+            DateTime currentDate = new DateTime(2007, 12, 14, 15, 23, 0);
             long elapsedTicks = currentDate.Ticks - centuryBegin.Ticks;
             TimeSpan elapsedSpan = new TimeSpan(elapsedTicks);
 
@@ -90,6 +90,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public static void TestTimeOfDay()
         {
             var date = new DateTime(2013, 9, 14, 9, 28, 0);
+
             Assert.True(date.Date.Equals(new DateTime(2013, 9, 14)), "Bridge582 TestTimeOfDay Date 2013, 9, 14, 9, 28, 0");
             Assert.True(date.TimeOfDay.Equals(new TimeSpan(9, 28, 0)), "Bridge582 TestTimeOfDay TimeOfDay 2013, 9, 14, 9, 28, 0");
 

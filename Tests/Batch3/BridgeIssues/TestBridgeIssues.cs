@@ -652,19 +652,20 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             Assert.AreEqual("Bridge.ClientTest.Batch3.BridgeIssues.Bridge306A+Props:A", a, "Bridge306A.New() works");
         }
 
-        [Test(Name = "#329", ExpectedCount = 5)]
-        public static void N329()
-        {
-            DateTime d1;
-            var b1 = DateTime.TryParse("2001-01-01", out d1, true);
-            Assert.True(b1, "TryParse parsed '2001 - 01 - 01'");
-            Assert.AreEqual(2001, d1.GetUtcFullYear(), "TryParse works Year");
-            Assert.AreEqual(1, d1.GetUtcMonth(), "TryParse works Month");
-            Assert.AreEqual(1, d1.GetUtcDay(), "TryParse works Day");
+        // Not C# API
+        //[Test(Name = "#329", ExpectedCount = 5)]
+        //public static void N329()
+        //{
+        //    DateTime d1;
+        //    var b1 = DateTime.TryParse("2001-01-01", out d1, true);
+        //    Assert.True(b1, "TryParse parsed '2001-01-01'");
+        //    Assert.AreEqual(2001, d1.Year, "TryParse works Year");
+        //    Assert.AreEqual(1, d1.Month, "TryParse works Month");
+        //    Assert.AreEqual(1, d1.Day, "TryParse works Day");
 
-            var d2 = DateTime.Parse("2001-01-01", true);
-            Assert.AreEqual(d1.ToString(), d2.ToString(), "TryParse And Parse give the same result");
-        }
+        //    var d2 = DateTime.Parse("2001-01-01", true);
+        //    Assert.AreEqual(d1.ToString(), d2.ToString(), "TryParse And Parse give the same result");
+        //}
 
         // Bridge[#335]
         [Test(Name = "#335", ExpectedCount = 1)]
@@ -797,21 +798,22 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
             }, "IDictionary getter throws exception when incorrect key used");
         }
 
-        // Bridge[#349]
-        [Test(Name = "#349", ExpectedCount = 5)]
-        public static void N349()
-        {
-            DateTime date;
-            var culture = new System.Globalization.CultureInfo("ru-RU");
+        // Not C# API
+        //// Bridge[#349]
+        //[Test(Name = "#349", ExpectedCount = 5)]
+        //public static void N349()
+        //{
+        //    DateTime date;
+        //    var culture = new System.Globalization.CultureInfo("ru-RU");
 
-            Assert.True(culture != null, "Created CultureInfo(\"ru-RU\")");
+        //    Assert.True(culture != null, "Created CultureInfo(\"ru-RU\")");
 
-            var parsed = DateTime.TryParse("22.08.2015", culture, out date);
-            Assert.True(parsed, "Parsed \"22.08.2015\"");
-            Assert.AreEqual(2015, date.Year, "TryParse works Year");
-            Assert.AreEqual(8, date.Month, "TryParse works Month");
-            Assert.AreEqual(22, date.Day, "TryParse works Day");
-        }
+        //    var parsed = DateTime.TryParse("22.08.2015", culture, out date);
+        //    Assert.True(parsed, "Parsed \"22.08.2015\"");
+        //    Assert.AreEqual(2015, date.Year, "TryParse works Year");
+        //    Assert.AreEqual(8, date.Month, "TryParse works Month");
+        //    Assert.AreEqual(22, date.Day, "TryParse works Day");
+        //}
 
         // Bridge[#377]
         [Test(Name = "#377", ExpectedCount = 6)]

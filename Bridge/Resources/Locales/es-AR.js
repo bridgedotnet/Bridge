@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-AR", true), {
         abbreviatedDayNames: ["dom.","lun.","mar.","mié.","jue.","vie.","sáb."],
         abbreviatedMonthGenitiveNames: ["ene.","feb.","mar.","abr.","may.","jun.","jul.","ago.","sep.","oct.","nov.","dic.",""],
         abbreviatedMonthNames: ["ene.","feb.","mar.","abr.","may.","jun.","jul.","ago.","sep.","oct.","nov.","dic.",""],
-        amDesignator: "a.m.",
+        amDesignator: "a. m.",
         dateSeparator: "/",
         dayNames: ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"],
         firstDayOfWeek: 0,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("es-AR", true), {
         monthDayPattern: "d 'de' MMMM",
         monthGenitiveNames: ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre",""],
         monthNames: ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre",""],
-        pmDesignator: "p.m.",
+        pmDesignator: "p. m.",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "d/M/yyyy",
         shortestDayNames: ["DO","LU","MA","MI","JU","VI","SA"],
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("es-AR", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM 'de' yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

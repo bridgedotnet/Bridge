@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("bez", true), {
         abbreviatedDayNames: ["Mul","Vil","Hiv","Hid","Hit","Hih","Lem"],
         abbreviatedMonthGenitiveNames: ["Hut","Vil","Dat","Tai","Han","Sit","Sab","Nan","Tis","Kum","Kmj","Kmb",""],
         abbreviatedMonthNames: ["Hut","Vil","Dat","Tai","Han","Sit","Sab","Nan","Tis","Kum","Kmj","Kmb",""],
-        amDesignator: "AM",
+        amDesignator: "pamilau",
         dateSeparator: "/",
         dayNames: ["pa mulungu","pa shahuviluha","pa hivili","pa hidatu","pa hitayi","pa hihanu","pa shahulembela"],
         firstDayOfWeek: 1,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("bez", true), {
         monthDayPattern: "MMMM d",
         monthGenitiveNames: ["pa mwedzi gwa hutala","pa mwedzi gwa wuvili","pa mwedzi gwa wudatu","pa mwedzi gwa wutai","pa mwedzi gwa wuhanu","pa mwedzi gwa sita","pa mwedzi gwa saba","pa mwedzi gwa nane","pa mwedzi gwa tisa","pa mwedzi gwa kumi","pa mwedzi gwa kumi na moja","pa mwedzi gwa kumi na mbili",""],
         monthNames: ["pa mwedzi gwa hutala","pa mwedzi gwa wuvili","pa mwedzi gwa wudatu","pa mwedzi gwa wutai","pa mwedzi gwa wuhanu","pa mwedzi gwa sita","pa mwedzi gwa saba","pa mwedzi gwa nane","pa mwedzi gwa tisa","pa mwedzi gwa kumi","pa mwedzi gwa kumi na moja","pa mwedzi gwa kumi na mbili",""],
-        pmDesignator: "PM",
+        pmDesignator: "pamunyi",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "dd/MM/yyyy",
         shortestDayNames: ["Mul","Vil","Hiv","Hid","Hit","Hih","Lem"],
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("bez", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

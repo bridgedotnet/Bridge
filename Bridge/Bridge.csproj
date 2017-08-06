@@ -150,6 +150,7 @@
     <Compile Include="System\ComponentModel\DataAnnotations\ValidationResult.cs" />
     <Compile Include="System\ComponentModel\DataAnnotations\Validator.cs" />
     <Compile Include="System\ComponentModel\EditorBrowsableAttribute.cs" />
+    <Compile Include="System\DateTimeKind.cs" />
     <Compile Include="System\SerializableAttribute.cs" />
     <Compile Include="Attributes\UnboxAttribute.cs" />
     <Compile Include="Attributes\GlobalMethodsAttribute.cs" />
@@ -446,6 +447,8 @@
     <Content Include="Resources\.generated\system\collections\generic\stack\enumerator.js" />
     <Content Include="Resources\.generated\system\collections\hashHelpers.js" />
     <Content Include="Resources\.generated\system\console.js" />
+    <Content Include="Resources\.generated\system\dateTimeKind.js" />
+    <Content Include="Resources\.generated\system\dayOfWeek.js" />
     <Content Include="Resources\.generated\system\environment.js" />
     <Content Include="Resources\.generated\system\formattableString.js" />
     <Content Include="Resources\.generated\system\formattableStringImpl.js" />
@@ -1300,6 +1303,14 @@
     <Content Include="Resources\.lib\LongLib.js" />
     <Content Include="Resources\Generator.js" />
     <Content Include="Resources\Double.js" />
+    <Content Include="Resources\Locales\de-IT.js" />
+    <Content Include="Resources\Locales\es-BR.js" />
+    <Content Include="Resources\Locales\nds-DE.js" />
+    <Content Include="Resources\Locales\nds-NL.js" />
+    <Content Include="Resources\Locales\nds.js" />
+    <Content Include="Resources\Locales\pt-CH.js" />
+    <Content Include="Resources\Locales\pt-GQ.js" />
+    <Content Include="Resources\Locales\pt-LU.js" />
     <Content Include="Resources\Long.js" />
     <Content Include="Resources\Math.js" />
     <Content Include="Resources\ReflectionAssembly.js" />

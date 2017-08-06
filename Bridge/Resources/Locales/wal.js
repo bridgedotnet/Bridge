@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("wal", true), {
         abbreviatedDayNames: ["ወጋ","ሳይኖ","ማቆሳኛ","አሩዋ","ሃሙሳ","አርባ","ቄራ"],
         abbreviatedMonthGenitiveNames: ["ጃንዩ","ፌብሩ","ማርች","ኤፕረ","ሜይ","ጁን","ጁላይ","ኦገስ","ሴፕቴ","ኦክተ","ኖቬም","ዲሴም",""],
         abbreviatedMonthNames: ["ጃንዩ","ፌብሩ","ማርች","ኤፕረ","ሜይ","ጁን","ጁላይ","ኦገስ","ሴፕቴ","ኦክተ","ኖቬም","ዲሴም",""],
-        amDesignator: "AM",
+        amDesignator: "ማለዶ",
         dateSeparator: "/",
         dayNames: ["ወጋ","ሳይኖ","ማቆሳኛ","አሩዋ","ሃሙሳ","አርባ","ቄራ"],
         firstDayOfWeek: 0,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("wal", true), {
         monthDayPattern: "MMMM d",
         monthGenitiveNames: ["ጃንዩወሪ","ፌብሩወሪ","ማርች","ኤፕረል","ሜይ","ጁን","ጁላይ","ኦገስት","ሴፕቴምበር","ኦክተውበር","ኖቬምበር","ዲሴምበር",""],
         monthNames: ["ጃንዩወሪ","ፌብሩወሪ","ማርች","ኤፕረል","ሜይ","ጁን","ጁላይ","ኦገስት","ሴፕቴምበር","ኦክተውበር","ኖቬምበር","ዲሴምበር",""],
-        pmDesignator: "PM",
+        pmDesignator: "ቃማ",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "dd/MM/yyyy",
         shortestDayNames: ["ወጋ","ሳይኖ","ማቆሳኛ","አሩዋ","ሃሙሳ","አርባ","ቄራ"],
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("wal", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy MMMM",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

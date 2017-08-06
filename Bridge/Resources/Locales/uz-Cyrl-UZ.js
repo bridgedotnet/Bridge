@@ -1,9 +1,9 @@
 Bridge.merge(new System.Globalization.CultureInfo("uz-Cyrl-UZ", true), {
     englishName: "Uzbek (Cyrillic, Uzbekistan)",
-    nativeName: "Ўзбек (Ўзбекистон)",
+    nativeName: "ўзбекча (Ўзбекистон)",
 
     numberFormat: Bridge.merge(new System.Globalization.NumberFormatInfo(), {
-        nanSymbol: "NaN",
+        nanSymbol: "ҳақиқий сон эмас",
         negativeSign: "-",
         positiveSign: "+",
         negativeInfinitySymbol: "-∞",
@@ -20,8 +20,8 @@ Bridge.merge(new System.Globalization.CultureInfo("uz-Cyrl-UZ", true), {
         currencyDecimalDigits: 0,
         currencyDecimalSeparator: ",",
         currencyGroupSeparator: " ",
-        currencyNegativePattern: 9,
-        currencyPositivePattern: 2,
+        currencyNegativePattern: 8,
+        currencyPositivePattern: 3,
         numberGroupSizes: [3],
         numberDecimalDigits: 2,
         numberDecimalSeparator: ",",
@@ -30,29 +30,29 @@ Bridge.merge(new System.Globalization.CultureInfo("uz-Cyrl-UZ", true), {
     }),
 
     dateTimeFormat: Bridge.merge(new System.Globalization.DateTimeFormatInfo(), {
-        abbreviatedDayNames: ["Якш","Душ","Сеш","Чор","Пай","Жум","Шан"],
-        abbreviatedMonthGenitiveNames: ["Янв","Фев","Мар","Апр","Май","Июн","Июл","Авг","Сен","Окт","Ноя","Дек",""],
+        abbreviatedDayNames: ["якш","душ","сеш","чор","пай","жум","шан"],
+        abbreviatedMonthGenitiveNames: ["янв","фев","мар","апр","май","июн","июл","авг","сен","окт","ноя","дек",""],
         abbreviatedMonthNames: ["Янв","Фев","Мар","Апр","Май","Июн","Июл","Авг","Сен","Окт","Ноя","Дек",""],
-        amDesignator: "AM",
+        amDesignator: "ТО",
         dateSeparator: "/",
         dayNames: ["якшанба","душанба","сешанба","чоршанба","пайшанба","жума","шанба"],
         firstDayOfWeek: 1,
-        fullDateTimePattern: "dddd, yyyy MMMM dd HH:mm:ss",
-        longDatePattern: "dddd, yyyy MMMM dd",
+        fullDateTimePattern: "dddd, dd MMMM, yyyy HH:mm:ss",
+        longDatePattern: "dddd, dd MMMM, yyyy",
         longTimePattern: "HH:mm:ss",
-        monthDayPattern: "MMMM d",
-        monthGenitiveNames: ["Январ","Феврал","Март","Апрел","Май","Июн","Июл","Август","Сентябр","Октябр","Ноябр","Декабр",""],
+        monthDayPattern: "d MMMM",
+        monthGenitiveNames: ["январ","феврал","март","апрел","май","июн","июл","август","сентябр","октябр","ноябр","декабр",""],
         monthNames: ["Январ","Феврал","Март","Апрел","Май","Июн","Июл","Август","Сентябр","Октябр","Ноябр","Декабр",""],
-        pmDesignator: "PM",
+        pmDesignator: "ТК",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "dd/MM/yyyy",
-        shortestDayNames: ["Якш","Душ","Сеш","Чор","Пай","Жум","Шан"],
+        shortestDayNames: ["Як","Ду","Се","Чо","Па","Жу","Ша"],
         shortTimePattern: "HH:mm",
         sortableDateTimePattern: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
         sortableDateTimePattern1: "yyyy'-'MM'-'dd",
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
-        yearMonthPattern: "yyyy MMMM",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        yearMonthPattern: "MMMM, yyyy",
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

@@ -1,4 +1,5 @@
 ﻿using Bridge.Test.NUnit;
+using Bridge.ClientTestHelper;
 using System;
 using System.Globalization;
 
@@ -34,51 +35,12 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.True(interfaces.Contains(typeof(IFormattable)));
         }
 
-        private void AssertDate(DateTime dt, int? year = null, int? month = null, int? day = null, int? hour = null, int? minute = null, int? second = null, int? ms = null)
-        {
-            if (year.HasValue)
-            {
-                Assert.AreEqual(year.Value, dt.Year, "Year");
-            }
-
-            if (month.HasValue)
-            {
-                Assert.AreEqual(month.Value, dt.Month, "Month");
-            }
-
-            if (day.HasValue)
-            {
-                Assert.AreEqual(day.Value, dt.Day, "Day");
-            }
-
-            if (hour.HasValue)
-            {
-                Assert.AreEqual(hour.Value, dt.Hour, "Hour");
-            }
-
-            if (minute.HasValue)
-            {
-                Assert.AreEqual(minute.Value, dt.Minute, "Minute");
-            }
-
-            if (second.HasValue)
-            {
-                Assert.AreEqual(second.Value, dt.Second, "Second");
-            }
-
-            if (ms.HasValue)
-            {
-                Assert.AreEqual(ms.Value, dt.Millisecond, "Millisecond");
-            }
-
-        }
-
         [Test]
         public void DefaultConstructorWorks_SPI_1606()
         {
             var dt = new DateTime();
             // #1606
-            AssertDate(dt, 1, 1, 1);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 0, 1, 1, 1);
         }
 
         [Test]
@@ -86,7 +48,7 @@ namespace Bridge.ClientTest.SimpleTypes
         {
             var dt = default(DateTime);
             // #1606
-            AssertDate(dt, 1, 1, 1);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 0, 1, 1, 1);
         }
 
         [Test]
@@ -94,13 +56,13 @@ namespace Bridge.ClientTest.SimpleTypes
         {
             var dt = Activator.CreateInstance<DateTime>();
             // #1606
-            AssertDate(dt, 1, 1, 1);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 0, 1, 1, 1);
         }
 
         [Test]
         public void MillisecondSinceEpochConstructorWorks()
         {
-            var dt = new DateTime(1440L * 60 * 500 * 1000);
+            var dt = new DateTime(1440L * 60 * 500 * 1000, DateTimeKind.Utc);
             Assert.AreEqual(1, dt.AddDays(1).Year);
         }
 
@@ -111,132 +73,238 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual(1, dt.Year);
 
             var dt1 = new DateTime(0);
-            AssertDate(dt, 1, 1, 1);
+            DateHelper.AssertDate(dt1, DateTimeKind.Unspecified, 0, 1, 1, 1);
 
             var dt2 = new DateTime(1000000000000000000);
-            AssertDate(dt2, 3169, 11, 16);
+            DateHelper.AssertDate(dt2, DateTimeKind.Unspecified, 1000000000000000000, 3169, 11, 16);
         }
 
         [Test]
-        public void StringConstructorWorks()
+        public void LongConstructorUtcWorks()
         {
-            var dt = new DateTime("Aug 12, 2012");
-            AssertDate(dt, 2012, 8, 12);
+            var dt = new DateTime(1440L * 60 * 500 * 1000, DateTimeKind.Local);
+            Assert.AreEqual(1, dt.Year);
+
+            var dt1 = new DateTime(0, DateTimeKind.Local);
+            DateHelper.AssertDate(dt1, DateTimeKind.Local, 0, 1, 1, 1);
+
+            var dt2 = new DateTime(1000000000000000000, DateTimeKind.Local);
+            DateHelper.AssertDate(dt2, DateTimeKind.Local, 1000000000000000000, 3169, 11, 16);
+
+            var dt3 = new DateTime(1440L * 60 * 500 * 1000, DateTimeKind.Utc);
+            Assert.AreEqual(1, dt3.Year);
+
+            var dt4 = new DateTime(0, DateTimeKind.Utc);
+            DateHelper.AssertDate(dt4, DateTimeKind.Utc, 0, 1, 1, 1);
+
+            var dt5 = new DateTime(1000000000000000000, DateTimeKind.Utc);
+            DateHelper.AssertDate(dt5, DateTimeKind.Utc, 1000000000000000000, 3169, 11, 16);
         }
 
         [Test]
         public void YMDConstructorWorks()
         {
             var dt = new DateTime(2011, 7, 12);
-            AssertDate(dt, 2011, 7, 12);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 634460256000000000, 2011, 7, 12);
         }
 
         [Test]
         public void YMDHConstructorWorks()
         {
-            var dt = new DateTime(2011, 7, 12, 13);
-            AssertDate(dt, 2011, 7, 12, 13);
+            var dt = new DateTime(2011, 7, 12, 13, 0, 0);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 634460724000000000, 2011, 7, 12, 13);
+        }
+
+        [Test]
+        public void YMDHConstructorUtcWorks()
+        {
+            var dt = new DateTime(2011, 7, 12, 13, 0, 0, DateTimeKind.Local);
+            DateHelper.AssertDate(dt, DateTimeKind.Local, 634460724000000000, 2011, 7, 12, 13);
+
+            var dt1 = new DateTime(2011, 7, 12, 13, 0, 0, DateTimeKind.Utc);
+            DateHelper.AssertDate(dt1, DateTimeKind.Utc, 634460724000000000, 2011, 7, 12, 13);
         }
 
         [Test]
         public void YMDHNConstructorWorks()
         {
-            var dt = new DateTime(2011, 7, 12, 13, 42);
-            AssertDate(dt, 2011, 7, 12, 13, 42);
+            var dt = new DateTime(2011, 7, 12, 13, 42, 0, 0);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 634460749200000000, 2011, 7, 12, 13, 42);
+        }
+
+        [Test]
+        public void YMDHNConstructorUtcWorks()
+        {
+            var dt = new DateTime(2011, 7, 12, 13, 42, 0, 0, DateTimeKind.Local);
+            DateHelper.AssertDate(dt, DateTimeKind.Local, 634460749200000000, 2011, 7, 12, 13, 42);
+
+            var dt1 = new DateTime(2011, 7, 12, 13, 42, 0, 0, DateTimeKind.Utc);
+            DateHelper.AssertDate(dt1, DateTimeKind.Utc, 634460749200000000, 2011, 7, 12, 13, 42);
         }
 
         [Test]
         public void YMDHNSConstructorWorks()
         {
             var dt = new DateTime(2011, 7, 12, 13, 42, 56);
-            AssertDate(dt, 2011, 7, 12, 13, 42, 56);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 634460749760000000, 2011, 7, 12, 13, 42, 56);
+        }
+
+        [Test]
+        public void YMDHNSConstructorUtcWorks()
+        {
+            var dt = new DateTime(2011, 7, 12, 13, 42, 56, DateTimeKind.Local);
+            DateHelper.AssertDate(dt, DateTimeKind.Local, 634460749760000000, 2011, 7, 12, 13, 42, 56);
+
+            var dt1 = new DateTime(2011, 7, 12, 13, 42, 56, DateTimeKind.Utc);
+            DateHelper.AssertDate(dt1, DateTimeKind.Utc, 634460749760000000, 2011, 7, 12, 13, 42, 56);
         }
 
         [Test]
         public void YMDHNSUConstructorWorks()
         {
             var dt = new DateTime(2011, 7, 12, 13, 42, 56, 345);
-            AssertDate(dt, 2011, 7, 12, 13, 42, 56, 345);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 634460749763450000, 2011, 7, 12, 13, 42, 56, 345);
+        }
+
+        [Test]
+        public void YMDHNSUConstructorUtcWorks()
+        {
+            var dt = new DateTime(2011, 7, 12, 13, 42, 56, 345, DateTimeKind.Local);
+            DateHelper.AssertDate(dt, DateTimeKind.Local, 634460749763450000, 2011, 7, 12, 13, 42, 56, 345);
+
+            var dt1 = new DateTime(2011, 7, 12, 13, 42, 56, 345, DateTimeKind.Utc);
+            DateHelper.AssertDate(dt1, DateTimeKind.Utc, 634460749763450000, 2011, 7, 12, 13, 42, 56, 345);
         }
 
         [Test]
         public void MinWorks()
         {
             var dt = DateTime.MinValue;
-            AssertDate(dt, 1, 1, 1);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 0, 1, 1, 1);
         }
 
         [Test]
         public void MaxWorks()
         {
             var dt = DateTime.MaxValue;
-            AssertDate(dt, 9999, 12, 31);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 3155378975999999999, 9999, 12, 31);
         }
 
         [Test]
         public void NowWorks()
         {
             var dt = DateTime.Now;
-            var year = dt.GetFullYear();
+            var year = dt.Year;
+            var kind = dt.Kind;
+            var ticks = dt.Ticks;
+
             Assert.True(year > 2016, year + " > 2016");
+            Assert.AreEqual(DateTimeKind.Local, kind, kind + " = Local");
+            Assert.True(ticks > 636353025520231775, ticks + " > 636353025520231775");
         }
 
         [Test]
         public void UtcNowWorks()
         {
-            var utc= DateTime.UtcNow;
-            var local = DateTime.Now;
-            Assert.True(
-                Math.Abs(
-                    (new DateTime(local.GetUtcFullYear(), local.GetUtcMonth(), local.GetUtcDate(), local.GetUtcHours(), local.GetUtcMinutes(), local.GetUtcSeconds(), local.GetUtcMilliseconds())
-                    - utc).TotalMinutes
-                ) < 1000);
+            var utcNow = DateTime.UtcNow;
+            var localNowToUtc = DateTime.Now.ToUniversalTime();
+
+            var utcString = utcNow.ToString("o");
+            var utcFromLocalString = localNowToUtc.ToString("o");
+
+            Assert.AreEqual(utcString, utcFromLocalString, "String representaions should equal");
+
+            var fromLocal = new DateTime(localNowToUtc.Year, localNowToUtc.Month, localNowToUtc.Day, localNowToUtc.Hour, localNowToUtc.Minute, localNowToUtc.Second, localNowToUtc.Millisecond);
+            var tickDiff = fromLocal.Ticks - utcNow.Ticks;
+
+            Assert.True(Math.Abs(tickDiff) < 10000, "Tick diff: Abs(" + tickDiff + ") < 10000");
+
+            var dateDiff = fromLocal - utcNow;
+            var minutes = dateDiff.TotalMinutes;
+
+            Assert.True(Math.Abs(minutes) < 1000, "Date diff in minutes: Abs(" + minutes + ") < 1000");
+
+            var year = utcNow.Year;
+            var kind = utcNow.Kind;
+            var ticks = utcNow.Ticks;
+
+            Assert.True(year > 2016, year + " > 2016");
+            Assert.AreEqual(DateTimeKind.Utc, kind, kind + " = Utc");
+            Assert.True(ticks > 636352945138088328, ticks + " > 636352945138088328");
         }
 
         [Test]
-        public void ToUniversalWorks()
+        public void ToUniversalWorksDoesNotDoubleCompute()
         {
-            var dt = new DateTime(2011, 7, 12, 13, 42, 56, 345);
-            var UTC = dt.ToUniversalTime();
-            Assert.AreEqual(UTC.Year, dt.GetUtcFullYear());
-            Assert.AreEqual(UTC.Month, dt.GetUtcMonth());
-            Assert.AreEqual(UTC.Day, dt.GetUtcDate());
-            Assert.AreEqual(UTC.Hour, dt.GetUtcHours());
-            Assert.AreEqual(UTC.Minute, dt.GetUtcMinutes());
-            Assert.AreEqual(UTC.Second, dt.GetUtcSeconds());
-            Assert.AreEqual(UTC.Millisecond, dt.GetUtcMilliseconds());
+            var d = new DateTime(2011, 7, 12, 13, 42, 56, 345);
+            var d1 = d.ToUniversalTime();
+            var d2 = d1.ToUniversalTime();
+
+            DateHelper.AssertDate(d2, d1);
+        }
+
+        [Test(Name = "#2929 #2524 - {0}", ExpectedCount = 5)]
+        public void ToUniversalTimeWorks_N2929_N2524()
+        {
+            var d1 = new DateTime(2011, 10, 5, 14, 48, 15, DateTimeKind.Utc);
+            var d2 = d1.ToLocalTime();
+            var d3 = d2.ToUniversalTime();
+            var d4 = d3.ToUniversalTime();
+
+            // 2011-10-05T20:48:15.0000000Z
+            Assert.AreEqual("2011-10-05T14:48:15.0000000Z", d3.ToString("O"));
+
+            // #2524
+            Assert.AreEqual(d3.ToString("O"), d4.ToString("O"));
+            Assert.AreEqual(d3.ToString("o"), d4.ToString("o"));
+            Assert.AreEqual(d3.ToString("o"), d4.ToString("O"));
+            Assert.AreEqual(d3.ToString("O"), d4.ToString("o"));
         }
 
         [Test]
-        public void ToLocalWorks()
+        public void ToLocalWorksDoesNotDoubleCompute()
         {
-            var UTC = new DateTime(2011, 7, 12, 13, 42, 56, 345);
-            var dt = UTC.ToLocalTime();
-            Assert.AreEqual(UTC.Year, dt.GetUtcFullYear());
-            Assert.AreEqual(UTC.Month, dt.GetUtcMonth());
-            Assert.AreEqual(UTC.Day, dt.GetUtcDate());
-            Assert.AreEqual(UTC.Hour, dt.GetUtcHours());
-            Assert.AreEqual(UTC.Minute, dt.GetUtcMinutes());
-            Assert.AreEqual(UTC.Second, dt.GetUtcSeconds());
-            Assert.AreEqual(UTC.Millisecond, dt.GetUtcMilliseconds());
+            var d = new DateTime(2011, 7, 12, 13, 42, 56, 345);
+            var d1 = d.ToLocalTime();
+            var d2 = d1.ToLocalTime();
+
+            DateHelper.AssertDate(d2, d1);
+        }
+
+        [Test(Name = "#2929 #2524 - {0}", ExpectedCount = 4)]
+        public void ToLocalTimeWorks_N2929_N2524()
+        {
+            var d1 = new DateTime(2011, 10, 5, 14, 48, 15);
+            var d2 = d1.ToUniversalTime();
+            var d3 = d2.ToLocalTime();
+            var d4 = d3.ToLocalTime();
+
+            // #2524
+            Assert.AreEqual(d3.ToString("O"), d4.ToString("O"));
+            Assert.AreEqual(d3.ToString("o"), d4.ToString("o"));
+            Assert.AreEqual(d3.ToString("o"), d4.ToString("O"));
+            Assert.AreEqual(d3.ToString("O"), d4.ToString("o"));
         }
 
         [Test]
         public void TodayWorks()
         {
             var dt = DateTime.Today;
-            Assert.True(dt.Year > 2011);
+
+            Assert.True(dt.Year > 2016, dt.Year + " > 2016");
             Assert.AreEqual(0, dt.Hour);
             Assert.AreEqual(0, dt.Minute);
             Assert.AreEqual(0, dt.Second);
             Assert.AreEqual(0, dt.Millisecond);
+            Assert.AreEqual(DateTimeKind.Local, dt.Kind, dt.Kind + " = Local");
+            Assert.True(dt.Ticks >= 636352416000000000, dt.Ticks + " >= 636352416000000000");
         }
 
         [Test]
         public void FormatWorks()
         {
-            var dt = new DateTime(2011, 7, 12, 13);
-            Assert.AreEqual("2011-07-12", dt.Format("yyyy-MM-dd"));
+            var dt = new DateTime(2011, 7, 12);
+            Assert.AreEqual("2011-07-12", dt.ToString("yyyy-MM-dd"));
         }
 
         [Test]
@@ -256,7 +324,7 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void IFormattableToStringWorks()
         {
-            var dt = new DateTime(2011, 7, 12, 13);
+            var dt = new DateTime(2011, 7, 12);
             Assert.AreEqual(dt.ToString("yyyy-MM-dd"), "2011-07-12");
             Assert.AreEqual(((IFormattable)dt).ToString("yyyy-MM-dd", CultureInfo.CurrentCulture), "2011-07-12");
         }
@@ -265,8 +333,8 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void LocaleFormatWorks()
         {
-            var dt = new DateTime(2011, 7, 12, 13);
-            Assert.AreEqual("2011-07-12", dt.Format("yyyy-MM-dd"));
+            var dt = new DateTime(2011, 7, 12);
+            Assert.AreEqual("2011-07-12", dt.ToString("yyyy-MM-dd"));
         }
 
         [Test]
@@ -325,19 +393,22 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual(2, dt.DayOfWeek);
         }
 
-        [Test]
-        public void GetTimeWorks()
-        {
-            var dt = new DateTime(DateTime.Utc(1000, 1, 2));
-            Assert.AreEqual((-30610137600000).ToString(), dt.GetTime().ToString());
-        }
+        // Not C# API
 
-        [Test]
-        public void ValueOfWorks()
-        {
-            var dt = new DateTime(DateTime.Utc(1000, 1, 2));
-            Assert.AreEqual((-30610137600000).ToString(), dt.ValueOf().ToString());
-        }
+        //[Test]
+        //public void GetTimeWorks()
+        //{
+        //    var dt = new DateTime(1000, 1, 2, 0, 0, 0, DateTimeKind.Utc);
+        //    Assert.AreEqual((-30610137600000).ToString(), (dt.Ticks / 10000).ToString());
+        //}
+
+        // Not C# API
+        //[Test]
+        //public void ValueOfWorks()
+        //{
+        //    var dt = new DateTime(1000, 1, 2, 0, 0, 0, DateTimeKind.Utc);
+        //    Assert.AreEqual((-30610137600000).ToString(), (dt.Ticks / 10000).ToString());
+        //}
 
         [Test]
         public void TicksWorks()
@@ -363,84 +434,84 @@ namespace Bridge.ClientTest.SimpleTypes
         [Test]
         public void GetUTCFullYearWorks()
         {
-            var dt = new DateTime(DateTime.Utc(2011, 7, 12, 13, 42, 56, 345));
-            Assert.AreEqual(2011, dt.GetUtcFullYear());
+            var dt = new DateTime(2011, 7, 12, 13, 42, 56, 345, DateTimeKind.Utc);
+            Assert.AreEqual(2011, dt.Year);
         }
 
         [Test]
         public void GetUtcMonthWorks()
         {
-            var dt = new DateTime(DateTime.Utc(2011, 7, 12, 13, 42, 56, 345));
-            Assert.AreEqual(7, dt.GetUtcMonth());
+            var dt = new DateTime(2011, 7, 12, 13, 42, 56, 345, DateTimeKind.Utc);
+            Assert.AreEqual(7, dt.Month);
         }
 
         [Test]
         public void GetUTCDateWorks()
         {
-            var dt = new DateTime(DateTime.Utc(2011, 7, 12, 13, 42, 56, 345));
-            Assert.AreEqual(12, dt.GetUtcDate());
+            var dt = new DateTime(2011, 7, 12, 13, 42, 56, 345, DateTimeKind.Utc);
+            Assert.AreEqual(12, dt.Day);
         }
 
         [Test]
         public void GetUTCHoursWorks()
         {
-            var dt = new DateTime(DateTime.Utc(2011, 7, 12, 13, 42, 56, 345));
-            Assert.AreEqual(13, dt.GetUtcHours());
+            var dt = new DateTime(2011, 7, 12, 13, 42, 56, 345, DateTimeKind.Utc);
+            Assert.AreEqual(13, dt.Hour);
         }
 
         [Test]
         public void GetUTCMinutesWorks()
         {
-            var dt = new DateTime(DateTime.Utc(2011, 7, 12, 13, 42, 56, 345));
-            Assert.AreEqual(42, dt.GetUtcMinutes());
+            var dt = new DateTime(2011, 7, 12, 13, 42, 56, 345, DateTimeKind.Utc);
+            Assert.AreEqual(42, dt.Minute);
         }
 
         [Test]
         public void GetUTCSecondsWorks()
         {
-            var dt = new DateTime(DateTime.Utc(2011, 7, 12, 13, 42, 56, 345));
-            Assert.AreEqual(56, dt.GetUtcSeconds());
+            var dt = new DateTime(2011, 7, 12, 13, 42, 56, 345, DateTimeKind.Utc);
+            Assert.AreEqual(56, dt.Second);
         }
 
         [Test]
         public void GetUTCMillisecondsWorks()
         {
-            var dt = new DateTime(DateTime.Utc(2011, 7, 12, 13, 42, 56, 345));
-            Assert.AreEqual(345, dt.GetUtcMilliseconds());
+            var dt = new DateTime(2011, 7, 12, 13, 42, 56, 345, DateTimeKind.Utc);
+            Assert.AreEqual(345, dt.Millisecond);
         }
 
         [Test]
         public void GetUTCDayWorks()
         {
-            var dt = new DateTime(DateTime.Utc(2011, 7, 12, 13, 42, 56, 345));
-            Assert.AreEqual(2, dt.GetUtcDay());
+            var dt = new DateTime(2011, 7, 12, 13, 42, 56, 345, DateTimeKind.Utc);
+            Assert.AreEqual(12, dt.Day);
         }
 
         [Test]
         public void ParseWorks()
         {
             var dt = DateTime.Parse("Aug 12, 2012");
-            AssertDate(dt, 2012, 8, 12);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 634803264000000000, 2012, 8, 12);
         }
 
         [Test]
         public void ParseExactWorks()
         {
-            var dt = DateTime.ParseExact("2012-12-08", "yyyy-dd-MM");
-            AssertDate(dt, 2012, 8, 12);
+            var dt = DateTime.ParseExact("2012-12-08", "yyyy-dd-MM", null);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 634803264000000000, 2012, 8, 12);
         }
 
         [Test]
         public void ParseExactReturnsNullIfTheInputIsInvalid()
         {
-            Assert.Throws<FormatException>(() => { var dt = DateTime.ParseExact("X", "yyyy-dd-MM"); });
+            Assert.Throws<FormatException>(() => { var dt = DateTime.ParseExact("X", "yyyy-dd-MM", null); });
         }
 
         [Test]
         public void ParseExactWithCultureWorks()
         {
             var dt = DateTime.ParseExact("2012-12-08", "yyyy-dd-MM", CultureInfo.InvariantCulture);
-            AssertDate(dt, 2012, 8, 12);
+            DateHelper.AssertDate(dt, DateTimeKind.Unspecified, 634803264000000000, 2012, 8, 12);
         }
 
         [Test]
@@ -449,88 +520,214 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.Throws<FormatException>(() => { var dt = DateTime.ParseExact("X", "yyyy-dd-MM", CultureInfo.InvariantCulture); });
         }
 
-        [Test]
-        public void ParseExactUTCWorks()
-        {
-            //var dt = DateTime.ParseExactUTC("2012-12-08", "yyyy-dd-MM");
-            var dt = DateTime.ParseExact("2012-12-08", "yyyy-dd-MM", true);
-            Assert.AreEqual(2012, dt.GetUtcFullYear());
-            Assert.AreEqual(8, dt.GetUtcMonth());
-            Assert.AreEqual(12, dt.GetUtcDate());
-        }
+        // The test is restructured to run correctly within any TimeZone
+        // And commented out due to DST problem
+        //[Test]
+        //public void ParseExactWithLocalKindsWithFormatK()
+        //{
+        //    var format = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK";
 
-        [Test]
-        public void ParseExactUtcReturnsNullIfTheInputIsInvalid()
-        {
-            Assert.Throws<FormatException>(() => { var dt = DateTime.ParseExact("X", "yyyy-dd-MM", true); });
-        }
+        //    var baseOffsetHours = 8;
+        //    var firstTestZone = (DateHelper.GetOffsetMinutes() / 60) + baseOffsetHours;
+        //    var testShift = 4 - firstTestZone;
 
-        [Test]
-        public void ParseExactUTCWithCultureWorks()
-        {
-            var dt = DateTime.ParseExact("2012-12-08", "yyyy-dd-MM", CultureInfo.InvariantCulture, true);
-            //var dt = DateTime.ParseExact("2012-12-08", "yyyy-dd-MM", CultureInfo.InvariantCulture);
-            Assert.AreEqual(2012, dt.GetUtcFullYear());
-            Assert.AreEqual(8, dt.GetUtcMonth());
-            Assert.AreEqual(12, dt.GetUtcDate());
-        }
+        //    // This iterates offsets through -04:00 to +04:00 (including 00:00 which is replaced by 'Z')
+        //    for (int i = 0; i < 8; i++)
+        //    {
+        //        var testId = "d" + (i + 1) + ": ";
 
-        [Test]
-        public void ParseExactUtcWithCultureReturnsNullIfTheInputIsInvalid()
-        {
-            Assert.Throws<FormatException>(() => { var dt = DateTime.ParseExact("X", "yyyy-dd-MM", CultureInfo.InvariantCulture, true); });
-        }
+        //        CommonHelper.Safe(() =>
+        //        {
+        //            var s1 = "2008-05-01T07:34:42" + DateHelper.GetOffsetString((baseOffsetHours - i + testShift) * 60);
+        //            var d1 = DateTime.ParseExact(s1, format, null);
 
-        [Test]
-        public void ToDateStringWorks()
-        {
-            var dt = new DateTime(2011, 7, 12, 13, 42);
-            var s = dt.ToDateString();
-            Assert.True(s.IndexOf("2011") >= 0 && s.IndexOf("42") < 0);
-        }
+        //            Assert.True(true, testId + "input " + s1);
+        //            DateHelper.AssertDate(new DateTime(2008, 5, 1, 15 - i + 1 + testShift, 34, 42, DateTimeKind.Local), d1, testId);
+        //        }, testId);
+        //    }
 
-        [Test]
-        public void ToTimeStringWorks()
-        {
-            var dt = new DateTime(2011, 7, 12, 13, 42);
-            var s = dt.ToTimeString();
-            Assert.True(s.IndexOf("2011") < 0 && s.IndexOf("42") >= 0);
-        }
+        //    // This iterates offsets through -04:00 to +04:00 (including 00:00 which is replaced by 'Z')
+        //    for (int i = 0; i < 8; i++)
+        //    {
+        //        var testId = "m" + (i + 1) + ": ";
 
-        [Test]
-        public void ToUTCStringWorks()
-        {
-            var dt = new DateTime(2011, 7, 12, 13, 42);
-            var s = dt.ToUtcString();
-            Assert.True(s.IndexOf("2011") >= 0 && s.IndexOf("42") >= 0);
-        }
+        //        CommonHelper.Safe(() =>
+        //        {
+        //            var s2 = "2008-09-15T09:30:41.7752486" + DateHelper.GetOffsetString((baseOffsetHours - i + testShift) * 60);
+        //            var d2 = DateTime.ParseExact(s2, format, null);
 
-        [Test]
-        public void ToLocaleDateStringWorks()
-        {
-            var dt = new DateTime(2011, 7, 12, 13, 42);
-            var s = dt.ToLocaleDateString();
-            Assert.True(s.IndexOf("2011") >= 0 && s.IndexOf("42") < 0);
-        }
+        //            Assert.True(true, testId + "input " + s2);
+        //            DateHelper.AssertDate(new DateTime(2008, 9, 15, 17 - i + 1 + testShift, 30, 41, 775, DateTimeKind.Local), d2, testId);
+        //        }, testId);
+        //    }
+        //}
 
-        [Test]
-        public void ToLocaleTimeStringWorks()
-        {
-            var dt = new DateTime(2011, 7, 12, 13, 42);
-            var s = dt.ToLocaleTimeString();
-            Assert.True(s.IndexOf("2011") < 0 && s.IndexOf("42") >= 0);
-        }
+        // The test is restructured to run correctly within any TimeZone
+        // And commented out due to DST problem
+        //[Test]
+        //public void ParseExactWithNoZNorOffsetWithFormatK()
+        //{
+        //    var s = "2008-09-15T09:30:41.7752486";
 
-        private void AssertDateUTC(DateTime dt, int year, int month, int day, int hours, int minutes, int seconds, int milliseconds)
-        {
-            Assert.AreEqual(year, dt.GetUtcFullYear());
-            Assert.AreEqual(month, dt.GetUtcMonth());
-            Assert.AreEqual(day, dt.GetUtcDate());
-            Assert.AreEqual(hours, dt.GetUtcHours());
-            Assert.AreEqual(minutes, dt.GetUtcMinutes());
-            Assert.AreEqual(seconds, dt.GetUtcSeconds());
-            Assert.AreEqual(milliseconds, dt.GetUtcMilliseconds());
-        }
+        //    var format = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFFFFFK";
+
+        //    CommonHelper.Safe(() =>
+        //    {
+        //        var d = DateTime.ParseExact(s, format, null);
+        //        var l = d.ToString();
+
+        //        DateHelper.AssertDate(new DateTime(2008, 9, 15, 9, 30, 41, 775, DateTimeKind.Unspecified), d, l + ": ");
+        //    }, s + ": ");
+        //}
+
+        // Not C# API
+        //[Test]
+        //public void ParseExactUTCWorks()
+        //{
+        //    var d1 = DateTime.ParseExact("2012-12-08", "yyyy-dd-MM", true);
+        //    var d2 = DateTime.SpecifyKind(d1, DateTimeKind.Utc);
+        //    var utc = new DateTime(2012, 8, 12, 0, 0, 0, DateTimeKind.Utc);
+
+        //    DateHelper.AssertDate(utc, d2);
+        //}
+
+        // Not C# API
+        //[Test]
+        //public void ParseExactUtcReturnsNullIfTheInputIsInvalid()
+        //{
+        //    Assert.Throws<FormatException>(() => { var dt = DateTime.ParseExact("X", "yyyy-dd-MM", true); });
+        //}
+
+        // Not C# API
+        //[Test]
+        //public void ParseExactUTCWithCultureWorks()
+        //{
+        //    var d1 = DateTime.ParseExact("2012-12-08", "yyyy-dd-MM", CultureInfo.InvariantCulture, true);
+        //    var d2 = DateTime.SpecifyKind(d1, DateTimeKind.Utc);
+        //    var utc = new DateTime(2012, 8, 12, 0, 0, 0, DateTimeKind.Utc);
+
+        //    DateHelper.AssertDate(utc, d2);
+        //}
+
+        // Not Supported in 16.0.0
+        //[Test]
+        //public void ParseWithLocalKinds()
+        //{
+        //    var s1 = "2008-05-01T07:34:42-5:00";
+        //    var s2 = "2008-05-01 7:34:42Z";
+        //    var s3 = "Thu, 01 May 2008 07:34:42 GMT";
+
+        //    CommonHelper.Safe(() =>
+        //    {
+        //        var d1 = DateTime.Parse(s1);
+        //        DateHelper.AssertDate(new DateTime(2008, 5, 1, 16, 34, 42, DateTimeKind.Local), d1, "d1: ");
+        //    }, "d1: ");
+
+        //    CommonHelper.Safe(() =>
+        //    {
+        //        var d2 = DateTime.Parse(s2);
+        //        DateHelper.AssertDate(new DateTime(2008, 5, 1, 11, 34, 42, DateTimeKind.Local), d2, "d2: ");
+        //    }, "d2: ");
+
+        //    CommonHelper.Safe(() =>
+        //    {
+        //        var d3 = DateTime.Parse(s3);
+        //        DateHelper.AssertDate(new DateTime(2008, 5, 1, 11, 34, 42, DateTimeKind.Local), d3, "d3: ");
+        //    }, "d3: ");
+        //}
+
+        // Not Supported in 16.0.0
+        //[Test]
+        //public void ParseWithDifferentKinds()
+        //{
+        //    var s1 = "2008-09-15T09:30:41.7752486-07:00";
+        //    var s2 = "2008-09-15T09:30:41.7752486Z";
+        //    var s3 = "2008-09-15T09:30:41.7752486";
+        //    var s4 = "2008-09-15T09:30:41.7752486-04:00";
+        //    var s5 = "Mon, 15 Sep 2008 09:30:41 GMT";
+
+        //    CommonHelper.Safe(() =>
+        //    {
+        //        var d1 = DateTime.Parse(s1);
+        //        DateHelper.AssertDate(new DateTime(633571074417752486, DateTimeKind.Local), d1, "d1: ");
+        //    }, "d1: ");
+
+        //    CommonHelper.Safe(() =>
+        //    {
+        //        var d2 = DateTime.Parse(s2);
+        //        DateHelper.AssertDate(new DateTime(633570822417752486, DateTimeKind.Local), d2, "d2: ");
+        //    }, "d2: ");
+
+        //    CommonHelper.Safe(() =>
+        //    {
+        //        var d3 = DateTime.Parse(s3);
+        //        DateHelper.AssertDate(new DateTime(633570678417752486, DateTimeKind.Unspecified), d3, "d3: ");
+        //    }, "d3: ");
+
+        //    CommonHelper.Safe(() =>
+        //    {
+        //        var d4 = DateTime.Parse(s4);
+        //        DateHelper.AssertDate(new DateTime(633570966417752486, DateTimeKind.Local), d4, "d4: ");
+        //    }, "d4: ");
+
+        //    CommonHelper.Safe(() =>
+        //    {
+        //        var d5 = DateTime.Parse(s5);
+        //        DateHelper.AssertDate(new DateTime(633570822410000000, DateTimeKind.Local), d5, "d5: ");
+        //    }, "d5: ");
+        //}
+
+        // Not C# API
+        //[Test]
+        //public void ParseExactUtcWithCultureReturnsNullIfTheInputIsInvalid()
+        //{
+        //    Assert.Throws<FormatException>(() => { var dt = DateTime.ParseExact("X", "yyyy-dd-MM", CultureInfo.InvariantCulture, true); });
+        //}
+
+        // Not C# API
+        //[Test]
+        //public void ToDateStringWorks()
+        //{
+        //    var dt = new DateTime(2011, 7, 12, 13, 42, 0);
+        //    var s = dt.ToDateString();
+        //    Assert.True(s.IndexOf("2011") >= 0 && s.IndexOf("42") < 0);
+        //}
+
+        // Not C# API
+        //[Test]
+        //public void ToTimeStringWorks()
+        //{
+        //    var dt = new DateTime(2011, 7, 12, 13, 42, 0);
+        //    var s = dt.ToTimeString();
+        //    Assert.True(s.IndexOf("2011") < 0 && s.IndexOf("42") >= 0);
+        //}
+
+        // Not C# API
+        //[Test]
+        //public void ToUTCStringWorks()
+        //{
+        //    var dt = new DateTime(2011, 7, 12, 13, 42, 0);
+        //    var s = dt.ToUtcString();
+        //    Assert.True(s.IndexOf("2011") >= 0 && s.IndexOf("42") >= 0);
+        //}
+
+        // Not C# API
+        //[Test]
+        //public void ToLocaleDateStringWorks()
+        //{
+        //    var dt = new DateTime(2011, 7, 12, 13, 42, 0);
+        //    var s = dt.ToLocaleDateString();
+        //    Assert.True(s.IndexOf("2011") >= 0 && s.IndexOf("42") < 0);
+        //}
+
+        // Not C# API
+        //[Test]
+        //public void ToLocaleTimeStringWorks()
+        //{
+        //    var dt = new DateTime(2011, 7, 12, 13, 42, 0);
+        //    var s = dt.ToLocaleTimeString();
+        //    Assert.True(s.IndexOf("2011") < 0 && s.IndexOf("42") >= 0);
+        //}
 
         // Not C# API
         //[Test]
@@ -567,35 +764,41 @@ namespace Bridge.ClientTest.SimpleTypes
         //    AssertDateUtc(DateTime.FromUtc(2011, 7, 12, 13, 42, 56, 345), 2011, 7, 12, 13, 42, 56, 345);
         //}
 
-        [Test]
-        public void UtcYMDWorks()
-        {
-            AssertDateUTC(new DateTime(DateTime.Utc(2011, 7, 12)), 2011, 7, 12, 0, 0, 0, 0);
-        }
+        // Not C# API
+        //[Test]
+        //public void UtcYMDWorks()
+        //{
+        //    AssertDateUTC(new DateTime(2011, 7, 12)), 2011, 7, 12, 0, 0, 0, 0);
+        //}
 
-        [Test]
-        public void UtcYMDHWorks()
-        {
-            AssertDateUTC(new DateTime(DateTime.Utc(2011, 7, 12, 13)), 2011, 7, 12, 13, 0, 0, 0);
-        }
+        // Not C# API
+        //[Test]
+        //public void UtcYMDHWorks()
+        //{
+        //    AssertDateUTC(new DateTime(2011, 7, 12, 13, 0, 0)), 2011, 7, 12, 13, 0, 0, 0);
+        //}
 
-        [Test]
-        public void UtcYMDHNWorks()
-        {
-            AssertDateUTC(new DateTime(DateTime.Utc(2011, 7, 12, 13, 42)), 2011, 7, 12, 13, 42, 0, 0);
-        }
+        // Not C# API
+        //[Test]
+        //public void UtcYMDHNWorks()
+        //{
+        //    AssertDateUTC(new DateTime(2011, 7, 12, 13, 42, 0)), 2011, 7, 12, 13, 42, 0, 0);
+        //}
 
-        [Test]
-        public void UtcYMDHNSWorks()
-        {
-            AssertDateUTC(new DateTime(DateTime.Utc(2011, 7, 12, 13, 42, 56)), 2011, 7, 12, 13, 42, 56, 0);
-        }
+        // Not C# API
+        //[Test]
+        //public void UtcYMDHNSWorks()
+        //{
+        //    AssertDateUTC(new DateTime(2011, 7, 12, 13, 42, 56)), 2011, 7, 12, 13, 42, 56, 0);
+        //}
 
-        [Test]
-        public void UtcYMDHNSUWorks()
-        {
-            AssertDateUTC(new DateTime(DateTime.Utc(2011, 7, 12, 13, 42, 56, 345)), 2011, 7, 12, 13, 42, 56, 345);
-        }
+        // Not C# API
+        //[Test]
+        //public void UtcYMDHNSUWorks()
+        //{
+        //    AssertDateUTC(new DateTime(2011, 7, 12, 13, 42, 56, 345)), 2011, 7, 12, 13, 42, 56, 345);
+        //}
+
         [Test]
         public void SubtractingDatesWorks()
         {
@@ -638,6 +841,16 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.True(new DateTime(2011, 7, 12) == new DateTime(2011, 7, 12));
             Assert.False(new DateTime(2011, 7, 12) == new DateTime(2011, 7, 13));
 
+            Assert.True(new DateTime(2011, 7, 12, 1, 2, 3, 4, DateTimeKind.Unspecified) == new DateTime(2011, 7, 12, 1, 2, 3, 4, DateTimeKind.Unspecified));
+            Assert.True(new DateTime(2011, 7, 12, 1, 2, 3, 4, DateTimeKind.Unspecified) == new DateTime(2011, 7, 12, 1, 2, 3, 4, DateTimeKind.Local));
+            Assert.True(new DateTime(2011, 7, 12, 1, 2, 3, 4, DateTimeKind.Local) == new DateTime(2011, 7, 12, 1, 2, 3, 4, DateTimeKind.Local));
+            Assert.True(new DateTime(2011, 7, 12, 1, 2, 3, 4, DateTimeKind.Utc) == new DateTime(2011, 7, 12, 1, 2, 3, 4, DateTimeKind.Utc));
+
+            Assert.False(new DateTime(2011, 7, 12, 1, 2, 3, 4, DateTimeKind.Unspecified) == new DateTime(2011, 7, 12, 1, 2, 3, 5, DateTimeKind.Unspecified));
+            Assert.False(new DateTime(2011, 7, 12, 1, 2, 3, 4, DateTimeKind.Unspecified) == new DateTime(2011, 7, 12, 1, 2, 6, 4, DateTimeKind.Local));
+            Assert.False(new DateTime(2011, 7, 12, 1, 2, 3, 4, DateTimeKind.Local) == new DateTime(2011, 7, 12, 1, 7, 3, 4, DateTimeKind.Local));
+            Assert.False(new DateTime(2011, 7, 12, 1, 2, 3, 4, DateTimeKind.Utc) == new DateTime(2011, 7, 12, 8, 2, 3, 4, DateTimeKind.Utc));
+
             // Removed because DateTime is non-nullable value type
             // After move of Date.cs class to Bridge.Html5 namespace,
             // these tests started failing. Possibly due to moving explicit operator.
@@ -652,6 +865,16 @@ namespace Bridge.ClientTest.SimpleTypes
         {
             Assert.False(new DateTime(2011, 7, 12) != new DateTime(2011, 7, 12));
             Assert.True(new DateTime(2011, 7, 12) != new DateTime(2011, 7, 13));
+
+            Assert.False(new DateTime(2011, 7, 12, 1, 2, 3, 4, DateTimeKind.Unspecified) != new DateTime(2011, 7, 12, 1, 2, 3, 4, DateTimeKind.Unspecified));
+            Assert.False(new DateTime(2011, 7, 12, 1, 2, 3, 4, DateTimeKind.Unspecified) != new DateTime(2011, 7, 12, 1, 2, 3, 4, DateTimeKind.Local));
+            Assert.False(new DateTime(2011, 7, 12, 1, 2, 3, 4, DateTimeKind.Local) != new DateTime(2011, 7, 12, 1, 2, 3, 4, DateTimeKind.Local));
+            Assert.False(new DateTime(2011, 7, 12, 1, 2, 3, 4, DateTimeKind.Utc) != new DateTime(2011, 7, 12, 1, 2, 3, 4, DateTimeKind.Utc));
+
+            Assert.True(new DateTime(2011, 7, 12, 1, 2, 3, 4, DateTimeKind.Unspecified) != new DateTime(2011, 7, 12, 1, 2, 3, 5, DateTimeKind.Unspecified));
+            Assert.True(new DateTime(2011, 7, 12, 1, 2, 3, 4, DateTimeKind.Unspecified) != new DateTime(2011, 7, 12, 1, 2, 6, 4, DateTimeKind.Local));
+            Assert.True(new DateTime(2011, 7, 12, 1, 2, 3, 4, DateTimeKind.Local) != new DateTime(2011, 7, 12, 1, 7, 3, 4, DateTimeKind.Local));
+            Assert.True(new DateTime(2011, 7, 12, 1, 2, 3, 4, DateTimeKind.Utc) != new DateTime(2011, 7, 12, 8, 2, 3, 4, DateTimeKind.Utc));
 
             // Removed because DateTime is non-nullable value type
             // After move of Date.cs class to Bridge.Html5 namespace,
@@ -839,6 +1062,26 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.AreEqual(new DateTime(2011, 7, 12, 2, 42, 56, 345), dt);
         }
 
+        [Test(Name = "#2967 - {0}")]
+        public void AddDaysForDSTWorks_N2967()
+        {
+            // This should be tested in time zone where daylight time change in April
+            // Like AEST – Australian Eastern Standard Time / Eastern Standard Time (Standard Time)
+            var x = new DateTime(2017, 04, 1);
+            Assert.AreEqual(new DateTime(2017, 4, 1), x);
+            x = x.AddDays(1);
+            Assert.AreEqual(new DateTime(2017, 4, 2), x);
+            x = x.AddDays(1);
+            Assert.AreEqual(new DateTime(2017, 4, 3), x);
+
+            var y = new DateTime(2017, 05, 1);
+            Assert.AreEqual(new DateTime(2017, 5, 1), y);
+            y = y.AddDays(1);
+            Assert.AreEqual(new DateTime(2017, 5, 2), y);
+            y = y.AddDays(1);
+            Assert.AreEqual(new DateTime(2017, 5, 3), y);
+        }
+
         [Test]
         public void AddHoursWorks()
         {
@@ -862,8 +1105,8 @@ namespace Bridge.ClientTest.SimpleTypes
         {
             var dt = new DateTime(2011, 7, 12, 2, 42, 56, 345);
             var actual = dt.AddMinutes(2.5);
-            Assert.AreEqual(new DateTime(2011, 7, 12, 2, 45, 26, 345), actual);
-            Assert.AreEqual(new DateTime(2011, 7, 12, 2, 42, 56, 345), dt);
+            DateHelper.AssertDate(new DateTime(2011, 7, 12, 2, 45, 26, 345), actual);
+            DateHelper.AssertDate(new DateTime(2011, 7, 12, 2, 42, 56, 345), dt);
         }
 
         [Test]
@@ -871,34 +1114,34 @@ namespace Bridge.ClientTest.SimpleTypes
         {
             var dt = new DateTime(2011, 7, 12, 2, 42, 56, 345);
             var actual = dt.AddMonths(6);
-            Assert.AreEqual(new DateTime(2012, 1, 12, 2, 42, 56, 345), actual);
-            Assert.AreEqual(new DateTime(2011, 7, 12, 2, 42, 56, 345), dt);
+            DateHelper.AssertDate(new DateTime(2012, 1, 12, 2, 42, 56, 345), actual);
+            DateHelper.AssertDate(new DateTime(2011, 7, 12, 2, 42, 56, 345), dt);
         }
 
         [Test(Name = "#2542 - {0}")]
         public void AddMonthsEdgeCasesWorks()
         {
             var dt = new DateTime(2017, 3, 31, 16, 10, 10);
-            Assert.AreEqual(new DateTime(2017, 3, 31, 16, 10, 10), dt);
+            DateHelper.AssertDate(new DateTime(2017, 3, 31, 16, 10, 10), dt);
 
             var actual = dt.AddMonths(1);
-            Assert.AreEqual(new DateTime(2017, 4, 30, 16, 10, 10), actual);
+            DateHelper.AssertDate(new DateTime(2017, 4, 30, 16, 10, 10), actual);
             actual = dt.AddMonths(2);
-            Assert.AreEqual(new DateTime(2017, 5, 31, 16, 10, 10), actual);
+            DateHelper.AssertDate(new DateTime(2017, 5, 31, 16, 10, 10), actual);
             actual = dt.AddMonths(3);
-            Assert.AreEqual(new DateTime(2017, 6, 30, 16, 10, 10), actual);
+            DateHelper.AssertDate(new DateTime(2017, 6, 30, 16, 10, 10), actual);
             actual = dt.AddMonths(12);
-            Assert.AreEqual(new DateTime(2018, 3, 31, 16, 10, 10), actual);
+            DateHelper.AssertDate(new DateTime(2018, 3, 31, 16, 10, 10), actual);
 
             dt = new DateTime(2020, 2, 29, 16, 10, 10);
-            Assert.AreEqual(new DateTime(2020, 2, 29, 16, 10, 10), dt);
+            DateHelper.AssertDate(new DateTime(2020, 2, 29, 16, 10, 10), dt);
 
             actual = dt.AddMonths(1);
-            Assert.AreEqual(new DateTime(2020, 3, 29, 16, 10, 10), actual);
+            DateHelper.AssertDate(new DateTime(2020, 3, 29, 16, 10, 10), actual);
             actual = dt.AddMonths(2);
-            Assert.AreEqual(new DateTime(2020, 4, 29, 16, 10, 10), actual);
+            DateHelper.AssertDate(new DateTime(2020, 4, 29, 16, 10, 10), actual);
             actual = dt.AddMonths(12);
-            Assert.AreEqual(new DateTime(2021, 2, 28, 16, 10, 10), actual);
+            DateHelper.AssertDate(new DateTime(2021, 2, 28, 16, 10, 10), actual);
         }
 
         [Test]
@@ -906,8 +1149,8 @@ namespace Bridge.ClientTest.SimpleTypes
         {
             var dt = new DateTime(2011, 7, 12, 2, 42, 56, 345);
             var actual = dt.AddSeconds(2.5);
-            Assert.AreEqual(new DateTime(2011, 7, 12, 2, 42, 58, 845), actual);
-            Assert.AreEqual(new DateTime(2011, 7, 12, 2, 42, 56, 345), dt);
+            DateHelper.AssertDate(new DateTime(2011, 7, 12, 2, 42, 58, 845), actual);
+            DateHelper.AssertDate(new DateTime(2011, 7, 12, 2, 42, 56, 345), dt);
         }
 
         [Test]
@@ -915,8 +1158,23 @@ namespace Bridge.ClientTest.SimpleTypes
         {
             var dt = new DateTime(2011, 7, 12, 2, 42, 56, 345);
             var actual = dt.AddYears(3);
-            Assert.AreEqual(new DateTime(2014, 7, 12, 2, 42, 56, 345), actual);
-            Assert.AreEqual(new DateTime(2011, 7, 12, 2, 42, 56, 345), dt);
+
+            DateHelper.AssertDate(new DateTime(2014, 7, 12, 2, 42, 56, 345), actual);
+            DateHelper.AssertDate(new DateTime(2011, 7, 12, 2, 42, 56, 345), dt);
+        }
+
+        [Test(Name = "#2963 - {0}")]
+        public void AddYearsWorks_N2963()
+        {
+            var d = new DateTime(2017, 1, 2);
+
+            bool b = false;
+            var d1 = d.AddYears(b ? -1 : 1);
+            DateHelper.AssertDate(new DateTime(2018, 1, 2), d1);
+
+            b = true;
+            var d2 = d.AddYears(b ? -1 : 1);
+            DateHelper.AssertDate(new DateTime(2016, 1, 2), d2);
         }
 
         [Test]
@@ -946,25 +1204,41 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.False(DateTime.IsLeapYear(2003));
         }
 
-        [Test(ExpectedCount = 1)]
-        public static void DateTimes()
+        [Test]
+        public void SpecifyKindWorks()
         {
-            // TEST
-            // [#83] by C#
-            var str = "2015-03-24T10:48:09.1500225+03:00";
-            var bridgeDate = DateTime.Parse(str);
-            var bridgeDate1 = new DateTime(str);
+            var d = new DateTime(2017, 1, 2, 3, 0, 0);
+            var t = d.Ticks;
 
-            Assert.AreDeepEqual(bridgeDate1, bridgeDate, "[#83] C# bridgeDate = bridgeDate1");
+            Assert.AreEqual(DateTimeKind.Unspecified, d.Kind, "Unspecified Kind");
 
-            // TEST
-            // [#83] by JavaScript code. This is to check the same issue as above and just to check another way of calling QUnit from JavaScript
-            //Script.Write<dynamic>("var str = \"2015-03-24T10:48:09.1500225+03:00\";");
-            //Script.Write<dynamic>("var bridgeDate2 = Bridge.Date.parse(str);");
-            //Script.Write<dynamic>("var jsDate = new Date(Date.parse(str));");
-            //Script.Write<dynamic>("var format = \"yyyy-MM-dd hh:mm:ss\";");
+            var d1 = DateTime.SpecifyKind(d, DateTimeKind.Local);
 
-            //Script.Write<dynamic>("assert.deepEqual(Bridge.Date.format(bridgeDate2, format), Bridge.Date.format(jsDate, format), \"[#83] js\");");
+            Assert.AreEqual(DateTimeKind.Unspecified, d.Kind, "1. Kind not changed");
+            Assert.AreEqual(t, d.Ticks, "1 Ticks not changed");
+            Assert.AreEqual(DateTimeKind.Local, d1.Kind, "1 Local Kind");
+            Assert.AreEqual(t, d1.Ticks, "1 Local Ticks");
+
+            var d2 = DateTime.SpecifyKind(d, DateTimeKind.Utc);
+
+            Assert.AreEqual(DateTimeKind.Unspecified, d.Kind, "2. Kind not changed");
+            Assert.AreEqual(t, d.Ticks, "2 Ticks not changed");
+            Assert.AreEqual(DateTimeKind.Utc, d2.Kind, "2 Utc Kind");
+            Assert.AreEqual(t, d2.Ticks, "2 Utc Ticks");
+
+            var d3 = DateTime.SpecifyKind(d, DateTimeKind.Local);
+
+            Assert.AreEqual(DateTimeKind.Unspecified, d.Kind, "3. Kind not changed");
+            Assert.AreEqual(t, d.Ticks, "3 Ticks not changed");
+            Assert.AreEqual(DateTimeKind.Local, d3.Kind, "3 Local Kind");
+            Assert.AreEqual(t, d3.Ticks, "3 Local Ticks");
+
+            var d4 = DateTime.SpecifyKind(d, DateTimeKind.Unspecified);
+
+            Assert.AreEqual(DateTimeKind.Unspecified, d.Kind, "4. Kind not changed");
+            Assert.AreEqual(t, d.Ticks, "4 Ticks not changed");
+            Assert.AreEqual(DateTimeKind.Unspecified, d4.Kind, "4 Unspecified Kind");
+            Assert.AreEqual(t, d4.Ticks, "4 Unspecified Ticks");
         }
 
         [Test(ExpectedCount = 11)]

@@ -12,8 +12,8 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test(ExpectedCount = 1)]
         public static void TestMoreThanDecimalDigitsFromTotalHours()
         {
-            var a = new DateTime(2015, 1, 1, 9);
-            var b = new DateTime(2015, 1, 1, 12, 52);
+            var a = new DateTime(2015, 1, 1, 9, 0, 0);
+            var b = new DateTime(2015, 1, 1, 12, 52, 0);
 
             decimal value = (decimal)((b - a).TotalHours);
 

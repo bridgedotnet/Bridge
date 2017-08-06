@@ -10,7 +10,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ar-TN", true), {
         positiveInfinitySymbol: "∞",
         percentSymbol: "%",
         percentGroupSizes: [3],
-        percentDecimalDigits: 3,
+        percentDecimalDigits: 2,
         percentDecimalSeparator: ".",
         percentGroupSeparator: ",",
         percentPositivePattern: 1,
@@ -23,7 +23,7 @@ Bridge.merge(new System.Globalization.CultureInfo("ar-TN", true), {
         currencyNegativePattern: 8,
         currencyPositivePattern: 3,
         numberGroupSizes: [3],
-        numberDecimalDigits: 3,
+        numberDecimalDigits: 2,
         numberDecimalSeparator: ".",
         numberGroupSeparator: ",",
         numberNegativePattern: 1
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("ar-TN", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM, yyyy",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });

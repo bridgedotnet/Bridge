@@ -33,7 +33,7 @@ Bridge.merge(new System.Globalization.CultureInfo("eo", true), {
         abbreviatedDayNames: ["di","lu","ma","me","ĵa","ve","sa"],
         abbreviatedMonthGenitiveNames: ["jan","feb","mar","apr","maj","jun","jul","aŭg","sep","okt","nov","dec",""],
         abbreviatedMonthNames: ["jan","feb","mar","apr","maj","jun","jul","aŭg","sep","okt","nov","dec",""],
-        amDesignator: "AM",
+        amDesignator: "atm",
         dateSeparator: "-",
         dayNames: ["dimanĉo","lundo","mardo","merkredo","ĵaŭdo","vendredo","sabato"],
         firstDayOfWeek: 1,
@@ -43,7 +43,7 @@ Bridge.merge(new System.Globalization.CultureInfo("eo", true), {
         monthDayPattern: "MMMM d",
         monthGenitiveNames: ["januaro","februaro","marto","aprilo","majo","junio","julio","aŭgusto","septembro","oktobro","novembro","decembro",""],
         monthNames: ["januaro","februaro","marto","aprilo","majo","junio","julio","aŭgusto","septembro","oktobro","novembro","decembro",""],
-        pmDesignator: "PM",
+        pmDesignator: "ptm",
         rfc1123: "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
         shortDatePattern: "yyyy-MM-dd",
         shortestDayNames: ["di","lu","ma","me","ĵa","ve","sa"],
@@ -53,6 +53,6 @@ Bridge.merge(new System.Globalization.CultureInfo("eo", true), {
         timeSeparator: ":",
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy MMMM",
-        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.uzzz"
+        roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
     })
 });
