@@ -19,12 +19,6 @@
   <Target Name="BridgeNetCompilerTask">
     <Message Text="BridgeNetCompilerTask started: Project: $(MSBuildProjectName), Configuration: $(Configuration) $(Platform) OutputPath: $(OutputPath)" Importance="high" />
 
-    <Message Text="Environment:" Importance="high" />
-    <Message Text="   MonoBuild: $(MonoBuild)" Importance="high" />
-    <Message Text="   OnWin:     $(OnWin)" Importance="high" />
-    <Message Text="   OS:        $(OS)" Importance="high" />
-    <Message Text="   OSName:    $(OSName)" Importance="high" />
-
     <BridgeCompilerTask
       Assembly="@(IntermediateAssembly)"
       AssemblyName="$(AssemblyName)"
@@ -45,14 +39,6 @@
 
   <Target Name="BridgeNetCompilerUtil">
     <Message Text="BridgeNetCompilerUtil started: Project: $(MSBuildProjectName)" Importance="high" />
-
-    <Message Text="Environment:" Importance="high" />
-    <Message Text="   MonoBuild: $(MonoBuild)" Importance="high" />
-    <Message Text="   OnWin:     $(OnWin)" Importance="high" />
-    <Message Text="   OS:        $(OS)" Importance="high" />
-    <Message Text="   OSName:    $(OSName)" Importance="high" />
-    <Message Text="   MSBuildThisFileDirectory:    $(MSBuildThisFileDirectory)" Importance="high" />
-    <Message Text="   MSBuildProjectDirectory:    $(MSBuildProjectDirectory)" Importance="high" />
 
     <PropertyGroup>
       <BridgeUtilWorkDir>$(MSBuildThisFileDirectory)\..\tools\</BridgeUtilWorkDir>
