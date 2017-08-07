@@ -15388,7 +15388,7 @@ Bridge.$N1391Result =                     r;
                     var second = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.SomeMethod(System.Int32);
                     Bridge.Test.NUnit.Assert.AreEqual(0, second);
 
-                    var third = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.SomeMethod(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.SomeStruct);
+                    var third = Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.SomeMethod(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2207.SomeStruct).$clone();
                     Bridge.Test.NUnit.Assert.True(third.IsDefault());
                 }
             }
@@ -23972,10 +23972,8 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
-
-
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
                 }
             }
         }
@@ -24331,6 +24329,71 @@ Bridge.$N1391Result =                     r;
         f1: function () {
             var x1 = (Bridge.Int.check(715827882, System.Int32));
             x1 = Bridge.Int.mul(x1, x1, 1);
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3027", {
+        statics: {
+            methods: {
+                TestGenericInvocationClone: function () {
+                    var $t;
+                    var foo = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge3027.Foo$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3027.MyValueType))(($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3027.MyValueType(), $t.Value = 1, $t));
+                    var iShouldBeACopy = foo.GetField().$clone();
+                    iShouldBeACopy.Value = 2;
+                    Bridge.Test.NUnit.Assert.AreEqual(1, foo.GetField().Value);
+                }
+            }
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3027.Foo$1", function (T) { return {
+        fields: {
+            _Value: Bridge.getDefaultValue(T)
+        },
+        ctors: {
+            ctor: function (v) {
+                this.$initialize();
+                this._Value = v;
+            }
+        },
+        methods: {
+            GetField: function () {
+                return this._Value;
+            }
+        }
+    }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3027.MyValueType", {
+        $kind: "struct",
+        statics: {
+            methods: {
+                getDefaultValue: function () { return new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3027.MyValueType(); }
+            }
+        },
+        fields: {
+            Value: 0
+        },
+        ctors: {
+            ctor: function () {
+                this.$initialize();
+            }
+        },
+        methods: {
+            getHashCode: function () {
+                var h = Bridge.addHash([3055640370, this.Value]);
+                return h;
+            },
+            equals: function (o) {
+                if (!Bridge.is(o, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3027.MyValueType)) {
+                    return false;
+                }
+                return Bridge.equals(this.Value, o.Value);
+            },
+            $clone: function (to) {
+                var s = to || new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3027.MyValueType();
+                s.Value = this.Value;
+                return s;
+            }
         }
     });
 
@@ -29045,7 +29108,7 @@ Bridge.$N1391Result =                     r;
 
                     var value1 = System.Nullable.getValueOrDefault(test1, 0);
                     var value2 = System.Nullable.getValueOrDefault(test2, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge762A());
-                    var value3 = System.Nullable.getValueOrDefault(test3, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge762B());
+                    var value3 = System.Nullable.getValueOrDefault(test3, new Bridge.ClientTest.Batch3.BridgeIssues.Bridge762B()).$clone();
 
                     Bridge.Test.NUnit.Assert.AreEqual(0, value1, "Bridge762 int");
                     Bridge.Test.NUnit.Assert.AreNotEqual(null, value2, "Bridge762A struct");
