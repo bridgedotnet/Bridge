@@ -242,9 +242,9 @@ namespace Bridge.Contract
                     logger.Trace("basePath1: " + basePath);
                 }
 
-                if (!string.IsNullOrEmpty(basePath) && basePath[basePath.Length - 1] != '\\')
+                if (!string.IsNullOrEmpty(basePath) && basePath[basePath.Length - 1] != Path.DirectorySeparatorChar)
                 {
-                    basePath = basePath + '\\';
+                    basePath = basePath + Path.DirectorySeparatorChar;
                 }
 
                 if (logger != null)
