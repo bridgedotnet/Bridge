@@ -85,7 +85,9 @@ namespace Bridge.Translator
             var firstMinJs = true;
             var firstCss = true;
 
-            var outputLogger = this.Log;
+            // Set the logger if required to debug GetOutputPath methods
+            //ILogger outputLogger = this.Log;
+            ILogger outputLogger = null;
 
             foreach (var output in outputForHtml)
             {

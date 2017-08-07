@@ -239,7 +239,7 @@ namespace Bridge.Contract
             {
                 if (logger != null)
                 {
-                    logger.Trace("basePath1: " + basePath);
+                    logger.Trace("\tbasePath1: " + basePath);
                 }
 
                 if (!string.IsNullOrEmpty(basePath) && basePath[basePath.Length - 1] != Path.DirectorySeparatorChar)
@@ -249,21 +249,21 @@ namespace Bridge.Contract
 
                 if (logger != null)
                 {
-                    logger.Trace("basePath2: " + basePath);
+                    logger.Trace("\tbasePath2: " + basePath);
                 }
 
                 basePath = Path.GetFullPath(basePath);
 
                 if (logger != null)
                 {
-                    logger.Trace("basePath3: " + basePath);
+                    logger.Trace("\tbasePath3: " + basePath);
                 }
 
                 path = MakeRelative(path, basePath);
 
                 if (logger != null)
                 {
-                    logger.Trace("path: " + path);
+                    logger.Trace("\tpath: " + path);
                 }
             }
 
