@@ -432,7 +432,7 @@ namespace Bridge.Builder
 
                 value = parts[1];
 
-                if (value != null && value.Length > 1 && value[0] == '"' && value.Last() == '"')
+                if (value != null && value.Length > 1 && (value[0] == '"' || value.Last() == '"'))
                 {
                     value = value.Trim('"');
                 }
