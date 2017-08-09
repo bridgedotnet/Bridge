@@ -24237,8 +24237,10 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
+
+
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
                 }
             }
         }
@@ -24603,9 +24605,22 @@ Bridge.$N1391Result =                     r;
                 TestGenericInvocationClone: function () {
                     var $t;
                     var foo = new (Bridge.ClientTest.Batch3.BridgeIssues.Bridge3027.Foo$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge3027.MyValueType))(($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3027.MyValueType(), $t.Value = 1, $t));
+
                     var iShouldBeACopy = foo.GetField().$clone();
                     iShouldBeACopy.Value = 2;
+
                     Bridge.Test.NUnit.Assert.AreEqual(1, foo.GetField().Value);
+                    Bridge.Test.NUnit.Assert.AreEqual(2, iShouldBeACopy.Value);
+                },
+                TestNonGenericInvocationClone: function () {
+                    var $t;
+                    var foo = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3027.FooNonGeneric(($t = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3027.MyValueType(), $t.Value = 3, $t));
+
+                    var iShouldBeACopy = foo.GetField();
+                    iShouldBeACopy.Value = 4;
+
+                    Bridge.Test.NUnit.Assert.AreEqual(3, foo.GetField().Value);
+                    Bridge.Test.NUnit.Assert.AreEqual(4, iShouldBeACopy.Value);
                 }
             }
         }
@@ -24627,6 +24642,26 @@ Bridge.$N1391Result =                     r;
             }
         }
     }; });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3027.FooNonGeneric", {
+        fields: {
+            _Value: null
+        },
+        ctors: {
+            init: function () {
+                this._Value = new Bridge.ClientTest.Batch3.BridgeIssues.Bridge3027.MyValueType();
+            },
+            ctor: function (v) {
+                this.$initialize();
+                this._Value = v.$clone();
+            }
+        },
+        methods: {
+            GetField: function () {
+                return this._Value.$clone();
+            }
+        }
+    });
 
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3027.MyValueType", {
         $kind: "struct",
