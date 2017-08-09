@@ -12,14 +12,28 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     [TestFixture(TestNameFormat = "#2937 - {0}")]
     public class Bridge2937
     {
-        enum A { A, B, C }
+        enum Letter { A, B, C }
 
         [Test]
         public static void TestAssignmentConversion()
         {
-            var e = A.C;
-            Assert.AreEqual("A", ((object)(e -= 2)).ToString());
-            Assert.AreEqual("A", ((object)(e)).ToString());
+            var e = Letter.C;
+
+            Assert.AreEqual(Letter.C, ((object)e), "e C");
+            Assert.AreEqual("C", e.ToString(), "e ToString()");
+
+            var r = (object)(e -= 2);
+
+            Assert.AreEqual(Letter.A, r, "r A");
+            Assert.AreEqual("A", r.ToString(), "r A ToString()");
+            Assert.AreEqual("Letter", r.GetType().Name, "r A Type");
+            Assert.AreEqual("A", ((object)(r)).ToString());
+
+            r = (object)(e -= 1);
+
+            Assert.AreEqual(-1, r, "r -1");
+            Assert.AreEqual("-1", r.ToString(), "r -1 ToString()");
+            Assert.AreEqual("Letter", r.GetType().Name, "r -1 Type");
         }
     }
 }
