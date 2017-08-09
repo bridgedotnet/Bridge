@@ -85,6 +85,8 @@ namespace Bridge.Translator
             var firstMinJs = true;
             var firstCss = true;
 
+            ILogger outputLogger = this.Log;
+
             foreach (var output in outputForHtml)
             {
                 if (output.OutputType == TranslatorOutputType.JavaScript && indexScript >= 0)
@@ -99,7 +101,7 @@ namespace Bridge.Translator
 
                         firstMinJs = false;
 
-                        jsMinBuffer.Append(string.Format(scriptTemplate, output.GetOutputPath(outputPath, true)));
+                        jsMinBuffer.Append(string.Format(scriptTemplate, output.GetOutputPath(outputPath, true, outputLogger)));
                     }
                     else
                     {
@@ -111,7 +113,7 @@ namespace Bridge.Translator
 
                         firstJs = false;
 
-                        jsBuffer.Append(string.Format(scriptTemplate, output.GetOutputPath(outputPath, true)));
+                        jsBuffer.Append(string.Format(scriptTemplate, output.GetOutputPath(outputPath, true, outputLogger)));
                     }
                 } else if (output.OutputType == TranslatorOutputType.StyleSheets && indexCss >= 0)
                 {
@@ -123,7 +125,7 @@ namespace Bridge.Translator
 
                     firstCss = false;
 
-                    cssBuffer.Append(string.Format(cssLinkTemplate, output.GetOutputPath(outputPath, true)));
+                    cssBuffer.Append(string.Format(cssLinkTemplate, output.GetOutputPath(outputPath, true, outputLogger)));
                 }
             }
 

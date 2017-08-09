@@ -805,6 +805,14 @@
                 }
             }
 
+            if (mi.box) {
+                var unboxed = method;
+                method = function() {
+                    var v = unboxed.apply(this, arguments);
+                    return v != null ? mi.box(v) : v;
+                };
+            }
+
             return bind !== false ? Bridge.fn.bind(target, method) : method;
         },
 
@@ -834,7 +842,7 @@
             if (arguments.length === 3) {
                 obj[fi.sn] = arguments[2];
             } else {
-                return obj[fi.sn];
+                return fi.box ? fi.box(obj[fi.sn]) : obj[fi.sn];
             }
         },
 
