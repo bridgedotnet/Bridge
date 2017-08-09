@@ -156,6 +156,21 @@ namespace Bridge.Translator
                 var expectedType = block.Emitter.Resolver.Resolver.GetExpectedType(expression);
                 int level = 0;
 
+                if (expression.Parent is ParenthesizedExpression && expression.Parent.Parent is CastExpression)
+                {
+                    var prr = block.Emitter.Resolver.ResolveNode(expression.Parent, block.Emitter);
+                    var pconversion = block.Emitter.Resolver.Resolver.GetConversion((Expression)expression.Parent);
+                    var pexpectedType = block.Emitter.Resolver.Resolver.GetExpectedType((Expression)expression.Parent);
+
+                    if (pconversion.IsBoxingConversion)
+                    {
+                        rr = prr;
+                        conversion = pconversion;
+                        expectedType = pexpectedType;
+                        expression = (Expression)expression.Parent;
+                    }
+                }
+
                 return ConversionBlock.DoConversion(block, expression, conversion, expectedType, level, rr);
             }
             catch
@@ -165,7 +180,7 @@ namespace Bridge.Translator
             return 0;
         }
 
-        private static string GetBoxedType(IType itype, IEmitter emitter)
+        internal static string GetBoxedType(IType itype, IEmitter emitter)
         {
             if (NullableType.IsNullable(itype))
             {
@@ -405,7 +420,7 @@ namespace Bridge.Translator
                         block.WriteOpenParentheses();
                         block.AfterOutput2 += ", " + ConversionBlock.GetBoxedType(rr.Type, block.Emitter);
 
-                        var inlineMethod = ConversionBlock.GetInlineMethod(block.Emitter, "ToString",
+                        var inlineMethod = ConversionBlock.GetInlineMethod(block.Emitter, CS.Methods.TOSTRING,
                             block.Emitter.Resolver.Compilation.FindType(KnownTypeCode.String), rr.Type, expression);
 
                         if (inlineMethod != null)
@@ -413,7 +428,7 @@ namespace Bridge.Translator
                             block.AfterOutput2 += ", " + inlineMethod;
                         }
 
-                        inlineMethod = ConversionBlock.GetInlineMethod(block.Emitter, "GetHashCode",
+                        inlineMethod = ConversionBlock.GetInlineMethod(block.Emitter, CS.Methods.GETHASHCODE,
                             block.Emitter.Resolver.Compilation.FindType(KnownTypeCode.Int32), rr.Type, expression);
 
                         if (inlineMethod != null)

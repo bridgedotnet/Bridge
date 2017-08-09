@@ -1041,7 +1041,7 @@ namespace Bridge.Translator
             {
                 var toStringMethod = rr.Type.GetMembers().FirstOrDefault(m =>
                 {
-                    if (m.Name == "ToString" && !m.IsStatic && m.ReturnType.IsKnownType(KnownTypeCode.String) && m.IsOverride)
+                    if (m.Name == CS.Methods.TOSTRING && !m.IsStatic && m.ReturnType.IsKnownType(KnownTypeCode.String) && m.IsOverride)
                     {
                         var method = m as IMethod;
 

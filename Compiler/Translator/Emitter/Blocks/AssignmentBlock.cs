@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace Bridge.Translator
 {
-    public class AssignmentBlock : AbstractEmitterBlock
+    public class AssignmentBlock : ConversionBlock
     {
         public AssignmentBlock(IEmitter emitter, AssignmentExpression assignmentExpression)
             : base(emitter, assignmentExpression)
@@ -25,7 +25,12 @@ namespace Bridge.Translator
             set;
         }
 
-        protected override void DoEmit()
+        protected override Expression GetExpression()
+        {
+            return this.AssignmentExpression;
+        }
+
+        protected override void EmitConversionExpression()
         {
             this.VisitAssignmentExpression();
         }

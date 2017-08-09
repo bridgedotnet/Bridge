@@ -25,7 +25,6 @@
       "files": [
         "Resources/.auxiliary/Init.js",
         "Resources/Core.js",
-        "Resources/Enum.js",
         "Resources/Browser.js",
         "Resources/Class.js",
         "Resources/ReflectionAssembly.js",
@@ -33,6 +32,7 @@
         "Resources/.generated/bridge/utils/systemAssemblyVersion.js",
         "Resources/Reflection.js",
         "Resources/Interfaces.js",
+        "Resources/Enum.js",
         "Resources/Nullable.js",
         "Resources/Char.js",
         "Resources/.generated/system/formattableString.js",
