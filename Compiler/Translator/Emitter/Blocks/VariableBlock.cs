@@ -1,6 +1,5 @@
 using Bridge.Contract;
 using Bridge.Contract.Constants;
-
 using ICSharpCode.NRefactory.CSharp;
 using ICSharpCode.NRefactory.Semantics;
 
@@ -60,8 +59,6 @@ namespace Bridge.Translator
                     isReferenceLocal = this.Emitter.LocalsMap[lrr.Variable].EndsWith(".v");
                 }
 
-                this.WriteAwaiters(variable.Initializer);
-
                 var hasInitializer = !variable.Initializer.IsNull;
 
                 if (variable.Initializer.IsNull && !this.VariableDeclarationStatement.Type.IsVar())
@@ -74,22 +71,24 @@ namespace Bridge.Translator
                     }
                 }
 
+                if ((!this.Emitter.IsAsync || hasInitializer || isReferenceLocal) && needComma)
+                {
+                    if (this.Emitter.IsAsync)
+                    {
+                        this.WriteSemiColon(true);
+                    }
+                    else
+                    {
+                        this.WriteComma();
+                    }
+                }
+
+                needComma = true;
+
+                this.WriteAwaiters(variable.Initializer);
+
                 if (!this.Emitter.IsAsync || hasInitializer || isReferenceLocal)
                 {
-                    if (needComma)
-                    {
-                        if (this.Emitter.IsAsync)
-                        {
-                            this.WriteSemiColon();
-                        }
-                        else
-                        {
-                            this.WriteComma();
-                        }
-                    }
-
-                    needComma = true;
-
                     this.Write(varName);
                 }
 

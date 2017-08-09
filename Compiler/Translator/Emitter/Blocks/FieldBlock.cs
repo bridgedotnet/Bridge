@@ -582,7 +582,7 @@ namespace Bridge.Translator
                     return true;
                 }
 
-                if (objectName != JS.Fields.PROPERTIES && objectName != JS.Fields.FIELDS)
+                if (objectName != JS.Fields.PROPERTIES && objectName != JS.Fields.FIELDS && objectName != JS.Fields.EVENTS)
                 {
                     if (!isPrimitive || constValue is AstType)
                     {

@@ -22,8 +22,6 @@
             return type.prototype.$utype || System.Int32;
         },
 
-        $$name: "System.Enum",
-
         toName: function (name) {
             return name;
         },
@@ -340,4 +338,9 @@
         }
     };
 
-    System.Enum = enumMethods;
+    Bridge.define("System.Enum", {
+        inherits: [System.IComparable, System.IFormattable],
+        statics: {
+            methods: enumMethods
+        }
+    });
