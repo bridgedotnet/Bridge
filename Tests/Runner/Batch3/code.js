@@ -24130,10 +24130,8 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
-
-
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
                 }
             }
         }
@@ -24489,6 +24487,20 @@ Bridge.$N1391Result =                     r;
         f1: function () {
             var x1 = (Bridge.Int.check(715827882, System.Int32));
             x1 = Bridge.Int.mul(x1, x1, 1);
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3031", {
+        statics: {
+            methods: {
+                TestLongParse: function () {
+                    var l = System.Convert.toNumberInBase("0000000000000010", 16, 11);
+                    Bridge.Test.NUnit.Assert.True(l.equals(System.Int64(16)));
+
+                    l = System.Int64.parse("0000000000000010");
+                    Bridge.Test.NUnit.Assert.True(l.equals(System.Int64(10)));
+                }
+            }
         }
     });
 

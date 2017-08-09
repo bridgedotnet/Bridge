@@ -394,7 +394,7 @@
 
         var result = new System.Int64(str);
 
-        if (str !== result.toString()) {
+        if (System.String.trimStart(str, System.String.toCharArray(' 0+')) !== result.toString()) {
             throw new System.OverflowException();
         }
 

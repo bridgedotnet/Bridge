@@ -402,7 +402,7 @@
                     res = new System.UInt64(Bridge.$Long.fromString(str, true, fromBase));
                 }
 
-                if (res.toString(fromBase) !== str) {
+                if (res.toString(fromBase) !== System.String.trimStart(str, System.String.toCharArray(' 0+'))) {
                     throw new System.OverflowException("Value was either too large or too small.");
                 }
 

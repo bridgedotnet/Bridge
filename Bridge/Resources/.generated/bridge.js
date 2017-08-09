@@ -7380,7 +7380,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
         var result = new System.Int64(str);
 
-        if (str !== result.toString()) {
+        if (System.String.trimStart(str, System.String.toCharArray(' 0+')) !== result.toString()) {
             throw new System.OverflowException();
         }
 
@@ -15023,7 +15023,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                     res = new System.UInt64(Bridge.$Long.fromString(str, true, fromBase));
                 }
 
-                if (res.toString(fromBase) !== str) {
+                if (res.toString(fromBase) !== System.String.trimStart(str, System.String.toCharArray(' 0+'))) {
                     throw new System.OverflowException("Value was either too large or too small.");
                 }
 
