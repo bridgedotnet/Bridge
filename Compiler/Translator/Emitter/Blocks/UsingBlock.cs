@@ -76,7 +76,7 @@ namespace Bridge.Translator
                 }
             }
 
-            if(name == null)
+            if (name == null)
             {
                 temp = this.GetTempVarName();
                 name = temp;
