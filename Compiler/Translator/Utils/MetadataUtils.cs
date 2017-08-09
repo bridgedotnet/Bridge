@@ -716,18 +716,19 @@ namespace Bridge.Translator
 
         private static void AddBox(IMember m, IEmitter emitter, JObject properties)
         {
-            bool needBox = ConversionBlock.IsBoxable(m.ReturnType, emitter) ||
-                           m.ReturnType.IsKnownType(KnownTypeCode.NullableOfT) &&
-                           ConversionBlock.IsBoxable(NullableType.GetUnderlyingType(m.ReturnType), emitter);
+            bool needBox = ConversionBlock.IsBoxable(m.ReturnType, emitter)
+                        || m.ReturnType.IsKnownType(KnownTypeCode.NullableOfT)
+                        && ConversionBlock.IsBoxable(NullableType.GetUnderlyingType(m.ReturnType), emitter);
+
             if (needBox)
             {
-                StringBuilder sb = new StringBuilder("function ($v) { return ");
+                StringBuilder sb = new StringBuilder("function (" + JS.Vars.V + ") { return ");
 
                 sb.Append(JS.Types.Bridge.BOX);
-                sb.Append("($v, ");
+                sb.Append("(" + JS.Vars.V + ", ");
                 sb.Append(ConversionBlock.GetBoxedType(m.ReturnType, emitter));
 
-                var inlineMethod = ConversionBlock.GetInlineMethod(emitter, "ToString",
+                var inlineMethod = ConversionBlock.GetInlineMethod(emitter, CS.Methods.TOSTRING,
                     emitter.Resolver.Compilation.FindType(KnownTypeCode.String), m.ReturnType, null);
 
                 if (inlineMethod != null)
@@ -735,7 +736,7 @@ namespace Bridge.Translator
                     sb.Append(", " + inlineMethod);
                 }
 
-                inlineMethod = ConversionBlock.GetInlineMethod(emitter, "GetHashCode",
+                inlineMethod = ConversionBlock.GetInlineMethod(emitter, CS.Methods.GETHASHCODE,
                     emitter.Resolver.Compilation.FindType(KnownTypeCode.Int32), m.ReturnType, null);
 
                 if (inlineMethod != null)
@@ -746,7 +747,7 @@ namespace Bridge.Translator
                 sb.Append(");");
 
                 sb.Append("}");
-                properties.Add("box", new JRaw(sb.ToString()));
+                properties.Add(JS.Fields.BOX, new JRaw(sb.ToString()));
             }
         }
 
