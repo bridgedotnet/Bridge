@@ -40,7 +40,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
 
             Assert.AreEqual("A, B, C", str);
             Assert.AreEqual("B", typeof(C).GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static).First().GetValue(null).ToString());
-            Assert.AreEqual("B", typeof(C).GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static).First().GetMethod.Invoke(null).ToString() );
+            Assert.AreEqual("B", typeof(C).GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static).First().GetMethod.Invoke(null).ToString());
             Assert.AreEqual("C", typeof(C).GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static).First().Invoke(null).ToString());
         }
     }
