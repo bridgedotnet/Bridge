@@ -4382,10 +4382,10 @@ Bridge.assembly("Bridge.ClientTest.Batch3", function ($asm, globals) {
             methods: {
                 TestEnumNumberParsing: function () {
                     var ec = System.Enum.parse(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1311.SimpleEnum, "C");
-                    Bridge.Test.NUnit.Assert.AreEqual(4, ec, "C");
+                    Bridge.Test.NUnit.Assert.AreEqual(4, Bridge.unbox(ec), "C");
 
                     var e3 = System.Enum.parse(Bridge.ClientTest.Batch3.BridgeIssues.Bridge1311.SimpleEnum, "3");
-                    Bridge.Test.NUnit.Assert.AreEqual(3, e3, "3");
+                    Bridge.Test.NUnit.Assert.AreEqual(3, Bridge.unbox(e3), "3");
                 }
             }
         }
@@ -13791,7 +13791,7 @@ Bridge.$N1391Result =                     r;
 
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge2065.VehicleType.Boat, vehicleType);
                     Bridge.Test.NUnit.Assert.AreEqual("Boat", box.toString());
-                    Bridge.Test.NUnit.Assert.AreEqual("Boat", System.Enum.toString(Bridge.getType(System.Enum.parse(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge2065.VehicleType, "Boat")), System.Enum.parse(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge2065.VehicleType, "Boat")));
+                    Bridge.Test.NUnit.Assert.AreEqual("Boat", System.Enum.parse(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2077.Bridge2065.VehicleType, "Boat").toString());
                 }
             }
         }
@@ -24130,10 +24130,8 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
-
-
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
                 }
             }
         }
@@ -24489,6 +24487,21 @@ Bridge.$N1391Result =                     r;
         f1: function () {
             var x1 = (Bridge.Int.check(715827882, System.Int32));
             x1 = Bridge.Int.mul(x1, x1, 1);
+        }
+    });
+
+    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3028", {
+        statics: {
+            methods: {
+                ToEnum: function (T, name) {
+                    var value = System.Nullable.getValue(Bridge.cast(Bridge.unbox(System.Enum.parse(T, name, true)), T));
+
+                    return value;
+                },
+                TestEnumParseCast: function () {
+                    Bridge.Test.NUnit.Assert.AreEqual(System.DayOfWeek.Monday, Bridge.ClientTest.Batch3.BridgeIssues.Bridge3028.ToEnum(System.DayOfWeek, "Monday"));
+                }
+            }
         }
     });
 
