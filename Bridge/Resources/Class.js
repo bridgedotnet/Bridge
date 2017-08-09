@@ -312,6 +312,10 @@
 
             prop.$kind = prop.$kind || "class";
 
+            if (prop.$kind === "enum") {
+                extend = [System.Enum];
+            }
+
             if (prop.$noRegister === true) {
                 registerT = false;
                 delete prop.$noRegister;
