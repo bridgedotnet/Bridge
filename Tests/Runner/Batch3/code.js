@@ -23271,9 +23271,12 @@ Bridge.$N1391Result =                     r;
             methods: {
                 TestIndexChecking: function () {
                     var arr = System.Array.init([1, 2, 3], System.Int32);
+
                     var i = arr[10];
                     Bridge.Test.NUnit.Assert.Null(i);
+
                     Bridge.Test.NUnit.Assert.Null(arr[10]);
+
                     Bridge.Test.NUnit.Assert.Throws$2(System.IndexOutOfRangeException, function () {
                         var i1 = arr[System.Array.index(10, arr)];
                     });
@@ -24262,8 +24265,10 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
+
+
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
                 }
             }
         }

@@ -33,12 +33,15 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         public static void TestIndexChecking()
         {
             var arr = new int[] { 1, 2, 3 };
+
             unchecked
             {
                 var i = arr[10];
                 Assert.Null(i);
             }
+
             Assert.Null(unchecked(arr[10]));
+
             Assert.Throws<IndexOutOfRangeException>(() =>
             {
                 var i = arr[10];
