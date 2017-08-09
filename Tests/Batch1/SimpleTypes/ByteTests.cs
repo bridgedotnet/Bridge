@@ -167,15 +167,11 @@ namespace Bridge.ClientTest.SimpleTypes
 
             result = byte.TryParse("54768", out numberResult);
             Assert.False(result);
-            // #1592
-            Assert.AreEqual(54768, numberResult, "#1592");
-            //Assert.AreEqual(0, numberResult);
+            Assert.AreEqual(0, numberResult, "#1592");
 
             result = byte.TryParse("-1", out numberResult);
             Assert.False(result);
-            // #1592
-            Assert.AreEqual(-1, numberResult, "#1592");
-            //Assert.AreEqual(0, numberResult);
+            Assert.AreEqual(0, numberResult, "#1592");
 
             result = byte.TryParse("2.5", out numberResult);
             Assert.False(result);

@@ -713,6 +713,7 @@
                 result.v = parseInt(str, radix);
 
                 if (result.v < min || result.v > max) {
+                    result.v = 0;
                     return false;
                 }
 

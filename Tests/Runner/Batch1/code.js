@@ -1,9 +1,9 @@
 /**
  * Bridge Test library - general C# language tests
- * @version 16.0.0
+ * @version 16.0.1
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2017 Object.NET, Inc.
- * @compiler Bridge.NET 16.0.0
+ * @compiler Bridge.NET 16.0.1
  */
 Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resource1.bin":"AAECAwQFBgc=","Bridge.ClientTest.Batch1.Reflection.Resource2.bin":"EBESExQV"}, function ($asm, globals) {
     "use strict";
@@ -33068,15 +33068,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 result = System.Byte.tryParse("54768", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
-                // #1592
-                Bridge.Test.NUnit.Assert.AreEqual(54768, numberResult.v, "#1592");
-                //Assert.AreEqual(0, numberResult);
+                Bridge.Test.NUnit.Assert.AreEqual(0, numberResult.v, "#1592");
 
                 result = System.Byte.tryParse("-1", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
-                // #1592
-                Bridge.Test.NUnit.Assert.AreEqual(-1, numberResult.v, "#1592");
-                //Assert.AreEqual(0, numberResult);
+                Bridge.Test.NUnit.Assert.AreEqual(0, numberResult.v, "#1592");
 
                 result = System.Byte.tryParse("2.5", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
@@ -36252,13 +36248,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 result = System.Int16.tryParse("54768", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
-                // #1592
-                //Assert.AreEqual(0, numberResult);
+                Bridge.Test.NUnit.Assert.AreEqual(0, numberResult.v, "#1592");
 
                 result = System.Int16.tryParse("-55678", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
-                // #1592
-                //Assert.AreEqual(0, numberResult);
+                Bridge.Test.NUnit.Assert.AreEqual(0, numberResult.v, "#1592");
 
                 result = System.Int16.tryParse("2.5", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
@@ -37949,9 +37943,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 result = System.SByte.tryParse("54768", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
-                // #1592
-                Bridge.Test.NUnit.Assert.AreEqual(54768, numberResult.v);
-                //Assert.AreEqual(0, numberResult);
+                Bridge.Test.NUnit.Assert.AreEqual(0, numberResult.v, "#1592");
 
                 result = System.SByte.tryParse("2.5", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
@@ -39598,9 +39590,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 result = System.UInt16.tryParse("-1", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
-                // #1592
-                Bridge.Test.NUnit.Assert.AreEqual(-1, numberResult.v);
-                //Assert.AreEqual(0, numberResult);
+                Bridge.Test.NUnit.Assert.AreEqual(0, numberResult.v, "#1592");
 
                 result = System.UInt16.tryParse("2.5", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
@@ -39790,9 +39780,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 result = System.UInt32.tryParse("-1", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
-                // #1592
-                Bridge.Test.NUnit.Assert.AreEqual(-1, numberResult.v);
-                //Assert.AreEqual(0, numberResult);
+                Bridge.Test.NUnit.Assert.AreEqual(0, numberResult.v, "#1592");
 
                 result = System.UInt32.tryParse("2.5", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);

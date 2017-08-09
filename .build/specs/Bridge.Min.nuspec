@@ -15,7 +15,7 @@
     <copyright>Copyright (c) 2008-2017, Object.NET, Inc. (http://object.net/). All rights reserved.</copyright>
     <tags>bridge bridge.net bridge js javascript C# csharp mobile ios asp.net aspnet mvc aspnetmvc web transpiler compiler object.net</tags>
     <dependencies>
-      <dependency id="Bridge.Core" version="16.0.0" />
+      <dependency id="Bridge.Core" version="16.0.1" />
     </dependencies>
     <frameworkAssemblies>
     </frameworkAssemblies>
@@ -31,6 +31,7 @@
     <file src="../../Compiler/Build/bin/Release/Bridge.Build.dll" target="tools/Bridge.Builder.v16.dll" />
     <file src="../../Compiler/Build/bin/Release/Bridge.Contract.dll" target="tools/Bridge.Contract.dll" />
     <file src="../../Compiler/Build/bin/Release/Bridge.Translator.dll" target="tools/Bridge.Translator.dll" />
+    <file src="../../Compiler/Builder/bin/Release/bridge.exe" target="tools/bridge.exe" />
     <file src="../../Compiler/Build/bin/Release/AjaxMin.dll" target="tools/AjaxMin.dll" />
     <file src="../../Compiler/Build/bin/Release/ICSharpCode.NRefactory.Cecil.dll" target="tools/ICSharpCode.NRefactory.Cecil.dll" />
     <file src="../../Compiler/Build/bin/Release/ICSharpCode.NRefactory.CSharp.dll" target="tools/ICSharpCode.NRefactory.CSharp.dll" />
