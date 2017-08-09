@@ -1,7 +1,7 @@
 /**
- * @version   : 16.0.0 - Bridge.NET
+ * @version   : 16.0.1 - Bridge.NET
  * @author    : Object.NET, Inc. http://bridge.net/
- * @date      : 2017-08-01
+ * @date      : 2017-08-08
  * @copyright : Copyright 2008-2017 Object.NET, Inc. http://object.net/
  * @license   : See license.txt and https://github.com/bridgedotnet/Bridge/blob/master/LICENSE.md
  */
@@ -3086,8 +3086,8 @@
     // @source systemAssemblyVersion.js
 
     Bridge.init(function () {
-        Bridge.SystemAssembly.version = "16.0.0";
-        Bridge.SystemAssembly.compiler = "16.0.0";
+        Bridge.SystemAssembly.version = "16.0.1";
+        Bridge.SystemAssembly.compiler = "16.0.1";
     });
 
     Bridge.define("Bridge.Utils.SystemAssemblyVersion");
@@ -3901,6 +3901,14 @@
                 }
             }
 
+            if (mi.box) {
+                var unboxed = method;
+                method = function() {
+                    var v = unboxed.apply(this, arguments);
+                    return v != null ? mi.box(v) : v;
+                };
+            }
+
             return bind !== false ? Bridge.fn.bind(target, method) : method;
         },
 
@@ -3930,7 +3938,7 @@
             if (arguments.length === 3) {
                 obj[fi.sn] = arguments[2];
             } else {
-                return obj[fi.sn];
+                return fi.box ? fi.box(obj[fi.sn]) : obj[fi.sn];
             }
         },
 

@@ -29,6 +29,7 @@
             public const string METHODS = "methods";
             public const string STATICS = "statics";
             public const string CTORS = "ctors";
+            public const string BOX = "box";
 
             public const string ASYNC_TASK = "task";
             public const string PROTOTYPE = "prototype";
@@ -322,6 +323,7 @@
 
             public const string T = "$t";
             public const string E = "$e";
+            public const string V = "$v";
             public const string YIELD = "$yield";
             public const string ENUMERATOR = "$enumerator";
             public const string EXPORTS = "$exports";

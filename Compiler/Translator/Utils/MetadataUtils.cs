@@ -616,6 +616,8 @@ namespace Bridge.Translator
                 {
                     properties.Add("p", new JArray(method.Parameters.Select(p => new JRaw(MetadataUtils.GetTypeName(p.Type, emitter, isGenericSpecialization)))));
                 }
+
+                MetadataUtils.AddBox(m, emitter, properties);
             }
             else if (m is IField)
             {
@@ -628,6 +630,8 @@ namespace Bridge.Translator
                 {
                     properties.Add("ro", field.IsReadOnly);
                 }
+
+                MetadataUtils.AddBox(m, emitter, properties);
             }
             else if (m is IProperty)
             {
@@ -710,6 +714,43 @@ namespace Bridge.Translator
             return properties;
         }
 
+        private static void AddBox(IMember m, IEmitter emitter, JObject properties)
+        {
+            bool needBox = ConversionBlock.IsBoxable(m.ReturnType, emitter)
+                        || m.ReturnType.IsKnownType(KnownTypeCode.NullableOfT)
+                        && ConversionBlock.IsBoxable(NullableType.GetUnderlyingType(m.ReturnType), emitter);
+
+            if (needBox)
+            {
+                StringBuilder sb = new StringBuilder("function (" + JS.Vars.V + ") { return ");
+
+                sb.Append(JS.Types.Bridge.BOX);
+                sb.Append("(" + JS.Vars.V + ", ");
+                sb.Append(ConversionBlock.GetBoxedType(m.ReturnType, emitter));
+
+                var inlineMethod = ConversionBlock.GetInlineMethod(emitter, CS.Methods.TOSTRING,
+                    emitter.Resolver.Compilation.FindType(KnownTypeCode.String), m.ReturnType, null);
+
+                if (inlineMethod != null)
+                {
+                    sb.Append(", " + inlineMethod);
+                }
+
+                inlineMethod = ConversionBlock.GetInlineMethod(emitter, CS.Methods.GETHASHCODE,
+                    emitter.Resolver.Compilation.FindType(KnownTypeCode.Int32), m.ReturnType, null);
+
+                if (inlineMethod != null)
+                {
+                    sb.Append(", " + inlineMethod);
+                }
+
+                sb.Append(");");
+
+                sb.Append("}");
+                properties.Add(JS.Fields.BOX, new JRaw(sb.ToString()));
+            }
+        }
+
         public static JObject ConstructFieldPropertyAccessor(IMethod m, IEmitter emitter, string fieldName, bool isGetter, bool includeDeclaringType, bool isGenericSpecialization, SyntaxTree tree)
         {
             var properties = MetadataUtils.GetCommonMemberInfoProperties(m, emitter, includeDeclaringType, isGenericSpecialization, tree);
@@ -725,6 +766,8 @@ namespace Bridge.Translator
             {
                 properties.Add("is", true);
             }
+
+            MetadataUtils.AddBox(m, emitter, properties);
 
             return properties;
         }
