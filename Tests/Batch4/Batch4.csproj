@@ -58,13 +58,8 @@
     <Compile Include="Web\HttpUtilityTests.cs" />
     <Compile Include="Runtime\CompilerServices\RuntimeHelpersTests.cs" />
     <Compile Include="LazyTests.cs" />
-    <Compile Include="SimpleTypes\ByteTests.cs" />
     <Compile Include="Serialization\JsonTests.cs" />
-    <Compile Include="SimpleTypes\UInt16Tests.cs" />
-    <Compile Include="SimpleTypes\UInt32Tests.cs" />
-    <Compile Include="SimpleTypes\SByteTests.cs" />
     <Compile Include="SimpleTypes\Int32Tests.cs" />
-    <Compile Include="SimpleTypes\Int16Tests.cs" />
     <Compile Include="DelegateTests.cs" />
     <Compile Include="SimpleTypes\DecimalTests.cs" />
     <Compile Include="SimpleTypes\StringTests.cs" />

@@ -171,9 +171,7 @@ namespace Bridge.ClientTest.SimpleTypes
 
             result = sbyte.TryParse("54768", out numberResult);
             Assert.False(result);
-            // #1592
-            Assert.AreEqual(54768, numberResult);
-            //Assert.AreEqual(0, numberResult);
+            Assert.AreEqual(0, numberResult, "#1592");
 
             result = sbyte.TryParse("2.5", out numberResult);
             Assert.False(result);

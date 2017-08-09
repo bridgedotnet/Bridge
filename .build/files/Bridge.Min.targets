@@ -6,14 +6,18 @@
     <NoStdLib>True</NoStdLib>
     <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
     <AdditionalExplicitAssemblyReferences />
+    <OnWin>false</OnWin>
+    <OnWin Condition="'$(OS)' == 'Windows_NT'">true</OnWin>
   </PropertyGroup>
 
   <PropertyGroup>
-    <PrepareForRunDependsOn>$(PrepareForRunDependsOn);BridgeNetGenerateScript</PrepareForRunDependsOn>
+    <BridgeNetCompilerTarget Condition="$(OnWin) == true">BridgeNetCompilerTask</BridgeNetCompilerTarget>
+    <BridgeNetCompilerTarget Condition="$(OnWin) != true">BridgeNetCompilerUtil</BridgeNetCompilerTarget>
+    <PrepareForRunDependsOn>$(PrepareForRunDependsOn);$(BridgeNetCompilerTarget)</PrepareForRunDependsOn>
   </PropertyGroup>
 
-  <Target Name="BridgeNetGenerateScript">
-    <Message Text="------ BridgeNetGenerateScript task started: Project: $(MSBuildProjectName), Configuration: $(Configuration) $(Platform) OutputPath: $(OutputPath) ------" Importance="high" />
+  <Target Name="BridgeNetCompilerTask">
+    <Message Text="BridgeNetCompilerTask started: Project: $(MSBuildProjectName), Configuration: $(Configuration) $(Platform) OutputPath: $(OutputPath)" Importance="high" />
 
     <BridgeCompilerTask
       Assembly="@(IntermediateAssembly)"
@@ -30,6 +34,24 @@
       RootNamespace="$(RootNamespace)"
       Sources="@(Compile)" />
 
-    <Message Text="------ BridgeNetGenerateScript task done: Project: $(MSBuildProjectName), Configuration: $(Configuration) $(Platform) OutputPath: $(OutputPath) ------" Importance="high" />
+    <Message Text="BridgeNetCompilerTask done: Project: $(MSBuildProjectName), Configuration: $(Configuration) $(Platform) OutputPath: $(OutputPath)" Importance="high" />
+  </Target>
+
+  <Target Name="BridgeNetCompilerUtil">
+    <Message Text="BridgeNetCompilerUtil started: Project: $(MSBuildProjectName)" Importance="high" />
+
+    <PropertyGroup>
+      <BridgeUtilWorkDir>$(MSBuildThisFileDirectory)\..\tools\</BridgeUtilWorkDir>
+      <BridgePath>$(MSBuildProjectDirectory)\$(OutDir)\Bridge.dll</BridgePath>
+      <BridgeUtilCommand>&quot;$(BridgeUtilWorkDir)bridge.exe&quot; -p &quot;$(MSBuildProjectFullPath)&quot; -b &quot;$(BridgePath)&quot; --settings AssemblyName:&quot;$(AssemblyName)&quot;,Configuration:&quot;$(Configuration)&quot;,DefineConstants:&quot;$(DefineConstants)&quot;,OutputPath:&quot;$(OutputPath)&quot;,OutDir:&quot;$(OutDir)&quot;,OutputType:&quot;$(OutputType)&quot;,Platform:&quot;$(Platform)&quot;,RootNamespace:&quot;$(RootNamespace)&quot;</BridgeUtilCommand>
+    </PropertyGroup>
+
+    <Message Text="   Working Directory:           $(BridgeUtilWorkDir)" Importance="high" />
+    <Message Text="   BridgePath:                  $(BridgePath)" Importance="high" />
+    <Message Text="   Command:                     $(BridgeUtilCommand)" Importance="high" />
+
+    <Exec Command="$(BridgeUtilCommand)" LogStandardErrorAsError="true" WorkingDirectory="$(BridgeUtilWorkDir)"/>
+
+    <Message Text="BridgeNetCompilerUtil done: Project: $(MSBuildProjectName)" Importance="high" />
   </Target>
 </Project>

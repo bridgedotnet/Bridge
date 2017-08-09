@@ -1,9 +1,9 @@
 /**
  * Bridge Test library - general C# language tests for Portarelle
- * @version 16.0.0
+ * @version 16.0.1
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2017 Object.NET, Inc.
- * @compiler Bridge.NET 16.0.0
+ * @compiler Bridge.NET 16.0.1
  */
 Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
     "use strict";
@@ -418,24 +418,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.ByteTests", {
-        methods: {
-            TryParseWorks_SPI_1592: function () {
-                var numberResult = { };
-
-                var result = System.Byte.tryParse("54768", numberResult);
-                Bridge.Test.NUnit.Assert.False(result);
-                // #1592
-                Bridge.Test.NUnit.Assert.AreEqual(0, numberResult.v);
-
-                result = System.Byte.tryParse("-1", numberResult);
-                Bridge.Test.NUnit.Assert.False(result);
-                // #1592
-                Bridge.Test.NUnit.Assert.AreEqual(0, numberResult.v);
-            }
-        }
-    });
-
     Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.CharTests", {
         methods: {
             TypePropertiesAreInt32_SPI_1603: function () {
@@ -754,23 +736,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.Int16Tests", {
-        methods: {
-            TryParseWorks_SPI_1592: function () {
-                var numberResult = { };
-                var result = System.Int16.tryParse("54768", numberResult);
-                Bridge.Test.NUnit.Assert.False(result);
-                // #1592
-                Bridge.Test.NUnit.Assert.AreEqual(0, numberResult.v);
-
-                result = System.Int16.tryParse("-55678", numberResult);
-                Bridge.Test.NUnit.Assert.False(result);
-                // #1592
-                Bridge.Test.NUnit.Assert.AreEqual(0, numberResult.v);
-            }
-        }
-    });
-
     Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.Int32Tests", {
         methods: {
             IntegerModuloWorks_SPI_1602: function () {
@@ -779,18 +744,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
                 Bridge.Test.NUnit.Assert.Throws$2(System.DivideByZeroException, function () {
                     var x = a % c;
                 });
-            }
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.SByteTests", {
-        methods: {
-            TryParseWorks_SPI_1592: function () {
-                var numberResult = { };
-                var result = System.SByte.tryParse("54768", numberResult);
-                Bridge.Test.NUnit.Assert.False(result);
-                // #1592
-                Bridge.Test.NUnit.Assert.AreEqual(0, numberResult.v);
             }
         }
     });
@@ -824,28 +777,6 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
         methods: {
             format: function (format, formatProvider) {
                 return System.String.concat("Formatted: ", format, ", ", (formatProvider == null ? "null formatProvider" : Bridge.Reflection.getTypeFullName(Bridge.getType(formatProvider))));
-            }
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.UInt16Tests", {
-        methods: {
-            TryParseWorks_SPI_1592: function () {
-                var numberResult = { };
-                var result = System.UInt16.tryParse("-1", numberResult);
-                // #1592
-                Bridge.Test.NUnit.Assert.AreEqual(0, numberResult.v);
-            }
-        }
-    });
-
-    Bridge.define("Bridge.ClientTest.Batch4.SimpleTypes.UInt32Tests", {
-        methods: {
-            TryParseWorks_SPI_1592: function () {
-                var numberResult = { };
-                var result = System.UInt32.tryParse("-1", numberResult);
-                // #1592
-                Bridge.Test.NUnit.Assert.AreEqual(0, numberResult.v);
             }
         }
     });
@@ -1157,5 +1088,5 @@ Bridge.assembly("Bridge.ClientTest.Batch4", function ($asm, globals) {
 
     var $m = Bridge.setMetadata,
         $n = [System,Bridge.ClientTest.Batch4];
-    $m($n[1].DelegateTests, function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":1,"n":"A","t":8,"sn":"A","rt":$n[0].Void},{"a":1,"n":"AddForCreateWorks","t":8,"pi":[{"n":"x","pt":$n[0].Int32,"ps":0}],"sn":"AddForCreateWorks","rt":$n[0].Int32,"p":[$n[0].Int32]},{"a":2,"n":"Call","t":8,"pi":[{"n":"t","pt":$n[0].Object,"ps":0},{"n":"d","pt":Function,"ps":1},{"n":"args","ip":true,"pt":$n[0].Array.type(System.Object),"ps":2}],"tpc":0,"def":function (t, d, args) { return d.apply(t, args); },"rt":$n[0].Object,"p":[$n[0].Object,Function,$n[0].Array.type(System.Object)]},{"a":2,"n":"CloneWorks_SPI_1563","t":8,"sn":"CloneWorks_SPI_1563","rt":$n[0].Void},{"a":2,"n":"CloningDelegateToTheSameTypeCreatesANewClone_SPI_1563","t":8,"sn":"CloningDelegateToTheSameTypeCreatesANewClone_SPI_1563","rt":$n[0].Void},{"a":2,"n":"CreateWorks","t":8,"sn":"CreateWorks","rt":$n[0].Void},{"a":2,"n":"EqualityAndInequalityOperatorsAndEqualsMethod_SPI_1563","t":8,"sn":"EqualityAndInequalityOperatorsAndEqualsMethod_SPI_1563","rt":$n[0].Void},{"a":2,"n":"RemoveDoesNotAffectOriginal_SPI_1563","t":8,"sn":"RemoveDoesNotAffectOriginal_SPI_1563","rt":$n[0].Void},{"a":2,"n":"RemoveWorksWithMethodGroupConversion_SPI_1563","t":8,"sn":"RemoveWorksWithMethodGroupConversion_SPI_1563","rt":$n[0].Void},{"a":1,"n":"testField","t":4,"rt":$n[0].Int32,"sn":"testField"}]}; });
+    $m($n[1].DelegateTests, function () { return {"att":1048577,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":1,"n":"A","t":8,"sn":"A","rt":$n[0].Void},{"a":1,"n":"AddForCreateWorks","t":8,"pi":[{"n":"x","pt":$n[0].Int32,"ps":0}],"sn":"AddForCreateWorks","rt":$n[0].Int32,"p":[$n[0].Int32],"box":function ($v) { return Bridge.box($v, System.Int32);}},{"a":2,"n":"Call","t":8,"pi":[{"n":"t","pt":$n[0].Object,"ps":0},{"n":"d","pt":Function,"ps":1},{"n":"args","ip":true,"pt":$n[0].Array.type(System.Object),"ps":2}],"tpc":0,"def":function (t, d, args) { return d.apply(t, args); },"rt":$n[0].Object,"p":[$n[0].Object,Function,$n[0].Array.type(System.Object)]},{"a":2,"n":"CloneWorks_SPI_1563","t":8,"sn":"CloneWorks_SPI_1563","rt":$n[0].Void},{"a":2,"n":"CloningDelegateToTheSameTypeCreatesANewClone_SPI_1563","t":8,"sn":"CloningDelegateToTheSameTypeCreatesANewClone_SPI_1563","rt":$n[0].Void},{"a":2,"n":"CreateWorks","t":8,"sn":"CreateWorks","rt":$n[0].Void},{"a":2,"n":"EqualityAndInequalityOperatorsAndEqualsMethod_SPI_1563","t":8,"sn":"EqualityAndInequalityOperatorsAndEqualsMethod_SPI_1563","rt":$n[0].Void},{"a":2,"n":"RemoveDoesNotAffectOriginal_SPI_1563","t":8,"sn":"RemoveDoesNotAffectOriginal_SPI_1563","rt":$n[0].Void},{"a":2,"n":"RemoveWorksWithMethodGroupConversion_SPI_1563","t":8,"sn":"RemoveWorksWithMethodGroupConversion_SPI_1563","rt":$n[0].Void},{"a":1,"n":"testField","t":4,"rt":$n[0].Int32,"sn":"testField","box":function ($v) { return Bridge.box($v, System.Int32);}}]}; });
 });

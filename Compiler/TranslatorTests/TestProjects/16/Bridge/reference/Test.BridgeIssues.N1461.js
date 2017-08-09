@@ -36,7 +36,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
         },
         statics : {
             methods: {
-                $metadata : function () { return {"m":[{"a":2,"n":"A","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_A","t":8,"rt":System.Int32,"fg":"A"},"fn":"A"}]}; }
+                $metadata : function () { return {"m":[{"a":2,"n":"A","t":16,"rt":System.Int32,"g":{"a":2,"n":"get_A","t":8,"rt":System.Int32,"fg":"A","box":function ($v) { return Bridge.box($v, System.Int32);}},"fn":"A"}]}; }
             }
         }
     });
