@@ -12536,7 +12536,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             methods: {
                 TestEnumBaseType: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2932).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2932, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestEnumBaseType()", $t.Line = "17", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2932).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2932, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestEnumBaseType()", $t.Line = "12", $t));
                     Bridge.ClientTest.Batch3.BridgeIssues.Bridge2932.TestEnumBaseType();
                 }
             }

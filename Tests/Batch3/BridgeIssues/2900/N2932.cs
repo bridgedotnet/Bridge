@@ -1,9 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Threading.Tasks;
-using Bridge.Html5;
 using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
@@ -17,6 +12,7 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
         [Test]
         public static void TestEnumBaseType()
         {
+            Assert.AreEqual("System.Enum", typeof(A).BaseType.FullName);
             Assert.AreEqual(typeof(Enum), typeof(A).BaseType);
         }
     }

@@ -23878,6 +23878,7 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestEnumBaseType: function () {
+                    Bridge.Test.NUnit.Assert.AreEqual("System.Enum", Bridge.Reflection.getTypeFullName(Bridge.Reflection.getBaseType(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2932.A)));
                     Bridge.Test.NUnit.Assert.AreEqual(System.Enum, Bridge.Reflection.getBaseType(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2932.A));
                 }
             }
