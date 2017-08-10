@@ -24725,20 +24725,6 @@ Bridge.$N1391Result =                     r;
         }
     });
 
-    Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge3031", {
-        statics: {
-            methods: {
-                TestLongParse: function () {
-                    var l = System.Convert.toNumberInBase("0000000000000010", 16, 11);
-                    Bridge.Test.NUnit.Assert.True(l.equals(System.Int64(16)));
-
-                    l = System.Int64.parse("0000000000000010");
-                    Bridge.Test.NUnit.Assert.True(l.equals(System.Int64(10)));
-                }
-            }
-        }
-    });
-
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.IBridge304", {
         $kind: "interface"
     });

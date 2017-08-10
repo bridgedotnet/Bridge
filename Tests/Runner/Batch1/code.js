@@ -36751,6 +36751,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.True(result);
                 Bridge.Test.NUnit.Assert.AreEqual(System.Int64(-14), numberResult.v);
 
+                result = System.Int64.tryParse("0000000000000010", numberResult);
+                Bridge.Test.NUnit.Assert.True(result);
+                Bridge.ClientTestHelper.NumberHelper.AssertNumber(System.Int64(10), numberResult.v, "#3031");
+
                 result = System.Int64.tryParse("", numberResult);
                 Bridge.Test.NUnit.Assert.False(result);
                 Bridge.Test.NUnit.Assert.AreEqual(System.Int64(0), numberResult.v);
@@ -36778,6 +36782,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             ParseWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual(System.Int64([568732647,3]), System.Int64.parse("13453634535"));
                 Bridge.Test.NUnit.Assert.AreEqual(System.Int64([-1258093817,-54542]), System.Int64.parse("-234253069384953"));
+                Bridge.ClientTestHelper.NumberHelper.AssertNumber(System.Int64(10), System.Int64.parse("0000000000000010"), "#3031");
                 Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.Int64Tests.f2);
                 Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentNullException, $asm.$.Bridge.ClientTest.SimpleTypes.Int64Tests.f3);
                 Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.Int64Tests.f4);
@@ -48172,7 +48177,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     "0", 
                     longMinValue.toString(), 
                     longMaxValue.toString(), 
-                    null
+                    null, 
+                    "0000000000000010"
                 ], System.String);
                 var expectedValues = System.Array.init([
                     System.Int64(100), 
@@ -48180,7 +48186,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     System.Int64(0), 
                     longMinValue, 
                     longMaxValue, 
-                    System.Int64(0)
+                    System.Int64(0), 
+                    System.Int64(10)
                 ], System.Int64);
                 this.VerifyFromString(function (value) { return System.Convert.toInt64(value); }, function (value, provider) { return System.Convert.toInt64(value, provider); }, testValues, expectedValues, void 0, true);
 
@@ -48206,7 +48213,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     Bridge.ClientTest.ConvertTests.ConvertConstants.INT64_MIN_STRING_BASE_16, 
                     minSafeValue.toString(), 
                     Bridge.ClientTest.ConvertTests.ConvertConstants.INT64_MIN_STRING_BASE_8, 
-                    Bridge.ClientTest.ConvertTests.ConvertConstants.INT64_MIN_STRING_BASE_2
+                    Bridge.ClientTest.ConvertTests.ConvertConstants.INT64_MIN_STRING_BASE_2, 
+                    "0000000000000010"
                 ], System.String);
                 var testBases = System.Array.init([
                     10, 
@@ -48220,7 +48228,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     16, 
                     10, 
                     8, 
-                    2
+                    2, 
+                    16
                 ], System.Int32);
                 var expectedValues = System.Array.init([
                     System.Int64(0), 
@@ -48234,7 +48243,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     minSafeValue, 
                     minSafeValue, 
                     minSafeValue, 
-                    minSafeValue
+                    minSafeValue, 
+                    System.Int64(16)
                 ], System.Int64);
                 this.VerifyFromStringWithBase(function (value, fromBase) { return System.Convert.toNumberInBase(value, fromBase, 11); }, testValues, testBases, expectedValues, true);
 
