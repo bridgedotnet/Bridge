@@ -410,7 +410,7 @@
 
             v.v = new System.Int64(str);
 
-            if (str !== v.v.toString()) {
+            if (System.String.trimStart(str, System.String.toCharArray(' 0+')) !== v.v.toString()) {
                 v.v = System.Int64(Bridge.$Long.ZERO);
                 return false;
             }
