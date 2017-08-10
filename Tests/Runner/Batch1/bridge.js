@@ -15592,13 +15592,13 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                         if (typeCode === typeCodes.Int64) {
                             value = new System.Int64(value);
 
-                            if (str !== value.toString()) {
+                            if (System.String.trimStart(str, System.String.toCharArray(' 0+')) !== value.toString()) {
                                 this.throwOverflow(scope.internal.getTypeCodeName(typeCode));
                             }
                         } else if (typeCode === typeCodes.UInt64) {
                             value = new System.UInt64(value);
 
-                            if (str !== value.toString()) {
+                            if (System.String.trimStart(str, System.String.toCharArray(' 0+')) !== value.toString()) {
                                 this.throwOverflow(scope.internal.getTypeCodeName(typeCode));
                             }
                         } else {
