@@ -7704,7 +7704,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             throw new System.OverflowException();
         }
 
-        if (str !== result.toString()) {
+        if (System.String.trimStart(str, System.String.toCharArray(' 0+')) !== result.toString()) {
             throw new System.OverflowException();
         }
 
@@ -7725,7 +7725,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 return false;
             }
 
-            if (str !== v.v.toString()) {
+            if (System.String.trimStart(str, System.String.toCharArray(' 0+')) !== v.v.toString()) {
                 v.v = System.UInt64(Bridge.$Long.UZERO);
                 return false;
             }
