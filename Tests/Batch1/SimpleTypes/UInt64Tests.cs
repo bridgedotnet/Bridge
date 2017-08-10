@@ -1,4 +1,5 @@
 ﻿using Bridge.Test.NUnit;
+using Bridge.ClientTestHelper;
 using System;
 using System.Globalization;
 
@@ -234,6 +235,10 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.True(result);
             Assert.AreEqual(23445UL, numberResult);
 
+            result = ulong.TryParse("0000000000000010", out numberResult);
+            Assert.True(result);
+            NumberHelper.AssertNumber(10UL, numberResult, "#3031");
+
             result = ulong.TryParse("", out numberResult);
             Assert.False(result);
             Assert.AreEqual(0UL, numberResult);
@@ -263,6 +268,7 @@ namespace Bridge.ClientTest.SimpleTypes
         public void ParseWorks()
         {
             Assert.AreEqual(23445UL, ulong.Parse("23445"));
+            NumberHelper.AssertNumber(10UL, ulong.Parse("0000000000000010"), "#3031");
             Assert.Throws<FormatException>(() => ulong.Parse(""));
             Assert.Throws<ArgumentNullException>(() => ulong.Parse(null));
             Assert.Throws<FormatException>(() => ulong.Parse("notanumber"));
