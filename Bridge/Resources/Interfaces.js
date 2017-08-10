@@ -44,6 +44,14 @@
                     }
 
                     return Bridge.is(obj, System.IComparable$1(T), true);
+                },
+
+                isAssignableFrom: function (type) {
+                    if (type === System.DateTime && T === Date) {
+                        return true;
+                    }
+
+                    return Bridge.Reflection.getInterfaces(type).indexOf(System.IComparable$1(T)) >= 0;
                 }
             }
         };
@@ -60,6 +68,14 @@
                     }
 
                     return Bridge.is(obj, System.IEquatable$1(T), true);
+                },
+
+                isAssignableFrom: function (type) {
+                    if (type === System.DateTime && T === Date) {
+                        return true;
+                    }
+
+                    return Bridge.Reflection.getInterfaces(type).indexOf(System.IEquatable$1(T)) >= 0;
                 }
             }
         };
