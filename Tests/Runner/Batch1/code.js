@@ -36751,6 +36751,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.True(result);
                 Bridge.Test.NUnit.Assert.AreEqual(System.Int64(-14), numberResult.v);
 
+                result = System.Int64.tryParse("0000000000000000", numberResult);
+                Bridge.Test.NUnit.Assert.True(result);
+                Bridge.ClientTestHelper.NumberHelper.AssertNumber(System.Int64(0), numberResult.v, "#3031");
+
+                result = System.Int64.tryParse("0", numberResult);
+                Bridge.Test.NUnit.Assert.True(result);
+                Bridge.ClientTestHelper.NumberHelper.AssertNumber(System.Int64(0), numberResult.v, "#3031");
+
                 result = System.Int64.tryParse("0000000000000010", numberResult);
                 Bridge.Test.NUnit.Assert.True(result);
                 Bridge.ClientTestHelper.NumberHelper.AssertNumber(System.Int64(10), numberResult.v, "#3031");
@@ -36782,6 +36790,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             ParseWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual(System.Int64([568732647,3]), System.Int64.parse("13453634535"));
                 Bridge.Test.NUnit.Assert.AreEqual(System.Int64([-1258093817,-54542]), System.Int64.parse("-234253069384953"));
+                Bridge.ClientTestHelper.NumberHelper.AssertNumber(System.Int64(0), System.Int64.parse("0"), "#3031");
+                Bridge.ClientTestHelper.NumberHelper.AssertNumber(System.Int64(0), System.Int64.parse("000000000000000"), "#3031");
                 Bridge.ClientTestHelper.NumberHelper.AssertNumber(System.Int64(10), System.Int64.parse("0000000000000010"), "#3031");
                 Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.Int64Tests.f2);
                 Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentNullException, $asm.$.Bridge.ClientTest.SimpleTypes.Int64Tests.f3);
@@ -40028,6 +40038,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.True(result);
                 Bridge.Test.NUnit.Assert.AreEqual(System.UInt64(23445), numberResult.v);
 
+                result = System.UInt64.tryParse("0000000000000000", numberResult);
+                Bridge.Test.NUnit.Assert.True(result);
+                Bridge.ClientTestHelper.NumberHelper.AssertNumber(System.UInt64(0), numberResult.v, "#3031");
+
+                result = System.UInt64.tryParse("0", numberResult);
+                Bridge.Test.NUnit.Assert.True(result);
+                Bridge.ClientTestHelper.NumberHelper.AssertNumber(System.UInt64(0), numberResult.v, "#3031");
+
                 result = System.UInt64.tryParse("0000000000000010", numberResult);
                 Bridge.Test.NUnit.Assert.True(result);
                 Bridge.ClientTestHelper.NumberHelper.AssertNumber(System.UInt64(10), numberResult.v, "#3031");
@@ -40059,6 +40077,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             ParseWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual(System.UInt64(23445), System.UInt64.parse("23445"));
                 Bridge.ClientTestHelper.NumberHelper.AssertNumber(System.UInt64(10), System.UInt64.parse("0000000000000010"), "#3031");
+                Bridge.ClientTestHelper.NumberHelper.AssertNumber(System.UInt64(0), System.UInt64.parse("0"), "#3031");
+                Bridge.ClientTestHelper.NumberHelper.AssertNumber(System.UInt64(0), System.UInt64.parse("000000000000000"), "#3031");
                 Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.UInt64Tests.f2);
                 Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentNullException, $asm.$.Bridge.ClientTest.SimpleTypes.UInt64Tests.f3);
                 Bridge.Test.NUnit.Assert.Throws$2(System.FormatException, $asm.$.Bridge.ClientTest.SimpleTypes.UInt64Tests.f4);
@@ -48183,7 +48203,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     longMinValue.toString(), 
                     longMaxValue.toString(), 
                     null, 
-                    "0000000000000010"
+                    "0000000000000010", 
+                    "00"
                 ], System.String);
                 var expectedValues = System.Array.init([
                     System.Int64(100), 
@@ -48192,7 +48213,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     longMinValue, 
                     longMaxValue, 
                     System.Int64(0), 
-                    System.Int64(10)
+                    System.Int64(10), 
+                    System.Int64(0)
                 ], System.Int64);
                 this.VerifyFromString(function (value) { return System.Convert.toInt64(value); }, function (value, provider) { return System.Convert.toInt64(value, provider); }, testValues, expectedValues, void 0, true);
 
@@ -48219,7 +48241,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     minSafeValue.toString(), 
                     Bridge.ClientTest.ConvertTests.ConvertConstants.INT64_MIN_STRING_BASE_8, 
                     Bridge.ClientTest.ConvertTests.ConvertConstants.INT64_MIN_STRING_BASE_2, 
-                    "0000000000000010"
+                    "0000000000000010", 
+                    "0", 
+                    "00"
                 ], System.String);
                 var testBases = System.Array.init([
                     10, 
@@ -48234,6 +48258,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     10, 
                     8, 
                     2, 
+                    16, 
+                    16, 
                     16
                 ], System.Int32);
                 var expectedValues = System.Array.init([
@@ -48249,7 +48275,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     minSafeValue, 
                     minSafeValue, 
                     minSafeValue, 
-                    System.Int64(16)
+                    System.Int64(16), 
+                    System.Int64(0), 
+                    System.Int64(0)
                 ], System.Int64);
                 this.VerifyFromStringWithBase(function (value, fromBase) { return System.Convert.toNumberInBase(value, fromBase, 11); }, testValues, testBases, expectedValues, true);
 
@@ -49392,7 +49420,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     ushortMaxValue.toString(), 
                     uintMaxValue.toString(), 
                     null, 
-                    "0000000000000010"
+                    "0000000000000010", 
+                    "00"
                 ], System.String);
                 var expectedValues = System.Array.init([
                     System.UInt64(1000), 
@@ -49400,7 +49429,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     System.UInt64(65535), 
                     System.UInt64(4294967295), 
                     System.UInt64(0), 
-                    System.UInt64(10)
+                    System.UInt64(10), 
+                    System.UInt64(0)
                 ], System.UInt64);
                 this.VerifyFromString(function (value) { return System.Convert.toUInt64(value); }, function (value, provider) { return System.Convert.toUInt64(value, provider); }, testValues, expectedValues);
 
@@ -49427,7 +49457,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     maxSafeValue.toString(), 
                     Bridge.ClientTest.ConvertTests.ConvertConstants.UINT64_MAX_STRING_BASE_8, 
                     Bridge.ClientTest.ConvertTests.ConvertConstants.UINT64_MAX_STRING_BASE_2, 
-                    "0000000000000010"
+                    "0000000000000010", 
+                    "00", 
+                    "0"
                 ], System.String);
                 var testBases = System.Array.init([
                     10, 
@@ -49438,6 +49470,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     10, 
                     8, 
                     2, 
+                    16, 
+                    16, 
                     16
                 ], System.Int32);
                 var expectedValues = System.Array.init([
@@ -49449,7 +49483,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     maxSafeValue, 
                     maxSafeValue, 
                     maxSafeValue, 
-                    System.UInt64(16)
+                    System.UInt64(16), 
+                    System.UInt64(0), 
+                    System.UInt64(0)
                 ], System.UInt64);
                 this.VerifyFromStringWithBase(function (value, fromBase) { return System.Convert.toNumberInBase(value, fromBase, 12); }, testValues, testBases, expectedValues, true);
 

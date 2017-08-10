@@ -235,6 +235,14 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.True(result);
             Assert.AreEqual(23445UL, numberResult);
 
+            result = ulong.TryParse("0000000000000000", out numberResult);
+            Assert.True(result);
+            NumberHelper.AssertNumber(0UL, numberResult, "#3031");
+
+            result = ulong.TryParse("0", out numberResult);
+            Assert.True(result);
+            NumberHelper.AssertNumber(0UL, numberResult, "#3031");
+
             result = ulong.TryParse("0000000000000010", out numberResult);
             Assert.True(result);
             NumberHelper.AssertNumber(10UL, numberResult, "#3031");
@@ -269,6 +277,8 @@ namespace Bridge.ClientTest.SimpleTypes
         {
             Assert.AreEqual(23445UL, ulong.Parse("23445"));
             NumberHelper.AssertNumber(10UL, ulong.Parse("0000000000000010"), "#3031");
+            NumberHelper.AssertNumber(0UL, ulong.Parse("0"), "#3031");
+            NumberHelper.AssertNumber(0UL, ulong.Parse("000000000000000"), "#3031");
             Assert.Throws<FormatException>(() => ulong.Parse(""));
             Assert.Throws<ArgumentNullException>(() => ulong.Parse(null));
             Assert.Throws<FormatException>(() => ulong.Parse("notanumber"));
