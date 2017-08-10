@@ -467,6 +467,10 @@ Bridge.define("System.String", {
             return System.String.trimStart(System.String.trimEnd(str, chars), chars);
         },
 
+        trimStartZeros: function (str) {
+            return str.replace(new RegExp('^[ 0+]+(?=.)'), '');
+        },
+
         concat: function (values) {
             var list = (arguments.length == 1 && Array.isArray(values)) ? values : [].slice.call(arguments),
                 s = "";

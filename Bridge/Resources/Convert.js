@@ -402,7 +402,7 @@
                     res = new System.UInt64(Bridge.$Long.fromString(str, true, fromBase));
                 }
 
-                if (res.toString(fromBase) !== System.String.trimStart(str, System.String.toCharArray(' 0+'))) {
+                if (res.toString(fromBase) !== System.String.trimStartZeros(str)) {
                     throw new System.OverflowException("Value was either too large or too small.");
                 }
 
@@ -971,13 +971,13 @@
                         if (typeCode === typeCodes.Int64) {
                             value = new System.Int64(value);
 
-                            if (System.String.trimStart(str, System.String.toCharArray(' 0+')) !== value.toString()) {
+                            if (System.String.trimStartZeros(str) !== value.toString()) {
                                 this.throwOverflow(scope.internal.getTypeCodeName(typeCode));
                             }
                         } else if (typeCode === typeCodes.UInt64) {
                             value = new System.UInt64(value);
 
-                            if (System.String.trimStart(str, System.String.toCharArray(' 0+')) !== value.toString()) {
+                            if (System.String.trimStartZeros(str) !== value.toString()) {
                                 this.throwOverflow(scope.internal.getTypeCodeName(typeCode));
                             }
                         } else {
