@@ -77,7 +77,11 @@ namespace Bridge.Translator
 
                     base.VisitBinaryOperatorExpression(binaryOperatorExpression);
 
-                    if (this.AwaitExpressions.Count > count)
+                    if (this.AwaitExpressions.Count > count && (
+                        binaryOperatorExpression.Operator == BinaryOperatorType.BitwiseAnd ||
+                        binaryOperatorExpression.Operator == BinaryOperatorType.BitwiseOr ||
+                        binaryOperatorExpression.Operator == BinaryOperatorType.ConditionalOr ||
+                        binaryOperatorExpression.Operator == BinaryOperatorType.ConditionalAnd))
                     {
                         this.AwaitExpressions.Insert(idx > -1 ? idx : 0, binaryOperatorExpression);
                     }

@@ -328,7 +328,12 @@ namespace Bridge.Translator
         {
             BinaryOperatorExpression binaryOperatorExpression = this.BinaryOperatorExpression;
 
-            if (this.Emitter.IsAsync && this.GetAwaiters(binaryOperatorExpression).Length > 0)
+            if (this.Emitter.IsAsync && (
+                binaryOperatorExpression.Operator == BinaryOperatorType.BitwiseAnd ||
+                binaryOperatorExpression.Operator == BinaryOperatorType.BitwiseOr ||
+                binaryOperatorExpression.Operator == BinaryOperatorType.ConditionalOr ||
+                binaryOperatorExpression.Operator == BinaryOperatorType.ConditionalAnd
+                ) && this.GetAwaiters(binaryOperatorExpression).Length > 0)
             {
                 if (this.Emitter.AsyncBlock.WrittenAwaitExpressions.Contains(binaryOperatorExpression))
                 {
