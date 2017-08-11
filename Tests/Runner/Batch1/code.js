@@ -35850,18 +35850,18 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         statics: {
             methods: {
                 TestParse: function () {
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.Zero, System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, "Zero"), "Parse Digits.Zero");
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.One, System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, "One"), "Parse Digits.One");
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.Two, System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, "Two"), "Parse Digits.Two");
-                    Bridge.Test.NUnit.Assert.AreEqual(3, System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.Pets, "Dog, Cat"), "Parse Dog, Cat");
-                    Bridge.Test.NUnit.Assert.AreEqual(14, System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.Pets, "Bird, Cat, Rabbit"), "Parse Bird, Cat, Rabbit");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.Zero, Bridge.unbox(System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, "Zero")), "Parse Digits.Zero");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.One, Bridge.unbox(System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, "One")), "Parse Digits.One");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.Two, Bridge.unbox(System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, "Two")), "Parse Digits.Two");
+                    Bridge.Test.NUnit.Assert.AreEqual(3, Bridge.unbox(System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.Pets, "Dog, Cat")), "Parse Dog, Cat");
+                    Bridge.Test.NUnit.Assert.AreEqual(14, Bridge.unbox(System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.Pets, "Bird, Cat, Rabbit")), "Parse Bird, Cat, Rabbit");
 
                     Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.EnumTests.f1, "Parse ONE");
                 },
                 TestParseIgnoreCase: function () {
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.Zero, System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, "zero", true), "Parse Digits.Zero");
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.One, System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, "oNe", true), "Parse Digits.One");
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.Two, System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, "TWO", true), "Parse Digits.Two");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.Zero, Bridge.unbox(System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, "zero", true)), "Parse Digits.Zero");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.One, Bridge.unbox(System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, "oNe", true)), "Parse Digits.One");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.ClientTest.SimpleTypes.EnumTests.Digits.Two, Bridge.unbox(System.Enum.parse(Bridge.ClientTest.SimpleTypes.EnumTests.Digits, "TWO", true)), "Parse Digits.Two");
 
                     Bridge.Test.NUnit.Assert.Throws$1($asm.$.Bridge.ClientTest.SimpleTypes.EnumTests.f2, "Parse ONN");
                 },
