@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Internal\CommonHelper.cs" />
     <Compile Include="Internal\DateHelper.cs" />
+    <Compile Include="Internal\NumberHelper.cs" />
     <Compile Include="Internal\StringHelper.cs" />
     <Compile Include="Internal\HtmlHelper.cs" />
     <Compile Include="Internal\N1193.cs" />

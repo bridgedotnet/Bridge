@@ -7,9 +7,9 @@ namespace System
 #pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
     public abstract class Enum : ValueType, IComparable, IFormattable
     {
-        public static extern Enum Parse(Type enumType, string value);
+        public static extern Object Parse(Type enumType, string value);
 
-        public static extern Enum Parse(Type enumType, string value, bool ignoreCase);
+        public static extern Object Parse(Type enumType, string value, bool ignoreCase);
 
         public static extern string ToString(Type enumType, Enum value);
 

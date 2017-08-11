@@ -1,4 +1,5 @@
 ﻿using Bridge.Test.NUnit;
+using Bridge.ClientTestHelper;
 using System;
 using System.Globalization;
 
@@ -217,6 +218,18 @@ namespace Bridge.ClientTest.SimpleTypes
             Assert.True(result);
             Assert.AreEqual(-14L, numberResult);
 
+            result = long.TryParse("0000000000000000", out numberResult);
+            Assert.True(result);
+            NumberHelper.AssertNumber(0L, numberResult, "#3031");
+
+            result = long.TryParse("0", out numberResult);
+            Assert.True(result);
+            NumberHelper.AssertNumber(0L, numberResult, "#3031");
+
+            result = long.TryParse("0000000000000010", out numberResult);
+            Assert.True(result);
+            NumberHelper.AssertNumber(10L, numberResult, "#3031");
+
             result = long.TryParse("", out numberResult);
             Assert.False(result);
             Assert.AreEqual(0L, numberResult);
@@ -247,6 +260,9 @@ namespace Bridge.ClientTest.SimpleTypes
         {
             Assert.AreEqual(13453634535L, long.Parse("13453634535"));
             Assert.AreEqual(-234253069384953L, long.Parse("-234253069384953"));
+            NumberHelper.AssertNumber(0L, long.Parse("0"), "#3031");
+            NumberHelper.AssertNumber(0L, long.Parse("000000000000000"), "#3031");
+            NumberHelper.AssertNumber(10L, long.Parse("0000000000000010"), "#3031");
             Assert.Throws<FormatException>(() => long.Parse(""));
             Assert.Throws<ArgumentNullException>(() => long.Parse(null));
             Assert.Throws<FormatException>(() => long.Parse("notanumber"));
