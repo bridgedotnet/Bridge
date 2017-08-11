@@ -9,10 +9,19 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     public class Bridge2935
     {
         [Test]
-        public static void TestEnumBaseType()
+        public static void TestStringAsEnumerableChar()
         {
-            var numerable = "Hello" as IEnumerable<char>;
+            var s = "Hello";
+            var numerable = s as IEnumerable<char>;
+
             Assert.NotNull(numerable);
+
+            var i = 0;
+            foreach (var c in numerable)
+            {
+                Assert.AreEqual(s[i], c);
+                i++;
+            }
         }
     }
 }

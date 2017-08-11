@@ -24034,10 +24034,26 @@ Bridge.$N1391Result =                     r;
     Bridge.define("Bridge.ClientTest.Batch3.BridgeIssues.Bridge2935", {
         statics: {
             methods: {
-                TestEnumBaseType: function () {
-                    var numerable = Bridge.as("Hello", System.Collections.Generic.IEnumerable$1(System.Char));
+                TestStringAsEnumerableChar: function () {
+                    var $t;
+                    var s = "Hello";
+                    var numerable = Bridge.as(s, System.Collections.Generic.IEnumerable$1(System.Char));
+
                     Bridge.Test.NUnit.Assert.NotNull(numerable);
-                }
+
+                    var i = 0;
+                    $t = Bridge.getEnumerator(numerable, System.Char);
+                    try {
+                        while ($t.moveNext()) {
+                            var c = $t.Current;
+                            Bridge.Test.NUnit.Assert.AreEqual(s.charCodeAt(i), c);
+                            i = (i + 1) | 0;
+                        }
+                    } finally {
+                        if (Bridge.is($t, System.IDisposable)) {
+                            $t.System$IDisposable$dispose();
+                        }
+                    }}
             }
         }
     });
@@ -24276,8 +24292,10 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
+
+
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
                 }
             }
         }
