@@ -155,6 +155,17 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.ClientTestHelper.NumberHelper", {
+        statics: {
+            methods: {
+                AssertNumber: function (expected, actual, message) {
+                    Bridge.Test.NUnit.Assert.AreEqual(expected.toString(), actual.toString(), System.String.concat(message, " representation"));
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.getType(expected)), Bridge.Reflection.getTypeName(Bridge.getType(actual)), System.String.concat(message, " type"));
+                }
+            }
+        }
+    });
+
     Bridge.define("Bridge.ClientTestHelper.StringHelper", {
         statics: {
             methods: {

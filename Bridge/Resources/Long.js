@@ -394,7 +394,7 @@
 
         var result = new System.Int64(str);
 
-        if (str !== result.toString()) {
+        if (System.String.trimStartZeros(str) !== result.toString()) {
             throw new System.OverflowException();
         }
 
@@ -410,7 +410,7 @@
 
             v.v = new System.Int64(str);
 
-            if (str !== v.v.toString()) {
+            if (System.String.trimStartZeros(str) !== v.v.toString()) {
                 v.v = System.Int64(Bridge.$Long.ZERO);
                 return false;
             }
@@ -718,7 +718,7 @@
             throw new System.OverflowException();
         }
 
-        if (str !== result.toString()) {
+        if (System.String.trimStartZeros(str) !== result.toString()) {
             throw new System.OverflowException();
         }
 
@@ -739,7 +739,7 @@
                 return false;
             }
 
-            if (str !== v.v.toString()) {
+            if (System.String.trimStartZeros(str) !== v.v.toString()) {
                 v.v = System.UInt64(Bridge.$Long.UZERO);
                 return false;
             }

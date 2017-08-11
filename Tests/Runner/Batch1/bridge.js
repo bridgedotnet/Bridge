@@ -7380,7 +7380,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
         var result = new System.Int64(str);
 
-        if (str !== result.toString()) {
+        if (System.String.trimStartZeros(str) !== result.toString()) {
             throw new System.OverflowException();
         }
 
@@ -7396,7 +7396,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
 
             v.v = new System.Int64(str);
 
-            if (str !== v.v.toString()) {
+            if (System.String.trimStartZeros(str) !== v.v.toString()) {
                 v.v = System.Int64(Bridge.$Long.ZERO);
                 return false;
             }
@@ -7704,7 +7704,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
             throw new System.OverflowException();
         }
 
-        if (str !== result.toString()) {
+        if (System.String.trimStartZeros(str) !== result.toString()) {
             throw new System.OverflowException();
         }
 
@@ -7725,7 +7725,7 @@ Bridge.Class.addExtend(System.Boolean, [System.IComparable$1(System.Boolean), Sy
                 return false;
             }
 
-            if (str !== v.v.toString()) {
+            if (System.String.trimStartZeros(str) !== v.v.toString()) {
                 v.v = System.UInt64(Bridge.$Long.UZERO);
                 return false;
             }
@@ -13254,6 +13254,10 @@ Bridge.define("System.String", {
             return System.String.trimStart(System.String.trimEnd(str, chars), chars);
         },
 
+        trimStartZeros: function (str) {
+            return str.replace(new RegExp('^[ 0+]+(?=.)'), '');
+        },
+
         concat: function (values) {
             var list = (arguments.length == 1 && Array.isArray(values)) ? values : [].slice.call(arguments),
                 s = "";
@@ -15023,7 +15027,7 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                     res = new System.UInt64(Bridge.$Long.fromString(str, true, fromBase));
                 }
 
-                if (res.toString(fromBase) !== str) {
+                if (res.toString(fromBase) !== System.String.trimStartZeros(str)) {
                     throw new System.OverflowException("Value was either too large or too small.");
                 }
 
@@ -15592,13 +15596,13 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                         if (typeCode === typeCodes.Int64) {
                             value = new System.Int64(value);
 
-                            if (str !== value.toString()) {
+                            if (System.String.trimStartZeros(str) !== value.toString()) {
                                 this.throwOverflow(scope.internal.getTypeCodeName(typeCode));
                             }
                         } else if (typeCode === typeCodes.UInt64) {
                             value = new System.UInt64(value);
 
-                            if (str !== value.toString()) {
+                            if (System.String.trimStartZeros(str) !== value.toString()) {
                                 this.throwOverflow(scope.internal.getTypeCodeName(typeCode));
                             }
                         } else {
