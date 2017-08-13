@@ -93,6 +93,7 @@ namespace System.Globalization
 
         [Convention(Notation.LowerCamelCase)] //[Field]
         public extern int FirstDayOfWeek
+        public extern DayOfWeek FirstDayOfWeek
         {
             get;
             set;
