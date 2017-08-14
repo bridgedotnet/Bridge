@@ -1,9 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Threading.Tasks;
-using Bridge.Html5;
 using Bridge.Test.NUnit;
 
 namespace Bridge.ClientTest.Batch3.BridgeIssues
@@ -14,7 +9,9 @@ namespace Bridge.ClientTest.Batch3.BridgeIssues
     {
         public class Test : IDisposable
         {
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
         }
 
         [Test]

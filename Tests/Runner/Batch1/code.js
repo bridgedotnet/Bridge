@@ -1,9 +1,9 @@
 /**
  * Bridge Test library - general C# language tests
- * @version 16.0.1
+ * @version 16.1.0
  * @author Object.NET, Inc.
  * @copyright Copyright 2008-2017 Object.NET, Inc.
- * @compiler Bridge.NET 16.0.1
+ * @compiler Bridge.NET 16.1.0
  */
 Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resource1.bin":"AAECAwQFBgc=","Bridge.ClientTest.Batch1.Reflection.Resource2.bin":"EBESExQV"}, function ($asm, globals) {
     "use strict";
@@ -16629,6 +16629,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual("iv", culture.name);
                 Bridge.Test.NUnit.Assert.AreEqual(System.Globalization.DateTimeFormatInfo.invariantInfo, culture.dateTimeFormat);
                 Bridge.Test.NUnit.Assert.AreEqual(System.Globalization.NumberFormatInfo.invariantInfo, culture.numberFormat);
+            },
+            DateTimeFormatFirstDayOfWeekWorks_N3013: function () {
+                var isFriday = System.Globalization.CultureInfo.getCurrentCulture().dateTimeFormat.firstDayOfWeek === System.DayOfWeek.Friday;
+
+                isFriday = isFriday ^ isFriday;
+
+                Bridge.Test.NUnit.Assert.False(isFriday, "#3013: FirstDayOfWeek is of type DayOfWeek");
             }
         }
     });

@@ -257,7 +257,7 @@ namespace Bridge.Translator
             var finallyBlock = new BlockStatement();
             var dispose = new InvocationExpression(
                 new MemberReferenceExpression(
-                    new MemberReferenceExpression(new IdentifierExpression(CS.NS.BRIDGE), "Script"), "Write"),
+                    new MemberReferenceExpression(new TypeReferenceExpression(new MemberType(new SimpleType("global"), CS.NS.BRIDGE) { IsDoubleColon = true }), "Script"), "Write"),
                 new PrimitiveExpression(
                     string.Format("if (" + JS.Funcs.BRIDGE_HASVALUE + "({0})) {0}." + JS.Funcs.DISPOSE + "();", name))
             );
@@ -323,7 +323,7 @@ namespace Bridge.Translator
 
                     if (isPost && !isStatement)
                     {
-                        return new InvocationExpression(new MemberReferenceExpression(new MemberReferenceExpression(new IdentifierExpression(CS.NS.BRIDGE), "Script"), "Identity"), clonUnaryOperatorExpression.Expression.Clone(), ae);
+                        return new InvocationExpression(new MemberReferenceExpression(new MemberReferenceExpression(new TypeReferenceExpression(new MemberType(new SimpleType("global"), CS.NS.BRIDGE) { IsDoubleColon = true }), "Script"), "Identity"), clonUnaryOperatorExpression.Expression.Clone(), ae);
                     }
                     else
                     {
@@ -369,7 +369,7 @@ namespace Bridge.Translator
 
                     if (isPost && !isStatement)
                     {
-                        return new InvocationExpression(new MemberReferenceExpression(new MemberReferenceExpression(new IdentifierExpression(CS.NS.BRIDGE), "Script"), "Identity"), clonUnaryOperatorExpression.Expression.Clone(), ae);
+                        return new InvocationExpression(new MemberReferenceExpression(new MemberReferenceExpression(new TypeReferenceExpression(new MemberType(new SimpleType("global"), CS.NS.BRIDGE) { IsDoubleColon = true }), "Script"), "Identity"), clonUnaryOperatorExpression.Expression.Clone(), ae);
                     }
                     else
                     {

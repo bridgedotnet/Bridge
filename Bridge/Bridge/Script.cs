@@ -303,9 +303,11 @@ namespace Bridge
         public static extern Task<T> AsyncCallFor<T>(T t, Func<T, Task<T>> init);
 
         [Template("({name:tmp} = {t})")]
+        [Unbox(false)]
         public static extern T ToTemp<T>(string name, T t);
 
         [Template("{name:gettmp}")]
+        [Unbox(false)]
         public static extern T FromTemp<T>(string name);
 
         [Template("{action:body}")]

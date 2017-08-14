@@ -524,7 +524,7 @@ namespace Bridge.Translator
 
             var combinedOutput = Combine(null, this.Outputs.References, fileName, "project references", TranslatorOutputKind.ProjectOutput);
 
-            if (combinedOutput != null)
+            if (combinedOutput?.Content?.Builder != null)
             {
                 buffer = combinedOutput.Content.Builder;
 
@@ -548,7 +548,7 @@ namespace Bridge.Translator
 
                 this.Outputs.CombinedLocales = null;
 
-                if (combinedOutput != null)
+                if (combinedOutput?.Content?.Builder != null)
                 {
                     buffer = combinedOutput.Content.Builder;
 
