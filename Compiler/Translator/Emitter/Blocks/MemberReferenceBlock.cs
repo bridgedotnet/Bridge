@@ -86,6 +86,7 @@ namespace Bridge.Translator
             this.NoTarget = string.IsNullOrWhiteSpace(target);
 
             if (member.Member.IsStatic
+                && target != CS.NS.BRIDGE
                 && !target.StartsWith(CS.Bridge.DOTNAME)
                 && this.MemberReferenceExpression.Target.ToString().StartsWith(CS.NS.GLOBAL))
             {
