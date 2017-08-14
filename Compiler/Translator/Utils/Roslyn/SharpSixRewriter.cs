@@ -880,7 +880,7 @@ namespace Bridge.Translator
                 
                 args[1] = lambda;
 
-                var methodIdentifier = isAsync ? SyntaxFactory.IdentifierName("Bridge.Script.AsyncCallFor") : SyntaxFactory.IdentifierName("Bridge.Script.CallFor");
+                var methodIdentifier = isAsync ? SyntaxFactory.IdentifierName("global::Bridge.Script.AsyncCallFor") : SyntaxFactory.IdentifierName("global::Bridge.Script.CallFor");
                 var invocation = SyntaxFactory.InvocationExpression(methodIdentifier, SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(args.Select(SyntaxFactory.Argument))));
                 invocation = invocation.WithLeadingTrivia(node.GetLeadingTrivia()).WithTrailingTrivia(node.GetTrailingTrivia());
 
@@ -1038,7 +1038,7 @@ namespace Bridge.Translator
 
             if (catchItem.Filter != null)
             {
-                var methodIdentifier = SyntaxFactory.IdentifierName("Bridge.Script.SafeFunc");
+                var methodIdentifier = SyntaxFactory.IdentifierName("global::Bridge.Script.SafeFunc");
                 var lambda = SyntaxFactory.ParenthesizedLambdaExpression(SyntaxFactory.ParameterList(), catchItem.Declaration.Identifier.Kind() != SyntaxKind.None ? new IdentifierReplacer(catchItem.Declaration.Identifier.Value.ToString(), SyntaxFactory.CastExpression(catchItem.Declaration.Type, SyntaxFactory.IdentifierName(varName))).Replace(catchItem.Filter.FilterExpression) : catchItem.Filter.FilterExpression);
                 var invocation = SyntaxFactory.InvocationExpression(methodIdentifier, SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(new [] { SyntaxFactory.Argument(
                     lambda
@@ -1138,7 +1138,7 @@ namespace Bridge.Translator
                 {
                     var key = tempKey++;
                     var keyArg = SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal("key" + key));
-                    var methodIdentifier = SyntaxFactory.IdentifierName("Bridge.Script.ToTemp");
+                    var methodIdentifier = SyntaxFactory.IdentifierName("global::Bridge.Script.ToTemp");
                     var arg = parentTarget != null
                         ? SyntaxFactory.ParseExpression(parentTarget.ToString() + info.Node.Expression.WithoutTrivia().ToString())
                         : info.Node.Expression.WithoutTrivia();
@@ -1146,7 +1146,7 @@ namespace Bridge.Translator
                     leftForCondition = SyntaxFactory.InvocationExpression(methodIdentifier,
                         SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(new[] { SyntaxFactory.Argument(keyArg), SyntaxFactory.Argument(arg) })));
 
-                    var parentMethodIdentifier = SyntaxFactory.GenericName(SyntaxFactory.Identifier("Bridge.Script.FromTemp"),
+                    var parentMethodIdentifier = SyntaxFactory.GenericName(SyntaxFactory.Identifier("global::Bridge.Script.FromTemp"),
                                                                  SyntaxFactory.TypeArgumentList(SyntaxFactory.SeparatedList(new[] { info.ExpressionType })));
                     var invocation = SyntaxFactory.InvocationExpression(parentMethodIdentifier,
                         SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(new[] { SyntaxFactory.Argument(keyArg) })));
@@ -1183,7 +1183,7 @@ namespace Bridge.Translator
 
             if (lastInfo.IsResultVoid && lastInfo.Node.WhenNotNull is InvocationExpressionSyntax)
             {
-                var methodIdentifier = SyntaxFactory.IdentifierName(SyntaxFactory.Identifier("Bridge.Script.FromLambda"));
+                var methodIdentifier = SyntaxFactory.IdentifierName(SyntaxFactory.Identifier("global::Bridge.Script.FromLambda"));
                 var invocation = SyntaxFactory.InvocationExpression(methodIdentifier,
                     SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(new[] { SyntaxFactory.Argument(SyntaxFactory.ParenthesizedLambdaExpression(whenTrue)) })));
                 whenTrue = invocation;

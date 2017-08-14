@@ -600,7 +600,7 @@ namespace Bridge.Contract
                 emitter,
                 astType.Parent is TypeOfExpression && symbol != null && symbol.SymbolKind == SymbolKind.TypeDefinition);
 
-            if (!name.StartsWith(CS.Bridge.DOTNAME) && astType.ToString().StartsWith(CS.NS.GLOBAL))
+            if (name != CS.NS.BRIDGE && !name.StartsWith(CS.Bridge.DOTNAME) && astType.ToString().StartsWith(CS.NS.GLOBAL))
             {
                 return JS.Types.Bridge.Global.DOTNAME + name;
             }
