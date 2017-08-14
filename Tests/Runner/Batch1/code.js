@@ -16618,6 +16618,28 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual("System.Globalization.CultureInfo", Bridge.Reflection.getTypeFullName(System.Globalization.CultureInfo));
                 Bridge.Test.NUnit.Assert.True(Bridge.hasValue(culture));
             },
+            ConstructorWorks_N2583: function () {
+                var culture = new System.Globalization.CultureInfo("en-US");
+                Bridge.Test.NUnit.Assert.AreEqual("English (United States)", culture.englishName, "en-US");
+
+                culture = new System.Globalization.CultureInfo("");
+                Bridge.Test.NUnit.Assert.AreEqual("Invariant Language (Invariant Country)", culture.englishName, "#2583: Empty");
+
+                Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentNullException, $asm.$.Bridge.ClientTest.CultureInfoTests.f1, "#2583: Null");
+
+                Bridge.Test.NUnit.Assert.Throws$2(System.Globalization.CultureNotFoundException, $asm.$.Bridge.ClientTest.CultureInfoTests.f2, "#2583: Non-existing");
+            },
+            GetCultureInfoWorks_N2583: function () {
+                var culture = System.Globalization.CultureInfo.getCultureInfo("en-US");
+                Bridge.Test.NUnit.Assert.AreEqual("English (United States)", culture.englishName, "en-US");
+
+                culture = System.Globalization.CultureInfo.getCultureInfo("");
+                Bridge.Test.NUnit.Assert.AreEqual("Invariant Language (Invariant Country)", culture.englishName, "#2583: Empty");
+
+                Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentNullException, $asm.$.Bridge.ClientTest.CultureInfoTests.f3, "#2583: Null");
+
+                Bridge.Test.NUnit.Assert.Throws$2(System.Globalization.CultureNotFoundException, $asm.$.Bridge.ClientTest.CultureInfoTests.f4, "#2583: Non-existing");
+            },
             GetFormatWorks: function () {
                 var culture = System.Globalization.CultureInfo.invariantCulture;
                 Bridge.Test.NUnit.Assert.AreEqual(null, Bridge.unbox(culture.getFormat(System.Int32)));
@@ -16637,6 +16659,23 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                 Bridge.Test.NUnit.Assert.False(isFriday, "#3013: FirstDayOfWeek is of type DayOfWeek");
             }
+        }
+    });
+
+    Bridge.ns("Bridge.ClientTest.CultureInfoTests", $asm.$);
+
+    Bridge.apply($asm.$.Bridge.ClientTest.CultureInfoTests, {
+        f1: function () {
+            new System.Globalization.CultureInfo(null);
+        },
+        f2: function () {
+            new System.Globalization.CultureInfo("cake-CAKE");
+        },
+        f3: function () {
+            System.Globalization.CultureInfo.getCultureInfo(null);
+        },
+        f4: function () {
+            System.Globalization.CultureInfo.getCultureInfo("cake-CAKE");
         }
     });
 

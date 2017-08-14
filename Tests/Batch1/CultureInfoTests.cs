@@ -17,6 +17,46 @@ namespace Bridge.ClientTest
         }
 
         [Test]
+        public void ConstructorWorks_N2583()
+        {
+            var culture = new CultureInfo("en-US");
+            Assert.AreEqual("English (United States)", culture.EnglishName, "en-US");
+
+            culture = new CultureInfo("");
+            Assert.AreEqual("Invariant Language (Invariant Country)", culture.EnglishName, "#2583: Empty");
+
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new CultureInfo(null);
+            }, "#2583: Null");
+
+            Assert.Throws<CultureNotFoundException> (() =>
+            {
+                new CultureInfo("cake-CAKE");
+            }, "#2583: Non-existing");
+        }
+
+        [Test]
+        public void GetCultureInfoWorks_N2583()
+        {
+            var culture = CultureInfo.GetCultureInfo("en-US");
+            Assert.AreEqual("English (United States)", culture.EnglishName, "en-US");
+
+            culture = CultureInfo.GetCultureInfo("");
+            Assert.AreEqual("Invariant Language (Invariant Country)", culture.EnglishName, "#2583: Empty");
+
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                CultureInfo.GetCultureInfo(null);
+            }, "#2583: Null");
+
+            Assert.Throws<CultureNotFoundException>(() =>
+            {
+                CultureInfo.GetCultureInfo("cake-CAKE");
+            }, "#2583: Non-existing");
+        }
+
+        [Test]
         public void GetFormatWorks()
         {
             var culture = CultureInfo.InvariantCulture;
