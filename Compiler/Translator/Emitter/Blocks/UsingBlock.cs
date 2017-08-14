@@ -30,12 +30,15 @@ namespace Bridge.Translator
             var varStat = res as VariableDeclarationStatement;
             if (varStat != null)
             {
+                this.VariableDeclarationStatement = varStat;
                 inner = varStat.Variables.Skip(1);
                 res = varStat.Variables.First();
             }
 
             this.EmitUsing(res, inner);
         }
+
+        public VariableDeclarationStatement VariableDeclarationStatement { get; set; }
 
         protected virtual void EmitUsing(AstNode expression, IEnumerable<AstNode> inner)
         {
@@ -45,9 +48,10 @@ namespace Bridge.Translator
             var varInit = expression as VariableInitializer;
             if (varInit != null)
             {
-                name = varInit.Name;
+                name = this.AddLocal(varInit.Name, expression, this.VariableDeclarationStatement.Type);
+
                 this.WriteVar();
-                this.Write(varInit.Name);
+                this.Write(name);
                 this.Write(" = ");
                 varInit.Initializer.AcceptVisitor(this.Emitter);
                 this.WriteSemiColon();
