@@ -4,7 +4,6 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Threading.Tasks;
 using Bridge.ClientTest.Batch3;
-using Bridge.Html5;
 using Bridge.Test.NUnit;
 
 namespace BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues
@@ -20,6 +19,7 @@ namespace BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues
             {
                 { "123", "Test" }
             };
+
             Assert.AreEqual("Test", dict["123"]?.ToString());
         }
     }

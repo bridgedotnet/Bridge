@@ -253,11 +253,11 @@ namespace Bridge.Translator
 
                 tryCatchStatement.TryBlock = block;
             }
-            
+
             var finallyBlock = new BlockStatement();
             var dispose = new InvocationExpression(
                 new MemberReferenceExpression(
-                    new MemberReferenceExpression(new TypeReferenceExpression(new MemberType(new SimpleType("global"), CS.NS.BRIDGE) {IsDoubleColon = true}), "Script"), "Write"),
+                    new MemberReferenceExpression(new TypeReferenceExpression(new MemberType(new SimpleType("global"), CS.NS.BRIDGE) { IsDoubleColon = true }), "Script"), "Write"),
                 new PrimitiveExpression(
                     string.Format("if (" + JS.Funcs.BRIDGE_HASVALUE + "({0})) {0}." + JS.Funcs.DISPOSE + "();", name))
             );
