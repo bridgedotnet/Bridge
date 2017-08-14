@@ -33054,30 +33054,30 @@ Bridge.$N1391Result =                     r;
     Bridge.ns("Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues", $asm.$);
 
     Bridge.apply($asm.$.Bridge.ClientTest.Batch3.BridgeIssues.TestBridgeIssues, {
-        f1: function (_o46) {
-            _o46.add(0);
-            _o46.add(1);
-            _o46.add(2);
-            _o46.add(3);
-            _o46.add(4);
-            return _o46;
-        },
-        f2: function (_o47) {
-            _o47.add(3, "b");
-            _o47.add(6, "z");
-            _o47.add(9, "x");
+        f1: function (_o47) {
+            _o47.add(0);
+            _o47.add(1);
+            _o47.add(2);
+            _o47.add(3);
+            _o47.add(4);
             return _o47;
+        },
+        f2: function (_o48) {
+            _o48.add(3, "b");
+            _o48.add(6, "z");
+            _o48.add(9, "x");
+            return _o48;
         },
         f3: function (i) {
             return Bridge.Int.mul(i, 2);
         },
-        f4: function (_o48) {
-            _o48.add(0);
-            _o48.add(1);
-            _o48.add(2);
-            _o48.add(3);
-            _o48.add(4);
-            return _o48;
+        f4: function (_o49) {
+            _o49.add(0);
+            _o49.add(1);
+            _o49.add(2);
+            _o49.add(3);
+            _o49.add(4);
+            return _o49;
         }
     });
 
@@ -33164,6 +33164,28 @@ Bridge.$N1391Result =                     r;
                     return 9;
                 }
             }
+        }
+    });
+
+    Bridge.define("BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Bridge3038", {
+        statics: {
+            methods: {
+                TestRewriterInBridgeNs: function () {
+                    var $t;
+                    var dict = $asm.$.BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Bridge3038.f1(new (System.Collections.Generic.Dictionary$2(System.String,System.Object))());
+
+                    Bridge.Test.NUnit.Assert.AreEqual("Test", ($t = dict.get("123")) != null ? $t.toString() : null);
+                }
+            }
+        }
+    });
+
+    Bridge.ns("BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Bridge3038", $asm.$);
+
+    Bridge.apply($asm.$.BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Bridge3038, {
+        f1: function (_o46) {
+            _o46.add("123", "Test");
+            return _o46;
         }
     });
 
