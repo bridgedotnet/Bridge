@@ -16629,6 +16629,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual("iv", culture.name);
                 Bridge.Test.NUnit.Assert.AreEqual(System.Globalization.DateTimeFormatInfo.invariantInfo, culture.dateTimeFormat);
                 Bridge.Test.NUnit.Assert.AreEqual(System.Globalization.NumberFormatInfo.invariantInfo, culture.numberFormat);
+            },
+            DateTimeFormatFirstDayOfWeekWorks_N3013: function () {
+                var isFriday = System.Globalization.CultureInfo.getCurrentCulture().dateTimeFormat.firstDayOfWeek === System.DayOfWeek.Friday;
+
+                isFriday = isFriday ^ isFriday;
+
+                Bridge.Test.NUnit.Assert.False(isFriday, "#3013: FirstDayOfWeek is of type DayOfWeek");
             }
         }
     });
