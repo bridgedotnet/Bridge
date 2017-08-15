@@ -1,0 +1,19 @@
+/*
+    style2429_1.css
+    This original file encoded with UTF-8 BOM
+    It is supposed to test resource combining (#2429) - to check if it removes BOM by default or persist by removeBom = false
+*/
+
+p {
+    text-align: center;
+    color: red;
+} /*
+    style2429_2.css
+    This original file encoded with UTF-8 BOM
+    It is supposed to test resource combining (#2429) - to check if it removes BOM by default or persist by removeBom = false
+*/
+
+p.one {
+    border-style: solid;
+    border-width: 5px;
+}
