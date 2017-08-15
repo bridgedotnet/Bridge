@@ -1,0 +1,5 @@
+{
+  // The combineScripts setting is correct in this file.
+  // To test #1033 the correct combineScripts is set in bridge.release.json and bridge.debug.json
+  "combineScripts": false
+}

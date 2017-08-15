@@ -1,0 +1,111 @@
+{
+  "output": "Bridge\\output",
+  "outputBy": "Namespace",
+  "cleanOutputFolderBeforeBuildPattern": "*.*",
+  // The combineScripts setting is incorrect in this file.
+  // To test #1033 the correct combineScripts is set in bridge.release.json and bridge.debug.json
+  "combineScripts": true,
+  "outputFormatting": "Formatted",
+  "localesOutput": "locales",
+  "combineLocales": true,
+  "localesFileName": "allLocales.js",
+  "locales": "ru-RU;en-US;es*",
+  "namedFunctions": "Name", // #2407
+  "logging": {
+    "level":  "None"
+  },
+  "report": true,
+  // #1656 test
+  "assembly": {
+    "disableInitAssembly": true,
+    "enableReservedNamespaces": false,
+    "fullName": "BridgeTest18Assembly"
+  },
+  "console": {
+    "enabled": true
+  },
+  // #1680 test
+  "resources": [
+    // Check defaults are used
+    {
+      "extract": false,
+      "inject": false
+    },
+    // Check bridge.js is not extracted
+    // Should apply default's extract = false
+    {
+      "name": "bridge#bridge.js"
+    },
+    // Check files embedded and extracted into Bridge\output folder
+    {
+      "name": "testResources1.js",
+      "extract": true,
+      "files": [
+        "Bridge\\output/testIssue1035.js",
+        "Bridge\\output/testIssue379.js"
+      ]
+    },
+    // Check files embedded and not extracted
+    // Should apply default's extract = false
+    {
+      "name": "testResources2.js",
+      "files": [
+        "Bridge\\output/testIssue1230.js"
+      ]
+    },
+    // Check two files embedded and extracted into Bridge\output\resources folder
+    // Content header and remark applied with tokens
+    {
+      "name": "testResources3.js",
+      "extract": true,
+      "output": "resources",
+      "header": "// Content header: {version} {copyright} {notdate} {year} {author}",
+      "remark": "// ---\n// Content remark: Path: {path}; name: {name}\r\n// ---\n",
+      "files": [
+        "Bridge\\output/testIssue434.js",
+        "Bridge\\output/testIssue461.js"
+      ]
+    },
+    // Check two files embedded and extracted into Bridge\output\resources folder
+    // File header with tokens and remark with no tokens applied
+    {
+      "name": "testResources4.js",
+      "extract": true,
+      "output": "resources",
+      "header": "Bridge\\res\\header.js",
+      "remark": "// -- remark with no tokens\n",
+      "files": [
+        "Bridge\\output/testIssue599.js",
+        "Bridge\\output/testIssue948.js"
+      ]
+    },
+    // #2429 Check two css files with BOM encoding get BOM removed when combined by default
+    {
+      "name": "issue2429_NoBom.css",
+      "extract": true,
+      "output": "resources",
+      "files": [
+        "Bridge/res/style2429_1.css",
+        "Bridge/res/style2429_2.css"
+      ]
+    },
+    // #2429 Check two css files with BOM encoding do NOT get BOM removed when combined with RemoveBom = false
+    {
+      "name": "issue2429_Bom.css",
+      "extract": true,
+      "removeBom": false,
+      "output": "resources",
+      "files": [
+        "Bridge/res/style2429_1.css",
+        "Bridge/res/style2429_2.css"
+      ]
+    },
+    // #2890 Bad handling of file encoding for javascript files included in Bridge projects
+    {
+      "name": "issue2890.js",
+      "extract": true,
+      "output": "resources",
+      "files": [ "Bridge/res/utf8.js", "Bridge/res/utf16.js" ]
+    }
+  ]
+}

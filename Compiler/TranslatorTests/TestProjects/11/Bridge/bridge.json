@@ -1,0 +1,11 @@
+{
+  "output": "Bridge\\output",
+  "outputBy": "Namespace",
+  "cleanOutputFolderBeforeBuildPattern": "*.*",
+  "generateTypeScript": "true",
+  "outputFormatting": "Formatted",
+  "logging": {
+    "level":  "None"
+  },
+  "report": true
+}

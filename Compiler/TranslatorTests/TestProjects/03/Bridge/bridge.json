@@ -1,0 +1,15 @@
+{
+  "output": "Bridge\\output",
+  "outputBy": "Namespace",
+  "cleanOutputFolderBeforeBuildPattern": "*.*",
+  "outputFormatting": "Minified",
+  "sourceMap": {
+    "enabled": true,
+    "eol": "crlf"
+  },
+  "console":true,
+  "logging": {
+    "level":  "None"
+  },
+  "report": "reports/"
+}

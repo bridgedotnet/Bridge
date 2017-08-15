@@ -1,0 +1,23 @@
+{
+  "output": "Bridge\\output",
+  "cleanOutputFolderBeforeBuildPattern": "*.*",
+  //"outputBy": "Project",
+  "outputFormatting": "Formatted",
+  "useTypedArrays": true,
+  // alternative syntax of console option
+  "console": false,
+  "resources": [
+    {
+      // console option should win
+      "name": "bridge.console.min.js",
+      "extract": true
+    }
+  ],
+  "logging": {
+    "level":  "None"
+  },
+  "report": {
+    "enabled": true,
+    "fileName": "report.log"
+  }
+}
