@@ -9,7 +9,7 @@ namespace Bridge.Html5
     [Name("HTMLInputElement")]
     public sealed class HTMLInputElement : HTMLElement<HTMLInputElement>
     {
-        [Template("document.createElement('input')")]
+        [Template("document.createElement(\"input\")")]
         public extern HTMLInputElement();
 
         /// <summary>

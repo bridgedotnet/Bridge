@@ -9,7 +9,7 @@ namespace Bridge.Html5
     [Name("HTMLVideoElement")]
     public sealed class HTMLVideoElement : HTMLMediaElement<HTMLVideoElement>
     {
-        [Template("document.createElement('video')")]
+        [Template("document.createElement(\"video\")")]
         public extern HTMLVideoElement();
 
         /// <summary>

@@ -9,7 +9,7 @@ namespace Bridge.Html5
     [Name("HTMLTextAreaElement")]
     public sealed class HTMLTextAreaElement : HTMLElement<HTMLTextAreaElement>
     {
-        [Template("document.createElement('textarea')")]
+        [Template("document.createElement(\"textarea\")")]
         public extern HTMLTextAreaElement();
 
         /// <summary>
