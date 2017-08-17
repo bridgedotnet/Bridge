@@ -440,7 +440,7 @@ namespace System
         /// </summary>
         public static extern string NewLine
         {
-            [Template("'\\n'")]
+            [Template("\"\\n\"")]
             get;
         }
 

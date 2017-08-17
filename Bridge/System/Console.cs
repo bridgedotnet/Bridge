@@ -61,7 +61,7 @@ namespace System
         /// Writes the text representation of the specified Decimal value to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.Write({value}.toString('G'))")]
+        [Template("System.Console.Write({value}.toString(\"G\"))")]
         public static extern void Write(Decimal value);
 
         /// <summary>
@@ -218,7 +218,7 @@ namespace System
         /// Writes the text representation of the specified Decimal value, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.WriteLine({value}.toString('G'))")]
+        [Template("System.Console.WriteLine({value}.toString(\"G\"))")]
         public static extern void WriteLine(Decimal value);
 
         /// <summary>
@@ -358,7 +358,7 @@ namespace System
         /// Writes the text representation of the specified nullable decimal, followed by the current line terminator, to the standard output stream.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        [Template("System.Console.WriteLine({value} && {value}.toString('G'))")]
+        [Template("System.Console.WriteLine({value} && {value}.toString(\"G\"))")]
         public static extern void WriteLine(decimal? value);
 
         #endregion WriteLine
