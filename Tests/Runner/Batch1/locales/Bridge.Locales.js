@@ -54,6 +54,17 @@ Bridge.merge(new System.Globalization.CultureInfo("ru-RU", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1251,
+        CultureName: "ru-RU",
+        EBCDICCodePage: 20880,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 1049,
+        MacCodePage: 10007,
+        OEMCodePage: 866
     })
 });
 
@@ -113,6 +124,17 @@ Bridge.merge(new System.Globalization.CultureInfo("en-US", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "en-US",
+        EBCDICCodePage: 37,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 1033,
+        MacCodePage: 10000,
+        OEMCodePage: 437
     })
 });
 
@@ -172,6 +194,17 @@ Bridge.merge(new System.Globalization.CultureInfo("en-GB", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "en-GB",
+        EBCDICCodePage: 20285,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 2057,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
 
@@ -231,6 +264,17 @@ Bridge.merge(new System.Globalization.CultureInfo("nb-NO", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "nb-NO",
+        EBCDICCodePage: 20277,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 1044,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
 
@@ -290,6 +334,17 @@ Bridge.merge(new System.Globalization.CultureInfo("es-419", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM 'de' yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "es-419",
+        EBCDICCodePage: 20284,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 22538,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
 
@@ -349,6 +404,17 @@ Bridge.merge(new System.Globalization.CultureInfo("es-AR", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM 'de' yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "es-AR",
+        EBCDICCodePage: 20284,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 11274,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
 
@@ -408,6 +474,17 @@ Bridge.merge(new System.Globalization.CultureInfo("es-BO", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM 'de' yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "es-BO",
+        EBCDICCodePage: 20284,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 16394,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
 
@@ -467,6 +544,17 @@ Bridge.merge(new System.Globalization.CultureInfo("es-CL", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM 'de' yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "es-CL",
+        EBCDICCodePage: 20284,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 13322,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
 
@@ -526,6 +614,17 @@ Bridge.merge(new System.Globalization.CultureInfo("es-CO", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM 'de' yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "es-CO",
+        EBCDICCodePage: 20284,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 9226,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
 
@@ -585,6 +684,17 @@ Bridge.merge(new System.Globalization.CultureInfo("es-CR", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM 'de' yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "es-CR",
+        EBCDICCodePage: 20284,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 5130,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
 
@@ -644,6 +754,17 @@ Bridge.merge(new System.Globalization.CultureInfo("es-CU", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM 'de' yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "es-CU",
+        EBCDICCodePage: 20284,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 23562,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
 
@@ -703,6 +824,17 @@ Bridge.merge(new System.Globalization.CultureInfo("es-DO", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM 'de' yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "es-DO",
+        EBCDICCodePage: 20284,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 7178,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
 
@@ -762,6 +894,17 @@ Bridge.merge(new System.Globalization.CultureInfo("es-EC", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM 'de' yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "es-EC",
+        EBCDICCodePage: 20284,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 12298,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
 
@@ -821,6 +964,17 @@ Bridge.merge(new System.Globalization.CultureInfo("es-ES", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM' de 'yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "es-ES",
+        EBCDICCodePage: 20284,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 3082,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
 
@@ -880,6 +1034,17 @@ Bridge.merge(new System.Globalization.CultureInfo("es-GQ", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM 'de' yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "es-GQ",
+        EBCDICCodePage: 20284,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 4096,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
 
@@ -939,6 +1104,17 @@ Bridge.merge(new System.Globalization.CultureInfo("es-GT", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM 'de' yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "es-GT",
+        EBCDICCodePage: 20284,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 4106,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
 
@@ -998,6 +1174,17 @@ Bridge.merge(new System.Globalization.CultureInfo("es-HN", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM 'de' yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "es-HN",
+        EBCDICCodePage: 20284,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 18442,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
 
@@ -1057,6 +1244,17 @@ Bridge.merge(new System.Globalization.CultureInfo("es-MX", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM' de 'yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "es-MX",
+        EBCDICCodePage: 20284,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 2058,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
 
@@ -1116,6 +1314,17 @@ Bridge.merge(new System.Globalization.CultureInfo("es-NI", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM 'de' yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "es-NI",
+        EBCDICCodePage: 20284,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 19466,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
 
@@ -1175,6 +1384,17 @@ Bridge.merge(new System.Globalization.CultureInfo("es-PA", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM 'de' yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "es-PA",
+        EBCDICCodePage: 20284,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 6154,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
 
@@ -1234,6 +1454,17 @@ Bridge.merge(new System.Globalization.CultureInfo("es-PE", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM 'de' yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "es-PE",
+        EBCDICCodePage: 20284,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 10250,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
 
@@ -1293,6 +1524,17 @@ Bridge.merge(new System.Globalization.CultureInfo("es-PH", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM 'de' yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "es-PH",
+        EBCDICCodePage: 20284,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 4096,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
 
@@ -1352,6 +1594,17 @@ Bridge.merge(new System.Globalization.CultureInfo("es-PR", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM 'de' yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "es-PR",
+        EBCDICCodePage: 20284,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 20490,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
 
@@ -1411,6 +1664,17 @@ Bridge.merge(new System.Globalization.CultureInfo("es-PY", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM 'de' yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "es-PY",
+        EBCDICCodePage: 20284,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 15370,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
 
@@ -1470,6 +1734,17 @@ Bridge.merge(new System.Globalization.CultureInfo("es-SV", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM 'de' yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "es-SV",
+        EBCDICCodePage: 20284,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 17418,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
 
@@ -1529,6 +1804,17 @@ Bridge.merge(new System.Globalization.CultureInfo("es-US", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM' de 'yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "es-US",
+        EBCDICCodePage: 20284,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 21514,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
 
@@ -1588,6 +1874,17 @@ Bridge.merge(new System.Globalization.CultureInfo("es-UY", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM 'de' yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "es-UY",
+        EBCDICCodePage: 20284,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 14346,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
 
@@ -1647,6 +1944,17 @@ Bridge.merge(new System.Globalization.CultureInfo("es-VE", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM 'de' yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "es-VE",
+        EBCDICCodePage: 20284,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 8202,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
 
@@ -1706,5 +2014,16 @@ Bridge.merge(new System.Globalization.CultureInfo("es", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM' de 'yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "es-ES",
+        EBCDICCodePage: 20284,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 3082,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
