@@ -54,5 +54,16 @@ Bridge.merge(new System.Globalization.CultureInfo("uz-Cyrl", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM, yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1251,
+        CultureName: "uz-Cyrl-UZ",
+        EBCDICCodePage: 20880,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 2115,
+        MacCodePage: 10007,
+        OEMCodePage: 866
     })
 });

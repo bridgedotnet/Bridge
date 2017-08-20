@@ -54,5 +54,16 @@ Bridge.merge(new System.Globalization.CultureInfo("mi-NZ", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM, yy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 0,
+        CultureName: "mi-NZ",
+        EBCDICCodePage: 500,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 1153,
+        MacCodePage: 2,
+        OEMCodePage: 1
     })
 });

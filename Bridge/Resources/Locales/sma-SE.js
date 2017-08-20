@@ -54,5 +54,16 @@ Bridge.merge(new System.Globalization.CultureInfo("sma-SE", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "sma-SE",
+        EBCDICCodePage: 20278,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 7227,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });

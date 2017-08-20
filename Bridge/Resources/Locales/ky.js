@@ -54,5 +54,16 @@ Bridge.merge(new System.Globalization.CultureInfo("ky", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy'-ж.'",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1251,
+        CultureName: "ky-KG",
+        EBCDICCodePage: 20880,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 1088,
+        MacCodePage: 10007,
+        OEMCodePage: 866
     })
 });

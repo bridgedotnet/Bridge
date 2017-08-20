@@ -54,5 +54,16 @@ Bridge.merge(new System.Globalization.CultureInfo("ml", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy MMMM",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 0,
+        CultureName: "ml-IN",
+        EBCDICCodePage: 500,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 1100,
+        MacCodePage: 2,
+        OEMCodePage: 1
     })
 });

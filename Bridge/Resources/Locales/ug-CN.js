@@ -54,5 +54,16 @@ Bridge.merge(new System.Globalization.CultureInfo("ug-CN", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy-'يىلى' MMMM",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1256,
+        CultureName: "ug-CN",
+        EBCDICCodePage: 20420,
+        IsReadOnly: false,
+        IsRightToLeft: true,
+        LCID: 1152,
+        MacCodePage: 10004,
+        OEMCodePage: 720
     })
 });

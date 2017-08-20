@@ -54,5 +54,16 @@ Bridge.merge(new System.Globalization.CultureInfo("dv", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy, MMMM",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 0,
+        CultureName: "dv-MV",
+        EBCDICCodePage: 500,
+        IsReadOnly: false,
+        IsRightToLeft: true,
+        LCID: 1125,
+        MacCodePage: 2,
+        OEMCodePage: 1
     })
 });

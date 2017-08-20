@@ -54,5 +54,16 @@ Bridge.merge(new System.Globalization.CultureInfo("vi-VN", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1258,
+        CultureName: "vi-VN",
+        EBCDICCodePage: 500,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 1066,
+        MacCodePage: 10000,
+        OEMCodePage: 1258
     })
 });

@@ -54,5 +54,16 @@ Bridge.merge(new System.Globalization.CultureInfo("es-HN", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM 'de' yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "es-HN",
+        EBCDICCodePage: 20284,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 18442,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });

@@ -54,5 +54,16 @@ Bridge.merge(new System.Globalization.CultureInfo("sq-MK", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1250,
+        CultureName: "sq-MK",
+        EBCDICCodePage: 20880,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 4096,
+        MacCodePage: 10029,
+        OEMCodePage: 852
     })
 });

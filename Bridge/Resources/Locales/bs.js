@@ -54,5 +54,16 @@ Bridge.merge(new System.Globalization.CultureInfo("bs", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy.",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1250,
+        CultureName: "bs-Latn-BA",
+        EBCDICCodePage: 870,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 5146,
+        MacCodePage: 10082,
+        OEMCodePage: 852
     })
 });

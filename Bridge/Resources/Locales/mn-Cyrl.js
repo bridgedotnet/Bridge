@@ -54,5 +54,16 @@ Bridge.merge(new System.Globalization.CultureInfo("mn-Cyrl", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy MMMM",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1251,
+        CultureName: "mn-MN",
+        EBCDICCodePage: 20880,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 1104,
+        MacCodePage: 10007,
+        OEMCodePage: 866
     })
 });

@@ -54,5 +54,16 @@ Bridge.merge(new System.Globalization.CultureInfo("sah", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy 'с.' MMMM",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1251,
+        CultureName: "sah-RU",
+        EBCDICCodePage: 20880,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 1157,
+        MacCodePage: 10007,
+        OEMCodePage: 866
     })
 });

@@ -54,5 +54,16 @@ Bridge.merge(new System.Globalization.CultureInfo("zh-Hant", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy'年'M'月'",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 950,
+        CultureName: "zh-HK",
+        EBCDICCodePage: 500,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 3076,
+        MacCodePage: 10002,
+        OEMCodePage: 950
     })
 });

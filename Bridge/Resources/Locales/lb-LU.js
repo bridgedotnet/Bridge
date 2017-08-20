@@ -54,5 +54,16 @@ Bridge.merge(new System.Globalization.CultureInfo("lb-LU", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "lb-LU",
+        EBCDICCodePage: 20297,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 1134,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });

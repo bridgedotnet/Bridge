@@ -54,5 +54,16 @@ Bridge.merge(new System.Globalization.CultureInfo("smj-SE", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "smj-SE",
+        EBCDICCodePage: 20278,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 5179,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });

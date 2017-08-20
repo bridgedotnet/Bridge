@@ -54,5 +54,16 @@ Bridge.merge(new System.Globalization.CultureInfo("az-Latn-AZ", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy MMMM",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1254,
+        CultureName: "az-Latn-AZ",
+        EBCDICCodePage: 20905,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 1068,
+        MacCodePage: 10081,
+        OEMCodePage: 857
     })
 });

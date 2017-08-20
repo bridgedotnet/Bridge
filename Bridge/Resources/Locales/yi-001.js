@@ -54,5 +54,16 @@ Bridge.merge(new System.Globalization.CultureInfo("yi-001", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 0,
+        CultureName: "yi-001",
+        EBCDICCodePage: 500,
+        IsReadOnly: false,
+        IsRightToLeft: true,
+        LCID: 1085,
+        MacCodePage: 2,
+        OEMCodePage: 1
     })
 });

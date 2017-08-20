@@ -54,5 +54,16 @@ Bridge.merge(new System.Globalization.CultureInfo("iu", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM, yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "iu-Latn-CA",
+        EBCDICCodePage: 37,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 2141,
+        MacCodePage: 10000,
+        OEMCodePage: 437
     })
 });

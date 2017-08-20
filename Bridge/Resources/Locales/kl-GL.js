@@ -54,5 +54,16 @@ Bridge.merge(new System.Globalization.CultureInfo("kl-GL", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "kl-GL",
+        EBCDICCodePage: 20277,
+        IsReadOnly: false,
+        IsRightToLeft: false,
+        LCID: 1135,
+        MacCodePage: 10000,
+        OEMCodePage: 850
     })
 });
