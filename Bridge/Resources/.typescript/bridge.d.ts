@@ -56,7 +56,7 @@ declare module Bridge {
 
     export interface Array {
         get(arr: any[], indices: number[]): any;
-        set(arr: any[], indices: number[], value: any);
+        set(arr: any[], indices: number[], value: any): void;
         getLength(arr: any[], dimension: number): number;
         getRank(arr: any[]): number;
         create(defValue: any, initValues: any[], sizes: number[]): any[];
@@ -90,7 +90,7 @@ declare module Bridge {
     var IPromise: Function;
 
     export interface Int extends System.IComparable$1<Int>, System.IEquatable$1<Int> {
-        instanceOf(instance): boolean;
+        instanceOf(instance: any): boolean;
         getDefaultValue(): number;
         format(num: number, format?: string, provider?: System.Globalization.NumberFormatInfo): string;
         parseFloat(str: string, provider?: System.Globalization.NumberFormatInfo): number;
@@ -728,8 +728,6 @@ declare module System {
                 get(index: number): T;
                 set(index: number, value: T): void;
                 add(value: T): void;
-                addRange(items: T[]);
-                addRange(items: IEnumerable$1<T>);
                 clear(): void;
                 indexOf(item: T, startIndex?: number): number;
                 insertRange(index: number, items: IEnumerable$1<T>): void;
@@ -745,7 +743,6 @@ declare module System {
                 removeRange(index: number, count: number): void;
                 reverse(): void;
                 slice(start: number, end: number): void;
-                sort(comparison?: { (x: T, y: T): number });
                 splice(start: number, deleteCount: number, itemsToInsert?: IEnumerable$1<T>): void;
                 splice(start: number, deleteCount: number, itemsToInsert?: T[]): void;
                 unshift(): void;
@@ -757,6 +754,9 @@ declare module System {
                 new (obj: T[]): List$1<T>;
                 new (obj: IEnumerable$1<T>): List$1<T>;
             }
+        addRange(items: T[]): void;
+        addRange(items: IEnumerable$1<T>): void;
+        sort(comparison?: { (x: T, y: T): number }): void;
 
             export interface BitHelper {
                 markBit(bitPosition: number): void;
