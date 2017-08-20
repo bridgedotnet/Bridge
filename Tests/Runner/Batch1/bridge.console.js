@@ -99,7 +99,7 @@ Bridge.assembly("Bridge", function ($asm, globals) {
                         self.bufferedOutput = System.String.concat(self.bufferedOutput, v);
 
                         if (newLine) {
-                            self.bufferedOutput = System.String.concat(self.bufferedOutput, '\n');
+                            self.bufferedOutput = System.String.concat(self.bufferedOutput, "\n");
                         }
 
                         return;
