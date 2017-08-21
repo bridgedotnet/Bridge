@@ -282,7 +282,7 @@
                     throw new System.ArgumentOutOfRangeException("byteCount");
 
                 if (byteCount > 0x7fffffff)
-                    throw new System.ArgumentOutOfRangeException("byteCount", Environment.GetResourceString("ArgumentOutOfRange_GetCharCountOverflow"));
+                    throw new System.ArgumentOutOfRangeException("byteCount");
 
                 return byteCount;
             }
@@ -535,7 +535,7 @@
                 var charCount = (byteCount >> 1) + (byteCount & 1) + 1;
 
                 if (charCount > 0x7fffffff)
-                    throw new System.ArgumentOutOfRangeException("byteCount", Environment.GetResourceString("ArgumentOutOfRange_GetCharCountOverflow"));
+                    throw new System.ArgumentOutOfRangeException("byteCount");
 
                 return charCount | 0;
             }
@@ -774,7 +774,7 @@
                 var charCount = byteCount + 1;
 
                 if (charCount > 0x7fffffff)
-                    throw new System.ArgumentOutOfRangeException("byteCount", Environment.GetResourceString("ArgumentOutOfRange_GetCharCountOverflow"));
+                    throw new System.ArgumentOutOfRangeException("byteCount");
 
                 return charCount | 0;
             }
@@ -805,7 +805,7 @@
 
             $encode: function (str, outputBytes, outputIndex) {
                 var regex,
-                    setD = "A-Za-z0-9" + this.$escape("'(),-./:?");;
+                    setD = "A-Za-z0-9" + this.$escape("'(),-./:?");
 
                 var encode = function(str) {
                     var b = new Array(str.length * 2);

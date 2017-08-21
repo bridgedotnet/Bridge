@@ -38,6 +38,20 @@ Bridge.define("System.String", {
             return String.fromCharCode(codePt);
         },
 
+        fromCharArray: function (chars, startIndex, length) {
+            var result = "";
+
+            startIndex = startIndex || 0;
+            length = Bridge.isNumber(length) ? length : chars.length;
+
+            for (var i = 0; i < length; i++) {
+                var ch = chars[i + startIndex] | 0;
+                result += String.fromCharCode(ch);
+            }
+
+            return result;
+        },
+
         lastIndexOf: function (s, search, startIndex, count) {
             var index = s.lastIndexOf(search, startIndex);
 

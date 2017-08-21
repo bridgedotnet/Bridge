@@ -29,7 +29,7 @@ namespace System
         [InlineConst]
         public const string Empty = "";
 
-        [Template("String.fromCharCode.apply(null, {value})")]
+        [Template("System.String.fromCharArray({value})")]
         public extern String(char[] value);
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace System
         [Template("System.String.fromCharCount({c}, {count})")]
         public extern String(char c, int count);
 
-        [Template("String.fromCharCode.apply(null, {value}.slice({startIndex}, {startIndex} + {length}))")]
+        [Template("System.String.fromCharArray({value}, {startIndex}, {length})")]
         public extern String(char[] value, int startIndex, int length);
 
         /// <summary>

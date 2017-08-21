@@ -13923,7 +13923,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         while ($t.moveNext()) {
                             var ch = Bridge.cast($t.Current, System.Char);
                             var builder = "abc";
-                            var addingStr = String.fromCharCode.apply(null, System.Array.init([ch], System.Char));
+                            var addingStr = System.String.fromCharArray(System.Array.init([ch], System.Char));
                             System.String.insert(1, builder, addingStr);
                             Bridge.ClientTest.ConvertTests.ConvertFromBase64Tests.VerifyInvalidInput(builder);
                         }
@@ -14364,12 +14364,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     // Convert the first half of the byte array, write to the first half of the char array
                     var c = System.Convert.toBase64CharArray(inputBuffer, 0, 3, outputBuffer, 0, null);
                     Bridge.Test.NUnit.Assert.AreEqual(4, c);
-                    Bridge.Test.NUnit.Assert.AreEqual("AAEC....", String.fromCharCode.apply(null, outputBuffer));
+                    Bridge.Test.NUnit.Assert.AreEqual("AAEC....", System.String.fromCharArray(outputBuffer));
 
                     // Convert the second half of the byte array, write to the second half of the char array
                     c = System.Convert.toBase64CharArray(inputBuffer, 3, 3, outputBuffer, 4, null);
                     Bridge.Test.NUnit.Assert.AreEqual(4, c);
-                    Bridge.Test.NUnit.Assert.AreEqual("AAECAwQF", String.fromCharCode.apply(null, outputBuffer));
+                    Bridge.Test.NUnit.Assert.AreEqual("AAECAwQF", System.String.fromCharArray(outputBuffer));
                 },
                 InvalidInputBuffer: function () {
                     Bridge.Test.NUnit.Assert.Throws$4($asm.$.Bridge.ClientTest.ConvertTests.ConvertToBase64CharArrayTests.f1, $asm.$.Bridge.ClientTest.ConvertTests.ConvertToBase64CharArrayTests.f2);
@@ -20341,7 +20341,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var wordChars = System.String.toCharArray(word, 0, word.length);
                 wordChars.sort();
 
-                return String.fromCharCode.apply(null, wordChars);
+                return System.String.fromCharArray(wordChars);
             }
         }
     });
@@ -34845,7 +34845,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual("xxxxx", System.String.fromCharCount(120, 5));
             },
             CharArrayConstructorWorks: function () {
-                Bridge.Test.NUnit.Assert.AreEqual("abC", String.fromCharCode.apply(null, System.Array.init([97, 98, 67], System.Char)));
+                Bridge.Test.NUnit.Assert.AreEqual("abC", System.String.fromCharArray(System.Array.init([97, 98, 67], System.Char)));
             },
             EmptyFieldWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("", "");
@@ -38275,7 +38275,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         var b = bytes[System.Array.index(((i + index) | 0), bytes)];
                         chars[System.Array.index(i, chars)] = b <= 127 ? b : 63;
                     }
-                    return String.fromCharCode.apply(null, chars);
+                    return System.String.fromCharArray(chars);
                 }
             }
         },
@@ -38502,12 +38502,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var charArray = System.String.toCharArray(chars, 0, chars.length);
                     if (index === 0 && count === chars.length) {
                         // Use GetByteCount(string) or GetByteCount(char[])
-                        Bridge.ClientTest.Text.EncodingHelpers.AreEqual(expected, encoding.getByteCount(chars));
+                        Bridge.ClientTest.Text.EncodingHelpers.AreEqual(expected, encoding.getByteCount$2(chars));
                         Bridge.ClientTest.Text.EncodingHelpers.AreEqual(expected, encoding.getByteCount(charArray));
                     }
 
                     // Use GetByteCount(char[], int, int)
-                    Bridge.ClientTest.Text.EncodingHelpers.AreEqual(expected, encoding.getByteCount(charArray, index, count));
+                    Bridge.ClientTest.Text.EncodingHelpers.AreEqual(expected, encoding.getByteCount$1(charArray, index, count));
                 },
                 GetBytes: function (encoding, source, index, count, expectedBytes) {
                     var fullArray = System.Array.init(((expectedBytes.length + 4) | 0), 0, System.Byte);
@@ -38528,7 +38528,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                     if (index === 0 && count === source.length) {
                         // Use GetBytes(string)
-                        var stringResultBasic = encoding.getBytes(source);
+                        var stringResultBasic = encoding.getBytes$2(source);
                         Bridge.ClientTest.Text.EncodingHelpers.VerifyGetBytes(stringResultBasic, 0, stringResultBasic.length, originalBytes, expectedBytes);
 
                         // Use GetBytes(char[])
@@ -38537,18 +38537,18 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     }
 
                     // Use GetBytes(char[], int, int)
-                    var charArrayResultAdvanced = encoding.getBytes(System.String.toCharArray(source, 0, source.length), index, count);
+                    var charArrayResultAdvanced = encoding.getBytes$1(System.String.toCharArray(source, 0, source.length), index, count);
                     Bridge.ClientTest.Text.EncodingHelpers.VerifyGetBytes(charArrayResultAdvanced, 0, charArrayResultAdvanced.length, originalBytes, expectedBytes);
 
                     // Use GetBytes(string, int, int, byte[], int)
                     var stringBytes = Bridge.cast(System.Array.clone(bytes), System.Array.type(System.Byte));
-                    var stringByteCount = encoding.getBytes(source, index, count, stringBytes, byteIndex);
+                    var stringByteCount = encoding.getBytes$4(source, index, count, stringBytes, byteIndex);
                     Bridge.ClientTest.Text.EncodingHelpers.VerifyGetBytes(stringBytes, byteIndex, stringByteCount, originalBytes, expectedBytes);
                     Bridge.ClientTest.Text.EncodingHelpers.AreEqual(expectedBytes.length, stringByteCount);
 
                     // Use GetBytes(char[], int, int, byte[], int)
                     var charArrayBytes = Bridge.cast(System.Array.clone(bytes), System.Array.type(System.Byte));
-                    var charArrayByteCount = encoding.getBytes(System.String.toCharArray(source, 0, source.length), index, count, charArrayBytes, byteIndex);
+                    var charArrayByteCount = encoding.getBytes$3(System.String.toCharArray(source, 0, source.length), index, count, charArrayBytes, byteIndex);
                     Bridge.ClientTest.Text.EncodingHelpers.VerifyGetBytes(charArrayBytes, byteIndex, charArrayByteCount, originalBytes, expectedBytes);
                     Bridge.ClientTest.Text.EncodingHelpers.AreEqual(expectedBytes.length, charArrayByteCount);
                 },
@@ -38583,7 +38583,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         Bridge.ClientTest.Text.EncodingHelpers.AreEqual(expected, encoding.getCharCount(bytes));
                     }
                     // Use GetCharCount(byte[], int, int)
-                    Bridge.ClientTest.Text.EncodingHelpers.AreEqual(expected, encoding.getCharCount(bytes, index, count));
+                    Bridge.ClientTest.Text.EncodingHelpers.AreEqual(expected, encoding.getCharCount$1(bytes, index, count));
                 },
                 GetChars: function (encoding, bytes, index, count, expectedChars) {
                     var fullArray = System.Array.init(((expectedChars.length + 4) | 0), 0, System.Char);
@@ -38609,12 +38609,12 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     }
 
                     // Use GetChars(byte[], int, int)
-                    var resultAdvanced = encoding.getChars(bytes, byteIndex, byteCount);
+                    var resultAdvanced = encoding.getChars$1(bytes, byteIndex, byteCount);
                     Bridge.ClientTest.Text.EncodingHelpers.VerifyGetChars(resultAdvanced, 0, resultAdvanced.length, originalChars, expectedChars);
 
                     // Use GetChars(byte[], int, int, char[], int)
                     var byteChars = Bridge.cast(System.Array.clone(chars), System.Array.type(System.Char));
-                    var charCount = encoding.getChars(bytes, byteIndex, byteCount, byteChars, charIndex);
+                    var charCount = encoding.getChars$2(bytes, byteIndex, byteCount, byteChars, charIndex);
                     Bridge.ClientTest.Text.EncodingHelpers.VerifyGetChars(byteChars, charIndex, charCount, originalChars, expectedChars);
                     Bridge.ClientTest.Text.EncodingHelpers.AreEqual(expectedChars.length, charCount);
                 },
@@ -38644,7 +38644,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         Bridge.ClientTest.Text.EncodingHelpers.AreEqual(expected, encoding.getString(bytes));
                     }
                     // Use GetString(byte[], int, int)
-                    Bridge.ClientTest.Text.EncodingHelpers.AreEqual(expected, encoding.getString(bytes, index, count));
+                    Bridge.ClientTest.Text.EncodingHelpers.AreEqual(expected, encoding.getString$1(bytes, index, count));
                 }
             }
         }
@@ -38659,14 +38659,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                     if (index === 0 && count === chars.length) {
                         Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
-                            encoding.getByteCount(chars);
+                            encoding.getByteCount$2(chars);
                         });
                         Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
                             encoding.getByteCount(charsArray);
                         });
 
                         Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
-                            encoding.getBytes(chars);
+                            encoding.getBytes$2(chars);
                         });
                         Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
                             encoding.getBytes(charsArray);
@@ -38674,18 +38674,18 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     }
 
                     Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
-                        encoding.getByteCount(charsArray, index, count);
+                        encoding.getByteCount$1(charsArray, index, count);
                     });
 
                     Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
-                        encoding.getBytes(charsArray, index, count);
+                        encoding.getBytes$1(charsArray, index, count);
                     });
 
                     Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
-                        encoding.getBytes(chars, index, count, bytes, 0);
+                        encoding.getBytes$4(chars, index, count, bytes, 0);
                     });
                     Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
-                        encoding.getBytes(charsArray, index, count, bytes, 0);
+                        encoding.getBytes$3(charsArray, index, count, bytes, 0);
                     });
                 },
                 Decode_Invalid: function (encoding, bytes, index, count) {
@@ -38705,18 +38705,18 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     }
 
                     Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
-                        encoding.getCharCount(bytes, index, count);
+                        encoding.getCharCount$1(bytes, index, count);
                     });
 
                     Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
-                        encoding.getChars(bytes, index, count);
+                        encoding.getChars$1(bytes, index, count);
                     });
                     Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
-                        encoding.getString(bytes, index, count);
+                        encoding.getString$1(bytes, index, count);
                     });
 
                     Bridge.Test.NUnit.Assert.Throws$2(System.Exception, function () {
-                        encoding.getChars(bytes, index, count, chars, 0);
+                        encoding.getChars$2(bytes, index, count, chars, 0);
                     });
                 }
             }
@@ -39019,7 +39019,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         letters[System.Array.index(i, letters)] = value.charCodeAt(((((value.length - i) | 0) - 1) | 0));
                     }
 
-                    return String.fromCharCode.apply(null, letters);
+                    return System.String.fromCharArray(letters);
                 }
             }
         },
@@ -40079,16 +40079,16 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                         var bigEndianBytes = Bridge.ClientTest.Text.UnicodeEncodingDecodeTests.GetBigEndianBytes(littleEndianBytes, index, count);
 
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding(false, true, false), littleEndianBytes, index, count, expected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding(false, false, false), littleEndianBytes, index, count, expected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding(true, false, false), bigEndianBytes, index, count, expected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding(true, true, false), bigEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding.$ctor2(false, true, false), littleEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding.$ctor2(false, false, false), littleEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding.$ctor2(true, false, false), bigEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding.$ctor2(true, true, false), bigEndianBytes, index, count, expected);
 
                         // Decoding valid bytes should throw with a DecoderExceptionFallback
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding(false, true, true), littleEndianBytes, index, count, expected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding(false, false, true), littleEndianBytes, index, count, expected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding(true, false, true), bigEndianBytes, index, count, expected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding(true, true, true), bigEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding.$ctor2(false, true, true), littleEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding.$ctor2(false, false, true), littleEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding.$ctor2(true, false, true), bigEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding.$ctor2(true, true, true), bigEndianBytes, index, count, expected);
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {
@@ -40108,16 +40108,16 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                         var bigEndianBytes = Bridge.ClientTest.Text.UnicodeEncodingDecodeTests.GetBigEndianBytes(littleEndianBytes, index, count);
 
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding(false, true, false), littleEndianBytes, index, count, expected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding(false, false, false), littleEndianBytes, index, count, expected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding(true, false, false), bigEndianBytes, index, count, expected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding(true, true, false), bigEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding.$ctor2(false, true, false), littleEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding.$ctor2(false, false, false), littleEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding.$ctor2(true, false, false), bigEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UnicodeEncoding.$ctor2(true, true, false), bigEndianBytes, index, count, expected);
 
                         // Decoding invalid bytes should throw with a DecoderExceptionFallback
-                        Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UnicodeEncoding(false, true, true), littleEndianBytes, index, count);
-                        Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UnicodeEncoding(false, false, true), littleEndianBytes, index, count);
-                        Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UnicodeEncoding(true, false, true), bigEndianBytes, index, count);
-                        Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UnicodeEncoding(true, true, true), bigEndianBytes, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UnicodeEncoding.$ctor2(false, true, true), littleEndianBytes, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UnicodeEncoding.$ctor2(false, false, true), littleEndianBytes, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UnicodeEncoding.$ctor2(true, false, true), bigEndianBytes, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UnicodeEncoding.$ctor2(true, true, true), bigEndianBytes, index, count);
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {
@@ -40445,15 +40445,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                         var expectedBigEndian = Bridge.ClientTest.Text.UnicodeEncodingEncodeTests.GetBigEndianBytes(expectedLittleEndian);
 
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding(false, true, false), source, index, count, expectedLittleEndian);
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding(false, false, false), source, index, count, expectedLittleEndian);
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding(true, true, false), source, index, count, expectedBigEndian);
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding(true, false, false), source, index, count, expectedBigEndian);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding.$ctor2(false, true, false), source, index, count, expectedLittleEndian);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding.$ctor2(false, false, false), source, index, count, expectedLittleEndian);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding.$ctor2(true, true, false), source, index, count, expectedBigEndian);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding.$ctor2(true, false, false), source, index, count, expectedBigEndian);
 
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding(false, true, true), source, index, count, expectedLittleEndian);
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding(false, false, true), source, index, count, expectedLittleEndian);
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding(true, true, true), source, index, count, expectedBigEndian);
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding(true, false, true), source, index, count, expectedBigEndian);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding.$ctor2(false, true, true), source, index, count, expectedLittleEndian);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding.$ctor2(false, false, true), source, index, count, expectedLittleEndian);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding.$ctor2(true, true, true), source, index, count, expectedBigEndian);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding.$ctor2(true, false, true), source, index, count, expectedBigEndian);
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {
@@ -40475,15 +40475,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                         var expectedBigEndian = Bridge.ClientTest.Text.UnicodeEncodingEncodeTests.GetBigEndianBytes(expectedLittleEndian);
 
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding(false, true, false), source, index, count, expectedLittleEndian);
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding(false, false, false), source, index, count, expectedLittleEndian);
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding(true, true, false), source, index, count, expectedBigEndian);
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding(true, false, false), source, index, count, expectedBigEndian);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding.$ctor2(false, true, false), source, index, count, expectedLittleEndian);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding.$ctor2(false, false, false), source, index, count, expectedLittleEndian);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding.$ctor2(true, true, false), source, index, count, expectedBigEndian);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UnicodeEncoding.$ctor2(true, false, false), source, index, count, expectedBigEndian);
 
-                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UnicodeEncoding(false, true, true), source, index, count);
-                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UnicodeEncoding(false, false, true), source, index, count);
-                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UnicodeEncoding(true, true, true), source, index, count);
-                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UnicodeEncoding(true, false, true), source, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UnicodeEncoding.$ctor2(false, true, true), source, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UnicodeEncoding.$ctor2(false, false, true), source, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UnicodeEncoding.$ctor2(true, true, true), source, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UnicodeEncoding.$ctor2(true, false, true), source, index, count);
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {
@@ -40503,15 +40503,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     while ($t.moveNext()) {
                         var charCount = $t.Current;
                         var expected = Bridge.Int.mul((((charCount + 1) | 0)), 2);
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(false, true, false).getMaxByteCount(charCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(false, false, false).getMaxByteCount(charCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(true, true, false).getMaxByteCount(charCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(true, false, false).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding.$ctor2(false, true, false).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding.$ctor2(false, false, false).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding.$ctor2(true, true, false).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding.$ctor2(true, false, false).getMaxByteCount(charCount));
 
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(false, true, true).getMaxByteCount(charCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(false, false, true).getMaxByteCount(charCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(true, true, true).getMaxByteCount(charCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(true, false, true).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding.$ctor2(false, true, true).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding.$ctor2(false, false, true).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding.$ctor2(true, true, true).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding.$ctor2(true, false, true).getMaxByteCount(charCount));
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {
@@ -40528,15 +40528,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         var byteCount = pair.key;
                         var expected = pair.value;
 
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(false, true, false).getMaxCharCount(byteCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(false, false, false).getMaxCharCount(byteCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(true, true, false).getMaxCharCount(byteCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(true, false, false).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding.$ctor2(false, true, false).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding.$ctor2(false, false, false).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding.$ctor2(true, true, false).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding.$ctor2(true, false, false).getMaxCharCount(byteCount));
 
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(false, true, true).getMaxCharCount(byteCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(false, false, true).getMaxCharCount(byteCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(true, true, true).getMaxCharCount(byteCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding(true, false, true).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding.$ctor2(false, true, true).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding.$ctor2(false, false, true).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding.$ctor2(true, true, true).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UnicodeEncoding.$ctor2(true, false, true).getMaxCharCount(byteCount));
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {
@@ -40652,15 +40652,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                         var bigEndianBytes = Bridge.ClientTest.Text.UTF32EncodingDecodeTests.GetBigEndianBytes(littleEndianBytes, index, count);
 
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding(true, true, false), bigEndianBytes, index, count, expected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding(true, false, false), bigEndianBytes, index, count, expected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding(false, true, false), littleEndianBytes, index, count, expected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding(false, false, false), littleEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding.$ctor2(true, true, false), bigEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding.$ctor2(true, false, false), bigEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding.$ctor2(false, true, false), littleEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding.$ctor2(false, false, false), littleEndianBytes, index, count, expected);
 
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding(true, true, true), bigEndianBytes, index, count, expected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding(true, false, true), bigEndianBytes, index, count, expected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding(false, true, true), littleEndianBytes, index, count, expected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding(false, false, true), littleEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding.$ctor2(true, true, true), bigEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding.$ctor2(true, false, true), bigEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding.$ctor2(false, true, true), littleEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding.$ctor2(false, false, true), littleEndianBytes, index, count, expected);
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {
@@ -40680,15 +40680,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                         var bigEndianBytes = Bridge.ClientTest.Text.UTF32EncodingDecodeTests.GetBigEndianBytes(littleEndianBytes, index, count);
 
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding(true, true, false), bigEndianBytes, index, count, expected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding(true, false, false), bigEndianBytes, index, count, expected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding(false, true, false), littleEndianBytes, index, count, expected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding(false, false, false), littleEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding.$ctor2(true, true, false), bigEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding.$ctor2(true, false, false), bigEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding.$ctor2(false, true, false), littleEndianBytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF32Encoding.$ctor2(false, false, false), littleEndianBytes, index, count, expected);
 
-                        Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UTF32Encoding(true, true, true), bigEndianBytes, index, count);
-                        Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UTF32Encoding(true, false, true), bigEndianBytes, index, count);
-                        Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UTF32Encoding(false, true, true), littleEndianBytes, index, count);
-                        Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UTF32Encoding(false, false, true), littleEndianBytes, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UTF32Encoding.$ctor2(true, true, true), bigEndianBytes, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UTF32Encoding.$ctor2(true, false, true), bigEndianBytes, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UTF32Encoding.$ctor2(false, true, true), littleEndianBytes, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UTF32Encoding.$ctor2(false, false, true), littleEndianBytes, index, count);
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {
@@ -40787,15 +40787,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                         var bigEndianExpected = Bridge.ClientTest.Text.UTF32EncodingEncodeTests.GetBigEndianBytes(littleEndianExpected);
 
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding(true, true, false), chars, index, count, bigEndianExpected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding(true, false, false), chars, index, count, bigEndianExpected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding(false, true, false), chars, index, count, littleEndianExpected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding(false, false, false), chars, index, count, littleEndianExpected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding.$ctor2(true, true, false), chars, index, count, bigEndianExpected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding.$ctor2(true, false, false), chars, index, count, bigEndianExpected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding.$ctor2(false, true, false), chars, index, count, littleEndianExpected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding.$ctor2(false, false, false), chars, index, count, littleEndianExpected);
 
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding(true, true, true), chars, index, count, bigEndianExpected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding(true, false, true), chars, index, count, bigEndianExpected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding(false, true, true), chars, index, count, littleEndianExpected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding(false, false, true), chars, index, count, littleEndianExpected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding.$ctor2(true, true, true), chars, index, count, bigEndianExpected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding.$ctor2(true, false, true), chars, index, count, bigEndianExpected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding.$ctor2(false, true, true), chars, index, count, littleEndianExpected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding.$ctor2(false, false, true), chars, index, count, littleEndianExpected);
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {
@@ -40815,15 +40815,15 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
 
                         var bigEndianExpected = Bridge.ClientTest.Text.UTF32EncodingEncodeTests.GetBigEndianBytes(littleEndianExpected);
 
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding(true, true, false), chars, index, count, bigEndianExpected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding(true, false, false), chars, index, count, bigEndianExpected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding(false, true, false), chars, index, count, littleEndianExpected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding(false, false, false), chars, index, count, littleEndianExpected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding.$ctor2(true, true, false), chars, index, count, bigEndianExpected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding.$ctor2(true, false, false), chars, index, count, bigEndianExpected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding.$ctor2(false, true, false), chars, index, count, littleEndianExpected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF32Encoding.$ctor2(false, false, false), chars, index, count, littleEndianExpected);
 
-                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UTF32Encoding(true, true, true), chars, index, count);
-                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UTF32Encoding(true, false, true), chars, index, count);
-                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UTF32Encoding(false, true, true), chars, index, count);
-                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UTF32Encoding(false, false, true), chars, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UTF32Encoding.$ctor2(true, true, true), chars, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UTF32Encoding.$ctor2(true, false, true), chars, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UTF32Encoding.$ctor2(false, true, true), chars, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UTF32Encoding.$ctor2(false, false, true), chars, index, count);
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {
@@ -40843,14 +40843,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     while ($t.moveNext()) {
                         var charCount = $t.Current;
                         var expected = Bridge.Int.mul((((charCount + 1) | 0)), 4);
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(true, false, false).getMaxByteCount(charCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(true, true, false).getMaxByteCount(charCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(true, false, true).getMaxByteCount(charCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(true, true, true).getMaxByteCount(charCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(false, true, true).getMaxByteCount(charCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(false, true, false).getMaxByteCount(charCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(false, false, true).getMaxByteCount(charCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(false, false, false).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding.$ctor2(true, false, false).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding.$ctor2(true, true, false).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding.$ctor2(true, false, true).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding.$ctor2(true, true, true).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding.$ctor2(false, true, true).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding.$ctor2(false, true, false).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding.$ctor2(false, false, true).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding.$ctor2(false, false, false).getMaxByteCount(charCount));
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {
@@ -40866,14 +40866,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         var pair = $t.Current;
                         var byteCount = pair.key;
                         var expected = pair.value;
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(true, false, false).getMaxCharCount(byteCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(true, true, false).getMaxCharCount(byteCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(true, false, true).getMaxCharCount(byteCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(true, true, true).getMaxCharCount(byteCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(false, true, true).getMaxCharCount(byteCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(false, true, false).getMaxCharCount(byteCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(false, false, true).getMaxCharCount(byteCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding(false, false, false).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding.$ctor2(true, false, false).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding.$ctor2(true, true, false).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding.$ctor2(true, false, true).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding.$ctor2(true, true, true).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding.$ctor2(false, true, true).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding.$ctor2(false, true, false).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding.$ctor2(false, false, true).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF32Encoding.$ctor2(false, false, false).getMaxCharCount(byteCount));
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {
@@ -41254,8 +41254,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         var count = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(2, objectse)]), System.Int32));
                         var expected = Bridge.as(objectse[System.Array.index(3, objectse)], System.String);
 
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF7Encoding(true), bytes, index, count, expected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF7Encoding(false), bytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF7Encoding.$ctor1(true), bytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF7Encoding.$ctor1(false), bytes, index, count, expected);
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {
@@ -41532,8 +41532,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         var count = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(2, objectse)]), System.Int32));
                         var expected = Bridge.cast(objectse[System.Array.index(3, objectse)], System.Array.type(System.Byte));
 
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF7Encoding(true), source, index, count, expected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF7Encoding(false), source, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF7Encoding.$ctor1(true), source, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF7Encoding.$ctor1(false), source, index, count, expected);
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {
@@ -41552,7 +41552,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         var count = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(3, objectse)]), System.Int32));
                         var expected = Bridge.cast(objectse[System.Array.index(4, objectse)], System.Array.type(System.Byte));
 
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF7Encoding(allowOptionals), source, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF7Encoding.$ctor1(allowOptionals), source, index, count, expected);
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {
@@ -41572,8 +41572,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     while ($t.moveNext()) {
                         var charCount = $t.Current;
                         var expected = (Bridge.Int.mul(charCount, 3) + 2) | 0;
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF7Encoding(true).getMaxByteCount(charCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF7Encoding(false).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF7Encoding.$ctor1(true).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF7Encoding.$ctor1(false).getMaxByteCount(charCount));
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {
@@ -41588,8 +41588,8 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     while ($t.moveNext()) {
                         var byteCount = $t.Current;
                         var expected = Math.max(byteCount, 1);
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF7Encoding(true).getMaxCharCount(byteCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF7Encoding(false).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF7Encoding.$ctor1(true).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF7Encoding.$ctor1(false).getMaxCharCount(byteCount));
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {
@@ -42343,11 +42343,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                             var count = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(2, objectse)]), System.Int32));
                             var expected = Bridge.as(objectse[System.Array.index(3, objectse)], System.String);
 
-                            Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF8Encoding(true, false), bytes, index, count, expected);
-                            Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF8Encoding(false, false), bytes, index, count, expected);
+                            Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF8Encoding.$ctor2(true, false), bytes, index, count, expected);
+                            Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF8Encoding.$ctor2(false, false), bytes, index, count, expected);
 
-                            Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UTF8Encoding(false, true), bytes, index, count);
-                            Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UTF8Encoding(true, true), bytes, index, count);
+                            Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UTF8Encoding.$ctor2(false, true), bytes, index, count);
+                            Bridge.ClientTest.Text.NegativeEncodingTests.Decode_Invalid(new System.Text.UTF8Encoding.$ctor2(true, true), bytes, index, count);
                         }
                     } finally {
                         if (Bridge.is($t, System.IDisposable)) {
@@ -42368,11 +42368,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         var count = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(2, objectse)]), System.Int32));
                         var expected = Bridge.as(objectse[System.Array.index(3, objectse)], System.String);
 
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF8Encoding(true, false), bytes, index, count, expected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF8Encoding(false, false), bytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF8Encoding.$ctor2(true, false), bytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF8Encoding.$ctor2(false, false), bytes, index, count, expected);
 
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF8Encoding(false, true), bytes, index, count, expected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF8Encoding(true, true), bytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF8Encoding.$ctor2(false, true), bytes, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Decode(new System.Text.UTF8Encoding.$ctor2(true, true), bytes, index, count, expected);
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {
@@ -42900,46 +42900,46 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     var encoding = System.Text.Encoding.UTF8;
                     // Bytes has enough capacity to accomodate result
                     var s = Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([84, 55357, 56833, 101, 115, 116], System.Int32));
-                    Bridge.Test.NUnit.Assert.AreEqual(4, encoding.getBytes(s, 0, 2, System.Array.init(4, 0, System.Byte), 0));
-                    Bridge.Test.NUnit.Assert.AreEqual(5, encoding.getBytes(s, 0, 3, System.Array.init(5, 0, System.Byte), 0));
-                    Bridge.Test.NUnit.Assert.AreEqual(6, encoding.getBytes(s, 0, 4, System.Array.init(6, 0, System.Byte), 0));
-                    Bridge.Test.NUnit.Assert.AreEqual(7, encoding.getBytes(s, 0, 5, System.Array.init(7, 0, System.Byte), 0));
+                    Bridge.Test.NUnit.Assert.AreEqual(4, encoding.getBytes$4(s, 0, 2, System.Array.init(4, 0, System.Byte), 0));
+                    Bridge.Test.NUnit.Assert.AreEqual(5, encoding.getBytes$4(s, 0, 3, System.Array.init(5, 0, System.Byte), 0));
+                    Bridge.Test.NUnit.Assert.AreEqual(6, encoding.getBytes$4(s, 0, 4, System.Array.init(6, 0, System.Byte), 0));
+                    Bridge.Test.NUnit.Assert.AreEqual(7, encoding.getBytes$4(s, 0, 5, System.Array.init(7, 0, System.Byte), 0));
 
                     var c = System.String.toCharArray(s, 0, s.length);
-                    Bridge.Test.NUnit.Assert.AreEqual(4, encoding.getBytes(c, 0, 2, System.Array.init(4, 0, System.Byte), 0));
-                    Bridge.Test.NUnit.Assert.AreEqual(5, encoding.getBytes(c, 0, 3, System.Array.init(5, 0, System.Byte), 0));
-                    Bridge.Test.NUnit.Assert.AreEqual(6, encoding.getBytes(c, 0, 4, System.Array.init(6, 0, System.Byte), 0));
-                    Bridge.Test.NUnit.Assert.AreEqual(7, encoding.getBytes(c, 0, 5, System.Array.init(7, 0, System.Byte), 0));
+                    Bridge.Test.NUnit.Assert.AreEqual(4, encoding.getBytes$3(c, 0, 2, System.Array.init(4, 0, System.Byte), 0));
+                    Bridge.Test.NUnit.Assert.AreEqual(5, encoding.getBytes$3(c, 0, 3, System.Array.init(5, 0, System.Byte), 0));
+                    Bridge.Test.NUnit.Assert.AreEqual(6, encoding.getBytes$3(c, 0, 4, System.Array.init(6, 0, System.Byte), 0));
+                    Bridge.Test.NUnit.Assert.AreEqual(7, encoding.getBytes$3(c, 0, 5, System.Array.init(7, 0, System.Byte), 0));
                 },
                 GetBytes_InvalidASCIIUnicode: function () {
                     var encoding = System.Text.Encoding.UTF8;
                     // Bytes does not have enough capacity to accomodate result
                     var s = Bridge.ClientTest.Text.EncodingHelpers.ToString(System.Array.init([84, 55357, 56833, 101, 115, 116], System.Int32));
                     Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
-                        encoding.getBytes(s, 0, 2, System.Array.init(3, 0, System.Byte), 0);
+                        encoding.getBytes$4(s, 0, 2, System.Array.init(3, 0, System.Byte), 0);
                     });
                     Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
-                        encoding.getBytes(s, 0, 3, System.Array.init(4, 0, System.Byte), 0);
+                        encoding.getBytes$4(s, 0, 3, System.Array.init(4, 0, System.Byte), 0);
                     });
                     Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
-                        encoding.getBytes(s, 0, 4, System.Array.init(5, 0, System.Byte), 0);
+                        encoding.getBytes$4(s, 0, 4, System.Array.init(5, 0, System.Byte), 0);
                     });
                     Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
-                        encoding.getBytes(s, 0, 5, System.Array.init(6, 0, System.Byte), 0);
+                        encoding.getBytes$4(s, 0, 5, System.Array.init(6, 0, System.Byte), 0);
                     });
 
                     var c = System.String.toCharArray(s, 0, s.length);
                     Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
-                        encoding.getBytes(c, 0, 2, System.Array.init(3, 0, System.Byte), 0);
+                        encoding.getBytes$3(c, 0, 2, System.Array.init(3, 0, System.Byte), 0);
                     });
                     Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
-                        encoding.getBytes(c, 0, 3, System.Array.init(4, 0, System.Byte), 0);
+                        encoding.getBytes$3(c, 0, 3, System.Array.init(4, 0, System.Byte), 0);
                     });
                     Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
-                        encoding.getBytes(c, 0, 4, System.Array.init(5, 0, System.Byte), 0);
+                        encoding.getBytes$3(c, 0, 4, System.Array.init(5, 0, System.Byte), 0);
                     });
                     Bridge.Test.NUnit.Assert.Throws$2(System.ArgumentException, function () {
-                        encoding.getBytes(c, 0, 5, System.Array.init(6, 0, System.Byte), 0);
+                        encoding.getBytes$3(c, 0, 5, System.Array.init(6, 0, System.Byte), 0);
                     });
                 }
             }
@@ -42956,11 +42956,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         var count = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(2, objectse)]), System.Int32));
                         var expected = Bridge.cast(objectse[System.Array.index(3, objectse)], System.Array.type(System.Byte));
 
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF8Encoding(true, false), chars, index, count, expected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF8Encoding(false, false), chars, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF8Encoding.$ctor2(true, false), chars, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF8Encoding.$ctor2(false, false), chars, index, count, expected);
 
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF8Encoding(false, true), chars, index, count, expected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF8Encoding(true, true), chars, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF8Encoding.$ctor2(false, true), chars, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF8Encoding.$ctor2(true, true), chars, index, count, expected);
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {
@@ -42978,11 +42978,11 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                         var count = System.Nullable.getValue(Bridge.cast(Bridge.unbox(objectse[System.Array.index(2, objectse)]), System.Int32));
                         var expected = Bridge.cast(objectse[System.Array.index(3, objectse)], System.Array.type(System.Byte));
 
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF8Encoding(true, false), chars, index, count, expected);
-                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF8Encoding(false, false), chars, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF8Encoding.$ctor2(true, false), chars, index, count, expected);
+                        Bridge.ClientTest.Text.EncodingHelpers.Encode(new System.Text.UTF8Encoding.$ctor2(false, false), chars, index, count, expected);
 
-                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UTF8Encoding(false, true), chars, index, count);
-                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UTF8Encoding(true, true), chars, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UTF8Encoding.$ctor2(false, true), chars, index, count);
+                        Bridge.ClientTest.Text.NegativeEncodingTests.Encode_Invalid(new System.Text.UTF8Encoding.$ctor2(true, true), chars, index, count);
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {
@@ -43002,10 +43002,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     while ($t.moveNext()) {
                         var charCount = $t.Current;
                         var expected = Bridge.Int.mul((((charCount + 1) | 0)), 3);
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF8Encoding(true, true).getMaxByteCount(charCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF8Encoding(true, false).getMaxByteCount(charCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF8Encoding(false, true).getMaxByteCount(charCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF8Encoding(false, false).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF8Encoding.$ctor2(true, true).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF8Encoding.$ctor2(true, false).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF8Encoding.$ctor2(false, true).getMaxByteCount(charCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF8Encoding.$ctor2(false, false).getMaxByteCount(charCount));
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {
@@ -43020,10 +43020,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                     while ($t.moveNext()) {
                         var byteCount = $t.Current;
                         var expected = (byteCount + 1) | 0;
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF8Encoding(true, true).getMaxCharCount(byteCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF8Encoding(true, false).getMaxCharCount(byteCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF8Encoding(false, true).getMaxCharCount(byteCount));
-                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF8Encoding(false, false).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF8Encoding.$ctor2(true, true).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF8Encoding.$ctor2(true, false).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF8Encoding.$ctor2(false, true).getMaxCharCount(byteCount));
+                        Bridge.Test.NUnit.Assert.AreEqual(expected, new System.Text.UTF8Encoding.$ctor2(false, false).getMaxCharCount(byteCount));
                     }
                 } finally {
                     if (Bridge.is($t, System.IDisposable)) {
@@ -59138,7 +59138,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
     $m($n[3].TypeSystemTests.ProtectedClass, function () { return {"td":$n[3].TypeSystemTests,"att":1048580,"a":3,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"}]}; });
     $m($n[3].TypeSystemTests.E1, function () { return {"td":$n[3].TypeSystemTests,"att":258,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"sn":"ctor"},{"a":2,"n":"V1","is":true,"t":4,"rt":$n[3].TypeSystemTests.E1,"sn":"V1"},{"a":2,"n":"V2","is":true,"t":4,"rt":$n[3].TypeSystemTests.E1,"sn":"V2"},{"a":2,"n":"V3","is":true,"t":4,"rt":$n[3].TypeSystemTests.E1,"sn":"V3"}]}; });
     $m($n[0].Int32, function () { return {"att":1048841,"a":2,"m":[{"a":2,"isSynthetic":true,"n":".ctor","t":1,"def":function () { return Number; }},{"a":1,"n":".ctor","t":1,"p":[$n[0].Int32],"pi":[{"n":"i","pt":$n[0].Int32,"ps":0}],"def":function (i) { return Number; }},{"a":2,"n":"CompareTo","t":8,"pi":[{"n":"other","pt":$n[0].Int32,"ps":0}],"tpc":0,"def":function (other) { return Bridge.compare(this, other); },"rt":$n[0].Int32,"p":[$n[0].Int32]},{"a":2,"n":"CompareTo","t":8,"pi":[{"n":"obj","pt":$n[0].Object,"ps":0}],"tpc":0,"def":function (obj) { return Bridge.compare(this, obj); },"rt":$n[0].Int32,"p":[$n[0].Object]},{"a":2,"n":"Equals","t":8,"pi":[{"n":"other","pt":$n[0].Int32,"ps":0}],"tpc":0,"def":function (other) { return this === other; },"rt":$n[0].Boolean,"p":[$n[0].Int32]},{"ov":true,"a":2,"n":"Equals","t":8,"pi":[{"n":"other","pt":$n[0].Object,"ps":0}],"tpc":0,"def":function (other) { return System.Int32.equals(this, other); },"rt":$n[0].Boolean,"p":[$n[0].Object]},{"a":2,"n":"Format","t":8,"pi":[{"n":"format","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (format) { return System.Int32.format(this, format); },"rt":$n[0].String,"p":[$n[0].String]},{"a":2,"n":"Format","t":8,"pi":[{"n":"format","pt":$n[0].String,"ps":0},{"n":"provider","pt":$n[0].IFormatProvider,"ps":1}],"tpc":0,"def":function (format, provider) { return System.Int32.format(this, format, provider); },"rt":$n[0].String,"p":[$n[0].String,$n[0].IFormatProvider]},{"a":2,"n":"Parse","is":true,"t":8,"pi":[{"n":"s","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (s) { return System.Int32.parse(s); },"rt":$n[0].Int32,"p":[$n[0].String]},{"a":2,"n":"Parse","is":true,"t":8,"pi":[{"n":"s","pt":$n[0].String,"ps":0},{"n":"radix","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (s, radix) { return System.Int32.parse(s, radix); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32]},{"a":2,"n":"ToString","t":8,"pi":[{"n":"radix","pt":$n[0].Int32,"ps":0}],"sn":"toString","rt":$n[0].String,"p":[$n[0].Int32]},{"a":2,"n":"ToString","t":8,"pi":[{"n":"format","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (format) { return System.Int32.format(this, format); },"rt":$n[0].String,"p":[$n[0].String]},{"a":2,"n":"ToString","t":8,"pi":[{"n":"format","pt":$n[0].String,"ps":0},{"n":"provider","pt":$n[0].IFormatProvider,"ps":1}],"tpc":0,"def":function (format, provider) { return System.Int32.format(this, format, provider); },"rt":$n[0].String,"p":[$n[0].String,$n[0].IFormatProvider]},{"a":2,"n":"TryParse","is":true,"t":8,"pi":[{"n":"s","pt":$n[0].String,"ps":0},{"n":"result","out":true,"pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (s, result) { return System.Int32.tryParse(s, result); },"rt":$n[0].Boolean,"p":[$n[0].String,$n[0].Int32]},{"a":2,"n":"TryParse","is":true,"t":8,"pi":[{"n":"s","pt":$n[0].String,"ps":0},{"n":"result","out":true,"pt":$n[0].Int32,"ps":1},{"n":"radix","pt":$n[0].Int32,"ps":2}],"tpc":0,"def":function (s, result, radix) { return System.Int32.tryParse(s, result, radix); },"rt":$n[0].Boolean,"p":[$n[0].String,$n[0].Int32,$n[0].Int32]},{"a":2,"n":"MaxValue","is":true,"t":4,"rt":$n[0].Int32,"sn":"MaxValue"},{"a":2,"n":"MinValue","is":true,"t":4,"rt":$n[0].Int32,"sn":"MinValue"}]}; });
-    $m($n[0].String, function () { return {"att":1048833,"a":2,"m":[{"a":2,"n":".ctor","t":1,"def":function () { return ""; }},{"a":2,"n":".ctor","t":1,"p":[$n[0].Array.type(System.Char)],"pi":[{"n":"value","pt":$n[0].Array.type(System.Char),"ps":0}],"def":function (value) { return String.fromCharCode.apply(null, value); }},{"a":2,"n":".ctor","t":1,"p":[$n[0].Char,$n[0].Int32],"pi":[{"n":"c","pt":$n[0].Char,"ps":0},{"n":"count","pt":$n[0].Int32,"ps":1}],"def":function (c, count) { return System.String.fromCharCount(c, count); }},{"a":2,"n":".ctor","t":1,"p":[$n[0].Array.type(System.Char),$n[0].Int32,$n[0].Int32],"pi":[{"n":"value","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"length","pt":$n[0].Int32,"ps":2}],"def":function (value, startIndex, length) { return String.fromCharCode.apply(null, value.slice(startIndex, startIndex + length)); }},{"a":2,"n":"Clone","t":8,"tpc":0,"def":function () { return this; },"rt":$n[0].Object},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"strB","pt":$n[0].String,"ps":1}],"tpc":0,"def":function (strA, strB) { return System.String.compare(strA, strB); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].String]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"strB","pt":$n[0].String,"ps":1},{"n":"ignoreCase","pt":$n[0].Boolean,"ps":2}],"tpc":0,"def":function (strA, strB, ignoreCase) { return System.String.compare(strA, strB, ignoreCase); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].String,$n[0].Boolean]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"strB","pt":$n[0].String,"ps":1},{"n":"comparisonType","pt":Number,"ps":2}],"tpc":0,"def":function (strA, strB, comparisonType) { return System.String.compare(strA, strB, comparisonType); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].String,Number]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"strB","pt":$n[0].String,"ps":1},{"n":"ignoreCase","pt":$n[0].Boolean,"ps":2},{"n":"culture","pt":$n[4].CultureInfo,"ps":3}],"tpc":0,"def":function (strA, strB, ignoreCase, culture) { return System.String.compare(strA, strB, ignoreCase, culture); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].String,$n[0].Boolean,$n[4].CultureInfo]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"indexA","pt":$n[0].Int32,"ps":1},{"n":"strB","pt":$n[0].String,"ps":2},{"n":"indexB","pt":$n[0].Int32,"ps":3},{"n":"length","pt":$n[0].Int32,"ps":4}],"tpc":0,"def":function (strA, indexA, strB, indexB, length) { return System.String.compare(strA.substr(indexA, length), strB.substr(indexB, length)); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].String,$n[0].Int32,$n[0].Int32]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"indexA","pt":$n[0].Int32,"ps":1},{"n":"strB","pt":$n[0].String,"ps":2},{"n":"indexB","pt":$n[0].Int32,"ps":3},{"n":"length","pt":$n[0].Int32,"ps":4},{"n":"ignoreCase","pt":$n[0].Boolean,"ps":5}],"tpc":0,"def":function (strA, indexA, strB, indexB, length, ignoreCase) { return System.String.compare(strA.substr(indexA, length), strB.substr(indexB, length), ignoreCase); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].String,$n[0].Int32,$n[0].Int32,$n[0].Boolean]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"indexA","pt":$n[0].Int32,"ps":1},{"n":"strB","pt":$n[0].String,"ps":2},{"n":"indexB","pt":$n[0].Int32,"ps":3},{"n":"length","pt":$n[0].Int32,"ps":4},{"n":"comparisonType","pt":Number,"ps":5}],"tpc":0,"def":function (strA, indexA, strB, indexB, length, comparisonType) { return System.String.compare(strA.substr(indexA, length), strB.substr(indexB, length), comparisonType); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].String,$n[0].Int32,$n[0].Int32,Number]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"indexA","pt":$n[0].Int32,"ps":1},{"n":"strB","pt":$n[0].String,"ps":2},{"n":"indexB","pt":$n[0].Int32,"ps":3},{"n":"length","pt":$n[0].Int32,"ps":4},{"n":"ignoreCase","pt":$n[0].Boolean,"ps":5},{"n":"culture","pt":$n[4].CultureInfo,"ps":6}],"tpc":0,"def":function (strA, indexA, strB, indexB, length, ignoreCase, culture) { return System.String.compare(strA.substr(indexA, length), strB.substr(indexB, length), ignoreCase, culture); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].String,$n[0].Int32,$n[0].Int32,$n[0].Boolean,$n[4].CultureInfo]},{"a":2,"n":"CompareTo","t":8,"pi":[{"n":"value","pt":$n[0].Object,"ps":0}],"tpc":0,"def":function (value) { return System.String.compare(this, value.toString()); },"rt":$n[0].Int32,"p":[$n[0].Object]},{"a":2,"n":"CompareTo","t":8,"pi":[{"n":"strB","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (strB) { return System.String.compare(this, strB); },"rt":$n[0].Int32,"p":[$n[0].String]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"values","pt":$n[5].IEnumerable$1(System.String),"ps":0}],"tpc":0,"def":function (values) { return System.String.concat(Bridge.toArray(values)); },"rt":$n[0].String,"p":[$n[5].IEnumerable$1(System.String)]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"values","pt":$n[5].IEnumerable$1(System.Object),"ps":0}],"tpc":1,"def":function (T, values) { return System.String.concat(Bridge.toArray(values)); },"rt":$n[0].String,"p":[$n[5].IEnumerable$1(System.Object)]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"arg0","pt":$n[0].Object,"ps":0}],"tpc":0,"def":function (arg0) { return System.String.concat(arg0); },"rt":$n[0].String,"p":[$n[0].Object]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"args","ip":true,"pt":$n[0].Array.type(System.Object),"ps":0}],"tpc":0,"def":function (args) { return System.String.concat(Array.prototype.slice.call((arguments, 0))); },"rt":$n[0].String,"p":[$n[0].Array.type(System.Object)]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"values","ip":true,"pt":$n[0].Array.type(System.String),"ps":0}],"tpc":0,"def":function (values) { return System.String.concat(Array.prototype.slice.call((arguments, 0))); },"rt":$n[0].String,"p":[$n[0].Array.type(System.String)]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"arg0","pt":$n[0].Object,"ps":0},{"n":"arg1","pt":$n[0].Object,"ps":1}],"tpc":0,"def":function (arg0, arg1) { return System.String.concat(arg0, arg1); },"rt":$n[0].String,"p":[$n[0].Object,$n[0].Object]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"str0","pt":$n[0].String,"ps":0},{"n":"str1","pt":$n[0].String,"ps":1}],"tpc":0,"def":function (str0, str1) { return System.String.concat(str0, str1); },"rt":$n[0].String,"p":[$n[0].String,$n[0].String]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"arg0","pt":$n[0].Object,"ps":0},{"n":"arg1","pt":$n[0].Object,"ps":1},{"n":"arg2","pt":$n[0].Object,"ps":2}],"tpc":0,"def":function (arg0, arg1, arg2) { return System.String.concat(arg0, arg1, arg2); },"rt":$n[0].String,"p":[$n[0].Object,$n[0].Object,$n[0].Object]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"str0","pt":$n[0].String,"ps":0},{"n":"str1","pt":$n[0].String,"ps":1},{"n":"str2","pt":$n[0].String,"ps":2}],"tpc":0,"def":function (str0, str1, str2) { return System.String.concat(str0, str1, str2); },"rt":$n[0].String,"p":[$n[0].String,$n[0].String,$n[0].String]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"arg0","pt":$n[0].Object,"ps":0},{"n":"arg1","pt":$n[0].Object,"ps":1},{"n":"arg2","pt":$n[0].Object,"ps":2},{"n":"arg3","pt":$n[0].Object,"ps":3}],"tpc":0,"def":function (arg0, arg1, arg2, arg3) { return System.String.concat(arg0, arg1, arg2, arg3); },"rt":$n[0].String,"p":[$n[0].Object,$n[0].Object,$n[0].Object,$n[0].Object]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"str0","pt":$n[0].String,"ps":0},{"n":"str1","pt":$n[0].String,"ps":1},{"n":"str2","pt":$n[0].String,"ps":2},{"n":"str3","pt":$n[0].String,"ps":3}],"tpc":0,"def":function (str0, str1, str2, str3) { return System.String.concat(str0, str1, str2, str3); },"rt":$n[0].String,"p":[$n[0].String,$n[0].String,$n[0].String,$n[0].String]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"arg0","pt":$n[0].Object,"ps":0},{"n":"arg1","pt":$n[0].Object,"ps":1},{"n":"arg2","pt":$n[0].Object,"ps":2},{"n":"arg3","pt":$n[0].Object,"ps":3},{"n":"args","ip":true,"pt":$n[0].Array.type(System.Object),"ps":4}],"tpc":0,"def":function (arg0, arg1, arg2, arg3, args) { return System.String.concat(arg0, arg1, arg2, arg3, args); },"rt":$n[0].String,"p":[$n[0].Object,$n[0].Object,$n[0].Object,$n[0].Object,$n[0].Array.type(System.Object)]},{"a":2,"n":"Contains","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.contains(this,value); },"rt":$n[0].Boolean,"p":[$n[0].String]},{"a":2,"n":"CopyTo","t":8,"pi":[{"n":"sourceIndex","pt":$n[0].Int32,"ps":0},{"n":"destination","pt":$n[0].Array.type(System.Char),"ps":1},{"n":"destinationIndex","pt":$n[0].Int32,"ps":2},{"n":"count","pt":$n[0].Int32,"ps":3}],"tpc":0,"def":function (sourceIndex, destination, destinationIndex, count) { return System.String.copyTo(this, sourceIndex, destination, destinationIndex, count); },"rt":$n[0].Void,"p":[$n[0].Int32,$n[0].Array.type(System.Char),$n[0].Int32,$n[0].Int32]},{"a":2,"n":"EndsWith","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.endsWith(this, value); },"rt":$n[0].Boolean,"p":[$n[0].String]},{"a":2,"n":"Equals","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.equals(this, value); },"rt":$n[0].Boolean,"p":[$n[0].String]},{"a":2,"n":"Equals","is":true,"t":8,"pi":[{"n":"a","pt":$n[0].String,"ps":0},{"n":"b","pt":$n[0].String,"ps":1}],"tpc":0,"def":function (a, b) { return System.String.equals(a, b); },"rt":$n[0].Boolean,"p":[$n[0].String,$n[0].String]},{"a":2,"n":"Equals","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"comparisonType","pt":Number,"ps":1}],"tpc":0,"def":function (value, comparisonType) { return System.String.equals(this, value, comparisonType); },"rt":$n[0].Boolean,"p":[$n[0].String,Number]},{"a":2,"n":"Equals","is":true,"t":8,"pi":[{"n":"a","pt":$n[0].String,"ps":0},{"n":"b","pt":$n[0].String,"ps":1},{"n":"comparisonType","pt":Number,"ps":2}],"tpc":0,"def":function (a, b, comparisonType) { return System.String.equals(a, b, comparisonType); },"rt":$n[0].Boolean,"p":[$n[0].String,$n[0].String,Number]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"format","pt":$n[0].String,"ps":0},{"n":"arg0","pt":$n[0].Object,"ps":1}],"tpc":0,"def":function (format, arg0) { return System.String.format(format, arg0); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Object]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"format","pt":$n[0].String,"ps":0},{"n":"args","ip":true,"pt":$n[0].Array.type(System.Object),"ps":1}],"tpc":0,"def":function (format, args) { return System.String.format(format, args); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Array.type(System.Object)]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"provider","pt":$n[0].IFormatProvider,"ps":0},{"n":"format","pt":$n[0].String,"ps":1},{"n":"arg0","pt":$n[0].Object,"ps":2}],"tpc":0,"def":function (provider, format, arg0) { return System.String.formatProvider(provider, format, arg0); },"rt":$n[0].String,"p":[$n[0].IFormatProvider,$n[0].String,$n[0].Object]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"provider","pt":$n[0].IFormatProvider,"ps":0},{"n":"format","pt":$n[0].String,"ps":1},{"n":"args","ip":true,"pt":$n[0].Array.type(System.Object),"ps":2}],"tpc":0,"def":function (provider, format, args) { return System.String.formatProvider(provider, format, args); },"rt":$n[0].String,"p":[$n[0].IFormatProvider,$n[0].String,$n[0].Array.type(System.Object)]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"format","pt":$n[0].String,"ps":0},{"n":"arg0","pt":$n[0].Object,"ps":1},{"n":"arg1","pt":$n[0].Object,"ps":2}],"tpc":0,"def":function (format, arg0, arg1) { return System.String.format(format, arg0, arg1); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Object,$n[0].Object]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"provider","pt":$n[0].IFormatProvider,"ps":0},{"n":"format","pt":$n[0].String,"ps":1},{"n":"arg0","pt":$n[0].Object,"ps":2},{"n":"arg1","pt":$n[0].Object,"ps":3}],"tpc":0,"def":function (provider, format, arg0, arg1) { return System.String.formatProvider(provider, format, arg0, arg1); },"rt":$n[0].String,"p":[$n[0].IFormatProvider,$n[0].String,$n[0].Object,$n[0].Object]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"format","pt":$n[0].String,"ps":0},{"n":"arg0","pt":$n[0].Object,"ps":1},{"n":"arg1","pt":$n[0].Object,"ps":2},{"n":"arg2","pt":$n[0].Object,"ps":3}],"tpc":0,"def":function (format, arg0, arg1, arg2) { return System.String.format(format, arg0, arg1, arg2); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Object,$n[0].Object,$n[0].Object]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"provider","pt":$n[0].IFormatProvider,"ps":0},{"n":"format","pt":$n[0].String,"ps":1},{"n":"arg0","pt":$n[0].Object,"ps":2},{"n":"arg1","pt":$n[0].Object,"ps":3},{"n":"arg2","pt":$n[0].Object,"ps":4}],"tpc":0,"def":function (provider, format, arg0, arg1, arg2) { return System.String.formatProvider(provider, format, arg0, arg1, arg2); },"rt":$n[0].String,"p":[$n[0].IFormatProvider,$n[0].String,$n[0].Object,$n[0].Object,$n[0].Object]},{"a":2,"n":"GetEnumerator","t":8,"tpc":0,"def":function () { return Bridge.getEnumerator(this); },"rt":$n[0].CharEnumerator},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].Char,"ps":0}],"tpc":0,"def":function (value) { return System.String.indexOf(this, String.fromCharCode(value)); },"rt":$n[0].Int32,"p":[$n[0].Char]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.indexOf(this, value); },"rt":$n[0].Int32,"p":[$n[0].String]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].Char,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (value, startIndex) { return System.String.indexOf(this, String.fromCharCode(value), startIndex); },"rt":$n[0].Int32,"p":[$n[0].Char,$n[0].Int32]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (value, startIndex) { return System.String.indexOf(this, value, startIndex); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"comparisonType","pt":Number,"ps":1}],"tpc":0,"def":function (value, comparisonType) { return ($t = this, System.String.indexOf($t, value, 0, $t.length, comparisonType)); },"rt":$n[0].Int32,"p":[$n[0].String,Number]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].Char,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2}],"tpc":0,"def":function (value, startIndex, count) { return System.String.indexOf(this, String.fromCharCode(value), startIndex, count); },"rt":$n[0].Int32,"p":[$n[0].Char,$n[0].Int32,$n[0].Int32]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"searchValue","pt":$n[0].String,"ps":0},{"n":"fromIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2}],"tpc":0,"def":function (searchValue, fromIndex, count) { return System.String.indexOf(this, searchValue, fromIndex, count); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].Int32]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"comparisonType","pt":Number,"ps":2}],"tpc":0,"def":function (value, startIndex, comparisonType) { return ($t1 = this, System.String.indexOf($t1, value, startIndex, $t1.length, comparisonType)); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,Number]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2},{"n":"comparisonType","pt":Number,"ps":3}],"tpc":0,"def":function (value, startIndex, count, comparisonType) { return System.String.indexOf(this, value, startIndex, count, comparisonType); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].Int32,Number]},{"a":2,"n":"IndexOfAny","t":8,"pi":[{"n":"anyOf","pt":$n[0].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (anyOf) { return System.String.indexOfAny(this, anyOf); },"rt":$n[0].Int32,"p":[$n[0].Array.type(System.Char)]},{"a":2,"n":"IndexOfAny","t":8,"pi":[{"n":"anyOf","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (anyOf, startIndex) { return System.String.indexOfAny(this, anyOf, startIndex); },"rt":$n[0].Int32,"p":[$n[0].Array.type(System.Char),$n[0].Int32]},{"a":2,"n":"IndexOfAny","t":8,"pi":[{"n":"anyOf","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2}],"tpc":0,"def":function (anyOf, startIndex, count) { return System.String.indexOfAny(this, anyOf, startIndex, count); },"rt":$n[0].Int32,"p":[$n[0].Array.type(System.Char),$n[0].Int32,$n[0].Int32]},{"a":2,"n":"Insert","t":8,"pi":[{"n":"startIndex","pt":$n[0].Int32,"ps":0},{"n":"value","pt":$n[0].String,"ps":1}],"tpc":0,"def":function (startIndex, value) { return System.String.insert(startIndex, this, value); },"rt":$n[0].String,"p":[$n[0].Int32,$n[0].String]},{"a":2,"n":"IsNullOrEmpty","is":true,"t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.isNullOrEmpty(value); },"rt":$n[0].Boolean,"p":[$n[0].String]},{"a":2,"n":"IsNullOrWhiteSpace","is":true,"t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.isNullOrWhiteSpace(value); },"rt":$n[0].Boolean,"p":[$n[0].String]},{"a":2,"n":"Join","is":true,"t":8,"pi":[{"n":"separator","pt":$n[0].String,"ps":0},{"n":"values","pt":$n[5].IEnumerable$1(System.String),"ps":1}],"tpc":0,"def":function (separator, values) { return Bridge.toArray(values).join(separator); },"rt":$n[0].String,"p":[$n[0].String,$n[5].IEnumerable$1(System.String)]},{"a":2,"n":"Join","is":true,"t":8,"pi":[{"n":"separator","pt":$n[0].String,"ps":0},{"n":"values","pt":$n[5].IEnumerable$1(System.Object),"ps":1}],"tpc":1,"def":function (T, separator, values) { return Bridge.toArray(values).join(separator); },"rt":$n[0].String,"p":[$n[0].String,$n[5].IEnumerable$1(System.Object)]},{"a":2,"n":"Join","is":true,"t":8,"pi":[{"n":"separator","pt":$n[0].String,"ps":0},{"n":"values","ip":true,"pt":$n[0].Array.type(System.Object),"ps":1}],"tpc":0,"def":function (separator, values) { return Array.prototype.slice.call((arguments, 1)).join(separator); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Array.type(System.Object)]},{"a":2,"n":"Join","is":true,"t":8,"pi":[{"n":"separator","pt":$n[0].String,"ps":0},{"n":"value","ip":true,"pt":$n[0].Array.type(System.String),"ps":1}],"tpc":0,"def":function (separator, value) { return Array.prototype.slice.call((arguments, 1)).join(separator); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Array.type(System.String)]},{"a":2,"n":"Join","is":true,"t":8,"pi":[{"n":"separator","pt":$n[0].String,"ps":0},{"n":"value","pt":$n[0].Array.type(System.String),"ps":1},{"n":"startIndex","pt":$n[0].Int32,"ps":2},{"n":"count","pt":$n[0].Int32,"ps":3}],"tpc":0,"def":function (separator, value, startIndex, count) { return value.slice(startIndex, startIndex + count).join(separator); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Array.type(System.String),$n[0].Int32,$n[0].Int32]},{"a":2,"n":"LastIndexOf","t":8,"pi":[{"n":"value","pt":$n[0].Char,"ps":0}],"tpc":0,"def":function (value) { return this.lastIndexOf(String.fromCharCode(value)); },"rt":$n[0].Int32,"p":[$n[0].Char]},{"a":2,"n":"LastIndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"sn":"lastIndexOf","rt":$n[0].Int32,"p":[$n[0].String]},{"a":2,"n":"LastIndexOf","t":8,"pi":[{"n":"value","pt":$n[0].Char,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (value, startIndex) { return this.lastIndexOf(String.fromCharCode(value), startIndex); },"rt":$n[0].Int32,"p":[$n[0].Char,$n[0].Int32]},{"a":2,"n":"LastIndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1}],"sn":"lastIndexOf","rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32]},{"a":2,"n":"LastIndexOf","t":8,"pi":[{"n":"value","pt":$n[0].Char,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2}],"tpc":0,"def":function (value, startIndex, count) { return System.String.lastIndexOf(this, String.fromCharCode(value), startIndex, count); },"rt":$n[0].Int32,"p":[$n[0].Char,$n[0].Int32,$n[0].Int32]},{"a":2,"n":"LastIndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2}],"tpc":0,"def":function (value, startIndex, count) { return System.String.lastIndexOf(this, value, startIndex, count); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].Int32]},{"a":2,"n":"LastIndexOfAny","t":8,"pi":[{"n":"anyOf","ip":true,"pt":$n[0].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (anyOf) { return System.String.lastIndexOfAny(this, Array.prototype.slice.call((arguments, 0))); },"rt":$n[0].Int32,"p":[$n[0].Array.type(System.Char)]},{"a":2,"n":"LastIndexOfAny","t":8,"pi":[{"n":"anyOf","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (anyOf, startIndex) { return System.String.lastIndexOfAny(this, anyOf, startIndex); },"rt":$n[0].Int32,"p":[$n[0].Array.type(System.Char),$n[0].Int32]},{"a":2,"n":"LastIndexOfAny","t":8,"pi":[{"n":"anyOf","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2}],"tpc":0,"def":function (anyOf, startIndex, count) { return System.String.lastIndexOfAny(this, anyOf, startIndex, count); },"rt":$n[0].Int32,"p":[$n[0].Array.type(System.Char),$n[0].Int32,$n[0].Int32]},{"a":2,"n":"PadLeft","t":8,"pi":[{"n":"totalWidth","pt":$n[0].Int32,"ps":0}],"tpc":0,"def":function (totalWidth) { return System.String.alignString(this, totalWidth); },"rt":$n[0].String,"p":[$n[0].Int32]},{"a":2,"n":"PadLeft","t":8,"pi":[{"n":"totalWidth","pt":$n[0].Int32,"ps":0},{"n":"paddingChar","pt":$n[0].Char,"ps":1}],"tpc":0,"def":function (totalWidth, paddingChar) { return System.String.alignString(this, totalWidth, paddingChar); },"rt":$n[0].String,"p":[$n[0].Int32,$n[0].Char]},{"a":2,"n":"PadRight","t":8,"pi":[{"n":"totalWidth","pt":$n[0].Int32,"ps":0}],"tpc":0,"def":function (totalWidth) { return System.String.alignString(this, -totalWidth); },"rt":$n[0].String,"p":[$n[0].Int32]},{"a":2,"n":"PadRight","t":8,"pi":[{"n":"totalWidth","pt":$n[0].Int32,"ps":0},{"n":"paddingChar","pt":$n[0].Char,"ps":1}],"tpc":0,"def":function (totalWidth, paddingChar) { return System.String.alignString(this, -totalWidth, paddingChar); },"rt":$n[0].String,"p":[$n[0].Int32,$n[0].Char]},{"a":2,"n":"Remove","t":8,"pi":[{"n":"startIndex","pt":$n[0].Int32,"ps":0}],"tpc":0,"def":function (startIndex) { return System.String.remove(this, startIndex); },"rt":$n[0].String,"p":[$n[0].Int32]},{"a":2,"n":"Remove","t":8,"pi":[{"n":"startIndex","pt":$n[0].Int32,"ps":0},{"n":"count","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (startIndex, count) { return System.String.remove(this, startIndex, count); },"rt":$n[0].String,"p":[$n[0].Int32,$n[0].Int32]},{"a":2,"n":"Replace","t":8,"pi":[{"n":"oldChar","pt":$n[0].Char,"ps":0},{"n":"newChar","pt":$n[0].Char,"ps":1}],"tpc":0,"def":function (oldChar, newChar) { return System.String.replaceAll(this, String.fromCharCode(oldChar), String.fromCharCode(newChar)); },"rt":$n[0].String,"p":[$n[0].Char,$n[0].Char]},{"a":2,"n":"Replace","t":8,"pi":[{"n":"oldValue","pt":$n[0].String,"ps":0},{"n":"newValue","pt":$n[0].String,"ps":1}],"tpc":0,"def":function (oldValue, newValue) { return System.String.replaceAll(this, oldValue, newValue); },"rt":$n[0].String,"p":[$n[0].String,$n[0].String]},{"a":2,"n":"Split","t":8,"pi":[{"n":"separator","ip":true,"pt":$n[0].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (separator) { return System.String.split(this, Array.prototype.slice.call((arguments, 0)).map(function(i) {{ return String.fromCharCode(i); }})); },"rt":$n[0].Array.type(System.String),"p":[$n[0].Array.type(System.Char)]},{"a":2,"n":"Split","t":8,"pi":[{"n":"separator","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"count","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (separator, count) { return System.String.split(this, separator.map(function(i) {{ return String.fromCharCode(i); }}), count); },"rt":$n[0].Array.type(System.String),"p":[$n[0].Array.type(System.Char),$n[0].Int32]},{"a":2,"n":"Split","t":8,"pi":[{"n":"separator","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"options","pt":Number,"ps":1}],"tpc":0,"def":function (separator, options) { return System.String.split(this, separator.map(function(i) {{ return String.fromCharCode(i); }}), null, options); },"rt":$n[0].Array.type(System.String),"p":[$n[0].Array.type(System.Char),Number]},{"a":2,"n":"Split","t":8,"pi":[{"n":"separator","pt":$n[0].Array.type(System.String),"ps":0},{"n":"options","pt":Number,"ps":1}],"tpc":0,"def":function (separator, options) { return System.String.split(this, separator, null, options); },"rt":$n[0].Array.type(System.String),"p":[$n[0].Array.type(System.String),Number]},{"a":2,"n":"Split","t":8,"pi":[{"n":"separator","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"count","pt":$n[0].Int32,"ps":1},{"n":"options","pt":Number,"ps":2}],"tpc":0,"def":function (separator, count, options) { return System.String.split(this, separator.map(function(i) {{ return String.fromCharCode(i); }}), count, options); },"rt":$n[0].Array.type(System.String),"p":[$n[0].Array.type(System.Char),$n[0].Int32,Number]},{"a":2,"n":"Split","t":8,"pi":[{"n":"separator","pt":$n[0].Array.type(System.String),"ps":0},{"n":"count","pt":$n[0].Int32,"ps":1},{"n":"options","pt":Number,"ps":2}],"tpc":0,"def":function (separator, count, options) { return System.String.split(this, separator, count, options); },"rt":$n[0].Array.type(System.String),"p":[$n[0].Array.type(System.String),$n[0].Int32,Number]},{"a":2,"n":"StartsWith","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.startsWith(this, value); },"rt":$n[0].Boolean,"p":[$n[0].String]},{"a":2,"n":"Substring","t":8,"pi":[{"n":"startIndex","pt":$n[0].Int32,"ps":0}],"sn":"substr","rt":$n[0].String,"p":[$n[0].Int32]},{"a":2,"n":"Substring","t":8,"pi":[{"n":"startIndex","pt":$n[0].Int32,"ps":0},{"n":"length","pt":$n[0].Int32,"ps":1}],"sn":"substr","rt":$n[0].String,"p":[$n[0].Int32,$n[0].Int32]},{"a":2,"n":"ToCharArray","t":8,"tpc":0,"def":function () { return ($t2 = this, System.String.toCharArray($t2, 0, $t2.length)); },"rt":$n[0].Array.type(System.Char)},{"a":2,"n":"ToCharArray","t":8,"pi":[{"n":"startIndex","pt":$n[0].Int32,"ps":0},{"n":"length","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (startIndex, length) { return System.String.toCharArray(this, startIndex, length); },"rt":$n[0].Array.type(System.Char),"p":[$n[0].Int32,$n[0].Int32]},{"a":2,"n":"ToLower","t":8,"tpc":0,"def":function () { return this.toLowerCase(); },"rt":$n[0].String},{"a":2,"n":"ToUpper","t":8,"tpc":0,"def":function () { return this.toUpperCase(); },"rt":$n[0].String},{"a":2,"n":"Trim","t":8,"sn":"trim","rt":$n[0].String},{"a":2,"n":"Trim","t":8,"pi":[{"n":"trimChars","ip":true,"pt":$n[0].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (trimChars) { return System.String.trim(this, Array.prototype.slice.call((arguments, 0))); },"rt":$n[0].String,"p":[$n[0].Array.type(System.Char)]},{"a":2,"n":"TrimEnd","t":8,"tpc":0,"def":function () { return System.String.trimEnd(this); },"rt":$n[0].String},{"a":2,"n":"TrimEnd","t":8,"pi":[{"n":"trimChars","ip":true,"pt":$n[0].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (trimChars) { return System.String.trimEnd(this, Array.prototype.slice.call((arguments, 0))); },"rt":$n[0].String,"p":[$n[0].Array.type(System.Char)]},{"a":2,"n":"TrimStart","t":8,"tpc":0,"def":function () { return System.String.trimStart(this); },"rt":$n[0].String},{"a":2,"n":"TrimStart","t":8,"pi":[{"n":"trimChars","ip":true,"pt":$n[0].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (trimChars) { return System.String.trimStart(this, Array.prototype.slice.call((arguments, 0))); },"rt":$n[0].String,"p":[$n[0].Array.type(System.Char)]},{"a":2,"n":"op_Equality","is":true,"t":8,"pi":[{"n":"s1","pt":$n[0].String,"ps":0},{"n":"s2","pt":$n[0].String,"ps":1}],"sn":"op_Equality","rt":$n[0].Boolean,"p":[$n[0].String,$n[0].String]},{"a":2,"n":"op_Inequality","is":true,"t":8,"pi":[{"n":"s1","pt":$n[0].String,"ps":0},{"n":"s2","pt":$n[0].String,"ps":1}],"sn":"op_Inequality","rt":$n[0].Boolean,"p":[$n[0].String,$n[0].String]},{"a":2,"n":"Chars","t":16,"rt":$n[0].Char,"p":[$n[0].Int32],"i":true,"ipi":[{"n":"index","pt":$n[0].Int32,"ps":0}],"g":{"a":2,"n":"get_Chars","t":8,"pi":[{"n":"index","pt":$n[0].Int32,"ps":0}],"tpc":0,"def":function (index) { return charCodeAt(index); },"rt":$n[0].Char,"p":[$n[0].Int32]}},{"a":2,"n":"Length","t":16,"rt":$n[0].Int32,"g":{"a":2,"n":"get_Length","t":8,"rt":$n[0].Int32,"fg":"length"},"fn":"length"},{"a":2,"n":"Empty","is":true,"t":4,"rt":$n[0].String,"sn":"Empty"}]}; });
+    $m($n[0].String, function () { return {"att":1048833,"a":2,"m":[{"a":2,"n":".ctor","t":1,"def":function () { return ""; }},{"a":2,"n":".ctor","t":1,"p":[$n[0].Array.type(System.Char)],"pi":[{"n":"value","pt":$n[0].Array.type(System.Char),"ps":0}],"def":function (value) { return System.String.fromCharArray(value); }},{"a":2,"n":".ctor","t":1,"p":[$n[0].Char,$n[0].Int32],"pi":[{"n":"c","pt":$n[0].Char,"ps":0},{"n":"count","pt":$n[0].Int32,"ps":1}],"def":function (c, count) { return System.String.fromCharCount(c, count); }},{"a":2,"n":".ctor","t":1,"p":[$n[0].Array.type(System.Char),$n[0].Int32,$n[0].Int32],"pi":[{"n":"value","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"length","pt":$n[0].Int32,"ps":2}],"def":function (value, startIndex, length) { return System.String.fromCharArray(value, startIndex, length); }},{"a":2,"n":"Clone","t":8,"tpc":0,"def":function () { return this; },"rt":$n[0].Object},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"strB","pt":$n[0].String,"ps":1}],"tpc":0,"def":function (strA, strB) { return System.String.compare(strA, strB); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].String]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"strB","pt":$n[0].String,"ps":1},{"n":"ignoreCase","pt":$n[0].Boolean,"ps":2}],"tpc":0,"def":function (strA, strB, ignoreCase) { return System.String.compare(strA, strB, ignoreCase); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].String,$n[0].Boolean]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"strB","pt":$n[0].String,"ps":1},{"n":"comparisonType","pt":Number,"ps":2}],"tpc":0,"def":function (strA, strB, comparisonType) { return System.String.compare(strA, strB, comparisonType); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].String,Number]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"strB","pt":$n[0].String,"ps":1},{"n":"ignoreCase","pt":$n[0].Boolean,"ps":2},{"n":"culture","pt":$n[4].CultureInfo,"ps":3}],"tpc":0,"def":function (strA, strB, ignoreCase, culture) { return System.String.compare(strA, strB, ignoreCase, culture); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].String,$n[0].Boolean,$n[4].CultureInfo]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"indexA","pt":$n[0].Int32,"ps":1},{"n":"strB","pt":$n[0].String,"ps":2},{"n":"indexB","pt":$n[0].Int32,"ps":3},{"n":"length","pt":$n[0].Int32,"ps":4}],"tpc":0,"def":function (strA, indexA, strB, indexB, length) { return System.String.compare(strA.substr(indexA, length), strB.substr(indexB, length)); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].String,$n[0].Int32,$n[0].Int32]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"indexA","pt":$n[0].Int32,"ps":1},{"n":"strB","pt":$n[0].String,"ps":2},{"n":"indexB","pt":$n[0].Int32,"ps":3},{"n":"length","pt":$n[0].Int32,"ps":4},{"n":"ignoreCase","pt":$n[0].Boolean,"ps":5}],"tpc":0,"def":function (strA, indexA, strB, indexB, length, ignoreCase) { return System.String.compare(strA.substr(indexA, length), strB.substr(indexB, length), ignoreCase); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].String,$n[0].Int32,$n[0].Int32,$n[0].Boolean]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"indexA","pt":$n[0].Int32,"ps":1},{"n":"strB","pt":$n[0].String,"ps":2},{"n":"indexB","pt":$n[0].Int32,"ps":3},{"n":"length","pt":$n[0].Int32,"ps":4},{"n":"comparisonType","pt":Number,"ps":5}],"tpc":0,"def":function (strA, indexA, strB, indexB, length, comparisonType) { return System.String.compare(strA.substr(indexA, length), strB.substr(indexB, length), comparisonType); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].String,$n[0].Int32,$n[0].Int32,Number]},{"a":2,"n":"Compare","is":true,"t":8,"pi":[{"n":"strA","pt":$n[0].String,"ps":0},{"n":"indexA","pt":$n[0].Int32,"ps":1},{"n":"strB","pt":$n[0].String,"ps":2},{"n":"indexB","pt":$n[0].Int32,"ps":3},{"n":"length","pt":$n[0].Int32,"ps":4},{"n":"ignoreCase","pt":$n[0].Boolean,"ps":5},{"n":"culture","pt":$n[4].CultureInfo,"ps":6}],"tpc":0,"def":function (strA, indexA, strB, indexB, length, ignoreCase, culture) { return System.String.compare(strA.substr(indexA, length), strB.substr(indexB, length), ignoreCase, culture); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].String,$n[0].Int32,$n[0].Int32,$n[0].Boolean,$n[4].CultureInfo]},{"a":2,"n":"CompareTo","t":8,"pi":[{"n":"value","pt":$n[0].Object,"ps":0}],"tpc":0,"def":function (value) { return System.String.compare(this, value.toString()); },"rt":$n[0].Int32,"p":[$n[0].Object]},{"a":2,"n":"CompareTo","t":8,"pi":[{"n":"strB","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (strB) { return System.String.compare(this, strB); },"rt":$n[0].Int32,"p":[$n[0].String]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"values","pt":$n[5].IEnumerable$1(System.String),"ps":0}],"tpc":0,"def":function (values) { return System.String.concat(Bridge.toArray(values)); },"rt":$n[0].String,"p":[$n[5].IEnumerable$1(System.String)]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"values","pt":$n[5].IEnumerable$1(System.Object),"ps":0}],"tpc":1,"def":function (T, values) { return System.String.concat(Bridge.toArray(values)); },"rt":$n[0].String,"p":[$n[5].IEnumerable$1(System.Object)]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"arg0","pt":$n[0].Object,"ps":0}],"tpc":0,"def":function (arg0) { return System.String.concat(arg0); },"rt":$n[0].String,"p":[$n[0].Object]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"args","ip":true,"pt":$n[0].Array.type(System.Object),"ps":0}],"tpc":0,"def":function (args) { return System.String.concat(Array.prototype.slice.call((arguments, 0))); },"rt":$n[0].String,"p":[$n[0].Array.type(System.Object)]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"values","ip":true,"pt":$n[0].Array.type(System.String),"ps":0}],"tpc":0,"def":function (values) { return System.String.concat(Array.prototype.slice.call((arguments, 0))); },"rt":$n[0].String,"p":[$n[0].Array.type(System.String)]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"arg0","pt":$n[0].Object,"ps":0},{"n":"arg1","pt":$n[0].Object,"ps":1}],"tpc":0,"def":function (arg0, arg1) { return System.String.concat(arg0, arg1); },"rt":$n[0].String,"p":[$n[0].Object,$n[0].Object]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"str0","pt":$n[0].String,"ps":0},{"n":"str1","pt":$n[0].String,"ps":1}],"tpc":0,"def":function (str0, str1) { return System.String.concat(str0, str1); },"rt":$n[0].String,"p":[$n[0].String,$n[0].String]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"arg0","pt":$n[0].Object,"ps":0},{"n":"arg1","pt":$n[0].Object,"ps":1},{"n":"arg2","pt":$n[0].Object,"ps":2}],"tpc":0,"def":function (arg0, arg1, arg2) { return System.String.concat(arg0, arg1, arg2); },"rt":$n[0].String,"p":[$n[0].Object,$n[0].Object,$n[0].Object]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"str0","pt":$n[0].String,"ps":0},{"n":"str1","pt":$n[0].String,"ps":1},{"n":"str2","pt":$n[0].String,"ps":2}],"tpc":0,"def":function (str0, str1, str2) { return System.String.concat(str0, str1, str2); },"rt":$n[0].String,"p":[$n[0].String,$n[0].String,$n[0].String]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"arg0","pt":$n[0].Object,"ps":0},{"n":"arg1","pt":$n[0].Object,"ps":1},{"n":"arg2","pt":$n[0].Object,"ps":2},{"n":"arg3","pt":$n[0].Object,"ps":3}],"tpc":0,"def":function (arg0, arg1, arg2, arg3) { return System.String.concat(arg0, arg1, arg2, arg3); },"rt":$n[0].String,"p":[$n[0].Object,$n[0].Object,$n[0].Object,$n[0].Object]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"str0","pt":$n[0].String,"ps":0},{"n":"str1","pt":$n[0].String,"ps":1},{"n":"str2","pt":$n[0].String,"ps":2},{"n":"str3","pt":$n[0].String,"ps":3}],"tpc":0,"def":function (str0, str1, str2, str3) { return System.String.concat(str0, str1, str2, str3); },"rt":$n[0].String,"p":[$n[0].String,$n[0].String,$n[0].String,$n[0].String]},{"a":2,"n":"Concat","is":true,"t":8,"pi":[{"n":"arg0","pt":$n[0].Object,"ps":0},{"n":"arg1","pt":$n[0].Object,"ps":1},{"n":"arg2","pt":$n[0].Object,"ps":2},{"n":"arg3","pt":$n[0].Object,"ps":3},{"n":"args","ip":true,"pt":$n[0].Array.type(System.Object),"ps":4}],"tpc":0,"def":function (arg0, arg1, arg2, arg3, args) { return System.String.concat(arg0, arg1, arg2, arg3, args); },"rt":$n[0].String,"p":[$n[0].Object,$n[0].Object,$n[0].Object,$n[0].Object,$n[0].Array.type(System.Object)]},{"a":2,"n":"Contains","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.contains(this,value); },"rt":$n[0].Boolean,"p":[$n[0].String]},{"a":2,"n":"CopyTo","t":8,"pi":[{"n":"sourceIndex","pt":$n[0].Int32,"ps":0},{"n":"destination","pt":$n[0].Array.type(System.Char),"ps":1},{"n":"destinationIndex","pt":$n[0].Int32,"ps":2},{"n":"count","pt":$n[0].Int32,"ps":3}],"tpc":0,"def":function (sourceIndex, destination, destinationIndex, count) { return System.String.copyTo(this, sourceIndex, destination, destinationIndex, count); },"rt":$n[0].Void,"p":[$n[0].Int32,$n[0].Array.type(System.Char),$n[0].Int32,$n[0].Int32]},{"a":2,"n":"EndsWith","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.endsWith(this, value); },"rt":$n[0].Boolean,"p":[$n[0].String]},{"a":2,"n":"Equals","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.equals(this, value); },"rt":$n[0].Boolean,"p":[$n[0].String]},{"a":2,"n":"Equals","is":true,"t":8,"pi":[{"n":"a","pt":$n[0].String,"ps":0},{"n":"b","pt":$n[0].String,"ps":1}],"tpc":0,"def":function (a, b) { return System.String.equals(a, b); },"rt":$n[0].Boolean,"p":[$n[0].String,$n[0].String]},{"a":2,"n":"Equals","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"comparisonType","pt":Number,"ps":1}],"tpc":0,"def":function (value, comparisonType) { return System.String.equals(this, value, comparisonType); },"rt":$n[0].Boolean,"p":[$n[0].String,Number]},{"a":2,"n":"Equals","is":true,"t":8,"pi":[{"n":"a","pt":$n[0].String,"ps":0},{"n":"b","pt":$n[0].String,"ps":1},{"n":"comparisonType","pt":Number,"ps":2}],"tpc":0,"def":function (a, b, comparisonType) { return System.String.equals(a, b, comparisonType); },"rt":$n[0].Boolean,"p":[$n[0].String,$n[0].String,Number]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"format","pt":$n[0].String,"ps":0},{"n":"arg0","pt":$n[0].Object,"ps":1}],"tpc":0,"def":function (format, arg0) { return System.String.format(format, arg0); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Object]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"format","pt":$n[0].String,"ps":0},{"n":"args","ip":true,"pt":$n[0].Array.type(System.Object),"ps":1}],"tpc":0,"def":function (format, args) { return System.String.format(format, args); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Array.type(System.Object)]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"provider","pt":$n[0].IFormatProvider,"ps":0},{"n":"format","pt":$n[0].String,"ps":1},{"n":"arg0","pt":$n[0].Object,"ps":2}],"tpc":0,"def":function (provider, format, arg0) { return System.String.formatProvider(provider, format, arg0); },"rt":$n[0].String,"p":[$n[0].IFormatProvider,$n[0].String,$n[0].Object]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"provider","pt":$n[0].IFormatProvider,"ps":0},{"n":"format","pt":$n[0].String,"ps":1},{"n":"args","ip":true,"pt":$n[0].Array.type(System.Object),"ps":2}],"tpc":0,"def":function (provider, format, args) { return System.String.formatProvider(provider, format, args); },"rt":$n[0].String,"p":[$n[0].IFormatProvider,$n[0].String,$n[0].Array.type(System.Object)]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"format","pt":$n[0].String,"ps":0},{"n":"arg0","pt":$n[0].Object,"ps":1},{"n":"arg1","pt":$n[0].Object,"ps":2}],"tpc":0,"def":function (format, arg0, arg1) { return System.String.format(format, arg0, arg1); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Object,$n[0].Object]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"provider","pt":$n[0].IFormatProvider,"ps":0},{"n":"format","pt":$n[0].String,"ps":1},{"n":"arg0","pt":$n[0].Object,"ps":2},{"n":"arg1","pt":$n[0].Object,"ps":3}],"tpc":0,"def":function (provider, format, arg0, arg1) { return System.String.formatProvider(provider, format, arg0, arg1); },"rt":$n[0].String,"p":[$n[0].IFormatProvider,$n[0].String,$n[0].Object,$n[0].Object]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"format","pt":$n[0].String,"ps":0},{"n":"arg0","pt":$n[0].Object,"ps":1},{"n":"arg1","pt":$n[0].Object,"ps":2},{"n":"arg2","pt":$n[0].Object,"ps":3}],"tpc":0,"def":function (format, arg0, arg1, arg2) { return System.String.format(format, arg0, arg1, arg2); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Object,$n[0].Object,$n[0].Object]},{"a":2,"n":"Format","is":true,"t":8,"pi":[{"n":"provider","pt":$n[0].IFormatProvider,"ps":0},{"n":"format","pt":$n[0].String,"ps":1},{"n":"arg0","pt":$n[0].Object,"ps":2},{"n":"arg1","pt":$n[0].Object,"ps":3},{"n":"arg2","pt":$n[0].Object,"ps":4}],"tpc":0,"def":function (provider, format, arg0, arg1, arg2) { return System.String.formatProvider(provider, format, arg0, arg1, arg2); },"rt":$n[0].String,"p":[$n[0].IFormatProvider,$n[0].String,$n[0].Object,$n[0].Object,$n[0].Object]},{"a":2,"n":"GetEnumerator","t":8,"tpc":0,"def":function () { return Bridge.getEnumerator(this); },"rt":$n[0].CharEnumerator},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].Char,"ps":0}],"tpc":0,"def":function (value) { return System.String.indexOf(this, String.fromCharCode(value)); },"rt":$n[0].Int32,"p":[$n[0].Char]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.indexOf(this, value); },"rt":$n[0].Int32,"p":[$n[0].String]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].Char,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (value, startIndex) { return System.String.indexOf(this, String.fromCharCode(value), startIndex); },"rt":$n[0].Int32,"p":[$n[0].Char,$n[0].Int32]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (value, startIndex) { return System.String.indexOf(this, value, startIndex); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"comparisonType","pt":Number,"ps":1}],"tpc":0,"def":function (value, comparisonType) { return ($t = this, System.String.indexOf($t, value, 0, $t.length, comparisonType)); },"rt":$n[0].Int32,"p":[$n[0].String,Number]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].Char,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2}],"tpc":0,"def":function (value, startIndex, count) { return System.String.indexOf(this, String.fromCharCode(value), startIndex, count); },"rt":$n[0].Int32,"p":[$n[0].Char,$n[0].Int32,$n[0].Int32]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"searchValue","pt":$n[0].String,"ps":0},{"n":"fromIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2}],"tpc":0,"def":function (searchValue, fromIndex, count) { return System.String.indexOf(this, searchValue, fromIndex, count); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].Int32]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"comparisonType","pt":Number,"ps":2}],"tpc":0,"def":function (value, startIndex, comparisonType) { return ($t1 = this, System.String.indexOf($t1, value, startIndex, $t1.length, comparisonType)); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,Number]},{"a":2,"n":"IndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2},{"n":"comparisonType","pt":Number,"ps":3}],"tpc":0,"def":function (value, startIndex, count, comparisonType) { return System.String.indexOf(this, value, startIndex, count, comparisonType); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].Int32,Number]},{"a":2,"n":"IndexOfAny","t":8,"pi":[{"n":"anyOf","pt":$n[0].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (anyOf) { return System.String.indexOfAny(this, anyOf); },"rt":$n[0].Int32,"p":[$n[0].Array.type(System.Char)]},{"a":2,"n":"IndexOfAny","t":8,"pi":[{"n":"anyOf","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (anyOf, startIndex) { return System.String.indexOfAny(this, anyOf, startIndex); },"rt":$n[0].Int32,"p":[$n[0].Array.type(System.Char),$n[0].Int32]},{"a":2,"n":"IndexOfAny","t":8,"pi":[{"n":"anyOf","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2}],"tpc":0,"def":function (anyOf, startIndex, count) { return System.String.indexOfAny(this, anyOf, startIndex, count); },"rt":$n[0].Int32,"p":[$n[0].Array.type(System.Char),$n[0].Int32,$n[0].Int32]},{"a":2,"n":"Insert","t":8,"pi":[{"n":"startIndex","pt":$n[0].Int32,"ps":0},{"n":"value","pt":$n[0].String,"ps":1}],"tpc":0,"def":function (startIndex, value) { return System.String.insert(startIndex, this, value); },"rt":$n[0].String,"p":[$n[0].Int32,$n[0].String]},{"a":2,"n":"IsNullOrEmpty","is":true,"t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.isNullOrEmpty(value); },"rt":$n[0].Boolean,"p":[$n[0].String]},{"a":2,"n":"IsNullOrWhiteSpace","is":true,"t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.isNullOrWhiteSpace(value); },"rt":$n[0].Boolean,"p":[$n[0].String]},{"a":2,"n":"Join","is":true,"t":8,"pi":[{"n":"separator","pt":$n[0].String,"ps":0},{"n":"values","pt":$n[5].IEnumerable$1(System.String),"ps":1}],"tpc":0,"def":function (separator, values) { return Bridge.toArray(values).join(separator); },"rt":$n[0].String,"p":[$n[0].String,$n[5].IEnumerable$1(System.String)]},{"a":2,"n":"Join","is":true,"t":8,"pi":[{"n":"separator","pt":$n[0].String,"ps":0},{"n":"values","pt":$n[5].IEnumerable$1(System.Object),"ps":1}],"tpc":1,"def":function (T, separator, values) { return Bridge.toArray(values).join(separator); },"rt":$n[0].String,"p":[$n[0].String,$n[5].IEnumerable$1(System.Object)]},{"a":2,"n":"Join","is":true,"t":8,"pi":[{"n":"separator","pt":$n[0].String,"ps":0},{"n":"values","ip":true,"pt":$n[0].Array.type(System.Object),"ps":1}],"tpc":0,"def":function (separator, values) { return Array.prototype.slice.call((arguments, 1)).join(separator); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Array.type(System.Object)]},{"a":2,"n":"Join","is":true,"t":8,"pi":[{"n":"separator","pt":$n[0].String,"ps":0},{"n":"value","ip":true,"pt":$n[0].Array.type(System.String),"ps":1}],"tpc":0,"def":function (separator, value) { return Array.prototype.slice.call((arguments, 1)).join(separator); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Array.type(System.String)]},{"a":2,"n":"Join","is":true,"t":8,"pi":[{"n":"separator","pt":$n[0].String,"ps":0},{"n":"value","pt":$n[0].Array.type(System.String),"ps":1},{"n":"startIndex","pt":$n[0].Int32,"ps":2},{"n":"count","pt":$n[0].Int32,"ps":3}],"tpc":0,"def":function (separator, value, startIndex, count) { return value.slice(startIndex, startIndex + count).join(separator); },"rt":$n[0].String,"p":[$n[0].String,$n[0].Array.type(System.String),$n[0].Int32,$n[0].Int32]},{"a":2,"n":"LastIndexOf","t":8,"pi":[{"n":"value","pt":$n[0].Char,"ps":0}],"tpc":0,"def":function (value) { return this.lastIndexOf(String.fromCharCode(value)); },"rt":$n[0].Int32,"p":[$n[0].Char]},{"a":2,"n":"LastIndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"sn":"lastIndexOf","rt":$n[0].Int32,"p":[$n[0].String]},{"a":2,"n":"LastIndexOf","t":8,"pi":[{"n":"value","pt":$n[0].Char,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (value, startIndex) { return this.lastIndexOf(String.fromCharCode(value), startIndex); },"rt":$n[0].Int32,"p":[$n[0].Char,$n[0].Int32]},{"a":2,"n":"LastIndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1}],"sn":"lastIndexOf","rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32]},{"a":2,"n":"LastIndexOf","t":8,"pi":[{"n":"value","pt":$n[0].Char,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2}],"tpc":0,"def":function (value, startIndex, count) { return System.String.lastIndexOf(this, String.fromCharCode(value), startIndex, count); },"rt":$n[0].Int32,"p":[$n[0].Char,$n[0].Int32,$n[0].Int32]},{"a":2,"n":"LastIndexOf","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2}],"tpc":0,"def":function (value, startIndex, count) { return System.String.lastIndexOf(this, value, startIndex, count); },"rt":$n[0].Int32,"p":[$n[0].String,$n[0].Int32,$n[0].Int32]},{"a":2,"n":"LastIndexOfAny","t":8,"pi":[{"n":"anyOf","ip":true,"pt":$n[0].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (anyOf) { return System.String.lastIndexOfAny(this, Array.prototype.slice.call((arguments, 0))); },"rt":$n[0].Int32,"p":[$n[0].Array.type(System.Char)]},{"a":2,"n":"LastIndexOfAny","t":8,"pi":[{"n":"anyOf","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (anyOf, startIndex) { return System.String.lastIndexOfAny(this, anyOf, startIndex); },"rt":$n[0].Int32,"p":[$n[0].Array.type(System.Char),$n[0].Int32]},{"a":2,"n":"LastIndexOfAny","t":8,"pi":[{"n":"anyOf","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"startIndex","pt":$n[0].Int32,"ps":1},{"n":"count","pt":$n[0].Int32,"ps":2}],"tpc":0,"def":function (anyOf, startIndex, count) { return System.String.lastIndexOfAny(this, anyOf, startIndex, count); },"rt":$n[0].Int32,"p":[$n[0].Array.type(System.Char),$n[0].Int32,$n[0].Int32]},{"a":2,"n":"PadLeft","t":8,"pi":[{"n":"totalWidth","pt":$n[0].Int32,"ps":0}],"tpc":0,"def":function (totalWidth) { return System.String.alignString(this, totalWidth); },"rt":$n[0].String,"p":[$n[0].Int32]},{"a":2,"n":"PadLeft","t":8,"pi":[{"n":"totalWidth","pt":$n[0].Int32,"ps":0},{"n":"paddingChar","pt":$n[0].Char,"ps":1}],"tpc":0,"def":function (totalWidth, paddingChar) { return System.String.alignString(this, totalWidth, paddingChar); },"rt":$n[0].String,"p":[$n[0].Int32,$n[0].Char]},{"a":2,"n":"PadRight","t":8,"pi":[{"n":"totalWidth","pt":$n[0].Int32,"ps":0}],"tpc":0,"def":function (totalWidth) { return System.String.alignString(this, -totalWidth); },"rt":$n[0].String,"p":[$n[0].Int32]},{"a":2,"n":"PadRight","t":8,"pi":[{"n":"totalWidth","pt":$n[0].Int32,"ps":0},{"n":"paddingChar","pt":$n[0].Char,"ps":1}],"tpc":0,"def":function (totalWidth, paddingChar) { return System.String.alignString(this, -totalWidth, paddingChar); },"rt":$n[0].String,"p":[$n[0].Int32,$n[0].Char]},{"a":2,"n":"Remove","t":8,"pi":[{"n":"startIndex","pt":$n[0].Int32,"ps":0}],"tpc":0,"def":function (startIndex) { return System.String.remove(this, startIndex); },"rt":$n[0].String,"p":[$n[0].Int32]},{"a":2,"n":"Remove","t":8,"pi":[{"n":"startIndex","pt":$n[0].Int32,"ps":0},{"n":"count","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (startIndex, count) { return System.String.remove(this, startIndex, count); },"rt":$n[0].String,"p":[$n[0].Int32,$n[0].Int32]},{"a":2,"n":"Replace","t":8,"pi":[{"n":"oldChar","pt":$n[0].Char,"ps":0},{"n":"newChar","pt":$n[0].Char,"ps":1}],"tpc":0,"def":function (oldChar, newChar) { return System.String.replaceAll(this, String.fromCharCode(oldChar), String.fromCharCode(newChar)); },"rt":$n[0].String,"p":[$n[0].Char,$n[0].Char]},{"a":2,"n":"Replace","t":8,"pi":[{"n":"oldValue","pt":$n[0].String,"ps":0},{"n":"newValue","pt":$n[0].String,"ps":1}],"tpc":0,"def":function (oldValue, newValue) { return System.String.replaceAll(this, oldValue, newValue); },"rt":$n[0].String,"p":[$n[0].String,$n[0].String]},{"a":2,"n":"Split","t":8,"pi":[{"n":"separator","ip":true,"pt":$n[0].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (separator) { return System.String.split(this, Array.prototype.slice.call((arguments, 0)).map(function(i) {{ return String.fromCharCode(i); }})); },"rt":$n[0].Array.type(System.String),"p":[$n[0].Array.type(System.Char)]},{"a":2,"n":"Split","t":8,"pi":[{"n":"separator","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"count","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (separator, count) { return System.String.split(this, separator.map(function(i) {{ return String.fromCharCode(i); }}), count); },"rt":$n[0].Array.type(System.String),"p":[$n[0].Array.type(System.Char),$n[0].Int32]},{"a":2,"n":"Split","t":8,"pi":[{"n":"separator","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"options","pt":Number,"ps":1}],"tpc":0,"def":function (separator, options) { return System.String.split(this, separator.map(function(i) {{ return String.fromCharCode(i); }}), null, options); },"rt":$n[0].Array.type(System.String),"p":[$n[0].Array.type(System.Char),Number]},{"a":2,"n":"Split","t":8,"pi":[{"n":"separator","pt":$n[0].Array.type(System.String),"ps":0},{"n":"options","pt":Number,"ps":1}],"tpc":0,"def":function (separator, options) { return System.String.split(this, separator, null, options); },"rt":$n[0].Array.type(System.String),"p":[$n[0].Array.type(System.String),Number]},{"a":2,"n":"Split","t":8,"pi":[{"n":"separator","pt":$n[0].Array.type(System.Char),"ps":0},{"n":"count","pt":$n[0].Int32,"ps":1},{"n":"options","pt":Number,"ps":2}],"tpc":0,"def":function (separator, count, options) { return System.String.split(this, separator.map(function(i) {{ return String.fromCharCode(i); }}), count, options); },"rt":$n[0].Array.type(System.String),"p":[$n[0].Array.type(System.Char),$n[0].Int32,Number]},{"a":2,"n":"Split","t":8,"pi":[{"n":"separator","pt":$n[0].Array.type(System.String),"ps":0},{"n":"count","pt":$n[0].Int32,"ps":1},{"n":"options","pt":Number,"ps":2}],"tpc":0,"def":function (separator, count, options) { return System.String.split(this, separator, count, options); },"rt":$n[0].Array.type(System.String),"p":[$n[0].Array.type(System.String),$n[0].Int32,Number]},{"a":2,"n":"StartsWith","t":8,"pi":[{"n":"value","pt":$n[0].String,"ps":0}],"tpc":0,"def":function (value) { return System.String.startsWith(this, value); },"rt":$n[0].Boolean,"p":[$n[0].String]},{"a":2,"n":"Substring","t":8,"pi":[{"n":"startIndex","pt":$n[0].Int32,"ps":0}],"sn":"substr","rt":$n[0].String,"p":[$n[0].Int32]},{"a":2,"n":"Substring","t":8,"pi":[{"n":"startIndex","pt":$n[0].Int32,"ps":0},{"n":"length","pt":$n[0].Int32,"ps":1}],"sn":"substr","rt":$n[0].String,"p":[$n[0].Int32,$n[0].Int32]},{"a":2,"n":"ToCharArray","t":8,"tpc":0,"def":function () { return ($t2 = this, System.String.toCharArray($t2, 0, $t2.length)); },"rt":$n[0].Array.type(System.Char)},{"a":2,"n":"ToCharArray","t":8,"pi":[{"n":"startIndex","pt":$n[0].Int32,"ps":0},{"n":"length","pt":$n[0].Int32,"ps":1}],"tpc":0,"def":function (startIndex, length) { return System.String.toCharArray(this, startIndex, length); },"rt":$n[0].Array.type(System.Char),"p":[$n[0].Int32,$n[0].Int32]},{"a":2,"n":"ToLower","t":8,"tpc":0,"def":function () { return this.toLowerCase(); },"rt":$n[0].String},{"a":2,"n":"ToUpper","t":8,"tpc":0,"def":function () { return this.toUpperCase(); },"rt":$n[0].String},{"a":2,"n":"Trim","t":8,"sn":"trim","rt":$n[0].String},{"a":2,"n":"Trim","t":8,"pi":[{"n":"trimChars","ip":true,"pt":$n[0].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (trimChars) { return System.String.trim(this, Array.prototype.slice.call((arguments, 0))); },"rt":$n[0].String,"p":[$n[0].Array.type(System.Char)]},{"a":2,"n":"TrimEnd","t":8,"tpc":0,"def":function () { return System.String.trimEnd(this); },"rt":$n[0].String},{"a":2,"n":"TrimEnd","t":8,"pi":[{"n":"trimChars","ip":true,"pt":$n[0].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (trimChars) { return System.String.trimEnd(this, Array.prototype.slice.call((arguments, 0))); },"rt":$n[0].String,"p":[$n[0].Array.type(System.Char)]},{"a":2,"n":"TrimStart","t":8,"tpc":0,"def":function () { return System.String.trimStart(this); },"rt":$n[0].String},{"a":2,"n":"TrimStart","t":8,"pi":[{"n":"trimChars","ip":true,"pt":$n[0].Array.type(System.Char),"ps":0}],"tpc":0,"def":function (trimChars) { return System.String.trimStart(this, Array.prototype.slice.call((arguments, 0))); },"rt":$n[0].String,"p":[$n[0].Array.type(System.Char)]},{"a":2,"n":"op_Equality","is":true,"t":8,"pi":[{"n":"s1","pt":$n[0].String,"ps":0},{"n":"s2","pt":$n[0].String,"ps":1}],"sn":"op_Equality","rt":$n[0].Boolean,"p":[$n[0].String,$n[0].String]},{"a":2,"n":"op_Inequality","is":true,"t":8,"pi":[{"n":"s1","pt":$n[0].String,"ps":0},{"n":"s2","pt":$n[0].String,"ps":1}],"sn":"op_Inequality","rt":$n[0].Boolean,"p":[$n[0].String,$n[0].String]},{"a":2,"n":"Chars","t":16,"rt":$n[0].Char,"p":[$n[0].Int32],"i":true,"ipi":[{"n":"index","pt":$n[0].Int32,"ps":0}],"g":{"a":2,"n":"get_Chars","t":8,"pi":[{"n":"index","pt":$n[0].Int32,"ps":0}],"tpc":0,"def":function (index) { return charCodeAt(index); },"rt":$n[0].Char,"p":[$n[0].Int32]}},{"a":2,"n":"Length","t":16,"rt":$n[0].Int32,"g":{"a":2,"n":"get_Length","t":8,"rt":$n[0].Int32,"fg":"length"},"fn":"length"},{"a":2,"n":"Empty","is":true,"t":4,"rt":$n[0].String,"sn":"Empty"}]}; });
     $asm.attr= [Bridge.apply(new Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A2Attribute.$ctor1(64), {
         P: 23
     } ),Bridge.apply(new Bridge.ClientTest.Batch1.Reflection.AssemblyAttributes.A3Attribute.$ctor1(15), {

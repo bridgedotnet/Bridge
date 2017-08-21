@@ -19657,10 +19657,10 @@ Bridge.assembly("Bridge.ClientTest.Batch4", {"Bridge.ClientTest.Batch4.Reflectio
                 Bridge.Test.NUnit.Assert.AreEqual("xxxxx", System.String.fromCharCount(120, 5));
             },
             CharArrayConstructorWorks: function () {
-                Bridge.Test.NUnit.Assert.AreEqual("abC", String.fromCharCode.apply(null, System.Array.init([97, 98, 67], System.Char)));
+                Bridge.Test.NUnit.Assert.AreEqual("abC", System.String.fromCharArray(System.Array.init([97, 98, 67], System.Char)));
             },
             CharArrayWithStartIndexAndLengthConstructorWorks: function () {
-                Bridge.Test.NUnit.Assert.AreEqual("bc", String.fromCharCode.apply(null, System.Array.init([97, 98, 99, 68], System.Char).slice(1, 1 + 2)));
+                Bridge.Test.NUnit.Assert.AreEqual("bc", System.String.fromCharArray(System.Array.init([97, 98, 99, 68], System.Char), 1, 2));
             },
             EmptyFieldWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual("", "");

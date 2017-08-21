@@ -467,6 +467,7 @@
     <Content Include="Resources\.generated\system\guid.js" />
     <Content Include="Resources\.generated\system\random.js" />
     <Content Include="Resources\.generated\system\runtime\compilerServices\formattableStringFactory.js" />
+    <Content Include="Resources\.generated\system\text\encoding.js" />
     <Content Include="Resources\.generated\system\threading\timer.js" />
     <Content Include="Resources\.generated\system\version.js" />
     <Content Include="Resources\.generated\system\version\parseFailureKind.js" />

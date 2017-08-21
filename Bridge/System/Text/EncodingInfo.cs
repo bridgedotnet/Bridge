@@ -2,21 +2,46 @@ using Bridge;
 
 namespace System.Text
 {
-    [External]
     [Reflectable]
-    public class EncodingInfo : IBridgeClass
+    [FileName("system\\text\\encoding.js")]
+    public sealed class EncodingInfo
     {
-        internal extern EncodingInfo(int codePage, string name, string displayName);
+        internal EncodingInfo(int codePage, string name, string displayName)
+        {
+            this.CodePage = codePage;
+            this.Name = name;
+            this.DisplayName = displayName ?? name;
+        }
 
-        public extern int CodePage { get; }
+        public int CodePage
+        {
+            get;
+        }
 
+        public string Name
+        {
+            get;
+        }
 
-        public extern string Name { get; }
+        public string DisplayName
+        {
+            get;
+        }
 
+        public Encoding GetEncoding()
+        {
+            return System.Text.Encoding.GetEncoding(this.CodePage);
+        }
 
-        public extern string DisplayName { get; }
+        public override int GetHashCode()
+        {
+            return this.CodePage;
+        }
 
-
-        public extern Encoding GetEncoding();
+        public override bool Equals(object o)
+        {
+            var that = o as EncodingInfo;
+            return this.CodePage == that?.CodePage;
+        }
     }
 }

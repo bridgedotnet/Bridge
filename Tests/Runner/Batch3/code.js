@@ -14866,7 +14866,7 @@ Bridge.$N1391Result =                     r;
             methods: {
                 TestMethod: function (TType) {
                     var $t;
-                    return ($t = new TType(), $t.TestIntProperty = 2, $t.TestStringProperty = "initializer", $t.TestObjectProperty = String.fromCharCode.apply(null, System.Array.init([105], System.Char)), $t);
+                    return ($t = new TType(), $t.TestIntProperty = 2, $t.TestStringProperty = "initializer", $t.TestObjectProperty = System.String.fromCharArray(System.Array.init([105], System.Char)), $t);
                 },
                 TestCreatingGenericInstanceWithInitializer: function () {
                     Bridge.Test.NUnit.Assert.AreEqual(2, Bridge.ClientTest.Batch3.BridgeIssues.Bridge2157.TestMethod(Bridge.ClientTest.Batch3.BridgeIssues.Bridge2157.TestClass).TestIntProperty);
@@ -14888,7 +14888,7 @@ Bridge.$N1391Result =                     r;
                 this.$initialize();
                 this.TestIntProperty = 1;
                 this.TestStringProperty = "constructor";
-                this.TestObjectProperty = String.fromCharCode.apply(null, System.Array.init([99], System.Char));
+                this.TestObjectProperty = System.String.fromCharArray(System.Array.init([99], System.Char));
             }
         }
     });
