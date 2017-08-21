@@ -24431,10 +24431,8 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
-
-
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
                 }
             }
         }
@@ -33167,6 +33165,18 @@ Bridge.$N1391Result =                     r;
         }
     });
 
+    Bridge.define("BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.ApiResponse$1", function (T) { return {
+        props: {
+            ResultIfSuccessful: Bridge.getDefaultValue(T)
+        },
+        ctors: {
+            ctor: function (resultIfSuccessful) {
+                this.$initialize();
+                this.ResultIfSuccessful = resultIfSuccessful;
+            }
+        }
+    }; });
+
     Bridge.define("BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Bridge3038", {
         statics: {
             methods: {
@@ -33186,6 +33196,33 @@ Bridge.$N1391Result =                     r;
         f1: function (_o46) {
             _o46.add("123", "Test");
             return _o46;
+        }
+    });
+
+    Bridge.define("BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Bridge3071", {
+        statics: {
+            methods: {
+                TestArrayTypeParsing: function () {
+                    var type = Bridge.Reflection.getType("BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.ApiResponse`1[[BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.KeyValuePairDataModel[], Bridge.ClientTest.Batch3]], Bridge.ClientTest.Batch3");
+                    Bridge.Test.NUnit.Assert.AreEqual("BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.ApiResponse`1[[BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.KeyValuePairDataModel[]]]", Bridge.Reflection.getTypeFullName(type));
+
+                    type = Bridge.Reflection.getType("System.Int32[]");
+                    Bridge.Test.NUnit.Assert.AreEqual("System.Int32[]", Bridge.Reflection.getTypeFullName(type));
+
+                    type = Bridge.Reflection.getType("System.Int32[,]");
+                    Bridge.Test.NUnit.Assert.AreEqual("System.Int32[,]", Bridge.Reflection.getTypeFullName(type));
+
+                    type = Bridge.Reflection.getType("System.Int32[,], mscorlib");
+                    Bridge.Test.NUnit.Assert.AreEqual("System.Int32[,]", Bridge.Reflection.getTypeFullName(type));
+                }
+            }
+        }
+    });
+
+    Bridge.define("BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.KeyValuePairDataModel", {
+        fields: {
+            Key: 0,
+            Value: null
         }
     });
 

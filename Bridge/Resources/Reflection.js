@@ -255,7 +255,9 @@
         },
 
         _getAssemblyType: function (asm, name) {
-            var noAsm = false;
+            var noAsm = false,
+                isArray = false,
+                rank = 1;
 
             if (new RegExp(/[\+\`]/).test(name)) {
                 name = name.replace(/\+|\`/g, function(match) { return match === "+" ? "." : "$"});
@@ -266,11 +268,18 @@
                 noAsm = true;
             }
 
+            var m = (/\[(,*)\]$/g).exec(name);
+            if (m) {
+                isArray = true;
+                name = name.substring(0, m.index);
+                rank = m[1].length + 1;
+            }
+
             if (asm.$types) {
                 var t = asm.$types[name] || null;
 
                 if (t) {
-                    return t;
+                    return isArray ? System.Array.type(t, rank) : t;
                 }
 
                 if (asm.name === "mscorlib") {
@@ -295,7 +304,7 @@
                 return null;
             }
 
-            return scope;
+            return isArray ? System.Array.type(scope, rank) : scope;
         },
 
         getAssemblyTypes: function (asm) {
@@ -418,10 +427,30 @@
         _getType: function (typeName, asm, re, noinit) {
             var outer = !re;
 
+            var next = function () {
+                for (; ;) {
+                    var m = re.exec(typeName);
+
+                    if (m && m[0] == "[" && (typeName[m.index + 1] === ']' || typeName[m.index + 1] === ',')) {
+                        continue;
+                    }
+
+                    if (m && m[0] == "]" && (typeName[m.index - 1] === '[' || typeName[m.index - 1] === ',')) {
+                        continue;
+                    }
+
+                    if (m && m[0] == "," && (typeName[m.index + 1] === ']' || typeName[m.index + 1] === ',')) {
+                        continue;
+                    }
+
+                    return m;
+                }                
+            };
+
             re = re || /[[,\]]/g;
 
             var last = re.lastIndex,
-                m = re.exec(typeName),
+                m = next(),
                 tname,
                 targs = [],
                 t,
@@ -439,7 +468,7 @@
                         }
 
                         for (; ;) {
-                            re.exec(typeName);
+                            next();
                             t = Bridge.Reflection._getType(typeName, Bridge.SystemAssembly, re);
 
                             if (!t) {
@@ -456,10 +485,10 @@
                             }
                         }
 
-                        m = re.exec(typeName);
+                        m = next();
 
                         if (m && m[0] === ',') {
-                            re.exec(typeName);
+                            next();
 
                             if (!(asm = System.Reflection.Assembly.assemblies[(re.lastIndex > 0 ? typeName.substring(m.index + 1, re.lastIndex - 1) : typeName.substring(m.index + 1)).trim()])) {
                                 return null;
@@ -471,7 +500,7 @@
                         break;
 
                     case ',':
-                        re.exec(typeName);
+                        next();
 
                         if (!(asm = System.Reflection.Assembly.assemblies[(re.lastIndex > 0 ? typeName.substring(m.index + 1, re.lastIndex - 1) : typeName.substring(m.index + 1)).trim()])) {
                             return null;
