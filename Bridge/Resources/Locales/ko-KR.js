@@ -54,5 +54,17 @@ Bridge.merge(new System.Globalization.CultureInfo("ko-KR", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy'년' M'월'",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 949,
+        CultureName: "ko-KR",
+        EBCDICCodePage: 20833,
+        IsRightToLeft: false,
+        LCID: 1042,
+        listSeparator: ",",
+        MacCodePage: 10003,
+        OEMCodePage: 949,
+        IsReadOnly: true
     })
 });

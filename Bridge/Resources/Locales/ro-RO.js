@@ -54,5 +54,17 @@ Bridge.merge(new System.Globalization.CultureInfo("ro-RO", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1250,
+        CultureName: "ro-RO",
+        EBCDICCodePage: 20880,
+        IsRightToLeft: false,
+        LCID: 1048,
+        listSeparator: ";",
+        MacCodePage: 10029,
+        OEMCodePage: 852,
+        IsReadOnly: true
     })
 });

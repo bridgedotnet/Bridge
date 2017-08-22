@@ -54,5 +54,17 @@ Bridge.merge(new System.Globalization.CultureInfo("fo", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "fo-FO",
+        EBCDICCodePage: 20277,
+        IsRightToLeft: false,
+        LCID: 1080,
+        listSeparator: ";",
+        MacCodePage: 10079,
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

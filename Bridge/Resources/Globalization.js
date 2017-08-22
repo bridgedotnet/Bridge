@@ -283,7 +283,18 @@
                     englishName: "Invariant Language (Invariant Country)",
                     nativeName: "Invariant Language (Invariant Country)",
                     numberFormat: System.Globalization.NumberFormatInfo.invariantInfo,
-                    dateTimeFormat: System.Globalization.DateTimeFormatInfo.invariantInfo
+                    dateTimeFormat: System.Globalization.DateTimeFormatInfo.invariantInfo,
+                    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+                        ANSICodePage: 1252,
+                        CultureName: "",
+                        EBCDICCodePage: 37,
+                        listSeparator: ",",
+                        IsRightToLeft: false,
+                        LCID: 127,
+                        MacCodePage: 10000,
+                        OEMCodePage: 437,
+                        IsReadOnly: true
+                    })
                 });
 
                 this.setCurrentCulture(System.Globalization.CultureInfo.invariantCulture);
@@ -360,8 +371,11 @@
                             "englishName",
                             "nativeName",
                             "numberFormat",
-                            "dateTimeFormat"
+                            "dateTimeFormat",
+                            "TextInfo"
                 ]);
+
+                this.TextInfo.IsReadOnly = false;
             }
         },
 

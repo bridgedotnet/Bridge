@@ -54,5 +54,17 @@ Bridge.merge(new System.Globalization.CultureInfo("ig-NG", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "ig-NG",
+        EBCDICCodePage: 37,
+        IsRightToLeft: false,
+        LCID: 1136,
+        listSeparator: ";",
+        MacCodePage: 10000,
+        OEMCodePage: 437,
+        IsReadOnly: true
     })
 });

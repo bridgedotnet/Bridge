@@ -85,7 +85,7 @@ namespace System
         /// </summary>
         public extern bool IsAbstract
         {
-            [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 128)  != 0)")]
+            [Template("((Bridge.Reflection.getMetaValue({this}, \"att\", 0)  & 128)  != 0)")]
             get;
         }
 
@@ -94,7 +94,7 @@ namespace System
         /// </summary>
         public extern bool IsSealed
         {
-            [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 256)  != 0)")]
+            [Template("((Bridge.Reflection.getMetaValue({this}, \"att\", 0)  & 256)  != 0)")]
             get;
         }
 
@@ -103,7 +103,7 @@ namespace System
         /// </summary>
         public extern Type DeclaringType
         {
-            [Template("Bridge.Reflection.getMetaValue({this}, 'td', null)")]
+            [Template("Bridge.Reflection.getMetaValue({this}, \"td\", null)")]
             get;
         }
 
@@ -112,7 +112,7 @@ namespace System
         /// </summary>
         public extern bool IsNested
         {
-            [Template("(Bridge.Reflection.getMetaValue({this}, 'td', null) != null)")]
+            [Template("(Bridge.Reflection.getMetaValue({this}, \"td\", null) != null)")]
             get;
         }
 
@@ -121,7 +121,7 @@ namespace System
         /// </summary>
         public extern TypeAttributes Attributes
         {
-            [Template("Bridge.Reflection.getMetaValue({this}, 'att', 0)")]
+            [Template("Bridge.Reflection.getMetaValue({this}, \"att\", 0)")]
             get;
         }
 
@@ -348,7 +348,7 @@ namespace System
         /// </summary>
         public extern bool IsPublic
         {
-            [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 7)  == 1)")]
+            [Template("((Bridge.Reflection.getMetaValue({this}, \"att\", 0)  & 7)  == 1)")]
             get;
         }
 
@@ -357,7 +357,7 @@ namespace System
         /// </summary>
         public extern bool IsNotPublic
         {
-            [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 7)  == 0)")]
+            [Template("((Bridge.Reflection.getMetaValue({this}, \"att\", 0)  & 7)  == 0)")]
             get;
         }
 
@@ -366,7 +366,7 @@ namespace System
         /// </summary>
         public extern bool IsNestedPublic
         {
-            [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 7)  == 2)")]
+            [Template("((Bridge.Reflection.getMetaValue({this}, \"att\", 0)  & 7)  == 2)")]
             get;
         }
 
@@ -375,7 +375,7 @@ namespace System
         /// </summary>
         public extern bool IsNestedPrivate
         {
-            [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 7)  == 3)")]
+            [Template("((Bridge.Reflection.getMetaValue({this}, \"att\", 0)  & 7)  == 3)")]
             get;
         }
 
@@ -384,7 +384,7 @@ namespace System
         /// </summary>
         public extern bool IsNestedFamily
         {
-            [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 7)  == 4)")]
+            [Template("((Bridge.Reflection.getMetaValue({this}, \"att\", 0)  & 7)  == 4)")]
             get;
         }
 
@@ -393,7 +393,7 @@ namespace System
         /// </summary>
         public extern bool IsNestedAssembly
         {
-            [Template("((Bridge.Reflection.getMetaValue({this}, 'att', 0)  & 7)  == 5)")]
+            [Template("((Bridge.Reflection.getMetaValue({this}, \"att\", 0)  & 7)  == 5)")]
             get;
         }
 

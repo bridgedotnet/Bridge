@@ -54,5 +54,17 @@ Bridge.merge(new System.Globalization.CultureInfo("lo-LA", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy MMMM",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 0,
+        CultureName: "lo-LA",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 1108,
+        listSeparator: ";",
+        MacCodePage: 2,
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

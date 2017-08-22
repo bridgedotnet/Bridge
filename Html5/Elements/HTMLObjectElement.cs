@@ -8,7 +8,7 @@ namespace Bridge.Html5
     [Name("HTMLObjectElement")]
     public sealed class HTMLObjectElement : HTMLElement<HTMLObjectElement>
     {
-        [Template("document.createElement('object')")]
+        [Template("document.createElement(\"object\")")]
         public extern HTMLObjectElement();
 
         /// <summary>

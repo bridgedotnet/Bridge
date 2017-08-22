@@ -7,7 +7,7 @@ namespace Bridge.Html5
     [Name("HTMLAreaElement")]
     public sealed class HTMLAreaElement : HTMLElement<HTMLAreaElement>
     {
-        [Template("document.createElement('area')")]
+        [Template("document.createElement(\"area\")")]
         public extern HTMLAreaElement();
 
         /// <summary>

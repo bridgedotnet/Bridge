@@ -12,6 +12,8 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("CreateAndInitializationModes - Test", Bridge.Test.Runtime.BridgeClientTestRunner.CreateAndInitializationModesTests.Test);
             QUnit.test("ObjectCreateMode - Test", Bridge.Test.Runtime.BridgeClientTestRunner.CreateModeTests.Test);
             QUnit.test("ObjectInitializationMode - Test", Bridge.Test.Runtime.BridgeClientTestRunner.InitializationModeTests.Test);
+            QUnit.test("Create<T> - TestExternalInterface", Bridge.Test.Runtime.BridgeClientTestRunner.ObjectLiteralCreateTests.TestExternalInterface);
+            QUnit.test("Create<T> - TestClass", Bridge.Test.Runtime.BridgeClientTestRunner.ObjectLiteralCreateTests.TestClass);
             QUnit.module("Activator");
             QUnit.test("ActivatorTests - NonGenericCreateInstanceWithoutArgumentsWorks", Bridge.Test.Runtime.BridgeClientTestRunner.ActivatorTests.NonGenericCreateInstanceWithoutArgumentsWorks);
             QUnit.test("ActivatorTests - NonGenericCreateInstanceWithOneArgumentWorks_SPI_1540", Bridge.Test.Runtime.BridgeClientTestRunner.ActivatorTests.NonGenericCreateInstanceWithOneArgumentWorks_SPI_1540);
@@ -3148,6 +3150,8 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("GetCultureInfoWorks_N2583", Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests.GetCultureInfoWorks_N2583);
             QUnit.test("GetFormatWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests.GetFormatWorks);
             QUnit.test("InvariantWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests.InvariantWorks);
+            QUnit.test("TextInfoViaGetCultureInfoWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests.TextInfoViaGetCultureInfoWorks);
+            QUnit.test("TextInfoViaNewCultureInfoWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests.TextInfoViaNewCultureInfoWorks);
             QUnit.test("DateTimeFormatFirstDayOfWeekWorks_N3013", Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests.DateTimeFormatFirstDayOfWeekWorks_N3013);
         }
     });
@@ -7474,9 +7478,19 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                     var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CultureInfoTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "InvariantWorks()", $t.Line = "68", $t));
                     t.Fixture.InvariantWorks();
                 },
+                TextInfoViaGetCultureInfoWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CultureInfoTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TextInfoViaGetCultureInfoWorks()", $t.Line = "92", $t));
+                    t.Fixture.TextInfoViaGetCultureInfoWorks();
+                },
+                TextInfoViaNewCultureInfoWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CultureInfoTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TextInfoViaNewCultureInfoWorks()", $t.Line = "112", $t));
+                    t.Fixture.TextInfoViaNewCultureInfoWorks();
+                },
                 DateTimeFormatFirstDayOfWeekWorks_N3013: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CultureInfoTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateTimeFormatFirstDayOfWeekWorks_N3013()", $t.Line = "77", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CultureInfoTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateTimeFormatFirstDayOfWeekWorks_N3013()", $t.Line = "133", $t));
                     t.Fixture.DateTimeFormatFirstDayOfWeekWorks_N3013();
                 }
             }
@@ -14516,6 +14530,36 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
         }
     });
 
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ObjectLiteralCreateTests", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ObjectLiteralTests.ObjectLiteralCreateTests)],
+        statics: {
+            methods: {
+                TestExternalInterface: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ObjectLiteralTests.ObjectLiteralCreateTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ObjectLiteralCreateTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestExternalInterface()", $t.Line = "464", $t));
+                    t.Fixture.TestExternalInterface();
+                },
+                TestClass: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.ObjectLiteralTests.ObjectLiteralCreateTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.ObjectLiteralCreateTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestClass()", $t.Line = "496", $t));
+                    t.Fixture.TestClass();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch1", $t.ClassName = "Bridge.ClientTest.ObjectLiteralTests.ObjectLiteralCreateTests", $t.File = "Batch1\\ObjectLiteralTests.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
     Bridge.define("Bridge.Test.Runtime.BridgeClientTestRunner.ObjectTests", {
         inherits: [Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.SimpleTypes.ObjectTests)],
         statics: {
@@ -20298,7 +20342,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             methods: {
                 TestBasic: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestAutoProps).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestAutoProps, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "31", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestAutoProps).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestAutoProps, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "27", $t));
                     Bridge.ClientTest.CSharp6.TestAutoProps.TestBasic();
                 }
             }
@@ -20568,7 +20612,7 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             methods: {
                 TestBasic: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestInterpolatedStrings).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestInterpolatedStrings, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "37", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CSharp6.TestInterpolatedStrings).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestRunner.TestInterpolatedStrings, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestBasic()", $t.Line = "35", $t));
                     Bridge.ClientTest.CSharp6.TestInterpolatedStrings.TestBasic();
                 }
             }

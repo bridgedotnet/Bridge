@@ -497,7 +497,7 @@ namespace Bridge.Translator
                         this.Write(") ? ");
                         this.WriteOpenParentheses();
                         this.UnaryOperatorExpression.Expression.AcceptVisitor(this.Emitter);
-                        this.Write(" = " + JS.Types.SYSTEM_NULLABLE + "." + JS.Funcs.Math.LIFT1 + "('" + (op == UnaryOperatorType.Decrement ? JS.Funcs.Math.DEC : JS.Funcs.Math.INC) + "', ");
+                        this.Write(" = " + JS.Types.SYSTEM_NULLABLE + "." + JS.Funcs.Math.LIFT1 + "(\"" + (op == UnaryOperatorType.Decrement ? JS.Funcs.Math.DEC : JS.Funcs.Math.INC) + "\", ");
                         this.UnaryOperatorExpression.Expression.AcceptVisitor(this.Emitter);
                         this.AddOveflowFlag(typeCode, JS.Funcs.Math.DEC, true);
                         this.Write(")");
@@ -521,7 +521,7 @@ namespace Bridge.Translator
                         this.UnaryOperatorExpression.Expression.AcceptVisitor(this.Emitter);
                         this.WriteComma();
                         this.UnaryOperatorExpression.Expression.AcceptVisitor(this.Emitter);
-                        this.Write(" = " + JS.Types.SYSTEM_NULLABLE + "." + JS.Funcs.Math.LIFT1 + "('" + (op == UnaryOperatorType.PostDecrement ? JS.Funcs.Math.DEC : JS.Funcs.Math.INC) + "', ");
+                        this.Write(" = " + JS.Types.SYSTEM_NULLABLE + "." + JS.Funcs.Math.LIFT1 + "(\"" + (op == UnaryOperatorType.PostDecrement ? JS.Funcs.Math.DEC : JS.Funcs.Math.INC) + "\", ");
                         this.UnaryOperatorExpression.Expression.AcceptVisitor(this.Emitter);
                         this.AddOveflowFlag(typeCode, JS.Funcs.Math.DEC, true);
                         this.Write(")");

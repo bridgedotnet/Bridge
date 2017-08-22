@@ -7,7 +7,7 @@ namespace Bridge.Html5
     [Name("HTMLTableElement")]
     public sealed class HTMLTableElement : HTMLElement<HTMLTableElement>
     {
-        [Template("document.createElement('table')")]
+        [Template("document.createElement(\"table\")")]
         public extern HTMLTableElement();
 
         /// <summary>

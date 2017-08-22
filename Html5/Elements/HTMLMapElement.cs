@@ -7,7 +7,7 @@ namespace Bridge.Html5
     [Name("HTMLMapElement")]
     public sealed class HTMLMapElement : HTMLElement<HTMLMapElement>
     {
-        [Template("document.createElement('map')")]
+        [Template("document.createElement(\"map\")")]
         public extern HTMLMapElement();
 
         /// <summary>

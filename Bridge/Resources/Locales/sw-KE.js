@@ -54,5 +54,17 @@ Bridge.merge(new System.Globalization.CultureInfo("sw-KE", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "sw-KE",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 1089,
+        listSeparator: ";",
+        MacCodePage: 10000,
+        OEMCodePage: 437,
+        IsReadOnly: true
     })
 });

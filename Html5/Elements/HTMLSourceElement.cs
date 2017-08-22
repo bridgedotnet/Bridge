@@ -7,7 +7,7 @@ namespace Bridge.Html5
     [Name("HTMLSourceElement")]
     public sealed class HTMLSourceElement : HTMLElement<HTMLSourceElement>
     {
-        [Template("document.createElement('source')")]
+        [Template("document.createElement(\"source\")")]
         public extern HTMLSourceElement();
 
         /// <summary>

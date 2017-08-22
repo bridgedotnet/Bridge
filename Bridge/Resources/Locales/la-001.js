@@ -54,5 +54,17 @@ Bridge.merge(new System.Globalization.CultureInfo("la-001", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "la-001",
+        EBCDICCodePage: 37,
+        IsRightToLeft: false,
+        LCID: 1142,
+        listSeparator: ",",
+        MacCodePage: 10000,
+        OEMCodePage: 437,
+        IsReadOnly: true
     })
 });

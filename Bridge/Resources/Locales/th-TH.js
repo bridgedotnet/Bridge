@@ -54,5 +54,17 @@ Bridge.merge(new System.Globalization.CultureInfo("th-TH", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 874,
+        CultureName: "th-TH",
+        EBCDICCodePage: 20838,
+        IsRightToLeft: false,
+        LCID: 1054,
+        listSeparator: ",",
+        MacCodePage: 10021,
+        OEMCodePage: 874,
+        IsReadOnly: true
     })
 });

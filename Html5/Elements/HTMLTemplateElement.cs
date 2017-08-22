@@ -7,7 +7,7 @@ namespace Bridge.Html5
     [Name("HTMLTemplateElement")]
     public sealed class HTMLTemplateElement : HTMLElement<HTMLTemplateElement>
     {
-        [Template("document.createElement('template')")]
+        [Template("document.createElement(\"template\")")]
         public extern HTMLTemplateElement();
 
         /// <summary>
