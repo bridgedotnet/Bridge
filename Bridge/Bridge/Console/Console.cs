@@ -434,7 +434,7 @@ namespace Bridge.Utils
 
             if (value != null)
             {
-                //@ v = (value.toString == {}.toString) ? JSON.stringify(value, null, 2) : value.toString();
+                //@ v = (value.toString == { }.toString) ? JSON.stringify(value, null, 2) : value.toString();
             }
 
             if (self.BufferedOutput != null)

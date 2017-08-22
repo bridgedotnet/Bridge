@@ -494,7 +494,7 @@ namespace Bridge.Translator
                 this.Emitter.Comma = false;
 
                 this.WriteNewLine();
-                this.Write("var " + JS.Vars.DBOX_ + " = {};");
+                this.Write("var " + JS.Vars.DBOX_ + " = { };");
                 this.WriteNewLine();
 
                 foreach (var boxedFunction in this.Emitter.NamedBoxedFunctions)
