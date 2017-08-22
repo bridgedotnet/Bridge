@@ -133,11 +133,11 @@ namespace Bridge.Translator
 
                 this.WriteObjectInitializer(objectCreateExpression.Initializer.Elements, type, invocationResolveResult, false);
 
-                if(pos < this.Emitter.Output.Length)
+                if (pos < this.Emitter.Output.Length)
                 {
                     this.WriteSpace();
                 }
-                
+
                 this.WriteCloseBrace();
             }
             else
@@ -264,7 +264,7 @@ namespace Bridge.Translator
             }
             else if (item is ArrayInitializerExpression)
             {
-                var arrayInitializer = (ArrayInitializerExpression) item;
+                var arrayInitializer = (ArrayInitializerExpression)item;
 
                 foreach (var el in arrayInitializer.Elements)
                 {
@@ -274,7 +274,7 @@ namespace Bridge.Translator
             else if (item is IdentifierExpression)
             {
                 this.WriteComma();
-                var identifierExpression = (IdentifierExpression) item;
+                var identifierExpression = (IdentifierExpression)item;
                 new IdentifierBlock(this.Emitter, identifierExpression).Emit();
             }
             else
@@ -288,7 +288,7 @@ namespace Bridge.Translator
         {
             if (expression is ArrayInitializerExpression)
             {
-                var arrayInitializer = (ArrayInitializerExpression) expression;
+                var arrayInitializer = (ArrayInitializerExpression)expression;
 
                 foreach (var el in arrayInitializer.Elements)
                 {
@@ -525,9 +525,9 @@ namespace Bridge.Translator
                     }
                 }
 
-                if(tinfo == null)
+                if (tinfo == null)
                 {
-                    if(mode == 2)
+                    if (mode == 2)
                     {
                         var properties = rr.Member.DeclaringTypeDefinition.GetProperties(null, GetMemberOptions.IgnoreInheritedMembers);
                         foreach (var prop in properties)
@@ -562,7 +562,7 @@ namespace Bridge.Translator
                     }
 
                     return;
-                } 
+                }
 
                 if (mode != 0)
                 {
