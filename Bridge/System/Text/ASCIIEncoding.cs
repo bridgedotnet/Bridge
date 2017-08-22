@@ -87,7 +87,7 @@ namespace System.Text
             {
                 throw new System.ArgumentOutOfRangeException("charCount");
             }
-                
+
             return (int)byteCount;
         }
 

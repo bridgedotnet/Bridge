@@ -56,7 +56,7 @@ namespace System.Text
                 }
             };
 
-            Func<char> fallback = () => 
+            Func<char> fallback = () =>
             {
                 if (this.throwOnInvalid)
                 {
@@ -70,7 +70,7 @@ namespace System.Text
             {
                 outputBytes = new byte[0];
             }
-            
+
             for (var i = 0; i < s.Length; i++)
             {
                 var charcode = s[i];
@@ -90,11 +90,11 @@ namespace System.Text
 
                 if (charcode < 0x80)
                 {
-                    write(new []{ charcode.As<byte>() });
+                    write(new[] { charcode.As<byte>() });
                 }
                 else if (charcode < 0x800)
                 {
-                    write(new []{(0xc0 | (charcode >> 6)).As<byte>(), (0x80 | (charcode & 0x3f)).As<byte>()});
+                    write(new[] { (0xc0 | (charcode >> 6)).As<byte>(), (0x80 | (charcode & 0x3f)).As<byte>() });
                 }
                 else if (charcode < 0xd800 || charcode >= 0xe000)
                 {
@@ -273,7 +273,7 @@ namespace System.Text
             {
                 throw new System.ArgumentOutOfRangeException("charCount");
             }
-                
+
 
             var byteCount = (long)charCount + 1;
             byteCount *= 3;
@@ -282,7 +282,7 @@ namespace System.Text
             {
                 throw new System.ArgumentOutOfRangeException("charCount");
             }
-                
+
             return (int)byteCount;
         }
 

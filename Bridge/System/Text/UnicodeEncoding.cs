@@ -63,7 +63,8 @@ namespace System.Text
 
             Func<char, char> swap = ch => (char)(((ch & 0xFF) << 8) | ((ch >> 8) & 0xFF));
 
-            Action fallback = () => {
+            Action fallback = () =>
+            {
                 if (this.throwOnInvalid)
                 {
                     throw new System.Exception("Invalid character in UTF16 text");
@@ -187,7 +188,7 @@ namespace System.Text
                 }
 
                 var a = bytes[position++];
-                var b = bytes[position++];               
+                var b = bytes[position++];
 
                 var point = (char)((a << 8) | b);
                 if (!this.bigEndian)
@@ -261,7 +262,7 @@ namespace System.Text
             {
                 throw new System.ArgumentOutOfRangeException("charCount");
             }
-                
+
             return (int)byteCount;
         }
 

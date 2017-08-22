@@ -32,7 +32,7 @@ namespace System.Text
         {
             var setD = "A-Za-z0-9" + Escape("'(),-./:?");
 
-            Func<string, string> encode = (str) => 
+            Func<string, string> encode = (str) =>
             {
                 var b = new byte[str.Length * 2];
                 var bi = 0;
@@ -73,7 +73,7 @@ namespace System.Text
             }
 
             writtenBytes = arr.Length;
-            
+
             return new Uint8Array(arr).As<byte[]>();
         }
 
@@ -104,7 +104,8 @@ namespace System.Text
                 }
             };
 
-            Func<string, string> decode = (s) => {
+            Func<string, string> decode = (s) =>
+            {
                 var b = _base64ToArrayBuffer(s);
                 var r = new char[0];
                 for (var i = 0; i < b.Length;)
@@ -131,7 +132,7 @@ namespace System.Text
             {
                 throw new System.ArgumentOutOfRangeException("charCount");
             }
-                
+
             return (int)byteCount;
         }
 

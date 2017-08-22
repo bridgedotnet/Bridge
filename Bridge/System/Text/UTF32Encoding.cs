@@ -30,11 +30,12 @@ namespace System.Text
         public override int CodePage => this.bigEndian ? 1201 : 1200;
         public override string EncodingName => this.bigEndian ? "Unicode (UTF-32 Big-Endian)" : "Unicode (UTF-32)";
 
-        private char[] ToCodePoints (string str)
+        private char[] ToCodePoints(string str)
         {
             char surrogate_1st = '\u0000';
             char[] unicode_codes = new char[0];
-            Action fallback = () => {
+            Action fallback = () =>
+            {
                 if (this.throwOnInvalid)
                 {
                     throw new System.Exception("Invalid character in UTF32 text");
@@ -89,7 +90,7 @@ namespace System.Text
             var hasBuffer = outputBytes != null;
             var recorded = 0;
 
-            Action<byte> write = (ch) => 
+            Action<byte> write = (ch) =>
             {
                 if (hasBuffer)
                 {
@@ -107,7 +108,8 @@ namespace System.Text
                 recorded++;
             };
 
-            Action<uint> write32 = (a) => {
+            Action<uint> write32 = (a) =>
+            {
                 var r = new byte[4];
                 r[0] = (a & 0xFF).As<byte>();
                 r[1] = ((a & 0xFF00) >> 8).As<byte>();
@@ -129,7 +131,7 @@ namespace System.Text
             {
                 outputBytes = new byte[0];
             }
-            
+
             var unicode_codes = this.ToCodePoints(s);
             for (var i = 0; i < unicode_codes.Length; ++i)
             {
@@ -152,7 +154,8 @@ namespace System.Text
             var result = "";
             var endpoint = position + count;
 
-            Action fallback = () => {
+            Action fallback = () =>
+            {
                 if (this.throwOnInvalid)
                 {
                     throw new System.Exception("Invalid character in UTF32 text");
@@ -161,7 +164,8 @@ namespace System.Text
                 result += this.fallbackCharacter.ToString();
             };
 
-            Func<uint?> read32 = () => {
+            Func<uint?> read32 = () =>
+            {
                 if ((position + 4) > endpoint)
                 {
                     position = position + 4;
@@ -223,7 +227,7 @@ namespace System.Text
             if (charCount < 0)
             {
                 throw new System.ArgumentOutOfRangeException("charCount");
-            }                
+            }
 
             var byteCount = (long)charCount + 1;
             byteCount *= 4;
@@ -232,7 +236,7 @@ namespace System.Text
             {
                 throw new System.ArgumentOutOfRangeException("charCount");
             }
-                
+
             return (int)byteCount;
         }
 
@@ -241,14 +245,14 @@ namespace System.Text
             if (byteCount < 0)
             {
                 throw new System.ArgumentOutOfRangeException("byteCount");
-            }                
+            }
 
             var charCount = byteCount / 2 + 2;
 
             if (charCount > 0x7fffffff)
             {
                 throw new System.ArgumentOutOfRangeException("byteCount");
-            }                
+            }
 
             return charCount;
         }
