@@ -1312,7 +1312,6 @@
     <Content Include="Resources\Collections\KeyValuePair.js" />
     <Content Include="Resources\Diagnostics.js" />
     <Content Include="Resources\Convert.js" />
-    <Content Include="Resources\Text\Encoding.js" />
     <Content Include="Resources\Enum.js" />
     <Content Include="Resources\.lib\LongLib.js" />
     <Content Include="Resources\Generator.js" />
