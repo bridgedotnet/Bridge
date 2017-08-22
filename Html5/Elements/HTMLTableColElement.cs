@@ -10,7 +10,7 @@ namespace Bridge.Html5
     [Name("HTMLTableColElement")]
     public sealed class HTMLTableColElement : HTMLElement<HTMLTableColElement>
     {
-        [Template("document.createElement('col')")]
+        [Template("document.createElement(\"col\")")]
         public extern HTMLTableColElement();
 
         [Template("document.createElement({0})")]

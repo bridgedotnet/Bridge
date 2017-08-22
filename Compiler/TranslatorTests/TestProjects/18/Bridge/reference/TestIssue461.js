@@ -2,11 +2,11 @@
         statics: {
             methods: {
                 Test: function Test () {
-                    var input = document.createElement('input');
+                    var input = document.createElement("input");
 
                     input.onchange = Bridge.fn.combine(input.onchange, $asm.$.TestIssue461.Issue461.f1);
 
-                    var anchor = document.createElement('a');
+                    var anchor = document.createElement("a");
 
                     anchor.onclick = Bridge.fn.combine(anchor.onclick, $asm.$.TestIssue461.Issue461.f2);
 
@@ -16,8 +16,8 @@
                     // Tests if Element is still a superclass of all the element classes and the following code compiles
                     var element;
 
-                    element = document.createElement('input');
-                    element = document.createElement('textarea');
+                    element = document.createElement("input");
+                    element = document.createElement("textarea");
                 }
             }
         }

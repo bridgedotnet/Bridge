@@ -9,7 +9,7 @@ namespace Bridge.Html5
     [Name("HTMLHRElement")]
     public sealed class HTMLHRElement : HTMLElement<HTMLHRElement>
     {
-        [Template("document.createElement('hr')")]
+        [Template("document.createElement(\"hr\")")]
         public extern HTMLHRElement();
 
         /// <summary>

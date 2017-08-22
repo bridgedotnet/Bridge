@@ -5,7 +5,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
         statics: {
             methods: {
                 Output: function () {
-                    var inputElement = document.createElement('input');
+                    var inputElement = document.createElement("input");
                     var file = Bridge.cast(inputElement.files, FileList)[0.0];
                 }
             }

@@ -7,7 +7,7 @@ namespace Bridge.Html5
     [Name("HTMLLinkElement")]
     public sealed class HTMLLinkElement : HTMLElement<HTMLLinkElement>
     {
-        [Template("document.createElement('link')")]
+        [Template("document.createElement(\"link\")")]
         public extern HTMLLinkElement();
 
         /// <summary>
