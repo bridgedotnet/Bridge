@@ -101,15 +101,14 @@ namespace Bridge.ClientTest.SimpleTypes
             // Embed the source string in the destination string
             strSource.CopyTo(0, destination, 4, strSource.Length);
 
-            Assert.AreEqual("The changed array", destination.ToString());
+            Assert.AreEqual("The changed array", string.Join("", destination.Select(x => Char.ToString(x))));
 
             strSource = "A different string";
 
             // Embed only a section of the source string in the destination
             strSource.CopyTo(2, destination, 3, 9);
 
-            Assert.AreEqual("Thedifferentarray", destination.ToString());
-
+            Assert.AreEqual("Thedifferentarray", string.Join("", destination.Select(x => Char.ToString(x))));
 
             Assert.Throws<ArgumentNullException>(() => { strSource.CopyTo(0, null, 4, strSource.Length); });
 
@@ -119,7 +118,7 @@ namespace Bridge.ClientTest.SimpleTypes
 
             Assert.Throws<ArgumentOutOfRangeException>(() => { strSource.CopyTo(100, destination, 4, strSource.Length); });
             Assert.Throws<ArgumentOutOfRangeException>(() => { strSource.CopyTo(0, destination, 100, strSource.Length); });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { strSource.CopyTo(0, destination, 4,200); });
+            Assert.Throws<ArgumentOutOfRangeException>(() => { strSource.CopyTo(0, destination, 4, 200); });
         }
 
         [Test]
