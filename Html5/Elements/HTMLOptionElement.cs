@@ -7,7 +7,7 @@ namespace Bridge.Html5
     [Name("HTMLOptionElement")]
     public sealed class HTMLOptionElement : HTMLElement<HTMLOptionElement>
     {
-        [Template("document.createElement('option')")]
+        [Template("document.createElement(\"option\")")]
         public extern HTMLOptionElement();
 
         /// <summary>

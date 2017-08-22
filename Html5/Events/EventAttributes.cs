@@ -6,18 +6,18 @@ namespace Bridge.Html5
         [Template("{0}")]
         Raw = 0,
 
-        [Template("document.getElementById('{0}')")]
+        [Template("document.getElementById(\"{0}\")")]
         GetElementById = 1,
 
-        [Template("document.querySelector('{0}')")]
+        [Template("document.querySelector(\"{0}\")")]
         QuerySelector = 2
     }
 
     [External]
     public abstract class EventAttribute : Bridge.AdapterAttribute
     {
-        public const string Format = "Bridge.on('{0}', {1}, this.{2});";
-        public const string FormatScope = "Bridge.on('{0}', {1}, this.{2}, this);";
+        public const string Format = "Bridge.on(\"{0}\", {1}, this.{2});";
+        public const string FormatScope = "Bridge.on(\"{0}\", {1}, this.{2}, this);";
     }
 
     [External]

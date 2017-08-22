@@ -10,7 +10,7 @@ namespace Bridge.Html5
     [Name("HTMLFormElement")]
     public sealed class HTMLFormElement : HTMLElement<HTMLFormElement>, IEnumerable<HTMLElement>
     {
-        [Template("document.createElement('form')")]
+        [Template("document.createElement(\"form\")")]
         public extern HTMLFormElement();
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Bridge.Html5
         /// Reflects the autocomplete HTML attribute, containing a string that indicates whether the controls in this form can have their values automatically populated by the browser.
         /// </summary>
         [Name("autocomplete")]
-        public AutoComplete AutoComplete;
+        public Union<string, AutoComplete> AutoComplete;
 
         /// <summary>
         /// All the form controls belonging to this form element.

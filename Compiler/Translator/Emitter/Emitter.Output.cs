@@ -342,7 +342,7 @@ namespace Bridge.Translator
                     cjs.Each(md =>
                     {
                         this.WriteIndent(tmp, level);
-                        tmp.AppendFormat("var {0} = require('{1}');", md.VariableName.IsNotEmpty() ? md.VariableName : md.DependencyName, md.DependencyName);
+                        tmp.AppendFormat("var {0} = require(\"{1}\");", md.VariableName.IsNotEmpty() ? md.VariableName : md.DependencyName, md.DependencyName);
                         this.WriteNewLine(tmp);
                     });
 

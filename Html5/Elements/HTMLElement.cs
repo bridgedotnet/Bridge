@@ -9,7 +9,7 @@ namespace Bridge.Html5
     [Name("HTMLElement")]
     public class HTMLElement : Element
     {
-        [Template("document.createElement('div')")]
+        [Template("document.createElement(\"div\")")]
         public extern HTMLElement();
 
         [Template("document.createElement({0})")]

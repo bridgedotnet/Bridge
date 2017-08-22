@@ -7,7 +7,7 @@ namespace Bridge.Html5
     [Name("HTMLOutputElement")]
     public sealed class HTMLOutputElement : HTMLElement<HTMLOutputElement>
     {
-        [Template("document.createElement('output')")]
+        [Template("document.createElement(\"output\")")]
         public extern HTMLOutputElement();
 
         /// <summary>

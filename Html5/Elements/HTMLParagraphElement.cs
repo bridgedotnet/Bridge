@@ -7,7 +7,7 @@ namespace Bridge.Html5
     [Name("HTMLParagraphElement")]
     public sealed class HTMLParagraphElement : HTMLElement<HTMLParagraphElement>
     {
-        [Template("document.createElement('p')")]
+        [Template("document.createElement(\"p\")")]
         public extern HTMLParagraphElement();
     }
 }

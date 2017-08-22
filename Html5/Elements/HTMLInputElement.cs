@@ -9,7 +9,7 @@ namespace Bridge.Html5
     [Name("HTMLInputElement")]
     public sealed class HTMLInputElement : HTMLElement<HTMLInputElement>
     {
-        [Template("document.createElement('input')")]
+        [Template("document.createElement(\"input\")")]
         public extern HTMLInputElement();
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Bridge.Html5
         /// Reflects the autocomplete HTML attribute, indicating whether the value of the control can be automatically completed by the browser. Ignored if the value of the type attribute is hidden, checkbox, radio, file, or a button type (button, submit, reset, image).
         /// </summary>
         [Name("autocomplete")]
-        public AutoComplete AutoComplete;
+        public Union<string, AutoComplete> AutoComplete;
 
         /// <summary>
         /// Reflects the autofocus HTML attribute, which specifies that a form control should have input focus when the page loads, unless the user overrides it, for example by typing in a different control. Only one form element in a document can have the autofocus attribute. It cannot be applied if the type attribute is set to hidden (that is, you cannot automatically set focus to a hidden control).
