@@ -3552,7 +3552,7 @@
                 t,
                 noasm = !asm;
 
-            asm = asm || Bridge.$currentAssembly;
+            //asm = asm || Bridge.$currentAssembly;
 
             if (m) {
                 tname = typeName.substring(last, m.index);
@@ -3565,7 +3565,7 @@
 
                         for (; ;) {
                             next();
-                            t = Bridge.Reflection._getType(typeName, Bridge.SystemAssembly, re);
+                            t = Bridge.Reflection._getType(typeName, null, re);
 
                             if (!t) {
                                 return null;
