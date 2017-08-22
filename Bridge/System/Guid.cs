@@ -520,5 +520,10 @@ namespace System
             _j = r[6];
             _k = r[7];
         }
+
+        private string toJSON()
+        {
+            return this.ToString();
+        }
     }
 }

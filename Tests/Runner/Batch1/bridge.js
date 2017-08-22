@@ -19983,6 +19983,9 @@ Bridge.Class.addExtend(System.String, [System.IComparable$1(System.String), Syst
                 this._j = r[System.Array.index(6, r)];
                 this._k = r[System.Array.index(7, r)];
             },
+            toJSON: function () {
+                return this.toString();
+            },
             $clone: function (to) { return this; }
         }
     });
