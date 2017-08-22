@@ -16651,6 +16651,60 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual("iv", culture.name);
                 Bridge.Test.NUnit.Assert.AreEqual(System.Globalization.DateTimeFormatInfo.invariantInfo, culture.dateTimeFormat);
                 Bridge.Test.NUnit.Assert.AreEqual(System.Globalization.NumberFormatInfo.invariantInfo, culture.numberFormat);
+
+                var textInfo = culture.TextInfo;
+
+                Bridge.Test.NUnit.Assert.NotNull(textInfo);
+                Bridge.Test.NUnit.Assert.AreEqual(1252, textInfo.ANSICodePage);
+                Bridge.Test.NUnit.Assert.AreEqual("", textInfo.CultureName);
+                Bridge.Test.NUnit.Assert.AreEqual(37, textInfo.EBCDICCodePage);
+                Bridge.Test.NUnit.Assert.AreEqual(true, textInfo.IsReadOnly);
+                Bridge.Test.NUnit.Assert.AreEqual(false, textInfo.IsRightToLeft);
+                Bridge.Test.NUnit.Assert.AreEqual(127, textInfo.LCID);
+                Bridge.Test.NUnit.Assert.AreEqual(",", textInfo.ListSeparator);
+                Bridge.Test.NUnit.Assert.AreEqual(10000, textInfo.MacCodePage);
+                Bridge.Test.NUnit.Assert.AreEqual(437, textInfo.OEMCodePage);
+
+                Bridge.Test.NUnit.Assert.Throws$2(System.InvalidOperationException, function () {
+                    textInfo.ListSeparator = "separator";
+                });
+            },
+            TextInfoViaGetCultureInfoWorks: function () {
+                var culture = System.Globalization.CultureInfo.getCultureInfo("nb-NO");
+                var textInfo = culture.TextInfo;
+
+                Bridge.Test.NUnit.Assert.NotNull(textInfo);
+                Bridge.Test.NUnit.Assert.AreEqual(1252, textInfo.ANSICodePage);
+                Bridge.Test.NUnit.Assert.AreEqual("nb-NO", textInfo.CultureName);
+                Bridge.Test.NUnit.Assert.AreEqual(20277, textInfo.EBCDICCodePage);
+                Bridge.Test.NUnit.Assert.AreEqual(true, textInfo.IsReadOnly);
+                Bridge.Test.NUnit.Assert.AreEqual(false, textInfo.IsRightToLeft);
+                Bridge.Test.NUnit.Assert.AreEqual(1044, textInfo.LCID);
+                Bridge.Test.NUnit.Assert.AreEqual(";", textInfo.ListSeparator);
+                Bridge.Test.NUnit.Assert.AreEqual(10000, textInfo.MacCodePage);
+                Bridge.Test.NUnit.Assert.AreEqual(850, textInfo.OEMCodePage);
+
+                Bridge.Test.NUnit.Assert.Throws$2(System.InvalidOperationException, function () {
+                    textInfo.ListSeparator = "separator";
+                });
+            },
+            TextInfoViaNewCultureInfoWorks: function () {
+                var culture = new System.Globalization.CultureInfo("nb-NO");
+                var textInfo = culture.TextInfo;
+
+                Bridge.Test.NUnit.Assert.NotNull(textInfo);
+                Bridge.Test.NUnit.Assert.AreEqual(1252, textInfo.ANSICodePage);
+                Bridge.Test.NUnit.Assert.AreEqual("nb-NO", textInfo.CultureName);
+                Bridge.Test.NUnit.Assert.AreEqual(20277, textInfo.EBCDICCodePage);
+                Bridge.Test.NUnit.Assert.AreEqual(false, textInfo.IsReadOnly);
+                Bridge.Test.NUnit.Assert.AreEqual(false, textInfo.IsRightToLeft);
+                Bridge.Test.NUnit.Assert.AreEqual(1044, textInfo.LCID);
+                Bridge.Test.NUnit.Assert.AreEqual(";", textInfo.ListSeparator);
+                Bridge.Test.NUnit.Assert.AreEqual(10000, textInfo.MacCodePage);
+                Bridge.Test.NUnit.Assert.AreEqual(850, textInfo.OEMCodePage);
+
+                textInfo.ListSeparator = "separator";
+                Bridge.Test.NUnit.Assert.AreEqual("separator", textInfo.ListSeparator);
             },
             DateTimeFormatFirstDayOfWeekWorks_N3013: function () {
                 var isFriday = System.Globalization.CultureInfo.getCurrentCulture().dateTimeFormat.firstDayOfWeek === System.DayOfWeek.Friday;

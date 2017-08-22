@@ -54,5 +54,17 @@ Bridge.merge(new System.Globalization.CultureInfo("ar-KW", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM, yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1256,
+        CultureName: "ar-KW",
+        EBCDICCodePage: 20420,
+        IsRightToLeft: true,
+        LCID: 13313,
+        listSeparator: ";",
+        MacCodePage: 10004,
+        OEMCodePage: 720,
+        IsReadOnly: true
     })
 });

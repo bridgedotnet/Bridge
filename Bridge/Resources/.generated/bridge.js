@@ -5533,6 +5533,46 @@ Bridge.define("System.Exception", {
         }
     });
 
+    // @source textInfo.js
+
+    Bridge.define("System.Globalization.TextInfo", {
+        inherits: [System.ICloneable,System.Object],
+        fields: {
+            listSeparator: null
+        },
+        props: {
+            ANSICodePage: 0,
+            CultureName: null,
+            EBCDICCodePage: 0,
+            IsReadOnly: false,
+            IsRightToLeft: false,
+            LCID: 0,
+            ListSeparator: {
+                get: function () {
+                    return this.listSeparator;
+                },
+                set: function (value) {
+                    this.verifyWritable();
+
+                    this.listSeparator = value;
+                }
+            },
+            MacCodePage: 0,
+            OEMCodePage: 0
+        },
+        alias: ["clone", "System$ICloneable$clone"],
+        methods: {
+            clone: function () {
+                return Bridge.copy(new System.Globalization.TextInfo(), this, System.Array.init(["ANSICodePage", "CultureName", "EBCDICCodePage", "IsRightToLeft", "LCID", "listSeparator", "MacCodePage", "OEMCodePage", "IsReadOnly"], System.String));
+            },
+            verifyWritable: function () {
+                if (this.IsReadOnly) {
+                    throw new System.InvalidOperationException("Instance is read-only.");
+                }
+            }
+        }
+    });
+
     // @source Globalization.js
 
     Bridge.define("System.Globalization.DateTimeFormatInfo", {
@@ -5820,7 +5860,18 @@ Bridge.define("System.Exception", {
                     englishName: "Invariant Language (Invariant Country)",
                     nativeName: "Invariant Language (Invariant Country)",
                     numberFormat: System.Globalization.NumberFormatInfo.invariantInfo,
-                    dateTimeFormat: System.Globalization.DateTimeFormatInfo.invariantInfo
+                    dateTimeFormat: System.Globalization.DateTimeFormatInfo.invariantInfo,
+                    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+                        ANSICodePage: 1252,
+                        CultureName: "",
+                        EBCDICCodePage: 37,
+                        listSeparator: ",",
+                        IsRightToLeft: false,
+                        LCID: 127,
+                        MacCodePage: 10000,
+                        OEMCodePage: 437,
+                        IsReadOnly: true
+                    })
                 });
 
                 this.setCurrentCulture(System.Globalization.CultureInfo.invariantCulture);
@@ -5897,8 +5948,11 @@ Bridge.define("System.Exception", {
                             "englishName",
                             "nativeName",
                             "numberFormat",
-                            "dateTimeFormat"
+                            "dateTimeFormat",
+                            "TextInfo"
                 ]);
+
+                this.TextInfo.IsReadOnly = false;
             }
         },
 

@@ -151,6 +151,7 @@
     <Compile Include="System\ComponentModel\DataAnnotations\Validator.cs" />
     <Compile Include="System\ComponentModel\EditorBrowsableAttribute.cs" />
     <Compile Include="System\DateTimeKind.cs" />
+    <Compile Include="System\Globalization\TextInfo.cs" />
     <Compile Include="System\SerializableAttribute.cs" />
     <Compile Include="Attributes\UnboxAttribute.cs" />
     <Compile Include="Attributes\GlobalMethodsAttribute.cs" />
@@ -452,9 +453,11 @@
     <Content Include="Resources\.generated\system\environment.js" />
     <Content Include="Resources\.generated\system\formattableString.js" />
     <Content Include="Resources\.generated\system\formattableStringImpl.js" />
+    <Content Include="Resources\.generated\system\globalization\textInfo.js" />
     <Content Include="Resources\.generated\system\guid.js" />
     <Content Include="Resources\.generated\system\random.js" />
     <Content Include="Resources\.generated\system\runtime\compilerServices\formattableStringFactory.js" />
+    <Content Include="Resources\.generated\system\text\regularExpressions\regex.js" />
     <Content Include="Resources\.generated\system\threading\timer.js" />
     <Content Include="Resources\.generated\system\version.js" />
     <Content Include="Resources\.generated\system\version\parseFailureKind.js" />

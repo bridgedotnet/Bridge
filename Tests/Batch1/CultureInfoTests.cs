@@ -72,6 +72,62 @@ namespace Bridge.ClientTest
             Assert.AreEqual("iv", culture.Name);
             Assert.AreEqual(DateTimeFormatInfo.InvariantInfo, culture.DateTimeFormat);
             Assert.AreEqual(NumberFormatInfo.InvariantInfo, culture.NumberFormat);
+
+            var textInfo = culture.TextInfo;
+
+            Assert.NotNull(textInfo);
+            Assert.AreEqual(1252, textInfo.ANSICodePage);
+            Assert.AreEqual("", textInfo.CultureName);
+            Assert.AreEqual(37, textInfo.EBCDICCodePage);
+            Assert.AreEqual(true, textInfo.IsReadOnly);
+            Assert.AreEqual(false, textInfo.IsRightToLeft);
+            Assert.AreEqual(127, textInfo.LCID);
+            Assert.AreEqual(",", textInfo.ListSeparator);
+            Assert.AreEqual(10000, textInfo.MacCodePage);
+            Assert.AreEqual(437, textInfo.OEMCodePage);
+
+            Assert.Throws<InvalidOperationException>(() => { textInfo.ListSeparator = "separator"; });
+        }
+
+        [Test]
+        public void TextInfoViaGetCultureInfoWorks()
+        {
+            var culture = CultureInfo.GetCultureInfo("nb-NO");
+            var textInfo = culture.TextInfo;
+
+            Assert.NotNull(textInfo);
+            Assert.AreEqual(1252, textInfo.ANSICodePage);
+            Assert.AreEqual("nb-NO", textInfo.CultureName);
+            Assert.AreEqual(20277, textInfo.EBCDICCodePage);
+            Assert.AreEqual(true, textInfo.IsReadOnly);
+            Assert.AreEqual(false, textInfo.IsRightToLeft);
+            Assert.AreEqual(1044, textInfo.LCID);
+            Assert.AreEqual(";", textInfo.ListSeparator);
+            Assert.AreEqual(10000, textInfo.MacCodePage);
+            Assert.AreEqual(850, textInfo.OEMCodePage);
+
+            Assert.Throws<InvalidOperationException>(() => {  textInfo.ListSeparator = "separator"; } );
+        }
+
+        [Test]
+        public void TextInfoViaNewCultureInfoWorks()
+        {
+            var culture = new CultureInfo("nb-NO");
+            var textInfo = culture.TextInfo;
+
+            Assert.NotNull(textInfo);
+            Assert.AreEqual(1252, textInfo.ANSICodePage);
+            Assert.AreEqual("nb-NO", textInfo.CultureName);
+            Assert.AreEqual(20277, textInfo.EBCDICCodePage);
+            Assert.AreEqual(false, textInfo.IsReadOnly);
+            Assert.AreEqual(false, textInfo.IsRightToLeft);
+            Assert.AreEqual(1044, textInfo.LCID);
+            Assert.AreEqual(";", textInfo.ListSeparator);
+            Assert.AreEqual(10000, textInfo.MacCodePage);
+            Assert.AreEqual(850, textInfo.OEMCodePage);
+
+            textInfo.ListSeparator = "separator";
+            Assert.AreEqual("separator", textInfo.ListSeparator);
         }
 
         [Test]

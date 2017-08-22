@@ -54,5 +54,17 @@ Bridge.merge(new System.Globalization.CultureInfo("zh", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy'年'M'月'",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 936,
+        CultureName: "zh-CN",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 2052,
+        listSeparator: ",",
+        MacCodePage: 10008,
+        OEMCodePage: 936,
+        IsReadOnly: true
     })
 });

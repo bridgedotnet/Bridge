@@ -54,5 +54,17 @@ Bridge.merge(new System.Globalization.CultureInfo("nso-ZA", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy MMMM",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "nso-ZA",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 1132,
+        listSeparator: ";",
+        MacCodePage: 10000,
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

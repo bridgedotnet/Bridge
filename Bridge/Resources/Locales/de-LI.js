@@ -54,5 +54,17 @@ Bridge.merge(new System.Globalization.CultureInfo("de-LI", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "de-LI",
+        EBCDICCodePage: 20273,
+        IsRightToLeft: false,
+        LCID: 5127,
+        listSeparator: ";",
+        MacCodePage: 10000,
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

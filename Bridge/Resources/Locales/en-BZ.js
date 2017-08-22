@@ -54,5 +54,17 @@ Bridge.merge(new System.Globalization.CultureInfo("en-BZ", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "en-BZ",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 10249,
+        listSeparator: ",",
+        MacCodePage: 10000,
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });
