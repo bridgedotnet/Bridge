@@ -8,7 +8,7 @@ namespace Bridge.Html5
     [Name("HTMLUListElement")]
     public sealed class HTMLUListElement : HTMLElement<HTMLUListElement>
     {
-        [Template("document.createElement('ul')")]
+        [Template("document.createElement(\"ul\")")]
         public extern HTMLUListElement();
     }
 }

@@ -179,7 +179,7 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
 
                     for (var i = 0; i < lines.length; i = (i + 1) | 0) {
                         if (i !== 0) {
-                            s = System.String.concat(s, '\n');
+                            s = System.String.concat(s, "\n");
                         }
 
                         s = System.String.concat(s, lines[System.Array.index(i, lines)]);
@@ -195,7 +195,7 @@ Bridge.assembly("Bridge.ClientTestHelper", function ($asm, globals) {
                         return null;
                     }
 
-                    return System.String.concat(s, '\n');
+                    return System.String.concat(s, "\n");
                 }
             }
         }

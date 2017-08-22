@@ -7,7 +7,7 @@ namespace Bridge.Html5
     [Name("HTMLLIElement")]
     public sealed class HTMLLIElement : HTMLElement<HTMLLIElement>
     {
-        [Template("document.createElement('li')")]
+        [Template("document.createElement(\"li\")")]
         public extern HTMLLIElement();
 
         /// <summary>

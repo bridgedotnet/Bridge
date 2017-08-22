@@ -39,6 +39,7 @@
         "Resources/.generated/system/formattableStringImpl.js",
         "Resources/.generated/system/runtime/compilerServices/formattableStringFactory.js",
         "Resources/Exception.js",
+        "Resources/.generated/system/globalization/textInfo.js",
         "Resources/Globalization.js",
         "Resources/Math.js",
         "Resources/Bool.js",

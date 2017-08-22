@@ -1,6 +1,7 @@
 /// <reference path="..\..\Runner\resources\qunit\qunit.d.ts" />
 /// <reference path="..\..\Runner\TypeScript\App1\bridge.d.ts" />
 /// <reference path="..\..\Runner\TypeScript\App1\classes.d.ts" />
+"use strict";
 QUnit.module("TypeScript - Classes");
 QUnit.test("Inheritance", function (assert) {
     var animal = new Classes.Animal.ctor();

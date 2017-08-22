@@ -843,6 +843,8 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
             QUnit.test("#470", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.TestBridgeIssues.N470);
             QUnit.test("#499", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.TestBridgeIssues.N499);
             QUnit.test("#3038 - TestRewriterInBridgeNs", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3038.TestRewriterInBridgeNs);
+            QUnit.test("#3071 - TestArrayTypeParsing", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3071.TestArrayTypeParsing);
+            QUnit.test("#3071 - TestArrayTypeParsingMoreLevel", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3071.TestArrayTypeParsingMoreLevel);
             QUnit.test("#2954 - TestLoopIndexRenaming", Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge2954.TestLoopIndexRenaming);
         }
     });
@@ -13245,6 +13247,36 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest.Batch3", function ($asm, globals)
                 var $t;
                 if (this.context == null) {
                     this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "Bridge.ClientTest.Batch3.BridgeIssues.Bridge3046", $t.File = "Batch3\\BridgeIssues\\3000\\N3046.cs", $t);
+                }
+                return this.context;
+            }
+        }
+    });
+
+    Bridge.define("Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3071", {
+        inherits: [Bridge.Test.Runtime.TestFixture$1(BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Bridge3071)],
+        statics: {
+            methods: {
+                TestArrayTypeParsing: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Bridge3071).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3071, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestArrayTypeParsing()", $t.Line = "15", $t));
+                    BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Bridge3071.TestArrayTypeParsing();
+                },
+                TestArrayTypeParsingMoreLevel: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Bridge3071).BeforeTest(false, assert, Bridge.Test.Runtime.BridgeClientTestBatch3Runner.Bridge3071, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TestArrayTypeParsingMoreLevel()", $t.Line = "31", $t));
+                    BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Bridge3071.TestArrayTypeParsingMoreLevel();
+                }
+            }
+        },
+        fields: {
+            context: null
+        },
+        methods: {
+            GetContext: function () {
+                var $t;
+                if (this.context == null) {
+                    this.context = ($t = new Bridge.Test.Runtime.FixtureContext(), $t.Project = "Batch3", $t.ClassName = "BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Bridge3071", $t.File = "Batch3\\BridgeIssues\\3000\\N3071.cs", $t);
                 }
                 return this.context;
             }

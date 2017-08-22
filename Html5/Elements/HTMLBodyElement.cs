@@ -9,7 +9,7 @@ namespace Bridge.Html5
     [Name("HTMLBodyElement")]
     public sealed class HTMLBodyElement : HTMLElement<HTMLBodyElement>
     {
-        [Template("document.createElement('body')")]
+        [Template("document.createElement(\"body\")")]
         public extern HTMLBodyElement();
 
         /// <summary>

@@ -54,5 +54,17 @@ Bridge.merge(new System.Globalization.CultureInfo("da-GL", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "da-GL",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 4096,
+        listSeparator: ";",
+        MacCodePage: 2,
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

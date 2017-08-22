@@ -16651,6 +16651,60 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual("iv", culture.name);
                 Bridge.Test.NUnit.Assert.AreEqual(System.Globalization.DateTimeFormatInfo.invariantInfo, culture.dateTimeFormat);
                 Bridge.Test.NUnit.Assert.AreEqual(System.Globalization.NumberFormatInfo.invariantInfo, culture.numberFormat);
+
+                var textInfo = culture.TextInfo;
+
+                Bridge.Test.NUnit.Assert.NotNull(textInfo);
+                Bridge.Test.NUnit.Assert.AreEqual(1252, textInfo.ANSICodePage);
+                Bridge.Test.NUnit.Assert.AreEqual("", textInfo.CultureName);
+                Bridge.Test.NUnit.Assert.AreEqual(37, textInfo.EBCDICCodePage);
+                Bridge.Test.NUnit.Assert.AreEqual(true, textInfo.IsReadOnly);
+                Bridge.Test.NUnit.Assert.AreEqual(false, textInfo.IsRightToLeft);
+                Bridge.Test.NUnit.Assert.AreEqual(127, textInfo.LCID);
+                Bridge.Test.NUnit.Assert.AreEqual(",", textInfo.ListSeparator);
+                Bridge.Test.NUnit.Assert.AreEqual(10000, textInfo.MacCodePage);
+                Bridge.Test.NUnit.Assert.AreEqual(437, textInfo.OEMCodePage);
+
+                Bridge.Test.NUnit.Assert.Throws$2(System.InvalidOperationException, function () {
+                    textInfo.ListSeparator = "separator";
+                });
+            },
+            TextInfoViaGetCultureInfoWorks: function () {
+                var culture = System.Globalization.CultureInfo.getCultureInfo("nb-NO");
+                var textInfo = culture.TextInfo;
+
+                Bridge.Test.NUnit.Assert.NotNull(textInfo);
+                Bridge.Test.NUnit.Assert.AreEqual(1252, textInfo.ANSICodePage);
+                Bridge.Test.NUnit.Assert.AreEqual("nb-NO", textInfo.CultureName);
+                Bridge.Test.NUnit.Assert.AreEqual(20277, textInfo.EBCDICCodePage);
+                Bridge.Test.NUnit.Assert.AreEqual(true, textInfo.IsReadOnly);
+                Bridge.Test.NUnit.Assert.AreEqual(false, textInfo.IsRightToLeft);
+                Bridge.Test.NUnit.Assert.AreEqual(1044, textInfo.LCID);
+                Bridge.Test.NUnit.Assert.AreEqual(";", textInfo.ListSeparator);
+                Bridge.Test.NUnit.Assert.AreEqual(10000, textInfo.MacCodePage);
+                Bridge.Test.NUnit.Assert.AreEqual(850, textInfo.OEMCodePage);
+
+                Bridge.Test.NUnit.Assert.Throws$2(System.InvalidOperationException, function () {
+                    textInfo.ListSeparator = "separator";
+                });
+            },
+            TextInfoViaNewCultureInfoWorks: function () {
+                var culture = new System.Globalization.CultureInfo("nb-NO");
+                var textInfo = culture.TextInfo;
+
+                Bridge.Test.NUnit.Assert.NotNull(textInfo);
+                Bridge.Test.NUnit.Assert.AreEqual(1252, textInfo.ANSICodePage);
+                Bridge.Test.NUnit.Assert.AreEqual("nb-NO", textInfo.CultureName);
+                Bridge.Test.NUnit.Assert.AreEqual(20277, textInfo.EBCDICCodePage);
+                Bridge.Test.NUnit.Assert.AreEqual(false, textInfo.IsReadOnly);
+                Bridge.Test.NUnit.Assert.AreEqual(false, textInfo.IsRightToLeft);
+                Bridge.Test.NUnit.Assert.AreEqual(1044, textInfo.LCID);
+                Bridge.Test.NUnit.Assert.AreEqual(";", textInfo.ListSeparator);
+                Bridge.Test.NUnit.Assert.AreEqual(10000, textInfo.MacCodePage);
+                Bridge.Test.NUnit.Assert.AreEqual(850, textInfo.OEMCodePage);
+
+                textInfo.ListSeparator = "separator";
+                Bridge.Test.NUnit.Assert.AreEqual("separator", textInfo.ListSeparator);
             },
             DateTimeFormatFirstDayOfWeekWorks_N3013: function () {
                 var isFriday = System.Globalization.CultureInfo.getCurrentCulture().dateTimeFormat.firstDayOfWeek === System.DayOfWeek.Friday;
@@ -18405,7 +18459,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual("", "");
             },
             NewLineIsAStringContainingOnlyTheNewLineChar: function () {
-                Bridge.Test.NUnit.Assert.AreEqual("\n", '\n');
+                Bridge.Test.NUnit.Assert.AreEqual("\n", "\n");
             },
             OSVersionNull: function () {
                 Bridge.Test.NUnit.Assert.Null(Bridge.unbox(null));
@@ -22053,9 +22107,9 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var $t, $t1, $t2, $t3, $t4, $t5, $t6, $t7, $t8;
                 var arr = System.Array.create(0, null, System.Double, 4, 4);
                 arr.set([1, 2], 2.5);
-                var e1 = ($t = { ntype: 38, t: System.Array.type(System.Double, 2), n: "a" }, $t1 = { ntype: 38, t: System.Int32, n: "b" }, $t2 = { ntype: 38, t: System.Int32, n: "c" }, ($t5 = ($t3 = System.Double, $t4 = [$t1,$t2], { ntype: 6, t: $t3, obj: $t, method: { t: 8, td: System.Array.type($t3, $t4.length), n: 'Get', rt: $t3, p: System.Array.init($t4.length, System.Int32, $t3, true), def: function() { return System.Array.$get.call(this, arguments); } }, args: Bridge.toList($t4) }), { ntype: 18, t: Function, rt: $t5.t, body: $t5, p: Bridge.toList([$t,$t1,$t2]) }));
-                var e2 = ($t6 = System.Double, $t7 = System.Array.init([{ ntype: 38, t: System.Int32, n: "b" }, { ntype: 38, t: System.Int32, n: "c" }], System.Object), { ntype: 6, t: $t6, obj: { ntype: 38, t: System.Array.type(System.Double, 2), n: "a" }, method: { t: 8, td: System.Array.type($t6, $t7.length), n: 'Get', rt: $t6, p: System.Array.init($t7.length, System.Int32, $t6, true), def: function() { return System.Array.$get.call(this, arguments); } }, args: Bridge.toList($t7) });
-                var e3 = ($t8 = System.Double, (function(a, b, c) { return { ntype: 6, t: a, obj: b, method: { t: 8, td: System.Array.type($t8, c.getCount()), n: 'Get', rt: a, p: System.Array.init(c.getCount(), System.Int32, $t8, true), def: function() { return System.Array.$get.call(this, arguments); } }, args: c }; })($t8, { ntype: 38, t: System.Array.type(System.Double, 2), n: "a" }, Bridge.toList(new (Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyEnumerable$1(System.Object))(System.Array.init([{ ntype: 38, t: System.Int32, n: "b" }, { ntype: 38, t: System.Int32, n: "c" }], System.Object)))));
+                var e1 = ($t = { ntype: 38, t: System.Array.type(System.Double, 2), n: "a" }, $t1 = { ntype: 38, t: System.Int32, n: "b" }, $t2 = { ntype: 38, t: System.Int32, n: "c" }, ($t5 = ($t3 = System.Double, $t4 = [$t1,$t2], { ntype: 6, t: $t3, obj: $t, method: { t: 8, td: System.Array.type($t3, $t4.length), n: "Get", rt: $t3, p: System.Array.init($t4.length, System.Int32, $t3, true), def: function() { return System.Array.$get.call(this, arguments); } }, args: Bridge.toList($t4) }), { ntype: 18, t: Function, rt: $t5.t, body: $t5, p: Bridge.toList([$t,$t1,$t2]) }));
+                var e2 = ($t6 = System.Double, $t7 = System.Array.init([{ ntype: 38, t: System.Int32, n: "b" }, { ntype: 38, t: System.Int32, n: "c" }], System.Object), { ntype: 6, t: $t6, obj: { ntype: 38, t: System.Array.type(System.Double, 2), n: "a" }, method: { t: 8, td: System.Array.type($t6, $t7.length), n: "Get", rt: $t6, p: System.Array.init($t7.length, System.Int32, $t6, true), def: function() { return System.Array.$get.call(this, arguments); } }, args: Bridge.toList($t7) });
+                var e3 = ($t8 = System.Double, (function(a, b, c) { return { ntype: 6, t: a, obj: b, method: { t: 8, td: System.Array.type($t8, c.getCount()), n: "Get", rt: a, p: System.Array.init(c.getCount(), System.Int32, $t8, true), def: function() { return System.Array.$get.call(this, arguments); } }, args: c }; })($t8, { ntype: 38, t: System.Array.type(System.Double, 2), n: "a" }, Bridge.toList(new (Bridge.ClientTest.Linq.Expressions.ExpressionTests.MyEnumerable$1(System.Object))(System.Array.init([{ ntype: 38, t: System.Int32, n: "b" }, { ntype: 38, t: System.Int32, n: "c" }], System.Object)))));
 
                 var asserter = function (expr, title) {
                     var $t9;
@@ -26517,7 +26571,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var task = new System.Threading.Tasks.Task(function () {
                     // mutate DOM
                     // observer will be invoked asynchronously
-                    root.appendChild(document.createElement('span'));
+                    root.appendChild(document.createElement("span"));
                 });
 
                 var task1 = task.continueWith($asm.$.Bridge.ClientTest.MutationObserverTests.f2);
@@ -31036,10 +31090,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
         statics: {
             methods: {
                 IsNestedWorks: function () {
-                    Bridge.Test.NUnit.Assert.True((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.L1, 'td', null) != null));
-                    Bridge.Test.NUnit.Assert.True((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.I1, 'td', null) != null));
-                    Bridge.Test.NUnit.Assert.True((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.G$2, 'td', null) != null));
-                    Bridge.Test.NUnit.Assert.False((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests, 'td', null) != null));
+                    Bridge.Test.NUnit.Assert.True((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.L1, "td", null) != null));
+                    Bridge.Test.NUnit.Assert.True((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.I1, "td", null) != null));
+                    Bridge.Test.NUnit.Assert.True((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.G$2, "td", null) != null));
+                    Bridge.Test.NUnit.Assert.False((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests, "td", null) != null));
                 },
                 ContainsGenericParametersWorks: function () {
                     Bridge.Test.NUnit.Assert.False(Bridge.Reflection.hasGenericParameters(Bridge.ClientTest.Reflection.TypeSystemTests.CA2));
@@ -31058,25 +31112,25 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 },
                 DeclaringTypeWorks: function () {
                     var $t, $t1, $t2, $t3, $t4;
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.L1, 'td', null)), "TypeSystemTests");
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.Reflection.getMetaValue(($t = Bridge.Reflection.getMethodGenericArguments(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.TypeSystemTests.L1, 8, 284, "M")))[System.Array.index(0, $t)], 'td', null)), "L1");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.L1, "td", null)), "TypeSystemTests");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.Reflection.getMetaValue(($t = Bridge.Reflection.getMethodGenericArguments(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.TypeSystemTests.L1, 8, 284, "M")))[System.Array.index(0, $t)], "td", null)), "L1");
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.TypeSystemTests.L1, 16, 284, "P").td), "L1");
 
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.L1.L2, 'td', null)), "L1");
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.Reflection.getMetaValue(($t1 = Bridge.Reflection.getMethodGenericArguments(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.TypeSystemTests.L1.L2, 8, 284, "M")))[System.Array.index(0, $t1)], 'td', null)), "L2");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.L1.L2, "td", null)), "L1");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.Reflection.getMetaValue(($t1 = Bridge.Reflection.getMethodGenericArguments(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.TypeSystemTests.L1.L2, 8, 284, "M")))[System.Array.index(0, $t1)], "td", null)), "L2");
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.TypeSystemTests.L1.L2, 16, 284, "P").td), "L2");
 
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.L32, 'td', null)), "TypeSystemTests");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.L32, "td", null)), "TypeSystemTests");
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.TypeSystemTests.L32, 16, 284, "P1").td), "L30");
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.TypeSystemTests.L32, 8, 284, "M1").td), "L32");
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.Reflection.getMetaValue(($t2 = Bridge.Reflection.getMethodGenericArguments(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.TypeSystemTests.L32, 8, 284, "M4")))[System.Array.index(0, $t2)], 'td', null)), "L32");
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.Reflection.getMetaValue(($t3 = Bridge.Reflection.getMethodGenericArguments(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.TypeSystemTests.L32, 8, 284, "M5")))[System.Array.index(0, $t3)], 'td', null)), "L32");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.Reflection.getMetaValue(($t2 = Bridge.Reflection.getMethodGenericArguments(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.TypeSystemTests.L32, 8, 284, "M4")))[System.Array.index(0, $t2)], "td", null)), "L32");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.Reflection.getMetaValue(($t3 = Bridge.Reflection.getMethodGenericArguments(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.TypeSystemTests.L32, 8, 284, "M5")))[System.Array.index(0, $t3)], "td", null)), "L32");
 
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.L31$1, 'td', null)), "TypeSystemTests");
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.L31$1(System.String), 'td', null)), "TypeSystemTests");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.L31$1, "td", null)), "TypeSystemTests");
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.L31$1(System.String), "td", null)), "TypeSystemTests");
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.TypeSystemTests.L31$1(System.Int32), 16, 284, "P1").td), "L30");
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.TypeSystemTests.L31$1, 16, 284, "P1").td), "L30");
-                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getMetaValue(($t4 = Bridge.Reflection.getGenericArguments(Bridge.ClientTest.Reflection.TypeSystemTests.L31$1(System.Int32)))[System.Array.index(0, $t4)], 'td', null), null);
+                    Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getMetaValue(($t4 = Bridge.Reflection.getGenericArguments(Bridge.ClientTest.Reflection.TypeSystemTests.L31$1(System.Int32)))[System.Array.index(0, $t4)], "td", null), null);
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.TypeSystemTests.L31$1, 8, 284, "M1").td), "L30");
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.TypeSystemTests.L31$1(System.Object), 8, 284, "M1").td), "L30");
                     Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getTypeName(Bridge.Reflection.getMembers(Bridge.ClientTest.Reflection.TypeSystemTests.L31$1, 8, 284, "M2").td), "L31`1");
@@ -31216,14 +31270,14 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual("Bridge.ClientTest.Reflection.TypeSystemTests+IG`1[[Bridge.ClientTest.Reflection.TypeSystemTests+G`2[[Bridge.ClientTest.Reflection.TypeSystemTests+G`2[[Bridge.ClientTest.Reflection.TypeSystemTests+C, Bridge.ClientTest],[Bridge.ClientTest.Reflection.TypeSystemTests+IG`1[[System.String, mscorlib]], Bridge.ClientTest]], Bridge.ClientTest],[System.String, mscorlib]], Bridge.ClientTest]]", Bridge.Reflection.getTypeFullName(($t = Bridge.Reflection.getInterfaces(Bridge.ClientTest.Reflection.TypeSystemTests.G$2(System.Int32,Bridge.ClientTest.Reflection.TypeSystemTests.G$2(Bridge.ClientTest.Reflection.TypeSystemTests.C,Bridge.ClientTest.Reflection.TypeSystemTests.IG$1(System.String)))))[System.Array.index(0, $t)]));
             },
             IsAbstractWorks: function () {
-                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA1, 'att', 0)  & 128)  != 0));
-                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA2, 'att', 0)  & 128)  != 0));
-                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.I1, 'att', 0)  & 128)  != 0));
-                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1, 'att', 0)  & 128)  != 0));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS1$1, 'att', 0)  & 128)  != 0));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.C, 'att', 0)  & 128)  != 0));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.E1, 'att', 0)  & 128)  != 0));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.G$2, 'att', 0)  & 128)  != 0));
+                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA1, "att", 0)  & 128)  != 0));
+                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA2, "att", 0)  & 128)  != 0));
+                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.I1, "att", 0)  & 128)  != 0));
+                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1, "att", 0)  & 128)  != 0));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS1$1, "att", 0)  & 128)  != 0));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.C, "att", 0)  & 128)  != 0));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.E1, "att", 0)  & 128)  != 0));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.G$2, "att", 0)  & 128)  != 0));
             },
             IsGenericTypeWorks: function () {
                 Bridge.Test.NUnit.Assert.True(Bridge.Reflection.isGenericType(Bridge.ClientTest.Reflection.TypeSystemTests.G$2));
@@ -31235,112 +31289,112 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.False(Bridge.Reflection.isGenericType(Bridge.ClientTest.Reflection.TypeSystemTests.E1));
             },
             IsPublicWorks: function () {
-                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests, 'att', 0)  & 7)  == 1));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA1, 'att', 0)  & 7)  == 1));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA2, 'att', 0)  & 7)  == 1));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.I1, 'att', 0)  & 7)  == 1));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1, 'att', 0)  & 7)  == 1));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS1$1, 'att', 0)  & 7)  == 1));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS2$2, 'att', 0)  & 7)  == 1));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS3, 'att', 0)  & 7)  == 1));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.C, 'att', 0)  & 7)  == 1));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.E1, 'att', 0)  & 7)  == 1));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.G$2, 'att', 0)  & 7)  == 1));
+                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests, "att", 0)  & 7)  == 1));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA1, "att", 0)  & 7)  == 1));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA2, "att", 0)  & 7)  == 1));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.I1, "att", 0)  & 7)  == 1));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1, "att", 0)  & 7)  == 1));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS1$1, "att", 0)  & 7)  == 1));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS2$2, "att", 0)  & 7)  == 1));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS3, "att", 0)  & 7)  == 1));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.C, "att", 0)  & 7)  == 1));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.E1, "att", 0)  & 7)  == 1));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.G$2, "att", 0)  & 7)  == 1));
             },
             IsNestedPublicWorks: function () {
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests, 'att', 0)  & 7)  == 2));
-                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA1, 'att', 0)  & 7)  == 2));
-                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA2, 'att', 0)  & 7)  == 2));
-                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.I1, 'att', 0)  & 7)  == 2));
-                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1, 'att', 0)  & 7)  == 2));
-                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS1$1, 'att', 0)  & 7)  == 2));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS2$2, 'att', 0)  & 7)  == 2));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS3, 'att', 0)  & 7)  == 2));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.L1, 'att', 0)  & 7)  == 2));
-                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.C, 'att', 0)  & 7)  == 2));
-                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.E1, 'att', 0)  & 7)  == 2));
-                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.G$2, 'att', 0)  & 7)  == 2));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests, "att", 0)  & 7)  == 2));
+                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA1, "att", 0)  & 7)  == 2));
+                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA2, "att", 0)  & 7)  == 2));
+                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.I1, "att", 0)  & 7)  == 2));
+                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1, "att", 0)  & 7)  == 2));
+                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS1$1, "att", 0)  & 7)  == 2));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS2$2, "att", 0)  & 7)  == 2));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS3, "att", 0)  & 7)  == 2));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.L1, "att", 0)  & 7)  == 2));
+                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.C, "att", 0)  & 7)  == 2));
+                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.E1, "att", 0)  & 7)  == 2));
+                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.G$2, "att", 0)  & 7)  == 2));
             },
             IsNestedPrivateWorks: function () {
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests, 'att', 0)  & 7)  == 3));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA1, 'att', 0)  & 7)  == 3));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA2, 'att', 0)  & 7)  == 3));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.I1, 'att', 0)  & 7)  == 3));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1, 'att', 0)  & 7)  == 3));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS1$1, 'att', 0)  & 7)  == 3));
-                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS2$2, 'att', 0)  & 7)  == 3));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS3, 'att', 0)  & 7)  == 3));
-                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.L1, 'att', 0)  & 7)  == 3));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.C, 'att', 0)  & 7)  == 3));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.E1, 'att', 0)  & 7)  == 3));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.G$2, 'att', 0)  & 7)  == 3));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests, "att", 0)  & 7)  == 3));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA1, "att", 0)  & 7)  == 3));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA2, "att", 0)  & 7)  == 3));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.I1, "att", 0)  & 7)  == 3));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1, "att", 0)  & 7)  == 3));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS1$1, "att", 0)  & 7)  == 3));
+                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS2$2, "att", 0)  & 7)  == 3));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS3, "att", 0)  & 7)  == 3));
+                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.L1, "att", 0)  & 7)  == 3));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.C, "att", 0)  & 7)  == 3));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.E1, "att", 0)  & 7)  == 3));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.G$2, "att", 0)  & 7)  == 3));
             },
             IsNestedFamilyWorks: function () {
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests, 'att', 0)  & 7)  == 4));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA1, 'att', 0)  & 7)  == 4));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA2, 'att', 0)  & 7)  == 4));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.I1, 'att', 0)  & 7)  == 4));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1, 'att', 0)  & 7)  == 4));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS1$1, 'att', 0)  & 7)  == 4));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS2$2, 'att', 0)  & 7)  == 4));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS3, 'att', 0)  & 7)  == 4));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.L1, 'att', 0)  & 7)  == 4));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.C, 'att', 0)  & 7)  == 4));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.E1, 'att', 0)  & 7)  == 4));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.G$2, 'att', 0)  & 7)  == 4));
-                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.ProtectedClass, 'att', 0)  & 7)  == 4));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.ProtectedInternalClass, 'att', 0)  & 7)  == 4));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests, "att", 0)  & 7)  == 4));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA1, "att", 0)  & 7)  == 4));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA2, "att", 0)  & 7)  == 4));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.I1, "att", 0)  & 7)  == 4));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1, "att", 0)  & 7)  == 4));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS1$1, "att", 0)  & 7)  == 4));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS2$2, "att", 0)  & 7)  == 4));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS3, "att", 0)  & 7)  == 4));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.L1, "att", 0)  & 7)  == 4));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.C, "att", 0)  & 7)  == 4));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.E1, "att", 0)  & 7)  == 4));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.G$2, "att", 0)  & 7)  == 4));
+                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.ProtectedClass, "att", 0)  & 7)  == 4));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.ProtectedInternalClass, "att", 0)  & 7)  == 4));
             },
             IsNestedAssemblyWorks: function () {
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests, 'att', 0)  & 7)  == 5));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA1, 'att', 0)  & 7)  == 5));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA2, 'att', 0)  & 7)  == 5));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.I1, 'att', 0)  & 7)  == 5));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1, 'att', 0)  & 7)  == 5));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS1$1, 'att', 0)  & 7)  == 5));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS2$2, 'att', 0)  & 7)  == 5));
-                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS3, 'att', 0)  & 7)  == 5));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.L1, 'att', 0)  & 7)  == 5));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.C, 'att', 0)  & 7)  == 5));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.E1, 'att', 0)  & 7)  == 5));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.G$2, 'att', 0)  & 7)  == 5));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.ProtectedClass, 'att', 0)  & 7)  == 5));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.ProtectedInternalClass, 'att', 0)  & 7)  == 5));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests, "att", 0)  & 7)  == 5));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA1, "att", 0)  & 7)  == 5));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA2, "att", 0)  & 7)  == 5));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.I1, "att", 0)  & 7)  == 5));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1, "att", 0)  & 7)  == 5));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS1$1, "att", 0)  & 7)  == 5));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS2$2, "att", 0)  & 7)  == 5));
+                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS3, "att", 0)  & 7)  == 5));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.L1, "att", 0)  & 7)  == 5));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.C, "att", 0)  & 7)  == 5));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.E1, "att", 0)  & 7)  == 5));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.G$2, "att", 0)  & 7)  == 5));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.ProtectedClass, "att", 0)  & 7)  == 5));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.ProtectedInternalClass, "att", 0)  & 7)  == 5));
             },
             IsNotPublicWorks: function () {
-                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Utilities.DecimalHelper, 'att', 0)  & 7)  == 0));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests, 'att', 0)  & 7)  == 0));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA1, 'att', 0)  & 7)  == 0));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA2, 'att', 0)  & 7)  == 0));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.I1, 'att', 0)  & 7)  == 0));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1, 'att', 0)  & 7)  == 0));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS1$1, 'att', 0)  & 7)  == 0));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS2$2, 'att', 0)  & 7)  == 0));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS3, 'att', 0)  & 7)  == 0));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.C, 'att', 0)  & 7)  == 0));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.E1, 'att', 0)  & 7)  == 0));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.G$2, 'att', 0)  & 7)  == 0));
+                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Utilities.DecimalHelper, "att", 0)  & 7)  == 0));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests, "att", 0)  & 7)  == 0));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA1, "att", 0)  & 7)  == 0));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA2, "att", 0)  & 7)  == 0));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.I1, "att", 0)  & 7)  == 0));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1, "att", 0)  & 7)  == 0));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS1$1, "att", 0)  & 7)  == 0));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS2$2, "att", 0)  & 7)  == 0));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS3, "att", 0)  & 7)  == 0));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.C, "att", 0)  & 7)  == 0));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.E1, "att", 0)  & 7)  == 0));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.G$2, "att", 0)  & 7)  == 0));
             },
             IsSealedWorks: function () {
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.G$2, 'att', 0)  & 256)  != 0));
-                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(System.Object, 'att', 0)  & 256)  != 0));
-                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(System.String, 'att', 0)  & 256)  != 0));
-                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(System.Int32, 'att', 0)  & 256)  != 0));
-                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS1$1, 'att', 0)  & 256)  != 0));
-                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS2$2, 'att', 0)  & 256)  != 0));
-                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS3, 'att', 0)  & 256)  != 0));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.G$2, "att", 0)  & 256)  != 0));
+                Bridge.Test.NUnit.Assert.False(((Bridge.Reflection.getMetaValue(System.Object, "att", 0)  & 256)  != 0));
+                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(System.String, "att", 0)  & 256)  != 0));
+                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(System.Int32, "att", 0)  & 256)  != 0));
+                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS1$1, "att", 0)  & 256)  != 0));
+                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS2$2, "att", 0)  & 256)  != 0));
+                Bridge.Test.NUnit.Assert.True(((Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS3, "att", 0)  & 256)  != 0));
             },
             AttributesWorks: function () {
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA1, 'att', 0), 1048706);
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA2, 'att', 0), 1048706);
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests, 'att', 0), 1048577);
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.B, 'att', 0), 1048578);
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.I1, 'att', 0), 162);
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1, 'att', 0), 162);
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS1$1, 'att', 0), 1048834);
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS2$2, 'att', 0), 1048835);
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS3, 'att', 0), 1048837);
-                Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.E1, 'att', 0), 258);
+                Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA1, "att", 0), 1048706);
+                Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CA2, "att", 0), 1048706);
+                Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests, "att", 0), 1048577);
+                Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.B, "att", 0), 1048578);
+                Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.I1, "att", 0), 162);
+                Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.IG$1, "att", 0), 162);
+                Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS1$1, "att", 0), 1048834);
+                Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS2$2, "att", 0), 1048835);
+                Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.CS3, "att", 0), 1048837);
+                Bridge.Test.NUnit.Assert.AreEqual(Bridge.Reflection.getMetaValue(Bridge.ClientTest.Reflection.TypeSystemTests.E1, "att", 0), 258);
             },
             GetEnumNamesWorks: function () {
                 Bridge.Test.NUnit.Assert.AreEqual(System.Enum.getNames(Bridge.ClientTest.Reflection.TypeSystemTests.E0), System.Array.init(["V3", "V2", "V1"], System.String));
@@ -34579,13 +34633,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 this.AssertIsDecimalAndEqualTo(System.Nullable.lift1("neg", x1), Bridge.box(-3, System.Int32));
                 this.AssertIsDecimalAndEqualTo(System.Nullable.lift2("add", x1, System.Decimal(4.0)), Bridge.box(7, System.Int32));
                 this.AssertIsDecimalAndEqualTo(System.Nullable.lift2("sub", x1, System.Decimal(2.0)), Bridge.box(1, System.Int32));
-                this.AssertIsDecimalAndEqualTo(Bridge.hasValue(x1) ? ($t = x1, x1 = System.Nullable.lift1('inc', x1), $t) : null, Bridge.box(3, System.Int32));
+                this.AssertIsDecimalAndEqualTo(Bridge.hasValue(x1) ? ($t = x1, x1 = System.Nullable.lift1("inc", x1), $t) : null, Bridge.box(3, System.Int32));
                 this.AssertIsDecimalAndEqualTo(x1, Bridge.box(4, System.Int32));
-                this.AssertIsDecimalAndEqualTo(Bridge.hasValue(x1) ? (x1 = System.Nullable.lift1('inc', x1)) : null, Bridge.box(5, System.Int32));
+                this.AssertIsDecimalAndEqualTo(Bridge.hasValue(x1) ? (x1 = System.Nullable.lift1("inc", x1)) : null, Bridge.box(5, System.Int32));
                 this.AssertIsDecimalAndEqualTo(x1, Bridge.box(5, System.Int32));
-                this.AssertIsDecimalAndEqualTo(Bridge.hasValue(x1) ? ($t = x1, x1 = System.Nullable.lift1('dec', x1), $t) : null, Bridge.box(5, System.Int32));
+                this.AssertIsDecimalAndEqualTo(Bridge.hasValue(x1) ? ($t = x1, x1 = System.Nullable.lift1("dec", x1), $t) : null, Bridge.box(5, System.Int32));
                 this.AssertIsDecimalAndEqualTo(x1, Bridge.box(4, System.Int32));
-                this.AssertIsDecimalAndEqualTo(Bridge.hasValue(x1) ? (x1 = System.Nullable.lift1('dec', x1)) : null, Bridge.box(3, System.Int32));
+                this.AssertIsDecimalAndEqualTo(Bridge.hasValue(x1) ? (x1 = System.Nullable.lift1("dec", x1)) : null, Bridge.box(3, System.Int32));
                 this.AssertIsDecimalAndEqualTo(x1, Bridge.box(3, System.Int32));
                 this.AssertIsDecimalAndEqualTo(System.Nullable.lift2("mul", x1, System.Decimal(3.0)), Bridge.box(9, System.Int32));
                 this.AssertIsDecimalAndEqualTo(System.Nullable.lift2("div", x1, System.Decimal(2.0)), Bridge.box(1.5, System.Double, System.Double.format, System.Double.getHashCode));
@@ -34607,13 +34661,13 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 Bridge.Test.NUnit.Assert.AreEqual(null, System.Nullable.lift2("add", System.Decimal(4.0), x2));
                 Bridge.Test.NUnit.Assert.AreEqual(null, System.Nullable.lift2("sub", x2, System.Decimal(2.0)));
                 Bridge.Test.NUnit.Assert.AreEqual(null, System.Nullable.lift2("sub", System.Decimal(2.0), x2));
-                Bridge.Test.NUnit.Assert.AreEqual(null, Bridge.hasValue(x2) ? ($t = x2, x2 = System.Nullable.lift1('inc', x2), $t) : null);
+                Bridge.Test.NUnit.Assert.AreEqual(null, Bridge.hasValue(x2) ? ($t = x2, x2 = System.Nullable.lift1("inc", x2), $t) : null);
                 Bridge.Test.NUnit.Assert.AreEqual(null, x2);
-                Bridge.Test.NUnit.Assert.AreEqual(null, Bridge.hasValue(x2) ? (x2 = System.Nullable.lift1('inc', x2)) : null);
+                Bridge.Test.NUnit.Assert.AreEqual(null, Bridge.hasValue(x2) ? (x2 = System.Nullable.lift1("inc", x2)) : null);
                 Bridge.Test.NUnit.Assert.AreEqual(null, x2);
-                Bridge.Test.NUnit.Assert.AreEqual(null, Bridge.hasValue(x2) ? ($t = x2, x2 = System.Nullable.lift1('dec', x2), $t) : null);
+                Bridge.Test.NUnit.Assert.AreEqual(null, Bridge.hasValue(x2) ? ($t = x2, x2 = System.Nullable.lift1("dec", x2), $t) : null);
                 Bridge.Test.NUnit.Assert.AreEqual(null, x2);
-                Bridge.Test.NUnit.Assert.AreEqual(null, Bridge.hasValue(x2) ? (x2 = System.Nullable.lift1('dec', x2)) : null);
+                Bridge.Test.NUnit.Assert.AreEqual(null, Bridge.hasValue(x2) ? (x2 = System.Nullable.lift1("dec", x2)) : null);
                 Bridge.Test.NUnit.Assert.AreEqual(null, x2);
                 Bridge.Test.NUnit.Assert.AreEqual(null, System.Nullable.lift2("mul", x2, System.Decimal(3.0)));
                 Bridge.Test.NUnit.Assert.AreEqual(null, System.Nullable.lift2("mul", System.Decimal(3.0), x2));
@@ -40270,28 +40324,28 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["a"]));
             },
             TestWriteLineDecimal: function () {
-                System.Console.WriteLine(System.Decimal(-1.0).toString('G'));
+                System.Console.WriteLine(System.Decimal(-1.0).toString("G"));
                 this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["-1"]));
 
-                System.Console.WriteLine(System.Decimal(1.0).toString('G'));
+                System.Console.WriteLine(System.Decimal(1.0).toString("G"));
                 this.AssertConsoleMessage("#2", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["1"]));
 
-                System.Console.WriteLine(System.Decimal(-12345678.0).toString('G'));
+                System.Console.WriteLine(System.Decimal(-12345678.0).toString("G"));
                 this.AssertConsoleMessage("#3", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["-12345678"]));
 
-                System.Console.WriteLine(System.Decimal(12345678.0).toString('G'));
+                System.Console.WriteLine(System.Decimal(12345678.0).toString("G"));
                 this.AssertConsoleMessage("#4", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["12345678"]));
 
-                System.Console.WriteLine(System.Decimal(-1.12345678).toString('G'));
+                System.Console.WriteLine(System.Decimal(-1.12345678).toString("G"));
                 this.AssertConsoleMessage("#5", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["-1.12345678"]));
 
-                System.Console.WriteLine(System.Decimal(1.12345678).toString('G'));
+                System.Console.WriteLine(System.Decimal(1.12345678).toString("G"));
                 this.AssertConsoleMessage("#6", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["1.12345678"]));
 
-                System.Console.WriteLine(System.Decimal("-12345678.12345678").toString('G'));
+                System.Console.WriteLine(System.Decimal("-12345678.12345678").toString("G"));
                 this.AssertConsoleMessage("#7", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["-12345678.12345678"]));
 
-                System.Console.WriteLine(System.Decimal("12345678.12345678").toString('G'));
+                System.Console.WriteLine(System.Decimal("12345678.12345678").toString("G"));
                 this.AssertConsoleMessage("#8", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["12345678.12345678"]));
             },
             TestWriteLineDouble: function () {
@@ -40658,45 +40712,45 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
             },
             TestWriteLineDecimalNullable: function () {
                 var d = System.Decimal(-1.0);
-                System.Console.WriteLine(d && d.toString('G'));
+                System.Console.WriteLine(d && d.toString("G"));
                 this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["-1"]));
 
                 d = System.Decimal(1.12345678);
-                System.Console.WriteLine(d && d.toString('G'));
+                System.Console.WriteLine(d && d.toString("G"));
                 this.AssertConsoleMessage("#2", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["1.12345678"]));
 
                 d = System.Decimal.lift(null);
-                System.Console.WriteLine(d && d.toString('G'));
+                System.Console.WriteLine(d && d.toString("G"));
                 this.AssertConsoleMessage("#3", Bridge.ClientTestHelper.StringHelper.CombineLinesNL([""]));
             },
             TestWriteLineInt64Nullable: function () {
                 var l = System.Int64(0);
-                System.Console.WriteLine(System.Decimal.lift(l) && System.Decimal.lift(l).toString('G'));
+                System.Console.WriteLine(System.Decimal.lift(l) && System.Decimal.lift(l).toString("G"));
                 this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["0"]));
 
                 l = System.Int64([-1,2147483647]);
-                System.Console.WriteLine(System.Decimal.lift(l) && System.Decimal.lift(l).toString('G'));
+                System.Console.WriteLine(System.Decimal.lift(l) && System.Decimal.lift(l).toString("G"));
                 this.AssertConsoleMessage("#2", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["9223372036854775807"]));
 
                 l = System.Int64([0,-2147483648]);
-                System.Console.WriteLine(System.Decimal.lift(l) && System.Decimal.lift(l).toString('G'));
+                System.Console.WriteLine(System.Decimal.lift(l) && System.Decimal.lift(l).toString("G"));
                 this.AssertConsoleMessage("#3", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["-9223372036854775808"]));
 
                 l = System.Int64.lift(null);
-                System.Console.WriteLine(System.Decimal.lift(l) && System.Decimal.lift(l).toString('G'));
+                System.Console.WriteLine(System.Decimal.lift(l) && System.Decimal.lift(l).toString("G"));
                 this.AssertConsoleMessage("#4", Bridge.ClientTestHelper.StringHelper.CombineLinesNL([""]));
             },
             TestWriteLineUInt64Nullable: function () {
                 var l = System.UInt64(0);
-                System.Console.WriteLine(System.Decimal.lift(l) && System.Decimal.lift(l).toString('G'));
+                System.Console.WriteLine(System.Decimal.lift(l) && System.Decimal.lift(l).toString("G"));
                 this.AssertConsoleMessage("#1", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["0"]));
 
                 l = System.UInt64([-1,-1]);
-                System.Console.WriteLine(System.Decimal.lift(l) && System.Decimal.lift(l).toString('G'));
+                System.Console.WriteLine(System.Decimal.lift(l) && System.Decimal.lift(l).toString("G"));
                 this.AssertConsoleMessage("#2", Bridge.ClientTestHelper.StringHelper.CombineLinesNL(["18446744073709551615"]));
 
                 l = System.UInt64.lift(null);
-                System.Console.WriteLine(System.Decimal.lift(l) && System.Decimal.lift(l).toString('G'));
+                System.Console.WriteLine(System.Decimal.lift(l) && System.Decimal.lift(l).toString("G"));
                 this.AssertConsoleMessage("#3", Bridge.ClientTestHelper.StringHelper.CombineLinesNL([""]));
             },
             TestWriteMultiline: function () {
@@ -40716,28 +40770,28 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 this.AssertConsoleMessage("#1", "a");
             },
             TestWriteDecimal: function () {
-                System.Console.Write(System.Decimal(-1.0).toString('G'));
+                System.Console.Write(System.Decimal(-1.0).toString("G"));
                 this.AssertConsoleMessage("#1", "-1");
 
-                System.Console.Write(System.Decimal(1.0).toString('G'));
+                System.Console.Write(System.Decimal(1.0).toString("G"));
                 this.AssertConsoleMessage("#2", "1");
 
-                System.Console.Write(System.Decimal(-12345678.0).toString('G'));
+                System.Console.Write(System.Decimal(-12345678.0).toString("G"));
                 this.AssertConsoleMessage("#3", "-12345678");
 
-                System.Console.Write(System.Decimal(12345678.0).toString('G'));
+                System.Console.Write(System.Decimal(12345678.0).toString("G"));
                 this.AssertConsoleMessage("#4", "12345678");
 
-                System.Console.Write(System.Decimal(-1.12345678).toString('G'));
+                System.Console.Write(System.Decimal(-1.12345678).toString("G"));
                 this.AssertConsoleMessage("#5", "-1.12345678");
 
-                System.Console.Write(System.Decimal(1.12345678).toString('G'));
+                System.Console.Write(System.Decimal(1.12345678).toString("G"));
                 this.AssertConsoleMessage("#6", "1.12345678");
 
-                System.Console.Write(System.Decimal("-12345678.12345678").toString('G'));
+                System.Console.Write(System.Decimal("-12345678.12345678").toString("G"));
                 this.AssertConsoleMessage("#7", "-12345678.12345678");
 
-                System.Console.Write(System.Decimal("12345678.12345678").toString('G'));
+                System.Console.Write(System.Decimal("12345678.12345678").toString("G"));
                 this.AssertConsoleMessage("#8", "12345678.12345678");
             },
             TestWriteDouble: function () {
@@ -52570,7 +52624,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 // Attempting to match the entire input string
 
                 var startPos = 0, endPos = 70;
-                var cr = '\n';
+                var cr = "\n";
                 var input = System.String.concat("Brooklyn Dodgers, National League, 1911, 1912, 1932-1957", cr, "Chicago Cubs, National League, 1903-present", cr, "Detroit Tigers, American League, 1901-present", cr, "New York Giants, National League, 1885-1957", cr, "Washington Senators, American League, 1901-1960", cr);
 
                 var basePattern = "^((\\w+(\\s?)){2,}),\\s(\\w+\\s\\w+),(\\s\\d{4}(-(\\d{4}|present))?,?)+";
@@ -52611,7 +52665,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var $t, $t1;
                 // Attempting to match each element in a string array
 
-                var cr = '\n';
+                var cr = "\n";
                 var input = System.String.concat("Brooklyn Dodgers, National League, 1911, 1912, 1932-1957", cr, "Chicago Cubs, National League, 1903-present", cr, "Detroit Tigers, American League, 1901-present", cr, "New York Giants, National League, 1885-1957", cr, "Washington Senators, American League, 1901-1960", cr);
 
                 var basePattern = "^((\\w+(\\s?)){2,}),\\s(\\w+\\s\\w+),(\\s\\d{4}(-(\\d{4}|present))?,?)+";
@@ -52700,7 +52754,7 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var $t;
                 // Attempting to match each line of an input string with '\r?$'
 
-                var cr = '\n';
+                var cr = "\n";
                 var input = System.String.concat("Brooklyn Dodgers, National League, 1911, 1912, 1932-1957", cr, "Chicago Cubs, National League, 1903-present", cr, "Detroit Tigers, American League, 1901-present", cr, "New York Giants, National League, 1885-1957", cr, "Washington Senators, American League, 1901-1960", cr);
 
                 var basePattern = "^((\\w+(\\s?)){2,}),\\s(\\w+\\s\\w+),(\\s\\d{4}(-(\\d{4}|present))?,?)+";
@@ -52782,10 +52836,10 @@ Bridge.assembly("Bridge.ClientTest", {"Bridge.ClientTest.Batch1.Reflection.Resou
                 var $t;
                 var inputs = System.Array.init([
                     "Brooklyn Dodgers, National League, 1911, 1912, 1932-1957", 
-                    System.String.concat("Chicago Cubs, National League, 1903-present", '\n'), 
+                    System.String.concat("Chicago Cubs, National League, 1903-present", "\n"), 
                     System.String.concat("Detroit Tigers, American League, 1901-present", System.Text.RegularExpressions.Regex.unescape("\\n")), 
                     "New York Giants, National League, 1885-1957", 
-                    System.String.concat("Washington Senators, American League, 1901-1960", '\n')
+                    System.String.concat("Washington Senators, American League, 1901-1960", "\n")
                 ], System.String);
                 var pattern = "^((\\w+(\\s?)){2,}),\\s(\\w+\\s\\w+),(\\s\\d{4}(-(\\d{4}|present))?,?)+\\r?\\Z";
 

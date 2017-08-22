@@ -54,5 +54,17 @@ Bridge.merge(new System.Globalization.CultureInfo("haw-US", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "yyyy MMMM",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1252,
+        CultureName: "haw-US",
+        EBCDICCodePage: 37,
+        IsRightToLeft: false,
+        LCID: 1141,
+        listSeparator: ";",
+        MacCodePage: 10000,
+        OEMCodePage: 437,
+        IsReadOnly: true
     })
 });

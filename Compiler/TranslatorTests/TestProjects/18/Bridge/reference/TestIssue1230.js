@@ -24,11 +24,11 @@
                     var l = System.Decimal(v);
                     l = System.Decimal(v);
 
-                    System.Console.WriteLine(System.Decimal(v).toString('G'));
-                    System.Console.WriteLine(System.Decimal(v).toString('G'));
-                    System.Console.WriteLine(System.Decimal(2.0).toString('G'));
-                    System.Console.WriteLine(System.Decimal(2.0).toString('G'));
-                    System.Console.WriteLine(System.Decimal(7.0).toString('G'));
+                    System.Console.WriteLine(System.Decimal(v).toString("G"));
+                    System.Console.WriteLine(System.Decimal(v).toString("G"));
+                    System.Console.WriteLine(System.Decimal(2.0).toString("G"));
+                    System.Console.WriteLine(System.Decimal(2.0).toString("G"));
+                    System.Console.WriteLine(System.Decimal(7.0).toString("G"));
                     TestIssue1230.Issue1230.MethodDecimal(System.Decimal(v));
                     TestIssue1230.Issue1230.MethodDecimal(System.Decimal(v));
                 },

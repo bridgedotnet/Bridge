@@ -11,7 +11,7 @@ namespace Bridge.Html5
     [Name("Element")]
     public class Element : Node
     {
-        [Template("document.createElement('div')")]
+        [Template("document.createElement(\"div\")")]
         public Element()
         {
         }

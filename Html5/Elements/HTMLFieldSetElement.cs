@@ -7,7 +7,7 @@ namespace Bridge.Html5
     [Name("HTMLFieldSetElement")]
     public sealed class HTMLFieldSetElement : HTMLElement<HTMLFieldSetElement>
     {
-        [Template("document.createElement('fieldset')")]
+        [Template("document.createElement(\"fieldset\")")]
         public extern HTMLFieldSetElement();
 
         /// <summary>

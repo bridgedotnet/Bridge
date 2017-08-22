@@ -9,7 +9,7 @@ namespace Bridge.Html5
     [Name("HTMLOListElement")]
     public sealed class HTMLOListElement : HTMLElement<HTMLOListElement>
     {
-        [Template("document.createElement('ol')")]
+        [Template("document.createElement(\"ol\")")]
         public extern HTMLOListElement();
 
         /// <summary>
