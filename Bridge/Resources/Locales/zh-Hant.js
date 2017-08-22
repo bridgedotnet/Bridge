@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("zh-Hant", true), {
         ANSICodePage: 950,
         CultureName: "zh-HK",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 3076,
+        listSeparator: ",",
         MacCodePage: 10002,
-        OEMCodePage: 950
+        OEMCodePage: 950,
+        IsReadOnly: true
     })
 });

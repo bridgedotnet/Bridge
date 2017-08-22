@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("fo", true), {
         ANSICodePage: 1252,
         CultureName: "fo-FO",
         EBCDICCodePage: 20277,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1080,
+        listSeparator: ";",
         MacCodePage: 10079,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

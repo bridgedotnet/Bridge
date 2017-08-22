@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("zh-Hans-MO", true), {
         ANSICodePage: 936,
         CultureName: "zh-Hans-MO",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 4096,
+        listSeparator: ";",
         MacCodePage: 10008,
-        OEMCodePage: 936
+        OEMCodePage: 936,
+        IsReadOnly: true
     })
 });

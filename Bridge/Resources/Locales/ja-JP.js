@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("ja-JP", true), {
         ANSICodePage: 932,
         CultureName: "ja-JP",
         EBCDICCodePage: 20290,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1041,
+        listSeparator: ",",
         MacCodePage: 10001,
-        OEMCodePage: 932
+        OEMCodePage: 932,
+        IsReadOnly: true
     })
 });

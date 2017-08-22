@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("nn", true), {
         ANSICodePage: 1252,
         CultureName: "nn-NO",
         EBCDICCodePage: 20277,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 2068,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

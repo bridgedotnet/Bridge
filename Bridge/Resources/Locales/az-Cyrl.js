@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("az-Cyrl", true), {
         ANSICodePage: 1251,
         CultureName: "az-Cyrl-AZ",
         EBCDICCodePage: 20880,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 2092,
+        listSeparator: ";",
         MacCodePage: 10007,
-        OEMCodePage: 866
+        OEMCodePage: 866,
+        IsReadOnly: true
     })
 });

@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("fi-FI", true), {
         ANSICodePage: 1252,
         CultureName: "fi-FI",
         EBCDICCodePage: 20278,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1035,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

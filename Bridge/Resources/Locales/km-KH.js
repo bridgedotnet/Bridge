@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("km-KH", true), {
         ANSICodePage: 0,
         CultureName: "km-KH",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1107,
+        listSeparator: ",",
         MacCodePage: 2,
-        OEMCodePage: 1
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

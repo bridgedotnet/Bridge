@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("fa", true), {
         ANSICodePage: 1256,
         CultureName: "fa-IR",
         EBCDICCodePage: 20420,
-        IsReadOnly: false,
         IsRightToLeft: true,
         LCID: 1065,
+        listSeparator: "؛",
         MacCodePage: 10004,
-        OEMCodePage: 720
+        OEMCodePage: 720,
+        IsReadOnly: true
     })
 });

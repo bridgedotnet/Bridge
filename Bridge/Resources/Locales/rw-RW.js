@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("rw-RW", true), {
         ANSICodePage: 1252,
         CultureName: "rw-RW",
         EBCDICCodePage: 37,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1159,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 437
+        OEMCodePage: 437,
+        IsReadOnly: true
     })
 });

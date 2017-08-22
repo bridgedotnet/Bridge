@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("tg", true), {
         ANSICodePage: 1251,
         CultureName: "tg-Cyrl-TJ",
         EBCDICCodePage: 20880,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1064,
+        listSeparator: ";",
         MacCodePage: 10007,
-        OEMCodePage: 866
+        OEMCodePage: 866,
+        IsReadOnly: true
     })
 });

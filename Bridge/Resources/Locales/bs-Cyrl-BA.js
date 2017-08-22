@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("bs-Cyrl-BA", true), {
         ANSICodePage: 1251,
         CultureName: "bs-Cyrl-BA",
         EBCDICCodePage: 870,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 8218,
+        listSeparator: ";",
         MacCodePage: 10082,
-        OEMCodePage: 855
+        OEMCodePage: 855,
+        IsReadOnly: true
     })
 });

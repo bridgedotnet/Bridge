@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("smj-NO", true), {
         ANSICodePage: 1252,
         CultureName: "smj-NO",
         EBCDICCodePage: 20277,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 4155,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

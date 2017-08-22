@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("ha-Latn-NE", true), {
         ANSICodePage: 1252,
         CultureName: "ha-Latn-NE",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 4096,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 437
+        OEMCodePage: 437,
+        IsReadOnly: true
     })
 });

@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("ig", true), {
         ANSICodePage: 1252,
         CultureName: "ig-NG",
         EBCDICCodePage: 37,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1136,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 437
+        OEMCodePage: 437,
+        IsReadOnly: true
     })
 });

@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("cs-CZ", true), {
         ANSICodePage: 1250,
         CultureName: "cs-CZ",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1029,
+        listSeparator: ";",
         MacCodePage: 10029,
-        OEMCodePage: 852
+        OEMCodePage: 852,
+        IsReadOnly: true
     })
 });

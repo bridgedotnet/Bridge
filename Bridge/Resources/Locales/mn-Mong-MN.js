@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("mn-Mong-MN", true), {
         ANSICodePage: 0,
         CultureName: "mn-Mong-MN",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 3152,
+        listSeparator: ",",
         MacCodePage: 2,
-        OEMCodePage: 1
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

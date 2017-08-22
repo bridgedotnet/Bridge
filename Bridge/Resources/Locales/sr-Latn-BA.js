@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("sr-Latn-BA", true), {
         ANSICodePage: 1250,
         CultureName: "sr-Latn-BA",
         EBCDICCodePage: 870,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 6170,
+        listSeparator: ";",
         MacCodePage: 10082,
-        OEMCodePage: 852
+        OEMCodePage: 852,
+        IsReadOnly: true
     })
 });

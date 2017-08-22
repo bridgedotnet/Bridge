@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("mr", true), {
         ANSICodePage: 0,
         CultureName: "mr-IN",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1102,
+        listSeparator: ",",
         MacCodePage: 2,
-        OEMCodePage: 1
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

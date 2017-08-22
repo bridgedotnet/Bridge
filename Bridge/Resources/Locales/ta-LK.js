@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("ta-LK", true), {
         ANSICodePage: 0,
         CultureName: "ta-LK",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 2121,
+        listSeparator: ";",
         MacCodePage: 2,
-        OEMCodePage: 1
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

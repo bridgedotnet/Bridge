@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("sah-RU", true), {
         ANSICodePage: 1251,
         CultureName: "sah-RU",
         EBCDICCodePage: 20880,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1157,
+        listSeparator: ";",
         MacCodePage: 10007,
-        OEMCodePage: 866
+        OEMCodePage: 866,
+        IsReadOnly: true
     })
 });

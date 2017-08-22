@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("yi-001", true), {
         ANSICodePage: 0,
         CultureName: "yi-001",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: true,
         LCID: 1085,
+        listSeparator: ";",
         MacCodePage: 2,
-        OEMCodePage: 1
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

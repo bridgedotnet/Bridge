@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("lv-LV", true), {
         ANSICodePage: 1257,
         CultureName: "lv-LV",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1062,
+        listSeparator: ";",
         MacCodePage: 10029,
-        OEMCodePage: 775
+        OEMCodePage: 775,
+        IsReadOnly: true
     })
 });

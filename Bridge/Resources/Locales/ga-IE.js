@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("ga-IE", true), {
         ANSICodePage: 1252,
         CultureName: "ga-IE",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 2108,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

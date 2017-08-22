@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("sq-AL", true), {
         ANSICodePage: 1250,
         CultureName: "sq-AL",
         EBCDICCodePage: 20880,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1052,
+        listSeparator: ";",
         MacCodePage: 10029,
-        OEMCodePage: 852
+        OEMCodePage: 852,
+        IsReadOnly: true
     })
 });

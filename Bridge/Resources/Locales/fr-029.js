@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("fr-029", true), {
         ANSICodePage: 1252,
         CultureName: "fr-029",
         EBCDICCodePage: 20297,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 7180,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

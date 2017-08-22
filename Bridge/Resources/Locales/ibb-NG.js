@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("ibb-NG", true), {
         ANSICodePage: 1252,
         CultureName: "ibb-NG",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1129,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

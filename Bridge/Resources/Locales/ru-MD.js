@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("ru-MD", true), {
         ANSICodePage: 1251,
         CultureName: "ru-MD",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 2073,
+        listSeparator: ";",
         MacCodePage: 2,
-        OEMCodePage: 866
+        OEMCodePage: 866,
+        IsReadOnly: true
     })
 });

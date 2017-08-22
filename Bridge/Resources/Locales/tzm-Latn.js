@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("tzm-Latn", true), {
         ANSICodePage: 1252,
         CultureName: "tzm-Latn-DZ",
         EBCDICCodePage: 20297,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 2143,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

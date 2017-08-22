@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("nso-ZA", true), {
         ANSICodePage: 1252,
         CultureName: "nso-ZA",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1132,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("nqo-GN", true), {
         ANSICodePage: 0,
         CultureName: "nqo-GN",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: true,
         LCID: 4096,
+        listSeparator: "،",
         MacCodePage: 2,
-        OEMCodePage: 1
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

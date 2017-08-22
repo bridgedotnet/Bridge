@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("wo", true), {
         ANSICodePage: 1252,
         CultureName: "wo-SN",
         EBCDICCodePage: 20297,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1160,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

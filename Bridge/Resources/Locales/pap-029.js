@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("pap-029", true), {
         ANSICodePage: 1252,
         CultureName: "pap-029",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1145,
+        listSeparator: ",",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

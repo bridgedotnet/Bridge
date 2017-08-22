@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("dz", true), {
         ANSICodePage: 0,
         CultureName: "dz-BT",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 3153,
+        listSeparator: ";",
         MacCodePage: 2,
-        OEMCodePage: 1
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

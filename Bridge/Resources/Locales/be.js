@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("be", true), {
         ANSICodePage: 1251,
         CultureName: "be-BY",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1059,
+        listSeparator: ";",
         MacCodePage: 10007,
-        OEMCodePage: 866
+        OEMCodePage: 866,
+        IsReadOnly: true
     })
 });

@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("uk", true), {
         ANSICodePage: 1251,
         CultureName: "uk-UA",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1058,
+        listSeparator: ";",
         MacCodePage: 10017,
-        OEMCodePage: 866
+        OEMCodePage: 866,
+        IsReadOnly: true
     })
 });

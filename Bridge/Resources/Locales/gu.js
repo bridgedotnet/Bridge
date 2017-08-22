@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("gu", true), {
         ANSICodePage: 0,
         CultureName: "gu-IN",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1095,
+        listSeparator: ",",
         MacCodePage: 2,
-        OEMCodePage: 1
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

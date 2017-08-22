@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("prs-AF", true), {
         ANSICodePage: 1256,
         CultureName: "prs-AF",
         EBCDICCodePage: 20420,
-        IsReadOnly: false,
         IsRightToLeft: true,
         LCID: 1164,
+        listSeparator: ";",
         MacCodePage: 10004,
-        OEMCodePage: 720
+        OEMCodePage: 720,
+        IsReadOnly: true
     })
 });

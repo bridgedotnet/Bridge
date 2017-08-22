@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("haw", true), {
         ANSICodePage: 1252,
         CultureName: "haw-US",
         EBCDICCodePage: 37,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1141,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 437
+        OEMCodePage: 437,
+        IsReadOnly: true
     })
 });

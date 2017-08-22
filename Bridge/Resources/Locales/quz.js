@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("quz", true), {
         ANSICodePage: 1252,
         CultureName: "quz-BO",
         EBCDICCodePage: 20284,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1131,
+        listSeparator: ",",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

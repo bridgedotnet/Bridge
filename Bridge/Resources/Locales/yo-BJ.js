@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("yo-BJ", true), {
         ANSICodePage: 1252,
         CultureName: "yo-BJ",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 4096,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 437
+        OEMCodePage: 437,
+        IsReadOnly: true
     })
 });

@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("tzm-Tfng", true), {
         ANSICodePage: 0,
         CultureName: "tzm-Tfng-MA",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 4191,
+        listSeparator: ";",
         MacCodePage: 2,
-        OEMCodePage: 1
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

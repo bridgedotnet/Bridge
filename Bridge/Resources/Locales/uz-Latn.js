@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("uz-Latn", true), {
         ANSICodePage: 1254,
         CultureName: "uz-Latn-UZ",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1091,
+        listSeparator: ";",
         MacCodePage: 10029,
-        OEMCodePage: 857
+        OEMCodePage: 857,
+        IsReadOnly: true
     })
 });

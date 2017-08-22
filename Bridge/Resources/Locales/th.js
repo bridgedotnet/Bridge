@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("th", true), {
         ANSICodePage: 874,
         CultureName: "th-TH",
         EBCDICCodePage: 20838,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1054,
+        listSeparator: ",",
         MacCodePage: 10021,
-        OEMCodePage: 874
+        OEMCodePage: 874,
+        IsReadOnly: true
     })
 });

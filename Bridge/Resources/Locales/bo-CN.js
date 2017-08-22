@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("bo-CN", true), {
         ANSICodePage: 0,
         CultureName: "bo-CN",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1105,
+        listSeparator: ",",
         MacCodePage: 2,
-        OEMCodePage: 1
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

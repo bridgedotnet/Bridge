@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("kl-GL", true), {
         ANSICodePage: 1252,
         CultureName: "kl-GL",
         EBCDICCodePage: 20277,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1135,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

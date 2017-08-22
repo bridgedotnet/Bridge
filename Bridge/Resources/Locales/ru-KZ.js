@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("ru-KZ", true), {
         ANSICodePage: 1251,
         CultureName: "ru-KZ",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 4096,
+        listSeparator: ";",
         MacCodePage: 2,
-        OEMCodePage: 866
+        OEMCodePage: 866,
+        IsReadOnly: true
     })
 });

@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("ar-OM", true), {
         ANSICodePage: 1256,
         CultureName: "ar-OM",
         EBCDICCodePage: 20420,
-        IsReadOnly: false,
         IsRightToLeft: true,
         LCID: 8193,
+        listSeparator: ";",
         MacCodePage: 10004,
-        OEMCodePage: 720
+        OEMCodePage: 720,
+        IsReadOnly: true
     })
 });

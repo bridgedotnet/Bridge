@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("moh-CA", true), {
         ANSICodePage: 1252,
         CultureName: "moh-CA",
         EBCDICCodePage: 37,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1148,
+        listSeparator: ",",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("en-NZ", true), {
         ANSICodePage: 1252,
         CultureName: "en-NZ",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 5129,
+        listSeparator: ",",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

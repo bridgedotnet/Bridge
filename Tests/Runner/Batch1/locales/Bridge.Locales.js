@@ -60,11 +60,12 @@ Bridge.merge(new System.Globalization.CultureInfo("ru-RU", true), {
         ANSICodePage: 1251,
         CultureName: "ru-RU",
         EBCDICCodePage: 20880,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1049,
+        listSeparator: ";",
         MacCodePage: 10007,
-        OEMCodePage: 866
+        OEMCodePage: 866,
+        IsReadOnly: true
     })
 });
 
@@ -130,11 +131,12 @@ Bridge.merge(new System.Globalization.CultureInfo("en-US", true), {
         ANSICodePage: 1252,
         CultureName: "en-US",
         EBCDICCodePage: 37,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1033,
+        listSeparator: ",",
         MacCodePage: 10000,
-        OEMCodePage: 437
+        OEMCodePage: 437,
+        IsReadOnly: true
     })
 });
 
@@ -200,11 +202,12 @@ Bridge.merge(new System.Globalization.CultureInfo("en-GB", true), {
         ANSICodePage: 1252,
         CultureName: "en-GB",
         EBCDICCodePage: 20285,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 2057,
+        listSeparator: ",",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });
 
@@ -270,11 +273,12 @@ Bridge.merge(new System.Globalization.CultureInfo("nb-NO", true), {
         ANSICodePage: 1252,
         CultureName: "nb-NO",
         EBCDICCodePage: 20277,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1044,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });
 
@@ -340,11 +344,12 @@ Bridge.merge(new System.Globalization.CultureInfo("es-419", true), {
         ANSICodePage: 1252,
         CultureName: "es-419",
         EBCDICCodePage: 20284,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 22538,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });
 
@@ -410,11 +415,12 @@ Bridge.merge(new System.Globalization.CultureInfo("es-AR", true), {
         ANSICodePage: 1252,
         CultureName: "es-AR",
         EBCDICCodePage: 20284,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 11274,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });
 
@@ -480,11 +486,12 @@ Bridge.merge(new System.Globalization.CultureInfo("es-BO", true), {
         ANSICodePage: 1252,
         CultureName: "es-BO",
         EBCDICCodePage: 20284,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 16394,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });
 
@@ -550,11 +557,12 @@ Bridge.merge(new System.Globalization.CultureInfo("es-CL", true), {
         ANSICodePage: 1252,
         CultureName: "es-CL",
         EBCDICCodePage: 20284,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 13322,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });
 
@@ -620,11 +628,12 @@ Bridge.merge(new System.Globalization.CultureInfo("es-CO", true), {
         ANSICodePage: 1252,
         CultureName: "es-CO",
         EBCDICCodePage: 20284,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 9226,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });
 
@@ -690,11 +699,12 @@ Bridge.merge(new System.Globalization.CultureInfo("es-CR", true), {
         ANSICodePage: 1252,
         CultureName: "es-CR",
         EBCDICCodePage: 20284,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 5130,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });
 
@@ -760,11 +770,12 @@ Bridge.merge(new System.Globalization.CultureInfo("es-CU", true), {
         ANSICodePage: 1252,
         CultureName: "es-CU",
         EBCDICCodePage: 20284,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 23562,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });
 
@@ -830,11 +841,12 @@ Bridge.merge(new System.Globalization.CultureInfo("es-DO", true), {
         ANSICodePage: 1252,
         CultureName: "es-DO",
         EBCDICCodePage: 20284,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 7178,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });
 
@@ -900,11 +912,12 @@ Bridge.merge(new System.Globalization.CultureInfo("es-EC", true), {
         ANSICodePage: 1252,
         CultureName: "es-EC",
         EBCDICCodePage: 20284,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 12298,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });
 
@@ -970,11 +983,12 @@ Bridge.merge(new System.Globalization.CultureInfo("es-ES", true), {
         ANSICodePage: 1252,
         CultureName: "es-ES",
         EBCDICCodePage: 20284,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 3082,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });
 
@@ -1040,11 +1054,12 @@ Bridge.merge(new System.Globalization.CultureInfo("es-GQ", true), {
         ANSICodePage: 1252,
         CultureName: "es-GQ",
         EBCDICCodePage: 20284,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 4096,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });
 
@@ -1110,11 +1125,12 @@ Bridge.merge(new System.Globalization.CultureInfo("es-GT", true), {
         ANSICodePage: 1252,
         CultureName: "es-GT",
         EBCDICCodePage: 20284,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 4106,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });
 
@@ -1180,11 +1196,12 @@ Bridge.merge(new System.Globalization.CultureInfo("es-HN", true), {
         ANSICodePage: 1252,
         CultureName: "es-HN",
         EBCDICCodePage: 20284,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 18442,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });
 
@@ -1250,11 +1267,12 @@ Bridge.merge(new System.Globalization.CultureInfo("es-MX", true), {
         ANSICodePage: 1252,
         CultureName: "es-MX",
         EBCDICCodePage: 20284,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 2058,
+        listSeparator: ",",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });
 
@@ -1320,11 +1338,12 @@ Bridge.merge(new System.Globalization.CultureInfo("es-NI", true), {
         ANSICodePage: 1252,
         CultureName: "es-NI",
         EBCDICCodePage: 20284,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 19466,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });
 
@@ -1390,11 +1409,12 @@ Bridge.merge(new System.Globalization.CultureInfo("es-PA", true), {
         ANSICodePage: 1252,
         CultureName: "es-PA",
         EBCDICCodePage: 20284,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 6154,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });
 
@@ -1460,11 +1480,12 @@ Bridge.merge(new System.Globalization.CultureInfo("es-PE", true), {
         ANSICodePage: 1252,
         CultureName: "es-PE",
         EBCDICCodePage: 20284,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 10250,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });
 
@@ -1530,11 +1551,12 @@ Bridge.merge(new System.Globalization.CultureInfo("es-PH", true), {
         ANSICodePage: 1252,
         CultureName: "es-PH",
         EBCDICCodePage: 20284,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 4096,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });
 
@@ -1600,11 +1622,12 @@ Bridge.merge(new System.Globalization.CultureInfo("es-PR", true), {
         ANSICodePage: 1252,
         CultureName: "es-PR",
         EBCDICCodePage: 20284,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 20490,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });
 
@@ -1670,11 +1693,12 @@ Bridge.merge(new System.Globalization.CultureInfo("es-PY", true), {
         ANSICodePage: 1252,
         CultureName: "es-PY",
         EBCDICCodePage: 20284,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 15370,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });
 
@@ -1740,11 +1764,12 @@ Bridge.merge(new System.Globalization.CultureInfo("es-SV", true), {
         ANSICodePage: 1252,
         CultureName: "es-SV",
         EBCDICCodePage: 20284,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 17418,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });
 
@@ -1810,11 +1835,12 @@ Bridge.merge(new System.Globalization.CultureInfo("es-US", true), {
         ANSICodePage: 1252,
         CultureName: "es-US",
         EBCDICCodePage: 20284,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 21514,
+        listSeparator: ",",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });
 
@@ -1880,11 +1906,12 @@ Bridge.merge(new System.Globalization.CultureInfo("es-UY", true), {
         ANSICodePage: 1252,
         CultureName: "es-UY",
         EBCDICCodePage: 20284,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 14346,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });
 
@@ -1950,11 +1977,12 @@ Bridge.merge(new System.Globalization.CultureInfo("es-VE", true), {
         ANSICodePage: 1252,
         CultureName: "es-VE",
         EBCDICCodePage: 20284,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 8202,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });
 
@@ -2020,10 +2048,11 @@ Bridge.merge(new System.Globalization.CultureInfo("es", true), {
         ANSICodePage: 1252,
         CultureName: "es-ES",
         EBCDICCodePage: 20284,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 3082,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

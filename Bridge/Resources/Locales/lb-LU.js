@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("lb-LU", true), {
         ANSICodePage: 1252,
         CultureName: "lb-LU",
         EBCDICCodePage: 20297,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1134,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

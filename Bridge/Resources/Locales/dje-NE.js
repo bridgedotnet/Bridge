@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("dje-NE", true), {
         ANSICodePage: 0,
         CultureName: "dje-NE",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 4096,
+        listSeparator: ";",
         MacCodePage: 2,
-        OEMCodePage: 1
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("hsb-DE", true), {
         ANSICodePage: 1252,
         CultureName: "hsb-DE",
         EBCDICCodePage: 870,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1070,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("da", true), {
         ANSICodePage: 1252,
         CultureName: "da-DK",
         EBCDICCodePage: 20277,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1030,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

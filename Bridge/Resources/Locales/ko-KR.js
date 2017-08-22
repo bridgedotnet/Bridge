@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("ko-KR", true), {
         ANSICodePage: 949,
         CultureName: "ko-KR",
         EBCDICCodePage: 20833,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1042,
+        listSeparator: ",",
         MacCodePage: 10003,
-        OEMCodePage: 949
+        OEMCodePage: 949,
+        IsReadOnly: true
     })
 });

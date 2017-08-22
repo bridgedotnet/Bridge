@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("iu-Latn-CA", true), {
         ANSICodePage: 1252,
         CultureName: "iu-Latn-CA",
         EBCDICCodePage: 37,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 2141,
+        listSeparator: ",",
         MacCodePage: 10000,
-        OEMCodePage: 437
+        OEMCodePage: 437,
+        IsReadOnly: true
     })
 });

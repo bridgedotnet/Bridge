@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("ro", true), {
         ANSICodePage: 1250,
         CultureName: "ro-RO",
         EBCDICCodePage: 20880,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1048,
+        listSeparator: ";",
         MacCodePage: 10029,
-        OEMCodePage: 852
+        OEMCodePage: 852,
+        IsReadOnly: true
     })
 });

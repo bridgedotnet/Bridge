@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("syr", true), {
         ANSICodePage: 0,
         CultureName: "syr-SY",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: true,
         LCID: 1114,
+        listSeparator: ",",
         MacCodePage: 2,
-        OEMCodePage: 1
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

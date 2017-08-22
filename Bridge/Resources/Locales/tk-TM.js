@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("tk-TM", true), {
         ANSICodePage: 1250,
         CultureName: "tk-TM",
         EBCDICCodePage: 20880,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1090,
+        listSeparator: ";",
         MacCodePage: 10029,
-        OEMCodePage: 852
+        OEMCodePage: 852,
+        IsReadOnly: true
     })
 });

@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("pa-Arab", true), {
         ANSICodePage: 1256,
         CultureName: "pa-Arab-PK",
         EBCDICCodePage: 20420,
-        IsReadOnly: false,
         IsRightToLeft: true,
         LCID: 2118,
+        listSeparator: ";",
         MacCodePage: 10004,
-        OEMCodePage: 720
+        OEMCodePage: 720,
+        IsReadOnly: true
     })
 });

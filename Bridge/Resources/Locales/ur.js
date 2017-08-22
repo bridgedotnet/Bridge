@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("ur", true), {
         ANSICodePage: 1256,
         CultureName: "ur-PK",
         EBCDICCodePage: 20420,
-        IsReadOnly: false,
         IsRightToLeft: true,
         LCID: 1056,
+        listSeparator: ";",
         MacCodePage: 10004,
-        OEMCodePage: 720
+        OEMCodePage: 720,
+        IsReadOnly: true
     })
 });

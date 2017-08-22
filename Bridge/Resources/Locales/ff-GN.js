@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("ff-GN", true), {
         ANSICodePage: 1252,
         CultureName: "ff-GN",
         EBCDICCodePage: 20297,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 4096,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

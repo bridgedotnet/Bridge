@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("sk", true), {
         ANSICodePage: 1250,
         CultureName: "sk-SK",
         EBCDICCodePage: 20880,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1051,
+        listSeparator: ";",
         MacCodePage: 10029,
-        OEMCodePage: 852
+        OEMCodePage: 852,
+        IsReadOnly: true
     })
 });

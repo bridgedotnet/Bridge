@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("sw-KE", true), {
         ANSICodePage: 1252,
         CultureName: "sw-KE",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1089,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 437
+        OEMCodePage: 437,
+        IsReadOnly: true
     })
 });

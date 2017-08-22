@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("hr-HR", true), {
         ANSICodePage: 1250,
         CultureName: "hr-HR",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1050,
+        listSeparator: ";",
         MacCodePage: 10082,
-        OEMCodePage: 852
+        OEMCodePage: 852,
+        IsReadOnly: true
     })
 });

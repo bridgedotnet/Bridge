@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("az-Latn", true), {
         ANSICodePage: 1254,
         CultureName: "az-Latn-AZ",
         EBCDICCodePage: 20905,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1068,
+        listSeparator: ";",
         MacCodePage: 10081,
-        OEMCodePage: 857
+        OEMCodePage: 857,
+        IsReadOnly: true
     })
 });

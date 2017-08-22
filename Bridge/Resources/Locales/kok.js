@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("kok", true), {
         ANSICodePage: 0,
         CultureName: "kok-IN",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1111,
+        listSeparator: ",",
         MacCodePage: 2,
-        OEMCodePage: 1
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

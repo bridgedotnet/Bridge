@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("sma-NO", true), {
         ANSICodePage: 1252,
         CultureName: "sma-NO",
         EBCDICCodePage: 20277,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 6203,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

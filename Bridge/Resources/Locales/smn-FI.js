@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("smn-FI", true), {
         ANSICodePage: 1252,
         CultureName: "smn-FI",
         EBCDICCodePage: 20278,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 9275,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

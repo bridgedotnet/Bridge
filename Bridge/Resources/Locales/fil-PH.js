@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("fil-PH", true), {
         ANSICodePage: 1252,
         CultureName: "fil-PH",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1124,
+        listSeparator: ";",
         MacCodePage: 10000,
-        OEMCodePage: 437
+        OEMCodePage: 437,
+        IsReadOnly: true
     })
 });

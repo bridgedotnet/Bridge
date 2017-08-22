@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("quc-Latn", true), {
         ANSICodePage: 1252,
         CultureName: "quc-Latn-GT",
         EBCDICCodePage: 20284,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1158,
+        listSeparator: ",",
         MacCodePage: 10000,
-        OEMCodePage: 850
+        OEMCodePage: 850,
+        IsReadOnly: true
     })
 });

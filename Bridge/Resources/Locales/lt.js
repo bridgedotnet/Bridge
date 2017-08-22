@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("lt", true), {
         ANSICodePage: 1257,
         CultureName: "lt-LT",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1063,
+        listSeparator: ";",
         MacCodePage: 10029,
-        OEMCodePage: 775
+        OEMCodePage: 775,
+        IsReadOnly: true
     })
 });

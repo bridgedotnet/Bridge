@@ -60,10 +60,11 @@ Bridge.merge(new System.Globalization.CultureInfo("pa-IN", true), {
         ANSICodePage: 0,
         CultureName: "pa-IN",
         EBCDICCodePage: 500,
-        IsReadOnly: false,
         IsRightToLeft: false,
         LCID: 1094,
+        listSeparator: ",",
         MacCodePage: 2,
-        OEMCodePage: 1
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });
