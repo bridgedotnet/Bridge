@@ -5469,6 +5469,9 @@ Bridge.define("System.Exception", {
 
     Bridge.define("System.Globalization.TextInfo", {
         inherits: [System.ICloneable,System.Object],
+        fields: {
+            listSeparator: null
+        },
         props: {
             ANSICodePage: 0,
             CultureName: null,
@@ -5476,14 +5479,28 @@ Bridge.define("System.Exception", {
             IsReadOnly: false,
             IsRightToLeft: false,
             LCID: 0,
-            ListSeparator: null,
+            ListSeparator: {
+                get: function () {
+                    return this.listSeparator;
+                },
+                set: function (value) {
+                    this.verifyWritable();
+
+                    this.listSeparator = value;
+                }
+            },
             MacCodePage: 0,
             OEMCodePage: 0
         },
         alias: ["clone", "System$ICloneable$clone"],
         methods: {
             clone: function () {
-                return Bridge.copy(new System.Globalization.TextInfo(), this, System.Array.init(["ANSICodePage", "CultureName", "EBCDICCodePage", "IsReadOnly", "IsRightToLeft", "LCID", "MacCodePage", "OEMCodePage"], System.String));
+                return Bridge.copy(new System.Globalization.TextInfo(), this, System.Array.init(["ANSICodePage", "CultureName", "EBCDICCodePage", "IsRightToLeft", "LCID", "listSeparator", "MacCodePage", "OEMCodePage", "IsReadOnly"], System.String));
+            },
+            verifyWritable: function () {
+                if (this.IsReadOnly) {
+                    throw new System.InvalidOperationException("Instance is read-only.");
+                }
             }
         }
     });
@@ -5780,11 +5797,12 @@ Bridge.define("System.Exception", {
                         ANSICodePage: 1252,
                         CultureName: "",
                         EBCDICCodePage: 37,
-                        IsReadOnly: true,
+                        listSeparator: ",",
                         IsRightToLeft: false,
                         LCID: 127,
                         MacCodePage: 10000,
-                        OEMCodePage: 437
+                        OEMCodePage: 437,
+                        IsReadOnly: true
                     })
                 });
 
@@ -5865,6 +5883,8 @@ Bridge.define("System.Exception", {
                             "dateTimeFormat",
                             "TextInfo"
                 ]);
+
+                this.TextInfo.IsReadOnly = false;
             }
         },
 

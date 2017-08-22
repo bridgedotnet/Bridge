@@ -288,11 +288,12 @@
                         ANSICodePage: 1252,
                         CultureName: "",
                         EBCDICCodePage: 37,
-                        IsReadOnly: true,
+                        listSeparator: ",",
                         IsRightToLeft: false,
                         LCID: 127,
                         MacCodePage: 10000,
-                        OEMCodePage: 437
+                        OEMCodePage: 437,
+                        IsReadOnly: true
                     })
                 });
 
@@ -373,6 +374,8 @@
                             "dateTimeFormat",
                             "TextInfo"
                 ]);
+
+                this.TextInfo.IsReadOnly = false;
             }
         },
 

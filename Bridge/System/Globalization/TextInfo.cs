@@ -9,6 +9,8 @@ namespace System.Globalization
     [Reflectable]
     public class TextInfo : ICloneable, IBridgeClass
     {
+        private string listSeparator;
+
         /// <summary>
         /// Gets the American National Standards Institute (ANSI) code page used by the writing system represented by the current TextInfo.
         /// </summary>
@@ -48,9 +50,17 @@ namespace System.Globalization
         /// </summary>
         public virtual string ListSeparator
         {
-            get;
+            get
+            {
+                return this.listSeparator;
+            }
             [ComVisibleAttribute(false)]
-            set;
+            set
+            {
+                VerifyWritable();
+
+                this.listSeparator = value;
+            }
         }
 
         /// <summary>
@@ -75,12 +85,21 @@ namespace System.Globalization
                 "ANSICodePage",
                 "CultureName",
                 "EBCDICCodePage",
-                "IsReadOnly",
                 "IsRightToLeft",
                 "LCID",
+                "listSeparator",
                 "MacCodePage",
-                "OEMCodePage"
+                "OEMCodePage",
+                "IsReadOnly"
             });
+        }
+
+        private void VerifyWritable()
+        {
+            if (this.IsReadOnly)
+            {
+                throw new InvalidOperationException("Instance is read-only.");
+            }
         }
     }
 }
