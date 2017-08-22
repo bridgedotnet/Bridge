@@ -82,14 +82,14 @@
                     var v = "";
 
                     if (value != null) {
-                        v = (value.toString == {}.toString) ? JSON.stringify(value, null, 2) : value.toString();
+                        v = (value.toString == { }.toString) ? JSON.stringify(value, null, 2) : value.toString();
                     }
 
                     if (self.bufferedOutput != null) {
                         self.bufferedOutput = System.String.concat(self.bufferedOutput, v);
 
                         if (newLine) {
-                            self.bufferedOutput = System.String.concat(self.bufferedOutput, '\n');
+                            self.bufferedOutput = System.String.concat(self.bufferedOutput, "\n");
                         }
 
                         return;

@@ -54,5 +54,17 @@ Bridge.merge(new System.Globalization.CultureInfo("uk-UA", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy' р.'",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1251,
+        CultureName: "uk-UA",
+        EBCDICCodePage: 500,
+        IsRightToLeft: false,
+        LCID: 1058,
+        listSeparator: ";",
+        MacCodePage: 10017,
+        OEMCodePage: 866,
+        IsReadOnly: true
     })
 });

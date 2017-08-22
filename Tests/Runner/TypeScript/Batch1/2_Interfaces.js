@@ -1,6 +1,7 @@
 /// <reference path="..\..\Runner\resources\qunit\qunit.d.ts" />
 /// <reference path="..\..\Runner\TypeScript\App1\bridge.d.ts" />
 /// <reference path="..\..\Runner\TypeScript\App1\interfaces.d.ts" />
+"use strict";
 QUnit.module("TypeScript - Interfaces");
 QUnit.test("Simple field and property", function (assert) {
     var instance = new Interfaces.Class1();

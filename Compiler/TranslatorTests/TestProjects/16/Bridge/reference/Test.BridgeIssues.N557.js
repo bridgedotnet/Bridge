@@ -5,7 +5,7 @@ Bridge.assembly("TestProject", function ($asm, globals) {
         statics: {
             methods: {
                 Test1: function () {
-                    var text = document.createTextNode('');
+                    var text = document.createTextNode("");
                 },
                 Test2: function () {
                     var text = document.createTextNode("Some text");

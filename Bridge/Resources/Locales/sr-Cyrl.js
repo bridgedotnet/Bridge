@@ -54,5 +54,17 @@ Bridge.merge(new System.Globalization.CultureInfo("sr-Cyrl", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy.",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1251,
+        CultureName: "sr-Cyrl-RS",
+        EBCDICCodePage: 21025,
+        IsRightToLeft: false,
+        LCID: 10266,
+        listSeparator: ";",
+        MacCodePage: 10007,
+        OEMCodePage: 855,
+        IsReadOnly: true
     })
 });

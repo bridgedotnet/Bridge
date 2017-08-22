@@ -7,7 +7,7 @@ namespace Bridge.Html5
     [Name("HTMLEmbedElement")]
     public sealed class HTMLEmbedElement : HTMLElement<HTMLEmbedElement>
     {
-        [Template("document.createElement('embed')")]
+        [Template("document.createElement(\"embed\")")]
         public extern HTMLEmbedElement();
 
         /// <summary>

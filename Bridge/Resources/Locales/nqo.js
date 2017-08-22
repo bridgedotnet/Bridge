@@ -54,5 +54,17 @@ Bridge.merge(new System.Globalization.CultureInfo("nqo", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM, yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 0,
+        CultureName: "nqo-GN",
+        EBCDICCodePage: 500,
+        IsRightToLeft: true,
+        LCID: 4096,
+        listSeparator: "،",
+        MacCodePage: 2,
+        OEMCodePage: 1,
+        IsReadOnly: true
     })
 });

@@ -1,6 +1,7 @@
 /// <reference path="..\..\Runner\resources\qunit\qunit.d.ts" />
 /// <reference path="..\..\Runner\TypeScript\App1\bridge.d.ts" />
 /// <reference path="..\..\Runner\TypeScript\App1\generics.d.ts" />
+"use strict";
 QUnit.module("TypeScript - Generics");
 QUnit.test("Check predefined generic instances", function (assert) {
     var g1 = Generics.implementation.SimpleGenericInt;

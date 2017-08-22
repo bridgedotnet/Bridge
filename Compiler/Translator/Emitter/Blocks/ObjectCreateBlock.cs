@@ -129,10 +129,15 @@ namespace Bridge.Translator
             {
                 this.WriteOpenBrace();
                 this.WriteSpace();
+                var pos = this.Emitter.Output.Length;
 
                 this.WriteObjectInitializer(objectCreateExpression.Initializer.Elements, type, invocationResolveResult, false);
 
-                this.WriteSpace();
+                if(pos < this.Emitter.Output.Length)
+                {
+                    this.WriteSpace();
+                }
+                
                 this.WriteCloseBrace();
             }
             else

@@ -54,5 +54,17 @@ Bridge.merge(new System.Globalization.CultureInfo("tr-CY", true), {
         universalSortableDateTimePattern: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
         yearMonthPattern: "MMMM yyyy",
         roundtripFormat: "yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffzzz"
+    }),
+
+    TextInfo: Bridge.merge(new System.Globalization.TextInfo(), {
+        ANSICodePage: 1254,
+        CultureName: "tr-CY",
+        EBCDICCodePage: 20905,
+        IsRightToLeft: false,
+        LCID: 4096,
+        listSeparator: ";",
+        MacCodePage: 10081,
+        OEMCodePage: 857,
+        IsReadOnly: true
     })
 });
