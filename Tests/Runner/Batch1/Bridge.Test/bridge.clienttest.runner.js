@@ -3148,6 +3148,8 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
             QUnit.test("GetCultureInfoWorks_N2583", Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests.GetCultureInfoWorks_N2583);
             QUnit.test("GetFormatWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests.GetFormatWorks);
             QUnit.test("InvariantWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests.InvariantWorks);
+            QUnit.test("TextInfoViaGetCultureInfoWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests.TextInfoViaGetCultureInfoWorks);
+            QUnit.test("TextInfoViaNewCultureInfoWorks", Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests.TextInfoViaNewCultureInfoWorks);
             QUnit.test("DateTimeFormatFirstDayOfWeekWorks_N3013", Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests.DateTimeFormatFirstDayOfWeekWorks_N3013);
         }
     });
@@ -7474,9 +7476,19 @@ Bridge.assembly("Bridge.Test.Bridge.ClientTest", function ($asm, globals) {
                     var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CultureInfoTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "InvariantWorks()", $t.Line = "68", $t));
                     t.Fixture.InvariantWorks();
                 },
+                TextInfoViaGetCultureInfoWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CultureInfoTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TextInfoViaGetCultureInfoWorks()", $t.Line = "92", $t));
+                    t.Fixture.TextInfoViaGetCultureInfoWorks();
+                },
+                TextInfoViaNewCultureInfoWorks: function (assert) {
+                    var $t;
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CultureInfoTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "TextInfoViaNewCultureInfoWorks()", $t.Line = "112", $t));
+                    t.Fixture.TextInfoViaNewCultureInfoWorks();
+                },
                 DateTimeFormatFirstDayOfWeekWorks_N3013: function (assert) {
                     var $t;
-                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CultureInfoTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateTimeFormatFirstDayOfWeekWorks_N3013()", $t.Line = "77", $t));
+                    var t = Bridge.Test.Runtime.TestFixture$1(Bridge.ClientTest.CultureInfoTests).BeforeTest(true, assert, Bridge.Test.Runtime.BridgeClientTestRunner.CultureInfoTests, void 0, ($t = new Bridge.Test.Runtime.TestContext(), $t.Method = "DateTimeFormatFirstDayOfWeekWorks_N3013()", $t.Line = "133", $t));
                     t.Fixture.DateTimeFormatFirstDayOfWeekWorks_N3013();
                 }
             }
