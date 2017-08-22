@@ -254,10 +254,30 @@
             }
         },
 
+        _extractArrayRank: function (name) {
+            var rank = -1,
+                m = (/<(\d+)>$/g).exec(name);
+
+            if (m) {
+                name = name.substring(0, m.index);
+                rank = parseInt(m[1]);
+            }
+
+            m = (/\[(,*)\]$/g).exec(name);
+            if (m) {
+                name = name.substring(0, m.index);
+                rank = m[1].length + 1;
+            }
+
+            return {
+                rank: rank,
+                name: name
+            };
+        },
+
         _getAssemblyType: function (asm, name) {
             var noAsm = false,
-                isArray = false,
-                rank = 1;
+                rank = -1;
 
             if (new RegExp(/[\+\`]/).test(name)) {
                 name = name.replace(/\+|\`/g, function(match) { return match === "+" ? "." : "$"});
@@ -268,18 +288,15 @@
                 noAsm = true;
             }
 
-            var m = (/\[(,*)\]$/g).exec(name);
-            if (m) {
-                isArray = true;
-                name = name.substring(0, m.index);
-                rank = m[1].length + 1;
-            }
+            var rankInfo = Bridge.Reflection._extractArrayRank(name);
+            rank = rankInfo.rank;
+            name = rankInfo.name;            
 
             if (asm.$types) {
                 var t = asm.$types[name] || null;
 
                 if (t) {
-                    return isArray ? System.Array.type(t, rank) : t;
+                    return rank > -1 ? System.Array.type(t, rank) : t;
                 }
 
                 if (asm.name === "mscorlib") {
@@ -304,7 +321,7 @@
                 return null;
             }
 
-            return isArray ? System.Array.type(scope, rank) : scope;
+            return rank > -1 ? System.Array.type(scope, rank) : scope;
         },
 
         getAssemblyTypes: function (asm) {
@@ -427,6 +444,12 @@
         _getType: function (typeName, asm, re, noinit) {
             var outer = !re;
 
+            if (outer) {
+                typeName = typeName.replace(/\[(,*)\]/g, function (match, g1) {
+                    return "<" + (g1.length + 1) + ">"
+                });
+            }            
+
             var next = function () {
                 for (; ;) {
                     var m = re.exec(typeName);
@@ -476,13 +499,18 @@
                             }
 
                             targs.push(t);
-                            m = re.exec(typeName);
+                            m = next();
 
                             if (m[0] === ']') {
                                 break;
                             } else if (m[0] !== ',') {
                                 return null;
                             }
+                        }
+
+                        var arrMatch = (/^\s*<(\d+)>/g).exec(typeName.substring(m.index+1));
+                        if (arrMatch) {
+                            tname = tname + "<" + parseInt(arrMatch[1]) + ">";
                         }
 
                         m = next();
@@ -516,7 +544,12 @@
                 return null;
             }
 
-            t = Bridge.Reflection._getAssemblyType(asm, tname.trim());
+            tname = tname.trim();
+            var rankInfo = Bridge.Reflection._extractArrayRank(tname);
+            var rank = rankInfo.rank;
+            tname = rankInfo.name;
+
+            t = Bridge.Reflection._getAssemblyType(asm, tname);
 
             if (noinit) {
                 return t;
@@ -533,11 +566,17 @@
                     }
                 }
             }
-
+            
             t = targs.length ? t.apply(null, targs) : t;
+
             if (t && t.$staticInit) {
                 t.$staticInit();
             }
+
+            if (rank > -1) {
+                t = System.Array.type(t, rank);
+            }
+
             return t;
         },
 

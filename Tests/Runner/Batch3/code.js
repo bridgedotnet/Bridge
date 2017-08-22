@@ -24431,10 +24431,8 @@ Bridge.$N1391Result =                     r;
         statics: {
             methods: {
                 TestNullCast: function () { /// The result of the expression is always 'null'
-
-
                     Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))));
-                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false);
+                    Bridge.Test.NUnit.Assert.False(System.Nullable.hasValue(System.Int64.lift((System.Int64.lift(Bridge.as(null, System.Int64, true))))) ? true : false); /// The result of the expression is always 'null'
                 }
             }
         }
@@ -33264,10 +33262,73 @@ Bridge.$N1391Result =                     r;
 
                     type = Bridge.Reflection.getType("System.Int32[,], mscorlib");
                     Bridge.Test.NUnit.Assert.AreEqual("System.Int32[,]", Bridge.Reflection.getTypeFullName(type));
+                },
+                TestArrayTypeParsingMoreLevel: function () {
+                    var name = "BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Case8+ApiResponse`1[[BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Case8+Container`1[[BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Case8+PageEditData[]]][]]], Bridge.ClientTest.Batch3";
+                    var type = Bridge.Reflection.getType(name);
+
+                    Bridge.Test.NUnit.Assert.AreEqual("BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Case8+ApiResponse`1[[BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Case8+Container`1[[BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Case8+PageEditData[]]][]]]", Bridge.Reflection.getTypeFullName(type));
+                    var targs = Bridge.Reflection.getGenericArguments(type);
+
+                    Bridge.Test.NUnit.Assert.AreEqual(1, targs.length);
+                    Bridge.Test.NUnit.Assert.True(Bridge.isArray(null, targs[System.Array.index(0, targs)]));
+
+                    var elementType = (targs[System.Array.index(0, targs)].$elementType || null);
+
+                    targs = Bridge.Reflection.getGenericArguments(elementType);
+
+                    Bridge.Test.NUnit.Assert.AreEqual(1, targs.length);
+                    Bridge.Test.NUnit.Assert.True(Bridge.isArray(null, targs[System.Array.index(0, targs)]));
                 }
             }
         }
     });
+
+    Bridge.define("BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Case8");
+
+    Bridge.define("BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Case8.ApiResponse$1", function (T) { return {
+        fields: {
+            Value: Bridge.getDefaultValue(T)
+        }
+    }; });
+
+    Bridge.define("BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Case8.ApiResponse$2", function (T, K) { return {
+        fields: {
+            Value1: Bridge.getDefaultValue(T)
+        },
+        props: {
+            Value2: Bridge.getDefaultValue(K)
+        }
+    }; });
+
+    Bridge.define("BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Case8.Container", {
+        statics: {
+            methods: {
+                Create: function (K, value) {
+                    var $t;
+                    return ($t = new (BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Case8.Container$1(K))(), $t.Item1 = value, $t);
+                }
+            }
+        }
+    });
+
+    Bridge.define("BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Case8.Container$1", function (T) { return {
+        fields: {
+            Item1: Bridge.getDefaultValue(T)
+        }
+    }; });
+
+    Bridge.define("BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Case8.PageEditData", {
+        props: {
+            Data: 0
+        }
+    });
+
+    Bridge.define("BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.Case8.PageEditData$1", function (T) { return {
+        props: {
+            Data: Bridge.getDefaultValue(T)
+        }
+    }; });
 
     Bridge.define("BridgeTest.ClientTest.Batch3.Bridge.BridgeIssues.KeyValuePairDataModel", {
         fields: {
