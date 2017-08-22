@@ -13481,20 +13481,24 @@ Bridge.define("System.String", {
             if (destination == null) {
                 throw new System.ArgumentNullException("destination");
             }
-                
+
+            if (str == null) {
+                throw new System.ArgumentNullException("str");
+            }
+
             if (count < 0) {
                 throw new System.ArgumentOutOfRangeException("count");
             }
-                
+
             if (sourceIndex < 0) {
                 throw new System.ArgumentOutOfRangeException("sourceIndex");
             }
-                
-            if (count > Length - sourceIndex) {
+
+            if (count > str.length - sourceIndex) {
                 throw new System.ArgumentOutOfRangeException("sourceIndex");
             }
-                
-            if (destinationIndex > destination.Length - count || destinationIndex < 0) {
+
+            if (destinationIndex > destination.length - count || destinationIndex < 0) {
                 throw new System.ArgumentOutOfRangeException("destinationIndex");
             }
 

@@ -948,6 +948,13 @@ namespace System
         [Template("{this}")]
         public extern Object Clone();
 
+        /// <summary>
+        /// Copies a specified number of characters from a specified position in this instance to a specified position in an array of Unicode characters.
+        /// </summary>
+        /// <param name="sourceIndex">The index of the first character in this instance to copy.</param>
+        /// <param name="destination">An array of Unicode characters to which characters in this instance are copied.</param>
+        /// <param name="destinationIndex">The index in destination at which the copy operation begins.</param>
+        /// <param name="count">The number of characters in this instance to copy to destination.</param>
         [Template("System.String.copyTo({this}, {sourceIndex}, {destination}, {destinationIndex}, {count})")]
         public extern void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count);
     }
